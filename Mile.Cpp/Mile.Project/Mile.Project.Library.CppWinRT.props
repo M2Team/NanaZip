@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+   PROJECT:   Mouri Internal Library Essentials
+   FILE:      Mile.Project.Library.CppWinRT.props
+   PURPOSE:   Definition for Visual Studio C++ Project
+
+   LICENSE:   The MIT License
+
+   DEVELOPER: Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.CppWinRT">
+      <Version>2.0.210629.4</Version>
+    </PackageReference>
+  </ItemGroup>
+</Project>

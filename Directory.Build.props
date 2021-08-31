@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:   Mouri Internal Library Essentials
+  FILE:      Directory.Build.props
+  PURPOSE:   Global settings for Visual Studio C++ Project
+
+  LICENSE:   The MIT License
+
+  DEVELOPER: Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+-->
+<Project>
+  <PropertyGroup>
+    <MSBuildProjectExtensionsPath>$(SolutionDir)Output\Objects\$(Configuration)\$(MSBuildProjectName)\obj\</MSBuildProjectExtensionsPath>
+  </PropertyGroup>
+  <ItemGroup Label="NuGet" Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
+    <ProjectCapability Include="PackageReferences" />
+  </ItemGroup>
+  <PropertyGroup Label="NuGet" Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
+    <!-- https://github.com/microsoft/react-native-windows/pull/8195 -->
+    <AssetTargetFallback>$(AssetTargetFallback);native</AssetTargetFallback>
+    <!-- https://github.com/microsoft/react-native-windows/pull/8195 -->
+    <TargetFrameworkMoniker>native,Version=v0.0</TargetFrameworkMoniker>
+    <NuGetTargetMoniker>native,Version=v0.0</NuGetTargetMoniker>
+    <RuntimeIdentifiers>win;win-x86;win-x64;win-arm;win-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:   Mouri Internal Library Essentials
+  FILE:      BuildAllTargets.proj
+  PURPOSE:   Build all targets script for Visual Studio C++ Project
+
+  LICENSE:   The MIT License
+
+  DEVELOPER: Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+-->
+<Project 
+  DefaultTargets="Restore;Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SolutionPath>$(MSBuildThisFileDirectory)*.sln</SolutionPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Debug;Platform=ARM64</AdditionalProperties>   
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Release;Platform=ARM64</AdditionalProperties>   
+    </ProjectReference>
+  </ItemGroup>
+  <Target Name="Restore" >
+    <MSBuild
+      Projects="@(ProjectReference)"
+      Targets="Restore"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+  </Target>
+  <Target Name="Build" >
+    <MSBuild
+      Projects="@(ProjectReference)"
+      Targets="Build"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+  </Target>
+  <Target Name="Rebuild" >
+    <MSBuild
+      Projects="@(ProjectReference)"
+      Targets="Rebuild"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+  </Target>
+</Project>
