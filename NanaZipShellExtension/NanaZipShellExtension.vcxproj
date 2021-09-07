@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F17D4837-7943-4361-9527-2AF9CACE477D}</ProjectGuid>
+    <RootNamespace>NanaZipShellExtension</RootNamespace>
+    <MileProjectType>DynamicLibrary</MileProjectType>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+  </PropertyGroup>
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Library.CppWinRT.props" />
+  <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <ItemDefinitionGroup>
+    <Link>
+      <ModuleDefinitionFile>NanaZipShellExtension.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="NanaZipShellExtension.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Mile.Project.Properties.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanaZipShellExtension.def" />
+  </ItemGroup>
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
+</Project>
