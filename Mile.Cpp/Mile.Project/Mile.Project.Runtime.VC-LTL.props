@@ -17,7 +17,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <PackageReference Include="VC-LTL">
-      <Version>5.0.1-Beta4</Version>
+      <Version>5.0.1-Beta6</Version>
     </PackageReference>
   </ItemGroup>
 </Project>
