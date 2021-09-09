@@ -1,0 +1,59 @@
+PROG = 7zcl
+IS_NOT_STANDALONE = 1
+
+# IS_X64 = 1
+
+
+
+ifdef SystemDrive
+
+SYS_OBJS = \
+  $O/resource.o \
+
+else
+
+SYS_OBJS = \
+  $O/MyWindows.o \
+  $O/TimeUtils.o \
+
+endif
+
+
+LOCAL_FLAGS = \
+
+
+CURRENT_OBJS = \
+  $O/Client7z.o \
+
+COMMON_OBJS = \
+  $O/IntToString.o \
+  $O/MyString.o \
+  $O/MyVector.o \
+  $O/NewHandler.o \
+  $O/StringConvert.o \
+  $O/StringToInt.o \
+  $O/UTFConvert.o \
+  $O/Wildcard.o \
+
+WIN_OBJS = \
+  $O/DLL.o \
+  $O/FileDir.o \
+  $O/FileFind.o \
+  $O/FileIO.o \
+  $O/FileName.o \
+  $O/PropVariant.o \
+  $O/PropVariantConv.o \
+
+7ZIP_COMMON_OBJS = \
+  $O/FileStreams.o \
+
+
+OBJS = \
+  $(COMMON_OBJS) \
+  $(WIN_OBJS) \
+  $(SYS_OBJS) \
+  $(7ZIP_COMMON_OBJS) \
+  $(CURRENT_OBJS) \
+
+
+include ../../7zip_gcc.mak

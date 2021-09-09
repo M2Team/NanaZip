@@ -1,0 +1,43 @@
+#include "SystemPageRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 240
+#define yc 252
+
+IDD_SYSTEM  DIALOG  0, 0, xs, ys  MY_PAGE_STYLE  MY_FONT
+CAPTION "System"
+BEGIN
+  LTEXT       "Associate 7-Zip with:", IDT_SYSTEM_ASSOCIATE, m, m, xc, 8
+  PUSHBUTTON  "+", IDB_SYSTEM_CURRENT, 80, m + 12, 40, bys
+  PUSHBUTTON  "+", IDB_SYSTEM_ALL,    166, m + 12, 40, bys
+  CONTROL     "List1", IDL_SYSTEM_ASSOCIATE, "SysListView32",
+              LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,
+              m, m + 32, xc, (yc - 32)
+END
+
+#ifdef UNDER_CE
+
+#undef m
+#undef xc
+#undef yc
+
+#define m 4
+#define xc (SMALL_PAGE_SIZE_X + 8)
+#define yc (128 + 8)
+
+IDD_SYSTEM_2  DIALOG  0, 0, xs, ys  MY_PAGE_STYLE  MY_FONT
+CAPTION "System"
+BEGIN
+  LTEXT       "Associate 7-Zip with:", IDT_SYSTEM_ASSOCIATE, m, m, xc, 8
+  PUSHBUTTON  "+", IDB_SYSTEM_CURRENT, 60, m + 12, 40, bys
+  CONTROL     "List1", IDL_SYSTEM_ASSOCIATE, "SysListView32",
+              LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,
+              m, m + 32, xc, (yc - 32)
+END
+
+#endif
+
+STRINGTABLE
+BEGIN
+  IDS_SYSTEM_ALL_USERS  "All users"
+END

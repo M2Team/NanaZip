@@ -1,0 +1,15 @@
+#include "EditDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 320
+#define yc 240
+
+IDD_EDIT_DLG  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
+CAPTION "Edit"
+{
+  // OK_CANCEL
+  MY_BUTTON__CLOSE
+
+  EDITTEXT  IDE_EDIT, m, m, xc, yc - bys - m, 
+	ES_MULTILINE | ES_READONLY | WS_VSCROLL | WS_HSCROLL | ES_WANTRETURN
+}

@@ -1,0 +1,37 @@
+#include "../../MyVersionInfo.rc"
+
+MY_VERSION_INFO_DLL("7z Plugin" , "7z")
+
+
+0  ICON  "../../Archive/Icons/7z.ico"
+1  ICON  "../../Archive/Icons/zip.ico"
+2  ICON  "../../Archive/Icons/bz2.ico"
+3  ICON  "../../Archive/Icons/rar.ico"
+4  ICON  "../../Archive/Icons/arj.ico"
+5  ICON  "../../Archive/Icons/z.ico"
+6  ICON  "../../Archive/Icons/lzh.ico"
+7  ICON  "../../Archive/Icons/cab.ico"
+8  ICON  "../../Archive/Icons/iso.ico"
+9  ICON  "../../Archive/Icons/split.ico"
+10  ICON  "../../Archive/Icons/rpm.ico"
+11  ICON  "../../Archive/Icons/deb.ico"
+12  ICON  "../../Archive/Icons/cpio.ico"
+13  ICON  "../../Archive/Icons/tar.ico"
+14  ICON  "../../Archive/Icons/gz.ico"
+15  ICON  "../../Archive/Icons/wim.ico"
+16  ICON  "../../Archive/Icons/lzma.ico"
+17  ICON  "../../Archive/Icons/dmg.ico"
+18  ICON  "../../Archive/Icons/hfs.ico"
+19  ICON  "../../Archive/Icons/xar.ico"
+20  ICON  "../../Archive/Icons/vhd.ico"
+21  ICON  "../../Archive/Icons/fat.ico"
+22  ICON  "../../Archive/Icons/ntfs.ico"
+23  ICON  "../../Archive/Icons/xz.ico"
+24  ICON  "../../Archive/Icons/squashfs.ico"
+
+
+
+STRINGTABLE
+BEGIN
+  100 "7z:0 zip:1 rar:3 001:9 cab:7 iso:8 xz:23 txz:23 lzma:16 tar:13 cpio:12 bz2:2 bzip2:2 tbz2:2 tbz:2 gz:14 gzip:14 tgz:14 tpz:14 z:5 taz:5 lzh:6 lha:6 rpm:10 deb:11 arj:4 vhd:20 wim:15 swm:15 esd:15 fat:21 ntfs:22 dmg:17 hfs:18 xar:19 squashfs:24"
+END

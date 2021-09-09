@@ -1,0 +1,403 @@
+<?xml version="1.0"?>
+
+<?define VerMajor = "21" ?>
+<?define VerMinor = "03" ?>
+<?define VerBuild = "00" ?>
+<?define MmVer = "$(var.VerMajor).$(var.VerMinor)" ?>
+<?define MmHex = "$(var.VerMajor)$(var.VerMinor)" ?>
+<?define MmmmVer = "$(var.MmVer).$(var.VerBuild).0" ?>
+<?define UpgradeMinVer = "4.38" ?>
+
+<?define ProductName = "7-Zip" ?>
+
+<?ifndef MyCPU?>
+  <?define MyCPU = "Intel" ?>
+<?endif?>
+
+<?if $(var.MyCPU) = "x64" ?>
+  <?define CpuId = "2" ?>
+  <?define PFilesFolder = "ProgramFiles64Folder" ?>
+  <?define Platforms = "x64" ?>
+  <?define CpuPostfix = " (x64 edition)" ?>
+  <?define Is64 = "yes" ?>
+  <?define NumBits = "64" ?>
+<?elseif $(var.MyCPU) = "ia64" ?>
+  <?define CpuId = "3" ?>
+  <?define PFilesFolder = "ProgramFiles64Folder" ?>
+  <?define Platforms = "Intel64" ?>
+  <?define CpuPostfix = " (ia64 edition)" ?>
+  <?define Is64 = "yes" ?>
+  <?define NumBits = "64" ?>
+<?else ?>
+  <?define CpuId = "1" ?>
+  <?define PFilesFolder = "ProgramFilesFolder" ?>
+  <?define Platforms = "Intel" ?>
+  <?define CpuPostfix = "" ?>
+  <?define Is64 = "no" ?>
+  <?define NumBits = "32" ?>
+<?endif ?>
+
+
+<?define ShellExtId = "{23170F69-40C1-278A-1000-000100020000}" ?>
+
+<?define BaseId = "23170F69-40C1-270$(var.CpuId)" ?>
+<?define BaseIdVer = "$(var.BaseId)-$(var.MmHex)-$(var.VerBuild)00" ?>
+<?define ProductId   = "$(var.BaseIdVer)01000000" ?>
+<?define PackageId   = "$(var.BaseIdVer)02000000" ?>
+<?define CompId      = "$(var.BaseIdVer)030000" ?>
+<?define UpgradeCode = "$(var.BaseId)-0000-000004000000" ?>
+
+<?define CompFm       = "$(var.CompId)01" ?>
+<?define CompShellExt = "$(var.CompId)02" ?>
+<?define CompCmdLine  = "$(var.CompId)03" ?>
+<?define CompCmdLineA = "$(var.CompId)04" ?>
+<?define CompGui      = "$(var.CompId)05" ?>
+<?define CompGuiSfx   = "$(var.CompId)06" ?>
+<?define CompConSfx   = "$(var.CompId)07" ?>
+<?define CompHelp     = "$(var.CompId)08" ?>
+<?define CompDocs     = "$(var.CompId)09" ?>
+<?define CompFormats  = "$(var.CompId)10" ?>
+<?define CompCodecs   = "$(var.CompId)11" ?>
+<?define CompLang     = "$(var.CompId)12" ?>
+<?define CompShellExt2 = "$(var.CompId)13" ?>
+<?define CompInstallRegCU         = "$(var.CompId)80" ?>
+<?define CompInstallRegLM         = "$(var.CompId)81" ?>
+<?define CompInstallRegWild       = "$(var.CompId)82" ?>
+<?define CompInstallRegDirectory  = "$(var.CompId)83" ?>
+<?define CompInstallRegDirDD      = "$(var.CompId)84" ?>
+<?define CompInstallRegDriveDD    = "$(var.CompId)85" ?>
+<?define CompInstallRegApproved   = "$(var.CompId)86" ?>
+<?define CompInstallRegAppPath    = "$(var.CompId)87" ?>
+<?define CompInstallRegFolder     = "$(var.CompId)88" ?>
+
+
+<?define Manufacturer = "Igor Pavlov" ?>
+<?define HomePage = "http://www.7-zip.org/" ?>
+<?define AboutURL = "$(var.HomePage)" ?>
+<?define UpdatesURL = "$(var.HomePage)download.html" ?>
+<?define SupportURL = "$(var.HomePage)support.html" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
+  <Product
+      Id="$(var.ProductId)"
+      UpgradeCode="$(var.UpgradeCode)"
+      Name="$(var.ProductName) $(var.MmVer)$(var.CpuPostfix)"
+      Language="1033"
+      Version="$(var.MmmmVer)"
+      Manufacturer="$(var.Manufacturer)">
+   
+    <Package
+        Id="$(var.PackageId)"
+        Description="$(var.ProductName)$(var.CpuPostfix) Package"
+        Comments="$(var.ProductName)$(var.CpuPostfix) Package"
+        Manufacturer="$(var.Manufacturer)"
+        InstallerVersion="200"
+        Compressed="yes"
+        Platforms="$(var.Platforms)"
+        />
+
+    <!-- Major upgrade -->
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.UpgradeMinVer)" IncludeMinimum="yes"
+           Maximum="$(var.MmmmVer)" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+
+    <Media Id="1" Cabinet="product.cab" EmbedCab="yes" CompressionLevel="high" />
+
+    <Property Id="MSIRMSHUTDOWN" Value="2"/>
+
+    <Property Id="INSTALLDIR">
+      <RegistrySearch Id="My7zipPathLM"  Type="raw" Root="HKLM" Key="Software\7-Zip" Name="Path" />
+      <RegistrySearch Id="My7zipPathLM2" Type="raw" Root="HKLM" Key="Software\7-Zip" Name="Path$(var.NumBits)" />
+      <RegistrySearch Id="My7zipPath"    Type="raw" Root="HKCU" Key="Software\7-Zip" Name="Path" />
+      <RegistrySearch Id="My7zipPath2"   Type="raw" Root="HKCU" Key="Software\7-Zip" Name="Path$(var.NumBits)" />
+    </Property>
+
+    <Property Id="ALLUSERS">2</Property>
+
+    <Property Id="LicenseAccepted">1</Property>
+
+    <Property Id="ARPURLINFOABOUT" Value="$(var.AboutURL)" />
+    <Property Id="ARPHELPLINK" Value="$(var.SupportURL)" />
+    <Property Id="ARPURLUPDATEINFO" Value="$(var.UpdatesURL)" />
+
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="$(var.PFilesFolder)" Name="Files">
+        <Directory Id="INSTALLDIR" Name="7-Zip">
+
+          <Component Id="InstallRegCU" Guid="$(var.CompInstallRegCU)" DiskId="1" Win64="$(var.Is64)">
+            <Registry Id="MyInstallRegCU"  Root="HKCU" Key="Software\7-Zip" Name="Path" Action="write" Type="string" Value="[INSTALLDIR]" />
+            <Registry Id="MyInstallRegCU2" Root="HKCU" Key="Software\7-Zip" Name="Path$(var.NumBits)" Action="write" Type="string" Value="[INSTALLDIR]" />
+          </Component>
+          <Component Id="InstallRegLM" Guid="$(var.CompInstallRegLM)" DiskId="1" Win64="$(var.Is64)">
+            <Condition>Privileged</Condition>
+            <Registry Id="MyInstallRegLM"  Root="HKLM" Key="Software\7-Zip" Name="Path" Action="write" Type="string" Value="[INSTALLDIR]" />
+            <Registry Id="MyInstallRegLM2" Root="HKLM" Key="Software\7-Zip" Name="Path$(var.NumBits)" Action="write" Type="string" Value="[INSTALLDIR]" />
+          </Component>
+          
+
+          <Component Id="InstallRegWild" Guid="$(var.CompInstallRegWild)" DiskId="1" Win64="$(var.Is64)">
+            <Registry Id="MyInstallRegWild" Action="write" Type="string"
+               Root="HKCR" Key="*\shellex\ContextMenuHandlers\7-Zip"
+               Value="$(var.ShellExtId)" />
+          </Component>
+
+          <Component Id="InstallRegDirectory" Guid="$(var.CompInstallRegDirectory)" DiskId="1" Win64="$(var.Is64)">
+            <Registry Id="MyInstallRegDirectory" Action="write" Type="string"
+               Root="HKCR" Key="Directory\shellex\ContextMenuHandlers\7-Zip"
+               Value="$(var.ShellExtId)" />
+          </Component>
+
+          <Component Id="InstallRegFolder" Guid="$(var.CompInstallRegFolder)" DiskId="1" Win64="$(var.Is64)">
+            <Registry Id="MyInstallRegFolder" Action="write" Type="string"
+               Root="HKCR" Key="Folder\shellex\ContextMenuHandlers\7-Zip"
+               Value="$(var.ShellExtId)" />
+          </Component>
+
+          <Component Id="InstallRegDirDD" Guid="$(var.CompInstallRegDirDD)" DiskId="1" Win64="$(var.Is64)">
+            <Registry Id="MyInstallRegDirDD" Action="write" Type="string"
+               Root="HKCR" Key="Directory\shellex\DragDropHandlers\7-Zip"
+               Value="$(var.ShellExtId)" />
+          </Component>
+
+          <Component Id="InstallRegDriveDD" Guid="$(var.CompInstallRegDriveDD)" DiskId="1" Win64="$(var.Is64)">
+            <Registry Id="MyInstallRegDriveDD" Action="write" Type="string"
+               Root="HKCR" Key="Drive\shellex\DragDropHandlers\7-Zip"
+               Value="$(var.ShellExtId)" />
+          </Component>
+
+          <Component Id="InstallRegApproved" Guid="$(var.CompInstallRegApproved)" DiskId="1" Win64="$(var.Is64)">
+            <Condition>Privileged</Condition>
+            <Registry Id="MyInstallRegApproved" Action="write" Type="string"
+               Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"
+               Name="$(var.ShellExtId)" Value="7-Zip Shell Extension" />
+          </Component>
+
+
+          <Component Id="InstallRegAppPath" Guid="$(var.CompInstallRegAppPath)" DiskId="1" Win64="$(var.Is64)">
+            <Condition>Privileged</Condition>
+            <Registry Id="MyInstallRegAppPath" Action="write" Type="string"
+               Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\7zFM.exe"
+               Value="[INSTALLDIR]7zFM.exe" />
+            <Registry Id="MyInstallRegAppPath2" Action="write" Type="string"
+               Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\7zFM.exe" Name="Path"
+               Value="[INSTALLDIR]" />
+          </Component>
+
+          <Component Id="Fm" Guid="$(var.CompFm)" DiskId="1" Win64="$(var.Is64)">
+            <File Id="_7zFM.exe" Name="7zFM.exe">
+              <Shortcut Id="startmenuFmShortcut" Directory="PMenu" Name="7zipFM" LongName="7-Zip File Manager" />
+            </File>
+          </Component>
+
+          <?if $(var.MyCPU) = "x64" ?>
+
+          <Component Id="ShellExt32" Guid="$(var.CompShellExt2)" DiskId="1" Win64="no">
+            <File Id="_7zip32.dll" Name="7-zip32.dll" />
+            <Registry Id="shellReg0_32" Action="write" Type="string" Root="HKCR"
+               Key="CLSID\$(var.ShellExtId)\InprocServer32"
+               Value="[INSTALLDIR]7-zip32.dll" />
+            <Registry Id="shellReg1_32" Action="write" Type="string" Root="HKCR"
+               Key="CLSID\$(var.ShellExtId)\InprocServer32"
+               Name="ThreadingModel"
+               Value="Apartment" />
+          </Component>
+
+          <?endif ?>
+
+          <Component Id="ShellExt" Guid="$(var.CompShellExt)" DiskId="1" Win64="$(var.Is64)">
+            <File Id="_7zip.dll" Name="7-zip.dll" />
+            <Registry Id="shellReg0" Action="write" Type="string" Root="HKCR"
+               Key="CLSID\$(var.ShellExtId)\InprocServer32"
+               Value="[INSTALLDIR]7-zip.dll" />
+            <Registry Id="shellReg1" Action="write" Type="string" Root="HKCR"
+               Key="CLSID\$(var.ShellExtId)\InprocServer32"
+               Name="ThreadingModel"
+               Value="Apartment" />
+          </Component>
+
+          <Component Id="Gui" Guid="$(var.CompGui)" DiskId="1" Win64="$(var.Is64)">
+            <File Id="_7zG.exe" Name="7zG.exe" />
+          </Component>
+
+          <Component Id="Formats" Guid="$(var.CompFormats)" DiskId="1" Win64="$(var.Is64)">
+              <File Id="_7z.dll" Name="7z.dll" />
+          </Component>
+
+          <Component Id="CmdLine" Guid="$(var.CompCmdLine)" DiskId="1" Win64="$(var.Is64)">
+            <File Id="_7z.exe" Name="7z.exe" />
+          </Component>
+
+          <Component Id="GuiSfx" Guid="$(var.CompGuiSfx)" DiskId="1" Win64="$(var.Is64)">
+            <File Id="_7z.sfx" Name="7z.sfx" />
+          </Component>
+
+          <Component Id="ConSfx" Guid="$(var.CompConSfx)" DiskId="1" Win64="$(var.Is64)">
+            <File Id="_7zCon.sfx" Name="7zCon.sfx" />
+          </Component>
+
+          <Component Id="Docs" Guid="$(var.CompDocs)" DiskId="1" Win64="$(var.Is64)">
+            <File Id="descript.ion" Name="descript.ion" />
+            <File Id="History.txt" Name="History.txt" />
+            <File Id="License.txt" Name="License.txt" />
+            <File Id="readme.txt" Name="readme.txt" />
+          </Component>
+
+
+          <Component Id="Help" Guid="$(var.CompHelp)">
+            <File Id="_7zip.chm" Name="7-zip.chm" DiskId="1" >
+              <Shortcut Id="startmenuHelpShortcut" Directory="PMenu" Name="7zipHelp" LongName="7-Zip Help" />
+            </File>
+          </Component>
+
+          <Directory Id="MyLang" Name="Lang">
+            <Component Id="Lang" Guid="$(var.CompLang)" DiskId="1" Win64="$(var.Is64)">
+              <File Id="en.ttt" Name="en.ttt" />
+              <File Id="af.txt" Name="af.txt" />
+              <File Id="an.txt" Name="an.txt" />
+              <File Id="ar.txt" Name="ar.txt" />
+              <File Id="ast.txt" Name="ast.txt" />
+              <File Id="az.txt" Name="az.txt" />
+              <File Id="ba.txt" Name="ba.txt" />
+              <File Id="be.txt" Name="be.txt" />
+              <File Id="bg.txt" Name="bg.txt" />
+              <File Id="bn.txt" Name="bn.txt" />
+              <File Id="br.txt" Name="br.txt" />
+              <File Id="ca.txt" Name="ca.txt" />
+              <File Id="co.txt" Name="co.txt" />
+              <File Id="cs.txt" Name="cs.txt" />
+              <File Id="cy.txt" Name="cy.txt" />
+              <File Id="da.txt" Name="da.txt" />
+              <File Id="de.txt" Name="de.txt" />
+              <File Id="el.txt" Name="el.txt" />
+              <File Id="eo.txt" Name="eo.txt" />
+              <File Id="es.txt" Name="es.txt" />
+              <File Id="et.txt" Name="et.txt" />
+              <File Id="eu.txt" Name="eu.txt" />
+              <File Id="ext.txt" Name="ext.txt" />
+              <File Id="fa.txt" Name="fa.txt" />
+              <File Id="fi.txt" Name="fi.txt" />
+              <File Id="fr.txt" Name="fr.txt" />
+              <File Id="fur.txt" Name="fur.txt" />
+              <File Id="fy.txt" Name="fy.txt" />
+              <File Id="ga.txt" Name="ga.txt" />
+              <File Id="gl.txt" Name="gl.txt" />
+              <File Id="gu.txt" Name="gu.txt" />
+              <File Id="he.txt" Name="he.txt" />
+              <File Id="hi.txt" Name="hi.txt" />
+              <File Id="hr.txt" Name="hr.txt" />
+              <File Id="hu.txt" Name="hu.txt" />
+              <File Id="hy.txt" Name="hy.txt" />
+              <File Id="id.txt" Name="id.txt" />
+              <File Id="io.txt" Name="io.txt" />
+              <File Id="is.txt" Name="is.txt" />
+              <File Id="it.txt" Name="it.txt" />
+              <File Id="ja.txt" Name="ja.txt" />
+              <File Id="ka.txt" Name="ka.txt" />
+              <File Id="kaa.txt" Name="kaa.txt" />
+              <File Id="kab.txt" Name="kab.txt" />
+              <File Id="kk.txt" Name="kk.txt" />
+              <File Id="ko.txt" Name="ko.txt" />
+              <File Id="ku.txt" Name="ku.txt" />
+              <File Id="ku_ckb.txt" Name="ku-ckb.txt" />
+              <File Id="ky.txt" Name="ky.txt" />
+              <File Id="lij.txt" Name="lij.txt" />
+              <File Id="lt.txt" Name="lt.txt" />
+              <File Id="lv.txt" Name="lv.txt" />
+              <File Id="mk.txt" Name="mk.txt" />
+              <File Id="mn.txt" Name="mn.txt" />
+              <File Id="mng.txt" Name="mng.txt" />
+              <File Id="mng2.txt" Name="mng2.txt" />
+              <File Id="mr.txt" Name="mr.txt" />
+              <File Id="ms.txt" Name="ms.txt" />
+              <File Id="ne.txt" Name="ne.txt" />
+              <File Id="nl.txt" Name="nl.txt" />
+              <File Id="nb.txt" Name="nb.txt" />
+              <File Id="nn.txt" Name="nn.txt" />
+              <File Id="pa_in.txt" Name="pa-in.txt" />
+              <File Id="pl.txt" Name="pl.txt" />
+              <File Id="ps.txt" Name="ps.txt" />
+              <File Id="pt.txt" Name="pt.txt" />
+              <File Id="pt_br.txt" Name="pt-br.txt" />
+              <File Id="ro.txt" Name="ro.txt" />
+              <File Id="ru.txt" Name="ru.txt" />
+              <File Id="sa.txt" Name="sa.txt" />
+              <File Id="si.txt" Name="si.txt" />
+              <File Id="sk.txt" Name="sk.txt" />
+              <File Id="sl.txt" Name="sl.txt" />
+              <File Id="sq.txt" Name="sq.txt" />
+              <File Id="sr_spl.txt" Name="sr-spl.txt" />
+              <File Id="sr_spc.txt" Name="sr-spc.txt" />
+              <File Id="sv.txt" Name="sv.txt" />
+              <File Id="sw.txt" Name="sw.txt" />
+              <File Id="ta.txt" Name="ta.txt" />
+              <File Id="tg.txt" Name="tg.txt" />
+              <File Id="th.txt" Name="th.txt" />
+              <File Id="tk.txt" Name="tk.txt" />
+              <File Id="tr.txt" Name="tr.txt" />
+              <File Id="tt.txt" Name="tt.txt" />
+              <File Id="ug.txt" Name="ug.txt" />
+              <File Id="uk.txt" Name="uk.txt" />
+              <File Id="uz.txt" Name="uz.txt" />
+              <File Id="uz_cyrl.txt" Name="uz-cyrl.txt" />
+              <File Id="va.txt" Name="va.txt" />
+              <File Id="vi.txt" Name="vi.txt" />
+              <File Id="yo.txt" Name="yo.txt" />
+              <File Id="zh_cn.txt" Name="zh-cn.txt" />
+              <File Id="zh_tw.txt" Name="zh-tw.txt" />
+            </Component>
+          </Directory>
+
+
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder" Name="PMenu" LongName="Programs">
+        <Directory Id="PMenu" Name="7zip" LongName="7-Zip" />
+      </Directory>
+    </Directory>
+
+    <Feature Id="Complete" Title="7-Zip" Description="The complete package."
+         Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR"
+         Absent="disallow" AllowAdvertise="no" >
+      <Feature Id="Program" Title="Program files" Description="Program files." Level="1"
+         Absent="disallow" AllowAdvertise="no">
+        <ComponentRef Id="Fm" />
+        <ComponentRef Id="ShellExt" />
+        <?if $(var.MyCPU) = "x64" ?>
+        <ComponentRef Id="ShellExt32" />
+        <?endif ?>
+        <ComponentRef Id="CmdLine" />
+        <ComponentRef Id="Gui" />
+        <ComponentRef Id="GuiSfx" />
+        <ComponentRef Id="ConSfx" />
+        <ComponentRef Id="Formats" />
+        <ComponentRef Id="Docs" />
+        <ComponentRef Id="Help" />
+        <ComponentRef Id="InstallRegCU" />
+        <ComponentRef Id="InstallRegLM" />
+        <ComponentRef Id="InstallRegWild" />
+        <ComponentRef Id="InstallRegDirectory" />
+        <ComponentRef Id="InstallRegDirDD" />
+        <ComponentRef Id="InstallRegDriveDD" />
+        <ComponentRef Id="InstallRegApproved" />
+        <ComponentRef Id="InstallRegAppPath" />
+        <ComponentRef Id="InstallRegFolder" />
+
+      </Feature>
+      <Feature Id="LanguageFiles" Title="Localization files" Description="Localization files for 71 languages."
+          Level="1" AllowAdvertise="no">
+        <ComponentRef Id="Lang" />
+      </Feature>
+    </Feature>
+
+    <UIRef Id="WixUI" />
+
+    <!-- Install Sequences -->
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallValidate" />
+    </InstallExecuteSequence>
+
+  </Product>
+</Wix>

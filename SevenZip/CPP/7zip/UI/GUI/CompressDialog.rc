@@ -1,0 +1,227 @@
+#include "CompressDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 400
+#define yc 354
+
+#undef gSize
+#undef gSpace
+#undef g0xs
+#undef g1x
+#undef g1xs
+#undef g2xs
+#undef g3x
+#undef g3xs
+#undef g4x
+#undef g4x2
+#undef g4xs
+#undef g4xs2
+
+#define gSize 192
+#define gSpace 24
+
+#define ntSize2 168
+#define ntSizeX (ntSize2 - m - m)
+#define ntPosX m + m
+#define ntPosY 292
+
+#define g1xs 88
+#define g0xs (gSize - g1xs)
+#define g1x  (m + g0xs)
+
+#define g3xs 40
+#define g2xs (gSize - g3xs)
+#define g3x  (m + g2xs)
+
+#define g4x (m + gSize + gSpace)
+#define g4x2 (g4x + m)
+#define g4xs (xc - gSize - gSpace)
+#define g4xs2 (g4xs - m - m)
+
+#define yOpt 80
+
+#define xArcFolderOffs 40
+
+#undef GROUP_Y_SIZE
+#undef GROUP_Y_SIZE_ENCRYPT
+#ifdef UNDER_CE
+#define GROUP_Y_SIZE 8
+#define GROUP_Y_SIZE_ENCRYPT 8
+#else
+#define GROUP_Y_SIZE 64
+#define GROUP_Y_SIZE_ENCRYPT 128
+#endif
+
+#define yPsw (yOpt + GROUP_Y_SIZE + 8)
+
+IDD_COMPRESS  DIALOG  0, 0, xs, ys  MY_MODAL_DIALOG_STYLE  MY_FONT
+CAPTION "Add to Archive"
+BEGIN
+  LTEXT     "", IDT_COMPRESS_ARCHIVE_FOLDER, m + xArcFolderOffs, m, xc - xArcFolderOffs, 8
+  LTEXT    "&Archive:", IDT_COMPRESS_ARCHIVE, m, 12, xArcFolderOffs, 8
+  COMBOBOX  IDC_COMPRESS_ARCHIVE, m + xArcFolderOffs, 18, xc - bxsDots - 12 - xArcFolderOffs, 126, MY_COMBO_WITH_EDIT
+  PUSHBUTTON  "...", IDB_COMPRESS_SET_ARCHIVE, xs - m - bxsDots, 16, bxsDots, bys, WS_GROUP
+
+  LTEXT     "Archive &format:", IDT_COMPRESS_FORMAT,      m,  41, g0xs, 8
+  COMBOBOX  IDC_COMPRESS_FORMAT, g1x, 39, g1xs, 80, MY_COMBO | CBS_SORT
+  
+  LTEXT     "Compression &level:", IDT_COMPRESS_LEVEL,    m,  62, g0xs, 8
+  COMBOBOX  IDC_COMPRESS_LEVEL,  g1x, 60, g1xs, 80, MY_COMBO
+  
+  LTEXT     "Compression &method:", IDT_COMPRESS_METHOD,  m,  83, g0xs, 8
+  COMBOBOX  IDC_COMPRESS_METHOD, g1x, 81, g1xs, 80, MY_COMBO
+
+  LTEXT     "&Dictionary size:", IDT_COMPRESS_DICTIONARY, m, 104, g0xs, 8
+  COMBOBOX  IDC_COMPRESS_DICTIONARY, g1x, 102, g1xs, 167, MY_COMBO
+
+  LTEXT     "&Word size:", IDT_COMPRESS_ORDER,            m, 125, g0xs, 8
+  COMBOBOX  IDC_COMPRESS_ORDER,  g1x, 123, g1xs, 141, MY_COMBO
+
+  LTEXT     "&Solid Block size:", IDT_COMPRESS_SOLID,     m, 146, g0xs, 8
+  COMBOBOX  IDC_COMPRESS_SOLID,  g1x, 144, g1xs, 140, MY_COMBO
+
+  LTEXT     "Number of CPU &threads:", IDT_COMPRESS_THREADS, m, 167, g0xs, 8
+  COMBOBOX  IDC_COMPRESS_THREADS,  g1x, 165, g1xs - 35, 140, MY_COMBO
+  RTEXT     "", IDT_COMPRESS_HARDWARE_THREADS, g1x + g1xs - 35 + 10, 167, 25, 8
+
+  
+  LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY,      m, 190, g2xs, 8
+  RTEXT     "", IDT_COMPRESS_MEMORY_VALUE,    g3x, 190, g3xs, 8
+  
+  LTEXT     "Memory usage for Decompressing:", IDT_COMPRESS_MEMORY_DE, m, 206, g2xs, 8
+  RTEXT     "", IDT_COMPRESS_MEMORY_DE_VALUE, g3x, 206, g3xs, 8
+
+
+  LTEXT     "Split to &volumes, bytes:", IDT_SPLIT_TO_VOLUMES, m, 225, gSize, 8
+  COMBOBOX  IDC_COMPRESS_VOLUME, m, 237, gSize, 73, MY_COMBO_WITH_EDIT
+
+  LTEXT     "Parameters:", IDT_COMPRESS_PARAMETERS, m, 256, gSize, 8
+  EDITTEXT  IDE_COMPRESS_PARAMETERS, m, 268, gSize, 14, ES_AUTOHSCROLL
+
+
+  GROUPBOX  "NTFS", IDG_COMPRESS_NTFS, m, ntPosY, ntSize2, 68
+
+  CONTROL   "Store symbolic links", IDX_COMPRESS_NT_SYM_LINKS, MY_CHECKBOX,
+            ntPosX, ntPosY + 12, ntSizeX, 10
+  CONTROL   "Store hard links", IDX_COMPRESS_NT_HARD_LINKS, MY_CHECKBOX,
+            ntPosX, ntPosY + 26, ntSizeX, 10
+  CONTROL   "Store alternate data streams", IDX_COMPRESS_NT_ALT_STREAMS, MY_CHECKBOX,
+            ntPosX, ntPosY + 40, ntSizeX, 10
+  CONTROL   "Store file security", IDX_COMPRESS_NT_SECUR, MY_CHECKBOX,
+            ntPosX, ntPosY + 54, ntSizeX, 10
+  
+
+  LTEXT     "&Update mode:", IDT_COMPRESS_UPDATE_MODE, g4x, 41, 80, 8
+  COMBOBOX  IDC_COMPRESS_UPDATE_MODE, g4x + 84, 39, g4xs - 84, 80, MY_COMBO
+
+  LTEXT     "Path mode:", IDT_COMPRESS_PATH_MODE, g4x, 61, 80, 8
+  COMBOBOX  IDC_COMPRESS_PATH_MODE, g4x + 84, 59, g4xs - 84, 80, MY_COMBO
+
+
+  GROUPBOX  "Options", IDG_COMPRESS_OPTIONS, g4x, yOpt, g4xs, GROUP_Y_SIZE
+
+  CONTROL   "Create SF&X archive", IDX_COMPRESS_SFX, MY_CHECKBOX,
+            g4x2, yOpt + 14, g4xs2, 10
+  CONTROL   "Compress shared files", IDX_COMPRESS_SHARED, MY_CHECKBOX,
+            g4x2, yOpt + 30, g4xs2, 10
+  CONTROL   "Delete files after compression", IDX_COMPRESS_DEL, MY_CHECKBOX,
+            g4x2, yOpt + 46, g4xs2, 10
+
+
+  GROUPBOX  "Encryption", IDG_COMPRESS_ENCRYPTION, g4x, yPsw, g4xs, GROUP_Y_SIZE_ENCRYPT
+
+  LTEXT     "Enter &password:", IDT_PASSWORD_ENTER, g4x2, yPsw + 14, g4xs2, 8
+  EDITTEXT  IDE_COMPRESS_PASSWORD1, g4x2, yPsw + 26, g4xs2, 14, ES_PASSWORD | ES_AUTOHSCROLL
+  LTEXT     "Reenter password:", IDT_PASSWORD_REENTER, g4x2, yPsw + 46, g4xs2, 8
+  EDITTEXT  IDE_COMPRESS_PASSWORD2, g4x2, yPsw + 58, g4xs2, 14, ES_PASSWORD | ES_AUTOHSCROLL
+
+  CONTROL   "Show Password", IDX_PASSWORD_SHOW, MY_CHECKBOX,
+            g4x2, yPsw + 79, g4xs2, 10
+
+  LTEXT     "&Encryption method:", IDT_COMPRESS_ENCRYPTION_METHOD, g4x2, yPsw + 95, 100, 8
+  COMBOBOX  IDC_COMPRESS_ENCRYPTION_METHOD, g4x2 + 100, yPsw + 93, g4xs2 - 100,  198, MY_COMBO
+
+  CONTROL   "Encrypt file &names", IDX_COMPRESS_ENCRYPT_FILE_NAMES, MY_CHECKBOX,
+            g4x2, yPsw + 111, g4xs2, 10
+  
+  DEFPUSHBUTTON  "OK",     IDOK,     bx3, by, bxs, bys, WS_GROUP
+  PUSHBUTTON     "Cancel", IDCANCEL, bx2, by, bxs, bys
+  PUSHBUTTON     "Help",   IDHELP,   bx1, by, bxs, bys
+END
+
+
+#ifdef UNDER_CE
+
+#undef m
+#undef xc
+#undef yc
+
+#define m 4
+#define xc 152
+#define yc 160
+
+
+IDD_COMPRESS_2  DIALOG  0, 0, xs, ys  MY_MODAL_DIALOG_STYLE  MY_FONT
+CAPTION "Add to Archive"
+MY_FONT
+BEGIN
+  COMBOBOX  IDC_COMPRESS_ARCHIVE, m, m, xc - bxsDots - m, 126, MY_COMBO_WITH_EDIT
+  PUSHBUTTON  "...", IDB_COMPRESS_SET_ARCHIVE, xs - m - bxsDots, m, bxsDots, 12, WS_GROUP
+
+  COMBOBOX  IDC_COMPRESS_FORMAT,  m      , 22, 32, 80, MY_COMBO | CBS_SORT
+  COMBOBOX  IDC_COMPRESS_LEVEL,   m +  36, 22, 68, 80, MY_COMBO
+  COMBOBOX  IDC_COMPRESS_METHOD,  m + 108, 22, 44, 80, MY_COMBO
+
+  COMBOBOX  IDC_COMPRESS_DICTIONARY,    m, 40, 40, 80, MY_COMBO
+  COMBOBOX  IDC_COMPRESS_ORDER,   m +  44, 40, 32, 80, MY_COMBO
+  COMBOBOX  IDC_COMPRESS_SOLID,   m +  80, 40, 40, 80, MY_COMBO
+  COMBOBOX  IDC_COMPRESS_THREADS, m + 124, 40, 28, 80, MY_COMBO
+
+  LTEXT     "Split to &volumes, bytes:", IDT_SPLIT_TO_VOLUMES, m, 60, 32, 8
+  COMBOBOX  IDC_COMPRESS_VOLUME, m + 32, 58, 44, 73, MY_COMBO_WITH_EDIT
+  LTEXT     "Parameters:", IDT_COMPRESS_PARAMETERS, m + 80, 60, 48, 8
+  EDITTEXT  IDE_COMPRESS_PARAMETERS, m + 128, 58, 24, 13, ES_AUTOHSCROLL
+
+  COMBOBOX  IDC_COMPRESS_UPDATE_MODE, m, 76, 88, 80, MY_COMBO
+  CONTROL   "SF&X", IDX_COMPRESS_SFX, MY_CHECKBOX, m + 92, 77, 60, 10
+
+  CONTROL   "Compress shared files", IDX_COMPRESS_SHARED, MY_CHECKBOX, m, 94, xc, 10
+  
+  LTEXT     "Enter &password:", IDT_PASSWORD_ENTER, m, 112, 60, 8
+  EDITTEXT  IDE_COMPRESS_PASSWORD1, m + 60, 110, 44, 13, ES_PASSWORD | ES_AUTOHSCROLL
+  CONTROL   "Show Password", IDX_PASSWORD_SHOW, MY_CHECKBOX, m + 108, 112, 44, 10
+
+  COMBOBOX  IDC_COMPRESS_ENCRYPTION_METHOD, m, 128, 48, 198, MY_COMBO
+  CONTROL   "Encrypt file &names", IDX_COMPRESS_ENCRYPT_FILE_NAMES, MY_CHECKBOX, m + 52, 130, 100, 10
+  
+  OK_CANCEL
+END
+
+#endif
+
+STRINGTABLE
+BEGIN
+    IDS_PASSWORD_NOT_MATCH  "Passwords do not match"
+    IDS_PASSWORD_USE_ASCII  "Use only English letters, numbers and special characters (!, #, $, ...) for password."
+    IDS_PASSWORD_TOO_LONG   "Password is too long"
+
+    IDS_METHOD_STORE    "Store"
+    IDS_METHOD_FASTEST  "Fastest"
+    IDS_METHOD_FAST     "Fast"
+    IDS_METHOD_NORMAL   "Normal"
+    IDS_METHOD_MAXIMUM  "Maximum"
+    IDS_METHOD_ULTRA    "Ultra"
+
+    IDS_COMPRESS_UPDATE_MODE_ADD    "Add and replace files"
+    IDS_COMPRESS_UPDATE_MODE_UPDATE "Update and add files"
+    IDS_COMPRESS_UPDATE_MODE_FRESH  "Freshen existing files"
+    IDS_COMPRESS_UPDATE_MODE_SYNC   "Synchronize files"
+
+    IDS_OPEN_TYPE_ALL_FILES  "All Files"
+    IDS_COMPRESS_SET_ARCHIVE_BROWSE  "Browse"
+
+    IDS_COMPRESS_NON_SOLID  "Non-solid"
+    IDS_COMPRESS_SOLID      "Solid"
+
+    IDS_SPLIT_CONFIRM  "Specified volume size: {0} bytes.\nAre you sure you want to split archive into such volumes?"
+END

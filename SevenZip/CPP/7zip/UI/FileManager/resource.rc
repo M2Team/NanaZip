@@ -1,0 +1,268 @@
+#include "../../MyVersionInfo.rc"
+#include "../../GuiCommon.rc"
+#include "resource.h"
+
+MY_VERSION_INFO_APP("7-Zip File Manager", "7zFM")
+
+IDR_ACCELERATOR1 ACCELERATORS
+BEGIN
+//  "N",     IDM_CREATE_FILE,      VIRTKEY, CONTROL, NOINVERT
+  VK_F1,   IDM_HELP_CONTENTS,    VIRTKEY, NOINVERT
+  VK_F12,  IDM_FOLDERS_HISTORY,  VIRTKEY, ALT, NOINVERT
+//  VK_F7,   IDM_CREATE_FOLDER,    VIRTKEY, NOINVERT
+END
+
+
+IDM_MENU MENU
+BEGIN
+  POPUP "&File"
+  BEGIN
+    MENUITEM "&Open\tEnter",                IDM_OPEN
+    MENUITEM "Open &Inside\tCtrl+PgDn",     IDM_OPEN_INSIDE
+    MENUITEM "Open Inside *",               IDM_OPEN_INSIDE_ONE
+    MENUITEM "Open Inside #",               IDM_OPEN_INSIDE_PARSER
+    MENUITEM "Open O&utside\tShift+Enter",  IDM_OPEN_OUTSIDE
+    MENUITEM "&View\tF3",                   IDM_FILE_VIEW
+    MENUITEM "&Edit\tF4",                   IDM_FILE_EDIT
+    MENUITEM SEPARATOR
+    MENUITEM "Rena&me\tF2",                 IDM_RENAME
+    MENUITEM "&Copy To...\tF5",             IDM_COPY_TO
+    MENUITEM "&Move To...\tF6",             IDM_MOVE_TO
+    MENUITEM "&Delete\tDel",                IDM_DELETE
+    MENUITEM SEPARATOR
+    MENUITEM "&Split file...",              IDM_SPLIT
+    MENUITEM "Com&bine files...",           IDM_COMBINE
+    MENUITEM SEPARATOR
+    MENUITEM "P&roperties\tAlt+Enter",      IDM_PROPERTIES
+    MENUITEM "Comme&nt...\tCtrl+Z",         IDM_COMMENT
+    // MENUITEM "Calculate checksum",          IDM_CRC
+    POPUP "CRC"
+    BEGIN
+      MENUITEM "CRC-32",                    IDM_CRC32
+      MENUITEM "CRC-64",                    IDM_CRC64
+      MENUITEM "SHA-1",                     IDM_SHA1
+      MENUITEM "SHA-256",                   IDM_SHA256
+      MENUITEM "*",                         IDM_HASH_ALL
+    END
+    MENUITEM "Di&ff",                       IDM_DIFF
+    MENUITEM SEPARATOR
+    MENUITEM "Create Folder\tF7",           IDM_CREATE_FOLDER
+    MENUITEM "Create File\tCtrl+N",         IDM_CREATE_FILE
+    MENUITEM SEPARATOR
+    MENUITEM "&Link...",                    IDM_LINK
+    MENUITEM "&Alternate streams",          IDM_ALT_STREAMS
+    MENUITEM SEPARATOR
+    MENUITEM "E&xit\tAlt+F4",               IDCLOSE
+  END
+  POPUP "&Edit"
+  BEGIN
+    // MENUITEM "Cu&t\tCtrl+X",                IDM_EDIT_CUT, GRAYED
+    // MENUITEM "&Copy\tCtrl+C",               IDM_EDIT_COPY, GRAYED
+    // MENUITEM "&Paste\tCtrl+V",              IDM_EDIT_PASTE, GRAYED
+    // MENUITEM SEPARATOR
+    MENUITEM "Select &All\tShift+[Grey +]", IDM_SELECT_ALL
+    MENUITEM "Deselect All\tShift+[Grey -]", IDM_DESELECT_ALL
+    MENUITEM "&Invert Selection\tGrey *",   IDM_INVERT_SELECTION
+    MENUITEM "Select...\tGrey +",           IDM_SELECT
+    MENUITEM "Deselect...\tGrey -",         IDM_DESELECT
+    MENUITEM "Select by Type\tAlt+[Grey+]", IDM_SELECT_BY_TYPE
+    MENUITEM "Deselect by Type\tAlt+[Grey -]", IDM_DESELECT_BY_TYPE
+  END
+  POPUP "&View"
+  BEGIN
+    MENUITEM "Lar&ge Icons\tCtrl+1",        IDM_VIEW_LARGE_ICONS
+    MENUITEM "S&mall Icons\tCtrl+2",        IDM_VIEW_SMALL_ICONS
+    MENUITEM "&List\tCtrl+3",               IDM_VIEW_LIST
+    MENUITEM "&Details\tCtrl+4",            IDM_VIEW_DETAILS, CHECKED
+    MENUITEM SEPARATOR
+    MENUITEM "Name\tCtrl+F3",               IDM_VIEW_ARANGE_BY_NAME
+    MENUITEM "Type\tCtrl+F4",               IDM_VIEW_ARANGE_BY_TYPE
+    MENUITEM "Date\tCtrl+F5",               IDM_VIEW_ARANGE_BY_DATE
+    MENUITEM "Size\tCtrl+F6",               IDM_VIEW_ARANGE_BY_SIZE
+    MENUITEM "Unsorted\tCtrl+F7",           IDM_VIEW_ARANGE_NO_SORT
+    MENUITEM SEPARATOR
+    MENUITEM "Flat View",                   IDM_VIEW_FLAT_VIEW
+    MENUITEM "&2 Panels\tF9",               IDM_VIEW_TWO_PANELS
+
+    POPUP "2017"
+    BEGIN
+      MENUITEM "Time",                      IDM_VIEW_TIME
+    END
+
+    POPUP "Toolbars"
+    BEGIN
+      MENUITEM "Archive Toolbar",           IDM_VIEW_ARCHIVE_TOOLBAR
+      MENUITEM "Standard Toolbar",          IDM_VIEW_STANDARD_TOOLBAR
+      MENUITEM SEPARATOR
+      MENUITEM "Large Buttons",             IDM_VIEW_TOOLBARS_LARGE_BUTTONS
+      MENUITEM "Show Buttons Text",         IDM_VIEW_TOOLBARS_SHOW_BUTTONS_TEXT
+    END
+    MENUITEM "Open Root Folder\t\\",        IDM_OPEN_ROOT_FOLDER
+    MENUITEM "Up One Level\tBackspace",     IDM_OPEN_PARENT_FOLDER
+    MENUITEM "Folders History...\tAlt+F12", IDM_FOLDERS_HISTORY
+    MENUITEM "&Refresh\tCtrl+R",            IDM_VIEW_REFRESH
+    MENUITEM "Auto Refresh",                IDM_VIEW_AUTO_REFRESH
+
+    // MENUITEM "Show NTFS streams",           IDM_VIEW_SHOW_STREAMS
+    // MENUITEM "Show deleted files",          IDM_VIEW_SHOW_DELETED
+
+  END
+  POPUP "F&avorites"
+  BEGIN
+    POPUP "&Add folder to Favorites as"
+    BEGIN
+        MENUITEM SEPARATOR
+    END
+    MENUITEM SEPARATOR
+  END
+  POPUP "&Tools"
+  BEGIN
+    MENUITEM "&Options...",                 IDM_OPTIONS
+    MENUITEM SEPARATOR
+    MENUITEM "&Benchmark",                  IDM_BENCHMARK
+  #ifdef UNDER_CE
+    MENUITEM "Benchmark 2",                 IDM_BENCHMARK2
+  #endif
+  #ifndef UNDER_CE
+  END
+  POPUP "&Help"
+  BEGIN
+    MENUITEM "&Contents...\tF1",            IDM_HELP_CONTENTS
+  #endif
+    MENUITEM SEPARATOR
+  MENUITEM "&About 7-Zip...",               IDM_ABOUT
+  END
+END
+
+
+IDI_ICON  ICON  "../../UI/FileManager/FM.ico"
+
+#ifndef UNDER_CE
+1  24  MOVEABLE PURE   "../../UI/FileManager/7zFM.exe.manifest"
+#endif
+
+IDB_ADD        BITMAP  "../../UI/FileManager/Add.bmp"
+IDB_EXTRACT    BITMAP  "../../UI/FileManager/Extract.bmp"
+IDB_TEST       BITMAP  "../../UI/FileManager/Test.bmp"
+IDB_COPY       BITMAP  "../../UI/FileManager/Copy.bmp"
+IDB_MOVE       BITMAP  "../../UI/FileManager/Move.bmp"
+IDB_DELETE     BITMAP  "../../UI/FileManager/Delete.bmp"
+IDB_INFO       BITMAP  "../../UI/FileManager/Info.bmp"
+IDB_ADD2       BITMAP  "../../UI/FileManager/Add2.bmp"
+IDB_EXTRACT2   BITMAP  "../../UI/FileManager/Extract2.bmp"
+IDB_TEST2      BITMAP  "../../UI/FileManager/Test2.bmp"
+IDB_COPY2      BITMAP  "../../UI/FileManager/Copy2.bmp"
+IDB_MOVE2      BITMAP  "../../UI/FileManager/Move2.bmp"
+IDB_DELETE2    BITMAP  "../../UI/FileManager/Delete2.bmp"
+IDB_INFO2      BITMAP  "../../UI/FileManager/Info2.bmp"
+
+
+STRINGTABLE
+BEGIN
+  IDS_BOOKMARK   "Bookmark"
+
+  IDS_OPTIONS    "Options"
+
+  IDS_N_SELECTED_ITEMS  "{0} object(s) selected"
+
+  IDS_FILE_EXIST  "File {0} is already exist"
+  IDS_WANT_UPDATE_MODIFIED_FILE  "File '{0}' was modified.\nDo you want to update it in the archive?"
+  IDS_CANNOT_UPDATE_FILE   "Cannot update file\n'{0}'"
+  IDS_CANNOT_START_EDITOR  "Cannot start editor."
+  IDS_VIRUS                "The file looks like a virus (the file name contains long spaces in name)."
+  IDS_MESSAGE_UNSUPPORTED_OPERATION_FOR_LONG_PATH_FOLDER "The operation cannot be called from a folder that has a long path."
+  IDS_SELECT_ONE_FILE      "You must select one file"
+  IDS_SELECT_FILES         "You must select one or more files"
+  IDS_TOO_MANY_ITEMS       "Too many items"
+
+  IDS_COPY      "Copy"
+  IDS_MOVE      "Move"
+  IDS_COPY_TO   "Copy to:"
+  IDS_MOVE_TO   "Move to:"
+  IDS_COPYING   "Copying..."
+  IDS_MOVING    "Moving..."
+  IDS_RENAMING  "Renaming..."
+
+  IDS_OPERATION_IS_NOT_SUPPORTED  "Operation is not supported."
+  IDS_ERROR_RENAMING  "Error Renaming File or Folder"
+  IDS_CONFIRM_FILE_COPY   "Confirm File Copy"
+  IDS_WANT_TO_COPY_FILES  "Are you sure you want to copy files to archive"
+
+  IDS_CONFIRM_FILE_DELETE   "Confirm File Delete"
+  IDS_CONFIRM_FOLDER_DELETE "Confirm Folder Delete"
+  IDS_CONFIRM_ITEMS_DELETE  "Confirm Multiple File Delete"
+  IDS_WANT_TO_DELETE_FILE   "Are you sure you want to delete '{0}'?"
+  IDS_WANT_TO_DELETE_FOLDER "Are you sure you want to delete the folder '{0}' and all its contents?"
+  IDS_WANT_TO_DELETE_ITEMS  "Are you sure you want to delete these {0} items?"
+  IDS_DELETING              "Deleting..."
+  IDS_ERROR_DELETING        "Error Deleting File or Folder"
+  IDS_ERROR_LONG_PATH_TO_RECYCLE  "The system cannot move a file with long path to the Recycle Bin"
+  
+  IDS_CREATE_FOLDER       "Create Folder"
+  IDS_CREATE_FILE         "Create File"
+  IDS_CREATE_FOLDER_NAME  "Folder name:"
+  IDS_CREATE_FILE_NAME    "File Name:"
+  IDS_CREATE_FOLDER_DEFAULT_NAME  "New Folder"
+  IDS_CREATE_FILE_DEFAULT_NAME    "New File"
+  IDS_CREATE_FOLDER_ERROR "Error Creating Folder"
+  IDS_CREATE_FILE_ERROR   "Error Creating File"
+
+  IDS_COMMENT      "Comment"
+  IDS_COMMENT2     "&Comment:"
+  IDS_SELECT       "Select"
+  IDS_DESELECT     "Deselect"
+  IDS_SELECT_MASK  "Mask:"
+
+  IDS_PROPERTIES   "Properties"
+  IDS_FOLDERS_HISTORY  "Folders History"
+
+  IDS_COMPUTER   "Computer"
+  IDS_NETWORK    "Network"
+  IDS_DOCUMENTS  "Documents"
+  IDS_SYSTEM     "System"
+
+  IDS_ADD            "Add"
+  IDS_EXTRACT        "Extract"
+  IDS_TEST           "Test"
+  IDS_BUTTON_COPY    "Copy"
+  IDS_BUTTON_MOVE    "Move"
+  IDS_BUTTON_DELETE  "Delete"
+  IDS_BUTTON_INFO    "Info"
+
+  IDS_SPLITTING            "Splitting..."
+  IDS_SPLIT_CONFIRM_TITLE  "Confirm Splitting"
+  IDS_SPLIT_CONFIRM_MESSAGE  "Are you sure you want to split file into {0} volumes?"
+  IDS_SPLIT_VOL_MUST_BE_SMALLER "Volume size must be smaller than size of original file"
+
+  IDS_COMBINE     "Combine Files"
+  IDS_COMBINE_TO  "&Combine to:"
+  IDS_COMBINING   "Combining..."
+  IDS_COMBINE_SELECT_ONE_FILE  "Select only first part of split file"
+  IDS_COMBINE_CANT_DETECT_SPLIT_FILE  "Cannot detect file as split file"
+  IDS_COMBINE_CANT_FIND_MORE_THAN_ONE_PART  "Cannot find more than one part of split file"
+
+END
+
+#include "AboutDialog.rc"
+#include "BrowseDialog.rc"
+#include "ComboDialog.rc"
+#include "CopyDialog.rc"
+#include "EditDialog.rc"
+#include "EditPage.rc"
+#include "FoldersPage.rc"
+#include "LangPage.rc"
+#include "LinkDialog.rc"
+#include "ListViewDialog.rc"
+#include "MenuPage.rc"
+#include "MessagesDialog.rc"
+#include "OverwriteDialog.rc"
+#include "PasswordDialog.rc"
+#include "ProgressDialog2.rc"
+#include "PropertyName.rc"
+#include "SettingsPage.rc"
+#include "SplitDialog.rc"
+#include "SystemPage.rc"
+#include "../GUI/Extract.rc"
+#include "../GUI/resource3.rc"
+#include "../Explorer/resource2.rc"
+#include "resourceGui.rc"

@@ -1,0 +1,26 @@
+#include "AboutDialogRes.h"
+#include "../../GuiCommon.rc"
+#include "../../MyVersion.h"
+
+#define xc 144
+#define yc 144
+
+#define y 93
+
+IDI_LOGO ICON "../../UI/FileManager/7zipLogo.ico"
+
+#ifndef SS_REALSIZEIMAGE
+#define SS_REALSIZEIMAGE 0x800
+#endif
+
+IDD_ABOUT DIALOG 0, 0, xs, ys  MY_MODAL_DIALOG_STYLE  MY_FONT
+CAPTION "About 7-Zip"
+{
+  DEFPUSHBUTTON  "OK", IDOK, bx1, by, bxs, bys
+  PUSHBUTTON  "www.7-zip.org", IDB_ABOUT_HOMEPAGE, bx2, by, bxs, bys
+  ICON   IDI_LOGO, -1, m, m, 32, 32, SS_REALSIZEIMAGE
+  LTEXT  "", IDT_ABOUT_VERSION, m, 54, xc, 8
+  LTEXT  "", IDT_ABOUT_DATE, m, 67, xc, 8
+  LTEXT  MY_COPYRIGHT, -1, m, 80, xc, 8
+  LTEXT  "7-Zip is free software", IDT_ABOUT_INFO, m, y, xc, (by - y - 1)
+}

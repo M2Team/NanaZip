@@ -1,0 +1,18 @@
+#include "resource.h"
+
+STRINGTABLE
+BEGIN
+  IDS_CONTEXT_FOLDER      "<Folder>"
+  IDS_CONTEXT_ARCHIVE     "<Archive>"
+  IDS_CONTEXT_OPEN        "Open archive"
+  IDS_CONTEXT_EXTRACT     "Extract files..."
+  IDS_CONTEXT_COMPRESS    "Add to archive..."
+  IDS_CONTEXT_TEST        "Test archive"
+  IDS_CONTEXT_EXTRACT_HERE "Extract Here"
+  IDS_CONTEXT_EXTRACT_TO  "Extract to {0}"
+  IDS_CONTEXT_COMPRESS_TO "Add to {0}"
+  IDS_CONTEXT_COMPRESS_EMAIL "Compress and email..."
+  IDS_CONTEXT_COMPRESS_TO_EMAIL "Compress to {0} and email"
+END
+
+IDB_MENU_LOGO  BITMAP  "../../UI/Explorer/MenuLogo.bmp"

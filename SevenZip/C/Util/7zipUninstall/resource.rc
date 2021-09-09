@@ -1,0 +1,47 @@
+#include <winnt.h>
+#include <WinUser.h>
+#include <CommCtrl.h>
+
+#define USE_COPYRIGHT_CR
+#include "../../7zVersion.rc"
+#include "resource.h"
+
+MY_VERSION_INFO(MY_VFT_APP, "7-Zip Uninstaller", "Uninstall", "Uninstall.exe")
+
+1  ICON "7zipUninstall.ico"
+
+#define xc 184
+#define yc 96
+
+#define m 8
+#define bxs 64
+#define bys 16
+
+
+#define xs (xc + m + m)
+#define ys (yc + m + m)
+
+#define bx1 (xs - m - bxs)
+#define bx2 (bx1 - m - bxs)
+
+#define by (ys - m - bys)
+
+IDD_INSTALL DIALOG 0, 0, xs, ys
+STYLE DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "Uninstall 7-Zip"
+FONT 8, "MS Shell Dlg"
+BEGIN
+  LTEXT          "Uninstall from:", IDT_EXTRACT_EXTRACT_TO, m, m, xc, 8
+  EDITTEXT       IDE_EXTRACT_PATH, m, 21, xc, 14, ES_AUTOHSCROLL | WS_DISABLED
+
+
+  LTEXT          "", IDT_CUR_FILE, m, 50, xc, 8
+  CONTROL        "", IDC_PROGRESS, "msctls_progress32", WS_BORDER, m, 64, xc, 10
+
+  DEFPUSHBUTTON  "&Uninstall", IDOK,  bx2, by, bxs, bys, WS_GROUP
+  PUSHBUTTON     "Cancel",  IDCANCEL, bx1, by, bxs, bys
+END
+
+#ifndef UNDER_CE
+1 24 MOVEABLE PURE "7zipUninstall.manifest"
+#endif

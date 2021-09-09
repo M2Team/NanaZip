@@ -1,0 +1,22 @@
+#include "SettingsPageRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 240
+#define yc 120
+
+IDD_SETTINGS  MY_PAGE
+#include "SettingsPage2.rc"
+
+
+#ifdef UNDER_CE
+
+#undef m
+#undef xc
+
+#define m 4
+#define xc (SMALL_PAGE_SIZE_X + 8)
+
+IDD_SETTINGS_2  MY_PAGE
+#include "SettingsPage2.rc"
+
+#endif

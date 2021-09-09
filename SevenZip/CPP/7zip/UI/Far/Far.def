@@ -1,0 +1,35 @@
+; 7-ZipFar.def : Declares the module parameters for the DLL.
+
+LIBRARY      "7-ZipFar"
+
+EXPORTS
+  ExitFAR
+  SetStartupInfo
+  OpenPlugin
+  OpenFilePlugin
+  ClosePlugin
+  GetFindData
+  FreeFindData
+  SetDirectory
+  GetPluginInfo
+  Configure
+  GetOpenPluginInfo
+  GetFiles
+  PutFiles
+  DeleteFiles
+  ProcessKey
+
+  ;SetStartupInfoW
+  ;OpenPluginW
+  ;OpenFilePluginW
+  ;ClosePluginW
+  ;GetFindDataW
+  ;FreeFindDataW
+  ;SetDirectoryW
+  ;GetPluginInfoW
+  ;ConfigureW
+  ;GetOpenPluginInfoW
+  ;GetFilesW
+  ;PutFilesW
+  ;DeleteFilesW
+  ;ProcessKeyW

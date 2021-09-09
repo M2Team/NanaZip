@@ -1,0 +1,14 @@
+CAPTION "Editor"
+{
+  LTEXT       "&View:",   IDT_EDIT_VIEWER, m, m, xc, 8
+  EDITTEXT                IDE_EDIT_VIEWER, m, m + 12, xc - m - bxsDots, 14, ES_AUTOHSCROLL
+  PUSHBUTTON  "...",      IDB_EDIT_VIEWER, xs - m - bxsDots, m + 11, bxsDots, bys
+
+  LTEXT       "&Editor:", IDT_EDIT_EDITOR, m, m + 32, xc, 8
+  EDITTEXT                IDE_EDIT_EDITOR, m, m + 44, xc - m - bxsDots, 14, ES_AUTOHSCROLL
+  PUSHBUTTON  "...",      IDB_EDIT_EDITOR, xs - m - bxsDots, m + 43, bxsDots, bys
+
+  LTEXT       "&Diff:",   IDT_EDIT_DIFF,   m, m + 64, xc, 8
+  EDITTEXT                IDE_EDIT_DIFF,   m, m + 76, xc - m - bxsDots, 14, ES_AUTOHSCROLL
+  PUSHBUTTON  "...",      IDB_EDIT_DIFF,   xs - m - bxsDots, m + 75, bxsDots, bys
+}

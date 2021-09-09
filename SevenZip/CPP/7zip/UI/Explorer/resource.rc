@@ -1,0 +1,8 @@
+#include "../../MyVersionInfo.rc"
+#include "resource2.rc"
+
+MY_VERSION_INFO_DLL("7-Zip Shell Extension", "7-zip")
+
+#ifndef UNDER_CE
+1 24 MOVEABLE PURE "7-zip.dll.manifest"
+#endif

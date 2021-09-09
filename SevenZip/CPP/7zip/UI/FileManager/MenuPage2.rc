@@ -1,0 +1,17 @@
+#include "../GUI/ExtractDialogRes.h"
+
+#define y 82
+
+CAPTION "7-Zip"
+BEGIN
+  CONTROL  "Integrate 7-Zip to shell context menu", IDX_SYSTEM_INTEGRATE_TO_MENU, MY_CHECKBOX, m, m, xc, 10
+  CONTROL  "(32-bit)", IDX_SYSTEM_INTEGRATE_TO_MENU_2, MY_CHECKBOX, m, m + 14, xc, 10
+  CONTROL  "Cascaded context menu", IDX_SYSTEM_CASCADED_MENU, MY_CHECKBOX, m, m + 28, xc, 10
+  CONTROL  "Icons in context menu", IDX_SYSTEM_ICON_IN_MENU, MY_CHECKBOX, m, m + 42, xc, 10
+  CONTROL   "Eliminate duplication of root folder", IDX_EXTRACT_ELIM_DUP, MY_CHECKBOX, m, m + 56, xc, 10
+
+  LTEXT    "Context menu items:", IDT_SYSTEM_CONTEXT_MENU_ITEMS, m, m + 70, xc, 8
+  CONTROL  "List", IDL_SYSTEM_OPTIONS, "SysListView32",
+           LVS_REPORT | LVS_SINGLESEL | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,
+           m, m + y, xc, yc - y
+END

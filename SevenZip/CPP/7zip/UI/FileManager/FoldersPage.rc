@@ -1,0 +1,23 @@
+#include "FoldersPageRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 240
+#define yc 100
+
+IDD_FOLDERS  MY_PAGE
+#include "FoldersPage2.rc"
+
+#ifdef UNDER_CE
+
+#undef xc
+#define xc SMALL_PAGE_SIZE_X
+
+IDD_FOLDERS_2  MY_PAGE
+#include "FoldersPage2.rc"
+
+#endif
+
+STRINGTABLE
+BEGIN
+  IDS_FOLDERS_SET_WORK_PATH_TITLE  "Specify a location for temporary archive files."
+END

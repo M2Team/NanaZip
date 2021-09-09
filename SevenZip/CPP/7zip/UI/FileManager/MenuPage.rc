@@ -1,0 +1,24 @@
+#include "MenuPageRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 240
+#define yc 224
+
+IDD_MENU  MY_PAGE
+#include "MenuPage2.rc"
+
+#ifdef UNDER_CE
+
+#undef m
+#undef xc
+#undef yc
+
+#define m 4
+#define xc (SMALL_PAGE_SIZE_X + 8)
+
+#define yc 112
+
+IDD_MENU_2  MY_PAGE
+#include "MenuPage2.rc"
+
+#endif

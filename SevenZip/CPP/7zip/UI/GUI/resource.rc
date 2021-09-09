@@ -1,0 +1,25 @@
+#include "../../MyVersionInfo.rc"
+// #include <winnt.h>
+
+#include "resource2.rc"
+#include "resource3.rc"
+
+#include "../FileManager/resourceGui.rc"
+
+MY_VERSION_INFO(MY_VFT_APP, "7-Zip GUI", "7zg", "7zg.exe")
+
+IDI_ICON ICON "FM.ico"
+
+#ifndef UNDER_CE
+1 24 MOVEABLE PURE "7zG.exe.manifest"
+#endif
+
+#include "../FileManager/PropertyName.rc"
+#include "../FileManager/OverwriteDialog.rc"
+#include "../FileManager/PasswordDialog.rc"
+#include "../FileManager/ProgressDialog2.rc"
+#include "Extract.rc"
+#include "../FileManager/BrowseDialog.rc"
+#include "../FileManager/ComboDialog.rc"
+#include "../FileManager/EditDialog.rc"
+#include "../FileManager/ListViewDialog.rc"

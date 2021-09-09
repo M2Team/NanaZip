@@ -1,0 +1,100 @@
+PROG = 7zz
+
+# IS_X64 = 1
+# USE_ASM = 1
+# ST_MODE = 1
+
+CONSOLE_VARIANT_FLAGS=-DPROG_VARIANT_Z
+
+include ../Format7zF/Arc_gcc.mak
+
+ifdef SystemDrive
+
+LOCAL_FLAGS_SYS = \
+  -D_7ZIP_LARGE_PAGES \
+  -DWIN_LONG_PATH \
+  -DSUPPORT_DEVICE_FILE \
+
+SYS_OBJS = \
+  $O/FileSystem.o \
+  $O/Registry.o \
+  $O/MemoryLock.o \
+  $O/DLL.o \
+  $O/DllSecur.o \
+  $O/resource.o \
+
+else
+
+SYS_OBJS = \
+  $O/MyWindows.o \
+
+endif
+
+
+LOCAL_FLAGS = \
+  $(LOCAL_FLAGS_SYS) \
+  $(LOCAL_FLAGS_ST) \
+
+
+UI_COMMON_OBJS = \
+  $O/ArchiveCommandLine.o \
+  $O/ArchiveExtractCallback.o \
+  $O/ArchiveOpenCallback.o \
+  $O/Bench.o \
+  $O/DefaultName.o \
+  $O/EnumDirItems.o \
+  $O/Extract.o \
+  $O/ExtractingFilePath.o \
+  $O/HashCalc.o \
+  $O/LoadCodecs.o \
+  $O/OpenArchive.o \
+  $O/PropIDUtils.o \
+  $O/SetProperties.o \
+  $O/SortUtils.o \
+  $O/TempFiles.o \
+  $O/Update.o \
+  $O/UpdateAction.o \
+  $O/UpdateCallback.o \
+  $O/UpdatePair.o \
+  $O/UpdateProduce.o \
+
+
+CONSOLE_OBJS = \
+  $O/BenchCon.o \
+  $O/ConsoleClose.o \
+  $O/ExtractCallbackConsole.o \
+  $O/HashCon.o \
+  $O/List.o \
+  $O/Main.o \
+  $O/MainAr.o \
+  $O/OpenCallbackConsole.o \
+  $O/PercentPrinter.o \
+  $O/UpdateCallbackConsole.o \
+  $O/UserInputUtils.o \
+
+COMMON_OBJS_2 = \
+  $O/CommandLineParser.o \
+  $O/ListFileUtils.o \
+  $O/StdInStream.o \
+  $O/StdOutStream.o \
+
+WIN_OBJS_2 = \
+  $O/ErrorMsg.o \
+  $O/FileLink.o \
+  $O/PropVariantConv.o \
+  $O/SystemInfo.o \
+
+7ZIP_COMMON_OBJS_2 = \
+  $O/FilePathAutoRename.o \
+  $O/FileStreams.o \
+
+OBJS = \
+  $(ARC_OBJS) \
+  $(SYS_OBJS) \
+  $(COMMON_OBJS_2) \
+  $(WIN_OBJS_2) \
+  $(7ZIP_COMMON_OBJS_2) \
+  $(UI_COMMON_OBJS) \
+  $(CONSOLE_OBJS) \
+
+include ../../7zip_gcc.mak

@@ -1,0 +1,645 @@
+HISTORY of the 7-Zip source code
+--------------------------------
+
+21.02 alpha    2021-05-06
+-------------------------
+- 7-Zip now writes additional field for filename in UTF-8 encoding to zip archives.
+  It allows to extract correct file name from zip archives on different systems.
+- The command line version of 7-Zip for macOS was released.
+- The speed for LZMA and LZMA2 decompression in arm64 versions for macOS and Linux 
+  was increased by 20%-60%.
+- Some changes and improvements in ZIP, TAR and NSIS code.
+
+
+21.01 alpha    2021-03-09
+-------------------------
+- The command line version of 7-Zip for Linux was released.
+- The improvements for speed of ARM64 version using hardware CPU instructions 
+  for AES, CRC-32, SHA-1 and SHA-256.
+- The bug in versions 18.02 - 21.00 was fixed:
+  7-Zip could not correctly extract some ZIP archives created with xz compression method.
+- Some bugs were fixed.
+
+
+20.02 alpha    2020-08-08
+-------------------------
+- The default number of LZMA2 chunks per solid block in 7z archive was increased to 64.
+  It allows to increase the compression speed for big 7z archives, if there is a big number 
+  of CPU cores and threads.
+- The speed of PPMd compressing/decompressing was increased for 7z/ZIP/RAR archives.
+- The new -ssp switch. If the switch -ssp is specified, 7-Zip doesn't allow the system 
+  to modify "Last Access Time" property of source files for archiving and hashing operations. 
+- Some bugs were fixed.
+
+
+20.00 alpha    2020-02-06
+-------------------------
+- 7-Zip now supports new optional match finders for LZMA/LZMA2 compression: bt5 and hc5, 
+  that can work faster than bt4 and hc4 match finders for the data with big redundancy.
+- The compression ratio was improved for Fast and Fastest compression levels with the 
+  following default settings:
+   - Fastest level (-mx1) : hc5 match finder with 256 KB dictionary.
+   - Fast    level (-mx3) : hc5 match finder with 4 MB dictionary.
+- Minor speed optimizations in multithreaded LZMA/LZMA2 compression for Normal/Maximum/Ultra 
+  compression levels.
+- bzip2 decoding code was updated to support bzip2 archives, created by lbzip2 program.
+
+
+19.02          2019-09-05
+-------------------------
+- Support for SHA-1/SHA-256 optimized code in 
+  Sha1Opt.c, Sha256Opt.c, Sha256Opt.asm, Sha1Opt.asm.
+
+
+19.00          2019-02-21
+-------------------------
+- Encryption strength for 7z archives was increased:
+  the size of random initialization vector was increased from 64-bit to 128-bit,
+  and the pseudo-random number generator was improved.
+- Some bugs were fixed.
+
+
+18.06          2018-12-30
+-------------------------
+- The speed for LZMA/LZMA2 compressing was increased by 3-10%,
+  and there are minor changes in compression ratio.
+- Some bugs were fixed.
+- The bug in 7-Zip 18.02-18.05 was fixed:
+  There was memory leak in multithreading xz decoder - XzDecMt_Decode(),
+  if xz stream contains only one block.
+- 7-Zip 18.02-18.05 used only one CPU thread for bz2 archive creation.
+- The changes for MSVS compiler makefiles: 
+   - the makefiles now use "PLATFORM" macroname with values (x64, x86, arm64)
+     instead of "CPU" macroname with values (AMD64, ARM64).
+   - the makefiles by default now use static version of the run-time library.
+
+
+18.05          2018-04-30
+-------------------------
+- The speed for LZMA/LZMA2 compressing was increased 
+    by 8% for fastest/fast compression levels and 
+    by 3% for normal/maximum compression levels.
+- Previous versions of 7-Zip could work incorrectly in "Large memory pages" mode in
+  Windows 10 because of some BUG with "Large Pages" in Windows 10. 
+  Now 7-Zip doesn't use "Large Pages" on Windows 10 up to revision 1709 (16299).
+
+
+18.03 beta     2018-03-04
+-------------------------
+- Asm\x86\LzmaDecOpt.asm: new optimized LZMA decoder written in asm 
+  for x64 with about 30% higher speed than main version of LZMA decoder written in C.
+- The speed for single-thread LZMA/LZMA2 decoder written in C was increased by 3%.
+- 7-Zip now can use multi-threading for 7z/LZMA2 decoding,
+  if there are multiple independent data chunks in LZMA2 stream.
+- 7-Zip now can use multi-threading for xz decoding,
+  if there are multiple blocks in xz stream.
+
+
+17.00 beta     2017-04-29
+-------------------------
+- NewHandler.h / NewHandler.cpp: 
+    now it redefines operator new() only for old MSVC compilers (_MSC_VER < 1900).
+- C/7zTypes.h : the names of variables in interface structures were changed (vt).
+- Some bugs were fixed. 7-Zip could crash in some cases.
+- Some internal changes in code.
+
+
+16.02          2016-05-21
+-------------------------
+- The BUG in 16.00 - 16.01 was fixed:
+  Split Handler (SplitHandler.cpp) returned incorrect 
+  total size value (kpidSize) for split archives.
+
+
+16.01          2016-05-19
+-------------------------	
+- Some bugs were fixed,
+- Some internal changes to reduce the number of compiler warnings.
+
+
+16.00          2016-05-10
+-------------------------	
+- 7-Zip now can extract multivolume ZIP archives (z01, z02, ... , zip).
+- Some bugs were fixed,
+
+
+15.12          2015-11-19
+-------------------------	
+- The BUG in C version of 7z decoder was fixed:
+  7zDec.c : SzDecodeLzma2()
+  7z decoder could mistakenly report about decoding error for some 7z archives
+  that use LZMA2 compression method.
+  The probability to get that mistaken decoding error report was about 
+  one error per 16384 solid blocks for solid blocks larger than 16 KB (compressed size). 
+- The BUG (in 9.26-15.11) in C version of 7z decoder was fixed:
+  7zArcIn.c : SzReadHeader2()
+  7z decoder worked incorrectly for 7z archives that contain 
+  empty solid blocks, that can be placed to 7z archive, if some file is 
+  unavailable for reading during archive creation.
+
+
+15.09 beta     2015-10-16
+-------------------------	
+- The BUG in LZMA / LZMA2 encoding code was fixed.
+  The BUG in LzFind.c::MatchFinder_ReadBlock() function.
+  If input data size is larger than (4 GiB - dictionary_size),
+  the following code worked incorrectly:
+  -  LZMA : LzmaEnc_MemEncode(), LzmaEncode() : LZMA encoding functions 
+     for compressing from memory to memory. 
+     That BUG is not related to LZMA encoder version that works via streams.
+  -  LZMA2 : multi-threaded version of LZMA2 encoder worked incorrectly, if 
+     default value of chunk size (CLzma2EncProps::blockSize) is changed 
+     to value larger than (4 GiB - dictionary_size).
+
+
+9.38 beta      2015-01-03
+-------------------------	
+- The BUG in 9.31-9.37 was fixed:
+  IArchiveGetRawProps interface was disabled for 7z archives.
+- The BUG in 9.26-9.36 was fixed:
+  Some code in CPP\7zip\Archive\7z\ worked correctly only under Windows.
+
+
+9.36 beta      2014-12-26
+-------------------------	
+- The BUG in command line version was fixed:
+  7-Zip created temporary archive in current folder during update archive
+  operation, if -w{Path} switch was not specified. 
+  The fixed 7-Zip creates temporary archive in folder that contains updated archive.
+- The BUG in 9.33-9.35 was fixed:
+  7-Zip silently ignored file reading errors during 7z or gz archive creation,
+  and the created archive contained only part of file that was read before error.
+  The fixed 7-Zip stops archive creation and it reports about error.
+
+
+9.31           2012-10-31
+-------------------------
+- InBuffer.h : CInBuffer  uses ISequentialInStream  *_stream; instead of CMyComPtr<ISequentialInStream> 
+  OutBuffer.h: COutBuffer uses ISequentialOutStream *_stream; instead of CMyComPtr<ISequentialOutStream> 
+	
+
+9.26           2011-04-11
+-------------------------
+- The BUG was fixed: multi-threaded ZIP stored file size that was at scan stage,
+  So if the file was changed after scan, the Unpack Size field was incorrect
+	
+
+9.21           2011-04-11
+-------------------------	
+- New class FString for file names at file systems.
+- Speed optimization in CRC code for big-endian CPUs.
+
+
+9.18           2010-11-02
+-------------------------	
+- New small SFX module for installers (C/Util/SfxSetup).
+
+
+9.17           2010-10-04
+-------------------------
+- IStream.h::IOutStream::
+    STDMETHOD(SetSize)(Int64 newSize) PURE;
+  was changed to
+    STDMETHOD(SetSize)(UInt64 newSize) PURE;
+
+
+9.09           2009-12-12
+-------------------------
+- The bug was fixed:
+   Utf16_To_Utf8 funstions in UTFConvert.cpp and 7zMain.c
+   incorrectly converted surrogate characters (the code >= 0x10000) to UTF-8.
+
+
+9.05           2009-07-05
+-------------------------
+- FileMapping.h::CFileMapping now returns WRes
+
+
+9.04           2009-05-30
+-------------------------
+- ICoder.h: NCoderPropID::EEnum values were changed
+
+
+9.02           2009-04-23
+-------------------------
+- Bug was fixed: if swap2 filter was requests at compression,
+  7-zip used swap4 filter instead (but id was swap2), so archives were incorrect.
+  
+4.61           2008-11-23
+-------------------------
+- Bug in ver. 4.58+ was fixed:
+   7-Zip didn't use any -m* switch after -mtc, -mcl or -mcu for .zip archives. 
+- Bug in .CAB code was fixed. 7-Zip didn't show some empty files,
+  if .CAB archive contains more than one empty file.
+   
+
+4.59           2008-07-27
+-------------------------
+- Bug was fixed:
+   LZMA Encoder in fast compression mode could access memory outside of 
+   allocated range in some rare cases.
+   
+
+4.59 alpha     2008-05-30
+-------------------------
+- BUGS was fixed: 
+    7zOut.cpp: 7-Zip incorrectly wrote size of property records in some cases.
+    7zIn.cpp:  7-Zip incorrectly work with archive, containg archive properties.
+
+4.58 alpha 9   2008-04-29
+-------------------------
+- BUG was fixed: 7-Zip showed incorrect timestamps in ISO files.
+
+
+4.58 alpha 8   2008-04-15
+-------------------------
+- BUG in 4.58 alpha 5/6/7 was fixed:
+    LZMA encoder worked incorrectly, if lp != 0.
+- Unicode (UTF-8) support for filenames in .ZIP archives. Now there are 3 modes:
+    1) Default mode: 7-Zip uses UTF-8, if the local code page doesn't contain required symbols.
+    2) -mcu switch:  7-Zip uses UTF-8, if there are non-ASCII symbols.
+    3) -mcl switch:  7-Zip uses local code page.
+- Now it's possible to use -mSW- and -mSW+ switches instead of -mSW=off and -mSW=on  
+
+
+4.58 alpha 7   2008-04-08
+-------------------------
+- BUG was fixed: BZip2Encoder and BZip2Decoder used CEvent objects without 
+  creating, when BZip2 code was called with one thread (with -mmt1 switch or with 
+  default switches on single thread CPU).
+- .lzma support.
+- RPM and NSIS support was improved.
+- LZMA now stores only (2 << n) or (3 << n) dictionary size value to LZMA properties.
+
+
+4.58 alpha 6   2008-03-27
+-------------------------
+- NTFS time extra in ZIP.
+- New item property - kpidTimeType - VT_UI4 (0 - NTFS, 1 - Unix, 2 - DOS).
+- Static CRC table is not required now for Lzma Encoder (in Lz MatchFinder).
+
+
+4.58 alpha 5   2008-03-19
+-------------------------
+- Creation time (-mtc switch) for .7z archives
+- LZMA encoder was converted to ANSI-C
+
+
+4.58 alpha 3   2008-02-25
+-------------------------
+- Speed optimizations for LZMA decoding. Now it uses C code instead of C++.
+- 7-Zip now has 128 MB dictionary limit for 32-bit version:
+  It's for speed optimization: kNumLogBits = 9 + sizeof(size_t) / 2;
+- TAR: 'D' link flag support.
+- 7-Zip now can unpack multivolume RAR archives created with 
+  "old style volume names" scheme (-vn switch) and names *.001, *.002, ...
+- Fixed bugs:
+  - 7-Zip FM could not copy / move files to root network folders like \\COMPNAME\FOLDERNAME\
+    In case of move it removed original files.
+  - SFX-WIN: if there are errors, it still could return 0.
+  - ZIP (.XPS file) isZip64 && thisDiskNumber16 == 0xFFFF.
+  - ZIP name updating:
+      If zip file contains extra field and you try to change properties of files,
+      7-zip tries to delete all extra fileds (except for WzAES).
+      And that code could hang.
+  -  7-Zip GUI didn't suggest BZip2 dictionary size used in previous run.
+  -  If creation time stamp was included in .RAR archive, 7-zip used creation time stamp 
+     as modification time stamp.
+
+4.58 alpha 2   2007-12-31
+-------------------------
+- Small changes in Deflate and LZMA compression.
+- Some speed optimizations.
+
+
+4.57
+----
+- Bug was fixed:
+  Anti item is created for wrong file:
+  http://sourceforge.net/forum/forum.php?thread_id=1880366&forum_id=45798
+
+
+4.52 beta      2007-07-32
+-------------------------
+- 7-Zip could not decompress some cab files
+- "." dir creating at FAT was fixed / long names
+
+
+4.50 beta      2007-07-24
+-------------------------
+- 7-Zip now replaces unsupported filenames (like "nul", "com1") during extracting.
+- New switch for command line version:
+    -ssc[-] enables/disables case-sensitive mode.
+- 7z.exe l shows archive comment for zip archives
+- Some bugs were fixed: long paths names shorter than 4.
+- Speed optimizations for AES encryption.
+
+
+
+4.56 beta      2007-09-13
+-------------------------
+- some fixes in LZ encoder (LZMA and Deflate) code.
+ size_t was replaces to ptrdiff_t.
+ size_t version worked incorrectly with some compilers.
+
+ 
+4.46 beta      2007-05-25
+-------------------------
+- CPP Synchronization objects now return HRes (error code) instead of bool.
+
+
+4.45 beta      2007-04-16
+-------------------------
+- 7-Zip now uses C version of CRC, so you must call CrcGenerateTable at 
+  stratup code, or you must add CPP/Common/CRC.cpp to your project.
+- Method ID in .7z now is 63-bit integer (UInt64).
+- Open error messages
+- unRar 1.5 fixed
+- unShrink fixed
+- BUG of 4.43 beta and 4.44 beta was fixed.
+  7-Zip compressing to .zip in multi-threading mode didn't work in some cases.
+
+
+4.44 beta      2007-01-20
+-------------------------
+
+- Bug was fixed: LZMAEncoder.cpp::CEncoder::GetOptimumFast
+  it was:
+    data++
+  fixed version:
+    data = _matchFinder.GetPointerToCurrentPos(_matchFinderObj) - 1;
+  It could lead to very small cpmpression ratio decreasing when block needs move.
+
+
+4.30 beta      2005-11-18
+-------------------------
+- Security.h::AddLockMemoryPrivilege       - installs "Large pages" feature
+- MemoryLock.h::EnableLockMemoryPrivilege  - enables "Large pages" feature
+- Alloc.h::SetLargePageSize                - sets optimal LargePageSize size
+
+
+4.27           2005-09-21
+-------------------------
+- Some GUIDs/interfaces were changed.
+ IStream.h:
+   ISequentialInStream::Read now works as old ReadPart
+   ISequentialOutStream::Write now works as old WritePart
+
+
+4.26 beta      2005-08-05
+-------------------------
+-  MyAlloc(0)/BigAlloc(0) now return 0
+
+
+4.25 beta      2005-07-31
+-------------------------
+-  More 64-bit compatibilty
+
+
+4.24 beta      2005-07-06
+-------------------------
+-  Common\NewHandler.h: using throw() for code size optimization.
+
+
+4.23           2005-06-29
+-------------------------
+-  Bug was fixed: memory leak in Cab decoder.
+
+
+4.19 beta      2005-05-21
+-------------------------
+-  BZip2 code was rewritten. Now 7-Zip doesn't use original BZip2 code.
+  Old (original) version was moved to folder 7zip/Compress/BZip2Original/
+
+
+4.14 beta      2005-01-11
+-------------------------
+-  STL using was reduced
+-  7za now supports Split(001) archves
+
+
+4.10 beta      2004-10-21
+-------------------------
+-  Codecs now use new interface: ICompressSetDecoderProperties2
+
+
+4.07 beta      2004-10-03
+-------------------------
+-  some interfaces were changed slightly to support 
+  -stdin -stdout mode.
+-  FilterCoder for simple filters
+-  Wildcard censor class was changed.
+-  Bug was fixed: when encrypted stream was multiple 16,
+  it used additional 16 empty bytes.
+
+
+3.11           2003-10-06
+-------------------------
+  File functions support unicode strings even
+  on Windows 95/98/ME.
+
+
+3.08.02        2003-09-20
+-------------------------
+  More compatible with GCC.
+
+
+3.08.02 beta   2003-08-20
+-------------------------
+  Extracting bug in 7zExtract.cpp was fixed.
+ 
+
+3.08 beta      2003-08-19
+-------------------------
+  Big source code reconstruction.
+ 
+
+2.30 Beta 32   2003-05-15
+-------------------------
+  Small changes in Deflate decoder.
+ 
+
+2.30 Beta 31   2003-04-29
+-------------------------
+  Common/NewHandler.cpp
+    HeapAlloc in (included to beta 30) was changed to malloc.
+    HeapAlloc worked slower in Win95/98/Me.
+ 
+
+2.30 Beta 30   2003-04-21
+-------------------------
+  new file: Common/String.cpp
+  Common/NewHandler.*  were changed
+
+
+2.30 Beta 29   2003-04-07
+-------------------------
+  Small changes in LZMA code.
+
+
+2.30 Beta 28   2003-02-16
+-------------------------
+  Processing anti-files was corrected.
+
+
+2.30 Beta 27   2003-01-24
+-------------------------
+  Project/Archiver/Format/Common/ArchiveInterface.h:
+    new IArchiveOpenVolumeCallback interface.
+
+
+2.30 Beta 26   2003-01-12
+-------------------------
+  SDK/Interface/PropID.h:
+    kpidComment now is kpidCommented
+
+
+2.30 Beta 25   2003-01-02
+-------------------------
+  Main archive interfaces were changed.
+
+
+2.30 Beta 24   2002-11-01
+-------------------------
+  SDK/Windows/Synchronization.h 
+  SDK/Windows/Synchronization.cpp
+    - some changes.
+
+
+2.30 Beta 23   2002-09-07
+-------------------------
+  Project/FileManager folder was added.
+  Notation of some source files was changed.
+
+
+2.30 Beta 22   2002-08-28
+-------------------------
+  Project/FileManager folder was added.
+  Notation of some source files was changed.
+
+
+
+2.30 Beta 21   2002-07-08
+-------------------------
+  Project/Compress/LZ/MatchFinder/BinTree/BinTree.h
+  Project/Compress/LZ/MatchFinder/BinTree/BinTreeMain.h
+  Project/Compress/LZ/MatchFinder/BinTree/HC.h
+  Project/Compress/LZ/MatchFinder/BinTree/HCMain.h
+    - RAM requirements for LZMA (7z) compression were reduced.
+
+
+2.30 Beta 20   2002-07-01
+-------------------------
+- SDK/Stream/WindowOut.h 
+    now it uses only required memory (dictionary size).
+- Project/Archiver/Resource 
+    contains common resurces
+
+
+2.30 Beta 19   2002-04-11
+-------------------------
+- SDK/Archive/Rar/Handler.cpp
+    supporting RAR29
+
+2.30 Beta 18   2002-03-25
+-------------------------
+- SDK/Archive/Cab/MSZipDecoder.cpp
+  SDK/Archive/Cab/LZXDecoder.cpp:
+    bug with corrupted archives was fixed
+- Project/Compress/LZ/MatchFinder/BinTree/BinTree.h 
+- Project/Compress/LZ/MatchFinder/BinTree/BinTreeMain.h 
+    some speed optimization (using prefetching)
+
+
+2.30 Beta 17   2002-03-03
+-------------------------
+- ARJ suppport.
+
+
+2.30 Beta 16   2002-02-24
+-------------------------
+- Project/Compress/LZ/LZMA/Decoder.cpp:
+    Bug was fixed: LZMA could not extract more than 4 GB.
+- RPM and CPIO formats.
+- Project/Compress/LZ/LZMA/Encoder.*
+  Project/Archiver/Format/7z/OutHandler.cpp 
+    New fast compression mode for LZMA: -m0a=0.
+- New match finders for LZMA: bt4b, hc3, hc4.
+
+
+2.30 Beta 15   2002-02-17
+-------------------------
+- Compression ratio in LZMA was slightly improved:
+    Project/Compress/LZ/LZMA/Encoder.*
+    Project/Archiver/Format/7z/OutHandler.cpp 
+
+
+2.30 Beta 14   2002-02-10
+-------------------------
+- Supporting multithreading for LZMA:
+    Project/Compress/LZ/MatchFinder/MT 
+- Common/String.h:
+    CStringBase::Replace function was fixed.
+
+
+2.30 Beta 13   2002-01-27
+-------------------------
+- Compress/LZ/MatchFinder/BinTree3.h: 
+   method
+- Compress/LZ/MatchFinder/BinTreemain.h: 
+    - one VirtualAlloc array was splitted to 
+      the for 3 arrays.
+    - Hash-functions were changed.
+
+
+
+2.30 Beta 12   2002-01-16
+-------------------------
+- Compress/LZ/MatchFinder/BinTreemain.h: 
+  Compress/LZ/MatchFinder/Patricia.h: 
+  Compress/PPM/PPMd/SubAlloc.h: 
+    Beta 11 bugs were fixed:
+      - VirtualFree was used incorrectly
+      - checking WIN32 instead _WINDOWS.
+  Compress/LZ/MatchFinder/Patricia.h: 
+    Beta 11 bug with deleting m_Hash2Descendants was fixed.
+
+
+2.30 Beta 11   2002-01-15
+-------------------------
+- Compress/LZ/MatchFinder/BinTreemain.h: 
+  Compress/LZ/MatchFinder/Patricia.h: 
+  Compress/PPM/PPMd/SubAlloc.h: 
+    using VirtualAlloc for memory allocating
+- Exlorer/ContextMenu.cpp: 
+    Testing supporting.
+    CreateProcess instead WinExec
+- Format/Common/IArchiveHandler.h:
+  Exlorer/ProxyHandler.cpp:
+  FAR/Plugin.cpp:
+    New properties names: Method, HostOS.
+- Exlorer/OverwriteDialog.cpp:
+  FAR/OverwriteDialog.cpp:
+  Windows/PropVariantConversions.h
+    Using National time format was eliminated.
+
+
+
+2.30 Beta 10   2002-01-11
+-------------------------
+- Exlorer/ContextMenu.cpp: bug with context menu on 
+  Windows NT4 in Unicode version was fixed.
+- Format/7z/UpdateArchiveEngine.cpp: bug was fixed - 
+  Updating in Beta 8 and 9 didn't work.
+- Exlorer/CCompressDialog.cpp: history growing bug was fixed.
+
+
+2.30 Beta 9    2002-01-08
+-------------------------
+- SDK/Common/Vector.h: sopporting sorted object vectors .
+- Lang features.
+- Two new match finders: pat3h and pat4h.
+- SDK/Archive/Zip/InEngine.cpp: bug was fixed.
+- SDK/Windows/FileDir.cpp: function CreateComplexDirectory
+  was changed.
+

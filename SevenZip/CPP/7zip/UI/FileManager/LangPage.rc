@@ -1,0 +1,37 @@
+#include "LangPageRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 160
+#define yc 100
+
+IDD_LANG  DIALOG  0, 0, xs, ys  MY_PAGE_STYLE  MY_FONT
+CAPTION "Language"
+{
+  LTEXT     "Language:", IDT_LANG_LANG, m, m, xc, 8
+  COMBOBOX  IDC_LANG_LANG, m, 20, xc, yc - 20, MY_COMBO_SORTED
+}
+
+
+#ifdef UNDER_CE
+
+#undef m
+#undef xc
+
+#define m 4
+#define xc (SMALL_PAGE_SIZE_X + 8)
+
+IDD_LANG_2  MY_PAGE
+CAPTION "Language"
+{
+  LTEXT     "Language:", IDT_LANG_LANG, m, m, xc, 8
+  COMBOBOX  IDC_LANG_LANG, m, 20, xc, yc - 20, MY_COMBO_SORTED
+}
+
+#endif
+
+
+STRINGTABLE
+BEGIN
+  IDS_LANG_ENGLISH  "English"
+  IDS_LANG_NATIVE   "English"
+END

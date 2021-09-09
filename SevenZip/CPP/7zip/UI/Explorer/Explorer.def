@@ -1,0 +1,9 @@
+; 7-zip.def
+
+LIBRARY "7-zip"
+
+EXPORTS
+  DllCanUnloadNow PRIVATE
+  DllGetClassObject PRIVATE
+  DllRegisterServer PRIVATE
+  DllUnregisterServer PRIVATE
