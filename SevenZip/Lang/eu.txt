@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  15.12 : 2015-12-04 : Xabier Aramendi
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Basque
+Euskara
+401
+&Ongi
+E&zeztatu
+
+
+
+&Bai
+&Ez
+It&xi
+&Laguntza
+
+&Jarraitu
+440
+Bai &Guztiari
+Ez G&uztiari
+Gelditu
+Berrabiarazi
+Ba&rrenean
+&Gainean
+&Pausatu
+Pausatuta
+Zihur zaude ezeztatzea nahi duzula?
+500
+&Agiria
+&Editatu
+&Ikusi
+&Gogokoenak
+&Tresnak
+&Laguntza
+540
+&Ireki
+Ireki &Barnean
+Ireki &Kanpoan
+Ik&usi
+&Editatu
+Berrize&ndatu
+Kopiatu &Hona...
+&Mugitu Hona...
+E&zabatu
+Banan&du agiria...
+Nahas&tu agiriak...
+Ezau&garriak
+&Aipamena...
+Ka&lkulatu egiaztapen-batura
+Ezber
+Sortu Agiritegia
+S&ortu Agiria
+I&rten
+Lotura
+&Aldikatu Jarioak
+600
+Hautatu &Guztiak
+Deshatutau G&uztiak
+&Alderantzizkatu Hautapena
+&Hautatu...
+&Deshautatu...
+Hautatu &Motaz
+Deshautatu M&otaz
+700
+Ikur &Handiak
+Ikur Txi&kiak
+&Zerrenda
+&Xehetasunak
+730
+Ant&olatugabe
+Ik&uspegi Laua
+&2 Panel
+&Tresnabarrak
+Ireki &Erro Agiritegia
+Maila Bat &Gora
+Agiritegi &Historia...
+&Berritu
+Be&rez Berritu
+750
+Artxibo Tresnabarra
+Tresnabarra Estandarra
+Botoi Handiak
+Erakutsi Botoien Idazkia
+800
+&Gehitu agiritegia Gogokoenetara honela
+Lastermarka
+900
+A&ukerak...
+&Benchmark
+960
+&Edukiak...
+&7-Zip Buruz...
+1003
+Helburua
+Izena
+Luzapena
+Agiritegia
+Neurria
+Pakete Neurria
+Ezaugarriak
+Sortua
+Sartua
+Aldatua
+Solidoa
+Aipatua
+Enkriptatua
+Banandu Aurretik
+Banandu Ondoren
+Hiztegia
+
+Mota
+Anti
+Metodoa
+Hostalari SE
+Agiri Sistema
+Erabiltzailea
+Taldea
+Blokea
+Aipamena
+Kokapena
+Helburu Aurrizkia
+Agiritegiak
+Agiriak
+Bertsioa
+Bolumena
+Bolumen-anitz
+Oreka
+Loturak
+Blokeak
+Bolumenak
+
+64-bit
+Big-endian
+CPU
+Neurri Fisikoa
+Idazburu Neurria
+Egiaztapen-batura
+Ezaugarriak
+Helbide Birtuala
+ID-a
+Izen Laburra
+Aplikazio Sortzailea
+Sektore Neurria
+Modua
+Lotura Sinbolikoa
+Akatsa
+Neurria Guztira
+Toki Askea
+Kluster Neurria
+Etiketa
+Tokiko Izena
+Hornitzailea
+NT Segurtasuna
+Aldikatu Jarioa
+Aux
+Ezabatuta
+Zuhaitza da
+
+
+Akats Mota
+Akatsak
+Akatsak
+Ohartarazpenak
+Ohartarazpena
+Jarioak
+Aldikatu Jarioak
+Aldikatu Jario Neurriak
+Neurri Birtuala
+Despaketatu Neurria
+Neurri Fisikoa Guztira
+Bolumen Aurkibidea
+AzpiMota
+Aipamen Labura
+Kode Orrialdea
+
+
+
+Isats Neurria
+Barneratutako Stub Neurria
+Lotura
+Lotura Gogorra
+iNode
+
+Irakurtzeko-bakarrik
+2100
+Aukerak
+Hizkuntza
+Hizkuntza:
+Editatzailea
+&Editatzailea:
+E&zberdintasunak:
+2200
+Sistema
+Elkartu 7-Zip hauekin:
+Erabiltzaile guztiak
+2301
+&Bateratu 7-Zip shell hitzinguru menura
+&Urjauzi hitzinguru menua
+Hitzinguru menuko gaiak:
+&Ikurrak hitzinguru menuan
+2320
+<Agiritegia>
+<Artxiboa>
+Ireki artxiboa
+Atera agiriak...
+Gehitu &artxibora...
+Aztertu artxiboa
+Atera Hemen
+Atera hona: {0}
+Gehitu hona: {0}
+Konprimitu eta &bidali post@z...
+Konprimitu hona {0} eta bidali post@z
+2400
+Agiritegiak
+&Lan agiritegia
+&Sistemaren aldibaterako agiritegia
+&Oraingoa
+A&dierazia:
+&Erabili gidagailu kengarrientzat bakarrik
+Adierazi aldibaterako artxibo agirientzako kokalekua
+2500
+Ezarpenak
+&Erakutsi ".." gai
+E&rakutsi egizko agiriaren ikurrak
+Erakutsi siste&maren menua
+&Lerro osoko hautapena
+Erakutsi &saretxo lerroak
+&Klik-bakarra gai bat irekitzeko
+A&ukerazko hautapen modua
+Erabili &oroimen handiko orrialdeak
+2900
+7-Zip buruz
+7-Zip software askea da
+3000
+Sistemak ezin du beharrezko oroimen kopurua esleitu
+Ez dago akatsik
+{0} objetu hautaturik
+Ezin da '{0}' agiritegia sortu
+Eguneratze eragiketak ez daude sostengaturik artxibo honentzat.
+Ezinezkoa '{0}' agiria artxibo bezala irekitzea
+Ezinezkoa '{0}' artxibo enkriptatua ireki. Sarhitz okerra?
+Artxibo mota ez dago sostengatua
+{0} agiria badago jadanik
+'{0}' agiria aldatu egin da.\nArtxioboan eguneratzea nahi duzu?
+Ezinezkoa agiria eguneratzea\n'{0}'
+Ezin da editatzailea abiarazi.
+Agiriak birus bat ematen du (agiri izenak tarte luzeak ditu izenean).
+Eragiketa ezin da helburu luze bat duen agiritegi batetik deitu
+Agiri bat hautatu behar duzu
+Agiri bat edo gehiago hautatu behar dituzu
+Gai gehiegi
+Ezin da agiria {0} artxibo bezala ireki
+Agiria {0} artxibo bezala dago irekita
+Artxiboa orekaz irekita dago
+3300
+Ateratzen
+Konprimitzen
+Aztertzen
+Atzeratzen...
+Mihatzen...
+Kentzen
+3320
+Gehitzen
+Eguneratzen
+Aztertzen
+Erreplikatzen
+Berpaketatzen
+Jauzten
+Ezabatzen
+Idazburua sortzen
+3400
+&Atera
+Atera &hona:
+A&dierazi ateratako agirientzako kokaleku bat.
+3410
+Helburu mo&dua:
+Helburu-izen osoak
+Helburu-izenik ez
+Helburu-izen absolutoak
+Helburu-izen erlatiboak
+3420
+Gainidazketa modua:
+Galdetu gainidatzi aurretik
+Gainidazi galdetu gabe
+Jauzi dauden agiriak
+Berez berrizendatu
+Berez berrizendatu dauden agiriak
+3430
+Ezabatu erro agiritegi bikoizketa
+Leheneratu agiri segurtasuna
+3500
+Baieztatu Agiri Ordeztea
+Helmuga agiritegiak jadanik badu prozesatutako agiria.
+Dagoen agiria ordeztea nahi duzu
+beste honekin?
+{0} byte
+&Berez Berrizendatu
+3700
+Konpresio metodo sostengatu gabea '{0}'-rako.
+Datu akatsa '{0}'. Agiria hautsita dago.
+CRC hutsegitea '{0}'. Agiria hautsita dago.
+Datu akatsa '{0}' enkriptaturiko agirian. Sarhitz okerra?
+CRC hutsegitea '{0}' enkriptaturiko agirian. Sarhitz okerra?
+3710
+Sarhitz okerra?
+3721
+Konpresio metodoa ez dago sostengatua
+Datu akatsa
+CRC hutsegitea
+Datu eskuraezinak
+Ustekabeko datu amaiera
+Zenbait akats daude gertaketa amaieraren ondoren
+Ez da artxiboa
+Idazburu Akatsa
+Sarhitz okerra
+3763
+Artxibo hasiera eskuraezina
+Artxibo hasiera baieztatugabe
+
+
+
+Ezaugarri sostengu gabea
+3800
+Sartu sarhitza
+Sartu sarhitza:
+Bersartu sarhitza:
+&Erakutsi sarhitza
+Sarhitzak ez datoz bat
+Erabili bakarrik Ingelerazko hizkiak, zenbakiak eta hizki bereziak (!, #, $, ...) sarhitzarentzat
+Sarhitza luzeegia da
+Sarhitza
+3900
+Igarotako denbora:
+Gelditzen den denbora:
+Neurria guztira:
+Abiadura:
+Prozesatuta:
+Konpresio maila:
+Akatsak:
+Artxiboak:
+4000
+Gehitu artxibora
+&Artxiboa:
+Egu&neraketa modua:
+Artxibo he&uskarria:
+Konpre&sio maila:
+Konpresio &metodoa:
+&Hiztegi neurria:
+Hi&tz neurria:
+&Bloke solidoaren neurria:
+&CPU hari zenbatekoa:
+&Parametroak:
+Aukerak
+Sortu SF&X artxiboa
+&Konprimitu elkarbanaturiko agiriak
+Enkriptaketa
+Enkriptaketa metodoa:
+Enkriptatu agiri &izenak
+Oroimen erabilera Konprimitzeko:
+Oroimen erabilera Deskonprimitzeko:
+Ezabatu agi&riak konprimitu ondoren
+4040
+Biltegiratu lotura sinbolikoak
+Biltegiratu lotura gogorrak
+Biltegiratu aldikatu datu jarioak
+Biltegiratu agiri segurtasuna
+4050
+Biltegia
+Azkarrena
+Azkarra
+Arrunta
+Gehiena
+Ultra
+4060
+Gehitu eta ordeztu agiriak
+Eguneratu eta gehitu agiriak
+Berritu dauden agiriak
+Aldiberetu agiriak
+4070
+Bilatu
+Agiri Denak
+Ez-solidoa
+Solidoa
+6000
+Kopiatu
+Mugitu
+Kopiatu hona:
+Mugitu hona:
+Kopiatzen...
+Mugitzen...
+Berrizendatzen...
+Hautatu helmuga agiritegia.
+Eragiketa hau ez dago sostengatua agiritegi honentzat.
+Akatsa Agiria edo Agiritegia Berrizendatzerakoan
+Baieztatu Agiri Kopiatzea
+Zihur zaude agiriak artxibora kopiatzea nahi dituzula
+6100
+Baieztatu Agiri Ezabapena
+Baieztatu Agiritegi Ezabapena
+Baieztatu Agiri Anitz Ezabapena
+Zihur zaude '{0}' ezabatzea nahi duzula?
+Zihur zaude '{0}' agiritegia eta bere eduki guztiak ezabatzea nahi dituzula?
+Zihur zaude {0} gai hauek ezabatzea nahi dituzula?
+Ezabatzen...
+Akatsa Agiria edo Agiritegia Ezabatzerakoan
+Sistemak ezin du helburu luzeko agiria Birziklapen Ontzira mugitu
+6300
+Sortu Agiritegia
+Sortu Agiria
+Agiritegi izena:
+Agiri Izena:
+Agiritegi Berria
+Agiri Berria
+Akatsa Agiritegia Sortzerakoan
+Akatsa Agiria Sortzerakoan
+6400
+Aipamena
+&Aipamena:
+Hautatu
+Deshautatu
+Mozorroa:
+6600
+Ezaugarriak
+Agiritegi Historia
+Azterketa mezuak
+Mezuak
+7100
+Ordenagailua
+Sarea
+Agiriak
+Sistema
+7200
+Gehitu
+Atera
+Aztertu
+Kopiatu
+Mugitu
+Ezabatu
+Argibideak
+7300
+Banandu Agiria
+Banandu &hona:
+Banandu &bolumenetan, byte:
+Banantzen...
+Baieztatu Banantzea
+Zihur zaude agiria {0} bolumenetan banantzea nahi duzula?
+Bolumen neurria jatorrizko agiriaren neurria baino txikiagoa izan behar da
+Bolumen neurri okerra
+Adierazitako bolumen neurria: {0} byte.\nZihur zaude artxiboa bolumenetan banantzea nahi duzula?
+7400
+Nahastu Agiriak
+&Nahastu hona:
+Nahasten...
+Hautatu bakarrik banantzeko agiriaren lehen atala
+Ezin da agiria atzeman banandutako agiriaren atal bezala
+Ezin da aurkitu banandutako agiriaren atal bat baino gehiago
+7500
+Egiaztapen-batura kalkulatzen...
+Egiaztapen-batura argibideak
+CRC Egiaztapen-batura datuentzat:
+CRC Egiaztapen-batura datu eta izenentzat:
+7600
+Benchmark
+Oroimen erabilpena:
+Konprimitzen
+Deskonprimitzen
+Mailaketa
+Mailaketa Guztira
+Oraingoa
+Emaitza
+CPU Erabilpena
+Mailaketa / Erabilpena
+Pasaldiak:
+7700
+Lotura
+Lotura
+Lotura hemendik:
+Lotura hona:
+7710
+Lotura Mota
+Lotura Gogorra
+Agiri Lotura Sinbolikoa
+Zuzenbide Lotura Sinbolikoa
+Zuzenbide Elkargunea

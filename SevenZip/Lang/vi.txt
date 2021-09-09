@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  2.30 :            : Tran Hong Ha
+;  4.42 :            : Le Vu Hoang
+;  4.48 :            : Nguyen Hong Quan
+;  9.07 : 2011-04-12 : Vietnamize Team
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Vietnamese
+Tiếng Việt
+401
+Đồng ý
+Hủy bỏ
+
+
+
+Có
+Không
+Đóng
+Giúp đỡ
+
+Tiếp tục
+440
+Có tất cả
+Không tất cả
+Dừng
+Làm lại
+Chạy nền
+Chế độ ưu tiên
+Dừng
+Đã dừng
+Bạn chắc chắn muốn hủy bỏ?
+500
+Tập tin
+Biên tập
+Xem
+Ưa thích
+Công cụ
+Giúp đỡ
+540
+Mở
+Mở tại đây
+Mở trong cửa sổ khác
+Xem
+Biên tập
+Đổi tên
+Sao chép đến...
+Di chuyển đến...
+Xoá
+Chia cắt tệp nén...
+Nối tệp nén...
+Thuộc tính
+Chú thích
+Tính checksum (md5)
+So sánh
+Tạo thư mục
+Tạo tệp nén
+Thoát
+600
+Chọn tất cả
+Bỏ chọn tất cả
+Đảo lựa chọn
+Chọn...
+Bỏ chọn...
+Chọn theo loại
+Bỏ chọn theo loại
+700
+Biểu tượng lớn
+Biểu tượng nhỏ
+Danh sách
+Chi tiết
+730
+Không sắp xếp
+Mọi tập tin và thư mục con
+2 bảng
+Thanh công cụ
+Mở thư mục gốc
+Lên một cấp
+Lịch sử thư mục...
+Nạp lại
+750
+Thanh công cụ nén
+Thanh công cụ chuẩn
+Sử dụng nút lớn
+Hiển thị chữ trên nút
+800
+Thêm thư mục vào 'Ưa thích' như là
+Đánh dấu
+900
+Tùy chọn...
+Đo tốc độ
+960
+Nội dung...
+Về 7-Zip...
+1003
+Đường dẫn
+Tên
+Phần mở rộng
+Thư mục
+Kích cỡ thực
+Kích cỡ nén
+Thuộc tính
+Thời điểm tạo
+Thời điểm truy xuất
+Thời điểm sửa đổi
+Kiểu nén Solid
+Ghi chú
+Được mã hoá
+Chia nhỏ trước
+Chia nhỏ sau
+Từ điển
+CRC
+Loại
+Anti
+Phương thức nén
+Hệ điều hành
+Tệp hệ thống
+Người dùng
+Tập đoàn
+Số thứ tự
+Chú thích
+Vị trí
+Đường dẫn đầu
+Thư mục
+Tập tin
+Phiên bản
+Kích cỡ
+Đa kích cỡ
+Offset
+Liên kết
+Tập tin
+Kích cỡ
+
+64-bit
+Big-endian
+CPU
+Kích cỡ lý thuyết
+Kích cỡ hiện tại
+Checksum
+Đặc điểm
+Địa chỉ ảo
+ID
+Tên ngắn
+Trình tạo ứng dụng
+Kích cỡ vùng
+Chế độ
+Liên kết
+Lỗi
+Tổng dung lượng
+Dung lượng trống
+Dung lượng cluster
+Nhãn
+Tên mạng cục bộ
+Nhà cung cấp
+2100
+Các tùy chọn
+Ngôn ngữ hiển thị
+Ngôn ngữ:
+Biên tập
+Trình biên tập:
+Trình so sánh:
+2200
+Hệ thống
+Kết hợp 7-Zip với:
+2301
+Tích hợp 7-Zip vào menu ngữ cảnh
+Xếp tầng menu ngữ cảnh
+Menu ngữ cảnh:
+2320
+<Thư mục>
+<Tệp nén>
+Mở tệp nén
+Giải nén tệp...
+Thêm vào tệp nén...
+Kiểm tra tệp nén
+Giải nén tại đây
+Giải nén vào {0}
+Thêm vào {0}
+Nén và gởi qua email...
+Nén thành {0} và gởi qua email
+2400
+Thư mục
+Thư mục hiện hành
+Hệ thống thư mục tạm
+Hiện tại
+Đặc biệt:
+Chỉ sử dụng cho ổ đĩa di động
+Xác định vị trí cho các tệp lưu trữ tạm thời.
+2500
+Thiết lập
+Hiển thị mục ".."
+Hiển thị biểu tượng thực của tệp
+Hiển thị menu hệ thống
+Chọn cả dòng
+Hiển thị lưới
+Nhắp chuột để mở
+Chế độ chọn luân phiên
+Sử dụng bộ nhớ lớn
+2900
+Về 7-Zip
+7-Zip là một phần mềm miễn phí.
+3000
+Không thể cấp thêm dung lượng RAM yêu cầu
+Không xuất hiện lỗi
+{0} đối tượng đã chọn
+Không thể tạo thư mục '{0}'
+Tệp nén này không được hỗ trợ cập nhật.
+Không thể mở '{0}' như là tệp nén
+Không thể mở tập tin nén '{0}' bị mã hóa . Mật khẩu sai?
+Không hỗ trợ tệp nén này
+Tệp {0} đang tồn tại
+Tệp '{0}' đã bị thay đổi.\nBạn có muốn cập nhật nó vào tập tin nén?
+Không thể cập nhật tệp\n'{0}'
+Không thể khởi động trình biên tập.
+Tập tin này có thể là virus (tên tập tin có chứa khoảng cách dài).
+Không thể thực hiện với một thư mục có đường dẫn quá dài.
+Bạn phải chọn một tập tin
+Bạn phải chọn một hoặc 2 tập tin
+Quá nhiều tập tin
+3300
+Đang giải nén...
+Đang nén...
+Đang kiểm tra...
+Đang mở...
+Đang quét...
+3400
+Giải nén
+Giải nén vào:
+Chọn nơi để giải nén tệp.
+3410
+Chọn đường dẫn
+Đường dẫn đầy đủ
+Không có đường dẫn
+3420
+Chế độ ghi đè
+Hỏi trước khi ghi đè
+Ghi đè không cần hỏi
+Bỏ qua tệp đã có
+Tự động đổi tên
+Tự động đổi tên tệp đã có
+3500
+Xác nhận thay thế
+Thư mục đích đã có tập tin đó.
+Bạn có muốn thay thế tập tin đã có
+bằng tập tin mới?
+{0} bytes
+Tự động đổi tên
+3700
+Phương thức nén không hỗ trợ cho '{0}'.
+Lỗi dữ liệu trong '{0}'. Tệp đã bị hỏng.
+Lỗi chẵn/lẻ (CRC) trong '{0}'. Tệp đã bị hỏng.
+Lỗi dữ liệu trong tệp nén bị mã hóa '{0}'. Mật khẩu sai?
+Kiểm tra CRC thất bại trong tệp nén bị mã hóa '{0}'. Mật khẩu sai?
+3800
+Vui lòng nhập mật khẩu
+Nhập mật khẩu:
+Nhập lại mật khẩu:
+Xem mật khẩu
+Mật khẩu không khớp nhau
+Chỉ đặt mật khẩu bằng tiếng Anh, số và những kí tự đặc biệt (!, #, $, ...) cho mật khẩu
+Mật khẩu quá dài
+Mật khẩu
+3900
+Thời gian đã qua:
+Thời gian còn lại:
+Tổng kích cỡ:
+Tốc độ:
+Đã nén:
+Tỷ lệ nén:
+Lỗi:
+Tệp nén:
+4000
+Thêm vào tệp nén
+Tệp nén:
+Chế độ cập nhật:
+Dạng tệp nén:
+Mức độ nén:
+Phương thức nén:
+Kích cỡ thư mục:
+Kích cỡ văn bản:
+Kích cỡ nén Solid:
+Số luồng xử lý CPU:
+Tham số:
+Tùy chọn
+Tạo trình tự giải nén tệp
+Nén tập tin chia sẻ
+Mã hóa
+Phương thức mã hóa:
+Mã hoá tên tệp
+Bộ nhớ dùng cho việc nén:
+Bộ nhớ dùng cho việc giải nén:
+4050
+Lưu trữ
+Nhanh nhất
+Nhanh
+Bình thường
+Tối đa
+Siêu nhanh
+4060
+Thêm và thay thế
+Thêm và cập nhật
+Cập nhật tập tin đã có
+Đồng bộ
+4070
+Duyệt
+Mọi tập tin
+Không nén dạng Solid
+Solid
+6000
+Sao chép
+Di chuyển
+Sao chép đến:
+Di chuyển đến:
+Đang thêm...
+Đang di chuyển...
+Đang đổi tên...
+Chọn thư mục đến.
+Thao tác không được hỗ trợ cho tập tin này.
+Lỗi khi đổi tên tệp hoặc thư mục
+Xác nhận thêm
+Bạn muốn thêm vào tệp nén?
+6100
+Xác nhận xoá
+Xác nhận xoá thư mục
+Xác nhận xoá nhiều tệp
+Bạn có chắc chắn muốn xoá '{0}'?
+Bạn có chắc chắn muốn xoá thư mục '{0}' và mọi tập tin bên trong?
+Bạn có chắc chắn muốn xoá {0} ?
+Đang xóa...
+Lỗi khi đang xóa tệp hoặc thư mục
+Hệ thống không thể xóa tệp với đường dẫn dài vào Thùng rác
+6300
+Tạo thư mục
+Tạo tệp nén
+Tên thư mục:
+Tên tệp mới:
+Thư mục mới
+Tệp mới
+Lỗi khi tạo thư mục
+Lỗi khi tạo tệp
+6400
+Chú thích
+Chú thích:
+Chọn
+Bỏ chọn
+Ẩn danh:
+6600
+Thuộc tính
+Lịch sử thư mục
+Thông tin chẩn đoán
+Thông tin
+7100
+Máy tính
+Mạng
+Tài liệu
+Hệ thống
+7200
+Thêm
+Giải nén
+Kiểm tra
+Sao chép
+Di chuyển
+Xoá
+Thông tin
+7300
+Chia nhỏ tệp
+Chia nhỏ và lưu tại:
+Chia thành nhiều phần, bytes:
+Đang chia nhỏ...
+Xác nhận việc chia nhỏ
+Bạn có chắc muốn chia nhỏ tệp nén thành {0} phần?
+Kích cỡ mỗi phần phải nhỏ hơn tệp gốc
+Kích cỡ phần chia chưa đúng
+Kích cỡ phần chia đã đặt: {0} bytes.\nBạn chắc chắn muốn chia tệp nén theo kích cỡ chia đã đặt?
+7400
+Nối tệp
+Nối thành:
+Đang nối...
+Chỉ chọn phần đầu của tệp bị chia nhỏ
+Không thể xem tập tin như phần nối của tệp bị chia cắt
+Không tìm thấy thêm phần nối nào của tệp chia cắt
+7500
+Đang tính checksum...
+Thông tin checksum
+CRC checksum cho dữ liệu:
+CRC checksum cho dữ liệu và tên:
+7600
+Đo tốc độ
+Bộ nhớ sử dụng:
+Đang nén
+Đang giải nén
+Đánh giá
+Tổng đánh giá
+Hiện thời
+Kết quả
+Mức dùng CPU
+Tốc độ / Mức dùng
+Đã qua:

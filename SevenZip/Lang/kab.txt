@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+; 15.00 : 2018-02-27 : Belkacem Mohammed
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Kabyle
+Taqbaylit
+401
+IH
+Sefsex
+
+
+
+&Ih
+&Uhu
+&Mdel
+Tallelt
+
+&Kemmel
+440
+Ih i &Meṛṛa
+Uhu i M&eṛṛa
+Seḥbes
+Ales tanekra
+&Agilal
+&Aɣawas Amezwaru
+&Rǧu
+Iḥbes
+Tebɣiḍ ad tsefsxeḍ?
+500
+A&faylu
+&Ẓreg
+&Sken
+I&nurifen
+&Ifecka
+&Tallelt
+540
+&Ldi
+Ldi deg &ugensu
+Ldi di B&erra
+&Sken
+&Ẓṛeg
+Snif&el Isem
+&Nɣel Ɣer...
+&Senkez ɣer...
+&Kkes
+&Bḍu Afaylu...
+Sdu&kkel ifuyla...
+A&ylan
+Awenn&it...
+Timernit n Usenqed
+Iceṛṛiq
+Snulfu-d Akaram
+Snulfu-d Afaylu
+F&feɣ
+Aseɣwen
+&Alternate Streams
+600
+Fren &Meṛṛa
+Kkes Afran i Meṛṛa
+&Tti Afran
+Fren...
+Kkes Afran...
+Fren s Tawsit
+Kkes Afran s Tawsit
+700
+Tig&nitin Timeqranin
+T&ignitin Timeẓyanin
+&Tabdart
+&Talqayt
+730
+Ur Yettwafren ara
+Askan Imlebbeḍ
+&2 Igalisen
+&Ifeggagen n Ifecka
+Ldi Akaram Agejdan
+Yiwen Uswir d Asawen
+Amazray n Ikaramen...
+&Smiren
+Asmiren Awurman
+750
+Afeggag n Ifecka Uɣbaṛ
+Afeggag n Ifecka Alugen
+Tiqeffalin Tihrawanin
+Sken Aḍris n Tqeffalin
+800
+&Rnu akaram ɣer Inurifen am
+Bookmark
+900
+&Iɣewwaṛen...
+&Skazal Timellit
+960
+&Igburen...
+&Γef 7-Zip...
+1003
+Abrid
+Isem
+Asiɣzef
+Akaram
+Teɣzi
+Yettwassed
+Aylan
+Timerna
+Yettwakcam
+Abeddel aneggaru
+Solid
+Awennet
+Iwgelhen
+Bḍu Send
+Bḍu Seld
+Amawal
+
+Anaw
+Anti
+Tarrayt
+Anagraw n Wammud Usenneftay
+Anagraw n Ufaylu
+Aseqdac
+Agraw
+Iḥder
+Awennit
+Tizgi
+Adat n Webrid
+Ikaramen
+Ifuyla
+Leqqem
+Ableɣ
+Aget-Ableɣ
+Anakaz
+Iseɣwan
+Iḥedran
+Iblaɣen
+
+64-ibitten
+Big-endian
+CPU
+Teɣzi Taɣarant
+Teɣzi n Iqerra
+Tmernit Usenqed
+Tiskanin
+Tansa Tuhlist
+ID
+Isem Awezlan
+Asnas n Umesnulfu
+Teɣzi n Ugzum
+Askar
+Aseɣwen Azamal
+Tuccḍa
+Teɣzi Tamatut
+Tallunt Tilellit
+Teɣzi n Ugazi
+Tabzimt
+Isem adigan
+Imefki
+Taɣellist n NT
+Alternate Stream
+Aux
+Yettwakkes
+D Aseklu
+
+
+Tawsit n Tuccḍa
+Tuccḍiwin
+Tuccḍiwin
+Ilɣuten
+Alɣu
+Isuddman
+Alternate Streams
+Alternate Streams Size
+Virtual Size
+Unpack Size
+Teɣzi Taɣarant Tamatut
+Volume Index
+Adu-Tawsit
+Awennit Awezlan
+Code Page
+
+
+
+Tail Size
+Embedded Stub Size
+Aseɣwen
+Aseɣwen Aquran
+iTikerrist
+
+Taɣuri-Kan
+2100
+Iɣewwaṛen
+Tutlayt
+Tutlayt:
+Amaẓrag 
+&Amaẓrag:
+&Iceṛṛiq:
+2200
+Anagraw
+Associate 7-Zip with:
+Iseqdacen Meṛṛa
+2301
+Integrate 7-Zip to shell context menu
+Cascaded context menu
+Context menu items:
+Icons in context menu
+2320
+<Akaram>
+<Aɣbaṛ>
+Ldi Aɣbaṛ
+Ssef ifuyla...
+Rnu ɣer Uɣbaṛ...
+Sekyed Aɣbaṛ
+Ssef Dagi
+Ssef ɣer {0}
+Rnu ɣer {0}
+Ssed sakin azen di imayl...
+Ssed ɣer {0} sakin azen di imayl
+2400
+Ikaramen
+&Working folder
+&System temp folder
+&Amiran
+&Specified:
+Use for removable drives only
+Specify a location for temporary archive files.
+2500
+Iɣewwaṛen
+Sken ".." amagrad
+Sken tigninit n tidett ufaylu
+Sken umuɣ n unagraw
+&Full row select
+Show &grid lines
+Single-click to open an item
+&Askar n Ufran Amellay
+Use &large memory pages
+2900
+Ɣef 7-Zip
+7-Zip d aseɣẓan n baṭṭel
+3000
+The system cannot allocate the required amount of memory
+Ulac Tuccḍiwin 
+{0} n tiɣawsiwin yettwafernen
+Ur yezmir ara ad isnulfu Akaram '{0}'
+Update operations are not supported for this archive.
+Ur yezmir ara ad yeldi afaylu '{0}' am uɣbaṛ
+Ur yezmir ara ad yeldi aɣbaṛ awgelhan '{0}'. Yir awal uffir?
+Tawsit n Uɣbaṛ ur Tettwasefrak ara
+Afaylu {0} yella yakan
+File '{0}' was modified.\nDo you want to update it in the archive?
+Can not update file\n'{0}'
+Cannot start editor.
+The file looks like a virus (the file name contains long spaces in name).
+The operation cannot be called from a folder that has a long path.
+Yessefk ad tferneḍ yiwen ufaylu
+Yessefk ad tferneḍ yiwen neɣ ugar n ifuyla
+Ddeqs n imagraden
+Ur yezmir ara ad yeldi afaylu am {0} uɣbaṛ
+Afaylu agi yeldi am {0} uɣbaṛ
+The archive is open with offset
+3300
+Tussfa
+Tussda
+Asekyed
+Alday...
+Scanning...
+Tukksa
+3320
+Timerna
+Aleqqem
+Analyzing
+Replicating
+Repacking
+Skipping
+Aseffeḍ
+Asnulfu n Uqerru
+3400
+Ssef
+S&sef ɣer:
+Fren adig i ifuyla Yettwassefen.
+3410
+Askar n webrid:
+Full pathnames
+No pathnames
+Absolute pathnames
+Relative pathnames
+3420
+Overwrite mode:
+Ask before overwrite
+Overwrite without prompt
+Skip existing files
+Asnifel awurman n isem
+Asnifel awurman n isem ifuyla yellan yakan
+3430
+Eliminate duplication of root folder
+Restore file security
+3500
+Sentem Asemselsi n Ufaylu
+Destination folder already contains processed file.
+Would you like to replace the existing file
+S Wagi?
+{0} iṭamḍanen
+A&snifel awurman n isem
+3700
+Tarrayt n tussda ur tettwasefrak ara i '{0}'.
+Tuccḍa deg isefka di '{0}'. Afaylu yerreẓ.
+CRC yecceḍ di '{0}'. Afaylu yerreẓ.
+Tuccḍa deg isefka deg ufaylu awgelhan '{0}'. Yir awal uffir?
+CRC yecceḍ deg ufaylu awgelhan '{0}'. Yir awal uffir?
+3710
+Yir awal uffir?
+3721
+Tarrayt n tussda ur tettwasefrak ara
+Tuccḍa deg ifeska
+CRC yecceḍ
+Ulac isefka
+Tagar n isefka ur tettwaṛǧi ara
+Llan kra n isefka seld tagara n isefka iwulmen
+Mačči d Aɣbaṛ
+Tuccḍa n Iqerra 
+Yir awal uffir
+3763
+Ulac Beddu n Uɣbaṛ
+Ulac asentem n Beddu n Uɣbaṛ
+
+
+
+Tamahilt ur Tettwasefrak ara
+3800
+Sekcem awal uffir
+Sekcem awal uffir:
+Ales asekcem n wawal uffir:
+&Sken awal uffir
+Awalen uffiren ur menṭaḍen ara
+Seqdec kan isekkilen n Tlaṭinit, Imḍanen akked isekkilen Imeẓliyen (!, #, $, ...) i wawal Uffir
+Awal uffir ɣezzif aṭas
+Awal uffir
+3900
+Akud yeddan:
+Akud i d-yeqqimen:
+Teɣzi Tamatut:
+Arured:
+Yettusesfer :
+Atug n tussda:
+Tuccḍiwin:
+Iɣbaṛen:
+4000
+Rnu ɣer Uɣbaṛ
+&Aɣbaṛ:
+&Askar n Uleqqem:
+Amasal n &tussda:
+Aswir n &tussda:
+Tarrayt n &tussda:
+&Tiddi n umawal:
+&Tiddi n usekkil:
+Teɣzi n Iḥder Aquran:
+Amḍan n Ikalan n CPU:
+&Iɣewwaṛen:
+Iɣewwaṛen
+Snulfu aɣbaṛCreate SF&X
+Ssed ifuyla yettwabḍan
+Awgelhen
+Tarrayt n Uwgelhen:
+Wgelhen &ismawen n ufaylu
+Aseqdec n Tkatut i Tussda:
+Aseqdec n Tkatut i Usefruri:
+Kkes ifuyla seld tussda
+4040
+Ḥrez iseɣwan izamalen
+Ḥrez iseɣwan iquranen
+Store alternate data streams
+Ḥrez taɣellist n ufaylu
+4050
+Ḥrez
+Arurad ugar
+Arurad
+Amagnu
+Afellay
+Ultra
+4060
+Rnu Semselsi Ifuyla
+Leqqem yerna rnu ifuyla
+Freshen existing files
+Mtawi ifuyla
+4070
+Snirem
+Ifuyla i meṛṛa
+Mačči-d-Aquṛan
+Aquṛan
+6000
+Nɣel
+Senkez
+Nɣel ɣer:
+Senkez ɣer:
+Anɣal...
+Asenkez...
+Abeddel n yisem...
+Fren Akaram n Userken.
+Tamhelt ur tettwasefrak ara i ukaram agi.
+Tella-d Tuccḍa deg Ubeddel n yisem Ufaylu neɣ Ukaram
+Sentem Anɣal Ufaylu
+Tebɣiḍ ad tesneɣleḍ ifuyla ɣer uɣbaṛ?
+6100
+Sentem Tukksa Ufaylu
+Sentem Tukksa Ukaram
+Sentem Tukksa n ddeqs Ifayla
+Tebɣiḍ ad tekkseḍ '{0}'?
+Tebɣiḍ ad tekkseḍ akaram '{0}' akked reṛṛa ayen yellan deg-s?
+Tebɣiḍ ad tekkseḍ imagraden {0} agi?
+Tukksa tteddu...
+Tella-d Tuccḍa deg Tukksa n Ufaylu neɣ Akaram
+Anagraw ur yezir ara ad isenkez afaylu yesɛan ubrid ɣezzifen ɣer iḍumman
+6300
+Snulfu-d Akaram
+Snulfu-d Afaylu
+Isem Ukaram:
+Isem Ufaylu:
+Akaram Amaynut
+Afaylu amaynut
+Tella-d tuccḍa deg usnulfu Ukaram
+Tella-d tuccḍa deg usnulfu Ufaylu
+6400
+Awennit
+&Awennit:
+Fren
+Kkes Afran
+Ffer:
+6600
+Timeẓliyin
+Amazray n Ikaramen
+Diagnostic messages
+Izen
+7100
+Aselkim
+Aẓeṭṭa
+Zzmamat
+Anagraw
+7200
+Rnu
+Suffeɣ
+Sekyed
+Nɣel
+Lḥu
+Kkes
+Talɣut
+7300
+Bḍu Afaylu
+&Bḍu ɣer:
+Bḍu ɣer &iblaɣen, iṭamḍanen:
+Beṭṭu i teddu...
+Sentem Beṭṭu
+Tebɣiḍ ad bḍuḍ afaylu ɣef {0} n iblaɣen?
+Teɣzi n ubleɣ yessefk ad yili meẓẓi ɣef teɣzi n ufaylu amezwaru
+Teɣzi n ubleɣ mačči d ameɣtu
+Teɣzi n ubleɣ i d-ittunefken: {0} iṭamḍanen.\nTebɣiḍ ad bḍuḍ afaylu ɣef ilaɣen am wigi?
+7400
+Sedukkel Ifuyla
+&Sedukkel ɣer:
+Asedukkel i teddu...
+Fren kan aḥric amezwaru n ufaylu yettwabḍan
+Ur yezmir ara ad yaf afaylu d aḥric n ufaylu yettwabḍan
+Ur ufiɣ ara ugar n yiwen n weḥric n ufaylu yettwabḍan
+7500
+Aselkem n Tmernit Usenqed...
+Talɣut n Tmernit Usenqed
+Timernit Usenqed CRC i isefka:
+Timerni Usenqed CRC i isefka d ismawen:
+7600
+Skazal Timellit
+Aseqdec n Tkatut:
+Tussda
+Asefruri
+Askazal
+Askazal Amatu
+Amiran
+Resulting
+Aseqdec n CPU
+Askazal / Aseqdec
+Passes:
+7700
+Aseɣwen
+Aseɣwen
+Aseɣwen si:
+Aseɣwen ɣer:
+7710
+Tawsit n Useɣwen
+Aseɣwen Aquran
+Aseɣwen Azamal n Ufaylu
+Aseɣwen Azamal n Ukaram
+Amyager n Ukaram

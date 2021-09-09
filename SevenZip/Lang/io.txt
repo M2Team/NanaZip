@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.08 : iZoom
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Ido
+Ido
+401
+B&one
+Abandonar
+
+
+
+&Yes
+&No
+&Klozez
+Helpo
+
+&Durez
+440
+Yes por &omni
+No por o&mni
+Haltez
+Ristartez
+&Fono
+&Avanajo
+&Pauzo
+Pauzita
+Kad vu ya volas abortar?
+500
+&Dosiero
+&Redakto
+&Aspekto
+&Favoraji
+&Utensili
+&Helpo
+540
+&Apertigar
+Apertigar int&erne
+Apertigar e&xter
+&Vidigar
+&Redaktar
+Ch&anjar nomo
+Ko&piar aden...
+Transp&ozar aden...
+E&facar
+F&endar dosiero...
+Komb&inar dosieri...
+In&heraji
+Ko&mentar
+
+
+Krear &dosieruyo
+Krear dos&iero
+E&kirar
+600
+Merk&ar omno
+Des&merkar omno
+&Inversigar merko
+Merkar...
+Desmerkar...
+Merkar segun tipo
+Desmerkar segun tipo
+700
+&Granda ikoneti
+&Mikra ikoneti
+&Listo
+&Tabelo
+730
+&Nearanjite
+
+&2 paneli
+Utens&ila paneli
+Apertigar radika dosieruyo
+Ad-supre ye un nivelo
+Dosieruya historio...
+R&inovigar
+750
+Utensila panelo di arkivo
+Norma utensila panelo
+Granda ikoneti
+Videbla butontexto
+800
+&Adjuntar dosieruyo ad la favorata quale
+Lektomerkajo
+900
+&Ajusti...
+&Experienco dil rapideso
+960
+&Konteno...
+&Pri 7-Zip...
+1003
+Dosiervoyo
+Nomo
+Dosiernoma sufixo
+Dosieruyo
+Grandeso
+Enarkiva grandeso
+Atributi
+Kreita
+Acesita
+Chanjita
+Solida
+Komentita
+Chifrita
+Fendita ante
+Fendita pos
+Vortaro
+CRC
+Tipo
+Kontre
+Metodo
+Operacala sistemo
+Dosiersistemo
+Uzero
+Grupo
+Bloko
+Komenturo
+Poziciono
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eroro
+Tota kapacivo
+Vakanta
+Faskogrando
+Etiketo
+Lokala nomo
+Provizanto
+2100
+Ajusti
+Linguo
+Linguo:
+Redaktilo
+&Redaktilo:
+
+2200
+Sistemo
+Asociar 7-Zip-o kun dosieru:
+2301
+Pozar 7-Zip'o en kuntexta menuo di shelo
+Kaskada kuntexta menuo
+Elementi di kuntexta menuo:
+2320
+<Dosieruyo>
+<Arkivo>
+Apertar
+Extraktar dosieri...
+Adjuntar ad arkivo...
+Verifikar arkivo
+Extraktez hike
+Extraktez aden {0}
+Adjuntar ad {0}
+Enarkivigar ed sendar elk-posto...
+Enarkivigar aden {0} e sendar elk-posto...
+2400
+Dosieruyi
+&Laborala dosieruyo
+&Sistemala provizora dosieruyo
+&Nuna
+&Definez:
+&Uzar nur por deprenebla datumportili
+Definar loko por provizora arkiva dosieri.
+2500
+Ajusti
+Montrar ".."-elemento
+Montrar reala dosier-ikoneti
+Montrar sistemala menuo
+Merkar &tota lineo
+Montrar &streki separanta
+
+
+
+2900
+Pri progamo...
+7-Zip esas gratuita programo. Tamen, vu povas mantenar developado di 7-Zip per enregistrigesar.
+3000
+
+Erori ne es trovita
+{0} objekt(o|i) merkita
+Krear dosieruyo '{0}' neposiblesis
+Rinovigo ne suportesas por ica arkivo.
+
+
+
+
+Dosiero '{0}' chanjesis.\nKa vu volas rinovigar lu enarkive?
+Rinovigo dil dosiero\n'{0}' faliis
+Startigo dil redaktilo.
+
+
+
+
+Tro multa objekti
+3300
+Extrakto
+Kompreso
+Probado
+Aperto...
+
+3400
+&Extraktar
+E&xtraktar aden:
+Definez loko por dosieri extraktenda.
+3410
+Dosiervoyi
+&Absoluta dosiervoyi
+&Sen dosiervoyi
+3420
+Remplasala skribmodo
+&Kun konfirmo
+&Sen konfirmo
+&Omisar existanta dosieri
+Automata nomchanjo
+Automata nomchanjo de existanta dosieri
+3500
+Konfirmo di nomchanjo
+Dosieruyo ja kontenas operacata dosiero.
+Kad remplasor esanta dosiero
+per la ica?
+{0} bayti*
+&Automata nomchanjo.
+3700
+Kompresmetodo ne esas suportata por dosiero '{0}'.
+Datumeroro en '{0}'. Dosiero es fushita.
+CRC-eroro en '{0}'. Dosiero es fushita.
+
+
+3800
+Pasovorto
+Sugestez pasovorto:
+
+&Montrar pasovorto
+
+
+
+&Pasovorto
+3900
+Pasinta tempo:
+Restanta tempo:
+Grandeso:
+Rapideso:
+
+
+Erori:
+
+4000
+Adjuntar aden arkivo
+&Arkivo:
+R&emplasomodo:
+A&rkiva formato:
+Kompreso&grado
+&Kompresometodo:
+&Vortarograndeso:
+Vo&rtograndeso:
+
+
+&Parametri:
+Ajustaji
+Krear SF&X-arkivo
+
+
+
+Chifrar dosier&nomi
+Memoruzo por kompresar:
+Memoruzo por extraktar:
+4050
+Sen kompresar
+Maxim rapide
+Rapide
+Normala kompreso
+Maxim granda kompreso
+Extreme
+4060
+Adjuntar e remplasar dosieri
+Rinovigar e adjuntar dosieri
+Rifreshigar existanta dosieri
+Sinkronizar dosieri
+4070
+Inspektar
+Omna dosieri
+
+
+6000
+Kopiar
+Transpozar
+Kopiez aden:
+Transpozez aden:
+Kopio...
+Transpozo...
+Nomchanjo...
+
+Operaco ne suportesas.
+Eroro dum nomchanjo di dosiero o dosieruyo
+
+
+6100
+Konfirmo dil efaco di dosiero
+Konfirmo dil efaco di dosieruyo
+Konfirmo dil efaco di dosieraro
+Ka vu ya volas efacar '{0}'?
+Ka vu ya volas efacar dosieruyo "{0}" e omna lua kontenaji?
+Ka vu ya volas efacar ita {0} objekti?
+Efaco...
+Eroro dum efacar di dosiero o dosieruyo
+
+6300
+Krear dosieruyo
+Krear dosiero
+Dosieruynomo:
+Dosiernomo:
+Nova dosieruyo
+Nova dosiero
+Eroro dum dosieruykreo
+Eroro dum dosierkreo
+6400
+Komento
+&Komento:
+Merkar
+Desmerkar
+Masko:
+6600
+
+Dosieruyhistorio
+Diagnozala mesaji
+Mesajo
+7100
+Komputilo
+Reto
+
+Sistemo
+7200
+Adjuntar
+Extraktar
+Verifikar
+Kopiar
+Transpozar
+Efacar
+Informo
+7300
+Fendar dosiero
+&Fendez aden:
+&Fendar por volumini, bayti:
+Fendo...
+
+
+
+
+
+7400
+Kombinar dosieri
+&Kombinar aden:
+Kombino...
+
+
+
+7500
+
+
+
+
+7600
+Experienco dil rapideso
+Memoruzo:
+Kompresado
+Extraktado
+Aprecuro
+Tota aprecuro
+Kuranta
+Rezulta
+
+
+Pasi:

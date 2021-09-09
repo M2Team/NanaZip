@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.37 : Owain Lewis
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Welsh
+Cymraeg
+401
+Iawn
+Canslo
+
+
+
+&Iawn
+&Na
+&Cau
+Cymorth
+
+P&arhau
+440
+Iawn i'r &Cwbwl
+Na i'r C&wbwl
+Stopio
+Ailgychwyn
+&Cefndir
+&Blaendir
+&Pwyllo
+Pwyllo
+Ydych chi am canslo?
+500
+&Ffeil
+&Golygu
+Gwe&ld
+Ff&efrynnau
+&Offer
+&Cymorth
+540
+&Agor
+Agor tu &Mewn
+Agor tu &Fas
+Gwe&ld
+&Golygu
+A&ilenwi
+&Copïo i...
+&Symud i...
+&Dileu
+&Hollti ffeil...
+Cy&funo ffeilau...
+&Priodweddau
+Syl&wad
+Cyfrifo swm-gwirio
+
+Creu Ffolder
+Creu Ffeil
+Alla&n
+600
+Dewis y C&yfan
+Dad-ddewis y Cyfan
+Gwrt&hdroi'r Dewis
+Dewis...
+Dad-ddewis...
+Dewis trwy Math
+Dad-ddewis trwy Math
+700
+Eiconau &Mawr
+Eiconau &Bach
+&Rhestr
+Ma&nylion
+730
+Dad-dosbarthu
+Golwg Flat
+&2 Paneli
+Bariau &Offer
+Agor Ffolder Gwraidd
+Lan Un Lefel
+Hanes Ffolderi...
+&Adnewyddu
+750
+Bar Offer Archif
+Bar Offer Arferol
+Botwmau Fawr
+Dangos Testun Botwmau
+800
+&Ychwanegu ffolder i Ffefrynnau fel
+Llyfrnod
+900
+&Dewisiadau...
+&Meincnod
+960
+&Cynnwys...
+&Manylion 7-Zip...
+1003
+Llwybr
+Enw
+Estyniad
+Ffolder
+Maint
+Maint wedi'i Cywasgu
+Priodweddau
+Crëwyd
+Cyrchwyd
+Addaswyd
+Solet
+Sylwad
+Amgryptio
+Hollti Cyn
+Hollti ar Ôl
+Geiriadur
+CRC
+Math
+Anti
+Dull
+SW Cynnal
+System Ffeiliau
+Ddefnyddiwr
+Grŵp
+Bloc
+Sylwad
+Safle
+Rhagddodiad y Llwybr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Gwall
+Cyfanswm Maint
+Lle Rhydd
+Maint Clwstwr
+Label
+Enw Lleol
+Darparwr
+2100
+Dewisiadau
+Iaith
+Iaith:
+Golygydd
+&Golygydd:
+
+2200
+System
+Cysylltu 7-Zip gyda:
+2301
+Cyfuno 7-Zip mewn i dewislen cyd-destun y cribyn
+Dewislen cyd-destun wedi'i rhaeadru
+Eitemau dewislen cyd-destun:
+2320
+<Ffolder>
+<Archif>
+Agor archif
+Echdynnu ffeiliau...
+Ychwanegu i'r archif...
+Profi archif
+Echdynnu Yma
+Echdynnu i {0}
+Ychwanegu i {0}
+Cywasgu ac e-bostio...
+Cywasgu i {0} ac e-bostio
+2400
+Ffolderi
+Ffolder &gweithio
+Ffolder tymor byr y &system
+&Cyfredol
+&Penodol:
+Defnyddiwch am gyriant symudadwy yn unig
+Nodwch lleoliad am ffeiliau archif tymor byr.
+2500
+Gosodiadau
+Dangos eitem ".."
+Dangos eicon ffeil go iawn
+Dangos dewislen y system
+Dethol &holl rhes
+Dangos llinellau &grid
+
+Modd dethol &arallddewisiol
+Defnyddiwch tudalenau cof &mawr
+2900
+Manylion 7-Zip
+Mae 7-Zip yn meddalwedd am ddim. Ond, gallwch cefnogi y\ndatblygiad o 7-Zip trwy cofrestru.
+3000
+
+Mae na ddim wallau
+{0} gwrthrych(au) dethol
+Ddim yn gallu creu y ffolder '{0}'
+Mae gweithrediadau diweddaru ddim yn ateg am yr archif hyn.
+
+
+
+
+Roedd ffeil '{0}' wedi'i addasu.\nWyt ti moen ei diweddaru yn yr\narchif?
+Ddim yn gallu diweddaru ffeil\n'{0}'
+Ddim yn gallu dechrau golygydd.
+
+
+
+
+Gormod o eitemau
+3300
+Echdynnu
+Cywasgu
+Ymbrofi
+Agor...
+Sganio...
+3400
+Echdynnu
+E&chdynnu i:
+Nodwch lleoliad am echdynnu ffeiliau.
+3410
+Modd llwybr
+Enwau llwybr llawn
+Dim enwau llwybr
+3420
+Modd disodli
+Gofyn cyn disodli
+Disodli heb awgrymeb
+Crychneidio ffeiliau presennol
+Ailenwu yn awtomatig
+Ailenwu ffeiliau presennol yn awtomatig
+3500
+Cadarnhau Disodli Ffeil
+Mae'r ffolder hon eisioes yn cynnwys y ffeil cyrchfan.
+Hoffech chi ddisodli'r ffeil sy'n bodoli eisioes
+Gyda hon?
+{0} beit
+Ailenwi A&wtomatig
+3700
+Modd cywasgu ddim yn dilys am '{0}'.
+Gwall data mewn '{0}'. Ffeil wedi'i torri.
+CRC wedi'i methu mewn '{0}'. Ffeil wedi'i torri.
+
+
+3800
+Mewnbynnwch cyfrinair
+Mewnbynnwch cyfrinair:
+
+&Dangos cyfrinair
+
+
+
+Cyfrinair
+3900
+Wedi treiglo:
+Amser a'r ôl:
+Maint:
+Cyflymder:
+
+
+Gwallau:
+
+4000
+Ychwanegu i'r archif
+&Archif:
+Modd &diweddaru:
+&Fformat yr archif:
+&Lefel cywasgu:
+Dull &cywasgu:
+Maint &geiriadur:
+Maint geiria&u:
+
+
+&Paramedrau:
+Dewisiadau
+Creu archif SF&X
+
+
+
+Amgryptio &enwau ffeiliau
+Defnydd cof am Cywasgu:
+Defnydd cof am Datgywasgu:
+4050
+Storio
+Cyflymach
+Cyflum
+Arferol
+Uchafswm
+Ultra
+4060
+Ychwanegu ac amnewid ffeiliau
+Diweddaru ac ychwanegu ffeiliau
+Adnewyddu y ffeiliau presennol
+Cyfamseru ffeiliau
+4070
+Pori
+Pob Ffeil
+
+
+6000
+Copïo
+Symud
+Copïo i:
+Symud i:
+Copïo...
+Symud...
+Ailenwi...
+
+Mae'r gweithrediad ddim wedi'i ategu.
+Gwall wrth Ailenwi Ffeil neu Ffolder
+Cadarnhau Copi Ffeil
+Ydych chi'n siŵr eich bod am copïo'r ffeiliau i'r archif
+6100
+Cadarnhau Dileu Ffeil
+Cadarnhau Dileu Ffolder
+Cadarnhau Dileu Ffeiliau Amryfal
+Ydych chi'n siŵr eich bod am dileu '{0}'?
+Ydych chi'n siŵr eich bod am dileu y ffolder '{0}' ac ei holl\ncynnwys?
+Ydych chi'n siŵr eich bod am dileu yr eitemau hyn {0}?
+Dileu...
+Gwall Dileu Ffeil neu Ffolder
+
+6300
+Creu Ffolder
+Creu Ffeil
+Enw Ffolder:
+Enw Ffeil:
+Ffolder Newydd
+Ffeil Newydd
+Gwall wrth Creu Ffolder
+Gwall wrth Creu Ffeil
+6400
+Sylwad
+&Sylwad:
+Dewis
+Dad-ddewis
+Mwgwd:
+6600
+
+Hanes Ffolderi
+Neges diagnostig
+Neges
+7100
+Cyfrifiadur
+Rhyngrwyd
+
+System
+7200
+Ychwanegu
+Echdynnu
+Profi
+Copïo
+Symud
+Dileu
+Gwybodaeth
+7300
+Hollti Ffeil
+&Hollti i:
+Hollti i &cyfeintiau, beitiau:
+Hollti...
+
+
+
+
+
+7400
+Cyfuno Ffeiliau
+&Cyfuno i:
+Cyfuno...
+
+
+
+7500
+Cyfrifo swm-gwirio...
+Gwybodaeth swm-gwirio
+Swm-gwirio CRC am data:
+Swm-gwirio CRC am data ac enwau:
+7600
+Meincnod
+Defnyddiad cof:
+Cywasgu
+Datgywasgu
+Amcangyfrif
+Amcangyfrif llwyr
+Presennol
+Canlyniad
+
+
+Pasio:

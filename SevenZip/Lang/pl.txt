@@ -1,0 +1,477 @@
+﻿;!@Lang2@!UTF-8!
+;       : cienislaw
+;       : pixel
+;  9.07 : F1xat
+;  9.33 : Łukasz Maria P. Pastuszczak
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Polish
+Polski
+401
+OK
+Anuluj
+
+
+
+&Tak
+&Nie
+&Zamknij
+Pomoc
+
+&Kontynuuj
+440
+Ta&k na wszystkie
+Ni&e na wszystkie
+Zatrzymaj
+Ponów
+&Tło
+&Pierwszy plan
+&Wstrzymaj
+Wstrzymano
+Czy na pewno chcesz anulować?
+500
+&Plik
+&Edycja
+&Widok
+&Ulubione
+&Narzędzia
+Pomo&c
+540
+&Otwórz
+Otwórz &wewnątrz
+Otwórz na &zewnątrz
+Pod&gląd
+&Edytuj
+Zmień &nazwę
+Kopiuj &do...
+&Przenieś do...
+&Usuń
+Podzie&l plik...
+Złą&cz pliki...
+Wł&aściwości
+Ko&mentarz
+Oblicz sumę kontrolną
+Diff
+Utwórz &folder
+U&twórz plik
+Za&kończ
+Dow&iązanie
+600
+Z&aznacz wszystko
+&Odznacz wszystko
+Odwróć &zaznaczenie
+Zaznacz...
+Odznacz...
+Zaznacz według typu
+Odznacz według typu
+700
+&Duże ikony
+&Małe ikony
+&Lista
+&Szczegóły
+730
+Nieposortowane
+Widok płaski
+&2 panele
+&Paski narzędzi
+Otwórz folder główny
+Do góry o jeden poziom
+Historia folderów...
+&Odśwież
+Automatyczne odświeżanie
+750
+Pasek archiwum
+Pasek standardowy
+Duże przyciski
+Pokaż etykiety tekstowe
+800
+&Dodaj folder do ulubionych jako
+Zakładka
+900
+&Opcje...
+&Test wydajności
+960
+&Zawartość
+7-Zip - i&nformacje
+1003
+Ścieżka
+Nazwa
+Rozszerzenie
+Folder
+Rozmiar
+Rozmiar po spakowaniu
+Atrybuty
+Utworzony
+Ostatnio otwarty
+Zmodyfikowany
+Ciągły
+Z komentarzem
+Zaszyfrowany
+Podzielony przed
+Podzielony po
+Słownik
+
+Typ
+Anty
+Metoda
+Pochodzenie
+System plików
+Użytkownik
+Grupa
+Blok
+Komentarz
+Pozycja
+Prefiks ścieżki
+Foldery
+Pliki
+Wersja
+Wolumin
+Wielowoluminowy
+Przesunięcie
+Dowiązania
+Bloki
+Woluminy
+
+64-bitowy
+Big-endian
+Procesor
+Rozmiar fizyczny
+Rozmiar nagłówków
+Suma kontrolna
+Charakterystyki
+Adres wirtualny
+Numer seryjny woluminu
+Krótka nazwa
+Generator
+Rozmiar sektora
+Tryb
+Dowiązanie symboliczne
+Błąd
+Całkowity rozmiar
+Wolne miejsce
+Rozmiar klastra
+Etykieta
+Nazwa lokalna
+Dostawca
+Zabezpieczenia NT
+Alternatywny strumień
+
+Usunięty
+Drzewo
+
+
+Rodzaj błędu
+Błędy
+Błędy
+Ostrzeżenia
+Ostrzeżenie
+Strumienie
+Alternatywne strumienie
+Rozmiar alternatywnych strumieni
+Rozmiar wirtualny
+Rozmiar po rozpakowaniu
+Całkowity rozmiar fizyczny
+Numer woluminu
+Podtyp
+Krótki komentarz
+Strona kodowa
+
+
+
+
+
+Dowiązanie
+Dowiązanie twarde
+I-węzeł
+2100
+Opcje
+Język
+Język:
+Edytor
+&Edytor:
+&Diff:
+2200
+System
+Skojarz program 7-Zip z:
+2301
+Zintegruj program 7-Zip z menu kontekstowym powłoki
+Kaskadowe menu kontekstowe
+Elementy menu kontekstowego:
+Ikony w menu kontekstowym
+2320
+<Folder>
+<Archiwum>
+Otwórz archiwum
+Wypakuj pliki...
+Dodaj do archiwum...
+Testuj archiwum
+Wypakuj tutaj
+Wypakuj do {0}
+Dodaj do {0}
+Skompresuj i wyślij e-mailem...
+Skompresuj do {0} i wyślij e-mailem
+2400
+Foldery
+Folder roboczy
+&Systemowy folder tymczasowy
+&Bieżący
+&Wskazany:
+Użyj tylko dla dysków wymiennych
+Wskaż lokalizację dla tymczasowych plików archiwów.
+2500
+Ustawienia
+Pokaż element „..”
+Pokaż prawdziwe ikony plików
+Pokaż menu systemowe
+Zaznaczaj &cały rząd
+&Pokaż linie siatki
+Pojedyncze kliknięcie otwiera element
+&Alternatywny tryb zaznaczania
+&Użyj dużych stron pamięci
+2900
+7-Zip - informacje
+7-Zip jest programem darmowym.
+3000
+System nie może przydzielić wymaganej ilości pamięci
+Nie wykryto błędów
+Zaznaczono {0} obiekt(ów)
+Nie można utworzyć folderu „{0}”
+Operacje aktualizacji nie są obsługiwane dla tego archiwum.
+Nie można otworzyć pliku „{0}” jako archiwum
+Nie można otworzyć zaszyfrowanego archiwum „{0}”. Nieprawidłowe hasło?
+Nieobsługiwany typ archiwum
+Plik {0} już istnieje
+Plik „{0}” został zmodyfikowany.\nCzy chcesz zaktualizować go w archiwum?
+Nie można zaktualizować pliku\n„{0}”
+Nie można uruchomić edytora.
+Plik wygląda na wirusa (nazwa pliku zawiera długi ciąg spacji).
+Operacja nie może być wywołana z folderu, który ma długą ścieżkę.
+Musisz zaznaczyć jeden plik
+Musisz zaznaczyć jeden lub więcej plików
+Zbyt dużo elementów
+3300
+Wypakowywanie
+Kompresowanie
+Testowanie
+Otwieranie...
+Skanowanie...
+3400
+Wypakuj
+&Wypakuj do:
+Wskaż lokalizację dla wypakowanych plików.
+3410
+Tryb ścieżek:
+Pełne ścieżki
+Bez ścieżek
+Bezwzględne ścieżki
+Względne ścieżki
+3420
+Tryb nadpisywania:
+Monituj przed nadpisaniem
+Nadpisuj bez monitowania
+Pomiń istniejące pliki
+Automatycznie zmień nazwy
+Automatycznie zmień nazwy istniejących plików
+3430
+Wyeliminuj podwojenie folderu głównego
+Przywróć zabezpieczenia plików
+3500
+Potwierdź zamianę pliku
+Folder docelowy zawiera już przetwarzany plik.
+Czy chcesz zamienić istniejący plik
+na następujący?
+{0} bajtów
+Automatycznie &zmień nazwy
+3700
+Nieobsługiwana metoda kompresji pliku „{0}”.
+Błąd danych w „{0}”. Plik jest uszkodzony.
+CRC nie powiodła się dla „{0}”. Plik jest uszkodzony.
+Błąd danych w zaszyfrowanym pliku „{0}”. Nieprawidłowe hasło?
+CRC nie powiodła się dla zaszyfrowanego pliku „{0}”. Nieprawidłowe hasło?
+3710
+Nieprawidłowe hasło?
+3721
+Nieobsługiwana metoda kompresji
+Błąd danych
+CRC nie powiodła się
+Niedostępne dane
+Nieoczekiwany koniec danych
+Pewne dane znajdują się za końcem bloku użytecznych danych
+Nie rozpoznano archiwum
+Błąd nagłówków
+3763
+Niedostępny początek archiwum
+Niepotwierdzony początek archiwum
+
+
+
+Nieobsługiwana funkcja
+3800
+Wprowadź hasło
+Wprowadź hasło:
+Wprowadź ponownie hasło:
+Pokaż &hasło
+Hasła nie zgadzają się
+W haśle używaj tylko liter alfabetu angielskiego, cyfr i znaków specjalnych (!, #, $, ...)
+Hasło jest zbyt długie
+Hasło
+3900
+Upłynęło czasu:
+Pozostało czasu:
+Całkowity rozmiar:
+Szybkość:
+Przetworzono:
+Współczynnik kompresji:
+Błędy:
+Archiwów:
+4000
+Dodaj do archiwum
+&Archiwum:
+&Tryb aktualizacji:
+&Format archiwum:
+Stopień &kompresji:
+&Metoda kompresji:
+&Rozmiar słownika:
+Rozmiar &słowa:
+Rozmiar bloku ciągłego:
+Liczba wątków:
+&Parametry:
+Opcje
+&Utwórz archiwum SFX
+Kompresuj pliki współdzielone
+Szyfrowanie
+Metoda szyfrowania:
+&Zaszyfruj nazwy plików
+Użycie pamięci dla kompresji:
+Użycie pamięci dla dekompresji:
+Usuń pliki po skompresowaniu
+4040
+Zachowaj dowiązania symboliczne
+Zachowaj dowiązania twarde
+Zachowaj alternatywne strumienie danych
+Zachowaj zabezpieczenia plików
+4050
+Bez kompresji
+Najszybsza
+Szybka
+Normalna
+Maksymalna
+Ultra
+4060
+Dodaj i zamień pliki
+Aktualizuj i dodaj pliki
+Odśwież istniejące pliki
+Synchronizuj pliki
+4070
+Przeglądaj
+Wszystkie pliki
+Nieciągły
+Ciągły
+6000
+Kopiuj
+Przenieś
+Kopiuj do:
+Przenieś do:
+Kopiowanie...
+Przenoszenie...
+Zmienianie nazwy...
+Wybierz folder docelowy.
+Operacja nie jest obsługiwana dla tego folderu.
+Błąd podczas zmiany nazwy pliku lub folderu
+Potwierdź kopiowanie plików
+Czy na pewno chcesz skopiować pliki do archiwum
+6100
+Potwierdź usunięcie pliku
+Potwierdź usunięcie folderu
+Potwierdź usunięcie wielu plików
+Czy na pewno chcesz usunąć plik „{0}”?
+Czy na pewno chcesz usunąć folder „{0}” i całą zawartość?
+Elementów: {0} - czy na pewno chcesz je usunąć?
+Usuwanie...
+Błąd podczas usuwania pliku lub folderu
+System nie może przenieść pliku o długiej ścieżce do Kosza
+6300
+Utwórz folder
+Utwórz plik
+Nazwa folderu:
+Nazwa pliku:
+Nowy folder
+Nowy plik
+Błąd podczas tworzenia folderu
+Błąd podczas tworzenia pliku
+6400
+- komentarz
+&Komentarz:
+Zaznacz
+Odznacz
+Maska:
+6600
+Właściwości
+Historia folderów
+Komunikaty diagnostyczne
+Komunikat
+7100
+Komputer
+Sieć
+Dokumenty
+System
+7200
+Dodaj
+Wypakuj
+Testuj
+Kopiuj
+Przenieś
+Usuń
+Informacje
+7300
+Podziel plik
+&Podziel do:
+Rozmiar &woluminów (bajty):
+Dzielenie...
+Potwierdź podział
+Czy na pewno chcesz podzielić plik na {0} woluminów?
+Rozmiar woluminu musi być mniejszy od rozmiaru oryginalnego pliku
+Nieprawidłowy rozmiar woluminu
+Określony rozmiar woluminu: {0} bajtów.\nCzy na pewno chcesz podzielić archiwum na takie woluminy?
+7400
+Złącz pliki
+&Złącz do:
+Łączenie...
+Zaznacz tylko pierwszą część podzielonego pliku
+To nie jest poprawna część podzielonego pliku
+Nie można odnaleźć co najmniej jednej części podzielonego pliku
+7500
+Obliczanie sumy kontrolnej...
+Informacja o sumie kontrolnej
+Suma kontrolna CRC dla danych:
+Suma kontrolna CRC dla danych i nazw:
+7600
+Test wydajności
+Użycie pamięci:
+Kompresja
+Dekompresja
+Ocena
+Całkowita ocena
+Aktualnie
+Wynik
+Użycie CPU
+Ocena / Użycie
+Przebiegi:
+7700
+Dowiązanie
+Dowiąż
+Element źródłowy:
+Element docelowy:
+7710
+Rodzaj dowiązania
+Dowiązanie twarde
+Dowiązanie symboliczne pliku
+Dowiązanie symboliczne katalogu
+Połączenie katalogów

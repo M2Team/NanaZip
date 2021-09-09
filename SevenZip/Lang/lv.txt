@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.10 : Armands Radzuška
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Latvian
+Latviešu
+401
+&Labi
+&Atcelt
+
+
+
+&Jā
+&Nē
+Aiz&vērt
+&Rokasgrāmata
+
+&Turpināt
+440
+Jā &visiem
+Nē v&isiem
+Stop
+Pārstartēt
+&Fonā
+&Priekšplānā
+Pa&uze
+Pauzēts
+Vai piekrītat pārtraukt šo darbību?
+500
+&Fails
+&Labošana
+&Izskats
+Ie&cienītās
+&Rīki
+&Palīdzība
+540
+&Atvērt
+Atvērt &iekšpusē
+Atvērt ārp&usē
+Ap&skate
+&Labot
+Pā&rdēvēt
+&Kopēt uz...
+Pār&vietot uz...
+&Dzēst
+&Sadalīt failu...
+Ap&vienot failus...
+Īpašī&bas
+&Piezīmes
+
+
+Izveidot &mapi
+Izveidot &failu
+&Beigt
+600
+Iezīmēt &visu
+Atcelt vis&u
+I&nvertēt iezīmējumu
+Ie&zīmēt...
+&Atcelt...
+I&ezīmēt pēc tipa
+A&tcelt pēc tipa
+700
+&Lielas ikonas
+&Mazas ikonas
+&Saraksts
+Sī&kāk
+730
+&Nešķirot
+
+&2 paneļi
+&Rīku joslas
+&Atvērt saknes mapi
+Līmeni &uz augšu
+Mapju &vēsture...
+&Pārlasīt
+750
+Arhīva rīku josla
+Standarta rīku josla
+Lielas pogas
+Parādīt pogu tekstu
+800
+&Pievienot mapi iecienītajām kā
+Iecienītās
+900
+&Uzstādījumi...
+&Darbspējas pārbaude
+960
+&Rokasgrāmatas saturs...
+&Par 7-Zip...
+1003
+Ceļš
+Nosaukums
+Paplašinājums
+Mape
+Lielums
+Saspiests
+Atribūti
+Izveidots
+Atvērts
+Pārveidots
+Blīvs
+Piezīmes
+Šifrēts
+Dalīts pirms
+Dalīts pēc
+Vārdnīca
+CRC
+Veids
+Anti
+Paņēmiens
+Sistēma
+Failu sistēma
+Lietotājs
+Grupa
+Bloks
+Piezīmes
+Pozīcija
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kļūda
+Tilpums
+Brīvā vieta
+Klāstera lielums
+Nosaukums
+Lokālais nosaukums
+Provaiders
+2100
+Uzstādījumi
+Valoda
+Valoda:
+Labošana
+&Labošanas programma:
+
+2200
+Sistēma
+Piesaistīt 7-Zip pie:
+2301
+&Integrēt 7-Zip Windows vides kontekstizvēlē
+&Kaskādveida kontekstizvēle
+Kontekstizvēles elementi:
+2320
+<Mape>
+<Arhīvs>
+Atvērt arhīvu
+Izvilkt failus...
+Ielikt arhīvā...
+Pārbaudīt arhīvu
+Izvilkt šeit
+Izvilkt {0} mapē
+Ielikt {0}
+Saspiest, sūtīt pa e-pastu...
+Saspiest {0}, sūtīt pa e-pastu
+2400
+Mapes
+&Darba mape
+&Sistēmas pagaidfailu mape
+&Tekošā
+&Noteikt:
+&Izmantot tikai maināmajiem nesējiem
+Norādiet vietu arhīvu pagaidfailiem.
+2500
+Uzstādījumi
+Parādīt ".." &vienību
+Parādīt īstās &failu ikonas
+Parādīt &sistēmas izvēli
+&Pilnas rindas iezīmēšana
+Parādīt at&dalošās līnijas
+
+
+
+2900
+Par 7-Zip
+7-Zip ir bezmaksas programma, tomēr, reģistrējoties jūs varat 7-Zip izstrādāšanu atbalstīt.
+3000
+
+Kļūdu nav.
+Iezīmēts(i) {0} objekts(i)
+Mapi '{0}' neizdevās izveidot.
+Šis arhīvs neatbalsta pārveidošanu.
+
+
+
+
+Fails '{0}' ir pārveidots.\nVai vēlaties to atjaunināt arī arhīvā?
+Failu nav iespējams uzlabot\n'{0}'
+Nav iespējams palaist labošanas programmu.
+
+
+
+
+Par daudz vienību.
+3300
+Izvilkšana
+saspiešana
+Pārbaude
+Atvēršana...
+
+3400
+Izvilkšana
+&Izvilkt uz:
+Norādiet vietu izvelkamiem failiem.
+3410
+Ceļi
+Pilni &ceļu nosaukumi
+&Bez ceļu nosaukumiem
+3420
+Pārrakstīšana
+&Jautāt pirms pārrakstīšanas
+Pārra&kstīt bez jautāšanas
+I&zlaist esošos failus
+A&utopārdēvēšana
+Automātiski pārdēvēt esošos failu
+3500
+Apstipriniet faila aizvietošanu
+Mērķa mape jau satur apstrādājamo failu.
+Vai vēlaties aizvietot esošo failu
+ar šo?
+{0} baiti
+Autopārdēvēšana
+3700
+Neatbalstīts saspiešanas paņēmiens '{0}' failam.
+Datu kļūda '{0}'. Fails ir bojāts.
+CRC kļūda '{0}'. Fails ir bojāts.
+
+
+3800
+Paroles ievadīšana
+Ievadiet paroli:
+
+Par&ole redzama
+
+
+
+&Parole
+3900
+Pagājušais laiks:
+Atlikušais laiks:
+Lielums:
+Ātrums:
+
+
+Kļūdas:
+
+4000
+Pievienošana arhīvam
+Ar&hīvs:
+Pār&veidošanas režīms:
+Arhīva &formāts:
+&Saspiešanas līmenis:
+&Saspiešanas paņēmiens:
+&Vārdnīcas lielums:
+Vār&da lielums:
+
+
+Parame&tri:
+&Uzstādījumi
+Izveidot SF&X arhīvu
+
+
+
+Šifrēt failu &nosaukumus
+Atmiņa arhivēšanai:
+Atmiņa atarhivēšanai:
+4050
+Uzkrāšana nesaspiežot
+Ātrākais
+Ātrais
+Parastais
+Maksimālā saspiešana
+Ultra
+4060
+Pievienot un aizvietot failus
+Atjaunināt un pievienot failus
+Atjaunināt esošos failus
+Sinhronizēt failus
+4070
+Pārlūkošana
+Visi faili
+
+
+6000
+Kopēt
+Pārvietot
+Kopēt uz:
+Pārvietot uz:
+Kopēšana...
+Pārvietošana...
+Pārdēvēšana...
+
+Darbība nav atbalstīta.
+Faila vai mapes pārdēvēšanas kļūda
+
+
+6100
+Faila dzēšanas apstiprinājums
+Mapes dzēšanas apstiprinājums
+Vairāku failu dzēšanas apstiprinājums
+Vai piekrītat '{0}' dzēšanai?
+Vai piekrītat mapes '{0}' un visa tās satura dzēšanai?
+Vai piekrītat šo {0} vienību dzēšanai?
+Dzēšana...
+Faila vai mapes dzēšanas kļūda
+
+6300
+Mapes izveidošana
+Faila izveidošana
+Mapes nosaukums:
+Faila nosaukums:
+Jauna mape
+Jauns fails
+Mapes izveidošanas kļūda
+Faila izveidošanas kļūda
+6400
+Piezīmes
+&Piezīmes:
+Iezīmēšana
+Iezīmējuma atcelšana
+Šablons:
+6600
+
+Mapju vēsture
+Diagnostikas paziņojumi
+Paziņojums
+7100
+Dators
+Tīkls
+
+Sistēma
+7200
+Ievietot
+Izvilkt
+Pārbaude
+Kopēt
+Pārvietot
+Dzēst
+Info
+7300
+Sadalīt failu
+&Dalīt uz:
+&Dalīt sējumos, baitos:
+Dalīšana...
+
+
+
+
+
+7400
+Apvienot failus
+&Apvienot uz:
+Apvienošana...
+
+
+
+7500
+
+
+
+
+7600
+Darpspējības pārbaude
+Atmiņas pielietojums:
+Arhivēšana
+Atarhivēšana
+Vērtējums
+Kopējais vērtējums
+Patreizējais
+Rezultējošais
+
+
+Izdošanās:

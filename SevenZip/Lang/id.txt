@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+; 20.00 : 2020-02-18 : Frans Leung
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Indonesian
+Bahasa Indonesia
+401
+Oke
+Batal
+
+
+
+&Ya
+&Tidak
+&Tutup
+Bantuan
+
+&Lanjut
+440
+Ya untuk &semua
+Tidak untuk s&emua
+Henti
+Mulai Ulang
+Latar Bela&kang
+Latar &Depan
+&Jeda
+Dijeda
+Anda yakin ingin batal?
+500
+&Berkas
+&Edit
+Tam&pilan
+&Kesukaan
+Pera&latan
+Ban&tuan
+540
+&Buka
+Buka di &Dalam
+Buka di L&uar
+&Tampilkan
+&Edit
+&Nama Ulang
+&Salin Ke...
+P&indah Ke...
+&Hapus
+Be&lah Berkas...
+Gabun&g Berkas...
+P&roperti
+K&omentar...
+Hitung ceksum
+Beda
+Buat Direktori
+Buat Berkas
+&Keluar
+Tautan
+Alternati&f Aliran
+600
+Pi&lih Semua
+Batal Pilih Semua
+Pilih Sebal&iknya
+Pilih...
+Batal Pilih...
+Pilih Berdasarkan Tipe
+Batal Pilih Berdasarkan Tipe
+700
+Ikon &Besar
+Ikon &Kecil
+&Daftar
+D&etail
+730
+Tidak Disortir
+Tampil Datar
+&2 Panel
+Bilah Ala&t
+Buka Akar Direktori
+Naik Satu Tingkat
+Riwayat Direktori...
+&Segarkan
+Segarkan Otomatis
+750
+Bilah Alat Arsip
+Bilah Ala&t Standar
+Tombol Besar
+Perlihatkan Teks Tombol
+800
+&Tambah direktori ke Favorit sebagai
+Markah
+900
+&Pilihan...
+Pa&tokan
+960
+Petun&juk...
+Tent&ang 7-Zip...
+1003
+Lintasan
+Nama
+Ekstensi
+Direktori
+Ukuran
+Ukuran dipak
+Atribut
+Dibuat
+Diakses
+Diubah
+Padat
+Dikomentari
+Dienkripsi
+Belah Sebelum
+Belah Setelah
+Kamus
+
+Tipe
+Anti
+Metode
+SO Hos
+Sistem Berkas
+Pengguna
+Grup
+Blok
+Komentar
+Posisi
+Awalan Lintasan
+Direktori
+Berkas
+Versi
+Volume
+Multivolume
+Gelinciran
+Tautan
+Blok
+Volume
+
+64-bit
+Big-endian
+CPU
+Ukuran Fisik
+Ukuran Tajuk
+Ceksum
+Karakteristik
+Alamat Maya
+ID
+Nama Singkat
+Aplikasi Pembuat
+Ukuran Sektor
+Cara
+Tautan Simbolik
+Galat
+Ukuran Total
+Ruang Kosong
+Ukuran Gugus
+Label
+Nama Lokal
+Penyelenggara
+Keamanan NT
+Alternatif ALiran
+Aux
+Dihapus
+Apakah Pohon
+
+
+Tipe Galat
+Galat
+Galat
+Peringatan
+Peringatan
+Aliran
+Alternatif Aliran
+Ukuran Alternatif Aliran
+Ukuran Maya
+Ukuran Terbongkar
+Jumlah Ukuran Fisik
+Indeks Volume
+SubTipe
+Komentar Singkat
+Laman Kode
+
+
+
+Ukuran Ujung
+Ukuran Rintisan Tertanam
+Tautan
+Tautan Keras
+iNode
+
+Hanya-baca
+2100
+Pilihan
+Bahasa
+Bahasa:
+Editor
+&Editor:
+Be&da:
+2200
+Sistem
+Asosiasikan 7-Zip dengan:
+Semua pengguna
+2301
+Integrasikan 7-Zip ke cangkang menu konteks
+Menu konteks dikaskade
+Butir-butir menu konteks:
+Ikon-ikon di menu konteks
+2320
+<Direktori>
+<Arsip>
+Buka arsip
+Ekstrak berkas...
+Tambah ke arsip...
+Uji arsip
+Ekstrak di sini
+Ekstrak ke {0}
+Tambah ke {0}
+Mampat dan surat kawat...
+Mampat ke {0} dan surat kawat
+2400
+Direktori
+&Direktori kerja
+Direktori temporer &sistem
+S&ekarang
+&Ditentukan:
+Hanya untuk kandar yang dapat dilepas
+Tetapkan lokasi untuk berkas arsip sementara.
+2500
+Pengaturan
+Perlihatkan butir ".."
+Perlihatkan ikon asli berkas
+Perlihatkan menu sistem
+&Memilih baris penuh
+Perlihatkan &garis kisi-kisi
+Klik-tunggal untuk membuka
+Ragam pemilihan &alternatif
+Gunakan halaman memori &besar
+2900
+Mengenai 7-Zip
+7-Zip merupakan perangkat lunak gratis.\n\nTerjemahan oleh Frans Liando.
+3000
+Sistem tidak bisa mengalokasikan jumlah memori yang diperlukan
+Tidak ada galat
+{0} objek terpilih
+Tidak bisa membuat Direktori '{0}'
+Operasi pembaruan tidaklah didukung untuk arsip ini.
+Tidak bisa membuka berkas arsip '{0}'
+Tidak bisa membuka arsip terenkripsi '{0}'. Salah kata sandi?
+Tipe arsip tidak didukung
+Berkas {0} telah ada
+Berkas '{0}' telah diubah.\nAnda ingin memperbarui berkas dalam arsip?
+Tidak bisa perbarui berkas\n'{0}'
+Tidak bisa memulai editor.
+Berkas ini tampaknya seperti virus (pada nama berkas berisi spasi yang panjang).
+Pengoperasian tidak bisa dipanggil dari direktori yang berlintasan panjang.
+Anda harus memilih satu berkas
+Anda harus memilih satu berkas atau lebih
+Terlalu banyak butir
+Tidak bisa buka berkas sebagai arsip {0}
+Berkas dibuka sebagai arsip {0}
+Berkas dibuka dengan gelinciran
+3300
+Mengekstrak
+Pemampatan
+Pengujian
+Membuka...
+Memindai...
+Memindah
+3320
+Menambah
+Memperbarui
+Menganalisa
+Mereplikasi
+Pak ulang
+Melewatkan
+Menghapus
+Membuat tajuk
+3400
+Ekstrak
+E&kstrak ke:
+Tetapkan lokasi untuk berkas yang diekstrak.
+3410
+Ragam lintasan:
+Nama lengkap lintasan
+Tidak ada nama lintasan
+Nama lintasan absolut
+Nama lintasan relatif
+3420
+Ragam tulis timpa:
+Konfirmasikan sebelum tulis timpa
+Tulis timpa tanpa konfirmasi
+Lewati berkas yang ada
+Penamaan ulang automatis
+Penamaan ulang automatis terhadap berkas yang ada
+3430
+Hilangkan duplikasi direktori akar
+Pulihkan keamanan berkas
+3500
+Konfirmasi Penggantian Berkas
+Direktori tujuan telah berisi berkas yang terproses.
+Apakah Anda ingin mengganti berkas yang ada
+dengan yang ini?
+{0} bita
+Nama &Ulang Automatis
+3700
+Metode mampat untuk '{0}' tidak didukung.
+Galat data di '{0}'. Berkas ini rusak.
+CRC gagal di '{0}'. Berkas ini rusak.
+Galat data di berkas terenkripsi '{0}'. Salah kata sandi?
+CRC gagal di berkas terenkripsi '{0}'. Salah kata sandi?
+3710
+Salah kata sandi?
+3721
+Metode mampat tidak didukung
+Galat data
+CRC gagal
+Data tidak tersedia
+Akhir data tidak terduga
+Terdapat suatu data setelah akhir muatan data
+Bukan arsip
+Galat Tajuk
+Salah kata sandi
+3763
+Awal arsip belum tersedia
+Awal arsip belum dikonfirmasi
+
+
+
+Fitur tidak didukung
+3800
+Masukkan kata sandi
+Masukkan kata sandi:
+Konfirmasi kata sandi:
+&Perlihatkan kata sandi
+Kata sandi tidak cocok
+Gunakanlah hanya huruf bahasa Indonesia, nomor dan karakter khusus (!, #, $, ...) untuk kata sandi
+Kata sandi terlalu panjang
+Kata sandi
+3900
+Waktu terpakai:
+Sisa waktu:
+Jumlah ukuran:
+Kecepatan:
+Terproses:
+Rasio mampat:
+Galat:
+Arsip:
+4000
+Tambah ke arsip
+&Arsip:
+Ragam perbar&u:
+&Format arsip:
+&Level mampat:
+&Metode mampat:
+Ukuran &kamus:
+Ukuran ka&ta:
+Ukuran blok padat:
+Jumlah CPU:
+&Parameter:
+Pilihan
+Buat arsip SF&X
+Kompres berkas bersama
+Enkripsi
+Metode enkripsi:
+Enkripsi &nama berkas
+Pemakaian memori untuk Pemampatan:
+Pemakaian memori untuk Pengawamampatan:
+Hapus berkas setelah dimampatkan
+4040
+Simpan tautan simbolik
+Simpan tautan keras
+Simpan alternatif aliran data
+Simpan keamanan berkas
+4050
+Simpan
+Tercepat
+Cepat
+Normal
+Maksimum
+Ultra
+4060
+Tambah dan ganti berkas
+Perbarui dan tambah berkas
+Segarkan ulang berkas yang ada
+Sinkronisasikan berkas
+4070
+Ramban
+Semua Berkas
+Non-padat
+Padat
+6000
+Salin
+Pindah
+Salin ke:
+Pindah ke:
+Menyalin...
+Memindah...
+Penamaan Ulang...
+Pilih direktori tujuan.
+Pengoperasian tidak didukung untuk direktori demikian.
+Galat Penamaan Ulang Berkas atau Direktori
+Konfirmasi Salin Berkas
+Anda yakin ingin menyalin berkas ke arsip
+6100
+Konfirmasikan Hapus Berkas
+Konfirmasikan Hapus Direktori
+Konfirmasikan Hapus Berkas-berkas
+Anda yakin ingin hapus '{0}'?
+Anda yakin ingin hapus direktori '{0}' dan semua isinya?
+Anda yakin ingin hapus {0} butir?
+Menghapus...
+Galat Penghapusan Berkas atau Direktori
+Sistem tidak bisa memindah suatu berkas yang berlintasan panjang ke Recycle Bin
+6300
+Buat Direktori
+Buat Berkas
+Nama Direktori:
+Nama berkas:
+Direktori Baru
+Berkas Baru
+Galat Membuat Direktori
+Galat Pembuatan Berkas
+6400
+Komentar
+&Komentari:
+Pilih
+Tidak Memilih
+Masker:
+6600
+Properti
+Riwayat Direktori
+Pesan Diagnosa
+Pesan
+7100
+Komputer
+Jaringan
+Dokumen
+Sistem
+7200
+Tambah
+Ekstrak
+Uji
+Salin
+Pindah
+Hapus
+Info
+7300
+Belah Berkas
+&Belah ke:
+Belah ke &volume, bita:
+Membelah...
+Konfirmasi Membelah
+Anda yakin ingin membelah berkas menjadi {0} volume?
+Ukuran volume harus lebih kecil dari ukuran asli berkas
+Ukuran volume salah
+Ukuran volume yang ditentukan: {0} bita.\nAnda Yakin ingin membelah arsip menjadi volume demikian?
+7400
+Gabung Berkas
+&Gabung ke:
+Menggabung...
+Pilih bagian pertama saja dari berkas belahan
+Tidak bisa mendeteksi berkas sebagai bagian berkas belahan
+Tidak bisa menemukan lebih dari satu bagian berkas belahan
+7500
+Hitung ceksum...
+Informasi ceksum
+Ceksum CRC untuk data:
+Ceksum CRC untuk data dan nama:
+7600
+Patokan
+Pemakaian memori:
+Pemampatan
+Pengawamampatan
+Penilaian
+Jumlah Penilaian
+Aktual
+Perolehan
+Pemakaian CPU
+Penilaian/Pemakaian
+Pas:
+7700
+Tautan
+Tautan
+Tautan dari:
+Tautan ke:
+7710
+Tipe Tautan
+Tautan Keras
+Berkas Tautan Simbolik
+Direktori Tautan Simbolik
+Cabang Direktori

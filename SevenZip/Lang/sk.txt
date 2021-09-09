@@ -1,0 +1,477 @@
+﻿;!@Lang2@!UTF-8!
+;       : Tomas Tomasek
+;  9.07 : Pavel Devečka
+;  9.38 beta : 2015-01-11 : Roman Horváth
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Slovak
+Slovenčina
+401
+OK
+Zrušiť
+
+
+
+&Áno
+&Nie
+&Zavrieť
+Pomocník
+
+Po&kračovať
+440
+Áno na &všetko
+Nie na vš&etko
+Zastaviť
+Reštartovať
+&Pozadie
+P&opredie
+Po&zastaviť
+Pozastavené
+Ste si istý, že chcete akciu zrušiť?
+500
+&Súbor
+&Upraviť
+&Zobraziť
+&Obľúbené
+&Nástroje
+&Pomocník
+540
+&Otvoriť
+O&tvoriť vnútri
+Ot&voriť externe
+&Zobraziť
+&Upraviť
+&Premenovať
+&Kopírovať do...
+P&resunúť do...
+O&dstrániť
+Ro&zdeliť súbor...
+Zlúč&iť súbory...
+V&lastnosti
+Ko&mentár
+Vypočítať kontrolný súčet
+Rozdiel (Diff)
+Vytvoriť priečinok
+Vytvoriť súbor
+Uko&nčiť
+Odkaz...
+600
+Označiť všetko
+Odznačiť všetko
+Invertovať označenie
+Označiť...
+Odznačiť...
+Označiť podľa typu
+Odznačiť podľa typu
+700
+&Veľké ikony
+&Malé ikony
+&Zoznam
+&Podrobnosti
+730
+Netriediť
+Plochý vzhľad
+&2 Panely
+P&anely nástrojov
+Otvoriť koreňový priečinok
+O úroveň vyššie
+História priečinkov...
+&Obnoviť
+Automatické obnovenie
+750
+Archív
+Štandard
+Veľké ikony
+Textový popis pod ikonami
+800
+Pridať priečinok medzi obľúbené ako
+Záložka
+900
+N&astavenia...
+&Skúšobný test
+960
+&Obsah pomocníka...
+O p&rograme 7-Zip
+1003
+Cesta
+Meno
+Prípona
+Priečinok
+Veľkosť
+Veľkosť po kompresii
+Atribúty
+Vytvorený
+Sprístupnený
+Zmenený
+Jednoliaty
+Komentovaný
+Zašifrovaný
+Rozdelený predtým
+Rozdelený potom
+Slovník
+CRC
+Typ
+Anti
+Metóda
+Hostiteľský OS
+Súborový systém
+Používateľ
+Skupina
+Blok
+Komentár
+Pozícia
+Predpona cesty
+Priečinky
+Súbory
+Verzia
+Zväzok
+Multizväzok
+Ofset
+Odkazy
+Bloky
+Zväzky
+
+64-bitov
+Big-endian
+CPU
+Fyzická veľkosť
+Veľkosť hlavičiek
+Kontrolný súčet
+Charakteristiky
+Virtuálna adresa
+ID
+Skrátený názov
+Aplikácia
+Veľkosť sektora
+Režim
+Symbolický odkaz
+Chyba
+Celková veľkosť
+Voľné miesto
+Veľkosť klastra
+Menovka
+Lokálny názov
+Prevádzkovateľ
+Bezpečnosť NT
+Alternatívny prúd
+Aux
+Vymazané
+Je strom
+
+
+Typ chyby
+Chyby
+Chyby
+Varovania
+Varovanie
+Prúdy
+Alternatívne prúdy
+Veľkosť alternatívneho prúdu
+Virtuálna veľkosť
+Veľkosť po rozbalení
+Celková fyzická veľkosť
+Index zväzku
+Podtyp
+Krátky komentár
+Kódová stránka
+
+
+
+Veľkosť zakončenia
+Veľkosť vloženého ústrižku
+Odkaz
+Pevný odkaz
+iNode
+2100
+Nastavenia
+Jazyk
+Jazyk:
+Editor
+Editor:
+Vyhľadávač rozdielov (Diff):
+2200
+Systém
+Asociovať 7-Zip s vybranými typmi súborov:
+2301
+Integrovať 7-Zip do kontextovej ponuky
+Kaskádová kontextová ponuka
+Položky kontextovej ponuky:
+Ikony v kontextovej ponuke
+2320
+<Priečinok>
+<Archív>
+Otvoriť archív
+Rozbaliť súbory...
+Pridať do archívu...
+Otestovať archív
+Rozbaliť tu
+Rozbaliť do {0}
+Pridať do {0}
+Skomprimovať a poslať emailom...
+Skomprimovať do {0} a poslať emailom
+2400
+Priečinky
+&Pracovný priečinok
+&Systémový priečinok pre dočasné súbory
+&Aktuálny priečinok
+&Manuálne vybraný priečinok:
+Po&užiť len pre vymeniteľné jednotky
+Vyberte priečinok pre dočasné súbory.
+2500
+Nastavenia
+Ukázať položku ".."
+Ukázať skutočné ikony súborov
+Ukázať systémovú ponuku
+Označiť celý riadok
+Zobraziť čiary mriežky
+Otvoriť položku jednoduchým kliknutím
+Alternatívny režim výberu
+Použitie veľkých stránok pamäti
+2900
+O programe 7-Zip
+7-Zip je voľne šíriteľný softvér
+3000
+Systém nemôže alokovať požadované množstvo pamäte
+V archíve sa nenašli žiadne chyby
+{0} vybraných objektov
+Nie je možné vytvoriť priečinok '{0}'.
+Operácie aktualizácie nie sú pre tento archív podporované.
+Súbor '{0}' nie je možné otvoriť ako archív
+Nie je možné otvoriť šifrovaný archív '{0}'. Nesprávne heslo?
+Nepodporovaný typ archívu
+Súbor {0} už existuje.
+Súbor '{0}' bol zmenený.\nChcete ho aktualizovať v archíve?
+Nie je možné aktualizovať súbor\n'{0}'
+Nie je možné spustiť editor.
+Súbor vyzerá ako vírus. (Meno súboru obsahuje veľa medzier.)
+Operácia nemôže byť vykonaná v priečinku, ktorý má dlhú cestu.
+Musíte vybrať jeden súbor
+Musíte vybrať jeden alebo viac súborov
+Priveľa položiek
+3300
+Rozbaľovanie
+Komprimovanie
+Výsledok testovania
+Otváranie...
+Prehľadávanie...
+3400
+Rozbaliť
+Rozbaliť do:
+Špecifikujte priečinok pre rozbalené súbory.
+3410
+Nastavenie názvov ciest:
+Plné názvy ciest
+Žiadne názvy ciest
+Absolútne názvy ciest
+Relatívne názvy ciest
+3420
+Nastavenie prepísania:
+Spýtať sa pred prepísaním
+Prepísať bez výzvy
+Preskočiť existujúce súbory
+Automaticky premenovať
+Automaticky premenovať existujúce súbory
+3430
+Eliminovať duplikáty koreňového priečinka
+Obnoviť práva súboru
+3500
+Potvrdenie nahradenia súboru
+Cieľový priečinok už obsahuje rozbaľovaný súbor.
+Chcete nahradiť existujúci súbor
+týmto súborom?
+{0} bajtov
+&Automaticky premenovať
+3700
+Nepodporovaná kompresná metóda pre '{0}'.
+Chybné údaje v '{0}'. Súbor je poškodený.
+CRC zlyhalo v '{0}'. Súbor je poškodený.
+Chybné údaje v šifrovanom súbore '{0}'. Nesprávne heslo?
+CRC zlyhalo v šifrovanom súbore '{0}'. Nesprávne heslo?
+3710
+Nesprávne heslo?
+3721
+Nepodporovaná kompresná metóda
+Chybné údaje
+CRC zlyhalo
+Údaje sú nedostupné
+Neočakávaný koniec údajov
+Za zužitkovateľnými údajmi sa nachádzajú ďalšie údaje
+Nie je to archív
+Chybné hlavičky
+3763
+Začiatok archívu je nedostupný
+Začiatok archívu nie je potvrdený
+
+
+
+Nepodporovaná funkcia
+3800
+Zadajte heslo
+Zadajte heslo:
+Zopakujte heslo:
+Ukázať heslo
+Heslá nie sú zhodné
+Používajte len písmená bez diakritiky, čísla a špeciálne znaky (!, #, $, ...)
+Heslo je príliš dlhé
+Heslo
+3900
+Uplynutý čas:
+Zostávajúci čas:
+Veľkosť:
+Rýchlosť:
+Spracované:
+Úroveň kompresie:
+Chyby:
+Archívy:
+4000
+Pridať do archívu
+&Archív:
+&Nastavenie aktualizácie súborov v existujúcich archívoch:
+&Formát archívu:
+Ú&roveň kompresie:
+&Kompresná metóda:
+&Veľkosť slovníka:
+V&eľkosť slova:
+Veľk&osť jednoliateho bloku:
+Poče&t CPU vlákien:
+&Parametre:
+Možnosti
+Vytvoriť samorozbaľovací archív
+Komprimovať zdieľané súbory
+Šifrovanie
+Metóda šifrovania:
+Zašifrovať mená súborov
+Pamäť potrebná na kompresiu:
+Pamäť potrebná na dekompresiu:
+Vymazať súbory po kompresii
+4040
+Uložiť symbolické odkazy
+Uložiť pevné odkazy
+Uložiť alternatívne údajové prúdy
+Uložiť práva súborov
+4050
+Bez kompresie
+Najrýchlejšia
+Rýchla
+Normálna
+Maximálna
+Ultra
+4060
+Pridať a nahradiť súbory
+Aktualizovať a pridať súbory
+Aktualizovať existujúce súbory
+Synchronizovať súbory
+4070
+Prehľadávať
+Všetky súbory
+Nejednoliaty
+Jednoliaty
+6000
+Kopírovať
+Presunúť
+Kopírovať do:
+Presunúť do:
+Kopírovanie...
+Presúvanie...
+Premenovanie...
+Vyberte cieľový priečinok.
+Operácia nie je podporovaná pre tento priečinok.
+Chyba pri premenovaní súboru alebo priečinka
+Potvrdiť kopírovanie súboru/súborov
+Ste si istý, že chcete kopírovať súbor/súbory do archívu
+6100
+Potvrdenie odstránenia súboru
+Potvrdenie odstránenia priečinka
+Potvrdenie odstránenia viacerých položiek
+Ste si istý, že chcete odstrániť súbor '{0}'?
+Ste si istý, že chcete odstrániť priečinok '{0}' a celý jeho obsah?
+Ste si istý, že chcete odstrániť týchto {0} položiek?
+Odstraňovanie...
+Chyba pri odstraňovaní súboru alebo priečinka
+Systém nemôže presunúť do koša súbor s dlhou cestou
+6300
+Vytvoriť priečinok
+Vytvoriť súbor
+Meno priečinka:
+Meno súboru:
+Nový priečinok
+Nový súbor
+Chyba pri vytváraní priečinka
+Chyba pri vytváraní súboru
+6400
+Komentár
+&Komentár:
+Označiť
+Odznačiť
+Maska:
+6600
+Vlastnosti
+História priečinkov
+Diagnostické správy
+Správa
+7100
+Počítač
+Sieť
+Dokumenty
+Systém
+7200
+Pridať
+Rozbaliť
+Otestovať
+Kopírovať
+Presunúť
+Odstrániť
+Informácie
+7300
+Rozdeliť súbor
+&Rozdeliť na:
+Roz&deliť na zväzky bajtov:
+Rozdeľovanie...
+Potvrdiť rozdeľovanie.
+Ste si istý, že chcete rozdeliť súbor na {0} zväzkov?
+Veľkosť zväzku musí byť menšia než veľkosť pôvodného súboru.
+Nesprávna veľkosť zväzku
+Určená veľkosť zväzku: {0} bajtov.\nSte si istý, že chcete rozdeliť archív na také zväzky?
+7400
+Zlúčiť súbory
+&Zlúčiť do:
+Zlučovanie...
+Vyberte len prvý súbor.
+Nie je možné rozlíšiť súbor ako súčasť rozdeleného súboru
+Nie je možné nájsť viac než jednu časť rozdeleného súboru
+7500
+Výpočet kontrolného súčtu...
+Informácie o kontrolnom súčte
+CRC súčet pre údaje:
+CRC súčet pre údaje a názvy:
+7600
+Skúšobný test
+Použitá pamäť:
+Komprimovanie
+Rozbaľovanie
+Hodnotenie
+Celkové hodnotenie
+Aktuálne
+Výsledné
+Využitie CPU
+Hodn. / Využitie
+Testov bez chýb:
+7700
+Odkaz
+Odkaz
+Odkaz z:
+Odkaz do:
+7710
+Typ odkazu
+Pevný odkaz
+Súbor symbolického odkazu
+Priečinok symbolického odkazu
+Prekríženie priečinkov

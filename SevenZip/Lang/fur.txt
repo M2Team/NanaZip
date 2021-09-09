@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.60 : Andrea Decorte (Klenje) : http://softfurlan.altervista.org : secont l'ortografie uficiâl de Provincie di Udin
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Friulian
+Furlan
+401
+Va ben
+Scancele
+
+
+
+&Sì
+&No
+&Siare
+&Jutori
+
+&Continue
+440
+Sì &a ducj
+No a &ducj
+Ferme
+Torne a inviâ
+&Sfont
+P&rin plan
+&Pause
+In pause
+Sêstu sigûr di volê scancelâ?
+500
+&File
+&Modifiche
+&Viodude
+&Preferîts
+&Imprescj
+&Jutori
+540
+&Viarç
+Viarç dentri 7-&Zip
+V&iarç fûr di 7-Zip
+&Mostre
+M&odifiche
+Gambie &non
+&Copie in...
+Mô&f in...
+&Elimine
+&Divît file...
+Torne a &unî files...
+P&ropietâts
+Comen&t
+Calcole so&me di control
+
+Cree cartele
+Cree file
+V&a fûr
+600
+Selezione d&ut
+&Deselezione dut
+&Invertìs selezion
+Selezione...
+Deselezione...
+Selezione par gjenar
+Deselezione par gjenar
+700
+Iconis &grandis
+Iconis &piçulis
+&Liste
+&Detais
+730
+Cence ordin
+Viodude plane
+&2 panei
+Sbaris dai impresc&j
+Viarç cartele principâl
+Parsore di un nivel
+Storic des cartelis...
+&Atualize
+750
+Sbare dai imprescj par l'archivi
+Sbare dai imprescj standard
+Botons larcs
+Mostre test dai botons
+800
+&Zonte cartele ai Preferîts sicu
+Preferît
+900
+&Opzions...
+&Banc di prove
+960
+&Argoments...
+&Informazions su 7-Zip...
+1003
+Percors
+Non
+Estension
+Cartele
+Dimension
+Dimension comprimude
+Atribûts
+Creât
+Ultin acès
+Modificât
+Solit
+Comentât
+Cifrât
+Divît prin di
+Divît daspò di
+Dizionari
+CRC
+Gjenar
+Anti
+Metodi
+SO di origjin
+Sisteme dai files
+Utent
+Grup
+Bloc
+Coment
+Posizion
+Prefìs dal troi
+Cartelis
+Files
+Version
+Volum
+Multivolum
+Offset
+Leams
+Blocs
+Volums
+
+64-bit
+Big-endian
+CPU
+Dimension fisiche
+Dimension intestazions
+Some di control
+Caracteristichis
+Direzion virtuâl
+
+
+
+
+
+
+Erôr
+Dimension totâl
+Puest libar
+Dimension setôr
+Etichete
+Non locâl
+Furnidôr
+2100
+Opzions
+Lenghe
+Lenghe:
+Editôr
+&Editôr:
+
+2200
+Sisteme
+Associe 7-Zip cun:
+2301
+Integre 7-Zip intal menù contestuâl de shell
+Menù contestuâl in discjadude
+Elements dal menù contestuâl:
+2320
+<Cartele>
+<archivi>
+Viarç archivi
+Tire fûr files...
+Zonte a un archivi...
+Prove archivi
+Tire fûr ca
+Tire fûr in {0}
+Zonte a {0}
+Comprim e mande par email...
+Comprim in {0} e mande par email
+2400
+Cartelis
+Cartele di &vore
+Cartele &provisorie dal sisteme
+&Corinte
+&Specificade:
+Dopre dome pai drives che si puedin gjavâ
+Specifiche une posizion pai files provisoris di un archivi.
+2500
+Configurazion
+Mostre l'element ".."
+Mostre lis veris iconis dai files
+Mostre il menù dal sisteme
+&Selezione la rie intire
+Mostre les liniis de &gridele sot
+
+Mût di selezion &alternatîf
+Dopre pagjinis di memorie &largjis
+2900
+Informazions su 7-Zip
+7-Zip al è un program libar. Purpûr, tu puedis supuartâ il disvilup di 7-Zip cu la regjistrazion. I utents regjistrâts a podaran otignî supuart tecnic.
+3000
+Il sisteme nol rive a cjoli la cuantitât di memorie che e covente
+Nissun erôr cjatât
+{0} ogjet(s) selezionât(s)
+No si pues creâ la cartele '{0}'
+Lis operazions di atualizazion no son supuartadis par chest archivi.
+No si pues viarzi il file '{0}' come archivi
+No si pues viarzi l'archivi cifrât '{0}'. Ise sbaliade la peraule clâf?
+Gjenar di archivi no supuartât
+Il file {0} al esist za
+Il file '{0}' al è stât modificât.\nVuelistu atualizâlu intal archivi?
+No si pues atualizâ il file\n'{0}'
+No si pues inviâ l'editôr.
+Il file al samee un virus (il non al à dentri un grum di spazis).
+Cheste operazion no pues jessi clamade di une cartele cuntun troi lunc.
+Tu scugnis sielzi un file
+Tu scugnis sielzi un o plui files
+Masse elements
+3300
+Daûr a tirâ fûr...
+Daûr a comprimi
+Daûr a provâ
+Daûr a viarzi...
+Daûr a scandaiâ...
+3400
+Tire fûr
+Tir&e fûr in:
+Specifiche une posizion pai files tirâts fûr.
+3410
+Struture des cartelis
+Percors intîrs
+Nissun percors
+3420
+Sore scriture
+Domande prin di scrivi parsore
+Scrîf parsore cence domandâ
+Salte i files che esistin
+Gambie nons in automatic
+Gambie nons in automatic se a esistin
+3500
+Conferme de sostituzion dal file
+Inte cartele di destinazion al è za il file processât.
+Vuelistu sostituî il file esistint
+cun chest file?
+{0} bytes
+&Gambie non in automatic
+3700
+Il metodi di compression nol è supuartât par '{0}'.
+Erôr di dâts in '{0}'. Il file al è corot.
+CRC falît in '{0}'. Il file al è corot.
+Erôr di dâts tal file cifrât '{0}'. Peraule clâf sbaliade?
+CRC falît tal file cifrât '{0}'. Peraule clâf sbaliade?
+3800
+Scrîf peraule clâf
+Scrîf la peraule clâf:
+Torne a inserî la peraule clâf:
+&Mostre la peraule clâf
+Lis peraulis clâfs no son compagnis
+Dopre dome lis letaris inglesis (no acentadis), i numars e i caratars speciâi (!, #, $, ...) inte peraule clâf
+La peraule clâf e je masse lungje
+Peraule clâf
+3900
+Timp passât:
+Timp restant:
+Dimension:
+Sveltece:
+Elaborât:
+Tas di compression:
+Erôrs:
+Archivis:
+4000
+Zonte a un archivi
+&Archivi:
+Mût di at&ualizazion:
+&Formât archivi:
+Nive&l di compression:
+&Metodi di compression:
+&Dimension dizionari:
+Dimension &peraule:
+Dimension bloc solit:
+Numar di threads de CPU:
+&Parametris:
+Opzions
+Cree archivi SF&X
+Comprim i files condividûts
+Ciframent
+Metodi di ciframent:
+Cifre i &nons dai files
+Utilizazion memorie comprimint:
+Utilizazion memorie decomprimint:
+4050
+Cence compression
+Il pi svelt
+Svelt
+Normâl
+Massim
+Super
+4060
+Zonte e sostituìs files
+Atualize e zonte files
+Atualize i files che esistin
+Sincronize i files
+4070
+Sgarfe
+Ducj i files
+No-solit
+Solit
+6000
+Copie
+Môf
+Copie in:
+Môf in:
+Daûr a copiâ...
+Daûr a movi...
+Daûr a gambiâ non...
+Sielç la cartele di destinazion.
+L'operazion no je supuartade.
+Erôr gambiant non a un file o une cartele
+Conferme de copie dai files
+Sêstu sigûr di volê copiâ i files tal archivi
+6100
+Conferme de eliminazion dal file
+Conferme de eliminazion de cartele
+Conferme de eliminazion di plui files
+Sêstu sigûr di volê eliminâ '{0}'?
+Sêstu sigûr di volê eliminâ la cartele '{0}' e dut ce ch'al è lì dentri?
+Sêstu sigûr di volê eliminâ chescj {0} elements?
+Daûr a eliminâ...
+Erôr eliminant un file o une cartele
+Il sisteme nol pues movi un file cuntun troi lunc te Scovacere
+6300
+Cree cartele
+Cree file
+Non de cartele:
+Non dal file:
+Gnove cartele
+Gnûf file
+Erôr inte creazion de cartele
+Erôr inte creazion dal file
+6400
+Coment
+&Coment:
+Selezione
+Deselezione
+Filtri:
+6600
+Propietâts
+Storic des cartelis
+Messaçs diagnostics
+Messaç
+7100
+Ordenadôr
+Rêt
+Documents
+Sisteme
+7200
+Zonte
+Tire fûr
+Prove
+Copie
+Môf
+Elimine
+Info
+7300
+Divît file
+&Divît in:
+Divît in &volums, grandece in bytes:
+Daûr a dividi...
+Conferme de division
+Sêstu sigûr di volê dividi il file in {0} tocs?
+La dimension di un volum e à di jessi plui piçule di chê dal file origjinâl
+Dimension dai volums sbaliade
+Dimension dai volums volude: {0} bytes.\nSêstu sigûr di volê dividi l'archivi in tocs di cheste dimension?
+7400
+Torne a unî files
+&Torne a unî in:
+Daûr a tornâ a unî...
+Sielç dome il prin file
+No si pues rilevâ il file come toc di un file dividût
+No son stâts cjatâts plui tocs di file dividûts
+7500
+Daûr a calcolâ la some di control...
+Informazions su la some di control
+Some di control CRC pai dâts:
+Some di control CRC pai dâts e i nons:
+7600
+Banc di prove
+Utilizazion memorie:
+Comprimint
+Decomprimint
+Valutazion
+Valutazion totâl
+Corint
+Risultant
+Utilizazion CPU
+Judizi / Utilizazion
+Passaçs:

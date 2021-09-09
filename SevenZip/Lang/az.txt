@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+; 9.07 : F@rhad
+; 15.02 : 2015-03-29 : Г. Гасымов
+; 
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Azerbaijani
+Azərbaycanca
+401
+OLDU
+İmtina
+
+
+
+&Bəli
+&Xeyr
+&Bağlamaq
+Kömək
+
+&Davam
+440
+&Hamısına Bəli
+Ha&mısına Xeyr
+Dayan
+Yenidən başlamaq
+&Arxa planda
+Ö&ndə
+F&asilə
+Fasilədə
+Həqiqətən əməliyyatı dayandırmaq istəyirsiniz?
+500
+&Fayl
+&Düzəliş
+&Görünüş
+S&eçilmişlər
+&Vasitələr
+&Arayış
+540
+&Açmaq
+&Daxildə Açmaq
+B&ayırda açmaq
+&Baxış
+&Düzəliş
+Ye&nidən Adlandırmaq
+&Nüsxələmək...
+&Köçürmək...
+&Silmək
+Faylı &Bölmək...
+Faylları B&irləşdirmək...
+X&üsusiyyətlər
+Şər&h...
+Yoxlama Cəmi
+Müqayisə
+Qovluq Yaratmaq
+Fayl Yaratmaq
+Ç&ıxış
+İstinad
+&Əvəzedici Axınlar
+600
+&Hamısını Seçmək
+Seçimin Ləğvi
+&Seçimi Çevirmək
+Seçmək...
+Seçimin Ləğvi...
+Növünə Görə Seçmək
+Növünə Görə Seçimin Ləğvi
+700
+&Böyük İşarələr
+K&içik İşarələr
+&Siyahı
+&Cədvəl
+730
+Çeşidsiz
+Müstəvi Görünüş
+&2 Lövhə
+&Alətlər Lövhələri
+Kök Qovluğu Açmaq
+Bir Səviyyə Yuxarı
+Qovluqlar Tarixçəsi...
+&Yeniləmək
+Bilavasitə Yeniləmək
+750
+Arxivləyicinin Düymələr Lövhəsi
+Sadə Düymələr Lövhəsi
+Böyük Düymələr
+Düymələr Üzərində Mətnlər
+800
+&Qovluğu Seçilmişlərə Fərqli Əlavə Etmək
+Əlfəcin
+900
+Tənzimləmələr...
+Səmərə Sınağı
+960
+&Başlıq...
+7-Zip &Haqqında...
+1003
+İstiqamət
+Ad
+Genişləmə
+Qovluq
+Ölçü
+Sıxılmış
+Rəmzlər
+Yaranıb
+Açıq
+Dəyişilib
+Aramsız
+Şərh
+Şifrələnib
+Əvvəlki parça
+Sonrakı parça
+Lüğət
+
+Növ
+Əleyhinə
+Sıxılma Üsulu
+Quruluş
+Fayl Quruluşu
+İstifadəçi
+Dəstə
+Bölmə
+Şərh
+Mövqe
+İstiqamət
+Qovluq
+Fayl
+Buraxılış
+Cild
+Çox Cildli
+Uzlaşma
+İstinad
+Bölmə
+Cild
+
+
+
+Prosessor
+Fiziki Ölçü
+Başlıqlar Ölçüsü
+Yoxlama Cəmi
+Xassələr
+Xəyali Ünvan
+
+Qısa Ad
+Yaradıcı
+Sahə Ölçüsü
+Vəziyyət
+Rəmzi İstinad
+Xəta
+Cəmi Həcm
+Azad Həcm
+Toplam Həcm
+Nişan
+Qısa Ad
+Təchizatcı
+NT Təhlükəsizlik
+Əvəzedici Axın
+
+Silinmiş
+Ağac
+
+
+Xəta Növü
+Xətalar
+Xətalar
+Xəbərdarlıqlar
+Xəbərdarlıq
+Axınlar
+Əvəzedici Axınlar
+Əvəzedici Axınlar Ölçüsü
+Xəyali Ölçü
+Ceşidli Ölçü
+Ümumi Fiziki Ölçü
+Cild Nömrəsi
+Növaltı
+Qısa Şərh
+Şifrələnmiş Səhifə
+
+
+
+Qalıq Ölçüsü
+Tətbiq Olunmuş Bölmə Ölçüsü
+İstinad
+Sərt İstinad
+iNode
+
+Yalnız Oxumaq Üçün
+2100
+Tənzimləmələr
+Dil
+Dil:
+Düzəliş
+&Düzəliş:
+&Müqayisə:
+2200
+Quruluş
+7-Zip Fayllarla Əlaqələnsin
+Bütün İstifadəçilər
+2301
+7-Zip əhatə təklifinə tətbiq edilsin 
+Zəncirvari əhatə təklifi
+Ünsürlü əhatə təklifi:
+Əhatə təklifində nişanlar
+2320
+<Qovluq>
+<Аrxiv>
+Arxivi Açmaq
+Çeşidləmək
+Arxivə Əlavə Etmək...
+Sınaq
+Burda Çeşidləmək
+{0} Çeşidləmək
+{0} Əlavə Etmək
+Sıxmaq Və E-Poçtla Göndərmək...
+{0} Sıxmaq Və E-Poçtla Göndərmək
+2400
+Qovluqlar
+&İş Qovluğu
+&Müvəqqəti Quruluş Qovluğu
+&Cari
+&Təyin Etmək:
+Yalnız dəyişkən daşıyıcılar üçün istifadə
+Müvəqqəti arxivlər üçün yer göstərmək.
+2500
+Tənzimləmələr
+".." ünsürünü göstərmək
+Həqiqi fayl işarələri göstərmək
+Quruluş təklifini göstərmək
+Ox bütün sətir üzrə
+Ayrıcıları Göstərmək 
+Bir Toxunuşla Açmaq
+Əvəzedici vəziyyət işarələnməsi
+Böyük yaddaş səhifələri istifadəsi
+2900
+7-Zip Haqqında
+7-Zip Sərbəst Yayılan Proqramdır
+3000
+Kifayət qədər boş yaddaş yoxdur
+Səhvlər tapılmadı
+{0} Ayrılmış hədəf
+'{0}' Qovluğunu yaratmaq mümkün olmadı
+Bu arxiv üçün dəyişiklik əməliyatı dəstəklənmir
+'{0}' Faylını arxiv kimi açmaq alınmadı
+Şifrələnmiş '{0}' arxivini açmaq alınmadı. Yanlış şifrə?
+Dəstəklənməyən arxiv
+{0} faylı artıq mövcuddur
+'{0}' faylına dəyişiklik edildi.\nSiz onu arxivdə yeniləmək istəyirsiz? 
+\n'{0}' faylını yeniləmək alınmadı
+Redaktəni işə salmaq alınmadı
+Fayl zərərvericiyə oxşayır (faylın adı uzun boşluq ardıcıllığı təşkil edir).
+Əməliyyat uzun yol təşkil edən qovluqdan icra oluna bilmir.
+Siz bir fayl seçməlisiniz
+Siz bir və ya bir neçə fayl seçməlisiniz
+Həddən çox ünsür
+Faylı, '{0}' arxivi kimi açmaq alınmadı
+Fayl, {0} arxivi kimi açıldı
+Arxiv əvəzlənərək açıldı
+3300
+Çeşidlənmə
+Sıxılma
+Sınaq
+Açılır...
+Yoxlanır...
+Silinmə
+3320
+Əlavə Etmək
+Yenilənmə
+Təhlil
+Nüsxələnmə
+Yenidən Çeşidlənmə
+Keçmə İcazəsi
+Silinmə
+Başlıqlar Yaradılması
+3400
+Ayırmaq
+Ç&eçidlə:
+Ayrılan faylların yerini göstərin.
+3410
+Fayllara istiqamət:
+Tam istiqamətlər
+İstiqamətsiz
+Mütləq istiqamətlər
+Nisbi istiqamətlər
+3420
+Yenidən yazılma:
+Təsdiqli
+Təsdiqsiz
+Ötürmək
+Birbaşa yenidən adlandırmaq
+Mövcud olanları yenidən adlandırmaq
+3430
+Kök qovluqla bənzərliyi aradan qaldırmaq
+Faylın təhlükəsizlik bərpası 
+3500
+Faylın əvəzlənmə təsdiqi
+Qovluq artıq emal olunan fayl təşkil edir.
+Mövcud faylı əvəzləmək
+növbəti faylla?
+{0} bayt
+Birbaşa yenidən adlandırmaq
+3700
+'{0}' faylının dəstəklənməyən sıxılma üsulu.
+'{0}' məlumatlarında xəta. Fayl korlanıb.
+'{0}' CRC xətası. Fayl korlanıb.
+'{0}' şifrəli fayl məlumatlarında xəta. Yanlış şifrə?
+'{0}' şifrəli faylı üçün CRC xətası. Yanlış şifrə?
+3710
+Yanlış şifrə?
+3721
+Dəstəklənməyən sıxılma üsulu
+Dəlillərdə xəta
+CRC xətası
+Mövcud olmayan dəlillər
+Dəlillərin gözlənilməz sonu
+Bölmənin sonunda faydalı dəlillər olduğuna dəlillər var
+Arxiv deyil
+Başlıqlarda Xəta
+Yanlış şifrə
+3763
+Arxivin əvvəli mövcud deyil
+Təsdiqsiz arxiv əvvəli
+
+
+
+Dəstəklənməyən xüsusiyyət
+3800
+Şifrə daxil etmək
+&Şifrə daxil edin:
+Şifrəni təkrarlayın:
+&Şifrəni göstərmək
+Şifrələr uyğun deyil
+Şifrə üçün yalnız latın hərfləri, rəqəmlər və xüsusi rəmzlər istifadə edin (!, #, $, ...)
+Şifrə şox uzundur
+&Şifrə
+3900
+Keçdi:
+Qalıb:
+Cəmi:
+Sürət:
+Ölçü:
+Sıxılma dərəcəsi:
+Xəta:
+Arxiv:
+4000
+Arxivə əlavə etmək
+&Arxiv:
+&Dəyişmə vəziyyəti:
+Arxiv &qismi:
+Sıxılma &dərəcəsi:
+Sıxılma &üsulu:
+&Lüğət ölçüsü:
+&Söz ölçüsü:
+Bölmə ölçüsü:
+Axın sayı:
+&Nizamlar:
+&Seçimlər
+SF&X arxiv yaratmaq
+Yazılış üçün açıq faylları sıxmaq
+Şifrələmə
+Şifrələmə üsulu:
+Fayl adlarını &şifrələmək
+Qablaşdırma üçün yaddaş həcmi:
+Çeşidləmə üçün yaddaş həcmi:
+Sıxılmadan sonra faylları silmək
+4040
+Rəmzli keçidləri saxlamaq
+Sərt keçidləri saxlamaq
+Əvəzedici axınları saxlamaq
+Giriş hüququnu saxlamaq
+4050
+Sıxılmasız
+Sürətli
+Cəld
+Məqbul
+Yüksək
+Daha Yüksək (Ultra)
+4060
+Əlavə etmək və əvəzləmək
+Yeniləmək və əlavə etmək
+Yeniləmək
+Eyniləşdir (Sinxron)
+4070
+Vərəqləmək
+Bütün Fayllar
+Fayl ölçüsünə görə
+Aramsız
+6000
+Nüsxələmək
+Köçürmək
+Nüsxələmək:
+Köçürmək:
+Nüsxələlənir...
+Köçürülür...
+Yenidən adlandırılır...
+Qovluğu göstərin.
+Əməliyyat bu qovluq üçün dəstəklənmir.
+Fayl və ya Qovluğun Yenidən Adlandırılması Zamanı Xəta 
+Faylların Nüsxələlənmə Təsdiqi
+Siz həqiqətən bu faylları arxivə nüsxələmək istəyirsiz
+6100
+Fayl silinmə təsdiqi
+Qovluq silinmə təsdiqi
+Fayllar dəstəsinin silinmə təsdiqi
+Siz həqiqətən "{0}" silmək istəyirsiz?
+Siz həqiqətən "{0}" qovluğunu və onun bütün məzmununu silmək istəyirsiz?
+Siz həqiqətən {0} hədəfi silmək istəyirsiz?
+Silinir...
+Fayl və ya Qovluq Silinməsi Zamanı Xəta
+Quruluş uzun yollu faylların səbətə silinməsi əməliyyatını dəstəkləmir
+6300
+Qovluq Yaratmaq
+Fayl Yaratmaq
+Qovluq Adı:
+Fayl Adı:
+Yeni Qovluq
+Yeni Fayl
+Qovluq Yaradılması Zamanı Zəta
+Fayl Yaradılması Zamanı Zəta
+6400
+Şərh
+&Şərh:
+Seçin
+Seçimin Ləğvi
+Üzlük (Maska):
+6600
+Xassələr
+Qovluqlar Tarixçəsi
+İsmarıclar
+İsmarıc
+7100
+Kompüter
+Şəbəkə
+Sənədlər
+Quruluş
+7200
+Əlavə Etmək
+Ayırmaq
+Sınaq
+Nüsxələmək
+Köçürmək
+Silmək
+Məlumat
+7300
+Fayl Bölmək
+&Bölmək:
+Cildlərə &bölmək, (bayt) ölçüdə:
+Bölünür...
+Bölünmə Təsdiqi
+Siz həqiqətən faylı {0} hissəyə bölmək istəyirsiz?
+Cild ölçüsü ilkin fayl ölçüsündən kiçik olmalıdır
+Cildlərin ölçü təyin etmə sahəsində xəta
+Təyin edilmiş cild ölçüsü: {0} bayt.\nSiz həqiqətən arxivi belə cildlərə bölmək istəyirsiniz?
+7400
+Faylları Birləşdir
+&Birləşdirmək:
+Birləşir...
+Bölünmüş faylın yalnız birinci hissəsini seçmək lazımdır
+Bölünmüş faylın tanınması mümkün olmadı
+Bölünmüş faylın birdən çox hissəsini tapmaq mümkün olmadı
+7500
+Yoxlanma cəminin hesablanması...
+Yoxlanma cəmi
+Dəlillər üçün CRC yoxlanma cəmi:
+Dəlillər və adlar üçün CRC yoxlanma cəmi:
+7600
+Səmərə Sinağı
+Yaddaş Həcmi:
+Qablaşdırma
+Çeşidlənmə
+Dərəcə
+Ümumi Dərəcə
+Cari
+Nəticə
+Yüklənmə
+Yüklənmə Dərəcəsi
+Keçid:
+7700
+İstinad
+Əlaqələndir
+Mənbə:
+Məqsəd:
+7710
+İstinad Qismi
+Sərt İstinad 
+Rəmzi İstinad (Fayl)
+Rəmzi İstinad (Qovluq)
+Bağlantı Nöqtəsi (Qovşaq)

@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;       : Andreas M Nilsson, Christoffer Enqvist
+;  4.59 : Bernhard Eriksson
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Swedish
+Svenska
+401
+OK
+Avbryt
+
+
+
+&Ja
+&Nej
+&Stäng
+Hjälp
+
+F&ortsätt
+440
+Ja till &Alla
+Nej till A&lla
+Stopp
+Starta om
+&Bakgrunden
+&Förgrunden
+&Pausa
+Pausad
+Är du säker på att du vill avbryta?
+500
+&Arkiv
+&Redigera
+&Visa
+&Favoriter
+Verkt&yg
+&Hjälp
+540
+&Öppna
+Öppna &internt
+Öppna &externt
+&Visa
+&Redigera
+&Byt namn
+&Kopiera till...
+&Flytta till...
+&Ta bort
+&Dela upp fil...
+&Sätt ihop filer...
+E&genskaper
+Komme&ntera
+Beräkna checksumma
+
+Skapa mapp
+Skapa fil
+&Avsluta
+600
+Markera &alla
+Avmarkera alla
+&Invertera markering
+Markera...
+Avmarkera...
+Markera efter typ
+Avmarkera efter typ
+700
+St&ora ikoner
+Sm&å ikoner
+&Lista
+&Detaljerad lista
+730
+Osorterade
+Platt vy
+&2 Paneler
+&Verktygsfält
+Öppna rotmappen
+Upp en nivå
+Mapphistorik...
+&Uppdatera
+750
+Verktygsfältet Arkiv
+Verktygsfältet Standard
+Stora Knappar
+Visa Knapptext
+800
+&Lägg mappen till Favoriter som
+Bokmärke
+900
+&Alternativ...
+&Benchmark
+960
+&Innehåll...
+&Om 7-Zip...
+1003
+Sökväg
+Namn
+Filändelse
+Mapp
+Storlek
+Storlek komprimerad
+Attribut
+Skapad
+Använd
+Ändrad
+Sammanhängande (Solid)
+Kommenterad
+Krypterad
+Delad före
+Delad efter
+Ordlista
+CRC
+Typ
+Anti
+Metod
+Värd OS
+Filsystem
+Användare
+Grupp
+Block
+Kommentar
+Position
+Sökvägs prefix
+Kataloger
+Filer
+Version
+Volym
+Multivolym
+Offset
+Länkar
+Block
+Volymer
+
+64-bitars
+Big-endian
+CPU
+Fysisk storlek
+Storlek på header
+Checksumma
+Karakteristisk
+Virtuell adress
+
+
+
+
+
+
+Fel
+Total Storlek
+Ledigt utrymme
+Kluster storlek
+Etikett
+Datornamn
+Nätverkstyp
+2100
+Alternativ
+Språk
+Språk:
+Redigerare
+&Redigerare:
+
+2200
+System
+Associera med 7-Zip:
+2301
+Lägg till 7-Zip som alternativ i Utforskarens högerklicksmenyn
+Placera 7-Zip som en undermeny
+Objekt i högerklicksmenyn:
+2320
+<Mapp>
+<Arkiv>
+Öppna
+Packa upp filer...
+Lägg till arkiv...
+Kontrollera arkivet
+Packa upp här
+Packa upp till {0}
+Lägg till {0}
+Komprimera och skicka som e-post...
+Komprimera till {0} och skicka som e-post
+2400
+Mappar
+&Arbetsmapp
+&Systemets temp-mapp
+A&ktuell
+Spe&cificerad:
+Använd enbart för &flyttbara enheter
+Ange plats där temporära arkivfiler ska sparas.
+2500
+Inställningar
+Visa ".." objektet
+Visa riktiga ikoner, för filer innehållande ikoner (el. länkade)
+Visa system-menyn
+Markera &hel rad
+Visa &rutnät
+
+&Alternativt markeringsläge
+Använd &stora minnessidor
+2900
+Om 7-Zip
+7-Zip är fri programvara. Du kan emellertid stödja den fortsatta utvecklingen av 7-Zip genom att donera. Den aktuella översättningen på svenska är gjord av Wermlandsdata, baserad på arbete utfört av Andreas M Nilsson och Christoffer Enqvist.
+3000
+Systemet kan inte allokera den begärda minnesmängden
+Inga fel påträffades
+{0} objekt markerade
+Kan inte skapa mapp '{0}'
+Uppdatering stöds inte för det här arkivet.
+Kan inte öppna filen '{0}' som ett arkiv
+Kan inte öppna det krypterade arkivet '{0}'. Fel lösenord?
+Arkiv typen stöds ej
+Filen {0} existerar redan
+Filen '{0}' har blivit ändrad.\nVill du uppdatera den i arkivet?
+Kan inte uppdatera filen\n'{0}'
+Kan inte starta redigeraren.
+Filen verkar vara ett virus (filnamnet innehåller 'långa' mellanslag).
+Operation kan inte utföras från en katalog med en så lång sökväg.
+Du måste välja en fil
+Du måste välja en eller flera filer
+För många objekt
+3300
+Packar upp
+Komprimerar
+Kontrollerar
+Öppnar...
+Skannar...
+3400
+Packa upp
+&Packa upp till:
+Ange sökväg för uppackade filer.
+3410
+&Sökvägstyp
+Kompletta sökvägar
+Inga sökvägar
+3420
+&Överskrivning
+Fråga före överskrivning
+Skriv över befintliga filer
+Hoppa över befintliga filer
+Automatisk omdöpning
+Automatisk omdöpning av befintliga filer
+3500
+Bekräfta överskrivning av fil
+Målmappen innehåller redan den behandlade filen.
+Vill du skriva över den befintliga filen
+med den här?
+{0} bytes
+A&utomatisk omdöpning
+3700
+Komprimeringsmetoden stöds inte för '{0}'.
+Datafel i '{0}'. Filen är korrupt.
+CRC-fel i '{0}'. Filen är korrupt.
+Datafel i den krypterade filen '{0}'. Fel lösenord?
+CRC-fel i den krypterade filen '{0}'. Fel lösenord?
+3800
+Ange lösenord
+Ange lösenord:
+Upprepa lösenord:
+&Visa lösenord
+Lösenorden stämmer inte överens.
+Använd endast engelska tecken, siffror och special tecken (!, #, $, ...) till lösenord
+Lösenordet är för långt.
+&Lösenord
+3900
+Förfluten tid:
+Återstående tid:
+Storlek:
+Hastighet:
+Bearbetat:
+Komprimeringsgrad:
+Fel:
+Arkiv:
+4000
+Lägg till arkiv
+&Arkiv:
+&Uppdateringsmetod:
+Arkiv&format:
+Komprimeringsniv&å:
+&Komprimeringsmetod:
+Storlek på &ordlista:
+Storlek på o&rd:
+Solit block storlek:
+Antal trådar:
+&Parametrar:
+Alternativ
+Skapa sj&älvuppackande arkiv
+Komprimera delade filer
+Kryptering
+Krypteringsmetod:
+Kryptera fil&namn
+Minne behövt vid komprimering:
+Minne behövt vid dekomprimering:
+4050
+Okomprimerat
+Snabbaste
+Snabb
+Normal
+Maximal
+Ultra
+4060
+Lägg till och ersätt filer
+Lägg till och uppdatera befintliga filer
+Uppdatera enbart befintliga filer
+Synkronisera filer
+4070
+Bläddra
+Alla filer
+Icke-solit
+Solit
+6000
+Kopiera
+Flytta
+Kopiera till:
+Flytta till:
+Kopierar...
+Flyttar...
+Döper om...
+Välj målmapp.
+Funktionen stöds inte.
+Ett fel uppstod under omdöpning av fil eller mapp
+Bekräfta kopiering av fil
+Är du säker på att du vill kopiera filerna till arkivet
+6100
+Bekräfta borttagning av fil
+Bekräfta borttagning av mapp
+Bekräfta borttagning av flera filer
+Är du säker på att du vill ta bort '{0}'?
+Är du säker på att du vill ta bort mappen '{0}' och allt dess innehåll?
+Är du säker på att du vill ta bort de här {0} objekten?
+Tar bort...
+Ett fel uppstod under borttagning av fil eller mapp
+Systemet kan inte flytta en fil med s lng skvg till papperskorgen
+6300
+Skapa mapp
+Skapa fil
+Mappnamn:
+Filnamn:
+Ny mapp
+Ny fil
+Fel vid skapande av mapp
+Fel vid skapande av fil
+6400
+Kommentar
+&Kommentar:
+Markera
+Avmarkera
+Filter:
+6600
+Egenskaper
+Mapphistorik
+Diagnostiska meddelanden
+Meddelande
+7100
+Dator
+Nätverk
+Dokument
+System
+7200
+Lägg till
+Packa upp
+Testa
+Kopiera
+Flytta
+Radera
+Info
+7300
+Dela Upp Fil
+&Dela upp till:
+Dela upp i &delar (volymer), bytes:
+Delar upp...
+Bekräfta uppdelning
+Är det säkert du vill dela upp filen i {0} volymer?
+Volymstorleken måste vara mindre än storleken på originalfilen.
+Felaktig volymstorlek.
+Specificerad volymstorlek: {0} byte.\nÄr du säker du vill dela arkivet i sådana delar?
+7400
+Sätt Ihop Filer
+&Sätt ihop till:
+Sätter ihop...
+Markera bara första filen
+Kan inte upptäcka att filen är en del av en uppdelad fil
+Kan inte hitta mer än en del av en uppdelad fil
+7500
+Beräknar checksumma...
+Checksumma information
+CRC checksumma för data:
+CRC checksumma för data och namn:
+7600
+Benchmark
+Minnesanvändning:
+Komprimering
+Dekomprimering
+Prestanda
+Total prestanda
+Aktuellt
+Resultat
+CPU Användning
+Rate / Användning
+Omgångar:

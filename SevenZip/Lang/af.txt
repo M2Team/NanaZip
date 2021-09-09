@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.09 : Petri Jooste
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Afrikaans
+Afrikaans
+401
+OK
+Kanselleer
+
+
+
+&Ja
+&Nee
+A&fsluit
+Hulp
+
+&Gaan voort
+440
+Ja vir &almal
+Nee vir a&lmal
+Stop
+Herbegin
+&Agtergrond
+&Voorgrond
+&Wag
+Wagtend
+Is u seker dat u wil kanselleer?
+500
+&Lêer
+R&edigeer
+&Vertoon
+G&unstelinge
+&Gereedskap
+&Hulp
+540
+&Open
+Open &Binne
+Open B&uite
+&Wys
+R&edigeer
+Her&noem
+&Kopieer na...
+&Verskuif na...
+Ve&rwyder
+Ver&deel lêer...
+Kom&bineer lêers...
+E&ienskappe
+Komme&ntaar
+
+
+Maak gids
+Maak lêer
+A&fsluit
+600
+Selekteer &alles
+Deselekteer a&lles
+Keer &seleksie om
+Selekteer...
+Deselekteer...
+Selekteer op Soort
+Deselekteer op Soort
+700
+&Groot ikone
+&Klein ikone
+&Lys
+&Detail
+730
+Ongesorteer
+
+&2 Panele
+&Nutsbalke
+Maak wortelgids oop
+Een vlak hoër
+Gidse geskiedenis...
+&Verfris
+750
+Argiveernutsbalk
+Standaardnutsbalk
+Groot knoppies
+Wys teks op knoppies
+800
+Voeg gids by gunstelinge &as
+Boekmerk
+900
+&Opsies...
+&Normtoetsing
+960
+&Inhoud...
+&Aangaande 7-Zip...
+1003
+Pad
+Naam
+Uitgang
+Gids
+Grootte
+Ingepakte grootte
+Kenmerke
+Gemaak
+Laatste toegang
+Gewysig
+Kompak
+Kommentaar
+Versleuteld
+Verdeel Voor
+Verdeel Na
+Woordeboek
+CRC
+Tipe
+Anti
+Metode
+Gasheer BS
+Lêersstelsel
+Gebruiker
+Groep
+Blok
+Kommentaar
+Posisie
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fout
+Totale grootte
+Vrye ruimte
+Klustergrootte
+Etiket
+Plaaslike naam
+Verskaffer
+2100
+Opsies
+Taal
+Taal:
+Redigeerder
+R&edigeerder:
+
+2200
+Stelsel
+Assosieer 7-Zip met:
+2301
+Integreer 7-Zip in kontekskeuselys.
+Trapsgewyse kontekskeuselys
+Kontekskeuselysitems:
+2320
+<Gids>
+<Argief>
+Open
+Pak lêers uit...
+Voeg by argief...
+Toets argief
+Pak hier uit
+Pak uit in {0}
+Voeg by {0}
+Saampers en e-pos...
+Pers saam in {0} en e-pos
+2400
+Gidse
+&Werkgids
+&TEMP-gids van het stelsel
+&Huidige gids
+&Gespesifiseerde gids:
+Gebruik slegs vir verwisselbare media.
+Spesifiseer die stoorplek vir tydelyke argieflêers.
+2500
+Instellings
+Wys ".." &item
+Wys &ware lêerikone
+Wys &stelselkeuselys
+Wys seleksie oor &hele ry(e)
+Wys &roosterlyne
+
+
+
+2900
+Aangaande 7-Zip
+7-Zip is gratis programmatuur. Indien u egter so baie van 7-Zip hou dat u die verdere ontwikkeling wil ondersteun, registreer dan asb. met 'n geldelike donasie aan die 7-Zip Projek.
+3000
+
+Daar is geen foute nie
+{0} objekt(e) is geselekteer
+Kan gids '{0}' nie maak nie
+Bywerk-funksie word vir hierdie argief nie ondersteun nie.
+
+
+
+
+Lêer '{0}' is gewysig.\nWil u dit bywerk in die argief?
+Kan lêer\n'{0}' nie bywerk nie
+Redigeerder nie aan die gang gesit word nie.
+
+
+
+
+Te veel items
+3300
+Besig om uit te pak
+Besig met saampersing
+Besig om te toets
+Besig om oop te maak...
+
+3400
+&Uitpak
+U&itpak in:
+Gee 'n bestemming vir uitgepakte lêers.
+3410
+Pad-metode
+Volledige padname
+Geen padname
+3420
+Vervang lêers
+Vervang slegs met bevestiging
+Vervang sonder bevestiging
+Slaan bestaande lêers oor
+Hernoem outomaties
+Hernoem bestaande lêers outomaties
+3500
+Bevestig lêeroorskrywing
+Doelgids bevat alreeds 'n lêer met hierdie naam.
+Wil u die bestaande lêer vervang
+deur hierdie lêer ?
+{0} grepe
+O&utomaties hernoem
+3700
+Nie-ondersteunde saampersmetode vir '{0}'.
+Datafout in '{0}'. Lêer is beskadig.
+CRC het misluk in '{0}'. Lêer is beskadig.
+
+
+3800
+Tik wagwoord in
+Tik wagwoord in:
+
+&Wys wagwoord
+
+
+
+&Wagwoord
+3900
+Tydsduur sovêr:
+Oorblywende tyd:
+Grootte:
+Spoed:
+
+
+Foute:
+
+4000
+Voeg by argief
+&Argief:
+&Bywerkwyse:
+Argie&fformaat:
+Saampersingv&lak:
+&Saampersmetode:
+&Woordeboekgrootte:
+&Woordgrootte:
+
+
+Pa&rameters:
+Opsies
+Maak SF&X argief
+
+
+
+Enkripteer lêer&name
+Geheuegebruik vir saampersing:
+Geheuegebruik vir uitpakking:
+4050
+Stoor
+Vinnigste
+Vinnig
+Normaal
+Maksimum
+Ultra
+4060
+Lêers byvoeg en vervang
+Lêers bywerk en byvoeg
+Verfris bestaande lêers
+Sinkroniseer lêers
+4070
+Blaai
+Alle lêers
+
+
+6000
+Kopieer
+Verskuif
+Kopieer na:
+Verskuif na:
+Besig met kopiëring...
+Besig met verskuiwing...
+Besig met hernoeming...
+
+Bewerking word nie ondersteun nie.
+Fout by hernoeming van lêer of gids
+
+
+6100
+Bevestig lêerverwydering
+Bevestig gidsverwydering
+Bevestig verwydering van meerdere lêers
+Is u seker dat u '{0}' wil verwyder?
+Is u seker dat u gids '{0}' asook die inhoud daarvan wil verwyder?
+Is u seker dat u hierdie {0} items wil verwyder?
+Besig met verwydering...
+Fout by verwydering van lêer of gids
+
+6300
+Maak gids
+Maak lêer
+Naam van die gids:
+Lêernaam:
+Nuwe gids
+Nuwe lêer
+Fout by maak van gids
+Fout by maak van nuwe lêer
+6400
+
+
+Selekteer
+Deselekteer
+Masker:
+6600
+
+Gidse-geskiedenis
+Diagnostiese boodskappe
+Boodskap
+7100
+Rekenaar
+Network
+
+Stelsel
+7200
+Voeg by
+Pak uit
+Toets
+Kopiëer
+Skuif
+Vee uit
+Intigting
+7300
+Verdeel lêer
+&Verdeel na:
+Verdeel in &volumes, aantal grepe:
+Besig met verdeling...
+
+
+
+
+
+7400
+Kombineer lêers
+&Kombineer na:
+Besig met kombinering...
+
+
+
+7500
+
+
+
+
+7600
+Meet
+Geheuegebruik:
+Inpakking
+Uitpakking
+Gradering
+Totale gradering
+Huidige
+Resultaat
+
+
+Lopies:

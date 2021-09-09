@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  9.07 : Seanán Ó Coistín
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Irish
+Gaeilge
+401
+Tá go maith
+Cealaigh
+
+
+
+&Tá
+&Níl
+&Dún
+Cabhair
+
+&Lean ar aghaidh
+440
+Tá do gach ceann
+Níl go gach ceann
+Stad
+Atosaigh
+&Cúlra
+&Tulra
+&Cuir ar sos
+Ar sos
+An bhfuil tú cinnte gur mian leat é a chealú?
+500
+&Comhad
+&Leagan
+Am&harc
+Ceanáin
+&Uirlisí
+&Cabhair
+540
+&Oscail
+Oscail &istigh
+Oscail &lasamuigh
+&Amharc
+&Eagar
+Athainmnigh
+&Macasamhlaigh go...
+&Bog go...
+S&crios
+Scar an comhad...
+Cumascaigh na comhaid...
+Airíonna
+Nóta tráchta
+Ríomh an tsuim sheiceála
+Diff
+Cruthaigh fillteán
+Cruthaigh comhad
+&Scoir
+600
+Roghnaigh &uile
+Díroghnaigh uile
+&Aisiompaigh an roghnúchán
+Roghnaigh...
+Díroghnaigh...
+Roghnaigh de réir cineál
+Díroghnaigh de réir cineál
+700
+&Deilbhíní móra
+&Deilbhíní beaga
+&Liosta
+&Sonraí
+730
+Neamhaicmithe
+Gach rud in aon chiseal
+&2 fhuinneog
+&Barraí na n-uirlisí
+Oscail an fréamhfhillteán
+Suas fillteán amháin
+Oireas na bhfillteán...
+Athnuaigh
+750
+Barra cartlanna
+Barra na n-uirlisí caighdeánacha
+Cnaipí móra
+Taispeáin an téacs ar na cnaipí
+800
+&Cuir an fillteán leis na Ceanáin
+Leabharmharc
+900
+&Roghanna...
+Tástáil fheidhmíochta
+960
+&Inneachair...
+Maidir le 7-Zip...
+1003
+Conair
+Ainm
+Breiseán
+Fillteán
+Méid
+Comhbhrúite
+Tréithe
+Cruthaithe an
+Rochtain faighte ar an
+Mionathraithe ar an
+Fothúil
+Trácht
+Criptithe
+Roinn roimh
+Roinn i ndiaidh
+Foclóir
+CRC
+Cineál
+Frith
+Modh
+Óstach an CO
+Córas na gcomhad
+Úsáideoir
+Aicme
+Ceap
+Nóta tráchta
+Suíomh
+Réimír na conaire
+Fillteáin
+Comhaid
+Leagan
+Imleabhar
+Il-imleabhair
+Fritháirigh
+Naisc
+Ceapa
+Imleabhair
+
+64 bheart
+Foirceann mór
+LAP
+Méid aiceanta
+Méid na gceanntásc
+Suim seiceála
+Tréithe
+Seoladh fíorúil
+ID
+Ainm gearr
+Feidhmchlár a chruthaigh í
+Méid na hearnála
+Modh
+Nasc
+Botún
+Méid iomlán
+Slí atá saor
+Méid na braisle
+Lipéad
+Ainm logánta
+Soláthraí
+2100
+Roghanna
+Teanga
+Teanga:
+Eagarthóir
+&Eagarthóir:
+&Diff:
+2200
+Córas
+Comhthiomsaigh 7-Zip le:
+2301
+Comhtháthaigh 7-Zip sa roghchlár comhthéacs
+Roghchlár comhthéacs ag titim
+Nithe an roghchláir chomhthéacs:
+2320
+<Fillteán>
+<Comhad>
+Oscail
+Asbhain na comhaid...
+Cuir leis an gcartlann...
+Tástáil an chartlann
+Asbhain anseo
+Bain go {0}
+Cuir le {0}
+Comhbhrúigh agus seol i ríomphost iad...
+Comhbhrúigh go {0} agus seol i ríomhphost iad
+2400
+Fillteáin
+Fillteán oibre
+Fillteán sealadach an chórai&s
+An comhad reatha
+Fillteán &sonraithe:
+Bain feidhm as do thiomántáin inaistrithe amháin
+Sonraigh suíomh i gcomhair comhaid chartlainne sealadacha.
+2500
+Socruithe
+Taispeáin an ní ".."
+Taispeáin fíordheilbhíní an chomhaid
+Taispeáin roghchlár an chórais
+Roghnaigh an tsraith ar fad
+Taispeáin línte na greille
+Brúigh uair amháin chun ní a oscailt
+Bain feidhm as modh roghnaithe malartach
+Bain feidhm as leathanaigh chuimhne mhóra
+2900
+Maidir le 7-Zip
+Is saorearra é 7-Zip. Is féidir tacaíocht a thabhairt dá fhorbairt amach anseo, áfach, trí chlárú.
+3000
+Ní féidir leis an gcóras an méid cuimhne atá de dhíth a leathdháileadh dó
+Níl aon bhotún ann
+{0} ní/nithe roghnaithe
+Ní féidir an fillteán '{0}' a chruthú
+Ní féidir an chartlann seo a nuashonrú.
+Ní féidir an comhad '{0}' a oscailt mar chartlann
+Ní féidir an chartlann chriptithe '{0}' a oscailt. An bhfuil an focal faire mícheart?
+Ní thugtar tacaíocht don chineál comhad seo
+Tá an comhad {0} ann cheana
+Mionathraíodh an comhad '{0}'.\nAr mhaith leat é a nuashonrú sa chartlann?
+Ní féidir an comhad a leanas a nuashonrú\n'{0}'
+Ní féidir an t-eagarthóir a thosú.
+B'fhéidir gur aicíd é an comhad (tá bearnaí móra in ainm an chomhaid).
+Ní féidir an oibríocht seo a chur i bhfeidhm ó fhillteán a bhfuil conair fhada aige.
+Caithfear comhad amháin a roghnú
+Caithfear comhad amháin nó níos mó a roghnú
+An iomarca nithe
+3300
+Asbhaint
+Ag comhbhrú
+Ag tástáil
+Ag oscailt...
+Ag taiscéal...
+3400
+Bain
+Bain go:
+Roghnaigh fillteán do na comhaid asbhainte.
+3410
+Conairí
+Conairí iomlána
+Níl conair ann
+3420
+Modh forscríofa
+Deimhnigh sular forscríobhtar
+Forscríobh gan iarraidh
+Déan neamhaird de na comhaid atá ann cheana
+Athainmnigh go huathoibríoch
+Athainmnigh na comhaid atá ann cheana
+3500
+Deimhnigh ionadú comhaid
+Tá comhad leis an ainm seo sa spriocfhillteán cheana féin.
+Ar mhaith leat an comhad atá ann cheana a ionadú
+leis an gceann seo?
+{0} bearta
+Athainmnigh go huathoibríoch
+3700
+Níl an bealach comhbhrúite bailí i gcomhair '{0}'.
+Botún sna sonraí sa chomhad '{0}'. Tá an comhad briste.
+Theip ar CRC sa chomhad '{0}'. Tá an comhad briste.
+Sonra mícheart sa chomhad criptithe '{0}'. Focal faire mícheart?
+Theip ar CRC sa chomhad chriptithe '{0}'. Focal faire mícheart?
+3800
+Cuir isteach an focal faire
+Cuir an focal faire isteach:
+Cuir an focal faire isteach arís:
+&Taispeáin an focal faire
+Ní hionann an dá fhocal faire
+Bain feidhm as litreacha gan síntí fada, uimhreacha agus carachtair shainiúla (!, #, $, ...)
+Tá an focal faire rófhada
+Focal faire
+3900
+Am caite:
+Am fágtha:
+Méid iomlán:
+Luas:
+Déanta:
+Luas an chomhbhrúite:
+Botúin:
+Cartlanna:
+4000
+Cuir leis an gcartlann
+&Cartlann:
+&Modh nuashonraithe:
+&Formáid na cartlainne:
+Méid comhbhrúite:
+Modh comhbhrúite:
+&Méid an fhoclóra:
+Méid na bhfocal:
+Méid an chip fhothúla:
+Líon na snáitheanna LAP:
+&Teorainneacha:
+Roghanna
+Cruthaigh cartlann SF&X
+Comhbhrúigh na comhaid a roinneadh
+Criptiú
+Modh criptiúcháin:
+Criptigh ainmneacha na gcomhad
+Cuimhne don chomhbhrúigh:
+Cuimhne don dhíchomhbhrúigh:
+4050
+Taisc
+Is gasta
+Gasta
+Gnáth
+Uasmhéid
+Fíorghasta
+4060
+Cuir comhaid leis agus ionadaigh
+Nuashonraigh na comhaid agus cuir leo
+Athnuaigh comhaid atá ann cheana
+Comhionannaigh na comhaid
+4070
+Siortaigh
+Gach comhad
+Neamhfhothúil
+Fothúil
+6000
+Macasamhlaigh
+Bog
+Macasamhlaigh chuig:
+Bog chuig:
+Ag acasamhlú...
+Ag bogadh...
+Ag athainmniú...
+Roghnaigh an spriocfhillteán.
+Ní féidir sin a dhéanamh.
+Tharla botún ag athainmniú an comhad nó an fillteán
+Deimhnigh macasamhlú an chomhaid
+An bhfuil tú cinnte gur mian leat na comhaid a mhacasamhlú go dtí an chartlann?
+6100
+Deimhnigh scriosadh an chomhaid
+Deimhnigh scriosadh an chomhaid
+Deimhnigh scriosadh iliomad comhad
+An bhfuil tú cinnte gur mian leat '{0}' a scriosadh?
+An bhfuil tú cinnte gur mian leat an fillteán '{0}' agus gach rud ann a scriosadh?
+An bhfuil tú cinnte gur mian leat na {0} nithe seo a scriosadh?
+Ag scriosadh...
+Tharla botún ag scriosadh an comhad nó an fillteán
+Ní thig leis an gcóras comhad le conair fhada a bhogadh go dtí an bosca athchúrsála
+6300
+Cruthaigh comhad
+Cruthaigh comhad
+Ainm an chomhaid:
+Ainm an chomhaid:
+Comhad nua
+Comhad nua
+Tharla botún fad is a bhí an comhad á chruthú
+Tharla botún fad is a bhí an comhad á chruthú
+6400
+Trácht
+&Trácht:
+Roghnaigh
+Díroghnaigh
+Folaigh:
+6600
+Airíonna
+Oireas na bhfillteán
+Teachtaireachtaí diagnóiseach
+Teachtaireacht
+7100
+Ríomhaire
+Líonra
+Cáipéisí
+Córas
+7200
+Cuir leis
+Asbhain
+Tástáil
+Macasamhlaigh
+Bog
+Scrios
+Faisnéis
+7300
+Roinn an comhad
+&Roinn chuig:
+Roinn in imleabhair, bearta:
+Ag roinnt...
+Deimhnigh an roinnt
+An bhfuil tú cinnte go dteastaíonn uait an comhad a roinnt i {0} imleabhair?
+Ní mór do mhéid an imleabhair a bheith níos lú ná méid an chomhaid bhunaidh
+Tá méid an cholúin mícheart
+Méid an cholúin sonraithe: {0} bearta.\nAn bhfuil tú cinnte gur mian leat an chartlann a roinnt in imleabhair?
+7400
+Cumaisc comhaid
+&Cumaisc go:
+Ag cumasc...
+Ná roghnaigh an chéad chomhad
+Ní féidir an comhad a bhraith mar chuid de chomhad scoilte
+Ní féidir níos mó ná aon chuid amháin den chomhad scoilte a aimsiú
+7500
+Ag ríomh na suime seiceála...
+Faisnéis maidir leis an suim sheiceála
+Suim sheiceála do shonraí:
+Suim sheiceála do shonraí agus d'ainmneacha
+7600
+Tástáil fheidhmíochta
+Gnáthaíocht na cuimhne:
+Ag comhbhrú
+Ag díchomhbhrú
+Measúnú
+Measúnú iomlán
+Reatha
+Toradh
+Gnáthaíocht an LAP
+Measúnú / Gnáthaíocht
+Bealaí:

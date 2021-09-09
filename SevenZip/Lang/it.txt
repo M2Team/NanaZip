@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  4.07 : Leandro Spagnol
+;       : Vincenzo Reale (some corrections)
+; 15.05 : 2015-06-17 : TJL73 : http://tjl73.altervista.org/
+; 15.05 : 2017-02-01 : Massimo Castiglia
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Italian
+Italiano
+401
+OK
+Annulla
+
+
+
+&Sì
+&No
+&Chiudi
+Aiuto
+
+&Continua
+440
+Sì per &tutti
+No per t&utti
+Stop
+Riavvia
+&In background
+In p&rimo piano
+&Pausa
+In pausa
+Sei sicuro di voler annullare?
+500
+&File
+&Modifica
+&Visualizza
+&Preferiti
+&Strumenti
+&Aiuto
+540
+&Apri
+Apri in &7-Zip File Manager
+Apri con &un altro programma
+&Visualizza
+Modifica con l'&editor predefinito
+Rino&mina
+&Copia in...
+&Sposta in...
+&Elimina
+&Suddividi il file...
+&Unisci i files...
+&Proprietà
+Comme&nto...
+Calcola chec&ksum
+Comparazione differenze (Diff)
+Crea Cartella
+Crea File
+E&sci
+Link
+Streams &alternativi
+600
+Selezion&a tutto
+&Deseleziona tutto
+&Inverti selezione
+Seleziona...
+Deseleziona...
+Seleziona per tipo
+Deseleziona per tipo
+700
+Icone &grandi
+Icone &piccole
+&Elenco
+&Dettagli
+730
+Nessun ordine
+Visualizzazione semplice
+Interfaccia a &2 pannelli
+Barre degli s&trumenti
+Apri Cartella principale
+Su di un livello
+Cronologia Cartelle...
+Aggio&rna
+Aggiornamento automatico
+750
+Barra degli strumenti Archivio
+Barra degli strumenti Standard
+Pulsanti grandi
+Mostra il testo sui pulsanti
+800
+&Aggiungi la Cartella ai Preferiti come
+Segnalibro
+900
+&Opzioni...
+&Benchmark
+960
+&Guida...
+&Informazioni su 7-Zip...
+1003
+Percorso
+Nome
+Estensione
+Cartella
+Dimensione
+Dimensione compressa
+Attributi
+Creato
+Ultimo accesso
+Ultima modifica
+Solido
+Commentato
+Crittografato
+Dividi prima
+Dividi dopo
+Dizionario
+
+Tipo
+Estensione
+Metodo
+OS Computer
+File System
+Utente
+Gruppo
+Blocco
+Commento
+Posizione
+Prefisso del percorso
+Cartelle
+Files
+Versione
+Volume
+Multivolume
+Offset
+Links
+Blocchi
+Volumi
+
+64-bit
+Big-endian
+CPU
+Dimensione fisica
+Dimensione headers
+Checksum
+Caratteristiche
+Indirizzo virtuale
+ID
+Nome breve
+Applicativo origine
+Dimensione settore
+Modalità
+Link simbolico
+Errore
+Dimensione totale
+Spazio libero
+Dimensione dei cluster
+Etichetta
+Nome locale
+Fornitore
+Sicurezza NT
+Stream alternato
+Ausiliario
+Eliminato
+In struttura
+
+
+Tipo di errori
+Errori
+Errori
+Avvertimenti
+Avvertimento
+Streams
+Streams alternati
+Dimensione degli Streams alternati
+Dimensione virtuale
+Dimensione decompressione
+Dimensione fisica totale
+Indice del volume
+Sottotipo
+Commento breve
+Pagina dei codici
+
+
+
+Dimensione della coda
+Dimensione della matrice integrata
+Link
+Link fisso
+iNode
+
+Sola lettura
+2100
+Opzioni
+Lingua
+Lingua:
+Editor
+&Editor predefinito:
+Comparatore &differenze (Diff):
+2200
+Sistema
+Associa 7-Zip a:
+Tutti gli utenti
+2301
+Integra 7-Zip nel menù contestuale della shell
+Menù contestuale a cascata
+Elementi del menù contestuale:
+Icone nel menù contestuale
+2320
+<Cartella>
+<archivio>
+Apri
+Estrai i files...
+Aggiungi all'archivio...
+Verifica l'archivio
+Estrai qui
+Estrai in {0}
+Aggiungi a {0}
+Comprimi ed invia per email...
+Comprimi in {0} ed invia per email
+2400
+Cartelle
+Cartella di la&voro
+Cartella TEMP di &Sistema
+&Corrente
+&Specificata:
+&Utilizza solo per dischi rimovibili
+Specifica una posizione per i files temporanei.
+2500
+Impostazioni
+Mostra l'elemento ".."
+Mostra le icone reali dei files
+Mostra il menù di Sistema
+Seleziona una &riga intera
+Mostra le linee della &griglia
+Click singolo per aprire un elemento
+Modalità di selezione &alternativa
+Utilizza pagine di memoria &larghe 
+2900
+Informazioni su 7-Zip
+7-Zip è un software gratuito.\n\nTraduzione italiana a cura di Massimo Castiglia (massimocastiglia@alice.it)
+3000
+Non è possibile allocare la quantità di memoria necessaria
+Non ci sono errori
+{0} oggetti selezionati
+Impossibile creare la Cartella '{0}'
+Le operazioni di aggiornamento non sono supportate per questo archivio
+Impossibile aprire il file '{0}' come archivio.
+Impossibile aprire l'archivio crittografato '{0}'. Password errata?
+Tipo di archivio non supportato
+Il file {0} è già presente
+Il file '{0}' è stato modificato.\nVuoi aggiornarlo nell'archivio?
+Impossibile aggiornare il file\n'{0}'
+Impossibile avviare l'editor.
+Il file sembra essere un virus (il nome del file contiene spazi lunghi).
+L'operazione non può essere richiamata da una Cartella con un percorso lungo.
+Devi selezionare un file
+Devi selezionare uno o più files
+Troppi elementi
+Impossibile aprire il file come archivio {0}
+Il file è aperto come archivio {0}
+L'archivio è aperto con offset
+3300
+Estrazione in corso
+Compressione in corso
+Verifica archivio in corso
+Apertura in corso...
+Scansione in corso...
+Rimozione in corso
+3320
+Aggiunta
+Aggiornamento
+Analisi
+Replica
+Reimpacchettamento
+Salta
+Eliminazione
+Creazione header
+3400
+Estrai
+E&strai in:
+Specifica una posizione in cui estrarre i files.
+3410
+Struttura delle cartelle:
+Percorsi completi
+Nessun percorso
+Percorsi assoluti
+Percorsi relativi
+3420
+Modalità sovrascrittura:
+Chiedi prima di sovrascrivere
+Sovrascrivi senza chiedere
+Non sovrascrivere i files esistenti
+Rinomina automaticamente
+Rinomina autom. i files esistenti
+3430
+Elimina la duplicazione della Cartella principale
+Ripristina la sicurezza dei files
+3500
+Conferma la sovrascrittura del file
+La Cartella di destinazione contiene già il file elaborato.
+Vuoi sostituire il file esistente
+con questo?
+{0} byte
+Rinomina a&utomaticamente
+3700
+Metodo di compressione non supportato per '{0}'.
+Errore nei dati in '{0}'. Il file è danneggiato.
+CRC non corretto in '{0}'. Il file è danneggiato.
+Errore nel file crittografato '{0}'. Password errata?
+CRC errato nel file crittografato '{0}'. Password errata?
+3710
+Password errata?
+3721
+Metodo di compressione non supportato
+Errore dei dati
+CRC errato
+Dati non disponibili
+Termine dei dati inatteso
+Sono presenti dati oltre la fine del payload dei dati
+Non è un archivio
+Errore Headers
+Password errata
+3763
+Inizio dell'archivio non disponibile
+Inizio dell'archivio non confermato
+
+
+
+Funzionalità non supportata
+3800
+Inserisci password
+Inserisci password:
+Reinserisci password:
+Mo&stra password
+Password differenti
+Per la password, utilizzare solo lettere ASCII, numeri e caratteri speciali (!, #, $, ...)
+La password è troppo lunga
+Password
+3900
+Tempo trascorso:
+Tempo rimanente:
+Dimensione totale:
+Velocità:
+Elaborato:
+Rapporto compressione:
+Errori:
+Archivi:
+4000
+Aggiungi all'archivio
+Nome &archivio:
+Modalità a&ggiornamento:
+&Formato dell'archivio:
+&Livello di compressione:
+&Metodo di compressione:
+Dimensione &Dizionario:
+Dimensioni &Parola:
+Dimensione del &blocco solido:
+Numero di processi CPU:
+&Parametri:
+Opzioni
+Crea archivio auto-&estraente
+Comprimi files condivisi
+Crittografia
+Metodo &crittografico:
+Crittografa i &nomi dei files
+Utilizzo della memoria per la compressione:
+Utilizzo della memoria per ka decompressione::
+Elimina i files dopo la compressione
+4040
+Memorizza i links simbolici
+Memorizza i links fissi
+Memorizza gli streams dati alternativi
+Memorizza la sicurezza dei files
+4050
+Memorizzazione
+Velocissima
+Veloce
+Normale
+Massima
+Ultra
+4060
+Aggiungi e sostituisci i files
+Aggiorna ed aggiungi i files
+Aggiorna i files esistenti
+Sincronizza i files
+4070
+Sfoglia
+Tutti i files
+Non solido
+Solido
+6000
+Copia
+Sposta
+Copia in:
+Sposta in:
+Copia in corso...
+Spostamento in corso...
+Ridenominazione in corso...
+Seleziona la Cartella di destinazione.
+Operazione non supportata per questa Cartella.
+Errore nella ridenominazione del File o della Cartella
+Conferma copia File
+Sei sicuro di voler copiare questi Files nell'archivio
+6100
+Conferma eliminazione File
+Conferma eliminazione Cartella
+Conferma eliminazione multipla
+Sei sicuro di voler eliminare '{0}'?
+Sei sicuro di voler eliminare la Cartella '{0}' e tutto il suo contenuto?
+Sei sicuro di voler eliminare questi {0} elementi?
+Eliminazione in corso...
+Errore nell'eliminazione del File o della Cartella
+Impossibile spostare un File con percorso lungo nel Cestino
+6300
+Crea Cartella
+Crea File
+Nome Cartella:
+Nome File:
+Nuova Cartella
+Nuovo File
+Errore nella creazione della Cartella
+Errore nella creazione del File
+6400
+Commento
+&Commento:
+Seleziona
+Deseleziona
+Filtro:
+6600
+Proprietà
+Cronologia Cartelle
+Messaggi di diagnostica
+Messaggio
+7100
+Computer
+Rete
+Documenti
+Sistema
+7200
+Aggiungi
+Estrai
+Verifica
+Copia
+Sposta
+Elimina
+Informazioni
+7300
+Suddividi File
+&Suddividi in:
+Suddividi in &porzioni (dimensione in byte):
+Suddivisione...
+Conferma Suddivisione
+Sei sicuro di voler suddividere il file in {0} porzioni?
+La dimensione di ciascuna porzione deve essere più piccola della dimensione totale del file originale
+Dimensione non corretta
+Dimensione specificata: {0} byte.\nSei sicuro di voler suddividere l'archivio in queste porzioni?
+7400
+Unisci i File
+&Unisci in:
+Unisci...
+Seleziona solo la prima parte del File suddiviso
+Impossibile rilevare il File come parte del File suddiviso
+Impossibile trovare più di una parte del file suddiviso
+7500
+Calcolo del checksum in corso...
+Informazioni sul checksum
+Checksum CRC sui dati:
+Checksum CRC su dati e nomi:
+7600
+Benchmark
+Utilizzo memoria:
+Compressione in corso
+Decompressione in corso
+Valutazione
+Valutazione totale
+Attuale
+Risultante
+Utilizzo CPU
+Valutazione / Utilizzo
+Passaggi:
+7700
+Link
+Link
+Origine del Link:
+Destinazione del Link:
+7710
+Tipo di Link
+Link fisso
+Link simbolico al File
+Link simbolico alla Cartella
+Giunzione Directory

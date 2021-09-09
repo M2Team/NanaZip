@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  9.07 : Atabek Murtazaev
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Karakalpak - Latin
+Qaraqalpaqsha - Latın
+401
+OK
+Biykar etiw
+
+
+
+&Awa
+&Yaq
+&Jabıw
+Ja'rdem
+
+&Dawam etiw
+440
+&Barlıg'ına awa
+Ba&rlıg'ına yaq
+Toqtatıw
+Qaytadan baslaw
+&Artqı fong'a
+Aldıng'ı &fong'a
+&Pauza
+Pauza qılıng'an
+Anıq biykar etiwdi qa'leysizbe?
+500
+&Fayl
+&Du'zetiw
+&Ko'rinis
+&Saylandılar
+A's&baplar
+&Ja'rdem
+540
+&Ashıw
+&İshinde ashıw
+&Sırtında ashıw
+&Ko'riw
+&Du'zetiw
+Atın o'&zgertiw
+Bul jerge &nusqasın alıw...
+Bul jerge ko'shiriw...
+O'shiriw
+&Fayldı bo'liw...
+Fayllardı &biriktiriw...
+Sazlawla&r
+Kom&mentariy...
+Qadag'alaw summası
+Diff
+Papka jaratıw
+Fayl jaratıw
+Sh&ıg'ıw
+600
+Barlıg'ın &saylaw
+Saylawdı alıp taslaw
+Saylawdı &teris awdarıw
+Saylaw...
+Saylawdı alıp taslaw...
+Tu'ri boyınsha saylaw
+Tu'ri boyınsha saylawdı alıp taslaw
+700
+U'&lken ikonalar
+Kishi &ikonalar
+&Dizim
+&Keste
+730
+Ta'rtipsiz
+Tegis ko'rinis
+&2 panel
+&A'sbaplar paneli
+Derek papkasın ashıw
+Bir da'reje joqarıg'a ko'teriliw
+Papkalar tariyxı...
+&Jan'alaw
+750
+Arxivator knopkalar paneli
+Standart knopkalar paneli
+U'lken knopkalar
+Knopkalar tekstin ko'rsetiw
+800
+&Papkanı saylandılarg'a qosıw
+Belgi
+900
+&Sazlawlar...
+&O'nimlilikti tekseriw
+960
+&Mazmunı...
+&7-Zip haqqında...
+1003
+Jol
+Atı
+Ken'eytpe
+Papka
+Ko'lemi
+Qısılg'andag'ı ko'lemi
+Attributları
+Jaratılg'an
+Ashılg'an
+O'zgertilgen
+U'ziliksiz
+Kommentariy berilgen
+Shifrlengen
+deyin bo'lingen
+keyin bo'lingen
+So'zlik
+CRC
+Tu'ri
+Anti
+Usıl
+Basqarıwshı OS
+Fayl sisteması
+Paydalanıwshı
+Topar
+Blok
+Kommentariy
+Ornı
+Jol prefiksi
+Papkalar
+Fayllar
+Versiya
+Tom
+Ko'p tomlı
+Jıljıw
+Siltewler
+Bloklar
+Tomlar
+
+64-bit
+Big-endian
+Protsessor
+Fizikalıq ko'lemi
+Baslama ko'lemi
+Qadag'alaw summası
+Xarakteristika
+Virtual adresi
+ID
+Qısqa atı
+Jaratıwshı bag'darlama
+Sektor ko'lemi
+Rejim
+Siltew
+Qa'te
+Ulıwma ko'lem
+Bos orın
+Klaster ko'lemi
+Belgi
+Jergilikli atı
+Provayder
+2100
+Sazlawlar
+Til
+Til:
+Redaktor
+&Redaktor:
+&Diff:
+2200
+Sistema
+To'mendegi fayllardı 7-Zip penen baylanıstırıw:
+2301
+7-Zip ti qabıq kontekst menyuine qosıw
+Kaskadlı kontekst menyu
+Kontekst menyu elementleri:
+2320
+<Papka>
+<Arxiv>
+Arxivti ashıw
+Fayllardı shıg'arıp alıw...
+Arxivke qosıw...
+Arxivti sınaw
+Usı jerge shıg'arıw
+Mına jerge shıg'arıw: {0}
+Mınag'an qosıw: {0}
+Qısıw ha'm email arqalı jiberiw...
+Mınag'an qısıw: {0} ha'm email arqalı jiberiw
+2400
+Papkalar
+&İslewshi papka
+&Sistemanın' waqtınshalıq papkası
+Ha'zirgi &papka
+&Ko'rsetilgen:
+Tek alınbalı tasıg'ıshlar ushın paydalanıw
+Waqtınshalıq arxiv fayllardın' ornın ko'rsetin'.
+2500
+Sazlawlar
+".." elementti ko'rsetiw
+Fayldın' haqıyqıy ikonaların ko'rsetiw
+Sistema menyuin ko'rsetiw
+&Tolıq joldı saylaw
+Tor &sızıqların ko'rsetiw
+Elementti bir basıwdan ashıw
+Saylawdın' &alternativ usılı
+U'lken &yad betlerin paydalanıw
+2900
+7-Zip haqqında
+7-Zip bul biypul bag'darlama
+3000
+Sistema kerekli bolg'an yad mug'darın ajırata almadı
+Qa'te tabılmadı
+{0} obekt saylang'an
+'{0}' papkasın jaratıw iske aspadı
+Bul arxiv ushın jan'alaw operatsiyaları qollanılmaydı.
+'{0}' faylın arxiv sıpatında ashıw iske aspadı
+Shifrlang'an '{0}' arxivin ashıw iske aspadı. Parol qa'te emespe?
+Qollanbaytug'ın arxiv tu'ri
+{0} faylı a'lle qashan bar (jaratılg'an)
+'{0}' faylı o'zgertilgen.\nOnı arxiv ishinde jan'alawdı qa'leysizbe?
+Mına fayldı jan'alaw iske aspadı\n'{0}'
+Redaktordı ashıw iske aspadı.
+Fayl virusqa uqsaydı (fayl atında uzın bos orınlar qollanılg'an).
+Operatsiya uzun jollı papkadan ju'klene almaydı.
+Siz bir fayl saylawın'ız kerek
+Siz bir yamasa onnan ko'p fayllardı saylawın'ız kerek
+Elementler sanı dım ko'p
+3300
+Shıg'arılmaqta
+Qısılmaqta
+Sınaw
+Ashılmaqta...
+Skanerlenbekte...
+3400
+Shıg'arıw
+&Bul jerge shıg'arıw:
+Shıg'arılatug'ın fayllar ushın orın ko'rsetin'.
+3410
+Jol usılı
+Tolıq jol atları
+Jolsız
+3420
+U'stinen jazıw usılı
+U'stine jazıwdan aldın soraw
+Soramastan u'stine jazıw
+Aldınnan bar fayllardı o'tkizip jiberiw
+Avtomat ta'rizde qayta at beriw
+Aldınnan bar fayllarg'a avtomat ta'rizde qayta at beriw
+3500
+Fayldın' u'stinen jazıwdı tastıyqlaw
+Tayınlang'an papka a'lle qashan islengen fayldı o'z ishine alg'an.
+Siz bar fayldı
+mına fayl menen almastırıwdı qa'leysizbe?
+{0} bayt
+A&vtomat ta'rizde qayta at beriw
+3700
+'{0}' faylı ushın tanıs bolmag'an qısıw usılı.
+'{0}' faylında mag'lıwmat qa'tesi tabıldı. Fayl buzılg'an.
+'{0}' faylında CRC qa'tesi tabıldı. Fayl buzılg'an.
+'{0}' shifrlang'an faylında mag'lıwmat qa'tesi tabıldı. Parol qa'te emespe?
+'{0}' shifrlang'an faylında CRC qa'tesi tabıldı. Parol qa'te emespe?
+3800
+Paroldi kiritiw
+Paroldi kiritin':
+Paroldi qayta kiritin':
+Paroldi &ko'rsetiw
+Paroller sa'ykes kelmedi
+Parol ushın tek latın a'lipbesi ha'riplerin, sanlar ha'm arnawlı simvollardı (!, #, $, ...) paydalanın'
+Parol dım uzın
+Parol
+3900
+O'tken waqıt:
+Qalg'an waqıt:
+Tolıq ko'lem:
+Tezlik:
+İslengen ko'lem:
+Qısıw da'rejesi:
+Qa'teler:
+Arxivler:
+4000
+Arxivke qosıw
+&Arxiv:
+&Jan'alaw usılı:
+Arxiv &formatı:
+Qısıw &da'rejesi:
+Qısıw &usılı:
+&So'zlik ko'lemi:
+So'z &ko'lemi:
+Blok ko'lemi:
+CPU ag'ımlar sanı:
+&Parametrler:
+Sazlawlar
+SF&X arxivin jaratıw
+Jazıw ushın ashılg'an fayllardı qısıw
+Shifrlaw
+Shifrlaw usılı:
+Fayl a&tların shifrlaw
+Qısıwg'a arnalg'an yad:
+Ajıratıwg'a arnalg'an yad:
+4050
+Qısıwsız
+En' tez
+Tez
+Qa'dimgi
+En' joqarı
+Ultra
+4060
+Fayllardı qosıw ha'm almastırıw
+Fayllardı jan'alaw ha'm qosıw
+Bar fayllardı jan'alaw
+Fayllardı sinxronlastırıw
+4070
+Belgilew
+Barlıq fayllar
+Fayl ko'lemi boyınsha
+U'ziliksiz
+6000
+Nusqasın alıw
+Ko'shiriw
+Mına papkag'a nusqasın alıw:
+Mına papkag'a ko'shiriw:
+Nusqa alınbaqta...
+Ko'shirilmekte...
+Qayta at berilmekte...
+Papkanı saylan'.
+Ko'rsetilgen operatsiya bul papka ushın qollanılmaydı.
+Fayl yaki papkag'a qayta at beriwde qa'te ju'z berdi
+Fayldın' nusqasın alıwdı tastıyqlan'
+Siz bul fayllardı anıq arxivke ko'shiriwdi qa'leysizbe
+6100
+Fayl o'shiriliwin tastıyqlaw
+Papka o'shiriliwin tastıyqlaw
+Fayllar toparının' o'shiriliwin tastıyqlaw
+'{0}' degendi anıq o'shiriwdi qa'leysizbe?
+'{0}' papkası ha'm onın' ishindegilerdi anıq o'shiriwdi qa'leysizbe?
+Bul obektlerdi ({0} dana) anıq o'shiriwdi qa'leysizbe?
+O'shirilmekte...
+Fayl yaki papkanı o'shiriwde qa'te ju'z berdi
+Sistema uzın jollı fayllardı sebetke ko'shire almaydı
+6300
+Papka jaratıw
+Fayl jaratıw
+Papka atı:
+Fayl atı:
+Jan'a papka
+Jan'a fayl
+Papkanı jaratıwda qa'te ju'z berdi
+Fayldı jaratıwda qa'te ju'z berdi
+6400
+Kommentariy
+&Kommentariy:
+Saylaw
+Saylawdı alıp taslaw
+Maska:
+6600
+Sazlawlar
+Papkalar tariyxı
+Diagnostik xabarlar
+Xabar
+7100
+Kompyuter
+Tarmaq
+Hu'jjetler
+Sistema
+7200
+Qosıw
+Shıg'arıw
+Sınaw
+Nusqa alıw
+Ko'shiriw
+O'shiriw
+Mag'lıwmat
+7300
+Fayldı bo'liw
+&Mınag'an bo'liw:
+Tomlarg'a &bo'liw (baytlarda):
+Bo'linbekte...
+Bo'liwdi tastıyqlan'
+Siz fayldı {0} bo'lekke anıq bo'liwdi qa'leysizbe?
+Bo'lek ko'lemi original fayl ko'leminen kishi bolıwı kerek
+Tom ko'lemi natuwrı berilgen
+Tomnın' ko'rsetilgen ko'lemi: {0} bayt.\nArxivti bunday tomlarg'a anıq bo'liwdi qa'leysizbe?
+7400
+Fayllardı biriktiriw
+&Mınag'an biriktiriw:
+Biriktirilmekte...
+Bo'lingen fayldın' tek birinshi bo'legin saylaw kerek
+Fayl bo'lingen fayldın' bo'legi retinde tanılmadı
+Bo'lingen fayldın' birden ko'p bo'legi tabılmadı
+7500
+Qadag'alaw summasın esaplaw...
+Qadag'alaw summası mag'lıwmatı
+Mag'lıwmatlar ushın CRC qadag'alaw summası:
+Mag'lıwmatlar ha'm atamalar ushın CRC qadag'alaw summası:
+7600
+O'nimlilikti tekseriw
+Yad ko'lemi:
+Qısıw
+Ajıratıw
+Reyting
+Ulıwma reyting
+Ha'zirgi
+Ja'mi
+Awırlıq
+Reyting / Awır.
+O'tkenler:

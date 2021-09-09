@@ -1,0 +1,495 @@
+;!@Lang2@!UTF-8!
+; 19.02 : 2019-11-12 : Stefán Örvar Sigmundsson
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Icelandic
+Íslenska
+401
+Í lagi
+Hætta við
+
+
+
+&Já
+&Nei
+&Loka
+Hjálp
+
+&Halda áfram
+440
+&Já við öllu
+&Nei við öllu
+Stöðva
+Endurræsa
+&Bakgrunnur
+&Forgrunnur
+&Gera hlé
+Í hléi
+Ert þú viss um að þú viljir hætta við?
+500
+&Skrá
+&Breyta
+&Skoða
+&Uppáhald
+&Verkfæri
+&Hjálp
+540
+&Opna
+&Opna að innanverðu
+&Opna að utanverðu
+&Skoða
+&Breyta
+&Endurnefna
+&Afrita í...
+&Færa í...
+&Eyða
+&Kljúfa skrá...
+&Sameina skrár...
+&Eiginleikar
+&Gera athugasemd...
+Reikna samtölu
+Mismunur
+Skapa möppu
+Skapa skrá
+&Hætta
+Tengill
+&Víxlstraumar
+600
+&Velja allt
+&Afvelja allt
+&Umsnúa vali
+Velja...
+Afvelja...
+Velja eftir tegund
+Afvelja eftir tegund
+700
+&Stórar táknmyndir
+&Smáar táknmyndir
+&Listi
+&Smáatriði
+730
+Óflokkað
+Flatsýn
+&2 spjöld
+&Verkfærastikur
+Opna rótarmöppu
+Upp um eitt stig
+Möppusaga...
+&Endurglæða
+Sjálfendurglæðun
+750
+Safnverkfærastika
+Stöðluð verkfærastika
+Stórir takkar
+Sýna takkatexta
+800
+&Bæta við möppu í uppáhald sem
+Bókamerki
+900
+&Valmöguleikar...
+&Afkastaprófa
+960
+&Efnisyfirlit...
+&Um 7-Zip...
+1003
+Slóð
+Nafn
+Framlenging
+Mappa
+Stærð
+Þjöppuð stærð
+Eiginleikar
+Skapað
+Aðkomið
+Dagsetning
+Þétt
+Athugasemd
+Dulkóðað
+Kljúfa fyrir
+Kljúfa eftir
+Orðasafn
+
+Tegund
+And
+Aðferð
+Stýrikerfi hýsils
+Skráakerfi
+Notandi
+Hópur
+Bálkur
+Athugasemd
+Staðsetning
+Slóðarforskeyti
+Möppur
+Skrár
+Útgáfa
+Bindi
+Fjölbindi
+Afsetning
+Tenglar
+Bálkar
+Bindi
+
+64-bita
+Háenda
+Gjörvi
+Efnisleg stærð
+Höfðastærð
+Samtala
+Einkenni
+Sýndarstaðfang
+Auðkenni
+Stutt nafn
+Skaparahugbúnaður
+Geirastærð
+Hamur
+Mjúktengill
+Villa
+Heildarstærð
+Laust pláss
+Klasastærð
+Merki
+Staðarnafn
+Veitandi
+NT-öryggi
+Víxlstraumur
+Aðstoðar-
+Eytt
+Er tré
+
+
+Villutegund
+Villur
+Villur
+Viðvaranir
+Viðvörun
+Straumar
+Víxlstraumar
+Víxlstraumastærð
+Sýndarstærð
+Afþjöppuð stærð
+Efnisleg heildarstærð
+Bindaskrá
+Undirtegund
+Stutt athugasemd
+Kóðasíða
+
+
+
+Halastærð
+Innfelld stubbastærð
+Tengill
+Harðtengill
+Skráhnútur
+
+Einungis lesanlegt
+2100
+Valmöguleikar
+Tungumál
+Tungumál:
+Ritill
+&Ritill:
+&Mismunur:
+2200
+Kerfi
+Tengja 7-Zip við:
+Allir notendur
+2301
+Innleiða 7-Zip í samhengisvalmynd skeljar
+Þrepaskipt samhengisvalmynd
+Samhengisvalmyndaratriði:
+Táknmyndir í samhengisvalmynd
+2320
+<Mappa>
+<Safn>
+Opna safn
+Útdraga skrár...
+Bæta í safn...
+Prófa safn
+Útdraga hér
+Útdraga í „{0}“
+Bæta við í „{0}“
+Þjappa og senda í rafpósti...
+Þjappa í „{0}“ og senda í rafpósti
+2400
+Möppur
+&Vinnslumappa
+&Tímabundin mappa kerfis
+&Núverandi
+&Tilgreind:
+Nota einungis fyrir fjarlægjanleg drif
+Tilgreina staðsetningu fyrir tímabundnar safnskrár.
+2500
+Stillingar
+Sýna „..“ atriði
+Sýna raunverulegar skráartáknmyndir
+Sýna kerfisvalmynd
+&Heildarraðaval
+&Sýna grindarlínur
+Einsmella til að opna atriði
+&Annars konar valhamur
+&Nota stórar minnissíður
+2900
+Um 7-Zip
+7-Zip er frjáls hugbúnaður
+3000
+Kerfið getur ekki ráðstafað nauðsynlega magninu af minninu
+Það eru engar villur
+„{0}“ hlutir valdir
+Getur ekki skapað möppuna „{0}“
+Uppfærsluaðgerðir eru ekki studdar fyrir þetta safn.
+Getur ekki opnað skrána „{0}“ sem safn
+Getur ekki opnað dulkóðaða safnið „{0}“. Rangt aðgangsorð?
+Óstudd safntegund
+Skráin „{0}“ er nú þegar til
+Skránni „{0}“ var breytt.\nVilt þú uppfæra hana í safninu?
+Getur ekki uppfært skrána\n„{0}“
+Getur ekki ræst ritilinn.
+Skráin lítur út eins og veira (skráarnafnið inniheldur löng bil).
+Aðgerðina er ekki hægt að kalla í frá möppu sem hefur langa slóð.
+Þú verður að velja eina skrá
+Þú verður að velja eina eða fleiri skrár
+Of mörg atriði
+Getur ekki opnað skrána sem „{0}“-safn
+Skráin er opin sem „{0}“-safn
+Safnið er opið með afsetningu
+3300
+Útdragandi
+Þjappandi
+Prófandi
+Opnandi...
+Skimandi...
+Fjarlægandi
+3320
+Bætandi við
+Uppfærandi
+Greinandi
+Endurtakandi
+Endurpakkandi
+Sleppandi
+Eyðandi
+Skapandi höfuð
+3400
+Afþjappa
+&Afþjappa í:
+Tilgreindu staðsetningu fyrir útdregnu skrárnar.
+3410
+Slóðarhamur:
+Full slóðarnöfn
+Engin slóðarnöfn
+Algild slóðarnöfn
+Afstæð slóðarnöfn
+3420
+Yfirritunarhamur:
+Spyrja áður en yfirritað er
+Yfirrita án kvaðningar
+Sleppa gildandi skrám
+Sjálfendurnefnun
+Sjálfendurnefnun gildandi skráa
+3430
+Útrýma afritinu af rótarmöppunni
+Endurheimta skráaröryggi
+3500
+Staðfesta skráaryfirritun
+Áfangastaðsmappan inniheldur nú þegar meðhöndluðu skrána.
+Vilt þú yfirrita gildandi skrána
+með þessari?
+{0} bæti
+Sjálfendurnefnun
+3700
+Óstudd þjöppunaraðferð fyrir „{0}“.
+Gagnavilla í „{0}“. Skráin er brotin
+CRC mistókst í „{0}“. Skráin er brotin.
+Gagnavilla í dulkóðuðu „{0}“. Rangt aðgangsorð?
+CRC mistókst í dulkóðuðu skránni „{0}“. Rangt aðgangsorð?
+3710
+Rangt aðgangsorð?
+3721
+Óstudd þjöppunaraðferð
+Gagnavilla
+CRC mistókst
+Ótiltæk gögn
+Óvæntur endir gagna
+Það eru gögn eftir endanum á aðalgögnunum
+Er ekki safn
+Höfðavillur
+Rangt aðgangsorð
+3763
+Ótiltækt upphaf safns
+Óstaðfest upphaf safns
+
+
+
+Óstuddur eiginleiki
+3800
+Innsláðu aðgangsorðið
+Innsláðu aðgangsorðið:
+Endurinnsláðu aðgangsorðið:
+&Sýna aðgangsorðið
+Aðgangsorðin samsvarast ekki
+Notaðu einungis enska stafi, tölur og sérstök rittákn (!, #, $, ...) í aðgangsorðunum
+Aðgangsorðið er of langt
+Aðgangsorð
+3900
+Liðinn tími:
+Tími eftir:
+Heildarstærð:
+Hraði:
+Meðhöndlað:
+Þjöppunarhlutfall:
+Villur:
+Söfn:
+4000
+Bæta við safni
+&Safn:
+&Uppfærsluhamur:
+&Safnsnið:
+&Þjöppunarsnið:
+&Þjöppunaraðferð:
+&Orðasafnsstærð:
+&Orðastærð:
+Þéttbálkstærð:
+Fjöldi gjörvaþráða:
+&Færibreytur:
+Valmöguleikar
+&Skapa SFX-safn
+Þjappa sameiginlegum skrám
+Dulkóðun
+Dulkóðunaraðferð:
+&Dulkóða skráarnöfn
+Minnisnotkun fyrir þjöppun:
+Minnisnotkun fyrir afþjöppun:
+Eyða skrám eftir þjöppun
+4040
+Geyma mjúktengla
+Geyma harðtengla
+Geyma víxlgagnastrauma
+Geyma skráaröryggi
+4050
+Geyma
+Hraðast
+Hratt
+Venjulegt
+Hámarks
+Öfga-
+4060
+Bæta við og yfirrita skrár
+Uppfæra og bæta við skrám
+Hressa við gildandi skrám
+Samstilla skrár
+4070
+Vafra
+Allar skrár
+Óþétt
+Þétt
+6000
+Afrita
+Færa
+Afrita í:
+Færa í:
+Afritandi...
+Færandi...
+Endurnefnandi...
+Veldu móttökumöppu.
+Aðferðin er ekki stutt fyrir þessa möppu.
+Villa við endurnefnun skráar eða möppu
+Staðfesta skráarafritun
+Ert þú viss um að þú viljir afrita skrárnar í safnið
+6100
+Staðfesta skráareyðingu
+Staðfesta möppueyðingu
+Staðfesta fjölskráaeyðingu
+Ert þú viss um að þú viljir eyða „{0}“?
+Ert þú viss um að þú viljir eyða möppunni „{0}“ og öllu innihaldinu hennar?
+Ert þú viss um að þú viljir eyða þessum {0} atriðum?
+Eyðandi...
+Villa við eyðingu skráar eða möppu
+Kerfið getur ekki fært skrá með langri slóð í Endurvinnslutunnu
+6300
+Skapa möppu
+Skapa skrá
+Möppunafn:
+Skráarnafn:
+Ný mappa
+Ný skrá
+Villa við sköpun möppunnar
+Villa við sköpun skráarinnar
+6400
+Athugasemd
+&Athugasemd:
+Velja
+Afvelja
+Mát:
+6600
+Eiginleikar
+Möppusaga
+Greiningarskilaboð
+Skilaboð
+7100
+Tölva
+Net
+Skjöl
+Kerfi
+7200
+Bæta við
+Afþjappa
+Prófa
+Afrita
+Færa
+Eyða
+Upplýsingar
+7300
+Kljúfa skrá
+&Kljúfa í:
+&Kljúfa í bindi, bæti:
+Kljúfandi...
+Staðfesta klofning
+Ert þú viss um að þú viljir kjúfa skrána í {0} bindi?
+Bindisstærð verður að vera minni en stærðin á upprunalegu skránni
+Röng bindisstærð
+Tilgreindu bindisstærð: {0} bæti.\nErt þú viss um að þú viljir kljúfa safnið í slík bindi?
+7400
+Sameina skrár
+&Sameina í:
+Sameinandi...
+Veldu einungis fyrsta hlutann af klofningsskránni
+Get ekki greint skrána sem hluta af klofningsskránni
+Get ekki fundið meira en einn hluta af klofningsskránni
+7500
+Reiknar samtölu...
+Samtöluupplýsingar
+CRC-samtala fyrir gögn:
+CRC-samtala fyrir gögn og nöfn:
+7600
+Afkastapróf
+Minnisnotkun:
+Þjappandi
+Afþjappandi
+Mat
+Heildarmat
+Núverandi
+Útkoma
+Gjörvanotkun
+Mat / Notkun
+Yfirferðir:
+7700
+Tengill
+Tengill
+Tengill frá:
+Tengill til:
+7710
+Tengiltegund
+Harðtengill
+Skráarmjúktengill
+Skráasafnsmjúktengill
+Skráasafnstenging

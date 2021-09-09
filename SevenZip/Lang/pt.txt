@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;       : Carlos Macao
+;       : João Alves
+;       : João Frade (100 NOME TR)
+;  4.46 : Rui Costa
+;  9.17 : Sérgio Marques 
+; 15.00 : Rui Aguiar
+;
+;
+;
+;
+;
+0
+7-Zip
+Portuguese Portugal
+Português
+401
+OK
+Cancelar
+
+
+
+&Sim
+&Não
+&Fechar
+Ajuda
+
+&Continuar
+440
+Sim p/ &Todos
+Não p/ T&odos
+Parar
+Reiniciar
+&Segundo plano
+P&rimeiro plano
+&Pausar
+Em pausa
+Quer mesmo cancelar?
+500
+&Ficheiro
+&Editar
+&Ver
+F&avoritos
+Ferramen&tas
+&Ajuda
+540
+&Abrir
+Abrir &dentro
+Abrir &fora
+&Ver
+&Editar
+Mudar& o nome
+&Copiar para...
+&Mover para...
+&Eliminar
+&Separar ficheiro...
+Com&binar ficheiros...
+P&ropriedades
+Come&ntário
+Calcular o checksum
+Diff
+Criar pasta
+Criar ficheiro
+&Sair
+Link
+&Alternar Fluxo
+600
+Seleccionar &Tudo
+Desmarcar tudo
+&Inverter selecção
+Seleccionar...
+Desmarcar...
+Seleccionar por tipo
+Desmarcar por tipo
+700
+Ícones &grandes
+Ícones &pequenos
+&Lista
+&Detalhes
+730
+Sem ordem
+Vista plana
+&2 painéis
+&Barras de ferramentas
+Abrir pasta root
+Subir um nível
+Histórico de pastas...
+&Actualizar
+Auto Actualizar
+750
+Barra de ferramentas do arquivo
+Barra de ferramentas pré-definida
+Botões grandes
+Mostrar a legenda dos botões
+800
+&Adicionar a pasta aos favoritos como
+Marcador
+900
+&Opções...
+&Desempenho
+960
+&Conteúdo...
+&Acerca do 7-Zip...
+1003
+Caminho
+Nome
+Extensão
+pasta
+Tamanho
+Tamanho comprimido
+Atributos
+Criado
+Acedido
+Modificado
+sólido
+Comentado
+Encriptado
+Separar antes
+Separar depois
+Dicionário
+
+Tipo
+Anti
+Método
+SO anfitrião
+Sistema de ficheiros
+Utilizador
+Grupo
+Bloco
+Comentário
+Posição
+Prefixo do destino
+pastas
+ficheiros
+Versão
+Volume
+Multivolume
+Não definido
+Ligações
+Blocos
+Volumes
+
+64-bit
+Big-endian
+CPU
+Tamanho físico
+Tamanho dos cabeçalhos
+Soma de verificação
+Características
+Endereço virtual
+ID
+Abreviatura
+Criador da aplicação
+Tamanho do sector
+Modo
+Ligação
+Erro
+Tamanho total
+Espaço livre
+Tamanho do sector
+Etiqueta
+Nome local
+Fornecedor
+Segurança NT
+Alternar Fluxo
+Aux
+Excluído
+É Árvore
+
+
+Tipo de Erro
+Erros
+Erros
+Avisos
+Aviso
+Fluxo
+Alternar Fluxo
+Alternate Tamanho de Fluxos
+Tamanho Virtual
+Tamanho Descompactado
+Tamanho Físico Total
+Índice de Volume
+SubTipo
+Breve Comentário
+Página de Código
+
+
+
+Tamanho Tail
+Tamanho Stub Incorporado
+Link
+Link do Disco Rígido
+iNode
+
+Só de leitura
+2100
+Opções
+Idioma
+Idioma:
+Editor
+&Editor:
+&Diff:
+2200
+Sistema
+Associar o 7-Zip com:
+Todos os utilizadores
+2301
+Integrar o 7-Zip no menu de contexto
+Menu de contexto em cascata
+Itens do menu de contexto:
+Icons no menu de contexto
+2320
+<Pasta>
+<Arquivo>
+Abrir arquivo
+Extrair ficheiros...
+Adicionar ao arquivo...
+Testar arquivo
+Extrair para aqui
+Extrair para {0}
+Adicionar a {0}
+Comprimir e enviar por e-mail...
+Comprimir para {0} e enviar por e-mail
+2400
+pastas
+&Pasta de trabalho
+Pasta &temporária
+&Actual
+&Especificada:
+Utilizar só para discos amovíveis
+Especifique a pasta para os ficheiros temporários.
+2500
+Definições
+Mostrar item ".."
+Mostrar os ícones reais dos ficheiros
+Mostrar o menu do sistema
+Selecção de linha &completa
+Mostrar as linhas da &grelha
+Clique uma vez para abrir um item
+Modo de seleçção &alternativo
+Utilizar páginas de &memória grandes
+2900
+Acerca do 7-Zip
+O 7-Zip é um programa gratuito.\n\nO 7-Zip foi traduzido por: Rui Aguiar\n\trui_a_aguiar@hotmail.com
+3000
+O sistema não consegue alocar a memória necessária
+Não existem erros
+{0} objecto(s) seleccionado(s)
+Não é possível criar a pasta '{0}'
+Este tipo de arquivo não permite actualizações.
+Não é possível abrir o ficheiro '{0}' como arquivo
+Não é possível abrir o arquivo encriptado '{0}'. Palavra-passe errada?
+O arquivo não é suportado
+Já existe o ficheiro {0}
+O ficheiro '{0}' foi modificado.\nQuer actualizá-lo no arquivo?
+Não foi possível actualizar o ficheiro\n'{0}'
+Não foi possível iniciar o editor.
+O ficheiro parece ser um vírus (o nome do ficheiro contém muitos espaços em branco).
+A operação não pode ser invocada a partir de uma pasta com uma longa localização.
+Tem que seleccionar um ficheiro
+Tem que seleccionar um ou mais ficheiros
+Demasiados itens
+Não é possível abrir o ficheiro como arquivo {0}
+Ficheiro aberto como arquivo {0}
+Arquivo aberto com offset
+3300
+A extrair...
+A comprimir
+A testar...
+A abrir...
+A pesquisar...
+Removendo
+3320
+A adicionar...
+A actualizar...
+A analisar...
+Replicando
+A recomprimir...
+A ignorar...
+A eliminar
+Criando cabeçalho
+3400
+Extrair
+E&xtrair para:
+Especifique o destino para os ficheiros extraídos.
+3410
+Modo de nome de pasta
+Nome de pastas completo
+Sem nome de pastas
+Caminhos absolutos
+Caminhos relativos
+3420
+Modo de sobrescrever
+Perguntar antes de substituir
+Sem confirmação
+Ignorar ficheiros existentes
+Mudar o nome automaticamente.
+Mudar o nome automomaticamente os ficheiros existentes
+3430
+Eliminar a duplicação da pasta de raiz
+Restaurar segurança de ficheiros
+3500
+Confirmar substituição de ficheiro
+A pasta já possui um ficheiro com o mesmo nome.
+Deseja substituir o ficheiro existente
+por este?
+{0} bytes
+Mudar o nome a&utomaticamente
+3700
+O método de compressão é inválido para '{0}'.
+Erro de dados em '{0}'. O arquivo está danificado.
+CRC falhou em '{0}'. O arquivo está danificado.
+Erro de dados no ficheiro encriptado '{0}'. Palavra-passe errada?
+CRC falhou no ficheiro encriptado '{0}'. Palavra-passe errada?
+3710
+Palavra-passe errada?
+3721
+Método de compressão não suportado
+Erro nos dados
+O CRC falhou
+Dados indisponíveis
+Fim inesperado nos dados
+Existem alguns dados após o final dos dados de carga útil
+Não é um arquivo
+Erro nos Cabeçalhos
+Palavra-passe errada
+3763
+Início de arquivo indisponível
+Início de arquivo não confirmado
+
+
+
+Funcionalidade não suportada
+3800
+Insira a palavra-passe
+Introduza a palavra-passe:
+Reintroduza a palavra-passe:
+&Mostrar palavra-passe
+As palavras-passe não coincidem
+Para a palavra-passe, utilize apenas letras inglesas, números e os caracteres especiais (!, #, $, ...)
+A palavra-passe é muito comprida
+Palavra-passe
+3900
+Tempo decorrido:
+Tempo restante:
+Tamanho:
+Velocidade:
+Processado:
+Rácio de compressão:
+Erros:
+Arquivos:
+4000
+Adicionar ao arquivo
+&Arquivo:
+&Modo de actualização:
+&Formato do arquivo:
+Níve&l de compressão:
+Método de &compressão:
+Tamanho do &dicionário:
+&Tamanho da &palavra:
+Tamanho dos blocos sólidos:
+Nº de processos do CPU:
+&Parâmetros:
+Opções
+Criar arquivo SF&X
+Comprimir ficheiros partilhados
+Encriptação
+Método de encriptação:
+Encriptar &nomes de ficheiros
+Utilização de memória para compressão:
+Utilização de memória para descompressão:
+Excluir ficheiros após compressão
+4040
+Armazenar links simbólicos
+Armazenar links do disco rígido
+Armazenar fluxo de dados alternados
+Armazenar segurança de ficheiros
+4050
+Guardar
+Muito rápido
+Rápido
+Normal
+Máxima
+Ultra
+4060
+Adicionar e substituir ficheiros
+Actualizar e adicionar ficheiros
+Actualizar ficheiros
+Sincronizar ficheiros
+4070
+Procurar
+Todos os ficheiros
+Não sólido
+sólido
+6000
+Copiar
+Mover
+Copiar para:
+Mover para:
+A copiar...
+A mover...
+A mudar o nome...
+Seleccione a pasta de destino.
+Operação não suportada.
+Erro ao mudar o nome do ficheiro ou pasta
+Confirmar a cópia dos ficheiros
+Quer mesmo copiar os ficheiros para o arquivo?
+6100
+Confirmar a eliminação do ficheiro
+Confirmar a eliminação da pasta
+Confirmar a eliminação de múltiplos ficheiros
+Quer mesmo eliminar o '{0}'?
+Quer mesmo eliminar a pasta '{0}' e todo o seu conteúdo?
+Quer mesmo eliminar os itens {0}?
+A eliminar...
+Erro ao eliminar o ficheiro ou pasta
+O sistema não consegue mover para a reciclagem um ficheiro com uma localização longa
+6300
+Criar pasta
+Criar ficheiro
+Nome da pasta:
+Nome do ficheiro:
+Nova Pasta
+Novo ficheiro
+Erro ao criar a pasta
+Erro ao criar ficheiro
+6400
+Comentário
+&Comentário:
+Seleccionar
+Desseleccionar
+Máscara:
+6600
+Propriedades
+Histórico de pastas
+Mensagens de diagnóstico
+Mensagem
+7100
+Computador
+Rede
+Documentos
+Sistema
+7200
+Adicionar
+Extrair
+Testar
+Copiar
+Mover
+Eliminar
+Info
+7300
+Separar ficheiro
+&Separar para:
+Separar por &volumes, bytes:
+A separar...
+Confirmar separação
+Quer mesmo separar o ficheiro em {0} volumes?
+O tamanho do volume tem de ser inferior ao tamanho do ficheiro original
+Tamanho do volume incorrecto
+Tamanho do volume especificado: {0} bytes.\nQuer mesmo separar o arquivo nestes volumes?
+7400
+Combinar ficheiros
+&Combinar para:
+A combinar...
+Seleccione apenas o primeiro ficheiro
+Não foi possivel apagar o ficheiro como parte do ficheiro dividido
+Não foi possível encontrar mais do que uma parte do ficheiro dividido
+7500
+A calcular o checksum...
+Informações do checksum
+CRC checksum para dados:
+CRC checksum para dados e nome:
+7600
+Desempenho
+Utilização de Memória:
+A comprimir
+A descomprimir
+Desempenho
+Desempenho Total
+Actual
+Resultante
+Utilização CPU
+Desemp. / Utiliza.
+Passagens:
+7700
+Link
+Link
+Link de:
+Link para:
+7710
+Link Tipo
+Link do Disco Rígido
+Link do Ficheiro Simbólico
+Link do Directório Simbólico
+Directório de Junção

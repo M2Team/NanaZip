@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  3.08 : Ari Ryynanen
+;  4.30 : Jarko P.
+;  4.42 : Juhani Valtasalmi
+;  9.35b : T.Sakkara
+;  15.05 : 2015-08-07 : Lauri Kenttä
+; (19.00): 2020-12-28 : Sampo Hippeläinen
+;
+;
+;
+;
+;
+0
+7-Zip
+Finnish
+Suomi
+401
+OK
+Peruuta
+
+
+
+&Kyllä
+&Ei
+&Sulje
+Ohje
+
+&Jatka
+440
+Kyllä k&aikkiin
+E&i kaikkiin
+Pysäytä
+Aloita uudelleen
+Aja &taustalla
+Aja &edustalla
+&Tauko
+Tauolla
+Peruutetaanko toiminto?
+500
+&Tiedosto
+&Muokkaa
+&Näytä
+&Suosikit
+Työ&kalut
+&Ohje
+540
+&Avaa
+Avaa s&isäisesti
+Avaa ulkoisesti
+&Näytä
+&Muokkaa
+Nimeä &uudelleen
+&Kopioi...
+&Siirrä...
+&Poista
+&Jaa osiin...
+&Yhdistä jaetut...
+&Ominaisuudet
+Ku&vaus
+Laske tarkiste
+Erot
+Luo kansio
+Luo tiedosto
+&Lopeta
+Linkitä
+Vaihtoehtoiset virrat
+600
+V&alitse kaikki
+Poista &valinnat
+&Käänteinen valinta
+Valitse...
+Poista valinta...
+Valitse tyypeittäin
+Poista valinta tyypeittäin
+700
+Suu&ret kuvakkeet
+&Pienet kuvakkeet
+&Luettelo
+&Tiedot
+730
+Alkuperäinen järjestys
+Luettele myös kansioiden tiedostot
+&Kaksi paneelia
+&Työkalupalkit
+Avaa pääkansio
+Avaa yläkansio
+Kansiohistoria...
+P&äivitä
+Automaattipäivitys
+750
+Pakettipalkki
+Vakiopalkki
+Suuret painikkeet
+Näytä painiketekstit
+800
+&Lisää kansio suosikkeihin
+Kirjanmerkki
+900
+&Asetukset...
+&Nopeustesti
+960
+&Sisältö...
+&Tietoja ohjelmasta...
+1003
+Polku
+Nimi
+Pääte
+Kansio
+Koko
+Pakattu koko
+Määritteet
+Luotu
+Käytetty
+Muokattu
+Kiinteä
+Kuvailtu
+Salattu
+Jaa ennen
+Jaa jälkeen
+Sanakirja
+Tarkiste
+Laji
+Vastakohta
+Menetelmä
+Käyttöjärjestelmä
+Tiedostojärjestelmä
+Käyttäjä
+Ryhmä
+Lohko
+Kuvaus
+Kohta
+Polun etuliite
+Kansioita
+Tiedostoja
+Versio
+Nimi
+Jaettu osiin
+Siirtymä
+Linkit
+Lohkot
+Nimet
+
+64-bittinen
+Big-endian
+Suoritin
+Fyysinen koko
+Otsikon koko
+Tarkiste
+Ominaisuudet
+Näennäisosoite
+ID
+Lyhyt nimi
+Luontisovellus
+Sektorikoko
+Tila
+Symbolinen linkki
+Virhe
+Aseman koko
+Vapaata tilaa
+Varausyksikön koko
+Nimi
+Paikallinen nimi
+Palveluntarjoja
+NT-suojaukset
+Vaihtoehtoinen virta
+Muu
+Poistettu
+On kansiorakenne
+
+
+Virhelaji
+Virheet
+Virheet
+Varoitukset
+Varoitus
+Virrat
+Vaihtoehtoiset virrat
+Vaihtoehtoisten virtojen koko
+Näennäiskoko
+Pakkaamaton koko
+Fyysinen koko
+Aseman indeksi
+Alilaji
+Kuvaus
+Koodisivu
+
+
+
+Loppupään koko
+Upotetun segmentin koko
+Linkki
+Kiinteä linkki
+iNode
+
+Vain luku
+2100
+Asetukset
+Kieli
+Kieli:
+Muokkaimet
+&Tekstimuokkain:
+&Erojen etsintä:
+2200
+Järjestelmä
+Kytke 7-Zip seuraaviin tiedostotyypeihin:
+Kaikki käyttäjät
+2301
+Kytke 7-Zip järjestelmän valikoihin.
+Ryhmitetty kontekstivalikko
+Kontekstivalikon sisältö:
+Näytä kontekstivalikon kuvakkeet
+2320
+<Kansio>
+<Paketti>
+Avaa
+Pura...
+Lisää pakettiin...
+Eheystarkistus
+Pura tänne
+Pura kansioon {0}
+Lisää pakettiin {0}
+Pakkaa tiedostot ja lähetä...
+Lisää pakettiin {0} ja lähetä
+2400
+Kansiot
+&Työkansio
+&Järjestelmän väliaikaiskansio
+&Nykyinen kansio
+&Valittu kansio:
+Käytä vain siirrettäville tietovälineille
+Määritä väliaikaistiedostojen sijainti.
+2500
+Asetukset
+Näytä &yläkansion symboli
+Näytä oike&at tiedostokuvakkeet
+Näytä &järjestelmävalikko
+&Valitse koko rivi
+Näytä &ruudukko
+Avaa &kertanapsautuksella
+Vaihtoehtoinen valintojen &esitystapa
+Käytä &suuria muistisivuja
+2900
+Tietoja
+7-Zip on vapaa ohjelmisto.
+3000
+Ei riittävästi muistia toimintoa varten
+Ei virheitä.
+{0} kohde(tta) valittu
+Ei voida luoda kansiota '{0}'
+Tätä pakettia ei voi päivittää.
+Tiedoston '{0}' pakkausta ei voi purkaa.
+Ei voi avata salattua pakettia '{0}'. Väärä salasana?
+Pakkaustapaa ei tueta
+Tiedosto {0} on jo olemassa
+Tiedostoa '{0}' on muutettu.\nHaluatko päivittää paketin?
+Ei voida päivittää tiedostoa \n'{0}'.
+Muokkainta ei voida käynnistää.
+Tiedosto vaikuttaa haittaohjelmalta, sillä sen nimi sisältää peräkkäisiä välilyöntejä.
+Toimintoa ei voi suorittaa kansiosta, jonka polku on pitkä.
+Valitse yksi tiedosto
+Valitse vähintään yksi tiedosto
+Liian monta kohdetta.
+Ei voida avata tiedostoa {0}-pakettina
+Tiedosto on avattu {0}-pakettina
+Paketti on auki eri alkukohdasta (offset)
+3300
+Puretaan paketti
+Lisätään pakettiin
+Eheystarkistus
+Avataan...
+Etsitään...
+Poistetaan
+3320
+Lisätään
+Päivitetään
+Analysoidaan
+Kopioidaan
+Pakataan uudestaan
+Ohitetaan
+Poistetaan
+Luodaan otsikkoa
+3400
+Pura
+&Pura kansioon
+Määritä puretuille tiedostoille sijainti.
+3410
+Polut:
+Täydet polut
+Ei polkuja (vain nimi)
+Absoluuttiset polut
+Suhteelliset polut
+3420
+Samannimiset tiedostot:
+Kysy tapauskohtaisesti
+Korvaa
+Ohita
+Uudelleennimeä automaattisesti
+Uudelleennimeä entiset automaattisesti
+3430
+Estä pääkansion kahdennus
+Palauta tiedostojen suojaukset
+3500
+Vahvista tiedoston korvaus
+Kansiossa on jo samanniminen tiedosto.
+Korvataanko aiempi tiedosto
+tällä tiedostolla?
+{0} tavua
+&Uudelleennimeä automaattisesti
+3700
+Tiedoston '{0}' pakkaustapaa ei tueta.
+Sisältövirhe tiedostossa '{0}'. Tiedosto on vioittunut.
+Tiedoston '{0}' eheystarkistus epäonnistui. Tiedosto on vioittunut.
+Virhe avattaessa salattua tiedostoa '{0}'. Väärä salasana?
+Tarkistevirhe avattaessa salattua tiedostoa '{0}'. Väärä salasana?
+3710
+Väärä salasana?
+3721
+Pakkaustapaa ei tueta
+Sisältövirhe
+Tarkistevirhe
+Sisältö ei ole käytettävissä
+Sisällön ennenaikainen loppuminen
+Varsinaisen tietosisällön jälkeen on ylimääräistä sisältöä
+Tiedosto ei ole pakattu
+Otsikkovirhe
+Väärä salasana
+3763
+Pakkauksen alku ei käytettävissä
+Pakkauksen alkua ei vahvistettu
+
+
+
+Toiminto ei tuettu
+3800
+Syötä salasana
+Syötä salasana:
+Toista salasana:
+Näytä &salasana
+Salasanat eivät täsmää
+Salasanassa voi käyttää numeroita ja erikoismerkkejä, mutta EI skandinaavisia kirjaimia.
+Liian pitkä salasana
+Salasana
+3900
+Aikaa kulunut:
+Aikaa jäljellä:
+Koko:
+Nopeus:
+Käsitelty:
+Pakkaussuhde:
+Virheitä:
+Paketteja:
+4000
+Lisää pakettiin
+&Paketti:
+&Päivitystapa:
+Pakka&usmuoto:
+Pakkauksen &taso:
+Pakkaus&menetelmä:
+&Sanakirjan koko:
+&Sanakoko:
+Lohkokoko:
+Suoritinsäikeet:
+&Parametrit:
+Lisäasetukset
+Luo itsepurkava paketti
+Pakkaa auki olevat tiedostot
+Salaus
+Salausalgoritmi
+Salaa tiedosto&nimet
+Pakkaamiseen vaadittava muisti:
+Purkamiseen vaadittava muisti:
+Poista tiedostot pakkaamisen jälkeen
+4040
+Tallenna symboliset linkit
+Tallenna kovat linkit
+Tallenna vaihtoehtoiset virrat
+Tallenna tiedostojen suojaustiedot
+4050
+Ei pakkausta
+Nopein
+Nopea
+Normaali
+Maksimi
+Ultra
+4060
+Lisää ja korvaa
+Päivitä ja lisää
+Päivitä
+Synkronoi
+4070
+Selaa
+Kaikki tiedostot
+Irrallinen
+Kiinteä
+6000
+Kopioi
+Siirrä
+Kopioi kansioon:
+Siirrä kansioon:
+Kopioidaan...
+Siirretään...
+Nimetään uudelleen...
+Valitse kohdekansio.
+Toiminto ei ole tuettu tälle kansiolle.
+Virhe uudelleennimettäessä tiedostoa tai kansiota
+Vahvista tiedoston kopioiminen
+Kopioidaanko tiedostot pakettiin
+6100
+Vahvista tiedoston poisto
+Vahvista kansion poisto
+Vahvista useiden kohteiden poisto
+Poistetaanko tiedosto '{0}'?
+Poistetaanko kansio '{0}' ja kaikki sen sisältö?
+Poistetaanko nämä {0} kohdetta?
+Poistetaan...
+Virhe poistettaessa tiedostoa tai kansiota
+Roskakoriin ei voida siirtää tiedostoa, jolla on pitkä polku
+6300
+Luo uusi kansio
+Luo uusi tiedosto
+Kansion nimi:
+Tiedostonimi:
+Uusi kansio
+Uusi tiedosto
+Virhe luotaessa kansiota
+Virhe luotaessa tiedostoa
+6400
+Kuvaus
+&Kuvaus:
+Valitse
+Poista valinta
+Maski:
+6600
+Ominaisuudet
+Kansiohistoria
+Tekniset tiedot
+Viesti
+7100
+Tietokone
+Verkko
+Asiakirjat
+Järjestelmä
+7200
+Lisää
+Pura
+Eheystarkistus
+Kopioi
+Siirrä
+Poista
+Ominaisuudet
+7300
+Jaa tiedosto osiin
+&Jaa kansioon:
+&Osien koko jaettaessa:
+Jaetaan osiin...
+Vahvista jakaminen.
+Jaetaanko tiedosto {0} osaan?
+Jaetun osan koon pitää olla alkuperäistä pienempi.
+Jaetun osan koko ei kelpaa
+Jaettavien osien koko: {0} tavua.\nJaetaanko tiedosto sen kokoisiin osiin?
+7400
+Yhdistä jaetut tiedostot
+&Yhdistä kansioon:
+Yhdistetään...
+Valitse jaetusta tiedostosta vain ensimmäinen osa
+Tiedosto ei ole jaetun tiedoston osa
+Jaetun tiedoston osista löydettiin vain yksi
+7500
+Lasketaan tarkiste...
+Tarkisteet
+Sisällön tarkiste:
+Sisällön ja tiedostonimien tarkiste:
+7600
+Nopeustesti
+Muistin käyttö:
+Pakkaaminen
+Purkaminen
+Tulos
+Kokonaistulos
+Nykyinen
+Mitattu
+Suoritinkäyttö
+Luokitus / käyttö
+Kierrokset:
+7700
+Linkitys
+Linkitä
+Linkitys kohteesta:
+Linkitys kohteeseen:
+7710
+Linkin tyyppi
+Kova linkki
+Symbolinen tiedostolinkki
+Symbolinen kansiolinkki
+Kansioliitos

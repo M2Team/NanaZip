@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;       : Lazar
+;  9.07 : Ozzii
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Serbian - Latin
+Srpski - latinica
+401
+U redu
+Otkaži
+
+
+
+Da
+Ne
+Zatvori
+Pomoć
+
+Nastavi
+440
+Da za sve
+Ne za sve
+Stani
+Ponovo
+Pozadina
+Na vrhu
+Pauza
+Pauza
+Da li ste sigurni da želite da prekinete?
+500
+Datoteka
+Uređivanje
+Pregled
+Omiljeno
+Alati
+Pomoć
+540
+Pogledaj
+Otvori sa 7-Zip-om
+Otvori sa pridruženom programom
+Pregledaj
+Promeni
+Preimenuj
+Kopiraj u...
+Premesti u...
+Obriši
+Podeli fajl...
+Spoj delove...
+Svojstva
+Komentar
+Izračunajte provernu veličinu
+razlika
+Nova fascikla
+Nova datoteka
+Izlaz
+600
+Izaberi sve
+Poništi izbor svega
+Obrnuti izbor
+Izaberi...
+Poništi izbor...
+Izaberi po tipu
+Poništi izbor po tipu
+700
+Ikone
+Naporedno slaganje
+Spisak
+Detalji
+730
+Bez sortiranja
+Ravan pregled
+2 Prozora
+Trake sa alatkama
+Otvori početnu fasciklu
+Gore za jedan nivo
+Hronologija...
+Osvežavanje
+750
+Rad sa arhivama
+Rad sa datotekama
+Velika dugmad
+Prikaži tekst ispod dugmadi
+800
+Dodaj
+Izaberi
+900
+Opcije...
+Benchmark
+960
+Pomoć...
+O programu...
+1003
+Putanja
+Naziv
+Tip
+Fascikla
+Veličina
+Veličina u zapakovanom stanju
+Atributi
+Kreirana
+Pristupano
+Promenjeno
+Solidno
+Komentar
+Šifrovano
+Podeli pre
+Podeli posle
+Rečnik
+CRC
+Tip
+Anti
+Metod
+Operativni sistem
+Sistem datoteka
+Korisnik
+Grupa
+Blok
+Komentar
+Položaj
+Prefiks putanje
+Fascikle
+Datoteke
+Verzija
+Volumen
+VišeVolumena
+Ofset
+Linkovi
+Blokovi
+Volumeni
+
+64-bit
+Big-endian
+Procesor
+Fizička veličina
+Veličina zaglavlja
+Provera rezultata
+Karakteristike
+Virtuelna adresa
+ID
+Kratko ime
+Kreator aplikacije
+Veličina sektora
+Način
+Link
+Greška
+Ukupni kapacitet
+Slobodni prostor
+Veličina cluster-a
+Naziv
+Lokalno ime
+Provajder
+2100
+Opcije
+Jezik
+Jezik:
+Promene u datotekama
+Program:
+Razlika:
+2200
+Sistem
+7-Zip otvara sledeće tipove datoteka:
+2301
+Ubaci 7-Zip u sistemski meni
+Kaskadni sistemski meni
+Stavke sistemskog menija:
+2320
+<Folder>
+<Archive>
+Otvori arhivu
+Izdvoj datoteke...
+Dodaj u arhivu...
+Testiraj arhivu
+Izdvoj ovde
+Izdvoj u {0}
+Dodaj u {0}
+Dodaj i napravi e-mail...
+Dodaj u {0} i napravi e-mail
+2400
+Fascikle
+Radna fascikla
+Koristi Windows-ovu privremenu fasciklu
+Trenutna
+Navedena:
+Koristi samo za izmenjive medije
+Navedite lokaciju za smeštanje privremenih datoteka.
+2500
+Podešavanja
+Prikaži ".."
+Prikaži prave sličice datoteka
+Prikaži sistemski meni
+Obeleži ceo red
+Prikaži linije mreže
+Jedan klik za otvaranje stavke
+Alternativni način za biranje
+Koristi velike memorijske blokove
+2900
+O programu
+7-Zip je besplatan program.
+3000
+Sistem ne može da izdvoji potrebnu količinu memorije
+Nije bilo nikakvih grešaka
+{0} objekat(a) izabrano
+Ne mogu da kreiram Fasciklu '{0}'
+Operacija osvežavanja nije dozvoljena za ovu arhivu.
+Ne mogu da otvorim datoteku '(0)' kao arhiva
+Ne mogu da otvorim šifrovanu arhivu '(0)'. Pogrešna lozinka?
+Nepodržan tip arhive
+Datoteka {0} već postoji
+Datoteka '{0}' je izmjenjena.\nDa li želite ažurirati arhivu?
+Nije moguće ažurirati datoteku\n'{0}'
+Nije moguće započeti uređivanje.
+Datoteka izgleda kao virus (ime datoteke sadrži puno razmaka u imenu).
+Operacija ne može biti pozvana iz fascikle koja ima dugu putanju.
+Morate da izaberete neku datoteku
+Morate da izaberete jednu ili više datoteka
+Isuviše stavki
+3300
+Izdvajanje
+Dodajem
+Testiranje
+Otvaranje u toku...
+Skeniranje...
+3400
+Izdvoj
+Izdvoj u:
+Navedi lokaciju gde će se izdvajati datoteke iz arhiva.
+3410
+Putanje
+Puna putanja
+Bez putanje
+3420
+Zamena
+Pitaj pre nego što zameniš
+Zameni bez zapitkivanja
+Preskoči postojeće datoteke
+Automatska promena naziva
+Automatska promena naziva postojećih datoteka
+3500
+Potvrdi zamenu datoteke
+Ciljna fascikla već sadrži datoteku koja se trenutno obrađuje.
+Da li želite da zamenite postojeću datoteku
+sa ovom?
+{0} bajtova
+Automatska promena naziva
+3700
+Nepodržani metod kompresije za '{0}'.
+Greška u '{0}'. Datoteka je neispravana.
+CRC greška u '{0}'. Datoteka je neispravana.
+Greške u kodiranu datoteku '(0)' Pogrešna lozinka.
+CRC greška u šifrovane datoteke '(0)' Pogrešna lozinka.
+3800
+Unesite lozinku
+Unesite lozinku:
+Ponovo unesite lozinku:
+Prikaži lozinku
+Lozinke se ne poklapaju
+Koristi samo engleska slova, brojeva i specijalnih znakova (!, #, $, ...) Za lozinke
+Lozinka je predugačka
+Šifra
+3900
+Proteklo vreme:
+Preostalo vreme:
+Veličina:
+Brzina:
+Obrađeno:
+Kompresioni odnos:
+Greške:
+Arhive:
+4000
+Dodaj u arhivu
+Arhiva:
+Nadogradnja arhiva:
+Format arhive:
+Nivo kompresije:
+Tip kompresije:
+Dictionary size:
+Word size:
+Veličina čvrstog bloka:
+Broj niza procesora:
+Parametri:
+Opcije
+Kreiraj SFX arhivu
+Kompresija deljene datoteka
+Šifrovanje
+Metoda šifrovanja:
+Šifruj nazive datoteka
+Potrebna memorija - kompresija:
+Potrebna memorija - dekompresija:
+4050
+Bez kompresije
+Brže
+Brzo
+Normalno
+Maksimalno
+Najbrže
+4060
+Dodaj i zameni datoteke
+Osveži i dodaj datoteke
+Ozveži postojeće datoteke
+Sinhronizuj datoteke
+4070
+Pregledaj
+Sve datoteke
+Ne-čvrste
+Čvrsto
+6000
+Kopiraj
+Iseci
+Kopiraj u:
+Premesti u:
+Kopiranje u toku...
+Premeštanje u toku...
+Preimenovanje u toku...
+Izaberite odredišnu fasciklu.
+Operacija nije podržana.
+Greška pri preimenovanju datoteke ili fascikle
+Potvrdi kopiranje datoteke
+Da li ste sigurni da želite da kopirate datoteke u arhivu
+6100
+Potvrdite brisanje datoteke
+Potvrdite brisanje fascikle
+Potvrdite višestruko brisanje datoteka
+Jeste li sigurni da želite da obrišete '{0}'?
+Jeste li sigurni da želite da obrišete fasciklu '{0}' i sav njen sadržaj?
+Jeste li sigurni da želite da obrišete ove {0} podatke?
+Brisanje u toku...
+Greška pri brisanju datoteke ili fascikle
+Sistem ne može da premesti datoteku sa dugom putu u korpu za otpatke
+6300
+Kreiraj fasciklu
+Kreiraj datoteku
+Ime fascikle:
+Ime datoteke:
+Nova fascikla
+Nova datoteka
+Greška pri kreiranju fascikli
+Greška pri kreiranju datoteka
+6400
+Komentar
+Komentar:
+Odaberi
+Poništi izbor
+Maska:
+6600
+Osobine
+Hronologija
+Dijagnostičke poruke
+Poruke
+7100
+Računar
+Mreža
+Dokumenti
+Sistem
+7200
+Dodaj
+Izdvoj
+Testiraj
+Kopiraj
+Premesti
+Izbriši
+Svojstva
+7300
+Podeli datoteku
+Podeli na:
+Podeli na delove, bajti:
+Podela...
+Potvrda podele
+Da li ste sigurni da želite da podelite datoteku na (0) dela?
+Veličine dela mora biti manji od veličine originalne datoteke
+Neispravna veličina volumena
+Određena veličina volumena: {0} bajtova.\nDa li ste sigurni da želite da podelite arhivu u tih volumena?
+7400
+Sastavi datoteke
+Sastavi u:
+Spajanje...
+Izaberite samo prvi deo podele datoteke
+Ne mogu da otkrijem datoteku kao deo podele
+Ne može se naći više od jednog dela podele
+7500
+Izračunavanje proverne veličine...
+Informacija o proverne veličine
+CRC porvera za podatak:
+CRC provera za podatak i imena:
+7600
+Benchmark
+Korišćenje memorije:
+Kompresija
+Dekompresija
+Ocena
+Potpuna ocena
+Trenutno
+Rezultat
+Upotreba procesora
+Rejting/Upotreba
+Prolazi:

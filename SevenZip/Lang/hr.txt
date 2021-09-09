@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  3.12 : Alan Šimek
+;  4.53 : Hasan Osmanagić
+;  9.07 : 
+; 15.05 : 2015-06-15 : Stjepan Treger  
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Croatian
+Hrvatski
+401
+U redu
+Odustani
+
+
+
+&Da
+&Ne
+&Zatvori
+Pomoć
+
+Nastavi
+440
+Da za &Sve
+Ne za Sv&e
+&Stani
+Ponovi
+U pozadini
+U prvom planu
+&Pauza
+Pauzirano
+Poništiti?
+500
+&Datoteke
+&Uređivanje
+&Izgled
+Omiljene mape
+&Alati
+&Pomoć
+540
+&Otvori
+Ot&vori mapu
+Otvori u &sustavu
+Iz&gled
+&Uređivanje
+Prei&menuj
+&Kopiraj u...
+Premje&sti u...
+O&briši
+Podije&li datoteku...
+Spo&ji datoteke...
+Svojs&tva
+Komentar
+Izračun kontrolnog zbroja
+Uspoređivanje
+Stvo&ri mapu
+Stvori &datoteku
+&Izlaz
+Poveznica
+&Alternativni tokovi
+600
+Odaberi &sve
+Poništi odabir
+&Obrni odabir
+Odaberi...
+Poništi odabir...
+Odabir po tipu
+Poništi odabir tipa
+700
+&Velike ikone
+&Male ikone
+&Popis
+&Detalji
+730
+Neso&rtirano
+Sadržaj mapa
+&2 okna
+Alatne &trake
+&Korijen
+&Nadmapa
+Proš&le mape...
+O&svježi
+Automatski osvježi
+750
+Alatna traka arhiva
+Standardna alatna traka
+Velike tipke
+Prikaži tekst
+800
+Dod&aj u popis omiljenih kao
+Zabilješka
+900
+&Mogućnosti...
+M&jerenje
+960
+&7-Zip pomoć...
+&O programu...
+1003
+Putanja
+Prema nazivu
+Tip
+Mapa
+Prema veličini
+Sažeta veličina
+Atributi
+Kreirano
+Pristupano
+Prema mijenjanju
+Zbijeno
+Komentar
+Enkripcija
+Podjeli prije
+Podjeli poslije
+Rječnik
+
+Prema tipu
+Anti
+Način
+Glavni OS
+Sustav datoteka
+Korisnik
+Grupa
+Zbijeno
+Komentar
+Pozicija
+U datoteci
+Mape
+Datoteke
+Inačica
+Dio
+Višedijelni
+Razmak
+Veza
+Blokovi
+Dijelova
+
+64-bitno
+Big-endian
+CPU
+Fizička veličina
+Veličina zaglavlja
+Kontrolni zbroj
+Karakteristike
+Virtualna adresa
+Jedinstvena oznaka
+Kratko ime
+Aplikacija stvaranja
+Veličina sektora
+Način
+Poveznica
+Greška
+Ukupni kapacitet
+Slobodni prostor
+Veličina klastera
+Naziv
+Lokalni naziv
+Pružatelj
+NT sigurnost
+Alternativni tok
+Dodatno
+Obrisano
+Je stablo
+
+
+Tip greške
+Greške
+Greške
+Upozorenja
+Upozorenje
+Tokovi
+Alternativni tokovi
+Veličina alternativnih tokova
+Virtualna veličina
+Veličina raspakiranog
+Ukupna fizička veličina
+Indeks dijela
+Podtip
+Kratki komentar
+Kodna stranica
+
+
+
+Veličina repa
+Veličina ugrađenog odsječka
+Poveznica
+Čvrsta poveznica
+iNode
+
+Samo za čitanje
+2100
+Mogućnosti
+Jezik
+Jezik:
+Uređivač
+&Program za uređivanje:
+Program za uspoređivanje:
+2200
+Sustav
+Poveži 7-Zip sa:
+Svi korisnici
+2301
+Integriraj 7-Zip u padajući kontekstni izbornik
+Padajući kontekstni izbornik
+Stavke kontekstnog izbornika:
+Ikone kontekstnog izbornika
+2320
+<Mapa>
+<Arhiva>
+Otvori arhiv
+Raspakiraj datoteke...
+Dodaj u arhiv...
+Testiraj arhiv
+Raspakiraj ovdje
+Raspakiraj u {0}
+Dodaj u {0}
+Sažimanje i slanje e-poštom
+Sažimanje u {0} i slanje e-poštom
+2400
+Mape
+&Radna mapa
+&Privremena sistemska mapa
+&Trenutna
+&Navedena:
+Koristi samo za izmjenjive diskove
+Lokaciju za smještaj privremenih datoteka.
+2500
+Postavke
+Nadmapa ".."
+Prikaži prave ikone datoteka
+Prikaži sistemski izbornik
+&Označi cijeli redak
+Prikaži &linije mreže
+Jedan klik za otvaranje stavke
+Drugi n&ačin označavanja
+Koristi raspo&loživu memoriju
+2900
+O 7-Zip-u
+7-Zip je besplatan softver.
+3000
+Sustav ne može pripremiti potrebnu količinu memorije
+Nema grešaka
+{0} objekt(a) izabrano
+Ne mogu kreirati mapu '{0}'
+Obnova nije podržana za ovaj arhiv.
+Nemoguće otvoriti datoteku '{0}' kao arhiv
+Nemoguće otvoriti kriptiranu arhivu '{0}'. Kriva lozinka?
+Tip arhive nije podržan
+Datoteka {0} već postoji
+Datoteka '{0}' je izmijenjena.\nObnoviti arhiv?
+Nije moguće obnoviti datoteku\n'{0}'
+Nije moguće započeti uređivanje.
+Datoteka izgleda kao virus (naziv datoteke sadrži dugačke razmake).
+Operaciju nemoguće pozvati iz mape koja ima dugačku putanju.
+Morate obilježiti jednu datoteku
+Morate obilježiti jednu ili više datoteka
+Previše stavki
+Nemoguće otvoriti datoteku kao {0} arhivu
+Datoteka je otvorena kao {0} arhiva
+Arhiva je otvorena sa pomakom
+3300
+Raspakiranje
+Sažimanje u arhiv
+Testiranje
+Otvaranje u tijeku...
+Skeniram...
+Uklanjanje
+3320
+Dodavanje
+Ažuriranje
+Analiziranje
+Replikiranje
+Repakiranje
+Preskakanje
+Brisanje
+Stvaranje zaglavlja
+3400
+Raspakiraj
+&Raspakiraj u:
+Lokacija za raspakiranje datoteka.
+3410
+Putanja mapa:
+Potpune putanje
+Bez putanja
+Apsolutne putanje
+Relativne putanje
+3420
+Natpiši postojeće
+Pitaj prije natpisivanja postojećeg
+Natpiši postojeće bez upozorenja
+Preskoči postojeće datoteke
+Automatska promjena naziva
+Automatska promjena naziva postojećih datoteka
+3430
+Eliminiraj dupliranje korijenske mape
+Vrati sigurnost datoteka
+3500
+Potvrdite zamjenu datoteka
+Ciljana mapa već sadrži datoteku koja se trenutno obrađuje.
+Zamijeniti postojeću
+datoteku s ovom?
+{0} bajte
+A&utomatska promjena naziva
+3700
+Nije podržan način sažimanja za '{0}'.
+Podatkovna greška u '{0}'. Datoteka je neispravna.
+CRC greška u '{0}'. Datoteka je neispravna.
+Greška u kriptiranoj datoteci '{0}'. Kriva lozinka?
+CRC greška u kriptiranoj datoteci '{0}'. Kriva lozinka?
+3710
+Kriva lozinka?
+3721
+Nepodržana metoda kompresije
+Greška podataka
+CRC neuspješan
+Nedostupni podaci
+Neočekivan kraj podataka
+Postoji još podataka nakon glavnih podataka
+Nije arhiva
+Greška zaglavlja
+Kriva lozinka
+3763
+Neočekivan početak arhive
+Nepotvrđen početak arhive
+
+
+
+Nepodržano svojstvo
+3800
+Unesite lozinku
+Unesite lozinku:
+Ponovite lozinku:
+&Prikaži lozinku
+Lozinka nije jednaka
+Koristite samo engleska slova, brojeve i specijalne znake (!, #, $, ...) za lozinku
+Lozinka je preduga
+&Lozinka
+3900
+Utrošeno vrijeme:
+Preostalo vrijeme:
+Veličina:
+Brzina:
+Obrađeno:
+Omjer kompresije:
+Greške:
+Arhive:
+4000
+Dodaj u arhiv
+&Arhiv:
+&Način obnove:
+&Format arhiva:
+Stupanj sažimanja
+&Metoda sažimanja:
+Veličina &rječnika:
+&Veličina riječi:
+Veličina bloka u zbijenom:
+Broj niti u CPU:
+&Parametri:
+&Mogućnosti
+Kreiraj E&XE arhiv
+Sažmi dijeljene datoteke
+Kriptiranje
+Metoda kriptiranja:
+Enkripcija naziva datoteka
+Korištenje memorije za sažimanje:
+Korištenje memorije za raspakiranje:
+Obriši datoteke nakon kompresije
+4040
+Spremi simbolične poveznice
+Spremi čvrste poveznice
+Spremi alternativne tokove podataka
+Spremi sigurnost datoteka
+4050
+Bez sažimanja
+Vrlo brzo
+Brzo
+Uobičajeno
+Najjače
+Ultra
+4060
+Dodaj i zamjeni datoteke
+Obnovi i dodaj datoteke
+Osvježi postojeće datoteke
+Sinkroniziraj datoteke
+4070
+Traži
+Sve datoteke
+Bez-zbijanja
+Zbijeno
+6000
+Kopiraj
+Premjesti
+Kopiraj u:
+Premjesti u:
+Kopiranje u tijeku...
+Premještanje u tijeku...
+Preimenovanje u tijeku...
+Odabir odredišne mape.
+Operacija nije podržana.
+Greška pri preimenovanju datoteke ili mape
+Potvrdite kopiranje datoteka
+Kopiranje datoteka u arhiv?
+6100
+Potvrdite brisanje datoteke
+Potvrdite brisanje mape
+Potvrdite višestruko brisanje datoteka
+Obrisati '{0}'?
+Obrisati mapu '{0}' i sav njezin sadržaj?
+Obrisati ove {0} podatke?
+Brisanje u tijeku...
+Greška pri brisanju datoteke ili mape
+Sustav ne može premjestiti datoteku sa dugačkom putanjom u Kantu za recikliranje
+6300
+Kreiraj mapu
+Kreiraj datoteku
+Naziv mape:
+Naziv datoteke:
+Nova mapa
+Nova datoteka
+Greška pri kreiranju mape
+Greška pri kreiranju datoteka
+6400
+Komentar
+&Komentar:
+Odaberi
+Poništi odabir
+Maska:
+6600
+Svojstva
+Kronologija mapa
+Dijagnostičke poruke
+Poruka
+7100
+Računalo
+Mreža
+Dokumenti
+Sustav
+7200
+Dodaj
+Raspakiraj
+Testiraj
+Kopiraj
+Premjesti
+Obriši
+Svojstva
+7300
+Podijeli datoteku
+&Podijeli u:
+Razdvajanje na dijelove, bajta:
+Dioba...
+Potvrdite diobu
+Podijeliti datoteku u {0} dijelova?
+Veličina diobenog dijela mora biti manja od izvorne datoteke
+Netočna veličina bloka
+Veličina bloka: {0} bajtova.\nJeste li sigurni da želite podijeliti u takve dijelove?
+7400
+Spoji datoteke
+&Spoji u:
+Spajanje...
+Označite samo prvu datoteku
+Nije pronađena datoteka koja je dio razdijeljenih datoteka
+Pronađena samo jedna datoteka od razdijeljenih datoteka
+7500
+Izračunavanje kontrolnog zbroja...
+Info kontrolni zbroj
+CRC kontrolni zbroj za podatke:
+CRC kontrolni zbroj za podatke i nazive:
+7600
+Mjerenje
+Korištenje memorije:
+Sažimanje
+Raspakiranje
+Ocjena
+Ukupna ocjena
+Trenutno
+Rezultat
+CPU zauzeće
+Ocjena / Zauzeće
+Prolazi:
+7700
+Poveznica
+Poveznica
+Veza od:
+Veza do:
+7710
+Tip poveznice
+Čvrsta poveznica
+Simbolična poveznica datoteka
+Simbolična poveznica mapa
+Mapa čvorišta

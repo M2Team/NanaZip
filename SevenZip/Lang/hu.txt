@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;       : Jozsef Tamas Herczeg
+;  9.16 : Nyilas MISY
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Hungarian
+Magyar
+401
+OK
+Mégsem
+
+
+
+&Igen
+&Nem
+&Bezárás
+Súgó
+
+&Folytatás
+440
+I&gen, mindre
+N&em, mindre
+Leállítás
+Újraindítás
+&Háttérben
+&Előtérben
+&Szünet
+Szünet
+Biztos, hogy megszakítja a folyamatot?
+500
+&Fájl
+S&zerkesztés
+&Nézet
+Ked&vencek
+&Eszközök
+&Súgó
+540
+M&egnyitás
+Megnyitás &belül
+Megnyitás kí&vül
+&Nézet
+S&zerkesztés
+Átn&evezés
+Más&olás mappába...
+Át&helyezés mappába...
+&Törlés
+Fájl&darabolás...
+Fájl&egyesítés...
+T&ulajdonságok
+&Megjegyzés
+Checksum számolása
+Különbség
+Mappa létrehozása
+Fájl létrehozása
+&Kilépés
+600
+Min&d kijelölése
+Kijelölés megszüntetése
+Kijelölés &megfordítása
+Kijelölés...
+Megszüntetés...
+Kijelölés típus alapján
+Megszüntetés típus alapján
+700
+&Nagy ikonok
+&Kis ikonok
+&Lista
+&Részletek
+730
+Rendezetlen
+Lapos ikonok
+&2 panel
+&Eszköztárak
+Gyökérmappa megnyitása
+Egy szinttel feljebb
+Mappa előzmények...
+&Frissítés
+750
+Archiválás eszköztár
+Szokásos eszköztár
+Nagy gombok
+Szövegcímkék megjelenítése
+800
+Mappa &hozzáadása a Kedvencekhez mint
+Könyvjelző
+900
+&Beállítások...
+&Teljesítménymérés
+960
+&Tartalomjegyzék...
+7-Zip &névjegye...
+1003
+Útvonal
+Név
+Kiterjesztés
+Mappa
+Méret
+Tömörített méret
+Attribútumok
+Létrehozva
+Hozzáférés
+Módosítva
+Tömör
+Megjegyzés
+Titkosított
+Feldarabolás előtt
+Feldarabolás után
+Szótár
+CRC
+Típus
+Anti
+Módszer
+Gazda OS
+Fájlrendszer
+Felhasználó
+Csoport
+Blokk
+Megjegyzés
+Pozíció
+Útvonal előtag
+Mappák
+Fájlok
+Verzió
+Kötet
+Többkötet
+Eltolás
+Linkek
+Blokkok
+Kötetek
+
+64-bit
+Big-endian
+CPU
+Fizikai méret
+Fejlécek mérete
+Checksum
+Karakterisztika
+Virtuális cím
+ID
+Név rendezése
+Alkalmazás készítője
+Szakasz mérete
+Mód
+Link
+Hiba
+Teljes méret
+Szabad terület
+Kluszterméret
+Címke
+Helyi név
+Szolgáltató
+2100
+Beállítások
+Nyelv
+Nyelv:
+Szerkesztő
+&Szerkesztő:
+&Különbség:
+2200
+Rendszer
+7-Zip társítása:
+2301
+7-Zip hozzáadása a parancsértelmező helyi menüjéhez
+Lépcsőzetes helyi menü
+Helyi menü elemek:
+2320
+<Mappa>
+<Archívum>
+Archívum megnyitása
+Fájlok kibontása...
+Hozzáad az archívumhoz...
+Archívum tesztelése
+Kibontás ide
+Kibontás ide: {0}
+Hozzáadás: {0}
+Tömörítés és küldés...
+Tömörítés {0} archívumba és küldés
+2400
+Mappák
+&Munkamappa
+A &rendszer ideiglenes mappája
+&Jelenlegi
+&Meghatározott:
+Csak cserélhető meghajtókhoz
+Válassza ki az ideiglenes archív fájlok mappáját.
+2500
+Beállítások
+A ".." elem látható
+Az eredeti fájlikonok láthatók
+Látható a rendszermenü
+&Teljes soros kijelölés
+&Rácsvonalak kijelzése
+Elem megnyitása egyszeres kattintással
+&Alternativ kiválasztási mód
+&Nagy memória haszálata
+2900
+A 7-Zip névjegye
+A 7-Zip ingyenes szoftver.
+3000
+A rendszer nem tudja lefoglalni a szükséges memóriát
+Az archívum hibamentes
+{0} objektum kijelölve
+A(z) '{0}' mappát nem lehet létrehozni
+Az aktualizálás ennél az archívumtípusnál nem támogatott.
+A(z) '{0}' fájl nem nyitható meg archívként
+A(z) '{0}' titkosított archívum nem megnyitható. Hibás a jelszó?
+Nem támogatott archívum típus
+A(z) {0} fájl már létezik
+'{0}'\nA fájl tartalma megváltozott.\nKívánja aktualizálni az archívumban?
+A fájl nem aktualizálható:\n'{0}'
+A szerkesztő nem indítható.
+A fájl vírusnak néz ki (a fájlnév hosszú szóközt tartalmaz a nevében).
+A művelet nem hívható meg abból a mappából amelynek hosszú az elérési útvonala.
+Egy fájlt ki kell jelölnie!
+Egy vagy több fájlt ki kell jelölnie
+Túl sok elem
+3300
+Kibontás
+Tömörítés
+Tesztelés
+Megnyitás...
+Vizsgálat...
+3400
+Kibontás
+&Kibontás ide:
+Határozza meg a kibontott fájlok tárolómappáját.
+3410
+Útvonal
+Teljes útvonal
+Nincs útvonal
+3420
+Felülírás
+Rákérdezés felülírás előtt
+Felülírás rákérdezés nélkül
+A létező fájlok kihagyása
+Automatikus átnevezés
+A létező fájlok automatikus átnevezése
+3500
+Fájlcsere megerősítése
+A célmappa már tartalmazza a feldolgozott fájlt.
+Kívánja lecserélni a létező fájlt
+ezzel a fájllal?
+{0} bájt
+A&utomatikus átnevezés
+3700
+A(z) '{0}' tömörítési módja nem támogatott.
+Adathiba a következőben: '{0}'. A fájl sérült.
+CRC-hiba a következőben: '{0}'. A fájl sérült.
+Adathiba a titkosított fájlban: '{0}'. Hibás a jelszó?
+CRC-hiba a titkosított fájlban: '{0}'. Hibás a jelszó?
+3800
+Jelszó beírása
+Írja be a jelszót:
+Jelszó újbóli beírása:
+A &jelszó megjelenítése
+Jelszavak nem egyeznek
+Csak ékezetmentes karaktereket, számokat és speciális karaktereket (!, #, $, ...) használjon a jelszavaknak
+A jelszó túl hosszú
+Jelszó
+3900
+Eltelt idő:
+Hátralévő idő:
+Méret:
+Sebesség:
+Feldolgozott:
+Tömörítési arány:
+Hibák:
+Archívumok:
+4000
+Behelyezés archívumba
+&Archívum:
+Akt&ualizálás módja:
+Arcíhvum &formátuma:
+Tömörítés &foka:
+Tömörítés &módja:
+&Címtár mérete:
+&Szó mérete:
+Tömör blokk méret:
+CPU számok:
+&Tulajdonságok:
+Beállítások
+SF&X archívum létrehozása
+Megosztott fájlok tömörítése
+Titkosítás
+Titkosítási eljárás:
+Fájlnevek &titkosítása
+A tömörítés memóriahasználata:
+A kitömörítés memóriahasználata:
+4050
+Raktár
+Leggyorsabb
+Gyors
+Normál
+Legnagyobb
+Ultra
+4060
+Fájlok behelyezése és cseréje
+Fájlok aktualizálása és behelyezése
+Létező fájlok frissítése
+Fájlok szinkronizálása
+4070
+Tallózás
+Minden fájl
+Nem tömör
+Tömör
+6000
+Másolás
+Áthelyezés
+Másolás ide:
+Áthelyezés ide:
+Másolás...
+Áthelyezés...
+Átnevezés...
+Válassza ki a cél mappát.
+A művelet nem támogatott.
+Hiba történt a fájl vagy a mappa átnevezésekor
+Fájl másolásának megerősítése
+Biztos, hogy fájl(oka)t akar másolni az archívumba?
+6100
+Fájltörlés megerősítése
+Mappatörlés megerősítése
+Több fájltörlés megerősítése
+Biztos, hogy törölni akarja a következőt: '{0}'?
+Biztos, hogy törölni akarja a(z) '{0}' mappát és annak teljes tartalmát?
+Biztos, hogy törölni akarja ezt a(z) {0} elemet?
+Törlés...
+Hiba történt a fájl vagy a mappa törlésekor
+A rendszer nembírja mozgatni a fájlt a hosszú útvonallal a Lomtárba
+6300
+Mappa létrehozása
+Fájl létrehozása
+Mappa neve:
+Fájlnév:
+Új mappa
+Új fájl
+Hiba történt a mappa létrehozásakor
+Hiba történt a fájl létrehozásakor
+6400
+Megjegyzés
+&Megjegyzés:
+Kijelölés
+Megszüntetés
+Maszk:
+6600
+Tulajdonságok
+Mappa előzmények
+Diagnosztikai üzenetek
+Üzenet
+7100
+Sajátgép
+Hálózati helyek
+Dokumentumok
+Rendszer
+7200
+Hozzáadás
+Kibontás
+Teszt
+Másolás
+Áthelyezés
+Törlés
+Tulajdonságok
+7300
+Fájldarabolás
+&Darabolás ide:
+Darabolás &kötetekre, bájt:
+Darabolás...
+Darabolás megerősítése
+Biztos szét akarja darabolni a fájlt {0} kötetre?
+Kötet méretének kissebbnek kell lennie, mint az eredeti fájl mérete
+Hibás kötet méret
+A megadott kötet mérete: {0} byte.\nBiztos fel akarja darabolni az archívumot ilyen kötetre?
+7400
+Fájlegyesítés
+&Egyesítés ide:
+Egyesítés...
+Csak az első rész kiválasztása a darabolt fájlból
+Nem ismeri fel a fájlt, mint darabolt fájl része
+Nem talál egynél több részt a darabolt fájlból
+7500
+Leírás számolása...
+Leírás információ
+CRC leírás az adathoz:
+CRC leírás az adathoz és névhez:
+7600
+Teljesítménymérés
+Memóriahasználat:
+Tömörítés
+Kitömörítés
+Értékelés
+Összértékelés
+Jelenlegi
+Eredmény
+CPU használata
+Becslés / Használat
+Menetek:

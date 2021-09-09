@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;       : Miguel Angel
+;  9.07 : Purgossu
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Extremaduran
+Estremeñu
+401
+Acetal
+Cancelal
+
+
+
+&Sí
+&Nu
+&Fechal
+Ayua
+
+A&continal
+440
+Sí &a tó
+Nu a &tó
+Paral
+Reinicial
+Se&gundu pranu
+&Primel pranu
+&Paral
+Parau
+De siguru que quieri cancelal la operación?
+500
+&Archivu
+&Eital
+&Vel
+A&tihus
+&Herramientas
+A&yua
+540
+&Abril
+Abril &dentru
+Abril &huera
+&Vel
+&Eital
+Renom&bral
+&Copial a...
+&Movel pa...
+&Eliminal
+De&sapartal ficheru...
+Com&binal ficherus...
+P&ropieais
+Come&ntariu
+Calculal suma e verificación
+Diff
+Creal diretóriu
+Creal ficheru
+&Salil
+600
+Selecional &tó
+Deselecional tó
+&Invertil seleción
+Selecional...
+Deselecional...
+Selecional pol tipu
+Deselecional pol tipu
+700
+Iconus g&randis
+Iconus caquerus
+&Listau
+&Detallis
+730
+Nu soportau
+Vista prana
+&2 panelis
+Barra e herramien&tas
+Abril diretóriu raí
+Subil un nivel
+Estorial de diretórius...
+&Atualizal
+750
+Barra e herramientas 'archivu'
+Barra e herramientas estándal
+Botonis grandis
+Muestral testu enus botonis
+800
+&Añíl diretóriu a Atihus comu
+Atihu
+900
+&Ocionis...
+&Prebas ('benchmark')
+960
+&Contenius...
+&Al tentu 7-Zip...
+1003
+Ruta
+Nombri
+Estensión
+Diretóriu
+Tamañu
+Tamañu comprimiu
+Atributus
+Creau'l
+Úrtimu acesu
+Escambiau'l
+Sóliu
+Comentau
+Encrihtau
+Desapartau enantis
+Desapartau endispués
+Izionáriu
+CRC
+Tipu
+Anti
+Métou
+S.O. orihin
+Sistema d'archivus
+Usuariu
+Grupu
+Broqui
+Comentariu
+Posición
+Prefihu la ruta
+Diretórius
+Ficherus
+Velsión
+Volumin
+Murtivolumin
+Desprazamientu
+Enlacis
+Broquis
+Volúmenis
+
+64-bit
+Big-endian
+UCP
+Tamañu físicu
+Tamañu las cabiceras
+Suma e cumprebación
+Caraterísticas
+Direción virtual
+ID
+Nombri cortu
+Apricación criaora
+Tamañu el setol
+Mou
+Enlaci
+Yerru
+Tamañu total
+Espaciu dispunibri
+Tamañu el 'cluster'
+Etiqueta
+Nombri local
+Proveol
+2100
+Ocionis
+Palra
+Palra:
+Eitol
+&Eitol:
+&Diff:
+2200
+Sistema
+Asocial 7-Zip a hormatus:
+2301
+Integral 7-Zip nel menú contestual
+Menú contestual en cascá
+Elementus del menú contestual:
+2320
+<Diretóriu>
+<Archivu>
+Abril archivu
+Estrayel ficherus...
+Añíl al archivu...
+Comprebal archivu
+Estrayel aquina
+Estrayel en {0}
+Añiil a {0}
+Comprimil i envial pol correu-e...
+Comprimil en {0} i envial pol correu
+2400
+Diretórius
+Diretóriu e labu&tu
+Diretóriu temporal del &sistema
+Diretóriu &ahtual
+&Especifical:
+Usal sólu pa dispositivus estrayíbris
+Especifical ruta pa ficherus d'archivus temporalis.
+2500
+Configuración
+Muestral l'elementu \.."
+Muestral icunus propius del ficheru
+Muestral menú el sistema
+&Selecional fila(s) enteriza(s)
+Muestral línias e la &cuairícula
+'Click' únicu p'abril un elementu
+Móu e seleción &alternativu
+Usa&l páhinas de memoria grandis
+2900
+About 7-Zip
+7-Zip es una apricación libri i a gastus pagus. Peru puei apoyal el desarrollu e 7-Zip meyanti'l rehistru el pograma.
+3000
+El sistema nu á síu escapás d'asinal la cantiá prehisa de memoria
+Sin yerrus
+{0} elementu(s) selecionaus
+Nu s'á puiu crial el diretóriu '{0}'
+Nu se puei atualizal esti tipu d'archivu.
+Nu s'á puiu abril '{0}' comu archivu
+Nu s'a puiu abril l'archivu encritau '{0}'. Conseña yerronia?
+Tipu archivu nu suportau
+File {0} is already exist
+El ficheru '{0}' á síu moificau.\nAtualizalu nel archivu?
+Nu s'á puíu atualizal l'archivu\n'{0}'
+Nu s'á puíu ehecutal el eitol.
+El ficheru pahi un virus (el nombri'l ficheru contieni espacius largus nel nombri).
+Nu puei realizasi la operación dendi un diretóriu que tenga una ruta larga.
+You must select one file
+You must select one or more files
+Ai elementus en demasía
+3300
+Estrayendu
+Comprimiendu
+Comprebandu
+Abriendu...
+Escaneandu...
+3400
+Estrayel
+E&strayel a:
+Especifical destinu palus ficherus estrayíus.
+3410
+Mou e ruta
+Ruta compreta
+Sin ruta
+3420
+Mou e sobrescrebil
+Preguntal enantis
+Sobrescrebil sin preguntal
+Conserval ficherus esistentis
+Renombral de horma automática
+Autu-renombral ficherus esistentis
+3500
+Confirmal remprazu de ficherus
+El diretóriu ya contieni un ficheru el mesmu nombri.
+Escambial el ficheru esistenti
+pol esti otru?
+{0} bytes
+Escambial nombri a&utomáticamenti
+3700
+Métou e compresión nu soportau pa '{0}'.
+Yerru datus en '{0}'. El ficheru está changarrau.
+Yerru e CRC '{0}'. El ficheru está changarrau.
+Yerru e datus nel ficheru encritau '{0}'. Conseña yerrónia?
+Yerru e CRC nel ficheru encritau '{0}'. Conseña yerrónia?
+3800
+Introuzil conseña
+Introuzil conseña:
+Repitil conseña:
+Mue&stral conseña
+Las cunseñas nu coinciín
+Usi sólu letras ingresas, númirus i caráteris especialis (!, #, $, ...) pala conseña
+La conseña tieni largura'n demasía
+Conseña
+3900
+Tiempu trascurríu:
+Tiempu restanti:
+Tamañu total:
+Velociá:
+Procesau:
+Tasa e compresión:
+Yerrus:
+Archivus:
+4000
+Añiil a archivu
+&Archivu:
+&Mou d'atualización:
+&Hormatu d'archivu:
+Nive&l de compresión:
+Mé&tou e compresión:
+Tamañu el i&zionariu:
+Tama&ñu e parabra:
+Tamañu el bloqui sóliu:
+Númiru hilus e la UCP:
+&Parámetrus:
+Ocionis
+Creal archivu 'SF&X'
+Comprimil ficherus compartíus
+Encritación
+Métou encritación:
+Encrital &nombris de ficheru
+Usu e memoria pa compresión:
+Usu e memoria pa decompresión:
+4050
+Almacenal
+La más respahila
+Respahila
+Normal
+Másima
+Ultra
+4060
+Añiil i remprazal ficherus
+Atualizal i añiil ficherus
+Atualizal sólu ficherus esistentis
+Sincronizal ficherus
+4070
+Esproral
+Tolos ficherus
+Nu sóliu
+Sóliu
+6000
+Copial
+Movel
+Copial a:
+Movel pa:
+Copiandu...
+Moviendu...
+Renombrandu...
+Selecional diretóriu destinu.
+Operación nu soportá.
+S'alcuentrau'n yerru al renombral el ficheru u diretóriu
+Confirmal copia el ficheru
+De siguru que quieri copiar estus ficherus al archivu?
+6100
+Confirmal eliminación del ficheru
+Confirmal eliminación del direhtoriu
+Confirmal eliminación de varius ficherus
+De siguru que quieri eliminal '{0}'?
+De siguru que quieri eliminal el diretóriu '{0}' i tol su conteniu?
+De siguru que quieri eliminal estus {0} elementus?
+Eliminandu...
+S'alcuentrau'n yerru al eliminal el ficheru u diretóriu
+El sistema nu puei movel un ficheru con ruta larga a la Papelera Recicrahi
+6300
+Creal diretóriu
+Creal ficheru
+Nombri e diretóriu:
+Nombri el ficheru:
+Nuevu diretóriu
+Nuevu ficheru
+S'alcuentrau'n yerru al creal el diretóriu
+S'alcuentrau'n yerru al creal el ficheru
+6400
+Comentáriu
+&Comentáriu:
+Selecional
+Deselecional
+Máscara:
+6600
+Propieais
+Estorial de diretórius
+Mensahis de dianósticu
+Mensahi
+7100
+Mi PC
+Entorno de red
+Documentos
+Sistema
+7200
+Añiil
+Estrayel
+Comprebal
+Copial
+Movel
+Eliminal
+Inhormazión
+7300
+Desapartal ficheru
+&Desapartal a:
+Desapartal en &balandronis, 'bytes':
+Desapartandu...
+Confirmal desapartamientu
+De siguru que quieri desapartal el ficheru'n {0} volúmenis?
+El tamañu lus volúmenis debi sel mas caqueru que'l del ficheru orihinal
+Tamañu el volumin nu váliu
+Introuza'l tamañu el volumin: {0} 'bytes'.\nDe siguru que quieri desapartal l'archivu'n tantus volúmenis?
+7400
+Uñil ficherus
+&Uñil en:
+Uñiendu...
+Selecional sólu'l primel ficheru
+Nu s'á puíu detetal el ficheru comu parti d'un ficheru desapartau
+Nu s'á puíu alcuentral más d'un balandrón del ficheru desapartau
+7500
+Calculandu la suma e verificación...
+Inhormazión de suma e verificación
+Suma e verificación de 'CRC' pala inhormazión:
+Suma e verificación de 'CRC' pala inhormazión i lus nombris:
+7600
+Prebas ('benchmark')
+Usu e memoria:
+Comprimiendu
+Comprimiendu
+Razón
+Razón total
+Atual
+Resurtau
+Usu e CPU
+Razón / Usu
+Pasis:

@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.07 : Dinamiteru
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Asturian
+Asturianu
+401
+Val
+Torgar
+
+
+
+&Si
+&Non
+&Zarrar
+Axuda
+
+&Siguir
+440
+Si a &Too
+Non a T&oo
+Parar
+Reentamar
+&De fondu
+&En primer planu
+&Posar
+Posao
+¿Tas fixu que quies paralo?
+500
+F&icheru
+&Remanar
+&Ver
+F&avoritos
+&Ferramientes
+A&xuda
+540
+&Abrir
+Abrir &Dientro
+Abrir F&uera
+&Ver
+&Remanar
+Reno&mar
+&Copiar a...
+&Mover a...
+&Borrar
+&Partir ficheru...
+Com&binar ficheros...
+P&ropiedaes
+Come&ntariu
+
+
+Crear carpeta
+Crear ficheru
+Co&lar
+600
+Seleicionar &Too
+Deseleicionar too
+&Invertir seleición
+Seleicionar...
+Deseleicionar...
+Seleicionar por Tipu
+Deseleicionar por Tipu
+700
+Miniatures &Grandes
+&Miniatures Pequeñes
+&Llista
+&Detalles
+730
+Ensín Ordenar
+
+&2 Paneles
+&Barres de Ferramientes
+Abrir Carpeta Raiz
+Xubir Un Nivel
+Hestorial de Carpetes...
+Actualiza&r
+750
+Barra Ferramientes d´Archivu
+Barra Ferramientes Normal
+Botones Grandes
+Amosar Testu nos Botones
+800
+&Añedir carpeta a Favoritos como
+Marca
+900
+&Opciones...
+&Bancu de Pruebes
+960
+&Conteníos...
+&Al rodiu 7-Zip...
+1003
+Ruta
+Nome
+Estensión
+Carpeta
+Tamañu
+Tamañu comprimío
+Atributos
+Creao
+Accedío
+Cambiao
+Sólidu
+Comentao
+Cifrao
+Partir antes
+Partir dempués
+Diccionariu
+CRC
+Tipu
+Anti
+Métodu
+S.O. d´Acoyida
+Sistema de ficheros
+Usuariu
+Grupu
+Bloque
+Comentariu
+Posición
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Error
+Tamañu total
+Espaciu llibre
+Tamañu del clúster
+Etiqueta
+Nome llocal
+Suministrador
+2100
+Opciones
+Llingua
+Llingua:
+Remanaor
+&Remanaor:
+
+2200
+Sistema
+Asociar 7-Zip con:
+2301
+Integrar 7-Zip nel menú contestual
+Menú contestual en ´cascada´
+Artículos del menú contestual:
+2320
+<Carpeta>
+<Archivu>
+Abrir archivu
+Estrayer ficheros...
+Añedir al archivu...
+Probar archivu
+Estrayer equí
+Estrayer a {0}
+Añedir a {0}
+Comprimir y mandar per correu...
+Comprimir en {0} y mandar per correu
+2400
+Carpetes
+&Carpeta de trabayu
+Carpeta &temporal de sistema
+&Actual
+&Especificar:
+Usar sólo pa dispositivos estrayibles
+Especificar llocalización pa ficheros d´archivos temporales.
+2500
+Igües
+Amosar ".." artículu
+Amosar les miniatures reales del ficheru
+Amosar menú del sistema
+Seleicionar tola &fila
+Amosar les llinies de la &cuadrícula
+
+
+
+2900
+Al rodiu 7-Zip
+7-Zip ye software llibre. De toos moos, tú pues sofitar el desendolcu de 7-Zip rexistrándote.
+3000
+
+Ensín errores
+{0} oxetu(os) seleicionaos
+Nun se puede crear la carpeta '{0}'
+Esti archivu nun permite les operaciones d´actualización.
+
+
+
+
+El ficheru '{0}' foi modificáu.\nDo ¿Quies actualizalu nel archivu?
+Nun se pudo actualizar l´archivu\n'{0}'
+Nun se pudo entamar el Remanaor.
+
+
+
+
+Demasiaos artículos
+3300
+Estrayendo
+Comprimiendo
+Probando
+Abriendo...
+
+3400
+Estrayer
+E&strayer a:
+Especificar llocalización pa ficheros estrayíos.
+3410
+Mou de ruta
+Nomes de ruta completos
+Ensín nomes de ruta
+3420
+Mou de sobreescritura
+Entrugar enantes de sobreescribir
+Sobreescribir ensín confirmación
+Dexar ficheros esistentes
+Auto renomar
+Auto renomar ficheros esistentes
+3500
+Confirmar sustitución de ficheros
+La carpeta destín yá tien el ficheru procesáu.
+¿Quiés sustituyir el ficheru esistente
+con esti otru?
+{0} bytes
+A&uto Renomar
+3700
+Métodu de compresión nun permitíu pa '{0}'.
+Error de datos en '{0}'. El ficheru ta rotu.
+El CRC falló en '{0}'. El ficheru ta rotu.
+
+
+3800
+Introduz clave
+Introduz clave:
+
+Amo&sar clave
+
+
+
+Clave
+3900
+Tiempu trescurríu:
+Tiempu pa finar:
+Tamañu:
+Velocidá:
+
+
+Errores:
+
+4000
+Añedir al archivu
+&Archivu:
+Mo&u d´actualización:
+&Formatu del archivu:
+Nive&l de compresión:
+&Métodu de compresión:
+Tamañu del &Diccionariu:
+Tamañu de la pa&llabra:
+
+
+&Parámetros:
+Opciones
+Crear archivu SF&X
+
+
+
+Cifrar &nomes de ficheru
+Usu de memoria pa la compresión:
+Usu de memoria pa la descompresión:
+4050
+Nenguna
+Más rápida
+Rápida
+Normal
+Másima
+Ultra
+4060
+Añedir y sustituyir ficheros
+Actualizar y añedir ficheros
+Actualizar ficheros esistentes
+Sincronizar ficheros
+4070
+Agüeyar
+Tolos ficheros
+
+
+6000
+Copiar
+Mover
+Copiar a:
+Mover a:
+Copiando...
+Moviendo...
+Renomando...
+
+La operación nun tá permitía.
+Error al renomar el ficheru o carpeta
+
+
+6100
+Confirmar Borráu de Ficheru
+Confirmar Borráu de Carpeta
+Confirmar Borráu Múltiple de Ficheros
+¿Tas fixu que quies borrar '{0}'?
+¿Tas fixu que quies borrar la carpeta '{0}' y tolos sos conteníos?
+¿Tas fixu que quies borrar estos {0} artículos?
+Borrando...
+Error al borrar el ficheru o carpeta
+
+6300
+Crear Carpeta
+Crear ficheru
+Nome de la carpeta:
+Nome del ficheru:
+Nueva carpeta
+Nuevu ficheru
+Error al crear la carpeta
+Error al crear el ficheru
+6400
+Comentariu
+&Comentariu:
+Seleicionar
+Deseleicionar
+Mazcarita:
+6600
+
+Hestorial de carpetes
+Mensaxes de diagnósticu
+Mensax
+7100
+Ordenador
+Rede de Trabayu
+
+Sistema
+7200
+Añedir
+Estrayer
+Probar
+Copiar
+Mover
+Borrar
+Información
+7300
+Partir Ficheru
+&Partir a:
+Partir en &cachos, bytes:
+Partiendo...
+
+
+
+
+
+7400
+Combinar Ficheros
+&Combinar a:
+Combinando...
+
+
+
+7500
+
+
+
+
+7600
+Bancu de Pruebes
+Usu de memoria:
+Comprimiendo
+Descomprimiendo
+Valoración
+Valoración total
+Actual
+Resultáu
+
+
+Correutos:

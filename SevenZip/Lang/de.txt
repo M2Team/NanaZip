@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  2.30 : Soeren Finster
+;  4.07 : JAK-Software.DE
+;  9.07 : Joachim Henke
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+German
+Deutsch
+401
+OK
+Abbrechen
+
+
+
+&Ja
+&Nein
+&Schließen
+Hilfe
+
+&Fortsetzen
+440
+Ja für &alle
+Nein für a&lle
+Stopp
+Neustart
+&Hintergrund
+&Vordergrund
+&Pause
+Pause
+Möchten Sie wirklich abbrechen?
+500
+&Datei
+&Bearbeiten
+&Ansicht
+&Favoriten
+&Extras
+&Hilfe
+540
+Ö&ffnen
+I&ntern öffnen
+E&xtern öffnen
+&Ansehen
+&Bearbeiten
+&Umbenennen
+&Kopieren nach...
+&Verschieben nach...
+&Löschen
+Datei auf&splitten...
+Dateien &zusammenfügen...
+E&igenschaften
+K&ommentieren
+&Prüfsumme berechnen
+Ver&gleichen
+Ordner erstellen
+Datei erstellen
+Be&enden
+Verknüpfung...
+&Alternative Datenströme
+600
+Alles &markieren
+Alles abwählen
+Markierung &umkehren
+Auswählen...
+Auswahl aufheben...
+Nach Typ auswählen
+Nach Typ abwählen
+700
+&Große Symbole
+&Kleine Symbole
+&Liste
+&Details
+730
+Unsortiert
+Alles in einer &Ebene
+&Zweigeteiltes Fenster
+&Symbolleisten
+Wurzelverzeichnis
+Übergeordneter Ordner
+Ordnerverlauf...
+&Aktualisieren
+Auto-Aktualisierung
+750
+Archivfunktionen
+Standardfunktionen
+Große Schaltflächen
+Schaltflächenbeschriftung
+800
+&Ordner hinzufügen als
+Favorit
+900
+&Optionen...
+&Benchmark
+960
+&Hilfethemen
+Ü&ber 7-Zip...
+1003
+Pfad
+Name
+Erweiterung
+Ordner
+Größe
+Gepackte Größe
+Attribute
+Erstellt am
+Letzter Zugriff
+Geändert am
+Kompakt (solid)
+Kommentiert
+Verschlüsselt
+Vorher geteilt
+Danach geteilt
+Wörterbuch
+CRC
+Typ
+Anti
+Verfahren
+Herkunft
+Dateisystem
+Besitzer
+Gruppe
+Block
+Kommentar
+Position
+Pfad
+Ordner
+Dateien
+Version
+Teilarchiv
+Mehrteiliges Archiv
+Offset
+Verknüpfungen
+Blöcke
+Teilarchive
+
+64 Bit
+Big-Endian
+CPU
+Gesamtgröße
+Header-Größe
+Prüfsumme
+Kenndaten
+Virtuelle Adresse
+ID
+Kurzname
+Erstellt durch
+Sektorgröße
+Zugriffsrechte
+Link
+Fehler
+Gesamtgröße
+Freier Speicherplatz
+Cluster-Größe
+Name
+Lokaler Name
+Provider
+NT-Sicherheit
+Alternativer Datenstrom
+Aux
+Gelöscht
+Ist Baum
+
+
+Fehlertyp
+Fehler
+Fehler
+Warnungen
+Warnung
+Datenströme
+Alternative Datenströme
+Größe der alternativen Datenströme
+Virtuelle Größe
+Entpackte Größe
+Gesamte physikalische Größe
+Teilstück Index
+Untertyp
+Kurzkommentar
+Code-Seite
+
+
+
+Endungsgröße
+integrierte Stub-Größe
+Verknüpfung
+Harte Verknüpfung
+iNode
+
+Schreibgeschützt
+2100
+Optionen
+Sprache
+Sprache:
+Editor
+&Editor:
+Programm zum &Vergleichen:
+2200
+System
+7-Zip verknüpfen mit:
+alle Benutzer
+2301
+7-Zip in Kontextmenü integrieren
+Kontextmenü kaskadieren
+Einträge im Kontextmenü:
+Symbole im Kontextmenü
+2320
+<Verzeichnis>
+<Archiv>
+Öffnen
+Dateien entpacken...
+Zu einem Archiv hinzufügen...
+Archiv überprüfen
+Hier entpacken
+Entpacken nach {0}
+Hinzufügen zu {0}
+Archivieren und versenden...
+Archivieren in {0} und versenden
+2400
+Ordner
+&Arbeitsverzeichnis
+&TEMP-Ordner des Systems
+Aktueller &Ordner
+&Benutzerdefiniert:
+Nur bei &Wechselmedien benutzen
+Wählen Sie einen Ordner für temporäre Archivdateien:
+2500
+Einstellungen
+&Verzeichniseintrag ".." anzeigen
+Symbole aus &Dateien laden und anzeigen
+System-Kontext&menü im Dateimenü anzeigen
+Dateiauswahl markiert ganze &Zeile
+&Gitternetzlinien anzeigen
+Einfacher &Klick zum Öffnen
+&Alternativer Dateiauswahl-Modus
+Große &Speicherseiten verwenden
+2900
+Info über 7-Zip
+7-Zip ist freie Software. Sie können jedoch das Projekt durch eine Registrierung unterstützen.
+3000
+Das System kann die benötigte Speichermenge nicht bereit stellen.
+Es sind keine Fehler aufgetreten.
+{0} Objekt(e) markiert
+Kann den Ordner "{0}" nicht erstellen.
+Aktualisierungen werden für dieses Archiv nicht unterstützt.
+Die Datei "{0}" kann nicht als Archiv geöffnet werden.
+Das verschlüsselte Archiv "{0}" kann nicht geöffnet werden. Falsches Passwort?
+Typ des Archives wird nicht unterstützt
+Die Datei {0} existiert bereits.
+Die Datei "{0}" wurde geändert.\nSoll sie im Archiv aktualisiert werden?
+Die Datei konnte nicht aktualisiert werden.\n"{0}"
+Kann Editor nicht starten
+Die Datei scheint ein Virus zu sein (Dateiname enthält lange Reihen von Leerzeichen).
+Die Operation kann nicht aus einem Ordner mit langem Pfad aufgerufen werden.
+Bitte genau eine Datei auswählen.
+Bitte mindestens eine Datei auswählen.
+Zu viele Objekte
+Die Datei kann nicht als {0}-Archiv geöffnet werden.
+Die Datei wurde als {0}-Archiv geöffnet.
+Die Datei wurde mit einem Offset geöffnet.
+3300
+Entpacken
+Komprimiere
+Überprüfen
+Öffne...
+Durchsuche...
+Entferne
+3320
+Hinzufügen
+Aktualisieren
+Analysieren
+Replizieren
+Neu Packen
+Überspringen
+Löschen
+Header erstellen
+3400
+Entpacken
+&Entpacken nach:
+Wählen Sie einen Ordner für die entpackten Dateien:
+3410
+Verzeichnisstruktur wiederherstellen
+Komplette Pfadangaben
+Keine Pfadangaben
+Absolute Pfadangaben
+Relative Pfadangaben
+3420
+Dateien überschreiben
+Nur mit Bestätigung
+Ohne Bestätigung
+Vorhandene Dateien überspringen
+Automatisch umbenennen
+Vorhandene Dateien umbenennen
+3430
+Verdoppelung des Wurzelordners vermeiden
+Dateirechte wiederherstellen
+3500
+Überschreiben bestätigen
+Der Zielordner beinhaltet bereits eine Datei diesen Namens.
+Wollen Sie diese Datei
+durch diese ersetzen?
+{0} Bytes
+A&utomatisch umbenennen
+3700
+Das Kompressionsverfahren in "{0}" wird nicht unterstützt.
+Datenfehler in "{0}". Die Datei ist beschädigt.
+CRC-Prüfsummenfehler. Die Datei "{0}" ist beschädigt.
+Datenfehler in der verschlüsselten Datei "{0}". Falsches Passwort?
+CRC-Prüfsummenfehler bei verschlüsselter Datei "{0}". Falsches Passwort?
+3710
+Falsches Passwort?
+3721
+Nicht unterstützte Kompressionsmethode
+Datenfehler
+CRC-Fehler
+Daten stehen nicht zur Verfügung
+Unerwartetes Datenende
+Es gibt noch Daten hinter den Hauptdaten
+Ist kein Archiv
+Headers-Fehler
+Falsches Passwort
+3763
+Anfang des Archivs fehlt
+Anfang des Archivs nicht bestätigt
+
+
+
+Nicht unterstützte Funktion
+3800
+Kennworteingabe
+Passwort eingeben:
+Passwort bestätigen:
+Passwort an&zeigen
+Die Passwörter stimmen nicht überein.
+Bitte nur Buchstaben des englischen Alphabets, Ziffern und Sonderzeichen (!, #, $, ...) im Passwort verwenden!
+Das Passwort ist zu lang.
+Passwort
+3900
+Verstrichene Zeit:
+Verbleibende Zeit:
+Gesamtdatenmenge:
+Geschwindigkeit:
+Verarbeitet:
+Kompressionsrate:
+Fehler:
+Archive:
+4000
+Zu Archiv hinzufügen
+&Archiv:
+Art der Akt&ualisierung:
+Archiv&format:
+&Kompressionsstärke:
+Kompressions&verfahren:
+Wörter&buchgröße:
+&Wortgröße:
+Größe &solider Blöcke:
+Anzahl &CPU-Threads:
+&Parameter:
+Optionen
+Selbstentpackendes Archiv (SF&X) erstellen
+Zum Schreiben &geöffnete Dateien einbeziehen
+Verschlüsselung
+Verfahren:
+Datei&namen verschlüsseln
+Speicherbedarf beim Komprimieren:
+Speicherbedarf beim Entpacken:
+Dateien nach Komprimierung löschen
+4040
+Symbolische Verknüpfungen speichern
+Harte Verknüpfungen speichern
+Alternative Datenströme speichern
+Dateirechte speichern
+4050
+Speichern
+Schnellste
+Schnell
+Normal
+Maximum
+Ultra
+4060
+Hinzufügen und Ersetzen
+Aktualisieren und Hinzufügen
+Vorhandene Dateien aktualisieren
+Synchronisieren
+4070
+Durchsuchen
+Alle Dateien
+Nicht solide
+Solide
+6000
+Kopieren
+Verschieben
+Kopieren nach:
+Verschieben nach:
+Kopiere...
+Verschiebe...
+Umbenennen...
+Zielordner auswählen
+Die Operation wird für diesen Ordner nicht unterstützt.
+Fehler beim Umbenennen von Datei oder Ordner
+Kopieren bestätigen
+Sollen die Dateien wirklich in dieses Archiv kopiert werden:
+6100
+Löschen von Datei bestätigen
+Löschen von Ordner bestätigen
+Löschen von mehreren Dateien bestätigen
+Soll "{0}" wirklich gelöscht werden?
+Soll der Ordner "{0}" und sein gesamter Inhalt wirklich gelöscht werden?
+Sollen diese {0} Objekte wirklich gelöscht werden?
+Lösche...
+Fehler beim Löschen von Datei oder Ordner
+Das System kann Dateien mit langem Pfad nicht in den Papierkorb verschieben.
+6300
+Ordner erstellen
+Datei erstellen
+Ordnername:
+Dateiname:
+Neuer Ordner
+Neue Datei
+Fehler beim Erstellen des Ordners
+Fehler beim Erstellen der Datei
+6400
+Kommentar
+&Kommentar:
+Auswählen
+Auswahl aufheben
+Filter:
+6600
+Eigenschaften
+Ordnerverlauf
+Diagnosemeldungen
+Meldung
+7100
+Arbeitsplatz
+Netzwerk
+Dokumente
+System
+7200
+Hinzufügen
+Entpacken
+Überprüfen
+Kopieren
+Verschieben
+Löschen
+Eigenschaften
+7300
+Datei aufsplitten
+Teildateien &nach:
+In &Teildateien aufsplitten (Bytes):
+Aufsplitten...
+Aufsplitten bestätigen
+Sind Sie sicher, die Datei in {0} Teildateien aufsplitten zu wollen?
+Die Größe der Teildateien muss kleiner sein als die der ursprünglichen Datei.
+Ungültiger Wert für Dateigrößen
+Angegebene Größe für Teildateien: {0} Bytes.\nSind Sie sicher, dass das Archiv dementsprechend aufgesplittet werden soll?
+7400
+Dateien zusammenfügen
+Zieldatei &nach:
+Zusammenfügen...
+Bitte nur den ersten Teil der Datei auswählen.
+Datei nicht als Teil einer aufgesplitteten Datei erkannt
+Kann nicht mehr als eine Teildatei finden.
+7500
+Berechne Prüfsumme...
+Prüfsummen-Information
+CRC-Prüfsumme über die Daten:
+Prüfsumme über Daten und Namen:
+7600
+Benchmark
+Speichernutzung:
+Komprimierung
+Dekomprimierung
+Bewertung
+Gesamtwertung
+Aktuell
+Ergebnis
+CPU-Nutzung
+Bewert./Nutzung
+Durchläufe:
+7700
+Verknüpfung
+Verknüpfung
+Verknüpfung von:
+Verknüpfung zu:
+7710
+Verknüpfungsart
+Harte Verknüpfung
+Datei Symbolische Verknüpfung
+Ordner Symbolische Verknüpfung
+Ordner Verbindung

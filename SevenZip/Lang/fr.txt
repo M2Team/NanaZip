@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  4.07 : Nicolas Sierro
+;  9.07 : Philippe Berthault
+; 15.14 : Sylvain St-Amand (SSTSylvain)
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+French
+Français
+401
+OK
+Annuler
+
+
+
+&Oui
+&Non
+&Fermer
+Aide
+
+&Continuer
+440
+Oui pour &Tous
+Non pour T&ous
+Arrêter
+Redémarrer
+&Arrière-plan
+P&remier plan
+&Pause
+En pause
+Êtes-vous sur de vouloir annuler ?
+500
+&Fichier
+&Édition
+Affic&hage
+Fa&voris
+&Outils
+&Aide
+540
+&Ouvrir
+Ouvrir à l'&intérieur
+Ouvrir à l'e&xtérieur
+&Voir
+&Édition
+Reno&mmer
+&Copier vers...
+&Déplacer vers...
+S&upprimer
+Diviser le &fichier...
+Combiner les fic&hiers...
+P&ropriétés
+Comme&ntaire...
+Somme de contrôle
+Diff
+Créer un dossier
+Créer un fichier
+&Quitter
+Lien
+Flux &Alternatif
+600
+Sélectionner &Tout
+Désélectionner Tout
+&Inverser la Sélection
+Sélectionner...
+Désélectionner...
+Sélectionner par Sorte
+Désélectionner par Sorte
+700
+&Grandes Icônes
+&Petites Icônes
+&Liste
+&Détails
+730
+Non trié
+Vue à plat
+&2 Fenêtres
+&Barres d'outils
+Ouvrir le dossier racine
+Dossier parent
+Historique des dossiers...
+Actualis&er
+Actualiser Automatiquement
+750
+Barre d'Archive
+Barre Standard
+Grands Boutons
+Montrer le texte des Boutons
+800
+&Ajouter le répertoire aux Favoris
+Signet
+900
+&Options...
+&Test de performance
+960
+&Contenu...
+À &propos de 7-Zip...
+1003
+Chemin
+Nom
+Extension
+Dossier
+Taille
+Compressé
+Attributs
+Créé le
+Accédé le
+Modifié le
+Solide
+Commentaire
+Chiffrer
+Diviser Avant
+Diviser Après
+Dictionnaire
+
+Sorte
+Anti
+Méthode
+OS hôte
+Système de Fichiers
+Utilisateur
+Groupe
+Bloc
+Commentaire
+Position
+Préfixe
+Dossiers
+Fichiers
+Version
+Volume
+Multivolume
+Offset
+Liens
+Blocs
+Volumes
+
+64 bits
+Big-endian
+CPU
+Taille physique
+Taille des en-têtes
+Somme de contrôle
+Caractéristiques
+Adresse virtuelle
+ID
+Nom court
+Application créatrice
+Taille de secteur
+Mode
+Lien Symbolique
+Erreur
+Taille Totale
+Espace Libre
+Taille des clusters
+Nom de volume
+Nom local
+Fournisseur
+Sécurité NT
+Flux alternatif
+Aux
+Effacer
+En Arbre
+
+
+Type d'erreur
+Erreurs
+Erreurs
+Avertissements
+Avertissement
+Flux
+Flux Alterné
+Grosseur du Flux Alterné
+Grosseur Virtuel
+Grosseur Décompressé
+Grosseur Physique Totale
+Indexe du Volume
+Sous-Type
+Commentaire Bref
+Code Page
+
+
+
+Grosseur Tail
+Grosseur Embedded Stub
+Lien
+Lien Solide
+iNode
+
+Lecture-seulement
+2100
+Options
+Langue
+Langue :
+Éditeur
+&Éditeur :
+&Diff :
+2200
+Système
+Associer avec 7-Zip :
+Tous les utilisateurs
+2301
+Intégrer 7-Zip au menu contextuel
+Menu contextuel en cascade
+Éléments du menu contextuel :
+Icônes dans le menu contextuel
+2320
+<Dossier>
+<Archive>
+Ouvrir archive
+Extraire les fichiers...
+Ajouter à l'archive...
+Contrôler l'archive
+Extraire Ici
+Extraire vers {0}
+Ajouter à {0}
+Compresser et envoyer par courriel...
+Compresser vers {0} et envoyer par courriel
+2400
+Dossiers
+Dossier de &travail
+Dossier temporaire du &système
+&Courant
+S&pécifié :
+N'utiliser que pour les médias amovibles
+Spécifiez un dossier pour les fichiers d'archive temporaires.
+2500
+Paramètres
+Afficher l'élément ".."
+Afficher les icônes réelles des fichiers
+Afficher le menu système
+&Sélectionner toute la ligne
+Afficher la &grille
+Simple clic pour ouvrir un item
+Utiliser la sélection &alternative
+Utiliser des &grosses pages mémoire
+2900
+A propos de 7-Zip
+7-Zip est un logiciel libre
+3000
+Le système ne peut allouer la quantité de mémoire nécessaire
+Il n'y a pas d'erreurs
+{0} objet(s) sélectionné(s)
+Le dossier '{0}' ne peut pas être créé
+Les opérations de mise à jour ne sont pas disponibles pour cette archive.
+Le fichier '{0}' ne peut être ouvert comme une archive
+L'archive cryptée '{0}' ne peut être ouverte. Mauvais mot de passe ?
+Ce type d'archive n'est pas supporté
+Le fichier {0} existe déjà
+Le fichier '{0}' a été modifié.\nVoulez-vous le mettre à jour dans l'archive ?
+Impossible de mettre à jour\n'{0}'
+Impossible de démarrer l'éditeur.
+Le fichier est peut-être un virus (le nom contient des grands espacements pour masquer l'extension).
+Cette opération ne peut être effectuée depuis un dossier ayant un trop long chemin d'accès.
+Vous devez sélectionner un fichier
+Vous devez sélectionner un ou plusieurs fichiers
+Trop d'objets
+Ne peut ouvrir les fichiers {0} comme une archive
+Le fichier {0} est ouvert comme une archive
+L'archive est ouverte avec un décalage
+3300
+Extraction
+Compression
+Contrôle
+Ouverture...
+Exploration...
+Enlever
+3320
+Ajoute
+Modifie
+Analyse
+Réplique
+Remballage
+Passe
+Efface
+Création d'un en-tête
+3400
+Extraire
+E&xtraire vers :
+Choisissez un dossier pour l'extraction des fichiers.
+3410
+Mode de chemin :
+Nom de chemin complet
+Pas de nom de chemin
+Nom de chemin absolu
+Nom de chemin relatif
+3420
+Mode de remplacement :
+Confirmer avant de remplacer
+Remplacer sans demander
+Ignorer les fichiers existants
+Renommer automatiquement
+Renommer les fichiers existants
+3430
+Élimine la duplication du répertoire racine
+Restauration du fichier de sécurité
+3500
+Confirmer le remplacement de fichier
+Le dossier de destination contient déjà un fichier avec ce nom.
+Voulez-vous remplacer le fichier existant
+par celui-ci ?
+{0} octets
+Renommer &automatiquement
+3700
+Méthode de compression non valide pour '{0}'.
+Donnée erronée dans le fichier '{0}'. Le fichier est corrompu.
+Échec du contrôle CRC dans le fichier '{0}'. Le fichier est corrompu.
+Donnée erronée dans le fichier crypté '{0}'. Mauvais mot de passe ?
+Échec du contrôle CRC dans le fichier crypté '{0}'. Mauvais mot de passe ?
+3710
+Pas le bon mot de passe ?
+3721
+Méthode de compression non supportée
+Erreur de donnée
+Échec de CRC
+Donnée non disponible
+Fin de données inattendues
+Il y a des données après la fin des données utiles
+N'est pas une archive
+Erreur en-têtes
+Mauvais mot de passe
+3763
+Démarrage non disponible d'une archive
+Démarrage non confirmé d'une archive
+
+
+
+Option non supportée
+3800
+Entrez le mot de passe
+Entrez le mot de passe :
+Entrez le mot de passe à nouveau :
+&Afficher le mot de passe
+Les mots de passe ne correspondent pas
+Pour le mot de passe, n'utilisez que des lettres non accentuées, des chiffres et des caractères spéciaux (!, #, $, ...)
+Le mot de passe est trop long
+Mot de passe
+3900
+Temps écoulé :
+Temps restant :
+Taille totale :
+Vitesse :
+Traité :
+Taux de compression :
+Erreurs :
+Archive :
+4000
+Ajouter à l'archive
+&Archive :
+&Mode de mise à jour :
+&Format de l'archive :
+N&iveau de compression :
+Méthode de &compression :
+&Taille du dictionnaire :
+Tai&lle des mots :
+Taille de bloc solide :
+Nombre de threads CPU :
+&Paramètres :
+Options
+Créer une archive SF&X
+Compresser des fichiers partagés
+Chiffrement
+Méthode de chiffrement :
+Chiffre les &noms de fichiers
+Mémoire pour la compression :
+Mémoire pour la décompression :
+Effacer les fichiers après compression
+4040
+Emmagasine liens symboliques
+Emmagasine liens solides
+Emmagasine flux de données alternatifs
+Emmagasine fichier de sécurité
+4050
+Aucune
+Le plus rapide
+Rapide
+Normale
+Maximum
+Ultra
+4060
+Ajouter et remplacer les fichiers
+Mettre à jour et ajouter les fichiers
+Rafraîchir les fichiers existants
+Synchroniser les fichiers
+4070
+Choisir
+Tous les fichiers
+Non-solide
+Solide
+6000
+Copier
+Déplacer
+Copier dans :
+Déplacer vers :
+Copie...
+Déplacement...
+Renommage...
+Sélectionnez le dossier de destination.
+L'opération n'est pas possible pour ce dossier.
+Erreur durant le Renommage du Fichier ou du Dossier
+Confirmation de la Copie de(s) Fichier(s)
+Confirmer la copie de(s) fichier(s) à archiver
+6100
+Confirmer la Suppression du Fichier
+Confirmer la Suppression du Dossier
+Confirmer la Suppression de Multiple Fichiers
+Êtes-vous sûr de vouloir supprimer '{0}' ?
+Êtes-vous sûr de vouloir supprimer le dossier '{0}' et tout ce qu'il contient ?
+Êtes-vous sûr de vouloir supprimer ces {0} objets ?
+Suppression...
+Erreur durant la suppression du fichier ou du dossier
+Le système ne peut mettre à la Corbeille un fichier avec un trop long chemin d'accès
+6300
+Créer un Dossier
+Créer un Fichier
+Nom du dossier :
+Nom du fichier :
+Nouveau dossier
+Nouveau fichier
+Erreur durant la création du dossier
+Erreur durant la création du fichier
+6400
+Commentaire
+&Commentaire :
+Sélectionner
+Désélectionner
+Masquer :
+6600
+Propriétés
+Historique des dossiers
+Messages de diagnostic
+Message
+7100
+Ordinateur
+Réseau
+Documents
+Système
+7200
+Ajouter
+Extraire
+Tester
+Copier
+Déplacer
+Supprimer
+Informations
+7300
+Diviser le fichier
+&Diviser en :
+Diviser en &volumes, octets :
+Découper...
+Confirmez le découpage
+Êtes-vous sûr de vouloir découper le fichier en {0} volumes ?
+La taille de volume doit être inférieure à la taille du fichier d'origine
+Taille de volume incorrecte
+Taille de volume spécifiée : {0} octets.\nÊtes-vous sûr de vouloir découper l'archive dans de tels volumes ?
+7400
+Combiner les fichiers
+&Combiner en :
+Combinaison...
+Ne sélectionnez que le premier fichier
+Ne trouve aucun fichier faisant partie d'une archive divisée
+Ne trouve qu'un seul fichier faisant partie d'une archive divisée
+7500
+Calcul de la somme de contrôle...
+Informations sur la somme de contrôle
+Somme de contrôle des données :
+Somme de contrôle des données et des noms :
+7600
+Test de performance
+Utilisation de la mémoire :
+Compression
+Décompression
+Taux
+Taux total
+Actuel
+Résultant
+Utilisation CPU
+Estimé / Usage
+Passe :
+7700
+Lien
+Lien
+Lien depuis :
+Lien ver :
+7710
+Sorte de lien
+Lien solide
+Lien symbolique de fichier
+Lien symbolique de répertoire
+Jonction de répertoire

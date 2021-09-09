@@ -1,0 +1,495 @@
+;!@Lang2@!UTF-8!
+; 15.00 : 2020-05-15 : Mara Gati Lucky (http://electricity.co.ke)
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Swahili
+Kiswahili
+401
+Sawa
+Ghairi
+
+
+
+&Ndio
+&Hapana
+&Funga
+Usaidizi
+
+&Endelea
+440
+Ndio kwa &zote
+Hapana kwa z&ote
+Simamisha
+Washa upya
+&Mandharinyuma
+&Mandharimbele
+&Tuliza
+Imetulizwa
+Una uhakika unataka kughairi?
+500
+&Faili
+&Hariri
+&Mwoneko
+Z&inazopendwa
+&Zana
+&Usaidizi
+540
+&Fungua
+Fungua &ndani
+Fungua n&je
+&Mwoneko
+&Hariri
+Pati&a jina upya
+&Nakili hadi...
+&Sogeza hadi...
+&Futa
+&Gawiza faili...
+Ung&anisha nyaraka...
+S&ifa
+Toa m&aoni...
+Kokotoa checksum
+Tofautisha
+Unda kabrasha
+Unda faili
+F&unga
+Kiungo
+&Mitiririsho mbadala
+600
+Teua &zote
+Ondoa uteuzi wote
+&Pindua uteuzi
+Teua...
+Ondoa uteuzi...
+Teua kulingana na aina
+Ondoa uteuzi kulingana na aina
+700
+Iko&ni kubwa
+Ikoni ndogo
+&Orodha
+&Maelezo
+730
+Haijapangwa
+Mwoneko bapa
+&2 paneli
+&Miambaa zana
+Fungua kabrasha shina
+Juu kiwango kimoja
+Historia ya folda...
+&Weka upya
+Weka upya kioto
+750
+Mwambaa zana wa akiba
+Mwambaa zana wa kawaida
+Vitufe vikubwa
+Onyesha matini ya vitufe
+800
+&Ongeza folda kwa zinazopendwa kama
+Alamisho
+900
+&Chaguo...
+&Kanuni ya mwongozo
+960
+&Yaliyomo...
+&Kuhusu 7-Zip...
+1003
+Kijia
+Jina
+Kiendelezi
+Folda
+Ukubwa
+Ukubwa finyaza
+Sifa
+Iliundwa
+Imefikiwa
+Imerekebishwa
+Thabiti
+Ilitolewa maoni
+Imesimbwa fiche
+Gawiza kabla
+Gawiza baada
+Kamusi
+
+Aina
+Kinga
+Mbinu
+OS mwenyeji
+Mfumo wa mafaili
+Mtumiaji
+Kundi
+Fungu
+Maoni
+Cheo
+Kiambishi awali ya kijia
+Folda
+Nyaraka
+Toleo
+Kiwango
+Viwango-zaidi
+Chipuo
+Viungo
+Vifungu
+Viwango
+
+biti-64
+Big-endian
+CPU
+Ukubwa wa asili
+Ukubwa wa vijajuu
+Checksum
+Sifa
+Anwani pepe
+ID
+Jina fupi
+Programu-tumizi iliyounda
+Ukubwa wa sekta
+Modi
+Kiungo ishara
+Tatizo
+Ukubwa jumla
+Nafasi huru
+Ukubwa wa kishada
+Lebo
+Jina la ndani
+Mtoa-huduma
+Usalama wa NT
+Mtiririsho mbadala
+Aux
+Imefutwa
+Ni mti
+	
+
+Aina ya hitilafu
+Hitilafu
+Hitilafu
+Maonyo
+Onyo
+Mitiririsho
+Mitiririsho mbadala
+Ukubwa wa mitiririsho mbadala
+Ukubwa pepe
+Ukubwa wa kufungusha
+Jumla ya ukubwa halisi
+Kielezo cha kihifadhi
+AinaNdogo
+Maoni fupi
+Ukurasa msimbo
+
+
+
+Ukubwa wa mkia
+Ukubwa wa stub iliyopachikwa
+Kiungo
+Kiungo dhabiti
+iNode
+
+Soma-tu
+2100
+Chaguo
+Lugha
+Lugha:
+Kihariri
+&Kihariri:
+&Tofauti:
+2200
+Mfumo
+Husisha 7-Zip na:
+Watumiaji wote
+2301
+Jumlisha 7-Zip kwenya menyu muktadha ya sheli
+Menyu muktadha iliyoporomoka
+Vipengee vya menyu muktadha:
+Ikoni katika menyu muktadha
+2320
+<Folda>
+<Kihifadhi>
+Fungua kihifadhi
+Chopoa faili...
+Ongeza kwa kihifadhi...
+Pima kihifadhi
+Chopoa hapa
+Chopoa kwenda {0}
+Ongeza kwa {0}
+Finyaza na utume barua pepe...
+Finyaza kwa {0} na tuma barua pepe
+2400
+Folda
+&Folda tumizi
+F&olda ya muda ya mfumo
+&Ya sasa
+&Imebainishwa:
+Tumia kwa viendeshi vinavyoweza kutolewa pekee
+Bainisha eneo la muda la vihifadhi.
+2500
+Mipangilio
+Onyesha ".." kipengee
+Onyesha ikoni halisi za faili
+Onyesha menyu ya mfumo
+Teua sa&fumlalo nzima
+Onyesha &mistari mraba
+Bofya mara moja kufungua kipengee
+&Mtindo mbadala wa uteuzi
+Tumia kurasa &kubwa za kumbukumbu
+2900
+Kuhusu 7-Zip
+7-Zip ni programu huria
+3000
+Mfumo hauwezi kutenga kumbukumbu inayohitajika
+Hakuna matatizo yoyote
+Vipengee {0} vimeteuliwa
+Folda '{0}' haitengenezeki
+Operesheni za usasishi haziauniwi kwa kihifadhi hiki.
+Haiwezi fungua faili '{0}' kama kihifadhi
+Haiwezi fungua kihifadhi simba-fiche '{0}'. Nywila mbovu?
+Mtindo wa kihifadhi haiauniwi
+Faili {0} tayari ipo
+Faili '{0}' ilibadilishwa.\nJe, unataka kuisasisha katika kihifadhi?
+Haiwezi kusasisha faili\n'{0}'
+Haiwezi fungua kihariri.
+Faili hii inakaa kama kirusi (jina la faili ina nafasi ndefu).
+Operesheni haiwezi itwa kutoka folda iliyo na kijiajina ndefu.
+Lazima uteue faili moja
+Lazima uteue faili moja au zaidi
+Vipengee vingi kupindukia
+Haiwezi fungua faili kama {0} kihifadhi
+Faili imefunguliwa kama {0} kihifadhi
+Kihifadhi imefunguliwa kama chipuo
+3300
+Chopoa
+Inafinyaza
+Inapima
+Inafungua...
+Inatambaza...
+Inaondoa
+3320
+Inaongeza
+Inasasisha
+Inakagua
+Inarudufisha
+Inafungasha tena
+Inaruka
+Inafuta
+Inatengeneza kijajuu
+3400
+Chopoa
+Chopoa hadi:
+Bainisha eneo la faili zitakazochopolewa.
+3410
+Mtindo wa kijia:
+Jina kijia kamili
+Hakuna jina kijia
+Kijiajina kuntu
+Kijiajina husiani
+3420
+Mtindo wa kuandikia juu:
+Uliza kabla kuandikia juu
+Andikia juu bila kisituo
+Ruka faili zilizopo
+Patia jina upya kioto
+Patia faili zilizopo majina mapya kioto
+3430
+Ondoa urudufu wa kabrasha shina
+Rejesha usalama wa faili
+3500
+Dhibitisha kubadilisha faili
+Folda fikio tayari inayo faili iliyochakatwa.
+Ungependa kubadilisha faili iliyopo
+na hii?
+{0} baiti
+Patia jina &upya kioto
+3700
+Mbinu ya ufinyazi haiauniwi kwa '{0}'.
+Tatizo la data katika '{0}'. Faili imevunjika.
+CRC haikufaulu katika '{0}'. Faili imevunjika.
+Tatizo la data katika faili simba-fiche '{0}'. Nywila mbovu?
+CRC haikufaulu katika faili simba-fiche '{0}'. Nywila mbovu?
+3710
+Nywila si sahihi?
+3721
+Mbinu ya ufinyazi haiauniwi
+Tatizo la data
+CRC haikufaulu
+Data haipatikani
+Mwisho wa data haukutarajika
+Kuna data baada ya mwisho wa data muhimu
+Si kihifadhi
+Matatizo ya vijajuu
+Nywila si sahihi
+3763
+Mwanzo wa kihifadhi haupatikani
+Mwanzo wa kihifadhi haujadhibitishwa
+
+
+
+Kipengele hakiauniwi
+3800
+Ingiza nywila
+Ingiza nywila:
+Ingiza nywila tena:
+&Onyesha nywila
+Nywila hazifanani
+Tumia tu herufi za Kiingereza, nambari na vibambo spesheli (!, #, $, ...) katika nywila
+Nywila ni ndefu kupindukia
+Nwyila
+3900
+Muda uliopita:
+Muda uliobaki:
+Jumla ya ukubwa:
+Kasi:
+Iliyochakatwa:
+Uwiano wa ufinyazi:
+Matatizo:
+Vihifadhi:
+4000
+Ongeza kwa kihifadhi
+&Hifadhi:
+&Mbinu ya usasishi:
+Umbizo la kihi&fadhi:
+Kiwango cha u&finyazi:
+&Mbinu ya ufinyazi:
+U&kubwa wa kamusi:
+&Ukubwa wa neno:
+Ukubwa wa fungu dhabiti:
+Idadi ya mitungo ya CPU:
+&Parameta:
+Chaguo
+Tengeneza kihifadhi ya SF&X
+Finyaza faili shirikishi
+Usimbaji fiche
+Mbinu ya usimbaji fiche:
+Simba fiche maji&na ya faili
+Kumbukumbu inayotumika kufinyaza:
+Kumbukumbu inayotumika kutoa ufinyazi:
+Futa mafaili baada ya kutoa ufinyazi
+4040
+Hifadhi viungo ishara
+Hifadhi viungo dhabiti
+Hifadhi mitiririsho data mbadala
+Hifadhi usalama wa faili
+4050
+Ekeza
+Haraka zaidi
+Haraka
+Kawaida
+Upeojuu
+Upoejuu zaidi
+4060
+Ongeza na badilisha faili
+Sasisha na ongeza faili
+Fanya faili zilizopo ziwe freshi
+Landanisha faili
+4070
+Vinjari
+Faili zote
+Sio-dhabiti
+Dhabiti
+6000
+Nakili
+Sogeza
+Nakili hadi:
+Sogeza hadi:
+Inanakili...
+Inasogeza...
+Inapeana jina upya...
+Teua folda fikio.
+Operesheni hiyo haikubaliki kwa folda hii.
+Tatizo katika kupatia faili au folda jina upya
+Dhibitisha unakilishaji wa faili
+Una uhakika unataka kunakilisha faili hadi hifadhi?
+6100
+Dhibitisha ufutaji wa faili
+Dhibitisha ufutaji wa folda
+Dhibitisha ufutaji wa faili anuwai
+Una uhakika unataka kufuta '{0}'?
+Una uhakika unataka kufuta folda '{0}' na yote yaliyomo?
+Una uhakika unataka kufuta vipengee hivi {0} ?
+Inafuta...
+Tatizo katika kufuta faili au folda
+Mfumo haiwezi kutuma faili yenye kijia ndefu kwa kijalala
+6300
+Unda folda
+Unda faili
+Jina la folda:
+Jina la faili:
+Folda Mpya
+Faili Mpya
+Tatizo kuuda folda
+Tatizo kuunda faili
+6400
+Maoni
+&Maoni:
+Teua
+Ondoa uteuzi
+Figu:
+6600
+Sifa
+Historia ya folda
+Jumbe za uchunguzi
+Ujumbe
+7100
+Tarakilishi
+Mtandao
+Nyaraka
+Mfumo
+7200
+Ongeza
+Chopoa
+Jaribu
+Nakili
+Sogeza
+Futa
+Taarifa
+7300
+Gawiza faili
+&Gawiza hadi:
+Gawiza hadi &vihifadhi data, baiti:
+Inagawiza...
+Dhibitisha kugawiza
+Una uhakika unataka kugawiza faili hii hadi vihifadhi data {0} ?
+Ukubwa wa kihifadhi data lazima iwe ndogo kuliko ukubwa wa faili asili
+Ukubwa wa kihifadhi data sio sahihi
+Ukubwa wa kihifadhi data uliobainishwa: {0} bytes.\nUna uhakika unataka kugawiza hifadhi hadi vihifadhi kama hivi?
+7400
+Unganisha faili
+&Unganisha hadi:
+Inaunganisha...
+Teua tu pande ya kwanza ya faili gawizww
+Haiwezi kugundua faili kama pande ya faili gawize
+Haiwezi pata zaidi ya pande moja ya faili gawize
+7500
+Inakokotoa checksum...
+Taarifa ya checksum
+Checksum CRC ya data:
+Checksum CRC ya data na majina:
+7600
+Kanuni ya mwongozo
+Matumizi ya kumbukumbu:
+Kufinyaza
+Kutoa ufinyazi
+Kadirio
+Kadirio kiujumla
+Ya sasa
+Yanayotokea
+Matumizi ya CPU
+Kadirio / Matumizi
+Mapitio:
+7700
+Kiungo
+Kiungo
+Kiungo kutoka:
+Kiungo hadi:
+7710
+Aina ya kiungo
+Kiungo ngumu
+Faili kiungo kiishara
+Folda kiungo kiishara
+Makutano ya saraka

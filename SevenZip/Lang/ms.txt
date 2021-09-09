@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.30 : Khairul Ridhwan Bin Omar
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Malay
+Bahasa Melayu
+401
+OK
+Batal
+
+
+
+&Ya
+&Tidak
+&Tutup
+Bantuan
+
+&Teruskan
+440
+Ya untuk Semua
+Tidak untuk Semua
+Henti
+Mula Semula
+&Latar belakang
+&Latar depan
+&Berehat
+Berehat
+Anda yakin untuk membatalkannya?
+500
+&Fail
+&Edit
+&Paparan
+K&egemaran
+&Alat
+&Bantuan
+540
+&Buka
+Buka di D&alam
+Buka di L&uar
+&Paparan
+&Edit
+Nam&akan semula
+&Salin ke...
+&Pindahkan ke...
+Hapus
+&Bahagi/belah Fail...
+Gab&ung Fail...
+P&roperti
+Kom&en
+
+
+Buat Folder
+Buat Fail
+K&eluar
+600
+Pilih &Semua
+Jangan Pilih Semua
+&Sonsangkan Pilihan
+Pilih...
+Tidak Memilih...
+Pilih Berdasarkan Jenis
+Tidak Memilih Berdasarkan Jenis
+700
+Ikon B&esar
+Ikon K&ecil
+&Senarai
+&Butiran
+730
+Tidak Tersusun
+
+&2 Panel
+&Toolbar
+Buka Root Folder
+Ke atas Satu Aras
+Folder Sejarah...
+&Segarkan Semula
+750
+Toolbar Arkib
+Toolbar Standard
+Bebutang Besar
+Perlihatkan Teks Bebutang
+800
+&Tambah folder pada Kegemaran sebagai
+Penanda Buku
+900
+&Opsyen...
+&Tanda Aras
+960
+&Kandungan...
+&Perihal 7-Zip...
+1003
+Bahagian
+Nama
+Sambungan
+Folder
+Saiz
+Saiz Paket
+Atribut
+Dibuat
+Diakses
+Diubah Suai
+Solid
+Komen
+Terenkripsi
+Terpisah Sebelum
+Terpisah Selepas
+Kamus
+CRC
+Jenis
+Anti
+Kaedah
+Sistem Operasi
+Sistem Fail
+Pengguna
+Kumpulan
+Blok
+Komen
+Posisi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ralat
+Saiz Keseluruhan
+Ruang Kosong
+Saiz Kluster
+Label
+Nama Tempatan
+Penyedia
+2100
+Opsyen
+Bahasa
+Bahasa:
+Editor
+&Editor:
+
+2200
+Sistem
+Kongsikan 7-Zip dengan:
+2301
+Integrasikan 7-Zip ke shell konteks menu
+Cascaded konteks menu
+Item pada konteks menu:
+2320
+<Folder>
+<Arkib>
+Buka arkib
+Ekstrak fail...
+Tambahkan ke arkib...
+Uji arkib
+Ekstrak di sini
+Ekstrak ke {0}
+Tambahkan ke {0}
+Padatkan dan kirimkan melalui email...
+Padatkan ke {0} dan kirimkan melalui email
+2400
+Folder
+&Folder kerja
+&Folder sementara sistem
+&Sekarang
+&Ditentukan:
+Hanya untuk pemacu mudah alih
+Tentukan lokasi untuk arkib fail sementara.
+2500
+Seting
+Perlihatkan ".." item
+Perlihatkan ikon asli dari fail
+Perlihatkan menu sistem
+&Pilih barisan penuh
+Perlihatkan garisan grid
+
+&Mod Pilihan Alternatif
+Gunakan muka surat memori yang &besar
+2900
+Perihal 7-Zip
+7-Zip adalah perisian percuma. Sokong pembangunan 7-Zip dengan melakukan pendaftaran.
+3000
+
+Tidak ada ralat
+{0} buah objek telah terpilih
+Tidak dapat membuat folder '{0}'
+Tidak menyokong pengemaskinian untuk arkib ini.
+
+
+
+
+Fail '{0}' telah terubah suai.\nApakah anda ingin mengemaskininya pada arkib?
+Tidak dapat mengemaskini fail\n'{0}'
+Tidak dapat membuka editor.
+
+
+
+
+Terlalu banyak item
+3300
+Sedang mengekstrak
+Memampatkan
+Pengujian
+Membuka...
+
+3400
+Ekstrak
+Ekstrak ke:
+Tentukan lokasi untuk pengekstrakan fail.
+3410
+Mod laluan
+Laluan nama penuh
+Tidak pakai nama laluan
+3420
+Mod tulis semula
+Tanya sebelum menulis semula
+Tulis semula tanpa perlu diberitahu
+Abaikan fail yang ada
+Namakan semula automatik
+Namakan automatik fail yang ada
+3500
+Pastikan penggantian fail
+Folder tujuan telah berisi fail yang telah terproses.
+Mahukah anda menggantikan fail yang ada
+dengan yang ini?
+{0} baits
+N&amakan semula Automatik
+3700
+Kaedah pemampatan untuk '{0}' tidak disokong.
+Data ralat di '{0}'. Fail ini rosak.
+CRC gagal di '{0}'. Fail ini rosak.
+
+
+3800
+Masukkan kata laluan
+Masukkan kata laluan:
+
+&Perlihatkan kata laluan
+
+
+
+Kata laluan
+3900
+Telah berlalu:
+Selesai dalam:
+Saiz:
+Kecepatan:
+
+
+Ralat:
+
+4000
+Tambahkan ke arkib
+&Arkib:
+&Mod kemaskini:
+Format arkib:
+Aras &mampatan:
+Kaedah mampatan:
+&Saiz kamus:
+&Saiz perkataan:
+
+
+&Parameter:
+Opsyen
+Buat arkib SF&X
+
+
+
+Enkripsi nama &fail
+Penggunaan memori untuk Memampatkan:
+Penggunaan memori untuk Menyah-mampatkan:
+4050
+Untuk Penyimpanan
+Lebih cepat
+Cepat
+Normal
+Maksimum
+Ultra
+4060
+Tambah dan gantikan fail
+Kemaskini dan tambahkan fail
+Perbaharui fail yang ada
+Menyesuaikan fail
+4070
+Selusur...
+Semua Fail
+
+
+6000
+Salin
+Pindah
+Salin ke:
+Pindah ke:
+Sedang menyalin...
+Sedang memindah...
+Namakan semula...
+
+Operasi tidak disokong.
+Ralat, ketika namakan semula Fail atau Folder
+Pasti salinkan fail
+Anda yakin untuk menyalinkan fail kepada arkib
+6100
+Pasti penghapusan fail
+Pasti penghapusan folder
+Pasti penghapusan fail-fail
+Anda yakin untuk menghapus '{0}'?
+Anda yakin untuk menghapus folder '{0}' dan semua isi kandungannya?
+Anda yakin untuk menghapus item {0}?
+Penghapusan...
+Ralat ketika menghapuskan Fail atau Folder
+
+6300
+Buat Folder
+Buat Fail
+Nama Folder:
+Nama Fail:
+Folder Baru
+Fail Baru
+Ralat, tidak dapat Membuat Folder
+Ralat, tidak dapat Membuat Fail
+6400
+Komen
+&Komen:
+Pilih
+Tidak Memilih
+Topeng:
+6600
+
+Folder Sejarah
+Mesej diagnostik
+Mesej
+7100
+Komputer
+Rangkaian
+
+Sistem
+7200
+Tambah
+Ekstrak
+Uji
+Salin
+Pindah
+Hapus
+Maklumat
+7300
+Pisahkan Fail
+&Pisahkan ke:
+Bahagi/belah ke &nilai, baits:
+Pembelahan ...
+
+
+
+
+
+7400
+Gabungan Fail
+&Gabung ke:
+Penggabungan ...
+
+
+
+7500
+
+
+
+
+7600
+Tanda Aras
+Penggunaan memori:
+Pemampatan
+Penyah-mampatan
+Rating
+Total Rating
+Sekarang
+Keputusan
+
+
+Lulus:

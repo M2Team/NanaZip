@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  3.09 : Kaupo Suviste
+;  9.07 : Mihkel Tõnnov
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Estonian
+eesti keel
+401
+OK
+Loobu
+
+
+
+&Jah
+&Ei
+&Sulge
+Abi
+
+&Jätka
+440
+Kõigile j&ah
+Kõigile e&i
+Seiska
+Restardi
+&Taustal
+&Esiplaanile
+&Paus
+Pausiks peatatud
+Kas soovite kindlasti loobuda?
+500
+&Fail
+&Redigeeri
+&Vaade
+&Lemmikud
+&Tööriistad
+&Abi
+540
+&Ava
+Ava s&ees
+Ava väljasp&ool
+Vaat&ur
+&Redigeeri
+&Nimeta ümber
+&Kopeeri asukohta...
+&Teisalda asukohta...
+Ku&stuta
+Tükel&da fail...
+Ü&henda failid...
+Atri&buudid
+Ko&mmentaar...
+Arvuta kontrollsumma
+Võrdle
+Loo kaust
+Loo fail
+&Välju
+600
+V&ali kõik
+Tühista kõik valikud
+&Pööra valik
+Vali...
+Tühista valik...
+Vali tüübi järgi
+Tühista tüübi järgi valik
+700
+&Suured ikoonid
+Väik&esed ikoonid
+&Loend
+Üksikasja&d
+730
+Sortimata
+Lame vaade
+&Kaks paani
+&Tööriistaribad
+Ava juurkaust
+Taseme võrra üles
+Kaustaajalugu...
+&Värskenda
+750
+Arhiiviriistariba
+Standardnupuriba
+Suured nupud
+Kuva nupusildid
+800
+&Lisa kaust lemmikute hulka järjehoidjana
+Järjehoidja
+900
+&Häälestus...
+&Jõudlustest
+960
+&Sisukord...
+&Teave 7-Zipi kohta...
+1003
+Tee
+Nimi
+Laiend
+Kaust
+Maht
+Maht tihendatult
+Atribuudid
+Loodud
+Avatud
+Muudetud
+Ühtne
+Kommenteeritud
+Krüptitud
+Tükeldatud enne
+Tükeldatud pärast
+Sõnastik
+CRC
+Tüüp
+Anti
+Meetod
+Opsüsteem
+Failisüsteem
+Kasutaja
+Rühm
+Plokk
+Kommentaar
+Koht
+Tee prefiks
+Kaustu
+Faile
+Versioon
+Köide
+Mitmeköiteline
+Nihe
+Linke
+Plokke
+Köiteid
+
+64-bitine
+Big-Endian
+Protsessor
+Füüsiline maht
+Päiste maht
+Kontrollsumma
+Karakteristikud
+Virtuaalaadress
+ID
+Lühinimi
+Loomisrakendus
+Sektori maht
+Režiim
+Link
+Tõrge
+Kogumaht
+Vaba ruum
+Klastri suurus
+Silt
+Kohalik nimi
+Teenusepakkuja
+2100
+Häälestus
+Keel
+Keel:
+Redaktor
+&Redaktor:
+&Võrdlusprogramm:
+2200
+Süsteem
+Seosta 7-Zip laienditega:
+2301
+Integreeri 7-Zip kesta hüpikmenüüsse
+Kaskaad-hüpikmenüü
+Hüpikmenüü käsud:
+2320
+<Kaust>
+<Arhiiv>
+Ava arhiiv
+Eralda failid...
+Lisa arhiivi...
+Testi arhiivi
+Eralda siia
+Eralda kausta {0}
+Lisa arhiivi {0}
+Tihenda ja meili...
+Tihenda arhiiviks {0} ja meili
+2400
+Kaustad
+&Töökaust
+&Süsteemi ajutiste failide kaust
+&Praegune kaust
+&Kasutaja määratud:
+Kasuta ainult irddraivide puhul
+Määrake ajutiste arhiivifailide asukoht.
+2500
+Sätted
+Kuva element ".."
+Kuva tegelikud failiikoonid
+Kuva süsteemimenüü
+&Vali terve rida
+Kuva &ruudujooned
+Ava üksus ühe klõpsuga
+&Alternatiivne valikurežiim
+Kasuta &suuri mälulehekülgi
+2900
+Teave 7-Zipi kohta
+7-Zip on vaba tarkvara. Kuid kui soovite toetada 7-Zipi arendamist, siis saate programmi registreerida.\n\n7-Zipi Eesti koduleht:\nhttp://www.hot.ee/somberg/7zip.html
+3000
+Süsteem ei saa eraldada nõutavat mälumahtu.
+Vigu ei leitud.
+{0} üksus(t) valitud
+Ei saa luua kausta {0}
+Selle arhiivi värskendamistoiminguid ei toetata.
+Ei saa avada faili {0} arhiivina.
+Ei saa avada krüptitud arhiivi {0}. Kas vale parool?
+Toetamata arhiivitüüp.
+Fail {0} on juba olemas.
+Faili {0} on muudetud.\nKas soovite selle arhiivis värskendada?
+Ei saa värskendada faili\n{0}
+Ei saa käivitada redaktorit.
+See fail sarnaneb viirusega (faili nimi sisaldab pikka tühikute jada).
+Toimingut ei saa käivitada kaustast, millel on pikk tee.
+Te peate valima ühe faili.
+Te peate valima ühe või mitu faili.
+Liiga palju üksusi.
+3300
+välja eraldatud
+tihendatud
+Testimine
+Avamine...
+Läbivaatamine...
+3400
+Väljaeraldamine
+&Eralda välja kausta:
+Määrake väljaeraldatud failide asukoht.
+3410
+Teed
+&Täielikud teenimed
+Teenime&deta
+3420
+Ülekirjutus
+Küsi e&nne ülekirjutamist
+Ki&rjuta küsimata üle
+&Jäta olemasolevad failid vahele
+Nimeta a&utomaatselt ümber
+Nimeta &olemasolevad f. autom. ümber
+3500
+Failiasenduse kinnitamine
+Sihtkaust juba sisaldab töödeldavat faili.
+Kas soovite asendada olemasoleva faili
+selle failiga?
+{0} baiti
+Nimeta a&utomaatselt ümber
+3700
+Toetuseta tihendusmeetod failile {0}.
+Andmeviga failis {0}. Fail on rikutud.
+Tsükkelkoodkontroll (CRC) failis {0} nurjus. Fail on rikutud.
+Andmeviga krüptitud failis {0}. Kas vale parool?
+Tsükkelkoodkontroll (CRC) krüptitud failis {0} nurjus. Kas vale parool?
+3800
+Parooli sisestamine
+Sisestage parool:
+Parooli kordus:
+&Kuva parool
+Paroolid ei kattu.
+Kasutage paroolis ainult inglise keele tähti, numbreid ja erimärke (!, #, $, ...).
+Parool on liiga pikk.
+&Parool
+3900
+Kulunud aeg:
+Järelejäänud aeg:
+Kogumaht:
+Kiirus:
+Töödeldud:
+Tihendussuhe:
+Vigu:
+Arhiive:
+4000
+Arhiivi lisamine
+&Arhiiv:
+Värskend&usrežiim:
+Arhiivi&vorming:
+&Tihendusaste:
+Tihendus&meetod:
+Sõnaraamatu ma&ht:
+&Sõna maht:
+Ühtse ploki maht:
+Protsessorilõimede arv:
+Pa&rameetrid:
+Suvandid
+Loo is&eavanev arhiiv
+Tihenda kirjutuseks avatud failid
+Krüptimine
+Krüptimismeetod:
+Krüpti faili&nimed
+Mälu hõivatus tihendamisel:
+Mälu hõivatus hõrendamisel:
+4050
+Tihenduseta
+Kiireim tihendus
+Kiirtihendus
+Normaaltihendus
+Maksimaaltihendus
+Ultratihendus
+4060
+Lisa ja asenda failid
+Värskenda ja lisa failid
+Värskenda olemasolevad failid
+Sünkrooni failid
+4070
+Sirvi
+Kõik failid
+Mitteühtne
+Ühtne
+6000
+Kopeerimine
+Teisaldamine
+Kopeeri asukohta:
+Teisalda asukohta:
+Kopeerimine...
+Teisaldamine...
+Ümbernimetamine...
+Valige sihtkaust.
+See toiming pole selles kaustas toetatud.
+Tõrge faili või kausta ümbernimetamisel
+Failikopeerimise kinnitamine
+Kas soovite kindlasti kopeerida arhiivi järgmised failid:
+6100
+Failikustutuse kinnitamine
+Kaustakustutuse kinnitamine
+Mitme faili kustutamise kinnitamine
+Kas soovite kindlasti kustutada faili {0}?
+Kas soovite kindlasti kustutada kausta {0} ja kogu selle sisu?
+Kas soovite kindlasti kustutada need {0} üksust?
+Kustutamine...
+Tõrge faili või kausta kustutamisel
+Süsteem ei saa teisaldada prügikasti pika teega faili.
+6300
+Kausta loomine
+Faili loomine
+Kausta nimi:
+Faili nimi:
+Uus kaust
+Uus fail
+Tõrge kausta loomisel
+Tõrge faili loomisel
+6400
+- kommentaar
+&Kommentaar:
+Valimine
+Valiku tühistamine
+Mask:
+6600
+Atribuudid
+Kaustaajalugu
+Diagnostikateated
+Teade
+7100
+Arvuti
+Võrk
+Dokumendid
+Süsteem
+7200
+Lisa
+Eralda välja
+Testi
+Kopeeri
+Teisalda
+Kustuta
+Teave
+7300
+Faili tükeldamine:
+&Tükelda asukohta:
+&Tükelda köideteks (baitides):
+Tükeldamine...
+Tükeldamise kinnitamine
+Kas soovite kindlasti tükeldada faili {0} köiteks?
+Köite maht peab olema algfaili mahust väiksem.
+Sobimatu köitemaht.
+Määratud köitemaht: {0} baiti.\nKas soovite kindlasti tükeldada arhiivi niisugusteks köideteks?
+7400
+Failide ühendamine:
+Ü&henda asukohta:
+Ühendamine...
+Valige ainult tükeldatud faili esimene osa.
+Ei õnnestu tuvastada, et see fail oleks tükeldatud faili osa.
+Ei leia rohkem kui ühte tükeldatud faili osa.
+7500
+Kontrollsumma arvutamine...
+Kontrollsumma
+Andmete CRC-kontrollsumma:
+Andmete ja nimede CRC-kontrollsumma:
+7600
+Jõudlustest
+Mälu hõivatus:
+Tihendamine
+Hõrendamine
+Hinnang
+Üldine jõudlushinnang
+Praegune:
+Lõpptulemus:
+CPU hõivatus
+Hinnang/hõivatus
+Töötiire:

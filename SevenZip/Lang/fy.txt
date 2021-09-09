@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.53 : Berend Ytsma
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Frisian
+Frysk
+401
+Okee
+Ofbrekke
+
+
+
+&Jawis
+&Nee
+&Slute
+Help
+
+&Ferfetsje
+440
+Jawis foar &Alles
+Nee foar A&lles
+Stopje
+Opnij begjinne
+&Eftergrûn
+&Foargrûn
+&Skoftsje
+Skoft
+Binne jo wis dat jo ôfbrekke wolle?
+500
+&Triem
+&Bewurkje
+&Byld
+B&lêdwizers
+&Ark
+&Help
+540
+&Iepenje
+Iepenje &yn
+Iepenje bû&ten
+&Byld
+&Bewurkje
+Omne&ame
+&Kopiearje nei...
+&Ferpleats nei...
+&Wiskje
+Triemmen &spjalte...
+Triemmen Kom&binearje...
+E&igenskippen
+Komme&ntaar
+Kontrôlesom berekenje
+
+Map meitsje
+Triem meitsje
+U&tgong
+600
+&Alles selektearje
+Alles net selektearje
+&Seleksje omdraaien
+Selektearje...
+Net selektearje...
+Selektearje neffens type
+Net selektearje neffens type
+700
+Gru&tte Ikoanen
+L&ytse Ikoanen
+&List
+&Details
+730
+Net Sortearre
+Platte werjefte
+&2 Panielen
+&Arkbalke
+Haadmap iepenje
+Ien nivo omheech
+Maphistoarje...
+&Ferfarskje
+750
+Argyf arkbalke
+Standert arkbalke
+Grutte knoppen
+Knoptekst sjen litte
+800
+Map oan blêdwizers &taheakje  as
+Blêdwizer meitsje
+900
+&Opsjes...
+&Ykpunt
+960
+&Ynhâld...
+&7-Zip it hoe en het...
+1003
+Paad
+Namme
+Taheaksel
+Map
+Grutte
+Ynpakte grutte
+Skaaimerk
+Makke
+Lêste tagong
+Feroare
+Kompakt
+Kommentaar
+Fersifere
+Spjalt foar
+Spjalt efter
+Wurdboek
+CRC
+Type
+Anty
+Metoade
+Host OS
+Triemsysteem
+Brûker
+Keppel
+Blok
+Kommentaar
+Posysje
+Paad foarheaksel
+Mappen
+Triemmen
+Ferzje
+Folume
+Multifolume
+Offset
+Links
+Blokken
+Folumes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Flater
+Totale grutte
+Frije romte
+Kluster grutte
+Kaartsje
+Lokale namme
+Ferskaffer
+2100
+Opsjes
+Taal
+Taal:
+Bewurker
+&Bewurker:
+
+2200
+Systeem
+Ferbyn 7-Zip Mei:
+2301
+Yntegraasje fan 7-Zip yn ferbânmenu
+Ferbânmenu yn trepfoarm
+Ferbânmenu-items:
+2320
+<Map>
+<Argyf>
+Argyf iepenje
+Triemmen útpakke...
+Oan argyf taheakje...
+Argyf teste
+Hjir útpakke
+Utpakke yn {0}
+Oan {0} taheakje
+komprimearje en ferstjoere...
+Komprimearje nei {0} en poste
+2400
+Mappen
+&Wurkmap
+&Tydlikesysteemmap
+&Aktive
+&Oantsjutte:
+Allinnich brûke foar útnimbere skiven
+ynfiere fan de lokaasje foar tydlike argyftriemmen.
+2500
+Ynstellings
+".." item sjen litte
+Echte triem ikoanen sjen litte
+Systeemmenu sjen litte
+&Folsleine rige selektearje
+&Roaster sjen litte
+
+&Alternative seleksje modus
+Brûk &grut ûnthâld siden
+2900
+7-Zip it hoe en het
+7-Zip is fergees. Mar, jo kinne de ûntwikkeling stypje troch jo te registrearjen.
+3000
+
+Der binne gjin flaters
+{0} objekt(en) selektearre
+Kin map '{0}' net meitsje
+Bywurk operaasje waard net stipe troch dit argyf.
+Kin triem '{0} net as argyf iepenje
+Kin fersifere argyf '{0}' net iepenje. Ferkeard wachtwurd?
+
+
+Triem '{0}' is wizige.\nWolle jo it bywurkje yn it argyf?
+Kin triem '{0}'\nnet bywurkje
+Kin bewurker net starte.
+
+
+
+
+Tefolle items
+3300
+Utpakke
+Oan it komprimearjen
+Oan it Testen
+Oan it iepenjen...
+Oan it skennen...
+3400
+Utpakke
+U&tpakke nei:
+De lokaasje om nei út te pakken oantsjutte.
+3410
+Paad modus
+Folsleine paadnammen
+Gjin paadnammen
+3420
+Oerskriuw modus
+Freegje foardat jo oerskriuwe
+Oerskriuwe sûnder pront
+Besteande triemmen oerslaan
+Automatysk omneame
+Automatysk ek by besteande triemmen
+3500
+It ferfangen fan de triem befêstigje
+Bestimmingsmap befettet al in triem mei dizze namme.
+Wolle jo de triem ferfange
+Mei dizze?
+{0} bytes
+A&utomatysk omneame
+3700
+Net stipe kompresjemetoade foar '{0}'.
+Data flater yn '{0}'. Triem is beskeadige.
+CRC mislearre yn '{0}'. Triem is beskeadige.
+Data flater yn fersifere triem '{0}'. Ferkeard wachtwurd?
+CRC mislearre yn fersifere triem '{0}'. Ferkeard wachtwurd?
+3800
+Wachtwurd ynfiere
+Wachtwurd ynfiere:
+Wachwurd opnij ynfiere:
+Wachtwurd &sjen litte
+Wachtwurden komme net oerien
+Brûk allinne ingelske letters, nûmers en spesjale karakters (!, #, $, ...) foar it wachtwurd
+Wachtwurd is te lang
+Wachtwurd
+3900
+Ferstrutsen tiid:
+Tiid noch te gean:
+Totale grutte:
+Fluggens:
+Ferwurke:
+Kompresje nivo:
+Flaters:
+Argiven:
+4000
+Oan argyf taheakje
+&Argyf:
+&Bywurkmodus:
+Argyf &formaat:
+Kompresje&nivo:
+Kompresje&metoade:
+&Wurdboekgrutte:
+&Wurdgrutte:
+Kompakte blokgrutte:
+Tal CPU trieden:
+&Parameters:
+Opsjes
+Meitsje SF&X-argyf
+Dielde triemmen komprimearje
+Fersifering
+Fersiferingmetoade:
+Fersiferje triem&nammen
+Unthâld gebrûk by komprimearjen:
+Unthâld gebrûk by ûntkomprimearjen:
+4050
+Bewarje
+Fluchst
+Fluch
+Normaal
+Maksimum
+Ultra
+4060
+Triemmen taheakje en ferfange
+Triemmen taheakje en bywurkje
+Besteande triemmen ferfarskje
+Triemmen lyk rinne litte
+4070
+Blêdzje
+Alle triemmen
+net-kompakt
+Kompakt
+6000
+Kopiearje
+Ferpleatse
+Kopiearje nei:
+Ferpleats nei:
+Oan it kopiearren...
+Oan it ferpleatsen...
+Omneame...
+Bestimmingsmap selektearje.
+Operaasje wurdt net stipe.
+Flater by it omneamen fan triem of map
+Triem kopiearje befêstigje
+Binne jo wis dat jo de triemmen nei it argyf kopiearje wolle?
+6100
+It wiskjen fan de triem befêstigje
+It wiskjen fan de map befêstigje
+It wiskjen fan meardere triemmen befêstigje
+Binne jo wis dat jo '{0}' wiskje wolle?
+Binne jo wis dat jo de map '{0}' en al syn ynhâld wiskje wolle?
+Binne jo wis dat jo {0} items wiskje wolle?
+Oan it wiskjen
+Flater by it wiskjen fan triem of map
+
+6300
+Map meitsje
+Triem meitsje
+Mapnamme:
+Triem namme:
+Nije map
+Nije triem
+Flater by it meitsjen fan map
+Flater by’t meitsjen fan triem
+6400
+Kommentaar
+&Kommentaar:
+Selektearje
+Net Selektearje
+Masker:
+6600
+Eigenskippen
+Maphistoarje
+Diagnostyk berjocht
+Berjocht
+7100
+Kompjûter
+Netwurk
+
+Systeem
+7200
+Taheakje
+Utpakke
+Test
+Kopiearje
+Ferpleatse
+Wiskje
+Ynformaasje
+7300
+Triem spjalte
+&Spjalt nei:
+Spjalte nei &folumes, bytes:
+Oan it Spjalten...
+Spjalte befêstigje
+Wolle jo de triem spjalte yn {0} dielen?
+Folumegrutte moat lytser wêze dan de grutte fan it orizjineel
+Net juste folumegrutte
+Oantsjutte folumegrutte: {0} bytes.\nWolle jo it argyf yn sokke folumes spjalte?
+7400
+Triemmen kombinearje
+&Kombinearje nei:
+Oan it kombinearjen...
+Allinne earste triem selektearje
+
+
+7500
+Kontrôlesom oan it berekenjen...
+Kontrôlesom ynformaasje
+CRC kontrôlesom foar data:
+CRC kontrôlesom foar data en nammen:
+7600
+Benchmark
+Unthâld gebrûk:
+Oan it komprimearren
+Oan it ûntkomprimearren
+Wurdearring
+Totale Wurdearring
+Hjoeddeiske
+Resultaat
+CPU brûkens
+Beoardieling / Brûkens
+Kear foarbei:

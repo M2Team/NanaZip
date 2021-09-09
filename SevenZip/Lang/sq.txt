@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.37 : Mikel Hasko
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Albanian
+Shqip
+401
+Në rregull
+Anulim
+
+
+
+&Po
+&Jo
+&Mbyll
+Ndihmë
+
+&Vazhdim
+440
+Po për të gjith&a
+Jo për të gjit&ha
+Ndalo
+Rinis
+Në &sfond
+Në pla&n të parë
+&Pushim
+Në pushim
+Jeni të sigurt se dëshironi ta anuloni?
+500
+&Skedari
+&Redaktimi
+&Pamja
+&Të parapëlqyerit
+&Veglat
+&Ndihma
+540
+&Hap
+Hap përbre&nda
+Hap përjas&hta
+&Pamja
+&Redakto
+Ri&emërto
+&Kopjo tek...
+&Zhvendos tek...
+&Fshi
+N&daj skedarin...
+Kom&bino skedarët...
+&Vetitë
+Ko&menti
+Llogarit shumën e verifikimit
+
+Krijo një dosje
+Krijo një skedar
+&Dil
+600
+S&elekto të gjithë
+Çse&lekto të gjithë
+Anasill selekti&min
+Selekto...
+Çselekto...
+Selekto sipas tipit
+Çselekto sipas tipit
+700
+Ikona të &mëdha
+Ikona të &vogla
+&Listë
+&Detaje
+730
+&Të parenditur
+Pamje e rrafshtë
+&2 panele
+&Shiritat e veglave
+Hap dosjen rrënjë
+Një nivel më lartë
+Historiku i dosjes...
+&Rifresko
+750
+Shiriti i veglave i arkivit
+Shiriti standard i veglave
+Butona të mëdhenj
+Shfaq tekstin e butonave
+800
+&Shto dosjen tek të parapëlqyerit si
+Shënuesi
+900
+&Opsionet...
+&Etapa
+960
+&Përmbajtjet...
+&Për 7-Zip...
+1003
+Shtegu
+Emri
+Prapashtesa
+Dosja
+Madhësia
+Madhësia e mbërthimit
+Atributet
+Krijuar më
+Hyrë së fundi më
+Modifikuar më
+I qëndrueshëm
+I komentuar
+I shifruar
+Ndaj para
+Ndaj pas
+Fjalori
+CRC
+Tipi
+Anti
+Metoda
+Pronari i sistemit
+Sistemi i skedarit
+Përdoruesi
+Grupi
+Blloku
+Komenti
+Pozicioni
+Prefiksi i shtegut
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Gabim
+Madhësia totale
+Hapësira e lirë
+Madhësia e cluster-it
+Etiketa
+Emri lokal
+Kujdestari
+2100
+Opsionet
+Gjuha
+Gjuha:
+Redaktuesi
+&Redaktuesi:
+
+2200
+Sistemi
+Lidh 7-Zip me:
+2301
+Integro 7-Zip në kontekst meny
+Kaskado kontekst menynë
+Elementë të kontekst menysë:
+2320
+<Dosja>
+<Arkivi>
+Hap arkivin
+Zbërthe skedarët...
+Shto në arkiv...
+Testo arkivin
+Zbërthe këtu
+Zbërthe në {0}
+Shto tek {0}
+Kompreso dhe dërgo me e-mail...
+Kompreso në {0} dhe dërgo me e-mail
+2400
+Dosje
+&Dosja e punës
+Dosja e përkohshme e &sistemit
+Dosja &aktuale
+I sp&ecifikuar:
+Përdor vetëm për njësi të largueshme
+Specifikoni një vendndodhje për skedarët e përkohshëm të arkivit.
+2500
+Rregullimet
+Shfaq &artikullin ".."
+Shfaq &ikonat e vërteta të skedarëve
+Shfaq &menynë e sistemit
+Selekto të tërë &rreshtin
+Shfaq &vijat e rrjetit
+
+Mënyrë alternative &selektimi
+Përdor &faqe të mëdha të memories
+2900
+Për 7-Zip
+7-Zip është softuer falas. Megjithatë, ju mund të përkrahni në zhvillimin e 7-Zip duke e regjistruar atë.
+3000
+
+S'ka gabime
+Selektuar {0} objekt(e)
+S'mund të krijojë dosjen '{0}'
+Operacionet e azhurnimit për këtë arkiv s'përkrahen.
+
+
+
+
+Skedari '{0}' u modifikua.\nDoni ta azhurnoni atë edhe në arkiv?
+S'mund të azhurnojë skedarin\n'{0}'
+S'mund të hap redaktuesin.
+
+
+
+
+Tepër shumë artikuj
+3300
+Duke zbërthyer
+Duke kompresuar
+Duke testuar
+Duke hapur...
+Duke skanuar...
+3400
+Zbërthe
+Z&bërthe në:
+Specifikoni një vendndodhje për skedarët e zbërthyer.
+3410
+Mënyra e Shtegut
+Emra të plotë Shtigjesh
+Pa emra shtigjesh
+3420
+Mënyra e mbishkrimit
+Pyet para se të mbishkruaj
+Mbishkruaj pa nxitje
+Mbikalo skedarët ekzistues
+Riemërto automatikisht
+Riemërto auto. skedarët ekzistues
+3500
+Konfirmo zëvendësimin e skedarëve
+Dosja e destinacionit e përmban një herë skedarin e përpunuar.
+Dëshironi ta zëvendësoni skedarin ekzistues
+me këtë?
+{0} bajt
+R&iemërtim automatik
+3700
+Metodë e papërkrahshme kompresimi për '{0}'.
+Gabim të dhënash në '{0}'. Skedari është i prishur.
+CRC dështoi '{0}'. Skedari është i prishur.
+
+
+3800
+Fusni fjalëkalimin
+Fusni fjalëkalimin:
+
+&Trego fjalëkalimin
+
+
+
+Fjalëkalimi
+3900
+Koha e kaluar:
+Koha e mbetur:
+Madhësia:
+Shpejtësia:
+
+
+Gabime:
+
+4000
+Shto në arkiv
+&Arkivi:
+&Mënyra e azhurnimit:
+&Formati i arkivit:
+&Niveli i kompresimit:
+Metoda e kompr&esimit:
+Ma&dhësia e fjalorit:
+Mad&hësia e fjalës:
+
+
+&Parametrat:
+Opsionet
+Krijo një arkiv SF&X
+
+
+
+Shifro em&rat e skedarëve
+Shfrytëzimi i memo. për kompresimin:
+Shfrytëzimi i memo. për dekompresimin:
+4050
+Ruaj
+Më i shpejtë
+I shpejtë
+Normal
+Maksimal
+Ultra
+4060
+Shto dhe zëvendëso skedarët
+Azhurno dhe shto skedarët
+Azhurno skedarët ekzistues
+Sinkronizo skedarët
+4070
+Shfleto
+Të gjithë skedarët
+
+
+6000
+Kopjo
+Zhvendos
+Kopjo tek:
+Zhvendos tek:
+Duke kopjuar...
+Duke zhvendosur...
+Duke riemërtuar...
+
+Operacioni s'përkrahet.
+Gabim gjatë riemërtimit të skedarit apo dosjes
+Konfirmim për kopjimin e skedarëve
+Jeni të sigurt që doni të kopjoni skedarë në arkiv
+6100
+Konfirmo fshirjen e skedarit
+Konfirmo fshirjen e dosjes
+Konfirmo fshirjen e shumëfishtë të skedarëve
+Jeni të sigurt që doni të fshini '{0}'?
+Jeni të sigurt që doni të fshini dosjen '{0}' dhe tërë përmbajtjen e saj?
+Jeni të sigurt që doni t'i fshini këto {0} artikuj?
+Duke fshirë...
+Gabim gjatë fshirjes së skedarit apo dosjes
+
+6300
+Krijo një dosje
+Krijo një skedar
+Emri i dosjes:
+Emri i skedarit:
+Dosje e re
+Skedar i ri
+Gabim gjatë krijimit të dosjes
+Gabim gjatë krijimit të skedarit
+6400
+Komenti
+&Komenti:
+Selekto
+Çselekto
+Maska:
+6600
+
+Historiku i dosjes
+Mesazhe diagnostikues
+Mesazhi
+7100
+Kompjuteri
+Rrejti
+
+Sistemi
+7200
+Shto
+Zbërthe
+Testo
+Kopjo
+Zhvendos
+Fshi
+Info
+7300
+Ndaj skedarin
+&Ndaj në:
+Ndaj në &volume (madhësia jepet në bajt):
+Duke ndarë...
+
+
+
+
+
+7400
+Kombino skedarët
+&Kombino në:
+Duke kombinuar...
+
+
+
+7500
+Duke llogaritur shumën e verifikimit...
+Informacionet e shumës së verifikimit
+Shuma e verifikimit CRC për të dhënat:
+Shuma e verifikimit CRC për të dhënat dhe emrat:
+7600
+Etapa
+Shfrytëzimi i memories:
+Kompresimi
+Dekompresimi
+Vlerësimi
+Vlerësimi total
+Aktualisht
+Rezultati
+
+
+Kalime:

@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+; 15.00 : 2015-03-29 : Igor Pavlov
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+English
+English
+401
+OK
+Cancel
+
+
+
+&Yes
+&No
+&Close
+Help
+
+&Continue
+440
+Yes to &All
+No to A&ll
+Stop
+Restart
+&Background
+&Foreground
+&Pause
+Paused
+Are you sure you want to cancel?
+500
+&File
+&Edit
+&View
+F&avorites
+&Tools
+&Help
+540
+&Open
+Open &Inside
+Open O&utside
+&View
+&Edit
+Rena&me
+&Copy To...
+&Move To...
+&Delete
+&Split file...
+Com&bine files...
+P&roperties
+Comme&nt...
+Calculate checksum
+Diff
+Create Folder
+Create File
+E&xit
+Link
+&Alternate Streams
+600
+Select &All
+Deselect All
+&Invert Selection
+Select...
+Deselect...
+Select by Type
+Deselect by Type
+700
+Lar&ge Icons
+S&mall Icons
+&List
+&Details
+730
+Unsorted
+Flat View
+&2 Panels
+&Toolbars
+Open Root Folder
+Up One Level
+Folders History...
+&Refresh
+Auto Refresh
+750
+Archive Toolbar
+Standard Toolbar
+Large Buttons
+Show Buttons Text
+800
+&Add folder to Favorites as
+Bookmark
+900
+&Options...
+&Benchmark
+960
+&Contents...
+&About 7-Zip...
+1003
+Path
+Name
+Extension
+Folder
+Size
+Packed Size
+Attributes
+Created
+Accessed
+Modified
+Solid
+Commented
+Encrypted
+Split Before
+Split After
+Dictionary
+
+Type
+Anti
+Method
+Host OS
+File System
+User
+Group
+Block
+Comment
+Position
+Path Prefix
+Folders
+Files
+Version
+Volume
+Multivolume
+Offset
+Links
+Blocks
+Volumes
+
+64-bit
+Big-endian
+CPU
+Physical Size
+Headers Size
+Checksum
+Characteristics
+Virtual Address
+ID
+Short Name
+Creator Application
+Sector Size
+Mode
+Symbolic Link
+Error
+Total Size
+Free Space
+Cluster Size
+Label
+Local Name
+Provider
+NT Security
+Alternate Stream
+Aux
+Deleted
+Is Tree
+
+
+Error Type
+Errors
+Errors
+Warnings
+Warning
+Streams
+Alternate Streams
+Alternate Streams Size
+Virtual Size
+Unpack Size
+Total Physical Size
+Volume Index
+SubType
+Short Comment
+Code Page
+
+
+
+Tail Size
+Embedded Stub Size
+Link
+Hard Link
+iNode
+
+Read-only
+2100
+Options
+Language
+Language:
+Editor
+&Editor:
+&Diff:
+2200
+System
+Associate 7-Zip with:
+All users
+2301
+Integrate 7-Zip to shell context menu
+Cascaded context menu
+Context menu items:
+Icons in context menu
+2320
+<Folder>
+<Archive>
+Open archive
+Extract files...
+Add to archive...
+Test archive
+Extract Here
+Extract to {0}
+Add to {0}
+Compress and email...
+Compress to {0} and email
+2400
+Folders
+&Working folder
+&System temp folder
+&Current
+&Specified:
+Use for removable drives only
+Specify a location for temporary archive files.
+2500
+Settings
+Show ".." item
+Show real file icons
+Show system menu
+&Full row select
+Show &grid lines
+Single-click to open an item
+&Alternative selection mode
+Use &large memory pages
+2900
+About 7-Zip
+7-Zip is free software
+3000
+The system cannot allocate the required amount of memory
+There are no errors
+{0} object(s) selected
+Cannot create folder '{0}'
+Update operations are not supported for this archive.
+Cannot open file '{0}' as archive
+Cannot open encrypted archive '{0}'. Wrong password?
+Unsupported archive type
+File {0} is already exist
+File '{0}' was modified.\nDo you want to update it in the archive?
+Cannot update file\n'{0}'
+Cannot start editor.
+The file looks like a virus (the file name contains long spaces in name).
+The operation cannot be called from a folder that has a long path.
+You must select one file
+You must select one or more files
+Too many items
+Cannot open the file as {0} archive
+The file is open as {0} archive
+The archive is open with offset
+3300
+Extracting
+Compressing
+Testing
+Opening...
+Scanning...
+Removing
+3320
+Adding
+Updating
+Analyzing
+Replicating
+Repacking
+Skipping
+Deleting
+Header creating
+3400
+Extract
+E&xtract to:
+Specify a location for extracted files.
+3410
+Path mode:
+Full pathnames
+No pathnames
+Absolute pathnames
+Relative pathnames
+3420
+Overwrite mode:
+Ask before overwrite
+Overwrite without prompt
+Skip existing files
+Auto rename
+Auto rename existing files
+3430
+Eliminate duplication of root folder
+Restore file security
+3500
+Confirm File Replace
+Destination folder already contains processed file.
+Would you like to replace the existing file
+with this one?
+{0} bytes
+A&uto Rename
+3700
+Unsupported compression method for '{0}'.
+Data error in '{0}'. File is broken.
+CRC failed in '{0}'. File is broken.
+Data error in encrypted file '{0}'. Wrong password?
+CRC failed in encrypted file '{0}'. Wrong password?
+3710
+Wrong password?
+3721
+Unsupported compression method
+Data error
+CRC failed
+Unavailable data
+Unexpected end of data
+There are some data after the end of the payload data
+Is not archive
+Headers Error
+Wrong password
+3763
+Unavailable start of archive
+Unconfirmed start of archive
+
+
+
+Unsupported feature
+3800
+Enter password
+Enter password:
+Reenter password:
+&Show password
+Passwords do not match
+Use only English letters, numbers and special characters (!, #, $, ...) for password
+Password is too long
+Password
+3900
+Elapsed time:
+Remaining time:
+Total size:
+Speed:
+Processed:
+Compression ratio:
+Errors:
+Archives:
+4000
+Add to archive
+&Archive:
+&Update mode:
+Archive &format:
+Compression &level:
+Compression &method:
+&Dictionary size:
+&Word size:
+Solid block size:
+Number of CPU threads:
+&Parameters:
+Options
+Create SF&X archive
+Compress shared files
+Encryption
+Encryption method:
+Encrypt file &names
+Memory usage for Compressing:
+Memory usage for Decompressing:
+Delete files after compression
+4040
+Store symbolic links
+Store hard links
+Store alternate data streams
+Store file security
+4050
+Store
+Fastest
+Fast
+Normal
+Maximum
+Ultra
+4060
+Add and replace files
+Update and add files
+Freshen existing files
+Synchronize files
+4070
+Browse
+All Files
+Non-solid
+Solid
+6000
+Copy
+Move
+Copy to:
+Move to:
+Copying...
+Moving...
+Renaming...
+Select destination folder.
+The operation is not supported for this folder.
+Error Renaming File or Folder
+Confirm File Copy
+Are you sure you want to copy files to archive
+6100
+Confirm File Delete
+Confirm Folder Delete
+Confirm Multiple File Delete
+Are you sure you want to delete '{0}'?
+Are you sure you want to delete the folder '{0}' and all its contents?
+Are you sure you want to delete these {0} items?
+Deleting...
+Error Deleting File or Folder
+The system cannot move a file with long path to the Recycle Bin
+6300
+Create Folder
+Create File
+Folder name:
+File Name:
+New Folder
+New File
+Error Creating Folder
+Error Creating File
+6400
+Comment
+&Comment:
+Select
+Deselect
+Mask:
+6600
+Properties
+Folders History
+Diagnostic messages
+Message
+7100
+Computer
+Network
+Documents
+System
+7200
+Add
+Extract
+Test
+Copy
+Move
+Delete
+Info
+7300
+Split File
+&Split to:
+Split to &volumes, bytes:
+Splitting...
+Confirm Splitting
+Are you sure you want to split file into {0} volumes?
+Volume size must be smaller than size of original file
+Incorrect volume size
+Specified volume size: {0} bytes.\nAre you sure you want to split archive into such volumes?
+7400
+Combine Files
+&Combine to:
+Combining...
+Select only first part of split file
+Cannot detect file as part of split file
+Cannot find more than one part of split file
+7500
+Checksum calculating...
+Checksum information
+CRC checksum for data:
+CRC checksum for data and names:
+7600
+Benchmark
+Memory usage:
+Compressing
+Decompressing
+Rating
+Total Rating
+Current
+Resulting
+CPU Usage
+Rating / Usage
+Passes:
+7700
+Link
+Link
+Link from:
+Link to:
+7710
+Link Type
+Hard Link
+File Symbolic Link
+Directory Symbolic Link
+Directory Junction

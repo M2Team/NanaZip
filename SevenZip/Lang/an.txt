@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;       : Feliciano Martínez Tur
+;  9.07 : Juan Pablo Martínez
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Aragonese
+Aragonés
+401
+Acceptar
+Cancelar
+
+
+
+&Sí
+&No
+&Zarrar
+Aduya
+
+&Continar
+440
+Sí a &tot
+No a t&ot
+Aturar
+Tornar a empecipiar
+Se&gundo plano
+P&rimer plano
+&Pausa
+Aturau
+Yes seguro que quiers cancelar?
+500
+&Fichero
+&Editar
+&Veyer
+&Favoritos
+&Ferramientas
+Ad&uya
+540
+&Ubrir
+Ubrir &adintro
+Ubrir &difuera
+&Veyer
+&Editar
+Re&nombrar
+&Copiar en...
+&Mover ta...
+&Borrar
+Di&vidir o fichero...
+C&ombinar os fichers...
+&Propiedatz
+Comen&tario
+Calcular a suma de comprebación
+Diff
+Creyar carpeta
+Creyar fichero
+&Salir
+600
+Seleccionar-lo &tot
+Deseleccionar-lo tot
+&Invertir selección
+Seleccionar...
+Deseleccionar...
+Seleccionar por tipo
+Deseleccionar por tipo
+700
+Iconos g&rans
+&Iconos chicotz
+&Lista
+&Detalles
+730
+Desordenau
+Anvista plana
+&2 panels
+&Barras de ferramientas
+Ubrir a carpeta radiz
+Carpeta mai
+Historial de carpetas...
+&Esviellar
+750
+Barra de ferramientas d'archivo
+Barras de ferramientas estandard
+Botons grans
+Amostrar texto en os botons
+800
+&Adhibir carpeta a favoritos como
+Adhibir a favoritos
+900
+&Opcions...
+&Prebas de referencia (benchmark)
+960
+&Conteniu...
+A&rredol de 7-Zip...
+1003
+Rota
+Nombre
+Tipo de fichero
+Carpeta
+Grandaria
+Grandaria comprimida
+Atributos
+Creyau
+Zaguer acceso
+Zaguera modificación
+Compacto
+Comentario
+Zifrau
+Expandiu antis
+Expandiu dimpués
+Diccionario
+CRC
+Tipo
+Anti
+Metodo
+SO d'orichen
+Sistema de fichers
+Usuario
+Grupo
+Bloque
+Comentario
+Posición
+Prefixo de rota
+Carpeta
+Fichers
+Versión
+Fragmento
+Multiframento
+Desplazamiento
+Vinclos
+Bloques
+Fragmentos
+
+64-bit
+Big-endian
+CPU
+Grandaria fisica
+Grandaria d'as cabeceras
+Suma de comprebación
+Caracteristicas
+Adreza virtual
+ID
+Nombre curto
+Aplicación creyadera
+Grandaria de sector
+Modo
+Vinclo
+Error
+Espacio total
+Espacio libre
+Grandaria de sector
+Etiqueta
+Nombre local
+Proveyedor
+2100
+Opcions
+Luenga
+Luenga:
+Editor
+&Editor:
+&Diff:
+2200
+Sistema
+Asociar 7-Zip con:
+2301
+Integrar 7-Zip en o menú contextual de Windows
+Menú contextual en cascada
+Elementos d'o menú contextual:
+2320
+<Carpeta>
+<Archivo>
+Ubrir archivo
+Extrayer-ne os fichers...
+Adhibir a l'archivo...
+Comprebar l'archivo
+Extrayer aquí
+Extrayer en {0}
+Adhibir a {0}
+Comprimir y ninviar por correu...
+Comprimir en {0} y ninviar por correu
+2400
+Carpeta
+Carpeta de &treballo
+Carpeta temporal d'o &sistema
+Carpeta &actual
+&Especificar una carpeta:
+No emplegar que ta dispositivos extrayibles
+Especificar una carpeta ta archivos temporals.
+2500
+Propiedatz
+Amostrar l'elemento ".."
+Amostrar iconos propios
+Amostrar o menú d'o sistema
+&Seleccionar ringlera(s) completa(s)
+Amostrar as linias d'a &quadricla
+Clicar una vegada ta ubrir elemento
+Modo de selección &alternativo
+Emplegar pachinas de memoria &grans
+2900
+Arredol de 7-Zip
+7-Zip ye un programa libre y gratuito. Si quiers, puetz colaborar en o desembolique de 7-Zip rechistrando-te ta contribuyir a amillorar o programa.
+3000
+O sistema no ha puesto asignar a cantidat necesaria de memoria
+No i hai errors
+{0} elemento(s) seleccionau(s)
+No se puet creyar a carpeta '{0}'
+Ista mena d'archivo no permite actualización.
+No se puet ubrir o fichero '{0}' como archivo comprimiu
+No se puet ubrir l'archivo zifrau '{0}'. Comprebe si a clau ye incorrecta.
+Tipo d'archivo no admeso
+O fichero {0} ya existe
+O fichero '{0}' s'ha modificau.\nQuiers esviellar-lo en l'archivo?
+No se puet esviellar o fichero\n'{0}'
+No se puet executar l'editor.
+O fichero pareix un virus (o nombre d'o fichero contiene espacios largos).
+No se puet execitar ista operación dende una carpeta que tienga una rota larga.
+Has de seleccionar un fichero
+Has de seleccionar un u más fichers
+Masiaus elementos
+3300
+Extrayendo
+comprimindo
+Prebando
+Ubrindo...
+Buscando...
+3400
+Extrayer
+E&xtrayer a:
+Selecciona un destín ta os fichers extrayius.
+3410
+Modo de rota
+Rotas completas
+Sin rotas
+3420
+Modo de sobrescritura
+Con confirmación
+Sin confirmación
+Conservar os fichers ya existents
+Renombrar automaticament
+Renombrar automaticament os fichers ya existents
+3500
+Confirmar a substitución de fichers
+A carpeta de destín ya contiene un fichero con o mesmo nombre.
+Quiers substituyir o fichero existent
+por iste atro?
+{0} bytes
+Renombrar a&utomaticament
+3700
+Metodo de compresión no valido ta '{0}'.
+Error de datos en '{0}'. O fichero ye corrompiu.
+O CRC ha fallau en '{0}'. O fichero ye corrompiu.
+Error de datos en o fichero zifrau '{0}'. Verifica a clau.
+Error de CRC en o fichero zifrau '{0}'. Verifica a clau.
+3800
+Escribe a clau
+Escribe a clau:
+Torne a escribir a clau:
+&Amostrar a clau
+As claus son diferents. Por favor, torne a escribir-la.
+Emplega en a clau nomás as letras de l'alfabeto anglés, numeros y caracters especials (!, #, $, ...)
+A clau ye masiau larga.
+Contrasenya
+3900
+Tiempo transcorriu:
+Tiempo pendient:
+Grandaria:
+Velocidat:
+Procesau:
+Razón de compresión:
+Errors:
+Archivos:
+4000
+Adhibir a l'archivo
+&Archivo:
+M&odo d'actualización:
+&Formato d'archivo:
+&Libel de compresión:
+&Metodo de compresión:
+Grandaria de &diccionario:
+Granda&ria d'a parola:
+Grandaria de bloque compacto:
+Numero de filos d'a CPU:
+&Parametros:
+Opcions
+Creyar archivo SF&X (autoextrayible)
+Comprimir fichers compartius
+Encriptación
+Metodo d'e &zifrau:
+Zifrar &nombres de fichero
+Memoria emplegada ta comprimir:
+Memoria emplegada ta descomprimir:
+4050
+Sin compresión
+A mas rapida
+Rapida
+Normal
+Maxima
+Ultra
+4060
+Adhibir y substituyir fichers
+Esviellar y adhibir-ie fichers
+Esviellar fichers ya presents
+Sincronizar fichers
+4070
+Explorar
+Totz os fichers
+No compacto
+Compacto
+6000
+Copiar
+Mover
+Copiar en:
+Mover ta:
+Copiando...
+Movendo...
+Renombrando...
+Selecciona a carpeta de destín
+Operación no permitida.
+Error en enombrar un fichero u carpeta
+Confirmar a copia d'o fichero
+Yes seguro de que quiers copiar os fichers en l'archivo
+6100
+Confirmar borrau de fichero
+Confirmar borrau de carpeta
+Confirmar borrau multiple fichers
+Yes seguro que quiers borrar '{0}'?
+Yes seguro que quiers borrar a carpeta '{0}' y tot o suyo conteniu?
+Yes seguro que quiers borrar istos {0} elementos?
+Borrando...
+Error borrando fichero u carpeta
+O sistema no puet mover un fichero con rota larga ta la Papelera de Reciclache
+6300
+Creyar carpeta
+Creyar fichero
+Nombre de'a carpeta:
+Nombre de'o fichero:
+Carpeta nueva
+Fichero nuevo
+Error en creyar carpeta
+Error en creyar o fichero:
+6400
+Comentario
+&Comentario:
+Seleccionar
+Deseleccionar
+Patrón:
+6600
+Propiedatz
+Historial de carpetas
+Mensaches de diagnostico
+Mensache
+7100
+O mío ordinador
+Entorno de ret
+Documentos
+Sistema
+7200
+Adhibir
+Extrayer
+Prebar
+Copiar
+Mover
+Borrar
+Información
+7300
+Dividir fichero
+Di&vidir a:
+Dividir en fra&gmentos (bytes):
+Dividindo...
+Confirmar a división
+Yes seguro que quiers dividir o fichero en {0} fragmentos?
+A grandaria d'os fragmentos ha d'estar menor que a d'o fichero orichinal
+Grandaria de fragmento incorrecta
+Grandaria de fragmento especificada: {0} bytes.\nYe seguro que quiere dividir o fichero en fragmentos d'ixa grandaria?
+7400
+Combinar fichers
+&Combinar en:
+Combinando...
+Selecciona només o primer fichero
+No s'ha puesto detectar o fichero como parti d'un fichero por fragmentos
+No s'ha puesto trobar que un fragmento d'o fichero por fragmentos
+7500
+Calculando a suma de verificación...
+Suma de verificación (CRC)
+CRC d'os datos:
+CRC d'os datos y os nombres:
+7600
+Prebas de referencia (benchmark)
+Emplego de memoria:
+Compresión
+Descompresión
+Taxa
+Taxa total
+Actual
+Resultant
+Emplego de CPU
+Taxa / Emplego
+Pasadas:

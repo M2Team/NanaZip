@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;       : tomazek
+;  4.55 : miles
+;
+; 21.00 : 2021-01-19 : Jadran Rudec
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Slovenian
+Slovenščina
+401
+Vredu
+Prekliči
+
+
+
+&Da
+&Ne
+&Zapri
+Po&moč
+
+&Nadaljuj
+440
+Da za &vse
+Ne za v&se
+Ustavi
+Znova zaženi
+Ozad&je
+&Ospredje
+Premor
+Na premoru
+Ali ste prepričani, da želite preklicati?
+500
+Datoteka
+Urejanje
+&Prikaz
+Priljubljene
+Orodja
+Pomoč
+540
+&Odpri
+Odpri &znotraj
+Odpri zu&naj
+P&rikaz
+&Uredi
+Prei&menuj
+&Kopiraj...
+&Premakni...
+Iz&briši
+&Razdeli datoteko...
+&Združi datoteke...
+L&astnosti
+Ko&mentar
+Izračunaj preizusno vsoto
+Razlika
+Ustvari mapo
+Ustvari datoteko
+&Izhod
+Povezava
+&Nadomestni tokovi
+600
+Izberi &vse
+Razveljavi izbiro vseh
+&Preobrni izbor
+Izberi...
+Razveljavi izbiro...
+Izberi po vrsti
+Razveljavi izbiro po vrsti
+700
+&Velike ikone
+&Majhne ikone
+&Seznam
+&Podrobnosti
+730
+Nerazvrščeno
+Ploski prikaz
+&Dve podokni
+&Orodne vrstice
+Odpri korensko mapo
+Eno raven navzgor
+Zgodovina map...
+&Osveži
+Samodejno osveži
+750
+Orodna vrstica arhiva
+Srandardna orodna vrstica
+Veliki gumbi
+Prikaži besedilo gumbov
+800
+&Dodaj mapo med Priljubljene kot
+Zaznamek
+900
+&Možnosti...
+Me&ritev
+960
+Vse&bina pomoči...
+&Vizitka 7-Zip...
+1003
+Pot
+Ime
+Končnica
+Mapa
+Velikost
+Stisnjena velikost
+Atributi
+Ustvarjena
+Dostop
+Spremenjena
+Trdno
+Komentirana
+Šifrirana
+Razdeli pred
+Razdeli po
+Slovar
+
+Vrsta
+Anti
+Metoda
+Gostiteljski OS
+Datotečni sistem
+Uporabnik
+Skupina
+Blok
+Opomba
+Položaj
+Predpona poti
+Map
+Datotek
+Različica
+Nosilec
+Več nosilcev
+Odmik
+Povezav
+Blokov
+Nosilcev
+
+64-bitni
+Big-endian
+CPE
+Fizična velikost
+Velikost glave
+Kontrolna vsota
+Značilnosti
+Navidezni naslov
+ID
+Kratko ime
+Ustvarjalec aplikacije
+Velikost sektorja
+Način
+Simbolna povezava
+Napaka
+Skupna velikost
+Prost prostor
+Velikost gruče
+Oznaka
+Lokalno ime
+Ponudnik
+NT varnost
+Nadomestni tok
+Pomož.
+Izbrisano
+Je drevo
+
+
+Vrsta napake
+Napake
+Napake
+Opozorila
+Opozorilo
+Tokovi
+Nadomestni tokovi
+Velikost nadomestnih tokov
+Navidezna velikost
+Razpakirana velikost
+Skupna fizična velikost
+Indeks nosilca
+Podvrsta
+Kratek komentar
+Kodna stran
+
+
+
+Velikost konca
+Velikost vdelanega ostanka
+Povezava
+Trdna povezava
+iNode
+
+Samo-za-branje
+2100
+Možnosti
+Jezik
+Jezik:
+Urejevalnik
+&Urejevalnik:
+&Razlika:
+2200
+Sistem
+Poveži 7-Zip z:
+Vsi uporabniki
+2301
+Vključi 7-Zip v priročni meni lupine
+Stopničasti priročni meni
+Vnosi priročnega menija:
+Ikone priročnega menija
+2320
+<Mapa>
+<Arhiv>
+Odpri arhiv
+Razširi datoteke...
+Dodaj v arhiv...
+Preizkusi arhiv
+Razširi sem
+Razširi v {0}
+Dodaj v {0}
+Stisni in pošlji po e-pošti...
+Stisni v {0} in pošlji po e-pošti
+2400
+Mape
+&Delovna mapa:
+&Sistemska začasna mapa
+&Trenutna mapa
+&Določena mapa:
+Uporabi le za odstranljive pogone
+Določi mesto začasnih arhivskih datotek.
+2500
+Nastavitve
+Prikaži ".." vnos
+Prikaži ikone stvarnih datotek
+Prikaži sistemski meni
+&Izbor celotne vrstice
+Prikaži &mrežne črte
+En klik za odpiranje vnosa
+Na&domestni način izbire
+Uporabi &velike pomnilniške strani
+2900
+Vizitka
+7-Zip je brezplačen program
+3000
+Sistem ne more dodeliti potrebne količine pomnilnika
+Ni napak
+{0} izbranih predmetov
+Mape '{0}' ni mogoče ustvariti
+Posodabljanja za ta arhiv niso podprta.
+Datoteke '{0}' ni mogoče odpreti kot arhiv
+Šifriranega arhiva '{0}' ni mogoče odpreti. Napačno geslo?
+Nepodprta vrsta arhiva
+Datoteka {0} že obstaja
+Datoteka '{0}' je bila spremenjena.\nAli jo želite posodobiti v arhivu?
+Datoteke ni mogoče posodobiti\n'{0}'
+Ni mogoče zagnati urejevalnika.
+Datoteka izgleda kot virus (ime datoteke vsebuje dolge presledke v imenu).
+Operacije ni mogoče priklicati iz mape, ki ima dolgo pot.
+Izbrati morate eno datoteko
+Izbrati morate eno ali več datotek
+Preveč vnosov
+Datoteke ni mogoče odpreti kot arhiv {0}
+Datoteka je odprta kot arhiv {0}
+Arhiv je odprt z odmikom
+3300
+Razširjanje
+Stiskanje
+Preizkušanje
+Odpiranje...
+Pregledovanje...
+Odstranjevanje
+3320
+Dodajanje
+Posodabljanje
+Analiziranje
+Razmnoževanje
+Ponovno pakiranje
+Preskakovanje
+Brisanje
+Ustvarjanje glave
+3400
+Razširi
+R&azširi v:
+Določite mesto razširjanja datotek.
+3410
+Način poti:
+Polna imena poti
+Ni poti
+Absolutna imena poti
+Relativna imena poti
+3420
+Prepisovalni način:
+Vprašaj pred prepisovanjem
+Prepiši brez poziva
+Preskoči obstoječe datoteke
+Samodejno preimenuj
+Samodejno preimenuj obstoječe datoteke
+3430
+Odpravi podvajanje korenske mape
+Obnovi varnost datoteke
+3500
+Potrdite zamenjavo datoteke
+Ciljna mapa že vsebuje obdelano datoteko.
+Ali želite zamenjati obstoječo datoteko
+s to?
+{0} bajtov
+Samodejno &preimenuj
+3700
+Nepodprta metoda stiskanja za '{0}'.
+Podatkovna napaka v '{0}'. Datoteka je poškodovana.
+Napaka CRC v '{0}'. Datoteka je poškodovana.
+Podatkovna napaka v šifrirani datoteki '{0}'. Napačno geslo?
+Napaka CRC v šifrirani datoteki '{0}'. Napačno geslo?
+3710
+Napačno geslo?
+3721
+Nepodprta metoda stiskanja
+Napaka podatkov
+CRC ni uspel
+Nedostopni podatki
+Nepričakovan konec podatkov
+Po koncu podatkov o obremenitvi je nekaj podatkov
+Ni arhiv
+Napaka v glavah
+Napačno geslo
+3763
+Nedosegljiv začetek arhiva
+Nepotrjen začetek arhiva
+
+
+
+Nepodprta funkcija
+3800
+Vnos gesla
+Vnesite geslo:
+Ponovno vnesite geslo:
+&Prikaži geslo
+Gesli se ne ujemata
+Za geslo uporabite le črke, številke in posebne znake angleške abecede (!, #, $,...)
+Geslo je predolgo
+Geslo
+3900
+Potekel čas:
+Preostali čas:
+Velikost:
+Hitrost:
+Obdelano:
+Razmerje stiskanja:
+Napake:
+Arhivi:
+4000
+Dodaj v arhiv
+&Arhiv:
+&Način posodobitve:
+&Vrsta arhiva:
+Stopnja &stiskanja:
+&Metoda stiskanja:
+&Velikost slovarja:
+Velikost &besede:
+Velikost trdnega bloka:
+Število niti CPE:
+&Parametri:
+Možnosti
+Ustvari samorazširljiv arhiv (SFX)
+Stisni datoteke v skupni rabi
+Šifriranje
+Metoda šifriranja:
+Šifriraj &imena datotek
+Poraba pomnilnika za stiskanje:
+Poraba pomnilnika za razširjanje:
+Izbriši datoteke po stiskanju
+4040
+Shrani simbolne povezave
+Shrani trdne povezave
+Shrani nadomestne podatkovne tokove
+Shrani varnost datoteke
+4050
+Brez stiskanja
+Najhitrejše
+Hitro
+Običajno
+Največje stiskanje
+Ultra
+4060
+Dodaj in zamenjaj datoteke
+Osveži in dodaj datoteke
+Osveži obstoječe datoteke
+Sinhroniziraj datoteke
+4070
+Prebrskaj
+Vse datoteke
+Ne-trdni
+Trdni
+6000
+Kopiraj
+Premakni
+Kopiraj v:
+Premakni v:
+Kopiranje...
+Premikanje...
+Preimenovanje...
+Izberite ciljno mapo.
+Operacija ni podprta.
+Napaka pri preimenovanju datoteke ali mape
+Potrditev kopiranja datoteke
+Ali ste prepričani, da želite kopirati datoteke v arhiv?
+6100
+Potrditev brisanja datoteke
+Potrditev brisanja mape
+Potrditev brisanja več datotek
+Ali ste prepričani, da želite zbrisati '{0}'?
+Ali ste prepričani, da želite izbrisati mapo '{0}' in celotno njeno vsebino?
+Ali ste prepričani, da želite izbrisati teh {0} vnosov?
+Brisanje...
+Napaka pri brisanju datoteke ali mape
+Sistem ne more premakniti datoteke z dolgo potjo v Koš
+6300
+Izdelava mape
+Ustvarjanje datoteke
+Ime mape:
+Ime datoteke:
+Nova mapa
+Nova datoteka
+Napaka pri ustvarjanju mape
+Napaka pri ustvarjanju datoteke
+6400
+Opomba
+&Opomba:
+Izberi
+Razveljavi izbiro
+Maska:
+6600
+Lastnosti
+Zgodovina map
+Diagnostična sporočila
+Sporočilo
+7100
+Računalnik
+Omrežje
+Dokumenti
+Sistem
+7200
+Dodaj
+Razširi
+Preizkusi
+Kopiraj
+Premakni
+Izbriši
+Informacije
+7300
+Razdeli datoteko
+&Razdeli na:
+Razdeli na &nosilce (v bajtih):
+Razdelitev...
+Potrdite razdelitev
+Ali ste prepričani, da želite razdeliti datoteko na {0} nosilcev?
+Nosilec mora biti manjši od izvirne datoteke
+Neveljavna velikost nosilca
+Navedena velikost nosilca: {0} bajtov.\nAli ste prepričani, da želite razdeliti arhiv na takšne nosilce?
+7400
+Spoji datoteke
+Spo&ji v:
+Spajanje...
+Izberite samo prvi del deljene datoteke
+Ni mogoče zaznati datoteke kot del deljene datoteke
+Ni mogoče najti več kot en del deljene datoteke
+7500
+Izračun preizkusne vsote...
+Podatki o preizkusni vsoti
+Preizkusna vsota za podatke:
+Preizkusna vsota za podatke in imena:
+7600
+Meritev
+Poraba pomnilnika:
+Stiskanje
+Razširjanje
+Ocena
+Skupna ocena
+Trenutno
+Končno
+Uporaba CPE
+Ocena/Uporaba
+Prehodov:
+7700
+Povezava
+Povezava
+Povezava iz:
+Povezava do:
+7710
+Vrsta povezave
+Trdna povezava
+Datoteka simbolnih povezav
+Mapa simbolnih povezav
+Združevanje map

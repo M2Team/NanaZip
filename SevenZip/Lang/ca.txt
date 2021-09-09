@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  9.07 : Josep Casals, Marc Folch
+; 17.01 : Benet «BennyBeat» R. i Camps
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Catalan
+Català
+401
+D'acord
+Cancel·la
+
+
+
+&Sí
+&No
+Tan&ca
+Ajuda
+
+&Continua
+440
+Sí a &tot
+No a t&ot
+Atura
+Re&inicia
+Rere&fons
+Prim&er pla
+&Pausa
+Pausat
+Segur que voleu cancel·lar?
+500
+&Fitxer
+&Edita
+&Visualitza
+&Preferits
+E&ines
+Aj&uda
+540
+&Obre
+Obre d&ins
+Obre &fora
+&Visualitza
+&Edita
+Reanom&ena
+&Copia a...
+&Mou a...
+&Suprimeix
+&Divideix el fitxer...
+Com&bina el fitxer...
+P&ropietats
+Come&ntari
+Calcula la suma de verificació
+Compara
+Crea una carpeta
+Crea un fitxer
+S&urt
+Enlla&ç
+Flux &alternatiu
+600
+Seleccion&a-ho tot
+No seleccionis res
+&Inverteix la selecció
+Selecciona...
+Desselecciona...
+Selecciona per tipus
+Desselecciona per tipus
+700
+Icones g&rans
+Icones petites
+&Llista
+&Detalls
+730
+No ordenat
+Vista plana
+&2 Panells
+&Barres d'eines
+Obre la carpeta arrel
+Carpeta pare
+Historial de carpetes...
+&Actualitza
+Actualitza automàticament
+750
+Barra d'eines afegeix/extreu
+Barra d'eines estàndard
+Botons grans
+Mostra botons amb text
+800
+&Afegeix la carpeta als Preferits com
+Personal
+900
+Opcions...
+&Test de referència
+960
+&Contingut...
+Quant al 7-Zip...
+1003
+Camí
+Nom
+Tipus de fitxer
+Carpeta
+Mida
+Mida comprimit
+Atributs
+Creat
+Darrer accés
+Darrera modificació
+Compacte
+Comentari
+Xifrat
+Expandit abans
+Expandit després
+Diccionari
+CRC
+Tipus
+Anti
+Mètode
+Sistema d'origen
+Sistema de fitxers
+Usuari
+Grup
+Bloc
+Comentari
+Posició
+Prefix del camí
+Carpetes
+Fitxers
+Versió
+Volum
+Volum múltiple
+Desplaçament
+Enllaços
+Blocs
+Volums
+
+64-bits
+Big-endian
+CPU
+Mida física
+Mida de la capçalera
+Suma de verificació
+Característiques
+Adreça virtual
+ID
+Nom curt
+Aplicació creadora
+Mida del sector
+Mode
+Enllaç simbòlic
+Error
+Mida total
+Espai lliure
+Mida per sector
+Etiqueta
+Nom local
+Proveïdor
+Seguretat NT
+Flux alternatiu
+Aux
+Suprimit
+És un directori
+
+
+Tipus d'error
+Errors
+Errors
+Advertències
+Advertència
+Flux
+Flux alternatiu
+Mida del flux alternatiu
+Mida virtual
+Mida desempaquetat
+Mida física total
+Índex del volum
+Subtipus
+Descripció
+Codi de pàgina
+
+
+
+Mida de cua
+Mida del text incrustat
+Enllaç
+Enllaç físic
+iNode
+
+Només lectura
+2100
+Opcions
+Llengua
+Llengua:
+Editor
+&Editor:
+&Compara:
+2200
+Sistema
+Associa el 7-Zip amb:
+Tots els usuaris
+2301
+Integra el 7-Zip al menú contextual del Windows
+Menú contextual en cascada
+Objectes del menú contextual:
+Icones al menú contextual
+2320
+<Carpeta>
+<fitxer>
+Obre
+Extreu fitxers...
+Afegeix a l'arxiu comprimit...
+Comprova l'arxiu comprimit
+Extreu en aquesta carpeta
+Extreu a {0}
+Afegeix a {0}
+Comprimeix i envia per correu electrònic...
+Comprimeix a {0} i envia per correu electrònic
+2400
+Carpetes
+Carpeta de &treball
+Carpeta temporal del &sistema
+Carpeta a&ctual
+E&specifica una carpeta:
+Utilitza únicament per a mitjans extraïbles
+Especifica una carpeta pels fitxers temporals.
+2500
+Selecció
+Mostra l'element «..»
+Mostra les icones reals dels fitxers
+Mostra el menú de sistema
+&Selecció de columna completa
+Mostra les línies de &graella
+Obre amb un sol clic els elements
+Mode de selecció &alternatiu
+Utilitza pàgines de memòria &grans
+2900
+Quant al 7-Zip
+	El 7-Zip és programari lliure.\n       Traducció realitzada per: Softcatalà\n	https://www.softcatala.org
+3000
+El sistema no pot assignar la quantitat de memòria requerida
+Cap error
+{0} objecte(s) seleccionat(s)
+No es pot crear la carpeta «{0}»
+Aquest tipus de fitxer no permet actualització.
+No es pot obrir el fitxer «{0}» com a arxiu
+No es pot obrir el fitxer xifrat «{0}». Contrasenya errònia?
+Tipus d'arxiu no admès
+El fitxer {0} ja existeix
+S'ha modificat el fitxer «{0}».\nVoleu actualitzar-lo a l'arxiu?
+No es pot actualitzar el fitxer\n«{0}»
+No es pot executar l'editor.
+El fitxer sembla un virus (el nom del fitxer conté espais molt llargs al nom).
+L'operació no es pot iniciar des d'una carpeta amb una ruta llarga.
+Seleccioneu un fitxer
+Seleccionar un o més fitxers
+Massa objectes
+No es pot obrir el fitxer {0} com a arxiu
+S'ha obert el fitxer com l'arxiu {0}
+L'arxiu està obert amb compensació
+3300
+Extraient
+Comprimint
+Provant
+S'està obrint...
+S'està analitzant...
+Suprimint
+3320
+Afegint
+Actualitzant
+Analitzant
+Replicant
+Reempaquetant
+Ometent
+Suprimint
+Creant la capçalera
+3400
+Extreu
+E&xtreu a:
+Seleccioneu una destinació on extreure els fitxers.
+3410
+Mode d'adreça
+Adreça completa
+Sense adreça
+Adreça absoluta
+Adreça relativa
+3420
+Sobreescriu:
+Amb confirmació
+Sense confirmació
+Omet els fitxers ja existents
+Reanomena automàticament
+Auto-reanomena fitxers existents
+3430
+Suprimeix la duplicació de la carpeta arrel
+Restaura el fitxer de seguretat
+3500
+Confirmeu substitució de fitxers
+Ja existeix un fitxer amb el mateix nom a la carpeta de destinació.
+Voleu substituir el fitxer existent
+per aquest altre?
+{0} bytes
+Reanomena a&utomàticament
+3700
+Mètode de compressió no vàlid per a «{0}».
+Error de dades en «{0}». El fitxer és corrupte.
+Ha fallat el CRC en «{0}». El fitxer és corrupte.
+Error de dades al fitxer xifrat «{0}». Contrasenya errònia?
+Ha fallat el CRC al fitxer xifrat «{0}». Contrasenya errònia?
+3710
+Contrasenya errònia?
+3721
+Mètode de compressió no compatible
+Error de dades
+Ha fallat el CRC
+Dades no disponibles
+Final de dades inesperat
+Hi ha algunes dades després del final de les dades de la càrrega útil
+No és cap arxiu
+Error de capçalera
+Contrasenya no vàlida
+3763
+Inici d'arxiu no disponible
+Inici d'arxiu no confirmat
+
+
+
+Característica no suportada
+3800
+Introduïu la contrasenya
+Introduïu la contrasenya:
+Torneu a introduir la contrasenya:
+Mo&stra la contrasenya
+Les contrasenyes no coincideixen
+A la contrasenya utilitzeu només lletres (sense accents), números i caràcters especials (!, #, $...)
+La contrasenya és massa llarga
+Contrasenya
+3900
+Temps transcorregut:
+Temps restant:
+Mida:
+Taxa:
+Processat:
+Ràtio de compressió:
+Errors:
+Arxius:
+4000
+Afegeix a l'arxiu comprimit
+&Arxiu:
+Mode d'act&ualització:
+&Format de l'arxiu:
+Nivell de &compressió:
+&Tipus de compressió:
+Mida del &diccionari:
+Mida de la paraula:
+Mida del bloc sòlid:
+Nombre de fils de la CPU:
+&Paràmetres:
+Opcions
+Crea un fitxer sòlid (SF&X)
+Comprimeix els fitxers compartits
+Xifrat
+Mètode de xifrat:
+Xifra el nom dels fitxers
+Ús de memòria per comprimir:
+Ús de memòria per descomprimir:
+Suprimeix els fitxers en comprimir
+4040
+Emmagatzema els enllaços simbòlics
+Emmagatzema els enllaços físics
+Emmagatzema el flux alternatiu
+Emmagatzema el fitxer de seguretat
+4050
+Sense compressió
+Molt ràpida
+Ràpida
+Normal
+Màxima
+Ultra
+4060
+Afegeix i substitueix fitxers
+Actualitza i afegeix fitxers
+Actualitza els fitxers existents
+Sincronitza els fitxers
+4070
+Visualitza
+Tots els fitxers
+No sòlid
+Sòlid
+6000
+Copia
+Mou
+Copia a:
+Mou a:
+S'està copiant...
+S'està movent...
+S'està reanomenant...
+Seleccioneu la carpeta de destinació:
+Operació no permesa.
+S'ha produït un error reanomenant el fitxer o carpeta
+Confirmeu la còpia del fitxer
+Segur que voleu copiar els fitxers a l'arxiu
+6100
+Confirmeu la supressió del fitxer
+Confirmeu la supressió de la carpeta
+Confirmeu supressió múltiple de fitxers
+Segur que voleu suprimir «{0}»?
+Segur que voleu suprimir la carpeta «{0}» i tot el seu contingut?
+Segur que voleu suprimir aquests {0} elements?
+S'està suprimint...
+S'ha produït un error suprimint un fitxer o carpeta
+El sistema no pot moure un fitxer amb una ruta llarga a la paperera de reciclatge
+6300
+Crea una carpeta
+Crea un fitxer
+Nom de la carpeta:
+Nom del fitxer:
+Carpeta nova
+Fitxer nou
+Error creant la carpeta
+Error creant el fitxer
+6400
+Comentari
+&Comentari:
+Selecciona
+Desselecciona
+Màscara:
+6600
+Propietats
+Historial de carpetes
+Missatges de diagnosi
+Missatge
+7100
+Ordinador
+Entorn de xarxa
+Documents
+Sistema
+7200
+Afegeix
+Extreu
+Prova
+Copia
+Mou
+Suprimeix
+Informació
+7300
+Divideix el fitxer
+&Divideix a:
+Divideix en &volums, bytes:
+S'està dividint...
+Confirmació de la divisió
+Segur que voleu dividir el fitxer en {0} volums?
+La mida del volum ha de ser més petita que la mida del fitxer original
+Mida del volum no valida
+Mida de volum especificada: {0} bytes.\nSegur que voleu dividir el fitxer en aquests volums?
+7400
+Combina fitxers
+&Combina a:
+S'està combinant...
+Seleccioneu només el primer fitxer
+No es pot detectar un fitxer com a una part del fitxer dividit
+No es pot trobar més d'una part del fitxer dividit
+7500
+S'està calculant la suma de verificació...
+Informació de la suma de verificació
+Suma de verificació CRC per les dades:
+Suma de verificació CRC per les dades i els noms:
+7600
+Test de referència
+Ús de la memòria:
+Comprimint
+Descomprimint
+Taxa
+Taxa total
+Actual
+Resultant
+Ús de la CPU
+Taxa / Ús
+Passades:
+7700
+Enllaç
+Enllaça
+Enllaç des de:
+Enllaç a:
+7710
+Tipus d'enllaç
+Enllaç físic
+Fitxer d'enllaç simbòlic
+Directori d'enllaç simbòlic
+Directori d'unió

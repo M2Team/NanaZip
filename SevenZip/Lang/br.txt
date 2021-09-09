@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  3.12 : KAD-Korvigelloù An Drouizig (drouizig.org).
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Breton
+Brezhoneg
+401
+Mat eo
+Nullañ
+
+
+
+&Ya
+&Ket
+&Serriñ
+Skoazell
+
+&Kenderc'hel
+440
+Ya be&pred
+Ket &bepred
+Paouez
+Adloc'hañ
+&Drekleur
+&Rakleur
+&Ehan
+Ehanet
+Ha fellout a ra deoc'h nullañ ?
+500
+&Restr
+&Aozañ
+&Gwelout
+Di&baboù
+&Ostilhoù
+&Skoazell
+540
+&Digeriñ
+Digeriñ a-zia&barzh
+Digeriñ a-zia&vaez
+&Gwelout
+&Aozañ
+Adenv&el
+&Kopiañ diwar...
+&Dilec'hiañ diwar...
+D&ilemel
+&Troc'hañ restr...
+&Kendeuziñ restroù...
+P&erzhioù
+Evezhia&denn
+
+
+Sevel un teul
+Sevel ur restr
+&Kuitaat
+600
+Diuz pep &tra
+Diziuz pe tra
+Lakaat an &diuzad war an tu gin
+Diuz...
+Diziuz...
+Diuz diouzh ar rizh
+Diziuz diouzh ar rizh
+700
+Arlunioù &bras
+Arlunioù &bihan
+&Roll
+&Munudoù
+730
+Dirummet
+
+&2 brenestr
+&Barrennoù ostilhoù
+Digeriñ an teul gwrizienn
+Teul kerent
+Roll istor an teul...
+Fresk&aat
+750
+Barrenn ziell
+Barrenn skouerek
+Meudellioù bras
+Diskouez an destenn
+800
+&Ouzhpennañ ar c'havlec'h d'ar sinedoù
+Sined
+900
+&Dibaboù...
+&Amprouiñ
+960
+&Roll ar pennadoù...
+A-&zivout 7-Zip...
+1003
+Treug
+Anv
+Astenn
+Teul
+Ment
+Gwasket
+Doareennoù
+Savet d'ar
+Stoket d'ar
+Kemmet d'ar
+Solut
+Evezhiadenn
+Ennodet
+Rannañ a-raok
+Rannañ war-lerc'h
+Geriadur
+CRC
+Rizh
+Enep
+Hentenn
+OS ostiz
+Reizhiad restroù
+Implijour
+Strollad
+Bloc'h
+Evezhiadenn
+Lec'hiadur
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fazi
+Ment en holl
+Egor vak
+Ment ar c'hleusteurioù
+Skritellig
+Anv lec'hel
+Pourchaser
+2100
+Dibaboù
+Yezh
+Yezh :
+Embanner
+&Embanner :
+
+2200
+Reizhiad
+Kenstagañ 7-Zip ouzh :
+2301
+Lakaat 7-Zip el lañser kemperzhel
+Lañser kemperzhel a-steud
+Elfennoù al lañser kemperzhel :
+2320
+<Teul>
+<Diell>
+Digeriñ
+Eztennañ ar restroù...
+Ouzhpennañ d'an diell...
+Gwiriañ an diell
+Eztennañ amañ
+Eztennañ diwar {0}
+Ouzhpennañ da {0}
+Gwaskañ ha kas dre postel...
+Gwaskañ diwar {0} ha kas dre postel.
+2400
+Teulioù
+Teulioù &labour
+Teul dibadelus ar &reizhiad
+Teul &red
+Teul &spisaet :
+Implijout nemet evit ar mediaoù dilec'hus
+Spisait un teul evit lakaat ar restroù diell dibadelus.
+2500
+Perzhioù
+Diskouez an elfenn ".."
+Diskouez arlunioù gwirion ar restroù
+Diskouez al lañser reizhiad
+&Diuz ar bannoù a-bezh
+Diskouez al &linennoù kael
+
+
+
+2900
+Keloù
+Digoust eo ar meziant 7-Zip. Mar plij deoc'h 7-zip ha mar fell deoc'h skoazellañ ar raktres-mañ e c'hellit donezoniñ argant da 7-Zip.
+3000
+
+N'eus fazi ebet
+{0} elfenn ziuzet
+N'haller ket sevel ar restr '{0}'
+N'haller ket ober gant an oberiadennoù nevesaat evti an diell-mañ.
+
+
+
+
+Kemmet ez eo bet ar restr '{0}'.\nHa fellout a ra deoc'h he nevesaat en diell ?
+N'haller ket nevesaat\n'{0}'
+N'haller ket loc'hañ an embanner.
+
+
+
+
+Re a elfennoù
+3300
+Eztennañ
+O waskañ
+Gwiriañ
+O tigeriñ...
+
+3400
+Eztennañ
+E&ztennañ diwar :
+Dibabit un teul evit eztennañ an restroù.
+3410
+Treugoù
+Treugoù klok
+Treug ebet
+3420
+Mod erlec'hiañ
+Goulenn a-raok erlec'hiañ
+Erlec'hiañ hep goulenn
+Lakaat ar restroù a zo anezho a-gostez
+Adenvel ent-emgefre ar restroù a zo anezho
+
+3500
+Kadarnaat a-raok erlec'hiañ ur restr
+Emañ dija ur restr gant ar memes anv en teul bukenn.
+Ha fellout a ra deoc'h lakaat e-lec'h
+ar restr da heul ?
+{0} eizhtet
+Adenvel ent-&emgefre
+3700
+Hentenn waskañ direizh evit '{0}'.
+Stlenn faziet e-barzh '{0}'. Gwastet eo ar restr.
+Fazi ar reoliñ CRC evit '{0}'. Gwastet eo ar restr.
+
+
+3800
+Roit ar ger-tremen
+Roit ar ger-tremen :
+
+&Diskouez ar ger-tremen
+
+
+
+Ger-tremen
+3900
+Amzer dremenet :
+Amzer o chom :
+Ment :
+Tizh :
+
+
+Fazioù :
+
+4000
+Ouzhpennañ d'an diell
+&Diell :
+&Mod nevesaat :
+&Mentrezh an diell :
+L&ive gwaskañ :
+Rizh &gwaskañ:
+&Ment ar geriadur :
+Me&nt ar gerioù :
+
+
+&Perzhioù:
+&Dibaboù
+Sevel un diell SF&X
+
+
+
+Ennodiñ an &anvioù restroù
+Memor evit ar waskerezh :
+Memor evit an diwaskerezh :
+4050
+Gwaskañ ebet
+Primañ
+Prim
+Reizh
+Uhelañ
+Gour
+4060
+Ouzhpennañ hag erlec'hiañ ar restroù
+Nevesaat hag ouzhpennañ ar restroù
+Freskaat ar restroù a zo anezho
+Goubredañ ar restroù
+4070
+Furchal
+An holl restroù
+
+
+6000
+Kopiañ
+Dilec'hiañ
+Kopiañ e-barzh :
+Dilec'hiañ diwar :
+O kopiañ...
+O tilec'hiañ...
+Oc'h adenvel...
+
+N'haller ket ober an oberiadenn-mañ.
+Fazi oc'h adenvel ar restr pe an teul
+
+
+6100
+Kadarnañ a-raok dilemel ar restr
+Kadarnañ a-raok dilemel an teul
+Kadarnañ a-raok dilemel an holl restroù
+Ha fellout a ra deoc'h dilemel '{0}' ?
+Ha fellout a ra deoc'h dilemel an teul '{0}' ha pep tra a zo e-barzh ?
+Ha fellout a ra deoc'h dilemel ar {0} elfenn-mañ ?
+O tilemel...
+Fazo o tilemel ar restr pe an teul
+
+6300
+Sevel un teul
+Sevel ur restr
+Anv an teul :
+Anv restr :
+Teul nevez
+Restr nevez
+Fazi o sevel an teul
+Fazi o sevel ar restr
+6400
+Evezhiadenn
+&Evezhiadenn :
+Diuz
+Diziuz
+Kuzh :
+6600
+
+Roll istor an teulioù
+Kemennoù yalc'h
+Kemenn
+7100
+Urzhiataer
+Rouedad
+
+Reizhiad
+7200
+Ouzhpennañ
+Eztennañ
+Amprouiñ
+Kopiañ
+Dilec'hiañ
+Dilemel
+Keloù
+7300
+Troc'hañ restr
+&Troc'hañ da :
+Troc'hañ e &levrennoù, eizhtetoù :
+O troc'hañ...
+
+
+
+
+
+7400
+Kendeuziñ restroù
+&Kendeuziñ da :
+O kendeuziñ...
+
+
+
+7500
+
+
+
+
+7600
+Amprouiñ
+Implij ar vemor :
+Gwaskerezh
+Diwaskerezh
+Feur
+Feur en holl
+Red
+Da heul
+
+
+Tremenioù :

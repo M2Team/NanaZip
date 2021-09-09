@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;  4.30 : Milan Hrubý
+;  4.33 : Michal Molhanec
+;  9.07 : Jiří Malák
+; 15.00 : Kryštof Černý
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Czech
+Čeština
+401
+OK
+Storno
+
+
+
+&Ano
+&Ne
+Zavří&t
+Nápověda
+
+Po&kračovat
+440
+Ano na &všechno
+N&e na všechno
+Zastavit
+Spustit znovu
+&Pozadí
+P&opředí
+Po&zastavit
+Pozastaveno
+Jste si jistí, že to chcete stornovat?
+500
+&Soubor
+Úpr&avy
+&Zobrazení
+&Oblíbené
+&Nástroje
+Nápo&věda
+540
+&Otevřít
+Otevřít u&vnitř
+Otevřít &mimo
+&Zobrazit
+&Upravit
+&Přejmenovat
+Kopírovat &do...
+Př&esunout do...
+Vymaza&t
+&Rozdělit soubor...
+&Sloučit soubory...
+Vlast&nosti
+Poznámk&a
+Vypočítat kontrolní součet
+Porovnat soubory
+Vytvořit složku
+Vytvořit soubor
+&Konec
+Odkázat
+&Alternate Streams
+600
+Vybrat &vše
+Zrušit výběr vše
+&Invertovat výběr
+Vybrat...
+Zrušit výběr...
+Vybrat podle typu
+Zrušit výběr podle typu
+700
+&Velké ikony
+&Malé ikony
+&Seznam
+&Podrobnosti
+730
+&Bez třídění
+"Ploché" zobrazení
+&2 panely
+Nástrojové lišty
+Otevřít kořenovou složku
+O úroveň výš
+Historie složek...
+&Obnovit
+Automatické obnovení
+750
+Archivační lišta
+Standardní lišta
+Velká tlačítka
+Zobrazovat text tlačítek
+800
+&Přidat složku do oblíbených jako
+Záložka
+900
+&Možnosti...
+&Zkouška výkonu
+960
+&Obsah...
+O progr&amu 7-Zip...
+1003
+Cesta
+Název
+Přípona
+Složka
+Velikost
+Komprimovaná velikost
+Atributy
+Vytvořen
+Použit
+Změněn
+Pevný
+S poznámkou
+Zakódovaný
+Rozdělen do
+Rozdělen od
+Slovník
+CRC
+Typ
+Anti
+Metoda
+Hostitelský OS
+Souborový systém
+Uživatel
+Skupina
+Blok
+Poznámka
+Pozice
+Cesta
+Složky
+Soubory
+Verze
+Díl
+Vícedílný
+Offset
+Odkazy
+Bloků
+Dílů
+
+64-bit
+Big-endian
+Procesor
+Fyzická velikost
+Velikost hlaviček
+Kontrolní součet
+Charakteristiky
+Virtuální adresa
+ID
+Krátké jméno
+Autor
+Velikost sektoru
+Režim
+Odkaz
+Chyba
+Celková velikost
+Volné místo
+Velikost clusteru
+Označení
+Místní název
+Poskytovatel
+NT Zabezpečení
+Alternate Stream
+Aux
+Odstraněný
+Is Tree
+
+
+Typ chyby
+Chyby
+Chyby
+Upozornění
+Upozornění
+Streams
+Alternate Streams
+Alternate Streams Size
+Virtuální velikost
+Rozbalená velikost
+Celková fyzická velikost
+Volume Index
+SubType
+Short Comment
+Code Page
+
+
+
+Tail Size
+Embedded Stub Size
+Link
+Hard Link
+iNode
+
+Jen pro čtení
+2100
+Možnosti
+Jazyk
+Jazyk:
+Editor
+&Editor:
+Program pro &porovnání souborů:
+2200
+Systém
+Asociovat 7-Zip s:
+Všichni uživatelé
+2301
+&Integrovat 7-Zip do kontextového menu
+S&tupňovité kontextové menu
+&Položky kontextového menu:
+Ikony v kontextovém menu
+2320
+<Složka>
+<Archiv>
+Otevřít
+Rozbalit soubory...
+Přidat do archivu...
+Zkontrolovat archiv
+Rozbalit zde
+Rozbalit do {0}
+Přidat do {0}
+Zkomprimovat a odeslat poštou...
+Zkomprimovat do {0} a odeslat poštou
+2400
+Složky
+Pracovní složka
+&Systémová složka pro dočasné soubory
+&Aktuální
+S&ložka:
+&Používat pouze pro vyjímatelné disky
+Vyberte umístění pro dočasné komprimované soubory.
+2500
+Nastavení
+Zobrazovat položku ".."
+Zobrazovat skutečnou ikonu souboru
+Zobrazovat systémové menu
+&Vybírat celý řádek
+Zobrazovat &mřížku
+Otevřít položku jedním kliknutím
+&Alternativní způsob výběru
+&Používat velké stránky paměti
+2900
+O programu 7-Zip
+7-Zip je svobodný software. Nicméně můžete podpořit jeho vývoj registrací.
+3000
+Systém nemůže přidělit požadovanou velikost paměti
+Nedošlo k žádným chybám
+vybráno {0} objekt(ů)
+Nelze vytvořit složku '{0}'
+Aktualizace není podporována pro tento archiv.
+Soubor '{0}' nelze otevřít jako archiv
+Zakódovaný archiv '{0}' nelze otevřít. Špatné heslo?
+Nepodporovaný typ archivu
+Soubor {0} již existuje
+Soubor '{0}' byl změněn.\nChcete ho aktualizovat v archivu?
+Nelze aktualizovat soubor\n'{0}'
+Editor nelze spustit.
+Soubor se jeví jako virus (ve jménu souboru jsou dlouhé mezery).
+Operace nemůže být provedena ze složky s dlouhou cestou.
+Musíte vybrat jeden soubor
+Musíte vybrat jeden nebo více souborů
+Příliš mnoho položek
+Nelze otevřít soubor jako {0} archiv
+Soubor je otevřen jako {0} archiv
+Archiv je otevřen s offsetem
+3300
+Rozbalování
+Komprimování
+Kontrola
+Otevírání...
+Prohledávání...
+Odebírání
+3320
+Přidávání
+Aktualizování
+Analyzování
+Replikace
+Přebalování
+Přeskakování
+Odstraňování
+Vytváření hlavičky
+3400
+Rozbalit
+&Rozbalit do:
+Vyberte umístění pro rozbalené soubory.
+3410
+Cesty
+Plné cesty
+Bez cesty
+Absolutní cesty
+Relativní cesty
+3420
+Způsob přepisování
+Zeptat se před přepisem
+Přepsat bez výzvy
+Přeskočit existující soubory
+Automatické přejmenování
+Automatické přejmenování existujících souborů
+3430
+Eliminovat duplikaci kořenové složky
+Obnovit zabezpečení souborů
+3500
+Potvrzení nahrazení souboru
+Cílová složka již obsahuje zpracovaný soubor.
+Chcete nahradit existující soubor
+tímto?
+{0} bajtů
+A&utomaticky přejmenovat
+3700
+Nepodporovaná komprimační metoda pro '{0}'.
+Chyba dat v '{0}'. Soubor je poškozený.
+Chyba CRC v '{0}'. Soubor je poškozený.
+Chyba dat v zakódovaném souboru '{0}'. Chybné heslo?
+Chyba CRC v zakódovaném souboru '{0}'. Chybné heslo?
+3710
+Špatné heslo?
+3721
+Nepodporovaná komprimační metoda
+Chyba dat
+CRC selhal
+Nedostupná data
+Neočekávaný konec dat
+Jsou přítomny nějaké data po konci payload dat
+Není archiv
+Chyba hlavičky
+Špatné heslo
+3763
+Nedostupný start archivu
+Nepotvrzený start archivu
+
+
+
+Nepodporovaná funkce
+3800
+Vložit heslo
+Vložit heslo:
+Potvrzení hesla:
+Zobrazit he&slo
+Heslo nesouhlasí
+Pro heslo použijte pouze anglická písmena, číslice a speciální znaky (!, #, $, ...)
+Heslo je příliš dlouhé
+Heslo
+3900
+Uplynulý čas:
+Zbývající čas:
+Celková velikost:
+Rychlost:
+Zpracováno:
+Komprimační poměr:
+Chyb:
+Archívy:
+4000
+Přidat do archivu
+&Archiv:
+Způsob aktualizace:
+&Formát archivu:
+Ú&roveň komprese:
+&Komprimační metoda:
+Ve&likost slovníku:
+V&elikost slova:
+Velikost bloku:
+Počet vláken procesoru:
+&Parametry:
+Možnosti
+Vytvořit SF&X archiv
+Zkomprimovat otevřené soubory
+Zakódování
+Metoda zakódování:
+Zakódovat &názvy souborů
+Spotřeba paměti pro zabalení:
+Spotřeba paměti pro rozbalení:
+Odstranit soubory po zabalení
+4040
+Uložit symbolické odkazy
+Uložit pevné odkazy
+Store alternate data streams
+Uložit zabezpečení souborů
+4050
+Skladovací
+Nejrychlejší
+Rychlá
+Normální
+Maximální
+Ultra
+4060
+Přidat a nahradit soubory
+Aktualizovat a přidat soubory
+Aktualizovat existující soubory
+Synchronizovat soubory
+4070
+Procházet
+Všechny soubory
+Podle velikosti souboru
+Pevný
+6000
+Kopírovat
+Přesunout
+Kopírovat do:
+Přesunout do:
+Kopírování...
+Přesouvání...
+Přejmenování...
+Vyberte cílovou složku.
+Operace není podporována.
+Chyba při přejmenování souboru nebo složky
+Potvrzení kopírování souborů
+Jste si jistí, že chcete zkopírovat soubory do archivu
+6100
+Potvrdit vymazání souboru
+Potvrdit vymazání složky
+Potvrdit mnohonásobné vymazání souboru
+Jste si jistí, že chcete vymazat '{0}'?
+Jste si jistí, že chcete vymazat složku '{0}' a všechno co obsahuje?
+Jste si jistí, že chcete vymazat tyto {0} položky?
+Mazání...
+Chyba při mazání souboru nebo složky
+Systém nepodporuje přesun soubor s dlouhou cestou do Odpadkového koše
+6300
+Vytvořit složku
+Vytvořit soubor
+Název složky:
+Název souboru:
+Nová složka
+Nový soubor
+Chyba při vytváření složky
+Chyba při vytváření souboru
+6400
+Poznámka
+&Poznámka:
+Vybrat
+Zrušit výběr
+Maska:
+6600
+Vlastnosti
+Historie složek
+Diagnostické zprávy
+Zpráva
+7100
+Počítač
+Síť
+Dokumenty
+Systém
+7200
+Přidat
+Rozbalit
+Zkontrolovat
+Kopírovat
+Přesunout
+Vymazat
+Informace
+7300
+Rozdělit soubor
+Rozdělit do:
+Rozdělit na díly, bajtů:
+Rozdělování...
+Potvrdit rozdělování
+Jste si jistí, že chcete rozdělit soubor na {0} dílů?
+Velikost dílu musí být menší než velikost původního souboru
+Nesprávná velikost dílu
+Zadaná velikost dílu: {0} bytů.\nJste si jistí, že chcete rozdělit archiv do takových dílů?
+7400
+Sloučit soubory
+Sloučit do:
+Slučování...
+Musí se vybrat pouze první díl rozděleného soubor
+Nepodařilo se rozpoznat rozdělený soubor
+Nepodařilo se nalézt více než jeden díl rozděleného souboru
+7500
+Vypočítávání kontrolního součtu...
+Informace o kontrolním součtu
+CRC kontrolní součet pro data:
+CRC kontrolní součet pro data a jména:
+7600
+Zkouška výkonu
+Spotřeba paměti:
+Komprimování
+Rozbalování
+Výkon
+Celkový výkon
+Aktuální
+Výsledné
+Využití procesoru
+Výkon / Využití
+Průchodů:
+7700
+Odkázat1
+Odkázat2
+Odkázat z:
+Odkázat na:
+7710
+Typ odkázání
+Pevný odkaz
+Symbolický odkaz souboru
+Symbolický odkaz složky
+Spojení složek

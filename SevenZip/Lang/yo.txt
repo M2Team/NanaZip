@@ -1,0 +1,495 @@
+;!@Lang2@!UTF-8!
+; 15.00 : 2015-03-29 : Ibrahim Oyekan
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Yoruba
+Yoruba
+401
+O DAA
+Pa re
+
+
+
+&Bẹẹni
+&Bẹẹkọ
+&Pádé
+Ìrànlọwọ
+
+&Tẹ́-síwájú
+440
+Bẹẹni fun &gbogbo ẹ
+Bẹẹkọ fun &gbogbo ẹ
+Dúró
+Ṣàtúnbẹ̀rẹ̀ 
+&Ẹ̣̀hìn-ìgbéhìn
+&Ojú-ìgbéhìn
+&Dádúró
+Ìdúró
+Ṣe ẹ dájú pe ẹnyin fẹ́ paarẹ
+500
+&Faíli
+&Tunkọ
+&Ìwò
+&Aàyò
+&Irinṣẹ́ 
+&Ìrànlọwọ
+540
+&Ṣi
+Ṣi &si ínú
+Ṣi &si íta
+&Ìwò
+&Tunkọ
+&Tun orukọ kọ
+&Ṣẹ̀dà si...
+&Gbé si...
+&Paarẹ
+&Pín faíli...
+Ṣà àwọn faíli kópọ̀...
+&Àbùdá
+&Ọrọ ìwòye...
+Ṣe iṣiro checksum
+íyàtọ̀
+Dá àpò faíli silẹ́ 
+Dá faíli silẹ́ 
+&Pádé
+Ìtọ́kasí 
+&Yiyan agbara détà
+600
+Àṣàyàn &gbogbo faíli
+Paa Àṣàyàn gbogbo faíli
+&Yi Àṣàyàn Padà
+Àṣàyàn...
+Paa Àṣàyàn...
+Àṣàyàn bi irú faíli
+Paa Àṣàyàn bi irú faíli
+700
+&Àmi ńlá
+&Àmi Kékeré
+&Akọjọ́
+&Awọn alaye
+730
+Lai tọ lẹsẹsẹ
+Iwò Ṣepẹtẹ
+&Irinṣẹ́ méjì
+&Pẹpẹ irinṣẹ́ 
+Ṣi pìlẹ̀ 
+Lọ sókè lẹẹkan
+Ìtàn àpò faíli...
+&Sọdọ̀tun 
+Isọdọ̀tun aládàáṣẹ́ 
+750
+Kó pẹpẹ irinṣẹ́ jọ́pọ
+Ojúlówó pẹpẹ irinṣẹ́ 
+Onini ńlá
+Fihàn Ìpilẹ̀sọ́ ọ̀rọ̀ Onini
+800
+Fi àpò faíli si àpò faíli ayanfẹ
+Àmì ìwé 
+900
+&Ìyàn...
+&Ala
+960na
+&Àkóónú...
+&Nípa 7-Zip...
+1003
+Ọnà
+Orukọ
+Ìkọpọmó
+Àpò faíli
+Ìwọn
+Ìwọn àkójọpọ̀ 
+Àwòmọ́ 
+Idásílẹ́
+Ìráyè sí 
+Atúnṣe
+Alagbara
+Ọrọ ìwòye
+Ìwépọ̀
+Kọkọ pín
+Pín lẹ́hìn
+Ìwe itúmọ̀-èdè 
+
+Irú
+Egboogi
+Ito lẹsẹsẹ
+OS agbalejo
+Ìlànà ètò fáìlì
+Onilò
+Ìwọ́pọ̀ 
+Dínà
+Ọrọ ìwòye
+Ipò
+Ìpele ọ̀nà
+Àpò faíli
+Faíli
+Ẹya
+Ọ̀pọ̀ òǹlò 
+Ọ̀pọ̀ òǹlò ọpọlọpọ
+Aiṣedeede
+Awọn Ìtọ́kasí 
+Àkọsílẹ
+Awọn ọ̀pọ̀ òǹlò 
+
+Bíìtì-8 
+Endian itóbi
+CPU
+Ìwọn gangan
+Ìwọn àkọsórí
+Checksum
+Ti ìwà 
+Àdírẹ́ẹ̀sì àfojúunúṣe
+ID
+Orúkọ kuru
+Ohun èlò  eleda
+Ìwọn apákàan
+Móòdù
+Ìtọ́kasí to ni aami
+Ìṣiṣe
+Ìwọn lapapọ
+Aaye to ṣẹku
+Ìwọn ìṣùpọ̀ 
+Aṣàmì 
+Agbègbè orúkọ
+Olùpèsè 
+Ààbò NT
+Yiyan agbara détà
+Olurànlọwọ
+Ààtàn 
+O jẹ igi
+
+
+Irú 
+Awọn ìṣiṣe
+Awọn ìṣiṣe
+Awọn ìkìlọ̀ 
+Ìkìlọ̀ 
+Agbara détà
+Yiyan agbara détà
+Ìwọn Yiyan Agbara 
+Ìwọn àfojúunúṣe
+Ìwọn ìtú erú 
+Ìwọn gangan lapapọ
+Atọ́kà ọ̀pọ̀ òǹlò
+ẹ̀ka-ìwọn
+ọrọ ìwòye kuru
+Ojú-ìwé kóòdù 
+
+
+
+Ìwọn ìrú 
+Ìwọn àfibọ̀ ìyọkúrò
+Ìtọ́kasí 
+Ìtọ́kasí lile 
+iNode
+
+Kàn kàá 
+2100
+Ìyàn
+Èdè
+Èdè:
+Aṣàtúnṣe
+&Aṣàtúnṣe:
+&íyàtọ̀:
+2200
+Ìlànà ètò 
+Da fáìlì pọ-mọ 7-Zip:
+Gbogbo onilò
+2301
+Sọ 7-Zip pọ̀ mọ mẹ́nù ọ̀gàngán ipò ṣẹ́ẹ̀lì
+Mẹ́nù ọ̀gàngán ipò pérété 
+Ijẹri ninu mẹ́nù ọ̀gàngán ipò:
+Àmì ninu mẹ́nù ọ̀gàngán ipò
+2320
+<Àpò faíli>
+<Àpò faíli àkójọ́pọ>
+Ṣi àpò faíli àkójọ́pọ
+Tú faíli silẹ...
+Fi si àpò faíli àkójọ́pọ...
+Dán àpò faíli àkójọ́pọ wò 
+Tú faíli si inú ibí 
+Tú faíli si inú {0}
+Fi si {0}
+Kó faíli jọ́pọ, ko rán í-meèlì...
+Kó faíli jọ́pọ si {0} ko rán í-meèlì
+2400
+Àpò faíli
+&Àpò faíli iṣiṣẹ́ 
+&Ìlànà ètò àpò faíli ibùgbé
+&Lọ́wọ́lọ́wọ́ 
+&Pàtó kan:
+Lò fun àwo àká-ọ̀rọ̀  yiyọ nìkan
+Yan ilé fun àpò faíli àkójọ́pọ ibùgbé
+2500
+Ìtò
+Fihàn ".." ijẹri
+Fihàn àmì faíli gidi
+Fihàn mẹ́nù ìlànà ètò
+&Àṣàyàn gbogbo ìlà ìbú
+Fihàn &àwọn ìlà gírìdì
+Ìṣíra tẹ̀ lẹ́ẹ̀kan láti ṣí ijẹri
+&Yiyan móòdù àṣàyàn
+Lò &ojú-ìwé ti o nlò ibi ìpamọ́  ńlá
+2900
+Nípa 7-Zip
+Ẹ̀yà àìrídìmú ṣ'ofo ni 7-Zip
+3000
+Ìlànà ètò ò le pín ibi ìpamọ́  ti o tó 
+Kò si iṣiṣe kankan
+Iye àṣàyàn: {0}
+Kò lé dá àpò faíli '{0}'
+Kò lé ṣàfikùn àpò faíli àkójọ́pọ yí.
+Kò lé ṣí àpò faíli '{0}' sí àpò faíli àkójọ́pọ
+Kò lé ṣí àpò faíli àkójọ́pọ (ìpàrokò). ọrọ̀ aṣínà láìpé
+Faíli yí o baamu
+Faíli {0} ti wà níbẹ
+Faíli '{0}' títúnṣe.\n ṣe ẹ fẹ̀  túnṣe si inú àpò faíli àkójọ́pọ?
+Kò le ṣàfikún fun faíli yí \n'{0}'
+Kò le ṣí Olótùú.
+Faíli yí jọ àkóràn(Ààyè to wa ni àárín orukọ faíli ti poju).
+Kò le pè ìmú iṣiṣẹ́ yí láti àpò faíli to ni ọ̀nà gígùn.
+Ẹ gbọdọ ṣàyàn faíli kan.
+Ẹ gbọdọ ṣàyàn faíli kan tàbí faíli pupọ
+Ijẹri ti ẹ ṣà ti pọju 
+Kò le ṣí faíli yí bí {0} àpò faíli àkójọ́pọ
+Faíli yí ti ṣí  bí {0} àpò faíli àkójọ́pọ
+Àpò faíli àkójọ́pọ yí ti ṣí pẹlu aiṣedeede
+3300
+Ìtúsilẹ
+Ìkójọ́pọ
+Ìdánwò 
+Ìṣíṣí...
+Ìṣẹ̀dà àwòrán ...
+Ìyọkúrò
+3320
+Ìfi-sí
+Ìṣàfikùn
+Ìtúpalẹ̀
+Ìfijọ
+Ìṣatopọ
+Mbẹ́
+Ìpaarẹ 
+Ìdá àkọsórí
+3400
+Túsilẹ
+&Tú faíli si inú:
+Yan ibi ti awọn faíli ma tú si. 
+3410
+Móòdù ọ̀nà:
+Gbogbo orukọ ọ̀nà
+Kò si orukọ ọ̀nà
+Orukọ ọ̀nà ọlọ́gangan
+Orukọ ọ̀nà ìbátan
+3420
+Móòdù ìkọsórí:
+Béèrè kí ó tó kọ sórí faíli
+Kọ sórí faíli lai béèrè
+Mà wo faíli tó ti wà níbẹ
+Tun orukọ kọ laládàáṣiṣẹ́
+Tun kọ orukọ faíli tó ti wà níbẹ laládàáṣiṣẹ́ 
+3430
+Mú ìfijọ àpò faíli ìpìlẹ̀  kúrò
+Da ààbò faíli padà
+3500
+Tẹnumọ́  àfirọ́pò faíli
+Àpò fáìlì èbúté ti ní fáìlì ìgbésẹ́.
+Ṣe ẹ fẹ̀  ṣàfirọ́pò fun fáìlì tó ti wà níbẹ
+pẹlu fáìlì yí?
+Báìtì {0}
+&Tun orukọ kọ laládàáṣiṣẹ́
+3700
+Kọ si àtìlẹ́yìn fun ètò àkójọ́pọ yí '{0}'.
+Ìṣiṣe détà  ṣẹlẹ ní inú '{0}'. Fáìlì ti bajẹ.
+Ìkùnà CRC ṣẹlẹ ní inú '{0}'. Fáìlì ti bajẹ.
+Ìṣiṣe détà ṣẹlẹ ní inú fáìlì pàroko '{0}'. Tun wo ọ̀rọ̀ aṣínà 
+Ìkùnà CRC ṣẹlẹ ní inú fáìlì pàroko '{0}'. Tun wo ọ̀rọ̀ aṣínà 
+3710
+Tun wo ọ̀rọ̀ aṣínà 
+3721
+Ko si àtìlẹ́yìn fun ètò àkójọ́pọ yí
+Ìṣiṣe détà ṣẹlẹ
+Détà ò ṣeélò 
+Ìkùnà CRC
+Détà ti parí lójijì
+Détà ṣi wa lẹ̀hìn détà ọ̀gangan
+Kò ṣe faíli akójọ́pọ
+Ìṣiṣe àkọlé
+Tun wo ọ̀rọ̀ aṣínà
+3763
+Ìbẹ̀rẹ̀  faíli akójọ́pọ ò ṣeélò 
+Ìbẹ̀rẹ̀  faíli akójọ́pọ ò ṣe tẹnumọ́ 
+
+
+
+Ko si àtìlẹ́yìn fun àfidámọ̀  yí
+3800
+Tẹ̀ ọ̀rọ̀ aṣínà
+Tẹ̀ ọ̀rọ̀ aṣínà:
+ṣítẹ̀ ọ̀rọ̀ aṣínà:
+&Fihàn ọ̀rọ̀ aṣínà
+Awọn ọ̀rọ̀ aṣínà ò dọgba
+Lò ábídí, iye tàbí aami Gẹ̀ẹ́sì nìkan (!, #, $, ...) fun ọ̀rọ̀ aṣínà
+Ọ̀rọ̀ aṣínà ti gùn ju
+Ọ̀rọ̀ aṣínà
+3900
+Àsìkò ti okan:
+Àsìkò ti o ku:
+Ìwọn lapapọ:
+Ìyára:
+Ìṣètò:
+Ìpín Ìkójọ́pọ:
+Awọn ìṣiṣe:
+Awọn faíli àkójọ́pọ:
+4000
+Fi si àpò faíli àkójọ́pọ
+&Faíli àkójọ́pọ:
+&Móòdù ìṣàfikún:
+&Ìgúnrégé faíli àkójọ́pọ:
+&Ìpele àkójọ́pọ:
+&Ọ̀nà àkójọ́pọ:
+&Ìwọn àtúmọ̀-èdè:
+&Ìwọn ó̩ró̩gbólóhùn:
+Ìwọn sèdíwọ:
+Iye èròjà atẹ̀lélànà CPU:
+&Awọn afòdiwọ̀n:
+Ìyàn
+Dá àpò faíli àkójọ́pọ fun SF&X
+Ko faíli alájọpín jọ́pọ
+Ìpàrokò 
+Móòdù ìpàrokò:
+&Ṣe ìpàrokò fun orúkọ faíli
+ìlò ibi ìpamọ́ fun àkójọ́pọ:
+ìlò ibi ìpamọ́ fun ìtúsilẹ:
+Paarẹ faíli lẹ̀hìn àkójọ́pọ
+4040
+Fi ìtọ́kasí to ni aami pamọ́ 
+Fi ìtọ́kasí lile pamọ́  
+Fi agbara détà pamọ́ 
+Fi àfirọ́pò faíli pamọ́  
+4050
+Ṣàfipamọ́ 
+Kíá ju
+Kíákíá 
+Déédéé 
+Ki o pọju
+Ki o púpọ̀ 
+4060
+Fi faíli si ki o tun fi rọ́pò
+Ṣàfikùn faili ki o tun fi si
+Sọ awọn faili lọ́wọ́ di ọ̀tun
+Mú awọn faíli dọ́gba 
+4070
+Wáròyìn
+Gbogbo faíli
+Lai le
+Lile
+6000
+Ṣẹ̀dà
+Gbé
+Ṣẹ̀dà si:
+Gbé si:
+Ìṣẹ̀dà
+Ìgbé...
+Ìtunkọ...
+Ṣàyàn èbúté àpò faíli.
+Ìmú ṣiṣẹ́ o ni àtìlẹ́yìn fun àpò faíli.
+Ìṣiṣe ṣẹlẹ ní ìtunkọ àpò faíli
+Tẹnumọ́  ìṣẹ̀dà faíli
+Ṣe ẹ́ dájú pe ẹ fẹ́ ṣẹ̀dà awọn faíli yí si àpò faíli àkójọ́pọ?
+6100
+Tẹnumọ́ ìpaarẹ faíli
+Tẹnumọ́ ìpaarẹ àpò faíli
+Tẹnumọ́ ìpaarẹ àpò faíli ọ̀pọ̀
+Ṣe ẹ́ dájú pe ẹ fẹ́ paarẹ '{0}'?
+Ṣe ẹ́ dájú pe ẹ fẹ́ paarẹ '{0}' a àti gbogbo àkóónú ẹ?
+Ṣe ẹ́ dájú pe ẹ fẹ́ paarẹ iye ijẹri yí {0} ?
+Ìpaarẹ...
+Ìṣiṣe ṣẹlẹ ni ìpaarẹ faíli tàbí àpò faíli
+Ìlànà ètò o le gbé faíli to ni orúkọ gígùn si inú Ààtàn
+6300
+Dá àpò faíli
+Dá faíli
+Orúkọ àpò faíli:
+Orúkọ faíli:
+Àpò faíli
+Faíli tuntun
+Ìṣiṣe ṣẹlẹ ni ìdá àpò faíli
+Ìṣiṣe ṣẹlẹ ni ìdá faíli
+6400
+Ọrọ ìwòye
+&Ọrọ ìwòye:
+Ṣàyàn
+Paa Àṣàyàn
+Asẹ́ iye:
+6600
+Àbùdá
+Akọọ́lẹ̀  àpò faíli
+Atọpinpin-Àìṣedédé iṣé
+Iṣé
+7100
+Kọ̀mpútà 
+Alásopọ̀ 
+Àkọsílẹ̀ 
+Ìlànà ètò 
+7200
+Fi-sí 
+Túsilẹ
+Dán-wò 
+Ṣẹ̀dà 
+Gbé
+Paarẹ
+Ìròyìn 
+7300
+Pín faíli
+&Pín si:
+Pín si &ọ̀pọ̀ òǹlò, báìtì:
+Ìpín...
+Tẹnumọ́ Ìpín
+Ṣe ẹ́ dájú pe ẹ fẹ́ pín faíli si ọ̀pọ̀ òǹlò {0}?
+Ọ̀̀pọ̀ òǹlò láti kéré ju ìwọn faíli ojulowo lọ
+ìwọn ọ̀pọ̀ òǹlò láìpé 
+Yan ìwọn ọ̀pọ̀ òǹlò: {0} báìtì.\nṢe ẹ́ dájú pe ẹ fẹ́  pín àpò faíli àkójọ́pọ si ọ̀pọ̀ òǹlò awọn yí?
+7400
+Kó faíli pọ̀ 
+&Kó faíli pọ̀  si:
+Ìkópọ̀...
+Ṣàyàn akọkọ faíli ìpín nìkan
+Ko lè rí faíli ni inu faíli ìpín
+Ko lè rí ju apá faíli kan lọ
+7500
+Ìkà checksum...
+Ìròyìn Checksum
+CRC checksum fun détà:
+CRC checksum fun détà àti orúkọ:
+7600
+Ala
+Ìlò ibi ìpamọ́:
+Akójọ́pọ
+Ìtúsilẹ
+Ìgbéléwọ̀n 
+Awọn ìgbéléwọ̀n lapapọ
+Lọ́wọ́lọ́wọ́ 
+èsì 
+Ìlò CPU
+Ìgbéléwọ̀n / Ìlò
+Ìwé ìjáde:
+7700
+Ìtọ́kasí
+Ìtọ́kasí
+Ìtọ́kasí láti:
+Ìtọ́kasí:
+7710
+Irú Ìtọ́kasí
+Ìtọ́kasí lile
+Faíli Ìtọ́kasí to ni aami
+Iwé ilana Ìtọ́kasí to ni aami
+Idapọ iwé ilana

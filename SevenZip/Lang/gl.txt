@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+; 15.00 : 2016-02-01 : enfeitizador
+;
+;  9.20 : 2014-11-26 : enfeitizador
+;
+;  3.12 : 2007-11-22 : Xosé Calvo
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Galician
+Galego
+401
+De acordo
+Cancelar
+
+
+
+&Si
+&Non
+Pe&char
+Axuda
+
+&Continuar
+440
+Si &a todo
+Non a &todo
+Parar
+Reiniciar
+Poñer por de&baixo
+Traer ao &fronte
+&Pausa
+Pausado
+Ten a certeza de querer cancelar?
+500
+&Ficheiro
+&Editar
+&Ver
+F&avoritos
+Ferramen&tas
+A&xuda
+540
+&Abrir
+Abrir &dentro
+Abrir &fora
+&Ver
+&Editar
+Rena&me
+&Copiar a...
+&Mover a...
+&Eliminar
+&Dividir ficheiro...
+Com&binar ficheiros...
+P&ropiedades
+Come&ntario...
+Calcular suma de verificación
+Diferenzas
+Crear cartafol
+Crear ficheiro
+Sa&ír
+Ligazón
+&Alternar fluxos
+600
+Seleccion&ar todo
+Desmarcar todo
+&Inverter selección
+Seleccionar...
+Desmarcar...
+Seleccionar por tipo
+Desmarcar por tipo
+700
+Iconas lon&gas
+Iconas &miúdas
+&Lista
+&Detalles
+730
+Sen orde
+Vista plana
+&2 paneis
+Barras de ferramen&tas
+Abrir cartafol raíz
+Subir un nivel
+Históricos de cartafoles...
+&Recargar
+Recargar auto.
+750
+Barra de ferramentas de arquivos
+Barra de ferramentas normal
+Botóns grandes
+Amosar texto dos botóns
+800
+Eng&adir cartafol a favoritos como
+Marcador
+900
+&Opcións...
+&Rendemento
+960
+&Contidos...
+&Acerca de 7-Zip...
+1003
+Camiño
+Nome
+Extensión
+Cartafol
+Tamaño
+Tamaño comprimido
+Atributos
+Creado
+Último acceso
+Modificado
+Sólido
+Comentado
+Cifrado
+Partir antes
+Partir despois
+Dicionario
+CRC
+Tipo
+Anti
+Método
+SO servidor
+Sistema de ficheiros
+Usuario
+Grupo
+Bloque
+Comentario
+Posición
+Prefixo do camiño
+Cartafoles
+Ficheiros
+Versión
+Volume
+Varios volumes
+Desprazamento
+Ligazóns
+Bloques
+Volumes
+
+64-bit
+Big-Endian
+Procesador
+Tamaño físico
+Tamaño cabeceiras
+Suma de verificación
+Características
+Enderezo virtual
+ID
+Nome curto
+Aplicación orixinal
+Tamaño sector
+Modo
+Ligazón simbólica
+Erro
+Tamaño total
+Tamaño libre
+Tamaño do clúster
+Etiqueta
+Nome local
+Fornecedor
+Seguridade NT
+Fluxos alternos
+Aux !BUSCA
+Eliminado
+Is Tree !BUSCA
+
+
+Tipo de error
+Erros
+Erros
+Avisos
+Aviso
+Fluxos
+Fluxos alternos
+Tamaño fluxos alternos
+Tamaño virtual
+Tamaño sen comprimir
+Total tamaño físico
+Indexar volume
+SubTipo
+Comentario curto
+Código de páxina
+
+
+
+Tamaño de cola
+Tamaño temporal inserido
+Ligazón
+Ligazón forte
+iNode
+
+Só lectura
+2100
+Opcións
+Idioma
+Idioma:
+Editor
+&Editor:
+&Diferenza:
+2200
+Sistema
+Asociar 7-Zip con:
+Todos os usuarios
+2301
+Integrar 7-Zip no menú de contexto
+Menú do contexto en cascada
+Elementos do menú do contexto:
+Iconas no menú de contexto
+2320
+<Cartafol>
+<Arquivo>
+Abrir arquivo
+Extraer ficheiros...
+Engadir ao arquivo...
+Comprobar arquivo
+Extraer aquí
+Extraer a {0}
+Engadir a {0}
+Comprimir e enviar por correo...
+Comprimir a {0} e enviar por correo
+2400
+Cartafoles
+Cartafol en &uso
+Cartafol temporal do &sistema
+Cartafol a&ctual
+E&specificar:
+Usar só en unidades extraíbles
+Especificar unha localización para os arquivos temporais.
+2500
+Axustes
+Amosar o elemento ".."
+Amosar iconas reais do ficheiro
+Amosar menú do sistema
+Seleccionar &fila completa
+Amosar liñas de &grella
+Clic simple para abrir un elemento
+Modo de selección &alternativo
+Usar memoria &longa de páxinas
+2900
+Acerca de 7-Zip
+7-Zip é un programa gratuíto
+3000
+O sistema non puido atribuír a memoria requirida
+Non se produciron erros
+{0} obxecto(s) seleccionados
+Non se pode crear o cartafol '{0}'
+Este tipo de arquivo non permite actualizacións.
+Non se pode abrir o ficheiro '{0}' como arquivo
+Non se pode abrir o ficheiro cifrado '{0}'. Contrasinal incorrecto?
+Tipo de arquivo non admitido
+O ficheiro {0} xa existe
+Modificouse o ficheiro '{0}'.\nQuéreo actualizar no arquivo?
+Non se pode actualizar o ficheiro\n'{0}'
+Non se pode iniciar o editor.
+O ficheiro parécese a un virus (o nome do ficheiro contén espazos longos).
+A operación non pode responder dende un cartafol cun camiño longo.
+Tes que seleccionar un ficheiro
+Tes que seleccionar un ou máis ficheiros
+Demasiados elementos
+Non se pode abrir o ficheiro como arquivo {0}
+O ficheiro está aberto como arquivo {0}
+O arquivo está aberto con desprazamento
+3300
+Extraendo
+Comprimindo
+Probando
+Abrindo...
+Escaneando...
+Eliminando
+3320
+Engadindo
+Actualizando
+Analizando
+Replicando
+Volvendo comprimir
+Omitindo
+Eliminando
+Creando cabeceira
+3400
+Extraer
+E&xtraer a:
+Especificar unha localización para os ficheiros extraídos.
+3410
+Modo camiño:
+Nomes de camiño completos
+Sen nomes de camiño
+Nomes de camiño absoluto
+Nomes de camiño relativo
+3420
+Modo sobrescribir:
+Preguntar antes de sobrescribir
+Sobrescribir sen preguntar
+Omitir ficheiros existentes
+Renomeo automático
+Renomeo automático de ficheiros existentes
+3430
+Eliminar duplicidade do cartafol raíz
+Restaurar seguridade do ficheiro
+3500
+Confirmar a substitución de ficheiro
+O cartafol destino xa ten un ficheiro co mesmo nome.
+Desexa substituír o ficheiro existente
+con estoutro?
+{0} bytes
+Renomeo a&utomático
+3700
+Método de compresión non admitido para '{0}'.
+Erro de datos en '{0}'. O ficheiro está danado.
+Fallou a verificación CRC en '{0}'. O ficheiro está danado.
+Erro de datos no ficheiro cifrado '{0}'. Contrasinal incorrecto?
+Fallou a verificación CRC no ficheiro cifrado '{0}'. Contrasinal incorrecto?
+3710
+Contrasinal incorrecto?
+3721
+Método de compresión non admitido
+Erro de datos
+Fallou a verificación CRC
+Datos non dispoñibles
+Remate de datos inesperado
+Hai certos datos despois do remate dos datos cargados
+Non é arquivo
+Erro de cabeceiras
+Contrasinal incorrecto
+3763
+Inicio de arquivo non dispoñible
+Inicio de arquivo non confirmado
+
+
+
+Característica non admitida
+3800
+Insira contrasinal
+Insira contrasinal:
+Insírao de novo:
+Amo&sar contrasinal
+Os contrasinais non coinciden
+Use só letras latinas, números e caracteres especiais (!, #, $, ...) para o contrasinal
+O contrasinal é moi longo
+Contrasinal
+3900
+Tempo transcorrido:
+Tempo restante:
+Tamaño total:
+Velocidade:
+Procesado:
+Proporción de compresión:
+Erros:
+Arquivos:
+4000
+Engadir ao arquivo
+&Arquivo:
+Función act&ualizar:
+&Formato de arquivo:
+Nive&l de compresión:
+&Método de compresión:
+Tamaño do &dicionario:
+Tamaño de &palabra:
+Tamaño de bloque sólido:
+Número de procesos da CPU:
+&Parámetros:
+Opcións
+Crear ficheiro SF&X
+Comprimir ficheiros compartidos
+Cifrado
+Método de cifrado:
+Cifrar &nomes de ficheiro
+Uso de memoria para compresión:
+Uso de memoria para extracción:
+Eliminar ficheiros despois de comprimir
+4040
+Arquivar ligazóns simbólicas
+Arquivar ligazóns fortes
+Arquivar fluxo de datos alternos
+Arquivar seguridade de ficheiro
+4050
+Arquivar
+Máis rápida
+Rápida
+Normal
+Máxima
+Ultra
+4060
+Engadir e substituír ficheiros
+Actualizar e engadir ficheiros
+Só actualizar ficheiros existentes
+Sincronizar ficheiros
+4070
+Navegar
+Todos os ficheiros
+Non sólido
+Sólido
+6000
+Copiar
+Mover
+Copiar a:
+Mover a:
+Copiando...
+Movendo...
+Renomeando...
+Seleccione cartafol destino.
+A operación non é admitida para este cartafol.
+Erro ao renomear ficheiro ou cartafol
+Confirmar copia de ficheiro
+Desexa copiar os ficheiros ao arquivo
+6100
+Confirmar eliminar ficheiro
+Confirmar eliminar cartafol
+Confirmar eliminar ficheiro múltiplo
+Ten a certeza de eliminar '{0}'?
+Ten a certeza de eliminar o cartafol '{0}' e todo o que contén?
+Ten a certeza de eliminar estes {0} elementos?
+Eliminando...
+Erro ao eliminar ficheiro ou cartafol
+O sistema non pode mover un ficheiro cun nome tan longo á papeleira
+6300
+Crear cartafol
+Crear ficheiro
+Nome do cartafol:
+Nome do ficheiro:
+Novo cartafol
+Novo ficheiro
+Erro ao crear cartafol
+Erro ao crear ficheiro
+6400
+Comentario
+&Comentario:
+Seleccionar
+Desmarcar
+Máscara:
+6600
+Propiedades
+Histórico de cartafoles
+Mensaxes de diagnose
+Mensaxe
+7100
+Computador
+Rede
+Documentos
+Sistema
+7200
+Engadir
+Extraer
+Probar
+Copiar
+Mover
+Eliminar
+Información
+7300
+Dividir ficheiro
+&Dividir a:
+Dividir en &volumes, bytes:
+Dividindo...
+Confirmar división
+Ten a certeza de dividir o ficheiro en {0} volumes?
+O tamaño do volume ten que ser menor que o tamaño do ficheiro orixinal
+Tamaño de volume incorrecto
+Tamaño de volume especificado: {0} bytes.\nTen a certeza de dividir o arquivo nestes volumes?
+7400
+Combinar ficheiros
+&Combinar a:
+Combinando...
+Seleccionar só a primeira parte do ficheiro dividido
+Non se detecta o ficheiro como parte dun ficheiro dividido
+Non se atopan máis ca unha parte do ficheiro dividido
+7500
+Calculando suma de verificación...
+Información da suma de verificación
+Verificación CRC para datos:
+Verificación CRC para datos e nomes:
+7600
+Rendemento
+Uso de memoria:
+Comprimindo
+Extraendo
+Proporción
+Proporción total
+Actual
+Resultante
+Uso de CPU
+Proporción / Uso
+Pases:
+7700
+Ligazón
+Ligazón
+Ligazón desde:
+Ligazón a:
+7710
+Tipo de ligazón
+Ligazón forte
+Ligazón simbólica de ficheiro
+Directorio ligazón simbólica
+Directorio nexo

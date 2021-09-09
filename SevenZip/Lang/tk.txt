@@ -1,0 +1,495 @@
+;!@Lang2@!UTF-8!
+; 19.00 : 2019-03-04 : Merdan NURIYEV Hazar-Balkan H.K.
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Turkmen
+Türkmençe
+401
+Howwa
+Goýbolsun et
+
+
+
+&Howwa
+&Ýok
+Ýa&p
+Kömek al
+
+&Dowam et
+440
+Hemmesine howw&a
+Hemmesine &ýok
+Dur
+Gaýtadan başla
+&Görünme
+&Öňe çyksyn
+&Sägindir
+Sägindi
+Goýbolsun etjekmi?
+500
+&Dosýa
+&Düzelt
+&Gör
+F&aworitler
+G&urallar
+&Kömek
+540
+&Aç
+&Içinde Aç
+Daş&ynda Aç
+&Gör
+&Düzelt
+Adyn&y üýtget
+Şu ýere &kopýala...
+Şu ýere &göçür...
+&Öçür
+Faýly &böl...
+Faýllary &birleşdir...
+&Düzgünlemeler
+Tes&wir...
+Barlag jemini hasapla
+Tapawutlanma 
+Bukja döret
+Faýl döret
+&Çyk
+Bag 
+Akymlary ç&alyş
+600
+Hemmesini Seç
+Hemmesini Seçme
+Seçim&i tersine öwür 
+Seç...
+Seçme...
+Tiplerine görä seç
+Tiplerine göra seçme
+700
+U&ly Ikon
+Kiçi Ikon
+Tablissa
+Jikme-jikleri
+730
+Sortlanmadyk
+Düz Görnüş
+&2 Paneller
+&Esbaplar
+Düýp Bukjany Aç
+Bir Tekje Ýokary
+Öňki Bukjalar...
+Täzele
+Awtomatiki Täzele
+750
+Arhiw Esbaplary
+Standart Esbaplar
+Uly Knopkalar
+Konopkalarda tekst görkez
+800
+Bukj&any faworitlere şu ad bilen goş
+Bellik
+900
+&Seçimler...
+&Barlag nokady
+960
+Ma&zmunlar...
+7-zip H&akynda
+1003
+Ýol
+Ad
+Faýl guýrugu
+Bukja
+Ululyk/Gabara
+Paket ulylygy
+Atributlar/Sypatlar
+Döredildi
+Ualnyldy
+Üýtgedildi
+Bitewi
+Bellik edildi
+Kodlandy
+Öňinçä Böl
+Soňra Böl
+Sözlük
+
+Tip
+Anti
+Usul/Tär
+Hojaýyn OS
+Faýl Sistema
+Ulanyjy
+Topar
+Bölüm
+Bellik
+Pozitsiýa
+Ýoluň Öňady/Pristawkasy
+Bukjalar
+Faýllar
+Wersiýa
+Tom
+Köp Tomly
+Offset (Ýeri doldurylan) 
+Baglar
+Bölümler
+Tomlar
+
+64-tike
+Big-endian
+Prosesor
+Fiziki Göwrüm
+Faýl başlygy Göwrümi
+Barlag-jemi
+Harakteristikalar
+Haýaly Salgy
+ID
+Gysga Ad
+Dorediji porgramma
+Sektor Göwrümi
+Metod Görnüşi
+Simwolik Link
+Ýalňyş
+Toplam Göwrüm
+Boş Ýer
+Hoşa Göwrüm
+Etiketka
+Lokal Ady
+Üpjünçi
+NT Howpsuzlyk
+Çalyşan Akym
+Aux
+Öçürilen
+Agaçmy
+
+
+Ýalňyşlygyň Görnuşi
+Ýalňyşlar
+Ýalňyşlar
+Duýduryşlar
+Duýduryş
+Akymlar
+Akymlary Çalyş
+Çalyşan Akymlaryň Göwrümi
+Haýaly Göwrüm
+Giňeldilen Göwrüm
+Toplam Fiziki Göwrüm
+Tom Indeksi
+Tabyn Görnüş
+Gysga Bellik
+Kod Sahypasy
+
+
+
+Guýruk Ölçegi
+Gömülen Omça Göwrümi
+Bag
+Gönimel Bag
+iDüwin
+
+Diňe Okalýan
+2100
+Seçimler
+Dil
+Dil:
+Redaktor
+R&edaktor:
+&Diff(Parh)
+2200
+Sistema
+7-zip bilen şärik et:
+Ähli Ulanyjylar
+2301
+7-zipi kontekst/baglam menýu bilen birleşdir
+Basgançaklaşdyrylan kontekst/baglam menýu
+Kontekst menýu maddalary:
+Kontekst menýudaky şekiljikler
+2320
+<Bukja>
+<Arhiw>
+Arhiwi aç
+Faýllary çykar...
+Arhiwe goş...
+Arhiwi synag et
+Bu ýere Çykar
+{0} şu ýere çykar
+{0} şuňa goş
+Gys we e-poçta edip iber...
+{0} şuňa gys we e-poçta et
+2400
+Bukjalar
+&Işlenýän Bukja
+&Sistemanyň wagtlaýyn bukjasy
+Häzirki
+&Takyklanan:
+Diňe aýrylýan sürujüler üçin ulanmaly
+Wagtlaýyn arhiw faýly üçin ýer takyklama.
+2500
+Sazlamalar
+".." elementini görkez
+Faýllaryň hakyky şekiljiklerini görkez
+Sistema menuýusuny görkez
+&Doly setir seç
+Gözenek çyzyklaryny görkez
+Ýeke-basyşda elementi aç
+Başgaça seçiş mody
+Uly hakyda sahypasyny u&lan
+2900
+7-zip Hakynda
+7-zip erkin bir programma üpçünçiligidir
+3000
+Sistema gerekli hakyda mukdaryny bölüp alyp bilmedi
+Ýalňyşlyk ýok
+{0} obýekt(ler) seçildi
+'{0}' bukjasy döredilip bolmady
+Bu arhiw üçin täzeleme amalay üpçin edilmedik.
+'{0}' faýly bir arhiw hökminde açyp bolmaýar
+Kodlanan '{0}' arhiw açylmady. Ýalňyş parol?
+Goldanmaýan arhiw türi
+{0} faýly öňden hem bar
+'{0}' faýly üýtgäpdir. \nOny arhiwiň içinde de üýtgetmeli mi?
+Faýlda üýtgeşme girizilmeýär \n'{0}'
+Editor acylmady.
+Faýl wirusa meňzeýär (Faýlyň adynda uzyn boşluklar bar).
+Uzyn ýol ady bolan bukjadan amal ýerine ýetirilip bolmaýar.
+Siz bir faýl seçmelisiňiz
+Siz bir ýada birnäçe faýl seçmelisiňiz
+Gaty kän madda
+{0} faýly arhiw görnüşinde açylmady
+{0} Faýly arhiw görnüşinde açyk
+Arhiw süýşürme/çalşyrma bilen açyldy
+3300
+Çykarylýar
+Gysylýar
+Synag edilýär
+Açylýar...
+Daranýar...
+Aýrylýar
+3320
+Goşulýar
+Täzelenýär
+Seljerilýär
+Gaýtalnýar/Replika edilýär
+Gaýtadan gaplanýar
+Degmän geçilýär
+Öçürilýär
+Faýl başy döredilýär
+3400
+Çykar
+Ş&uňa çykar:
+Çykarylan faýllara ýer belläň.
+3410
+Ýoda modu:
+Doly ýol ady
+Ýoda adlary ýok
+Doly adly ýoda
+Bagly ýoda adlary
+3420
+Üztünden ýazma mody:
+Üstünde ýazmazdan öň sora
+Soramazdan ýaz
+Bar faýllary ätle
+Awtomatiki adyny üýtget
+Öň bar faýllary awtomatiki usulda adyny üýtget
+3430
+Kök bukjasynyň dublikatlaryny ýok et
+Faýl goraglaryny yzyna/ýerine goý
+3500
+Faýl çalyşyklygyny tassykla
+Seçilen bukjada öň işlenen faýl bar.
+Bar bolan faýly şunuň bilen 
+çalyşjakmy?
+{0} baýt
+A&wtomatiki adyny üýtget
+3700
+'{0}' üçin goldanmaýan usul.
+'{0}' içinde data ýalňyşlygy. Faýl bozyk.
+'{0}' içinde Gaýtalanýan Ölçegsizlik Barlagy (CRC) ýalňyşlygy. Faýl bozyk.
+'{0}' kodlanan faýlda data ýalňyşlygy. Ýalňyş parol.
+'{0}' kodlanan faýlda Gaýtalanýan Ölçegsizlik Barlagy (CRC) ýalňyşlygy. Ýalňyş parol my?.
+3710
+Ýalňyş parol my?
+3721
+Goldanmaýan gysma metody
+Data ýalňyşlygy
+Gaýtalanýan Ölçegsizlik Barlagy (CRC) ýalňyşlygy
+Data ýok
+Garaşylmaýan data soňy
+Peýdaly datanyň "soň" belgisinden soňra birentek data bar
+Arhiw däl
+Başlyk Ýalňyşlygy
+Ýalňyş Parol
+3763
+Arhiw başlangyjy yok
+Tassyklanmadyk arhiw başlangyjy
+
+
+
+Goldanmaýan funksiýa
+3800
+Parola ýaz
+Parola ýaz:
+Parolany gaýtadan ýaz:
+Parolany &görkez
+Parolalar gabat gelmeýär
+Parol üçin diňe Iňlis harplary, sifrlar we ýörite siýmbollar (!, #, $, ...) ulanmaly
+Parol gaty uzyn
+Parol
+3900
+Sarp edilen wagt:
+Gerekli wagt:
+Toplam göwrim:
+Tizlik:
+Işlenen:
+Gysma koefissenti:
+Ýalňyşlyklar:
+Arhiwler:
+4000
+Arhiwe goş
+&Arhiwle:
+Tä&zeleme mody:
+Arhiw &formady:
+Gysma dere&jesi:
+Gysma &metody:
+&Sözlügiň göwrümi:
+Söz gö&wrümi:
+Bitewi blok göwrümi:
+Prosesor iş akym sany:
+&Parametrler:
+Seçimler
+SF&X (öz-özünden açylýän) arhiwini döret
+Açyk ulanylýan faýllary gys
+Kodlama
+Kodlama metody:
+Faýl adlary&ny kodla
+Gysma işi üçin hakyda ulanylşygy:
+Arhiwden çykarma işi üçin hakyda ulanylşygy:
+Gysma/arhiwleme işinden soňra faýllary öçür
+4040
+Simwolik linkleri sakla
+Gönimel linkleri sakla
+Çalyşan data akymlaryny sakla
+Faýl goraglaryny sakla
+4050
+Sakla
+Iň çalt
+Çalt
+Adatça
+Maksimum
+Aňry başy
+4060
+Faýllary Goş we çalyş
+Faýllary täzele we goş
+Öň bar bolyp täzelenen faýllar
+Faýllary sinhron et
+4070
+Göz aýla
+Hemme faýllar
+Bitewi bolmadyk
+Bitewi
+6000
+Kopýala
+Göçür
+Şuňa kopýala:
+Şuňa göçür:
+Kopýalanýar...
+Göçürilýär...
+Ad üýtgedilýär...
+Bukja seçiň.
+Amal bu bukja üçin goldanmaýar.
+Bukja ýada faýl ad üýtgetme ýalňyşlygy
+Faýl Kopýalanmasyny tassyklaň
+Faýllaryň arhiwe kopýalanmasynda kesgitlimisiň?
+6100
+Faýl Öçürilmesini Tassykla
+Bukja Öçürilmesini Tassykla
+Köp sanly Faýllaryň Öçürilmesini Tassykla
+'{0}' öçürilmegine kesgitlimisiň?
+'{0}' bukjasynyň we ähli mazmunynyň öçürilmegine kesgitlimisiň?
+{0} şularyň öçürilmeginde kesgitlimisiň?
+Öçürilýär...
+Faýl ýada Bukja Öçürme Ýalňyşlygy
+Sistema uzyn ýoda adlary bolan faýllary öçürip bilenok.
+6300
+Bukja Döret
+Faýl Döret
+Bukja ady:
+Faýl Ady:
+Täze Bukja
+Täze Faýl
+Bukja Döretme Ýalňyşlygy
+Faýl Döretme Ýalňyşlygy
+6400
+Bellik
+&Bellik:
+Seç
+Seçimi ýatyr
+Şert/Maska:
+6600
+Alamatlar
+Öňki Bukjalar
+Diagnostik maglumatlar
+Maglumat
+7100
+Kompýutor
+Tor
+Dokumentler
+Sistema
+7200
+Goş
+Çykar
+Synag
+Kopýala
+Göçür
+Öçür
+Informasiýa
+7300
+Faýly Böl
+&Şuňa böl:
+Göw&rümlere, baýtlara böl:
+Böleklenýär...
+Böleklemegi Tassykla
+{0} göwrüminde böleklemäge kesgitlimisiň?
+Göwrümiň ulylygy aslynyň ulylygyndan kiçi bolmalydyr
+Göwrüm ulylygy ýalňyş Incorrect volume size
+Bellenen göwrüm ulylygy: {0} baýt.\nArhiwi şeýle göwrümlere bölmäge kesgitlimisiňiz?
+7400
+Faýllary Birleşdir
+&Şu ýerde birleşir:
+Birleşdirilýär...
+Böleklenen faýlyň diňe birinji bölegini seçiň
+Faýly böleklenen faýlyň bir bölegi hökminde ele alyp bolmaýar
+Faýly böleklenen faýlyň bir ýada birnäçe bölümini tapyp bolmady
+7500
+Barlag-jemi hasaplanýar...
+Barlag-jemi maglumaty
+Data üçin Gaýtalanýan Ölçegsizlik Barlagy (CRC) barlag-jemi:
+Data we adlar üçin Gaýtalanýan Ölçegsizlik Barlagy (CRC) barlag-jemi:
+7600
+Barlag nokady
+Hakyda ulanylşygy:
+Gysylýar
+Arhiwden çykarylýar
+Anyklama
+Toplam anyklama
+Häzirki
+Jemlenýar
+Prosesor ulanylşygy
+Anyklama / Ulanylşyk
+Üstünden geçildi:
+7700
+Bag
+Bag
+Şundan bag:
+Şuňa bag:
+7710
+Bag tipi
+Gönimel Bag
+Faýl Simwolik Bagy
+Bukja Simwolik Bagy
+Baglanan Bukja

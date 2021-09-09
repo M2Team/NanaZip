@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4:26 : Tomas Miralles
+;  4.44 : Fernando Verdú
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Valencian
+Valencià
+401
+Acceptar
+Cancel·lar
+
+
+
+&Si
+&No
+Tan&car
+Ajuda
+
+&Continuar
+440
+Si a &tot
+No a t&ot
+Parar
+Reiniciar
+Segon pla
+Primer pla
+&Pausa
+Parat
+Està segur que vol cancel·lar?
+500
+&Arxiu
+&Editar
+&Visualitzar
+Favorits
+Ferramentes
+Ajuda
+540
+&Obrir
+Obrir d&ins
+Obrir fora
+&Visualitzar
+&Editar
+Renom&enar
+&Copiar a...
+&Moure a...
+&Suprimir
+&Separar fitxer...
+Com&binar fitxers...
+P&ropietats
+Come&ntari
+Calcular checksum
+
+Crear directori
+Crear fitxer
+Eixir
+600
+Seleccion&ar-ho tot
+Deseleccionar-ho tot
+&Invertir selecció
+Seleccionar...
+No seleccionar...
+Seleccionar per tipus
+No seleccionar per tipus
+700
+Icones g&rans
+Icones menudes
+&Llista
+&Detalls
+730
+No ordenat
+Vista plana
+&2 Taules
+&Barres de ferramentes
+Obrir directori arrel
+Directori pare
+Historial de carpetes...
+Actualitza&r
+750
+Arxiu
+Estàndard
+Botons grans
+Mostrar text dels botons
+800
+&Afegir el directori als Favorits com a
+Personal
+900
+&Opcions...
+&Banc de proves
+960
+&Contingut...
+Sobre 7-Zip...
+1003
+Adreça
+Nom
+Tipus d'arxiu
+Directori
+Tamany
+Tamany comprimit
+Atributs
+Creat
+ültim accés
+Última modificació
+Compacte
+Comentari
+Xifrat
+Expandit abans
+Expandit després
+Diccionari
+CRC
+Tipus
+Anti
+Mètode
+SO d'origen
+Sistema de fitxers
+Usuari
+Grup
+Bloc
+Comentari
+Posició
+Prefix de ruta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Error
+Tamany total
+Espai lliure
+Tamany sector
+Etiqueta
+Nom local
+Proveïdor
+2100
+Opcions
+Idioma
+Idioma:
+Editor
+&Editor:
+
+2200
+Sistema
+Associar 7-Zip amb:
+2301
+Integrar 7-Zip dins el menu contextual de Windows
+Menu contextual en cascada
+Objectes del menu contextual:
+2320
+<Directori>
+<Arxiu>
+Obrir arxiu
+Extraure fitxers...
+Afegir a l'arxiu...
+Comprovar arxiu
+Extraure ací
+Extraure a {0}
+Afegir a {0}
+Comprimir i enviar per correu electrònic...
+Comprimir a {0} i enviar per correu electrònic
+2400
+Directoris
+Directori de &treball
+Directori temporal del &sistema
+Directori a&ctual
+E&specificar directori:
+Utilitzar només per a discs extraibles
+Especificar un directori per als arxius temporals.
+2500
+Ajusts
+Mostrar l'objecte ".."
+Mostrar icones reals dels fitxers
+Mostrar el menú del sistema
+Seleccionar &tota la la fila
+Mostrar &línies de la taula
+
+Mode de selecció &alternatiu
+Utilitzar pàgines de memòria &grans
+2900
+Sobre 7-Zip
+7-Zip és un programa lliure (GNU LGPL). Pot col·laborar en el desenvolupament del 7-zip registrant-lo, com a usuari registrat podrà rebre suport tècnic.
+3000
+
+No hi ha errors
+{0} objecte(s) seleccionat(s)
+No es pot crear el directori '{0}'
+Les operacions d'actualització d'este arxiu no estan suportades.
+No es pot obrir el fitxer '{0}' com arxiu
+No es pot obrir l'arxiu xifrat '{0}'. contrasenya incorrecta?
+
+
+El fitxer '{0}' ha sigut modificat.\nVol actualitzar-lo a l'arxiu?
+No es pot actualitzar el fitxer\n'{0}'
+No es pot executar l'editor.
+
+
+
+
+Massa objectes
+3300
+Extraent
+Comprimint
+Provant
+Obrint...
+Escanejant...
+3400
+Extraure
+E&xtraure a:
+Seleccione destinació per als fitxers extrets.
+3410
+Mode d'adreça
+Adreça sencera
+Sense adreça
+3420
+Sobreescriu
+Pregunta abans de sobreescriure
+Sobreescriu sense confirmació
+Conserva arxius ja existents
+Reanomena automàticament
+Reanomena automàticament arxius ja existents
+3500
+Confirmar substitució de fitxers
+El directori de destinació conté un fitxer amb el mateix nom.
+Vol substituir el fitxer existent
+per este altre?
+{0} bytes
+Renomenar a&utomàticament
+3700
+Mètode de compressió no vàlid per a '{0}'.
+Error de dades en '{0}'. L'arxiu està corrupte.
+CRC ha fallat en '{0}'. L'arxiu està corrupte.
+Errors de dades en l'arxiu xifrat '{0}'. Contrasenya incorrecta?
+CRC incorrecte en l'arxiu xifrat '{0}'. Contrasenya incorrecta?
+3800
+Introduir contrasenya
+Introduir contrasenya:
+Reintroduir contrasenya:
+Mo&strar contrasenya
+Les contrasenyes no coincideixen
+Useu només lletres de l'alfabet anglès, números i caràcters especials (!, #, $, ...) per a la contrasenya
+Contrasenya massa llarga
+Contrasenya
+3900
+Temps transcorregut:
+Temps restant:
+Mida:
+Velocitat:
+
+
+Errors:
+
+4000
+Afegir a l'arxiu
+&Arxiu:
+Mode d'act&ualització:
+&Format de l'arxiu:
+&Nivell de compressió:
+Tipus de co&mpressió:
+Tamany &diccionari:
+Tamany &paraula:
+
+
+&Paràmetres:
+Opcions
+Crear arxiu SF&X
+
+Xifrat
+Métode de xifrat:
+Encriptar el nom dels fitxers
+Us de memòria Comprimint:
+Us de memòria Descomprimint:
+4050
+Sense compressió
+La més ràpida
+Ràpida
+Normal
+Màxima
+Ultra
+4060
+Afegir i substituir fitxers
+Actualitzar i afegir fitxers
+Actualitzar fitxers existents
+Sincronitzar fitxers
+4070
+Visualitzar
+Tots els fitxers
+
+
+6000
+Copiar
+Moure
+Copiar a:
+Moure a:
+Copiant...
+Movent...
+Renomenant...
+Seleccioneu carpeta de destinació.
+Operació no permesa.
+Error renomenant fitxer o carpeta
+Confirmar copia de fitxer
+Està segur que vol copiar els fitxers a l'arxiu
+6100
+Confirmar supressió del fitxer
+Confirmar supressió del directori
+Confirmar supressió m�ltiple de fitxers
+Està segur de voler suprimir '{0}'?
+Està segur de voler suprimir la carpeta '{0}' i tot el seu contingut?
+Està segur de voler esborrar estos {0} elements?
+Suprimint...
+Error esborrant fitxer o carpeta
+
+6300
+Crear carpeta
+Crear fitxer
+Nom de carpeta:
+Nom de fitxer:
+Carpeta nova
+Fitxer nou
+Error creant carpeta
+Error creant el fitxer
+6400
+Comentari
+&Comentari:
+Seleccionar
+No seleccionar
+Màscara:
+6600
+
+Historial de directoris
+Missatges de diagnosi
+Missatge
+7100
+El meu ordinador
+Entorn de xarxa
+
+Sistema
+7200
+Afegir
+Extraure
+Provar
+Copiar
+Moure
+Esborrar
+Info
+7300
+Separar fitxer
+&Separar a:
+Separar en &volums, bytes:
+Separant...
+Confirma divissió
+Esteu segurs que voleu dividir el fitxer en {0} volums?
+La mida del volum ha de ser menor que la mida original del fitxer
+Mida incorrecta de volum
+Mida del volum especificada: {0} bytes.\nEsteu segurs que voleu dividir l'arxiu en volums?
+7400
+Combinar fitxers
+&Combinar a:
+Combinant...
+Seleccioneu només el primer fitxer
+
+
+7500
+Calculant checksum...
+Informació checksum
+CRC checksum per a les dades:
+CRC checksum per a dades i noms:
+7600
+Banc de proves
+Us de memoria:
+Comprimint
+Descomprimint
+Taxa
+Taxa total
+Actual
+Resultant
+
+
+Passades:

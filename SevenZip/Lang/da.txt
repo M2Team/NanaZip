@@ -1,0 +1,495 @@
+;!@Lang2@!UTF-8!
+;       : Jakob Schmidt
+;  9.07 : Kian Andersen, Jørgen Rasmussen
+; 15.00 : 2016-11-25 : scootergrisen
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Danish
+Dansk
+401
+OK
+Annuller
+
+
+
+&Ja
+&Nej
+&Luk
+Hjælp
+
+&Fortsæt
+440
+Ja til &alle
+Nej til a&lle
+Stop
+Genstart
+&Baggrund
+&Forgrund
+&Pause
+Sat på pause
+Er du sikker på, at du vil annullere?
+500
+&Filer
+R&ediger
+&Vis
+F&avoritter
+Funk&tioner
+&Hjælp
+540
+&Åbn
+Åbn &inden i
+Åbn &uden for
+&Vis
+&Rediger
+O&mdøb
+&Kopier til...
+&Flyt til...
+S&let
+&Opdel fil...
+Kom&biner filer...
+&Egenskaber
+Komme&ntar...
+Udregn checksum
+Sammenlign
+Opret mappe
+Opret fil
+&Afslut
+Opret/rediger henvisning
+&Alternative strømme
+600
+Vælg &alle
+Fravælg alle
+&Omvendt markering
+Vælg...
+Fravælg...
+Vælg efter type
+Fravælg efter type
+700
+Sto&re ikoner
+S&må ikoner
+&Liste
+&Detaljer
+730
+Usorteret
+Flad visning
+&2 paneler
+&Værktøjslinjer
+Åbn rodmappe
+Et niveau op
+Mappehistorik...
+&Opdater
+Opdater automatisk
+750
+Arkivlinje
+Standardlinje
+Store knapper
+Vis knappernes tekst
+800
+&Føj mappe til Favoritter som
+Bogmærke
+900
+&Funktioner...
+&Benchmark
+960
+&Indhold...
+&Om 7-Zip...
+1003
+Sti
+Navn
+Filtype
+Mappe
+Størrelse
+Pakket størrelse
+Attributter
+Oprettet
+Åbnet
+Ændret
+Solid
+Kommenteret
+Krypteret
+Opdel før
+Opdel efter
+Leksikon
+
+Type
+Anti
+Metode
+Vært OS
+Filsystem
+Bruger
+Gruppe
+Blok
+Kommentar
+Placering
+Sti præfiks
+Mapper
+Filer
+Version
+Bind
+Flerbindsarkiv
+Forskydning
+Henvisning
+Blokke
+Bind
+
+64-bit
+Big-endian
+CPU
+Fysisk størrelse
+Hovedernes størrelse
+Checksum
+Karakteristika
+Virtuel adresse
+ID
+Kort navn
+Oprettende program
+Sektorstørrelse
+Tilstand
+Symbolsk henvisning
+Fejl
+Samlet størrelse
+Ledig plads
+Klyngestørrelse
+Etiket
+Lokalt navn
+Udbyder
+NT Security
+Alternativ strøm
+Aux
+Slettet
+Er træ
+
+
+Fejltype
+Fejl
+Fejl
+Advarsler
+Advarsel
+Strømme
+Alternative strømme
+Størrelse på alternative strømme
+Virtuel størrelse
+Udpakket størrelse
+Samlet fysiske størrelse
+Bind-indeks
+Undertype
+Kort kommentar
+Tegnsæt
+
+
+
+Halestørrelse
+Indlejret stumpstørrelse
+Henvisning
+Fast henvisning
+iNode
+
+Skrivebeskyttet
+2100
+Funktioner
+Sprog
+Sprog:
+Redigering
+&Rediger:
+&Sammenlign:
+2200
+System
+Knyt 7-Zip til:
+Alle brugere
+2301
+Vis i Windows genvejsmenu
+Brug undermenu
+Punkter i genvejsmenu:
+Ikoner i genvejsmenu
+2320
+<Mappe>
+<Arkiv>
+Åbn arkiv
+Udpak filer...
+Føj til arkiv...
+Test arkiv
+Udpak her
+Udpak til {0}
+Føj til {0}
+Komprimer og vedhæft i e-mail...
+Komprimer til {0} og vedhæft i e-mail
+2400
+Mapper
+&Arbejdsmappe
+&Systemets midlertidige mappe
+&Aktuelle
+&Brugerdefineret:
+Brug kun til flytbare drev
+Angiv en placering til midlertidige arkivfiler.
+2500
+Indstillinger
+Vis ".."-element
+Vis rigtige filikoner
+Vis systemmenu
+&Marker hele rækken
+Vis &gitter
+Åbn element med ét klik
+&Alternativ markeringsmetode
+Brug &store hukommelsessider
+2900
+Om 7-Zip
+7-Zip er fri software
+3000
+Systemet kan ikke tildele den nødvendige mængde hukommelse
+Der er ingen fejl
+{0} markerede element(er)
+Kan ikke oprette mappen "{0}"
+Arkivet understøtter ikke opdateringshandlinger.
+Kan ikke åbne filen "{0}" som arkiv
+Kan ikke åbne det krypterede arkiv "{0}". Forkert adgangskode?
+Arkivtypen er ikke understøttet
+Filen {0} findes allerede
+Filen "{0}" er blevet ændret.\nVil du opdatere den i arkivet?
+Kan ikke opdatere filen\n"{0}"
+Kan ikke starte redigering.
+Filen ligner en virus (filnavnet indeholder lange mellemrum i navn).
+Handlingen kan ikke kaldes fra en mappe som har en lang sti.
+Du skal vælge en fil
+Du skal vælge en eller flere filer
+For mange elementer
+Kan ikke åbne filen som {0}-arkiv
+Filen er åbnet som {0}-arkiv
+Arkivet er åbnet med forskydning
+3300
+Udpakker
+Komprimerer
+Tester
+Åbner...
+Skanner...
+Fjerner
+3320
+Tilføjer
+Opdaterer
+Analyserer
+Replikerer
+Ompakker
+Springer over
+Sletter
+Opretter hovede
+3400
+Udpak
+U&dpak til:
+Angiv en placering til udpakkede filer.
+3410
+Stitilstand:
+Fulde stinavne
+Ingen stinavne
+Absolutte stinavne
+Relative stinavne
+3420
+Overskrivningstilstand:
+Spørg før overskrivning
+Overskriv uden at spørge
+Spring eksisterende filer over
+Automatisk omdøbning
+Automatisk omdøbning af eksisterende filer
+3430
+Forhindr duplikering af rodmappe
+Genskab filsikkerhed
+3500
+Bekræft filerstatning
+Destinationsmappen indeholder allerede behandlet fil.
+Vil du erstatte den eksisterende fil
+med denne?
+{0} byte
+A&utomatisk omdøbning
+3700
+Komprimeringsmetode for "{0}" er ikke understøttet.
+Datafejl i "{0}". Filen er ødelagt.
+CRC mislykkedes i "{0}". Filen er ødelagt.
+Datafejl i den krypterede fil "{0}". Forkert adgangskode?
+CRC mislykkedes i den krypterede fil "{0}". Forkert adgangskode?
+3710
+Forkert adgangskode?
+3721
+Komprimeringsmetoden er ikke understøttet
+Datafejl
+CRC mislykkedes
+Utilgængelig data
+Uventet slutning på data
+Der er data efter slutningen af nyttedataene
+Ikke et arkiv
+Fejl i hoveder
+Forkert adgangskode
+3763
+Utilgængelig begyndelse på arkiv
+Ubekræftet begyndelse på arkiv
+
+
+
+Faciliteten understøttes ikke
+3800
+Indtast adgangskode
+Indtast adgangskode:
+Indtast adgangskode igen:
+&Vis adgangskode
+Adgangskoderne er ikke ens
+Brug kun engelske bogstaver, numre og specialtegn (!, #, $, ...) til adgangskoden
+Adgangskoden er for lang
+Adgangskode
+3900
+Forløbet tid:
+Resterende tid:
+Samlet størrelse:
+Hastighed:
+Behandlet:
+Komprimeringsforhold:
+Fejl:
+Arkiver:
+4000
+Føj til arkiv
+&Arkiv:
+O&pdateringstilstand:
+Arkiv&format:
+Komprimerings&niveau:
+Komprimerings&metode:
+Størrelse på or&dbog:
+Størrelse på &ord:
+Størrelse på solid blok:
+Antal CPU-tråde:
+Pa&rametre:
+Funktioner
+Opret SF&X-arkiv
+Komprimer delte filer
+Kryptering
+Krypteringsmetode:
+Kr&ypter filnavne
+Hukommelsesforbrug ved komprimering:
+Hukommelsesforbrug ved udpakning:
+Slet filer efter komprimering
+4040
+Opbevar symbolske henvisninger
+Opbevar hårde henvisninger
+Opbevar alternative datastrømme
+Opbevar filsikkerhed
+4050
+Gem
+Hurtigst
+Hurtig
+Normal
+Maksimum
+Ultra
+4060
+Tilføj og erstat filer
+Opdater og tilføj filer
+Opdater eksisterende filer
+Synkroniser filer
+4070
+Gennemse
+Alle filer
+Ikke-solid
+Solid
+6000
+Kopier
+Flyt
+Kopier til:
+Flyt til:
+Kopierer...
+Flytter...
+Omdøber...
+Vælg destinationsmappen.
+Handlingen understøttes ikke af denne mappe.
+Fejl under omdøbning af fil eller mappe
+Bekræft kopiering af fil
+Er du sikker på, at du vil kopiere filer til arkiv
+6100
+Bekræft sletning af fil
+Bekræft sletning af mappe
+Bekræft sletning af flere filer
+Er du sikker på, at du vil slette "{0}"?
+Er du sikker på, at du vil slette mappen "{0}" og alt dens indhold?
+Er du sikker på, at du vil slette disse {0} elementer?
+Sletter...
+Fejl under sletning af fil eller mappe
+Systemet kan ikke flytte en fil med lang sti til Papirkurven
+6300
+Opret mappe
+Opret fil
+Mappenavn:
+Filnavn:
+Ny mappe
+Ny fil
+Fejl under oprettelse af mappe
+Fejl under oprettelse af fil
+6400
+Kommentar
+&Kommentar:
+Vælg
+Fravælg
+Maske:
+6600
+Egenskaber
+Mappers historik
+Diagnostiske meddelelser
+Meddelelse
+7100
+Computer
+Netværk
+Dokumenter
+System
+7200
+Tilføj
+Udpak
+Test
+Kopier
+Flyt
+Slet
+Info
+7300
+Opdel fil
+&Opdel til:
+Opd&el i bind, byte:
+Opdeler...
+Bekræft opdeling
+Er du sikker på, at du vil opdele filen i {0} bind?
+Størrelsen på bind skal være mindre end størrelsen på den originale fil
+Forkert størrelse på bind
+Angivet størrelse på bind: {0} byte.\nEr du sikker på, at du vil opdele arkivet i disse bind?
+7400
+Kombiner filer
+&Kombiner til:
+Kombinerer...
+Vælg kun første del af opdelt fil
+Kan ikke genkende fil, som del af opdelt fil
+Kan ikke finde mere end én del af opdelt fil
+7500
+Beregner checksum...
+Checksum information
+CRC-checksum for data:
+CRC-checksum for data og navne:
+7600
+Benchmark
+Hukommelsesforbrug:
+Komprimering
+Udpakning
+Vurdering
+Samlet vurdering
+Aktuelt
+Resultat
+CPU forbrug
+Vurdering/forbrug
+Gennemløb:
+7700
+Opret/rediger henvisning
+Opret/rediger henvisning
+Henvisning fra:
+Henvisning til:
+7710
+Henvisningstype
+Fast henvisning
+Fil symbolsk henvisning
+Mappe symbolsk henvisning
+Mappe forbindelsespunkt

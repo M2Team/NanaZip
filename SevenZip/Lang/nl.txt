@@ -1,0 +1,495 @@
+﻿;!@Lang2@!UTF-8!
+;       : Bert van Velsen
+;  4.26 : Jeroen van der Weijde.
+;       : Harm Hilvers
+;  9.07 : Jeroen Tulp 
+; 15.00 : Jeroen Tulp 
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Dutch
+Nederlands
+401
+OK
+Annuleren
+
+
+
+&Ja
+&Nee
+A&fsluiten
+Help
+
+&Hervatten
+440
+Ja op &alles
+Nee op a&lles
+Stop
+Herstarten
+&Achtergrond
+&Voorgrond
+&Pauzeren
+Gepauzeerd
+Weet u zeker dat u wilt annuleren?
+500
+&Bestand
+Be&werken
+Bee&ld
+&Favorieten
+E&xtra
+&Help
+540
+&Openen
+Open B&innen
+Open B&uiten
+Bee&ld
+&Bewerken
+&Hernoemen
+&Kopiëren naar...
+&Verplaatsen naar...
+Verwij&deren
+Bestand &opsplitsen...
+Bestanden &samenvoegen...
+&Eigenschappen
+O&pmerking
+&Checksum berekenen
+Ver&gelijken
+Nieuwe &map
+&Nieuw bestand
+&Sluiten
+Koppe&ling
+&Alternate Streams
+600
+&Alles selecteren
+A&lles de-selecteren
+Selectie &omkeren
+&Selecteer...
+&De-selecteer...
+Selecteer op &type
+De-selecteer op t&ype
+700
+&Grote pictogrammen
+&Kleine pictogrammen
+&Lijst
+&Details
+730
+&Ongesorteerd
+&Platte weergave
+&2 Panelen
+&Werkbalken
+&Root map openen
+Één &niveau omhoog
+&Mappen Geschiedenis...
+&Verversen
+&Automatisch verversen 
+750
+&Archief werkbalk
+&Standaard werkbalk
+Grote kn&oppen
+Knop&tekst weergeven
+800
+&Map toevoegen aan Favorieten
+Favoriet maken
+900
+&Opties...
+&Benchmark
+960
+&Inhoud...
+&Over 7-Zip...
+1003
+Pad
+Naam
+Extensie
+Map
+Grootte
+Ingepakte grootte
+Kenmerken
+Aangemaakt
+Laatst geopend
+Gewijzigd
+Compact
+Commentaar
+Gecodeerd
+Gesplitst voor
+Gesplitst na
+Woordenboek
+
+Type
+Anti
+Methode
+Gastheer OS
+Bestandssysteem
+Gebruiker
+Groep
+Blok
+Commentaar
+Positie
+Pad Prefix
+Mappen
+Bestanden
+Versie
+Volume
+Multivolume
+Offset
+Koppelingen
+Blokken
+Volumes
+
+64-bit
+Big-endian
+CPU
+Fysieke grootte
+Kop grootte
+Checksum
+Karakteristieken
+Virtueel Adres
+ID
+Korte Naam
+Aanmaak Applicatie
+Sector Grootte
+Modus
+Symbolische Kpoppeling
+Fout
+Capaciteit
+Beschikbaar
+Clustergrootte
+Label
+Lokale naam
+Provider
+NT Beveiliging
+Alternate Stream
+Aux
+Verwijderd
+Is Structuur
+
+
+Error Type
+Errors
+Errors
+Waarschuwingen
+Waarschuwing
+Streams
+Alternate Streams
+Alternate Streams Grootte
+Virtuele Grootte
+Uitgepakte Grootte
+Totale Fysieke Grootte
+Volume Index
+SubType
+Kort Commentaar
+Tekstcodering
+
+
+
+Tail Grootte
+Embedded Stub Grootte
+Koppeling
+Harde Koppeling
+iNode
+
+Alleen-lezen
+2100
+Opties
+Taal
+Taal:
+Editor
+&Editor:
+&Vergelijken:
+2200
+Systeem
+Associeer 7-Zip met:
+All users
+2301
+7-Zip in het contextmenu integreren.
+Trapsgewijs contextmenu
+Contextmenu items:
+Pictogrammen in contexmenu
+2320
+<Map>
+<Archief>
+Open archief
+Bestanden uitpakken...
+Toevoegen aan archief...
+Testen archief
+Uitpakken (hier)
+Uitpakken naar {0}
+Toevoegen aan {0}
+Comprimeer en verstuur...
+Comprimeer naar {0} en verstuur
+2400
+Mappen
+&Werkmap
+&Tijdelijke systeemmap
+&Huidige
+&Gespecificeerd:
+Alleen voor verwisselbare schijven gebruiken.
+Specificeer een locatie voor tijdelijke archiefbestanden.
+2500
+Instellingen
+Toon ".." &item
+Toon &echte bestandspictogrammen
+Toon &systeem contextmenu
+&Selecteer gehele rij
+Toon &rasterlijnen
+Enkele klik om een item te openen
+&Alternatieve selectiemodus
+&Gebruik grote geheugenpagina's
+2900
+Over 7-Zip
+7-Zip is gratis software. Echter, u kunt de ontwikkeling van 7-Zip ondersteunen door u te registreren.
+3000
+Het systeem kan de benodigde hoeveelheid geheugen niet alloceren
+Er zijn geen fouten.
+{0} item(s) geselecteerd
+Kan map '{0}' niet aanmaken.
+Bijwerkfuncties niet ondersteund voor dit archief.
+Kan bestand '{0}' niet openen als archief.
+Kan het gecodeerde archief '{0}' niet openen. Verkeerd wachtwoord?
+Niet ondersteund archief type
+Bestand {0} bestaat reeds
+Bestand '{0}' is gewijzigd.\nWilt u het bijwerken in het archief?
+Kan bestand\n'{0}' niet bijwerken.
+Kan de editor niet starten.
+Het bestand lijkt op een virus (het bevat veel opeenvolgende spaties in de naam).
+De actie kan niet worden uitgevoerd vanuit een folder met een dermate lang pad.
+U moet 1 bestand selecteren
+U moet 1 of meerdere bestanden selecteren
+Te veel items
+Kan het bestand niet openen als {0} archief
+Het bestand is geopend als {0} archief
+Het archiefis geopend met een offset
+3300
+Uitpakken
+Comprimeren
+Testen
+Openen...
+Scannen...
+Verwijderen
+3320
+Toevoegen
+Bijwerken
+Analyseren
+Repliceren
+Opnieuw inpakken
+Overslaan
+Verwijderen
+Kop aanmaken
+3400
+&Uitpakken
+U&itpakken naar:
+Specificeer een locatie voor de uitgepakte bestanden.
+3410
+Padmethode
+Volledige padnamen
+Geen padnamen
+Absolute padnamen
+Relatieve padnamen
+3420
+Overschrijfmethode
+Vraag voor overschrijven
+Overschrijven zonder bevestiging
+Bestaande bestanden overslaan
+Automatisch hernoemen
+Automatisch hernoemen van bestaande bestanden
+3430
+Verwijder duplicaat van de hoofdmap 
+Herstellen bestandsbeveiliging
+3500
+Bevestig vervangen bestand
+Doelmap bevat reeds het verwerkte bestand.
+Wilt u het bestaande bestand vervangen
+door dit bestand?
+{0} bytes
+A&utomatisch hernoemen
+3700
+Niet ondersteunde compressiemethode voor '{0}'.
+Gegevensfout in '{0}'. Bestand is beschadigd.
+CRC mislukt in '{0}'. Bestand is beschadigd.
+Gegevensfout in het gecodeerde bestand '{0}'. Verkeerd wachtwoord?
+CRC mislukt in het gecodeerde bestand '{0}'. Verkeerd wachtwoord?
+3710
+Verkeerd wachtwoord?
+3721
+Niet ondersteunde compresssiemethode
+Gegevens fout
+CRC mislukt
+Data niet beschikbaar
+Data eindigd onverwachts
+Er is nog wat data na het einde van de payload data
+Is geen archief
+Kop Error
+Verkeerd wachtwoord
+3763
+Start van archief is niet beschikbaar
+Start van archief is niet bevestigd
+
+
+
+Niet ondersteunde functie
+3800
+Wachtwoord ingeven
+Wachtwoord &ingeven:
+Wachtwoord bevestigen:
+Wachtwoord &tonen
+Wachtwoorden komen niet overeen.
+Gebruik alleen alfanumerieke en speciale karakters (!, #, $, ...) voor het wachtwoord
+Wachtwoord is te lang.
+&Wachtwoord
+3900
+Verstreken tijd:
+Overgebleven tijd:
+Grootte:
+Snelheid:
+Verwerkt:
+Compressie verhouding:
+Fouten:
+Archieven:
+4000
+Toevoegen aan archief
+&Archief:
+&Bijwerkmethode:
+Archief &formaat:
+Compressie&niveau:
+Compressie&methode:
+&Woordenboekgrootte:
+W&oordgrootte:
+Compacte b&lokgrootte:
+Aantal CP&U-threads:
+&Parameters:
+Opties
+SF&X archief maken
+Comprimeer &gedeelde bestanden
+Codering
+Cod&eermethode:
+Codee&r bestandsnamen
+Geheugengebruik bij het inpakken:
+Geheugengebruik bij het uitpakken:
+Verwijder bestanden na inpakken
+4040
+Symboische koppelingen opslaan
+Harde koppelingen opslaan
+Alternate data streams opslaan
+Bestandsbeveiliging opslaan
+4050
+Opslaan
+Snelst
+Snel
+Normaal
+Maximum
+Ultra
+4060
+Bestanden toevoegen en vervangen
+Bestanden bijwerken en toevoegen
+Bestaande bestanden opfrissen
+Bestanden synchroniseren
+4070
+Bladeren
+Alle bestanden
+Niet compact
+Compact
+6000
+Kopiëren
+Verplaatsen
+Kopiëren naar:
+Verplaatsen naar:
+Bezig met kopiëren...
+Bezig met verplaatsen...
+Bezig met hernoemen...
+Selecteer een doelmap.
+Functie wordt niet ondersteund.
+Fout bij het hernoemen van een bestand of map
+Bevestig kopiëren van bestand
+Weet u zeker dat u deze bestanden naar het archief wilt kopiëren
+6100
+Verwijdering bestand bevestigen
+Verwijdering map bevestigen
+Verwijdering van meerdere bestanden bevestigen
+Weet u zeker dat u '{0}' wilt verwijderen?
+Weet u zeker dat u de map '{0}' en alle onderliggende items wilt verwijderen?
+Weet u zeker dat u deze {0} items wilt verwijderen?
+Bezig met verwijderen...
+Fout bij het verwijderen van een bestand of map
+Het systeem kan een bestand met een lang pad niet verplaatsen naar de Prullenbak
+6300
+Map maken
+Bestand maken
+Naam van de map:
+Bestandsnaam:
+Nieuwe map
+Nieuw bestand
+Fout bij het maken van de map
+Fout bij het maken van het bestand.
+6400
+Opmerking
+&Opmerking:
+Selecteren
+De-selecteren
+Masker:
+6600
+Eigenschappen
+Mappen Geschiedenis
+Diagnostische berichten
+Bericht
+7100
+Computer
+Netwerk
+Documenten
+Systeem
+7200
+Toevoegen
+Uitpakken
+Testen
+Kopiëren
+Verplaatsen
+Verwijderen
+Info
+7300
+Opsplitsen bestand
+&Opsplitsen naar:
+Opsplitsen in &volumes (grootte in bytes):
+Bezig met opsplitsen...
+Bevestigen opsplitsen
+Weet u zeker dat u het bestand wilt opsplitsen in {0} volumes?
+De volumegrootte moet kleiner zijn dan de grootte van het oorspronkelijke bestand.
+Verkeerde volumegrootte
+Gespecificeerde volumegrootte: {0} bytes.\nWeet u zeker dat u het archief zo wilt splitsen?
+7400
+Bestanden samenvoegen
+&Samenvoegen naar:
+Bezig met samenvoegen...
+Selecteer alleen het eerste bestand.
+Kan het bestand niet herkennen als onderdeel van een gesplitst bestand
+Kan niet meer dan 1  deel van een gesplitst bestand
+7500
+Bezig met checksum berekenen...
+Checksum informatie
+CRC checksum voor gegevens:
+CRC checksum voor gegevens en namen:
+7600
+Benchmark
+Geheugengebruik:
+Inpakken
+Uitpakken
+Waarde
+Totale waarde
+Huidig
+Resultaat
+CPU-gebruik
+Waarde / gebruik
+Doorgangen:
+7700
+Koppeling
+Koppeling
+Koppeling van:
+Koppeling naar:
+7710
+Koppeling Type
+Harde Koppeling
+Bestand Symbolische Koppeling
+Map Symbolische Koppeling
+Mapsplitsing

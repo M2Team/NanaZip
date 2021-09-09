@@ -1,0 +1,404 @@
+﻿;!@Lang2@!UTF-8!
+;  4.37 : Dmitri Gabinski
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+0
+7-Zip
+Esperanto
+Esperanto
+401
+B&one
+Nuligu
+
+
+
+&Jes
+&Ne
+&Fermu
+Helpo
+
+&Daŭrigu
+440
+Jes por ĉ&iuj
+Ne por ĉi&uj
+&Haltu
+Restartigu
+&Fono
+&Malfono
+&Paŭzo
+Paŭzita
+Ĉu vi vere volas nuligi?
+500
+&Dosiero
+&Redakto
+&Vido
+&Favoritaj
+&Agordoj
+&Helpo
+540
+&Malfermu
+Malfermu &ene
+Malfermu ek&stere
+&Vidigu
+&Redaktu
+Ŝ&anĝu nomon
+&Kopiu en...
+M&ovu en...
+&Forigu
+&Erigu dosierojn...
+Komb&inu dosierojn...
+A&tributoj
+Ko&mentu
+Kalkulu kontrolsumon
+
+Kreu &dosierujon
+Kre&u dos&ieron
+E&liru
+600
+M&arku ĉiun
+Ma&lmarku ĉiun
+&Inversigu markon
+Marku...
+Malmarku...
+Marku laŭ tipo
+Malmarku laŭ tipo
+700
+&Grandaj bildetoj
+&Malgrandaj bildetoj
+&Listo
+&Detale
+730
+&Neordigite
+Ununivela vido
+&2 paneloj
+&Ilobretoj
+Malfermu radikan dosierujon
+Supren je unu nivelo
+Dosierujhistorio...
+Ĝ&isdatigu
+750
+Arĥivo-ilobreto
+Norma ilobreto
+Grandaj bildetoj
+Montru butontekston
+800
+&Aldonu dosierujon al favorataj kiel
+Legosigno
+900
+&Agordoj...
+&Etalono
+960
+&Enhavo...
+&Pri 7-Zip...
+1003
+Dosierindiko
+Nomo
+Dosiernoma sufikso
+Dosierujo
+Grando
+Enarĥiva grando
+Atributoj
+Kreita
+Malfermita
+Ŝanĝita
+Solida
+Komento
+Ĉifra
+Disigita antaŭ
+Disigita post
+Vortaro
+CRC
+Tipo
+Kontraŭ
+Metodo
+Gastiga operaciumo
+Dosiersistemo
+Uzulo
+Grupo
+Bloko
+Komento
+Pozicio
+Vojprefikso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eraro
+Kapacito
+Libera
+Faskogrando
+Marko
+Loka nomo
+Provizanto
+2100
+Agordoj
+Lingvo
+Lingvo:
+Redaktilo
+&Redaktilo:
+
+2200
+Sistemo
+Asociu 7-Zip-on kun dosieroj:
+2301
+Metu 7-Zip'on en kuntekstan menuon de ŝelo
+Kaskada kunteksta menuo
+Punktoj de kunteksta menuo:
+2320
+<Dosierujo>
+<Arĥivo>
+Malfermu
+Elarĥivigu dosierojn...
+Enarĥivigu...
+Testu arĥivon
+Elarĥivigu ĉi-tien
+Elarĥivigu en {0}
+Aldonu al {0}
+Enarĥivigu kaj enretpoŝtigu...
+Enarĥivigu en {0} kaj enretpoŝtigu...
+2400
+Dosierujoj
+&Kuranta dosierujo
+&Sistema labora dosierujo
+&Ĉi tiu
+&Specifu:
+&Uzi nur por demeteblaj datumportiloj
+Specifu ujon por laboraj dosieroj.
+2500
+Agordoj
+Montru ".."-elementon
+Montru realajn dosierbildetojn
+Montru sisteman menuon
+Marku &tutan linion
+Montru &kradliniojn
+
+&Alternativa markreĝimo
+Uzu &grandajn memorpaĝojn
+2900
+Informo
+7-Zip estas senpaga programo. Tamen, vi povas subteni evoluadon de 7-Zip per enregistriĝo.
+3000
+
+Eraroj ne trovitaj
+{0} objekto(j) markita(j)
+Fiaskis krei dosierujon '{0}'
+Ĝisdatigoperacioj ne estas subtenataj por ĉi-tiu arĥivo.
+
+
+
+
+Dosiero '{0}' ŝanĝiĝis.\nĈu vi volas ĝistadigi ĝin enraĥive?
+Fiaskis ĝisdatigi dosieron\n'{0}''
+Fiaskis startigi redaktilon.
+
+
+
+
+Troaj elementoj
+3300
+Elarĥivigo
+Densigo
+Testado
+Malfermo...
+Analizante...
+3400
+&Elarĥivigu
+E&larĥivigu en:
+Specifu ujon por elarĥivendaj dosieroj.
+3410
+Dosierindikoj
+&Absolutaj dosierindikoj
+&Sen dosierindikoj
+3420
+Anstataŭiga skribreĝimo
+&Kun konfirmo
+&Sen konfirmo
+&Preterlasu estantaj dosieroj
+Aŭtonomŝanĝo
+Aŭtonomŝanĝo de ekzistantaj dosieroj
+3500
+Konfirmo de nomŝanĝo
+Dosierujo jam enhavas prilaboratan dosieron.
+Anstataŭigu estantan dosieron
+per ĉi-tiu?
+{0} bajtoj
+&Aŭtonomŝanĝo.
+3700
+Ne estas subtenata densigmetodo por dosiero '{0}'.
+Datumeraro en '{0}'. Difektiĝinta dosiero.
+CRC-eraro en '{0}'. Difektiĝinta dosiero.
+
+
+3800
+Pasvorto
+Enigu pasvorton:
+
+&Montru pasvorton
+
+
+
+&Pasvorto
+3900
+Pasinta tempo:
+Restanta tempo:
+Grando:
+Rapideco:
+
+
+Eraroj:
+
+4000
+Enarĥivigu
+&Arĥivo:
+A&nstataŭigreĝimo:
+A&rĥivformato:
+Densigo&nivelo
+&Densigmetodo:
+&Vortarogrando:
+Vo&rtogrando:
+
+
+&Parametroj:
+Agordoj
+Kreu SF&X-arĥivon
+
+
+
+Ĉifru dosier&nomojn
+Memoruzo por densigo:
+Memoruzo por maldensigo:
+4050
+Sen densigo
+Plej rapide
+Rapide
+Normala densigo
+Maksimuma densigo
+Ultra
+4060
+Aldonu kaj anstataŭigu dosierojn
+Ĝisdatigu kaj aldonu dosierojn
+Refreŝigu estantajn dosierojn
+Sinkronigu dosierojn
+4070
+Foliumu
+Ĉiuj dosieroj
+
+
+6000
+Kopiu
+Movu
+Kopiu en:
+Movu en:
+Kopio...
+Movo...
+Nomŝanĝo...
+
+Operacio ne estas subtenata.
+Eraro dum nomŝanĝo de dosiero aŭ dosierujo
+Konfirmu dosierkopion
+Ĉu vere kopii dosierojn enarĥiven
+6100
+Konfirmo de forigo de dosiero
+Konfirmo de forigo de dosierujo
+Konfirmo de forigo de dosieraro
+Ĉu vi vere volas forigi '{0}'?
+Ĉu vi vere volas forigi dosierujon "{0}" kaj tutan ĝian enhavon?
+Ĉu vi vere volas forigi ĉi tiajn {0} objektojn?
+Forigo...
+Eraro dum forigo de dosiero aŭ dosierujo
+
+6300
+Kreu dosierujon
+Kreu dosieron
+Dosierujnomo:
+Dosiernomo:
+Nova dosierujo
+Nova dosiero
+Eraro dum dosierujkreo
+Eraro dum dosierkreo
+6400
+Komento
+&Komento:
+Marku
+Malmarku
+Masko:
+6600
+
+Dosierujhistorio
+Diagnozaj mesaĝoj
+Mesaĝo
+7100
+Komputilo
+Reto
+
+Sistemo
+7200
+Enarĥivigu
+Elarĥivigu
+Testu
+Kopiu
+Movu
+Forigu
+Informo
+7300
+Erigu dosieron
+&Erigu en:
+&Plurvolumigu, bajtoj:
+Erigo...
+
+
+
+
+
+7400
+Kombinu dosierojn
+&Kombinu en:
+Kombino...
+
+
+
+7500
+Kalkulante kontrolsumon...
+Informo pri kontrolsumo
+CRC-kontrolsumo por datumoj:
+CRC-kontrolsumo por datumoj kaj nomoj:
+7600
+Etalono
+Memoruzo:
+Densigo
+Maldensigo
+Takso
+Tuta takso
+Kuranta
+Rezulta
+
+
+Pasoj:
