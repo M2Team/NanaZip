@@ -289,6 +289,5 @@ C_OBJS = \
 !include "../../Crc.mak"
 !include "../../Crc64.mak"
 !include "../../LzFindOpt.mak"
-!include "../../LzmaDec.mak"
 !include "../../Sha1.mak"
 !include "../../Sha256.mak"

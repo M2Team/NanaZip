@@ -27,7 +27,6 @@ OBJS = \
   $(COMPRESS_OBJS) \
   $(CRYPTO_OBJS) \
   $(C_OBJS) \
-  $(ASM_OBJS) \
   $O\resource.res \
 
 !include "../../../Build.mak"
@@ -236,5 +235,3 @@ $(C_OBJS): ../../../../C/$(*B).c
 	$(CCOMPLB)
 
 !ENDIF
-
-!include "Asm.mak"

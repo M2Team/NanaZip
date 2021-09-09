@@ -893,69 +893,6 @@ SOURCE=..\..\Archive\Common\OutStreamWithCRC.cpp
 SOURCE=..\..\Archive\Common\OutStreamWithCRC.h
 # End Source File
 # End Group
-# Begin Group "Asm"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\..\..\..\Asm\x86\7zAsm.asm
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\..\..\Asm\x86\7zCrcOpt.asm
-
-!IF  "$(CFG)" == "Console - Win32 Release"
-
-# Begin Custom Build
-OutDir=.\Release
-InputPath=..\..\..\..\Asm\x86\7zCrcOpt.asm
-InputName=7zCrcOpt
-
-"$(OutDir)\$(InputName).obj" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	ml.exe -c -Fo$(OutDir)\$(InputName).obj $(InputPath)
-
-# End Custom Build
-
-!ELSEIF  "$(CFG)" == "Console - Win32 Debug"
-
-# Begin Custom Build
-OutDir=.\Debug
-InputPath=..\..\..\..\Asm\x86\7zCrcOpt.asm
-InputName=7zCrcOpt
-
-"$(OutDir)\$(InputName).obj" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	ml.exe -c -omf -Fo$(OutDir)\$(InputName).obj $(InputPath)
-
-# End Custom Build
-
-!ELSEIF  "$(CFG)" == "Console - Win32 ReleaseU"
-
-# Begin Custom Build
-OutDir=.\ReleaseU
-InputPath=..\..\..\..\Asm\x86\7zCrcOpt.asm
-InputName=7zCrcOpt
-
-"$(OutDir)\$(InputName).obj" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	ml.exe -c -Fo$(OutDir)\$(InputName).obj $(InputPath)
-
-# End Custom Build
-
-!ELSEIF  "$(CFG)" == "Console - Win32 DebugU"
-
-# Begin Custom Build
-OutDir=.\DebugU
-InputPath=..\..\..\..\Asm\x86\7zCrcOpt.asm
-InputName=7zCrcOpt
-
-"$(OutDir)\$(InputName).obj" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	ml.exe -c -omf -Fo$(OutDir)\$(InputName).obj $(InputPath)
-
-# End Custom Build
-
-!ENDIF 
-
-# End Source File
-# End Group
 # Begin Group "Interface"
 
 # PROP Default_Filter ""
