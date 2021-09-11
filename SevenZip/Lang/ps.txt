@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Pashto
 پښتو
 401

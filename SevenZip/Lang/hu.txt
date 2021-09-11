@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Hungarian
 Magyar
 401
@@ -97,7 +97,7 @@ Könyvjelző
 &Teljesítménymérés
 960
 &Tartalomjegyzék...
-7-Zip &névjegye...
+NanaZip &névjegye...
 1003
 Útvonal
 Név
@@ -167,9 +167,9 @@ Szerkesztő
 &Különbség:
 2200
 Rendszer
-7-Zip társítása:
+NanaZip társítása:
 2301
-7-Zip hozzáadása a parancsértelmező helyi menüjéhez
+NanaZip hozzáadása a parancsértelmező helyi menüjéhez
 Lépcsőzetes helyi menü
 Helyi menü elemek:
 2320
@@ -203,8 +203,8 @@ Elem megnyitása egyszeres kattintással
 &Alternativ kiválasztási mód
 &Nagy memória haszálata
 2900
-A 7-Zip névjegye
-A 7-Zip ingyenes szoftver.
+A NanaZip névjegye
+A NanaZip ingyenes szoftver.
 3000
 A rendszer nem tudja lefoglalni a szükséges memóriát
 Az archívum hibamentes

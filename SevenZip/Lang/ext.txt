@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Extremaduran
 Estremeñu
 401
@@ -97,7 +97,7 @@ Atihu
 &Prebas ('benchmark')
 960
 &Contenius...
-&Al tentu 7-Zip...
+&Al tentu NanaZip...
 1003
 Ruta
 Nombri
@@ -167,9 +167,9 @@ Eitol
 &Diff:
 2200
 Sistema
-Asocial 7-Zip a hormatus:
+Asocial NanaZip a hormatus:
 2301
-Integral 7-Zip nel menú contestual
+Integral NanaZip nel menú contestual
 Menú contestual en cascá
 Elementus del menú contestual:
 2320
@@ -203,8 +203,8 @@ Muestral línias e la &cuairícula
 Móu e seleción &alternativu
 Usa&l páhinas de memoria grandis
 2900
-About 7-Zip
-7-Zip es una apricación libri i a gastus pagus. Peru puei apoyal el desarrollu e 7-Zip meyanti'l rehistru el pograma.
+About NanaZip
+NanaZip es una apricación libri i a gastus pagus. Peru puei apoyal el desarrollu e NanaZip meyanti'l rehistru el pograma.
 3000
 El sistema nu á síu escapás d'asinal la cantiá prehisa de memoria
 Sin yerrus

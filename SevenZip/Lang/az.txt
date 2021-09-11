@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Azerbaijani
 Azərbaycanca
 401
@@ -100,7 +100,7 @@ Tənzimləmələr...
 Səmərə Sınağı
 960
 &Başlıq...
-7-Zip &Haqqında...
+NanaZip &Haqqında...
 1003
 İstiqamət
 Ad
@@ -202,10 +202,10 @@ Düzəliş
 &Müqayisə:
 2200
 Quruluş
-7-Zip Fayllarla Əlaqələnsin
+NanaZip Fayllarla Əlaqələnsin
 Bütün İstifadəçilər
 2301
-7-Zip əhatə təklifinə tətbiq edilsin 
+NanaZip əhatə təklifinə tətbiq edilsin 
 Zəncirvari əhatə təklifi
 Ünsürlü əhatə təklifi:
 Əhatə təklifində nişanlar
@@ -240,8 +240,8 @@ Bir Toxunuşla Açmaq
 Əvəzedici vəziyyət işarələnməsi
 Böyük yaddaş səhifələri istifadəsi
 2900
-7-Zip Haqqında
-7-Zip Sərbəst Yayılan Proqramdır
+NanaZip Haqqında
+NanaZip Sərbəst Yayılan Proqramdır
 3000
 Kifayət qədər boş yaddaş yoxdur
 Səhvlər tapılmadı

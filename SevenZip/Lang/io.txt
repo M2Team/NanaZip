@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Ido
 Ido
 401
@@ -97,7 +97,7 @@ Lektomerkajo
 &Experienco dil rapideso
 960
 &Konteno...
-&Pri 7-Zip...
+&Pri NanaZip...
 1003
 Dosiervoyo
 Nomo
@@ -167,9 +167,9 @@ Redaktilo
 
 2200
 Sistemo
-Asociar 7-Zip-o kun dosieru:
+Asociar NanaZip-o kun dosieru:
 2301
-Pozar 7-Zip'o en kuntexta menuo di shelo
+Pozar NanaZip'o en kuntexta menuo di shelo
 Kaskada kuntexta menuo
 Elementi di kuntexta menuo:
 2320
@@ -204,7 +204,7 @@ Montrar &streki separanta
 
 2900
 Pri progamo...
-7-Zip esas gratuita programo. Tamen, vu povas mantenar developado di 7-Zip per enregistrigesar.
+NanaZip esas gratuita programo. Tamen, vu povas mantenar developado di NanaZip per enregistrigesar.
 3000
 
 Erori ne es trovita

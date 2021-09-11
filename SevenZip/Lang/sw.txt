@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Swahili
 Kiswahili
 401
@@ -100,7 +100,7 @@ Alamisho
 &Kanuni ya mwongozo
 960
 &Yaliyomo...
-&Kuhusu 7-Zip...
+&Kuhusu NanaZip...
 1003
 Kijia
 Jina
@@ -202,10 +202,10 @@ Kihariri
 &Tofauti:
 2200
 Mfumo
-Husisha 7-Zip na:
+Husisha NanaZip na:
 Watumiaji wote
 2301
-Jumlisha 7-Zip kwenya menyu muktadha ya sheli
+Jumlisha NanaZip kwenya menyu muktadha ya sheli
 Menyu muktadha iliyoporomoka
 Vipengee vya menyu muktadha:
 Ikoni katika menyu muktadha
@@ -240,8 +240,8 @@ Bofya mara moja kufungua kipengee
 &Mtindo mbadala wa uteuzi
 Tumia kurasa &kubwa za kumbukumbu
 2900
-Kuhusu 7-Zip
-7-Zip ni programu huria
+Kuhusu NanaZip
+NanaZip ni programu huria
 3000
 Mfumo hauwezi kutenga kumbukumbu inayohitajika
 Hakuna matatizo yoyote

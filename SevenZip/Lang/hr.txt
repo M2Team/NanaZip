@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Croatian
 Hrvatski
 401
@@ -99,7 +99,7 @@ Zabilješka
 &Mogućnosti...
 M&jerenje
 960
-&7-Zip pomoć...
+&NanaZip pomoć...
 &O programu...
 1003
 Putanja
@@ -202,10 +202,10 @@ Uređivač
 Program za uspoređivanje:
 2200
 Sustav
-Poveži 7-Zip sa:
+Poveži NanaZip sa:
 Svi korisnici
 2301
-Integriraj 7-Zip u padajući kontekstni izbornik
+Integriraj NanaZip u padajući kontekstni izbornik
 Padajući kontekstni izbornik
 Stavke kontekstnog izbornika:
 Ikone kontekstnog izbornika
@@ -240,8 +240,8 @@ Jedan klik za otvaranje stavke
 Drugi n&ačin označavanja
 Koristi raspo&loživu memoriju
 2900
-O 7-Zip-u
-7-Zip je besplatan softver.
+O NanaZip-u
+NanaZip je besplatan softver.
 3000
 Sustav ne može pripremiti potrebnu količinu memorije
 Nema grešaka

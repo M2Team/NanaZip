@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Uzbek
 O‘zbekcha
 401
@@ -100,7 +100,7 @@ Xatcho‘p
 &Samaradorlikni sinamoq
 960
 &Ma’lumotnoma...
-&7-Zip dasturi haqida...
+&NanaZip dasturi haqida...
 1003
 Yo‘lak
 Nomi
@@ -202,10 +202,10 @@ Muharrir
 &Taqqoslovchi dastur:
 2200
 Tizim
-7-Zip bilan birikkan formatlar:
+NanaZip bilan birikkan formatlar:
 Barcha foyd-chilar
 2301
-7-Zip dasturini kontekst menyuga biriktirmoq
+NanaZip dasturini kontekst menyuga biriktirmoq
 Kontekst menyuni ichma-ich qilmoq
 Kontekst menyu tarkibi:
 Kontekst menyuda ikonkalar ko‘rinsin
@@ -240,8 +240,8 @@ Elementni bir marta bosib ochmoq
 &Muqobil tanlash uslubidan foydalanmoq
 &Katta hajmli xotiradan foydalanmoq
 2900
-7-Zip dasturi haqida
-7-Zip bepul dasturiy ta’minot hisoblanadi.
+NanaZip dasturi haqida
+NanaZip bepul dasturiy ta’minot hisoblanadi.
 3000
 Tizim kerakli hajmdagi xotirani ajrata olmaydi.
 Xatolik mavjud emas!

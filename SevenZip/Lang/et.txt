@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Estonian
 eesti keel
 401
@@ -97,7 +97,7 @@ Järjehoidja
 &Jõudlustest
 960
 &Sisukord...
-&Teave 7-Zipi kohta...
+&Teave NanaZipi kohta...
 1003
 Tee
 Nimi
@@ -167,9 +167,9 @@ Redaktor
 &Võrdlusprogramm:
 2200
 Süsteem
-Seosta 7-Zip laienditega:
+Seosta NanaZip laienditega:
 2301
-Integreeri 7-Zip kesta hüpikmenüüsse
+Integreeri NanaZip kesta hüpikmenüüsse
 Kaskaad-hüpikmenüü
 Hüpikmenüü käsud:
 2320
@@ -203,8 +203,8 @@ Ava üksus ühe klõpsuga
 &Alternatiivne valikurežiim
 Kasuta &suuri mälulehekülgi
 2900
-Teave 7-Zipi kohta
-7-Zip on vaba tarkvara. Kuid kui soovite toetada 7-Zipi arendamist, siis saate programmi registreerida.\n\n7-Zipi Eesti koduleht:\nhttp://www.hot.ee/somberg/7zip.html
+Teave NanaZipi kohta
+NanaZip on vaba tarkvara. Kuid kui soovite toetada NanaZipi arendamist, siis saate programmi registreerida.\n\nNanaZipi Eesti koduleht:\nhttp://www.hot.ee/somberg/7zip.html
 3000
 Süsteem ei saa eraldada nõutavat mälumahtu.
 Vigu ei leitud.

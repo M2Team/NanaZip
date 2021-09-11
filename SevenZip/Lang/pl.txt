@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Polish
 Polski
 401
@@ -99,7 +99,7 @@ Zakładka
 &Test wydajności
 960
 &Zawartość
-7-Zip - i&nformacje
+NanaZip - i&nformacje
 1003
 Ścieżka
 Nazwa
@@ -199,9 +199,9 @@ Edytor
 &Diff:
 2200
 System
-Skojarz program 7-Zip z:
+Skojarz program NanaZip z:
 2301
-Zintegruj program 7-Zip z menu kontekstowym powłoki
+Zintegruj program NanaZip z menu kontekstowym powłoki
 Kaskadowe menu kontekstowe
 Elementy menu kontekstowego:
 Ikony w menu kontekstowym
@@ -236,8 +236,8 @@ Pojedyncze kliknięcie otwiera element
 &Alternatywny tryb zaznaczania
 &Użyj dużych stron pamięci
 2900
-7-Zip - informacje
-7-Zip jest programem darmowym.
+NanaZip - informacje
+NanaZip jest programem darmowym.
 3000
 System nie może przydzielić wymaganej ilości pamięci
 Nie wykryto błędów

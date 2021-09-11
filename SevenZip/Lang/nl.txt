@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Dutch
 Nederlands
 401
@@ -100,7 +100,7 @@ Favoriet maken
 &Benchmark
 960
 &Inhoud...
-&Over 7-Zip...
+&Over NanaZip...
 1003
 Pad
 Naam
@@ -202,10 +202,10 @@ Editor
 &Vergelijken:
 2200
 Systeem
-Associeer 7-Zip met:
+Associeer NanaZip met:
 All users
 2301
-7-Zip in het contextmenu integreren.
+NanaZip in het contextmenu integreren.
 Trapsgewijs contextmenu
 Contextmenu items:
 Pictogrammen in contexmenu
@@ -240,8 +240,8 @@ Enkele klik om een item te openen
 &Alternatieve selectiemodus
 &Gebruik grote geheugenpagina's
 2900
-Over 7-Zip
-7-Zip is gratis software. Echter, u kunt de ontwikkeling van 7-Zip ondersteunen door u te registreren.
+Over NanaZip
+NanaZip is gratis software. Echter, u kunt de ontwikkeling van NanaZip ondersteunen door u te registreren.
 3000
 Het systeem kan de benodigde hoeveelheid geheugen niet alloceren
 Er zijn geen fouten.

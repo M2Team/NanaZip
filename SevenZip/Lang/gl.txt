@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Galician
 Galego
 401
@@ -100,7 +100,7 @@ Marcador
 &Rendemento
 960
 &Contidos...
-&Acerca de 7-Zip...
+&Acerca de NanaZip...
 1003
 Camiño
 Nome
@@ -202,10 +202,10 @@ Editor
 &Diferenza:
 2200
 Sistema
-Asociar 7-Zip con:
+Asociar NanaZip con:
 Todos os usuarios
 2301
-Integrar 7-Zip no menú de contexto
+Integrar NanaZip no menú de contexto
 Menú do contexto en cascada
 Elementos do menú do contexto:
 Iconas no menú de contexto
@@ -240,8 +240,8 @@ Clic simple para abrir un elemento
 Modo de selección &alternativo
 Usar memoria &longa de páxinas
 2900
-Acerca de 7-Zip
-7-Zip é un programa gratuíto
+Acerca de NanaZip
+NanaZip é un programa gratuíto
 3000
 O sistema non puido atribuír a memoria requirida
 Non se produciron erros

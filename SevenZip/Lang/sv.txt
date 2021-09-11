@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Swedish
 Svenska
 401
@@ -97,7 +97,7 @@ Bokmärke
 &Benchmark
 960
 &Innehåll...
-&Om 7-Zip...
+&Om NanaZip...
 1003
 Sökväg
 Namn
@@ -167,10 +167,10 @@ Redigerare
 
 2200
 System
-Associera med 7-Zip:
+Associera med NanaZip:
 2301
-Lägg till 7-Zip som alternativ i Utforskarens högerklicksmenyn
-Placera 7-Zip som en undermeny
+Lägg till NanaZip som alternativ i Utforskarens högerklicksmenyn
+Placera NanaZip som en undermeny
 Objekt i högerklicksmenyn:
 2320
 <Mapp>
@@ -203,8 +203,8 @@ Visa &rutnät
 &Alternativt markeringsläge
 Använd &stora minnessidor
 2900
-Om 7-Zip
-7-Zip är fri programvara. Du kan emellertid stödja den fortsatta utvecklingen av 7-Zip genom att donera. Den aktuella översättningen på svenska är gjord av Wermlandsdata, baserad på arbete utfört av Andreas M Nilsson och Christoffer Enqvist.
+Om NanaZip
+NanaZip är fri programvara. Du kan emellertid stödja den fortsatta utvecklingen av NanaZip genom att donera. Den aktuella översättningen på svenska är gjord av Wermlandsdata, baserad på arbete utfört av Andreas M Nilsson och Christoffer Enqvist.
 3000
 Systemet kan inte allokera den begärda minnesmängden
 Inga fel påträffades

@@ -1,5 +1,5 @@
 ﻿;!@Lang2@!UTF-8!
-;  2.30 : Marius Navickas : http://www.teisininkas.lt/ivairus/7-zip:
+;  2.30 : Marius Navickas : http://www.teisininkas.lt/ivairus/NanaZip:
 ;  4.57 : Domas Jokubauskis
 ;  15.05 : Vaidas777 (terminų šaltinis: www.raštija.lt)
 ;
@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Lithuanian
 Lietuvių
 401
@@ -100,7 +100,7 @@ Mėgiamiausias
 &Spartos bandymas
 960
 &Turinys...
-&Apie 7-Zip...
+&Apie NanaZip...
 1003
 Kelias
 Pavadinimas
@@ -202,10 +202,10 @@ R&edaktorius:
 &Sulyginimas:
 2200
 Sistema
-Susieti 7-Zip su:
+Susieti NanaZip su:
 Visi vartotojai
 2301
-Integruoti 7-Zip į kontekstinį meniu
+Integruoti NanaZip į kontekstinį meniu
 Pakopinis kontekstinis meniu
 Kontekstinio meniu įrašai:
 Piktogramos kontekstiniame meniu
@@ -240,8 +240,8 @@ Atverti vienu spustelėjimu
 &Kitoks žymėjimo būdas
 Naudoti didžiu&lius atmintinės puslapius
 2900
-Apie 7-Zip
-7-Zip yra nemokama programa.
+Apie NanaZip
+NanaZip yra nemokama programa.
 3000
 Sistema begali skirti reikalingo atminties kiekio
 Klaidų nerasta

@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Romanian
 Română
 401
@@ -97,7 +97,7 @@ Semn de carte
 &Banc de încercare
 960
 &Conţinut...
-&Despre 7-Zip...
+&Despre NanaZip...
 1003
 Calea
 Nume
@@ -167,9 +167,9 @@ Editor
 
 2200
 Sistem
-Asociază 7-Zip cu:
+Asociază NanaZip cu:
 2301
-Integrează 7-Zip în contextul meniului shell
+Integrează NanaZip în contextul meniului shell
 Contextul meniului în cascadă
 Obiectele meniului:
 2320
@@ -203,8 +203,8 @@ Arată liniile de ghidare
 Mod de selectare &alternativă
 Utilizează pagini &mari de memorie
 2900
-Despre 7-Zip
-7-Zip este un program gratuit. Oricum, poţi contribui la dezvoltarea 7-Zip înregistrându-te.
+Despre NanaZip
+NanaZip este un program gratuit. Oricum, poţi contribui la dezvoltarea NanaZip înregistrându-te.
 3000
 Sistemul nu poate aloca memoria necesară
 Nu sunt erori

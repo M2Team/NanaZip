@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Afrikaans
 Afrikaans
 401
@@ -97,7 +97,7 @@ Boekmerk
 &Normtoetsing
 960
 &Inhoud...
-&Aangaande 7-Zip...
+&Aangaande NanaZip...
 1003
 Pad
 Naam
@@ -167,9 +167,9 @@ R&edigeerder:
 
 2200
 Stelsel
-Assosieer 7-Zip met:
+Assosieer NanaZip met:
 2301
-Integreer 7-Zip in kontekskeuselys.
+Integreer NanaZip in kontekskeuselys.
 Trapsgewyse kontekskeuselys
 Kontekskeuselysitems:
 2320
@@ -203,8 +203,8 @@ Wys &roosterlyne
 
 
 2900
-Aangaande 7-Zip
-7-Zip is gratis programmatuur. Indien u egter so baie van 7-Zip hou dat u die verdere ontwikkeling wil ondersteun, registreer dan asb. met 'n geldelike donasie aan die 7-Zip Projek.
+Aangaande NanaZip
+NanaZip is gratis programmatuur. Indien u egter so baie van NanaZip hou dat u die verdere ontwikkeling wil ondersteun, registreer dan asb. met 'n geldelike donasie aan die NanaZip Projek.
 3000
 
 Daar is geen foute nie

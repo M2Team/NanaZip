@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Frisian
 Frysk
 401
@@ -97,7 +97,7 @@ Blêdwizer meitsje
 &Ykpunt
 960
 &Ynhâld...
-&7-Zip it hoe en het...
+&NanaZip it hoe en het...
 1003
 Paad
 Namme
@@ -167,9 +167,9 @@ Bewurker
 
 2200
 Systeem
-Ferbyn 7-Zip Mei:
+Ferbyn NanaZip Mei:
 2301
-Yntegraasje fan 7-Zip yn ferbânmenu
+Yntegraasje fan NanaZip yn ferbânmenu
 Ferbânmenu yn trepfoarm
 Ferbânmenu-items:
 2320
@@ -203,8 +203,8 @@ Systeemmenu sjen litte
 &Alternative seleksje modus
 Brûk &grut ûnthâld siden
 2900
-7-Zip it hoe en het
-7-Zip is fergees. Mar, jo kinne de ûntwikkeling stypje troch jo te registrearjen.
+NanaZip it hoe en het
+NanaZip is fergees. Mar, jo kinne de ûntwikkeling stypje troch jo te registrearjen.
 3000
 
 Der binne gjin flaters

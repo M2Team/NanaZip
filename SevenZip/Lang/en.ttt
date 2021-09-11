@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 English
 English
 401
@@ -100,7 +100,7 @@ Bookmark
 &Benchmark
 960
 &Contents...
-&About 7-Zip...
+&About NanaZip...
 1003
 Path
 Name
@@ -202,10 +202,10 @@ Editor
 &Diff:
 2200
 System
-Associate 7-Zip with:
+Associate NanaZip with:
 All users
 2301
-Integrate 7-Zip to shell context menu
+Integrate NanaZip to shell context menu
 Cascaded context menu
 Context menu items:
 Icons in context menu
@@ -240,8 +240,8 @@ Single-click to open an item
 &Alternative selection mode
 Use &large memory pages
 2900
-About 7-Zip
-7-Zip is free software
+About NanaZip
+NanaZip is free software
 3000
 The system cannot allocate the required amount of memory
 There are no errors

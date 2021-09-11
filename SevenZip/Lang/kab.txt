@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Kabyle
 Taqbaylit
 401
@@ -100,7 +100,7 @@ Bookmark
 &Skazal Timellit
 960
 &Igburen...
-&Γef 7-Zip...
+&Γef NanaZip...
 1003
 Abrid
 Isem
@@ -202,10 +202,10 @@ Amaẓrag
 &Iceṛṛiq:
 2200
 Anagraw
-Associate 7-Zip with:
+Associate NanaZip with:
 Iseqdacen Meṛṛa
 2301
-Integrate 7-Zip to shell context menu
+Integrate NanaZip to shell context menu
 Cascaded context menu
 Context menu items:
 Icons in context menu
@@ -240,8 +240,8 @@ Single-click to open an item
 &Askar n Ufran Amellay
 Use &large memory pages
 2900
-Ɣef 7-Zip
-7-Zip d aseɣẓan n baṭṭel
+Ɣef NanaZip
+NanaZip d aseɣẓan n baṭṭel
 3000
 The system cannot allocate the required amount of memory
 Ulac Tuccḍiwin 

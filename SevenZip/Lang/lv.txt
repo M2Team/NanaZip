@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Latvian
 Latviešu
 401
@@ -97,7 +97,7 @@ Iecienītās
 &Darbspējas pārbaude
 960
 &Rokasgrāmatas saturs...
-&Par 7-Zip...
+&Par NanaZip...
 1003
 Ceļš
 Nosaukums
@@ -167,9 +167,9 @@ Labošana
 
 2200
 Sistēma
-Piesaistīt 7-Zip pie:
+Piesaistīt NanaZip pie:
 2301
-&Integrēt 7-Zip Windows vides kontekstizvēlē
+&Integrēt NanaZip Windows vides kontekstizvēlē
 &Kaskādveida kontekstizvēle
 Kontekstizvēles elementi:
 2320
@@ -203,8 +203,8 @@ Parādīt at&dalošās līnijas
 
 
 2900
-Par 7-Zip
-7-Zip ir bezmaksas programma, tomēr, reģistrējoties jūs varat 7-Zip izstrādāšanu atbalstīt.
+Par NanaZip
+NanaZip ir bezmaksas programma, tomēr, reģistrējoties jūs varat NanaZip izstrādāšanu atbalstīt.
 3000
 
 Kļūdu nav.

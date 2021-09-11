@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Irish
 Gaeilge
 401
@@ -97,7 +97,7 @@ Leabharmharc
 Tástáil fheidhmíochta
 960
 &Inneachair...
-Maidir le 7-Zip...
+Maidir le NanaZip...
 1003
 Conair
 Ainm
@@ -167,9 +167,9 @@ Eagarthóir
 &Diff:
 2200
 Córas
-Comhthiomsaigh 7-Zip le:
+Comhthiomsaigh NanaZip le:
 2301
-Comhtháthaigh 7-Zip sa roghchlár comhthéacs
+Comhtháthaigh NanaZip sa roghchlár comhthéacs
 Roghchlár comhthéacs ag titim
 Nithe an roghchláir chomhthéacs:
 2320
@@ -203,8 +203,8 @@ Brúigh uair amháin chun ní a oscailt
 Bain feidhm as modh roghnaithe malartach
 Bain feidhm as leathanaigh chuimhne mhóra
 2900
-Maidir le 7-Zip
-Is saorearra é 7-Zip. Is féidir tacaíocht a thabhairt dá fhorbairt amach anseo, áfach, trí chlárú.
+Maidir le NanaZip
+Is saorearra é NanaZip. Is féidir tacaíocht a thabhairt dá fhorbairt amach anseo, áfach, trí chlárú.
 3000
 Ní féidir leis an gcóras an méid cuimhne atá de dhíth a leathdháileadh dó
 Níl aon bhotún ann

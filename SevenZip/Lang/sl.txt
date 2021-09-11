@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Slovenian
 Slovenščina
 401
@@ -100,7 +100,7 @@ Zaznamek
 Me&ritev
 960
 Vse&bina pomoči...
-&Vizitka 7-Zip...
+&Vizitka NanaZip...
 1003
 Pot
 Ime
@@ -202,10 +202,10 @@ Urejevalnik
 &Razlika:
 2200
 Sistem
-Poveži 7-Zip z:
+Poveži NanaZip z:
 Vsi uporabniki
 2301
-Vključi 7-Zip v priročni meni lupine
+Vključi NanaZip v priročni meni lupine
 Stopničasti priročni meni
 Vnosi priročnega menija:
 Ikone priročnega menija
@@ -241,7 +241,7 @@ Na&domestni način izbire
 Uporabi &velike pomnilniške strani
 2900
 Vizitka
-7-Zip je brezplačen program
+NanaZip je brezplačen program
 3000
 Sistem ne more dodeliti potrebne količine pomnilnika
 Ni napak

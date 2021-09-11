@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Danish
 Dansk
 401
@@ -100,7 +100,7 @@ Bogmærke
 &Benchmark
 960
 &Indhold...
-&Om 7-Zip...
+&Om NanaZip...
 1003
 Sti
 Navn
@@ -202,7 +202,7 @@ Redigering
 &Sammenlign:
 2200
 System
-Knyt 7-Zip til:
+Knyt NanaZip til:
 Alle brugere
 2301
 Vis i Windows genvejsmenu
@@ -240,8 +240,8 @@ Vis &gitter
 &Alternativ markeringsmetode
 Brug &store hukommelsessider
 2900
-Om 7-Zip
-7-Zip er fri software
+Om NanaZip
+NanaZip er fri software
 3000
 Systemet kan ikke tildele den nødvendige mængde hukommelse
 Der er ingen fejl

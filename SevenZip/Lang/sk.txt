@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Slovak
 Slovenčina
 401
@@ -99,7 +99,7 @@ N&astavenia...
 &Skúšobný test
 960
 &Obsah pomocníka...
-O p&rograme 7-Zip
+O p&rograme NanaZip
 1003
 Cesta
 Meno
@@ -199,9 +199,9 @@ Editor:
 Vyhľadávač rozdielov (Diff):
 2200
 Systém
-Asociovať 7-Zip s vybranými typmi súborov:
+Asociovať NanaZip s vybranými typmi súborov:
 2301
-Integrovať 7-Zip do kontextovej ponuky
+Integrovať NanaZip do kontextovej ponuky
 Kaskádová kontextová ponuka
 Položky kontextovej ponuky:
 Ikony v kontextovej ponuke
@@ -236,8 +236,8 @@ Otvoriť položku jednoduchým kliknutím
 Alternatívny režim výberu
 Použitie veľkých stránok pamäti
 2900
-O programe 7-Zip
-7-Zip je voľne šíriteľný softvér
+O programe NanaZip
+NanaZip je voľne šíriteľný softvér
 3000
 Systém nemôže alokovať požadované množstvo pamäte
 V archíve sa nenašli žiadne chyby

@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Norwegian Bokmal
 Norsk Bokmål
 401
@@ -97,7 +97,7 @@ Bokmerke
 &Yteprøve …
 960
 &Innhold
-&Om 7-Zip
+&Om NanaZip
 1003
 Plassering
 Navn
@@ -167,9 +167,9 @@ Redigering
 
 2200
 System
-Assosier 7-Zip med:
+Assosier NanaZip med:
 2301
-Integrer 7-Zip i programmenyen
+Integrer NanaZip i programmenyen
 Forgrenet programmeny
 Valg i programmenyen:
 2320
@@ -203,8 +203,8 @@ Vis &rutenett
 &Alternativ merking
 Bruk &store minnesider
 2900
-Om 7-Zip
-7-Zip er gratis programvare, men du kan støtte utviklingen av 7-Zip ved å registrere deg.
+Om NanaZip
+NanaZip er gratis programvare, men du kan støtte utviklingen av NanaZip ved å registrere deg.
 3000
 
 Fant ingen feil.

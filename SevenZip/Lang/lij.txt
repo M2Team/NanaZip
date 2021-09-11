@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Ligurian
 Zeneize
 401
@@ -45,7 +45,7 @@ Ti ê seguo de voei anulâ?
 A&giutto
 540
 &Arvi
-Arvi into Manezatô d'archivi 7-Zip
+Arvi into Manezatô d'archivi NanaZip
 Arvi inte Explorer
 &Vixoalizza
 &Modifica
@@ -97,7 +97,7 @@ Colegamento
 &Ponto de riferimento
 960
 &Goidda...
-&Informaçioin in sce de 7-Zip...
+&Informaçioin in sce de NanaZip...
 1003
 Percorso
 Nomme
@@ -167,9 +167,9 @@ Editô
 &Dif:
 2200
 Scistemma
-Asòccia 7-Zip a:
+Asòccia NanaZip a:
 2301
-Integra 7-Zip into menù contestoale
+Integra NanaZip into menù contestoale
 Menù contestoale a cascaa
 Elementi do menù contestoale:
 2320
@@ -204,7 +204,7 @@ Sciacâ unna vòtta sola pe arvî un elemento
 Deuvia grende &pagine de memöia
 2900
 Dæti
-7-Zip o l'é un programa libero e de badda.
+NanaZip o l'é un programa libero e de badda.
 3000
 O scistemma o no peu separâ a quantitæ de memöia necesaia
 Nisciun erô

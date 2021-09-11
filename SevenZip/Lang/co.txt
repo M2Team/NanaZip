@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Corsican
 Corsu
 401
@@ -100,7 +100,7 @@ Indetta
 &Sperimentu di pussibilità…
 960
 &Cuntenutu (in inglese)…
-&Apprupositu di 7-Zip…
+&Apprupositu di NanaZip…
 1003
 Chjassu
 Nome
@@ -202,10 +202,10 @@ Editore
 &Paragunà e sfarenze :
 2200
 Sistema
-Assucià 7-zip cù :
+Assucià NanaZip cù :
 Tutti l’utilizatori
 2301
-Integrà 7-zip à u listinu cuntestuale
+Integrà NanaZip à u listinu cuntestuale
 Listinu cuntestuale in cascata
 Elementi di u listinu cuntestuale :
 Icone in u listinu cuntestuale
@@ -240,8 +240,8 @@ Cliccu simplice per apre un elementu
 Modu di selezzione &alternativa
 Impiegà pagine &maiò di memoria
 2900
-Apprupositu di 7-Zip
-7-Zip hè un prugramma liberu.\n\nTraduttu in lingua corsa da Patriccollu di Santa Maria è Sichè.
+Apprupositu di NanaZip
+NanaZip hè un prugramma liberu.\n\nTraduttu in lingua corsa da Patriccollu di Santa Maria è Sichè.
 3000
 U sistema ùn pò micca attribuisce a quantità richiesta di memoria
 Ùn ci hè micca sbagliu

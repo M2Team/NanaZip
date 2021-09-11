@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 German
 Deutsch
 401
@@ -100,7 +100,7 @@ Favorit
 &Benchmark
 960
 &Hilfethemen
-Ü&ber 7-Zip...
+Ü&ber NanaZip...
 1003
 Pfad
 Name
@@ -202,10 +202,10 @@ Editor
 Programm zum &Vergleichen:
 2200
 System
-7-Zip verknüpfen mit:
+NanaZip verknüpfen mit:
 alle Benutzer
 2301
-7-Zip in Kontextmenü integrieren
+NanaZip in Kontextmenü integrieren
 Kontextmenü kaskadieren
 Einträge im Kontextmenü:
 Symbole im Kontextmenü
@@ -240,8 +240,8 @@ Einfacher &Klick zum Öffnen
 &Alternativer Dateiauswahl-Modus
 Große &Speicherseiten verwenden
 2900
-Info über 7-Zip
-7-Zip ist freie Software. Sie können jedoch das Projekt durch eine Registrierung unterstützen.
+Info über NanaZip
+NanaZip ist freie Software. Sie können jedoch das Projekt durch eine Registrierung unterstützen.
 3000
 Das System kann die benötigte Speichermenge nicht bereit stellen.
 Es sind keine Fehler aufgetreten.

@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Serbian - Latin
 Srpski - latinica
 401
@@ -45,7 +45,7 @@ Alati
 Pomoć
 540
 Pogledaj
-Otvori sa 7-Zip-om
+Otvori sa NanaZip-om
 Otvori sa pridruženom programom
 Pregledaj
 Promeni
@@ -167,9 +167,9 @@ Program:
 Razlika:
 2200
 Sistem
-7-Zip otvara sledeće tipove datoteka:
+NanaZip otvara sledeće tipove datoteka:
 2301
-Ubaci 7-Zip u sistemski meni
+Ubaci NanaZip u sistemski meni
 Kaskadni sistemski meni
 Stavke sistemskog menija:
 2320
@@ -204,7 +204,7 @@ Alternativni način za biranje
 Koristi velike memorijske blokove
 2900
 O programu
-7-Zip je besplatan program.
+NanaZip je besplatan program.
 3000
 Sistem ne može da izdvoji potrebnu količinu memorije
 Nije bilo nikakvih grešaka

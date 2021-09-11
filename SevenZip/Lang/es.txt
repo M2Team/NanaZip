@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Spanish
 Español
 401
@@ -100,7 +100,7 @@ Agregar a favoritos
 &Pruebas (benchmark)
 960
 &Contenido...
-&Acerca de 7-Zip...
+&Acerca de NanaZip...
 1003
 Ruta
 Nombre
@@ -202,10 +202,10 @@ Editor
 &Diff:
 2200
 Sistema
-Asociar 7-Zip con:
+Asociar NanaZip con:
 Todos los usuarios
 2301
-Integrar 7-Zip en el menú contextual de Windows
+Integrar NanaZip en el menú contextual de Windows
 Menú contextual en cascada
 Elementos en el menú contextual:
 Iconos en el menú contextual
@@ -240,8 +240,8 @@ Clicar una vez para abrir elemento
 Modo de selección &alternativo
 Usar páginas &grandes de memoria
 2900
-Acerca de 7-Zip
-7-Zip es un programa excelente; además, es libre y gratuito. Tú puedes apoyar el desarrollo de 7-Zip registrándote para contribuir a mejorar el programa.
+Acerca de NanaZip
+NanaZip es un programa excelente; además, es libre y gratuito. Tú puedes apoyar el desarrollo de NanaZip registrándote para contribuir a mejorar el programa.
 3000
 El sistema no ha podido asignar la cantidad necesaria de memoria
 No hay errores

@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Kurdish
 Kurdî
 401
@@ -97,7 +97,7 @@ Cih
 &Pîvana Çalakbûnê
 960
 &Naverok...
-D&er barê 7-Zip de...
+D&er barê NanaZip de...
 1003
 Rê
 Nav
@@ -167,9 +167,9 @@ Pergalkerê De&qê:
 
 2200
 Pergal
-Bi 7-Zip re têkildar bike:
+Bi NanaZip re têkildar bike:
 2301
-Bila di pêşekên naverokê de 7-Zip bixuye
+Bila di pêşekên naverokê de NanaZip bixuye
 Pêşeka naverokê ya sûlavî
 Hêmanên peşeka naverokê:
 2320
@@ -203,8 +203,8 @@ Bila &xêzên tabloyê xuya bike
 &Kipa hilbijartina alternatîf
 bîra berfireh bikar bîne
 2900
-Der barê 7-Zip de
-7-Zip nivîsbariyeke azad e. Lê, tu dikarî wekî tomarkirin desteka pêşxistina 7-zip bibî.
+Der barê NanaZip de
+NanaZip nivîsbariyeke azad e. Lê, tu dikarî wekî tomarkirin desteka pêşxistina NanaZip bibî.
 3000
 
 Çewtî nîn e.

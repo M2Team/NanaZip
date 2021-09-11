@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 French
 Français
 401
@@ -100,7 +100,7 @@ Signet
 &Test de performance
 960
 &Contenu...
-À &propos de 7-Zip...
+À &propos de NanaZip...
 1003
 Chemin
 Nom
@@ -202,10 +202,10 @@ Langue :
 &Diff :
 2200
 Système
-Associer avec 7-Zip :
+Associer avec NanaZip :
 Tous les utilisateurs
 2301
-Intégrer 7-Zip au menu contextuel
+Intégrer NanaZip au menu contextuel
 Menu contextuel en cascade
 Éléments du menu contextuel :
 Icônes dans le menu contextuel
@@ -240,8 +240,8 @@ Simple clic pour ouvrir un item
 Utiliser la sélection &alternative
 Utiliser des &grosses pages mémoire
 2900
-A propos de 7-Zip
-7-Zip est un logiciel libre
+A propos de NanaZip
+NanaZip est un logiciel libre
 3000
 Le système ne peut allouer la quantité de mémoire nécessaire
 Il n'y a pas d'erreurs

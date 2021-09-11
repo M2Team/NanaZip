@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Karakalpak - Latin
 Qaraqalpaqsha - Latın
 401
@@ -97,7 +97,7 @@ Belgi
 &O'nimlilikti tekseriw
 960
 &Mazmunı...
-&7-Zip haqqında...
+&NanaZip haqqında...
 1003
 Jol
 Atı
@@ -167,9 +167,9 @@ Redaktor
 &Diff:
 2200
 Sistema
-To'mendegi fayllardı 7-Zip penen baylanıstırıw:
+To'mendegi fayllardı NanaZip penen baylanıstırıw:
 2301
-7-Zip ti qabıq kontekst menyuine qosıw
+NanaZip ti qabıq kontekst menyuine qosıw
 Kaskadlı kontekst menyu
 Kontekst menyu elementleri:
 2320
@@ -203,8 +203,8 @@ Elementti bir basıwdan ashıw
 Saylawdın' &alternativ usılı
 U'lken &yad betlerin paydalanıw
 2900
-7-Zip haqqında
-7-Zip bul biypul bag'darlama
+NanaZip haqqında
+NanaZip bul biypul bag'darlama
 3000
 Sistema kerekli bolg'an yad mug'darın ajırata almadı
 Qa'te tabılmadı

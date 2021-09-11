@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Esperanto
 Esperanto
 401
@@ -97,7 +97,7 @@ Legosigno
 &Etalono
 960
 &Enhavo...
-&Pri 7-Zip...
+&Pri NanaZip...
 1003
 Dosierindiko
 Nomo
@@ -167,9 +167,9 @@ Redaktilo
 
 2200
 Sistemo
-Asociu 7-Zip-on kun dosieroj:
+Asociu NanaZip-on kun dosieroj:
 2301
-Metu 7-Zip'on en kuntekstan menuon de ŝelo
+Metu NanaZip'on en kuntekstan menuon de ŝelo
 Kaskada kunteksta menuo
 Punktoj de kunteksta menuo:
 2320
@@ -204,7 +204,7 @@ Montru &kradliniojn
 Uzu &grandajn memorpaĝojn
 2900
 Informo
-7-Zip estas senpaga programo. Tamen, vi povas subteni evoluadon de 7-Zip per enregistriĝo.
+NanaZip estas senpaga programo. Tamen, vi povas subteni evoluadon de NanaZip per enregistriĝo.
 3000
 
 Eraroj ne trovitaj

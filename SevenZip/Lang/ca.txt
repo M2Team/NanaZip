@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Catalan
 Català
 401
@@ -100,7 +100,7 @@ Opcions...
 &Test de referència
 960
 &Contingut...
-Quant al 7-Zip...
+Quant al NanaZip...
 1003
 Camí
 Nom
@@ -202,10 +202,10 @@ Editor
 &Compara:
 2200
 Sistema
-Associa el 7-Zip amb:
+Associa el NanaZip amb:
 Tots els usuaris
 2301
-Integra el 7-Zip al menú contextual del Windows
+Integra el NanaZip al menú contextual del Windows
 Menú contextual en cascada
 Objectes del menú contextual:
 Icones al menú contextual
@@ -240,8 +240,8 @@ Obre amb un sol clic els elements
 Mode de selecció &alternatiu
 Utilitza pàgines de memòria &grans
 2900
-Quant al 7-Zip
-	El 7-Zip és programari lliure.\n       Traducció realitzada per: Softcatalà\n	https://www.softcatala.org
+Quant al NanaZip
+	El NanaZip és programari lliure.\n       Traducció realitzada per: Softcatalà\n	https://www.softcatala.org
 3000
 El sistema no pot assignar la quantitat de memòria requerida
 Cap error

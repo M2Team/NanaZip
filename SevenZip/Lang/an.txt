@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Aragonese
 Aragonés
 401
@@ -97,7 +97,7 @@ Adhibir a favoritos
 &Prebas de referencia (benchmark)
 960
 &Conteniu...
-A&rredol de 7-Zip...
+A&rredol de NanaZip...
 1003
 Rota
 Nombre
@@ -167,9 +167,9 @@ Editor
 &Diff:
 2200
 Sistema
-Asociar 7-Zip con:
+Asociar NanaZip con:
 2301
-Integrar 7-Zip en o menú contextual de Windows
+Integrar NanaZip en o menú contextual de Windows
 Menú contextual en cascada
 Elementos d'o menú contextual:
 2320
@@ -203,8 +203,8 @@ Clicar una vegada ta ubrir elemento
 Modo de selección &alternativo
 Emplegar pachinas de memoria &grans
 2900
-Arredol de 7-Zip
-7-Zip ye un programa libre y gratuito. Si quiers, puetz colaborar en o desembolique de 7-Zip rechistrando-te ta contribuyir a amillorar o programa.
+Arredol de NanaZip
+NanaZip ye un programa libre y gratuito. Si quiers, puetz colaborar en o desembolique de NanaZip rechistrando-te ta contribuyir a amillorar o programa.
 3000
 O sistema no ha puesto asignar a cantidat necesaria de memoria
 No i hai errors

@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Friulian
 Furlan
 401
@@ -46,7 +46,7 @@ Sêstu sigûr di volê scancelâ?
 540
 &Viarç
 Viarç dentri 7-&Zip
-V&iarç fûr di 7-Zip
+V&iarç fûr di NanaZip
 &Mostre
 M&odifiche
 Gambie &non
@@ -97,7 +97,7 @@ Preferît
 &Banc di prove
 960
 &Argoments...
-&Informazions su 7-Zip...
+&Informazions su NanaZip...
 1003
 Percors
 Non
@@ -167,9 +167,9 @@ Editôr
 
 2200
 Sisteme
-Associe 7-Zip cun:
+Associe NanaZip cun:
 2301
-Integre 7-Zip intal menù contestuâl de shell
+Integre NanaZip intal menù contestuâl de shell
 Menù contestuâl in discjadude
 Elements dal menù contestuâl:
 2320
@@ -203,8 +203,8 @@ Mostre les liniis de &gridele sot
 Mût di selezion &alternatîf
 Dopre pagjinis di memorie &largjis
 2900
-Informazions su 7-Zip
-7-Zip al è un program libar. Purpûr, tu puedis supuartâ il disvilup di 7-Zip cu la regjistrazion. I utents regjistrâts a podaran otignî supuart tecnic.
+Informazions su NanaZip
+NanaZip al è un program libar. Purpûr, tu puedis supuartâ il disvilup di NanaZip cu la regjistrazion. I utents regjistrâts a podaran otignî supuart tecnic.
 3000
 Il sisteme nol rive a cjoli la cuantitât di memorie che e covente
 Nissun erôr cjatât

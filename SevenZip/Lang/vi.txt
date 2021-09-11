@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Vietnamese
 Tiếng Việt
 401
@@ -97,7 +97,7 @@ Tùy chọn...
 Đo tốc độ
 960
 Nội dung...
-Về 7-Zip...
+Về NanaZip...
 1003
 Đường dẫn
 Tên
@@ -167,9 +167,9 @@ Trình biên tập:
 Trình so sánh:
 2200
 Hệ thống
-Kết hợp 7-Zip với:
+Kết hợp NanaZip với:
 2301
-Tích hợp 7-Zip vào menu ngữ cảnh
+Tích hợp NanaZip vào menu ngữ cảnh
 Xếp tầng menu ngữ cảnh
 Menu ngữ cảnh:
 2320
@@ -203,8 +203,8 @@ Nhắp chuột để mở
 Chế độ chọn luân phiên
 Sử dụng bộ nhớ lớn
 2900
-Về 7-Zip
-7-Zip là một phần mềm miễn phí.
+Về NanaZip
+NanaZip là một phần mềm miễn phí.
 3000
 Không thể cấp thêm dung lượng RAM yêu cầu
 Không xuất hiện lỗi

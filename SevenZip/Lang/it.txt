@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Italian
 Italiano
 401
@@ -45,7 +45,7 @@ Sei sicuro di voler annullare?
 &Aiuto
 540
 &Apri
-Apri in &7-Zip File Manager
+Apri in &NanaZip File Manager
 Apri con &un altro programma
 &Visualizza
 Modifica con l'&editor predefinito
@@ -100,7 +100,7 @@ Segnalibro
 &Benchmark
 960
 &Guida...
-&Informazioni su 7-Zip...
+&Informazioni su NanaZip...
 1003
 Percorso
 Nome
@@ -202,10 +202,10 @@ Editor
 Comparatore &differenze (Diff):
 2200
 Sistema
-Associa 7-Zip a:
+Associa NanaZip a:
 Tutti gli utenti
 2301
-Integra 7-Zip nel menù contestuale della shell
+Integra NanaZip nel menù contestuale della shell
 Menù contestuale a cascata
 Elementi del menù contestuale:
 Icone nel menù contestuale
@@ -240,8 +240,8 @@ Click singolo per aprire un elemento
 Modalità di selezione &alternativa
 Utilizza pagine di memoria &larghe 
 2900
-Informazioni su 7-Zip
-7-Zip è un software gratuito.\n\nTraduzione italiana a cura di Massimo Castiglia (massimocastiglia@alice.it)
+Informazioni su NanaZip
+NanaZip è un software gratuito.\n\nTraduzione italiana a cura di Massimo Castiglia (massimocastiglia@alice.it)
 3000
 Non è possibile allocare la quantità di memoria necessaria
 Non ci sono errori

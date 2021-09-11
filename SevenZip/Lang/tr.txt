@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Turkish
 Türkçe
 401
@@ -45,7 +45,7 @@ Düz&enle
 &Yardım
 540
 &Aç
-7-Zip İçi&nde Aç
+NanaZip İçi&nde Aç
 &Varsayılan Uygulamada Aç
 &Görüntüleyici
 Düz&enle
@@ -100,7 +100,7 @@ Yer İmi
 &Başarım
 960
 &Kullanım Kılavuzu...
-7-Zip &Hakkında...
+NanaZip &Hakkında...
 1003
 Yol
 Ad
@@ -202,10 +202,10 @@ Düzenleyici
 &Fark Görüntüleyici:
 2200
 Sistem
-7-Zip ile açılacak dosya türleri:
+NanaZip ile açılacak dosya türleri:
 Tüm kullanıcılar
 2301
-Sağ Tık Menüsünde 7-Zip Görüntülensin
+Sağ Tık Menüsünde NanaZip Görüntülensin
 Sağ Tık Menüsü Gruplansın
 Sağ Tık Menüsünde Görüntülenecek Ögeler
 Sağ Tık Menüsünde Simgeler Görüntülensin
@@ -240,8 +240,8 @@ Ayarlar
 Alternati&f Seçim Kipi Kullanılabilsin
 Büyük Be&llek Sayfaları Kullanılsın
 2900
-7-Zip Hakkında
-7-Zip özgür ve ücretsiz bir uygulamadır.
+NanaZip Hakkında
+NanaZip özgür ve ücretsiz bir uygulamadır.
 3000
 Sistem istenilen miktardaki belleği ayıramıyor
 Herhangi bir sorun yok

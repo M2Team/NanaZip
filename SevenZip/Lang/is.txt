@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Icelandic
 Íslenska
 401
@@ -100,7 +100,7 @@ Bókamerki
 &Afkastaprófa
 960
 &Efnisyfirlit...
-&Um 7-Zip...
+&Um NanaZip...
 1003
 Slóð
 Nafn
@@ -202,10 +202,10 @@ Ritill
 &Mismunur:
 2200
 Kerfi
-Tengja 7-Zip við:
+Tengja NanaZip við:
 Allir notendur
 2301
-Innleiða 7-Zip í samhengisvalmynd skeljar
+Innleiða NanaZip í samhengisvalmynd skeljar
 Þrepaskipt samhengisvalmynd
 Samhengisvalmyndaratriði:
 Táknmyndir í samhengisvalmynd
@@ -240,8 +240,8 @@ Einsmella til að opna atriði
 &Annars konar valhamur
 &Nota stórar minnissíður
 2900
-Um 7-Zip
-7-Zip er frjáls hugbúnaður
+Um NanaZip
+NanaZip er frjáls hugbúnaður
 3000
 Kerfið getur ekki ráðstafað nauðsynlega magninu af minninu
 Það eru engar villur

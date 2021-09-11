@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Welsh
 Cymraeg
 401
@@ -97,7 +97,7 @@ Llyfrnod
 &Meincnod
 960
 &Cynnwys...
-&Manylion 7-Zip...
+&Manylion NanaZip...
 1003
 Llwybr
 Enw
@@ -167,9 +167,9 @@ Golygydd
 
 2200
 System
-Cysylltu 7-Zip gyda:
+Cysylltu NanaZip gyda:
 2301
-Cyfuno 7-Zip mewn i dewislen cyd-destun y cribyn
+Cyfuno NanaZip mewn i dewislen cyd-destun y cribyn
 Dewislen cyd-destun wedi'i rhaeadru
 Eitemau dewislen cyd-destun:
 2320
@@ -203,8 +203,9 @@ Dangos llinellau &grid
 Modd dethol &arallddewisiol
 Defnyddiwch tudalenau cof &mawr
 2900
-Manylion 7-Zip
-Mae 7-Zip yn meddalwedd am ddim. Ond, gallwch cefnogi y\ndatblygiad o 7-Zip trwy cofrestru.
+Manylion NanaZip
+Mae NanaZip yn meddalwedd am ddim. Ond, gallwch cefnogi yNanaZip
+\ndatblygiad o SevenZip trwy cofrestru.
 3000
 
 Mae na ddim wallau
@@ -215,7 +216,8 @@ Mae gweithrediadau diweddaru ddim yn ateg am yr archif hyn.
 
 
 
-Roedd ffeil '{0}' wedi'i addasu.\nWyt ti moen ei diweddaru yn yr\narchif?
+Roedd ffeil '{0}' wedi'i addasu.\nWyt ti moen ei diweddaru yn yr
+\narchif?
 Ddim yn gallu diweddaru ffeil\n'{0}'
 Ddim yn gallu dechrau golygydd.
 
@@ -330,7 +332,8 @@ Cadarnhau Dileu Ffeil
 Cadarnhau Dileu Ffolder
 Cadarnhau Dileu Ffeiliau Amryfal
 Ydych chi'n siŵr eich bod am dileu '{0}'?
-Ydych chi'n siŵr eich bod am dileu y ffolder '{0}' ac ei holl\ncynnwys?
+Ydych chi'n siŵr eich bod am dileu y ffolder '{0}' ac ei holl
+\ncynnwys?
 Ydych chi'n siŵr eich bod am dileu yr eitemau hyn {0}?
 Dileu...
 Gwall Dileu Ffeil neu Ffolder

@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Turkmen
 Türkmençe
 401
@@ -100,7 +100,7 @@ Bellik
 &Barlag nokady
 960
 Ma&zmunlar...
-7-zip H&akynda
+NanaZip H&akynda
 1003
 Ýol
 Ad
@@ -202,10 +202,10 @@ R&edaktor:
 &Diff(Parh)
 2200
 Sistema
-7-zip bilen şärik et:
+NanaZip bilen şärik et:
 Ähli Ulanyjylar
 2301
-7-zipi kontekst/baglam menýu bilen birleşdir
+NanaZipi kontekst/baglam menýu bilen birleşdir
 Basgançaklaşdyrylan kontekst/baglam menýu
 Kontekst menýu maddalary:
 Kontekst menýudaky şekiljikler
@@ -240,8 +240,8 @@ Gözenek çyzyklaryny görkez
 Başgaça seçiş mody
 Uly hakyda sahypasyny u&lan
 2900
-7-zip Hakynda
-7-zip erkin bir programma üpçünçiligidir
+NanaZip Hakynda
+NanaZip erkin bir programma üpçünçiligidir
 3000
 Sistema gerekli hakyda mukdaryny bölüp alyp bilmedi
 Ýalňyşlyk ýok

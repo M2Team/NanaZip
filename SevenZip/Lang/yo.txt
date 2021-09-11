@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Yoruba
 Yoruba
 401
@@ -100,7 +100,7 @@ Fi àpò faíli si àpò faíli ayanfẹ
 &Ala
 960na
 &Àkóónú...
-&Nípa 7-Zip...
+&Nípa NanaZip...
 1003
 Ọnà
 Orukọ
@@ -202,10 +202,10 @@ Aṣàtúnṣe
 &íyàtọ̀:
 2200
 Ìlànà ètò 
-Da fáìlì pọ-mọ 7-Zip:
+Da fáìlì pọ-mọ NanaZip:
 Gbogbo onilò
 2301
-Sọ 7-Zip pọ̀ mọ mẹ́nù ọ̀gàngán ipò ṣẹ́ẹ̀lì
+Sọ NanaZip pọ̀ mọ mẹ́nù ọ̀gàngán ipò ṣẹ́ẹ̀lì
 Mẹ́nù ọ̀gàngán ipò pérété 
 Ijẹri ninu mẹ́nù ọ̀gàngán ipò:
 Àmì ninu mẹ́nù ọ̀gàngán ipò
@@ -240,8 +240,8 @@ Fihàn &àwọn ìlà gírìdì
 &Yiyan móòdù àṣàyàn
 Lò &ojú-ìwé ti o nlò ibi ìpamọ́  ńlá
 2900
-Nípa 7-Zip
-Ẹ̀yà àìrídìmú ṣ'ofo ni 7-Zip
+Nípa NanaZip
+Ẹ̀yà àìrídìmú ṣ'ofo ni NanaZip
 3000
 Ìlànà ètò ò le pín ibi ìpamọ́  ti o tó 
 Kò si iṣiṣe kankan

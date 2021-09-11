@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Asturian
 Asturianu
 401
@@ -97,7 +97,7 @@ Marca
 &Bancu de Pruebes
 960
 &Conteníos...
-&Al rodiu 7-Zip...
+&Al rodiu NanaZip...
 1003
 Ruta
 Nome
@@ -167,9 +167,9 @@ Remanaor
 
 2200
 Sistema
-Asociar 7-Zip con:
+Asociar NanaZip con:
 2301
-Integrar 7-Zip nel menú contestual
+Integrar NanaZip nel menú contestual
 Menú contestual en ´cascada´
 Artículos del menú contestual:
 2320
@@ -203,8 +203,8 @@ Amosar les llinies de la &cuadrícula
 
 
 2900
-Al rodiu 7-Zip
-7-Zip ye software llibre. De toos moos, tú pues sofitar el desendolcu de 7-Zip rexistrándote.
+Al rodiu NanaZip
+NanaZip ye software llibre. De toos moos, tú pues sofitar el desendolcu de NanaZip rexistrándote.
 3000
 
 Ensín errores

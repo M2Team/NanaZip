@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Breton
 Brezhoneg
 401
@@ -97,7 +97,7 @@ Sined
 &Amprouiñ
 960
 &Roll ar pennadoù...
-A-&zivout 7-Zip...
+A-&zivout NanaZip...
 1003
 Treug
 Anv
@@ -167,9 +167,9 @@ Embanner
 
 2200
 Reizhiad
-Kenstagañ 7-Zip ouzh :
+Kenstagañ NanaZip ouzh :
 2301
-Lakaat 7-Zip el lañser kemperzhel
+Lakaat NanaZip el lañser kemperzhel
 Lañser kemperzhel a-steud
 Elfennoù al lañser kemperzhel :
 2320
@@ -204,7 +204,7 @@ Diskouez al &linennoù kael
 
 2900
 Keloù
-Digoust eo ar meziant 7-Zip. Mar plij deoc'h 7-zip ha mar fell deoc'h skoazellañ ar raktres-mañ e c'hellit donezoniñ argant da 7-Zip.
+Digoust eo ar meziant NanaZip. Mar plij deoc'h NanaZip ha mar fell deoc'h skoazellañ ar raktres-mañ e c'hellit donezoniñ argant da NanaZip.
 3000
 
 N'eus fazi ebet

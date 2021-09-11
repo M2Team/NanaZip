@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Indonesian
 Bahasa Indonesia
 401
@@ -100,7 +100,7 @@ Markah
 Pa&tokan
 960
 Petun&juk...
-Tent&ang 7-Zip...
+Tent&ang NanaZip...
 1003
 Lintasan
 Nama
@@ -202,10 +202,10 @@ Editor
 Be&da:
 2200
 Sistem
-Asosiasikan 7-Zip dengan:
+Asosiasikan NanaZip dengan:
 Semua pengguna
 2301
-Integrasikan 7-Zip ke cangkang menu konteks
+Integrasikan NanaZip ke cangkang menu konteks
 Menu konteks dikaskade
 Butir-butir menu konteks:
 Ikon-ikon di menu konteks
@@ -240,8 +240,8 @@ Klik-tunggal untuk membuka
 Ragam pemilihan &alternatif
 Gunakan halaman memori &besar
 2900
-Mengenai 7-Zip
-7-Zip merupakan perangkat lunak gratis.\n\nTerjemahan oleh Frans Liando.
+Mengenai NanaZip
+NanaZip merupakan perangkat lunak gratis.\n\nTerjemahan oleh Frans Liando.
 3000
 Sistem tidak bisa mengalokasikan jumlah memori yang diperlukan
 Tidak ada galat

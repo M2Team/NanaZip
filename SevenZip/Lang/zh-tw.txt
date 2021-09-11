@@ -1,6 +1,6 @@
 ﻿;!@Lang2@!UTF-8!
 ;  4.59 : Leon Tseng, sec2, 琥珀
-;  9.07 - 15.00 : Jack Pang : http://www.developershome.com/7-zip/
+;  9.07 - 15.00 : Jack Pang : http://www.developershome.com/NanaZip/
 ;
 ;
 ;
@@ -11,7 +11,7 @@
 ;
 ;
 0
-7-Zip
+NanaZip
 Chinese Traditional
 繁體中文
 401
@@ -100,7 +100,7 @@ Chinese Traditional
 效能測試(&B)
 960
 內容(&C)...
-關於 7-Zip(&A)...
+關於 NanaZip(&A)...
 1003
 路徑
 名稱
@@ -202,10 +202,10 @@ iNode
 檔案比較程式(&D):
 2200
 系統
-使 7-Zip 與之產生關聯:
+使 NanaZip 與之產生關聯:
 所有使用者
 2301
-將 7-Zip 整合到快顯功能表中
+將 NanaZip 整合到快顯功能表中
 串聯式快顯功能表
 快顯功能表項目:
 快顯功能表顯示圖示
@@ -240,8 +240,8 @@ iNode
 使用替代選擇模式(&A)
 使用大記憶體分頁(&L)
 2900
-關於 7-Zip
-7-Zip 為自由軟體
+關於 NanaZip
+NanaZip 為自由軟體
 3000
 系統未能提供所需記憶體空間
 沒有任何錯誤
