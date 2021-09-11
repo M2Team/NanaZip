@@ -1,6 +1,6 @@
-; 7-zip.def
+; NanaZip.def
 
-LIBRARY "7-zip"
+LIBRARY "NanaZip"
 
 EXPORTS
   DllCanUnloadNow PRIVATE

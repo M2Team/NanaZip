@@ -33,7 +33,7 @@ extern bool g_IsNT;
 
 #define kTempDirPrefix FTEXT("7zE")
 
-static LPCTSTR const kSvenZipSetFolderFormat = TEXT("7-Zip::SetTargetFolder");
+static LPCTSTR const kSvenZipSetFolderFormat = TEXT("NanaZip::SetTargetFolder");
 
 ////////////////////////////////////////////////////////
 
@@ -57,7 +57,7 @@ public:
 
   STDMETHODIMP SetData(LPFORMATETC etc, STGMEDIUM *medium, BOOL release);
   STDMETHODIMP EnumFormatEtc(DWORD drection, LPENUMFORMATETC *enumFormatEtc);
-  
+
   STDMETHODIMP DAdvise(FORMATETC * /* etc */, DWORD /* advf */, LPADVISESINK /* pAdvSink */, DWORD * /* pdwConnection */)
     { return OLE_E_ADVISENOTSUPPORTED; }
   STDMETHODIMP DUnadvise(DWORD /* dwConnection */) { return OLE_E_ADVISENOTSUPPORTED; }
@@ -185,7 +185,7 @@ public:
   UString Folder;
   CDataObject *DataObjectSpec;
   CMyComPtr<IDataObject> DataObject;
-  
+
   bool NeedPostCopy;
   HRESULT Result;
   UStringVector Messages;
@@ -218,8 +218,8 @@ STDMETHODIMP CDropSource::QueryContinueDrag(BOOL escapePressed, DWORD keyState)
       // DoDragDrop() probably calls SetCapture() to some hidden window.
       // But it's problem, if we show some modal window, like MessageBox.
       // So we return capture to our window.
-      // If you know better way to solve the problem, please notify 7-Zip developer.
-      
+      // If you know better way to solve the problem, please notify NanaZip developer.
+
       // MessageBoxW(*Panel, L"test", L"test", 0);
 
       /* HWND oldHwnd = */ SetCapture(*Panel);
@@ -257,10 +257,10 @@ static bool CopyNamesToHGlobal(NMemory::CGlobal &hgDrop, const UStringVector &na
       namesA.Add(GetSystemString(names[i]));
     for (i = 0; i < names.Size(); i++)
       totalLen += namesA[i].Len() + 1;
-    
+
     if (!hgDrop.Alloc(GHND | GMEM_SHARE, totalLen * sizeof(CHAR) + sizeof(DROPFILES)))
       return false;
-    
+
     NMemory::CGlobalLock dropLock(hgDrop);
     DROPFILES* dropFiles = (DROPFILES*)dropLock.GetPointer();
     if (!dropFiles)
@@ -287,10 +287,10 @@ static bool CopyNamesToHGlobal(NMemory::CGlobal &hgDrop, const UStringVector &na
     unsigned i;
     for (i = 0; i < names.Size(); i++)
       totalLen += names[i].Len() + 1;
-    
+
     if (!hgDrop.Alloc(GHND | GMEM_SHARE, totalLen * sizeof(WCHAR) + sizeof(DROPFILES)))
       return false;
-    
+
     NMemory::CGlobalLock dropLock(hgDrop);
     DROPFILES* dropFiles = (DROPFILES*)dropLock.GetPointer();
     if (!dropFiles)
@@ -320,7 +320,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
     return;
 
   CDisableTimerProcessing disableTimerProcessing2(*this);
-  
+
   CRecordVector<UInt32> indices;
   GetOperatedItemIndices(indices);
   if (indices.Size() == 0)
@@ -354,8 +354,8 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
   {
     UStringVector names;
 
-    // names variable is     USED for drag and drop from 7-zip to Explorer or to 7-zip archive folder.
-    // names variable is NOT USED for drag and drop from 7-zip to 7-zip File System folder.
+    // names variable is     USED for drag and drop from NanaZip to Explorer or to NanaZip archive folder.
+    // names variable is NOT USED for drag and drop from NanaZip to NanaZip File System folder.
 
     FOR_VECTOR (i, indices)
     {
@@ -370,7 +370,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
         // We use (keepAndReplaceEmptyPrefixes = true) in CAgentFolder::Extract
         // So the following code is not required.
         // Maybe we also can change IFolder interface and send some flag also.
-  
+
         if (s.IsEmpty())
         {
           // Correct_FsFile_Name("") returns "_".
@@ -400,7 +400,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
   dropSourceSpec->DataObjectSpec = dataObjectSpec;
   dropSourceSpec->DataObject = dataObjectSpec;
 
- 
+
   /*
   CTime - file creation timestamp.
   There are two operations in Windows with Drag and Drop:
@@ -414,7 +414,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
         Does DoDragDrop() use some another function (not MoveFile())?
 
   if (effectsOK == DROPEFFECT_COPY) it works as COPY_OPERATION
-    
+
   if (effectsOK == DROPEFFECT_MOVE) drag works as MOVE_OPERATION
 
   if (effectsOK == (DROPEFFECT_COPY | DROPEFFECT_MOVE))
@@ -422,13 +422,13 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
     if we drag file to same volume, then Windows suggests:
        CTRL      - COPY_OPERATION
        [default] - MOVE_OPERATION
-    
+
     if we drag file to another volume, then Windows suggests
        [default] - COPY_OPERATION
        SHIFT     - MOVE_OPERATION
   }
 
-  We want to use MOVE_OPERATION for extracting from archive (open in 7-Zip) to Explorer:
+  We want to use MOVE_OPERATION for extracting from archive (open in NanaZip) to Explorer:
   It has the following advantages:
     1) it uses fast MOVE_OPERATION instead of slow COPY_OPERATION and DELETE, if same volume.
     2) it preserved CTime
@@ -443,7 +443,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
   We create objects:
     IDropSource *dropSource
     IDataObject *dataObject
-  if DropTarget is 7-Zip window, then 7-Zip's
+  if DropTarget is NanaZip window, then NanaZip's
     IDropTarget::DragOver() sets Path in IDataObject.
   and
     IDropSource::QueryContinueDrag() sets NeedPostCopy, if Path is not epmty.
@@ -463,14 +463,14 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
 
   DWORD effect;
   _panelCallback->DragBegin();
-  
+
   HRESULT res = DoDragDrop(dataObject, dropSource, effectsOK, &effect);
-  
+
   _panelCallback->DragEnd();
   bool canceled = (res == DRAGDROP_S_CANCEL);
-  
+
   CDisableNotify disableNotify(*this);
-  
+
   if (res == DRAGDROP_S_DROP)
   {
     res = dropSourceSpec->Result;
@@ -505,7 +505,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
     messagesDialog.Messages = &dropSourceSpec->Messages;
     messagesDialog.Create((*this));
   }
-  
+
   if (res != S_OK && res != E_ABORT)
   {
     // we restore Notify before MessageBox_Error_HRESULT. So we will se files selection
@@ -698,7 +698,7 @@ bool CDropTarget::IsItSameDrive() const
     return false;
 
   UString drive;
-  
+
   if (m_Panel->IsFSFolder())
   {
     drive = m_Panel->GetDriveOrNetworkPrefix();
@@ -715,28 +715,28 @@ bool CDropTarget::IsItSameDrive() const
 
   if (m_SourcePaths.Size() == 0)
     return false;
-  
+
   FOR_VECTOR (i, m_SourcePaths)
   {
     if (!m_SourcePaths[i].IsPrefixedBy_NoCase(drive))
       return false;
   }
-  
+
   return true;
 }
 
 
 /*
-  There are 2 different actions, when we drag to 7-Zip:
-  1) Drag from any external program except of Explorer to "7-Zip" FS folder.
+  There are 2 different actions, when we drag to NanaZip:
+  1) Drag from any external program except of Explorer to "NanaZip" FS folder.
      We want to create new archive for that operation.
   2) all another operation work as usual file COPY/MOVE
-    - Drag from "7-Zip" FS to "7-Zip" FS.
+    - Drag from "NanaZip" FS to "NanaZip" FS.
         COPY/MOVE are supported.
-    - Drag to open archive in 7-Zip.
+    - Drag to open archive in NanaZip.
         We want to update archive.
         We replace COPY to MOVE.
-    - Drag from "7-Zip" archive to "7-Zip" FS.
+    - Drag from "NanaZip" archive to "NanaZip" FS.
         We replace COPY to MOVE.
 */
 
@@ -749,12 +749,12 @@ DWORD CDropTarget::GetEffect(DWORD keyState, POINTL /* pt */, DWORD allowedEffec
     allowedEffect &= ~DROPEFFECT_MOVE;
 
   DWORD effect = 0;
-  
+
   if (keyState & MK_CONTROL)
     effect = allowedEffect & DROPEFFECT_COPY;
   else if (keyState & MK_SHIFT)
     effect = allowedEffect & DROPEFFECT_MOVE;
-  
+
   if (effect == 0)
   {
     if (allowedEffect & DROPEFFECT_COPY)
@@ -786,7 +786,7 @@ UString CDropTarget::GetTargetPath() const
 bool CDropTarget::SetPath(bool enablePath) const
 {
   UINT setFolderFormat = RegisterClipboardFormat(kSvenZipSetFolderFormat);
-  
+
   FORMATETC etc = { (CLIPFORMAT)setFolderFormat, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
   STGMEDIUM medium;
   medium.tymed = etc.tymed;
@@ -940,9 +940,9 @@ void CPanel::CompressDropFiles(const UStringVector &fileNames, const UString &fo
       if (IsFolderInTemp(folderPath2F))
         folderPath2 = ROOT_FS_FOLDER;
     }
-    
+
     const UString arcName = CreateArchiveName(fileNames);
-    
+
     CompressFiles(folderPath2, arcName, L"",
       true, // addExtension
       fileNames,

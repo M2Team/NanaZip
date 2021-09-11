@@ -15,13 +15,13 @@ API_FUNC_IsArc IsArc_Zip(const Byte *p, size_t size);
 
 namespace NArchive {
 namespace NZip {
-  
+
 class CItemEx: public CItem
 {
 public:
   UInt32 LocalFullHeaderSize; // including Name and Extra
   // int ParentOfAltStream; // -1, if not AltStream
-  
+
   bool DescriptorWasRead;
 
   CItemEx():
@@ -89,7 +89,7 @@ struct CInArchiveInfo
       ThereIsTail(false)
       // BaseVolIndex(0)
       {}
-  
+
   void Clear()
   {
     // BaseVolIndex = 0;
@@ -114,9 +114,9 @@ struct CInArchiveInfo
 struct CCdInfo
 {
   bool IsFromEcd64;
-  
+
   UInt16 CommentSize;
-  
+
   // 64
   UInt16 VersionMade;
   UInt16 VersionNeedExtract;
@@ -158,13 +158,13 @@ struct CVols
 
     CSubStreamInfo(): Size(0) {}
   };
-  
+
   CObjectVector<CSubStreamInfo> Streams;
-  
+
   int StreamIndex;   // -1 for StartStream
                      // -2 for ZipStream at multivol detection code
                      // >=0 volume index in multivol
-  
+
   bool NeedSeek;
 
   bool DisableVolsSearch;
@@ -239,7 +239,7 @@ class CVolStream:
 {
 public:
   CVols *Vols;
-  
+
   MY_UNKNOWN_IMP1(ISequentialInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -328,13 +328,13 @@ class CInArchive
 
 public:
   CInArchiveInfo ArcInfo;
-  
+
   bool IsArc;
   bool IsZip64;
 
   bool IsApk;
   bool IsCdUnsorted;
-  
+
   bool HeadersError;
   bool HeadersWarning;
   bool ExtraMinorError;
@@ -353,7 +353,7 @@ public:
   UInt32 EcdVolIndex;
 
   CVols Vols;
- 
+
   CInArchive():
       IsArcOpen(false),
       Stream(NULL),
@@ -377,13 +377,13 @@ public:
       return (UInt64)ArcInfo.Base;
   }
 
-  
+
   void ClearRefs();
   void Close();
   HRESULT Open(IInStream *stream, const UInt64 *searchLimit, IArchiveOpenCallback *callback, CObjectVector<CItemEx> &items);
 
   bool IsOpen() const { return IsArcOpen; }
-  
+
   bool AreThereErrors() const
   {
     return HeadersError
@@ -430,14 +430,14 @@ public:
        || IsApk
        || IsCdUnsorted)
       return false;
-   
-    // 7-zip probably can update archives with embedded stubs.
+
+    // NanaZip probably can update archives with embedded stubs.
     // we just disable that feature for more safety.
 
     return true;
   }
 };
-  
+
 }}
-  
+
 #endif

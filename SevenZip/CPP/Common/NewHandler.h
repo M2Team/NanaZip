@@ -19,8 +19,8 @@ For older _MSC_VER versions we redefine operator new() and operator delete().
 Our version of operator new() throws CNewException() exception on failure.
 
 It's still allowed to use redefined version of operator new() from "NewHandler.cpp"
-with any compiler. 7-Zip's code can work with std::bad_alloc and CNewException() exceptions.
-But if you use some additional code (outside of 7-Zip's code), you must check
+with any compiler. NanaZip's code can work with std::bad_alloc and CNewException() exceptions.
+But if you use some additional code (outside of NanaZip's code), you must check
 that redefined version of operator new() is not problem for your code.
 */
 

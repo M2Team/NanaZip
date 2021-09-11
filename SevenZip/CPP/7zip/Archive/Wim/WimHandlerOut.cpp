@@ -35,15 +35,15 @@ static int AddUniqHash(const CStreamInfo *streams, CUIntVector &sorted, const By
     unsigned mid = (left + right) / 2;
     unsigned index = sorted[mid];
     const Byte *hash2 = streams[index].Hash;
-    
+
     unsigned i;
     for (i = 0; i < kHashSize; i++)
       if (h[i] != hash2[i])
         break;
-    
+
     if (i == kHashSize)
       return index;
-  
+
     if (h[i] < hash2[i])
       right = mid;
     else
@@ -52,7 +52,7 @@ static int AddUniqHash(const CStreamInfo *streams, CUIntVector &sorted, const By
 
   if (streamIndexForInsert >= 0)
     sorted.Insert(left, streamIndexForInsert);
- 
+
   return -1;
 }
 
@@ -73,7 +73,7 @@ struct CMetaItem
 {
   int UpdateIndex;
   int HashIndex;
-  
+
   UInt64 Size;
   FILETIME CTime;
   FILETIME ATime;
@@ -142,15 +142,15 @@ static int AddToHardLinkList(const CObjectVector<CMetaItem> &metaItems, unsigned
 struct CUpdateItem
 {
   unsigned CallbackIndex; // index in callback
-  
+
   int MetaIndex;          // index in in MetaItems[]
-  
+
   int AltStreamIndex;     // index in CMetaItem::AltStreams vector
                           // -1: if not alt stream?
-  
+
   int InArcIndex;         // >= 0, if we use OLD Data
                           //   -1, if we use NEW Data
- 
+
   CUpdateItem(): MetaIndex(-1), AltStreamIndex(-1), InArcIndex(-1) {}
 };
 
@@ -408,7 +408,7 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
   unsigned shortNameLen2 = (shortNameLen == 0 ? 2 : shortNameLen + 4);
 
   size_t totalLen = ((kDirRecordSize + fileNameLen2 + shortNameLen2 + 6) & ~7);
-  
+
   memset(p, 0, totalLen);
   Set64(p, totalLen);
   Set64(p + 8, item.Attrib);
@@ -416,7 +416,7 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
   SetFileTimeToMem(p + 0x28, item.CTime);
   SetFileTimeToMem(p + 0x30, item.ATime);
   SetFileTimeToMem(p + 0x38, item.MTime);
-  
+
   /* WIM format probably doesn't support hard links to symbolic links.
      In these cases it just stores symbolic links (REPARSE TAGS).
      Check it in new versions of WIM software form MS !!!
@@ -432,7 +432,7 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
   {
     Set64(p + 0x58, item.FileID);
   }
-  
+
   Set16(p + 0x62, (UInt16)shortNameLen);
   Set16(p + 0x64, (UInt16)fileNameLen);
   unsigned i;
@@ -440,7 +440,7 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
     Set16(p + kDirRecordSize + i * 2, (UInt16)item.Name[i]);
   for (i = 0; i * 2 < shortNameLen; i++)
     Set16(p + kDirRecordSize + fileNameLen2 + i * 2, (UInt16)item.ShortName[i]);
-  
+
   if (item.GetNumAltStreams() == 0)
   {
     if (item.HashIndex >= 0)
@@ -450,7 +450,7 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
   {
     Set16(p + 0x60, (UInt16)(item.GetNumAltStreams() + (item.IsDir ? 0 : 1)));
     p += totalLen;
-    
+
     if (!item.IsDir)
     {
       UInt32 curLen = (((0x26 + 0) + 6) & ~7);
@@ -461,18 +461,18 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
       totalLen += curLen;
       p += curLen;
     }
-    
+
     FOR_VECTOR (si, item.AltStreams)
     {
       const CAltStream &ss = item.AltStreams[si];
       if (ss.Skip)
         continue;
-      
+
       fileNameLen = ss.Name.Len() * 2;
       fileNameLen2 = (fileNameLen == 0 ? 0 : fileNameLen + 2 + 2);
       UInt32 curLen = (((0x26 + fileNameLen2) + 6) & ~7);
       memset(p, 0, curLen);
-      
+
       Set64(p, curLen);
       if (ss.HashIndex >= 0)
         memcpy(p + 0x10, streams[ss.HashIndex].Hash, kHashSize);
@@ -483,7 +483,7 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
       p += curLen;
     }
   }
-  
+
   return totalLen;
 }
 
@@ -760,7 +760,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       numUnchangedItemsInImage.Add(0);
       isChangedImage.Add(false);
     }
-    
+
     for (i = 0; i < numItems; i++)
     {
       UInt32 indexInArchive;
@@ -778,7 +778,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         }
         else
         {
-          // oldProps & newData. Current version of 7-Zip doesn't use it
+          // oldProps & newData. Current version of NanaZip doesn't use it
           if (item.ImageIndex >= 0)
             isChangedImage[item.ImageIndex] = true;
         }
@@ -792,7 +792,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       {
         NCOM::CPropVariant prop;
         RINOK(callback->GetProperty(i, kpidPath, &prop));
-        
+
         if (prop.vt != VT_BSTR)
           return E_INVALIDARG;
         const wchar_t *path = prop.bstrVal;
@@ -815,7 +815,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
           return E_INVALIDARG;
       }
     }
-    
+
     for (i = 0; i < _db.Images.Size(); i++)
       if (!isChangedImage[i])
         isChangedImage[i] = _db.GetNumUserItemsInImage(i) != numUnchangedItemsInImage[i];
@@ -867,13 +867,13 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         rootItem.SecurityId = secUniqBlocks.AddUniq((const Byte *)data, dataSize);
       }
     }
-    
+
     IArchiveGetRootProps *thisGetRoot = isUpdate ? this : NULL;
-    
+
     RINOK(GetRootTime(getRootProps, thisGetRoot, kpidCTime, rootItem.CTime));
     RINOK(GetRootTime(getRootProps, thisGetRoot, kpidATime, rootItem.ATime));
     RINOK(GetRootTime(getRootProps, thisGetRoot, kpidMTime, rootItem.MTime));
-    
+
     {
       NCOM::CPropVariant prop;
       if (getRootProps)
@@ -894,7 +894,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       }
       rootItem.Attrib |= FILE_ATTRIBUTE_DIRECTORY;
     }
-    
+
     AddTrees(trees, db.MetaItems, ri, defaultImageIndex);
     db.MetaItems[trees[defaultImageIndex].Dirs[0].MetaIndex] = rootItem;
   }
@@ -902,7 +902,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   // ---------- Request Metadata for changed items ----------
 
   UString fileName;
-  
+
   for (i = 0; i < numItems; i++)
   {
     CUpdateItem ui;
@@ -914,9 +914,9 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     {
       if (indexInArchive >= _db.SortedItems.Size())
         continue;
-      
+
       const CItem &item = _db.Items[_db.SortedItems[indexInArchive]];
-      
+
       if (item.ImageIndex >= 0)
       {
         if (!isChangedImage[item.ImageIndex])
@@ -938,7 +938,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
             return E_NOTIMPL;
         }
       }
-    
+
       if (newData == 0)
         ui.InArcIndex = indexInArchive;
     }
@@ -983,7 +983,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       }
 
       NCOM::CPropVariant prop;
-      
+
       if (newData)
       {
         RINOK(callback->GetProperty(i, kpidSize, &prop));
@@ -992,7 +992,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       {
         RINOK(GetProperty(indexInArchive, kpidSize, &prop));
       }
-     
+
       if (prop.vt == VT_UI8)
         size = prop.uhVal.QuadPart;
       else if (prop.vt != VT_EMPTY)
@@ -1007,7 +1007,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         path = propPath.bstrVal;
       else if (propPath.vt != VT_EMPTY)
         return E_INVALIDARG;
-    
+
     if (!path)
       return E_INVALIDARG;
 
@@ -1016,7 +1016,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     fileName.Empty();
 
     int imageIndex;
-    
+
     if (!showImageNumber)
     {
       imageIndex = defaultImageIndex;
@@ -1031,7 +1031,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         return E_INVALIDARG;
       if (val == 0 || val > kNumImagesMaxUpdate)
         return E_INVALIDARG;
-      
+
       imageIndex = (int)val - 1;
       if (imageIndex < (int)isChangedImage.Size())
        if (!isChangedImage[imageIndex])
@@ -1040,7 +1040,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       AddTrees(trees, db.MetaItems, ri, imageIndex);
       curItem = &trees[imageIndex].Dirs[0];
       wchar_t c = *end;
-      
+
       if (c == 0)
       {
         if (!isDir || isAltStream)
@@ -1068,7 +1068,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       else
         return E_INVALIDARG;
     }
-      
+
     if (ui.MetaIndex < 0)
     {
       for (;;)
@@ -1117,13 +1117,13 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         int colonPos = fileName.Find(L':');
         if (colonPos < 0)
           return E_INVALIDARG;
-        
+
         // we want to support cases of c::substream, where c: is drive name
         if (colonPos == 1 && fileName[2] == L':' && IS_LETTER_CHAR(fileName[0]))
           colonPos = 2;
         const UString mainName = fileName.Left(colonPos);
         unsigned indexOfDir;
-        
+
         if (mainName.IsEmpty())
           ui.MetaIndex = curItem->MetaIndex;
         else if (curItem->FindDir(db.MetaItems, mainName, indexOfDir))
@@ -1141,7 +1141,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
             }
           }
         }
-        
+
         if (ui.MetaIndex >= 0)
         {
           CAltStream ss;
@@ -1161,7 +1161,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         ui.MetaIndex = db.MetaItems.Size();
         db.MetaItems.AddNew();
       }
-    
+
       CMetaItem &mi = db.MetaItems[ui.MetaIndex];
       mi.Size = size;
       mi.IsDir = isDir;
@@ -1194,18 +1194,18 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
       while (imageIndex >= (int)secureBlocks.Size())
         secureBlocks.AddNew();
-      
+
       if (!isAltStream && (getRawProps || arcIndex >= 0))
       {
         CUniqBlocks &secUniqBlocks = secureBlocks[imageIndex];
         const void *data;
         UInt32 dataSize;
         UInt32 propType;
-        
+
         data = NULL;
         dataSize = 0;
         propType = 0;
-        
+
         if (arcIndex >= 0)
         {
           GetRawProp(arcIndex, kpidNtSecure, &data, &dataSize, &propType);
@@ -1214,7 +1214,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         {
           getRawProps->GetRawProp(i, kpidNtSecure, &data, &dataSize, &propType);
         }
-        
+
         if (dataSize != 0)
         {
           if (propType != NPropDataType::kRaw)
@@ -1225,7 +1225,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         data = NULL;
         dataSize = 0;
         propType = 0;
-        
+
         if (arcIndex >= 0)
         {
           GetRawProp(arcIndex, kpidNtReparse, &data, &dataSize, &propType);
@@ -1234,7 +1234,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         {
           getRawProps->GetRawProp(i, kpidNtReparse, &data, &dataSize, &propType);
         }
-      
+
         if (dataSize != 0)
         {
           if (propType != NPropDataType::kRaw)
@@ -1257,9 +1257,9 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
           curItem->Files.Add(ui.MetaIndex);
       }
     }
-    
+
     }
-    
+
     if (iNode != 0 && ui.MetaIndex >= 0 && ui.AltStreamIndex < 0)
       db.MetaItems[ui.MetaIndex].FileID = iNode;
 
@@ -1309,7 +1309,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   for (i = 0; i < db.UpdateIndexes.Size(); i++)
   {
     const CUpdateItem &ui = db.UpdateItems[db.UpdateIndexes[i]];
-    
+
     if (ui.InArcIndex >= 0)
     {
       if ((unsigned)ui.InArcIndex >= _db.SortedItems.Size())
@@ -1331,13 +1331,13 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   }
 
   // Clear ref counts for SolidBig streams
-  
+
   for (i = 0; i < _db.DataStreams.Size(); i++)
     if (_db.DataStreams[i].Resource.IsSolidBig())
       streamsRefs[i] = 0;
 
   // Set ref counts for SolidBig streams
-  
+
   for (i = 0; i < _db.DataStreams.Size(); i++)
     if (streamsRefs[i] != 0)
     {
@@ -1353,7 +1353,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       if (!rs.IsSolidSmall())
         complexity += rs.PackSize;
     }
-      
+
   RINOK(callback->SetTotal(complexity));
   UInt64 totalComplexity = complexity;
 
@@ -1401,10 +1401,10 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     inStreamLimitedSpec->SetStream(_volumes[1].Stream);
   }
 
-  
+
   CRecordVector<CStreamInfo> streams;
   CUIntVector sortedHashes; // indexes to streams, sorted by SHA1
-  
+
   // ---------- Copy unchanged data streams ----------
 
   UInt64 solidRunOffset = 0;
@@ -1414,7 +1414,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   {
     const CStreamInfo &siOld = _db.DataStreams[i];
     const CResource &rs = siOld.Resource;
-    
+
     unsigned numRefs = streamsRefs[i];
 
     if (numRefs == 0)
@@ -1459,14 +1459,14 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       solidRunOffset = 0;
       curSolidSize = 0;
     }
-     
+
     if (!rs.IsSolid() || rs.IsSolidSmall())
     {
       int find = AddUniqHash(&streams.Front(), sortedHashes, siOld.Hash, streamIndex);
       if (find >= 0)
         return E_FAIL; // two streams with same SHA-1
     }
-   
+
     if (!rs.IsSolid() || rs.IsSolidBig())
     {
       RINOK(_volumes[siOld.PartNumber].Stream->Seek(rs.Offset, STREAM_SEEK_SET, NULL));
@@ -1482,7 +1482,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     streams.Add(s);
   }
 
-  
+
   // ---------- Write new items ----------
 
   CUIntVector hlIndexes; // sorted indexes for hard link items
@@ -1494,7 +1494,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     const CUpdateItem &ui = db.UpdateItems[db.UpdateIndexes[i]];
     CMetaItem &mi = db.MetaItems[ui.MetaIndex];
     UInt64 size = 0;
-    
+
     if (ui.AltStreamIndex >= 0)
     {
       if (mi.Skip)
@@ -1519,9 +1519,9 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
       if ((unsigned)ui.InArcIndex >= _db.SortedItems.Size())
         return E_FAIL;
-      
+
       const CItem &item = _db.Items[_db.SortedItems[ui.InArcIndex]];
-      
+
       if (item.StreamIndex < 0)
       {
         if (size == 0)
@@ -1531,7 +1531,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       }
 
       // We support empty file (size = 0, but with stream and SHA-1) from old archive
-      
+
       const CStreamInfo &siOld = _db.DataStreams[item.StreamIndex];
 
       int index = AddUniqHash(&streams.Front(), sortedHashes, siOld.Hash, -1);
@@ -1543,13 +1543,13 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         mi.HashIndex = index;
       else
         mi.AltStreams[ui.AltStreamIndex].HashIndex = index;
-      
+
       continue;
     }
 
     CMyComPtr<ISequentialInStream> fileInStream;
     HRESULT res = callback->GetStream(ui.CallbackIndex, &fileInStream);
-    
+
     if (res == S_FALSE)
     {
       if (ui.AltStreamIndex >= 0)
@@ -1565,7 +1565,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       RINOK(res);
 
       int miIndex = -1;
-      
+
       if (!fileInStream)
       {
         if (!mi.IsDir)
@@ -1606,7 +1606,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
           }
         }
       }
-      
+
       if (miIndex >= 0)
       {
         mi.HashIndex = db.MetaItems[miIndex].HashIndex;
@@ -1624,7 +1624,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         sha1.Update((const Byte *)mi.Reparse + 8, packSize);
         Byte hash[kHashSize];
         sha1.Final(hash);
-        
+
         int index = AddUniqHash(&streams.Front(), sortedHashes, hash, streams.Size());
 
         if (index >= 0)
@@ -1649,7 +1649,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
           streams.Add(s);
         }
-        
+
         mi.HashIndex = index;
       }
       else
@@ -1670,10 +1670,10 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
           }
         }
         */
-        
+
         RINOK(copyCoder->Code(inShaStream, outStream, NULL, NULL, progress));
         size = copyCoderSpec->TotalSize;
-       
+
         if (size != 0)
         {
           Byte hash[kHashSize];
@@ -1707,7 +1707,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
             streams.Add(s);
           }
-          
+
           if (ui.AltStreamIndex < 0)
             mi.HashIndex = index;
           else
@@ -1723,8 +1723,8 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   while (secureBlocks.Size() < numNewImages)
     secureBlocks.AddNew();
 
-  
-  
+
+
   // ---------- Write Images ----------
 
   for (i = 0; i < numNewImages; i++)
@@ -1734,7 +1734,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     if (i < isChangedImage.Size() && !isChangedImage[i])
     {
       CStreamInfo s = _db.MetaStreams[i];
-      
+
       RINOK(_volumes[1].Stream->Seek(s.Resource.Offset, STREAM_SEEK_SET, NULL));
       inStreamLimitedSpec->Init(s.Resource.PackSize);
       RINOK(copyCoder->Code(inStreamLimited, outStream, NULL, NULL, progress));
@@ -1760,7 +1760,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
     const CDir &tree = trees[i];
     const UInt32 kSecuritySize = 8;
-    
+
     size_t pos = kSecuritySize;
 
     const CUniqBlocks &secUniqBlocks = secureBlocks[i];
@@ -1768,15 +1768,15 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     pos += (size_t)secUniqBlocks.GetTotalSizeInBytes();
     pos += secBufs.Size() * 8;
     pos = (pos + 7) & ~(size_t)7;
-    
+
     db.DefaultDirItem = ri;
     pos += db.WriteTree_Dummy(tree);
-    
+
     CByteArr meta(pos);
-    
+
     Set32((Byte *)meta + 4, secBufs.Size()); // num security entries
     pos = kSecuritySize;
-    
+
     if (secBufs.Size() == 0)
     {
       // we can write 0 here only if there is no security data, imageX does it,
@@ -1805,7 +1805,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         meta[pos++] = 0;
       Set32((Byte *)meta, (UInt32)pos); // size of security data
     }
-    
+
     db.Hashes = &streams.Front();
     db.WriteTree(tree, (Byte *)meta, pos);
 
@@ -1816,7 +1816,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
       Byte digest[kHashSize];
       sha.Final(digest);
-      
+
       CStreamInfo s;
       s.Resource.PackSize = pos;
       s.Resource.Offset = curPos;
@@ -1846,8 +1846,8 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   header.OffsetResource.Offset = curPos;
   header.OffsetResource.Flags = NResourceFlags::kMetadata;
 
-  
-  
+
+
   // ---------- Write Streams Info Tables ----------
 
   for (i = 0; i < streams.Size(); i++)
@@ -1886,12 +1886,12 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         prop.Name = "INDEX";
         prop.Value = temp;
       }
-      
+
       AddTag_String_IfEmpty(item, "NAME", temp);
       AddTag_UInt64(item, "DIRCOUNT", tree.GetNumDirs() - 1);
       AddTag_UInt64(item, "FILECOUNT", tree.GetNumFiles());
       AddTag_UInt64(item, "TOTALBYTES", tree.GetTotalSize(db.MetaItems));
-      
+
       AddTag_Time(item, "CREATIONTIME", ftCur);
       AddTag_Time(item, "LASTMODIFICATIONTIME", ftCur);
     }
@@ -1913,7 +1913,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       Set16((Byte *)xmlBuf + 2 + i * 2, (UInt16)utf16[i]);
     RINOK(WriteStream(outStream, (const Byte *)xmlBuf, xmlSize));
   }
-  
+
   header.XmlResource.UnpackSize = header.XmlResource.PackSize = xmlSize;
   header.XmlResource.Offset = curPos;
   header.XmlResource.Flags = NResourceFlags::kMetadata;

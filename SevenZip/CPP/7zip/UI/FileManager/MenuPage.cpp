@@ -84,7 +84,7 @@ bool CMenuPage::OnInit()
   _initMode = true;
 
   Clear_MenuChanged();
-  
+
   LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
 
   #ifdef UNDER_CE
@@ -114,10 +114,10 @@ bool CMenuPage::OnInit()
   }
 
   const FString prefix = NDLL::GetModuleDirPrefix();
-  
+
   _dlls[0].ctrl = IDX_SYSTEM_INTEGRATE_TO_MENU;
   _dlls[1].ctrl = IDX_SYSTEM_INTEGRATE_TO_MENU_2;
-  
+
   _dlls[0].wow = 0;
   _dlls[1].wow =
       #ifdef _WIN64
@@ -143,11 +143,11 @@ bool CMenuPage::OnInit()
 
     FString &path = dll.Path;
     path = prefix;
-    path += (d == 0 ? "7-zip.dll" :
+    path += (d == 0 ? "NanaZip.dll" :
         #ifdef _WIN64
-          "7-zip32.dll"
+          "NanaZip32.dll"
         #else
-          "7-zip64.dll"
+          "NanaZip64.dll"
         #endif
         );
 
@@ -234,7 +234,7 @@ bool CMenuPage::OnInit()
 
 static void ShowMenuErrorMessage(const wchar_t *m, HWND hwnd)
 {
-  MessageBoxW(hwnd, m, L"7-Zip", MB_ICONERROR);
+  MessageBoxW(hwnd, m, L"NanaZip", MB_ICONERROR);
 }
 
 #endif
@@ -243,7 +243,7 @@ static void ShowMenuErrorMessage(const wchar_t *m, HWND hwnd)
 LONG CMenuPage::OnApply()
 {
   #ifndef UNDER_CE
-  
+
   for (unsigned d = 2; d != 0;)
   {
     d--;
@@ -270,16 +270,16 @@ LONG CMenuPage::OnApply()
 
     ci.MenuIcons.Val = IsButtonCheckedBool(IDX_SYSTEM_ICON_IN_MENU);
     ci.MenuIcons.Def = _menuIcons_Changed;
-    
+
     ci.ElimDup.Val = IsButtonCheckedBool(IDX_EXTRACT_ELIM_DUP);
     ci.ElimDup.Def = _elimDup_Changed;
 
     ci.Flags = 0;
-    
+
     for (unsigned i = 0; i < ARRAY_SIZE(kMenuItems); i++)
       if (_listView.GetCheckState(i))
         ci.Flags |= kMenuItems[i].Flag;
-    
+
     ci.Flags_Def = _flags_Changed;
     ci.Save();
 
@@ -317,11 +317,11 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SYSTEM_CASCADED_MENU: _cascaded_Changed = true; break;
     case IDX_SYSTEM_ICON_IN_MENU: _menuIcons_Changed = true; break;
     case IDX_EXTRACT_ELIM_DUP: _elimDup_Changed = true; break;
-      
+
     default:
       return CPropertyPage::OnButtonClicked(buttonID, buttonHWND);
   }
-  
+
   Changed();
   return true;
 }

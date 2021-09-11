@@ -9,7 +9,7 @@
 #define k_BROWSE_y_List  24
 
 IDD_BROWSE  DIALOG 0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
-CAPTION "7-Zip: Browse"
+CAPTION "NanaZip: Browse"
 {
   EDITTEXT  IDE_BROWSE_PATH,   m, by - m - k_BROWSE_y_CtrlSize - k_BROWSE_y_CtrlSize - m, xc, k_BROWSE_y_CtrlSize, ES_AUTOHSCROLL
   COMBOBOX  IDC_BROWSE_FILTER, m, by - m - k_BROWSE_y_CtrlSize, xc, 30, MY_COMBO

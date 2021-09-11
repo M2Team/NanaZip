@@ -270,12 +270,12 @@ STDMETHODIMP COutMultiVolStream::SetSize(UInt64 newSize)
 void CArchivePath::ParseFromPath(const UString &path, EArcNameMode mode)
 {
   OriginalPath = path;
-  
+
   SplitPathToParts_2(path, Prefix, Name);
-  
+
   if (mode == k_ArcNameMode_Add)
     return;
-  
+
   if (mode != k_ArcNameMode_Exact)
   {
     int dotPos = Name.ReverseFind_Dot();
@@ -406,7 +406,7 @@ struct CUpdateProduceCallbackImp: public IUpdateProduceCallback
   const CObjectVector<CArcItem> *_arcItems;
   CDirItemsStat *_stat;
   IUpdateCallbackUI *_callback;
-  
+
   CUpdateProduceCallbackImp(
       const CObjectVector<CArcItem> *a,
       CDirItemsStat *stat,
@@ -414,7 +414,7 @@ struct CUpdateProduceCallbackImp: public IUpdateProduceCallback
     _arcItems(a),
     _stat(stat),
     _callback(callback) {}
-  
+
   virtual HRESULT ShowDeleteFile(unsigned arcIndex);
 };
 
@@ -515,7 +515,7 @@ static HRESULT Compress(
 {
   CMyComPtr<IOutArchive> outArchive;
   int formatIndex = options.MethodMode.Type.FormatIndex;
-  
+
   if (arc)
   {
     formatIndex = arc->FormatIndex;
@@ -541,15 +541,15 @@ static HRESULT Compress(
     }
     #endif
   }
-  
+
   if (outArchive == 0)
     throw kUpdateIsNotSupoorted;
-  
+
   NFileTimeType::EEnum fileTimeType;
   {
     UInt32 value;
     RINOK(outArchive->GetFileTimeType(&value));
-    
+
     switch (value)
     {
       case NFileTimeType::kWindows:
@@ -583,7 +583,7 @@ static HRESULT Compress(
       const CArcItem &ai = arcItems[i];
       bool needRename = false;
       UString dest;
-      
+
       if (ai.Censored)
       {
         FOR_VECTOR (j, options.RenamePairs)
@@ -594,7 +594,7 @@ static HRESULT Compress(
             needRename = true;
             break;
           }
-          
+
           #ifdef SUPPORT_ALT_STREAMS
           if (ai.IsAltStream)
           {
@@ -618,7 +618,7 @@ static HRESULT Compress(
           #endif
         }
       }
-      
+
       CUpdatePair2 up2;
       up2.SetAs_NoChangeArcItem(ai.IndexInServer);
       if (needRename)
@@ -635,7 +635,7 @@ static HRESULT Compress(
     CRecordVector<CUpdatePair> updatePairs;
     GetUpdatePairInfoList(dirItems, arcItems, fileTimeType, updatePairs); // must be done only once!!!
     CUpdateProduceCallbackImp upCallback(&arcItems, &stat2.DeleteData, callback);
-    
+
     UpdateProduce(updatePairs, actionSet, updatePairs2, isUpdatingItself ? &upCallback : NULL);
   }
 
@@ -716,10 +716,10 @@ static HRESULT Compress(
     }
     RINOK(callback->SetNumItems(stat2));
   }
-  
+
   CArchiveUpdateCallback *updateCallbackSpec = new CArchiveUpdateCallback;
   CMyComPtr<IArchiveUpdateCallback> updateCallback(updateCallbackSpec);
-  
+
   updateCallbackSpec->PreserveATime = options.PreserveATime;
   updateCallbackSpec->ShareForWrite = options.OpenShareForWrite;
   updateCallbackSpec->StopAfterOpenError = options.StopAfterOpenError;
@@ -731,7 +731,7 @@ static HRESULT Compress(
     // we set Archive to allow to transfer GetProperty requests back to DLL.
     updateCallbackSpec->Archive = arc->Archive;
   }
-  
+
   updateCallbackSpec->DirItems = &dirItems;
   updateCallbackSpec->ParentDirItem = parentDirItem;
 
@@ -777,7 +777,7 @@ static HRESULT Compress(
       outStream = outSeekStream;
       bool isOK = false;
       FString realPath;
-      
+
       for (unsigned i = 0; i < (1 << 16); i++)
       {
         if (archivePath.Temp)
@@ -802,7 +802,7 @@ static HRESULT Compress(
         if (!archivePath.Temp)
           break;
       }
-      
+
       if (!isOK)
         return errorInfo.SetFromLastError("cannot open file", realPath);
     }
@@ -813,7 +813,7 @@ static HRESULT Compress(
       return E_FAIL;
     if (arc && arc->GetGlobalOffset() > 0)
       return E_NOTIMPL;
-      
+
     volStreamSpec = new COutMultiVolStream;
     outSeekStream = volStreamSpec;
     outStream = outSeekStream;
@@ -860,7 +860,7 @@ static HRESULT Compress(
     }
 
     RINOK(NCompress::CopyStream(sfxStream, sfxOutStream, NULL));
-    
+
     if (outStreamSpec2)
     {
       RINOK(outStreamSpec2->Close());
@@ -1073,7 +1073,7 @@ HRESULT UpdateArchive(
   #endif
   censor.ExtendExclude();
 
-  
+
   if (options.VolumesSizes.Size() > 0 && (options.EMailMode /* || options.SfxMode */))
     return E_NOTIMPL;
 
@@ -1106,14 +1106,14 @@ HRESULT UpdateArchive(
 
   CArchiveLink arcLink;
 
-  
+
   if (needSetPath)
   {
     if (!options.InitFormatIndex(codecs, types, cmdArcPath2) ||
         !options.SetArcPath(codecs, cmdArcPath2))
       return E_NOTIMPL;
   }
-  
+
   UString arcPath = options.ArchivePath.GetFinalPath();
 
   if (!options.VolumesSizes.IsEmpty())
@@ -1199,7 +1199,7 @@ HRESULT UpdateArchive(
 
       if (result == E_ABORT)
         return result;
-      
+
       HRESULT res2 = callback->OpenResult(codecs, arcLink, arcPath, result);
       /*
       if (result == S_FALSE)
@@ -1214,7 +1214,7 @@ HRESULT UpdateArchive(
         errorInfo.Message = kUpdateIsNotSupported_MultiVol;
         return E_NOTIMPL;
       }
-      
+
       CArc &arc = arcLink.Arcs.Back();
       arc.MTimeDefined = !fi.IsDevice;
       arc.MTime = fi.MTime;
@@ -1244,13 +1244,13 @@ HRESULT UpdateArchive(
   bool thereIsInArchive = arcLink.IsOpen;
   if (!thereIsInArchive && renameMode)
     return E_FAIL;
-  
+
   CDirItems dirItems;
   dirItems.Callback = callback;
 
   CDirItem parentDirItem;
   CDirItem *parentDirItem_Ptr = NULL;
-  
+
   /*
   FStringVector requestedPaths;
   FStringVector *requestedPaths_Ptr = NULL;
@@ -1271,7 +1271,7 @@ HRESULT UpdateArchive(
   else
   {
     bool needScanning = false;
-    
+
     if (!renameMode)
     FOR_VECTOR (i, options.Commands)
       if (options.Commands[i].ActionSet.NeedScanning())
@@ -1300,7 +1300,7 @@ HRESULT UpdateArchive(
           errorInfo.Message = "Scanning error";
         return res;
       }
-      
+
       RINOK(callback->FinishScanning(dirItems.Stat));
 
       if (censor.Pairs.Size() == 1)
@@ -1338,7 +1338,7 @@ HRESULT UpdateArchive(
 
   FString tempDirPrefix;
   bool usesTempDir = false;
-  
+
   #ifdef _WIN32
   CTempDir tempDirectory;
   if (options.EMailMode && options.EMailRemoveAfter)
@@ -1462,7 +1462,7 @@ HRESULT UpdateArchive(
     CUpdateArchiveCommand &command = options.Commands[ci];
     UString name;
     bool isUpdating;
-    
+
     if (options.StdOutMode)
     {
       name = "stdout";
@@ -1473,7 +1473,7 @@ HRESULT UpdateArchive(
       name = command.ArchivePath.GetFinalPath();
       isUpdating = (ci == 0 && options.UpdateArchiveItself && thereIsInArchive);
     }
-    
+
     RINOK(callback->StartArchive(name, isUpdating))
 
     CFinishArchiveStat st;
@@ -1510,7 +1510,7 @@ HRESULT UpdateArchive(
     {
       CArchivePath &ap = options.Commands[0].ArchivePath;
       const FString &tempPath = ap.GetTempPath();
-      
+
       // DWORD attrib = 0;
       if (thereIsInArchive)
       {
@@ -1518,14 +1518,14 @@ HRESULT UpdateArchive(
         if (!DeleteFileAlways(us2fs(arcPath)))
           return errorInfo.SetFromLastError("cannot delete the file", us2fs(arcPath));
       }
-      
+
       if (!MyMoveFile(tempPath, us2fs(arcPath)))
       {
         errorInfo.SetFromLastError("cannot move the file", tempPath);
         errorInfo.FileNames.Add(us2fs(arcPath));
         return errorInfo.Get_HRESULT_Error();
       }
-      
+
       /*
       if (attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_READONLY))
       {
@@ -1543,7 +1543,7 @@ HRESULT UpdateArchive(
 
 
   #if defined(_WIN32) && !defined(UNDER_CE)
-  
+
   if (options.EMailMode)
   {
     NDLL::CLibrary mapiLib;
@@ -1557,21 +1557,21 @@ HRESULT UpdateArchive(
     LPMAPISENDDOCUMENTS fnSend = (LPMAPISENDDOCUMENTS)mapiLib.GetProc("MAPISendDocuments");
     if (fnSend == 0)
     {
-      errorInfo.SetFromLastError)("7-Zip cannot find MAPISendDocuments function");
+      errorInfo.SetFromLastError)("NanaZip cannot find MAPISendDocuments function");
       return errorInfo.Get_HRESULT_Error();
     }
     */
-    
+
     LPMAPISENDMAIL sendMail = (LPMAPISENDMAIL)(void *)mapiLib.GetProc("MAPISendMail");
     if (sendMail == 0)
     {
-      errorInfo.SetFromLastError("7-Zip cannot find MAPISendMail function");
+      errorInfo.SetFromLastError("NanaZip cannot find MAPISendMail function");
       return errorInfo.Get_HRESULT_Error();;
     }
 
     FStringVector fullPaths;
     unsigned i;
-    
+
     for (i = 0; i < options.Commands.Size(); i++)
     {
       CArchivePath &ap = options.Commands[i].ArchivePath;
@@ -1586,7 +1586,7 @@ HRESULT UpdateArchive(
 
     AStringVector paths;
     AStringVector names;
-    
+
     for (i = 0; i < fullPaths.Size(); i++)
     {
       const UString arcPath2 = fs2us(fullPaths[i]);
@@ -1601,7 +1601,7 @@ HRESULT UpdateArchive(
 
     CRecordVector<MapiFileDesc> files;
     files.ClearAndSetSize(paths.Size());
-    
+
     for (i = 0; i < paths.Size(); i++)
     {
       MapiFileDesc &f = files[i];
@@ -1616,7 +1616,7 @@ HRESULT UpdateArchive(
       memset(&m, 0, sizeof(m));
       m.nFileCount = files.Size();
       m.lpFiles = &files.Front();
-      
+
       const AString addr (GetAnsiString(options.EMailAddress));
       MapiRecipDesc rec;
       if (!addr.IsEmpty())
@@ -1627,11 +1627,11 @@ HRESULT UpdateArchive(
         m.nRecipCount = 1;
         m.lpRecips = &rec;
       }
-      
+
       sendMail((LHANDLE)0, 0, &m, MAPI_DIALOG, 0);
     }
   }
-  
+
   #endif
 
   if (options.DeleteAfterCompressing)
@@ -1687,7 +1687,7 @@ HRESULT UpdateArchive(
     }
 
     pairs.Sort2();
-    
+
     for (i = 0; i < pairs.Size(); i++)
     {
       const FString phyPath = dirItems.GetPhyPath(pairs[i].Index);

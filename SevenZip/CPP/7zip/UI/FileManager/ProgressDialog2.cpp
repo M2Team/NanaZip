@@ -250,7 +250,7 @@ CProgressDialog::CProgressDialog():
   _needClose = false;
   _inCancelMessageBox = false;
   _externalCloseMessageWasReceived = false;
-  
+
   _numPostedMessages = 0;
   _numAutoSizeMessages = 0;
   _errorsWereDisplayed = false;
@@ -340,7 +340,7 @@ bool CProgressDialog::OnInit()
 
   INIT_AS_UNDEFINED(_prevSpeed);
   _prevSpeed_MoveBits = 0;
-  
+
   _prevTime = ::GetTickCount();
   _elapsedTime = 0;
 
@@ -348,7 +348,7 @@ bool CProgressDialog::OnInit()
   INIT_AS_UNDEFINED(_processed_Prev);
   INIT_AS_UNDEFINED(_packed_Prev);
   INIT_AS_UNDEFINED(_ratio_Prev);
-  
+
   _filesStr_Prev.Empty();
   _filesTotStr_Prev.Empty();
 
@@ -427,7 +427,7 @@ static const UINT kIDs[] =
   IDT_PROGRESS_FILES,     IDT_PROGRESS_FILES_VAL,
   0,                      IDT_PROGRESS_FILES_TOTAL,
   IDT_PROGRESS_ERRORS,    IDT_PROGRESS_ERRORS_VAL,
-  
+
   IDT_PROGRESS_TOTAL,     IDT_PROGRESS_TOTAL_VAL,
   IDT_PROGRESS_SPEED,     IDT_PROGRESS_SPEED_VAL,
   IDT_PROGRESS_PROCESSED, IDT_PROGRESS_PROCESSED_VAL,
@@ -831,17 +831,17 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
         needSetTitle = true;
       }
     }
-    
+
     {
       wchar_t s[64];
-      
+
       ConvertUInt64ToString(completedFiles, s);
       if (_filesStr_Prev != s)
       {
         _filesStr_Prev = s;
         SetItemText(IDT_PROGRESS_FILES_VAL, s);
       }
-      
+
       s[0] = 0;
       if (IS_DEFINED_VAL(totalFiles))
       {
@@ -854,7 +854,7 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
         SetItemText(IDT_PROGRESS_FILES_TOTAL, s);
       }
     }
-    
+
     const UInt64 packSize   = CompressingMode ? outSize : inSize;
     const UInt64 unpackSize = CompressingMode ? inSize : outSize;
 
@@ -868,7 +868,7 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     {
       ShowSize(IDT_PROGRESS_PROCESSED_VAL, unpackSize, _processed_Prev);
       ShowSize(IDT_PROGRESS_PACKED_VAL, packSize, _packed_Prev);
-      
+
       if (IS_DEFINED_VAL(packSize) &&
           IS_DEFINED_VAL(unpackSize) &&
           unpackSize != 0)
@@ -955,7 +955,7 @@ INT_PTR CProgressDialog::Create(const UString &title, NWindows::CThread &thread,
     {
       CWaitCursor waitCursor;
       HANDLE h[] = { thread, _createDialogEvent };
-      
+
       DWORD res2 = WaitForMultipleObjects(ARRAY_SIZE(h), h, FALSE, kCreateDelay);
       if (res2 == WAIT_OBJECT_0 && !Sync.ThereIsMessage())
         return 0;
@@ -971,7 +971,7 @@ INT_PTR CProgressDialog::Create(const UString &title, NWindows::CThread &thread,
   }
   thread.Wait_Close();
   if (!MessagesDisplayed)
-    MessageBoxW(wndParent, L"Progress Error", L"7-Zip", MB_ICONERROR);
+    MessageBoxW(wndParent, L"Progress Error", L"NanaZip", MB_ICONERROR);
   return res;
 }
 
@@ -985,7 +985,7 @@ bool CProgressDialog::OnExternalCloseMessage()
   // SetText(L"Finished2 ");
 
   UpdateStatInfo(true);
-  
+
   SetItemText(IDCANCEL, LangString(IDS_CLOSE));
   ::SendMessage(GetItem(IDCANCEL), BM_SETSTYLE, BS_DEFPUSHBUTTON, MAKELPARAM(TRUE, 0));
   HideItem(IDB_PROGRESS_BACKGROUND);
@@ -1005,7 +1005,7 @@ bool CProgressDialog::OnExternalCloseMessage()
   {
     MessagesDisplayed = true;
     if (fm.ErrorMessage.Title.IsEmpty())
-      fm.ErrorMessage.Title = "7-Zip";
+      fm.ErrorMessage.Title = "NanaZip";
     MessageBoxW(*this, fm.ErrorMessage.Message, fm.ErrorMessage.Title, MB_ICONERROR);
   }
   else if (!thereAreMessages)
@@ -1015,7 +1015,7 @@ bool CProgressDialog::OnExternalCloseMessage()
     if (!fm.OkMessage.Message.IsEmpty())
     {
       if (fm.OkMessage.Title.IsEmpty())
-        fm.OkMessage.Title = "7-Zip";
+        fm.OkMessage.Title = "NanaZip";
       MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK);
     }
   }
@@ -1217,7 +1217,7 @@ bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
         End(IDCLOSE);
         break;
       }
-        
+
       bool paused = Sync.Get_Paused();
       if (!paused)
         OnPauseButton();
@@ -1262,7 +1262,7 @@ void CProgressDialog::ProcessWasFinished()
   // Set Window title here.
   if (!WaitMode)
     WaitCreating();
-  
+
   if (_wasCreated)
     PostMsg(kCloseMessage);
   else

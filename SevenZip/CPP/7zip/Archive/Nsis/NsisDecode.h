@@ -26,7 +26,7 @@ namespace NMethodType
   };
 }
 
-/* 7-Zip installers 4.38 - 9.08 used modified version of NSIS that
+/* NanaZip installers 4.38 - 9.08 used modified version of NSIS that
    supported BCJ filter for better compression ratio.
    We support such modified NSIS archives. */
 
@@ -46,12 +46,12 @@ class CDecoder
 public:
   CMyComPtr<IInStream> InputStream; // for non-solid
   UInt64 StreamPos; // the pos in unpacked for solid, the pos in Packed for non-solid
-  
+
   NMethodType::EEnum Method;
   bool FilterFlag;
   bool Solid;
   bool IsNsisDeflate;
-  
+
   CByteBuffer Buffer; // temp buf
 
   CDecoder():
@@ -77,7 +77,7 @@ public:
   }
 
   UInt64 GetInputProcessedSize() const;
-  
+
   HRESULT Init(ISequentialInStream *inStream, bool &useFilter);
 
   HRESULT Read(void *data, size_t *processedSize)

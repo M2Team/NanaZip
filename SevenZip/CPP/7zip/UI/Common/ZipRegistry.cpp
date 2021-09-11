@@ -16,7 +16,7 @@ using namespace NRegistry;
 static NSynchronization::CCriticalSection g_CS;
 #define CS_LOCK NSynchronization::CCriticalSectionLock lock(g_CS);
 
-static LPCTSTR const kCuPrefix = TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("7-Zip") TEXT(STRING_PATH_SEPARATOR);
+static LPCTSTR const kCuPrefix = TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("NanaZip") TEXT(STRING_PATH_SEPARATOR);
 
 static CSysString GetKeyPath(LPCTSTR path) { return kCuPrefix + (CSysString)path; }
 
@@ -97,7 +97,7 @@ void CInfo::Load()
   PathMode_Force = false;
   OverwriteMode = NOverwriteMode::kAsk;
   OverwriteMode_Force = false;
-  
+
   SplitDest.Val = true;
 
   Paths.Clear();
@@ -106,7 +106,7 @@ void CInfo::Load()
   CKey key;
   if (OpenMainKey(key, kKeyName) != ERROR_SUCCESS)
     return;
-  
+
   key.GetValue_Strings(kPathHistory, Paths);
   UInt32 v;
   if (key.QueryValue(kExtractMode, v) == ERROR_SUCCESS && v <= NPathMode::kAbsPaths)
@@ -206,7 +206,7 @@ void CInfo::Save() const
   Key_Set_BoolPair(key, kAltStreams, AltStreams);
   Key_Set_BoolPair(key, kHardLinks, HardLinks);
   Key_Set_BoolPair(key, kSymLinks, SymLinks);
-  
+
   key.SetValue(kShowPassword, ShowPassword);
   key.SetValue(kLevel, (UInt32)Level);
   key.SetValue(kArchiver, ArcType);
@@ -224,7 +224,7 @@ void CInfo::Save() const
       const CFormatOptions &fo = Formats[i];
       CKey fk;
       fk.Create(optionsKey, fo.FormatID);
-      
+
       SetRegUInt32(fk, kLevel, fo.Level);
       SetRegUInt32(fk, kDictionary, fo.Dictionary);
       SetRegUInt32(fk, kOrder, fo.Order);
@@ -260,7 +260,7 @@ void CInfo::Load()
   Key_Get_BoolPair(key, kSymLinks, SymLinks);
 
   key.GetValue_Strings(kArcHistory, ArcPaths);
-  
+
   {
     CKey optionsKey;
     if (optionsKey.Open(key, kOptionsKeyName, KEY_READ) == ERROR_SUCCESS)
@@ -362,11 +362,11 @@ void CContextMenuInfo::Save() const
   CS_LOCK
   CKey key;
   CreateMainKey(key, kOptionsInfoKeyName);
-  
+
   Key_Set_BoolPair(key, kCascadedMenu, Cascaded);
   Key_Set_BoolPair(key, kMenuIcons, MenuIcons);
   Key_Set_BoolPair(key, kElimDup, ElimDup);
-  
+
   if (Flags_Def)
     key.SetValue(kContextMenu, Flags);
 }
@@ -384,13 +384,13 @@ void CContextMenuInfo::Load()
 
   Flags = (UInt32)(Int32)-1;
   Flags_Def = false;
-  
+
   CS_LOCK
-  
+
   CKey key;
   if (OpenMainKey(key, kOptionsInfoKeyName) != ERROR_SUCCESS)
     return;
-  
+
   Key_Get_BoolPair_true(key, kCascadedMenu, Cascaded);
   Key_Get_BoolPair_true(key, kElimDup, ElimDup);
   Key_Get_BoolPair(key, kMenuIcons, MenuIcons);

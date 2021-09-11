@@ -36,11 +36,11 @@ CSysString CModifiedExtInfo::GetString() const
 {
   const char *s;
   if (State == kExtState_7Zip)
-    s = "7-Zip";
+    s = "NanaZip";
   else if (State == kExtState_Clear)
     s = "";
   else if (Other7Zip)
-    s = "[7-Zip]";
+    s = "[NanaZip]";
   else
     return ProgramKey;
   return CSysString (s);
@@ -53,9 +53,9 @@ int CSystemPage::AddIcon(const UString &iconPath, int iconIndex)
     return -1;
   if (iconIndex == -1)
     iconIndex = 0;
-  
+
   HICON hicon;
-  
+
   #ifdef UNDER_CE
   ExtractIconExW(iconPath, iconIndex, NULL, &hicon, 1);
   if (!hicon)
@@ -71,7 +71,7 @@ int CSystemPage::AddIcon(const UString &iconPath, int iconIndex)
   if (num != 1 || !hicon)
   #endif
     return -1;
-  
+
   _imageList.AddIcon(hicon);
   DestroyIcon(hicon);
   return _numIcons++;
@@ -98,7 +98,7 @@ void CSystemPage::ChangeState(unsigned group, const CUIntVector &indices)
 
   bool thereAreClearItems = false;
   unsigned counters[3] = { 0, 0, 0 };
-  
+
   unsigned i;
   for (i = 0; i < indices.Size(); i++)
   {
@@ -120,28 +120,28 @@ void CSystemPage::ChangeState(unsigned group, const CUIntVector &indices)
     state = kExtState_Other;
   else if (counters[kExtState_7Zip] != 0)
     state = kExtState_7Zip;
-  
+
   for (i = 0; i < indices.Size(); i++)
   {
     unsigned listIndex = indices[i];
     CAssoc &assoc = _items[GetRealIndex(listIndex)];
     CModifiedExtInfo &mi = assoc.Pair[group];
     bool change = false;
-    
+
     switch (state)
     {
       case kExtState_Clear: change = true; break;
       case kExtState_Other: change = mi.Other; break;
       default: change = !(mi.Other && thereAreClearItems); break;
     }
-    
+
     if (change)
     {
       mi.State = state;
       RefreshListItem(group, listIndex);
     }
   }
-  
+
   _needSave = true;
   Changed();
 }
@@ -190,7 +190,7 @@ bool CSystemPage::OnInit()
         res = GetUserNameW(s.GetBuf(size), &size);
         s.ReleaseBuf_CalcLen(MyMin((unsigned)size, kSize));
       }
-    
+
       if (!res)
     #endif
         s = "Current User";
@@ -250,7 +250,7 @@ bool CSystemPage::OnInit()
       _listView.SetSubItem(itemIndex, 1 + g, texts[g]);
     _items.Add(assoc);
   }
-  
+
   if (_listView.GetItemCount() > 0)
     _listView.SetItemState(0, LVIS_FOCUSED, LVIS_FOCUSED);
 
@@ -273,7 +273,7 @@ LONG CSystemPage::OnApply()
     return PSNRET_NOERROR;
 
   const UString command = GetProgramCommand();
-  
+
   LONG res = 0;
 
   FOR_VECTOR (listIndex, _extDB.Exts)
@@ -286,11 +286,11 @@ LONG CSystemPage::OnApply()
     {
       CModifiedExtInfo &mi = assoc.Pair[g];
       HKEY key = GetHKey(g);
-      
+
       if (mi.OldState != mi.State)
       {
         LONG res2 = 0;
-        
+
         if (mi.State == kExtState_7Zip)
         {
           UString title = extInfo.Ext;
@@ -301,18 +301,18 @@ LONG CSystemPage::OnApply()
         }
         else if (mi.State == kExtState_Clear)
           res2 = NRegistryAssoc::DeleteShellExtensionInfo(key, GetSystemString(extInfo.Ext));
-        
+
         if (res == 0)
           res = res2;
         if (res2 == 0)
           mi.OldState = mi.State;
-        
+
         mi.State = mi.OldState;
         RefreshListItem(g, listIndex);
       }
     }
   }
-  
+
   #ifndef UNDER_CE
   SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, NULL, NULL);
   #endif
@@ -320,10 +320,10 @@ LONG CSystemPage::OnApply()
   WasChanged = true;
 
   _needSave = false;
-  
+
   if (res != 0)
-    MessageBoxW(*this, NError::MyFormatMessage(res), L"7-Zip", MB_ICONERROR);
-  
+    MessageBoxW(*this, NError::MyFormatMessage(res), L"NanaZip", MB_ICONERROR);
+
   return PSNRET_NOERROR;
 }
 
@@ -386,14 +386,14 @@ bool CSystemPage::OnNotify(UINT controlID, LPNMHDR lParam)
         }
         break;
       }
-      
+
       case LVN_KEYDOWN:
       {
         if (OnListKeyDown(LPNMLVKEYDOWN(lParam)))
           return true;
         break;
       }
-      
+
       /*
       case NM_RCLICK:
       case NM_DBLCLK:
@@ -411,15 +411,15 @@ bool CSystemPage::OnNotify(UINT controlID, LPNMHDR lParam)
 void CSystemPage::ChangeState(unsigned group)
 {
   CUIntVector indices;
-  
+
   int itemIndex = -1;
   while ((itemIndex = _listView.GetNextSelectedItem(itemIndex)) != -1)
     indices.Add(itemIndex);
-  
+
   if (indices.IsEmpty())
     FOR_VECTOR (i, _items)
       indices.Add(i);
-  
+
   ChangeState(group, indices);
 }
 

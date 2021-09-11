@@ -13,7 +13,7 @@ using namespace NWindows;
 using namespace NFile;
 
 /*
-static LPCTSTR const kLMBasePath = TEXT("Software\\7-Zip\\FM");
+static LPCTSTR const kLMBasePath = TEXT("Software\\NanaZip\\FM");
 
 static LPCTSTR const kPluginsKeyName = TEXT("Plugins");
 static LPCTSTR const kPluginsOpenClassIDValue = TEXT("CLSID");
@@ -44,7 +44,7 @@ static bool ReadPluginInfo(CPluginInfo &pluginInfo, bool needCheckDll)
   GetPluginPropertyFunc getPluginProperty = (GetPluginPropertyFunc)lib.GetProc("GetPluginProperty");
   if (getPluginProperty == NULL)
     return false;
-  
+
   NCOM::CPropVariant prop;
   if (getPluginProperty(NPlugin::kName, &prop) != S_OK)
     return false;
@@ -52,7 +52,7 @@ static bool ReadPluginInfo(CPluginInfo &pluginInfo, bool needCheckDll)
     return false;
   pluginInfo.Name = prop.bstrVal;
   prop.Clear();
-  
+
   if (getPluginProperty(NPlugin::kClassID, &prop) != S_OK)
     return false;
   if (prop.vt == VT_EMPTY)
@@ -65,7 +65,7 @@ static bool ReadPluginInfo(CPluginInfo &pluginInfo, bool needCheckDll)
     pluginInfo.ClassID = *(const GUID *)(const void *)prop.bstrVal;
   }
   prop.Clear();
-  
+
   if (getPluginProperty(NPlugin::kOptionsClassID, &prop) != S_OK)
     return false;
   if (prop.vt == VT_EMPTY)
@@ -97,7 +97,7 @@ void ReadPluginInfoList(CObjectVector<CPluginInfo> &plugins)
   FString baseFolderPrefix = NDLL::GetModuleDirPrefix();
   {
     CPluginInfo pluginInfo;
-    pluginInfo.FilePath = baseFolderPrefix + FTEXT("7-zip.dll");
+    pluginInfo.FilePath = baseFolderPrefix + FTEXT("NanaZip.dll");
     if (::ReadPluginInfo(pluginInfo, false))
       plugins.Add(pluginInfo);
   }
@@ -129,7 +129,7 @@ void ReadFileFolderPluginInfoList(CObjectVector<CPluginInfo> &plugins)
     CPluginInfo p;
     // p.FilePath.Empty();
     p.Type = kPluginTypeFF;
-    p.Name = "7-Zip";
+    p.Name = "NanaZip";
     // p.ClassID = CLSID_CAgentArchiveHandler;
     p.ClassIDDefined = true;
     // p.OptionsClassID;

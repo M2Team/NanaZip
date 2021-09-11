@@ -7,7 +7,7 @@
 IDD_SYSTEM  DIALOG  0, 0, xs, ys  MY_PAGE_STYLE  MY_FONT
 CAPTION "System"
 BEGIN
-  LTEXT       "Associate 7-Zip with:", IDT_SYSTEM_ASSOCIATE, m, m, xc, 8
+  LTEXT       "Associate NanaZip with:", IDT_SYSTEM_ASSOCIATE, m, m, xc, 8
   PUSHBUTTON  "+", IDB_SYSTEM_CURRENT, 80, m + 12, 40, bys
   PUSHBUTTON  "+", IDB_SYSTEM_ALL,    166, m + 12, 40, bys
   CONTROL     "List1", IDL_SYSTEM_ASSOCIATE, "SysListView32",
@@ -28,7 +28,7 @@ END
 IDD_SYSTEM_2  DIALOG  0, 0, xs, ys  MY_PAGE_STYLE  MY_FONT
 CAPTION "System"
 BEGIN
-  LTEXT       "Associate 7-Zip with:", IDT_SYSTEM_ASSOCIATE, m, m, xc, 8
+  LTEXT       "Associate NanaZip with:", IDT_SYSTEM_ASSOCIATE, m, m, xc, 8
   PUSHBUTTON  "+", IDB_SYSTEM_CURRENT, 60, m + 12, 40, bys
   CONTROL     "List1", IDL_SYSTEM_ASSOCIATE, "SysListView32",
               LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,

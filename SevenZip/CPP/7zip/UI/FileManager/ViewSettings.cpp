@@ -3,7 +3,7 @@
 #include "StdAfx.h"
 
 #include "../../../../C/CpuArch.h"
- 
+
 #include "../../../Common/IntToString.h"
 #include "../../../Common/StringConvert.h"
 
@@ -15,7 +15,7 @@
 using namespace NWindows;
 using namespace NRegistry;
 
-#define REG_PATH_FM TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("7-Zip") TEXT(STRING_PATH_SEPARATOR) TEXT("FM")
+#define REG_PATH_FM TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("NanaZip") TEXT(STRING_PATH_SEPARATOR) TEXT("FM")
 
 static LPCTSTR const kCUBasePath = REG_PATH_FM;
 static LPCTSTR const kCulumnsKeyName = REG_PATH_FM TEXT(STRING_PATH_SEPARATOR) TEXT("Columns");

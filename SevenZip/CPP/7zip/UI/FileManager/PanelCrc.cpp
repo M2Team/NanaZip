@@ -61,7 +61,7 @@ DWORD CDirEnumerator::GetNextFile(NFind::CFileInfo &fi, bool &filled, FString &r
 {
   filled = false;
   resPath.Empty();
-  
+
   for (;;)
   {
     #if defined(_WIN32) && !defined(UNDER_CE)
@@ -94,12 +94,12 @@ DWORD CDirEnumerator::GetNextFile(NFind::CFileInfo &fi, bool &filled, FString &r
         resPath = path;
         return error;
       }
-    
+
       break;
     }
-    
+
     bool found;
-    
+
     if (Enumerators.Back().Next(fi, found))
     {
       if (found)
@@ -116,13 +116,13 @@ DWORD CDirEnumerator::GetNextFile(NFind::CFileInfo &fi, bool &filled, FString &r
       Prefixes.DeleteBack();
       return error;
     }
-    
+
     Enumerators.DeleteBack();
     Prefixes.DeleteBack();
   }
-  
+
   resPath += fi.Name;
-  
+
   if (EnterToDirs && fi.IsDir())
   {
     FString s = resPath;
@@ -130,7 +130,7 @@ DWORD CDirEnumerator::GetNextFile(NFind::CFileInfo &fi, bool &filled, FString &r
     Prefixes.Add(s);
     Enumerators.AddNew().SetDirPrefix(BasePrefix + s);
   }
-  
+
   filled = true;
   return S_OK;
 }
@@ -194,13 +194,13 @@ void CThreadCrc::SetStatus(const UString &s2)
 HRESULT CThreadCrc::ProcessVirt()
 {
   // Hash.Init();
-  
+
   CMyBuffer buf;
   if (!buf.Allocate(kBufSize))
     return E_OUTOFMEMORY;
 
   CProgressSync &sync = Sync;
-  
+
   SetStatus(LangString(IDS_SCANNING));
 
   Enumerator.Init();
@@ -255,7 +255,7 @@ HRESULT CThreadCrc::ProcessVirt()
   // SetStatus(LangString(IDS_CHECKSUM_CALCULATING));
   // sync.SetCurFilePath(L"");
   SetStatus(L"");
- 
+
   Enumerator.Init();
 
   FString tempPath;
@@ -273,7 +273,7 @@ HRESULT CThreadCrc::ProcessVirt()
     }
     if (!filled)
       break;
-    
+
     error = 0;
     Hash.InitForNewFile();
     if (!fi.IsDir())
@@ -359,7 +359,7 @@ HRESULT CApp::CalculateCrc2(const UString &methodName)
   #ifdef EXTERNAL_CODECS
 
   LoadGlobalCodecs();
-    
+
   #endif
 
   {
@@ -370,7 +370,7 @@ HRESULT CApp::CalculateCrc2(const UString &methodName)
       methods.Add(methodName);
       RINOK(t.Hash.SetMethods(EXTERNAL_CODECS_VARS_G methods));
     }
-    
+
     FOR_VECTOR (i, indices)
       t.Enumerator.FilePaths.Add(us2fs(srcPanel.GetItemRelPath(indices[i])));
 
@@ -390,16 +390,16 @@ HRESULT CApp::CalculateCrc2(const UString &methodName)
     t.Enumerator.BasePrefix_for_Open = us2fs(basePrefix2);
 
     t.Enumerator.EnterToDirs = !GetFlatMode();
-    
+
     t.ShowCompressionInfo = false;
-    
+
     UString title = LangString(IDS_CHECKSUM_CALCULATING);
-    
+
     t.MainWindow = _window;
-    t.MainTitle = "7-Zip"; // LangString(IDS_APP_TITLE);
+    t.MainTitle = "NanaZip"; // LangString(IDS_APP_TITLE);
     t.MainAddTitle = title;
     t.MainAddTitle.Add_Space();
-    
+
     RINOK(t.Create(title, _window));
 
     t.ShowFinalResults(_window);

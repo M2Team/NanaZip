@@ -20,13 +20,13 @@ using namespace NRegistry;
 #define k_Clsid_A "{23170F69-40C1-278A-1000-000100020000}"
 
 static LPCTSTR const k_Clsid = TEXT(k_Clsid_A);
-static LPCTSTR const k_ShellExtName = TEXT("7-Zip Shell Extension");
+static LPCTSTR const k_ShellExtName = TEXT("NanaZip Shell Extension");
 
 static LPCTSTR const k_Approved = TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved");
 static LPCTSTR const k_Inproc = TEXT("InprocServer32");
 
-static LPCSTR const k_KeyPostfix_ContextMenu = "\\shellex\\ContextMenuHandlers\\7-Zip";
-static LPCSTR const k_KeyPostfix_DragDrop    = "\\shellex\\DragDropHandlers\\7-Zip";
+static LPCSTR const k_KeyPostfix_ContextMenu = "\\shellex\\ContextMenuHandlers\\NanaZip";
+static LPCSTR const k_KeyPostfix_DragDrop    = "\\shellex\\DragDropHandlers\\NanaZip";
 
 static LPCSTR const k_KeyName_File      = "*";
 static LPCSTR const k_KeyName_Folder    = "Folder";
@@ -79,7 +79,7 @@ static LONG MyRegistry_DeleteKey(HKEY parentKey, LPCTSTR name, UInt32 wow)
 {
   if (wow == 0)
     return RegDeleteKey(parentKey, name);
-  
+
   /*
   #ifdef _WIN64
   return RegDeleteKeyExW
@@ -125,7 +125,7 @@ bool CheckContextMenuHandler(const UString &path, UInt32 wow)
   CSysString s ("CLSID\\");
   s += k_Clsid_A;
   s += "\\InprocServer32";
-  
+
   {
     NRegistry::CKey key;
     if (key.Open(HKEY_CLASSES_ROOT, s, KEY_READ | wow) != ERROR_SUCCESS)
@@ -136,7 +136,7 @@ bool CheckContextMenuHandler(const UString &path, UInt32 wow)
     if (!path.IsEqualTo_NoCase(regPath))
       return false;
   }
-  
+
   return
        CheckHandlerCommon(Get_ContextMenuHandler_KeyName(k_KeyName_File), wow);
   /*
@@ -184,7 +184,7 @@ LONG SetContextMenuHandler(bool setMode, const UString &path, UInt32 wow)
         }
       }
     }
-    
+
     {
       CKey key;
       if (MyCreateKey(key, HKEY_LOCAL_MACHINE, k_Approved, wow) == ERROR_SUCCESS)

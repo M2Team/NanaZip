@@ -610,7 +610,7 @@ SOURCE=.\UpdateCallback100.cpp
 SOURCE=.\UpdateCallback100.h
 # End Source File
 # End Group
-# Begin Group "7-Zip Common"
+# Begin Group "NanaZip Common"
 
 # PROP Default_Filter ""
 # Begin Source File

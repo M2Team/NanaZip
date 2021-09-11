@@ -97,7 +97,7 @@ enum Enum
   kHelp1 = 0,
   kHelp2,
   kHelp3,
-  
+
   kDisableHeaders,
   kDisablePercents,
   kShowTime,
@@ -118,7 +118,7 @@ enum Enum
   kProperty,
   kOutputDir,
   kWorkingDir,
-  
+
   kInclude,
   kExclude,
   kArInclude,
@@ -133,7 +133,7 @@ enum Enum
   kSfx,
   kEmail,
   kHash,
- 
+
   kStdIn,
   kStdOut,
 
@@ -141,7 +141,7 @@ enum Enum
   kListfileCharSet,
   kConsoleCharSet,
   kTechMode,
-  
+
   kPreserveATime,
   kShareForWrite,
   kStopAfterOpenError,
@@ -151,12 +151,12 @@ enum Enum
   kDisableWildcardParsing,
   kElimDup,
   kFullPathMode,
-  
+
   kHardLinks,
   kSymLinks_AllowDangerous,
   kSymLinks,
   kNtSecurity,
-  
+
   kAltStreams,
   kReplaceColonForAltStream,
   kWriteToAltStreamIfColon,
@@ -237,7 +237,7 @@ static const CSwitchForm kSwitchForms[] =
   { "?", SWFRM_SIMPLE },
   { "h", SWFRM_SIMPLE },
   { "-help", SWFRM_SIMPLE },
-  
+
   { "ba", SWFRM_SIMPLE },
   { "bd", SWFRM_SIMPLE },
   { "bt", SWFRM_SIMPLE },
@@ -246,15 +246,15 @@ static const CSwitchForm kSwitchForms[] =
   { "bso", NSwitchType::kChar, false, 1, k_Stream_PostCharSet },
   { "bse", NSwitchType::kChar, false, 1, k_Stream_PostCharSet },
   { "bsp", NSwitchType::kChar, false, 1, k_Stream_PostCharSet },
-  
+
   { "y", SWFRM_SIMPLE },
-  
+
   { "ad", SWFRM_SIMPLE },
   { "ao", NSwitchType::kChar, false, 1, kOverwritePostCharSet},
 
   { "t",  SWFRM_STRING_SINGL(1) },
   { "stx", SWFRM_STRING_MULT(1) },
-  
+
   { "m",  SWFRM_STRING_MULT(1) },
   { "o",  SWFRM_STRING_SINGL(1) },
   { "w",  SWFRM_STRING },
@@ -264,16 +264,16 @@ static const CSwitchForm kSwitchForms[] =
   { "ai", SWFRM_STRING_MULT(kSomeCludePostStringMinSize) },
   { "ax", SWFRM_STRING_MULT(kSomeCludePostStringMinSize) },
   { "an", SWFRM_SIMPLE },
-  
+
   { "u",  SWFRM_STRING_MULT(1) },
   { "v",  SWFRM_STRING_MULT(1) },
   { "r",  NSwitchType::kChar, false, 0, kRecursedPostCharSet },
-  
+
   { "stm", SWFRM_STRING },
   { "sfx", SWFRM_STRING },
   { "seml", SWFRM_STRING_SINGL(0) },
   { "scrc", SWFRM_STRING_MULT(0) },
-  
+
   { "si", SWFRM_STRING },
   { "so", SWFRM_SIMPLE },
 
@@ -287,22 +287,22 @@ static const CSwitchForm kSwitchForms[] =
   { "sse", SWFRM_SIMPLE },
   { "ssc", SWFRM_MINUS },
   { "sa",  NSwitchType::kChar, false, 1, k_ArcNameMode_PostCharSet },
-  
+
   { "spd", SWFRM_SIMPLE },
   { "spe", SWFRM_MINUS },
   { "spf", SWFRM_STRING_SINGL(0) },
-  
+
   { "snh", SWFRM_MINUS },
   { "snld", SWFRM_MINUS },
   { "snl", SWFRM_MINUS },
   { "sni", SWFRM_SIMPLE },
-  
+
   { "sns", SWFRM_MINUS },
   { "snr", SWFRM_SIMPLE },
   { "snc", SWFRM_SIMPLE },
-  
+
   { "snt", SWFRM_MINUS },
-  
+
   { "sdel", SWFRM_SIMPLE },
   { "stl", SWFRM_SIMPLE }
 
@@ -499,7 +499,7 @@ static void AddToCensorFromNonSwitchesStrings(
         );
 
   int oldIndex = -1;
-  
+
   if (stopSwitchIndex < 0)
     stopSwitchIndex = (int)nonSwitchStrings.Size();
 
@@ -525,7 +525,7 @@ static void AddToCensorFromNonSwitchesStrings(
     else
       AddNameToCensor(censor, s, true, type, wildcardMatching);
   }
-  
+
   if (oldIndex != -1)
   {
     throw CArcCmdLineException("There is no second file name for rename pair:", nonSwitchStrings[(unsigned)oldIndex]);
@@ -537,7 +537,7 @@ static void AddToCensorFromNonSwitchesStrings(
 struct CEventSetEnd
 {
   UString Name;
-  
+
   CEventSetEnd(const wchar_t *name): Name(name) {}
   ~CEventSetEnd()
   {
@@ -591,7 +591,7 @@ static const char *ParseMapWithPaths(
     wchar_t c = p[i];
     if (c == 0)
     {
-      // MessageBoxW(0, name, L"7-Zip", 0);
+      // MessageBoxW(0, name, L"NanaZip", 0);
       AddNameToCensor(censor, name, include, commonRecursedType, wildcardMatching);
       name.Empty();
     }
@@ -620,13 +620,13 @@ static void AddSwitchWildcardsToCensor(
     const UString &name = strings[i];
     NRecursedType::EEnum recursedType;
     unsigned pos = 0;
-    
+
     if (name.Len() < kSomeCludePostStringMinSize)
     {
       errorMessage = "Too short switch";
       break;
     }
-    
+
     if (::MyCharLower_Ascii(name[pos]) == kRecursedIDChar)
     {
       pos++;
@@ -640,15 +640,15 @@ static void AddSwitchWildcardsToCensor(
     }
     else
       recursedType = commonRecursedType;
-    
+
     if (name.Len() < pos + kSomeCludeAfterRecursedPostStringMinSize)
     {
       errorMessage = "Too short switch";
       break;
     }
-    
+
     const UString tail = name.Ptr(pos + 1);
-    
+
     if (name[pos] == kImmediateNameID)
       AddNameToCensor(censor, tail, include, recursedType, wildcardMatching);
     else if (name[pos] == kFileListID)
@@ -787,9 +787,9 @@ static void SetAddCommandOptions(
     default:
       defaultActionSet = NUpdateArchive::k_ActionSet_Update;
   }
-  
+
   options.UpdateArchiveItself = true;
-  
+
   options.Commands.Clear();
   CUpdateArchiveCommand updateMainCommand;
   updateMainCommand.ActionSet = defaultActionSet;
@@ -915,7 +915,7 @@ void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
   #if defined(_WIN32) && !defined(UNDER_CE)
   NSecurity::EnablePrivilege_SymLink();
   #endif
-  
+
   // options.LargePages = false;
 
   if (parser[NKey::kLargePages].ThereIs)
@@ -929,7 +929,7 @@ void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
       if (!StringToUInt32(s, slp))
         throw CArcCmdLineException("Unsupported switch postfix for -slp", s);
     }
-    
+
     #ifdef _7ZIP_LARGE_PAGES
     if (slp >
           #if defined(_WIN32) && !defined(UNDER_CE)
@@ -992,9 +992,9 @@ void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
           }
         }
       }
-      
+
       #else // _WIN32
-      
+
       {
         Parse1Log += a;
         NSystem::CProcessAffinity aff;
@@ -1015,7 +1015,7 @@ void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
               aff.CpuSet(cpu);
           }
         }
-        
+
         if (!aff.SetProcAffinity())
         {
           DWORD lastError = GetLastError();
@@ -1094,13 +1094,13 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
 
   if (parser[NKey::kHash].ThereIs)
     options.HashMethods = parser[NKey::kHash].PostStrings;
-  
+
   if (parser[NKey::kElimDup].ThereIs)
   {
     options.ExtractOptions.ElimDup.Def = true;
     options.ExtractOptions.ElimDup.Val = !parser[NKey::kElimDup].WithMinus;
   }
-  
+
   NWildcard::ECensorPathMode censorPathMode = NWildcard::k_RelatPath;
   bool fullPathMode = parser[NKey::kFullPathMode].ThereIs;
   if (fullPathMode)
@@ -1134,7 +1134,7 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   UInt32 codePage = (UInt32)FindCharset(parser, NKey::kListfileCharSet, false, CP_UTF8);
 
   bool thereAreSwitchIncludes = false;
-  
+
   if (parser[NKey::kInclude].ThereIs)
   {
     thereAreSwitchIncludes = true;
@@ -1145,7 +1145,7 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   if (parser[NKey::kExclude].ThereIs)
     AddSwitchWildcardsToCensor(options.Censor,
         parser[NKey::kExclude].PostStrings, false, recursedType, wildcardMatching, codePage);
- 
+
   unsigned curCommandIndex = kCommandIndex + 1;
   bool thereIsArchiveName = !parser[NKey::kNoArName].ThereIs &&
       options.Command.CommandType != NCommandType::kBenchmark &&
@@ -1206,11 +1206,11 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
 
   CBoolPair symLinks_AllowDangerous;
   SetBoolPair(parser, NKey::kSymLinks_AllowDangerous, symLinks_AllowDangerous);
-  
+
 
   /*
   bool supportSymLink = options.SymLinks.Val;
-  
+
   if (!options.SymLinks.Def)
   {
     if (isExtractOrList)
@@ -1253,7 +1253,7 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
       nt.ReplaceColonForAltStream = parser[NKey::kReplaceColonForAltStream].ThereIs;
       nt.WriteToAltStreamIfColon = parser[NKey::kWriteToAltStreamIfColon].ThereIs;
     }
-      
+
     options.Censor.AddPathsToCensor(NWildcard::k_AbsPath);
     options.Censor.ExtendExclude();
 
@@ -1281,7 +1281,7 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
 
     if (options.StdInMode)
       options.ArcName_for_StdInMode = parser[NKey::kStdIn].PostStrings.Front();
-    
+
     if (isExtractGroupCommand)
     {
       if (options.StdOutMode)
@@ -1303,7 +1303,7 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
            )
           throw CArcCmdLineException(kSameTerminalError);
       }
-      
+
       if (parser[NKey::kOutputDir].ThereIs)
       {
         eo.OutputDir = us2fs(parser[NKey::kOutputDir].PostStrings[0]);
@@ -1346,7 +1346,7 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
     CUpdateOptions &updateOptions = options.UpdateOptions;
 
     SetAddCommandOptions(options.Command.CommandType, parser, updateOptions);
-    
+
     updateOptions.MethodMode.Properties = options.Properties;
 
     if (parser[NKey::kPreserveATime].ThereIs)
@@ -1383,18 +1383,18 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
 
     if (updateOptions.StdOutMode && updateOptions.EMailMode)
       throw CArcCmdLineException("stdout mode and email mode cannot be combined");
-    
+
     if (updateOptions.StdOutMode)
     {
       if (options.IsStdOutTerminal)
         throw CArcCmdLineException(kTerminalOutError);
-      
+
       if (options.Number_for_Percents == k_OutStream_stdout
           || options.Number_for_Out == k_OutStream_stdout
           || options.Number_for_Errors == k_OutStream_stdout)
         throw CArcCmdLineException(kSameTerminalError);
     }
-    
+
     if (updateOptions.StdInMode)
       updateOptions.StdInFileName = parser[NKey::kStdIn].PostStrings.Front();
 

@@ -83,7 +83,7 @@ void CApp::SetListSettings()
     extendedStyle |= LVS_EX_FULLROWSELECT;
   if (st.ShowGrid)
     extendedStyle |= LVS_EX_GRIDLINES;
-  
+
   if (st.SingleClick)
   {
     extendedStyle |= LVS_EX_ONECLICKACTIVATE | LVS_EX_TRACKSELECT;
@@ -121,9 +121,9 @@ HRESULT CApp::CreateOnePanel(int panelIndex, const UString &mainPath, const UStr
 {
   if (Panels[panelIndex].PanelCreated)
     return S_OK;
-  
+
   m_PanelCallbackImp[panelIndex].Init(this, panelIndex);
-  
+
   UString path;
   if (mainPath.IsEmpty())
   {
@@ -132,7 +132,7 @@ HRESULT CApp::CreateOnePanel(int panelIndex, const UString &mainPath, const UStr
   }
   else
     path = mainPath;
-  
+
   int id = 1000 + 100 * panelIndex;
 
   return Panels[panelIndex].Create(_window, _window,
@@ -291,7 +291,7 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
   #endif
 
   MyLoadMenu();
-  
+
   #ifdef UNDER_CE
   _commandBar.AutoSize();
   #endif
@@ -304,7 +304,7 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
     Panels[i].PanelCreated = false;
 
   AppState.Read();
-  
+
   SetListSettings();
 
   if (LastFocusedPanel >= kNumPanelsMax)
@@ -313,7 +313,7 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
 
   CListMode listMode;
   listMode.Read();
-  
+
   for (i = 0; i < kNumPanelsMax; i++)
   {
     CPanel &panel = Panels[i];
@@ -321,7 +321,7 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
     panel._xSize = xSizes[i];
     panel._flatModeForArc = ReadFlatView(i);
   }
-  
+
   for (i = 0; i < kNumPanelsMax; i++)
   {
     unsigned panelIndex = i;
@@ -334,16 +334,16 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
     {
       if (NumPanels == 1)
         Panels[panelIndex]._xSize = xSizes[0] + xSizes[1];
-      
+
       COpenResult openRes2;
       UString path;
       if (isMainPanel)
         path = mainPath;
-      
+
       RINOK(CreateOnePanel(panelIndex, path, arcFormat,
           isMainPanel && needOpenArc,
           *(isMainPanel ? &openRes : &openRes2)));
-      
+
       if (isMainPanel)
       {
         if (needOpenArc && !openRes.ArchiveIsOpened)
@@ -351,7 +351,7 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
       }
     }
   }
-  
+
   SetFocusedPanel(LastFocusedPanel);
   Panels[LastFocusedPanel].SetFocusToList();
   return S_OK;
@@ -384,7 +384,7 @@ void CApp::Save()
 {
   AppState.Save();
   CListMode listMode;
-  
+
   for (unsigned i = 0; i < kNumPanelsMax; i++)
   {
     const CPanel &panel = Panels[i];
@@ -398,7 +398,7 @@ void CApp::Save()
     listMode.Panels[i] = panel.GetListViewMode();
     SaveFlatView(i, panel._flatModeForArc);
   }
-  
+
   listMode.Save();
   // Save_ShowDeleted(ShowDeletedFiles);
 }
@@ -497,7 +497,7 @@ UString CPanel::GetItemsInfoString(const CRecordVector<UInt32> &indices)
   UString info;
   UInt64 numDirs, numFiles, filesSize, foldersSize;
   numDirs = numFiles = filesSize = foldersSize = 0;
-  
+
   unsigned i;
   for (i = 0; i < indices.Size(); i++)
   {
@@ -520,10 +520,10 @@ UString CPanel::GetItemsInfoString(const CRecordVector<UInt32> &indices)
   numDefined += ((filesSize != (UInt64)(Int64)-1) && filesSize != 0) ? 1: 0;
   if (numDefined == 2)
     AddValuePair1(info, IDS_PROP_SIZE, filesSize + foldersSize);
-  
+
   info.Add_LF();
   info += _currentFolderPrefix;
-  
+
   for (i = 0; i < indices.Size() && (int)i < (int)kCopyDialog_NumInfoLines - 6; i++)
   {
     info.Add_LF();
@@ -603,10 +603,10 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
         Reduce_Path_To_RealFileSystemPath(destPath);
     }
   }
-  
+
   UStringVector copyFolders;
   ReadCopyHistory(copyFolders);
-  
+
   bool useFullItemPaths = srcPanel.Is_IO_FS_Folder(); // maybe we need flat also here ??
 
   {
@@ -760,7 +760,7 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
     srcPanel.MessageBox_Error_UnsupportOperation();
     return;
   }
-  
+
   CTempDir tempDirectory;
   FString tempDirPrefix;
   if (useTemp)
@@ -779,7 +779,7 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
   CPanel::CDisableNotify disableNotify2(srcPanel);
 
   HRESULT result = S_OK;
-  
+
   if (useSrcPanel)
   {
     CCopyToOptions options;
@@ -791,19 +791,19 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
 
     result = srcPanel.CopyTo(options, indices, NULL);
   }
-  
+
   if (result == S_OK && useDestPanel)
   {
     UStringVector filePaths;
     UString folderPrefix;
-    
+
     if (useTemp)
       folderPrefix = fs2us(tempDirPrefix);
     else
       folderPrefix = srcPanel.GetFsPath();
-    
+
     filePaths.ClearAndReserve(indices.Size());
-    
+
     FOR_VECTOR (i, indices)
     {
       UInt32 index = indices[i];
@@ -814,10 +814,10 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
         s = srcPanel.GetItemName_for_Copy(index);
       filePaths.AddInReserved(s);
     }
-    
+
     result = destPanel.CopyFrom(move, folderPrefix, filePaths, true, 0);
   }
-  
+
   if (result != S_OK)
   {
     // disableNotify1.Restore();
@@ -832,12 +832,12 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
   }
 
   RefreshTitleAlways();
-  
+
   if (copyToSame || move)
   {
     srcPanel.RefreshListCtrl(srcSelState);
   }
-  
+
   if (!copyToSame)
   {
     destPanel.RefreshListCtrl(destSelState);
@@ -958,7 +958,7 @@ void CApp::RefreshTitle(bool always)
 {
   UString path = GetFocusedPanel()._currentFolderPrefix;
   if (path.IsEmpty())
-    path = "7-Zip"; // LangString(IDS_APP_TITLE);
+    path = "NanaZip"; // LangString(IDS_APP_TITLE);
   if (!always && path == PrevTitle)
     return;
   PrevTitle = path;

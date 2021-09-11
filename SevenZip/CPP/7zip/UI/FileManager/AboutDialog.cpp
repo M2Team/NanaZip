@@ -19,7 +19,7 @@ static const UInt32 kLangIDs[] =
   IDT_ABOUT_INFO
 };
 
-#define kHomePageURL TEXT("https://www.7-zip.org/")
+#define kHomePageURL TEXT("https://github.com/M2Team/NanaZip")
 #define kHelpTopic "start.htm"
 
 #define LLL_(quote) L##quote
@@ -35,14 +35,14 @@ bool CAboutDialog::OnInit()
     UString s;
     g_CodecsObj->GetCodecsErrorMessage(s);
     if (!s.IsEmpty())
-      MessageBoxW(GetParent(), s, L"7-Zip", MB_ICONERROR);
+      MessageBoxW(GetParent(), s, L"NanaZip", MB_ICONERROR);
   }
   #endif
 
   LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
-  SetItemText(IDT_ABOUT_VERSION, UString("7-Zip " MY_VERSION_CPU));
+  SetItemText(IDT_ABOUT_VERSION, UString("NanaZip " MY_VERSION_CPU));
   SetItemText(IDT_ABOUT_DATE, LLL(MY_DATE));
-  
+
   LangSetWindowText(*this, IDD_ABOUT);
   NormalizePosition();
   return CModalDialog::OnInit();

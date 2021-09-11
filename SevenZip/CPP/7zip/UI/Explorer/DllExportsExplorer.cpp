@@ -25,7 +25,7 @@
 
 #include "ContextMenu.h"
 
-static LPCTSTR const k_ShellExtName = TEXT("7-Zip Shell Extension");
+static LPCTSTR const k_ShellExtName = TEXT("NanaZip Shell Extension");
 static LPCTSTR const k_Approved = TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved");
 
 // {23170F69-40C1-278A-1000-000100020000}
@@ -63,7 +63,7 @@ public:
   ~CShellExtClassFactory() { InterlockedDecrement(&g_DllRefCount); }
 
   MY_UNKNOWN_IMP1_MT(IClassFactory)
-  
+
   STDMETHODIMP CreateInstance(LPUNKNOWN, REFIID, void**);
   STDMETHODIMP LockServer(BOOL);
 };
@@ -75,7 +75,7 @@ STDMETHODIMP CShellExtClassFactory::CreateInstance(LPUNKNOWN pUnkOuter,
   *ppvObj = NULL;
   if (pUnkOuter)
     return CLASS_E_NOAGGREGATION;
-  
+
   CZipContextMenu *shellExt;
   try
   {
@@ -84,7 +84,7 @@ STDMETHODIMP CShellExtClassFactory::CreateInstance(LPUNKNOWN pUnkOuter,
   catch(...) { return E_OUTOFMEMORY; }
   if (!shellExt)
     return E_OUTOFMEMORY;
-  
+
   HRESULT res = shellExt->QueryInterface(riid, ppvObj);
   if (res != S_OK)
     delete shellExt;
@@ -172,10 +172,10 @@ static BOOL RegisterServer()
   if (!NDLL::MyGetModuleFileName(modulePath))
     return FALSE;
   const UString modulePathU = fs2us(modulePath);
-  
+
   CSysString s ("CLSID\\");
   s += k_Clsid;
-  
+
   {
     NRegistry::CKey key;
     if (key.Create(HKEY_CLASSES_ROOT, s, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE) != NOERROR)
@@ -187,7 +187,7 @@ static BOOL RegisterServer()
     keyInproc.SetValue(NULL, modulePathU);
     keyInproc.SetValue(TEXT("ThreadingModel"), TEXT("Apartment"));
   }
- 
+
   #if !defined(_WIN64) && !defined(UNDER_CE)
   if (IsItWindowsNT())
   #endif
@@ -196,7 +196,7 @@ static BOOL RegisterServer()
     if (key.Create(HKEY_LOCAL_MACHINE, k_Approved, NULL, REG_OPTION_NON_VOLATILE, KEY_WRITE) == NOERROR)
       key.SetValue(k_Clsid, k_ShellExtName);
   }
-  
+
   return TRUE;
 }
 

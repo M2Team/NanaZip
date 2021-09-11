@@ -199,7 +199,7 @@ static BOOL InitInstance(int nCmdShow)
 
   // LoadString(hInstance, IDS_CLASS, windowClass, MAX_LOADSTRING);
 
-  UString title ("7-Zip"); // LangString(IDS_APP_TITLE, 0x03000000);
+  UString title ("NanaZip"); // LangString(IDS_APP_TITLE, 0x03000000);
 
   /*
   //If it is already running, then focus on the window
@@ -243,7 +243,7 @@ static BOOL InitInstance(int nCmdShow)
 
   DWORD style = WS_OVERLAPPEDWINDOW;
   // DWORD style = 0;
-  
+
   CWindowInfo info;
   info.maximized = false;
   int x, y, xSize, ySize;
@@ -255,7 +255,7 @@ static BOOL InitInstance(int nCmdShow)
   {
     x = info.rect.left;
     y = info.rect.top;
-    
+
     xSize = RECT_SIZE_X(info.rect);
     ySize = RECT_SIZE_Y(info.rect);
   }
@@ -444,7 +444,7 @@ static const CSwitchForm kSwitchForms[kNumSwitches] =
 
 static void ErrorMessage(const wchar_t *s)
 {
-  MessageBoxW(0, s, L"7-Zip", MB_ICONERROR);
+  MessageBoxW(0, s, L"NanaZip", MB_ICONERROR);
 }
 
 static void ErrorMessage(const char *s)
@@ -730,22 +730,22 @@ static void SaveWindowInfo(HWND aWnd)
   CWindowInfo info;
 
   #ifdef UNDER_CE
-  
+
   if (!::GetWindowRect(aWnd, &info.rect))
     return;
   info.maximized = g_Maximized;
-  
+
   #else
-  
+
   WINDOWPLACEMENT placement;
   placement.length = sizeof(placement);
   if (!::GetWindowPlacement(aWnd, &placement))
     return;
   info.rect = placement.rcNormalPosition;
   info.maximized = BOOLToBool(::IsZoomed(aWnd));
-  
+
   #endif
-  
+
   info.numPanels = g_App.NumPanels;
   info.currentPanel = g_App.LastFocusedPanel;
   info.splitterPos = g_Splitter.GetPos();
@@ -809,7 +809,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
       icex.dwICC  = ICC_BAR_CLASSES;
       InitCommonControlsEx(&icex);
-      
+
       // Toolbar buttons used to create the first 4 buttons.
       TBBUTTON tbb [ ] =
       {
@@ -818,7 +818,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
           // {0, 0, TBSTATE_ENABLED, BTNS_SEP, 0L, 0},
         {VIEW_NEWFOLDER, ID_FILE_CREATEFOLDER, TBSTATE_ENABLED, BTNS_BUTTON, 0L, 0},
       };
-      
+
       int baseID = 100;
       NWindows::NControl::CToolBar aToolBar;
       aToolBar.Attach(::CreateToolbarEx (hWnd,
@@ -849,7 +849,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         xSizes[1] = 0;
 
       g_App.CreateDragTarget();
-      
+
       COpenResult openRes;
       bool needOpenArc = false;
 
@@ -865,14 +865,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         if (NFile::NFind::DoesFileExist_FollowLink(us2fs(fullPath)))
           needOpenArc = true;
       }
-      
+
       HRESULT res = g_App.Create(hWnd, fullPath, g_ArcFormat, xSizes,
           needOpenArc,
           openRes);
 
       if (res == E_ABORT)
         return -1;
-      
+
       if ((needOpenArc && !openRes.ArchiveIsOpened) || res != S_OK)
       {
         UString m ("Error");
@@ -895,7 +895,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       }
 
       g_WindowWasCreated = true;
-      
+
       // g_SplitterPos = 0;
 
       // ::DragAcceptFiles(hWnd, TRUE);
@@ -912,9 +912,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
       if (g_WindowWasCreated)
         g_App.Save();
-    
+
       g_App.Release();
-      
+
       if (g_WindowWasCreated)
         SaveWindowInfo(hWnd);
 
@@ -922,21 +922,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       PostQuitMessage(0);
       break;
     }
-    
+
     // case WM_MOVE: break;
-    
+
     case WM_LBUTTONDOWN:
       g_StartCaptureMousePos = LOWORD(lParam);
       g_StartCaptureSplitterPos = g_Splitter.GetPos();
       ::SetCapture(hWnd);
       break;
-    
+
     case WM_LBUTTONUP:
     {
       ::ReleaseCapture();
       break;
     }
-    
+
     case WM_MOUSEMOVE:
     {
       if ((wParam & MK_LBUTTON) != 0 && ::GetCapture() == hWnd)
@@ -957,7 +957,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         g_Splitter.SetPos(hWnd, g_SplitterPos );
         g_CanChangeSplitter = true;
       }
-      
+
       g_Maximized = (wParam == SIZE_MAXIMIZED) || (wParam == SIZE_MAXSHOW);
 
       g_App.MoveSubWindows();
@@ -973,12 +973,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       return 0;
       // break;
     }
-    
+
     case WM_SETFOCUS:
       // g_App.SetFocus(g_App.LastFocusedPanel);
       g_App.SetFocusToLastItem();
       break;
-    
+
     /*
     case WM_ACTIVATE:
     {
@@ -995,24 +995,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       break;
     }
     */
-    
+
     /*
     case kLangWasChangedMessage:
       MyLoadMenu();
       return 0;
     */
-      
+
     /*
     case WM_SETTINGCHANGE:
       break;
     */
-    
+
     case WM_NOTIFY:
     {
       g_App.OnNotify((int)wParam, (LPNMHDR)lParam);
       break;
     }
-    
+
     /*
     case WM_DROPFILES:
     {
@@ -1072,9 +1072,9 @@ void CApp::MoveSubWindows()
     #endif
     headerSize += Window_GetRealHeight(_toolBar);
   }
-  
+
   int ySize = MyMax((int)(rect.bottom - headerSize), 0);
-  
+
   if (NumPanels > 1)
   {
     Panels[0].Move(0, headerSize, g_Splitter.GetPos(), ySize);

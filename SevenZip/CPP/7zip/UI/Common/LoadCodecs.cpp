@@ -10,7 +10,7 @@ EXTERNAL_CODECS
     - "Codecs"  subdir
   The order of check:
     1) directory of client executable
-    2) WIN32: directory for REGISTRY item [HKEY_*\Software\7-Zip\Path**]
+    2) WIN32: directory for REGISTRY item [HKEY_*\Software\NanaZip\Path**]
        The order for HKEY_* : Path** :
          - HKEY_CURRENT_USER  : PathXX
          - HKEY_LOCAL_MACHINE : PathXX
@@ -24,7 +24,7 @@ EXPORT_CODECS
 -------------
   if (EXTERNAL_CODECS) is defined, then the code exports internal
   codecs of client from CCodecs object to external plugins.
-  7-Zip doesn't use that feature. 7-Zip uses the scheme:
+  NanaZip doesn't use that feature. NanaZip uses the scheme:
     - client application without internal plugins.
     - 7z.dll module contains all (or almost all) plugins.
       7z.dll can use codecs from another plugins, if required.
@@ -93,7 +93,7 @@ static CFSTR const kMainDll =
 
 #ifdef _WIN32
 
-static LPCTSTR const kRegistryPath = TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("7-zip");
+static LPCTSTR const kRegistryPath = TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("NanaZip");
 static LPCWSTR const kProgramPathValue = L"Path";
 static LPCWSTR const kProgramPath2Value = L"Path"
   #ifdef _WIN64
@@ -215,7 +215,7 @@ static bool ParseSignatures(const Byte *data, unsigned size, CObjectVector<CByte
 static FString GetBaseFolderPrefixFromRegistry()
 {
   FString moduleFolderPrefix = NDLL::GetModuleDirPrefix();
-  
+
   #ifdef _WIN32
   if (   !NFind::DoesFileOrDirExist(moduleFolderPrefix + kMainDll)
       && !NFind::DoesFileOrDirExist(moduleFolderPrefix + kCodecsFolderName)
@@ -228,7 +228,7 @@ static FString GetBaseFolderPrefixFromRegistry()
     if (ReadPathFromRegistry(HKEY_LOCAL_MACHINE, kProgramPathValue,  path)) return path;
   }
   #endif
-  
+
   // printf("\nmoduleFolderPrefix = %s\n", (const char *)GetAnsiString(moduleFolderPrefix));
   return moduleFolderPrefix;
 }
@@ -300,7 +300,7 @@ HRESULT CCodecs::LoadCodecs()
       }
     }
   }
-  
+
   return S_OK;
 }
 
@@ -391,13 +391,13 @@ static const UInt32 kArcFlagsPars[] =
 HRESULT CCodecs::LoadFormats()
 {
   const NDLL::CLibrary &lib = Libs.Back().Lib;
-  
+
   Func_GetHandlerProperty getProp = NULL;
   Func_GetHandlerProperty2 getProp2;
   MY_GET_FUNC (getProp2, Func_GetHandlerProperty2, lib.GetProc("GetHandlerProperty2"));
   Func_GetIsArc getIsArc;
   MY_GET_FUNC (getIsArc, Func_GetIsArc, lib.GetProc("GetIsArc"));
-  
+
   UInt32 numFormats = 1;
 
   if (getProp2)
@@ -415,7 +415,7 @@ HRESULT CCodecs::LoadFormats()
     if (!getProp)
       return S_OK;
   }
-  
+
   for (UInt32 i = 0; i < numFormats; i++)
   {
     CArcInfoEx item;
@@ -456,7 +456,7 @@ HRESULT CCodecs::LoadFormats()
           item.Flags |= kArcFlagsPars[j + 1];
       }
     }
-    
+
     CByteBuffer sig;
     RINOK(GetProp_RawData(getProp, getProp2, i, NArchive::NHandlerPropID::kSignature, sig));
     if (sig.Size() != 0)
@@ -469,7 +469,7 @@ HRESULT CCodecs::LoadFormats()
 
     bool signatureOffset_Defined;
     RINOK(GetProp_UInt32(getProp, getProp2, i, NArchive::NHandlerPropID::kSignatureOffset, item.SignatureOffset, signatureOffset_Defined));
-    
+
     // bool version_Defined;
     // RINOK(GetProp_UInt32(getProp, getProp2, i, NArchive::NHandlerPropID::kVersion, item.Version, version_Defined));
 
@@ -529,13 +529,13 @@ HRESULT CCodecs::LoadDll(const FString &dllPath, bool needCheckDll, bool *loaded
   #else
   UNUSED_VAR(needCheckDll)
   #endif
-  
+
   Libs.AddNew();
   CCodecLib &lib = Libs.Back();
   lib.Path = dllPath;
   bool used = false;
   // HRESULT res = S_OK;
-  
+
   if (lib.Lib.Load(dllPath))
   {
     if (loadedOK)
@@ -599,13 +599,13 @@ HRESULT CCodecs::LoadDll(const FString &dllPath, bool needCheckDll, bool *loaded
         error.ErrorCode = res;
       }
     }
-    // plugins can use non-7-zip dlls, so we silently ignore non7zip DLLs
+    // plugins can use non-NanaZip dlls, so we silently ignore non7zip DLLs
     /*
     if (!used)
     {
       CCodecError &error = Errors.AddNew();
       error.Path = dllPath;
-      error.Message = "no 7-Zip code";
+      error.Message = "no NanaZip code";
     }
     */
   }
@@ -613,7 +613,7 @@ HRESULT CCodecs::LoadDll(const FString &dllPath, bool needCheckDll, bool *loaded
   {
     AddLastError(dllPath);
   }
-  
+
   if (!used)
     Libs.DeleteBack();
 
@@ -661,17 +661,17 @@ void CCodecs::CloseLibs()
   WIN32: FreeLibrary() (CLibrary::Free()) function doesn't work as expected,
   if it's called from another FreeLibrary() call.
   So we need to call FreeLibrary() before global destructors.
-  
+
   Also we free global links from DLLs to object of this module before CLibrary::Free() call.
   */
-  
+
   FOR_VECTOR(i, Libs)
   {
     const CCodecLib &lib = Libs[i];
     if (lib.SetCodecs)
       lib.SetCodecs(NULL);
   }
-  
+
   // OutputDebugStringA("~CloseLibs after SetCodecs");
   Libs.Clear();
   // OutputDebugStringA("~CloseLibs end");
@@ -687,24 +687,24 @@ HRESULT CCodecs::Load()
   #endif
 
   Formats.Clear();
-  
+
   #ifdef EXTERNAL_CODECS
     Errors.Clear();
     MainDll_ErrorPath.Empty();
     Codecs.Clear();
     Hashers.Clear();
   #endif
-  
+
   for (UInt32 i = 0; i < g_NumArcs; i++)
   {
     const CArcInfo &arc = *g_Arcs[i];
     CArcInfoEx item;
-    
+
     item.Name = arc.Name;
     item.CreateInArchive = arc.CreateInArchive;
     item.IsArcFunc = arc.IsArc;
     item.Flags = arc.Flags;
-  
+
     {
       UString e, ae;
       if (arc.Ext)
@@ -721,17 +721,17 @@ HRESULT CCodecs::Load()
     item.SignatureOffset = arc.SignatureOffset;
     // item.Version = MY_VER_MIX;
     item.NewInterface = true;
-    
+
     if (arc.IsMultiSignature())
       ParseSignatures(arc.Signature, arc.SignatureSize, item.Signatures);
     else
       item.Signatures.AddNew().CopyFrom(arc.Signature, arc.SignatureSize);
-    
+
     #endif
 
     Formats.Add(item);
   }
-  
+
   // printf("\nLoad codecs \n");
 
   #ifdef EXTERNAL_CODECS
@@ -746,7 +746,7 @@ HRESULT CCodecs::Load()
     RINOK(LoadDllsFromFolder(baseFolder + kFormatsFolderName));
 
   NeedSetLibCodecs = true;
-    
+
   if (Libs.Size() == 0)
     NeedSetLibCodecs = false;
   else if (Libs.Size() == 1)
@@ -965,7 +965,7 @@ STDMETHODIMP CCodecs::CreateDecoder(UInt32 index, const GUID *iid, void **coder)
   if (index < g_NumCodecs)
     return CreateDecoder(index, iid, coder);
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   const CDllCodecInfo &ci = Codecs[index - NUM_EXPORT_CODECS];
   if (ci.DecoderIsAssigned)
@@ -1050,7 +1050,7 @@ int CCodecs::GetCodec_LibIndex(UInt32 index) const
   if (index < g_NumCodecs)
     return -1;
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   const CDllCodecInfo &ci = Codecs[index - NUM_EXPORT_CODECS];
   return (int)ci.LibIndex;
@@ -1065,7 +1065,7 @@ int CCodecs::GetHasherLibIndex(UInt32 index)
   if (index < g_NumHashers)
     return -1;
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   const CDllHasherInfo &ci = Hashers[index - NUM_EXPORT_HASHERS];
   return (int)ci.LibIndex;
@@ -1088,7 +1088,7 @@ bool CCodecs::GetCodec_DecoderIsAssigned(UInt32 index) const
     return false;
   }
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   return Codecs[index - NUM_EXPORT_CODECS].DecoderIsAssigned;
   #else
@@ -1110,7 +1110,7 @@ bool CCodecs::GetCodec_EncoderIsAssigned(UInt32 index) const
     return false;
   }
   #endif
-  
+
   #ifdef EXTERNAL_CODECS
   return Codecs[index - NUM_EXPORT_CODECS].EncoderIsAssigned;
   #else

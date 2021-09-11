@@ -73,7 +73,7 @@ bool g_LVN_ITEMACTIVATE_Support = true;
 
 static void ErrorMessage(LPCWSTR message)
 {
-  MessageBoxW(NULL, message, L"7-Zip", MB_ICONERROR | MB_OK);
+  MessageBoxW(NULL, message, L"NanaZip", MB_ICONERROR | MB_OK);
 }
 
 static void ErrorMessage(const char *s)
@@ -86,7 +86,7 @@ static void ErrorLangMessage(UINT resourceID)
   ErrorMessage(LangString(resourceID));
 }
 
-static const char * const kNoFormats = "7-Zip cannot find the code that works with archives.";
+static const char * const kNoFormats = "NanaZip cannot find the code that works with archives.";
 
 static int ShowMemErrorMessage()
 {
@@ -119,7 +119,7 @@ static int Main2()
   #endif
   if (commandStrings.Size() == 0)
   {
-    MessageBoxW(0, L"Specify command", L"7-Zip", 0);
+    MessageBoxW(0, L"Specify command", L"NanaZip", 0);
     return 0;
   }
 
@@ -140,29 +140,29 @@ static int Main2()
     UString s;
     codecs->GetCodecsErrorMessage(s);
     if (!s.IsEmpty())
-      MessageBoxW(0, s, L"7-Zip", MB_ICONERROR);
+      MessageBoxW(0, s, L"NanaZip", MB_ICONERROR);
   }
   #endif
 
- 
+
   bool isExtractGroupCommand = options.Command.IsFromExtractGroup();
-  
+
   if (codecs->Formats.Size() == 0 &&
         (isExtractGroupCommand
-        
+
         || options.Command.IsFromUpdateGroup()))
   {
     #ifdef EXTERNAL_CODECS
     if (!codecs->MainDll_ErrorPath.IsEmpty())
     {
-      UString s ("7-Zip cannot load module: ");
+      UString s ("NanaZip cannot load module: ");
       s += fs2us(codecs->MainDll_ErrorPath);
       throw s;
     }
     #endif
     throw kNoFormats;
   }
-  
+
   CObjectVector<COpenType> formatIndices;
   if (!ParseOpenTypes(*codecs, options.ArcType, formatIndices))
   {
@@ -190,7 +190,7 @@ static int Main2()
       || options.Command.CommandType == NCommandType::kBenchmark)
     ThrowException_if_Error(__externalCodecs.Load());
   #endif
-  
+
   if (options.Command.CommandType == NCommandType::kBenchmark)
   {
     HRESULT res = Benchmark(
@@ -239,7 +239,7 @@ static int Main2()
     #ifndef _SFX
     CHashBundle hb;
     CHashBundle *hb_ptr = NULL;
-    
+
     if (!options.HashMethods.IsEmpty())
     {
       hb_ptr = &hb;
@@ -377,7 +377,7 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   /* lpCmdLine */, int /* nCmdShow */)
 {
   g_hInstance = hInstance;
-  
+
   #ifdef _WIN32
   NT_CHECK
   #endif

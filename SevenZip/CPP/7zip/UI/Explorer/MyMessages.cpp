@@ -13,7 +13,7 @@ using namespace NWindows;
 
 void ShowErrorMessage(HWND window, LPCWSTR message)
 {
-  ::MessageBoxW(window, message, L"7-Zip", MB_OK | MB_ICONSTOP);
+  ::MessageBoxW(window, message, L"NanaZip", MB_OK | MB_ICONSTOP);
 }
 
 void ShowErrorMessageHwndRes(HWND window, UINT resID)

@@ -53,7 +53,7 @@ UString GetQuotedString(const UString &s)
 
 static void ErrorMessage(LPCWSTR message)
 {
-  MessageBoxW(g_HWND, message, L"7-Zip", MB_ICONERROR | MB_OK);
+  MessageBoxW(g_HWND, message, L"NanaZip", MB_ICONERROR | MB_OK);
 }
 
 static void ErrorMessageHRESULT(HRESULT res, LPCWSTR s = NULL)
@@ -124,7 +124,7 @@ static HRESULT CreateMap(const UStringVector &names,
       totalSize += (names[i].Len() + 1);
   }
   totalSize *= sizeof(wchar_t);
-  
+
   CRandNameGenerator random;
 
   UString mappingName;
@@ -138,7 +138,7 @@ static HRESULT CreateMap(const UStringVector &names,
       return HRESULT_FROM_WIN32(wres);
     fileMapping.Close();
   }
-  
+
   UString eventName;
   for (;;)
   {
@@ -157,7 +157,7 @@ static HRESULT CreateMap(const UStringVector &names,
   char temp[32];
   ConvertUInt64ToString(totalSize, temp);
   params += temp;
-  
+
   params += ':';
   params += eventName;
 
@@ -189,7 +189,7 @@ HRESULT CompressFiles(
 {
   MY_TRY_BEGIN
   UString params ('a');
-  
+
   CFileMapping fileMapping;
   NSynchronization::CManualResetEvent event;
   params += kIncludeSwitch;
@@ -219,7 +219,7 @@ HRESULT CompressFiles(
 
   params += kStopSwitchParsing;
   params.Add_Space();
-  
+
   if (!arcName.IsEmpty())
   {
     params += GetQuotedString(
@@ -228,7 +228,7 @@ HRESULT CompressFiles(
     // #endif
     arcName);
   }
-  
+
   return Call7zGui(params,
       // (arcPathPrefix.IsEmpty()? 0: (LPCWSTR)arcPathPrefix),
       waitFinish, &event);

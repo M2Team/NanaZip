@@ -41,7 +41,7 @@ struct CThreadArchiveOpen
     }
     catch(...) { Result = E_FAIL; }
   }
-  
+
   static THREAD_FUNC_DECL MyThreadFunction(void *param)
   {
     ((CThreadArchiveOpen *)param)->Process();
@@ -103,7 +103,7 @@ static void GetFolderLevels(CMyComPtr<IFolderFolder> &folder, CArcLevelsInfo &le
 
   CMyComPtr<IGetFolderArcProps> getFolderArcProps;
   folder.QueryInterface(IID_IGetFolderArcProps, &getFolderArcProps);
-  
+
   if (!getFolderArcProps)
     return;
   CMyComPtr<IFolderArcProps> arcProps;
@@ -114,13 +114,13 @@ static void GetFolderLevels(CMyComPtr<IFolderFolder> &folder, CArcLevelsInfo &le
   UInt32 numLevels;
   if (arcProps->GetArcNumLevels(&numLevels) != S_OK)
     numLevels = 0;
-  
+
   for (UInt32 level = 0; level <= numLevels; level++)
   {
     const PROPID propIDs[] = { kpidError, kpidPath, kpidType, kpidErrorType };
 
     CArcLevelInfo lev;
-    
+
     for (Int32 i = 0; i < 4; i++)
     {
       CMyComBSTR name;
@@ -154,7 +154,7 @@ static void GetFolderLevels(CMyComPtr<IFolderFolder> &folder, CArcLevelsInfo &le
     levels.Levels.Add(lev);
   }
 }
-    
+
 static UString GetBracedType(const wchar_t *type)
 {
   UString s ('[');
@@ -176,7 +176,7 @@ static void GetFolderError(CMyComPtr<IFolderFolder> &folder, UString &open_Error
     const CArcLevelInfo &lev = levs.Levels[levs.Levels.Size() - 1 - i];
 
     UString m;
-    
+
     if (!lev.ErrorType.IsEmpty())
     {
       m = MyFormatNew(IDS_CANT_OPEN_AS_TYPE, GetBracedType(lev.ErrorType));
@@ -206,7 +206,7 @@ static void GetFolderError(CMyComPtr<IFolderFolder> &folder, UString &open_Error
       m += ": ";
       m += lev.ErrorFlags;
     }
-    
+
     if (!m.IsEmpty())
     {
       if (isNonOpenLevel)
@@ -308,7 +308,7 @@ HRESULT CFfpOpen::OpenFileFolderPlugin(IInStream *inStream,
     {
       CProgressDialog &pd = t.OpenCallbackSpec->ProgressDialog;
       pd.MainWindow = parentWindow;
-      pd.MainTitle = "7-Zip"; // LangString(IDS_APP_TITLE);
+      pd.MainTitle = "NanaZip"; // LangString(IDS_APP_TITLE);
       pd.MainAddTitle = progressTitle + L' ';
       pd.WaitMode = true;
     }
@@ -349,7 +349,7 @@ HRESULT CFfpOpen::OpenFileFolderPlugin(IInStream *inStream,
       // Folder.Attach(t.Folder.Detach());
       Folder = t.Folder;
     }
-    
+
     return t.Result;
   }
 

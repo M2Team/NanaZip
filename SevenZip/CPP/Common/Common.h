@@ -4,15 +4,15 @@
 #define __COMMON_COMMON_H
 
 /*
-This file is included to all cpp files in 7-Zip.
+This file is included to all cpp files in NanaZip.
 Each folder contains StdAfx.h file that includes "Common.h".
-So 7-Zip includes "Common.h" in both modes:
+So NanaZip includes "Common.h" in both modes:
   with precompiled StdAfx.h
 and
   without precompiled StdAfx.h
 
-If you use 7-Zip code, you must include "Common.h" before other h files of 7-zip.
-If you don't need some things that are used in 7-Zip,
+If you use NanaZip code, you must include "Common.h" before other h files of NanaZip.
+If you don't need some things that are used in NanaZip,
 you can change this h file or h files included in this file.
 */
 

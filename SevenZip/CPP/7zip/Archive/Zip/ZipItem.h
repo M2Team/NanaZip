@@ -67,7 +67,7 @@ struct CWzAesExtra
     Method = GetUi16(p + 5);
     return true;
   }
-  
+
   void SetSubBlock(CExtraSubBlock &sb) const
   {
     sb.Data.Alloc(k_WzAesExtra_Size);
@@ -130,7 +130,7 @@ struct CExtraBlock
   bool MinorError;
   bool IsZip64;
   bool IsZip64_Error;
-  
+
   CExtraBlock(): Error(false), MinorError(false), IsZip64(false), IsZip64_Error(false) {}
 
   void Clear()
@@ -138,7 +138,7 @@ struct CExtraBlock
     SubBlocks.Clear();
     IsZip64 = false;
   }
-  
+
   size_t GetSize() const
   {
     size_t res = 0;
@@ -146,7 +146,7 @@ struct CExtraBlock
       res += SubBlocks[i].Data.Size() + 2 + 2;
     return res;
   }
-  
+
   bool GetWzAes(CWzAesExtra &e) const
   {
     FOR_VECTOR (i, SubBlocks)
@@ -205,10 +205,10 @@ class CLocalItem
 public:
   UInt16 Flags;
   UInt16 Method;
-  
+
   /*
     Zip specification doesn't mention that ExtractVersion field uses HostOS subfield.
-    18.06: 7-Zip now doesn't use ExtractVersion::HostOS to detect codePage
+    18.06: NanaZip now doesn't use ExtractVersion::HostOS to detect codePage
   */
 
   CVersion ExtractVersion;
@@ -219,7 +219,7 @@ public:
   UInt32 Crc;
 
   UInt32 Disk;
-  
+
   AString Name;
 
   CExtraBlock LocalExtra;
@@ -238,7 +238,7 @@ public:
   // bool IsAltStream() const { return (Flags & NFileHeader::NFlags::kAltStream) != 0; }
 
   unsigned GetDeflateLevel() const { return (Flags >> 1) & 3; }
-  
+
   bool IsDir() const;
 
   /*
@@ -285,15 +285,15 @@ public:
   CVersion MadeByVersion;
   UInt16 InternalAttrib;
   UInt32 ExternalAttrib;
-  
+
   UInt64 LocalHeaderPos;
-  
+
   CExtraBlock CentralExtra;
   CByteBuffer Comment;
 
   bool FromLocal;
   bool FromCentral;
-  
+
   // CItem can be used as CLocalItem. So we must clear unused fields
   CItem():
       InternalAttrib(0),
@@ -333,7 +333,7 @@ public:
       return false;
     return (MadeByVersion.HostOS == NFileHeader::NHostOS::kUnix);
   }
-  
+
   UINT GetCodePage() const
   {
     // 18.06: now we use HostOS only from Central::MadeByVersion

@@ -1,5 +1,5 @@
 // BrowseDialog.cpp
- 
+
 #include "StdAfx.h"
 
 #include "../../../Common/MyWindows.h"
@@ -73,7 +73,7 @@ extern UString HResultToMessage(HRESULT errorCode);
 
 static void MessageBox_Error_Global(HWND wnd, const wchar_t *message)
 {
-  ::MessageBoxW(wnd, message, L"7-Zip", MB_ICONERROR);
+  ::MessageBoxW(wnd, message, L"NanaZip", MB_ICONERROR);
 }
 
 static void MessageBox_HResError(HWND wnd, HRESULT errorCode, const wchar_t *name)
@@ -116,7 +116,7 @@ class CBrowseDialog: public NControl::CModalDialog
   // Reload changes DirPrefix. Don't send DirPrefix in pathPrefix parameter
   HRESULT Reload(const UString &pathPrefix, const UString &selectedName);
   HRESULT Reload();
-  
+
   void OpenParentFolder();
   void SetPathEditText();
   void OnCreateDir();
@@ -491,7 +491,7 @@ int CBrowseDialog::CompareItems(LPARAM lParam1, LPARAM lParam2)
   bool isDir2 = f2.IsDir();
   if (isDir1 && !isDir2) return -1;
   if (isDir2 && !isDir1) return 1;
-  
+
   int res = 0;
   switch (_sortIndex)
   {
@@ -528,7 +528,7 @@ static void ConvertSizeToString(UInt64 v, wchar_t *s)
 HRESULT CBrowseDialog::Reload(const UString &pathPrefix, const UString &selectedName)
 {
   CObjectVector<CFileInfo> files;
-  
+
   #ifndef UNDER_CE
   bool isDrive = false;
   if (pathPrefix.IsEmpty() || pathPrefix.IsEqualTo(kSuperPathPrefix))
@@ -873,7 +873,7 @@ bool MyBrowseForFile(HWND owner, LPCWSTR title, LPCWSTR path,
   }
 
   #endif
-  
+
   #ifdef USE_MY_BROWSE_DIALOG
   CBrowseDialog dialog;
   if (title)
@@ -916,7 +916,7 @@ bool CorrectFsPath(const UString &relBase, const UString &path2, UString &result
   path.Replace(L'/', WCHAR_PATH_SEPARATOR);
   unsigned start = 0;
   UString base;
-  
+
   if (IsAbsolutePath(path))
   {
     #if defined(_WIN32) && !defined(UNDER_CE)
@@ -997,7 +997,7 @@ bool CorrectFsPath(const UString &relBase, const UString &path2, UString &result
     result.Add_PathSepar();
     start = slashPos + 1;
   }
-  
+
   return true;
 }
 

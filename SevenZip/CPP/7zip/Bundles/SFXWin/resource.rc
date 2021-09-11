@@ -13,7 +13,7 @@ MY_VERSION_INFO_APP("7z SFX", "7z.sfx")
 IDI_ICON ICON "7z.ico"
 
 IDD_EXTRACT  DIALOG  0, 0, xs, ys  MY_MODAL_DIALOG_STYLE  MY_FONT
-CAPTION "7-Zip self-extracting archive"
+CAPTION "NanaZip self-extracting archive"
 BEGIN
   LTEXT          "E&xtract to:", IDT_EXTRACT_EXTRACT_TO, m, m, xc, 8
   EDITTEXT       IDC_EXTRACT_PATH, m, 21, xc - bxsDots - 12, 14, ES_AUTOHSCROLL
@@ -28,7 +28,7 @@ END
 #define xc 144
 
 IDD_EXTRACT_2  DIALOG  0, 0, xs, ys  MY_MODAL_DIALOG_STYLE  MY_FONT
-CAPTION "7-Zip self-extracting archive"
+CAPTION "NanaZip self-extracting archive"
 BEGIN
   LTEXT          "E&xtract to:", IDT_EXTRACT_EXTRACT_TO, m, m, xc - bxsDots - 12, 8
   EDITTEXT       IDC_EXTRACT_PATH, m, m + bys + 4, xc, 14, ES_AUTOHSCROLL

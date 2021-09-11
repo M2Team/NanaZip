@@ -68,7 +68,7 @@ HWND CPanel::GetParent() const
   return (h == 0) ? _mainWindow : h;
 }
 
-#define kClassName L"7-Zip::Panel"
+#define kClassName L"NanaZip::Panel"
 
 
 HRESULT CPanel::Create(HWND mainWindow, HWND parentWindow, UINT id,
@@ -388,7 +388,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   _listView.Show(SW_SHOW);
   _listView.InvalidateRect(NULL, true);
   _listView.Update();
-  
+
   // Ensure that the common control DLL is loaded.
   INITCOMMONCONTROLSEX icex;
 
@@ -411,7 +411,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
     icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
     icex.dwICC  = ICC_COOL_CLASSES | ICC_BAR_CLASSES;
     InitCommonControlsEx(&icex);
-    
+
     // if there is no CCS_NOPARENTALIGN, there is space of some pixels after rebar (Incorrect GetWindowRect ?)
 
     _headerReBar.Attach(::CreateWindowEx(WS_EX_TOOLWINDOW,
@@ -453,7 +453,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   icex.dwICC = ICC_USEREX_CLASSES;
   InitCommonControlsEx(&icex);
   #endif
-  
+
   _headerComboBox.CreateEx(0,
       #ifdef UNDER_CE
       WC_COMBOBOXW
@@ -504,13 +504,13 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
     rbi.fMask  = 0;
     rbi.himl   = (HIMAGELIST)NULL;
     _headerReBar.SetBarInfo(&rbi);
-    
+
     // Send the TB_BUTTONSTRUCTSIZE message, which is required for
     // backward compatibility.
     // _headerToolBar.SendMessage(TB_BUTTONSTRUCTSIZE, (WPARAM)sizeof(TBBUTTON), 0);
     SIZE size;
     _headerToolBar.GetMaxSize(&size);
-    
+
     REBARBANDINFO rbBand;
     rbBand.cbSize = sizeof(REBARBANDINFO);  // Required
     rbBand.fMask = RBBIM_STYLE | RBBIM_CHILD | RBBIM_CHILDSIZE | RBBIM_SIZE;
@@ -549,7 +549,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
 
   // InitListCtrl();
   RefreshListCtrl();
-  
+
   return true;
 }
 
@@ -576,10 +576,10 @@ void CPanel::ChangeWindowSize(int xSize, int ySize)
 
   _statusBar.GetWindowRect(&rect);
   kStatusBarSize = RECT_SIZE_Y(rect);
-  
+
   // _statusBar2.GetWindowRect(&rect);
   // kStatusBar2Size = RECT_SIZE_Y(rect);
- 
+
   int yListViewSize = MyMax(ySize - kHeaderSize - kStatusBarSize, 0);
   const int kStartXPos = 32;
   if (_headerReBar)
@@ -711,14 +711,14 @@ bool CPanel::OnCommand(int code, int itemID, LPARAM lParam, LRESULT &result)
 void CPanel::MessageBox_Info(LPCWSTR message, LPCWSTR caption) const
   { ::MessageBoxW((HWND)*this, message, caption, MB_OK); }
 void CPanel::MessageBox_Warning(LPCWSTR message) const
-  { ::MessageBoxW((HWND)*this, message, L"7-Zip", MB_OK | MB_ICONWARNING); }
+  { ::MessageBoxW((HWND)*this, message, L"NanaZip", MB_OK | MB_ICONWARNING); }
 */
 
 void CPanel::MessageBox_Error_Caption(LPCWSTR message, LPCWSTR caption) const
   { ::MessageBoxW((HWND)*this, message, caption, MB_OK | MB_ICONSTOP); }
 
 void CPanel::MessageBox_Error(LPCWSTR message) const
-  { MessageBox_Error_Caption(message, L"7-Zip"); }
+  { MessageBox_Error_Caption(message, L"NanaZip"); }
 
 static UString ErrorHResult_To_Message(HRESULT errorCode)
 {
@@ -733,7 +733,7 @@ void CPanel::MessageBox_Error_HRESULT_Caption(HRESULT errorCode, LPCWSTR caption
 }
 
 void CPanel::MessageBox_Error_HRESULT(HRESULT errorCode) const
-  { MessageBox_Error_HRESULT_Caption(errorCode, L"7-Zip"); }
+  { MessageBox_Error_HRESULT_Caption(errorCode, L"NanaZip"); }
 
 void CPanel::MessageBox_Error_2Lines_Message_HRESULT(LPCWSTR message, HRESULT errorCode) const
 {
@@ -747,7 +747,7 @@ void CPanel::MessageBox_LastError(LPCWSTR caption) const
   { MessageBox_Error_HRESULT_Caption(::GetLastError(), caption); }
 
 void CPanel::MessageBox_LastError() const
-  { MessageBox_LastError(L"7-Zip"); }
+  { MessageBox_LastError(L"NanaZip"); }
 
 void CPanel::MessageBox_Error_LangID(UINT resourceID) const
   { MessageBox_Error(LangString(resourceID)); }
@@ -794,7 +794,7 @@ bool CPanel::IsFSDrivesFolder() const { return IsFolderTypeEqTo("FSDrives"); }
 bool CPanel::IsAltStreamsFolder() const { return IsFolderTypeEqTo("AltStreamsFolder"); }
 bool CPanel::IsArcFolder() const
 {
-  return GetFolderTypeID().IsPrefixedBy_Ascii_NoCase("7-Zip");
+  return GetFolderTypeID().IsPrefixedBy_Ascii_NoCase("NanaZip");
 }
 
 UString CPanel::GetFsPath() const
@@ -887,9 +887,9 @@ void CPanel::AddToArchive()
 
   FOR_VECTOR (i, indices)
     names.Add(curPrefix + GetItemRelPath2(indices[i]));
-  
+
   const UString arcName = CreateArchiveName(names);
-  
+
   HRESULT res = CompressFiles(destCurDirPrefix, arcName, L"",
       true, // addExtension
       names, false, true, false);
@@ -951,14 +951,14 @@ void CPanel::ExtractArchives()
   GetFilePaths(indices, paths);
   if (paths.IsEmpty())
     return;
-  
+
   UString outFolder = GetFsPath();
   if (indices.Size() == 1)
     outFolder += GetSubFolderNameForExtract2(GetItemRelPath(indices[0]));
   else
     outFolder += '*';
   outFolder.Add_PathSepar();
-  
+
   ::ExtractArchives(paths, outFolder
       , true // showDialog
       , false // elimDup
@@ -1068,20 +1068,20 @@ void CPanel::TestArchives()
       return;
 
     extracter.Indices = indices;
-    
+
     UString title = LangString(IDS_PROGRESS_TESTING);
-    
+
     extracter.ProgressDialog.CompressingMode = false;
     extracter.ProgressDialog.MainWindow = GetParent();
-    extracter.ProgressDialog.MainTitle = "7-Zip"; // LangString(IDS_APP_TITLE);
+    extracter.ProgressDialog.MainTitle = "NanaZip"; // LangString(IDS_APP_TITLE);
     extracter.ProgressDialog.MainAddTitle = title + L' ';
-    
+
     extracter.ExtractCallbackSpec->OverwriteMode = NExtract::NOverwriteMode::kAskBefore;
     extracter.ExtractCallbackSpec->Init();
-    
+
     if (extracter.Create(title, GetParent()) != S_OK)
       return;
-    
+
     }
     RefreshTitleAlways();
     return;

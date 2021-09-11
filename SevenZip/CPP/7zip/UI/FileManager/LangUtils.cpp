@@ -26,7 +26,7 @@ static NSynchronization::CCriticalSection g_CriticalSection;
 bool LangOpen(CLang &lang, CFSTR fileName);
 bool LangOpen(CLang &lang, CFSTR fileName)
 {
-  return lang.Open(fileName, "7-Zip");
+  return lang.Open(fileName, "NanaZip");
 }
 
 FString GetLangDirPrefix()
@@ -222,7 +222,7 @@ static void OpenDefaultLang()
   if (sysLang != userLang)
     return;
   LANGID langID = userLang;
-  
+
   /*
   LANGID sysUILang; // english  in XP64
   LANGID userUILang; // english  in XP64

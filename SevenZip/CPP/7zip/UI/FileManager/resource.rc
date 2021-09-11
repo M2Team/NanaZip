@@ -2,7 +2,7 @@
 #include "../../GuiCommon.rc"
 #include "resource.h"
 
-MY_VERSION_INFO_APP("7-Zip File Manager", "7zFM")
+MY_VERSION_INFO_APP("NanaZip File Manager", "7zFM")
 
 IDR_ACCELERATOR1 ACCELERATORS
 BEGIN
@@ -130,7 +130,7 @@ BEGIN
     MENUITEM "&Contents...\tF1",            IDM_HELP_CONTENTS
   #endif
     MENUITEM SEPARATOR
-  MENUITEM "&About 7-Zip...",               IDM_ABOUT
+  MENUITEM "&About NanaZip...",               IDM_ABOUT
   END
 END
 

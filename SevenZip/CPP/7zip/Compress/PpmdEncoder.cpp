@@ -100,7 +100,7 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIA
       // if (v < PPMD7_MIN_MEM_SIZE) return E_INVALIDARG; // (1 << 11)
       /*
         Supported MEM_SIZE range :
-        [ (1 << 11) , 0xFFFFFFFF - 12 * 3 ] - current 7-Zip's Ppmd7 constants
+        [ (1 << 11) , 0xFFFFFFFF - 12 * 3 ] - current NanaZip's Ppmd7 constants
         [ 1824      , 0xFFFFFFFF          ] - real limits of Ppmd7 code
       */
       props.MemSize = v;

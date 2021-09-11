@@ -5,7 +5,7 @@
 #define yc 160
 
 IDD_MESSAGES  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
-CAPTION "7-Zip: Diagnostic messages"
+CAPTION "NanaZip: Diagnostic messages"
 {
   DEFPUSHBUTTON "&Close", IDOK, bx, by, bxs, bys
   CONTROL "List1", IDL_MESSAGE, "SysListView32",

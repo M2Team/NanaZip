@@ -10,7 +10,7 @@
 CODER_INTERFACE(ICompressProgressInfo, 0x04)
 {
   STDMETHOD(SetRatioInfo)(const UInt64 *inSize, const UInt64 *outSize) PURE;
-  
+
   /* (inSize) can be NULL, if unknown
      (outSize) can be NULL, if unknown
 
@@ -38,23 +38,23 @@ CODER_INTERFACE(ICompressCoder2, 0x18)
 /*
   ICompressCoder::Code
   ICompressCoder2::Code
-  
+
   returns:
     S_OK     : OK
     S_FALSE  : data error (for decoders)
     E_OUTOFMEMORY : memory allocation error
     E_NOTIMPL : unsupported encoding method (for decoders)
     another error code : some error. For example, it can be error code received from inStream or outStream function.
-  
+
   Parameters:
     (inStream != NULL)
     (outStream != NULL)
 
     if (inSize != NULL)
     {
-      Encoders in 7-Zip ignore (inSize).
+      Encoders in NanaZip ignore (inSize).
       Decoder can use (*inSize) to check that stream was decoded correctly.
-      Some decoder in 7-Zip check it, if (full_decoding mode was set via ICompressSetFinishMode)
+      Some decoder in NanaZip check it, if (full_decoding mode was set via ICompressSetFinishMode)
     }
 
     If it's required to limit the reading from input stream (inStream), it can
@@ -62,16 +62,16 @@ CODER_INTERFACE(ICompressCoder2, 0x18)
 
     if (outSize != NULL)
     {
-      Encoders in 7-Zip ignore (outSize).
+      Encoders in NanaZip ignore (outSize).
       Decoder unpacks no more than (*outSize) bytes.
     }
-    
+
     (progress == NULL) is allowed.
 
 
   Decoding with Code() function
   -----------------------------
-   
+
   You can request some interfaces before decoding
    - ICompressSetDecoderProperties2
    - ICompressSetFinishMode
@@ -90,7 +90,7 @@ CODER_INTERFACE(ICompressCoder2, 0x18)
 
   Encoding with Code() function
   -----------------------------
-  
+
   You can request some interfaces :
   - ICompressSetCoderProperties   - use it before encoding to set properties
   - ICompressWriteCoderProperties - use it before or after encoding to request encoded properties.
@@ -425,7 +425,7 @@ extern "C"
   typedef HRESULT (WINAPI *Func_CreateEncoder)(UInt32 index, const GUID *iid, void **outObject);
 
   typedef HRESULT (WINAPI *Func_GetHashers)(IHashers **hashers);
-  
+
   typedef HRESULT (WINAPI *Func_SetCodecs)(ICompressCodecsInfo *compressCodecsInfo);
 }
 

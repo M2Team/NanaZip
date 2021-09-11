@@ -616,7 +616,7 @@ SOURCE=.\UpdateGUI.cpp
 SOURCE=.\UpdateGUI.h
 # End Source File
 # End Group
-# Begin Group "7-zip Common"
+# Begin Group "NanaZip Common"
 
 # PROP Default_Filter ""
 # Begin Source File

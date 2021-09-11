@@ -33,7 +33,7 @@ bool CSplitDialog::OnInit()
   #endif
   _pathCombo.Attach(GetItem(IDC_SPLIT_PATH));
   _volumeCombo.Attach(GetItem(IDC_SPLIT_VOLUME));
-  
+
   if (!FilePath.IsEmpty())
   {
     UString title;
@@ -109,7 +109,7 @@ void CSplitDialog::OnOK()
   volumeString.Trim();
   if (!ParseVolumeSizes(volumeString, VolumeSizes) || VolumeSizes.Size() == 0)
   {
-    ::MessageBoxW(*this, LangString(IDS_INCORRECT_VOLUME_SIZE), L"7-Zip", MB_ICONERROR);
+    ::MessageBoxW(*this, LangString(IDS_INCORRECT_VOLUME_SIZE), L"NanaZip", MB_ICONERROR);
     return;
   }
   CModalDialog::OnOK();

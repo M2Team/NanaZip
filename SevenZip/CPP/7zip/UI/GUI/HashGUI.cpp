@@ -251,7 +251,7 @@ void AddHashBundleRes(UString &s, const CHashBundle &hb)
 {
   CPropNameValPairs pairs;
   AddHashBundleRes(pairs, hb);
-  
+
   FOR_VECTOR (i, pairs)
   {
     const CProperty &pair = pairs[i];
@@ -275,7 +275,7 @@ HRESULT CHashCallbackGUI::AfterLastFile(CHashBundle &hb)
   hb.FirstFileName = FirstFileName;
   // MainPath
   AddHashBundleRes(PropNameValPairs, hb);
-  
+
   CProgressSync &sync = Sync;
   sync.Set_NumFilesCur(hb.NumFiles);
 
@@ -314,7 +314,7 @@ HRESULT HashCalcGUI(
 
   const UString title = LangString(IDS_CHECKSUM_CALCULATING);
 
-  t.MainTitle = "7-Zip"; // LangString(IDS_APP_TITLE);
+  t.MainTitle = "NanaZip"; // LangString(IDS_APP_TITLE);
   t.MainAddTitle = title;
   t.MainAddTitle.Add_Space();
 
@@ -327,19 +327,19 @@ HRESULT HashCalcGUI(
 void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
 {
   CListViewDialog lv;
-  
+
   FOR_VECTOR (i, propPairs)
   {
     const CProperty &pair = propPairs[i];
     lv.Strings.Add(pair.Name);
     lv.Values.Add(pair.Value);
   }
-  
+
   lv.Title = LangString(IDS_CHECKSUM_INFORMATION);
   lv.DeleteIsAllowed = true;
   lv.SelectFirst = false;
   lv.NumColumns = 2;
-  
+
   lv.Create(hwnd);
 }
 

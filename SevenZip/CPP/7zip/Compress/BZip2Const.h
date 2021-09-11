@@ -57,9 +57,9 @@ The number of selectors stored in bzip2 block:
 (numSelectors  > 18002)
    lbzip2 2.5: encoder can write up to (18001 + 7) selectors.
 
-   7-Zip before 19.03: decoder doesn't support it.
-   7-Zip        19.03: decoder allows 8 additional selector records for lbzip2 compatibility.
-   
+   NanaZip before 19.03: decoder doesn't support it.
+   NanaZip        19.03: decoder allows 8 additional selector records for lbzip2 compatibility.
+
    bzip2 1.0.6: decoder can overflow selector[18002] arrays. But there are another
                arrays after selector arrays. So the compiled code works.
    bzip2 1.0.7: decoder doesn't support it.

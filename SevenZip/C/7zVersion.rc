@@ -34,13 +34,13 @@ BEGIN \
     BEGIN  \
         BLOCK "040904b0" \
         BEGIN \
-            VALUE "CompanyName", "Igor Pavlov" \
+            VALUE "CompanyName", "M2-Team" \
             VALUE "FileDescription", descr \
             VALUE "FileVersion", MY_VERSION  \
             VALUE "InternalName", intName \
             VALUE "LegalCopyright", MY_COPYRIGHT \
             VALUE "OriginalFilename", origName \
-            VALUE "ProductName", "7-Zip" \
+            VALUE "ProductName", "NanaZip" \
             VALUE "ProductVersion", MY_VERSION \
         END \
     END \

@@ -27,7 +27,7 @@ namespace NCompressDialog
       kSync
     };
   }
-  
+
   struct CInfo
   {
     NUpdateMode::EEnum UpdateMode;
@@ -52,14 +52,14 @@ namespace NCompressDialog
     bool SFXMode;
     bool OpenShareForWrite;
     bool DeleteAfterCompressing;
-    
+
     CBoolPair SymLinks;
     CBoolPair HardLinks;
     CBoolPair AltStreams;
     CBoolPair NtSecurity;
-    
+
     UString ArcPath; // in: Relative or abs ; out: Relative or abs
-    
+
     // FString CurrentDirPrefix;
     bool KeepName;
 
@@ -103,7 +103,7 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
 
   NWindows::NControl::CComboBox m_UpdateMode;
   NWindows::NControl::CComboBox m_PathMode;
-  
+
   NWindows::NControl::CComboBox m_Volume;
   NWindows::NControl::CDialogChildControl m_Params;
 
@@ -124,16 +124,16 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   void SetArchiveName(const UString &name);
   int FindRegistryFormat(const UString &name);
   int FindRegistryFormatAlways(const UString &name);
-  
+
   void CheckSFXNameChange();
   void SetArchiveName2(bool prevWasSFX);
-  
+
   int GetStaticFormatIndex();
 
   void SetNearestSelectComboBox(NWindows::NControl::CComboBox &comboBox, UInt32 value);
 
   void SetLevel();
-  
+
   void SetMethod(int keepMethodId = -1);
   int GetMethodID();
   UString GetMethodSpec();
@@ -146,7 +146,7 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
 
   void AddDict2(size_t sizeReal, size_t sizeShow);
   void AddDict(size_t size);
-  
+
   void SetDictionary();
 
   UInt32 GetComboValue(NWindows::NControl::CComboBox &c, int defMax = 0);
@@ -204,7 +204,7 @@ public:
 
   void MessageBoxError(LPCWSTR message)
   {
-    MessageBoxW(*this, message, L"7-Zip", MB_ICONERROR);
+    MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
   }
 
 protected:
