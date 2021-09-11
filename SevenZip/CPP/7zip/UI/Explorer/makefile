@@ -1,4 +1,4 @@
-PROG = NanaZip.dll
+PROG = NanaZipShellExtension.dll
 DEF_FILE = Explorer.def
 CFLAGS = $(CFLAGS) \
   -DLANG \

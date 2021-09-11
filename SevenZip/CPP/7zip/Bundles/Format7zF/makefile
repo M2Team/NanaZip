@@ -1,4 +1,4 @@
-PROG = 7z.dll
+PROG = NanaZipCore.dll
 DEF_FILE = ../../Archive/Archive2.def
 CFLAGS = $(CFLAGS) \
   -DEXTERNAL_CODECS \

@@ -262,7 +262,7 @@ static UString GetProgramCommand()
 {
   UString s ('\"');
   s += fs2us(NDLL::GetModuleDirPrefix());
-  s += "7zFM.exe\" \"%1\"";
+  s += "NanaZip.exe\" \"%1\"";
   return s;
 }
 

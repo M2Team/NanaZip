@@ -51,14 +51,14 @@ BOOL WINAPI DllMain(
 {
   if (dwReason == DLL_PROCESS_ATTACH)
   {
-    // OutputDebugStringA("7z.dll DLL_PROCESS_ATTACH");
+    // OutputDebugStringA("NanaZipCore.dll DLL_PROCESS_ATTACH");
     g_hInstance = (HINSTANCE)hInstance;
     NT_CHECK;
   }
   /*
   if (dwReason == DLL_PROCESS_DETACH)
   {
-    OutputDebugStringA("7z.dll DLL_PROCESS_DETACH");
+    OutputDebugStringA("NanaZipCore.dll DLL_PROCESS_DETACH");
   }
   */
   return TRUE;

@@ -4,5 +4,5 @@
 MY_VERSION_INFO_DLL("NanaZip Shell Extension", "NanaZip")
 
 #ifndef UNDER_CE
-1 24 MOVEABLE PURE "NanaZip.dll.manifest"
+1 24 MOVEABLE PURE "NanaZipShellExtension.dll.manifest"
 #endif

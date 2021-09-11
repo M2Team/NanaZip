@@ -1223,7 +1223,7 @@ bool CBenchmarkDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
           if (res == S_FALSE)
             m = "Decoding error";
           else if (res == CLASS_E_CLASSNOTAVAILABLE)
-            m = "Can't find 7z.dll";
+            m = "Can't find NanaZipCore.dll";
           else
             m = HResultToMessage(res);
           MessageBoxError_Status(m);

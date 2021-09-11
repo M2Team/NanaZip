@@ -123,7 +123,7 @@ struct IUnknown
   STDMETHOD_(ULONG, AddRef)() PURE;
   STDMETHOD_(ULONG, Release)() PURE;
   virtual ~IUnknown() {}
-  // We use virtual ~IUnknown() here for binary compatibility with 7z.so from p7zip
+  // We use virtual ~IUnknown() here for binary compatibility with NanaZipCore.so from p7zip
 };
 
 typedef IUnknown *LPUNKNOWN;

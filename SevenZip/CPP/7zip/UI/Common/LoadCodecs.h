@@ -20,13 +20,13 @@ EXTERNAL_CODECS
 
   1) Executable that uses external plugins must be compiled
      with EXTERNAL_CODECS defined:
-       - 7z.exe, 7zG.exe, 7zFM.exe
+       - NanaZipC.exe, NanaZipG.exe, NanaZip.exe
 
      Note: EXTERNAL_CODECS is used also in CPP/7zip/Common/CreateCoder.h
-           that code is used in plugin module (7z.dll).
+           that code is used in plugin module (NanaZipCore.dll).
 
   2) Standalone modules are compiled without EXTERNAL_CODECS:
-    - SFX modules: 7z.sfx, 7zCon.sfx
+    - SFX modules: NanaZipWindows.sfx, NanaZipConsole.sfx
     - standalone versions of console NanaZip: 7za.exe, 7zr.exe
 
   if EXTERNAL_CODECS is defined, CCodecs class implements interfaces:

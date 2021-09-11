@@ -1,4 +1,4 @@
-PROG = 7zCon.sfx
+PROG = NanaZipConsole.sfx
 MY_CONSOLE = 1
 MY_FIXED = 1
 

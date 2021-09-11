@@ -31,7 +31,7 @@ using namespace NWindows;
 #define MY_TRY_FINISH_VOID } \
   catch(...) { ErrorMessageHRESULT(E_FAIL); }
 
-#define k7zGui  "7zG.exe"
+#define k7zGui  "NanaZipG.exe"
 
 #define kShowDialogSwitch  " -ad"
 #define kEmailSwitch  " -seml."

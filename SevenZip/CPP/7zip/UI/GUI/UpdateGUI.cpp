@@ -28,7 +28,7 @@ using namespace NWindows;
 using namespace NFile;
 using namespace NDir;
 
-static const char * const kDefaultSfxModule = "7z.sfx";
+static const char * const kDefaultSfxModule = "NanaZipWindows.sfx";
 static const char * const kSFXExtension = "exe";
 
 extern void AddMessageToString(UString &dest, const UString &src);
@@ -47,7 +47,7 @@ public:
   CUpdateOptions *Options;
   bool needSetPath;
 };
- 
+
 HRESULT CThreadUpdating::ProcessVirt()
 {
   CUpdateErrorInfo ei;
@@ -174,7 +174,7 @@ static void SetOutProperties(
       AddProp(properties, name, (UInt32)order);
     }
   }
-    
+
   if (!encryptionMethod.IsEmpty())
     AddProp(properties, "em", encryptionMethod);
 
@@ -239,7 +239,7 @@ static HRESULT ShowDialog(
   bool oneFile = false;
   NFind::CFileInfo fileInfo;
   UString name;
-  
+
   /*
   if (censor.Pairs.Size() > 0)
   {
@@ -280,7 +280,7 @@ static HRESULT ShowDialog(
     }
   }
 
-  
+
   #if defined(_WIN32) && !defined(UNDER_CE)
   CCurrentDirRestorer curDirRestorer;
   #endif
@@ -290,7 +290,7 @@ static HRESULT ShowDialog(
 
   if (options.MethodMode.Type_Defined)
     di.FormatIndex = options.MethodMode.Type.FormatIndex;
-  
+
   FOR_VECTOR (i, codecs->Formats)
   {
     const CArcInfoEx &ai = codecs->Formats[i];
@@ -315,7 +315,7 @@ static HRESULT ShowDialog(
   dialog.OriginalFileName = fs2us(fileInfo.Name);
 
   di.PathMode = options.PathMode;
-    
+
   // di.CurrentDirPrefix = currentDirPrefix;
   di.SFXMode = options.SfxMode;
   di.OpenShareForWrite = options.OpenShareForWrite;
@@ -325,14 +325,14 @@ static HRESULT ShowDialog(
   di.HardLinks = options.HardLinks;
   di.AltStreams = options.AltStreams;
   di.NtSecurity = options.NtSecurity;
-  
+
   if (callback->PasswordIsDefined)
     di.Password = callback->Password;
-    
+
   di.KeepName = !oneFile;
 
   NUpdateArchive::CActionSet &actionSet = options.Commands.Front().ActionSet;
- 
+
   {
     int index = FindActionSet(actionSet);
     if (index < 0)
@@ -349,11 +349,11 @@ static HRESULT ShowDialog(
   options.HardLinks = di.HardLinks;
   options.AltStreams = di.AltStreams;
   options.NtSecurity = di.NtSecurity;
- 
+
   #if defined(_WIN32) && !defined(UNDER_CE)
   curDirRestorer.NeedRestore = dialog.CurrentDirWasChanged;
   #endif
-  
+
   options.VolumesSizes = di.VolumeSizes;
   /*
   if (di.VolumeSizeIsDefined)
@@ -363,7 +363,7 @@ static HRESULT ShowDialog(
   }
   */
 
- 
+
   {
     int index = FindUpdateMode(di.UpdateMode);
     if (index < 0)
@@ -396,7 +396,7 @@ static HRESULT ShowDialog(
       di.EncryptionMethod,
       di.EncryptHeadersIsAllowed, di.EncryptHeaders,
       di.SFXMode);
-  
+
   options.OpenShareForWrite = di.OpenShareForWrite;
   ParseAndAddPropertires(options.MethodMode.Properties, di.Options);
 

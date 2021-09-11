@@ -1,4 +1,4 @@
-PROG = 7zFM.exe
+PROG = NanaZip.exe
 CFLAGS = $(CFLAGS) \
   -DEXTERNAL_CODECS \
 

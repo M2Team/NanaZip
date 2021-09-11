@@ -1,4 +1,4 @@
-PROG = 7zG.exe
+PROG = NanaZipG.exe
 CFLAGS = $(CFLAGS) \
   -DLANG \
   -DEXTERNAL_CODECS \

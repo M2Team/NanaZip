@@ -143,7 +143,7 @@ bool CMenuPage::OnInit()
 
     FString &path = dll.Path;
     path = prefix;
-    path += (d == 0 ? "NanaZip.dll" :
+    path += (d == 0 ? "NanaZipShellExtension.dll" :
         #ifdef _WIN64
           "NanaZip32.dll"
         #else

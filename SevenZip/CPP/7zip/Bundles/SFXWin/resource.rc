@@ -5,7 +5,7 @@
 
 #include "resource.h"
 
-MY_VERSION_INFO_APP("7z SFX", "7z.sfx")
+MY_VERSION_INFO_APP("7z SFX", "NanaZipWindows.sfx")
 
 #define xc 240
 #define yc 64

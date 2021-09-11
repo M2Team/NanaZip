@@ -6,12 +6,12 @@
 
 #include "../FileManager/resourceGui.rc"
 
-MY_VERSION_INFO(MY_VFT_APP, "NanaZip GUI", "7zg", "7zg.exe")
+MY_VERSION_INFO(MY_VFT_APP, "NanaZip GUI", "7zg", "NanaZipG.exe")
 
 IDI_ICON ICON "FM.ico"
 
 #ifndef UNDER_CE
-1 24 MOVEABLE PURE "7zG.exe.manifest"
+1 24 MOVEABLE PURE "NanaZipG.exe.manifest"
 #endif
 
 #include "../FileManager/PropertyName.rc"
