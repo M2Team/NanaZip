@@ -11,7 +11,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.CppWinRT">
-      <Version>2.0.210629.4</Version>
+      <Version>2.0.210825.3</Version>
     </PackageReference>
   </ItemGroup>
 </Project>

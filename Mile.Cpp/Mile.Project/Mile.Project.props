@@ -80,7 +80,10 @@
     <ConfigurationType>Application</ConfigurationType>
     <ConfigurationType Condition="'$(MileProjectType)'=='DynamicLibrary'">DynamicLibrary</ConfigurationType>
     <ConfigurationType Condition="'$(MileProjectType)'=='StaticLibrary'">StaticLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '16.0'">v142</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
     <UseDebugLibraries Condition="'$(Configuration)'=='Release'">false</UseDebugLibraries>
@@ -88,8 +91,6 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup>
-    <OutDir>$(SolutionDir)Output\Binaries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)Output\Objects\$(Configuration)\$(MSBuildProjectName)\$(Platform)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)'=='Debug'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)'=='Release'">false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
