@@ -4,17 +4,127 @@
     <ProjectGuid>{F17D4837-7943-4361-9527-2AF9CACE477D}</ProjectGuid>
     <RootNamespace>NanaZipShellExtension</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
-    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Library.CppWinRT.props" />
   <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
   <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
+      <Optimization Condition="'$(Configuration)'=='Release'">MinSpace</Optimization>
+      <CallingConvention Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">FastCall</CallingConvention>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <PreprocessorDefinitions>LANG;WIN_LONG_PATH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <Link>
+      <LargeAddressAware>true</LargeAddressAware>
       <ModuleDefinitionFile>NanaZipShellExtension.def</ModuleDefinitionFile>
+      <AdditionalDependencies>comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SevenZip\C\CpuArch.c" />
+    <ClCompile Include="..\SevenZip\C\Threads.c" />
+    <ClCompile Include="..\SevenZip\CPP\Common\IntToString.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Lang.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\MyString.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\MyVector.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\NewHandler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Random.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\StringConvert.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\StringToInt.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\UTFConvert.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Wildcard.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\Control\Dialog.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\Control\ListView.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\Control\PropertyPage.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\DLL.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\ErrorMsg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\FileDir.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\FileFind.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\FileIO.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\FileName.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\MemoryGlobal.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\MemoryLock.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\Menu.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\ProcessUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\Registry.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\ResourceString.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\Shell.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\Window.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveName.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\CompressCall.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\HelpUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\DllExportsExplorer.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\MyMessages.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\StdAfx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SevenZip\C\CpuArch.h" />
+    <ClInclude Include="..\SevenZip\C\Threads.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\IntToString.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\Lang.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\MyCom.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\MyString.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\MyVector.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\NewHandler.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\Random.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\StringConvert.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\StringToInt.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\Types.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\UTFConvert.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\Wildcard.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Control\Dialog.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Control\ListView.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Control\PropertyPage.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\DLL.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\ErrorMsg.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\FileDir.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\FileFind.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\FileIO.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\FileMapping.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\FileName.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\MemoryGlobal.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\MemoryLock.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Menu.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\ProcessUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Registry.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\ResourceString.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Shell.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Synchronization.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Window.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveName.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\CompressCall.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\HelpUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyMessages.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\resource.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\StdAfx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\SevenZip\CPP\7zip\UI\Explorer\NanaZipShellExtension.dll.manifest" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZipShellExtension.cpp" />
   </ItemGroup>

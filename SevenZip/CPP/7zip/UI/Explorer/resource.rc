@@ -1,7 +1,4 @@
-#include "../../MyVersionInfo.rc"
 #include "resource2.rc"
-
-MY_VERSION_INFO_DLL("NanaZip Shell Extension", "NanaZip")
 
 #ifndef UNDER_CE
 1 24 MOVEABLE PURE "NanaZipShellExtension.dll.manifest"
