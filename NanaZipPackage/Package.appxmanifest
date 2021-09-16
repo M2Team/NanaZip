@@ -7,13 +7,13 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="M2Team.NanaZip"
-    Publisher="CN=M2-Team, O=M2-Team, C=CN"
+    Name="40174MouriNaruto.NanaZip"
+    Publisher="CN=E310A153-74A9-4D81-800B-857A8D58408A"
     Version="1.0.0.0" />
 
   <Properties>
     <DisplayName>NanaZip</DisplayName>
-    <PublisherDisplayName>M2-Team</PublisherDisplayName>
+    <PublisherDisplayName>Kenji Mouri</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
