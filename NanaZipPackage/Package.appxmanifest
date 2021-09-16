@@ -7,13 +7,13 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="76034e38-a491-4cc9-9b5b-cd03115c0d21"
-    Publisher="CN=Mouri"
+    Name="M2Team.NanaZip"
+    Publisher="CN=M2-Team, O=M2-Team, C=CN"
     Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>NanaZipPackage</DisplayName>
-    <PublisherDisplayName>Mouri</PublisherDisplayName>
+    <DisplayName>NanaZip</DisplayName>
+    <PublisherDisplayName>M2-Team</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
@@ -31,8 +31,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="NanaZipPackage"
-        Description="NanaZipPackage"
+        DisplayName="NanaZip"
+        Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">
@@ -43,7 +43,6 @@
   </Applications>
 
   <Capabilities>
-    <Capability Name="internetClient" />
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
 </Package>
