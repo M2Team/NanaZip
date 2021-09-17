@@ -8,8 +8,9 @@ The source code of NanaZip (not including the source code from third-party
 libraries, 7-Zip or other 7-Zip derivatives) is distributed under the MIT 
 License.
 
-The source code from 7-Zip or other 7-Zip derivatives is distributed under the
-7-Zip License.
+The source code from 7-Zip or other 7-Zip derivatives (these contents are only 
+in `SevenZip` and `NanaZipPackage\Lang` folders) is distributed under the 7-Zip
+License.
 
 The source code from the third-party libraries is distributed under the original
 license used in the third-party libraries.
