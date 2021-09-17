@@ -90,14 +90,30 @@
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Test.bmp">
       <Filter>Spec</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Add2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Copy2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Delete2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Extract2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Move2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Test2.bmp" />
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Add2.bmp">
+      <Filter>Spec</Filter>
+    </Image>
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Copy2.bmp">
+      <Filter>Spec</Filter>
+    </Image>
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Delete2.bmp">
+      <Filter>Spec</Filter>
+    </Image>
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Extract2.bmp">
+      <Filter>Spec</Filter>
+    </Image>
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info.bmp">
+      <Filter>Spec</Filter>
+    </Image>
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info2.bmp">
+      <Filter>Spec</Filter>
+    </Image>
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Move2.bmp">
+      <Filter>Spec</Filter>
+    </Image>
+    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Test2.bmp">
+      <Filter>Spec</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ClassDefs.cpp">
@@ -526,15 +542,33 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyCoder.cpp">
       <Filter>Compress</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FilePlugins.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FM.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\MyLoadMenu.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\OpenCallback.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SplitUtils.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FilePlugins.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FM.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\MyLoadMenu.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\OpenCallback.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SplitUtils.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MyWindowsNew.h">
@@ -1023,25 +1057,49 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\PropID.h">
       <Filter>Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FilePlugins.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MyCom2.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MyLoadMenu.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\OpenCallback.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PluginInterface.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PluginLoader.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\resource.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SplitUtils.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FilePlugins.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MyCom2.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MyLoadMenu.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\OpenCallback.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PluginInterface.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PluginLoader.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\resource.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SplitUtils.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\Tresource.rc">
+    <Manifest Include="NanaZip.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\resource.rc">
       <Filter>Spec</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="..\SevenZip\CPP\7zip\UI\FileManager\TNanaZip.exe.manifest" />
   </ItemGroup>
 </Project>

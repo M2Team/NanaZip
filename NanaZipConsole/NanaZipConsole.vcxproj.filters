@@ -581,4 +581,7 @@
       <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipConsole.manifest" />
+  </ItemGroup>
 </Project>

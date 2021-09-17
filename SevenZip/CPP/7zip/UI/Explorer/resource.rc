@@ -1,5 +1,1 @@
 #include "resource2.rc"
-
-#ifndef UNDER_CE
-1 24 MOVEABLE PURE "NanaZipShellExtension.dll.manifest"
-#endif

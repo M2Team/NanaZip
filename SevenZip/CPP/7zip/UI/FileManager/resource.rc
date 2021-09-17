@@ -137,10 +137,6 @@ END
 
 IDI_ICON  ICON  "../../UI/FileManager/FM.ico"
 
-#ifndef UNDER_CE
-1  24  MOVEABLE PURE   "../../UI/FileManager/NanaZip.exe.manifest"
-#endif
-
 IDB_ADD        BITMAP  "../../UI/FileManager/Add.bmp"
 IDB_EXTRACT    BITMAP  "../../UI/FileManager/Extract.bmp"
 IDB_TEST       BITMAP  "../../UI/FileManager/Test.bmp"

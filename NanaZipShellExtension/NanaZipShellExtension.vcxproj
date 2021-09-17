@@ -4,6 +4,7 @@
     <ProjectGuid>{F17D4837-7943-4361-9527-2AF9CACE477D}</ProjectGuid>
     <RootNamespace>NanaZipShellExtension</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
+    <MileProjectManifestFile>NanaZipShellExtension.manifest</MileProjectManifestFile>
   </PropertyGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
@@ -123,7 +124,7 @@
     <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="..\SevenZip\CPP\7zip\UI\Explorer\NanaZipShellExtension.dll.manifest" />
+    <Manifest Include="NanaZipShellExtension.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZipShellExtension.cpp" />

@@ -296,7 +296,9 @@
     <ClInclude Include="..\SevenZip\CPP\Windows\Window.h">
       <Filter>Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\resource.rc">
@@ -304,7 +306,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="..\SevenZip\CPP\7zip\UI\Explorer\NanaZipShellExtension.dll.manifest" />
+    <Manifest Include="NanaZipShellExtension.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZipShellExtension.cpp" />

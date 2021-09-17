@@ -1625,6 +1625,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\SevenZip\CPP\7zip\Archive\Archive2.def" />
+    <None Include="..\SevenZip\CPP\7zip\Archive\Archive2.def">
+      <Filter>Spec</Filter>
+    </None>
   </ItemGroup>
 </Project>

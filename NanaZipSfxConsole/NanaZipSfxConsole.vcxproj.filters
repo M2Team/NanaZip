@@ -291,7 +291,9 @@
     <ClInclude Include="..\SevenZip\C\Threads.h">
       <Filter>C</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\IArchive.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\IArchive.h">
+      <Filter>Spec</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\resource.rc">
@@ -608,9 +610,13 @@
     <ClCompile Include="..\SevenZip\C\Threads.c">
       <Filter>C</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\SfxCon.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\SfxCon.cpp">
+      <Filter>Spec</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\7z.ico" />
+    <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\7z.ico">
+      <Filter>Spec</Filter>
+    </Image>
   </ItemGroup>
 </Project>

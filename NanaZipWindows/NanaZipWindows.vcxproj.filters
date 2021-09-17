@@ -42,9 +42,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="..\SevenZip\CPP\7zip\UI\GUI\NanaZipG.exe.manifest">
-      <Filter>Spec</Filter>
-    </Manifest>
+    <Manifest Include="NanaZipWindows.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractRes.h">

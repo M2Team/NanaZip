@@ -5,6 +5,7 @@
     <RootNamespace>NanaZipConsole</RootNamespace>
     <MileProjectType>ConsoleApplication</MileProjectType>
     <TargetName>NanaZipC</TargetName>
+    <MileProjectManifestFile>NanaZipConsole.manifest</MileProjectManifestFile>
   </PropertyGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
@@ -211,6 +212,9 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\StdAfx.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\UpdateCallbackConsole.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\UserInputUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipConsole.manifest" />
   </ItemGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
 </Project>

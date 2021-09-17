@@ -1,7 +1,3 @@
 #include "../../MyVersionInfo.rc"
 
 MY_VERSION_INFO_APP("NanaZip Console" , "7z")
-
-#ifndef UNDER_CE
-1  24  MOVEABLE PURE   "Console.manifest"
-#endif

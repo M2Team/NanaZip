@@ -10,10 +10,6 @@ MY_VERSION_INFO(MY_VFT_APP, "NanaZip GUI", "7zg", "NanaZipG.exe")
 
 IDI_ICON ICON "FM.ico"
 
-#ifndef UNDER_CE
-1 24 MOVEABLE PURE "NanaZipG.exe.manifest"
-#endif
-
 #include "../FileManager/PropertyName.rc"
 #include "../FileManager/OverwriteDialog.rc"
 #include "../FileManager/PasswordDialog.rc"
