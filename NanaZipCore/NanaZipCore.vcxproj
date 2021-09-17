@@ -687,6 +687,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\IStream.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\PropID.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.h" />
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
 </Project>

@@ -1,8 +1,5 @@
-#include "../../MyVersionInfo.rc"
 #include "../../GuiCommon.rc"
 #include "resource.h"
-
-MY_VERSION_INFO_APP("NanaZip File Manager", "7zFM")
 
 IDR_ACCELERATOR1 ACCELERATORS
 BEGIN

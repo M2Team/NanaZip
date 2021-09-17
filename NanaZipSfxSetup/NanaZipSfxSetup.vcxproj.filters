@@ -502,6 +502,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractEngine.h">
       <Filter>Spec</Filter>
     </ClInclude>
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\setup.ico">

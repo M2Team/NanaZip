@@ -1,12 +1,7 @@
-#include "../../MyVersionInfo.rc"
-// #include <winnt.h>
-
 #include "resource2.rc"
 #include "resource3.rc"
 
 #include "../FileManager/resourceGui.rc"
-
-MY_VERSION_INFO(MY_VFT_APP, "NanaZip GUI", "7zg", "NanaZipG.exe")
 
 IDI_ICON ICON "FM.ico"
 

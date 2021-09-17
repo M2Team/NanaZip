@@ -1,4 +1,4 @@
-// ZipAddCommon.cpp
+﻿// ZipAddCommon.cpp
 
 #include "StdAfx.h"
 
@@ -9,7 +9,7 @@
 
 #include "../../ICoder.h"
 #include "../../IPassword.h"
-#include "../../MyVersion.h"
+#include "../../../../../NanaZipCore/Mile.Project.Properties.h"
 
 #include "../../Common/CreateCoder.h"
 #include "../../Common/StreamObjects.h"
@@ -68,8 +68,8 @@ STDMETHODIMP CLzmaEncoder::SetCoderProperties(const PROPID *propIDs, const PROPV
   RINOK(EncoderSpec->WriteCoderProperties(outStream));
   if (outStreamSpec->GetPos() != kLzmaPropsSize)
     return E_FAIL;
-  Header[0] = MY_VER_MAJOR;
-  Header[1] = MY_VER_MINOR;
+  Header[0] = MILE_PROJECT_VERSION_MAJOR;
+  Header[1] = MILE_PROJECT_VERSION_MINOR;
   Header[2] = kLzmaPropsSize;
   Header[3] = 0;
   return S_OK;
@@ -138,7 +138,7 @@ HRESULT CAddCommon::Set_Pre_CompressionResult(bool inSeqMode, bool outSeqMode, U
   // cases when compressed size can be about 3% larger than uncompressed size
 
   const UInt32 kUnpackZip64Limit = 0xF8000000;
-  
+
   opRes.UnpackSize = unpackSize;
   opRes.PackSize = (UInt64)1 << 60; // we use big value to force Zip64 mode.
 
@@ -159,7 +159,7 @@ HRESULT CAddCommon::Set_Pre_CompressionResult(bool inSeqMode, bool outSeqMode, U
 
   opRes.ExtractVersion = NCompressionMethod::kExtractVersion_Default;
   opRes.DescriptorMode = outSeqMode;
-  
+
   if (_options.PasswordIsDefined)
   {
     opRes.ExtractVersion = NCompressionMethod::kExtractVersion_ZipCrypto;
@@ -171,10 +171,10 @@ HRESULT CAddCommon::Set_Pre_CompressionResult(bool inSeqMode, bool outSeqMode, U
         opRes.DescriptorMode = true;
     }
   }
-  
+
   opRes.Method = method;
   Byte ver = 0;
-  
+
   switch (method)
   {
     case NCompressionMethod::kStore: break;
@@ -215,7 +215,7 @@ HRESULT CAddCommon::Compress(
 
   CSequentialInStreamWithCRC *inSecCrcStreamSpec = new CSequentialInStreamWithCRC;
   CMyComPtr<ISequentialInStream> inCrcStream = inSecCrcStreamSpec;
-  
+
   CMyComPtr<IInStream> inStream2;
   if (!inSeqMode)
   {
@@ -234,7 +234,7 @@ HRESULT CAddCommon::Compress(
   unsigned numTestMethods = _options.MethodSequence.Size();
 
   bool descriptorMode = outSeqMode;
-  
+
   // ZipCrypto without descriptor requires additional reading pass for
   // inStream to calculate CRC for password check field.
   // The descriptor allows to use ZipCrypto check field without CRC (InfoZip's modification).
@@ -250,16 +250,16 @@ HRESULT CAddCommon::Compress(
 
   UInt32 crc = 0;
   bool crc_IsCalculated = false;
-  
+
   Byte method = 0;
   CFilterCoder::C_OutStream_Releaser outStreamReleaser;
   opRes.ExtractVersion = NCompressionMethod::kExtractVersion_Default;
-  
+
   for (unsigned i = 0; i < numTestMethods; i++)
   {
     opRes.LzmaEos = false;
     opRes.ExtractVersion = NCompressionMethod::kExtractVersion_Default;
-    
+
     if (i != 0)
     {
       if (inStream2)
@@ -278,9 +278,9 @@ HRESULT CAddCommon::Compress(
       // we still can create descriptor_mode archives with "Store" method, but they are not good for 100%
       return E_NOTIMPL;
     }
-    
+
     bool needCode = true;
-    
+
     if (_options.PasswordIsDefined)
     {
       opRes.ExtractVersion = NCompressionMethod::kExtractVersion_ZipCrypto;
@@ -290,7 +290,7 @@ HRESULT CAddCommon::Compress(
         _cryptoStreamSpec = new CFilterCoder(true);
         _cryptoStream = _cryptoStreamSpec;
       }
-      
+
       if (_options.IsAesMode)
       {
         opRes.ExtractVersion = NCompressionMethod::kExtractVersion_Aes;
@@ -309,9 +309,9 @@ HRESULT CAddCommon::Compress(
           _cryptoStreamSpec->Filter = _filterSpec = new NCrypto::NZip::CEncoder;
           _filterSpec->CryptoSetPassword((const Byte *)(const char *)_options.Password, _options.Password.Len());
         }
-        
+
         UInt32 check;
-        
+
         if (descriptorMode)
         {
           // it's Info-ZIP modification for stream_mode descriptor_mode (bit 3 of the general purpose bit flag is set)
@@ -328,10 +328,10 @@ HRESULT CAddCommon::Compress(
           }
           check = (crc >> 16);
         }
-        
+
         RINOK(_filterSpec->WriteHeader_Check16(outStream, (UInt16)check));
       }
-      
+
       if (method == NCompressionMethod::kStore)
       {
         needCode = false;
@@ -364,7 +364,7 @@ HRESULT CAddCommon::Compress(
         RINOK(_copyCoder->Code(inCrcStream, outStreamNew, NULL, NULL, progress));
         break;
       }
-      
+
       default:
       {
         if (!_compressEncoder)
@@ -457,7 +457,7 @@ HRESULT CAddCommon::Compress(
             RINOK(optProps->SetCoderPropertiesOpt(&propID, &prop, 1));
           }
         }
-        
+
         try {
         RINOK(_compressEncoder->Code(inCrcStream, outStreamNew, NULL, NULL, progress));
         } catch (...) { return E_FAIL; }
@@ -478,7 +478,7 @@ HRESULT CAddCommon::Compress(
         RINOK(_filterAesSpec->WriteFooter(outStream));
       }
     }
-    
+
     RINOK(outStream->Seek(0, STREAM_SEEK_CUR, &opRes.PackSize));
 
     {

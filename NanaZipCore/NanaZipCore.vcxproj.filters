@@ -1623,6 +1623,7 @@
     <ClInclude Include="..\SevenZip\CPP\Windows\TimeUtils.h">
       <Filter>Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SevenZip\CPP\7zip\Archive\Archive2.def">

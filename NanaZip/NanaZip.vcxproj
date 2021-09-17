@@ -373,6 +373,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\UpdateCallback100.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.h" />
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\resource.rc" />

@@ -26,7 +26,7 @@
 #include "../FileManager/LangUtils.h"
 #endif
 
-#include "../../MyVersion.h"
+#include "../../../../../NanaZipSfxWindows/Mile.Project.Properties.h"
 
 #include "../Common/Bench.h"
 
@@ -515,7 +515,7 @@ bool CBenchmarkDialog::OnInit()
       SetItemTextA(IDT_BENCH_CPU_FEATURE, s);
     }
 
-    s = "NanaZip " MY_VERSION_CPU;
+    s = "NanaZip " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")";
     SetItemTextA(IDT_BENCH_VER, s);
   }
 
@@ -1888,7 +1888,7 @@ HRESULT Benchmark(
   if (bd.TotalMode)
   {
     // bd.Bench2Text.Empty();
-    bd.Bench2Text = "NanaZip " MY_VERSION_CPU;
+    bd.Bench2Text = "NanaZip " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")";
     bd.Bench2Text += (char)0xD;
     bd.Bench2Text.Add_LF();
   }

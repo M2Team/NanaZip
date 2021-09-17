@@ -226,6 +226,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractDialog.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractGUI.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.h" />
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\7z.ico" />

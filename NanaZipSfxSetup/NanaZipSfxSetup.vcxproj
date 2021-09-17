@@ -184,6 +184,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractCallbackSfx.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractEngine.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\StdAfx.h" />
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\setup.ico" />

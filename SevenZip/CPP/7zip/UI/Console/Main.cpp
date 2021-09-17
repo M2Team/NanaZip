@@ -1,4 +1,4 @@
-// Main.cpp
+﻿// Main.cpp
 
 #include "StdAfx.h"
 
@@ -48,11 +48,7 @@
 #include "OpenCallbackConsole.h"
 #include "UpdateCallbackConsole.h"
 
-#ifdef PROG_VARIANT_R
-#include "../../../../C/7zVersion.h"
-#else
-#include "../../MyVersion.h"
-#endif
+#include "../../../../../NanaZipConsole/Mile.Project.Properties.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -89,8 +85,8 @@ extern const CHasherInfo *g_Hashers[];
 
 static const char * const kCopyrightString = "\nNanaZip"
   PROG_POSTFIX_2
-  " " MY_VERSION_CPU
-  " : " MY_COPYRIGHT_DATE "\n";
+  " " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")"
+  " : " MILE_PROJECT_LEGAL_COPYRIGHT "\n";
 
 static const char * const kHelpString =
     "Usage: 7z"

@@ -146,6 +146,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI2.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\UpdateGUI.h" />
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\UI\GUI\FM.ico" />

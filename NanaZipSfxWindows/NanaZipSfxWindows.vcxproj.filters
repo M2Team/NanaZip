@@ -635,6 +635,7 @@
     <ClInclude Include="..\SevenZip\C\Threads.h">
       <Filter>C</Filter>
     </ClInclude>
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\7z.ico">

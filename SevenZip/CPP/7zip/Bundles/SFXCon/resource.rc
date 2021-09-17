@@ -1,5 +1,1 @@
-#include "../../MyVersionInfo.rc"
-
-MY_VERSION_INFO_APP("7z Console SFX", "NanaZipWindows.sfx")
-
 101 ICON "7z.ico"

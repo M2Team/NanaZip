@@ -396,6 +396,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.h">
       <Filter>Archive Common</Filter>
     </ClInclude>
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\UI\GUI\FM.ico">

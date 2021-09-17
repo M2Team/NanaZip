@@ -33,11 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\Console\resource.rc">
-      <Filter>Spec</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Console\StdAfx.cpp">
       <Filter>Spec</Filter>
     </ClCompile>
@@ -580,6 +575,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\..\..\PropID.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZipConsole.manifest" />

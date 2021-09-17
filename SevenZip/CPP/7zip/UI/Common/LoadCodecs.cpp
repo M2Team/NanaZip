@@ -33,8 +33,6 @@ EXPORT_CODECS
 
 #include "StdAfx.h"
 
-#include "../../../../C/7zVersion.h"
-
 #include "../../../Common/MyCom.h"
 #include "../../../Common/StringToInt.h"
 #include "../../../Common/StringConvert.h"

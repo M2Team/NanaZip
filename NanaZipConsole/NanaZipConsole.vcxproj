@@ -25,9 +25,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\Console\resource.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\SevenZip\C\7zCrc.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
@@ -212,6 +209,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\StdAfx.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\UpdateCallbackConsole.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\UserInputUtils.h" />
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZipConsole.manifest" />

@@ -114,6 +114,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\UserInputUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\resource.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\StdAfx.h" />
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\resource.rc" />

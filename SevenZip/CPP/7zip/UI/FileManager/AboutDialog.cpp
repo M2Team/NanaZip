@@ -4,7 +4,7 @@
 
 #include "../../../../C/CpuArch.h"
 
-#include "../../MyVersion.h"
+#include "../../../../../NanaZip/Mile.Project.Properties.h"
 
 #include "../Common/LoadCodecs.h"
 
@@ -40,8 +40,7 @@ bool CAboutDialog::OnInit()
   #endif
 
   LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
-  SetItemText(IDT_ABOUT_VERSION, UString("NanaZip " MY_VERSION_CPU));
-  SetItemText(IDT_ABOUT_DATE, LLL(MY_DATE));
+  SetItemText(IDT_ABOUT_VERSION, UString("NanaZip " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")"));
 
   LangSetWindowText(*this, IDD_ABOUT);
   NormalizePosition();

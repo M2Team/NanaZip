@@ -1,11 +1,11 @@
 #include "AboutDialogRes.h"
 #include "../../GuiCommon.rc"
-#include "../../MyVersion.h"
+#include "../../../../../NanaZip/Mile.Project.Properties.h"
 
-#define xc 144
+#define xc 192
 #define yc 144
 
-#define y 93
+#define y 80
 
 IDI_LOGO ICON "../../UI/FileManager/7zipLogo.ico"
 
@@ -20,7 +20,6 @@ CAPTION "About NanaZip"
   PUSHBUTTON  "GitHub", IDB_ABOUT_HOMEPAGE, bx2, by, bxs, bys
   ICON   IDI_LOGO, -1, m, m, 32, 32, SS_REALSIZEIMAGE
   LTEXT  "", IDT_ABOUT_VERSION, m, 54, xc, 8
-  LTEXT  "", IDT_ABOUT_DATE, m, 67, xc, 8
-  LTEXT  MY_COPYRIGHT, -1, m, 80, xc, 8
+  LTEXT  MILE_PROJECT_LEGAL_COPYRIGHT, -1, m, 67, xc, 8
   LTEXT  "NanaZip is free software", IDT_ABOUT_INFO, m, y, xc, (by - y - 1)
 }

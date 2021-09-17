@@ -1,7 +1,4 @@
-#include "../../MyVersionInfo.rc"
 #include "resource.h"
-
-MY_VERSION_INFO_APP("7z Setup SFX", "NanaZipSetup.sfx")
 
 IDI_ICON  ICON "setup.ico"
 

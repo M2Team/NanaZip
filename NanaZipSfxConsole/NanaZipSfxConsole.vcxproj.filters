@@ -294,6 +294,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\IArchive.h">
       <Filter>Spec</Filter>
     </ClInclude>
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\resource.rc">

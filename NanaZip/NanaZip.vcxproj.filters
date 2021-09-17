@@ -1093,6 +1093,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.h">
       <Filter>Spec</Filter>
     </ClInclude>
+    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZip.manifest" />
