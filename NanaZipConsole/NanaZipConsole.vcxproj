@@ -6,6 +6,8 @@
     <MileProjectType>ConsoleApplication</MileProjectType>
     <TargetName>NanaZipC</TargetName>
     <MileProjectManifestFile>NanaZipConsole.manifest</MileProjectManifestFile>
+    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <CleanImport>true</CleanImport>
   </PropertyGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
