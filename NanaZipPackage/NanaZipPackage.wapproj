@@ -62,9 +62,8 @@
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZip.exe" />
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipC.exe " />
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipCore.dll " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipConsole.sfx " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipSetup.sfx " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipWindows.sfx " />
+    <Content Include="$(MileProjectBinariesPath)$(Configuration)\Win32\NanaZipConsole.sfx " />
+    <Content Include="$(MileProjectBinariesPath)$(Configuration)\Win32\NanaZipWindows.sfx " />
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipShellExtension.dll " />
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipG.exe " />
   </ItemGroup>
