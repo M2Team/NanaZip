@@ -194,7 +194,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\StdAfx.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SystemPage.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\UpdateCallback100.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\VerCtrl.cpp" />
@@ -371,7 +370,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\StdAfx.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SystemPage.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\UpdateCallback100.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.h" />

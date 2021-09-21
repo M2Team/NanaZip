@@ -254,7 +254,6 @@ END
 #include "PropertyName.rc"
 #include "SettingsPage.rc"
 #include "SplitDialog.rc"
-#include "SystemPage.rc"
 #include "../GUI/Extract.rc"
 #include "../GUI/resource3.rc"
 #include "../Explorer/resource2.rc"

@@ -1,4 +1,4 @@
-// MenuPage.cpp
+﻿// MenuPage.cpp
 
 #include "StdAfx.h"
 
@@ -28,9 +28,7 @@ using namespace NContextMenuFlags;
 
 static const UInt32 kLangIDs[] =
 {
-  IDX_SYSTEM_INTEGRATE_TO_MENU,
-  IDX_SYSTEM_CASCADED_MENU,
-  IDX_SYSTEM_ICON_IN_MENU,
+  IDB_SYSTEM_ASSOCIATE,
   IDX_EXTRACT_ELIM_DUP,
   IDT_SYSTEM_CONTEXT_MENU_ITEMS
 };
@@ -46,12 +44,11 @@ struct CContextMenuItem
 static const CContextMenuItem kMenuItems[] =
 {
   { IDS_CONTEXT_OPEN, kOpen },
-  { IDS_CONTEXT_OPEN, kOpenAs },
+  { IDS_CONTEXT_TEST, kTest },
+
   { IDS_CONTEXT_EXTRACT, kExtract },
   { IDS_CONTEXT_EXTRACT_HERE, kExtractHere },
   { IDS_CONTEXT_EXTRACT_TO, kExtractTo },
-
-  { IDS_CONTEXT_TEST, kTest },
 
   { IDS_CONTEXT_COMPRESS, kCompress },
   { IDS_CONTEXT_COMPRESS_TO, kCompressTo7z },
@@ -87,91 +84,9 @@ bool CMenuPage::OnInit()
 
   LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
 
-  #ifdef UNDER_CE
-
-  HideItem(IDX_SYSTEM_INTEGRATE_TO_MENU);
-  HideItem(IDX_SYSTEM_INTEGRATE_TO_MENU_2);
-
-  #else
-
-  {
-    UString s;
-    {
-      CWindow window(GetItem(IDX_SYSTEM_INTEGRATE_TO_MENU));
-      window.GetText(s);
-    }
-    UString bit64 = LangString(IDS_PROP_BIT64);
-    if (bit64.IsEmpty())
-      bit64 = "64-bit";
-    #ifdef _WIN64
-      bit64.Replace(L"64", L"32");
-    #endif
-    s.Add_Space();
-    s += '(';
-    s += bit64;
-    s += ')';
-    SetItemText(IDX_SYSTEM_INTEGRATE_TO_MENU_2, s);
-  }
-
-  const FString prefix = NDLL::GetModuleDirPrefix();
-
-  _dlls[0].ctrl = IDX_SYSTEM_INTEGRATE_TO_MENU;
-  _dlls[1].ctrl = IDX_SYSTEM_INTEGRATE_TO_MENU_2;
-
-  _dlls[0].wow = 0;
-  _dlls[1].wow =
-      #ifdef _WIN64
-        KEY_WOW64_32KEY
-      #else
-        KEY_WOW64_64KEY
-      #endif
-      ;
-
-  for (unsigned d = 0; d < 2; d++)
-  {
-    CShellDll &dll = _dlls[d];
-
-    dll.wasChanged = false;
-
-    #ifndef _WIN64
-    if (d != 0 && !g_Is_Wow64)
-    {
-      HideItem(dll.ctrl);
-      continue;
-    }
-    #endif
-
-    FString &path = dll.Path;
-    path = prefix;
-    path += (d == 0 ? "NanaZipShellExtension.dll" :
-        #ifdef _WIN64
-          "NanaZip32.dll"
-        #else
-          "NanaZip64.dll"
-        #endif
-        );
-
-
-    if (!NFile::NFind::DoesFileExist_Raw(path))
-    {
-      path.Empty();
-      EnableItem(dll.ctrl, false);
-    }
-    else
-    {
-      dll.prevValue = CheckContextMenuHandler(fs2us(path), dll.wow);
-      CheckButton(dll.ctrl, dll.prevValue);
-    }
-  }
-
-  #endif
-
-
   CContextMenuInfo ci;
   ci.Load();
 
-  CheckButton(IDX_SYSTEM_CASCADED_MENU, ci.Cascaded.Val);
-  CheckButton(IDX_SYSTEM_ICON_IN_MENU, ci.MenuIcons.Val);
   CheckButton(IDX_EXTRACT_ELIM_DUP, ci.ElimDup.Val);
 
   _listView.Attach(GetItem(IDL_SYSTEM_OPTIONS));
@@ -188,9 +103,6 @@ bool CMenuPage::OnInit()
     UString s = LangString(menuItem.ControlID);
     if (menuItem.Flag == kCRC)
       s = "CRC SHA";
-    if (menuItem.Flag == kOpenAs ||
-        menuItem.Flag == kCRC)
-      s += " >";
 
     switch (menuItem.ControlID)
     {
@@ -262,14 +174,9 @@ LONG CMenuPage::OnApply()
 
   #endif
 
-  if (_cascaded_Changed || _menuIcons_Changed || _elimDup_Changed || _flags_Changed)
+  if (_elimDup_Changed || _flags_Changed)
   {
     CContextMenuInfo ci;
-    ci.Cascaded.Val = IsButtonCheckedBool(IDX_SYSTEM_CASCADED_MENU);
-    ci.Cascaded.Def = _cascaded_Changed;
-
-    ci.MenuIcons.Val = IsButtonCheckedBool(IDX_SYSTEM_ICON_IN_MENU);
-    ci.MenuIcons.Def = _menuIcons_Changed;
 
     ci.ElimDup.Val = IsButtonCheckedBool(IDX_EXTRACT_ELIM_DUP);
     ci.ElimDup.Def = _elimDup_Changed;
@@ -300,23 +207,19 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
 {
   switch (buttonID)
   {
-    #ifndef UNDER_CE
-    case IDX_SYSTEM_INTEGRATE_TO_MENU:
-    case IDX_SYSTEM_INTEGRATE_TO_MENU_2:
-    {
-      for (unsigned d = 0; d < 2; d++)
-      {
-        CShellDll &dll = _dlls[d];
-        if (buttonID == dll.ctrl && !dll.Path.IsEmpty())
-          dll.wasChanged = true;
-      }
-      break;
-    }
-    #endif
-
-    case IDX_SYSTEM_CASCADED_MENU: _cascaded_Changed = true; break;
-    case IDX_SYSTEM_ICON_IN_MENU: _menuIcons_Changed = true; break;
     case IDX_EXTRACT_ELIM_DUP: _elimDup_Changed = true; break;
+
+    case IDB_SYSTEM_ASSOCIATE:
+    {
+        ::ShellExecuteW(
+            nullptr,
+            L"open",
+            L"ms-settings:defaultapps",
+            nullptr,
+            nullptr,
+            SW_SHOWNORMAL);
+        return true;
+    }
 
     default:
       return CPropertyPage::OnButtonClicked(buttonID, buttonHWND);

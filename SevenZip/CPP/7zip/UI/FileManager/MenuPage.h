@@ -1,4 +1,4 @@
-// MenuPage.h
+﻿// MenuPage.h
  
 #ifndef __MENU_PAGE_H
 #define __MENU_PAGE_H
@@ -21,15 +21,11 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
 {
   bool _initMode;
 
-  bool _cascaded_Changed;
-  bool _menuIcons_Changed;
   bool _elimDup_Changed;
   bool _flags_Changed;
 
   void Clear_MenuChanged()
   {
-    _cascaded_Changed = false;
-    _menuIcons_Changed = false;
     _elimDup_Changed = false;
     _flags_Changed = false;
   }

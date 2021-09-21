@@ -1,4 +1,4 @@
-// OptionsDialog.cpp
+﻿// OptionsDialog.cpp
 
 #include "StdAfx.h"
 
@@ -17,8 +17,6 @@
 #include "MenuPageRes.h"
 #include "SettingsPage.h"
 #include "SettingsPageRes.h"
-#include "SystemPage.h"
-#include "SystemPageRes.h"
 
 #include "App.h"
 #include "LangUtils.h"
@@ -31,7 +29,6 @@ using namespace NWindows;
 void OptionsDialog(HWND hwndOwner, HINSTANCE hInstance);
 void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
 {
-  CSystemPage systemPage;
   CMenuPage menuPage;
   CFoldersPage foldersPage;
   CEditPage editPage;
@@ -42,15 +39,14 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
   BIG_DIALOG_SIZE(200, 200);
 
   const UINT pageIDs[] = {
-      SIZED_DIALOG(IDD_SYSTEM),
       SIZED_DIALOG(IDD_MENU),
       SIZED_DIALOG(IDD_FOLDERS),
       SIZED_DIALOG(IDD_EDIT),
       SIZED_DIALOG(IDD_SETTINGS),
       SIZED_DIALOG(IDD_LANG) };
 
-  NControl::CPropertyPage *pagePointers[] = { &systemPage,  &menuPage, &foldersPage, &editPage, &settingsPage, &langPage };
-  
+  NControl::CPropertyPage *pagePointers[] = { &menuPage, &foldersPage, &editPage, &settingsPage, &langPage };
+
   for (unsigned i = 0; i < ARRAY_SIZE(pageIDs); i++)
   {
     NControl::CPageInfo &page = pages.AddNew();
@@ -60,7 +56,7 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
   }
 
   INT_PTR res = NControl::MyPropertySheet(pages, hwndOwner, LangString(IDS_OPTIONS));
-  
+
   if (res != -1 && res != 0)
   {
     if (langPage.LangWasChanged)
@@ -71,15 +67,7 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
       g_App.MoveSubWindows(); // we need it to change list window aafter _toolBar.AutoSize();
       g_App.ReloadLang();
     }
-  
-    /*
-    if (systemPage.WasChanged)
-    {
-      // probably it doesn't work, since image list is locked?
-      g_App.SysIconsWereChanged();
-    }
-    */
-    
+
     g_App.SetListSettings();
     g_App.RefreshAllPanels();
     // ::PostMessage(hwndOwner, kLangWasChangedMessage, 0 , 0);
