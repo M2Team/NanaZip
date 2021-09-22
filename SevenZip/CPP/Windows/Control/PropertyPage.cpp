@@ -111,7 +111,7 @@ INT_PTR MyPropertySheet(const CObjectVector<CPageInfo> &pagesInfo, HWND hwndPare
   {
     PROPSHEETHEADER sheet;
     sheet.dwSize = sizeof(sheet);
-    sheet.dwFlags = PSH_PROPSHEETPAGE;
+    sheet.dwFlags = PSH_PROPSHEETPAGE | PSH_NOCONTEXTHELP;
     sheet.hwndParent = hwndParent;
     sheet.hInstance = g_hInstance;
     AString titleA (GetSystemString(title));
@@ -127,7 +127,7 @@ INT_PTR MyPropertySheet(const CObjectVector<CPageInfo> &pagesInfo, HWND hwndPare
   {
     PROPSHEETHEADERW sheet;
     sheet.dwSize = sizeof(sheet);
-    sheet.dwFlags = PSH_PROPSHEETPAGE;
+    sheet.dwFlags = PSH_PROPSHEETPAGE | PSH_NOCONTEXTHELP;
     sheet.hwndParent = hwndParent;
     sheet.hInstance = g_hInstance;
     sheet.pszCaption = title;
