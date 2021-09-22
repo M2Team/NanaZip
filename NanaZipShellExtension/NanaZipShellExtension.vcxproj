@@ -68,7 +68,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\DllExportsExplorer.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\MyMessages.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\StdAfx.cpp" />
   </ItemGroup>

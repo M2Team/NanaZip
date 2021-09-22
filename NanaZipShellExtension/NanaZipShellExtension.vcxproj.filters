@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\DllExportsExplorer.cpp">
-      <Filter>Spec</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\StdAfx.cpp">
       <Filter>Spec</Filter>
     </ClCompile>

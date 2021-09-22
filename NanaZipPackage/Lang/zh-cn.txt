@@ -495,4 +495,4 @@ CPU 使用率
 目录接合点（Directory Junction）
 12200
 
-打开 Windows 设置应用程序将文件与 NanaZip 关联
+打开 Windows 设置应用将文件与 NanaZip 关联
