@@ -1,5 +1,5 @@
 // LangPage.h
- 
+
 #ifndef __LANG_PAGE_H
 #define __LANG_PAGE_H
 
@@ -14,10 +14,9 @@ class CLangPage: public NWindows::NControl::CPropertyPage
   bool _needSave;
 public:
   bool LangWasChanged;
-  
+
   CLangPage(): _needSave(false), LangWasChanged(false) {}
   virtual bool OnInit();
-  virtual void OnNotifyHelp();
   virtual bool OnCommand(int code, int itemID, LPARAM param);
   virtual LONG OnApply();
 };

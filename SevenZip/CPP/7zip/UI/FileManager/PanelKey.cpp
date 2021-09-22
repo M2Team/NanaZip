@@ -3,14 +3,11 @@
 #include "StdAfx.h"
 
 #include "Panel.h"
-#include "HelpUtils.h"
 
 #include "../../PropID.h"
 #include "App.h"
 
 using namespace NWindows;
-
-// #define kHelpTopic "FM/index.htm"
 
 struct CVKeyPropIDPair
 {
@@ -93,13 +90,6 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
       _prevFocusedItem = _listView.GetFocusedItem();
       break;
     }
-    /*
-    case VK_F1:
-    {
-      // ShowHelpWindow(NULL, kHelpTopic);
-      break;
-    }
-    */
     case VK_F2:
     {
       if (!alt && !ctrl &&!shift)

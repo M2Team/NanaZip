@@ -1,5 +1,5 @@
 ﻿// MenuPage.h
- 
+
 #ifndef __MENU_PAGE_H
 #define __MENU_PAGE_H
 
@@ -29,15 +29,14 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
     _elimDup_Changed = false;
     _flags_Changed = false;
   }
-  
+
   #ifndef UNDER_CE
   CShellDll _dlls[2];
   #endif
-  
+
   NWindows::NControl::CListView _listView;
 
   virtual bool OnInit();
-  virtual void OnNotifyHelp();
   virtual bool OnNotify(UINT controlID, LPNMHDR lParam);
   virtual bool OnItemChanged(const NMLISTVIEW *info);
   virtual LONG OnApply();

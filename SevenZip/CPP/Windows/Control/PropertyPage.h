@@ -18,7 +18,7 @@ class CPropertyPage: public CDialog
 {
 public:
   CPropertyPage(HWND window = NULL): CDialog(window){};
-  
+
   void Changed() { PropSheet_Changed(GetParent(), (HWND)*this); }
   void UnChanged() { PropSheet_UnChanged(GetParent(), (HWND)*this); }
 
@@ -30,8 +30,6 @@ public:
   virtual LONG OnSetActive(const PSHNOTIFY *) { return OnSetActive(); }
   virtual LONG OnApply() { return PSNRET_NOERROR; }
   virtual LONG OnApply(const PSHNOTIFY *) { return OnApply(); }
-  virtual void OnNotifyHelp() {}
-  virtual void OnNotifyHelp(const PSHNOTIFY *) { OnNotifyHelp(); }
   virtual void OnReset() {}
   virtual void OnReset(const PSHNOTIFY *) { OnReset(); }
 };

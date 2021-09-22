@@ -186,9 +186,6 @@ bool CDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDCANCEL:
       OnCancel();
       break;
-    case IDHELP:
-      OnHelp();
-      break;
     default:
       return false;
   }

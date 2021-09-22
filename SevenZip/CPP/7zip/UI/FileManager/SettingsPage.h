@@ -1,5 +1,5 @@
 // SettingsPage.h
- 
+
 #ifndef __SETTINGS_PAGE_H
 #define __SETTINGS_PAGE_H
 
@@ -16,7 +16,6 @@ class CSettingsPage: public NWindows::NControl::CPropertyPage
   bool OnButtonClicked(int buttonID, HWND buttonHWND);
 public:
   virtual bool OnInit();
-  virtual void OnNotifyHelp();
   virtual LONG OnApply();
 };
 

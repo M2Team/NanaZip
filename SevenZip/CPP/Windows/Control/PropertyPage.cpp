@@ -38,7 +38,6 @@ bool CPropertyPage::OnNotify(UINT /* controlID */, LPNMHDR lParam)
     case PSN_KILLACTIVE: SetMsgResult(BoolToBOOL(OnKillActive(LPPSHNOTIFY(lParam)))); break;
     case PSN_SETACTIVE: SetMsgResult(OnSetActive(LPPSHNOTIFY(lParam))); break;
     case PSN_RESET: OnReset(LPPSHNOTIFY(lParam)); break;
-    case PSN_HELP: OnNotifyHelp(LPPSHNOTIFY(lParam)); break;
     default: return false;
   }
   return true;
@@ -67,12 +66,12 @@ INT_PTR MyPropertySheet(const CObjectVector<CPageInfo> &pagesInfo, HWND hwndPare
     {
       PROPSHEETPAGE page;
       page.dwSize = sizeof(page);
-      page.dwFlags = PSP_HASHELP;
+      page.dwFlags = 0;
       page.hInstance = g_hInstance;
       page.pszTemplate = MAKEINTRESOURCE(pageInfo.ID);
       page.pszIcon = NULL;
       page.pfnDlgProc = NWindows::NControl::MyProperyPageProcedure;
-      
+
       if (titles[i].IsEmpty())
         page.pszTitle = NULL;
       else
@@ -88,12 +87,12 @@ INT_PTR MyPropertySheet(const CObjectVector<CPageInfo> &pagesInfo, HWND hwndPare
     {
       PROPSHEETPAGEW page;
       page.dwSize = sizeof(page);
-      page.dwFlags = PSP_HASHELP;
+      page.dwFlags = 0;
       page.hInstance = g_hInstance;
       page.pszTemplate = MAKEINTRESOURCEW(pageInfo.ID);
       page.pszIcon = NULL;
       page.pfnDlgProc = NWindows::NControl::MyProperyPageProcedure;
-      
+
       if (pageInfo.Title.IsEmpty())
         page.pszTitle = NULL;
       else

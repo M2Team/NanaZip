@@ -1,5 +1,5 @@
 // EditPage.h
- 
+
 #ifndef __EDIT_PAGE_H
 #define __EDIT_PAGE_H
 
@@ -21,7 +21,6 @@ class CEditPage: public NWindows::NControl::CPropertyPage
   bool _initMode;
 public:
   virtual bool OnInit();
-  virtual void OnNotifyHelp();
   virtual bool OnCommand(int code, int itemID, LPARAM param);
   virtual LONG OnApply();
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);

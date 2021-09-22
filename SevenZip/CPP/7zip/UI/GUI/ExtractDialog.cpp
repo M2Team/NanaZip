@@ -9,11 +9,6 @@
 #include "../../../Windows/FileDir.h"
 #include "../../../Windows/ResourceString.h"
 
-#ifndef NO_REGISTRY
-#include "../FileManager/HelpUtils.h"
-#endif
-
-
 #include "../FileManager/BrowseDialog.h"
 #include "../FileManager/LangUtils.h"
 #include "../FileManager/resourceGui.h"
@@ -410,12 +405,3 @@ void CExtractDialog::OnOK()
 
   CModalDialog::OnOK();
 }
-
-#ifndef NO_REGISTRY
-#define kHelpTopic "fm/plugins/NanaZip/extract.htm"
-void CExtractDialog::OnHelp()
-{
-  ShowHelpWindow(kHelpTopic);
-  CModalDialog::OnHelp();
-}
-#endif

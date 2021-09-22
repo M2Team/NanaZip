@@ -54,9 +54,8 @@ BEGIN
   CONTROL   "Restore file security", IDX_EXTRACT_NT_SECUR, MY_CHECKBOX,
             g2x, m + 104, g2xs, 10
   
-  DEFPUSHBUTTON  "OK",     IDOK,     bx3, by, bxs, bys, WS_GROUP
-  PUSHBUTTON     "Cancel", IDCANCEL, bx2, by, bxs, bys
-  PUSHBUTTON     "Help",   IDHELP,   bx1, by, bxs, bys
+  DEFPUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys, WS_GROUP
+  PUSHBUTTON     "Cancel", IDCANCEL, bx1, by, bxs, bys
 END
 
 

@@ -7,7 +7,6 @@
 #include "../../../Windows/FileFind.h"
 #include "../../../Windows/ResourceString.h"
 
-#include "HelpUtils.h"
 #include "LangPage.h"
 #include "LangPageRes.h"
 #include "LangUtils.h"
@@ -19,8 +18,6 @@ static const UInt32 kLangIDs[] =
 {
   IDT_LANG_LANG
 };
-
-#define kLangTopic "fm/options.htm#language"
 
 static void NativeLangString(UString &dest, const wchar_t *s)
 {
@@ -50,7 +47,7 @@ bool CLangPage::OnInit()
   NFile::NFind::CFileInfo fi;
   CLang lang;
   UString error;
-  
+
   while (enumerator.Next(fi))
   {
     if (fi.IsDir())
@@ -71,7 +68,7 @@ bool CLangPage::OnInit()
       error += fs2us(fi.Name);
       continue;
     }
-    
+
     const UString shortName = fs2us(fi.Name.Left(pos));
     UString s = shortName;
     const wchar_t *eng = lang.Get(IDS_LANG_ENGLISH);
@@ -86,7 +83,7 @@ bool CLangPage::OnInit()
     if (g_LangID.IsEqualTo_NoCase(shortName))
       _langCombo.SetCurSel(index);
   }
-  
+
   if (!error.IsEmpty())
     MessageBoxW(0, error, L"Error in Lang file", MB_ICONERROR);
   return CPropertyPage::OnInit();
@@ -101,11 +98,6 @@ LONG CLangPage::OnApply()
   ReloadLang();
   LangWasChanged = true;
   return PSNRET_NOERROR;
-}
-
-void CLangPage::OnNotifyHelp()
-{
-  ShowHelpWindow(kLangTopic);
 }
 
 bool CLangPage::OnCommand(int code, int itemID, LPARAM param)

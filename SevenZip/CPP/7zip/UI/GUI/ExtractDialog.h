@@ -50,7 +50,7 @@ class CExtractDialog: public NWindows::NControl::CModalDialog
   // int GetFilesMode() const;
   void UpdatePasswordControl();
   #endif
-  
+
   void OnButtonSetPath();
 
   void CheckButton_TwoBools(UINT id, const CBoolPair &b1, const CBoolPair &b2);
@@ -58,15 +58,13 @@ class CExtractDialog: public NWindows::NControl::CModalDialog
   virtual bool OnInit();
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
   virtual void OnOK();
-  
+
   #ifndef NO_REGISTRY
 
-  virtual void OnHelp();
-
   NExtract::CInfo _info;
-  
+
   #endif
-  
+
   bool IsShowPasswordChecked() const { return IsButtonCheckedBool(IDX_PASSWORD_SHOW); }
 public:
   // bool _enableSelectedFilesButton;

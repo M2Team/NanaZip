@@ -70,7 +70,6 @@ BEGIN
   PUSHBUTTON  "&Restart", IDB_RESTART, bx1, m, bxs, bys
   PUSHBUTTON  "&Stop",    IDB_STOP,    bx1, m + bys + 6, bxs, bys
   
-  PUSHBUTTON  "&Help",  IDHELP,   bx2, by, bxs, bys
   PUSHBUTTON  "Cancel", IDCANCEL, bx1, by, bxs, bys
   
   LTEXT  "&Dictionary size:", IDT_BENCH_DICTIONARY, m, m + 1, g0xs, 8
@@ -283,6 +282,5 @@ CAPTION "Benchmark"
   LTEXT  "Elapsed time:", IDT_BENCH_ELAPSED, m, m, 58, 8
   RTEXT  "", IDT_BENCH_ELAPSED_VAL, m + 58, m, 38, 8
   EDITTEXT  IDE_BENCH2_EDIT, m, m + 14, xc, yc - bys - m - 14, ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL | WS_VSCROLL | WS_HSCROLL
-  PUSHBUTTON  "&Help",  IDHELP,   bx2, by, bxs, bys
   PUSHBUTTON  "Cancel", IDCANCEL, bx1, by, bxs, bys
 }

@@ -6,7 +6,6 @@
 #include "FoldersPage.h"
 
 #include "../FileManager/BrowseDialog.h"
-#include "../FileManager/HelpUtils.h"
 #include "../FileManager/LangUtils.h"
 
 using namespace NWindows;
@@ -27,10 +26,8 @@ static const int kWorkModeButtons[] =
   IDR_FOLDERS_WORK_SPECIFIED
 };
 
-#define kFoldersTopic "fm/options.htm#folders"
-
 static const unsigned kNumWorkModeButtons = ARRAY_SIZE(kWorkModeButtons);
- 
+
 bool CFoldersPage::OnInit()
 {
   _initMode = true;
@@ -40,7 +37,7 @@ bool CFoldersPage::OnInit()
   m_WorkDirInfo.Load();
 
   CheckButton(IDX_FOLDERS_WORK_FOR_REMOVABLE, m_WorkDirInfo.ForRemovableOnly);
-  
+
   CheckRadioButton(kWorkModeButtons[0], kWorkModeButtons[kNumWorkModeButtons - 1],
       kWorkModeButtons[m_WorkDirInfo.Mode]);
 
@@ -49,7 +46,7 @@ bool CFoldersPage::OnInit()
   m_WorkPath.SetText(fs2us(m_WorkDirInfo.Path));
 
   MyEnableControls();
-  
+
   _initMode = false;
   return CPropertyPage::OnInit();
 }
@@ -113,7 +110,7 @@ bool CFoldersPage::OnButtonClicked(int buttonID, HWND buttonHWND)
       ModifiedEvent();
       return true;
     }
-  
+
   switch (buttonID)
   {
     case IDB_FOLDERS_WORK_PATH:
@@ -124,7 +121,7 @@ bool CFoldersPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     default:
       return CPropertyPage::OnButtonClicked(buttonID, buttonHWND);
   }
-  
+
   ModifiedEvent();
   return true;
 }
@@ -158,9 +155,4 @@ LONG CFoldersPage::OnApply()
     _needSave = false;
   }
   return PSNRET_NOERROR;
-}
-
-void CFoldersPage::OnNotifyHelp()
-{
-  ShowHelpWindow(kFoldersTopic);
 }

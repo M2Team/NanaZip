@@ -17,7 +17,6 @@
 #include "../GUI/ExtractDialogRes.h"
 
 #include "FormatUtils.h"
-#include "HelpUtils.h"
 #include "LangUtils.h"
 #include "MenuPage.h"
 #include "MenuPageRes.h"
@@ -32,8 +31,6 @@ static const UInt32 kLangIDs[] =
   IDX_EXTRACT_ELIM_DUP,
   IDT_SYSTEM_CONTEXT_MENU_ITEMS
 };
-
-#define kMenuTopic "fm/options.htm#sevenZip"
 
 struct CContextMenuItem
 {
@@ -196,11 +193,6 @@ LONG CMenuPage::OnApply()
   // UnChanged();
 
   return PSNRET_NOERROR;
-}
-
-void CMenuPage::OnNotifyHelp()
-{
-  ShowHelpWindow(kMenuTopic);
 }
 
 bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)

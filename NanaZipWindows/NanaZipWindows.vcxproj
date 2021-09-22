@@ -125,7 +125,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FolderInterface.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\HelpUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\OpenCallback.h" />
@@ -250,7 +249,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\EditDialog.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\HelpUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\OpenCallback.cpp" />

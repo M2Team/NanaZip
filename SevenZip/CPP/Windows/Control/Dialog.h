@@ -113,15 +113,6 @@ public:
   virtual bool OnSize(WPARAM /* wParam */, int /* xSize */, int /* ySize */) { return false; }
   virtual bool OnDestroy() { return false; }
 
-  /*
-  #ifdef UNDER_CE
-  virtual void OnHelp(void *) { OnHelp(); }
-  #else
-  virtual void OnHelp(LPHELPINFO) { OnHelp(); }
-  #endif
-  */
-  virtual void OnHelp() {};
-
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
   virtual void OnOK() {};
   virtual void OnCancel() {};

@@ -6,7 +6,6 @@
 #include "EditPageRes.h"
 
 #include "BrowseDialog.h"
-#include "HelpUtils.h"
 #include "LangUtils.h"
 #include "RegistryUtils.h"
 
@@ -22,8 +21,6 @@ static const UInt32 kLangIDs_Colon[] =
 {
   IDT_EDIT_VIEWER
 };
-
-#define kEditTopic "FM/options.htm#editor"
 
 bool CEditPage::OnInit()
 {
@@ -70,13 +67,8 @@ LONG CEditPage::OnApply()
       c.WasChanged = false;
     }
   }
-  
-  return PSNRET_NOERROR;
-}
 
-void CEditPage::OnNotifyHelp()
-{
-  ShowHelpWindow(kEditTopic);
+  return PSNRET_NOERROR;
 }
 
 void SplitCmdLineSmart(const UString &cmd, UString &prg, UString &params);
@@ -88,11 +80,11 @@ static void Edit_BrowseForFile(NWindows::NControl::CEdit &edit, HWND hwnd)
 
   UString param;
   UString prg;
-  
+
   SplitCmdLineSmart(cmd, prg, param);
 
   UString resPath;
-  
+
   if (MyBrowseForFile(hwnd, 0, prg, NULL, L"*.exe", resPath))
   {
     resPath.Trim();
@@ -123,7 +115,7 @@ bool CEditPage::OnButtonClicked(int buttonID, HWND buttonHWND)
       return true;
     }
   }
-  
+
   return CPropertyPage::OnButtonClicked(buttonID, buttonHWND);
 }
 

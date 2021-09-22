@@ -48,17 +48,6 @@ bool CDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
     case WM_TIMER: return OnTimer(wParam, lParam);
     case WM_SIZE: return OnSize(wParam, LOWORD(lParam), HIWORD(lParam));
     case WM_DESTROY: return OnDestroy();
-    case WM_HELP: OnHelp(); return true;
-    /*
-        OnHelp(
-          #ifdef UNDER_CE
-          (void *)
-          #else
-          (LPHELPINFO)
-          #endif
-          lParam);
-        return true;
-    */
     default: return false;
   }
 }
@@ -82,7 +71,6 @@ bool CDialog::OnButtonClicked(int buttonID, HWND /* buttonHWND */)
     case IDOK: OnOK(); break;
     case IDCANCEL: OnCancel(); break;
     case IDCLOSE: OnClose(); break;
-    case IDHELP: OnHelp(); break;
     default: return false;
   }
   return true;

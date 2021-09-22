@@ -63,7 +63,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\HelpUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.cpp" />
@@ -110,7 +109,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\HelpUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h" />

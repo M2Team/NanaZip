@@ -1,5 +1,5 @@
 // FoldersPage.h
- 
+
 #ifndef __FOLDERS_PAGE_H
 #define __FOLDERS_PAGE_H
 
@@ -17,14 +17,13 @@ class CFoldersPage : public NWindows::NControl::CPropertyPage
 
   void MyEnableControls();
   void ModifiedEvent();
-  
+
   void OnFoldersWorkButtonPath();
   int GetWorkMode() const;
   void GetWorkDir(NWorkDir::CInfo &workDirInfo);
   // bool WasChanged();
   virtual bool OnInit();
   virtual bool OnCommand(int code, int itemID, LPARAM lParam);
-  virtual void OnNotifyHelp();
   virtual LONG OnApply();
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
 };

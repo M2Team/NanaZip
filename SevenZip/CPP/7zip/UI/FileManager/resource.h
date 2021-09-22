@@ -98,7 +98,6 @@
 #define IDM_BENCHMARK            901
 #define IDM_BENCHMARK2           902
 
-#define IDM_HELP_CONTENTS        960
 #define IDM_ABOUT                961
 
 #define IDS_OPTIONS                     2100

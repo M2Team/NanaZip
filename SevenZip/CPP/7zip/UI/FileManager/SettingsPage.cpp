@@ -8,7 +8,6 @@
 #include "../../../Windows/MemoryLock.h"
 #endif
 
-#include "HelpUtils.h"
 #include "LangUtils.h"
 #include "RegistryUtils.h"
 #include "SettingsPage.h"
@@ -28,8 +27,6 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_ALTERNATIVE_SELECTION,
   IDX_SETTINGS_LARGE_PAGES
 };
-
-#define kSettingsTopic "FM/options.htm#settings"
 
 extern bool IsLargePageSupported();
 
@@ -52,12 +49,12 @@ bool CSettingsPage::OnInit()
   // CheckButton(IDX_SETTINGS_UNDERLINE, st.Underline);
 
   CheckButton(IDX_SETTINGS_SHOW_SYSTEM_MENU, st.ShowSystemMenu);
-  
+
   if (IsLargePageSupported())
     CheckButton(IDX_SETTINGS_LARGE_PAGES, ReadLockMemoryEnable());
   else
     EnableItem(IDX_SETTINGS_LARGE_PAGES, false);
-  
+
   // EnableSubItems();
 
   return CPropertyPage::OnInit();
@@ -82,14 +79,14 @@ LONG CSettingsPage::OnApply()
     st.SingleClick = IsButtonCheckedBool(IDX_SETTINGS_SINGLE_CLICK);
     st.AlternativeSelection = IsButtonCheckedBool(IDX_SETTINGS_ALTERNATIVE_SELECTION);
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
-    
+
     st.ShowSystemMenu = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SYSTEM_MENU);
 
     st.Save();
-    
+
     _wasChanged = false;
   }
-  
+
   #ifndef UNDER_CE
   if (_largePages_wasChanged)
   {
@@ -102,13 +99,8 @@ LONG CSettingsPage::OnApply()
     _largePages_wasChanged = false;
   }
   #endif
-  
-  return PSNRET_NOERROR;
-}
 
-void CSettingsPage::OnNotifyHelp()
-{
-  ShowHelpWindow(kSettingsTopic);
+  return PSNRET_NOERROR;
 }
 
 bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)

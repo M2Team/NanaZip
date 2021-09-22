@@ -13,7 +13,6 @@
 
 #include "../FileManager/BrowseDialog.h"
 #include "../FileManager/FormatUtils.h"
-#include "../FileManager/HelpUtils.h"
 #include "../FileManager/SplitUtils.h"
 
 #include "../Explorer/MyMessages.h"
@@ -887,13 +886,6 @@ void CCompressDialog::OnOK()
   m_RegistryInfo.Save();
 
   CModalDialog::OnOK();
-}
-
-#define kHelpTopic "fm/plugins/NanaZip/add.htm"
-
-void CCompressDialog::OnHelp()
-{
-  ShowHelpWindow(kHelpTopic);
 }
 
 bool CCompressDialog::OnCommand(int code, int itemID, LPARAM lParam)

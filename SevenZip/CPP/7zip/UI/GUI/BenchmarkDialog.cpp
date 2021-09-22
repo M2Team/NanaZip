@@ -21,7 +21,6 @@
 #include "../../Common/MethodProps.h"
 
 #include "../FileManager/DialogSize.h"
-#include "../FileManager/HelpUtils.h"
 #ifdef LANG
 #include "../FileManager/LangUtils.h"
 #endif
@@ -34,8 +33,6 @@
 #include "BenchmarkDialog.h"
 
 using namespace NWindows;
-
-#define kHelpTopic "fm/benchmark.htm"
 
 static const UINT_PTR kTimerID = 4;
 static const UINT kTimerElapse = 1000; // 1000
@@ -295,7 +292,6 @@ class CBenchmarkDialog:
   virtual bool OnSize(WPARAM /* wParam */, int xSize, int ySize);
   virtual bool OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
   virtual bool OnCommand(int code, int itemID, LPARAM lParam);
-  virtual void OnHelp();
   virtual void OnCancel();
   virtual bool OnTimer(WPARAM timerID, LPARAM callback);
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
@@ -667,10 +663,9 @@ bool CBenchmarkDialog::OnSize(WPARAM /* wParam */, int xSize, int ySize)
     return false;
   }
 
-  int bx1, bx2, by;
+  int bx1, by;
 
   GetItemSizes(IDCANCEL, bx1, by);
-  GetItemSizes(IDHELP, bx2, by);
 
   {
     int y = ySize - my - by;
@@ -679,7 +674,6 @@ bool CBenchmarkDialog::OnSize(WPARAM /* wParam */, int xSize, int ySize)
     InvalidateRect(NULL);
 
     MoveItem(IDCANCEL, x, y, bx1, by);
-    MoveItem(IDHELP, x - mx - bx2, y, bx2, by);
   }
 
   if (_consoleEdit)
@@ -980,14 +974,6 @@ void CBenchmarkDialog::OnCancel()
   else
     CModalDialog::OnCancel();
 }
-
-
-void CBenchmarkDialog::OnHelp()
-{
-  ShowHelpWindow(kHelpTopic);
-}
-
-
 
 // void GetTimeString(UInt64 timeValue, wchar_t *s);
 

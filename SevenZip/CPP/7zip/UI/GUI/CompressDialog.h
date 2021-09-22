@@ -221,7 +221,6 @@ protected:
   virtual bool OnCommand(int code, int itemID, LPARAM lParam);
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
   virtual void OnOK();
-  virtual void OnHelp();
 
 };
 

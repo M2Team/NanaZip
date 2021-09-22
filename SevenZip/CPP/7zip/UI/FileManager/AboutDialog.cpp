@@ -11,7 +11,6 @@
 #include "AboutDialog.h"
 #include "PropertyNameRes.h"
 
-#include "HelpUtils.h"
 #include "LangUtils.h"
 
 static const UInt32 kLangIDs[] =
@@ -20,7 +19,6 @@ static const UInt32 kLangIDs[] =
 };
 
 #define kHomePageURL TEXT("https://github.com/M2Team/NanaZip")
-#define kHelpTopic "start.htm"
 
 #define LLL_(quote) L##quote
 #define LLL(quote) LLL_(quote)
@@ -45,11 +43,6 @@ bool CAboutDialog::OnInit()
   LangSetWindowText(*this, IDD_ABOUT);
   NormalizePosition();
   return CModalDialog::OnInit();
-}
-
-void CAboutDialog::OnHelp()
-{
-  ShowHelpWindow(kHelpTopic);
 }
 
 bool CAboutDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
