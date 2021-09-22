@@ -26,33 +26,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\7z.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\arj.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\bz2.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\cab.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\cpio.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\deb.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\dmg.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\fat.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\gz.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\hfs.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\iso.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\lzh.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\lzma.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\ntfs.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\rar.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\rpm.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\split.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\squashfs.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\tar.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\vhd.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\wim.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\xar.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\xz.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\z.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\zip.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\SevenZip\CPP\7zip\Archive\Archive2.def" />
   </ItemGroup>
   <ItemGroup>
@@ -465,9 +438,6 @@
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\C\7zBuf.h" />

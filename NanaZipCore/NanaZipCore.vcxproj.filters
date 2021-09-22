@@ -4,9 +4,6 @@
     <Filter Include="Spec">
       <UniqueIdentifier>{165b33b6-dd17-476d-8c1c-69edb8321a2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Spec\Icons">
-      <UniqueIdentifier>{ee610801-4945-485e-bc1f-8fbecf03b093}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{550e2080-488c-4e19-bf75-c7180b3726ea}</UniqueIdentifier>
     </Filter>
@@ -85,83 +82,6 @@
     <Filter Include="Windows">
       <UniqueIdentifier>{0b03f898-87a4-48c6-aa2c-191c8b0f671c}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\7z.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\arj.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\bz2.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\cab.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\cpio.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\deb.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\dmg.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\fat.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\gz.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\hfs.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\iso.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\lzh.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\lzma.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\ntfs.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\rar.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\rpm.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\split.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\squashfs.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\tar.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\vhd.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\wim.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\xar.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\xz.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\z.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\Archive\Icons\zip.ico">
-      <Filter>Spec\Icons</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ArchiveExports.cpp">
@@ -959,11 +879,6 @@
     <ClCompile Include="..\SevenZip\C\7zCrcOpt.c">
       <Filter>C</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\resource.rc">
-      <Filter>Spec</Filter>
-    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.h">
