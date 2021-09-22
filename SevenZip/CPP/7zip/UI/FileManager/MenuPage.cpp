@@ -9,7 +9,6 @@
 #include "../../../Windows/FileFind.h"
 
 #include "../Explorer/ContextMenuFlags.h"
-#include "../Explorer/RegistryContextMenu.h"
 #include "../Explorer/resource.h"
 
 #include "../FileManager/PropertyNameRes.h"
@@ -138,39 +137,8 @@ bool CMenuPage::OnInit()
   return CPropertyPage::OnInit();
 }
 
-
-#ifndef UNDER_CE
-
-static void ShowMenuErrorMessage(const wchar_t *m, HWND hwnd)
-{
-  MessageBoxW(hwnd, m, L"NanaZip", MB_ICONERROR);
-}
-
-#endif
-
-
 LONG CMenuPage::OnApply()
 {
-  #ifndef UNDER_CE
-
-  for (unsigned d = 2; d != 0;)
-  {
-    d--;
-    CShellDll &dll = _dlls[d];
-    if (dll.wasChanged && !dll.Path.IsEmpty())
-    {
-      bool newVal = IsButtonCheckedBool(dll.ctrl);
-      LONG res = SetContextMenuHandler(newVal, fs2us(dll.Path), dll.wow);
-      if (res != ERROR_SUCCESS && (dll.prevValue != newVal || newVal))
-        ShowMenuErrorMessage(NError::MyFormatMessage(res), *this);
-      dll.prevValue = CheckContextMenuHandler(fs2us(dll.Path), dll.wow);
-      CheckButton(dll.ctrl, dll.prevValue);
-      dll.wasChanged = false;
-    }
-  }
-
-  #endif
-
   if (_elimDup_Changed || _flags_Changed)
   {
     CContextMenuInfo ci;

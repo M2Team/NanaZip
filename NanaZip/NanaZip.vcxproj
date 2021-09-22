@@ -132,7 +132,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\WorkDir.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\RegistryContextMenu.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\GUI\HashGUI.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI2.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\AboutDialog.cpp" />
@@ -316,7 +315,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\RegistryContextMenu.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\HashGUI.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI2.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\AboutDialog.h" />

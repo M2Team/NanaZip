@@ -14,5 +14,3 @@ BEGIN
   IDS_CONTEXT_COMPRESS_EMAIL "Compress and email..."
   IDS_CONTEXT_COMPRESS_TO_EMAIL "Compress to {0} and email"
 END
-
-IDB_MENU_LOGO  BITMAP  "../../UI/Explorer/MenuLogo.bmp"

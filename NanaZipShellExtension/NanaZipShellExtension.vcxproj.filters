@@ -42,9 +42,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.cpp">
       <Filter>UI Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\MyMessages.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -166,9 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ZipRegistry.h">
       <Filter>UI Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyMessages.h">
       <Filter>Engine</Filter>

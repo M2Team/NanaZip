@@ -524,9 +524,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp">
       <Filter>UI\Explorer</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\RegistryContextMenu.cpp">
-      <Filter>UI\Explorer</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\GUI\HashGUI.cpp">
       <Filter>UI\GUI</Filter>
     </ClCompile>
@@ -1010,9 +1007,6 @@
       <Filter>UI\Explorer</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h">
-      <Filter>UI\Explorer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\RegistryContextMenu.h">
       <Filter>UI\Explorer</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\HashGUI.h">
