@@ -189,7 +189,9 @@ namespace NanaZip::ShellExtension
             HashCRC64,
             HashSHA1,
             HashSHA256,
-            HashAll
+            HashAll,
+
+            Maximum
         };
     }
     
@@ -199,41 +201,29 @@ namespace NanaZip::ShellExtension
     struct ExplorerCommandBase : public winrt::implements<
         ExplorerCommandBase,
         IExplorerCommand,
-        IObjectWithSite,
-        IEnumExplorerCommand>
+        IObjectWithSite>
     {
     private:
 
-        std::vector<winrt::com_ptr<IShellItem>> m_ShellItems;
-
-    private:
+        std::wstring m_Title;
 
         DWORD m_CommandID;
         bool m_IsSeparator;
         CBoolPair m_ElimDup;
 
-        std::wstring m_Icon;
-        SubCommandList m_SubCommands;
-
-        SubCommandListIterator m_CurrentSubCommand;
         winrt::com_ptr<IUnknown> m_Site;
 
     public:
 
         ExplorerCommandBase(
+            std::wstring const& Title = std::wstring(),
             DWORD CommandID = CommandID::None,
-            CBoolPair const& ElimDup = CBoolPair(),
-            std::wstring const& Icon = std::wstring(),
-            SubCommandList const& SubCommands = SubCommandList()) :
+            CBoolPair const& ElimDup = CBoolPair()) :
+            m_Title(Title),
             m_CommandID(CommandID),
-            m_ElimDup(ElimDup),
-            m_Icon(Icon),
-            m_SubCommands(SubCommands)
+            m_ElimDup(ElimDup)
         {
-            this->m_CurrentSubCommand = this->m_SubCommands.cbegin();
-            this->m_IsSeparator = (
-                (this->m_CommandID == CommandID::None) &&
-                (this->m_SubCommands.empty()));
+            this->m_IsSeparator = (this->m_CommandID == CommandID::None);
         }
 
 #pragma region IExplorerCommand
@@ -242,297 +232,15 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _Outptr_ LPWSTR* ppszName)
         {
+            Mile::UnreferencedParameter(psiItemArray);
+
             if (this->m_IsSeparator)
             {
                 *ppszName = nullptr;
                 return S_FALSE;
             }
 
-            std::vector<std::wstring> FilePaths;
-            if (psiItemArray)
-            {
-                DWORD Count = 0;
-                if (SUCCEEDED(psiItemArray->GetCount(&Count)))
-                {
-                    for (DWORD i = 0; i < Count; ++i)
-                    {
-                        winrt::com_ptr<IShellItem> Item;
-                        if (SUCCEEDED(psiItemArray->GetItemAt(
-                            i,
-                            Item.put())))
-                        {
-                            LPWSTR DisplayName = nullptr;
-                            if (SUCCEEDED(Item->GetDisplayName(
-                                SIGDN_FILESYSPATH,
-                                &DisplayName)))
-                            {
-                                FilePaths.push_back(std::wstring(DisplayName));
-                                ::CoTaskMemFree(DisplayName);
-                            }
-                        }
-                    }
-                }
-            }
-
-            bool NeedExtract = false;
-            if (FilePaths.size() > 0)
-            {
-                for (std::wstring const FilePath : FilePaths)
-                {
-                    DWORD FileAttributes = ::GetFileAttributesW(
-                        FilePath.c_str());
-                    if (FileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-                    {
-                        continue;
-                    }
-                    
-                    if (DoNeedExtract(::PathFindFileNameW(FilePath.c_str())))
-                    {
-                        NeedExtract = true;
-                        break;
-                    }
-                }
-            }
-
-            std::wstring SpecFolder = L"*";
-            if (NeedExtract)
-            {
-                if (FilePaths.size() == 1)
-                {
-                    SpecFolder = GetSubFolderNameForExtract(
-                        ::PathFindFileNameW(FilePaths[0].c_str()));
-                }
-                SpecFolder += L'\\';
-            }
-
-            std::wstring ArchiveName;
-            if (FilePaths.size() == 1)
-            {
-                UStringVector FileNames;
-                NWindows::NFile::NFind::CFileInfo FileInfo0;
-                FString FolderPrefix;
-
-                for (std::wstring const FilePath : FilePaths)
-                {
-                    FileNames.Add(FilePath.c_str());
-                }
-
-                const UString& FileName = FileNames.Front();
-
-                if (NWindows::NFile::NName::IsDevicePath(us2fs(FileName)))
-                {
-                    // CFileInfo::Find can be slow for device files. So we
-                    // don't call it.
-                    // we need only name here.
-                    // change it 4 - must be constant
-                    FileInfo0.Name = us2fs(FileName.Ptr(
-                        NWindows::NFile::NName::kDevicePathPrefixSize)); 
-                    FolderPrefix = "C:\\";
-                }
-                else
-                {
-                    if (!FileInfo0.Find(us2fs(FileName)))
-                    {
-                        return Mile::HResultFromLastError();
-                    }
-                    NWindows::NFile::NDir::GetOnlyDirPrefix(
-                        us2fs(FileName),
-                        FolderPrefix);
-                }
-
-                const UString Name = CreateArchiveName(
-                    FileNames,
-                    FileNames.Size() == 1 ? &FileInfo0 : NULL);
-                ArchiveName = std::wstring(Name.Ptr(), Name.Len());
-
-            }
-
-            std::wstring ArchiveName7z = ArchiveName + L".7z";
-            std::wstring ArchiveNameZip = ArchiveName + L".zip";
-
-            std::wstring FinalString;
-
-            switch (this->m_CommandID)
-            {
-            case CommandID::None:
-            {
-                FinalString = L"NanaZip";
-                break;
-            }
-            case CommandID::Open:
-            {
-                if (FilePaths.size() != 1)
-                {
-                    break;
-                }
-
-                DWORD FileAttributes = ::GetFileAttributesW(
-                    FilePaths[0].c_str());
-                if (FileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-                {
-                    break;
-                }
-
-                if (!DoNeedExtract(FilePaths[0].c_str()))
-                {
-                    break;
-                }
-                
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_OPEN, TranslatedString);
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-
-                break;
-            }
-            case CommandID::Test:
-            {
-                if (!NeedExtract)
-                {
-                    break;
-                }
-
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_TEST, TranslatedString);
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::Extract:
-            {
-                if (!NeedExtract)
-                {
-                    break;
-                }
-
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_EXTRACT, TranslatedString);
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::ExtractHere:
-            {
-                if (!NeedExtract)
-                {
-                    break;
-                }
-
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_EXTRACT_HERE, TranslatedString);
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::ExtractTo:
-            {
-                if (!NeedExtract)
-                {
-                    break;
-                }
-
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_EXTRACT_TO, TranslatedString);
-                MyFormatNew_ReducedName(TranslatedString, SpecFolder.c_str());
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::Compress:
-            {
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_COMPRESS, TranslatedString);
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::CompressTo7z:
-            {
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_COMPRESS_TO, TranslatedString);
-                MyFormatNew_ReducedName(TranslatedString, ArchiveName7z.c_str());
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::CompressToZip:
-            {
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_COMPRESS_TO, TranslatedString);
-                MyFormatNew_ReducedName(TranslatedString, ArchiveNameZip.c_str());
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::CompressEmail:
-            {
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_COMPRESS_EMAIL, TranslatedString);
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::CompressTo7zEmail:
-            {
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_COMPRESS_TO_EMAIL, TranslatedString);
-                MyFormatNew_ReducedName(TranslatedString, ArchiveName7z.c_str());
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::CompressToZipEmail:
-            {
-                UString TranslatedString;
-                LangString(IDS_CONTEXT_COMPRESS_TO_EMAIL, TranslatedString);
-                MyFormatNew_ReducedName(TranslatedString, ArchiveNameZip.c_str());
-                FinalString = std::wstring(
-                    TranslatedString.Ptr(),
-                    TranslatedString.Len());
-                break;
-            }
-            case CommandID::HashCRC32:
-            {
-                FinalString = L"CRC-32";
-                break;
-            }
-            case CommandID::HashCRC64:
-            {
-                FinalString = L"CRC-64";
-                break;
-            }
-            case CommandID::HashSHA1:
-            {
-                FinalString = L"SHA-1";
-                break;
-            }
-            case CommandID::HashSHA256:
-            {
-                FinalString = L"SHA-256";
-                break;
-            }
-            case CommandID::HashAll:
-            {
-                FinalString = L"*";
-                break;
-            }
-            default:
-                break;
-            }
-
-            return FinalString.empty()
-                ? E_NOTIMPL
-                : SHStrDupW(FinalString.c_str(), ppszName);
+            return ::SHStrDupW(this->m_Title.c_str(), ppszName);
         }
 
         HRESULT STDMETHODCALLTYPE GetIcon(
@@ -542,10 +250,7 @@ namespace NanaZip::ShellExtension
             Mile::UnreferencedParameter(psiItemArray);
 
             *ppszIcon = nullptr;
-
-            return this->m_Icon.empty()
-                ? E_NOTIMPL :
-                :: SHStrDupW(this->m_Icon.c_str(), ppszIcon);
+            return E_NOTIMPL;
         }
 
         HRESULT STDMETHODCALLTYPE GetToolTip(
@@ -833,9 +538,480 @@ namespace NanaZip::ShellExtension
         HRESULT STDMETHODCALLTYPE GetFlags(
             _Out_ EXPCMDFLAGS* pFlags)
         {
-            *pFlags = this->m_SubCommands.empty()
-                ? this->m_IsSeparator ? ECF_ISSEPARATOR : ECF_DEFAULT
-                : ECF_HASSUBCOMMANDS;
+            *pFlags =
+                this->m_IsSeparator
+                ? ECF_ISSEPARATOR
+                : ECF_DEFAULT;
+            return S_OK;
+        }
+
+        HRESULT STDMETHODCALLTYPE EnumSubCommands(
+            _Outptr_ IEnumExplorerCommand** ppEnum)
+        {
+            *ppEnum = nullptr;
+            return E_NOTIMPL;
+        }
+
+#pragma endregion
+
+#pragma region IObjectWithSite
+
+        HRESULT STDMETHODCALLTYPE SetSite(
+            _In_opt_ IUnknown* pUnkSite)
+        {
+            *this->m_Site.put() = pUnkSite;
+            return S_OK;
+        }
+
+        HRESULT STDMETHODCALLTYPE GetSite(
+            _In_ REFIID riid,
+            _Outptr_ void** ppvSite)
+        {
+            return this->m_Site->QueryInterface(riid, ppvSite);
+        }
+
+#pragma endregion
+    };
+
+
+    struct ExplorerCommandRoot : public winrt::implements<
+        ExplorerCommandRoot,
+        IExplorerCommand,
+        IObjectWithSite,
+        IEnumExplorerCommand>
+    {
+    private:
+
+        DWORD m_ContextMenuFlags;
+        CBoolPair m_ContextMenuElimDup;
+
+        SubCommandList m_SubCommands;
+        SubCommandListIterator m_CurrentSubCommand;
+        winrt::com_ptr<IUnknown> m_Site;
+
+    public:
+
+        ExplorerCommandRoot()
+        {
+            CContextMenuInfo ContextMenuInfo;
+            ContextMenuInfo.Load();
+            this->m_ContextMenuFlags = ContextMenuInfo.Flags;
+            this->m_ContextMenuElimDup = ContextMenuInfo.ElimDup;
+        }
+
+#pragma region IExplorerCommand
+
+        HRESULT STDMETHODCALLTYPE GetTitle(
+            _In_opt_ IShellItemArray* psiItemArray,
+            _Outptr_ LPWSTR* ppszName)
+        {
+            Mile::UnreferencedParameter(psiItemArray);
+
+            std::vector<std::wstring> FilePaths;
+            if (psiItemArray)
+            {
+                DWORD Count = 0;
+                if (SUCCEEDED(psiItemArray->GetCount(&Count)))
+                {
+                    for (DWORD i = 0; i < Count; ++i)
+                    {
+                        winrt::com_ptr<IShellItem> Item;
+                        if (SUCCEEDED(psiItemArray->GetItemAt(
+                            i,
+                            Item.put())))
+                        {
+                            LPWSTR DisplayName = nullptr;
+                            if (SUCCEEDED(Item->GetDisplayName(
+                                SIGDN_FILESYSPATH,
+                                &DisplayName)))
+                            {
+                                FilePaths.push_back(std::wstring(DisplayName));
+                                ::CoTaskMemFree(DisplayName);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (FilePaths.empty())
+            {
+                return E_NOTIMPL;
+            }
+
+            UStringVector FileNames;
+            for (std::wstring const FilePath : FilePaths)
+            {
+                FileNames.Add(FilePath.c_str());
+            }
+
+            bool NeedExtract = false;
+            for (std::wstring const FilePath : FilePaths)
+            {
+                DWORD FileAttributes = ::GetFileAttributesW(
+                    FilePath.c_str());
+                if (FileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+                {
+                    continue;
+                }
+
+                if (DoNeedExtract(::PathFindFileNameW(FilePath.c_str())))
+                {
+                    NeedExtract = true;
+                    break;
+                }
+            }
+
+            std::wstring SpecFolder = L"*";
+            if (NeedExtract)
+            {
+                if (FilePaths.size() == 1)
+                {
+                    SpecFolder = GetSubFolderNameForExtract(
+                        ::PathFindFileNameW(FilePaths[0].c_str()));
+                }
+                SpecFolder += L'\\';
+            }
+
+            FString FolderPrefix;
+
+            std::wstring ArchiveName;
+            {
+                NWindows::NFile::NFind::CFileInfo FileInfo0;
+
+                const UString& FileName = FileNames.Front();
+
+                if (NWindows::NFile::NName::IsDevicePath(us2fs(FileName)))
+                {
+                    // CFileInfo::Find can be slow for device files. So we
+                    // don't call it.
+                    // we need only name here.
+                    // change it 4 - must be constant
+                    FileInfo0.Name = us2fs(FileName.Ptr(
+                        NWindows::NFile::NName::kDevicePathPrefixSize));
+                    FolderPrefix = "C:\\";
+                }
+                else
+                {
+                    if (!FileInfo0.Find(us2fs(FileName)))
+                    {
+                        return Mile::HResultFromLastError();
+                    }
+                    NWindows::NFile::NDir::GetOnlyDirPrefix(
+                        us2fs(FileName),
+                        FolderPrefix);
+                }
+
+                const UString Name = CreateArchiveName(
+                    FileNames,
+                    FileNames.Size() == 1 ? &FileInfo0 : nullptr);
+                ArchiveName = std::wstring(Name.Ptr(), Name.Len());
+
+            }
+
+            std::wstring BaseFolder = std::wstring(
+                FolderPrefix.Ptr(),
+                FolderPrefix.Len());
+
+            std::wstring ArchiveName7z = ArchiveName + L".7z";
+            std::wstring ArchiveNameZip = ArchiveName + L".zip";
+
+            using NanaZip::ShellExtension::ExplorerCommandBase;
+
+            CContextMenuInfo ContextMenuInfo;
+            ContextMenuInfo.Load();
+            DWORD ContextMenuFlags = ContextMenuInfo.Flags;
+            CBoolPair ContextMenuElimDup = ContextMenuInfo.ElimDup;
+
+            bool IsExisted[CommandID::Maximum] = { false };
+
+            LoadLangOneTime();
+
+            if (ContextMenuFlags & NContextMenuFlags::kOpen)
+            {
+                DWORD FileAttributes = ::GetFileAttributesW(
+                    FilePaths[0].c_str());
+                if ((FilePaths.size() == 1) &&
+                    !(FileAttributes & FILE_ATTRIBUTE_DIRECTORY) &&
+                    DoNeedExtract(FilePaths[0].c_str()))
+                {
+                    UString TranslatedString;
+                    LangString(IDS_CONTEXT_OPEN, TranslatedString);
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>(
+                            std::wstring(
+                                TranslatedString.Ptr(),
+                                TranslatedString.Len()),
+                            CommandID::Open,
+                            ContextMenuElimDup));
+
+                    IsExisted[CommandID::Open] = true;
+                }
+            }      
+
+            if (ContextMenuFlags & NContextMenuFlags::kTest)
+            {
+                if (NeedExtract)
+                {
+                    UString TranslatedString;
+                    LangString(IDS_CONTEXT_TEST, TranslatedString);
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>(
+                            std::wstring(
+                                TranslatedString.Ptr(),
+                                TranslatedString.Len()),
+                            CommandID::Test,
+                            ContextMenuElimDup));
+
+                    IsExisted[CommandID::Test] = true;
+                }
+            }
+            if ((ContextMenuFlags & NContextMenuFlags::kOpen) ||
+                (ContextMenuFlags & NContextMenuFlags::kTest))
+            {
+                if (IsExisted[CommandID::Open] ||
+                    IsExisted[CommandID::Test])
+                {
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>());
+                }
+            }
+
+            if (NeedExtract)
+            {
+                if (ContextMenuFlags & NContextMenuFlags::kExtract)
+                {
+                    UString TranslatedString;
+                    LangString(IDS_CONTEXT_EXTRACT, TranslatedString);
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>(
+                            std::wstring(
+                                TranslatedString.Ptr(),
+                                TranslatedString.Len()),
+                            CommandID::Extract,
+                            ContextMenuElimDup));
+                }
+
+                if (ContextMenuFlags & NContextMenuFlags::kExtractHere)
+                {
+                    UString TranslatedString;
+                    LangString(IDS_CONTEXT_EXTRACT_HERE, TranslatedString);
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>(
+                            std::wstring(
+                                TranslatedString.Ptr(),
+                                TranslatedString.Len()),
+                            CommandID::ExtractHere,
+                            ContextMenuElimDup));
+                }
+
+                if (ContextMenuFlags & NContextMenuFlags::kExtractTo)
+                {
+                    UString TranslatedString;
+                    LangString(IDS_CONTEXT_EXTRACT_TO, TranslatedString);
+                    MyFormatNew_ReducedName(TranslatedString, SpecFolder.c_str());
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>(
+                            std::wstring(
+                                TranslatedString.Ptr(),
+                                TranslatedString.Len()),
+                            CommandID::ExtractTo,
+                            ContextMenuElimDup));
+                }
+
+                if ((ContextMenuFlags & NContextMenuFlags::kExtract) ||
+                    (ContextMenuFlags & NContextMenuFlags::kExtractHere) ||
+                    (ContextMenuFlags & NContextMenuFlags::kExtractTo))
+                {
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>());
+                }
+            }
+
+            if (ContextMenuFlags & NContextMenuFlags::kCompress)
+            {
+                UString TranslatedString;
+                LangString(IDS_CONTEXT_COMPRESS, TranslatedString);
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        std::wstring(
+                            TranslatedString.Ptr(),
+                            TranslatedString.Len()),
+                        CommandID::Compress,
+                        ContextMenuElimDup));
+            }
+
+            if (ContextMenuFlags & NContextMenuFlags::kCompressTo7z)
+            {
+                UString TranslatedString;
+                LangString(IDS_CONTEXT_COMPRESS_TO, TranslatedString);
+                MyFormatNew_ReducedName(TranslatedString, ArchiveName7z.c_str());
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        std::wstring(
+                            TranslatedString.Ptr(),
+                            TranslatedString.Len()),
+                        CommandID::CompressTo7z,
+                        ContextMenuElimDup));
+            }
+
+            if (ContextMenuFlags & NContextMenuFlags::kCompressToZip)
+            {
+                UString TranslatedString;
+                LangString(IDS_CONTEXT_COMPRESS_TO, TranslatedString);
+                MyFormatNew_ReducedName(TranslatedString, ArchiveNameZip.c_str());
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        std::wstring(
+                            TranslatedString.Ptr(),
+                            TranslatedString.Len()),
+                        CommandID::CompressToZip,
+                        ContextMenuElimDup));
+            }
+
+            if ((ContextMenuFlags & NContextMenuFlags::kCompress) ||
+                (ContextMenuFlags & NContextMenuFlags::kCompressTo7z) ||
+                (ContextMenuFlags & NContextMenuFlags::kCompressToZip))
+            {
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>());
+            }
+
+            if (ContextMenuFlags & NContextMenuFlags::kCompressEmail)
+            {
+                UString TranslatedString;
+                LangString(IDS_CONTEXT_COMPRESS_EMAIL, TranslatedString);
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        std::wstring(
+                            TranslatedString.Ptr(),
+                            TranslatedString.Len()),
+                        CommandID::CompressEmail,
+                        ContextMenuElimDup));
+            }
+
+            if (ContextMenuFlags & NContextMenuFlags::kCompressTo7zEmail)
+            {
+                UString TranslatedString;
+                LangString(IDS_CONTEXT_COMPRESS_TO_EMAIL, TranslatedString);
+                MyFormatNew_ReducedName(TranslatedString, ArchiveName7z.c_str());
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        std::wstring(
+                            TranslatedString.Ptr(),
+                            TranslatedString.Len()),
+                        CommandID::CompressTo7zEmail,
+                        ContextMenuElimDup));
+            }
+
+            if (ContextMenuFlags & NContextMenuFlags::kCompressToZipEmail)
+            {
+                UString TranslatedString;
+                LangString(IDS_CONTEXT_COMPRESS_TO_EMAIL, TranslatedString);
+                MyFormatNew_ReducedName(TranslatedString, ArchiveNameZip.c_str());
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        std::wstring(
+                            TranslatedString.Ptr(),
+                            TranslatedString.Len()),
+                        CommandID::CompressToZipEmail,
+                        ContextMenuElimDup));
+            }
+
+            if ((ContextMenuFlags & NContextMenuFlags::kCompressEmail) ||
+                (ContextMenuFlags & NContextMenuFlags::kCompressTo7zEmail) ||
+                (ContextMenuFlags & NContextMenuFlags::kCompressToZipEmail))
+            {
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>());
+            }
+
+            if (ContextMenuFlags & NContextMenuFlags::kCRC)
+            {
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        L"CRC-32",
+                        CommandID::HashCRC32,
+                        ContextMenuElimDup));
+
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        L"CRC-64",
+                        CommandID::HashCRC64,
+                        ContextMenuElimDup));
+
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        L"SHA-1",
+                        CommandID::HashSHA1,
+                        ContextMenuElimDup));
+
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        L"SHA-256",
+                        CommandID::HashSHA256,
+                        ContextMenuElimDup));
+
+                this->m_SubCommands.push_back(
+                    winrt::make<ExplorerCommandBase>(
+                        L"*",
+                        CommandID::HashAll,
+                        ContextMenuElimDup));
+            }
+
+            return ::SHStrDupW(L"NanaZip", ppszName);
+        }
+
+        HRESULT STDMETHODCALLTYPE GetIcon(
+            _In_opt_ IShellItemArray* psiItemArray,
+            _Outptr_ LPWSTR* ppszIcon)
+        {
+            Mile::UnreferencedParameter(psiItemArray);
+            UString Path = ::GetNanaZipPath();
+            std::wstring Icon = std::wstring(Path.Ptr(), Path.Len());
+            Icon += L",-1";
+            return ::SHStrDupW(Icon.c_str(), ppszIcon);
+        }
+
+        HRESULT STDMETHODCALLTYPE GetToolTip(
+            _In_opt_ IShellItemArray* psiItemArray,
+            _Outptr_ LPWSTR* ppszInfotip)
+        {
+            Mile::UnreferencedParameter(psiItemArray);
+            *ppszInfotip = nullptr;
+            return E_NOTIMPL;
+        }
+
+        HRESULT STDMETHODCALLTYPE GetCanonicalName(
+            _Out_ GUID* pguidCommandName)
+        {
+            *pguidCommandName = GUID_NULL;
+            return E_NOTIMPL;
+        }
+
+        HRESULT STDMETHODCALLTYPE GetState(
+            _In_opt_ IShellItemArray* psiItemArray,
+            _In_ BOOL fOkToBeSlow,
+            _Out_ EXPCMDSTATE* pCmdState)
+        {
+            Mile::UnreferencedParameter(psiItemArray);
+            Mile::UnreferencedParameter(fOkToBeSlow);
+            *pCmdState = ECS_ENABLED;
+            return S_OK;
+        }
+
+        HRESULT STDMETHODCALLTYPE Invoke(
+            _In_opt_ IShellItemArray* psiItemArray,
+            _In_opt_ IBindCtx* pbc)
+        {
+            Mile::UnreferencedParameter(psiItemArray);
+            Mile::UnreferencedParameter(pbc);
+            return E_NOTIMPL;
+        }
+
+        HRESULT STDMETHODCALLTYPE GetFlags(
+            _Out_ EXPCMDFLAGS* pFlags)
+        {
+            *pFlags = ECF_HASSUBCOMMANDS;
             return S_OK;
         }
 
@@ -849,9 +1025,10 @@ namespace NanaZip::ShellExtension
             }
             else
             {
+                this->m_CurrentSubCommand = this->m_SubCommands.cbegin();
                 this->AddRef();
                 return this->QueryInterface(IID_PPV_ARGS(ppEnum));
-            }         
+            }
         }
 
 #pragma endregion
@@ -923,12 +1100,7 @@ namespace NanaZip::ShellExtension
         }
 
 #pragma endregion
-
-
     };
-
-
-
 
     struct DECLSPEC_UUID("CAE3F1D4-7765-4D98-A060-52CD14D56EAB")
         ClassFactory : public winrt::implements<
@@ -945,166 +1117,10 @@ namespace NanaZip::ShellExtension
 
             try
             {
-                using NanaZip::ShellExtension::ExplorerCommandBase;
-                using NanaZip::ShellExtension::SubCommandList;
+                //::MessageBoxW(nullptr, L"fuck", L"fuck", 0);
 
-                CContextMenuInfo ContextMenuInfo;
-                ContextMenuInfo.Load();
-                DWORD ContextMenuFlags = ContextMenuInfo.Flags;
-                CBoolPair ContextMenuElimDup = ContextMenuInfo.ElimDup;
-
-                LoadLangOneTime();
-
-                SubCommandList NanaZipMenu;
-
-                if (ContextMenuFlags & NContextMenuFlags::kOpen)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::Open,
-                            ContextMenuElimDup));
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kTest)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::Test,
-                            ContextMenuElimDup));
-                }
-
-                if ((ContextMenuFlags & NContextMenuFlags::kOpen) ||
-                    (ContextMenuFlags & NContextMenuFlags::kTest))
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>());
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kExtract)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::Extract,
-                            ContextMenuElimDup));
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kExtractHere)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::ExtractHere,
-                            ContextMenuElimDup));
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kExtractTo)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::ExtractTo,
-                            ContextMenuElimDup));
-                }
-
-                if ((ContextMenuFlags & NContextMenuFlags::kExtract) ||
-                    (ContextMenuFlags & NContextMenuFlags::kExtractHere) ||
-                    (ContextMenuFlags & NContextMenuFlags::kExtractTo))
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>());
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kCompress)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::Compress,
-                            ContextMenuElimDup));
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kCompressTo7z)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::CompressTo7z,
-                            ContextMenuElimDup));
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kCompressToZip)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::CompressToZip,
-                            ContextMenuElimDup));
-                }
-
-                if ((ContextMenuFlags & NContextMenuFlags::kCompress) ||
-                    (ContextMenuFlags & NContextMenuFlags::kCompressTo7z) ||
-                    (ContextMenuFlags & NContextMenuFlags::kCompressToZip))
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>());
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kCompressEmail)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::CompressEmail,
-                            ContextMenuElimDup));
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kCompressTo7zEmail)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::CompressTo7zEmail,
-                            ContextMenuElimDup));
-                }           
-
-                if (ContextMenuFlags & NContextMenuFlags::kCompressToZipEmail)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::CompressToZipEmail,
-                            ContextMenuElimDup));
-                }
-
-                if ((ContextMenuFlags & NContextMenuFlags::kCompressEmail) ||
-                    (ContextMenuFlags & NContextMenuFlags::kCompressTo7zEmail)||
-                    (ContextMenuFlags & NContextMenuFlags::kCompressToZipEmail))
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>());
-                }
-
-                if (ContextMenuFlags & NContextMenuFlags::kCRC)
-                {
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::HashCRC32,
-                            ContextMenuElimDup));
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::HashCRC64,
-                            ContextMenuElimDup));
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::HashSHA1,
-                            ContextMenuElimDup));
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::HashSHA256,
-                            ContextMenuElimDup));
-                    NanaZipMenu.push_back(
-                        winrt::make<ExplorerCommandBase>(
-                            CommandID::HashAll,
-                            ContextMenuElimDup));
-                }
-
-                return winrt::make<ExplorerCommandBase>(
-                    CommandID::None,
-                    ContextMenuElimDup,
-                    std::wstring(),
-                    NanaZipMenu)->QueryInterface(riid, ppvObject);
+                return winrt::make<ExplorerCommandRoot>()->QueryInterface(
+                    riid, ppvObject);
             }
             catch (...)
             {
