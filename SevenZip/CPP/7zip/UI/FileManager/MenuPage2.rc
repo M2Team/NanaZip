@@ -2,7 +2,7 @@
 
 #define y 50
 
-CAPTION "NanaZip"
+CAPTION "Integration"
 BEGIN
   PUSHBUTTON  "Open Windows Settings app to associate files with NanaZip", IDB_SYSTEM_ASSOCIATE, m, m, xc, bys
 

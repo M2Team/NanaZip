@@ -494,5 +494,5 @@ CPU 使用率
 目录符号链接（Symbolic Link）
 目录接合点（Directory Junction）
 12200
-
+集成
 打开 Windows 设置应用将文件与 NanaZip 关联
