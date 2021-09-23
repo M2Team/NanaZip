@@ -20,6 +20,8 @@
 #define IDB_DELETE2  155
 #define IDB_INFO2    156
 
+#define IDB_PARENT_FOLDER 160
+
 #define IDM_HASH_ALL             101
 #define IDM_CRC32                102
 #define IDM_CRC64                103

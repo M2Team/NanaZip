@@ -58,27 +58,18 @@
     <Filter Include="Interface">
       <UniqueIdentifier>{681d2cd4-1242-49c3-b9bd-456058a824e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{768d4162-5afd-46ef-9aa1-8a652a1018c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Toolbar">
+      <UniqueIdentifier>{8e11afaf-a6e1-4ec6-92f1-db273897ef74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\7zipLogo.ico">
       <Filter>Spec</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\add.bmp">
-      <Filter>Spec</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Copy.bmp">
-      <Filter>Spec</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Delete.bmp">
-      <Filter>Spec</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Extract.bmp">
-      <Filter>Spec</Filter>
-    </Image>
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\FM.ico">
-      <Filter>Spec</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Move.bmp">
       <Filter>Spec</Filter>
     </Image>
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Parent.bmp">
@@ -87,32 +78,47 @@
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Properties.bmp">
       <Filter>Spec</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Test.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Add_24x24.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Add2.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Add_48x48.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Copy2.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Copy_24x24.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Delete2.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Copy_48x48.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Extract2.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Delete_24x24.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Delete_48x48.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info2.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Extract_24x24.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Move2.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Extract_48x48.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Test2.bmp">
-      <Filter>Spec</Filter>
+    <Image Include="Assets\Toolbar\Info_24x24.bmp">
+      <Filter>Assets\Toolbar</Filter>
+    </Image>
+    <Image Include="Assets\Toolbar\Info_48x48.bmp">
+      <Filter>Assets\Toolbar</Filter>
+    </Image>
+    <Image Include="Assets\Toolbar\Move_24x24.bmp">
+      <Filter>Assets\Toolbar</Filter>
+    </Image>
+    <Image Include="Assets\Toolbar\Move_48x48.bmp">
+      <Filter>Assets\Toolbar</Filter>
+    </Image>
+    <Image Include="Assets\Toolbar\Test_24x24.bmp">
+      <Filter>Assets\Toolbar</Filter>
+    </Image>
+    <Image Include="Assets\Toolbar\Test_48x48.bmp">
+      <Filter>Assets\Toolbar</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

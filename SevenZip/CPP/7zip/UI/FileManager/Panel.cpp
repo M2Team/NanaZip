@@ -399,7 +399,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   TBBUTTON tbb [ ] =
   {
     // {0, 0, TBSTATE_ENABLED, BTNS_SEP, 0L, 0},
-    {VIEW_PARENTFOLDER, kParentFolderID, TBSTATE_ENABLED, BTNS_BUTTON, { 0, 0 }, 0, 0 },
+    {0, kParentFolderID, TBSTATE_ENABLED, BTNS_BUTTON, { 0, 0 }, 0, 0 },
     // {0, 0, TBSTATE_ENABLED, BTNS_SEP, 0L, 0},
     // {VIEW_NEWFOLDER, kCreateFolderID, TBSTATE_ENABLED, BTNS_BUTTON, 0L, 0},
   };
@@ -442,10 +442,29 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
 
   _headerToolBar.Attach(::CreateToolbarEx ((*this), toolbarStyle,
       _baseID + 2, 11,
-      (HINSTANCE)HINST_COMMCTRL,
+      g_hInstance,
       IDB_VIEW_SMALL_COLOR,
-      (LPCTBBUTTON)&tbb, ARRAY_SIZE(tbb),
-      0, 0, 0, 0, sizeof (TBBUTTON)));
+      nullptr, 0,
+      0, 0, 0, 0, sizeof(TBBUTTON)));
+
+  TBADDBITMAP ToolbarAddBitmap;
+  ToolbarAddBitmap.hInst = g_hInstance;
+  ToolbarAddBitmap.nID = IDB_PARENT_FOLDER;
+  SendMessageW(
+    _headerToolBar,
+    TB_ADDBITMAP,
+    (WPARAM)1,
+    (LPARAM)&ToolbarAddBitmap);
+
+  SendMessageW(
+    _headerToolBar,
+    TB_ADDBUTTONS,
+    ARRAY_SIZE(tbb),
+    (LPARAM)&tbb);
+
+
+
+
 
   #ifndef UNDER_CE
   // Load ComboBoxEx class

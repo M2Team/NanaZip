@@ -29,23 +29,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\7zipLogo.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\add.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Add2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Copy.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Copy2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Delete.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Delete2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Extract.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Extract2.bmp" />
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\FM.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Info2.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Move.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Move2.bmp" />
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Parent.bmp" />
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Properties.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Test.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Test2.bmp" />
+    <Image Include="Assets\Toolbar\Add_24x24.bmp" />
+    <Image Include="Assets\Toolbar\Add_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Copy_24x24.bmp" />
+    <Image Include="Assets\Toolbar\Copy_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Delete_24x24.bmp" />
+    <Image Include="Assets\Toolbar\Delete_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Extract_24x24.bmp" />
+    <Image Include="Assets\Toolbar\Extract_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Info_24x24.bmp" />
+    <Image Include="Assets\Toolbar\Info_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Move_24x24.bmp" />
+    <Image Include="Assets\Toolbar\Move_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Test_24x24.bmp" />
+    <Image Include="Assets\Toolbar\Test_48x48.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\C\Alloc.c" />

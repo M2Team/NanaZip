@@ -131,21 +131,22 @@ END
 
 IDI_ICON  ICON  "../../UI/FileManager/FM.ico"
 
-IDB_ADD        BITMAP  "../../UI/FileManager/Add.bmp"
-IDB_EXTRACT    BITMAP  "../../UI/FileManager/Extract.bmp"
-IDB_TEST       BITMAP  "../../UI/FileManager/Test.bmp"
-IDB_COPY       BITMAP  "../../UI/FileManager/Copy.bmp"
-IDB_MOVE       BITMAP  "../../UI/FileManager/Move.bmp"
-IDB_DELETE     BITMAP  "../../UI/FileManager/Delete.bmp"
-IDB_INFO       BITMAP  "../../UI/FileManager/Info.bmp"
-IDB_ADD2       BITMAP  "../../UI/FileManager/Add2.bmp"
-IDB_EXTRACT2   BITMAP  "../../UI/FileManager/Extract2.bmp"
-IDB_TEST2      BITMAP  "../../UI/FileManager/Test2.bmp"
-IDB_COPY2      BITMAP  "../../UI/FileManager/Copy2.bmp"
-IDB_MOVE2      BITMAP  "../../UI/FileManager/Move2.bmp"
-IDB_DELETE2    BITMAP  "../../UI/FileManager/Delete2.bmp"
-IDB_INFO2      BITMAP  "../../UI/FileManager/Info2.bmp"
+IDB_ADD        BITMAP  "../../../../../NanaZip/Assets/Toolbar/Add_48x48.bmp"
+IDB_EXTRACT    BITMAP  "../../../../../NanaZip/Assets/Toolbar/Extract_48x48.bmp"
+IDB_TEST       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Test_48x48.bmp"
+IDB_COPY       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Copy_48x48.bmp"
+IDB_MOVE       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Move_48x48.bmp"
+IDB_DELETE     BITMAP  "../../../../../NanaZip/Assets/Toolbar/Delete_48x48.bmp"
+IDB_INFO       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Info_48x48.bmp"
+IDB_ADD2       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Add_32x32.bmp"
+IDB_EXTRACT2   BITMAP  "../../../../../NanaZip/Assets/Toolbar/Extract_32x32.bmp"
+IDB_TEST2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Test_32x32.bmp"
+IDB_COPY2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Copy_32x32.bmp"
+IDB_MOVE2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Move_32x32.bmp"
+IDB_DELETE2    BITMAP  "../../../../../NanaZip/Assets/Toolbar/Delete_32x32.bmp"
+IDB_INFO2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Info_32x32.bmp"
 
+IDB_PARENT_FOLDER      BITMAP  "../../../../../NanaZip/Assets/ParentFolder.bmp"
 
 STRINGTABLE
 BEGIN

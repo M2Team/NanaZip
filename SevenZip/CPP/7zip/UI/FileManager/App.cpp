@@ -1,4 +1,4 @@
-// App.cpp
+﻿// App.cpp
 
 #include "StdAfx.h"
 
@@ -150,7 +150,7 @@ static void CreateToolbar(HWND parent,
   toolBar.Attach(::CreateWindowEx(0, TOOLBARCLASSNAME, NULL, 0
       | WS_CHILD
       | WS_VISIBLE
-      | TBSTYLE_FLAT
+      | TBSTYLE_LIST
       | TBSTYLE_TOOLTIPS
       | TBSTYLE_WRAPABLE
       // | TBSTYLE_AUTOSIZE
@@ -166,8 +166,8 @@ static void CreateToolbar(HWND parent,
   toolBar.ButtonStructSize();
 
   imageList.Create(
-      largeButtons ? 48: 24,
-      largeButtons ? 36: 24,
+      (largeButtons ? 48 : 32),
+      (largeButtons ? 48 : 32),
       ILC_MASK | ILC_COLOR32, 0, 0);
   toolBar.SetImageList(0, imageList);
 }
@@ -237,10 +237,10 @@ static void AddButton(
     but.iString = (INT_PTR)(LPCWSTR)s;
 
   but.iBitmap = imageList.GetImageCount();
-  HBITMAP b = ::LoadBitmap(g_hInstance,
+  HBITMAP b = ::LoadBitmapW(g_hInstance,
       large ?
-      MAKEINTRESOURCE(butInfo.BitmapResID):
-      MAKEINTRESOURCE(butInfo.Bitmap2ResID));
+      MAKEINTRESOURCEW(butInfo.BitmapResID) :
+      MAKEINTRESOURCEW(butInfo.Bitmap2ResID));
   if (b != 0)
   {
     imageList.AddMasked(b, RGB(255, 0, 255));
