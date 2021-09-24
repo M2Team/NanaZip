@@ -32,20 +32,21 @@
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\FM.ico" />
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Parent.bmp" />
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Properties.bmp" />
+    <Image Include="Assets\ParentFolder.bmp" />
     <Image Include="Assets\Toolbar\Add_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Add_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Add_32x32.bmp" />
     <Image Include="Assets\Toolbar\Copy_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Copy_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Copy_32x32.bmp" />
     <Image Include="Assets\Toolbar\Delete_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Delete_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Delete_32x32.bmp" />
     <Image Include="Assets\Toolbar\Extract_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Extract_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Extract_32x32.bmp" />
     <Image Include="Assets\Toolbar\Info_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Info_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Info_32x32.bmp" />
     <Image Include="Assets\Toolbar\Move_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Move_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Move_32x32.bmp" />
     <Image Include="Assets\Toolbar\Test_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Test_48x48.bmp" />
+    <Image Include="Assets\Toolbar\Test_32x32.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\C\Alloc.c" />

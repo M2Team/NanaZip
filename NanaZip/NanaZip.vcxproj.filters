@@ -81,44 +81,47 @@
     <Image Include="Assets\Toolbar\Add_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="Assets\Toolbar\Add_48x48.bmp">
+    <Image Include="Assets\Toolbar\Add_32x32.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
     <Image Include="Assets\Toolbar\Copy_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="Assets\Toolbar\Copy_48x48.bmp">
+    <Image Include="Assets\Toolbar\Copy_32x32.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
     <Image Include="Assets\Toolbar\Delete_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="Assets\Toolbar\Delete_48x48.bmp">
+    <Image Include="Assets\Toolbar\Delete_32x32.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
     <Image Include="Assets\Toolbar\Extract_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="Assets\Toolbar\Extract_48x48.bmp">
+    <Image Include="Assets\Toolbar\Extract_32x32.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
     <Image Include="Assets\Toolbar\Info_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="Assets\Toolbar\Info_48x48.bmp">
+    <Image Include="Assets\Toolbar\Info_32x32.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
     <Image Include="Assets\Toolbar\Move_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="Assets\Toolbar\Move_48x48.bmp">
+    <Image Include="Assets\Toolbar\Move_32x32.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
     <Image Include="Assets\Toolbar\Test_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
-    <Image Include="Assets\Toolbar\Test_48x48.bmp">
+    <Image Include="Assets\Toolbar\Test_32x32.bmp">
       <Filter>Assets\Toolbar</Filter>
+    </Image>
+    <Image Include="Assets\ParentFolder.bmp">
+      <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

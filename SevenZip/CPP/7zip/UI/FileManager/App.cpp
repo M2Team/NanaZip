@@ -165,9 +165,14 @@ static void CreateToolbar(HWND parent,
   // backward compatibility.
   toolBar.ButtonStructSize();
 
+  const int DefaultDpi = 96;
+  int ControlDpi = ::GetDeviceCaps(::GetDC(toolBar), LOGPIXELSX);
+  int LargeSize = ::MulDiv(32, ControlDpi, DefaultDpi);
+  int NormalSize = ::MulDiv(24, ControlDpi, DefaultDpi);
+
   imageList.Create(
-      (largeButtons ? 48 : 32),
-      (largeButtons ? 48 : 32),
+      (largeButtons ? LargeSize : NormalSize),
+      (largeButtons ? LargeSize : NormalSize),
       ILC_MASK | ILC_COLOR32, 0, 0);
   toolBar.SetImageList(0, imageList);
 }
@@ -237,10 +242,21 @@ static void AddButton(
     but.iString = (INT_PTR)(LPCWSTR)s;
 
   but.iBitmap = imageList.GetImageCount();
-  HBITMAP b = ::LoadBitmapW(g_hInstance,
-      large ?
-      MAKEINTRESOURCEW(butInfo.BitmapResID) :
-      MAKEINTRESOURCEW(butInfo.Bitmap2ResID));
+
+  const int DefaultDpi = 96;
+  int ControlDpi = ::GetDeviceCaps(::GetDC(toolBar), LOGPIXELSX);
+  int LargeSize = ::MulDiv(32, ControlDpi, DefaultDpi);
+  int NormalSize = ::MulDiv(24, ControlDpi, DefaultDpi);
+
+  HBITMAP b = static_cast<HBITMAP>(::LoadImageW(
+      g_hInstance,
+      large
+      ? MAKEINTRESOURCEW(butInfo.BitmapResID)
+      : MAKEINTRESOURCEW(butInfo.Bitmap2ResID),
+      IMAGE_BITMAP,
+      (large ? LargeSize : NormalSize),
+      (large ? LargeSize : NormalSize),
+      0));
   if (b != 0)
   {
     imageList.AddMasked(b, RGB(255, 0, 255));
