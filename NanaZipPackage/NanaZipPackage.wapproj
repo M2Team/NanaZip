@@ -50,15 +50,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\SplashScreen.scale-200.png" />
-    <Content Include="Images\LockScreenLogo.scale-200.png" />
-    <Content Include="Images\Square150x150Logo.scale-200.png" />
-    <Content Include="Images\Square44x44Logo.scale-200.png" />
-    <Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Images\StoreLogo.png" />
-    <Content Include="Images\Wide310x150Logo.scale-200.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZip.exe" />
     <!--<Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipC.exe " />-->
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipCore.dll " />
@@ -68,6 +59,11 @@
     <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipG.exe " />
   </ItemGroup>
   <ItemGroup>
+    <!-- Image Assets -->
+    <Content Include="..\Assets\PackageAssets\**\*">
+      <DeploymentContent>true</DeploymentContent>
+      <Link>Assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Content>
     <!-- Internationalization Support -->
     <Content Include="..\SevenZip\Lang\**\*">
       <DeploymentContent>true</DeploymentContent>
