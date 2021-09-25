@@ -17,10 +17,10 @@
 
 - Visual Studio 2019 Version 16.11 or later.
   - You also need install ARM64 components (MSVC Toolchain and ATL/MFC) if you
-    want to compile ARM64 version of NSudo.
+    want to compile ARM64 version of NanaZip.
 - Windows 10 Version 20H1 SDK or later.
-  - You also need install ARM64 components when you installing the Windows 10
-    Version 1703 SDK or later and you want to compile ARM64 version of NSudo.
+  - You also need install ARM64 components if you want to compile ARM64 version
+    of NanaZip.
 
 #### How to build all targets of NSudo
 
