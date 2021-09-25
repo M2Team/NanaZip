@@ -129,7 +129,7 @@ BEGIN
 END
 
 
-IDI_ICON  ICON  "../../UI/FileManager/FM.ico"
+IDI_ICON  ICON  "../../../../../Assets/NanaZip.ico"
 
 IDB_ADD        BITMAP  "../../../../../NanaZip/Assets/Toolbar/Add_32x32.bmp"
 IDB_EXTRACT    BITMAP  "../../../../../NanaZip/Assets/Toolbar/Extract_32x32.bmp"
