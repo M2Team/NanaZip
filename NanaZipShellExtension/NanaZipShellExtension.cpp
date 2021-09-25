@@ -200,8 +200,7 @@ namespace NanaZip::ShellExtension
 
     struct ExplorerCommandBase : public winrt::implements<
         ExplorerCommandBase,
-        IExplorerCommand,
-        IObjectWithSite>
+        IExplorerCommand>
     {
     private:
 
@@ -210,8 +209,6 @@ namespace NanaZip::ShellExtension
         DWORD m_CommandID;
         bool m_IsSeparator;
         CBoolPair m_ElimDup;
-
-        winrt::com_ptr<IUnknown> m_Site;
 
     public:
 
@@ -553,31 +550,12 @@ namespace NanaZip::ShellExtension
         }
 
 #pragma endregion
-
-#pragma region IObjectWithSite
-
-        HRESULT STDMETHODCALLTYPE SetSite(
-            _In_opt_ IUnknown* pUnkSite)
-        {
-            *this->m_Site.put() = pUnkSite;
-            return S_OK;
-        }
-
-        HRESULT STDMETHODCALLTYPE GetSite(
-            _In_ REFIID riid,
-            _Outptr_ void** ppvSite)
-        {
-            return this->m_Site->QueryInterface(riid, ppvSite);
-        }
-
-#pragma endregion
     };
 
 
     struct ExplorerCommandRoot : public winrt::implements<
         ExplorerCommandRoot,
         IExplorerCommand,
-        IObjectWithSite,
         IEnumExplorerCommand>
     {
     private:
@@ -587,7 +565,6 @@ namespace NanaZip::ShellExtension
 
         SubCommandList m_SubCommands;
         SubCommandListIterator m_CurrentSubCommand;
-        winrt::com_ptr<IUnknown> m_Site;
 
     public:
 
@@ -1033,24 +1010,6 @@ namespace NanaZip::ShellExtension
 
 #pragma endregion
 
-#pragma region IObjectWithSite
-
-        HRESULT STDMETHODCALLTYPE SetSite(
-            _In_opt_ IUnknown* pUnkSite)
-        {
-            *this->m_Site.put() = pUnkSite;
-            return S_OK;
-        }
-
-        HRESULT STDMETHODCALLTYPE GetSite(
-            _In_ REFIID riid,
-            _Outptr_ void** ppvSite)
-        {
-            return this->m_Site->QueryInterface(riid, ppvSite);
-        }
-
-#pragma endregion
-
 #pragma region IEnumExplorerCommand
 
         HRESULT STDMETHODCALLTYPE Next(
@@ -1117,8 +1076,6 @@ namespace NanaZip::ShellExtension
 
             try
             {
-                //::MessageBoxW(nullptr, L"fuck", L"fuck", 0);
-
                 return winrt::make<ExplorerCommandRoot>()->QueryInterface(
                     riid, ppvObject);
             }
