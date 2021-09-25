@@ -1,6 +1,7 @@
-﻿# NanaZip
+﻿# ![NanaZip](Assets/NanaZip.png) NanaZip
 
 ![ContextMenu](Documents/ContextMenu.png)
+![MainWindow](Documents/MainWindow.png)
 
 **Warning: This project is in early stages of development, the final product 
 may differ from what you see now.**
