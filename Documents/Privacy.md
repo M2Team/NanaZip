@@ -11,4 +11,4 @@ websites you will need to look at their privacy policy.
 No information is collected or shared over the wire. We reserve the right to 
 make changes to this policy. Any changes to this policy will be updated. 
  
-## Last updated: January 18, 2018
+## Last updated: Sep 25, 2021
