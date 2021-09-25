@@ -18,6 +18,8 @@ supported.
 - You may meet the application crash in some cases in NanaZip 1.0 Preview 1 
   because there are some issues in the exception handler implementation from 
   VC-LTL 5.x. I need to wait mingkuang (the author of VC-LTL) to fix it. 
+- Windows may show the contrast white icon in the taskbar when you using the 
+  contrast standard mode.
 
 # Development Roadmap
 
@@ -76,3 +78,4 @@ requests and issues are welcome.**
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Versioning](Documents/Versioning.md)
+- [My Digital Life Forums](https://forums.mydigitallife.net/threads/84171)
