@@ -22,11 +22,11 @@
   - You also need install ARM64 components if you want to compile ARM64 version
     of NanaZip.
 
-#### How to build all targets of NSudo
+#### How to build all targets of NanaZip
 
 Run `BuildAllTargets.bat` in the root of the repository.
 
-#### How to modify or debugging NSudo
+#### How to modify or debugging NanaZip
 
 Open `NanaZip.sln` in the root of the repository.
 
