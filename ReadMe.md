@@ -12,17 +12,23 @@ experience, forked from the source code of well-known open source file archiver
 We need help to translate NanaZip into native languages that have not been 
 supported.
 
+# Known issues
+
+- You may meet the application crash in some cases in NanaZip 1.0 Preview 1 
+  because there are some issues in the exception handler implementation from 
+  VC-LTL 5.x. I need to wait mingkuang (the author of VC-LTL) to fix it. 
+
 # Development Roadmap
 
 - 1.x Series
-  - [x] Modernize the build toolchain with MSBuild for the MSIX packaging and 
+  - [x] Modernize the build toolchain with MSBuild for using MSIX packaging and
         parallel compilation support.
   - [x] Use [VC-LTL 5.x](https://github.com/Chuyu-Team/VC-LTL5) toolchain to 
         make the binary size even smaller than the official 7-Zip because we
         can use ucrtbase.dll directly and the optimizations from modern compile
         toolchain.
-  - [x] Add support for the new context menu in the Windows 11 File Explorer.
-  - [ ] New icons and minor UI tweaks.
+  - [x] Add the context menu support in Windows 10/11 File Explorer.
+  - [x] New icons and minor UI tweaks.
   - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [ ] Try to merge Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support
         from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd) (Suggested by 
@@ -57,15 +63,15 @@ requests and issues are welcome.**
 # Features
 
 - Packaging with MSIX for modern deployment experience.
-- Support the new context menu in the Windows 11 File Explorer.
+- Support the context menu in Windows 10/11 File Explorer.
 
 # Documents
 
 - [License](License.md)
-- [Changelog]()
+- [Changelog](Documents/Changelog.md)
 - [Relevant People](Documents/People.md)
 - [Privacy Policy](Documents/Privacy.md)
 - [Windows Store]()
-- [Code of Conduct]()
-- [Contributing Guide]()
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Contributing Guide](CONTRIBUTING.md)
 - [Versioning](Documents/Versioning.md)
