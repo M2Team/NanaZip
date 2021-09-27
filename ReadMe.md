@@ -37,6 +37,8 @@ supported.
         from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd) (Suggested by 
         fcharlie.)
   - [ ] Try to add option for save file names with UTF-8 in 7z archives.
+  - [ ] Try to merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
+        (Suggested by alanfox2000.)
 - 2.x Series
   - [ ] Modernize the UI with XAML Islands.
   - [ ] Full High DPI and Accessibility support in all UI components.
@@ -47,13 +49,16 @@ supported.
         experience. (Suggested by SakuraNeko and shuax.)
   - [ ] Add batch task support. (Suggested by 刘泪.)
   - [ ] Try to design the new UI layout. (Suggested by wangwenx190.)
-  - [ ] Add option for using Windows Imaging API (WIMGAPI) backend to make 
-        better creation and extraction support for wim archives, also add 
+  - [ ] Try to add option for using Windows Imaging API (WIMGAPI) backend to 
+        make better creation and extraction support for wim archives, also add 
         creation and extraction support for esd archives.
+  - [ ] Try to add pri archive extracting support.
+  - [ ] Try to add smart extraction.
 - 4.x Series
   - [ ] Try to add recovery record support for 7z archives. (Suggested by 
         SakuraNeko.)
   - [ ] Try to create a new archive format for Windows imaging.
+  - [ ] Try to add ISO creation support.
 
 **All kinds of contributions will be appreciated. All suggestions, pull 
 requests and issues are welcome.**
