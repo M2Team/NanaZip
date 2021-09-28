@@ -79,7 +79,7 @@ requests and issues are welcome.**
 - [Changelog](Documents/Changelog.md)
 - [Relevant People](Documents/People.md)
 - [Privacy Policy](Documents/Privacy.md)
-- [Windows Store]()
+- [Windows Store](https://www.microsoft.com/store/apps/9N8G7TSCL18R)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Versioning](Documents/Versioning.md)
