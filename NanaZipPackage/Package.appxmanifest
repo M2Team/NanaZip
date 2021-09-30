@@ -31,7 +31,7 @@
   </Resources>
 
   <Applications>
-    <!--<Application 
+    <Application 
       Id="NanaZipC" 
       Executable="NanaZipC.exe" 
       EntryPoint="Windows.FullTrustApplication">
@@ -74,7 +74,7 @@
           </uap3:AppExecutionAlias>
         </uap3:Extension>
       </Extensions>
-    </Application>-->
+    </Application>
     <Application 
       Id="NanaZip"
       Executable="NanaZip.exe"
