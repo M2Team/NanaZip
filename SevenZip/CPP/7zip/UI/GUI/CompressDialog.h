@@ -202,10 +202,10 @@ public:
 
   CCompressDialog(): CurrentDirWasChanged(false) {};
 
-  void MessageBoxError(LPCWSTR message)
-  {
-    MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
-  }
+//   void MessageBoxError(LPCWSTR message)
+//   {
+//     MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
+//   }
 
 protected:
 

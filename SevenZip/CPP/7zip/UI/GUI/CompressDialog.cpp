@@ -728,7 +728,8 @@ void SetErrorMessage_MemUsage(UString &s, UInt64 reqSize, UInt64 ramSize, UInt64
 
   s.Add_LF();
   s.Add_LF();
-  s += LangString(IDS_MEM_ERROR);
+  //s += LangString(IDS_MEM_ERROR);
+  s += "Do you want to continue?";
 }
 
 
@@ -776,8 +777,15 @@ void CCompressDialog::OnOK()
       if (s2.IsEmpty())
         GetItemText(IDT_COMPRESS_MEMORY, s2);
       SetErrorMessage_MemUsage(s, memUsage, ramSize, maxRamSize, s2);
-      MessageBoxError(s);
-      return;
+      //MessageBoxError(s);
+      if (IDOK != ::MessageBoxW(
+        *this,
+        s,
+        L"NanaZip",
+        MB_ICONWARNING | MB_OKCANCEL))
+      {
+        return;
+      }
     }
   }
 
