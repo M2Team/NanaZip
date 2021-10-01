@@ -40,7 +40,8 @@ supported.
   - [ ] Try to merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
         (Suggested by alanfox2000.)
 - 2.x Series
-  - [ ] Modernize the UI with XAML Islands.
+  - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
+        Mica material, dark and light mode support.
   - [ ] Full High DPI and Accessibility support in all UI components.
 - 3.x Series
   - [ ] Modernize the core implementation.
