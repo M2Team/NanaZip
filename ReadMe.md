@@ -39,6 +39,7 @@ supported.
   - [ ] Try to add option for save file names with UTF-8 in 7z archives.
   - [ ] Try to merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
         (Suggested by alanfox2000.)
+  - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
 - 2.x Series
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
