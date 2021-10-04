@@ -37,7 +37,7 @@ supported.
         from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd) (Suggested by 
         fcharlie.)
   - [ ] Try to add option for save file names with UTF-8 in 7z archives.
-  - [ ] Try to merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
+  - [x] Merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
         (Suggested by alanfox2000.)
   - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
 - 2.x Series

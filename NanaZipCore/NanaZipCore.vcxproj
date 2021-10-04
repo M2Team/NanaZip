@@ -18,7 +18,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <PreprocessorDefinitions>EXTERNAL_CODECS;_7ZIP_LARGE_PAGES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXTERNAL_CODECS;_7ZIP_LARGE_PAGES;NSIS_SCRIPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
