@@ -12,9 +12,9 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="40174MouriNaruto.NanaZip"
+    Name="40174MouriNaruto.NanaZip.Canary"
     Publisher="CN=E310A153-74A9-4D81-800B-857A8D58408A"
-    Version="1.0.31.0" />
+    Version="1.0.34.0" />
 
   <Properties>
     <DisplayName>NanaZip</DisplayName>
@@ -37,7 +37,7 @@
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
-        DisplayName="NanaZip"
+        DisplayName="NanaZip (Canary)"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -59,7 +59,7 @@
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
-        DisplayName="NanaZip"
+        DisplayName="NanaZip (Canary)"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -80,7 +80,7 @@
       Executable="NanaZip.exe"
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
-        DisplayName="NanaZip"
+        DisplayName="NanaZip (Canary)"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
