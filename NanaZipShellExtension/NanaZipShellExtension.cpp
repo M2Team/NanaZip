@@ -898,6 +898,12 @@ namespace NanaZip::ShellExtension
                         ContextMenuElimDup));
             }
 
+            if (this->m_SubCommands.empty())
+            {
+                *ppszName = nullptr;
+                return E_NOTIMPL;
+            }
+
             return ::SHStrDupW(L"NanaZip", ppszName);
         }
 
