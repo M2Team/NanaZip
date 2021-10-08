@@ -699,8 +699,6 @@ namespace NanaZip::ShellExtension
             DWORD ContextMenuFlags = ContextMenuInfo.Flags;
             CBoolPair ContextMenuElimDup = ContextMenuInfo.ElimDup;
 
-            bool IsExisted[CommandID::Maximum] = { false };
-
             LoadLangOneTime();
 
             if (ContextMenuFlags & NContextMenuFlags::kOpen)
@@ -720,14 +718,12 @@ namespace NanaZip::ShellExtension
                                 TranslatedString.Len()),
                             CommandID::Open,
                             ContextMenuElimDup));
-
-                    IsExisted[CommandID::Open] = true;
                 }
             }      
 
-            if (ContextMenuFlags & NContextMenuFlags::kTest)
+            if (NeedExtract)
             {
-                if (NeedExtract)
+                if (ContextMenuFlags & NContextMenuFlags::kTest)
                 {
                     UString TranslatedString;
                     LangString(IDS_CONTEXT_TEST, TranslatedString);
@@ -738,23 +734,8 @@ namespace NanaZip::ShellExtension
                                 TranslatedString.Len()),
                             CommandID::Test,
                             ContextMenuElimDup));
-
-                    IsExisted[CommandID::Test] = true;
                 }
-            }
-            if ((ContextMenuFlags & NContextMenuFlags::kOpen) ||
-                (ContextMenuFlags & NContextMenuFlags::kTest))
-            {
-                if (IsExisted[CommandID::Open] ||
-                    IsExisted[CommandID::Test])
-                {
-                    this->m_SubCommands.push_back(
-                        winrt::make<ExplorerCommandBase>());
-                }
-            }
 
-            if (NeedExtract)
-            {
                 if (ContextMenuFlags & NContextMenuFlags::kExtract)
                 {
                     UString TranslatedString;
@@ -793,14 +774,6 @@ namespace NanaZip::ShellExtension
                                 TranslatedString.Len()),
                             CommandID::ExtractTo,
                             ContextMenuElimDup));
-                }
-
-                if ((ContextMenuFlags & NContextMenuFlags::kExtract) ||
-                    (ContextMenuFlags & NContextMenuFlags::kExtractHere) ||
-                    (ContextMenuFlags & NContextMenuFlags::kExtractTo))
-                {
-                    this->m_SubCommands.push_back(
-                        winrt::make<ExplorerCommandBase>());
                 }
             }
 
@@ -845,14 +818,6 @@ namespace NanaZip::ShellExtension
                         ContextMenuElimDup));
             }
 
-            if ((ContextMenuFlags & NContextMenuFlags::kCompress) ||
-                (ContextMenuFlags & NContextMenuFlags::kCompressTo7z) ||
-                (ContextMenuFlags & NContextMenuFlags::kCompressToZip))
-            {
-                this->m_SubCommands.push_back(
-                    winrt::make<ExplorerCommandBase>());
-            }
-
             if (ContextMenuFlags & NContextMenuFlags::kCompressEmail)
             {
                 UString TranslatedString;
@@ -894,16 +859,14 @@ namespace NanaZip::ShellExtension
                         ContextMenuElimDup));
             }
 
-            if ((ContextMenuFlags & NContextMenuFlags::kCompressEmail) ||
-                (ContextMenuFlags & NContextMenuFlags::kCompressTo7zEmail) ||
-                (ContextMenuFlags & NContextMenuFlags::kCompressToZipEmail))
-            {
-                this->m_SubCommands.push_back(
-                    winrt::make<ExplorerCommandBase>());
-            }
-
             if (ContextMenuFlags & NContextMenuFlags::kCRC)
             {
+                if (!this->m_SubCommands.empty())
+                {
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>());
+                }
+
                 this->m_SubCommands.push_back(
                     winrt::make<ExplorerCommandBase>(
                         L"CRC-32",
