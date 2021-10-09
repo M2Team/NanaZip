@@ -15,11 +15,14 @@ supported.
 
 # Known issues
 
-- You may meet the application crash in some cases in NanaZip 1.0 Preview 1 
-  because there are some issues in the exception handler implementation from 
-  VC-LTL 5.x. I need to wait mingkuang (the author of VC-LTL) to fix it. 
+- You may meet the application crash in some cases in NanaZip 1.0 Preview 1 and
+  NanaZip 1.0 Preview 2 because there are some issues in the exception handler 
+  implementation from VC-LTL 5.x. NanaZip 1.0 Preview 3 will be fixed the issue
+  because mingkuang (the author of VC-LTL) has releasd the new version of 
+  VC-LTL. 
 - Windows may show the contrast white icon in the taskbar when you using the 
-  contrast standard mode.
+  contrast standard mode in NanaZip 1.0 Preview 1 and NanaZip 1.0 Preview 2 is 
+  fixed the issue.
 
 # Development Roadmap
 
