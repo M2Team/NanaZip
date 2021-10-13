@@ -41,22 +41,12 @@
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <!-- https://github.com/microsoft/Terminal/issues/700 -->
     <DebuggerType>NativeOnly</DebuggerType>
-    <!-- https://stackoverflow.com/a/62971988 -->
-    <EntryPointExe>NanaZip.exe</EntryPointExe>
+    <EntryPointProjectUniqueName>..\NanaZip\NanaZip.vcxproj</EntryPointProjectUniqueName>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZip.exe" />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipC.exe " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipCore.dll " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\Win32\NanaZipConsole.sfx " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\Win32\NanaZipWindows.sfx " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipShellExtension.dll " />
-    <Content Include="$(MileProjectBinariesPath)$(Configuration)\$(Platform)\NanaZipG.exe " />
   </ItemGroup>
   <ItemGroup>
     <!-- Image Assets -->
@@ -70,10 +60,46 @@
       <Link>Lang\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NanaZip\NanaZip.vcxproj" />
+    <ProjectReference Include="..\NanaZipConsole\NanaZipConsole.vcxproj" />
+    <ProjectReference Include="..\NanaZipCore\NanaZipCore.vcxproj" />
+    <ProjectReference Include="..\NanaZipSfxConsole\NanaZipSfxConsole.vcxproj" />
+    <ProjectReference Include="..\NanaZipSfxWindows\NanaZipSfxWindows.vcxproj" />
+    <ProjectReference Include="..\NanaZipShellExtension\NanaZipShellExtension.vcxproj" />
+    <ProjectReference Include="..\NanaZipWindows\NanaZipWindows.vcxproj" />
+  </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
-
+  <!-- ## BEGIN HACK - Put all output files to the AppX root folder ## -->
+  <!--
+    Reference: https://github.com/microsoft/terminal
+               /blob/a89c3e2f8527a51b39768980627ed8f7c1ea5f0b
+               /src/cascadia/CascadiaPackage/CascadiaPackage.wapproj#L73
+  -->
+  <!-- 
+    For our builds, we want to put all output files to the AppX root folder for
+    simplifying the implementation.
+  -->
+  <Target Name="NanaZipStompSourceProjectForWapProject" BeforeTargets="_ConvertItems">
+    <ItemGroup>
+      <!--
+        Stomp all "SourceProject" values for all incoming dependencies to 
+        flatten the package. 
+      -->
+      <_TemporaryFilteredWapProjOutput Include="@(_FilteredNonWapProjProjectOutput)" />
+      <_FilteredNonWapProjProjectOutput Remove="@(_TemporaryFilteredWapProjOutput)" />
+      <_FilteredNonWapProjProjectOutput Include="@(_TemporaryFilteredWapProjOutput)">
+        <!--
+        Blank the SourceProject here to vend all files into the root of the
+        package.
+      -->
+        <SourceProject>
+        </SourceProject>
+      </_FilteredNonWapProjProjectOutput>
+    </ItemGroup>
+  </Target>
+  <!-- ## END HACK - Put all output files to the AppX root folder ## -->
   <!-- ## BEGIN HACK - Removing Microsoft.VCLibs Packages ## -->
-
   <!--
     Reference: https://github.com/microsoft/terminal
                /blob/a89c3e2f8527a51b39768980627ed8f7c1ea5f0b
@@ -86,33 +112,24 @@
     the store to get our dependency packages, and we want to be robust and 
     deployable everywhere.
   -->
-
   <!--
     This target removes the FrameworkSdkReferences from before the AppX package
     targets manifest generation happens. This is part of the generic machinery 
     that applies to every AppX. 
   -->
-  <Target 
-    Name="NanaZipStripAllDependenciesFromPackageFirstManifest" 
-    BeforeTargets="_GenerateCurrentProjectAppxManifest">
+  <Target Name="NanaZipStripAllDependenciesFromPackageFirstManifest" BeforeTargets="_GenerateCurrentProjectAppxManifest">
     <ItemGroup>
       <FrameworkSdkReference Remove="@(FrameworkSdkReference)" />
     </ItemGroup>
   </Target>
-
   <!--
     This target removes the FrameworkSdkPackages from before the *desktop 
     bridge* manifest generation happens. 
   -->
-  <Target 
-    Name="NanaZipStripAllDependenciesFromPackageSecondManifest" 
-    BeforeTargets="_GenerateDesktopBridgeAppxManifest" 
-    DependsOnTargets="_ResolveVCLibDependencies">
+  <Target Name="NanaZipStripAllDependenciesFromPackageSecondManifest" BeforeTargets="_GenerateDesktopBridgeAppxManifest" DependsOnTargets="_ResolveVCLibDependencies">
     <ItemGroup>
       <FrameworkSdkPackage Remove="@(FrameworkSdkPackage)" />
     </ItemGroup>
   </Target>
-
   <!-- ## END HACK - Removing Microsoft.VCLibs Packages ## -->
-
 </Project>
