@@ -71,4 +71,48 @@
     </Content>
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
+
+  <!-- ## BEGIN HACK - Removing Microsoft.VCLibs Packages ## -->
+
+  <!--
+    Reference: https://github.com/microsoft/terminal
+               /blob/a89c3e2f8527a51b39768980627ed8f7c1ea5f0b
+               /src/cascadia/CascadiaPackage/CascadiaPackage.wapproj#L125
+  -->
+  <!-- 
+    For our builds, we're just using VC-LTL to compile the project and delete
+    the package dependencies. We don't want to rely on the Microsoft.VCLibs 
+    packages. Because it's very difficult for users who do not have access to 
+    the store to get our dependency packages, and we want to be robust and 
+    deployable everywhere.
+  -->
+
+  <!--
+    This target removes the FrameworkSdkReferences from before the AppX package
+    targets manifest generation happens. This is part of the generic machinery 
+    that applies to every AppX. 
+  -->
+  <Target 
+    Name="NanaZipStripAllDependenciesFromPackageFirstManifest" 
+    BeforeTargets="_GenerateCurrentProjectAppxManifest">
+    <ItemGroup>
+      <FrameworkSdkReference Remove="@(FrameworkSdkReference)" />
+    </ItemGroup>
+  </Target>
+
+  <!--
+    This target removes the FrameworkSdkPackages from before the *desktop 
+    bridge* manifest generation happens. 
+  -->
+  <Target 
+    Name="NanaZipStripAllDependenciesFromPackageSecondManifest" 
+    BeforeTargets="_GenerateDesktopBridgeAppxManifest" 
+    DependsOnTargets="_ResolveVCLibDependencies">
+    <ItemGroup>
+      <FrameworkSdkPackage Remove="@(FrameworkSdkPackage)" />
+    </ItemGroup>
+  </Target>
+
+  <!-- ## END HACK - Removing Microsoft.VCLibs Packages ## -->
+
 </Project>
