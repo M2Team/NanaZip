@@ -9,8 +9,9 @@ libraries, 7-Zip or other 7-Zip derivatives) is distributed under the MIT
 License.
 
 The application file association icons of NanaZip (these contents are only in 
-the `Assets` folder) are designed by 四月天 and authorized to the NanaZip 
-project, and it is distributed under the CC BY-ND 4.0 License.
+the `Assets` folder) are designed by Alice (四月天), Chi Lei, Kenji Mouri, 
+Rúben Garrido, Sakura Neko and authorized to the NanaZip project, and it is 
+distributed under the CC BY-ND 4.0 License.
 
 The source code from 7-Zip or other 7-Zip derivatives (these contents are only 
 in the `SevenZip` folder) is distributed under the 7-Zip License.
@@ -168,7 +169,8 @@ SOFTWARE.
 ### The CC BY-ND 4.0 License
 
 ```
-Copyright (c) 四月天 and M2-Team. All rights reserved.
+Copyright (c) Alice (四月天), Chi Lei, Kenji Mouri, Rúben Garrido, Sakura Neko
+and M2-Team. All rights reserved.
 
 This work is licensed under a Creative Commons Attribution-NoDerivatives 4.0
 International License.
