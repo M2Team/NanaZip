@@ -65,6 +65,8 @@
       <DeploymentContent>true</DeploymentContent>
       <Link>Lang\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
+    <None Include="priconfig.default.xml" />
+    <None Include="priconfig.packaging.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NanaZip\NanaZip.vcxproj" />
