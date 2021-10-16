@@ -696,17 +696,46 @@ Mile::HResultFromLastError Mile::SetFileAttributesByHandle(
         sizeof(FILE_BASIC_INFO));
 }
 
+Mile::HResultFromLastError Mile::GetFileHardlinkCountByHandle(
+    _In_ HANDLE FileHandle,
+    _Out_ PDWORD HardlinkCount)
+{
+    FILE_STANDARD_INFO StandardInfo;
+
+    BOOL Result = ::GetFileInformationByHandleEx(
+        FileHandle,
+        FILE_INFO_BY_HANDLE_CLASS::FileStandardInfo,
+        &StandardInfo,
+        sizeof(FILE_STANDARD_INFO));
+
+    *HardlinkCount = Result
+        ? StandardInfo.NumberOfLinks
+        : static_cast<DWORD>(-1);
+
+    return Result;
+}
+
 Mile::HResultFromLastError Mile::DeleteFileByHandle(
     _In_ HANDLE FileHandle)
 {
     FILE_DISPOSITION_INFO DispostionInfo;
     DispostionInfo.DeleteFile = TRUE;
-
-    return ::SetFileInformationByHandle(
+    if (::SetFileInformationByHandle(
         FileHandle,
         FILE_INFO_BY_HANDLE_CLASS::FileDispositionInfo,
         &DispostionInfo,
-        sizeof(FILE_DISPOSITION_INFO));
+        sizeof(FILE_DISPOSITION_INFO)))
+    {
+        return TRUE;
+    }
+
+    FILE_DISPOSITION_INFO_EX DispostionInfoEx;
+    DispostionInfoEx.Flags = FILE_DISPOSITION_FLAG_DELETE;
+    return ::SetFileInformationByHandle(
+        FileHandle,
+        FILE_INFO_BY_HANDLE_CLASS::FileDispositionInfoEx,
+        &DispostionInfoEx,
+        sizeof(FILE_DISPOSITION_INFO_EX));
 }
 
 Mile::HResult Mile::DeleteFileByHandleIgnoreReadonlyAttribute(
@@ -720,20 +749,29 @@ Mile::HResult Mile::DeleteFileByHandleIgnoreReadonlyAttribute(
         &OldAttribute);
     if (hr.IsSucceeded())
     {
-        // Remove readonly attribute.
-        hr = Mile::SetFileAttributesByHandle(
+        DWORD HardlinkCount = 0;
+
+        // Get hardlink count.
+        hr = Mile::GetFileHardlinkCountByHandle(
             FileHandle,
-            OldAttribute & (-1 ^ FILE_ATTRIBUTE_READONLY));
+            &HardlinkCount);
         if (hr.IsSucceeded())
         {
-            // Delete the file.
-            hr = Mile::DeleteFileByHandle(FileHandle);
-            if (hr.IsFailed())
+            // Remove readonly attribute.
+            hr = Mile::SetFileAttributesByHandle(
+                FileHandle,
+                OldAttribute & (-1 ^ FILE_ATTRIBUTE_READONLY));
+            if (hr.IsSucceeded())
             {
-                // Restore attributes if failed.
-                hr = Mile::SetFileAttributesByHandle(
-                    FileHandle,
-                    OldAttribute);
+                // Delete the file.
+                hr = Mile::DeleteFileByHandle(FileHandle);
+                if (hr.IsFailed() || HardlinkCount > 1)
+                {
+                    // Restore attributes if failed or had another hard links.
+                    Mile::SetFileAttributesByHandle(
+                        FileHandle,
+                        OldAttribute);
+                }
             }
         }
     }

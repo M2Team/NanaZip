@@ -1453,6 +1453,18 @@ namespace Mile
         _In_ DWORD FileAttributes);
 
     /**
+     * @brief Retrieves hardlink count for a specified file.
+     * @param FileHandle A handle to the file that contains the information to
+     *                   be retrieved. This handle should not be a pipe handle.
+     * @param HardlinkCount The hardlink count for the file.
+     * @return An HResultFromLastError object An containing the HResult object
+     *         containing the error code.
+    */
+    Mile::HResultFromLastError GetFileHardlinkCountByHandle(
+        _In_ HANDLE FileHandle,
+        _Out_ PDWORD HardlinkCount);
+
+    /**
      * @brief Deletes an existing file.
      * @param FileHandle The handle of the file to be deleted. This handle must
      *                   be opened with the appropriate permissions for the
