@@ -89,7 +89,7 @@ static const char * const kCopyrightString = "\nNanaZip"
   " : " MILE_PROJECT_LEGAL_COPYRIGHT "\n";
 
 static const char * const kHelpString =
-    "Usage: 7z"
+    "Usage: NanaZipConsole"
     PROG_POSTFIX
     " <command> [<switches>...] <archive_name> [<file_names>...] [@listfile]\n"
     "\n"

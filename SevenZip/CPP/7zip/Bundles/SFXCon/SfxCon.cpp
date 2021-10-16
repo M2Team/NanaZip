@@ -113,7 +113,7 @@ static const NRecursedType::EEnum kCommandRecursedDefault[kNumCommandForms] =
 static const char * const kUniversalWildcard = "*";
 
 static const char * const kHelpString =
-    "\nUsage: 7zSFX [<command>] [<switches>...] [<file_name>...]\n"
+    "\nUsage: NanaZipSfxConsole [<command>] [<switches>...] [<file_name>...]\n"
     "\n"
     "<Commands>\n"
     // "  l: List contents of archive\n"
