@@ -59,8 +59,8 @@ supported.
         creation and extraction support for esd archives.
   - [ ] Try to add pri archive extracting support.
   - [ ] Try to add smart extraction.
-  - [ ] Add file name encoding switching support in File Manager. (Suggested by
-        刘泪.)
+  - [ ] Add language encoding switching support for file names in File Manager.
+        (Suggested by 刘泪 and zjkmxy.)
   - [ ] Add deleting source after archiving support. (Suggested by OrionGrant.)
 - 4.x Series
   - [ ] Try to add recovery record support for 7z archives. (Suggested by 
