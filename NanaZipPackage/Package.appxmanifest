@@ -49,6 +49,7 @@
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipC.exe" />
+            <desktop:ExecutionAlias Alias="7z.exe" />
           </uap3:AppExecutionAlias>
         </uap3:Extension>
       </Extensions>
@@ -71,6 +72,7 @@
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipG.exe" />
+            <desktop:ExecutionAlias Alias="7zG.exe" />
           </uap3:AppExecutionAlias>
         </uap3:Extension>
       </Extensions>
@@ -104,6 +106,7 @@
             EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZip.exe" />
+            <desktop:ExecutionAlias Alias="7zFM.exe" />
           </uap3:AppExecutionAlias>
         </uap3:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">

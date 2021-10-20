@@ -43,7 +43,7 @@ supported.
   - [x] Merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
         (Suggested by alanfox2000.)
   - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
-  - [ ] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
+  - [x] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
         (Suggested by AndromedaMelody.)
 - 2.x Series
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
