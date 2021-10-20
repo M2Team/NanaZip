@@ -567,6 +567,12 @@ public licenses.
 Creative Commons may be contacted at creativecommons.org.
 ```
 
+### The 7-Zip branches used in NanaZip
+
+- https://www.7-zip.org/
+- https://github.com/myfreeer/7z-build-nsis
+- https://github.com/mcmilk/7-Zip-zstd
+
 ### The third-party libraries used in NanaZip
 
 - C++/WinRT, https://github.com/microsoft/cppwinrt

@@ -43,13 +43,17 @@ supported.
   - [x] Merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
         (Suggested by alanfox2000.)
   - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
+  - [ ] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
+        (Suggested by AndromedaMelody.)
 - 2.x Series
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
   - [ ] Full High DPI and Accessibility support in all UI components.
+  - [ ] Migrate configurations from registry to json. (Suggested by 
+        AndromedaMelody.)
+  - [ ] Try to modernize the core implementation.
+  - [ ] Try to Windows Runtime component for interoperability.
 - 3.x Series
-  - [ ] Modernize the core implementation.
-  - [ ] Add Windows Runtime component for interoperability.
   - [ ] Try to add extension for Windows File Explorer for give user immersive 
         experience. (Suggested by SakuraNeko and shuax.)
   - [ ] Add batch task support. (Suggested by 刘泪.)
