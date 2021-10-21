@@ -4,12 +4,13 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
-  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
-  IgnorableNamespaces="uap rescap">
+  xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
+  IgnorableNamespaces="uap rescap desktop uap3 com desktop4 desktop5 uap8">
 
   <Identity
     Name="40174MouriNaruto.NanaZip.Canary"
@@ -49,7 +50,7 @@
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipC.exe" />
-            <desktop:ExecutionAlias Alias="7z.exe" />
+            <desktop:ExecutionAlias Alias="7z.exe" uap8:AllowOverride="true"/>
           </uap3:AppExecutionAlias>
         </uap3:Extension>
       </Extensions>
@@ -72,7 +73,7 @@
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipG.exe" />
-            <desktop:ExecutionAlias Alias="7zG.exe" />
+            <desktop:ExecutionAlias Alias="7zG.exe" uap8:AllowOverride="true"/>
           </uap3:AppExecutionAlias>
         </uap3:Extension>
       </Extensions>
@@ -106,7 +107,7 @@
             EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZip.exe" />
-            <desktop:ExecutionAlias Alias="7zFM.exe" />
+            <desktop:ExecutionAlias Alias="7zFM.exe" uap8:AllowOverride="true"/>
           </uap3:AppExecutionAlias>
         </uap3:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
