@@ -19,6 +19,11 @@
 - Rúben Garrido ([https://github.com/RGarrido03](https://github.com/RGarrido03))
 - Sakura Neko ([https://github.com/SakuraNeko](https://github.com/SakuraNeko))
 
+## Translation Contributors
+
+- Blueberryy ([https://github.com/Blueberryy](https://github.com/Blueberryy))
+- Maicol Battistini ([https://github.com/maicol07](https://github.com/maicol07))
+
 ## Special thanks
 
 - Belleve ([https://github.com/be5invis](https://github.com/be5invis))

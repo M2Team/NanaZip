@@ -35,16 +35,15 @@ supported.
         toolchain.
   - [x] Add the context menu support in Windows 10/11 File Explorer.
   - [x] New icons and minor UI tweaks.
+  - [x] Merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
+        (Suggested by alanfox2000.)
+  - [x] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
+        (Suggested by AndromedaMelody.)
   - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [ ] Try to merge Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support
         from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd) (Suggested by 
         fcharlie.)
-  - [ ] Try to add option for save file names with UTF-8 in 7z archives.
-  - [x] Merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
-        (Suggested by alanfox2000.)
   - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
-  - [x] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
-        (Suggested by AndromedaMelody.)
 - 2.x Series
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
@@ -54,6 +53,7 @@ supported.
   - [ ] Try to modernize the core implementation.
   - [ ] Try to Windows Runtime component for interoperability.
 - 3.x Series
+  - [ ] Try to add option for save file names with UTF-8 in 7z archives.
   - [ ] Try to add extension for Windows File Explorer for give user immersive 
         experience. (Suggested by SakuraNeko and shuax.)
   - [ ] Add batch task support. (Suggested by 刘泪.)
@@ -85,6 +85,7 @@ requests and issues are welcome.**
 - Packaging with MSIX for modern deployment experience.
 - Support the context menu in Windows 10/11 File Explorer.
 - Enable parsing the NSIS script support in the NSIS archives.
+- Provide 7-Zip execution alias for helping users to migrate to NanaZip.
 
 # Documents
 
