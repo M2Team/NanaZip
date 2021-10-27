@@ -40,9 +40,9 @@ supported.
   - [x] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
         (Suggested by AndromedaMelody.)
   - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
-  - [ ] Try to merge Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support
-        from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd) (Suggested by 
-        fcharlie.)
+  - [ ] Try to add codec support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and 
+        Zstandard support from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd).
+        (Suggested by fcharlie.)
   - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
 - 2.x Series
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
@@ -53,6 +53,10 @@ supported.
   - [ ] Try to modernize the core implementation.
   - [ ] Try to Windows Runtime component for interoperability.
 - 3.x Series
+  - [ ] Try to add compression support in the graphical user interface for 
+        Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support from 
+        [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd). (Suggested by 
+        fcharlie.)
   - [ ] Try to add option for save file names with UTF-8 in 7z archives.
   - [ ] Try to add extension for Windows File Explorer for give user immersive 
         experience. (Suggested by SakuraNeko and shuax.)
