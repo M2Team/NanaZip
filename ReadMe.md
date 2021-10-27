@@ -26,7 +26,7 @@ supported.
 
 # Development Roadmap
 
-- 1.x Series
+- 1.x Series (2022 Q2)
   - [x] Modernize the build toolchain with MSBuild for using MSIX packaging and
         parallel compilation support.
   - [x] Use [VC-LTL 5.x](https://github.com/Chuyu-Team/VC-LTL5) toolchain to 
@@ -44,7 +44,7 @@ supported.
         Zstandard support from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd).
         (Suggested by fcharlie.)
   - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
-- 2.x Series
+- 2.x Series (2023 Q3)
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
   - [ ] Full High DPI and Accessibility support in all UI components.
@@ -52,7 +52,7 @@ supported.
         AndromedaMelody.)
   - [ ] Try to modernize the core implementation.
   - [ ] Try to Windows Runtime component for interoperability.
-- 3.x Series
+- 3.x Series (2024 Q3)
   - [ ] Try to add compression support in the graphical user interface for 
         Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support from 
         [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd). (Suggested by 
@@ -70,7 +70,7 @@ supported.
   - [ ] Add language encoding switching support for file names in File Manager.
         (Suggested by 刘泪 and zjkmxy.)
   - [ ] Add deleting source after archiving support. (Suggested by OrionGrant.)
-- 4.x Series
+- 4.x Series (2025 Q3)
   - [ ] Try to add recovery record support for 7z archives. (Suggested by 
         SakuraNeko.)
   - [ ] Try to create a new archive format for Windows imaging.
