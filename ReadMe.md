@@ -44,6 +44,8 @@ supported.
         Zstandard support from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd).
         (Suggested by fcharlie.)
   - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
+  - [ ] Modernize the i18n implementation and migrate language files from 
+        `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
 - 2.x Series (2023 Q3)
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
