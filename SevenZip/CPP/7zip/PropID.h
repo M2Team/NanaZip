@@ -103,6 +103,9 @@ enum
   kpidReadOnly,
   kpidOutName,
   kpidCopyLink,
+  kpidArcFileName,
+  kpidIsHash,
+
 
   kpid_NUM_DEFINED,
 

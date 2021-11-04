@@ -87,7 +87,7 @@ public:
   CErrorPathCodes ScanErrors;
   UInt64 NumNonOpenFiles;
 
-  HRESULT PrintProgress(const wchar_t *name, const char *command, bool showInLog);
+  HRESULT PrintProgress(const wchar_t *name, bool isDir, const char *command, bool showInLog);
 
 };
 

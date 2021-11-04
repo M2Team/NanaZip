@@ -133,9 +133,14 @@ static void AddPropertyString(PROPID propID, UInt64 val, CListViewDialog &dialog
 }
 
 
-static inline char GetHex(Byte value)
+static inline unsigned GetHex_Upper(unsigned v)
 {
-  return (char)((value < 10) ? ('0' + value) : ('A' + (value - 10)));
+  return (v < 10) ? ('0' + v) : ('A' + (v - 10));
+}
+
+static inline unsigned GetHex_Lower(unsigned v)
+{
+  return (v < 10) ? ('0' + v) : ('a' + (v - 10));
 }
 
 static const Byte kSpecProps[] =
@@ -225,11 +230,21 @@ void CPanel::Properties()
               }
               else
               {
+                const bool needUpper = (dataSize <= 8)
+                    && (propID == kpidCRC || propID == kpidChecksum);
                 for (UInt32 k = 0; k < dataSize; k++)
                 {
-                  Byte b = ((const Byte *)data)[k];
-                  s += GetHex((Byte)((b >> 4) & 0xF));
-                  s += GetHex((Byte)(b & 0xF));
+                  const Byte b = ((const Byte *)data)[k];
+                  if (needUpper)
+                  {
+                    s += (char)GetHex_Upper((b >> 4) & 0xF);
+                    s += (char)GetHex_Upper(b & 0xF);
+                  }
+                  else
+                  {
+                    s += (char)GetHex_Lower((b >> 4) & 0xF);
+                    s += (char)GetHex_Lower(b & 0xF);
+                  }
                 }
               }
             }
@@ -931,6 +946,7 @@ void CPanel::CreateFileMenu(HMENU menuSpec,
   CFileMenu fm;
   
   fm.readOnly = IsThereReadOnlyFolder();
+  fm.isHashFolder = IsHashFolder();
   fm.isFsFolder = Is_IO_FS_Folder();
   fm.programMenu = programMenu;
   fm.allAreFiles = allAreFiles;
@@ -939,7 +955,7 @@ void CPanel::CreateFileMenu(HMENU menuSpec,
   fm.isAltStreamsSupported = false;
   
   if (fm.numItems == 1)
-    fm.FilePath = GetItemFullPath(operatedIndices[0]);
+    fm.FilePath = us2fs(GetItemFullPath(operatedIndices[0]));
 
   if (_folderAltStreams)
   {

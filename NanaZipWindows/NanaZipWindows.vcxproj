@@ -31,6 +31,8 @@
     <Manifest Include="NanaZipWindows.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\DynLimBuf.h" />
     <ClInclude Include="..\SevenZip\C\7zCrc.h" />
     <ClInclude Include="..\SevenZip\C\Alloc.h" />
     <ClInclude Include="..\SevenZip\C\CpuArch.h" />
@@ -156,6 +158,8 @@
     <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\GUI\resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\DynLimBuf.cpp" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>

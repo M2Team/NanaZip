@@ -53,7 +53,7 @@ static unsigned ParseStringToUInt64(const UString &srcString, UInt64 &number)
 HRESULT ParsePropToUInt32(const UString &name, const PROPVARIANT &prop, UInt32 &resValue)
 {
   // =VT_UI4
-  // =VT_EMPTY
+  // =VT_EMPTY : it doesn't change (resValue), and returns S_OK
   // {stringUInt32}=VT_EMPTY
 
   if (prop.vt == VT_UI4)
@@ -74,29 +74,90 @@ HRESULT ParsePropToUInt32(const UString &name, const PROPVARIANT &prop, UInt32 &
   return S_OK;
 }
 
-HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 defaultNumThreads, UInt32 &numThreads)
+
+
+HRESULT ParseMtProp2(const UString &name, const PROPVARIANT &prop, UInt32 &numThreads, bool &force)
 {
+  force = false;
+  UString s;
   if (name.IsEmpty())
   {
-    switch (prop.vt)
+    if (prop.vt == VT_UI4)
     {
-      case VT_UI4:
-        numThreads = prop.ulVal;
-        break;
-      default:
-      {
-        bool val;
-        RINOK(PROPVARIANT_to_bool(prop, val));
-        numThreads = (val ? defaultNumThreads : 1);
-        break;
-      }
+      numThreads = prop.ulVal;
+      force = true;
+      return S_OK;
     }
-    return S_OK;
+    bool val;
+    HRESULT res = PROPVARIANT_to_bool(prop, val);
+    if (res == S_OK)
+    {
+      if (!val)
+      {
+        numThreads = 1;
+        force = true;
+      }
+      // force = true; for debug
+      // "(VT_BOOL = VARIANT_TRUE)" set "force = false" and doesn't change numThreads
+      return S_OK;
+    }
+    if (prop.vt != VT_BSTR)
+      return res;
+    s.SetFromBstr(prop.bstrVal);
+    if (s.IsEmpty())
+      return E_INVALIDARG;
   }
-  if (prop.vt != VT_EMPTY)
-    return E_INVALIDARG;
-  return ParsePropToUInt32(name, prop, numThreads);
+  else
+  {
+    if (prop.vt != VT_EMPTY)
+      return E_INVALIDARG;
+    s = name;
+  }
+
+  s.MakeLower_Ascii();
+  const wchar_t *start = s;
+  UInt32 v = numThreads;
+
+  /* we force up, if threads number specified
+     only `d` will force it down */ 
+  bool force_loc = true;
+  for (;;)
+  {
+    const wchar_t c = *start;
+    if (!c)
+      break;
+    if (c == 'd')
+    {
+      force_loc = false;  // force down
+      start++;
+      continue;
+    }
+    if (c == 'u')
+    {
+      force_loc = true;   // force up
+      start++;
+      continue;
+    }
+    bool isPercent = false;
+    if (c == 'p')
+    {
+      isPercent = true;
+      start++;
+    }
+    const wchar_t *end;
+    v = ConvertStringToUInt32(start, &end);
+    if (end == start)
+      return E_INVALIDARG;
+    if (isPercent)
+      v = numThreads * v / 100;
+    start = end;
+  }
+
+  numThreads = v;
+  force = force_loc;
+  return S_OK;
 }
+
 
 
 static HRESULT SetLogSizeProp(UInt64 number, NCOM::CPropVariant &destProp)
@@ -263,9 +324,9 @@ HRESULT CProps::SetCoderProps_DSReduce_Aff(
 
 int CMethodProps::FindProp(PROPID id) const
 {
-  for (int i = (int)Props.Size() - 1; i >= 0; i--)
-    if (Props[(unsigned)i].Id == id)
-      return i;
+  for (unsigned i = Props.Size(); i != 0;)
+    if (Props[--i].Id == id)
+      return (int)i;
   return -1;
 }
 
@@ -510,6 +571,59 @@ HRESULT CMethodProps::ParseParamsFromPROPVARIANT(const UString &realName, const 
   Props.Add(prop);
   return S_OK;
 }
+
+
+static UInt64 GetMemoryUsage_LZMA(UInt32 dict, bool isBt, UInt32 numThreads)
+{
+  UInt32 hs = dict - 1;
+  hs |= (hs >> 1);
+  hs |= (hs >> 2);
+  hs |= (hs >> 4);
+  hs |= (hs >> 8);
+  hs >>= 1;
+  if (hs >= (1 << 24))
+    hs >>= 1;
+  hs |= (1 << 16) - 1;
+  // if (numHashBytes >= 5)
+  if (!isBt)
+    hs |= (256 << 10) - 1;
+  hs++;
+  UInt64 size1 = (UInt64)hs * 4;
+  size1 += (UInt64)dict * 4;
+  if (isBt)
+    size1 += (UInt64)dict * 4;
+  size1 += (2 << 20);
+  
+  if (numThreads > 1 && isBt)
+    size1 += (2 << 20) + (4 << 20);
+  return size1;
+}
+
+static const UInt32 kLzmaMaxDictSize = (UInt32)15 << 28;
+
+UInt64 CMethodProps::Get_Lzma_MemUsage(bool addSlidingWindowSize) const
+{
+  const UInt64 dicSize = Get_Lzma_DicSize();
+  const bool isBt = Get_Lzma_MatchFinder_IsBt();
+  const UInt32 dict32 = (dicSize >= kLzmaMaxDictSize ? kLzmaMaxDictSize : (UInt32)dicSize);
+  const UInt32 numThreads = Get_Lzma_NumThreads();
+  UInt64 size = GetMemoryUsage_LZMA(dict32, isBt, numThreads);
+  
+  if (addSlidingWindowSize)
+  {
+    const UInt32 kBlockSizeMax = (UInt32)0 - (UInt32)(1 << 16);
+    UInt64 blockSize = (UInt64)dict32 + (1 << 16)
+        + (numThreads > 1 ? (1 << 20) : 0);
+    blockSize += (blockSize >> (blockSize < ((UInt32)1 << 30) ? 1 : 2));
+    if (blockSize >= kBlockSizeMax)
+      blockSize = kBlockSizeMax;
+    size += blockSize;
+  }
+  return size;
+}
+
+
+
 
 HRESULT COneMethodInfo::ParseMethodFromString(const UString &s)
 {

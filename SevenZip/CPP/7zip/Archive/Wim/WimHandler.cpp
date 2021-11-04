@@ -877,8 +877,10 @@ STDMETHODIMP CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCal
         curStream = inStream;
       else
       {
-        UString fullName = seqName.GetNextName(i);
-        HRESULT result = openVolumeCallback->GetStream(fullName, &curStream);
+        if (!openVolumeCallback)
+          continue;
+        const UString fullName = seqName.GetNextName(i);
+        const HRESULT result = openVolumeCallback->GetStream(fullName, &curStream);
         if (result == S_FALSE)
           continue;
         if (result != S_OK)

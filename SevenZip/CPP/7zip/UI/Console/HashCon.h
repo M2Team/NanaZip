@@ -12,15 +12,23 @@ class CHashCallbackConsole: public IHashCallbackUI, public CCallbackConsoleBase
   UString _fileName;
   AString _s;
 
+  void AddSpace()
+  {
+    _s.Add_Space_if_NotEmpty();
+  }
+
   void AddSpacesBeforeName()
   {
-    _s.Add_Space();
-    _s.Add_Space();
+    if (!_s.IsEmpty())
+    {
+      _s.Add_Space();
+      _s.Add_Space();
+    }
   }
 
   void PrintSeparatorLine(const CObjectVector<CHasherState> &hashers);
   void PrintResultLine(UInt64 fileSize,
-      const CObjectVector<CHasherState> &hashers, unsigned digestIndex, bool showHash);
+      const CObjectVector<CHasherState> &hashers, unsigned digestIndex, bool showHash, const AString &path);
   void PrintProperty(const char *name, UInt64 value);
 
 public:
@@ -28,14 +36,17 @@ public:
 
   bool PrintHeaders;
   
-  bool PrintSize;
-  bool PrintName;
+  // bool PrintSize;
+  // bool PrintNewLine; // set it too (false), if you need only hash for single file without LF char.
+  AString PrintFields;
+
+  AString GetFields() const;
 
   CHashCallbackConsole():
       PrintNameInPercents(true),
-      PrintHeaders(false),
-      PrintSize(true),
-      PrintName(true)
+      PrintHeaders(false)
+      // , PrintSize(true),
+      // , PrintNewLine(true)
     {}
   
   virtual ~CHashCallbackConsole() {}

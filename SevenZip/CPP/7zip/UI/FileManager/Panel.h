@@ -647,6 +647,7 @@ public:
   bool IsFSDrivesFolder() const;
   bool IsAltStreamsFolder() const;
   bool IsArcFolder() const;
+  bool IsHashFolder() const;
   
   /*
     c:\Dir

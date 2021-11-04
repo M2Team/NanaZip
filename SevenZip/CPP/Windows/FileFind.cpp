@@ -1001,7 +1001,17 @@ void CFileInfo::SetFrom_stat(const struct stat &st)
   // NTime::UnixTimeToFileTime(st.st_mtime, MTime);
   // NTime::UnixTimeToFileTime(st.st_atime, ATime);
   #ifdef __APPLE__
+  // #ifdef _DARWIN_FEATURE_64_BIT_INODE
+  /*
+    here we can use birthtime instead of st_ctimespec.
+    but we use st_ctimespec for compatibility with previous versions and p7zip.
+    st_birthtimespec in OSX
+    st_birthtim : at FreeBSD, NetBSD
+  */
+  // timespec_To_FILETIME(st.st_birthtimespec, CTime);
+  // #else
   timespec_To_FILETIME(st.st_ctimespec, CTime);
+  // #endif
   timespec_To_FILETIME(st.st_mtimespec, MTime);
   timespec_To_FILETIME(st.st_atimespec, ATime);
   #else
@@ -1093,15 +1103,18 @@ void CEnumerator::SetDirPrefix(const FString &dirPrefix)
 
 bool CDirEntry::IsDots() const throw()
 {
-  if (
-    #if !defined(_AIX)
-      !IsDir() ||
-    #endif
-      Name.IsEmpty())
+  /* some systems (like CentOS 7.x on XFS) have (Type == DT_UNKNOWN)
+     we can call fstatat() for that case, but we use only (Name) check here */
+
+  #if !defined(_AIX)
+  if (Type != DT_DIR && Type != DT_UNKNOWN)
     return false;
-  if (Name[0] != '.')
-    return false;
-  return Name.Len() == 1 || (Name.Len() == 2 && Name[1] == '.');
+  #endif
+
+  return Name.Len() != 0
+      && Name.Len() <= 2
+      && Name[0] == '.'
+      && (Name.Len() == 1 || Name[1] == '.');
 }
 
 
@@ -1135,6 +1148,19 @@ bool CEnumerator::NextAny(CDirEntry &fi, bool &found)
   
   #if !defined(_AIX)
   fi.Type = de->d_type;
+  /* some systems (like CentOS 7.x on XFS) have (Type == DT_UNKNOWN)
+     we can set (Type) from fstatat() in that case.
+     But (Type) is not too important. So we don't set it here with slow fstatat() */
+  /*
+  // fi.Type = DT_UNKNOWN; // for debug
+  if (fi.Type == DT_UNKNOWN)
+  {
+    struct stat st;
+    if (fstatat(dirfd(_dir), de->d_name, &st, AT_SYMLINK_NOFOLLOW) == 0)
+      if (S_ISDIR(st.st_mode))
+        fi.Type = DT_DIR;
+  }
+  */
   #endif
   
   /*
@@ -1191,7 +1217,7 @@ bool CEnumerator::Next(CDirEntry &fileInfo, bool &found)
 }
 */
 
-bool CEnumerator::Fill_FileInfo(const CDirEntry &de, CFileInfo &fileInfo, bool followLink)
+bool CEnumerator::Fill_FileInfo(const CDirEntry &de, CFileInfo &fileInfo, bool followLink) const
 {
   // printf("\nCEnumerator::Fill_FileInfo()\n");
   struct stat st;

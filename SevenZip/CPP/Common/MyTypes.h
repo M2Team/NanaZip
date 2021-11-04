@@ -25,6 +25,12 @@ struct CBoolPair
     Val = true;
     Def = true;
   }
+
+  void SetVal_as_Defined(bool val)
+  {
+    Val = val;
+    Def = true;
+  }
 };
 
 #define CLASS_NO_COPY(cls) \

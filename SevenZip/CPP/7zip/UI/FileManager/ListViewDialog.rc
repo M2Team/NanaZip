@@ -1,7 +1,7 @@
 #include "ListViewDialogRes.h"
 #include "../../GuiCommon.rc"
 
-#define xc 440
+#define xc 480
 #define yc 320
 
 IDD_LISTVIEW  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT

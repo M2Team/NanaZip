@@ -59,8 +59,18 @@ class CCensorNode  MY_UNCOPYABLE
   bool CheckPathCurrent(bool include, const UStringVector &pathParts, bool isFile) const;
   void AddItemSimple(bool include, CItem &item);
 public:
-  CCensorNode(): Parent(NULL) { };
-  CCensorNode(const UString &name, CCensorNode *parent): Parent(parent), Name(name)  { };
+  // bool ExcludeDirItems;
+
+  CCensorNode():
+      Parent(NULL)
+      // , ExcludeDirItems(false)
+      {};
+
+  CCensorNode(const UString &name, CCensorNode *parent):
+      Parent(parent)
+      // , ExcludeDirItems(false)
+      , Name(name)
+      {}
 
   UString Name; // WIN32 doesn't support wildcards in file names
   CObjectVector<CCensorNode> SubNodes;
@@ -150,6 +160,14 @@ class CCensor  MY_UNCOPYABLE
   int FindPairForPrefix(const UString &prefix) const;
 public:
   CObjectVector<CPair> Pairs;
+
+  bool ExcludeDirItems;
+  bool ExcludeFileItems;
+
+  CCensor():
+      ExcludeDirItems(false),
+      ExcludeFileItems(false)
+      {}
 
   CObjectVector<NWildcard::CCensorPath> CensorPaths;
   

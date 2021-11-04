@@ -394,6 +394,12 @@
       <Filter>Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h">
+      <Filter>Archive Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\Common\DynLimBuf.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\UI\GUI\FM.ico">
@@ -726,6 +732,12 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp">
       <Filter>Archive Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp">
+      <Filter>Archive Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\DynLimBuf.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

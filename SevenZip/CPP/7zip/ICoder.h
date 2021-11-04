@@ -394,7 +394,8 @@ namespace NMethodPropID
     kDescription,
     kDecoderIsAssigned,
     kEncoderIsAssigned,
-    kDigestSize
+    kDigestSize,
+    kIsFilter
   };
 }
 

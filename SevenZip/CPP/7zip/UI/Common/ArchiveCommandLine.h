@@ -66,6 +66,8 @@ struct CArcCmdLineOptions
   bool TechMode;
   bool ShowTime;
 
+  AString ListFields;
+
   int ConsoleCodePage;
 
   NWildcard::CCensor Censor;
@@ -79,6 +81,7 @@ struct CArcCmdLineOptions
   #endif
 
   UStringVector HashMethods;
+  // UString HashFilePath;
 
   bool AppendName;
   // UStringVector ArchivePathsSorted;

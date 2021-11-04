@@ -141,7 +141,16 @@ public:
 
   bool SymLinks;
   bool ScanAltStreams;
-  
+  bool ExcludeDirItems;
+  bool ExcludeFileItems;
+
+  /* it must be called after anotrher checks */
+  bool CanIncludeItem(bool isDir) const
+  {
+    return isDir ? !ExcludeDirItems : !ExcludeFileItems;
+  }
+ 
+
   CDirItemsStat Stat;
 
   #if !defined(UNDER_CE)

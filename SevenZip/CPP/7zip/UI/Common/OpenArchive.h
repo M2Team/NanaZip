@@ -70,6 +70,7 @@ struct COpenType
 
   bool CanReturnArc;
   bool CanReturnParser;
+  bool IsHashType;
   bool EachPos;
 
   // bool SkipSfxStub;
@@ -90,6 +91,7 @@ struct COpenType
       Recursive(true),
       CanReturnArc(true),
       CanReturnParser(false),
+      IsHashType(false),
       EachPos(false),
       // SkipSfxStub(true),
       // ExeAsUnknown(true),
@@ -285,7 +287,7 @@ public:
   UString Path;
   UString filePath;
   UString DefaultName;
-  int FormatIndex; // - 1 means Parser.
+  int FormatIndex;     // -1 means Parser
   UInt32 SubfileIndex; // (UInt32)(Int32)-1; means no subfile
   FILETIME MTime;
   bool MTimeDefined;
@@ -358,9 +360,16 @@ public:
   HRESULT OpenStream(const COpenOptions &options);
   HRESULT OpenStreamOrFile(COpenOptions &options);
 
-  HRESULT ReOpen(const COpenOptions &options);
+  HRESULT ReOpen(const COpenOptions &options, IArchiveOpenCallback *openCallback_Additional);
   
   HRESULT CreateNewTailStream(CMyComPtr<IInStream> &stream);
+
+  bool IsHashHandler(const COpenOptions &options) const
+  {
+    if (FormatIndex < 0)
+      return false;
+    return options.codecs->Formats[(unsigned)FormatIndex].Flags_HashHandler();
+  }
 };
 
 struct CArchiveLink
@@ -420,6 +429,8 @@ struct CArchiveLink
 };
 
 bool ParseOpenTypes(CCodecs &codecs, const UString &s, CObjectVector<COpenType> &types);
+
+// bool IsHashType(const CObjectVector<COpenType> &types);
 
 
 struct CDirPathSortPair

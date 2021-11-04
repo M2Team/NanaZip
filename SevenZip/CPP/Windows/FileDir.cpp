@@ -5,6 +5,7 @@
 
 #ifndef _WIN32
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 #include <limits.h>
 #include <unistd.h>
@@ -887,17 +888,39 @@ bool GetCurrentDir(FString &path)
 
   char s[MY__PATH_MAX + 1];
   char *res = getcwd(s, MY__PATH_MAX);
-  if (!res)
+  if (res)
   {
-    // if (errno != ERANGE)
-      return false;
+    path = fas2fs(s);
+    return true;
   }
-  path = fas2fs(s);
-  return true;
+  {
+    // if (errno != ERANGE) return false;
+    #if defined(__GLIBC__) || defined(__APPLE__)
+    /* As an extension to the POSIX.1-2001 standard, glibc's getcwd()
+       allocates the buffer dynamically using malloc(3) if buf is NULL. */
+    res = getcwd(NULL, 0);
+    if (res)
+    {
+      path = fas2fs(res);
+      ::free(res);
+      return true;
+    }
+    #endif
+    return false;
+  }
 }
 
 
-static void FILETME_To_timespec(const FILETIME *ft, timespec &ts)
+
+// #undef UTIME_OMIT // to debug
+
+#ifndef UTIME_OMIT
+  /* we can define UTIME_OMIT for debian and another systems.
+     Is it OK to define UTIME_OMIT to -2 here, if UTIME_OMIT is not defined? */
+  // #define UTIME_OMIT -2
+#endif
+
+static bool FILETME_To_timespec(const FILETIME *ft, timespec &ts)
 {
   if (ft)
   {
@@ -909,14 +932,20 @@ static void FILETME_To_timespec(const FILETIME *ft, timespec &ts)
       ts.tv_sec = sec2;
       const UInt64 winTime = (((UInt64)ft->dwHighDateTime) << 32) + ft->dwLowDateTime;
       ts.tv_nsec = (long)((winTime % 10000000) * 100);
-      return;
+      return true;
     }
   }
   // else
   {
     ts.tv_sec = 0;
-    // ts.tv_nsec = UTIME_NOW; // set to the current time
-    ts.tv_nsec = UTIME_OMIT; // keep old timesptamp
+    ts.tv_nsec =
+    #ifdef UTIME_OMIT
+      UTIME_OMIT; // keep old timesptamp
+    #else
+      // UTIME_NOW; // set to the current time
+      0;
+    #endif
+    return false;
   }
 }
 
@@ -968,8 +997,12 @@ bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const 
   struct timespec times[2];
   UNUSED_VAR(cTime)
   
-  FILETME_To_timespec(aTime, times[0]);
-  FILETME_To_timespec(mTime, times[1]);
+  bool needChange;
+  needChange  = FILETME_To_timespec(aTime, times[0]);
+  needChange |= FILETME_To_timespec(mTime, times[1]);
+
+  if (!needChange)
+    return true;
 
   const int flags = 0; // follow link
     // = AT_SYMLINK_NOFOLLOW; // don't follow link

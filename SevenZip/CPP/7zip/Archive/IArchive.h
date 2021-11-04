@@ -59,6 +59,7 @@ namespace NArcInfoFlags
   const UInt32 kSymLinks        = 1 << 10; // the handler supports symbolic links
   const UInt32 kHardLinks       = 1 << 11; // the handler supports hard links
   const UInt32 kByExtOnlyOpen   = 1 << 12; // call handler only if file extension matches
+  const UInt32 kHashHandler     = 1 << 13; // the handler contains the hashes (checksums)
 }
 
 namespace NArchive
@@ -91,7 +92,8 @@ namespace NArchive
       {
         kExtract = 0,
         kTest,
-        kSkip
+        kSkip,
+        kReadExternal
       };
     }
 
@@ -458,7 +460,8 @@ namespace NUpdateNotifyOp
     kRepack,
     kSkip,
     kDelete,
-    kHeader
+    kHeader,
+    kHashRead
 
     // kNumDefined
   };
@@ -480,6 +483,14 @@ ARCHIVE_INTERFACE(IArchiveUpdateCallbackFile, 0x83)
   INTERFACE_IArchiveUpdateCallbackFile(PURE);
 };
 
+
+#define INTERFACE_IArchiveGetDiskProperty(x) \
+  STDMETHOD(GetDiskProperty)(UInt32 index, PROPID propID, PROPVARIANT *value) x; \
+
+ARCHIVE_INTERFACE(IArchiveGetDiskProperty, 0x84)
+{
+  INTERFACE_IArchiveGetDiskProperty(PURE);
+};
 
 /*
 UpdateItems()

@@ -25,11 +25,11 @@
     <Filter Include="C">
       <UniqueIdentifier>{d03c536a-41e0-41ec-be15-899ad9df564b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ArchiveCommon">
-      <UniqueIdentifier>{b721d824-31e1-4654-9ff7-0fe074dbb784}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface">
       <UniqueIdentifier>{64b74d81-8178-46bb-b714-47cbce2f34ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archive Common">
+      <UniqueIdentifier>{b721d824-31e1-4654-9ff7-0fe074dbb784}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -268,10 +268,16 @@
       <Filter>C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp">
-      <Filter>ArchiveCommon</Filter>
+      <Filter>Archive Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\7zCrcOpt.c">
       <Filter>C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\DynLimBuf.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp">
+      <Filter>Archive Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -552,7 +558,7 @@
       <Filter>C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.h">
-      <Filter>ArchiveCommon</Filter>
+      <Filter>Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\IArchive.h">
       <Filter>Interface</Filter>
@@ -576,6 +582,12 @@
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\DynLimBuf.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h">
+      <Filter>Archive Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZipConsole.manifest" />

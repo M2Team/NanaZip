@@ -153,7 +153,7 @@ HRESULT CUpdateCallbackAgent::ReportExtractResult(Int32 opRes, Int32 isEncrypted
   return S_OK;
 }
 
-HRESULT CUpdateCallbackAgent::ReportUpdateOpeartion(UInt32 op, const wchar_t *name, bool isDir)
+HRESULT CUpdateCallbackAgent::ReportUpdateOperation(UInt32 op, const wchar_t *name, bool isDir)
 {
   if (Callback2)
   {

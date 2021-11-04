@@ -18,15 +18,26 @@ protected:
   {
     #ifndef _7ZIP_ST
     _numProcessors = _numThreads = NWindows::NSystem::GetNumberOfProcessors();
+    _numThreads_WasForced = false;
     #endif
 
     UInt64 memAvail = (UInt64)(sizeof(size_t)) << 28;
     _memAvail = memAvail;
-    _memUsage = memAvail;
-    if (NWindows::NSystem::GetRamSize(memAvail))
+    _memUsage_Compress = memAvail;
+    _memUsage_Decompress = memAvail;
+    _memUsage_WasSet = NWindows::NSystem::GetRamSize(memAvail);
+    if (_memUsage_WasSet)
     {
       _memAvail = memAvail;
-      _memUsage = memAvail / 32 * 17;
+      unsigned bits = sizeof(size_t) * 8;
+      if (bits == 32)
+      {
+        const UInt32 limit2 = (UInt32)7 << 28;
+        if (memAvail > limit2)
+          memAvail = limit2;
+      }
+      _memUsage_Compress   = memAvail / 32 * 28;
+      _memUsage_Decompress = memAvail / 32 * 17;
     }
   }
 
@@ -34,9 +45,12 @@ public:
   #ifndef _7ZIP_ST
   UInt32 _numThreads;
   UInt32 _numProcessors;
+  bool _numThreads_WasForced;
   #endif
 
-  UInt64 _memUsage;
+  bool _memUsage_WasSet;
+  UInt64 _memUsage_Compress;
+  UInt64 _memUsage_Decompress;
   UInt64 _memAvail;
 
   bool SetCommonProperty(const UString &name, const PROPVARIANT &value, HRESULT &hres);
@@ -63,7 +77,8 @@ public:
   void SetGlobalLevelTo(COneMethodInfo &oneMethodInfo) const;
 
   #ifndef _7ZIP_ST
-  static void SetMethodThreadsTo(COneMethodInfo &oneMethodInfo, UInt32 numThreads);
+  static void SetMethodThreadsTo_IfNotFinded(CMethodProps &props, UInt32 numThreads);
+  static void SetMethodThreadsTo_Replace(CMethodProps &props, UInt32 numThreads);
   #endif
 
 

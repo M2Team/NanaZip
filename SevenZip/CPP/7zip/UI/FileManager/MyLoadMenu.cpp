@@ -534,6 +534,31 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
         }
       }
 
+      if (isHashFolder)
+      {
+        switch (item.wID)
+        {
+          case IDM_OPEN:
+          case IDM_OPEN_INSIDE:
+          case IDM_OPEN_INSIDE_ONE:
+          case IDM_OPEN_INSIDE_PARSER:
+          case IDM_OPEN_OUTSIDE:
+          case IDM_FILE_VIEW:
+          case IDM_FILE_EDIT:
+          // case IDM_RENAME:
+          case IDM_COPY_TO:
+          case IDM_MOVE_TO:
+          // case IDM_DELETE:
+          case IDM_COMMENT:
+          case IDM_CREATE_FOLDER:
+          case IDM_CREATE_FILE:
+          case IDM_LINK:
+          case IDM_DIFF:
+            disable = true;
+        }
+      }
+
+
       if (item.wID == IDM_LINK && numItems != 1)
         disable = true;
 
@@ -770,7 +795,6 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     case IDM_BENCHMARK: MyBenchmark(false); break;
     case IDM_BENCHMARK2: MyBenchmark(true); break;
 
-    // Help
     case IDM_ABOUT:
     {
       CAboutDialog dialog;

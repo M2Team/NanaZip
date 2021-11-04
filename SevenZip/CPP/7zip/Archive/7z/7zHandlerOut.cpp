@@ -69,15 +69,12 @@ HRESULT CHandler::SetHeaderMethod(CCompressionMethodMode &headerMethod)
   return PropsMethod_To_FullMethod(methodFull, m);
 }
 
-HRESULT CHandler::SetMainMethod(
-    CCompressionMethodMode &methodMode
-    #ifndef _7ZIP_ST
-    , UInt32 numThreads
-    #endif
-    )
+
+HRESULT CHandler::SetMainMethod(CCompressionMethodMode &methodMode)
 {
   methodMode.Bonds = _bonds;
 
+  // we create local copy of _methods. So we can modify it.
   CObjectVector<COneMethodInfo> methods = _methods;
 
   {
@@ -120,18 +117,24 @@ HRESULT CHandler::SetMainMethod(
     COneMethodInfo &oneMethodInfo = methods[i];
 
     SetGlobalLevelTo(oneMethodInfo);
+
     #ifndef _7ZIP_ST
-    CMultiMethodProps::SetMethodThreadsTo(oneMethodInfo, numThreads);
+    const bool numThreads_WasSpecifiedInMethod = (oneMethodInfo.Get_NumThreads() >= 0);
+    if (!numThreads_WasSpecifiedInMethod)
+    {
+      // here we set the (NCoderPropID::kNumThreads) property in each method, only if there is no such property already
+      CMultiMethodProps::SetMethodThreadsTo_IfNotFinded(oneMethodInfo, methodMode.NumThreads);
+    }
     #endif
 
     CMethodFull &methodFull = methodMode.Methods.AddNew();
     RINOK(PropsMethod_To_FullMethod(methodFull, oneMethodInfo));
 
+    methodFull.Set_NumThreads = true;
+    methodFull.NumThreads = methodMode.NumThreads;
+
     if (methodFull.Id != k_Copy)
       needSolid = true;
-
-    if (_numSolidBytesDefined)
-      continue;
 
     UInt64 dicSize;
     switch (methodFull.Id)
@@ -145,9 +148,13 @@ HRESULT CHandler::SetMainMethod(
       default: continue;
     }
 
+    UInt64 numSolidBytes;
+    
     if (methodFull.Id == k_LZMA2)
     {
       // he we calculate default chunk Size for LZMA2 as defined in LZMA2 encoder code
+      /* lzma2 code use dictionary upo to fake 4 GiB to calculate ChunkSize.
+         So we do same */
       UInt64 cs = (UInt64)dicSize << 2;
       const UInt32 kMinSize = (UInt32)1 << 20;
       const UInt32 kMaxSize = (UInt32)1 << 28;
@@ -157,20 +164,78 @@ HRESULT CHandler::SetMainMethod(
       cs += (kMinSize - 1);
       cs &= ~(UInt64)(kMinSize - 1);
       // we want to use at least 64 chunks (threads) per one solid block.
-      _numSolidBytes = cs << 6;
+
+      // here we don't use chunckSize property
+      numSolidBytes = cs << 6;
+
+      // here we get real chunckSize
+      cs = oneMethodInfo.Get_Xz_BlockSize();
+      if (dicSize > cs)
+        dicSize = cs;
+
       const UInt64 kSolidBytes_Lzma2_Max = ((UInt64)1 << 34);
-      if (_numSolidBytes > kSolidBytes_Lzma2_Max)
-        _numSolidBytes = kSolidBytes_Lzma2_Max;
+      if (numSolidBytes > kSolidBytes_Lzma2_Max)
+        numSolidBytes = kSolidBytes_Lzma2_Max;
+
+      methodFull.Set_NumThreads = false; // we don't use ICompressSetCoderMt::SetNumberOfThreads() for LZMA2 encoder
+
+      #ifndef _7ZIP_ST
+      if (!numThreads_WasSpecifiedInMethod
+          && !methodMode.NumThreads_WasForced
+          && methodMode.MemoryUsageLimit_WasSet
+          )
+      {
+        const UInt32 lzmaThreads = oneMethodInfo.Get_Lzma_NumThreads();
+        const UInt32 numBlockThreads_Original = methodMode.NumThreads / lzmaThreads;
+
+        if (numBlockThreads_Original > 1)
+        {
+          /*
+            const UInt32 kNumThreads_Max = 1024;
+            if (numBlockThreads > kNumMaxThreads)
+            numBlockThreads = kNumMaxThreads;
+          */
+
+          UInt32 numBlockThreads = numBlockThreads_Original;
+          const UInt64 lzmaMemUsage = oneMethodInfo.Get_Lzma_MemUsage(false); // solid
+          
+          for (; numBlockThreads > 1; numBlockThreads--)
+          {
+            UInt64 size = numBlockThreads * (lzmaMemUsage + cs);
+            UInt32 numPackChunks = numBlockThreads + (numBlockThreads / 8) + 1;
+            if (cs < ((UInt32)1 << 26)) numPackChunks++;
+            if (cs < ((UInt32)1 << 24)) numPackChunks++;
+            if (cs < ((UInt32)1 << 22)) numPackChunks++;
+            size += numPackChunks * cs;
+            // printf("\nnumBlockThreads = %d, size = %d\n", (unsigned)(numBlockThreads), (unsigned)(size >> 20));
+            if (size <= methodMode.MemoryUsageLimit)
+              break;
+          }
+
+          if (numBlockThreads == 0)
+            numBlockThreads = 1;
+          if (numBlockThreads != numBlockThreads_Original)
+          {
+            const UInt32 numThreads_New = numBlockThreads * lzmaThreads;
+            CMultiMethodProps::SetMethodThreadsTo_Replace(methodFull, numThreads_New);
+          }
+        }
+      }
+      #endif
     }
     else
     {
-      _numSolidBytes = (UInt64)dicSize << 7;
-      if (_numSolidBytes > kSolidBytes_Max)
-        _numSolidBytes = kSolidBytes_Max;
+      numSolidBytes = (UInt64)dicSize << 7;
+      if (numSolidBytes > kSolidBytes_Max)
+        numSolidBytes = kSolidBytes_Max;
     }
 
-    if (_numSolidBytes < kSolidBytes_Min)
-      _numSolidBytes = kSolidBytes_Min;
+    if (_numSolidBytesDefined)
+      continue;
+
+    if (numSolidBytes < kSolidBytes_Min)
+      numSolidBytes = kSolidBytes_Min;
+    _numSolidBytes = numSolidBytes;
     _numSolidBytesDefined = true;
   }
 
@@ -182,8 +247,12 @@ HRESULT CHandler::SetMainMethod(
       _numSolidBytes = 0;
   }
   _numSolidBytesDefined = true;
+
+
   return S_OK;
 }
+
+
 
 static HRESULT GetTime(IArchiveUpdateCallback *updateCallback, unsigned index, PROPID propID, UInt64 &ft, bool &ftDefined)
 {
@@ -576,22 +645,28 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
 
   CCompressionMethodMode methodMode, headerMethod;
 
-  HRESULT res = SetMainMethod(methodMode
-    #ifndef _7ZIP_ST
-    , _numThreads
-    #endif
-    );
+  methodMode.MemoryUsageLimit = _memUsage_Compress;
+  methodMode.MemoryUsageLimit_WasSet = _memUsage_WasSet;
+
+  #ifndef _7ZIP_ST
+  {
+    UInt32 numThreads = _numThreads;
+    const UInt32 kNumThreads_Max = 1024;
+    if (numThreads > kNumThreads_Max)
+      numThreads = kNumThreads_Max;
+    methodMode.NumThreads = numThreads;
+    methodMode.NumThreads_WasForced = _numThreads_WasForced;
+    methodMode.MultiThreadMixer = _useMultiThreadMixer;
+    // headerMethod.NumThreads = 1;
+    headerMethod.MultiThreadMixer = _useMultiThreadMixer;
+  }
+  #endif
+
+  HRESULT res = SetMainMethod(methodMode);
   RINOK(res);
 
   RINOK(SetHeaderMethod(headerMethod));
   
-  #ifndef _7ZIP_ST
-  methodMode.NumThreads = _numThreads;
-  methodMode.MultiThreadMixer = _useMultiThreadMixer;
-  headerMethod.NumThreads = 1;
-  headerMethod.MultiThreadMixer = _useMultiThreadMixer;
-  #endif
-
   CMyComPtr<ICryptoGetTextPassword2> getPassword2;
   updateCallback->QueryInterface(IID_ICryptoGetTextPassword2, (void **)&getPassword2);
 

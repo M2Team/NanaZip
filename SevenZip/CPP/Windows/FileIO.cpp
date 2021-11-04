@@ -498,7 +498,24 @@ bool COutFile::Write(const void *data, UInt32 size, UInt32 &processedSize) throw
     data = (const void *)((const unsigned char *)data + processedLoc);
     size -= processedLoc;
   }
-  while (size > 0);
+  while (size != 0);
+  return true;
+}
+
+bool COutFile::WriteFull(const void *data, size_t size) throw()
+{
+  do
+  {
+    UInt32 processedLoc = 0;
+    const UInt32 sizeCur = (size > kChunkSizeMax ? kChunkSizeMax : (UInt32)size);
+    if (!WritePart(data, sizeCur, processedLoc))
+      return false;
+    if (processedLoc == 0)
+      return (size == 0);
+    data = (const void *)((const unsigned char *)data + processedLoc);
+    size -= processedLoc;
+  }
+  while (size != 0);
   return true;
 }
 

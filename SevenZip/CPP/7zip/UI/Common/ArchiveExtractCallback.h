@@ -62,9 +62,15 @@ struct CExtractNtOptions
 
   bool PreAllocateOutFile;
 
+  // used for hash arcs only, when we open external files
+  bool PreserveATime;
+  bool OpenShareForWrite;
+
   CExtractNtOptions():
       ReplaceColonForAltStream(false),
-      WriteToAltStreamIfColon(false)
+      WriteToAltStreamIfColon(false),
+      PreserveATime(false),
+      OpenShareForWrite(false)
   {
     SymLinks.Val = true;
     SymLinks_AllowDangerous.Val = false;
@@ -205,6 +211,8 @@ class CArchiveExtractCallback:
   public IArchiveExtractCallbackMessage,
   public ICryptoGetTextPassword,
   public ICompressProgressInfo,
+  public IArchiveUpdateCallbackFile,
+  public IArchiveGetDiskProperty,
   public CMyUnknownImp
 {
   const CArc *_arc;
@@ -342,6 +350,9 @@ class CArchiveExtractCallback:
   HRESULT GetTime(UInt32 index, PROPID propID, FILETIME &filetime, bool &filetimeIsDefined);
   HRESULT GetUnpackSize();
 
+  FString Hash_GetFullFilePath();
+
+public:
   HRESULT SendMessageError(const char *message, const FString &path);
   HRESULT SendMessageError_with_LastError(const char *message, const FString &path);
   HRESULT SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2);
@@ -356,10 +367,20 @@ public:
   UInt64 UnpackSize;
   UInt64 AltStreams_UnpackSize;
   
-  MY_UNKNOWN_IMP3(IArchiveExtractCallbackMessage, ICryptoGetTextPassword, ICompressProgressInfo)
+  FString DirPathPrefix_for_HashFiles;
+
+  MY_UNKNOWN_IMP5(
+      IArchiveExtractCallbackMessage,
+      ICryptoGetTextPassword,
+      ICompressProgressInfo,
+      IArchiveUpdateCallbackFile,
+      IArchiveGetDiskProperty
+      )
 
   INTERFACE_IArchiveExtractCallback(;)
   INTERFACE_IArchiveExtractCallbackMessage(;)
+  INTERFACE_IArchiveUpdateCallbackFile(;)
+  INTERFACE_IArchiveGetDiskProperty(;)
 
   STDMETHOD(SetRatioInfo)(const UInt64 *inSize, const UInt64 *outSize);
 
@@ -453,6 +474,7 @@ private:
   bool _isRenamed;
   HRESULT CheckExistFile(FString &fullProcessedPath, bool &needExit);
   HRESULT GetExtractStream(CMyComPtr<ISequentialOutStream> &outStreamLoc, bool &needExit);
+  HRESULT GetItem(UInt32 index);
 
   HRESULT CloseFile();
   HRESULT CloseReparseAndFile();

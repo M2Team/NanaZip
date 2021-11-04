@@ -126,6 +126,12 @@ HRESULT CPanel::CopyTo(CCopyToOptions &options, const CRecordVector<UInt32> &ind
     UStringVector *messages,
     bool &usePassword, UString &password)
 {
+  if (IsHashFolder())
+  {
+    if (!options.testMode)
+      return E_NOTIMPL;
+  }
+
   if (!_folderOperations)
   {
     UString errorMessage = LangString(IDS_OPERATION_IS_NOT_SUPPORTED);
@@ -290,6 +296,11 @@ struct CThreadUpdate
 HRESULT CPanel::CopyFrom(bool moveMode, const UString &folderPrefix, const UStringVector &filePaths,
     bool showErrorMessages, UStringVector *messages)
 {
+  if (IsHashFolder())
+  {
+    if (moveMode)
+      return E_NOTIMPL;
+  }
   // CDisableNotify disableNotify(*this);
 
   HRESULT res;

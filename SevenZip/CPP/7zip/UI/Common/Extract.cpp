@@ -7,11 +7,13 @@
 #include "../../../Common/StringConvert.h"
 
 #include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
 #include "../../../Windows/ErrorMsg.h"
 #include "../../../Windows/PropVariant.h"
 #include "../../../Windows/PropVariantConv.h"
 
 #include "../Common/ExtractingFilePath.h"
+#include "../Common/HashCalc.h"
 
 #include "Extract.h"
 #include "SetProperties.h"
@@ -87,7 +89,7 @@ static HRESULT DecompressArchive(
     }
   }
 
-  bool allFilesAreAllowed = wildcardCensor.AreAllAllowed();
+  const bool allFilesAreAllowed = wildcardCensor.AreAllAllowed();
 
   if (!options.StdInMode)
   {
@@ -98,9 +100,14 @@ static HRESULT DecompressArchive(
 
     for (UInt32 i = 0; i < numItems; i++)
     {
-      if (elimIsPossible || !allFilesAreAllowed)
+      if (elimIsPossible
+          || !allFilesAreAllowed
+          || options.ExcludeDirItems
+          || options.ExcludeFileItems)
       {
         RINOK(arc.GetItem(i, item));
+        if (item.IsDir ? options.ExcludeDirItems : options.ExcludeFileItems)
+          continue;
       }
       else
       {
@@ -254,6 +261,7 @@ int Find_FileName_InSortedVector(const UStringVector &fileName, const UString &n
 
 
 HRESULT Extract(
+    // DECL_EXTERNAL_CODECS_LOC_VARS
     CCodecs *codecs,
     const CObjectVector<COpenType> &types,
     const CIntVector &excludedFormats,
@@ -407,6 +415,31 @@ HRESULT Extract(
       if (!options.StdInMode)
         totalPackProcessed += fi.Size;
       continue;
+    }
+
+    if (arcLink.Arcs.Size() != 0)
+    {
+      if (arcLink.GetArc()->IsHashHandler(op))
+      {
+        if (!options.TestMode)
+        {
+          /* real Extracting to files is possible.
+             But user can think that hash archive contains real files.
+             So we block extracting here. */
+          return E_NOTIMPL;
+        }
+        FString dirPrefix = us2fs(options.HashDir);
+        if (dirPrefix.IsEmpty())
+        {
+          if (!NFile::NDir::GetOnlyDirPrefix(us2fs(arcPath), dirPrefix))
+          {
+            // return GetLastError_noZero_HRESULT();
+          }
+        }
+        if (!dirPrefix.IsEmpty())
+          NName::NormalizeDirPathPrefix(dirPrefix);
+        ecs->DirPathPrefix_for_HashFiles = dirPrefix;
+      }
     }
 
     if (!options.StdInMode)

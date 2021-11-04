@@ -44,6 +44,7 @@ void CExtractCallbackImp::Init()
   _lang_Extracting = LangString(IDS_PROGRESS_EXTRACTING);
   _lang_Testing = LangString(IDS_PROGRESS_TESTING);
   _lang_Skipping = LangString(IDS_PROGRESS_SKIPPING);
+  _lang_Reading = "Reading";
 
   NumArchiveErrors = 0;
   ThereAreMessageErrors = false;
@@ -233,6 +234,7 @@ STDMETHODIMP CExtractCallbackImp::PrepareOperation(const wchar_t *name, Int32 is
     case NArchive::NExtract::NAskMode::kExtract: msg = &_lang_Extracting; break;
     case NArchive::NExtract::NAskMode::kTest:    msg = &_lang_Testing; break;
     case NArchive::NExtract::NAskMode::kSkip:    msg = &_lang_Skipping; break;
+    case NArchive::NExtract::NAskMode::kReadExternal: msg = &_lang_Reading; break;
     // default: s = "Unknown operation";
   }
 
@@ -911,8 +913,10 @@ STDMETHODIMP CExtractCallbackImp::PrepareOperation7(Int32 askExtractMode)
 {
   COM_TRY_BEGIN
   _needUpdateStat = (
-      askExtractMode == NArchive::NExtract::NAskMode::kExtract ||
-      askExtractMode == NArchive::NExtract::NAskMode::kTest);
+         askExtractMode == NArchive::NExtract::NAskMode::kExtract
+      || askExtractMode == NArchive::NExtract::NAskMode::kTest
+      || askExtractMode == NArchive::NExtract::NAskMode::kReadExternal
+      );
 
   /*
   _extractMode = false;
@@ -930,7 +934,7 @@ STDMETHODIMP CExtractCallbackImp::PrepareOperation7(Int32 askExtractMode)
   COM_TRY_END
 }
 
-STDMETHODIMP CExtractCallbackImp::SetOperationResult7(Int32 opRes, Int32 encrypted)
+STDMETHODIMP CExtractCallbackImp::SetOperationResult8(Int32 opRes, Int32 encrypted, UInt64 size)
 {
   COM_TRY_BEGIN
   if (VirtFileSystem && _newVirtFileWasAdded)
@@ -950,7 +954,7 @@ STDMETHODIMP CExtractCallbackImp::SetOperationResult7(Int32 opRes, Int32 encrypt
   }
   else if (_hashCalc && _needUpdateStat)
   {
-    _hashCalc->SetSize(_curSize);
+    _hashCalc->SetSize(size); // (_curSize) before 21.04
     _hashCalc->Final(_isFolder, _isAltStream, _filePath);
   }
   return SetOperationResult(opRes, encrypted);

@@ -117,7 +117,7 @@ class CHandler:
     #ifndef _7ZIP_ST
     decoder._numThreads = _numThreads;
     #endif
-    decoder._memUsage = _memUsage;
+    decoder._memUsage = _memUsage_Decompress;
 
     HRESULT hres = decoder.Decode(seqInStream, outStream,
         NULL, // *outSizeLimit
@@ -1129,14 +1129,14 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
 
   if (IntToBool(newData))
   {
-    UInt64 size;
+    UInt64 dataSize;
     {
       NCOM::CPropVariant prop;
       RINOK(updateCallback->GetProperty(0, kpidSize, &prop));
       if (prop.vt != VT_UI8)
         return E_INVALIDARG;
-      size = prop.uhVal.QuadPart;
-      RINOK(updateCallback->SetTotal(size));
+      dataSize = prop.uhVal.QuadPart;
+      RINOK(updateCallback->SetTotal(dataSize));
     }
 
     NCompress::NXz::CEncoder *encoderSpec = new NCompress::NXz::CEncoder;
@@ -1147,17 +1147,79 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
 
     lzma2Props.lzmaProps.level = GetLevel();
 
-    xzProps.reduceSize = size;
+    xzProps.reduceSize = dataSize;
     /*
     {
-      NCOM::CPropVariant prop = (UInt64)size;
+      NCOM::CPropVariant prop = (UInt64)dataSize;
       RINOK(encoderSpec->SetCoderProp(NCoderPropID::kReduceSize, prop));
     }
     */
 
     #ifndef _7ZIP_ST
-    xzProps.numTotalThreads = (int)_numThreads;
-    #endif
+    
+    UInt32 numThreads = _numThreads;
+
+    const UInt32 kNumThreads_Max = 1024;
+    if (numThreads > kNumThreads_Max)
+      numThreads = kNumThreads_Max;
+
+    if (!_numThreads_WasForced
+        && _numThreads >= 1
+        && _memUsage_WasSet)
+    {
+      COneMethodInfo oneMethodInfo;
+      if (!_methods.IsEmpty())
+        oneMethodInfo = _methods[0];
+
+      SetGlobalLevelTo(oneMethodInfo);
+
+      const bool numThreads_WasSpecifiedInMethod = (oneMethodInfo.Get_NumThreads() >= 0);
+      if (!numThreads_WasSpecifiedInMethod)
+      {
+        // here we set the (NCoderPropID::kNumThreads) property in each method, only if there is no such property already
+        CMultiMethodProps::SetMethodThreadsTo_IfNotFinded(oneMethodInfo, numThreads);
+      }
+
+      UInt64 cs = _numSolidBytes;
+      if (cs != XZ_PROPS__BLOCK_SIZE__AUTO)
+        oneMethodInfo.AddProp_BlockSize2(cs);
+      cs = oneMethodInfo.Get_Xz_BlockSize();
+
+      if (cs != XZ_PROPS__BLOCK_SIZE__AUTO &&
+          cs != XZ_PROPS__BLOCK_SIZE__SOLID)
+      {
+        const UInt32 lzmaThreads = oneMethodInfo.Get_Lzma_NumThreads();
+        const UInt32 numBlockThreads_Original = numThreads / lzmaThreads;
+
+        if (numBlockThreads_Original > 1)
+        {
+          UInt32 numBlockThreads = numBlockThreads_Original;
+          {
+            const UInt64 lzmaMemUsage = oneMethodInfo.Get_Lzma_MemUsage(false);
+            for (; numBlockThreads > 1; numBlockThreads--)
+            {
+              UInt64 size = numBlockThreads * (lzmaMemUsage + cs);
+              UInt32 numPackChunks = numBlockThreads + (numBlockThreads / 8) + 1;
+              if (cs < ((UInt32)1 << 26)) numPackChunks++;
+              if (cs < ((UInt32)1 << 24)) numPackChunks++;
+              if (cs < ((UInt32)1 << 22)) numPackChunks++;
+              size += numPackChunks * cs;
+              // printf("\nnumBlockThreads = %d, size = %d\n", (unsigned)(numBlockThreads), (unsigned)(size >> 20));
+              if (size <= _memUsage_Compress)
+                break;
+            }
+          }
+          if (numBlockThreads == 0)
+            numBlockThreads = 1;
+          if (numBlockThreads != numBlockThreads_Original)
+            numThreads = numBlockThreads * lzmaThreads;
+        }
+      }
+    }
+    xzProps.numTotalThreads = (int)numThreads;
+
+    #endif // _7ZIP_ST
+
 
     xzProps.blockSize = _numSolidBytes;
     if (_numSolidBytes == XZ_PROPS__BLOCK_SIZE__SOLID)

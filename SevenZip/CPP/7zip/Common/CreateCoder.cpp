@@ -118,6 +118,7 @@ HRESULT CExternalCodecs::Load()
       }
       RINOK(ReadIsAssignedProp(GetCodecs, i, NMethodPropID::kEncoderIsAssigned, info.EncoderIsAssigned));
       RINOK(ReadIsAssignedProp(GetCodecs, i, NMethodPropID::kDecoderIsAssigned, info.DecoderIsAssigned));
+      RINOK(ReadIsAssignedProp(GetCodecs, i, NMethodPropID::kIsFilter, info.IsFilter));
       
       Codecs.Add(info);
     }

@@ -64,6 +64,12 @@ class CThreadExtracting: public CProgressThreadVirt
 {
   HRESULT ProcessVirt();
 public:
+  /*
+  #ifdef EXTERNAL_CODECS
+  const CExternalCodecs *externalCodecs;
+  #endif
+  */
+
   CCodecs *codecs;
   CExtractCallbackImp *ExtractCallbackSpec;
   const CObjectVector<COpenType> *FormatIndices;
@@ -105,7 +111,13 @@ HRESULT CThreadExtracting::ProcessVirt()
   */
   #endif
 
-  HRESULT res = Extract(codecs,
+  HRESULT res = Extract(
+      /*
+      #ifdef EXTERNAL_CODECS
+      externalCodecs,
+      #endif
+      */
+      codecs,
       *FormatIndices, *ExcludedFormatIndices,
       *ArchivePaths, *ArchivePathsFull,
       *WildcardCensor, *Options, ExtractCallbackSpec, ExtractCallback,
@@ -154,6 +166,7 @@ HRESULT CThreadExtracting::ProcessVirt()
 
 
 HRESULT ExtractGUI(
+    // DECL_EXTERNAL_CODECS_LOC_VARS
     CCodecs *codecs,
     const CObjectVector<COpenType> &formatIndices,
     const CIntVector &excludedFormatIndices,
@@ -172,6 +185,11 @@ HRESULT ExtractGUI(
   messageWasDisplayed = false;
 
   CThreadExtracting extracter;
+  /*
+  #ifdef EXTERNAL_CODECS
+  extracter.externalCodecs = __externalCodecs;
+  #endif
+  */
   extracter.codecs = codecs;
   extracter.FormatIndices = &formatIndices;
   extracter.ExcludedFormatIndices = &excludedFormatIndices;

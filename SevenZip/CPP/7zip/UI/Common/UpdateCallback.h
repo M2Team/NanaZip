@@ -40,7 +40,7 @@ struct CArcToDoStat
   virtual HRESULT ReadingFileError(const FString &path, DWORD systemError) x; \
   virtual HRESULT SetOperationResult(Int32 opRes) x; \
   virtual HRESULT ReportExtractResult(Int32 opRes, Int32 isEncrypted, const wchar_t *name) x; \
-  virtual HRESULT ReportUpdateOpeartion(UInt32 op, const wchar_t *name, bool isDir) x; \
+  virtual HRESULT ReportUpdateOperation(UInt32 op, const wchar_t *name, bool isDir) x; \
   /* virtual HRESULT SetPassword(const UString &password) x; */ \
   virtual HRESULT CryptoGetTextPassword2(Int32 *passwordIsDefined, BSTR *password) x; \
   virtual HRESULT CryptoGetTextPassword(BSTR *password) x; \
@@ -87,6 +87,8 @@ class CArchiveUpdateCallback:
   UInt32 _hardIndex_From;
   UInt32 _hardIndex_To;
 
+  void UpdateProcessedItemStatus(unsigned dirIndex);
+
 public:
   MY_QUERYINTERFACE_BEGIN2(IArchiveUpdateCallback2)
     MY_QUERYINTERFACE_ENTRY(IArchiveUpdateCallbackFile)
@@ -121,6 +123,7 @@ public:
   CRecordVector<UInt64> VolumesSizes;
   FString VolName;
   FString VolExt;
+  UString ArcFileName; // without path prefix
 
   IUpdateCallbackUI *Callback;
 
@@ -146,7 +149,6 @@ public:
   bool StoreSymLinks;
 
   Byte *ProcessedItemsStatuses;
-
 
   CArchiveUpdateCallback();
 

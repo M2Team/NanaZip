@@ -230,8 +230,8 @@ public:
 
 #define MY_ADDREF_RELEASE \
 STDMETHOD_(ULONG, AddRef)() throw() { return ++__m_RefCount; } \
-STDMETHOD_(ULONG, Release)() { if (--__m_RefCount != 0)  \
-  return __m_RefCount; delete this; return 0; }
+STDMETHOD_(ULONG, Release)() { if (--__m_RefCount != 0) return __m_RefCount; \
+    delete this; return 0; }
 
 #define MY_UNKNOWN_IMP_SPEC(i) \
   MY_QUERYINTERFACE_BEGIN \

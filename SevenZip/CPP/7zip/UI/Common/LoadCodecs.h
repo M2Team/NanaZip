@@ -68,6 +68,8 @@ struct CDllCodecInfo
   UInt32 CodecIndex;
   bool EncoderIsAssigned;
   bool DecoderIsAssigned;
+  bool IsFilter;
+  bool IsFilter_Assigned;
   CLSID Encoder;
   CLSID Decoder;
 };
@@ -119,6 +121,23 @@ struct CArcInfoEx
     CLSID ClassID;
   #endif
 
+  int Compare(const CArcInfoEx &a) const
+  {
+    int res = Name.Compare(a.Name);
+    if (res != 0)
+      return res;
+    #ifdef EXTERNAL_CODECS
+    return MyCompare(LibIndex, a.LibIndex);
+    #else
+    return 0;
+    #endif
+    /*
+    if (LibIndex < a.LibIndex) return -1;
+    if (LibIndex > a.LibIndex) return 1;
+    return 0;
+    */
+  }
+
   bool Flags_KeepName() const { return (Flags & NArcInfoFlags::kKeepName) != 0; }
   bool Flags_FindSignature() const { return (Flags & NArcInfoFlags::kFindSignature) != 0; }
 
@@ -133,6 +152,7 @@ struct CArcInfoEx
   bool Flags_PreArc() const { return (Flags & NArcInfoFlags::kPreArc) != 0; }
   bool Flags_PureStartOpen() const { return (Flags & NArcInfoFlags::kPureStartOpen) != 0; }
   bool Flags_ByExtOnlyOpen() const { return (Flags & NArcInfoFlags::kByExtOnlyOpen) != 0; }
+  bool Flags_HashHandler() const { return (Flags & NArcInfoFlags::kHashHandler) != 0; }
 
   UString GetMainExt() const
   {
@@ -235,6 +255,21 @@ struct CCodecError
   AString Message;
   CCodecError(): ErrorCode(0) {}
 };
+
+
+struct CCodecInfoUser
+{
+  // unsigned LibIndex;
+  // UInt32 CodecIndex;
+  // UInt64 id;
+  bool EncoderIsAssigned;
+  bool DecoderIsAssigned;
+  bool IsFilter;
+  bool IsFilter_Assigned;
+  UInt32 NumStreams;
+  AString Name;
+};
+
 
 class CCodecs:
   #ifdef EXTERNAL_CODECS
@@ -353,6 +388,7 @@ public:
   int GetCodec_LibIndex(UInt32 index) const;
   bool GetCodec_DecoderIsAssigned(UInt32 index) const;
   bool GetCodec_EncoderIsAssigned(UInt32 index) const;
+  bool GetCodec_IsFilter(UInt32 index, bool &isAssigned) const;
   UInt32 GetCodec_NumStreams(UInt32 index);
   HRESULT GetCodec_Id(UInt32 index, UInt64 &id);
   AString GetCodec_Name(UInt32 index);
@@ -415,6 +451,8 @@ public:
     }
     return -1;
   }
+
+  void Get_CodecsInfoUser_Vector(CObjectVector<CCodecInfoUser> &v);
 
   #endif // _SFX
 };

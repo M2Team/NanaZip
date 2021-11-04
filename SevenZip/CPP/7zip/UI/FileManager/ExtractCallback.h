@@ -282,6 +282,7 @@ public:
   UString _lang_Extracting;
   UString _lang_Testing;
   UString _lang_Skipping;
+  UString _lang_Reading;
   UString _lang_Empty;
 
   bool _totalFilesDefined;

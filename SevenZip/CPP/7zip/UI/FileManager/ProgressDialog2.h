@@ -152,6 +152,7 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   NWindows::NControl::CListView _messageList;
   
   int _numMessages;
+  UStringVector _messageStrings;
 
   #ifdef __ITaskbarList3_INTERFACE_DEFINED__
   CMyComPtr<ITaskbarList3> _taskbarList;
@@ -212,6 +213,9 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
   virtual void OnCancel();
   virtual void OnOK();
+  virtual bool OnNotify(UINT /* controlID */, LPNMHDR header);
+  void CopyToClipboard();
+
   NWindows::NSynchronization::CManualResetEvent _createDialogEvent;
   NWindows::NSynchronization::CManualResetEvent _dialogCreatedEvent;
   #ifndef _SFX

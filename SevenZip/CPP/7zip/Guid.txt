@@ -21,7 +21,8 @@
   11  IFolderScanProgress
   
   20  IFileExtractCallback.h::IGetProp
-  30  IFileExtractCallback.h::IFolderExtractToStreamCallback
+  30  IFileExtractCallback.h::IFolderExtractToStreamCallback (old)
+  31  IFileExtractCallback.h::IFolderExtractToStreamCallback (new 21.04)
 
 03 IStream.h
 
@@ -104,6 +105,7 @@
   80  IArchiveUpdateCallback
   82  IArchiveUpdateCallback2
   83  IArchiveUpdateCallbackFile
+  84  IArchiveGetDiskProperty
 
   A0  IOutArchive
 

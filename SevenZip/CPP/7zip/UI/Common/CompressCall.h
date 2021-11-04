@@ -16,8 +16,13 @@ HRESULT CompressFiles(
     bool email, bool showDialog, bool waitFinish);
 
 void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup);
-void TestArchives(const UStringVector &arcPaths);
-void CalcChecksum(const UStringVector &paths, const UString &methodName);
+void TestArchives(const UStringVector &arcPaths, bool hashMode = false);
+
+void CalcChecksum(const UStringVector &paths,
+    const UString &methodName,
+    const UString &arcPathPrefix,
+    const UString &arcFileName);
+
 void Benchmark(bool totalMode);
 
 #endif

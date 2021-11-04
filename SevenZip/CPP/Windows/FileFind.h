@@ -103,6 +103,15 @@ public:
     return S_ISLNK(mod);
   }
   #endif
+
+  bool IsOsSymLink() const
+  {
+    #ifdef _WIN32
+      return HasReparsePoint();
+    #else
+      return IsPosixLink();
+    #endif
+  }
 };
 
 struct CFileInfo: public CFileInfoBase
@@ -223,13 +232,15 @@ struct CDirEntry
   #endif
   FString Name;
 
+  /*
   #if !defined(_AIX)
   bool IsDir() const
   {
-    // DT_DIR is
+    // (Type == DT_UNKNOWN) on some systems
     return Type == DT_DIR;
   }
   #endif
+  */
 
   bool IsDots() const throw();
 };
@@ -246,7 +257,22 @@ public:
   void SetDirPrefix(const FString &dirPrefix);
 
   bool Next(CDirEntry &fileInfo, bool &found);
-  bool Fill_FileInfo(const CDirEntry &de, CFileInfo &fileInfo, bool followLink);
+  bool Fill_FileInfo(const CDirEntry &de, CFileInfo &fileInfo, bool followLink) const;
+  bool DirEntry_IsDir(const CDirEntry &de, bool followLink) const
+  {
+    #if !defined(_AIX)
+    if (de.Type == DT_DIR)
+      return true;
+    if (de.Type != DT_UNKNOWN)
+      return false;
+    #endif
+    CFileInfo fileInfo;
+    if (Fill_FileInfo(de, fileInfo, followLink))
+    {
+      return fileInfo.IsDir();
+    }
+    return false; // change it
+  }
 };
 
 /*

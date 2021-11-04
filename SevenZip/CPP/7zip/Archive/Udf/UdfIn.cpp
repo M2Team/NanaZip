@@ -109,7 +109,7 @@ static UString ParseDString(const Byte *data, unsigned size)
       }
     }
     else
-      return UString("[unknow]");
+      return UString("[unknown]");
     *p = 0;
     res.ReleaseBuf_SetLen((unsigned)(p - (const wchar_t *)res));
   }

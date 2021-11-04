@@ -505,7 +505,7 @@ static void PrintTime(char *dest, const FILETIME *ft)
 
 static inline char GetHex(Byte value)
 {
-  return (char)((value < 10) ? ('0' + value) : ('A' + (value - 10)));
+  return (char)((value < 10) ? ('0' + value) : ('a' + (value - 10)));
 }
 
 static void HexToString(char *dest, const Byte *data, UInt32 size)
@@ -1019,7 +1019,9 @@ HRESULT Print_OpenArchive_Error(CStdOutStream &so, const CCodecs *codecs, const 
 
 bool CensorNode_CheckPath(const NWildcard::CCensorNode &node, const CReadArcItem &item);
 
-HRESULT ListArchives(CCodecs *codecs,
+HRESULT ListArchives(
+    const CListOptions &listOptions,
+    CCodecs *codecs,
     const CObjectVector<COpenType> &types,
     const CIntVector &excludedFormats,
     bool stdInMode,
@@ -1270,6 +1272,9 @@ HRESULT ListArchives(CCodecs *codecs,
       }
 
       RINOK(Archive_IsItem_Dir(archive, i, fp.IsDir));
+
+      if (fp.IsDir ? listOptions.ExcludeDirItems : listOptions.ExcludeFileItems)
+        continue;
 
       if (!allFilesAreAllowed)
       {

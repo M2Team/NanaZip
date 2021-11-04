@@ -374,7 +374,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           
           _7Z_DECODER_CRYPRO_VARS
           #if !defined(_7ZIP_ST)
-            , true, _numThreads, _memUsage
+            , true, _numThreads, _memUsage_Decompress
           #endif
           );
 

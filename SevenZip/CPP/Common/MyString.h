@@ -198,6 +198,7 @@ bool StringsAreEqualNoCase(const wchar_t *s1, const wchar_t *s2) throw();
 bool IsString1PrefixedByString2(const char *s1, const char *s2) throw();
 bool IsString1PrefixedByString2(const wchar_t *s1, const wchar_t *s2) throw();
 bool IsString1PrefixedByString2(const wchar_t *s1, const char *s2) throw();
+bool IsString1PrefixedByString2_NoCase_Ascii(const char *s1, const char *s2) throw();
 bool IsString1PrefixedByString2_NoCase_Ascii(const wchar_t *u, const char *a) throw();
 bool IsString1PrefixedByString2_NoCase(const wchar_t *s1, const wchar_t *s2) throw();
 

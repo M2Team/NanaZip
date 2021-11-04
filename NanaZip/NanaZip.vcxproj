@@ -49,6 +49,8 @@
     <Image Include="Assets\Toolbar\Test_32x32.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\DynLimBuf.cpp" />
     <ClCompile Include="..\SevenZip\C\Alloc.c" />
     <ClCompile Include="..\SevenZip\C\CpuArch.c" />
     <ClCompile Include="..\SevenZip\C\DllSecur.c" />
@@ -199,6 +201,9 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\DynLimBuf.h" />
     <ClInclude Include="..\SevenZip\C\7zTypes.h" />
     <ClInclude Include="..\SevenZip\C\Alloc.h" />
     <ClInclude Include="..\SevenZip\C\CpuArch.h" />

@@ -158,12 +158,7 @@ private:
 
   HRESULT PropsMethod_To_FullMethod(CMethodFull &dest, const COneMethodInfo &m);
   HRESULT SetHeaderMethod(CCompressionMethodMode &headerMethod);
-  HRESULT SetMainMethod(CCompressionMethodMode &method
-      #ifndef _7ZIP_ST
-      , UInt32 numThreads
-      #endif
-      );
-
+  HRESULT SetMainMethod(CCompressionMethodMode &method);
 
   #endif
 

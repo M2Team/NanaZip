@@ -30,6 +30,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\SevenZip\CPP\Windows\Clipboard.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\MemoryGlobal.cpp" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c" />
     <ClCompile Include="..\SevenZip\C\7zCrcOpt.c" />
     <ClCompile Include="..\SevenZip\C\Aes.c" />
@@ -143,6 +145,8 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\SevenZip\CPP\Windows\Clipboard.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\MemoryGlobal.h" />
     <ClInclude Include="..\SevenZip\C\7zCrc.h" />
     <ClInclude Include="..\SevenZip\C\Aes.h" />
     <ClInclude Include="..\SevenZip\C\Alloc.h" />

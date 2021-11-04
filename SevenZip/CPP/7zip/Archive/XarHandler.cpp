@@ -151,7 +151,8 @@ IMP_IInArchive_ArcProps
 
 #define PARSE_NUM(_num_, _dest_) \
     { const char *end; _dest_ = ConvertStringToUInt32(p, &end); \
-    if ((unsigned)(end - p) != _num_) return 0; p += _num_ + 1; }
+    if ((unsigned)(end - p) != _num_) return 0; \
+    p += _num_ + 1; }
 
 static bool ParseUInt64(const CXmlItem &item, const char *name, UInt64 &res)
 {

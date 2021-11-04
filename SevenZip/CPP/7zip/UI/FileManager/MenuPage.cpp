@@ -1,4 +1,4 @@
-﻿// MenuPage.cpp
+// MenuPage.cpp
 
 #include "StdAfx.h"
 

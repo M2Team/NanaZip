@@ -542,7 +542,7 @@ static HRESULT Compress(
     #endif
   }
 
-  if (outArchive == 0)
+  if (!outArchive)
     throw kUpdateIsNotSupoorted;
 
   NFileTimeType::EEnum fileTimeType;
@@ -567,6 +567,8 @@ static HRESULT Compress(
     if (options.AltStreams.Val && !arcInfo.Flags_AltStreams())
       return E_NOTIMPL;
     if (options.NtSecurity.Val && !arcInfo.Flags_NtSecure())
+      return E_NOTIMPL;
+    if (options.DeleteAfterCompressing && arcInfo.Flags_HashHandler())
       return E_NOTIMPL;
   }
 
@@ -745,6 +747,11 @@ static HRESULT Compress(
 
   updateCallbackSpec->ProcessedItemsStatuses = processedItemsStatuses;
 
+  {
+    const UString arcPath = archivePath.GetFinalPath();
+    updateCallbackSpec->ArcFileName = ExtractFileNameFromPath(arcPath);
+  }
+
   if (options.RenamePairs.Size() != 0)
     updateCallbackSpec->NewNames = &newNames;
 
@@ -907,7 +914,7 @@ static HRESULT Compress(
     ft.dwHighDateTime = 0;
     FOR_VECTOR (i, updatePairs2)
     {
-      CUpdatePair2 &pair2 = updatePairs2[i];
+      const CUpdatePair2 &pair2 = updatePairs2[i];
       const FILETIME *ft2 = NULL;
       if (pair2.NewProps && pair2.DirIndex >= 0)
         ft2 = &dirItems.Items[(unsigned)pair2.DirIndex].MTime;
@@ -945,8 +952,27 @@ static HRESULT Compress(
     result = outStreamSpec->Close();
   else if (volStreamSpec)
     result = volStreamSpec->Close();
+
+  RINOK(result)
+
+  if (processedItemsStatuses)
+  {
+    FOR_VECTOR (i, updatePairs2)
+    {
+      const CUpdatePair2 &up = updatePairs2[i];
+      if (up.NewData && up.DirIndex >= 0)
+      {
+        const CDirItem &di = dirItems.Items[(unsigned)up.DirIndex];
+        if (di.AreReparseData() || (!di.IsDir() && di.Size == 0))
+          processedItemsStatuses[(unsigned)up.DirIndex] = 1;
+      }
+    }
+  }
+
   return result;
 }
+
+
 
 bool CensorNode_CheckPath2(const NWildcard::CCensorNode &node, const CReadArcItem &item, bool &include);
 
@@ -1288,6 +1314,8 @@ HRESULT UpdateArchive(
       #endif
 
       dirItems.ScanAltStreams = options.AltStreams.Val;
+      dirItems.ExcludeDirItems = censor.ExcludeDirItems;
+      dirItems.ExcludeFileItems = censor.ExcludeFileItems;
 
       HRESULT res = EnumerateItems(censor,
           options.PathMode,
@@ -1440,7 +1468,7 @@ HRESULT UpdateArchive(
   CByteBuffer processedItems;
   if (options.DeleteAfterCompressing)
   {
-    unsigned num = dirItems.Items.Size();
+    const unsigned num = dirItems.Items.Size();
     processedItems.Alloc(num);
     for (unsigned i = 0; i < num; i++)
       processedItems[i] = 0;
@@ -1654,17 +1682,27 @@ HRESULT UpdateArchive(
       }
       else
       {
-        if (processedItems[i] != 0 || dirItem.Size == 0)
+        // 21.04: we have set processedItems[*] before for all required items
+        if (processedItems[i] != 0
+            // || dirItem.Size == 0
+            // || dirItem.AreReparseData()
+            )
         {
           NFind::CFileInfo fileInfo;
-          /* here we compare Raw FileInfo that can be link with actual file info that was processed.
-             we can fix it. */
-          if (fileInfo.Find(phyPath))
+          /* if (!SymLinks), we follow link here, similar to (dirItem) filling */
+          if (fileInfo.Find(phyPath, !options.SymLinks.Val))
           {
-            // FIXME: here we can check Find_FollowLink() also;
+            bool is_SameSize = false;
+            if (options.SymLinks.Val && dirItem.AreReparseData())
+            {
+              /* (dirItem.Size = dirItem.ReparseData.Size()) was set before.
+                 So we don't compare sizes for that case here */
+              is_SameSize = fileInfo.IsOsSymLink();
+            }
+            else
+              is_SameSize = (fileInfo.Size == dirItem.Size);
 
-            // maybe we must exclude also files with archive name: "a a.7z * -sdel"
-            if (fileInfo.Size == dirItem.Size
+            if (is_SameSize
                 && CompareFileTime(&fileInfo.MTime, &dirItem.MTime) == 0
                 && CompareFileTime(&fileInfo.CTime, &dirItem.CTime) == 0)
             {
@@ -1675,11 +1713,11 @@ HRESULT UpdateArchive(
         }
         else
         {
-          // file was skipped
+          // file was skipped by some reason. We can throw error for debug:
           /*
           errorInfo.SystemError = 0;
           errorInfo.Message = "file was not processed";
-          errorInfo.FileName = phyPath;
+          errorInfo.FileNames.Add(phyPath);
           return E_FAIL;
           */
         }

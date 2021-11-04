@@ -6,6 +6,7 @@
 #include <limits.h>
 #include <unistd.h>
 #include "../Common/StringConvert.h"
+#include "FileDir.h"
 #endif
 
 #include "FileName.h"
@@ -65,6 +66,19 @@ void NormalizeDirPathPrefix(UString &dirPath)
 }
 
 #ifdef _WIN32
+
+#ifndef USE_UNICODE_FSTRING
+#ifdef WIN_LONG_PATH
+static void NormalizeDirSeparators(UString &s)
+{
+  const unsigned len = s.Len();
+  for (unsigned i = 0; i < len; i++)
+    if (s[i] == '/')
+      s.ReplaceOneCharAtPos(i, WCHAR_PATH_SEPARATOR);
+}
+#endif
+#endif
+
 void NormalizeDirSeparators(FString &s)
 {
   const unsigned len = s.Len();
@@ -72,6 +86,7 @@ void NormalizeDirSeparators(FString &s)
     if (s[i] == '/')
       s.ReplaceOneCharAtPos(i, FCHAR_PATH_SEPARATOR);
 }
+
 #endif
 
 
@@ -391,16 +406,9 @@ static bool GetCurDir(UString &path)
 
   #else
 
-  #define MY__PATH_MAX  PATH_MAX
-  // #define MY__PATH_MAX  1024
-
-  char s[MY__PATH_MAX + 1];
-  char *res = getcwd(s, MY__PATH_MAX);
-  if (!res)
-  {
-    // if (errno != ERANGE)
-      return false;
-  }
+  FString s;
+  if (!NDir::GetCurrentDir(s))
+    return false;
   path = GetUnicodeString(s);
   return true;
 
@@ -721,7 +729,7 @@ static bool GetSuperPathBase(CFSTR s, UString &res)
      true            false             *          use Super path
      true            true             true        don't use any path, we already used mainPath
      true            true             false       use main path as Super Path, we don't try mainMath
-                                                  That case is possible now if GetCurDir returns unknow
+                                                  That case is possible now if GetCurDir returns unknown
                                                   type of path (not drive and not network)
 
   We can change that code if we want to try mainPath, if GetSuperPathBase returns error,

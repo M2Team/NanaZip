@@ -462,10 +462,6 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
     ARRAY_SIZE(tbb),
     (LPARAM)&tbb);
 
-
-
-
-
   #ifndef UNDER_CE
   // Load ComboBoxEx class
   icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
@@ -814,6 +810,18 @@ bool CPanel::IsAltStreamsFolder() const { return IsFolderTypeEqTo("AltStreamsFol
 bool CPanel::IsArcFolder() const
 {
   return GetFolderTypeID().IsPrefixedBy_Ascii_NoCase("NanaZip");
+}
+
+bool CPanel::IsHashFolder() const
+{
+  if (_folder)
+  {
+    NCOM::CPropVariant prop;
+    if (_folder->GetFolderProperty(kpidIsHash, &prop) == S_OK)
+      if (prop.vt == VT_BOOL)
+        return VARIANT_BOOLToBool(prop.boolVal);
+  }
+  return false;
 }
 
 UString CPanel::GetFsPath() const

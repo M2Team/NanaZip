@@ -92,9 +92,14 @@ UString ConvertSizeToString(UInt64 value)
   return s;
 }
 
-static inline unsigned GetHex(unsigned v)
+static inline unsigned GetHex_Upper(unsigned v)
 {
   return (v < 10) ? ('0' + v) : ('A' + (v - 10));
+}
+
+static inline unsigned GetHex_Lower(unsigned v)
+{
+  return (v < 10) ? ('0' + v) : ('a' + (v - 10));
 }
 
 /*
@@ -350,11 +355,21 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
         if (dataSize > limit)
           dataSize = limit;
         WCHAR *dest = text;
+        const bool needUpper = (dataSize <= 8)
+            && (propID == kpidCRC || propID == kpidChecksum);
         for (UInt32 i = 0; i < dataSize; i++)
         {
           unsigned b = ((const Byte *)data)[i];
-          dest[0] = (WCHAR)GetHex((b >> 4) & 0xF);
-          dest[1] = (WCHAR)GetHex(b & 0xF);
+          if (needUpper)
+          {
+            dest[0] = (WCHAR)GetHex_Upper((b >> 4) & 0xF);
+            dest[1] = (WCHAR)GetHex_Upper(b & 0xF);
+          }
+          else
+          {
+            dest[0] = (WCHAR)GetHex_Lower((b >> 4) & 0xF);
+            dest[1] = (WCHAR)GetHex_Lower(b & 0xF);
+          }
           dest += 2;
         }
         *dest = 0;

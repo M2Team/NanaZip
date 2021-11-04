@@ -144,6 +144,9 @@
     <ClCompile Include="..\SevenZip\CPP\Windows\Window.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp">
+      <Filter>FileManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\resource.h">
@@ -282,6 +285,12 @@
       <Filter>Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.h">
+      <Filter>FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

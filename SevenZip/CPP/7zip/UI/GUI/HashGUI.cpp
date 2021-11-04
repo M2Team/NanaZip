@@ -174,10 +174,12 @@ HRESULT CHashCallbackGUI::SetOperationResult(UInt64 /* fileSize */, const CHashB
   return CheckBreak();
 }
 
+static const unsigned k_DigestStringSize = k_HashCalc_DigestSize_Max * 2 + k_HashCalc_ExtraSize * 2 + 16;
+
 static void AddHashString(CProperty &s, const CHasherState &h, unsigned digestIndex)
 {
-  char temp[k_HashCalc_DigestSize_Max * 2 + 4];
-  AddHashHexToString(temp, h.Digests[digestIndex], h.DigestSize);
+  char temp[k_DigestStringSize];
+  h.WriteToString(digestIndex, temp);
   s.Value = temp;
 }
 

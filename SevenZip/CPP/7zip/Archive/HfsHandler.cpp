@@ -1513,6 +1513,9 @@ STDMETHODIMP CHandler::GetRawProp(UInt32 index, PROPID propID, const void **data
     *propType = PROP_DATA_TYPE_wchar_t_PTR_Z_LE;
     return S_OK;
   }
+  #else
+  UNUSED_VAR(index);
+  UNUSED_VAR(propID);
   #endif
   return S_OK;
 }

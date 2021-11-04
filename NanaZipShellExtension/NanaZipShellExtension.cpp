@@ -522,7 +522,7 @@ namespace NanaZip::ShellExtension
                     break;
                 }
 
-                CalcChecksum(FileNames, MethodName.c_str());
+                CalcChecksum(FileNames, MethodName.c_str(), L"", L"");
                 break;
             }
             default:

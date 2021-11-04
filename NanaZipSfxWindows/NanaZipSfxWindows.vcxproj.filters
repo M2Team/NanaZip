@@ -384,6 +384,12 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\SfxWin.cpp">
       <Filter>Spec</Filter>
     </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Windows\Clipboard.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Windows\MemoryGlobal.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.h">
@@ -636,6 +642,12 @@
       <Filter>C</Filter>
     </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\Clipboard.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\Windows\MemoryGlobal.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\7z.ico">

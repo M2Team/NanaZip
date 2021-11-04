@@ -20,6 +20,22 @@
 
 #include <sys/auxv.h>
 
+// #undef AT_HWCAP    // to debug
+// #undef AT_HWCAP2   // to debug
+
+/* the following patch for some debian systems.
+   Is it OK to define AT_HWCAP and AT_HWCAP2 here with these constant numbers? */
+ 
+#if defined(__FreeBSD_kernel__) && defined(__GLIBC__)
+  #ifndef AT_HWCAP
+    #define AT_HWCAP 16
+  #endif
+  #ifndef AT_HWCAP2
+    #define AT_HWCAP2 26
+  #endif
+#endif
+
+
 #ifdef MY_CPU_ARM_OR_ARM64
 #include <asm/hwcap.h>
 #endif
@@ -75,7 +91,7 @@ static bool ReadFile_to_Buffer(CFSTR fileName, CByteBuffer &buf)
 #endif
 
 
-#ifndef __APPLE__
+#if defined(_WIN32) || defined(AT_HWCAP) || defined(AT_HWCAP2)
 static void PrintHex(AString &s, UInt64 v)
 {
   char temp[32];
@@ -657,6 +673,7 @@ void AddCpuFeatures(AString &s)
   #endif
 
 
+  #ifdef AT_HWCAP
   s.Add_OptSpaced("hwcap:");
   {
     unsigned long h = getauxval(AT_HWCAP);
@@ -671,7 +688,9 @@ void AddCpuFeatures(AString &s)
     if (h & HWCAP_NEON)   s += ":NEON";
     #endif
   }
-
+  #endif // AT_HWCAP
+ 
+  #ifdef AT_HWCAP2
   {
     unsigned long h = getauxval(AT_HWCAP2);
     #ifndef MY_CPU_ARM
@@ -688,6 +707,7 @@ void AddCpuFeatures(AString &s)
       #endif
     }
   }
+  #endif // AT_HWCAP2
   #endif // _AIX
   #endif // _WIN32
 }

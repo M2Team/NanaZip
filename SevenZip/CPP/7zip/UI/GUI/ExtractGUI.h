@@ -20,6 +20,7 @@
 */
 
 HRESULT ExtractGUI(
+    // DECL_EXTERNAL_CODECS_LOC_VARS
     CCodecs *codecs,
     const CObjectVector<COpenType> &formatIndices,
     const CIntVector &excludedFormatIndices,

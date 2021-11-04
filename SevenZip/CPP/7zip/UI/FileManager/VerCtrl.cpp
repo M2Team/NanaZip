@@ -18,10 +18,10 @@ using namespace NFile;
 using namespace NFind;
 using namespace NDir;
 
-static UString ConvertPath_to_Ctrl(const UString &path)
+static FString ConvertPath_to_Ctrl(const FString &path)
 {
-  UString s = path;
-  s.Replace(L':', L'_');
+  FString s = path;
+  s.Replace(FChar(':'), FChar('_'));
   return s;
 }
 
@@ -33,11 +33,11 @@ struct CFileDataInfo
 
   CFileDataInfo(): IsOpen (false) {}
   UInt64 GetSize() const { return (((UInt64)Info.nFileSizeHigh) << 32) + Info.nFileSizeLow; }
-  bool Read(const UString &path);
+  bool Read(const FString &path);
 };
 
 
-bool CFileDataInfo::Read(const UString &path)
+bool CFileDataInfo::Read(const FString &path)
 {
   IsOpen = false;
   NIO::CInFile file;
@@ -69,7 +69,7 @@ bool CFileDataInfo::Read(const UString &path)
 }
 
 
-static bool CreateComplexDir_for_File(const UString &path)
+static bool CreateComplexDir_for_File(const FString &path)
 {
   FString resDirPrefix;
   FString resFileName;
@@ -81,7 +81,7 @@ static bool CreateComplexDir_for_File(const UString &path)
 
 static bool ParseNumberString(const FString &s, UInt32 &number)
 {
-  const wchar_t *end;
+  const FChar *end;
   UInt64 result = ConvertStringToUInt64(s, &end);
   if (*end != 0 || s.IsEmpty() || result > (UInt32)0x7FFFFFFF)
     return false;
@@ -145,7 +145,7 @@ void CApp::VerCtrl(unsigned id)
     return;
   }
 
-  const UString path = panel.GetItemFullPath(indices[0]);
+  const FString path = us2fs(panel.GetItemFullPath(indices[0]));
 
   UString vercPath;
   ReadReg_VerCtrlPath(vercPath);
@@ -161,8 +161,8 @@ void CApp::VerCtrl(unsigned id)
     return;
   }
 
-  const UString dirPrefix2 = vercPath + ConvertPath_to_Ctrl(dirPrefix);
-  const UString path2 = dirPrefix2 + fileName;
+  const FString dirPrefix2 = us2fs(vercPath) + ConvertPath_to_Ctrl(dirPrefix);
+  const FString path2 = dirPrefix2 + fileName;
 
   bool sameTime = false;
   bool sameData = false;
@@ -362,6 +362,6 @@ void CApp::VerCtrl(unsigned id)
   {
     if (!fdi2.IsOpen)
       return;
-    DiffFiles(path2, path);
+    DiffFiles(fs2us(path2), fs2us(path));
   }
 }

@@ -1566,6 +1566,10 @@ tryInternal tryExternal
 
 void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bool editMode, bool useEditor, const wchar_t *type)
 {
+  // we don't want to change hash data here
+  if (IsHashFolder())
+    return;
+
   const UString name = GetItemName(index);
   const UString relPath = GetItemRelPath(index);
 
@@ -1793,6 +1797,8 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
   tpi->UsePassword = usePassword;
   tpi->Password = password;
   tpi->ReadOnly = IsThereReadOnlyFolder();
+  if (IsHashFolder())
+    tpi->ReadOnly = true;
 
   if (!tpi->FileInfo.Find(tempFilePath))
     return;

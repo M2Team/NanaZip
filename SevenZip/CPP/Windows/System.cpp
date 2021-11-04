@@ -202,9 +202,12 @@ bool GetRamSize(UInt64 &size)
         size = val;
 
   #elif defined(_AIX)
-  
   // fixme
-
+  #elif defined(__gnu_hurd__)
+  // fixme
+  #elif defined(__FreeBSD_kernel__) && defined(__GLIBC__)
+  // GNU/kFreeBSD Debian
+  // fixme
   #else
 
   struct sysinfo info;

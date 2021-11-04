@@ -51,6 +51,7 @@ using namespace NWindows;
 
 #include "../../ICoder.h"
 #include "../../Common/RegisterArc.h"
+#include "../../Common/RegisterCodec.h"
 
 #ifdef EXTERNAL_CODECS
 
@@ -191,9 +192,9 @@ void CArcInfoEx::AddExts(const UString &ext, const UString &addExt)
 static bool ParseSignatures(const Byte *data, unsigned size, CObjectVector<CByteBuffer> &signatures)
 {
   signatures.Clear();
-  while (size > 0)
+  while (size != 0)
   {
-    unsigned len = *data++;
+    const unsigned len = *data++;
     size--;
     if (len > size)
       return false;
@@ -250,6 +251,25 @@ static HRESULT GetCoderClass(Func_GetMethodProperty getMethodProperty, UInt32 in
   return S_OK;
 }
 
+
+static HRESULT GetMethodBoolProp(Func_GetMethodProperty getMethodProperty, UInt32 index,
+    PROPID propId, bool &resVal, bool &isAssigned)
+{
+  NCOM::CPropVariant prop;
+  resVal = false;
+  isAssigned = false;
+  RINOK(getMethodProperty(index, propId, &prop));
+  if (prop.vt == VT_BOOL)
+  {
+    isAssigned = true;
+    resVal = VARIANT_BOOLToBool(prop.boolVal);
+  }
+  else if (prop.vt != VT_EMPTY)
+    return E_FAIL;
+  return S_OK;
+}
+
+
 #define MY_GET_FUNC(dest, type, func)  *(void **)(&dest) = (func);
 // #define MY_GET_FUNC(dest, type, func)  dest = (type)(func);
 
@@ -277,6 +297,7 @@ HRESULT CCodecs::LoadCodecs()
       info.CodecIndex = i;
       RINOK(GetCoderClass(lib.GetMethodProperty, i, NMethodPropID::kEncoder, info.Encoder, info.EncoderIsAssigned));
       RINOK(GetCoderClass(lib.GetMethodProperty, i, NMethodPropID::kDecoder, info.Decoder, info.DecoderIsAssigned));
+      RINOK(GetMethodBoolProp(lib.GetMethodProperty, i, NMethodPropID::kIsFilter, info.IsFilter, info.IsFilter_Assigned));
       Codecs.Add(info);
     }
   }
@@ -645,8 +666,14 @@ HRESULT CCodecs::LoadDllsFromFolder(const FString &folderPath)
     }
     if (!found)
       break;
+    #ifdef _WIN32
     if (fi.IsDir())
       continue;
+    #else
+    if (enumerator.DirEntry_IsDir(fi, true)) // followLink
+      continue;
+    #endif
+
     RINOK(LoadDll(folderPrefix + fi.Name, true));
   }
   return S_OK;
@@ -723,7 +750,10 @@ HRESULT CCodecs::Load()
     if (arc.IsMultiSignature())
       ParseSignatures(arc.Signature, arc.SignatureSize, item.Signatures);
     else
-      item.Signatures.AddNew().CopyFrom(arc.Signature, arc.SignatureSize);
+    {
+      if (arc.SignatureSize != 0) // 21.04
+        item.Signatures.AddNew().CopyFrom(arc.Signature, arc.SignatureSize);
+    }
 
     #endif
 
@@ -774,6 +804,8 @@ HRESULT CCodecs::Load()
 
   #endif
 
+  // we sort Formats to get fixed order of Formats after compilation.
+  Formats.Sort();
   return S_OK;
 }
 
@@ -950,6 +982,15 @@ STDMETHODIMP CCodecs::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *valu
     prop.Detach(value);
     return S_OK;
   }
+
+  if (propID == NMethodPropID::kIsFilter && ci.IsFilter_Assigned)
+  {
+    NCOM::CPropVariant prop;
+    prop = (bool)ci.IsFilter;
+    prop.Detach(value);
+    return S_OK;
+  }
+
   const CCodecLib &lib = Libs[ci.LibIndex];
   return lib.GetMethodProperty(ci.CodecIndex, propID, value);
   #else
@@ -1094,6 +1135,7 @@ bool CCodecs::GetCodec_DecoderIsAssigned(UInt32 index) const
   #endif
 }
 
+
 bool CCodecs::GetCodec_EncoderIsAssigned(UInt32 index) const
 {
   #ifdef EXPORT_CODECS
@@ -1115,6 +1157,38 @@ bool CCodecs::GetCodec_EncoderIsAssigned(UInt32 index) const
   return false;
   #endif
 }
+
+
+bool CCodecs::GetCodec_IsFilter(UInt32 index, bool &isAssigned) const
+{
+  isAssigned = false;
+  #ifdef EXPORT_CODECS
+  if (index < g_NumCodecs)
+  {
+    NCOM::CPropVariant prop;
+    if (GetProperty(index, NMethodPropID::kIsFilter, &prop) == S_OK)
+    {
+      if (prop.vt == VT_BOOL)
+      {
+        isAssigned = true;
+        return VARIANT_BOOLToBool(prop.boolVal);
+      }
+    }
+    return false;
+  }
+  #endif
+
+  #ifdef EXTERNAL_CODECS
+  {
+    const CDllCodecInfo &c = Codecs[index - NUM_EXPORT_CODECS];
+    isAssigned = c.IsFilter_Assigned;
+    return c.IsFilter;
+  }
+  #else
+  return false;
+  #endif
+}
+
 
 UInt32 CCodecs::GetCodec_NumStreams(UInt32 index)
 {
@@ -1201,3 +1275,45 @@ void CCodecs::GetCodecsErrorMessage(UString &s)
 }
 
 #endif // EXTERNAL_CODECS
+
+#ifndef _SFX
+
+extern unsigned g_NumCodecs;
+extern const CCodecInfo *g_Codecs[];
+
+void CCodecs::Get_CodecsInfoUser_Vector(CObjectVector<CCodecInfoUser> &v)
+{
+  v.Clear();
+  {
+    for (unsigned i = 0; i < g_NumCodecs; i++)
+    {
+      const CCodecInfo &cod = *g_Codecs[i];
+      CCodecInfoUser &u = v.AddNew();
+      u.EncoderIsAssigned = (cod.CreateEncoder != NULL);
+      u.DecoderIsAssigned = (cod.CreateDecoder != NULL);
+      u.IsFilter_Assigned = true;
+      u.IsFilter = cod.IsFilter;
+      u.NumStreams = cod.NumStreams;
+      u.Name = cod.Name;
+    }
+  }
+
+
+  #ifdef EXTERNAL_CODECS
+  {
+    UInt32 numMethods;
+    if (GetNumMethods(&numMethods) == S_OK)
+    for (UInt32 j = 0; j < numMethods; j++)
+    {
+      CCodecInfoUser &u = v.AddNew();
+      u.EncoderIsAssigned = GetCodec_EncoderIsAssigned(j);
+      u.DecoderIsAssigned = GetCodec_DecoderIsAssigned(j);
+      u.IsFilter = GetCodec_IsFilter(j, u.IsFilter_Assigned);
+      u.NumStreams = GetCodec_NumStreams(j);
+      u.Name = GetCodec_Name(j);
+    }
+  }
+  #endif
+}
+
+#endif

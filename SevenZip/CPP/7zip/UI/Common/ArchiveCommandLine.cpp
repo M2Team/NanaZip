@@ -133,6 +133,8 @@ enum Enum
   kSfx,
   kEmail,
   kHash,
+  // kHashGenFile,
+  kHashDir,
 
   kStdIn,
   kStdOut,
@@ -141,6 +143,7 @@ enum Enum
   kListfileCharSet,
   kConsoleCharSet,
   kTechMode,
+  kListFields,
 
   kPreserveATime,
   kShareForWrite,
@@ -273,6 +276,8 @@ static const CSwitchForm kSwitchForms[] =
   { "sfx", SWFRM_STRING },
   { "seml", SWFRM_STRING_SINGL(0) },
   { "scrc", SWFRM_STRING_MULT(0) },
+  // { "scrf", SWFRM_STRING_SINGL(1) },
+  { "shd", SWFRM_STRING_SINGL(1) },
 
   { "si", SWFRM_STRING },
   { "so", SWFRM_SIMPLE },
@@ -281,6 +286,7 @@ static const CSwitchForm kSwitchForms[] =
   { "scs", SWFRM_STRING },
   { "scc", SWFRM_STRING },
   { "slt", SWFRM_SIMPLE },
+  { "slf", SWFRM_STRING_SINGL(1) },
 
   { "ssp", SWFRM_SIMPLE },
   { "ssw", SWFRM_SIMPLE },
@@ -627,6 +633,20 @@ static void AddSwitchWildcardsToCensor(
       break;
     }
 
+    if (!include)
+    {
+      if (name.IsEqualTo_Ascii_NoCase("td"))
+      {
+        censor.ExcludeDirItems = true;
+        continue;
+      }
+      if (name.IsEqualTo_Ascii_NoCase("tf"))
+      {
+        censor.ExcludeFileItems = true;
+        continue;
+      }
+    }
+
     if (::MyCharLower_Ascii(name[pos]) == kRecursedIDChar)
     {
       pos++;
@@ -875,6 +895,11 @@ void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
   options.StdInMode = parser[NKey::kStdIn].ThereIs;
   options.StdOutMode = parser[NKey::kStdOut].ThereIs;
   options.EnableHeaders = !parser[NKey::kDisableHeaders].ThereIs;
+  if (parser[NKey::kListFields].ThereIs)
+  {
+    const UString &s = parser[NKey::kListFields].PostStrings[0];
+    options.ListFields = GetAnsiString(s);
+  }
   options.TechMode = parser[NKey::kTechMode].ThereIs;
   options.ShowTime = parser[NKey::kShowTime].ThereIs;
 
@@ -1095,6 +1120,27 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   if (parser[NKey::kHash].ThereIs)
     options.HashMethods = parser[NKey::kHash].PostStrings;
 
+  /*
+  if (parser[NKey::kHashGenFile].ThereIs)
+  {
+    const UString &s = parser[NKey::kHashGenFile].PostStrings[0];
+    for (unsigned i = 0 ; i < s.Len();)
+    {
+      const wchar_t c = s[i++];
+      if (!options.HashOptions.ParseFlagCharOption(c, true))
+      {
+        if (c != '=')
+          throw CArcCmdLineException("Unsupported hash mode switch:", s);
+        options.HashOptions.HashFilePath = s.Ptr(i);
+        break;
+      }
+    }
+  }
+  */
+
+  if (parser[NKey::kHashDir].ThereIs)
+    options.ExtractOptions.HashDir = parser[NKey::kHashDir].PostStrings[0];
+
   if (parser[NKey::kElimDup].ThereIs)
   {
     options.ExtractOptions.ElimDup.Def = true;
@@ -1232,6 +1278,9 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   {
     CExtractOptionsBase &eo = options.ExtractOptions;
 
+    eo.ExcludeDirItems = options.Censor.ExcludeDirItems;
+    eo.ExcludeFileItems = options.Censor.ExcludeFileItems;
+
     {
       CExtractNtOptions &nt = eo.NtOptions;
       nt.NtSecurity = options.NtSecurity;
@@ -1252,6 +1301,11 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
 
       nt.ReplaceColonForAltStream = parser[NKey::kReplaceColonForAltStream].ThereIs;
       nt.WriteToAltStreamIfColon = parser[NKey::kWriteToAltStreamIfColon].ThereIs;
+
+      if (parser[NKey::kPreserveATime].ThereIs)
+        nt.PreserveATime = true;
+      if (parser[NKey::kShareForWrite].ThereIs)
+        nt.OpenShareForWrite = true;
     }
 
     options.Censor.AddPathsToCensor(NWildcard::k_AbsPath);
@@ -1422,6 +1476,7 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
     CHashOptions &hashOptions = options.HashOptions;
     hashOptions.PathMode = censorPathMode;
     hashOptions.Methods = options.HashMethods;
+    // hashOptions.HashFilePath = options.HashFilePath;
     if (parser[NKey::kPreserveATime].ThereIs)
       hashOptions.PreserveATime = true;
     if (parser[NKey::kShareForWrite].ThereIs)

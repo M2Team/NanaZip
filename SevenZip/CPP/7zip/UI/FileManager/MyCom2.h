@@ -36,4 +36,12 @@ STDMETHOD_(ULONG, Release)() { InterlockedDecrement((LONG *)&__m_RefCount); if (
   MY_QUERYINTERFACE_ENTRY(i3) \
   )
 
+#define MY_UNKNOWN_IMP4_MT(i1, i2, i3, i4) MY_UNKNOWN_IMP_SPEC_MT2( \
+  i1, \
+  MY_QUERYINTERFACE_ENTRY(i1) \
+  MY_QUERYINTERFACE_ENTRY(i2) \
+  MY_QUERYINTERFACE_ENTRY(i3) \
+  MY_QUERYINTERFACE_ENTRY(i4) \
+  )
+
 #endif

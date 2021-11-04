@@ -144,6 +144,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetRootProp(PROPID propID, PROPVARIANT *val
     case kpidCTime:  if (ParentDirItem) prop = ParentDirItem->CTime; break;
     case kpidATime:  if (ParentDirItem) prop = ParentDirItem->ATime; break;
     case kpidMTime:  if (ParentDirItem) prop = ParentDirItem->MTime; break;
+    case kpidArcFileName:  if (!ArcFileName.IsEmpty()) prop = ArcFileName; break;
   }
   prop.Detach(value);
   return S_OK;
@@ -475,6 +476,17 @@ STDMETHODIMP CArchiveUpdateCallback::GetProperty(UInt32 index, PROPID propID, PR
 static NSynchronization::CCriticalSection CS;
 #endif
 
+void CArchiveUpdateCallback::UpdateProcessedItemStatus(unsigned dirIndex)
+{
+  if (ProcessedItemsStatuses)
+  {
+    #ifndef _7ZIP_ST
+    NSynchronization::CCriticalSectionLock lock(CS);
+    #endif
+    ProcessedItemsStatuses[dirIndex] = 1;
+  }
+}
+
 STDMETHODIMP CArchiveUpdateCallback::GetStream2(UInt32 index, ISequentialInStream **inStream, UInt32 mode)
 {
   COM_TRY_BEGIN
@@ -544,6 +556,8 @@ STDMETHODIMP CArchiveUpdateCallback::GetStream2(UInt32 index, ISequentialInStrea
       CMyComPtr<ISequentialInStream> inStreamLoc = inStreamSpec;
       inStreamSpec->Init(di.ReparseData, di.ReparseData.Size());
       *inStream = inStreamLoc.Detach();
+
+      UpdateProcessedItemStatus((unsigned)up.DirIndex);
       return S_OK;
     }
     #endif // !defined(UNDER_CE)
@@ -600,13 +614,7 @@ STDMETHODIMP CArchiveUpdateCallback::GetStream2(UInt32 index, ISequentialInStrea
     }
     // #endif
 
-    if (ProcessedItemsStatuses)
-    {
-      #ifndef _7ZIP_ST
-      NSynchronization::CCriticalSectionLock lock(CS);
-      #endif
-      ProcessedItemsStatuses[(unsigned)up.DirIndex] = 1;
-    }
+    UpdateProcessedItemStatus((unsigned)up.DirIndex);
     *inStream = inStreamLoc.Detach();
   }
   
@@ -649,7 +657,7 @@ STDMETHODIMP CArchiveUpdateCallback::ReportOperation(UInt32 indexType, UInt32 in
         isDir = DirItems->Items[(unsigned)up.DirIndex].IsDir();
       }
     }
-    return Callback->ReportUpdateOpeartion(op, name.IsEmpty() ? NULL : name.Ptr(), isDir);
+    return Callback->ReportUpdateOperation(op, name.IsEmpty() ? NULL : name.Ptr(), isDir);
   }
   
   wchar_t temp[16];
@@ -684,7 +692,7 @@ STDMETHODIMP CArchiveUpdateCallback::ReportOperation(UInt32 indexType, UInt32 in
   if (!s)
     s = L"";
 
-  return Callback->ReportUpdateOpeartion(op, s, isDir);
+  return Callback->ReportUpdateOperation(op, s, isDir);
 
   COM_TRY_END
 }

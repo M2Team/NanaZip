@@ -27,6 +27,7 @@ CCodecs *g_CodecsObj;
 
 #ifdef EXTERNAL_CODECS
   CExternalCodecs g_ExternalCodecs;
+  const CExternalCodecs *g_ExternalCodecs_Ptr;
   static CCodecs::CReleaser g_CodecsReleaser;
 #else
   extern
@@ -53,6 +54,7 @@ void FreeGlobalCodecs()
   g_CodecsReleaser.Set(NULL);
   g_CodecsObj = NULL;
   g_ExternalCodecs.ClearAndRelease();
+  g_ExternalCodecs_Ptr = NULL;
   #else
   g_CodecsRef.Release();
   #endif
@@ -83,8 +85,11 @@ HRESULT LoadGlobalCodecs()
     return E_NOTIMPL;
   }
 
+  Codecs_AddHashArcHandler(g_CodecsObj);
+
   #ifdef EXTERNAL_CODECS
   RINOK(g_ExternalCodecs.Load());
+  g_ExternalCodecs_Ptr = &g_ExternalCodecs;
   #endif
 
   return S_OK;
@@ -1223,7 +1228,11 @@ STDMETHODIMP CAgentFolder::GetFolderProperty(PROPID propID, PROPVARIANT *value)
     if (_agentSpec->Is_Attrib_ReadOnly())
       prop = true;
     else
-      prop = _agentSpec->IsThereReadOnlyArc();
+      prop = _agentSpec->IsThere_ReadOnlyArc();
+  }
+  else if (propID == kpidIsHash)
+  {
+    prop = _agentSpec->_isHashHandler;
   }
   else if (_proxy2)
   {
@@ -1446,6 +1455,10 @@ STDMETHODIMP CAgentFolder::Extract(const UInt32 *indices,
     IFolderArchiveExtractCallback *extractCallback2)
 {
   COM_TRY_BEGIN
+
+  if (!testMode && _agentSpec->_isHashHandler)
+    return E_NOTIMPL;
+
   CArchiveExtractCallback *extractCallbackSpec = new CArchiveExtractCallback;
   CMyComPtr<IArchiveExtractCallback> extractCallback = extractCallbackSpec;
   UStringVector pathParts;
@@ -1500,6 +1513,9 @@ STDMETHODIMP CAgentFolder::Extract(const UInt32 *indices,
   if (_proxy2)
     extractCallbackSpec->SetBaseParentFolderIndex(_proxy2->Dirs[_proxyDirIndex].ArcIndex);
 
+  // do we need another base folder for subfolders ?
+  extractCallbackSpec->DirPathPrefix_for_HashFiles = _agentSpec->_hashBaseFolderPrefix;
+
   CUIntVector realIndices;
   GetRealIndices(indices, numItems, IntToBool(includeAltStreams),
       false, // includeFolderSubItemsInFlatMode
@@ -1536,7 +1552,8 @@ CAgent::CAgent():
     _proxy(NULL),
     _proxy2(NULL),
     _updatePathPrefix_is_AltFolder(false),
-    _isDeviceFile(false)
+    _isDeviceFile(false),
+    _isHashHandler(false)
 {
 }
 
@@ -1571,9 +1588,11 @@ STDMETHODIMP CAgent::Open(
 {
   COM_TRY_BEGIN
   _archiveFilePath = filePath;
+  _hashBaseFolderPrefix.Empty();
   _attrib = 0;
-  NFile::NFind::CFileInfo fi;
   _isDeviceFile = false;
+  _isHashHandler = false;
+  NFile::NFind::CFileInfo fi;
   if (!inStream)
   {
     if (!fi.Find(us2fs(_archiveFilePath)))
@@ -1582,6 +1601,12 @@ STDMETHODIMP CAgent::Open(
       return E_FAIL;
     _attrib = fi.Attrib;
     _isDeviceFile = fi.IsDevice;
+    FString dirPrefix, fileName;
+    if (NFile::NDir::GetFullPathAndSplit(us2fs(_archiveFilePath), dirPrefix, fileName))
+    {
+      NFile::NName::NormalizeDirPathPrefix(dirPrefix);
+      _hashBaseFolderPrefix = dirPrefix;
+    }
   }
   CArcInfoEx archiverInfo0, archiverInfo1;
 
@@ -1629,6 +1654,9 @@ STDMETHODIMP CAgent::Open(
     {
       RINOK(StringToBstr(ArchiveType, archiveType));
     }
+
+    if (arc.IsHashHandler(options))
+      _isHashHandler = true;
   }
 
   return res;
@@ -1745,6 +1773,10 @@ STDMETHODIMP CAgent::Extract(
     IFolderArchiveExtractCallback *extractCallback2)
 {
   COM_TRY_BEGIN
+
+  if (!testMode && _isHashHandler)
+    return E_NOTIMPL;
+
   CArchiveExtractCallback *extractCallbackSpec = new CArchiveExtractCallback;
   CMyComPtr<IArchiveExtractCallback> extractCallback = extractCallbackSpec;
   extractCallbackSpec->InitForMulti(
@@ -1768,6 +1800,8 @@ STDMETHODIMP CAgent::Extract(
       us2fs(path),
       UStringVector(), false,
       (UInt64)(Int64)-1);
+
+  extractCallbackSpec->DirPathPrefix_for_HashFiles = _hashBaseFolderPrefix;
 
   #ifdef SUPPORT_LINKS
 

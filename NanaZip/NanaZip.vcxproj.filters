@@ -64,6 +64,9 @@
     <Filter Include="Assets\Toolbar">
       <UniqueIdentifier>{8e11afaf-a6e1-4ec6-92f1-db273897ef74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archive Common">
+      <UniqueIdentifier>{1c280651-beff-422f-9d4a-7e96a798d793}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\7zipLogo.ico">
@@ -568,6 +571,12 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.cpp">
       <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp">
+      <Filter>Archive Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\DynLimBuf.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1085,6 +1094,15 @@
       <Filter>Spec</Filter>
     </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h">
+      <Filter>Archive Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h">
+      <Filter>UI\Explorer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\Common\DynLimBuf.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZip.manifest" />

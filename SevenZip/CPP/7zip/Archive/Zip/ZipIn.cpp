@@ -989,7 +989,8 @@ bool CInArchive::ReadFileName(unsigned size, AString &s)
 
 
 bool CInArchive::ReadExtra(const CLocalItem &item, unsigned extraSize, CExtraBlock &extra,
-    UInt64 &unpackSize, UInt64 &packSize, UInt64 &localOffset, UInt32 &disk)
+    UInt64 &unpackSize, UInt64 &packSize,
+    CItem *cdItem)
 {
   extra.Clear();
 
@@ -1018,17 +1019,39 @@ bool CInArchive::ReadExtra(const CLocalItem &item, unsigned extraSize, CExtraBlo
       extra.IsZip64 = true;
       bool isOK = true;
 
-      if (ZIP64_IS_32_MAX(unpackSize))
-        { if (size < 8) isOK = false; else { size -= 8; unpackSize = ReadUInt64(); }}
+      if (!cdItem
+          && size == 16
+          && !ZIP64_IS_32_MAX(unpackSize)
+          && !ZIP64_IS_32_MAX(packSize))
+      {
+        /* Win10 Explorer's "Send to Zip" for big (3500 MiB) files
+           creates Zip64 Extra in local file header.
+           But if both uncompressed and compressed sizes are smaller than 4 GiB,
+           Win10 doesn't store 0xFFFFFFFF in 32-bit fields as expected by zip specification.
+           21.04: we ignore these minor errors in Win10 zip archives. */
+        if (ReadUInt64() != unpackSize)
+          isOK = false;
+        if (ReadUInt64() != packSize)
+          isOK = false;
+        size = 0;
+      }
+      else
+      {
+        if (ZIP64_IS_32_MAX(unpackSize))
+          { if (size < 8) isOK = false; else { size -= 8; unpackSize = ReadUInt64(); }}
 
-      if (isOK && ZIP64_IS_32_MAX(packSize))
-        { if (size < 8) isOK = false; else { size -= 8; packSize = ReadUInt64(); }}
+        if (isOK && ZIP64_IS_32_MAX(packSize))
+          { if (size < 8) isOK = false; else { size -= 8; packSize = ReadUInt64(); }}
 
-      if (isOK && ZIP64_IS_32_MAX(localOffset))
-        { if (size < 8) isOK = false; else { size -= 8; localOffset = ReadUInt64(); }}
+        if (cdItem)
+        {
+          if (isOK && ZIP64_IS_32_MAX(cdItem->LocalHeaderPos))
+            { if (size < 8) isOK = false; else { size -= 8; cdItem->LocalHeaderPos = ReadUInt64(); }}
 
-      if (isOK && ZIP64_IS_16_MAX(disk))
-        { if (size < 4) isOK = false; else { size -= 4; disk = ReadUInt32(); }}
+          if (isOK && ZIP64_IS_16_MAX(cdItem->Disk))
+            { if (size < 4) isOK = false; else { size -= 4; cdItem->Disk = ReadUInt32(); }}
+        }
+      }
 
       if (!isOK || size != 0)
       {
@@ -1100,9 +1123,7 @@ bool CInArchive::ReadLocalItem(CItemEx &item)
 
   if (extraSize > 0)
   {
-    UInt64 localOffset = 0;
-    UInt32 disk = 0;
-    if (!ReadExtra(item, extraSize, item.LocalExtra, item.Size, item.PackSize, localOffset, disk))
+    if (!ReadExtra(item, extraSize, item.LocalExtra, item.Size, item.PackSize, NULL))
     {
       /* Most of archives are OK for Extra. But there are some rare cases
          that have error. And if error in first item, it can't open archive.
@@ -1557,7 +1578,7 @@ HRESULT CInArchive::ReadCdItem(CItemEx &item)
   ReadFileName(nameSize, item.Name);
 
   if (extraSize > 0)
-    ReadExtra(item, extraSize, item.CentralExtra, item.Size, item.PackSize, item.LocalHeaderPos, item.Disk);
+    ReadExtra(item, extraSize, item.CentralExtra, item.Size, item.PackSize, &item);
 
   // May be these strings must be deleted
   /*

@@ -70,15 +70,22 @@ bool CCommonMethodProps::SetCommonProperty(const UString &name, const PROPVARIAN
   if (name.IsPrefixedBy_Ascii_NoCase("mt"))
   {
     #ifndef _7ZIP_ST
-    hres = ParseMtProp(name.Ptr(2), value, _numProcessors, _numThreads);
+    _numThreads = _numProcessors;
+    _numThreads_WasForced = false;
+    hres = ParseMtProp2(name.Ptr(2), value, _numThreads, _numThreads_WasForced);
+    // "mt" means "_numThreads_WasForced = false" here
     #endif
     return true;
   }
   
   if (name.IsPrefixedBy_Ascii_NoCase("memuse"))
   {
-    if (!ParseSizeString(name.Ptr(6), value, _memAvail, _memUsage))
+    UInt64 v;
+    if (!ParseSizeString(name.Ptr(6), value, _memAvail, v))
       hres = E_INVALIDARG;
+    _memUsage_Decompress = v;
+    _memUsage_Compress = v;
+    _memUsage_WasSet = true;
     return true;
   }
 
@@ -88,10 +95,22 @@ bool CCommonMethodProps::SetCommonProperty(const UString &name, const PROPVARIAN
 
 #ifndef EXTRACT_ONLY
 
-static void SetMethodProp32(COneMethodInfo &m, PROPID propID, UInt32 value)
+static void SetMethodProp32(CMethodProps &m, PROPID propID, UInt32 value)
 {
   if (m.FindProp(propID) < 0)
     m.AddProp32(propID, value);
+}
+
+static void SetMethodProp32_Replace(CMethodProps &m, PROPID propID, UInt32 value)
+{
+  const int i = m.FindProp(propID);
+  if (i >= 0)
+  {
+    NWindows::NCOM::CPropVariant &val = m.Props[(unsigned)i].Value;
+    val = (UInt32)value;
+    return;
+  }
+  m.AddProp32(propID, value);
 }
 
 void CMultiMethodProps::SetGlobalLevelTo(COneMethodInfo &oneMethodInfo) const
@@ -102,9 +121,14 @@ void CMultiMethodProps::SetGlobalLevelTo(COneMethodInfo &oneMethodInfo) const
 }
 
 #ifndef _7ZIP_ST
-void CMultiMethodProps::SetMethodThreadsTo(COneMethodInfo &oneMethodInfo, UInt32 numThreads)
+void CMultiMethodProps::SetMethodThreadsTo_IfNotFinded(CMethodProps &oneMethodInfo, UInt32 numThreads)
 {
   SetMethodProp32(oneMethodInfo, NCoderPropID::kNumThreads, numThreads);
+}
+
+void CMultiMethodProps::SetMethodThreadsTo_Replace(CMethodProps &oneMethodInfo, UInt32 numThreads)
+{
+  SetMethodProp32_Replace(oneMethodInfo, NCoderPropID::kNumThreads, numThreads);
 }
 #endif
 

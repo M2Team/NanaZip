@@ -312,7 +312,7 @@ class CInArchive
   bool ReadFileName(unsigned nameSize, AString &dest);
 
   bool ReadExtra(const CLocalItem &item, unsigned extraSize, CExtraBlock &extra,
-      UInt64 &unpackSize, UInt64 &packSize, UInt64 &localOffset, UInt32 &disk);
+      UInt64 &unpackSize, UInt64 &packSize, CItem *cdItem);
   bool ReadLocalItem(CItemEx &item);
   HRESULT FindDescriptor(CItemEx &item, unsigned numFiles);
   HRESULT ReadCdItem(CItemEx &item);

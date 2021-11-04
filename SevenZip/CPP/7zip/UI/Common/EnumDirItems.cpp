@@ -146,6 +146,8 @@ bool InitLocalPrivileges();
 CDirItems::CDirItems():
     SymLinks(false),
     ScanAltStreams(false)
+    , ExcludeDirItems(false)
+    , ExcludeFileItems(false)
     #ifdef _USE_SECURITY_CODE
     , ReadSecure(false)
     #endif
@@ -318,6 +320,8 @@ HRESULT CDirItems::EnumerateDir(int phyParent, int logParent, const FString &phy
     */
     #endif
 
+    if (CanIncludeItem(fi.IsDir()))
+    {
     int secureIndex = -1;
     #ifdef _USE_SECURITY_CODE
     if (ReadSecure)
@@ -325,8 +329,8 @@ HRESULT CDirItems::EnumerateDir(int phyParent, int logParent, const FString &phy
       RINOK(AddSecurityItem(phyPrefix + fi.Name, secureIndex));
     }
     #endif
-    
     AddDirFileInfo(phyParent, logParent, secureIndex, fi);
+    }
     
     if (Callback && (i & kScanProgressStepMask) == kScanProgressStepMask)
     {
@@ -392,6 +396,8 @@ HRESULT CDirItems::EnumerateItems2(
       phyParentCur = (int)AddPrefix(phyParent, logParent, fs2us(phyPrefixCur));
     }
 
+    if (CanIncludeItem(fi.IsDir()))
+    {
     int secureIndex = -1;
     #ifdef _USE_SECURITY_CODE
     if (ReadSecure)
@@ -399,8 +405,8 @@ HRESULT CDirItems::EnumerateItems2(
       RINOK(AddSecurityItem(phyPath, secureIndex));
     }
     #endif
-
     AddDirFileInfo(phyParentCur, logParent, secureIndex, fi);
+    }
     
     if (fi.IsDir())
     {
@@ -470,6 +476,9 @@ static HRESULT EnumerateAltStreams(
     bool addAllSubStreams,
     CDirItems &dirItems)
 {
+  // we don't use (ExcludeFileItems) rules for AltStreams
+  // if (dirItems.ExcludeFileItems) return S_OK;
+
   NFind::CStreamEnumerator enumerator(phyPath);
   for (;;)
   {
@@ -560,29 +569,42 @@ static HRESULT EnumerateForItem(
   int dirItemIndex = -1;
   #if defined(_WIN32)
   bool addAllSubStreams = false;
+  bool needAltStreams = true;
   #endif // _WIN32
   #endif // !defined(UNDER_CE)
 
   // check the path in inlcude rules
   if (curNode.CheckPathToRoot(true, newParts, !fi.IsDir()))
   {
-    int secureIndex = -1;
-    #ifdef _USE_SECURITY_CODE
-    if (dirItems.ReadSecure)
-    {
-      RINOK(dirItems.AddSecurityItem(phyPrefix + fi.Name, secureIndex));
-    }
-    #endif
-    
     #if !defined(UNDER_CE)
-    dirItemIndex = (int)dirItems.Items.Size();
+    // dirItemIndex = (int)dirItems.Items.Size();
     #if defined(_WIN32)
     // we will not check include rules for substreams.
     addAllSubStreams = true;
     #endif // _WIN32
     #endif // !defined(UNDER_CE)
 
-    dirItems.AddDirFileInfo(phyParent, logParent, secureIndex, fi);
+    if (dirItems.CanIncludeItem(fi.IsDir()))
+    {
+      int secureIndex = -1;
+    #ifdef _USE_SECURITY_CODE
+      if (dirItems.ReadSecure)
+      {
+        RINOK(dirItems.AddSecurityItem(phyPrefix + fi.Name, secureIndex));
+      }
+    #endif
+    #if !defined(UNDER_CE)
+      dirItemIndex = (int)dirItems.Items.Size();
+    #endif // !defined(UNDER_CE)
+      dirItems.AddDirFileInfo(phyParent, logParent, secureIndex, fi);
+    }
+    else
+    {
+      #if defined(_WIN32) && !defined(UNDER_CE)
+        needAltStreams = false;
+      #endif
+    }
+    
     if (fi.IsDir())
       enterToSubFolders = true;
   }
@@ -600,7 +622,7 @@ static HRESULT EnumerateForItem(
   }
   
   #if defined(_WIN32)
-  if (dirItems.ScanAltStreams)
+  if (needAltStreams && dirItems.ScanAltStreams)
   {
     RINOK(EnumerateAltStreams(fi, curNode, phyParent, logParent,
         phyPrefix + fi.Name,    // with (fi.Name)
@@ -814,6 +836,9 @@ static HRESULT EnumerateDirItems(
             continue;
         }
         
+
+       if (dirItems.CanIncludeItem(fi.IsDir()))
+       {
         int secureIndex = -1;
         #ifdef _USE_SECURITY_CODE
         if (needSecurity && dirItems.ReadSecure)
@@ -848,6 +873,7 @@ static HRESULT EnumerateDirItems(
         #endif // defined(_WIN32)
 
         #endif // !defined(UNDER_CE)
+       }
 
 
         #ifndef _WIN32

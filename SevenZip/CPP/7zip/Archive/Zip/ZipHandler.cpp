@@ -1665,7 +1665,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         m_Archive, item, realOutStream, extractCallback,
         progress,
         #ifndef _7ZIP_ST
-        _props._numThreads, _props._memUsage,
+        _props._numThreads, _props._memUsage_Decompress,
         #endif
         res);
 

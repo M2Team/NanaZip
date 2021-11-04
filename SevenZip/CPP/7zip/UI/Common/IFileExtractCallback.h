@@ -103,9 +103,9 @@ DECL_INTERFACE_SUB(IGetProp, IUnknown, 0x01, 0x20)
   STDMETHOD(UseExtractToStream)(Int32 *res) x; \
   STDMETHOD(GetStream7)(const wchar_t *name, Int32 isDir, ISequentialOutStream **outStream, Int32 askExtractMode, IGetProp *getProp) x; \
   STDMETHOD(PrepareOperation7)(Int32 askExtractMode) x; \
-  STDMETHOD(SetOperationResult7)(Int32 resultEOperationResult, Int32 encrypted) x; \
+  STDMETHOD(SetOperationResult8)(Int32 resultEOperationResult, Int32 encrypted, UInt64 size) x; \
 
-DECL_INTERFACE_SUB(IFolderExtractToStreamCallback, IUnknown, 0x01, 0x30)
+DECL_INTERFACE_SUB(IFolderExtractToStreamCallback, IUnknown, 0x01, 0x31)
 {
   INTERFACE_IFolderExtractToStreamCallback(PURE)
 };

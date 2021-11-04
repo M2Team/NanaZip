@@ -230,15 +230,12 @@ STDAPI GetMethodProperty(UInt32 codecIndex, PROPID propID, PROPVARIANT *value)
         value->ulVal = (ULONG)codec.NumStreams;
       }
       break;
-    /*
     case NMethodPropID::kIsFilter:
-      // if (codec.IsFilter)
       {
         value->vt = VT_BOOL;
         value->boolVal = BoolToVARIANT_BOOL(codec.IsFilter);
       }
       break;
-    */
     /*
     case NMethodPropID::kDecoderFlags:
       {

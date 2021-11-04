@@ -34,7 +34,7 @@ namespace NCompressDialog
     NWildcard::ECensorPathMode PathMode;
 
     bool SolidIsSpecified;
-    bool MultiThreadIsAllowed;
+    // bool MultiThreadIsAllowed;
     UInt64 SolidBlockSize;
     UInt32 NumThreads;
 
@@ -80,6 +80,8 @@ namespace NCompressDialog
         FormatIndex(-1)
     {
       Level = Order = (UInt32)(Int32)-1;
+      NumThreads = (UInt32)(Int32)-1;
+      SolidIsSpecified = false;
       Dict64 = (UInt64)(Int64)(-1);
       OrderMode = false;
       Method.Empty();
@@ -100,16 +102,23 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   NWindows::NControl::CComboBox m_Order;
   NWindows::NControl::CComboBox m_Solid;
   NWindows::NControl::CComboBox m_NumThreads;
+  NWindows::NControl::CComboBox m_Volume;
+
+  NWindows::NControl::CDialogChildControl m_Params;
 
   NWindows::NControl::CComboBox m_UpdateMode;
   NWindows::NControl::CComboBox m_PathMode;
 
-  NWindows::NControl::CComboBox m_Volume;
-  NWindows::NControl::CDialogChildControl m_Params;
-
   NWindows::NControl::CEdit _password1Control;
   NWindows::NControl::CEdit _password2Control;
   NWindows::NControl::CComboBox _encryptionMethod;
+
+  int _auto_MethodId;
+  UInt32 _auto_Dict; // (UInt32)(Int32)-1 means unknown
+  UInt32 _auto_Order;
+  UInt64 _auto_Solid;
+  UInt32 _auto_NumThreads;
+
   int _default_encryptionMethod_Index;
 
   NCompression::CInfo m_RegistryInfo;
@@ -118,12 +127,29 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   UString DirPrefix;
   UString StartDirPrefix;
 
+  bool _ramSize_Defined;
+  UInt64 _ramSize;
+  UInt64 _ramUsage_Auto;
+  UInt64 _ramUsage_Limit;
+
+
   void CheckButton_TwoBools(UINT id, const CBoolPair &b1, const CBoolPair &b2);
   void GetButton_Bools(UINT id, CBoolPair &b1, CBoolPair &b2);
 
   void SetArchiveName(const UString &name);
   int FindRegistryFormat(const UString &name);
   int FindRegistryFormatAlways(const UString &name);
+
+  const CArcInfoEx &Get_ArcInfoEx()
+  {
+    return (*ArcFormats)[GetFormatIndex()];
+  }
+
+  NCompression::CFormatOptions &Get_FormatOptions()
+  {
+    const CArcInfoEx &ai = Get_ArcInfoEx();
+    return m_RegistryInfo.Formats[ FindRegistryFormatAlways(ai.Name) ];
+  }
 
   void CheckSFXNameChange();
   void SetArchiveName2(bool prevWasSFX);
@@ -132,11 +158,35 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
 
   void SetNearestSelectComboBox(NWindows::NControl::CComboBox &comboBox, UInt32 value);
 
-  void SetLevel();
+  void SetLevel2();
+  void SetLevel()
+  {
+    SetLevel2();
+    EnableMultiCombo(IDC_COMPRESS_LEVEL);
+    SetMethod();
+  }
 
-  void SetMethod(int keepMethodId = -1);
+  void SetMethod2(int keepMethodId);
+  void SetMethod(int keepMethodId = -1)
+  {
+    SetMethod2(keepMethodId);
+    EnableMultiCombo(IDC_COMPRESS_METHOD);
+  }
+
+  void MethodChanged()
+  {
+    SetDictionary2();
+    EnableMultiCombo(IDC_COMPRESS_DICTIONARY);
+    SetOrder2();
+    EnableMultiCombo(IDC_COMPRESS_ORDER);
+  }
+
+  int GetMethodID_RAW();
   int GetMethodID();
+
+  UString GetMethodSpec(UString &estimatedName);
   UString GetMethodSpec();
+  bool IsMethodEqualTo(const UString &s);
   UString GetEncryptionMethodSpec();
 
   bool IsZipFormat();
@@ -144,10 +194,10 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
 
   void SetEncryptionMethod();
 
-  void AddDict2(size_t sizeReal, size_t sizeShow);
-  void AddDict(size_t size);
+  int AddDict2(size_t sizeReal, size_t sizeShow);
+  int AddDict(size_t size);
 
-  void SetDictionary();
+  void SetDictionary2();
 
   UInt32 GetComboValue(NWindows::NControl::CComboBox &c, int defMax = 0);
   UInt64 GetComboValue_64(NWindows::NControl::CComboBox &c, int defMax = 0);
@@ -155,24 +205,60 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   UInt32 GetLevel()  { return GetComboValue(m_Level); }
   UInt32 GetLevelSpec()  { return GetComboValue(m_Level, 1); }
   UInt32 GetLevel2();
-  UInt64 GetDict() { return GetComboValue_64(m_Dictionary); }
+
   UInt64 GetDictSpec() { return GetComboValue_64(m_Dictionary, 1); }
-  UInt32 GetOrder() { return GetComboValue(m_Order); }
+  UInt64 GetDict2()
+  {
+    UInt64 num = GetDictSpec();
+    if (num == (UInt64)(Int64)-1)
+    {
+      if (_auto_Dict == (UInt32)(Int32)-1)
+        return (UInt64)(Int64)-1; // unknown
+      num = _auto_Dict;
+    }
+    return num;
+  }
+
+  // UInt32 GetOrder() { return GetComboValue(m_Order); }
   UInt32 GetOrderSpec() { return GetComboValue(m_Order, 1); }
   UInt32 GetNumThreadsSpec() { return GetComboValue(m_NumThreads, 1); }
-  UInt32 GetNumThreads2() { UInt32 num = GetNumThreadsSpec(); if (num == UInt32(-1)) num = 1; return num; }
+
+  UInt32 GetNumThreads2()
+  {
+    UInt32 num = GetNumThreadsSpec();
+    if (num == (UInt32)(Int32)-1)
+      num = _auto_NumThreads;
+    return num;
+  }
+
   UInt32 GetBlockSizeSpec() { return GetComboValue(m_Solid, 1); }
 
   int AddOrder(UInt32 size);
-  void SetOrder();
+  int AddOrder_Auto();
+
+  void SetOrder2();
+
   bool GetOrderMode();
 
-  void SetSolidBlockSize(bool useDictionary = false);
-  void SetNumThreads();
+  void SetSolidBlockSize2();
+  void SetSolidBlockSize(/* bool useDictionary = false */)
+  {
+    SetSolidBlockSize2();
+    EnableMultiCombo(IDC_COMPRESS_SOLID);
+  }
+
+  void SetNumThreads2();
+  void SetNumThreads()
+  {
+    SetNumThreads2();
+    EnableMultiCombo(IDC_COMPRESS_THREADS);
+  }
+
 
   UInt64 GetMemoryUsage_Dict_DecompMem(UInt64 dict, UInt64 &decompressMemory);
+  UInt64 GetMemoryUsage_Threads_Dict_DecompMem(UInt32 numThreads, UInt64 dict, UInt64 &decompressMemory);
   UInt64 GetMemoryUsage_DecompMem(UInt64 &decompressMemory);
-  UInt64 GetMemoryUsageComp_Dict(UInt64 dict64);
+  UInt64 GetMemoryUsageComp_Threads_Dict(UInt32 numThreads, UInt64 dict64);
 
   void PrintMemUsage(UINT res, UInt64 value);
   void SetMemoryUsage();
@@ -186,9 +272,31 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   bool SetArcPathFields(const UString &path, UString &name, bool always);
   bool GetFinalPath_Smart(UString &resPath);
 
+  void CheckSFXControlsEnable();
+  // void CheckVolumeEnable();
+  void EnableMultiCombo(unsigned id);
+  void FormatChanged();
+
+  void OnButtonSetArchive();
+  bool IsSFX();
+  void OnButtonSFX();
+
+  virtual bool OnInit();
+  virtual bool OnCommand(int code, int itemID, LPARAM lParam);
+  virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
+  virtual void OnOK();
+
+//   void MessageBoxError(LPCWSTR message)
+//   {
+//     MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
+//   }
+
 public:
-  CObjectVector<CArcInfoEx> *ArcFormats;
+  const CObjectVector<CArcInfoEx> *ArcFormats;
   CUIntVector ArcIndices; // can not be empty, must contain Info.FormatIndex, if Info.FormatIndex >= 0
+  AStringVector ExternalMethods;
+
+  void SetMethods(const CObjectVector<CCodecInfoUser> &userCodecs);
 
   NCompressDialog::CInfo Info;
   UString OriginalFileName; // for bzip2, gzip2
@@ -201,27 +309,6 @@ public:
   }
 
   CCompressDialog(): CurrentDirWasChanged(false) {};
-
-//   void MessageBoxError(LPCWSTR message)
-//   {
-//     MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
-//   }
-
-protected:
-
-  void CheckSFXControlsEnable();
-  // void CheckVolumeEnable();
-  void CheckControlsEnable();
-
-  void OnButtonSetArchive();
-  bool IsSFX();
-  void OnButtonSFX();
-
-  virtual bool OnInit();
-  virtual bool OnCommand(int code, int itemID, LPARAM lParam);
-  virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
-  virtual void OnOK();
-
 };
 
 #endif

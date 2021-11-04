@@ -34,6 +34,10 @@
 
 using namespace NWindows;
 
+#ifdef EXTERNAL_CODECS
+const CExternalCodecs *g_ExternalCodecs_Ptr;
+#endif
+
 extern
 HINSTANCE g_hInstance;
 HINSTANCE g_hInstance;
@@ -134,18 +138,22 @@ static int Main2()
   codecs->CaseSensitiveChange = options.CaseSensitiveChange;
   codecs->CaseSensitive = options.CaseSensitive;
   ThrowException_if_Error(codecs->Load());
+  Codecs_AddHashArcHandler(codecs);
 
   #ifdef EXTERNAL_CODECS
   {
+    g_ExternalCodecs_Ptr = &__externalCodecs;
     UString s;
     codecs->GetCodecsErrorMessage(s);
     if (!s.IsEmpty())
+    {
       MessageBoxW(0, s, L"NanaZip", MB_ICONERROR);
+    }
+
   }
   #endif
 
-
-  bool isExtractGroupCommand = options.Command.IsFromExtractGroup();
+  const bool isExtractGroupCommand = options.Command.IsFromExtractGroup();
 
   if (codecs->Formats.Size() == 0 &&
         (isExtractGroupCommand
@@ -170,7 +178,7 @@ static int Main2()
     return NExitCode::kFatalError;
   }
 
-  CIntVector excludedFormatIndices;
+  CIntVector excludedFormats;
   FOR_VECTOR (k, options.ExcludedArcTypes)
   {
     CIntVector tempIndices;
@@ -180,12 +188,13 @@ static int Main2()
       ErrorLangMessage(IDS_UNSUPPORTED_ARCHIVE_TYPE);
       return NExitCode::kFatalError;
     }
-    excludedFormatIndices.AddToUniqueSorted(tempIndices[0]);
-    // excludedFormatIndices.Sort();
+    excludedFormats.AddToUniqueSorted(tempIndices[0]);
+    // excludedFormats.Sort();
   }
 
   #ifdef EXTERNAL_CODECS
   if (isExtractGroupCommand
+      || options.Command.IsFromUpdateGroup()
       || options.Command.CommandType == NCommandType::kHash
       || options.Command.CommandType == NCommandType::kBenchmark)
     ThrowException_if_Error(__externalCodecs.Load());
@@ -270,8 +279,10 @@ static int Main2()
 
     ecs->MultiArcMode = (ArchivePathsSorted.Size() > 1);
 
-    HRESULT result = ExtractGUI(codecs,
-          formatIndices, excludedFormatIndices,
+    HRESULT result = ExtractGUI(
+          // EXTERNAL_CODECS_VARS_L
+          codecs,
+          formatIndices, excludedFormats,
           ArchivePathsSorted,
           ArchivePathsFullSorted,
           options.Censor.Pairs.Front().Head,

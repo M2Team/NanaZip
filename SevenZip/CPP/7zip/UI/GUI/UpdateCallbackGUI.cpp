@@ -156,7 +156,7 @@ HRESULT CUpdateCallbackGUI::ReportExtractResult(Int32 opRes, Int32 isEncrypted, 
   return S_OK;
 }
 
-HRESULT CUpdateCallbackGUI::ReportUpdateOpeartion(UInt32 op, const wchar_t *name, bool isDir)
+HRESULT CUpdateCallbackGUI::ReportUpdateOperation(UInt32 op, const wchar_t *name, bool isDir)
 {
   return SetOperation_Base(op, name, isDir);
 }

@@ -14,16 +14,18 @@ struct CFileMenu
 {
   bool programMenu;
   bool readOnly;
+  bool isHashFolder;
   bool isFsFolder;
   bool allAreFiles;
   bool isAltStreamsSupported;
   int numItems;
   
-  UString FilePath;
+  FString FilePath;
 
   CFileMenu():
       programMenu(false),
       readOnly(false),
+      isHashFolder(false),
       isFsFolder(false),
       allAreFiles(false),
       isAltStreamsSupported(true),

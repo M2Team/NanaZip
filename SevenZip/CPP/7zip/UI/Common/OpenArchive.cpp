@@ -1026,30 +1026,33 @@ static void MakeCheckOrder(CCodecs *codecs,
 {
   for (unsigned i = 0; i < numTypes; i++)
   {
-    int index = orderIndices[i];
+    const int index = orderIndices[i];
     if (index < 0)
       continue;
     const CArcInfoEx &ai = codecs->Formats[(unsigned)index];
-    if (ai.SignatureOffset != 0)
+    if (ai.SignatureOffset == 0)
     {
-      orderIndices2.Add(index);
-      orderIndices[i] = -1;
-      continue;
-    }
-
-    const CObjectVector<CByteBuffer> &sigs = ai.Signatures;
-    FOR_VECTOR (k, sigs)
-    {
-      const CByteBuffer &sig = sigs[k];
-      if ((sig.Size() == 0 && dataSize == 0)
-          || (sig.Size() != 0 && sig.Size() <= dataSize
-              && TestSignature(data, sig, sig.Size())))
+      if (ai.Signatures.IsEmpty())
       {
-        orderIndices2.Add(index);
-        orderIndices[i] = -1;
-        break;
+        if (dataSize != 0) // 21.04: no Sinature means Empty Signature
+          continue;
+      }
+      else
+      {
+        unsigned k;
+        const CObjectVector<CByteBuffer> &sigs = ai.Signatures;
+        for (k = 0; k < sigs.Size(); k++)
+        {
+          const CByteBuffer &sig = sigs[k];
+          if (sig.Size() <= dataSize && TestSignature(data, sig, sig.Size()))
+            break;
+        }
+        if (k == sigs.Size())
+          continue;
       }
     }
+    orderIndices2.Add(index);
+    orderIndices[i] = -1;
   }
 }
 
@@ -2143,7 +2146,7 @@ HRESULT CArc::OpenStream2(const COpenOptions &op)
         continue;
       }
 
-      bool isNewStyleSignature = IsNewStyleSignature(ai);
+      const bool isNewStyleSignature = IsNewStyleSignature(ai);
       bool needCheck = !isNewStyleSignature
           || ai.Signatures.IsEmpty()
           || ai.Flags_PureStartOpen()
@@ -2156,13 +2159,12 @@ HRESULT CArc::OpenStream2(const COpenOptions &op)
         for (k = 0; k < ai.Signatures.Size(); k++)
         {
           const CByteBuffer &sig = ai.Signatures[k];
-          UInt32 signatureEnd = ai.SignatureOffset + (UInt32)sig.Size();
-          if (processedSize < signatureEnd)
+          if (processedSize < ai.SignatureOffset + sig.Size())
           {
             if (!endOfFile)
               needCheck = true;
           }
-          else if (memcmp(sig, byteBuffer + ai.SignatureOffset, sig.Size()) == 0)
+          else if (TestSignature(sig, byteBuffer + ai.SignatureOffset, sig.Size()))
             break;
         }
         if (k != ai.Signatures.Size())
@@ -3390,7 +3392,7 @@ HRESULT CArchiveLink::Open2(COpenOptions &op, IOpenCallbackUI *callbackUI)
   return S_OK;
 }
 
-HRESULT CArc::ReOpen(const COpenOptions &op)
+HRESULT CArc::ReOpen(const COpenOptions &op, IArchiveOpenCallback *openCallback_Additional)
 {
   ErrorInfo.ClearErrors();
   ErrorInfo.ErrorFormatIndex = -1;
@@ -3420,7 +3422,10 @@ HRESULT CArc::ReOpen(const COpenOptions &op)
   // There are archives with embedded STUBs (like ZIP), so we must support signature scanning
   // But for another archives we can use 0 here. So the code can be fixed !!!
   UInt64 maxStartPosition = kMaxCheckStartPosition;
-  HRESULT res = Archive->Open(stream2, &maxStartPosition, op.callback);
+  IArchiveOpenCallback *openCallback = openCallback_Additional;
+  if (!openCallback)
+    openCallback = op.callback;
+  HRESULT res = Archive->Open(stream2, &maxStartPosition, openCallback);
   
   if (res == S_OK)
   {
@@ -3476,7 +3481,7 @@ HRESULT CArchiveLink::ReOpen(COpenOptions &op)
   op.stream = stream;
 
   CArc &arc = Arcs[0];
-  HRESULT res = arc.ReOpen(op);
+  HRESULT res = arc.ReOpen(op, openCallbackNew);
   
   PasswordWasAsked = openCallbackSpec->PasswordWasAsked;
   // Password = openCallbackSpec->Password;
@@ -3579,6 +3584,12 @@ static bool ParseType(CCodecs &codecs, const UString &s, COpenType &type)
       type.CanReturnArc = false;
       type.CanReturnParser = true;
     }
+    else if (name.IsEqualTo_Ascii_NoCase("hash"))
+    {
+      // type.CanReturnArc = false;
+      // type.CanReturnParser = false;
+      type.IsHashType = true;
+    }
     else
       return false;
   }
@@ -3606,6 +3617,7 @@ static bool ParseType(CCodecs &codecs, const UString &s, COpenType &type)
 bool ParseOpenTypes(CCodecs &codecs, const UString &s, CObjectVector<COpenType> &types)
 {
   types.Clear();
+  bool isHashType = false;
   for (unsigned pos = 0; pos < s.Len();)
   {
     int pos2 = s.Find(L'.', pos);
@@ -3617,10 +3629,24 @@ bool ParseOpenTypes(CCodecs &codecs, const UString &s, CObjectVector<COpenType> 
     COpenType type;
     if (!ParseType(codecs, name, type))
       return false;
+    if (isHashType)
+      return false;
+    if (type.IsHashType)
+      isHashType = true;
     types.Add(type);
     pos = (unsigned)pos2 + 1;
   }
   return true;
 }
+
+/*
+bool IsHashType(const CObjectVector<COpenType> &types)
+{
+  if (types.Size() != 1)
+    return false;
+  return types[0].IsHashType;
+}
+*/
+
 
 #endif

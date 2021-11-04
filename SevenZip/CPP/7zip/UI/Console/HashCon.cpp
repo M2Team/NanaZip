@@ -4,6 +4,8 @@
 
 #include "../../../Common/IntToString.h"
 
+#include "../../../Windows/FileName.h"
+
 #include "ConsoleClose.h"
 #include "HashCon.h"
 
@@ -33,13 +35,15 @@ HRESULT CHashCallbackConsole::StartScanning()
   return CheckBreak2();
 }
 
-HRESULT CHashCallbackConsole::ScanProgress(const CDirItemsStat &st, const FString &path, bool /* isDir */)
+HRESULT CHashCallbackConsole::ScanProgress(const CDirItemsStat &st, const FString &path, bool isDir)
 {
   if (NeedPercents())
   {
     _percent.Files = st.NumDirs + st.NumFiles + st.NumAltStreams;
     _percent.Completed = st.GetTotalBytes();
     _percent.FileName = fs2us(path);
+    if (isDir)
+      NWindows::NFile::NName::NormalizeDirPathPrefix(_percent.FileName);
     _percent.Print();
   }
   return CheckBreak2();
@@ -111,6 +115,15 @@ static void SetSpacesAndNul(char *s, unsigned num)
   s[num] = 0;
 }
 
+static void SetSpacesAndNul_if_Positive(char *s, int num)
+{
+  if (num < 0)
+    return;
+  for (int i = 0; i < num; i++)
+    s[i] = ' ';
+  s[num] = 0;
+}
+
 static const unsigned kSizeField_Len = 13;
 static const unsigned kNameField_Len = 12;
 
@@ -122,32 +135,48 @@ static unsigned GetColumnWidth(unsigned digestSize)
   return width < kHashColumnWidth_Min ? kHashColumnWidth_Min: width;
 }
 
+
+AString CHashCallbackConsole::GetFields() const
+{
+  AString s = PrintFields;
+  if (s.IsEmpty())
+    s = "hsn";
+  s.MakeLower_Ascii();
+  return s;
+}
+
+
 void CHashCallbackConsole::PrintSeparatorLine(const CObjectVector<CHasherState> &hashers)
 {
   _s.Empty();
-  
-  for (unsigned i = 0; i < hashers.Size(); i++)
+  const AString fields = GetFields();
+  for (unsigned pos = 0; pos < fields.Len(); pos++)
   {
-    if (i != 0)
-      _s.Add_Space();
-    const CHasherState &h = hashers[i];
-    AddMinuses(_s, GetColumnWidth(h.DigestSize));
-  }
-
-  if (PrintSize)
-  {
-    _s.Add_Space();
-    AddMinuses(_s, kSizeField_Len);
-  }
-
-  if (PrintName)
-  {
-    AddSpacesBeforeName();
-    AddMinuses(_s, kNameField_Len);
+    const char c = fields[pos];
+    if (c == 'h')
+    {
+      for (unsigned i = 0; i < hashers.Size(); i++)
+      {
+        AddSpace();
+        const CHasherState &h = hashers[i];
+        AddMinuses(_s, GetColumnWidth(h.DigestSize));
+      }
+    }
+    else if (c == 's')
+    {
+      AddSpace();
+      AddMinuses(_s, kSizeField_Len);
+    }
+    else if (c == 'n')
+    {
+      AddSpacesBeforeName();
+      AddMinuses(_s, kNameField_Len);
+    }
   }
   
   *_so << _s << endl;
 }
+
 
 HRESULT CHashCallbackConsole::BeforeFirstFile(const CHashBundle &hb)
 {
@@ -155,28 +184,34 @@ HRESULT CHashCallbackConsole::BeforeFirstFile(const CHashBundle &hb)
   {
     _s.Empty();
     ClosePercents_for_so();
-    
-    FOR_VECTOR (i, hb.Hashers)
+
+    const AString fields = GetFields();
+    for (unsigned pos = 0; pos < fields.Len(); pos++)
     {
-      if (i != 0)
-        _s.Add_Space();
-      const CHasherState &h = hb.Hashers[i];
-      _s += h.Name;
-      AddSpaces_if_Positive(_s, (int)GetColumnWidth(h.DigestSize) - (int)h.Name.Len());
-    }
-    
-    if (PrintSize)
-    {
-      _s.Add_Space();
-      const AString s2 ("Size");
-      AddSpaces_if_Positive(_s, (int)kSizeField_Len - (int)s2.Len());
-      _s += s2;
-    }
-    
-    if (PrintName)
-    {
-      AddSpacesBeforeName();
-      _s += "Name";
+      const char c = fields[pos];
+      if (c == 'h')
+      {
+        FOR_VECTOR (i, hb.Hashers)
+        {
+          AddSpace();
+          const CHasherState &h = hb.Hashers[i];
+          _s += h.Name;
+          AddSpaces_if_Positive(_s, (int)GetColumnWidth(h.DigestSize) - (int)h.Name.Len());
+        }
+      }
+      
+      else if (c == 's')
+      {
+        AddSpace();
+        const AString s2 ("Size");
+        AddSpaces_if_Positive(_s, (int)kSizeField_Len - (int)s2.Len());
+        _s += s2;
+      }
+      else if (c == 'n')
+      {
+        AddSpacesBeforeName();
+        _s += "Name";
+      }
     }
     
     *_so << _s << endl;
@@ -191,9 +226,11 @@ HRESULT CHashCallbackConsole::OpenFileError(const FString &path, DWORD systemErr
   return OpenFileError_Base(path, systemError);
 }
 
-HRESULT CHashCallbackConsole::GetStream(const wchar_t *name, bool /* isFolder */)
+HRESULT CHashCallbackConsole::GetStream(const wchar_t *name, bool isDir)
 {
   _fileName = name;
+  if (isDir)
+    NWindows::NFile::NName::NormalizeDirPathPrefix(_fileName);
 
   if (NeedPercents())
   {
@@ -208,57 +245,81 @@ HRESULT CHashCallbackConsole::GetStream(const wchar_t *name, bool /* isFolder */
   return CheckBreak2();
 }
 
+
+static const unsigned k_DigestStringSize = k_HashCalc_DigestSize_Max * 2 + k_HashCalc_ExtraSize * 2 + 16;
+
+
+
 void CHashCallbackConsole::PrintResultLine(UInt64 fileSize,
-    const CObjectVector<CHasherState> &hashers, unsigned digestIndex, bool showHash)
+    const CObjectVector<CHasherState> &hashers, unsigned digestIndex, bool showHash,
+    const AString &path)
 {
   ClosePercents_for_so();
 
   _s.Empty();
-
-  FOR_VECTOR (i, hashers)
-  {
-    const CHasherState &h = hashers[i];
-    char s[k_HashCalc_DigestSize_Max * 2 + 64];
-    s[0] = 0;
-    if (showHash)
-      AddHashHexToString(s, h.Digests[digestIndex], h.DigestSize);
-    const unsigned pos = (unsigned)strlen(s);
-    SetSpacesAndNul(s + pos, GetColumnWidth(h.DigestSize) - pos);
-    if (i != 0)
-      _s.Add_Space();
-    _s += s;
-  }
+  const AString fields = GetFields();
   
-  if (PrintSize)
+  for (unsigned pos = 0; pos < fields.Len(); pos++)
   {
-    _s.Add_Space();
-
-    char s[kSizeField_Len + 32];
-    char *p = s;
-    
-    SetSpacesAndNul(s, kSizeField_Len);
-    if (showHash)
+    const char c = fields[pos];
+    if (c == 'h')
     {
-      p = s + kSizeField_Len;
-      ConvertUInt64ToString(fileSize, p);
-      int numSpaces = (int)kSizeField_Len - (int)strlen(p);
-      if (numSpaces > 0)
-        p -= (unsigned)numSpaces;
+      FOR_VECTOR (i, hashers)
+      {
+        AddSpace();
+        const CHasherState &h = hashers[i];
+        char s[k_DigestStringSize];
+        s[0] = 0;
+        if (showHash)
+          h.WriteToString(digestIndex, s);
+        const unsigned len = (unsigned)strlen(s);
+        SetSpacesAndNul_if_Positive(s + len, (int)GetColumnWidth(h.DigestSize) - (int)len);
+        _s += s;
+      }
     }
-    
-    _s += p;
+    else if (c == 's')
+    {
+      AddSpace();
+      char s[kSizeField_Len + 32];
+      char *p = s;
+      SetSpacesAndNul(s, kSizeField_Len);
+      if (showHash)
+      {
+        p = s + kSizeField_Len;
+        ConvertUInt64ToString(fileSize, p);
+        const int numSpaces = (int)kSizeField_Len - (int)strlen(p);
+        if (numSpaces > 0)
+          p -= (unsigned)numSpaces;
+      }
+      _s += p;
+    }
+    else if (c == 'n')
+    {
+      AddSpacesBeforeName();
+      _s += path;
+    }
   }
-
-  if (PrintName)
-    AddSpacesBeforeName();
   
   *_so << _s;
 }
+
 
 HRESULT CHashCallbackConsole::SetOperationResult(UInt64 fileSize, const CHashBundle &hb, bool showHash)
 {
   if (_so)
   {
+    AString s;
+    if (_fileName.IsEmpty())
+      s = kEmptyFileAlias;
+    else
+    {
+      UString temp = _fileName;
+      _so->Normalize_UString(temp);
+      _so->Convert_UString_to_AString(temp, s);
+    }
+    PrintResultLine(fileSize, hb.Hashers, k_HashCalc_Index_Current, showHash, s);
+
+    /*
     PrintResultLine(fileSize, hb.Hashers, k_HashCalc_Index_Current, showHash);
     if (PrintName)
     {
@@ -267,7 +328,9 @@ HRESULT CHashCallbackConsole::SetOperationResult(UInt64 fileSize, const CHashBun
       else
         _so->NormalizePrint_UString(_fileName);
     }
-    *_so << endl;
+    */
+    // if (PrintNewLine)
+      *_so << endl;
   }
   
   if (NeedPercents())
@@ -299,9 +362,9 @@ static void PrintSum(CStdOutStream &so, const CHasherState &h, unsigned digestIn
 
   so << k_DigestTitles[digestIndex];
 
-  char s[k_HashCalc_DigestSize_Max * 2 + 64];
-  s[0] = 0;
-  AddHashHexToString(s, h.Digests[digestIndex], h.DigestSize);
+  char s[k_DigestStringSize];
+  // s[0] = 0;
+  h.WriteToString(digestIndex, s);
   so << s << endl;
 }
 
@@ -336,7 +399,7 @@ HRESULT CHashCallbackConsole::AfterLastFile(CHashBundle &hb)
   {
     PrintSeparatorLine(hb.Hashers);
     
-    PrintResultLine(hb.FilesSize, hb.Hashers, k_HashCalc_Index_DataSum, true);
+    PrintResultLine(hb.FilesSize, hb.Hashers, k_HashCalc_Index_DataSum, true, AString());
     
     *_so << endl << endl;
     

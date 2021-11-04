@@ -9,3 +9,4 @@
 #include "../Agent/Agent.h"
 
 #include "MyWindowsNew.h"
+#include "../Explorer/MyExplorerCommand.h"

@@ -158,6 +158,8 @@ static void SetInArchiveInterfaces(CAgent *agent, CArchiveUpdateCallback *upd)
   const CArc &arc = agent->GetArc();
   upd->Arc = &arc;
   upd->Archive = arc.Archive;
+
+  upd->ArcFileName = ExtractFileNameFromPath(arc.Path);
 }
 
 struct CDirItemsCallback_AgentOut: public IDirItemsCallback
@@ -190,6 +192,7 @@ struct CDirItemsCallback_AgentOut: public IDirItemsCallback
   }
 };
 
+  
 STDMETHODIMP CAgent::DoOperation(
     FStringVector *requestedPaths,
     FStringVector *processedPaths,

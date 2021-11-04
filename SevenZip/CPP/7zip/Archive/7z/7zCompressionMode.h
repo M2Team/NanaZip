@@ -14,8 +14,10 @@ struct CMethodFull: public CMethodProps
   CMethodId Id;
   UInt32 NumStreams;
   int CodecIndex;
+  UInt32 NumThreads;
+  bool Set_NumThreads;
 
-  CMethodFull(): CodecIndex(-1) {}
+  CMethodFull(): CodecIndex(-1), NumThreads(1), Set_NumThreads(false) {}
   bool IsSimpleCoder() const { return NumStreams == 1; }
 };
 
@@ -53,8 +55,12 @@ struct CCompressionMethodMode
 
   #ifndef _7ZIP_ST
   UInt32 NumThreads;
+  bool NumThreads_WasForced;
   bool MultiThreadMixer;
   #endif
+
+  UInt64 MemoryUsageLimit;
+  bool MemoryUsageLimit_WasSet;
   
   bool PasswordIsDefined;
   UString Password; // _Wipe
@@ -65,8 +71,11 @@ struct CCompressionMethodMode
       , Filter_was_Inserted(false)
       #ifndef _7ZIP_ST
       , NumThreads(1)
+      , NumThreads_WasForced(false)
       , MultiThreadMixer(true)
       #endif
+      , MemoryUsageLimit((UInt64)1 << 30)
+      , MemoryUsageLimit_WasSet(false)
       , PasswordIsDefined(false)
   {}
 

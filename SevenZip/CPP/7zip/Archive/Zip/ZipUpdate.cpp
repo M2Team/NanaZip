@@ -773,7 +773,7 @@ static HRESULT Update2(
   if (numThreads < 1)
     numThreads = 1;
 
-  const size_t kMemPerThread = (size_t)1 << 25;
+  const size_t kMemPerThread = (size_t)sizeof(size_t) << 23;
   const size_t kBlockSize = 1 << 16;
 
   bool mtMode = (numThreads > 1);
@@ -791,6 +791,7 @@ static HRESULT Update2(
 
       if (onem.FindProp(NCoderPropID::kNumThreads) < 0)
       {
+        // fixme: we should check the number of threads for xz mehod also
         // fixed for 9.31. bzip2 default is just one thread.
         onem.AddProp_NumThreads(numThreads);
       }
@@ -801,8 +802,8 @@ static HRESULT Update2(
     if (method == NFileHeader::NCompressionMethod::kStore && !options.PasswordIsDefined)
       numThreads = 1;
     
-    if (oneMethodMain)
-    {
+   if (oneMethodMain)
+   {
 
     if (method == NFileHeader::NCompressionMethod::kBZip2)
     {
@@ -828,6 +829,7 @@ static HRESULT Update2(
       int numXzThreads = oneMethodMain->Get_Xz_NumThreads(numLzmaThreads);
       if (numXzThreads < 0)
       {
+        // numXzThreads is unknown
         const UInt64 averageSize = numBytesToCompress / numFilesToCompress;
         const UInt64 blockSize = oneMethodMain->Get_Xz_BlockSize();
         UInt64 averageNumberOfBlocks = 1;
@@ -844,18 +846,52 @@ static HRESULT Update2(
       }
       numThreads /= (unsigned)numXzThreads;
     }
+    else if (
+           method == NFileHeader::NCompressionMethod::kDeflate
+        || method == NFileHeader::NCompressionMethod::kDeflate64
+        || method == NFileHeader::NCompressionMethod::kPPMd)
+    {
+      if (numThreads > 1
+          && options._memUsage_WasSet
+          && !options._numThreads_WasForced)
+      {
+        UInt64 methodMemUsage;
+        if (method == NFileHeader::NCompressionMethod::kPPMd)
+          methodMemUsage = oneMethodMain->Get_Ppmd_MemSize();
+        else
+          methodMemUsage = (4 << 20); // for deflate
+        const UInt64 threadMemUsage = kMemPerThread + methodMemUsage;
+        const UInt64 numThreads64 = options._memUsage_Compress / threadMemUsage;
+        if (numThreads64 < numThreads)
+          numThreads = (UInt32)numThreads64;
+      }
+    }
     else if (method == NFileHeader::NCompressionMethod::kLZMA)
     {
       // we suppose that default LZMA is 2 thread. So we don't change it
-      UInt32 numLZMAThreads = oneMethodMain->Get_Lzma_NumThreads();
+      const UInt32 numLZMAThreads = oneMethodMain->Get_Lzma_NumThreads();
       numThreads /= numLZMAThreads;
+
+      if (numThreads > 1
+          && options._memUsage_WasSet
+          && !options._numThreads_WasForced)
+      {
+        const UInt64 methodMemUsage = oneMethodMain->Get_Lzma_MemUsage(true);
+        const UInt64 threadMemUsage = kMemPerThread + methodMemUsage;
+        const UInt64 numThreads64 = options._memUsage_Compress / threadMemUsage;
+        if (numThreads64 < numThreads)
+          numThreads = (UInt32)numThreads64;
+      }
     }
-    }
+   } // (oneMethodMain)
 
     if (numThreads > numFilesToCompress)
       numThreads = (UInt32)numFilesToCompress;
     if (numThreads <= 1)
+    {
       mtMode = false;
+      numThreads = 1;
+    }
   }
 
   // mtMode = true; // to test mtMode for seqMode

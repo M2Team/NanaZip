@@ -12,12 +12,27 @@
 
 #include "../ICoder.h"
 
+// UInt64 GetMemoryUsage_LZMA(UInt32 dict, bool isBt, UInt32 numThreads);
+
 bool StringToBool(const wchar_t *s, bool &res);
 HRESULT PROPVARIANT_to_bool(const PROPVARIANT &prop, bool &dest);
 unsigned ParseStringToUInt32(const UString &srcString, UInt32 &number);
+
+/*
+if (name.IsEmpty() && prop.vt == VT_EMPTY), it doesn't change (resValue) and returns S_OK.
+  So you must set (resValue) for default value before calling */
 HRESULT ParsePropToUInt32(const UString &name, const PROPVARIANT &prop, UInt32 &resValue);
 
-HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 defaultNumThreads, UInt32 &numThreads);
+/* input: (numThreads = the_number_of_processors) */
+HRESULT ParseMtProp2(const UString &name, const PROPVARIANT &prop, UInt32 &numThreads, bool &force);
+
+inline HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 numCPUs, UInt32 &numThreads)
+{
+  bool forced = false;
+  numThreads = numCPUs;
+  return ParseMtProp2(name, prop, numThreads, forced);
+}
+
 
 struct CProp
 {
@@ -123,9 +138,21 @@ public:
     return dictSize;
   }
 
+  bool Get_Lzma_MatchFinder_IsBt() const
+  {
+    const int i = FindProp(NCoderPropID::kMatchFinder);
+    if (i >= 0)
+    {
+      const NWindows::NCOM::CPropVariant &val = Props[(unsigned)i].Value;
+      if (val.vt == VT_BSTR)
+        return ((val.bstrVal[0] | 0x20) != 'h'); // check for "hc"
+    }
+    return GetLevel() >= 5;
+  }
+
   bool Get_Lzma_Eos() const
   {
-    int i = FindProp(NCoderPropID::kEndMarker);
+    const int i = FindProp(NCoderPropID::kEndMarker);
     if (i >= 0)
     {
       const NWindows::NCOM::CPropVariant &val = Props[(unsigned)i].Value;
@@ -153,6 +180,9 @@ public:
     return 2;
   }
 
+  UInt64 Get_Lzma_MemUsage(bool addSlidingWindowSize) const;
+
+  /* returns -1, if numThreads is unknown */
   int Get_Xz_NumThreads(UInt32 &lzmaThreads) const
   {
     lzmaThreads = 1;
@@ -191,6 +221,7 @@ public:
     const UInt32 kMinSize = (UInt32)1 << 20;
     const UInt32 kMaxSize = (UInt32)1 << 28;
     const UInt64 dictSize = Get_Lzma_DicSize();
+    /* lzma2 code uses fake 4 GiB to calculate ChunkSize. So we do same */
     UInt64 blockSize = (UInt64)dictSize << 2;
     if (blockSize < kMinSize) blockSize = kMinSize;
     if (blockSize > kMaxSize) blockSize = kMaxSize;
@@ -266,6 +297,17 @@ public:
   {
     if (FindProp(NCoderPropID::kEndMarker) < 0)
       AddPropBool(NCoderPropID::kEndMarker, eos);
+  }
+
+  void AddProp_BlockSize2(UInt64 blockSize2)
+  {
+    if (FindProp(NCoderPropID::kBlockSize2) < 0)
+    {
+      CProp &prop = Props.AddNew();
+      prop.IsOptional = true;
+      prop.Id = NCoderPropID::kBlockSize2;
+      prop.Value = blockSize2;
+    }
   }
 
   HRESULT ParseParamsFromString(const UString &srcString);

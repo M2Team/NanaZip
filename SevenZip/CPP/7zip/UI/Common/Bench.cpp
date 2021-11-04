@@ -639,15 +639,22 @@ STDMETHODIMP CBenchProgressInfo::SetRatioInfo(const UInt64 *inSize, const UInt64
 
 static const unsigned kSubBits = 8;
 
-static UInt32 GetLogSize(UInt64 size)
+static unsigned GetLogSize(UInt64 size)
+{
+  unsigned i = 0;
+  for (;;)
+  {
+    i++;  size >>= 1;  if (size == 0) break;
+  }
+  return i;
+}
+
+
+static UInt32 GetLogSize_Sub(UInt64 size)
 {
   if (size <= 1)
     return 0;
-  unsigned i;
-  for (i = 2; i < 64; i++)
-    if (size < ((UInt64)1 << i))
-      break;
-  i--;
+  const unsigned i = GetLogSize(size) - 1;
   UInt32 v;
   if (i <= kSubBits)
     v = (UInt32)(size) << (kSubBits - i);
@@ -656,14 +663,48 @@ static UInt32 GetLogSize(UInt64 size)
   return ((UInt32)i << kSubBits) + (v & (((UInt32)1 << kSubBits) - 1));
 }
 
-static void NormalizeVals(UInt64 &v1, UInt64 &v2)
+
+static UInt64 Get_UInt64_from_double(double v)
 {
-  while (v1 >= ((UInt32)1 << ((64 - kBenchmarkUsageMultBits) / 2)))
-  {
-    v1 >>= 1;
-    v2 >>= 1;
-  }
+  const UInt64 kMaxVal = (UInt64)1 << 62;
+  if (v > (double)(Int64)kMaxVal)
+    return kMaxVal;
+  return (UInt64)v;
 }
+
+static UInt64 MyMultDiv64(UInt64 m1, UInt64 m2, UInt64 d)
+{
+  if (d == 0)
+    d = 1;
+  const double v =
+      (double)(Int64)m1 *
+      (double)(Int64)m2 /
+      (double)(Int64)d;
+  return Get_UInt64_from_double(v);
+  /*
+  unsigned n1 = GetLogSize(m1);
+  unsigned n2 = GetLogSize(m2);
+  while (n1 + n2 > 64)
+  {
+    if (n1 >= n2)
+    {
+      m1 >>= 1;
+      n1--;
+    }
+    else
+    {
+      m2 >>= 1;
+      n2--;
+    }
+    d >>= 1;
+  }
+
+  if (d == 0)
+    d = 1;
+  return m1 * m2 / d;
+  */
+}
+
 
 UInt64 CBenchInfo::GetUsage() const
 {
@@ -671,45 +712,52 @@ UInt64 CBenchInfo::GetUsage() const
   UInt64 userFreq = UserFreq;
   UInt64 globalTime = GlobalTime;
   UInt64 globalFreq = GlobalFreq;
-  NormalizeVals(userTime, userFreq);
-  NormalizeVals(globalFreq, globalTime);
+
   if (userFreq == 0)
     userFreq = 1;
   if (globalTime == 0)
     globalTime = 1;
-  return userTime * globalFreq * kBenchmarkUsageMult / userFreq / globalTime;
+
+  const double v =
+        ((double)(Int64)userTime / (double)(Int64)userFreq)
+      * ((double)(Int64)globalFreq / (double)(Int64)globalTime)
+      * (double)(Int64)kBenchmarkUsageMult;
+  return Get_UInt64_from_double(v);
+  /*
+  return MyMultDiv64(
+        MyMultDiv64(kBenchmarkUsageMult, userTime, userFreq),
+        globalFreq, globalTime);
+  */
 }
+
 
 UInt64 CBenchInfo::GetRatingPerUsage(UInt64 rating) const
 {
-  UInt64 userTime = UserTime;
-  UInt64 userFreq = UserFreq;
-  UInt64 globalTime = GlobalTime;
-  UInt64 globalFreq = GlobalFreq;
-  NormalizeVals(userFreq, userTime);
-  NormalizeVals(globalTime, globalFreq);
-  if (globalFreq == 0)
-    globalFreq = 1;
-  if (userTime == 0)
+  if (UserTime == 0)
   {
     return 0;
     // userTime = 1;
   }
-  return userFreq * globalTime / globalFreq * rating / userTime;
+  UInt64 globalFreq = GlobalFreq;
+  if (globalFreq == 0)
+    globalFreq = 1;
+
+  const double v =
+        ((double)(Int64)GlobalTime / (double)(Int64)globalFreq)
+      * ((double)(Int64)UserFreq  / (double)(Int64)UserTime)
+      * (double)(Int64)rating;
+  return Get_UInt64_from_double(v);
+  /*
+  return MyMultDiv64(
+        MyMultDiv64(rating, UserFreq, UserTime),
+        GlobalTime, globalFreq);
+  */
 }
 
-static UInt64 MyMultDiv64(UInt64 value, UInt64 elapsedTime, UInt64 freq)
-{
-  UInt64 elTime = elapsedTime;
-  NormalizeVals(freq, elTime);
-  if (elTime == 0)
-    elTime = 1;
-  return value * freq / elTime;
-}
 
 UInt64 CBenchInfo::GetSpeed(UInt64 numUnits) const
 {
-  return MyMultDiv64(numUnits, GlobalTime, GlobalFreq);
+  return MyMultDiv64(numUnits, GlobalFreq, GlobalTime);
 }
 
 struct CBenchProps
@@ -764,24 +812,24 @@ UInt64 CBenchProps::GetCompressRating(UInt64 dictSize, UInt64 elapsedTime, UInt6
     /*
     for (UInt64 uu = 0; uu < (UInt64)0xf << 60;)
     {
-      unsigned rr = GetLogSize(uu);
+      unsigned rr = GetLogSize_Sub(uu);
       printf("\n%16I64x , log = %4x", uu, rr);
       uu += 1;
       uu += uu / 50;
     }
     */
     // throw 1;
-    const UInt32 t = GetLogSize(dictSize) - (kBenchMinDicLogSize << kSubBits);
+    const UInt32 t = GetLogSize_Sub(dictSize) - (kBenchMinDicLogSize << kSubBits);
     encComplex = 870 + ((t * t * 5) >> (2 * kSubBits));
   }
   const UInt64 numCommands = (UInt64)size * encComplex;
-  return MyMultDiv64(numCommands, elapsedTime, freq);
+  return MyMultDiv64(numCommands, freq, elapsedTime);
 }
 
 UInt64 CBenchProps::GetDecompressRating(UInt64 elapsedTime, UInt64 freq, UInt64 outSize, UInt64 inSize, UInt64 numIterations)
 {
   const UInt64 numCommands = (inSize * DecComplexCompr + outSize * DecComplexUnc) * numIterations;
-  return MyMultDiv64(numCommands, elapsedTime, freq);
+  return MyMultDiv64(numCommands, freq, elapsedTime);
 }
 
 
@@ -2675,8 +2723,8 @@ void CTotalBenchRes::Mult_For_Weight(unsigned weight)
   NumIterations2 *= weight;
   RPU *= weight;
   Rating *= weight;
-  Usage += weight;
-  Speed += weight;
+  Usage *= weight;
+  Speed *= weight;
 }
 
 void CTotalBenchRes::Update_With_Res(const CTotalBenchRes &r)
@@ -3712,7 +3760,7 @@ HRESULT Bench(
         start = 1;
       const UInt64 freq = GetFreq();
       // mips is constant in some compilers
-      const UInt64 hz = MyMultDiv64(numMilCommands * 1000000, start, freq);
+      const UInt64 hz = MyMultDiv64(numMilCommands * 1000000, freq, start);
       const UInt64 mipsVal = numMilCommands * freq / start;
       if (printCallback)
       {

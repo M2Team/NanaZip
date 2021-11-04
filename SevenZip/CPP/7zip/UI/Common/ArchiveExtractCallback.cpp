@@ -47,6 +47,7 @@ static const char * const kCantRenameFile = "Cannot rename existing file";
 static const char * const kCantDeleteOutputFile = "Cannot delete output file";
 static const char * const kCantDeleteOutputDir = "Cannot delete output folder";
 static const char * const kCantOpenOutFile = "Cannot open output file";
+static const char * const kCantOpenInFile = "Cannot open input file";
 static const char * const kCantSetFileLen = "Cannot set length for output file";
 #ifdef SUPPORT_LINKS
 static const char * const kCantCreateHardLink = "Cannot create hard link";
@@ -889,7 +890,8 @@ void CArchiveExtractCallback::CorrectPathParts()
 
 void CArchiveExtractCallback::CreateFolders()
 {
-  UStringVector &pathParts = _item.PathParts;
+  // 21.04 : we don't change original (_item.PathParts) here
+  UStringVector pathParts = _item.PathParts;
 
   if (!_item.IsDir)
   {
@@ -1078,18 +1080,19 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
   IInArchive *archive = _arc->Archive;
   #endif
 
-  const UStringVector &pathParts = _item.PathParts;
   const UInt32 index = _index;
 
   bool isAnti = false;
   RINOK(_arc->IsItemAnti(index, isAnti));
 
   CorrectPathParts();
-  
-  UString processedPath (MakePathFromParts(pathParts));
+  UString processedPath (MakePathFromParts(_item.PathParts));
   
   if (!isAnti)
+  {
+    // 21.04: CreateFolders doesn't change (_item.PathParts)
     CreateFolders();
+  }
   
   FString fullProcessedPath (us2fs(processedPath));
   if (_pathMode != NExtract::NPathMode::kAbsPaths
@@ -1295,7 +1298,25 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
 
 
 
+HRESULT CArchiveExtractCallback::GetItem(UInt32 index)
+{
+  #ifndef _SFX
+  _item._use_baseParentFolder_mode = _use_baseParentFolder_mode;
+  if (_use_baseParentFolder_mode)
+  {
+    _item._baseParentFolder = (int)_baseParentFolder;
+    if (_pathMode == NExtract::NPathMode::kFullPaths ||
+        _pathMode == NExtract::NPathMode::kAbsPaths)
+      _item._baseParentFolder = -1;
+  }
+  #endif // _SFX
 
+  #ifdef SUPPORT_ALT_STREAMS
+  _item.WriteToAltStreamIfColon = _ntOptions.WriteToAltStreamIfColon;
+  #endif
+
+  return _arc->GetItem(index, _item);
+}
 
 
 STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStream **outStream, Int32 askExtractMode)
@@ -1339,22 +1360,7 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
 
   IInArchive *archive = _arc->Archive;
 
-  #ifndef _SFX
-  _item._use_baseParentFolder_mode = _use_baseParentFolder_mode;
-  if (_use_baseParentFolder_mode)
-  {
-    _item._baseParentFolder = (int)_baseParentFolder;
-    if (_pathMode == NExtract::NPathMode::kFullPaths ||
-        _pathMode == NExtract::NPathMode::kAbsPaths)
-      _item._baseParentFolder = -1;
-  }
-  #endif // _SFX
-
-  #ifdef SUPPORT_ALT_STREAMS
-  _item.WriteToAltStreamIfColon = _ntOptions.WriteToAltStreamIfColon;
-  #endif
-
-  RINOK(_arc->GetItem(index, _item));
+  RINOK(GetItem(index));
 
   {
     NCOM::CPropVariant prop;
@@ -1382,6 +1388,7 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
     return S_OK;
   #endif // SUPPORT_ALT_STREAMS
 
+  // we can change (_item.PathParts) in this function
   UStringVector &pathParts = _item.PathParts;
 
   if (_wildcardCensor)
@@ -1974,7 +1981,10 @@ STDMETHODIMP CArchiveExtractCallback::SetOperationResult(Int32 opRes)
 
   #ifndef _SFX
   if (ExtractToStreamCallback)
-    return ExtractToStreamCallback->SetOperationResult7(opRes, BoolToInt(_encrypted));
+  {
+    GetUnpackSize();
+    return ExtractToStreamCallback->SetOperationResult8(opRes, BoolToInt(_encrypted), _curSize);
+  }
   #endif
 
   #ifndef _SFX
@@ -2102,6 +2112,82 @@ STDMETHODIMP CArchiveExtractCallback::CryptoGetTextPassword(BSTR *password)
   COM_TRY_END
 }
 
+
+// ---------- HASH functions ----------
+
+FString CArchiveExtractCallback::Hash_GetFullFilePath()
+{
+  // this function changes _item.PathParts.
+  CorrectPathParts();
+  const UStringVector &pathParts = _item.PathParts;
+  const UString processedPath (MakePathFromParts(pathParts));
+  FString fullProcessedPath (us2fs(processedPath));
+  if (_pathMode != NExtract::NPathMode::kAbsPaths
+      || !NName::IsAbsolutePath(processedPath))
+  {
+    fullProcessedPath = MakePath_from_2_Parts(
+        DirPathPrefix_for_HashFiles,
+        // _dirPathPrefix,
+        fullProcessedPath);
+  }
+  return fullProcessedPath;
+}
+
+
+STDMETHODIMP CArchiveExtractCallback::GetDiskProperty(UInt32 index, PROPID propID, PROPVARIANT *value)
+{
+  COM_TRY_BEGIN
+  NCOM::CPropVariant prop;
+  if (propID == kpidSize)
+  {
+    RINOK(GetItem(index));
+    const FString fullProcessedPath = Hash_GetFullFilePath();
+    NFile::NFind::CFileInfo fi;
+    if (fi.Find_FollowLink(fullProcessedPath))
+      if (!fi.IsDir())
+        prop = (UInt64)fi.Size;
+  }
+  prop.Detach(value);
+  return S_OK;
+  COM_TRY_END
+}
+
+
+STDMETHODIMP CArchiveExtractCallback::GetStream2(UInt32 index, ISequentialInStream **inStream, UInt32 mode)
+{
+  COM_TRY_BEGIN
+  *inStream = NULL;
+  // if (index != _index) return E_FAIL;
+  if (mode != NUpdateNotifyOp::kHashRead)
+    return E_FAIL;
+
+  RINOK(GetItem(index));
+  const FString fullProcessedPath = Hash_GetFullFilePath();
+
+  CInFileStream *inStreamSpec = new CInFileStream;
+  CMyComPtr<ISequentialInStream> inStreamRef = inStreamSpec;
+  inStreamSpec->File.PreserveATime = _ntOptions.PreserveATime;
+  if (!inStreamSpec->OpenShared(fullProcessedPath, _ntOptions.OpenShareForWrite))
+  {
+    RINOK(SendMessageError_with_LastError(kCantOpenInFile, fullProcessedPath));
+    return S_OK;
+  }
+  *inStream = inStreamRef.Detach();
+  return S_OK;
+  COM_TRY_END
+}
+
+
+STDMETHODIMP CArchiveExtractCallback::ReportOperation(
+    UInt32 /* indexType */, UInt32 /* index */, UInt32 /* op */)
+{
+  // COM_TRY_BEGIN
+  return S_OK;
+  // COM_TRY_END
+}
+
+
+// ------------ After Extracting functions ------------
 
 void CDirPathSortPair::SetNumSlashes(const FChar *s)
 {

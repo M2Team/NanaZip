@@ -70,6 +70,9 @@ HRESULT CAgentFolder::CommonUpdateOperation(
     const UInt32 *indices, UInt32 numItems,
     IProgress *progress)
 {
+  if (moveMode && _agentSpec->_isHashHandler)
+    return E_NOTIMPL;
+
   if (!_agentSpec->CanUpdate())
     return E_NOTIMPL;
 

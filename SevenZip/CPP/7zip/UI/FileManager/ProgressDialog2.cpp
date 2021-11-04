@@ -5,7 +5,7 @@
 #include "../../../Common/IntToString.h"
 #include "../../../Common/StringConvert.h"
 
-#include "../../../Windows/Control/Static.h"
+#include "../../../Windows/Clipboard.h"
 #include "../../../Windows/ErrorMsg.h"
 
 #include "../GUI/ExtractRes.h"
@@ -239,7 +239,7 @@ void CProgressSync::AddError_Code_Name(DWORD systemError, const wchar_t *name)
 CProgressDialog::CProgressDialog():
    _timer(0),
    CompressingMode(true),
-   MainWindow(0)
+   MainWindow(NULL)
 {
   _isDir = false;
 
@@ -280,7 +280,7 @@ CProgressDialog::~CProgressDialog()
 }
 void CProgressDialog::AddToTitle(LPCWSTR s)
 {
-  if (MainWindow != 0)
+  if (MainWindow)
   {
     CWindow window(MainWindow);
     window.SetText((UString)s + MainTitle);
@@ -357,6 +357,7 @@ bool CProgressDialog::OnInit()
   m_ProgressBar.Attach(GetItem(IDC_PROGRESS1));
   _messageList.Attach(GetItem(IDL_PROGRESS_MESSAGES));
   _messageList.SetUnicodeFormat();
+  _messageList.SetExtendedListViewStyle(LVS_EX_FULLROWSELECT);
 
   _wasCreated = true;
   _dialogCreatedEvent.Set();
@@ -1046,6 +1047,8 @@ bool CProgressDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
       }
       if (_inCancelMessageBox)
       {
+        /* if user is in MessageBox(), we will call OnExternalCloseMessage()
+           later, when MessageBox() will be closed */
         _externalCloseMessageWasReceived = true;
         break;
       }
@@ -1142,13 +1145,16 @@ void CProgressDialog::OnPriorityButton()
 
 void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
 {
-  int itemIndex = _messageList.GetItemCount();
   wchar_t sz[16];
   sz[0] = 0;
   if (needNumber)
     ConvertUInt32ToString(_numMessages + 1, sz);
-  _messageList.InsertItem(itemIndex, sz);
-  _messageList.SetSubItem(itemIndex, 1, message);
+  const unsigned itemIndex = _messageStrings.Size(); // _messageList.GetItemCount();
+  if (_messageList.InsertItem((int)itemIndex, sz) == (int)itemIndex)
+  {
+    _messageList.SetSubItem((int)itemIndex, 1, message);
+    _messageStrings.Add(message);
+  }
 }
 
 void CProgressDialog::AddMessage(LPCWSTR message)
@@ -1218,23 +1224,41 @@ bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
         break;
       }
 
-      bool paused = Sync.Get_Paused();
+      if (_cancelWasPressed)
+        return true;
+
+      const bool paused = Sync.Get_Paused();
+
       if (!paused)
-        OnPauseButton();
-      _inCancelMessageBox = true;
-      int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
-      _inCancelMessageBox = false;
-      if (!paused)
-        OnPauseButton();
-      if (res == IDCANCEL || res == IDNO)
       {
-        if (_externalCloseMessageWasReceived)
-          OnExternalCloseMessage();
+        OnPauseButton();
+      }
+
+      _inCancelMessageBox = true;
+      const int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
+      _inCancelMessageBox = false;
+      if (res == IDYES)
+        _cancelWasPressed = true;
+
+      if (!paused)
+      {
+        OnPauseButton();
+      }
+
+      if (_externalCloseMessageWasReceived)
+      {
+        /* we have received kCloseMessage while we were in MessageBoxW().
+           so we call OnExternalCloseMessage() here.
+           it can show MessageBox and it can close dialog */
+        OnExternalCloseMessage();
         return true;
       }
 
-      _cancelWasPressed = true;
+      if (!_cancelWasPressed)
+        return true;
+
       MessagesDisplayed = true;
+      // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
       break;
     }
 
@@ -1267,6 +1291,87 @@ void CProgressDialog::ProcessWasFinished()
     PostMsg(kCloseMessage);
   else
     _needClose = true;
+}
+
+
+bool CProgressDialog::OnNotify(UINT /* controlID */, LPNMHDR header)
+{
+  if (header->hwndFrom != _messageList)
+    return false;
+  switch (header->code)
+  {
+    case LVN_KEYDOWN:
+    {
+      LPNMLVKEYDOWN keyDownInfo = LPNMLVKEYDOWN(header);
+      switch (keyDownInfo->wVKey)
+      {
+        case 'A':
+        {
+          if (IsKeyDown(VK_CONTROL))
+          {
+            _messageList.SelectAll();
+            return true;
+          }
+          break;
+        }
+        case VK_INSERT:
+        case 'C':
+        {
+          if (IsKeyDown(VK_CONTROL))
+          {
+            CopyToClipboard();
+            return true;
+          }
+          break;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+
+static void ListView_GetSelected(NControl::CListView &listView, CUIntVector &vector)
+{
+  vector.Clear();
+  int index = -1;
+  for (;;)
+  {
+    index = listView.GetNextSelectedItem(index);
+    if (index < 0)
+      break;
+    vector.Add(index);
+  }
+}
+
+
+void CProgressDialog::CopyToClipboard()
+{
+  CUIntVector indexes;
+  ListView_GetSelected(_messageList, indexes);
+  UString s;
+  unsigned numIndexes = indexes.Size();
+  if (numIndexes == 0)
+    numIndexes = _messageList.GetItemCount();
+
+  for (unsigned i = 0; i < numIndexes; i++)
+  {
+    const unsigned index = (i < indexes.Size() ? indexes[i] : i);
+    // s.Add_UInt32(index);
+    // s += ": ";
+    s += _messageStrings[index];
+    {
+      s +=
+        #ifdef _WIN32
+          "\r\n"
+        #else
+          "\n"
+        #endif
+        ;
+    }
+  }
+
+  ClipboardSetText(*this, s);
 }
 
 
