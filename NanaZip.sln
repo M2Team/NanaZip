@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipShellExtension", "NanaZipShellExtension\NanaZipShellExtension.vcxproj", "{F17D4837-7943-4361-9527-2AF9CACE477D}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -53,6 +53,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipConsole", "NanaZipCo
 	EndProjectSection
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "NanaZipPackage", "NanaZipPackage\NanaZipPackage.wapproj", "{9A119A76-97CB-4490-B8C2-651576CB9302}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipInstaller", "NanaZipInstaller\NanaZipInstaller.vcxproj", "{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}"
+	ProjectSection(ProjectDependencies) = postProject
+		{84E27A16-CBC7-466C-971F-2A4E0F2F95BE} = {84E27A16-CBC7-466C-971F-2A4E0F2F95BE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -178,6 +183,18 @@ Global
 		{9A119A76-97CB-4490-B8C2-651576CB9302}.Release|x86.ActiveCfg = Release|x86
 		{9A119A76-97CB-4490-B8C2-651576CB9302}.Release|x86.Build.0 = Release|x86
 		{9A119A76-97CB-4490-B8C2-651576CB9302}.Release|x86.Deploy.0 = Release|x86
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Debug|ARM64.Build.0 = Debug|ARM64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Debug|x64.ActiveCfg = Debug|x64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Debug|x64.Build.0 = Debug|x64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Debug|x86.ActiveCfg = Debug|Win32
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Debug|x86.Build.0 = Debug|Win32
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Release|ARM64.ActiveCfg = Release|ARM64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Release|ARM64.Build.0 = Release|ARM64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Release|x64.ActiveCfg = Release|x64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Release|x64.Build.0 = Release|x64
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Release|x86.ActiveCfg = Release|Win32
+		{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

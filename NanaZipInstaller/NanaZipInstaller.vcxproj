@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}</ProjectGuid>
+    <RootNamespace>NanaZipInstaller</RootNamespace>
+    <MileProjectType>WindowsApplication</MileProjectType>
+    <MileProjectManifestFile>NanaZipInstaller.manifest</MileProjectManifestFile>
+  </PropertyGroup>
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Library.CppWinRT.props" />
+  <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <ItemGroup>
+    <ClCompile Include="NanaZipInstaller.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipInstaller.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NanaZipInstaller.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+  </ItemGroup>
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
+</Project>

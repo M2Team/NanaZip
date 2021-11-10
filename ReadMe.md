@@ -43,7 +43,7 @@ supported.
   - [ ] Try to add codec support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and 
         Zstandard support from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd).
         (Suggested by fcharlie.)
-  - [ ] Provide NanaZip Deployment Tool for advanced deployment scenarios.
+  - [ ] Provide NanaZip Installer for simplify the deployment.
   - [ ] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
 - 2.x Series (2023 Q3)
