@@ -29,6 +29,6 @@ popd
 call "%VisualStudioInstallDir%\VC\Auxiliary\Build\vcvarsall.bat" x86
 
 rem Build all targets
-MSBuild BuildAllTargets.proj
+MSBuild -m BuildAllTargets.proj
 
 @endlocal
