@@ -3,7 +3,7 @@
 ;       : pixel
 ;  9.07 : F1xat
 ;  9.33 : Łukasz Maria P. Pastuszczak
-;
+; 21.03 : Michał L.
 ;
 ;
 ;
@@ -58,11 +58,12 @@ Złą&cz pliki...
 Wł&aściwości
 Ko&mentarz
 Oblicz sumę kontrolną
-Diff
+Różnice pomiędzy plikami
 Utwórz &folder
 U&twórz plik
 Za&kończ
 Dow&iązanie
+&Alternatywne strumienie
 600
 Z&aznacz wszystko
 &Odznacz wszystko
@@ -162,7 +163,7 @@ Nazwa lokalna
 Dostawca
 Zabezpieczenia NT
 Alternatywny strumień
-
+Aux
 Usunięty
 Drzewo
 
@@ -185,21 +186,24 @@ Strona kodowa
 
 
 
-
-
+Rozmiar danych po zakończeniu archiwum
+Rozmiar danych zewnętrznych
 Dowiązanie
 Dowiązanie twarde
 I-węzeł
+
+Tylko do odczytu
 2100
 Opcje
 Język
 Język:
 Edytor
 &Edytor:
-&Diff:
+&Program do porównywania:
 2200
 System
 Skojarz program NanaZip z:
+Wszyscy użytkownicy
 2301
 Zintegruj program NanaZip z menu kontekstowym powłoki
 Kaskadowe menu kontekstowe
@@ -256,12 +260,25 @@ Operacja nie może być wywołana z folderu, który ma długą ścieżkę.
 Musisz zaznaczyć jeden plik
 Musisz zaznaczyć jeden lub więcej plików
 Zbyt dużo elementów
+Nie można otworzyć pliku jako archiwum {0}
+Plik jest otwarty jako archiwum {0}
+Archiwum jest otwarte z przesunięciem
 3300
 Wypakowywanie
 Kompresowanie
 Testowanie
 Otwieranie...
 Skanowanie...
+Usuwanie
+3320
+Dodawanie
+Aktualizowanie
+Analizowanie
+Replikacja
+Przepakowywanie
+Pomijanie
+Usuwanie
+Tworzenie nagłówka
 3400
 Wypakuj
 &Wypakuj do:
@@ -306,6 +323,7 @@ Nieoczekiwany koniec danych
 Pewne dane znajdują się za końcem bloku użytecznych danych
 Nie rozpoznano archiwum
 Błąd nagłówków
+Nieprawidłowe hasło
 3763
 Niedostępny początek archiwum
 Niepotwierdzony początek archiwum
@@ -475,3 +493,6 @@ Dowiązanie twarde
 Dowiązanie symboliczne pliku
 Dowiązanie symboliczne katalogu
 Połączenie katalogów
+12200
+Integracja
+Otwórz aplikację Ustawienia, aby powiązać rozszerzenia plików z programem NanaZip
