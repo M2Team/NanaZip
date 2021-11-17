@@ -1,5 +1,10 @@
 ﻿# ![NanaZip](Assets/NanaZip.png) NanaZip
 
+[![GitHub Actions Build Status](https://github.com/M2Team/NanaZip/actions/workflows/BuildBinaries.yml/badge.svg?branch=master&event=push)](https://github.com/M2Team/NanaZip/actions/workflows/BuildBinaries.yml?query=event%3Apush+branch%3Amaster)
+[![Latest Version](https://img.shields.io/github/release/M2Team/NanaZip.svg)](https://github.com/M2Team/NanaZip/releases/latest)
+[![Latest Release Downloads](https://img.shields.io/github/downloads/M2Team/NanaZip/latest/total.svg)](https://github.com/M2Team/NanaZip/releases/latest)
+[![Total Downloads](https://img.shields.io/github/downloads/M2Team/NanaZip/total.svg)](https://github.com/M2Team/NanaZip/releases)
+
 ![ContextMenu](Documents/ContextMenu.png)
 ![MainWindow](Documents/MainWindow.png)
 
@@ -69,9 +74,12 @@ supported.
         creation and extraction support for esd archives.
   - [ ] Try to add pri archive extracting support.
   - [ ] Try to add smart extraction.
-  - [ ] Add language encoding switching support for file names in File Manager.
-        (Suggested by 刘泪 and zjkmxy.)
-  - [ ] Add deleting source after archiving support. (Suggested by OrionGrant.)
+  - [ ] Try to add language encoding switching support for file names in File
+        Manager. (Suggested by 刘泪 and zjkmxy.)
+  - [ ] Try to add deleting source after archiving support. (Suggested by 
+        OrionGrant.)
+  - [ ] Try to add an option when extracting an archive to open the folder 
+        where you extracted the files, like WinRAR. (Suggested by maicol07.)
 - 4.x Series (2025 Q3)
   - [ ] Try to add recovery record support for 7z archives. (Suggested by 
         SakuraNeko.)
