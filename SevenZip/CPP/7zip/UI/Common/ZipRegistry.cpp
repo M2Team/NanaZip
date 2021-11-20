@@ -8,6 +8,8 @@
 #include "../../../Windows/Registry.h"
 #include "../../../Windows/Synchronization.h"
 
+#include "../FileManager/RegistryUtils.h"
+
 #include "ZipRegistry.h"
 
 using namespace NWindows;
@@ -67,6 +69,7 @@ void CInfo::Save() const
   CS_LOCK
   CKey key;
   CreateMainKey(key, kKeyName);
+  UStringVector Empty;
 
   if (PathMode_Force)
     key.SetValue(kExtractMode, (UInt32)PathMode);
@@ -80,7 +83,10 @@ void CInfo::Save() const
   Key_Set_BoolPair(key, kShowPassword, ShowPassword);
 
   key.RecurseDeleteKey(kPathHistory);
-  key.SetValue_Strings(kPathHistory, Paths);
+  if (WantPathHistory())
+    key.SetValue_Strings(kPathHistory, Paths);
+  else
+    key.SetValue_Strings(kPathHistory, Empty);
 }
 
 void Save_ShowPassword(bool showPassword)
@@ -160,6 +166,7 @@ static LPCTSTR const kBlockSize = TEXT("BlockSize");
 static LPCTSTR const kNumThreads = TEXT("NumThreads");
 static LPCWSTR const kMethod = L"Method";
 static LPCWSTR const kOptions = L"Options";
+static LPCWSTR const kSplitVolume = L"SplitVolume";
 static LPCWSTR const kEncryptionMethod = L"EncryptionMethod";
 
 static LPCTSTR const kNtSecur = TEXT("Security");
@@ -197,6 +204,7 @@ static void GetRegUInt32(CKey &key, LPCTSTR name, UInt32 &value)
 
 void CInfo::Save() const
 {
+  UStringVector Empty;
   CS_LOCK
 
   CKey key;
@@ -213,7 +221,11 @@ void CInfo::Save() const
   key.SetValue(kShowPassword, ShowPassword);
   key.SetValue(kEncryptHeaders, EncryptHeaders);
   key.RecurseDeleteKey(kArcHistory);
-  key.SetValue_Strings(kArcHistory, ArcPaths);
+
+  if (WantArcHistory())
+    key.SetValue_Strings(kArcHistory, ArcPaths);
+  else
+    key.SetValue_Strings(kArcHistory, Empty);
 
   key.RecurseDeleteKey(kOptionsKeyName);
   {
@@ -233,6 +245,7 @@ void CInfo::Save() const
 
       SetRegString(fk, kMethod, fo.Method);
       SetRegString(fk, kOptions, fo.Options);
+      SetRegString(fk, kSplitVolume, fo.SplitVolume);
       SetRegString(fk, kEncryptionMethod, fo.EncryptionMethod);
     }
   }
@@ -274,8 +287,9 @@ void CInfo::Load()
         fo.FormatID = formatIDs[i];
         if (fk.Open(optionsKey, fo.FormatID, KEY_READ) == ERROR_SUCCESS)
         {
-          GetRegString(fk, kOptions, fo.Options);
           GetRegString(fk, kMethod, fo.Method);
+          GetRegString(fk, kOptions, fo.Options);
+          GetRegString(fk, kSplitVolume, fo.SplitVolume);
           GetRegString(fk, kEncryptionMethod, fo.EncryptionMethod);
 
           GetRegUInt32(fk, kLevel, fo.Level);

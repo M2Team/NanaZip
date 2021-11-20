@@ -147,6 +147,9 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp">
       <Filter>FileManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.cpp">
+      <Filter>FileManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\resource.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.h">
+      <Filter>FileManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

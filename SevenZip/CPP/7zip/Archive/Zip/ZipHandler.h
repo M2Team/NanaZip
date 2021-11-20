@@ -16,7 +16,7 @@ namespace NArchive {
 namespace NZip {
 
 const unsigned kNumMethodNames1 = NFileHeader::NCompressionMethod::kZstdPk + 1;
-const unsigned kMethodNames2Start = NFileHeader::NCompressionMethod::kZstdWz;
+const unsigned kMethodNames2Start = NFileHeader::NCompressionMethod::kZstd;
 const unsigned kNumMethodNames2 = NFileHeader::NCompressionMethod::kWzAES + 1 - kMethodNames2Start;
 
 extern const char * const kMethodNames1[kNumMethodNames1];
@@ -74,7 +74,7 @@ private:
     m_WriteNtfsTimeExtra = true;
     _removeSfxBlock = false;
     m_ForceLocal = false;
-    m_ForceUtf8 = false;
+    m_ForceUtf8 = true;
     _forceCodePage = false;
     _specifiedCodePage = CP_OEMCP;
   }

@@ -30,6 +30,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.cpp" />
     <ClCompile Include="..\SevenZip\C\CpuArch.c" />
     <ClCompile Include="..\SevenZip\C\Threads.c" />
     <ClCompile Include="..\SevenZip\CPP\Common\IntToString.cpp" />
@@ -73,6 +74,7 @@
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\StringUtils.h" />
     <ClInclude Include="..\SevenZip\C\CpuArch.h" />
     <ClInclude Include="..\SevenZip\C\Threads.h" />
     <ClInclude Include="..\SevenZip\CPP\Common\IntToString.h" />

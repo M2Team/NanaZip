@@ -19,7 +19,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <PreprocessorDefinitions>EXTERNAL_CODECS;LANG;NEW_FOLDER_INTERFACE;WIN_LONG_PATH;SUPPORT_DEVICE_FILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXTERNAL_CODECS;LANG;NEW_FOLDER_INTERFACE;WIN_LONG_PATH;SUPPORT_DEVICE_FILE;WANT_OPTIONAL_LOWERCASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>

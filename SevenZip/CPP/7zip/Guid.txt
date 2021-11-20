@@ -168,7 +168,12 @@ Handler GUIDs:
   0B lzma86
   0C xz
   0D ppmd
+  0E zstd
+  0F lz4
+  10 lz5
+  11 liz
 
+  C4 Lzip
   C5 Base64
   C6 COFF
   C7 Ext

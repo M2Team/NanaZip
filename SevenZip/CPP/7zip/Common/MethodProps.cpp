@@ -373,8 +373,29 @@ static const CNameToPropID g_NameToPropID[] =
   { VT_UI4, "b" },
   { VT_UI4, "check" },
   { VT_BSTR, "filter" },
-  { VT_UI8, "memuse" }
+  { VT_UI8, "memuse" },
+  { VT_UI8, "aff" },
+  // zstd props
+  { VT_UI4, "strat" },
+  { VT_UI4, "fast" },
+  { VT_UI4, "long" },
+  { VT_UI4, "wlog" },
+  { VT_UI4, "hlog" },
+  { VT_UI4, "clog" },
+  { VT_UI4, "slog" },
+  { VT_UI4, "slen" },
+  { VT_UI4, "tlen" },
+  { VT_UI4, "ovlog" },
+  { VT_UI4, "ldmhlog" },
+  { VT_UI4, "ldmslen" },
+  { VT_UI4, "ldmblog" },
+  { VT_UI4, "ldmhevery" }
 };
+
+#if defined(static_assert) || (__STDC_VERSION >= 201112L) || (_MSC_VER >= 1900)
+  static_assert(ARRAY_SIZE(g_NameToPropID) == NCoderPropID::kEndOfProp,
+    "g_NameToPropID doesn't match NCoderPropID enum");
+#endif
 
 static int FindPropIdExact(const UString &name)
 {

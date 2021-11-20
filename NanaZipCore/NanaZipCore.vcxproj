@@ -10,6 +10,7 @@
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
   <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
@@ -29,6 +30,35 @@
     <None Include="..\SevenZip\CPP\7zip\Archive\Archive2.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LizardHandler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz4Handler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz5Handler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LzHandler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ZstdHandler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliEncoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliRegister.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\FastLzma2Register.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LizardDecoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LizardEncoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LizardRegister.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz4Decoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz4Encoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz4Register.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz5Decoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz5Encoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz5Register.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdEncoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Blake3Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Md2Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Md4Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Md5Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Sha384Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Sha512Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\XXH32Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\XXH64Reg.cpp" />
     <ClCompile Include="..\SevenZip\C\7zBuf2.c" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
@@ -440,6 +470,16 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BrotliEncoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\LizardDecoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\LizardEncoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz4Decoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz4Encoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz5Decoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz5Encoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdEncoder.h" />
     <ClInclude Include="..\SevenZip\C\7zBuf.h" />
     <ClInclude Include="..\SevenZip\C\7zCrc.h" />
     <ClInclude Include="..\SevenZip\C\7zTypes.h" />

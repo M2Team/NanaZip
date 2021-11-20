@@ -295,6 +295,9 @@
       <Filter>Spec</Filter>
     </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
+      <Filter>Compress</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\resource.rc">
@@ -613,6 +616,12 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\SfxCon.cpp">
       <Filter>Spec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
+      <Filter>Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp">
+      <Filter>Compress</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

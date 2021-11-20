@@ -20,7 +20,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <PreprocessorDefinitions>LANG;EXTERNAL_CODECS;WIN_LONG_PATH;SUPPORT_DEVICE_FILE;_7ZIP_LARGE_PAGES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LANG;EXTERNAL_CODECS;WIN_LONG_PATH;SUPPORT_DEVICE_FILE;_7ZIP_LARGE_PAGES;WANT_OPTIONAL_LOWERCASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>

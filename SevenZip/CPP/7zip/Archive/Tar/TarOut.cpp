@@ -115,8 +115,12 @@ HRESULT COutArchive::WriteHeaderReal(const CItem &item)
   cur += NFileHeader::kGroupNameSize;
 
 
-  if (item.DeviceMajorDefined) RETURN_IF_NOT_TRUE(WriteOctal_8(cur, item.DeviceMajor)); cur += 8;
-  if (item.DeviceMinorDefined) RETURN_IF_NOT_TRUE(WriteOctal_8(cur, item.DeviceMinor)); cur += 8;
+  /* temp fix for #202
+   * if (item.DeviceMajorDefined) RETURN_IF_NOT_TRUE(WriteOctal_8(cur, item.DeviceMajor)); cur += 8;
+   * if (item.DeviceMinorDefined) RETURN_IF_NOT_TRUE(WriteOctal_8(cur, item.DeviceMinor)); cur += 8;
+   */
+  RETURN_IF_NOT_TRUE(WriteOctal_8(cur, item.DeviceMajorDefined ? item.DeviceMajor : 0)); cur += 8;
+  RETURN_IF_NOT_TRUE(WriteOctal_8(cur, item.DeviceMinorDefined ? item.DeviceMinor : 0)); cur += 8;
 
   if (item.IsSparse())
   {

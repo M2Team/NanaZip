@@ -82,6 +82,21 @@
     <Filter Include="Windows">
       <UniqueIdentifier>{0b03f898-87a4-48c6-aa2c-191c8b0f671c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Compress\Brotli Compress">
+      <UniqueIdentifier>{2252e28f-20cd-42fb-aaf5-5205da69f318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compress\Lizard Compress">
+      <UniqueIdentifier>{47cff66a-927b-4fbc-95bb-5e95948791ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compress\Lz4 Compress">
+      <UniqueIdentifier>{95dc0a7b-71cb-4b55-96ce-fb5b7bc851c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compress\Lz5 Compress">
+      <UniqueIdentifier>{fb495191-da44-423b-b3fb-f8c5f2700116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compress\Zstd Compress">
+      <UniqueIdentifier>{83383154-7b75-45c8-b5ec-f46af5aa4503}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ArchiveExports.cpp">
@@ -879,6 +894,93 @@
     <ClCompile Include="..\SevenZip\C\7zCrcOpt.c">
       <Filter>C</Filter>
     </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.cpp">
+      <Filter>Compress\Brotli Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliEncoder.cpp">
+      <Filter>Compress\Brotli Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliRegister.cpp">
+      <Filter>Compress\Brotli Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LizardDecoder.cpp">
+      <Filter>Compress\Lizard Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LizardEncoder.cpp">
+      <Filter>Compress\Lizard Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LizardRegister.cpp">
+      <Filter>Compress\Lizard Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz4Decoder.cpp">
+      <Filter>Compress\Lz4 Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz4Encoder.cpp">
+      <Filter>Compress\Lz4 Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz4Register.cpp">
+      <Filter>Compress\Lz4 Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz5Decoder.cpp">
+      <Filter>Compress\Lz5 Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz5Encoder.cpp">
+      <Filter>Compress\Lz5 Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lz5Register.cpp">
+      <Filter>Compress\Lz5 Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
+      <Filter>Compress\Zstd Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdEncoder.cpp">
+      <Filter>Compress\Zstd Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp">
+      <Filter>Compress\Zstd Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\FastLzma2Register.cpp">
+      <Filter>Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\Blake3Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\Md2Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\Md4Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\Md5Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\Sha384Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\Sha512Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\XXH32Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\XXH64Reg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LizardHandler.cpp">
+      <Filter>Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz4Handler.cpp">
+      <Filter>Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz5Handler.cpp">
+      <Filter>Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LzHandler.cpp">
+      <Filter>Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ZstdHandler.cpp">
+      <Filter>Archive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.h">
@@ -1539,6 +1641,36 @@
       <Filter>Windows</Filter>
     </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.h">
+      <Filter>Compress\Brotli Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BrotliEncoder.h">
+      <Filter>Compress\Brotli Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\LizardDecoder.h">
+      <Filter>Compress\Lizard Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\LizardEncoder.h">
+      <Filter>Compress\Lizard Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz4Decoder.h">
+      <Filter>Compress\Lz4 Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz4Encoder.h">
+      <Filter>Compress\Lz4 Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz5Decoder.h">
+      <Filter>Compress\Lz5 Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz5Encoder.h">
+      <Filter>Compress\Lz5 Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
+      <Filter>Compress\Zstd Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdEncoder.h">
+      <Filter>Compress\Zstd Compress</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SevenZip\CPP\7zip\Archive\Archive2.def">

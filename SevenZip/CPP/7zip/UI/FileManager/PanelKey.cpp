@@ -188,7 +188,7 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
     case VK_UP:
     {
       if (alt)
-        _panelCallback->OnSetSameFolder();
+        OpenParentFolder();
       else if (shift)
         OnArrowWithShift();
       return false;
@@ -199,6 +199,8 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
         _panelCallback->OnSetSubFolder();
       else if (shift)
         OnArrowWithShift();
+      else if (ctrl)
+        _panelCallback->OnSetSameFolder();
       return false;
     }
     case VK_LEFT:
@@ -207,6 +209,8 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
         _panelCallback->OnSetSubFolder();
       else if (shift)
         OnArrowWithShift();
+      else if (ctrl)
+        _panelCallback->OnSetSameFolder();
       return false;
     }
     case VK_NEXT:

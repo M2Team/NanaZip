@@ -45,6 +45,7 @@ namespace NCompression
     
     CSysString FormatID;
     UString Method;
+    UString SplitVolume;
     UString Options;
     UString EncryptionMethod;
 

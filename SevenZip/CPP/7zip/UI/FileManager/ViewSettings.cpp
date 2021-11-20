@@ -10,6 +10,7 @@
 #include "../../../Windows/Registry.h"
 #include "../../../Windows/Synchronization.h"
 
+#include "RegistryUtils.h"
 #include "ViewSettings.h"
 
 using namespace NWindows;
@@ -288,7 +289,15 @@ static void ReadStringList(LPCTSTR valueName, UStringVector &folders)
 }
 
 void SaveFolderHistory(const UStringVector &folders)
-  { SaveStringList(kFolderHistoryValueName, folders); }
+{
+  if (WantFolderHistory())
+    SaveStringList(kFolderHistoryValueName, folders);
+  else {
+    UStringVector Empty;
+    SaveStringList(kFolderHistoryValueName, Empty);
+  }
+}
+
 void ReadFolderHistory(UStringVector &folders)
   { ReadStringList(kFolderHistoryValueName, folders); }
 
@@ -298,7 +307,15 @@ void ReadFastFolders(UStringVector &folders)
   { ReadStringList(kFastFoldersValueName, folders); }
 
 void SaveCopyHistory(const UStringVector &folders)
-  { SaveStringList(kCopyHistoryValueName, folders); }
+{
+  if (WantCopyHistory())
+    SaveStringList(kCopyHistoryValueName, folders);
+  else {
+    UStringVector Empty;
+    SaveStringList(kCopyHistoryValueName, Empty);
+  }
+}
+
 void ReadCopyHistory(UStringVector &folders)
   { ReadStringList(kCopyHistoryValueName, folders); }
 

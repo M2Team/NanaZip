@@ -98,8 +98,13 @@ namespace
         "7z"
       , "bz2"
       , "gz"
+      , "lz"
+      , "liz"
+      , "lz4"
+      , "lz5"
       , "rar"
       , "zip"
+      , "zst"
     };
 
     static bool IsItArcExt(const UString& ext)

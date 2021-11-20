@@ -21,7 +21,7 @@ enum ECtxCommandType
   CtxCommandType_CrcRoot,
   CtxCommandType_CrcChild,
 };
-   
+
 
 class CZipContextMenu:
   public IContextMenu,
@@ -48,13 +48,22 @@ public:
     kCompressToZipEmail,
     kHash_CRC32,
     kHash_CRC64,
+    kHash_XXH32,
+    kHash_XXH64,
+    kHash_MD2,
+    kHash_MD4,
+    kHash_MD5,
     kHash_SHA1,
     kHash_SHA256,
+    kHash_SHA384,
+    kHash_SHA512,
+    kHash_BLAKE2sp,
+    kHash_BLAKE3,
     kHash_All,
     kHash_Generate_SHA256,
     kHash_TestArc
   };
-  
+
   MY_UNKNOWN_IMP4_MT(
       IContextMenu,
       IShellExtInit,

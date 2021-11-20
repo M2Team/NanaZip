@@ -17,8 +17,10 @@
 #include "../../../Windows/ProcessUtils.h"
 #include "../../../Windows/Synchronization.h"
 
+#include "../FileManager/StringUtils.h"
 #include "../FileManager/RegistryUtils.h"
 
+#include "ZipRegistry.h"
 #include "CompressCall.h"
 
 using namespace NWindows;
@@ -41,6 +43,7 @@ using namespace NWindows;
 #define kHashIncludeSwitches  " -i"
 #define kStopSwitchParsing  " --"
 
+static NCompression::CInfo m_RegistryInfo;
 extern HWND g_HWND;
 
 UString GetQuotedString(const UString &s)
@@ -179,6 +182,29 @@ static HRESULT CreateMap(const UStringVector &names,
   return S_OK;
 }
 
+int FindRegistryFormat(const UString &name)
+{
+  FOR_VECTOR (i, m_RegistryInfo.Formats)
+  {
+    const NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[i];
+    if (name.IsEqualTo_NoCase(GetUnicodeString(fo.FormatID)))
+      return i;
+  }
+  return -1;
+}
+
+int FindRegistryFormatAlways(const UString &name)
+{
+  int index = FindRegistryFormat(name);
+  if (index < 0)
+  {
+    NCompression::CFormatOptions fo;
+    fo.FormatID = GetSystemString(name);
+    index = m_RegistryInfo.Formats.Add(fo);
+  }
+  return index;
+}
+
 HRESULT CompressFiles(
     const UString &arcPathPrefix,
     const UString &arcName,
@@ -195,10 +221,65 @@ HRESULT CompressFiles(
   params += kIncludeSwitch;
   RINOK(CreateMap(names, fileMapping, event, params));
 
-  if (!arcType.IsEmpty())
+  if (!arcType.IsEmpty() && arcType == L"7z")
   {
+    int index;
     params += kArchiveTypeSwitch;
     params += arcType;
+    m_RegistryInfo.Load();
+    index = FindRegistryFormatAlways(arcType);
+    if (index >= 0)
+    {
+      char temp[64];
+      const NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[index];
+
+      if (!fo.Method.IsEmpty())
+      {
+        params += " -m0=";
+        params += fo.Method;
+      }
+
+      if (fo.Level)
+      {
+        params += " -mx=";
+        ConvertUInt32ToString(fo.Level, temp);
+        params += temp;
+      }
+
+      if (fo.Dictionary)
+      {
+        params += " -md=";
+        ConvertUInt32ToString(fo.Dictionary, temp);
+        params += temp;
+        params += "b";
+      }
+
+      if (fo.BlockLogSize)
+      {
+        params += " -ms=";
+        ConvertUInt64ToString(1ULL << fo.BlockLogSize, temp);
+        params += temp;
+        params += "b";
+      }
+
+      if (fo.NumThreads)
+      {
+        params += " -mmt=";
+        ConvertUInt32ToString(fo.NumThreads, temp);
+        params += temp;
+      }
+
+      if (!fo.Options.IsEmpty())
+      {
+        UStringVector strings;
+        SplitString(fo.Options, strings);
+        FOR_VECTOR (i, strings)
+        {
+          params += " -m";
+          params += strings[i];
+        }
+      }
+    }
   }
 
   if (email)

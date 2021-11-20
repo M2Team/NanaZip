@@ -368,13 +368,13 @@ static HRESULT ReadDataToString(ISequentialInStream *stream, CItemEx &item, AStr
   return S_OK;
 }
 
-static bool ParsePaxLongName(const AString &src, AString &dest)
+static bool ParsePaxParams(const AString& src, AString& pax_path, Int64& pax_mtime)
 {
-  dest.Empty();
+  pax_path.Empty();
   for (unsigned pos = 0;;)
   {
     if (pos >= src.Len())
-      return false;
+      return true; // false;
     const char *start = src.Ptr(pos);
     const char *end;
     const UInt32 lineLen = ConvertStringToUInt32(start, &end);
@@ -382,7 +382,9 @@ static bool ParsePaxLongName(const AString &src, AString &dest)
       return false;
     if (*end != ' ')
       return false;
-    if (lineLen > src.Len() - pos)
+    if (lineLen <= 0 || lineLen > src.Len() - pos)
+      return false;
+    if (start[lineLen - 1] != '\n')
       return false;
     unsigned offset = (unsigned)(end - start) + 1;
     if (lineLen < offset)
@@ -390,13 +392,32 @@ static bool ParsePaxLongName(const AString &src, AString &dest)
     if (IsString1PrefixedByString2(src.Ptr(pos + offset), "path="))
     {
       offset += 5; // "path="
-      dest = src.Mid(pos + offset, lineLen - offset);
-      if (dest.IsEmpty())
-        return false;
-      if (dest.Back() != '\n')
-        return false;
-      dest.DeleteBack();
-      return true;
+      pax_path = src.Mid(pos + offset, lineLen - offset - 1);
+    }
+    else if (IsString1PrefixedByString2(src.Ptr(pos + offset), "mtime="))
+    {
+      Int64 v = 0; int mult = 10 * 1000 * 1000;
+      offset += 6; // "mtime=ssssssssss.ccccccc"
+      bool after_dot = false;
+      for (;;) {
+        const char c = start[offset++];
+        if (c >= '0' && c <= '9') {
+          v = 10 * v + (c - '0');
+          if (after_dot) {
+            mult /= 10;
+            if (mult == 1)
+              break;
+          }
+        }
+        else {
+          if (c == '.')
+            after_dot = true;
+          else
+            break;
+        }
+      }
+      if (v > 0)
+        pax_mtime = v * mult;
     }
     pos += lineLen;
   }
@@ -459,6 +480,9 @@ HRESULT ReadItem(ISequentialInStream *stream, bool &filled, CItemEx &item, EErro
         if (IsString1PrefixedByString2(s, "./"))
           s += 2;
         if (   IsString1PrefixedByString2(s, "PaxHeader/")
+            || item.Name.Find("/PaxHeader/") >= 0
+            || IsString1PrefixedByString2(s, "PaxHeaders/")
+            || item.Name.Find("/PaxHeaders/") >= 0
             || IsString1PrefixedByString2(s, "PaxHeaders.X/")
             || IsString1PrefixedByString2(s, "PaxHeaders.4467/")
             || StringsAreEqual_Ascii(s, "@PaxHeader")
@@ -503,8 +527,14 @@ HRESULT ReadItem(ISequentialInStream *stream, bool &filled, CItemEx &item, EErro
     if (!pax.IsEmpty())
     {
       AString name;
-      if (ParsePaxLongName(pax, name))
-        item.Name = name;
+      Int64 mtime = 0;
+      if (ParsePaxParams(pax, name, mtime))
+      {
+        if (!name.IsEmpty())
+          item.Name = name;
+        if (mtime > 0)
+          item.MTime = mtime;
+      }
       else
       {
         // no "path" property is allowed in pax4467

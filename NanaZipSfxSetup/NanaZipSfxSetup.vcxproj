@@ -8,6 +8,7 @@
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
   <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <PropertyGroup>
     <TargetName>NanaZipSetup</TargetName>
     <TargetExt>.sfx</TargetExt>
@@ -32,6 +33,8 @@
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c" />
     <ClCompile Include="..\SevenZip\C\7zCrcOpt.c" />
     <ClCompile Include="..\SevenZip\C\Alloc.c" />
@@ -116,6 +119,7 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
     <ClInclude Include="..\SevenZip\C\7zCrc.h" />
     <ClInclude Include="..\SevenZip\C\Alloc.h" />
     <ClInclude Include="..\SevenZip\C\Bcj2.h" />

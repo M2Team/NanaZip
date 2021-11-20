@@ -182,7 +182,7 @@ IArchiveExtractCallback::GetStream()
 if (IProgress::SetTotal() was called)
 {
   IProgress::SetCompleted(completeValue) uses
-    packSize   - for some stream formats (xz, gz, bz2, lzma, z, ppmd).
+    packSize   - for some stream formats (xz, gz, bz2, lz, lzma, z, ppmd).
     unpackSize - for another formats.
 }
 else

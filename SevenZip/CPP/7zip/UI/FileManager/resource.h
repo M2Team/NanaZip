@@ -25,8 +25,17 @@
 #define IDM_HASH_ALL             101
 #define IDM_CRC32                102
 #define IDM_CRC64                103
-#define IDM_SHA1                 104
-#define IDM_SHA256               105
+#define IDM_XXH32                104
+#define IDM_XXH64                105
+#define IDM_MD2                  106
+#define IDM_MD4                  107
+#define IDM_MD5                  108
+#define IDM_SHA1                 109
+#define IDM_SHA256               110
+#define IDM_SHA384               111
+#define IDM_SHA512               112
+#define IDM_BLAKE2sp             113
+#define IDM_BLAKE3               114
 
 #define IDM_OPEN                 540
 #define IDM_OPEN_INSIDE          541
