@@ -13,7 +13,7 @@ may differ from what you see now.**
 
 NanaZip is an open source file archiver intended for the modern Windows 
 experience, forked from the source code of well-known open source file archiver
-7-Zip 21.03.
+7-Zip 21.04.
 
 We need help to translate NanaZip into native languages that have not been 
 supported.
@@ -28,6 +28,8 @@ supported.
 - Windows may show the contrast white icon in the taskbar when you using the 
   contrast standard mode in NanaZip 1.0 Preview 1 and NanaZip 1.0 Preview 2 is 
   fixed the issue.
+- If you don't find NanaZip in the context menu, please restart File Explorer 
+  via Task Manager.
 
 # Development Roadmap
 
@@ -44,10 +46,14 @@ supported.
         (Suggested by alanfox2000.)
   - [x] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
         (Suggested by AndromedaMelody.)
-  - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
-  - [ ] Try to add codec support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and 
+  - [x] Try to add codec support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and 
         Zstandard support from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd).
         (Suggested by fcharlie.)
+  - [x] Try to add compression support in the graphical user interface for 
+        Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support from 
+        [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd). (Suggested by 
+        fcharlie.)
+  - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [ ] Provide NanaZip Installer for simplify the deployment.
   - [ ] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
@@ -60,10 +66,6 @@ supported.
   - [ ] Try to modernize the core implementation.
   - [ ] Try to Windows Runtime component for interoperability.
 - 3.x Series (2024 Q3)
-  - [ ] Try to add compression support in the graphical user interface for 
-        Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support from 
-        [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd). (Suggested by 
-        fcharlie.)
   - [ ] Try to add option for save file names with UTF-8 in 7z archives.
   - [ ] Try to add extension for Windows File Explorer for give user immersive 
         experience. (Suggested by SakuraNeko and shuax.)
@@ -100,6 +102,7 @@ requests and issues are welcome.**
 - Support the context menu in Windows 10/11 File Explorer.
 - Enable parsing the NSIS script support in the NSIS archives.
 - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
+- Support Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs.
 
 # Documents
 
