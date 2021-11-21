@@ -1214,8 +1214,12 @@ void CCompressDialog::SetLevel2()
       UInt32 langID = g_Levels[i];
       UString s;
       s.Add_UInt32(i);
-      s += " - ";
-      s += LangString(langID);
+      if (langID)
+      {
+          s += " (";
+          s += LangString(langID);
+          s += ")";
+      }
       int index = (int)m_Level.AddString(s);
       m_Level.SetItemData(index, i);
     }
