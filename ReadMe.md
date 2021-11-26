@@ -13,7 +13,7 @@ may differ from what you see now.**
 
 NanaZip is an open source file archiver intended for the modern Windows 
 experience, forked from the source code of well-known open source file archiver
-7-Zip 21.04.
+7-Zip.
 
 We need help to translate NanaZip into native languages that have not been 
 supported.
@@ -98,6 +98,7 @@ requests and issues are welcome.**
 
 # Features
 
+- Inherit all features from 7-Zip 21.04.
 - Packaging with MSIX for modern deployment experience.
 - Support the context menu in Windows 10/11 File Explorer.
 - Enable parsing the NSIS script support in the NSIS archives.
