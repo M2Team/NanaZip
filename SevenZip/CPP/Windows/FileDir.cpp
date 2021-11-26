@@ -1054,6 +1054,7 @@ bool SetFileAttrib_PosixHighDetect(CFSTR path, DWORD attrib)
       TRACE_SetFileAttrib("bad lstat()");
       return false;
     }
+    // TRACE_chmod("lstat", st.st_mode);
   }
   else
   {
@@ -1066,6 +1067,7 @@ bool SetFileAttrib_PosixHighDetect(CFSTR path, DWORD attrib)
   
   if (attrib & FILE_ATTRIBUTE_UNIX_EXTENSION)
   {
+    TRACE_SetFileAttrib("attrib & FILE_ATTRIBUTE_UNIX_EXTENSION");
     st.st_mode = attrib >> 16;
     if (S_ISDIR(st.st_mode))
     {
@@ -1077,12 +1079,15 @@ bool SetFileAttrib_PosixHighDetect(CFSTR path, DWORD attrib)
   }
   else if (S_ISLNK(st.st_mode))
   {
-    // change it
-    SetLastError(ENOSYS);
-    return false;
+    /* for most systems: permissions for symlinks are fixed to rwxrwxrwx.
+       so we don't need chmod() for symlinks. */
+    return true;
+    // SetLastError(ENOSYS);
+    // return false;
   }
   else
   {
+    TRACE_SetFileAttrib("Only Windows Attributes");
     // Only Windows Attributes
     if (S_ISDIR(st.st_mode)
         || (attrib & FILE_ATTRIBUTE_READONLY) == 0)
@@ -1090,10 +1095,23 @@ bool SetFileAttrib_PosixHighDetect(CFSTR path, DWORD attrib)
     st.st_mode &= ~(mode_t)(S_IWUSR | S_IWGRP | S_IWOTH); // octal: ~0222; // disable write permissions
   }
 
-  TRACE_chmod(path, (st.st_mode) & g_umask.mask);
-  int res = chmod(path, (st.st_mode) & g_umask.mask);
-
-  // TRACE_SetFileAttrib("OK")
+  int res;
+  /*
+  if (S_ISLNK(st.st_mode))
+  {
+    printf("\nfchmodat()\n");
+    TRACE_chmod(path, (st.st_mode) & g_umask.mask);
+    // AT_SYMLINK_NOFOLLOW is not implemted still in Linux.
+    res = fchmodat(AT_FDCWD, path, (st.st_mode) & g_umask.mask,
+        S_ISLNK(st.st_mode) ? AT_SYMLINK_NOFOLLOW : 0);
+  }
+  else
+  */
+  {
+    TRACE_chmod(path, (st.st_mode) & g_umask.mask);
+    res = chmod(path, (st.st_mode) & g_umask.mask);
+  }
+  // TRACE_SetFileAttrib("End")
   return (res == 0);
 }
 

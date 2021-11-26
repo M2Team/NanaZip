@@ -661,6 +661,12 @@ void AString::Add_UInt32(UInt32 v)
   _len = (unsigned)(ConvertUInt32ToString(v, _chars + _len) - _chars);
 }
 
+void UString::Add_UInt64(UInt64 v)
+{
+  Grow(20);
+  _len = (unsigned)(ConvertUInt64ToString(v, _chars + _len) - _chars);
+}
+
 void AString::SetFrom(const char *s, unsigned len) // no check
 {
   if (len > _limit)
@@ -1302,6 +1308,12 @@ void UString::Add_UInt32(UInt32 v)
 {
   Grow(10);
   _len = (unsigned)(ConvertUInt32ToString(v, _chars + _len) - _chars);
+}
+
+void AString::Add_UInt64(UInt64 v)
+{
+  Grow(20);
+  _len = (unsigned)(ConvertUInt64ToString(v, _chars + _len) - _chars);
 }
 
 

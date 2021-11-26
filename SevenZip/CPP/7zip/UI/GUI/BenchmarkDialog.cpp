@@ -727,9 +727,7 @@ void CBenchmarkDialog::SetItemText_Number(int itemID, UInt64 val, LPCTSTR post)
 
 static void AddSize_MB(UString &s, UInt64 size)
 {
-  char temp[32];
-  ConvertUInt64ToString((size + (1 << 20) - 1) >> 20, temp);
-  s += temp;
+  s.Add_UInt64((size + (1 << 20) - 1) >> 20);
   s += kMB;
 }
 
@@ -1541,16 +1539,13 @@ HRESULT CFreqCallback::AddCpuFreq(unsigned numThreads, UInt64 freq, UInt64 usage
       s.Add_LF();
     }
     s += " ";
-    char temp[64];
     if (numThreads != 1)
     {
-      ConvertUInt64ToString(GetUsagePercents(usage), temp);
-      s += temp;
+      s.Add_UInt64(GetUsagePercents(usage));
       s += '%';
       s.Add_Space();
     }
-    ConvertUInt64ToString(GetMips(freq), temp);
-    s += temp;
+    s.Add_UInt64(GetMips(freq));
     // BenchmarkDialog->Sync.sd.NeedPrint_Freq = true;
     res = sync.Exit ? E_ABORT : S_OK;
   }

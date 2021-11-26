@@ -30,7 +30,7 @@ LONG g_DllRefCount;
 LONG g_DllRefCount = 0;
 
 static const UINT kSevenZipStartMenuID = kMenuCmdID_Plugin_Start;
-static const UINT kSystemStartMenuID = kMenuCmdID_Plugin_Start + 100;
+static const UINT kSystemStartMenuID = kMenuCmdID_Plugin_Start + 400;
 
 void CPanel::InvokeSystemCommand(const char *command)
 {
@@ -993,11 +993,19 @@ bool CPanel::InvokePluginCommand(unsigned id,
     IContextMenu *sevenZipContextMenu, IContextMenu *systemContextMenu)
 {
   UInt32 offset;
-  bool isSystemMenu = (id >= kSystemStartMenuID);
+  const bool isSystemMenu = (id >= kSystemStartMenuID);
   if (isSystemMenu)
+  {
+    if (!systemContextMenu)
+      return false;
     offset = id - kSystemStartMenuID;
+  }
   else
+  {
+    if (!sevenZipContextMenu)
+      return false;
     offset = id - kSevenZipStartMenuID;
+  }
 
   #ifdef use_CMINVOKECOMMANDINFOEX
     CMINVOKECOMMANDINFOEX

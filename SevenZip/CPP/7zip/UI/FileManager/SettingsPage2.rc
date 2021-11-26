@@ -1,3 +1,5 @@
+// #define g1xs 60
+
 CAPTION "Settings"
 BEGIN 
   CONTROL  "Show "".."" item",      IDX_SETTINGS_SHOW_DOTS,            MY_CHECKBOX, m,  8, xc, 10
@@ -16,4 +18,8 @@ BEGIN
   CONTROL  "Want CopyHistory",   IDX_SETTINGS_WANT_COPY_HISTORY,      MY_CHECKBOX, m, 168, xc, 10
   CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 182, xc, 10
   CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 196, xc, 10
+
+  // LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY, m, 140, xc, 8
+  // COMBOBOX  IDC_SETTINGS_MEM, m , 152, g1xs, yc - 152, MY_COMBO
+  // LTEXT     "/ RAM", IDT_SETTINGS_MEM_RAM, m + g1xs + m, 154, xc - g1xs - m, MY_TEXT_NOPREFIX
 END

@@ -27,11 +27,30 @@ bool ParseSizeString(const wchar_t *s, const PROPVARIANT &prop, UInt64 percentsB
   else if (prop.vt != VT_EMPTY)
     return false;
 
+  bool percentMode = false;
+  {
+    const wchar_t c = *s;
+    if (MyCharLower_Ascii(c) == 'p')
+    {
+      percentMode = true;
+      s++;
+    }
+  }
+
   const wchar_t *end;
-  UInt64 v = ConvertStringToUInt64(s, &end);
+  const UInt64 v = ConvertStringToUInt64(s, &end);
   if (s == end)
     return false;
-  wchar_t c = *end;
+  const wchar_t c = *end;
+
+  if (percentMode)
+  {
+    if (c != 0)
+      return false;
+    res = Calc_From_Val_Percents(percentsBase, v);
+    return true;
+  }
+
   if (c == 0)
   {
     res = v;
@@ -42,7 +61,7 @@ bool ParseSizeString(const wchar_t *s, const PROPVARIANT &prop, UInt64 percentsB
 
   if (c == '%')
   {
-    res = percentsBase / 100 * v;
+    res = Calc_From_Val_Percents(percentsBase, v);
     return true;
   }
 
@@ -56,7 +75,7 @@ bool ParseSizeString(const wchar_t *s, const PROPVARIANT &prop, UInt64 percentsB
     case 't': numBits = 40; break;
     default: return false;
   }
-  UInt64 val2 = v << numBits;
+  const UInt64 val2 = v << numBits;
   if ((val2 >> numBits) != v)
     return false;
   res = val2;

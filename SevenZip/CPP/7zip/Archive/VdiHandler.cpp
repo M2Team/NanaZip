@@ -32,7 +32,17 @@ static const Byte k_Signature[] = SIGNATURE;
 
 static const unsigned k_ClusterBits = 20;
 static const UInt32 k_ClusterSize = (UInt32)1 << k_ClusterBits;
-static const UInt32 k_UnusedCluster = 0xFFFFFFFF;
+
+
+/*
+VDI_IMAGE_BLOCK_FREE = (~0) // returns any random data
+VDI_IMAGE_BLOCK_ZERO = (~1) // returns zeros
+*/
+
+// static const UInt32 k_ClusterType_Free  = 0xffffffff;
+static const UInt32 k_ClusterType_Zero  = 0xfffffffe;
+
+#define IS_CLUSTER_ALLOCATED(v) ((UInt32)(v) < k_ClusterType_Zero)
 
 
 // static const UInt32 kDiskType_Dynamic = 1;
@@ -135,8 +145,8 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
     if (cluster < _table.Size())
     {
       const Byte *p = (const Byte *)_table + (size_t)cluster;
-      UInt32 v = Get32(p);
-      if (v != k_UnusedCluster)
+      const UInt32 v = Get32(p);
+      if (IS_CLUSTER_ALLOCATED(v))
       {
         UInt64 offset = _dataOffset + ((UInt64)v << k_ClusterBits);
         offset += lowBits;
@@ -374,8 +384,8 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallbac
   const Byte *data = _table;
   for (UInt32 i = 0; i < totalBlocks; i++)
   {
-    UInt32 v = Get32(data + (size_t)i * 4);
-    if (v == k_UnusedCluster)
+    const UInt32 v = Get32(data + (size_t)i * 4);
+    if (!IS_CLUSTER_ALLOCATED(v))
       continue;
     if (v >= numAllocatedBlocks)
     {

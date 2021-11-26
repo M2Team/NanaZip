@@ -36,7 +36,10 @@ protected:
         if (memAvail > limit2)
           memAvail = limit2;
       }
-      _memUsage_Compress   = memAvail / 32 * 28;
+      // 80% - is auto usage limit in handlers
+      // _memUsage_Compress = memAvail * 4 / 5;
+      // _memUsage_Compress = Calc_From_Val_Percents(memAvail, 80);
+      _memUsage_Compress = Calc_From_Val_Percents_Less100(memAvail, 80);
       _memUsage_Decompress = memAvail / 32 * 17;
     }
   }

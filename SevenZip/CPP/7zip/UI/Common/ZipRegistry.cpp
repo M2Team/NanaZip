@@ -2,7 +2,10 @@
 
 #include "StdAfx.h"
 
+#include "../../../../C/CpuArch.h"
+
 #include "../../../Common/IntToString.h"
+#include "../../../Common/StringToInt.h"
 
 #include "../../../Windows/FileDir.h"
 #include "../../../Windows/Registry.h"
@@ -202,6 +205,13 @@ static void GetRegUInt32(CKey &key, LPCTSTR name, UInt32 &value)
     value = (UInt32)(Int32)-1;
 }
 
+static LPCWSTR const kMemUse = L"MemUse"
+    #if defined(MY_CPU_SIZEOF_POINTER) && (MY_CPU_SIZEOF_POINTER == 4)
+      L"32";
+    #else
+      L"64";
+    #endif
+
 void CInfo::Save() const
 {
   UStringVector Empty;
@@ -247,6 +257,7 @@ void CInfo::Save() const
       SetRegString(fk, kOptions, fo.Options);
       SetRegString(fk, kSplitVolume, fo.SplitVolume);
       SetRegString(fk, kEncryptionMethod, fo.EncryptionMethod);
+      SetRegString(fk, kMemUse, fo.MemUse);
     }
   }
 }
@@ -291,6 +302,7 @@ void CInfo::Load()
           GetRegString(fk, kOptions, fo.Options);
           GetRegString(fk, kSplitVolume, fo.SplitVolume);
           GetRegString(fk, kEncryptionMethod, fo.EncryptionMethod);
+          GetRegString(fk, kMemUse, fo.MemUse);
 
           GetRegUInt32(fk, kLevel, fo.Level);
           GetRegUInt32(fk, kDictionary, fo.Dictionary);
@@ -311,6 +323,116 @@ void CInfo::Load()
   key.GetValue_IfOk(kShowPassword, ShowPassword);
   key.GetValue_IfOk(kEncryptHeaders, EncryptHeaders);
 }
+
+
+static bool ParseMemUse(const wchar_t *s, CMemUse &mu)
+{
+  mu.Clear();
+
+  bool percentMode = false;
+  {
+    const wchar_t c = *s;
+    if (MyCharLower_Ascii(c) == 'p')
+    {
+      percentMode = true;
+      s++;
+    }
+  }
+  const wchar_t *end;
+  UInt64 number = ConvertStringToUInt64(s, &end);
+  if (end == s)
+    return false;
+  
+  wchar_t c = *end;
+
+  if (percentMode)
+  {
+    if (c != 0)
+      return false;
+    mu.IsPercent = true;
+    mu.Val = number;
+    return true;
+  }
+
+  if (c == 0)
+  {
+    mu.Val = number;
+    return true;
+  }
+
+  c = MyCharLower_Ascii(c);
+
+  const wchar_t c1 = end[1];
+  
+  if (c == '%')
+  {
+    if (c1 != 0)
+      return false;
+    mu.IsPercent = true;
+    mu.Val = number;
+    return true;
+  }
+
+  if (c == 'b')
+  {
+    if (c1 != 0)
+      return false;
+    mu.Val = number;
+    return true;
+  }
+  
+  if (c1 != 0)
+    if (MyCharLower_Ascii(c1) != 'b' || end[2] != 0)
+      return false;
+  
+  unsigned numBits;
+  switch (c)
+  {
+    case 'k': numBits = 10; break;
+    case 'm': numBits = 20; break;
+    case 'g': numBits = 30; break;
+    case 't': numBits = 40; break;
+    default: return false;
+  }
+  if (number >= ((UInt64)1 << (64 - numBits)))
+    return false;
+  mu.Val = number << numBits;
+  return true;
+}
+
+
+void CMemUse::Parse(const UString &s)
+{
+  IsDefined = ParseMemUse(s, *this);
+}
+
+/*
+void MemLimit_Save(const UString &s)
+{
+  CS_LOCK
+  CKey key;
+  CreateMainKey(key, kKeyName);
+  SetRegString(key, kMemUse, s);
+}
+
+bool MemLimit_Load(NCompression::CMemUse &mu)
+{
+  mu.Clear();
+  UString a;
+  {
+    CS_LOCK
+    CKey key;
+    if (OpenMainKey(key, kKeyName) != ERROR_SUCCESS)
+      return false;
+    if (key.QueryValue(kMemUse, a) != ERROR_SUCCESS)
+      return false;
+  }
+  if (a.IsEmpty())
+    return false;
+  mu.Parse(a);
+  return mu.IsDefined;
+}
+*/
 
 }
 

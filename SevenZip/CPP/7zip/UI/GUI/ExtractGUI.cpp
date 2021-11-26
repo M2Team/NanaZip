@@ -44,9 +44,7 @@ static void AddValuePair(UString &s, UINT resourceID, UInt64 value, bool addColo
   if (addColon)
     s += ':';
   s.Add_Space();
-  char sz[32];
-  ConvertUInt64ToString(value, sz);
-  s += sz;
+  s.Add_UInt64(value);
   s.Add_LF();
 }
 

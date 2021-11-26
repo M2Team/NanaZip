@@ -1,5 +1,5 @@
 /* LzmaEnc.c -- LZMA Encoder
-2021-07-10: Igor Pavlov : Public domain */
+2021-11-18: Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
@@ -668,12 +668,11 @@ static int RangeEnc_Alloc(CRangeEnc *p, ISzAllocPtr alloc)
 static void RangeEnc_Free(CRangeEnc *p, ISzAllocPtr alloc)
 {
   ISzAlloc_Free(alloc, p->bufBase);
-  p->bufBase = 0;
+  p->bufBase = NULL;
 }
 
 static void RangeEnc_Init(CRangeEnc *p)
 {
-  /* Stream.Init(); */
   p->range = 0xFFFFFFFF;
   p->cache = 0;
   p->low = 0;
@@ -687,12 +686,12 @@ static void RangeEnc_Init(CRangeEnc *p)
 
 MY_NO_INLINE static void RangeEnc_FlushStream(CRangeEnc *p)
 {
-  size_t num;
-  if (p->res != SZ_OK)
-    return;
-  num = (size_t)(p->buf - p->bufBase);
-  if (num != ISeqOutStream_Write(p->outStream, p->bufBase, num))
-    p->res = SZ_ERROR_WRITE;
+  const size_t num = (size_t)(p->buf - p->bufBase);
+  if (p->res == SZ_OK)
+  {
+    if (num != ISeqOutStream_Write(p->outStream, p->bufBase, num))
+      p->res = SZ_ERROR_WRITE;
+  }
   p->processed += num;
   p->buf = p->bufBase;
 }
@@ -2946,9 +2945,12 @@ static size_t SeqOutStreamBuf_Write(const ISeqOutStream *pp, const void *data, s
     size = p->rem;
     p->overflow = True;
   }
-  memcpy(p->data, data, size);
-  p->rem -= size;
-  p->data += size;
+  if (size != 0)
+  {
+    memcpy(p->data, data, size);
+    p->rem -= size;
+    p->data += size;
+  }
   return size;
 }
 

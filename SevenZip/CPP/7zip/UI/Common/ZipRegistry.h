@@ -6,6 +6,8 @@
 #include "../../../Common/MyTypes.h"
 #include "../../../Common/MyString.h"
 
+#include "../../Common/MethodProps.h"
+
 #include "ExtractMode.h"
 
 namespace NExtract
@@ -35,6 +37,36 @@ namespace NExtract
 
 namespace NCompression
 {
+  struct CMemUse
+  {
+    // UString Str;
+    bool IsDefined;
+    bool IsPercent;
+    UInt64 Val;
+
+    CMemUse():
+      IsDefined(false),
+      IsPercent(false),
+      Val(0)
+      {}
+
+    void Clear()
+    {
+      // Str.Empty();
+      IsDefined = false;
+      IsPercent = false;
+      Val = 0;
+    }
+
+    UInt64 GetBytes(UInt64 ramSize) const
+    {
+      if (!IsPercent)
+        return Val;
+      return Calc_From_Val_Percents(ramSize, Val);
+    }
+    void Parse(const UString &s);
+  };
+
   struct CFormatOptions
   {
     UInt32 Level;
@@ -48,6 +80,7 @@ namespace NCompression
     UString SplitVolume;
     UString Options;
     UString EncryptionMethod;
+    UString MemUse;
 
     void Reset_BlockLogSize()
     {

@@ -126,6 +126,18 @@ static void WriteFile(const FString &path, bool createAlways, const CFileDataInf
 }
 
 
+static UInt64 FILETIME_to_UInt64(const FILETIME &ft)
+{
+  return ft.dwLowDateTime | ((UInt64)ft.dwHighDateTime << 32);
+}
+
+static void UInt64_TO_FILETIME(UInt64 v, FILETIME &ft)
+{
+  ft.dwLowDateTime = (DWORD)v;
+  ft.dwHighDateTime = (DWORD)(v >> 32);
+}
+
+
 void CApp::VerCtrl(unsigned id)
 {
   const CPanel &panel = GetFocusedPanel();
@@ -297,6 +309,55 @@ void CApp::VerCtrl(unsigned id)
         return;
       }
     }
+
+    const UInt64 timeStampOriginal = FILETIME_to_UInt64(fdi.Info.ftLastWriteTime);
+    UInt64 timeStamp2 = 0;
+    if (fdi2.IsOpen)
+      timeStamp2 = FILETIME_to_UInt64(fdi2.Info.ftLastWriteTime);
+
+    if (timeStampOriginal > timeStamp2)
+    {
+      const UInt64 k_Ntfs_prec = 10000000;
+      UInt64 timeStamp = timeStampOriginal;
+      const UInt32 k_precs[] = { 60 * 60, 60, 2, 1 };
+      for (unsigned i = 0; i < ARRAY_SIZE(k_precs); i++)
+      {
+        timeStamp = timeStampOriginal;
+        const UInt64 prec = k_Ntfs_prec * k_precs[i];
+        // timeStamp += prec - 1; // for rounding up
+        timeStamp /= prec;
+        timeStamp *= prec;
+        if (timeStamp > timeStamp2)
+          break;
+      }
+
+      if (timeStamp != timeStampOriginal
+          && timeStamp > timeStamp2)
+      {
+        FILETIME mTime;
+        UInt64_TO_FILETIME(timeStamp, mTime);
+        // NDir::SetFileAttrib(path, 0);
+        {
+          NIO::COutFile outFile;
+          if (!outFile.Open(path, OPEN_EXISTING))
+          {
+            panel.MessageBox_LastError();
+            return;
+            // if (::GetLastError() != ERROR_SUCCESS)
+            // throw "open error";
+          }
+          else
+          {
+            const UInt64 cTime = FILETIME_to_UInt64(fdi.Info.ftCreationTime);
+            if (cTime > timeStamp)
+              outFile.SetTime(&mTime, NULL, &mTime);
+            else
+              outFile.SetMTime(&mTime);
+          }
+        }
+      }
+    }
+
     if (!SetFileAttrib(path, fdi.Info.dwFileAttributes | FILE_ATTRIBUTE_READONLY))
     {
       panel.MessageBox_LastError();

@@ -189,7 +189,17 @@ struct CLinkInfo
   bool isRelative;
   bool isWSL;
   UString linkPath;
-  
+
+  bool IsSymLink() const { return !isHardLink; }
+
+  CLinkInfo():
+    // IsCopyLink(false),
+    isHardLink(false),
+    isJunction(false),
+    isRelative(false),
+    isWSL(false)
+    {}
+
   void Clear()
   {
     // IsCopyLink = false;
@@ -291,10 +301,12 @@ class CArchiveExtractCallback:
     }
   } _fi;
 
-  bool _is_SymLink_in_Data;
+  // bool _is_SymLink_in_Data;
   bool _is_SymLink_in_Data_Linux; // false = WIN32, true = LINUX
 
-  bool _fileWasExtracted;
+  bool _needSetAttrib;
+  bool _isSymLinkCreated;
+  bool _itemFailure;
 
   UInt32 _index;
   UInt64 _curSize;
@@ -351,6 +363,8 @@ class CArchiveExtractCallback:
   HRESULT GetUnpackSize();
 
   FString Hash_GetFullFilePath();
+
+  void SetAttrib();
 
 public:
   HRESULT SendMessageError(const char *message, const FString &path);

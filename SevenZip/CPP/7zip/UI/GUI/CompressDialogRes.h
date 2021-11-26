@@ -20,6 +20,7 @@
 
 #define IDG_COMPRESS_NTFS                115
 #define IDC_COMPRESS_PATH_MODE           116
+#define IDC_COMPRESS_MEM_USE             117
 
 #define IDE_COMPRESS_PASSWORD1           120
 #define IDE_COMPRESS_PASSWORD2           121

@@ -25,7 +25,7 @@
 
 /* the following patch for some debian systems.
    Is it OK to define AT_HWCAP and AT_HWCAP2 here with these constant numbers? */
- 
+/*
 #if defined(__FreeBSD_kernel__) && defined(__GLIBC__)
   #ifndef AT_HWCAP
     #define AT_HWCAP 16
@@ -34,7 +34,7 @@
     #define AT_HWCAP2 26
   #endif
 #endif
-
+*/
 
 #ifdef MY_CPU_ARM_OR_ARM64
 #include <asm/hwcap.h>

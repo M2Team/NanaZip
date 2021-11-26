@@ -11,6 +11,8 @@
 #include "../../../Windows/FileName.h"
 #include "../../../Windows/System.h"
 
+#include "../../Common/MethodProps.h"
+
 #include "../FileManager/BrowseDialog.h"
 #include "../FileManager/FormatUtils.h"
 #include "../FileManager/SplitUtils.h"
@@ -191,19 +193,30 @@ static const EMethodID g_HashMethods[] =
   // , kCrc64
 };
 
+static const UInt32 kFF_Filter      = 1 << 0;
+static const UInt32 kFF_Solid       = 1 << 1;
+static const UInt32 kFF_MultiThread = 1 << 2;
+static const UInt32 kFF_Encrypt     = 1 << 3;
+static const UInt32 kFF_EncryptFileNames  = 1 << 4;
+static const UInt32 kFF_MemUse      = 1 << 5;
+static const UInt32 kFF_SFX         = 1 << 6;
+
 struct CFormatInfo
 {
   LPCSTR Name;
   UInt32 LevelsMask;
   unsigned NumMethods;
   const EMethodID *MethodIDs;
-  bool Filter;
-  bool Solid;
-  bool MultiThread;
-  bool SFX;
 
-  bool Encrypt;
-  bool EncryptFileNames;
+  UInt32 Flags;
+
+  bool Filter_() const { return (Flags & kFF_Filter) != 0; }
+  bool Solid_() const { return (Flags & kFF_Solid) != 0; }
+  bool MultiThread_() const { return (Flags & kFF_MultiThread) != 0; }
+  bool Encrypt_() const { return (Flags & kFF_Encrypt) != 0; }
+  bool EncryptFileNames_() const { return (Flags & kFF_EncryptFileNames) != 0; }
+  bool MemUse_() const { return (Flags & kFF_MemUse) != 0; }
+  bool SFX_() const { return (Flags & kFF_SFX) != 0; }
 };
 
 #define METHODS_PAIR(x) ARRAY_SIZE(x), x
@@ -215,62 +228,63 @@ static const CFormatInfo g_Formats[] =
     // (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     ((UInt32)1 << 10) - 1,
     // (UInt32)(Int32)-1,
-    0, 0,
-    false, false, true, false, false, false
+    0, NULL,
+    kFF_MultiThread | kFF_MemUse
   },
   {
     k7zFormat,
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_7zMethods),
-    true, true, true, true, true, true
+    kFF_Filter | kFF_Solid | kFF_MultiThread | kFF_Encrypt |
+    kFF_EncryptFileNames | kFF_MemUse | kFF_SFX
   },
   {
     "Zip",
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_ZipMethods),
-    false, false, true, false, true, false
+    kFF_MultiThread | kFF_Encrypt | kFF_MemUse
   },
   {
     "GZip",
     (1 << 1) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_GZipMethods),
-    false, false, false, false, false, false
+    kFF_MemUse
   },
   {
     "BZip2",
     (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_BZip2Methods),
-    false, false, true, false, false, false
+    kFF_MultiThread | kFF_MemUse
   },
   {
     "xz",
     (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_XzMethods),
-    false, true, true, false, false, false
+    kFF_Solid | kFF_MultiThread | kFF_MemUse
   },
   {
     "Swfc",
     (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_SwfcMethods),
-    false, false, true, false, false, false
+    0
   },
   {
     "Tar",
     (1 << 0),
-    0, 0,
-    false, false, false, false, false, false
+    0, NULL,
+    0
   },
   {
     "wim",
     (1 << 0),
-    0, 0,
-    false, false, false, false, false, false
+    0, NULL,
+    0
   },
   {
     "Hash",
     (0 << 0),
     METHODS_PAIR(g_HashMethods),
-    false, false, false, false, false, false
+    0
   }
 };
 
@@ -371,13 +385,11 @@ bool CCompressDialog::OnInit()
   {
     UInt64 size = (UInt64)(sizeof(size_t)) << 29;
     _ramSize_Defined = NSystem::GetRamSize(size);
-    // size = 100 << 20; // for debug only;
+    // size = (UInt64)3 << 62; // for debug only;
     _ramSize = size;
     const UInt64 kMinUseSize = (1 << 26);
     if (size < kMinUseSize)
       size = kMinUseSize;
-
-    _ramUsage_Limit = size / 32 * 30; // it's relaxed limit for user defined settings
 
     unsigned bits = sizeof(size_t) * 8;
     if (bits == 32)
@@ -387,7 +399,10 @@ bool CCompressDialog::OnInit()
         size = limit2;
     }
 
-    _ramUsage_Auto  = size / 32 * 28; // it's same as in auto usage limit in handlers
+    _ramSize_Reduced = size;
+
+    // 80% - is auto usage limit in handlers
+    _ramUsage_Auto = Calc_From_Val_Percents(size, 80);
   }
 
   _password1Control.Attach(GetItem(IDE_COMPRESS_PASSWORD1));
@@ -405,6 +420,7 @@ bool CCompressDialog::OnInit()
   m_Order.Attach(GetItem(IDC_COMPRESS_ORDER));
   m_Solid.Attach(GetItem(IDC_COMPRESS_SOLID));
   m_NumThreads.Attach(GetItem(IDC_COMPRESS_THREADS));
+  m_MemUse.Attach(GetItem(IDC_COMPRESS_MEM_USE));
 
   m_UpdateMode.Attach(GetItem(IDC_COMPRESS_UPDATE_MODE));
   m_PathMode.Attach(GetItem(IDC_COMPRESS_PATH_MODE));
@@ -542,7 +558,7 @@ bool CCompressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
 void CCompressDialog::CheckSFXControlsEnable()
 {
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
-  bool enable = fi.SFX;
+  bool enable = fi.SFX_();
   if (enable)
   {
     const int methodID = GetMethodID();
@@ -577,11 +593,12 @@ void CCompressDialog::FormatChanged()
   SetLevel();
   SetSolidBlockSize();
   SetParams();
+  SetMemUseCombo();
   SetNumThreads();
 
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
-  Info.SolidIsSpecified = fi.Solid;
-  Info.EncryptHeadersIsAllowed = fi.EncryptFileNames;
+  Info.SolidIsSpecified = fi.Solid_();
+  Info.EncryptHeadersIsAllowed = fi.EncryptFileNames_();
 
   /*
   const bool multiThreadEnable = fi.MultiThread;
@@ -612,19 +629,20 @@ void CCompressDialog::FormatChanged()
   }
   // CheckVolumeEnable();
 
-  EnableItem(IDG_COMPRESS_ENCRYPTION, fi.Encrypt);
+  const bool encrypt = fi.Encrypt_();
+  EnableItem(IDG_COMPRESS_ENCRYPTION, encrypt);
 
-  EnableItem(IDT_PASSWORD_ENTER, fi.Encrypt);
-  EnableItem(IDT_PASSWORD_REENTER, fi.Encrypt);
-  EnableItem(IDE_COMPRESS_PASSWORD1, fi.Encrypt);
-  EnableItem(IDE_COMPRESS_PASSWORD2, fi.Encrypt);
-  EnableItem(IDX_PASSWORD_SHOW, fi.Encrypt);
+  EnableItem(IDT_PASSWORD_ENTER, encrypt);
+  EnableItem(IDT_PASSWORD_REENTER, encrypt);
+  EnableItem(IDE_COMPRESS_PASSWORD1, encrypt);
+  EnableItem(IDE_COMPRESS_PASSWORD2, encrypt);
+  EnableItem(IDX_PASSWORD_SHOW, encrypt);
 
-  EnableItem(IDT_COMPRESS_ENCRYPTION_METHOD, fi.Encrypt);
-  EnableItem(IDC_COMPRESS_ENCRYPTION_METHOD, fi.Encrypt);
-  EnableItem(IDX_COMPRESS_ENCRYPT_FILE_NAMES, fi.EncryptFileNames);
+  EnableItem(IDT_COMPRESS_ENCRYPTION_METHOD, encrypt);
+  EnableItem(IDC_COMPRESS_ENCRYPTION_METHOD, encrypt);
+  EnableItem(IDX_COMPRESS_ENCRYPT_FILE_NAMES, fi.EncryptFileNames_());
 
-  ShowItem_Bool(IDX_COMPRESS_ENCRYPT_FILE_NAMES, fi.EncryptFileNames);
+  ShowItem_Bool(IDX_COMPRESS_ENCRYPT_FILE_NAMES, fi.EncryptFileNames_());
 
   SetEncryptionMethod();
   SetMemoryUsage();
@@ -766,9 +784,10 @@ static bool IsAsciiString(const UString &s)
 
 static void AddSize_MB(UString &s, UInt64 size)
 {
-  char temp[32];
-  ConvertUInt64ToString((size + (1 << 20) - 1) >> 20, temp);
-  s += temp;
+  const UInt64 v2 = size + ((UInt32)1 << 20) - 1;
+  if (size <= v2)
+    size = v2;
+  s.Add_UInt64(size >> 20);
   s += " MB";
 }
 
@@ -792,7 +811,7 @@ void SetErrorMessage_MemUsage(UString &s, UInt64 reqSize, UInt64 ramSize, UInt64
   AddSize_MB(s, ramSize);
   s += " : RAM";
 
-  if (ramLimit != 0)
+  // if (ramLimit != 0)
   {
     s.Add_LF();
     AddSize_MB(s, ramLimit);
@@ -841,21 +860,24 @@ void CCompressDialog::OnOK()
     UInt64 decompressMem;
     const UInt64 memUsage = GetMemoryUsage_DecompMem(decompressMem);
     if (memUsage != (UInt64)(Int64)-1)
-    if (_ramSize_Defined && memUsage > _ramUsage_Limit)
     {
-      UString s;
-      UString s2 = LangString(IDT_COMPRESS_MEMORY);
-      if (s2.IsEmpty())
-        GetItemText(IDT_COMPRESS_MEMORY, s2);
-      SetErrorMessage_MemUsage(s, memUsage, _ramSize, _ramUsage_Limit, s2);
-      //MessageBoxError(s);
-      if (IDOK != ::MessageBoxW(
-          *this,
-          s,
-          L"NanaZip",
-          MB_ICONWARNING | MB_OKCANCEL))
+      const UInt64 limit = Get_MemUse_Bytes();
+      if (memUsage > limit)
       {
-          return;
+        UString s;
+        UString s2 = LangString(IDT_COMPRESS_MEMORY);
+        if (s2.IsEmpty())
+          GetItemText(IDT_COMPRESS_MEMORY, s2);
+        SetErrorMessage_MemUsage(s, memUsage, _ramSize, limit, s2);
+        //MessageBoxError(s);
+        if (IDOK != ::MessageBoxW(
+            *this,
+            s,
+            L"NanaZip",
+            MB_ICONWARNING | MB_OKCANCEL))
+        {
+            return;
+        }
       }
     }
   }
@@ -882,6 +904,18 @@ void CCompressDialog::OnOK()
   Info.Order = GetOrderSpec();
   Info.OrderMode = GetOrderMode();
   Info.NumThreads = GetNumThreadsSpec();
+
+  Info.MemUsage.Clear();
+  {
+    const UString mus = Get_MemUse_Spec();
+    if (!mus.IsEmpty())
+    {
+      NCompression::CMemUse mu;
+      mu.Parse(mus);
+      if (mu.IsDefined)
+        Info.MemUsage = mu;
+    }
+  }
 
   {
     // Info.SolidIsSpecified = g_Formats[GetStaticFormatIndex()].Solid;
@@ -1058,6 +1092,18 @@ bool CCompressDialog::OnCommand(int code, int itemID, LPARAM lParam)
 
       case IDC_COMPRESS_THREADS:
       {
+        SetMemoryUsage();
+        return true;
+      }
+
+      case IDC_COMPRESS_MEM_USE:
+      {
+        /* we want to change the reported threads for Auto line
+           and keep selected NumThreads option
+           So we save selected NumThreads option in memory */
+        SaveOptionsInMem();
+
+        SetNumThreads(); // we want to change the reported threads for Auto line only
         SetMemoryUsage();
         return true;
       }
@@ -1439,22 +1485,19 @@ static const size_t k_Auto_Dict = (size_t)0 - 1;
 
 int CCompressDialog::AddDict2(size_t sizeReal, size_t sizeShow)
 {
-  Byte c = 0;
+  char c = 0;
   unsigned moveBits = 0;
        if ((sizeShow & 0xFFFFF) == 0) { moveBits = 20; c = 'M'; }
   else if ((sizeShow &   0x3FF) == 0) { moveBits = 10; c = 'K'; }
-  char s[32];
-  ConvertUInt64ToString(sizeShow >> moveBits, s);
-  unsigned pos = MyStringLen(s);
-  s[pos++] = ' ';
+  AString s;
+  s.Add_UInt64(sizeShow >> moveBits);
+  s.Add_Space();
   if (moveBits != 0)
-    s[pos++] = c;
-  s[pos++] = 'B';
-  s[pos++] = 0;
-  AString s2 (s);
+    s += c;
+  s += 'B';
   if (sizeReal == k_Auto_Dict)
-    Modify_Auto(s2);
-  const int index = (int)ComboBox_AddStringAscii(m_Dictionary, s2);
+    Modify_Auto(s);
+  const int index = (int)ComboBox_AddStringAscii(m_Dictionary, s);
   m_Dictionary.SetItemData(index, sizeReal);
   return index;
 }
@@ -1835,22 +1878,18 @@ static UInt64 Get_Lzma2_ChunkSize(UInt64 dict)
 }
 
 
-static void Add_Size(AString &s2, UInt64 val)
+static void Add_Size(AString &s, UInt64 val)
 {
   unsigned moveBits = 0;
-  Byte c = 0;
+  char c = 0;
        if ((val & 0x3FFFFFFF) == 0) { moveBits = 30; c = 'G'; }
   else if ((val &    0xFFFFF) == 0) { moveBits = 20; c = 'M'; }
   else if ((val &      0x3FF) == 0) { moveBits = 10; c = 'K'; }
-  char s[32];
-  ConvertUInt64ToString(val >> moveBits, s);
-  unsigned pos = MyStringLen(s);
-  s[pos++] = ' ';
+  s.Add_UInt64(val >> moveBits);
+  s.Add_Space();
   if (moveBits != 0)
-    s[pos++] = c;
-  s[pos++] = 'B';
-  s[pos++] = 0;
-  s2 += s;
+    s += c;
+  s += 'B';
 }
 
 
@@ -1860,7 +1899,7 @@ void CCompressDialog::SetSolidBlockSize2()
   _auto_Solid = 1 << 20;
 
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
-  if (!fi.Solid)
+  if (!fi.Solid_())
     return;
 
   const UInt32 level = GetLevel2();
@@ -1981,7 +2020,7 @@ void CCompressDialog::SetNumThreads2()
 
   m_NumThreads.ResetContent();
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
-  if (!fi.MultiThread)
+  if (!fi.MultiThread_())
     return;
 
   const UInt32 numHardwareThreads = NSystem::GetNumberOfProcessors();
@@ -2033,6 +2072,8 @@ void CCompressDialog::SetNumThreads2()
   if (autoThreads > numAlgoThreadsMax)
     autoThreads = numAlgoThreadsMax;
 
+  const UInt64 memUse_Limit = Get_MemUse_Bytes();
+
   if (autoThreads > 1 && _ramSize_Defined)
   {
     if (isZip)
@@ -2042,7 +2083,7 @@ void CCompressDialog::SetNumThreads2()
         const UInt64 dict64 = GetDict2();
         UInt64 decompressMemory;
         const UInt64 usage = GetMemoryUsage_Threads_Dict_DecompMem(autoThreads, dict64, decompressMemory);
-        if (usage <= _ramUsage_Auto)
+        if (usage <= memUse_Limit)
           break;
       }
     }
@@ -2056,7 +2097,7 @@ void CCompressDialog::SetNumThreads2()
         autoThreads = numBlockThreads * numThreads1;
         UInt64 decompressMemory;
         const UInt64 usage = GetMemoryUsage_Threads_Dict_DecompMem(autoThreads, dict64, decompressMemory);
-        if (usage <= _ramUsage_Auto)
+        if (usage <= memUse_Limit)
           break;
       }
       autoThreads = numBlockThreads * numThreads1;
@@ -2092,6 +2133,174 @@ void CCompressDialog::SetNumThreads2()
 }
 
 
+static void AddMemSize(UString &res, UInt64 size)
+{
+  char c;
+  unsigned moveBits = 0;
+  if (size >= ((UInt64)1 << 31) && (size & 0x3FFFFFFF) == 0)
+    { moveBits = 30; c = 'G'; }
+  else // if (size >= ((UInt32)1 << 21) && (size & 0xFFFFF) == 0)
+    { moveBits = 20; c = 'M'; }
+  // else { moveBits = 10; c = 'K'; }
+  res.Add_UInt64(size >> moveBits);
+  res.Add_Space();
+  if (moveBits != 0)
+    res += c;
+  res += 'B';
+}
+
+
+int CCompressDialog::AddMemComboItem(UInt64 val, bool isPercent, bool isDefault)
+{
+  UString sUser;
+  UString sRegistry;
+  if (isPercent)
+  {
+    UString s;
+    s.Add_UInt64(val);
+    s += '%';
+    if (isDefault)
+      sUser = "* ";
+    else
+      sRegistry = s;
+    sUser += s;
+  }
+  else
+  {
+    AddMemSize(sUser, val);
+    sRegistry = sUser;
+    for (;;)
+    {
+      int pos = sRegistry.Find(L' ');
+      if (pos < 0)
+        break;
+      sRegistry.Delete(pos);
+    }
+    if (!sRegistry.IsEmpty())
+      if (sRegistry.Back() == 'B')
+        sRegistry.DeleteBack();
+  }
+  const unsigned dataIndex = _memUse_Strings.Add(sRegistry);
+  const int index = (int)m_MemUse.AddString(sUser);
+  m_MemUse.SetItemData(index, dataIndex);
+  return index;
+}
+
+
+
+void CCompressDialog::SetMemUseCombo()
+{
+  _memUse_Strings.Clear();
+  m_MemUse.ResetContent();
+  const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
+
+  {
+    const bool enable = fi.MemUse_();
+    ShowItem_Bool(IDT_COMPRESS_MEMORY, enable);
+    ShowItem_Bool(IDT_COMPRESS_MEMORY_VALUE, enable);
+    ShowItem_Bool(IDT_COMPRESS_MEMORY_DE, enable);
+    ShowItem_Bool(IDT_COMPRESS_MEMORY_DE_VALUE, enable);
+    ShowItem_Bool(IDC_COMPRESS_MEM_USE, enable);
+    EnableItem(IDC_COMPRESS_MEM_USE, enable);
+    if (!enable)
+      return;
+  }
+
+  UInt64 curMem_Bytes = 0;
+  UInt64 curMem_Percents = 0;
+  bool needSetCur_Bytes = false;
+  bool needSetCur_Percents = false;
+  {
+    const NCompression::CFormatOptions &fo = Get_FormatOptions();
+    if (!fo.MemUse.IsEmpty())
+    {
+      NCompression::CMemUse mu;
+      mu.Parse(fo.MemUse);
+      if (mu.IsDefined)
+      {
+        if (mu.IsPercent)
+        {
+          curMem_Percents = mu.Val;
+          needSetCur_Percents = true;
+        }
+        else
+        {
+          curMem_Bytes = mu.GetBytes(_ramSize_Reduced);
+          needSetCur_Bytes = true;
+        }
+      }
+    }
+  }
+
+
+  // 80% - is auto usage limit in handlers
+  AddMemComboItem(80, true, true);
+  m_MemUse.SetCurSel(0);
+
+  {
+    for (unsigned i = 10;; i += 10)
+    {
+      UInt64 size = i;
+      if (i > 100)
+        size = (UInt64)(Int64)-1;
+      if (needSetCur_Percents && size >= curMem_Percents)
+      {
+        const int index = AddMemComboItem(curMem_Percents, true);
+        m_MemUse.SetCurSel(index);
+        needSetCur_Percents = false;
+        if (size == curMem_Percents)
+          continue;
+      }
+      if (size == (UInt64)(Int64)-1)
+        break;
+      AddMemComboItem(size, true);
+    }
+  }
+  {
+    for (unsigned i = (27) * 2;; i++)
+    {
+      UInt64 size = (UInt64)(2 + (i & 1)) << (i / 2);
+      if (i > (20 + sizeof(size_t) * 3 - 1) * 2)
+        size = (UInt64)(Int64)-1;
+      if (needSetCur_Bytes && size >= curMem_Bytes)
+      {
+        const int index = AddMemComboItem(curMem_Bytes);
+        m_MemUse.SetCurSel(index);
+        needSetCur_Bytes = false;
+        if (size == curMem_Bytes)
+          continue;
+      }
+      if (size == (UInt64)(Int64)-1)
+        break;
+      AddMemComboItem(size);
+    }
+  }
+}
+
+
+UString CCompressDialog::Get_MemUse_Spec()
+{
+  if (m_MemUse.GetCount() < 1)
+    return UString();
+  return _memUse_Strings[(unsigned)m_MemUse.GetItemData_of_CurSel()];
+}
+
+
+UInt64 CCompressDialog::Get_MemUse_Bytes()
+{
+  const UString mus = Get_MemUse_Spec();
+  NCompression::CMemUse mu;
+  if (!mus.IsEmpty())
+  {
+    mu.Parse(mus);
+    if (mu.IsDefined)
+      return mu.GetBytes(_ramSize_Reduced);
+  }
+  return _ramUsage_Auto; // _ramSize_Reduced; // _ramSize;;
+}
+
+
+
 UInt64 CCompressDialog::GetMemoryUsage_DecompMem(UInt64 &decompressMemory)
 {
   return GetMemoryUsage_Dict_DecompMem(GetDict2(), decompressMemory);
@@ -2123,7 +2332,7 @@ UInt64 CCompressDialog::GetMemoryUsage_Threads_Dict_DecompMem(UInt32 numThreads,
   UInt64 size = 0;
 
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
-  if (fi.Filter && level >= 9)
+  if (fi.Filter_() && level >= 9)
     size += (12 << 20) * 2 + (5 << 20);
   // UInt32 numThreads = GetNumThreads2();
 
@@ -2258,6 +2467,34 @@ UInt64 CCompressDialog::GetMemoryUsage_Threads_Dict_DecompMem(UInt32 numThreads,
 }
 
 
+
+static void AddMemUsage(UString &s, UInt64 v)
+{
+  const char *post;
+  if (v <= ((UInt64)16 << 30))
+  {
+    v = (v + (1 << 20) - 1) >> 20;
+    post = "MB";
+  }
+  else if (v <= ((UInt64)64 << 40))
+  {
+    v = (v + (1 << 30) - 1) >> 30;
+    post = "GB";
+  }
+  else
+  {
+    const UInt64 v2 = v + ((UInt64)1 << 40) - 1;
+    if (v <= v2)
+      v = v2;
+    v >>= 40;
+    post = "TB";
+  }
+  s.Add_UInt64(v);
+  s.Add_Space();
+  s += post;
+}
+
+
 void CCompressDialog::PrintMemUsage(UINT res, UInt64 value)
 {
   if (value == (UInt64)(Int64)-1)
@@ -2265,21 +2502,34 @@ void CCompressDialog::PrintMemUsage(UINT res, UInt64 value)
     SetItemText(res, TEXT("?"));
     return;
   }
-  TCHAR s[32];
-  if (value <= ((UInt64)16 << 30))
+  UString s;
+  AddMemUsage(s, value);
+  if (res == IDT_COMPRESS_MEMORY_VALUE)
   {
-    value = (value + (1 << 20) - 1) >> 20;
-    ConvertUInt64ToString(value, s);
-    lstrcat(s, TEXT(" MB"));
-  }
-  else
-  {
-    value = (value + (1 << 30) - 1) >> 30;
-    ConvertUInt64ToString(value, s);
-    lstrcat(s, TEXT(" GB"));
+    const UString mus = Get_MemUse_Spec();
+    NCompression::CMemUse mu;
+    if (!mus.IsEmpty())
+      mu.Parse(mus);
+    if (mu.IsDefined)
+    {
+      s += " / ";
+      AddMemUsage(s, mu.GetBytes(_ramSize_Reduced));
+    }
+    else if (_ramSize_Defined)
+    {
+      s += " / ";
+      AddMemUsage(s, _ramUsage_Auto);
+    }
+
+    if (_ramSize_Defined)
+    {
+      s += " / ";
+      AddMemUsage(s, _ramSize);
+    }
   }
   SetItemText(res, s);
 }
+
 
 void CCompressDialog::SetMemoryUsage()
 {
@@ -2338,6 +2588,7 @@ void CCompressDialog::SaveOptionsInMem()
   fo.EncryptionMethod = GetEncryptionMethodSpec();
   fo.NumThreads = GetNumThreadsSpec();
   fo.BlockLogSize = GetBlockSizeSpec();
+  fo.MemUse = Get_MemUse_Spec();
 }
 
 unsigned CCompressDialog::GetFormatIndex()

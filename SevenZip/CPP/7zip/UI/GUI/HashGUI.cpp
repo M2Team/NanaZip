@@ -75,11 +75,10 @@ void AddSizeValue(UString &s, UInt64 value)
           if (value >= ((UInt64)10 << 30)) { value >>= 30; c = 'G'; }
     else  if (value >=         (10 << 20)) { value >>= 20; c = 'M'; }
     else                                   { value >>= 10; c = 'K'; }
-    char sz[32];
-    ConvertUInt64ToString(value, sz);
+
     s += " (";
-    s += sz;
-    s += " ";
+    s.Add_UInt64(value);
+    s.Add_Space();
     s += (wchar_t)c;
     s += "iB)";
   }

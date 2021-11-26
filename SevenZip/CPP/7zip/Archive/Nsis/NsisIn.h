@@ -176,6 +176,7 @@ private:
   int BadCmd; // -1: no bad command; in another cases lowest bad command id
 
   bool IsPark() const { return NsisType >= k_NsisType_Park1; }
+  bool IsNsis3_OrHigher() const { return NsisType == k_NsisType_Nsis3; }
 
   UInt64 _fileSize;
   

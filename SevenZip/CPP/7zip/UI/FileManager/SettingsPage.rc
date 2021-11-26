@@ -2,7 +2,7 @@
 #include "../../GuiCommon.rc"
 
 #define xc 240
-#define yc 120
+#define yc 250
 
 IDD_SETTINGS  MY_PAGE
 #include "SettingsPage2.rc"

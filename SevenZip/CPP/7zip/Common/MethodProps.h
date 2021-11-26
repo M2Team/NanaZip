@@ -14,6 +14,17 @@
 
 // UInt64 GetMemoryUsage_LZMA(UInt32 dict, bool isBt, UInt32 numThreads);
 
+inline UInt64 Calc_From_Val_Percents_Less100(UInt64 val, UInt64 percents)
+{
+  if (percents == 0)
+    return 0;
+  if (val <= (UInt64)(Int64)-1 / percents)
+    return val * percents / 100;
+  return val / 100 * percents;
+}
+
+UInt64 Calc_From_Val_Percents(UInt64 val, UInt64 percents);
+
 bool StringToBool(const wchar_t *s, bool &res);
 HRESULT PROPVARIANT_to_bool(const PROPVARIANT &prop, bool &dest);
 unsigned ParseStringToUInt32(const UString &srcString, UInt32 &number);

@@ -118,7 +118,9 @@ struct CDirItem
   UInt32 GetPosixAttrib() const
   {
     UInt32 v = IsDir() ? MY_LIN_S_IFDIR : MY_LIN_S_IFREG;
-    v |= (IsReadOnly() ? 0555 : 0777);
+    /* 21.06: as WSL we allow write permissions (0222) for directories even for (FILE_ATTRIBUTE_READONLY).
+       So extracting at Linux will be allowed to write files inside (0777) directories. */
+    v |= ((IsReadOnly() && !IsDir()) ? 0555 : 0777);
     return v;
   }
   #endif

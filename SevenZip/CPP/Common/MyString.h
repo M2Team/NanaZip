@@ -367,6 +367,7 @@ public:
   AString &operator+=(const AString &s);
 
   void Add_UInt32(UInt32 v);
+  void Add_UInt64(UInt64 v);
 
   void SetFrom(const char *s, unsigned len); // no check
   void SetFrom_CalcLen(const char *s, unsigned len);
@@ -633,6 +634,7 @@ public:
   UString &operator+=(const AString &s) { return operator+=(s.Ptr()); }
 
   void Add_UInt32(UInt32 v);
+  void Add_UInt64(UInt64 v);
 
   UString Mid(unsigned startIndex, unsigned count) const { return UString(count, _chars + startIndex); }
   UString Left(unsigned count) const { return UString(count, *this); }

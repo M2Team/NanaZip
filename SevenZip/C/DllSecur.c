@@ -1,5 +1,5 @@
 /* DllSecur.c -- DLL loading security
-2018-02-21 : Igor Pavlov : Public domain */
+2021-11-18 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
@@ -43,7 +43,7 @@ void My_SetDefaultDllDirectories()
     if (!GetVersionEx(&vi) || vi.dwMajorVersion != 6 || vi.dwMinorVersion != 0)
     {
       Func_SetDefaultDllDirectories setDllDirs = (Func_SetDefaultDllDirectories)
-          GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "SetDefaultDllDirectories");
+          (void(*)())GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "SetDefaultDllDirectories");
       if (setDllDirs)
         if (setDllDirs(MY_LOAD_LIBRARY_SEARCH_SYSTEM32 | MY_LOAD_LIBRARY_SEARCH_USER_DIRS))
           return;
@@ -66,7 +66,7 @@ void LoadSecurityDlls()
     if (!GetVersionEx(&vi) || vi.dwMajorVersion != 6 || vi.dwMinorVersion != 0)
     {
       Func_SetDefaultDllDirectories setDllDirs = (Func_SetDefaultDllDirectories)
-          GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "SetDefaultDllDirectories");
+          (void(*)())GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "SetDefaultDllDirectories");
       if (setDllDirs)
         if (setDllDirs(MY_LOAD_LIBRARY_SEARCH_SYSTEM32 | MY_LOAD_LIBRARY_SEARCH_USER_DIRS))
           return;

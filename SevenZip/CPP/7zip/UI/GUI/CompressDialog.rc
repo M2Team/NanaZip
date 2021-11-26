@@ -29,7 +29,7 @@
 #define g0xs (gSize - g1xs)
 #define g1x  (m + g0xs)
 
-#define g3xs 40
+#define g3xs 52
 #define g2xs (gSize - g3xs)
 #define g3x  (m + g2xs)
 
@@ -82,14 +82,15 @@ BEGIN
 
   LTEXT     "Number of CPU &threads:", IDT_COMPRESS_THREADS, m, 167, g0xs, 8
   COMBOBOX  IDC_COMPRESS_THREADS,  g1x, 165, g1xs - 35, 140, MY_COMBO
-  RTEXT     "", IDT_COMPRESS_HARDWARE_THREADS, g1x + g1xs - 35 + 10, 167, 25, 8
+  RTEXT     "", IDT_COMPRESS_HARDWARE_THREADS, g1x + g1xs - 35 + 10, 167, 25, MY_TEXT_NOPREFIX
 
   
-  LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY,      m, 190, g2xs, 8
-  RTEXT     "", IDT_COMPRESS_MEMORY_VALUE,    g3x, 190, g3xs, 8
+  LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY,      m, 184, g2xs, 8
+  COMBOBOX  IDC_COMPRESS_MEM_USE,  g3x, 188, g3xs, 140, MY_COMBO
+  LTEXT     "", IDT_COMPRESS_MEMORY_VALUE,    m, 194, g2xs, MY_TEXT_NOPREFIX
   
-  LTEXT     "Memory usage for Decompressing:", IDT_COMPRESS_MEMORY_DE, m, 206, g2xs, 8
-  RTEXT     "", IDT_COMPRESS_MEMORY_DE_VALUE, g3x, 206, g3xs, 8
+  LTEXT     "Memory usage for Decompressing:", IDT_COMPRESS_MEMORY_DE, m, 208, g2xs, 8
+  RTEXT     "", IDT_COMPRESS_MEMORY_DE_VALUE, g3x, 208, g3xs, MY_TEXT_NOPREFIX
 
 
   LTEXT     "Split to &volumes, bytes:", IDT_SPLIT_TO_VOLUMES, m, 225, gSize, 8

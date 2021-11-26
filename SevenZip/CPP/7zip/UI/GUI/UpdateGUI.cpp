@@ -61,7 +61,7 @@ HRESULT CThreadUpdating::ProcessVirt()
   return HRESULT_FROM_WIN32(ei.SystemError);
 }
 
-static void AddProp(CObjectVector<CProperty> &properties, const char *name, const UString &value)
+static void AddProp_UString(CObjectVector<CProperty> &properties, const char *name, const UString &value)
 {
   CProperty prop;
   prop.Name = name;
@@ -69,16 +69,16 @@ static void AddProp(CObjectVector<CProperty> &properties, const char *name, cons
   properties.Add(prop);
 }
 
-static void AddProp(CObjectVector<CProperty> &properties, const char *name, UInt32 value)
+static void AddProp_UInt32(CObjectVector<CProperty> &properties, const char *name, UInt32 value)
 {
-  char tmp[32];
-  ConvertUInt64ToString(value, tmp);
-  AddProp(properties, name, UString(tmp));
+  UString s;
+  s.Add_UInt32(value);
+  AddProp_UString(properties, name, s);
 }
 
-static void AddProp(CObjectVector<CProperty> &properties, const char *name, bool value)
+static void AddProp_bool(CObjectVector<CProperty> &properties, const char *name, bool value)
 {
-  AddProp(properties, name, UString(value ? "on": "off"));
+  AddProp_UString(properties, name, UString(value ? "on": "off"));
 }
 
 static bool IsThereMethodOverride(bool is7z, const UString &propertiesString)
@@ -126,15 +126,15 @@ static void ParseAndAddPropertires(CObjectVector<CProperty> &properties,
   }
 }
 
-static UString GetNumInBytesString(UInt64 v)
+
+static void AddProp_Size(CObjectVector<CProperty> &properties, const char *name, const UInt64 size)
 {
-  char s[32];
-  ConvertUInt64ToString(v, s);
-  size_t len = MyStringLen(s);
-  s[len++] = 'B';
-  s[len] = '\0';
-  return UString(s);
+  UString s;
+  s.Add_UInt64(size);
+  s += 'b';
+  AddProp_UString(properties, name, s);
 }
+
 
 static void SetOutProperties(
     CObjectVector<CProperty> &properties,
@@ -150,21 +150,22 @@ static void SetOutProperties(
     UInt32 numThreads,
     const UString &encryptionMethod,
     bool encryptHeadersIsAllowed, bool encryptHeaders,
+    const NCompression::CMemUse &memUse,
     bool /* sfxMode */)
 {
   if (level != (UInt32)(Int32)-1)
-    AddProp(properties, "x", (UInt32)level);
+    AddProp_UInt32(properties, "x", (UInt32)level);
   if (setMethod)
   {
     if (!method.IsEmpty())
-      AddProp(properties, is7z ? "0": "m", method);
+      AddProp_UString(properties, is7z ? "0": "m", method);
     if (dict64 != (UInt64)(Int64)-1)
     {
       AString name;
       if (is7z)
         name = "0";
       name += (orderMode ? "mem" : "d");
-      AddProp(properties, name, GetNumInBytesString(dict64));
+      AddProp_Size(properties, name, dict64);
     }
     if (order != (UInt32)(Int32)-1)
     {
@@ -172,21 +173,37 @@ static void SetOutProperties(
       if (is7z)
         name = "0";
       name += (orderMode ? "o" : "fb");
-      AddProp(properties, name, (UInt32)order);
+      AddProp_UInt32(properties, name, (UInt32)order);
     }
   }
 
   if (!encryptionMethod.IsEmpty())
-    AddProp(properties, "em", encryptionMethod);
+    AddProp_UString(properties, "em", encryptionMethod);
 
   if (encryptHeadersIsAllowed)
-    AddProp(properties, "he", encryptHeaders);
+    AddProp_bool(properties, "he", encryptHeaders);
   if (solidIsSpecified)
-    AddProp(properties, "s", GetNumInBytesString(solidBlockSize));
+    AddProp_Size(properties, "s", solidBlockSize);
+
   if (
       // multiThreadIsAllowed &&
       numThreads != (UInt32)(Int32)-1)
-    AddProp(properties, "mt", numThreads);
+    AddProp_UInt32(properties, "mt", numThreads);
+
+  if (memUse.IsDefined)
+  {
+    const char *kMemUse = "memuse";
+    if (memUse.IsPercent)
+    {
+      UString s;
+      // s += 'p'; // for debug: alternate percent method
+      s.Add_UInt64(memUse.Val);
+      s += '%';
+      AddProp_UString(properties, kMemUse, s);
+    }
+    else
+      AddProp_Size(properties, kMemUse, memUse.Val);
+  }
 }
 
 struct C_UpdateMode_ToAction_Pair
@@ -408,6 +425,7 @@ static HRESULT ShowDialog(
       di.NumThreads,
       di.EncryptionMethod,
       di.EncryptHeadersIsAllowed, di.EncryptHeaders,
+      di.MemUsage,
       di.SFXMode);
 
   options.OpenShareForWrite = di.OpenShareForWrite;

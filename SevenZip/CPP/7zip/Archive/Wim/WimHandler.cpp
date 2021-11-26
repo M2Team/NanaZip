@@ -1209,6 +1209,12 @@ STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
       RINOK(ParsePropToUInt32(L"", prop, image));
       _defaultImageNumber = image;
     }
+    else if (name.IsPrefixedBy_Ascii_NoCase("mt"))
+    {
+    }
+    else if (name.IsPrefixedBy_Ascii_NoCase("memuse"))
+    {
+    }
     else
       return E_INVALIDARG;
   }

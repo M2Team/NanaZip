@@ -8,6 +8,36 @@
 
 using namespace NWindows;
 
+UInt64 Calc_From_Val_Percents(UInt64 val, UInt64 percents)
+{
+  // if (percents == 0) return 0;
+  const UInt64 q = percents / 100;
+  const UInt32 r = (UInt32)(percents % 100);
+  UInt64 res = 0;
+  
+  if (q != 0)
+  {
+    if (val > (UInt64)(Int64)-1 / q)
+      return (UInt64)(Int64)-1;
+    res = val * q;
+  }
+
+  if (r != 0)
+  {
+    UInt64 v2;
+    if (val <= (UInt64)(Int64)-1 / r)
+      v2 = val * r / 100;
+    else
+      v2 = val / 100 * r;
+    res += v2;
+    if (res < v2)
+      return (UInt64)(Int64)-1;
+  }
+  
+  return res;
+}
+
+
 bool StringToBool(const wchar_t *s, bool &res)
 {
   if (s[0] == 0 || (s[0] == '+' && s[1] == 0) || StringsAreEqualNoCase_Ascii(s, "ON"))
@@ -119,7 +149,7 @@ HRESULT ParseMtProp2(const UString &name, const PROPVARIANT &prop, UInt32 &numTh
   UInt32 v = numThreads;
 
   /* we force up, if threads number specified
-     only `d` will force it down */ 
+     only `d` will force it down */
   bool force_loc = true;
   for (;;)
   {
