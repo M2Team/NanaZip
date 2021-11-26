@@ -42,17 +42,14 @@ supported.
         toolchain.
   - [x] Add the context menu support in Windows 10/11 File Explorer.
   - [x] New icons and minor UI tweaks.
-  - [x] Merge [NSIS](https://github.com/myfreeer/7z-build-nsis) support.
+  - [x] Merge NSIS script decompiling support from 
+        [7-Zip NSIS branch](https://github.com/myfreeer/7z-build-nsis).
         (Suggested by alanfox2000.)
   - [x] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
         (Suggested by AndromedaMelody.)
-  - [x] Try to add codec support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and 
-        Zstandard support from [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd).
-        (Suggested by fcharlie.)
-  - [x] Try to add compression support in the graphical user interface for 
-        Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard support from 
-        [7-Zip ZS](https://github.com/mcmilk/7-Zip-zstd). (Suggested by 
-        fcharlie.)
+  - [x] Add support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard
+        from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd). (Suggested
+        by fcharlie.)
   - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [ ] Provide NanaZip Installer for simplify the deployment.
   - [ ] Modernize the i18n implementation and migrate language files from 
@@ -98,12 +95,14 @@ requests and issues are welcome.**
 
 # Features
 
-- Inherit all features from 7-Zip 21.04.
+- Inherit all features from 7-Zip 21.06.
 - Packaging with MSIX for modern deployment experience.
 - Support the context menu in Windows 10/11 File Explorer.
-- Enable parsing the NSIS script support in the NSIS archives.
+- Enable NSIS script decompiling support for the NSIS archives. (Merged from 
+  [7-Zip NSIS branch](https://github.com/myfreeer/7z-build-nsis).)
 - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
-- Support Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs.
+- Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs. (Merged 
+  from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd).)
 
 # Documents
 
