@@ -5,6 +5,9 @@
 [![Latest Release Downloads](https://img.shields.io/github/downloads/M2Team/NanaZip/latest/total.svg)](https://github.com/M2Team/NanaZip/releases/latest)
 [![Total Downloads](https://img.shields.io/github/downloads/M2Team/NanaZip/total.svg)](https://github.com/M2Team/NanaZip/releases)
 
+[![Windows Store - Release Channel](https://img.shields.io/badge/Windows%20Store-Release%20Channel-blue)](https://www.microsoft.com/store/apps/9N8G7TSCL18R)
+[![Windows Store - Preview Channel](https://img.shields.io/badge/Windows%20Store-Preview%20Channel-blue)]()
+
 ![ContextMenu](Documents/ContextMenu.png)
 ![MainWindow](Documents/MainWindow.png)
 
@@ -17,6 +20,22 @@ experience, forked from the source code of well-known open source file archiver
 
 We need help to translate NanaZip into native languages that have not been 
 supported.
+
+# Features
+
+- Inherit all features from 7-Zip 21.06.
+- Packaging with MSIX for modern deployment experience.
+- Support the context menu in Windows 10/11 File Explorer.
+- Enable NSIS script decompiling support for the NSIS archives. (Merged from 
+  [7-Zip NSIS branch](https://github.com/myfreeer/7z-build-nsis).)
+- Provide 7-Zip execution alias for helping users to migrate to NanaZip.
+- Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs. (Merged 
+  from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd).)
+
+# System Requirements
+
+- Supported OS: Windows 10, version 1809 or later
+- Supported Platforms: x86, x86-64(AMD64) and ARM64.
 
 # Known issues
 
@@ -88,29 +107,12 @@ supported.
 **All kinds of contributions will be appreciated. All suggestions, pull 
 requests and issues are welcome.**
 
-# System Requirements
-
-- Supported OS: Windows 10, version 1809 or later
-- Supported Platforms: x86, x86-64(AMD64) and ARM64.
-
-# Features
-
-- Inherit all features from 7-Zip 21.06.
-- Packaging with MSIX for modern deployment experience.
-- Support the context menu in Windows 10/11 File Explorer.
-- Enable NSIS script decompiling support for the NSIS archives. (Merged from 
-  [7-Zip NSIS branch](https://github.com/myfreeer/7z-build-nsis).)
-- Provide 7-Zip execution alias for helping users to migrate to NanaZip.
-- Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs. (Merged 
-  from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd).)
-
 # Documents
 
 - [License](License.md)
 - [Changelog](Documents/Changelog.md)
 - [Relevant People](Documents/People.md)
 - [Privacy Policy](Documents/Privacy.md)
-- [Windows Store](https://www.microsoft.com/store/apps/9N8G7TSCL18R)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Versioning](Documents/Versioning.md)
