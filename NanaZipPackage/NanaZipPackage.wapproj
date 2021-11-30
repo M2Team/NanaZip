@@ -3,7 +3,7 @@
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Wap.props" />
   <PropertyGroup>
     <ProjectGuid>9a119a76-97cb-4490-b8c2-651576cb9302</ProjectGuid>
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.22000.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>

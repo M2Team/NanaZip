@@ -10,8 +10,8 @@
   xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
-  xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
-  IgnorableNamespaces="uap rescap desktop uap3 com desktop4 desktop5 uap8 desktop6">
+  xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
+  IgnorableNamespaces="uap rescap desktop uap3 com desktop4 desktop5 uap8 virtualization">
 
   <Identity
     Name="40174MouriNaruto.NanaZip"
@@ -22,7 +22,13 @@
     <DisplayName>NanaZip</DisplayName>
     <PublisherDisplayName>Kenji Mouri</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
-    <desktop6:FileSystemWriteVirtualization>disabled</desktop6:FileSystemWriteVirtualization>
+		<virtualization:FileSystemWriteVirtualization>
+			<virtualization:ExcludedDirectories>
+				<virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)</virtualization:ExcludedDirectory>
+				<virtualization:ExcludedDirectory>$(KnownFolder:LocalAppDataLow)</virtualization:ExcludedDirectory>
+				<virtualization:ExcludedDirectory>$(KnownFolder:RoamingAppData)</virtualization:ExcludedDirectory>
+			</virtualization:ExcludedDirectories>
+		</virtualization:FileSystemWriteVirtualization>
   </Properties>
 
   <Dependencies>
@@ -512,6 +518,5 @@
   </Applications>
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
-    <rescap:Capability Name="unvirtualizedResources"/>
   </Capabilities>
 </Package>
