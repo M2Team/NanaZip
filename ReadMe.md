@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/github/downloads/M2Team/NanaZip/total.svg)](https://github.com/M2Team/NanaZip/releases)
 
 [![Windows Store - Release Channel](https://img.shields.io/badge/Windows%20Store-Release%20Channel-blue)](https://www.microsoft.com/store/apps/9N8G7TSCL18R)
-[![Windows Store - Preview Channel](https://img.shields.io/badge/Windows%20Store-Preview%20Channel-blue)]()
+[![Windows Store - Preview Channel](https://img.shields.io/badge/Windows%20Store-Preview%20Channel-blue)](https://www.microsoft.com/store/apps/9NZL0LRP1BNL)
 
 ![ContextMenu](Documents/ContextMenu.png)
 ![MainWindow](Documents/MainWindow.png)
@@ -42,7 +42,7 @@ supported.
 - You may meet the application crash in some cases in NanaZip 1.0 Preview 1 and
   NanaZip 1.0 Preview 2 because there are some issues in the exception handler 
   implementation from VC-LTL 5.x. NanaZip 1.0 Preview 3 will be fixed the issue
-  because mingkuang (the author of VC-LTL) has releasd the new version of 
+  because mingkuang (the author of VC-LTL) has released the new version of 
   VC-LTL. 
 - Windows may show the contrast white icon in the taskbar when you using the 
   contrast standard mode in NanaZip 1.0 Preview 1 and NanaZip 1.0 Preview 2 is 

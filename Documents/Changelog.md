@@ -1,5 +1,28 @@
 ﻿# Changelog
 
+**NanaZip 1.0 Preview 4 (1.0.88.0)**
+
+- Update Italian, Russian and Polish Translations. (Contributed by Blueberryy, 
+  Maicol Battistini and ChuckMichael.)
+- Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
+  (Suggested by AndromedaMelody.)
+- Adjust file association icon. (Suggested by 奕然.)
+- Merge features from 7-Zip ZStandard branch. (Suggested by fcharlie. Thanks to
+  Tino Reichardt.)
+- Update 7-Zip to 21.06. (Noticed by Dan, lychichem and sanderdewit. Thanks to 
+  Igor Pavlov.)
+- Fix compression level display issue in the compress dialog. (Thanks to 
+  SakuraNeko.)
+- Make every file extension have own file type in file type association
+  definitions for solving https://github.com/M2Team/NanaZip/issues/53. (Thanks 
+  to oxygen-dioxide.)
+- Disable virtualization:ExcludedDirectories for resolve 
+  https://github.com/M2Team/NanaZip/issues/34. (Thanks to AndromedaMelody.)
+- Reduce the compilation warnings.
+- Change the configuration for NanaZipPackage project for solve the issue when
+  referencing the Windows Runtime Components.
+- Update Mile.Cpp.
+
 **NanaZip 1.0 Preview 3 (1.0.46.0)**
 
 - Enable parsing the NSIS script support in the NSIS archives. (Suggested by 
