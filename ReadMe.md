@@ -110,10 +110,11 @@ requests and issues are welcome.**
 # Documents
 
 - [License](License.md)
-- [Changelog](Documents/Changelog.md)
 - [Relevant People](Documents/People.md)
 - [Privacy Policy](Documents/Privacy.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contributing Guide](CONTRIBUTING.md)
+- [NanaZip Release Notes](Documents/ReleaseNotes.md)
+- [NanaZip Preview Release Notes](Documents/ReleaseNotesPreview.md)
 - [Versioning](Documents/Versioning.md)
 - [My Digital Life Forums](https://forums.mydigitallife.net/threads/84171)

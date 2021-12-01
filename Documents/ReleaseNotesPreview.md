@@ -1,4 +1,6 @@
-﻿# Changelog
+﻿# NanaZip Preview Release Notes
+
+For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
 **NanaZip 1.0 Preview 4 (1.0.88.0)**
 
@@ -40,7 +42,7 @@
 
 **NanaZip 1.0 Preview 2 (1.0.31.0)**
 
-- Remove IObjectWithSite in shell extension  implementation to reduce the 
+- Remove IObjectWithSite in shell extension implementation to reduce the 
   complexity and crashes.
 - Add altform-lightunplated assets for display the contrast standard mode icon
   in the taskbar instead of contrast white icon. (Thanks to AndromedaMelody.)
