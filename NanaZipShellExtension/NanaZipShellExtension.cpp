@@ -34,7 +34,7 @@
 
 namespace
 {
-    static const char* const kExtractExludeExtensions =
+    static const char* const kExtractExcludeExtensions =
         " 3gp"
         " aac ans ape asc asm asp aspx avi awk"
         " bas bat bmp"
@@ -54,7 +54,7 @@ namespace
         " sed sh shn shtml sln sql srt swa"
         " tcl tex tiff tta txt"
         " vb vcproj vbs"
-        " wav wma wv"
+        " wav webp wma wv"
         " xml xsd xsl xslt"
         " ";
 
@@ -90,7 +90,7 @@ namespace
 
     static bool DoNeedExtract(const FString& name)
     {
-        return !FindExt(kExtractExludeExtensions, name);
+        return !FindExt(kExtractExcludeExtensions, name);
     }
 
     static const char* const kArcExts[] =
