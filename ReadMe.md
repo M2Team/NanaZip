@@ -37,6 +37,37 @@ supported.
 - Supported OS: Windows 10, version 1809 or later
 - Supported Platforms: x86, x86-64(AMD64) and ARM64.
 
+# Download and Installation
+
+Here are some available installation methods for NanaZip.
+
+## Microsoft Store
+
+This is the recommended way to install NanaZip.
+
+Search and install `NanaZip` in Windows Store for stable release, and `NanaZip
+Preview` for preview release.
+
+Also, you can also click the Microsoft Store link you needed.
+
+- [NanaZip](https://www.microsoft.com/store/apps/9N8G7TSCL18R)
+- [NanaZip Preview](https://www.microsoft.com/store/apps/9NZL0LRP1BNL)
+
+## MSIX Package
+
+You also can download the MSIX Package in 
+[GitHub Releases](https://github.com/M2Team/NanaZip/releases).
+
+After you have downloaded the MSIX Package, you can double click to install it,
+or you can execute the following command in the Command Prompt which is run as the Administrator.
+
+> PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -Path `The path of the MSIX package`
+
+P.S. All needed dependencies are included in the MSIX Package of NanaZip 
+because we known that it's very difficult for users who do not have access to 
+the store to get our dependency packages, and we want to be robust and 
+deployable everywhere.
+
 # Known issues
 
 - You may meet the application crash in some cases in NanaZip 1.0 Preview 1 and
@@ -47,12 +78,19 @@ supported.
 - Windows may show the contrast white icon in the taskbar when you using the 
   contrast standard mode in NanaZip 1.0 Preview 1 and NanaZip 1.0 Preview 2 is 
   fixed the issue.
-- If you don't find NanaZip in the context menu, please restart File Explorer 
-  via Task Manager.
+- If you can't find NanaZip in the context menu, please restart all File 
+  Explorer processes via Task Manager.
+- Due to the issues in Desktop Bridge file system virtualization, you are 
+  unable to use NanaZip in the Safe Mode of Windows.
+- Due to the policy from Microsoft Store, NanaZip is unable to disable Desktop 
+  Bridge file system virtualization, so the file operations in 
+  `%UserProfile%/AppData` will be redirected in Windows 10, and file operations
+  in directories other than `Local`, `LocalLow` and `Roaming` in 
+  `%UserProfile%/AppData` will still be redirected in Windows 11.
 
 # Development Roadmap
 
-- 1.x Series (2022 Q2)
+- 1.0 (December ??, 2021)
   - [x] Modernize the build toolchain with MSBuild for using MSIX packaging and
         parallel compilation support.
   - [x] Use [VC-LTL 5.x](https://github.com/Chuyu-Team/VC-LTL5) toolchain to 
@@ -69,10 +107,13 @@ supported.
   - [x] Add support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard
         from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd). (Suggested
         by fcharlie.)
+- 1.x Series (2022 Q2)
   - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [ ] Provide NanaZip Installer for simplify the deployment.
   - [ ] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
+  - [ ] Add the UI stack based on XAML Islands which is used in NanaZip 2.x 
+        Series.
 - 2.x Series (2023 Q3)
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
