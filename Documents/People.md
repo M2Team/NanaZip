@@ -22,6 +22,7 @@
 ## Translation Contributors
 
 - Blueberryy ([https://github.com/Blueberryy](https://github.com/Blueberryy))
+- ChuckMichael ([https://github.com/ChuckMichael](https://github.com/ChuckMichael))
 - Maicol Battistini ([https://github.com/maicol07](https://github.com/maicol07))
 
 ## Special thanks

@@ -3,7 +3,7 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
-**NanaZip 1.0 Draft (1.0.??.0)**
+**NanaZip 1.0 (1.0.95.0)**
 
 - Modernize the build toolchain with MSBuild for using MSIX packaging and 
   parallel compilation support. (Thanks to AndromedaMelody, be5invis, 
@@ -17,7 +17,7 @@ For preview versions, please read
 - New icons. (Designed by Alice (四月天), Chi Lei, Kenji Mouri, Rúben Garrido 
   and Sakura Neko. Thanks to AndromedaMelody and 奕然.)
 - Minor tweaks. (Thanks to adrianghc, Blueberryy, ChuckMichael, Legna, Maicol 
-  Battistini and SakuraNeko.)
+  Battistini, SakuraNeko and Zbynius.)
 - Update 7-Zip from 21.03 to 21.06. (Noticed by Dan, lychichem and sanderdewit.
   Thanks to Igor Pavlov.)
 - Enable parsing the NSIS script support in the NSIS archives. (Suggested by 

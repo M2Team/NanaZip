@@ -14,12 +14,12 @@
   IgnorableNamespaces="uap rescap desktop uap3 com desktop4 desktop5 uap8 virtualization">
 
   <Identity
-    Name="40174MouriNaruto.NanaZipPreview"
+    Name="40174MouriNaruto.NanaZip"
     Publisher="CN=E310A153-74A9-4D81-800B-857A8D58408A"
-    Version="1.0.88.0" />
+    Version="1.0.95.0" />
 
   <Properties>
-    <DisplayName>NanaZip Preview</DisplayName>
+    <DisplayName>NanaZip</DisplayName>
     <PublisherDisplayName>Kenji Mouri</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
 		<virtualization:FileSystemWriteVirtualization>
@@ -46,7 +46,7 @@
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
-        DisplayName="NanaZip Preview"
+        DisplayName="NanaZip"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -69,7 +69,7 @@
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
-        DisplayName="NanaZip Preview"
+        DisplayName="NanaZip"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -91,7 +91,7 @@
       Executable="NanaZip.exe"
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
-        DisplayName="NanaZip Preview"
+        DisplayName="NanaZip"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
