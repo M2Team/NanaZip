@@ -495,4 +495,4 @@ Dowiązanie symboliczne katalogu
 Połączenie katalogów
 12200
 Integracja
-Otwórz aplikację Ustawienia, aby powiązać rozszerzenia plików z programem NanaZip
+Otwórz Ustawienia, aby powiązać typy plików z programem NanaZip
