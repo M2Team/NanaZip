@@ -2,6 +2,14 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.1 Preview 1 (1.0.???.0)**
+
+- Exclude .webp in the archive file type list for solving 
+  https://github.com/M2Team/NanaZip/issues/57. (Thanks to Zbynius. Fixed in 
+  NanaZip 1.0 Stable.)
+- Update Polish translation. (Contributed by ChuckMichael.)
+- Fix CI issue.
+
 **NanaZip 1.0 Preview 4 (1.0.88.0)**
 
 - Update Italian, Russian and Polish Translations. (Contributed by Blueberryy, 

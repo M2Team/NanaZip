@@ -90,7 +90,7 @@ deployable everywhere.
 
 # Development Roadmap
 
-- 1.0 (December ??, 2021)
+- 1.0 (December 8, 2021)
   - [x] Modernize the build toolchain with MSBuild for using MSIX packaging and
         parallel compilation support.
   - [x] Use [VC-LTL 5.x](https://github.com/Chuyu-Team/VC-LTL5) toolchain to 
