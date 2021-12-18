@@ -1,671 +1,674 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Spec">
-      <UniqueIdentifier>{77d4fb11-867b-44a5-9204-4092cf675792}</UniqueIdentifier>
+    <Filter Include="SevenZip">
+      <UniqueIdentifier>{6f7a35af-c841-4c21-9e51-593d6fce498c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="7z">
+    <Filter Include="SevenZip\7z">
       <UniqueIdentifier>{fe304646-6bc5-4c1e-9cfb-4998d7f79359}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archive Common">
-      <UniqueIdentifier>{04353f97-67cc-4813-9bf3-fa73fbd1d54e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Compress">
-      <UniqueIdentifier>{38256c0f-c4dc-4ac9-855c-028d4dbb4da8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Crypto">
-      <UniqueIdentifier>{71684931-5f10-480c-ac2d-898b65c47e76}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dialogs">
-      <UniqueIdentifier>{0bd943ac-78db-428a-b5ba-140686504085}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="7zip Common">
+    <Filter Include="SevenZip\7zip Common">
       <UniqueIdentifier>{ecf84694-8c47-403a-8067-821f13aaacba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="File Manager">
-      <UniqueIdentifier>{3a8c70ec-3cc7-45d3-b0c8-439bd7bdaf37}</UniqueIdentifier>
+    <Filter Include="SevenZip\Archive Common">
+      <UniqueIdentifier>{04353f97-67cc-4813-9bf3-fa73fbd1d54e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Windows">
-      <UniqueIdentifier>{dcb17d25-87ed-4bbe-816d-59a9100d9d85}</UniqueIdentifier>
+    <Filter Include="SevenZip\C">
+      <UniqueIdentifier>{9d71bf7d-ba45-47a8-bd7a-c188bad9a5e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Windows\Control">
-      <UniqueIdentifier>{50f7f85b-8234-47a7-ab84-ffd160f1ad1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common">
+    <Filter Include="SevenZip\Common">
       <UniqueIdentifier>{2282e405-6493-46dc-9dba-b63aa79f9d9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI">
+    <Filter Include="SevenZip\Compress">
+      <UniqueIdentifier>{38256c0f-c4dc-4ac9-855c-028d4dbb4da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\Crypto">
+      <UniqueIdentifier>{71684931-5f10-480c-ac2d-898b65c47e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\Dialogs">
+      <UniqueIdentifier>{0bd943ac-78db-428a-b5ba-140686504085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\File Manager">
+      <UniqueIdentifier>{3a8c70ec-3cc7-45d3-b0c8-439bd7bdaf37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\Spec">
+      <UniqueIdentifier>{77d4fb11-867b-44a5-9204-4092cf675792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\UI">
       <UniqueIdentifier>{31694862-1a46-4b3a-8326-758e98503fd2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\UI Common">
+    <Filter Include="SevenZip\UI\UI Common">
       <UniqueIdentifier>{a29a234e-2265-45a5-aab8-32df3bb85869}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\GUI">
+    <Filter Include="SevenZip\UI\GUI">
       <UniqueIdentifier>{c8c5e2db-3806-4f21-91ec-11a7b0326bdf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Explorer">
+    <Filter Include="SevenZip\UI\Explorer">
       <UniqueIdentifier>{0b460cbf-d58a-4c0b-b6ac-13b5eb5b4b43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C">
-      <UniqueIdentifier>{9d71bf7d-ba45-47a8-bd7a-c188bad9a5e0}</UniqueIdentifier>
+    <Filter Include="SevenZip\Windows">
+      <UniqueIdentifier>{dcb17d25-87ed-4bbe-816d-59a9100d9d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\Windows\Control">
+      <UniqueIdentifier>{50f7f85b-8234-47a7-ab84-ffd160f1ad1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.cpp">
-      <Filter>Spec</Filter>
+      <Filter>SevenZip\Spec</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\7z\7zHandler.cpp">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\7z\7zIn.cpp">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\SplitHandler.cpp">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\CoderMixer2.cpp">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\MultiStream.cpp">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Bcj2Coder.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Bcj2Register.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BcjCoder.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BcjRegister.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BranchMisc.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BranchRegister.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyCoder.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyRegister.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\DeltaFilter.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lzma2Decoder.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lzma2Register.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LzmaDecoder.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LzmaRegister.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\PpmdDecoder.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\PpmdRegister.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\7zAes.cpp">
-      <Filter>Crypto</Filter>
+      <Filter>SevenZip\Crypto</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp">
-      <Filter>Crypto</Filter>
+      <Filter>SevenZip\Crypto</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\MyAes.cpp">
-      <Filter>Crypto</Filter>
+      <Filter>SevenZip\Crypto</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.cpp">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ComboDialog.cpp">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.cpp">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.cpp">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.cpp">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\CreateCoder.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\CWrappers.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\FilePathAutoRename.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\FileStreams.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\FilterCoder.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\InBuffer.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\LimitedStreams.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\LockedStream.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\OutBuffer.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\ProgressUtils.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\PropId.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\StreamBinder.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\StreamObjects.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\StreamUtils.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\VirtThread.cpp">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.cpp">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.cpp">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\Control\ComboBox.cpp">
-      <Filter>Windows\Control</Filter>
+      <Filter>SevenZip\Windows\Control</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\Control\Dialog.cpp">
-      <Filter>Windows\Control</Filter>
+      <Filter>SevenZip\Windows\Control</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\Control\ListView.cpp">
-      <Filter>Windows\Control</Filter>
+      <Filter>SevenZip\Windows\Control</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\CommonDialog.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\DLL.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\ErrorMsg.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\FileDir.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\FileFind.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\FileIO.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\FileName.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\PropVariant.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\PropVariantConv.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\ResourceString.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\Shell.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\Synchronization.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\System.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\Window.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\CommandLineParser.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\CRC.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\IntToString.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\MyString.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\MyVector.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\NewHandler.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\Sha256Prepare.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\StringConvert.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\Wildcard.cpp">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveExtractCallback.cpp">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveOpenCallback.cpp">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\DefaultName.cpp">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\Extract.cpp">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.cpp">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\LoadCodecs.cpp">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\OpenArchive.cpp">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractDialog.cpp">
-      <Filter>UI\GUI</Filter>
+      <Filter>SevenZip\UI\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractGUI.cpp">
-      <Filter>UI\GUI</Filter>
+      <Filter>SevenZip\UI\GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\MyMessages.cpp">
-      <Filter>UI\Explorer</Filter>
+      <Filter>SevenZip\UI\Explorer</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\7zCrc.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\7zCrcOpt.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Aes.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\AesOpt.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Alloc.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Bcj2.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Bra.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Bra86.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\BraIA64.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\CpuArch.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Delta.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\DllSecur.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Lzma2Dec.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Lzma2DecMt.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\LzmaDec.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\MtDec.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Ppmd7.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Ppmd7Dec.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Sha256.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Sha256Opt.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Threads.c">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\SfxWin.cpp">
-      <Filter>Spec</Filter>
+      <Filter>SevenZip\Spec</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\Clipboard.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\MemoryGlobal.cpp">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.h">
-      <Filter>Spec</Filter>
+      <Filter>SevenZip\Spec</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\7z\7zDecode.h">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\7z\7zHandler.h">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\7z\7zHeader.h">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\7z\7zIn.h">
-      <Filter>7z</Filter>
+      <Filter>SevenZip\7z</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\CoderMixer2.h">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\MultiStream.h">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.h">
-      <Filter>Archive Common</Filter>
+      <Filter>SevenZip\Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BranchMisc.h">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Crypto\7zAes.h">
-      <Filter>Crypto</Filter>
+      <Filter>SevenZip\Crypto</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Crypto\MyAes.h">
-      <Filter>Crypto</Filter>
+      <Filter>SevenZip\Crypto</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.h">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ComboDialog.h">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.h">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.h">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.h">
-      <Filter>Dialogs</Filter>
+      <Filter>SevenZip\Dialogs</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\CreateCoder.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\CWrappers.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\FilePathAutoRename.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\FileStreams.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\FilterCoder.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\InBuffer.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\LimitedStreams.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\LockedStream.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\OutBuffer.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\ProgressUtils.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\StreamBinder.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\StreamObjects.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\StreamUtils.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\VirtThread.h">
-      <Filter>7zip Common</Filter>
+      <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.h">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\PropertyName.h">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.h">
-      <Filter>File Manager</Filter>
+      <Filter>SevenZip\File Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\Control\ComboBox.h">
-      <Filter>Windows\Control</Filter>
+      <Filter>SevenZip\Windows\Control</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\Control\Dialog.h">
-      <Filter>Windows\Control</Filter>
+      <Filter>SevenZip\Windows\Control</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\Control\ListView.h">
-      <Filter>Windows\Control</Filter>
+      <Filter>SevenZip\Windows\Control</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\CommonDialog.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\DLL.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\ErrorMsg.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\FileDir.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\FileFind.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\FileIO.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\FileName.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\PropVariant.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\PropVariantConv.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\ResourceString.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\Shell.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\Synchronization.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\System.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\Window.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\CommandLineParser.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\CRC.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\IntToString.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\MyString.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\MyVector.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\NewHandler.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\StringConvert.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\Wildcard.h">
-      <Filter>Common</Filter>
+      <Filter>SevenZip\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveExtractCallback.h">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveOpenCallback.h">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\DefaultName.h">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\Extract.h">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.h">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\LoadCodecs.h">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\OpenArchive.h">
-      <Filter>UI\UI Common</Filter>
+      <Filter>SevenZip\UI\UI Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractDialog.h">
-      <Filter>UI\GUI</Filter>
+      <Filter>SevenZip\UI\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractGUI.h">
-      <Filter>UI\GUI</Filter>
+      <Filter>SevenZip\UI\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\MyMessages.h">
-      <Filter>UI\Explorer</Filter>
+      <Filter>SevenZip\UI\Explorer</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\7zCrc.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Aes.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Alloc.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Bcj2.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Bra.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Delta.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\DllSecur.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Lzma2Dec.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Lzma2DecMt.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\LzmaDec.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\MtDec.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Ppmd7.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Threads.h">
-      <Filter>C</Filter>
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
     <ClInclude Include="..\SevenZip\CPP\Windows\Clipboard.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Windows\MemoryGlobal.h">
-      <Filter>Windows</Filter>
+      <Filter>SevenZip\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
-      <Filter>Compress</Filter>
+      <Filter>SevenZip\Compress</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\7z.ico">
-      <Filter>Spec</Filter>
+      <Filter>SevenZip\Spec</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\resource.rc">
-      <Filter>Spec</Filter>
+      <Filter>SevenZip\Spec</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>
