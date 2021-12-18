@@ -493,3 +493,6 @@ Harte Verknüpfung
 Datei Symbolische Verknüpfung
 Ordner Symbolische Verknüpfung
 Ordner Verbindung
+12200
+Integration
+Windowseinstellungen/Standard-Apps öffnen, um Dateien mit NanaZip zu verknüpfen
