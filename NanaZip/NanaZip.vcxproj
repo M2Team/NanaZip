@@ -28,10 +28,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\7zipLogo.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\FM.ico" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Parent.bmp" />
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Properties.bmp" />
     <Image Include="Assets\ParentFolder.bmp" />
     <Image Include="Assets\Toolbar\Add_24x24.bmp" />
     <Image Include="Assets\Toolbar\Add_32x32.bmp" />
@@ -137,7 +133,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\GUI\HashGUI.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI2.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\AboutDialog.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\AltStreamsFolder.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\App.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.cpp" />
@@ -199,6 +194,7 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\UpdateCallback100.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\VerCtrl.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.cpp" />
+    <ClCompile Include="AboutDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
@@ -323,7 +319,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\HashGUI.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI2.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\AboutDialog.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\AltStreamsFolder.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\App.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\AppState.h" />
@@ -375,6 +370,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\UpdateCallback100.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.h" />
+    <ClInclude Include="AboutDialog.h" />
     <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>

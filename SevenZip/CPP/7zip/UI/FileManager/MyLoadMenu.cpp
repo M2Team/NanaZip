@@ -10,7 +10,7 @@
 
 #include "../Common/CompressCall.h"
 
-#include "AboutDialog.h"
+#include "../../../../../NanaZip/AboutDialog.h"
 #include "App.h"
 #include "LangUtils.h"
 #include "MyLoadMenu.h"
@@ -806,9 +806,8 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
 
     case IDM_ABOUT:
     {
-      CAboutDialog dialog;
-      dialog.Create(hWnd);
-      break;
+        NanaZip::FileManager::AboutDialog::Show(hWnd);
+        break;
     }
     default:
     {

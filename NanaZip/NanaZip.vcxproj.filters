@@ -70,20 +70,11 @@
     <Filter Include="SevenZip\Windows\Control">
       <UniqueIdentifier>{7129b3d3-8d4d-44d1-a771-d6314d17e0a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AboutDialog">
+      <UniqueIdentifier>{c8bf1ac8-1083-46a5-aa52-bcd9e29c6b69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\7zipLogo.ico">
-      <Filter>SevenZip\Spec</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\FM.ico">
-      <Filter>SevenZip\Spec</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Parent.bmp">
-      <Filter>SevenZip\Spec</Filter>
-    </Image>
-    <Image Include="..\SevenZip\CPP\7zip\UI\FileManager\Properties.bmp">
-      <Filter>SevenZip\Spec</Filter>
-    </Image>
     <Image Include="Assets\Toolbar\Add_24x24.bmp">
       <Filter>Assets\Toolbar</Filter>
     </Image>
@@ -238,9 +229,6 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\SettingsPage.cpp">
       <Filter>SevenZip\Dialog\Options</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\AboutDialog.cpp">
-      <Filter>SevenZip\Dialog</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.cpp">
       <Filter>SevenZip\Dialog</Filter>
@@ -581,6 +569,9 @@
     <ClCompile Include="..\SevenZip\CPP\Common\DynLimBuf.cpp">
       <Filter>SevenZip\Common</Filter>
     </ClCompile>
+    <ClCompile Include="AboutDialog.cpp">
+      <Filter>AboutDialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MyWindowsNew.h">
@@ -648,9 +639,6 @@
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\SettingsPage.h">
       <Filter>SevenZip\Dialog\Options</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\AboutDialog.h">
-      <Filter>SevenZip\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.h">
       <Filter>SevenZip\Dialog</Filter>
@@ -1105,6 +1093,9 @@
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\DynLimBuf.h">
       <Filter>SevenZip\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutDialog.h">
+      <Filter>AboutDialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
