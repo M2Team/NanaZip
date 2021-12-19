@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.Win32.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{43308629-5328-46BF-8E1C-A258A937B981}</ProjectGuid>
     <RootNamespace>NanaZipSfxSetup</RootNamespace>
