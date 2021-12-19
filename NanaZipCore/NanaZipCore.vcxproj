@@ -11,9 +11,11 @@
     <CleanImport>true</CleanImport>
   </PropertyGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
+  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
   <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
+  <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipHardwareAcceleration.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
@@ -66,12 +68,10 @@
     <ClCompile Include="..\SevenZip\C\7zCrc.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\7zCrcOpt.c" />
     <ClCompile Include="..\SevenZip\C\7zStream.c" />
     <ClCompile Include="..\SevenZip\C\Aes.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\AesOpt.c" />
     <ClCompile Include="..\SevenZip\C\Alloc.c" />
     <ClCompile Include="..\SevenZip\C\Bcj2.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
@@ -103,9 +103,6 @@
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\LzFindMt.c">
-      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\LzFindOpt.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Lzma2Dec.c">
@@ -151,20 +148,15 @@
     <ClCompile Include="..\SevenZip\C\Sha1.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Sha1Opt.c" />
     <ClCompile Include="..\SevenZip\C\Sha256.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Sha256Opt.c" />
     <ClCompile Include="..\SevenZip\C\Sort.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Threads.c" />
     <ClCompile Include="..\SevenZip\C\Xz.c" />
     <ClCompile Include="..\SevenZip\C\XzCrc64.c">
-      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\XzCrc64Opt.c">
       <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\XzDec.c" />
@@ -705,4 +697,5 @@
     <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
+  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>

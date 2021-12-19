@@ -432,9 +432,6 @@
     <ClCompile Include="..\SevenZip\C\XzCrc64.c">
       <Filter>SevenZip\C\xz</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\XzCrc64Opt.c">
-      <Filter>SevenZip\C\xz</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\C\XzDec.c">
       <Filter>SevenZip\C\xz</Filter>
     </ClCompile>
@@ -493,9 +490,6 @@
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\LzFindMt.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\LzFindOpt.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\Lzma2Dec.c">
@@ -884,18 +878,6 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\TimeUtils.cpp">
       <Filter>SevenZip\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Sha256Opt.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Sha1Opt.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\AesOpt.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\7zCrcOpt.c">
-      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.cpp">
       <Filter>SevenZip\Compress\Brotli Compress</Filter>
