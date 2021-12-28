@@ -1,7 +1,7 @@
 ;!@Lang2@!UTF-8!
 ;  2.30 : 2002-09-07 : Modern Tiger, kaZek, Hutu Li
-;  3.08 : 2003-08-29 : Tunghsiao Liu (aka. Sparanoid)
-; 16.00 : 2016-05-16 : Tunghsiao Liu (aka. Sparanoid)
+;  3.08 : 2003-08-29 : Tunghsiao Liu
+; 21.03 : 2021-07-21 : Tunghsiao Liu
 ;
 ;
 ;
@@ -241,7 +241,7 @@ NanaZip 传统选择模式(&A)
 使用大内存页(&L)
 2900
 关于 NanaZip
-NanaZip 是一款自由软件。您可以通过捐赠的方式来支持 NanaZip 的开发。
+NanaZip 是一款自由软件
 3000
 系统无法分配所需内存
 未发现错误
@@ -490,9 +490,9 @@ CPU 使用率
 7710
 链接类型
 硬链接
-文件符号链接（Symbolic Link）
-目录符号链接（Symbolic Link）
-目录接合点（Directory Junction）
+文件符号链接
+目录符号链接
+目录连接（Directory Junction）
 12200
 集成
 打开 Windows 设置应用将文件与 NanaZip 关联

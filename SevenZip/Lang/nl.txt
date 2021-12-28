@@ -4,8 +4,8 @@
 ;       : Harm Hilvers
 ;  9.07 : Jeroen Tulp 
 ; 15.00 : Jeroen Tulp 
-;
-;
+; 21.03 : Quinten Althues
+; 21.05 : Jeroen Tulp
 ;
 ;
 ;
@@ -29,7 +29,7 @@ Help
 440
 Ja op &alles
 Nee op a&lles
-Stop
+Stoppen
 Herstarten
 &Achtergrond
 &Voorgrond
@@ -45,9 +45,9 @@ E&xtra
 &Help
 540
 &Openen
-Open B&innen
-Open B&uiten
-Bee&ld
+Open b&innen
+Open b&uiten
+Be&kijken
 &Bewerken
 &Hernoemen
 &Kopiëren naar...
@@ -56,45 +56,45 @@ Verwij&deren
 Bestand &opsplitsen...
 Bestanden &samenvoegen...
 &Eigenschappen
-O&pmerking
-&Checksum berekenen
-Ver&gelijken
-Nieuwe &map
-&Nieuw bestand
+O&pmerking plaatsen...
+Controlegetal berekenen
+Delta
+Nieuwe map
+Nieuw bestand
 &Sluiten
-Koppe&ling
-&Alternate Streams
+Koppeling
+&Alternate streams
 600
 &Alles selecteren
-A&lles de-selecteren
+Alles deselecteren
 Selectie &omkeren
-&Selecteer...
-&De-selecteer...
-Selecteer op &type
-De-selecteer op t&ype
+&Selecteren...
+&Deselecteren...
+Selecteren op &type
+Deselecteren op t&ype
 700
 &Grote pictogrammen
-&Kleine pictogrammen
+Kleine pictogra&mmen
 &Lijst
 &Details
 730
-&Ongesorteerd
-&Platte weergave
-&2 Panelen
+Ongesorteerd
+Platte weergave
+&2 panelen
 &Werkbalken
-&Root map openen
-Één &niveau omhoog
-&Mappen Geschiedenis...
+Hoogste niveau openen
+Één niveau omhoog
+&Mapgeschiedenis...
 &Verversen
-&Automatisch verversen 
+Automatisch verversen 
 750
-&Archief werkbalk
-&Standaard werkbalk
-Grote kn&oppen
-Knop&tekst weergeven
+Archiefwerkbalk
+Standaardwerkbalk
+Grote knoppen
+Knoptekst weergeven
 800
-&Map toevoegen aan Favorieten
-Favoriet maken
+&Map toevoegen aan Favorieten als
+Bladwijzer toevoegen
 900
 &Opties...
 &Benchmark
@@ -104,17 +104,17 @@ Favoriet maken
 1003
 Pad
 Naam
-Extensie
+Bestandsindeling
 Map
 Grootte
 Ingepakte grootte
 Kenmerken
-Aangemaakt
-Laatst geopend
-Gewijzigd
+Gemaakt op
+Geopend op
+Gewijzigd op
 Compact
 Commentaar
-Gecodeerd
+Versleuteld
 Gesplitst voor
 Gesplitst na
 Woordenboek
@@ -122,20 +122,20 @@ Woordenboek
 Type
 Anti
 Methode
-Gastheer OS
+Host-besturingssysteem
 Bestandssysteem
 Gebruiker
 Groep
 Blok
 Commentaar
 Positie
-Pad Prefix
+Padvoorvoegsel
 Mappen
 Bestanden
 Versie
 Volume
 Multivolume
-Offset
+Verschuiving
 Koppelingen
 Blokken
 Volumes
@@ -144,128 +144,128 @@ Volumes
 Big-endian
 CPU
 Fysieke grootte
-Kop grootte
+Kopgrootte
 Checksum
-Karakteristieken
-Virtueel Adres
+Kenmerken
+Virtueel adres
 ID
-Korte Naam
-Aanmaak Applicatie
-Sector Grootte
+Korte naam
+Aanmaaktoepassing
+Sectorgrootte
 Modus
-Symbolische Kpoppeling
+Symbolische koppeling
 Fout
-Capaciteit
-Beschikbaar
+Totale grootte
+Beschikbare ruimte
 Clustergrootte
 Label
 Lokale naam
 Provider
-NT Beveiliging
-Alternate Stream
+NT-beveiliging
+Alternate stream
 Aux
 Verwijderd
-Is Structuur
+Is boomstructuur
 
 
-Error Type
-Errors
-Errors
+Fouttype
+Fouten
+Fouten
 Waarschuwingen
 Waarschuwing
 Streams
-Alternate Streams
-Alternate Streams Grootte
-Virtuele Grootte
-Uitgepakte Grootte
-Totale Fysieke Grootte
-Volume Index
-SubType
-Kort Commentaar
-Tekstcodering
+Alternate streams
+Grootte alternate streams
+Virtuele grootte
+Uitgepakte grootte
+Totale fysieke grootte
+Volume-index
+Subtype
+Korte opmerking
+Codepagina
 
 
 
-Tail Grootte
-Embedded Stub Grootte
+Eind grootte
+Ingesloten stub grootte
 Koppeling
-Harde Koppeling
+Harde koppeling
 iNode
 
-Alleen-lezen
+Alleen lezen
 2100
 Opties
 Taal
 Taal:
-Editor
-&Editor:
+Applicaties
+&Bewerken:
 &Vergelijken:
 2200
 Systeem
-Associeer NanaZip met:
-All users
+NanaZip associëren met:
+Alle gebruikers
 2301
-NanaZip in het contextmenu integreren.
+NanaZip integreren in het contextmenu
 Trapsgewijs contextmenu
-Contextmenu items:
-Pictogrammen in contexmenu
+Contextmenu-items:
+Pictogrammen in contextmenu
 2320
 <Map>
 <Archief>
-Open archief
+Archief openen
 Bestanden uitpakken...
 Toevoegen aan archief...
-Testen archief
-Uitpakken (hier)
+Archief testen
+Hier uitpakken
 Uitpakken naar {0}
 Toevoegen aan {0}
-Comprimeer en verstuur...
-Comprimeer naar {0} en verstuur
+Inpakken en e-mailen...
+Inpakken naar {0} en e-mailen
 2400
 Mappen
 &Werkmap
-&Tijdelijke systeemmap
-&Huidige
-&Gespecificeerd:
-Alleen voor verwisselbare schijven gebruiken.
-Specificeer een locatie voor tijdelijke archiefbestanden.
+&Tijdelijke map van het systeem
+&Huidig
+&Opgegeven:
+Alleen voor verwisselbare media gebruiken
+Geef een locatie opvoor tijdelijke archiefbestanden.
 2500
 Instellingen
-Toon ".." &item
-Toon &echte bestandspictogrammen
-Toon &systeem contextmenu
-&Selecteer gehele rij
-Toon &rasterlijnen
+Item ".." weergeven
+Werkelijke bestandspictogrammen weergeven
+Systeemmenu weergeven
+&Volledige rij selecteren
+Rasterlijnen weer&geven
 Enkele klik om een item te openen
 &Alternatieve selectiemodus
 &Gebruik grote geheugenpagina's
 2900
 Over NanaZip
-NanaZip is gratis software. Echter, u kunt de ontwikkeling van NanaZip ondersteunen door u te registreren.
+NanaZip is gratis software
 3000
-Het systeem kan de benodigde hoeveelheid geheugen niet alloceren
-Er zijn geen fouten.
+Het systeem kan de benodigde hoeveelheid geheugen niet toewijzen
+Er zijn geen fouten
 {0} item(s) geselecteerd
-Kan map '{0}' niet aanmaken.
-Bijwerkfuncties niet ondersteund voor dit archief.
-Kan bestand '{0}' niet openen als archief.
-Kan het gecodeerde archief '{0}' niet openen. Verkeerd wachtwoord?
-Niet ondersteund archief type
-Bestand {0} bestaat reeds
+Kan map '{0}' niet aanmaken
+Bijwerkoperaties worden niet ondersteund voor dit archief.
+Kan bestand '{0}' niet openen als archief
+Kan versleuteld archief '{0}' niet openen. Verkeerd wachtwoord?
+Niet-ondersteund archieftype
+Bestand {0} bestaat al
 Bestand '{0}' is gewijzigd.\nWilt u het bijwerken in het archief?
-Kan bestand\n'{0}' niet bijwerken.
-Kan de editor niet starten.
+Kan bestand\n'{0}' niet bijwerken
+Kan de bewerker niet starten.
 Het bestand lijkt op een virus (het bevat veel opeenvolgende spaties in de naam).
-De actie kan niet worden uitgevoerd vanuit een folder met een dermate lang pad.
-U moet 1 bestand selecteren
-U moet 1 of meerdere bestanden selecteren
+De operatie kan niet worden uitgevoerd vanuit een folder met een lang pad.
+Er moet één bestand geselecteerd worden
+Er moeten één of meerdere bestanden geselecteerd worden
 Te veel items
 Kan het bestand niet openen als {0} archief
 Het bestand is geopend als {0} archief
-Het archiefis geopend met een offset
+Het archief is geopend met een verschuiving
 3300
 Uitpakken
-Comprimeren
+Inpakken
 Testen
 Openen...
 Scannen...
@@ -280,98 +280,98 @@ Overslaan
 Verwijderen
 Kop aanmaken
 3400
-&Uitpakken
-U&itpakken naar:
-Specificeer een locatie voor de uitgepakte bestanden.
+Uitpakken
+&Uitpakken naar:
+Geef een locatie op voor uitgepakte bestanden.
 3410
-Padmethode
+Padmodus:
 Volledige padnamen
 Geen padnamen
 Absolute padnamen
 Relatieve padnamen
 3420
-Overschrijfmethode
-Vraag voor overschrijven
-Overschrijven zonder bevestiging
+Overschrijfmethode:
+Vragen voor overschrijven
+Overschrijven zonder te vragen
 Bestaande bestanden overslaan
 Automatisch hernoemen
-Automatisch hernoemen van bestaande bestanden
+Bestaande bestanden automatisch hernoemen
 3430
-Verwijder duplicaat van de hoofdmap 
-Herstellen bestandsbeveiliging
+Duplicaat van hoogste niveau verwijderen 
+Bestandsbeveiliging herstellen
 3500
-Bevestig vervangen bestand
-Doelmap bevat reeds het verwerkte bestand.
-Wilt u het bestaande bestand vervangen
+Bevestigen om een bestand te vervangen
+De doelmap bevat het verwerkte bestand al.
+Moet het bestaande bestand worden vervangen
 door dit bestand?
 {0} bytes
 A&utomatisch hernoemen
 3700
-Niet ondersteunde compressiemethode voor '{0}'.
+Niet-ondersteunde compressiemethode voor '{0}'.
 Gegevensfout in '{0}'. Bestand is beschadigd.
 CRC mislukt in '{0}'. Bestand is beschadigd.
-Gegevensfout in het gecodeerde bestand '{0}'. Verkeerd wachtwoord?
-CRC mislukt in het gecodeerde bestand '{0}'. Verkeerd wachtwoord?
+Gegevensfout in versleuteld bestand '{0}'. Verkeerd wachtwoord?
+CRC mislukt in versleuteld bestand '{0}'. Verkeerd wachtwoord?
 3710
 Verkeerd wachtwoord?
 3721
-Niet ondersteunde compresssiemethode
-Gegevens fout
+Niet-ondersteunde compresssiemethode
+Gegevensfout
 CRC mislukt
-Data niet beschikbaar
-Data eindigd onverwachts
-Er is nog wat data na het einde van de payload data
+Gegevens niet beschikbaar
+Gegevens eindigen onverwachts
+Er zijn nog gegevens na het einde van de payload
 Is geen archief
-Kop Error
+Kopfout
 Verkeerd wachtwoord
 3763
-Start van archief is niet beschikbaar
-Start van archief is niet bevestigd
+Start van het archief niet beschikbaar
+Start van het archief niet bevestigd
 
 
 
-Niet ondersteunde functie
+Niet-ondersteunde functie
 3800
 Wachtwoord ingeven
-Wachtwoord &ingeven:
+Wachtwoord ingeven:
 Wachtwoord bevestigen:
 Wachtwoord &tonen
-Wachtwoorden komen niet overeen.
+Wachtwoorden komen niet overeen
 Gebruik alleen alfanumerieke en speciale karakters (!, #, $, ...) voor het wachtwoord
-Wachtwoord is te lang.
-&Wachtwoord
+Wachtwoord is te lang
+Wachtwoord
 3900
-Verstreken tijd:
-Overgebleven tijd:
-Grootte:
+Tijd verstreken:
+Tijd resterend:
+Totale grootte:
 Snelheid:
 Verwerkt:
-Compressie verhouding:
+Compressieverhouding:
 Fouten:
 Archieven:
 4000
 Toevoegen aan archief
 &Archief:
-&Bijwerkmethode:
-Archief &formaat:
+&Bijwerkmodus:
+Archief&formaat:
 Compressie&niveau:
 Compressie&methode:
-&Woordenboekgrootte:
-W&oordgrootte:
-Compacte b&lokgrootte:
-Aantal CP&U-threads:
+W&oordenboekgrootte:
+&Woordgrootte:
+Grootte compact blok:
+Aantal CPU-threads:
 &Parameters:
 Opties
-SF&X archief maken
-Comprimeer &gedeelde bestanden
-Codering
-Cod&eermethode:
-Codee&r bestandsnamen
-Geheugengebruik bij het inpakken:
-Geheugengebruik bij het uitpakken:
-Verwijder bestanden na inpakken
+SF&X-archief maken
+Gedeelde bestanden inpakken
+Versleuteling
+Versleutelingsmethode:
+Bestandsnamen &versleutelen
+Geheugengebruik bij inpakken:
+Geheugengebruik bij uitpakken:
+Bestanden na inpakken verwijderen
 4040
-Symboische koppelingen opslaan
+Symbolische koppelingen opslaan
 Harde koppelingen opslaan
 Alternate data streams opslaan
 Bestandsbeveiliging opslaan
@@ -380,59 +380,59 @@ Opslaan
 Snelst
 Snel
 Normaal
-Maximum
+Maximaal
 Ultra
 4060
 Bestanden toevoegen en vervangen
 Bestanden bijwerken en toevoegen
-Bestaande bestanden opfrissen
+Bestaande bestanden bijwerken
 Bestanden synchroniseren
 4070
 Bladeren
 Alle bestanden
-Niet compact
+Niet-compact
 Compact
 6000
 Kopiëren
 Verplaatsen
 Kopiëren naar:
 Verplaatsen naar:
-Bezig met kopiëren...
-Bezig met verplaatsen...
-Bezig met hernoemen...
+Kopiëren...
+Verplaatsen...
+Hernoemen...
 Selecteer een doelmap.
-Functie wordt niet ondersteund.
-Fout bij het hernoemen van een bestand of map
-Bevestig kopiëren van bestand
+De operatie wordt niet ondersteund voor deze map.
+Fout bij het hernoemen van bestand of map
+Kopiëren bestand bevestigen
 Weet u zeker dat u deze bestanden naar het archief wilt kopiëren
 6100
-Verwijdering bestand bevestigen
-Verwijdering map bevestigen
-Verwijdering van meerdere bestanden bevestigen
+Verwijderen bestand bevestigen
+Verwijderen map bevestigen
+Verwijderen meerdere bestanden bevestigen
 Weet u zeker dat u '{0}' wilt verwijderen?
-Weet u zeker dat u de map '{0}' en alle onderliggende items wilt verwijderen?
+Weet u zeker dat u de map '{0}' en de onderliggende inhoud wilt verwijderen?
 Weet u zeker dat u deze {0} items wilt verwijderen?
-Bezig met verwijderen...
-Fout bij het verwijderen van een bestand of map
-Het systeem kan een bestand met een lang pad niet verplaatsen naar de Prullenbak
+Verwijderen...
+Fout bij verwijderen van bestand of map
+Het systeem kan een bestand met een lang pad niet verplaatsen naar de prullenbak
 6300
-Map maken
-Bestand maken
-Naam van de map:
+Map aanmaken
+Bestand aanmaken
+Mapnaam:
 Bestandsnaam:
 Nieuwe map
 Nieuw bestand
-Fout bij het maken van de map
-Fout bij het maken van het bestand.
+Fout bij aanmaken map
+Fout bij aanmaken bestand
 6400
 Opmerking
 &Opmerking:
 Selecteren
-De-selecteren
+Deselecteren
 Masker:
 6600
 Eigenschappen
-Mappen Geschiedenis
+Mapgeschiedenis
 Diagnostische berichten
 Bericht
 7100
@@ -449,47 +449,47 @@ Verplaatsen
 Verwijderen
 Info
 7300
-Opsplitsen bestand
-&Opsplitsen naar:
-Opsplitsen in &volumes (grootte in bytes):
-Bezig met opsplitsen...
-Bevestigen opsplitsen
+Bestand opsplitsen
+Op&splitsen naar:
+Opsplitsen in &volumes, bytes:
+Opsplitsen...
+Opsplitsen bevestigen
 Weet u zeker dat u het bestand wilt opsplitsen in {0} volumes?
-De volumegrootte moet kleiner zijn dan de grootte van het oorspronkelijke bestand.
-Verkeerde volumegrootte
-Gespecificeerde volumegrootte: {0} bytes.\nWeet u zeker dat u het archief zo wilt splitsen?
+De volumegrootte moet kleiner zijn dan het oorspronkelijke bestand
+Onjuiste volumegrootte
+Opgegeven volumegrootte: {0} bytes.\nWeet u zeker dat u het archief zo wilt opsplitsen?
 7400
 Bestanden samenvoegen
 &Samenvoegen naar:
-Bezig met samenvoegen...
-Selecteer alleen het eerste bestand.
-Kan het bestand niet herkennen als onderdeel van een gesplitst bestand
-Kan niet meer dan 1  deel van een gesplitst bestand
+Samenvoegen...
+Selecteer alleen het eerste onderdeel van het opgesplitste bestand
+Kan het bestand niet herkennen als onderdeel van een opgesplitst bestand
+Kan niet meer dan één deel van het opgesplitste bestand vinden
 7500
-Bezig met checksum berekenen...
+Checksum berekenen...
 Checksum informatie
-CRC checksum voor gegevens:
-CRC checksum voor gegevens en namen:
+CRC-checksum voor gegevens:
+CRC-checksum voor gegevens en namen:
 7600
 Benchmark
 Geheugengebruik:
 Inpakken
 Uitpakken
-Waarde
-Totale waarde
+Snelheid
+Totale snelheid
 Huidig
 Resultaat
 CPU-gebruik
-Waarde / gebruik
-Doorgangen:
+Snelheid/gebruik
+Aantal tests:
 7700
-Koppeling
-Koppeling
-Koppeling van:
-Koppeling naar:
+Koppelen
+Koppelen
+Koppelen van:
+Koppelen aan:
 7710
-Koppeling Type
-Harde Koppeling
-Bestand Symbolische Koppeling
-Map Symbolische Koppeling
-Mapsplitsing
+Koppelingstype
+Harde koppeling
+Symbolische bestandskoppeling
+Symbolische mapkoppeling
+Map knooppunt

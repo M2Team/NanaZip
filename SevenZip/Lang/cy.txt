@@ -205,7 +205,7 @@ Defnyddiwch tudalenau cof &mawr
 2900
 Manylion NanaZip
 Mae NanaZip yn meddalwedd am ddim. Ond, gallwch cefnogi yNanaZip
-\ndatblygiad o SevenZip trwy cofrestru.
+\ndatblygiad o 7-Zip trwy cofrestru.
 3000
 
 Mae na ddim wallau

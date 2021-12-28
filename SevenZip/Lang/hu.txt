@@ -1,7 +1,7 @@
 ﻿;!@Lang2@!UTF-8!
 ;       : Jozsef Tamas Herczeg
 ;  9.16 : Nyilas MISY
-;
+; 15.00 : 2021-11-09 : Barnabas Kovacs
 ;
 ;
 ;
@@ -62,6 +62,8 @@ Különbség
 Mappa létrehozása
 Fájl létrehozása
 &Kilépés
+Link
+Alternatív adatfolyam
 600
 Min&d kijelölése
 Kijelölés megszüntetése
@@ -84,6 +86,7 @@ Gyökérmappa megnyitása
 Egy szinttel feljebb
 Mappa előzmények...
 &Frissítés
+Automatikus frissítés
 750
 Archiválás eszköztár
 Szokásos eszköztár
@@ -131,7 +134,7 @@ Mappák
 Fájlok
 Verzió
 Kötet
-Többkötet
+Több kötet
 Eltolás
 Linkek
 Blokkok
@@ -146,11 +149,11 @@ Checksum
 Karakterisztika
 Virtuális cím
 ID
-Név rendezése
+Rövid név
 Alkalmazás készítője
 Szakasz mérete
 Mód
-Link
+Szimbolikus link
 Hiba
 Teljes méret
 Szabad terület
@@ -158,6 +161,38 @@ Kluszterméret
 Címke
 Helyi név
 Szolgáltató
+NT biztonság
+Alternatív adatfolyam
+Aux
+Törölt
+Is Tree
+
+
+Hiba típusa
+Hibák
+Hibák
+Figyelmeztetések
+Figyelem
+Adatfolyamok
+Alternatív adatfolyamok
+Alternatív adatfolyam mérete
+Virtuális méret
+Kitömörített mérete
+Teljes fizikai méret
+Kötet index
+Altípus
+Rövid megjegyzés
+Kódlap
+
+
+
+Kitöltő mérete
+Beágyazott extra adat mérete
+Link
+Hard link
+iNode
+
+Csak olvasható
 2100
 Beállítások
 Nyelv
@@ -168,10 +203,12 @@ Szerkesztő
 2200
 Rendszer
 NanaZip társítása:
+Minden felhasználóhoz
 2301
 NanaZip hozzáadása a parancsértelmező helyi menüjéhez
 Lépcsőzetes helyi menü
 Helyi menü elemek:
+Ikonok a helyi menüben
 2320
 <Mappa>
 <Archívum>
@@ -201,7 +238,7 @@ Látható a rendszermenü
 &Rácsvonalak kijelzése
 Elem megnyitása egyszeres kattintással
 &Alternativ kiválasztási mód
-&Nagy memória haszálata
+&Nagy memória használata
 2900
 A NanaZip névjegye
 A NanaZip ingyenes szoftver.
@@ -223,12 +260,25 @@ A művelet nem hívható meg abból a mappából amelynek hosszú az elérési �
 Egy fájlt ki kell jelölnie!
 Egy vagy több fájlt ki kell jelölnie
 Túl sok elem
+Nem nyitható meg a fájl mint {0} archívum
+Fájl nyitva van mint {0} archívum
+Az archívum eltolással nyitva van
 3300
 Kibontás
 Tömörítés
 Tesztelés
 Megnyitás...
 Vizsgálat...
+Eltávolítás
+3320
+Hozzáadás
+Frissítés
+Analizálás
+Másolat készítés
+Újratömörítés
+Átugrás
+Törlés
+Fejléc készítés
 3400
 Kibontás
 &Kibontás ide:
@@ -237,6 +287,8 @@ Határozza meg a kibontott fájlok tárolómappáját.
 Útvonal
 Teljes útvonal
 Nincs útvonal
+Abszolút útvonal
+Relatív útvonal
 3420
 Felülírás
 Rákérdezés felülírás előtt
@@ -244,6 +296,9 @@ Felülírás rákérdezés nélkül
 A létező fájlok kihagyása
 Automatikus átnevezés
 A létező fájlok automatikus átnevezése
+3430
+Gyökérmappa többszörözés megszüntetése
+Biztonsági adatok visszaállítása
 3500
 Fájlcsere megerősítése
 A célmappa már tartalmazza a feldolgozott fájlt.
@@ -257,6 +312,25 @@ Adathiba a következőben: '{0}'. A fájl sérült.
 CRC-hiba a következőben: '{0}'. A fájl sérült.
 Adathiba a titkosított fájlban: '{0}'. Hibás a jelszó?
 CRC-hiba a titkosított fájlban: '{0}'. Hibás a jelszó?
+3710
+Hibás jelszó?
+3721
+Nem támogatott tömörítési mód
+Adat hiba
+CRC hiba
+Elérhetetlen adat
+az adat váratlanul véget ért
+There are some data after the end of the payload data
+Ez nem archívum
+Fejléc hiba
+Hibás jelszó
+3763
+Unavailable start of archive
+Unconfirmed start of archive
+
+
+
+Nem támogatott funkció
 3800
 Jelszó beírása
 Írja be a jelszót:
@@ -279,7 +353,7 @@ Archívumok:
 Behelyezés archívumba
 &Archívum:
 Akt&ualizálás módja:
-Arcíhvum &formátuma:
+Archívum &formátuma:
 Tömörítés &foka:
 Tömörítés &módja:
 &Címtár mérete:
@@ -295,6 +369,12 @@ Titkosítási eljárás:
 Fájlnevek &titkosítása
 A tömörítés memóriahasználata:
 A kitömörítés memóriahasználata:
+Tömörítés után törölje a fájlt
+4040
+Szimbolikus link tárolása
+Hard link tárolása
+Alternatív adatfolyam tárolása
+Biztonsági beállítások tárolása
 4050
 Raktár
 Leggyorsabb
@@ -334,7 +414,7 @@ Biztos, hogy törölni akarja a(z) '{0}' mappát és annak teljes tartalmát?
 Biztos, hogy törölni akarja ezt a(z) {0} elemet?
 Törlés...
 Hiba történt a fájl vagy a mappa törlésekor
-A rendszer nembírja mozgatni a fájlt a hosszú útvonallal a Lomtárba
+A rendszer nem bírja mozgatni a fájlt a hosszú útvonallal a Lomtárba
 6300
 Mappa létrehozása
 Fájl létrehozása
@@ -375,7 +455,7 @@ Darabolás &kötetekre, bájt:
 Darabolás...
 Darabolás megerősítése
 Biztos szét akarja darabolni a fájlt {0} kötetre?
-Kötet méretének kissebbnek kell lennie, mint az eredeti fájl mérete
+Kötet méretének kisebbnek kell lennie, mint az eredeti fájl mérete
 Hibás kötet méret
 A megadott kötet mérete: {0} byte.\nBiztos fel akarja darabolni az archívumot ilyen kötetre?
 7400
@@ -402,3 +482,14 @@ Eredmény
 CPU használata
 Becslés / Használat
 Menetek:
+7700
+Link
+Link
+Link innen:
+Link ide:
+7710
+Link típusa
+Hard link
+Szimbolikus fájl link
+Szimbolikus mappa link
+Mappa csatolási pont

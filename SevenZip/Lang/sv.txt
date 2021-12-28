@@ -1,7 +1,7 @@
 ﻿;!@Lang2@!UTF-8!
 ;       : Andreas M Nilsson, Christoffer Enqvist
 ;  4.59 : Bernhard Eriksson
-;
+; 15.00 : 2021-11-17 : Mikael Hiort af Ornäs
 ;
 ;
 ;
@@ -27,9 +27,9 @@ Hjälp
 
 F&ortsätt
 440
-Ja till &Alla
-Nej till A&lla
-Stopp
+Ja till &alla
+Nej till a&lla
+Stoppa
 Starta om
 &Bakgrunden
 &Förgrunden
@@ -54,14 +54,16 @@ Verkt&yg
 &Flytta till...
 &Ta bort
 &Dela upp fil...
-&Sätt ihop filer...
+&Sammanfoga filer...
 E&genskaper
 Komme&ntera
-Beräkna checksumma
-
+Beräkna kontrollsumma
+Differens
 Skapa mapp
 Skapa fil
 &Avsluta
+Skapa länk
+&Alternativa dataströmmar
 600
 Markera &alla
 Avmarkera alla
@@ -76,27 +78,28 @@ Sm&å ikoner
 &Lista
 &Detaljerad lista
 730
-Osorterade
+Osorterad
 Platt vy
-&2 Paneler
+&Två paneler
 &Verktygsfält
 Öppna rotmappen
 Upp en nivå
 Mapphistorik...
 &Uppdatera
+Uppdatera automatiskt
 750
 Verktygsfältet Arkiv
 Verktygsfältet Standard
-Stora Knappar
-Visa Knapptext
+Stora knappar
+Visa knapptext
 800
-&Lägg mappen till Favoriter som
+&Lägg till i mappen i Favoriter som
 Bokmärke
 900
 &Alternativ...
-&Benchmark
+&Prestandamått
 960
-&Innehåll...
+&Hjälp...
 &Om NanaZip...
 1003
 Sökväg
@@ -104,35 +107,35 @@ Namn
 Filändelse
 Mapp
 Storlek
-Storlek komprimerad
+Komprimerad storlek
 Attribut
 Skapad
 Använd
 Ändrad
-Sammanhängande (Solid)
+Enhetlig
 Kommenterad
 Krypterad
 Delad före
 Delad efter
 Ordlista
-CRC
+
 Typ
 Anti
 Metod
-Värd OS
+Värdoperativsystem
 Filsystem
 Användare
 Grupp
 Block
 Kommentar
 Position
-Sökvägs prefix
-Kataloger
+Sökvägsprefix
+Mappar
 Filer
 Version
 Volym
-Multivolym
-Offset
+Flervolym
+Förskjutning
 Länkar
 Block
 Volymer
@@ -141,151 +144,222 @@ Volymer
 Big-endian
 CPU
 Fysisk storlek
-Storlek på header
-Checksumma
-Karakteristisk
+Huvudets storlek
+Kontrollsumma
+Egenskaper
 Virtuell adress
-
-
-
-
-
-
+ID
+Kortnamn
+Upphovsprogram
+Sektorstorlek
+Läge
+Symbolisk länk
 Fel
-Total Storlek
+Total storlek
 Ledigt utrymme
-Kluster storlek
+Klusterstorlek
 Etikett
-Datornamn
-Nätverkstyp
+Lokalt namn
+Leverantör
+NT-säkerhet
+Alternativ dataström
+Aux
+Borttagen
+Är träd
+
+
+Feltyp
+Fel
+Fel
+Varningar
+Varning
+Dataströmmar
+Alternativa dataströmmar
+Storlek på alternativa dataströmmar
+Virtuell storlek
+Dekomprimerad storlek
+Total fysisk storlek
+Volymindex
+Undertyp
+Kort kommentar
+Teckentabell
+
+
+
+Storlek på filslut
+Storlek på inbäddad stub
+Länk
+Hård länk
+I-nod
+
+Skrivskyddad
 2100
 Alternativ
 Språk
 Språk:
 Redigerare
 &Redigerare:
-
+&Differens:
 2200
 System
-Associera med NanaZip:
+Associera NanaZip med följande filtyper:
+Alla användare
 2301
-Lägg till NanaZip som alternativ i Utforskarens högerklicksmenyn
+Lägg till i NanaZip som alternativ i Utforskarens snabbmeny
 Placera NanaZip som en undermeny
-Objekt i högerklicksmenyn:
+Objekt i snabbmenyn:
+Visa ikoner i snabbmenyn
 2320
 <Mapp>
 <Arkiv>
-Öppna
+Öppna arkiv
 Packa upp filer...
-Lägg till arkiv...
+Lägg till i arkiv...
 Kontrollera arkivet
 Packa upp här
 Packa upp till {0}
-Lägg till {0}
+Lägg till i {0}
 Komprimera och skicka som e-post...
 Komprimera till {0} och skicka som e-post
 2400
 Mappar
 &Arbetsmapp
-&Systemets temp-mapp
-A&ktuell
-Spe&cificerad:
+&Systemets mapp för temporära filer
+A&ktuell mapp
+&Välj mapp:
 Använd enbart för &flyttbara enheter
 Ange plats där temporära arkivfiler ska sparas.
 2500
 Inställningar
-Visa ".." objektet
-Visa riktiga ikoner, för filer innehållande ikoner (el. länkade)
-Visa system-menyn
+Visa objektet ".." (gå till överordnad mapp)
+Visa riktiga filikoner
+Visa systemmenyn
 Markera &hel rad
-Visa &rutnät
-
+Visa &stödlinjer
+Enkelklick för att öppna objekt
 &Alternativt markeringsläge
 Använd &stora minnessidor
 2900
 Om NanaZip
-NanaZip är fri programvara. Du kan emellertid stödja den fortsatta utvecklingen av NanaZip genom att donera. Den aktuella översättningen på svenska är gjord av Wermlandsdata, baserad på arbete utfört av Andreas M Nilsson och Christoffer Enqvist.
+NanaZip är fri programvara.
 3000
 Systemet kan inte allokera den begärda minnesmängden
 Inga fel påträffades
 {0} objekt markerade
-Kan inte skapa mapp '{0}'
-Uppdatering stöds inte för det här arkivet.
-Kan inte öppna filen '{0}' som ett arkiv
-Kan inte öppna det krypterade arkivet '{0}'. Fel lösenord?
-Arkiv typen stöds ej
-Filen {0} existerar redan
+Det går inte att skapa mappen '{0}'
+Uppdateringsåtgärder stöds inte för det här arkivet.
+Det går inte att öppna filen '{0}' som ett arkiv
+Det går inte att öppna det krypterade arkivet '{0}'. Fel lösenord?
+Arkivtypen stöds inte
+Filen '{0}' finns redan
 Filen '{0}' har blivit ändrad.\nVill du uppdatera den i arkivet?
-Kan inte uppdatera filen\n'{0}'
-Kan inte starta redigeraren.
-Filen verkar vara ett virus (filnamnet innehåller 'långa' mellanslag).
-Operation kan inte utföras från en katalog med en så lång sökväg.
+Det går inte att uppdatera filen\n'{0}'
+Det går inte att starta redigeraren.
+Filen verkar vara ett virus (filnamnet innehåller långa mellanslag).
+Åtgärden kan inte utföras från en mapp med en så lång sökväg.
 Du måste välja en fil
 Du måste välja en eller flera filer
 För många objekt
+Det går inte att öppna filen som ett {0}-arkiv
+Filen har öppnats som ett {0}-arkiv
+Arkivet har öppnats med förskjutning
 3300
 Packar upp
 Komprimerar
 Kontrollerar
 Öppnar...
 Skannar...
+Tar bort
+3320
+Lägger till
+Uppdaterar
+Analyserar
+Replikerar
+Packar om
+Hoppar över
+Tar bort
+Skapar huvud
 3400
 Packa upp
 &Packa upp till:
 Ange sökväg för uppackade filer.
 3410
-&Sökvägstyp
-Kompletta sökvägar
+&Sökvägsläge:
+Fullständiga sökvägar
 Inga sökvägar
+Absoluta sökvägar
+Relativa sökvägar
 3420
-&Överskrivning
+&Överskrivningsläge:
 Fråga före överskrivning
-Skriv över befintliga filer
+Skriv över utan att fråga
 Hoppa över befintliga filer
-Automatisk omdöpning
-Automatisk omdöpning av befintliga filer
+Byt namn automatiskt
+Byt namn på befintliga filer automatiskt
+3430
+Skapa ingen dubblett av rotmappen
+Återställ filsäkerhet
 3500
 Bekräfta överskrivning av fil
 Målmappen innehåller redan den behandlade filen.
 Vill du skriva över den befintliga filen
 med den här?
-{0} bytes
-A&utomatisk omdöpning
+{0} byte
+Byt namn a&utomatiskt
 3700
 Komprimeringsmetoden stöds inte för '{0}'.
 Datafel i '{0}'. Filen är korrupt.
 CRC-fel i '{0}'. Filen är korrupt.
 Datafel i den krypterade filen '{0}'. Fel lösenord?
 CRC-fel i den krypterade filen '{0}'. Fel lösenord?
+3710
+Fel lösenord?
+3721
+Komprimeringsmetoden stöds inte
+Datafel
+CRC-fel
+Data är inte tillgänglig
+Oväntat dataslut
+Det finns data efter nyttolastdataslutet
+Är inte ett arkiv
+Fel i huvudet
+Fel lösenord
+3763
+Arkivets början är inte tillgänglig
+Arkivets början har inte bekräftats
+
+
+
+Funktionen stöds inte
 3800
 Ange lösenord
 Ange lösenord:
 Upprepa lösenord:
 &Visa lösenord
-Lösenorden stämmer inte överens.
-Använd endast engelska tecken, siffror och special tecken (!, #, $, ...) till lösenord
-Lösenordet är för långt.
-&Lösenord
+Lösenorden stämmer inte överens
+Använd endast engelska bokstäver, siffror och specialtecken (!, #, $, ...) till lösenord
+Lösenordet är för långt
+Lösenord
 3900
 Förfluten tid:
 Återstående tid:
-Storlek:
+Total storlek:
 Hastighet:
 Bearbetat:
 Komprimeringsgrad:
 Fel:
 Arkiv:
 4000
-Lägg till arkiv
+Lägg till i arkiv
 &Arkiv:
-&Uppdateringsmetod:
+&Uppdateringsläge:
 Arkiv&format:
 Komprimeringsniv&å:
 &Komprimeringsmetod:
 Storlek på &ordlista:
 Storlek på o&rd:
-Solit block storlek:
-Antal trådar:
+Storlek på enhetliga block:
+Antal CPU-trådar:
 &Parametrar:
 Alternativ
 Skapa sj&älvuppackande arkiv
@@ -293,10 +367,16 @@ Komprimera delade filer
 Kryptering
 Krypteringsmetod:
 Kryptera fil&namn
-Minne behövt vid komprimering:
-Minne behövt vid dekomprimering:
+Minnesanvändning vid komprimering:
+Minnesanvändning vid dekomprimering:
+Ta bort filer efter komprimering
+4040
+Arkivera symboliska länkar utan komprimering
+Arkivera hårda länkar utan komprimering
+Arkivera alternativa dataströmmar utan komprimering
+Arkivera filsäkerhet utan komprimering
 4050
-Okomprimerat
+Ingen komprimering
 Snabbaste
 Snabb
 Normal
@@ -310,8 +390,8 @@ Synkronisera filer
 4070
 Bläddra
 Alla filer
-Icke-solit
-Solit
+Icke enhetlig
+Enhetlig
 6000
 Kopiera
 Flytta
@@ -319,10 +399,10 @@ Kopiera till:
 Flytta till:
 Kopierar...
 Flyttar...
-Döper om...
+Byter namn...
 Välj målmapp.
-Funktionen stöds inte.
-Ett fel uppstod under omdöpning av fil eller mapp
+Åtgärden stöds inte för den här mappen.
+Ett fel uppstod vid byte av namn på fil eller mapp
 Bekräfta kopiering av fil
 Är du säker på att du vill kopiera filerna till arkivet
 6100
@@ -334,7 +414,7 @@ Bekräfta borttagning av flera filer
 Är du säker på att du vill ta bort de här {0} objekten?
 Tar bort...
 Ett fel uppstod under borttagning av fil eller mapp
-Systemet kan inte flytta en fil med s lng skvg till papperskorgen
+Systemet kan inte flytta en fil med så lång sökväg till papperskorgen
 6300
 Skapa mapp
 Skapa fil
@@ -353,7 +433,7 @@ Filter:
 6600
 Egenskaper
 Mapphistorik
-Diagnostiska meddelanden
+Diagnostikmeddelanden
 Meddelande
 7100
 Dator
@@ -367,38 +447,49 @@ Testa
 Kopiera
 Flytta
 Radera
-Info
+Egenskaper
 7300
-Dela Upp Fil
+Dela upp fil
 &Dela upp till:
-Dela upp i &delar (volymer), bytes:
+Dela upp i &volymer, byte:
 Delar upp...
 Bekräfta uppdelning
 Är det säkert du vill dela upp filen i {0} volymer?
 Volymstorleken måste vara mindre än storleken på originalfilen.
 Felaktig volymstorlek.
-Specificerad volymstorlek: {0} byte.\nÄr du säker du vill dela arkivet i sådana delar?
+Angiven volymstorlek: {0} byte.\nÄr du säker du vill dela arkivet i sådana delar?
 7400
-Sätt Ihop Filer
-&Sätt ihop till:
-Sätter ihop...
-Markera bara första filen
-Kan inte upptäcka att filen är en del av en uppdelad fil
-Kan inte hitta mer än en del av en uppdelad fil
+Sammanfoga filer
+&Sammanfoga till:
+Sammanfogar...
+Markera bara första delen av den delade filen
+Det går inte att identifiera filen som en del av en uppdelad fil
+Det går inte att hitta mer än en del av den uppdelade filen
 7500
-Beräknar checksumma...
-Checksumma information
-CRC checksumma för data:
-CRC checksumma för data och namn:
+Beräknar kontrollsumma...
+Kontrollsummeinformation
+CRC-kontrollsumma för data:
+CRC-kontrollsumma för data och namn:
 7600
-Benchmark
+Prestandamätning
 Minnesanvändning:
 Komprimering
 Dekomprimering
 Prestanda
-Total prestanda
+Prestandaresultat
 Aktuellt
 Resultat
-CPU Användning
-Rate / Användning
+CPU-anv.
+Prest./Anv.
 Omgångar:
+7700
+Länk
+Skapa länk
+Länk från:
+Länk till:
+7710
+Länktyp
+Hård länk
+Symbolisk fillänk
+Symbolisk kataloglänk
+Katalogknutpunkt
