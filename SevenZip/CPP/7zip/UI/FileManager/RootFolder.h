@@ -1,4 +1,4 @@
-// RootFolder.h
+﻿// RootFolder.h
 
 #ifndef __ROOT_FOLDER_H
 #define __ROOT_FOLDER_H

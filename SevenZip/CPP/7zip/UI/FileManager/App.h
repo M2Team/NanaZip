@@ -1,4 +1,4 @@
-// App.h
+﻿// App.h
 
 #ifndef __APP_H
 #define __APP_H

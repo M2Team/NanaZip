@@ -1,4 +1,4 @@
-// BenchmarkDialog.h
+﻿// BenchmarkDialog.h
 
 #ifndef __BENCHMARK_DIALOG_H
 #define __BENCHMARK_DIALOG_H

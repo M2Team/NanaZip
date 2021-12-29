@@ -1,4 +1,4 @@
-// RootFolder.cpp
+﻿// RootFolder.cpp
 
 #include "StdAfx.h"
 

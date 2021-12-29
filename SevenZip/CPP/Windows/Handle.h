@@ -1,4 +1,4 @@
-// Windows/Handle.h
+﻿// Windows/Handle.h
 
 #ifndef __WINDOWS_HANDLE_H
 #define __WINDOWS_HANDLE_H

@@ -1,4 +1,4 @@
-/* Delta.h -- Delta converter
+﻿/* Delta.h -- Delta converter
 2013-01-18 : Igor Pavlov : Public domain */
 
 #ifndef __DELTA_H

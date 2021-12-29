@@ -1,4 +1,4 @@
-// ArchiveName.h
+﻿// ArchiveName.h
 
 #ifndef __ARCHIVE_NAME_H
 #define __ARCHIVE_NAME_H

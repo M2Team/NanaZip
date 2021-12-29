@@ -1,4 +1,4 @@
-// Crypto/MyAes.h
+﻿// Crypto/MyAes.h
 
 #ifndef __CRYPTO_MY_AES_H
 #define __CRYPTO_MY_AES_H

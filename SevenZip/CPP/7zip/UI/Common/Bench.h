@@ -1,4 +1,4 @@
-// Bench.h
+﻿// Bench.h
 
 #ifndef __7ZIP_BENCH_H
 #define __7ZIP_BENCH_H

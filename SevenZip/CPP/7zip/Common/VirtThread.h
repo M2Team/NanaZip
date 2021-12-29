@@ -1,4 +1,4 @@
-// VirtThread.h
+﻿// VirtThread.h
 
 #ifndef __VIRT_THREAD_H
 #define __VIRT_THREAD_H

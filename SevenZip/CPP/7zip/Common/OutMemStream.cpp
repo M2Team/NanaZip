@@ -1,4 +1,4 @@
-// OutMemStream.cpp
+﻿// OutMemStream.cpp
 
 #include "StdAfx.h"
 

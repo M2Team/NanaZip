@@ -1,4 +1,4 @@
-// OutBuffer.cpp
+﻿// OutBuffer.cpp
 
 #include "StdAfx.h"
 

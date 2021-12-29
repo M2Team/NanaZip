@@ -1,4 +1,4 @@
-// NetFolder.h
+﻿// NetFolder.h
 
 #ifndef __NET_FOLDER_H
 #define __NET_FOLDER_H

@@ -1,4 +1,4 @@
-// MyWindows.cpp
+﻿// MyWindows.cpp
 
 #include "StdAfx.h"
 

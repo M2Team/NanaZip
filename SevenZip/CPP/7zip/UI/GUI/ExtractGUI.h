@@ -1,4 +1,4 @@
-// GUI/ExtractGUI.h
+﻿// GUI/ExtractGUI.h
 
 #ifndef __EXTRACT_GUI_H
 #define __EXTRACT_GUI_H

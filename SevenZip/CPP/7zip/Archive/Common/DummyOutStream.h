@@ -1,4 +1,4 @@
-// DummyOutStream.h
+﻿// DummyOutStream.h
 
 #ifndef __DUMMY_OUT_STREAM_H
 #define __DUMMY_OUT_STREAM_H

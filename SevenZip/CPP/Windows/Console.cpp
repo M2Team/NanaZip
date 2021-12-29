@@ -1,4 +1,4 @@
-// Windows/Console.cpp
+﻿// Windows/Console.cpp
 
 #include "StdAfx.h"
 

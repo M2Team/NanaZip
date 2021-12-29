@@ -1,4 +1,4 @@
-// ImplodeDecoder.cpp
+﻿// ImplodeDecoder.cpp
 
 #include "StdAfx.h"
 

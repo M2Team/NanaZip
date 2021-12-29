@@ -1,4 +1,4 @@
-// Windows/Control/Window2.h
+﻿// Windows/Control/Window2.h
 
 #ifndef __WINDOWS_CONTROL_WINDOW2_H
 #define __WINDOWS_CONTROL_WINDOW2_H

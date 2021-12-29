@@ -1,4 +1,4 @@
-// BcjCoder.h
+﻿// BcjCoder.h
 
 #ifndef __COMPRESS_BCJ_CODER_H
 #define __COMPRESS_BCJ_CODER_H

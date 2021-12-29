@@ -1,4 +1,4 @@
-// StreamUtils.h
+﻿// StreamUtils.h
 
 #ifndef __STREAM_UTILS_H
 #define __STREAM_UTILS_H

@@ -1,4 +1,4 @@
-// StreamBinder.h
+﻿// StreamBinder.h
 
 #ifndef __STREAM_BINDER_H
 #define __STREAM_BINDER_H

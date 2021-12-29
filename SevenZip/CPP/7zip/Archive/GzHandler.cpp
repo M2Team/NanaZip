@@ -1,4 +1,4 @@
-// GzHandler.cpp
+﻿// GzHandler.cpp
 
 #include "StdAfx.h"
 

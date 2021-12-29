@@ -1,4 +1,4 @@
-/* Bcj2Enc.c -- BCJ2 Encoder (Converter for x86 code)
+﻿/* Bcj2Enc.c -- BCJ2 Encoder (Converter for x86 code)
 2021-02-09 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

@@ -1,4 +1,4 @@
-// LzmaDecoder.cpp
+﻿// LzmaDecoder.cpp
 
 #include "StdAfx.h"
 

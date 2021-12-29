@@ -1,4 +1,4 @@
-// PpmdZip.cpp
+﻿// PpmdZip.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Archive/CabHeader.h
+﻿// Archive/CabHeader.h
 
 #ifndef __ARCHIVE_CAB_HEADER_H
 #define __ARCHIVE_CAB_HEADER_H

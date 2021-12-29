@@ -1,4 +1,4 @@
-// CopyDialog.cpp
+﻿// CopyDialog.cpp
 
 #include "StdAfx.h"
 

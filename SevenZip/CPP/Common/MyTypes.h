@@ -1,4 +1,4 @@
-// Common/MyTypes.h
+﻿// Common/MyTypes.h
 
 #ifndef __COMMON_MY_TYPES_H
 #define __COMMON_MY_TYPES_H

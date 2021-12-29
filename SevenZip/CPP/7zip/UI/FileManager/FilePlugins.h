@@ -1,4 +1,4 @@
-// FilePlugins.h
+﻿// FilePlugins.h
 
 #ifndef __FILE_PLUGINS_H
 #define __FILE_PLUGINS_H

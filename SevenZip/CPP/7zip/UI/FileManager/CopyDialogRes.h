@@ -1,4 +1,4 @@
-#define IDD_COPY  96
+﻿#define IDD_COPY  96
 
 #define IDT_COPY           100
 #define IDC_COPY           101

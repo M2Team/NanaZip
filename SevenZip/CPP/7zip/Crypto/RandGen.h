@@ -1,4 +1,4 @@
-// RandGen.h
+﻿// RandGen.h
 
 #ifndef __CRYPTO_RAND_GEN_H
 #define __CRYPTO_RAND_GEN_H

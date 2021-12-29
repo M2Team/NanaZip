@@ -1,4 +1,4 @@
-// CompressionMode.h
+﻿// CompressionMode.h
 
 #ifndef __ZIP_COMPRESSION_MODE_H
 #define __ZIP_COMPRESSION_MODE_H

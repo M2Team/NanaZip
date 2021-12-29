@@ -1,4 +1,4 @@
-// ExtractDialog.h
+﻿// ExtractDialog.h
 
 #ifndef __EXTRACT_DIALOG_H
 #define __EXTRACT_DIALOG_H

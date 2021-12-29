@@ -1,4 +1,4 @@
-// Common/MyString.h
+﻿// Common/MyString.h
 
 #ifndef __COMMON_MY_STRING_H
 #define __COMMON_MY_STRING_H

@@ -1,4 +1,4 @@
-// PanelListNotify.cpp
+﻿// PanelListNotify.cpp
 
 #include "StdAfx.h"
 

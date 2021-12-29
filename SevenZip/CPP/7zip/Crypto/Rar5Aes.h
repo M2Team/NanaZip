@@ -1,4 +1,4 @@
-// Crypto/Rar5Aes.h
+﻿// Crypto/Rar5Aes.h
 
 #ifndef __CRYPTO_RAR5_AES_H
 #define __CRYPTO_RAR5_AES_H

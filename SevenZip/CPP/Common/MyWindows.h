@@ -1,4 +1,4 @@
-// MyWindows.h
+﻿// MyWindows.h
 
 #ifndef __MY_WINDOWS_H
 #define __MY_WINDOWS_H

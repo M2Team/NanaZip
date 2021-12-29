@@ -1,4 +1,4 @@
-/*
+﻿/*
 Lizard auto-framing library
 Copyright (C) 2011-2016, Yann Collet
 Copyright (C) 2016-2017, Przemyslaw Skibinski

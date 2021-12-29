@@ -1,4 +1,4 @@
-// FormatUtils.cpp
+﻿// FormatUtils.cpp
 
 #include "StdAfx.h"
 

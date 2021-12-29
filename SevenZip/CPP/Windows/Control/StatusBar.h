@@ -1,4 +1,4 @@
-// Windows/Control/StatusBar.h
+﻿// Windows/Control/StatusBar.h
 
 #ifndef __WINDOWS_CONTROL_STATUSBAR_H
 #define __WINDOWS_CONTROL_STATUSBAR_H

@@ -1,4 +1,4 @@
-// Archive/Common/ItemNameUtils.h
+﻿// Archive/Common/ItemNameUtils.h
 
 #ifndef __ARCHIVE_ITEM_NAME_UTILS_H
 #define __ARCHIVE_ITEM_NAME_UTILS_H

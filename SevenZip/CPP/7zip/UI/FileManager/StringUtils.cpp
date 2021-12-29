@@ -1,4 +1,4 @@
-// StringUtils.cpp
+﻿// StringUtils.cpp
 
 #include "StdAfx.h"
 

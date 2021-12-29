@@ -1,4 +1,4 @@
-// OutMemStream.h
+﻿// OutMemStream.h
 
 #ifndef __OUT_MEM_STREAM_H
 #define __OUT_MEM_STREAM_H

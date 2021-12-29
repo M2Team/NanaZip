@@ -1,4 +1,4 @@
-// Common/Wildcard.h
+﻿// Common/Wildcard.h
 
 #ifndef __COMMON_WILDCARD_H
 #define __COMMON_WILDCARD_H

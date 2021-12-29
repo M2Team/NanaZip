@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2019, Conor McCarthy
 * All rights reserved.
 *

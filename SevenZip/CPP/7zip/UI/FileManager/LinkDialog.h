@@ -1,4 +1,4 @@
-// LinkDialog.h
+﻿// LinkDialog.h
 
 #ifndef __LINK_DIALOG_H
 #define __LINK_DIALOG_H

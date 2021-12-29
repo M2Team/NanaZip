@@ -1,4 +1,4 @@
-// ProgressDialog2.cpp
+﻿// ProgressDialog2.cpp
 
 #include "StdAfx.h"
 

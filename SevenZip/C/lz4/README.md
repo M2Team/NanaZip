@@ -1,4 +1,4 @@
-LZ4 - Library Files
+﻿LZ4 - Library Files
 ================================
 
 The `/lib` directory contains many files, but depending on project's objectives,

@@ -1,4 +1,4 @@
-// Common/Defs.h
+﻿// Common/Defs.h
 
 #ifndef __COMMON_DEFS_H
 #define __COMMON_DEFS_H

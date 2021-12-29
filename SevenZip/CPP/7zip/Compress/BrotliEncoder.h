@@ -1,4 +1,4 @@
-// (C) 2017 Tino Reichardt
+﻿// (C) 2017 Tino Reichardt
 
 #define BROTLI_STATIC_LINKING_ONLY
 #include "../../../C/Alloc.h"

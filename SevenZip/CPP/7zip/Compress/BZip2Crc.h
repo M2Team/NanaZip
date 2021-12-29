@@ -1,4 +1,4 @@
-// BZip2Crc.h
+﻿// BZip2Crc.h
 
 #ifndef __BZIP2_CRC_H
 #define __BZIP2_CRC_H

@@ -1,4 +1,4 @@
-// PanelItemOpen.cpp
+﻿// PanelItemOpen.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Update.h
+﻿// Update.h
 
 #ifndef __COMMON_UPDATE_H
 #define __COMMON_UPDATE_H

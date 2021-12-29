@@ -1,4 +1,4 @@
-/* Sha256Opt.c -- SHA-256 optimized code for SHA-256 hardware instructions
+﻿/* Sha256Opt.c -- SHA-256 optimized code for SHA-256 hardware instructions
 2021-04-01 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

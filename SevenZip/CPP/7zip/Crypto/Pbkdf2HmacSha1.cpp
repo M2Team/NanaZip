@@ -1,4 +1,4 @@
-// Pbkdf2HmacSha1.cpp
+﻿// Pbkdf2HmacSha1.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// XpressDecoder.cpp
+﻿// XpressDecoder.cpp
 
 #include "StdAfx.h"
 

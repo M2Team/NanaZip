@@ -1,4 +1,4 @@
-// FastLzma2Register.cpp
+﻿// FastLzma2Register.cpp
 
 #include "StdAfx.h"
 

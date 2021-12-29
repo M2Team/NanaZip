@@ -1,4 +1,4 @@
-// VhdHandler.cpp
+﻿// VhdHandler.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-/* Delta.c -- Delta converter
+﻿/* Delta.c -- Delta converter
 2021-02-09 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

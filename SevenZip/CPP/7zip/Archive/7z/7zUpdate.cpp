@@ -1,4 +1,4 @@
-// 7zUpdate.cpp
+﻿// 7zUpdate.cpp
 
 #include "StdAfx.h"
 

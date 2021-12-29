@@ -1,4 +1,4 @@
-// FilterCoder.h
+﻿// FilterCoder.h
 
 #ifndef __FILTER_CODER_H
 #define __FILTER_CODER_H

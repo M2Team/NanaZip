@@ -1,4 +1,4 @@
-// PanelCrc.cpp
+﻿// PanelCrc.cpp
 
 #include "StdAfx.h"
 

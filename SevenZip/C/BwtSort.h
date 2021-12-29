@@ -1,4 +1,4 @@
-/* BwtSort.h -- BWT block sorting
+﻿/* BwtSort.h -- BWT block sorting
 2013-01-18 : Igor Pavlov : Public domain */
 
 #ifndef __BWT_SORT_H

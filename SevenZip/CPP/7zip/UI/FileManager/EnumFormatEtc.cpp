@@ -1,4 +1,4 @@
-// EnumFormatEtc.cpp
+﻿// EnumFormatEtc.cpp
 
 #include "StdAfx.h"
 

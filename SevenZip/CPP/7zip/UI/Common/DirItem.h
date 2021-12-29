@@ -1,4 +1,4 @@
-// DirItem.h
+﻿// DirItem.h
 
 #ifndef __DIR_ITEM_H
 #define __DIR_ITEM_H

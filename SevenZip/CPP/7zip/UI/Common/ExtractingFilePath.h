@@ -1,4 +1,4 @@
-// ExtractingFilePath.h
+﻿// ExtractingFilePath.h
 
 #ifndef __EXTRACTING_FILE_PATH_H
 #define __EXTRACTING_FILE_PATH_H

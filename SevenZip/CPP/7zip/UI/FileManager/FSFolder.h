@@ -1,4 +1,4 @@
-// FSFolder.h
+﻿// FSFolder.h
 
 #ifndef __FS_FOLDER_H
 #define __FS_FOLDER_H

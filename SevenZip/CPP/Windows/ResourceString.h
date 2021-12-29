@@ -1,4 +1,4 @@
-// Windows/ResourceString.h
+﻿// Windows/ResourceString.h
 
 #ifndef __WINDOWS_RESOURCE_STRING_H
 #define __WINDOWS_RESOURCE_STRING_H

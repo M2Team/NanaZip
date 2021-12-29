@@ -1,4 +1,4 @@
-// Windows/PropVariant.cpp
+﻿// Windows/PropVariant.cpp
 
 #include "StdAfx.h"
 

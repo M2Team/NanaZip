@@ -1,4 +1,4 @@
-// MyLinux.h
+﻿// MyLinux.h
 
 #ifndef __MY_LIN_LINUX_H
 #define __MY_LIN_LINUX_H

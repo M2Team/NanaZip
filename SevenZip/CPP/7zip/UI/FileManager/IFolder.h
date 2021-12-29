@@ -1,4 +1,4 @@
-// IFolder.h
+﻿// IFolder.h
 
 #ifndef __IFOLDER_H
 #define __IFOLDER_H

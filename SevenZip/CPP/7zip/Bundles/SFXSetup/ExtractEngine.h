@@ -1,4 +1,4 @@
-// ExtractEngine.h
+﻿// ExtractEngine.h
 
 #ifndef __EXTRACT_ENGINE_H
 #define __EXTRACT_ENGINE_H

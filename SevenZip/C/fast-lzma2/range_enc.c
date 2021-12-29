@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Bitwise range encoder by Igor Pavlov
 * Modified by Conor McCarthy
 *

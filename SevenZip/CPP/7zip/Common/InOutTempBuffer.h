@@ -1,4 +1,4 @@
-// InOutTempBuffer.h
+﻿// InOutTempBuffer.h
 
 #ifndef __IN_OUT_TEMP_BUFFER_H
 #define __IN_OUT_TEMP_BUFFER_H

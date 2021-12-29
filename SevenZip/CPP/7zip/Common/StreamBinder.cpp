@@ -1,4 +1,4 @@
-// StreamBinder.cpp
+﻿// StreamBinder.cpp
 
 #include "StdAfx.h"
 

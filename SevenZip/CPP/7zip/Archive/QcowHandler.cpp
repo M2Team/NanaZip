@@ -1,4 +1,4 @@
-// QcowHandler.cpp
+﻿// QcowHandler.cpp
 
 #include "StdAfx.h"
 

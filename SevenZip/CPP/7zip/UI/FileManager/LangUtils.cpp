@@ -1,4 +1,4 @@
-// LangUtils.cpp
+﻿// LangUtils.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// UpdateAction.h
+﻿// UpdateAction.h
 
 #ifndef __UPDATE_ACTION_H
 #define __UPDATE_ACTION_H

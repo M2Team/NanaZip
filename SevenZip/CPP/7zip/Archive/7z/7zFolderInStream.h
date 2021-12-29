@@ -1,4 +1,4 @@
-// 7zFolderInStream.h
+﻿// 7zFolderInStream.h
 
 #ifndef __7Z_FOLDER_IN_STREAM_H
 #define __7Z_FOLDER_IN_STREAM_H

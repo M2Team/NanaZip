@@ -1,4 +1,4 @@
-// CoderMixer2.h
+﻿// CoderMixer2.h
 
 #ifndef __CODER_MIXER2_H
 #define __CODER_MIXER2_H

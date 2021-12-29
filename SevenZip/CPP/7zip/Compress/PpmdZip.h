@@ -1,4 +1,4 @@
-// PpmdZip.h
+﻿// PpmdZip.h
 
 #ifndef __COMPRESS_PPMD_ZIP_H
 #define __COMPRESS_PPMD_ZIP_H

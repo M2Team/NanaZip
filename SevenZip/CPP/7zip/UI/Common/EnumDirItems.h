@@ -1,4 +1,4 @@
-// EnumDirItems.h
+﻿// EnumDirItems.h
 
 #ifndef __ENUM_DIR_ITEMS_H
 #define __ENUM_DIR_ITEMS_H

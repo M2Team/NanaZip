@@ -1,4 +1,4 @@
-// Common/IntToString.h
+﻿// Common/IntToString.h
 
 #ifndef __COMMON_INT_TO_STRING_H
 #define __COMMON_INT_TO_STRING_H

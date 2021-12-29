@@ -1,4 +1,4 @@
-// Windows/Control/ReBar.h
+﻿// Windows/Control/ReBar.h
   
 #ifndef __WINDOWS_CONTROL_REBAR_H
 #define __WINDOWS_CONTROL_REBAR_H

@@ -1,4 +1,4 @@
-// Common/ListFileUtils.h
+﻿// Common/ListFileUtils.h
 
 #ifndef __COMMON_LIST_FILE_UTILS_H
 #define __COMMON_LIST_FILE_UTILS_H

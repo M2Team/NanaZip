@@ -1,4 +1,4 @@
-// Common/DynLimBuf.h
+﻿// Common/DynLimBuf.h
 
 #ifndef __COMMON_DYN_LIM_BUF_H
 #define __COMMON_DYN_LIM_BUF_H

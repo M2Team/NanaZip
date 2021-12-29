@@ -1,4 +1,4 @@
-// ByteSwap.cpp
+﻿// ByteSwap.cpp
 
 #include "StdAfx.h"
 

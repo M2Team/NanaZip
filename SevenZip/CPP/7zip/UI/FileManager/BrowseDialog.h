@@ -1,4 +1,4 @@
-// BrowseDialog.h
+﻿// BrowseDialog.h
 
 #ifndef __BROWSE_DIALOG_H
 #define __BROWSE_DIALOG_H

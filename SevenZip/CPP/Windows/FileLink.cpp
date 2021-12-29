@@ -1,4 +1,4 @@
-// Windows/FileLink.cpp
+﻿// Windows/FileLink.cpp
 
 #include "StdAfx.h"
 

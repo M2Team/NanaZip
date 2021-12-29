@@ -1,4 +1,4 @@
-// Common/StdOutStream.h
+﻿// Common/StdOutStream.h
 
 #ifndef __COMMON_STD_OUT_STREAM_H
 #define __COMMON_STD_OUT_STREAM_H

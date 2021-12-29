@@ -1,4 +1,4 @@
-
+﻿
 /**
  * Copyright (c) 2016 Tino Reichardt
  * - removed unneeded stuff

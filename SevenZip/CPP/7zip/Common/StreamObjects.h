@@ -1,4 +1,4 @@
-// StreamObjects.h
+﻿// StreamObjects.h
 
 #ifndef __STREAM_OBJECTS_H
 #define __STREAM_OBJECTS_H

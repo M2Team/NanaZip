@@ -1,4 +1,4 @@
-/* transforms is a part of ABI, but not API.
+﻿/* transforms is a part of ABI, but not API.
 
    It means that there are some functions that are supposed to be in "common"
    library, but header itself is not placed into include/brotli. This way,

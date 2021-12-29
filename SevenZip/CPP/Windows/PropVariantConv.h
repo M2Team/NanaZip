@@ -1,4 +1,4 @@
-// Windows/PropVariantConv.h
+﻿// Windows/PropVariantConv.h
 
 #ifndef __PROP_VARIANT_CONV_H
 #define __PROP_VARIANT_CONV_H

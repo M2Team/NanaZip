@@ -1,4 +1,4 @@
-// FilePlugins.cpp
+﻿// FilePlugins.cpp
 
 #include "StdAfx.h"
 

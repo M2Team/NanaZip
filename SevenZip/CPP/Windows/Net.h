@@ -1,4 +1,4 @@
-// Windows/Net.h
+﻿// Windows/Net.h
 
 #ifndef __WINDOWS_NET_H
 #define __WINDOWS_NET_H

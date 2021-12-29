@@ -1,4 +1,4 @@
-// LinkDialog.cpp
+﻿// LinkDialog.cpp
 
 #include "StdAfx.h"
 

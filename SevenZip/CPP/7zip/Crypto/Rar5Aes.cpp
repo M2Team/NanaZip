@@ -1,4 +1,4 @@
-// Crypto/Rar5Aes.cpp
+﻿// Crypto/Rar5Aes.cpp
 
 #include "StdAfx.h"
 

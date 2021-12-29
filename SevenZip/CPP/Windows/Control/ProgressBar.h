@@ -1,4 +1,4 @@
-// Windows/Control/ProgressBar.h
+﻿// Windows/Control/ProgressBar.h
 
 #ifndef __WINDOWS_CONTROL_PROGRESSBAR_H
 #define __WINDOWS_CONTROL_PROGRESSBAR_H

@@ -1,4 +1,4 @@
-// Common/Wildcard.cpp
+﻿// Common/Wildcard.cpp
 
 #include "StdAfx.h"
 

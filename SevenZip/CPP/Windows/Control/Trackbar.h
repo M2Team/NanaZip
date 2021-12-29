@@ -1,4 +1,4 @@
-// Windows/Control/Trackbar.h
+﻿// Windows/Control/Trackbar.h
 
 #ifndef __WINDOWS_CONTROL_TRACKBAR_H
 #define __WINDOWS_CONTROL_TRACKBAR_H

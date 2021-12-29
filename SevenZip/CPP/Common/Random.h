@@ -1,4 +1,4 @@
-// Common/Random.h
+﻿// Common/Random.h
 
 #ifndef __COMMON_RANDOM_H
 #define __COMMON_RANDOM_H

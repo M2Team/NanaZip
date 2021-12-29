@@ -1,4 +1,4 @@
-// EditDialog.cpp
+﻿// EditDialog.cpp
 
 #include "StdAfx.h"
 

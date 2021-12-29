@@ -1,4 +1,4 @@
-// 7zAes.h
+﻿// 7zAes.h
 
 #ifndef __CRYPTO_7Z_AES_H
 #define __CRYPTO_7Z_AES_H

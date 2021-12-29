@@ -1,4 +1,4 @@
-// LzmaRegister.cpp
+﻿// LzmaRegister.cpp
 
 #include "StdAfx.h"
 

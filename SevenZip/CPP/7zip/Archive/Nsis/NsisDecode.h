@@ -1,4 +1,4 @@
-// NsisDecode.h
+﻿// NsisDecode.h
 
 #ifndef __NSIS_DECODE_H
 #define __NSIS_DECODE_H

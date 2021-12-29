@@ -1,4 +1,4 @@
-#define IDD_SPLIT  7300
+﻿#define IDD_SPLIT  7300
 
 #define IDT_SPLIT_PATH    7301
 #define IDT_SPLIT_VOLUME  7302

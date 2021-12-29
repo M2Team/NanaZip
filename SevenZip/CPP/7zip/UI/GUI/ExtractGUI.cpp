@@ -1,4 +1,4 @@
-// ExtractGUI.cpp
+﻿// ExtractGUI.cpp
 
 #include "StdAfx.h"
 

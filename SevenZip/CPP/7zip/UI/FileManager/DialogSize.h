@@ -1,4 +1,4 @@
-// DialogSize.h
+﻿// DialogSize.h
 
 #ifndef __DIALOG_SIZE_H
 #define __DIALOG_SIZE_H

@@ -1,4 +1,4 @@
-// HashCon.cpp
+﻿// HashCon.cpp
 
 #include "StdAfx.h"
 

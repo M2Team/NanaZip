@@ -1,4 +1,4 @@
-/* XzDec.c -- Xz Decode
+﻿/* XzDec.c -- Xz Decode
 2021-09-04 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

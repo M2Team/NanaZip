@@ -1,4 +1,4 @@
-// QuantumDecoder.h
+﻿// QuantumDecoder.h
 
 #ifndef __COMPRESS_QUANTUM_DECODER_H
 #define __COMPRESS_QUANTUM_DECODER_H

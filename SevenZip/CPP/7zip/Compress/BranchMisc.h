@@ -1,4 +1,4 @@
-// BranchMisc.h
+﻿// BranchMisc.h
 
 #ifndef __COMPRESS_BRANCH_MISC_H
 #define __COMPRESS_BRANCH_MISC_H

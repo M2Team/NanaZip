@@ -1,4 +1,4 @@
-// DmgHandler.cpp
+﻿// DmgHandler.cpp
 
 #include "StdAfx.h"
 

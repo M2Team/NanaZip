@@ -1,4 +1,4 @@
-// MyCom.h
+﻿// MyCom.h
 
 #ifndef __MY_COM_H
 #define __MY_COM_H

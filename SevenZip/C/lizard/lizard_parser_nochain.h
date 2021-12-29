@@ -1,4 +1,4 @@
-#define OPTIMAL_ML (int)((ML_MASK_LZ4-1)+MINMATCH)
+﻿#define OPTIMAL_ML (int)((ML_MASK_LZ4-1)+MINMATCH)
 
 //#define LIZARD_NOCHAIN_HASH_FUNCTION(ip, hashLog) Lizard_hashPtr(ip, hashLog, ctx->params.searchLength)
 #define LIZARD_NOCHAIN_HASH_FUNCTION(ip, hashLog) Lizard_hash5Ptr(ip, hashLog)

@@ -1,4 +1,4 @@
-#define IDD_EDIT     2103
+﻿#define IDD_EDIT     2103
 #define IDD_EDIT_2  12103
 
 #define IDT_EDIT_VIEWER    543

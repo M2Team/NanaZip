@@ -1,4 +1,4 @@
-// MessagesDialog.h
+﻿// MessagesDialog.h
 
 #ifndef __MESSAGES_DIALOG_H
 #define __MESSAGES_DIALOG_H

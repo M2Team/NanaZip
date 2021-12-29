@@ -1,4 +1,4 @@
-// Md4Reg.cpp /TR 2018-11-02
+﻿// Md4Reg.cpp /TR 2018-11-02
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Common.h
+﻿// Common.h
 
 #ifndef __COMMON_COMMON_H
 #define __COMMON_COMMON_H

@@ -1,4 +1,4 @@
-#define IDD_FOLDERS     2400
+﻿#define IDD_FOLDERS     2400
 #define IDD_FOLDERS_2  12400
 
 #define IDT_FOLDERS_WORKING_FOLDER      2401

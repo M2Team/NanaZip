@@ -1,4 +1,4 @@
-// LangPage.cpp
+﻿// LangPage.cpp
 
 #include "StdAfx.h"
 

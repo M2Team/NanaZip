@@ -1,4 +1,4 @@
-
+﻿
 /*
  * Copyright (c) 2006, 2010 Kungliga Tekniska Högskolan
  * (Royal Institute of Technology, Stockholm, Sweden).

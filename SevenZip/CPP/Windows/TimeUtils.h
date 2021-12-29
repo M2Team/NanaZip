@@ -1,4 +1,4 @@
-// Windows/TimeUtils.h
+﻿// Windows/TimeUtils.h
 
 #ifndef __WINDOWS_TIME_UTILS_H
 #define __WINDOWS_TIME_UTILS_H

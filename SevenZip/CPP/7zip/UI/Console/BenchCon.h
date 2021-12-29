@@ -1,4 +1,4 @@
-// BenchCon.h
+﻿// BenchCon.h
 
 #ifndef __BENCH_CON_H
 #define __BENCH_CON_H

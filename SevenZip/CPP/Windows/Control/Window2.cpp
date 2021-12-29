@@ -1,4 +1,4 @@
-// Windows/Control/Window2.cpp
+﻿// Windows/Control/Window2.cpp
 
 #include "StdAfx.h"
 

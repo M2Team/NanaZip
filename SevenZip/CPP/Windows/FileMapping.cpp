@@ -1,4 +1,4 @@
-// Windows/FileMapping.cpp
+﻿// Windows/FileMapping.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Windows/SecurityUtils.h
+﻿// Windows/SecurityUtils.h
 
 #ifndef __WINDOWS_SECURITY_UTILS_H
 #define __WINDOWS_SECURITY_UTILS_H

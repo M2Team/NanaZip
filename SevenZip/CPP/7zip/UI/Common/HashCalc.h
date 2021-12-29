@@ -1,4 +1,4 @@
-// HashCalc.h
+﻿// HashCalc.h
 
 #ifndef __HASH_CALC_H
 #define __HASH_CALC_H

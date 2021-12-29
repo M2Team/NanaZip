@@ -1,4 +1,4 @@
-// OpenArchive.h
+﻿// OpenArchive.h
 
 #ifndef __OPEN_ARCHIVE_H
 #define __OPEN_ARCHIVE_H

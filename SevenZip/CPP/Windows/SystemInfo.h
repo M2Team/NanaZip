@@ -1,4 +1,4 @@
-// Windows/SystemInfo.h
+﻿// Windows/SystemInfo.h
 
 #ifndef __WINDOWS_SYSTEM_INFO_H
 #define __WINDOWS_SYSTEM_INFO_H

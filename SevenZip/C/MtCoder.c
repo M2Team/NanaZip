@@ -1,4 +1,4 @@
-/* MtCoder.c -- Multi-thread Coder
+﻿/* MtCoder.c -- Multi-thread Coder
 2021-12-21 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

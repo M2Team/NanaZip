@@ -1,4 +1,4 @@
-// UpdateCallbackAgent.h
+﻿// UpdateCallbackAgent.h
 
 #ifndef __UPDATE_CALLBACK_AGENT_H
 #define __UPDATE_CALLBACK_AGENT_H

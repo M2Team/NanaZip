@@ -1,4 +1,4 @@
-// ZipUpdate.h
+﻿// ZipUpdate.h
 
 #ifndef __ZIP_UPDATE_H
 #define __ZIP_UPDATE_H

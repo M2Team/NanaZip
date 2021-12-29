@@ -1,4 +1,4 @@
-// BitlDecoder.cpp
+﻿// BitlDecoder.cpp
 
 #include "StdAfx.h"
 

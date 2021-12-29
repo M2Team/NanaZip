@@ -1,4 +1,4 @@
-// PanelOperations.cpp
+﻿// PanelOperations.cpp
 
 #include "StdAfx.h"
 

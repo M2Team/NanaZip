@@ -1,4 +1,4 @@
-// PropertyName.cpp
+﻿// PropertyName.cpp
 
 #include "StdAfx.h"
 

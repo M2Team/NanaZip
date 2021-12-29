@@ -1,4 +1,4 @@
-// ConsoleClose.h
+﻿// ConsoleClose.h
 
 #ifndef __CONSOLE_CLOSE_H
 #define __CONSOLE_CLOSE_H

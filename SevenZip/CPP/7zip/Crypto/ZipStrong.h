@@ -1,4 +1,4 @@
-// Crypto/ZipStrong.h
+﻿// Crypto/ZipStrong.h
 
 #ifndef __CRYPTO_ZIP_STRONG_H
 #define __CRYPTO_ZIP_STRONG_H

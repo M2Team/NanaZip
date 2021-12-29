@@ -1,4 +1,4 @@
-/* 7zStream.c -- 7z Stream functions
+﻿/* 7zStream.c -- 7z Stream functions
 2021-02-09 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

@@ -1,4 +1,4 @@
-/* MtCoder.h -- Multi-thread Coder
+﻿/* MtCoder.h -- Multi-thread Coder
 2018-07-04 : Igor Pavlov : Public domain */
 
 #ifndef __MT_CODER_H

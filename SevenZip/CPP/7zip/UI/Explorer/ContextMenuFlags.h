@@ -1,4 +1,4 @@
-// ContextMenuFlags.h
+﻿// ContextMenuFlags.h
 
 #ifndef __CONTEXT_MENU_FLAGS_H
 #define __CONTEXT_MENU_FLAGS_H

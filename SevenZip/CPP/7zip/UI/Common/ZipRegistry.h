@@ -1,4 +1,4 @@
-// ZipRegistry.h
+﻿// ZipRegistry.h
 
 #ifndef __ZIP_REGISTRY_H
 #define __ZIP_REGISTRY_H

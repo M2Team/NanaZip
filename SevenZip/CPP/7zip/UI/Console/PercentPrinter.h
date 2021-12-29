@@ -1,4 +1,4 @@
-// PercentPrinter.h
+﻿// PercentPrinter.h
 
 #ifndef __PERCENT_PRINTER_H
 #define __PERCENT_PRINTER_H

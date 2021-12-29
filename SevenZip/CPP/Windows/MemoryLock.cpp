@@ -1,4 +1,4 @@
-// Windows/MemoryLock.cpp
+﻿// Windows/MemoryLock.cpp
 
 #include "StdAfx.h"
 

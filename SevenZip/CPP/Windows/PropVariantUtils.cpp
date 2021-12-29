@@ -1,4 +1,4 @@
-// PropVariantUtils.cpp
+﻿// PropVariantUtils.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// IProgress.h
+﻿// IProgress.h
 
 #ifndef __IPROGRESS_H
 #define __IPROGRESS_H

@@ -1,4 +1,4 @@
-/* Lzma2DecMt.c -- LZMA2 Decoder Multi-thread
+﻿/* Lzma2DecMt.c -- LZMA2 Decoder Multi-thread
 2021-04-01 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

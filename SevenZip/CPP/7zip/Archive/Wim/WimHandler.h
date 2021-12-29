@@ -1,4 +1,4 @@
-// WimHandler.h
+﻿// WimHandler.h
 
 #ifndef __ARCHIVE_WIM_HANDLER_H
 #define __ARCHIVE_WIM_HANDLER_H

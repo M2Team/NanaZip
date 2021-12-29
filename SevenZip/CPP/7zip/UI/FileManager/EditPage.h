@@ -1,4 +1,4 @@
-// EditPage.h
+﻿// EditPage.h
 
 #ifndef __EDIT_PAGE_H
 #define __EDIT_PAGE_H

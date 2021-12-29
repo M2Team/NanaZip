@@ -1,4 +1,4 @@
-// Windows/DLL.h
+﻿// Windows/DLL.h
 
 #ifndef __WINDOWS_DLL_H
 #define __WINDOWS_DLL_H

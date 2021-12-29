@@ -1,4 +1,4 @@
-// RegistryUtils.cpp
+﻿// RegistryUtils.cpp
 
 #include "StdAfx.h"
 

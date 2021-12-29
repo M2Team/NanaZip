@@ -1,4 +1,4 @@
-// NSisHandler.cpp
+﻿// NSisHandler.cpp
 
 #include "StdAfx.h"
 

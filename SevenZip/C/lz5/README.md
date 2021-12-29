@@ -1,4 +1,4 @@
-LZ5 - Library Files
+﻿LZ5 - Library Files
 ================================
 
 The __lib__ directory contains several files, but you don't necessarily need them all.

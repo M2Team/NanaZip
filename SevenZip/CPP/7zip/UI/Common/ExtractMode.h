@@ -1,4 +1,4 @@
-// ExtractMode.h
+﻿// ExtractMode.h
 
 #ifndef __EXTRACT_MODE_H
 #define __EXTRACT_MODE_H

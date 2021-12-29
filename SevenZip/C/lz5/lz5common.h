@@ -1,4 +1,4 @@
-#ifndef LZ5COMMON_H
+﻿#ifndef LZ5COMMON_H
 #define LZ5COMMON_H
 
 #if defined (__cplusplus)

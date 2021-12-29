@@ -1,4 +1,4 @@
-// StreamUtils.cpp
+﻿// StreamUtils.cpp
 
 #include "StdAfx.h"
 

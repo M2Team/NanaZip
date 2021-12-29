@@ -1,4 +1,4 @@
-
+﻿
 /**
  * Copyright (c) 2016-present, Yann Collet, Facebook, Inc.
  * Copyright (c) 2016 - 2017 Tino Reichardt

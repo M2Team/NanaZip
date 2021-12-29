@@ -1,4 +1,4 @@
-// NetFolder.cpp
+﻿// NetFolder.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Rar5Handler.h
+﻿// Rar5Handler.h
 
 #ifndef __RAR5_HANDLER_H
 #define __RAR5_HANDLER_H

@@ -1,4 +1,4 @@
-// PropID.h
+﻿// PropID.h
 
 #ifndef __7ZIP_PROP_ID_H
 #define __7ZIP_PROP_ID_H

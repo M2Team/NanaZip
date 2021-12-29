@@ -1,4 +1,4 @@
-// FindSignature.h
+﻿// FindSignature.h
 
 #ifndef __FIND_SIGNATURE_H
 #define __FIND_SIGNATURE_H

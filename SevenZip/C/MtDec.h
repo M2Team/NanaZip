@@ -1,4 +1,4 @@
-/* MtDec.h -- Multi-thread Decoder
+﻿/* MtDec.h -- Multi-thread Decoder
 2020-03-05 : Igor Pavlov : Public domain */
 
 #ifndef __MT_DEC_H

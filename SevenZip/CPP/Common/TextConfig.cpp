@@ -1,4 +1,4 @@
-// Common/TextConfig.cpp
+﻿// Common/TextConfig.cpp
 
 #include "StdAfx.h"
 

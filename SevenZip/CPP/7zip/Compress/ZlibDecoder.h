@@ -1,4 +1,4 @@
-// ZlibDecoder.h
+﻿// ZlibDecoder.h
 
 #ifndef __ZLIB_DECODER_H
 #define __ZLIB_DECODER_H

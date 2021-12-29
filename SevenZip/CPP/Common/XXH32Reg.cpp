@@ -1,4 +1,4 @@
-// XXH32Reg.cpp /TR 2018-11-02
+﻿// XXH32Reg.cpp /TR 2018-11-02
 
 #include "StdAfx.h"
 

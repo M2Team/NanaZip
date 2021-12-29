@@ -1,4 +1,4 @@
-#define IDD_COMPRESS     4000
+﻿#define IDD_COMPRESS     4000
 #define IDD_COMPRESS_2  14000
 
 #define IDC_COMPRESS_ARCHIVE             100

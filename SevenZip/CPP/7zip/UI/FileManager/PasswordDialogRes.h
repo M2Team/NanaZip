@@ -1,4 +1,4 @@
-#define IDD_PASSWORD        3800
+﻿#define IDD_PASSWORD        3800
 #define IDT_PASSWORD_ENTER  3801
 #define IDX_PASSWORD_SHOW   3803
 

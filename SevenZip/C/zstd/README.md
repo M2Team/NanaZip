@@ -1,4 +1,4 @@
-Zstandard library files
+﻿Zstandard library files
 ================================
 
 The __lib__ directory is split into several sub-directories,

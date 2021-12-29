@@ -1,4 +1,4 @@
-// MyAesReg.cpp
+﻿// MyAesReg.cpp
 
 #include "StdAfx.h"
 

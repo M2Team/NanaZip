@@ -1,4 +1,4 @@
-// Windows/Defs.h
+﻿// Windows/Defs.h
 
 #ifndef __WINDOWS_DEFS_H
 #define __WINDOWS_DEFS_H

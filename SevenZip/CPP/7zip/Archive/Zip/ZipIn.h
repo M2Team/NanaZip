@@ -1,4 +1,4 @@
-// Archive/ZipIn.h
+﻿// Archive/ZipIn.h
 
 #ifndef __ZIP_IN_H
 #define __ZIP_IN_H

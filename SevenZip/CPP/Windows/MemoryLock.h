@@ -1,4 +1,4 @@
-// Windows/MemoryLock.h
+﻿// Windows/MemoryLock.h
 
 #ifndef __WINDOWS_MEMORY_LOCK_H
 #define __WINDOWS_MEMORY_LOCK_H

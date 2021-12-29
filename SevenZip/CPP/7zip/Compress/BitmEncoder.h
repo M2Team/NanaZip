@@ -1,4 +1,4 @@
-// BitmEncoder.h -- the Most Significant Bit of byte is First
+﻿// BitmEncoder.h -- the Most Significant Bit of byte is First
 
 #ifndef __BITM_ENCODER_H
 #define __BITM_ENCODER_H

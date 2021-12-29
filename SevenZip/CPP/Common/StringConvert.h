@@ -1,4 +1,4 @@
-// Common/StringConvert.h
+﻿// Common/StringConvert.h
 
 #ifndef __COMMON_STRING_CONVERT_H
 #define __COMMON_STRING_CONVERT_H

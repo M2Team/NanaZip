@@ -1,4 +1,4 @@
-// OpenCallbackConsole.h
+﻿// OpenCallbackConsole.h
 
 #ifndef __OPEN_CALLBACK_CONSOLE_H
 #define __OPEN_CALLBACK_CONSOLE_H

@@ -1,4 +1,4 @@
-// SwfHandler.cpp
+﻿// SwfHandler.cpp
 
 #include "StdAfx.h"
 

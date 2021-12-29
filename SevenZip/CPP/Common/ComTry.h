@@ -1,4 +1,4 @@
-// ComTry.h
+﻿// ComTry.h
 
 #ifndef __COM_TRY_H
 #define __COM_TRY_H

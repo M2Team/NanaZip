@@ -1,4 +1,4 @@
-// Windows/Registry.cpp
+﻿// Windows/Registry.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// ExtractDialog.cpp
+﻿// ExtractDialog.cpp
 
 #include "StdAfx.h"
 

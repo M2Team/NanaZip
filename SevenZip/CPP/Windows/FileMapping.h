@@ -1,4 +1,4 @@
-// Windows/FileMapping.h
+﻿// Windows/FileMapping.h
 
 #ifndef __WINDOWS_FILEMAPPING_H
 #define __WINDOWS_FILEMAPPING_H

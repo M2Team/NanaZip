@@ -1,4 +1,4 @@
-/* XzCrc64.h -- CRC64 calculation
+﻿/* XzCrc64.h -- CRC64 calculation
 2013-01-18 : Igor Pavlov : Public domain */
 
 #ifndef __XZ_CRC64_H

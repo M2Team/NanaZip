@@ -1,4 +1,4 @@
-// XzEncoder.h
+﻿// XzEncoder.h
 
 #ifndef __XZ_ENCODER_H
 #define __XZ_ENCODER_H

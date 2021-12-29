@@ -1,4 +1,4 @@
-// Windows/FileSystem.h
+﻿// Windows/FileSystem.h
 
 #ifndef __WINDOWS_FILE_SYSTEM_H
 #define __WINDOWS_FILE_SYSTEM_H

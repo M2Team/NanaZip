@@ -1,4 +1,4 @@
-// ExtractCallbackConsole.h
+﻿// ExtractCallbackConsole.h
 
 #ifndef __EXTRACT_CALLBACK_CONSOLE_H
 #define __EXTRACT_CALLBACK_CONSOLE_H

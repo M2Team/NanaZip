@@ -1,4 +1,4 @@
-// MyMessages.cpp
+﻿// MyMessages.cpp
 
 #include "StdAfx.h"
 

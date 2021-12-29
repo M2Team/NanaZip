@@ -1,4 +1,4 @@
-// IFileExtractCallback.h
+﻿// IFileExtractCallback.h
 
 #ifndef __I_FILE_EXTRACT_CALLBACK_H
 #define __I_FILE_EXTRACT_CALLBACK_H

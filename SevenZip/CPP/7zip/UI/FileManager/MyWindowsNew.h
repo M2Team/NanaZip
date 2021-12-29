@@ -1,4 +1,4 @@
-// MyWindowsNew.h
+﻿// MyWindowsNew.h
 
 #ifndef __MY_WINDOWS_NEW_H
 #define __MY_WINDOWS_NEW_H

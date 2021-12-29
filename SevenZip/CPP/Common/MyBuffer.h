@@ -1,4 +1,4 @@
-// Common/MyBuffer.h
+﻿// Common/MyBuffer.h
 
 #ifndef __COMMON_MY_BUFFER_H
 #define __COMMON_MY_BUFFER_H

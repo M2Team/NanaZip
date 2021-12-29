@@ -1,4 +1,4 @@
-// BenchmarkDialog.cpp
+﻿// BenchmarkDialog.cpp
 
 #include "StdAfx.h"
 

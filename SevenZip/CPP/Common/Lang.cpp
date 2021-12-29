@@ -1,4 +1,4 @@
-// Common/Lang.cpp
+﻿// Common/Lang.cpp
 
 #include "StdAfx.h"
 

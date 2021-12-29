@@ -1,4 +1,4 @@
-// Common/Exception.h
+﻿// Common/Exception.h
 
 #ifndef __COMMON_EXCEPTION_H
 #define __COMMON_EXCEPTION_H

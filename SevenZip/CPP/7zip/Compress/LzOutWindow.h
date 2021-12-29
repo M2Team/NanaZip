@@ -1,4 +1,4 @@
-// LzOutWindow.h
+﻿// LzOutWindow.h
 
 #ifndef __LZ_OUT_WINDOW_H
 #define __LZ_OUT_WINDOW_H

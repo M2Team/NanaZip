@@ -1,4 +1,4 @@
-<p align="center"><img src="https://brotli.org/brotli.svg" alt="Brotli" width="64"></p>
+﻿<p align="center"><img src="https://brotli.org/brotli.svg" alt="Brotli" width="64"></p>
 
 # SECURITY NOTE
 

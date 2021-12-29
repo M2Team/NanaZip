@@ -1,4 +1,4 @@
-// ProgressMt.h
+﻿// ProgressMt.h
 
 #ifndef __PROGRESSMT_H
 #define __PROGRESSMT_H

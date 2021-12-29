@@ -1,4 +1,4 @@
-// NewHandler.cpp
+﻿// NewHandler.cpp
  
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-/* Compiler.h
+﻿/* Compiler.h
 2021-01-05 : Igor Pavlov : Public domain */
 
 #ifndef __7Z_COMPILER_H

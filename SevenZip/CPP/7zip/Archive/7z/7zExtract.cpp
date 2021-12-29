@@ -1,4 +1,4 @@
-// 7zExtract.cpp
+﻿// 7zExtract.cpp
 
 #include "StdAfx.h"
 

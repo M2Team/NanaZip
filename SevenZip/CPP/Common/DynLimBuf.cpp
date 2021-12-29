@@ -1,4 +1,4 @@
-// Common/DynLimBuf.cpp
+﻿// Common/DynLimBuf.cpp
 
 #include "StdAfx.h"
 

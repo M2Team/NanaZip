@@ -1,4 +1,4 @@
-/*  LzmaEnc.h -- LZMA Encoder
+﻿/*  LzmaEnc.h -- LZMA Encoder
 2019-10-30 : Igor Pavlov : Public domain */
 
 #ifndef __LZMA_ENC_H

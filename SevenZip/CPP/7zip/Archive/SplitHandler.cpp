@@ -1,4 +1,4 @@
-// SplitHandler.cpp
+﻿// SplitHandler.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// 7zEncode.h
+﻿// 7zEncode.h
 
 #ifndef __7Z_ENCODE_H
 #define __7Z_ENCODE_H

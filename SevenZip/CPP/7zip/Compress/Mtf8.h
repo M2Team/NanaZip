@@ -1,4 +1,4 @@
-// Mtf8.h
+﻿// Mtf8.h
 
 #ifndef __COMPRESS_MTF8_H
 #define __COMPRESS_MTF8_H

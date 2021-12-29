@@ -1,4 +1,4 @@
-// Crypto/WzAes.h
+﻿// Crypto/WzAes.h
 /*
 This code implements Brian Gladman's scheme
 specified in "A Password Based File Encryption Utility":

@@ -1,4 +1,4 @@
-// PropIDUtils.cpp
+﻿// PropIDUtils.cpp
 
 #include "StdAfx.h"
 

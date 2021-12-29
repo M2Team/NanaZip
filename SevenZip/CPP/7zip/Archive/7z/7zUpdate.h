@@ -1,4 +1,4 @@
-// 7zUpdate.h
+﻿// 7zUpdate.h
 
 #ifndef __7Z_UPDATE_H
 #define __7Z_UPDATE_H

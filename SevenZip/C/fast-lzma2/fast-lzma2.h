@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2017-present, Conor McCarthy
  * All rights reserved.
  * Based on zstd.h copyright Yann Collet

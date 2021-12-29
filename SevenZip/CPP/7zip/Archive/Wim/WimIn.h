@@ -1,4 +1,4 @@
-// Archive/WimIn.h
+﻿// Archive/WimIn.h
 
 #ifndef __ARCHIVE_WIM_IN_H
 #define __ARCHIVE_WIM_IN_H

@@ -1,4 +1,4 @@
-// Blake3Reg.cpp /TR 2021-04-06
+﻿// Blake3Reg.cpp /TR 2021-04-06
 
 #include "StdAfx.h"
 

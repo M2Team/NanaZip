@@ -1,4 +1,4 @@
-/*
+﻿/*
     Lizard - Fast LZ compression algorithm 
     Copyright (C) 2011-2015, Yann Collet
     Copyright (C) 2016-2017, Przemyslaw Skibinski <inikep@gmail.com>

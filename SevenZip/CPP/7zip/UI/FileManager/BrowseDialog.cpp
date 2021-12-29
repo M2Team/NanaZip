@@ -1,4 +1,4 @@
-// BrowseDialog.cpp
+﻿// BrowseDialog.cpp
 
 #include "StdAfx.h"
 

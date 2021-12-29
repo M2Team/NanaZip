@@ -1,4 +1,4 @@
-// TarHandler.h
+﻿// TarHandler.h
 
 #ifndef __TAR_HANDLER_H
 #define __TAR_HANDLER_H

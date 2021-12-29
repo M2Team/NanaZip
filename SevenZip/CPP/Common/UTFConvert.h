@@ -1,4 +1,4 @@
-// Common/UTFConvert.h
+﻿// Common/UTFConvert.h
 
 #ifndef __COMMON_UTF_CONVERT_H
 #define __COMMON_UTF_CONVERT_H

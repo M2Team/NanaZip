@@ -1,4 +1,4 @@
-// ComboDialog.h
+﻿// ComboDialog.h
 
 #ifndef __COMBO_DIALOG_H
 #define __COMBO_DIALOG_H

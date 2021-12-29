@@ -1,4 +1,4 @@
-// Windows/FileIO.h
+﻿// Windows/FileIO.h
 
 #ifndef __WINDOWS_FILE_IO_H
 #define __WINDOWS_FILE_IO_H

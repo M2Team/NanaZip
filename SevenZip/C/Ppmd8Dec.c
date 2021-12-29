@@ -1,4 +1,4 @@
-/* Ppmd8Dec.c -- Ppmd8 (PPMdI) Decoder
+﻿/* Ppmd8Dec.c -- Ppmd8 (PPMdI) Decoder
 2021-04-13 : Igor Pavlov : Public domain
 This code is based on:
   PPMd var.I (2002): Dmitry Shkarin : Public domain

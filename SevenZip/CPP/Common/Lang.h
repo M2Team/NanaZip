@@ -1,4 +1,4 @@
-// Common/Lang.h
+﻿// Common/Lang.h
 
 #ifndef __COMMON_LANG_H
 #define __COMMON_LANG_H

@@ -1,4 +1,4 @@
-// UpdateCallbackGUI2.h
+﻿// UpdateCallbackGUI2.h
 
 #ifndef __UPDATE_CALLBACK_GUI2_H
 #define __UPDATE_CALLBACK_GUI2_H

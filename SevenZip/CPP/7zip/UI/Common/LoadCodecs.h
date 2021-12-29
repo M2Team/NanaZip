@@ -1,4 +1,4 @@
-// LoadCodecs.h
+﻿// LoadCodecs.h
 
 #ifndef __LOAD_CODECS_H
 #define __LOAD_CODECS_H

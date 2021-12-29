@@ -1,4 +1,4 @@
-// Windows/Control/PropertyPage.h
+﻿// Windows/Control/PropertyPage.h
 
 #ifndef __WINDOWS_CONTROL_PROPERTYPAGE_H
 #define __WINDOWS_CONTROL_PROPERTYPAGE_H

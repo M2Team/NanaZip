@@ -1,4 +1,4 @@
-// AgentProxy.h
+﻿// AgentProxy.h
 
 #ifndef __AGENT_PROXY_H
 #define __AGENT_PROXY_H

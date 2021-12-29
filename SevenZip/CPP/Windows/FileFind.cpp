@@ -1,4 +1,4 @@
-// Windows/FileFind.cpp
+﻿// Windows/FileFind.cpp
 
 #include "StdAfx.h"
 

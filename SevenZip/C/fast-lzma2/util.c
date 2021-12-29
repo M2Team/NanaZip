@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2016-present, Przemyslaw Skibinski, Yann Collet, Facebook, Inc.
  * All rights reserved.
  *

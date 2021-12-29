@@ -1,4 +1,4 @@
-#define LIZARD_FASTBIG_LONGOFF_MM MM_LONGOFF
+﻿#define LIZARD_FASTBIG_LONGOFF_MM MM_LONGOFF
 
 /**************************************
 *  Hash Functions

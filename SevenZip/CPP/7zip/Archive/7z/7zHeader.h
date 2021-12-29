@@ -1,4 +1,4 @@
-// 7z/7zHeader.h
+﻿// 7z/7zHeader.h
 
 #ifndef __7Z_HEADER_H
 #define __7Z_HEADER_H

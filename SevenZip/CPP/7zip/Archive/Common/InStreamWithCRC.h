@@ -1,4 +1,4 @@
-// InStreamWithCRC.h
+﻿// InStreamWithCRC.h
 
 #ifndef __IN_STREAM_WITH_CRC_H
 #define __IN_STREAM_WITH_CRC_H

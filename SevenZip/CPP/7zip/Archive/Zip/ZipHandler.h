@@ -1,4 +1,4 @@
-// Zip/Handler.h
+﻿// Zip/Handler.h
 
 #ifndef __ZIP_HANDLER_H
 #define __ZIP_HANDLER_H

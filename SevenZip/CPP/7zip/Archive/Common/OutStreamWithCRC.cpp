@@ -1,4 +1,4 @@
-// OutStreamWithCRC.cpp
+﻿// OutStreamWithCRC.cpp
 
 #include "StdAfx.h"
 

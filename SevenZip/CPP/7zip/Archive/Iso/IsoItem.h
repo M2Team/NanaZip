@@ -1,4 +1,4 @@
-// Archive/IsoItem.h
+﻿// Archive/IsoItem.h
 
 #ifndef __ARCHIVE_ISO_ITEM_H
 #define __ARCHIVE_ISO_ITEM_H

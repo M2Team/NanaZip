@@ -1,4 +1,4 @@
-// UpdatePair.h
+﻿// UpdatePair.h
 
 #ifndef __UPDATE_PAIR_H
 #define __UPDATE_PAIR_H

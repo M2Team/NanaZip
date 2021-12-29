@@ -1,4 +1,4 @@
-// Windows/MemoryGlobal.h
+﻿// Windows/MemoryGlobal.h
 
 #ifndef __WINDOWS_MEMORY_GLOBAL_H
 #define __WINDOWS_MEMORY_GLOBAL_H

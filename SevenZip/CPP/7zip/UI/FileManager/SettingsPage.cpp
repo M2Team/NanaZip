@@ -1,4 +1,4 @@
-// SettingsPage.cpp
+﻿// SettingsPage.cpp
 
 #include "StdAfx.h"
 

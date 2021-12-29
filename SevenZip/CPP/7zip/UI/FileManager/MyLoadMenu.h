@@ -1,4 +1,4 @@
-// MyLoadMenu.h
+﻿// MyLoadMenu.h
 
 #ifndef __MY_LOAD_MENU_H
 #define __MY_LOAD_MENU_H

@@ -1,4 +1,4 @@
-// Windows/Control/Dialog.cpp
+﻿// Windows/Control/Dialog.cpp
 
 #include "StdAfx.h"
 

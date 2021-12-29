@@ -1,4 +1,4 @@
-// PpmdEncoder.h
+﻿// PpmdEncoder.h
 
 #ifndef __COMPRESS_PPMD_ENCODER_H
 #define __COMPRESS_PPMD_ENCODER_H

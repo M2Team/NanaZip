@@ -1,4 +1,4 @@
-// ShrinkDecoder.h
+﻿// ShrinkDecoder.h
 
 #ifndef __COMPRESS_SHRINK_DECODER_H
 #define __COMPRESS_SHRINK_DECODER_H

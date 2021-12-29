@@ -1,4 +1,4 @@
-// ChmHandler.h
+﻿// ChmHandler.h
 
 #ifndef __ARCHIVE_CHM_HANDLER_H
 #define __ARCHIVE_CHM_HANDLER_H

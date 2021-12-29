@@ -1,4 +1,4 @@
-// ProgressUtils.h
+﻿// ProgressUtils.h
 
 #ifndef __PROGRESS_UTILS_H
 #define __PROGRESS_UTILS_H

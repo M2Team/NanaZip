@@ -1,4 +1,4 @@
-// RegistryUtils.h
+﻿// RegistryUtils.h
 
 #ifndef __REGISTRY_UTILS_H
 #define __REGISTRY_UTILS_H

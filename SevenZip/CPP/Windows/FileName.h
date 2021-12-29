@@ -1,4 +1,4 @@
-// Windows/FileName.h
+﻿// Windows/FileName.h
 
 #ifndef __WINDOWS_FILE_NAME_H
 #define __WINDOWS_FILE_NAME_H

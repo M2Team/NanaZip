@@ -1,4 +1,4 @@
-// Common/MyInitGuid.h
+﻿// Common/MyInitGuid.h
 
 #ifndef __COMMON_MY_INITGUID_H
 #define __COMMON_MY_INITGUID_H

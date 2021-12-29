@@ -1,3 +1,3 @@
-// DeflateProps.cpp
+﻿// DeflateProps.cpp
 
 #include "StdAfx.h"

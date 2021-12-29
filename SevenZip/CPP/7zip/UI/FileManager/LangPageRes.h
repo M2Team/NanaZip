@@ -1,4 +1,4 @@
-#define IDD_LANG     2101
+﻿#define IDD_LANG     2101
 #define IDD_LANG_2  12101
 
 #define IDS_LANG_ENGLISH   1

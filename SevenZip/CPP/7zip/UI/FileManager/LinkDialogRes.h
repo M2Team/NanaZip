@@ -1,4 +1,4 @@
-#define IDD_LINK  7700
+﻿#define IDD_LINK  7700
 
 #define IDB_LINK_LINK           7701
 

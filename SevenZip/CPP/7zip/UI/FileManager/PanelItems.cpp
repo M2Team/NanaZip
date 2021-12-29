@@ -1,4 +1,4 @@
-// PanelItems.cpp
+﻿// PanelItems.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// (C) 2016 - 2020 Tino Reichardt
+﻿// (C) 2016 - 2020 Tino Reichardt
 
 #include "StdAfx.h"
 #include "Lz4Encoder.h"

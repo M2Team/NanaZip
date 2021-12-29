@@ -1,4 +1,4 @@
-/* LzFindOpt.c -- multithreaded Match finder for LZ algorithms
+﻿/* LzFindOpt.c -- multithreaded Match finder for LZ algorithms
 2021-07-13 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

@@ -1,4 +1,4 @@
-#include "resourceGui.h"
+﻿#include "resourceGui.h"
 
 #define IDR_MENUBAR1      70
 #define IDM_MENU          71

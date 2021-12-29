@@ -1,4 +1,4 @@
-// SplitDialog.cpp
+﻿// SplitDialog.cpp
 
 #include "StdAfx.h"
 

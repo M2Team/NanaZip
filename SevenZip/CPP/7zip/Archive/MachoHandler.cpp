@@ -1,4 +1,4 @@
-// MachoHandler.cpp
+﻿// MachoHandler.cpp
 
 #include "StdAfx.h"
 

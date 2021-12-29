@@ -1,4 +1,4 @@
-// MethodProps.h
+﻿// MethodProps.h
 
 #ifndef __7Z_METHOD_PROPS_H
 #define __7Z_METHOD_PROPS_H

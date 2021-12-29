@@ -1,4 +1,4 @@
-// IPassword.h
+﻿// IPassword.h
 
 #ifndef __IPASSWORD_H
 #define __IPASSWORD_H

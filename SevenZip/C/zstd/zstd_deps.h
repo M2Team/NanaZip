@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) Facebook, Inc.
  * All rights reserved.
  *

@@ -1,4 +1,4 @@
-#define IDS_PROGRESS_REMOVE     3305
+﻿#define IDS_PROGRESS_REMOVE     3305
 
 #define IDS_PROGRESS_ADD        3320
 #define IDS_PROGRESS_UPDATE     3321

@@ -1,4 +1,4 @@
-// PasswordDialog.cpp
+﻿// PasswordDialog.cpp
 
 #include "StdAfx.h"
 

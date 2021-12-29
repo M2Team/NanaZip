@@ -1,4 +1,4 @@
-#define IDS_CONTEXT_FOLDER              2320
+﻿#define IDS_CONTEXT_FOLDER              2320
 #define IDS_CONTEXT_ARCHIVE             2321
 #define IDS_CONTEXT_OPEN                2322
 #define IDS_CONTEXT_EXTRACT             2323

@@ -1,4 +1,4 @@
-// IArchive.h
+﻿// IArchive.h
 
 #ifndef __IARCHIVE_H
 #define __IARCHIVE_H

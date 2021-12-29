@@ -1,4 +1,4 @@
-// Compress/CopyCoder.h
+﻿// Compress/CopyCoder.h
 
 #ifndef __COMPRESS_COPY_CODER_H
 #define __COMPRESS_COPY_CODER_H

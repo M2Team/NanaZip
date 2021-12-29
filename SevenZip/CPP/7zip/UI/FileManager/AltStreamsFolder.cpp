@@ -1,4 +1,4 @@
-// AltStreamsFolder.cpp
+﻿// AltStreamsFolder.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-#define LIZARD_HC_MIN_OFFSET 8
+﻿#define LIZARD_HC_MIN_OFFSET 8
 #define LIZARD_HC_LONGOFF_MM 0 /* not used with offsets > 1<<16 */
 #define OPTIMAL_ML (int)((ML_MASK_LZ4-1)+MINMATCH)
 #define GET_MINMATCH(offset) (MINMATCH)

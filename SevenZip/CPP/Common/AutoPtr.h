@@ -1,4 +1,4 @@
-// Common/AutoPtr.h
+﻿// Common/AutoPtr.h
 
 #ifndef __COMMON_AUTOPTR_H
 #define __COMMON_AUTOPTR_H

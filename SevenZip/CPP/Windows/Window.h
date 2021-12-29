@@ -1,4 +1,4 @@
-// Windows/Window.h
+﻿// Windows/Window.h
 
 #ifndef __WINDOWS_WINDOW_H
 #define __WINDOWS_WINDOW_H

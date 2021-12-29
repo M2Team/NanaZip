@@ -1,4 +1,4 @@
-// DeflateDecoder.h
+﻿// DeflateDecoder.h
 
 #ifndef __DEFLATE_DECODER_H
 #define __DEFLATE_DECODER_H

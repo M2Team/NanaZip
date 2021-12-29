@@ -1,4 +1,4 @@
-// Windows/SystemInfo.cpp
+﻿// Windows/SystemInfo.cpp
 
 #include "StdAfx.h"
 

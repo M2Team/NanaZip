@@ -1,4 +1,4 @@
-// ZipHeader.h
+﻿// ZipHeader.h
 
 #ifndef __ARCHIVE_ZIP_HEADER_H
 #define __ARCHIVE_ZIP_HEADER_H

@@ -1,4 +1,4 @@
-// MultiStream.h
+﻿// MultiStream.h
 
 #ifndef __MULTI_STREAM_H
 #define __MULTI_STREAM_H

@@ -1,4 +1,4 @@
-// IDecl.h
+﻿// IDecl.h
 
 #ifndef __IDECL_H
 #define __IDECL_H

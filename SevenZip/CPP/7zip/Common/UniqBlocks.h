@@ -1,4 +1,4 @@
-// UniqBlocks.h
+﻿// UniqBlocks.h
 
 #ifndef __UNIQ_BLOCKS_H
 #define __UNIQ_BLOCKS_H

@@ -1,4 +1,4 @@
-// DeflateRegister.cpp
+﻿// DeflateRegister.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// TarItem.h
+﻿// TarItem.h
 
 #ifndef __ARCHIVE_TAR_ITEM_H
 #define __ARCHIVE_TAR_ITEM_H

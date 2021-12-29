@@ -1,4 +1,4 @@
-// Archive/CabItem.h
+﻿// Archive/CabItem.h
 
 #ifndef __ARCHIVE_CAB_ITEM_H
 #define __ARCHIVE_CAB_ITEM_H

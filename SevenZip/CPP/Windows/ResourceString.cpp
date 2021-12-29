@@ -1,4 +1,4 @@
-// Windows/ResourceString.cpp
+﻿// Windows/ResourceString.cpp
 
 #include "StdAfx.h"
 

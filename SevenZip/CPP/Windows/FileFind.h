@@ -1,4 +1,4 @@
-// Windows/FileFind.h
+﻿// Windows/FileFind.h
 
 #ifndef __WINDOWS_FILE_FIND_H
 #define __WINDOWS_FILE_FIND_H

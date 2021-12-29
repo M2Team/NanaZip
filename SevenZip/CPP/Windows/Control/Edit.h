@@ -1,4 +1,4 @@
-// Windows/Control/Edit.h
+﻿// Windows/Control/Edit.h
 
 #ifndef __WINDOWS_CONTROL_EDIT_H
 #define __WINDOWS_CONTROL_EDIT_H

@@ -1,4 +1,4 @@
-// WimRegister.cpp
+﻿// WimRegister.cpp
 
 #include "StdAfx.h"
 

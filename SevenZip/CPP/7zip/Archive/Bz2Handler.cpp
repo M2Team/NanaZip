@@ -1,4 +1,4 @@
-// Bz2Handler.cpp
+﻿// Bz2Handler.cpp
 
 #include "StdAfx.h"
 

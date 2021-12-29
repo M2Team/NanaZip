@@ -1,4 +1,4 @@
-// Windows/Control/PropertyPage.cpp
+﻿// Windows/Control/PropertyPage.cpp
 
 #include "StdAfx.h"
 

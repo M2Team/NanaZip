@@ -1,4 +1,4 @@
-// ZipRegistry.cpp
+﻿// ZipRegistry.cpp
 
 #include "StdAfx.h"
 

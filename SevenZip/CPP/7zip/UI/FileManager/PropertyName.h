@@ -1,4 +1,4 @@
-// PropertyName.h
+﻿// PropertyName.h
 
 #ifndef __PROPERTY_NAME_H
 #define __PROPERTY_NAME_H

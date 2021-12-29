@@ -1,4 +1,4 @@
-// RarVol.h
+﻿// RarVol.h
 
 #ifndef __ARCHIVE_RAR_VOL_H
 #define __ARCHIVE_RAR_VOL_H

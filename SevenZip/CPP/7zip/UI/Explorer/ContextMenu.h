@@ -1,4 +1,4 @@
-// ContextMenu.h
+﻿// ContextMenu.h
 
 #ifndef __CONTEXT_MENU_H
 #define __CONTEXT_MENU_H

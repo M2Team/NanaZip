@@ -1,4 +1,4 @@
-// UpdateCallback.h
+﻿// UpdateCallback.h
 
 #ifndef __UPDATE_CALLBACK_H
 #define __UPDATE_CALLBACK_H

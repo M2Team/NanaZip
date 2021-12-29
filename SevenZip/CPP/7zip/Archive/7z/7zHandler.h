@@ -1,4 +1,4 @@
-// 7z/Handler.h
+﻿// 7z/Handler.h
 
 #ifndef __7Z_HANDLER_H
 #define __7Z_HANDLER_H

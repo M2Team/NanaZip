@@ -1,4 +1,4 @@
-// Windows/CommonDialog.cpp
+﻿// Windows/CommonDialog.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// RegisterArc.h
+﻿// RegisterArc.h
 
 #ifndef __REGISTER_ARC_H
 #define __REGISTER_ARC_H

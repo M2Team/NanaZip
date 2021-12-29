@@ -1,4 +1,4 @@
-// VerCtrl.cpp
+﻿// VerCtrl.cpp
 
 #include "StdAfx.h"
 

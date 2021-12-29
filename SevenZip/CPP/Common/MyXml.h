@@ -1,4 +1,4 @@
-// MyXml.h
+﻿// MyXml.h
 
 #ifndef __MY_XML_H
 #define __MY_XML_H

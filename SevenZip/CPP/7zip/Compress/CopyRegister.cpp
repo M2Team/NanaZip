@@ -1,4 +1,4 @@
-// CopyRegister.cpp
+﻿// CopyRegister.cpp
 
 #include "StdAfx.h"
 

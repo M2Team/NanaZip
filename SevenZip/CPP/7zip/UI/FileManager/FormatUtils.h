@@ -1,4 +1,4 @@
-// FormatUtils.h
+﻿// FormatUtils.h
 
 #ifndef __FORMAT_UTILS_H
 #define __FORMAT_UTILS_H

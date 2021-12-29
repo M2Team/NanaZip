@@ -1,4 +1,4 @@
-// FoldersPage.h
+﻿// FoldersPage.h
 
 #ifndef __FOLDERS_PAGE_H
 #define __FOLDERS_PAGE_H

@@ -1,4 +1,4 @@
-// Compress/BZip2Const.h
+﻿// Compress/BZip2Const.h
 
 #ifndef __COMPRESS_BZIP2_CONST_H
 #define __COMPRESS_BZIP2_CONST_H

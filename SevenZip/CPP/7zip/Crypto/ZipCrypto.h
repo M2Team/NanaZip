@@ -1,4 +1,4 @@
-// Crypto/ZipCrypto.h
+﻿// Crypto/ZipCrypto.h
 
 #ifndef __CRYPTO_ZIP_CRYPTO_H
 #define __CRYPTO_ZIP_CRYPTO_H

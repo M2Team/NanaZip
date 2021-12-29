@@ -1,4 +1,4 @@
-/* Blake2.h -- BLAKE2 Hash
+﻿/* Blake2.h -- BLAKE2 Hash
 2015-06-30 : Igor Pavlov : Public domain
 2015 : Samuel Neves : Public domain */
 

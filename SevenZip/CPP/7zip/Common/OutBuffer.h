@@ -1,4 +1,4 @@
-// OutBuffer.h
+﻿// OutBuffer.h
 
 #ifndef __OUT_BUFFER_H
 #define __OUT_BUFFER_H

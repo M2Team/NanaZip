@@ -1,4 +1,4 @@
-// CWrappers.h
+﻿// CWrappers.h
 
 #ifndef __C_WRAPPERS_H
 #define __C_WRAPPERS_H

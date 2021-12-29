@@ -1,4 +1,4 @@
-// Common/StdInStream.h
+﻿// Common/StdInStream.h
 
 #ifndef __COMMON_STD_IN_STREAM_H
 #define __COMMON_STD_IN_STREAM_H

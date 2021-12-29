@@ -1,4 +1,4 @@
-// CopyDialog.h
+﻿// CopyDialog.h
 
 #ifndef __COPY_DIALOG_H
 #define __COPY_DIALOG_H

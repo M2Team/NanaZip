@@ -1,4 +1,4 @@
-// IFolderArchive.h
+﻿// IFolderArchive.h
 
 #ifndef __IFOLDER_ARCHIVE_H
 #define __IFOLDER_ARCHIVE_H

@@ -1,4 +1,4 @@
-// LizardHandler.cpp
+﻿// LizardHandler.cpp
 
 #include "StdAfx.h"
 

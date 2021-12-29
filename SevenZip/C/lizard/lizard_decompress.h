@@ -1,4 +1,4 @@
-/*
+﻿/*
    Lizard - Fast LZ compression algorithm
    Header File
    Copyright (C) 2011-2016, Yann Collet

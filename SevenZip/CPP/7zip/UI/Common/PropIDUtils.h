@@ -1,4 +1,4 @@
-// PropIDUtils.h
+﻿// PropIDUtils.h
 
 #ifndef __PROPID_UTILS_H
 #define __PROPID_UTILS_H

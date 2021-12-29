@@ -1,4 +1,4 @@
-// ArchiveExtractCallback.h
+﻿// ArchiveExtractCallback.h
 
 #ifndef __ARCHIVE_EXTRACT_CALLBACK_H
 #define __ARCHIVE_EXTRACT_CALLBACK_H

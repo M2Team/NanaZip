@@ -1,4 +1,4 @@
-// EnumFormatEtc.h
+﻿// EnumFormatEtc.h
 
 #ifndef __ENUMFORMATETC_H
 #define __ENUMFORMATETC_H

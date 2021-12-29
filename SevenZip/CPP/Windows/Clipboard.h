@@ -1,4 +1,4 @@
-// Windows/Clipboard.h
+﻿// Windows/Clipboard.h
 
 #ifndef __CLIPBOARD_H
 #define __CLIPBOARD_H

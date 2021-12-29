@@ -1,3 +1,3 @@
-// ImplodeHuffmanDecoder.cpp
+﻿// ImplodeHuffmanDecoder.cpp
 
 #include "StdAfx.h"

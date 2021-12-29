@@ -1,4 +1,4 @@
-// Windows/System.h
+﻿// Windows/System.h
 
 #ifndef __WINDOWS_SYSTEM_H
 #define __WINDOWS_SYSTEM_H

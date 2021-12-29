@@ -1,4 +1,4 @@
-// Windows/NationalTime.h
+﻿// Windows/NationalTime.h
 
 #ifndef __WINDOWS_NATIONAL_TIME_H
 #define __WINDOWS_NATIONAL_TIME_H

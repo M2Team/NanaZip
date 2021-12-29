@@ -1,4 +1,4 @@
-// ZlibDecoder.cpp
+﻿// ZlibDecoder.cpp
 
 #include "StdAfx.h"
 

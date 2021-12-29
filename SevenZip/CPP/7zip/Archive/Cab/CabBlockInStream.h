@@ -1,4 +1,4 @@
-// CabBlockInStream.h
+﻿// CabBlockInStream.h
 
 #ifndef __CAB_BLOCK_IN_STREAM_H
 #define __CAB_BLOCK_IN_STREAM_H

@@ -1,4 +1,4 @@
-// Common/StdOutStream.cpp
+﻿// Common/StdOutStream.cpp
 
 #include "StdAfx.h"
 

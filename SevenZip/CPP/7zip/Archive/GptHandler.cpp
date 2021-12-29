@@ -1,4 +1,4 @@
-// GptHandler.cpp
+﻿// GptHandler.cpp
 
 #include "StdAfx.h"
 

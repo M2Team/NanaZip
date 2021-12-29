@@ -1,4 +1,4 @@
-// Windows/COM.h
+﻿// Windows/COM.h
 
 #ifndef __WINDOWS_COM_H
 #define __WINDOWS_COM_H

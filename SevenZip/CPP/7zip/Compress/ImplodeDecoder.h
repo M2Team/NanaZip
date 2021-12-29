@@ -1,4 +1,4 @@
-// ImplodeDecoder.h
+﻿// ImplodeDecoder.h
 
 #ifndef __COMPRESS_IMPLODE_DECODER_H
 #define __COMPRESS_IMPLODE_DECODER_H

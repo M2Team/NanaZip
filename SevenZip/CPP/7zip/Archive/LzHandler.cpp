@@ -1,4 +1,4 @@
-// LzHandler.cpp
+﻿// LzHandler.cpp
 
 #include "StdAfx.h"
 

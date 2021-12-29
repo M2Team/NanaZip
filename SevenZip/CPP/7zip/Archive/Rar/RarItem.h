@@ -1,4 +1,4 @@
-// RarItem.h
+﻿// RarItem.h
 
 #ifndef __ARCHIVE_RAR_ITEM_H
 #define __ARCHIVE_RAR_ITEM_H

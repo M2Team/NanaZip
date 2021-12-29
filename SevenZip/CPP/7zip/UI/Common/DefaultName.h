@@ -1,4 +1,4 @@
-// DefaultName.h
+﻿// DefaultName.h
 
 #ifndef __DEFAULT_NAME_H
 #define __DEFAULT_NAME_H

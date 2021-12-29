@@ -1,4 +1,4 @@
-#define IDD_BROWSE  95
+﻿#define IDD_BROWSE  95
 
 #define IDL_BROWSE         100
 #define IDT_BROWSE_FOLDER  101

@@ -1,4 +1,4 @@
-// Pbkdf2HmacSha1.h
+﻿// Pbkdf2HmacSha1.h
 // Password-Based Key Derivation Function (RFC 2898, PKCS #5) based on HMAC-SHA-1
 
 #ifndef __CRYPTO_PBKDF2_HMAC_SHA1_H

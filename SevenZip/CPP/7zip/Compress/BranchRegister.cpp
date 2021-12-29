@@ -1,4 +1,4 @@
-// BranchRegister.cpp
+﻿// BranchRegister.cpp
 
 #include "StdAfx.h"
 

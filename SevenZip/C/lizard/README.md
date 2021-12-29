@@ -1,4 +1,4 @@
-Lizard - Library Files
+﻿Lizard - Library Files
 ================================
 
 The __lib__ directory contains several directories.

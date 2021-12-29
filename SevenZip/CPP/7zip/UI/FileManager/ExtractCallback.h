@@ -1,4 +1,4 @@
-// ExtractCallback.h
+﻿// ExtractCallback.h
 
 #ifndef __EXTRACT_CALLBACK_H
 #define __EXTRACT_CALLBACK_H

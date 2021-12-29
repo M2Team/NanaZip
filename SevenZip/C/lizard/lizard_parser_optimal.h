@@ -1,4 +1,4 @@
-#define LIZARD_LOG_PARSER(fmt, ...) //printf(fmt, __VA_ARGS__)
+﻿#define LIZARD_LOG_PARSER(fmt, ...) //printf(fmt, __VA_ARGS__)
 #define LIZARD_LOG_PRICE(fmt, ...) //printf(fmt, __VA_ARGS__)
 #define LIZARD_LOG_ENCODE(fmt, ...) //printf(fmt, __VA_ARGS__) 
 

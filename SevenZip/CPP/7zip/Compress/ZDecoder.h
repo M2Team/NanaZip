@@ -1,4 +1,4 @@
-// ZDecoder.h
+﻿// ZDecoder.h
 
 #ifndef __COMPRESS_Z_DECODER_H
 #define __COMPRESS_Z_DECODER_H

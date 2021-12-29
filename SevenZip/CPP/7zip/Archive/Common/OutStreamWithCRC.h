@@ -1,4 +1,4 @@
-// OutStreamWithCRC.h
+﻿// OutStreamWithCRC.h
 
 #ifndef __OUT_STREAM_WITH_CRC_H
 #define __OUT_STREAM_WITH_CRC_H

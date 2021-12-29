@@ -1,4 +1,4 @@
-// NsisIn.cpp
+﻿// NsisIn.cpp
 
 #include "StdAfx.h"
 

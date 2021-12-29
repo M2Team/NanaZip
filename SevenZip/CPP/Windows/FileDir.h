@@ -1,4 +1,4 @@
-// Windows/FileDir.h
+﻿// Windows/FileDir.h
 
 #ifndef __WINDOWS_FILE_DIR_H
 #define __WINDOWS_FILE_DIR_H

@@ -1,4 +1,4 @@
-// Windows/ProcessMessages.cpp
+﻿// Windows/ProcessMessages.cpp
 
 #include "StdAfx.h"
 

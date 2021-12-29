@@ -1,4 +1,4 @@
-// RegisterCodec.h
+﻿// RegisterCodec.h
 
 #ifndef __REGISTER_CODEC_H
 #define __REGISTER_CODEC_H

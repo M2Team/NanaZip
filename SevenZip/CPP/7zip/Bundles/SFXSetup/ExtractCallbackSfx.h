@@ -1,4 +1,4 @@
-// ExtractCallbackSfx.h
+﻿// ExtractCallbackSfx.h
 
 #ifndef __EXTRACT_CALLBACK_SFX_H
 #define __EXTRACT_CALLBACK_SFX_H

@@ -1,4 +1,4 @@
-/*
+﻿/*
    Lizard auto-framing library
    Header File
    Copyright (C) 2011-2015, Yann Collet

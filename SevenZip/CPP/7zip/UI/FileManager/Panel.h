@@ -1,4 +1,4 @@
-// Panel.h
+﻿// Panel.h
 
 #ifndef __PANEL_H
 #define __PANEL_H

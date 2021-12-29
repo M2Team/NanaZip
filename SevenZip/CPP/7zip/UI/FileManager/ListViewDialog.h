@@ -1,4 +1,4 @@
-// ListViewDialog.h
+﻿// ListViewDialog.h
 
 #ifndef __LISTVIEW_DIALOG_H
 #define __LISTVIEW_DIALOG_H

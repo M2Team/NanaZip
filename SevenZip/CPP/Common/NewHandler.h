@@ -1,4 +1,4 @@
-// Common/NewHandler.h
+﻿// Common/NewHandler.h
 
 #ifndef __COMMON_NEW_HANDLER_H
 #define __COMMON_NEW_HANDLER_H

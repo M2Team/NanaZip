@@ -1,4 +1,4 @@
-// FilePathAutoRename.cpp
+﻿// FilePathAutoRename.cpp
 
 #include "StdAfx.h"
 

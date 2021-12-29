@@ -1,4 +1,4 @@
-// QuantumDecoder.cpp
+﻿// QuantumDecoder.cpp
 
 #include "StdAfx.h"
 

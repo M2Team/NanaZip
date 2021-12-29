@@ -1,4 +1,4 @@
-#define IDD_SETTINGS     2500
+﻿#define IDD_SETTINGS     2500
 #define IDD_SETTINGS_2  12500
 
 #define IDX_SETTINGS_SHOW_DOTS              2501

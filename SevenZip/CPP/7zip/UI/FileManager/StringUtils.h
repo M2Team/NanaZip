@@ -1,4 +1,4 @@
-// StringUtils.h
+﻿// StringUtils.h
 
 #ifndef __STRING_UTILS_H
 #define __STRING_UTILS_H

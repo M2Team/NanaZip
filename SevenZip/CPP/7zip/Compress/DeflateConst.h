@@ -1,4 +1,4 @@
-// DeflateConst.h
+﻿// DeflateConst.h
 
 #ifndef __DEFLATE_CONST_H
 #define __DEFLATE_CONST_H

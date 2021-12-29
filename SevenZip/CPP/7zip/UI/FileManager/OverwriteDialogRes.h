@@ -1,4 +1,4 @@
-#define IDD_OVERWRITE     3500
+﻿#define IDD_OVERWRITE     3500
 #define IDD_OVERWRITE_2  13500
 
 #define IDT_OVERWRITE_HEADER          3501

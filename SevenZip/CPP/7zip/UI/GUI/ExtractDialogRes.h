@@ -1,4 +1,4 @@
-#define IDD_EXTRACT     3400
+﻿#define IDD_EXTRACT     3400
 #define IDD_EXTRACT_2  13400
 
 #define IDC_EXTRACT_PATH             100

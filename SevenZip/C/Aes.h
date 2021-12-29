@@ -1,4 +1,4 @@
-/* Aes.h -- AES encryption / decryption
+﻿/* Aes.h -- AES encryption / decryption
 2018-04-28 : Igor Pavlov : Public domain */
 
 #ifndef __AES_H

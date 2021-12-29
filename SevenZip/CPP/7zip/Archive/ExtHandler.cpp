@@ -1,4 +1,4 @@
-// ExtHandler.cpp
+﻿// ExtHandler.cpp
 
 #include "StdAfx.h"
 

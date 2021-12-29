@@ -1,4 +1,4 @@
-// 7zOut.cpp
+﻿// 7zOut.cpp
 
 #include "StdAfx.h"
 

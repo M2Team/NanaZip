@@ -1,4 +1,4 @@
-// Windows/PropVariant.h
+﻿// Windows/PropVariant.h
 
 #ifndef __WINDOWS_PROP_VARIANT_H
 #define __WINDOWS_PROP_VARIANT_H

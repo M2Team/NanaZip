@@ -1,4 +1,4 @@
-// SplitUtils.h
+﻿// SplitUtils.h
 
 #ifndef __SPLIT_UTILS_H
 #define __SPLIT_UTILS_H

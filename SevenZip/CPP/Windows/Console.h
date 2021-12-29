@@ -1,4 +1,4 @@
-// Windows/Console.h
+﻿// Windows/Console.h
 
 #ifndef __WINDOWS_CONSOLE_H
 #define __WINDOWS_CONSOLE_H

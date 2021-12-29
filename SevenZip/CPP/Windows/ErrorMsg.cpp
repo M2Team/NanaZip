@@ -1,4 +1,4 @@
-// Windows/ErrorMsg.h
+﻿// Windows/ErrorMsg.h
 
 #include "StdAfx.h"
 

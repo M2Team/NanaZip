@@ -1,4 +1,4 @@
-// LoadCodecs.cpp
+﻿// LoadCodecs.cpp
 
 /*
 EXTERNAL_CODECS

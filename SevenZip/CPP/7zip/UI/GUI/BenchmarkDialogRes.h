@@ -1,4 +1,4 @@
-#define IDD_BENCH         7600
+﻿#define IDD_BENCH         7600
 #define IDD_BENCH_2      17600
 #define IDD_BENCH_TOTAL 7699
 

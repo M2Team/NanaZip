@@ -1,4 +1,4 @@
-// SettingsPage.h
+﻿// SettingsPage.h
 
 #ifndef __SETTINGS_PAGE_H
 #define __SETTINGS_PAGE_H

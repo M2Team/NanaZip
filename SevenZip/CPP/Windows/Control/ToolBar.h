@@ -1,4 +1,4 @@
-// Windows/Control/ToolBar.h
+﻿// Windows/Control/ToolBar.h
   
 #ifndef __WINDOWS_CONTROL_TOOLBAR_H
 #define __WINDOWS_CONTROL_TOOLBAR_H

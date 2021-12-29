@@ -1,4 +1,4 @@
-// Windows/Control/CommandBar.h
+﻿// Windows/Control/CommandBar.h
   
 #ifndef __WINDOWS_CONTROL_COMMANDBAR_H
 #define __WINDOWS_CONTROL_COMMANDBAR_H

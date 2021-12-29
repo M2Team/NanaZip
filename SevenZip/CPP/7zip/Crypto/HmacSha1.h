@@ -1,4 +1,4 @@
-// HmacSha1.h
+﻿// HmacSha1.h
 // Implements HMAC-SHA-1 (RFC2104, FIPS-198)
 
 #ifndef __CRYPTO_HMAC_SHA1_H

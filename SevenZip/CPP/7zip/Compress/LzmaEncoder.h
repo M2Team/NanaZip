@@ -1,4 +1,4 @@
-// LzmaEncoder.h
+﻿// LzmaEncoder.h
 
 #ifndef __LZMA_ENCODER_H
 #define __LZMA_ENCODER_H

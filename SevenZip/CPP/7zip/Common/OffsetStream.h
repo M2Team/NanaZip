@@ -1,4 +1,4 @@
-// OffsetStream.h
+﻿// OffsetStream.h
 
 #ifndef __OFFSET_STREAM_H
 #define __OFFSET_STREAM_H

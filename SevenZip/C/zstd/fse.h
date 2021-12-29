@@ -1,4 +1,4 @@
-/* ******************************************************************
+﻿/* ******************************************************************
  * FSE : Finite State Entropy codec
  * Public Prototypes declaration
  * Copyright (c) Yann Collet, Facebook, Inc.

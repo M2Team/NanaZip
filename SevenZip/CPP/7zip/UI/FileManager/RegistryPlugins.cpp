@@ -1,4 +1,4 @@
-// RegistryPlugins.cpp
+﻿// RegistryPlugins.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// HmacSha256.h
+﻿// HmacSha256.h
 // Implements HMAC-SHA-256 (RFC2104, FIPS-198)
 
 #ifndef __CRYPTO_HMAC_SHA256_H

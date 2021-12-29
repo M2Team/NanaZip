@@ -1,4 +1,4 @@
-/* Threads.c -- multithreading library
+﻿/* Threads.c -- multithreading library
 2021-12-21 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

@@ -1,4 +1,4 @@
-// EditDialog.h
+﻿// EditDialog.h
 
 #ifndef __EDIT_DIALOG_H
 #define __EDIT_DIALOG_H

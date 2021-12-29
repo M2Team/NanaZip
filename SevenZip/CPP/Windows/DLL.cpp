@@ -1,4 +1,4 @@
-// Windows/DLL.cpp
+﻿// Windows/DLL.cpp
 
 #include "StdAfx.h"
 

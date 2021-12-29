@@ -1,4 +1,4 @@
-// OpenCallback.h
+﻿// OpenCallback.h
 
 #ifndef __OPEN_CALLBACK_H
 #define __OPEN_CALLBACK_H

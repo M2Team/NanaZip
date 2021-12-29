@@ -1,4 +1,4 @@
-#define IDI_ICON  1
+﻿#define IDI_ICON  1
 
 #define IDS_MESSAGE_NO_ERRORS           3001
 

@@ -1,4 +1,4 @@
-// 7zOut.h
+﻿// 7zOut.h
 
 #ifndef __7Z_OUT_H
 #define __7Z_OUT_H

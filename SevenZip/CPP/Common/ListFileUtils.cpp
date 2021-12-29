@@ -1,4 +1,4 @@
-// Common/ListFileUtils.cpp
+﻿// Common/ListFileUtils.cpp
 
 #include "StdAfx.h"
 

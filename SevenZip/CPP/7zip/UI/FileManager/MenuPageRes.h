@@ -1,4 +1,4 @@
-#define IDD_MENU    12200
+﻿#define IDD_MENU    12200
 #define IDD_MENU_2  12300
 
 #define IDB_SYSTEM_ASSOCIATE  12201

@@ -1,4 +1,4 @@
-// UserInputUtils.cpp
+﻿// UserInputUtils.cpp
 
 #include "StdAfx.h"
 

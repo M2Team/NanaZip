@@ -1,4 +1,4 @@
-/*
+﻿/*
    LZ5 auto-framing library
    Header File for static linking only
    Copyright (C) 2011-2015, Yann Collet.

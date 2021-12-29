@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 
 #include "../../../Common/IntToString.h"
 #include "../../../Common/StringConvert.h"

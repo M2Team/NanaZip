@@ -1,4 +1,4 @@
-// MessagesDialog.cpp
+﻿// MessagesDialog.cpp
  
 #include "StdAfx.h"
 

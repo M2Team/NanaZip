@@ -1,4 +1,4 @@
-// CabHandler.h
+﻿// CabHandler.h
 
 #ifndef __CAB_HANDLER_H
 #define __CAB_HANDLER_H

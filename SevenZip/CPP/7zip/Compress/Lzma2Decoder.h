@@ -1,4 +1,4 @@
-// Lzma2Decoder.h
+﻿// Lzma2Decoder.h
 
 #ifndef __LZMA2_DECODER_H
 #define __LZMA2_DECODER_H

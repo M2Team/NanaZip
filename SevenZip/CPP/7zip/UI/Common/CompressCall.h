@@ -1,4 +1,4 @@
-// CompressCall.h
+﻿// CompressCall.h
 
 #ifndef __COMPRESS_CALL_H
 #define __COMPRESS_CALL_H

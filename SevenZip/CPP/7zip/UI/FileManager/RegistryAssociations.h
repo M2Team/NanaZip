@@ -1,4 +1,4 @@
-// RegistryAssociations.h
+﻿// RegistryAssociations.h
 
 #ifndef __REGISTRY_ASSOCIATIONS_H
 #define __REGISTRY_ASSOCIATIONS_H

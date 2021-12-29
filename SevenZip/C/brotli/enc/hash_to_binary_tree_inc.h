@@ -1,4 +1,4 @@
-/* NOLINT(build/header_guard) */
+﻿/* NOLINT(build/header_guard) */
 /* Copyright 2016 Google Inc. All Rights Reserved.
 
    Distributed under MIT license.

@@ -1,4 +1,4 @@
-// Common/Random.cpp
+﻿// Common/Random.cpp
 
 #include "StdAfx.h"
 

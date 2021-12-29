@@ -1,3 +1,3 @@
-// LockedStream.cpp
+﻿// LockedStream.cpp
 
 #include "StdAfx.h"

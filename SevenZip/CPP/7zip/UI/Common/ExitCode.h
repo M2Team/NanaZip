@@ -1,4 +1,4 @@
-// ExitCode.h
+﻿// ExitCode.h
 
 #ifndef __EXIT_CODE_H
 #define __EXIT_CODE_H

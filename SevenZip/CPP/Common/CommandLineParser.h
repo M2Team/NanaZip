@@ -1,4 +1,4 @@
-// Common/CommandLineParser.h
+﻿// Common/CommandLineParser.h
 
 #ifndef __COMMON_COMMAND_LINE_PARSER_H
 #define __COMMON_COMMAND_LINE_PARSER_H

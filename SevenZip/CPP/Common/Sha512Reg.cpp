@@ -1,4 +1,4 @@
-// Sha512Reg.cpp /TR 2018-11-02
+﻿// Sha512Reg.cpp /TR 2018-11-02
 
 #include "StdAfx.h"
 

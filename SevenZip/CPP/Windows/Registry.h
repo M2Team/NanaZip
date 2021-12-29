@@ -1,4 +1,4 @@
-// Windows/Registry.h
+﻿// Windows/Registry.h
 
 #ifndef __WINDOWS_REGISTRY_H
 #define __WINDOWS_REGISTRY_H

@@ -1,4 +1,4 @@
-// 7zHandler.cpp
+﻿// 7zHandler.cpp
 
 #include "StdAfx.h"
 

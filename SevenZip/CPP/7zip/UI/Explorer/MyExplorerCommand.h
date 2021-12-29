@@ -1,4 +1,4 @@
-// MyExplorerCommand.h
+﻿// MyExplorerCommand.h
 
 #ifndef __MY_EXPLORER_COMMAND_H
 #define __MY_EXPLORER_COMMAND_H

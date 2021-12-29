@@ -1,4 +1,4 @@
-#define LIZARD_PRICEFAST_MIN_OFFSET 8
+﻿#define LIZARD_PRICEFAST_MIN_OFFSET 8
 
 FORCE_INLINE int Lizard_FindMatchFast(Lizard_stream_t* ctx, intptr_t matchIndex, intptr_t matchIndex3, /* Index table will be updated */
                                                const BYTE* ip, const BYTE* const iLimit,

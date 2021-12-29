@@ -1,4 +1,4 @@
-// HashCon.h
+﻿// HashCon.h
 
 #ifndef __HASH_CON_H
 #define __HASH_CON_H

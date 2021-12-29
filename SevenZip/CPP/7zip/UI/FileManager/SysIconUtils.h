@@ -1,4 +1,4 @@
-// SysIconUtils.h
+﻿// SysIconUtils.h
 
 #ifndef __SYS_ICON_UTILS_H
 #define __SYS_ICON_UTILS_H

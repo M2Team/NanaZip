@@ -1,4 +1,4 @@
-/* 7zAlloc.c -- Allocation functions
+﻿/* 7zAlloc.c -- Allocation functions
 2017-04-03 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

@@ -1,4 +1,4 @@
-// InBuffer.h
+﻿// InBuffer.h
 
 #ifndef __IN_BUFFER_H
 #define __IN_BUFFER_H

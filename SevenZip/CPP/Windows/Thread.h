@@ -1,4 +1,4 @@
-// Windows/Thread.h
+﻿// Windows/Thread.h
 
 #ifndef __WINDOWS_THREAD_H
 #define __WINDOWS_THREAD_H

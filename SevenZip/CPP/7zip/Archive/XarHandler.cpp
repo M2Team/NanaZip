@@ -1,4 +1,4 @@
-// XarHandler.cpp
+﻿// XarHandler.cpp
 
 #include "StdAfx.h"
 

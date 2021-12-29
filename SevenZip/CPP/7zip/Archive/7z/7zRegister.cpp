@@ -1,4 +1,4 @@
-// 7zRegister.cpp
+﻿// 7zRegister.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// WorkDir.h
+﻿// WorkDir.h
 
 #ifndef __WORK_DIR_H
 #define __WORK_DIR_H

@@ -1,4 +1,4 @@
-EXPORTS
+﻿EXPORTS
   CreateObject PRIVATE
 
   GetHandlerProperty PRIVATE

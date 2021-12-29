@@ -1,4 +1,4 @@
-// Crypto/MyAes.cpp
+﻿// Crypto/MyAes.cpp
 
 #include "StdAfx.h"
 

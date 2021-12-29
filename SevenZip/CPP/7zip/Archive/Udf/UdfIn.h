@@ -1,4 +1,4 @@
-// Archive/UdfIn.h -- UDF / ECMA-167
+﻿// Archive/UdfIn.h -- UDF / ECMA-167
 
 #ifndef __ARCHIVE_UDF_IN_H
 #define __ARCHIVE_UDF_IN_H

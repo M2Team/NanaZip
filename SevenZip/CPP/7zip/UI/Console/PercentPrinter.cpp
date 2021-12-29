@@ -1,4 +1,4 @@
-// PercentPrinter.cpp
+﻿// PercentPrinter.cpp
 
 #include "StdAfx.h"
 

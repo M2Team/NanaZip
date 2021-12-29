@@ -1,4 +1,4 @@
-// UpdateGUI.cpp
+﻿// UpdateGUI.cpp
 
 #include "StdAfx.h"
 

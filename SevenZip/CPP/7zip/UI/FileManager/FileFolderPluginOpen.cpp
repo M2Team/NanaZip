@@ -1,4 +1,4 @@
-// FileFolderPluginOpen.cpp
+﻿// FileFolderPluginOpen.cpp
 
 #include "StdAfx.h"
 

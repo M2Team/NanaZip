@@ -1,4 +1,4 @@
-// GUI/UpdateGUI.h
+﻿// GUI/UpdateGUI.h
 
 #ifndef __UPDATE_GUI_H
 #define __UPDATE_GUI_H

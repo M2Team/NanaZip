@@ -1,4 +1,4 @@
-// HandlerOut.h
+﻿// HandlerOut.h
 
 #ifndef __HANDLER_OUT_H
 #define __HANDLER_OUT_H

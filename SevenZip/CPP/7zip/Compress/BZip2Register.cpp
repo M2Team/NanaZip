@@ -1,4 +1,4 @@
-// BZip2Register.cpp
+﻿// BZip2Register.cpp
 
 #include "StdAfx.h"
 

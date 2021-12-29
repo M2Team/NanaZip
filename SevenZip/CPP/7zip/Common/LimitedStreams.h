@@ -1,4 +1,4 @@
-// LimitedStreams.h
+﻿// LimitedStreams.h
 
 #ifndef __LIMITED_STREAMS_H
 #define __LIMITED_STREAMS_H

@@ -1,4 +1,4 @@
-// BitlEncoder.h -- the Least Significant Bit of byte is First
+﻿// BitlEncoder.h -- the Least Significant Bit of byte is First
 
 #ifndef __BITL_ENCODER_H
 #define __BITL_ENCODER_H

@@ -1,4 +1,4 @@
-// UpdateCallbackGUI.cpp
+﻿// UpdateCallbackGUI.cpp
 
 #include "StdAfx.h"
 

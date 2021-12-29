@@ -1,4 +1,4 @@
-// OverwriteDialog.h
+﻿// OverwriteDialog.h
 
 #ifndef __OVERWRITE_DIALOG_H
 #define __OVERWRITE_DIALOG_H

@@ -1,4 +1,4 @@
-// Windows/Synchronization.h
+﻿// Windows/Synchronization.h
 
 #ifndef __WINDOWS_SYNCHRONIZATION_H
 #define __WINDOWS_SYNCHRONIZATION_H

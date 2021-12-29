@@ -1,4 +1,4 @@
-/* Ppmd7aDec.c -- PPMd7a (PPMdH) Decoder
+﻿/* Ppmd7aDec.c -- PPMd7a (PPMdH) Decoder
 2021-04-13 : Igor Pavlov : Public domain
 This code is based on:
   PPMd var.H (2001): Dmitry Shkarin : Public domain

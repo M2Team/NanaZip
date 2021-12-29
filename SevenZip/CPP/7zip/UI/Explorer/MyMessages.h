@@ -1,4 +1,4 @@
-// MyMessages.h
+﻿// MyMessages.h
 
 #ifndef __MY_MESSAGES_H
 #define __MY_MESSAGES_H

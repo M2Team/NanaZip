@@ -1,4 +1,4 @@
-// Windows/CommonDialog.h
+﻿// Windows/CommonDialog.h
 
 #ifndef __WINDOWS_COMMON_DIALOG_H
 #define __WINDOWS_COMMON_DIALOG_H

@@ -1,4 +1,4 @@
-// LangUtils.h
+﻿// LangUtils.h
 
 #ifndef __LANG_UTILS_H
 #define __LANG_UTILS_H

@@ -1,4 +1,4 @@
-// PanelDrag.cpp
+﻿// PanelDrag.cpp
 
 #include "StdAfx.h"
 

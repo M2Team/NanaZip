@@ -1,4 +1,4 @@
-// SplitDialog.h
+﻿// SplitDialog.h
 
 #ifndef __SPLIT_DIALOG_H
 #define __SPLIT_DIALOG_H

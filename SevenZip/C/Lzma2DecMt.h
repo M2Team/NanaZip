@@ -1,4 +1,4 @@
-/* Lzma2DecMt.h -- LZMA2 Decoder Multi-thread
+﻿/* Lzma2DecMt.h -- LZMA2 Decoder Multi-thread
 2018-02-17 : Igor Pavlov : Public domain */
 
 #ifndef __LZMA2_DEC_MT_H

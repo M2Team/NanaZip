@@ -1,4 +1,4 @@
-#define IDS_MEM_ERROR                   3000
+﻿#define IDS_MEM_ERROR                   3000
 
 #define IDS_CANNOT_CREATE_FOLDER        3003
 #define IDS_UPDATE_NOT_SUPPORTED        3004

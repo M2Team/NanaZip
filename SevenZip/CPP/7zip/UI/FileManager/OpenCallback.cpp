@@ -1,4 +1,4 @@
-// OpenCallback.cpp
+﻿// OpenCallback.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// XpressDecoder.h
+﻿// XpressDecoder.h
 
 #ifndef __XPRESS_DECODER_H
 #define __XPRESS_DECODER_H

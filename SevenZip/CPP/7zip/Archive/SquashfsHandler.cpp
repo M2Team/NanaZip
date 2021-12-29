@@ -1,4 +1,4 @@
-// SquashfsHandler.cpp
+﻿// SquashfsHandler.cpp
 
 #include "StdAfx.h"
 

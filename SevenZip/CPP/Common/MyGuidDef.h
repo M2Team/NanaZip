@@ -1,4 +1,4 @@
-// Common/MyGuidDef.h
+﻿// Common/MyGuidDef.h
 
 #ifndef GUID_DEFINED
 #define GUID_DEFINED

@@ -1,4 +1,4 @@
-// ProgressDialog2.h
+﻿// ProgressDialog2.h
 
 #ifndef __PROGRESS_DIALOG_2_H
 #define __PROGRESS_DIALOG_2_H

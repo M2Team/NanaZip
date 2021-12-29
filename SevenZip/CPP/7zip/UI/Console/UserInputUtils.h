@@ -1,4 +1,4 @@
-// UserInputUtils.h
+﻿// UserInputUtils.h
 
 #ifndef __USER_INPUT_UTILS_H
 #define __USER_INPUT_UTILS_H

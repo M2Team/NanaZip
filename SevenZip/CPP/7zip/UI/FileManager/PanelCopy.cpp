@@ -1,4 +1,4 @@
-/// PanelCopy.cpp
+﻿/// PanelCopy.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// SetProperties.h
+﻿// SetProperties.h
 
 #ifndef __SETPROPERTIES_H
 #define __SETPROPERTIES_H

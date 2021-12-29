@@ -1,4 +1,4 @@
-// RegistryAssociations.cpp
+﻿// RegistryAssociations.cpp
 
 #include "StdAfx.h"
 

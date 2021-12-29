@@ -1,4 +1,4 @@
-// Rar3Decoder.h
+﻿// Rar3Decoder.h
 // According to unRAR license, this code may not be used to develop
 // a program that creates RAR archives
 

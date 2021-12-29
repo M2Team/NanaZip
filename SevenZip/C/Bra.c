@@ -1,4 +1,4 @@
-/* Bra.c -- Converters for RISC code
+﻿/* Bra.c -- Converters for RISC code
 2021-02-09 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

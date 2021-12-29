@@ -1,4 +1,4 @@
-// ChmHandler.cpp
+﻿// ChmHandler.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Property.h
+﻿// Property.h
 
 #ifndef __7Z_PROPERTY_H
 #define __7Z_PROPERTY_H

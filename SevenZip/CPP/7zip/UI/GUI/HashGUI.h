@@ -1,4 +1,4 @@
-// HashGUI.h
+﻿// HashGUI.h
 
 #ifndef __HASH_GUI_H
 #define __HASH_GUI_H

@@ -1,4 +1,4 @@
-
+﻿
 # Multithreading Library for [Brotli], [Lizard], [LZ4], [LZ5] and [Zstandard]
 
 ## Description

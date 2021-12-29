@@ -1,4 +1,4 @@
-// ZstdHandler.cpp
+﻿// ZstdHandler.cpp
 
 #include "StdAfx.h"
 

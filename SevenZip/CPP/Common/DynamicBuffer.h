@@ -1,4 +1,4 @@
-// Common/DynamicBuffer.h
+﻿// Common/DynamicBuffer.h
 
 #ifndef __COMMON_DYNAMIC_BUFFER_H
 #define __COMMON_DYNAMIC_BUFFER_H

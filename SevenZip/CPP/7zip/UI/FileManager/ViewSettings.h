@@ -1,4 +1,4 @@
-// ViewSettings.h
+﻿// ViewSettings.h
 
 #ifndef __VIEW_SETTINGS_H
 #define __VIEW_SETTINGS_H

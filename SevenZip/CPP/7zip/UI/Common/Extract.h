@@ -1,4 +1,4 @@
-// Extract.h
+﻿// Extract.h
 
 #ifndef __EXTRACT_H
 #define __EXTRACT_H

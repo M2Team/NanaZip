@@ -1,4 +1,4 @@
-#define IDD_PROGRESS       97
+﻿#define IDD_PROGRESS       97
 #define IDD_PROGRESS_2  10097
 
 #define IDS_CLOSE                  408

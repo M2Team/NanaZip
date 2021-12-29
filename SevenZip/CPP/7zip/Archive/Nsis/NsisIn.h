@@ -1,4 +1,4 @@
-// NsisIn.h
+﻿// NsisIn.h
 
 #ifndef __ARCHIVE_NSIS_IN_H
 #define __ARCHIVE_NSIS_IN_H

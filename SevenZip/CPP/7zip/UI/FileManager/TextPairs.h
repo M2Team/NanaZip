@@ -1,4 +1,4 @@
-// TextPairs.h
+﻿// TextPairs.h
 
 #ifndef __FM_TEXT_PAIRS_H
 #define __FM_TEXT_PAIRS_H

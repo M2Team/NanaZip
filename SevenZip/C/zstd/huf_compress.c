@@ -1,4 +1,4 @@
-/* ******************************************************************
+﻿/* ******************************************************************
  * Huffman encoder, part of New Generation Entropy library
  * Copyright (c) Yann Collet, Facebook, Inc.
  *

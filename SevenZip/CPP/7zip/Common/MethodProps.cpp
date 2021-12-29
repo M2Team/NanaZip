@@ -1,4 +1,4 @@
-// MethodProps.cpp
+﻿// MethodProps.cpp
 
 #include "StdAfx.h"
 

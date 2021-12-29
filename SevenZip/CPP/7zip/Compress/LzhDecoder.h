@@ -1,4 +1,4 @@
-// LzhDecoder.h
+﻿// LzhDecoder.h
 
 #ifndef __COMPRESS_LZH_DECODER_H
 #define __COMPRESS_LZH_DECODER_H

@@ -1,4 +1,4 @@
-// Archive/RarHeader.h
+﻿// Archive/RarHeader.h
 
 #ifndef __ARCHIVE_RAR_HEADER_H
 #define __ARCHIVE_RAR_HEADER_H

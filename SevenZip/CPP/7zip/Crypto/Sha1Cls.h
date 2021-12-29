@@ -1,4 +1,4 @@
-// Crypto/Sha1Cls.h
+﻿// Crypto/Sha1Cls.h
 
 #ifndef __CRYPTO_SHA1_CLS_H
 #define __CRYPTO_SHA1_CLS_H

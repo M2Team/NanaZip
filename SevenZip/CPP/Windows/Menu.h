@@ -1,4 +1,4 @@
-// Windows/Menu.h
+﻿// Windows/Menu.h
 
 #ifndef __WINDOWS_MENU_H
 #define __WINDOWS_MENU_H

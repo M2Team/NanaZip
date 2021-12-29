@@ -1,4 +1,4 @@
-// RegistryPlugins.h
+﻿// RegistryPlugins.h
 
 #ifndef __REGISTRY_PLUGINS_H
 #define __REGISTRY_PLUGINS_H

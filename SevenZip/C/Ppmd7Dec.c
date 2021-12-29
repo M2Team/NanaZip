@@ -1,4 +1,4 @@
-/* Ppmd7Dec.c -- Ppmd7z (PPMdH with 7z Range Coder) Decoder
+﻿/* Ppmd7Dec.c -- Ppmd7z (PPMdH with 7z Range Coder) Decoder
 2021-04-13 : Igor Pavlov : Public domain
 This code is based on:
   PPMd var.H (2001): Dmitry Shkarin : Public domain */

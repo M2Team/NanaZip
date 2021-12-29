@@ -1,4 +1,4 @@
-// LangPage.h
+﻿// LangPage.h
 
 #ifndef __LANG_PAGE_H
 #define __LANG_PAGE_H

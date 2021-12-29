@@ -1,4 +1,4 @@
-// CreateCoder.h
+﻿// CreateCoder.h
 
 #ifndef __CREATE_CODER_H
 #define __CREATE_CODER_H

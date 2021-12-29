@@ -1,4 +1,4 @@
-// ProgressMt.h
+﻿// ProgressMt.h
 
 #include "StdAfx.h"
 

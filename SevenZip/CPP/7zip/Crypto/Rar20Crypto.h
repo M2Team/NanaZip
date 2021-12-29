@@ -1,4 +1,4 @@
-// Crypto/Rar20Crypto.h
+﻿// Crypto/Rar20Crypto.h
 
 #ifndef __CRYPTO_RAR20_CRYPTO_H
 #define __CRYPTO_RAR20_CRYPTO_H

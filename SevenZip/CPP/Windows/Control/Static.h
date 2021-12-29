@@ -1,4 +1,4 @@
-// Windows/Control/Static.h
+﻿// Windows/Control/Static.h
 
 #ifndef __WINDOWS_CONTROL_STATIC_H
 #define __WINDOWS_CONTROL_STATIC_H

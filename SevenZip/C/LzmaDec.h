@@ -1,4 +1,4 @@
-/* LzmaDec.h -- LZMA Decoder
+﻿/* LzmaDec.h -- LZMA Decoder
 2020-03-19 : Igor Pavlov : Public domain */
 
 #ifndef __LZMA_DEC_H

@@ -1,4 +1,4 @@
-
+﻿
 
 #define IDS_PROP_PATH             1003
 #define IDS_PROP_NAME             1004

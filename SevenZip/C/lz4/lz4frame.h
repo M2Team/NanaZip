@@ -1,4 +1,4 @@
-/*
+﻿/*
    LZ4 auto-framing library
    Header File
    Copyright (C) 2011-2017, Yann Collet.

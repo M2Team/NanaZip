@@ -1,4 +1,4 @@
-// AltStreamsFolder.h
+﻿// AltStreamsFolder.h
 
 #ifndef __ALT_STREAMS_FOLDER_H
 #define __ALT_STREAMS_FOLDER_H

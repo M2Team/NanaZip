@@ -1,4 +1,4 @@
-// CksumReg.cpp
+﻿// CksumReg.cpp
 
 #include "StdAfx.h"
 

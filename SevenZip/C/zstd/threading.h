@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2016 Tino Reichardt
  * All rights reserved.
  *

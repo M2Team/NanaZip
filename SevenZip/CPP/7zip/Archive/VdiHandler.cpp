@@ -1,4 +1,4 @@
-// VdiHandler.cpp
+﻿// VdiHandler.cpp
 
 #include "StdAfx.h"
 

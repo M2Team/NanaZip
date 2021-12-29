@@ -1,4 +1,4 @@
-// HashGUI.cpp
+﻿// HashGUI.cpp
 
 #include "StdAfx.h"
 

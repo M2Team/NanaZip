@@ -1,4 +1,4 @@
-// HashCalc.cpp
+﻿// HashCalc.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// SetProperties.cpp
+﻿// SetProperties.cpp
 
 #include "StdAfx.h"
 

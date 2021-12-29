@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2016-2021, Facebook, Inc.
  * All rights reserved.
  *

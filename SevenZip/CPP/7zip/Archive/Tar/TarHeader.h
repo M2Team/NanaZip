@@ -1,4 +1,4 @@
-// Archive/TarHeader.h
+﻿// Archive/TarHeader.h
 
 #ifndef __ARCHIVE_TAR_HEADER_H
 #define __ARCHIVE_TAR_HEADER_H

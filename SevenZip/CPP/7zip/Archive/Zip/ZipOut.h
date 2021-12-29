@@ -1,4 +1,4 @@
-// ZipOut.h
+﻿// ZipOut.h
 
 #ifndef __ZIP_OUT_H
 #define __ZIP_OUT_H

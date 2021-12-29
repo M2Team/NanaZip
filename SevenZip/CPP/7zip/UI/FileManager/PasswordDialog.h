@@ -1,4 +1,4 @@
-// PasswordDialog.h
+﻿// PasswordDialog.h
 
 #ifndef __PASSWORD_DIALOG_H
 #define __PASSWORD_DIALOG_H

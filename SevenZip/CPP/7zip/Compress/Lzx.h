@@ -1,4 +1,4 @@
-// Lzx.h
+﻿// Lzx.h
 
 #ifndef __COMPRESS_LZX_H
 #define __COMPRESS_LZX_H

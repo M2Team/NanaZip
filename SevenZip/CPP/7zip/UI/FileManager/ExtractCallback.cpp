@@ -1,4 +1,4 @@
-// ExtractCallback.cpp
+﻿// ExtractCallback.cpp
 
 #include "StdAfx.h"
 

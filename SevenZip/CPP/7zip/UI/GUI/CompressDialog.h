@@ -1,4 +1,4 @@
-// CompressDialog.h
+﻿// CompressDialog.h
 
 #ifndef __COMPRESS_DIALOG_H
 #define __COMPRESS_DIALOG_H

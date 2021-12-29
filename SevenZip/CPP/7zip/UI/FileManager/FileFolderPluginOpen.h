@@ -1,4 +1,4 @@
-// FileFolderPluginOpen.h
+﻿// FileFolderPluginOpen.h
 
 #ifndef __FILE_FOLDER_PLUGIN_OPEN_H
 #define __FILE_FOLDER_PLUGIN_OPEN_H

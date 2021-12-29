@@ -1,4 +1,4 @@
-// Crypto/ZipStrong.cpp
+﻿// Crypto/ZipStrong.cpp
 
 #include "StdAfx.h"
 

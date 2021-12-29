@@ -1,4 +1,4 @@
-// Windows/Shell.h
+﻿// Windows/Shell.h
 
 #ifndef __WINDOWS_SHELL_H
 #define __WINDOWS_SHELL_H

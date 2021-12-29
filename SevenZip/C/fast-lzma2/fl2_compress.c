@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018, Conor McCarthy
 * All rights reserved.
 * Parts based on zstd_compress.c copyright Yann Collet

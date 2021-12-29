@@ -1,4 +1,4 @@
-// Windows/Clipboard.cpp
+﻿// Windows/Clipboard.cpp
 
 #include "StdAfx.h"
 

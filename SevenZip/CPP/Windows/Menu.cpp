@@ -1,4 +1,4 @@
-// Windows/Menu.cpp
+﻿// Windows/Menu.cpp
 
 #include "StdAfx.h"
 

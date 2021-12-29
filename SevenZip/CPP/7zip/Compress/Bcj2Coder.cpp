@@ -1,4 +1,4 @@
-// Bcj2Coder.cpp
+﻿// Bcj2Coder.cpp
 
 #include "StdAfx.h"
 

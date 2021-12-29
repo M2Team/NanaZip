@@ -1,4 +1,4 @@
-// MyLoadMenu.cpp
+﻿// MyLoadMenu.cpp
 
 #include "StdAfx.h"
 

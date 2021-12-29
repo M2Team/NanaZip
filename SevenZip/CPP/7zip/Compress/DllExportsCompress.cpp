@@ -1,4 +1,4 @@
-// DllExportsCompress.cpp
+﻿// DllExportsCompress.cpp
 
 #include "StdAfx.h"
 

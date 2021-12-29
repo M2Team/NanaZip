@@ -1,4 +1,4 @@
-// NSisHandler.h
+﻿// NSisHandler.h
 
 #ifndef __NSIS_HANDLER_H
 #define __NSIS_HANDLER_H

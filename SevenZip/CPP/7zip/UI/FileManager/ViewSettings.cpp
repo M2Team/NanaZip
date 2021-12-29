@@ -1,4 +1,4 @@
-// ViewSettings.cpp
+﻿// ViewSettings.cpp
 
 #include "StdAfx.h"
 

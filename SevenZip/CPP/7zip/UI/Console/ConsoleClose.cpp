@@ -1,4 +1,4 @@
-// ConsoleClose.cpp
+﻿// ConsoleClose.cpp
 
 #include "StdAfx.h"
 

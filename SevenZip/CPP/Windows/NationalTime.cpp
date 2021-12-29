@@ -1,4 +1,4 @@
-// Windows/NationalTime.cpp
+﻿// Windows/NationalTime.cpp
 
 #include "StdAfx.h"
 

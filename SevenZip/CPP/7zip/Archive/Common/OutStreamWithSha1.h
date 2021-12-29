@@ -1,4 +1,4 @@
-// OutStreamWithSha1.h
+﻿// OutStreamWithSha1.h
 
 #ifndef __OUT_STREAM_WITH_SHA1_H
 #define __OUT_STREAM_WITH_SHA1_H
