@@ -22,13 +22,13 @@
     <DisplayName>NanaZip Preview</DisplayName>
     <PublisherDisplayName>Kenji Mouri</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
-		<virtualization:FileSystemWriteVirtualization>
-			<virtualization:ExcludedDirectories>
-				<virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)</virtualization:ExcludedDirectory>
-				<virtualization:ExcludedDirectory>$(KnownFolder:LocalAppDataLow)</virtualization:ExcludedDirectory>
-				<virtualization:ExcludedDirectory>$(KnownFolder:RoamingAppData)</virtualization:ExcludedDirectory>
-			</virtualization:ExcludedDirectories>
-		</virtualization:FileSystemWriteVirtualization>
+    <virtualization:FileSystemWriteVirtualization>
+      <virtualization:ExcludedDirectories>
+        <virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)</virtualization:ExcludedDirectory>
+        <virtualization:ExcludedDirectory>$(KnownFolder:LocalAppDataLow)</virtualization:ExcludedDirectory>
+        <virtualization:ExcludedDirectory>$(KnownFolder:RoamingAppData)</virtualization:ExcludedDirectory>
+      </virtualization:ExcludedDirectories>
+    </virtualization:FileSystemWriteVirtualization>
   </Properties>
 
   <Dependencies>
@@ -118,7 +118,7 @@
             <desktop:ExecutionAlias Alias="7zFM.exe" uap8:AllowOverride="true"/>
           </uap3:AppExecutionAlias>
         </uap3:Extension>
-                <uap:Extension Category="windows.fileTypeAssociation">
+        <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="archivetype_001">
             <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
             <uap:DisplayName>NanaZip - 001 Archive</uap:DisplayName>
@@ -505,7 +505,7 @@
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
-				<desktop4:Extension Category="windows.fileExplorerContextMenus">
+        <desktop4:Extension Category="windows.fileExplorerContextMenus">
           <desktop4:FileExplorerContextMenus>
             <desktop5:ItemType Type="Directory">
               <desktop5:Verb Id="NanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
