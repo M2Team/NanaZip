@@ -389,11 +389,11 @@ void CApp::VerCtrl(unsigned id)
         
         dialog.OldFileInfo.SetTime(&fdi.Info.ftLastWriteTime);
         dialog.OldFileInfo.SetSize(fdi.GetSize());
-        dialog.OldFileInfo.Name = path;
+        dialog.OldFileInfo.Name = fs2us(path);
         
         dialog.NewFileInfo.SetTime(&fdi2.Info.ftLastWriteTime);
         dialog.NewFileInfo.SetSize(fdi2.GetSize());
-        dialog.NewFileInfo.Name = path2;
+        dialog.NewFileInfo.Name = fs2us(path2);
 
         dialog.ShowExtraButtons = false;
         dialog.DefaultButton_is_NO = true;

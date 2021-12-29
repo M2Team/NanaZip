@@ -68,6 +68,7 @@ HRESULT UpdateArchive(IInStream *inStream, ISequentialOutStream *outStream,
   
     if (ui.NewProps)
     {
+      item.SetDefaultWriteFields();
       item.Mode = ui.Mode;
       item.Name = ui.Name;
       item.User = ui.User;
@@ -85,11 +86,6 @@ HRESULT UpdateArchive(IInStream *inStream, ISequentialOutStream *outStream,
       }
       
       item.MTime = ui.MTime;
-      item.DeviceMajorDefined = false;
-      item.DeviceMinorDefined = false;
-      item.UID = 0;
-      item.GID = 0;
-      memcpy(item.Magic, NFileHeader::NMagic::kUsTar_00, 8);
     }
     else
       item = inputItems[(unsigned)ui.IndexInArc];

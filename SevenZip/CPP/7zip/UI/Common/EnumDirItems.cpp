@@ -767,6 +767,15 @@ static HRESULT EnumerateDirItems(
         const UString &name = item.PathParts.Front();
         FString fullPath = phyPrefix + us2fs(name);
 
+        /*
+        // not possible now
+        if (!item.ForDir && !item.ForFile)
+        {
+          RINOK(dirItems.AddError(fullPath, ERROR_INVALID_PARAMETER));
+          continue;
+        }
+        */
+
         #if defined(_WIN32) && !defined(UNDER_CE)
         bool needAltStreams = true;
         #endif
@@ -823,9 +832,20 @@ static HRESULT EnumerateDirItems(
           continue;
         }
 
+        /*
+        #ifdef _WIN32
+          #define MY_ERROR_IS_DIR     ERROR_FILE_NOT_FOUND
+          #define MY_ERROR_NOT_DIR    DI_DEFAULT_ERROR
+        #else
+          #define MY_ERROR_IS_DIR     EISDIR
+          #define MY_ERROR_NOT_DIR    ENOTDIR
+        #endif
+        */
+
         const bool isDir = fi.IsDir();
-        if ((isDir && !item.ForDir) || (!isDir && !item.ForFile))
+        if (isDir ? !item.ForDir : !item.ForFile)
         {
+          // RINOK(dirItems.AddError(fullPath, isDir ? MY_ERROR_IS_DIR: MY_ERROR_NOT_DIR));
           RINOK(dirItems.AddError(fullPath, DI_DEFAULT_ERROR));
           continue;
         }

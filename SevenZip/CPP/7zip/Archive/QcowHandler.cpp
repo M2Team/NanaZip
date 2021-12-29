@@ -601,7 +601,6 @@ STDMETHODIMP CHandler::Close()
   _table.Free();
   _dir.Free();
   _phySize = 0;
-  _size = 0;
 
   _cacheCluster = (UInt64)(Int64)-1;
   _comprPos = 0;
@@ -611,7 +610,8 @@ STDMETHODIMP CHandler::Close()
   _isArc = false;
   _unsupported = false;
 
-  _imgExt = NULL;
+  // CHandlerImg:
+  Clear_HandlerImg_Vars();
   Stream.Release();
   return S_OK;
 }

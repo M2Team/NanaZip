@@ -1440,7 +1440,7 @@ UString CCompressDialog::GetMethodSpec(UString &estimatedName)
   UString s;
   if (methodId >= 0)
   {
-    if (methodId < ARRAY_SIZE(kMethodsNames))
+    if ((unsigned)methodId < ARRAY_SIZE(kMethodsNames))
       estimatedName = kMethodsNames[methodId];
     else
       estimatedName = ExternalMethods[methodId - ARRAY_SIZE(kMethodsNames)];

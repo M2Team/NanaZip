@@ -1,7 +1,7 @@
-// Common/String.h
+// Common/MyString.h
 
-#ifndef __COMMON_STRING_H
-#define __COMMON_STRING_H
+#ifndef __COMMON_MY_STRING_H
+#define __COMMON_MY_STRING_H
 
 #include <string.h>
 
@@ -13,6 +13,17 @@
 #include "MyWindows.h"
 #include "MyTypes.h"
 #include "MyVector.h"
+
+
+/* if (DEBUG_FSTRING_INHERITS_ASTRING is defined), then
+     FString inherits from AString, so we can find bugs related to FString at compile time.
+   DON'T define DEBUG_FSTRING_INHERITS_ASTRING in release code */
+   
+// #define DEBUG_FSTRING_INHERITS_ASTRING
+
+#ifdef DEBUG_FSTRING_INHERITS_ASTRING
+class FString;
+#endif
 
 
 #ifdef _MSC_VER
@@ -290,6 +301,12 @@ class AString
   FORBID_STRING_OPS_AString(long)
   FORBID_STRING_OPS_AString(unsigned long)
 
+ #ifdef DEBUG_FSTRING_INHERITS_ASTRING
+  AString(const FString &s);
+  AString &operator=(const FString &s);
+  AString &operator+=(const FString &s);
+ #endif
+
 public:
   explicit AString();
   explicit AString(char c);
@@ -550,12 +567,18 @@ class UString
 
   FORBID_STRING_OPS_2(UString, char)
 
+ #ifdef DEBUG_FSTRING_INHERITS_ASTRING
+  UString(const FString &s);
+  UString &operator=(const FString &s);
+  UString &operator+=(const FString &s);
+ #endif
+
 public:
   UString();
   explicit UString(wchar_t c);
   explicit UString(char c);
   explicit UString(const char *s);
-  // UString(const AString &s);
+  explicit UString(const AString &s);
   UString(const wchar_t *s);
   UString(const UString &s);
   ~UString() { MY_STRING_DELETE(_chars); }
@@ -795,7 +818,16 @@ class UString2
   FORBID_STRING_OPS_UString2(short)
 
   UString2 &operator=(wchar_t c);
-  UString2(wchar_t c);
+
+  UString2(const AString &s);
+  UString2 &operator=(const AString &s);
+  UString2 &operator+=(const AString &s);
+
+ #ifdef DEBUG_FSTRING_INHERITS_ASTRING
+  UString2(const FString &s);
+  UString2 &operator=(const FString &s);
+  UString2 &operator+=(const FString &s);
+ #endif
 
 public:
   UString2(): _chars(NULL), _len(0) {}
@@ -871,8 +903,10 @@ typedef CObjectVector<CSysString> CSysStringVector;
 
 // ---------- FString ----------
 
+#ifndef DEBUG_FSTRING_INHERITS_ASTRING
 #ifdef _WIN32
   #define USE_UNICODE_FSTRING
+#endif
 #endif
 
 #ifdef USE_UNICODE_FSTRING
@@ -893,12 +927,55 @@ typedef CObjectVector<CSysString> CSysStringVector;
   #define __FTEXT(quote) quote
 
   typedef char FChar;
+
+ #ifdef DEBUG_FSTRING_INHERITS_ASTRING
+
+  class FString: public AString
+  {
+    // FString &operator=(const char *s);
+    FString &operator=(const AString &s);
+    // FString &operator+=(const AString &s);
+  public:
+    FString(const AString &s): AString(s.Ptr()) {}
+    FString(const FString &s): AString(s.Ptr()) {}
+    FString(const char *s): AString(s) {}
+    FString() {}
+    FString &operator=(const FString &s)  { AString::operator=((const AString &)s); return *this; }
+    FString &operator=(char c) { AString::operator=(c); return *this; }
+    FString &operator+=(char c) { AString::operator+=(c); return *this; }
+    FString &operator+=(const FString &s) { AString::operator+=((const AString &)s); return *this; }
+    FString Left(unsigned count) const  { return FString(AString::Left(count)); }
+  };
+  void operator+(const AString &s1, const FString &s2);
+  void operator+(const FString &s1, const AString &s2);
+
+  inline FString operator+(const FString &s1, const FString &s2)
+  {
+    AString s =(const AString &)s1 + (const AString &)s2;
+    return FString(s.Ptr());
+    // return FString((const AString &)s1 + (const AString &)s2);
+  }
+  inline FString operator+(const FString &s1, const FChar *s2)
+  {
+    return s1 + (FString)s2;
+  }
+  /*
+  inline FString operator+(const FChar *s1, const FString &s2)
+  {
+    return (FString)s1 + s2;
+  }
+  */
+
+  inline FString fas2fs(const char *s)  { return FString(s); }
+
+ #else // DEBUG_FSTRING_INHERITS_ASTRING
   typedef AString FString;
+  #define fas2fs(_x_) (_x_)
+ #endif // DEBUG_FSTRING_INHERITS_ASTRING
 
   UString fs2us(const FChar *s);
   UString fs2us(const FString &s);
   FString us2fs(const wchar_t *s);
-  #define fas2fs(_x_) (_x_)
   #define fs2fas(_x_) (_x_)
 
 #endif

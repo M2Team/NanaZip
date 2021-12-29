@@ -124,7 +124,7 @@ HRESULT CompressFiles(
   NWildcard::CCensor censor;
   FOR_VECTOR (i, names)
   {
-    censor.AddPreItem(names[i]);
+    censor.AddPreItem_NoWildcard(names[i]);
   }
 
   bool messageWasDisplayed = false;
@@ -178,7 +178,7 @@ static HRESULT ExtractGroupCommand(const UStringVector &arcPaths,
     NWildcard::CCensor arcCensor;
     FOR_VECTOR (i, arcPaths)
     {
-      arcCensor.AddPreItem(arcPaths[i]);
+      arcCensor.AddPreItem_NoWildcard(arcPaths[i]);
     }
     arcCensor.AddPathsToCensor(NWildcard::k_RelatPath);
     CDirItemsStat st;
@@ -268,7 +268,7 @@ void CalcChecksum(const UStringVector &paths,
   NWildcard::CCensor censor;
   FOR_VECTOR (i, paths)
   {
-    censor.AddPreItem(paths[i]);
+    censor.AddPreItem_NoWildcard(paths[i]);
   }
 
   censor.AddPathsToCensor(NWildcard::k_RelatPath);

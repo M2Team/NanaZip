@@ -1,5 +1,5 @@
 /* 7zTypes.h -- Basic types
-2021-07-13 : Igor Pavlov : Public domain */
+2021-12-25 : Igor Pavlov : Public domain */
 
 #ifndef __7Z_TYPES_H
 #define __7Z_TYPES_H
@@ -105,6 +105,7 @@ typedef int WRes;
 
 // we use errno equivalents for some WIN32 errors:
 
+#define ERROR_INVALID_PARAMETER     EINVAL
 #define ERROR_INVALID_FUNCTION      EINVAL
 #define ERROR_ALREADY_EXISTS        EEXIST
 #define ERROR_FILE_EXISTS           EEXIST

@@ -866,7 +866,7 @@ struct CAffinityMode
   DWORD_PTR GetAffinityMask(UInt32 bundleIndex, CCpuSet *cpuSet) const;
   bool NeedAffinity() const { return NumBundleThreads != 0; }
 
-  WRes CreateThread_WithAffinity(NWindows::CThread &thread, THREAD_FUNC_RET_TYPE (THREAD_FUNC_CALL_TYPE *startAddress)(void *), LPVOID parameter, UInt32 bundleIndex) const
+  WRes CreateThread_WithAffinity(NWindows::CThread &thread, THREAD_FUNC_TYPE startAddress, LPVOID parameter, UInt32 bundleIndex) const
   {
     if (NeedAffinity())
     {

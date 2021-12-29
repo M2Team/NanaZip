@@ -35,12 +35,16 @@ using namespace NWindows;
 
 #define k7zGui  "NanaZipG.exe"
 
+// 21.07 : we can disable wildcard
+// #define ISWITCH_NO_WILDCARD_POSTFIX "w-"
+#define ISWITCH_NO_WILDCARD_POSTFIX
+
 #define kShowDialogSwitch  " -ad"
 #define kEmailSwitch  " -seml."
-#define kIncludeSwitch  " -i"
 #define kArchiveTypeSwitch  " -t"
-#define kArcIncludeSwitches  " -an -ai"
-#define kHashIncludeSwitches  " -i"
+#define kIncludeSwitch  " -i" ISWITCH_NO_WILDCARD_POSTFIX
+#define kArcIncludeSwitches  " -an -ai" ISWITCH_NO_WILDCARD_POSTFIX
+#define kHashIncludeSwitches  kIncludeSwitch
 #define kStopSwitchParsing  " --"
 
 static NCompression::CInfo m_RegistryInfo;

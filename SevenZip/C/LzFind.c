@@ -1,5 +1,5 @@
 /* LzFind.c -- Match finder for LZ algorithms
-2021-09-03 : Igor Pavlov : Public domain */
+2021-11-29 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
@@ -600,7 +600,9 @@ static
 #ifdef ATTRIB_SSE41
 ATTRIB_SSE41
 #endif
-void LzFind_SaturSub_128(UInt32 subValue, CLzRef *items, const CLzRef *lim)
+void
+MY_FAST_CALL
+LzFind_SaturSub_128(UInt32 subValue, CLzRef *items, const CLzRef *lim)
 {
   v128 sub2 =
     #ifdef MY_CPU_ARM_OR_ARM64
@@ -632,7 +634,9 @@ static
 #ifdef ATTRIB_AVX2
 ATTRIB_AVX2
 #endif
-void LzFind_SaturSub_256(UInt32 subValue, CLzRef *items, const CLzRef *lim)
+void
+MY_FAST_CALL
+LzFind_SaturSub_256(UInt32 subValue, CLzRef *items, const CLzRef *lim)
 {
   __m256i sub2 = _mm256_set_epi32(
       (Int32)subValue, (Int32)subValue, (Int32)subValue, (Int32)subValue,
@@ -669,7 +673,10 @@ static LZFIND_SATUR_SUB_CODE_FUNC g_LzFind_SaturSub;
 #define DEFAULT_SaturSub LzFind_SaturSub_32
 
 MY_NO_INLINE
-static void LzFind_SaturSub_32(UInt32 subValue, CLzRef *items, const CLzRef *lim)
+static
+void
+MY_FAST_CALL
+LzFind_SaturSub_32(UInt32 subValue, CLzRef *items, const CLzRef *lim)
 {
   do
   {

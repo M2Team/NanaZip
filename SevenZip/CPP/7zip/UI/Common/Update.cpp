@@ -974,6 +974,17 @@ static HRESULT Compress(
 
 
 
+static bool Censor_AreAllAllowed(const NWildcard::CCensor &censor)
+{
+  if (censor.Pairs.Size() != 1)
+    return false;
+  const NWildcard::CPair &pair = censor.Pairs[0];
+  /* Censor_CheckPath() ignores (CPair::Prefix).
+     So we also ignore (CPair::Prefix) here */
+  // if (!pair.Prefix.IsEmpty()) return false;
+  return pair.Head.AreAllAllowed();
+}
+
 bool CensorNode_CheckPath2(const NWildcard::CCensorNode &node, const CReadArcItem &item, bool &include);
 
 static bool Censor_CheckPath(const NWildcard::CCensor &censor, const CReadArcItem &item)
@@ -981,9 +992,13 @@ static bool Censor_CheckPath(const NWildcard::CCensor &censor, const CReadArcIte
   bool finded = false;
   FOR_VECTOR (i, censor.Pairs)
   {
+    /* (CPair::Prefix) in not used for matching items in archive.
+       So we ignore (CPair::Prefix) here */
     bool include;
     if (CensorNode_CheckPath2(censor.Pairs[i].Head, item, include))
     {
+      // Check it and FIXME !!!!
+      // here we can exclude item via some Pair, that is still allowed by another Pair
       if (!include)
         return false;
       finded = true;
@@ -1006,6 +1021,8 @@ static HRESULT EnumerateInArchiveItems(
 
   CReadArcItem item;
 
+  const bool allFilesAreAllowed = Censor_AreAllAllowed(censor);
+
   for (UInt32 i = 0; i < numItems; i++)
   {
     CArcItem ai;
@@ -1024,7 +1041,10 @@ static HRESULT EnumerateInArchiveItems(
     if (!storeStreamsMode && ai.IsAltStream)
       continue;
     */
-    ai.Censored = Censor_CheckPath(censor, item);
+    if (allFilesAreAllowed)
+      ai.Censored = true;
+    else
+      ai.Censored = Censor_CheckPath(censor, item);
 
     RINOK(arc.GetItemMTime(i, ai.MTime, ai.MTimeDefined));
     RINOK(arc.GetItemSize(i, ai.Size, ai.SizeDefined));
@@ -1418,7 +1438,7 @@ HRESULT UpdateArchive(
           UString s;
           s = "It is not allowed to include archive to itself";
           s.Add_LF();
-          s += path;
+          s += fs2us(path);
           throw s;
         }
       }

@@ -289,7 +289,7 @@ HRESULT CThreadCrc::ProcessVirt()
       }
       if (isFirstFile)
       {
-        Hash.FirstFileName = path;
+        Hash.FirstFileName = fs2us(path);
         isFirstFile = false;
       }
       sync.Set_FilePath(fs2us(path));
@@ -375,7 +375,7 @@ HRESULT CApp::CalculateCrc2(const UString &methodName)
       t.Enumerator.FilePaths.Add(us2fs(srcPanel.GetItemRelPath(indices[i])));
 
     if (t.Enumerator.FilePaths.Size() == 1)
-      t.Hash.MainName = t.Enumerator.FilePaths[0];
+      t.Hash.MainName = fs2us(t.Enumerator.FilePaths[0]);
 
     UString basePrefix = srcPanel.GetFsPath();
     UString basePrefix2 = basePrefix;

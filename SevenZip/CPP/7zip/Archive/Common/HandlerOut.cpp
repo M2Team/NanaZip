@@ -120,6 +120,15 @@ static void SetMethodProp32(CMethodProps &m, PROPID propID, UInt32 value)
     m.AddProp32(propID, value);
 }
 
+void CMultiMethodProps::SetGlobalLevelTo(COneMethodInfo &oneMethodInfo) const
+{
+  UInt32 level = _level;
+  if (level != (UInt32)(Int32)-1)
+    SetMethodProp32(oneMethodInfo, NCoderPropID::kLevel, (UInt32)level);
+}
+
+#ifndef _7ZIP_ST
+
 static void SetMethodProp32_Replace(CMethodProps &m, PROPID propID, UInt32 value)
 {
   const int i = m.FindProp(propID);
@@ -132,14 +141,6 @@ static void SetMethodProp32_Replace(CMethodProps &m, PROPID propID, UInt32 value
   m.AddProp32(propID, value);
 }
 
-void CMultiMethodProps::SetGlobalLevelTo(COneMethodInfo &oneMethodInfo) const
-{
-  UInt32 level = _level;
-  if (level != (UInt32)(Int32)-1)
-    SetMethodProp32(oneMethodInfo, NCoderPropID::kLevel, (UInt32)level);
-}
-
-#ifndef _7ZIP_ST
 void CMultiMethodProps::SetMethodThreadsTo_IfNotFinded(CMethodProps &oneMethodInfo, UInt32 numThreads)
 {
   SetMethodProp32(oneMethodInfo, NCoderPropID::kNumThreads, numThreads);
@@ -149,7 +150,9 @@ void CMultiMethodProps::SetMethodThreadsTo_Replace(CMethodProps &oneMethodInfo, 
 {
   SetMethodProp32_Replace(oneMethodInfo, NCoderPropID::kNumThreads, numThreads);
 }
-#endif
+
+#endif // _7ZIP_ST
+
 
 void CMultiMethodProps::InitMulti()
 {

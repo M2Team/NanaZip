@@ -139,11 +139,6 @@ bool CFileBase::Close() throw()
   return true;
 }
 
-bool CFileBase::GetPosition(UInt64 &position) const throw()
-{
-  return Seek(0, FILE_CURRENT, position);
-}
-
 bool CFileBase::GetLength(UInt64 &length) const throw()
 {
   #ifdef SUPPORT_DEVICE_FILE
@@ -154,13 +149,64 @@ bool CFileBase::GetLength(UInt64 &length) const throw()
   }
   #endif
 
-  DWORD sizeHigh;
-  DWORD sizeLow = ::GetFileSize(_handle, &sizeHigh);
-  if (sizeLow == 0xFFFFFFFF)
+  DWORD high = 0;
+  const DWORD low = ::GetFileSize(_handle, &high);
+  if (low == INVALID_FILE_SIZE)
     if (::GetLastError() != NO_ERROR)
       return false;
-  length = (((UInt64)sizeHigh) << 32) + sizeLow;
+  length = (((UInt64)high) << 32) + low;
   return true;
+
+  /*
+  LARGE_INTEGER fileSize;
+  // GetFileSizeEx() is unsupported in 98/ME/NT, and supported in Win2000+
+  if (!GetFileSizeEx(_handle, &fileSize))
+    return false;
+  length = (UInt64)fileSize.QuadPart;
+  return true;
+  */
+}
+
+
+/* Specification for SetFilePointer():
+   
+   If a new file pointer is a negative value,
+   {
+     the function fails,
+     the file pointer is not moved,
+     the code returned by GetLastError() is ERROR_NEGATIVE_SEEK.
+   }
+
+   If the hFile handle is opened with the FILE_FLAG_NO_BUFFERING flag set
+   {
+     an application can move the file pointer only to sector-aligned positions.
+     A sector-aligned position is a position that is a whole number multiple of
+     the volume sector size.
+     An application can obtain a volume sector size by calling the GetDiskFreeSpace.
+   }
+
+   It is not an error to set a file pointer to a position beyond the end of the file.
+   The size of the file does not increase until you call the SetEndOfFile, WriteFile, or WriteFileEx function.
+
+   If the return value is INVALID_SET_FILE_POINTER and if lpDistanceToMoveHigh is non-NULL,
+   an application must call GetLastError to determine whether or not the function has succeeded or failed.
+*/
+
+bool CFileBase::GetPosition(UInt64 &position) const throw()
+{
+  LONG high = 0;
+  const DWORD low = ::SetFilePointer(_handle, 0, &high, FILE_CURRENT);
+  if (low == INVALID_SET_FILE_POINTER && GetLastError() != NO_ERROR)
+  {
+    // for error case we can set (position)  to (-1) or (0) or leave (position) unchanged.
+    // position = (UInt64)(Int64)-1; // for debug
+    position = 0;
+    return false;
+  }
+  position = (((UInt64)(UInt32)high) << 32) + low;
+  return true;
+  // we don't want recursed GetPosition()
+  // return Seek(0, FILE_CURRENT, position);
 }
 
 bool CFileBase::Seek(Int64 distanceToMove, DWORD moveMethod, UInt64 &newPosition) const throw()
@@ -174,10 +220,18 @@ bool CFileBase::Seek(Int64 distanceToMove, DWORD moveMethod, UInt64 &newPosition
   #endif
 
   LONG high = (LONG)(distanceToMove >> 32);
-  DWORD low = ::SetFilePointer(_handle, (LONG)(distanceToMove & 0xFFFFFFFF), &high, moveMethod);
-  if (low == 0xFFFFFFFF)
-    if (::GetLastError() != NO_ERROR)
+  const DWORD low = ::SetFilePointer(_handle, (LONG)(distanceToMove & 0xFFFFFFFF), &high, moveMethod);
+  if (low == INVALID_SET_FILE_POINTER)
+  {
+    const DWORD lastError = ::GetLastError();
+    if (lastError != NO_ERROR)
+    {
+      // 21.07: we set (newPosition) to real position even after error.
+      GetPosition(newPosition);
+      SetLastError(lastError); // restore LastError
       return false;
+    }
+  }
   newPosition = (((UInt64)(UInt32)high) << 32) + low;
   return true;
 }
@@ -189,8 +243,8 @@ bool CFileBase::Seek(UInt64 position, UInt64 &newPosition) const throw()
 
 bool CFileBase::SeekToBegin() const throw()
 {
-  UInt64 newPosition;
-  return Seek(0, newPosition);
+  UInt64 newPosition = 0;
+  return Seek(0, newPosition) && (newPosition == 0);
 }
 
 bool CFileBase::SeekToEnd(UInt64 &newPosition) const throw()
@@ -531,6 +585,22 @@ bool COutFile::SetLength(UInt64 length) throw()
   return SetEndOfFile();
 }
 
+bool COutFile::SetLength_KeepPosition(UInt64 length) throw()
+{
+  UInt64 currentPos = 0;
+  if (!GetPosition(currentPos))
+    return false;
+  DWORD lastError = 0;
+  const bool result = SetLength(length);
+  if (!result)
+    lastError = GetLastError();
+  UInt64 currentPos2;
+  const bool result2 = Seek(currentPos, currentPos2);
+  if (lastError != 0)
+    SetLastError(lastError);
+  return (result && result2);
+}
+
 }}}
 
 #else // _WIN32
@@ -573,7 +643,9 @@ bool CFileBase::Close()
 
 bool CFileBase::GetLength(UInt64 &length) const
 {
-  const off_t curPos = seek(0, SEEK_CUR);
+  length = 0;
+  // length = (UInt64)(Int64)-1; // for debug
+  const off_t curPos = seekToCur();
   if (curPos == -1)
     return false;
   const off_t lengthTemp = seek(0, SEEK_END);
@@ -594,6 +666,11 @@ off_t CFileBase::seek(off_t distanceToMove, int moveMethod) const
 off_t CFileBase::seekToBegin() const throw()
 {
   return seek(0, SEEK_SET);
+}
+
+off_t CFileBase::seekToCur() const throw()
+{
+  return seek(0, SEEK_CUR);
 }
 
 /*
@@ -705,6 +782,7 @@ bool COutFile::SetLength(UInt64 length) throw()
     SetLastError(EFBIG);
     return false;
   }
+  // The value of the seek pointer shall not be modified by a call to ftruncate().
   int iret = ftruncate(_handle, len2);
   return (iret == 0);
 }

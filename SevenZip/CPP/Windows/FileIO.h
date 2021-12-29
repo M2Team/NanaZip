@@ -247,6 +247,7 @@ public:
   bool WriteFull(const void *data, size_t size) throw();
   bool SetEndOfFile() throw();
   bool SetLength(UInt64 length) throw();
+  bool SetLength_KeepPosition(UInt64 length) throw();
 };
 
 }
@@ -279,6 +280,7 @@ public:
   bool GetLength(UInt64 &length) const;
   off_t seek(off_t distanceToMove, int moveMethod) const;
   off_t seekToBegin() const throw();
+  off_t seekToCur() const throw();
   // bool SeekToBegin() throw();
   int my_fstat(struct stat *st) const  { return fstat(_handle, st); }
 };
@@ -327,6 +329,10 @@ public:
   }
 
   bool SetLength(UInt64 length) throw();
+  bool SetLength_KeepPosition(UInt64 length) throw()
+  {
+    return SetLength(length);
+  }
   bool SetTime(const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime) throw();
   bool SetMTime(const FILETIME *mTime) throw();
 };

@@ -1,10 +1,18 @@
 ; AesOpt.asm -- AES optimized code for x86 AES hardware instructions
-; 2021-03-10 : Igor Pavlov : Public domain
+; 2021-12-25 : Igor Pavlov : Public domain
 
 include 7zAsm.asm
 
+ifdef __ASMC__
+  use_vaes_256 equ 1
+else
 ifdef ymm0
   use_vaes_256 equ 1
+endif
+endif
+
+
+ifdef use_vaes_256
   ECHO "++ VAES 256"
 else
   ECHO "-- NO VAES 256"

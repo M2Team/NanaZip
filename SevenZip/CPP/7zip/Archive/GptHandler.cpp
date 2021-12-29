@@ -112,6 +112,7 @@ static const CPartType kPartTypes[] =
   { 0x516E7CB8, "zfs", "FreeBSD ZFS" },
 
   { 0x48465300, "hfsx", "HFS+" },
+  { 0x7C3457EF, "apfs", "APFS" },
 };
 
 static int FindPartType(const Byte *guid)

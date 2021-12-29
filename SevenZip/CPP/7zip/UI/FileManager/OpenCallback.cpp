@@ -69,7 +69,7 @@ STDMETHODIMP COpenArchiveCallback::GetProperty(PROPID propID, PROPVARIANT *value
   {
     switch (propID)
     {
-      case kpidName:  prop = _fileInfo.Name; break;
+      case kpidName:  prop = fs2us(_fileInfo.Name); break;
       case kpidIsDir:  prop = _fileInfo.IsDir(); break;
       case kpidSize:  prop = _fileInfo.Size; break;
       case kpidAttrib:  prop = (UInt32)_fileInfo.Attrib; break;

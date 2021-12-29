@@ -1,5 +1,5 @@
 /* LzFindMt.c -- multithreaded Match finder for LZ algorithms
-2021-07-12 : Igor Pavlov : Public domain */
+2021-12-21 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
@@ -832,8 +832,8 @@ void MatchFinderMt_Destruct(CMatchFinderMt *p, ISzAllocPtr alloc)
 #define kBtBufferSize (kMtBtBlockSize * kMtBtNumBlocks)
 
 
-static THREAD_FUNC_RET_TYPE THREAD_FUNC_CALL_TYPE HashThreadFunc2(void *p) { HashThreadFunc((CMatchFinderMt *)p);  return 0; }
-static THREAD_FUNC_RET_TYPE THREAD_FUNC_CALL_TYPE BtThreadFunc2(void *p)
+static THREAD_FUNC_DECL HashThreadFunc2(void *p) { HashThreadFunc((CMatchFinderMt *)p);  return 0; }
+static THREAD_FUNC_DECL BtThreadFunc2(void *p)
 {
   Byte allocaDummy[0x180];
   unsigned i = 0;

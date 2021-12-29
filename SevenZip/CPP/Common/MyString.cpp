@@ -1096,18 +1096,29 @@ UString::UString(char c)
 
 UString::UString(const wchar_t *s)
 {
-  unsigned len = MyStringLen(s);
+  const unsigned len = MyStringLen(s);
   SetStartLen(len);
   wmemcpy(_chars, s, len + 1);
 }
 
 UString::UString(const char *s)
 {
-  unsigned len = MyStringLen(s);
+  const unsigned len = MyStringLen(s);
   SetStartLen(len);
   wchar_t *chars = _chars;
   for (unsigned i = 0; i < len; i++)
     chars[i] = (unsigned char)s[i];
+  chars[len] = 0;
+}
+
+UString::UString(const AString &s)
+{
+  const unsigned len = s.Len();
+  SetStartLen(len);
+  wchar_t *chars = _chars;
+  const char *s2 = s.Ptr();
+  for (unsigned i = 0; i < len; i++)
+    chars[i] = (unsigned char)s2[i];
   chars[len] = 0;
 }
 

@@ -840,7 +840,7 @@ static void UString_Replace_CRLF_to_LF(UString &s)
 
 static void PrintPropVal_MultiLine(CStdOutStream &so, const wchar_t *val)
 {
-  UString s = val;
+  UString s (val);
   if (s.Find(L'\n') >= 0)
   {
     so << endl;
@@ -869,7 +869,7 @@ static void PrintPropPair(CStdOutStream &so, const char *name, const wchar_t *va
     PrintPropVal_MultiLine(so, val);
     return;
   }
-  UString s = val;
+  UString s (val);
   so.Normalize_UString(s);
   so << s;
   so << endl;

@@ -961,7 +961,7 @@ STDMETHODIMP CZipContextMenu::QueryContextMenu(HMENU hMenu, UINT indexMenu,
           else
             name = fs2us(fi0.Name);
           name += ".sha256";
-          cmi.Folder= folderPrefix;
+          cmi.Folder = fs2us(folderPrefix);
           cmi.ArcName = name;
           s = "SHA-256 -> ";
           s += name;

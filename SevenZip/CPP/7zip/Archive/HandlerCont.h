@@ -78,6 +78,9 @@ protected:
   // bool _stream_UsePackSize;
   // UInt64 _stream_PackSize;
 
+  void Reset_PosInArc() { _posInArc = (UInt64)0 - 1; }
+  void Reset_VirtPos() { _virtPos = (UInt64)0; }
+
   void ClearStreamVars()
   {
     _stream_unavailData = false;
@@ -87,6 +90,7 @@ protected:
     // _stream_PackSize = 0;
   }
 
+  void Clear_HandlerImg_Vars(); // it doesn't Release (Stream) var.
 
   virtual HRESULT Open2(IInStream *stream, IArchiveOpenCallback *openCallback) = 0;
   virtual void CloseAtError();

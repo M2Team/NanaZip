@@ -1,11 +1,11 @@
 /* Threads.c -- multithreading library
-2021-07-12 : Igor Pavlov : Public domain */
+2021-12-21 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
 #ifdef _WIN32
 
-#ifndef UNDER_CE
+#ifndef USE_THREADS_CreateThread
 #include <process.h>
 #endif
 
@@ -63,10 +63,10 @@ WRes Thread_Create(CThread *p, THREAD_FUNC_TYPE func, LPVOID param)
 {
   /* Windows Me/98/95: threadId parameter may not be NULL in _beginthreadex/CreateThread functions */
 
-  #ifdef UNDER_CE
+  #ifdef USE_THREADS_CreateThread
 
   DWORD threadId;
-  *p = CreateThread(0, 0, func, param, 0, &threadId);
+  *p = CreateThread(NULL, 0, func, param, 0, &threadId);
   
   #else
   
@@ -82,7 +82,7 @@ WRes Thread_Create(CThread *p, THREAD_FUNC_TYPE func, LPVOID param)
 
 WRes Thread_Create_With_Affinity(CThread *p, THREAD_FUNC_TYPE func, LPVOID param, CAffinityMask affinity)
 {
-  #ifdef UNDER_CE
+  #ifdef USE_THREADS_CreateThread
 
   UNUSED_VAR(affinity)
   return Thread_Create(p, func, param);

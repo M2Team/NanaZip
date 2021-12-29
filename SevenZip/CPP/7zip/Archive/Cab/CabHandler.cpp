@@ -320,7 +320,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
     }
 
-    case kpidBlock:  prop = (Int32)m_Database.GetFolderIndex(&mvItem); break;
+    case kpidBlock:  prop.Set_Int32((Int32)m_Database.GetFolderIndex(&mvItem)); break;
     
     #ifdef _CAB_DETAILS
     

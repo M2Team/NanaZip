@@ -1,5 +1,5 @@
 /* Threads.h -- multithreading library
-2021-07-12 : Igor Pavlov : Public domain */
+2021-12-21 : Igor Pavlov : Public domain */
 
 #ifndef __7Z_THREADS_H
 #define __7Z_THREADS_H
@@ -38,8 +38,14 @@ typedef HANDLE CThread;
 #define Thread_Close(p) HandlePtr_Close(p)
 // #define Thread_Wait(p) Handle_WaitObject(*(p))
 
+#ifdef UNDER_CE
+  // if (USE_THREADS_CreateThread is      defined), we use _beginthreadex()
+  // if (USE_THREADS_CreateThread is not definned), we use CreateThread()
+  #define USE_THREADS_CreateThread
+#endif
+
 typedef
-    #ifdef UNDER_CE
+    #ifdef USE_THREADS_CreateThread
       DWORD
     #else
       unsigned
@@ -90,7 +96,30 @@ typedef UInt64 CCpuSet;
 
 
 #define THREAD_FUNC_CALL_TYPE MY_STD_CALL
-#define THREAD_FUNC_DECL THREAD_FUNC_RET_TYPE THREAD_FUNC_CALL_TYPE
+
+#if defined(_WIN32) && defined(__GNUC__)
+/* GCC compiler for x86 32-bit uses the rule:
+   the stack is 16-byte aligned before CALL instruction for function calling.
+   But only root function main() contains instructions that
+   set 16-byte alignment for stack pointer. And another functions
+   just keep alignment, if it was set in some parent function.
+   
+   The problem:
+    if we create new thread in MinGW (GCC) 32-bit x86 via _beginthreadex() or CreateThread(),
+       the root function of thread doesn't set 16-byte alignment.
+       And stack frames in all child functions also will be unaligned in that case.
+   
+   Here we set (force_align_arg_pointer) attribute for root function of new thread.
+   Do we need (force_align_arg_pointer) also for another systems?  */
+  
+  #define THREAD_FUNC_ATTRIB_ALIGN_ARG __attribute__((force_align_arg_pointer))
+  // #define THREAD_FUNC_ATTRIB_ALIGN_ARG // for debug : bad alignment in SSE functions
+#else
+  #define THREAD_FUNC_ATTRIB_ALIGN_ARG
+#endif
+
+#define THREAD_FUNC_DECL  THREAD_FUNC_ATTRIB_ALIGN_ARG THREAD_FUNC_RET_TYPE THREAD_FUNC_CALL_TYPE
+
 typedef THREAD_FUNC_RET_TYPE (THREAD_FUNC_CALL_TYPE * THREAD_FUNC_TYPE)(void *);
 WRes Thread_Create(CThread *p, THREAD_FUNC_TYPE func, LPVOID param);
 WRes Thread_Create_With_Affinity(CThread *p, THREAD_FUNC_TYPE func, LPVOID param, CAffinityMask affinity);

@@ -47,7 +47,7 @@ public:
   CUpdateOptions *Options;
   bool needSetPath;
 };
-
+ 
 HRESULT CThreadUpdating::ProcessVirt()
 {
   CUpdateErrorInfo ei;
@@ -112,9 +112,13 @@ static void ParseAndAddPropertires(CObjectVector<CProperty> &properties,
   SplitString(propertiesString, strings);
   FOR_VECTOR (i, strings)
   {
-    const UString &s = strings[i];
+    UString s = strings[i];
+    if (s.Len() > 2
+        && s[0] == '-'
+        && MyCharLower_Ascii(s[1]) == 'm')
+      s.DeleteFrontal(2);
     CProperty property;
-    int index = s.Find(L'=');
+    const int index = s.Find(L'=');
     if (index < 0)
       property.Name = s;
     else
@@ -176,7 +180,7 @@ static void SetOutProperties(
       AddProp_UInt32(properties, name, (UInt32)order);
     }
   }
-
+    
   if (!encryptionMethod.IsEmpty())
     AddProp_UString(properties, "em", encryptionMethod);
 
@@ -184,12 +188,12 @@ static void SetOutProperties(
     AddProp_bool(properties, "he", encryptHeaders);
   if (solidIsSpecified)
     AddProp_Size(properties, "s", solidBlockSize);
-
+  
   if (
       // multiThreadIsAllowed &&
       numThreads != (UInt32)(Int32)-1)
     AddProp_UInt32(properties, "mt", numThreads);
-
+  
   if (memUse.IsDefined)
   {
     const char *kMemUse = "memuse";
@@ -259,7 +263,7 @@ static HRESULT ShowDialog(
   bool oneFile = false;
   NFind::CFileInfo fileInfo;
   UString name;
-
+  
   /*
   if (censor.Pairs.Size() > 0)
   {
@@ -300,7 +304,7 @@ static HRESULT ShowDialog(
     }
   }
 
-
+  
   #if defined(_WIN32) && !defined(UNDER_CE)
   CCurrentDirRestorer curDirRestorer;
   #endif
@@ -315,7 +319,7 @@ static HRESULT ShowDialog(
 
   if (options.MethodMode.Type_Defined)
     di.FormatIndex = options.MethodMode.Type.FormatIndex;
-
+  
   FOR_VECTOR (i, codecs->Formats)
   {
     const CArcInfoEx &ai = codecs->Formats[i];
@@ -344,7 +348,7 @@ static HRESULT ShowDialog(
   dialog.OriginalFileName = fs2us(fileInfo.Name);
 
   di.PathMode = options.PathMode;
-
+    
   // di.CurrentDirPrefix = currentDirPrefix;
   di.SFXMode = options.SfxMode;
   di.OpenShareForWrite = options.OpenShareForWrite;
@@ -354,14 +358,14 @@ static HRESULT ShowDialog(
   di.HardLinks = options.HardLinks;
   di.AltStreams = options.AltStreams;
   di.NtSecurity = options.NtSecurity;
-
+  
   if (callback->PasswordIsDefined)
     di.Password = callback->Password;
-
+    
   di.KeepName = !oneFile;
 
   NUpdateArchive::CActionSet &actionSet = options.Commands.Front().ActionSet;
-
+ 
   {
     int index = FindActionSet(actionSet);
     if (index < 0)
@@ -378,11 +382,11 @@ static HRESULT ShowDialog(
   options.HardLinks = di.HardLinks;
   options.AltStreams = di.AltStreams;
   options.NtSecurity = di.NtSecurity;
-
+ 
   #if defined(_WIN32) && !defined(UNDER_CE)
   curDirRestorer.NeedRestore = dialog.CurrentDirWasChanged;
   #endif
-
+  
   options.VolumesSizes = di.VolumeSizes;
   /*
   if (di.VolumeSizeIsDefined)
@@ -392,7 +396,7 @@ static HRESULT ShowDialog(
   }
   */
 
-
+ 
   {
     int index = FindUpdateMode(di.UpdateMode);
     if (index < 0)
@@ -427,7 +431,7 @@ static HRESULT ShowDialog(
       di.EncryptHeadersIsAllowed, di.EncryptHeaders,
       di.MemUsage,
       di.SFXMode);
-
+  
   options.OpenShareForWrite = di.OpenShareForWrite;
   ParseAndAddPropertires(options.MethodMode.Properties, di.Options);
 

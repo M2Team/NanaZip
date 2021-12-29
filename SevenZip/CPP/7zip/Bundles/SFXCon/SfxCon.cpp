@@ -1,4 +1,4 @@
-﻿// Main.cpp
+// Main.cpp
 
 #include "StdAfx.h"
 
@@ -208,7 +208,7 @@ static bool AddNameToCensor(NWildcard::CCensor &wildcardCensor,
   if (!IsWildcardFilePathLegal(name))
     return false;
   */
-  bool isWildcard = DoesNameContainWildcard(name);
+  const bool isWildcard = DoesNameContainWildcard(name);
   bool recursed = false;
 
   switch (type)
@@ -223,7 +223,10 @@ static bool AddNameToCensor(NWildcard::CCensor &wildcardCensor,
       recursed = false;
       break;
   }
-  wildcardCensor.AddPreItem(include, name, recursed, true);
+
+  NWildcard::CCensorPathProps props;
+  props.Recursive = recursed;
+  wildcardCensor.AddPreItem(include, name, props);
   return true;
 }
 
@@ -267,7 +270,7 @@ int Main2(
   #if defined(_WIN32) && !defined(UNDER_CE)
   SetFileApisToOEM();
   #endif
-
+  
   #ifdef ENV_HAVE_LOCALE
   MY_SetLocale();
   #endif
@@ -282,7 +285,7 @@ int Main2(
   #endif
 
   #ifdef _WIN32
-
+  
   FString arcPath;
   {
     FString path;
@@ -309,7 +312,7 @@ int Main2(
   #endif
 
   NCommandLineParser::CParser parser;
-
+  
   try
   {
     if (!parser.ParseStrings(kSwitchForms, kNumSwitches, commandStrings))
@@ -330,7 +333,7 @@ int Main2(
     PrintHelp();
     return 0;
   }
-
+  
   const UStringVector &nonSwitchStrings = parser.NonSwitchStrings;
 
   unsigned curCommandIndex = 0;
@@ -354,7 +357,7 @@ int Main2(
   recursedType = command.DefaultRecursedType();
 
   NWildcard::CCensor wildcardCensor;
-
+  
   {
     if (nonSwitchStrings.Size() == curCommandIndex)
       AddCommandLineWildcardToCensor(wildcardCensor, (UString)kUniversalWildcard, true, recursedType);
@@ -380,7 +383,7 @@ int Main2(
 
   if (!NFind::DoesFileExist_FollowLink(arcPath))
     throw kCantFindSFX;
-
+  
   FString outputDir;
   if (parser[NKey::kOutputDir].ThereIs)
   {
@@ -390,7 +393,7 @@ int Main2(
 
 
   wildcardCensor.AddPathsToCensor(NWildcard::k_RelatPath);
-
+  
   {
     UStringVector v1, v2;
     v1.Add(fs2us(arcPath));

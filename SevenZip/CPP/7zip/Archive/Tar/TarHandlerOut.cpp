@@ -130,8 +130,8 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
           return E_INVALIDARG;
         else
           ui.Mode = prop.ulVal;
-        // FIXME : we can clear high file type bits to be more compatible with tars created by GNU TAR.
-        // ui.Mode &= ~(UInt32)MY_LIN_S_IFMT;
+        // 21.07 : we clear high file type bits as GNU TAR.
+        ui.Mode &= ~(UInt32)MY_LIN_S_IFMT;
       }
 
       {

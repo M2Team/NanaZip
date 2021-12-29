@@ -105,10 +105,9 @@ STDMETHODIMP CHandlerCont::GetStream(UInt32 index, ISequentialInStream **stream)
 
 
 
-CHandlerImg::CHandlerImg():
-    _imgExt(NULL)
+CHandlerImg::CHandlerImg()
 {
-  ClearStreamVars();
+  Clear_HandlerImg_Vars();
 }
 
 STDMETHODIMP CHandlerImg::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
@@ -121,7 +120,11 @@ STDMETHODIMP CHandlerImg::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosit
     default: return STG_E_INVALIDFUNCTION;
   }
   if (offset < 0)
+  {
+    if (newPosition)
+      *newPosition = _virtPos;
     return HRESULT_WIN32_ERROR_NEGATIVE_SEEK;
+  }
   _virtPos = offset;
   if (newPosition)
     *newPosition = offset;
@@ -129,6 +132,7 @@ STDMETHODIMP CHandlerImg::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosit
 }
 
 static const Byte k_GDP_Signature[] = { 'E', 'F', 'I', ' ', 'P', 'A', 'R', 'T' };
+
 
 static const char *GetImgExt(ISequentialInStream *stream)
 {
@@ -151,6 +155,15 @@ void CHandlerImg::CloseAtError()
   Stream.Release();
 }
 
+void CHandlerImg::Clear_HandlerImg_Vars()
+{
+  _imgExt = NULL;
+  _size = 0;
+  ClearStreamVars();
+  Reset_VirtPos();
+  Reset_PosInArc();
+}
+
 STDMETHODIMP CHandlerImg::Open(IInStream *stream,
     const UInt64 * /* maxCheckStartPosition */,
     IArchiveOpenCallback * openCallback)
@@ -165,9 +178,16 @@ STDMETHODIMP CHandlerImg::Open(IInStream *stream,
       if (res == S_OK)
       {
         CMyComPtr<ISequentialInStream> inStream;
-        HRESULT res2 = GetStream(0, &inStream);
+        const HRESULT res2 = GetStream(0, &inStream);
         if (res2 == S_OK && inStream)
           _imgExt = GetImgExt(inStream);
+        // _imgExt = GetImgExt(this); // for debug
+        /*  we reset (_virtPos) to support cases, if some code will
+            call Read() from Handler object instead of GetStream() object. */
+        Reset_VirtPos();
+        // optional: we reset (_posInArc). if real seek position of stream will be changed in external code
+        Reset_PosInArc();
+        // optional: here we could also reset seek positions in parent streams..
         return S_OK;
       }
     }

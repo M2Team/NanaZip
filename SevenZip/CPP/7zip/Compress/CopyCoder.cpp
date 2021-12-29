@@ -37,12 +37,34 @@ STDMETHODIMP CCopyCoder::Code(ISequentialInStream *inStream,
   for (;;)
   {
     UInt32 size = kBufSize;
-    if (outSize && size > *outSize - TotalSize)
-      size = (UInt32)(*outSize - TotalSize);
-    if (size == 0)
-      return S_OK;
+    if (outSize)
+    {
+      const UInt64 rem = *outSize - TotalSize;
+      if (size > rem)
+      {
+        size = (UInt32)rem;
+        if (size == 0)
+          return S_OK;
+      }
+    }
     
-    HRESULT readRes = inStream->Read(_buf, size, &size);
+    HRESULT readRes;
+    {
+      UInt32 pos = 0;
+      do
+      {
+        const UInt32 curSize = size - pos;
+        UInt32 processed = 0;
+        readRes = inStream->Read(_buf + pos, curSize, &processed);
+        if (processed > curSize)
+          return E_FAIL; // internal code failure
+        pos += processed;
+        if (readRes != S_OK || processed == 0)
+          break;
+      }
+      while (pos < kBufSize);
+      size = pos;
+    }
 
     if (size == 0)
       return readRes;
@@ -52,12 +74,15 @@ STDMETHODIMP CCopyCoder::Code(ISequentialInStream *inStream,
       UInt32 pos = 0;
       do
       {
-        UInt32 curSize = size - pos;
-        HRESULT res = outStream->Write(_buf + pos, curSize, &curSize);
-        pos += curSize;
-        TotalSize += curSize;
+        const UInt32 curSize = size - pos;
+        UInt32 processed = 0;
+        const HRESULT res = outStream->Write(_buf + pos, curSize, &processed);
+        if (processed > curSize)
+          return E_FAIL; // internal code failure
+        pos += processed;
+        TotalSize += processed;
         RINOK(res);
-        if (curSize == 0)
+        if (processed == 0)
           return E_FAIL;
       }
       while (pos < size);
@@ -67,7 +92,10 @@ STDMETHODIMP CCopyCoder::Code(ISequentialInStream *inStream,
 
     RINOK(readRes);
 
-    if (progress)
+    if (size != kBufSize)
+      return S_OK;
+
+    if (progress && (TotalSize & (((UInt32)1 << 22) - 1)) == 0)
     {
       RINOK(progress->SetRatioInfo(&TotalSize, &TotalSize));
     }

@@ -45,6 +45,14 @@ inline void PropVarEm_Set_Bool(PROPVARIANT *p, bool b) throw()
 
 class CPropVariant : public tagPROPVARIANT
 {
+  // ---------- forbidden functions ----------
+  CPropVariant(const char *s);
+  // CPropVariant(const UString &s);
+ #ifdef DEBUG_FSTRING_INHERITS_ASTRING
+  CPropVariant(const FString &s);
+  CPropVariant& operator=(const FString &s);
+ #endif
+
 public:
   CPropVariant()
   {
@@ -64,13 +72,14 @@ public:
   CPropVariant(Byte value) { vt = VT_UI1; wReserved1 = 0; bVal = value; }
 
 private:
+  CPropVariant(UInt16 value); // { vt = VT_UI2; wReserved1 = 0; uiVal = value; }
   CPropVariant(Int16 value); // { vt = VT_I2; wReserved1 = 0; iVal = value; }
   CPropVariant(Int32 value); // { vt = VT_I4; wReserved1 = 0; lVal = value; }
+  CPropVariant(Int64 value); // { vt = VT_I8; wReserved1 = 0; hVal.QuadPart = value; }
 
 public:
   CPropVariant(UInt32 value) { vt = VT_UI4; wReserved1 = 0; ulVal = value; }
   CPropVariant(UInt64 value) { vt = VT_UI8; wReserved1 = 0; uhVal.QuadPart = value; }
-  CPropVariant(Int64 value) { vt = VT_I8; wReserved1 = 0; hVal.QuadPart = value; }
   CPropVariant(const FILETIME &value) { vt = VT_FILETIME; wReserved1 = 0; filetime = value; }
 
   CPropVariant& operator=(const CPropVariant &varSrc);
@@ -88,13 +97,17 @@ public:
   
 private:
   CPropVariant& operator=(Int16 value) throw();
+  CPropVariant& operator=(UInt16 value) throw();
+  CPropVariant& operator=(Int32 value) throw();
+  CPropVariant& operator=(Int64 value) throw();
 
 public:
-  CPropVariant& operator=(Int32 value) throw();
   CPropVariant& operator=(UInt32 value) throw();
   CPropVariant& operator=(UInt64 value) throw();
-  CPropVariant& operator=(Int64 value) throw();
   CPropVariant& operator=(const FILETIME &value) throw();
+
+  void Set_Int32(Int32 value) throw();
+  void Set_Int64(Int64 value) throw();
 
   BSTR AllocBstr(unsigned numChars);
 

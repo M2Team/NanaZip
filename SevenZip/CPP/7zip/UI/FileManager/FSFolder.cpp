@@ -515,7 +515,7 @@ STDMETHODIMP CFSFolder::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *va
     }
     case kpidPrefix:
       if (fi.Parent >= 0)
-        prop = Folders[fi.Parent];
+        prop = fs2us(Folders[fi.Parent]);
       break;
     case kpidNumSubDirs: if (fi.IsDir() && fi.FolderStat_Defined) prop = fi.NumFolders; break;
     case kpidNumSubFiles: if (fi.IsDir() && fi.FolderStat_Defined) prop = fi.NumFiles; break;

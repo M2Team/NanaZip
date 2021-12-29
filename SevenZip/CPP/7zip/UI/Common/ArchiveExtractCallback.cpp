@@ -1000,8 +1000,8 @@ HRESULT CArchiveExtractCallback::CheckExistFile(FString &fullProcessedPath, bool
     
     if (_overwriteMode == NExtract::NOverwriteMode::kAsk)
     {
-      int slashPos = fullProcessedPath.ReverseFind_PathSepar();
-      FString realFullProcessedPath (fullProcessedPath.Left((unsigned)(slashPos + 1)) + fileInfo.Name);
+      const int slashPos = fullProcessedPath.ReverseFind_PathSepar();
+      const FString realFullProcessedPath = fullProcessedPath.Left((unsigned)(slashPos + 1)) + fileInfo.Name;
   
       /* (fileInfo) can be symbolic link.
          we can show final file properties here. */

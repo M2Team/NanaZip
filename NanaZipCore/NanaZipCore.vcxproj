@@ -39,6 +39,7 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz4Handler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz5Handler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LzHandler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\VhdxHandler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ZstdHandler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliEncoder.cpp" />

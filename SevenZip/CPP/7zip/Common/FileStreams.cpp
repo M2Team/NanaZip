@@ -263,8 +263,13 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
   }
   #endif
   
-  UInt64 realNewPosition;
-  bool result = File.Seek(offset, seekOrigin, realNewPosition);
+  UInt64 realNewPosition = 0;
+  const bool result = File.Seek(offset, seekOrigin, realNewPosition);
+  const HRESULT hres = ConvertBoolToHRESULT(result);
+
+  /* 21.07: new File.Seek() in 21.07 already returns correct (realNewPosition)
+     in case of error. So we don't need additional code below */
+  // if (!result) { realNewPosition = 0; File.GetPosition(realNewPosition); }
   
   #ifdef SUPPORT_DEVICE_FILE
   PhyPos = VirtPos = realNewPosition;
@@ -272,13 +277,19 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
 
   if (newPosition)
     *newPosition = realNewPosition;
-  return ConvertBoolToHRESULT(result);
+
+  return hres;
   
   #else
   
-  off_t res = File.seek((off_t)offset, (int)seekOrigin);
+  const off_t res = File.seek((off_t)offset, (int)seekOrigin);
   if (res == -1)
-    return GetLastError_HRESULT();
+  {
+    const HRESULT hres = GetLastError_HRESULT();
+    if (newPosition)
+      *newPosition = (UInt64)File.seekToCur();
+    return hres;
+  }
   if (newPosition)
     *newPosition = (UInt64)res;
   return S_OK;
@@ -435,15 +446,15 @@ STDMETHODIMP COutFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPo
   
   #ifdef USE_WIN_FILE
 
-  UInt64 realNewPosition;
-  bool result = File.Seek(offset, seekOrigin, realNewPosition);
+  UInt64 realNewPosition = 0;
+  const bool result = File.Seek(offset, seekOrigin, realNewPosition);
   if (newPosition)
     *newPosition = realNewPosition;
   return ConvertBoolToHRESULT(result);
   
   #else
   
-  off_t res = File.seek((off_t)offset, (int)seekOrigin);
+  const off_t res = File.seek((off_t)offset, (int)seekOrigin);
   if (res == -1)
     return GetLastError_HRESULT();
   if (newPosition)
@@ -455,24 +466,7 @@ STDMETHODIMP COutFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPo
 
 STDMETHODIMP COutFileStream::SetSize(UInt64 newSize)
 {
-  #ifdef USE_WIN_FILE
-  
-  UInt64 currentPos;
-  if (!File.Seek(0, FILE_CURRENT, currentPos))
-    return E_FAIL;
-  bool result = File.SetLength(newSize);
-  UInt64 currentPos2;
-  result = result && File.Seek(currentPos, currentPos2);
-  return result ? S_OK : E_FAIL;
-  
-  #else
-  
-  // SetLength() uses ftruncate() that doesn't change file offset
-  if (!File.SetLength(newSize))
-    return GetLastError_HRESULT();
-  return S_OK;
-
-  #endif
+  return ConvertBoolToHRESULT(File.SetLength_KeepPosition(newSize));
 }
 
 HRESULT COutFileStream::GetSize(UInt64 *size)

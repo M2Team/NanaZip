@@ -337,10 +337,10 @@ public:
 
   CBenchmarkDialog():
       _timer(0),
-      TotalMode(false),
       WasStopped_in_GUI(false),
       ExitWasAsked_in_GUI(false),
-      NeedRestart(false)
+      NeedRestart(false),
+      TotalMode(false)
       {}
 
   ~CBenchmarkDialog();

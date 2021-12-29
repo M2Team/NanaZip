@@ -13,6 +13,48 @@
 
 #else
 
+/* IShellItem is defined:
+    ShObjIdl.h      : old Windows SDK
+    ShObjIdl_core.h : new Windows 10 SDK */
+
+#include <ShObjIdl.h>
+
+#ifndef __IShellItem_INTERFACE_DEFINED__
+#define __IShellItem_INTERFACE_DEFINED__
+
+// For MINGW we define IShellItem
+
+// #error Stop_Compiling__NOT_DEFINED__IShellItem_INTERFACE_DEFINED__
+
+typedef
+enum
+{ SIGDN_NORMALDISPLAY = 0,
+  SIGDN_PARENTRELATIVEPARSING = 0x80018001,
+  SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8001c001,
+  SIGDN_DESKTOPABSOLUTEPARSING  = 0x80028000,
+  SIGDN_PARENTRELATIVEEDITING = 0x80031001,
+  SIGDN_DESKTOPABSOLUTEEDITING  = 0x8004c000,
+  SIGDN_FILESYSPATH = 0x80058000,
+  SIGDN_URL = 0x80068000
+} SIGDN;
+
+
+typedef DWORD SICHINTF;
+typedef ULONG SFGAOF;
+
+struct IShellItem : public IUnknown
+{
+  virtual HRESULT STDMETHODCALLTYPE BindToHandler(IBindCtx *pbc, REFGUID rbhid, REFIID riid, void **ppvOut) = 0;
+  virtual HRESULT STDMETHODCALLTYPE GetParent(IShellItem **ppsi) = 0;
+  virtual HRESULT STDMETHODCALLTYPE GetDisplayName(SIGDN sigdnName, LPOLESTR *ppszName) = 0;
+  virtual HRESULT STDMETHODCALLTYPE GetAttributes(SFGAOF sfgaoMask, SFGAOF *psfgaoAttribs) = 0;
+  virtual HRESULT STDMETHODCALLTYPE Compare(IShellItem *psi, SICHINTF hint, int *piOrder) = 0;
+};
+
+#endif // __IShellItem_INTERFACE_DEFINED__
+
+
+
 #ifndef __IShellItemArray_INTERFACE_DEFINED__
 #define __IShellItemArray_INTERFACE_DEFINED__
 

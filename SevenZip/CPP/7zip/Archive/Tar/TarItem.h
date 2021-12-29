@@ -43,6 +43,15 @@ struct CItem
 
   CRecordVector<CSparseBlock> SparseBlocks;
 
+  void SetDefaultWriteFields()
+  {
+    DeviceMajorDefined = false;
+    DeviceMinorDefined = false;
+    UID = 0;
+    GID = 0;
+    memcpy(Magic, NFileHeader::NMagic::kUsTar_GNU, 8);
+  }
+
   bool IsSymLink() const { return LinkFlag == NFileHeader::NLinkFlag::kSymLink && (Size == 0); }
   bool IsHardLink() const { return LinkFlag == NFileHeader::NLinkFlag::kHardLink; }
   bool IsSparse() const { return LinkFlag == NFileHeader::NLinkFlag::kSparse; }
@@ -103,7 +112,7 @@ struct CItem
   bool IsUstarMagic() const
   {
     for (int i = 0; i < 5; i++)
-      if (Magic[i] != NFileHeader::NMagic::kUsTar_00[i])
+      if (Magic[i] != NFileHeader::NMagic::kUsTar_GNU[i])
         return false;
     return true;
   }

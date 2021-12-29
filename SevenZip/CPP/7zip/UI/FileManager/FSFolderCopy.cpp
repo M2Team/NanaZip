@@ -473,7 +473,10 @@ static HRESULT CopyFile_Ask(
 
 static FString CombinePath(const FString &folderPath, const FString &fileName)
 {
-  return folderPath + FCHAR_PATH_SEPARATOR + fileName;
+  FString s (folderPath);
+  s.Add_PathSepar(); // FCHAR_PATH_SEPARATOR
+  s += fileName;
+  return s;
 }
 
 static bool IsDestChild(const FString &src, const FString &dest)

@@ -28,12 +28,12 @@ public:
   {
     _needChangeForNext = true;
     _after.Empty();
-    UString base = name;
-    int dotPos = name.ReverseFind_Dot();
+    UString base (name);
+    const int dotPos = name.ReverseFind_Dot();
 
     if (dotPos >= 0)
     {
-      const UString ext = name.Ptr(dotPos + 1);
+      const UString ext (name.Ptr(dotPos + 1));
       if (ext.IsEqualTo_Ascii_NoCase("rar"))
       {
         _after = name.Ptr(dotPos);

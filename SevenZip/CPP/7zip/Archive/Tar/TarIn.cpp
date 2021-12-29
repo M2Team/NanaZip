@@ -72,10 +72,7 @@ static bool IsRecordLast(const char *buf)
 
 static void ReadString(const char *s, unsigned size, AString &result)
 {
-  char temp[NFileHeader::kRecordSize + 1];
-  MyStrNCpy(temp, s, size);
-  temp[size] = '\0';
-  result = temp;
+  result.SetFrom_CalcLen(s, size);
 }
 
 static bool ParseInt64(const char *p, Int64 &val)

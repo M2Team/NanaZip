@@ -76,7 +76,8 @@ namespace NFileHeader
     // extern const char * const kUsTar;  //  = "ustar"; // 5 chars
     // extern const char * const kGNUTar; //  = "GNUtar "; // 7 chars and a null
     // extern const char * const kEmpty;  //  = "\0\0\0\0\0\0\0\0"
-    extern const char kUsTar_00[8];
+    // extern const char kUsTar_00[8];
+    extern const char kUsTar_GNU[8];
   }
 }
 

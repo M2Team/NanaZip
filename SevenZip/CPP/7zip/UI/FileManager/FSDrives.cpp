@@ -224,14 +224,14 @@ STDMETHODIMP CFSDrives::GetProperty(UInt32 itemIndex, PROPID propID, PROPVARIANT
   switch (propID)
   {
     case kpidIsDir:  prop = !_volumeMode; break;
-    case kpidName:  prop = di.Name; break;
+    case kpidName:  prop = fs2us(di.Name); break;
     case kpidOutName:
       if (!di.Name.IsEmpty() && di.Name.Back() == ':')
       {
         FString s = di.Name;
         s.DeleteBack();
         AddExt(s, itemIndex);
-        prop = s;
+        prop = fs2us(s);
       }
       break;
 
