@@ -25,7 +25,7 @@ experience, forked from the source code of well-known open source file archiver
 We need help to translate NanaZip into native languages that have not been 
 supported.
 
-# Features
+## Features
 
 - Inherit all features from 7-Zip 21.06.
 - Packaging with MSIX for modern deployment experience.
@@ -36,16 +36,16 @@ supported.
 - Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs. (Merged 
   from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd).)
 
-# System Requirements
+## System Requirements
 
 - Supported OS: Windows 10, version 1809 or later
 - Supported Platforms: x86, x86-64(AMD64) and ARM64.
 
-# Download and Installation
+## Download and Installation
 
 Here are some available installation methods for NanaZip.
 
-## Microsoft Store
+### Microsoft Store
 
 This is the recommended way to install NanaZip.
 
@@ -57,7 +57,7 @@ Also, you can also click the Microsoft Store link you needed.
 - [NanaZip](https://www.microsoft.com/store/apps/9N8G7TSCL18R)
 - [NanaZip Preview](https://www.microsoft.com/store/apps/9NZL0LRP1BNL)
 
-## MSIX Package
+### MSIX Package
 
 You also can download the MSIX Package in 
 [GitHub Releases](https://github.com/M2Team/NanaZip/releases).
@@ -72,7 +72,7 @@ because we known that it's very difficult for users who do not have access to
 the store to get our dependency packages, and we want to be robust and 
 deployable everywhere.
 
-# Known issues
+## Known issues
 
 - You may meet the application crash in some cases in NanaZip 1.0 Preview 1 and
   NanaZip 1.0 Preview 2 because there are some issues in the exception handler 
@@ -92,7 +92,7 @@ deployable everywhere.
   in directories other than `Local`, `LocalLow` and `Roaming` in 
   `%UserProfile%/AppData` will still be redirected in Windows 11.
 
-# Development Roadmap
+## Development Roadmap
 
 - 1.0 (December 8, 2021)
   - [x] Modernize the build toolchain with MSBuild for using MSIX packaging and
@@ -152,7 +152,7 @@ deployable everywhere.
 **All kinds of contributions will be appreciated. All suggestions, pull 
 requests and issues are welcome.**
 
-# Documents
+## Documents
 
 - [License](License.md)
 - [Relevant People](Documents/People.md)
