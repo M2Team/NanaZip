@@ -31,18 +31,24 @@ public:
     UString base (name);
     const int dotPos = name.ReverseFind_Dot();
 
+    int newPos = dotPos;
+    for (; newPos != 0; newPos--)
+        if (IsDigit(base[newPos - 1]))
+            break;
+
     if (dotPos >= 0)
     {
       const UString ext (name.Ptr(dotPos + 1));
       if (ext.IsEqualTo_Ascii_NoCase("rar"))
       {
-        _after = name.Ptr(dotPos);
-        base.DeleteFrom(dotPos);
+        _after += name.Ptr(newPos);
+        base.DeleteFrom(newPos);
       }
       else if (ext.IsEqualTo_Ascii_NoCase("exe"))
       {
-        _after = ".rar";
-        base.DeleteFrom(dotPos);
+        _after += name.Ptr(newPos);
+        base.DeleteFrom(newPos);
+        _after.Replace(L".exe", L".rar");
       }
       else if (!newStyle)
       {
