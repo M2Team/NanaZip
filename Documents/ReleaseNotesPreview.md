@@ -2,6 +2,17 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.1 Preview 2 (1.1.152.0)**
+
+- Reimplement the about dialog with TaskDialog.
+- Update Deutsch translations. (Contributed by Henry2o1o.)
+- Add assembly implementations from 7-Zip back for improving performance.
+- Update translations inherited from 7-Zip.
+- Update 7-Zip to 21.07. (Thanks to Igor Pavlov. Noticed by HylianSteel.)
+- Improve the multi volume rar file detection for solving 
+  https://github.com/M2Team/NanaZip/issues/82. (Thanks to 1human.)
+- Modernize the message boxes with Task Dialog.
+
 **NanaZip 1.1 Preview 1 (1.1.101.0)**
 
 - Exclude .webp in the archive file type list for solving 
