@@ -15,6 +15,7 @@
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Library.CppWinRT.props" />
   <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>

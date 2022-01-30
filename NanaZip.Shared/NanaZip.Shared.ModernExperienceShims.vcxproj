@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.Win32.props" />
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.ARM64.props" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}</ProjectGuid>
+    <RootNamespace>NanaZip.Shared.ModernExperienceShims</RootNamespace>
+    <MileProjectType>StaticLibrary</MileProjectType>
+  </PropertyGroup>
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
+  <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <ItemGroup>
+    <None Include="NanaZip.Shared.ModernExperienceShims.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ModernWin32MessageBox.cpp" />
+  </ItemGroup>
+  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
+</Project>
