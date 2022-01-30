@@ -94,6 +94,8 @@
       <SubSystem Condition="'$(MileProjectType)'=='StaticLibrary'"></SubSystem>
     </Link>
     <ResourceCompile Condition="'$(MileProjectType)'!='StaticLibrary'">
+      <PreprocessorDefinitions Condition="'$(MileProjectType)'!='DynamicLibrary'">_MILE_PROJECT_MANIFEST_ID=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(MileProjectType)'=='DynamicLibrary'">_MILE_PROJECT_MANIFEST_ID=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(MileProjectManifestFile)'!=''">_MILE_PROJECT_MANIFEST_FILE=$([System.String]::Copy('$(MileProjectManifestFile)').Replace('\','\\'));%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir);$(MSBuildThisFileDirectory);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
