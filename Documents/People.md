@@ -19,11 +19,13 @@
 - Rúben Garrido ([https://github.com/RGarrido03](https://github.com/RGarrido03))
 - Sakura Neko ([https://github.com/SakuraNeko](https://github.com/SakuraNeko))
 
-## Translation Contributors
+## Contributors
 
 - Blueberryy ([https://github.com/Blueberryy](https://github.com/Blueberryy))
 - ChuckMichael ([https://github.com/ChuckMichael](https://github.com/ChuckMichael))
+- Hen Ry ([https://github.com/Henry2o1o](https://github.com/Henry2o1o))
 - Maicol Battistini ([https://github.com/maicol07](https://github.com/maicol07))
+- wallrik ([https://github.com/wallrik](https://github.com/wallrik))
 
 ## Special thanks
 

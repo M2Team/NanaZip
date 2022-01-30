@@ -5,7 +5,7 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 **NanaZip 1.1 Preview 2 (1.1.152.0)**
 
 - Reimplement the about dialog with TaskDialog.
-- Update Deutsch translations. (Contributed by Henry2o1o.)
+- Update Deutsch translations. (Contributed by Hen Ry.)
 - Add assembly implementations from 7-Zip back for improving performance.
 - Update translations inherited from 7-Zip.
 - Update 7-Zip to 21.07. (Thanks to Igor Pavlov. Noticed by HylianSteel.)
