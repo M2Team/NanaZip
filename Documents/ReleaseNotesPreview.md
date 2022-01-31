@@ -2,6 +2,10 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.1 Preview 2 (1.1.153.0)**
+
+- Fix the issue which can't load context menu properly. (Thanks to DJxSpeedy.)
+
 **NanaZip 1.1 Preview 2 (1.1.152.0)**
 
 - Reimplement the about dialog with TaskDialog.
