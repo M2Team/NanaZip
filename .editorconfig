@@ -1,7 +1,7 @@
 ﻿## 
 ## PROJECT:   Mouri Internal Library Essentials
 ## FILE:      .editorconfig
-## PURPOSE:   The root .editorconfig file for Visual Studio C++ Project
+## PURPOSE:   The root .editorconfig file for C++ Project
 ## 
 ## LICENSE:   The MIT License
 ## 
@@ -41,4 +41,9 @@ charset = utf-16le
 
 [*.bat]
 charset = utf-8
+insert_final_newline = true
+
+[*.sh]
+charset = utf-8
+end_of_line = lf
 insert_final_newline = true
