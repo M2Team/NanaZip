@@ -5,13 +5,14 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
   xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
   xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
-  IgnorableNamespaces="uap rescap desktop uap3 com desktop4 desktop5 uap8 virtualization">
+  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 uap8 virtualization">
 
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
@@ -119,390 +120,56 @@
           </uap3:AppExecutionAlias>
         </uap3:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_001">
+          <uap:FileTypeAssociation Name="fileassociations">
             <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - 001 Archive</uap:DisplayName>
             <uap:SupportedFileTypes>
               <uap:FileType>.001</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_7z">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - 7z Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.7z</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_arj">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - arj Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.arj</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_bz2">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - bz2 Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.bz2</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_bzip2">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - bzip2 Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.bzip2</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_cab">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - cab Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.cab</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_cpio">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - cpio Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.cpio</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_deb">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - deb Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.deb</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_dmg">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - dmg Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.dmg</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_esd">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - esd Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.esd</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_fat">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - fat Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.fat</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_gz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - gz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.gz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_gzip">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - gzip Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.gzip</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_hfs">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - hfs Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.hfs</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_iso">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - iso Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.iso</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_lha">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - lha Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.lha</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_liz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - liz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.liz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_lz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - lz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.lz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_lz4">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - lz4 Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.lz4</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_lz5">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - lz5 Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.lz5</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_lzh">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - lzh Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.lzh</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_lzma">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - lzma Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.lzma</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_ntfs">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - ntfs Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.ntfs</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_rar">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - rar Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.rar</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_rpm">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - rpm Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.rpm</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_squashfs">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - squashfs Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.squashfs</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_swm">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - swm Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.swm</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_tar">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - tar Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.tar</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_taz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - taz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.taz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_tbz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - tbz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.tbz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_tbz2">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - tbz2 Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.tbz2</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_tgz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - tgz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.tgz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_tlz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - tlz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.tlz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_tpz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - tpz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.tpz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_txz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - txz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.txz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_vhd">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - vhd Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.vhd</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_vhdx">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - vhdx Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.vhdx</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_wim">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - wim Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.wim</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_xar">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - xar Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.xar</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_xz">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - xz Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.xz</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_z">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - z Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.z</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_zip">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - zip Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.zip</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="archivetype_zst">
-            <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
-            <uap:DisplayName>NanaZip - zst Archive</uap:DisplayName>
-            <uap:SupportedFileTypes>
               <uap:FileType>.zst</uap:FileType>
             </uap:SupportedFileTypes>
+            <uap2:SupportedVerbs>
+              <uap3:Verb Id="open" Parameters="&quot;%1&quot;">open</uap3:Verb>
+            </uap2:SupportedVerbs>
           </uap:FileTypeAssociation>
         </uap:Extension>
         <desktop4:Extension Category="windows.fileExplorerContextMenus">
