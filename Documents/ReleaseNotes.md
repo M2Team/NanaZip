@@ -3,6 +3,23 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 1.1 (1.1.193.0)**
+
+- Add assembly implementations from 7-Zip back for improving performance.
+- Reimplement the about dialog with TaskDialog.
+- Modernize the message boxes with Task Dialog. (Thanks to DJxSpeedy.)
+- Update 7-Zip to 21.07. (Thanks to Igor Pavlov. Noticed by HylianSteel.)
+- Update translations inherited from 7-Zip.
+- Update Deutsch translations. (Contributed by Hen Ry.)
+- Update Polish translation. (Contributed by ChuckMichael.)
+- Improve the multi volume rar file detection for solving 
+  https://github.com/M2Team/NanaZip/issues/82. (Thanks to 1human.)
+- Simplify the file type association definitions and add the open verb for 
+  them. (Thanks to Fabio286.)
+- Fix CI issue.
+- Update VC-LTL to 5.0.4-Beta3.
+- Update C++/WinRT to 2.0.211028.7.
+
 **NanaZip 1.0 (1.0.95.0)**
 
 - Modernize the build toolchain with MSBuild for using MSIX packaging and 
