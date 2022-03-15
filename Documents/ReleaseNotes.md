@@ -3,7 +3,7 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
-**NanaZip 1.1 (1.1.193.0)**
+**NanaZip 1.1 (1.1.194.0)**
 
 - Add assembly implementations from 7-Zip back for improving performance.
 - Reimplement the about dialog with TaskDialog.
@@ -17,7 +17,7 @@ For preview versions, please read
 - Simplify the file type association definitions and add the open verb for 
   them. (Thanks to Fabio286.)
 - Fix CI issue.
-- Update VC-LTL to 5.0.4-Beta3.
+- Update VC-LTL to 5.0.4.
 - Update C++/WinRT to 2.0.211028.7.
 
 **NanaZip 1.0 (1.0.95.0)**

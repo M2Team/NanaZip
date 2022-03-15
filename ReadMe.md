@@ -111,7 +111,8 @@ deployable everywhere.
   - [x] Add support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard
         from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd). (Suggested
         by fcharlie.)
-- 1.x Series (2022 Q2)
+- 1.1 (March 15, 2022)
+- 1.1 Servicing Update Series (2022 Q2)
   - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [ ] Provide NanaZip Installer for simplify the deployment.
   - [ ] Modernize the i18n implementation and migrate language files from 
