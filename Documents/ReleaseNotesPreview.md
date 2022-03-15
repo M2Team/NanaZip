@@ -2,6 +2,12 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.1 Servicing Update 1 Preview 1 (1.1.196.0)**
+
+- Simplify the file type association definitions and add the open verb for 
+  them. (Thanks to Fabio286. Fixed in NanaZip 1.1 Stable.)
+- Update VC-LTL to 5.0.4. (Updated in NanaZip 1.1 Stable.)
+
 **NanaZip 1.1 Preview 2 (1.1.153.0)**
 
 - Fix the issue which can't load context menu properly. (Thanks to DJxSpeedy.)
