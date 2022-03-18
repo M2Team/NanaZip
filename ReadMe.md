@@ -116,7 +116,7 @@ deployable everywhere.
   - [x] Reimplement the about dialog with Task Dialog.
   - [x] Modernize the message boxes with Task Dialog.
 - 1.1 Servicing Update Series (2022 Q2)
-  - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
+  - [x] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [ ] Add i18n support for Self Extracting Executables.
   - [ ] Provide NanaZip Installer for simplify the deployment.
   - [ ] Modernize the i18n implementation and migrate language files from 
