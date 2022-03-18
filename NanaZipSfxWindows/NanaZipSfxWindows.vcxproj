@@ -5,6 +5,7 @@
     <ProjectGuid>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</ProjectGuid>
     <RootNamespace>NanaZipSfxWindows</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
+    <MileProjectManifestFile>NanaZipSfxWindows.manifest</MileProjectManifestFile>
   </PropertyGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
@@ -243,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipSfxWindows.manifest" />
   </ItemGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
 </Project>

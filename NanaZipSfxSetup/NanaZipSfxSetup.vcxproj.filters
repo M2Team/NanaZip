@@ -521,4 +521,7 @@
       <Filter>SevenZip\Spec</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipSfxSetup.manifest" />
+  </ItemGroup>
 </Project>

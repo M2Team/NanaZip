@@ -5,6 +5,7 @@
     <ProjectGuid>{43308629-5328-46BF-8E1C-A258A937B981}</ProjectGuid>
     <RootNamespace>NanaZipSfxSetup</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
+    <MileProjectManifestFile>NanaZipSfxSetup.manifest</MileProjectManifestFile>
   </PropertyGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
@@ -194,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\setup.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipSfxSetup.manifest" />
   </ItemGroup>
   <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
 </Project>

@@ -632,4 +632,7 @@
       <Filter>SevenZip\Spec</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipSfxConsole.manifest" />
+  </ItemGroup>
 </Project>

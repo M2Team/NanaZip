@@ -671,4 +671,7 @@
       <Filter>SevenZip\Spec</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZipSfxWindows.manifest" />
+  </ItemGroup>
 </Project>
