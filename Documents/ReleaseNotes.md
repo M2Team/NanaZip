@@ -6,7 +6,7 @@ For preview versions, please read
 **NanaZip 1.1 (1.1.194.0)**
 
 - Add assembly implementations from 7-Zip back for improving performance.
-- Reimplement the about dialog with TaskDialog.
+- Reimplement the about dialog with Task Dialog.
 - Modernize the message boxes with Task Dialog. (Thanks to DJxSpeedy.)
 - Update 7-Zip to 21.07. (Thanks to Igor Pavlov. Noticed by HylianSteel.)
 - Update translations inherited from 7-Zip.

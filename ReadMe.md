@@ -112,8 +112,12 @@ deployable everywhere.
         from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd). (Suggested
         by fcharlie.)
 - 1.1 (March 17, 2022)
+  - [x] Add assembly implementations from 7-Zip back for improving performance.
+  - [x] Reimplement the about dialog with Task Dialog.
+  - [x] Modernize the message boxes with Task Dialog.
 - 1.1 Servicing Update Series (2022 Q2)
   - [ ] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
+  - [ ] Add i18n support for Self Extracting Executables.
   - [ ] Provide NanaZip Installer for simplify the deployment.
   - [ ] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
