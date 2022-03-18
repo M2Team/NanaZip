@@ -25,6 +25,8 @@
 
 #include "../../../../C/DllSecur.h"
 
+#include <Mile.Windows.h>
+
 #include "resource.h"
 
 using namespace NWindows;
@@ -142,6 +144,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef _WIN32
   LoadSecurityDlls();
   #endif
+
+  Mile::EnablePerMonitorDialogScaling();
 
   // InitCommonControls();
 

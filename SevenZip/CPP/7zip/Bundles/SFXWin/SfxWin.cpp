@@ -30,6 +30,8 @@
 
 #include "../../../../C/DllSecur.h"
 
+#include <Mile.Windows.h>
+
 using namespace NWindows;
 using namespace NFile;
 using namespace NDir;
@@ -227,6 +229,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef _WIN32
     LoadSecurityDlls();
     #endif
+
+    Mile::EnablePerMonitorDialogScaling();
 
     return WinMain2();
   }
