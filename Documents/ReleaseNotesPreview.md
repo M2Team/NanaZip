@@ -2,6 +2,15 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.1 Servicing Update 1 Preview 2 (1.1.200.0)**
+
+- Fix no ordinal 345 was found in the dynamically attached library issue in 
+  Self Extracting Executables. (Thanks to FadeMind.)
+- Add Per-Monitor DPI-Aware support for Self Extracting Executables.
+- Adjust and simplify the compiler options for modernizing.
+- Fix i18n issue for the About dialog. (Thanks to  AndromedaMelody.)
+- Update installation tutorial. (Suggested by AndromedaMelody.)
+
 **NanaZip 1.1 Servicing Update 1 Preview 1 (1.1.196.0)**
 
 - Simplify the file type association definitions and add the open verb for 
