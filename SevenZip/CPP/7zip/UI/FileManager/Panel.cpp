@@ -32,6 +32,8 @@
 
 #include "PropertyNameRes.h"
 
+#include <Mile.Windows.h>
+
 using namespace NWindows;
 using namespace NControl;
 
@@ -421,6 +423,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       | CCS_NODIVIDER
       | CCS_NOPARENTALIGN
       | CCS_TOP
+      | CCS_NORESIZE
       | RBS_VARHEIGHT
       | RBS_BANDBORDERS
       ,0,0,0,0, *this, NULL, g_hInstance, NULL));
@@ -599,6 +602,26 @@ void CPanel::ChangeWindowSize(int xSize, int ySize)
   const int kStartXPos = 32;
   if (_headerReBar)
   {
+      int ControlDpi = USER_DEFAULT_SCREEN_DPI;
+      {
+          int xDPI = USER_DEFAULT_SCREEN_DPI;
+          int yDPI = USER_DEFAULT_SCREEN_DPI;
+          if (S_OK == Mile::GetDpiForMonitor(
+              ::MonitorFromWindow(_headerReBar, MONITOR_DEFAULTTONEAREST),
+              MDT_EFFECTIVE_DPI,
+              reinterpret_cast<UINT*>(&xDPI),
+              reinterpret_cast<UINT*>(&yDPI)))
+          {
+              ControlDpi = xDPI;
+          }
+      }
+
+      REBARBANDINFO rbBand = { 0 };
+      rbBand.cbSize = sizeof(REBARBANDINFO);
+      rbBand.fMask = RBBIM_CHILDSIZE;
+      rbBand.cxMinChild = ::MulDiv(30, ControlDpi, USER_DEFAULT_SCREEN_DPI);
+      rbBand.cyMinChild = ::MulDiv(24, ControlDpi, USER_DEFAULT_SCREEN_DPI);
+      _headerReBar.SetBandInfo(1, &rbBand); 
   }
   else
   {
@@ -618,7 +641,28 @@ bool CPanel::OnSize(WPARAM /* wParam */, int xSize, int ySize)
   if ((HWND)*this == 0)
     return true;
   if (_headerReBar)
-    _headerReBar.Move(0, 0, xSize, 0);
+  {
+      int ControlDpi = USER_DEFAULT_SCREEN_DPI;
+      {
+          int xDPI = USER_DEFAULT_SCREEN_DPI;
+          int yDPI = USER_DEFAULT_SCREEN_DPI;
+          if (S_OK == Mile::GetDpiForMonitor(
+              ::MonitorFromWindow(_headerReBar, MONITOR_DEFAULTTONEAREST),
+              MDT_EFFECTIVE_DPI,
+              reinterpret_cast<UINT*>(&xDPI),
+              reinterpret_cast<UINT*>(&yDPI)))
+          {
+              ControlDpi = xDPI;
+          }
+      }
+
+      _headerReBar.Move(
+          0,
+          0,
+          xSize,
+          ::MulDiv(24, ControlDpi, USER_DEFAULT_SCREEN_DPI));
+  }
+      
   ChangeWindowSize(xSize, ySize);
   return true;
 }
