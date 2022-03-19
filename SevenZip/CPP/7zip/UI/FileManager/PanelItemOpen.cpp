@@ -756,7 +756,30 @@ static HRESULT StartEditApplication(const UString &path, bool useEditor, HWND wi
 
   HRESULT res = StartAppWithParams(command, params, process);
   if (res != SZ_OK)
-    ::MessageBoxW(window, LangString(IDS_CANNOT_START_EDITOR), L"NanaZip", MB_OK  | MB_ICONSTOP);
+  {
+      PWSTR LocalAppDataPath = nullptr;
+      if (S_OK == ::SHGetKnownFolderPath(
+          FOLDERID_LocalAppData,
+          KF_FLAG_DEFAULT,
+          nullptr,
+          &LocalAppDataPath))
+      {
+          command = LocalAppDataPath;
+          command += L"\\Microsoft\\WindowsApps\\";
+          command += L"Microsoft.WindowsNotepad_8wekyb3d8bbwe\\notepad.exe";
+          res = StartAppWithParams(command, params, process);
+          ::CoTaskMemFree(LocalAppDataPath);
+      }
+      
+      if (res != SZ_OK)
+      {
+          ::MessageBoxW(
+              window,
+              LangString(IDS_CANNOT_START_EDITOR),
+              L"NanaZip",
+              MB_OK | MB_ICONSTOP);
+      }
+  }
   return res;
 }
 
