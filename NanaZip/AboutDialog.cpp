@@ -72,6 +72,10 @@ void NanaZip::FileManager::AboutDialog::Show(
 
     std::wstring WindowTitle = std::wstring(
         ::LangString(IDD_ABOUT));
+    if (WindowTitle.empty())
+    {
+        WindowTitle = L"About NanaZip";
+    }
 
     std::wstring WindowMainInstruction = std::wstring(
         "NanaZip " MILE_PROJECT_VERSION_STRING);
@@ -82,6 +86,10 @@ void NanaZip::FileManager::AboutDialog::Show(
 
     std::wstring WindowContent = std::wstring(
         ::LangString(IDT_ABOUT_INFO));
+    if (WindowContent.empty())
+    {
+        WindowContent = L"NanaZip is free software";
+    }
 #ifdef EXTERNAL_CODECS
     if (g_CodecsObj)
     {
