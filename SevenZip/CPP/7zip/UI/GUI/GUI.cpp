@@ -32,8 +32,6 @@
 
 #include "ExtractRes.h"
 
-#include <Mile.Windows.h>
-
 using namespace NWindows;
 
 #ifdef EXTERNAL_CODECS
@@ -394,8 +392,6 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef _WIN32
   NT_CHECK
   #endif
-
-  Mile::EnablePerMonitorDialogScaling();
 
   InitCommonControls();
 
