@@ -8,7 +8,7 @@
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <MASM>
-      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
     </MASM>
   </ItemDefinitionGroup>
   <Target Name="SevenZipHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">

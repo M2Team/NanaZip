@@ -19,10 +19,6 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <Optimization Condition="'$(Configuration)'=='Release'">MinSpace</Optimization>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <StringPooling>true</StringPooling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
       <PreprocessorDefinitions>LANG;EXTERNAL_CODECS;WIN_LONG_PATH;SUPPORT_DEVICE_FILE;_7ZIP_LARGE_PAGES;WANT_OPTIONAL_LOWERCASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -163,20 +159,12 @@
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\DynLimBuf.cpp" />
-    <ClCompile Include="..\SevenZip\C\7zCrc.c">
-      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\7zCrcOpt.c">
-      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-    </ClCompile>
+    <ClCompile Include="..\SevenZip\C\7zCrc.c" />
+    <ClCompile Include="..\SevenZip\C\7zCrcOpt.c" />
     <ClCompile Include="..\SevenZip\C\Alloc.c" />
-    <ClCompile Include="..\SevenZip\C\CpuArch.c">
-      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-    </ClCompile>
+    <ClCompile Include="..\SevenZip\C\CpuArch.c" />
     <ClCompile Include="..\SevenZip\C\DllSecur.c" />
-    <ClCompile Include="..\SevenZip\C\Sort.c">
-      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-    </ClCompile>
+    <ClCompile Include="..\SevenZip\C\Sort.c" />
     <ClCompile Include="..\SevenZip\C\Threads.c" />
     <ClCompile Include="..\SevenZip\CPP\Common\CommandLineParser.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\CRC.cpp" />

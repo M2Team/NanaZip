@@ -19,10 +19,6 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <Optimization Condition="'$(Configuration)'=='Release'">MinSpace</Optimization>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <StringPooling>true</StringPooling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
       <PreprocessorDefinitions>LANG;WIN_LONG_PATH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

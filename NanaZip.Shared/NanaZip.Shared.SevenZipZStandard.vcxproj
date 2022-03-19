@@ -24,10 +24,6 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <Optimization Condition="'$(Configuration)'=='Release'">MinSpace</Optimization>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <StringPooling>true</StringPooling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
       <PreprocessorDefinitions>ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;NO_XXHASH;FL2_7ZIP_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
