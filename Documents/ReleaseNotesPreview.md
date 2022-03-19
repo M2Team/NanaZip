@@ -8,7 +8,7 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   Self Extracting Executables. (Thanks to FadeMind.)
 - Add Per-Monitor DPI-Aware support for Self Extracting Executables.
 - Adjust and simplify the compiler options for modernizing.
-- Fix i18n issue for the About dialog. (Thanks to  AndromedaMelody.)
+- Fix i18n issue for the About dialog. (Thanks to AndromedaMelody.)
 - Update installation tutorial. (Suggested by AndromedaMelody.)
 
 **NanaZip 1.1 Servicing Update 1 Preview 1 (1.1.196.0)**
