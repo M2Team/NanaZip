@@ -65,7 +65,7 @@ You also can download the MSIX Package in
 After you have downloaded the MSIX Package, you can double click to install it,
 or you can execute the following command in the Command Prompt which is run as the Administrator.
 
-> PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -Path `The path of the MSIX package`
+> PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
 
 P.S. All needed dependencies are included in the MSIX Package of NanaZip 
 because we known that it's very difficult for users who do not have access to 
