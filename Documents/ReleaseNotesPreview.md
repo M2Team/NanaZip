@@ -6,10 +6,12 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
 - Fix no ordinal 345 was found in the dynamically attached library issue in 
   Self Extracting Executables. (Thanks to FadeMind.)
-- Add Per-Monitor DPI-Aware support for Self Extracting Executables.
+- Add Per-Monitor DPI-Aware support for all GUI components.
 - Adjust and simplify the compiler options for modernizing.
 - Fix i18n issue for the About dialog. (Thanks to AndromedaMelody.)
 - Update installation tutorial. (Suggested by AndromedaMelody.)
+- Fix cannot start editor issue when only store edition of notepad existed. 
+  (Thanks to AndromedaMelody.)
 
 **NanaZip 1.1 Servicing Update 1 Preview 1 (1.1.196.0)**
 
