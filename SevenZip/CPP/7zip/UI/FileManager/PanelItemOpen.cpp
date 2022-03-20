@@ -749,6 +749,22 @@ static HRESULT StartEditApplication(const UString &path, bool useEditor, HWND wi
     command = fs2us(winDir);
     #endif
     command += "notepad.exe";
+    if (INVALID_FILE_ATTRIBUTES == ::GetFileAttributesW(command))
+    {
+        PWSTR LocalAppDataPath = nullptr;
+        if (S_OK != ::SHGetKnownFolderPath(
+            FOLDERID_LocalAppData,
+            KF_FLAG_DEFAULT,
+            nullptr,
+            &LocalAppDataPath))
+        {
+            return 0;
+        }
+        command = LocalAppDataPath;        
+        command += L"\\Microsoft\\WindowsApps\\";
+        command += L"Microsoft.WindowsNotepad_8wekyb3d8bbwe\\notepad.exe";
+        ::CoTaskMemFree(LocalAppDataPath);
+    }
   }
 
   UStringVector params;
@@ -757,28 +773,11 @@ static HRESULT StartEditApplication(const UString &path, bool useEditor, HWND wi
   HRESULT res = StartAppWithParams(command, params, process);
   if (res != SZ_OK)
   {
-      PWSTR LocalAppDataPath = nullptr;
-      if (S_OK == ::SHGetKnownFolderPath(
-          FOLDERID_LocalAppData,
-          KF_FLAG_DEFAULT,
-          nullptr,
-          &LocalAppDataPath))
-      {
-          command = LocalAppDataPath;
-          command += L"\\Microsoft\\WindowsApps\\";
-          command += L"Microsoft.WindowsNotepad_8wekyb3d8bbwe\\notepad.exe";
-          res = StartAppWithParams(command, params, process);
-          ::CoTaskMemFree(LocalAppDataPath);
-      }
-      
-      if (res != SZ_OK)
-      {
-          ::MessageBoxW(
-              window,
-              LangString(IDS_CANNOT_START_EDITOR),
-              L"NanaZip",
-              MB_OK | MB_ICONSTOP);
-      }
+      ::MessageBoxW(
+          window,
+          LangString(IDS_CANNOT_START_EDITOR),
+          L"NanaZip",
+          MB_OK | MB_ICONSTOP);
   }
   return res;
 }
