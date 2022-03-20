@@ -2,7 +2,7 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 1.1 Servicing Update 1 Preview 2 (1.1.200.0)**
+**NanaZip 1.1 Servicing Update 1 Preview 2 (1.1.201.0)**
 
 - Fix no ordinal 345 was found in the dynamically attached library issue in 
   Self Extracting Executables. (Thanks to FadeMind.)
