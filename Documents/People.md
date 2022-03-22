@@ -21,6 +21,7 @@
 
 ## Contributors
 
+- AndromedaMelody ([https://github.com/AndromedaMelody](https://github.com/AndromedaMelody))
 - Blueberryy ([https://github.com/Blueberryy](https://github.com/Blueberryy))
 - ChuckMichael ([https://github.com/ChuckMichael](https://github.com/ChuckMichael))
 - Hen Ry ([https://github.com/Henry2o1o](https://github.com/Henry2o1o))

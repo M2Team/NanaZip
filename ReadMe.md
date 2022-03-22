@@ -117,10 +117,10 @@ deployable everywhere.
   - [x] Modernize the message boxes with Task Dialog.
 - 1.1 Servicing Update Series (2022 Q2)
   - [x] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
+  - [x] Modernize the i18n implementation and migrate language files from 
+        `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
   - [ ] Add i18n support for Self Extracting Executables.
   - [ ] Provide NanaZip Installer for simplify the deployment.
-  - [ ] Modernize the i18n implementation and migrate language files from 
-        `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
   - [ ] Add the UI stack based on XAML Islands which is used in NanaZip 2.x 
         Series.
 - 2.x Series (2023 Q3)
