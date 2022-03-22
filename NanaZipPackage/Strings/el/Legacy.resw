@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Greek</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Ελληνικά</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Άκυρο</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Ναι</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>Ό&amp;χι</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Κλείσιμο</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Βοήθεια</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Συνέχεια</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Ναι σε &amp;όλα</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Όχι σε ό&amp;λα</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>&amp;Παύση</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Επανεκκίνηση</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>Στο &amp;παρασκήνιο</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>Στο &amp;προσκήνιο</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Παύση</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Παύθηκε</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Είστε σίγουροι ότι θέλετε να ακυρώσετε;</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Αρχείο</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Επεξεργασία</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>Π&amp;ροβολή</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>Αγα&amp;πημένα</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>Εργα&amp;λεία</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Βοήθεια</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>Άν&amp;οιγμα</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Άνοιγμα στο &amp;ίδιο παράθυρο</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Άνοιγμα σε &amp;νέο παράθυρο</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>Π&amp;ροβολή</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>Επε&amp;ξεργασία</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Με&amp;τονομασία</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>Αντι&amp;γραφή...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>Μετα&amp;κίνηση...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>Διαγρα&amp;φή</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Τεμαχισμός αρχείου...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>&amp;Συνένωση αρχείων...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Ιδιότητες</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Σχόλιο</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Υπολογισμός αθροίσματος ελέγχου</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Δημιουργία φακέλου</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Δημιουργία αρχείου</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>Έ&amp;ξοδος</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Σύνδεσμος</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Alternate Streams</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Ε&amp;πιλογή όλων</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Αποεπιλογή όλων</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Αντιστροφή επιλογής</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Επιλογή...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Αποεπιλογή...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Επιλογή σύμφωνα με τον τύπο αρχείου</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Αποεπιλογή σύμφωνα με τον τύπο αρχείου</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Μεγάλα εικονί&amp;δια</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Μικρά εικονίδια</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Λίστα</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>Λε&amp;πτομέρειες</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Χωρίς ταξινόμηση</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Επίπεδη προβολή</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>2 πάνελ</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Γραμμές εργαλείων</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Άνοιγμα κεντρικού φακέλου</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Μετάβαση ένα επίπεδο πάνω</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>&amp;Ιστορικό φακέλων...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>Α&amp;νανέωση</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Αυτόματη ανανέωση</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Συμπίεσης</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Βασική</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Μεγάλα εικονίδια</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Εμφάνιση κειμένου</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Προσθήκη καταλόγου στα Αγαπημένα ως</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Σελιδοδείκτης</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Ρυθμίσεις...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Ελεγχος επιδόσεων</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Περιεχόμενα...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>Π&amp;ερί του NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Θέση</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Όνομα</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Τύπος</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Φάκελος</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Μέγεθος</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Συμπιεσμένο μέγεθος</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Ιδιότητες</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Δημιουργήθηκε</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Προσπελάστηκε</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Τροποποιήθηκε</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Συμπαγές</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Σχόλιο</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Κωδικοποιημένο</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Τεμαχισμός πριν</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Τεμαχισμός μετά</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Λεξικό</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Τύπος</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Αντί</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Μέθοδος</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Λειτουργικό</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Σύστημα αρχείων</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Χρήστης</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Ομάδα</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Μπλοκ</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Σχόλιο</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Θέση</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Προκαθορισμένη διαδρομή</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Φάκελοι</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Αρχεία</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Έκδοση</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Τόμος</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Πολυτόμος</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Σύνδεσμοι</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Μπλοκ</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Τόμοι</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Φυσικό μέγεθος</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Μέγεθος headers</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Άθροισμα ελέγχου</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Χαρακτηριστικά</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Εικονική διεύθυνση</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Σύντομο όνομα</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Εφαρμογή δημιουργίας</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Μέγεθος τομέα</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Κατάσταση λειτουργίας</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Σύνδεσμος</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Σφάλμα</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Συνολικό μέγεθος</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Ελεύθερος χώρος</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Μέγεθος συμπλέγματος</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Ετικέτα</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Τοπικό όνομα</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Παροχέας</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT Security</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Alternate Stream</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Is Tree</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Τύπος λάθους</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Λάθη</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Λάθη</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Προειδοποιήσεις</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Προειδοποίηση</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Streams</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Alternate Streams</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Alternate Streams Size</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Εικονικό μέγεθος</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Αποσυμπιεσμένο μέγεθος</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Συνολικό φυσικό μέγεθος</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Ευρετήριο τόμου</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>SubType</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Σύντομο σχόλιο</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Κωδικοσελίδα</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Tail Size</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Embedded Stub Size</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Σύνδεσμος</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Σταθερός σύνδεσμος</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Ανάγνωση-Μόνο</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Ρυθμίσεις</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Γλώσσα</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Γλώσσα:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Πρόγραμμα επεξεργασίας</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Πρόγραμμα επεξεργασίας:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Diff:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Σύστημα</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Συσχέτιση του NanaZip με τα αρχεία:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Ολοι οι χρήστες</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Ενσωμάτωση του NanaZip στο λειτουργικό</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Με ομαδοποίηση των επιλογών</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Στοιχεία του αναδυόμενου μενού:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Εικονίδια στο αναδυόμενο μενού</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Φάκελος&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Αρχείο Συμπίεσης&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Άνοιγμα</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Αποσυμπίεση αρχείων...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Προσθήκη σε αρχείο συμπίεσης...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Έλεγχος αρχείου συμπίεσης</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Αποσυμπίεση εδώ</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Αποσυμπίεση στο φάκελο {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Προσθήκη στο {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Συμπίεση και αποστολή με e-mail...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Συμπίεση στο {0} και αποστολή με e-mail</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Φάκελοι</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Φάκελος εργασίας</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Προσωρινός φάκελος συστήματος</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Τρέχων φάκελος</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Καθορισμένος:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Χρήση μόνο για αφαιρούμενες μονάδες δίσκου</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Καθορίστε μια τοποθεσία για τα προσωρινά αρχεία συμπίεσης.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Επιλογές</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Εμφάνιση αντικειμένου ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Εμφάνιση των κανονικών εικονιδίων των αρχείων</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Εμφάνιση μενού συστήματος</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Επιλογή ολόκληρης διαδρομής</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Εμφάνιση γραμμών πλέγματος</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Άνοιγμα αντικειμένου με μονό κλικ</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Εναλλακτική κατάσταση επιλογής</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Χρήση μεγάλων &amp;σελίδων μνήμης</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Πληροφορίες για το NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>Το NanaZip είναι ελεύθερο λογισμικό. Ωστόσο μπορείτε να υποστηρίξετε την περαιτέρω ανάπτυξη του με την εγγραφή σας.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Το σύστημα δεν μπορεί να διαθέσει την απαιτούμενη ποσότητα μνήμης.</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Δεν υπάρχουν σφάλματα</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} επιλεγμένα στοιχεία</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Αδύνατη η δημιουργία του φακέλου '{0}'</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Οι λειτουργίες ενημέρωσης δεν είναι διαθέσιμες για αυτόν τον τύπο συμπιεσμένου αρχείου.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Δεν μπορεί να ανοιχθεί το αρχείο '{0}' σαν αρχείο συμπίεσης</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Δεν μπορεί να ανοιχθεί το κρυπτογραφημένο αρχείο '{0}'. Λάθος κωδικός;</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Μη υποστηριζόμενο αρχείο συμπίεσης.</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Το αρχείο {0} ήδη υπάρχει.</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Το αρχείο '{0}' τροποποιήθηκε.\nΘέλετε να ενημερώσετε το αρχείο συμπίεσης;</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Αδυνατή η ενημέρωση του αρχείου\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Δεν είναι δυνατή η εκκίνηση του προγράμματος επεξεργασίας.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Το αρχείο μοιάζει με ιό (το όνομα του περιέχει μεγάλα κενά).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Η λειτουργία δεν μπορεί να κληθεί από ένα φάκελο που έχει μεγάλη διαδρομή.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Πρέπει να επιλέξετε ένα αρχείο.</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Πρέπει να επιλέξετε ένα ή περισσότερα αρχεία.</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Πάρα πολλά στοιχεία</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Αδυναμία ανοίγματος του αρχείου ως {0} συμπιεσμένο</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Το αρχείο είναι ανοιχτό ως {0} συμπιεσμένο</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Το συμπιεσμένο αρχείο είναι ανοιχτό με offset</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Αποσυμπίεση</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Συμπίεση</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Έλεγχος</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Άνοιγμα...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Σάρωση...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Διαγραφή...</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Προσθήκη..</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Ενημέρωση..</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Ανάλυση..</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Αντιγραφή..</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Επανασυμπίεση..</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Παράλειψη..</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Διαγραφή..</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Δημιουργία κεφαλίδας..</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Αποσυμπίεση</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Αποσυμπίεση στο φάκελο:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Καθορίστε τον φάκελο αποσυμπίεσης.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Επιλογές διαδρομών φακέλων</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Πλήρεις διαδρομές φακέλων</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Χωρίς διαδρομές φακέλων</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Απόλυτες διαδρομές φακέλων</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Σχετικές διαδρομές φακέλων</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Επιλογές αντικατάστασης αρχείων</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Αντικατάσταση με ερώτηση</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Αντικατάσταση χωρίς ερώτηση</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Παράβλεψη των υπαρχόντων αρχείων</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Αυτόματη μετονομασία</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Αυτόματη μετονομασία των υπαρχόντων αρχείων</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Απαλοιφή ριζικού καταλόγου</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Επαναφορά ασφάλειας αρχείου</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Επιβεβαίωση αντικατάστασης του αρχείου</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Ο φάκελος προορισμού περιέχει ήδη ένα αρχείο με το ίδιο όνομα.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Θέλετε να αντικαταστήσετε το υπάρχον αρχείο</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>με αυτό;</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bytes</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Αυτόματη &amp;μετονομασία</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Μη υποστηριζόμενη μέθοδος συμπίεσης για το '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Λάθος δεδομένων στο {0}. Το αρχείο είναι φθαρμένο.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>Ο έλεγχος CRC απέτυχε στο '{0}'. Το αρχείο είναι φθαρμένο.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Λάθος δεδομένων στο κρυπτογραφημένο αρχείο '{0}'. Λάθος κωδικός;</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Ο έλεγχος CRC απέτυχε στο κρυπτογραφημένο αρχείο '{0}'. Λάθος κωδικός;</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Λάθος κωδικός;</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Μη υποστηριζόμενη μέθοδος συμπίεσης</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Λάθος δεδομένων</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>Ο έλεγχος CRC απέτυχε</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Μη διαθέσιμα δεδομένα</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Απρόβλεπτο τελείωμα δεδομένων</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Υπάρχουν μερικα δεδομένα στο τέλος των χρήσιμων δεδομένων</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Δεν είναι συμπιεσμένο αρχείο</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Λάθος επικεφαλίδων</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Λάθος κωδικός</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Μη διαθέσιμη αρχή του συμπιεσμένου αρχείου</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Ανεπιβεβαίωτη αρχή του συμπιεσμένου αρχείου</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Μη υποστηριζόμενη λειτουργία</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Εισαγωγή κωδικού πρόσβασης</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Κωδικός πρόσβασης:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Επανεισάγετε τον κωδικό πρόσβασης:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Εμφάνιση κωδικού</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Οι κωδικοί δεν ταιριάζουν.</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Χρησιμοποιήστε μόνο Αγγλικά γράμματα, αριθμούς και ειδικούς χαρακτήρες (!, #, ...) για κωδικό.</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Ο κωδικός είναι πολύ μεγάλος.</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Κωδικός πρόσβασης</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Διανύθηκε:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Απομένει:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Μέγεθος:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Ταχύτητα:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Επεξεργάσθηκαν:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Αναλογία συμπίεσης</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Σφάλματα:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Αρχεία συμπίεσης:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Προσθήκη σε συμπιεσμένο αρχείο</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Όνομα αρχείου συμπίεσης:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Τρόπος ενημέρωσης:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Συμπίεση στη μορ&amp;φή:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Επίπεδο συμπίεσης:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Μέθοδος συμπίεσης:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Μέγεθος &amp;λεξικού:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Μέγεθος &amp;λέξης:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Μέγεθος συμπαγούς μπλοκ:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Αριθμός νημάτων CPU</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Παράμετροι:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Επιλογές συμπίεσης</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Με αυτόματη αποσυμπίεση (SF&amp;X)</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Συμπίεση κοινών αρχείων</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Κρυπτογράφηση</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Μέθοδος κρυπτογράφησης</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Κρυπτογράφηση των &amp;ονομάτων</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Χρήση μνήμης για συμπίεση:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Χρήση μνήμης για αποσυμπίεση:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Διαγραφή αρχείων μετά τη συμπίεση</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Αποθήκευση συμβολικών συνδέσμων</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Αποθήκευση σταθερών συνδέσμων</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Αποθήκευση ενναλλακτικών ροών δεδομένων</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Αποθήκευση ασφάλειας αρχείου</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Αποθήκευση</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Πολύ γρήγορη</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Γρήγορη</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Κανονική</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Μέγιστη</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Υπερσυμπίεση</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Προσθήκη και αντικατάσταση αρχείων</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Προσθήκη και ενημέρωση αρχείων</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Ενημέρωση των υπαρχόντων αρχείων</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Συγχρονισμός αρχείων</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Αναζήτηση</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Όλα τα αρχεία</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Μη-συμπαγές</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Συμπαγές</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Αντιγραφή</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Μετακίνηση</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Αντιγραφή στο:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Μετακίνηση στο:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Αντιγραφή...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Μετακίνηση...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Μετονομασία...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Επιλέξτε φάκελο προορισμού.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Η λειτουργία δεν υποστηρίζεται.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Παρουσιάστηκε σφάλμα κατά τη μετονομασία.</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Επιβεβαίωση αντιγραφής αρχείων</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Είστε βέβαιος ότι θέλετε να αντιγράψετε τα αρχεία στο αρχείο συμπίεσης;</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Επιβεβαίωση διαγραφής του αρχείου</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Επιβεβαίωση διαγραφής του φακέλου</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Επιβεβαίωση διαγραφής πολλών αρχείων</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Είστε βέβαιοι ότι θέλετε να διαγράψετε το '{0}' ;</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Είστε βέβαιοι ότι θέλετε να διαγράψετε το φάκελο '{0}' και όλα τα περιεχόμενα του;</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτά τα {0} στοιχεία;</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Διαγραφή...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Παρουσιάστηκε σφάλμα κατά τη διαγραφή.</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Το σύστημα δεν μπορεί να μετακινήσει ένα αρχείο με μεγάλη διαδρομή στον Κάδο Ανακύκλωσης.</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Δημιουργία φακέλου</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Δημιουργία αρχείου</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Όνομα φακέλου:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Όνομα αρχείου:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Νέος φάκελος</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Νέο αρχείο</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Σφάλμα κατά την δημιουργία φακέλου.</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Σφάλμα κατά την δημιουργία αρχείου.</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Σχόλιο</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Σχόλιο:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Επιλογή</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Αποεπιλογή</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Με όνομα:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Ιδιότητες</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Ιστορικό φακέλων</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Διαγνωστικά μηνύματα</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Μήνυμα</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Υπολογιστής</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Δικτύο</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Έγγραφα</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Σύστημα</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Προσθήκη</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Αποσυμπίεση</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Έλεγχος</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Αντιγραφή</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Μετακίνηση</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Διαγραφή</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Πληροφορίες</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Τεμαχισμός αρχείου</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Τεμαχισμός σε:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Τεμαχισμός σε τόμους:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Τεμαχισμός...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Επιβεβαίωση τεμαχισμού</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Είστε βέβαιος ότι θέλετε να τεμαχίσετε το αρχείο σε {0} τόμους;</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Το μέγεθος του τόμου πρέπει να είναι μικρότερο από αυτό του αρχικού αρχείου.</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Λάθος μέγεθος τόμου</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Καθορισμένο μέγεθος τόμου: {0} bytes.\nΕίστε σίγουρος ότι θέλετε να χωρίσετε το αρχείο σε τέτοιους τόμους;</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Συνένωση αρχείων</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Συνένωση σε:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Συνένωση...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Επιλέξτε μόνο το πρώτο αρχείο</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Το αρχείο δεν μπορεί να ανιχνευθεί ως μέρος τεμαχισμένου αρχείου.</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Δεν μπορούν να βρεθούν πάνω από ένα μέρη τεμαχισμένου αρχείου.</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Υπολογισμός αθροίσματος ελέγχου...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Πληροφορίες αθροίσματος ελέγχου</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Άθροισμα ελέγχου CRC για δεδομένα:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Άθροισμα ελέγχου CRC για δεδομένα και ονόματα:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Αξιολόγηση επιδόσεων</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Χρήση μνήμης:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Συμπίεση</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Αποσυμπίεση</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Εκτίμηση</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Συνολ. εκτίμηση</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Τρέχων πέρασμα</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Αποτέλεσμα</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Χρήση CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Ταξ/μιση/Χρήση</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Περάσματα:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Σύνδεσμος</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Σύνδεσμος</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Σύνδεσμος από:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Σύνδεσμος έως:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Τύπος συνδέσμου</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Σταθερός σύνδεσμος</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Συμβολικός σύνδεσμος αρχείου</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Συμβολικός σύνδεσμος καταλόγου</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Συνένωση καταλόγου</value>
+  </data>
+</root>

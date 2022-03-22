@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Sí</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;No</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Cerrar</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Continuar</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Sí a &amp;todo</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>No a t&amp;odo</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Volver a empezar</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>Se&amp;gundo plano</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>P&amp;rimer plano</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Pausa</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Pausado</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>¿Estás seguro de que deseas cancelar?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Archivo</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Editar</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Ver</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Favoritos</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Herramientas</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>Ay&amp;uda</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Abrir</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Abrir &amp;dentro</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Abrir &amp;fuera</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Ver</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Editar</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Re&amp;nombrar</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Copiar a...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Mover a...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Borrar</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Di&amp;vidir archivo...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>C&amp;ombinar archivos...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Propiedades</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Comen&amp;tario</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Suma de verificación</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Crear carpeta</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Crear archivo</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Salir</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Vincular</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>Flujos &amp;alternativos</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Seleccionar &amp;todo</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Deseleccionar todo</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Invertir selección</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Seleccionar...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Deseleccionar...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Seleccionar por tipo</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Deseleccionar por tipo</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Iconos g&amp;randes</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Iconos pequeños</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Lista</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Detalles</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Desordenado</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Vista plana (flat view)</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 paneles</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Barras de herramientas</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Abrir directorio raíz</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Subir un directorio</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Historia de carpetas...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Actualizar</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Actualizar automáticamente</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Barra de herramientas Archivo</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Barras de herramientas estándar</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Botones grandes</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Mostrar texto en los botones</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Añadir carpeta a favoritos como</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Agregar a favoritos</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Opciones...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Pruebas (benchmark)</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Contenido...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Acerca de NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Tipo de archivo</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Directorio</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Tamaño comprimido</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atributos</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Creado</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Acceso</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Modificado</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Compacto</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Comentado</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Encriptado</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>expandido antes</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>expandido después</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Diccionario</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Método</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>SO de origen</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Sistema de archivos</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Grupo</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Bloque</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Comentario</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Posición</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Directorios</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Ficheros</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Versión</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Volumen</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Multivolumen</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Desplazamiento</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Vínculos</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Bloques</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Volúmenes</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Tamaño físico</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Tamaño de las cabeceras</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Verificación de suma</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Características</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Dirección virtual</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Nombre corto</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Aplicación de creación</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Tamaño de sector</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Modo</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Enlace</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Espacio total</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Espacio libre</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Tamaño de clúster</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Etiqueta</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Nombre local</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Proveedor</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Seguridad NT</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Flujo alternativo</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Auxiliar</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Borrado</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Es el árbol</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Tipo de error</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Errores</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Errores</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Advertencias</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Advertencia</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Flujos</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Flujos alternativos</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Tamaño de flujos alternativos</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Tamaño virtual</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Tamaño descomprimido</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Tamaño físico total</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Índice de volumen</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Subtipo</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Comentario breve</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Página de códigos</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Tamaño final</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Tamaño de esbozo incrustado</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Vínculo</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Vínculo duro</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>Nodo inteligente</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Solo lectura</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Lengua</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Lengua:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Editor:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Diff:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Asociar NanaZip con:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Todos los usuarios</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integrar NanaZip en el menú contextual de Windows</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Menú contextual en cascada</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Elementos en el menú contextual:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Iconos en el menú contextual</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Carpeta&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Archivo&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Abrir comprimido</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Extraer ficheros...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Añadir al archivo...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Comprobar archivo</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Extraer aquí</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Extraer en {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Añadir a {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Comprimir y enviar por correo...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Comprimir a {0} y enviar por correo</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Directorios</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>Directorio de &amp;trabajo</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>Directorio temporal del &amp;sistema</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>Directorio &amp;actual</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Especificar directorio:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Usar solo para dispositivos extraíbles</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Especificar un directorio para archivos temporales.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Propiedades</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Mostrar el elemento ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Mostrar iconos propios</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Mostrar menú del sistema</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Seleccionar fila(s) entera(s)</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Mostrar &amp;cuadrícula</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Clicar una vez para abrir elemento</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Modo de selección &amp;alternativo</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Usar páginas &amp;grandes de memoria</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Acerca de NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip es un programa excelente; además, es libre y gratuito. Tú puedes apoyar el desarrollo de NanaZip registrándote para contribuir a mejorar el programa.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>El sistema no ha podido asignar la cantidad necesaria de memoria</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>No hay errores</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} elemento(s) seleccionado(s)</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>No se puede crear el directorio '{0}'</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Este tipo de archivo no permite actualización.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>No se puede abrir '{0}' como un archivo comprimido</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>No se puede abrir el archivo encriptado '{0}'. Verifique la contraseña.</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Tipo de archivo no soportado</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>El fichero {0} ya existe</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>El fichero '{0}' ha sido modificado.\n¿Quieres actualizarlo en el archivo?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>No puede actualizarse el fichero\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>No puede ejecutarse el editor.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>El fichero parece un virus (el nombre del fichero contiene espacios largos).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>No puede realizarse la operación desde una carpeta que tenga una ruta larga.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Debes seleccionar un fichero</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Debes seleccionar uno o más ficheros</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Demasiados elementos</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>No se puede abrir el archivo como un archivo {0}</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>El archivo se abrió como archivo {0}</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>El archivo está abierto con la posición</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>extrayendo</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>comprimiendo</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>probando</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>abriendo...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Buscando...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Removiendo</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Agregando</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Actualizando</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Analizando</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Replicando</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Recomprimiendo</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Salteando</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Borrando</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Creando cabecera</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Extraer</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>E&amp;xtraer a:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Selecciona destino para los archivos extraídos.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Modo de directorio</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Directorio completo</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Sin directorio</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Rutas absolutas</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Rutas relativas</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Sobreescribir</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Con confirmación</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Sin confirmación</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Conservar archivos existentes</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Renombrar automáticamente</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Autorrenombrar archivos existentes</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Eliminar duplicado de carpeta raíz</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Restaurar seguridad del archivo</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Confirmar sustitución de archivos</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>El directorio ya contiene un archivo con el mismo nombre.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>¿Deseas sustituir el archivo existente</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>por este otro?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bytes</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Renombrar a&amp;utomáticamente</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Método de compresión no válido para '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Error de datos en '{0}'. El archivo está corrupto.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC ha fallado en '{0}'. El archivo está corrupto.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Error de datos en el archivo encriptado '{0}'. Verifica la contraseña.</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Fallo de CRC en el archivo encriptado '{0}'. Verifica la contraseña.</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>¿Contraseña incorrecta?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Método de compresión no soportado</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Error de datos</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC fallado</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Unavailable data</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Final de datos inesperado</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Hay datos después del final de los datos precargados</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>No es un archivo</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Error en los encabezados</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Contraseña incorrecta</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Inicio de archivo no disponible</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Inicio de archivo sin confirmar</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Característica no soportada</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Introduce la contraseña</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>E&amp;scribe la contraseña:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Escribe nue&amp;vamente la contraseña:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Mostrar la contraseña</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Las contraseñas son diferentes. Por favor, vuelve a escribirlas.</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Usa en la contraseña solamente letras del alfabeto inglés, números y caracteres especiales (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>La contraseña es demasiado larga.</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Tiempo transcurrido:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Tiempo pendiente:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Tamaño:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Velocidad:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Procesado:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Razón de compresión:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Errores:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Archivos:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Añadir al archivo</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Archivo:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>M&amp;odo de actualización:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Formato de archivo:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Nive&amp;l de compresión:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Tipo de compresión:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Tamaño de &amp;diccionario:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Tama&amp;ño de la palabra:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Tamaño de bloque compacto:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Número de hilos de la CPU:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parámetros:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Crear archivo SF&amp;X (autoextraíble)</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Comprimir archivos abiertos para escritura</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Encriptación</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Método de &amp;encriptación:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Encriptar &amp;nombres de fichero</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Memoria usada para comprimir:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Memoria usada para descomprimir:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Borrar archivos después de la compresión</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Almacenar vínculos simbólicos</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Almacenar vínculos duros</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Almacenar flujos de datos alternativos</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Almacenar seguridad del archivo</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Sin compresión</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>La más rápida</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Rápida</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Máxima</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Añadir y sustituir archivos</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Actualizar y añadir archivos</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Solo actualizar archivos</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Sincronizar archivos</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Explorar</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Todos los archivos</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>No compacto</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Sin límite</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Mover</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Copiar a:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Mover a:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>copiado...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>movido...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Renombrando...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Selecciona la carpeta de destino</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Operación no permitida.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Error renombrando fichero o carpeta</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Confirmar copia de ficheros</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>¿Estás seguro de que deseas copiar los ficheros al archivo</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Confirmar borrado de archivo</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Confirmar borrado de carpeta</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Confirmar borrado de numerosos ficheros</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>¿Estás seguro de querer borrar '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>¿Estás seguro de querer borrar la carpeta '{0}' y todo su contenido?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>¿Estás seguro de querer borrar estos {0} elementos?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Borrando...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Error borrando fichero o carpeta</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>El sistema no puede mover un fichero con ruta larga a la Papelera de Reciclaje</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Crear carpeta</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Crear archivo</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Nombre de carpeta:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Nombre de archivo:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Carpeta nueva</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Archivo nuevo</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Error creando carpeta</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Error creando archivo</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Comentario</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Comentario:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Seleccionar</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Deseleccionar</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Máscara:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Propiedades</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Historial de carpetas</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Mensajes de diagnóstico</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Mi PC</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Entorno de red</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Documentos</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Extraer</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Probar</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Mover</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Dividir archivo</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>Di&amp;vidir a:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Dividir en fra&amp;gmentos (bytes):</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Dividiendo...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Confirmar división</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>¿Estás seguro de que deseas dividir el archivo en {0} partes?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>El tamaño de los fragmentos debe ser menor que el del archivo original</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Tamaño de fragmento incorrecto</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Tamaño de fragmento especificado: {0} bytes.\n¿Estás seguro de que deseas dividir el archivo en fragmentos de ese tamaño?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Combinar archivos</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Combinar a:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Combinando...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Selecciona solamente el primer archivo</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>No se ha podido detectar el fichero como parte de un fichero por volúmenes</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>No se ha podido encontrar más que un fragmento del fichero por volúmenes</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Calculando suma de verificación...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Suma de verificación (CRC)</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC de los datos:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC de los datos y nombres:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Pruebas (benchmark)</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Uso de memoria:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Compresión</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Descompresión</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Tasa</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Tasa total</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Resultante</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Uso de CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Resultante/uso</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Pasos:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Vincular</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Vincular</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Vincular desde:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Vincular hacia:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Tipo de vínculo</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Vínculo duro</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Vínculo simbólico de archivo</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Vínculo simbólico de directorio</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Unión de directorio</value>
+  </data>
+</root>

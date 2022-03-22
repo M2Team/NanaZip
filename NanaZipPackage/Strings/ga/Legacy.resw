@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Irish</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Gaeilge</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Tá go maith</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Cealaigh</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Tá</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Níl</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Dún</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Cabhair</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Lean ar aghaidh</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Tá do gach ceann</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Níl go gach ceann</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Stad</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Atosaigh</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Cúlra</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Tulra</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Cuir ar sos</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Ar sos</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>An bhfuil tú cinnte gur mian leat é a chealú?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Comhad</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Leagan</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>Am&amp;harc</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>Ceanáin</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Uirlisí</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Cabhair</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Oscail</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Oscail &amp;istigh</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Oscail &amp;lasamuigh</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Amharc</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Eagar</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Athainmnigh</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Macasamhlaigh go...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Bog go...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>S&amp;crios</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Scar an comhad...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Cumascaigh na comhaid...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>Airíonna</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Nóta tráchta</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Ríomh an tsuim sheiceála</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Cruthaigh fillteán</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Cruthaigh comhad</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Scoir</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Roghnaigh &amp;uile</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Díroghnaigh uile</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Aisiompaigh an roghnúchán</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Roghnaigh...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Díroghnaigh...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Roghnaigh de réir cineál</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Díroghnaigh de réir cineál</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Deilbhíní móra</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Deilbhíní beaga</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Liosta</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Sonraí</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Neamhaicmithe</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Gach rud in aon chiseal</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 fhuinneog</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Barraí na n-uirlisí</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Oscail an fréamhfhillteán</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Suas fillteán amháin</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Oireas na bhfillteán...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>Athnuaigh</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Barra cartlanna</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Barra na n-uirlisí caighdeánacha</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Cnaipí móra</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Taispeáin an téacs ar na cnaipí</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Cuir an fillteán leis na Ceanáin</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Leabharmharc</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Roghanna...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>Tástáil fheidhmíochta</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Inneachair...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>Maidir le NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Conair</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Ainm</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Breiseán</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Fillteán</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Méid</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Comhbhrúite</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Tréithe</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Cruthaithe an</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Rochtain faighte ar an</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Mionathraithe ar an</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Fothúil</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Trácht</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Criptithe</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Roinn roimh</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Roinn i ndiaidh</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Foclóir</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Cineál</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Frith</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Modh</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Óstach an CO</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Córas na gcomhad</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Úsáideoir</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Aicme</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Ceap</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Nóta tráchta</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Suíomh</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Réimír na conaire</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Fillteáin</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Comhaid</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Leagan</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Imleabhar</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Il-imleabhair</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Fritháirigh</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Naisc</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Ceapa</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Imleabhair</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64 bheart</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Foirceann mór</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>LAP</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Méid aiceanta</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Méid na gceanntásc</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Suim seiceála</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Tréithe</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Seoladh fíorúil</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Ainm gearr</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Feidhmchlár a chruthaigh í</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Méid na hearnála</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Modh</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Nasc</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Botún</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Méid iomlán</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Slí atá saor</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Méid na braisle</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Lipéad</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Ainm logánta</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Soláthraí</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Roghanna</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Teanga</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Teanga:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Eagarthóir</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Eagarthóir:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Diff:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Córas</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Comhthiomsaigh NanaZip le:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Comhtháthaigh NanaZip sa roghchlár comhthéacs</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Roghchlár comhthéacs ag titim</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Nithe an roghchláir chomhthéacs:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Fillteán&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Comhad&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Oscail</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Asbhain na comhaid...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Cuir leis an gcartlann...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Tástáil an chartlann</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Asbhain anseo</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Bain go {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Cuir le {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Comhbhrúigh agus seol i ríomphost iad...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Comhbhrúigh go {0} agus seol i ríomhphost iad</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Fillteáin</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>Fillteán oibre</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>Fillteán sealadach an chórai&amp;s</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>An comhad reatha</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>Fillteán &amp;sonraithe:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Bain feidhm as do thiomántáin inaistrithe amháin</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Sonraigh suíomh i gcomhair comhaid chartlainne sealadacha.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Socruithe</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Taispeáin an ní ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Taispeáin fíordheilbhíní an chomhaid</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Taispeáin roghchlár an chórais</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Roghnaigh an tsraith ar fad</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Taispeáin línte na greille</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Brúigh uair amháin chun ní a oscailt</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Bain feidhm as modh roghnaithe malartach</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Bain feidhm as leathanaigh chuimhne mhóra</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Maidir le NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>Is saorearra é NanaZip. Is féidir tacaíocht a thabhairt dá fhorbairt amach anseo, áfach, trí chlárú.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Ní féidir leis an gcóras an méid cuimhne atá de dhíth a leathdháileadh dó</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Níl aon bhotún ann</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} ní/nithe roghnaithe</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Ní féidir an fillteán '{0}' a chruthú</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Ní féidir an chartlann seo a nuashonrú.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Ní féidir an comhad '{0}' a oscailt mar chartlann</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Ní féidir an chartlann chriptithe '{0}' a oscailt. An bhfuil an focal faire mícheart?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Ní thugtar tacaíocht don chineál comhad seo</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Tá an comhad {0} ann cheana</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Mionathraíodh an comhad '{0}'.\nAr mhaith leat é a nuashonrú sa chartlann?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Ní féidir an comhad a leanas a nuashonrú\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Ní féidir an t-eagarthóir a thosú.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>B'fhéidir gur aicíd é an comhad (tá bearnaí móra in ainm an chomhaid).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Ní féidir an oibríocht seo a chur i bhfeidhm ó fhillteán a bhfuil conair fhada aige.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Caithfear comhad amháin a roghnú</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Caithfear comhad amháin nó níos mó a roghnú</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>An iomarca nithe</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Asbhaint</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Ag comhbhrú</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Ag tástáil</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Ag oscailt...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Ag taiscéal...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Bain</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Bain go:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Roghnaigh fillteán do na comhaid asbhainte.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Conairí</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Conairí iomlána</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Níl conair ann</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Modh forscríofa</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Deimhnigh sular forscríobhtar</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Forscríobh gan iarraidh</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Déan neamhaird de na comhaid atá ann cheana</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Athainmnigh go huathoibríoch</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Athainmnigh na comhaid atá ann cheana</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Deimhnigh ionadú comhaid</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Tá comhad leis an ainm seo sa spriocfhillteán cheana féin.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Ar mhaith leat an comhad atá ann cheana a ionadú</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>leis an gceann seo?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bearta</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Athainmnigh go huathoibríoch</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Níl an bealach comhbhrúite bailí i gcomhair '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Botún sna sonraí sa chomhad '{0}'. Tá an comhad briste.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>Theip ar CRC sa chomhad '{0}'. Tá an comhad briste.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Sonra mícheart sa chomhad criptithe '{0}'. Focal faire mícheart?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Theip ar CRC sa chomhad chriptithe '{0}'. Focal faire mícheart?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Cuir isteach an focal faire</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Cuir an focal faire isteach:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Cuir an focal faire isteach arís:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Taispeáin an focal faire</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Ní hionann an dá fhocal faire</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Bain feidhm as litreacha gan síntí fada, uimhreacha agus carachtair shainiúla (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Tá an focal faire rófhada</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Focal faire</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Am caite:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Am fágtha:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Méid iomlán:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Luas:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Déanta:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Luas an chomhbhrúite:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Botúin:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Cartlanna:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Cuir leis an gcartlann</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Cartlann:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Modh nuashonraithe:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Formáid na cartlainne:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Méid comhbhrúite:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Modh comhbhrúite:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Méid an fhoclóra:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Méid na bhfocal:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Méid an chip fhothúla:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Líon na snáitheanna LAP:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Teorainneacha:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Roghanna</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Cruthaigh cartlann SF&amp;X</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Comhbhrúigh na comhaid a roinneadh</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Criptiú</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Modh criptiúcháin:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Criptigh ainmneacha na gcomhad</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Cuimhne don chomhbhrúigh:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Cuimhne don dhíchomhbhrúigh:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Taisc</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Is gasta</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Gasta</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Gnáth</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Uasmhéid</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Fíorghasta</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Cuir comhaid leis agus ionadaigh</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Nuashonraigh na comhaid agus cuir leo</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Athnuaigh comhaid atá ann cheana</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Comhionannaigh na comhaid</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Siortaigh</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Gach comhad</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Neamhfhothúil</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Fothúil</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Macasamhlaigh</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Bog</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Macasamhlaigh chuig:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Bog chuig:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Ag acasamhlú...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Ag bogadh...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Ag athainmniú...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Roghnaigh an spriocfhillteán.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Ní féidir sin a dhéanamh.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Tharla botún ag athainmniú an comhad nó an fillteán</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Deimhnigh macasamhlú an chomhaid</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>An bhfuil tú cinnte gur mian leat na comhaid a mhacasamhlú go dtí an chartlann?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Deimhnigh scriosadh an chomhaid</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Deimhnigh scriosadh an chomhaid</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Deimhnigh scriosadh iliomad comhad</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>An bhfuil tú cinnte gur mian leat '{0}' a scriosadh?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>An bhfuil tú cinnte gur mian leat an fillteán '{0}' agus gach rud ann a scriosadh?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>An bhfuil tú cinnte gur mian leat na {0} nithe seo a scriosadh?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Ag scriosadh...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Tharla botún ag scriosadh an comhad nó an fillteán</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Ní thig leis an gcóras comhad le conair fhada a bhogadh go dtí an bosca athchúrsála</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Cruthaigh comhad</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Cruthaigh comhad</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Ainm an chomhaid:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Ainm an chomhaid:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Comhad nua</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Comhad nua</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Tharla botún fad is a bhí an comhad á chruthú</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Tharla botún fad is a bhí an comhad á chruthú</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Trácht</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Trácht:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Roghnaigh</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Díroghnaigh</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Folaigh:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Airíonna</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Oireas na bhfillteán</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Teachtaireachtaí diagnóiseach</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Teachtaireacht</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Ríomhaire</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Líonra</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Cáipéisí</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Córas</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Cuir leis</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Asbhain</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Tástáil</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Macasamhlaigh</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Bog</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Scrios</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Faisnéis</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Roinn an comhad</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Roinn chuig:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Roinn in imleabhair, bearta:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Ag roinnt...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Deimhnigh an roinnt</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>An bhfuil tú cinnte go dteastaíonn uait an comhad a roinnt i {0} imleabhair?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Ní mór do mhéid an imleabhair a bheith níos lú ná méid an chomhaid bhunaidh</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Tá méid an cholúin mícheart</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Méid an cholúin sonraithe: {0} bearta.\nAn bhfuil tú cinnte gur mian leat an chartlann a roinnt in imleabhair?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Cumaisc comhaid</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Cumaisc go:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Ag cumasc...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Ná roghnaigh an chéad chomhad</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Ní féidir an comhad a bhraith mar chuid de chomhad scoilte</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Ní féidir níos mó ná aon chuid amháin den chomhad scoilte a aimsiú</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Ag ríomh na suime seiceála...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Faisnéis maidir leis an suim sheiceála</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Suim sheiceála do shonraí:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Suim sheiceála do shonraí agus d'ainmneacha</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Tástáil fheidhmíochta</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Gnáthaíocht na cuimhne:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Ag comhbhrú</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Ag díchomhbhrú</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Measúnú</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Measúnú iomlán</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Reatha</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Toradh</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Gnáthaíocht an LAP</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Measúnú / Gnáthaíocht</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Bealaí:</value>
+  </data>
+</root>

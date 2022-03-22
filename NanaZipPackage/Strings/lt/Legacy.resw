@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Lithuanian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Lietuvių</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Gerai</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Atšaukti</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Taip</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Ne</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Uždaryti</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Elektroninis žinynas</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Tęsti</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>T&amp;aip Visiems</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Ne v&amp;isiems</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Sustabdyti</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Iš naujo</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Fone</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Pirminis procesas</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Laikinai sustabdyti</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Laikinai sustabdyta</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Ar jūs esate tikri, kad norite atšaukti?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Failas</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>K&amp;eisti</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Rodyti</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>Mėgi&amp;amiausi</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>Įran&amp;kiai</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Elektroninis žinynas</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Atverti</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Atverti v&amp;iduje</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Atverti iš&amp;orėje</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Rodyti</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>K&amp;eisti</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Pervadi&amp;nti</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Kopijuoti į...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Perkelti į...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>Šalin&amp;ti</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Skaidyti failą...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Jungti &amp;failus...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>Savy&amp;bės</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Kome&amp;ntuoti</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Skaičiuoti kontrolinę sumą</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Sulyginti</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Sukurti aplanką</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Sukurti failą</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>Išei&amp;ti</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Nuoroda</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Alternatyvūs srautai</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Pažymėti &amp;viską</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Nužymėti viską</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Atv&amp;irkštinis žymėjimas</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Parinkti...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Atžymėti...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Pasirinkti pagal tipą</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Atžymėti pagal tipą</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Did&amp;elės piktogramos</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Mažos piktogramos</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Sąrašas</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Išsamiai</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Nerūšiuotos</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Nepaisyti aplankų</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 skydeliai</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Mygtukų juostos</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Atverti šakninį aplanką</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Lygiu aukščiau</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Aplankų istorija...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Atnaujinti</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Automatiškai atnaujinti</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Archyvo mygtukų juosta</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Standartinė mygtukų juosta</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Dideli mygtukai</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Rodyti užrašus ant mygtukų</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Pridėti aplanką prie mėgiamiausiųjų kaip</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Mėgiamiausias</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Nuostatos...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Spartos bandymas</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Turinys...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Apie NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Kelias</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Pavadinimas</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Plėtinys</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Aplankas</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Dydis</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Dydis archyve</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atributai</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Sukurta</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Naudota</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Pakeista</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Vientisas</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Komentaras</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Šifruotas</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Perskyra prieš</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Perskyra paskui</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Žodynas</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Tipas</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Būdas</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Kompiuterio OS</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Bylų sistema</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Naudotojas</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Grupė</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Blokas</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Komentaras</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Pozicija</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Kelio priešdėlis</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Aplankai</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Failai</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Versija</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Tomas</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Daugiatomis</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Poslinkis</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Nuorodos</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Blokai</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Tomai</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Mažėjantys baitai</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Procesorius</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Fizinis dysis</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Antraštės dydis</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Kontrolinė suma</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Charakteristikos</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Virtualus adresas</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Trumpas pavadinimas</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Kūrėjo programa</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Sektoriaus dydis</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Moda</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Simbolinė nuoroda</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Klaida</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Visas dydis</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Laisva vieta</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Blokinio dydis</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Žymė</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Vietinis pavadinimas</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Teikėjas</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT saugumas</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Alternatyvus srautas</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Pagalbinis</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Ištrintas</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Medis</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Klaidos tipas</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Klaidos</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Klaidos</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Perspėjimai</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Perspėjimas</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Srautai</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Alternatyvūs srautai</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Alternatyvių srautų dydis</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Virtualus dydis</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Išpakuoto dydis</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Visas fizinis dydis</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Tomo numeris</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Subtipas</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Trumpas komentaras</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Kodų lentelė</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Pabaigos dydis</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Įterpto bloko dydis</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Nuoroda</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Patvarioji nuoroda</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Tik skaityti</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Nustatymai</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Kalba</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Kalba:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Redaktorius</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>R&amp;edaktorius:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Sulyginimas:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Susieti NanaZip su:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Visi vartotojai</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integruoti NanaZip į kontekstinį meniu</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Pakopinis kontekstinis meniu</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Kontekstinio meniu įrašai:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Piktogramos kontekstiniame meniu</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Aplankas&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Archyvas&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Atverti archyvą</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Išskleisti failus...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Įtraukti į archyvą...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Patikrinti archyvą</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Išskleisti čia</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Išskleisti į {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Įtraukti į {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Suglaudinti ir išsiųsti el. paštu...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Suglaudinti į {0} ir išsiųsti el. paštu</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Aplankai</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Darbinis aplankas</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Sisteminis laikinas aplankas</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>D&amp;abartinis</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>Nurodyta&amp;s:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Naudoti tik išimamiems diskams</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Nurodyti vietą laikiniems archyviniams failams.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Nustatos</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Rodyti „..“ failų sąraše</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Rodyti tikras failų piktogramas</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Rodyti sisteminį meniu</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Žymėti visą eilutę</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Rodyti tinklelio linija&amp;s</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Atverti vienu spustelėjimu</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Kitoks žymėjimo būdas</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Naudoti didžiu&amp;lius atmintinės puslapius</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Apie NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip yra nemokama programa.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Sistema begali skirti reikalingo atminties kiekio</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Klaidų nerasta</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>Pasirinkta {0} objektų:</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Negalima sukurti aplanko „{0}“</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Šio archyvo negalima atnaujinti.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Negalima atverti „{0}“ failo kaip archyvo</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Negalima atverti šifruoto archyvo „{0}“. Neteisingas slaptažodis?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Nepalaikomas archyvo tipas</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Failas pavadinimu {0} yra</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Failas „{0}“ buvo pakeistas.\nAr norite jį atnaujinti archyve?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Negalima atnaujinti failo\n„{0}“</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Negalima paleisti redaktoriaus.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Šis failas panašus į virusą (failo pavadinime yra pasikartojančių tarpų)</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Šis veiksmas negali būti vykdomas iš aplanko, kuris turi ilgą kelią</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Jūs privalote pažymėti vieną failą</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Jūs privalote pažymėti bent vieną failą</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Per daug elementų</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Negalima atverti failo kaip {0} archyvo</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Failas yra atvertas kaip {0} archyvas</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Archyvas yra atvertas su ofsetu</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Išskleidžiama</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Glaudinama</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Tikrinama</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Atidaroma...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Skenuojama...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Šalinama</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Glaudinama</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Atnaujinama</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Analizuojama</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Dubliuojama</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Glaudinama iš naujo</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Praleidžiama</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Šalinama</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Kuriama antraštė</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Išskleisti</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Iš&amp;skleisti į:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Nurodyti vietą išskleidžiamiesiems failams.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Kelio moda:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Pilni keliai</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Jokių kelių</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Absoliutūs keliai</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Santykiniai keliai</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Perrašymo režimas</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Paklausti prieš perrašant</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Perrašyti neįspėjant</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Praleisti esančius failus</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Automatiškai pervadinti</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Automatiškai pervadinti esančius failus</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Pašalinti šakninio aplanko pasikartojimą</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Atstatyti failų saugumo nuostatas</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Failų pakeitimo patvirtinimas</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Paskirtame aplanke jau yra apdorojamas failas.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Ar norėtumėte pakeisti esančią failą</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>šiuo failu?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} baitų</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>A&amp;utomatinis pervadinimas</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Nepalaikomas suglaudinimo metodas failui „{0}“.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Duomenų klaida „{0}“. Failas pažeistas.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC klaida „{0}“. Failas pažeistas.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Duomenų klaida šifruotame faile „{0}“. Neteisingas slaptažodis?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC neatitikimas šifruotame faile „{0}“. Neteisingas slaptažodis?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Neteisingas slaptažodis?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Nepalaikomas suglaudinimo metodas</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Duomenų klaida</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC neatitikimas</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Nepasiekiami duomenys</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Netikėta duomenų pabaiga</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Yra papildomi duomenys po naudingų duomenų</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Tai nėra archyvas</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Klaida antraštėse</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Klaidingas slaptažodis</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Nepasiekiama archyvo pradžia</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Nepatvirtinta archyvo pradžia</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Nepalaikoma ypatybė</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Slaptažodžio įvedimas</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Įveskite slaptažodį:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Pakartokite slaptažodį:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Rodyti slaptažodį</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Slaptažodžiai nesutampa</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Slaptažodžiui naudokite tik lotyniškas raides, numerius bei specialiuosius simbolius (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Slaptažodis yra per ilgas</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Slaptažodis</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Praėjęs laikas:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Likęs laikas:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Dydis:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Sparta:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Apdorota:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Suglaudinimo laipsnis:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Klaidos:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Archyvai:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Įtraukti į archyvą</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Archyvas:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Atna&amp;ujinimo režimas:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Archyvo &amp;formatas:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Suglaudinimo &amp;lygis:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Glaudini&amp;mo būdas:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Žo&amp;dyno dydis:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Ž&amp;odžio dydis:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Vientiso bloko dydis:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU gijų skaičius:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parametrai:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Nuostatos</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Sukurti iš&amp;sipakuojantį archyvą</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Glaudinti atvertus įrašymui failus</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Šifravimas</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Šifravimo metodas:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Už&amp;šifruoti failų pavadinimus</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Atmintinės naudojimas suglaudinimui:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Atmintinės naudojimas išskleidimui:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Ištrinti failus suglaudinus</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Įsiminti simbolines nuorodas</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Įsiminti patvariasias nuorodas</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Įsiminti alternatyvius duomenų srautus</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Įsiminti failų saugumo nuostatas</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Mažiausias</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Greitesnis</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Greitas</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normalus</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Didžiausias</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Smarkiausias</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Įtraukti ir pakeisti failus</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Atnaujinti ir įtraukti failus</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Atnaujinti esančius failus</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Sinchronizuoti failus</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Naršyti</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Visus failus</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Ne vientisas</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Vientisas archyvas</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Kopijuoti</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Perkelti</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Kopijuoti į:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Perkelti į:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Kopijuojama...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Perkeliama...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Pervadinama...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Pasirinkite paskirties aplanką.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Šiam aplankui veiksmas nepalaikomas.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Klaida pervadinant failą ar aplanką</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Failų kopijavimo patvirtinimas</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Ar jūs esate įsitikinę, jog norite kopijuoti failus į archyvą?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Patvirtinkite failo šalinimą</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Patvirtinkite aplanko šalinimą</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Patvirtinkite kelių failų šalinimą</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Ar esate įsitikinę, jog norite pašalinti „{0}“?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Ar esate įsitikinę, jog norite pašalinti „{0}“ aplanką ir visą jo turinį?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Ar esate įsitikinę, jog norite pašalinti šiuos {0} elementus?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Šalinama...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Klaida trinant failą ar aplanką</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Sistema negali perkelti failo į šiukšlinę, kadangi per ilgas kelias</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Sukurti aplanką</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Sukurti failą</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Aplanko pavadinimas:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Failo pavadinimas:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Naujas aplankas</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Naujas failas</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Klaida kuriant aplanką</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Klaida kuriant failą</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Komentaras</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Komentaras:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Pažymėti</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Panaikinti žymėjimą</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Šablonas:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Nuostatos</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Aplankų istorija</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Diagnostiniai pranešimai</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Pranešimas</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Kompiuteris</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Tinklas</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Dokumentai</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Glaudinti</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Išskleisti</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Bandyti</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Kopijuoti</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Perkelti</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Šalinti</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Informacija</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Skaidyti failą</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Skaidyti į:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Skaidyti į dalis bai&amp;tais:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Skaidoma...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Skaidymo patvirtinimas</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Ar jūs esate įsitikinę, jog norite failą skaidyti į {0} dalis?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Dalies dydis privalo būti mažesnis už dalijamo failo dydį</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Neteisingas dalies dydis</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Nurodytas dalies dydis: {0} baitai.\nAr jūs esate įsitikinę, jog norite archyvą skaidyti į tokias dalis?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Sujungti failus</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Sujungti į:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Sujungiami failai...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Pažymėkite tik pirmą suskaidyto archyvo failą</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Nepavyko atpažinti suskaldyto failo</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Nepavyko surasti daugiau nei vienos suskaldymo failo dalies</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Skaičiuojama kontrolinė suma...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Kontrolinės sumos informacija</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Duomenų CRC kontrolinė suma:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Duomenų ir failų pavadinimų CRC kontrolinė suma:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Spartos bandymas</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Atmintinės naudojimas:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Suglaudinama</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Išskleidžiama</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Įvertis</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Galutinis įvertis</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Dabartinis</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Galutinis</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU naudojimas</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Įvertis/naudojimas</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Kartai:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Nuoroda</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Sujungti</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Šaltinis:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Tikslas:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Nuorodos tipas</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Patvarioji nuoroda</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Failo simbolinė nuoroda</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Aplanko simbolinė nuoroda</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Sujungimo taškas (Junction)</value>
+  </data>
+</root>

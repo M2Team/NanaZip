@@ -1,0 +1,1068 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Thai</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>ไทย</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>ตกลง</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;ใช่</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;ไม่</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;ออก</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>ช่วยเหลือ</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;ดำเนินการต่อ</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>ใช่ทั้งหมด</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>ไม่ทั้งหมด</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>หยุด</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>ฟื้นฟู</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;ทำงานเป็นพื้นหลัง</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;ทำงานเป็นพื้นหน้า</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;หยุดชั่วคราว</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>หยุดชั่วคราว</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>คุณแน่ใจหรือว่าจะยกเลิก</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;แฟ้ม</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;แก้ไข</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;มุมมอง</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;รายการโปรด</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;เครื่องมือ</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;ช่วยเหลือ</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;เปิด</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>เปิดในหน้าต่างเดิม</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>เปิดในหน้าต่างใหม่</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;มุมมอง</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;แก้ไข</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;เปลี่ยนชื่อ</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;คัดลอกไปที่...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;วางที่...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;ลบ</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;แยกไฟล์...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>รวมไฟล์...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;คุณสมบัติ</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>&amp;หมายเหตุ</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>คำนวณ checksum</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>สร้างโฟลเดอร์</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>สร้างไฟล์</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>ออก</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>เลือกทั้งหมด</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>ยกเลิกการเลือกทั้งหมด</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;สลับการเลือกให้เป็นตรงกันข้าม</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>เลือก...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>ยกเลิกการเลือก...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>เลือกด้วยแบบชนิด</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>ยกเลิกการเลือกด้วยแบบชนิด</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;ไอคอนขนาดใหญ่</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;ไอคอนขนาดเล็ก</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;แสดงเป็นรายการ</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;แสดงแบบละเอียด</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>ไม่เลือก</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>แสดงไฟล์และโฟลด์เดอร์ทั้งหมด</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;แสดง 2 แผง</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;แถบเครื่องมือ</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>เปิดรากโฟลเดอร์</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>เลื่อนขึ้นหนึ่งระดับ</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>ประวัติโฟลเดอร์...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;ฟื้นฟู</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>แถบเครื่องมือเอกสาร</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>แถบเครื่องมือธรรมดา</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>ปุ่มขนาดใหญ่</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>แสดงข้อความบนปุ่ม</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;เพิ่มโฟลเดอร์เข้ารายการโปรด</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>คั่นหน้าที่</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;ตัวเลือก...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;เกณฑ์เปรียบเทียบสมรรถนะ</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;เนื้อหาและดัชนี...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;เกี่ยวกับ NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>ที่ตั้ง</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>ชื่อ</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>ชนิด</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>โฟลเดอร์</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>ขนาด</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>ขนาดเมื่อถูกจัดเก็บ</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>ลักษณะประจำ</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>สร้างเมื่อ</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>เข้าถึงเมื่อ</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>ดัดแปรเมื่อ</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>ต่อเนื่อง</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>หมายเหตุ</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>การเข้ารหัสลับ</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>ก่อนแบ่ง</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>หลังแบ่ง</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>ดิคชันนารี</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>ซีอาร์ซี</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>แบบชนิด</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>ต่อต้าน</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>วิธีการ</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>OS ที่ใช้</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>ไฟล์ระบบ</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>ผู้ใช้</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>กลุ่ม</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>บล็อก</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>หมายเหตุ</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>ตำแหน่ง</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>คำนำหน้าที่ตั้ง</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>โฟลเดอร์</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>ไฟล์</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>เวอร์ชั่น</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>วอลลุ่ม</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>มัลติวอลลุ่ม</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>ออฟเซ็ท</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>ลิ้งค์</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>บล็อค</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Volumes</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-บิท</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>ขนาดทางกายภาพ</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>ขนาดเฮดเดอร์</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>คุณลักษณะ</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Virtual Address</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>ชื่อย่อ</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>ผู้สร้างโปรแกรม</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>ขนาด Sector</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>โหมด</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>ลิงค์</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>เกิดข้อผิดพลาด</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>ขนาดทั้งหมด</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>ช่องว่างที่เหลืออยู่</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>ขนาดกลุ่ม</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>ป้าย</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>ชื่อเฉพาะ</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>ผู้ให้บริการ</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>ตัวเลือก</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>ภาษา</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>ภาษา:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>บรรณาธิกรณ์</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;บรรณาธิกรณ์:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Diff:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>ระบบ</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>ทำให้ NanaZip ทำงานร่วมกับ:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>รวบรวมคำสั่ง NanaZip ไปที่แถบเมนูลัด</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>แยกเป็นแถบคำสั่ง NanaZip</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>วัตถุที่ปรากฏบนเมนูลัด:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;โฟลเดอร์&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;เอกสาร&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>เปิดเอกสาร</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>แยกไฟล์...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>เพิ่มเข้าเอกสาร...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>ทดสอบเอกสาร</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>แยกไฟล์ที่นี่</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>แยกไฟล์ไปที่ {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>เพิ่มเข้า {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>บีบอัดแล้วส่งอีเมลล์...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>บีบอัดเป็น {0} แล้วส่งอีเมลล์</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>โฟลเดอร์</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;โฟลเดอร์ที่ทำงานอยู่</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;โฟลเดอร์ต่างๆของระบบ</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;โฟลเดอร์ปัจจุบัน</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;ระบุ:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>ใช้สำหรับไดรฟ์แบบถอดได้เท่านั้น</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>ระบุที่ตั้งสำหรับไฟล์เอกสารชั่วคราว</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>กำหนด</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>แสดงวัตถุ ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>แสดงไอคอนไฟล์ที่แท้จริง</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>แสดงเมนูระบบ</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;เลือกเต็มแถว</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>แสดง &amp;เส้นกริด</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>คลิกครั้งเดียวเพื่อเปิดไฟล์</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;โหมดการเลือกอื่น</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>ใช้ &amp;เพจความจำขนาดใหญ่</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>เกี่ยวกับ NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip เป็นฟรีแวร์  อย่างไรก็ตาม  คุณสามารถสนับสนุนการพัฒนาของ NanaZip ได้โดยการลงทะเบียน  เมื่อคุณเป็นผู้ใช้ที่ลงทะเบียนแล้ว  คุณจะได้รับการสนับสนุนทางเทคนิคจากเรา</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>ระบบไม่สามารถใช้หน่วยความจำตามที่ระบุได้</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>ไม่มีข้อผิดพลาด</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} วัตถุที่เลือกไว้</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>ไม่สามารถสร้างโฟลเดอร์ '{0}'</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>ปรับปรุงการทำงานไม่สนับสนุนสำหรับเอกสาร</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>ไม่สามารถเปิดไฟล์ '{0}' เป็นเอกสารได้</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>ไม่สามารถเปิดไฟล์ที่เข้ารหัสได้ '{0}' พาสเวิร์ดผิดหรือไม่?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>ชนิดของไฟล์บีบอัดไม่รองรับ</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>ไฟล์ {0} มีอยู่แล้ว</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>ไฟล์ '{0}' ได้ถูกดัดแปรแล้ว\nคุณต้องการจะปรับปรุงเอกสารหรือไม่</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>ไม่สามารถปรับปรุงไฟล์\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>ไม่สามารถเปิดตัวแก้ไขได้</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>ไฟล์อาจเป็นไวรัส (ชื่อไฟล์มีช่องว่างยาว)</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>ไม่สามารถดำเเนินการได้จากโฟลเดอร์ที่มีที่ตั้งยาว</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>ท่านต้องเลือกไฟล์</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>ท่านต้องเลือกไฟล์หนึ่งไฟล์หรือมากว่า</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>มีวัตถุมากเกินไป</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>กำลังแยกไฟล์</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>กำลังบีบอัด</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>กำลังทดสอบ</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>กำลังเปิด...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>กำลังสแกน...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>แยกไฟล์</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>แยกไฟล์ไปที่:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>ระบุที่ตั้งสำหรับไฟล์ที่แยกออกมา</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>ที่ตั้ง</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>ชื่อที่ตั้งแบบเต็ม</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>ไม่มีชื่อที่ตั้ง</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>การบันทึกทับ</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>ถามก่อนมีการบันทึกทับ</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>บันทึกทับโดยไม่มีข้อความพร้อมรับ</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>ข้ามไฟล์ที่มีอยู่</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>เปลี่ยนชื่ออัตโนมัติ</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>เปลี่ยนชื่อไฟล์ที่มีอยู่อัตโนมัติ</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>ยืนยันการแทนที่ไฟล์</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>โฟลเดอร์ปลายทางมีไฟล์ที่ได้ประมวลผลแล้ว</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>คุณต้องการแทนที่ไฟล์ที่มีอยู่หรือไม่</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>ด้วย</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} ไบต์</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>เปลี่ยนชื่ออัตโนมัติ</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>ไม่รองรับวิธีการบีบอัดนี้สำหรับ '{0}'</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>ข้อมูลใน '{0}' ผิดพลาด  ไฟล์ชำรุด</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>ซีอาร์ซีใน '{0}' ไม่สามารถใช้การได้  ไฟล์ชำรุด</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>ข้อมูลในไฟล์บีบอัด '{0}' ผิดพลาด รหัสผ่านไม่ถูกต้อง?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>ใส่รหัสผ่าน</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>ใส่รหัสผ่าน:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>ใส่รหัสผ่านอีกครั้ง:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;แสดงรหัสผ่าน</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>รหัสผผ่านไม่ตรง</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>ตั้งรหัสผ่านด้วยอักษรภาษาอังกฤษ หรืออักขระ (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>รห้สผ่านยาวเกินไป</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>รหัสผ่าน</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>ใช้เวลาไปแล้ว:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>ต้องใช้เวลาอีก:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>ขนาด:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>ความเร็ว:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>ดำเนินการแล้ว:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>อัตราส่วนการบีบอัด:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>ความผิดพลาด:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>เอกสาร:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>เพิ่มเข้าเอกสาร</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;เอกสาร:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;การปรับปรุง:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>รูปแบบการบีบอัดที่ต้องการใช้:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>อัตราการบีบอัด:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;วิธีการบีบอัด:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;ขนาดดิคชันนารี:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;ขนาดอักษร:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>ขนาด Solid block:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>จำนวน CPU threads:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;พารามิเตอร์:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>ตัวเลือก</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>สร้างเอกสาร SFX</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>บีบอัดแชร์ไฟล์</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>การเข้ารหัส</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>วิธีการเข้ารหัส:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>สร้างรหัสผ่าน</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>หน่วยความจำที่ใช้ในการบีบอัด:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>หน่วยความจำที่ใช้ในการแตกออก:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>เก็บเฉยๆ</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>เร็วที่สุด</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>เร็ว</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>ปกติ</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>ดี</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>ดีที่สุด</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>เพิ่มและแทนที่ไฟล์</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>ปรับปรุงและเพิ่ม</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>ทำให้ไฟล์ที่มีอยู่ใช้การได้ดีขึ้น</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>ทำให้ไฟล์ประสานกัน</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>ค้นดู</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>ไฟล์ทั้งหมด</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Non-solid</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>คัดลอก</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>ย้าย</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>คัดลอกไปที่:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>ย้ายที่:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>กำลังคัดลอก...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>กำลังวาง...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>กำลังเปลี่ยนชื่อ...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>เลือกโฟลเดอร์ที่ตั้ง</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>การปฏิบัติการไม่สนับสนุน</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>เกิดข้อผิดพลาดในการเปลี่ยนชื่อไฟล์หรือโฟลเดอร์</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>ยืนยันการคัดลอกไฟล์</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>ท่านมั่นใจที่จะคัดลอกไฟล์ไปยังเอกสารหรือไม่</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>ยืนยันการลบไฟล์</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>ยืนยันการลบโฟลเดอร์</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>ยืนยันการลบไฟล์แบบควบซ้อน</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>คุณแน่ใจหรือว่าคุณต้องการจะลบไฟล์ '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>คุณแน่ใจหรือว่าคุณต้องการจะลบโฟลเดอร์ '{0}' และข้อมูลของมันทั้งหมด</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>คุณแน่ใจหรือว่าจะลบวัตถุ {0} เหล่านี้</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>กำลังลบ...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>เกิดข้อผิดพลาดในการลบไฟล์หรือโฟลเดอร์</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>ระบบไม่สามารถย้ายไฟล์ที่ชื่อที่ตั้งยาวไปยังถังขยะได้</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>สร้างโฟลเดอร์</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>สร้างไฟล์</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>ชื่อโฟลเดอร์:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>ชื่อไฟล์:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>โฟลเดอร์ใหม่</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>ไฟล์ใหม่</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>เกิดข้อผิดพลาดในการสร้างโฟลเดอร์</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>เหิดข้อผิดพลาดในการสร้างไฟล์</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>หมายเหตุ</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;หมายเหตุ:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>เลือก</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>ยกเลิกการเลือก</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>ตัวพราง:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>คุณสมบัติ</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>ประวัติโฟลเดอร์</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>ข้อความวินิจฉัย</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>ข้อความ</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>คอมพิวเตอร์</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>เครือข่าย</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>เอกสาร</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>ระบบ</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>เพิ่มเข้า</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>แยกไฟล์</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>ทดสอบ</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>คัดลอก</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>ย้าย</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>ลบ</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>เกี่ยวกับ</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>แยกไฟล์</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;แยกไปยัง:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>ขนาดไฟล์ที่ต้องการแบ่ง, ไบต์:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>กำลังแยก...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>ยืนยันการแยก</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>ท่านมั่นใจว่าต้องการแยกไฟล์เป็น {0} volumes?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>ขนาด Volume ต้องเล็กกว่าขนาดไฟล์ต้นฉบับ</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>ขนาด volume ไม่ถูกต้อง</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>ระบุขนาด volume: {0} ไบท์.\nท่านมั่นใจว่าต้องการแบ่งไฟล์เป็น volumes ดังกล่าว?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>รวมไฟล์</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;รวมไปยัง:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>กำลังรวม...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>เลือกเฉพาะส่วนแรกของไฟล์แยก</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>ไม่สามารถตรวจพบไฟล์ว่าเป็นส่วนหนึ่งของไฟล์แยก</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>ไม่สามารถหาไฟล์แยกได้มากหนึ่ง</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>กำลังคำนวณ Checksum...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>ข้อมูล Checksum</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC checksum ของข้อมูล:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC checksum ของข้อมูลและชื่อ:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>เกณฑ์เปรียบเทียบสมรรถนะ</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>หน่วยความจำที่ใช้:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>การบีบอัด</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>การยกเลิกบีบอัด</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>เกณฑ์ความสามารถ</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>เกณฑ์ความสามารถทั้งหมด</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>ปัจจุบัน</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>ผลการประเมิน</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>การใช้งาน CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>ประสิทธิภาพ /การใช้งาน</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>ข้อความ:</value>
+  </data>
+</root>

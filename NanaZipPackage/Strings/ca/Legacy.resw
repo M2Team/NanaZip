@@ -1,0 +1,1293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Catalan</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Català</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>D'acord</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Cancel·la</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Sí</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;No</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>Tan&amp;ca</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Continua</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Sí a &amp;tot</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>No a t&amp;ot</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Atura</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Re&amp;inicia</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>Rere&amp;fons</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>Prim&amp;er pla</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Pausa</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Pausat</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Segur que voleu cancel·lar?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Fitxer</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Edita</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Visualitza</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Preferits</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>E&amp;ines</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>Aj&amp;uda</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Obre</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Obre d&amp;ins</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Obre &amp;fora</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Visualitza</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Edita</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Reanom&amp;ena</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Copia a...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Mou a...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Suprimeix</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Divideix el fitxer...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Com&amp;bina el fitxer...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>P&amp;ropietats</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Come&amp;ntari</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Calcula la suma de verificació</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Compara</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Crea una carpeta</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Crea un fitxer</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>S&amp;urt</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Enlla&amp;ç</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>Flux &amp;alternatiu</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Seleccion&amp;a-ho tot</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>No seleccionis res</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Inverteix la selecció</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Selecciona...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Desselecciona...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Selecciona per tipus</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Desselecciona per tipus</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Icones g&amp;rans</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Icones petites</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Llista</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Detalls</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>No ordenat</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Vista plana</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 Panells</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Barres d'eines</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Obre la carpeta arrel</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Carpeta pare</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Historial de carpetes...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Actualitza</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Actualitza automàticament</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Barra d'eines afegeix/extreu</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Barra d'eines estàndard</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Botons grans</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Mostra botons amb text</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Afegeix la carpeta als Preferits com</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>Opcions...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Test de referència</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Contingut...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>Quant al NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Camí</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Tipus de fitxer</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Carpeta</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Mida</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Mida comprimit</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atributs</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Creat</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Darrer accés</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Darrera modificació</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Compacte</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Comentari</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Xifrat</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Expandit abans</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Expandit després</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Diccionari</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Tipus</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Mètode</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Sistema d'origen</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Sistema de fitxers</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Usuari</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Grup</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Bloc</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Comentari</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Posició</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Prefix del camí</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Carpetes</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Fitxers</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Versió</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Volum</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Volum múltiple</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Desplaçament</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Enllaços</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Blocs</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Volums</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-bits</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Mida física</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Mida de la capçalera</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Suma de verificació</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Característiques</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Adreça virtual</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Nom curt</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Aplicació creadora</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Mida del sector</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Enllaç simbòlic</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Mida total</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Espai lliure</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Mida per sector</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Etiqueta</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Nom local</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Proveïdor</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Seguretat NT</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Flux alternatiu</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Suprimit</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>És un directori</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Tipus d'error</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Advertències</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Advertència</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Flux</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Flux alternatiu</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Mida del flux alternatiu</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Mida virtual</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Mida desempaquetat</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Mida física total</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Índex del volum</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Subtipus</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Descripció</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Codi de pàgina</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Mida de cua</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Mida del text incrustat</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Enllaç</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>Enllaç físic</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1086" xml:space="preserve">
+    <value>Només lectura</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Opcions</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Llengua</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Llengua:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Editor:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Compara:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Associa el NanaZip amb:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Tots els usuaris</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integra el NanaZip al menú contextual del Windows</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Menú contextual en cascada</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Objectes del menú contextual:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Icones al menú contextual</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Carpeta&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;fitxer&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Obre</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Extreu fitxers...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Afegeix a l'arxiu comprimit...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Comprova l'arxiu comprimit</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Extreu en aquesta carpeta</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Extreu a {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Afegeix a {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Comprimeix i envia per correu electrònic...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Comprimeix a {0} i envia per correu electrònic</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Carpetes</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>Carpeta de &amp;treball</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>Carpeta temporal del &amp;sistema</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>Carpeta a&amp;ctual</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>E&amp;specifica una carpeta:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Utilitza únicament per a mitjans extraïbles</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Especifica una carpeta pels fitxers temporals.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Selecció</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Mostra l'element «..»</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Mostra les icones reals dels fitxers</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Mostra el menú de sistema</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Selecció de columna completa</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Mostra les línies de &amp;graella</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Obre amb un sol clic els elements</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Mode de selecció &amp;alternatiu</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Utilitza pàgines de memòria &amp;grans</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Quant al NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>	El NanaZip és programari lliure.\n       Traducció realitzada per: Softcatalà\n	https://www.softcatala.org</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>El sistema no pot assignar la quantitat de memòria requerida</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Cap error</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} objecte(s) seleccionat(s)</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>No es pot crear la carpeta «{0}»</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Aquest tipus de fitxer no permet actualització.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>No es pot obrir el fitxer «{0}» com a arxiu</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>No es pot obrir el fitxer xifrat «{0}». Contrasenya errònia?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Tipus d'arxiu no admès</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>El fitxer {0} ja existeix</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>S'ha modificat el fitxer «{0}».\nVoleu actualitzar-lo a l'arxiu?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>No es pot actualitzar el fitxer\n«{0}»</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>No es pot executar l'editor.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>El fitxer sembla un virus (el nom del fitxer conté espais molt llargs al nom).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>L'operació no es pot iniciar des d'una carpeta amb una ruta llarga.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Seleccioneu un fitxer</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Seleccionar un o més fitxers</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Massa objectes</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>No es pot obrir el fitxer {0} com a arxiu</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>S'ha obert el fitxer com l'arxiu {0}</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>L'arxiu està obert amb compensació</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Extraient</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Comprimint</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Provant</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>S'està obrint...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>S'està analitzant...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Suprimint</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Afegint</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Actualitzant</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Analitzant</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Replicant</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Reempaquetant</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Ometent</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Suprimint</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Creant la capçalera</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Extreu</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>E&amp;xtreu a:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Seleccioneu una destinació on extreure els fitxers.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Mode d'adreça</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Adreça completa</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Sense adreça</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Adreça absoluta</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Adreça relativa</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Sobreescriu:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Amb confirmació</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Sense confirmació</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Omet els fitxers ja existents</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Reanomena automàticament</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Auto-reanomena fitxers existents</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Suprimeix la duplicació de la carpeta arrel</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Restaura el fitxer de seguretat</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Confirmeu substitució de fitxers</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Ja existeix un fitxer amb el mateix nom a la carpeta de destinació.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Voleu substituir el fitxer existent</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>per aquest altre?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bytes</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Reanomena a&amp;utomàticament</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Mètode de compressió no vàlid per a «{0}».</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Error de dades en «{0}». El fitxer és corrupte.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>Ha fallat el CRC en «{0}». El fitxer és corrupte.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Error de dades al fitxer xifrat «{0}». Contrasenya errònia?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Ha fallat el CRC al fitxer xifrat «{0}». Contrasenya errònia?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Contrasenya errònia?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Mètode de compressió no compatible</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Error de dades</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>Ha fallat el CRC</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Dades no disponibles</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Final de dades inesperat</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Hi ha algunes dades després del final de les dades de la càrrega útil</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>No és cap arxiu</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Error de capçalera</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Contrasenya no vàlida</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Inici d'arxiu no disponible</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Inici d'arxiu no confirmat</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Característica no suportada</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Introduïu la contrasenya</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Introduïu la contrasenya:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Torneu a introduir la contrasenya:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>Mo&amp;stra la contrasenya</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Les contrasenyes no coincideixen</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>A la contrasenya utilitzeu només lletres (sense accents), números i caràcters especials (!, #, $...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>La contrasenya és massa llarga</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Contrasenya</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Temps transcorregut:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Temps restant:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Mida:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Taxa:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Processat:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Ràtio de compressió:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Errors:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Arxius:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Afegeix a l'arxiu comprimit</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arxiu:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Mode d'act&amp;ualització:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Format de l'arxiu:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Nivell de &amp;compressió:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Tipus de compressió:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Mida del &amp;diccionari:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Mida de la paraula:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Mida del bloc sòlid:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Nombre de fils de la CPU:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Paràmetres:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Opcions</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Crea un fitxer sòlid (SF&amp;X)</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Comprimeix els fitxers compartits</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Xifrat</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Mètode de xifrat:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Xifra el nom dels fitxers</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Ús de memòria per comprimir:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Ús de memòria per descomprimir:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Suprimeix els fitxers en comprimir</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Emmagatzema els enllaços simbòlics</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Emmagatzema els enllaços físics</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Emmagatzema el flux alternatiu</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Emmagatzema el fitxer de seguretat</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Sense compressió</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Molt ràpida</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Ràpida</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Màxima</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Afegeix i substitueix fitxers</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Actualitza i afegeix fitxers</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Actualitza els fitxers existents</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Sincronitza els fitxers</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Visualitza</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Tots els fitxers</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>No sòlid</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Sòlid</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Copia</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Mou</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Copia a:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Mou a:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>S'està copiant...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>S'està movent...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>S'està reanomenant...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Seleccioneu la carpeta de destinació:</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Operació no permesa.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>S'ha produït un error reanomenant el fitxer o carpeta</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Confirmeu la còpia del fitxer</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Segur que voleu copiar els fitxers a l'arxiu</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Confirmeu la supressió del fitxer</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Confirmeu la supressió de la carpeta</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Confirmeu supressió múltiple de fitxers</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Segur que voleu suprimir «{0}»?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Segur que voleu suprimir la carpeta «{0}» i tot el seu contingut?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Segur que voleu suprimir aquests {0} elements?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>S'està suprimint...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>S'ha produït un error suprimint un fitxer o carpeta</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>El sistema no pot moure un fitxer amb una ruta llarga a la paperera de reciclatge</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Crea una carpeta</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Crea un fitxer</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Nom de la carpeta:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Nom del fitxer:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Carpeta nova</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Fitxer nou</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Error creant la carpeta</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Error creant el fitxer</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Comentari</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Comentari:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Selecciona</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Desselecciona</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Màscara:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Propietats</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Historial de carpetes</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Missatges de diagnosi</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Missatge</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Ordinador</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Entorn de xarxa</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Afegeix</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Extreu</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Prova</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Copia</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Mou</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Suprimeix</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Informació</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Divideix el fitxer</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Divideix a:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Divideix en &amp;volums, bytes:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>S'està dividint...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Confirmació de la divisió</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Segur que voleu dividir el fitxer en {0} volums?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>La mida del volum ha de ser més petita que la mida del fitxer original</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Mida del volum no valida</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Mida de volum especificada: {0} bytes.\nSegur que voleu dividir el fitxer en aquests volums?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Combina fitxers</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Combina a:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>S'està combinant...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Seleccioneu només el primer fitxer</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>No es pot detectar un fitxer com a una part del fitxer dividit</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>No es pot trobar més d'una part del fitxer dividit</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>S'està calculant la suma de verificació...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Informació de la suma de verificació</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Suma de verificació CRC per les dades:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Suma de verificació CRC per les dades i els noms:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Test de referència</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Ús de la memòria:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Comprimint</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Descomprimint</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Taxa</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Taxa total</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Resultant</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Ús de la CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Taxa / Ús</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Passades:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Enllaç</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Enllaça</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Enllaç des de:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Enllaç a:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Tipus d'enllaç</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Enllaç físic</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Fitxer d'enllaç simbòlic</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Directori d'enllaç simbòlic</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Directori d'unió</value>
+  </data>
+</root>

@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Danish</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Dansk</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Annuller</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Ja</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Nej</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Luk</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Hjælp</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Fortsæt</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Ja til &amp;alle</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Nej til a&amp;lle</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Genstart</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Baggrund</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Forgrund</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Pause</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Sat på pause</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Er du sikker på, at du vil annullere?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Filer</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>R&amp;ediger</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Vis</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>F&amp;avoritter</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>Funk&amp;tioner</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Hjælp</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Åbn</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Åbn &amp;inden i</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Åbn &amp;uden for</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Vis</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Rediger</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>O&amp;mdøb</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Kopier til...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Flyt til...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>S&amp;let</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Opdel fil...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Kom&amp;biner filer...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Egenskaber</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Komme&amp;ntar...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Udregn checksum</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Sammenlign</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Opret mappe</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Opret fil</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Afslut</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Opret/rediger henvisning</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Alternative strømme</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Vælg &amp;alle</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Fravælg alle</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Omvendt markering</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Vælg...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Fravælg...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Vælg efter type</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Fravælg efter type</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Sto&amp;re ikoner</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>S&amp;må ikoner</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Liste</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Detaljer</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Usorteret</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Flad visning</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 paneler</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Værktøjslinjer</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Åbn rodmappe</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Et niveau op</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Mappehistorik...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Opdater</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Opdater automatisk</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Arkivlinje</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Standardlinje</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Store knapper</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Vis knappernes tekst</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Føj mappe til Favoritter som</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Bogmærke</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Funktioner...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Benchmark</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Indhold...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Om NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Sti</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Navn</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Filtype</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Mappe</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Størrelse</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Pakket størrelse</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Attributter</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Oprettet</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Åbnet</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Ændret</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Kommenteret</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Krypteret</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Opdel før</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Opdel efter</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Leksikon</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Metode</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Vært OS</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Filsystem</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Bruger</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Gruppe</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Blok</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Placering</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Sti præfiks</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Mapper</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Filer</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Bind</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Flerbindsarkiv</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Forskydning</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Henvisning</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Blokke</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Bind</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Fysisk størrelse</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Hovedernes størrelse</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Karakteristika</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Virtuel adresse</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Kort navn</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Oprettende program</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Sektorstørrelse</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Tilstand</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Symbolsk henvisning</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Fejl</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Samlet størrelse</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Ledig plads</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Klyngestørrelse</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Etiket</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Lokalt navn</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Udbyder</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT Security</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Alternativ strøm</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Slettet</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Er træ</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Fejltype</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Fejl</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Fejl</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Advarsler</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Advarsel</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Strømme</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Alternative strømme</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Størrelse på alternative strømme</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Virtuel størrelse</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Udpakket størrelse</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Samlet fysiske størrelse</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Bind-indeks</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Undertype</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Kort kommentar</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Tegnsæt</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Halestørrelse</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Indlejret stumpstørrelse</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Henvisning</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Fast henvisning</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Skrivebeskyttet</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Funktioner</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Sprog</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Sprog:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Redigering</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Rediger:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Sammenlign:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Knyt NanaZip til:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Alle brugere</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Vis i Windows genvejsmenu</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Brug undermenu</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Punkter i genvejsmenu:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Ikoner i genvejsmenu</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Mappe&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Arkiv&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Åbn arkiv</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Udpak filer...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Føj til arkiv...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Test arkiv</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Udpak her</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Udpak til {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Føj til {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Komprimer og vedhæft i e-mail...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Komprimer til {0} og vedhæft i e-mail</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Mapper</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Arbejdsmappe</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Systemets midlertidige mappe</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Aktuelle</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Brugerdefineret:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Brug kun til flytbare drev</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Angiv en placering til midlertidige arkivfiler.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Indstillinger</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Vis ".."-element</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Vis rigtige filikoner</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Vis systemmenu</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Marker hele rækken</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Vis &amp;gitter</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Åbn element med ét klik</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Alternativ markeringsmetode</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Brug &amp;store hukommelsessider</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Om NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip er fri software</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Systemet kan ikke tildele den nødvendige mængde hukommelse</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Der er ingen fejl</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} markerede element(er)</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Kan ikke oprette mappen "{0}"</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Arkivet understøtter ikke opdateringshandlinger.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Kan ikke åbne filen "{0}" som arkiv</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Kan ikke åbne det krypterede arkiv "{0}". Forkert adgangskode?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Arkivtypen er ikke understøttet</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Filen {0} findes allerede</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Filen "{0}" er blevet ændret.\nVil du opdatere den i arkivet?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Kan ikke opdatere filen\n"{0}"</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Kan ikke starte redigering.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Filen ligner en virus (filnavnet indeholder lange mellemrum i navn).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Handlingen kan ikke kaldes fra en mappe som har en lang sti.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Du skal vælge en fil</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Du skal vælge en eller flere filer</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>For mange elementer</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Kan ikke åbne filen som {0}-arkiv</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Filen er åbnet som {0}-arkiv</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Arkivet er åbnet med forskydning</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Udpakker</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Komprimerer</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Tester</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Åbner...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Skanner...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Fjerner</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Tilføjer</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Opdaterer</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Analyserer</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Replikerer</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Ompakker</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Springer over</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Sletter</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Opretter hovede</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Udpak</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>U&amp;dpak til:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Angiv en placering til udpakkede filer.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Stitilstand:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Fulde stinavne</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Ingen stinavne</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Absolutte stinavne</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Relative stinavne</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Overskrivningstilstand:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Spørg før overskrivning</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Overskriv uden at spørge</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Spring eksisterende filer over</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Automatisk omdøbning</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Automatisk omdøbning af eksisterende filer</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Forhindr duplikering af rodmappe</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Genskab filsikkerhed</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Bekræft filerstatning</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Destinationsmappen indeholder allerede behandlet fil.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Vil du erstatte den eksisterende fil</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>med denne?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} byte</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>A&amp;utomatisk omdøbning</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Komprimeringsmetode for "{0}" er ikke understøttet.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Datafejl i "{0}". Filen er ødelagt.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC mislykkedes i "{0}". Filen er ødelagt.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Datafejl i den krypterede fil "{0}". Forkert adgangskode?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC mislykkedes i den krypterede fil "{0}". Forkert adgangskode?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Forkert adgangskode?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Komprimeringsmetoden er ikke understøttet</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Datafejl</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC mislykkedes</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Utilgængelig data</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Uventet slutning på data</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Der er data efter slutningen af nyttedataene</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Ikke et arkiv</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Fejl i hoveder</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Forkert adgangskode</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Utilgængelig begyndelse på arkiv</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Ubekræftet begyndelse på arkiv</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Faciliteten understøttes ikke</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Indtast adgangskode</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Indtast adgangskode:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Indtast adgangskode igen:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Vis adgangskode</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Adgangskoderne er ikke ens</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Brug kun engelske bogstaver, numre og specialtegn (!, #, $, ...) til adgangskoden</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Adgangskoden er for lang</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Adgangskode</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Forløbet tid:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Resterende tid:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Samlet størrelse:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Hastighed:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Behandlet:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Komprimeringsforhold:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Fejl:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Arkiver:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Føj til arkiv</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arkiv:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>O&amp;pdateringstilstand:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Arkiv&amp;format:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Komprimerings&amp;niveau:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Komprimerings&amp;metode:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Størrelse på or&amp;dbog:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Størrelse på &amp;ord:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Størrelse på solid blok:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Antal CPU-tråde:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>Pa&amp;rametre:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Funktioner</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Opret SF&amp;X-arkiv</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Komprimer delte filer</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Kryptering</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Krypteringsmetode:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Kr&amp;ypter filnavne</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Hukommelsesforbrug ved komprimering:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Hukommelsesforbrug ved udpakning:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Slet filer efter komprimering</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Opbevar symbolske henvisninger</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Opbevar hårde henvisninger</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Opbevar alternative datastrømme</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Opbevar filsikkerhed</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Gem</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Hurtigst</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Hurtig</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maksimum</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Tilføj og erstat filer</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Opdater og tilføj filer</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Opdater eksisterende filer</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Synkroniser filer</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Gennemse</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Alle filer</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Ikke-solid</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Kopier</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Flyt</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Kopier til:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Flyt til:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Kopierer...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Flytter...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Omdøber...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Vælg destinationsmappen.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Handlingen understøttes ikke af denne mappe.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Fejl under omdøbning af fil eller mappe</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Bekræft kopiering af fil</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Er du sikker på, at du vil kopiere filer til arkiv</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Bekræft sletning af fil</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Bekræft sletning af mappe</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Bekræft sletning af flere filer</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Er du sikker på, at du vil slette "{0}"?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Er du sikker på, at du vil slette mappen "{0}" og alt dens indhold?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Er du sikker på, at du vil slette disse {0} elementer?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Sletter...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Fejl under sletning af fil eller mappe</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Systemet kan ikke flytte en fil med lang sti til Papirkurven</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Opret mappe</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Opret fil</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Mappenavn:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Filnavn:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Ny mappe</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Ny fil</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Fejl under oprettelse af mappe</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Fejl under oprettelse af fil</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Kommentar:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Vælg</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Fravælg</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Maske:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Egenskaber</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Mappers historik</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Diagnostiske meddelelser</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Meddelelse</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Computer</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Netværk</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Dokumenter</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Tilføj</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Udpak</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Kopier</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Flyt</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Slet</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Opdel fil</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Opdel til:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Opd&amp;el i bind, byte:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Opdeler...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Bekræft opdeling</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Er du sikker på, at du vil opdele filen i {0} bind?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Størrelsen på bind skal være mindre end størrelsen på den originale fil</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Forkert størrelse på bind</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Angivet størrelse på bind: {0} byte.\nEr du sikker på, at du vil opdele arkivet i disse bind?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Kombiner filer</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Kombiner til:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Kombinerer...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Vælg kun første del af opdelt fil</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Kan ikke genkende fil, som del af opdelt fil</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Kan ikke finde mere end én del af opdelt fil</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Beregner checksum...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Checksum information</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC-checksum for data:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC-checksum for data og navne:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Benchmark</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Hukommelsesforbrug:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Komprimering</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Udpakning</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Vurdering</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Samlet vurdering</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Aktuelt</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Resultat</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU forbrug</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Vurdering/forbrug</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Gennemløb:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Opret/rediger henvisning</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Opret/rediger henvisning</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Henvisning fra:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Henvisning til:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Henvisningstype</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Fast henvisning</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Fil symbolsk henvisning</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Mappe symbolsk henvisning</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Mappe forbindelsespunkt</value>
+  </data>
+</root>

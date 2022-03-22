@@ -1,0 +1,852 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Malay</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Bahasa Melayu</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Ya</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Tidak</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Tutup</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Bantuan</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Teruskan</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Ya untuk Semua</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Tidak untuk Semua</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Henti</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Mula Semula</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Latar belakang</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Latar depan</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Berehat</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Berehat</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Anda yakin untuk membatalkannya?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Fail</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Edit</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Paparan</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>K&amp;egemaran</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Alat</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Bantuan</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Buka</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Buka di D&amp;alam</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Buka di L&amp;uar</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Paparan</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Edit</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Nam&amp;akan semula</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Salin ke...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Pindahkan ke...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Bahagi/belah Fail...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Gab&amp;ung Fail...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>P&amp;roperti</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Kom&amp;en</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Buat Folder</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Buat Fail</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>K&amp;eluar</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Pilih &amp;Semua</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Jangan Pilih Semua</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Sonsangkan Pilihan</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Pilih...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Tidak Memilih...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Pilih Berdasarkan Jenis</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Tidak Memilih Berdasarkan Jenis</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Ikon B&amp;esar</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Ikon K&amp;ecil</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Senarai</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Butiran</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Tidak Tersusun</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>&amp;2 Panel</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;Toolbar</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>Buka Root Folder</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Ke atas Satu Aras</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Folder Sejarah...</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>&amp;Segarkan Semula</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Toolbar Arkib</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Toolbar Standard</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Bebutang Besar</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Perlihatkan Teks Bebutang</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Tambah folder pada Kegemaran sebagai</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Penanda Buku</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Opsyen...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Tanda Aras</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Kandungan...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Perihal NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Bahagian</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Nama</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Sambungan</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Saiz</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Saiz Paket</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atribut</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Dibuat</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Diakses</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Diubah Suai</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Komen</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Terenkripsi</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Terpisah Sebelum</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Terpisah Selepas</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Kamus</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Jenis</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Kaedah</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Sistem Operasi</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Sistem Fail</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Pengguna</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Kumpulan</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Blok</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Komen</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Posisi</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Ralat</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Saiz Keseluruhan</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Ruang Kosong</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Saiz Kluster</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Nama Tempatan</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Penyedia</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Opsyen</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Bahasa</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Bahasa:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Editor:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Sistem</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Kongsikan NanaZip dengan:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integrasikan NanaZip ke shell konteks menu</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Cascaded konteks menu</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Item pada konteks menu:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Folder&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Arkib&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Buka arkib</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Ekstrak fail...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Tambahkan ke arkib...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Uji arkib</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Ekstrak di sini</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Ekstrak ke {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Tambahkan ke {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Padatkan dan kirimkan melalui email...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Padatkan ke {0} dan kirimkan melalui email</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Folder kerja</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Folder sementara sistem</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Sekarang</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Ditentukan:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Hanya untuk pemacu mudah alih</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Tentukan lokasi untuk arkib fail sementara.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Seting</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Perlihatkan ".." item</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Perlihatkan ikon asli dari fail</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Perlihatkan menu sistem</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Pilih barisan penuh</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Perlihatkan garisan grid</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>&amp;Mod Pilihan Alternatif</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Gunakan muka surat memori yang &amp;besar</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Perihal NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip adalah perisian percuma. Sokong pembangunan NanaZip dengan melakukan pendaftaran.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Tidak ada ralat</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>{0} buah objek telah terpilih</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>Tidak dapat membuat folder '{0}'</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Tidak menyokong pengemaskinian untuk arkib ini.</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Fail '{0}' telah terubah suai.\nApakah anda ingin mengemaskininya pada arkib?</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Tidak dapat mengemaskini fail\n'{0}'</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Tidak dapat membuka editor.</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Terlalu banyak item</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Sedang mengekstrak</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Memampatkan</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Pengujian</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Membuka...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Ekstrak</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Ekstrak ke:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Tentukan lokasi untuk pengekstrakan fail.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Mod laluan</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Laluan nama penuh</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Tidak pakai nama laluan</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Mod tulis semula</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Tanya sebelum menulis semula</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Tulis semula tanpa perlu diberitahu</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Abaikan fail yang ada</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Namakan semula automatik</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Namakan automatik fail yang ada</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Pastikan penggantian fail</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Folder tujuan telah berisi fail yang telah terproses.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Mahukah anda menggantikan fail yang ada</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>dengan yang ini?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} baits</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>N&amp;amakan semula Automatik</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Kaedah pemampatan untuk '{0}' tidak disokong.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Data ralat di '{0}'. Fail ini rosak.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC gagal di '{0}'. Fail ini rosak.</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Masukkan kata laluan</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Masukkan kata laluan:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>&amp;Perlihatkan kata laluan</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>Kata laluan</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Telah berlalu:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Selesai dalam:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Saiz:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Kecepatan:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Ralat:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Tambahkan ke arkib</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arkib:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Mod kemaskini:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Format arkib:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Aras &amp;mampatan:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Kaedah mampatan:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Saiz kamus:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Saiz perkataan:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>&amp;Parameter:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Opsyen</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>Buat arkib SF&amp;X</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Enkripsi nama &amp;fail</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Penggunaan memori untuk Memampatkan:</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Penggunaan memori untuk Menyah-mampatkan:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Untuk Penyimpanan</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Lebih cepat</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Cepat</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maksimum</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Tambah dan gantikan fail</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Kemaskini dan tambahkan fail</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Perbaharui fail yang ada</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Menyesuaikan fail</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Selusur...</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Semua Fail</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Salin</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Pindah</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Salin ke:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Pindah ke:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Sedang menyalin...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Sedang memindah...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Namakan semula...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Operasi tidak disokong.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Ralat, ketika namakan semula Fail atau Folder</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Pasti salinkan fail</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Anda yakin untuk menyalinkan fail kepada arkib</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Pasti penghapusan fail</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Pasti penghapusan folder</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Pasti penghapusan fail-fail</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Anda yakin untuk menghapus '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Anda yakin untuk menghapus folder '{0}' dan semua isi kandungannya?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Anda yakin untuk menghapus item {0}?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Penghapusan...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Ralat ketika menghapuskan Fail atau Folder</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Buat Folder</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Buat Fail</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Nama Folder:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Nama Fail:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Folder Baru</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Fail Baru</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Ralat, tidak dapat Membuat Folder</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Ralat, tidak dapat Membuat Fail</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Komen</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Komen:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Pilih</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Tidak Memilih</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Topeng:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Folder Sejarah</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Mesej diagnostik</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Mesej</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Komputer</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Rangkaian</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Sistem</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Tambah</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Ekstrak</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Uji</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Salin</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Pindah</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Maklumat</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Pisahkan Fail</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Pisahkan ke:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Bahagi/belah ke &amp;nilai, baits:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Pembelahan ...</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Gabungan Fail</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Gabung ke:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Penggabungan ...</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Tanda Aras</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Penggunaan memori:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Pemampatan</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Penyah-mampatan</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Total Rating</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Sekarang</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Keputusan</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Lulus:</value>
+  </data>
+</root>

@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Hindi, Indian, हिन्दुस्तान</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>हिन्दी</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>ठीक है</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>रद्द</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;हाँ</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;नहीं</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;बंद करो</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>मदद</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;जारी रखे</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>&amp;सभी के लिये हाँ</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>&amp;सभी के लिये नहीं</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>रूको</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>पुनः शुरु करें</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;पॄष्ठ्भूमि</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;अग्रभूमि(डेस्क्टोप)</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;विश्राम</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>विश्रामित</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>तुम रद्द करना चाहते हो. तुम्हें यकीन है क्या?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;फ़ाइल</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;संपादन</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;दर्शन</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;मनपसंद</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;औजार</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;मदद</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;खोले</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>&amp;अंदर खोले</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>&amp;बाहर खोले</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;दृश्य</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;संपादन</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;पुन: नामकरण</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;में नकल बनाये...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;में ले जायें...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;मिटायें</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;फ़ाइल का विभाजन करें...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>&amp;फ़ाइल का संयोजन करें...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;संपत्तियाँ या गुण</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>&amp;टिप्पणी</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>&amp;जाँच योग की गणना करें</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>&amp;अन्तर</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>&amp;फ़ोल्डर तैयार करें</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>&amp;फ़ाइल तैयार करें</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;निर्गमन</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>&amp;सभी चयन करे</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>&amp;सभी अचयनित करें</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;चयन उलटा करें</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>चयन करें...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>अचयन करे...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>प्रकार द्वारा चयन</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>प्रकार द्वारा अचयन</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>बड़ी प्रतीक</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>लघु प्रतीक</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;सूची</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;वर्णन</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>अवितरित</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>चौड़ा दृश्य</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;२ फ़लक</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;औजार पट्टीयाँ</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>मूल फ़ोल्डर खोले</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>एक स्तर ऊपर चढ़े</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>फ़ोल्डरो का इतिहास...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;ताजा करें</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>संग्रह उपकरणपट्टी</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>मानक औजार पट्टी</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>बड़े खटके(बटन)</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>खटके(बटन) के शब्द दिखायें</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;फ़ोल्डर मनपसंद में ऎसे जोड़े...</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>पुस्तचिन्ह</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;विकल्प...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;बेञ्चमार्क(प्रामाणिक तुलना)</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;सामग्री...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>7-जिप के बारे में...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>मार्ग</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>नाम</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>विस्तार</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>फ़ोल्डर</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>आकार</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>कुल आकार</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>विशेषता या गुणधर्म</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>सर्जित</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>चलायी गई</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>परिवर्धित</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>ठोस</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>टिप्पणी</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>गुप्तिकृत</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>के पूर्व विभाजन(टुकडे) करें</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>के बाद विभाजन(टुकडे) करें</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>शब्दकोश</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>सीआरसी</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>प्रकार</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>विरोधी</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>पद्धति</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>यजमान आज्ञावली(ओपरेटिंग सिस्टम)</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>फ़ाइल प्रणाली</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>प्रयोगकर्ता</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>समूह</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>रोक या टुकड़े</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>प्रतिक्रिया</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>स्थान</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>मार्ग प्रत्यय</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>फोल्डर्स</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>फाइल्स</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>संस्करण</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>जत्था</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>अनेक जत्थे</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>ओफसेट</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>कडियाँ</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>टुकड़े</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>जत्थे</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-बिट</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>बड़ा-एन्डियन</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>सीपीयू</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>भौतिक आकार</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>शीर्षकों के आकार</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>जाँचयोग</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>चरित्रताऎं</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>आभासी पता</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>आईडी</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>संक्षिप्त नाम</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>सर्जक अनुप्रयोग</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>सेक्टर का आकार</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>स्थिति</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>कड़ी</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>त्रुटि</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>कुल आकार</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>स्वतन्त्र रिक्तस्थान(खाली जगह)</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>क्लस्टर(समूह) आकार</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>ध्यानाकर्षक(लेबल)</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>स्थानिय नाम</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>प्रदायक</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>विकल्प</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>भाषा</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>भाषा:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>संपादक</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;संपादक:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;अन्तर:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>प्रणाली या तंत्र</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>संबधित करें 7-जिप के साथ:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>7-जिप के शेल (कवच) प्रसंग मेनु में जोडें</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>सोपानीकृत(केस्केडेड) प्रसंग मेनु</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>प्रसंग(कोन्टेक्स्ट) मेनु वस्तुएँ:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;फोल्डर&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;संग्रह(आर्चिव)&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>संग्रह खोले</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>फ़ाइल्स बाहर निकाले...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>संग्रह में जोड़े...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>संग्रह की जाँच करे</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>यहीं बाहर निकाले</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>{0} में बाहर निकाले</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0} में जोड़े</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>दबायें(संकुचन) ओर इमेल करें...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>{0} में दबायें ओर ईमेल करें</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>फ़ोल्डर्स</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;कार्यरत फ़ोल्डर</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;प्रणाली का अस्थायी(टेम्पररी) फोल्डर</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;चालू</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;निर्दिष्ट:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>सिर्फ हटाने योग्य(रिमूवेबल) ड्राईव के लिये ही प्रयोग करें</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>अस्थायी संग्रह फाइल के लिये स्थान निर्दिष्ट करें(बतायें).</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>व्यवस्थाएँ</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>दिखाओ ".."वस्तु</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>वास्तविक फ़ाइल प्रतिमायें दिखाओ</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>तंत्र का मेनु दिखाओ</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;पूरी पन्क्ति का चयन</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>&amp;ग्रिड(जाल) रेखा दिखाओ</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>वस्तु खोलने के लिये एक ही(सिंगल)-क्लिक</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;वैकल्पिक चयन स्थिति</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>&amp;बड़े स्मृति पृष्ठ का प्रयोग करे</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>7-जिप के बारे में</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>7-जिप यह निःशुल्क सॉफ़्टवेयर है. फिर भी, आप पंजीकृत(रजिस्टर्ड) होकर७-ज़िप के विकास में सहयोग कर सकते हैं.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>तंत्र जरूरी मात्रा में मेमोरी(स्मृति) वितरित नही कर सकता है</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>इनमे कोई भी त्रुटि नहीं है</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} चयनित वस्तु(एँ)</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>'{0}' फ़ोल्डर सर्जित नहीं कर सकता</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>इस संग्रह के लिये अद्यतनीकृत संचालन समर्थित नहीं हैं.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>'{0}' फाइल को संग्रह के रूप में नही खोल सकता</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>'{0}' गुप्तिकृत संग्रह को नही खोल सकता. गलत कूटशब्द?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>असमर्थित संग्रह प्रकार</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>फाइल {0} पहले से मौजूद है</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>'{0}' फ़ाइल परिवर्धित हुई है.\nक्या तुम संग्रह में इसे अद्यतनीकृत करना चाहते हो?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>फ़ाइल को अद्यतनीकृत नही कर सकता\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>संपादक को शुरू नही कर सकता.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>यह फाइल एक विषाणु(वायरस) जैसी लगती है(फाइल नाम लंबी खाली जगह नाम में रखता है).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>जिस फोल्डर का लंबा मार्ग है उससे सञ्चालन क्रिया नही बुलाई जा सकती.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>तुम्हे एक फाइल का चयन तो करना ही होगा</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>तुम्हे एक या ज्यादा फाइलों को चुनना ही होगा</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>बहुत ज्यादा वस्तुएँ</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>बाहर निकाल रहा है</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>संकुचन कर रहा है</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>परीक्षण</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>खोल रहा है...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>तलाशी(स्कैनिंग) कर रहा है...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>बाहर निकाले</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;बाहर निकाले:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>बाहर निकाली हुई फ़ाइलों के लिये स्थान निर्दिष्ट करें.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>मार्ग स्थिति</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>पूरा मार्गनाम</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>कोई मार्ग नाम नहीं है</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>अधिलेखन रीत</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>अधिलेखन करने से पहले पूछे</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>बिना पूछे अधिलेखन(पुराने को मिटाना) करें</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>पहले से मौजूद फ़ाइलस को छोड़े</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>स्वचालित पुन: नामकरण</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>पहले से मौजूद फ़ाइलस का स्वचालित(ओटोमेटिक) पुन: नामकरण करे</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>फ़ाइल प्रतिस्थापन को पक्का करें</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>गन्तव्य फोल्डर में पहले से ही प्रक्रिया हुई फ़ाइल है.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>क्या आप पहले से मौजूद फ़ाइल को बदलना पसंद करेंगे?</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>इसके साथ?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} बाइट्स</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>स्वचालित पुन: नामकरण</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>'{0}' के लिए असहायक दबाने की पद्धति.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>डेटा त्रुटि'{0}' में. फ़ाइल टूटी हुई है.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>'{0}' में सीआरसी असफल. फ़ाइल टूटी हुई है.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>'{0}' गुप्तिकृत(एनक्रिप्टेड) फाइल में डेटा त्रुटि. गलत कूटशब्द?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>'{0}'गुप्तिकृत(एनक्रिप्टेड) फाइल में सीआरसी असफल. गलत कूटशब्द?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>कूटशब्द(पासवर्ड) डाले</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>कूटशब्द(पासवर्ड) डाले:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>कूटशब्द पुनः डाले:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;कूटशब्द(पासवर्ड) दिखाओ</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>कूटशब्द सहेजे हुए से अलग है</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>कूटशब्द के लिये सिर्फ़ इंग्लिश वर्णमाला, अंको और विशेष अक्षरों (!, #, $, ...) का ही उपयोग करें</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>कूटशब्द बहुत ज्यादा बड़ा है</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>कूटशब्द(पासवर्ड)</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>व्यतीत समय:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>बाकी बचा समय:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>कुल आकार:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>गति:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>प्रक्रिया किया हुआ:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>दबाने(आकार छोटा करने) का अनुपात:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>त्रुटियाँ:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>संग्रह:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>संग्रह में जोड़े</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;संग्रह:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;अद्यतनीकरण स्थिति(मोड):</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>संग्रह &amp;ढाँचा:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;संकुचन स्तर:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;संकुचन विधि:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;शब्दकोश आकार:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;शब्द आकार:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>ठोस टुकडे का आकार:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>सीपीयू सूत्र संख्या:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;परिमाप:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>विकल्प</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>&amp;एसएफ़एक्स(SFX) संग्रह तैयार करें</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>साझी फाइलें संकुचित करें</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>गुप्तिकरण</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>गुप्तिकरण पद्धति:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>फ़ाइल &amp;नाम गुप्तिकरण करें</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>संकुचन के लिये स्मृति प्रयोग:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>प्रसारण के लिये स्मृति प्रयोग:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>भण्डारण</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>सर्वाधिक तेज</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>तेज</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>साधारण</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>अधिकतम</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>अत्यन्त</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>फ़ाइलें जोड़े और प्रतिस्थापित करे</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>फ़ाइले अद्यतनीकृत करें और जोड़े</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>अवस्थित फ़ाइलें ताजा करें</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>फाइलें समक्रमण(सिंक्रोनाईज़) करें</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>ब्राउज या घूमे</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>सभी फ़ाइलें</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>अ-ठोस</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>ठोस</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>नकल</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>ले जायें</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>में नकल:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>में ले जायें:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>नकल...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>ले जा रहा है...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>पुन: नामकरण...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>गन्तव्य फोल्डर चयनित करें.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>इस फोल्डर के लिये यह सञ्चालन क्रिया समर्थित नहीं है.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>फ़ाइल या फ़ोल्डर के पुन: नामकरण में त्रुटि</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>फ़ाइल की नकल करना पक्का करो</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>तुम संग्रह में फाइल की प्रतिलिपि करना चाहते हो क्या तुम्हे यकीन है</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>फ़ाइल मिटाये यह पक्का करो</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>फ़ोल्डर मिटायें पक्का करो</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>अनेक फ़ाइल मिटायें पक्का करो</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>क्या तुम्हे यकीन है कि तुम मिटाना चाहते हो '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>क्या तुम्हे यकीन है कि तुम फ़ोल्डर मिटाना चाहते हो '{0}' और इसकी सब सामग्री भी?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>क्या तुम्हे यकीन है कि तुम मिटाना चाहते हो इन {0} वस्तुओं को?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>मिटा रहा है...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>फ़ाइल किंवा फ़ोल्डर मिटाने में त्रुटि</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>तंत्र लंबे मार्ग वाली फाइल को पुनःचक्रण पेटी(रिसाईकल बिन) में नही ले जा सकता है.</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>फ़ॊल्डर तैयार करें</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>फ़ाइल तैयार करें</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>फ़ोल्डर नाम:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>फ़ाइल नाम:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>नया फ़ॊल्डर</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>नया फ़ाइल</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>फ़ोल्डर तैयार करने में त्रुटि</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>फ़ाइल तैयार करने में त्रुटि</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>टिप्पणी</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;टिप्पणी:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>चयन</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>चयन रद्द</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>मुखौटा:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>गुण या संपत्तियाँ</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>फ़ोल्डरों का इतिहास</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>निदानात्मक संदेश</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>संदेश</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>संगणक</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>सञ्जाल</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>दस्तावेज</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>प्रणाली</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>जोड़े</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>बाहर निकाले</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>परीक्षण</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>नकल</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>ले जायें</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>मिटायें</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>सूचना</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>फ़ाइल का विभाजन करें</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;में विभाजन:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>जत्थों में विभाजन, बाइट्स:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>विभाजन कर रहा है...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>विभाजन करना पक्का करे</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>क्या तुम्हे यकीन है कि तुम फाइल को {0} जत्थों में विभाजित करना चाहते हो?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>मूल फाइल के आकार की तुलना में जत्थे का आकार छोटा ही होना चाहिए</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>जत्थे का आकार गलत है</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>निर्देशित जत्था आकार: {0} बाइटस.\n आप संग्रह को ऎसे जत्थों में विभाजित करना चाहते है, क्या आपको यकीन है?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>फ़ाइले संयोजित करें</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;मेंसंयोजन करे:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>संयोजन हो रहा है...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>विभाजित फाइल का सिर्फ़ प्रथम भाग ही चयनित करे</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>फाइल को विभाजित फाइल के भाग के रूप में पहचान नही सकता</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>विभाजित फाइल का एक से ज्यादा भाग नही ढूँढ सकता</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>जाँचयोग(चेकसम) की गणना कर रहा है...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>जाँचयोग(चेकसम) माहिती</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>सीआरसी जाँचयोग(चेकसम) आँकड़ों के लिये :</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>सीआरसी जाँचयोग(चेकसम) आँकड़ों और नामों के लिये :</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>(कसौटी चिन्ह)बेञ्चमार्क</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>स्मृति उपयोग:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>संकुचन कर रहा है</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>प्रसारण हो रहा है</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>क्रमांकन</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>कुल क्रमांकन</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>वर्तमान</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>परिणाम</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>सीपीयू उपयोग</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>क्रमांकन / उपयोग</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>पास:</value>
+  </data>
+</root>

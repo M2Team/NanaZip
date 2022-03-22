@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>はい(&amp;Y)</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>いいえ(&amp;N)</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>閉じる(&amp;C)</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>続行(&amp;C)</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>すべてはい(&amp;A)</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>すべていいえ(&amp;L)</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>再実行</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>バックグラウンド(&amp;B)</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>フォアグラウンド(&amp;F)</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>一時停止(&amp;P)</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>キャンセルしてよろしいですか?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>ファイル(&amp;F)</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>編集(&amp;E)</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>表示(&amp;V)</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>お気に入り(&amp;A)</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>ツール(&amp;T)</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>ヘルプ(&amp;H)</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>開く(&amp;O)</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>NanaZip で開く(&amp;I)</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>関連付けで開く(&amp;U)</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>表示(&amp;V)</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>編集(&amp;E)</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>名前の変更(&amp;M)</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>コピー(&amp;C)...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>移動(&amp;M)...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>削除(&amp;D)</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>ファイル分割(&amp;S)...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>ファイル結合(&amp;B)...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>プロパティ(&amp;R)</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>コメント(&amp;N)</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>チェックサムの計算</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>比較</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>新しいフォルダーの作成</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>新しいファイルの作成</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>閉じる(&amp;X)</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>リンク</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>代替データ ストリーム(&amp;A)</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>すべて選択(&amp;A)</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>選択解除</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>選択の切り替え(&amp;I)</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>選択...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>選択解除...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>同じ種類を選択</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>同じ種類を選択解除</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>大アイコン(&amp;G)</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>小アイコン(&amp;M)</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>一覧(&amp;L)</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>詳細(&amp;D)</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>並べ替えなし</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>フラット ビュー</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 分割画面</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>ツールバー(&amp;T)</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>ルート フォルダーを開く</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>1 つ上の階層へ</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>フォルダー履歴...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>最新の情報に更新(&amp;R)</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>自動更新</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>アーカイブ ツールバー</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>標準ツールバー</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>大きなボタン</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>ボタン名を表示</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>フォルダーをお気に入りに追加(&amp;A)</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>ブックマーク</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>オプション(&amp;O)...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>ベンチマーク(&amp;B)</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>ヘルプの表示(&amp;C)...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>バージョン情報(&amp;A)...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>パス</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>拡張子</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>フォルダー</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>格納サイズ</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>作成日時</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>アクセス日時</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>更新日時</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>ソリッド</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>コメント</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>暗号化</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>分割前</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>分割後</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>辞書</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>種類</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>アンチ</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>圧縮方式</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>ホスト OS</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>ファイル システム</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>ユーザー</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>グループ</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>ブロック</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>コメント</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>ポジション</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>パス プレフィックス</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>フォルダー数</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>ファイル数</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>ボリューム</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>マルチボリューム</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>オフセット</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>リンク数</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>使用ブロック数</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>ボリューム数</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64ビット</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>ビッグ エンディアン</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>物理サイズ</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>ヘッダー サイズ</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>チェックサム</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>特性</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>仮想アドレス</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>短い名前</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>作成アプリケーション</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>セクター サイズ</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>モード</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>シンボリック リンク</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>合計サイズ</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>空き領域</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>クラスター サイズ</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>ローカル名</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>プロバイダー</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT セキュリティ</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>代替データ ストリーム</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>補助</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>削除済み</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>ツリー構造</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>エラーの種類</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>ストリーム</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>代替データ ストリーム</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>代替データ ストリーム サイズ</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>仮想サイズ</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>展開サイズ</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>合計物理サイズ</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>ボリューム インデックス</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>サブタイプ</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>短いコメント</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>コードページ</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>テール サイズ</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>埋め込みスタブ サイズ</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>リンク</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>ハードリンク</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iノード</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>読み取り専用</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>言語設定:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>外部ツール</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>編集(&amp;E):</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>比較(&amp;D):</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>システム</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip に関連付けるファイル:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>すべてのユーザー</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>シェル コンテキストメニューに NanaZip を登録</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>NanaZip をサブメニュー化</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>メニュー アイテム:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>コンテキストメニューにアイコンを表示</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;フォルダー&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;アーカイブ&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>展開...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>圧縮...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>アーカイブをテスト</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>ここに展開</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>{0} に展開</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0} に圧縮</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>圧縮してメール送信...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>{0} に圧縮してメール送信</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>フォルダー</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>作業フォルダー(&amp;W)</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>システムの一時フォルダー(&amp;S)</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>現在のフォルダー(&amp;C)</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>指定したフォルダー(&amp;P):</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>リムーバブル ドライブの時のみ使用</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>一時ファイルの場所を指定してください。</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>".." を表示する</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>実際のファイル アイコンを表示する</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>システム メニューも表示する</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>行単位で選択する(&amp;F)</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>グリッドの線を表示する(&amp;G)</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>シングルクリックで開く</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>カーソル移動で選択が自動解除されないモード(&amp;A)</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>大きなメモリ ページを使用する(&amp;L)</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip について</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip はフリー ソフトウェアです</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>システムは必要な量のメモリを割り当てることができません</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>エラーはありません</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} 個のオブジェクトを選択</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>フォルダー "{0}" が作成できません</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>このアーカイブでは更新の操作がサポートされていません。</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>ファイル "{0}" はアーカイブとして開くことができません</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>暗号化されたアーカイブ "{0}" を開くことができません。パスワードが間違っていませんか?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>サポートされていないアーカイブ形式です</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>ファイル {0} は既に存在しています</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>ファイル "{0}" は変更されました。\nアーカイブを更新しますか?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>ファイルを更新できません\n"{0}"</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>外部ツールを起動できません。</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>ファイルはウイルスの疑いがあります。(ファイル名に大量のスペースを含むため)</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>パスが長いフォルダーではこの操作を実行できません。</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>1つのファイルを選択してください</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>1つ以上のファイルを選択してください</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>アイテムが多過ぎます</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>ファイルを {0} アーカイブとして開くことができません</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>ファイルが {0} アーカイブとして開かれています</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>アーカイブはオフセットを使用して開かれています</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>展開</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>圧縮</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>テスト</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>開いています...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>スキャン中...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>解析</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>複製</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>再圧縮</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>スキップ</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>ヘッダーの作成</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>展開</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>展開先(&amp;X):</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>展開ファイルの場所を指定してください。</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>パス名出力モード:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>フル パス</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>パスなし</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>絶対パス</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>相対パス</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>上書きモード</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>上書きする前に確認</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>確認しないで上書き</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>存在するファイルはスキップ</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>自動的に名前を変更</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>自動的に既存ファイルの名前を変更</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>ルート フォルダーの重複を回避</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>ファイルのセキュリティ属性を復元</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>ファイルの上書き確認</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>出力先のフォルダーには既に以下の同じファイルが存在しています。</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>現在のファイル</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>を次の新しいファイルに置き換えますか?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} バイト</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>自動的に名前を変更(&amp;U)</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>"{0}" はサポートされていない圧縮方式です。</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>"{0}" でデータ エラーが発生しました。ファイルは壊れています。</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>"{0}" の CRC が違います。ファイルは壊れています。</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>暗号化されたファイル "{0}" でデータ エラーが発生しました。パスワードが間違っていませんか?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>暗号化されたファイル "{0}" の CRC が違います。パスワードが間違っていませんか?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>パスワードが間違っていませんか?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>サポートされていない圧縮方式です</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>データ エラー</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC が違います</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>データが利用できません</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>予期しないデータの終わりです</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>データのペイロード後にデータが存在します</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>アーカイブではありません</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>ヘッダー エラー</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>パスワードが間違っています</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>アーカイブの始まりが利用できません</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>アーカイブの始まりが確認できません</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>サポートされていない機能です</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>パスワード入力</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>パスワード入力:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>パスワード再入力:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>パスワードを表示(&amp;S)</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>パスワードが一致しません</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>パスワードには半角英数記号 (!, #, $, ...) のみを使用してください。</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>パスワードが長過ぎます</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>経過時間:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>残り時間:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>合計サイズ:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>速度:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>処理済み:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>圧縮率:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>エラー:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>アーカイブ数:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>圧縮</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>圧縮先(&amp;A):</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>更新モード(&amp;U):</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>アーカイブ形式(&amp;F):</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>圧縮レベル(&amp;L):</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>圧縮方式(&amp;M):</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>辞書サイズ(&amp;D):</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>ワード サイズ(&amp;W):</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>ソリッド ブロック サイズ:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU スレッド数:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>パラメーター(&amp;P):</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>自己展開アーカイブの作成(&amp;X)</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>共有状態のファイルも圧縮</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>暗号化</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>暗号化方式:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>ファイル名を暗号化(&amp;N)</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>圧縮に必要なメモリ:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>展開に必要なメモリ:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>圧縮後に元のファイルを削除</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>シンボリック リンクを保存</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>ハードリンクを保存</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>代替データ ストリームを保存</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>ファイルのセキュリティ属性を保存</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>無圧縮</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>最速</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>高速</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>標準</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>最高</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>超圧縮</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>すべてのファイルを上書き</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>既存ファイルの更新と追加</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>既存ファイルの更新のみ</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>すべてのファイルを同期</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>参照</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>すべてのファイル</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>ソリッドなし</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>無制限</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>移動</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>コピー先:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>移動先:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>コピーしています...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>移動しています...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>名前を変更しています...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>対象のフォルダーを選択してください。</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>このフォルダーでは、その操作はサポートされていません。</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>ファイルまたはフォルダーの名前変更エラー</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>ファイル コピーの確認</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>本当にファイルをアーカイブに追加してよろしいですか?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>ファイル削除の確認</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>フォルダー削除の確認</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>複数アイテム削除の確認</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>"{0}" を削除してよろしいですか?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>フォルダー "{0}" とその中身をすべて削除してよろしいですか?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>{0} 個のアイテムを削除してよろしいですか?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>削除中...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>ファイルまたはフォルダーの削除エラー</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>ファイルのパスが長すぎるため、ファイルをごみ箱に移動できません</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>フォルダー作成</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>ファイル作成</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>フォルダー名:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>ファイル名:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>新しいフォルダー</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>新しいファイル</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>フォルダー作成エラー</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>ファイル作成エラー</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>コメント</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>コメント(&amp;C):</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>選択</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>選択解除</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>マスク:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>プロパティ</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>フォルダー履歴</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>診断結果</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>メッセージ</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>PC</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>ネットワーク</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>ドキュメント</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>システム</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>展開</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>テスト</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>移動</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>ファイル分割</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>分割先(&amp;S):</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>分割ボリューム サイズ(&amp;V):</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>分割中...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>分割の確認</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>ファイルを {0} 個のボリュームに分割してよろしいですか?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>ボリューム サイズは元のファイルのサイズより小さくなければなりません</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>不正なボリューム サイズ</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>指定されたボリューム サイズ: {0} バイト\nこのサイズにアーカイブを分割してよろしいですか?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>ファイル結合</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>結合先(&amp;C):</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>結合中...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>分割ファイルの先頭ファイルだけを選択してください</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>ファイルを分割ファイルの一部として認識できません</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>分割ファイルの一部が見つかりません</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>チェックサム計算中...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>チェックサム情報</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC (データのみ):</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC (データと名前):</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>ベンチマーク</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>メモリ使用量:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>圧縮</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>展開</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>評価</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>総合評価</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>現在</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>結果</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU 使用率</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>評価 / 使用率</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>テスト回数:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>リンク</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>リンク作成</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>リンク元:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>リンク先:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>リンクの種類</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>ハードリンク</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>ファイルのシンボリック リンク</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>ディレクトリのシンボリック リンク</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>ディレクトリのジャンクション</value>
+  </data>
+</root>

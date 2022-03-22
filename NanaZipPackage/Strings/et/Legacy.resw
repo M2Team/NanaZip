@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Estonian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>eesti keel</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Loobu</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Jah</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Ei</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Sulge</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Abi</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Jätka</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Kõigile j&amp;ah</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Kõigile e&amp;i</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Seiska</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Restardi</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Taustal</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Esiplaanile</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Paus</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Pausiks peatatud</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Kas soovite kindlasti loobuda?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Fail</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Redigeeri</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Vaade</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Lemmikud</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Tööriistad</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Abi</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Ava</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Ava s&amp;ees</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Ava väljasp&amp;ool</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>Vaat&amp;ur</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Redigeeri</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;Nimeta ümber</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Kopeeri asukohta...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Teisalda asukohta...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>Ku&amp;stuta</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Tükel&amp;da fail...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Ü&amp;henda failid...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>Atri&amp;buudid</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Ko&amp;mmentaar...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Arvuta kontrollsumma</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Võrdle</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Loo kaust</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Loo fail</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Välju</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>V&amp;ali kõik</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Tühista kõik valikud</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Pööra valik</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Vali...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Tühista valik...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Vali tüübi järgi</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Tühista tüübi järgi valik</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Suured ikoonid</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Väik&amp;esed ikoonid</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Loend</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>Üksikasja&amp;d</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Sortimata</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Lame vaade</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;Kaks paani</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Tööriistaribad</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Ava juurkaust</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Taseme võrra üles</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Kaustaajalugu...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Värskenda</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Arhiiviriistariba</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Standardnupuriba</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Suured nupud</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Kuva nupusildid</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Lisa kaust lemmikute hulka järjehoidjana</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Järjehoidja</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Häälestus...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Jõudlustest</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Sisukord...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Teave NanaZipi kohta...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Tee</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Nimi</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Laiend</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Kaust</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Maht</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Maht tihendatult</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atribuudid</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Loodud</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Avatud</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Muudetud</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Ühtne</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Kommenteeritud</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Krüptitud</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Tükeldatud enne</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Tükeldatud pärast</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Sõnastik</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Tüüp</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Meetod</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Opsüsteem</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Failisüsteem</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Kasutaja</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Rühm</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Plokk</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Kommentaar</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Koht</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Tee prefiks</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Kaustu</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Faile</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Versioon</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Köide</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Mitmeköiteline</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Nihe</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Linke</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Plokke</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Köiteid</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-bitine</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-Endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Protsessor</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Füüsiline maht</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Päiste maht</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Kontrollsumma</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Karakteristikud</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Virtuaalaadress</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Lühinimi</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Loomisrakendus</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Sektori maht</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Režiim</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Tõrge</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Kogumaht</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Vaba ruum</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Klastri suurus</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Silt</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Kohalik nimi</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Teenusepakkuja</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Häälestus</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Keel</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Keel:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Redaktor</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Redaktor:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Võrdlusprogramm:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Süsteem</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Seosta NanaZip laienditega:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integreeri NanaZip kesta hüpikmenüüsse</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Kaskaad-hüpikmenüü</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Hüpikmenüü käsud:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Kaust&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Arhiiv&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Ava arhiiv</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Eralda failid...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Lisa arhiivi...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Testi arhiivi</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Eralda siia</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Eralda kausta {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Lisa arhiivi {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Tihenda ja meili...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Tihenda arhiiviks {0} ja meili</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Kaustad</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Töökaust</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Süsteemi ajutiste failide kaust</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Praegune kaust</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Kasutaja määratud:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Kasuta ainult irddraivide puhul</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Määrake ajutiste arhiivifailide asukoht.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Sätted</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Kuva element ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Kuva tegelikud failiikoonid</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Kuva süsteemimenüü</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Vali terve rida</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Kuva &amp;ruudujooned</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Ava üksus ühe klõpsuga</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Alternatiivne valikurežiim</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Kasuta &amp;suuri mälulehekülgi</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Teave NanaZipi kohta</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip on vaba tarkvara. Kuid kui soovite toetada NanaZipi arendamist, siis saate programmi registreerida.\n\nNanaZipi Eesti koduleht:\nhttp://www.hot.ee/somberg/7zip.html</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Süsteem ei saa eraldada nõutavat mälumahtu.</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Vigu ei leitud.</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} üksus(t) valitud</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Ei saa luua kausta {0}</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Selle arhiivi värskendamistoiminguid ei toetata.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Ei saa avada faili {0} arhiivina.</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Ei saa avada krüptitud arhiivi {0}. Kas vale parool?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Toetamata arhiivitüüp.</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Fail {0} on juba olemas.</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Faili {0} on muudetud.\nKas soovite selle arhiivis värskendada?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Ei saa värskendada faili\n{0}</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Ei saa käivitada redaktorit.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>See fail sarnaneb viirusega (faili nimi sisaldab pikka tühikute jada).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Toimingut ei saa käivitada kaustast, millel on pikk tee.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Te peate valima ühe faili.</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Te peate valima ühe või mitu faili.</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Liiga palju üksusi.</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>välja eraldatud</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>tihendatud</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Testimine</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Avamine...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Läbivaatamine...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Väljaeraldamine</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Eralda välja kausta:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Määrake väljaeraldatud failide asukoht.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Teed</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>&amp;Täielikud teenimed</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Teenime&amp;deta</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Ülekirjutus</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Küsi e&amp;nne ülekirjutamist</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Ki&amp;rjuta küsimata üle</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>&amp;Jäta olemasolevad failid vahele</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Nimeta a&amp;utomaatselt ümber</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Nimeta &amp;olemasolevad f. autom. ümber</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Failiasenduse kinnitamine</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Sihtkaust juba sisaldab töödeldavat faili.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Kas soovite asendada olemasoleva faili</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>selle failiga?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} baiti</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Nimeta a&amp;utomaatselt ümber</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Toetuseta tihendusmeetod failile {0}.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Andmeviga failis {0}. Fail on rikutud.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>Tsükkelkoodkontroll (CRC) failis {0} nurjus. Fail on rikutud.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Andmeviga krüptitud failis {0}. Kas vale parool?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Tsükkelkoodkontroll (CRC) krüptitud failis {0} nurjus. Kas vale parool?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Parooli sisestamine</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Sisestage parool:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Parooli kordus:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Kuva parool</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Paroolid ei kattu.</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Kasutage paroolis ainult inglise keele tähti, numbreid ja erimärke (!, #, $, ...).</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Parool on liiga pikk.</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>&amp;Parool</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Kulunud aeg:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Järelejäänud aeg:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Kogumaht:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Kiirus:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Töödeldud:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Tihendussuhe:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Vigu:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Arhiive:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Arhiivi lisamine</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arhiiv:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Värskend&amp;usrežiim:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Arhiivi&amp;vorming:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;Tihendusaste:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Tihendus&amp;meetod:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Sõnaraamatu ma&amp;ht:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Sõna maht:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Ühtse ploki maht:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Protsessorilõimede arv:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>Pa&amp;rameetrid:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Suvandid</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Loo is&amp;eavanev arhiiv</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Tihenda kirjutuseks avatud failid</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Krüptimine</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Krüptimismeetod:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Krüpti faili&amp;nimed</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Mälu hõivatus tihendamisel:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Mälu hõivatus hõrendamisel:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Tihenduseta</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Kiireim tihendus</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Kiirtihendus</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normaaltihendus</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maksimaaltihendus</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultratihendus</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Lisa ja asenda failid</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Värskenda ja lisa failid</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Värskenda olemasolevad failid</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Sünkrooni failid</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Sirvi</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Kõik failid</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Mitteühtne</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Ühtne</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Kopeerimine</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Teisaldamine</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Kopeeri asukohta:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Teisalda asukohta:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Kopeerimine...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Teisaldamine...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Ümbernimetamine...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Valige sihtkaust.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>See toiming pole selles kaustas toetatud.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Tõrge faili või kausta ümbernimetamisel</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Failikopeerimise kinnitamine</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Kas soovite kindlasti kopeerida arhiivi järgmised failid:</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Failikustutuse kinnitamine</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Kaustakustutuse kinnitamine</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Mitme faili kustutamise kinnitamine</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Kas soovite kindlasti kustutada faili {0}?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Kas soovite kindlasti kustutada kausta {0} ja kogu selle sisu?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Kas soovite kindlasti kustutada need {0} üksust?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Kustutamine...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Tõrge faili või kausta kustutamisel</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Süsteem ei saa teisaldada prügikasti pika teega faili.</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Kausta loomine</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Faili loomine</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Kausta nimi:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Faili nimi:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Uus kaust</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Uus fail</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Tõrge kausta loomisel</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Tõrge faili loomisel</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>- kommentaar</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Kommentaar:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Valimine</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Valiku tühistamine</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Mask:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Atribuudid</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Kaustaajalugu</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Diagnostikateated</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Teade</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Arvuti</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Võrk</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Dokumendid</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Süsteem</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Lisa</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Eralda välja</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Testi</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Kopeeri</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Teisalda</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Kustuta</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Teave</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Faili tükeldamine:</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Tükelda asukohta:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>&amp;Tükelda köideteks (baitides):</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Tükeldamine...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Tükeldamise kinnitamine</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Kas soovite kindlasti tükeldada faili {0} köiteks?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Köite maht peab olema algfaili mahust väiksem.</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Sobimatu köitemaht.</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Määratud köitemaht: {0} baiti.\nKas soovite kindlasti tükeldada arhiivi niisugusteks köideteks?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Failide ühendamine:</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>Ü&amp;henda asukohta:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Ühendamine...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Valige ainult tükeldatud faili esimene osa.</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Ei õnnestu tuvastada, et see fail oleks tükeldatud faili osa.</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Ei leia rohkem kui ühte tükeldatud faili osa.</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Kontrollsumma arvutamine...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Kontrollsumma</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Andmete CRC-kontrollsumma:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Andmete ja nimede CRC-kontrollsumma:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Jõudlustest</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Mälu hõivatus:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Tihendamine</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Hõrendamine</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Hinnang</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Üldine jõudlushinnang</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Praegune:</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Lõpptulemus:</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU hõivatus</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Hinnang/hõivatus</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Töötiire:</value>
+  </data>
+</root>

@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Dutch</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Nederlands</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Ja</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Nee</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>A&amp;fsluiten</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Hervatten</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Ja op &amp;alles</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Nee op a&amp;lles</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Stoppen</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Herstarten</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Achtergrond</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Voorgrond</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Pauzeren</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Gepauzeerd</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Weet u zeker dat u wilt annuleren?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Bestand</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>Be&amp;werken</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>Bee&amp;ld</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Favorieten</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>E&amp;xtra</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Openen</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Open b&amp;innen</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Open b&amp;uiten</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>Be&amp;kijken</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Bewerken</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;Hernoemen</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Kopiëren naar...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Verplaatsen naar...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>Verwij&amp;deren</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Bestand &amp;opsplitsen...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Bestanden &amp;samenvoegen...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Eigenschappen</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>O&amp;pmerking plaatsen...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Controlegetal berekenen</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Delta</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Nieuwe map</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Nieuw bestand</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Sluiten</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Koppeling</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Alternate streams</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>&amp;Alles selecteren</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Alles deselecteren</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Selectie &amp;omkeren</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>&amp;Selecteren...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>&amp;Deselecteren...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Selecteren op &amp;type</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Deselecteren op t&amp;ype</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Grote pictogrammen</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Kleine pictogra&amp;mmen</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Lijst</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Details</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Ongesorteerd</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Platte weergave</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 panelen</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Werkbalken</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Hoogste niveau openen</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Één niveau omhoog</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>&amp;Mapgeschiedenis...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Verversen</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Automatisch verversen </value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Archiefwerkbalk</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Standaardwerkbalk</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Grote knoppen</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Knoptekst weergeven</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Map toevoegen aan Favorieten als</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Bladwijzer toevoegen</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Opties...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Benchmark</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Inhoud...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Over NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Pad</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Bestandsindeling</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Grootte</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Ingepakte grootte</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Kenmerken</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Gemaakt op</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Geopend op</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Gewijzigd op</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Compact</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Commentaar</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Versleuteld</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Gesplitst voor</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Gesplitst na</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Woordenboek</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Methode</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Host-besturingssysteem</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Bestandssysteem</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Gebruiker</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Groep</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Blok</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Commentaar</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Positie</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Padvoorvoegsel</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Mappen</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Bestanden</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Versie</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Multivolume</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Verschuiving</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Koppelingen</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Blokken</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Volumes</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Fysieke grootte</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Kopgrootte</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Kenmerken</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Virtueel adres</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Korte naam</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Aanmaaktoepassing</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Sectorgrootte</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Modus</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Symbolische koppeling</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Fout</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Totale grootte</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Beschikbare ruimte</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Clustergrootte</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Lokale naam</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT-beveiliging</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Alternate stream</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Verwijderd</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Is boomstructuur</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Fouttype</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Fouten</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Fouten</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Waarschuwingen</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Waarschuwing</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Streams</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Alternate streams</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Grootte alternate streams</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Virtuele grootte</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Uitgepakte grootte</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Totale fysieke grootte</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Volume-index</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Subtype</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Korte opmerking</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Codepagina</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Eind grootte</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Ingesloten stub grootte</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Koppeling</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Harde koppeling</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Alleen lezen</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Opties</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Taal:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Applicaties</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Bewerken:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Vergelijken:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Systeem</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip associëren met:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Alle gebruikers</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>NanaZip integreren in het contextmenu</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Trapsgewijs contextmenu</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Contextmenu-items:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Pictogrammen in contextmenu</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Map&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Archief&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Archief openen</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Bestanden uitpakken...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Toevoegen aan archief...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Archief testen</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Hier uitpakken</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Uitpakken naar {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Toevoegen aan {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Inpakken en e-mailen...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Inpakken naar {0} en e-mailen</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Mappen</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Werkmap</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Tijdelijke map van het systeem</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Huidig</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Opgegeven:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Alleen voor verwisselbare media gebruiken</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Geef een locatie opvoor tijdelijke archiefbestanden.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Item ".." weergeven</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Werkelijke bestandspictogrammen weergeven</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Systeemmenu weergeven</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Volledige rij selecteren</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Rasterlijnen weer&amp;geven</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Enkele klik om een item te openen</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Alternatieve selectiemodus</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>&amp;Gebruik grote geheugenpagina's</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Over NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip is gratis software</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Het systeem kan de benodigde hoeveelheid geheugen niet toewijzen</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Er zijn geen fouten</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} item(s) geselecteerd</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Kan map '{0}' niet aanmaken</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Bijwerkoperaties worden niet ondersteund voor dit archief.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Kan bestand '{0}' niet openen als archief</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Kan versleuteld archief '{0}' niet openen. Verkeerd wachtwoord?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Niet-ondersteund archieftype</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Bestand {0} bestaat al</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Bestand '{0}' is gewijzigd.\nWilt u het bijwerken in het archief?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Kan bestand\n'{0}' niet bijwerken</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Kan de bewerker niet starten.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Het bestand lijkt op een virus (het bevat veel opeenvolgende spaties in de naam).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>De operatie kan niet worden uitgevoerd vanuit een folder met een lang pad.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Er moet één bestand geselecteerd worden</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Er moeten één of meerdere bestanden geselecteerd worden</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Te veel items</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Kan het bestand niet openen als {0} archief</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Het bestand is geopend als {0} archief</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Het archief is geopend met een verschuiving</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Uitpakken</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Inpakken</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Testen</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Openen...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Scannen...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Toevoegen</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Bijwerken</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Analyseren</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Repliceren</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Opnieuw inpakken</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Overslaan</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Kop aanmaken</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Uitpakken</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Uitpakken naar:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Geef een locatie op voor uitgepakte bestanden.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Padmodus:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Volledige padnamen</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Geen padnamen</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Absolute padnamen</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Relatieve padnamen</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Overschrijfmethode:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Vragen voor overschrijven</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Overschrijven zonder te vragen</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Bestaande bestanden overslaan</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Automatisch hernoemen</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Bestaande bestanden automatisch hernoemen</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Duplicaat van hoogste niveau verwijderen </value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Bestandsbeveiliging herstellen</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Bevestigen om een bestand te vervangen</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>De doelmap bevat het verwerkte bestand al.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Moet het bestaande bestand worden vervangen</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>door dit bestand?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bytes</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>A&amp;utomatisch hernoemen</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Niet-ondersteunde compressiemethode voor '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Gegevensfout in '{0}'. Bestand is beschadigd.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC mislukt in '{0}'. Bestand is beschadigd.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Gegevensfout in versleuteld bestand '{0}'. Verkeerd wachtwoord?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC mislukt in versleuteld bestand '{0}'. Verkeerd wachtwoord?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Verkeerd wachtwoord?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Niet-ondersteunde compresssiemethode</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Gegevensfout</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC mislukt</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Gegevens niet beschikbaar</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Gegevens eindigen onverwachts</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Er zijn nog gegevens na het einde van de payload</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Is geen archief</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Kopfout</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Verkeerd wachtwoord</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Start van het archief niet beschikbaar</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Start van het archief niet bevestigd</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Niet-ondersteunde functie</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Wachtwoord ingeven</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Wachtwoord ingeven:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Wachtwoord bevestigen:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>Wachtwoord &amp;tonen</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Wachtwoorden komen niet overeen</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Gebruik alleen alfanumerieke en speciale karakters (!, #, $, ...) voor het wachtwoord</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Wachtwoord is te lang</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Wachtwoord</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Tijd verstreken:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Tijd resterend:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Totale grootte:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Snelheid:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Verwerkt:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Compressieverhouding:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Fouten:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Archieven:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Toevoegen aan archief</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Archief:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Bijwerkmodus:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Archief&amp;formaat:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Compressie&amp;niveau:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Compressie&amp;methode:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>W&amp;oordenboekgrootte:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Woordgrootte:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Grootte compact blok:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Aantal CPU-threads:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parameters:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Opties</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>SF&amp;X-archief maken</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Gedeelde bestanden inpakken</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Versleuteling</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Versleutelingsmethode:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Bestandsnamen &amp;versleutelen</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Geheugengebruik bij inpakken:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Geheugengebruik bij uitpakken:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Bestanden na inpakken verwijderen</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Symbolische koppelingen opslaan</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Harde koppelingen opslaan</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Alternate data streams opslaan</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Bestandsbeveiliging opslaan</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Snelst</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Snel</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normaal</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maximaal</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Bestanden toevoegen en vervangen</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Bestanden bijwerken en toevoegen</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Bestaande bestanden bijwerken</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Bestanden synchroniseren</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Bladeren</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Alle bestanden</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Niet-compact</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Compact</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Kopiëren</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Verplaatsen</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Kopiëren naar:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Verplaatsen naar:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Kopiëren...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Verplaatsen...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Hernoemen...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Selecteer een doelmap.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>De operatie wordt niet ondersteund voor deze map.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Fout bij het hernoemen van bestand of map</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Kopiëren bestand bevestigen</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Weet u zeker dat u deze bestanden naar het archief wilt kopiëren</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Verwijderen bestand bevestigen</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Verwijderen map bevestigen</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Verwijderen meerdere bestanden bevestigen</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Weet u zeker dat u '{0}' wilt verwijderen?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Weet u zeker dat u de map '{0}' en de onderliggende inhoud wilt verwijderen?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Weet u zeker dat u deze {0} items wilt verwijderen?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Verwijderen...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Fout bij verwijderen van bestand of map</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Het systeem kan een bestand met een lang pad niet verplaatsen naar de prullenbak</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Map aanmaken</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Bestand aanmaken</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Mapnaam:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Bestandsnaam:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Nieuwe map</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Nieuw bestand</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Fout bij aanmaken map</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Fout bij aanmaken bestand</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Opmerking</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Opmerking:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Selecteren</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Deselecteren</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Masker:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Eigenschappen</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Mapgeschiedenis</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Diagnostische berichten</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Bericht</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Computer</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Netwerk</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Documenten</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Systeem</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Toevoegen</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Uitpakken</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Testen</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Kopiëren</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Verplaatsen</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Bestand opsplitsen</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>Op&amp;splitsen naar:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Opsplitsen in &amp;volumes, bytes:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Opsplitsen...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Opsplitsen bevestigen</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Weet u zeker dat u het bestand wilt opsplitsen in {0} volumes?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>De volumegrootte moet kleiner zijn dan het oorspronkelijke bestand</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Onjuiste volumegrootte</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Opgegeven volumegrootte: {0} bytes.\nWeet u zeker dat u het archief zo wilt opsplitsen?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Bestanden samenvoegen</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Samenvoegen naar:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Samenvoegen...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Selecteer alleen het eerste onderdeel van het opgesplitste bestand</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Kan het bestand niet herkennen als onderdeel van een opgesplitst bestand</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Kan niet meer dan één deel van het opgesplitste bestand vinden</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Checksum berekenen...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Checksum informatie</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC-checksum voor gegevens:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC-checksum voor gegevens en namen:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Benchmark</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Geheugengebruik:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Inpakken</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Uitpakken</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Snelheid</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Totale snelheid</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Huidig</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Resultaat</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU-gebruik</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Snelheid/gebruik</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Aantal tests:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Koppelen</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Koppelen</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Koppelen van:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Koppelen aan:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Koppelingstype</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Harde koppeling</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Symbolische bestandskoppeling</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Symbolische mapkoppeling</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Map knooppunt</value>
+  </data>
+</root>

@@ -1,0 +1,1044 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Romanian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Română</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Bine</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Anulare</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Da</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Nu</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Închide</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Ajutor</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Continuă</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Da, pe &amp;toate</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>N&amp;ici unul</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Opreşte</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Restartează</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>În &amp;fundal</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>La &amp;suprafaţă</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Pauză</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>În pauză</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Eşti sigur că vrei să anulezi?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Fişier</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Editează</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Vizualizează</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>F&amp;avorite</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Unelte</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Ajutor</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Deschide</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Deschide î&amp;n</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Deschide în &amp;afară</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Vizualizeză</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Editează</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;Redenumeşte</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Copiază la...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Mută la...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>Şter&amp;ge</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Împarte &amp;fişierul...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>&amp;Uneşte fişierele...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Proprietăţi</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Comen&amp;tariu</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Calculează suma de verificare</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Crează director</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Crează fişier</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>&amp;Ieşire</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>&amp;Selectează tot</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>&amp;Deselectează tot</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Inversează selecţia</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Selectează...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Deselectează...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Selectează după tip</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Deselectează după tip</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Iconiţe m&amp;ari</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Iconiţe m&amp;ici</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Listă</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Detalii</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Nesortat</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Vedere plană</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 panouri</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>Bare de &amp;unelte</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Deschide directorul rădăcină</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Un nivel mai sus</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Istoria directoarelor...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Împrospătează</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Bara de arhivare</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Bara de unelte standard</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Butoane mari</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Arată textul butoanelor</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Adaugă directorul în Favorite ca</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Semn de carte</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Opţiuni...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Banc de încercare</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Conţinut...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Despre NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Calea</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Extensie</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Mărime</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Mărimea pachetului</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atribute</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Creată</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Accesată</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Modificată</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Solidă</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Comentat</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Criptat</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Împarte înainte</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Împarte după</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Dicţionar</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Metoda</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>SO gazdă</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Fişier de sistem</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Utilizator</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Grup</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Blochează</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Comentariu</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Poziţia</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Prefixul destinaţiei</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Directoare</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Fişiere</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Versiunea</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Volum</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Multivolume</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Ofset</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Legături</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Blocuri</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Mărime fizică</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Mărimea antetelor</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Caracteristici</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Adresa virtuală</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Eroare</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Mărimea totală</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Spaţiu liber</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Mărimea grupului</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Etichetă</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Nume local</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Distribuitor</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Opţiuni</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Limba</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Limba:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Editor:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Sistem</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Asociază NanaZip cu:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integrează NanaZip în contextul meniului shell</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Contextul meniului în cascadă</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Obiectele meniului:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Director&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Arhivă&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Deschide arhiva</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Dezarhivează fişierele...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Adaugă într-o arhivă...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Testează arhiva</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Dezarhivează aici</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Dezarhivează în {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Adaugă în {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Arhivează şi trimite email...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Arhivează în {0} şi trimite email</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Directoare</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Directorul de lucru</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>Directorul &amp;tempotar al sistemului</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Actual</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Specificat:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Utilizează numai pentru discurile detaşabile</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Specifică o destinaţie pentru arhivele temporare.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Setări</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Arată ".." obiect</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Arată iconiţele reale ale fişierului</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Arată meniul sistemului</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Selectează &amp;tot rândul</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Arată liniile de ghidare</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Mod de selectare &amp;alternativă</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Utilizează pagini &amp;mari de memorie</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Despre NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip este un program gratuit. Oricum, poţi contribui la dezvoltarea NanaZip înregistrându-te.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Sistemul nu poate aloca memoria necesară</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Nu sunt erori</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} obiect(e) selectat(e)</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Nu pot crea directorul '{0}'</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Operaţiile de actualizare nu sunt suportate pentru această arhivă.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Nu pot deschide fişierul '{0}' ca arhivă</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Nu pot deschide arhiva criptată '{0}'. Parola greşită?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Tip de arhivă nesuportat</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Fișierul {0} există deja</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Fişierul '{0}' a fost modificat.\nDoreşti să îl actualizez în arhivă?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Nu pot actualiza fişierul\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Nu pot porni editorul.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>The file looks like a virus (the file name contains long spaces in name).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Operația nu poate fi apelată dintr-un director cu cale lungă.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Trebuie să alegi un fișier</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Trebuie să alegi unul sau mai multe fișiere</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Prea multe obiecte</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Dezarhivez</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Arhivare</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Testez</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Deschid...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Citesc...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Dezarhivează</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Dezarhivează în:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Specifică o destinaţie pentru fişierele dezarhivate.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Modul destinaţie</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Numele întreg al destinaţiei</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Fără locaţie</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Modul de înlocuire</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Întreabă înainte de a înlocui</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Înlocuieşte fară a întreba</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Sări peste fişierele existente</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Auto redenumire</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Auto redenumeşte fişierele existente</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Aprobă înlocuirea fişierului</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Fişierul există deja în directorul destinaţie.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Doriţi să înlocuiţi fişierul existent</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>cu acesta?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} octeţi</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>A&amp;uto redenumire</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Metodă de arhivare nesuportată pentru '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Eroare de date la '{0}'. Fişierul este corupt.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>Verificarea CRC a eşuat pentru '{0}'. Fişierul este corupt.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Erori de date la fişierul criptat '{0}'. Parolă greşită?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Verificarea CRC a eşuat pentru fişierul criptat '{0}'. Parolă greşită?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Introdu parola</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Introdu parola:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Reintrodu parola:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Arată parola</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Parolele nu sunt identice</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Utilizaţi numai litere, cifre şi caracterele speciale (!, #, $, ...) pentru parolă</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Parola este prea lungă</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Parola</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Timp trecut:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Timp rămas:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Mărimea:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Viteza:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Procesat:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Rata de comprimare:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Erori:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Arhive:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Adaugă într-o arhivă</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arhivează:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Modul de a&amp;ctualizare:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Formatul arhivei:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;Nivel de arhivare:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Metoda de arhivare:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Mărimea &amp;dicţionarului:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Mărimea &amp;cuvântului:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Mărimea blocului solid:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Numărul de procesoare utilizate:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parametri:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Opţiuni</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Crează arhivă SF&amp;X</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Arhivează fişierele partajate</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Criptare</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Metoda de criptare:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Criptează &amp;numele fişierului</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Memorie utilizată pentru arhivare:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Memorie utilizată pentru dezarhivare:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Stochează</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Imediată</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Rapidă</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normală</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maximă</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Adaugă şi înlocuieşte fişierele</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Actualizează şi adaugă fişierele</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Actualizează fişierele existente</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Sincronizează fişierele</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Caută</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Toate fişierele</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>NEsolid</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Copiază</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Mută</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Copiază la:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Mută la:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Copiez...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Mut...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Redenumesc...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Alege directorul destinaţie.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Operaţia nu este suportată.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Eroare la redenumirea fişierului sau directorului</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Aprobă copierea fişierului</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Eşti sigur că vrei să copiezi fişierele în arhivă</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Aprobă ştergerea fişierului</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Aprobă ştergerea directorului</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Aprobă ştergerea mai multor fişiere</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Eşti sigur că vrei să ştergi '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Eşti sigur că vrei să ştergi directorul '{0}' şi tot conţinutul lui?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Eşti sigur că vrei să ştergi aceste {0} obiecte?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Şterg...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Eroare la ştergerea fişierului sau directorului</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Sistemul nu poate muta un fişier cu cale lungă la Coşul de gunoi</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Crează director</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Crează fişier</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Numele directorului:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Numele fişierului:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Director nou</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Fişier nou</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Eroare la crearea directorului</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Eroare la crearea fişierului</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Comentariu</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Comentariu:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Selectează</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Deselectează</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Masca:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Proprietăţi</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Istoria directoarelor</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Mesaje de diagnosticare</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Mesaj</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Computer</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Reţea</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Documente</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Sistem</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Arhivează</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Dezarhivează</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Testează</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Copiază</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Mută</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Şterge</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Împarte fişierul</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>Î&amp;mparte în:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Împarte în &amp;volume, octeţi:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Împart...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Confirmă împărţirea</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Eşti sigur că vrei să imparţi arhiva în {0} volume (părţi)?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Dimensiunea volumului trebuie să fie mai mică decât dimensiunea fişierului original</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Dimensiunea volumului este incorectă</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Dimensiunea volumului specificat: {0} octeţi.\nEşti sigur că vrei să împarţi arhiva în mai multe volume (părţi)?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Uneşte fişierele</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Uneşte în:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Unesc...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Alege doar prima parte din fişierul împărțit</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Nu pot detecta fișierul ca parte a fișierului împărțit</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Nu găsesc mai mult de o parte din fișierul împărțit</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Calculez suma de control...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Informaţii despre suma de control</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Suma de control CRC pentru conţinut:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Suma de control CRC pentru conţinut şi nume:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Banc de încercare</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Memorie utilizată:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Arhivez</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Dezarhivez</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Rata</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Rata totală</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Rezultate</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Utilizarea procesorului</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Rata / Utilizare</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Trecute:</value>
+  </data>
+</root>

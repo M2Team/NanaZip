@@ -1,0 +1,1293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Swahili</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Kiswahili</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Sawa</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Ghairi</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Ndio</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Hapana</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Funga</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Usaidizi</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Endelea</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Ndio kwa &amp;zote</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Hapana kwa z&amp;ote</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Simamisha</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Washa upya</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Mandharinyuma</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Mandharimbele</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Tuliza</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Imetulizwa</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Una uhakika unataka kughairi?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Faili</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Hariri</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Mwoneko</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>Z&amp;inazopendwa</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Zana</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Usaidizi</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Fungua</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Fungua &amp;ndani</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Fungua n&amp;je</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Mwoneko</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Hariri</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Pati&amp;a jina upya</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Nakili hadi...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Sogeza hadi...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Futa</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Gawiza faili...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Ung&amp;anisha nyaraka...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>S&amp;ifa</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Toa m&amp;aoni...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Kokotoa checksum</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Tofautisha</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Unda kabrasha</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Unda faili</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>F&amp;unga</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Kiungo</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Mitiririsho mbadala</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Teua &amp;zote</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Ondoa uteuzi wote</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Pindua uteuzi</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Teua...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Ondoa uteuzi...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Teua kulingana na aina</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Ondoa uteuzi kulingana na aina</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Iko&amp;ni kubwa</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Ikoni ndogo</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Orodha</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Maelezo</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Haijapangwa</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Mwoneko bapa</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 paneli</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Miambaa zana</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Fungua kabrasha shina</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Juu kiwango kimoja</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Historia ya folda...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Weka upya</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Weka upya kioto</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Mwambaa zana wa akiba</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Mwambaa zana wa kawaida</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Vitufe vikubwa</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Onyesha matini ya vitufe</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Ongeza folda kwa zinazopendwa kama</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Alamisho</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Chaguo...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Kanuni ya mwongozo</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Yaliyomo...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Kuhusu NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Kijia</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Jina</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Kiendelezi</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Folda</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Ukubwa</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Ukubwa finyaza</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Sifa</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Iliundwa</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Imefikiwa</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Imerekebishwa</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Thabiti</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Ilitolewa maoni</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Imesimbwa fiche</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Gawiza kabla</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Gawiza baada</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Kamusi</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Aina</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Kinga</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Mbinu</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>OS mwenyeji</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Mfumo wa mafaili</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Mtumiaji</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Kundi</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Fungu</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Maoni</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Cheo</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Kiambishi awali ya kijia</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Folda</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Nyaraka</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Toleo</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Kiwango</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Viwango-zaidi</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Chipuo</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Viungo</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Vifungu</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Viwango</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>biti-64</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Ukubwa wa asili</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Ukubwa wa vijajuu</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Sifa</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Anwani pepe</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Jina fupi</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Programu-tumizi iliyounda</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Ukubwa wa sekta</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Modi</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Kiungo ishara</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Tatizo</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Ukubwa jumla</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Nafasi huru</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Ukubwa wa kishada</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Lebo</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Jina la ndani</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Mtoa-huduma</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Usalama wa NT</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Mtiririsho mbadala</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Imefutwa</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Ni mti</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>	</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Aina ya hitilafu</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Hitilafu</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Hitilafu</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Maonyo</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Onyo</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Mitiririsho</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Mitiririsho mbadala</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Ukubwa wa mitiririsho mbadala</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Ukubwa pepe</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Ukubwa wa kufungusha</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Jumla ya ukubwa halisi</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Kielezo cha kihifadhi</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>AinaNdogo</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Maoni fupi</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Ukurasa msimbo</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Ukubwa wa mkia</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Ukubwa wa stub iliyopachikwa</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Kiungo</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>Kiungo dhabiti</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1086" xml:space="preserve">
+    <value>Soma-tu</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Chaguo</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Lugha</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Lugha:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Kihariri</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Kihariri:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Tofauti:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Mfumo</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Husisha NanaZip na:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Watumiaji wote</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Jumlisha NanaZip kwenya menyu muktadha ya sheli</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Menyu muktadha iliyoporomoka</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Vipengee vya menyu muktadha:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Ikoni katika menyu muktadha</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Folda&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Kihifadhi&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Fungua kihifadhi</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Chopoa faili...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Ongeza kwa kihifadhi...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Pima kihifadhi</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Chopoa hapa</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Chopoa kwenda {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Ongeza kwa {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Finyaza na utume barua pepe...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Finyaza kwa {0} na tuma barua pepe</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Folda</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Folda tumizi</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>F&amp;olda ya muda ya mfumo</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Ya sasa</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Imebainishwa:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Tumia kwa viendeshi vinavyoweza kutolewa pekee</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Bainisha eneo la muda la vihifadhi.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Mipangilio</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Onyesha ".." kipengee</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Onyesha ikoni halisi za faili</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Onyesha menyu ya mfumo</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Teua sa&amp;fumlalo nzima</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Onyesha &amp;mistari mraba</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Bofya mara moja kufungua kipengee</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Mtindo mbadala wa uteuzi</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Tumia kurasa &amp;kubwa za kumbukumbu</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Kuhusu NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip ni programu huria</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Mfumo hauwezi kutenga kumbukumbu inayohitajika</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Hakuna matatizo yoyote</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>Vipengee {0} vimeteuliwa</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Folda '{0}' haitengenezeki</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Operesheni za usasishi haziauniwi kwa kihifadhi hiki.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Haiwezi fungua faili '{0}' kama kihifadhi</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Haiwezi fungua kihifadhi simba-fiche '{0}'. Nywila mbovu?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Mtindo wa kihifadhi haiauniwi</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Faili {0} tayari ipo</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Faili '{0}' ilibadilishwa.\nJe, unataka kuisasisha katika kihifadhi?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Haiwezi kusasisha faili\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Haiwezi fungua kihariri.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Faili hii inakaa kama kirusi (jina la faili ina nafasi ndefu).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Operesheni haiwezi itwa kutoka folda iliyo na kijiajina ndefu.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Lazima uteue faili moja</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Lazima uteue faili moja au zaidi</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Vipengee vingi kupindukia</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Haiwezi fungua faili kama {0} kihifadhi</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Faili imefunguliwa kama {0} kihifadhi</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Kihifadhi imefunguliwa kama chipuo</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Chopoa</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Inafinyaza</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Inapima</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Inafungua...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Inatambaza...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Inaondoa</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Inaongeza</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Inasasisha</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Inakagua</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Inarudufisha</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Inafungasha tena</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Inaruka</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Inafuta</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Inatengeneza kijajuu</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Chopoa</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Chopoa hadi:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Bainisha eneo la faili zitakazochopolewa.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Mtindo wa kijia:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Jina kijia kamili</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Hakuna jina kijia</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Kijiajina kuntu</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Kijiajina husiani</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Mtindo wa kuandikia juu:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Uliza kabla kuandikia juu</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Andikia juu bila kisituo</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Ruka faili zilizopo</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Patia jina upya kioto</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Patia faili zilizopo majina mapya kioto</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Ondoa urudufu wa kabrasha shina</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Rejesha usalama wa faili</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Dhibitisha kubadilisha faili</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Folda fikio tayari inayo faili iliyochakatwa.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Ungependa kubadilisha faili iliyopo</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>na hii?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} baiti</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Patia jina &amp;upya kioto</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Mbinu ya ufinyazi haiauniwi kwa '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Tatizo la data katika '{0}'. Faili imevunjika.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC haikufaulu katika '{0}'. Faili imevunjika.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Tatizo la data katika faili simba-fiche '{0}'. Nywila mbovu?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC haikufaulu katika faili simba-fiche '{0}'. Nywila mbovu?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Nywila si sahihi?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Mbinu ya ufinyazi haiauniwi</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Tatizo la data</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC haikufaulu</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Data haipatikani</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Mwisho wa data haukutarajika</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Kuna data baada ya mwisho wa data muhimu</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Si kihifadhi</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Matatizo ya vijajuu</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Nywila si sahihi</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Mwanzo wa kihifadhi haupatikani</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Mwanzo wa kihifadhi haujadhibitishwa</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Kipengele hakiauniwi</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Ingiza nywila</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Ingiza nywila:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Ingiza nywila tena:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Onyesha nywila</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Nywila hazifanani</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Tumia tu herufi za Kiingereza, nambari na vibambo spesheli (!, #, $, ...) katika nywila</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Nywila ni ndefu kupindukia</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Nwyila</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Muda uliopita:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Muda uliobaki:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Jumla ya ukubwa:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Kasi:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Iliyochakatwa:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Uwiano wa ufinyazi:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Matatizo:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Vihifadhi:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Ongeza kwa kihifadhi</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Hifadhi:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Mbinu ya usasishi:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Umbizo la kihi&amp;fadhi:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Kiwango cha u&amp;finyazi:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Mbinu ya ufinyazi:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>U&amp;kubwa wa kamusi:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Ukubwa wa neno:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Ukubwa wa fungu dhabiti:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Idadi ya mitungo ya CPU:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parameta:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Chaguo</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Tengeneza kihifadhi ya SF&amp;X</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Finyaza faili shirikishi</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Usimbaji fiche</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Mbinu ya usimbaji fiche:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Simba fiche maji&amp;na ya faili</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Kumbukumbu inayotumika kufinyaza:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Kumbukumbu inayotumika kutoa ufinyazi:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Futa mafaili baada ya kutoa ufinyazi</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Hifadhi viungo ishara</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Hifadhi viungo dhabiti</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Hifadhi mitiririsho data mbadala</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Hifadhi usalama wa faili</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Ekeza</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Haraka zaidi</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Haraka</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Kawaida</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Upeojuu</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Upoejuu zaidi</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Ongeza na badilisha faili</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Sasisha na ongeza faili</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Fanya faili zilizopo ziwe freshi</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Landanisha faili</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Vinjari</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Faili zote</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Sio-dhabiti</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Dhabiti</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Nakili</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Sogeza</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Nakili hadi:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Sogeza hadi:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Inanakili...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Inasogeza...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Inapeana jina upya...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Teua folda fikio.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Operesheni hiyo haikubaliki kwa folda hii.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Tatizo katika kupatia faili au folda jina upya</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Dhibitisha unakilishaji wa faili</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Una uhakika unataka kunakilisha faili hadi hifadhi?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Dhibitisha ufutaji wa faili</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Dhibitisha ufutaji wa folda</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Dhibitisha ufutaji wa faili anuwai</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Una uhakika unataka kufuta '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Una uhakika unataka kufuta folda '{0}' na yote yaliyomo?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Una uhakika unataka kufuta vipengee hivi {0} ?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Inafuta...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Tatizo katika kufuta faili au folda</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Mfumo haiwezi kutuma faili yenye kijia ndefu kwa kijalala</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Unda folda</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Unda faili</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Jina la folda:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Jina la faili:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Folda Mpya</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Faili Mpya</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Tatizo kuuda folda</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Tatizo kuunda faili</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Maoni</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Maoni:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Teua</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Ondoa uteuzi</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Figu:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Sifa</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Historia ya folda</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Jumbe za uchunguzi</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Ujumbe</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Tarakilishi</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Mtandao</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Nyaraka</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Mfumo</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Ongeza</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Chopoa</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Jaribu</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Nakili</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Sogeza</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Futa</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Taarifa</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Gawiza faili</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Gawiza hadi:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Gawiza hadi &amp;vihifadhi data, baiti:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Inagawiza...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Dhibitisha kugawiza</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Una uhakika unataka kugawiza faili hii hadi vihifadhi data {0} ?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Ukubwa wa kihifadhi data lazima iwe ndogo kuliko ukubwa wa faili asili</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Ukubwa wa kihifadhi data sio sahihi</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Ukubwa wa kihifadhi data uliobainishwa: {0} bytes.\nUna uhakika unataka kugawiza hifadhi hadi vihifadhi kama hivi?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Unganisha faili</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Unganisha hadi:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Inaunganisha...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Teua tu pande ya kwanza ya faili gawizww</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Haiwezi kugundua faili kama pande ya faili gawize</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Haiwezi pata zaidi ya pande moja ya faili gawize</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Inakokotoa checksum...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Taarifa ya checksum</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Checksum CRC ya data:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Checksum CRC ya data na majina:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Kanuni ya mwongozo</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Matumizi ya kumbukumbu:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Kufinyaza</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Kutoa ufinyazi</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Kadirio</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Kadirio kiujumla</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Ya sasa</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Yanayotokea</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Matumizi ya CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Kadirio / Matumizi</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Mapitio:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Kiungo</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Kiungo</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Kiungo kutoka:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Kiungo hadi:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Aina ya kiungo</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Kiungo ngumu</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Faili kiungo kiishara</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Folda kiungo kiishara</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Makutano ya saraka</value>
+  </data>
+</root>
