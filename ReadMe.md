@@ -74,14 +74,6 @@ deployable everywhere.
 
 ## Known issues
 
-- You may meet the application crash in some cases in NanaZip 1.0 Preview 1 and
-  NanaZip 1.0 Preview 2 because there are some issues in the exception handler 
-  implementation from VC-LTL 5.x. NanaZip 1.0 Preview 3 will be fixed the issue
-  because mingkuang (the author of VC-LTL) has released the new version of 
-  VC-LTL. 
-- Windows may show the contrast white icon in the taskbar when you using the 
-  contrast standard mode in NanaZip 1.0 Preview 1 and NanaZip 1.0 Preview 2 is 
-  fixed the issue.
 - If you can't find NanaZip in the context menu, please restart all File 
   Explorer processes via Task Manager.
 - Due to the issues in Desktop Bridge file system virtualization, you are 
@@ -91,6 +83,9 @@ deployable everywhere.
   `%UserProfile%/AppData` will be redirected in Windows 10, and file operations
   in directories other than `Local`, `LocalLow` and `Roaming` in 
   `%UserProfile%/AppData` will still be redirected in Windows 11.
+- Due to the Microsoft Store limitations, NanaZip 1.1 Servicing Update 1 and 
+  later won't support languages not mentioned in 
+  https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages.
 
 ## Development Roadmap
 
