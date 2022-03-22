@@ -1,0 +1,1044 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Sinhala</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>සිංහල</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>හරි</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>එපා</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>ඔවු (&amp;Y)</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>නැහැ (&amp;N)</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>වසන්න (&amp;C)</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>උදව්</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>නැවත අරඹන්න (&amp;C)</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>සියල්ලටම ඔවු (&amp;A)</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>සියල්ලටම නැහැ(&amp;L)</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>නවතන්න</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>ප්‍රත්‍යාරම්භ කරන්න</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>පසුබිමින් (&amp;B)</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>පෙරබිමින් (&amp;F)</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>මදකට නවතන්න (&amp;P)</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>මදකට නවතා ඇත</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>ඉවත්වීමට අවශ්‍ය බව විශ්වාස ද ?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>ගොනුව (&amp;F)</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>සැකසුම් (&amp;E)</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>දසුන (&amp;V)</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>කැමතිම (&amp;A)</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>මෙවලම් (&amp;T)</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>උදව් (&amp;H)</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>විවෘත කරන්න (&amp;O)</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>මෙහිම විවෘත කරන්න (&amp;I)</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>පිටතින් විවෘත කරන්න (&amp;U)</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>දසුන (&amp;V)</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>සංස්කරණය කරන්න (&amp;E)</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>නැවත නම් කරන්න (&amp;M)</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>වෙනත් තැනකට පිටපත් කරන්න (&amp;C)...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>වෙනත් තැනකට ගෙනය‍න්න (&amp;M)...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>මකන්න (&amp;D)</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>ගොනුව බෙදන්න (&amp;S)...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>ගොනු එකතු කරන්න (&amp;B)...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>වත්කම් (&amp;R)</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>ටීකා (&amp;N)</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>checksum ගණනය කරන්න</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>බහාලුමක් තනන්න</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>ගොනුවක් තනන්න</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>ඉවත් වන්න (&amp;X)</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>සියල්ල තෝරන්න (&amp;A)</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>තෝරන ලද සියල්ල ඉන් ඉවත් කරන්න</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>අනෙක් පැත්තට තෝරන්න (&amp;I)</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>තෝරන්න...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>තේරීම ඉවත් කරන්න...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>වර්ගයෙන් තෝරන්න</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>වර්ගයෙන් තේරීම ඉවත් කරන්න</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>විශාල මූර්ති (&amp;G)</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>කුඩා මූර්ති (&amp;M)</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>ලයිස්තුව (&amp;L)</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>සවිස්තර (&amp;D)</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>අසුරන නොලද</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>පැතලි දසුන</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>පැනල &amp;2</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>මෙවලම් තීරු (&amp;T)</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>ප්‍රධාන බහාලුම විවෘත කරන්න</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>ඉහළට එක් ස්ථරයක්</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>බහාලුම් අතීතය...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>ප්‍රතිපූරණය කරන්න(&amp;R)</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>හැකිළුම් මෙවලම් තීරුව</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>සම්මත මෙවලම් තීරුව</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>විශාල බොත්තම්</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>බොත්තම් පෙළ දක්වන්න</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>බහාලුම කැමතිම අංග වලට එකතු කරන අයුර (&amp;A)</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>පොත් සලකුණ - අංක</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>විකල්ප (&amp;O)...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Benchmark</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>අන්තර්ගතය (&amp;C)...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>NanaZip පිළිබඳව (&amp;A)...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>මංපෙත</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>නම</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>දිගුව</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>බහාලුම</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>විශාලත්වය</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>හැකිළුමෙන් පසු විශාලත්වය</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>ලක්ෂණ</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>නිර්මාණය කළ දිනය</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>ප්‍රවේශ වූ දිනය</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>අළුත් කළ දිනය</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>සවි</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>ටීකා කොට ඇත</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>සුරක්ෂිතය</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Split Before</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Split After</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Dictionary</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>වර්ගය</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>ක්‍රමය</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>ධාරක මෙහෙයුම් පද්ධතිය</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>ගොනු පද්ධතිය</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>පරිශිලක</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>සමූහය</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>ටීකාව</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>පිහිටීම</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Path Prefix</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>බහාලුම්</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>ගොනු</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>සංස්කරණය</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Multivolume</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>සබැඳීන්</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Blocks</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Volumes</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>බිට්-64</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>මධ්‍යම සැකසුම් පද්ධතිය (CPU)</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>භෞතික විශාලත්වය</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>ශීර්ෂ විශාලත්වය</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>මුහුණුවර</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Virtual Address</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>දෝෂයක්</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>සම්පූර්ණ විශාලත්වය</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>නිදහස් ඉඩ</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Cluster විශාලත්වය</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>නම් පත</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Local Name</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>සපයන්නා</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>විකල්ප</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>භාෂාව</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>භාෂාව:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>සංස්කාරකය</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>සංස්කාරකය (&amp;E):</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>පද්ධතිය</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip සමග හවුල් කරන්න:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Shell context මෙනුව වෙත NanaZip අන්තර්ගත කරන්න</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Context menu අංග එක් අංගයක් යටතේ සඳහන් කරන්න‍‍‍</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Context මෙනු අංග:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;බහාලුම&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;හැකිළුම&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>හැකිළුම විවෘත කරන්න</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>ගොනු ලිහන්න...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>හැකිළුමකට ඇතුල් කරන්න...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>හැකිළුම පරීක්ෂා කරන්න</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>මෙතැනට ලිහන්න</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>{0} වෙත ලිහන්න</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0} වෙත එක් කරන්න</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>හකුළා විදුලි තැපැල් කරන්න...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>{0} වෙත හකුළා විදුලි තැපැල් කරන්න</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>බහාලුම්</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>සක්‍රීය බහාලුම් (&amp;W)</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>පද්ධති තාවකාලික දෑ (Temp) බහාලුම (&amp;S)</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>වත්මන් (&amp;C)</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>තෝරන්න (&amp;S):</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>ඉවත් කළ හැකි ධාවක සඳහා පමණක් භාවිතා කරන්න</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>තාවකාලික හැකිළුම් ගොනු සඳහා ස්ථානයක් දෙන්න.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>සෙටිංග්ස්</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>".." අංගය පෙන්වන්න</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>ගොනු වල සත්‍ය මූර්තිය පෙන්වන්න</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>පද්ධති මෙනුව පෙන්වන්න</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>සම්පූර්ණ තීරු තේරීම (&amp;F)</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>වගු රේභා පෙන්වන්න (&amp;G)</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>වෛකල්පිත තේරීම් ස්වභාවය (&amp;A)</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>විශාල මතක පිටු භාවිතා කරන්න (&amp;L)</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip පිළිබඳව</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip නිදහස් මෘදුකාංගයක් වුවත්, ලියාපදිංචි වීම මගින් NanaZip හි වැඩි දියුණුව සඳහා ඔබට දායක විය හැකිය.\n\nමෙම සිංහල භාෂා පරිවර්තනය G.S.N. සුපුන් බුධාජීව (budhajeewa@gmail.com) විසින් සිදු කරන ලදී.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>අවශ්‍ය මතක ප්‍රමාණය පද්ධතියට වෙන් කර ගත නොහැක</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>දෝෂ නොමැත</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>වස්තු {0}ක් තෝරා ඇත</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>'{0}' බහාලුම තැනිය නොහැක</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>මෙම හැකිළුම සඳහා යාවත්කාල කිරීම් සහයෝගය නොදක්වයි.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>'{0}' ගොනුව හැකිළුමක් ලෙස විවෘත කළ නොහැක</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>සුරක්ෂිත '{0}' හැකිළුම විවෘත කළ නොහැක. මුරපදය වැරදි ද ?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>සහයෝගී නොවන හැකිළුම් ක්‍රමයක්</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>{0} ගොනුව දැනටමත් ඇත</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>'{0}' ගොනුව නව්‍ය කෙරිනි.\nහැකිළුමෙහි එය යාවත්කාල කිරීමට ඔබට අවශ්‍ය ද ?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>ගොනුව යාවත්කාල කල නොහැක\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>සංස්කාරකය විවෘත කළ නොහැක.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>ගොනුව වෛරසයක් වැනිය (ගොනු නාමයේ දිගු හිස් තැන් ඇත).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>දිගු මංපෙතක් ඇති බහාලුමකින් ක්‍රියාකාරීත්වය කැඳවිය නොහැක.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>එක් ගොනුවක් පමණක් තේරිය යුතුය.</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>ගොනු එකක් හෝ වැඩි ගණනක් තේරිය යුතුය.</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>අංග ඉතා අධිකය</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>ලිහමින් පවතී‍</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>හකුළමින් පවතී</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>පරීක්ෂා කිරීම</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>විවෘත කරමින් පවතී...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>සුපිරික්සමින් පවතී...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>ලිහන්න</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>ලිහීමට තැනක් (&amp;X) :</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>ලිහන ලද ගොනු සඳහා ස්ථානයක් තෝරන්න.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>මංපෙත් ස්වභාවය</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>සම්පූර්ණ මංපෙත් නම්</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>මංපෙත් නම් අවශ්‍ය නැත</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>උඩින් ලිවීමේ ස්වභාවය</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>උඩින් ලියන්නට පෙර විමසන්න</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>විමසීමෙන් තොරව උඩින් ලියන්න</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>දැනටමත් ඇති ගොනු මගහරින්න</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>ගොනු ස්වයංක්‍රියව ප්‍රතිනම් කරන්න</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>දැනටමත් ඇති ගොනු‍ ප්‍රතිනම් කරන්න</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>ගොනු ප්‍රතිස්ථාපනය තහවුරු කර ගැනීම</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>ගමනාන්ත බහාලුමේ දැනටමත් නිර්මිත ගොනුවක් ඇත.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>දැනටම පවතින පහත ගොනුව,</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>මෙය සමග ප්‍රතිස්ථාපනය කරන්න ද ?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} බයිට (Bytes)</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>ස්වයංක්‍රියව ප්‍රතිනම් කරන්න (&amp;U)</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>'{0}' සඳහා සහයෝගය නොදක්වන හැකිළුම් ක්‍රමයක්.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>'{0}' හි දත්ත දෝෂයකි. ගොනුව බිඳී ඇත.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>'{0}' හි CRC අසමත් විනි. ගොනුව බිඳී ඇත.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>සුරක්ෂිත '{0}' ගොනුවේ දත්ත දෝෂයකි. වැරදි මුරපදයක් ද ?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>සුරක්ෂිත '{0}' ගොනුවේ CRC අසමත් විනි. වැරදි මුරපදයක් ද ?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>මුරපදය ඇතුල් කරන්න</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>මුරපදය ඇතුල් කරන්න:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>මුරපදය නැවත ඇතුල් කරන්න:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>මුරපදය පෙන්වන්න (&amp;S)</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>මුරපද නොගැලපේ</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>මුරපද සඳහා ඉංග්‍රිසි අකුරු, ඉලක්කම් සහ විශේෂිත සංකේත පමණක් භාවිතා කරන්න (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>මුරපදය දිග වැඩිය</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>මුරපදය</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>ගතවූ කාලය:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>ඉතිරි කාලය:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>සම්පූර්ණ විශාලත්වය:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>වේගය:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>ක්‍රියාවලියට භාජනය වූ ප්‍රමාණය:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>හැකිළුම් අනුපාතය:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>දෝෂ:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>හැකිළුම්:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>හැකිළුමකට එක් කරන්න</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>හැකිළුම (&amp;A):</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>යාවත්කාල කිරීමේ ස්වභාවය (&amp;U):</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>හැකිළුම් රටාව (&amp;F):</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>හැකිළුම් මට්ටම (&amp;L):</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>හැකිළුම් ක්‍රමය (&amp;M):</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Dictionary size:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Word size:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Solid block size:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Number of CPU threads:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>පරාමිති (&amp;P):</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>විකල්ප</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>SF&amp;X හැකිළුමක් තනන්න</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>හවුල්කාර ගොනු ද හකුළන්න</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>සුරැකුම්</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>සුරැකුම් ක්‍රමය:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>ගොනු නාම සුරකින්න (&amp;S)</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>හැකිලීම සඳහා මතක භාවිතය:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>ලිහීම ක්‍රියාව සඳහා මතක භාවිතය:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>තැන්පත් කරන්න</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>ඉතා වේගවත්</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>වේගවත්</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>සාමාන්‍ය</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>උපරිම</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>අධි හැකිළුම්‍</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>ගොනු එක් කර ප්‍රතිස්ථාපනය කරන්න</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>ගොනු යාවත්කාල කර එක් කරන්න</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>දැනටමත් ඇති ගොනු නැවුම් කරන්න</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>ගොනු සමකාලී කරන්න</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>සොයන්න</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>සියළු ගොනු</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>සවි-නොමැති</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>සවි</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>පිටපත් කරන්න</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>ගෙනයන්න</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>වෙනත් තැනකට පිටපත් කරන්න:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>වෙනත් තැනකට ගෙනයන්න:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>පිටපත් කරමින් පවතී...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>ගෙනයමින් පවතී...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>ප්‍රතිනම් කරමින් පවතී...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>ගමනාන්ත බහාලුම තෝරන්න.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>ක්‍රියාව කල නොහැක.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>ගොනුව හෝ බහාලුම මැකීමේදී දෝෂයක් මතු විය</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>ගොනු පිටපත් කිරීම තහවුරු කිරීම</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>ගො‍නුව හැකිළුම වෙත පිටපත් කළ යුතු බව ඔබට විශ්වාස ද</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>ගොනු මැකීම තහවුරු කිරීම</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>බහාලුම් මැකීම තහවුරු කිරීම</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>බහු ගොනු මැකීම තහවුරු කිරීම</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>ඔබට '{0}' මැකීමට අවශ්‍ය බව විශ්වාස ද ?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>ඔබට '{0}' බහාලුම හා එහි අන්තර්ගතය මැකීමට අවශ්‍ය බව විශ්වාස ද ?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>ඔබට {0} යන වස්තු මැකීමට අවශ්‍ය බව විශ්වාස ද ?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>මකමින් පවතී...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>ගොනුව හෝ බහාලුම මැකීමේ දී දෝෂයක් මතු විය</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>දිගු මංපෙතක් ඇති ගොනුවක් කුණු බඳුනට යැවීම පද්ධතියට කල නොහැක.</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>බහාලුමක් තනන්න</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>ගොනුවක් තනන්න</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>බහාලුම් නාමය:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>ගොනු නාමය:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>නව බහාලුමක්</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>නව ගොනුවක්</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>බහාලුම තැනීමේදී දෝෂයක් මතුවිය</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>ගොනුව තැනීමේදී දෝෂයක් මතුවිය</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>ටීකාව</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>ටීකාව (&amp;C):</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>තෝරන්න</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>තේරීම ඉවත් කරන්න</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>ගොනුවේ හෝ බහාලුමේ නම හෝ කොටසක්:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>වත්කම්</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>බහාලුම් අතීතය</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>විනිශ්චීය පණිවුඩ</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>පණිවිඩය</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>පරිගණකය</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>ජාලය</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>ලියකියවිලි</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>පද්ධතිය</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>හකුළන්න</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>ලිහන්න</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>පරීක්ෂා කරන්න</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>පිටපත් කරන්න</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>ගෙන යන්න</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>මකන්න</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>තොරතුරු</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>ගොනුව බෙදන්න</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>ගොනුව බෙදා කොටස් මෙහි තැන්පත් කරන්න (&amp;S):</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>කොටස් වලට බෙදන්න, බයිට (bytes):</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>ගොනුව බෙදමින් පවතී...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>ගොනුව බෙදීම තහවුරු කරන්න</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>ගොනුව කොටස් {0} කට බෙදීමට අවශ්‍ය බව ඔබට විශ්වාස ද ?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>බෙදූ කොටසක විශාලත්වය, මුල් ගොනුවේ විශාලත්වයට වඩා අඩු විය යුතුය</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>වැරදි කොටස් විශාලත්වයකි</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>සඳහන් කරන ලද කොටස් විශාලත්වය බයිට  {0} කි.\nහැකිළුම මෙවන් කොටස් වලට බෙදියයුතු බව විශ්වාස ද ?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>බෙදූ ගොනු එක් කරන්න</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>බෙදූ ගොනු එක් කර මෙහි තැනපත් කරන්න (&amp;C):</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>බෙදූ ගොන එක් කරමින් පවතී...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>පළමු ගොනුව පමණක් තෝරන්න</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>ගොනුව, බෙදන ලද ගොනුවක කොටසක් ලෙස හඳුනාගත නොහැක.</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>බෙදන ලද ගොනුවේ කොටස් වලින් එකකට වඩා සොයාගත නොහැක.</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Checksum calculating...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Checksum information</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC checksum for data:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC checksum for data and names:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Benchmark</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>මතක භාවිතය:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>හැකිළුම්</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>ලිහුම්</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>ඇගයුම</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>සම්පූර්ණ ඇගයුම</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>වත්මන්</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>ප්‍රතිඵලිත</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU භාවිතාව</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>ඇගයුම / භාවිතාව‍</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Passes:</value>
+  </data>
+</root>

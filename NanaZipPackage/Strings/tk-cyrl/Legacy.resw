@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Turkmen</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Türkmençe</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Howwa</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Goýbolsun et</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Howwa</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Ýok</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>Ýa&amp;p</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Kömek al</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Dowam et</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Hemmesine howw&amp;a</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Hemmesine &amp;ýok</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Dur</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Gaýtadan başla</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Görünme</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Öňe çyksyn</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Sägindir</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Sägindi</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Goýbolsun etjekmi?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Dosýa</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Düzelt</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Gör</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>F&amp;aworitler</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>G&amp;urallar</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Kömek</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Aç</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>&amp;Içinde Aç</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Daş&amp;ynda Aç</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Gör</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Düzelt</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Adyn&amp;y üýtget</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>Şu ýere &amp;kopýala...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>Şu ýere &amp;göçür...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Öçür</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Faýly &amp;böl...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Faýllary &amp;birleşdir...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Düzgünlemeler</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Tes&amp;wir...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Barlag jemini hasapla</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Tapawutlanma </value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Bukja döret</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Faýl döret</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Çyk</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Bag </value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>Akymlary ç&amp;alyş</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Hemmesini Seç</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Hemmesini Seçme</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Seçim&amp;i tersine öwür </value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Seç...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Seçme...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Tiplerine görä seç</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Tiplerine göra seçme</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>U&amp;ly Ikon</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Kiçi Ikon</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>Tablissa</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>Jikme-jikleri</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Sortlanmadyk</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Düz Görnüş</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 Paneller</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Esbaplar</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Düýp Bukjany Aç</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Bir Tekje Ýokary</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Öňki Bukjalar...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>Täzele</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Awtomatiki Täzele</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Arhiw Esbaplary</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Standart Esbaplar</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Uly Knopkalar</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Konopkalarda tekst görkez</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>Bukj&amp;any faworitlere şu ad bilen goş</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Bellik</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Seçimler...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Barlag nokady</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>Ma&amp;zmunlar...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>NanaZip H&amp;akynda</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Ýol</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Faýl guýrugu</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Bukja</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Ululyk/Gabara</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Paket ulylygy</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atributlar/Sypatlar</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Döredildi</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Ualnyldy</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Üýtgedildi</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Bitewi</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Bellik edildi</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Kodlandy</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Öňinçä Böl</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Soňra Böl</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Sözlük</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Usul/Tär</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Hojaýyn OS</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Faýl Sistema</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Ulanyjy</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Topar</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Bölüm</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Bellik</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Pozitsiýa</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Ýoluň Öňady/Pristawkasy</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Bukjalar</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Faýllar</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Wersiýa</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Tom</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Köp Tomly</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Offset (Ýeri doldurylan) </value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Baglar</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Bölümler</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Tomlar</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-tike</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Prosesor</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Fiziki Göwrüm</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Faýl başlygy Göwrümi</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Barlag-jemi</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Harakteristikalar</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Haýaly Salgy</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Gysga Ad</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Dorediji porgramma</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Sektor Göwrümi</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Metod Görnüşi</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Simwolik Link</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Ýalňyş</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Toplam Göwrüm</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Boş Ýer</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Hoşa Göwrüm</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Etiketka</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Lokal Ady</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Üpjünçi</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT Howpsuzlyk</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Çalyşan Akym</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Öçürilen</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Agaçmy</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Ýalňyşlygyň Görnuşi</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Ýalňyşlar</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Ýalňyşlar</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Duýduryşlar</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Duýduryş</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Akymlar</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Akymlary Çalyş</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Çalyşan Akymlaryň Göwrümi</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Haýaly Göwrüm</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Giňeldilen Göwrüm</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Toplam Fiziki Göwrüm</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Tom Indeksi</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Tabyn Görnüş</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Gysga Bellik</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Kod Sahypasy</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Guýruk Ölçegi</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Gömülen Omça Göwrümi</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Bag</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Gönimel Bag</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iDüwin</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Diňe Okalýan</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Seçimler</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Dil:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Redaktor</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>R&amp;edaktor:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Diff(Parh)</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip bilen şärik et:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Ähli Ulanyjylar</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>NanaZipi kontekst/baglam menýu bilen birleşdir</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Basgançaklaşdyrylan kontekst/baglam menýu</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Kontekst menýu maddalary:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Kontekst menýudaky şekiljikler</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Bukja&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Arhiw&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Arhiwi aç</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Faýllary çykar...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Arhiwe goş...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Arhiwi synag et</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Bu ýere Çykar</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>{0} şu ýere çykar</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0} şuňa goş</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Gys we e-poçta edip iber...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>{0} şuňa gys we e-poçta et</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Bukjalar</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Işlenýän Bukja</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Sistemanyň wagtlaýyn bukjasy</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>Häzirki</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Takyklanan:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Diňe aýrylýan sürujüler üçin ulanmaly</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Wagtlaýyn arhiw faýly üçin ýer takyklama.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Sazlamalar</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>".." elementini görkez</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Faýllaryň hakyky şekiljiklerini görkez</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Sistema menuýusuny görkez</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Doly setir seç</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Gözenek çyzyklaryny görkez</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Ýeke-basyşda elementi aç</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Başgaça seçiş mody</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Uly hakyda sahypasyny u&amp;lan</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip Hakynda</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip erkin bir programma üpçünçiligidir</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Sistema gerekli hakyda mukdaryny bölüp alyp bilmedi</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Ýalňyşlyk ýok</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} obýekt(ler) seçildi</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>'{0}' bukjasy döredilip bolmady</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Bu arhiw üçin täzeleme amalay üpçin edilmedik.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>'{0}' faýly bir arhiw hökminde açyp bolmaýar</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Kodlanan '{0}' arhiw açylmady. Ýalňyş parol?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Goldanmaýan arhiw türi</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>{0} faýly öňden hem bar</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>'{0}' faýly üýtgäpdir. \nOny arhiwiň içinde de üýtgetmeli mi?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Faýlda üýtgeşme girizilmeýär \n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Editor acylmady.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Faýl wirusa meňzeýär (Faýlyň adynda uzyn boşluklar bar).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Uzyn ýol ady bolan bukjadan amal ýerine ýetirilip bolmaýar.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Siz bir faýl seçmelisiňiz</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Siz bir ýada birnäçe faýl seçmelisiňiz</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Gaty kän madda</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>{0} faýly arhiw görnüşinde açylmady</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>{0} Faýly arhiw görnüşinde açyk</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Arhiw süýşürme/çalşyrma bilen açyldy</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Çykarylýar</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Gysylýar</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Synag edilýär</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Açylýar...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Daranýar...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Aýrylýar</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Goşulýar</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Täzelenýär</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Seljerilýär</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Gaýtalnýar/Replika edilýär</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Gaýtadan gaplanýar</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Degmän geçilýär</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Öçürilýär</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Faýl başy döredilýär</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Çykar</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Ş&amp;uňa çykar:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Çykarylan faýllara ýer belläň.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Ýoda modu:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Doly ýol ady</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Ýoda adlary ýok</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Doly adly ýoda</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Bagly ýoda adlary</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Üztünden ýazma mody:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Üstünde ýazmazdan öň sora</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Soramazdan ýaz</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Bar faýllary ätle</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Awtomatiki adyny üýtget</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Öň bar faýllary awtomatiki usulda adyny üýtget</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Kök bukjasynyň dublikatlaryny ýok et</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Faýl goraglaryny yzyna/ýerine goý</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Faýl çalyşyklygyny tassykla</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Seçilen bukjada öň işlenen faýl bar.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Bar bolan faýly şunuň bilen </value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>çalyşjakmy?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} baýt</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>A&amp;wtomatiki adyny üýtget</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>'{0}' üçin goldanmaýan usul.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>'{0}' içinde data ýalňyşlygy. Faýl bozyk.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>'{0}' içinde Gaýtalanýan Ölçegsizlik Barlagy (CRC) ýalňyşlygy. Faýl bozyk.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>'{0}' kodlanan faýlda data ýalňyşlygy. Ýalňyş parol.</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>'{0}' kodlanan faýlda Gaýtalanýan Ölçegsizlik Barlagy (CRC) ýalňyşlygy. Ýalňyş parol my?.</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Ýalňyş parol my?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Goldanmaýan gysma metody</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Data ýalňyşlygy</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>Gaýtalanýan Ölçegsizlik Barlagy (CRC) ýalňyşlygy</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Data ýok</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Garaşylmaýan data soňy</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Peýdaly datanyň "soň" belgisinden soňra birentek data bar</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Arhiw däl</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Başlyk Ýalňyşlygy</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Ýalňyş Parol</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Arhiw başlangyjy yok</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Tassyklanmadyk arhiw başlangyjy</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Goldanmaýan funksiýa</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Parola ýaz</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Parola ýaz:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Parolany gaýtadan ýaz:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>Parolany &amp;görkez</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Parolalar gabat gelmeýär</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Parol üçin diňe Iňlis harplary, sifrlar we ýörite siýmbollar (!, #, $, ...) ulanmaly</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Parol gaty uzyn</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Parol</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Sarp edilen wagt:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Gerekli wagt:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Toplam göwrim:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Tizlik:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Işlenen:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Gysma koefissenti:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Ýalňyşlyklar:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Arhiwler:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Arhiwe goş</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arhiwle:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Tä&amp;zeleme mody:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Arhiw &amp;formady:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Gysma dere&amp;jesi:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Gysma &amp;metody:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Sözlügiň göwrümi:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Söz gö&amp;wrümi:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Bitewi blok göwrümi:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Prosesor iş akym sany:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parametrler:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Seçimler</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>SF&amp;X (öz-özünden açylýän) arhiwini döret</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Açyk ulanylýan faýllary gys</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Kodlama</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Kodlama metody:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Faýl adlary&amp;ny kodla</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Gysma işi üçin hakyda ulanylşygy:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Arhiwden çykarma işi üçin hakyda ulanylşygy:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Gysma/arhiwleme işinden soňra faýllary öçür</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Simwolik linkleri sakla</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Gönimel linkleri sakla</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Çalyşan data akymlaryny sakla</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Faýl goraglaryny sakla</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Sakla</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Iň çalt</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Çalt</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Adatça</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maksimum</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Aňry başy</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Faýllary Goş we çalyş</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Faýllary täzele we goş</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Öň bar bolyp täzelenen faýllar</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Faýllary sinhron et</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Göz aýla</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Hemme faýllar</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Bitewi bolmadyk</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Bitewi</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Kopýala</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Göçür</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Şuňa kopýala:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Şuňa göçür:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Kopýalanýar...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Göçürilýär...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Ad üýtgedilýär...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Bukja seçiň.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Amal bu bukja üçin goldanmaýar.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Bukja ýada faýl ad üýtgetme ýalňyşlygy</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Faýl Kopýalanmasyny tassyklaň</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Faýllaryň arhiwe kopýalanmasynda kesgitlimisiň?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Faýl Öçürilmesini Tassykla</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Bukja Öçürilmesini Tassykla</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Köp sanly Faýllaryň Öçürilmesini Tassykla</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>'{0}' öçürilmegine kesgitlimisiň?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>'{0}' bukjasynyň we ähli mazmunynyň öçürilmegine kesgitlimisiň?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>{0} şularyň öçürilmeginde kesgitlimisiň?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Öçürilýär...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Faýl ýada Bukja Öçürme Ýalňyşlygy</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Sistema uzyn ýoda adlary bolan faýllary öçürip bilenok.</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Bukja Döret</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Faýl Döret</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Bukja ady:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Faýl Ady:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Täze Bukja</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Täze Faýl</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Bukja Döretme Ýalňyşlygy</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Faýl Döretme Ýalňyşlygy</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Bellik</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Bellik:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Seç</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Seçimi ýatyr</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Şert/Maska:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Alamatlar</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Öňki Bukjalar</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Diagnostik maglumatlar</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Maglumat</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Kompýutor</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Tor</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Dokumentler</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Goş</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Çykar</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Synag</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Kopýala</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Göçür</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Öçür</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Informasiýa</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Faýly Böl</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Şuňa böl:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Göw&amp;rümlere, baýtlara böl:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Böleklenýär...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Böleklemegi Tassykla</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>{0} göwrüminde böleklemäge kesgitlimisiň?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Göwrümiň ulylygy aslynyň ulylygyndan kiçi bolmalydyr</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Göwrüm ulylygy ýalňyş Incorrect volume size</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Bellenen göwrüm ulylygy: {0} baýt.\nArhiwi şeýle göwrümlere bölmäge kesgitlimisiňiz?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Faýllary Birleşdir</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Şu ýerde birleşir:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Birleşdirilýär...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Böleklenen faýlyň diňe birinji bölegini seçiň</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Faýly böleklenen faýlyň bir bölegi hökminde ele alyp bolmaýar</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Faýly böleklenen faýlyň bir ýada birnäçe bölümini tapyp bolmady</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Barlag-jemi hasaplanýar...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Barlag-jemi maglumaty</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Data üçin Gaýtalanýan Ölçegsizlik Barlagy (CRC) barlag-jemi:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Data we adlar üçin Gaýtalanýan Ölçegsizlik Barlagy (CRC) barlag-jemi:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Barlag nokady</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Hakyda ulanylşygy:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Gysylýar</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Arhiwden çykarylýar</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Anyklama</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Toplam anyklama</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Häzirki</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Jemlenýar</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Prosesor ulanylşygy</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Anyklama / Ulanylşyk</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Üstünden geçildi:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Bag</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Bag</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Şundan bag:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Şuňa bag:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Bag tipi</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Gönimel Bag</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Faýl Simwolik Bagy</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Bukja Simwolik Bagy</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Baglanan Bukja</value>
+  </data>
+</root>

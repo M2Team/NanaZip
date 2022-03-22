@@ -5,7 +5,7 @@
     <ProjectGuid>9a119a76-97cb-4490-b8c2-651576cb9302</ProjectGuid>
     <TargetPlatformVersion>10.0.22000.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\NanaZip\NanaZip.vcxproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
@@ -27,10 +27,9 @@
       <Link>Assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
     <!-- Internationalization Support -->
-    <Content Include="..\SevenZip\Lang\**\*">
-      <DeploymentContent>true</DeploymentContent>
-      <Link>Lang\%(RecursiveDir)%(FileName)%(Extension)</Link>
-    </Content>
+    <PRIResource Include="Strings\**\*">
+      <Link>Strings\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </PRIResource>
     <None Include="priconfig.default.xml" />
     <None Include="priconfig.packaging.xml" />
   </ItemGroup>

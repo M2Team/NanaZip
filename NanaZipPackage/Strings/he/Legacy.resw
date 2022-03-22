@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Hebrew</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>עברית</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>אשר</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>בטל</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;כן</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;לא</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;סגור</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>עזרה</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;המשך</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>כן ל&amp;כל</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>לא &amp;לכל</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>עצור</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>התחל מחדש</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;רקע</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;קידמה</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;השהה</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>מושהה</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>?אם אתה בטוח שאתה רוצה לבטל</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;קובץ</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;עריכה</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;תצוגה</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;מועדפים</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;כלים</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>ע&amp;זרה</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>פ&amp;תח</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>פתח ב&amp;פנים</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>פתח ב&amp;חוץ</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;הצג</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;ערוך</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;שנה שם</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>…העת&amp;ק אל</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>…הע&amp;בר אל</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;מחק</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>…פצ&amp;ל קובץ</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>…&amp;אחד קבצים</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;מאפיינים</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>…הע&amp;רה</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>חשב סיכום ביקורת</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>מבדילן</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>צור תיקייה</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>צור קובץ</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;צא</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>קַשֵׁר</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;זרמים מתחלפים</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>בחר &amp;הכל</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>בטל בחירת הכל</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;הפוך בחירה</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>…בחר</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>…בטל בחירה</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>בחר לפי סוג</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>בטל בחירה לפי סוג</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>איקונים &amp;גדולים</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>איקונים &amp;קטנים</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;רשימה</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;פרטים</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>בלתי ממויין</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>תצוגה שטוחה</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 לוחות</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;סרגלי כלים</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>פתח תיקיית שורש</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>רמה אחת למעלה</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>…היסטורית תיקיות</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;רענן</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>רענן אוטומטית</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>סרגל כלים של ארכיון</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>סרגל כלים תקני</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>כפתורים גדולים</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>הראה טקסט של כפתורים</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;הוסף תיקייה אל מועדפים בתור</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>סימנייה</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>…א&amp;פשרויות</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;בוחן ביצועים</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>…תכנים&amp;</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>…NanaZip אודות&amp;</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>נתיב</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>שם</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>סיומת</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>תיקייה</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>גודל</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>גודל ארוז</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>תכונות</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>תאריך יצירה</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>תאריך גישה</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>תאריך שינוי</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>מוצק</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>עם הערה</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>מוצפן</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>פיצול לפני</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>פיצול אחרי</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>תיקייה</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>סוג</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>נגד</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>שיטה</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>מערכת הפעלה</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>מערכת קבצים</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>משתמש</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>קבוצה</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>גוש</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>הערה</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>מיקום</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>קידומת נתיב</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>תיקיות</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>קבצים</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>גרסה</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>כרך</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>רב־כרכים</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>קיזוז</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>קישורים</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>גושים</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>כרכים</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64־סיביות</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>יע״מ</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>גודל פיזי</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>גודל כותרות עליונות</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>סיכום ביקורת</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>אופיינים</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>כתובת מדומה</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>זהות</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>שם קצר</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>יישום יוצר</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>גודל מגזר</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>מצב</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>קישור סמלי</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>שגיאה</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>גודל כולל</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>שטח פנוי</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>גודל אשכול</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>תווית</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>שם מקומי</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>ספק</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT אבטחת</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>זרם מתחלף</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>מחוק</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>עץ</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>סוג שגיאה</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>שגיאות</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>שגיאות</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>אזהרות</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>אזהרה</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>זרמים</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>זרמים מתחלפים</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>גודל זרמים מתחלפים</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>גודל מדומה</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>גודל פריקה</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>גודל פיזי כולל</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>מדד כרך</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>תת־סוג</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>הערה קצרה</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>דף קוד</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>גודל זנב</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>גודל של בדל משובץ</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>קישור</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>קישור קשיח</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>קריאה בלבד</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>אפשרויות</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>שפה</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>:שפה</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>עורך</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>:עורך&amp;</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>:&amp;מבדילן</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>מערכת</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>:עם Zip-7 שייך את</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>כל המשתמשים</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>אל תפריט ההקשר של המעטפת Zip7 שלב את</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>השתמש בתפריט מודרג של הקשר</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>:פריטי תפריט הקשר</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>הראה איקונים בתפריט ההקשר</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;תיקייה&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;ארכיון&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>פתח ארכיון</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>חלץ קבצים…</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>הוסף אל ארכיון…</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>בחן ארכיון</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>חלץ כאן</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>חלץ אל {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>הוסף אל {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>…דחוס ושלח בדוא״ל</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>ושלח בדוא״ל {0} דחוס אל</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>תיקיות</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;תיקיית עבודה</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;תיקייה זמנית של המערכת</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;נוכחית</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;:מסוימת</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>השתמש עבור כוננים נתיקים בלבד</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>.ציין מיקום עבור קבצי ארכיון זמניים</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>הגדרות</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>הראה את הפריט ".." בראש</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>הראה איקונים אמיתיים של קבצים</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>הראה תפריט מערכת</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>בחר שורה &amp;מלאה</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>הראה קווי &amp;סורג</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>לחץ לחיצה יחידה כדי לפתוח פריט</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;השתמש במצב בחירה חלופי</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>השתמש בדפי זיכרון &amp;גדולים</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip אודות</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip היא תוכנה חופשית</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>המערכת אינה יכולה להקציב את כמות הזיכרון הדרושה</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>אין שגיאות</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} עצמים נבחרו</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>'{0}' לא ניתן ליצור את התיקייה</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>.פעולות עדכון אינן נתמכות עבור ארכיון זה</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>לא ניתן לפתוח את הקובץ\n'{0}'\nכארכיון</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>?סיסמה שגויה .'{0}' לא ניתן לפתוח את הארכיון המוצפן</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>סוג בלתי נתמך של ארכיון</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>הקובץ\n{0}\nקיים כבר</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>הקובץ הבא השתנה\n'{0}'\n?האם אתה רוצה לעדכן אותו בתוך הארכיון</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>לא ניתן לעדכן את הקובץ\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>.לא ניתן להתחיל את העורך</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>.הקובץ נראה כמו נגיף (שם הקובץ מכיל רווחים ארוכים בשם)</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>.הפעולה אינה יכולה להיקרא מתיקייה שיש לה נתיב ארוך</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>אתה חייב לבחור קובץ אחד</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>אתה חייב לבחור קובץ אחד לפחות</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>יותר מדי פריטים</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>{0} לא ניתן לפתוח את הקובץ כארכיון</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>{0} הקובץ פתוח כארכיון</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>הארכיון פתוח עם קיזוז</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>מחלץ</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>דוחס</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>בוחן</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>…פותח</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>…סורק</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>מסיר</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>מוסיף</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>מעדכן</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>מנתח</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>משכפל</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>אורז מחדש</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>מלג</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>מוחק</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>יצירה של כותרת עליונה</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>חלץ</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>חלץ&amp; אל:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>.ציין מיקום עבור קבצים מחולצים</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>מצב נתיב:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>שמות נתיב מלאים</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>ללא שמות נתיב</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>שמות נתי מוחלטים</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>שמות נתיב יחסיים</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>מצב דריסה:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>שאל לפני דריסה</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>שכתב ללא יידוע</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>דלג על קבצים קיימים</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>שנה שם אוטומטית</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>שנה אוטומטית שם של קבצים</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>חסל שכפול של תיקיית שורש</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>שחזר אבטחת קובץ</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>אישור החלפת קובץ</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>.תיקיית היעד מכילה כבר את הקובץ המעובד</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>האם אתה רוצה להחליף את הקובץ הקיים</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>?בקובץ הזה</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} בתים</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>שנה שם &amp;אוטומטית</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>.'{0}' שיטה בלתי נתמכת של דחיסה עבור </value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>שגיאת נתונים בקובץ\n'{0}'\nהקובץ שבור</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>נכשל בקובץ CRC\n'{0}'\nהקובץ שבור</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>שגיאת נתונים בקובץ מוצפן\n'{0}'\n?סיסמה שגויה</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>נכשל בקובץ מוצפן CRC\n'{0}'\n?סיסמה שגויה</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>?סיסמה שגויה</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>שיטה בלתי נתמכת של דחיסה</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>שגיאת נתונים</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>נכשל CRC</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>נתונים בלתי זמינים</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>סוף בלתי צפוי של נתונים</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>יש נתונים מסוימים לאחר הסוף של נתוני המיטען</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>אינו ארכיון</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>שגיאת כותרות עליונות</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>סיסמה שגויה</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>התחלה בלתי זמינה של ארכיון</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>התחלה בלתי מאושרת של ארכיון</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>מאפיין בלתי נתמך</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>הכנס סיסמה</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>:הכנס סיסמה</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>:הכנס מחדש סיסמה</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;הראה סיסמה</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>הסיסמאות אינן תואמות</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>השתמש רק באותיות אנגליות, מספרים ותווים מיוחדים (!, #, $, …) עבור סיסמה</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>הסיסמה ארוכה מדי</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>סיסמה</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>זמן שחלף:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>זמן שנותר:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>גודל כולל:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>מהירות:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>עובד:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>יחס דחיסה:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>שגיאות:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>ארכיונים:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>הוסף אל ארכיון</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;ארכיון:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;מצב עדכון:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>ת&amp;סדיר ארכיון:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;רמת דחיסה:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;שיטת דחיסה:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;גודל מילון:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;גודל מילה:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>גודל של גוש מוצק:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>מספר תהליכוני יע״מ:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>:&amp;פרמטרים</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>אפשרויות</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>צור ארכיון חילוץ־&amp;עצמי</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>דחוס קבצים משותפים</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>הצפנה</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>שיטת הצפנה:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>הצפן &amp;שמות קבצים</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>שימוש בזיכרון לצורך דחיסה:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>שימוש בזיכרון לצורך חילוץ:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>מחק קבצים לאחר דחיסה</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>אחסן קישורים סמליים</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>אחסן קישורים קשיחים</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>אחסן זרמים מתחלפים של נתונים</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>אחסן אבטחת קבצים</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>אחסון</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>הכי מהיר</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>מהיר</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>רגיל</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>מרבי</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>אולטרה</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>הוסף והחלף קבצים</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>עדכן והוסף קבצים</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>רענן קבצים קיימים</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>סנכרן קבצים</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>עיין</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>כל הקבצים</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>בלתי מוצק</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>מוצק</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>העתק</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>העבר</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>העתק אל:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>העבר אל:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>…מעתיק</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>…מעביר</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>…משנה שם</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>.בחר תיקיית יעד</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>.הפעולה אינה נתמכת עבור תיקייה זאת</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>שגיאה בעת שינוי שם של קובץ או תיקייה</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>אישור העתקת קובץ</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>האם אתה בטוח שאתה רוצה להעתיק קבצים אל ארכיון</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>אישור מחיקת קובץ</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>אישור מחיקת תיקייה</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>אישור מחיקת קבצים רבים</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>האם אתה בטוח שאתה רוצה למחוק את\n?'{0}'</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>האם בטוח שאתה רוצה למחוק את התיקייה\n'{0}'\n?ואת כל תכניה</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>?האם אתה בטוח שאתה רוצה למחוק {0} פריטים אלו</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>…מוחק</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>שגיאה בעת מחיקת קובץ או תיקייה</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>המערכת אינה יכולה להעביר קובץ עם נתיב ארוך אל סל המיחזור</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>צור תיקייה</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>צור קובץ</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>שם תיקייה:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>שם קובץ:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>תיקייה חדשה</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>קובץ חדש</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>שגיאה בעת יצירת תיקייה</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>שגיאה בעת יצירת קובץ</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>הערה</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;הערה:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>בחר</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>בטל בחירה</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>מיסוך:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>מאפיינים</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>היסטורית תיקיות</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>הודעות אבחנתיות</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>הודעה</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>מחשב</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>רשת</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>מסמכים</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>מערכת</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>הוסף</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>חלץ</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>בחן</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>העתק</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>העבר</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>מחק</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>מידע</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>פיצול קובץ</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>:&amp;פצל אל</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>:פצל אל &amp;כרכים, בתים</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>…מפצל</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>אשר פיצול</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>?האם אתה בטוח שאתה רוצה לפצל את הקובץ אל {0} כרכים</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>גודל כרך חייב להיות קטן יותר מאשר הגודל של הקובץ המקורי</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>גודל שגוי של כרך</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>.גודל מצוין של כרך: {0} בתים\n?האם אתה בטוח שאתה רוצה לפצל את הארכיון אל כרכים כאלו</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>איחוד קבצים</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>:&amp;אחד אל</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>…מאחד</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>בחר רק את החלק הראשון של הקובץ המפוצל</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>לא היה ניתן לגלות קובץ כחלק מקובץ מפוצל</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>לא היה ניתן למצוא יותר מחלק אחד של קובץ מפוצל</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>…חישוב סיכום ביקורת</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>מידע סיכום ביקורת</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>:עבור נתונים CRC סיכום ביקורת</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>:עבור נתונים ושמות CRC סיכום ביקורת</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>בוחן ביצועים</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>שימוש בזיכרון:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>דוחס</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>מחלץ</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>דירוג</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>דירוג כולל</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>נוכחי</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>תוצאה</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>שימוש ביע״מ</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>דירוג / שימוש</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>מעברים:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>קישור</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>קשר</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>:קשר מן</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>:קשר אל</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>סוג קישור</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>קישור קשיח</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>קישור סמלי של קובץ</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>קישור סמלי של תיקייה</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>צומת תיקייה</value>
+  </data>
+</root>

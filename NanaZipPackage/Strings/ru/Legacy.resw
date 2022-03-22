@@ -1,0 +1,1284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Russian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Да</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Нет</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Закрыть</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Продолжить</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Да для &amp;всех</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Нет для в&amp;сех</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Перезапуск</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Фоном</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;На передний план</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Пауза</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>На паузе</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Вы действительно хотите прервать операцию?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Файл</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Правка</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Вид</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Избранное</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>С&amp;ервис</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Справка</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Открыть</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Открыть &amp;внутри</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Открыть снару&amp;жи</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>Просмотр</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Редактировать</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Переи&amp;меновать</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Копировать в...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Переместить в...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Удалить</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Ра&amp;збить файл...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>О&amp;бъединить файлы...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>Сво&amp;йства</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Комме&amp;нтарий...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Контрольная сумма</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Сравнить</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>&amp;Создать Папку</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Созд&amp;ать Файл</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>В&amp;ыход</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Альтернативные Потоки</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Выделить в&amp;се</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Убрать выделение</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Обратить в&amp;ыделение</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Выделить...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Убрать выделение...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Выделить по типу</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Убрать выделение по типу</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Крупные значки</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Мелкие значки</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>Спис&amp;ок</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Таблица</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Без сортировки</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Плоский режим</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 Панели</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Панели инструментов</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Открыть корневую папку</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Переход на один уровень вверх</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>История папок...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>О&amp;бновить</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Автообновление</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Панель кнопок архиватора</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Стандартная панель кнопок</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Большие кнопки</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Надписи на кнопках</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>Добавить папку в &amp;избранное как</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Закладка</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>Настройки...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>Тестирование производительности</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Оглавление...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>О &amp;программе...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Путь</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Расширение</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Папка</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Размер</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Сжатый</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Атрибуты</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Создан</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Открыт</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Изменен</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Непрерывный</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Зашифрован</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Разбит До</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Разбит После</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Словарь</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Анти</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Метод</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Файловая Система</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Группа</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Блок</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Позиция</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Путь</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Папок</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Файлов</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Том</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Многотомный</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Смещение</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Ссылок</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Блоков</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Томов</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Процессор</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Физический Размер</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Размер Заголовков</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Контрольная Сумма</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Характеристики</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Виртуальный Адрес</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Короткое Имя</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Создатель</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Размер Сектора</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Режим</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Символьная Ссылка</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Емкость</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Свободно</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Размер кластера</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Метка</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Локальное имя</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Провайдер</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>NT Безопасность</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Альтернативный Поток</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Удаленный</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Дерево</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Тип Ошибки</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Ошибки</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Ошибки</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Предупреждения</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Потоки</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Альтернативные Потоки</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Размер Альтернативных потоков</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Виртуальный Размер</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Распакованный Размер</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Общий Физический Размер</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Номер Тома</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Подтип</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Короткий Комментарий</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Кодовая Страница</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Размер Остатка</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Размер Встроенного Блока</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Жесткая Ссылка</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Только для чтения</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Язык:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Редактор</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Редактор:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Программа сравнения:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Ассоциировать NanaZip с файлами:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Все пользователи</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Встроить NanaZip в контекстное меню оболочки</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Каскадное контекстное меню</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Элементы контекстного меню:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Иконки в контекстном меню</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Папка&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Архив&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Открыть архив</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Распаковать</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Добавить к архиву...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Тестировать</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Распаковать здесь</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Распаковать в {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Добавить к {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Сжать и отправить по email...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Сжать в {0} и отправить по email</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Папки</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Рабочая папка</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Системная временная папка</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Текущая</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Задать:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Использовать только для сменных носителей</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Укажите положение для временных архивов.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Показывать элемент ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Показывать реальные иконки файлов</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Показывать системное меню</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Курсор на всю строку</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Показывать разделители</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Открывать одним щелчком</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Альтернативный режим пометки</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Использовать большие страницы памяти</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>О программе NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip является свободно распространяемой программой.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Недостаточно свободной памяти</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Ошибок не найдено</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>Выделено объектов: {0}</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Не удалось создать папку '{0}'</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Операции изменения не поддерживаются для этого архива.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Не удалось открыть файл '{0}' как архив</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Не удалось открыть зашифрованный архив '{0}'. Неверный пароль?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Неподдерживаемый тип архива</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Файл {0} уже существует</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Файл '{0}' был изменен.\nВы хотите обновить его в архиве?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Не удалось обновить файл\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Не удалось запустить редактор</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Файл похож на вирус (имя файла содержит длинную последовательность пробелов).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Операция не может быть исполнена из папки, которая имеет длинный путь.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Вы должны выделить один файл</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Вы должны выделить один или несколько файлов</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Слишком много элементов</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Не удалось открыть файл как {0} архив</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Файл открыт как {0} архив</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Архив открыт со смещением</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Распаковка</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Упаковка</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Тестирование</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Открытие...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Сканирование...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Удаление</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Добавление</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Обновление</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Анализ</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Копирование</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Перепаковка</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Пропуск</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Удаление</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Создание заголовков</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Извлечь</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Распаковать в:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Укажите положение для извлекаемых файлов.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Пути к файлам:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Полные пути</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Без путей</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Абсолютные пути</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Относительные пути</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Перезапись:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>С подтверждением</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Без подтверждения</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Пропускать</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Переименовать автоматически</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Переименовать существующие</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Устранить дублирование корневой папки</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Устанавливать права доступа</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Подтверждение замены файла</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Папка уже содержит обрабатываемый файл.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Заменить существующий файл</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>следующим файлом?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} байтов</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Переименовать автом.</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Неподдерживаемый метод сжатия для файла '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Ошибка в данных в '{0}'. Файл испорчен.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>Ошибка CRC в '{0}'. Файл испорчен.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Ошибка в данных зашифрованного файла '{0}'. Неверный пароль?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Ошибка CRC для зашифрованного файла '{0}'. Неверный пароль?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Неверный пароль?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Неподдерживаемый метод сжатия</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Ошибка в данных</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>Ошибка CRC</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Недоступные данные</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Неожиданный конец данных</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Есть данные после конца блока полезных данных</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Не является архивом</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Ошибка в заголовках</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Неверный пароль</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Недоступно начало архива</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Неподтвержденное начало архива</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Неподдерживаемая функциональность </value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Ввод пароля</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>&amp;Введите пароль:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Повторите пароль:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Показать пароль</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Пароли не совпадают</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Для пароля используйте только символы латинского алфавита, цифры и специальные символы (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Пароль слишком длинный</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>&amp;Пароль</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Прошло:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Осталось:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Всего:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Скорость:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Размер:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Степень сжатия:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Ошибок:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Архивов:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Добавить к архиву</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Архив:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Режим изменения:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Формат архива:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;Уровень сжатия:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Метод сжатия:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Размер &amp;словаря:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Размер с&amp;лова:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Размер блока:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Число потоков:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Параметры:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>&amp;Опции</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Создать SF&amp;X-архив</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Сжимать открытые для записи файлы</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Шифрование</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Метод шифрования:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>&amp;Шифровать имена файлов</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Объем памяти для упаковки:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Объем памяти для распаковки:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Удалять файлы после сжатия</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Сохранять символьные ссылки</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Сохранять жесткие ссылки</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Сохранять альтернативные потоки</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Сохранять права доступа</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Без сжатия</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Скоростной</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Быстрый</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Нормальный</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Максимальный</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ультра</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Добавить и заменить</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Обновить и добавить</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Синхронизировать</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Пролистать</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Все файлы</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>По размеру файла</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Непрерывный</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Копировать</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Переместить</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Копировать в:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Переместить в:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Копирование...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Перемещение...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Переименование...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Укажите папку.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Операция не поддерживается для этой папки.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Ошибка при переименовании файла или папки</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Подтверждение копирования файлов</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Вы действительно хотите скопировать эти файлы в архив</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Подтверждение удаления файла</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Подтверждение удаления папки</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Подтверждение удаления группы файлов</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Вы действительно хотите удалить "{0}"?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Вы действительно хотите удалить папку "{0}" и все ее содержимое?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Вы действительно хотите удалить эти объекты ({0} шт.)?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Удаление...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Ошибка при удалении файла или папки</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Система не поддерживает операцию удаления файлов с длинными путями в корзину</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Создать папку</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Создать файл</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Имя папки:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Имя файла:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Новая папка</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Новый файл</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Ошибка при создании папки</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Ошибка при создании файла</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Комментарий:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Выделить</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Убрать выделение</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Маска:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Свойства</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>История папок</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Сообщения</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Компьютер</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Извлечь</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Тестировать</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Копировать</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Переместить</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Разбить файл</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Разбить в:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Разбить на &amp;тома размером (в байтах):</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Разбиение...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Подтверждение разбиения</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Вы действительно хотите разбить файл на {0} частей?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Размер тома должен быть меньше размера исходного файла</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Ошибка в поле для задания размера томов</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Установленный размер тома: {0} байтов.\nВы действительно хотите разбить архив на такие тома?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Объединить файлы</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Объединить в:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Объединение...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Необходимо выделить только первую часть разбитого файла</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Не удалось распознать разбитый файл</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Не удалось найти более одной части разбитого файла</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Вычисление контрольной суммы...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Контрольная сумма</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Сумма CRC для данных:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Сумма CRC для данных и имен:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Тестирование производительности</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Объем памяти:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Упаковка</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Распаковка</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Общий рейтинг</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Текущий</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Итоговый</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Нагрузка</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Рейтинг / Нагр.</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Проходов:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Связать</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Источник:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Цель:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Тип ссылки</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Жесткая ссылка </value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Символьная ссылка (Файл)</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Символьная ссылка (Папка)</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Точка соединения (Junction)</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>Интеграция</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Открыть параметры Windows, чтобы ассоциировать файлы с NanaZip</value>
+  </data>
+</root>

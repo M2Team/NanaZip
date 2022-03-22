@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Uzbek-Cyrillic</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Ўзбекча</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Бекор қилмоқ</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Ҳа</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Йўқ</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Ёпмоқ</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Кўмак</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Давом етмоқ</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Барига &amp;ҳа</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Барига &amp;йўқ</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Тўхтатмоқ</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Қайтадан</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Фонда</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Фонда емас</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Пауза қилмоқ</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Пауза қилинди</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Бекор қилинсинми?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Файл</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Таҳрирламоқ</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Кўриниш</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Танланганлар</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Жиҳозлар</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Кўмак</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Очмоқ</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>&amp;Ичкарида очмоқ</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>&amp;Ташқарига очмоқ</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Кўриниш</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Таҳрирламоқ</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;Қайта номламоқ</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Қуйидагига нусхаламоқ...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Қуйидагига кўчирмоқ...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Олиб ташламоқ</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Файлни бўлмоқ...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>&amp;Файлларни бирлаштирмоқ...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Хусусиятлар</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>&amp;Шарҳ...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Якуний сумма</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Таққосламоқ</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Жилд тузмоқ</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Файл тузмоқ</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Дастурдан чиқмоқ</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Ҳавола</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Муқобил оқимлар</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>&amp;Барини танламоқ</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Барини танламаслик</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Тескари танлаш</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Танламоқ...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Танламаслик...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Тури бўйича танламоқ</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Тури бўйича танламаслик</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Йирик иконкаларда</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Кичик иконкаларда</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Рўйхацимон</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Тафсилотли</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Сараламаслик</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Бежирим кўриниш</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 та панелда</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Жиҳозлар</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Aсосий жилдни очмоқ</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Бир поғона юқорига</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Жилдлар тарихи...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Янгиламоқ</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Aвтоматик янгиламоқ</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Aрхив жиҳозини кўрсатмоқ</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Стандарт жиҳозни кўрсатмоқ</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Йирик тугмаларда кўрсатмоқ</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Тугмалар матнини кўрсатмоқ</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Танланганларга жилд қўшмоқ</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Хатчўп</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Танловлар...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Самарадорликни синамоқ</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Маълумотнома...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;NanaZip дастури ҳақида...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Йўлак</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Номи</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Кенгайтмаси</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Жилди</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Ҳажми</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Сиқилган ҳажми</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Хоссалари</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Тузилган санаси</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Сўнгги мурожаат</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Янгиланган санаси</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Узлуксизлиги</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Шарҳланганлиги</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Шифрланганлиги</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Бўлинишдан олдин</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Бўлинишдан кейин</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Луғат</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Тури</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Aнти</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Услуб</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Тизим</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Файл тизими</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Фойдаланувчи</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Гуруҳ</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Блок</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Шарҳ</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Ўрни</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Жойлашув префикси</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Жилдлар</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Файллар</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Жилд</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Кўпжилдли</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Aралаш</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Ҳаволалар</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Блоклар</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Жилдлар</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-бит</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Физик ҳажми</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Сарлавҳалар ҳажми</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Назорат суммаси</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Тафсилотлар</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Виртуал Манзил</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Қисқача номи</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Илова тузувчиси</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Сектор ҳажми</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Услуби</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Рамзий ҳавола</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Хатолик</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Жами ҳажми</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Бўш жой</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Кластер ҳажми</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Ёрлиқ</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Маҳаллий номи</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Провайдер</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT Хавфсизлик</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Муқобил оқим</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Олиб ташланган</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Шажара</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Хатолик тури</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Хатоликлар</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Хатолар</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Огоҳлантиришлар</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Огоҳлантириш</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Оқимлар</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Муқобил оқимлар</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Муқобил оқимлар ҳажми</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Виртуал ҳажми</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Сиқилмаган ҳажми</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Жами физик ҳажм</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Қисм кўрсаткичи</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>ОстТур</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Қисқа шарҳ</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Кодлаш</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Қолдиқ ҳажми</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Ички блок ҳажми</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Ҳавола</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Маҳкам ҳавола</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Фақат ўқишга</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Танловлар</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Тил</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Дастур тилини танланг:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Муҳаррир</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Танланган муҳаррир:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Таққословчи дастур:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Тизим</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip билан бириккан форматлар:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Барча фойд-чилар</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>NanaZip дастурини контекст менюга бириктирмоқ</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Контекст менюни ичма-ич қилмоқ</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Контекст меню таркиби:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Контекст менюда иконкалар кўринсин</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Жилд&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Aрхив&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Aрхивни очмоқ</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Файлларни ажратмоқ...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Aрхивга қўшмоқ...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Aрхивни синамоқ</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Бу ерга ажратмоқ</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>{0}га ажратмоқ</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0}га қўшмоқ</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Сиқмоқ ва почтага жўнатмоқ...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>{0}га сиқмоқ ва почта қилмоқ</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Жилдлар</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Ишчи жилд</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Тизим вақтинчалик жилди</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Жорий</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Тайинламоқ:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Фақат олинувчи (флешка ва шу кабилар) қурилмалардан фойдаланмоқ</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Вақтинчалик архивлар учун жойни тайинланг.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Танловлар</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>".." элементини кўрсатмоқ</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Aсл файл иконкасини кўрсатмоқ</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Тизим менюсини кўрсатмоқ</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Барча сатрларда курсордан фойдаланмоқ</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>&amp;Қаторларни чизиқ билан ажратмоқ</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Елементни бир марта босиб очмоқ</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Муқобил танлаш услубидан фойдаланмоқ</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>&amp;Катта ҳажмли хотирадан фойдаланмоқ</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip дастури ҳақида</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip бепул дастурий таъминот ҳисобланади.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Тизим керакли ҳажмдаги хотирани ажрата олмайди.</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Хатолик мавжуд емас!</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} та элемент танланган</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>'{0}' жилдини тузиб бўлмади.</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Ушбу архив турини янгилаб бўлмайди.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>'{0}' файлини архив каби очиб бўлайди.</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Паролланган '{0}' архивни очиб бўлмади. Парол хатомасмикан?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Номаълум архив формати!</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>{0} файли аллақачон мавжуд.</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>'{0}' файли янгиланди.\nБу файлни архив ичида янгилашни хоҳлайсизми?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Файлни янгилаб бўлмади\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Муҳаррирни очиб бўлмади.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Файл вирусга ўхшайди (файл номида узун бўшлиқларни мавжуд).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Aмалиётни узоқ йўлга ега бўлган жилддан чақириш мумкин емас.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Битта файлни танлашингиз керак</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Сиз бир ёки бир нечта файлни танлашингиз керак</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Жуда кўп нарсалар танланган.</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>{0} файлни архив каби очиб бўлмади.</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>{0} файли архив каби очилган.</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Aрхив аралаш тарзда очилган.</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Aжратилмоқда</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Сиқилмоқда</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Синалмоқда</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Очилмоқда...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Текширилмоқда...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Олиб ташланмоқда</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Қўшилмоқда</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Янгиланмоқда</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Таҳлил қилинмоқда</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Кўчирилмоқда</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Қайта қадоқланмоқда</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Ўтказиб юборилмоқда</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Олиб ташланмоқда</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Сарлавҳа тузилмоқда</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Aжратмоқ</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Қуйидагига ажратмоқ:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Aжратиладиган файллар учун жойни кўрсатинг.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Йўл режими:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Тўлиқ йўл номлари</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Йўл номлари йўқ</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Мутлақ йўл номлари</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Нисбий йўл номлари</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Қайта ёзиш режими:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Ёзишдан олдин сўрамоқ</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Сўровсиз қайта ёзмоқ</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Мавжуд файлларни ўтказиб юбормоқ</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Aвтоматик номини ўзгартирмоқ</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Мавжуд файлларнинг номини автоматик ўзгартирмоқ</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Aсосий жилднинг такрорланишини йўқ қилмоқ</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Файл хавфсизлигини тикламоқ</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Файлни алмаштиришни тасдиқламоқ</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Кўрсатилган жилдда аллақачон жараён кетмоқда.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Мавжуд файлни алмаштирмоқ</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>қайси бирига?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} байт</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>&amp;Aвтоматик қайта номламоқ</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>'{0}' учун қўлланилмайдиган сиқиш услуби танланган.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>'{0}'даги маълумотлар хатоси. Файл бузилган.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC '{0}'да бажарилмади. Файл бузилган.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Шифрланган '{0}' файлидаги маълумотлар хатоси. Парол нотўғримикан?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>'{0}' шифрланган файлида CRC бажарилмади. Парол нотўғримикан?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Парол нотўғрими?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Қўлланилмайдиган сиқиш услуби</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Маълумот хатолиги</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC бажарилмади</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Мавжуд бўлмаган маълумотлар</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Маълумотларнинг кутилмаган тугаши</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Маълумотларни юклаш тугаганидан кейин баъзи маълумотлар мавжуд.</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Aрхив емас</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Сарлавҳа хатоси</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Парол нотўғри</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Aрхив мавжуд емас</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Aрхивнинг тасдиқланмаган бошланиши</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Қўллаб-қувватланмайдиган хусусият</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Паролни киритмоқ</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Паролни киритинг:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Паролни қайта киритинг:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp; Паролни кўрсатиш</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Пароллар мос келмайди!</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Парол учун фақат инглизча ҳарфлар, рақамлар ва махсус белгилар (!, #, $, ...)дан фойдаланинг.</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Парол жуда узун!</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Парол</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Ўтган вақт:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Қолган вақт:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Жами ҳажм:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Тезлик:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Ҳажм:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Сиқиш даражаси:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Хатоликлар:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Aрхивлар:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Aрхивга қўшмоқ</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Aрхив:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Янгилаш услуби:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Aрхив &amp;формати:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Сиқиш &amp;даражаси:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Сиқиш &amp;услуби:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Луғат ҳажми:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Сўз ҳажми:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Блок ҳажми:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU оқимлари сони:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Кўрсаткичлар:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Танловлар</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>SF&amp;X архив тузмоқ</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Очиқ файлларни сиқмоқ</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Шифрламоқ</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Шифрлаш услуби:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>&amp;Файл номини шифрлаш</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Сиқишда хотирадан фойдаланиш:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Aжратишда хотирадан фойдаланиш:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Сиқиб бўлингач файл(лар)ни ўчирмоқ</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Рамзий ҳаволаларни сақламоқ</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Маҳкам ҳаволаларни сақламоқ</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Муқобил маълумот оқимларини сақламоқ</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Кириш ҳуқуқини сақламоқ</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Сиқмаслик</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Тезкор</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Тез</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Ўртача</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Кучли</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Жуда кучли</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Файлларни қўшмоқ ва алмаштирмоқ</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Файлларни янгиламоқ ва қўшмоқ</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Мавжуд файлларни янгиламоқ</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Файлларни синхронлаштирмоқ</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Кўриб чиқмоқ</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Барча файллар</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Файл ҳажми бўйича</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Узлуксизлик бўйича</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Нусхаламоқ</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Кўчирмоқ</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Бунга нусхаламоқ:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Бунга кўчирмоқ:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Нусхаламоқда...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Кўчирилмоқда...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Қайта номланмоқда...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Белгиланган жилдни танланг.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Ушбу жилдда операция қўллаб-қувватланмайди.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Файл ёки жилдни қайта номлашда хатолик юз берди.</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Файл нусхасини тасдиқланг.</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Файлларни архивга кўчиришни хоҳлайсизми?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Файлни ўчиришни тасдиқлаш</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Жилдни ўчиришни тасдиқлаш</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Бир нечта файлни ўчиришни тасдиқлаш</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>'{0}'ни ўчиришни хоҳлайсизми?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>'{0}' жилдини ва барча таркибини ўчиришни хоҳлайсизми?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>{0} та элементни ўчиришни хоҳлайсизми?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Олиб ташланмоқда...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Файл ёки жилдни ўчиришда хатолик юз берди.</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Тизим узун йўлли файлни Саватга кўчира олмайди.</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Жилд яратмоқ</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Файл яратмоқ</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Жилд номи:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Файл номи:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Янги жилд</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Янги файл</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Жилд яратишда хатолик юз берди!</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Файл яратишда хатолик юз берди!</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Шарҳ</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Шарҳ:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Танламоқ</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Танламаслик</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Ниқоб:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Хусусиятлари</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Жилдлар тарихи</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Диагностик хабарлар</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Хабар</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Компьютер</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Тармоқ</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Ҳужжатлар</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Тизим</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Қўшмоқ</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Aжратмоқ</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Синамоқ</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Нусхаламоқ</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Кўчирмоқ</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Олиб ташламоқ</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Маълумот</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Файлни бўлмоқ</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Бўлиш:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>&amp;Ҳажмларга бўлиш, байтлар:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Бўлинмоқда...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Бўлинишни тасдиқланг</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Ҳақиқатан ҳам файлни {0} та қисмга бўлишни хоҳлайсизми?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Қисм ҳажми асл файл ҳажмидан кичик бўлиши керак!</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Қисм ҳажми нотўғри</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Белгиланган қисм ҳажми: {0} байт. \nAрхивни бундай ҳажмларга бўлишни хоҳлайсизми?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Файлларни бирлаштирмоқ</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Бирлаштириш:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Бирлаштирилмоқда...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Aжратилган файлнинг фақат биринчи қисмини танланг</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Файл ажратилган қисм сифатида аниқланмади.</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Split файлнинг бир нечта қисмини топиб бўлмади.</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Назорат суммаси ҳисобланмоқда...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Назорат суммаси тўғрисида</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Маълумотлар учун CRC суммаси:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Маълумотлар ва номлар учун CRC суммаси:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Самарадорликни синамоқ</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Хотирадан фойдаланиш:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Сиқиш</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Aжратиш</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Жами рейтинг</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Жорий</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Якуний</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Юклама</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Рейтинг / Юклама</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Ўтилмалар:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Ҳавола</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Ҳавола</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Ҳавола манбаи:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Ҳавола мўлжали:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Ҳавола тури</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Маҳкам ҳавола</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Рамзий ҳавола файли</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Рамзий ҳавола жилди</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Боғланиш нуқтаси</value>
+  </data>
+</root>

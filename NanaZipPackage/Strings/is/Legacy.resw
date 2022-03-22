@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Icelandic</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Íslenska</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Í lagi</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Hætta við</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Já</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Nei</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Loka</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Hjálp</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Halda áfram</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>&amp;Já við öllu</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>&amp;Nei við öllu</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Stöðva</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Endurræsa</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Bakgrunnur</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Forgrunnur</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Gera hlé</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Í hléi</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Ert þú viss um að þú viljir hætta við?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Skrá</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Breyta</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Skoða</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Uppáhald</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Verkfæri</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Hjálp</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Opna</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>&amp;Opna að innanverðu</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>&amp;Opna að utanverðu</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Skoða</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Breyta</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;Endurnefna</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Afrita í...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Færa í...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Eyða</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Kljúfa skrá...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>&amp;Sameina skrár...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Eiginleikar</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>&amp;Gera athugasemd...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Reikna samtölu</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Mismunur</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Skapa möppu</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Skapa skrá</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Hætta</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Tengill</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Víxlstraumar</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>&amp;Velja allt</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>&amp;Afvelja allt</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Umsnúa vali</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Velja...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Afvelja...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Velja eftir tegund</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Afvelja eftir tegund</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Stórar táknmyndir</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Smáar táknmyndir</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Listi</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Smáatriði</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Óflokkað</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Flatsýn</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 spjöld</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Verkfærastikur</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Opna rótarmöppu</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Upp um eitt stig</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Möppusaga...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Endurglæða</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Sjálfendurglæðun</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Safnverkfærastika</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Stöðluð verkfærastika</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Stórir takkar</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Sýna takkatexta</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Bæta við möppu í uppáhald sem</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Bókamerki</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Valmöguleikar...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Afkastaprófa</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Efnisyfirlit...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Um NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Slóð</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Nafn</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Framlenging</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Mappa</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Stærð</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Þjöppuð stærð</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Eiginleikar</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Skapað</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Aðkomið</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Dagsetning</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Þétt</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Athugasemd</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Dulkóðað</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Kljúfa fyrir</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Kljúfa eftir</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Orðasafn</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Tegund</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Aðferð</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Stýrikerfi hýsils</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Skráakerfi</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Notandi</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Hópur</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Bálkur</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Athugasemd</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Staðsetning</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Slóðarforskeyti</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Möppur</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Skrár</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Útgáfa</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Bindi</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Fjölbindi</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Afsetning</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Tenglar</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Bálkar</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Bindi</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-bita</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Háenda</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Gjörvi</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Efnisleg stærð</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Höfðastærð</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Samtala</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Einkenni</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Sýndarstaðfang</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Auðkenni</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Stutt nafn</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Skaparahugbúnaður</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Geirastærð</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Hamur</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Mjúktengill</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Villa</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Heildarstærð</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Laust pláss</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Klasastærð</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Merki</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Staðarnafn</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Veitandi</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT-öryggi</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Víxlstraumur</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aðstoðar-</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Eytt</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Er tré</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Villutegund</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Villur</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Villur</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Viðvaranir</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Viðvörun</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Straumar</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Víxlstraumar</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Víxlstraumastærð</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Sýndarstærð</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Afþjöppuð stærð</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Efnisleg heildarstærð</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Bindaskrá</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Undirtegund</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Stutt athugasemd</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Kóðasíða</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Halastærð</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Innfelld stubbastærð</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Tengill</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Harðtengill</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>Skráhnútur</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>Einungis lesanlegt</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Valmöguleikar</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Tungumál</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Tungumál:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Ritill</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Ritill:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Mismunur:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Kerfi</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Tengja NanaZip við:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Allir notendur</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Innleiða NanaZip í samhengisvalmynd skeljar</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Þrepaskipt samhengisvalmynd</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Samhengisvalmyndaratriði:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Táknmyndir í samhengisvalmynd</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Mappa&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Safn&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Opna safn</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Útdraga skrár...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Bæta í safn...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Prófa safn</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Útdraga hér</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Útdraga í „{0}“</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Bæta við í „{0}“</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Þjappa og senda í rafpósti...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Þjappa í „{0}“ og senda í rafpósti</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Möppur</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Vinnslumappa</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Tímabundin mappa kerfis</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Núverandi</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Tilgreind:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Nota einungis fyrir fjarlægjanleg drif</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Tilgreina staðsetningu fyrir tímabundnar safnskrár.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Stillingar</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Sýna „..“ atriði</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Sýna raunverulegar skráartáknmyndir</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Sýna kerfisvalmynd</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Heildarraðaval</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>&amp;Sýna grindarlínur</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Einsmella til að opna atriði</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Annars konar valhamur</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>&amp;Nota stórar minnissíður</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Um NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip er frjáls hugbúnaður</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Kerfið getur ekki ráðstafað nauðsynlega magninu af minninu</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Það eru engar villur</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>„{0}“ hlutir valdir</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Getur ekki skapað möppuna „{0}“</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Uppfærsluaðgerðir eru ekki studdar fyrir þetta safn.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Getur ekki opnað skrána „{0}“ sem safn</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Getur ekki opnað dulkóðaða safnið „{0}“. Rangt aðgangsorð?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Óstudd safntegund</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Skráin „{0}“ er nú þegar til</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Skránni „{0}“ var breytt.\nVilt þú uppfæra hana í safninu?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Getur ekki uppfært skrána\n„{0}“</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Getur ekki ræst ritilinn.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Skráin lítur út eins og veira (skráarnafnið inniheldur löng bil).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Aðgerðina er ekki hægt að kalla í frá möppu sem hefur langa slóð.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Þú verður að velja eina skrá</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Þú verður að velja eina eða fleiri skrár</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Of mörg atriði</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Getur ekki opnað skrána sem „{0}“-safn</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Skráin er opin sem „{0}“-safn</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Safnið er opið með afsetningu</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Útdragandi</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Þjappandi</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Prófandi</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Opnandi...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Skimandi...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Fjarlægandi</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Bætandi við</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Uppfærandi</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Greinandi</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Endurtakandi</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Endurpakkandi</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Sleppandi</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Eyðandi</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Skapandi höfuð</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Afþjappa</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Afþjappa í:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Tilgreindu staðsetningu fyrir útdregnu skrárnar.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Slóðarhamur:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Full slóðarnöfn</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Engin slóðarnöfn</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Algild slóðarnöfn</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Afstæð slóðarnöfn</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Yfirritunarhamur:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Spyrja áður en yfirritað er</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Yfirrita án kvaðningar</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Sleppa gildandi skrám</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Sjálfendurnefnun</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Sjálfendurnefnun gildandi skráa</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Útrýma afritinu af rótarmöppunni</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Endurheimta skráaröryggi</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Staðfesta skráaryfirritun</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Áfangastaðsmappan inniheldur nú þegar meðhöndluðu skrána.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Vilt þú yfirrita gildandi skrána</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>með þessari?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bæti</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Sjálfendurnefnun</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Óstudd þjöppunaraðferð fyrir „{0}“.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Gagnavilla í „{0}“. Skráin er brotin</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC mistókst í „{0}“. Skráin er brotin.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Gagnavilla í dulkóðuðu „{0}“. Rangt aðgangsorð?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC mistókst í dulkóðuðu skránni „{0}“. Rangt aðgangsorð?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Rangt aðgangsorð?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Óstudd þjöppunaraðferð</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Gagnavilla</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC mistókst</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Ótiltæk gögn</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Óvæntur endir gagna</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Það eru gögn eftir endanum á aðalgögnunum</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Er ekki safn</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Höfðavillur</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Rangt aðgangsorð</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Ótiltækt upphaf safns</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Óstaðfest upphaf safns</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Óstuddur eiginleiki</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Innsláðu aðgangsorðið</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Innsláðu aðgangsorðið:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Endurinnsláðu aðgangsorðið:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Sýna aðgangsorðið</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Aðgangsorðin samsvarast ekki</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Notaðu einungis enska stafi, tölur og sérstök rittákn (!, #, $, ...) í aðgangsorðunum</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Aðgangsorðið er of langt</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Aðgangsorð</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Liðinn tími:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Tími eftir:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Heildarstærð:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Hraði:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Meðhöndlað:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Þjöppunarhlutfall:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Villur:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Söfn:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Bæta við safni</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Safn:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Uppfærsluhamur:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Safnsnið:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;Þjöppunarsnið:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Þjöppunaraðferð:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Orðasafnsstærð:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Orðastærð:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Þéttbálkstærð:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Fjöldi gjörvaþráða:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Færibreytur:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Valmöguleikar</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>&amp;Skapa SFX-safn</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Þjappa sameiginlegum skrám</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Dulkóðun</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Dulkóðunaraðferð:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>&amp;Dulkóða skráarnöfn</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Minnisnotkun fyrir þjöppun:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Minnisnotkun fyrir afþjöppun:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Eyða skrám eftir þjöppun</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Geyma mjúktengla</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Geyma harðtengla</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Geyma víxlgagnastrauma</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Geyma skráaröryggi</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Geyma</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Hraðast</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Hratt</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Venjulegt</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Hámarks</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Öfga-</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Bæta við og yfirrita skrár</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Uppfæra og bæta við skrám</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Hressa við gildandi skrám</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Samstilla skrár</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Vafra</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Allar skrár</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Óþétt</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Þétt</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Afrita</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Færa</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Afrita í:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Færa í:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Afritandi...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Færandi...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Endurnefnandi...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Veldu móttökumöppu.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Aðferðin er ekki stutt fyrir þessa möppu.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Villa við endurnefnun skráar eða möppu</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Staðfesta skráarafritun</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Ert þú viss um að þú viljir afrita skrárnar í safnið</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Staðfesta skráareyðingu</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Staðfesta möppueyðingu</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Staðfesta fjölskráaeyðingu</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Ert þú viss um að þú viljir eyða „{0}“?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Ert þú viss um að þú viljir eyða möppunni „{0}“ og öllu innihaldinu hennar?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Ert þú viss um að þú viljir eyða þessum {0} atriðum?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Eyðandi...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Villa við eyðingu skráar eða möppu</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Kerfið getur ekki fært skrá með langri slóð í Endurvinnslutunnu</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Skapa möppu</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Skapa skrá</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Möppunafn:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Skráarnafn:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Ný mappa</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Ný skrá</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Villa við sköpun möppunnar</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Villa við sköpun skráarinnar</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Athugasemd</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Athugasemd:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Velja</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Afvelja</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Mát:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Eiginleikar</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Möppusaga</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Greiningarskilaboð</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Skilaboð</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Tölva</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Net</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Skjöl</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Kerfi</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Bæta við</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Afþjappa</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Prófa</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Afrita</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Færa</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Eyða</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Upplýsingar</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Kljúfa skrá</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Kljúfa í:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>&amp;Kljúfa í bindi, bæti:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Kljúfandi...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Staðfesta klofning</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Ert þú viss um að þú viljir kjúfa skrána í {0} bindi?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Bindisstærð verður að vera minni en stærðin á upprunalegu skránni</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Röng bindisstærð</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Tilgreindu bindisstærð: {0} bæti.\nErt þú viss um að þú viljir kljúfa safnið í slík bindi?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Sameina skrár</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Sameina í:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Sameinandi...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Veldu einungis fyrsta hlutann af klofningsskránni</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Get ekki greint skrána sem hluta af klofningsskránni</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Get ekki fundið meira en einn hluta af klofningsskránni</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Reiknar samtölu...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Samtöluupplýsingar</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC-samtala fyrir gögn:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC-samtala fyrir gögn og nöfn:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Afkastapróf</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Minnisnotkun:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Þjappandi</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Afþjappandi</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Mat</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Heildarmat</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Núverandi</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Útkoma</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Gjörvanotkun</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Mat / Notkun</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Yfirferðir:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Tengill</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Tengill</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Tengill frá:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Tengill til:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Tengiltegund</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Harðtengill</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Skráarmjúktengill</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Skráasafnsmjúktengill</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Skráasafnstenging</value>
+  </data>
+</root>

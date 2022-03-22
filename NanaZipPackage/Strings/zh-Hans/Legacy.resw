@@ -1,0 +1,1296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Chinese Simplified</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>是(&amp;Y)</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>否(&amp;N)</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>关闭(&amp;C)</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>继续(&amp;C)</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>全是(&amp;A)</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>全否(&amp;L)</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>重新开始</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>后台(&amp;B)</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>前台(&amp;F)</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>暂停(&amp;P)</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>您真的要取消吗？</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>文件(&amp;F)</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>编辑(&amp;E)</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>查看(&amp;V)</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>书签(&amp;A)</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>工具(&amp;T)</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>帮助(&amp;H)</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>打开(&amp;O)</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>当前窗口打开(&amp;I)</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>新建窗口打开(&amp;U)</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>查看(&amp;V)</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>编辑(&amp;E)</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>重命名(&amp;M)</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>复制到(&amp;C)...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>移动到(&amp;M)...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>删除(&amp;D)</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>分割文件(&amp;S)...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>合并文件(&amp;B)...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>属性(&amp;R)</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>注释(&amp;N)</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>文件校验</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>文件比较</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>新建文件夹</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>新建文件</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>退出(&amp;X)</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>链接</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>交替数据流(&amp;A)</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>全选(&amp;A)</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>全部取消</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>反选(&amp;I)</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>选择...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>取消选择...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>选择相同类型的文件</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>取消选择相同类型的文件</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>大图标(&amp;G)</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>小图标(&amp;M)</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>列表(&amp;L)</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>详细信息(&amp;D)</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>不排序</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>平铺模式</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>双版面(&amp;2)</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>工具栏(&amp;T)</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>打开根文件夹</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>向上</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>文件夹历史...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>刷新(&amp;R)</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>自动刷新</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>档案工具栏</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>标准工具栏</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>大按钮</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>显示按钮文字</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>添加到书签(&amp;A)</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>书签</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>选项(&amp;O)</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>基准测试(&amp;B)</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>查看帮助(&amp;C)</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>关于 NanaZip (&amp;A)</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>路径</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>扩展名</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>文件夹</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>压缩后大小</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>访问时间</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>修改时间</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>固实</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>注释</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>之前分割</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>之后分割</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>字典大小</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>剔除项</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>算法</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>主操作系统</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>文件系统</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>组</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>字块</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>注释</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>定位</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>路径前缀</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>文件夹</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>卷</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>多卷压缩</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>偏移</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>链接</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>字块</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>分卷</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64 位</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>大端序</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>物理大小</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>文件头大小</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>校验和</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>特征</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>虚拟地址</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>短文件名</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>创建程序</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>扇区大小</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>链接</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>总大小</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>可用空间</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>簇大小</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>卷标</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>本地名称</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>供应者</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT 安全</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>交替数据流</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>已删除</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>树状结构</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>错误类型</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>数据流</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>交替数据流</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>交替数据流大小</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>虚拟大小</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>释放大小</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>完整物理大小</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>卷索引</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>SubType</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>短评论</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>代码页</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>尾部大小</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>嵌入尾部大小</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>链接类型</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>硬链接</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>只读</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>选择语言：</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>编辑器</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>指定编辑器(&amp;E)：</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>指定文件比较程序(&amp;D)：</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>系统</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>使用 NanaZip 关联的文件类型：</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>所有用户</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>添加 NanaZip 到右键菜单</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>层叠右键菜单</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>选择在右键菜单中显示的项目：</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>右键菜单显示图标</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;文件夹&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;档案&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>打开压缩包</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>提取文件...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>添加到压缩包...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>测试压缩包</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>提取到当前位置</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>提取到 {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>添加到 {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>压缩并邮寄...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>压缩 {0} 并邮寄</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>文件夹</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>工作文件夹(&amp;W)</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>系统临时文件夹(&amp;S)</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>当前文件夹(&amp;C)</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>指定位置(&amp;S)</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>仅用于可移动设备</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>指定一个存放临时压缩包的位置。</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>显示「..」项 (双击向上)</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>显示真实图标</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>显示系统菜单</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>整行选择(&amp;F)</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>显示网格线(&amp;G)</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>单击打开项目</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>NanaZip 传统选择模式(&amp;A)</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>使用大内存页(&amp;L)</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>关于 NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip 是一款自由软件</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>系统无法分配所需内存</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>未发现错误</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>选定 {0} 个项目</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>无法创建文件夹「{0}」</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>不支持此压缩包的更新操作。</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>无法作为压缩包打开文件「{0}」</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>无法打开加密压缩包「{0}」。密码错误？</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>不支持的压缩包格式</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>文件 {0} 已存在</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>文件「{0}」已修改。\n你想在压缩文件中更新它？</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>无法更新文件\n「{0}」。</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>无法运行外部编辑。</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>此文件似乎是病毒文件(文件名中包含多个空格)。</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>无法为过长的路径完成该操作。</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>您必须选择一个文件</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>您至少要选择一个文件</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>项目太多</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>无法作为 {0} 压缩包打开该文件</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>文件以 {0} 格式打开</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>压缩包包含偏移</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>正在提取</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>正在压缩</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>正在测试</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>正在打开...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>正在搜索...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>正在移除</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>正在添加</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>正在更新</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>正在分析</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>正在复制</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>正在打包</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>正在跳过</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>正在删除</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>正在创建文件头</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>提取</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>提取到(&amp;X)：</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>指定一个提取文件的位置。</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>路径模式</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>完整路径</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>无路径</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>绝对路径</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>相对路径</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>覆盖模式</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>在覆盖前询问</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>不提示自动覆盖</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>跳过已经存在的文件</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>自动重命名</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>重命名现有文件</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>排除重复的根文件夹</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>恢复文件安全设置</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>确认文件替换</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>此文件夹已包含一个相同名称的文件。</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>是否将现有文件</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>替换为</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} 字节</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>自动重新命名(&amp;U)</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>不支持的压缩算法「{0}」。</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>数据「{0}」发生错误，文件已损坏。</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC 校验「{0}」失败，文件已损坏。</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>加密文件「{0}」数据有误，密码错误？</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>加密文件「{0}」CRC 数据校验有误，密码错误？</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>密码错误？</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>不支持的压缩算法</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>数据错误</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC 校验失败</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>数据不可用</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>文件末端错误</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>有效数据外包含额外数据</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>非压缩包</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>头部错误</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>密码错误</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>档案起始位置不可用</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>无法确认档案起始位置</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>不支持此功能</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>输入密码</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>输入密码：</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>重新输入：</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>显示密码(&amp;S)</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>密码不匹配</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>密码只允许英文字符，数字，以及特殊字符 (!、#、$...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>密码过长</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>已用时间：</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>剩余时间：</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>总大小：</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>速度：</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>已处理：</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>压缩率：</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>发生错误：</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>压缩包：</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>添加到压缩包</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>压缩包(&amp;A)：</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>更新方式(&amp;U)：</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>压缩格式(&amp;F)：</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>压缩等级(&amp;L)：</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>压缩方法(&amp;M)：</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>字典大小(&amp;D)：</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>单词大小(&amp;W)：</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>固实数据大小：</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU 线程数：</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>参数(&amp;P)：</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>创建自释放程序(&amp;X)</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>压缩共享文件</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>加密算法：</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>加密文件名(&amp;N)</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>压缩所需内存：</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>解压缩所需内存：</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>操作完成后删除源文件</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>保存符号链接</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>保存硬链接</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>保存交替数据流</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>保存文件安全设置</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>仅存储</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>极速压缩</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>快速压缩</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>标准压缩</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>最大压缩</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>极限压缩</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>添加并替换文件</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>更新并添加文件</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>只刷新已存在的文件</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>同步压缩包内容</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>浏览</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>所有文件</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>非固实</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>固实</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>移动</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>复制到：</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>移动到：</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>正在复制...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>正在移动...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>正在重新命名...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>选择目标文件夹。</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>不支持当前操作</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>无法重命名文件或文件夹。</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>确认文件复制</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>您确定复制文件到压缩包</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>确认文件删除</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>确认文件夹删除</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>确认删除多个文件</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>确实要删除 「{0}」吗？</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>确实要删除文件夹「{0}」以及全部内容吗？</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>确实要删除这 {0} 项？</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>正在删除...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>无法删除文件或文件夹.</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>系统无法将过长路径的文件移动到回收站</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>新建文件夹</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>新建文件</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>文件夹名称：</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>文件名：</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>新建文件夹</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>新建文件.txt</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>无法创建文件夹</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>无法新建文件</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>注释</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>注释(&amp;C)：</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>取消选定</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>掩码：</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>文件夹历史</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>诊断信息</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>我的电脑</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>网络</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>我的文档</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>系统</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>提取</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>测试</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>移动</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>分割文件</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>分割文件到(&amp;S)：</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>分卷大小，字节(&amp;V)：</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>正在分割...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>确认分割</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>您确认要将文件分割为 {0} 个分卷？</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>分卷大小必须小于原文件大小</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>分卷大小错误</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>指定分卷大小：{0} 字节。\n您确定要分割当前文件吗？</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>合并文件</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>合并文件到(&amp;S)：</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>正在合并...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>请选择分卷的首个文件</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>无法识别文件为压缩分卷</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>无法找到其他压缩分卷</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>正在校验...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>校验信息</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC 数据校验：</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC 数据及文件名校验：</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>基准测试</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>内存使用：</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>压缩</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>解压缩</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>评分</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>总体评分</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>当前</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>结果</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU 使用率</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>使用率评分</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>已通过：</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>链接</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>链接</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>链接自：</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>链接到：</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>链接类型</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>硬链接</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>文件符号链接</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>目录符号链接</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>目录连接（Directory Junction）</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>集成</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>打开 Windows 设置应用将文件与 NanaZip 关联</value>
+  </data>
+</root>

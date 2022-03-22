@@ -1,0 +1,1278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Azerbaijani</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Azərbaycanca</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OLDU</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>İmtina</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Bəli</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Xeyr</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Bağlamaq</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Kömək</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Davam</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>&amp;Hamısına Bəli</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Ha&amp;mısına Xeyr</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Dayan</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Yenidən başlamaq</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Arxa planda</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>Ö&amp;ndə</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>F&amp;asilə</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Fasilədə</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Həqiqətən əməliyyatı dayandırmaq istəyirsiniz?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Fayl</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Düzəliş</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Görünüş</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>S&amp;eçilmişlər</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Vasitələr</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Arayış</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Açmaq</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>&amp;Daxildə Açmaq</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>B&amp;ayırda açmaq</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Baxış</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Düzəliş</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Ye&amp;nidən Adlandırmaq</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Nüsxələmək...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Köçürmək...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Silmək</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Faylı &amp;Bölmək...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Faylları B&amp;irləşdirmək...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>X&amp;üsusiyyətlər</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Şər&amp;h...</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Yoxlama Cəmi</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Müqayisə</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Qovluq Yaratmaq</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Fayl Yaratmaq</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>Ç&amp;ıxış</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>İstinad</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Əvəzedici Axınlar</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>&amp;Hamısını Seçmək</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Seçimin Ləğvi</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Seçimi Çevirmək</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Seçmək...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Seçimin Ləğvi...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Növünə Görə Seçmək</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Növünə Görə Seçimin Ləğvi</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Böyük İşarələr</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>K&amp;içik İşarələr</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Siyahı</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Cədvəl</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Çeşidsiz</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Müstəvi Görünüş</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 Lövhə</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Alətlər Lövhələri</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Kök Qovluğu Açmaq</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Bir Səviyyə Yuxarı</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Qovluqlar Tarixçəsi...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Yeniləmək</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Bilavasitə Yeniləmək</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Arxivləyicinin Düymələr Lövhəsi</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Sadə Düymələr Lövhəsi</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Böyük Düymələr</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Düymələr Üzərində Mətnlər</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Qovluğu Seçilmişlərə Fərqli Əlavə Etmək</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Əlfəcin</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>Tənzimləmələr...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>Səmərə Sınağı</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Başlıq...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>NanaZip &amp;Haqqında...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>İstiqamət</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Genişləmə</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Qovluq</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Ölçü</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Sıxılmış</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Rəmzlər</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Yaranıb</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Açıq</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Dəyişilib</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Aramsız</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Şərh</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Şifrələnib</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Əvvəlki parça</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Sonrakı parça</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Lüğət</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Növ</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Əleyhinə</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Sıxılma Üsulu</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Quruluş</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Fayl Quruluşu</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>İstifadəçi</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Dəstə</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Bölmə</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Şərh</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Mövqe</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>İstiqamət</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Qovluq</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Fayl</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Buraxılış</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Cild</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Çox Cildli</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Uzlaşma</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>İstinad</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Bölmə</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Cild</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Prosessor</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Fiziki Ölçü</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Başlıqlar Ölçüsü</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Yoxlama Cəmi</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Xassələr</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Xəyali Ünvan</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Qısa Ad</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Yaradıcı</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Sahə Ölçüsü</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Vəziyyət</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Rəmzi İstinad</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Xəta</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Cəmi Həcm</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Azad Həcm</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Toplam Həcm</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Nişan</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Qısa Ad</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Təchizatcı</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>NT Təhlükəsizlik</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Əvəzedici Axın</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Silinmiş</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Ağac</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Xəta Növü</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Xətalar</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Xətalar</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Xəbərdarlıqlar</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Xəbərdarlıq</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Axınlar</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Əvəzedici Axınlar</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Əvəzedici Axınlar Ölçüsü</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Xəyali Ölçü</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Ceşidli Ölçü</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Ümumi Fiziki Ölçü</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Cild Nömrəsi</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Növaltı</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Qısa Şərh</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Şifrələnmiş Səhifə</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Qalıq Ölçüsü</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Tətbiq Olunmuş Bölmə Ölçüsü</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>İstinad</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Sərt İstinad</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Yalnız Oxumaq Üçün</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Tənzimləmələr</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Dil:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Düzəliş</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Düzəliş:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Müqayisə:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Quruluş</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip Fayllarla Əlaqələnsin</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Bütün İstifadəçilər</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>NanaZip əhatə təklifinə tətbiq edilsin </value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Zəncirvari əhatə təklifi</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Ünsürlü əhatə təklifi:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Əhatə təklifində nişanlar</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Qovluq&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Аrxiv&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Arxivi Açmaq</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Çeşidləmək</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Arxivə Əlavə Etmək...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Sınaq</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Burda Çeşidləmək</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>{0} Çeşidləmək</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0} Əlavə Etmək</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Sıxmaq Və E-Poçtla Göndərmək...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>{0} Sıxmaq Və E-Poçtla Göndərmək</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Qovluqlar</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;İş Qovluğu</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Müvəqqəti Quruluş Qovluğu</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Cari</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Təyin Etmək:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Yalnız dəyişkən daşıyıcılar üçün istifadə</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Müvəqqəti arxivlər üçün yer göstərmək.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Tənzimləmələr</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>".." ünsürünü göstərmək</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Həqiqi fayl işarələri göstərmək</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Quruluş təklifini göstərmək</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Ox bütün sətir üzrə</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Ayrıcıları Göstərmək </value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Bir Toxunuşla Açmaq</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Əvəzedici vəziyyət işarələnməsi</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Böyük yaddaş səhifələri istifadəsi</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip Haqqında</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip Sərbəst Yayılan Proqramdır</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Kifayət qədər boş yaddaş yoxdur</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Səhvlər tapılmadı</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} Ayrılmış hədəf</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>'{0}' Qovluğunu yaratmaq mümkün olmadı</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Bu arxiv üçün dəyişiklik əməliyatı dəstəklənmir</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>'{0}' Faylını arxiv kimi açmaq alınmadı</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Şifrələnmiş '{0}' arxivini açmaq alınmadı. Yanlış şifrə?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Dəstəklənməyən arxiv</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>{0} faylı artıq mövcuddur</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>'{0}' faylına dəyişiklik edildi.\nSiz onu arxivdə yeniləmək istəyirsiz? </value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>\n'{0}' faylını yeniləmək alınmadı</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Redaktəni işə salmaq alınmadı</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Fayl zərərvericiyə oxşayır (faylın adı uzun boşluq ardıcıllığı təşkil edir).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Əməliyyat uzun yol təşkil edən qovluqdan icra oluna bilmir.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Siz bir fayl seçməlisiniz</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Siz bir və ya bir neçə fayl seçməlisiniz</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Həddən çox ünsür</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Faylı, '{0}' arxivi kimi açmaq alınmadı</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Fayl, {0} arxivi kimi açıldı</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Arxiv əvəzlənərək açıldı</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Çeşidlənmə</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Sıxılma</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Sınaq</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Açılır...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Yoxlanır...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Silinmə</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Əlavə Etmək</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Yenilənmə</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Təhlil</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Nüsxələnmə</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Yenidən Çeşidlənmə</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Keçmə İcazəsi</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Silinmə</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Başlıqlar Yaradılması</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Ayırmaq</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Ç&amp;eçidlə:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Ayrılan faylların yerini göstərin.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Fayllara istiqamət:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Tam istiqamətlər</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>İstiqamətsiz</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Mütləq istiqamətlər</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Nisbi istiqamətlər</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Yenidən yazılma:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Təsdiqli</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Təsdiqsiz</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Ötürmək</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Birbaşa yenidən adlandırmaq</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Mövcud olanları yenidən adlandırmaq</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Kök qovluqla bənzərliyi aradan qaldırmaq</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Faylın təhlükəsizlik bərpası </value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Faylın əvəzlənmə təsdiqi</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Qovluq artıq emal olunan fayl təşkil edir.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Mövcud faylı əvəzləmək</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>növbəti faylla?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bayt</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Birbaşa yenidən adlandırmaq</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>'{0}' faylının dəstəklənməyən sıxılma üsulu.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>'{0}' məlumatlarında xəta. Fayl korlanıb.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>'{0}' CRC xətası. Fayl korlanıb.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>'{0}' şifrəli fayl məlumatlarında xəta. Yanlış şifrə?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>'{0}' şifrəli faylı üçün CRC xətası. Yanlış şifrə?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Yanlış şifrə?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Dəstəklənməyən sıxılma üsulu</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Dəlillərdə xəta</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC xətası</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Mövcud olmayan dəlillər</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Dəlillərin gözlənilməz sonu</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Bölmənin sonunda faydalı dəlillər olduğuna dəlillər var</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Arxiv deyil</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Başlıqlarda Xəta</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Yanlış şifrə</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Arxivin əvvəli mövcud deyil</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Təsdiqsiz arxiv əvvəli</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Dəstəklənməyən xüsusiyyət</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Şifrə daxil etmək</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>&amp;Şifrə daxil edin:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Şifrəni təkrarlayın:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Şifrəni göstərmək</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Şifrələr uyğun deyil</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Şifrə üçün yalnız latın hərfləri, rəqəmlər və xüsusi rəmzlər istifadə edin (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Şifrə şox uzundur</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>&amp;Şifrə</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Keçdi:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Qalıb:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Cəmi:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Sürət:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Ölçü:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Sıxılma dərəcəsi:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Xəta:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Arxiv:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Arxivə əlavə etmək</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arxiv:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Dəyişmə vəziyyəti:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Arxiv &amp;qismi:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Sıxılma &amp;dərəcəsi:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Sıxılma &amp;üsulu:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Lüğət ölçüsü:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Söz ölçüsü:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Bölmə ölçüsü:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Axın sayı:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Nizamlar:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>&amp;Seçimlər</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>SF&amp;X arxiv yaratmaq</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Yazılış üçün açıq faylları sıxmaq</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Şifrələmə</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Şifrələmə üsulu:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Fayl adlarını &amp;şifrələmək</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Qablaşdırma üçün yaddaş həcmi:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Çeşidləmə üçün yaddaş həcmi:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Sıxılmadan sonra faylları silmək</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Rəmzli keçidləri saxlamaq</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Sərt keçidləri saxlamaq</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Əvəzedici axınları saxlamaq</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Giriş hüququnu saxlamaq</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Sıxılmasız</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Sürətli</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Cəld</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Məqbul</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Yüksək</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Daha Yüksək (Ultra)</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Əlavə etmək və əvəzləmək</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Yeniləmək və əlavə etmək</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Yeniləmək</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Eyniləşdir (Sinxron)</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Vərəqləmək</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Bütün Fayllar</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Fayl ölçüsünə görə</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Aramsız</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Nüsxələmək</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Köçürmək</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Nüsxələmək:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Köçürmək:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Nüsxələlənir...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Köçürülür...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Yenidən adlandırılır...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Qovluğu göstərin.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Əməliyyat bu qovluq üçün dəstəklənmir.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Fayl və ya Qovluğun Yenidən Adlandırılması Zamanı Xəta </value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Faylların Nüsxələlənmə Təsdiqi</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Siz həqiqətən bu faylları arxivə nüsxələmək istəyirsiz</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Fayl silinmə təsdiqi</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Qovluq silinmə təsdiqi</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Fayllar dəstəsinin silinmə təsdiqi</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Siz həqiqətən "{0}" silmək istəyirsiz?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Siz həqiqətən "{0}" qovluğunu və onun bütün məzmununu silmək istəyirsiz?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Siz həqiqətən {0} hədəfi silmək istəyirsiz?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Silinir...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Fayl və ya Qovluq Silinməsi Zamanı Xəta</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Quruluş uzun yollu faylların səbətə silinməsi əməliyyatını dəstəkləmir</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Qovluq Yaratmaq</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Fayl Yaratmaq</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Qovluq Adı:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Fayl Adı:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Yeni Qovluq</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Yeni Fayl</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Qovluq Yaradılması Zamanı Zəta</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Fayl Yaradılması Zamanı Zəta</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Şərh</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Şərh:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Seçin</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Seçimin Ləğvi</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Üzlük (Maska):</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Xassələr</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Qovluqlar Tarixçəsi</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>İsmarıclar</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>İsmarıc</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Kompüter</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Şəbəkə</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Sənədlər</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Quruluş</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Əlavə Etmək</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Ayırmaq</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Sınaq</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Nüsxələmək</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Köçürmək</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Silmək</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Məlumat</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Fayl Bölmək</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Bölmək:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Cildlərə &amp;bölmək, (bayt) ölçüdə:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Bölünür...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Bölünmə Təsdiqi</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Siz həqiqətən faylı {0} hissəyə bölmək istəyirsiz?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Cild ölçüsü ilkin fayl ölçüsündən kiçik olmalıdır</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Cildlərin ölçü təyin etmə sahəsində xəta</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Təyin edilmiş cild ölçüsü: {0} bayt.\nSiz həqiqətən arxivi belə cildlərə bölmək istəyirsiniz?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Faylları Birləşdir</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Birləşdirmək:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Birləşir...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Bölünmüş faylın yalnız birinci hissəsini seçmək lazımdır</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Bölünmüş faylın tanınması mümkün olmadı</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Bölünmüş faylın birdən çox hissəsini tapmaq mümkün olmadı</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Yoxlanma cəminin hesablanması...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Yoxlanma cəmi</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Dəlillər üçün CRC yoxlanma cəmi:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Dəlillər və adlar üçün CRC yoxlanma cəmi:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Səmərə Sinağı</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Yaddaş Həcmi:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Qablaşdırma</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Çeşidlənmə</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Dərəcə</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Ümumi Dərəcə</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Cari</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Nəticə</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Yüklənmə</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Yüklənmə Dərəcəsi</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Keçid:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>İstinad</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Əlaqələndir</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Mənbə:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Məqsəd:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>İstinad Qismi</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Sərt İstinad </value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Rəmzi İstinad (Fayl)</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Rəmzi İstinad (Qovluq)</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Bağlantı Nöqtəsi (Qovşaq)</value>
+  </data>
+</root>

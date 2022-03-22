@@ -1,0 +1,1290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>عربي</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>حسناً</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>إلغاء الأمر</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;نعم</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;لا</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;إغلاق</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>المساعدة</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;استمرار</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>نعم للكل</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>لا للكل</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>إيقاف</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>إعادة تشغيل</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>بال&amp;خلفية</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>بالم&amp;قدمة</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;إيقاف مؤقت</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>متوقف مؤقتاً</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>هل أنت متأكد من الإلغاء؟</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;ملف</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;تعديل</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;عرض</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>التف&amp;ضيلات</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;أدوات</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;مساعدة</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;فتح</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>&amp;افتح بالداخل</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>ا&amp;فتح للخارج</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;عرض</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;تعديل</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>إعا&amp;دة التسمية</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>..ن&amp;سخ إلى</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>..ن&amp;قل إلى</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;حذف</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;تقسيم الملف...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>دم&amp;ج الملفات...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>الخ&amp;صائص</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>تعليق&amp;</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>حساب قيمة التدقيق </value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>الفرق</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>إنشاء مجلد</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>إنشاء ملف</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;خروج</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>ربط</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;الجداول البديلة</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>تحديد ال&amp;كل</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>عدم تحديد الكل</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;عكس التحديد</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>تحديد...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>عدم تحديد...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>تحديد حسب النوع</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>عدم تحديد حسب النوع</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>رموز &amp;كبيرة</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>رموز &amp;صغيرة</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;قائمة</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;تفاصيل</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>غير مرتب</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>عرض أفقي</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;مجموعتين</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;أشرطة الأدوات</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>فتح المجلد الرئيسي</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>إلى الأعلى بمستوى واحد</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>...محفوظات المجلدات</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;تحديث</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>تحديث تلقائي</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>شريط أدوات الأرشفة</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>شريط الأدوات القياسي</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>أزرار كبيرة</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>إظهار تسميات الأزرار</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;إضافة المجلد للمفضلة باسم</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>العلامات المرجعية</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>...&amp;الخيارات</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;معالج الأداء</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>..&amp;المحتويات</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>NanaZip &amp;حول...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>المسار</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>الامتداد</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>المجلد</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>الحجم</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>الحجم المضغوط</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>الخواص</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>تم إنشاءه</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>تم الدخول</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>تم تعديله</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>ثابت</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>تم التعليق</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>مشفر</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>التقسيم قبل</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>التقسيم بعد</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>القاموس</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>ضد</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>الطريقة</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>نظام التشغيل</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>نظام الملفات</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>المجموعة</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>التكتل</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>التعليق</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>الموقع</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>بادئة المسار</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>المجلدات</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>الملفات</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>الإصدار</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>وحدة التخزين</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>وحدة تخزين متعددة</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>التعويض</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>روابط</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>كتل</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>وحدات تخزين</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>64-بت</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>المعالج</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>الحجم الطبيعي</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>حجم المقدمات</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>قيمة التحقق</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>المميزات</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>العنوان الظاهري</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>الهوية</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>اسم قصير</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>برنامج الإنشاء</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>حجم القطاع</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>الوضع</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>الرابط الرمزي</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>الحجم الكلي</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>المساحة الحرة</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>حجم الجزء</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>العلامة</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>الاسم المحلي</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>المزوّد</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>NT أمان</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>الجداول البديلة</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>تم حذفه</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>التفرعات</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>خطأ في النوع</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>أخطاء</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>أخطاء</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>تحذيرات</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>تحذير</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>الجداول</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>الجداول البديلة</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>حجم الجداول البديلة</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>الحجم الظاهري</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>حجم الإخراج</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>الحجم الطبيعي الكلي</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>دليل الحجم</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>النوع الفرعي</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>تعليق قصير</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>رمز الصفحة</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>حجم التذييل</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>حجم العقبات المضمن</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>الارتباط</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>الارتباط الثابت</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>للقراءة-فقط</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>الخيارات</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>ترجمة الأستاذ عوض الغامدي - التعديل الأول سيف الاسدي - التعديل الثاني عمار كرد</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>المحرر</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;المحرر:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>ال&amp;فرق:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>النظام</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>تكامل البرنامج مع:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>جميع المستخدمين</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>الإندماج مع قائمة الزر الأيمن</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>تتالي قائمة الزر الأيمن</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>عناصر قائمة الزر الأيمن:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>الأيقونات في قائمة الزر الأيمن</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;مجلد&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;أرشيف&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>فتح أرشيف</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>استخراج الملفات...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>إضافة إلى الأرشيف...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>فحص الأرشيف</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>استخرج هنا</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>استخرج إلى {0}ـ</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>إضافة إلى {0}ـ</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>ضغط ثم إرسال...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>ضغط إلى {0} ثم إرسال</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>مجلدات</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;مجلد العمل</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;مجلد النظام المؤقت</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;الحالي</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;محدد:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>يستخدم فقط للأقراص المتحركة</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>تحديد موضع للأرشيف المؤقت للملفات</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>إعدادات</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>عرض ".." عنصر</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>عرض أيقونات الملف الفعلية</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>عرض قائمة النظام</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;تحديد الصف بالكامل</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>إظهار خطوط الشبكة</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>نقرة واحدة لفتح أي مادة</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;نظام تحديد بديل</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>استعمال &amp;صفحات ذاكرة كبيرة</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>حول البرنامج</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip هو برمجية مجانية</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>لا يمكن للنظام تخصيص الكمية المطلوبة للذاكرة</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>لا يوجد أخطاء</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>تم تحديد {0} عنصر</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>'{0}' لا يمكن إنشاء المجلد</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>تحديث العمليات غير مدعوم لهذا الأرشيف</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>كأرشيف '{0}' لا يمكن فتح الملف</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>كلمة المرور خطأ؟. '{0}' تعذر فتح الأرشيف المشفر</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>نوع أرشيف غير معتمد</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>موجود مسبقا {0} الملف</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>هل تريد تحديثه في الأرشيف؟\nالملف '{0}' تم تعديله</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>لا يمكن تحديث الملف\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>لا يمكن بدء المحرر</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>(الملف يشبه الفيروس (اسم الملف يحتوي على مسافات بيضاء طويلة</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>لا يمكن استدعاء العملية من مجلد له مسار طويل</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>يجب تحديد ملف واحد</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>يجب تحديد ملف واحد أو أكثر</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>عناصر كثيرة جداً</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>لا يمكن فتح الملف {0} كأرشيف</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>الملف مفتوح {0} كأرشيف</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>الأرشيف مفتوح بطريقة الطباعة بالأوفسيت</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>جاري الاستخراج</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>جاري الضغط</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>جاري الفحص</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>جاري الفـتـح...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>يتم التفحص...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>تتم الإزالة</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>يتم الإضافة</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>يتم التحديث</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>يتم التحليل</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>يتم التكرار</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>يتم إعادة الضغط</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>يتم التجاهل</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>يتم الحذف</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>يتم إنشاء المقدمة</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>استخراج</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>استخراج إلى:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>تحديد الموضع للملفات المستخرجة</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>حالة المسار</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>اسم المسار بالكامل</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>بدون اسم المسار</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>اسم المسار المطلق</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>اسم المسار النسبي</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>حالة إعادة الكتابة</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>السؤال قبل إعادة الكتابة</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>إعادة الكتابة بدون تنبيه</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>تجاوز الملفات المتوفرة</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>تسمية تلقائية</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>تسمية الملفات الموجودة تلقائياً</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>إزالة تكرارات المجلد الرئيسي</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>استعادة ملف الأمان</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>تأكيد استبدال الملف</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>المجلد الهدف يحوي مسبقاً الملف</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>أتريد استبدال الملف الموجود؟</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>بهذا الملف؟</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} بايت</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>إعادة تسمية تلقائية</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>طريقة ضغط غير معتمدة لـ '{0}'</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>خطأ بيانات في '{0}'. الملف تالف.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>خطأ بصمة في '{0}'. الملف تالف.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>خطأ بيانات في الملف المشفر '{0}'. كلمة المرور غير صحيحة؟</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>فشل الفحص الدوري في الملف المشفر '{0}'. كلمة المرور غير صحيحة؟</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>كلمة مرور خاطئة؟</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>طريقة ضغط غير مدعومة</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>خطأ في البيانات</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC فشل</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>بيانات غير متاحة</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>نهاية غير متوقعة للبيانات</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>هناك بعض البيانات بعد نهاية بيانات الحمولة</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>ليس أرشيفاً</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>خطأ في المقدمات</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>كلمة مرور خاطئة</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>البداية غير متوفرة للأرشيف</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>البداية غير مؤكدة للأرشيف</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>ميزة غير مدعومة</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>أدخل كلمة المرور</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>أدخل كلمة المرور:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>إعادة كلمة المرور:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;إظهار كلمة المرور</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>كلمتا المرور غير متطابقتان</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>استخدم فقط حروف إنجليزية و أرقام وعلامات خاصة (!,#,,$ ...) لكلمة المرور</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>كلمة المرور طويلة جداً</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>الزمن المنقضي:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>الزمن المتبقي:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>الحجم الكلي:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>السرعة:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>المعالج:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>نسبة الضغط:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>الأخطاء:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>ملفات الأرشيف:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>إضافة للأرشيف</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;الأرشيف:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;حالة التحديث:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>صيغة الأرشيف:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>مستوى الضغط&amp;:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>طريقة ال&amp;ضغط:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;حجم المعجم:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;حجم الكلمة:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>حجم الكتلة الخاصة:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>عدد مؤشرات الـ CPU:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;المزايا:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>الخيارات</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>إنشاء أرشيف ذاتي الاستخراج</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>ضغط الملفات المشاركة</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>التشفير</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>طريقة التشفير:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>تشفير أسماء ال&amp;ملفات</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>استهلاك الذاكرة للضغط:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>استهلاك الذاكرة لإلغاء الضغط:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>حذف الملفات بعد الضغط</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>حفظ الارتباطات الرمزية</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>حفظ الارتباطات الثابتة</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>حفظ جداول البيانات البديلة</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>حفظ ملف الأمان</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>الأسرع</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>سريع</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>طبيعي</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>مرتفع</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>الأقصى</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>إضافة واستبدال الملفات</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>تحديث وإضافة الملفات</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>تجديد الملفات المتوفرة فقط</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>مزامنة الملفات</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>استعراض</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>كافة الملفات</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>غير خالص</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>خالص</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>نسخ</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>نقل</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>نسخ إلى:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>نقل إلى:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>جاري النـسـخ...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>جاري النـقـل...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>جاري إعادة التسمية...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>تحديد مجلد الوجهة</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>العملية غير معتمدة</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>حدوث خطأ عند إعادة تسمية الملف أو المجلد</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>تأكيد نسخ الملف</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>هل أنت متأكد من نسخ الملفات إلى الأرشيف؟</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>تأكيد الحذف للملف</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>تأكيد الحذف للمجلد</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>تأكيد الحذف للملفات</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>'؟ {0}'هل أنت متأكد من حذف</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>هل أنت متأكد من حذف المجلد '{0}' و كافة محتوياته؟</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>هل أنت متأكد من حذف العناصر التالية {0}؟</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>جاري الحذف...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>حدوث خطأ عند حذف الملف أو المجلد</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>لا يمكن للنظام نقل ملف له مسار طويل إلى سلة المحذوفات</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>إنشاء مجلد</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>إنشاء ملف</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>اسم المجلد:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>اسم الملف:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>مجلد جديد</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>ملف جديد</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>حدوث خطأ عند إنشاء المجلد</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>حدوث خطأ عند إنشاء الملف</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>تعليق</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;تعليق:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>تحديد</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>عدم تحديد</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>إخفاء:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>خصائص</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>محفوظات المجلدات</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>رسائل الفاحص</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>رسالة</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>جهاز الكمبيوتر</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>الشبكة</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>المستندات</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>النظام</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>استخراج</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>فحص</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>نسخ</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>نقل</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>معلومات</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>تقسيم الملف</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;التقسيم إلى:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>التقسيم لكتل أو بايتات:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>جاري التقسيم...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>تأكيد التقسيم</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>هل تريد فعلا تقسيم الملف إلى {0} كتلة؟</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>يجب أن يكون حجم الكتلة أصغر من حجم الملف الأصلي</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>كتلة الحجم غير صحيحة</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>حجم الكتلة المعين: {0} بايت\nهل تريد فعلاً تقسيم الأرشيف إلى مثل هذه الكتل؟</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>دمج الملفات</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;دمج إلى:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>جاري الدمج...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>حدد فقط الجزء الأول من ملف التقسيم</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>لا يمكن اكتشاف الملف كجزء من ملف التقسيم</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>لا يمكن العثور على أكثر من جزء واحد من ملف التقسيم</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>يتم حساب مجموعة الاختبار...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>معلومات مجموعة الاختبار</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>للبيانات CRC مجموعة الاختبار:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>مجموعة الاختبار CRC للبيانات وللاسماء:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>تقييم الأداء</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>استخدام الذاكرة:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>ضغط</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>فك ضغط</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>المعدل</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>المعدل الكلي</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>الحالي</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>الناتج</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>استهلاك الـ CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>التقدير/الاستهلاك</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>العمليات:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>الرابط</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>الارتباط</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>ربط من:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>ربط إلي:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>نوع الربط</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>ربط قوي</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>ربط الملف الرمزي</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>ربط القاموس الرمزي</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>قاموس الربط</value>
+  </data>
+</root>

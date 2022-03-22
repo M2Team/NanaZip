@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Vietnamese</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Đồng ý</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Hủy bỏ</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>Có</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Giúp đỡ</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>Tiếp tục</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Có tất cả</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Không tất cả</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Dừng</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Làm lại</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>Chạy nền</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>Chế độ ưu tiên</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>Dừng</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Đã dừng</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Bạn chắc chắn muốn hủy bỏ?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>Tập tin</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>Biên tập</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>Xem</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>Ưa thích</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>Công cụ</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>Giúp đỡ</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>Mở</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Mở tại đây</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Mở trong cửa sổ khác</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>Xem</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>Biên tập</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Đổi tên</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>Sao chép đến...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>Di chuyển đến...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>Xoá</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Chia cắt tệp nén...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Nối tệp nén...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>Thuộc tính</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Chú thích</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Tính checksum (md5)</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>So sánh</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Tạo thư mục</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Tạo tệp nén</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>Thoát</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Chọn tất cả</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Bỏ chọn tất cả</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Đảo lựa chọn</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Chọn...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Bỏ chọn...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Chọn theo loại</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Bỏ chọn theo loại</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Biểu tượng lớn</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Biểu tượng nhỏ</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>Danh sách</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Không sắp xếp</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Mọi tập tin và thư mục con</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>2 bảng</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>Thanh công cụ</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Mở thư mục gốc</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Lên một cấp</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Lịch sử thư mục...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>Nạp lại</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Thanh công cụ nén</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Thanh công cụ chuẩn</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Sử dụng nút lớn</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Hiển thị chữ trên nút</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>Thêm thư mục vào 'Ưa thích' như là</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Đánh dấu</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>Tùy chọn...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>Đo tốc độ</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>Nội dung...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>Về NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Đường dẫn</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Phần mở rộng</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Thư mục</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Kích cỡ thực</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Kích cỡ nén</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Thuộc tính</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Thời điểm tạo</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Thời điểm truy xuất</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Thời điểm sửa đổi</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Kiểu nén Solid</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Được mã hoá</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Chia nhỏ trước</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Chia nhỏ sau</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Từ điển</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Loại</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Phương thức nén</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Hệ điều hành</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Tệp hệ thống</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Người dùng</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Tập đoàn</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Số thứ tự</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Chú thích</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Vị trí</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Đường dẫn đầu</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Thư mục</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Tập tin</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Phiên bản</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Kích cỡ</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Đa kích cỡ</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Liên kết</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Tập tin</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Kích cỡ</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Kích cỡ lý thuyết</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Kích cỡ hiện tại</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Đặc điểm</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Địa chỉ ảo</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Tên ngắn</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Trình tạo ứng dụng</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Kích cỡ vùng</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Chế độ</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Liên kết</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Tổng dung lượng</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Dung lượng trống</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Dung lượng cluster</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Nhãn</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Tên mạng cục bộ</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Nhà cung cấp</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Các tùy chọn</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Ngôn ngữ hiển thị</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Ngôn ngữ:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Biên tập</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>Trình biên tập:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>Trình so sánh:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Hệ thống</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Kết hợp NanaZip với:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Tích hợp NanaZip vào menu ngữ cảnh</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Xếp tầng menu ngữ cảnh</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Menu ngữ cảnh:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Thư mục&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Tệp nén&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Mở tệp nén</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Giải nén tệp...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Thêm vào tệp nén...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Kiểm tra tệp nén</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Giải nén tại đây</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Giải nén vào {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Thêm vào {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Nén và gởi qua email...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Nén thành {0} và gởi qua email</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Thư mục</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>Thư mục hiện hành</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>Hệ thống thư mục tạm</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>Hiện tại</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>Đặc biệt:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Chỉ sử dụng cho ổ đĩa di động</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Xác định vị trí cho các tệp lưu trữ tạm thời.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Thiết lập</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Hiển thị mục ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Hiển thị biểu tượng thực của tệp</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Hiển thị menu hệ thống</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Chọn cả dòng</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Hiển thị lưới</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Nhắp chuột để mở</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Chế độ chọn luân phiên</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Sử dụng bộ nhớ lớn</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Về NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip là một phần mềm miễn phí.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Không thể cấp thêm dung lượng RAM yêu cầu</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Không xuất hiện lỗi</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} đối tượng đã chọn</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Không thể tạo thư mục '{0}'</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Tệp nén này không được hỗ trợ cập nhật.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Không thể mở '{0}' như là tệp nén</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Không thể mở tập tin nén '{0}' bị mã hóa . Mật khẩu sai?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Không hỗ trợ tệp nén này</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Tệp {0} đang tồn tại</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Tệp '{0}' đã bị thay đổi.\nBạn có muốn cập nhật nó vào tập tin nén?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Không thể cập nhật tệp\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Không thể khởi động trình biên tập.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Tập tin này có thể là virus (tên tập tin có chứa khoảng cách dài).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Không thể thực hiện với một thư mục có đường dẫn quá dài.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Bạn phải chọn một tập tin</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Bạn phải chọn một hoặc 2 tập tin</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Quá nhiều tập tin</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Đang giải nén...</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Đang nén...</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Đang kiểm tra...</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Đang mở...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Đang quét...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Giải nén</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Giải nén vào:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Chọn nơi để giải nén tệp.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Chọn đường dẫn</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Đường dẫn đầy đủ</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Không có đường dẫn</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Chế độ ghi đè</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Hỏi trước khi ghi đè</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Ghi đè không cần hỏi</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Bỏ qua tệp đã có</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Tự động đổi tên</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Tự động đổi tên tệp đã có</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Xác nhận thay thế</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Thư mục đích đã có tập tin đó.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Bạn có muốn thay thế tập tin đã có</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>bằng tập tin mới?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bytes</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Tự động đổi tên</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Phương thức nén không hỗ trợ cho '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Lỗi dữ liệu trong '{0}'. Tệp đã bị hỏng.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>Lỗi chẵn/lẻ (CRC) trong '{0}'. Tệp đã bị hỏng.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Lỗi dữ liệu trong tệp nén bị mã hóa '{0}'. Mật khẩu sai?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>Kiểm tra CRC thất bại trong tệp nén bị mã hóa '{0}'. Mật khẩu sai?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Vui lòng nhập mật khẩu</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Nhập mật khẩu:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Nhập lại mật khẩu:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>Xem mật khẩu</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Mật khẩu không khớp nhau</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Chỉ đặt mật khẩu bằng tiếng Anh, số và những kí tự đặc biệt (!, #, $, ...) cho mật khẩu</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Mật khẩu quá dài</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Thời gian đã qua:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Thời gian còn lại:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Tổng kích cỡ:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Tốc độ:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Đã nén:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Tỷ lệ nén:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Lỗi:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Tệp nén:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Thêm vào tệp nén</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>Tệp nén:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Chế độ cập nhật:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Dạng tệp nén:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Mức độ nén:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Phương thức nén:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Kích cỡ thư mục:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Kích cỡ văn bản:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Kích cỡ nén Solid:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Số luồng xử lý CPU:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>Tham số:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Tùy chọn</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Tạo trình tự giải nén tệp</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Nén tập tin chia sẻ</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Mã hóa</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Phương thức mã hóa:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Mã hoá tên tệp</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Bộ nhớ dùng cho việc nén:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Bộ nhớ dùng cho việc giải nén:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Lưu trữ</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Nhanh nhất</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Nhanh</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Bình thường</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Tối đa</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Siêu nhanh</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Thêm và thay thế</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Thêm và cập nhật</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Cập nhật tập tin đã có</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Đồng bộ</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Duyệt</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Mọi tập tin</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Không nén dạng Solid</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Di chuyển</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Sao chép đến:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Di chuyển đến:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Đang thêm...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Đang di chuyển...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Đang đổi tên...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Chọn thư mục đến.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Thao tác không được hỗ trợ cho tập tin này.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Lỗi khi đổi tên tệp hoặc thư mục</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Xác nhận thêm</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Bạn muốn thêm vào tệp nén?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Xác nhận xoá</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Xác nhận xoá thư mục</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Xác nhận xoá nhiều tệp</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xoá '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xoá thư mục '{0}' và mọi tập tin bên trong?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xoá {0} ?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Đang xóa...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Lỗi khi đang xóa tệp hoặc thư mục</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Hệ thống không thể xóa tệp với đường dẫn dài vào Thùng rác</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Tạo thư mục</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Tạo tệp nén</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Tên thư mục:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Tên tệp mới:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Thư mục mới</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Tệp mới</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Lỗi khi tạo thư mục</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Lỗi khi tạo tệp</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Chú thích</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>Chú thích:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Bỏ chọn</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Ẩn danh:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Thuộc tính</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Lịch sử thư mục</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Thông tin chẩn đoán</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Máy tính</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Mạng</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Tài liệu</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Hệ thống</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Giải nén</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Kiểm tra</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Di chuyển</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Xoá</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Chia nhỏ tệp</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>Chia nhỏ và lưu tại:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Chia thành nhiều phần, bytes:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Đang chia nhỏ...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Xác nhận việc chia nhỏ</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Bạn có chắc muốn chia nhỏ tệp nén thành {0} phần?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Kích cỡ mỗi phần phải nhỏ hơn tệp gốc</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Kích cỡ phần chia chưa đúng</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Kích cỡ phần chia đã đặt: {0} bytes.\nBạn chắc chắn muốn chia tệp nén theo kích cỡ chia đã đặt?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Nối tệp</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>Nối thành:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Đang nối...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Chỉ chọn phần đầu của tệp bị chia nhỏ</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Không thể xem tập tin như phần nối của tệp bị chia cắt</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Không tìm thấy thêm phần nối nào của tệp chia cắt</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Đang tính checksum...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Thông tin checksum</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC checksum cho dữ liệu:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC checksum cho dữ liệu và tên:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Đo tốc độ</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Bộ nhớ sử dụng:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Đang nén</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Đang giải nén</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Đánh giá</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Tổng đánh giá</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Hiện thời</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Kết quả</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Mức dùng CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Tốc độ / Mức dùng</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Đã qua:</value>
+  </data>
+</root>

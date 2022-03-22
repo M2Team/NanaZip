@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Mongolian (Unicode)</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>ᠮᠤᠩᠭᠤᠯ ᠬᠡᠯᠡ</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>ᠲᠡᠭᠡ</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>ᠲᠡᠭᠡ (&amp;Y)</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>ᠪᠣᠯᠢ (&amp;N)</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>ᠬᠠᠭᠠᠬᠤ (&amp;C)</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>ᠬᠠᠪᠰᠤᠷᠤᠮᠵᠢ</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>ᠵᠠᠯᠭᠠᠭᠠᠳ (&amp;C)</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>ᠪᠦᠭᠦᠳᠡ ᠲᠡᠭᠡ (&amp;A)</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>ᠪᠦᠭᠦᠳᠡ ᠪᠣᠯᠢ (&amp;L)</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>ᠵᠣᠭᠰᠣᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>ᠳᠠᠬᠢᠨ ᠡᠬᠢᠯᠡᠬᠦ</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>ᠠᠷᠤ ᠲᠠᠯ᠎ᠠ (&amp;B)</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>ᠡᠮᠦᠨ᠎ᠡ ᠲᠠᠯ᠎ᠠ (&amp;F)</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>ᠵᠣᠭᠰᠣᠭᠠᠬᠤ (&amp;P)</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>ᠨᠢᠭᠡᠨᠲᠡ ᠵᠣᠭᠰᠣᠪᠠ</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>ᠲᠠ ᠦᠨᠡᠬᠡᠷ ᠤᠰᠠᠳᠬᠠᠬᠤ ᠦᠦ ︖</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ (&amp;F)</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>ᠨᠠᠶᠢᠷᠠᠭᠤᠯᠬᠤ (&amp;E)</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>ᠦᠵᠡᠬᠦ (&amp;V)</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>ᠬᠠᠳᠠᠭᠠᠯᠠᠬᠤ (&amp;A)</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>ᠪᠠᠭᠠᠵᠢ (&amp;T)</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>ᠬᠠᠪᠰᠤᠷᠤᠮᠵᠢ (&amp;H)</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>ᠨᠡᠭᠡᠭᠡᠬᠦ (&amp;O)</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>ᠣᠳᠣᠬᠢ ᠴᠣᠩᠬᠣ  ᠶᠢ ᠨᠡᠭᠡᠭᠡᠬᠦ (&amp;I)</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>ᠰᠢᠨ᠎ᠡ ᠴᠣᠩᠬᠣ ᠪᠠᠶᠢᠭᠤᠯᠤᠭᠠᠳ ᠨᠡᠭᠡᠭᠡᠬᠦ (&amp;U)</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>ᠵᠢᠷᠤᠭ ᠦᠵᠡᠬᠦ (&amp;V)</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>ᠨᠠᠶᠢᠷᠠᠭᠤᠯᠬᠤ (&amp;E)</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>ᠲᠠᠬᠢᠨ ᠨᠡᠷᠡᠯᠡᠬᠦ (&amp;M)</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>ᠬᠣᠣᠰᠯᠠᠬᠤ (&amp;C)</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>ᠰᠢᠯᠵᠢᠭᠦᠯᠬᠦ (&amp;M)</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>ᠤᠰᠠᠳᠬᠠᠬᠤ (&amp;D)</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠬᠤᠪᠢᠶᠠᠬᠤ (&amp;S)...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ ᠨᠡᠶᠢᠯᠡᠭᠦᠯᠬᠦ (&amp;B)...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>ᠰᠢᠨᠵᠢ ᠴᠢᠨᠠᠷ (&amp;R)</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>ᠲᠠᠶᠢᠯᠪᠤᠷᠢ (&amp;N)</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠰᠢᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠠᠳᠠᠯᠢᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>ᠰᠢᠨ᠎ᠡ ᠬᠠᠪᠲᠠᠰᠤ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>ᠭᠠᠷᠬᠤ (&amp;X)</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>ᠪᠦᠬᠦᠨ  ᠢ ᠰᠣᠩᠭᠣᠬᠤ (&amp;A)</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>ᠪᠦᠬᠦᠨ  ᠢ  ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>ᠡᠰᠡᠷᠭᠦ ᠰᠣᠩᠭᠣᠬᠤ (&amp;I)</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>ᠰᠣᠩᠭᠣᠬᠤ ...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>ᠤᠰᠠᠳᠬᠠᠬᠤ ᠪᠠᠨ ᠰᠣᠩᠭᠣᠬᠤ ...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>ᠠᠳᠠᠯᠢ ᠬᠡᠯᠪᠡᠷᠢ  ᠶᠢᠨ ᠹᠠᠶᠢᠯ  ᠢ ᠰᠣᠩᠭᠣᠬᠤ</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>ᠠᠳᠠᠯᠢ ᠬᠡᠯᠪᠡᠷᠢ  ᠶᠢᠨ ᠹᠠᠶᠢᠯ  ᠢ ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>ᠶᠡᠬᠡ ᠵᠢᠷᠤᠭ (&amp;G)</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>ᠪᠠᠭ᠎ᠠ ᠵᠢᠷᠤᠭ (&amp;M)</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>ᠵᠢᠭᠰᠠᠭᠠᠬᠤ (&amp;L)</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>ᠨᠠᠷᠢᠨ ᠠᠭᠤᠯᠭ᠎ᠠ (&amp;D)</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>ᠮᠥᠷᠯᠡᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>ᠲᠡᠭᠰᠢ ᠬᠡᠪ</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>ᠬᠣᠣᠰ ᠨᠢᠭᠤᠷ (&amp;2)</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>ᠪᠠᠭᠠᠵᠢ  ᠶᠢᠨ ᠰᠠᠮᠪᠠᠷ᠎ᠠ (&amp;T)</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>ᠦᠨᠳᠦᠰᠦ ᠬᠠᠪᠲᠠᠰᠤ ᠨᠡᠭᠡᠭᠡᠬᠦ</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>ᠳᠡᠭᠡᠭᠰᠢ</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤᠨ ‍ᠣ ᠲᠡᠦᠬᠡ  ...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>ᠰᠢᠨᠡᠳᠬᠡᠬᠦ (&amp;R)</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>ᠳᠠᠩᠰᠠᠨ ‍ᠣ ᠪᠠᠭᠠᠵᠢ  ᠶᠢᠨ ᠰᠠᠮᠪᠠᠷ᠎ᠠ</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>ᠪᠠᠷᠢᠮᠵᠢᠶ᠎ᠠ ᠪᠠᠭᠠᠵᠢ  ᠶᠢᠨ ᠰᠠᠮᠪᠠᠷ᠎ᠠ</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>ᠶᠡᠬᠡ ᠳᠠᠷᠤᠪᠴᠢ</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>ᠳᠠᠷᠤᠪᠴᠢ  ᠶᠢᠨ ᠦᠰᠦᠭ ᠢᠯᠡᠷᠡᠬᠦ</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>ᠬᠠᠳᠠᠭᠠᠯᠠᠮᠵᠢ ᠲᠠᠭᠠᠨ ᠨᠡᠮᠡᠬᠦ (&amp;A)</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>ᠱᠣᠰᠢᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>ᠰᠣᠩᠭᠣᠯᠲᠠ (&amp;O)</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>ᠥᠭᠭᠦᠭᠳᠡᠯ ᠰᠢᠯᠭᠠᠯᠲᠠ (&amp;B)</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>ᠬᠠᠪᠰᠤᠷᠤᠮᠵᠢ ᠦᠵᠡᠬᠦ  (&amp;C)</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>NanaZip ‍ᠣ ᠲᠤᠬᠠᠢ (&amp;A)</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>ᠵᠠᠮ</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>ᠨᠡᠷᠡᠶᠢᠳᠦᠯ</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>ᠥᠷᠭᠡᠳᠭᠡᠭᠰᠡᠨ ᠨᠡᠷ᠎ᠡ</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠭᠰᠠᠨ ‍ᠣ ᠳᠠᠷᠠᠭᠠᠬᠢ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>ᠰᠢᠨᠵᠢ ᠴᠢᠨᠠᠷ</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>ᠪᠠᠶᠢᠭᠤᠯᠤᠭᠰᠠᠨ ᠴᠠᠭ</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>ᠦᠵᠡᠭᠰᠡᠨ ᠴᠠᠭ</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>ᠵᠠᠰᠠᠭᠰᠠᠨ ᠴᠠᠭ</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>ᠬᠠᠳᠠᠭᠤᠷ</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>ᠲᠠᠶᠢᠯᠪᠤᠷᠢ</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>ᠪᠠᠲᠤᠵᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>ᠡᠮᠦᠨ᠎ᠡ ᠨᠢ ᠬᠤᠪᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>ᠰᠡᠭᠦᠯᠡᠷ ᠨᠢ ᠬᠤᠪᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>ᠲᠣᠯᠢ ᠪᠢᠴᠢᠭ  ᠦᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>ᠲᠥᠷᠥᠯ</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>ᠠᠷᠢᠯᠭᠠᠬᠤ ᠵᠦᠢᠯ</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>ᠲᠣᠭᠠᠴᠠᠬᠤ ᠠᠷᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>ᠭᠣᠣᠯ ᠠᠵᠢᠯᠯᠠᠬᠤ ᠰᠢᠰᠲ᠋ᠧᠮ</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠤᠨ ᠰᠢᠰᠲ᠋ᠧᠮ</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>ᠬᠡᠷᠡᠭᠯᠡᠭᠴᠢ</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>ᠪᠦᠯᠦᠭ</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>ᠥᠰᠦᠭ  ᠦᠨ ᠬᠡᠰᠡᠭ</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>ᠲᠠᠶᠢᠯᠪᠤᠷᠢ</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>ᠣᠷᠣᠨ ᠲᠣᠭᠲᠠᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>ᠵᠠᠮ  ᠤᠨ ᠡᠮᠦᠨ᠎ᠡ ᠬᠡᠰᠡᠭ</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>ᠬᠡᠪ</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>ᠡᠪᠬᠡᠮᠡᠯ</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>ᠣᠯᠠᠨ ᠡᠪᠬᠡᠮᠡᠯ ᠠᠪᠴᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>ᠬᠠᠵᠠᠭᠠᠢ ᠰᠢᠯᠵᠢᠭᠦᠯᠬᠦ</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>ᠵᠠᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>ᠥᠰᠦᠭ  ᠦᠨ ᠬᠡᠰᠡᠭ</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>ᠡᠪᠬᠡᠮᠡᠯ ᠬᠤᠪᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64 ᠣᠷᠣᠨ</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>ᠶᠡᠬᠡ ᠦᠰᠦᠭ  ᠦᠨ ᠬᠡᠰᠡᠭ  ᠦᠨ ᠳᠠᠷᠠᠭᠠᠯᠠᠯ</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>ᠹᠢᠽᠢᠺ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠤᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>ᠨᠡᠶᠢᠯᠡᠪᠦᠷᠢ  ᠶᠢ ᠰᠢᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>ᠣᠨᠴᠠᠯᠢᠭ</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ᠬᠡᠶᠢᠰᠪᠦᠷᠢ ᠬᠠᠶ᠋ᠢᠭ</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>ᠵᠢᠭᠠᠬᠠᠨ ᠹᠠᠶᠢᠯ  ᠤᠨ ᠨᠡᠷ᠎ᠡ</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>ᠫᠷᠦᠭᠷᠡᠮ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>ᠳᠡᠪᠢᠭᠦᠷ  ᠦᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>ᠬᠡᠪ ᠵᠠᠭᠪᠤᠷ</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>ᠵᠠᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>ᠪᠤᠷᠤᠭᠤ</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>ᠶᠡᠷᠤᠩᠬᠡᠢ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>ᠬᠡᠷᠡᠭᠯᠡᠭᠰᠡᠨ ᠣᠷᠣᠨ ᠵᠠᠢ</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>ᠪᠠᠭᠴᠠ  ᠶᠢᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>ᠡᠪᠬᠡᠮᠡᠯ  ᠦᠨ ᠲᠡᠮᠳᠡᠭ</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>ᠲᠤᠰ ᠭᠠᠵᠠᠷ  ᠤᠨ ᠨᠡᠷᠡᠶᠢᠳᠦᠯ</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>ᠬᠠᠩᠭᠠᠭᠴᠢ</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>ᠰᠣᠩᠭᠣᠯᠲᠠ</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>ᠬᠡᠯᠡ</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>ᠬᠡᠯᠡ ᠰᠣᠩᠭᠣᠬᠤ᠄</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>ᠨᠠᠶᠢᠷᠠᠭᠤᠯᠤᠭᠴᠢ</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>ᠲᠣᠭᠲᠠᠭᠰᠠᠨ ᠨᠠᠶᠢᠷᠠᠭᠤᠯᠤᠭᠴᠢ (&amp;E)：</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>ᠲᠣᠭᠲᠠᠭᠰᠠᠨ ᠹᠠᠶᠢᠯ  ᠢ ᠠᠳᠠᠯᠢᠳᠬᠠᠬᠤ (&amp;D)：</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>ᠰᠢᠰᠲ᠋ᠧᠮ</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip ᠪᠠᠷ ᠹᠠᠶᠢᠯ  ᠤᠨ ᠲᠥᠷᠥᠯ  ᠢ ᠬᠣᠯᠪᠣᠭᠳᠠᠭᠤᠯᠬᠤ ᠄</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>NanaZip ᠶ᠋ᠢ ᠪᠠᠷᠠᠭᠤᠨ ᠳᠠᠷᠤᠪᠴᠢ ᠳ᠋ᠥ ᠨᠡᠮᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>ᠪᠠᠷᠠᠭᠤᠨ ᠳᠠᠷᠤᠪᠴᠢ ᠳ᠋ᠥ ᠳᠠᠪᠬᠤᠴᠠᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>ᠪᠠᠷᠠᠭᠤᠨ ᠳᠠᠷᠤᠪᠴᠢ ᠳ᠋ᠥ ᠢᠯᠡᠷᠡᠬᠦ ᠺᠣᠳ᠋  ᠢ ᠰᠣᠩᠭᠣᠬᠤ</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;ᠬᠠᠪᠲᠠᠰᠤ &gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt; ᠡᠪᠬᠡᠮᠡᠯ &gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ  ᠢ ᠨᠡᠭᠡᠭᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>ᠮᠠᠲ᠋ᠧᠷᠢᠶᠠᠯ  ᠢ ᠭᠠᠷᠭᠠᠨ ᠠᠪᠬᠤ ...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ ᠳ᠋ᠥ ᠨᠡᠮᠡᠬᠦ ...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ  ᠢ ᠰᠢᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>ᠳᠣᠣᠷᠠᠬᠢ ᠭᠠᠷᠴᠠᠭ ᠳ᠋ᠥ ᠭᠠᠷᠭᠠᠨ ᠠᠪᠬᠤ</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>{0}ᠤᠷᠤᠭᠤ ᠵᠠᠳᠠᠯᠬᠤ</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0} ᠳ᠋ᠥ ᠨᠡᠮᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠭᠠᠳ ᠢᠮᠸᠯ ᠶᠠᠪᠤᠭᠤᠯᠬᠤ ...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠭᠠᠳ {0}ᠶ᠋ᠢ ᠢᠯᠡᠭᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>ᠠᠵᠢᠯ  ᠤᠨ ᠬᠠᠪᠲᠠᠰᠤ (&amp;W)</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>ᠰᠢᠰᠲ᠋ᠧᠮ \ ᠵᠠᠰᠠᠪᠤᠷᠢ  ᠶᠢᠨ ᠬᠠᠪᠲᠠᠰᠤ (&amp;S)</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>ᠣᠳᠣ  ᠶᠢᠨ ᠬᠠᠪᠲᠠᠰᠤ (&amp;C)</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>ᠲᠣᠭᠲᠠᠮᠠᠯ ᠪᠠᠶᠢᠷᠢ (&amp;S)</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>ᠵᠥᠪᠬᠡᠨ ᠵᠥᠭᠡᠭᠡᠪᠦᠷᠢ  ᠶᠢᠨ ᠲᠥᠬᠥᠭᠡᠷᠦᠮᠵᠢ ᠳ᠋ᠥ ᠬᠡᠷᠡᠭᠯᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>ᠲᠦᠷ ᠴᠠᠭ  ᠤᠨ ᠠᠪᠴᠢᠮᠠᠯ ᠹᠠᠶᠢᠯ ᠡᠭᠦᠰᠬᠡᠬᠦ ᠪᠠᠶᠢᠷᠢᠯᠠᠯ  ᠢ ᠲᠣᠳᠣᠷᠬᠠᠶᠢᠯᠠᠯ</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>ᠢᠯᠡᠷᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>ᠢᠯᠡᠷᠡᠬᠦ “..” ᠵᠦᠢᠯ ( ᠳᠡᠭᠡᠭᠰᠢ ᠬᠣᠣᠰ ᠲᠣᠪᠴᠢᠳᠠᠭᠠᠳ )</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>ᠦᠨᠡᠨ ᠵᠢᠷᠤᠭ ᠨᠢ ᠢᠯᠡᠷᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>ᠰᠢᠰᠲ᠋ᠧᠮ  ᠦᠨ ᠲᠣᠪᠶᠣᠭ ᠨᠢ ᠢᠯᠡᠷᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>ᠪᠦᠬᠦ ᠮᠥᠷ  ᠢ ᠰᠣᠩᠭᠣᠬᠤ (&amp;F)</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>ᠰᠦᠯᠵᠢᠶᠡᠨ ᠤᠲᠠᠰᠤ ᠢᠯᠡᠷᠡᠬᠦ (&amp;G)</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>ᠲᠣᠪᠴᠢᠳᠠᠭᠠᠳ ᠨᠡᠭᠡᠭᠡᠬᠦ</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>NanaZip ᠤᠯᠠᠮᠵᠢᠯᠠᠯᠲᠤ ᠬᠡᠪ  ᠢ ᠰᠣᠩᠭᠣᠬᠤ (&amp;A)</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>ᠶᠡᠬᠡ ᠷᠠᠮ  ᠤᠨ ᠨᠢᠭᠤᠷ  ᠢ ᠬᠡᠷᠡᠭᠯᠡᠬᠦ (&amp;L)</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip  ᠶᠢᠨ ᠲᠤᠬᠠᠢ</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip ᠪᠣᠯ ᠲᠥᠯᠥᠪᠦᠷᠢ ᠦᠭᠡᠢ ᠰᠣᠹᠲ ᠂ ᠲᠠ ᠬᠠᠨᠳᠢᠪ  ᠤᠨ ᠬᠡᠯᠪᠡᠷᠢ ᠪᠠᠷ 7 -zip ᠶ᠋ᠢ ᠳᠡᠮᠵᠢᠵᠦ ᠪᠣᠯᠣᠨ᠎ᠠ ᠂ ᠮᠣᠩᠭᠣᠯ ᠰᠣᠹᠲ  ᠤᠨ ᠪᠦᠯᠦᠭ  ᠨᠢᠭᠡ 39338772  ᠬᠣᠶᠠᠷ  38803882 ᠵᠢᠨ ᠰᠠᠴᠤᠷᠠᠯᠲᠤ ᠮᠣᠩᠭᠣᠯᠴᠢᠯᠠᠪᠠ ᠂  QQ 136087084 Email: saqirilatu@126.com</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>ᠰᠢᠰᠲ᠋ᠧᠮ ᠷᠠᠮ  ᠢ ᠨᠢ ᠬᠤᠪᠢᠶᠠᠵᠤ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>ᠪᠤᠷᠤᠭᠤ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0}  ᠢ ᠰᠣᠩᠭᠣᠬᠤ</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>{0}” ᠬᠠᠪᠲᠠᠰᠤ ᠪᠠᠶᠢᠭᠤᠯᠵᠤ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>ᠲᠣᠰ ᠠᠪᠴᠢᠮᠠᠯ  ᠤᠨ ᠰᠢᠨᠡᠳᠬᠡᠬᠦ  ᠶᠢ  ᠳᠡᠮᠵᠢᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ ᠨᠡᠭᠡᠭᠡᠵᠦ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ {0}”</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>ᠪᠠᠲᠤ ᠠᠪᠴᠢᠮᠠᠯ ᠨᠡᠭᠡᠭᠡᠵᠦ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ “{0}” ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠨᠢ ᠪᠤᠷᠤᠭᠤ</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>ᠳᠡᠮᠵᠢᠬᠦ ᠦᠭᠡᠢ ᠠᠪᠴᠢᠮᠠᠯ  ᠤᠨ ᠬᠡᠯᠪᠡᠷᠢ</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>{0} ᠹᠠᠶᠢᠯ ᠨᠢᠭᠡᠨᠲᠡ ᠪᠠᠶᠢᠨ᠎ᠠ</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ“{0}”ᠥᠭᠡᠷᠡᠴᠢᠯᠡᠭᠳᠡᠪᠡ  \nᠲᠠ ᠠᠪᠴᠢᠮᠠᠯ  ᠳᠠᠬᠢ ᠹᠠᠶᠢᠯ  ᠢᠶᠠᠨ ᠰᠢᠨᠡᠳᠬᠡᠬᠦ ᠦᠦ ？</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ ᠰᠢᠨᠡᠳᠬᠡᠵᠦ ᠳᠡᠶᠢᠯᠦᠭᠰᠡᠨ ᠦᠭᠡᠢ \n“{0}”ᠲᠤᠰ ᠠᠪᠴᠢᠮᠠᠯ ᠪᠤᠷᠤᠭᠤ ᠭᠠᠷᠴᠠᠢ</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>ᠭᠠᠳᠠᠨᠠᠬᠢ ᠨᠠᠶᠢᠷᠠᠭᠤᠯᠭ᠎ᠠ  ᠶᠢ ᠠᠵᠢᠯᠯᠠᠭᠤᠯᠵᠤ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>ᠲᠤᠰ ᠹᠠᠶᠢᠯ ᠬᠣᠣᠷ ᠲᠠᠢ ( ᠹᠠᠶᠢᠯ  ᠤᠨ ᠨᠡᠷ᠎ᠡ ᠳ᠋ᠥ ᠣᠯᠠᠨ ᠬᠣᠭᠣᠰᠤᠨ ᠵᠠᠢ ᠪᠠᠶᠢᠨ᠎ᠠ  )。</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>ᠬᠡᠲᠦᠷᠬᠡᠢ ᠤᠷᠲᠤ ᠂ ᠠᠵᠢᠯᠯᠠᠭᠤᠯᠵᠤ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>ᠲᠠ ᠵᠢᠭᠠᠪᠠᠯ ᠨᠢᠭᠡ ᠹᠠᠶᠢᠯ ᠰᠣᠩᠭᠣᠨ᠎ᠠ</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>ᠲᠠ ᠬᠠᠮᠤᠭ ᠪᠠᠭ᠎ᠠ  ᠳᠠᠭᠠᠨ ᠨᠢᠭᠡ ᠹᠠᠶᠢᠯ ᠰᠣᠩᠭᠣᠨ᠎ᠠ</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>ᠮᠠᠲ᠋ᠧᠷᠢᠶᠠᠯ ᠬᠡᠲᠦᠷᠬᠡᠢ ᠣᠯᠠᠨ</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>ᠶᠠᠭ ᠭᠠᠷᠭᠠᠨ ᠠᠪᠴᠤ ᠪᠠᠶᠢᠨ᠎ᠠ  ....</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>ᠰᠢᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>ᠶᠡᠬ ᠨᠡᠭᠡᠭᠡᠵᠦ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>ᠬᠠᠶᠢᠵᠤ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>ᠭᠠᠷᠭᠠᠨ ᠠᠪᠬᠤ</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>(&amp;X)  ᠠᠴᠠ ᠭᠠᠷᠭᠠᠨ ᠠᠪᠬᠤ :</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>ᠮᠠᠲ᠋ᠧᠷᠢᠶᠠᠯ  ᠢ ᠭᠠᠷᠭᠠᠨ ᠠᠪᠤᠭᠰᠠᠨ ᠬᠠᠪᠲᠠᠰᠤ  ᠶᠢᠨ ᠪᠠᠶᠢᠷᠢ</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>ᠵᠠᠮ  ᠤᠨ ᠬᠡᠯᠪᠡᠷᠢ</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>ᠪᠦᠷᠢᠨ ᠵᠠᠮ</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>ᠵᠠᠮ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>ᠰᠣᠯᠢᠬᠤ ᠬᠡᠯᠪᠡᠷᠢ</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>ᠰᠣᠯᠢᠬᠤ  ᠠᠴᠠ ᠡᠮᠦᠨ᠎ᠡ ᠠᠰᠠᠭᠤᠨ᠎ᠠ</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>ᠰᠠᠨᠠᠭᠤᠯᠬᠤ ᠦᠭᠡᠢ ᠰᠢᠭᠤᠳ ᠰᠣᠯᠢᠬᠤ</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>ᠪᠠᠶᠢᠬᠤ ᠹᠠᠶᠢᠯ  ᠢ ᠥᠰᠦᠷᠬᠡᠶᠢᠯᠨᠨ ᠭᠠᠷᠬᠤ</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>ᠠᠦ᠋ᠲ᠋ᠣ᠋ ᠵᠢᠨᠷ ᠨᠡᠷᠡᠯᠡᠬᠦ</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>ᠣᠳᠣᠬᠢ ᠹᠠᠶᠢᠯ  ᠢᠶᠠᠨ ᠨᠡᠷᠡᠯᠡᠬᠦ</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ ᠰᠣᠯᠢᠨ᠎ᠠ</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>ᠲᠣᠰ ᠬᠠᠪᠲᠠᠰᠤ ᠳ᠋ᠥ ᠠᠳᠠᠯᠢ ᠨᠡᠷᠡᠶᠢᠳᠦᠯ ᠲᠠᠢ ᠹᠠᠶᠢᠯ ᠪᠠᠶᠢᠨ᠎ᠠ</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>ᠣᠳᠣ ᠪᠠᠶᠢᠬᠤ ᠹᠠᠶᠢᠯ  ᠢᠶᠠᠨ</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>ᠰᠣᠯᠢᠬᠤ</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0}ᠦᠰᠦᠭ  ᠦᠨ ᠰᠢᠷᠬᠡᠭ</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>ᠠᠦ᠋ᠲ᠋ᠣ᠋ ᠰᠢᠨ᠎ᠡ ᠨᠡᠷᠡᠯᠡᠬᠦ (&amp;U)</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>ᠳᠡᠮᠵᠢᠬᠦ ᠦᠭᠡᠢ ᠠᠪᠴᠢᠮᠠᠯ ᠲᠤᠭᠠᠴᠢᠯᠳᠠ “{0}”。</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>ᠲᠣᠭ᠎ᠠ ᠪᠠᠷᠢᠮᠲᠠ “{0}” ᠪᠤᠷᠤᠭᠤ ᠭᠠᠷᠴᠠᠢ ᠂ ᠹᠠᠶᠢᠯ ᠡᠪᠳᠡᠷᠡᠭᠰᠡᠨ ᠡ</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC ᠰᠢᠯᠭᠠᠭᠠᠳ“{0}”ᠢᠯᠠᠭᠳᠠᠵᠠᠢ ᠂  ᠹᠠᠶᠢᠯ ᠡᠪᠳᠡᠷᠡᠭᠰᠡᠨ ᠡ</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>ᠪᠠᠲᠤ ᠹᠠᠶᠢᠯ “{0}”  ᠤᠨ ᠲᠣᠭ᠎ᠠ ᠪᠠᠷᠢᠮᠲᠠ ᠨᠢ ᠪᠤᠷᠤᠭᠤ ᠂ ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠨᠢ ᠪᠤᠷᠤᠭᠤ</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>ᠪᠠᠲᠤ ᠹᠠᠶᠢᠯ “{0}” CRC  ᠵᠢᠨ ᠰᠢᠯᠭᠠᠭᠰᠠᠨ ᠲᠣᠭ᠎ᠠ ᠪᠠᠷᠢᠮᠲᠠ ᠨᠢ ᠪᠤᠷᠤᠭᠤ ᠂ ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠨᠢ ᠪᠤᠷᠤᠭᠤ</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠣᠷᠣᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠣᠷᠣᠭᠤᠯᠬᠤ ᠄</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>ᠳᠠᠬᠢᠨ ᠣᠷᠣᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠢᠯᠡᠷᠡᠬᠦ (&amp;S)</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠨᠢ ᠪᠤᠷᠤᠭᠤ</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠨᠢ ᠵᠥᠪᠬᠡᠨ ᠠᠩᠭ᠍ᠯᠢ ᠬᠡᠯᠡ ᠪᠣᠯᠣᠨ ᠲᠣᠭ᠎ᠠ ᠬᠢᠭᠡᠳ ᠣᠨᠴᠠᠭᠠᠢ ᠲᠡᠮᠳᠡᠭ (!、#、$...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ ᠨᠢ ᠬᠡᠲᠦᠷᠬᠡᠢ ᠤᠷᠲᠤ</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>ᠨᠢᠭᠤᠴᠠ ᠨᠣᠮᠧᠷ</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>ᠬᠡᠷᠡᠭᠰᠡᠭᠰᠡᠨ ᠴᠠᠭ ᠄</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>ᠦᠯᠡᠳᠡᠭᠰᠡᠨ ᠴᠠᠭ ᠄</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>ᠶᠡᠷᠤᠩᠬᠡᠢ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>ᠬᠤᠷᠳᠤᠴᠠ ᠄</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>ᠨᠢᠭᠡᠨᠲᠡ ᠰᠢᠢᠳᠪᠦᠷᠢᠯᠡᠭᠰᠡᠨ ᠨᠢ ᠄</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠭᠰᠠᠨ ᠬᠡᠮᠵᠢᠶ᠎ᠡ ᠄</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>ᠪᠤᠷᠤᠭᠤ ᠭᠠᠷᠴᠠᠢ ᠄</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ ᠄</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ ᠳ᠋ᠥ ᠨᠡᠮᠡᠬᠦ</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ (&amp;A)：</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>ᠰᠢᠨᠡᠳᠬᠡᠬᠦ ᠬᠡᠯᠪᠡᠷᠢ (&amp;U)：</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ  ᠤᠨ ᠬᠡᠯᠪᠡᠷᠢ (&amp;F)：</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠬᠤ ᠳᠡᠰ (&amp;L)：</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠬᠤ ᠠᠷᠭ᠎ᠠ (&amp;M)：</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>ᠲᠣᠯᠢ  ᠶᠢᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ (&amp;D)：</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>ᠳᠠᠩ ᠦᠭᠡᠰ  ᠦᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ  (&amp;W)：</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>ᠲᠣᠭ᠎ᠠ ᠪᠠᠷᠢᠮᠲᠠ  ᠶᠢᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU ᠬᠡᠷᠡᠭᠯᠡᠭᠰᠡᠨ ᠬᠡᠮᠵᠢᠶ᠎ᠡ</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>ᠲᠣᠭ᠎ᠠ ᠪᠠᠷᠢᠮᠲᠠ (&amp;P)：</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>ᠰᠣᠩᠭᠣᠯᠲᠠ</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>ᠥᠪᠡᠷᠲᠡᠭᠡᠨ ᠠᠴᠢᠶᠠᠯᠠᠭᠴᠢ ᠫᠷᠦᠭᠷᠡᠮ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ  (&amp;X)</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ ᠹᠠᠶᠢᠯ  ᠢᠶᠠᠨ ᠬᠤᠪᠢᠶᠠᠯᠴᠠᠬᠤ</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>ᠪᠠᠲᠤᠵᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>ᠪᠠᠲᠤᠵᠢᠭᠤᠯᠬᠤ ᠲᠣᠭᠠᠴᠠᠬᠤ ᠠᠷᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>ᠪᠠᠲᠤ ᠹᠠᠶᠢᠯ  ᠤᠨ ᠨᠡᠷᠡᠶᠢᠳᠦᠯ (&amp;N)</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠯᠠᠬᠤ ᠳ᠋ᠥ ᠬᠡᠷᠡᠭᠯᠡᠬᠦ ᠷᠠᠮ</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>ᠵᠠᠳᠠᠯᠬᠤ ᠳ᠋ᠥ ᠬᠡᠷᠡᠭᠯᠡᠬᠦ ᠷᠠᠮ</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>ᠵᠥᠪᠬᠡᠨ ᠬᠠᠳᠠᠭᠠᠯᠠᠬᠤ</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>ᠣᠨᠴᠠ ᠬᠤᠷᠳᠤᠨ ᠠᠪᠴᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>ᠬᠤᠷᠳᠤᠨ ᠠᠪᠴᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>ᠪᠠᠷᠢᠮᠵᠢᠶ᠎ᠠ ᠠᠪᠴᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>ᠬᠠᠮᠤᠭ ᠶᠡᠬᠡ ᠠᠪᠴᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>ᠴᠢᠨᠠᠷᠯᠠᠩᠭᠤᠢ ᠠᠪᠴᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠨᠡᠮᠡᠭᠡᠳ ᠰᠣᠯᠢᠬᠤ</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ ᠰᠢᠨᠡᠳᠬᠡᠭᠡᠳ ᠨᠡᠮᠡᠬᠦ</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>ᠪᠠᠶᠢᠬᠤ ᠹᠠᠶᠢᠯ  ᠢ ᠰᠢᠨᠡᠳᠬᠡᠬᠦ</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠮᠠᠯ  ᠤᠨ ᠠᠭᠤᠯᠭ᠎ᠠ  ᠶᠢ ᠵᠡᠷᠭᠡᠴᠡᠭᠦᠯᠬᠦ</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>ᠦᠵᠡᠬᠦ ...</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>ᠪᠦᠬᠦ ᠹᠠᠶᠢᠯ</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>ᠲᠡᠭᠡ</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>ᠪᠤᠯᠢ</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>ᠬᠣᠣᠰᠯᠠᠬᠤ</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>ᠰᠢᠯᠵᠢᠭᠦᠯᠬᠦ</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>ᠬᠣᠣᠰᠯᠠᠭᠤᠯᠤᠨ ᠄</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>ᠰᠢᠯᠵᠢᠭᠦᠯᠦᠨ</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>ᠬᠣᠣᠰᠯᠠᠵᠤ ᠪᠠᠶᠢᠨ᠎ᠠ ...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>ᠰᠢᠯᠵᠢᠭᠦᠯᠵᠦ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>ᠶᠠᠭ ᠰᠢᠨ᠎ᠡ ᠨᠡᠷᠡᠶᠢᠳᠴᠦ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ ᠰᠣᠩᠭᠣᠬᠤ</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>ᠣᠳᠣᠬᠢ ᠠᠵᠢᠯᠯᠠᠭ᠎ᠠ  ᠶᠢ ᠳᠡᠮᠵᠢᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠪᠠ ᠬᠠᠪᠲᠠᠰᠤ  ᠶᠢ ᠲᠠᠬᠢᠨ ᠨᠡᠷᠡᠶᠢᠳᠴᠦ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ ᠬᠣᠣᠰᠯᠠᠬᠤ ᠦᠦ ︖</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ ᠠᠪᠴᠢᠮᠠᠯ ᠳ᠋ᠥ ᠬᠣᠣᠰᠯᠠᠬᠤ ᠦᠦ ︖</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ  ᠶᠢ  ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>ᠣᠯᠠᠨ ᠹᠠᠶᠢᠯ  ᠢ  ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>ᠦᠨᠡᠬᠡᠷ“{0}” ᠶᠢ ᠤᠰᠠᠳᠬᠠᠬᠤ ᠦᠦ  ?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>ᠦᠨᠡᠬᠡᠷ“{0}”ᠬᠠᠪᠲᠠᠰᠤ  ᠶᠢᠨ ᠪᠦᠬᠦ ᠠᠭᠤᠯᠭ᠎ᠠ  ᠶᠢ ᠤᠰᠠᠳᠬᠠᠬᠤ ᠦᠦ ？</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>ᠦᠨᠡᠬᠡᠷ {0} ᠵᠢ ᠤᠰᠠᠳᠬᠠᠬᠤ ᠦᠦ ？</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>ᠤᠰᠠᠳᠬᠠᠵᠤ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠪᠠ ᠬᠠᠪᠲᠠᠰᠤ  ᠶᠢ ᠤᠰᠠᠳᠬᠠᠵᠤ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>ᠰᠢᠰᠲ᠋ᠧᠮ ᠬᠡᠲᠦᠷᠬᠡᠢ ᠤᠷᠲᠤ ᠵᠠᠮ ᠲᠠᠢ ᠹᠠᠶᠢᠯ  ᠢ ᠬᠣᠭ ᠬᠤᠷᠢᠶᠠᠭᠴᠢ ᠳ᠋ᠥ ᠰᠢᠯᠵᠢᠭᠦᠯᠵᠦ ᠳᠡᠶᠢᠯᠬᠦ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>ᠰᠢᠨ᠎ᠡ ᠬᠠᠪᠲᠠᠰᠤ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>ᠰᠢᠨ᠎ᠡ ᠹᠠᠶᠢᠯ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ  ᠶᠢᠨ ᠨᠡᠷᠡᠶᠢᠳᠦᠯ ᠄</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠤᠨ ᠨᠡᠷ᠎ᠡ</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>ᠰᠢᠨ᠎ᠡ ᠬᠠᠪᠲᠠᠰᠤ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>ᠰᠢᠨ᠎ᠡ ᠹᠠᠶᠢᠯ ᠪᠠᠶᠢᠭᠤᠯᠬᠤ  .txt</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ ᠪᠠᠶᠢᠭᠤᠯᠵᠤ ᠳᠡᠶᠢᠯᠦᠭᠰᠡᠨ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>ᠰᠢᠨ᠎ᠡ ᠹᠠᠶᠢᠯ ᠪᠠᠶᠢᠭᠤᠯᠵᠤ ᠳᠡᠶᠢᠯᠦᠭᠰᠡᠨ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>ᠲᠠᠶᠢᠯᠪᠤᠷᠢ</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>ᠲᠠᠶᠢᠯᠪᠤᠷᠢ (&amp;C)：</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>ᠰᠣᠩᠭᠣᠬᠤ</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>ᠰᠣᠩᠭᠣᠭᠰᠠᠨ  ᠢᠶᠠᠨ ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>ᠨᠣᠮᠧᠷ ᠄</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>ᠰᠢᠨᠵᠢ ᠴᠢᠨᠠᠷ</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>ᠬᠠᠪᠲᠠᠰᠤ  ᠶᠢᠨ ᠲᠡᠦᠬᠡ</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>ᠣᠨᠣᠰᠢᠯᠠᠭᠰᠠᠨ ᠰᠤᠷᠠᠭ</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>ᠰᠤᠷᠠᠭ</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>ᠮᠢᠨᠤ ᠺᠣᠮᠫᠢᠦ᠋ᠲ᠋ᠧᠷ</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>ᠰᠦᠯᠵᠢᠶᠡᠨ ‍ᠣ ᠬᠠᠨᠢ</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>ᠮᠢᠨᠤ ᠮᠠᠲ᠋ᠧᠷᠢᠶᠠᠯ</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>ᠰᠢᠰᠲ᠋ᠧᠮ</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>ᠨᠡᠮᠡᠬᠦ</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>ᠭᠠᠷᠭᠠᠨ ᠠᠪᠬᠤ</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>ᠰᠢᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>ᠬᠣᠣᠰᠯᠠᠬᠤ</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>ᠰᠢᠯᠵᠢᠭᠦᠯᠬᠦ</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>ᠤᠰᠠᠳᠬᠠᠬᠤ</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>ᠰᠤᠷᠠᠭ</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠰᠢᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ (&amp;S) ᠵᠦᠭ ᠰᠠᠯᠭᠠᠬᠤ᠄</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>ᠡᠪᠬᠡᠮᠡᠯ ᠬᠤᠪᠢᠶᠠᠬᠤ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ (&amp;V)：</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>ᠰᠠᠯᠭᠠᠵᠤ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>ᠰᠠᠯᠭᠠᠬᠤ ᠦᠦ</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>ᠲᠠ ᠹᠠᠶᠢᠯ  ᠢᠶᠠᠨ {0} ᠬᠡᠰᠡᠭ ᠬᠤᠪᠢᠶᠠᠬᠤ ᠦᠦ ︖</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>ᠡᠪᠬᠡᠮᠡᠯ ᠬᠤᠪᠢᠶᠠᠭᠰᠠᠨ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ ᠨᠢ ᠤᠭ ᠹᠠᠶᠢᠯ  ᠠᠴᠠ ᠪᠠᠭ᠎ᠠ ᠪᠠᠶᠢᠬᠤ ᠬᠡᠷᠡᠭᠲᠡᠢ</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>ᠡᠪᠬᠡᠮᠡᠯ ᠬᠤᠪᠢᠶᠠᠬᠤ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ ᠨᠢ ᠪᠤᠷᠤᠭᠤ</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>ᠡᠪᠬᠡᠮᠡᠯ ᠬᠤᠪᠢᠶᠠᠬᠤ ᠶᠡᠬᠡ ᠪᠠᠭ᠎ᠠ  ᠶᠢ ᠲᠣᠭᠲᠠᠭᠠᠬᠤ {0} ᠦᠰᠦᠭ  ᠦᠨ ᠰᠢᠷᠬᠡᠭ \nᠲᠠ ᠳᠣᠣᠷᠠᠬᠢ ᠹᠠᠶᠢᠯ  ᠢ ᠬᠤᠪᠢᠶᠠᠬᠤ ᠦᠦ ？</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠨᠡᠶᠢᠯᠡᠭᠦᠯᠬᠦ</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ  ᠢ (&amp;S) ᠳ᠋ᠥ ᠨᠡᠶᠢᠯᠡᠭᠦᠯᠬᠦ</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>ᠨᠡᠶᠢᠯᠡᠭᠦᠯᠵᠦ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>ᠬᠤᠪᠢᠷᠢ ᠡᠪᠬᠡᠮᠡᠯ  ᠦᠨ ᠲᠦᠷᠦᠭᠦᠦ ᠹᠠᠶᠢᠯ  ᠢ ᠰᠣᠩᠭᠣᠭᠠᠷᠠᠢ</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>ᠬᠤᠪᠢᠷᠢ ᠡᠪᠬᠡᠮᠡᠯ  ᠢ ᠲᠠᠨᠢᠬᠤ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>ᠪᠤᠰᠤᠳ ᠬᠤᠪᠢᠷᠢ ᠡᠪᠬᠡᠮᠡᠯ ᠬᠠᠶᠢᠵᠤ ᠣᠯᠣᠭᠰᠠᠨ ᠦᠭᠡᠢ</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>ᠰᠢᠯᠭᠠᠵᠤ ᠪᠠᠶᠢᠨ᠎ᠠ  ...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>ᠰᠢᠯᠭᠠᠭᠰᠠᠨ ᠰᠤᠷᠠᠭ</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC ᠲᠣᠭ᠎ᠠ ᠪᠠᠷᠢᠮᠲᠠ ᠰᠢᠯᠭᠠᠬᠤ</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC ᠲᠣᠭ᠎ᠠ ᠪᠠᠷᠢᠮᠲᠠ ᠪᠠ ᠹᠠᠶᠢᠯ  ᠤᠨ ᠨᠡᠷ᠎ᠡ  ᠶᠢ ᠰᠢᠯᠭᠠᠬᠤ :</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>ᠥᠭᠭᠦᠭᠳᠡᠯ ᠰᠢᠯᠭᠠᠯᠲᠠ</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>ᠷᠠᠮ ᠬᠡᠷᠡᠭᠯᠡᠯᠲᠡ ᠄</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>ᠠᠪᠴᠢᠶᠠᠬᠤ</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>ᠵᠠᠳᠠᠯᠬᠤ</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>ᠣᠨᠣᠭ᠎ᠠ ᠥᠭᠬᠦ</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>ᠶᠡᠷᠤᠩᠬᠡᠢ ᠣᠨᠣᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>ᠣᠳᠣᠬᠢ</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>ᠦᠷ᠎ᠡ ᠳ᠋ᠦᠩ</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPUᠬᠡᠷᠡᠭᠯᠡᠭᠰᠡᠨ ᠬᠡᠮᠵᠢᠶ᠎ᠡ</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>ᠬᠡᠷᠡᠭᠯᠡᠭᠴᠢ  ᠶᠢᠨ ᠣᠨᠣᠭ᠎ᠠ</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>ᠪᠠᠲᠤᠯᠠᠭᠳᠠᠭᠰᠠᠨ ᠡ ᠄</value>
+  </data>
+</root>

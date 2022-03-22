@@ -1,0 +1,1293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Hungarian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Magyar</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Mégsem</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Igen</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Nem</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Bezárás</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Súgó</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Folytatás</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>I&amp;gen, mindre</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>N&amp;em, mindre</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Leállítás</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Újraindítás</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Háttérben</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Előtérben</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Szünet</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Szünet</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Biztos, hogy megszakítja a folyamatot?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Fájl</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>S&amp;zerkesztés</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Nézet</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>Ked&amp;vencek</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Eszközök</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Súgó</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>M&amp;egnyitás</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Megnyitás &amp;belül</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Megnyitás kí&amp;vül</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Nézet</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>S&amp;zerkesztés</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Átn&amp;evezés</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>Más&amp;olás mappába...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>Át&amp;helyezés mappába...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Törlés</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Fájl&amp;darabolás...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Fájl&amp;egyesítés...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>T&amp;ulajdonságok</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>&amp;Megjegyzés</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Checksum számolása</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Különbség</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Mappa létrehozása</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Fájl létrehozása</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>&amp;Kilépés</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>Alternatív adatfolyam</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Min&amp;d kijelölése</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Kijelölés megszüntetése</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Kijelölés &amp;megfordítása</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Kijelölés...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Megszüntetés...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Kijelölés típus alapján</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Megszüntetés típus alapján</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Nagy ikonok</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Kis ikonok</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Lista</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Részletek</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Rendezetlen</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Lapos ikonok</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 panel</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Eszköztárak</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Gyökérmappa megnyitása</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Egy szinttel feljebb</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Mappa előzmények...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Frissítés</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Automatikus frissítés</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Archiválás eszköztár</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Szokásos eszköztár</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Nagy gombok</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Szövegcímkék megjelenítése</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>Mappa &amp;hozzáadása a Kedvencekhez mint</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Könyvjelző</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Beállítások...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Teljesítménymérés</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Tartalomjegyzék...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>NanaZip &amp;névjegye...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Útvonal</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Név</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Kiterjesztés</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Mappa</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Méret</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Tömörített méret</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Attribútumok</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Létrehozva</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Hozzáférés</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Módosítva</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Tömör</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Megjegyzés</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Titkosított</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Feldarabolás előtt</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Feldarabolás után</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Szótár</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Típus</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Módszer</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Gazda OS</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Fájlrendszer</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Felhasználó</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Csoport</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Blokk</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Megjegyzés</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Pozíció</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Útvonal előtag</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Mappák</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Fájlok</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Verzió</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Kötet</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Több kötet</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Eltolás</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Linkek</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Blokkok</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Kötetek</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Fizikai méret</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Fejlécek mérete</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Karakterisztika</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Virtuális cím</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Rövid név</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Alkalmazás készítője</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Szakasz mérete</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Mód</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Szimbolikus link</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Hiba</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Teljes méret</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Szabad terület</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Kluszterméret</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Címke</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Helyi név</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Szolgáltató</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>NT biztonság</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Alternatív adatfolyam</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Törölt</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Is Tree</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Hiba típusa</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Hibák</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Hibák</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Figyelmeztetések</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Figyelem</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Adatfolyamok</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Alternatív adatfolyamok</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Alternatív adatfolyam mérete</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Virtuális méret</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Kitömörített mérete</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Teljes fizikai méret</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Kötet index</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Altípus</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Rövid megjegyzés</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Kódlap</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Kitöltő mérete</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Beágyazott extra adat mérete</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>Hard link</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1086" xml:space="preserve">
+    <value>Csak olvasható</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Nyelv:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Szerkesztő</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Szerkesztő:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Különbség:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Rendszer</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>NanaZip társítása:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Minden felhasználóhoz</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>NanaZip hozzáadása a parancsértelmező helyi menüjéhez</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Lépcsőzetes helyi menü</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Helyi menü elemek:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Ikonok a helyi menüben</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Mappa&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Archívum&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Archívum megnyitása</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Fájlok kibontása...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Hozzáad az archívumhoz...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Archívum tesztelése</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Kibontás ide</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Kibontás ide: {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Hozzáadás: {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Tömörítés és küldés...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Tömörítés {0} archívumba és küldés</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Mappák</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Munkamappa</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>A &amp;rendszer ideiglenes mappája</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Jelenlegi</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Meghatározott:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Csak cserélhető meghajtókhoz</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Válassza ki az ideiglenes archív fájlok mappáját.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>A ".." elem látható</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Az eredeti fájlikonok láthatók</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Látható a rendszermenü</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Teljes soros kijelölés</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>&amp;Rácsvonalak kijelzése</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Elem megnyitása egyszeres kattintással</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Alternativ kiválasztási mód</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>&amp;Nagy memória használata</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>A NanaZip névjegye</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>A NanaZip ingyenes szoftver.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>A rendszer nem tudja lefoglalni a szükséges memóriát</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Az archívum hibamentes</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} objektum kijelölve</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>A(z) '{0}' mappát nem lehet létrehozni</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Az aktualizálás ennél az archívumtípusnál nem támogatott.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>A(z) '{0}' fájl nem nyitható meg archívként</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>A(z) '{0}' titkosított archívum nem megnyitható. Hibás a jelszó?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Nem támogatott archívum típus</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>A(z) {0} fájl már létezik</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>'{0}'\nA fájl tartalma megváltozott.\nKívánja aktualizálni az archívumban?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>A fájl nem aktualizálható:\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>A szerkesztő nem indítható.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>A fájl vírusnak néz ki (a fájlnév hosszú szóközt tartalmaz a nevében).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>A művelet nem hívható meg abból a mappából amelynek hosszú az elérési útvonala.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Egy fájlt ki kell jelölnie!</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Egy vagy több fájlt ki kell jelölnie</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Túl sok elem</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Nem nyitható meg a fájl mint {0} archívum</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Fájl nyitva van mint {0} archívum</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Az archívum eltolással nyitva van</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Kibontás</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Tömörítés</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Tesztelés</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Megnyitás...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Vizsgálat...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Eltávolítás</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Hozzáadás</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Frissítés</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Analizálás</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Másolat készítés</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Újratömörítés</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Átugrás</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Fejléc készítés</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Kibontás</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Kibontás ide:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Határozza meg a kibontott fájlok tárolómappáját.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Útvonal</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Teljes útvonal</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Nincs útvonal</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Abszolút útvonal</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Relatív útvonal</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Felülírás</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Rákérdezés felülírás előtt</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Felülírás rákérdezés nélkül</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>A létező fájlok kihagyása</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Automatikus átnevezés</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>A létező fájlok automatikus átnevezése</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Gyökérmappa többszörözés megszüntetése</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Biztonsági adatok visszaállítása</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Fájlcsere megerősítése</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>A célmappa már tartalmazza a feldolgozott fájlt.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Kívánja lecserélni a létező fájlt</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>ezzel a fájllal?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bájt</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>A&amp;utomatikus átnevezés</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>A(z) '{0}' tömörítési módja nem támogatott.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Adathiba a következőben: '{0}'. A fájl sérült.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC-hiba a következőben: '{0}'. A fájl sérült.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Adathiba a titkosított fájlban: '{0}'. Hibás a jelszó?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC-hiba a titkosított fájlban: '{0}'. Hibás a jelszó?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Hibás jelszó?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Nem támogatott tömörítési mód</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Adat hiba</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC hiba</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Elérhetetlen adat</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>az adat váratlanul véget ért</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>There are some data after the end of the payload data</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Ez nem archívum</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Fejléc hiba</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Hibás jelszó</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Unavailable start of archive</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Unconfirmed start of archive</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Nem támogatott funkció</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Jelszó beírása</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Írja be a jelszót:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Jelszó újbóli beírása:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>A &amp;jelszó megjelenítése</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Jelszavak nem egyeznek</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Csak ékezetmentes karaktereket, számokat és speciális karaktereket (!, #, $, ...) használjon a jelszavaknak</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>A jelszó túl hosszú</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Jelszó</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Eltelt idő:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Hátralévő idő:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Méret:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Sebesség:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Feldolgozott:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Tömörítési arány:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Hibák:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Archívumok:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Behelyezés archívumba</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Archívum:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Akt&amp;ualizálás módja:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>Archívum &amp;formátuma:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Tömörítés &amp;foka:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Tömörítés &amp;módja:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Címtár mérete:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Szó mérete:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Tömör blokk méret:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU számok:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Tulajdonságok:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>SF&amp;X archívum létrehozása</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Megosztott fájlok tömörítése</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Titkosítás</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Titkosítási eljárás:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Fájlnevek &amp;titkosítása</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>A tömörítés memóriahasználata:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>A kitömörítés memóriahasználata:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Tömörítés után törölje a fájlt</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Szimbolikus link tárolása</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Hard link tárolása</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Alternatív adatfolyam tárolása</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Biztonsági beállítások tárolása</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Raktár</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Leggyorsabb</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Gyors</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normál</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Legnagyobb</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Fájlok behelyezése és cseréje</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Fájlok aktualizálása és behelyezése</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Létező fájlok frissítése</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Fájlok szinkronizálása</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Tallózás</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Minden fájl</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Nem tömör</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Tömör</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Másolás</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Áthelyezés</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Másolás ide:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Áthelyezés ide:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Másolás...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Áthelyezés...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Átnevezés...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Válassza ki a cél mappát.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>A művelet nem támogatott.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Hiba történt a fájl vagy a mappa átnevezésekor</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Fájl másolásának megerősítése</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Biztos, hogy fájl(oka)t akar másolni az archívumba?</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Fájltörlés megerősítése</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Mappatörlés megerősítése</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Több fájltörlés megerősítése</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Biztos, hogy törölni akarja a következőt: '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Biztos, hogy törölni akarja a(z) '{0}' mappát és annak teljes tartalmát?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Biztos, hogy törölni akarja ezt a(z) {0} elemet?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Törlés...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Hiba történt a fájl vagy a mappa törlésekor</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>A rendszer nem bírja mozgatni a fájlt a hosszú útvonallal a Lomtárba</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Mappa létrehozása</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Fájl létrehozása</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Mappa neve:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Fájlnév:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Új mappa</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Új fájl</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Hiba történt a mappa létrehozásakor</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Hiba történt a fájl létrehozásakor</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Megjegyzés</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Megjegyzés:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Kijelölés</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Megszüntetés</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Maszk:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Tulajdonságok</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Mappa előzmények</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Diagnosztikai üzenetek</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Üzenet</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Sajátgép</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Hálózati helyek</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Dokumentumok</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Rendszer</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Hozzáadás</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Kibontás</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Teszt</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Másolás</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Áthelyezés</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Tulajdonságok</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Fájldarabolás</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Darabolás ide:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Darabolás &amp;kötetekre, bájt:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Darabolás...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Darabolás megerősítése</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Biztos szét akarja darabolni a fájlt {0} kötetre?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Kötet méretének kisebbnek kell lennie, mint az eredeti fájl mérete</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Hibás kötet méret</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>A megadott kötet mérete: {0} byte.\nBiztos fel akarja darabolni az archívumot ilyen kötetre?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Fájlegyesítés</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Egyesítés ide:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Egyesítés...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Csak az első rész kiválasztása a darabolt fájlból</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Nem ismeri fel a fájlt, mint darabolt fájl része</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Nem talál egynél több részt a darabolt fájlból</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Leírás számolása...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Leírás információ</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC leírás az adathoz:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC leírás az adathoz és névhez:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Teljesítménymérés</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Memóriahasználat:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Tömörítés</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Kitömörítés</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Értékelés</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Összértékelés</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Jelenlegi</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Eredmény</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU használata</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Becslés / Használat</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Menetek:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Link innen:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Link ide:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Link típusa</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Hard link</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Szimbolikus fájl link</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Szimbolikus mappa link</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Mappa csatolási pont</value>
+  </data>
+</root>

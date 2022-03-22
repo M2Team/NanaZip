@@ -1,0 +1,885 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Welsh</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Cymraeg</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Iawn</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Canslo</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Iawn</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Na</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Cau</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Cymorth</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>P&amp;arhau</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Iawn i'r &amp;Cwbwl</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Na i'r C&amp;wbwl</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Stopio</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Ailgychwyn</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Cefndir</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Blaendir</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Pwyllo</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Pwyllo</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Ydych chi am canslo?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Ffeil</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Golygu</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>Gwe&amp;ld</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>Ff&amp;efrynnau</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Offer</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Cymorth</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Agor</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Agor tu &amp;Mewn</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Agor tu &amp;Fas</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>Gwe&amp;ld</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Golygu</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>A&amp;ilenwi</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Copïo i...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Symud i...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Dileu</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Hollti ffeil...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Cy&amp;funo ffeilau...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>&amp;Priodweddau</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Syl&amp;wad</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Cyfrifo swm-gwirio</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Creu Ffolder</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Creu Ffeil</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Alla&amp;n</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Dewis y C&amp;yfan</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Dad-ddewis y Cyfan</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Gwrt&amp;hdroi'r Dewis</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Dewis...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Dad-ddewis...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Dewis trwy Math</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Dad-ddewis trwy Math</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Eiconau &amp;Mawr</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>Eiconau &amp;Bach</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Rhestr</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>Ma&amp;nylion</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Dad-dosbarthu</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Golwg Flat</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 Paneli</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>Bariau &amp;Offer</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Agor Ffolder Gwraidd</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Lan Un Lefel</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Hanes Ffolderi...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Adnewyddu</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Bar Offer Archif</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Bar Offer Arferol</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Botwmau Fawr</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Dangos Testun Botwmau</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Ychwanegu ffolder i Ffefrynnau fel</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Llyfrnod</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;Dewisiadau...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Meincnod</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Cynnwys...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>&amp;Manylion NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Llwybr</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Enw</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Estyniad</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Ffolder</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Maint</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Maint wedi'i Cywasgu</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Priodweddau</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Crëwyd</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Cyrchwyd</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Addaswyd</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Solet</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Sylwad</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Amgryptio</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Hollti Cyn</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Hollti ar Ôl</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Geiriadur</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Math</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Dull</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>SW Cynnal</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>System Ffeiliau</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Ddefnyddiwr</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Grŵp</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Bloc</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Sylwad</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Safle</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Rhagddodiad y Llwybr</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Gwall</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Cyfanswm Maint</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Lle Rhydd</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Maint Clwstwr</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Enw Lleol</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Darparwr</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Dewisiadau</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Iaith</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Iaith:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Golygydd</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Golygydd:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Cysylltu NanaZip gyda:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Cyfuno NanaZip mewn i dewislen cyd-destun y cribyn</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Dewislen cyd-destun wedi'i rhaeadru</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Eitemau dewislen cyd-destun:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Ffolder&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Archif&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Agor archif</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Echdynnu ffeiliau...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Ychwanegu i'r archif...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Profi archif</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Echdynnu Yma</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Echdynnu i {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Ychwanegu i {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Cywasgu ac e-bostio...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Cywasgu i {0} ac e-bostio</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Ffolderi</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>Ffolder &amp;gweithio</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>Ffolder tymor byr y &amp;system</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Cyfredol</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Penodol:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Defnyddiwch am gyriant symudadwy yn unig</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Nodwch lleoliad am ffeiliau archif tymor byr.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Gosodiadau</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Dangos eitem ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Dangos eicon ffeil go iawn</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Dangos dewislen y system</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Dethol &amp;holl rhes</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Dangos llinellau &amp;grid</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Modd dethol &amp;arallddewisiol</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Defnyddiwch tudalenau cof &amp;mawr</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Manylion NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>Mae NanaZip yn meddalwedd am ddim. Ond, gallwch cefnogi yNanaZip</value>
+  </data>
+  <data name="Resource2902" xml:space="preserve">
+    <value>\ndatblygiad o 7-Zip trwy cofrestru.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Mae na ddim wallau</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>{0} gwrthrych(au) dethol</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>Ddim yn gallu creu y ffolder '{0}'</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Mae gweithrediadau diweddaru ddim yn ateg am yr archif hyn.</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Roedd ffeil '{0}' wedi'i addasu.\nWyt ti moen ei diweddaru yn yr</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>\narchif?</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Ddim yn gallu diweddaru ffeil\n'{0}'</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Ddim yn gallu dechrau golygydd.</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Gormod o eitemau</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Echdynnu</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Cywasgu</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Ymbrofi</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Agor...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Sganio...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Echdynnu</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>E&amp;chdynnu i:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Nodwch lleoliad am echdynnu ffeiliau.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Modd llwybr</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Enwau llwybr llawn</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Dim enwau llwybr</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Modd disodli</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Gofyn cyn disodli</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Disodli heb awgrymeb</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Crychneidio ffeiliau presennol</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Ailenwu yn awtomatig</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Ailenwu ffeiliau presennol yn awtomatig</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Cadarnhau Disodli Ffeil</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Mae'r ffolder hon eisioes yn cynnwys y ffeil cyrchfan.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Hoffech chi ddisodli'r ffeil sy'n bodoli eisioes</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>Gyda hon?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} beit</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Ailenwi A&amp;wtomatig</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Modd cywasgu ddim yn dilys am '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Gwall data mewn '{0}'. Ffeil wedi'i torri.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC wedi'i methu mewn '{0}'. Ffeil wedi'i torri.</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Mewnbynnwch cyfrinair</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Mewnbynnwch cyfrinair:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>&amp;Dangos cyfrinair</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>Cyfrinair</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Wedi treiglo:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Amser a'r ôl:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Maint:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Cyflymder:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Gwallau:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Ychwanegu i'r archif</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Archif:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>Modd &amp;diweddaru:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Fformat yr archif:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;Lefel cywasgu:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Dull &amp;cywasgu:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Maint &amp;geiriadur:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Maint geiria&amp;u:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>&amp;Paramedrau:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Dewisiadau</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>Creu archif SF&amp;X</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Amgryptio &amp;enwau ffeiliau</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Defnydd cof am Cywasgu:</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Defnydd cof am Datgywasgu:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Storio</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Cyflymach</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Cyflum</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Arferol</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Uchafswm</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Ychwanegu ac amnewid ffeiliau</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Diweddaru ac ychwanegu ffeiliau</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Adnewyddu y ffeiliau presennol</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Cyfamseru ffeiliau</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Pori</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Pob Ffeil</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Copïo</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Symud</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Copïo i:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Symud i:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Copïo...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Symud...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Ailenwi...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Mae'r gweithrediad ddim wedi'i ategu.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Gwall wrth Ailenwi Ffeil neu Ffolder</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Cadarnhau Copi Ffeil</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Ydych chi'n siŵr eich bod am copïo'r ffeiliau i'r archif</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Cadarnhau Dileu Ffeil</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Cadarnhau Dileu Ffolder</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Cadarnhau Dileu Ffeiliau Amryfal</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Ydych chi'n siŵr eich bod am dileu '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Ydych chi'n siŵr eich bod am dileu y ffolder '{0}' ac ei holl</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>\ncynnwys?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Ydych chi'n siŵr eich bod am dileu yr eitemau hyn {0}?</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Dileu...</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Gwall Dileu Ffeil neu Ffolder</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Creu Ffolder</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Creu Ffeil</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Enw Ffolder:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Enw Ffeil:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Ffolder Newydd</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Ffeil Newydd</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Gwall wrth Creu Ffolder</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Gwall wrth Creu Ffeil</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Sylwad</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Sylwad:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Dewis</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Dad-ddewis</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Mwgwd:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Hanes Ffolderi</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Neges diagnostig</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Neges</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Cyfrifiadur</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Rhyngrwyd</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Ychwanegu</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Echdynnu</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Profi</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Copïo</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Symud</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Dileu</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Gwybodaeth</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Hollti Ffeil</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Hollti i:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Hollti i &amp;cyfeintiau, beitiau:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Hollti...</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Cyfuno Ffeiliau</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Cyfuno i:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Cyfuno...</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Cyfrifo swm-gwirio...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Gwybodaeth swm-gwirio</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Swm-gwirio CRC am data:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Swm-gwirio CRC am data ac enwau:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Meincnod</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Defnyddiad cof:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Cywasgu</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Datgywasgu</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Amcangyfrif</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Amcangyfrif llwyr</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Presennol</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Canlyniad</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Pasio:</value>
+  </data>
+</root>

@@ -1,0 +1,1278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Armenian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Հայերեն</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>ԼԱՎ</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Չեղարկել</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Այո</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Ոչ</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Փակել</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Օգնություն</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Շարունակել</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Այո բոլորի &amp;համար</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Ոչ բոլորի &amp;համար</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Կանգնեցնել</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Վերսկսել</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Խորապատկերում</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Առջևում</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Դադար</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Դադարի մեջ է</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Ընդհատե՞լ</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Ֆայլ</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Խմբագրել</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Տեսք</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Ընտրյալներ</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>Գ&amp;ործիքներ</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Օգնություն</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Բացել</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Բացել &amp;ներսում</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Բացել դրս&amp;ում</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>Ընտրել</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Խմբագրել</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Վեր&amp;անվանել</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Պատճենել...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Տեղափոխել...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Ջնջել</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Տրոհել&amp; ֆայլը...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Հ&amp;ամակցել ֆայլը...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>Հատկու&amp;թյուններ</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Մեկնաբա&amp;նություններ</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Հանրագումար</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Համեմատել</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>&amp;Ստեղծել թղթապանակ</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Ստեղ&amp;ծել ֆայլ</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>Փակ&amp;ել</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Հղում</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Այլընտրանքային հոսքեր</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Նշել &amp;բոլորը</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Ապանշել</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Ետարկել ն&amp;շումը</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Նշել...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Ապանշել...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Նշել ըստ տեսակի</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Ապանշել ըստ տեսակի</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Մեծ պատկերակներով</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Փոքր պատկերակներով</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>Ցուց&amp;ակ</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Աղյուսակ</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Առանց դասավորելու</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Հարթ եղանակ</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 վահանակ</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Գործիքների վահանակ</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Բացել արմատային թղթապանակը</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Մեկ մակարդակ վերև</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Թղթապանակների պատմությունը...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>Թ&amp;արմացնել</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Ինքնաթարմացում</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Ծրագրի կոճակների վահանակ</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Կոճակների ստանդարտ վահանակ</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Մեծ կոճակներով</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Կոճակների անունը</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>Ավելացնել թղթապանակը &amp;ընտրյալներին որպես</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Էջանիշ</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>Կարգավորումներ...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>Արտադրողականության թեստ</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Բովանդակություն...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>Ծրագրի &amp;մասին...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Ուղի</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Անուն</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Ընդլայնում</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Թղթապանակ</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Չափ</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Սեղմած</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Հատկություններ</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Ստեղծվել է</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Մուտք</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Փոփոխվել է</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Անընդհատ</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Մեկնաբանություններ</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Կոդավորված է</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Տրոհված է մինչ</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Տրոհված է հետո</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Բառարան</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>Տեսակ</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Հակա</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Մեթոդ</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Համակարգ</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Ֆայլային համակարգ</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Օգտվող</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Խումբ</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Կողպում</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Մեկնաբանություններ</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Դիրք</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Ուղի</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Թղթապանակներ</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Ֆայլեր</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Տարբերակ</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Հատոր</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Բազմահատոր</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Շեղում</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Հղումներ</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Հատվածներ</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Հատորներ</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>Ֆիզիկական չափը</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Գլխագրերի չափը</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Արդյունքը</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Բնութագրություններ</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Վիրտուալ հասցե</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Կարճ անուն</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Ստեղծող</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Հատվածի չափ</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Եղանակ</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Նշանային հղում</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Սխալ</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Ծավալ</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Ազատ է</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Կլաստերի չափ</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Տառ</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Տեղային անուն</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Մատակարար</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Անվտանգություն</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Այլընտրանքային հոսք</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Հեռակա</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Ծառ</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Սխալի տեսակ</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Սխալներ</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Սխալներ</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Զգուշացում</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Զգուշացումներ</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Հոսքեր</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Այլընտրանքային հոսքեր</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Այլընտրանքային հոսքերի չափ</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Վիրտուալ չափը</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Բացված չափը</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Ընդհանուր ֆիզիկական չափը</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Հատորի համարը</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Ենթատեսակ</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Կարճ մեկնաբանություն</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Կոդային էջ</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Մնացորդի չափը</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Ներկառուցված հատվածի չափը</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Հղում</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Կոշտ հղում</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Միայն կարդալու</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Կարգավորումներ</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Լեզուն</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Լեզուն.</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Խմբագիր</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Խմբագիր</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Համեմատելու ծրագիր.</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Համակարգը</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Ասոցիացնել NanaZip-ը հետևյալ ֆայլերի հետ՝</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Բոլոր օգտվողները</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Ներդնել NanaZip-ը համատեքստային ցանկում</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Կասկադային ցանկ</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Համատեքստային ցանկի բաղադրիչները</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Պատկերակներ համատեքստային ցանկում</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>«Թղթապանակ»</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>«Արխիվ»</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Բացել արխիվը</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Դուրս բերել</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Ավելացնել արխիվի...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Թեստավորել</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Դուրս բերել այստեղ</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Դուրս բերել{0}-ում</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Ավելացնել {0}-ին</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Սեղմել և ուղարկել էլ. փոստով...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Սեղմել {0}-ում և ուղարկել էլ. փոստով</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Թղթապանակներ</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Աշխատանքային թղթապանակ</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Համակարգային ժամանակավոր թղթապանակ</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Ընթացիկ</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Նշանակել.</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Օգտագործել միայն շարժական կրիչների համար</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Նշեք ժամանակավոր արխիվների համար տեղ</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Կարգավորումներ</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Ցուցադրել բաղադրիչը ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Ցուցադրել ֆայլերի իրական պատկերները</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Ցուցադրել համակարգային ցանկը</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Կուրսորը ամբողջ տողով</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Ցուցադրել բաժանարարներ</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Բացել մեկ սեղմամբ</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Նշելու այլընտրանքային եղանակ</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Օգտագործել հիշողության մեծ ծավալներ</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip-ի մասին</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip-ը ազատ տարածվող ծրագիր է:</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Չկա ազատ տեղ</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Սխալներ չկան</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>Ընտրված են {0} ֆայլեր</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Հնարավոր չէ ստեղծել '{0}' թղթապանակը:</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Փոփոխման գործողությունը այս արխիվը չի աջակցում:</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Հնարավոր չէ բացել '{0}' ֆայլը որպես արխիվ</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Հնարավոր չէ բացել '{0}' կողփած արխիվը: Մուտքագրեք գաղտնաբառը:</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Արխիվի տեսակը չի աջակցվում</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>{0} ֆայլը արդեն գոյություն ունի</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>'{0}' ֆայլը փոփոխվել է:\n Թարմացնե՞լ այն արխիվում:</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Հնարավոր չէ թարմացնել ֆայլը \n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Հնարավոր չէ բացել խմբագիրը:</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Ֆայլը նման է վիրուսի:</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Գործողությունը չի կարող կատարվել այն թղթապանակից, որը ունի երկար ճանապարհ:</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Ընտրեք գոնե մեկ ֆայլ</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Ընտրեք գոնե մեկ կամ մի քանի ֆայլեր</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Բաղադրիչները շատ են</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Հնարավոր չեղավ բացել ֆայլը որպես {0} արխիվ</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Ֆայլը բացվել է որպես {0} արխիվ</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Ֆայլը բացվել է շեղումով</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Դուրս է բերվում</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Սեղմվում է</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Թեստավորվում է</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Բացվում է...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Տեսածրում...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Ջնջում</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Ավելացվում է</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Թարմացվում է</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Վերլուծում</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Պատճենվում է</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Վերափաթեթավորում</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Բաց է թողնվում</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Ջնջում</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Գլխագրերի ստեղծում</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Դուրս բերել</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>&amp;Դուրս բերել՝</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Նշեք հանվող ֆայլերի տեղադրությունը:</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Ֆայլերի ուղին.</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Ամբողջական&amp; ուղիներ</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>&amp;Առանց ուղիների</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Բացարձակ ուղիներ</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Հարաբերական ուղիներ</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Վերագրանցում</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Հաստատումով</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Առանց հաստատման</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Բաց թողնել</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Վերանվանել</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Վերանվանել գոյություն ունեցողները</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Վերացնել արմատային թղթ. կրկնօրինակումը</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Վերացնել մուտքի թույլտվությունը</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Հաստատեք ֆայլի փոխարինումը</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Թղթապանակում արդեն կա մշակված ֆայլ:</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Փոխարինե՞լ առկա ֆայլը</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>տվյալ ֆայլով:</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} բայթ</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>Վերանվանել ինք.</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>'{0}' ֆայլը սեղմելու եղանակը չի աջակցվում</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Տվյալների սխալ'{0}'-ում: Ֆայլը վնասված է:</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC սխալ'{0}'-ում: Ֆայլը վնասված է:</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Սխալ՝ '{0}' ֆայլի կոդավորման տվյալներում: Գաղտնաբառը սխա՞լ է:</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC սխալ '{0}' կոդավորված ֆայլի համար: Գաղտնաբառը սխա՞լ է:</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Գաղտնաբառը սխա՞լ է</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Սեղմելու չաջակցվող եղանակ</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Սխալ տվյալներում</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC սխալ</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Անհասանելի տվյալներ</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Տվյալների անսպասելի ավարտ</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Կան տվյալներ՝ օգտակար տվյալների հատվածի վերջում</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Արխիվ չէ</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Սխալ գլխագրերում</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Գաղտնաբառը սխալ է</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Արխիվի անընդունելի սկիզբ</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Արխիվի չհաստատված սկիզբ</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Չաջակցվող յուրահատկություն</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Մուտքագրել գաղտնաբառ</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>&amp;Մուտքագրել գաղտնաբառ.</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Կրկնել գաղտնաբառը.</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Ցուցադրել գաղտնաբառը</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Գաղտնաբառը չի համապատասխանում</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Գաղտնաբառի համար օգտագործեք միայն լատիներեն տառեր, թվեր և հատուկ նշաններ (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Գաղտնաբառը չափազանց երկար է</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>&amp;Գաղտնաբառը.</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Անցել է.</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Մնացել է.</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Չափ.</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Արագություն.</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Ընթացք.</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Սեղմելու աստիճան</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Սխալներ.</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Արխիվներ.</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Ավելացնել արխիվի</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Արխիվ.</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Փոփոխման կարգը.</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Արխիվի տեսակը.</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>&amp;Սեղմելու աստիճանը.</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Սեղմելու մեթոդը.</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>Բառարանի &amp;չափը.</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>Բառի չ&amp;ափը.</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Հատվածի չափը.</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU հոսքերի քանակը.</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Ցուցիչներ.</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>&amp;Ընտրանքներ</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Ստեղծել SF&amp;X արխիվ</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Սեղմել համաօգտագործվող ֆայլերը</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Կոդավորում</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Կոդավորման եղանակ.</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>&amp;Կոդավորել ֆայլերի անունները</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Հիշող. ծավալը սեղմելու համար.</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Հիշող. ծավալը դուրս բերելու համար.</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Սեղմելուց հետո ջնջել ֆայլերը</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Պահպանել նշանային հղումները</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Պահպանել կոշտ հղումները</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Պահպանել այլընտրանքային հոսքերը</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Պահպանել մուտքի իրավունքը</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Առանց սեղմելու</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Արագընթաց</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Արագ</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Նորմալ</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Առավելագույն</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ուլտրա</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Ավելացնել և փոխարինել</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Թարմացնել և ավելացնել</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Թարմացնել</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Համաժամեցնել</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Թերթել</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Բոլոր ֆայլերը</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Ֆայլի չափով</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Անդադար</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Պատճենել</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Տեղափոխել</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Պատճենել՝</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Տեղափոխել՝</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Պատճենվում է...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Տեղափոխվում է...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Վերանվանվում է...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Ընտրել թղթապանակ</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Գործողությունը չի աջակցվում</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Սխալ` ֆայլը կամ թղթապանակը անվանափոխելիս:</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Հաստատեք ֆայլերի պատճենումը</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Պատճենե՞լ այս ֆայլերը արխիվի մեջ:</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Հաստատել ֆայլի ջնջումը</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Հաստատել թղթապանակի ջնջումը</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Հաստատել ֆայլերի ջնջումը</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Իրո՞ք ցանկանում եք ջնջել  "{0}"-ը:</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Իրո՞ք ցանկանում եք ջնջել  "{0}" թղթապանակը և նրա պարունակությունը:</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Իրո՞ք ցանկանում եք ջնջել ({0} հատ) ֆայլերը:</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Ջնջում է...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Սխալ` ֆայլը կամ թղթապանակը ջնջելիս:</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Հնարավոր չէ Աղբարկղ տեղափոխել երկար անուններով ֆայլեր:</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Ստեղծել թղթապանակ</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Ստեղծել ֆայլ</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Թղթապանակի անունը.</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Ֆայլի անունը.</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Նոր թղթապանակ</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Նոր ֆայլ</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Սխալ` թղթապանակ ստեղծելիս</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Սխալ` ֆայլ ստեղծելիս</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Մեկնաբանություններ</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Մեկնաբանություններ</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Նշել</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Ապանշել</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Դիմակ.</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Հատկություններ</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Թղթապանակների պատմությունը</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Հաղորդագրություն</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Հաղորդագրություն</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Համակարգիչ</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Ցանց</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Փաստաթղթեր</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Համակարգ</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Ավելացնել</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Դուրս բերել</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Թեստավորել</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Պատճենել</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Տեղափոխել</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Ջնջել</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Տեղեկություն</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Տրոհել ֆայլը</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Տրոհել՝</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Տրոհել &amp;մասերի (բայթերով)`</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Տրոհում...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Հաստատեք տրոհումը</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Իրո˚ք տրոհել ֆայլը {0} հատորների</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Հատորի չափը պետք է փոքր լինի ընթացիկ ֆայլի չափից</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Գործողության սխալ</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Հատորի նշված չափը. {0} բայթ:\nՏրոհե˚լ արխիվը հատորների:</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Համակցել ֆայլը</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Համակցել.</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Համակցում...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Ընտրել տրոհված ֆայլի միայն առաջին մասը</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Հնարավոր չեղավ ճանաչել տրոհված ֆայլը</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Հնարավոր չեղավ գտնել տրոհված ֆայլի մասերը</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Checksum-ի որոշում...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC checksum ֆայլերի համար.</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC checksum ֆայլերի և անունների համար.</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Արտադրողականության թեստ</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Հիշողության ծավալը.</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Սեղմել</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Դուրս բերել</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Վարկանիշ</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Ընդհանուր վարկանիշը</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Ընթացիկը</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Ավարտուն արդյունքը</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU-ի օգտ-ը</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Վարկ./Օգտ.</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Անցումներ.</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Հղում</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Կապել</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Աղբյուր.</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Նպատակ.</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Հղման տեսակ</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Կոշտ հղում</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Նշանային հղում (ֆայլ)</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Նշանային հղում (թղթապանակ)</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Միացման կետ (Junction)</value>
+  </data>
+</root>

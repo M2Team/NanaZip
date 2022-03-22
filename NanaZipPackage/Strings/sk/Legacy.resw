@@ -1,0 +1,1245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Slovak</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Slovenčina</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Zrušiť</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;Áno</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;Nie</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;Zavrieť</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>Pomocník</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>Po&amp;kračovať</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Áno na &amp;všetko</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Nie na vš&amp;etko</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Zastaviť</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Reštartovať</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Pozadie</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>P&amp;opredie</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>Po&amp;zastaviť</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Pozastavené</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Ste si istý, že chcete akciu zrušiť?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Súbor</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Upraviť</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Zobraziť</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Obľúbené</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Nástroje</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Pomocník</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Otvoriť</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>O&amp;tvoriť vnútri</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Ot&amp;voriť externe</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Zobraziť</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Upraviť</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>&amp;Premenovať</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Kopírovať do...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>P&amp;resunúť do...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>O&amp;dstrániť</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>Ro&amp;zdeliť súbor...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Zlúč&amp;iť súbory...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>V&amp;lastnosti</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Ko&amp;mentár</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Vypočítať kontrolný súčet</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Rozdiel (Diff)</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Vytvoriť priečinok</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Vytvoriť súbor</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>Uko&amp;nčiť</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Odkaz...</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Označiť všetko</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Odznačiť všetko</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>Invertovať označenie</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Označiť...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Odznačiť...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Označiť podľa typu</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Odznačiť podľa typu</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;Veľké ikony</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;Malé ikony</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Zoznam</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Podrobnosti</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Netriediť</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Plochý vzhľad</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 Panely</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>P&amp;anely nástrojov</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Otvoriť koreňový priečinok</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>O úroveň vyššie</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>História priečinkov...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Obnoviť</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Automatické obnovenie</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Archív</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Štandard</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Veľké ikony</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Textový popis pod ikonami</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>Pridať priečinok medzi obľúbené ako</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Záložka</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>N&amp;astavenia...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;Skúšobný test</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Obsah pomocníka...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>O p&amp;rograme NanaZip</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Cesta</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Meno</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Prípona</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Priečinok</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Veľkosť</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Veľkosť po kompresii</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atribúty</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Vytvorený</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Sprístupnený</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Zmenený</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>Jednoliaty</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>Komentovaný</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>Zašifrovaný</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Rozdelený predtým</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Rozdelený potom</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Slovník</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Metóda</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Hostiteľský OS</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Súborový systém</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Používateľ</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Skupina</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Blok</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Komentár</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Pozícia</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Predpona cesty</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Priečinky</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Súbory</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Verzia</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Zväzok</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Multizväzok</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Ofset</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Odkazy</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Bloky</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Zväzky</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64-bitov</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>Fyzická veľkosť</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Veľkosť hlavičiek</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Kontrolný súčet</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Charakteristiky</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Virtuálna adresa</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Skrátený názov</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Aplikácia</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Veľkosť sektora</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Režim</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Symbolický odkaz</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Celková veľkosť</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Voľné miesto</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Veľkosť klastra</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Menovka</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Lokálny názov</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Prevádzkovateľ</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Bezpečnosť NT</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Alternatívny prúd</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Vymazané</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Je strom</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Typ chyby</value>
+  </data>
+  <data name="Resource1067" xml:space="preserve">
+    <value>Chyby</value>
+  </data>
+  <data name="Resource1068" xml:space="preserve">
+    <value>Chyby</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Varovania</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Varovanie</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Prúdy</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Alternatívne prúdy</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Veľkosť alternatívneho prúdu</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Virtuálna veľkosť</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Veľkosť po rozbalení</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Celková fyzická veľkosť</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Index zväzku</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Podtyp</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Krátky komentár</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Kódová stránka</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Veľkosť zakončenia</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Veľkosť vloženého ústrižku</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Odkaz</value>
+  </data>
+  <data name="Resource1084" xml:space="preserve">
+    <value>Pevný odkaz</value>
+  </data>
+  <data name="Resource1085" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Nastavenia</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Jazyk:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>Editor:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>Vyhľadávač rozdielov (Diff):</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Systém</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Asociovať NanaZip s vybranými typmi súborov:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integrovať NanaZip do kontextovej ponuky</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Kaskádová kontextová ponuka</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Položky kontextovej ponuky:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Ikony v kontextovej ponuke</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Priečinok&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Archív&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Otvoriť archív</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Rozbaliť súbory...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Pridať do archívu...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Otestovať archív</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Rozbaliť tu</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Rozbaliť do {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Pridať do {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Skomprimovať a poslať emailom...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Skomprimovať do {0} a poslať emailom</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Priečinky</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Pracovný priečinok</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Systémový priečinok pre dočasné súbory</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Aktuálny priečinok</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;Manuálne vybraný priečinok:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Po&amp;užiť len pre vymeniteľné jednotky</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Vyberte priečinok pre dočasné súbory.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Nastavenia</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Ukázať položku ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Ukázať skutočné ikony súborov</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Ukázať systémovú ponuku</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>Označiť celý riadok</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Zobraziť čiary mriežky</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Otvoriť položku jednoduchým kliknutím</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>Alternatívny režim výberu</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Použitie veľkých stránok pamäti</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>O programe NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip je voľne šíriteľný softvér</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Systém nemôže alokovať požadované množstvo pamäte</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>V archíve sa nenašli žiadne chyby</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} vybraných objektov</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Nie je možné vytvoriť priečinok '{0}'.</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Operácie aktualizácie nie sú pre tento archív podporované.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Súbor '{0}' nie je možné otvoriť ako archív</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Nie je možné otvoriť šifrovaný archív '{0}'. Nesprávne heslo?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Nepodporovaný typ archívu</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Súbor {0} už existuje.</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Súbor '{0}' bol zmenený.\nChcete ho aktualizovať v archíve?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Nie je možné aktualizovať súbor\n'{0}'</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Nie je možné spustiť editor.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Súbor vyzerá ako vírus. (Meno súboru obsahuje veľa medzier.)</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Operácia nemôže byť vykonaná v priečinku, ktorý má dlhú cestu.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Musíte vybrať jeden súbor</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Musíte vybrať jeden alebo viac súborov</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Priveľa položiek</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Rozbaľovanie</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Komprimovanie</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Výsledok testovania</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Otváranie...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Prehľadávanie...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Rozbaliť</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Rozbaliť do:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Špecifikujte priečinok pre rozbalené súbory.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Nastavenie názvov ciest:</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Plné názvy ciest</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Žiadne názvy ciest</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Absolútne názvy ciest</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Relatívne názvy ciest</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Nastavenie prepísania:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Spýtať sa pred prepísaním</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Prepísať bez výzvy</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Preskočiť existujúce súbory</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Automaticky premenovať</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Automaticky premenovať existujúce súbory</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Eliminovať duplikáty koreňového priečinka</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Obnoviť práva súboru</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Potvrdenie nahradenia súboru</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Cieľový priečinok už obsahuje rozbaľovaný súbor.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Chcete nahradiť existujúci súbor</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>týmto súborom?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bajtov</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>&amp;Automaticky premenovať</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Nepodporovaná kompresná metóda pre '{0}'.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Chybné údaje v '{0}'. Súbor je poškodený.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC zlyhalo v '{0}'. Súbor je poškodený.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>Chybné údaje v šifrovanom súbore '{0}'. Nesprávne heslo?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC zlyhalo v šifrovanom súbore '{0}'. Nesprávne heslo?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Nesprávne heslo?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Nepodporovaná kompresná metóda</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Chybné údaje</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC zlyhalo</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Údaje sú nedostupné</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Neočakávaný koniec údajov</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Za zužitkovateľnými údajmi sa nachádzajú ďalšie údaje</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Nie je to archív</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Chybné hlavičky</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Začiatok archívu je nedostupný</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Začiatok archívu nie je potvrdený</value>
+  </data>
+  <data name="Resource3765" xml:space="preserve">
+    <value>Nepodporovaná funkcia</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Zadajte heslo</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Zadajte heslo:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Zopakujte heslo:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>Ukázať heslo</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Heslá nie sú zhodné</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Používajte len písmená bez diakritiky, čísla a špeciálne znaky (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Heslo je príliš dlhé</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Uplynutý čas:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Zostávajúci čas:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Veľkosť:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Rýchlosť:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Spracované:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Úroveň kompresie:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Chyby:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Archívy:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Pridať do archívu</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Archív:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Nastavenie aktualizácie súborov v existujúcich archívoch:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Formát archívu:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Ú&amp;roveň kompresie:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>&amp;Kompresná metóda:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Veľkosť slovníka:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>V&amp;eľkosť slova:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Veľk&amp;osť jednoliateho bloku:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Poče&amp;t CPU vlákien:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parametre:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Možnosti</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Vytvoriť samorozbaľovací archív</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Komprimovať zdieľané súbory</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Šifrovanie</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Metóda šifrovania:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Zašifrovať mená súborov</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Pamäť potrebná na kompresiu:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Pamäť potrebná na dekompresiu:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Vymazať súbory po kompresii</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Uložiť symbolické odkazy</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Uložiť pevné odkazy</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Uložiť alternatívne údajové prúdy</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Uložiť práva súborov</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Bez kompresie</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Najrýchlejšia</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>Rýchla</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normálna</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maximálna</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Pridať a nahradiť súbory</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Aktualizovať a pridať súbory</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Aktualizovať existujúce súbory</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Synchronizovať súbory</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Prehľadávať</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Všetky súbory</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Nejednoliaty</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Jednoliaty</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Kopírovať</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Presunúť</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Kopírovať do:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Presunúť do:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Kopírovanie...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Presúvanie...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Premenovanie...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Vyberte cieľový priečinok.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Operácia nie je podporovaná pre tento priečinok.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Chyba pri premenovaní súboru alebo priečinka</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Potvrdiť kopírovanie súboru/súborov</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Ste si istý, že chcete kopírovať súbor/súbory do archívu</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Potvrdenie odstránenia súboru</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Potvrdenie odstránenia priečinka</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Potvrdenie odstránenia viacerých položiek</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Ste si istý, že chcete odstrániť súbor '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Ste si istý, že chcete odstrániť priečinok '{0}' a celý jeho obsah?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Ste si istý, že chcete odstrániť týchto {0} položiek?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Odstraňovanie...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Chyba pri odstraňovaní súboru alebo priečinka</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Systém nemôže presunúť do koša súbor s dlhou cestou</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Vytvoriť priečinok</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Vytvoriť súbor</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Meno priečinka:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Meno súboru:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Nový priečinok</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Nový súbor</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Chyba pri vytváraní priečinka</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Chyba pri vytváraní súboru</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Komentár</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Komentár:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Označiť</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Odznačiť</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Maska:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Vlastnosti</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>História priečinkov</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Diagnostické správy</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Správa</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Počítač</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Sieť</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Dokumenty</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Systém</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Pridať</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Rozbaliť</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Otestovať</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Kopírovať</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Presunúť</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Odstrániť</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Informácie</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Rozdeliť súbor</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Rozdeliť na:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Roz&amp;deliť na zväzky bajtov:</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Rozdeľovanie...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Potvrdiť rozdeľovanie.</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Ste si istý, že chcete rozdeliť súbor na {0} zväzkov?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Veľkosť zväzku musí byť menšia než veľkosť pôvodného súboru.</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Nesprávna veľkosť zväzku</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Určená veľkosť zväzku: {0} bajtov.\nSte si istý, že chcete rozdeliť archív na také zväzky?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Zlúčiť súbory</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Zlúčiť do:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Zlučovanie...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Vyberte len prvý súbor.</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Nie je možné rozlíšiť súbor ako súčasť rozdeleného súboru</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Nie je možné nájsť viac než jednu časť rozdeleného súboru</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Výpočet kontrolného súčtu...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Informácie o kontrolnom súčte</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC súčet pre údaje:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC súčet pre údaje a názvy:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Skúšobný test</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Použitá pamäť:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Komprimovanie</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Rozbaľovanie</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Hodnotenie</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Celkové hodnotenie</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Aktuálne</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Výsledné</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Využitie CPU</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Hodn. / Využitie</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Testov bez chýb:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Odkaz</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Odkaz</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Odkaz z:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Odkaz do:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Typ odkazu</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Pevný odkaz</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Súbor symbolického odkazu</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Priečinok symbolického odkazu</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Prekríženie priečinkov</value>
+  </data>
+</root>

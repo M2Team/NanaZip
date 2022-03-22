@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Georgian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>ქართული</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>გაუქმება</value>
+  </data>
+  <data name="Resource403" xml:space="preserve">
+    <value>&amp;დიახ</value>
+  </data>
+  <data name="Resource404" xml:space="preserve">
+    <value>&amp;არა</value>
+  </data>
+  <data name="Resource405" xml:space="preserve">
+    <value>&amp;დახურვა</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>დახმარება</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;გაგრძელება</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>დიახ &amp;ყველასათვის</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>არა ყვე&amp;ლასათვის</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>შეწყვეტა</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>ხელახლა</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;ფონურად</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;წინა პლანზე</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;შეჩერება</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>&amp;შეჩერებული</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>ნამდვილად გსურთ მოქმედების შეწყვეტა?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;ფაილი</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;დამუშავება</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;ხედი</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>რ&amp;ჩეულები</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;ხელსაწყოები</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;დახმარება</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;გახსნა</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>გახსნა &amp;შიგნით</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>გახსნა გა&amp;რეთ</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>და&amp;თვალიერება</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>და&amp;მუშავება</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>გადა&amp;რქმევა</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;ასლის მოთავსება...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;გადატანა...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;წაშლა</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;ფაილის დაყოფა...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>&amp;ფაილების გაერთიანება...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>თ&amp;ვისებები</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>კომენ&amp;ტარი</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>საკონტროლო ჯამის დათვლა</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>საქაღალდის შექმნა</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>ფაილის შექმნა</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>გ&amp;ამოსვლა</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>&amp;ყველაფრის მონიშვნა</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>მონიშვნის გაუქმება</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>მონიშვნის შებრუნება</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>მოინიშნოს...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>მოიხსნას მონიშვნა...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>მონიშვნა ტიპის მიხედვით</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>მონიშვნის მოხსნა ტიპის მიხედვით</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>&amp;დიდი ხატულები</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>&amp;პატარა ხატულები</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;სია</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;დაწვრილებით</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>დაულაგებელი</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>ბრტყელი ხედი</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 პანელი</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;ხელსაწყოთა ზოლი</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>ძირეული საქაღალდის გახსნა</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>საქაღალდიდან გასვლა</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>საქაღალდეების ისტორია...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;განახლება</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>დაარქივების ზოლი</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>ძირითადი ზოლი</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>დიდი ღილაკები</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>წარწერები ღილაკებზე</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;საქაღალდის რჩეულებში დამატება როგორც</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>სანიშნე</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>&amp;გამართვა...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>&amp;წარმადობის შემოწმება</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>სარჩევი...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>NanaZip-ის შესახებ...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>მდებარეობა</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>სახელი</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>გაფართოება</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>საქაღალდე</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>ზომა</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>შეკუმშულის ზომა</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>ატრიბუტები</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>შექმნილია</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>გახსნილია</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>შეცვლილია</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>უწყვეტი</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>კომენტარი</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>დაშიფრულია</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>დაყოფა სანამ</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>დაყოფა შემდეგ</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>ლექსიკონი</value>
+  </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>ტიპი</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>ანტი</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>მეთოდი</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>სისტემა</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>ფაილური სისტემა</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>მომხმარებელი</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>ჯგუფი</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>ბლოკი</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>კომენტარი</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>მდებარეობა</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>მდებარეობის თავსართი</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>საქაღალდეები</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>ფაილები</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>ვერსია</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>ტომი</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>მრავალტომიანი</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>წანაცვლება</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>ბმულები</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>ბლოკები</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>ტომები</value>
+  </data>
+  <data name="Resource1040" xml:space="preserve">
+    <value>64 ბიტი</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>ფიზიკური ზომა</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>სათაურების ზომა</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>საკონტროლო ჯამი</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>თვისებები</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>ვირტუალური მისამართი</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>მოკლე სახელი</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>შემქმნელი პროგრამა</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>სექტორის ზომა</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>რეჟიმი</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>ბმული</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>შეცდომა</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>სრული მოცულობა</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>თავისუფალი სივრცე</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>კლასტერის ზომა</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>წარწერა</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>ადგილობრივი სახელი</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>მომწოდებელი</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>გამართვა</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>ენები</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>ენა:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>რედაქტორი</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>რედაქტორი:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Diff:</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>სისტემა</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>ასოცირება NanaZip-თან:</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>NanaZip-ის გარსის კონტექსტურ მენიუში ჩადგმა</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>კასკადური კონტექსტური მენიუ</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>კონტექსტური მენიუს შემადგენლობა:</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;საქაღალდე&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;არქივი&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>არქივის გახსნა</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>ფაილების ამოღება...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>არქივში ჩამატება...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>არქივის შემოწმება</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>ამოღება აქ</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>ამოღება {0}-ში</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>{0}-ში ჩამატება</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>შეკუმშვა და ელფოსტით გაგზავნა...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>{0}-ში შეკუმშვა და ელფოსტით გაგზავნა</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>საქაღალდეები</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;მუშაობის საქაღალდე</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;სისტემური დროებითი საქაღალდე</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;მიმდინარე</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;მითითებული:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>გამოიყენება ცვლადი მეხსიერების მოწყობილობებისთვის</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>მიუთითეთ მდებარეობა დროებითი არქივებისათვის.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>გამართვა</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>".." ელემენტის ჩვენება</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>ფაილთა ნამდვილი ხატულების ჩვენება</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>სისტემური მენიუს ჩვენება</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>კურსორი &amp;მთელ სტრიქონზე</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>ჩვენება &amp;ცხრილის სახით</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>ელემენტთა გახსნა ერთი წკაპით</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>მონიშნვის &amp;ალტერნატიული რეჟიმი</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>&amp;დიდი მეხსიერების ბლოკების გამოყენება</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>NanaZip-ის შესახებ</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip არის თავისუფლად გავრცელებადი პროგრამული უზრუნველყოფა.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>შეუძლებელია საჭირო ზომის მეხსიერების გამოყოფა</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>შეცდომები არ მოიძებნა</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>მონიშნულია {0} ობიექტი</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>ვერ მოხერხდა '{0}' საქაღალდეს შექმნა</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>ამ ტიპის არქივისათვის ცვლილების ოპერაცია ხელმიუწვდომელია.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>'{0}' ფაილის არქივად გახსნა ვერ მოხერხდა</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>'{0}' დაშიფრული არქივის გახსნა ვერ მოხერხდა. არასწორი პაროლი?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>არქივთა ამ სახეობის გახსნა შეუძლებელია</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>ფაილი '{0}' უკვე არსებობს</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>ფაილი '{0}' შეიცვალა.\nგნებავთ მისი არქივში განახლება?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>შეუძლებელია \n'{0}'-ის განახლება</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>შეუძლებელია რედაქტორის გაშვება.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>ფაილი შესაძლოა აღმოჩნდეს ვირუსი (სახელი შეიცავს ძალიან ბევრ თავმოყრილ ჰარს).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>შეუძლებელია გრძელ-სახელიანი საქაღალდიდან ქმედების შესრულება</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>უნდა აირჩიოთ ერთი ფაილი</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>უნდა აირჩიოთ ერთი ან მეტი ფაილი</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>მეტისმეტად ბევრი ელემენტი</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>მიმდინარეობს ამოღება</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>მიმდინარეობს შეკუმშვა</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>მიმდინარეობს შემოწმება</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>მიმდინარეობს გახსნა...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>მიმდინარეობს ამოკითხვა...</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>ამოღება</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>ა&amp;მოღება:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>მიუთითეთ ადგილი ამოსაღები ფაილებისათვის.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>მდებარეობა</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>სრული მდებარეობა</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>მდებარეობის გარეშე</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>ზედგადაწერა</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>ზედგადაწერის დასტური</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>ზედგადაწერა დასრურის გარეშე</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>არსებული ფაილების გამოტოვება</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>ავტო-გადარქმევა</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>არსებული ფაილების ავტო-გადარქმევა</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>ფაილის ზედგადაწერის დასტური</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>საქაღალდე უკვე შეიცავს დამუშავებულ ფაილს.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>გსურთ ჩაანაცვლოთ არსებული ფაილი</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>ახალი ფაილით?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} ბაიტი</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>ა&amp;ვტო-გადარქმევა</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>შეკუმშვის შეუთავსებადი მეთოდი '{0}'-თვის.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>მონაცემების შეცდომა '{0}'-ში. ფაილი დაზიანებულია.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC-ის შეცდომა '{0}'-ში. ფაილი დაზიანებულია.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>მონაცემების შეცდომა დაშიფრულ ფაილში '{0}'. არასწორი პაროლი?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC ჩაიშალა დაშიფრულ ფაილში '{0}'. არასწორი პაროლი?</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>პაროლის შეყვანა</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>შეიყვანეთ პაროლი:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>პაროლი ხელახლა:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>პაროლის &amp;ჩვენება</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>პაროლები არ დაემთხვა</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>პაროლად შეიყვანეთ მხოლოდ ლათინური ასოები, ციფრები და განსაკუთერებული სიმბოლოები (!, #, $, ...)</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>პაროლი მეტისმეტად გრძელია</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>პაროლი</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>გასული დრო:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>დარჩენილი დრო:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>ჯამური ზომა:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>სიჩქარე:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>დამუშავებული:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>შეკუმშვის დონე:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>შეცდომა:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>არქივები:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>არქივში ჩამატება</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;არქივი:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;განახლების რეჟიმი:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>არქივის &amp;ფორმატი:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>შეკუმშვის &amp;დონე:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>შეკუმშვის &amp;მეთოდი:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;ლექსიკონის ზომა:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;სიტყვის ზომა:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>უწყვეტი ბლოკის ზომა:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>CPU ნაკადების ოდენობა:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;პარამეტრები:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>დამატებითი</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>შეიქმნას SF&amp;X არქივი</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>გაზიარებული ფაილების შეკუმშვა</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>დაშიფრვა</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>დაშიფრვის მეთოდი:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>ფაილთა &amp;სახელების დაშიფრვა</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>მეხსიერება შეკუმშვისათვის:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>მეხსიერება ამოღებისათვის:</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>შეკუმშვის გარეშე</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>უსწრაფესი</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>სწრაფი</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>ჩვეულებრივი</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>მაღალი</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>უმაღლესი</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>ფაილთა დამატება და შეცვლა</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>ფაილთა განახლება და დამატება</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>ფაილთა განახლება</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>ფაილთა სინქრონიზება</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>დათვალიერება</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>ყველა ფაილი</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>წყვეტილი</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>უწყვეტი</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>ასლის აღება</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>გადატანა</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>ასლის მოთავსება:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>გადატანა:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>ასლის აღება...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>გადატანა...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>გადარქმევა...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>აირჩიეთ დანიშნულების საქაღალდე.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>ქმედება შუთავსებელია მიმდინარე საქაღალდესთან.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>ფაილის ან საქაღალდის გადარქმევის შეცდომა</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>ფაილის ასლის შექმნის დასტური</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>ნადმვილად გსურთ ფაილების არქივში ჩამატება</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>ფაილის წაშლის თანხმობა</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>საქაღალდის წაშლის თანხმობა</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>რამდენიმე ფაილის წაშლის თანხმობა</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>დარწმუნებული ხართ, რომ გინდათ წაშალოთ '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>დარწმუნებული ხართ, რომ გინდათ წაშალოთ '{0}' საქაღალდე და მთელი მისი შიგთავსი?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>დარწმუნებული ხართ, რომ გინდათ წაშალოთ {0} ელემენტები?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>იშლება...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>ფაილის ან საქაღალდის წაშლის შეცდომა</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>სისტემას არ შეუძლია გადაიტანოს სანაგვე ყუთში ფაილი მეტისმეტად გრძელი მისამართით.</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>საქაღალდის შექმნა</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>ფაილის შექმნა</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>საქაღალდის სახელი:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>ფაილის სახელი:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>ახალი საქაღალდე</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>ახალი ფაილი</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>შეცდომა საქაღალდის შექმნისას</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>შეცდომა ფაილის შექმნისას</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>კომენტარი</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;კომენტარი:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>მონიშვნა</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>მონიშვნის გაუქმება</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>ნიღაბი:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>თვისებები</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>საქაღალდეთა ისტორია</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>დიაგნოსტიკური შეტყობინება</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>შეტყობინება</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>კომპიუტერი</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>ქსელი</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>დოკუმენტები</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>სისტემა</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>დამატება</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>ამოღება</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>შემოწმება</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>ასლი</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>გადატანა</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>წაშლა</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>ცნობები</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>ფაილის დაყოფა</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;დაიყოფა:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>დაიყოს &amp;ტომებად, ზომით (ბაიტებში):</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>დაყოფა...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>დაყოფის დასტური</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>ნამდვილად გსურთ ფაილის დაყოფა {0} ნაწილად?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>ნაწილის ზომა უნდა იყოს საწყისი ფაილის ზომაზე ნაკლები</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>ნაწილის ზომა მიუღებელია</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>მითითებული ნაწილის ზომა: {0} ბაიტი.\nნამდვილად გსურთ ასეთი ზომის ნაწილებას დაყოთ ფაილი?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>ფაილების შეერთება</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;შეერთება:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>შეერთება...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>მონიშნეთ დაყოფილი ფაილის მხოლოდ პირველი ნაწილი</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>როგორც ჩანს, ფაილი არ წარმოადგენს დაყოფილი ფაილის ნაწილს</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>ვერ მოიზებნა დაყოფილი ფაილის ერთზე მეტი ნაწილი</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>საკონტროლო ჯამის დათვლა...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>საკონტრლო ჯამის შესახებ</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>CRC ჯამი მონაცემთათვის:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>CRC ჯამი სახელთა და მონაცემთათვის:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>წარმადობის შემოწმება</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>გამოყენებული მეხსიერება:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>შეკუმშვა</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>გაშლა</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>შეფასება</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>საერთო შეფასება</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>მიმდინარე</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>შემაჯამებელი</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>CPU დატვირთვა</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>შეფას./დატვირთვა</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>გატარება:</value>
+  </data>
+</root>
