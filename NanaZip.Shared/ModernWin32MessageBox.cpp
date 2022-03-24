@@ -21,7 +21,19 @@ EXTERN_C int WINAPI ModernMessageBoxW(
 {
     if (uType != (uType & (MB_ICONMASK | MB_TYPEMASK)))
     {
-        return ::MessageBoxW(hWnd, lpText, lpCaption, uType);
+        static decltype(MessageBoxW)* volatile pMessageBoxW =
+            reinterpret_cast<decltype(MessageBoxW)*>(::GetProcAddress(
+                ::GetModuleHandleW(L"user32.dll"),
+                "MessageBoxW"));
+        if (pMessageBoxW)
+        {
+            return pMessageBoxW(hWnd, lpText, lpCaption, uType);
+        }
+        else
+        {
+            ::SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+            return 0;
+        }
     }
 
     TASKDIALOGCONFIG TaskDialogConfig = { 0 };
