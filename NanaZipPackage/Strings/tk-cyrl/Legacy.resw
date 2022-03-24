@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Goýbolsun et</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Howwa</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Ýok</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>Ýa&amp;p</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Kömek al</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Dowam et</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Sözlük</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Tip</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Anti</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Usul/Tär</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>Hojaýyn OS</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>Faýl Sistema</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>Ulanyjy</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Topar</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Bölüm</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Bellik</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Pozitsiýa</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Ýoluň Öňady/Pristawkasy</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Bukjalar</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Faýllar</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Wersiýa</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1034" xml:space="preserve">
     <value>Tom</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1035" xml:space="preserve">
     <value>Köp Tomly</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1036" xml:space="preserve">
     <value>Offset (Ýeri doldurylan) </value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1037" xml:space="preserve">
     <value>Baglar</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1038" xml:space="preserve">
     <value>Bölümler</value>
   </data>
-  <data name="Resource1038" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>Tomlar</value>
   </data>
-  <data name="Resource1039" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-tike</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>Prosesor</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Fiziki Göwrüm</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Faýl başlygy Göwrümi</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Barlag-jemi</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Harakteristikalar</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Haýaly Salgy</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Gysga Ad</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Dorediji porgramma</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Sektor Göwrümi</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Metod Görnüşi</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Simwolik Link</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Ýalňyş</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Toplam Göwrüm</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Boş Ýer</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Hoşa Göwrüm</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Etiketka</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Lokal Ady</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Üpjünçi</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>NT Howpsuzlyk</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
+  <data name="Resource1063" xml:space="preserve">
     <value>Çalyşan Akym</value>
   </data>
-  <data name="Resource1062" xml:space="preserve">
+  <data name="Resource1064" xml:space="preserve">
     <value>Aux</value>
   </data>
-  <data name="Resource1063" xml:space="preserve">
+  <data name="Resource1065" xml:space="preserve">
     <value>Öçürilen</value>
   </data>
-  <data name="Resource1064" xml:space="preserve">
+  <data name="Resource1066" xml:space="preserve">
     <value>Agaçmy</value>
   </data>
-  <data name="Resource1065" xml:space="preserve">
+  <data name="Resource1069" xml:space="preserve">
     <value>Ýalňyşlygyň Görnuşi</value>
   </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>Ýalňyşlar</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Ýalňyşlar</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Duýduryşlar</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Duýduryş</value>
-  </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Akymlar</value>
+    <value>Ýalňyşlar</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Akymlary Çalyş</value>
+    <value>Ýalňyşlar</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Çalyşan Akymlaryň Göwrümi</value>
+    <value>Duýduryşlar</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Haýaly Göwrüm</value>
+    <value>Duýduryş</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Giňeldilen Göwrüm</value>
+    <value>Akymlar</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Toplam Fiziki Göwrüm</value>
+    <value>Akymlary Çalyş</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Tom Indeksi</value>
+    <value>Çalyşan Akymlaryň Göwrümi</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Tabyn Görnüş</value>
+    <value>Haýaly Göwrüm</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Gysga Bellik</value>
+    <value>Giňeldilen Göwrüm</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Kod Sahypasy</value>
+    <value>Toplam Fiziki Göwrüm</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Guýruk Ölçegi</value>
+    <value>Tom Indeksi</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Gömülen Omça Göwrümi</value>
+    <value>Tabyn Görnüş</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Bag</value>
+    <value>Gysga Bellik</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Kod Sahypasy</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Guýruk Ölçegi</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Gömülen Omça Göwrümi</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Bag</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>Gönimel Bag</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iDüwin</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Diňe Okalýan</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Tassyklanmadyk arhiw başlangyjy</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Goldanmaýan funksiýa</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

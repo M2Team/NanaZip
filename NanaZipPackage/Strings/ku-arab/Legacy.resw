@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>پاشگەزبوونەوە</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;بەڵێ</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;نەخێر</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;داخستن</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>یارمەتی</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;بەردەوامبوون</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -156,13 +156,13 @@
   <data name="Resource553" xml:space="preserve">
     <value>ژماردنی checksum</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>دروستکردنی بوخچە</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>دروستکردنی پەڕگە</value>
   </data>
-  <data name="Resource556" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>دەر&amp;چوون</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -363,49 +363,49 @@
   <data name="Resource1039" xml:space="preserve">
     <value>قەبارەکان</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>٦٤-بت</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>قەبارەی فیزیکی</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>قەبارەی سەر</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>کۆپشکنین</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>تایبەتمەندی</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>ناونیشانی ڕاستی</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>هەڵە</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>سەرجەمی قەبارە</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>بۆشایی بەتاڵ</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>قەبارەی کۆمەڵەکە</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>نیشان</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>ناوی ناوخۆیی</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>دابینکەر</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -510,10 +510,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>پیشاندانی هێڵە &amp;grid ـەکان</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>جۆری دیاریکردنی &amp;جێگرەوە/ ئەڵتەرناتیڤ</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>پەڕەی بیرگەی &amp;گەورە بەکارببە</value>
   </data>
   <data name="Resource2900" xml:space="preserve">

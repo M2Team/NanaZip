@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Anulare</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Da</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Nu</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Închide</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Ajutor</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Continuă</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -156,13 +156,13 @@
   <data name="Resource553" xml:space="preserve">
     <value>Calculează suma de verificare</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Crează director</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Crează fişier</value>
   </data>
-  <data name="Resource556" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>&amp;Ieşire</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -363,49 +363,49 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Volume</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bit</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Mărime fizică</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Mărimea antetelor</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Checksum</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Caracteristici</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Adresa virtuală</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Eroare</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Mărimea totală</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Spaţiu liber</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Mărimea grupului</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Etichetă</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Nume local</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Distribuitor</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -510,10 +510,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>Arată liniile de ghidare</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>Mod de selectare &amp;alternativă</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>Utilizează pagini &amp;mari de memorie</value>
   </data>
   <data name="Resource2900" xml:space="preserve">

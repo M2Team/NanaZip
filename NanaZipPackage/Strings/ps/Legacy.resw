@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>بندول</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>هو&amp;</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>نه&amp;</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>بندول&amp;</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>مرسته</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>پرمختلل&amp;</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -156,13 +156,13 @@
   <data name="Resource553" xml:space="preserve">
     <value>چېکسم شمېرل</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>پوښۍ جوړول</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>دوتنه جوړول</value>
   </data>
-  <data name="Resource556" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>و&amp;تون</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -363,25 +363,25 @@
   <data name="Resource1039" xml:space="preserve">
     <value>ډکونونه</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>تېروتنه</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>بشپړ کچ</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>پاتې تشه</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>ځومبک کچ</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>نښکه</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>ځایي نوم</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>برابروونى</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -486,10 +486,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>کرښې ښودل</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>انډوليز ټاکنې اکر&amp;</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>لوی ياد مخونه کارول&amp;</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
@@ -498,34 +498,34 @@
   <data name="Resource2901" xml:space="preserve">
     <value>.دا يو وړيا ساوتری دی. خو، په نومکښلو سره د ساوتري د پرمختګ ملاتړ کولی شئ</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>هېڅ تېروتنه نشته</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>ټاکل شوي څيزونه {0}</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>پوښۍ جوړولی نه شي '{0}'</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>.اوسمهاله چلښتونه دې ارشيو لپاره منلي نه دي</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3005" xml:space="preserve">
     <value>'{0}' دوتنه لکه د ارشيو نه شي پرانيستلی</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3006" xml:space="preserve">
     <value>کوډييز ارشيو پرانيستلی نه شي '{0}'. ناسمه تېرنويې؟</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>.'{0}' دوتنه کښې بدلون راغلی\nپه ارشيو کښې يې اوسمهالول غواړئ؟</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>'{0}'\nدوتنه اوسمهالولی نه شي</value>
   </data>
-  <data name="Resource3008" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>سمونګر پېلولی نه شي</value>
   </data>
-  <data name="Resource3009" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>ډېر زيات توکي</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -876,7 +876,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>جال</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>غونډال</value>
   </data>
   <data name="Resource7200" xml:space="preserve">

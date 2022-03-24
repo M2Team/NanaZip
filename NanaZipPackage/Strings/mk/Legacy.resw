@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Откажи</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Да</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Не</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Затвори</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Помош</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>П&amp;родолжи</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -153,13 +153,13 @@
   <data name="Resource552" xml:space="preserve">
     <value>К&amp;оментар</value>
   </data>
-  <data name="Resource553" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Креирај Директориум</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Креирај Датотека</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>&amp;Излези</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -198,22 +198,22 @@
   <data name="Resource730" xml:space="preserve">
     <value>Неподредени</value>
   </data>
-  <data name="Resource731" xml:space="preserve">
+  <data name="Resource732" xml:space="preserve">
     <value>&amp;2 Панели</value>
   </data>
-  <data name="Resource732" xml:space="preserve">
+  <data name="Resource733" xml:space="preserve">
     <value>&amp;Алатници</value>
   </data>
-  <data name="Resource733" xml:space="preserve">
+  <data name="Resource734" xml:space="preserve">
     <value>Отвори го основниот директориум</value>
   </data>
-  <data name="Resource734" xml:space="preserve">
+  <data name="Resource735" xml:space="preserve">
     <value>Едно Ниво Нагоре</value>
   </data>
-  <data name="Resource735" xml:space="preserve">
+  <data name="Resource736" xml:space="preserve">
     <value>Историја на Директориумите...</value>
   </data>
-  <data name="Resource736" xml:space="preserve">
+  <data name="Resource737" xml:space="preserve">
     <value>&amp;Обнови</value>
   </data>
   <data name="Resource750" xml:space="preserve">
@@ -327,25 +327,25 @@
   <data name="Resource1029" xml:space="preserve">
     <value>Позиција</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Грешка</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Вкупна Големина</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Слободен Простор</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Голем на Кластерите</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Етикета</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Име</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Провајдер</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -456,28 +456,28 @@
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip е бесплатен архивер. Меѓутоа, вие можете да дадете поддршка на понатамошното развивање на NanaZip со вашето  регистрирање.</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>Нема грешки</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>{0} објект(и) избрано</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>Не е можно креирање на директориумот '{0}'</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>Оваа операција не е поддржана за овој тип на архива.</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>Датотеката '{0}' е модифицирана.\nДали сакате да ја обновите во архивата?</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>Не е можно обновување на датотеката\n'{0}'</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>Грешка при стартување на Едиторот.</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>Премногу објекти</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -561,10 +561,10 @@
   <data name="Resource3801" xml:space="preserve">
     <value>Внеси лозинка:</value>
   </data>
-  <data name="Resource3802" xml:space="preserve">
+  <data name="Resource3803" xml:space="preserve">
     <value>&amp;Прикажи ја лозинката</value>
   </data>
-  <data name="Resource3803" xml:space="preserve">
+  <data name="Resource3807" xml:space="preserve">
     <value>Лозинка</value>
   </data>
   <data name="Resource3900" xml:space="preserve">
@@ -579,7 +579,7 @@
   <data name="Resource3903" xml:space="preserve">
     <value>Брзина:</value>
   </data>
-  <data name="Resource3904" xml:space="preserve">
+  <data name="Resource3906" xml:space="preserve">
     <value>Грешки:</value>
   </data>
   <data name="Resource4000" xml:space="preserve">
@@ -606,22 +606,22 @@
   <data name="Resource4007" xml:space="preserve">
     <value>Големина на &amp;зборот:</value>
   </data>
-  <data name="Resource4008" xml:space="preserve">
+  <data name="Resource4010" xml:space="preserve">
     <value>&amp;Параметри:</value>
   </data>
-  <data name="Resource4009" xml:space="preserve">
+  <data name="Resource4011" xml:space="preserve">
     <value>Опции</value>
   </data>
-  <data name="Resource4010" xml:space="preserve">
+  <data name="Resource4012" xml:space="preserve">
     <value>Креирај SFX ар&amp;хива</value>
   </data>
-  <data name="Resource4011" xml:space="preserve">
+  <data name="Resource4016" xml:space="preserve">
     <value>&amp;Енкриптирај ги имињата</value>
   </data>
-  <data name="Resource4012" xml:space="preserve">
+  <data name="Resource4017" xml:space="preserve">
     <value>Искорист мемор за компрес:</value>
   </data>
-  <data name="Resource4013" xml:space="preserve">
+  <data name="Resource4018" xml:space="preserve">
     <value>Искорист мемор за декомпрес:</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
@@ -681,10 +681,10 @@
   <data name="Resource6006" xml:space="preserve">
     <value>Преименување...</value>
   </data>
-  <data name="Resource6007" xml:space="preserve">
+  <data name="Resource6008" xml:space="preserve">
     <value>Постапката не е поддржана.</value>
   </data>
-  <data name="Resource6008" xml:space="preserve">
+  <data name="Resource6009" xml:space="preserve">
     <value>Грешка при преименувањето на Датотеката или Директориумот</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
@@ -750,13 +750,13 @@
   <data name="Resource6404" xml:space="preserve">
     <value>Маскирај:</value>
   </data>
-  <data name="Resource6600" xml:space="preserve">
+  <data name="Resource6601" xml:space="preserve">
     <value>Историја на Директориумите</value>
   </data>
-  <data name="Resource6601" xml:space="preserve">
+  <data name="Resource6602" xml:space="preserve">
     <value>Дијагноза</value>
   </data>
-  <data name="Resource6602" xml:space="preserve">
+  <data name="Resource6603" xml:space="preserve">
     <value>Порака</value>
   </data>
   <data name="Resource7100" xml:space="preserve">
@@ -765,7 +765,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>Мрежа</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>Систем</value>
   </data>
   <data name="Resource7200" xml:space="preserve">
@@ -834,7 +834,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>Резултат</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>Поминато:</value>
   </data>
 </root>

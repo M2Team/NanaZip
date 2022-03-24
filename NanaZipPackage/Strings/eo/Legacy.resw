@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Nuligu</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Jes</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Ne</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Fermu</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Helpo</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Daŭrigu</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -156,13 +156,13 @@
   <data name="Resource553" xml:space="preserve">
     <value>Kalkulu kontrolsumon</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Kreu &amp;dosierujon</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Kre&amp;u dos&amp;ieron</value>
   </data>
-  <data name="Resource556" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>E&amp;liru</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -336,25 +336,25 @@
   <data name="Resource1030" xml:space="preserve">
     <value>Vojprefikso</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Eraro</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Kapacito</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Libera</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Faskogrando</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Marko</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Loka nomo</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Provizanto</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -459,10 +459,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>Montru &amp;kradliniojn</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>&amp;Alternativa markreĝimo</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>Uzu &amp;grandajn memorpaĝojn</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
@@ -471,28 +471,28 @@
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip estas senpaga programo. Tamen, vi povas subteni evoluadon de NanaZip per enregistriĝo.</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>Eraroj ne trovitaj</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>{0} objekto(j) markita(j)</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>Fiaskis krei dosierujon '{0}'</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>Ĝisdatigoperacioj ne estas subtenataj por ĉi-tiu arĥivo.</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>Dosiero '{0}' ŝanĝiĝis.\nĈu vi volas ĝistadigi ĝin enraĥive?</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>Fiaskis ĝisdatigi dosieron\n'{0}''</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>Fiaskis startigi redaktilon.</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>Troaj elementoj</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -579,10 +579,10 @@
   <data name="Resource3801" xml:space="preserve">
     <value>Enigu pasvorton:</value>
   </data>
-  <data name="Resource3802" xml:space="preserve">
+  <data name="Resource3803" xml:space="preserve">
     <value>&amp;Montru pasvorton</value>
   </data>
-  <data name="Resource3803" xml:space="preserve">
+  <data name="Resource3807" xml:space="preserve">
     <value>&amp;Pasvorto</value>
   </data>
   <data name="Resource3900" xml:space="preserve">
@@ -597,7 +597,7 @@
   <data name="Resource3903" xml:space="preserve">
     <value>Rapideco:</value>
   </data>
-  <data name="Resource3904" xml:space="preserve">
+  <data name="Resource3906" xml:space="preserve">
     <value>Eraroj:</value>
   </data>
   <data name="Resource4000" xml:space="preserve">
@@ -624,22 +624,22 @@
   <data name="Resource4007" xml:space="preserve">
     <value>Vo&amp;rtogrando:</value>
   </data>
-  <data name="Resource4008" xml:space="preserve">
+  <data name="Resource4010" xml:space="preserve">
     <value>&amp;Parametroj:</value>
   </data>
-  <data name="Resource4009" xml:space="preserve">
+  <data name="Resource4011" xml:space="preserve">
     <value>Agordoj</value>
   </data>
-  <data name="Resource4010" xml:space="preserve">
+  <data name="Resource4012" xml:space="preserve">
     <value>Kreu SF&amp;X-arĥivon</value>
   </data>
-  <data name="Resource4011" xml:space="preserve">
+  <data name="Resource4016" xml:space="preserve">
     <value>Ĉifru dosier&amp;nomojn</value>
   </data>
-  <data name="Resource4012" xml:space="preserve">
+  <data name="Resource4017" xml:space="preserve">
     <value>Memoruzo por densigo:</value>
   </data>
-  <data name="Resource4013" xml:space="preserve">
+  <data name="Resource4018" xml:space="preserve">
     <value>Memoruzo por maldensigo:</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
@@ -699,16 +699,16 @@
   <data name="Resource6006" xml:space="preserve">
     <value>Nomŝanĝo...</value>
   </data>
-  <data name="Resource6007" xml:space="preserve">
+  <data name="Resource6008" xml:space="preserve">
     <value>Operacio ne estas subtenata.</value>
   </data>
-  <data name="Resource6008" xml:space="preserve">
+  <data name="Resource6009" xml:space="preserve">
     <value>Eraro dum nomŝanĝo de dosiero aŭ dosierujo</value>
   </data>
-  <data name="Resource6009" xml:space="preserve">
+  <data name="Resource6010" xml:space="preserve">
     <value>Konfirmu dosierkopion</value>
   </data>
-  <data name="Resource6010" xml:space="preserve">
+  <data name="Resource6011" xml:space="preserve">
     <value>Ĉu vere kopii dosierojn enarĥiven</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
@@ -774,13 +774,13 @@
   <data name="Resource6404" xml:space="preserve">
     <value>Masko:</value>
   </data>
-  <data name="Resource6600" xml:space="preserve">
+  <data name="Resource6601" xml:space="preserve">
     <value>Dosierujhistorio</value>
   </data>
-  <data name="Resource6601" xml:space="preserve">
+  <data name="Resource6602" xml:space="preserve">
     <value>Diagnozaj mesaĝoj</value>
   </data>
-  <data name="Resource6602" xml:space="preserve">
+  <data name="Resource6603" xml:space="preserve">
     <value>Mesaĝo</value>
   </data>
   <data name="Resource7100" xml:space="preserve">
@@ -789,7 +789,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>Reto</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>Sistemo</value>
   </data>
   <data name="Resource7200" xml:space="preserve">
@@ -870,7 +870,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>Rezulta</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>Pasoj:</value>
   </data>
 </root>

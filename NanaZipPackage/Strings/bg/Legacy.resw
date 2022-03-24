@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Отказ</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Да</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Не</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Затваряне</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Помощ</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>Пр&amp;одължаване</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -156,13 +156,13 @@
   <data name="Resource553" xml:space="preserve">
     <value>Изчисляване на контролна сума</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Създаване на директория</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Създаване на файл</value>
   </data>
-  <data name="Resource556" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>Из&amp;ход</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -363,49 +363,49 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Томове</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-битов</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Физически размер</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Размер на заглавната част</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Контролна сума</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Характеристики</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Виртуален адрес</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Грешка</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Пълен размер</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Свободно пространство</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Размер на клъстер</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Етикет</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Локално име</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Доставчик</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -510,10 +510,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>Показване на помощни &amp;линии</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>&amp;Алтернативен режим на избор</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>Използване на &amp;големи страници от паметта</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
@@ -1032,7 +1032,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>Резултат</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>Успешно преминали:</value>
   </data>
 </root>

@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Prekliči</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Da</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Ne</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Zapri</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Po&amp;moč</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Nadaljuj</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Slovar</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Vrsta</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Anti</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Metoda</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>Gostiteljski OS</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>Datotečni sistem</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>Uporabnik</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Skupina</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Blok</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Opomba</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Položaj</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Predpona poti</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Map</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Datotek</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Različica</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1034" xml:space="preserve">
     <value>Nosilec</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1035" xml:space="preserve">
     <value>Več nosilcev</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1036" xml:space="preserve">
     <value>Odmik</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1037" xml:space="preserve">
     <value>Povezav</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1038" xml:space="preserve">
     <value>Blokov</value>
   </data>
-  <data name="Resource1038" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>Nosilcev</value>
   </data>
-  <data name="Resource1039" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bitni</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPE</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Fizična velikost</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Velikost glave</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Kontrolna vsota</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Značilnosti</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Navidezni naslov</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Kratko ime</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Ustvarjalec aplikacije</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Velikost sektorja</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Način</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Simbolna povezava</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Napaka</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Skupna velikost</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Prost prostor</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Velikost gruče</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Oznaka</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Lokalno ime</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Ponudnik</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>NT varnost</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
+  <data name="Resource1063" xml:space="preserve">
     <value>Nadomestni tok</value>
   </data>
-  <data name="Resource1062" xml:space="preserve">
+  <data name="Resource1064" xml:space="preserve">
     <value>Pomož.</value>
   </data>
-  <data name="Resource1063" xml:space="preserve">
+  <data name="Resource1065" xml:space="preserve">
     <value>Izbrisano</value>
   </data>
-  <data name="Resource1064" xml:space="preserve">
+  <data name="Resource1066" xml:space="preserve">
     <value>Je drevo</value>
   </data>
-  <data name="Resource1065" xml:space="preserve">
+  <data name="Resource1069" xml:space="preserve">
     <value>Vrsta napake</value>
   </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>Napake</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Napake</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Opozorila</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Opozorilo</value>
-  </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Tokovi</value>
+    <value>Napake</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Nadomestni tokovi</value>
+    <value>Napake</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Velikost nadomestnih tokov</value>
+    <value>Opozorila</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Navidezna velikost</value>
+    <value>Opozorilo</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Razpakirana velikost</value>
+    <value>Tokovi</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Skupna fizična velikost</value>
+    <value>Nadomestni tokovi</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Indeks nosilca</value>
+    <value>Velikost nadomestnih tokov</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Podvrsta</value>
+    <value>Navidezna velikost</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Kratek komentar</value>
+    <value>Razpakirana velikost</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Kodna stran</value>
+    <value>Skupna fizična velikost</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Velikost konca</value>
+    <value>Indeks nosilca</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Velikost vdelanega ostanka</value>
+    <value>Podvrsta</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Povezava</value>
+    <value>Kratek komentar</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Kodna stran</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Velikost konca</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Velikost vdelanega ostanka</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Povezava</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>Trdna povezava</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Samo-za-branje</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Nepotrjen začetek arhiva</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Nepodprta funkcija</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

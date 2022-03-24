@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Zrušiť</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Áno</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Nie</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Zavrieť</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Pomocník</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>Po&amp;kračovať</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -372,142 +372,142 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Zväzky</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bitov</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Fyzická veľkosť</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Veľkosť hlavičiek</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Kontrolný súčet</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Charakteristiky</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Virtuálna adresa</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Skrátený názov</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Aplikácia</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Veľkosť sektora</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Režim</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Symbolický odkaz</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Chyba</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Celková veľkosť</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Voľné miesto</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Veľkosť klastra</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Menovka</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Lokálny názov</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Prevádzkovateľ</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>Bezpečnosť NT</value>
   </data>
-  <data name="Resource1062" xml:space="preserve">
+  <data name="Resource1063" xml:space="preserve">
     <value>Alternatívny prúd</value>
   </data>
-  <data name="Resource1063" xml:space="preserve">
+  <data name="Resource1064" xml:space="preserve">
     <value>Aux</value>
   </data>
-  <data name="Resource1064" xml:space="preserve">
+  <data name="Resource1065" xml:space="preserve">
     <value>Vymazané</value>
   </data>
-  <data name="Resource1065" xml:space="preserve">
+  <data name="Resource1066" xml:space="preserve">
     <value>Je strom</value>
   </data>
-  <data name="Resource1066" xml:space="preserve">
+  <data name="Resource1069" xml:space="preserve">
     <value>Typ chyby</value>
   </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Chyby</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Chyby</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Varovania</value>
-  </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Varovanie</value>
+    <value>Chyby</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Prúdy</value>
+    <value>Chyby</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Alternatívne prúdy</value>
+    <value>Varovania</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Veľkosť alternatívneho prúdu</value>
+    <value>Varovanie</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Virtuálna veľkosť</value>
+    <value>Prúdy</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Veľkosť po rozbalení</value>
+    <value>Alternatívne prúdy</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Celková fyzická veľkosť</value>
+    <value>Veľkosť alternatívneho prúdu</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Index zväzku</value>
+    <value>Virtuálna veľkosť</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Podtyp</value>
+    <value>Veľkosť po rozbalení</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Krátky komentár</value>
+    <value>Celková fyzická veľkosť</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Kódová stránka</value>
+    <value>Index zväzku</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Veľkosť zakončenia</value>
+    <value>Podtyp</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Veľkosť vloženého ústrižku</value>
+    <value>Krátky komentár</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Kódová stránka</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Veľkosť zakončenia</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Veľkosť vloženého ústrižku</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
     <value>Odkaz</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1090" xml:space="preserve">
     <value>Pevný odkaz</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -813,7 +813,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Začiatok archívu nie je potvrdený</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Nepodporovaná funkcia</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

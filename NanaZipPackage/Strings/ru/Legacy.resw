@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Да</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Нет</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Закрыть</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Помощь</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Продолжить</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,193 +312,193 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Словарь</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Тип</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Анти</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Метод</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>Система</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>Файловая Система</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>Пользователь</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Группа</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Блок</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Комментарий</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Позиция</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Путь</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Папок</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Файлов</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Версия</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1034" xml:space="preserve">
     <value>Том</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1035" xml:space="preserve">
     <value>Многотомный</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1036" xml:space="preserve">
     <value>Смещение</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1037" xml:space="preserve">
     <value>Ссылок</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1038" xml:space="preserve">
     <value>Блоков</value>
   </data>
-  <data name="Resource1038" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>Томов</value>
   </data>
-  <data name="Resource1039" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>Процессор</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Физический Размер</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Размер Заголовков</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Контрольная Сумма</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Характеристики</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Виртуальный Адрес</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Короткое Имя</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Создатель</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Размер Сектора</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Режим</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Символьная Ссылка</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Ошибка</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Емкость</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Свободно</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Размер кластера</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Метка</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Локальное имя</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Провайдер</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>NT Безопасность</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1063" xml:space="preserve">
     <value>Альтернативный Поток</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1065" xml:space="preserve">
     <value>Удаленный</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1066" xml:space="preserve">
     <value>Дерево</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
+  <data name="Resource1069" xml:space="preserve">
     <value>Тип Ошибки</value>
   </data>
-  <data name="Resource1062" xml:space="preserve">
-    <value>Ошибки</value>
-  </data>
-  <data name="Resource1063" xml:space="preserve">
-    <value>Ошибки</value>
-  </data>
-  <data name="Resource1064" xml:space="preserve">
-    <value>Предупреждения</value>
-  </data>
-  <data name="Resource1065" xml:space="preserve">
-    <value>Предупреждение</value>
-  </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>Потоки</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Альтернативные Потоки</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Размер Альтернативных потоков</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Виртуальный Размер</value>
-  </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Распакованный Размер</value>
+    <value>Ошибки</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Общий Физический Размер</value>
+    <value>Ошибки</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Номер Тома</value>
+    <value>Предупреждения</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Подтип</value>
+    <value>Предупреждение</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Короткий Комментарий</value>
+    <value>Потоки</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Кодовая Страница</value>
+    <value>Альтернативные Потоки</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Размер Остатка</value>
+    <value>Размер Альтернативных потоков</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Размер Встроенного Блока</value>
+    <value>Виртуальный Размер</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Ссылка</value>
+    <value>Распакованный Размер</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Жесткая Ссылка</value>
+    <value>Общий Физический Размер</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>iNode</value>
+    <value>Номер Тома</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
+    <value>Подтип</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Короткий Комментарий</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Кодовая Страница</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Размер Остатка</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Размер Встроенного Блока</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
+    <value>Жесткая Ссылка</value>
+  </data>
+  <data name="Resource1091" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1093" xml:space="preserve">
     <value>Только для чтения</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -846,7 +846,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Неподтвержденное начало архива</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Неподдерживаемая функциональность </value>
   </data>
   <data name="Resource3800" xml:space="preserve">

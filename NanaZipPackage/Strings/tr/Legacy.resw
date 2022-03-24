@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>İptal</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Evet</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Hayır</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Kapat</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Yardım</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Devam</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Sözlük</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Tür</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Anti</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Yöntem</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>İşletim Sistemi</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>Dosya Sistemi</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>Kullanıcı</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Grup</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Blok</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Açıklama</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Konum</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Yol Ön Eki</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Klasörler</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Dosyalar</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Sürüm</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1034" xml:space="preserve">
     <value>Parça</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1035" xml:space="preserve">
     <value>Birden Çok Parça</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1036" xml:space="preserve">
     <value>Sapma</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1037" xml:space="preserve">
     <value>Bağlantılar</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1038" xml:space="preserve">
     <value>Blok Sayısı</value>
   </data>
-  <data name="Resource1038" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>Parça Sayısı</value>
   </data>
-  <data name="Resource1039" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bit</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>İşlemci</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Fiziksel Boyut</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Üst Bilgi Boyutu</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Sağlama</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Özellikler</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Sanal Adres</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>Kod</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Kısa Ad</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Oluşturan Uygulama</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Sektör Boyutu</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Kip</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Sembolik Bağlantı</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
-    <value>Hata</value>
-  </data>
-  <data name="Resource1054" xml:space="preserve">
-    <value>Toplam Boyut</value>
-  </data>
   <data name="Resource1055" xml:space="preserve">
-    <value>Boş Alan</value>
+    <value>Hata</value>
   </data>
   <data name="Resource1056" xml:space="preserve">
-    <value>Küme Boyutu</value>
+    <value>Toplam Boyut</value>
   </data>
   <data name="Resource1057" xml:space="preserve">
-    <value>Etiket</value>
+    <value>Boş Alan</value>
   </data>
   <data name="Resource1058" xml:space="preserve">
-    <value>Yerel Ad</value>
+    <value>Küme Boyutu</value>
   </data>
   <data name="Resource1059" xml:space="preserve">
-    <value>Sağlayıcı</value>
+    <value>Etiket</value>
   </data>
   <data name="Resource1060" xml:space="preserve">
-    <value>NT Dosya Güvenliği</value>
+    <value>Yerel Ad</value>
   </data>
   <data name="Resource1061" xml:space="preserve">
-    <value>Alternatif Veri Akışı</value>
+    <value>Sağlayıcı</value>
   </data>
   <data name="Resource1062" xml:space="preserve">
-    <value>Dış</value>
+    <value>NT Dosya Güvenliği</value>
   </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>Silinmiş</value>
+    <value>Alternatif Veri Akışı</value>
   </data>
   <data name="Resource1064" xml:space="preserve">
-    <value>Ağaç</value>
+    <value>Dış</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
-    <value>Hata Türü</value>
+    <value>Silinmiş</value>
   </data>
   <data name="Resource1066" xml:space="preserve">
-    <value>Hata</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Hata</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Uyarı</value>
+    <value>Ağaç</value>
   </data>
   <data name="Resource1069" xml:space="preserve">
-    <value>Uyarı</value>
+    <value>Hata Türü</value>
   </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Veri Akışları</value>
+    <value>Hata</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Alternatif Veri Akışları</value>
+    <value>Hata</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Alternatif Veri Akışları Boyutu</value>
+    <value>Uyarı</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Sanal Boyut</value>
+    <value>Uyarı</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Ayıklanmış Boyut</value>
+    <value>Veri Akışları</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Toplam Fiziksel Boyut</value>
+    <value>Alternatif Veri Akışları</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Parça Dizini</value>
+    <value>Alternatif Veri Akışları Boyutu</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Alt Tür</value>
+    <value>Sanal Boyut</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Kısa Açıklama</value>
+    <value>Ayıklanmış Boyut</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Kod Sayfası</value>
+    <value>Toplam Fiziksel Boyut</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Kuyruk Boyutu</value>
+    <value>Parça Dizini</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Genişletilmiş Kök Boyutu</value>
+    <value>Alt Tür</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Bağlantı</value>
+    <value>Kısa Açıklama</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Kod Sayfası</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Kuyruk Boyutu</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Genişletilmiş Kök Boyutu</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Bağlantı</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>Mutlak Bağlantı</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Salt Okunur</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Arşiv başlangıcı doğrulanamadı</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Özellik desteklenmiyor</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

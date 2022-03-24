@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Бекоркунӣ</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Бале</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Не</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Пӯшондан</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Ёрӣ</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Идомадиҳӣ</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,193 +312,193 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Луғат</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Намуди</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Анти</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
-    <value>Усул</value>
-  </data>
   <data name="Resource1022" xml:space="preserve">
-    <value>Система</value>
+    <value>Усул</value>
   </data>
   <data name="Resource1023" xml:space="preserve">
-    <value>Системаи файлӣ</value>
+    <value>Система</value>
   </data>
   <data name="Resource1024" xml:space="preserve">
-    <value>Корбар</value>
+    <value>Системаи файлӣ</value>
   </data>
   <data name="Resource1025" xml:space="preserve">
-    <value>Гурӯҳ</value>
+    <value>Корбар</value>
   </data>
   <data name="Resource1026" xml:space="preserve">
-    <value>Блок</value>
+    <value>Гурӯҳ</value>
   </data>
   <data name="Resource1027" xml:space="preserve">
-    <value>Шарҳ</value>
+    <value>Блок</value>
   </data>
   <data name="Resource1028" xml:space="preserve">
-    <value>Вазифа</value>
+    <value>Шарҳ</value>
   </data>
   <data name="Resource1029" xml:space="preserve">
-    <value>Роҳ</value>
+    <value>Вазифа</value>
   </data>
   <data name="Resource1030" xml:space="preserve">
-    <value>Ҷузвдонҳо</value>
+    <value>Роҳ</value>
   </data>
   <data name="Resource1031" xml:space="preserve">
-    <value>Файлҳо</value>
+    <value>Ҷузвдонҳо</value>
   </data>
   <data name="Resource1032" xml:space="preserve">
-    <value>Нусхаи</value>
+    <value>Файлҳо</value>
   </data>
   <data name="Resource1033" xml:space="preserve">
-    <value>Том</value>
+    <value>Нусхаи</value>
   </data>
   <data name="Resource1034" xml:space="preserve">
-    <value>Multivolume</value>
+    <value>Том</value>
   </data>
   <data name="Resource1035" xml:space="preserve">
-    <value>Хато</value>
+    <value>Multivolume</value>
   </data>
   <data name="Resource1036" xml:space="preserve">
-    <value>Истинодҳо</value>
+    <value>Хато</value>
   </data>
   <data name="Resource1037" xml:space="preserve">
-    <value>Блокҳо</value>
+    <value>Истинодҳо</value>
   </data>
   <data name="Resource1038" xml:space="preserve">
-    <value>Ҳаҷмҳо</value>
+    <value>Блокҳо</value>
   </data>
   <data name="Resource1039" xml:space="preserve">
-    <value>ВПМ - Воҳиди Пардозиши Марказӣ</value>
-  </data>
-  <data name="Resource1040" xml:space="preserve">
-    <value>Андозаи ҷисмонӣ</value>
-  </data>
-  <data name="Resource1041" xml:space="preserve">
-    <value>Андозаи сарлавҳа</value>
-  </data>
-  <data name="Resource1042" xml:space="preserve">
-    <value>Маблағро тафтиш кардан</value>
+    <value>Ҳаҷмҳо</value>
   </data>
   <data name="Resource1043" xml:space="preserve">
-    <value>Тафсилот</value>
+    <value>ВПМ - Воҳиди Пардозиши Марказӣ</value>
   </data>
   <data name="Resource1044" xml:space="preserve">
-    <value>Суроғаи виртуалӣ</value>
+    <value>Андозаи ҷисмонӣ</value>
   </data>
   <data name="Resource1045" xml:space="preserve">
-    <value>Номи кӯтоҳ</value>
+    <value>Андозаи сарлавҳа</value>
   </data>
   <data name="Resource1046" xml:space="preserve">
-    <value>Офаридгор</value>
+    <value>Маблағро тафтиш кардан</value>
   </data>
   <data name="Resource1047" xml:space="preserve">
-    <value>Андозаи бахш</value>
+    <value>Тафсилот</value>
   </data>
   <data name="Resource1048" xml:space="preserve">
-    <value>Усул</value>
-  </data>
-  <data name="Resource1049" xml:space="preserve">
-    <value>Истиноди рамзӣ</value>
+    <value>Суроғаи виртуалӣ</value>
   </data>
   <data name="Resource1050" xml:space="preserve">
-    <value>Хатогӣ</value>
+    <value>Номи кӯтоҳ</value>
   </data>
   <data name="Resource1051" xml:space="preserve">
-    <value>Иқтидор</value>
+    <value>Офаридгор</value>
   </data>
   <data name="Resource1052" xml:space="preserve">
-    <value>Озод</value>
+    <value>Андозаи бахш</value>
   </data>
   <data name="Resource1053" xml:space="preserve">
-    <value>Андозаи кластер</value>
+    <value>Усул</value>
   </data>
   <data name="Resource1054" xml:space="preserve">
-    <value>Нишон</value>
+    <value>Истиноди рамзӣ</value>
   </data>
   <data name="Resource1055" xml:space="preserve">
-    <value>Номи маҳаллӣ</value>
+    <value>Хатогӣ</value>
   </data>
   <data name="Resource1056" xml:space="preserve">
-    <value>ISP</value>
+    <value>Иқтидор</value>
   </data>
   <data name="Resource1057" xml:space="preserve">
-    <value>Амнияти NT</value>
+    <value>Озод</value>
   </data>
   <data name="Resource1058" xml:space="preserve">
-    <value>Ҷараёни алтернативӣ</value>
+    <value>Андозаи кластер</value>
   </data>
   <data name="Resource1059" xml:space="preserve">
-    <value>Дурдаст</value>
+    <value>Нишон</value>
   </data>
   <data name="Resource1060" xml:space="preserve">
-    <value>Вуд</value>
+    <value>Номи маҳаллӣ</value>
   </data>
   <data name="Resource1061" xml:space="preserve">
-    <value>Намуди хато</value>
+    <value>ISP</value>
   </data>
   <data name="Resource1062" xml:space="preserve">
-    <value>Хатогиҳо</value>
+    <value>Амнияти NT</value>
   </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>Хатогиҳо</value>
-  </data>
-  <data name="Resource1064" xml:space="preserve">
-    <value>Огоҳӣ</value>
+    <value>Ҷараёни алтернативӣ</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
-    <value>Огоҳӣ</value>
+    <value>Дурдаст</value>
   </data>
   <data name="Resource1066" xml:space="preserve">
-    <value>Ҷараёнҳо</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Ҷараёнҳои алтернативӣ</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Андозаи ҷараёнҳои алтернативӣ</value>
+    <value>Вуд</value>
   </data>
   <data name="Resource1069" xml:space="preserve">
-    <value>Андозаи виртуалӣ</value>
+    <value>Намуди хато</value>
   </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Андозаи қуттӣ</value>
+    <value>Хатогиҳо</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Андозаи умумии ҷисмонӣ</value>
+    <value>Хатогиҳо</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Рақами ҷилди</value>
+    <value>Огоҳӣ</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Навъи</value>
+    <value>Огоҳӣ</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Шарҳи кӯтоҳ</value>
+    <value>Ҷараёнҳо</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Саҳифаи Кодекс</value>
+    <value>Ҷараёнҳои алтернативӣ</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Андозаи боқимонда</value>
+    <value>Андозаи ҷараёнҳои алтернативӣ</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Андозаи воҳиди дохилӣ</value>
+    <value>Андозаи виртуалӣ</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Истинод</value>
+    <value>Андозаи қуттӣ</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Истиноди сахт</value>
+    <value>Андозаи умумии ҷисмонӣ</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>iNode</value>
+    <value>Рақами ҷилди</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
+    <value>Навъи</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Шарҳи кӯтоҳ</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Саҳифаи Кодекс</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Андозаи боқимонда</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Андозаи воҳиди дохилӣ</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Истинод</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
+    <value>Истиноди сахт</value>
+  </data>
+  <data name="Resource1091" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1093" xml:space="preserve">
     <value>Танҳо барои хондан</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -846,7 +846,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Оғози бойгонии тасдиқнашуда</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Фаъолияти дастгирнашаванда</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

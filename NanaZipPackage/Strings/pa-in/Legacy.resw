@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>ਰੱਦ ਕਰੋ</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>ਹਾਂ (&amp;Y)</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>ਨਹੀਂ (&amp;N)</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>ਬੰਦ ਕਰੋ (&amp;C)</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>ਮੱਦਦ</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>ਜਾਰੀ ਕਰੋ (&amp;C)</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -156,13 +156,13 @@
   <data name="Resource553" xml:space="preserve">
     <value>ਚੈਕਸੱਮ ਗਣਨਾ ਕਰੋ</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>ਫੋਲਡਰ ਬਣਾਓ</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>ਫਾਇਲ ਬਣਾਓ</value>
   </data>
-  <data name="Resource556" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>ਬਾਹਰ ਨਿਕਲੋ (&amp;x)</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -363,25 +363,25 @@
   <data name="Resource1039" xml:space="preserve">
     <value>ਵੋਲੁੱਮ</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>ਸਮੱਸਿਆ</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>ਕੁੱਲ ਸਾਈਜ਼</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>ਖ਼ਾਲੀ ਥਾਂ</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>ਕਲੱਸਟਰ ਸਾਈਜ਼</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>ਲੇਬਲ</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>ਸਥਾਨਕ ਨਾਂ</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>ਉਪਲੱਬਧ ਕਰਤਾ</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -486,10 +486,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>ਗ੍ਰਿਡ ਲਾਈਨਾਂ ਵਿਖਾਓ (&amp;g)</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>ਵਿਕਲਪਕ ਚੁਣਾਓ ਢੰਗ (&amp;A)</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>ਵੱਡੇ ਮੈਮੋਰੀ ਪੇਜ ਵਰਤੋ (&amp;l)</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
@@ -498,34 +498,34 @@
   <data name="Resource2901" xml:space="preserve">
     <value>7-ਜ਼ਿੱਪ ਇੱਕ ਮੁਫ਼ਤ ਸਾਫ਼ਟਵੇਅਰ ਹੈ। ਪਰ ਫੇਰ ਵੀ, ਤੁਸੀਂ ਰਜਿਸਟਰ ਕਰਕੇ 7-ਜ਼ਿੱਪ ਦੇ ਵਿਕਾਸ ਵਿੱਚ ਸਮਰਥਨ ਪਾ ਸੱਕਦੇ ਹੋ।\n\nਪੰਜਾਬੀ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤਾ (Translation Done By):\nGurmeet Singh Kochar (ਗੁਰਮੀਤ ਸਿੰਘ ਕੋਚਰ)\n&lt;gomikochar@yahoo.com&gt;</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>ਕੋਈ ਸਮੱਸਿਆਵਾਂ ਨਹੀਂ ਹਨ</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>ਚੁਣੇ ਪਦਾਰਥ: {0}</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>'{0}' ਫੋਲਡਰ ਨਹੀਂ ਬਣਾਇਆ ਜਾ ਸੱਕਿਆ</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>ਅੱਪਡੇਟ ਔਪਰੇਸ਼ਨ ਇਸ ਆਕਾਈਵ ਲਈ ਸਹਿਯੋਗੀ ਨਹੀਂ ਹਨ।</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3005" xml:space="preserve">
     <value>'{0}' ਫਾਇਲ ਨੂੰ ਆਕਾਈਵ ਤਰ੍ਹਾਂ ਨਹੀਂ ਖੋਲਿਆ ਜਾ ਸੱਕਿਆ</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3006" xml:space="preserve">
     <value>'{0}' ਐਨਕ੍ਰਿਪਟਡ ਆਕਾਈਵ ਨਹੀਂ ਖੋਲਿਆ ਜਾ ਸੱਕਿਆ। ਗਲ਼ਤ ਪਾਸਵਰਡ?</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>'{0}' ਫਾਇਲ ਸੋਧ ਦਿੱਤੀ ਗਈ ਹੈ।\nਕੀ ਤੁਸੀਂ ਉਸਨੂੰ ਆਕਾਈਵ ਵਿੱਚ ਅੱਪਡੇਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>ਫਾਇਲ ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸੱਕੀ\n'{0}'</value>
   </data>
-  <data name="Resource3008" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>ਐਡੀਟਰ ਚਾਲੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸੱਕਿਆ।</value>
   </data>
-  <data name="Resource3009" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>ਬਹੁੱਤ ਸਾਰੀਆਂ ਆਈਟਮਾਂ</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -876,7 +876,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>ਨੈੱਟਵਰਕ</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>ਸਿਸਟਮ</value>
   </data>
   <data name="Resource7200" xml:space="preserve">

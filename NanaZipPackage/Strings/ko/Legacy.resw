@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>취소</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>예(&amp;Y)</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>아니오(&amp;N)</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>닫기(&amp;C)</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>도움말</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>계속(&amp;C)</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -375,145 +375,145 @@
   <data name="Resource1039" xml:space="preserve">
     <value>볼륨</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bit</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>물리적 크기</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>해더 크기</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>체크섬</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>특성</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>가상 주소</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>짧은 이름</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>생성 응용프로그램</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>섹터 크기</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>모드</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>심볼릭 연결</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
-    <value>오류</value>
-  </data>
   <data name="Resource1055" xml:space="preserve">
-    <value>전체 크기</value>
+    <value>오류</value>
   </data>
   <data name="Resource1056" xml:space="preserve">
-    <value>여유 공간</value>
+    <value>전체 크기</value>
   </data>
   <data name="Resource1057" xml:space="preserve">
-    <value>클러스터 크기</value>
+    <value>여유 공간</value>
   </data>
   <data name="Resource1058" xml:space="preserve">
-    <value>라벨</value>
+    <value>클러스터 크기</value>
   </data>
   <data name="Resource1059" xml:space="preserve">
-    <value>로컬 이름</value>
+    <value>라벨</value>
   </data>
   <data name="Resource1060" xml:space="preserve">
-    <value>제공자</value>
+    <value>로컬 이름</value>
   </data>
   <data name="Resource1061" xml:space="preserve">
-    <value>NT 보안</value>
+    <value>제공자</value>
   </data>
   <data name="Resource1062" xml:space="preserve">
-    <value>대체 데이터 스트림</value>
+    <value>NT 보안</value>
   </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>보조</value>
-  </data>
-  <data name="Resource1064" xml:space="preserve">
-    <value>삭제</value>
-  </data>
-  <data name="Resource1065" xml:space="preserve">
-    <value>Is Tree</value>
-  </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>오류 유형</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>오류</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>오류</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>경고</value>
-  </data>
-  <data name="Resource1070" xml:space="preserve">
-    <value>경고</value>
-  </data>
-  <data name="Resource1071" xml:space="preserve">
-    <value>스트림</value>
-  </data>
-  <data name="Resource1072" xml:space="preserve">
     <value>대체 데이터 스트림</value>
   </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>보조</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Is Tree</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>오류 유형</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>경고</value>
+  </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>대체 데이터 스트림 크기</value>
+    <value>경고</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>가상 크기</value>
+    <value>스트림</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>압축 해제 후 크기</value>
+    <value>대체 데이터 스트림</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>용량 실제 크기</value>
+    <value>대체 데이터 스트림 크기</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>볼륨 인덱스</value>
+    <value>가상 크기</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>보조형식</value>
+    <value>압축 해제 후 크기</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>주석</value>
+    <value>용량 실제 크기</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>코드 페이지</value>
+    <value>볼륨 인덱스</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>테일 크기</value>
+    <value>보조형식</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>임베디드 스텁 크기</value>
+    <value>주석</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>코드 페이지</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>테일 크기</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>임베디드 스텁 크기</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
     <value>연결</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1090" xml:space="preserve">
     <value>하드 연결</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1086" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>읽기 전용</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -861,7 +861,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>확인되지 않는 시작의 압축파일</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>지원하지 않는 기능</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

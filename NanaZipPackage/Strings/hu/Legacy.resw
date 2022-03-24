@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Mégsem</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Igen</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Nem</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Bezárás</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Súgó</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Folytatás</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -375,145 +375,145 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Kötetek</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bit</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Fizikai méret</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Fejlécek mérete</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Checksum</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Karakterisztika</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Virtuális cím</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Rövid név</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Alkalmazás készítője</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Szakasz mérete</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Mód</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Szimbolikus link</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Hiba</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Teljes méret</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Szabad terület</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Kluszterméret</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Címke</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Helyi név</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Szolgáltató</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>NT biztonság</value>
   </data>
-  <data name="Resource1062" xml:space="preserve">
+  <data name="Resource1063" xml:space="preserve">
     <value>Alternatív adatfolyam</value>
   </data>
-  <data name="Resource1063" xml:space="preserve">
+  <data name="Resource1064" xml:space="preserve">
     <value>Aux</value>
   </data>
-  <data name="Resource1064" xml:space="preserve">
+  <data name="Resource1065" xml:space="preserve">
     <value>Törölt</value>
   </data>
-  <data name="Resource1065" xml:space="preserve">
+  <data name="Resource1066" xml:space="preserve">
     <value>Is Tree</value>
   </data>
-  <data name="Resource1066" xml:space="preserve">
+  <data name="Resource1069" xml:space="preserve">
     <value>Hiba típusa</value>
   </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Hibák</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Hibák</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Figyelmeztetések</value>
-  </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Figyelem</value>
+    <value>Hibák</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Adatfolyamok</value>
+    <value>Hibák</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Alternatív adatfolyamok</value>
+    <value>Figyelmeztetések</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Alternatív adatfolyam mérete</value>
+    <value>Figyelem</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Virtuális méret</value>
+    <value>Adatfolyamok</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Kitömörített mérete</value>
+    <value>Alternatív adatfolyamok</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Teljes fizikai méret</value>
+    <value>Alternatív adatfolyam mérete</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Kötet index</value>
+    <value>Virtuális méret</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Altípus</value>
+    <value>Kitömörített mérete</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Rövid megjegyzés</value>
+    <value>Teljes fizikai méret</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Kódlap</value>
+    <value>Kötet index</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Kitöltő mérete</value>
+    <value>Altípus</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Beágyazott extra adat mérete</value>
+    <value>Rövid megjegyzés</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Kódlap</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Kitöltő mérete</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Beágyazott extra adat mérete</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
     <value>Link</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1090" xml:space="preserve">
     <value>Hard link</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1086" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Csak olvasható</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -861,7 +861,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Unconfirmed start of archive</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Nem támogatott funkció</value>
   </data>
   <data name="Resource3800" xml:space="preserve">
