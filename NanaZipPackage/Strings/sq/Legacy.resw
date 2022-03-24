@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Anulim</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Po</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Jo</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Mbyll</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Ndihmë</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Vazhdim</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -156,13 +156,13 @@
   <data name="Resource553" xml:space="preserve">
     <value>Llogarit shumën e verifikimit</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Krijo një dosje</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Krijo një skedar</value>
   </data>
-  <data name="Resource556" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>&amp;Dil</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -336,25 +336,25 @@
   <data name="Resource1030" xml:space="preserve">
     <value>Prefiksi i shtegut</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Gabim</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Madhësia totale</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Hapësira e lirë</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Madhësia e cluster-it</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Etiketa</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Emri lokal</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Kujdestari</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -459,10 +459,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>Shfaq &amp;vijat e rrjetit</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>Mënyrë alternative &amp;selektimi</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>Përdor &amp;faqe të mëdha të memories</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
@@ -471,28 +471,28 @@
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip është softuer falas. Megjithatë, ju mund të përkrahni në zhvillimin e NanaZip duke e regjistruar atë.</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>S'ka gabime</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>Selektuar {0} objekt(e)</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>S'mund të krijojë dosjen '{0}'</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>Operacionet e azhurnimit për këtë arkiv s'përkrahen.</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>Skedari '{0}' u modifikua.\nDoni ta azhurnoni atë edhe në arkiv?</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>S'mund të azhurnojë skedarin\n'{0}'</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>S'mund të hap redaktuesin.</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>Tepër shumë artikuj</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -579,10 +579,10 @@
   <data name="Resource3801" xml:space="preserve">
     <value>Fusni fjalëkalimin:</value>
   </data>
-  <data name="Resource3802" xml:space="preserve">
+  <data name="Resource3803" xml:space="preserve">
     <value>&amp;Trego fjalëkalimin</value>
   </data>
-  <data name="Resource3803" xml:space="preserve">
+  <data name="Resource3807" xml:space="preserve">
     <value>Fjalëkalimi</value>
   </data>
   <data name="Resource3900" xml:space="preserve">
@@ -597,7 +597,7 @@
   <data name="Resource3903" xml:space="preserve">
     <value>Shpejtësia:</value>
   </data>
-  <data name="Resource3904" xml:space="preserve">
+  <data name="Resource3906" xml:space="preserve">
     <value>Gabime:</value>
   </data>
   <data name="Resource4000" xml:space="preserve">
@@ -624,22 +624,22 @@
   <data name="Resource4007" xml:space="preserve">
     <value>Mad&amp;hësia e fjalës:</value>
   </data>
-  <data name="Resource4008" xml:space="preserve">
+  <data name="Resource4010" xml:space="preserve">
     <value>&amp;Parametrat:</value>
   </data>
-  <data name="Resource4009" xml:space="preserve">
+  <data name="Resource4011" xml:space="preserve">
     <value>Opsionet</value>
   </data>
-  <data name="Resource4010" xml:space="preserve">
+  <data name="Resource4012" xml:space="preserve">
     <value>Krijo një arkiv SF&amp;X</value>
   </data>
-  <data name="Resource4011" xml:space="preserve">
+  <data name="Resource4016" xml:space="preserve">
     <value>Shifro em&amp;rat e skedarëve</value>
   </data>
-  <data name="Resource4012" xml:space="preserve">
+  <data name="Resource4017" xml:space="preserve">
     <value>Shfrytëzimi i memo. për kompresimin:</value>
   </data>
-  <data name="Resource4013" xml:space="preserve">
+  <data name="Resource4018" xml:space="preserve">
     <value>Shfrytëzimi i memo. për dekompresimin:</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
@@ -699,16 +699,16 @@
   <data name="Resource6006" xml:space="preserve">
     <value>Duke riemërtuar...</value>
   </data>
-  <data name="Resource6007" xml:space="preserve">
+  <data name="Resource6008" xml:space="preserve">
     <value>Operacioni s'përkrahet.</value>
   </data>
-  <data name="Resource6008" xml:space="preserve">
+  <data name="Resource6009" xml:space="preserve">
     <value>Gabim gjatë riemërtimit të skedarit apo dosjes</value>
   </data>
-  <data name="Resource6009" xml:space="preserve">
+  <data name="Resource6010" xml:space="preserve">
     <value>Konfirmim për kopjimin e skedarëve</value>
   </data>
-  <data name="Resource6010" xml:space="preserve">
+  <data name="Resource6011" xml:space="preserve">
     <value>Jeni të sigurt që doni të kopjoni skedarë në arkiv</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
@@ -774,13 +774,13 @@
   <data name="Resource6404" xml:space="preserve">
     <value>Maska:</value>
   </data>
-  <data name="Resource6600" xml:space="preserve">
+  <data name="Resource6601" xml:space="preserve">
     <value>Historiku i dosjes</value>
   </data>
-  <data name="Resource6601" xml:space="preserve">
+  <data name="Resource6602" xml:space="preserve">
     <value>Mesazhe diagnostikues</value>
   </data>
-  <data name="Resource6602" xml:space="preserve">
+  <data name="Resource6603" xml:space="preserve">
     <value>Mesazhi</value>
   </data>
   <data name="Resource7100" xml:space="preserve">
@@ -789,7 +789,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>Rrejti</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>Sistemi</value>
   </data>
   <data name="Resource7200" xml:space="preserve">
@@ -870,7 +870,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>Rezultati</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>Kalime:</value>
   </data>
 </root>

@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Loobu</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Jah</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Ei</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Sulge</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Abi</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Jätka</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -366,67 +366,67 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Köiteid</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bitine</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-Endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>Protsessor</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Füüsiline maht</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Päiste maht</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Kontrollsumma</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Karakteristikud</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Virtuaalaadress</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Lühinimi</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Loomisrakendus</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Sektori maht</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Režiim</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Link</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Tõrge</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Kogumaht</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Vaba ruum</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Klastri suurus</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Silt</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Kohalik nimi</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Teenusepakkuja</value>
   </data>
   <data name="Resource2100" xml:space="preserve">

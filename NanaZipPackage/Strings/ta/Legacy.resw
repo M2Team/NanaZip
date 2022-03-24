@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>இரத்து</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>ஆம்</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>வேண்டாம்</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>மூடு</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>உதவி</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>தொடரவும்</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -141,19 +141,19 @@
   <data name="Resource548" xml:space="preserve">
     <value>அழி</value>
   </data>
-  <data name="Resource549" xml:space="preserve">
+  <data name="Resource551" xml:space="preserve">
     <value>தன்மைகள்</value>
   </data>
-  <data name="Resource550" xml:space="preserve">
+  <data name="Resource552" xml:space="preserve">
     <value>கருத்துரை</value>
   </data>
-  <data name="Resource551" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>கோப்பை உருவாக்கு</value>
   </data>
-  <data name="Resource552" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>கோப்பு உருவாக்கு</value>
   </data>
-  <data name="Resource553" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>வெளியேறு</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -192,22 +192,22 @@
   <data name="Resource730" xml:space="preserve">
     <value>வரிசைப்படுத்தப்படாதது</value>
   </data>
-  <data name="Resource731" xml:space="preserve">
+  <data name="Resource732" xml:space="preserve">
     <value>2 பலகங்கள்</value>
   </data>
-  <data name="Resource732" xml:space="preserve">
+  <data name="Resource733" xml:space="preserve">
     <value>கருவிப்பட்டைகள்</value>
   </data>
-  <data name="Resource733" xml:space="preserve">
+  <data name="Resource734" xml:space="preserve">
     <value>வேர் அடைவைத் திற</value>
   </data>
-  <data name="Resource734" xml:space="preserve">
+  <data name="Resource735" xml:space="preserve">
     <value>ஒரு படி மேல்</value>
   </data>
-  <data name="Resource735" xml:space="preserve">
+  <data name="Resource736" xml:space="preserve">
     <value>அடைவுகளின் வரலாறு...</value>
   </data>
-  <data name="Resource736" xml:space="preserve">
+  <data name="Resource737" xml:space="preserve">
     <value>புதுக்கல்</value>
   </data>
   <data name="Resource750" xml:space="preserve">
@@ -318,25 +318,25 @@
   <data name="Resource1028" xml:space="preserve">
     <value>குறிப்பு</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>தவறு</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>மொத்த அளவு</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>காளி இடம்</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>கொத்தணியின் அளவு</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>வில்லை</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>இடத்துரி பெயர்</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>வழங்குபவர்</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -441,28 +441,28 @@
   <data name="Resource2901" xml:space="preserve">
     <value>தமிழாக்கம் (c) 2004 தமிழா! குழு - www.thamizha.com/\n\n7-ஜிப் ஒரு பரிநிரல் ஆகும். ஆனால், நீங்கள் 7-ஜிப்பின் மேம்பாட்டை ஆதரிக்க விரும்பினால், பதிவுபெற்றுங்கள். பதிவுபெற்ற பயனராக, நீங்கள் தொழில்நுட்ப உதவியும் பெறலாம்.</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>தவறுகளேதுமில்லை</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>{0} பொருள் தெரிவானது</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>'{0}' அடைவை உருவாக்க இயலவில்லை</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>இக்காப்பகத்தில் புதுப்பிக்கும் செயல்களுக்கு ஆதரவில்லை.</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>'{0}' கோப்பு மாற்றப்பட்டது.\nஇதனை காப்பகத்தில் புதுப்பிக்க வேண்டுமா?</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>பின்வரும் கோப்பை புதுப்பிக்க இயலவில்லை\n'{0}'</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>பதிப்பாளனைத் துவக்க இயலவில்லை.</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>மிகவும் அதிகமான உருப்படிகள்</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -543,10 +543,10 @@
   <data name="Resource3801" xml:space="preserve">
     <value>கடவுச்சொல்லை உள்ளிடுக:</value>
   </data>
-  <data name="Resource3802" xml:space="preserve">
+  <data name="Resource3803" xml:space="preserve">
     <value>கடவுச்சொல்லை காட்டு</value>
   </data>
-  <data name="Resource3803" xml:space="preserve">
+  <data name="Resource3807" xml:space="preserve">
     <value>கடவுச்சொல்</value>
   </data>
   <data name="Resource3900" xml:space="preserve">
@@ -561,7 +561,7 @@
   <data name="Resource3903" xml:space="preserve">
     <value>வேகம்:</value>
   </data>
-  <data name="Resource3904" xml:space="preserve">
+  <data name="Resource3906" xml:space="preserve">
     <value>தவறுகள்:</value>
   </data>
   <data name="Resource4000" xml:space="preserve">
@@ -588,22 +588,22 @@
   <data name="Resource4007" xml:space="preserve">
     <value>வார்த்தை அளவு:</value>
   </data>
-  <data name="Resource4008" xml:space="preserve">
+  <data name="Resource4010" xml:space="preserve">
     <value>அளபுருகள்:</value>
   </data>
-  <data name="Resource4009" xml:space="preserve">
+  <data name="Resource4011" xml:space="preserve">
     <value>விருப்பத்தேர்வுகள்</value>
   </data>
-  <data name="Resource4010" xml:space="preserve">
+  <data name="Resource4012" xml:space="preserve">
     <value>SFX காப்பகம் உறுவாக்கு</value>
   </data>
-  <data name="Resource4011" xml:space="preserve">
+  <data name="Resource4016" xml:space="preserve">
     <value>பெயரை மறைக்குறியீடாக்கு</value>
   </data>
-  <data name="Resource4012" xml:space="preserve">
+  <data name="Resource4017" xml:space="preserve">
     <value>இறுக்க நினைவக பயன்பாடு:</value>
   </data>
-  <data name="Resource4013" xml:space="preserve">
+  <data name="Resource4018" xml:space="preserve">
     <value>பெருக்க நினைவக பயன்பாடு:</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
@@ -663,10 +663,10 @@
   <data name="Resource6006" xml:space="preserve">
     <value>பெயர்மாற்றப்படுகிறது...</value>
   </data>
-  <data name="Resource6007" xml:space="preserve">
+  <data name="Resource6008" xml:space="preserve">
     <value>அத்தகைய செயலுக்கு ஆதரவில்லை.</value>
   </data>
-  <data name="Resource6008" xml:space="preserve">
+  <data name="Resource6009" xml:space="preserve">
     <value>கோப்பையோ அடைவையோ பெயர்மாற்றும்போது தவறு</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
@@ -732,13 +732,13 @@
   <data name="Resource6404" xml:space="preserve">
     <value>முகமுடி:</value>
   </data>
-  <data name="Resource6600" xml:space="preserve">
+  <data name="Resource6601" xml:space="preserve">
     <value>அடைவுகளின் வரலாறு</value>
   </data>
-  <data name="Resource6601" xml:space="preserve">
+  <data name="Resource6602" xml:space="preserve">
     <value>அறிவழிச் செய்திகள்</value>
   </data>
-  <data name="Resource6602" xml:space="preserve">
+  <data name="Resource6603" xml:space="preserve">
     <value>செய்தி</value>
   </data>
   <data name="Resource7100" xml:space="preserve">
@@ -747,7 +747,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>பிணையம்</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>மண்டலம்</value>
   </data>
   <data name="Resource7200" xml:space="preserve">
@@ -771,7 +771,7 @@
   <data name="Resource7206" xml:space="preserve">
     <value>தகவல்</value>
   </data>
-  <data name="Resource7300" xml:space="preserve">
+  <data name="Resource7302" xml:space="preserve">
     <value>கனவளவுகளுக்கு, பைட்களுக்குப் பிரி:</value>
   </data>
   <data name="Resource7600" xml:space="preserve">
@@ -798,7 +798,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>முடிவில்</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>சரியானவை:</value>
   </data>
 </root>

@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Айнуу</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Ооба</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Жок</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Жабуу</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Жардам</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Улантуу</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -366,67 +366,67 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Томдор</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bit</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>Процессор</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Физикалык көлөм</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Баш аттардын көлөмү</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Текшерүү жыйынтык</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Мүнөздөмөлөр</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Виртуалдык дарек</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Кыска ат</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Жараткан</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Сектордун көлөмү</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Түзүлүш</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Сүрүштүрүү</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Ката</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Сыйдыргычтык</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Бош</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Размер кластера</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Белги</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Локалдык ат</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Провайдер</value>
   </data>
   <data name="Resource2100" xml:space="preserve">

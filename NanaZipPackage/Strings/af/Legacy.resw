@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Kanselleer</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Ja</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Nee</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>A&amp;fsluit</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Hulp</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Gaan voort</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -153,13 +153,13 @@
   <data name="Resource552" xml:space="preserve">
     <value>Komme&amp;ntaar</value>
   </data>
-  <data name="Resource553" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Maak gids</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Maak lêer</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>A&amp;fsluit</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -198,22 +198,22 @@
   <data name="Resource730" xml:space="preserve">
     <value>Ongesorteer</value>
   </data>
-  <data name="Resource731" xml:space="preserve">
+  <data name="Resource732" xml:space="preserve">
     <value>&amp;2 Panele</value>
   </data>
-  <data name="Resource732" xml:space="preserve">
+  <data name="Resource733" xml:space="preserve">
     <value>&amp;Nutsbalke</value>
   </data>
-  <data name="Resource733" xml:space="preserve">
+  <data name="Resource734" xml:space="preserve">
     <value>Maak wortelgids oop</value>
   </data>
-  <data name="Resource734" xml:space="preserve">
+  <data name="Resource735" xml:space="preserve">
     <value>Een vlak hoër</value>
   </data>
-  <data name="Resource735" xml:space="preserve">
+  <data name="Resource736" xml:space="preserve">
     <value>Gidse geskiedenis...</value>
   </data>
-  <data name="Resource736" xml:space="preserve">
+  <data name="Resource737" xml:space="preserve">
     <value>&amp;Verfris</value>
   </data>
   <data name="Resource750" xml:space="preserve">
@@ -327,25 +327,25 @@
   <data name="Resource1029" xml:space="preserve">
     <value>Posisie</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Fout</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Totale grootte</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Vrye ruimte</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Klustergrootte</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Etiket</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Plaaslike naam</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Verskaffer</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -456,28 +456,28 @@
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip is gratis programmatuur. Indien u egter so baie van NanaZip hou dat u die verdere ontwikkeling wil ondersteun, registreer dan asb. met 'n geldelike donasie aan die NanaZip Projek.</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>Daar is geen foute nie</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>{0} objekt(e) is geselekteer</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>Kan gids '{0}' nie maak nie</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>Bywerk-funksie word vir hierdie argief nie ondersteun nie.</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>Lêer '{0}' is gewysig.\nWil u dit bywerk in die argief?</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>Kan lêer\n'{0}' nie bywerk nie</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>Redigeerder nie aan die gang gesit word nie.</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>Te veel items</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -561,10 +561,10 @@
   <data name="Resource3801" xml:space="preserve">
     <value>Tik wagwoord in:</value>
   </data>
-  <data name="Resource3802" xml:space="preserve">
+  <data name="Resource3803" xml:space="preserve">
     <value>&amp;Wys wagwoord</value>
   </data>
-  <data name="Resource3803" xml:space="preserve">
+  <data name="Resource3807" xml:space="preserve">
     <value>&amp;Wagwoord</value>
   </data>
   <data name="Resource3900" xml:space="preserve">
@@ -579,7 +579,7 @@
   <data name="Resource3903" xml:space="preserve">
     <value>Spoed:</value>
   </data>
-  <data name="Resource3904" xml:space="preserve">
+  <data name="Resource3906" xml:space="preserve">
     <value>Foute:</value>
   </data>
   <data name="Resource4000" xml:space="preserve">
@@ -606,22 +606,22 @@
   <data name="Resource4007" xml:space="preserve">
     <value>&amp;Woordgrootte:</value>
   </data>
-  <data name="Resource4008" xml:space="preserve">
+  <data name="Resource4010" xml:space="preserve">
     <value>Pa&amp;rameters:</value>
   </data>
-  <data name="Resource4009" xml:space="preserve">
+  <data name="Resource4011" xml:space="preserve">
     <value>Opsies</value>
   </data>
-  <data name="Resource4010" xml:space="preserve">
+  <data name="Resource4012" xml:space="preserve">
     <value>Maak SF&amp;X argief</value>
   </data>
-  <data name="Resource4011" xml:space="preserve">
+  <data name="Resource4016" xml:space="preserve">
     <value>Enkripteer lêer&amp;name</value>
   </data>
-  <data name="Resource4012" xml:space="preserve">
+  <data name="Resource4017" xml:space="preserve">
     <value>Geheuegebruik vir saampersing:</value>
   </data>
-  <data name="Resource4013" xml:space="preserve">
+  <data name="Resource4018" xml:space="preserve">
     <value>Geheuegebruik vir uitpakking:</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
@@ -681,10 +681,10 @@
   <data name="Resource6006" xml:space="preserve">
     <value>Besig met hernoeming...</value>
   </data>
-  <data name="Resource6007" xml:space="preserve">
+  <data name="Resource6008" xml:space="preserve">
     <value>Bewerking word nie ondersteun nie.</value>
   </data>
-  <data name="Resource6008" xml:space="preserve">
+  <data name="Resource6009" xml:space="preserve">
     <value>Fout by hernoeming van lêer of gids</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
@@ -735,22 +735,22 @@
   <data name="Resource6307" xml:space="preserve">
     <value>Fout by maak van nuwe lêer</value>
   </data>
-  <data name="Resource6400" xml:space="preserve">
+  <data name="Resource6402" xml:space="preserve">
     <value>Selekteer</value>
   </data>
-  <data name="Resource6401" xml:space="preserve">
+  <data name="Resource6403" xml:space="preserve">
     <value>Deselekteer</value>
   </data>
-  <data name="Resource6402" xml:space="preserve">
+  <data name="Resource6404" xml:space="preserve">
     <value>Masker:</value>
   </data>
-  <data name="Resource6600" xml:space="preserve">
+  <data name="Resource6601" xml:space="preserve">
     <value>Gidse-geskiedenis</value>
   </data>
-  <data name="Resource6601" xml:space="preserve">
+  <data name="Resource6602" xml:space="preserve">
     <value>Diagnostiese boodskappe</value>
   </data>
-  <data name="Resource6602" xml:space="preserve">
+  <data name="Resource6603" xml:space="preserve">
     <value>Boodskap</value>
   </data>
   <data name="Resource7100" xml:space="preserve">
@@ -759,7 +759,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>Network</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>Stelsel</value>
   </data>
   <data name="Resource7200" xml:space="preserve">
@@ -828,7 +828,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>Resultaat</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>Lopies:</value>
   </data>
 </root>

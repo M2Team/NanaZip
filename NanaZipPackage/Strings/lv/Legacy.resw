@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>&amp;Atcelt</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Jā</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Nē</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>Aiz&amp;vērt</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>&amp;Rokasgrāmata</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Turpināt</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -153,13 +153,13 @@
   <data name="Resource552" xml:space="preserve">
     <value>&amp;Piezīmes</value>
   </data>
-  <data name="Resource553" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Izveidot &amp;mapi</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Izveidot &amp;failu</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>&amp;Beigt</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -198,22 +198,22 @@
   <data name="Resource730" xml:space="preserve">
     <value>&amp;Nešķirot</value>
   </data>
-  <data name="Resource731" xml:space="preserve">
+  <data name="Resource732" xml:space="preserve">
     <value>&amp;2 paneļi</value>
   </data>
-  <data name="Resource732" xml:space="preserve">
+  <data name="Resource733" xml:space="preserve">
     <value>&amp;Rīku joslas</value>
   </data>
-  <data name="Resource733" xml:space="preserve">
+  <data name="Resource734" xml:space="preserve">
     <value>&amp;Atvērt saknes mapi</value>
   </data>
-  <data name="Resource734" xml:space="preserve">
+  <data name="Resource735" xml:space="preserve">
     <value>Līmeni &amp;uz augšu</value>
   </data>
-  <data name="Resource735" xml:space="preserve">
+  <data name="Resource736" xml:space="preserve">
     <value>Mapju &amp;vēsture...</value>
   </data>
-  <data name="Resource736" xml:space="preserve">
+  <data name="Resource737" xml:space="preserve">
     <value>&amp;Pārlasīt</value>
   </data>
   <data name="Resource750" xml:space="preserve">
@@ -327,25 +327,25 @@
   <data name="Resource1029" xml:space="preserve">
     <value>Pozīcija</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Kļūda</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Tilpums</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Brīvā vieta</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Klāstera lielums</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Nosaukums</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Lokālais nosaukums</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Provaiders</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -456,28 +456,28 @@
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip ir bezmaksas programma, tomēr, reģistrējoties jūs varat NanaZip izstrādāšanu atbalstīt.</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>Kļūdu nav.</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>Iezīmēts(i) {0} objekts(i)</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>Mapi '{0}' neizdevās izveidot.</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>Šis arhīvs neatbalsta pārveidošanu.</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>Fails '{0}' ir pārveidots.\nVai vēlaties to atjaunināt arī arhīvā?</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>Failu nav iespējams uzlabot\n'{0}'</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>Nav iespējams palaist labošanas programmu.</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>Par daudz vienību.</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -561,10 +561,10 @@
   <data name="Resource3801" xml:space="preserve">
     <value>Ievadiet paroli:</value>
   </data>
-  <data name="Resource3802" xml:space="preserve">
+  <data name="Resource3803" xml:space="preserve">
     <value>Par&amp;ole redzama</value>
   </data>
-  <data name="Resource3803" xml:space="preserve">
+  <data name="Resource3807" xml:space="preserve">
     <value>&amp;Parole</value>
   </data>
   <data name="Resource3900" xml:space="preserve">
@@ -579,7 +579,7 @@
   <data name="Resource3903" xml:space="preserve">
     <value>Ātrums:</value>
   </data>
-  <data name="Resource3904" xml:space="preserve">
+  <data name="Resource3906" xml:space="preserve">
     <value>Kļūdas:</value>
   </data>
   <data name="Resource4000" xml:space="preserve">
@@ -606,22 +606,22 @@
   <data name="Resource4007" xml:space="preserve">
     <value>Vār&amp;da lielums:</value>
   </data>
-  <data name="Resource4008" xml:space="preserve">
+  <data name="Resource4010" xml:space="preserve">
     <value>Parame&amp;tri:</value>
   </data>
-  <data name="Resource4009" xml:space="preserve">
+  <data name="Resource4011" xml:space="preserve">
     <value>&amp;Uzstādījumi</value>
   </data>
-  <data name="Resource4010" xml:space="preserve">
+  <data name="Resource4012" xml:space="preserve">
     <value>Izveidot SF&amp;X arhīvu</value>
   </data>
-  <data name="Resource4011" xml:space="preserve">
+  <data name="Resource4016" xml:space="preserve">
     <value>Šifrēt failu &amp;nosaukumus</value>
   </data>
-  <data name="Resource4012" xml:space="preserve">
+  <data name="Resource4017" xml:space="preserve">
     <value>Atmiņa arhivēšanai:</value>
   </data>
-  <data name="Resource4013" xml:space="preserve">
+  <data name="Resource4018" xml:space="preserve">
     <value>Atmiņa atarhivēšanai:</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
@@ -681,10 +681,10 @@
   <data name="Resource6006" xml:space="preserve">
     <value>Pārdēvēšana...</value>
   </data>
-  <data name="Resource6007" xml:space="preserve">
+  <data name="Resource6008" xml:space="preserve">
     <value>Darbība nav atbalstīta.</value>
   </data>
-  <data name="Resource6008" xml:space="preserve">
+  <data name="Resource6009" xml:space="preserve">
     <value>Faila vai mapes pārdēvēšanas kļūda</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
@@ -750,13 +750,13 @@
   <data name="Resource6404" xml:space="preserve">
     <value>Šablons:</value>
   </data>
-  <data name="Resource6600" xml:space="preserve">
+  <data name="Resource6601" xml:space="preserve">
     <value>Mapju vēsture</value>
   </data>
-  <data name="Resource6601" xml:space="preserve">
+  <data name="Resource6602" xml:space="preserve">
     <value>Diagnostikas paziņojumi</value>
   </data>
-  <data name="Resource6602" xml:space="preserve">
+  <data name="Resource6603" xml:space="preserve">
     <value>Paziņojums</value>
   </data>
   <data name="Resource7100" xml:space="preserve">
@@ -765,7 +765,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>Tīkls</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>Sistēma</value>
   </data>
   <data name="Resource7200" xml:space="preserve">
@@ -834,7 +834,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>Rezultējošais</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>Izdošanās:</value>
   </data>
 </root>

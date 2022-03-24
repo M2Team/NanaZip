@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Откажи</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>Да</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>Не</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>Затвори</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Помоћ</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>Настави</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -366,67 +366,67 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Волумени</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-бит</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>Процесор</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Физичка величина</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Величина заглавља</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Провера резултата</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Карактеристике</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Виртуелна адреса</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ИД</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Кратко име</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Креатор апликације</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Величина сектора</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Начин</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Линк</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Грешка</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Укупни капацитет</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Слободни простор</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Величинa cluster-а</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Назив</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Локално име</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Провајдер</value>
   </data>
   <data name="Resource2100" xml:space="preserve">

@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>E&amp;zeztatu</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Bai</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Ez</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>It&amp;xi</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>&amp;Laguntza</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Jarraitu</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Hiztegia</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Mota</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Anti</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Metodoa</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>Hostalari SE</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>Agiri Sistema</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>Erabiltzailea</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Taldea</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Blokea</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Aipamena</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Kokapena</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Helburu Aurrizkia</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Agiritegiak</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Agiriak</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Bertsioa</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1034" xml:space="preserve">
     <value>Bolumena</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1035" xml:space="preserve">
     <value>Bolumen-anitz</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1036" xml:space="preserve">
     <value>Oreka</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1037" xml:space="preserve">
     <value>Loturak</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1038" xml:space="preserve">
     <value>Blokeak</value>
   </data>
-  <data name="Resource1038" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>Bolumenak</value>
   </data>
-  <data name="Resource1039" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bit</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Neurri Fisikoa</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Idazburu Neurria</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Egiaztapen-batura</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Ezaugarriak</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Helbide Birtuala</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID-a</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Izen Laburra</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Aplikazio Sortzailea</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Sektore Neurria</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Modua</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Lotura Sinbolikoa</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Akatsa</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Neurria Guztira</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Toki Askea</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Kluster Neurria</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Etiketa</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Tokiko Izena</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Hornitzailea</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>NT Segurtasuna</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
+  <data name="Resource1063" xml:space="preserve">
     <value>Aldikatu Jarioa</value>
   </data>
-  <data name="Resource1062" xml:space="preserve">
+  <data name="Resource1064" xml:space="preserve">
     <value>Aux</value>
   </data>
-  <data name="Resource1063" xml:space="preserve">
+  <data name="Resource1065" xml:space="preserve">
     <value>Ezabatuta</value>
   </data>
-  <data name="Resource1064" xml:space="preserve">
+  <data name="Resource1066" xml:space="preserve">
     <value>Zuhaitza da</value>
   </data>
-  <data name="Resource1065" xml:space="preserve">
+  <data name="Resource1069" xml:space="preserve">
     <value>Akats Mota</value>
   </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>Akatsak</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Akatsak</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Ohartarazpenak</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Ohartarazpena</value>
-  </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Jarioak</value>
+    <value>Akatsak</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Aldikatu Jarioak</value>
+    <value>Akatsak</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Aldikatu Jario Neurriak</value>
+    <value>Ohartarazpenak</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Neurri Birtuala</value>
+    <value>Ohartarazpena</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Despaketatu Neurria</value>
+    <value>Jarioak</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Neurri Fisikoa Guztira</value>
+    <value>Aldikatu Jarioak</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Bolumen Aurkibidea</value>
+    <value>Aldikatu Jario Neurriak</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>AzpiMota</value>
+    <value>Neurri Birtuala</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Aipamen Labura</value>
+    <value>Despaketatu Neurria</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Kode Orrialdea</value>
+    <value>Neurri Fisikoa Guztira</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Isats Neurria</value>
+    <value>Bolumen Aurkibidea</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Barneratutako Stub Neurria</value>
+    <value>AzpiMota</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Lotura</value>
+    <value>Aipamen Labura</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Kode Orrialdea</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Isats Neurria</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Barneratutako Stub Neurria</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Lotura</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>Lotura Gogorra</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Irakurtzeko-bakarrik</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Artxibo hasiera baieztatugabe</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Ezaugarri sostengu gabea</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

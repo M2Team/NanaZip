@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Yes</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;No</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Close</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Help</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Continue</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Dictionary</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Anti</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Method</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>Host OS</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>File System</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Group</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Block</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Comment</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Position</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Path Prefix</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Folders</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Files</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1034" xml:space="preserve">
     <value>Volume</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1035" xml:space="preserve">
     <value>Multivolume</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1036" xml:space="preserve">
     <value>Offset</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1037" xml:space="preserve">
     <value>Links</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1038" xml:space="preserve">
     <value>Blocks</value>
   </data>
-  <data name="Resource1038" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>Volumes</value>
   </data>
-  <data name="Resource1039" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bit</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>Physical Size</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>Headers Size</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Checksum</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>Characteristics</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Virtual Address</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>Short Name</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>Creator Application</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>Sector Size</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>Mode</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>Symbolic Link</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Total Size</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Free Space</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Cluster Size</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Label</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Local Name</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Provider</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>NT Security</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
+  <data name="Resource1063" xml:space="preserve">
     <value>Alternate Stream</value>
   </data>
-  <data name="Resource1062" xml:space="preserve">
+  <data name="Resource1064" xml:space="preserve">
     <value>Aux</value>
   </data>
-  <data name="Resource1063" xml:space="preserve">
+  <data name="Resource1065" xml:space="preserve">
     <value>Deleted</value>
   </data>
-  <data name="Resource1064" xml:space="preserve">
+  <data name="Resource1066" xml:space="preserve">
     <value>Is Tree</value>
   </data>
-  <data name="Resource1065" xml:space="preserve">
+  <data name="Resource1069" xml:space="preserve">
     <value>Error Type</value>
   </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>Errors</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Errors</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Warnings</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Warning</value>
-  </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Streams</value>
+    <value>Errors</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Alternate Streams</value>
+    <value>Errors</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Alternate Streams Size</value>
+    <value>Warnings</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Virtual Size</value>
+    <value>Warning</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Unpack Size</value>
+    <value>Streams</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Total Physical Size</value>
+    <value>Alternate Streams</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Volume Index</value>
+    <value>Alternate Streams Size</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>SubType</value>
+    <value>Virtual Size</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Short Comment</value>
+    <value>Unpack Size</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Code Page</value>
+    <value>Total Physical Size</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Tail Size</value>
+    <value>Volume Index</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Embedded Stub Size</value>
+    <value>SubType</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Link</value>
+    <value>Short Comment</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Code Page</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Tail Size</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Embedded Stub Size</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>Hard Link</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Read-only</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Unconfirmed start of archive</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Unsupported feature</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

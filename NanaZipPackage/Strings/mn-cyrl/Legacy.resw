@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Болих</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Тийм</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Үгүй</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Хаах</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Тусламж</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Үргэлжлүүл</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -153,13 +153,13 @@
   <data name="Resource552" xml:space="preserve">
     <value>Тай&amp;лбар</value>
   </data>
-  <data name="Resource553" xml:space="preserve">
+  <data name="Resource555" xml:space="preserve">
     <value>Хавтас үүсгэх</value>
   </data>
-  <data name="Resource554" xml:space="preserve">
+  <data name="Resource556" xml:space="preserve">
     <value>Файл үүсгэх</value>
   </data>
-  <data name="Resource555" xml:space="preserve">
+  <data name="Resource557" xml:space="preserve">
     <value>Га&amp;рах</value>
   </data>
   <data name="Resource600" xml:space="preserve">
@@ -198,22 +198,22 @@
   <data name="Resource730" xml:space="preserve">
     <value>Ангилаагүй</value>
   </data>
-  <data name="Resource731" xml:space="preserve">
+  <data name="Resource732" xml:space="preserve">
     <value>&amp;2 самбарууд</value>
   </data>
-  <data name="Resource732" xml:space="preserve">
+  <data name="Resource733" xml:space="preserve">
     <value>&amp;Багажны самбар</value>
   </data>
-  <data name="Resource733" xml:space="preserve">
+  <data name="Resource734" xml:space="preserve">
     <value>Гол хавтсыг нээх</value>
   </data>
-  <data name="Resource734" xml:space="preserve">
+  <data name="Resource735" xml:space="preserve">
     <value>Нэг төвшин дээш</value>
   </data>
-  <data name="Resource735" xml:space="preserve">
+  <data name="Resource736" xml:space="preserve">
     <value>Хавтасны түүх...</value>
   </data>
-  <data name="Resource736" xml:space="preserve">
+  <data name="Resource737" xml:space="preserve">
     <value>&amp;Сэргээ</value>
   </data>
   <data name="Resource750" xml:space="preserve">
@@ -327,25 +327,25 @@
   <data name="Resource1029" xml:space="preserve">
     <value>Байрлал</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>Алдаа</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>Нийт хэмжээ</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>Хоосон зай</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>Кластерын зай</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>Нэр</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>Локаль Нэр</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>Хангагч</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -450,10 +450,10 @@
   <data name="Resource2505" xml:space="preserve">
     <value>&amp;Мөрийн дундах зураас харуулах</value>
   </data>
-  <data name="Resource2506" xml:space="preserve">
+  <data name="Resource2507" xml:space="preserve">
     <value>&amp;Сайжруулсан Сонгох горим</value>
   </data>
-  <data name="Resource2507" xml:space="preserve">
+  <data name="Resource2508" xml:space="preserve">
     <value>&amp;Том санах ойн хуудас хэрэглэх</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
@@ -462,28 +462,28 @@
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip бол үнэгүй програм. Гэлээ ч та 7-Зип-д бүртгүүлэн хөгжүүлэгчдийг дэмжиж болно. Бүртгүүлсэн хэрэглэгчид техникийн дэмжлэг авах болно.</value>
   </data>
-  <data name="Resource3000" xml:space="preserve">
+  <data name="Resource3001" xml:space="preserve">
     <value>Алдаа алга байна</value>
   </data>
-  <data name="Resource3001" xml:space="preserve">
+  <data name="Resource3002" xml:space="preserve">
     <value>{0} зүйл(үүд) сонгогдсон байна</value>
   </data>
-  <data name="Resource3002" xml:space="preserve">
+  <data name="Resource3003" xml:space="preserve">
     <value>Хавтас үүсгэж чадахгүй '{0}'</value>
   </data>
-  <data name="Resource3003" xml:space="preserve">
+  <data name="Resource3004" xml:space="preserve">
     <value>Дэмжигдээгүй архивийг задлах шинэчлэлт хийх.</value>
   </data>
-  <data name="Resource3004" xml:space="preserve">
+  <data name="Resource3009" xml:space="preserve">
     <value>Файл '{0}' өөрчлөгдлөө.\nТа архивт шинэчлэлт хиймээр байна уу?</value>
   </data>
-  <data name="Resource3005" xml:space="preserve">
+  <data name="Resource3010" xml:space="preserve">
     <value>Файлыг шинэчилж чадсангүй\n'{0}</value>
   </data>
-  <data name="Resource3006" xml:space="preserve">
+  <data name="Resource3011" xml:space="preserve">
     <value>Засварлагчийг нээж чадсангүй.</value>
   </data>
-  <data name="Resource3007" xml:space="preserve">
+  <data name="Resource3016" xml:space="preserve">
     <value>Дэндүү их юм байна</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
@@ -567,10 +567,10 @@
   <data name="Resource3801" xml:space="preserve">
     <value>Нууц үгээ оруулах:</value>
   </data>
-  <data name="Resource3802" xml:space="preserve">
+  <data name="Resource3803" xml:space="preserve">
     <value>&amp;Нууц үг харуулах</value>
   </data>
-  <data name="Resource3803" xml:space="preserve">
+  <data name="Resource3807" xml:space="preserve">
     <value>Нууц үг</value>
   </data>
   <data name="Resource3900" xml:space="preserve">
@@ -585,7 +585,7 @@
   <data name="Resource3903" xml:space="preserve">
     <value>Хурд:</value>
   </data>
-  <data name="Resource3904" xml:space="preserve">
+  <data name="Resource3906" xml:space="preserve">
     <value>Алдаанууд:</value>
   </data>
   <data name="Resource4000" xml:space="preserve">
@@ -612,22 +612,22 @@
   <data name="Resource4007" xml:space="preserve">
     <value>&amp;Үгийн хэмжээ:</value>
   </data>
-  <data name="Resource4008" xml:space="preserve">
+  <data name="Resource4010" xml:space="preserve">
     <value>&amp;Параметерүүд:</value>
   </data>
-  <data name="Resource4009" xml:space="preserve">
+  <data name="Resource4011" xml:space="preserve">
     <value>Сонголтууд</value>
   </data>
-  <data name="Resource4010" xml:space="preserve">
+  <data name="Resource4012" xml:space="preserve">
     <value>SF&amp;X архив үүсгэх</value>
   </data>
-  <data name="Resource4011" xml:space="preserve">
+  <data name="Resource4016" xml:space="preserve">
     <value>&amp;Файлын нэрүүдийг нууцал</value>
   </data>
-  <data name="Resource4012" xml:space="preserve">
+  <data name="Resource4017" xml:space="preserve">
     <value>Шахаж байгаа санах ойн хэрэглээ:</value>
   </data>
-  <data name="Resource4013" xml:space="preserve">
+  <data name="Resource4018" xml:space="preserve">
     <value>Задалж байгаа санах ойн хэрэглээ:</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
@@ -687,16 +687,16 @@
   <data name="Resource6006" xml:space="preserve">
     <value>Нэр солиж байна...</value>
   </data>
-  <data name="Resource6007" xml:space="preserve">
+  <data name="Resource6008" xml:space="preserve">
     <value>Үйлдэл дэмжигдээгүй байна.</value>
   </data>
-  <data name="Resource6008" xml:space="preserve">
+  <data name="Resource6009" xml:space="preserve">
     <value>Файл болон хавтсын нэрийг солиход алдаатай</value>
   </data>
-  <data name="Resource6009" xml:space="preserve">
+  <data name="Resource6010" xml:space="preserve">
     <value>Файл хуулахыг магадлах</value>
   </data>
-  <data name="Resource6010" xml:space="preserve">
+  <data name="Resource6011" xml:space="preserve">
     <value>Та үнэхээр файлуудыг архив руу хуулахыг хүсэж байна уу</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
@@ -762,13 +762,13 @@
   <data name="Resource6404" xml:space="preserve">
     <value>Maск:</value>
   </data>
-  <data name="Resource6600" xml:space="preserve">
+  <data name="Resource6601" xml:space="preserve">
     <value>Хавтсын түүх</value>
   </data>
-  <data name="Resource6601" xml:space="preserve">
+  <data name="Resource6602" xml:space="preserve">
     <value>Шинжилгээний зурвас</value>
   </data>
-  <data name="Resource6602" xml:space="preserve">
+  <data name="Resource6603" xml:space="preserve">
     <value>Зурвас</value>
   </data>
   <data name="Resource7100" xml:space="preserve">
@@ -777,7 +777,7 @@
   <data name="Resource7101" xml:space="preserve">
     <value>Сүлжээ</value>
   </data>
-  <data name="Resource7102" xml:space="preserve">
+  <data name="Resource7103" xml:space="preserve">
     <value>Систем</value>
   </data>
   <data name="Resource7200" xml:space="preserve">
@@ -846,7 +846,7 @@
   <data name="Resource7607" xml:space="preserve">
     <value>Хариуг гаргаж байна</value>
   </data>
-  <data name="Resource7608" xml:space="preserve">
+  <data name="Resource7610" xml:space="preserve">
     <value>Өнгөрсөн:</value>
   </data>
 </root>

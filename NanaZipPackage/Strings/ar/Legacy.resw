@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>إلغاء الأمر</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;نعم</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;لا</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;إغلاق</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>المساعدة</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;استمرار</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>القاموس</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>النوع</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>ضد</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>الطريقة</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>نظام التشغيل</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>نظام الملفات</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>المستخدم</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>المجموعة</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>التكتل</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>التعليق</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>الموقع</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>بادئة المسار</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>المجلدات</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>الملفات</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>الإصدار</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
+  <data name="Resource1034" xml:space="preserve">
     <value>وحدة التخزين</value>
   </data>
-  <data name="Resource1034" xml:space="preserve">
+  <data name="Resource1035" xml:space="preserve">
     <value>وحدة تخزين متعددة</value>
   </data>
-  <data name="Resource1035" xml:space="preserve">
+  <data name="Resource1036" xml:space="preserve">
     <value>التعويض</value>
   </data>
-  <data name="Resource1036" xml:space="preserve">
+  <data name="Resource1037" xml:space="preserve">
     <value>روابط</value>
   </data>
-  <data name="Resource1037" xml:space="preserve">
+  <data name="Resource1038" xml:space="preserve">
     <value>كتل</value>
   </data>
-  <data name="Resource1038" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>وحدات تخزين</value>
   </data>
-  <data name="Resource1039" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-بت</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>المعالج</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>الحجم الطبيعي</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>حجم المقدمات</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>قيمة التحقق</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>المميزات</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>العنوان الظاهري</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>الهوية</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>اسم قصير</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>برنامج الإنشاء</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>حجم القطاع</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>الوضع</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>الرابط الرمزي</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>خطأ</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>الحجم الكلي</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>المساحة الحرة</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>حجم الجزء</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>العلامة</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>الاسم المحلي</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>المزوّد</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1062" xml:space="preserve">
     <value>NT أمان</value>
   </data>
-  <data name="Resource1061" xml:space="preserve">
-    <value>الجداول البديلة</value>
-  </data>
-  <data name="Resource1062" xml:space="preserve">
-    <value>Aux</value>
-  </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>تم حذفه</value>
+    <value>الجداول البديلة</value>
   </data>
   <data name="Resource1064" xml:space="preserve">
-    <value>التفرعات</value>
+    <value>Aux</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
-    <value>خطأ في النوع</value>
+    <value>تم حذفه</value>
   </data>
   <data name="Resource1066" xml:space="preserve">
-    <value>أخطاء</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>أخطاء</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>تحذيرات</value>
+    <value>التفرعات</value>
   </data>
   <data name="Resource1069" xml:space="preserve">
-    <value>تحذير</value>
+    <value>خطأ في النوع</value>
   </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>الجداول</value>
+    <value>أخطاء</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>الجداول البديلة</value>
+    <value>أخطاء</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>حجم الجداول البديلة</value>
+    <value>تحذيرات</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>الحجم الظاهري</value>
+    <value>تحذير</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>حجم الإخراج</value>
+    <value>الجداول</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>الحجم الطبيعي الكلي</value>
+    <value>الجداول البديلة</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>دليل الحجم</value>
+    <value>حجم الجداول البديلة</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>النوع الفرعي</value>
+    <value>الحجم الظاهري</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>تعليق قصير</value>
+    <value>حجم الإخراج</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>رمز الصفحة</value>
+    <value>الحجم الطبيعي الكلي</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>حجم التذييل</value>
+    <value>دليل الحجم</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>حجم العقبات المضمن</value>
+    <value>النوع الفرعي</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>الارتباط</value>
+    <value>تعليق قصير</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>رمز الصفحة</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>حجم التذييل</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>حجم العقبات المضمن</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>الارتباط</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>الارتباط الثابت</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>للقراءة-فقط</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>البداية غير مؤكدة للأرشيف</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>ميزة غير مدعومة</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

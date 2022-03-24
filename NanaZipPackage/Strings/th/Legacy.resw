@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>ยกเลิก</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;ใช่</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;ไม่</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;ออก</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>ช่วยเหลือ</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;ดำเนินการต่อ</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -366,67 +366,67 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Volumes</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-บิท</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
+  <data name="Resource1044" xml:space="preserve">
     <value>ขนาดทางกายภาพ</value>
   </data>
-  <data name="Resource1044" xml:space="preserve">
+  <data name="Resource1045" xml:space="preserve">
     <value>ขนาดเฮดเดอร์</value>
   </data>
-  <data name="Resource1045" xml:space="preserve">
+  <data name="Resource1046" xml:space="preserve">
     <value>Checksum</value>
   </data>
-  <data name="Resource1046" xml:space="preserve">
+  <data name="Resource1047" xml:space="preserve">
     <value>คุณลักษณะ</value>
   </data>
-  <data name="Resource1047" xml:space="preserve">
+  <data name="Resource1048" xml:space="preserve">
     <value>Virtual Address</value>
   </data>
-  <data name="Resource1048" xml:space="preserve">
+  <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Resource1049" xml:space="preserve">
+  <data name="Resource1050" xml:space="preserve">
     <value>ชื่อย่อ</value>
   </data>
-  <data name="Resource1050" xml:space="preserve">
+  <data name="Resource1051" xml:space="preserve">
     <value>ผู้สร้างโปรแกรม</value>
   </data>
-  <data name="Resource1051" xml:space="preserve">
+  <data name="Resource1052" xml:space="preserve">
     <value>ขนาด Sector</value>
   </data>
-  <data name="Resource1052" xml:space="preserve">
+  <data name="Resource1053" xml:space="preserve">
     <value>โหมด</value>
   </data>
-  <data name="Resource1053" xml:space="preserve">
+  <data name="Resource1054" xml:space="preserve">
     <value>ลิงค์</value>
   </data>
-  <data name="Resource1054" xml:space="preserve">
+  <data name="Resource1055" xml:space="preserve">
     <value>เกิดข้อผิดพลาด</value>
   </data>
-  <data name="Resource1055" xml:space="preserve">
+  <data name="Resource1056" xml:space="preserve">
     <value>ขนาดทั้งหมด</value>
   </data>
-  <data name="Resource1056" xml:space="preserve">
+  <data name="Resource1057" xml:space="preserve">
     <value>ช่องว่างที่เหลืออยู่</value>
   </data>
-  <data name="Resource1057" xml:space="preserve">
+  <data name="Resource1058" xml:space="preserve">
     <value>ขนาดกลุ่ม</value>
   </data>
-  <data name="Resource1058" xml:space="preserve">
+  <data name="Resource1059" xml:space="preserve">
     <value>ป้าย</value>
   </data>
-  <data name="Resource1059" xml:space="preserve">
+  <data name="Resource1060" xml:space="preserve">
     <value>ชื่อเฉพาะ</value>
   </data>
-  <data name="Resource1060" xml:space="preserve">
+  <data name="Resource1061" xml:space="preserve">
     <value>ผู้ให้บริการ</value>
   </data>
   <data name="Resource2100" xml:space="preserve">

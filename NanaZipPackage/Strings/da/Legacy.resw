@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Annuller</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Ja</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Nej</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Luk</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Hjælp</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Fortsæt</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Leksikon</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>Anti</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Metode</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>Vært OS</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>Filsystem</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>Bruger</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Gruppe</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Blok</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Kommentar</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Placering</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Sti præfiks</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Mapper</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Filer</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
-    <value>Bind</value>
-  </data>
   <data name="Resource1034" xml:space="preserve">
-    <value>Flerbindsarkiv</value>
+    <value>Bind</value>
   </data>
   <data name="Resource1035" xml:space="preserve">
-    <value>Forskydning</value>
+    <value>Flerbindsarkiv</value>
   </data>
   <data name="Resource1036" xml:space="preserve">
-    <value>Henvisning</value>
+    <value>Forskydning</value>
   </data>
   <data name="Resource1037" xml:space="preserve">
-    <value>Blokke</value>
-  </data>
-  <data name="Resource1038" xml:space="preserve">
-    <value>Bind</value>
-  </data>
-  <data name="Resource1039" xml:space="preserve">
-    <value>64-bit</value>
-  </data>
-  <data name="Resource1040" xml:space="preserve">
-    <value>Big-endian</value>
-  </data>
-  <data name="Resource1041" xml:space="preserve">
-    <value>CPU</value>
-  </data>
-  <data name="Resource1042" xml:space="preserve">
-    <value>Fysisk størrelse</value>
-  </data>
-  <data name="Resource1043" xml:space="preserve">
-    <value>Hovedernes størrelse</value>
-  </data>
-  <data name="Resource1044" xml:space="preserve">
-    <value>Checksum</value>
-  </data>
-  <data name="Resource1045" xml:space="preserve">
-    <value>Karakteristika</value>
-  </data>
-  <data name="Resource1046" xml:space="preserve">
-    <value>Virtuel adresse</value>
-  </data>
-  <data name="Resource1047" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="Resource1048" xml:space="preserve">
-    <value>Kort navn</value>
-  </data>
-  <data name="Resource1049" xml:space="preserve">
-    <value>Oprettende program</value>
-  </data>
-  <data name="Resource1050" xml:space="preserve">
-    <value>Sektorstørrelse</value>
-  </data>
-  <data name="Resource1051" xml:space="preserve">
-    <value>Tilstand</value>
-  </data>
-  <data name="Resource1052" xml:space="preserve">
-    <value>Symbolsk henvisning</value>
-  </data>
-  <data name="Resource1053" xml:space="preserve">
-    <value>Fejl</value>
-  </data>
-  <data name="Resource1054" xml:space="preserve">
-    <value>Samlet størrelse</value>
-  </data>
-  <data name="Resource1055" xml:space="preserve">
-    <value>Ledig plads</value>
-  </data>
-  <data name="Resource1056" xml:space="preserve">
-    <value>Klyngestørrelse</value>
-  </data>
-  <data name="Resource1057" xml:space="preserve">
-    <value>Etiket</value>
-  </data>
-  <data name="Resource1058" xml:space="preserve">
-    <value>Lokalt navn</value>
-  </data>
-  <data name="Resource1059" xml:space="preserve">
-    <value>Udbyder</value>
-  </data>
-  <data name="Resource1060" xml:space="preserve">
-    <value>NT Security</value>
-  </data>
-  <data name="Resource1061" xml:space="preserve">
-    <value>Alternativ strøm</value>
-  </data>
-  <data name="Resource1062" xml:space="preserve">
-    <value>Aux</value>
-  </data>
-  <data name="Resource1063" xml:space="preserve">
-    <value>Slettet</value>
-  </data>
-  <data name="Resource1064" xml:space="preserve">
-    <value>Er træ</value>
-  </data>
-  <data name="Resource1065" xml:space="preserve">
-    <value>Fejltype</value>
-  </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>Fejl</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Fejl</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Advarsler</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>Advarsel</value>
-  </data>
-  <data name="Resource1070" xml:space="preserve">
-    <value>Strømme</value>
-  </data>
-  <data name="Resource1071" xml:space="preserve">
-    <value>Alternative strømme</value>
-  </data>
-  <data name="Resource1072" xml:space="preserve">
-    <value>Størrelse på alternative strømme</value>
-  </data>
-  <data name="Resource1073" xml:space="preserve">
-    <value>Virtuel størrelse</value>
-  </data>
-  <data name="Resource1074" xml:space="preserve">
-    <value>Udpakket størrelse</value>
-  </data>
-  <data name="Resource1075" xml:space="preserve">
-    <value>Samlet fysiske størrelse</value>
-  </data>
-  <data name="Resource1076" xml:space="preserve">
-    <value>Bind-indeks</value>
-  </data>
-  <data name="Resource1077" xml:space="preserve">
-    <value>Undertype</value>
-  </data>
-  <data name="Resource1078" xml:space="preserve">
-    <value>Kort kommentar</value>
-  </data>
-  <data name="Resource1079" xml:space="preserve">
-    <value>Tegnsæt</value>
-  </data>
-  <data name="Resource1080" xml:space="preserve">
-    <value>Halestørrelse</value>
-  </data>
-  <data name="Resource1081" xml:space="preserve">
-    <value>Indlejret stumpstørrelse</value>
-  </data>
-  <data name="Resource1082" xml:space="preserve">
     <value>Henvisning</value>
   </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Blokke</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Bind</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Fysisk størrelse</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Hovedernes størrelse</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Karakteristika</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Virtuel adresse</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Kort navn</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Oprettende program</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Sektorstørrelse</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Tilstand</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Symbolsk henvisning</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Fejl</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Samlet størrelse</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Ledig plads</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Klyngestørrelse</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Etiket</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Lokalt navn</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Udbyder</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>NT Security</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Alternativ strøm</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>Slettet</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Er træ</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Fejltype</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Fejl</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Fejl</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Advarsler</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Advarsel</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Strømme</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Alternative strømme</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Størrelse på alternative strømme</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Virtuel størrelse</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Udpakket størrelse</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Samlet fysiske størrelse</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Bind-indeks</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Undertype</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Kort kommentar</value>
+  </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Tegnsæt</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Halestørrelse</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Indlejret stumpstørrelse</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Henvisning</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>Fast henvisning</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Skrivebeskyttet</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Ubekræftet begyndelse på arkiv</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Faciliteten understøttes ikke</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

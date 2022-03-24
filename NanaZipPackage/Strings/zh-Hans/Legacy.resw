@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>是(&amp;Y)</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>否(&amp;N)</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>关闭(&amp;C)</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>帮助</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>继续(&amp;C)</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>字典大小</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>类型</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>剔除项</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>算法</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>主操作系统</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>文件系统</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>用户</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>组</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
-    <value>字块</value>
-  </data>
   <data name="Resource1027" xml:space="preserve">
-    <value>注释</value>
+    <value>字块</value>
   </data>
   <data name="Resource1028" xml:space="preserve">
-    <value>定位</value>
+    <value>注释</value>
   </data>
   <data name="Resource1029" xml:space="preserve">
-    <value>路径前缀</value>
+    <value>定位</value>
   </data>
   <data name="Resource1030" xml:space="preserve">
-    <value>文件夹</value>
+    <value>路径前缀</value>
   </data>
   <data name="Resource1031" xml:space="preserve">
-    <value>文件</value>
+    <value>文件夹</value>
   </data>
   <data name="Resource1032" xml:space="preserve">
-    <value>版本</value>
+    <value>文件</value>
   </data>
   <data name="Resource1033" xml:space="preserve">
-    <value>卷</value>
+    <value>版本</value>
   </data>
   <data name="Resource1034" xml:space="preserve">
-    <value>多卷压缩</value>
+    <value>卷</value>
   </data>
   <data name="Resource1035" xml:space="preserve">
-    <value>偏移</value>
+    <value>多卷压缩</value>
   </data>
   <data name="Resource1036" xml:space="preserve">
-    <value>链接</value>
+    <value>偏移</value>
   </data>
   <data name="Resource1037" xml:space="preserve">
-    <value>字块</value>
-  </data>
-  <data name="Resource1038" xml:space="preserve">
-    <value>分卷</value>
-  </data>
-  <data name="Resource1039" xml:space="preserve">
-    <value>64 位</value>
-  </data>
-  <data name="Resource1040" xml:space="preserve">
-    <value>大端序</value>
-  </data>
-  <data name="Resource1041" xml:space="preserve">
-    <value>CPU</value>
-  </data>
-  <data name="Resource1042" xml:space="preserve">
-    <value>物理大小</value>
-  </data>
-  <data name="Resource1043" xml:space="preserve">
-    <value>文件头大小</value>
-  </data>
-  <data name="Resource1044" xml:space="preserve">
-    <value>校验和</value>
-  </data>
-  <data name="Resource1045" xml:space="preserve">
-    <value>特征</value>
-  </data>
-  <data name="Resource1046" xml:space="preserve">
-    <value>虚拟地址</value>
-  </data>
-  <data name="Resource1047" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="Resource1048" xml:space="preserve">
-    <value>短文件名</value>
-  </data>
-  <data name="Resource1049" xml:space="preserve">
-    <value>创建程序</value>
-  </data>
-  <data name="Resource1050" xml:space="preserve">
-    <value>扇区大小</value>
-  </data>
-  <data name="Resource1051" xml:space="preserve">
-    <value>模式</value>
-  </data>
-  <data name="Resource1052" xml:space="preserve">
     <value>链接</value>
   </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>字块</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>分卷</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>64 位</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>大端序</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>物理大小</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>文件头大小</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>校验和</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>特征</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>虚拟地址</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>短文件名</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>创建程序</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>扇区大小</value>
+  </data>
   <data name="Resource1053" xml:space="preserve">
-    <value>错误</value>
+    <value>模式</value>
   </data>
   <data name="Resource1054" xml:space="preserve">
-    <value>总大小</value>
+    <value>链接</value>
   </data>
   <data name="Resource1055" xml:space="preserve">
-    <value>可用空间</value>
+    <value>错误</value>
   </data>
   <data name="Resource1056" xml:space="preserve">
-    <value>簇大小</value>
+    <value>总大小</value>
   </data>
   <data name="Resource1057" xml:space="preserve">
-    <value>卷标</value>
+    <value>可用空间</value>
   </data>
   <data name="Resource1058" xml:space="preserve">
-    <value>本地名称</value>
+    <value>簇大小</value>
   </data>
   <data name="Resource1059" xml:space="preserve">
-    <value>供应者</value>
+    <value>卷标</value>
   </data>
   <data name="Resource1060" xml:space="preserve">
-    <value>NT 安全</value>
+    <value>本地名称</value>
   </data>
   <data name="Resource1061" xml:space="preserve">
-    <value>交替数据流</value>
+    <value>供应者</value>
   </data>
   <data name="Resource1062" xml:space="preserve">
-    <value>Aux</value>
+    <value>NT 安全</value>
   </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>已删除</value>
-  </data>
-  <data name="Resource1064" xml:space="preserve">
-    <value>树状结构</value>
-  </data>
-  <data name="Resource1065" xml:space="preserve">
-    <value>错误类型</value>
-  </data>
-  <data name="Resource1066" xml:space="preserve">
-    <value>错误</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>错误</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>警告</value>
-  </data>
-  <data name="Resource1069" xml:space="preserve">
-    <value>警告</value>
-  </data>
-  <data name="Resource1070" xml:space="preserve">
-    <value>数据流</value>
-  </data>
-  <data name="Resource1071" xml:space="preserve">
     <value>交替数据流</value>
   </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>已删除</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>树状结构</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>错误类型</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>错误</value>
+  </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>交替数据流大小</value>
+    <value>警告</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>虚拟大小</value>
+    <value>警告</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>释放大小</value>
+    <value>数据流</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>完整物理大小</value>
+    <value>交替数据流</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>卷索引</value>
+    <value>交替数据流大小</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>SubType</value>
+    <value>虚拟大小</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>短评论</value>
+    <value>释放大小</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>代码页</value>
+    <value>完整物理大小</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>尾部大小</value>
+    <value>卷索引</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>嵌入尾部大小</value>
+    <value>SubType</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>链接类型</value>
+    <value>短评论</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>代码页</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>尾部大小</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>嵌入尾部大小</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>链接类型</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>硬链接</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>只读</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>无法确认档案起始位置</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>不支持此功能</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

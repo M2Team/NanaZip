@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Hætta við</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Já</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Nei</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Loka</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Hjálp</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Halda áfram</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -312,205 +312,205 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Orðasafn</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
+  <data name="Resource1020" xml:space="preserve">
     <value>Tegund</value>
   </data>
-  <data name="Resource1020" xml:space="preserve">
+  <data name="Resource1021" xml:space="preserve">
     <value>And</value>
   </data>
-  <data name="Resource1021" xml:space="preserve">
+  <data name="Resource1022" xml:space="preserve">
     <value>Aðferð</value>
   </data>
-  <data name="Resource1022" xml:space="preserve">
+  <data name="Resource1023" xml:space="preserve">
     <value>Stýrikerfi hýsils</value>
   </data>
-  <data name="Resource1023" xml:space="preserve">
+  <data name="Resource1024" xml:space="preserve">
     <value>Skráakerfi</value>
   </data>
-  <data name="Resource1024" xml:space="preserve">
+  <data name="Resource1025" xml:space="preserve">
     <value>Notandi</value>
   </data>
-  <data name="Resource1025" xml:space="preserve">
+  <data name="Resource1026" xml:space="preserve">
     <value>Hópur</value>
   </data>
-  <data name="Resource1026" xml:space="preserve">
+  <data name="Resource1027" xml:space="preserve">
     <value>Bálkur</value>
   </data>
-  <data name="Resource1027" xml:space="preserve">
+  <data name="Resource1028" xml:space="preserve">
     <value>Athugasemd</value>
   </data>
-  <data name="Resource1028" xml:space="preserve">
+  <data name="Resource1029" xml:space="preserve">
     <value>Staðsetning</value>
   </data>
-  <data name="Resource1029" xml:space="preserve">
+  <data name="Resource1030" xml:space="preserve">
     <value>Slóðarforskeyti</value>
   </data>
-  <data name="Resource1030" xml:space="preserve">
+  <data name="Resource1031" xml:space="preserve">
     <value>Möppur</value>
   </data>
-  <data name="Resource1031" xml:space="preserve">
+  <data name="Resource1032" xml:space="preserve">
     <value>Skrár</value>
   </data>
-  <data name="Resource1032" xml:space="preserve">
+  <data name="Resource1033" xml:space="preserve">
     <value>Útgáfa</value>
   </data>
-  <data name="Resource1033" xml:space="preserve">
-    <value>Bindi</value>
-  </data>
   <data name="Resource1034" xml:space="preserve">
-    <value>Fjölbindi</value>
+    <value>Bindi</value>
   </data>
   <data name="Resource1035" xml:space="preserve">
-    <value>Afsetning</value>
+    <value>Fjölbindi</value>
   </data>
   <data name="Resource1036" xml:space="preserve">
-    <value>Tenglar</value>
+    <value>Afsetning</value>
   </data>
   <data name="Resource1037" xml:space="preserve">
-    <value>Bálkar</value>
+    <value>Tenglar</value>
   </data>
   <data name="Resource1038" xml:space="preserve">
-    <value>Bindi</value>
+    <value>Bálkar</value>
   </data>
   <data name="Resource1039" xml:space="preserve">
-    <value>64-bita</value>
-  </data>
-  <data name="Resource1040" xml:space="preserve">
-    <value>Háenda</value>
+    <value>Bindi</value>
   </data>
   <data name="Resource1041" xml:space="preserve">
-    <value>Gjörvi</value>
+    <value>64-bita</value>
   </data>
   <data name="Resource1042" xml:space="preserve">
-    <value>Efnisleg stærð</value>
+    <value>Háenda</value>
   </data>
   <data name="Resource1043" xml:space="preserve">
-    <value>Höfðastærð</value>
+    <value>Gjörvi</value>
   </data>
   <data name="Resource1044" xml:space="preserve">
-    <value>Samtala</value>
+    <value>Efnisleg stærð</value>
   </data>
   <data name="Resource1045" xml:space="preserve">
-    <value>Einkenni</value>
+    <value>Höfðastærð</value>
   </data>
   <data name="Resource1046" xml:space="preserve">
-    <value>Sýndarstaðfang</value>
+    <value>Samtala</value>
   </data>
   <data name="Resource1047" xml:space="preserve">
-    <value>Auðkenni</value>
+    <value>Einkenni</value>
   </data>
   <data name="Resource1048" xml:space="preserve">
-    <value>Stutt nafn</value>
+    <value>Sýndarstaðfang</value>
   </data>
   <data name="Resource1049" xml:space="preserve">
-    <value>Skaparahugbúnaður</value>
+    <value>Auðkenni</value>
   </data>
   <data name="Resource1050" xml:space="preserve">
-    <value>Geirastærð</value>
+    <value>Stutt nafn</value>
   </data>
   <data name="Resource1051" xml:space="preserve">
-    <value>Hamur</value>
+    <value>Skaparahugbúnaður</value>
   </data>
   <data name="Resource1052" xml:space="preserve">
-    <value>Mjúktengill</value>
+    <value>Geirastærð</value>
   </data>
   <data name="Resource1053" xml:space="preserve">
-    <value>Villa</value>
+    <value>Hamur</value>
   </data>
   <data name="Resource1054" xml:space="preserve">
-    <value>Heildarstærð</value>
+    <value>Mjúktengill</value>
   </data>
   <data name="Resource1055" xml:space="preserve">
-    <value>Laust pláss</value>
+    <value>Villa</value>
   </data>
   <data name="Resource1056" xml:space="preserve">
-    <value>Klasastærð</value>
+    <value>Heildarstærð</value>
   </data>
   <data name="Resource1057" xml:space="preserve">
-    <value>Merki</value>
+    <value>Laust pláss</value>
   </data>
   <data name="Resource1058" xml:space="preserve">
-    <value>Staðarnafn</value>
+    <value>Klasastærð</value>
   </data>
   <data name="Resource1059" xml:space="preserve">
-    <value>Veitandi</value>
+    <value>Merki</value>
   </data>
   <data name="Resource1060" xml:space="preserve">
-    <value>NT-öryggi</value>
+    <value>Staðarnafn</value>
   </data>
   <data name="Resource1061" xml:space="preserve">
-    <value>Víxlstraumur</value>
+    <value>Veitandi</value>
   </data>
   <data name="Resource1062" xml:space="preserve">
-    <value>Aðstoðar-</value>
+    <value>NT-öryggi</value>
   </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>Eytt</value>
+    <value>Víxlstraumur</value>
   </data>
   <data name="Resource1064" xml:space="preserve">
-    <value>Er tré</value>
+    <value>Aðstoðar-</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
-    <value>Villutegund</value>
+    <value>Eytt</value>
   </data>
   <data name="Resource1066" xml:space="preserve">
-    <value>Villur</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Villur</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Viðvaranir</value>
+    <value>Er tré</value>
   </data>
   <data name="Resource1069" xml:space="preserve">
-    <value>Viðvörun</value>
+    <value>Villutegund</value>
   </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Straumar</value>
+    <value>Villur</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Víxlstraumar</value>
+    <value>Villur</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Víxlstraumastærð</value>
+    <value>Viðvaranir</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Sýndarstærð</value>
+    <value>Viðvörun</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Afþjöppuð stærð</value>
+    <value>Straumar</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Efnisleg heildarstærð</value>
+    <value>Víxlstraumar</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Bindaskrá</value>
+    <value>Víxlstraumastærð</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Undirtegund</value>
+    <value>Sýndarstærð</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Stutt athugasemd</value>
+    <value>Afþjöppuð stærð</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Kóðasíða</value>
+    <value>Efnisleg heildarstærð</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Halastærð</value>
+    <value>Bindaskrá</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Innfelld stubbastærð</value>
+    <value>Undirtegund</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Tengill</value>
+    <value>Stutt athugasemd</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Kóðasíða</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Halastærð</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Innfelld stubbastærð</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Tengill</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
     <value>Harðtengill</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>Skráhnútur</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Einungis lesanlegt</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -858,7 +858,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Óstaðfest upphaf safns</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Óstuddur eiginleiki</value>
   </data>
   <data name="Resource3800" xml:space="preserve">

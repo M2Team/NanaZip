@@ -54,19 +54,19 @@
   <data name="Resource402" xml:space="preserve">
     <value>Peruuta</value>
   </data>
-  <data name="Resource403" xml:space="preserve">
+  <data name="Resource406" xml:space="preserve">
     <value>&amp;Kyllä</value>
   </data>
-  <data name="Resource404" xml:space="preserve">
+  <data name="Resource407" xml:space="preserve">
     <value>&amp;Ei</value>
   </data>
-  <data name="Resource405" xml:space="preserve">
+  <data name="Resource408" xml:space="preserve">
     <value>&amp;Sulje</value>
   </data>
-  <data name="Resource406" xml:space="preserve">
+  <data name="Resource409" xml:space="preserve">
     <value>Ohje</value>
   </data>
-  <data name="Resource407" xml:space="preserve">
+  <data name="Resource411" xml:space="preserve">
     <value>&amp;Jatka</value>
   </data>
   <data name="Resource440" xml:space="preserve">
@@ -375,145 +375,145 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Nimet</value>
   </data>
-  <data name="Resource1040" xml:space="preserve">
+  <data name="Resource1041" xml:space="preserve">
     <value>64-bittinen</value>
   </data>
-  <data name="Resource1041" xml:space="preserve">
+  <data name="Resource1042" xml:space="preserve">
     <value>Big-endian</value>
   </data>
-  <data name="Resource1042" xml:space="preserve">
+  <data name="Resource1043" xml:space="preserve">
     <value>Suoritin</value>
   </data>
-  <data name="Resource1043" xml:space="preserve">
-    <value>Fyysinen koko</value>
-  </data>
   <data name="Resource1044" xml:space="preserve">
-    <value>Otsikon koko</value>
+    <value>Fyysinen koko</value>
   </data>
   <data name="Resource1045" xml:space="preserve">
-    <value>Tarkiste</value>
+    <value>Otsikon koko</value>
   </data>
   <data name="Resource1046" xml:space="preserve">
-    <value>Ominaisuudet</value>
+    <value>Tarkiste</value>
   </data>
   <data name="Resource1047" xml:space="preserve">
-    <value>Näennäisosoite</value>
+    <value>Ominaisuudet</value>
   </data>
   <data name="Resource1048" xml:space="preserve">
-    <value>ID</value>
+    <value>Näennäisosoite</value>
   </data>
   <data name="Resource1049" xml:space="preserve">
-    <value>Lyhyt nimi</value>
+    <value>ID</value>
   </data>
   <data name="Resource1050" xml:space="preserve">
-    <value>Luontisovellus</value>
+    <value>Lyhyt nimi</value>
   </data>
   <data name="Resource1051" xml:space="preserve">
-    <value>Sektorikoko</value>
+    <value>Luontisovellus</value>
   </data>
   <data name="Resource1052" xml:space="preserve">
-    <value>Tila</value>
+    <value>Sektorikoko</value>
   </data>
   <data name="Resource1053" xml:space="preserve">
-    <value>Symbolinen linkki</value>
+    <value>Tila</value>
   </data>
   <data name="Resource1054" xml:space="preserve">
-    <value>Virhe</value>
+    <value>Symbolinen linkki</value>
   </data>
   <data name="Resource1055" xml:space="preserve">
-    <value>Aseman koko</value>
+    <value>Virhe</value>
   </data>
   <data name="Resource1056" xml:space="preserve">
-    <value>Vapaata tilaa</value>
+    <value>Aseman koko</value>
   </data>
   <data name="Resource1057" xml:space="preserve">
-    <value>Varausyksikön koko</value>
+    <value>Vapaata tilaa</value>
   </data>
   <data name="Resource1058" xml:space="preserve">
-    <value>Nimi</value>
+    <value>Varausyksikön koko</value>
   </data>
   <data name="Resource1059" xml:space="preserve">
-    <value>Paikallinen nimi</value>
+    <value>Nimi</value>
   </data>
   <data name="Resource1060" xml:space="preserve">
-    <value>Palveluntarjoja</value>
+    <value>Paikallinen nimi</value>
   </data>
   <data name="Resource1061" xml:space="preserve">
-    <value>NT-suojaukset</value>
+    <value>Palveluntarjoja</value>
   </data>
   <data name="Resource1062" xml:space="preserve">
-    <value>Vaihtoehtoinen virta</value>
+    <value>NT-suojaukset</value>
   </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>Muu</value>
+    <value>Vaihtoehtoinen virta</value>
   </data>
   <data name="Resource1064" xml:space="preserve">
-    <value>Poistettu</value>
+    <value>Muu</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
-    <value>On kansiorakenne</value>
+    <value>Poistettu</value>
   </data>
   <data name="Resource1066" xml:space="preserve">
-    <value>Virhelaji</value>
-  </data>
-  <data name="Resource1067" xml:space="preserve">
-    <value>Virheet</value>
-  </data>
-  <data name="Resource1068" xml:space="preserve">
-    <value>Virheet</value>
+    <value>On kansiorakenne</value>
   </data>
   <data name="Resource1069" xml:space="preserve">
-    <value>Varoitukset</value>
+    <value>Virhelaji</value>
   </data>
   <data name="Resource1070" xml:space="preserve">
-    <value>Varoitus</value>
+    <value>Virheet</value>
   </data>
   <data name="Resource1071" xml:space="preserve">
-    <value>Virrat</value>
+    <value>Virheet</value>
   </data>
   <data name="Resource1072" xml:space="preserve">
-    <value>Vaihtoehtoiset virrat</value>
+    <value>Varoitukset</value>
   </data>
   <data name="Resource1073" xml:space="preserve">
-    <value>Vaihtoehtoisten virtojen koko</value>
+    <value>Varoitus</value>
   </data>
   <data name="Resource1074" xml:space="preserve">
-    <value>Näennäiskoko</value>
+    <value>Virrat</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Pakkaamaton koko</value>
+    <value>Vaihtoehtoiset virrat</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Fyysinen koko</value>
+    <value>Vaihtoehtoisten virtojen koko</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
-    <value>Aseman indeksi</value>
+    <value>Näennäiskoko</value>
   </data>
   <data name="Resource1078" xml:space="preserve">
-    <value>Alilaji</value>
+    <value>Pakkaamaton koko</value>
   </data>
   <data name="Resource1079" xml:space="preserve">
-    <value>Kuvaus</value>
+    <value>Fyysinen koko</value>
   </data>
   <data name="Resource1080" xml:space="preserve">
-    <value>Koodisivu</value>
+    <value>Aseman indeksi</value>
   </data>
   <data name="Resource1081" xml:space="preserve">
-    <value>Loppupään koko</value>
+    <value>Alilaji</value>
   </data>
   <data name="Resource1082" xml:space="preserve">
-    <value>Upotetun segmentin koko</value>
+    <value>Kuvaus</value>
   </data>
   <data name="Resource1083" xml:space="preserve">
+    <value>Koodisivu</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Loppupään koko</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Upotetun segmentin koko</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
     <value>Linkki</value>
   </data>
-  <data name="Resource1084" xml:space="preserve">
+  <data name="Resource1090" xml:space="preserve">
     <value>Kiinteä linkki</value>
   </data>
-  <data name="Resource1085" xml:space="preserve">
+  <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
-  <data name="Resource1086" xml:space="preserve">
+  <data name="Resource1093" xml:space="preserve">
     <value>Vain luku</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
@@ -861,7 +861,7 @@
   <data name="Resource3764" xml:space="preserve">
     <value>Pakkauksen alkua ei vahvistettu</value>
   </data>
-  <data name="Resource3765" xml:space="preserve">
+  <data name="Resource3768" xml:space="preserve">
     <value>Toiminto ei tuettu</value>
   </data>
   <data name="Resource3800" xml:space="preserve">
