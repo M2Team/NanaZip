@@ -61,8 +61,5 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
         }
     }
 
-    auto fuck = LocaleNameToLCID(L"zh-cn", 0);
-    fuck = fuck;
-
     return Iterator->second.data();
 }
