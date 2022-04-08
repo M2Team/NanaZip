@@ -2,6 +2,15 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.1 Servicing Update 1 Preview 3 (1.1.220.0)**
+
+- Modernize the i18n implementation via migrating language files from .txt to 
+  .resw. (Contributed by AndromedaMelody. Suggested by Maicol Battistini.)
+- Update ModernWin32MessageBox for solving the infinite loop issue in some 
+  cases. (Thanks to AndromedaMelody.)
+- Tweak icons and provide icons for preview versions. (Designed by Alice 
+  (四月天). Thanks to StarlightMelody.)
+
 **NanaZip 1.1 Servicing Update 1 Preview 2 (1.1.201.0)**
 
 - Fix no ordinal 345 was found in the dynamically attached library issue in 
