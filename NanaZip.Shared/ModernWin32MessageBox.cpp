@@ -13,6 +13,27 @@
 #include <CommCtrl.h>
 #pragma comment(lib,"comctl32.lib")
 
+int WINAPI OriginalMessageBoxW(
+    _In_opt_ HWND hWnd,
+    _In_opt_ LPCWSTR lpText,
+    _In_opt_ LPCWSTR lpCaption,
+    _In_ UINT uType)
+{
+    static decltype(MessageBoxW)* volatile pMessageBoxW =
+        reinterpret_cast<decltype(MessageBoxW)*>(::GetProcAddress(
+            ::GetModuleHandleW(L"user32.dll"),
+            "MessageBoxW"));
+    if (pMessageBoxW)
+    {
+        return pMessageBoxW(hWnd, lpText, lpCaption, uType);
+    }
+    else
+    {
+        ::SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+        return 0;
+    }
+}
+
 EXTERN_C int WINAPI ModernMessageBoxW(
     _In_opt_ HWND hWnd,
     _In_opt_ LPCWSTR lpText,
@@ -21,19 +42,7 @@ EXTERN_C int WINAPI ModernMessageBoxW(
 {
     if (uType != (uType & (MB_ICONMASK | MB_TYPEMASK)))
     {
-        static decltype(MessageBoxW)* volatile pMessageBoxW =
-            reinterpret_cast<decltype(MessageBoxW)*>(::GetProcAddress(
-                ::GetModuleHandleW(L"user32.dll"),
-                "MessageBoxW"));
-        if (pMessageBoxW)
-        {
-            return pMessageBoxW(hWnd, lpText, lpCaption, uType);
-        }
-        else
-        {
-            ::SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-            return 0;
-        }
+        return ::OriginalMessageBoxW(hWnd, lpText, lpCaption, uType);
     }
 
     TASKDIALOGCONFIG TaskDialogConfig = { 0 };
@@ -67,7 +76,7 @@ EXTERN_C int WINAPI ModernMessageBoxW(
             TDCBF_RETRY_BUTTON | TDCBF_CANCEL_BUTTON;
         break;
     default:
-        return ::MessageBoxW(hWnd, lpText, lpCaption, uType);
+        return ::OriginalMessageBoxW(hWnd, lpText, lpCaption, uType);
     }
 
     switch (uType & MB_ICONMASK)
