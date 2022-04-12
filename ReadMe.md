@@ -110,15 +110,13 @@ deployable everywhere.
   - [x] Add assembly implementations from 7-Zip back for improving performance.
   - [x] Reimplement the about dialog with Task Dialog.
   - [x] Modernize the message boxes with Task Dialog.
-- 1.1 Servicing Update Series (2022 Q2)
+- 1.2 (2022 Q2)
   - [x] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [x] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
   - [ ] Add i18n support for Self Extracting Executables.
-  - [ ] Provide NanaZip Installer for simplify the deployment.
-  - [ ] Add the UI stack based on XAML Islands which is used in NanaZip 2.x 
-        Series.
 - 2.x Series (2023 Q3)
+  - [ ] Add the UI stack based on XAML Islands which is used in NanaZip.
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
   - [ ] Full High DPI and Accessibility support in all UI components.
@@ -126,6 +124,7 @@ deployable everywhere.
         AndromedaMelody.)
   - [ ] Try to modernize the core implementation.
   - [ ] Try to Windows Runtime component for interoperability.
+  - [ ] Provide NanaZip Installer for simplify the deployment.
 - 3.x Series (2024 Q3)
   - [ ] Try to add option for save file names with UTF-8 in 7z archives.
   - [ ] Try to add extension for Windows File Explorer for give user immersive 
@@ -143,7 +142,7 @@ deployable everywhere.
         OrionGrant.)
   - [ ] Try to add an option when extracting an archive to open the folder 
         where you extracted the files, like WinRAR. (Suggested by maicol07.)
-- 4.x Series (2025 Q3)
+- 5.x Series (2025 Q3)
   - [ ] Try to add recovery record support for 7z archives. (Suggested by 
         SakuraNeko.)
   - [ ] Try to create a new archive format for Windows imaging.
