@@ -11,8 +11,6 @@
 #include "EditPageRes.h"
 #include "FoldersPage.h"
 #include "FoldersPageRes.h"
-#include "LangPage.h"
-#include "LangPageRes.h"
 #include "MenuPage.h"
 #include "MenuPageRes.h"
 #include "SettingsPage.h"
@@ -33,7 +31,6 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
   CFoldersPage foldersPage;
   CEditPage editPage;
   CSettingsPage settingsPage;
-  CLangPage langPage;
 
   CObjectVector<NControl::CPageInfo> pages;
   BIG_DIALOG_SIZE(200, 200);
@@ -42,10 +39,10 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
       SIZED_DIALOG(IDD_MENU),
       SIZED_DIALOG(IDD_FOLDERS),
       SIZED_DIALOG(IDD_EDIT),
-      SIZED_DIALOG(IDD_SETTINGS),
-      SIZED_DIALOG(IDD_LANG) };
+      SIZED_DIALOG(IDD_SETTINGS)
+  };
 
-  NControl::CPropertyPage *pagePointers[] = { &menuPage, &foldersPage, &editPage, &settingsPage, &langPage };
+  NControl::CPropertyPage *pagePointers[] = { &menuPage, &foldersPage, &editPage, &settingsPage };
 
   for (unsigned i = 0; i < ARRAY_SIZE(pageIDs); i++)
   {
@@ -59,15 +56,6 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
 
   if (res != -1 && res != 0)
   {
-    if (langPage.LangWasChanged)
-    {
-      // g_App._window.SetText(LangString(IDS_APP_TITLE, 0x03000000));
-      MyLoadMenu();
-      g_App.ReloadToolbars();
-      g_App.MoveSubWindows(); // we need it to change list window aafter _toolBar.AutoSize();
-      g_App.ReloadLang();
-    }
-
     g_App.SetListSettings();
     g_App.RefreshAllPanels();
     // ::PostMessage(hwndOwner, kLangWasChangedMessage, 0 , 0);

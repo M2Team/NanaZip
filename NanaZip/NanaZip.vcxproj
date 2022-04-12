@@ -150,7 +150,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FSDrives.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FSFolder.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FSFolderCopy.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangPage.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LinkDialog.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.cpp" />
@@ -336,7 +335,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FSDrives.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FSFolder.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangPage.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LinkDialog.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.h" />

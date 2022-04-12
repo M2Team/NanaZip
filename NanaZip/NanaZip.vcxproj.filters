@@ -218,9 +218,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\FoldersPage.cpp">
       <Filter>SevenZip\Dialog\Options</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangPage.cpp">
-      <Filter>SevenZip\Dialog\Options</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\MenuPage.cpp">
       <Filter>SevenZip\Dialog\Options</Filter>
     </ClCompile>
@@ -629,9 +626,6 @@
       <Filter>SevenZip\Dialog\Options</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\FoldersPage.h">
-      <Filter>SevenZip\Dialog\Options</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangPage.h">
       <Filter>SevenZip\Dialog\Options</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MenuPage.h">
