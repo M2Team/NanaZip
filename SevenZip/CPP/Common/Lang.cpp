@@ -39,7 +39,6 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
     auto Iterator = g_LanguageMap.find(id);
     if (Iterator == g_LanguageMap.end())
     {
-        using winrt::Windows::ApplicationModel::Resources::Core::NamedResource;
         using winrt::Windows::ApplicationModel::Resources::Core::ResourceManager;
         using winrt::Windows::ApplicationModel::Resources::Core::ResourceMap;
 
@@ -51,7 +50,7 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
         if (CurrentResourceMap.HasKey(ResourceName))
         {
             winrt::hstring Content = CurrentResourceMap.Lookup(
-                ResourceName).Resolve().ValueAsString();
+                ResourceName).Candidates().GetAt(0).ValueAsString();
             g_LanguageMap.emplace(id, Content);
             return Content.data();
         }
