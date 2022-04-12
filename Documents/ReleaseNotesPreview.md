@@ -2,6 +2,15 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.2 Preview 4 (1.2.225.0)**
+
+- Continue to update ModernWin32MessageBox for solving the infinite loop issue
+  in some cases. (Thanks to AndromedaMelody.)
+- Fix crash issue when opening archive files. (Thanks to 1human and Maicol 
+  Battistini.)
+- Remove Language page in Options dialog because NanaZip will follow the 
+  language settings from Windows itself.
+
 **NanaZip 1.1 Servicing Update 1 Preview 3 (1.1.220.0)**
 
 - Modernize the i18n implementation via migrating language files from .txt to 
