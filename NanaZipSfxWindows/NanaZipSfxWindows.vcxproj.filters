@@ -660,6 +660,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
       <Filter>SevenZip\Compress</Filter>
     </ClInclude>
+    <ClInclude Include="NanaZipSfxWindowsResources.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\7z.ico">
@@ -670,6 +671,7 @@
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\resource.rc">
       <Filter>SevenZip\Spec</Filter>
     </ResourceCompile>
+    <ResourceCompile Include="NanaZipSfxWindowsResources.rc" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZipSfxWindows.manifest" />

@@ -233,12 +233,14 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractGUI.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.h" />
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="NanaZipSfxWindowsResources.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\7z.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\resource.rc" />
+    <ResourceCompile Include="NanaZipSfxWindowsResources.rc" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZipSfxWindows.manifest" />
