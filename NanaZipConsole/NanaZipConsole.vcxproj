@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.Win32.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.x64.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.ARM64.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.ARM64.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D866CA04-DF51-4660-BA4D-F82426A3A522}</ProjectGuid>
     <RootNamespace>NanaZipConsole</RootNamespace>
@@ -10,11 +10,9 @@
     <TargetName>NanaZipC</TargetName>
     <MileProjectManifestFile>NanaZipConsole.manifest</MileProjectManifestFile>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
-    <CleanImport>true</CleanImport>
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
-  <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
@@ -216,5 +214,5 @@
   <ItemGroup>
     <Manifest Include="NanaZipConsole.manifest" />
   </ItemGroup>
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.targets" />
 </Project>

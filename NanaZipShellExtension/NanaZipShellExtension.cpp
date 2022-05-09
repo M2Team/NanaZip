@@ -8,7 +8,7 @@
  * DEVELOPER: Mouri_Naruto (Mouri_Naruto AT Outlook.com)
  */
 
-#include <Mile.Windows.h>
+#include <Windows.h>
 
 #include <shlwapi.h>
 #pragma comment(lib, "Shlwapi.lib")
@@ -186,7 +186,7 @@ namespace NanaZip::ShellExtension
             CompressTo7z,
             CompressToZip,
 
-            CompressEmail,        
+            CompressEmail,
             CompressTo7zEmail,
             CompressToZipEmail,
 
@@ -199,7 +199,7 @@ namespace NanaZip::ShellExtension
             Maximum
         };
     }
-    
+
     using SubCommandList = std::vector<winrt::com_ptr<IExplorerCommand>>;
     using SubCommandListIterator = SubCommandList::const_iterator;
 
@@ -234,7 +234,7 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _Outptr_ LPWSTR* ppszName)
         {
-            Mile::UnreferencedParameter(psiItemArray);
+            UNREFERENCED_PARAMETER(psiItemArray);
 
             if (this->m_IsSeparator)
             {
@@ -249,7 +249,7 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _Outptr_ LPWSTR* ppszIcon)
         {
-            Mile::UnreferencedParameter(psiItemArray);
+            UNREFERENCED_PARAMETER(psiItemArray);
 
             *ppszIcon = nullptr;
             return E_NOTIMPL;
@@ -259,7 +259,7 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _Outptr_ LPWSTR* ppszInfotip)
         {
-            Mile::UnreferencedParameter(psiItemArray);
+            UNREFERENCED_PARAMETER(psiItemArray);
             *ppszInfotip = nullptr;
             return E_NOTIMPL;
         }
@@ -276,8 +276,8 @@ namespace NanaZip::ShellExtension
             _In_ BOOL fOkToBeSlow,
             _Out_ EXPCMDSTATE* pCmdState)
         {
-            Mile::UnreferencedParameter(psiItemArray);
-            Mile::UnreferencedParameter(fOkToBeSlow);
+            UNREFERENCED_PARAMETER(psiItemArray);
+            UNREFERENCED_PARAMETER(fOkToBeSlow);
             *pCmdState = ECS_ENABLED;
             return S_OK;
         }
@@ -286,7 +286,7 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _In_opt_ IBindCtx* pbc)
         {
-            Mile::UnreferencedParameter(pbc);
+            UNREFERENCED_PARAMETER(pbc);
 
             if (this->m_IsSeparator)
             {
@@ -379,7 +379,7 @@ namespace NanaZip::ShellExtension
                 {
                     if (!FileInfo0.Find(us2fs(FileName)))
                     {
-                        return Mile::HResultFromLastError();
+                        return ::HRESULT_FROM_WIN32(::GetLastError());
                     }
                     NWindows::NFile::NDir::GetOnlyDirPrefix(
                         us2fs(FileName),
@@ -587,7 +587,7 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _Outptr_ LPWSTR* ppszName)
         {
-            Mile::UnreferencedParameter(psiItemArray);
+            UNREFERENCED_PARAMETER(psiItemArray);
 
             std::vector<std::wstring> FilePaths;
             if (psiItemArray)
@@ -676,7 +676,7 @@ namespace NanaZip::ShellExtension
                 {
                     if (!FileInfo0.Find(us2fs(FileName)))
                     {
-                        return Mile::HResultFromLastError();
+                        return ::HRESULT_FROM_WIN32(::GetLastError());
                     }
                     NWindows::NFile::NDir::GetOnlyDirPrefix(
                         us2fs(FileName),
@@ -724,7 +724,7 @@ namespace NanaZip::ShellExtension
                             CommandID::Open,
                             ContextMenuElimDup));
                 }
-            }      
+            }
 
             if (NeedExtract)
             {
@@ -916,7 +916,7 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _Outptr_ LPWSTR* ppszIcon)
         {
-            Mile::UnreferencedParameter(psiItemArray);
+            UNREFERENCED_PARAMETER(psiItemArray);
             UString Path = ::GetNanaZipPath();
             std::wstring Icon = std::wstring(Path.Ptr(), Path.Len());
             Icon += L",-1";
@@ -927,7 +927,7 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _Outptr_ LPWSTR* ppszInfotip)
         {
-            Mile::UnreferencedParameter(psiItemArray);
+            UNREFERENCED_PARAMETER(psiItemArray);
             *ppszInfotip = nullptr;
             return E_NOTIMPL;
         }
@@ -944,8 +944,8 @@ namespace NanaZip::ShellExtension
             _In_ BOOL fOkToBeSlow,
             _Out_ EXPCMDSTATE* pCmdState)
         {
-            Mile::UnreferencedParameter(psiItemArray);
-            Mile::UnreferencedParameter(fOkToBeSlow);
+            UNREFERENCED_PARAMETER(psiItemArray);
+            UNREFERENCED_PARAMETER(fOkToBeSlow);
             *pCmdState = ECS_ENABLED;
             return S_OK;
         }
@@ -954,8 +954,8 @@ namespace NanaZip::ShellExtension
             _In_opt_ IShellItemArray* psiItemArray,
             _In_opt_ IBindCtx* pbc)
         {
-            Mile::UnreferencedParameter(psiItemArray);
-            Mile::UnreferencedParameter(pbc);
+            UNREFERENCED_PARAMETER(psiItemArray);
+            UNREFERENCED_PARAMETER(pbc);
             return E_NOTIMPL;
         }
 
@@ -1015,7 +1015,7 @@ namespace NanaZip::ShellExtension
         HRESULT STDMETHODCALLTYPE Skip(
             _In_ ULONG celt)
         {
-            Mile::UnreferencedParameter(celt);
+            UNREFERENCED_PARAMETER(celt);
             return E_NOTIMPL;
         }
 
@@ -1046,7 +1046,7 @@ namespace NanaZip::ShellExtension
             _In_ REFIID riid,
             _COM_Outptr_ void** ppvObject) noexcept override
         {
-            Mile::UnreferencedParameter(pUnkOuter);
+            UNREFERENCED_PARAMETER(pUnkOuter);
 
             try
             {

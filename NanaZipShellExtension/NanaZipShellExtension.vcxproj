@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.Win32.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.x64.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.ARM64.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.ARM64.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F17D4837-7943-4361-9527-2AF9CACE477D}</ProjectGuid>
     <RootNamespace>NanaZipShellExtension</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
     <MileProjectManifestFile>NanaZipShellExtension.manifest</MileProjectManifestFile>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
-    <CleanImport>true</CleanImport>
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Library.CppWinRT.props" />
-  <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <ItemDefinitionGroup>
     <ClCompile>
@@ -136,5 +134,5 @@
   <ItemGroup>
     <None Include="NanaZipShellExtension.def" />
   </ItemGroup>
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.targets" />
 </Project>

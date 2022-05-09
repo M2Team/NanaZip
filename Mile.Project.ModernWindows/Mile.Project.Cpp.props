@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
   PROJECT:   Mouri Internal Library Essentials
-  FILE:      Mile.Project.props
+  FILE:      Mile.Project.Cpp.props
   PURPOSE:   Definition for Visual Studio C++ Project
 
   LICENSE:   The MIT License
@@ -27,19 +27,48 @@
   How to enable the version information support.
     Copy Mile.Project.Properties.Template.h to the project folder and rename it
     to Mile.Project.Properties.h.
+  
+  How to enable VC-LTL support.
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+
+  How to enable C++/WinRT support.
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
 -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <!--
-      Only do this for MSBuild versions below 16.0 as it is since done 
-      automatically, see https://github.com/microsoft/msbuild/pull/3605.
-    -->
-    <MSBuildAllProjects Condition="'$(MSBuildToolsVersion)' &lt;= '15'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-  </PropertyGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <CleanImport Condition="'$(MileProjectEnableVCLTLSupport)' == 'true' and $([System.Version]::Parse('$(WindowsTargetPlatformMinVersion)').Build) >= 10240">true</CleanImport>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals" Condition="'$(MileProjectEnableCppWinRTSupport)' == 'true'">
+    <CppWinRTOptimized>true</CppWinRTOptimized>
+    <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
+    <CppWinRTGenerateWindowsMetadata>true</CppWinRTGenerateWindowsMetadata>
+    <!--
+      Import all Windows Runtime metadata in Windows SDK. By default enable 
+      C++/WinRT to include target platform winmds if we didn't override sdk
+      references and the C++ Project system isn't already adding them.
+    -->
+    <CppWinRTImplicitlyExpandTargetPlatform>true</CppWinRTImplicitlyExpandTargetPlatform>
+    <!--
+      Need to set to 'true' so that Win32 APIs are available; setting
+      $(WindowsAppContainer) to 'true' causes the C++ project system to set
+      WINAPI_FAMILY=WINAPI_FAMILY_APP unless this property property is also
+      'true'.
+    -->
+    <_NoWinAPIFamilyApp>true</_NoWinAPIFamilyApp>
+    <!-- Disable Microsoft.VCLibs reference -->
+    <UseCrtSDKReference>false</UseCrtSDKReference>
+    <!--
+      This is magic that tells msbuild to link against the Desktop platform
+      instead of the App platform. This you definitely want, because we're not
+      building a true universal "app", we're building a desktop application
+      with xaml. Without this, we'll link against the app CRT, and the =
+      unpackaged story _will not_ work. Furthermore, APIs like
+      CreatePseudoConsole won't be linkable without this. 
+    -->
+    <_VC_Target_Library_Platform>Desktop</_VC_Target_Library_Platform>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
@@ -47,9 +76,7 @@
     <ConfigurationType Condition="'$(MileProjectType)'=='DynamicLibrary'">DynamicLibrary</ConfigurationType>
     <ConfigurationType Condition="'$(MileProjectType)'=='StaticLibrary'">StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '16.0'">v142</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
     <UseDebugLibraries Condition="'$(Configuration)'=='Release'">false</UseDebugLibraries>
@@ -69,15 +96,8 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions Condition="'$(Platform)'=='Win32'">WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Optimization Condition="'$(Configuration)'=='Debug'">Disabled</Optimization>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-      <FunctionLevelLinking Condition="'$(Configuration)'=='Release'">true</FunctionLevelLinking>
-      <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
       <PreprocessorDefinitions Condition="'$(MileProjectType)'=='ConsoleApplication'">_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(MileProjectType)'=='WindowsApplication'">_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(MileProjectType)'=='DynamicLibrary'">_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -86,8 +106,6 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding Condition="'$(Configuration)'=='Release'">true</EnableCOMDATFolding>
-      <OptimizeReferences Condition="'$(Configuration)'=='Release'">true</OptimizeReferences>
       <SubSystem Condition="'$(MileProjectType)'=='ConsoleApplication'">Console</SubSystem>
       <SubSystem Condition="'$(MileProjectType)'=='WindowsApplication'">Windows</SubSystem>
       <SubSystem Condition="'$(MileProjectType)'=='DynamicLibrary'">Windows</SubSystem>
@@ -100,4 +118,48 @@
       <AdditionalIncludeDirectories>$(ProjectDir);$(MSBuildThisFileDirectory);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(MileProjectEnableCppWinRTSupport)' == 'true'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <PreprocessorDefinitions Condition="'$(MileProjectType)'=='DynamicLibrary'">_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <!--
+        Because we have WindowsAppContainer set to 'true' (required for
+        'Project -> Publish' menu and the .appxmanifest designer), we do not
+        get these libs included automatically, so we explictly include them 
+        here.
+      -->
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary Condition="'$(MileProjectEnableVCLTLSupport)' == 'true'">MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <RuntimeLibrary Condition="'$(MileProjectEnableVCLTLSupport)' == 'true'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <PackageReference Include="VC-LTL" Condition="'$(MileProjectEnableVCLTLSupport)' == 'true'">
+      <Version>5.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.CppWinRT" Condition="'$(MileProjectEnableCppWinRTSupport)' == 'true'">
+      <Version>2.0.211028.7</Version>
+    </PackageReference>
+  </ItemGroup>
 </Project>

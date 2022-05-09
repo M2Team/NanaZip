@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Platform.Win32.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x86.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</ProjectGuid>
     <RootNamespace>NanaZipSfxConsole</RootNamespace>
     <MileProjectType>ConsoleApplication</MileProjectType>
     <MileProjectManifestFile>NanaZipSfxConsole.manifest</MileProjectManifestFile>
+    <WindowsTargetPlatformMinVersion>6.0.6000.0</WindowsTargetPlatformMinVersion>
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.props" />
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.Runtime.VC-LTL.props" />
-  <Import Project="..\Mile.Cpp\Mile.Library\Mile.Library.props" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <PropertyGroup>
     <TargetName>NanaZipConsole</TargetName>
@@ -17,6 +17,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
+      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
       <PreprocessorDefinitions>EXTRACT_ONLY;NO_READ_FROM_CODER;_SFX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -232,5 +233,5 @@
   <ItemGroup>
     <Manifest Include="NanaZipSfxConsole.manifest" />
   </ItemGroup>
-  <Import Project="..\Mile.Cpp\Mile.Project\Mile.Project.targets" />
+  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.targets" />
 </Project>

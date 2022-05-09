@@ -29,8 +29,6 @@
 
 #include "PropertyNameRes.h"
 
-#include <Mile.Windows.h>
-
 using namespace NWindows;
 using namespace NFile;
 using namespace NDir;
@@ -167,19 +165,7 @@ static void CreateToolbar(HWND parent,
   // backward compatibility.
   toolBar.ButtonStructSize();
 
-  int ControlDpi = USER_DEFAULT_SCREEN_DPI;
-  {
-      int xDPI = USER_DEFAULT_SCREEN_DPI;
-      int yDPI = USER_DEFAULT_SCREEN_DPI;
-      if (S_OK == Mile::GetDpiForMonitor(
-          ::MonitorFromWindow(toolBar, MONITOR_DEFAULTTONEAREST),
-          MDT_EFFECTIVE_DPI,
-          reinterpret_cast<UINT*>(&xDPI),
-          reinterpret_cast<UINT*>(&yDPI)))
-      {
-          ControlDpi = xDPI;
-      }
-  }
+  int ControlDpi = ::GetDpiForWindow(toolBar);
   int LargeSize = ::MulDiv(32, ControlDpi, USER_DEFAULT_SCREEN_DPI);
   int NormalSize = ::MulDiv(24, ControlDpi, USER_DEFAULT_SCREEN_DPI);
 
@@ -256,19 +242,7 @@ static void AddButton(
 
   but.iBitmap = imageList.GetImageCount();
 
-  int ControlDpi = USER_DEFAULT_SCREEN_DPI;
-  {
-      int xDPI = USER_DEFAULT_SCREEN_DPI;
-      int yDPI = USER_DEFAULT_SCREEN_DPI;
-      if (S_OK == Mile::GetDpiForMonitor(
-          ::MonitorFromWindow(toolBar, MONITOR_DEFAULTTONEAREST),
-          MDT_EFFECTIVE_DPI,
-          reinterpret_cast<UINT*>(&xDPI),
-          reinterpret_cast<UINT*>(&yDPI)))
-      {
-          ControlDpi = xDPI;
-      }
-  }
+  int ControlDpi = ::GetDpiForWindow(toolBar);
   int LargeSize = ::MulDiv(32, ControlDpi, USER_DEFAULT_SCREEN_DPI);
   int NormalSize = ::MulDiv(24, ControlDpi, USER_DEFAULT_SCREEN_DPI);
 
