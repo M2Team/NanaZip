@@ -2,6 +2,13 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 1.2 Update 1 Preview 1 (1.2.253.0)**
+
+- Fix the issue of the i18n implementation of File Type Association. 
+  (Contributed by AndromedaMelody. Updated in NanaZip 1.2 Stable.)
+- Add i18n support for GUI edition of Self Extracting Executable. 
+  (Contributed by AndromedaMelody. Updated in NanaZip 1.2 Stable.)
+
 **NanaZip 1.2 Preview 4 (1.2.225.0)**
 
 - Continue to update ModernWin32MessageBox for solving the infinite loop issue

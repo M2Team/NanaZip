@@ -138,7 +138,7 @@ BEGIN
 END
 
 
-IDI_ICON  ICON  "../../../../../Assets/NanaZip.ico"
+IDI_ICON  ICON  "../../../../../Assets/NanaZipPreview.ico"
 
 IDB_ADD        BITMAP  "../../../../../NanaZip/Assets/Toolbar/Add_32x32.bmp"
 IDB_EXTRACT    BITMAP  "../../../../../NanaZip/Assets/Toolbar/Extract_32x32.bmp"
