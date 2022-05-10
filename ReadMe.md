@@ -15,15 +15,12 @@
 ![ContextMenu](Documents/ContextMenu.png)
 ![MainWindow](Documents/MainWindow.png)
 
-**Warning: This project is in early stages of development, the final product 
-may differ from what you see now.**
-
 NanaZip is an open source file archiver intended for the modern Windows 
 experience, forked from the source code of well-known open source file archiver
 7-Zip.
 
-We need help to translate NanaZip into native languages that have not been 
-supported.
+**All kinds of contributions will be appreciated. All suggestions, pull 
+requests and issues are welcome.**
 
 ## Features
 
@@ -35,6 +32,8 @@ supported.
 - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
 - Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs. (Merged 
   from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd).)
+- Support the Per-Monitor DPI-Aware for all GUI components.
+- Support the i18n for GUI edition of Self Extracting Executable.
 
 ## System Requirements
 
@@ -114,7 +113,7 @@ deployable everywhere.
   - [x] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [x] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
-  - [ ] Add i18n support for Self Extracting Executables.
+  - [x] Add i18n support for Self Extracting Executables.
 - 2.x Series (2023 Q3)
   - [ ] Add the UI stack based on XAML Islands which is used in NanaZip.
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
@@ -147,9 +146,6 @@ deployable everywhere.
         SakuraNeko.)
   - [ ] Try to create a new archive format for Windows imaging.
   - [ ] Try to add ISO creation support.
-
-**All kinds of contributions will be appreciated. All suggestions, pull 
-requests and issues are welcome.**
 
 ## Documents
 
