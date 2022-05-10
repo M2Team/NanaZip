@@ -1,4 +1,8 @@
-﻿#define IDS_CLOSE                                   408
+﻿#define REDIRECTED_IDOK                             401
+#define REDIRECTED_IDCANCEL                         402
+#define REDIRECTED_IDYES                            406
+#define REDIRECTED_IDNO                             407
+#define IDS_CLOSE                                   408
 #define IDS_CONTINUE                                411
 #define IDB_YES_TO_ALL                              440
 #define IDB_NO_TO_ALL                               441

@@ -20,7 +20,7 @@
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <PreprocessorDefinitions>NO_REGISTRY;EXTRACT_ONLY;NO_READ_FROM_CODER;_SFX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NO_REGISTRY;EXTRACT_ONLY;NO_READ_FROM_CODER;_SFX;LANG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
@@ -32,6 +32,8 @@
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Common\Lang.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\Clipboard.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\MemoryGlobal.cpp" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c" />
@@ -148,6 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
+    <ClInclude Include="..\SevenZip\CPP\Common\Lang.h" />
     <ClInclude Include="..\SevenZip\CPP\Windows\Clipboard.h" />
     <ClInclude Include="..\SevenZip\CPP\Windows\MemoryGlobal.h" />
     <ClInclude Include="..\SevenZip\C\7zCrc.h" />

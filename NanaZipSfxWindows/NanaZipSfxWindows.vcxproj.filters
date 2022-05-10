@@ -399,6 +399,12 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp">
       <Filter>SevenZip\Compress</Filter>
     </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp">
+      <Filter>SevenZip\File Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\CPP\Common\Lang.cpp">
+      <Filter>SevenZip\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.h">
@@ -661,6 +667,12 @@
       <Filter>SevenZip\Compress</Filter>
     </ClInclude>
     <ClInclude Include="NanaZipSfxWindowsResources.h" />
+    <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.h">
+      <Filter>SevenZip\File Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SevenZip\CPP\Common\Lang.h">
+      <Filter>SevenZip\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\7z.ico">

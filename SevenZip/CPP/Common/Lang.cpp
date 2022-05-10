@@ -26,19 +26,30 @@ bool CLang::Open(CFSTR fileName, const char *id)
     return true;
 }
 
+#ifdef _SFX
+#include "../Windows/ResourceString.h"
+#else
 #include <winrt/windows.foundation.h>
 #include <winrt/windows.foundation.collections.h>
 #include <winrt/windows.applicationmodel.resources.core.h>
+#endif
 
 #include <map>
 
+#ifdef _SFX
+std::map<UInt32, UString> g_LanguageMap;
+#else
 std::map<UInt32, winrt::hstring> g_LanguageMap;
+#endif
 
 const wchar_t *CLang::Get(UInt32 id) const throw()
 {
     auto Iterator = g_LanguageMap.find(id);
     if (Iterator == g_LanguageMap.end())
     {
+#ifdef _SFX
+        return g_LanguageMap.emplace(id, NWindows::MyLoadString(id)).first->second;
+#else
         using winrt::Windows::ApplicationModel::Resources::Core::ResourceManager;
         using winrt::Windows::ApplicationModel::Resources::Core::ResourceMap;
 
@@ -58,7 +69,12 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
         {
             return nullptr;
         }
+#endif    
     }
 
+#ifdef _SFX
+    return Iterator->second;
+#else
     return Iterator->second.data();
+#endif
 }

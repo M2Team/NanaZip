@@ -31,7 +31,11 @@ bool LangOpen(CLang &lang, CFSTR fileName)
 
 FString GetLangDirPrefix()
 {
-  return NDLL::GetModuleDirPrefix() + FTEXT("Lang") FSTRING_PATH_SEPARATOR;
+#ifdef _SFX
+    return L"";
+#else
+    return NDLL::GetModuleDirPrefix() + FTEXT("Lang") FSTRING_PATH_SEPARATOR;
+#endif
 }
 
 void LoadLangOneTime()
@@ -267,7 +271,9 @@ static void OpenDefaultLang()
 void ReloadLang()
 {
   g_Lang.Clear();
-  ReadRegLang(g_LangID);
+  #ifndef _SFX
+    ReadRegLang(g_LangID);
+  #endif
   #ifndef _UNICODE
   if (g_IsNT)
   #endif

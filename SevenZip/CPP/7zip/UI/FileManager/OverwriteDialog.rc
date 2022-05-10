@@ -37,7 +37,7 @@ BEGIN
   PUSHBUTTON  "A&uto Rename", IDB_AUTO_RENAME,   bx1, by2, bSizeBig, bys
   PUSHBUTTON  "&No",          IDNO,              bx3, by1, bxs, bys
   PUSHBUTTON  "No to A&ll",   IDB_NO_TO_ALL,     bx2, by1, bxs, bys
-  PUSHBUTTON  "&Cancel",      IDCANCEL, xs - m - bxs, by1, bxs, bys
+  PUSHBUTTON  "&Cancel",      IDCANCEL,          bx1, by1, bSizeBig, bys
 END
 
 
