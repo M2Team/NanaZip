@@ -15,12 +15,12 @@
   IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 uap8 virtualization">
 
   <Identity
-    Name="40174MouriNaruto.NanaZipPreview"
+    Name="40174MouriNaruto.NanaZip"
     Publisher="CN=E310A153-74A9-4D81-800B-857A8D58408A"
-    Version="1.2.225.0" />
+    Version="1.2.252.0" />
 
   <Properties>
-    <DisplayName>NanaZip Preview</DisplayName>
+    <DisplayName>NanaZip</DisplayName>
     <PublisherDisplayName>Kenji Mouri</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
     <virtualization:FileSystemWriteVirtualization>
@@ -47,7 +47,7 @@
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
-        DisplayName="NanaZip Preview"
+        DisplayName="NanaZip"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -70,7 +70,7 @@
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
-        DisplayName="NanaZip Preview"
+        DisplayName="NanaZip"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -92,7 +92,7 @@
       Executable="NanaZip.exe"
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
-        DisplayName="NanaZip Preview"
+        DisplayName="NanaZip"
         Description="NanaZip"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -120,7 +120,7 @@
           </uap3:AppExecutionAlias>
         </uap3:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="fileassociations">
+          <uap3:FileTypeAssociation Name="fileassociations" Parameters="&quot;%1&quot;">
             <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
             <uap:SupportedFileTypes>
               <uap:FileType>.001</uap:FileType>
@@ -167,25 +167,22 @@
               <uap:FileType>.zip</uap:FileType>
               <uap:FileType>.zst</uap:FileType>
             </uap:SupportedFileTypes>
-            <uap2:SupportedVerbs>
-              <uap3:Verb Id="open" Parameters="&quot;%1&quot;">ms-resource:///Legacy/Resource540</uap3:Verb>
-            </uap2:SupportedVerbs>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
+          </uap3:FileTypeAssociation>    
+      </uap:Extension>
         <desktop4:Extension Category="windows.fileExplorerContextMenus">
           <desktop4:FileExplorerContextMenus>
             <desktop5:ItemType Type="Directory">
-              <desktop5:Verb Id="NanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
+              <desktop5:Verb Id="NanaZipShellExtension" Clsid="CAE3F1D4-7765-4D98-A060-52CD14D56EAB" />
             </desktop5:ItemType>
             <desktop5:ItemType Type="*">
-              <desktop5:Verb Id="NanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
+              <desktop5:Verb Id="NanaZipShellExtension" Clsid="CAE3F1D4-7765-4D98-A060-52CD14D56EAB" />
             </desktop5:ItemType>
           </desktop4:FileExplorerContextMenus>
         </desktop4:Extension>
         <com:Extension Category="windows.comServer">
           <com:ComServer>
             <com:SurrogateServer DisplayName="NanaZip Shell Extension">
-              <com:Class Id="469D94E9-6AF4-4395-B396-99B1308F8CE5" Path="NanaZipShellExtension.dll" ThreadingModel="STA"/>
+              <com:Class Id="CAE3F1D4-7765-4D98-A060-52CD14D56EAB" Path="NanaZipShellExtension.dll" ThreadingModel="STA"/>
             </com:SurrogateServer>
           </com:ComServer>
         </com:Extension>

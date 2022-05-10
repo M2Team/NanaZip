@@ -3,6 +3,31 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 1.2 (1.2.252.0)**
+
+- Fix no ordinal 345 was found in the dynamically attached library issue in 
+  Self Extracting Executables. (Thanks to FadeMind.)
+- Add Per-Monitor DPI-Aware support for all GUI components.
+- Adjust and simplify the compiler options for modernizing.
+- Fix i18n issue for the About dialog. (Thanks to AndromedaMelody.)
+- Update installation tutorial. (Suggested by AndromedaMelody.)
+- Fix cannot start editor issue when only store edition of notepad existed. 
+  (Thanks to AndromedaMelody.)
+- Modernize the i18n implementation via migrating language files from .txt to 
+  .resw. (Contributed by AndromedaMelody. Suggested by Maicol Battistini.)
+- Update ModernWin32MessageBox for solving the infinite loop issue in some 
+  cases. (Thanks to AndromedaMelody.)
+- Tweak icons and provide icons for preview versions. (Designed by Alice 
+  (四月天). Thanks to StarlightMelody.)
+- Fix crash issue when opening archive files. (Thanks to 1human and Maicol 
+  Battistini.)
+- Remove Language page in Options dialog because NanaZip will follow the 
+  language settings from Windows itself.
+- Fix the issue of the i18n implementation of File Type Association. 
+  (Contributed by AndromedaMelody.)
+- Add i18n support for GUI edition of Self Extracting Executable. 
+  (Contributed by AndromedaMelody.)
+
 **NanaZip 1.1 (1.1.194.0)**
 
 - Add assembly implementations from 7-Zip back for improving performance.

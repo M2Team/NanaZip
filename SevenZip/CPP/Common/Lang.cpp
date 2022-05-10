@@ -48,7 +48,13 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
     if (Iterator == g_LanguageMap.end())
     {
 #ifdef _SFX
-        return g_LanguageMap.emplace(id, NWindows::MyLoadString(id)).first->second;
+        UString Content = NWindows::MyLoadString(id);
+        if (Content.IsEmpty())
+        {
+            return nullptr;
+        }
+
+        return g_LanguageMap.emplace(id, Content).first->second;
 #else
         using winrt::Windows::ApplicationModel::Resources::Core::ResourceManager;
         using winrt::Windows::ApplicationModel::Resources::Core::ResourceMap;
