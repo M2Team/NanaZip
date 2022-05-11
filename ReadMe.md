@@ -82,8 +82,8 @@ deployable everywhere.
   `%UserProfile%/AppData` will be redirected in Windows 10, and file operations
   in directories other than `Local`, `LocalLow` and `Roaming` in 
   `%UserProfile%/AppData` will still be redirected in Windows 11.
-- Due to the Microsoft Store limitations, NanaZip 1.1 Servicing Update 1 and 
-  later won't support languages not mentioned in 
+- Due to the Microsoft Store limitations, NanaZip 1.2 and later won't support 
+  languages not mentioned in 
   https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages.
 
 ## Development Roadmap
@@ -109,7 +109,7 @@ deployable everywhere.
   - [x] Add assembly implementations from 7-Zip back for improving performance.
   - [x] Reimplement the about dialog with Task Dialog.
   - [x] Modernize the message boxes with Task Dialog.
-- 1.2 (2022 Q2)
+- 1.2 (May 11, 2022)
   - [x] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
   - [x] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
