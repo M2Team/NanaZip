@@ -156,10 +156,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <PackageReference Include="VC-LTL" Condition="'$(MileProjectEnableVCLTLSupport)' == 'true'">
-      <Version>5.0.4</Version>
+      <Version>5.0.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.CppWinRT" Condition="'$(MileProjectEnableCppWinRTSupport)' == 'true'">
-      <Version>2.0.211028.7</Version>
+      <Version>2.0.220418.1</Version>
     </PackageReference>
   </ItemGroup>
 </Project>
