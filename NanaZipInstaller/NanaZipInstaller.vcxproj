@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x86.props" />
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x64.props" />
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.ARM64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}</ProjectGuid>
     <RootNamespace>NanaZipInstaller</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZipInstaller.manifest</MileProjectManifestFile>
-    <WindowsTargetPlatformMinVersion>6.0.6000.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
@@ -34,5 +33,5 @@
   <ItemGroup>
     <Image Include="icon1.ico" />
   </ItemGroup>
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.targets" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

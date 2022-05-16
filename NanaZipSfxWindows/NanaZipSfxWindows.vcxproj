@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</ProjectGuid>
     <RootNamespace>NanaZipSfxWindows</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZipSfxWindows.manifest</MileProjectManifestFile>
-    <WindowsTargetPlatformMinVersion>6.0.6000.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <PropertyGroup>
@@ -250,5 +249,5 @@
   <ItemGroup>
     <Manifest Include="NanaZipSfxWindows.manifest" />
   </ItemGroup>
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.targets" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

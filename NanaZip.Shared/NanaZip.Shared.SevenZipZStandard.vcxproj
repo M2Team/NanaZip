@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x86.props" />
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.x64.props" />
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Platform.ARM64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6F0E7455-ECE1-440D-9EA2-8C18E4F1CBE6}</ProjectGuid>
     <RootNamespace>NanaZip.Shared.SevenZipZStandard</RootNamespace>
     <MileProjectType>StaticLibrary</MileProjectType>
-    <WindowsTargetPlatformMinVersion>6.0.6000.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <PropertyGroup>
     <IncludePath>..\SevenZip\C\brotli\;$(IncludePath)</IncludePath>
     <IncludePath>..\SevenZip\C\fast-lzma2\;$(IncludePath)</IncludePath>
@@ -23,6 +22,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
+      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
       <PreprocessorDefinitions>ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;NO_XXHASH;FL2_7ZIP_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -311,5 +311,5 @@
     <None Include="..\SevenZip\C\zstdmt\LICENSE" />
     <None Include="..\SevenZip\C\zstdmt\README.md" />
   </ItemGroup>
-  <Import Project="..\Mile.Project.ModernWindows\Mile.Project.Cpp.targets" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

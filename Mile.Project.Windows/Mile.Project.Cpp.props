@@ -39,7 +39,7 @@
     <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <CleanImport Condition="'$(MileProjectEnableVCLTLSupport)' == 'true' and $([System.Version]::Parse('$(WindowsTargetPlatformMinVersion)').Build) >= 10240">true</CleanImport>
+    <CleanImport>true</CleanImport>
   </PropertyGroup>
   <PropertyGroup Label="Globals" Condition="'$(MileProjectEnableCppWinRTSupport)' == 'true'">
     <CppWinRTOptimized>true</CppWinRTOptimized>
