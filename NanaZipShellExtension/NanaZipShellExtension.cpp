@@ -568,26 +568,19 @@ namespace NanaZip::ShellExtension
         DWORD m_ContextMenuFlags;
         CBoolPair m_ContextMenuElimDup;
 
+        bool m_Initialized = false;
         SubCommandList m_SubCommands;
         SubCommandListIterator m_CurrentSubCommand;
 
-    public:
-
-        ExplorerCommandRoot()
+        void Initialize(
+            _In_opt_ IShellItemArray* psiItemArray)
         {
-            CContextMenuInfo ContextMenuInfo;
-            ContextMenuInfo.Load();
-            this->m_ContextMenuFlags = ContextMenuInfo.Flags;
-            this->m_ContextMenuElimDup = ContextMenuInfo.ElimDup;
-        }
+            if (m_Initialized)
+            {
+                return;
+            }
 
-#pragma region IExplorerCommand
-
-        HRESULT STDMETHODCALLTYPE GetTitle(
-            _In_opt_ IShellItemArray* psiItemArray,
-            _Outptr_ LPWSTR* ppszName)
-        {
-            UNREFERENCED_PARAMETER(psiItemArray);
+            m_Initialized = true;
 
             std::vector<std::wstring> FilePaths;
             if (psiItemArray)
@@ -617,7 +610,7 @@ namespace NanaZip::ShellExtension
 
             if (FilePaths.empty())
             {
-                return E_NOTIMPL;
+                return;
             }
 
             UStringVector FileNames;
@@ -676,7 +669,7 @@ namespace NanaZip::ShellExtension
                 {
                     if (!FileInfo0.Find(us2fs(FileName)))
                     {
-                        return ::HRESULT_FROM_WIN32(::GetLastError());
+                        return;
                     }
                     NWindows::NFile::NDir::GetOnlyDirPrefix(
                         us2fs(FileName),
@@ -902,7 +895,26 @@ namespace NanaZip::ShellExtension
                         CommandID::HashAll,
                         ContextMenuElimDup));
             }
+        }
 
+    public:
+
+        ExplorerCommandRoot()
+        {
+            CContextMenuInfo ContextMenuInfo;
+            ContextMenuInfo.Load();
+            this->m_ContextMenuFlags = ContextMenuInfo.Flags;
+            this->m_ContextMenuElimDup = ContextMenuInfo.ElimDup;
+        }
+
+#pragma region IExplorerCommand
+
+        HRESULT STDMETHODCALLTYPE GetTitle(
+            _In_opt_ IShellItemArray* psiItemArray,
+            _Outptr_ LPWSTR* ppszName)
+        {
+            this->Initialize(psiItemArray);
+            
             if (this->m_SubCommands.empty())
             {
                 *ppszName = nullptr;
