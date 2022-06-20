@@ -13,7 +13,7 @@
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
-  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 uap8 virtualization">
+  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 uap8 uap10 virtualization">
 
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
