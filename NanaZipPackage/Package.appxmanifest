@@ -11,8 +11,9 @@
   xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
-  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 uap8 virtualization">
+  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 uap8 uap10 virtualization">
 
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
@@ -166,6 +167,7 @@
               <uap:FileType>.z</uap:FileType>
               <uap:FileType>.zip</uap:FileType>
               <uap:FileType>.zst</uap:FileType>
+              <uap10:FileType>*</uap10:FileType>
             </uap:SupportedFileTypes>
           </uap3:FileTypeAssociation>    
       </uap:Extension>
