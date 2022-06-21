@@ -116,4 +116,13 @@ FOLDER_ARCHIVE_INTERFACE(IFolderScanProgress, 0x11)
   INTERFACE_IFolderScanProgress(PURE)
 };
 
+
+#define INTERFACE_IFolderSetZoneIdMode(x) \
+  STDMETHOD(SetZoneIdMode)(NExtract::NZoneIdMode::EEnum zoneMode) x; \
+
+FOLDER_ARCHIVE_INTERFACE(IFolderSetZoneIdMode, 0x12)
+{
+  INTERFACE_IFolderSetZoneIdMode(PURE)
+};
+
 #endif

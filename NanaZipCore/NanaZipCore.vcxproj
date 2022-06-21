@@ -28,10 +28,13 @@
     <None Include="..\SevenZip\CPP\7zip\Archive\Archive2.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ApfsHandler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LizardHandler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LpHandler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz4Handler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Lz5Handler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LzHandler.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\SparseHandler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\VhdxHandler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ZstdHandler.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.cpp" />
@@ -58,6 +61,7 @@
     <ClCompile Include="..\SevenZip\CPP\Common\Sha512Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\XXH32Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\XXH64Reg.cpp" />
+    <ClCompile Include="..\SevenZip\CPP\Windows\PropVariantConv.cpp" />
     <ClCompile Include="..\SevenZip\C\7zBuf2.c" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c" />
     <ClCompile Include="..\SevenZip\C\7zStream.c" />
@@ -329,6 +333,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lz5Encoder.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdEncoder.h" />
+    <ClInclude Include="..\SevenZip\CPP\Windows\PropVariantConv.h" />
     <ClInclude Include="..\SevenZip\C\7zBuf.h" />
     <ClInclude Include="..\SevenZip\C\7zCrc.h" />
     <ClInclude Include="..\SevenZip\C\7zTypes.h" />

@@ -98,8 +98,8 @@ THREAD_FUNC_RET_TYPE CThreadInfo::ThreadFunc()
     bool needLeave = true;
     try
     {
-      UInt32 blockSize = Encoder->ReadRleBlock(m_Block);
-      m_PackSize = Encoder->m_InStream.GetProcessedSize();
+      const UInt32 blockSize = Encoder->ReadRleBlock(m_Block);
+      m_UnpackSize = Encoder->m_InStream.GetProcessedSize();
       m_BlockIndex = Encoder->NextBlockIndex;
       if (++Encoder->NextBlockIndex == Encoder->NumThreads)
         Encoder->NextBlockIndex = 0;
@@ -130,12 +130,12 @@ void CEncProps::Normalize(int level)
 {
   if (level < 0) level = 5;
   if (level > 9) level = 9;
-  
+
   if (NumPasses == (UInt32)(Int32)-1)
     NumPasses = (level >= 9 ? 7 : (level >= 7 ? 2 : 1));
   if (NumPasses < 1) NumPasses = 1;
   if (NumPasses > kNumPassesMax) NumPasses = kNumPassesMax;
-  
+
   if (BlockSizeMult == (UInt32)(Int32)-1)
     BlockSizeMult = (level >= 5 ? 9 : (level >= 1 ? (unsigned)level * 2 - 1: 1));
   if (BlockSizeMult < kBlockSizeMultMin) BlockSizeMult = kBlockSizeMultMin;
@@ -167,7 +167,7 @@ HRESULT CEncoder::Create()
     if (wres != 0)
       return HRESULT_FROM_WIN32(wres);
   }
-  
+
   if (ThreadsInfo && m_NumThreadsPrev == NumThreads)
     return S_OK;
   try
@@ -222,7 +222,8 @@ UInt32 CEncoder::ReadRleBlock(Byte *buffer)
   Byte prevByte;
   if (m_InStream.ReadByte(prevByte))
   {
-    UInt32 blockSize = _props.BlockSizeMult * kBlockSizeStep - 1;
+    NumBlocks++;
+    const UInt32 blockSize = _props.BlockSizeMult * kBlockSizeStep - 1;
     unsigned numReps = 1;
     buffer[i++] = prevByte;
     while (i < blockSize) // "- 1" to support RLE
@@ -278,7 +279,7 @@ void CEncoder::WriteCrc(UInt32 v)
 void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
 {
   WriteBit2(0); // Randomised = false
-  
+
   {
     UInt32 origPtr = BlockSort(m_BlockSorterIndex, block, blockSize);
     // if (m_BlockSorterIndex[origPtr] != 0) throw 1;
@@ -402,10 +403,10 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
     }
 
     WriteBits2(numTables, kNumTablesBits);
-    
+
     UInt32 numSelectors = (numSymbols + kGroupSize - 1) / kGroupSize;
     WriteBits2(numSelectors, kNumSelectorsBits);
-    
+
     {
       UInt32 remFreq = numSymbols;
       unsigned gs = 0;
@@ -417,10 +418,10 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
         UInt32 aFreq = 0;
         while (aFreq < tFreq) //  && ge < alphaSize)
           aFreq += symbolCounts[ge++];
-        
+
         if (ge > gs + 1 && t != numTables && t != 1 && (((numTables - t) & 1) == 1))
           aFreq -= symbolCounts[--ge];
-        
+
         Byte *lens = Lens[(size_t)t - 1];
         unsigned i = 0;
         do
@@ -431,8 +432,8 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
       }
       while (--t != 0);
     }
-    
-    
+
+
     for (unsigned pass = 0; pass < kNumHuffPasses; pass++)
     {
       {
@@ -441,7 +442,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
           memset(Freqs[t], 0, sizeof(Freqs[t]));
         while (++t < numTables);
       }
-      
+
       {
         UInt32 mtfPos = 0;
         UInt32 g = 0;
@@ -457,7 +458,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
             symbols[i] = symbol;
           }
           while (++i < kGroupSize && mtfPos < mtfArraySize);
-          
+
           UInt32 bestPrice2 = 0xFFFFFFFF;
           unsigned t = 0;
           do
@@ -483,7 +484,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
         }
         while (mtfPos < mtfArraySize);
       }
-      
+
       unsigned t = 0;
       do
       {
@@ -497,7 +498,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
       }
       while (++t < numTables);
     }
-    
+
     {
       Byte mtfSel[kNumTablesMax];
       {
@@ -506,7 +507,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
           mtfSel[t] = (Byte)t;
         while (++t < numTables);
       }
-      
+
       UInt32 i = 0;
       do
       {
@@ -521,7 +522,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
       }
       while (++i < numSelectors);
     }
-    
+
     {
       unsigned t = 0;
       do
@@ -553,7 +554,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
       }
       while (++t < numTables);
     }
-    
+
     {
       UInt32 groupSize = 0;
       UInt32 groupIndex = 0;
@@ -644,12 +645,12 @@ void CThreadInfo::EncodeBlock2(const Byte *block, UInt32 blockSize, UInt32 numPa
   if (numPasses > 1 && blockSize >= (1 << 10))
   {
     UInt32 blockSize0 = blockSize / 2; // ????
-    
+
     for (; (block[blockSize0] == block[(size_t)blockSize0 - 1]
             || block[(size_t)blockSize0 - 1] == block[(size_t)blockSize0 - 2])
           && blockSize0 < blockSize;
         blockSize0++);
-    
+
     if (blockSize0 < blockSize)
     {
       EncodeBlock2(block, blockSize0, numPasses - 1);
@@ -722,8 +723,8 @@ HRESULT CThreadInfo::EncodeBlock3(UInt32 blockSize)
 
     if (Encoder->Progress)
     {
-      UInt64 unpackSize = Encoder->m_OutStream.GetProcessedSize();
-      res = Encoder->Progress->SetRatioInfo(&m_PackSize, &unpackSize);
+      const UInt64 packSize = Encoder->m_OutStream.GetProcessedSize();
+      res = Encoder->Progress->SetRatioInfo(&m_UnpackSize, &packSize);
     }
 
     Encoder->ThreadsInfo[blockIndex].CanWriteEvent.Set();
@@ -744,6 +745,7 @@ void CEncoder::WriteBytes(const Byte *data, UInt32 sizeInBits, Byte lastByte)
 HRESULT CEncoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *outStream,
     const UInt64 * /* inSize */, const UInt64 * /* outSize */, ICompressProgressInfo *progress)
 {
+  NumBlocks = 0;
   #ifndef _7ZIP_ST
   Progress = progress;
   RINOK(Create());
@@ -831,9 +833,9 @@ HRESULT CEncoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
       RINOK(ti.EncodeBlock3(blockSize));
       if (progress)
       {
-        UInt64 packSize = m_InStream.GetProcessedSize();
-        UInt64 unpackSize = m_OutStream.GetProcessedSize();
-        RINOK(progress->SetRatioInfo(&packSize, &unpackSize));
+        const UInt64 unpackSize = m_InStream.GetProcessedSize();
+        const UInt64 packSize = m_OutStream.GetProcessedSize();
+        RINOK(progress->SetRatioInfo(&unpackSize, &packSize));
       }
     }
   }
@@ -845,7 +847,10 @@ HRESULT CEncoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
   WriteByte(kFinSig5);
 
   WriteCrc(CombinedCrc.GetDigest());
-  return Flush();
+  RINOK(Flush());
+  if (!m_InStream.WasFinished())
+    return E_FAIL;
+  return S_OK;
 }
 
 STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream *outStream,

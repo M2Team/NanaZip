@@ -8,6 +8,7 @@
 #include "ArchiveOpenCallback.h"
 #include "LoadCodecs.h"
 #include "Property.h"
+#include "DirItem.h"
 
 #ifndef _SFX
 
@@ -161,7 +162,7 @@ struct CArcErrorInfo
   /* if CArc is Open OK with some format:
         - ErrorFormatIndex shows error format index, if extension is incorrect
         - other variables show message and warnings of archive that is open */
-  
+
   UString ErrorMessage;
   UString WarningMessage;
 
@@ -260,6 +261,9 @@ struct CReadArcItem
   }
 };
 
+
+
+
 class CArc
 {
   HRESULT PrepareToOpen(const COpenOptions &op, unsigned formatIndex, CMyComPtr<IInArchive> &archive);
@@ -268,7 +272,7 @@ class CArc
 
   #ifndef _SFX
   // parts.Back() can contain alt stream name "nams:AltName"
-  HRESULT GetItemPathToParent(UInt32 index, UInt32 parent, UStringVector &parts) const;
+  HRESULT GetItem_PathToParent(UInt32 index, UInt32 parent, UStringVector &parts) const;
   #endif
 
 public:
@@ -277,7 +281,7 @@ public:
           // we use InStream in 2 cases (ArcStreamOffset != 0):
           // 1) if we use additional cache stream
           // 2) we reopen sfx archive with CTailInStream
-  
+
   CMyComPtr<IArchiveGetRawProps> GetRawProps;
   CMyComPtr<IArchiveGetRootProps> GetRootProps;
 
@@ -289,19 +293,21 @@ public:
   UString DefaultName;
   int FormatIndex;     // -1 means Parser
   UInt32 SubfileIndex; // (UInt32)(Int32)-1; means no subfile
-  FILETIME MTime;
-  bool MTimeDefined;
-  
+
+  // CFiTime MTime;
+  // bool MTime_Defined;
+  CArcTime MTime;
+
   Int64 Offset; // it's offset of start of archive inside stream that is open by Archive Handler
   UInt64 PhySize;
   // UInt64 OkPhySize;
-  bool PhySizeDefined;
+  bool PhySize_Defined;
   // bool OkPhySize_Defined;
   UInt64 FileSize;
   UInt64 AvailPhySize; // PhySize, but it's reduced if exceed end of file
   // bool offsetDefined;
 
-  UInt64 GetEstmatedPhySize() const { return PhySizeDefined ? PhySize : FileSize; }
+  UInt64 GetEstmatedPhySize() const { return PhySize_Defined ? PhySize : FileSize; }
 
   UInt64 ArcStreamOffset; // offset of stream that is open by Archive Handler
   Int64 GetGlobalOffset() const { return (Int64)ArcStreamOffset + Offset; } // it's global offset of archive
@@ -312,7 +318,7 @@ public:
 
   bool IsTree;
   bool IsReadOnly;
-  
+
   bool Ask_Deleted;
   bool Ask_AltStream;
   bool Ask_Aux;
@@ -323,7 +329,7 @@ public:
   // void Set_ErrorFlagsText();
 
   CArc():
-    MTimeDefined(false),
+    // MTime_Defined(false),
     IsTree(false),
     IsReadOnly(false),
     Ask_Deleted(false),
@@ -343,17 +349,29 @@ public:
     return Archive->Close();
   }
 
-  HRESULT GetItemPath(UInt32 index, UString &result) const;
-  HRESULT GetDefaultItemPath(UInt32 index, UString &result) const;
-  
+  HRESULT GetItem_Path(UInt32 index, UString &result) const;
+  HRESULT GetItem_DefaultPath(UInt32 index, UString &result) const;
+
   // GetItemPath2 adds [DELETED] dir prefix for deleted items.
-  HRESULT GetItemPath2(UInt32 index, UString &result) const;
+  HRESULT GetItem_Path2(UInt32 index, UString &result) const;
 
   HRESULT GetItem(UInt32 index, CReadArcItem &item) const;
-  
-  HRESULT GetItemSize(UInt32 index, UInt64 &size, bool &defined) const;
-  HRESULT GetItemMTime(UInt32 index, FILETIME &ft, bool &defined) const;
-  HRESULT IsItemAnti(UInt32 index, bool &result) const
+
+  HRESULT GetItem_Size(UInt32 index, UInt64 &size, bool &defined) const;
+
+  /* if (GetProperty() returns vt==VT_EMPTY), this function sets
+     timestamp from archive file timestamp (MTime).
+     So (at) will be set in most cases (at.Def == true)
+     if (at.Prec == 0)
+     {
+       it means that (Prec == 0) was returned for (kpidMTime),
+       and no value was returned for (kpidTimeType).
+       it can mean Windows precision or unknown precision.
+     }
+  */
+  HRESULT GetItem_MTime(UInt32 index, CArcTime &at) const;
+
+  HRESULT IsItem_Anti(UInt32 index, bool &result) const
     { return Archive_GetItemBoolProp(Archive, index, kpidIsAnti, result); }
 
 
@@ -361,7 +379,7 @@ public:
   HRESULT OpenStreamOrFile(COpenOptions &options);
 
   HRESULT ReOpen(const COpenOptions &options, IArchiveOpenCallback *openCallback_Additional);
-  
+
   HRESULT CreateNewTailStream(CMyComPtr<IInStream> &stream);
 
   bool IsHashHandler(const COpenOptions &options) const
@@ -439,7 +457,7 @@ struct CDirPathSortPair
   unsigned Index;
 
   void SetNumSlashes(const FChar *s);
-  
+
   int Compare(const CDirPathSortPair &a) const
   {
     // We need sorting order where parent items will be after child items

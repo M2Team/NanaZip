@@ -9,13 +9,14 @@
 
 #include "LzmaEncoder.h"
 
-#include "../../Common/IntToString.h"
-#include "../../Windows/TimeUtils.h"
-
 // #define LOG_LZMA_THREADS
 
 #ifdef LOG_LZMA_THREADS
+
 #include <stdio.h>
+
+#include "../../Common/IntToString.h"
+#include "../../Windows/TimeUtils.h"
 
 EXTERN_C_BEGIN
 void LzmaEnc_GetLzThreads(CLzmaEncHandle pp, HANDLE lz_threads[2]);
@@ -102,7 +103,7 @@ HRESULT SetLzmaProp(PROPID propID, const PROPVARIANT &prop, CLzmaEncProps &ep)
 
   if (propID > NCoderPropID::kReduceSize)
     return S_OK;
-  
+
   if (propID == NCoderPropID::kReduceSize)
   {
     if (prop.vt == VT_UI8)
@@ -232,7 +233,7 @@ static void PrintTime(const char *s, UInt64 val, UInt64 total)
   printf(" .");
   UInt32 ms = (UInt32)(val - (sec * kFreq)) / (kFreq / 1000);
   PrintNum(ms, 3, '0');
-  
+
   while (val > ((UInt64)1 << 56))
   {
     val >>= 1;
@@ -251,7 +252,7 @@ static void PrintTime(const char *s, UInt64 val, UInt64 total)
 struct CBaseStat
 {
   UInt64 kernelTime, userTime;
-  
+
   BOOL Get(HANDLE thread, const CBaseStat *prevStat)
   {
     FILETIME creationTimeFT, exitTimeFT, kernelTimeFT, userTimeFT;
@@ -281,7 +282,7 @@ static void PrintStat(HANDLE thread, UInt64 totalTime, const CBaseStat *prevStat
   PrintTime("K", newStat.kernelTime, totalTime);
 
   const UInt64 processTime = newStat.kernelTime + newStat.userTime;
-  
+
   PrintTime("U", newStat.userTime, totalTime);
   PrintTime("S", processTime, totalTime);
   printf("\n");
@@ -311,10 +312,10 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
   CBaseStat oldStat;
   if (!oldStat.Get(GetCurrentThread(), NULL))
     return E_FAIL;
-  
+
   #endif
-  
-  
+
+
   SRes res = LzmaEnc_Encode(_encoder, &outWrap.vt, &inWrap.vt,
       progress ? &progressWrap.vt : NULL, &g_AlignedAlloc, &g_BigAlloc);
 
@@ -324,9 +325,9 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
   RET_IF_WRAP_ERROR(outWrap.Res, res, SZ_ERROR_WRITE)
   RET_IF_WRAP_ERROR(progressWrap.Res, res, SZ_ERROR_PROGRESS)
 
-  
+
   #ifdef LOG_LZMA_THREADS
-  
+
   NWindows::NTime::GetCurUtcFileTime(startTimeFT);
   totalTime = GetTime64(startTimeFT) - totalTime;
   HANDLE lz_threads[2];

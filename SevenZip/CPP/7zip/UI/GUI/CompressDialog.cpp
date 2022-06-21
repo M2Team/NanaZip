@@ -15,6 +15,7 @@
 
 #include "../FileManager/BrowseDialog.h"
 #include "../FileManager/FormatUtils.h"
+#include "../FileManager/PropertyName.h"
 #include "../FileManager/SplitUtils.h"
 
 #include "../Explorer/MyMessages.h"
@@ -35,6 +36,9 @@ extern bool g_IsNT;
 #include "ExtractRes.h"
 
 #ifdef LANG
+
+// #define IDS_OPTIONS 2100
+
 static const UInt32 kLangIDs[] =
 {
   IDT_COMPRESS_ARCHIVE,
@@ -48,6 +52,8 @@ static const UInt32 kLangIDs[] =
   IDT_COMPRESS_THREADS,
   IDT_COMPRESS_PARAMETERS,
 
+  IDB_COMPRESS_OPTIONS, // IDS_OPTIONS
+
   IDG_COMPRESS_OPTIONS,
   IDX_COMPRESS_SFX,
   IDX_COMPRESS_SHARED,
@@ -55,11 +61,6 @@ static const UInt32 kLangIDs[] =
 
   IDT_COMPRESS_MEMORY,
   IDT_COMPRESS_MEMORY_DE,
-
-  IDX_COMPRESS_NT_SYM_LINKS,
-  IDX_COMPRESS_NT_HARD_LINKS,
-  IDX_COMPRESS_NT_ALT_STREAMS,
-  IDX_COMPRESS_NT_SECUR,
 
   IDG_COMPRESS_ENCRYPTION,
   IDT_COMPRESS_ENCRYPTION_METHOD,
@@ -70,7 +71,7 @@ static const UInt32 kLangIDs[] =
   IDX_PASSWORD_SHOW,
 
   IDT_SPLIT_TO_VOLUMES,
-  IDT_COMPRESS_PATH_MODE
+  IDT_COMPRESS_PATH_MODE,
 };
 #endif
 
@@ -87,8 +88,6 @@ static const UInt32 kSolidLog_FullSolid = 64;
 static const UInt32 kLzmaMaxDictSize = (UInt32)15 << 28;
 
 static LPCSTR const kExeExt = ".exe";
-
-#define k7zFormat "7z"
 
 static const UInt32 g_Levels[] =
 {
@@ -118,6 +117,8 @@ enum EMethodID
   kSha1,
   kCrc32,
   kCrc64,
+  kGnu,
+  kPosix
 };
 
 static LPCSTR const kMethodsNames[] =
@@ -134,6 +135,8 @@ static LPCSTR const kMethodsNames[] =
   , "SHA1"
   , "CRC32"
   , "CRC64"
+  , "GNU"
+  , "POSIX"
 };
 
 static const EMethodID g_7zMethods[] =
@@ -185,6 +188,12 @@ static const EMethodID g_SwfcMethods[] =
   // kLZMA
 };
 
+static const EMethodID g_TarMethods[] =
+{
+  kGnu,
+  kPosix
+};
+
 static const EMethodID g_HashMethods[] =
 {
     kSha256
@@ -200,6 +209,13 @@ static const UInt32 kFF_Encrypt     = 1 << 3;
 static const UInt32 kFF_EncryptFileNames  = 1 << 4;
 static const UInt32 kFF_MemUse      = 1 << 5;
 static const UInt32 kFF_SFX         = 1 << 6;
+
+/*
+static const UInt32 kFF_Time_Win  = 1 << 10;
+static const UInt32 kFF_Time_Unix = 1 << 11;
+static const UInt32 kFF_Time_DOS  = 1 << 12;
+static const UInt32 kFF_Time_1ns  = 1 << 13;
+*/
 
 struct CFormatInfo
 {
@@ -232,23 +248,26 @@ static const CFormatInfo g_Formats[] =
     kFF_MultiThread | kFF_MemUse
   },
   {
-    k7zFormat,
+    "7z",
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_7zMethods),
     kFF_Filter | kFF_Solid | kFF_MultiThread | kFF_Encrypt |
     kFF_EncryptFileNames | kFF_MemUse | kFF_SFX
+    // | kFF_Time_Win
   },
   {
     "Zip",
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_ZipMethods),
     kFF_MultiThread | kFF_Encrypt | kFF_MemUse
+    // | kFF_Time_Win | kFF_Time_Unix | kFF_Time_DOS
   },
   {
     "GZip",
     (1 << 1) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_GZipMethods),
     kFF_MemUse
+    // | kFF_Time_Unix
   },
   {
     "BZip2",
@@ -271,14 +290,15 @@ static const CFormatInfo g_Formats[] =
   {
     "Tar",
     (1 << 0),
-    0, NULL,
-    0
+    METHODS_PAIR(g_TarMethods),
+    // kFF_Time_Unix | kFF_Time_Win // | kFF_Time_1ns
   },
   {
     "wim",
     (1 << 0),
     0, NULL,
     0
+    // | kFF_Time_Win
   },
   {
     "Hash",
@@ -334,22 +354,6 @@ static const UInt32 k_PathMode_IDs[] =
 };
 
 void AddComboItems(NControl::CComboBox &combo, const UInt32 *langIDs, unsigned numItems, const int *values, int curVal);
-bool GetBoolsVal(const CBoolPair &b1, const CBoolPair &b2);
-
-void CCompressDialog::CheckButton_TwoBools(UINT id, const CBoolPair &b1, const CBoolPair &b2)
-{
-  CheckButton(id, GetBoolsVal(b1, b2));
-}
-
-void CCompressDialog::GetButton_Bools(UINT id, CBoolPair &b1, CBoolPair &b2)
-{
-  bool val = IsButtonCheckedBool(id);
-  bool oldVal = GetBoolsVal(b1, b2);
-  if (val != oldVal)
-    b1.Def = b2.Def = true;
-  b1.Val = b2.Val = val;
-}
-
 
 void CCompressDialog::SetMethods(const CObjectVector<CCodecInfoUser> &userCodecs)
 {
@@ -380,6 +384,7 @@ bool CCompressDialog::OnInit()
   #ifdef LANG
   LangSetWindowText(*this, IDD_COMPRESS);
   LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
+  // LangSetDlgItemText(*this, IDB_COMPRESS_OPTIONS, IDS_OPTIONS); // IDG_COMPRESS_OPTIONS
   #endif
 
   {
@@ -434,11 +439,6 @@ bool CCompressDialog::OnInit()
   CheckButton(IDX_PASSWORD_SHOW, m_RegistryInfo.ShowPassword);
   CheckButton(IDX_COMPRESS_ENCRYPT_FILE_NAMES, m_RegistryInfo.EncryptHeaders);
 
-  CheckButton_TwoBools(IDX_COMPRESS_NT_SYM_LINKS,   Info.SymLinks,   m_RegistryInfo.SymLinks);
-  CheckButton_TwoBools(IDX_COMPRESS_NT_HARD_LINKS,  Info.HardLinks,  m_RegistryInfo.HardLinks);
-  CheckButton_TwoBools(IDX_COMPRESS_NT_ALT_STREAMS, Info.AltStreams, m_RegistryInfo.AltStreams);
-  CheckButton_TwoBools(IDX_COMPRESS_NT_SECUR,       Info.NtSecurity, m_RegistryInfo.NtSecurity);
-
   UpdatePasswordControl();
 
   {
@@ -489,7 +489,7 @@ bool CCompressDialog::OnInit()
   CheckButton(IDX_COMPRESS_SHARED, Info.OpenShareForWrite);
   CheckButton(IDX_COMPRESS_DEL, Info.DeleteAfterCompressing);
 
-  FormatChanged();
+  FormatChanged(false); // isChanged
 
   // OnButtonSFX();
 
@@ -551,6 +551,13 @@ bool CCompressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
       UpdatePasswordControl();
       return true;
     }
+    case IDB_COMPRESS_OPTIONS:
+    {
+      COptionsDialog dialog(this);
+      if (dialog.Create(*this) == IDOK)
+        ShowOptionsString();
+      return true;
+    }
   }
   return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
 }
@@ -587,8 +594,44 @@ void CCompressDialog::EnableMultiCombo(unsigned id)
   EnableItem(id, enable);
 }
 
+static LRESULT ComboBox_AddStringAscii(NControl::CComboBox &cb, const char *s);
+static void FormatOptions_To_String(const NCompression::CFormatOptions &fo, AString &s);
 
-void CCompressDialog::FormatChanged()
+static void Combine_Two_BoolPairs(const CBoolPair &b1, const CBoolPair &b2, CBool1 &res)
+{
+  if (!b1.Def && b2.Def)
+    res.Val = b2.Val;
+  else
+    res.Val = b1.Val;
+}
+
+#define SET_GUI_BOOL(name) \
+      Combine_Two_BoolPairs(Info. ## name, m_RegistryInfo. ## name, name)
+
+
+static void Set_Final_BoolPairs(
+    const CBool1 &gui,
+    CBoolPair &cmd,
+    CBoolPair &reg)
+{
+  if (!cmd.Def)
+  {
+    reg.Val = gui.Val;
+    reg.Def = gui.Val;
+  }
+  if (gui.Supported)
+  {
+    cmd.Val = gui.Val;
+    cmd.Def = gui.Val;
+  }
+  else
+    cmd.Init();
+}
+
+#define SET_FINAL_BOOL_PAIRS(name) \
+    Set_Final_BoolPairs(name, Info. ## name, m_RegistryInfo. ## name)
+
+void CCompressDialog::FormatChanged(bool isChanged)
 {
   SetLevel();
   SetSolidBlockSize();
@@ -614,18 +657,26 @@ void CCompressDialog::FormatChanged()
   CheckSFXControlsEnable();
 
   {
-    const CArcInfoEx &ai = Get_ArcInfoEx();
+    if (!isChanged)
+    {
+      SET_GUI_BOOL (SymLinks);
+      SET_GUI_BOOL (HardLinks);
+      SET_GUI_BOOL (AltStreams);
+      SET_GUI_BOOL (NtSecurity);
+      SET_GUI_BOOL (PreserveATime);
+    }
 
-    ShowItem_Bool(IDX_COMPRESS_NT_SYM_LINKS, ai.Flags_SymLinks());
-    ShowItem_Bool(IDX_COMPRESS_NT_HARD_LINKS, ai.Flags_HardLinks());
-    ShowItem_Bool(IDX_COMPRESS_NT_ALT_STREAMS, ai.Flags_AltStreams());
-    ShowItem_Bool(IDX_COMPRESS_NT_SECUR, ai.Flags_NtSecure());
+    PreserveATime.Supported = true;
 
-    ShowItem_Bool(IDG_COMPRESS_NTFS,
-           ai.Flags_SymLinks()
-        || ai.Flags_HardLinks()
-        || ai.Flags_AltStreams()
-        || ai.Flags_NtSecure());
+    {
+      const CArcInfoEx &ai = Get_ArcInfoEx();
+      SymLinks.Supported   = ai.Flags_SymLinks();
+      HardLinks.Supported  = ai.Flags_HardLinks();
+      AltStreams.Supported = ai.Flags_AltStreams();
+      NtSecurity.Supported = ai.Flags_NtSecurity();
+    }
+
+    ShowOptionsString();
   }
   // CheckVolumeEnable();
 
@@ -820,7 +871,6 @@ void SetErrorMessage_MemUsage(UString &s, UInt64 reqSize, UInt64 ramSize, UInt64
 
   s.Add_LF();
   s.Add_LF();
-  //s += LangString(IDS_MEM_ERROR);
   s += "Do you want to continue?";
 }
 
@@ -869,7 +919,6 @@ void CCompressDialog::OnOK()
         if (s2.IsEmpty())
           GetItemText(IDT_COMPRESS_MEMORY, s2);
         SetErrorMessage_MemUsage(s, memUsage, _ramSize, limit, s2);
-        //MessageBoxError(s);
         if (IDOK != ::MessageBoxW(
             *this,
             s,
@@ -940,17 +989,32 @@ void CCompressDialog::OnOK()
     Info.EncryptHeaders = IsButtonCheckedBool(IDX_COMPRESS_ENCRYPT_FILE_NAMES);
 
 
-  GetButton_Bools(IDX_COMPRESS_NT_SYM_LINKS,   Info.SymLinks,   m_RegistryInfo.SymLinks);
-  GetButton_Bools(IDX_COMPRESS_NT_HARD_LINKS,  Info.HardLinks,  m_RegistryInfo.HardLinks);
-  GetButton_Bools(IDX_COMPRESS_NT_ALT_STREAMS, Info.AltStreams, m_RegistryInfo.AltStreams);
-  GetButton_Bools(IDX_COMPRESS_NT_SECUR,       Info.NtSecurity, m_RegistryInfo.NtSecurity);
+  /* (Info) is for saving to registry:
+     (CBoolPair::Val) will be set as (false), if it was (false)
+       in registry at dialog creation, and user didn't click checkbox.
+     in another case (CBoolPair::Val) will be set as (true) */
 
   {
-    const CArcInfoEx &ai = Get_ArcInfoEx();
-    if (!ai.Flags_SymLinks()) Info.SymLinks.Val = false;
-    if (!ai.Flags_HardLinks()) Info.HardLinks.Val = false;
-    if (!ai.Flags_AltStreams()) Info.AltStreams.Val = false;
-    if (!ai.Flags_NtSecure()) Info.NtSecurity.Val = false;
+    /* Info properties could be for another archive types.
+       so we disable unsupported properties in Info */
+    // const CArcInfoEx &ai = Get_ArcInfoEx();
+
+    SET_FINAL_BOOL_PAIRS (SymLinks);
+    SET_FINAL_BOOL_PAIRS (HardLinks);
+    SET_FINAL_BOOL_PAIRS (AltStreams);
+    SET_FINAL_BOOL_PAIRS (NtSecurity);
+
+    SET_FINAL_BOOL_PAIRS (PreserveATime);
+  }
+
+  {
+    const NCompression::CFormatOptions &fo = Get_FormatOptions();
+
+    Info.TimePrec = fo.TimePrec;
+    Info.MTime = fo.MTime;
+    Info.CTime = fo.CTime;
+    Info.ATime = fo.ATime;
+    Info.SetArcMTime = fo.SetArcMTime;
   }
 
   m_Params.GetText(Info.Options);
@@ -975,7 +1039,7 @@ void CCompressDialog::OnOK()
         wchar_t s[32];
         ConvertUInt64ToString(volumeSize, s);
         if (::MessageBoxW(*this, MyFormatNew(IDS_SPLIT_CONFIRM, s),
-            L"NanaZip", MB_YESNOCANCEL | MB_ICONQUESTION) != IDYES)
+            L"7-Zip", MB_YESNOCANCEL | MB_ICONQUESTION) != IDYES)
           return;
       }
     }
@@ -1031,7 +1095,7 @@ bool CCompressDialog::OnCommand(int code, int itemID, LPARAM lParam)
       {
         const bool isSFX = IsSFX();
         SaveOptionsInMem();
-        FormatChanged();
+        FormatChanged(true); // isChanged
         SetArchiveName2(isSFX);
         return true;
       }
@@ -1057,6 +1121,7 @@ bool CCompressDialog::OnCommand(int code, int itemID, LPARAM lParam)
         SetMemoryUsage();
         if (Get_ArcInfoEx().Flags_HashHandler())
           SetArchiveName2(false);
+
         return true;
       }
 
@@ -1188,6 +1253,7 @@ void CCompressDialog::SetArchiveName(const UString &name)
   m_ArchivePath.SetText(fileName);
 }
 
+
 int CCompressDialog::FindRegistryFormat(const UString &name)
 {
   FOR_VECTOR (i, m_RegistryInfo.Formats)
@@ -1199,7 +1265,8 @@ int CCompressDialog::FindRegistryFormat(const UString &name)
   return -1;
 }
 
-int CCompressDialog::FindRegistryFormatAlways(const UString &name)
+
+unsigned CCompressDialog::FindRegistryFormat_Always(const UString &name)
 {
   int index = FindRegistryFormat(name);
   if (index < 0)
@@ -1210,6 +1277,14 @@ int CCompressDialog::FindRegistryFormatAlways(const UString &name)
   }
   return index;
 }
+
+
+NCompression::CFormatOptions &CCompressDialog::Get_FormatOptions()
+{
+  const CArcInfoEx &ai = Get_ArcInfoEx();
+  return m_RegistryInfo.Formats[FindRegistryFormat_Always(ai.Name)];
+}
+
 
 int CCompressDialog::GetStaticFormatIndex()
 {
@@ -1297,8 +1372,11 @@ void CCompressDialog::SetMethod2(int keepMethodId)
   const CArcInfoEx &ai = Get_ArcInfoEx();
   if (GetLevel() == 0 && !ai.Flags_HashHandler())
   {
-    MethodChanged();
-    return;
+    if (!ai.Is_Tar())
+    {
+      MethodChanged();
+      return;
+    }
   }
   UString defaultMethod;
   {
@@ -1312,7 +1390,7 @@ void CCompressDialog::SetMethod2(int keepMethodId)
   const bool isSfx = IsSFX();
   bool weUseSameMethod = false;
 
-  const bool is7z = ai.Name.IsEqualTo_Ascii_NoCase("7z");
+  const bool is7z = ai.Is_7z();
 
   for (unsigned m = 0;; m++)
   {
@@ -1371,12 +1449,12 @@ void CCompressDialog::SetMethod2(int keepMethodId)
 
 bool CCompressDialog::IsZipFormat()
 {
-  return Get_ArcInfoEx().Name.IsEqualTo_Ascii_NoCase("zip");
+  return Get_ArcInfoEx().Is_Zip();
 }
 
 bool CCompressDialog::IsXzFormat()
 {
-  return Get_ArcInfoEx().Name.IsEqualTo_Ascii_NoCase("xz");
+  return Get_ArcInfoEx().Is_Xz();
 }
 
 void CCompressDialog::SetEncryptionMethod()
@@ -1384,13 +1462,13 @@ void CCompressDialog::SetEncryptionMethod()
   _encryptionMethod.ResetContent();
   _default_encryptionMethod_Index = -1;
   const CArcInfoEx &ai = Get_ArcInfoEx();
-  if (ai.Name.IsEqualTo_Ascii_NoCase("7z"))
+  if (ai.Is_7z())
   {
     ComboBox_AddStringAscii(_encryptionMethod, "AES-256");
     _encryptionMethod.SetCurSel(0);
     _default_encryptionMethod_Index = 0;
   }
-  else if (ai.Name.IsEqualTo_Ascii_NoCase("zip"))
+  else if (ai.Is_Zip())
   {
     int index = FindRegistryFormat(ai.Name);
     UString encryptionMethod;
@@ -1933,7 +2011,7 @@ void CCompressDialog::SetSolidBlockSize2()
     }
   }
 
-  const bool is7z = ai.Name.IsEqualTo_Ascii_NoCase("7z");
+  const bool is7z = ai.Is_7z();
 
   const UInt64 cs = Get_Lzma2_ChunkSize(dict);
 
@@ -2553,11 +2631,16 @@ void CCompressDialog::SetParams()
 
 void CCompressDialog::SaveOptionsInMem()
 {
+  /* these options are for (Info.FormatIndex).
+     If it's called just after format changing,
+     then it's format that was selected before format changing
+     So we store previous format properties */
+
   m_Params.GetText(Info.Options);
   Info.Options.Trim();
 
   const CArcInfoEx &ai = (*ArcFormats)[Info.FormatIndex];
-  const int index = FindRegistryFormatAlways(ai.Name);
+  const unsigned index = FindRegistryFormat_Always(ai.Name);
   NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[index];
   fo.Options = Info.Options;
   fo.Level = GetLevelSpec();
@@ -2591,7 +2674,507 @@ void CCompressDialog::SaveOptionsInMem()
   fo.MemUse = Get_MemUse_Spec();
 }
 
+
 unsigned CCompressDialog::GetFormatIndex()
 {
   return (unsigned)m_Format.GetItemData_of_CurSel();
+}
+
+
+
+static void AddText_from_BoolPair(AString &s, const char *name, const CBoolPair &bp)
+{
+  if (bp.Def)
+  {
+    s.Add_OptSpaced(name);
+    if (!bp.Val)
+      s += "-";
+  }
+  /*
+  else if (bp.Val)
+  {
+    s.Add_OptSpaced("[");
+    s += name;
+    s += "]";
+  }
+  */
+}
+
+
+static void AddText_from_Bool1(AString &s, const char *name, const CBool1 &b)
+{
+  if (b.Supported && b.Val)
+    s.Add_OptSpaced(name);
+}
+
+
+void CCompressDialog::ShowOptionsString()
+{
+  NCompression::CFormatOptions &fo = Get_FormatOptions();
+
+  AString s;
+  if (fo.TimePrec != -1)
+  {
+    s.Add_OptSpaced("tp");
+    s.Add_UInt32(fo.TimePrec);
+  }
+  AddText_from_BoolPair(s, "tm", fo.MTime);
+  AddText_from_BoolPair(s, "tc", fo.CTime);
+  AddText_from_BoolPair(s, "ta", fo.ATime);
+  AddText_from_BoolPair(s, "-stl", fo.SetArcMTime);
+
+  // const CArcInfoEx &ai = Get_ArcInfoEx();
+  AddText_from_Bool1(s, "SL",  SymLinks);
+  AddText_from_Bool1(s, "HL",  HardLinks);
+  AddText_from_Bool1(s, "AS",  AltStreams);
+  AddText_from_Bool1(s, "Sec", NtSecurity);
+
+  // AddText_from_Bool1(s, "Preserve", PreserveATime);
+
+  SetItemText(IDT_COMPRESS_OPTIONS, GetUnicodeString(s));
+}
+
+
+
+
+
+// ---------- OPTIONS ----------
+
+
+void COptionsDialog::CheckButton_Bool1(UINT id, const CBool1 &b1)
+{
+  CheckButton(id, b1.Val);
+}
+
+void COptionsDialog::GetButton_Bool1(UINT id, CBool1 &b1)
+{
+  b1.Val = IsButtonCheckedBool(id);
+}
+
+
+void COptionsDialog::CheckButton_BoolBox(
+    bool supported, const CBoolPair &b2, CBoolBox &bb)
+{
+  const bool isSet = b2.Def;
+  const bool val = isSet ? b2.Val : bb.DefaultVal;
+
+  bb.IsSupported = supported;
+
+  CheckButton (bb.Set_Id, isSet);
+  ShowItem_Bool (bb.Set_Id, supported);
+  CheckButton (bb.Id, val);
+  EnableItem (bb.Id, isSet);
+  ShowItem_Bool (bb.Id, supported);
+}
+
+void COptionsDialog::GetButton_BoolBox(CBoolBox &bb)
+{
+  // we save value for invisible buttons too
+  bb.BoolPair.Val = IsButtonCheckedBool (bb.Id);
+  bb.BoolPair.Def = IsButtonCheckedBool (bb.Set_Id);
+}
+
+
+void COptionsDialog::Store_TimeBoxes()
+{
+  TimePrec = GetPrecSpec();
+  GetButton_BoolBox (MTime);
+  GetButton_BoolBox (CTime);
+  GetButton_BoolBox (ATime);
+  GetButton_BoolBox (ZTime);
+}
+
+
+UInt32 COptionsDialog::GetComboValue(NWindows::NControl::CComboBox &c, int defMax)
+{
+  if (c.GetCount() <= defMax)
+    return (UInt32)(Int32)-1;
+  return (UInt32)c.GetItemData_of_CurSel();
+}
+
+static const unsigned kTimePrec_Win  = 0;
+static const unsigned kTimePrec_Unix = 1;
+static const unsigned kTimePrec_DOS  = 2;
+static const unsigned kTimePrec_1ns  = 3;
+
+static void AddTimeOption(UString &s, UInt32 val, const UString &unit, const char *sys = NULL)
+{
+  // s += " : ";
+  {
+    AString s2;
+    s2.Add_UInt32(val);
+    s += s2;
+  }
+  s.Add_Space();
+  s += unit;
+  if (sys)
+  {
+    s += " : ";
+    s += sys;
+  }
+}
+
+int COptionsDialog::AddPrec(unsigned prec, bool isDefault)
+{
+  UString s;
+  UInt32 writePrec = prec;
+  if (isDefault)
+  {
+    // s += "* ";
+    // writePrec = (UInt32)(Int32)-1;
+  }
+       if (prec == kTimePrec_Win)  AddTimeOption(s, 100, NsString, "Windows");
+  else if (prec == kTimePrec_Unix) AddTimeOption(s, 1, SecString, "Unix");
+  else if (prec == kTimePrec_DOS)  AddTimeOption(s, 2, SecString, "DOS");
+  else if (prec == kTimePrec_1ns)  AddTimeOption(s, 1, NsString, "Linux");
+  else if (prec == k_PropVar_TimePrec_Base) AddTimeOption(s, 1, SecString);
+  else if (prec >= k_PropVar_TimePrec_Base)
+  {
+    UInt32 d = 1;
+    for (unsigned i = prec; i < k_PropVar_TimePrec_Base + 9; i++)
+      d *= 10;
+    AddTimeOption(s, d, NsString);
+  }
+  else
+    s.Add_UInt32(prec);
+  const int index = (int)m_Prec.AddString(s);
+  m_Prec.SetItemData(index, writePrec);
+  return index;
+}
+
+
+void COptionsDialog::SetPrec()
+{
+  // const CFormatInfo &fi = g_Formats[cd->GetStaticFormatIndex()];
+  const CArcInfoEx &ai = cd->Get_ArcInfoEx();
+
+  // UInt32 flags = fi.Flags;
+
+  UInt32 flags = ai.Get_TimePrecFlags();
+  UInt32 defaultPrec = ai.Get_DefaultTimePrec();
+  if (defaultPrec != 0)
+    flags |= ((UInt32)1 << defaultPrec);
+
+  // const NCompression::CFormatOptions &fo = cd->Get_FormatOptions();
+
+  // unsigned defaultPrec = kTimePrec_Win;
+
+  if (ai.Is_GZip())
+    defaultPrec = kTimePrec_Unix;
+
+  {
+    UString s;
+    s += GetNameOfProperty(kpidType, L"type");
+    s += ": ";
+    s += ai.Name;
+    if (ai.Is_Tar())
+    {
+      const int methodID = cd->GetMethodID();
+
+      // for debug
+      // defaultPrec = kTimePrec_Unix;
+      // flags = (UInt32)1 << kTimePrec_Unix;
+
+      s += ":";
+      if (methodID >= 0 && (unsigned)methodID < ARRAY_SIZE(kMethodsNames))
+        s += kMethodsNames[methodID];
+      if (methodID == kPosix)
+      {
+        // for debug
+        // flags |= (UInt32)1 << kTimePrec_Win;
+        // flags |= (UInt32)1 << kTimePrec_1ns;
+      }
+    }
+    else
+    {
+      // if (is_for_MethodChanging) return;
+    }
+
+    SetItemText(IDT_COMPRESS_TIME_INFO, s);
+  }
+
+  m_Prec.ResetContent();
+  _auto_Prec = defaultPrec;
+
+  unsigned selectedPrec = defaultPrec;
+  {
+    // if (TimePrec >= kTimePrec_Win && TimePrec <= kTimePrec_DOS)
+    if ((Int32)TimePrec >= 0)
+      selectedPrec = TimePrec;
+  }
+
+  int curSel = -1;
+  int defaultPrecIndex = -1;
+  for (unsigned prec = 0;
+      // prec <= k_PropVar_TimePrec_HighPrec;
+      prec <= k_PropVar_TimePrec_1ns;
+      prec++)
+  {
+    if (((flags >> prec) & 1) == 0)
+      continue;
+    const bool isDefault = (defaultPrec == prec);
+    const int index = AddPrec(prec, isDefault);
+    if (isDefault)
+      defaultPrecIndex = index;
+    if (selectedPrec == prec)
+      curSel = index;
+  }
+
+  if (curSel < 0 && selectedPrec > kTimePrec_DOS)
+    curSel = AddPrec(selectedPrec, false); // isDefault
+  if (curSel < 0)
+    curSel = defaultPrecIndex;
+  if (curSel >= 0)
+    m_Prec.SetCurSel(curSel);
+
+  {
+    const bool isSet = IsSet_TimePrec();
+    const int count = m_Prec.GetCount();
+    const bool showPrec = (count != 0);
+    ShowItem_Bool(IDC_COMPRESS_TIME_PREC, showPrec);
+    ShowItem_Bool(IDT_COMPRESS_TIME_PREC, showPrec);
+    EnableItem(IDC_COMPRESS_TIME_PREC, isSet && (count > 1));
+
+    CheckButton(IDX_COMPRESS_PREC_SET, isSet);
+    const bool setIsSupported = isSet || (count > 1);
+    EnableItem(IDX_COMPRESS_PREC_SET, setIsSupported);
+    ShowItem_Bool(IDX_COMPRESS_PREC_SET, setIsSupported);
+  }
+
+  SetTimeMAC();
+}
+
+
+void COptionsDialog::SetTimeMAC()
+{
+  const CArcInfoEx &ai = cd->Get_ArcInfoEx();
+
+  const
+  bool m_allow = ai.Flags_MTime();
+  bool c_allow = ai.Flags_CTime();
+  bool a_allow = ai.Flags_ATime();
+
+  if (ai.Is_Tar())
+  {
+    const int methodID = cd->GetMethodID();
+    c_allow = false;
+    a_allow = false;
+    if (methodID == kPosix)
+    {
+      // c_allow = true; // do we need it as change time ?
+      a_allow = true;
+    }
+  }
+
+  if (ai.Is_Zip())
+  {
+    // const int methodID = GetMethodID();
+    UInt32 prec = GetPrec();
+    if (prec == (UInt32)(Int32)-1)
+      prec = _auto_Prec;
+    if (prec != kTimePrec_Win)
+    {
+      c_allow = false;
+      a_allow = false;
+    }
+  }
+
+
+  /*
+  MTime.DefaultVal = true;
+  CTime.DefaultVal = false;
+  ATime.DefaultVal = false;
+  */
+
+  MTime.DefaultVal = ai.Flags_MTime_Default();
+  CTime.DefaultVal = ai.Flags_CTime_Default();
+  ATime.DefaultVal = ai.Flags_ATime_Default();
+
+  ZTime.DefaultVal = false;
+
+  const NCompression::CFormatOptions &fo = cd->Get_FormatOptions();
+
+  CheckButton_BoolBox (m_allow, fo.MTime, MTime );
+  CheckButton_BoolBox (c_allow, fo.CTime, CTime );
+  CheckButton_BoolBox (a_allow, fo.ATime, ATime );
+  CheckButton_BoolBox (true, fo.SetArcMTime, ZTime);
+
+  if (m_allow && !fo.MTime.Def)
+  {
+    const bool isSingleFile = ai.Flags_KeepName();
+    if (!isSingleFile)
+    {
+      // we can hide changing checkboxes for MTime here:
+      ShowItem_Bool (MTime.Set_Id, false);
+      EnableItem (MTime.Id, false);
+    }
+  }
+  // On_CheckBoxSet_Prec_Clicked();
+  // const bool isSingleFile = ai.Flags_KeepName();
+  // mtime for Gz can be
+}
+
+
+
+void COptionsDialog::On_CheckBoxSet_Prec_Clicked()
+{
+  const bool isSet = IsButtonCheckedBool(IDX_COMPRESS_PREC_SET);
+  if (!isSet)
+  {
+    // We save current MAC boxes to memory before SetPrec()
+    Store_TimeBoxes();
+    Reset_TimePrec();
+    SetPrec();
+  }
+  EnableItem(IDC_COMPRESS_TIME_PREC, isSet);
+}
+
+void COptionsDialog::On_CheckBoxSet_Clicked(const CBoolBox &bb)
+{
+  const bool isSet = IsButtonCheckedBool(bb.Set_Id);
+  if (!isSet)
+    CheckButton(bb.Id, bb.DefaultVal);
+  EnableItem(bb.Id, isSet);
+}
+
+
+
+
+#ifdef LANG
+static const UInt32 kLangIDs_Options[] =
+{
+  IDX_COMPRESS_NT_SYM_LINKS,
+  IDX_COMPRESS_NT_HARD_LINKS,
+  IDX_COMPRESS_NT_ALT_STREAMS,
+  IDX_COMPRESS_NT_SECUR,
+
+  IDG_COMPRESS_TIME,
+  IDT_COMPRESS_TIME_PREC,
+  IDX_COMPRESS_MTIME,
+  IDX_COMPRESS_CTIME,
+  IDX_COMPRESS_ATIME,
+  IDX_COMPRESS_ZTIME,
+  IDX_COMPRESS_PRESERVE_ATIME
+};
+#endif
+
+
+bool COptionsDialog::OnInit()
+{
+  #ifdef LANG
+  LangSetWindowText(*this, IDB_COMPRESS_OPTIONS); // IDS_OPTIONS
+  LangSetDlgItems(*this, kLangIDs_Options, ARRAY_SIZE(kLangIDs_Options));
+  // LangSetDlgItemText(*this, IDB_COMPRESS_TIME_DEFAULT, IDB_COMPRESS_TIME_DEFAULT);
+  // LangSetDlgItemText(*this, IDX_COMPRESS_TIME_DEFAULT, IDX_COMPRESS_TIME_DEFAULT);
+  #endif
+
+  LangString(IDS_COMPRESS_SEC, SecString);
+  if (SecString.IsEmpty())
+    SecString = "sec";
+  LangString(IDS_COMPRESS_NS, NsString);
+  if (NsString.IsEmpty())
+    NsString = "ns";
+
+  {
+    // const CArcInfoEx &ai = cd->Get_ArcInfoEx();
+
+    ShowItem_Bool ( IDX_COMPRESS_NT_SYM_LINKS,    cd->SymLinks.Supported);
+    ShowItem_Bool ( IDX_COMPRESS_NT_HARD_LINKS,   cd->HardLinks.Supported);
+    ShowItem_Bool ( IDX_COMPRESS_NT_ALT_STREAMS,  cd->AltStreams.Supported);
+    ShowItem_Bool ( IDX_COMPRESS_NT_SECUR,        cd->NtSecurity.Supported);
+
+    ShowItem_Bool ( IDG_COMPRESS_NTFS,
+           cd->SymLinks.Supported
+        || cd->HardLinks.Supported
+        || cd->AltStreams.Supported
+        || cd->NtSecurity.Supported);
+  }
+
+   /* we read property from two sources:
+       1) command line  : (Info)
+       2) registry      : (m_RegistryInfo)
+     (Info) has priority, if both are no defined */
+
+  CheckButton_Bool1 ( IDX_COMPRESS_NT_SYM_LINKS,   cd->SymLinks);
+  CheckButton_Bool1 ( IDX_COMPRESS_NT_HARD_LINKS,  cd->HardLinks);
+  CheckButton_Bool1 ( IDX_COMPRESS_NT_ALT_STREAMS, cd->AltStreams);
+  CheckButton_Bool1 ( IDX_COMPRESS_NT_SECUR,       cd->NtSecurity);
+
+  CheckButton_Bool1 (IDX_COMPRESS_PRESERVE_ATIME, cd->PreserveATime);
+
+  m_Prec.Attach (GetItem(IDC_COMPRESS_TIME_PREC));
+
+  MTime.SetIDs ( IDX_COMPRESS_MTIME, IDX_COMPRESS_MTIME_SET);
+  CTime.SetIDs ( IDX_COMPRESS_CTIME, IDX_COMPRESS_CTIME_SET);
+  ATime.SetIDs ( IDX_COMPRESS_ATIME, IDX_COMPRESS_ATIME_SET);
+  ZTime.SetIDs ( IDX_COMPRESS_ZTIME, IDX_COMPRESS_ZTIME_SET);
+
+  {
+    const NCompression::CFormatOptions &fo = cd->Get_FormatOptions();
+    TimePrec = fo.TimePrec;
+    MTime.BoolPair = fo.MTime;
+    CTime.BoolPair = fo.CTime;
+    ATime.BoolPair = fo.ATime;
+    ZTime.BoolPair = fo.SetArcMTime;
+  }
+
+  SetPrec();
+
+  NormalizePosition();
+
+  return CModalDialog::OnInit();
+}
+
+
+bool COptionsDialog::OnCommand(int code, int itemID, LPARAM lParam)
+{
+  if (code == CBN_SELCHANGE)
+  {
+    switch (itemID)
+    {
+      case IDC_COMPRESS_TIME_PREC:
+      {
+        Store_TimeBoxes();
+        SetTimeMAC(); // for zip/tar
+        return true;
+      }
+    }
+  }
+  return CModalDialog::OnCommand(code, itemID, lParam);
+}
+
+
+bool COptionsDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
+{
+  switch (buttonID)
+  {
+    case IDX_COMPRESS_PREC_SET:  { On_CheckBoxSet_Prec_Clicked(); return true; }
+    case IDX_COMPRESS_MTIME_SET: { On_CheckBoxSet_Clicked (MTime); return true; }
+    case IDX_COMPRESS_CTIME_SET: { On_CheckBoxSet_Clicked (CTime); return true; }
+    case IDX_COMPRESS_ATIME_SET: { On_CheckBoxSet_Clicked (ATime); return true; }
+    case IDX_COMPRESS_ZTIME_SET: { On_CheckBoxSet_Clicked (ZTime); return true; }
+  }
+  return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
+}
+
+
+void COptionsDialog::OnOK()
+{
+  GetButton_Bool1 (IDX_COMPRESS_NT_SYM_LINKS,   cd->SymLinks);
+  GetButton_Bool1 (IDX_COMPRESS_NT_HARD_LINKS,  cd->HardLinks);
+  GetButton_Bool1 (IDX_COMPRESS_NT_ALT_STREAMS, cd->AltStreams);
+  GetButton_Bool1 (IDX_COMPRESS_NT_SECUR,       cd->NtSecurity);
+  GetButton_Bool1 (IDX_COMPRESS_PRESERVE_ATIME, cd->PreserveATime);
+
+  Store_TimeBoxes();
+  {
+    NCompression::CFormatOptions &fo = cd->Get_FormatOptions();
+    fo.TimePrec = TimePrec;
+    fo.MTime = MTime.BoolPair;
+    fo.CTime = CTime.BoolPair;
+    fo.ATime = ATime.BoolPair;
+    fo.SetArcMTime = ZTime.BoolPair;
+  }
+
+  CModalDialog::OnOK();
 }

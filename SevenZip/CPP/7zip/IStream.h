@@ -14,11 +14,11 @@
 STREAM_INTERFACE(ISequentialInStream, 0x01)
 {
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize) PURE;
-  
+
   /*
   The requirement for caller: (processedSize != NULL).
   The callee can allow (processedSize == NULL) for compatibility reasons.
-    
+
   if (size == 0), this function returns S_OK and (*processedSize) is set to 0.
 
   if (size != 0)
@@ -31,7 +31,7 @@ STREAM_INTERFACE(ISequentialInStream, 0x01)
 
   If seek pointer before Read() call was changed to position past the end of stream:
     if (seek_pointer >= stream_size), this function returns S_OK and (*processedSize) is set to 0.
-  
+
   ERROR CASES:
     If the function returns error code, then (*processedSize) is size of
     data written to (data) buffer (it can be data before error or data with errors).
@@ -44,7 +44,7 @@ STREAM_INTERFACE(ISequentialInStream, 0x01)
 STREAM_INTERFACE(ISequentialOutStream, 0x02)
 {
   STDMETHOD(Write)(const void *data, UInt32 size, UInt32 *processedSize) PURE;
-  
+
   /*
   The requirement for caller: (processedSize != NULL).
   The callee can allow (processedSize == NULL) for compatibility reasons.
@@ -81,7 +81,7 @@ STREAM_INTERFACE(ISequentialOutStream, 0x02)
   If you seek before the beginning of the stream, Seek() function returns error code:
       Recommended error code is __HRESULT_FROM_WIN32(ERROR_NEGATIVE_SEEK).
       or STG_E_INVALIDFUNCTION
-      
+
   It is allowed to seek past the end of the stream.
 
 
@@ -131,6 +131,13 @@ struct CStreamFileProps
 STREAM_INTERFACE(IStreamGetProps2, 0x09)
 {
   STDMETHOD(GetProps2)(CStreamFileProps *props) PURE;
+};
+
+
+STREAM_INTERFACE(IStreamGetProp, 0x0a)
+{
+  STDMETHOD(GetProperty)(PROPID propID, PROPVARIANT *value) PURE;
+  STDMETHOD(ReloadProps)() PURE;
 };
 
 #endif

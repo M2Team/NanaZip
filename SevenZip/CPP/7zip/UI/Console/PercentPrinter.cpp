@@ -29,10 +29,10 @@ void CPercentPrinter::ClosePrint(bool needFlush)
   {
 
   unsigned i;
-    
+
   /* '\r' in old MAC OS means "new line".
      So we can't use '\r' in some systems */
-    
+
   #ifdef _WIN32
     char *start = _temp.GetBuf(num  + 2);
     char *p = start;
@@ -46,7 +46,7 @@ void CPercentPrinter::ClosePrint(bool needFlush)
     for (i = 0; i < num; i++) *p++ = ' ';
     for (i = 0; i < num; i++) *p++ = '\b';
   #endif
-    
+
   *p = 0;
   _temp.ReleaseBuf_SetLen((unsigned)(p - start));
   *_so << _temp;
@@ -63,7 +63,8 @@ void CPercentPrinter::GetPercents()
   {
     char c = '%';
     UInt64 val = 0;
-    if (Total == (UInt64)(Int64)-1)
+    if (Total == (UInt64)(Int64)-1 ||
+        (Total == 0 && Completed != 0))
     {
       val = Completed >> 20;
       c = 'M';
@@ -97,7 +98,7 @@ void CPercentPrinter::Print()
   {
     if (_tickStep != 0 && (UInt32)(tick - _prevTick) < _tickStep)
       return;
-    
+
     CPercentPrinterState &st = *this;
     if (_printedState.Command == st.Command
         && _printedState.FileName == st.FileName
@@ -113,7 +114,7 @@ void CPercentPrinter::Print()
   _s.Empty();
 
   GetPercents();
-  
+
   if (onlyPercentsChanged && _s == _printedPercents)
     return;
 
@@ -166,7 +167,7 @@ void CPercentPrinter::Print()
     }
     _s += _temp;
   }
-  
+
   if (_printedString != _s)
   {
     ClosePrint(false);

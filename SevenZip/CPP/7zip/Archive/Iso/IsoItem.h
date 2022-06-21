@@ -24,18 +24,17 @@ struct CRecordingDateTime
   Byte Minute;
   Byte Second;
   signed char GmtOffset; // min intervals from -48 (West) to +52 (East) recorded.
-  
-  bool GetFileTime(FILETIME &ft) const
+
+  bool GetFileTime(NWindows::NCOM::CPropVariant &prop) const
   {
-    UInt64 value;
-    bool res = NWindows::NTime::GetSecondsSince1601(Year + 1900, Month, Day, Hour, Minute, Second, value);
+    UInt64 v;
+    const bool res = NWindows::NTime::GetSecondsSince1601(Year + 1900, Month, Day, Hour, Minute, Second, v);
     if (res)
     {
-      value -= (Int64)((Int32)GmtOffset * 15 * 60);
-      value *= 10000000;
+      v -= (Int64)((Int32)GmtOffset * 15 * 60);
+      v *= 10000000;
+      prop.SetAsTimeFrom_Ft64_Prec(v, k_PropVar_TimePrec_Base);
     }
-    ft.dwLowDateTime = (DWORD)value;
-    ft.dwHighDateTime = (DWORD)(value >> 32);
     return res;
   }
 };
@@ -97,7 +96,7 @@ struct CDirRecord
     return (b == 0 || b == 1);
   }
 
-  
+
   const Byte* FindSuspRecord(unsigned skipSize, Byte id0, Byte id1, unsigned &lenRes) const
   {
     lenRes = 0;
@@ -123,7 +122,7 @@ struct CDirRecord
     return 0;
   }
 
-  
+
   const Byte* GetNameCur(bool checkSusp, int skipSize, unsigned &nameLenRes) const
   {
     const Byte *res = NULL;
@@ -177,7 +176,7 @@ struct CDirRecord
         return false;
 
       bool needSlash = false;
-      
+
            if (flags & (1 << 1)) link += "./";
       else if (flags & (1 << 2)) link += "../";
       else if (flags & (1 << 3)) link += '/';
@@ -272,7 +271,7 @@ struct CDirRecord
 
     if (len < step)
       return false;
-    
+
     t.Year = p[0];
     t.Month = p[1];
     t.Day = p[2];

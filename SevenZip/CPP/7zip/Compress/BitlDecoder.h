@@ -18,7 +18,7 @@ extern Byte kInvertTable[256];
 /* TInByte must support "Extra Bytes" (bytes that can be read after the end of stream
    TInByte::ReadByte() returns 0xFF after the end of stream
    TInByte::NumExtraBytes contains the number "Extra Bytes"
-       
+
    Bitl decoder can read up to 4 bytes ahead to internal buffer. */
 
 template<class TInByte>
@@ -53,14 +53,14 @@ public:
   UInt64 GetProcessedSize() const { return _stream.GetProcessedSize() - ((kNumBigValueBits - _bitPos) >> 3); }
 
   bool ThereAreDataInBitsBuffer() const { return this->_bitPos != kNumBigValueBits; }
-  
+
   MY_FORCE_INLINE
   void Normalize()
   {
     for (; _bitPos >= 8; _bitPos -= 8)
       _value = ((UInt32)_stream.ReadByte() << (kNumBigValueBits - _bitPos)) | _value;
   }
-  
+
   MY_FORCE_INLINE
   UInt32 ReadBits(unsigned numBits)
   {
@@ -75,12 +75,12 @@ public:
   {
     return (_stream.NumExtraBytes > 4 || kNumBigValueBits - _bitPos < (_stream.NumExtraBytes << 3));
   }
-  
+
   bool ExtraBitsWereRead_Fast() const
   {
     // full version is not inlined in vc6.
     // return _stream.NumExtraBytes != 0 && (_stream.NumExtraBytes > 4 || kNumBigValueBits - _bitPos < (_stream.NumExtraBytes << 3));
-    
+
     // (_stream.NumExtraBytes > 4) is fast overread detection. It's possible that
     // it doesn't return true, if small number of extra bits were read.
     return (_stream.NumExtraBytes > 4);
@@ -101,7 +101,7 @@ public:
     CBaseDecoder<TInByte>::Init();
     _normalValue = 0;
   }
-  
+
   MY_FORCE_INLINE
   void Normalize()
   {
@@ -112,21 +112,21 @@ public:
       this->_value = (this->_value << 8) | kInvertTable[b];
     }
   }
-  
+
   MY_FORCE_INLINE
   UInt32 GetValue(unsigned numBits)
   {
     Normalize();
     return ((this->_value >> (8 - this->_bitPos)) & kMask) >> (kNumValueBits - numBits);
   }
-  
+
   MY_FORCE_INLINE
   void MovePos(unsigned numBits)
   {
     this->_bitPos += numBits;
     _normalValue >>= numBits;
   }
-  
+
   MY_FORCE_INLINE
   UInt32 ReadBits(unsigned numBits)
   {
@@ -137,10 +137,10 @@ public:
   }
 
   void AlignToByte() { MovePos((32 - this->_bitPos) & 7); }
-  
+
   MY_FORCE_INLINE
   Byte ReadDirectByte() { return this->_stream.ReadByte(); }
-  
+
   MY_FORCE_INLINE
   Byte ReadAlignedByte()
   {
@@ -155,6 +155,10 @@ public:
   MY_FORCE_INLINE
   bool ReadAlignedByte_FromBuf(Byte &b)
   {
+    if (this->_stream.NumExtraBytes != 0)
+      if (this->_stream.NumExtraBytes >= 4
+          || kNumBigValueBits - this->_bitPos <= (this->_stream.NumExtraBytes << 3))
+        return false;
     if (this->_bitPos == kNumBigValueBits)
       return this->_stream.ReadByte_FromBuf(b);
     b = (Byte)(_normalValue & 0xFF);

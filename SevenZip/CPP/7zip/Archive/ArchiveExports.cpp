@@ -113,6 +113,7 @@ STDAPI GetHandlerProperty2(UInt32 formatIndex, PROPID propID, PROPVARIANT *value
     case NArchive::NHandlerPropID::kAltStreams: prop = ((arc.Flags & NArcInfoFlags::kAltStreams) != 0); break;
     case NArchive::NHandlerPropID::kNtSecure:   prop = ((arc.Flags & NArcInfoFlags::kNtSecure) != 0); break;
     case NArchive::NHandlerPropID::kFlags: prop = (UInt32)arc.Flags; break;
+    case NArchive::NHandlerPropID::kTimeFlags: prop = (UInt32)arc.TimeFlags; break;
     case NArchive::NHandlerPropID::kSignatureOffset: prop = (UInt32)arc.SignatureOffset; break;
     // case NArchive::NHandlerPropID::kVersion: prop = (UInt32)MY_VER_MIX; break;
 

@@ -37,7 +37,7 @@ public:
   INTERFACE_IInArchive_Cont(PURE)
 
   STDMETHOD(Extract)(const UInt32* indices, UInt32 numItems, Int32 testMode, IArchiveExtractCallback *extractCallback) MY_NO_THROW_DECL_ONLY;
-  
+
   STDMETHOD(GetStream)(UInt32 index, ISequentialInStream **stream);
 
   // destructor must be virtual for this class
@@ -71,7 +71,7 @@ protected:
   UInt64 _size;
   CMyComPtr<IInStream> Stream;
   const char *_imgExt;
-  
+
   bool _stream_unavailData;
   bool _stream_unsupportedMethod;
   bool _stream_dataError;
@@ -94,7 +94,19 @@ protected:
 
   virtual HRESULT Open2(IInStream *stream, IArchiveOpenCallback *openCallback) = 0;
   virtual void CloseAtError();
+
+  // returns (true), if Get_PackSizeProcessed() is required in Extract()
+  virtual bool Init_PackSizeProcessed()
+  {
+    return false;
+  }
 public:
+  virtual bool Get_PackSizeProcessed(UInt64 &size)
+  {
+    size = 0;
+    return false;
+  }
+
   MY_UNKNOWN_IMP3(IInArchive, IInArchiveGetStream, IInStream)
   INTERFACE_IInArchive_Img(PURE)
 
@@ -103,7 +115,7 @@ public:
   STDMETHOD(Extract)(const UInt32* indices, UInt32 numItems, Int32 testMode, IArchiveExtractCallback *extractCallback);
 
   STDMETHOD(GetStream)(UInt32 index, ISequentialInStream **stream) = 0;
-  
+
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize) = 0;
   STDMETHOD(Seek)(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition);
 

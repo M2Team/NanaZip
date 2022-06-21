@@ -26,14 +26,14 @@ struct CItem
       return false;
     return Name[0] == ':' && Name[1] == ':';
   }
-  
+
   bool IsUserItem() const
   {
     if (Name.Len() < 2)
       return false;
     return Name[0] == '/';
   }
-  
+
   bool IsDir() const
   {
     if (Name.IsEmpty())
@@ -83,7 +83,12 @@ struct CResetTable
   UInt64 CompressedSize;
   // unsigned BlockSizeBits;
   CRecordVector<UInt64> ResetOffsets;
-  
+
+  CResetTable():
+      UncompressedSize(0),
+      CompressedSize(0)
+      {}
+
   bool GetCompressedSizeOfBlocks(UInt64 blockIndex, UInt32 numBlocks, UInt64 &size) const
   {
     if (blockIndex >= ResetOffsets.Size())
@@ -100,7 +105,7 @@ struct CResetTable
   {
     return GetCompressedSizeOfBlocks(blockIndex, 1, size);
   }
-  
+
   UInt64 GetNumBlocks(UInt64 size) const
   {
     return (size + kBlockSize - 1) / kBlockSize;
@@ -111,12 +116,18 @@ struct CResetTable
 struct CLzxInfo
 {
   UInt32 Version;
-  
+
   unsigned ResetIntervalBits;
   unsigned WindowSizeBits;
   UInt32 CacheSize;
-  
+
   CResetTable ResetTable;
+
+  CLzxInfo():
+      Version(0),
+      ResetIntervalBits(0),
+      CacheSize(0)
+      {}
 
   unsigned GetNumDictBits() const
   {
@@ -138,7 +149,7 @@ struct CLzxInfo
     offset = ResetTable.ResetOffsets[(unsigned)blockIndex];
     return true;
   }
-  
+
   bool GetCompressedSizeOfFolder(UInt64 folderIndex, UInt64 &size) const
   {
     UInt64 blockIndex = GetBlockIndexFromFolderIndex(folderIndex);
@@ -152,7 +163,7 @@ struct CMethodInfo
   Byte Guid[16];
   CByteBuffer ControlData;
   CLzxInfo LzxInfo;
-  
+
   bool IsLzx() const;
   bool IsDes() const;
   AString GetGuidString() const;
@@ -219,7 +230,7 @@ public:
     CDatabase::Clear();
     HighLevelClear();
   }
-  
+
   void SetIndices();
   void Sort();
   bool Check();
@@ -264,7 +275,7 @@ public:
   HRESULT Open2(IInStream *inStream, const UInt64 *searchHeaderSizeLimit, CFilesDatabase &database);
   HRESULT Open(IInStream *inStream, const UInt64 *searchHeaderSizeLimit, CFilesDatabase &database);
 };
-  
+
 }}
-  
+
 #endif

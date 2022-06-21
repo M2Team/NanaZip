@@ -225,7 +225,7 @@ struct CSelectedState
   bool FocusedName_Defined;
   UString FocusedName;
   UStringVector SelectedNames;
-  
+
   CSelectedState(): FocusedItem(-1), SelectFocused(true), FocusedName_Defined(false) {}
 };
 
@@ -244,13 +244,16 @@ struct CCopyToOptions
   bool replaceAltStreamChars;
   bool showErrorMessages;
 
+  bool NeedRegistryZone;
+  NExtract::NZoneIdMode::EEnum ZoneIdMode;
+
   UString folder;
 
   UStringVector hashMethods;
 
   CVirtFileSystem *VirtFileSystemSpec;
   ISequentialOutStream *VirtFileSystem;
-  
+
   CCopyToOptions():
       streamMode(false),
       moveMode(false),
@@ -258,11 +261,13 @@ struct CCopyToOptions
       includeAltStreams(true),
       replaceAltStreamChars(false),
       showErrorMessages(false),
+      NeedRegistryZone(true),
+      ZoneIdMode(NExtract::NZoneIdMode::kNone),
       VirtFileSystemSpec(NULL),
       VirtFileSystem(NULL)
       {}
 };
-  
+
 
 
 struct COpenResult
@@ -300,9 +305,9 @@ class CPanel: public NWindows::NControl::CWindow2
   void AddComboBoxItem(const UString &name, int iconIndex, int indent, bool addToList);
 
   bool OnComboBoxCommand(UINT code, LPARAM param, LRESULT &result);
-  
+
   #ifndef UNDER_CE
-  
+
   LRESULT OnNotifyComboBoxEnter(const UString &s);
   bool OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result);
   #ifndef _UNICODE
@@ -339,13 +344,13 @@ public:
 private:
 
   void ChangeWindowSize(int xSize, int ySize);
- 
+
   HRESULT InitColumns();
   void DeleteColumn(unsigned index);
   void AddColumn(const CPropColumn &prop);
 
   void SetFocusedSelectedItem(int index, bool select);
-  
+
   void OnShiftSelectMessage();
   void OnArrowWithShift();
 
@@ -431,7 +436,7 @@ public:
     */
     return (UInt32)item.lParam;
   }
-  
+
   int GetRealItemIndex(int indexInListView) const
   {
     /*
@@ -459,10 +464,10 @@ public:
 
 
   UString _currentFolderPrefix;
-  
+
   CObjectVector<CFolderLink> _parentFolders;
   NWindows::NDLL::CLibrary _library;
-  
+
   CMyComPtr<IFolderFolder> _folder;
   CMyComPtr<IFolderCompare> _folderCompare;
   CMyComPtr<IFolderGetItemName> _folderGetItemName;
@@ -504,10 +509,10 @@ public:
   HRESULT BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes); // can be prefix
   HRESULT BindToPathAndRefresh(const UString &path);
   void OpenDrivesFolder();
-  
+
   void SetBookmark(unsigned index);
   void OpenBookmark(unsigned index);
-  
+
   void LoadFullPath();
   void LoadFullPathAndShow();
   void FoldersHistory();
@@ -575,10 +580,10 @@ public:
   bool _needSaveInfo;
   UString _typeIDString;
   CListViewInfo _listViewInfo;
-  
+
   CPropColumns _columns;
   CPropColumns _visibleColumns;
-  
+
   PROPID _sortID;
   // int _sortIndex;
   bool _ascending;
@@ -628,7 +633,7 @@ public:
   bool _selectMark;
   int _prevFocusedItem;
 
- 
+
   // void SortItems(int index);
   void SortItemsWithPropID(PROPID propID);
 
@@ -640,7 +645,7 @@ public:
   void KillSelection();
 
   UString GetFolderTypeID() const;
-  
+
   bool IsFolderTypeEqTo(const char *s) const;
   bool IsRootFolder() const;
   bool IsFSFolder() const;
@@ -648,7 +653,7 @@ public:
   bool IsAltStreamsFolder() const;
   bool IsArcFolder() const;
   bool IsHashFolder() const;
-  
+
   /*
     c:\Dir
     Computer\
@@ -668,7 +673,7 @@ public:
   // bool IsFsOrDrivesFolder() const { return IsFSFolder() || IsFSDrivesFolder(); }
   bool IsDeviceDrivesPrefix() const { return _currentFolderPrefix == L"\\\\.\\"; }
   bool IsSuperDrivesPrefix() const { return _currentFolderPrefix == L"\\\\?\\"; }
-  
+
   /*
     c:\Dir
     Computer\
@@ -712,7 +717,7 @@ public:
     bool _processTimer;
 
     CPanel &_panel;
-    
+
     public:
 
     CDisableTimerProcessing(CPanel &panel): _panel(panel) { Disable(); }
@@ -764,7 +769,7 @@ public:
 
   HRESULT RefreshListCtrl();
 
-  
+
   // void MessageBox_Info(LPCWSTR message, LPCWSTR caption) const;
   // void MessageBox_Warning(LPCWSTR message) const;
   void MessageBox_Error_Caption(LPCWSTR message, LPCWSTR caption) const;
@@ -788,7 +793,7 @@ public:
 
   void OpenFolder(int index);
   HRESULT OpenParentArchiveFolder();
-  
+
   HRESULT OpenAsArc(IInStream *inStream,
       const CTempFileInfo &tempFileInfo,
       const UString &virtualFilePath,
@@ -801,17 +806,17 @@ public:
       const UString &arcFormat
       // , bool showErrorMessage
       );
-  
+
   HRESULT OpenAsArc_Name(const UString &relPath, const UString &arcFormat
       // , bool showErrorMessage
       );
   HRESULT OpenAsArc_Index(int index, const wchar_t *type /* = NULL */
       // , bool showErrorMessage
       );
-  
+
   void OpenItemInArchive(int index, bool tryInternal, bool tryExternal,
       bool editMode, bool useEditor, const wchar_t *type = NULL);
-  
+
   HRESULT OnOpenItemChanged(UInt32 index, const wchar_t *fullFilePath, bool usePassword, const UString &password);
   LRESULT OnOpenItemChanged(LPARAM lParam);
 
@@ -837,7 +842,7 @@ public:
   {
     AutoRefresh_Mode = mode;
   }
-  
+
   void Post_Refresh_StatusBar();
   void Refresh_StatusBar();
 
@@ -906,7 +911,7 @@ public:
   bool _needExit;
   CRecordVector< ::CThread > _threads;
   unsigned _numActiveThreads;
-    
+
   CExitEventLauncher()
   {
     _needExit = false;

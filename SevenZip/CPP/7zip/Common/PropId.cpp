@@ -104,5 +104,12 @@ const Byte k7z_PROPID_To_VARTYPE[kpid_NUM_DEFINED] =
   VT_UI8,
   VT_BOOL,
   VT_BSTR,
-  VT_BSTR
+  VT_BSTR,
+  VT_BSTR,
+  VT_BOOL,
+  VT_FILETIME, // kpidChangeTime
+  VT_UI4,
+  VT_UI4,
+  VT_UI4,
+  VT_UI4 // kpidDeviceMinor
 };

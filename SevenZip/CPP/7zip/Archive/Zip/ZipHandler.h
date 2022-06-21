@@ -57,7 +57,9 @@ private:
 
   int m_MainMethod;
   bool m_ForceAesMode;
-  bool m_WriteNtfsTimeExtra;
+
+  CHandlerTimeOptions TimeOptions;
+
   bool _removeSfxBlock;
   bool m_ForceLocal;
   bool m_ForceUtf8;
@@ -71,7 +73,8 @@ private:
     _props.Init();
     m_MainMethod = -1;
     m_ForceAesMode = false;
-    m_WriteNtfsTimeExtra = true;
+    TimeOptions.Init();
+    TimeOptions.Prec = k_PropVar_TimePrec_0;
     _removeSfxBlock = false;
     m_ForceLocal = false;
     m_ForceUtf8 = true;

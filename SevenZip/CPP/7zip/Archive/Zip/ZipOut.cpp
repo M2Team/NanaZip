@@ -4,6 +4,7 @@
 
 #include "../../../../C/7zCrc.h"
 
+#include "../../../Windows/TimeUtils.h"
 #include "../../Common/OffsetStream.h"
 
 #include "ZipOut.h"
@@ -110,11 +111,45 @@ void COutArchive::WriteUtfName(const CItemOut &item)
   WriteBytes(item.Name_Utf, (UInt16)item.Name_Utf.Size());
 }
 
+
+static const unsigned k_Ntfs_ExtraSize = 4 + 2 + 2 + (3 * 8);
+static const unsigned k_UnixTime_ExtraSize = 1 + (1 * 4);
+
+void COutArchive::WriteTimeExtra(const CItemOut &item, bool writeNtfs)
+{
+  if (writeNtfs)
+  {
+    // windows explorer ignores that extra
+    Write16(NFileHeader::NExtraID::kNTFS);
+    Write16(k_Ntfs_ExtraSize);
+    Write32(0); // reserved
+    Write16(NFileHeader::NNtfsExtra::kTagTime);
+    Write16(8 * 3);
+    WriteNtfsTime(item.Ntfs_MTime);
+    WriteNtfsTime(item.Ntfs_ATime);
+    WriteNtfsTime(item.Ntfs_CTime);
+  }
+
+  if (item.Write_UnixTime)
+  {
+    // windows explorer ignores that extra
+    // by specification : should we write to local header also?
+    Write16(NFileHeader::NExtraID::kUnixTime);
+    Write16(k_UnixTime_ExtraSize);
+    const Byte flags = (Byte)((unsigned)1 << NFileHeader::NUnixTime::kMTime);
+    Write8(flags);
+    UInt32 unixTime;
+    NWindows::NTime::FileTime_To_UnixTime(item.Ntfs_MTime, unixTime);
+    Write32(unixTime);
+  }
+}
+
+
 void COutArchive::WriteLocalHeader(CItemOut &item, bool needCheck)
 {
   m_LocalHeaderPos = m_CurPos;
   item.LocalHeaderPos = m_CurPos;
-  
+
   bool isZip64 =
       DOES_NEED_ZIP64(item.PackSize) ||
       DOES_NEED_ZIP64(item.Size);
@@ -122,8 +157,14 @@ void COutArchive::WriteLocalHeader(CItemOut &item, bool needCheck)
   if (needCheck && m_IsZip64)
     isZip64 = true;
 
+  // Why don't we write NTFS timestamps to local header?
+  // Probably we want to reduce size of archive?
+  const bool writeNtfs = false; // do not write NTFS timestamp to local header
+  // const bool writeNtfs = item.Write_NtfsTime; // write NTFS time to local header
   const UInt32 localExtraSize = (UInt32)(
       (isZip64 ? (4 + 8 + 8): 0)
+      + (writeNtfs ? 4 + k_Ntfs_ExtraSize : 0)
+      + (item.Write_UnixTime ? 4 + k_UnixTime_ExtraSize : 0)
       + item.Get_UtfName_ExtraSize()
       + item.LocalExtra.GetSize());
   if ((UInt16)localExtraSize != localExtraSize)
@@ -137,27 +178,27 @@ void COutArchive::WriteLocalHeader(CItemOut &item, bool needCheck)
   item.LocalExtra.IsZip64 = isZip64;
 
   Write32(NSignature::kLocalFileHeader);
-  
+
   WriteCommonItemInfo(item, isZip64);
-  
+
   Write32(item.HasDescriptor() ? 0 : item.Crc);
 
   UInt64 packSize = item.PackSize;
   UInt64 size = item.Size;
-  
+
   if (item.HasDescriptor())
   {
     packSize = 0;
     size = 0;
   }
-  
+
   WRITE_32_VAL_SPEC(packSize, isZip64);
   WRITE_32_VAL_SPEC(size, isZip64);
 
   Write16((UInt16)item.Name.Len());
 
   Write16((UInt16)localExtraSize);
-  
+
   WriteBytes((const char *)item.Name, (UInt16)item.Name.Len());
 
   if (isZip64)
@@ -168,12 +209,11 @@ void COutArchive::WriteLocalHeader(CItemOut &item, bool needCheck)
     Write64(packSize);
   }
 
+  WriteTimeExtra(item, writeNtfs);
+
   WriteUtfName(item);
 
   WriteExtra(item.LocalExtra);
-
-  // Why don't we write NTFS timestamps to local header?
-  // Probably we want to reduce size of archive?
 
   const UInt32 localFileHeaderSize = (UInt32)(m_CurPos - m_LocalHeaderPos);
   if (needCheck && m_LocalFileHeaderSize != localFileHeaderSize)
@@ -231,15 +271,15 @@ void COutArchive::WriteDescriptor(const CItemOut &item)
 
 void COutArchive::WriteCentralHeader(const CItemOut &item)
 {
-  bool isUnPack64 = DOES_NEED_ZIP64(item.Size);
-  bool isPack64 = DOES_NEED_ZIP64(item.PackSize);
-  bool isPosition64 = DOES_NEED_ZIP64(item.LocalHeaderPos);
-  bool isZip64 = isPack64 || isUnPack64 || isPosition64;
-  
+  const bool isUnPack64 = DOES_NEED_ZIP64(item.Size);
+  const bool isPack64 = DOES_NEED_ZIP64(item.PackSize);
+  const bool isPosition64 = DOES_NEED_ZIP64(item.LocalHeaderPos);
+  const bool isZip64 = isPack64 || isUnPack64 || isPosition64;
+
   Write32(NSignature::kCentralFileHeader);
   Write8(item.MadeByVersion.Version);
   Write8(item.MadeByVersion.HostOS);
-  
+
   WriteCommonItemInfo(item, isZip64);
   Write32(item.Crc);
 
@@ -247,12 +287,13 @@ void COutArchive::WriteCentralHeader(const CItemOut &item)
   WRITE_32_VAL_SPEC(item.Size, isUnPack64);
 
   Write16((UInt16)item.Name.Len());
-  
+
   const UInt16 zip64ExtraSize = (UInt16)((isUnPack64 ? 8: 0) + (isPack64 ? 8: 0) + (isPosition64 ? 8: 0));
-  const UInt16 kNtfsExtraSize = 4 + 2 + 2 + (3 * 8);
+  const bool writeNtfs = item.Write_NtfsTime;
   const size_t centralExtraSize =
       (isZip64 ? 4 + zip64ExtraSize : 0)
-      + (item.NtfsTimeIsDefined ? 4 + kNtfsExtraSize : 0)
+      + (writeNtfs ? 4 + k_Ntfs_ExtraSize : 0)
+      + (item.Write_UnixTime ? 4 + k_UnixTime_ExtraSize : 0)
       + item.Get_UtfName_ExtraSize()
       + item.CentralExtra.GetSize();
 
@@ -263,14 +304,14 @@ void COutArchive::WriteCentralHeader(const CItemOut &item)
   Write16(centralExtraSize16);
 
   const UInt16 commentSize = (UInt16)item.Comment.Size();
-  
+
   Write16(commentSize);
   Write16(0); // DiskNumberStart;
   Write16(item.InternalAttrib);
   Write32(item.ExternalAttrib);
   WRITE_32_VAL_SPEC(item.LocalHeaderPos, isPosition64);
   WriteBytes((const char *)item.Name, item.Name.Len());
-  
+
   if (isZip64)
   {
     Write16(NFileHeader::NExtraID::kZip64);
@@ -282,21 +323,10 @@ void COutArchive::WriteCentralHeader(const CItemOut &item)
     if (isPosition64)
       Write64(item.LocalHeaderPos);
   }
-  
-  if (item.NtfsTimeIsDefined)
-  {
-    Write16(NFileHeader::NExtraID::kNTFS);
-    Write16(kNtfsExtraSize);
-    Write32(0); // reserved
-    Write16(NFileHeader::NNtfsExtra::kTagTime);
-    Write16(8 * 3);
-    WriteNtfsTime(item.Ntfs_MTime);
-    WriteNtfsTime(item.Ntfs_ATime);
-    WriteNtfsTime(item.Ntfs_CTime);
-  }
 
+  WriteTimeExtra(item, writeNtfs);
   WriteUtfName(item);
-  
+
   WriteExtra(item.CentralExtra);
   if (commentSize != 0)
     WriteBytes(item.Comment, commentSize);
@@ -304,23 +334,23 @@ void COutArchive::WriteCentralHeader(const CItemOut &item)
 
 void COutArchive::WriteCentralDir(const CObjectVector<CItemOut> &items, const CByteBuffer *comment)
 {
-  UInt64 cdOffset = GetCurPos();
+  const UInt64 cdOffset = GetCurPos();
   FOR_VECTOR (i, items)
     WriteCentralHeader(items[i]);
-  UInt64 cd64EndOffset = GetCurPos();
-  UInt64 cdSize = cd64EndOffset - cdOffset;
-  bool cdOffset64 = DOES_NEED_ZIP64(cdOffset);
-  bool cdSize64 = DOES_NEED_ZIP64(cdSize);
-  bool items64 = items.Size() >= 0xFFFF;
-  bool isZip64 = (cdOffset64 || cdSize64 || items64);
-  
+  const UInt64 cd64EndOffset = GetCurPos();
+  const UInt64 cdSize = cd64EndOffset - cdOffset;
+  const bool cdOffset64 = DOES_NEED_ZIP64(cdOffset);
+  const bool cdSize64 = DOES_NEED_ZIP64(cdSize);
+  const bool items64 = items.Size() >= 0xFFFF;
+  const bool isZip64 = (cdOffset64 || cdSize64 || items64);
+
   // isZip64 = true; // to test Zip64
 
   if (isZip64)
   {
     Write32(NSignature::kEcd64);
     Write64(kEcd64_MainSize);
-    
+
     // to test extra block:
     // const UInt32 extraSize = 1 << 26;
     // Write64(kEcd64_MainSize + extraSize);
@@ -341,13 +371,13 @@ void COutArchive::WriteCentralDir(const CObjectVector<CItemOut> &items, const CB
     Write64(cd64EndOffset);
     Write32(1); // total number of disks
   }
-  
+
   Write32(NSignature::kEcd);
   Write16(0); // ThisDiskNumber = 0;
   Write16(0); // StartCentralDirectoryDiskNumber;
   Write16((UInt16)(items64 ? 0xFFFF: items.Size()));
   Write16((UInt16)(items64 ? 0xFFFF: items.Size()));
-  
+
   WRITE_32_VAL_SPEC(cdSize, cdSize64);
   WRITE_32_VAL_SPEC(cdOffset, cdOffset64);
 

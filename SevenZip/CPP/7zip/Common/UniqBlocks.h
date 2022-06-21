@@ -3,9 +3,24 @@
 #ifndef __UNIQ_BLOCKS_H
 #define __UNIQ_BLOCKS_H
 
-#include "../../Common/MyTypes.h"
 #include "../../Common/MyBuffer.h"
-#include "../../Common/MyVector.h"
+#include "../../Common/MyString.h"
+
+struct C_UInt32_UString_Map
+{
+  CRecordVector<UInt32> Numbers;
+  UStringVector Strings;
+
+  void Add_UInt32(const UInt32 n)
+  {
+    Numbers.AddToUniqueSorted(n);
+  }
+  int Find(const UInt32 n)
+  {
+    return Numbers.FindInSorted(n);
+  }
+};
+
 
 struct CUniqBlocks
 {

@@ -193,7 +193,7 @@ BSTR CPropVariant::AllocBstr(unsigned numChars)
 }
 
 #define SET_PROP_id_dest(id, dest) \
-  if (vt != id) { InternalClear(); vt = id; } dest = value;
+  if (vt != id) { InternalClear(); vt = id; } dest = value; wReserved1 = 0;
 
 void CPropVariant::Set_Int32(Int32 value) throw()
 {
@@ -217,67 +217,83 @@ SET_PROP_FUNC(UInt64, VT_UI8, uhVal.QuadPart)
 // SET_PROP_FUNC(Int64, VT_I8, hVal.QuadPart)
 SET_PROP_FUNC(const FILETIME &, VT_FILETIME, filetime)
 
+#define CASE_SIMPLE_VT_VALUES \
+    case VT_EMPTY:    \
+    case VT_BOOL:     \
+    case VT_FILETIME: \
+    case VT_UI8:      \
+    case VT_UI4:      \
+    case VT_UI2:      \
+    case VT_UI1:      \
+    case VT_I8:       \
+    case VT_I4:       \
+    case VT_I2:       \
+    case VT_I1:       \
+    case VT_UINT:     \
+    case VT_INT:      \
+    case VT_NULL:     \
+    case VT_ERROR:    \
+    case VT_R4:       \
+    case VT_R8:       \
+    case VT_CY:       \
+    case VT_DATE:     \
+
+
+/*
+  ::VariantClear() and ::VariantCopy() don't work, if (vt == VT_FILETIME)
+  So we handle VT_FILETIME and another simple types directly
+  we call system functions for VT_BSTR and for unknown typed
+*/
+ 
+CPropVariant::~CPropVariant()
+{
+  switch ((unsigned)vt)
+  {
+    CASE_SIMPLE_VT_VALUES
+      // vt = VT_EMPTY; // it's optional
+      return;
+  }
+  ::VariantClear((tagVARIANT *)this);
+}
+
 HRESULT PropVariant_Clear(PROPVARIANT *prop) throw()
 {
-  switch (prop->vt)
+  switch ((unsigned)prop->vt)
   {
-    case VT_EMPTY:
-    case VT_UI1:
-    case VT_I1:
-    case VT_I2:
-    case VT_UI2:
-    case VT_BOOL:
-    case VT_I4:
-    case VT_UI4:
-    case VT_R4:
-    case VT_INT:
-    case VT_UINT:
-    case VT_ERROR:
-    case VT_FILETIME:
-    case VT_UI8:
-    case VT_R8:
-    case VT_CY:
-    case VT_DATE:
+    CASE_SIMPLE_VT_VALUES
       prop->vt = VT_EMPTY;
-      prop->wReserved1 = 0;
-      prop->wReserved2 = 0;
-      prop->wReserved3 = 0;
-      prop->uhVal.QuadPart = 0;
-      return S_OK;
+      break;
+    default:
+    {
+      const HRESULT res = ::VariantClear((VARIANTARG *)prop);
+      if (res != S_OK || prop->vt != VT_EMPTY)
+        return res;
+      break;
+    }
   }
-  return ::VariantClear((VARIANTARG *)prop);
-  // return ::PropVariantClear(prop);
-  // PropVariantClear can clear VT_BLOB.
+  prop->wReserved1 = 0;
+  prop->wReserved2 = 0;
+  prop->wReserved3 = 0;
+  prop->uhVal.QuadPart = 0;
+  return S_OK;
 }
 
 HRESULT CPropVariant::Clear() throw()
 {
   if (vt == VT_EMPTY)
+  {
+    wReserved1 = 0;
     return S_OK;
+  }
   return PropVariant_Clear(this);
 }
 
 HRESULT CPropVariant::Copy(const PROPVARIANT* pSrc) throw()
 {
-  ::VariantClear((tagVARIANT *)this);
-  switch (pSrc->vt)
+  Clear();
+  switch ((unsigned)pSrc->vt)
   {
-    case VT_UI1:
-    case VT_I1:
-    case VT_I2:
-    case VT_UI2:
-    case VT_BOOL:
-    case VT_I4:
-    case VT_UI4:
-    case VT_R4:
-    case VT_INT:
-    case VT_UINT:
-    case VT_ERROR:
-    case VT_FILETIME:
-    case VT_UI8:
-    case VT_R8:
-    case VT_CY:
-    case VT_DATE:
+    CASE_SIMPLE_VT_VALUES
       memmove((PROPVARIANT*)this, pSrc, sizeof(PROPVARIANT));
       return S_OK;
   }
@@ -287,12 +303,13 @@ HRESULT CPropVariant::Copy(const PROPVARIANT* pSrc) throw()
 
 HRESULT CPropVariant::Attach(PROPVARIANT *pSrc) throw()
 {
-  HRESULT hr = Clear();
+  const HRESULT hr = Clear();
   if (FAILED(hr))
     return hr;
   // memcpy((PROPVARIANT *)this, pSrc, sizeof(PROPVARIANT));
   *(PROPVARIANT *)this = *pSrc;
   pSrc->vt = VT_EMPTY;
+  pSrc->wReserved1 = 0;
   return S_OK;
 }
 
@@ -300,21 +317,25 @@ HRESULT CPropVariant::Detach(PROPVARIANT *pDest) throw()
 {
   if (pDest->vt != VT_EMPTY)
   {
-    HRESULT hr = PropVariant_Clear(pDest);
+    const HRESULT hr = PropVariant_Clear(pDest);
     if (FAILED(hr))
       return hr;
   }
   // memcpy(pDest, this, sizeof(PROPVARIANT));
   *pDest = *(PROPVARIANT *)this;
   vt = VT_EMPTY;
+  wReserved1 = 0;
   return S_OK;
 }
 
 HRESULT CPropVariant::InternalClear() throw()
 {
   if (vt == VT_EMPTY)
+  {
+    wReserved1 = 0;
     return S_OK;
-  HRESULT hr = Clear();
+  }
+  const HRESULT hr = Clear();
   if (FAILED(hr))
   {
     vt = VT_ERROR;
@@ -325,7 +346,7 @@ HRESULT CPropVariant::InternalClear() throw()
 
 void CPropVariant::InternalCopy(const PROPVARIANT *pSrc)
 {
-  HRESULT hr = Copy(pSrc);
+  const HRESULT hr = Copy(pSrc);
   if (FAILED(hr))
   {
     if (hr == E_OUTOFMEMORY)
@@ -335,11 +356,12 @@ void CPropVariant::InternalCopy(const PROPVARIANT *pSrc)
   }
 }
 
+
 int CPropVariant::Compare(const CPropVariant &a) throw()
 {
   if (vt != a.vt)
     return MyCompare(vt, a.vt);
-  switch (vt)
+  switch ((unsigned)vt)
   {
     case VT_EMPTY: return 0;
     // case VT_I1: return MyCompare(cVal, a.cVal);
@@ -352,7 +374,15 @@ int CPropVariant::Compare(const CPropVariant &a) throw()
     case VT_I8: return MyCompare(hVal.QuadPart, a.hVal.QuadPart);
     case VT_UI8: return MyCompare(uhVal.QuadPart, a.uhVal.QuadPart);
     case VT_BOOL: return -MyCompare(boolVal, a.boolVal);
-    case VT_FILETIME: return ::CompareFileTime(&filetime, &a.filetime);
+    case VT_FILETIME:
+    {
+      const int res = CompareFileTime(&filetime, &a.filetime);
+      if (res != 0)
+        return res;
+      const unsigned v1 = Get_Ns100();
+      const unsigned v2 = a.Get_Ns100();
+      return MyCompare(v1, v2);
+    }
     case VT_BSTR: return 0; // Not implemented
     default: return 0;
   }

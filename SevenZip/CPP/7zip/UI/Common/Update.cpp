@@ -2,6 +2,8 @@
 
 #include "StdAfx.h"
 
+// #include  <stdio.h>
+
 #include "Update.h"
 
 #include "../../../Common/StringConvert.h"
@@ -101,7 +103,7 @@ public:
     _length = 0;
   }
 
-  bool SetMTime(const FILETIME *mTime);
+  bool SetMTime(const CFiTime *mTime);
   HRESULT Close();
 
   UInt64 GetSize() const { return _length; }
@@ -131,7 +133,7 @@ HRESULT COutMultiVolStream::Close()
   return res;
 }
 
-bool COutMultiVolStream::SetMTime(const FILETIME *mTime)
+bool COutMultiVolStream::SetMTime(const CFiTime *mTime)
 {
   bool res = true;
   FOR_VECTOR (i, Streams)
@@ -545,11 +547,46 @@ static HRESULT Compress(
   if (!outArchive)
     throw kUpdateIsNotSupoorted;
 
+  // we need to set properties to get fileTimeType.
+  RINOK(SetProperties(outArchive, options.MethodMode.Properties));
+
   NFileTimeType::EEnum fileTimeType;
   {
+    /*
+    how we compare file_in_archive::MTime with dirItem.MTime
+    for GetUpdatePairInfoList():
+
+    if (kpidMTime is not defined), external MTime of archive is used.
+
+    before 22.00:
+      if (kpidTimeType is defined)
+      {
+        kpidTimeType is used as precision.
+        (kpidTimeType > kDOS) is not allowed.
+      }
+      else GetFileTimeType() value is used as precision.
+
+    22.00:
+      if (kpidMTime is defined)
+      {
+        if (kpidMTime::precision != 0), then kpidMTime::precision is used as precision.
+        else
+        {
+          if (kpidTimeType is defined), kpidTimeType is used as precision.
+          else GetFileTimeType() value is used as precision.
+        }
+      }
+      else external MTime of archive is used as precision.
+    */
+
     UInt32 value;
     RINOK(outArchive->GetFileTimeType(&value));
 
+    // we support any future fileType here.
+    fileTimeType = (NFileTimeType::EEnum)value;
+
+    /*
+    old 21.07 code:
     switch (value)
     {
       case NFileTimeType::kWindows:
@@ -560,13 +597,26 @@ static HRESULT Compress(
       default:
         return E_FAIL;
     }
+    */
   }
 
+  // bool noTimestampExpected = false;
   {
     const CArcInfoEx &arcInfo = codecs->Formats[(unsigned)formatIndex];
+
+    // if (arcInfo.Flags_KeepName()) noTimestampExpected = true;
+    if (arcInfo.Is_Xz() ||
+        arcInfo.Is_BZip2())
+    {
+      /* 7-zip before 22.00 returns NFileTimeType::kUnix for xz and bzip2,
+         but we want to set timestamp without reduction to unix. */
+      // noTimestampExpected = true;
+      fileTimeType = NFileTimeType::kNotDefined; // it means not defined
+    }
+
     if (options.AltStreams.Val && !arcInfo.Flags_AltStreams())
       return E_NOTIMPL;
-    if (options.NtSecurity.Val && !arcInfo.Flags_NtSecure())
+    if (options.NtSecurity.Val && !arcInfo.Flags_NtSecurity())
       return E_NOTIMPL;
     if (options.DeleteAfterCompressing && arcInfo.Flags_HashHandler())
       return E_NOTIMPL;
@@ -626,7 +676,7 @@ static HRESULT Compress(
       if (needRename)
       {
         up2.NewProps = true;
-        RINOK(arc->IsItemAnti(i, up2.IsAnti));
+        RINOK(arc->IsItem_Anti(i, up2.IsAnti));
         up2.NewNameIndex = (int)newNames.Add(dest);
       }
       updatePairs2.Add(up2);
@@ -661,6 +711,7 @@ static HRESULT Compress(
             else
               stat.NumDirs++;
           }
+         #ifdef _WIN32
           else if (di.IsAltStream)
           {
             if (up.IsAnti)
@@ -671,6 +722,7 @@ static HRESULT Compress(
               stat.AltStreamsSize += di.Size;
             }
           }
+         #endif
           else
           {
             if (up.IsAnti)
@@ -740,6 +792,8 @@ static HRESULT Compress(
   updateCallbackSpec->StoreNtSecurity = options.NtSecurity.Val;
   updateCallbackSpec->StoreHardLinks = options.HardLinks.Val;
   updateCallbackSpec->StoreSymLinks = options.SymLinks.Val;
+  updateCallbackSpec->StoreOwnerName = options.StoreOwnerName.Val;
+  updateCallbackSpec->StoreOwnerId = options.StoreOwnerId.Val;
 
   updateCallbackSpec->Arc = arc;
   updateCallbackSpec->ArcItems = &arcItems;
@@ -754,6 +808,12 @@ static HRESULT Compress(
 
   if (options.RenamePairs.Size() != 0)
     updateCallbackSpec->NewNames = &newNames;
+
+  if (options.SetArcMTime)
+  {
+    // updateCallbackSpec->Need_ArcMTime_Report = true;
+    updateCallbackSpec->Need_LatestMTime = true;
+  }
 
   CMyComPtr<IOutStream> outSeekStream;
   CMyComPtr<ISequentialOutStream> outStream;
@@ -838,8 +898,6 @@ static HRESULT Compress(
     */
   }
 
-  RINOK(SetProperties(outArchive, options.MethodMode.Properties));
-
   if (options.SfxMode)
   {
     CInFileStream *sfxStreamSpec = new CInFileStream;
@@ -909,24 +967,71 @@ static HRESULT Compress(
 
   if (options.SetArcMTime)
   {
-    FILETIME ft;
-    ft.dwLowDateTime = 0;
-    ft.dwHighDateTime = 0;
-    FOR_VECTOR (i, updatePairs2)
+    CFiTime ft;
+    FiTime_Clear(ft);
+    bool isDefined = false;
+
+    // bool needNormalizeAfterStream;
+    // needParse;
+    /*
+    if (updateCallbackSpec->ArcMTime_WasReported)
     {
-      const CUpdatePair2 &pair2 = updatePairs2[i];
-      const FILETIME *ft2 = NULL;
-      if (pair2.NewProps && pair2.DirIndex >= 0)
-        ft2 = &dirItems.Items[(unsigned)pair2.DirIndex].MTime;
-      else if (pair2.UseArcProps && pair2.ArcIndex >= 0)
-        ft2 = &arcItems[(unsigned)pair2.ArcIndex].MTime;
-      if (ft2)
-      {
-        if (::CompareFileTime(&ft, ft2) < 0)
-          ft = *ft2;
-      }
+      isDefined = updateCallbackSpec->Reported_ArcMTime.Def;
+      if (isDefined)
+        updateCallbackSpec->Reported_ArcMTime.Write_To_FiTime(ft);
+      else
+        fileTimeType = NFileTimeType::kNotDefined;
     }
-    if (ft.dwLowDateTime != 0 || ft.dwHighDateTime != 0)
+    if (!isDefined)
+    */
+    {
+      if (updateCallbackSpec->LatestMTime_Defined)
+      {
+        // CArcTime at = StreamCallback_ArcMTime;
+        // updateCallbackSpec->StreamCallback_ArcMTime.Write_To_FiTime(ft);
+        // we must normalize with precision from archive;
+        ft = updateCallbackSpec->LatestMTime;
+        isDefined = true;
+      }
+
+      FOR_VECTOR (i, updatePairs2)
+      {
+        const CUpdatePair2 &pair2 = updatePairs2[i];
+        CFiTime ft2;
+        bool ft2_Defined = false;
+        /* we use full precision of dirItem, if dirItem is defined
+           and (dirItem will be used or dirItem is sameTime in dir and arc */
+        if (pair2.DirIndex >= 0 &&
+            (pair2.NewProps || pair2.IsSameTime))
+        {
+          ft2 = dirItems.Items[(unsigned)pair2.DirIndex].MTime;
+          ft2_Defined = true;
+        }
+        else if (pair2.UseArcProps && pair2.ArcIndex >= 0)
+        {
+          const CArcItem &arcItem = arcItems[(unsigned)pair2.ArcIndex];
+          if (arcItem.MTime.Def)
+          {
+            arcItem.MTime.Write_To_FiTime(ft2);
+            ft2_Defined = true;
+          }
+        }
+        if (ft2_Defined)
+        {
+          if (Compare_FiTime(&ft, &ft2) < 0)
+          {
+            ft = ft2;
+            isDefined = true;
+          }
+        }
+      }
+      /*
+      if (fileTimeType != NFileTimeType::kNotDefined)
+        FiTime_Normalize_With_Prec(ft, fileTimeType);
+      */
+    }
+    // if (ft.dwLowDateTime != 0 || ft.dwHighDateTime != 0)
+    if (isDefined)
     {
       if (outStreamSpec)
         outStreamSpec->SetMTime(&ft);
@@ -1046,26 +1151,9 @@ static HRESULT EnumerateInArchiveItems(
     else
       ai.Censored = Censor_CheckPath(censor, item);
 
-    RINOK(arc.GetItemMTime(i, ai.MTime, ai.MTimeDefined));
-    RINOK(arc.GetItemSize(i, ai.Size, ai.SizeDefined));
-
-    {
-      CPropVariant prop;
-      RINOK(archive->GetProperty(i, kpidTimeType, &prop));
-      if (prop.vt == VT_UI4)
-      {
-        ai.TimeType = (int)(NFileTimeType::EEnum)prop.ulVal;
-        switch (ai.TimeType)
-        {
-          case NFileTimeType::kWindows:
-          case NFileTimeType::kUnix:
-          case NFileTimeType::kDOS:
-            break;
-          default:
-            return E_FAIL;
-        }
-      }
-    }
+    // ai.MTime will be set to archive MTime, if not present in archive item
+    RINOK(arc.GetItem_MTime(i, ai.MTime));
+    RINOK(arc.GetItem_Size(i, ai.Size, ai.Size_Defined));
 
     ai.IndexInServer = i;
     arcItems.AddInReserved(ai);
@@ -1198,8 +1286,10 @@ HRESULT UpdateArchive(
               EISDIR
             #endif
             );
+     #ifdef _WIN32
       if (fi.IsDevice)
         return E_NOTIMPL;
+     #endif
 
       if (!options.StdOutMode && options.UpdateArchiveItself)
         if (fi.IsReadOnly())
@@ -1262,8 +1352,14 @@ HRESULT UpdateArchive(
       }
 
       CArc &arc = arcLink.Arcs.Back();
-      arc.MTimeDefined = !fi.IsDevice;
-      arc.MTime = fi.MTime;
+      arc.MTime.Def =
+        #ifdef _WIN32
+          !fi.IsDevice;
+        #else
+          true;
+        #endif
+      if (arc.MTime.Def)
+        arc.MTime.Set_From_FiTime(fi.MTime);
 
       if (arc.ErrorInfo.ThereIsTail)
       {
@@ -1307,10 +1403,11 @@ HRESULT UpdateArchive(
   if (options.StdInMode)
   {
     CDirItem di;
+    di.ClearBase();
     di.Name = options.StdInFileName;
     di.Size = (UInt64)(Int64)-1;
-    di.Attrib = 0;
-    NTime::GetCurUtcFileTime(di.MTime);
+    di.SetAsFile();
+    NTime::GetCurUtc_FiTime(di.MTime);
     di.CTime = di.ATime = di.MTime;
     dirItems.Items.Add(di);
   }
@@ -1337,7 +1434,13 @@ HRESULT UpdateArchive(
       dirItems.ExcludeDirItems = censor.ExcludeDirItems;
       dirItems.ExcludeFileItems = censor.ExcludeFileItems;
 
-      HRESULT res = EnumerateItems(censor,
+      dirItems.ShareForWrite = options.OpenShareForWrite;
+
+     #ifndef _WIN32
+      dirItems.StoreOwnerName = options.StoreOwnerName.Val;
+     #endif
+
+      const HRESULT res = EnumerateItems(censor,
           options.PathMode,
           UString(), // options.AddPathPrefix,
           dirItems);
@@ -1351,6 +1454,8 @@ HRESULT UpdateArchive(
 
       RINOK(callback->FinishScanning(dirItems.Stat));
 
+      // 22.00: we don't need parent folder, if absolute path mode
+      if (options.PathMode != NWildcard::k_AbsPath)
       if (censor.Pairs.Size() == 1)
       {
         NFind::CFileInfo fi;
@@ -1366,11 +1471,7 @@ HRESULT UpdateArchive(
         if (fi.Find(prefix))
           if (fi.IsDir())
           {
-            parentDirItem.Size = fi.Size;
-            parentDirItem.CTime = fi.CTime;
-            parentDirItem.ATime = fi.ATime;
-            parentDirItem.MTime = fi.MTime;
-            parentDirItem.Attrib = fi.Attrib;
+            parentDirItem.Copy_From_FileInfoBase(fi);
             parentDirItem_Ptr = &parentDirItem;
 
             int secureIndex = -1;
@@ -1723,8 +1824,8 @@ HRESULT UpdateArchive(
               is_SameSize = (fileInfo.Size == dirItem.Size);
 
             if (is_SameSize
-                && CompareFileTime(&fileInfo.MTime, &dirItem.MTime) == 0
-                && CompareFileTime(&fileInfo.CTime, &dirItem.CTime) == 0)
+                && Compare_FiTime(&fileInfo.MTime, &dirItem.MTime) == 0
+                && Compare_FiTime(&fileInfo.CTime, &dirItem.CTime) == 0)
             {
               RINOK(callback->DeletingAfterArchiving(phyPath, false));
               DeleteFileAlways(phyPath);

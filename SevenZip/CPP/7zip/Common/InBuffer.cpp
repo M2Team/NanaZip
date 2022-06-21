@@ -77,7 +77,8 @@ bool CInBufferBase::ReadByte_FromNewBlock(Byte &b)
 {
   if (!ReadBlock())
   {
-    NumExtraBytes++;
+    // 22.00: we don't increment (NumExtraBytes) here
+    // NumExtraBytes++;
     b = 0xFF;
     return false;
   }

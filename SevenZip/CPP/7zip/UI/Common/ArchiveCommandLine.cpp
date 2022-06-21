@@ -161,6 +161,10 @@ enum Enum
   kSymLinks,
   kNtSecurity,
 
+  kStoreOwnerId,
+  kStoreOwnerName,
+
+  kZoneFile,
   kAltStreams,
   kReplaceColonForAltStream,
   kWriteToAltStreamIfColon,
@@ -305,6 +309,10 @@ static const CSwitchForm kSwitchForms[] =
   { "snl", SWFRM_MINUS },
   { "sni", SWFRM_SIMPLE },
 
+  { "snoi", SWFRM_MINUS },
+  { "snon", SWFRM_MINUS },
+
+  { "snz", SWFRM_STRING_SINGL(0) },
   { "sns", SWFRM_MINUS },
   { "snr", SWFRM_SIMPLE },
   { "snc", SWFRM_SIMPLE },
@@ -1032,9 +1040,9 @@ void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
 
   if (parser[NKey::kCaseSensitive].ThereIs)
   {
+    options.CaseSensitive =
     g_CaseSensitive = !parser[NKey::kCaseSensitive].WithMinus;
-    options.CaseSensitiveChange = true;
-    options.CaseSensitive = g_CaseSensitive;
+    options.CaseSensitive_Change = true;
   }
 
 
@@ -1368,6 +1376,9 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   SetBoolPair(parser, NKey::kHardLinks, options.HardLinks);
   SetBoolPair(parser, NKey::kSymLinks, options.SymLinks);
 
+  SetBoolPair(parser, NKey::kStoreOwnerId, options.StoreOwnerId);
+  SetBoolPair(parser, NKey::kStoreOwnerName, options.StoreOwnerName);
+
   CBoolPair symLinks_AllowDangerous;
   SetBoolPair(parser, NKey::kSymLinks_AllowDangerous, symLinks_AllowDangerous);
 
@@ -1420,10 +1431,26 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
       nt.ReplaceColonForAltStream = parser[NKey::kReplaceColonForAltStream].ThereIs;
       nt.WriteToAltStreamIfColon = parser[NKey::kWriteToAltStreamIfColon].ThereIs;
 
+      nt.ExtractOwner = options.StoreOwnerId.Val; // StoreOwnerName
+
       if (parser[NKey::kPreserveATime].ThereIs)
         nt.PreserveATime = true;
       if (parser[NKey::kShareForWrite].ThereIs)
         nt.OpenShareForWrite = true;
+    }
+
+    if (parser[NKey::kZoneFile].ThereIs)
+    {
+      eo.ZoneMode = NExtract::NZoneIdMode::kAll;
+      const UString &s = parser[NKey::kZoneFile].PostStrings[0];
+      if (!s.IsEmpty())
+      {
+             if (s == L"0") eo.ZoneMode = NExtract::NZoneIdMode::kNone;
+        else if (s == L"1") eo.ZoneMode = NExtract::NZoneIdMode::kAll;
+        else if (s == L"2") eo.ZoneMode = NExtract::NZoneIdMode::kOffice;
+        else
+          throw CArcCmdLineException("Unsupported -snz:", s);
+      }
     }
 
     options.Censor.AddPathsToCensor(NWildcard::k_AbsPath);
@@ -1549,6 +1576,9 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
     updateOptions.NtSecurity = options.NtSecurity;
     updateOptions.HardLinks = options.HardLinks;
     updateOptions.SymLinks = options.SymLinks;
+
+    updateOptions.StoreOwnerId = options.StoreOwnerId;
+    updateOptions.StoreOwnerName = options.StoreOwnerName;
 
     updateOptions.EMailMode = parser[NKey::kEmail].ThereIs;
     if (updateOptions.EMailMode)

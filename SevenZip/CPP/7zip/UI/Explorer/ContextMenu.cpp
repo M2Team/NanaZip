@@ -102,6 +102,7 @@ CZipContextMenu::CZipContextMenu():
    _isMenuForFM(false),
    _dropMode(false),
    _bitmap(NULL),
+   _writeZone((UInt32)(Int32)-1),
    IsSeparator(false),
    IsRoot(true),
    CurrentSubCommand(0)
@@ -574,6 +575,7 @@ STDMETHODIMP CZipContextMenu::QueryContextMenu(HMENU hMenu, UINT indexMenu,
   ci.Load();
 
   _elimDup = ci.ElimDup;
+  _writeZone = ci.WriteZone;
 
   HBITMAP bitmap = NULL;
   if (ci.MenuIcons.Val)
@@ -896,7 +898,7 @@ STDMETHODIMP CZipContextMenu::QueryContextMenu(HMENU hMenu, UINT indexMenu,
        NContextMenuFlags::kCRC_Cascaded)) != 0);
 
   if (
-      // !_isMenuForFM && // 21.04: we don't hide CRC SHA menu in NanaZip FM
+      // !_isMenuForFM && // 21.04: we don't hide CRC SHA menu in NanaZip
       needCrc
       && currentCommandID + 1 < commandIDLast)
   {
@@ -1181,7 +1183,8 @@ HRESULT CZipContextMenu::InvokeCommandCommon(const CCommandMapItem &cmi)
       {
         ExtractArchives(_fileNames, cmi.Folder,
             (cmdID == kExtract), // showDialog
-            (cmdID == kExtractTo) && _elimDup.Val // elimDup
+            (cmdID == kExtractTo) && _elimDup.Val, // elimDup
+            _writeZone
             );
         break;
       }

@@ -31,8 +31,9 @@ struct CExtraSubBlock
   CByteBuffer Data;
 
   bool ExtractNtfsTime(unsigned index, FILETIME &ft) const;
-  bool ExtractUnixTime(bool isCentral, unsigned index, UInt32 &res) const;
-  bool ExtractUnixExtraTime(unsigned index, UInt32 &res) const;
+  bool Extract_UnixTime(bool isCentral, unsigned index, UInt32 &res) const;
+  bool Extract_Unix01_Time(unsigned index, UInt32 &res) const;
+  // bool Extract_Unix_Time(unsigned index, UInt32 &res) const;
 
   bool CheckIzUnicode(const AString &s) const;
 
@@ -208,7 +209,7 @@ public:
 
   /*
     Zip specification doesn't mention that ExtractVersion field uses HostOS subfield.
-    18.06: NanaZip now doesn't use ExtractVersion::HostOS to detect codePage
+    18.06: 7-Zip now doesn't use ExtractVersion::HostOS to detect codePage
   */
 
   CVersion ExtractVersion;

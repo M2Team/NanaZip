@@ -93,3 +93,10 @@
 #define IDS_PROP_READ_ONLY        1093
 #define IDS_PROP_OUT_NAME         1094
 #define IDS_PROP_COPY_LINK        1095
+#define IDS_PROP_ARC_FILE_NAME    1096
+#define IDS_PROP_IS_HASH          1097
+#define IDS_PROP_CHANGE_TIME      1098
+#define IDS_PROP_USER_ID          1099
+#define IDS_PROP_GROUP_ID         1100
+#define IDS_PROP_DEVICE_MAJOR     1101
+#define IDS_PROP_DEVICE_MINOR     1102

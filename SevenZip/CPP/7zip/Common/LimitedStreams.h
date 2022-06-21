@@ -25,7 +25,7 @@ public:
     _pos = 0;
     _wasFinished = false;
   }
- 
+
   MY_UNKNOWN_IMP1(ISequentialInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -55,7 +55,7 @@ public:
     _size = size;
     return SeekToPhys();
   }
- 
+
   MY_UNKNOWN_IMP2(ISequentialInStream, IInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -101,21 +101,26 @@ public:
   STDMETHOD(Seek)(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition);
 };
 
+
+
+const UInt64 k_SeekExtent_Phy_Type_ZeroFill = (UInt64)(Int64)-1;
+
 struct CSeekExtent
 {
-  UInt64 Phy;
   UInt64 Virt;
+  UInt64 Phy;
+
+  void SetAs_ZeroFill() { Phy = k_SeekExtent_Phy_Type_ZeroFill; }
+  bool Is_ZeroFill() const { return Phy == k_SeekExtent_Phy_Type_ZeroFill; }
 };
 
 class CExtentsStream:
   public IInStream,
   public CMyUnknownImp
 {
-  UInt64 _phyPos;
   UInt64 _virtPos;
-  bool _needStartSeek;
-
-  HRESULT SeekToPhys() { return Stream->Seek((Int64)_phyPos, STREAM_SEEK_SET, NULL); }
+  UInt64 _phyPos;
+  unsigned _prevExtentIndex;
 
 public:
   CMyComPtr<IInStream> Stream;
@@ -129,10 +134,12 @@ public:
   void Init()
   {
     _virtPos = 0;
-    _phyPos = 0;
-    _needStartSeek = true;
+    _phyPos = (UInt64)0 - 1; // we need Seek() for Stream
+    _prevExtentIndex = 0;
   }
 };
+
+
 
 class CLimitedSequentialOutStream:
   public ISequentialOutStream,
@@ -171,7 +178,7 @@ public:
   {
     _virtPos = 0;
   }
- 
+
   MY_UNKNOWN_IMP2(ISequentialInStream, IInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -189,7 +196,7 @@ class CLimitedCachedInStream:
   UInt64 _physPos;
   UInt64 _size;
   UInt64 _startOffset;
-  
+
   const Byte *_cache;
   size_t _cacheSize;
   size_t _cachePhyPos;
@@ -215,7 +222,7 @@ public:
     _size = size;
     return SeekToPhys();
   }
- 
+
   MY_UNKNOWN_IMP2(ISequentialInStream, IInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -233,7 +240,7 @@ class CTailOutStream:
 public:
   CMyComPtr<IOutStream> Stream;
   UInt64 Offset;
-  
+
   virtual ~CTailOutStream() {}
 
   MY_UNKNOWN_IMP2(ISequentialOutStream, IOutStream)

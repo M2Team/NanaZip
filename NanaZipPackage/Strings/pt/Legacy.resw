@@ -49,7 +49,7 @@
     <value>Português</value>
   </data>
   <data name="Resource401" xml:space="preserve">
-    <value>OK</value>
+    <value>Aceitar</value>
   </data>
   <data name="Resource402" xml:space="preserve">
     <value>Cancelar</value>
@@ -70,10 +70,10 @@
     <value>&amp;Continuar</value>
   </data>
   <data name="Resource440" xml:space="preserve">
-    <value>Sim p/ &amp;Todos</value>
+    <value>Sim a &amp;tudo</value>
   </data>
   <data name="Resource441" xml:space="preserve">
-    <value>Não p/ T&amp;odos</value>
+    <value>Não a t&amp;udo</value>
   </data>
   <data name="Resource442" xml:space="preserve">
     <value>Parar</value>
@@ -142,7 +142,7 @@
     <value>&amp;Eliminar</value>
   </data>
   <data name="Resource549" xml:space="preserve">
-    <value>&amp;Separar ficheiro...</value>
+    <value>&amp;Dividir ficheiro...</value>
   </data>
   <data name="Resource550" xml:space="preserve">
     <value>Com&amp;binar ficheiros...</value>
@@ -169,16 +169,16 @@
     <value>&amp;Sair</value>
   </data>
   <data name="Resource558" xml:space="preserve">
-    <value>Link</value>
+    <value>Ligação</value>
   </data>
   <data name="Resource559" xml:space="preserve">
-    <value>&amp;Alternar Fluxo</value>
+    <value>&amp;Alternar fluxo</value>
   </data>
   <data name="Resource600" xml:space="preserve">
-    <value>Seleccionar &amp;Tudo</value>
+    <value>Seleccionar &amp;tudo</value>
   </data>
   <data name="Resource601" xml:space="preserve">
-    <value>Desmarcar tudo</value>
+    <value>Desseleccionar tudo</value>
   </data>
   <data name="Resource602" xml:space="preserve">
     <value>&amp;Inverter selecção</value>
@@ -187,13 +187,13 @@
     <value>Seleccionar...</value>
   </data>
   <data name="Resource604" xml:space="preserve">
-    <value>Desmarcar...</value>
+    <value>Dessseleccionar...</value>
   </data>
   <data name="Resource605" xml:space="preserve">
     <value>Seleccionar por tipo</value>
   </data>
   <data name="Resource606" xml:space="preserve">
-    <value>Desmarcar por tipo</value>
+    <value>Desseleccionar por tipo</value>
   </data>
   <data name="Resource700" xml:space="preserve">
     <value>Ícones &amp;grandes</value>
@@ -208,7 +208,7 @@
     <value>&amp;Detalhes</value>
   </data>
   <data name="Resource730" xml:space="preserve">
-    <value>Sem ordem</value>
+    <value>Desordenado</value>
   </data>
   <data name="Resource731" xml:space="preserve">
     <value>Vista plana</value>
@@ -232,13 +232,13 @@
     <value>&amp;Actualizar</value>
   </data>
   <data name="Resource738" xml:space="preserve">
-    <value>Auto Actualizar</value>
+    <value>Actualizar automaticamente</value>
   </data>
   <data name="Resource750" xml:space="preserve">
     <value>Barra de ferramentas do arquivo</value>
   </data>
   <data name="Resource751" xml:space="preserve">
-    <value>Barra de ferramentas pré-definida</value>
+    <value>Barra de ferramentas predefinida</value>
   </data>
   <data name="Resource752" xml:space="preserve">
     <value>Botões grandes</value>
@@ -265,7 +265,7 @@
     <value>&amp;Acerca do NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
-    <value>Caminho</value>
+    <value>Localização</value>
   </data>
   <data name="Resource1004" xml:space="preserve">
     <value>Nome</value>
@@ -274,7 +274,7 @@
     <value>Extensão</value>
   </data>
   <data name="Resource1006" xml:space="preserve">
-    <value>pasta</value>
+    <value>Pasta</value>
   </data>
   <data name="Resource1007" xml:space="preserve">
     <value>Tamanho</value>
@@ -295,7 +295,7 @@
     <value>Modificado</value>
   </data>
   <data name="Resource1013" xml:space="preserve">
-    <value>sólido</value>
+    <value>Sólido</value>
   </data>
   <data name="Resource1014" xml:space="preserve">
     <value>Comentado</value>
@@ -304,10 +304,10 @@
     <value>Encriptado</value>
   </data>
   <data name="Resource1016" xml:space="preserve">
-    <value>Separar antes</value>
+    <value>Dividir antes</value>
   </data>
   <data name="Resource1017" xml:space="preserve">
-    <value>Separar depois</value>
+    <value>Dividir depois</value>
   </data>
   <data name="Resource1018" xml:space="preserve">
     <value>Dicionário</value>
@@ -322,7 +322,7 @@
     <value>Método</value>
   </data>
   <data name="Resource1023" xml:space="preserve">
-    <value>SO anfitrião</value>
+    <value>Sistema Operativo</value>
   </data>
   <data name="Resource1024" xml:space="preserve">
     <value>Sistema de ficheiros</value>
@@ -346,10 +346,10 @@
     <value>Prefixo do destino</value>
   </data>
   <data name="Resource1031" xml:space="preserve">
-    <value>pastas</value>
+    <value>Pastas</value>
   </data>
   <data name="Resource1032" xml:space="preserve">
-    <value>ficheiros</value>
+    <value>Ficheiros</value>
   </data>
   <data name="Resource1033" xml:space="preserve">
     <value>Versão</value>
@@ -412,7 +412,7 @@
     <value>Modo</value>
   </data>
   <data name="Resource1054" xml:space="preserve">
-    <value>Ligação</value>
+    <value>Ligação simbólica</value>
   </data>
   <data name="Resource1055" xml:space="preserve">
     <value>Erro</value>
@@ -445,7 +445,7 @@
     <value>Aux</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
-    <value>Excluído</value>
+    <value>Eliminado</value>
   </data>
   <data name="Resource1066" xml:space="preserve">
     <value>É Árvore</value>
@@ -502,10 +502,10 @@
     <value>Tamanho Stub Incorporado</value>
   </data>
   <data name="Resource1089" xml:space="preserve">
-    <value>Link</value>
+    <value>Ligação</value>
   </data>
   <data name="Resource1090" xml:space="preserve">
-    <value>Link do Disco Rígido</value>
+    <value>Ligação física</value>
   </data>
   <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
@@ -586,7 +586,7 @@
     <value>Comprimir para {0} e enviar por e-mail</value>
   </data>
   <data name="Resource2400" xml:space="preserve">
-    <value>pastas</value>
+    <value>Pastas</value>
   </data>
   <data name="Resource2401" xml:space="preserve">
     <value>&amp;Pasta de trabalho</value>
@@ -637,10 +637,10 @@
     <value>Acerca do NanaZip</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>O NanaZip é um programa gratuito.\n\nO NanaZip foi traduzido por: Rui Aguiar\n\trui_a_aguiar@hotmail.com</value>
+    <value>O NanaZip é um programa gratuito.\n\nO NanaZip foi traduzido por: Hugo Carvalho\n\thugokarvalho@hotmail.com</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
-    <value>O sistema não consegue alocar a memória necessária</value>
+    <value>O sistema não consegue atribuir a memória necessária</value>
   </data>
   <data name="Resource3001" xml:space="preserve">
     <value>Não existem erros</value>
@@ -697,7 +697,7 @@
     <value>Ficheiro aberto como arquivo {0}</value>
   </data>
   <data name="Resource3019" xml:space="preserve">
-    <value>Arquivo aberto com offset</value>
+    <value>Arquivo aberto com compensação</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
     <value>A extrair...</value>
@@ -715,7 +715,7 @@
     <value>A pesquisar...</value>
   </data>
   <data name="Resource3305" xml:space="preserve">
-    <value>Removendo</value>
+    <value>A remover</value>
   </data>
   <data name="Resource3320" xml:space="preserve">
     <value>A adicionar...</value>
@@ -727,7 +727,7 @@
     <value>A analisar...</value>
   </data>
   <data name="Resource3323" xml:space="preserve">
-    <value>Replicando</value>
+    <value>A replicar</value>
   </data>
   <data name="Resource3324" xml:space="preserve">
     <value>A recomprimir...</value>
@@ -739,7 +739,7 @@
     <value>A eliminar</value>
   </data>
   <data name="Resource3327" xml:space="preserve">
-    <value>Criando cabeçalho</value>
+    <value>A criar cabeçalho</value>
   </data>
   <data name="Resource3400" xml:space="preserve">
     <value>Extrair</value>
@@ -748,25 +748,25 @@
     <value>E&amp;xtrair para:</value>
   </data>
   <data name="Resource3402" xml:space="preserve">
-    <value>Especifique o destino para os ficheiros extraídos.</value>
+    <value>Especifique a localização para os ficheiros extraídos.</value>
   </data>
   <data name="Resource3410" xml:space="preserve">
-    <value>Modo de nome de pasta</value>
+    <value>Modo de localização</value>
   </data>
   <data name="Resource3411" xml:space="preserve">
-    <value>Nome de pastas completo</value>
+    <value>Localizações completas</value>
   </data>
   <data name="Resource3412" xml:space="preserve">
-    <value>Sem nome de pastas</value>
+    <value>Sem localizações</value>
   </data>
   <data name="Resource3413" xml:space="preserve">
-    <value>Caminhos absolutos</value>
+    <value>Localizações absolutas</value>
   </data>
   <data name="Resource3414" xml:space="preserve">
-    <value>Caminhos relativos</value>
+    <value>Localizações relativas</value>
   </data>
   <data name="Resource3420" xml:space="preserve">
-    <value>Modo de sobrescrever</value>
+    <value>Modo de substituição</value>
   </data>
   <data name="Resource3421" xml:space="preserve">
     <value>Perguntar antes de substituir</value>
@@ -778,10 +778,10 @@
     <value>Ignorar ficheiros existentes</value>
   </data>
   <data name="Resource3424" xml:space="preserve">
-    <value>Mudar o nome automaticamente.</value>
+    <value>Mudar o nome automaticamente</value>
   </data>
   <data name="Resource3425" xml:space="preserve">
-    <value>Mudar o nome automomaticamente os ficheiros existentes</value>
+    <value>Mudar o nome automaticamente os ficheiros existentes</value>
   </data>
   <data name="Resource3430" xml:space="preserve">
     <value>Eliminar a duplicação da pasta de raiz</value>
@@ -796,7 +796,7 @@
     <value>A pasta já possui um ficheiro com o mesmo nome.</value>
   </data>
   <data name="Resource3502" xml:space="preserve">
-    <value>Deseja substituir o ficheiro existente</value>
+    <value>Quer substituir o ficheiro existente</value>
   </data>
   <data name="Resource3503" xml:space="preserve">
     <value>por este?</value>
@@ -817,13 +817,13 @@
     <value>CRC falhou em '{0}'. O arquivo está danificado.</value>
   </data>
   <data name="Resource3703" xml:space="preserve">
-    <value>Erro de dados no ficheiro encriptado '{0}'. Palavra-passe errada?</value>
+    <value>Erro de dados no ficheiro encriptado '{0}'. Palavra-passe incorrecta?</value>
   </data>
   <data name="Resource3704" xml:space="preserve">
-    <value>CRC falhou no ficheiro encriptado '{0}'. Palavra-passe errada?</value>
+    <value>CRC falhou no ficheiro encriptado '{0}'. Palavra-passe incorrecta?</value>
   </data>
   <data name="Resource3710" xml:space="preserve">
-    <value>Palavra-passe errada?</value>
+    <value>Palavra-passe incorrecta?</value>
   </data>
   <data name="Resource3721" xml:space="preserve">
     <value>Método de compressão não suportado</value>
@@ -847,10 +847,10 @@
     <value>Não é um arquivo</value>
   </data>
   <data name="Resource3728" xml:space="preserve">
-    <value>Erro nos Cabeçalhos</value>
+    <value>Erro nos cabeçalhos</value>
   </data>
   <data name="Resource3729" xml:space="preserve">
-    <value>Palavra-passe errada</value>
+    <value>Palavra-passe incorrecta</value>
   </data>
   <data name="Resource3763" xml:space="preserve">
     <value>Início de arquivo indisponível</value>
@@ -862,7 +862,7 @@
     <value>Funcionalidade não suportada</value>
   </data>
   <data name="Resource3800" xml:space="preserve">
-    <value>Insira a palavra-passe</value>
+    <value>Introduza a palavra-passe</value>
   </data>
   <data name="Resource3801" xml:space="preserve">
     <value>Introduza a palavra-passe:</value>
@@ -877,7 +877,7 @@
     <value>As palavras-passe não coincidem</value>
   </data>
   <data name="Resource3805" xml:space="preserve">
-    <value>Para a palavra-passe, utilize apenas letras inglesas, números e os caracteres especiais (!, #, $, ...)</value>
+    <value>Para a palavra-passe, utilize apenas letras Inglesas, números e os caracteres especiais (!, #, $, ...)</value>
   </data>
   <data name="Resource3806" xml:space="preserve">
     <value>A palavra-passe é muito comprida</value>
@@ -967,13 +967,13 @@
     <value>Utilização de memória para descompressão:</value>
   </data>
   <data name="Resource4019" xml:space="preserve">
-    <value>Excluir ficheiros após compressão</value>
+    <value>Eliminar ficheiros após compressão</value>
   </data>
   <data name="Resource4040" xml:space="preserve">
-    <value>Armazenar links simbólicos</value>
+    <value>Armazenar ligações simbólicos</value>
   </data>
   <data name="Resource4041" xml:space="preserve">
-    <value>Armazenar links do disco rígido</value>
+    <value>Armazenar ligações físicas</value>
   </data>
   <data name="Resource4042" xml:space="preserve">
     <value>Armazenar fluxo de dados alternados</value>
@@ -1021,7 +1021,7 @@
     <value>Não sólido</value>
   </data>
   <data name="Resource4073" xml:space="preserve">
-    <value>sólido</value>
+    <value>Sólido</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Copiar</value>
@@ -1099,7 +1099,7 @@
     <value>Nome do ficheiro:</value>
   </data>
   <data name="Resource6304" xml:space="preserve">
-    <value>Nova Pasta</value>
+    <value>Nova pasta</value>
   </data>
   <data name="Resource6305" xml:space="preserve">
     <value>Novo ficheiro</value>
@@ -1171,22 +1171,22 @@
     <value>Info</value>
   </data>
   <data name="Resource7300" xml:space="preserve">
-    <value>Separar ficheiro</value>
+    <value>Dividir ficheiro</value>
   </data>
   <data name="Resource7301" xml:space="preserve">
-    <value>&amp;Separar para:</value>
+    <value>&amp;Dividir para:</value>
   </data>
   <data name="Resource7302" xml:space="preserve">
-    <value>Separar por &amp;volumes, bytes:</value>
+    <value>Dividir por &amp;volumes, bytes:</value>
   </data>
   <data name="Resource7303" xml:space="preserve">
-    <value>A separar...</value>
+    <value>A dividir...</value>
   </data>
   <data name="Resource7304" xml:space="preserve">
-    <value>Confirmar separação</value>
+    <value>Confirmar divisão</value>
   </data>
   <data name="Resource7305" xml:space="preserve">
-    <value>Quer mesmo separar o ficheiro em {0} volumes?</value>
+    <value>Quer mesmo dividir o ficheiro em {0} volumes?</value>
   </data>
   <data name="Resource7306" xml:space="preserve">
     <value>O tamanho do volume tem de ser inferior ao tamanho do ficheiro original</value>
@@ -1195,7 +1195,7 @@
     <value>Tamanho do volume incorrecto</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Tamanho do volume especificado: {0} bytes.\nQuer mesmo separar o arquivo nestes volumes?</value>
+    <value>Tamanho do volume especificado: {0} bytes.\nQuer mesmo dividir o arquivo nestes volumes?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combinar ficheiros</value>
@@ -1210,7 +1210,7 @@
     <value>Seleccione apenas o primeiro ficheiro</value>
   </data>
   <data name="Resource7404" xml:space="preserve">
-    <value>Não foi possivel apagar o ficheiro como parte do ficheiro dividido</value>
+    <value>Não foi possivel detectar o ficheiro como parte do ficheiro dividido</value>
   </data>
   <data name="Resource7405" xml:space="preserve">
     <value>Não foi possível encontrar mais do que uma parte do ficheiro dividido</value>
@@ -1231,7 +1231,7 @@
     <value>Desempenho</value>
   </data>
   <data name="Resource7601" xml:space="preserve">
-    <value>Utilização de Memória:</value>
+    <value>Utilização de memória:</value>
   </data>
   <data name="Resource7602" xml:space="preserve">
     <value>A comprimir</value>
@@ -1243,7 +1243,7 @@
     <value>Desempenho</value>
   </data>
   <data name="Resource7605" xml:space="preserve">
-    <value>Desempenho Total</value>
+    <value>Desempenho total</value>
   </data>
   <data name="Resource7606" xml:space="preserve">
     <value>Actual</value>
@@ -1261,30 +1261,30 @@
     <value>Passagens:</value>
   </data>
   <data name="Resource7700" xml:space="preserve">
-    <value>Link</value>
+    <value>Ligação</value>
   </data>
   <data name="Resource7701" xml:space="preserve">
-    <value>Link</value>
+    <value>Ligação</value>
   </data>
   <data name="Resource7702" xml:space="preserve">
-    <value>Link de:</value>
+    <value>Ligação de:</value>
   </data>
   <data name="Resource7703" xml:space="preserve">
-    <value>Link para:</value>
+    <value>Ligação para:</value>
   </data>
   <data name="Resource7710" xml:space="preserve">
-    <value>Link Tipo</value>
+    <value>Tipo de ligação</value>
   </data>
   <data name="Resource7711" xml:space="preserve">
-    <value>Link do Disco Rígido</value>
+    <value>Ligação física</value>
   </data>
   <data name="Resource7712" xml:space="preserve">
-    <value>Link do Ficheiro Simbólico</value>
+    <value>Ligação do ficheiro simbólico</value>
   </data>
   <data name="Resource7713" xml:space="preserve">
-    <value>Link do Directório Simbólico</value>
+    <value>Ligação do directório simbólico</value>
   </data>
   <data name="Resource7714" xml:space="preserve">
-    <value>Directório de Junção</value>
+    <value>Directório de junção</value>
   </data>
 </root>

@@ -138,7 +138,7 @@ struct CInArchive
 {
   ISequentialInStream *Stream;
   UInt64 Processed;
-  
+
   HRESULT Read(void *data, size_t *size);
   HRESULT GetNextItem(CItem &item, EErrorType &errorType);
 };
@@ -483,7 +483,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
   COM_TRY_BEGIN
   {
     Close();
-    
+
     UInt64 endPos = 0;
 
     RINOK(stream->Seek(0, STREAM_SEEK_END, &endPos));
@@ -524,7 +524,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
       }
       if (item.IsTrailer())
         break;
-      
+
       _items.Add(item);
 
       {
@@ -573,7 +573,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
       // rare case: 4K/8K aligment is possible also
       const unsigned kTailSize_MAX = 1 << 9;
       Byte buf[kTailSize_MAX];
-      
+
       unsigned pos = (unsigned)arc.Processed & (kTailSize_MAX - 1);
       if (pos != 0) // use this check to support 512 bytes alignment only
       for (;;)
@@ -583,7 +583,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
         RINOK(ReadStream(stream, buf + pos, &processed));
         if (processed != rem)
           break;
-        
+
         for (; pos < kTailSize_MAX && buf[pos] == 0; pos++)
         {}
         if (pos != kTailSize_MAX)
@@ -596,7 +596,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
         break;
       }
     }
-    
+
     _isArc = true;
     _stream = stream;
   }
@@ -652,11 +652,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidMTime:
     {
       if (item.MTime != 0)
-      {
-        FILETIME utc;
-        NTime::UnixTimeToFileTime(item.MTime, utc);
-        prop = utc;
-      }
+        PropVariant_SetFrom_UnixTime(prop, item.MTime);
       break;
     }
     case kpidPosixAttrib: prop = item.Mode; break;
@@ -729,7 +725,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   extractCallback->SetTotal(totalSize);
 
   UInt64 currentTotalSize = 0;
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 

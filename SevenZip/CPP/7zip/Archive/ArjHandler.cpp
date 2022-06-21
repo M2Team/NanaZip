@@ -83,11 +83,11 @@ HRESULT CCoder::CodeReal(UInt64 rem, ICompressProgressInfo *progress)
     }
 
     UInt32 len;
-    
+
     {
       const unsigned kNumBits = 7 + 7;
       UInt32 val = _inBitStream.GetValue(kNumBits);
-      
+
       if ((val & (1 << (kNumBits - 1))) == 0)
       {
         _outWindow.PutByte((Byte)(val >> 5));
@@ -102,21 +102,21 @@ HRESULT CCoder::CodeReal(UInt64 rem, ICompressProgressInfo *progress)
       for (w = 1; w < 7; w++, mask >>= 1)
         if ((val & mask) == 0)
           break;
-      
+
       unsigned readBits = (w != 7 ? 1 : 0);
       readBits += w + w;
       len = (1 << w) - 1 + kMatchMinLen - 1 +
           (((val >> (kNumBits - readBits)) & ((1 << w) - 1)));
       _inBitStream.MovePos(readBits);
     }
-    
+
     {
       const unsigned kNumBits = 4 + 13;
       UInt32 val = _inBitStream.GetValue(kNumBits);
 
       unsigned readBits = 1;
       unsigned w;
-     
+
            if ((val & ((UInt32)1 << 16)) == 0) w = 9;
       else if ((val & ((UInt32)1 << 15)) == 0) w = 10;
       else if ((val & ((UInt32)1 << 14)) == 0) w = 11;
@@ -159,17 +159,17 @@ STDMETHODIMP CCoder::Code(ISequentialInStream *inStream, ISequentialOutStream *o
   {
     if (!outSize)
       return E_INVALIDARG;
-    
+
     if (!_outWindow.Create(kWindowSize))
       return E_OUTOFMEMORY;
     if (!_inBitStream.Create(1 << 17))
       return E_OUTOFMEMORY;
-    
+
     _outWindow.SetStream(outStream);
     _outWindow.Init(false);
     _inBitStream.SetStream(inStream);
     _inBitStream.Init();
-    
+
     CCoderReleaser coderReleaser(this);
     HRESULT res;
     {
@@ -177,7 +177,7 @@ STDMETHODIMP CCoder::Code(ISequentialInStream *inStream, ISequentialOutStream *o
       if (res != S_OK)
         return res;
     }
-    
+
     coderReleaser.Disable();
     return _outWindow.Flush();
   }
@@ -296,7 +296,7 @@ struct CArcHeader
   // Byte LastChapter;
   AString Name;
   AString Comment;
-  
+
   HRESULT Parse(const Byte *p, unsigned size);
 };
 
@@ -380,7 +380,7 @@ struct CExtendedInfo
 {
   UInt64 Size;
   bool CrcError;
-  
+
   void Clear()
   {
     Size = 0;
@@ -423,11 +423,11 @@ struct CItem
   UInt16 FileAccessMode;
   // Byte FirstChapter;
   // Byte LastChapter;
-  
+
   UInt64 DataPosition;
 
   CExtendedInfo ExtendedInfo;
-  
+
   bool IsEncrypted() const { return (Flags & NFlags::kGarbled) != 0; }
   bool IsDir() const { return (FileType == NFileType::kDirectory); }
   bool IsSplitAfter() const { return (Flags & NFlags::kVolume) != 0; }
@@ -682,15 +682,7 @@ static void SetTime(UInt32 dosTime, NCOM::CPropVariant &prop)
 {
   if (dosTime == 0)
     return;
-  FILETIME localFileTime, utc;
-  if (NTime::DosTimeToFileTime(dosTime, localFileTime))
-  {
-    if (!LocalFileTimeToFileTime(&localFileTime, &utc))
-      utc.dwHighDateTime = utc.dwLowDateTime = 0;
-  }
-  else
-    utc.dwHighDateTime = utc.dwLowDateTime = 0;
-  prop = utc;
+  PropVariant_SetFrom_DosTime(prop, dosTime);
 }
 
 static void SetHostOS(Byte hostOS, NCOM::CPropVariant &prop)
@@ -703,7 +695,7 @@ static void SetUnicodeString(const AString &s, NCOM::CPropVariant &prop)
   if (!s.IsEmpty())
     prop = MultiByteToUnicodeString(s, CP_OEMCP);
 }
- 
+
 STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
 {
   COM_TRY_BEGIN
@@ -773,11 +765,11 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
 HRESULT CHandler::Open2(IInStream *inStream, IArchiveOpenCallback *callback)
 {
   Close();
-  
+
   UInt64 endPos = 0;
   RINOK(inStream->Seek(0, STREAM_SEEK_END, &endPos));
   RINOK(inStream->Seek(0, STREAM_SEEK_SET, NULL));
-  
+
   _arc.Stream = inStream;
   _arc.Callback = callback;
   _arc.NumFiles = 0;
@@ -799,7 +791,7 @@ HRESULT CHandler::Open2(IInStream *inStream, IArchiveOpenCallback *callback)
 
     if (_arc.Error != k_ErrorType_OK)
       break;
-    
+
     if (!filled)
     {
       if (_arc.Error == k_ErrorType_OK)
@@ -809,7 +801,7 @@ HRESULT CHandler::Open2(IInStream *inStream, IArchiveOpenCallback *callback)
     }
     item.DataPosition = _arc.Processed;
     _items.Add(item);
-    
+
     UInt64 pos = item.DataPosition + item.PackSize;
     if (_arc.Header.ArchiveSize == 0)
       _phySize = pos;
@@ -822,7 +814,7 @@ HRESULT CHandler::Open2(IInStream *inStream, IArchiveOpenCallback *callback)
     RINOK(inStream->Seek(pos, STREAM_SEEK_SET, NULL));
     _arc.NumFiles = _items.Size();
     _arc.Processed = pos;
-    
+
     if (callback && (_items.Size() & 0xFF) == 0)
     {
       RINOK(callback->SetCompleted(&_arc.NumFiles, &_arc.Processed));
@@ -878,7 +870,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   totalUnpacked = totalPacked = 0;
   UInt64 curUnpacked, curPacked;
-  
+
   NCompress::NLzh::NDecoder::CCoder *lzhDecoderSpec = NULL;
   CMyComPtr<ICompressCoder> lzhDecoder;
 
@@ -935,9 +927,9 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       outStreamSpec->SetStream(realOutStream);
       realOutStream.Release();
       outStreamSpec->Init();
-  
+
       inStreamSpec->Init(item.PackSize);
-      
+
       UInt64 pos;
       _stream->Seek(item.DataPosition, STREAM_SEEK_SET, &pos);
 
@@ -991,7 +983,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
             opRes = NExtract::NOperationResult::kUnsupportedMethod;
         }
       }
-      
+
       if (opRes == NExtract::NOperationResult::kOK)
       {
         if (result == S_FALSE)
@@ -1004,12 +996,12 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
               NExtract::NOperationResult::kCRCError;
         }
       }
-      
+
       outStream.Release();
       RINOK(extractCallback->SetOperationResult(opRes));
     }
   }
-  
+
   return S_OK;
   COM_TRY_END
 }

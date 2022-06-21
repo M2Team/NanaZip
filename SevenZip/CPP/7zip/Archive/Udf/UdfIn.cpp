@@ -162,7 +162,7 @@ struct CTag
   // UInt16 Crc;
   // UInt16 CrcLen;
   // UInt32 TagLocation;
-  
+
   HRESULT Parse(const Byte *buf, size_t size);
 };
 
@@ -333,7 +333,7 @@ void CItem::Parse(const Byte *p)
   NumLogBlockRecorded = Get64(p + 64);
   ATime.Parse(p + 72);
   MTime.Parse(p + 84);
-  // AttrtTime.Parse(p + 96);
+  AttribTime.Parse(p + 96);
   // CheckPoint = Get32(p + 108);
   // ExtendedAttrIcb.Parse(p + 112);
   // ImplId.Parse(p + 128);
@@ -422,9 +422,9 @@ HRESULT CInArchive::ReadItem(int volIndex, int fsIndex, const CLongAllocDesc &la
     return S_FALSE;
   Items.Add(CItem());
   CItem &item = Items.Back();
-  
+
   const CLogVol &vol = LogVols[volIndex];
- 
+
   if (lad.GetLen() != vol.BlockSize)
     return S_FALSE;
 
@@ -539,11 +539,11 @@ HRESULT CInArchive::ReadItem(int volIndex, int fsIndex, const CLongAllocDesc &la
         // file.FileCharacteristics = fileId.FileCharacteristics;
         // file.ImplUse = fileId.ImplUse;
         file.Id = fileId.Id;
-        
+
         _fileNameLengthTotal += file.Id.Data.Size();
         if (_fileNameLengthTotal > kFileNameLengthTotalMax)
           return S_FALSE;
-        
+
         item.SubFiles.Add(Files.Size());
         if (Files.Size() > kNumFilesMax)
           return S_FALSE;
@@ -651,7 +651,7 @@ HRESULT CInArchive::Open2()
 
   const size_t kBufSize = 1 << 11;
   Byte buf[kBufSize];
-  
+
   for (SecLogSize = 11;; SecLogSize -= 3)
   {
     if (SecLogSize < 8)
@@ -671,7 +671,7 @@ HRESULT CInArchive::Open2()
           break;
     }
   }
-  
+
   PhySize = (UInt32)(256 + 1) << SecLogSize;
   IsArc = true;
 
@@ -705,7 +705,7 @@ HRESULT CInArchive::Open2()
     }
     if (tag.Id == DESC_TYPE_Terminating)
       break;
-    
+
     if (tag.Id == DESC_TYPE_Partition)
     {
       // Partition Descriptor
@@ -719,7 +719,7 @@ HRESULT CInArchive::Open2()
       // partition.Flags = Get16(buf + 20);
       partition.Number = Get16(buf + 22);
       // partition.ContentsId.Parse(buf + 24);
-      
+
       // memcpy(partition.ContentsUse, buf + 56, sizeof(partition.ContentsUse));
       // ContentsUse is Partition Header Description.
 
@@ -747,7 +747,7 @@ HRESULT CInArchive::Open2()
 
       if (vol.BlockSize < 512 || vol.BlockSize > ((UInt32)1 << 30))
         return S_FALSE;
-      
+
       // memcpy(vol.ContentsUse, buf + 248, sizeof(vol.ContentsUse));
       vol.FileSetLocation.Parse(buf + 248);
       /* the extent in which the first File Set Descriptor Sequence
@@ -773,7 +773,7 @@ HRESULT CInArchive::Open2()
 
         if (pos + len > bufSize)
           return S_FALSE;
-        
+
         // memcpy(pm.Data, buf + pos + 2, pm.Length - 2);
         if (pm.Type == 1)
         {
@@ -881,7 +881,7 @@ HRESULT CInArchive::Open2()
 
       if (tag.Id != DESC_TYPE_FileSet)
         return S_FALSE;
-      
+
       PRF(printf("\n FileSet", volIndex));
       CFileSet fs;
       fs.RecodringTime.Parse(p + 16);
@@ -889,16 +889,16 @@ HRESULT CInArchive::Open2()
       // fs.MaxInterchangeLevel = Get16(p + 20);
       // fs.FileSetNumber = Get32(p + 40);
       // fs.FileSetDescNumber = Get32(p + 44);
-      
+
       // fs.Id.Parse(p + 304);
       // fs.CopyrightId.Parse(p + 336);
       // fs.AbstractId.Parse(p + 368);
-      
+
       fs.RootDirICB.Parse(p + 400);
       // fs.DomainId.Parse(p + 416);
-      
+
       // fs.SystemStreamDirICB.Parse(p + 464);
-      
+
       vol.FileSets.Add(fs);
 
       // nextExtent.Parse(p + 448);
@@ -942,7 +942,7 @@ HRESULT CInArchive::Open2()
             continue;
           if (size < len)
             break;
-          
+
           int partitionIndex = vol.PartitionMaps[extent.PartitionRef].PartitionIndex;
           UInt32 logBlockNumber = extent.Pos;
           const CPartition &partition = Partitions[partitionIndex];
@@ -958,7 +958,7 @@ HRESULT CInArchive::Open2()
     const UInt32 secMask = ((UInt32)1 << SecLogSize) - 1;
     PhySize = (PhySize + secMask) & ~(UInt64)secMask;
   }
-  
+
   NoEndAnchor = true;
 
   if (PhySize < fileSize)
@@ -974,16 +974,16 @@ HRESULT CInArchive::Open2()
     {
       if (rem == 0)
         break;
-      
+
       size_t readSize = secSize;
       if (readSize > rem)
         readSize = (size_t)rem;
-      
+
       RINOK(ReadStream(_stream, buf, &readSize));
-      
+
       if (readSize == 0)
         break;
-      
+
       if (readSize == secSize && NoEndAnchor)
       {
         CTag tag;
@@ -996,7 +996,7 @@ HRESULT CInArchive::Open2()
           continue;
         }
       }
-      
+
       size_t i;
       for (i = 0; i < readSize && buf[i] == 0; i++);
       if (i != readSize)

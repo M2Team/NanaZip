@@ -1,5 +1,5 @@
 ﻿// NewHandler.cpp
- 
+
 #include "StdAfx.h"
 
 #include <stdlib.h>
@@ -97,19 +97,33 @@ const int kDebugSize = 1000000;
 static void *a[kDebugSize];
 static int index = 0;
 
+static bool wasInit = false;
+static CRITICAL_SECTION cs;
+
 static int numAllocs = 0;
 void * __cdecl operator new(size_t size)
 {
+  if (!wasInit)
+  {
+    InitializeCriticalSection(&cs);
+    wasInit = true;
+  }
+  EnterCriticalSection(&cs);
+
   numAllocs++;
+  int loc = numAllocs;
   void *p = HeapAlloc(GetProcessHeap(), 0, size);
+  /*
   if (index < kDebugSize)
   {
     a[index] = p;
     index++;
   }
+  */
+  printf("Alloc %6d, size = %8u\n", loc, (unsigned)size);
+  LeaveCriticalSection(&cs);
   if (p == 0)
     throw CNewException();
-  printf("Alloc %6d, size = %8u\n", numAllocs, (unsigned)size);
   return p;
 }
 
@@ -123,6 +137,7 @@ public:
   }
   ~CC()
   {
+    printf("\nDestructor: %d\n", numAllocs);
     for (int i = 0; i < kDebugSize; i++)
       if (a[i] != 0)
         return;
@@ -134,6 +149,7 @@ void __cdecl operator delete(void *p)
 {
   if (p == 0)
     return;
+  EnterCriticalSection(&cs);
   /*
   for (int i = 0; i < index; i++)
     if (a[i] == p)
@@ -142,6 +158,7 @@ void __cdecl operator delete(void *p)
   HeapFree(GetProcessHeap(), 0, p);
   numAllocs--;
   printf("Free %d\n", numAllocs);
+  LeaveCriticalSection(&cs);
 }
 
 #endif

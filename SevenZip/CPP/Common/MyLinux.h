@@ -3,6 +3,18 @@
 #ifndef __MY_LIN_LINUX_H
 #define __MY_LIN_LINUX_H
 
+// #include "../../C/7zTypes.h"
+
+#define MY_LIN_DT_UNKNOWN   0
+#define MY_LIN_DT_FIFO      1
+#define MY_LIN_DT_CHR       2
+#define MY_LIN_DT_DIR       4
+#define MY_LIN_DT_BLK       6
+#define MY_LIN_DT_REG       8
+#define MY_LIN_DT_LNK       10
+#define MY_LIN_DT_SOCK      12
+#define MY_LIN_DT_WHT       14
+
 #define MY_LIN_S_IFMT  00170000
 #define MY_LIN_S_IFSOCK 0140000
 #define MY_LIN_S_IFLNK  0120000
@@ -38,5 +50,26 @@
 #define MY_LIN_S_IROTH 00004
 #define MY_LIN_S_IWOTH 00002
 #define MY_LIN_S_IXOTH 00001
+
+/*
+// major/minor encoding for makedev(): MMMMMmmmmmmMMMmm:
+
+inline UInt32 MY_dev_major(UInt64 dev)
+{
+  return ((UInt32)(dev >> 8) & (UInt32)0xfff) | ((UInt32)(dev >> 32) & ~(UInt32)0xfff);
+}
+
+inline UInt32 MY_dev_minor(UInt64 dev)
+{
+  return ((UInt32)(dev) & 0xff) | ((UInt32)(dev >> 12) & ~0xff);
+}
+
+inline UInt64 MY_dev_makedev(UInt32 __major, UInt32 __minor)
+{
+  return (__minor & 0xff) | ((__major & 0xfff) << 8)
+      | ((UInt64) (__minor & ~0xff)  << 12)
+      | ((UInt64) (__major & ~0xfff) << 32);
+}
+*/
 
 #endif

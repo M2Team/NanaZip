@@ -23,7 +23,7 @@ struct CDir: public CDirRecord
     Parent = 0;
     _subItems.Clear();
   }
-  
+
   AString GetPath(bool checkSusp, unsigned skipSize) const
   {
     AString s;
@@ -43,9 +43,9 @@ struct CDir: public CDirRecord
     }
 
     char *p = s.GetBuf_SetEnd(len) + len;
-    
+
     cur = this;
-    
+
     for (;;)
     {
       unsigned curLen;
@@ -59,14 +59,14 @@ struct CDir: public CDirRecord
       p--;
       *p = CHAR_PATH_SEPARATOR;
     }
-    
+
     return s;
   }
 
   void GetPathU(UString &s) const
   {
     s.Empty();
-    
+
     unsigned len = 0;
     const CDir *cur = this;
 
@@ -87,9 +87,9 @@ struct CDir: public CDirRecord
     }
 
     wchar_t *p = s.GetBuf_SetEnd(len) + len;
-    
+
     cur = this;
-    
+
     for (;;)
     {
       unsigned curLen = (unsigned)(cur->FileId.Size() / 2);
@@ -123,21 +123,22 @@ struct CDateTime
   Byte Second;
   Byte Hundredths;
   signed char GmtOffset; // min intervals from -48 (West) to +52 (East) recorded.
-  
+
   bool NotSpecified() const { return Year == 0 && Month == 0 && Day == 0 &&
       Hour == 0 && Minute == 0 && Second == 0 && GmtOffset == 0; }
 
-  bool GetFileTime(FILETIME &ft) const
+  bool GetFileTime(NWindows::NCOM::CPropVariant &prop) const
   {
-    UInt64 value;
-    bool res = NWindows::NTime::GetSecondsSince1601(Year, Month, Day, Hour, Minute, Second, value);
+    UInt64 v;
+    const bool res = NWindows::NTime::GetSecondsSince1601(Year, Month, Day, Hour, Minute, Second, v);
     if (res)
     {
-      value -= (Int64)((Int32)GmtOffset * 15 * 60);
-      value *= 10000000;
+      v -= (Int64)((Int32)GmtOffset * 15 * 60);
+      v *= 10000000;
+      if (Hundredths < 100)
+        v += (UInt32)Hundredths * 100000;
+      prop.SetAsTimeFrom_Ft64_Prec(v, k_PropVar_TimePrec_Base + 2);
     }
-    ft.dwLowDateTime = (DWORD)value;
-    ft.dwHighDateTime = (DWORD)(value >> 32);
     return res;
   }
 };
@@ -242,7 +243,7 @@ class CInArchive
   UInt64 _position;
 
   UInt32 m_BufferPos;
-  
+
   CDir _rootDir;
   bool _bootIsDefined;
   CBootRecordDescriptor _bootDesc;
@@ -326,7 +327,7 @@ public:
   bool IsSusp;
   unsigned SuspSkipSize;
 };
-  
+
 }}
-  
+
 #endif

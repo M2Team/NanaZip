@@ -10,7 +10,7 @@ struct CProxyFile
   const wchar_t *Name;
   unsigned NameLen;
   bool NeedDeleteName;
-  
+
   CProxyFile(): Name(NULL), NameLen(0), NeedDeleteName(false)  {}
   ~CProxyFile() { if (NeedDeleteName) delete [](wchar_t *)(void *)Name; } // delete [](wchar_t *)Name;
 };
@@ -38,7 +38,7 @@ struct CProxyDir
   ~CProxyDir() { delete [](wchar_t *)(void *)Name; }
 
   void Clear();
-  bool IsLeaf() const { return ArcIndex >= 0; }
+  bool IsLeaf() const { return ArcIndex != -1; }
 };
 
 class CProxyArc
@@ -57,7 +57,7 @@ public:
   void GetDirPathParts(int dirIndex, UStringVector &pathParts) const;
   // returns full path of Dirs[dirIndex], including back slash
   UString GetDirPath_as_Prefix(int dirIndex) const;
-  
+
   // AddRealIndices DOES ADD also item represented by dirIndex (if it's Leaf)
   void AddRealIndices(unsigned dirIndex, CUIntVector &realIndices) const;
   int GetRealIndex(unsigned dirIndex, unsigned index) const;
@@ -79,10 +79,10 @@ struct CProxyFile2
   bool NeedDeleteName;
   bool Ignore;
   bool IsAltStream;
-  
+
   int GetDirIndex(bool forAltStreams) const { return forAltStreams ? AltDirIndex : DirIndex; }
 
-  bool IsDir() const { return DirIndex >= 0; }
+  bool IsDir() const { return DirIndex != -1; }
   CProxyFile2():
       DirIndex(-1), AltDirIndex(-1), Parent(-1),
       Name(NULL), NameLen(0),
@@ -133,7 +133,7 @@ public:
   void GetDirPathParts(int dirIndex, UStringVector &pathParts, bool &isAltStreamDir) const;
   UString GetDirPath_as_Prefix(unsigned dirIndex, bool &isAltStreamDir) const;
   bool IsAltDir(unsigned dirIndex) const;
-  
+
   // AddRealIndices_of_ArcItem DOES ADD item and subItems
   void AddRealIndices_of_ArcItem(unsigned arcIndex, bool includeAltStreams, CUIntVector &realIndices) const;
   unsigned GetRealIndex(unsigned dirIndex, unsigned index) const;
@@ -144,18 +144,18 @@ public:
   int GetParentDirOfFile(UInt32 arcIndex) const
   {
     const CProxyFile2 &file = Files[arcIndex];
-    
-    if (file.Parent < 0)
+
+    if (file.Parent == -1)
       return file.IsAltStream ?
           k_Proxy2_AltRootDirIndex :
           k_Proxy2_RootDirIndex;
-    
+
     const CProxyFile2 &parentFile = Files[file.Parent];
     return file.IsAltStream ?
         parentFile.AltDirIndex :
         parentFile.DirIndex;
   }
-  
+
   int FindItem(unsigned dirIndex, const wchar_t *name, bool foldersOnly) const;
 };
 

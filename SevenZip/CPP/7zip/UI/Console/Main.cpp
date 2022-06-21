@@ -71,6 +71,8 @@ extern const CHasherInfo *g_Hashers[];
 const CExternalCodecs *g_ExternalCodecs_Ptr;
 #endif
 
+DECLARE_AND_SET_CLIENT_VERSION_VAR
+
 #if defined(PROG_VARIANT_Z)
   #define PROG_POSTFIX      "z"
   #define PROG_POSTFIX_2  " (z)"
@@ -506,7 +508,7 @@ static void PrintStat()
       , &creationTimeFT, &exitTimeFT, &kernelTimeFT, &userTimeFT))
     return;
   FILETIME curTimeFT;
-  NTime::GetCurUtcFileTime(curTimeFT);
+  NTime::GetCurUtc_FiTime(curTimeFT);
 
   #ifndef UNDER_CE
 
@@ -841,7 +843,7 @@ int Main2(
     #if !defined(UNDER_CE)
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleInfo))
-      consoleWidth = (unsigned)consoleInfo.dwSize.X;
+      consoleWidth = (unsigned)(unsigned short)consoleInfo.dwSize.X;
     #endif
 
     #else
@@ -855,7 +857,7 @@ int Main2(
 
   CREATE_CODECS_OBJECT
 
-  codecs->CaseSensitiveChange = options.CaseSensitiveChange;
+  codecs->CaseSensitive_Change = options.CaseSensitive_Change;
   codecs->CaseSensitive = options.CaseSensitive;
   ThrowException_if_Error(codecs->Load());
   Codecs_AddHashArcHandler(codecs);
@@ -948,8 +950,10 @@ int Main2(
 
     so << endl << "Formats:" << endl;
 
-    const char * const kArcFlags = "KSNFMGOPBELHXC";
+    const char * const kArcFlags = "KSNFMGOPBELHXCc+a+m+r+";
+    const char * const kArcTimeFlags = "wudn";
     const unsigned kNumArcFlags = (unsigned)strlen(kArcFlags);
+    const unsigned kNumArcTimeFlags = (unsigned)strlen(kArcTimeFlags);
 
     for (i = 0; i < codecs->Formats.Size(); i++)
     {
@@ -963,10 +967,20 @@ int Main2(
 
       so << (char)(arc.UpdateEnabled ? 'C' : ' ');
 
-      for (unsigned b = 0; b < kNumArcFlags; b++)
       {
-        so << (char)
-          ((arc.Flags & ((UInt32)1 << b)) != 0 ? kArcFlags[b] : ' ');
+        unsigned b;
+        for (b = 0; b < kNumArcFlags; b++)
+          so << (char)((arc.Flags & ((UInt32)1 << b)) != 0 ? kArcFlags[b] : '.');
+        so << ' ';
+      }
+
+      if (arc.TimeFlags != 0)
+      {
+        unsigned b;
+        for (b = 0; b < kNumArcTimeFlags; b++)
+          so << (char)((arc.TimeFlags & ((UInt32)1 << b)) != 0 ? kArcTimeFlags[b] : '.');
+        so << arc.Get_DefaultTimePrec();
+        so << ' ';
       }
 
       so << ' ';

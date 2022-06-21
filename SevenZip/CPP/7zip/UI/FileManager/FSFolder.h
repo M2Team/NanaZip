@@ -18,6 +18,7 @@ namespace NFsFolder {
 class CFSFolder;
 
 #define FS_SHOW_LINKS_INFO
+// #define FS_SHOW_CHANGE_TIME
 
 struct CDirItem: public NWindows::NFile::NFind::CFileInfo
 {
@@ -26,10 +27,13 @@ struct CDirItem: public NWindows::NFile::NFind::CFileInfo
   #endif
 
   #ifdef FS_SHOW_LINKS_INFO
+  FILETIME ChangeTime;
   UInt64 FileIndex;
   UInt32 NumLinks;
   bool FileInfo_Defined;
   bool FileInfo_WasRequested;
+  bool ChangeTime_Defined;
+  bool ChangeTime_WasRequested;
   #endif
 
   #ifndef UNDER_CE
@@ -41,10 +45,10 @@ struct CDirItem: public NWindows::NFile::NFind::CFileInfo
   #ifndef UNDER_CE
   CByteBuffer Reparse;
   #endif
-  
+
   UInt64 NumFolders;
   UInt64 NumFiles;
-  
+
   int Parent;
 };
 
@@ -130,7 +134,7 @@ public:
 
 private:
   FString _path;
-  
+
   CObjectVector<CDirItem> Files;
   FStringVector Folders;
   // CObjectVector<CAltStream> Streams;
@@ -155,9 +159,10 @@ private:
   bool LoadComments();
   bool SaveComments();
   HRESULT LoadSubItems(int dirItem, const FString &path);
-  
+
   #ifdef FS_SHOW_LINKS_INFO
   bool ReadFileInfo(CDirItem &di);
+  void ReadChangeTime(CDirItem &di);
   #endif
 
 public:

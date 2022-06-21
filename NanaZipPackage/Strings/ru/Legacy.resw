@@ -501,6 +501,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>Только для чтения</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Ссылка копирования</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Изменены метаданные</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Настройки</value>
   </data>
@@ -777,6 +783,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>Устанавливать права доступа</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Распространять поток Zone.Id:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Для файлов Office</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Подтверждение замены файла</value>
   </data>
@@ -1010,6 +1022,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>Непрерывный</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Точность отметок времени:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Сохранять время изменения файлов</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Сохранять время создания файлов</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Сохранять время последнего доступа к файлам</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Уcтановить время архива по времени самого нового файла</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Не изменять время доступа у исходных файлов</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>сек</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>нс</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Копировать</value>

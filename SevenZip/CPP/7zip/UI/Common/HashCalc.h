@@ -16,6 +16,12 @@ const unsigned k_HashCalc_DigestSize_Max = 64;
 const unsigned k_HashCalc_ExtraSize = 8;
 const unsigned k_HashCalc_NumGroups = 4;
 
+/*
+  if (size <= 8) : upper case : reversed byte order : it shows 32-bit/64-bit number, if data contains little-endian number
+  if (size >  8) : lower case : original byte order (as big-endian byte sequence)
+*/
+void HashHexToString(char *dest, const Byte *data, UInt32 size);
+
 enum
 {
   k_HashCalc_Index_Current,
@@ -85,7 +91,7 @@ struct CHashBundle: public IHashCalc
   UString FirstFileName;
 
   HRESULT SetMethods(DECL_EXTERNAL_CODECS_LOC_VARS const UStringVector &methods);
-  
+
   // void Init() {}
   CHashBundle()
   {
@@ -126,7 +132,7 @@ struct CHashOptionsLocal
   CBoolPair HashMode_Tag;
   CBoolPair HashMode_Dirs;
   CBoolPair HashMode_OnlyHash;
-  
+
   void Init_HashOptionsLocal()
   {
     HashMode_Zero.Init();
@@ -140,7 +146,7 @@ struct CHashOptionsLocal
   {
     Init_HashOptionsLocal();
   }
-  
+
   bool ParseFlagCharOption(wchar_t c, bool val)
   {
     c = MyCharLower_Ascii(c);
@@ -220,7 +226,7 @@ struct CHashPair
   bool Size_from_Disk_Defined;
   AString Method;
   AString Name;
-  
+
   AString FullLine;
   AString HashString;
   // unsigned HashLengthInBits;

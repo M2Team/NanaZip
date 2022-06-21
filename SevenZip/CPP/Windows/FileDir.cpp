@@ -17,7 +17,6 @@
 
 #include "../Common/StringConvert.h"
 #include "../Common/C_FileIO.h"
-#include "TimeUtils.h"
 #endif
 
 #include "FileDir.h"
@@ -31,6 +30,30 @@ extern bool g_IsNT;
 using namespace NWindows;
 using namespace NFile;
 using namespace NName;
+
+#ifndef _WIN32
+
+static bool FiTime_To_timespec(const CFiTime *ft, timespec &ts)
+{
+  if (ft)
+  {
+    ts = *ft;
+    return true;
+  }
+  // else
+  {
+    ts.tv_sec = 0;
+    ts.tv_nsec =
+    #ifdef UTIME_OMIT
+      UTIME_OMIT; // -2 keep old timesptamp
+    #else
+      // UTIME_NOW; -1 // set to the current time
+      0;
+    #endif
+    return false;
+  }
+}
+#endif
 
 namespace NWindows {
 namespace NFile {
@@ -86,7 +109,7 @@ bool GetSystemDir(FString &path)
 #endif // UNDER_CE
 
 
-bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime)
+bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
 {
   #ifndef _UNICODE
   if (!g_IsNT)
@@ -95,7 +118,7 @@ bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const 
     return false;
   }
   #endif
-  
+
   HANDLE hDir = INVALID_HANDLE_VALUE;
   IF_USE_MAIN_PATH
     hDir = ::CreateFileW(fs2us(path), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
@@ -265,10 +288,10 @@ WinXP-64 CreateDir():
   ""                  - ERROR_PATH_NOT_FOUND
   \                   - ERROR_ACCESS_DENIED
   C:\                 - ERROR_ACCESS_DENIED, if there is such drive,
-  
+
   D:\folder             - ERROR_PATH_NOT_FOUND, if there is no such drive,
   C:\nonExistent\folder - ERROR_PATH_NOT_FOUND
-  
+
   C:\existFolder      - ERROR_ALREADY_EXISTS
   C:\existFolder\     - ERROR_ALREADY_EXISTS
 
@@ -317,7 +340,7 @@ bool CreateDir(CFSTR path)
 
   We need CreateDir2, since fileInfo.Find() for reserved names like "com8"
    returns FILE instead of DIRECTORY. And we need to use SuperPath */
- 
+
 static bool CreateDir2(CFSTR path)
 {
   #ifndef _UNICODE
@@ -365,7 +388,7 @@ static bool CreateDir2(CFSTR path);
 bool CreateComplexDir(CFSTR _path)
 {
   #ifdef _WIN32
-  
+
   {
     DWORD attrib = NFind::GetFileAttrib(_path);
     if (attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY) != 0)
@@ -373,12 +396,12 @@ bool CreateComplexDir(CFSTR _path)
   }
 
   #ifndef UNDER_CE
-  
+
   if (IsDriveRootPath_SuperAllowed(_path))
     return false;
-  
+
   const unsigned prefixSize = GetRootPrefixSize(_path);
-  
+
   #endif // UNDER_CE
 
   #else // _WIN32
@@ -390,7 +413,7 @@ bool CreateComplexDir(CFSTR _path)
     if (fi.IsDir())
       return true;
   }
-  
+
   #endif // _WIN32
 
   FString path (_path);
@@ -405,7 +428,7 @@ bool CreateComplexDir(CFSTR _path)
 
   const FString path2 (path);
   pos = (int)path.Len();
-  
+
   for (;;)
   {
     if (CreateDir2(path))
@@ -415,17 +438,17 @@ bool CreateComplexDir(CFSTR _path)
     pos = path.ReverseFind_PathSepar();
     if (pos < 0 || pos == 0)
       return false;
-    
+
     #if defined(_WIN32) && !defined(UNDER_CE)
     if (pos == 1 && IS_PATH_SEPAR(path[0]))
       return false;
     if (prefixSize >= (unsigned)pos + 1)
       return false;
     #endif
-    
+
     path.DeleteFrom((unsigned)pos);
   }
-  
+
   while (pos < (int)path2.Len())
   {
     int pos2 = NName::FindSepar(path2.Ptr((unsigned)pos + 1));
@@ -437,7 +460,7 @@ bool CreateComplexDir(CFSTR _path)
     if (!CreateDir(path))
       return false;
   }
-  
+
   return true;
 }
 
@@ -537,7 +560,7 @@ bool RemoveDirWithSubItems(const FString &path)
       return false;
     }
   }
-  
+
   // we clear read-only attrib to remove read-only dir
   if (!SetFileAttrib(path, 0))
     return false;
@@ -649,7 +672,7 @@ bool MyGetTempPath(FString &path)
   return (needLength > 0 && needLength <= MAX_PATH);
 
   #else
-  
+
   // FIXME: improve that code
   path = "/tmp/";
   if (!NFind::DoesDirExist_FollowLink(path))
@@ -763,7 +786,7 @@ bool CTempFile::MoveTo(CFSTR name, bool deleteDestBefore)
   }
   DisableDeleting();
   return MyMoveFile(_path, name);
-  
+
   /*
   if (attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_READONLY))
   {
@@ -812,7 +835,7 @@ static BOOL My__CopyFile(CFSTR oldFile, CFSTR newFile)
   NWindows::NFile::NIO::COutFile outFile;
   if (!outFile.Create(newFile, false))
     return FALSE;
-  
+
   NWindows::NFile::NIO::CInFile inFile;
   if (!inFile.Open(oldFile))
     return FALSE;
@@ -844,7 +867,7 @@ bool MyMoveFile(CFSTR oldFile, CFSTR newFile)
 
   if (My__CopyFile(oldFile, newFile) == FALSE)
     return false;
-    
+
   struct stat info_file;
   res = stat(oldFile, &info_file);
   if (res != 0)
@@ -920,46 +943,18 @@ bool GetCurrentDir(FString &path)
   // #define UTIME_OMIT -2
 #endif
 
-static bool FILETME_To_timespec(const FILETIME *ft, timespec &ts)
-{
-  if (ft)
-  {
-    const Int64 sec = NTime::FileTimeToUnixTime64(*ft);
-    // time_t is long
-    const time_t sec2 = (time_t)sec;
-    if (sec2 == sec)
-    {
-      ts.tv_sec = sec2;
-      const UInt64 winTime = (((UInt64)ft->dwHighDateTime) << 32) + ft->dwLowDateTime;
-      ts.tv_nsec = (long)((winTime % 10000000) * 100);
-      return true;
-    }
-  }
-  // else
-  {
-    ts.tv_sec = 0;
-    ts.tv_nsec =
-    #ifdef UTIME_OMIT
-      UTIME_OMIT; // keep old timesptamp
-    #else
-      // UTIME_NOW; // set to the current time
-      0;
-    #endif
-    return false;
-  }
-}
 
 
 
 
-bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime)
+bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
 {
   // need testing
   /*
   struct utimbuf buf;
   struct stat st;
   UNUSED_VAR(cTime)
- 
+
   printf("\nstat = %s\n", path);
   int ret = stat(path, &st);
 
@@ -996,14 +991,20 @@ bool SetDirTime(CFSTR path, const FILETIME *cTime, const FILETIME *aTime, const 
 
   struct timespec times[2];
   UNUSED_VAR(cTime)
-  
+
   bool needChange;
-  needChange  = FILETME_To_timespec(aTime, times[0]);
-  needChange |= FILETME_To_timespec(mTime, times[1]);
+  needChange  = FiTime_To_timespec(aTime, times[0]);
+  needChange |= FiTime_To_timespec(mTime, times[1]);
+
+  /*
+  if (mTime)
+  {
+    printf("\n time = %ld.%9ld\n", mTime->tv_sec, mTime->tv_nsec);
+  }
+  */
 
   if (!needChange)
     return true;
-
   const int flags = 0; // follow link
     // = AT_SYMLINK_NOFOLLOW; // don't follow link
   return utimensat(AT_FDCWD, path, times, flags) == 0;
@@ -1023,7 +1024,7 @@ struct C_umask
     mask = 0777 & (~um);        // octal: 0755 is expected
     umask(um);  // restore the umask
     // printf("\n umask = 0%03o mask = 0%03o\n", um, mask);
-    
+
     // mask = 0777; // debug we can disable the restriction:
   }
 };
@@ -1039,6 +1040,10 @@ static C_umask g_umask;
 #define TRACE_chmod(s, mode) \
   PRF(printf("\n chmod(%s, %o)\n", (const char *)path, (unsigned)(mode)));
 
+int my_chown(CFSTR path, uid_t owner, gid_t group)
+{
+  return chown(path, owner, group);
+}
 
 bool SetFileAttrib_PosixHighDetect(CFSTR path, DWORD attrib)
 {
@@ -1064,7 +1069,7 @@ bool SetFileAttrib_PosixHighDetect(CFSTR path, DWORD attrib)
       return false;
     }
   }
-  
+
   if (attrib & FILE_ATTRIBUTE_UNIX_EXTENSION)
   {
     TRACE_SetFileAttrib("attrib & FILE_ATTRIBUTE_UNIX_EXTENSION");

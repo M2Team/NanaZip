@@ -16,6 +16,12 @@ STDMETHODIMP CAgentFolder::SetReplaceAltStreamCharsMode(Int32 replaceAltStreamCh
 }
 */
 
+STDMETHODIMP CAgentFolder::SetZoneIdMode(NExtract::NZoneIdMode::EEnum zoneMode)
+{
+  _zoneMode = zoneMode;
+  return S_OK;
+}
+
 STDMETHODIMP CAgentFolder::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 numItems,
     Int32 includeAltStreams, Int32 replaceAltStreamCharsMode,
     const wchar_t *path, IFolderOperationsExtractCallback *callback)

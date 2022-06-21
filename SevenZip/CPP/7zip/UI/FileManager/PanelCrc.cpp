@@ -351,6 +351,7 @@ HRESULT CApp::CalculateCrc2(const UString &methodName)
     options.streamMode = true;
     options.showErrorMessages = true;
     options.hashMethods.Add(methodName);
+    options.NeedRegistryZone = false;
 
     UStringVector messages;
     return srcPanel.CopyTo(options, indices, &messages);

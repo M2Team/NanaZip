@@ -125,6 +125,24 @@ STDAPI SetCaseSensitive(Int32 caseSensitive)
   return S_OK;
 }
 
+/*
+UInt32 g_ClientVersion;
+STDAPI SetClientVersion(UInt32 version);
+STDAPI SetClientVersion(UInt32 version)
+{
+  g_ClientVersion = version;
+  return S_OK;
+}
+*/
+
+/*
+STDAPI SetProperty(Int32 id, const PROPVARIANT *value);
+STDAPI SetProperty(Int32 id, const PROPVARIANT *value)
+{
+  return S_OK;
+}
+*/
+
 #ifdef EXTERNAL_CODECS
 
 CExternalCodecs g_ExternalCodecs;

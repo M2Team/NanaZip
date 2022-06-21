@@ -22,7 +22,7 @@ namespace NUdf {
 struct CDString32
 {
   Byte Data[32];
-  
+
   void Parse(const Byte *buf);
   // UString GetString() const;
 };
@@ -31,7 +31,7 @@ struct CDString32
 struct CDString128
 {
   Byte Data[128];
-  
+
   void Parse(const Byte *buf) { memcpy(Data, buf, sizeof(Data)); }
   UString GetString() const;
 };
@@ -39,7 +39,7 @@ struct CDString128
 struct CDString
 {
   CByteBuffer Data;
-  
+
   void Parse(const Byte *p, unsigned size);
   UString GetString() const;
 };
@@ -109,7 +109,7 @@ struct CLogBlockAddr
 {
   UInt32 Pos;
   UInt16 PartitionRef;
-  
+
   void Parse(const Byte *buf);
 };
 
@@ -146,10 +146,10 @@ struct CLongAllocDesc
 {
   UInt32 Len;
   CLogBlockAddr Location;
-  
+
   // Byte ImplUse[6];
   // CADImpUse adImpUse; // UDF
-  
+
   UInt32 GetLen() const { return Len & 0x3FFFFFFF; }
   UInt32 GetType() const { return Len >> 30; }
   bool IsRecAndAlloc() const { return GetType() == SHORT_ALLOC_DESC_TYPE_RecordedAndAllocated; }
@@ -222,7 +222,7 @@ struct CMyExtent
   UInt32 Pos;
   UInt32 Len;
   unsigned PartitionRef;
-  
+
   UInt32 GetLen() const { return Len & 0x3FFFFFFF; }
   UInt32 GetType() const { return Len >> 30; }
   bool IsRecAndAlloc() const { return GetType() == SHORT_ALLOC_DESC_TYPE_RecordedAndAllocated; }
@@ -243,7 +243,7 @@ struct CItem
   UInt64 NumLogBlockRecorded;
   CTime ATime;
   CTime MTime;
-  // CTime AttrtTime;
+  CTime AttribTime; // Attribute time : most recent date and time of the day of file creation or modification of the attributes of.
   // UInt32 CheckPoint;
   // CLongAllocDesc ExtendedAttrIcb;
   // CRegId ImplId;
@@ -278,7 +278,7 @@ struct CItem
 
   bool IsDir() const { return IcbTag.IsDir(); }
 };
- 
+
 struct CRef
 {
   int Parent;
@@ -313,7 +313,7 @@ struct CLogVol
   CDString128 Id;
   UInt32 BlockSize;
   // CRegId DomainId;
-  
+
   // Byte ContentsUse[16];
   CLongAllocDesc FileSetLocation; // UDF
 
@@ -390,5 +390,5 @@ public:
 API_FUNC_IsArc IsArc_Udf(const Byte *p, size_t size);
 
 }}
-  
+
 #endif

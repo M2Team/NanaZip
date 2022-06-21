@@ -158,7 +158,7 @@ struct CEntry
   UInt32 Type;
   UInt32 Offset;
   UInt32 Count;
-  
+
   void Parse(const Byte *p)
   {
     Tag = Get32(p + 0);
@@ -188,7 +188,7 @@ class CHandler: public CHandlerCont
   UInt64 _phySize; // _headersSize + _payloadSize, if (_phySize_Defined)
   UInt32 _headerPlusPayload_Size;
   UInt32 _buildTime;
-  
+
   bool _payloadSize_Defined;
   bool _phySize_Defined;
   bool _headerPlusPayload_Size_Defined;
@@ -201,7 +201,7 @@ class CHandler: public CHandlerCont
   AString _release; // 8.1.1
   AString _arch;    // x86_64
   AString _os;      // linux
-  
+
   AString _format;      // cpio
   AString _compressor;  // xz, gzip, bzip2
 
@@ -215,11 +215,7 @@ class CHandler: public CHandlerCont
   void SetTime(NCOM::CPropVariant &prop) const
   {
     if (_time_Defined && _buildTime != 0)
-    {
-      FILETIME ft;
-      NTime::UnixTimeToFileTime(_buildTime, ft);
-      prop = ft;
-    }
+      PropVariant_SetFrom_UnixTime(prop, _buildTime);
   }
 
   void SetStringProp(const AString &s, NCOM::CPropVariant &prop) const
@@ -321,9 +317,9 @@ void CHandler::AddSubFileExtension(AString &res) const
   else
     res += "cpio";
   res += '.';
-  
+
   const char *s;
-  
+
   if (!_compressor.IsEmpty())
   {
     s = _compressor;
@@ -344,7 +340,7 @@ void CHandler::AddSubFileExtension(AString &res) const
     else
       s = "lzma";
   }
-  
+
   res += s;
 }
 
@@ -355,10 +351,10 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
   switch (propID)
   {
     case kpidMainSubfile: prop = (UInt32)0; break;
-    
+
     case kpidHeadersSize: prop = _headersSize; break;
     case kpidPhySize: if (_phySize_Defined) prop = _phySize; break;
-    
+
     case kpidMTime:
     case kpidCTime:
       SetTime(prop);
@@ -449,12 +445,12 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       case kpidPackSize:
         prop = meta.Size;
         break;
-      
+
       case kpidMTime:
       case kpidCTime:
         SetTime(prop);
         break;
-      
+
       case kpidPath:
       {
         AString s ("[META]");
@@ -499,7 +495,7 @@ HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
     return S_FALSE;
   CByteBuffer buffer(headerSize);
   RINOK(ReadStream_FALSE(stream, buffer, headerSize));
-  
+
   for (UInt32 i = 0; i < numEntries; i++)
   {
     CEntry entry;
@@ -510,7 +506,7 @@ HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
 
     const Byte *p = buffer + indexSize + entry.Offset;
     size_t rem = dataLen - entry.Offset;
-    
+
     if (!isMainHeader)
     {
       if (entry.Tag == RPMSIGTAG_SIZE &&
@@ -566,7 +562,7 @@ HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
           _buildTime = Get32(p);
           _time_Defined = true;
         }
-        
+
         #ifdef _SHOW_RPM_METADATA
         for (UInt32 t = 0; t < entry.Count; t++)
         {
@@ -631,7 +627,7 @@ HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
       _metadata += '\n';
       #endif
     }
-    
+
     #ifdef _SHOW_RPM_METADATA
     CMetaFile meta;
     meta.Offset = entry.Offset;
@@ -738,7 +734,7 @@ STDMETHODIMP CHandler::Close()
   _release.Empty();
   _arch.Empty();
   _os.Empty();
-  
+
   _format.Empty();
   _compressor.Empty();
 

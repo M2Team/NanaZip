@@ -30,6 +30,8 @@
 #include "../Common/MyString.h"
 #include "../Common/MyBuffer.h"
 
+#include "../Windows/TimeUtils.h"
+
 #include "Defs.h"
 
 HRESULT GetLastError_noZero_HRESULT();
@@ -94,6 +96,12 @@ struct CReparseAttr
   UString GetPath() const;
 };
 
+#ifdef _WIN32
+#define CFiInfo BY_HANDLE_FILE_INFORMATION
+#define ST_MTIME(st) (st).ftLastWriteTime
+#else
+#define CFiInfo stat
+#endif
 
 #ifdef _WIN32
 
@@ -107,7 +115,7 @@ class CFileBase  MY_UNCOPYABLE
 {
 protected:
   HANDLE _handle;
-  
+
   bool Create(CFSTR path, DWORD desiredAccess,
       DWORD shareMode, DWORD creationDisposition, DWORD flagsAndAttributes);
 
@@ -142,6 +150,8 @@ public:
   CFileBase(): _handle(INVALID_HANDLE_VALUE), PreserveATime(false) {};
   ~CFileBase() { Close(); }
 
+  HANDLE GetHandle() const { return _handle; }
+
   bool Close() throw();
 
   bool GetPosition(UInt64 &position) const throw();
@@ -151,7 +161,7 @@ public:
   bool Seek(UInt64 position, UInt64 &newPosition) const throw();
   bool SeekToBegin() const throw();
   bool SeekToEnd(UInt64 &newPosition) const throw();
-  
+
   bool GetFileInformation(BY_HANDLE_FILE_INFORMATION *info) const
     { return BOOLToBool(GetFileInformationByHandle(_handle, info)); }
 
@@ -186,7 +196,7 @@ class CInFile: public CFileBase
   #ifdef SUPPORT_DEVICE_FILE
 
   #ifndef UNDER_CE
-  
+
   bool GetGeometry(DISK_GEOMETRY *res) const
     { return DeviceIoControlOut(IOCTL_DISK_GET_DRIVE_GEOMETRY, res, sizeof(*res)); }
 
@@ -195,15 +205,15 @@ class CInFile: public CFileBase
 
   bool GetCdRomGeometry(DISK_GEOMETRY *res) const
     { return DeviceIoControlOut(IOCTL_CDROM_GET_DRIVE_GEOMETRY, res, sizeof(*res)); }
-  
+
   bool GetPartitionInfo(PARTITION_INFORMATION *res)
     { return DeviceIoControlOut(IOCTL_DISK_GET_PARTITION_INFO, LPVOID(res), sizeof(*res)); }
-  
+
   #endif
 
   void CorrectDeviceSize();
   void CalcDeviceSize(CFSTR name);
-  
+
   #endif
 
 public:
@@ -212,6 +222,15 @@ public:
   bool Open(CFSTR fileName);
 
   #ifndef UNDER_CE
+
+  bool Open_for_ReadAttributes(CFSTR fileName)
+  {
+    return Create(fileName, FILE_READ_ATTRIBUTES,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        OPEN_EXISTING,
+        FILE_FLAG_BACKUP_SEMANTICS);
+    // we must use (FILE_FLAG_BACKUP_SEMANTICS) to open handle of directory.
+  }
 
   bool OpenReparse(CFSTR fileName)
   {
@@ -223,7 +242,7 @@ public:
         FILE_SHARE_READ, OPEN_EXISTING,
         FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_BACKUP_SEMANTICS);
   }
-  
+
   #endif
 
   bool Read1(void *data, UInt32 size, UInt32 &processedSize) throw();
@@ -240,8 +259,8 @@ public:
   bool Create(CFSTR fileName, bool createAlways);
   bool CreateAlways(CFSTR fileName, DWORD flagsAndAttributes);
 
-  bool SetTime(const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime) throw();
-  bool SetMTime(const FILETIME *mTime) throw();
+  bool SetTime(const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime) throw();
+  bool SetMTime(const CFiTime *mTime) throw();
   bool WritePart(const void *data, UInt32 size, UInt32 &processedSize) throw();
   bool Write(const void *data, UInt32 size, UInt32 &processedSize) throw();
   bool WriteFull(const void *data, size_t size) throw();
@@ -270,6 +289,12 @@ class CFileBase
 protected:
   int _handle;
 
+  /*
+  bool IsDeviceFile;
+  bool SizeDefined;
+  UInt64 Size; // it can be larger than real available size
+  */
+
   bool OpenBinary(const char *name, int flags);
 public:
   bool PreserveATime;
@@ -283,6 +308,11 @@ public:
   off_t seekToCur() const throw();
   // bool SeekToBegin() throw();
   int my_fstat(struct stat *st) const  { return fstat(_handle, st); }
+  /*
+  int my_ioctl_BLKGETSIZE64(unsigned long long *val);
+  int GetDeviceSize_InBytes(UInt64 &size);
+  void CalcDeviceSize(CFSTR s);
+  */
 };
 
 class CInFile: public CFileBase
@@ -301,9 +331,9 @@ class COutFile: public CFileBase
   bool ATime_defined;
   bool MTime_defined;
 
-  FILETIME CTime;
-  FILETIME ATime;
-  FILETIME MTime;
+  CFiTime CTime;
+  CFiTime ATime;
+  CFiTime MTime;
 
   AString Path;
   ssize_t write_part(const void *data, size_t size) throw();
@@ -333,8 +363,8 @@ public:
   {
     return SetLength(length);
   }
-  bool SetTime(const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime) throw();
-  bool SetMTime(const FILETIME *mTime) throw();
+  bool SetTime(const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime) throw();
+  bool SetMTime(const CFiTime *mTime) throw();
 };
 
 }

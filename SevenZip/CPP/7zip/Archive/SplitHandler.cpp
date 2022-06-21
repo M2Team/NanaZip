@@ -70,7 +70,7 @@ struct CSeqName
   UString _unchangedPart;
   UString _changedPart;
   bool _splitStyle;
-  
+
   bool GetNextName(UString &s)
   {
     {
@@ -78,7 +78,7 @@ struct CSeqName
       for (;;)
       {
         wchar_t c = _changedPart[--i];
-        
+
         if (_splitStyle)
         {
           if (c == 'z')
@@ -115,7 +115,7 @@ struct CSeqName
         break;
       }
     }
-    
+
     s = _unchangedPart + _changedPart;
     return true;
   }
@@ -131,7 +131,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
   callback->QueryInterface(IID_IArchiveOpenVolumeCallback, (void **)&volumeCallback);
   if (!volumeCallback)
     return S_FALSE;
-  
+
   UString name;
   {
     NCOM::CPropVariant prop;
@@ -140,18 +140,18 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
       return S_FALSE;
     name = prop.bstrVal;
   }
-  
+
   int dotPos = name.ReverseFind_Dot();
   const UString prefix = name.Left((unsigned)(dotPos + 1));
   const UString ext = name.Ptr((unsigned)(dotPos + 1));
   UString ext2 = ext;
   ext2.MakeLower_Ascii();
-  
+
   CSeqName seqName;
-  
+
   unsigned numLetters = 2;
   bool splitStyle = false;
-  
+
   if (ext2.Len() >= 2 && StringsAreEqual_Ascii(ext2.RightPtr(2), "aa"))
   {
     splitStyle = true;
@@ -162,7 +162,10 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
       numLetters++;
     }
   }
-  else if (ext.Len() >= 2 && StringsAreEqual_Ascii(ext2.RightPtr(2), "01"))
+  else if (ext2.Len() >= 2 && (
+         StringsAreEqual_Ascii(ext2.RightPtr(2), "01")
+      || StringsAreEqual_Ascii(ext2.RightPtr(2), "00")
+      ))
   {
     while (numLetters < ext2.Len())
     {
@@ -170,21 +173,21 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
         break;
       numLetters++;
     }
-    if (numLetters != ext.Len())
+    if (numLetters != ext2.Len())
       return S_FALSE;
   }
   else
     return S_FALSE;
-  
+
   seqName._unchangedPart = prefix + ext.Left(ext2.Len() - numLetters);
   seqName._changedPart = ext.RightPtr(numLetters);
   seqName._splitStyle = splitStyle;
-  
+
   if (prefix.Len() < 1)
     _subName = "file";
   else
     _subName.SetFrom(prefix, prefix.Len() - 1);
-  
+
   UInt64 size;
   {
     /*
@@ -197,16 +200,16 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
     RINOK(stream->Seek(0, STREAM_SEEK_END, &size));
     RINOK(stream->Seek(0, STREAM_SEEK_SET, NULL));
   }
-  
+
   _totalSize += size;
   _sizes.Add(size);
   _streams.Add(stream);
-  
+
   {
     const UInt64 numFiles = _streams.Size();
     RINOK(callback->SetCompleted(&numFiles, NULL));
   }
-  
+
   for (;;)
   {
     UString fullName;
@@ -307,7 +310,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   if (!testMode && !outStream)
     return S_OK;
   RINOK(extractCallback->PrepareOperation(askMode));
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder;
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 

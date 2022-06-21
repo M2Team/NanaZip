@@ -1,5 +1,6 @@
 ﻿#define IDD_COMPRESS     4000
 #define IDD_COMPRESS_2  14000
+#define IDD_COMPRESS_OPTIONS 14001
 
 #define IDC_COMPRESS_ARCHIVE             100
 #define IDB_COMPRESS_SET_ARCHIVE         101
@@ -27,6 +28,10 @@
 #define IDC_COMPRESS_ENCRYPTION_METHOD   122
 
 #define IDT_COMPRESS_ARCHIVE_FOLDER      130
+
+// #define IDB_COMPRESS_OPTIONS             140
+#define IDB_COMPRESS_OPTIONS             2100
+#define IDT_COMPRESS_OPTIONS             141
 
 #define IDT_COMPRESS_PATH_MODE          3410
 
@@ -86,3 +91,31 @@
 #define IDT_SPLIT_TO_VOLUMES            7302
 #define IDS_INCORRECT_VOLUME_SIZE       7307
 #define IDS_SPLIT_CONFIRM               7308
+
+
+// Options Dialog
+
+#define IDG_COMPRESS_TIME               4080
+#define IDT_COMPRESS_TIME_PREC          4081
+#define IDX_COMPRESS_MTIME              4082
+#define IDX_COMPRESS_CTIME              4083
+#define IDX_COMPRESS_ATIME              4084
+#define IDX_COMPRESS_ZTIME              4085
+#define IDX_COMPRESS_PRESERVE_ATIME     4086
+
+#define IDS_COMPRESS_SEC                4090
+#define IDS_COMPRESS_NS                 4091
+
+#define IDC_COMPRESS_TIME_PREC          190
+#define IDT_COMPRESS_TIME_INFO          191
+
+#define IDX_COMPRESS_PREC_SET           201
+#define IDX_COMPRESS_MTIME_SET          202
+#define IDX_COMPRESS_CTIME_SET          203
+#define IDX_COMPRESS_ATIME_SET          204
+#define IDX_COMPRESS_ZTIME_SET          205
+
+// #define IDX_COMPRESS_NT_SYM_LINKS_SET       210
+// #define IDX_COMPRESS_NT_HARD_LINKS_SET      211
+// #define IDX_COMPRESS_NT_ALT_STREAMS_SET     212
+// #define IDX_COMPRESS_NT_SECUR_SET           213

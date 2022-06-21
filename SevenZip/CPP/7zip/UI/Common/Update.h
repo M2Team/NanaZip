@@ -35,7 +35,7 @@ struct CArchivePath
   FString TempPostfix;
 
   CArchivePath(): Temp(false) {};
-  
+
   void ParseFromPath(const UString &path, EArcNameMode mode);
   UString GetPathWithoutExt() const { return Prefix + Name; }
   UString GetFinalPath() const;
@@ -55,7 +55,7 @@ struct CCompressionMethodMode
   bool Type_Defined;
   COpenType Type;
   CObjectVector<CProperty> Properties;
-  
+
   CCompressionMethodMode(): Type_Defined(false) {}
 };
 
@@ -72,7 +72,7 @@ struct CRenamePair
   UString NewName;
   bool WildcardParsing;
   NRecursedType::EEnum RecursedType;
-  
+
   CRenamePair(): WildcardParsing(true), RecursedType(NRecursedType::kNonRecursed) {}
 
   bool Prepare();
@@ -90,7 +90,7 @@ struct CUpdateOptions
 
   bool SfxMode;
   FString SfxModule;
-  
+
   bool PreserveATime;
   bool OpenShareForWrite;
   bool StopAfterOpenError;
@@ -98,7 +98,7 @@ struct CUpdateOptions
   bool StdInMode;
   UString StdInFileName;
   bool StdOutMode;
-  
+
   bool EMailMode;
   bool EMailRemoveAfter;
   UString EMailAddress;
@@ -111,6 +111,9 @@ struct CUpdateOptions
   CBoolPair AltStreams;
   CBoolPair HardLinks;
   CBoolPair SymLinks;
+
+  CBoolPair StoreOwnerId;
+  CBoolPair StoreOwnerName;
 
   bool DeleteAfterCompressing;
 
@@ -136,9 +139,9 @@ struct CUpdateOptions
 
     EMailMode(false),
     EMailRemoveAfter(false),
-    
+
     PathMode(NWildcard::k_RelatPath),
-    
+
     DeleteAfterCompressing(false),
     SetArcMTime(false)
 

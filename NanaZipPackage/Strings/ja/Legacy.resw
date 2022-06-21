@@ -513,6 +513,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>読み取り専用</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>リンクをコピー</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>メタデータが変更されています</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>オプション</value>
   </data>
@@ -610,19 +616,19 @@
     <value>設定</value>
   </data>
   <data name="Resource2501" xml:space="preserve">
-    <value>".." を表示する</value>
+    <value>".." を表示</value>
   </data>
   <data name="Resource2502" xml:space="preserve">
-    <value>実際のファイル アイコンを表示する</value>
+    <value>実際のファイル アイコンを表示</value>
   </data>
   <data name="Resource2503" xml:space="preserve">
-    <value>システム メニューも表示する</value>
+    <value>システム メニューも表示</value>
   </data>
   <data name="Resource2504" xml:space="preserve">
-    <value>行単位で選択する(&amp;F)</value>
+    <value>行単位で選択(&amp;F)</value>
   </data>
   <data name="Resource2505" xml:space="preserve">
-    <value>グリッドの線を表示する(&amp;G)</value>
+    <value>グリッドの線を表示(&amp;G)</value>
   </data>
   <data name="Resource2506" xml:space="preserve">
     <value>シングルクリックで開く</value>
@@ -631,13 +637,13 @@
     <value>カーソル移動で選択が自動解除されないモード(&amp;A)</value>
   </data>
   <data name="Resource2508" xml:space="preserve">
-    <value>大きなメモリ ページを使用する(&amp;L)</value>
+    <value>大きなメモリ ページを使用(&amp;L)</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip について</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>NanaZip はフリー ソフトウェアです</value>
+    <value>NanaZip はフリーウェアです</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>システムは必要な量のメモリを割り当てることができません</value>
@@ -754,7 +760,7 @@
     <value>パス名出力モード:</value>
   </data>
   <data name="Resource3411" xml:space="preserve">
-    <value>フル パス</value>
+    <value>フルパス</value>
   </data>
   <data name="Resource3412" xml:space="preserve">
     <value>パスなし</value>
@@ -788,6 +794,12 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>ファイルのセキュリティ属性を復元</value>
+  </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Zone.Id ストリームの伝達:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Office ファイルの場合</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
     <value>ファイルの上書き確認</value>
@@ -841,7 +853,7 @@
     <value>予期しないデータの終わりです</value>
   </data>
   <data name="Resource3726" xml:space="preserve">
-    <value>データのペイロード後にデータが存在します</value>
+    <value>データのペイロード後にデータが存在しています</value>
   </data>
   <data name="Resource3727" xml:space="preserve">
     <value>アーカイブではありません</value>
@@ -1022,6 +1034,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>無制限</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>時刻</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>タイムスタンプの精度:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>更新日時を格納</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>作成日時を格納</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>アクセス日時を格納</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>アーカイブの日時を最新のファイルの日時に設定</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>ソース ファイルのアクセス日時を変更しない</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ナノ秒</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>コピー</value>

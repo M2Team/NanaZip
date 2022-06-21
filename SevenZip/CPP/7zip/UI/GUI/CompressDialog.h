@@ -60,6 +60,14 @@ namespace NCompressDialog
     CBoolPair AltStreams;
     CBoolPair NtSecurity;
 
+    CBoolPair PreserveATime;
+
+    UInt32 TimePrec;
+    CBoolPair MTime;
+    CBoolPair CTime;
+    CBoolPair ATime;
+    CBoolPair SetArcMTime;
+
     UString ArcPath; // in: Relative or abs ; out: Relative or abs
 
     // FString CurrentDirPrefix;
@@ -89,9 +97,44 @@ namespace NCompressDialog
       Method.Empty();
       Options.Empty();
       EncryptionMethod.Empty();
+      TimePrec = (UInt32)(Int32)(-1);
     }
   };
 }
+
+
+struct CBool1
+{
+  bool Val;
+  bool Supported;
+
+  CBool1(): Val(false), Supported(false) {}
+
+  void Init()
+  {
+    Val = false;
+    Supported = false;
+  }
+
+  void SetTrueTrue()
+  {
+    Val = true;
+    Supported = true;
+  }
+
+  void SetVal_as_Supported(bool val)
+  {
+    Val = val;
+    Supported = true;
+  }
+
+  /*
+  bool IsVal_True_and_Defined() const
+  {
+    return Def && Val;
+  }
+  */
+};
 
 
 class CCompressDialog: public NWindows::NControl::CModalDialog
@@ -126,8 +169,6 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
 
   int _default_encryptionMethod_Index;
 
-  NCompression::CInfo m_RegistryInfo;
-
   int m_PrevFormat;
   UString DirPrefix;
   UString StartDirPrefix;
@@ -137,23 +178,25 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   UInt64 _ramSize_Reduced; // full for 64-bit and reduced for 32-bit
   UInt64 _ramUsage_Auto;
 
-  void CheckButton_TwoBools(UINT id, const CBoolPair &b1, const CBoolPair &b2);
-  void GetButton_Bools(UINT id, CBoolPair &b1, CBoolPair &b2);
+public:
+  NCompression::CInfo m_RegistryInfo;
+
+  CBool1 SymLinks;
+  CBool1 HardLinks;
+  CBool1 AltStreams;
+  CBool1 NtSecurity;
+  CBool1 PreserveATime;
 
   void SetArchiveName(const UString &name);
   int FindRegistryFormat(const UString &name);
-  int FindRegistryFormatAlways(const UString &name);
+  unsigned FindRegistryFormat_Always(const UString &name);
 
   const CArcInfoEx &Get_ArcInfoEx()
   {
     return (*ArcFormats)[GetFormatIndex()];
   }
 
-  NCompression::CFormatOptions &Get_FormatOptions()
-  {
-    const CArcInfoEx &ai = Get_ArcInfoEx();
-    return m_RegistryInfo.Formats[ FindRegistryFormatAlways(ai.Name) ];
-  }
+  NCompression::CFormatOptions &Get_FormatOptions();
 
   void CheckSFXNameChange();
   void SetArchiveName2(bool prevWasSFX);
@@ -237,6 +280,12 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
 
   UInt32 GetBlockSizeSpec() { return GetComboValue(m_Solid, 1); }
 
+  /*
+  UInt32 GetPrecSpec() { return GetComboValue(m_Prec, 1); }
+  UInt32 GetPrec() { return GetComboValue(m_Prec, 0); }
+  */
+
+
   int AddOrder(UInt32 size);
   int AddOrder_Auto();
 
@@ -271,6 +320,7 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   void PrintMemUsage(UINT res, UInt64 value);
   void SetMemoryUsage();
   void SetParams();
+
   void SaveOptionsInMem();
 
   void UpdatePasswordControl();
@@ -283,7 +333,7 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   void CheckSFXControlsEnable();
   // void CheckVolumeEnable();
   void EnableMultiCombo(unsigned id);
-  void FormatChanged();
+  void FormatChanged(bool isChanged);
 
   void OnButtonSetArchive();
   bool IsSFX();
@@ -294,10 +344,7 @@ class CCompressDialog: public NWindows::NControl::CModalDialog
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
   virtual void OnOK();
 
-//   void MessageBoxError(LPCWSTR message)
-//   {
-//     MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
-//   }
+  void ShowOptionsString();
 
 public:
   const CObjectVector<CArcInfoEx> *ArcFormats;
@@ -312,11 +359,102 @@ public:
 
   INT_PTR Create(HWND wndParent = 0)
   {
-    BIG_DIALOG_SIZE(400, 304);
+    BIG_DIALOG_SIZE(400, 320);
     return CModalDialog::Create(SIZED_DIALOG(IDD_COMPRESS), wndParent);
   }
 
   CCompressDialog(): CurrentDirWasChanged(false) {};
+};
+
+
+
+
+class COptionsDialog: public NWindows::NControl::CModalDialog
+{
+  struct CBoolBox
+  {
+    bool IsSupported;
+    bool DefaultVal;
+    CBoolPair BoolPair;
+
+    int Id;
+    int Set_Id;
+
+    void SetIDs(int id, int set_Id)
+    {
+      Id = id;
+      Set_Id = set_Id;
+    }
+
+    CBoolBox():
+        IsSupported(false),
+        DefaultVal(false)
+        {}
+  };
+
+  CCompressDialog *cd;
+
+  NWindows::NControl::CComboBox m_Prec;
+
+  UInt32 _auto_Prec;
+  UInt32 TimePrec;
+
+  void Reset_TimePrec() { TimePrec = (UInt32)(Int32)-1; }
+  bool IsSet_TimePrec() const { return TimePrec != (UInt32)(Int32)-1; }
+
+  CBoolBox MTime;
+  CBoolBox CTime;
+  CBoolBox ATime;
+  CBoolBox ZTime;
+
+  UString SecString;
+  UString NsString;
+
+
+  void CheckButton_Bool1(UINT id, const CBool1 &b1);
+  void GetButton_Bool1(UINT id, CBool1 &b1);
+  void CheckButton_BoolBox(bool supported, const CBoolPair &b2, CBoolBox &bb);
+  void GetButton_BoolBox(CBoolBox &bb);
+
+  void Store_TimeBoxes();
+
+  UInt32 GetComboValue(NWindows::NControl::CComboBox &c, int defMax = 0);
+  UInt32 GetPrecSpec()
+  {
+    UInt32 prec = GetComboValue(m_Prec, 1);
+    if (prec == _auto_Prec)
+      prec = (UInt32)(Int32)-1;
+    return prec;
+  }
+  UInt32 GetPrec() { return GetComboValue(m_Prec, 0); }
+
+  // void OnButton_TimeDefault();
+  int AddPrec(unsigned prec, bool isDefault);
+  void SetPrec();
+  void SetTimeMAC();
+
+  void On_CheckBoxSet_Prec_Clicked();
+  void On_CheckBoxSet_Clicked(const CBoolBox &bb);
+
+  virtual bool OnInit();
+  virtual bool OnCommand(int code, int itemID, LPARAM lParam);
+  virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
+  virtual void OnOK();
+
+public:
+
+  INT_PTR Create(HWND wndParent = 0)
+  {
+    BIG_DIALOG_SIZE(240, 232);
+    return CModalDialog::Create(SIZED_DIALOG(IDD_COMPRESS_OPTIONS), wndParent);
+  }
+
+  COptionsDialog(CCompressDialog *cdLoc):
+      cd(cdLoc)
+      // , TimePrec(0)
+      {
+        Reset_TimePrec();
+      };
 };
 
 #endif

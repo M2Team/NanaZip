@@ -52,14 +52,14 @@ public:
     {
       unsigned numNewBits = MyMin(numBits, _bitPos);
       numBits -= numNewBits;
-      
+
       _curByte = (Byte)(_curByte << numNewBits);
       UInt32 newBits = value >> numBits;
       _curByte |= Byte(newBits);
       value -= (newBits << numBits);
-      
+
       _bitPos -= numNewBits;
-      
+
       if (_bitPos == 0)
       {
        _buf[_pos++] = _curByte;
@@ -67,7 +67,7 @@ public:
       }
     }
   }
-  
+
   UInt32 GetBytePos() const { return _pos ; }
   UInt32 GetPos() const { return _pos * 8 + (8 - _bitPos); }
   Byte GetCurByte() const { return _curByte; }
@@ -129,7 +129,7 @@ public:
   // it's not member of this thread. We just need one event per thread
   NWindows::NSynchronization::CAutoResetEvent CanWriteEvent;
 
-  UInt64 m_PackSize;
+  UInt64 m_UnpackSize;
 
   Byte MtPad[1 << 8]; // It's pad for Multi-Threading. Must be >= Cache_Line_Size.
   HRESULT Create();
@@ -150,7 +150,7 @@ struct CEncProps
   UInt32 BlockSizeMult;
   UInt32 NumPasses;
   UInt64 Affinity;
-  
+
   CEncProps()
   {
     BlockSizeMult = (UInt32)(Int32)-1;
@@ -195,6 +195,10 @@ public:
   CThreadInfo ThreadsInfo;
   #endif
 
+  UInt64 NumBlocks;
+
+  UInt64 GetInProcessedSize() const { return m_InStream.GetProcessedSize(); }
+
   UInt32 ReadRleBlock(Byte *buf);
   void WriteBytes(const Byte *data, UInt32 sizeInBits, Byte lastByte);
 
@@ -215,7 +219,7 @@ public:
   #endif
 
   HRESULT Flush() { return m_OutStream.Flush(); }
-  
+
   MY_QUERYINTERFACE_BEGIN2(ICompressCoder)
   #ifndef _7ZIP_ST
   MY_QUERYINTERFACE_ENTRY(ICompressSetCoderMt)

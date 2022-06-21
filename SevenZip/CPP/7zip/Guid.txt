@@ -19,6 +19,7 @@
   0F  IOutFolderArchive
   10  IFolderArchiveUpdateCallback2
   11  IFolderScanProgress
+  12  IFolderSetZoneIdMode
   
   20  IFileExtractCallback.h::IGetProp
   30  IFileExtractCallback.h::IFolderExtractToStreamCallback (old)
@@ -34,6 +35,7 @@
   07  IOutStreamFinish
   08  IStreamGetProps
   09  IStreamGetProps2
+  0A  IStreamGetProp
 
 
 04 ICoder.h
@@ -106,6 +108,8 @@
   82  IArchiveUpdateCallback2
   83  IArchiveUpdateCallbackFile
   84  IArchiveGetDiskProperty
+  85  IArchiveUpdateCallbackArcProp (Reserved)
+
 
   A0  IOutArchive
 
@@ -173,7 +177,11 @@ Handler GUIDs:
   10 lz5
   11 liz
 
-  C3 Lzip
+  BF Lzip
+  C0 AVB
+  C1 LP
+  C2 Sparse
+  C3 APFS
   C4 Vhdx
   C5 Base64
   C6 COFF

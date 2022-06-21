@@ -50,24 +50,25 @@ namespace NFileHeader
       kDeflate64 = 9,
       kPKImploding = 10,
 
-      kBZip2 = 12,   // File is compressed using BZIP2 algorithm
+      kBZip2 = 12,
 
-      kLZMA = 14,    // LZMA
+      kLZMA = 14,
 
-      kTerse = 18,   // File is compressed using IBM TERSE (new)
-      kLz77 = 19,    // IBM LZ77 z Architecture
-      kZstdPk = 20,  // deprecated (use method 93 for zstd)
+      kTerse = 18,
+      kLz77 = 19,
+      kZstdPk = 20,
 
-      kZstd = 93,    // Zstandard (zstd) Compression
-      kMP3 = 94,     // MP3 Compression
-      kXz = 95,      // XZ Compression
-      kJpeg = 96,    // JPEG variant
-      kWavPack = 97, // WavPack compressed data
-      kPPMd = 98,    // PPMd version I, Rev 1
-      kWzAES = 99    // AE-x encryption marker (see APPENDIX E)
+      kZstd = 93,
+      kMP3 = 94,
+      kXz = 95,
+      kJpeg = 96,
+      kWavPack = 97,
+      kPPMd = 98,
+      kWzAES = 99
     };
 
     const Byte kMadeByProgramVersion = 63;
+
     const Byte kExtractVersion_Default = 10;
     const Byte kExtractVersion_Dir = 20;
     const Byte kExtractVersion_ZipCrypto = 20;
@@ -78,7 +79,7 @@ namespace NFileHeader
     const Byte kExtractVersion_Aes = 51;
     const Byte kExtractVersion_LZMA = 63;
     const Byte kExtractVersion_PPMd = 63;
-    const Byte kExtractVersion_Xz = 20;   // test it
+    const Byte kExtractVersion_Xz = 20; // test it
     const Byte kExtractVersion_Zstd = 20; // WinZip mark it
   }
 
@@ -88,14 +89,15 @@ namespace NFileHeader
     {
       kZip64 = 0x01,
       kNTFS = 0x0A,
+      kUnix0 = 0x0D,                // Info-ZIP : (UNIX) PK
       kStrongEncrypt = 0x17,
       kIzNtSecurityDescriptor = 0x4453,
-      kUnixTime = 0x5455,
-      kUnixExtra = 0x5855,
+      kUnixTime = 0x5455,           // "UT" (time) Info-ZIP
+      kUnix1 = 0x5855,              // Info-ZIP
       kIzUnicodeComment = 0x6375,
       kIzUnicodeName = 0x7075,
-      kUnix2Extra = 0x7855,
-      kUnix3Extra = 0x7875,
+      kUnix2 = 0x7855,              // Info-ZIP
+      kUnixN = 0x7875,              // Info-ZIP
       kWzAES = 0x9901,
       kApkAlign = 0xD935
     };
@@ -142,7 +144,7 @@ namespace NFileHeader
 
     const unsigned kImplodeDictionarySizeMask = 1 << 1;
     const unsigned kImplodeLiteralsOnMask     = 1 << 2;
-    
+
     /*
     const unsigned kDeflateTypeBitStart = 1;
     const unsigned kNumDeflateTypeBits = 2;
@@ -150,7 +152,7 @@ namespace NFileHeader
     const unsigned kDeflateTypeMask = (1 << kNumDeflateTypeBits) - 1;
     */
   }
-  
+
   namespace NHostOS
   {
     enum EEnum

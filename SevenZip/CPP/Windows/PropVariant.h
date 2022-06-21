@@ -29,11 +29,14 @@ inline void PropVarEm_Set_UInt64(PROPVARIANT *p, UInt64 v) throw()
   p->uhVal.QuadPart = v;
 }
 
-inline void PropVarEm_Set_FileTime64(PROPVARIANT *p, UInt64 v) throw()
+inline void PropVarEm_Set_FileTime64_Prec(PROPVARIANT *p, UInt64 v, unsigned prec) throw()
 {
   p->vt = VT_FILETIME;
   p->filetime.dwLowDateTime = (DWORD)v;
   p->filetime.dwHighDateTime = (DWORD)(v >> 32);
+  p->wReserved1 = (WORD)prec;
+  p->wReserved2 = 0;
+  p->wReserved3 = 0;
 }
 
 inline void PropVarEm_Set_Bool(PROPVARIANT *p, bool b) throw()
@@ -63,7 +66,51 @@ public:
     // uhVal.QuadPart = 0;
     bstrVal = 0;
   }
-  ~CPropVariant() throw() { Clear(); }
+
+
+  void Set_FtPrec(unsigned prec)
+  {
+    wReserved1 = (WORD)prec;
+    wReserved2 = 0;
+    wReserved3 = 0;
+  }
+
+  void SetAsTimeFrom_FT_Prec(const FILETIME &ft, unsigned prec)
+  {
+    operator=(ft);
+    Set_FtPrec(prec);
+  }
+
+  void SetAsTimeFrom_Ft64_Prec(UInt64 v, unsigned prec)
+  {
+    FILETIME ft;
+    ft.dwLowDateTime = (DWORD)(UInt32)v;
+    ft.dwHighDateTime = (DWORD)(UInt32)(v >> 32);
+    operator=(ft);
+    Set_FtPrec(prec);
+  }
+
+  void SetAsTimeFrom_FT_Prec_Ns100(const FILETIME &ft, unsigned prec, unsigned ns100)
+  {
+    operator=(ft);
+    wReserved1 = (WORD)prec;
+    wReserved2 = (WORD)ns100;
+    wReserved3 = 0;
+  }
+
+  unsigned Get_Ns100() const
+  {
+    const unsigned prec = wReserved1;
+    const unsigned ns100 = wReserved2;
+    if (prec == 0
+        && prec <= k_PropVar_TimePrec_1ns
+        && ns100 < 100
+        && wReserved3 == 0)
+      return ns100;
+    return 0;
+  }
+
+  ~CPropVariant();
   CPropVariant(const PROPVARIANT &varSrc);
   CPropVariant(const CPropVariant &varSrc);
   CPropVariant(BSTR bstrSrc);
@@ -91,10 +138,10 @@ public:
   CPropVariant& operator=(const char *s);
   CPropVariant& operator=(const AString &s)
     { return (*this)=(const char *)s; }
-  
+
   CPropVariant& operator=(bool bSrc) throw();
   CPropVariant& operator=(Byte value) throw();
-  
+
 private:
   CPropVariant& operator=(Int16 value) throw();
   CPropVariant& operator=(UInt16 value) throw();
@@ -118,7 +165,6 @@ public:
 
   HRESULT InternalClear() throw();
   void InternalCopy(const PROPVARIANT *pSrc);
-
   int Compare(const CPropVariant &a) throw();
 };
 

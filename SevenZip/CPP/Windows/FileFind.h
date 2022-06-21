@@ -9,9 +9,13 @@
 #include <dirent.h>
 #endif
 
+#include "../Common/MyLinux.h"
 #include "../Common/MyString.h"
 #include "../Common/MyWindows.h"
+
 #include "Defs.h"
+
+#include "FileIO.h"
 
 namespace NWindows {
 namespace NFile {
@@ -32,6 +36,7 @@ bool DoesFileOrDirExist(CFSTR name);
 
 DWORD GetFileAttrib(CFSTR path);
 
+#ifdef _WIN32
 
 namespace NAttributes
 {
@@ -42,21 +47,38 @@ namespace NAttributes
   inline bool IsArchived(DWORD attrib) { return (attrib & FILE_ATTRIBUTE_ARCHIVE) != 0; }
   inline bool IsCompressed(DWORD attrib) { return (attrib & FILE_ATTRIBUTE_COMPRESSED) != 0; }
   inline bool IsEncrypted(DWORD attrib) { return (attrib & FILE_ATTRIBUTE_ENCRYPTED) != 0; }
+
+  inline UInt32 Get_PosixMode_From_WinAttrib(DWORD attrib)
+  {
+    UInt32 v = IsDir(attrib) ? MY_LIN_S_IFDIR : MY_LIN_S_IFREG;
+    /* 21.06: as WSL we allow write permissions (0222) for directories even for (FILE_ATTRIBUTE_READONLY).
+    So extracting at Linux will be allowed to write files inside (0777) directories. */
+    v |= ((IsReadOnly(attrib) && !IsDir(attrib)) ? 0555 : 0777);
+    return v;
+  }
 }
+
+#else
+
+UInt32 Get_WinAttribPosix_From_PosixMode(UInt32 mode);
+
+#endif
 
 class CFileInfoBase
 {
+ #ifdef _WIN32
   bool MatchesMask(UINT32 mask) const { return ((Attrib & mask) != 0); }
+ #endif
 public:
   UInt64 Size;
-  FILETIME CTime;
-  FILETIME ATime;
-  FILETIME MTime;
+  CFiTime CTime;
+  CFiTime ATime;
+  CFiTime MTime;
+ #ifdef _WIN32
   DWORD Attrib;
   bool IsAltStream;
   bool IsDevice;
 
-  #ifdef _WIN32
   /*
   #ifdef UNDER_CE
   DWORD ObjectID;
@@ -64,24 +86,25 @@ public:
   UINT32 ReparseTag;
   #endif
   */
-  #else
-  dev_t dev;
+ #else
+  dev_t dev;     /* ID of device containing file */
   ino_t ino;
-  nlink_t nlink;
   mode_t mode;
+  nlink_t nlink;
+  uid_t uid;     /* user ID of owner */
+  gid_t gid;     /* group ID of owner */
+  dev_t rdev;    /* device ID (defined, if S_ISCHR(mode) || S_ISBLK(mode)) */
   // bool Use_lstat;
-  #endif
+ #endif
 
   CFileInfoBase() { ClearBase(); }
   void ClearBase() throw();
-  
-  void SetAsDir()
-  {
-    Attrib = FILE_ATTRIBUTE_DIRECTORY;
-    #ifndef _WIN32
-    Attrib |= (FILE_ATTRIBUTE_UNIX_EXTENSION + (S_IFDIR << 16));
-    #endif
-  }
+
+ #ifdef _WIN32
+
+  bool Fill_From_ByHandleFileInfo(CFSTR path);
+  void SetAsDir()  { Attrib = FILE_ATTRIBUTE_DIRECTORY; } // |= (FILE_ATTRIBUTE_UNIX_EXTENSION + (S_IFDIR << 16));
+  void SetAsFile() { Attrib = 0; }
 
   bool IsArchived() const { return MatchesMask(FILE_ATTRIBUTE_ARCHIVE); }
   bool IsCompressed() const { return MatchesMask(FILE_ATTRIBUTE_COMPRESSED); }
@@ -96,13 +119,33 @@ public:
   bool IsSystem() const { return MatchesMask(FILE_ATTRIBUTE_SYSTEM); }
   bool IsTemporary() const { return MatchesMask(FILE_ATTRIBUTE_TEMPORARY); }
 
-  #ifndef _WIN32
-  bool IsPosixLink() const
+  UInt32 GetWinAttrib() const { return Attrib; }
+  UInt32 GetPosixAttrib() const
   {
-    const UInt32 mod = Attrib >> 16;
-    return S_ISLNK(mod);
+    return NAttributes::Get_PosixMode_From_WinAttrib(Attrib);
   }
-  #endif
+  bool Has_Attrib_ReparsePoint() const { return (Attrib & FILE_ATTRIBUTE_REPARSE_POINT) != 0; }
+
+ #else
+
+  UInt32 GetPosixAttrib() const { return mode; }
+  UInt32 GetWinAttrib() const { return Get_WinAttribPosix_From_PosixMode(mode); }
+
+  bool IsDir() const { return S_ISDIR(mode); }
+  void SetAsDir()  { mode = S_IFDIR; }
+  void SetAsFile() { mode = S_IFREG; }
+
+  bool IsReadOnly() const
+  {
+    // does linux support writing to ReadOnly files?
+    if ((mode & 0222) == 0) // S_IWUSR in p7zip
+      return true;
+    return false;
+  }
+
+  bool IsPosixLink() const { return S_ISLNK(mode); }
+
+ #endif
 
   bool IsOsSymLink() const
   {
@@ -126,7 +169,7 @@ struct CFileInfo: public CFileInfoBase
   bool Find_FollowLink(CFSTR path) { return Find(path, true); }
 
   #ifdef _WIN32
-  bool Fill_From_ByHandleFileInfo(CFSTR path);
+  // bool Fill_From_ByHandleFileInfo(CFSTR path);
   // bool FollowReparse(CFSTR path, bool isDir);
   #else
   bool Find_DontFill_Name(CFSTR path, bool followLink = false);
@@ -287,16 +330,8 @@ inline UInt32 Get_WinAttrib_From_PosixMode(UInt32 mode)
 }
 */
 
-UInt32 Get_WinAttribPosix_From_PosixMode(UInt32 mode);
-
 // UInt32 Get_WinAttrib_From_stat(const struct stat &st);
-#if defined(_AIX)
-  #define MY_ST_TIMESPEC st_timespec
-#else
-  #define MY_ST_TIMESPEC timespec
-#endif
 
-void timespec_To_FILETIME(const MY_ST_TIMESPEC &ts, FILETIME &ft);
 
 #endif // WIN32
 

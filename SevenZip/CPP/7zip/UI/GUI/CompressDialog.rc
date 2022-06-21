@@ -2,7 +2,7 @@
 #include "../../GuiCommon.rc"
 
 #define xc 400
-#define yc 354
+#define yc 320
 
 #undef gSize
 #undef gSpace
@@ -20,10 +20,6 @@
 #define gSize 192
 #define gSpace 24
 
-#define ntSize2 168
-#define ntSizeX (ntSize2 - m - m)
-#define ntPosX m + m
-#define ntPosY 292
 
 #define g1xs 88
 #define g0xs (gSize - g1xs)
@@ -99,18 +95,9 @@ BEGIN
   LTEXT     "Parameters:", IDT_COMPRESS_PARAMETERS, m, 256, gSize, 8
   EDITTEXT  IDE_COMPRESS_PARAMETERS, m, 268, gSize, 14, ES_AUTOHSCROLL
 
-
-  GROUPBOX  "NTFS", IDG_COMPRESS_NTFS, m, ntPosY, ntSize2, 68
-
-  CONTROL   "Store symbolic links", IDX_COMPRESS_NT_SYM_LINKS, MY_CHECKBOX,
-            ntPosX, ntPosY + 12, ntSizeX, 10
-  CONTROL   "Store hard links", IDX_COMPRESS_NT_HARD_LINKS, MY_CHECKBOX,
-            ntPosX, ntPosY + 26, ntSizeX, 10
-  CONTROL   "Store alternate data streams", IDX_COMPRESS_NT_ALT_STREAMS, MY_CHECKBOX,
-            ntPosX, ntPosY + 40, ntSizeX, 10
-  CONTROL   "Store file security", IDX_COMPRESS_NT_SECUR, MY_CHECKBOX,
-            ntPosX, ntPosY + 54, ntSizeX, 10
-  
+  PUSHBUTTON  "Options", IDB_COMPRESS_OPTIONS, m, 292, bxs, bys
+  LTEXT     "", IDT_COMPRESS_OPTIONS, m + bxs + m, 294, gSize - bxs - m, 16, SS_NOPREFIX
+           
 
   LTEXT     "&Update mode:", IDT_COMPRESS_UPDATE_MODE, g4x, 41, 80, 8
   COMBOBOX  IDC_COMPRESS_UPDATE_MODE, g4x + 84, 39, g4xs - 84, 80, MY_COMBO
@@ -145,8 +132,9 @@ BEGIN
   CONTROL   "Encrypt file &names", IDX_COMPRESS_ENCRYPT_FILE_NAMES, MY_CHECKBOX,
             g4x2, yPsw + 111, g4xs2, 10
   
-  DEFPUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys, WS_GROUP
-  PUSHBUTTON     "Cancel", IDCANCEL, bx1, by, bxs, bys
+  DEFPUSHBUTTON  "OK",     IDOK,     bx3, by, bxs, bys, WS_GROUP
+  PUSHBUTTON     "Cancel", IDCANCEL, bx2, by, bxs, bys
+  PUSHBUTTON     "Help",   IDHELP,   bx1, by, bxs, bys
 END
 
 
@@ -224,4 +212,10 @@ BEGIN
     IDS_COMPRESS_SOLID      "Solid"
 
     IDS_SPLIT_CONFIRM  "Specified volume size: {0} bytes.\nAre you sure you want to split archive into such volumes?"
+
+    IDS_COMPRESS_SEC "sec"
+    IDS_COMPRESS_NS "ns"
 END
+
+
+#include "CompressOptionsDialog.rc"

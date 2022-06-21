@@ -214,16 +214,19 @@ namespace NanaZip::ShellExtension
         DWORD m_CommandID;
         bool m_IsSeparator;
         CBoolPair m_ElimDup;
+        UInt32 m_WriteZone;
 
     public:
 
         ExplorerCommandBase(
             std::wstring const& Title = std::wstring(),
             DWORD CommandID = CommandID::None,
-            CBoolPair const& ElimDup = CBoolPair()) :
+            CBoolPair const& ElimDup = CBoolPair(),
+            UInt32 const& WriteZone = static_cast<UInt32>(-1)) :
             m_Title(Title),
             m_CommandID(CommandID),
-            m_ElimDup(ElimDup)
+            m_ElimDup(ElimDup),
+            m_WriteZone(WriteZone)
         {
             this->m_IsSeparator = (this->m_CommandID == CommandID::None);
         }
@@ -457,7 +460,8 @@ namespace NanaZip::ShellExtension
                     Folder.c_str(),
                     (this->m_CommandID == CommandID::Extract),
                     ((this->m_CommandID == CommandID::ExtractTo)
-                    && this->m_ElimDup.Val));
+                    && this->m_ElimDup.Val),
+                    this->m_WriteZone);
 
                 break;
             }
@@ -696,6 +700,7 @@ namespace NanaZip::ShellExtension
             ContextMenuInfo.Load();
             DWORD ContextMenuFlags = ContextMenuInfo.Flags;
             CBoolPair ContextMenuElimDup = ContextMenuInfo.ElimDup;
+            UInt32 ContextMenuWriteZone = ContextMenuInfo.WriteZone;
 
             LoadLangOneTime();
 
@@ -714,8 +719,7 @@ namespace NanaZip::ShellExtension
                             std::wstring(
                                 TranslatedString.Ptr(),
                                 TranslatedString.Len()),
-                            CommandID::Open,
-                            ContextMenuElimDup));
+                            CommandID::Open));
                 }
             }
 
@@ -730,8 +734,7 @@ namespace NanaZip::ShellExtension
                             std::wstring(
                                 TranslatedString.Ptr(),
                                 TranslatedString.Len()),
-                            CommandID::Test,
-                            ContextMenuElimDup));
+                            CommandID::Test));
                 }
 
                 if (ContextMenuFlags & NContextMenuFlags::kExtract)
@@ -744,7 +747,8 @@ namespace NanaZip::ShellExtension
                                 TranslatedString.Ptr(),
                                 TranslatedString.Len()),
                             CommandID::Extract,
-                            ContextMenuElimDup));
+                            ContextMenuElimDup,
+                            ContextMenuWriteZone));
                 }
 
                 if (ContextMenuFlags & NContextMenuFlags::kExtractHere)
@@ -757,7 +761,8 @@ namespace NanaZip::ShellExtension
                                 TranslatedString.Ptr(),
                                 TranslatedString.Len()),
                             CommandID::ExtractHere,
-                            ContextMenuElimDup));
+                            ContextMenuElimDup,
+                            ContextMenuWriteZone));
                 }
 
                 if (ContextMenuFlags & NContextMenuFlags::kExtractTo)
@@ -771,7 +776,8 @@ namespace NanaZip::ShellExtension
                                 TranslatedString.Ptr(),
                                 TranslatedString.Len()),
                             CommandID::ExtractTo,
-                            ContextMenuElimDup));
+                            ContextMenuElimDup,
+                            ContextMenuWriteZone));
                 }
             }
 
@@ -784,8 +790,7 @@ namespace NanaZip::ShellExtension
                         std::wstring(
                             TranslatedString.Ptr(),
                             TranslatedString.Len()),
-                        CommandID::Compress,
-                        ContextMenuElimDup));
+                        CommandID::Compress));
             }
 
             if (ContextMenuFlags & NContextMenuFlags::kCompressTo7z)
@@ -798,8 +803,7 @@ namespace NanaZip::ShellExtension
                         std::wstring(
                             TranslatedString.Ptr(),
                             TranslatedString.Len()),
-                        CommandID::CompressTo7z,
-                        ContextMenuElimDup));
+                        CommandID::CompressTo7z));
             }
 
             if (ContextMenuFlags & NContextMenuFlags::kCompressToZip)
@@ -812,8 +816,7 @@ namespace NanaZip::ShellExtension
                         std::wstring(
                             TranslatedString.Ptr(),
                             TranslatedString.Len()),
-                        CommandID::CompressToZip,
-                        ContextMenuElimDup));
+                        CommandID::CompressToZip));
             }
 
             if (ContextMenuFlags & NContextMenuFlags::kCompressEmail)
@@ -825,8 +828,7 @@ namespace NanaZip::ShellExtension
                         std::wstring(
                             TranslatedString.Ptr(),
                             TranslatedString.Len()),
-                        CommandID::CompressEmail,
-                        ContextMenuElimDup));
+                        CommandID::CompressEmail));
             }
 
             if (ContextMenuFlags & NContextMenuFlags::kCompressTo7zEmail)
@@ -839,8 +841,7 @@ namespace NanaZip::ShellExtension
                         std::wstring(
                             TranslatedString.Ptr(),
                             TranslatedString.Len()),
-                        CommandID::CompressTo7zEmail,
-                        ContextMenuElimDup));
+                        CommandID::CompressTo7zEmail));
             }
 
             if (ContextMenuFlags & NContextMenuFlags::kCompressToZipEmail)
@@ -853,8 +854,7 @@ namespace NanaZip::ShellExtension
                         std::wstring(
                             TranslatedString.Ptr(),
                             TranslatedString.Len()),
-                        CommandID::CompressToZipEmail,
-                        ContextMenuElimDup));
+                        CommandID::CompressToZipEmail));
             }
 
             if (ContextMenuFlags & NContextMenuFlags::kCRC)
@@ -868,32 +868,27 @@ namespace NanaZip::ShellExtension
                 this->m_SubCommands.push_back(
                     winrt::make<ExplorerCommandBase>(
                         L"CRC-32",
-                        CommandID::HashCRC32,
-                        ContextMenuElimDup));
+                        CommandID::HashCRC32));
 
                 this->m_SubCommands.push_back(
                     winrt::make<ExplorerCommandBase>(
                         L"CRC-64",
-                        CommandID::HashCRC64,
-                        ContextMenuElimDup));
+                        CommandID::HashCRC64));
 
                 this->m_SubCommands.push_back(
                     winrt::make<ExplorerCommandBase>(
                         L"SHA-1",
-                        CommandID::HashSHA1,
-                        ContextMenuElimDup));
+                        CommandID::HashSHA1));
 
                 this->m_SubCommands.push_back(
                     winrt::make<ExplorerCommandBase>(
                         L"SHA-256",
-                        CommandID::HashSHA256,
-                        ContextMenuElimDup));
+                        CommandID::HashSHA256));
 
                 this->m_SubCommands.push_back(
                     winrt::make<ExplorerCommandBase>(
                         L"*",
-                        CommandID::HashAll,
-                        ContextMenuElimDup));
+                        CommandID::HashAll));
             }
         }
 

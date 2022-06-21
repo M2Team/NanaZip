@@ -67,6 +67,7 @@ public:
   template <class Q>
   HRESULT QueryInterface(REFGUID iid, Q** pp) const throw()
   {
+    // if (*pp) throw 20220216; // for debug
     return _p->QueryInterface(iid, (void**)pp);
   }
 };
@@ -107,7 +108,7 @@ private:
   // CMyComBSTR(int nSize) { m_str = ::SysAllocStringLen(NULL, nSize); }
   // CMyComBSTR(int nSize, LPCOLESTR sz) { m_str = ::SysAllocStringLen(sz, nSize);  }
   // CMyComBSTR(const CMyComBSTR& src) { m_str = src.MyCopy(); }
-  
+
   /*
   CMyComBSTR(REFGUID src)
   {
@@ -117,7 +118,7 @@ private:
     CoTaskMemFree(szGuid);
   }
   */
-  
+
   /*
   CMyComBSTR& operator=(const CMyComBSTR& src)
   {
@@ -130,14 +131,14 @@ private:
     return *this;
   }
   */
-  
+
   CMyComBSTR& operator=(LPCOLESTR src)
   {
     ::SysFreeString(m_str);
     m_str = ::SysAllocString(src);
     return *this;
   }
-  
+
   unsigned Len() const { return ::SysStringLen(m_str); }
 
   BSTR MyCopy() const
@@ -152,7 +153,7 @@ private:
     return res;
     */
   }
-  
+
   /*
   void Attach(BSTR src) { m_str = src; }
   BSTR Detach()

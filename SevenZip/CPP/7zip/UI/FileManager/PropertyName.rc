@@ -97,4 +97,11 @@ BEGIN
   IDS_PROP_READ_ONLY    "Read-only"
   IDS_PROP_OUT_NAME     "Out Name"
   IDS_PROP_COPY_LINK    "Copy Link"
+  IDS_PROP_ARC_FILE_NAME "ArcFileName"
+  IDS_PROP_IS_HASH      "IsHash"
+  IDS_PROP_CHANGE_TIME  "Metadata Changed"
+  IDS_PROP_USER_ID      "User ID"
+  IDS_PROP_GROUP_ID     "Group ID"
+  IDS_PROP_DEVICE_MAJOR "Device Major"
+  IDS_PROP_DEVICE_MINOR "Device Minor"
 END

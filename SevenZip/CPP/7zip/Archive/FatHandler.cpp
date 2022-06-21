@@ -51,13 +51,13 @@ struct CHeader
   Byte SectorSizeLog;
   Byte SectorsPerClusterLog;
   Byte ClusterSizeLog;
-  
+
   UInt16 SectorsPerTrack;
   UInt16 NumHeads;
   UInt32 NumHiddenSectors;
 
   bool VolFieldsDefined;
-  
+
   UInt32 VolId;
   // Byte VolName[11];
   // Byte FileSys[8];
@@ -111,13 +111,13 @@ static int GetLog(UInt32 num)
 
 static const UInt32 kHeaderSize = 512;
 
-API_FUNC_static_IsArc IsArc_Fat(const Byte *p, size_t size)
+API_FUNC_IsArc IsArc_Fat(const Byte *p, size_t size);
+API_FUNC_IsArc IsArc_Fat(const Byte *p, size_t size)
 {
   if (size < kHeaderSize)
     return k_IsArc_Res_NEED_MORE;
   CHeader h;
   return h.Parse(p) ? k_IsArc_Res_YES : k_IsArc_Res_NO;
-}
 }
 
 bool CHeader::Parse(const Byte *p)
@@ -243,7 +243,7 @@ bool CHeader::Parse(const Byte *p)
     return false;
   UInt32 numDataSectors = NumSectors - DataSector;
   UInt32 numClusters = numDataSectors >> SectorsPerClusterLog;
-  
+
   BadCluster = 0x0FFFFFF7;
   if (numClusters < 0xFFF5)
   {
@@ -296,7 +296,7 @@ static unsigned CopyAndTrim(char *dest, const char *src, unsigned size, bool toL
         dest[i] = (char)(c + 0x20);
     }
   }
-  
+
   for (unsigned i = size;;)
   {
     if (i == 0)
@@ -471,7 +471,7 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
   UString curName;
   int checkSum = -1;
   int numLongRecords = -1;
-  
+
   for (UInt32 pos = blockSize;; pos += 32)
   {
     if (pos == blockSize)
@@ -501,12 +501,12 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
       }
       else if (sectorIndex++ >= Header.NumRootDirSectors)
         break;
-      
+
       RINOK(ReadStream_FALSE(InStream, ByteBuf, blockSize));
     }
-  
+
     const Byte *p = ByteBuf + pos;
-    
+
     if (p[0] == 0)
     {
       /*
@@ -516,14 +516,14 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
       */
       break;
     }
-    
+
     if (p[0] == 0xE5)
     {
       if (numLongRecords > 0)
         return S_FALSE;
       continue;
     }
-    
+
     Byte attrib = p[11];
     if ((attrib & 0x3F) == 0xF)
     {
@@ -543,12 +543,12 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
         return S_FALSE;
 
       numLongRecords--;
-      
+
       if (p[12] == 0)
       {
         wchar_t nameBuf[14];
         wchar_t *dest;
-        
+
         dest = AddSubStringToName(nameBuf, p + 1, 5);
         dest = AddSubStringToName(dest, p + 14, 6);
         AddSubStringToName(dest, p + 28, 2);
@@ -846,17 +846,18 @@ static const CStatProp kArcProps[] =
 IMP_IInArchive_Props
 IMP_IInArchive_ArcProps_WITH_NAME
 
+
 static void FatTimeToProp(UInt32 dosTime, UInt32 ms10, NWindows::NCOM::CPropVariant &prop)
 {
   FILETIME localFileTime, utc;
-  if (NWindows::NTime::DosTimeToFileTime(dosTime, localFileTime))
+  if (NWindows::NTime::DosTime_To_FileTime(dosTime, localFileTime))
     if (LocalFileTimeToFileTime(&localFileTime, &utc))
     {
       UInt64 t64 = (((UInt64)utc.dwHighDateTime) << 32) + utc.dwLowDateTime;
       t64 += ms10 * 100000;
       utc.dwLowDateTime = (DWORD)t64;
       utc.dwHighDateTime = (DWORD)(t64 >> 32);
-      prop = utc;
+      prop.SetAsTimeFrom_FT_Prec(utc, k_PropVar_TimePrec_Base + 2);
     }
 }
 
@@ -892,7 +893,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
     case kpidPhySize: prop = PhySize; break;
     case kpidFreeSpace: prop = (UInt64)NumFreeClusters << Header.ClusterSizeLog; break;
     case kpidHeadersSize: prop = GetHeadersSize(); break;
-    case kpidMTime: if (VolItemDefined) FatTimeToProp(VolItem.MTime, 0, prop); break;
+    case kpidMTime: if (VolItemDefined) PropVariant_SetFrom_DosTime(prop, VolItem.MTime); break;
     case kpidShortComment:
     case kpidVolumeName: if (VolItemDefined) prop = VolItem.GetVolName(); break;
     case kpidNumFats: if (Header.NumFats != 2) prop = Header.NumFats; break;
@@ -920,9 +921,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidPath: prop = GetItemPath(index); break;
     case kpidShortName: prop = item.GetShortName(); break;
     case kpidIsDir: prop = item.IsDir(); break;
-    case kpidMTime: FatTimeToProp(item.MTime, 0, prop); break;
+    case kpidMTime: PropVariant_SetFrom_DosTime(prop, item.MTime); break;
     case kpidCTime: FatTimeToProp(item.CTime, item.CTime2, prop); break;
-    case kpidATime: FatTimeToProp(((UInt32)item.ADate << 16), 0, prop); break;
+    case kpidATime: PropVariant_SetFrom_DosTime(prop, ((UInt32)item.ADate << 16)); break;
     case kpidAttrib: prop = (UInt32)item.Attrib; break;
     case kpidSize: if (!item.IsDir()) prop = item.Size; break;
     case kpidPackSize: if (!item.IsDir()) prop = Header.GetFilePackSize(item.Size); break;
@@ -983,7 +984,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 

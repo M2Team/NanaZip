@@ -513,6 +513,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>Somente-Leitura</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Copiar Link</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Metadados Mudados</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Opções</value>
   </data>
@@ -789,6 +795,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>Restaurar a segurança do arquivo</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Propagar o fluxo do Zone.Id:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Pros arquivos do Office</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Confirmar a Substituição dos Arquivos</value>
   </data>
@@ -1022,6 +1034,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>Sólido</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Tempo</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Precisão do tempo:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Armazenar o tempo de modificação</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Armazenar o tempo da criação</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Armazenar o tempo do último acesso</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Definir o tempo do arquivo compactado no tempo do arquivo mais recente</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Não mudar os arquivos de origem do tempo do último acesso</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>segs</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Copiar</value>

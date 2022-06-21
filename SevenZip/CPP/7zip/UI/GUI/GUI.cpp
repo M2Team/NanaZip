@@ -75,6 +75,8 @@ extern
 bool g_LVN_ITEMACTIVATE_Support;
 bool g_LVN_ITEMACTIVATE_Support = true;
 
+DECLARE_AND_SET_CLIENT_VERSION_VAR
+
 static void ErrorMessage(LPCWSTR message)
 {
   MessageBoxW(NULL, message, L"NanaZip", MB_ICONERROR | MB_OK);
@@ -135,7 +137,7 @@ static int Main2()
 
   CREATE_CODECS_OBJECT
 
-  codecs->CaseSensitiveChange = options.CaseSensitiveChange;
+  codecs->CaseSensitive_Change = options.CaseSensitive_Change;
   codecs->CaseSensitive = options.CaseSensitive;
   ThrowException_if_Error(codecs->Load());
   Codecs_AddHashArcHandler(codecs);

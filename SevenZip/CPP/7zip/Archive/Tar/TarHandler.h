@@ -9,7 +9,7 @@
 
 #include "../../Compress/CopyCoder.h"
 
-#include "../IArchive.h"
+#include "../Common/HandlerOut.h"
 
 #include "TarIn.h"
 
@@ -29,31 +29,26 @@ public:
   CMyComPtr<IInStream> _stream;
   CMyComPtr<ISequentialInStream> _seqStream;
 private:
-  UInt32 _curIndex;
-  bool _latestIsRead;
-  CItemEx _latestItem;
-
-  UInt64 _phySize;
-  UInt64 _headersSize;
-  bool _phySizeDefined;
-  EErrorType _error;
-  bool _warning;
   bool _isArc;
-
-  // bool _isSparse;
-  bool _thereIsPaxExtendedHeader;
-
+  bool _posixMode_WasForced;
+  bool _posixMode;
   bool _forceCodePage;
   UInt32 _specifiedCodePage;
   UInt32 _curCodePage;
   UInt32 _openCodePage;
-
+  // CTimeOptions TimeOptions;
+  CHandlerTimeOptions _handlerTimeOptions;
   CEncodingCharacts _encodingCharacts;
+
+  UInt32 _curIndex;
+  bool _latestIsRead;
+  CItemEx _latestItem;
+
+  CArchive _arc;
 
   NCompress::CCopyCoder *copyCoderSpec;
   CMyComPtr<ICompressCoder> copyCoder;
 
-  HRESULT ReadItem2(ISequentialInStream *stream, bool &filled, CItemEx &itemInfo);
   HRESULT Open2(IInStream *stream, IArchiveOpenCallback *callback);
   HRESULT SkipTo(UInt32 index);
   void TarStringToUnicode(const AString &s, NWindows::NCOM::CPropVariant &prop, bool toOs = false) const;

@@ -27,7 +27,7 @@ namespace NArchive {
 namespace NVhd {
 
 #define SIGNATURE { 'c', 'o', 'n', 'e', 'c', 't', 'i', 'x', 0, 0 }
-  
+
 static const unsigned kSignatureSize = 10;
 static const Byte kSignature[kSignatureSize] = SIGNATURE;
 
@@ -450,7 +450,7 @@ HRESULT CHandler::Open3()
     if (locator.DataLen != 0)
       UpdatePhySize(locator.DataOffset + locator.DataLen);
   }
-  
+
   if (Dyn.NumBlocks >= (UInt32)1 << 31)
     return S_FALSE;
   if (Footer.CurrentSize == 0)
@@ -622,7 +622,7 @@ static const Byte kProps[] =
   kpidSize,
   kpidPackSize,
   kpidCTime
-  
+
   /*
   { kpidNumCyls, VT_UI4},
   { kpidNumHeads, VT_UI4},
@@ -775,9 +775,9 @@ HRESULT CHandler::Open2(IInStream *stream, CHandler *child, IArchiveOpenCallback
   Stream = stream;
   if (level > (1 << 12)) // Maybe we need to increase that limit
     return S_FALSE;
-  
+
   RINOK(Open3());
-  
+
   NumLevels = 1;
   if (child && memcmp(child->Dyn.ParentId, Footer.Id, 16) != 0)
     return S_FALSE;
@@ -786,7 +786,7 @@ HRESULT CHandler::Open2(IInStream *stream, CHandler *child, IArchiveOpenCallback
 
   bool useRelative;
   UString name;
-  
+
   if (!Dyn.RelativeParentNameFromLocator.IsEmpty())
   {
     useRelative = true;
@@ -797,7 +797,7 @@ HRESULT CHandler::Open2(IInStream *stream, CHandler *child, IArchiveOpenCallback
     useRelative = false;
     name = Dyn.ParentName;
   }
-  
+
   Dyn.RelativeNameWasUsed = useRelative;
 
   CMyComPtr<IArchiveOpenVolumeCallback> openVolumeCallback;
@@ -807,7 +807,7 @@ HRESULT CHandler::Open2(IInStream *stream, CHandler *child, IArchiveOpenCallback
   {
     CMyComPtr<IInStream> nextStream;
     HRESULT res = openVolumeCallback->GetStream(name, &nextStream);
-    
+
     if (res == S_FALSE)
     {
       if (useRelative && Dyn.ParentName != Dyn.RelativeParentNameFromLocator)
@@ -820,16 +820,16 @@ HRESULT CHandler::Open2(IInStream *stream, CHandler *child, IArchiveOpenCallback
 
     if (res != S_OK && res != S_FALSE)
       return res;
-    
+
     if (res == S_FALSE || !nextStream)
     {
       AddErrorMessage("Missing volume : ", name);
       return S_OK;
     }
-    
+
     Parent = new CHandler;
     ParentStream = Parent;
-    
+
     res = Parent->Open2(nextStream, this, openArchiveCallback, level + 1);
 
     if (res != S_OK)
@@ -921,7 +921,8 @@ STDMETHODIMP CHandler::GetStream(UInt32 /* index */, ISequentialInStream **strea
     CLimitedInStream *streamSpec = new CLimitedInStream;
     CMyComPtr<ISequentialInStream> streamTemp = streamSpec;
     streamSpec->SetStream(Stream);
-    streamSpec->InitAndSeek(0, Footer.CurrentSize);
+    // fixme : check (startOffset = 0)
+    streamSpec->InitAndSeek(_startOffset, Footer.CurrentSize);
     RINOK(streamSpec->SeekToStart());
     *stream = streamTemp.Detach();
     return S_OK;

@@ -32,7 +32,7 @@ static const UInt32 kBufSize = (1 << 20);
 struct CBuf
 {
   Byte *Buf;
-  
+
   CBuf(): Buf(0) {}
   ~CBuf() { ::MidFree(Buf); }
   bool Alloc()
@@ -52,7 +52,7 @@ struct CItem
   UInt32 Attrib;
   UInt32 Time;
   AString Name;
-  
+
   unsigned Order;
   unsigned MemInMB;
   unsigned Ver;
@@ -76,7 +76,7 @@ HRESULT CItem::ReadHeader(ISequentialInStream *s, UInt32 &headerSize)
   Ver = info >> 12;
 
   if (Ver < 6 || Ver > 11) return S_FALSE;
- 
+
   UInt32 nameLen = GetUi16(h + 10);
   Restor = nameLen >> 14;
   if (Restor > 2)
@@ -174,7 +174,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIAN
     {
       // time can be in Unix format ???
       FILETIME utc;
-      if (NTime::DosTimeToFileTime(_item.Time, utc))
+      if (NTime::DosTime_To_FileTime(_item.Time, utc))
         prop = utc;
       break;
     }
@@ -225,7 +225,7 @@ struct CPpmdCpp
   unsigned Ver;
   CPpmd7 _ppmd7;
   CPpmd8 _ppmd8;
-  
+
   CPpmdCpp(unsigned version)
   {
     Ver = version;
@@ -254,7 +254,7 @@ struct CPpmdCpp
     else
       Ppmd8_Init(&_ppmd8, order, restor);;
   }
-    
+
   bool InitRc(CByteInBufWrap *inStream)
   {
     if (Ver == 7)
@@ -315,17 +315,17 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   CPpmdCpp ppmd(_item.Ver);
   if (!ppmd.Alloc(_item.MemInMB))
     return E_OUTOFMEMORY;
-  
+
   Int32 opRes = NExtract::NOperationResult::kUnsupportedMethod;
 
   if (_item.IsSupported())
   {
     opRes = NExtract::NOperationResult::kDataError;
-    
+
     ppmd.Init(_item.Order, _item.Restor);
     inBuf.Init();
     UInt64 outSize = 0;
-    
+
     if (ppmd.InitRc(&inBuf) && !inBuf.Extra && inBuf.Res == S_OK)
     for (;;)
     {
@@ -379,10 +379,10 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         break;
       }
     }
-    
+
     RINOK(inBuf.Res);
   }
-  
+
   realOutStream.Release();
   return extractCallback->SetOperationResult(opRes);
 }

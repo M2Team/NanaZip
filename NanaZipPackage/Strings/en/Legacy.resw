@@ -513,6 +513,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>Read-only</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Copy Link</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Metadata Changed</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Options</value>
   </data>
@@ -789,6 +795,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>Restore file security</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Propagate Zone.Id stream:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>For Office files</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Confirm File Replace</value>
   </data>
@@ -1022,6 +1034,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>Solid</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Timestamp precision:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Store modification time</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Store creation time</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Store last access time</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Set archive time to latest file time</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Do not change source files last access time</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Copy</value>

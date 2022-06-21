@@ -30,11 +30,12 @@ static const CUInt32PCharPair g_ExtraTypes[] =
 {
   { NExtraID::kZip64, "Zip64" },
   { NExtraID::kNTFS, "NTFS" },
+  { NExtraID::kUnix0, "UNIX" },
   { NExtraID::kStrongEncrypt, "StrongCrypto" },
   { NExtraID::kUnixTime, "UT" },
-  { NExtraID::kUnixExtra, "UX" },
-  { NExtraID::kUnix2Extra, "Ux" },
-  { NExtraID::kUnix3Extra, "ux" },
+  { NExtraID::kUnix1, "UX" },
+  { NExtraID::kUnix2, "Ux" },
+  { NExtraID::kUnixN, "ux" },
   { NExtraID::kIzUnicodeComment, "uc" },
   { NExtraID::kIzUnicodeName, "up" },
   { NExtraID::kIzNtSecurityDescriptor, "SD" },
@@ -50,6 +51,23 @@ void CExtraSubBlock::PrintInfo(AString &s) const
     if (pair.Value == ID)
     {
       s += pair.Name;
+      if (ID == NExtraID::kUnixTime)
+      {
+        if (Data.Size() >= 1)
+        {
+          s += ':';
+          const Byte flags = Data[0];
+          if (flags & 1) s += 'M';
+          if (flags & 2) s += 'A';
+          if (flags & 4) s += 'C';
+          const UInt32 size = (UInt32)(Data.Size()) - 1;
+          if (size % 4 == 0)
+          {
+            s += ':';
+            s.Add_UInt32(size / 4);
+          }
+        }
+      }
       /*
       if (ID == NExtraID::kApkAlign && Data.Size() >= 2)
       {
@@ -119,7 +137,7 @@ bool CExtraSubBlock::ExtractNtfsTime(unsigned index, FILETIME &ft) const
     size -= 4;
     if (attrSize > size)
       attrSize = size;
-    
+
     if (tag == NNtfsExtra::kTagTime && attrSize >= 24)
     {
       p += 8 * index;
@@ -133,14 +151,22 @@ bool CExtraSubBlock::ExtractNtfsTime(unsigned index, FILETIME &ft) const
   return false;
 }
 
-bool CExtraSubBlock::ExtractUnixTime(bool isCentral, unsigned index, UInt32 &res) const
+bool CExtraSubBlock::Extract_UnixTime(bool isCentral, unsigned index, UInt32 &res) const
 {
+  /* Info-Zip :
+     The central-header extra field contains the modification
+     time only, or no timestamp at all.
+     Size of Data is used to flag its presence or absence
+     If "Flags" indicates that Modtime is present in the local header
+     field, it MUST be present in the central header field, too
+  */
+
   res = 0;
   UInt32 size = (UInt32)Data.Size();
   if (ID != NExtraID::kUnixTime || size < 5)
     return false;
   const Byte *p = (const Byte *)Data;
-  Byte flags = *p++;
+  const Byte flags = *p++;
   size--;
   if (isCentral)
   {
@@ -168,18 +194,35 @@ bool CExtraSubBlock::ExtractUnixTime(bool isCentral, unsigned index, UInt32 &res
 }
 
 
-bool CExtraSubBlock::ExtractUnixExtraTime(unsigned index, UInt32 &res) const
+// Info-ZIP's abandoned "Unix1 timestamps & owner ID info"
+
+bool CExtraSubBlock::Extract_Unix01_Time(unsigned index, UInt32 &res) const
 {
   res = 0;
-  const size_t size = Data.Size();
-  unsigned offset = index * 4;
-  if (ID != NExtraID::kUnixExtra || size < offset + 4)
+  const unsigned offset = index * 4;
+  if (Data.Size() < offset + 4)
+    return false;
+  if (ID != NExtraID::kUnix0 &&
+      ID != NExtraID::kUnix1)
     return false;
   const Byte *p = (const Byte *)Data + offset;
   res = GetUi32(p);
   return true;
 }
 
+/*
+// PKWARE's Unix "extra" is similar to Info-ZIP's abandoned "Unix1 timestamps"
+bool CExtraSubBlock::Extract_Unix_Time(unsigned index, UInt32 &res) const
+{
+  res = 0;
+  const unsigned offset = index * 4;
+  if (ID != NExtraID::kUnix0 || Data.Size() < offset)
+    return false;
+  const Byte *p = (const Byte *)Data + offset;
+  res = GetUi32(p);
+  return true;
+}
+*/
 
 bool CExtraBlock::GetNtfsTime(unsigned index, FILETIME &ft) const
 {
@@ -199,23 +242,24 @@ bool CExtraBlock::GetUnixTime(bool isCentral, unsigned index, UInt32 &res) const
     {
       const CExtraSubBlock &sb = SubBlocks[i];
       if (sb.ID == NFileHeader::NExtraID::kUnixTime)
-        return sb.ExtractUnixTime(isCentral, index, res);
+        return sb.Extract_UnixTime(isCentral, index, res);
     }
   }
-  
+
   switch (index)
   {
     case NUnixTime::kMTime: index = NUnixExtra::kMTime; break;
     case NUnixTime::kATime: index = NUnixExtra::kATime; break;
     default: return false;
   }
-  
+
   {
     FOR_VECTOR (i, SubBlocks)
     {
       const CExtraSubBlock &sb = SubBlocks[i];
-      if (sb.ID == NFileHeader::NExtraID::kUnixExtra)
-        return sb.ExtractUnixExtraTime(index, res);
+      if (sb.ID == NFileHeader::NExtraID::kUnix0 ||
+          sb.ID == NFileHeader::NExtraID::kUnix1)
+        return sb.Extract_Unix01_Time(index, res);
     }
   }
   return false;
@@ -232,7 +276,7 @@ bool CItem::IsDir() const
   // FIXME: we can check InfoZip UTF-8 name at first.
   if (NItemName::HasTailSlash(Name, GetCodePage()))
     return true;
-  
+
   Byte hostOS = GetHostOS();
 
   if (Size == 0 && PackSize == 0 && !Name.IsEmpty() && Name.Back() == '\\')
@@ -252,7 +296,7 @@ bool CItem::IsDir() const
 
   if (!FromCentral)
     return false;
-  
+
   UInt16 highAttrib = (UInt16)((ExternalAttrib >> 16 ) & 0xFFFF);
 
   switch (hostOS)
@@ -308,9 +352,9 @@ UInt32 CItem::GetWinAttrib() const
             1) check 0x8000 marker. In that case we must add 0x8000 marker here.
             2) check that high 4 bits (file type bits in posix field) of attributes are not zero.
         */
-        
+
         winAttrib = ExternalAttrib & 0xFFFF0000;
-        
+
         // #ifndef _WIN32
         winAttrib |= 0x8000; // add posix mode marker
         // #endif
@@ -354,13 +398,13 @@ bool CExtraSubBlock::CheckIzUnicode(const AString &s) const
       return false;
   return Check_UTF8_Buf((const char *)(const void *)p, size, false);
 }
-  
+
 
 void CItem::GetUnicodeString(UString &res, const AString &s, bool isComment, bool useSpecifiedCodePage, UINT codePage) const
 {
   bool isUtf8 = IsUtf8();
   // bool ignore_Utf8_Errors = true;
-  
+
   if (!isUtf8)
   {
     {
@@ -368,7 +412,7 @@ void CItem::GetUnicodeString(UString &res, const AString &s, bool isComment, boo
           NFileHeader::NExtraID::kIzUnicodeComment:
           NFileHeader::NExtraID::kIzUnicodeName;
       const CObjectVector<CExtraSubBlock> &subBlocks = GetMainExtra().SubBlocks;
-      
+
       FOR_VECTOR (i, subBlocks)
       {
         const CExtraSubBlock &sb = subBlocks[i];
@@ -386,7 +430,7 @@ void CItem::GetUnicodeString(UString &res, const AString &s, bool isComment, boo
         }
       }
     }
-    
+
     if (useSpecifiedCodePage)
       isUtf8 = (codePage == CP_UTF8);
     #ifdef _WIN32
@@ -404,14 +448,14 @@ void CItem::GetUnicodeString(UString &res, const AString &s, bool isComment, boo
     }
     #endif
   }
-  
-  
+
+
   if (isUtf8)
   {
     ConvertUTF8ToUnicode(s, res);
     return;
   }
-  
+
   MultiByteToUnicodeString2(res, s, useSpecifiedCodePage ? codePage : GetCodePage());
 }
 

@@ -3,6 +3,7 @@
 #include "StdAfx.h"
 
 #include <time.h>
+// #include <stdio.h>
 
 #include "../../../Common/Wildcard.h"
 
@@ -14,29 +15,89 @@
 using namespace NWindows;
 using namespace NTime;
 
-static int MyCompareTime(NFileTimeType::EEnum fileTimeType, const FILETIME &time1, const FILETIME &time2)
-{
-  switch (fileTimeType)
+
+/*
+  a2.Prec =
   {
-    case NFileTimeType::kWindows:
-      return ::CompareFileTime(&time1, &time2);
-    case NFileTimeType::kUnix:
-      {
-        UInt32 unixTime1, unixTime2;
-        FileTimeToUnixTime(time1, unixTime1);
-        FileTimeToUnixTime(time2, unixTime2);
-        return MyCompare(unixTime1, unixTime2);
-      }
-    case NFileTimeType::kDOS:
-      {
-        UInt32 dosTime1, dosTime2;
-        FileTimeToDosTime(time1, dosTime1);
-        FileTimeToDosTime(time2, dosTime2);
-        return MyCompare(dosTime1, dosTime2);
-      }
+    0 (k_PropVar_TimePrec_0):
+       if GetProperty(kpidMTime) returned 0 and
+          GetProperty(kpidTimeType) did not returned VT_UI4.
+       7z, wim, tar in 7-Zip before v21)
+    in that case we use
+      (prec) that is set by IOutArchive::GetFileTimeType()
   }
-  throw 4191618;
+*/
+
+static int MyCompareTime(unsigned prec, const CFiTime &f1, const CArcTime &a2)
+{
+  // except of precision, we also have limitation, when timestamp is out of range
+
+  /* if (Prec) in archive item is defined, then use global (prec) */
+  if (a2.Prec != k_PropVar_TimePrec_0)
+    prec = a2.Prec;
+
+  CArcTime a1;
+  a1.Set_From_FiTime(f1);
+  /* Set_From_FiTime() must set full form precision:
+     k_PropVar_TimePrec_Base + numDigits
+     windows: 7 digits, non-windows: 9 digits */
+
+  if (prec == k_PropVar_TimePrec_DOS)
+  {
+    const UInt32 dosTime1 = a1.Get_DosTime();
+    const UInt32 dosTime2 = a2.Get_DosTime();
+    return MyCompare(dosTime1, dosTime2);
+  }
+
+  if (prec == k_PropVar_TimePrec_Unix)
+  {
+    const Int64 u2 = FileTime_To_UnixTime64(a2.FT);
+    if (u2 == 0 || u2 == (UInt32)0xFFFFFFFF)
+    {
+      // timestamp probably was saturated in archive to 32-bit
+      // so we use saturated 32-bit value for disk file too.
+      UInt32 u1;
+      FileTime_To_UnixTime(a1.FT, u1);
+      const UInt32 u2_32 = (UInt32)u2;
+      return MyCompare(u1, u2_32);
+    }
+
+    const Int64 u1 = FileTime_To_UnixTime64(a1.FT);
+    return MyCompare(u1, u2);
+    // prec = k_PropVar_TimePrec_Base; // for debug
+  }
+
+  if (prec == k_PropVar_TimePrec_0)
+    prec = k_PropVar_TimePrec_Base + 7;
+  else if (prec == k_PropVar_TimePrec_HighPrec)
+    prec = k_PropVar_TimePrec_Base + 9;
+  else if (prec < k_PropVar_TimePrec_Base)
+    prec = k_PropVar_TimePrec_Base;
+  else if (prec > k_PropVar_TimePrec_Base + 9)
+    prec = k_PropVar_TimePrec_Base + 7;
+
+  // prec now is full form: k_PropVar_TimePrec_Base + numDigits;
+  if (prec > a1.Prec && a1.Prec >= k_PropVar_TimePrec_Base)
+    prec = a1.Prec;
+
+  const unsigned numDigits = prec - k_PropVar_TimePrec_Base;
+  if (numDigits >= 7)
+  {
+    const int comp = CompareFileTime(&a1.FT, &a2.FT);
+    if (comp != 0 || numDigits == 7)
+      return comp;
+    return MyCompare(a1.Ns100, a2.Ns100);
+  }
+  UInt32 d = 1;
+  for (unsigned k = numDigits; k < 7; k++)
+    d *= 10;
+  const UInt64 v1 = a1.Get_FILETIME_as_UInt64() / d * d;
+  const UInt64 v2 = a2.Get_FILETIME_as_UInt64() / d * d;
+  // printf("\ndelta=%d numDigits=%d\n", (unsigned)(v1- v2), numDigits);
+  return MyCompare(v1, v2);
 }
+
+
 
 static const char * const k_Duplicate_inArc_Message = "Duplicate filename in archive:";
 static const char * const k_Duplicate_inDir_Message = "Duplicate filename on disk:";
@@ -64,8 +125,8 @@ static int CompareArcItemsBase(const CArcItem &ai1, const CArcItem &ai2)
 
 static int CompareArcItems(const unsigned *p1, const unsigned *p2, void *param)
 {
-  unsigned i1 = *p1;
-  unsigned i2 = *p2;
+  const unsigned i1 = *p1;
+  const unsigned i2 = *p2;
   const CObjectVector<CArcItem> &arcItems = *(const CObjectVector<CArcItem> *)param;
   int res = CompareArcItemsBase(arcItems[i1], arcItems[i2]);
   if (res != 0)
@@ -80,10 +141,10 @@ void GetUpdatePairInfoList(
     CRecordVector<CUpdatePair> &updatePairs)
 {
   CUIntVector dirIndices, arcIndices;
-  
-  unsigned numDirItems = dirItems.Items.Size();
-  unsigned numArcItems = arcItems.Size();
-  
+
+  const unsigned numDirItems = dirItems.Items.Size();
+  const unsigned numArcItems = arcItems.Size();
+
   CIntArr duplicatedArcItem(numArcItems);
   {
     int *vals = &duplicatedArcItem[0];
@@ -125,25 +186,25 @@ void GetUpdatePairInfoList(
         ThrowError(k_Duplicate_inDir_Message, s1, s2);
     }
   }
-  
+
   unsigned dirIndex = 0;
   unsigned arcIndex = 0;
 
   int prevHostFile = -1;
   const UString *prevHostName = NULL;
-  
+
   while (dirIndex < numDirItems || arcIndex < numArcItems)
   {
     CUpdatePair pair;
-    
+
     int dirIndex2 = -1;
     int arcIndex2 = -1;
     const CDirItem *di = NULL;
     const CArcItem *ai = NULL;
-    
+
     int compareResult = -1;
     const UString *name = NULL;
-    
+
     if (dirIndex < numDirItems)
     {
       dirIndex2 = (int)dirIndices[dirIndex];
@@ -165,7 +226,7 @@ void GetUpdatePairInfoList(
         }
       }
     }
-    
+
     if (compareResult < 0)
     {
       name = &dirNames[(unsigned)dirIndex2];
@@ -184,34 +245,40 @@ void GetUpdatePairInfoList(
     }
     else
     {
-      int dupl = duplicatedArcItem[arcIndex];
+      const int dupl = duplicatedArcItem[arcIndex];
       if (dupl != 0)
         ThrowError(k_Duplicate_inArc_Message, ai->Name, arcItems[arcIndices[(unsigned)((int)arcIndex + dupl)]].Name);
 
       name = &dirNames[(unsigned)dirIndex2];
       if (!ai->Censored)
         ThrowError(k_NotCensoredCollision_Message, *name, ai->Name);
-      
+
       pair.DirIndex = dirIndex2;
       pair.ArcIndex = arcIndex2;
 
-      switch (ai->MTimeDefined ? MyCompareTime(
-          ai->TimeType != - 1 ? (NFileTimeType::EEnum)ai->TimeType : fileTimeType,
-          di->MTime, ai->MTime): 0)
+      int compResult = 0;
+      if (ai->MTime.Def)
+      {
+        compResult = MyCompareTime(fileTimeType, di->MTime, ai->MTime);
+      }
+      switch (compResult)
       {
         case -1: pair.State = NUpdateArchive::NPairState::kNewInArchive; break;
         case  1: pair.State = NUpdateArchive::NPairState::kOldInArchive; break;
         default:
-          pair.State = (ai->SizeDefined && di->Size == ai->Size) ?
+          pair.State = (ai->Size_Defined && di->Size == ai->Size) ?
               NUpdateArchive::NPairState::kSameFiles :
               NUpdateArchive::NPairState::kUnknowNewerFiles;
       }
-      
+
       dirIndex++;
       arcIndex++;
     }
-    
-    if ((di && di->IsAltStream) ||
+
+    if (
+       #ifdef _WIN32
+        (di && di->IsAltStream) ||
+       #endif
         (ai && ai->IsAltStream))
     {
       if (prevHostName)
@@ -227,7 +294,7 @@ void GetUpdatePairInfoList(
       prevHostFile = (int)updatePairs.Size();
       prevHostName = name;
     }
-    
+
     updatePairs.Add(pair);
   }
 

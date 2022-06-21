@@ -191,6 +191,8 @@ static const Byte kProps[] =
   kpidVolumeIndex,
   kpidOffset
   // kpidIsAltStream
+  // , kpidChangeTime // for debug
+  // , 255  // for debug
 };
 
 static const Byte kArcProps[] =
@@ -348,6 +350,34 @@ STDMETHODIMP CHandler::GetNumberOfItems(UInt32 *numItems)
   return S_OK;
 }
 
+
+static bool NtfsUnixTimeToProp(bool fromCentral,
+    const CExtraBlock &extra,
+    unsigned ntfsIndex, unsigned unixIndex, NWindows::NCOM::CPropVariant &prop)
+{
+  {
+    FILETIME ft;
+    if (extra.GetNtfsTime(ntfsIndex, ft))
+    {
+      PropVariant_SetFrom_NtfsTime(prop, ft);
+      return true;
+    }
+  }
+  {
+    UInt32 unixTime = 0;
+    if (!extra.GetUnixTime(fromCentral, unixIndex, unixTime))
+      return false;
+    /*
+    // we allow unixTime == 0
+    if (unixTime == 0)
+      return false;
+    */
+    PropVariant_SetFrom_UnixTime(prop, unixTime);
+    return true;
+  }
+}
+
+
 STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *value)
 {
   COM_TRY_BEGIN
@@ -393,6 +423,30 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
 
     case kpidPackSize:  prop = item.PackSize; break;
 
+    case kpidCTime:
+      NtfsUnixTimeToProp(item.FromCentral, extra,
+          NFileHeader::NNtfsExtra::kCTime,
+          NFileHeader::NUnixTime::kCTime, prop);
+      break;
+
+    case kpidATime:
+      NtfsUnixTimeToProp(item.FromCentral, extra,
+          NFileHeader::NNtfsExtra::kATime,
+          NFileHeader::NUnixTime::kATime, prop);
+      break;
+
+    case kpidMTime:
+    {
+      if (!NtfsUnixTimeToProp(item.FromCentral, extra,
+          NFileHeader::NNtfsExtra::kMTime,
+          NFileHeader::NUnixTime::kMTime, prop))
+      {
+        if (item.Time != 0)
+          PropVariant_SetFrom_DosTime(prop, item.Time);
+      }
+      break;
+    }
+
     case kpidTimeType:
     {
       FILETIME ft;
@@ -400,7 +454,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       UInt32 type;
       if (extra.GetNtfsTime(NFileHeader::NNtfsExtra::kMTime, ft))
         type = NFileTimeType::kWindows;
-      else if (extra.GetUnixTime(true, NFileHeader::NUnixTime::kMTime, unixTime))
+      else if (extra.GetUnixTime(item.FromCentral, NFileHeader::NUnixTime::kMTime, unixTime))
         type = NFileTimeType::kUnix;
       else
         type = NFileTimeType::kDOS;
@@ -408,64 +462,28 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
     }
 
-    case kpidCTime:
+    /*
+    // for debug to get Dos time values:
+    case kpidChangeTime: if (item.Time != 0) PropVariant_SetFrom_DosTime(prop, item.Time); break;
+    // for debug
+    // time difference (dos - utc)
+    case 255:
     {
-      FILETIME utc;
-      bool defined = true;
-      if (!extra.GetNtfsTime(NFileHeader::NNtfsExtra::kCTime, utc))
+      if (NtfsUnixTimeToProp(item.FromCentral, extra,
+          NFileHeader::NNtfsExtra::kMTime,
+          NFileHeader::NUnixTime::kMTime, prop))
       {
-        UInt32 unixTime = 0;
-        if (extra.GetUnixTime(true, NFileHeader::NUnixTime::kCTime, unixTime))
-          NTime::UnixTimeToFileTime(unixTime, utc);
-        else
-          defined = false;
-      }
-      if (defined)
-        prop = utc;
-      break;
-    }
-
-    case kpidATime:
-    {
-      FILETIME utc;
-      bool defined = true;
-      if (!extra.GetNtfsTime(NFileHeader::NNtfsExtra::kATime, utc))
-      {
-        UInt32 unixTime = 0;
-        if (extra.GetUnixTime(true, NFileHeader::NUnixTime::kATime, unixTime))
-          NTime::UnixTimeToFileTime(unixTime, utc);
-        else
-          defined = false;
-      }
-      if (defined)
-        prop = utc;
-
-      break;
-    }
-
-    case kpidMTime:
-    {
-      FILETIME utc;
-      bool defined = true;
-      if (!extra.GetNtfsTime(NFileHeader::NNtfsExtra::kMTime, utc))
-      {
-        UInt32 unixTime = 0;
-        if (extra.GetUnixTime(true, NFileHeader::NUnixTime::kMTime, unixTime))
-          NTime::UnixTimeToFileTime(unixTime, utc);
-        else
+        FILETIME localFileTime;
+        if (item.Time != 0 && NTime::DosTime_To_FileTime(item.Time, localFileTime))
         {
-          FILETIME localFileTime;
-          if (item.Time == 0)
-            defined = false;
-          else if (!NTime::DosTimeToFileTime(item.Time, localFileTime) ||
-              !LocalFileTimeToFileTime(&localFileTime, &utc))
-            utc.dwHighDateTime = utc.dwLowDateTime = 0;
+          UInt64 t1 = FILETIME_To_UInt64(prop.filetime);
+          UInt64 t2 = FILETIME_To_UInt64(localFileTime);
+          prop.Set_Int64(t2 - t1);
         }
       }
-      if (defined)
-        prop = utc;
       break;
     }
+    */
 
     case kpidAttrib:  prop = item.GetWinAttrib(); break;
 
@@ -1149,7 +1167,18 @@ HRESULT CZipDecoder::Decode(
       AString_Wipe charPassword;
       if (password)
       {
-        UnicodeStringToMultiByte2(charPassword, (LPCOLESTR)password, CP_ACP);
+        /*
+        // 22.00: do we need UTF-8 passwords here ?
+        if (item.IsUtf8()) // 22.00
+        {
+          // throw 1;
+          ConvertUnicodeToUTF8((LPCOLESTR)password, charPassword);
+        }
+        else
+        */
+        {
+          UnicodeStringToMultiByte2(charPassword, (LPCOLESTR)password, CP_ACP);
+        }
         /*
         if (wzAesMode || pkAesMode)
         {
@@ -1372,6 +1401,8 @@ HRESULT CZipDecoder::Decode(
 
       if (id == NFileHeader::NCompressionMethod::kStore && item.IsEncrypted())
       {
+        // for debug : we can disable this code (kStore + 50), if we want to test CopyCoder+Filter
+        // here we use filter without CopyCoder
         readFromFilter = false;
 
         COutStreamWithPadPKCS7 *padStreamSpec = NULL;
@@ -1456,33 +1487,44 @@ HRESULT CZipDecoder::Decode(
               const UInt32 padSize = _pkAesDecoderSpec->GetPadSize((UInt32)processed);
               if (processed + padSize > coderPackSize)
                 truncatedError = true;
+              else if (processed + padSize < coderPackSize)
+                dataAfterEnd = true;
               else
               {
-                if (processed + padSize < coderPackSize)
-                  dataAfterEnd = true;
-                else
                 {
-                  // here we can PKCS7 padding data from reminder (it can be inside stream buffer in coder).
+                  // here we check PKCS7 padding data from reminder (it can be inside stream buffer in coder).
                   CMyComPtr<ICompressReadUnusedFromInBuf> readInStream;
                   coder->QueryInterface(IID_ICompressReadUnusedFromInBuf, (void **)&readInStream);
-                  if (readInStream)
+                  // CCopyCoder() for kStore doesn't read data outside of (item.Size)
+                  if (readInStream || id == NFileHeader::NCompressionMethod::kStore)
                   {
-                    // change pad size, it we support another block size in ZipStron
-                    // here we request more to detect error with data after end.
+                    // change pad size, if we support another block size in ZipStrong.
+                    // here we request more data to detect error with data after end.
                     const UInt32 kBufSize = NCrypto::NZipStrong::kAesPadAllign + 16;
                     Byte buf[kBufSize];
-                    UInt32 processedSize;
-                    RINOK(readInStream->ReadUnusedFromInBuf(buf, kBufSize, &processedSize));
+                    UInt32 processedSize = 0;
+                    if (readInStream)
+                    {
+                      RINOK(readInStream->ReadUnusedFromInBuf(buf, kBufSize, &processedSize));
+                    }
                     if (processedSize > padSize)
                       dataAfterEnd = true;
                     else
                     {
-                      if (ReadStream_FALSE(filterStream, buf + processedSize, padSize - processedSize) != S_OK)
-                        padError = true;
-                      else
-                      for (unsigned i = 0; i < padSize; i++)
-                        if (buf[i] != padSize)
-                          padError = true;
+                      size_t processedSize2 = kBufSize - processedSize;
+                      result = ReadStream(filterStream, buf + processedSize, &processedSize2);
+                      if (result == S_OK)
+                      {
+                        processedSize2 += processedSize;
+                        if (processedSize2 > padSize)
+                          dataAfterEnd = true;
+                        else if (processedSize2 < padSize)
+                          truncatedError = true;
+                        else
+                          for (unsigned i = 0; i < padSize; i++)
+                            if (buf[i] != padSize)
+                              padError = true;
+                      }
                     }
                   }
                 }

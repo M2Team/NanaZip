@@ -32,7 +32,7 @@ struct CUpdateItem
 {
   int IndexInArchive;
   unsigned IndexInClient;
-  
+
   UInt64 CTime;
   UInt64 ATime;
   UInt64 MTime;
@@ -50,7 +50,7 @@ struct CUpdateItem
   // int ParentSortIndexEnd;
 
   UInt32 Attrib;
-  
+
   bool NewData;
   bool NewProps;
 
@@ -61,6 +61,8 @@ struct CUpdateItem
   bool CTimeDefined;
   bool ATimeDefined;
   bool MTimeDefined;
+
+  // bool ATime_WasReadByAnalysis;
 
   // int SecureIndex; // 0 means (no_security)
 
@@ -76,6 +78,7 @@ struct CUpdateItem
       CTimeDefined(false),
       ATimeDefined(false),
       MTimeDefined(false)
+      // , ATime_WasReadByAnalysis(false)
       // SecureIndex(0)
       {}
   void SetDirStatusFromAttrib() { IsDir = ((Attrib & FILE_ATTRIBUTE_DIRECTORY) != 0); }
@@ -97,11 +100,16 @@ struct CUpdateOptions
   UInt64 NumSolidFiles;
   UInt64 NumSolidBytes;
   bool SolidExtension;
-  
+
   bool UseTypeSorting;
-  
+
   bool RemoveSfxBlock;
   bool MultiThreadMixer;
+
+  bool Need_CTime;
+  bool Need_ATime;
+  bool Need_MTime;
+  bool Need_Attrib;
 
   CUpdateOptions():
       Method(NULL),
@@ -114,7 +122,11 @@ struct CUpdateOptions
       SolidExtension(false),
       UseTypeSorting(true),
       RemoveSfxBlock(false),
-      MultiThreadMixer(true)
+      MultiThreadMixer(true),
+      Need_CTime(false),
+      Need_ATime(false),
+      Need_MTime(false),
+      Need_Attrib(false)
     {}
 };
 

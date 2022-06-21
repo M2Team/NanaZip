@@ -56,9 +56,9 @@ BSD (Mac OS X) variant:
 */
 
 static const unsigned kSignatureLen = 8;
-  
+
 #define SIGNATURE { '!', '<', 'a', 'r', 'c', 'h', '>', 0x0A }
-  
+
 static const Byte kSignature[kSignatureLen] = SIGNATURE;
 
 static const unsigned kNameSize = 16;
@@ -113,7 +113,7 @@ struct CItem
   UInt32 User;
   UInt32 Group;
   UInt32 Mode;
-  
+
   UInt64 HeaderPos;
   UInt64 HeaderSize;
 
@@ -127,11 +127,11 @@ struct CItem
 class CInArchive
 {
   CMyComPtr<IInStream> m_Stream;
-  
+
 public:
   UInt64 Position;
   ESubType SubType;
-  
+
   HRESULT GetNextItem(CItem &itemInfo, bool &filled);
   HRESULT Open(IInStream *inStream);
   HRESULT SkipData(UInt64 dataSize)
@@ -289,10 +289,10 @@ class CHandler:
   unsigned _numLibFiles;
   AString _errorMessage;
   bool _isArc;
-  
+
 
   void UpdateErrorMessage(const char *s);
-  
+
   HRESULT ParseLongNames(IInStream *stream);
   void ChangeDuplicateNames();
   int FindItem(UInt32 offset) const;
@@ -322,8 +322,8 @@ static const Byte kProps[] =
   kpidSize,
   kpidMTime,
   kpidPosixAttrib,
-  kpidUser,
-  kpidGroup
+  kpidUserId,
+  kpidGroupId
 };
 
 IMP_IInArchive_Props
@@ -347,7 +347,7 @@ HRESULT CHandler::ParseLongNames(IInStream *stream)
 
   CByteArr p(size);
   RINOK(ReadStream_FALSE(stream, p, size));
-  
+
   for (i = 0; i < _items.Size(); i++)
   {
     CItem &item2 = _items[i];
@@ -372,7 +372,7 @@ HRESULT CHandler::ParseLongNames(IInStream *stream)
     }
     item2.Name.SetFrom((const char *)(p + start), pos - start);
   }
-  
+
   _longNames_FileIndex = fileIndex;
   return S_OK;
 }
@@ -437,7 +437,7 @@ HRESULT CHandler::AddFunc(UInt32 offset, const Byte *data, size_t size, size_t &
       return S_FALSE;
   }
   while (data[i++] != 0);
-  
+
   AString &s = _libFiles[_numLibFiles];
   const AString &name = _items[fileIndex].Name;
   s += name;
@@ -467,7 +467,7 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
   size_t size = (size_t)item.Size;
   CByteArr p(size);
   RINOK(ReadStream_FALSE(stream, p, size));
- 
+
   size_t pos = 0;
 
   if (item.Name != "/")
@@ -485,7 +485,7 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
       namesStart += 4;
       if (namesStart > size || namesStart + namesSize != size)
         continue;
-      
+
       UInt32 numSymbols = tableSize >> 3;
       UInt32 i;
       for (i = 0; i < numSymbols; i++, pos += 8)
@@ -514,7 +514,7 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
     if (numSymbols > (size - pos) / 4)
       return S_FALSE;
     pos += 4 * numSymbols;
-    
+
     for (UInt32 i = 0; i < numSymbols; i++)
     {
       UInt32 offset = GetBe32(p + 4 + i * 4);
@@ -530,7 +530,7 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
     if (numMembers > (size - pos) / 4)
       return S_FALSE;
     pos += 4 * numMembers;
-    
+
     if (size - pos < 4)
       return S_FALSE;
     UInt32 numSymbols = GetUi32(p + pos);
@@ -539,7 +539,7 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
       return S_FALSE;
     size_t indexStart = pos;
     pos += 2 * numSymbols;
-    
+
     for (UInt32 i = 0; i < numSymbols; i++)
     {
       // index is 1-based. So 32-bit numSymbols field works as item[0]
@@ -606,7 +606,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream,
     _isArc = true;
 
     _subType = arc.SubType;
-    
+
     if (ParseLongNames(stream) != S_OK)
       UpdateErrorMessage("Long file names parsing error");
     if (_longNames_FileIndex >= 0)
@@ -734,15 +734,11 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidMTime:
     {
       if (item.MTime != 0)
-      {
-        FILETIME fileTime;
-        NTime::UnixTimeToFileTime(item.MTime, fileTime);
-        prop = fileTime;
-      }
+        PropVariant_SetFrom_UnixTime(prop, item.MTime);
       break;
     }
-    case kpidUser: if (item.User != 0) prop = item.User; break;
-    case kpidGroup: if (item.Group != 0) prop = item.Group; break;
+    case kpidUserId: if (item.User != 0) prop = item.User; break;
+    case kpidGroupId: if (item.Group != 0) prop = item.Group; break;
     case kpidPosixAttrib:
       if (item.TextFileIndex < 0)
         prop = item.Mode;
@@ -774,7 +770,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   extractCallback->SetTotal(totalSize);
 
   UInt64 currentTotalSize = 0;
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
@@ -799,7 +795,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(extractCallback->GetStream(index, &realOutStream, askMode));
     currentTotalSize += (item.TextFileIndex >= 0) ?
         (UInt64)_libFiles[(unsigned)item.TextFileIndex].Len() : item.Size;
-    
+
     if (!testMode && !realOutStream)
       continue;
     RINOK(extractCallback->PrepareOperation(askMode));

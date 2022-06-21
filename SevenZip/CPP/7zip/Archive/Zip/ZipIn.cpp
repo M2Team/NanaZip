@@ -465,7 +465,7 @@ API_FUNC_IsArc IsArc_Zip(const Byte *p, size_t size)
     {
       if (extraSize < 4)
       {
-        // NanaZip before 9.31 created incorrect WsAES Extra in folder's local headers.
+        // 7-Zip before 9.31 created incorrect WsAES Extra in folder's local headers.
         // so we return k_IsArc_Res_YES to support such archives.
         // return k_IsArc_Res_NO; // do we need to support such extra ?
         return k_IsArc_Res_YES;
@@ -1045,8 +1045,23 @@ bool CInArchive::ReadExtra(const CLocalItem &item, unsigned extraSize, CExtraBlo
 
         if (cdItem)
         {
-          if (isOK && ZIP64_IS_32_MAX(cdItem->LocalHeaderPos))
-            { if (size < 8) isOK = false; else { size -= 8; cdItem->LocalHeaderPos = ReadUInt64(); }}
+          if (isOK)
+          {
+            if (ZIP64_IS_32_MAX(cdItem->LocalHeaderPos))
+              { if (size < 8) isOK = false; else { size -= 8; cdItem->LocalHeaderPos = ReadUInt64(); }}
+            /*
+            else if (size == 8)
+            {
+              size -= 8;
+              const UInt64 v = ReadUInt64();
+              // soong_zip, an AOSP tool (written in the Go) writes incorrect value.
+              // we can ignore that minor error here
+              if (v != cdItem->LocalHeaderPos)
+                isOK = false; // ignore error
+              // isOK = false; // force error
+            }
+            */
+          }
 
           if (isOK && ZIP64_IS_16_MAX(cdItem->Disk))
             { if (size < 4) isOK = false; else { size -= 4; cdItem->Disk = ReadUInt32(); }}
@@ -1077,7 +1092,7 @@ bool CInArchive::ReadExtra(const CLocalItem &item, unsigned extraSize, CExtraBlo
   {
     ExtraMinorError = true;
     extra.MinorError = true;
-    // NanaZip before 9.31 created incorrect WsAES Extra in folder's local headers.
+    // 7-Zip before 9.31 created incorrect WsAES Extra in folder's local headers.
     // so we don't return false, but just set warning flag
     // return false;
     Skip(extraSize);
@@ -1926,7 +1941,7 @@ static int FindItem(const CObjectVector<CItemEx> &items, const CItemEx &item)
   {
     if (left >= right)
       return -1;
-    const unsigned index = (left + right) / 2;
+    const unsigned index = (unsigned)(((size_t)left + (size_t)right) / 2);
     const CItemEx &item2 = items[index];
     if (item.Disk < item2.Disk)
       right = index;
@@ -3104,7 +3119,7 @@ HRESULT CInArchive::ReadHeaders(CObjectVector<CItemEx> &items)
   }
   else
   {
-    // old NanaZip could store 32-bit number of CD items to 16-bit field.
+    // old 7-zip could store 32-bit number of CD items to 16-bit field.
     // if (ecd.NumEntries != items.Size())
     if (ecd.NumEntries > items.Size())
       HeadersError = true;

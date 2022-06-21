@@ -37,7 +37,7 @@ namespace NVmdk {
 
 
 #define SIGNATURE { 'K', 'D', 'M', 'V' }
-  
+
 static const Byte k_Signature[] = SIGNATURE;
 
 static const UInt32 k_Flags_NL         = (UInt32)1 << 0;
@@ -138,7 +138,7 @@ static bool Str_to_ValName(const AString &s, AString &name, AString &val)
   int eq = s.Find('=');
   if (eq < 0 || (qu >= 0 && eq > qu))
     return false;
-  name = s.Left(eq);
+  name.SetFrom(s.Ptr(), eq);
   name.Trim();
   val = s.Ptr(eq + 1);
   val.Trim();
@@ -207,7 +207,7 @@ struct CExtentInfo
   bool IsType_ZERO() const { return Type == "ZERO"; }
   // bool IsType_FLAT() const { return Type == "FLAT"; }
   bool IsType_Flat() const { return Type == "FLAT" || Type == "VMFS" || Type == "VMFSRAW"; }
-  
+
   bool Parse(const char *s);
 };
 
@@ -295,7 +295,7 @@ bool CDescriptor::Parse(const Byte *p, size_t size)
   AString s;
   AString name;
   AString val;
-  
+
   for (;;)
   {
     char c = 0;
@@ -325,7 +325,7 @@ bool CDescriptor::Parse(const Byte *p, size_t size)
           Extents.Add(ei);
         }
       }
-      
+
       s.Empty();
       if (c == 0)
         return true;
@@ -354,7 +354,7 @@ struct CExtent
 
   CMyComPtr<IInStream> Stream;
   UInt64 PosInArc;
-  
+
   UInt64 PhySize;
   UInt64 VirtSize;     // from vmdk header of volume
 
@@ -368,10 +368,10 @@ struct CExtent
   CHeader h;
 
   UInt64 GetEndOffset() const { return StartOffset + NumBytes; }
-  
+
   bool IsVmdk() const { return !IsZero && !IsFlat; };
   // if (IsOK && IsVmdk()), then VMDK header of this extent was read
-  
+
   CExtent():
       IsOK(false),
       IsArc(false),
@@ -384,9 +384,9 @@ struct CExtent
 
       ClusterBits(0),
       ZeroSector(0),
-      
+
       PosInArc(0),
-      
+
       PhySize(0),
       VirtSize(0),
 
@@ -394,7 +394,7 @@ struct CExtent
       NumBytes(0),
       FlatOffset(0)
         {}
-    
+
 
   HRESULT ReadForHeader(IInStream *stream, UInt64 sector, void *data, size_t numSectors);
   HRESULT Open3(IInStream *stream, IArchiveOpenCallback *openCallback,
@@ -420,7 +420,7 @@ struct CExtent
     return res;
   }
 };
-  
+
 
 class CHandler: public CHandlerImg
 {
@@ -436,7 +436,7 @@ class CHandler: public CHandlerImg
   unsigned _cacheExtent;
   CByteBuffer _cache;
   CByteBuffer _cacheCompressed;
-  
+
   unsigned _clusterBitsMax;
   UInt64 _phySize;
 
@@ -455,7 +455,7 @@ class CHandler: public CHandlerImg
   CDescriptor _descriptor;
 
   UString _missingVolName;
-  
+
   void InitAndSeekMain()
   {
     _virtPos = 0;
@@ -500,7 +500,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
     }
     extentIndex = left;
   }
-  
+
   CExtent &extent = _extents[extentIndex];
 
   {
@@ -593,7 +593,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
     }
   }
 
-  
+
   for (;;)
   {
     const UInt64 vir = _virtPos - extent.StartOffset;
@@ -615,19 +615,19 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
         *processedSize = size;
       return S_OK;
     }
-    
+
     const UInt64 high = cluster >> k_NumMidBits;
- 
+
     if (high < extent.Tables.Size())
     {
       const CByteBuffer &table = extent.Tables[(unsigned)high];
-    
+
       if (table.Size() != 0)
       {
         const size_t midBits = (size_t)cluster & ((1 << k_NumMidBits) - 1);
         const Byte *p = (const Byte *)table + (midBits << 2);
         const UInt32 v = Get32(p);
-        
+
         if (v != 0 && v != extent.ZeroSector)
         {
           UInt64 offset = (UInt64)v << 9;
@@ -638,7 +638,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
               // printf("\n%12x %12x\n", (unsigned)offset, (unsigned)(offset - extent.PosInArc));
               RINOK(extent.Seek(offset));
             }
-            
+
             const size_t kStartSize = 1 << 9;
             {
               size_t curSize = kStartSize;
@@ -656,7 +656,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
               return S_FALSE;
 
             size_t dataSize2 = (size_t)dataSize + 12;
-            
+
             if (dataSize2 > kStartSize)
             {
               dataSize2 = (dataSize2 + 511) & ~(size_t)511;
@@ -671,14 +671,14 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
             }
 
             _bufInStreamSpec->Init(_cacheCompressed + 12, dataSize);
-            
+
             _cacheCluster = (UInt64)(Int64)-1;
             _cacheExtent = (unsigned)(int)-1;
 
             if (_cache.Size() < clusterSize)
               return E_FAIL;
             _bufOutStreamSpec->Init(_cache, clusterSize);
-            
+
             // Do we need to use smaller block than clusterSize for last cluster?
             UInt64 blockSize64 = clusterSize;
             HRESULT res = _zlibDecoderSpec->Code(_bufInStream, _bufOutStream, NULL, &blockSize64, NULL);
@@ -700,10 +700,10 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
               }
 
             RINOK(res);
-            
+
             _cacheCluster = cluster;
             _cacheExtent = extentIndex;
-            
+
             continue;
             /*
             memcpy(data, _cache + lowBits, size);
@@ -743,7 +743,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
         }
       }
     }
-    
+
     memset(data, 0, size);
     _virtPos += size;
     if (processedSize)
@@ -778,10 +778,10 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
 {
   COM_TRY_BEGIN
   NCOM::CPropVariant prop;
-  
+
   const CExtent *e = NULL;
   const CDescriptor *desc = NULL;
-  
+
   if (_isMultiVol)
     desc = &_descriptor;
   else if (_extents.Size() == 1)
@@ -826,7 +826,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
             algo = h.algo;
           }
         }
-        
+
         if (h.Is_Marker())
           marker = true;
       }
@@ -836,12 +836,12 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
 
       if (marker)
         s.Add_OptSpaced("Marker");
-      
+
       if (!s.IsEmpty())
         prop = s;
       break;
     }
-    
+
     case kpidComment:
     {
       if (e && e->DescriptorBuf.Size() != 0)
@@ -853,7 +853,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
       }
       break;
     }
-    
+
     case kpidId:
     {
       if (desc && !desc->CID.IsEmpty())
@@ -906,7 +906,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
       break;
     }
   }
-  
+
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
@@ -943,7 +943,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIAN
     }
     case kpidExtension: prop = (_imgExt ? _imgExt : "img"); break;
   }
-  
+
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
@@ -1056,7 +1056,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
   {
     CExtent *e = NULL;
     CMyComPtr<IInStream> nextStream;
-    
+
     if (_isMultiVol)
     {
       const unsigned extentIndex = _extents.Size();
@@ -1097,7 +1097,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
 
       if (result != S_OK && result != S_FALSE)
         return result;
-      
+
       if (!nextStream || result != S_OK)
       {
         if (_missingVolName.IsEmpty())
@@ -1135,7 +1135,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
     HRESULT res = S_FALSE;
     if (e->h.Parse(buf))
       res = e->Open3(stream, openCallback, _isMultiVol ? _descriptor.Extents.Size() : 1, _extents.Size() - 1, complexity);
-    
+
     if (!_isMultiVol)
     {
       _isArc = e->IsArc;
@@ -1159,7 +1159,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
 
     e->Stream = stream;
     e->IsOK = true;
-    
+
     if (!_isMultiVol)
     {
       e->NumBytes = e->VirtSize;
@@ -1175,7 +1175,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
 
   _needDeflate = false;
   _clusterBitsMax = 0;
-  
+
   unsigned numOKs = 0;
   unsigned numUnsupported = 0;
 
@@ -1241,7 +1241,7 @@ HRESULT CExtent::Open3(IInStream *stream, IArchiveOpenCallback *openCallback,
       return S_FALSE;
     RINOK(stream->Seek(endPos - kEndSize, STREAM_SEEK_SET, NULL));
     RINOK(ReadStream_FALSE(stream, buf2, kEndSize));
-    
+
     CHeader h2;
     if (!h2.Parse(buf2 + 512))
       return S_FALSE;
@@ -1293,7 +1293,7 @@ HRESULT CExtent::Open3(IInStream *stream, IArchiveOpenCallback *openCallback,
   const UInt64 numSectorsPerGde = (UInt64)1 << (grainSize_Log + k_NumMidBits);
   const UInt64 numGdeEntries = (h.capacity + numSectorsPerGde - 1) >> (grainSize_Log + k_NumMidBits);
   CByteBuffer table;
-  
+
   if (numGdeEntries != 0)
   {
     if (h.gdOffset == 0)
@@ -1363,7 +1363,7 @@ HRESULT CExtent::Open3(IInStream *stream, IArchiveOpenCallback *openCallback,
         RINOK(openCallback->SetCompleted(numVols == 1 ? NULL : &volIndex2, &comp));
         numProcessed_Prev = i;
       }
-      
+
       if (h.Is_Marker())
       {
         Byte buf2[1 << 9];
@@ -1378,7 +1378,7 @@ HRESULT CExtent::Open3(IInStream *stream, IArchiveOpenCallback *openCallback,
             return S_FALSE;
         }
       }
-      
+
       buf.Alloc(k_NumMidItems * 4);
       RINOK(ReadForHeader(stream, v, buf, k_NumSectors));
     }
@@ -1430,7 +1430,7 @@ HRESULT CExtent::Open3(IInStream *stream, IArchiveOpenCallback *openCallback,
 STDMETHODIMP CHandler::Close()
 {
   _phySize = 0;
-  
+
   _cacheCluster = (UInt64)(Int64)-1;
   _cacheExtent = (unsigned)(int)-1;
 
@@ -1476,7 +1476,7 @@ STDMETHODIMP CHandler::GetStream(UInt32 /* index */, ISequentialInStream **strea
       _bufInStreamSpec = new CBufInStream;
       _bufInStream = _bufInStreamSpec;
     }
-    
+
     if (!_bufOutStream)
     {
       _bufOutStreamSpec = new CBufPtrSeqOutStream();
@@ -1488,7 +1488,7 @@ STDMETHODIMP CHandler::GetStream(UInt32 /* index */, ISequentialInStream **strea
       _zlibDecoderSpec = new NCompress::NZlib::CDecoder;
       _zlibDecoder = _zlibDecoderSpec;
     }
-    
+
     const size_t clusterSize = (size_t)1 << _clusterBitsMax;
     _cache.AllocAtLeast(clusterSize);
     _cacheCompressed.AllocAtLeast(clusterSize * 2);

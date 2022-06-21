@@ -2,17 +2,29 @@
 
 #include "StdAfx.h"
 
+// #include <stdio.h>
+
 #ifndef _WIN32
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
-#include "../../Windows/FileFind.h"
+#include <grp.h>
+#include <pwd.h>
+
+// for major minor
+// BSD: <sys/types.h>
+#include <sys/sysmacros.h>
+
 #endif
+
+#include "../../Windows/FileFind.h"
 
 #ifdef SUPPORT_DEVICE_FILE
 #include "../../../C/Alloc.h"
 #include "../../Common/Defs.h"
 #endif
+
+#include "../PropID.h"
 
 #include "FileStreams.h"
 
@@ -37,12 +49,19 @@ static const UInt32 kClusterSize = 1 << 18;
 #endif
 
 CInFileStream::CInFileStream():
-  #ifdef SUPPORT_DEVICE_FILE
+ #ifdef SUPPORT_DEVICE_FILE
   VirtPos(0),
   PhyPos(0),
   Buf(0),
   BufSize(0),
-  #endif
+ #endif
+ #ifndef _WIN32
+  _uid(0),
+  _gid(0),
+  StoreOwnerId(false),
+  StoreOwnerName(false),
+ #endif
+  _info_WasLoaded(false),
   SupportHardLinks(false),
   Callback(NULL),
   CallbackRef(0)
@@ -56,13 +75,13 @@ CInFileStream::~CInFileStream()
   #endif
 
   if (Callback)
-    Callback->InFileStream_On_Destroy(CallbackRef);
+    Callback->InFileStream_On_Destroy(this, CallbackRef);
 }
 
 STDMETHODIMP CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
 {
   #ifdef USE_WIN_FILE
-  
+
   #ifdef SUPPORT_DEVICE_FILE
   if (processedSize)
     *processedSize = 0;
@@ -95,7 +114,7 @@ STDMETHODIMP CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
           *processedSize += rem;
         return S_OK;
       }
-      
+
       bool useBuf = false;
       if ((VirtPos & mask) != 0 || ((ptrdiff_t)data & mask) != 0 )
         useBuf = true;
@@ -167,7 +186,7 @@ STDMETHODIMP CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
     return S_OK;
 
   #else // USE_WIN_FILE
-  
+
   if (processedSize)
     *processedSize = 0;
   const ssize_t res = File.read_part(data, (size_t)size);
@@ -204,7 +223,7 @@ STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
 STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
 {
   #ifdef _WIN32
-  
+
   DWORD realProcessedSize;
   UInt32 sizeTemp = (1 << 20);
   if (sizeTemp > size)
@@ -215,7 +234,7 @@ STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
   if (res == FALSE && GetLastError() == ERROR_BROKEN_PIPE)
     return S_OK;
   return ConvertBoolToHRESULT(res != FALSE);
-  
+
   #else
 
   if (processedSize)
@@ -231,10 +250,10 @@ STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
   if (processedSize)
     *processedSize = (UInt32)res;
   return S_OK;
-  
+
   #endif
 }
-  
+
 #endif
 
 STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
@@ -262,7 +281,7 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
     return S_OK;
   }
   #endif
-  
+
   UInt64 realNewPosition = 0;
   const bool result = File.Seek(offset, seekOrigin, realNewPosition);
   const HRESULT hres = ConvertBoolToHRESULT(result);
@@ -270,7 +289,7 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
   /* 21.07: new File.Seek() in 21.07 already returns correct (realNewPosition)
      in case of error. So we don't need additional code below */
   // if (!result) { realNewPosition = 0; File.GetPosition(realNewPosition); }
-  
+
   #ifdef SUPPORT_DEVICE_FILE
   PhyPos = VirtPos = realNewPosition;
   #endif
@@ -279,9 +298,9 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
     *newPosition = realNewPosition;
 
   return hres;
-  
+
   #else
-  
+
   const off_t res = File.seek((off_t)offset, (int)seekOrigin);
   if (res == -1)
   {
@@ -293,7 +312,7 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
   if (newPosition)
     *newPosition = (UInt64)res;
   return S_OK;
-  
+
   #endif
 }
 
@@ -306,8 +325,14 @@ STDMETHODIMP CInFileStream::GetSize(UInt64 *size)
 
 STDMETHODIMP CInFileStream::GetProps(UInt64 *size, FILETIME *cTime, FILETIME *aTime, FILETIME *mTime, UInt32 *attrib)
 {
+  if (!_info_WasLoaded)
+    RINOK(ReloadProps());
+  const BY_HANDLE_FILE_INFORMATION &info = _info;
+  /*
   BY_HANDLE_FILE_INFORMATION info;
-  if (File.GetFileInformation(&info))
+  if (!File.GetFileInformation(&info))
+    return GetLastError_HRESULT();
+  */
   {
     if (size) *size = (((UInt64)info.nFileSizeHigh) << 32) + info.nFileSizeLow;
     if (cTime) *cTime = info.ftCreationTime;
@@ -316,13 +341,18 @@ STDMETHODIMP CInFileStream::GetProps(UInt64 *size, FILETIME *cTime, FILETIME *aT
     if (attrib) *attrib = info.dwFileAttributes;
     return S_OK;
   }
-  return GetLastError_HRESULT();
 }
 
 STDMETHODIMP CInFileStream::GetProps2(CStreamFileProps *props)
 {
+  if (!_info_WasLoaded)
+    RINOK(ReloadProps());
+  const BY_HANDLE_FILE_INFORMATION &info = _info;
+  /*
   BY_HANDLE_FILE_INFORMATION info;
-  if (File.GetFileInformation(&info))
+  if (!File.GetFileInformation(&info))
+    return GetLastError_HRESULT();
+  */
   {
     props->Size = (((UInt64)info.nFileSizeHigh) << 32) + info.nFileSizeLow;
     props->VolID = info.dwVolumeSerialNumber;
@@ -335,27 +365,114 @@ STDMETHODIMP CInFileStream::GetProps2(CStreamFileProps *props)
     props->MTime = info.ftLastWriteTime;
     return S_OK;
   }
-  return GetLastError_HRESULT();
 }
+
+STDMETHODIMP CInFileStream::GetProperty(PROPID propID, PROPVARIANT *value)
+{
+  if (!_info_WasLoaded)
+    RINOK(ReloadProps());
+
+  if (!_info_WasLoaded)
+    return S_OK;
+
+  NWindows::NCOM::CPropVariant prop;
+
+ #ifdef SUPPORT_DEVICE_FILE
+  if (File.IsDeviceFile)
+  {
+    switch (propID)
+    {
+      case kpidSize:
+        if (File.SizeDefined)
+          prop = File.Size;
+        break;
+      // case kpidAttrib: prop = (UInt32)0; break;
+      case kpidPosixAttrib:
+      {
+        prop = (UInt32)NWindows::NFile::NFind::NAttributes::
+            Get_PosixMode_From_WinAttrib(0);
+        /* GNU TAR by default can't extract file with MY_LIN_S_IFBLK attribute
+           so we don't use MY_LIN_S_IFBLK here */
+        // prop = (UInt32)(MY_LIN_S_IFBLK | 0600); // for debug
+        break;
+      }
+      /*
+      case kpidDeviceMajor:
+        prop = (UInt32)8; // id for SCSI type device (sda)
+        break;
+      case kpidDeviceMinor:
+        prop = (UInt32)0;
+        break;
+      */
+    }
+  }
+  else
+ #endif
+  {
+    switch (propID)
+    {
+      case kpidSize:
+      {
+        const UInt64 size = (((UInt64)_info.nFileSizeHigh) << 32) + _info.nFileSizeLow;
+        prop = size;
+        break;
+      }
+      case kpidAttrib:  prop = (UInt32)_info.dwFileAttributes; break;
+      case kpidCTime:  PropVariant_SetFrom_FiTime(prop, _info.ftCreationTime); break;
+      case kpidATime:  PropVariant_SetFrom_FiTime(prop, _info.ftLastAccessTime); break;
+      case kpidMTime:  PropVariant_SetFrom_FiTime(prop, _info.ftLastWriteTime); break;
+      case kpidPosixAttrib:
+        prop = (UInt32)NWindows::NFile::NFind::NAttributes::
+            Get_PosixMode_From_WinAttrib(_info.dwFileAttributes);
+            // | (UInt32)(1 << 21); // for debug
+        break;
+    }
+  }
+  prop.Detach(value);
+  return S_OK;
+}
+
+
+STDMETHODIMP CInFileStream::ReloadProps()
+{
+ #ifdef SUPPORT_DEVICE_FILE
+  if (File.IsDeviceFile)
+  {
+    memset(&_info, 0, sizeof(_info));
+    if (File.SizeDefined)
+    {
+      _info.nFileSizeHigh = (DWORD)(File.Size >> 32);
+      _info.nFileSizeLow = (DWORD)(File.Size);
+    }
+    _info.nNumberOfLinks = 1;
+    _info_WasLoaded = true;
+    return S_OK;
+  }
+ #endif
+  _info_WasLoaded = File.GetFileInformation(&_info);
+  if (!_info_WasLoaded)
+    return GetLastError_HRESULT();
+  return S_OK;
+}
+
 
 #elif !defined(_WIN32)
 
 STDMETHODIMP CInFileStream::GetProps(UInt64 *size, FILETIME *cTime, FILETIME *aTime, FILETIME *mTime, UInt32 *attrib)
 {
+  if (!_info_WasLoaded)
+    RINOK(ReloadProps());
+  const struct stat &st = _info;
+  /*
   struct stat st;
   if (File.my_fstat(&st) != 0)
     return GetLastError_HRESULT();
+  */
 
   if (size) *size = (UInt64)st.st_size;
-  #ifdef __APPLE__
-  if (cTime) NWindows::NFile::NFind::timespec_To_FILETIME(st.st_ctimespec, *cTime);
-  if (aTime) NWindows::NFile::NFind::timespec_To_FILETIME(st.st_atimespec, *aTime);
-  if (mTime) NWindows::NFile::NFind::timespec_To_FILETIME(st.st_mtimespec, *mTime);
-  #else
-  if (cTime) NWindows::NFile::NFind::timespec_To_FILETIME(st.st_ctim, *cTime);
-  if (aTime) NWindows::NFile::NFind::timespec_To_FILETIME(st.st_atim, *aTime);
-  if (mTime) NWindows::NFile::NFind::timespec_To_FILETIME(st.st_mtim, *mTime);
-  #endif
+  if (cTime) FiTime_To_FILETIME (ST_CTIME(st), *cTime);
+  if (aTime) FiTime_To_FILETIME (ST_ATIME(st), *aTime);
+  if (mTime) FiTime_To_FILETIME (ST_MTIME(st), *mTime);
   if (attrib) *attrib = NWindows::NFile::NFind::Get_WinAttribPosix_From_PosixMode(st.st_mode);
 
   return S_OK;
@@ -365,9 +482,14 @@ STDMETHODIMP CInFileStream::GetProps(UInt64 *size, FILETIME *cTime, FILETIME *aT
 
 STDMETHODIMP CInFileStream::GetProps2(CStreamFileProps *props)
 {
+  if (!_info_WasLoaded)
+    RINOK(ReloadProps());
+  const struct stat &st = _info;
+  /*
   struct stat st;
   if (File.my_fstat(&st) != 0)
     return GetLastError_HRESULT();
+  */
 
   props->Size = (UInt64)st.st_size;
   /*
@@ -381,15 +503,9 @@ STDMETHODIMP CInFileStream::GetProps2(CStreamFileProps *props)
   props->NumLinks = (UInt32)st.st_nlink; // we reduce to UInt32 from (nlink_t) that is (unsigned long)
   props->Attrib = NWindows::NFile::NFind::Get_WinAttribPosix_From_PosixMode(st.st_mode);
 
-  #ifdef __APPLE__
-  NWindows::NFile::NFind::timespec_To_FILETIME(st.st_ctimespec, props->CTime);
-  NWindows::NFile::NFind::timespec_To_FILETIME(st.st_atimespec, props->ATime);
-  NWindows::NFile::NFind::timespec_To_FILETIME(st.st_mtimespec, props->MTime);
-  #else
-  NWindows::NFile::NFind::timespec_To_FILETIME(st.st_ctim, props->CTime);
-  NWindows::NFile::NFind::timespec_To_FILETIME(st.st_atim, props->ATime);
-  NWindows::NFile::NFind::timespec_To_FILETIME(st.st_mtim, props->MTime);
-  #endif
+  FiTime_To_FILETIME (ST_CTIME(st), props->CTime);
+  FiTime_To_FILETIME (ST_ATIME(st), props->ATime);
+  FiTime_To_FILETIME (ST_MTIME(st), props->MTime);
 
   /*
   printf("\nGetProps2() NumLinks=%d = st_dev=%d st_ino = %d\n"
@@ -402,7 +518,129 @@ STDMETHODIMP CInFileStream::GetProps2(CStreamFileProps *props)
   return S_OK;
 }
 
+STDMETHODIMP CInFileStream::GetProperty(PROPID propID, PROPVARIANT *value)
+{
+  if (!_info_WasLoaded)
+    RINOK(ReloadProps());
+
+  if (!_info_WasLoaded)
+    return S_OK;
+
+  const struct stat &st = _info;
+
+  NWindows::NCOM::CPropVariant prop;
+  {
+    switch (propID)
+    {
+      case kpidSize: prop = (UInt64)st.st_size; break;
+      case kpidAttrib:
+        prop = (UInt32)NWindows::NFile::NFind::Get_WinAttribPosix_From_PosixMode(st.st_mode);
+        break;
+      case kpidCTime:  PropVariant_SetFrom_FiTime(prop, ST_CTIME(st)); break;
+      case kpidATime:  PropVariant_SetFrom_FiTime(prop, ST_ATIME(st)); break;
+      case kpidMTime:  PropVariant_SetFrom_FiTime(prop, ST_MTIME(st)); break;
+      case kpidPosixAttrib: prop = (UInt32)st.st_mode; break;
+
+      case kpidDeviceMajor:
+      {
+        // printf("\nst.st_rdev = %d\n", st.st_rdev);
+        if (S_ISCHR(st.st_mode) ||
+            S_ISBLK(st.st_mode))
+          prop = (UInt32)(major(st.st_rdev)); //  + 1000);
+        // prop = (UInt32)12345678; // for debug
+        break;
+      }
+
+      case kpidDeviceMinor:
+        if (S_ISCHR(st.st_mode) ||
+            S_ISBLK(st.st_mode))
+          prop = (UInt32)(minor(st.st_rdev)); // + 100);
+        // prop = (UInt32)(st.st_rdev); // for debug
+        // printf("\nst.st_rdev = %d\n", st.st_rdev);
+        // prop = (UInt32)123456789; // for debug
+        break;
+
+      /*
+      case kpidDevice:
+        if (S_ISCHR(st.st_mode) ||
+            S_ISBLK(st.st_mode))
+          prop = (UInt64)(st.st_rdev);
+        break;
+      */
+
+      case kpidUserId:
+      {
+        if (StoreOwnerId)
+          prop = (UInt32)st.st_uid;
+        break;
+      }
+      case kpidGroupId:
+      {
+        if (StoreOwnerId)
+          prop = (UInt32)st.st_gid;
+        break;
+      }
+      case kpidUser:
+      {
+        if (StoreOwnerName)
+        {
+          const uid_t uid = st.st_uid;
+          {
+            if (!OwnerName.IsEmpty() && _uid == uid)
+              prop = OwnerName;
+            else
+            {
+              const passwd *pw = getpwuid(uid);
+              if (pw)
+              {
+                // we can use utf-8 here.
+                // prop = pw->pw_name;
+              }
+            }
+          }
+        }
+        break;
+      }
+      case kpidGroup:
+      {
+        if (StoreOwnerName)
+        {
+          const uid_t gid = st.st_gid;
+          {
+            if (!OwnerGroup.IsEmpty() && _gid == gid)
+              prop = OwnerGroup;
+            else
+            {
+              const group *gr = getgrgid(gid);
+              if (gr)
+              {
+                // we can use utf-8 here.
+                // prop = gr->gr_name;
+              }
+            }
+          }
+        }
+        break;
+      }
+    }
+  }
+  prop.Detach(value);
+  return S_OK;
+}
+
+
+STDMETHODIMP CInFileStream::ReloadProps()
+{
+  _info_WasLoaded = (File.my_fstat(&_info) == 0);
+  if (!_info_WasLoaded)
+    return GetLastError_HRESULT();
+  return S_OK;
+}
+
 #endif
+
+
+
 
 //////////////////////////
 // COutFileStream
@@ -422,9 +660,9 @@ STDMETHODIMP COutFileStream::Write(const void *data, UInt32 size, UInt32 *proces
   if (processedSize)
     *processedSize = realProcessedSize;
   return ConvertBoolToHRESULT(result);
-  
+
   #else
-  
+
   if (processedSize)
     *processedSize = 0;
   size_t realProcessedSize;
@@ -435,15 +673,15 @@ STDMETHODIMP COutFileStream::Write(const void *data, UInt32 size, UInt32 *proces
   if (res == -1)
     return GetLastError_HRESULT();
   return S_OK;
-  
+
   #endif
 }
-  
+
 STDMETHODIMP COutFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
 {
   if (seekOrigin >= 3)
     return STG_E_INVALIDFUNCTION;
-  
+
   #ifdef USE_WIN_FILE
 
   UInt64 realNewPosition = 0;
@@ -451,16 +689,16 @@ STDMETHODIMP COutFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPo
   if (newPosition)
     *newPosition = realNewPosition;
   return ConvertBoolToHRESULT(result);
-  
+
   #else
-  
+
   const off_t res = File.seek((off_t)offset, (int)seekOrigin);
   if (res == -1)
     return GetLastError_HRESULT();
   if (newPosition)
     *newPosition = (UInt64)res;
   return S_OK;
-  
+
   #endif
 }
 
@@ -513,7 +751,7 @@ STDMETHODIMP CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
   return ConvertBoolToHRESULT(res != FALSE);
 
   #else
-  
+
   ssize_t res;
 
   do
@@ -521,7 +759,7 @@ STDMETHODIMP CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
     res = write(1, data, (size_t)size);
   }
   while (res < 0 && (errno == EINTR));
-  
+
   if (res == -1)
     return GetLastError_HRESULT();
 
@@ -529,7 +767,7 @@ STDMETHODIMP CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
   if (processedSize)
     *processedSize = (UInt32)res;
   return S_OK;
-  
+
   #endif
 }
 

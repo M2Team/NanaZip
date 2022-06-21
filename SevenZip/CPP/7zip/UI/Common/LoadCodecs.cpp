@@ -273,6 +273,9 @@ static HRESULT GetMethodBoolProp(Func_GetMethodProperty getMethodProperty, UInt3
 #define MY_GET_FUNC(dest, type, func)  *(void **)(&dest) = (func);
 // #define MY_GET_FUNC(dest, type, func)  dest = (type)(func);
 
+#define MY_GET_FUNC_LOC(dest, type, func) \
+  type dest;  MY_GET_FUNC(dest, type, func)
+
 HRESULT CCodecs::LoadCodecs()
 {
   CCodecLib &lib = Libs.Back();
@@ -284,8 +287,7 @@ HRESULT CCodecs::LoadCodecs()
   if (lib.GetMethodProperty)
   {
     UInt32 numMethods = 1;
-    Func_GetNumberOfMethods getNumberOfMethods;
-    MY_GET_FUNC (getNumberOfMethods, Func_GetNumberOfMethods, lib.Lib.GetProc("GetNumberOfMethods"));
+    MY_GET_FUNC_LOC (getNumberOfMethods, Func_GetNumberOfMethods, lib.Lib.GetProc("GetNumberOfMethods"));
     if (getNumberOfMethods)
     {
       RINOK(getNumberOfMethods(&numMethods));
@@ -302,8 +304,7 @@ HRESULT CCodecs::LoadCodecs()
     }
   }
 
-  Func_GetHashers getHashers;
-  MY_GET_FUNC (getHashers, Func_GetHashers, lib.Lib.GetProc("GetHashers"));
+  MY_GET_FUNC_LOC (getHashers, Func_GetHashers, lib.Lib.GetProc("GetHashers"));
   if (getHashers)
   {
     RINOK(getHashers(&lib.ComHashers));
@@ -412,17 +413,14 @@ HRESULT CCodecs::LoadFormats()
   const NDLL::CLibrary &lib = Libs.Back().Lib;
 
   Func_GetHandlerProperty getProp = NULL;
-  Func_GetHandlerProperty2 getProp2;
-  MY_GET_FUNC (getProp2, Func_GetHandlerProperty2, lib.GetProc("GetHandlerProperty2"));
-  Func_GetIsArc getIsArc;
-  MY_GET_FUNC (getIsArc, Func_GetIsArc, lib.GetProc("GetIsArc"));
+  MY_GET_FUNC_LOC (getProp2, Func_GetHandlerProperty2, lib.GetProc("GetHandlerProperty2"));
+  MY_GET_FUNC_LOC (getIsArc, Func_GetIsArc, lib.GetProc("GetIsArc"));
 
   UInt32 numFormats = 1;
 
   if (getProp2)
   {
-    Func_GetNumberOfFormats getNumberOfFormats;
-    MY_GET_FUNC (getNumberOfFormats, Func_GetNumberOfFormats, lib.GetProc("GetNumberOfFormats"));
+    MY_GET_FUNC_LOC (getNumberOfFormats, Func_GetNumberOfFormats, lib.GetProc("GetNumberOfFormats"));
     if (getNumberOfFormats)
     {
       RINOK(getNumberOfFormats(&numFormats));
@@ -474,6 +472,11 @@ HRESULT CCodecs::LoadFormats()
         if (val)
           item.Flags |= kArcFlagsPars[j + 1];
       }
+    }
+
+    {
+      bool defined = false;
+      RINOK(GetProp_UInt32(getProp, getProp2, i, NArchive::NHandlerPropID::kTimeFlags, item.TimeFlags, defined));
     }
 
     CByteBuffer sig;
@@ -565,8 +568,7 @@ HRESULT CCodecs::LoadDll(const FString &dllPath, bool needCheckDll, bool *loaded
 
     /*
     {
-      Func_LibStartup _LibStartup;
-      MY_GET_FUNC (_LibStartup, Func_LibStartup, lib.Lib.GetProc("LibStartup"));
+      MY_GET_FUNC_LOC (_LibStartup, Func_LibStartup, lib.Lib.GetProc("LibStartup"));
       if (_LibStartup)
       {
         HRESULT res = _LibStartup();
@@ -583,20 +585,30 @@ HRESULT CCodecs::LoadDll(const FString &dllPath, bool needCheckDll, bool *loaded
     #ifdef _7ZIP_LARGE_PAGES
     if (g_LargePageSize != 0)
     {
-      Func_SetLargePageMode setLargePageMode;
-      MY_GET_FUNC (setLargePageMode, Func_SetLargePageMode, lib.Lib.GetProc("SetLargePageMode"));
+      MY_GET_FUNC_LOC (setLargePageMode, Func_SetLargePageMode, lib.Lib.GetProc("SetLargePageMode"));
       if (setLargePageMode)
         setLargePageMode();
     }
     #endif
 
-    if (CaseSensitiveChange)
+    if (CaseSensitive_Change)
     {
-      Func_SetCaseSensitive setCaseSensitive;
-      MY_GET_FUNC (setCaseSensitive, Func_SetCaseSensitive, lib.Lib.GetProc("SetCaseSensitive"));
+      MY_GET_FUNC_LOC (setCaseSensitive, Func_SetCaseSensitive, lib.Lib.GetProc("SetCaseSensitive"));
       if (setCaseSensitive)
         setCaseSensitive(CaseSensitive ? 1 : 0);
     }
+
+    /*
+    {
+      MY_GET_FUNC_LOC (setClientVersion, Func_SetClientVersion, lib.Lib.GetProc("SetClientVersion"));
+      if (setClientVersion)
+      {
+        // const UInt32 kVersion = (MY_VER_MAJOR << 16) | MY_VER_MINOR;
+        setClientVersion(g_ClientVersion);
+      }
+    }
+    */
+
 
     MY_GET_FUNC (lib.CreateObject, Func_CreateObject, lib.Lib.GetProc("CreateObject"));
     {

@@ -59,6 +59,9 @@ namespace NFileHeader
     const char kGnu_LongName = 'L';
     const char kSparse       = 'S';
     const char kLabel        = 'V';
+    const char kPax          = 'x'; // Extended header with meta data for the next file in the archive (POSIX.1-2001)
+    const char kPax_2        = 'X';
+    const char kGlobal       = 'g'; //  Global extended header with meta data (POSIX.1-2001)
     const char kDumpDir      = 'D'; /* GNUTYPE_DUMPDIR.
       data: list of files created by the --incremental (-G) option
       Each file name is preceded by either
@@ -66,6 +69,7 @@ namespace NFileHeader
         - 'N' (file is a directory, or is not stored in the archive.)
         Each file name is terminated by a null + an additional null after
         the last file name. */
+    // 'A'-'Z'  Vendor specific extensions (POSIX.1-1988)
   }
 
   extern const char * const kLongLink;  //   = "././@LongLink";
@@ -76,8 +80,8 @@ namespace NFileHeader
     // extern const char * const kUsTar;  //  = "ustar"; // 5 chars
     // extern const char * const kGNUTar; //  = "GNUtar "; // 7 chars and a null
     // extern const char * const kEmpty;  //  = "\0\0\0\0\0\0\0\0"
-    // extern const char kUsTar_00[8];
-    extern const char kUsTar_GNU[8];
+    extern const char k_Posix_ustar_00[8];
+    extern const char k_GNU_ustar__[8];
   }
 }
 

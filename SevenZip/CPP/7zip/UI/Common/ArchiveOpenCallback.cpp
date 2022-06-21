@@ -34,7 +34,8 @@ STDMETHODIMP COpenCallbackImp::SetCompleted(const UInt64 *files, const UInt64 *b
   return Callback->Open_SetCompleted(files, bytes);
   COM_TRY_END
 }
-  
+
+
 STDMETHODIMP COpenCallbackImp::GetProperty(PROPID propID, PROPVARIANT *value)
 {
   COM_TRY_BEGIN
@@ -51,10 +52,11 @@ STDMETHODIMP COpenCallbackImp::GetProperty(PROPID propID, PROPVARIANT *value)
       case kpidName:  prop = fs2us(_fileInfo.Name); break;
       case kpidIsDir:  prop = _fileInfo.IsDir(); break;
       case kpidSize:  prop = _fileInfo.Size; break;
-      case kpidAttrib:  prop = (UInt32)_fileInfo.Attrib; break;
-      case kpidCTime:  prop = _fileInfo.CTime; break;
-      case kpidATime:  prop = _fileInfo.ATime; break;
-      case kpidMTime:  prop = _fileInfo.MTime; break;
+      case kpidAttrib:  prop = (UInt32)_fileInfo.GetWinAttrib(); break;
+      case kpidPosixAttrib:  prop = (UInt32)_fileInfo.GetPosixAttrib(); break;
+      case kpidCTime:  PropVariant_SetFrom_FiTime(prop, _fileInfo.CTime); break;
+      case kpidATime:  PropVariant_SetFrom_FiTime(prop, _fileInfo.ATime); break;
+      case kpidMTime:  PropVariant_SetFrom_FiTime(prop, _fileInfo.MTime); break;
     }
   prop.Detach(value);
   return S_OK;
@@ -66,7 +68,7 @@ struct CInFileStreamVol: public CInFileStream
   unsigned FileNameIndex;
   COpenCallbackImp *OpenCallbackImp;
   CMyComPtr<IArchiveOpenCallback> OpenCallbackRef;
- 
+
   ~CInFileStreamVol()
   {
     if (OpenCallbackRef)
@@ -82,7 +84,7 @@ STDMETHODIMP COpenCallbackImp::GetStream(const wchar_t *name, IInStream **inStre
 {
   COM_TRY_BEGIN
   *inStream = NULL;
-  
+
   if (_subArchiveMode)
     return S_FALSE;
   if (Callback)
@@ -92,9 +94,9 @@ STDMETHODIMP COpenCallbackImp::GetStream(const wchar_t *name, IInStream **inStre
 
   UString name2 = name;
 
-  
+
   #ifndef _SFX
-  
+
   #ifdef _WIN32
   name2.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif

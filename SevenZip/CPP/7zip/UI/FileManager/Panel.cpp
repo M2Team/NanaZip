@@ -20,6 +20,7 @@
 
 #include "../Common/ArchiveName.h"
 #include "../Common/CompressCall.h"
+#include "../Common/ZipRegistry.h"
 
 #include "../Agent/IFolderArchive.h"
 
@@ -1004,9 +1005,13 @@ void CPanel::ExtractArchives()
     outFolder += '*';
   outFolder.Add_PathSepar();
 
+  CContextMenuInfo ci;
+  ci.Load();
+
   ::ExtractArchives(paths, outFolder
       , true // showDialog
       , false // elimDup
+      , ci.WriteZone
       );
 }
 

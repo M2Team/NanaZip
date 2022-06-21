@@ -80,7 +80,7 @@ struct CExtension
 {
   Byte Type;
   CByteBuffer Data;
-  
+
   AString GetString() const
   {
     AString s;
@@ -127,7 +127,7 @@ struct CItem
     return (IsLhMethod() && Method[3] == '0') ||
       (IsValidMethod() && Method[2] == 'z' && Method[3] == '4');
   }
-  
+
   bool IsLh1GroupMethod() const
   {
     if (!IsLhMethod())
@@ -139,7 +139,7 @@ struct CItem
     }
     return false;
   }
-  
+
   bool IsLh4GroupMethod() const
   {
     if (!IsLhMethod())
@@ -154,7 +154,7 @@ struct CItem
     }
     return false;
   }
-  
+
   unsigned GetNumDictBits() const
   {
     if (!IsLhMethod())
@@ -179,7 +179,7 @@ struct CItem
         return i;
     return -1;
   }
-  
+
   bool GetUnixTime(UInt32 &value) const
   {
     value = 0;
@@ -451,7 +451,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
   switch (propID)
   {
     case kpidPhySize: prop = _phySize; break;
-   
+
     case kpidErrorFlags:
       UInt32 v = _errorFlags;
       if (!_isArc) v |= kpv_ErrorFlags_IsNotArc;
@@ -487,22 +487,11 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidHostOS:  PAIR_TO_PROP(g_OsPairs, item.OsId, prop); break;
     case kpidMTime:
     {
-      FILETIME utc;
       UInt32 unixTime;
       if (item.GetUnixTime(unixTime))
-        NTime::UnixTimeToFileTime(unixTime, utc);
+        PropVariant_SetFrom_UnixTime(prop, unixTime);
       else
-      {
-        FILETIME localFileTime;
-        if (DosTimeToFileTime(item.ModifiedTime, localFileTime))
-        {
-          if (!LocalFileTimeToFileTime(&localFileTime, &utc))
-            utc.dwHighDateTime = utc.dwLowDateTime = 0;
-        }
-        else
-          utc.dwHighDateTime = utc.dwLowDateTime = 0;
-      }
-      prop = utc;
+        PropVariant_SetFrom_DosTime(prop, item.ModifiedTime);
       break;
     }
     // case kpidAttrib:  prop = (UInt32)item.Attributes; break;
@@ -625,7 +614,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   UInt64 currentTotalUnPacked = 0, currentTotalPacked = 0;
   UInt64 currentItemUnPacked, currentItemPacked;
-  
+
   NCompress::NLzh::NDecoder::CCoder *lzhDecoderSpec = 0;
   CMyComPtr<ICompressCoder> lzhDecoder;
   // CMyComPtr<ICompressCoder> lzh1Decoder;
@@ -682,7 +671,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       CMyComPtr<ISequentialOutStream> outStream(outStreamSpec);
       outStreamSpec->Init(realOutStream);
       realOutStream.Release();
-      
+
       UInt64 pos;
       _stream->Seek(item.DataPosition, STREAM_SEEK_SET, &pos);
 

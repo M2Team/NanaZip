@@ -69,7 +69,7 @@ static void ConvertPosixAttribToString(char *s, UInt32 a) throw()
   if ((a & 0x400) != 0) s[6] = ((a & (1 << 3)) ? 's' : 'S'); // S_ISGID
   if ((a & 0x200) != 0) s[9] = ((a & (1 << 0)) ? 't' : 'T'); // S_ISVTX
   s[10] = 0;
-  
+
   a &= ~(UInt32)0xFFFF;
   if (a != 0)
   {
@@ -87,9 +87,9 @@ void ConvertWinAttribToString(char *s, UInt32 wa) throw()
   macos - stores additional 0x4000 flag marker.
   info-zip - no additional marker.
   */
-  
+
   bool isPosix = ((wa & 0xF0000000) != 0);
-  
+
   UInt32 posix = 0;
   if (isPosix)
   {
@@ -111,7 +111,7 @@ void ConvertWinAttribToString(char *s, UInt32 wa) throw()
       }
     }
   }
-  
+
   if (wa != 0)
   {
     *s++ = ' ';
@@ -132,14 +132,41 @@ void ConvertWinAttribToString(char *s, UInt32 wa) throw()
 void ConvertPropertyToShortString2(char *dest, const PROPVARIANT &prop, PROPID propID, int level) throw()
 {
   *dest = 0;
-  
+
   if (prop.vt == VT_FILETIME)
   {
     const FILETIME &ft = prop.filetime;
-    if ((ft.dwHighDateTime == 0 &&
-         ft.dwLowDateTime == 0))
+    unsigned ns100 = 0;
+    int numDigits = kTimestampPrintLevel_NTFS;
+    const unsigned prec = prop.wReserved1;
+    const unsigned ns100_Temp = prop.wReserved2;
+    if (prec != 0
+        && prec <= k_PropVar_TimePrec_1ns
+        && ns100_Temp < 100
+        && prop.wReserved3 == 0)
+    {
+      ns100 = ns100_Temp;
+      if (prec == k_PropVar_TimePrec_Unix ||
+          prec == k_PropVar_TimePrec_DOS)
+        numDigits = 0;
+      else if (prec == k_PropVar_TimePrec_HighPrec)
+        numDigits = 9;
+      else
+      {
+        numDigits = (int)prec - (int)k_PropVar_TimePrec_Base;
+        if (
+            // numDigits < kTimestampPrintLevel_DAY // for debuf
+            numDigits < kTimestampPrintLevel_SEC
+            )
+
+          numDigits = kTimestampPrintLevel_NTFS;
+      }
+    }
+    if (ft.dwHighDateTime == 0 && ft.dwLowDateTime == 0 && ns100 == 0)
       return;
-    ConvertUtcFileTimeToString(prop.filetime, dest, level);
+    if (level > numDigits)
+      level = numDigits;
+    ConvertUtcFileTimeToString2(ft, ns100, dest, level);
     return;
   }
 
@@ -198,8 +225,26 @@ void ConvertPropertyToShortString2(char *dest, const PROPVARIANT &prop, PROPID p
       ConvertUInt64ToHex(v, dest + 2);
       return;
     }
+
+    /*
+    case kpidDevice:
+    {
+      UInt64 v = 0;
+      if (prop.vt == VT_UI4)
+        v = prop.ulVal;
+      else if (prop.vt == VT_UI8)
+        v = (UInt64)prop.uhVal.QuadPart;
+      else
+        break;
+      ConvertUInt32ToString(MY_dev_major(v), dest);
+      dest += strlen(dest);
+      *dest++ = ',';
+      ConvertUInt32ToString(MY_dev_minor(v), dest);
+      return;
+    }
+    */
   }
-  
+
   ConvertPropVariantToShortString(prop, dest);
 }
 
@@ -400,7 +445,7 @@ static void ParseSid(AString &s, const Byte *p, UInt32 lim, UInt32 &sidSize)
       }
     }
   }
-  
+
   s += "S-1-";
   if (p[2] == 0 && p[3] == 0)
     s.Add_UInt32(authority);
@@ -446,7 +491,7 @@ static void ParseAcl(AString &s, const Byte *p, UInt32 size, const char *strName
     return;
   UInt32 num = Get32(p + 4);
   s.Add_UInt32(num);
-  
+
   /*
   UInt32 aclSize = Get16(p + 2);
   if (num >= (1 << 16))
@@ -674,9 +719,9 @@ bool ConvertNtReparseToString(const Byte *data, UInt32 size, UString &s)
   if (len != 0)
   {
     s.Add_Space();
-    
+
     data += 8;
-    
+
     for (UInt32 i = 0; i < len; i++)
     {
       if (i >= 16)

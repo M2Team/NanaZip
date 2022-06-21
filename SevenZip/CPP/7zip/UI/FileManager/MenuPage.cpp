@@ -28,6 +28,7 @@ static const UInt32 kLangIDs[] =
 {
   IDB_SYSTEM_ASSOCIATE,
   IDX_EXTRACT_ELIM_DUP,
+  IDT_SYSTEM_ZONE,
   IDT_SYSTEM_CONTEXT_MENU_ITEMS
 };
 
@@ -72,6 +73,16 @@ extern bool g_Is_Wow64;
   #define KEY_WOW64_32KEY (0x0200)
 #endif
 
+
+static void LoadLang_Spec(UString &s, UInt32 id, const char *eng)
+{
+  LangString(id, s);
+  if (s.IsEmpty())
+    s = eng;
+  s.RemoveChar(L'&');
+}
+
+
 bool CMenuPage::OnInit()
 {
   _initMode = true;
@@ -86,6 +97,44 @@ bool CMenuPage::OnInit()
   CheckButton(IDX_EXTRACT_ELIM_DUP, ci.ElimDup.Val);
 
   _listView.Attach(GetItem(IDL_SYSTEM_OPTIONS));
+  _zoneCombo.Attach(GetItem(IDC_SYSTEM_ZONE));
+
+  {
+    unsigned wz = ci.WriteZone;
+    if (wz == (UInt32)(Int32)-1)
+      wz = 0;
+    for (unsigned i = 0; i <= 3; i++)
+    {
+      unsigned val = i;
+      UString s;
+      if (i == 3)
+      {
+        if (wz < 3)
+          break;
+        val = wz;
+      }
+      else
+      {
+        #define MY_IDYES  406
+        #define MY_IDNO   407
+        if (i == 0)
+          LoadLang_Spec(s, MY_IDNO, "No");
+        else if (i == 1)
+          LoadLang_Spec(s, MY_IDYES, "Yes");
+        else
+          LangString(IDT_ZONE_FOR_OFFICE, s);
+      }
+      if (s.IsEmpty())
+        s.Add_UInt32(val);
+      if (i == 0)
+        s.Insert(0, L"* ");
+      const int index = (int)_zoneCombo.AddString(s);
+      _zoneCombo.SetItemData(index, val);
+      if (val == wz)
+        _zoneCombo.SetCurSel(index);
+    }
+  }
+
 
   const UInt32 newFlags = LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT;
   _listView.SetExtendedListViewStyle(newFlags, newFlags);
@@ -139,12 +188,19 @@ bool CMenuPage::OnInit()
 
 LONG CMenuPage::OnApply()
 {
-  if (_elimDup_Changed || _flags_Changed)
+  if (_elimDup_Changed || _writeZone_Changed || _flags_Changed)
   {
     CContextMenuInfo ci;
 
     ci.ElimDup.Val = IsButtonCheckedBool(IDX_EXTRACT_ELIM_DUP);
     ci.ElimDup.Def = _elimDup_Changed;
+
+    {
+      int zoneIndex = (int)_zoneCombo.GetItemData_of_CurSel();
+      if (zoneIndex <= 0)
+        zoneIndex = -1;
+      ci.WriteZone = (UInt32)(Int32)zoneIndex;
+    }
 
     ci.Flags = 0;
 
@@ -168,6 +224,7 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
   switch (buttonID)
   {
     case IDX_EXTRACT_ELIM_DUP: _elimDup_Changed = true; break;
+    // case IDX_EXTRACT_WRITE_ZONE: _writeZone_Changed = true; break;
 
     case IDB_SYSTEM_ASSOCIATE:
     {
@@ -188,6 +245,19 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
   Changed();
   return true;
 }
+
+
+bool CMenuPage::OnCommand(int code, int itemID, LPARAM param)
+{
+  if (code == CBN_SELCHANGE && itemID == IDC_SYSTEM_ZONE)
+  {
+    _writeZone_Changed = true;
+    Changed();
+    return true;
+  }
+  return CPropertyPage::OnCommand(code, itemID, param);
+}
+
 
 bool CMenuPage::OnNotify(UINT controlID, LPNMHDR lParam)
 {

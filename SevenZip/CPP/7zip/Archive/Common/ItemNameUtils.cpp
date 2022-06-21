@@ -73,9 +73,32 @@ void ReplaceToOsSlashes_Remove_TailSlash(UString &name, bool
     }
   }
   #endif
-    
+
   if (name.Back() == kOsPathSepar)
     name.DeleteBack();
+}
+
+
+void NormalizeSlashes_in_FileName_for_OsPath(wchar_t *name, unsigned len)
+{
+  for (unsigned i = 0; i < len; i++)
+  {
+    wchar_t c = name[i];
+    if (c == L'/')
+      c = L'_';
+   #if WCHAR_PATH_SEPARATOR != L'/'
+    else if (c == L'\\')
+      c = WCHAR_IN_FILE_NAME_BACKSLASH_REPLACEMENT; // WSL scheme
+   #endif
+    else
+      continue;
+    name[i] = c;
+  }
+}
+
+void NormalizeSlashes_in_FileName_for_OsPath(UString &name)
+{
+  NormalizeSlashes_in_FileName_for_OsPath(name.GetBuf(), name.Len());
 }
 
 

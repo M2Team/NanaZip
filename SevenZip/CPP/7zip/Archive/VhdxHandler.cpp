@@ -64,7 +64,7 @@ namespace NVhdx {
 static struct C_CRC32c_TableInit { C_CRC32c_TableInit() { Crc32c_GenerateTable(); } } g__CRC32c_TableInit;
 
 #define SIGNATURE { 'v', 'h', 'd', 'x', 'f', 'i', 'l', 'e' }
-  
+
 static const unsigned kSignatureSize = 8;
 static const Byte kSignature[kSignatureSize] = SIGNATURE;
 
@@ -171,6 +171,20 @@ struct CHeader
   UInt64 LogOffset;
   CGuid Guids[3];
 
+  bool IsEqualTo(const CHeader &h) const
+  {
+    if (SequenceNumber != h.SequenceNumber)
+      return false;
+    if (LogLength != h.LogLength)
+      return false;
+    if (LogOffset != h.LogOffset)
+      return false;
+    for (unsigned i = 0; i < 3; i++)
+      if (!Guids[i].IsEqualTo(h.Guids[i]))
+        return false;
+    return true;
+  };
+
   bool Parse(Byte *p);
 };
 
@@ -234,7 +248,7 @@ bool CRegionEntry::Parse(const Byte *p)
     return false;
   return true;
 }
-  
+
 
 struct CRegion
 {
@@ -267,7 +281,7 @@ bool CRegion::Parse(Byte *p)
   const UInt32 crc_calced = Crc32c_Calc(p, kRegionSize);
   if (crc_calced != crc)
     return false;
-  
+
   const UInt32 EntryCount = Get32(p + 8);
   if (Get32(p + 12) != 0) // reserved field must be set to 0.
     return false;
@@ -340,7 +354,7 @@ struct CMetaEntry
 bool CMetaEntry::Parse(const Byte *p)
 {
   Guid.SetFrom(p);
-  
+
   G32(0x10, Offset);
   G32(0x14, Len);
   G32(0x18, Flags0);
@@ -359,7 +373,7 @@ bool CMetaEntry::Parse(const Byte *p)
     return false;
   return true;
 };
-  
+
 
 struct CParentPair
 {
@@ -426,7 +440,7 @@ static unsigned GetLogSize(UInt32 size)
   return k;
 }
 
- 
+
 static const unsigned kMetadataSize = 8;
 static const Byte kMetadata[kMetadataSize] =
   { 'm','e','t','a','d','a','t','a' };
@@ -482,7 +496,7 @@ bool CMetaHeader::Parse(const Byte *p, size_t size)
     if (!e.CheckLimit(size))
       return false;
     const Byte *p2 = p + e.Offset;
-    
+
     if (e.Guid.IsEqualTo(kFileParameters))
     {
       if (BlockSize_Log != 0)
@@ -678,7 +692,7 @@ class CHandler: public CHandlerImg
     buf.Alloc(size);
     return ReadStream_FALSE(Stream, buf, size);
   }
-  
+
   void InitSeekPositions();
   HRESULT ReadPhy(UInt64 offset, void *data, UInt32 size, UInt32 &processed);
 
@@ -838,7 +852,7 @@ struct CLogEntry
   UInt32 DescriptorCount;
   UInt64 FlushedFileOffset;
   UInt64 LastFileOffset;
-  
+
   bool Parse(const Byte *p);
 };
 
@@ -914,7 +928,7 @@ bool CHandler::ParseBat()
 {
   ChunkRatio_Log = kBitmapSize_Log + 3 + Meta.LogicalSectorSize_Log - Meta.BlockSize_Log;
   ChunkRatio = (size_t)1 << (ChunkRatio_Log);
-  
+
   UInt64 totalBatEntries64;
   const bool isDiff = IsDiff();
   const UInt32 blockSize = (UInt32)1 << Meta.BlockSize_Log;
@@ -923,7 +937,7 @@ bool CHandler::ParseBat()
     if (up < Meta.VirtualDiskSize)
       return false;
     const UInt64 numDataBlocks = up >> Meta.BlockSize_Log;
-    
+
     if (isDiff)
     {
       // differencing table must be finished with bitmap entry
@@ -936,19 +950,19 @@ bool CHandler::ParseBat()
       totalBatEntries64 = numDataBlocks + ((numDataBlocks - 1) >> ChunkRatio_Log);
     }
   }
-  
+
   if (totalBatEntries64 > Bat.Data.Size() / 8)
     return false;
 
   const size_t totalBatEntries = (size_t)totalBatEntries64;
   TotalBatEntries = totalBatEntries;
-  
+
   bool isCont = (!isDiff && Meta.Is_LeaveBlockAllocated());
   UInt64 prevBlockOffset = 0;
   UInt64 maxBlockOffset = 0;
 
   size_t remEntries = ChunkRatio + 1;
-  
+
   size_t i;
   for (i = 0; i < totalBatEntries; i++)
   {
@@ -957,14 +971,14 @@ bool CHandler::ParseBat()
       return false;
     const UInt64 offset = BAT_GET_OFFSET(v);
     const unsigned state = BAT_GET_STATE(v);
-    
+
     /*
     UInt64 index64 = v >> 20;
     printf("\n%7d", i);
     printf("%10d, ", (unsigned)index64);
     printf("%4x, ", (unsigned)state);
     */
-    
+
     remEntries--;
     if (remEntries == 0)
     {
@@ -1048,7 +1062,7 @@ bool CHandler::ParseBat()
   }
   return true;
 }
-    
+
 
 bool CHandler::CheckBat()
 {
@@ -1057,7 +1071,7 @@ bool CHandler::CheckBat()
     return false;
   const UInt64 useMapSize64 = upSize >> (kBitmapSize_Log + 3);
   const size_t useMapSize = (size_t)useMapSize64;
-  
+
   const UInt32 blockSizeMB = (UInt32)1 << (Meta.BlockSize_Log - kBitmapSize_Log);
 
   // we don't check useMap, if it's too big.
@@ -1071,10 +1085,10 @@ bool CHandler::CheckBat()
   memset(useMap, 0, useMapSize);
   // useMap[0] = (Byte)(1 << 0); // first 1 MB is used by headers
   // we can also update useMap for log, and region data.
-  
+
   const size_t totalBatEntries = TotalBatEntries;
   size_t remEntries = ChunkRatio + 1;
-  
+
   size_t i;
   for (i = 0; i < totalBatEntries; i++)
   {
@@ -1097,7 +1111,7 @@ bool CHandler::CheckBat()
         continue;
       numBlocks = blockSizeMB;
     }
-    
+
     for (unsigned k = 0; k < numBlocks; k++)
     {
       const UInt64 index2 = index + k;
@@ -1131,7 +1145,7 @@ bool CHandler::CheckBat()
   NumUsed_1MB_Blocks = num;
   NumUsed_1MB_Blocks_Defined = true;
   */
-  
+
   return true;
 }
 
@@ -1142,7 +1156,7 @@ HRESULT CHandler::Open3()
   {
     static const unsigned kHeaderSize = 512; // + 8
     Byte header[kHeaderSize];
-    
+
     RINOK(Read_FALSE(header, kHeaderSize));
 
     if (memcmp(header, kSignature, kSignatureSize) != 0)
@@ -1174,7 +1188,18 @@ HRESULT CHandler::Open3()
   unsigned mainIndex;
        if (headers[0].SequenceNumber > headers[1].SequenceNumber) mainIndex = 0;
   else if (headers[0].SequenceNumber < headers[1].SequenceNumber) mainIndex = 1;
-  else return S_FALSE;
+  else
+  {
+    /* Disk2vhd v2.02 can create image with 2 full copies of headers.
+       It's violation of VHDX specification:
+          "A header is current if it is the only valid header
+           or if it is valid and its SequenceNumber field is
+           greater than the other header's SequenceNumber".
+       but we support such Disk2vhd archives. */
+    if (!headers[0].IsEqualTo(headers[1]))
+      return S_FALSE;
+    mainIndex = 0;
+  }
 
   const CHeader &h = headers[mainIndex];
   Header = h;
@@ -1238,10 +1263,10 @@ HRESULT CHandler::Open3()
       return S_FALSE;
     */
   }
-  
+
   // UpdatePhySize((1 << 16) * 5);
   UpdatePhySize(1 << 20);
-  
+
   {
     const CRegion &region = regions[correctRegionIndex];
     HeadersSize += region.DataSize;
@@ -1336,7 +1361,7 @@ HRESULT CHandler::Open3()
   }
 
   // here we suppose that and locator can be used only with HasParent flag
-    
+
   // return S_FALSE;
 
   _size = Meta.VirtualDiskSize; // CHandlerImg
@@ -1387,7 +1412,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
 
   bool needParent = false;
   bool needRead = false;
-  
+
   if (blockState == PAYLOAD_BLOCK_FULLY_PRESENT)
     needRead = true;
   else if (blockState == PAYLOAD_BLOCK_NOT_PRESENT)
@@ -1567,6 +1592,7 @@ static void AddComment_BlockSize(UString &s, const char *name, unsigned logSize)
 
 void CHandler::AddComment(UString &s) const
 {
+  AddComment_UInt64(s, "VirtualDiskSize", Meta.VirtualDiskSize);
   AddComment_UInt64(s, "PhysicalSize", _phySize);
 
   if (!_errorMessage.IsEmpty())
@@ -1582,10 +1608,10 @@ void CHandler::AddComment(UString &s) const
     Meta.Guid.AddHexToString(s);
     s.Add_LF();
   }
-  
+
   AddComment_UInt64(s, "SequenceNumber", Header.SequenceNumber);
   AddComment_UInt64(s, "LogLength", Header.LogLength, true);
-  
+
   for (unsigned i = 0; i < 3; i++)
   {
     const CGuid &g = Header.Guids[i];
@@ -1606,7 +1632,7 @@ void CHandler::AddComment(UString &s) const
   AddComment_Bool(s, "Fixed", Meta.Is_LeaveBlockAllocated());
   if (Meta.Is_LeaveBlockAllocated())
     AddComment_Bool(s, "DataContiguous", _isDataContiguous);
-  
+
   AddComment_BlockSize(s, "BlockSize", Meta.BlockSize_Log);
   AddComment_BlockSize(s, "LogicalSectorSize", Meta.LogicalSectorSize_Log);
   AddComment_BlockSize(s, "PhysicalSectorSize", Meta.PhysicalSectorSize_Log);
@@ -1829,19 +1855,19 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openArchiveCall
     AddErrorMessage("Too many parent levels");
     return S_OK;
   }
-  
+
   bool _parentFileWasOpen = false;
-  
+
   if (!openArchiveCallback)
     res = S_FALSE;
   else
     res = OpenParent(openArchiveCallback, _parentFileWasOpen);
-  
+
   if (res != S_OK)
   {
     if (res != S_FALSE)
       return res;
-    
+
     if (_parentFileWasOpen)
       AddErrorMessage("Can't parse parent VHDX file : ", ParentName_Used);
     else
@@ -1866,11 +1892,11 @@ HRESULT CHandler::OpenParent(IArchiveOpenCallback *openArchiveCallback, bool &_p
     CMyComPtr<IInStream> nextStream;
     HRESULT res = S_FALSE;
     UString name;
-    
+
     FOR_VECTOR (i, ParentNames)
     {
       name = ParentNames[i];
-      
+
       // we remove prefix ".\\', but client already can support any variant
       if (name[0] == L'.' && name[1] == L'\\')
         name.DeleteFrontal(2);
@@ -1879,14 +1905,14 @@ HRESULT CHandler::OpenParent(IArchiveOpenCallback *openArchiveCallback, bool &_p
 
       if (res == S_OK && nextStream)
         break;
-         
+
       if (res != S_OK && res != S_FALSE)
         return res;
     }
-    
+
     if (res == S_FALSE || !nextStream)
       return S_FALSE;
-    
+
     ParentName_Used = name;
     _parentFileWasOpen = true;
 

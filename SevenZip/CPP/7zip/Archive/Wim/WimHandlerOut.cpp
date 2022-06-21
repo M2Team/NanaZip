@@ -32,8 +32,8 @@ static int AddUniqHash(const CStreamInfo *streams, CUIntVector &sorted, const By
   unsigned left = 0, right = sorted.Size();
   while (left != right)
   {
-    unsigned mid = (left + right) / 2;
-    unsigned index = sorted[mid];
+    const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+    const unsigned index = sorted[mid];
     const Byte *hash2 = streams[index].Hash;
 
     unsigned i;
@@ -124,9 +124,9 @@ static int AddToHardLinkList(const CObjectVector<CMetaItem> &metaItems, unsigned
   unsigned left = 0, right = indexes.Size();
   while (left != right)
   {
-    unsigned mid = (left + right) / 2;
-    unsigned index = indexes[mid];
-    int comp = Compare_HardLink_MetaItems(mi, metaItems[index]);
+    const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+    const unsigned index = indexes[mid];
+    const int comp = Compare_HardLink_MetaItems(mi, metaItems[index]);
     if (comp == 0)
       return index;
     if (comp < 0)
@@ -203,8 +203,8 @@ bool CDir::FindDir(const CObjectVector<CMetaItem> &items, const UString &name, u
   unsigned left = 0, right = Dirs.Size();
   while (left != right)
   {
-    unsigned mid = (left + right) / 2;
-    int comp = CompareFileNames(name, items[Dirs[mid].MetaIndex].Name);
+    const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+    const int comp = CompareFileNames(name, items[Dirs[mid].MetaIndex].Name);
     if (comp == 0)
     {
       index = mid;
@@ -778,7 +778,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         }
         else
         {
-          // oldProps & newData. Current version of NanaZip doesn't use it
+          // oldProps & newData. Current version of 7-Zip doesn't use it
           if (item.ImageIndex >= 0)
             isChangedImage[item.ImageIndex] = true;
         }

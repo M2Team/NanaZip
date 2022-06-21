@@ -5,53 +5,65 @@
 
 #include <string.h>
 
+const unsigned k_VectorSizeMax = ((unsigned)1 << 31) - 1;
+
 template <class T>
 class CRecordVector
 {
   T *_items;
   unsigned _size;
   unsigned _capacity;
-  
+
   void MoveItems(unsigned destIndex, unsigned srcIndex)
   {
     memmove(_items + destIndex, _items + srcIndex, (size_t)(_size - srcIndex) * sizeof(T));
   }
 
-  void ReserveOnePosition()
+  void ReAllocForNewCapacity(const unsigned newCapacity)
   {
-    if (_size == _capacity)
-    {
-      unsigned newCapacity = _capacity + (_capacity >> 2) + 1;
-      T *p;
-      MY_ARRAY_NEW(p, T, newCapacity);
-      // p = new T[newCapacity];
-      if (_size != 0)
-        memcpy(p, _items, (size_t)_size * sizeof(T));
-      delete []_items;
-      _items = p;
-      _capacity = newCapacity;
-    }
+    T *p;
+    MY_ARRAY_NEW(p, T, newCapacity);
+    // p = new T[newCapacity];
+    if (_size != 0)
+      memcpy(p, _items, (size_t)_size * sizeof(T));
+    delete []_items;
+    _items = p;
+    _capacity = newCapacity;
   }
 
 public:
 
-  CRecordVector(): _items(NULL), _size(0), _capacity(0) {}
-  
-  CRecordVector(const CRecordVector &v): _items(0), _size(0), _capacity(0)
+  void ReserveOnePosition()
   {
-    unsigned size = v.Size();
+    if (_size != _capacity)
+      return;
+    if (_capacity >= k_VectorSizeMax)
+      throw 2021;
+    const unsigned rem = k_VectorSizeMax - _capacity;
+    unsigned add = (_capacity >> 2) + 1;
+    if (add > rem)
+      add = rem;
+    ReAllocForNewCapacity(_capacity + add);
+  }
+
+  CRecordVector(): _items(NULL), _size(0), _capacity(0) {}
+
+  CRecordVector(const CRecordVector &v): _items(NULL), _size(0), _capacity(0)
+  {
+    const unsigned size = v.Size();
     if (size != 0)
     {
+      // MY_ARRAY_NEW(_items, T, size)
       _items = new T[size];
       _size = size;
       _capacity = size;
       memcpy(_items, v._items, (size_t)size * sizeof(T));
     }
   }
-  
+
   unsigned Size() const { return _size; }
   bool IsEmpty() const { return _size == 0; }
-  
+
   void ConstructReserve(unsigned size)
   {
     if (size != 0)
@@ -66,15 +78,16 @@ public:
   {
     if (newCapacity > _capacity)
     {
-      T *p;
-      MY_ARRAY_NEW(p, T, newCapacity);
-      // p = new T[newCapacity];
-      if (_size != 0)
-        memcpy(p, _items, (size_t)_size * sizeof(T));
-      delete []_items;
-      _items = p;
-      _capacity = newCapacity;
+      if (newCapacity > k_VectorSizeMax)
+        throw 2021;
+      ReAllocForNewCapacity(newCapacity);
     }
+  }
+
+  void ChangeSize_KeepData(unsigned newSize)
+  {
+    Reserve(newSize);
+    _size = newSize;
   }
 
   void ClearAndReserve(unsigned newCapacity)
@@ -82,6 +95,8 @@ public:
     Clear();
     if (newCapacity > _capacity)
     {
+      if (newCapacity > k_VectorSizeMax)
+        throw 2021;
       delete []_items;
       _items = NULL;
       _capacity = 0;
@@ -97,22 +112,6 @@ public:
     _size = newSize;
   }
 
-  void ChangeSize_KeepData(unsigned newSize)
-  {
-    if (newSize > _capacity)
-    {
-      T *p;
-      MY_ARRAY_NEW(p, T, newSize)
-      // p = new T[newSize];
-      if (_size != 0)
-        memcpy(p, _items, (size_t)_size * sizeof(T));
-      delete []_items;
-      _items = p;
-      _capacity = newSize;
-    }
-    _size = newSize;
-  }
-
   void ReserveDown()
   {
     if (_size == _capacity)
@@ -120,6 +119,7 @@ public:
     T *p = NULL;
     if (_size != 0)
     {
+      // MY_ARRAY_NEW(p, T, _size)
       p = new T[_size];
       memcpy(p, _items, (size_t)_size * sizeof(T));
     }
@@ -127,9 +127,9 @@ public:
     _items = p;
     _capacity = _size;
   }
-  
+
   ~CRecordVector() { delete []_items; }
-  
+
   void ClearAndFree()
   {
     delete []_items;
@@ -137,17 +137,17 @@ public:
     _size = 0;
     _capacity = 0;
   }
-  
+
   void Clear() { _size = 0; }
 
   void DeleteBack() { _size--; }
-  
+
   void DeleteFrom(unsigned index)
   {
     // if (index <= _size)
       _size = index;
   }
-  
+
   void DeleteFrontal(unsigned num)
   {
     if (num != 0)
@@ -178,7 +178,7 @@ public:
   {
     if (&v == this)
       return *this;
-    unsigned size = v.Size();
+    const unsigned size = v.Size();
     if (size > _capacity)
     {
       delete []_items;
@@ -196,29 +196,57 @@ public:
 
   CRecordVector& operator+=(const CRecordVector &v)
   {
-    unsigned size = v.Size();
-    Reserve(_size + size);
+    const unsigned size = v.Size();
     if (size != 0)
+    {
+      if (_size >= k_VectorSizeMax || size > k_VectorSizeMax - _size)
+        throw 2021;
+      const unsigned newSize = _size + size;
+      Reserve(newSize);
       memcpy(_items + _size, v._items, (size_t)size * sizeof(T));
-    _size += size;
+      _size = newSize;
+    }
     return *this;
   }
-  
+
   unsigned Add(const T item)
   {
     ReserveOnePosition();
-    _items[_size] = item;
-    return _size++;
+    const unsigned size = _size;
+    _size = size + 1;
+    _items[size] = item;
+    return size;
   }
 
-  void AddInReserved(const T item)
+  /*
+  unsigned Add2(const T &item)
   {
-    _items[_size++] = item;
+    ReserveOnePosition();
+    const unsigned size = _size;
+    _size = size + 1;
+    _items[size] = item;
+    return size;
+  }
+  */
+
+  unsigned AddInReserved(const T item)
+  {
+    const unsigned size = _size;
+    _size = size + 1;
+    _items[size] = item;
+    return size;
   }
 
   void Insert(unsigned index, const T item)
   {
     ReserveOnePosition();
+    MoveItems(index + 1, index);
+    _items[index] = item;
+    _size++;
+  }
+
+  void InsertInReserved(unsigned index, const T item)
+  {
     MoveItems(index + 1, index);
     _items[index] = item;
     _size++;
@@ -254,7 +282,8 @@ public:
   {
     while (left != right)
     {
-      unsigned mid = (left + right) / 2;
+      // const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+      const unsigned mid = (left + right) / 2;
       const T midVal = (*this)[mid];
       if (item == midVal)
         return (int)mid;
@@ -270,9 +299,10 @@ public:
   {
     while (left != right)
     {
-      unsigned mid = (left + right) / 2;
+      // const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+      const unsigned mid = (left + right) / 2;
       const T& midVal = (*this)[mid];
-      int comp = item.Compare(midVal);
+      const int comp = item.Compare(midVal);
       if (comp == 0)
         return (int)mid;
       if (comp < 0)
@@ -298,7 +328,8 @@ public:
     unsigned left = 0, right = _size;
     while (left != right)
     {
-      unsigned mid = (left + right) / 2;
+      // const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+      const unsigned mid = (left + right) / 2;
       const T midVal = (*this)[mid];
       if (item == midVal)
         return mid;
@@ -316,9 +347,10 @@ public:
     unsigned left = 0, right = _size;
     while (left != right)
     {
-      unsigned mid = (left + right) / 2;
+      // const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+      const unsigned mid = (left + right) / 2;
       const T& midVal = (*this)[mid];
-      int comp = item.Compare(midVal);
+      const int comp = item.Compare(midVal);
       if (comp == 0)
         return mid;
       if (comp < 0)
@@ -431,65 +463,99 @@ public:
   CObjectVector() {}
   CObjectVector(const CObjectVector &v)
   {
-    unsigned size = v.Size();
+    const unsigned size = v.Size();
     _v.ConstructReserve(size);
     for (unsigned i = 0; i < size; i++)
-      _v.AddInReserved(new T(v[i]));
+      AddInReserved(v[i]);
   }
   CObjectVector& operator=(const CObjectVector &v)
   {
     if (&v == this)
       return *this;
     Clear();
-    unsigned size = v.Size();
+    const unsigned size = v.Size();
     _v.Reserve(size);
     for (unsigned i = 0; i < size; i++)
-      _v.AddInReserved(new T(v[i]));
+      AddInReserved(v[i]);
     return *this;
   }
 
   CObjectVector& operator+=(const CObjectVector &v)
   {
-    unsigned size = v.Size();
-    _v.Reserve(Size() + size);
-    for (unsigned i = 0; i < size; i++)
-      _v.AddInReserved(new T(v[i]));
+    const unsigned addSize = v.Size();
+    if (addSize != 0)
+    {
+      const unsigned size = Size();
+      if (size >= k_VectorSizeMax || addSize > k_VectorSizeMax - size)
+        throw 2021;
+      _v.Reserve(size + addSize);
+      for (unsigned i = 0; i < addSize; i++)
+        AddInReserved(v[i]);
+    }
     return *this;
   }
-  
+
   const T& operator[](unsigned index) const { return *((T *)_v[index]); }
         T& operator[](unsigned index)       { return *((T *)_v[index]); }
   const T& Front() const { return operator[](0); }
         T& Front()       { return operator[](0); }
   const T& Back() const  { return *(T *)_v.Back(); }
         T& Back()        { return *(T *)_v.Back(); }
-  
+
   void MoveToFront(unsigned index) { _v.MoveToFront(index); }
 
-  unsigned Add(const T& item) { return _v.Add(new T(item)); }
-  
-  void AddInReserved(const T& item) { _v.AddInReserved(new T(item)); }
-  
+  unsigned Add(const T& item)
+  {
+    _v.ReserveOnePosition();
+    return AddInReserved(item);
+  }
+
+  unsigned AddInReserved(const T& item)
+  {
+    return _v.AddInReserved(new T(item));
+  }
+
+  void ReserveOnePosition()
+  {
+    _v.ReserveOnePosition();
+  }
+
+  unsigned AddInReserved_Ptr_of_new(T *ptr)
+  {
+    return _v.AddInReserved(ptr);
+  }
+
+  #define VECTOR_ADD_NEW_OBJECT(v, a) \
+    (v).ReserveOnePosition(); \
+    (v).AddInReserved_Ptr_of_new(new a);
+
+
   T& AddNew()
   {
+    _v.ReserveOnePosition();
     T *p = new T;
-    _v.Add(p);
+    _v.AddInReserved(p);
     return *p;
   }
-  
+
   T& AddNewInReserved()
   {
     T *p = new T;
     _v.AddInReserved(p);
     return *p;
   }
-  
-  void Insert(unsigned index, const T& item) { _v.Insert(index, new T(item)); }
-  
+
+  void Insert(unsigned index, const T& item)
+  {
+    _v.ReserveOnePosition();
+    _v.InsertInReserved(index, new T(item));
+  }
+
   T& InsertNew(unsigned index)
   {
+    _v.ReserveOnePosition();
     T *p = new T;
-    _v.Insert(index, p);
+    _v.InsertInReserved(index, p);
     return *p;
   }
 
@@ -498,23 +564,23 @@ public:
     for (unsigned i = _v.Size(); i != 0;)
       delete (T *)_v[--i];
   }
-  
+
   void ClearAndFree()
   {
     Clear();
     _v.ClearAndFree();
   }
-  
+
   void Clear()
   {
     for (unsigned i = _v.Size(); i != 0;)
       delete (T *)_v[--i];
     _v.Clear();
   }
-  
+
   void DeleteFrom(unsigned index)
   {
-    unsigned size = _v.Size();
+    const unsigned size = _v.Size();
     for (unsigned i = index; i < size; i++)
       delete (T *)_v[i];
     _v.DeleteFrom(index);
@@ -558,15 +624,16 @@ public:
     return -1;
   }
   */
-  
+
   int FindInSorted(const T& item) const
   {
     unsigned left = 0, right = Size();
     while (left != right)
     {
-      unsigned mid = (left + right) / 2;
+      // const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+      const unsigned mid = (left + right) / 2;
       const T& midVal = (*this)[mid];
-      int comp = item.Compare(midVal);
+      const int comp = item.Compare(midVal);
       if (comp == 0)
         return (int)mid;
       if (comp < 0)
@@ -582,9 +649,10 @@ public:
     unsigned left = 0, right = Size();
     while (left != right)
     {
-      unsigned mid = (left + right) / 2;
+      // const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+      const unsigned mid = (left + right) / 2;
       const T& midVal = (*this)[mid];
-      int comp = item.Compare(midVal);
+      const int comp = item.Compare(midVal);
       if (comp == 0)
         return mid;
       if (comp < 0)
@@ -602,9 +670,10 @@ public:
     unsigned left = 0, right = Size();
     while (left != right)
     {
-      unsigned mid = (left + right) / 2;
+      // const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+      const unsigned mid = (left + right) / 2;
       const T& midVal = (*this)[mid];
-      int comp = item.Compare(midVal);
+      const int comp = item.Compare(midVal);
       if (comp == 0)
       {
         right = mid + 1;

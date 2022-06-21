@@ -34,13 +34,22 @@ static void ReplaceIncorrectChars(UString &s)
           ||
           #endif
           c == WCHAR_PATH_SEPARATOR)
+      {
+       #if WCHAR_PATH_SEPARATOR != L'/'
+        // 22.00 : WSL replacement for backslash
+        if (c == WCHAR_PATH_SEPARATOR)
+          c = WCHAR_IN_FILE_NAME_BACKSLASH_REPLACEMENT;
+        else
+       #endif
+          c = '_';
         s.ReplaceOneCharAtPos(i,
-          '_' // default
+          c
           // (wchar_t)(0xf000 + c) // 21.02 debug: WSL encoding for unsupported characters
           );
+      }
     }
   }
-  
+
   if (g_PathTrailReplaceMode)
   {
     /*
@@ -171,11 +180,11 @@ UString Get_Correct_FsFile_Name(const UString &name)
 {
   UString res = name;
   Correct_PathPart(res);
-  
+
   #ifdef _WIN32
   CorrectUnsupportedName(res);
   #endif
-  
+
   if (res.IsEmpty())
     res = k_EmptyReplaceName;
   return res;
@@ -191,7 +200,7 @@ void Correct_FsPath(bool absIsAllowed, bool keepAndReplaceEmptyPrefixes, UString
     #if defined(_WIN32) && !defined(UNDER_CE)
     bool isDrive = false;
     #endif
-    
+
     if (parts[0].IsEmpty())
     {
       i = 1;
@@ -257,7 +266,7 @@ void Correct_FsPath(bool absIsAllowed, bool keepAndReplaceEmptyPrefixes, UString
       CorrectUnsupportedName(s);
       #endif
     }
-    
+
     i++;
   }
 

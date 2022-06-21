@@ -10,6 +10,8 @@
 #include "../../../Common/MyString.h"
 
 #include "../../../Windows/FileFind.h"
+#include "../../../Windows/PropVariant.h"
+#include "../../../Windows/TimeUtils.h"
 
 #include "../../Common/UniqBlocks.h"
 
@@ -22,9 +24,9 @@ struct CDirItemsStat
   UInt64 NumAltStreams;
   UInt64 FilesSize;
   UInt64 AltStreamsSize;
-  
+
   UInt64 NumErrors;
-  
+
   // UInt64 Get_NumItems() const { return NumDirs + NumFiles + NumAltStreams; }
   UInt64 Get_NumDataItems() const { return NumFiles + NumAltStreams; }
   UInt64 GetTotalBytes() const { return FilesSize + AltStreamsSize; }
@@ -36,7 +38,7 @@ struct CDirItemsStat
         && 0 == FilesSize
         && 0 == AltStreamsSize
         && 0 == NumErrors; }
-  
+
   CDirItemsStat():
       NumDirs(0),
       NumFiles(0),
@@ -53,7 +55,7 @@ struct CDirItemsStat2: public CDirItemsStat
   UInt64 Anti_NumDirs;
   UInt64 Anti_NumFiles;
   UInt64 Anti_NumAltStreams;
-  
+
   // UInt64 Get_NumItems() const { return Anti_NumDirs + Anti_NumFiles + Anti_NumAltStreams + CDirItemsStat::Get_NumItems(); }
   UInt64 Get_NumDataItems2() const { return Anti_NumFiles + Anti_NumAltStreams + CDirItemsStat::Get_NumDataItems(); }
 
@@ -61,7 +63,7 @@ struct CDirItemsStat2: public CDirItemsStat
         && 0 == Anti_NumDirs
         && 0 == Anti_NumFiles
         && 0 == Anti_NumAltStreams; }
-  
+
   CDirItemsStat2():
       Anti_NumDirs(0),
       Anti_NumFiles(0),
@@ -80,50 +82,213 @@ struct IDirItemsCallback
   INTERFACE_IDirItemsCallback(=0)
 };
 
-struct CDirItem
+
+struct CArcTime
 {
-  UInt64 Size;
-  FILETIME CTime;
-  FILETIME ATime;
-  FILETIME MTime;
+  FILETIME FT;
+  UInt16 Prec;
+  Byte Ns100;
+  bool Def;
+
+  CArcTime()
+  {
+    Clear();
+  }
+
+  void Clear()
+  {
+    FT.dwHighDateTime = FT.dwLowDateTime = 0;
+    Prec = 0;
+    Ns100 = 0;
+    Def = false;
+  }
+
+  bool IsZero() const
+  {
+    return FT.dwLowDateTime == 0 && FT.dwHighDateTime == 0 && Ns100 == 0;
+  }
+
+  int CompareWith(const CArcTime &a) const
+  {
+    const int res = CompareFileTime(&FT, &a.FT);
+    if (res != 0)
+      return res;
+    if (Ns100 < a.Ns100) return -1;
+    if (Ns100 > a.Ns100) return 1;
+    return 0;
+  }
+
+  UInt64 Get_FILETIME_as_UInt64() const
+  {
+    return (((UInt64)FT.dwHighDateTime) << 32) + FT.dwLowDateTime;
+  }
+
+  UInt32 Get_DosTime() const
+  {
+    FILETIME ft2 = FT;
+    if ((Prec == k_PropVar_TimePrec_Base + 8 ||
+         Prec == k_PropVar_TimePrec_Base + 9)
+        && Ns100 != 0)
+    {
+      UInt64 u64 = Get_FILETIME_as_UInt64();
+      // we round up even small (ns < 100ns) as FileTimeToDosTime()
+      if (u64 % 20000000 == 0)
+      {
+        u64++;
+        ft2.dwHighDateTime = (DWORD)(u64 >> 32);
+        ft2.dwHighDateTime = (DWORD)u64;
+      }
+    }
+    // FileTimeToDosTime() is expected to round up in Windows
+    UInt32 dosTime;
+    // we use simplified code with utctime->dos.
+    // do we need local time instead here?
+    NWindows::NTime::FileTime_To_DosTime(ft2, dosTime);
+    return dosTime;
+  }
+
+  int GetNumDigits() const
+  {
+    if (Prec == k_PropVar_TimePrec_Unix ||
+        Prec == k_PropVar_TimePrec_DOS)
+      return 0;
+    if (Prec == k_PropVar_TimePrec_HighPrec)
+      return 9;
+    if (Prec == k_PropVar_TimePrec_0)
+      return 7;
+    int digits = (int)Prec - (int)k_PropVar_TimePrec_Base;
+    if (digits < 0)
+      digits = 0;
+    return digits;
+  }
+
+  void Write_To_FiTime(CFiTime &dest) const
+  {
+   #ifdef _WIN32
+    dest = FT;
+   #else
+    if (FILETIME_To_timespec(FT, dest))
+    if ((Prec == k_PropVar_TimePrec_Base + 8 ||
+         Prec == k_PropVar_TimePrec_Base + 9)
+        && Ns100 != 0)
+    {
+      dest.tv_nsec += Ns100;
+    }
+   #endif
+  }
+
+  // (Def) is not set
+  void Set_From_FILETIME(const FILETIME &ft)
+  {
+    FT = ft;
+    // Prec = k_PropVar_TimePrec_CompatNTFS;
+    Prec = k_PropVar_TimePrec_Base + 7;
+    Ns100 = 0;
+  }
+
+  // (Def) is not set
+  // it set full form precision: k_PropVar_TimePrec_Base + numDigits
+  void Set_From_FiTime(const CFiTime &ts)
+  {
+   #ifdef _WIN32
+    FT = ts;
+    Prec = k_PropVar_TimePrec_Base + 7;
+    // Prec = k_PropVar_TimePrec_Base; // for debug
+    // Prec = 0; // for debug
+    Ns100 = 0;
+   #else
+    unsigned ns100;
+    FiTime_To_FILETIME_ns100(ts, FT, ns100);
+    Ns100 = (Byte)ns100;
+    Prec = k_PropVar_TimePrec_Base + 9;
+   #endif
+  }
+
+  void Set_From_Prop(const PROPVARIANT &prop)
+  {
+    FT = prop.filetime;
+    unsigned prec = 0;
+    unsigned ns100 = 0;
+    const unsigned prec_Temp = prop.wReserved1;
+    if (prec_Temp != 0
+        && prec_Temp <= k_PropVar_TimePrec_1ns
+        && prop.wReserved3 == 0)
+    {
+      const unsigned ns100_Temp = prop.wReserved2;
+      if (ns100_Temp < 100)
+      {
+        ns100 = ns100_Temp;
+        prec = prec_Temp;
+      }
+    }
+    Prec = (UInt16)prec;
+    Ns100 = (Byte)ns100;
+    Def = true;
+  }
+};
+
+
+struct CDirItem: public NWindows::NFile::NFind::CFileInfoBase
+{
   UString Name;
-  
-  #ifndef UNDER_CE
+
+ #ifndef UNDER_CE
   CByteBuffer ReparseData;
 
-  #ifdef _WIN32
+ #ifdef _WIN32
   // UString ShortName;
   CByteBuffer ReparseData2; // fixed (reduced) absolute links for WIM format
   bool AreReparseData() const { return ReparseData.Size() != 0 || ReparseData2.Size() != 0; }
-  #else
+ #else
   bool AreReparseData() const { return ReparseData.Size() != 0; }
-  #endif // _WIN32
+ #endif // _WIN32
 
-  #endif // !UNDER_CE
-  
-  UInt32 Attrib;
+ #endif // !UNDER_CE
+
+  void Copy_From_FileInfoBase(const NWindows::NFile::NFind::CFileInfoBase &fi)
+  {
+    (NWindows::NFile::NFind::CFileInfoBase &)*this = fi;
+  }
+
   int PhyParent;
   int LogParent;
   int SecureIndex;
 
-  bool IsAltStream;
-  
-  CDirItem(): PhyParent(-1), LogParent(-1), SecureIndex(-1), IsAltStream(false) {}
-  
-  bool IsDir() const { return (Attrib & FILE_ATTRIBUTE_DIRECTORY) != 0; }
-  bool IsReadOnly() const { return (Attrib & FILE_ATTRIBUTE_READONLY) != 0; }
-  bool Has_Attrib_ReparsePoint() const { return (Attrib & FILE_ATTRIBUTE_REPARSE_POINT) != 0; }
+ #ifdef _WIN32
+ #else
+  int OwnerNameIndex;
+  int OwnerGroupIndex;
+ #endif
 
-  #ifdef _WIN32
-  UInt32 GetPosixAttrib() const
+  CDirItem():
+      PhyParent(-1)
+    , LogParent(-1)
+    , SecureIndex(-1)
+   #ifdef _WIN32
+   #else
+    , OwnerNameIndex(-1)
+    , OwnerGroupIndex(-1)
+   #endif
   {
-    UInt32 v = IsDir() ? MY_LIN_S_IFDIR : MY_LIN_S_IFREG;
-    /* 21.06: as WSL we allow write permissions (0222) for directories even for (FILE_ATTRIBUTE_READONLY).
-       So extracting at Linux will be allowed to write files inside (0777) directories. */
-    v |= ((IsReadOnly() && !IsDir()) ? 0555 : 0777);
-    return v;
   }
-  #endif
+
+
+  CDirItem(const NWindows::NFile::NFind::CFileInfo &fi,
+      int phyParent, int logParent, int secureIndex):
+    CFileInfoBase(fi)
+    , Name(fs2us(fi.Name))
+   #if defined(_WIN32) && !defined(UNDER_CE)
+    // , ShortName(fs2us(fi.ShortName))
+   #endif
+    , PhyParent(phyParent)
+    , LogParent(logParent)
+    , SecureIndex(secureIndex)
+   #ifdef _WIN32
+   #else
+    , OwnerNameIndex(-1)
+    , OwnerGroupIndex(-1)
+   #endif
+    {}
 };
 
 
@@ -145,13 +310,14 @@ public:
   bool ScanAltStreams;
   bool ExcludeDirItems;
   bool ExcludeFileItems;
+  bool ShareForWrite;
 
   /* it must be called after anotrher checks */
   bool CanIncludeItem(bool isDir) const
   {
     return isDir ? !ExcludeDirItems : !ExcludeFileItems;
   }
- 
+
 
   CDirItemsStat Stat;
 
@@ -160,17 +326,27 @@ public:
       const FString &phyPrefix);
   #endif
 
-  #if defined(_WIN32) && !defined(UNDER_CE)
+ #if defined(_WIN32) && !defined(UNDER_CE)
 
   CUniqBlocks SecureBlocks;
   CByteBuffer TempSecureBuf;
   bool _saclEnabled;
   bool ReadSecure;
-  
+
   HRESULT AddSecurityItem(const FString &path, int &secureIndex);
   HRESULT FillFixedReparse();
 
-  #endif
+ #endif
+
+ #ifndef _WIN32
+
+  C_UInt32_UString_Map OwnerNameMap;
+  C_UInt32_UString_Map OwnerGroupMap;
+  bool StoreOwnerName;
+
+  HRESULT FillDeviceSizes();
+
+ #endif
 
   IDirItemsCallback *Callback;
 
@@ -193,7 +369,7 @@ public:
 
   // HRESULT EnumerateOneDir(const FString &phyPrefix, CObjectVector<NWindows::NFile::NFind::CDirEntry> &files);
   HRESULT EnumerateOneDir(const FString &phyPrefix, CObjectVector<NWindows::NFile::NFind::CFileInfo> &files);
-  
+
   HRESULT EnumerateItems2(
     const FString &phyPrefix,
     const UString &logPrefix,
@@ -204,20 +380,25 @@ public:
 };
 
 
+
+
 struct CArcItem
 {
   UInt64 Size;
-  FILETIME MTime;
   UString Name;
+  CArcTime MTime;  // it can be mtime of archive file, if MTime is not defined for item in archive
   bool IsDir;
   bool IsAltStream;
-  bool SizeDefined;
-  bool MTimeDefined;
+  bool Size_Defined;
   bool Censored;
   UInt32 IndexInServer;
-  int TimeType;
-  
-  CArcItem(): IsDir(false), IsAltStream(false), SizeDefined(false), MTimeDefined(false), Censored(false), TimeType(-1) {}
+
+  CArcItem():
+      IsDir(false),
+      IsAltStream(false),
+      Size_Defined(false),
+      Censored(false)
+    {}
 };
 
 #endif

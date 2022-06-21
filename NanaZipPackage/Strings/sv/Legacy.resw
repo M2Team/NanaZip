@@ -513,6 +513,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>Skrivskyddad</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Kopiera länk</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Metadata ändrad</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Alternativ</value>
   </data>
@@ -637,7 +643,7 @@
     <value>Om NanaZip</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>NanaZip är fri programvara.</value>
+    <value>NanaZip är fri och gratis programvara.</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>Systemet kan inte allokera den begärda minnesmängden</value>
@@ -788,6 +794,12 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Återställ filsäkerhet</value>
+  </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Sprid Zone.Id-ström:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>För Office-filer</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Bekräfta överskrivning av fil</value>
@@ -1023,6 +1035,33 @@
   <data name="Resource4073" xml:space="preserve">
     <value>Enhetlig</value>
   </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Tid</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Tidsstämpelprecision:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Lagra ändringstid</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Lagra skapandetid</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Lagra senaste åtkomsttid</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Ange den senaste filtiden som arkivets tid</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Ändra inte källfilers senaste åtkomsttider</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
+  </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Kopiera</value>
   </data>
@@ -1165,7 +1204,7 @@
     <value>Flytta</value>
   </data>
   <data name="Resource7205" xml:space="preserve">
-    <value>Radera</value>
+    <value>Ta bort</value>
   </data>
   <data name="Resource7206" xml:space="preserve">
     <value>Egenskaper</value>
@@ -1228,7 +1267,7 @@
     <value>CRC-kontrollsumma för data och namn:</value>
   </data>
   <data name="Resource7600" xml:space="preserve">
-    <value>Prestandamätning</value>
+    <value>Prestandamått</value>
   </data>
   <data name="Resource7601" xml:space="preserve">
     <value>Minnesanvändning:</value>

@@ -4,6 +4,8 @@
 
 #include "../../../Common/MyException.h"
 
+#include "../Common/ZipRegistry.h"
+
 #include "../GUI/HashGUI.h"
 
 #include "ExtractCallback.h"
@@ -70,6 +72,15 @@ HRESULT CPanelCopyThread::ProcessVirt()
 
   HRESULT result2;
 
+  {
+    CMyComPtr<IFolderSetZoneIdMode> setZoneMode;
+    FolderOperations.QueryInterface(IID_IFolderSetZoneIdMode, &setZoneMode);
+    if (setZoneMode)
+    {
+      RINOK(setZoneMode->SetZoneIdMode(options->ZoneIdMode));
+    }
+  }
+
   if (options->testMode)
   {
     CMyComPtr<IArchiveFolder> archiveFolder;
@@ -126,6 +137,14 @@ HRESULT CPanel::CopyTo(CCopyToOptions &options, const CRecordVector<UInt32> &ind
     UStringVector *messages,
     bool &usePassword, UString &password)
 {
+  if (options.NeedRegistryZone && !options.testMode)
+  {
+    CContextMenuInfo ci;
+    ci.Load();
+    if (ci.WriteZone != (UInt32)(Int32)-1)
+      options.ZoneIdMode = (NExtract::NZoneIdMode::EEnum)(int)(Int32)ci.WriteZone;
+  }
+
   if (IsHashFolder())
   {
     if (!options.testMode)
@@ -221,7 +240,7 @@ HRESULT CPanel::CopyTo(CCopyToOptions &options, const CRecordVector<UInt32> &ind
       title = LangString(titleID);
   }
 
-  UString progressWindowTitle ("NanaZip"); // LangString(IDS_APP_TITLE);
+  const UString progressWindowTitle ("NanaZip"); // LangString(IDS_APP_TITLE);
 
   extracter.MainWindow = GetParent();
   extracter.MainTitle = progressWindowTitle;

@@ -4,7 +4,7 @@
 #define __EXTRACT_MODE_H
 
 namespace NExtract {
-  
+
 namespace NPathMode
 {
   enum EEnum
@@ -26,6 +26,16 @@ namespace NOverwriteMode
     kSkip,
     kRename,
     kRenameExisting
+  };
+}
+
+namespace NZoneIdMode
+{
+  enum EEnum
+  {
+    kNone,
+    kAll,
+    kOffice
   };
 }
 

@@ -11,10 +11,10 @@ unsigned CUniqBlocks::AddUniq(const Byte *data, size_t size)
   unsigned left = 0, right = Sorted.Size();
   while (left != right)
   {
-    unsigned mid = (left + right) / 2;
-    unsigned index = Sorted[mid];
+    const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
+    const unsigned index = Sorted[mid];
     const CByteBuffer &buf = Bufs[index];
-    size_t sizeMid = buf.Size();
+    const size_t sizeMid = buf.Size();
     if (size < sizeMid)
       right = mid;
     else if (size > sizeMid)
@@ -23,7 +23,7 @@ unsigned CUniqBlocks::AddUniq(const Byte *data, size_t size)
     {
       if (size == 0)
         return index;
-      int cmp = memcmp(data, buf, size);
+      const int cmp = memcmp(data, buf, size);
       if (cmp == 0)
         return index;
       if (cmp < 0)

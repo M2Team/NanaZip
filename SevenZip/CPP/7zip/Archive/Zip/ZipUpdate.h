@@ -19,7 +19,7 @@ struct CUpdateRange
 {
   UInt64 Position;
   UInt64 Size;
-  
+
   // CUpdateRange() {};
   CUpdateRange(UInt64 position, UInt64 size): Position(position), Size(size) {};
 };
@@ -30,7 +30,9 @@ struct CUpdateItem
   bool NewData;
   bool NewProps;
   bool IsDir;
-  bool NtfsTimeIsDefined;
+  bool Write_NtfsTime;
+  bool Write_UnixTime;
+  // bool Write_UnixTime_ATime;
   bool IsUtf8;
   // bool IsAltStream;
   int IndexInArc;
@@ -50,23 +52,42 @@ struct CUpdateItem
   void Clear()
   {
     IsDir = false;
-    NtfsTimeIsDefined = false;
+
+    Write_NtfsTime = false;
+    Write_UnixTime = false;
+
     IsUtf8 = false;
     // IsAltStream = false;
+    Time = 0;
     Size = 0;
     Name.Empty();
     Name_Utf.Free();
     Comment.Free();
+
+    FILETIME_Clear(Ntfs_MTime);
+    FILETIME_Clear(Ntfs_ATime);
+    FILETIME_Clear(Ntfs_CTime);
   }
 
   CUpdateItem():
     IsDir(false),
-    NtfsTimeIsDefined(false),
+    Write_NtfsTime(false),
+    Write_UnixTime(false),
     IsUtf8(false),
     // IsAltStream(false),
+    Time(0),
     Size(0)
     {}
 };
+
+
+struct CUpdateOptions
+{
+  bool Write_MTime;
+  bool Write_ATime;
+  bool Write_CTime;
+};
+
 
 HRESULT Update(
     DECL_EXTERNAL_CODECS_LOC_VARS
@@ -74,6 +95,7 @@ HRESULT Update(
     CObjectVector<CUpdateItem> &updateItems,
     ISequentialOutStream *seqOutStream,
     CInArchive *inArchive, bool removeSfx,
+    const CUpdateOptions &updateOptions,
     const CCompressionMethodMode &compressionMethodMode,
     IArchiveUpdateCallback *updateCallback);
 

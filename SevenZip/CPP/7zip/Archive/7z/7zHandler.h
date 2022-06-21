@@ -49,15 +49,14 @@ public:
   bool _encryptHeaders;
   // bool _useParents; 9.26
 
-  CBoolPair Write_CTime;
-  CBoolPair Write_ATime;
-  CBoolPair Write_MTime;
+  CHandlerTimeOptions TimeOptions;
+
   CBoolPair Write_Attrib;
 
   bool _useMultiThreadMixer;
 
   bool _removeSfxBlock;
-  
+
   // bool _volumeMode;
 
   void InitSolidFiles() { _numSolidFiles = (UInt64)(Int64)(-1); }
@@ -83,17 +82,17 @@ public:
 class CHandler:
   public IInArchive,
   public IArchiveGetRawProps,
-  
+
   #ifdef __7Z_SET_PROPERTIES
   public ISetProperties,
   #endif
-  
+
   #ifndef EXTRACT_ONLY
   public IOutArchive,
   #endif
-  
+
   PUBLIC_ISetCompressCodecsInfo
-  
+
   public CMyUnknownImp,
 
   #ifndef EXTRACT_ONLY
@@ -137,7 +136,7 @@ public:
 private:
   CMyComPtr<IInStream> _inStream;
   NArchive::N7z::CDbEx _db;
-  
+
   #ifndef _NO_CRYPTO
   bool _isEncrypted;
   bool _passwordIsDefined;
@@ -145,7 +144,7 @@ private:
   #endif
 
   #ifdef EXTRACT_ONLY
-  
+
   #ifdef __7Z_SET_PROPERTIES
   bool _useMultiThreadMixer;
   #endif
@@ -153,7 +152,7 @@ private:
   UInt32 _crcSize;
 
   #else
-  
+
   CRecordVector<CBond2> _bonds;
 
   HRESULT PropsMethod_To_FullMethod(CMethodFull &dest, const COneMethodInfo &m);

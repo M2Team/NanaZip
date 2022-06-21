@@ -114,7 +114,7 @@ HRESULT CAgentFolder::CommonUpdateOperation(
       tailStreamSpec->Offset = arc.ArcStreamOffset;
       tailStreamSpec->Init();
     }
-    
+
     HRESULT result;
 
     switch (operation)
@@ -148,18 +148,18 @@ HRESULT CAgentFolder::CommonUpdateOperation(
       default:
         return E_FAIL;
     }
-    
+
     RINOK(result);
   }
 
   _agentSpec->KeepModeForNextOpen();
   _agentSpec->Close();
-  
+
   // before 9.26: if there was error for MoveToOriginal archive was closed.
   // now: we reopen archive after close
 
   // m_FolderItem = NULL;
-  
+
   HRESULT res = tempFile.MoveToOriginal(true);
 
   // RINOK(res);
@@ -187,15 +187,15 @@ HRESULT CAgentFolder::CommonUpdateOperation(
       updateCallback100->QueryInterface(IID_IArchiveOpenCallback, (void **)&openCallback);
     RINOK(_agentSpec->ReOpen(openCallback));
   }
-   
+
   // CAgent::ReOpen() deletes _proxy and _proxy2
   _items.Clear();
   _proxy = NULL;
   _proxy2 = NULL;
   _proxyDirIndex = k_Proxy_RootDirIndex;
   _isAltStreamFolder = false;
-  
-  
+
+
   // ---------- Restore FolderItem ----------
 
   CMyComPtr<IFolderFolder> archiveFolder;
@@ -210,12 +210,12 @@ HRESULT CAgentFolder::CommonUpdateOperation(
     FOR_VECTOR (i, pathParts)
     {
       int next = _proxy->FindSubDir(_proxyDirIndex, pathParts[i]);
-      if (next < 0)
+      if (next == -1)
         break;
       _proxyDirIndex = next;
     }
   }
-  
+
   if (_proxy2)
   {
     if (pathParts.IsEmpty() && isAltStreamFolder)
@@ -226,16 +226,16 @@ HRESULT CAgentFolder::CommonUpdateOperation(
     {
       bool dirOnly = (i + 1 < pathParts.Size() || !isAltStreamFolder);
       int index = _proxy2->FindItem(_proxyDirIndex, pathParts[i], dirOnly);
-      if (index < 0)
+      if (index == -1)
         break;
-      
+
       const CProxyFile2 &file = _proxy2->Files[_proxy2->Dirs[_proxyDirIndex].Items[index]];
-  
+
       if (dirOnly)
         _proxyDirIndex = file.DirIndex;
       else
       {
-        if (file.AltDirIndex >= 0)
+        if (file.AltDirIndex != -1)
           _proxyDirIndex = file.AltDirIndex;
         break;
       }
@@ -259,7 +259,7 @@ HRESULT CAgentFolder::CommonUpdateOperation(
   FOR_VECTOR (i, pathParts)
   {
     CMyComPtr<IFolderFolder> newFolder;
-  
+
     if (isAltStreamFolder && i == pathParts.Size() - 1)
     {
       CMyComPtr<IFolderAltStreams> folderAltStreams;
@@ -269,7 +269,7 @@ HRESULT CAgentFolder::CommonUpdateOperation(
     }
     else
       archiveFolder->BindToFolder(pathParts[i], &newFolder);
-    
+
     if (!newFolder)
       break;
     archiveFolder = newFolder;
@@ -282,7 +282,7 @@ HRESULT CAgentFolder::CommonUpdateOperation(
   _proxyDirIndex = agentFolder->_proxyDirIndex;
   // _parentFolder = agentFolder->_parentFolder;
   */
-  
+
   if (_proxy2)
     _isAltStreamFolder = _proxy2->IsAltDir(_proxyDirIndex);
 
@@ -340,7 +340,7 @@ STDMETHODIMP CAgentFolder::Delete(const UInt32 *indices, UInt32 numItems, IProgr
 STDMETHODIMP CAgentFolder::CreateFolder(const wchar_t *name, IProgress *progress)
 {
   COM_TRY_BEGIN
-  
+
   if (_isAltStreamFolder)
     return E_NOTIMPL;
 
@@ -351,10 +351,10 @@ STDMETHODIMP CAgentFolder::CreateFolder(const wchar_t *name, IProgress *progress
   }
   else
   {
-    if (_proxy->FindSubDir(_proxyDirIndex, name) >= 0)
+    if (_proxy->FindSubDir(_proxyDirIndex, name) != -1)
       return ERROR_ALREADY_EXISTS;
   }
-  
+
   return CommonUpdateOperation(AGENT_OP_CreateFolder, false, name, NULL, NULL, 0, progress);
   COM_TRY_END
 }
@@ -380,7 +380,7 @@ STDMETHODIMP CAgentFolder::SetProperty(UInt32 index, PROPID propID,
     return E_NOTIMPL;
   if (!_agentSpec || !_agentSpec->GetTypeOfArc(_agentSpec->GetArc()).IsEqualTo_Ascii_NoCase("zip"))
     return E_NOTIMPL;
-  
+
   return CommonUpdateOperation(AGENT_OP_Comment, false, value->bstrVal, NULL,
       &index, 1, progress);
   COM_TRY_END
