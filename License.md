@@ -14,7 +14,8 @@ Rúben Garrido, Sakura Neko and authorized to the NanaZip project, and it is
 distributed under the CC BY-ND 4.0 License.
 
 The source code from 7-Zip or other 7-Zip derivatives (these contents are only 
-in the `SevenZip` folder) is distributed under the 7-Zip License.
+in the `SevenZip\Asm`, `SevenZip\C` and `SevenZip\CPP` folders) is distributed
+under the 7-Zip License.
 
 The source code from the third-party libraries is distributed under the original
 license used in the third-party libraries.
@@ -577,5 +578,6 @@ Creative Commons may be contacted at creativecommons.org.
 
 - C++/WinRT, https://github.com/microsoft/cppwinrt
 - Mile.Cpp, https://github.com/ProjectMile/Mile.Cpp
+- RHash, https://github.com/rhash/RHash
 - VC-LTL, https://github.com/Chuyu-Team/VC-LTL5
 - Windows UI Library, https://github.com/microsoft/microsoft-ui-xaml
