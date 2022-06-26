@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="Brotli.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Brotli">
+      <UniqueIdentifier>{12ec77ea-5233-4834-bce9-d8be99d1b7e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\common">
+      <UniqueIdentifier>{a9e01c8c-2f1d-49c9-b7d2-958bd7f12913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\dec">
+      <UniqueIdentifier>{9346a63d-9d43-4527-a09d-61c187b2ec54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\enc">
+      <UniqueIdentifier>{4917656c-2101-4e67-993b-b412a504e73a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\include">
+      <UniqueIdentifier>{25f01a08-e919-41a3-b29d-db35e62cf527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\include\brotli">
+      <UniqueIdentifier>{5d07f240-6810-4e89-9a32-c97fbe7025aa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Brotli\common\constants.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\context.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\dictionary.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\platform.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\transform.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\bit_reader.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\decode.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\huffman.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\state.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references_hq.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\bit_cost.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\block_splitter.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\brotli_bit_stream.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\cluster.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\command.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compress_fragment.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compress_fragment_two_pass.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\dictionary_hash.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\encode.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\encoder_dict.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\entropy_encode.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\fast_log.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\histogram.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\literal_cost.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\memory.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\metablock.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\static_dict.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\utf8_util.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Brotli\common\constants.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\context.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\dictionary.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\platform.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\transform.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\version.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\bit_reader.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\huffman.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\prefix.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\state.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\backward_references.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\backward_references_hq.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\backward_references_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\bit_cost.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\bit_cost_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\block_encoder_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\block_splitter.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\block_splitter_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\brotli_bit_stream.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\cluster.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\cluster_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\command.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\compress_fragment.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\compress_fragment_two_pass.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\dictionary_hash.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\encoder_dict.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\entropy_encode.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\entropy_encode_static.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\fast_log.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\find_match_length.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_composite_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_forgetful_chain_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match_quickly_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match64_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_rolling_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_to_binary_tree_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\histogram.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\histogram_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\literal_cost.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\memory.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\metablock.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\metablock_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\params.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\prefix.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\quality.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\ringbuffer.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\static_dict.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\static_dict_lut.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\utf8_util.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\write_bits.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\decode.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\encode.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\port.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\types.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
