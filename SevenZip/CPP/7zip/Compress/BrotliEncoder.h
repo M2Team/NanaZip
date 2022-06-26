@@ -3,7 +3,7 @@
 #define BROTLI_STATIC_LINKING_ONLY
 #include "../../../C/Alloc.h"
 #include "../../../C/Threads.h"
-#include "../../../C/brotli/encode.h"
+#include <brotli/encode.h>
 #include "../../../C/zstdmt/brotli-mt.h"
 
 #include "../../Common/Common.h"

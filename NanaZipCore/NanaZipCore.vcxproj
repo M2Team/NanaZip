@@ -14,6 +14,7 @@
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipHardwareAcceleration.props" />
+  <Import Project="..\ThirdParty\Brotli.props" />
   <Import Project="..\ThirdParty\RHash.props" />
   <Import Project="..\ThirdParty\Zstandard.props" />
   <ItemDefinitionGroup>
