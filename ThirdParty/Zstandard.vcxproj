@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5054B943-8518-4FCC-B819-685D01104DCC}</ProjectGuid>
+    <RootNamespace>Zstandard</RootNamespace>
+    <MileProjectType>StaticLibrary</MileProjectType>
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+  </PropertyGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <ItemGroup>
+    <None Include="Zstandard.props" />
+  </ItemGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
+      <PreprocessorDefinitions>ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Zstandard\common\bitstream.h" />
+    <ClInclude Include="Zstandard\common\compiler.h" />
+    <ClInclude Include="Zstandard\common\cpu.h" />
+    <ClInclude Include="Zstandard\common\debug.h" />
+    <ClInclude Include="Zstandard\common\error_private.h" />
+    <ClInclude Include="Zstandard\common\fse.h" />
+    <ClInclude Include="Zstandard\common\huf.h" />
+    <ClInclude Include="Zstandard\common\mem.h" />
+    <ClInclude Include="Zstandard\common\pool.h" />
+    <ClInclude Include="Zstandard\common\portability_macros.h" />
+    <ClInclude Include="Zstandard\common\threading.h" />
+    <ClInclude Include="Zstandard\common\xxhash.h" />
+    <ClInclude Include="Zstandard\common\zstd_deps.h" />
+    <ClInclude Include="Zstandard\common\zstd_internal.h" />
+    <ClInclude Include="Zstandard\common\zstd_trace.h" />
+    <ClInclude Include="Zstandard\compress\clevels.h" />
+    <ClInclude Include="Zstandard\compress\hist.h" />
+    <ClInclude Include="Zstandard\compress\zstdmt_compress.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_internal.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_literals.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_sequences.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_superblock.h" />
+    <ClInclude Include="Zstandard\compress\zstd_cwksp.h" />
+    <ClInclude Include="Zstandard\compress\zstd_double_fast.h" />
+    <ClInclude Include="Zstandard\compress\zstd_fast.h" />
+    <ClInclude Include="Zstandard\compress\zstd_lazy.h" />
+    <ClInclude Include="Zstandard\compress\zstd_ldm.h" />
+    <ClInclude Include="Zstandard\compress\zstd_ldm_geartab.h" />
+    <ClInclude Include="Zstandard\compress\zstd_opt.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h" />
+    <ClInclude Include="Zstandard\dictBuilder\cover.h" />
+    <ClInclude Include="Zstandard\dictBuilder\divsufsort.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_legacy.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v01.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v02.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v03.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v04.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v05.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v06.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v07.h" />
+    <ClInclude Include="Zstandard\zdict.h" />
+    <ClInclude Include="Zstandard\zstd.h" />
+    <ClInclude Include="Zstandard\zstd_errors.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Zstandard\common\debug.c" />
+    <ClCompile Include="Zstandard\common\entropy_common.c" />
+    <ClCompile Include="Zstandard\common\error_private.c" />
+    <ClCompile Include="Zstandard\common\fse_decompress.c" />
+    <ClCompile Include="Zstandard\common\pool.c" />
+    <ClCompile Include="Zstandard\common\threading.c" />
+    <ClCompile Include="Zstandard\common\xxhash.c" />
+    <ClCompile Include="Zstandard\common\zstd_common.c" />
+    <ClCompile Include="Zstandard\compress\fse_compress.c" />
+    <ClCompile Include="Zstandard\compress\hist.c" />
+    <ClCompile Include="Zstandard\compress\huf_compress.c" />
+    <ClCompile Include="Zstandard\compress\zstdmt_compress.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress_literals.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress_sequences.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress_superblock.c" />
+    <ClCompile Include="Zstandard\compress\zstd_double_fast.c" />
+    <ClCompile Include="Zstandard\compress\zstd_fast.c" />
+    <ClCompile Include="Zstandard\compress\zstd_lazy.c" />
+    <ClCompile Include="Zstandard\compress\zstd_ldm.c" />
+    <ClCompile Include="Zstandard\compress\zstd_opt.c" />
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c" />
+    <ClCompile Include="Zstandard\dictBuilder\cover.c" />
+    <ClCompile Include="Zstandard\dictBuilder\divsufsort.c" />
+    <ClCompile Include="Zstandard\dictBuilder\fastcover.c" />
+    <ClCompile Include="Zstandard\dictBuilder\zdict.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v01.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v02.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v03.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v04.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v05.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v06.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v07.c" />
+  </ItemGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+</Project>
