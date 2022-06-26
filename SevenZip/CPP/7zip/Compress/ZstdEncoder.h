@@ -3,7 +3,7 @@
 #define ZSTD_STATIC_LINKING_ONLY
 #include "../../../C/Alloc.h"
 #include "../../../C/Threads.h"
-#include "../../../C/zstd/zstd.h"
+#include <zstd.h>
 
 #include "../../Common/Common.h"
 #include "../../Common/MyCom.h"

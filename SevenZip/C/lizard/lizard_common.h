@@ -46,7 +46,7 @@ extern "C" {
 #include <stdlib.h>   /* malloc, calloc, free */
 #include <string.h>   /* memset, memcpy */
 #include <stdint.h>   /* intptr_t */
-#include "../zstd/mem.h"
+#include <common/mem.h>
 #include "lizard_compress.h"      /* LIZARD_GCC_VERSION */
 
 //#define LIZARD_USE_LOGS

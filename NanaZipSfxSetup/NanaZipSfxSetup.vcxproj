@@ -9,8 +9,8 @@
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
+  <Import Project="..\ThirdParty\Zstandard.props" />
   <PropertyGroup>
     <TargetName>NanaZipSetup</TargetName>
     <TargetExt>.sfx</TargetExt>

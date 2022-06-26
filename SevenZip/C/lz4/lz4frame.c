@@ -94,7 +94,7 @@
 #define LZ4_HC_STATIC_LINKING_ONLY
 #include "lz4hc.h"
 #define XXH_STATIC_LINKING_ONLY
-#include "../zstd/xxhash.h"
+#include <common/xxhash.h>
 
 
 /*-************************************

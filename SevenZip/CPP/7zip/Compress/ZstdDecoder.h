@@ -2,8 +2,8 @@
 
 #define ZSTD_STATIC_LINKING_ONLY
 #include "../../../C/Alloc.h"
-#include "../../../C/zstd/zstd.h"
-#include "../../../C/zstd/zstd_errors.h"
+#include <zstd.h>
+#include <zstd_errors.h>
 
 #include "../../Windows/System.h"
 #include "../../Common/Common.h"

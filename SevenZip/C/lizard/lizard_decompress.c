@@ -62,7 +62,7 @@ typedef enum { full = 0, partial = 1 } earlyEnd_directive;
         #include "lizard_decompress_liz.h"
     #endif
 #endif
-#include "../zstd/huf.h"
+#include <common/huf.h>
 
 
 /*-*****************************

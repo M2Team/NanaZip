@@ -31,9 +31,6 @@
     <Filter Include="lz5">
       <UniqueIdentifier>{67bb3148-9b04-4d01-bb65-052ce6317515}</UniqueIdentifier>
     </Filter>
-    <Filter Include="zstd">
-      <UniqueIdentifier>{b7e68e59-606c-4f56-b90a-386176a062f4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="zstdmt">
       <UniqueIdentifier>{b1f269d6-df54-46ea-82aa-8d1c85a8def5}</UniqueIdentifier>
     </Filter>
@@ -369,126 +366,6 @@
     <ClInclude Include="..\SevenZip\C\lz5\mem.h">
       <Filter>lz5</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\bitstream.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\compiler.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\cpu.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\debug.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\error_private.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\fse.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\hist.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\huf.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\mem.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\pool.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\threading.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\xxhash.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstdmt_compress.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_compress_internal.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_compress_literals.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_compress_sequences.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_compress_superblock.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_cwksp.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_ddict.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_decompress_block.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_decompress_internal.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_deps.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_double_fast.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_errors.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_fast.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_internal.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_lazy.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_ldm.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_ldm_geartab.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_legacy.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_opt.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_trace.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_v01.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_v02.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_v03.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_v04.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_v05.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_v06.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\zstd\zstd_v07.h">
-      <Filter>zstd</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\zstdmt\brotli-mt.h">
       <Filter>zstdmt</Filter>
     </ClInclude>
@@ -674,105 +551,6 @@
     <ClCompile Include="..\SevenZip\C\lz5\lz5hc.c">
       <Filter>lz5</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\debug.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\entropy_common.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\error_private.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\fse_compress.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\fse_decompress.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\hist.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\huf_compress.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\huf_decompress.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\pool.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\threading.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\xxhash.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstdmt_compress.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_common.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_compress.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_compress_literals.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_compress_sequences.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_compress_superblock.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_ddict.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_decompress.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_decompress_block.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_double_fast.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_fast.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_lazy.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_ldm.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_opt.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_trace.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_v01.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_v02.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_v03.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_v04.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_v05.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_v06.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\zstd\zstd_v07.c">
-      <Filter>zstd</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_common.c">
       <Filter>zstdmt</Filter>
     </ClCompile>
@@ -849,18 +627,6 @@
     </None>
     <None Include="..\SevenZip\C\lz5\README.md">
       <Filter>lz5</Filter>
-    </None>
-    <None Include="..\SevenZip\C\zstd\AdjustZS.sh">
-      <Filter>zstd</Filter>
-    </None>
-    <None Include="..\SevenZip\C\zstd\COPYING">
-      <Filter>zstd</Filter>
-    </None>
-    <None Include="..\SevenZip\C\zstd\LICENSE">
-      <Filter>zstd</Filter>
-    </None>
-    <None Include="..\SevenZip\C\zstd\README.md">
-      <Filter>zstd</Filter>
     </None>
     <None Include="..\SevenZip\C\zstdmt\LICENSE">
       <Filter>zstdmt</Filter>
