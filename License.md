@@ -576,6 +576,7 @@ Creative Commons may be contacted at creativecommons.org.
 
 ### The third-party libraries used in NanaZip
 
+- Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
 - Mile.Cpp, https://github.com/ProjectMile/Mile.Cpp
 - RHash, https://github.com/rhash/RHash
