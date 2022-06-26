@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="RHash.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RHash\aich.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\blake2b.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\byte_order.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\ed2k.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\edonr.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\gost12.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\gost94.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\has160.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\hex.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\md4.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\ripemd-160.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\sha1.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\sha3.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\snefru.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger_sbox.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\torrent.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tth.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\util.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\whirlpool.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\whirlpool_sbox.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RHash\aich.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\blake2b.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\byte_order.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ed2k.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\edonr.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\gost12.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\gost94.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\has160.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\hex.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\md4.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ripemd-160.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha1.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha3.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\snefru.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\tiger.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\torrent.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\tth.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ustd.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\util.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\whirlpool.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="RHash">
+      <UniqueIdentifier>{4cd50305-aec1-4e83-ae56-276edf00af18}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
