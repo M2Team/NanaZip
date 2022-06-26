@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:   NanaZip
- * FILE:      TigerHandler.cpp
- * PURPOSE:   Implementation for Tiger hash algorithm
+ * FILE:      Sha384Handler.cpp
+ * PURPOSE:   Implementation for SHA-384 hash algorithm
  *
  * LICENSE:   The MIT License
  *
@@ -12,18 +12,18 @@
 #include "../../CPP/Common/MyCom.h"
 #include "../../CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../../ThirdParty/RHash/tiger.h"
+#include "../../../ThirdParty/RHash/sha512.h"
 
-class CTigerHandler :
+class CSha384Handler :
     public IHasher,
     public CMyUnknownImp
 {
-    tiger_ctx Context;
+    sha512_ctx Context;
     Byte mtDummy[1 << 7];
 
 public:
 
-    CTigerHandler()
+    CSha384Handler()
     {
         this->Init();
     }
@@ -32,28 +32,28 @@ public:
     INTERFACE_IHasher(;)
 };
 
-STDMETHODIMP_(void) CTigerHandler::Init() throw()
+STDMETHODIMP_(void) CSha384Handler::Init() throw()
 {
-    ::rhash_tiger_init(&this->Context);
+    ::rhash_sha384_init(&this->Context);
 }
 
-STDMETHODIMP_(void) CTigerHandler::Update(
+STDMETHODIMP_(void) CSha384Handler::Update(
     const void* data,
     UInt32 size) throw()
 {
-    ::rhash_tiger_update(
+    ::rhash_sha512_update(
         &this->Context,
         reinterpret_cast<const unsigned char*>(data),
         size);
 }
 
-STDMETHODIMP_(void) CTigerHandler::Final(Byte* digest) throw()
+STDMETHODIMP_(void) CSha384Handler::Final(Byte* digest) throw()
 {
-    ::rhash_tiger_final(&this->Context, digest);
+    ::rhash_sha512_final(&this->Context, digest);
 }
 
 REGISTER_HASHER(
-    CTigerHandler,
-    0x3B1,
-    "TIGER",
-    tiger_hash_length)
+    CSha384Handler,
+    0x382,
+    "SHA384",
+    sha384_hash_size)

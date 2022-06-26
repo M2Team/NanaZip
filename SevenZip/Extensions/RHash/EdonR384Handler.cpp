@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CEdonR384Handler::Final(Byte *digest) throw()
 
 REGISTER_HASHER(
     CEdonR384Handler,
-    0x306,
+    0x333,
     "EDON-R-384",
     edonr384_hash_size)

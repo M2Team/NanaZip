@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CRipemd160Handler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CRipemd160Handler,
-    0x30D,
+    0x371,
     "RIPEMD-160",
     ripemd160_hash_size)

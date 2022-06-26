@@ -67,6 +67,15 @@
     <ClCompile Include="RHash\whirlpool_sbox.c">
       <Filter>RHash</Filter>
     </ClCompile>
+    <ClCompile Include="RHash\md5.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\sha512.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\sha256.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RHash\aich.h">
@@ -127,6 +136,15 @@
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\whirlpool.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\md5.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha512.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha256.h">
       <Filter>RHash</Filter>
     </ClInclude>
   </ItemGroup>

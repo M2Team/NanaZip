@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CHas160Handler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CHas160Handler,
-    0x30C,
+    0x351,
     "HAS-160",
     has160_hash_size)

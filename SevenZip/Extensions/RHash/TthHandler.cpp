@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CTthHandler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CTthHandler,
-    0x317,
+    0x3B3,
     "TTH",
     24)

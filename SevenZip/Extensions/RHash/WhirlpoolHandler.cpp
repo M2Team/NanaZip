@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CWhirlpoolHandler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CWhirlpoolHandler,
-    0x318,
+    0x3D1,
     "WHIRLPOOL",
     64)

@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CGost94Handler::Final(Byte *digest) throw()
 
 REGISTER_HASHER(
     CGost94Handler,
-    0x30A,
+    0x341,
     "GOST94",
     gost94_hash_length)

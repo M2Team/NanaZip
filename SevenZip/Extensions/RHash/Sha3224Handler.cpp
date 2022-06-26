@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CSha3224Handler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CSha3224Handler,
-    0x30E,
+    0x391,
     "SHA3-224",
     sha3_224_hash_size)

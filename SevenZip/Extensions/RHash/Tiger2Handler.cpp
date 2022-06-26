@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CTiger2Handler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CTiger2Handler,
-    0x315,
+    0x3B2,
     "TIGER2",
     tiger_hash_length)

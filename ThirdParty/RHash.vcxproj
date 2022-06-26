@@ -9,7 +9,7 @@
     <MileProjectType>StaticLibrary</MileProjectType>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />  
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <DisableSpecificWarnings>4127;4146;4200;4267;</DisableSpecificWarnings>
@@ -29,9 +29,12 @@
     <ClCompile Include="RHash\has160.c" />
     <ClCompile Include="RHash\hex.c" />
     <ClCompile Include="RHash\md4.c" />
+    <ClCompile Include="RHash\md5.c" />
     <ClCompile Include="RHash\ripemd-160.c" />
     <ClCompile Include="RHash\sha1.c" />
+    <ClCompile Include="RHash\sha256.c" />
     <ClCompile Include="RHash\sha3.c" />
+    <ClCompile Include="RHash\sha512.c" />
     <ClCompile Include="RHash\snefru.c" />
     <ClCompile Include="RHash\tiger.c" />
     <ClCompile Include="RHash\tiger_sbox.c" />
@@ -52,9 +55,12 @@
     <ClInclude Include="RHash\has160.h" />
     <ClInclude Include="RHash\hex.h" />
     <ClInclude Include="RHash\md4.h" />
+    <ClInclude Include="RHash\md5.h" />
     <ClInclude Include="RHash\ripemd-160.h" />
     <ClInclude Include="RHash\sha1.h" />
+    <ClInclude Include="RHash\sha256.h" />
     <ClInclude Include="RHash\sha3.h" />
+    <ClInclude Include="RHash\sha512.h" />
     <ClInclude Include="RHash\snefru.h" />
     <ClInclude Include="RHash\tiger.h" />
     <ClInclude Include="RHash\torrent.h" />

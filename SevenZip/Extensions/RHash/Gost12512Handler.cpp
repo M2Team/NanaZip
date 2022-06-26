@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CGost12512Handler::Final(Byte *digest) throw()
 
 REGISTER_HASHER(
     CGost12512Handler,
-    0x309,
+    0x344,
     "GOST12-512",
     gost12_512_hash_size)

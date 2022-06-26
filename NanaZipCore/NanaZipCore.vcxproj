@@ -335,11 +335,16 @@
     <ClCompile Include="..\SevenZip\Extensions\RHash\Gost94CryptoProHandler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Gost94Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Has160Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Md4Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Md5Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Ripemd160Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha224Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3224Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3256Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3384Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3512Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha384Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha512Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Snefru128Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Snefru256Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Tiger2Handler.cpp" />

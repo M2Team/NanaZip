@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CSnefru256Handler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CSnefru256Handler,
-    0x313,
+    0x3A2,
     "SNEFRU-256",
     snefru256_hash_length)

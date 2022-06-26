@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CGost94CryptoProHandler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CGost94CryptoProHandler,
-    0x30B,
+    0x342,
     "GOST94CryptoPro",
     gost94_hash_length)

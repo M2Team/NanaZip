@@ -1068,6 +1068,21 @@
     <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh3128Handler.cpp">
       <Filter>Extensions\xxHash</Filter>
     </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Md4Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Md5Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha384Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha224Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.h">

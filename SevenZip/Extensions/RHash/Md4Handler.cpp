@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:   NanaZip
- * FILE:      TigerHandler.cpp
- * PURPOSE:   Implementation for Tiger hash algorithm
+ * FILE:      Md4Handler.cpp
+ * PURPOSE:   Implementation for MD4 hash algorithm
  *
  * LICENSE:   The MIT License
  *
@@ -12,18 +12,18 @@
 #include "../../CPP/Common/MyCom.h"
 #include "../../CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../../ThirdParty/RHash/tiger.h"
+#include "../../../ThirdParty/RHash/md4.h"
 
-class CTigerHandler :
+class CMd4Handler :
     public IHasher,
     public CMyUnknownImp
 {
-    tiger_ctx Context;
+    md4_ctx Context;
     Byte mtDummy[1 << 7];
 
 public:
 
-    CTigerHandler()
+    CMd4Handler()
     {
         this->Init();
     }
@@ -32,28 +32,28 @@ public:
     INTERFACE_IHasher(;)
 };
 
-STDMETHODIMP_(void) CTigerHandler::Init() throw()
+STDMETHODIMP_(void) CMd4Handler::Init() throw()
 {
-    ::rhash_tiger_init(&this->Context);
+    ::rhash_md4_init(&this->Context);
 }
 
-STDMETHODIMP_(void) CTigerHandler::Update(
+STDMETHODIMP_(void) CMd4Handler::Update(
     const void* data,
     UInt32 size) throw()
 {
-    ::rhash_tiger_update(
+    ::rhash_md4_update(
         &this->Context,
         reinterpret_cast<const unsigned char*>(data),
         size);
 }
 
-STDMETHODIMP_(void) CTigerHandler::Final(Byte* digest) throw()
+STDMETHODIMP_(void) CMd4Handler::Final(Byte* digest) throw()
 {
-    ::rhash_tiger_final(&this->Context, digest);
+    ::rhash_md4_final(&this->Context, digest);
 }
 
 REGISTER_HASHER(
-    CTigerHandler,
-    0x3B1,
-    "TIGER",
-    tiger_hash_length)
+    CMd4Handler,
+    0x361,
+    "MD4",
+    md4_hash_size)

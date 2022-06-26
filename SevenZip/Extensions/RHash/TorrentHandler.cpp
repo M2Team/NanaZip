@@ -59,6 +59,6 @@ STDMETHODIMP_(void) CTorrentHandler::Final(Byte* digest) throw()
 
 REGISTER_HASHER(
     CTorrentHandler,
-    0x316,
+    0x3C1,
     "BTIH",
     btih_hash_size)

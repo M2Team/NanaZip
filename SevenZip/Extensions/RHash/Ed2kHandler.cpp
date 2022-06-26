@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CEd2kHandler::Final(Byte *digest) throw()
 
 REGISTER_HASHER(
     CEd2kHandler,
-    0x303,
+    0x321,
     "ED2K",
     16)

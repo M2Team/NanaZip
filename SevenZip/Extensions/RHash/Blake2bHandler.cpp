@@ -54,6 +54,6 @@ STDMETHODIMP_(void) CBlake2bHandler::Final(Byte *digest) throw()
 
 REGISTER_HASHER(
     CBlake2bHandler,
-    0x302,
+    0x311,
     "BLAKE2b",
     blake2b_hash_size)
