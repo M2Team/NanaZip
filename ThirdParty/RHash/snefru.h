@@ -1,4 +1,4 @@
-/* snefru.h */
+﻿/* snefru.h */
 #ifndef SNEFRU_H
 #define SNEFRU_H
 #include "ustd.h"

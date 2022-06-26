@@ -1,4 +1,4 @@
-/* edonr.c - an implementation of EDON-R 256/224/384/512 hash functions
+﻿/* edonr.c - an implementation of EDON-R 256/224/384/512 hash functions
  *
  * Copyright (c) 2011, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

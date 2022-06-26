@@ -1,4 +1,4 @@
-/* byte_order.c - byte order related platform dependent routines,
+﻿/* byte_order.c - byte order related platform dependent routines,
  *
  * Copyright (c) 2008, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

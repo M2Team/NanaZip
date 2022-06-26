@@ -1,4 +1,4 @@
-/* util.c - memory functions.
+﻿/* util.c - memory functions.
  *
  * Copyright (c) 2020, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

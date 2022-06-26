@@ -1,4 +1,4 @@
-/* md4.h */
+﻿/* md4.h */
 #ifndef MD4_HIDER
 #define MD4_HIDER
 #include "ustd.h"

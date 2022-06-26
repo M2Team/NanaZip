@@ -1,4 +1,4 @@
-/* ripemd-160.c - an implementation of RIPEMD-160 Hash function
+﻿/* ripemd-160.c - an implementation of RIPEMD-160 Hash function
  * based on the original aritcle:
  * H. Dobbertin, A. Bosselaers, B. Preneel, RIPEMD-160: A strengthened version
  * of RIPEMD, Lecture Notes in Computer, 1996, V.1039, pp.71-82

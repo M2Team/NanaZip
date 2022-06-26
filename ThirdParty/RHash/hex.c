@@ -1,4 +1,4 @@
-/* hex.c - conversion for hexadecimal and base32 strings.
+﻿/* hex.c - conversion for hexadecimal and base32 strings.
  *
  * Copyright (c) 2008, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

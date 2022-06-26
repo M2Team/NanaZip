@@ -1,4 +1,4 @@
-/* gost12.c - an implementation of the GOST R 34.11-2012 hash function,
+﻿/* gost12.c - an implementation of the GOST R 34.11-2012 hash function,
  * the Russian cryptographic standard.
  * See also RFC 6986.
  *

@@ -1,4 +1,4 @@
-#ifndef TTH_H
+﻿#ifndef TTH_H
 #define TTH_H
 #include "ustd.h"
 #include "tiger.h"

@@ -1,4 +1,4 @@
-/* gost94.c - an implementation of the GOST R 34.11-94 hash function,
+﻿/* gost94.c - an implementation of the GOST R 34.11-94 hash function,
  * the deprecated Russian cryptographic standard.
  * See also RFC 4357.
  *

@@ -1,4 +1,4 @@
-/* aich.c - an implementation of EMule AICH Algorithm.
+﻿/* aich.c - an implementation of EMule AICH Algorithm.
  * Description: http://www.amule.org/wiki/index.php/AICH.
  *
  * Copyright (c) 2008, Aleksey Kravchenko <rhash.admin@gmail.com>

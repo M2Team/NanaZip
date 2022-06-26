@@ -1,4 +1,4 @@
-/* blake2b.h */
+﻿/* blake2b.h */
 #ifndef BLAKE2B_H
 #define BLAKE2B_H
 #include "ustd.h"

@@ -1,4 +1,4 @@
-/* gost94.h */
+﻿/* gost94.h */
 #ifndef GOST94_H
 #define GOST94_H
 #include "ustd.h"

@@ -1,4 +1,4 @@
-/* md4.c - an implementation of MD4 Message-Digest Algorithm based on RFC 1320.
+﻿/* md4.c - an implementation of MD4 Message-Digest Algorithm based on RFC 1320.
  *
  * Copyright (c) 2007, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

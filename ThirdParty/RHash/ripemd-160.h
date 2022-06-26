@@ -1,4 +1,4 @@
-/* ripemd-160.h */
+﻿/* ripemd-160.h */
 #ifndef  RMD160_H
 #define  RMD160_H
 #include "ustd.h"

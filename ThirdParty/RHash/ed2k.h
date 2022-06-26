@@ -1,4 +1,4 @@
-/* ed2k.h */
+﻿/* ed2k.h */
 #ifndef ED2K_H
 #define ED2K_H
 #include "md4.h"

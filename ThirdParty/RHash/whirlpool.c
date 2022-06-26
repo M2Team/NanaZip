@@ -1,4 +1,4 @@
-/* whirlpool.c - an implementation of the Whirlpool Hash Function.
+﻿/* whirlpool.c - an implementation of the Whirlpool Hash Function.
  *
  * Copyright (c) 2009, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

@@ -1,4 +1,4 @@
-/* hash.c - an implementation of HAS-160 Algorithm.
+﻿/* hash.c - an implementation of HAS-160 Algorithm.
  *
  * Copyright (c) 2009, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

@@ -1,4 +1,4 @@
-/* tiger.c - an implementation of Tiger Hash Function
+﻿/* tiger.c - an implementation of Tiger Hash Function
  * based on the article by
  * Ross Anderson and Eli Biham "Tiger: A Fast New Hash Function".
  *

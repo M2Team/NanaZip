@@ -1,4 +1,4 @@
-/* tiger_sbox.c - S-Box for Tiger hash function
+﻿/* tiger_sbox.c - S-Box for Tiger hash function
  *
  * Copyright (c) 2007, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

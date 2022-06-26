@@ -1,4 +1,4 @@
-/* has160.h */
+﻿/* has160.h */
 #ifndef HAS160_H
 #define HAS160_H
 #include "ustd.h"

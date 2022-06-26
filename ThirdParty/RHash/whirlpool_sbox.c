@@ -1,4 +1,4 @@
-/* whirlpool_sbox.c - S-Box for the Whirlpool hash function
+﻿/* whirlpool_sbox.c - S-Box for the Whirlpool hash function
  *
  * Copyright (c) 2009, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

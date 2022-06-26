@@ -1,4 +1,4 @@
-/* sha1.c - an implementation of Secure Hash Algorithm 1 (SHA1)
+﻿/* sha1.c - an implementation of Secure Hash Algorithm 1 (SHA1)
  * based on RFC 3174.
  *
  * Copyright (c) 2008, Aleksey Kravchenko <rhash.admin@gmail.com>

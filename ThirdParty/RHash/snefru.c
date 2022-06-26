@@ -1,4 +1,4 @@
-/* snefru.c - an implementation of Snefru-128/256 Message-Digest Algorithms
+﻿/* snefru.c - an implementation of Snefru-128/256 Message-Digest Algorithms
  *
  * Copyright (c) 2009, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

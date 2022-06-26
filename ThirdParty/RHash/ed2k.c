@@ -1,4 +1,4 @@
-/* ed2k.c - an implementation of EDonkey 2000 Hash Algorithm.
+﻿/* ed2k.c - an implementation of EDonkey 2000 Hash Algorithm.
  *
  * Copyright (c) 2006, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

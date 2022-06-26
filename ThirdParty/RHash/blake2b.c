@@ -1,4 +1,4 @@
-/* blake2b.c - an implementation of blake2b hash function.
+﻿/* blake2b.c - an implementation of blake2b hash function.
  *
  * Copyright (c) 2012, Samuel Neves <sneves@dei.uc.pt>
  * Copyright (c) 2021, Aleksey Kravchenko <rhash.admin@gmail.com>

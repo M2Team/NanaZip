@@ -1,4 +1,4 @@
-/* tth.c - calculate TTH (Tiger Tree Hash) function.
+﻿/* tth.c - calculate TTH (Tiger Tree Hash) function.
  *
  * Copyright (c) 2007, Aleksey Kravchenko <rhash.admin@gmail.com>
  *

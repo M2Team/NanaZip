@@ -1,4 +1,4 @@
-/* sha3.c - an implementation of Secure Hash Algorithm 3 (Keccak).
+﻿/* sha3.c - an implementation of Secure Hash Algorithm 3 (Keccak).
  * based on the
  * The Keccak SHA-3 submission. Submission to NIST (Round 3), 2011
  * by Guido Bertoni, Joan Daemen, Michaël Peeters and Gilles Van Assche

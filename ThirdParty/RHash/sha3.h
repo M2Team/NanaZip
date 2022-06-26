@@ -1,4 +1,4 @@
-/* sha3.h */
+﻿/* sha3.h */
 #ifndef RHASH_SHA3_H
 #define RHASH_SHA3_H
 #include "ustd.h"

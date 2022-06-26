@@ -1,4 +1,4 @@
-/* ustd.h common macros and includes */
+﻿/* ustd.h common macros and includes */
 #ifndef LIBRHASH_USTD_H
 #define LIBRHASH_USTD_H
 

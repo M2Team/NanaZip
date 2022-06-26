@@ -1,4 +1,4 @@
-/* hex.h - conversion for hexadecimal and base32 strings. */
+﻿/* hex.h - conversion for hexadecimal and base32 strings. */
 #ifndef HEX_H
 #define HEX_H
 
