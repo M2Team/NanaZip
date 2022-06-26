@@ -942,18 +942,6 @@
     <ClCompile Include="..\SevenZip\CPP\Common\Md2Reg.cpp">
       <Filter>SevenZip\Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\Common\Md4Reg.cpp">
-      <Filter>SevenZip\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\Common\Md5Reg.cpp">
-      <Filter>SevenZip\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\Common\Sha384Reg.cpp">
-      <Filter>SevenZip\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\Common\Sha512Reg.cpp">
-      <Filter>SevenZip\Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LizardHandler.cpp">
       <Filter>SevenZip\Archive</Filter>
     </ClCompile>

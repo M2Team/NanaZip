@@ -59,10 +59,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\Blake3Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\Md2Reg.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\Md4Reg.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\Md5Reg.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\Sha384Reg.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\Sha512Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\PropVariantConv.cpp" />
     <ClCompile Include="..\SevenZip\C\7zBuf2.c" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c" />

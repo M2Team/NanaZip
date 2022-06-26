@@ -56,9 +56,6 @@
     <ClInclude Include="..\SevenZip\C\hashes\blake3.h" />
     <ClInclude Include="..\SevenZip\C\hashes\hash.h" />
     <ClInclude Include="..\SevenZip\C\hashes\md2.h" />
-    <ClInclude Include="..\SevenZip\C\hashes\md4.h" />
-    <ClInclude Include="..\SevenZip\C\hashes\md5.h" />
-    <ClInclude Include="..\SevenZip\C\hashes\sha.h" />
     <ClInclude Include="..\SevenZip\C\lizard\lizard_common.h" />
     <ClInclude Include="..\SevenZip\C\lizard\lizard_compress.h" />
     <ClInclude Include="..\SevenZip\C\lizard\lizard_compress_liz.h" />
@@ -108,9 +105,6 @@
     <ClCompile Include="..\SevenZip\C\fast-lzma2\util.c" />
     <ClCompile Include="..\SevenZip\C\hashes\blake3.c" />
     <ClCompile Include="..\SevenZip\C\hashes\md2.c" />
-    <ClCompile Include="..\SevenZip\C\hashes\md4.c" />
-    <ClCompile Include="..\SevenZip\C\hashes\md5.c" />
-    <ClCompile Include="..\SevenZip\C\hashes\sha512.c" />
     <ClCompile Include="..\SevenZip\C\lizard\lizard_compress.c" />
     <ClCompile Include="..\SevenZip\C\lizard\lizard_decompress.c" />
     <ClCompile Include="..\SevenZip\C\lizard\lizard_frame.c" />

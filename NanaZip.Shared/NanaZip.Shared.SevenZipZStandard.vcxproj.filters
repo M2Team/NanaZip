@@ -96,15 +96,6 @@
     <ClInclude Include="..\SevenZip\C\hashes\md2.h">
       <Filter>hashes</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\hashes\md4.h">
-      <Filter>hashes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\hashes\md5.h">
-      <Filter>hashes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\hashes\sha.h">
-      <Filter>hashes</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\lizard\lizard_common.h">
       <Filter>lizard</Filter>
     </ClInclude>
@@ -246,15 +237,6 @@
       <Filter>hashes</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\hashes\md2.c">
-      <Filter>hashes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\hashes\md4.c">
-      <Filter>hashes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\hashes\md5.c">
-      <Filter>hashes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\hashes\sha512.c">
       <Filter>hashes</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\lizard\lizard_compress.c">
