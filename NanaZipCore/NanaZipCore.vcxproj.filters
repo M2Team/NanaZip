@@ -106,6 +106,9 @@
     <Filter Include="Extensions\RHash">
       <UniqueIdentifier>{015f970a-3223-4422-a522-9896873b53e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extensions\xxHash">
+      <UniqueIdentifier>{29302b7a-2d79-4a16-b4fa-222f223c08ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ArchiveExports.cpp">
@@ -951,12 +954,6 @@
     <ClCompile Include="..\SevenZip\CPP\Common\Sha512Reg.cpp">
       <Filter>SevenZip\Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\Common\XXH32Reg.cpp">
-      <Filter>SevenZip\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\Common\XXH64Reg.cpp">
-      <Filter>SevenZip\Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\LizardHandler.cpp">
       <Filter>SevenZip\Archive</Filter>
     </ClCompile>
@@ -1058,6 +1055,18 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\Extensions\RHash\WhirlpoolHandler.cpp">
       <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh32Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh64Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh364Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh3128Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

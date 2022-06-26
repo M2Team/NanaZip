@@ -63,8 +63,6 @@
     <ClCompile Include="..\SevenZip\CPP\Common\Md5Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\Sha384Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\Sha512Reg.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\XXH32Reg.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\XXH64Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\PropVariantConv.cpp" />
     <ClCompile Include="..\SevenZip\C\7zBuf2.c" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c" />
@@ -349,6 +347,10 @@
     <ClCompile Include="..\SevenZip\Extensions\RHash\TorrentHandler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\TthHandler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\WhirlpoolHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh3128Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh32Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh364Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\xxHash\Xxh64Handler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.h" />
