@@ -61,7 +61,7 @@ extern "C" {
 #ifdef RHASH_BYTE_ORDER
 #elif defined(CPU_IA32) || defined(CPU_X64) || defined(__ia64) || defined(__ia64__) || \
       defined(__alpha__) || defined(_M_ALPHA) || defined(vax) || defined(MIPSEL) || \
-      defined(_ARM_) || defined(__arm__)
+      defined(_ARM_) || defined(__arm__) || defined(_M_ARM) || defined(_M_ARM64)
 #  define RHASH_BYTE_ORDER RHASH_BYTE_ORDER_LE
 #elif defined(__sparc) || defined(__sparc__) || defined(sparc) || \
       defined(_ARCH_PPC) || defined(_ARCH_PPC64) || defined(_POWER) || \
