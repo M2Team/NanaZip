@@ -100,6 +100,12 @@
     <Filter Include="SevenZip\Windows">
       <UniqueIdentifier>{0b03f898-87a4-48c6-aa2c-191c8b0f671c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extensions">
+      <UniqueIdentifier>{98d5a25b-ad82-4d32-8fa2-8d916f342631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\RHash">
+      <UniqueIdentifier>{015f970a-3223-4422-a522-9896873b53e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\ArchiveExports.cpp">
@@ -980,6 +986,78 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\PropVariantConv.cpp">
       <Filter>SevenZip\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\AichHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Blake2bHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Ed2kHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR224Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR384Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost12256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost12512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost94Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost94CryptoProHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Has160Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Ripemd160Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3224Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3384Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Snefru128Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Snefru256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Tiger2Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\TigerHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\TorrentHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\TthHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SevenZip\Extensions\RHash\WhirlpoolHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

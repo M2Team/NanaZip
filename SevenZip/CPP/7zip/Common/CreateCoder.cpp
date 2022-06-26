@@ -35,7 +35,7 @@ void RegisterCodec(const CCodecInfo *codecInfo) throw()
     g_Codecs[g_NumCodecs++] = codecInfo;
 }
 
-static const unsigned kNumHashersMax = 16;
+static const unsigned kNumHashersMax = 256;
 extern
 unsigned g_NumHashers;
 unsigned g_NumHashers = 0;

@@ -14,6 +14,7 @@
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipHardwareAcceleration.props" />
+  <Import Project="..\ThirdParty\RHash.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
@@ -321,6 +322,30 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\ZipCrypto.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\ZipStrong.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\AichHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Blake2bHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Ed2kHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR224Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR256Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR384Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\EdonR512Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost12256Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost12512Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost94CryptoProHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Gost94Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Has160Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Ripemd160Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3224Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3256Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3384Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Sha3512Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Snefru128Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Snefru256Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\Tiger2Handler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\TigerHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\TorrentHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\TthHandler.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\RHash\WhirlpoolHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.h" />
