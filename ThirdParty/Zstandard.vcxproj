@@ -10,9 +10,6 @@
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
-  <ItemGroup>
-    <None Include="Zstandard.props" />
-  </ItemGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
@@ -20,6 +17,9 @@
       <PreprocessorDefinitions>ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Zstandard.props" />
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Zstandard\common\bitstream.h" />
     <ClInclude Include="Zstandard\common\compiler.h" />

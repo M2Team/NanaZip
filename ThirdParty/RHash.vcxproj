@@ -9,15 +9,15 @@
     <MileProjectType>StaticLibrary</MileProjectType>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
-  <ItemGroup>
-    <None Include="RHash.props" />
-  </ItemGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />  
   <ItemDefinitionGroup>
     <ClCompile>
       <DisableSpecificWarnings>4127;4146;4200;4267;</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="RHash.props" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RHash\aich.c" />
     <ClCompile Include="RHash\blake2b.c" />
