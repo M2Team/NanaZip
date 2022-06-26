@@ -126,6 +126,7 @@
             <uap:SupportedFileTypes>
               <uap:FileType>.001</uap:FileType>
               <uap:FileType>.7z</uap:FileType>
+              <uap:FileType>.apfs</uap:FileType>
               <uap:FileType>.arj</uap:FileType>
               <uap:FileType>.bz2</uap:FileType>
               <uap:FileType>.bzip2</uap:FileType>
@@ -169,8 +170,8 @@
               <uap:FileType>.zst</uap:FileType>
               <uap10:FileType>*</uap10:FileType>
             </uap:SupportedFileTypes>
-          </uap3:FileTypeAssociation>    
-      </uap:Extension>
+          </uap3:FileTypeAssociation>
+        </uap:Extension>
         <desktop4:Extension Category="windows.fileExplorerContextMenus">
           <desktop4:FileExplorerContextMenus>
             <desktop5:ItemType Type="Directory">
