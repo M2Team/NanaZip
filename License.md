@@ -582,4 +582,5 @@ Creative Commons may be contacted at creativecommons.org.
 - RHash, https://github.com/rhash/RHash
 - VC-LTL, https://github.com/Chuyu-Team/VC-LTL5
 - Windows UI Library, https://github.com/microsoft/microsoft-ui-xaml
+- xxHash, https://github.com/Cyan4973/xxHash
 - Zstandard, https://github.com/facebook/zstd
