@@ -11,6 +11,7 @@
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\ThirdParty\Brotli.props" />
+  <Import Project="..\ThirdParty\xxHash.props" />
   <Import Project="..\ThirdParty\Zstandard.props" />
   <PropertyGroup>
     <IncludePath>..\SevenZip\C\fast-lzma2\;$(IncludePath)</IncludePath>

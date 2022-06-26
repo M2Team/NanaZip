@@ -64,7 +64,7 @@ You can contact the author at :
 #include "lz5.h"
 #include "lz5hc.h"
 #define XXH_STATIC_LINKING_ONLY
-#include <common/xxhash.h>
+#include <xxhash.h>
 
 /**************************************
 *  Basic Types

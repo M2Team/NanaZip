@@ -9,6 +9,7 @@
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Project="..\ThirdParty\xxHash.props" />
   <Import Project="..\ThirdParty\Zstandard.props" />
   <PropertyGroup>
     <TargetName>NanaZipConsole</TargetName>

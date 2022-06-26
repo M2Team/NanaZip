@@ -57,9 +57,6 @@
     <ClInclude Include="Zstandard\common\threading.h">
       <Filter>Zstandard\common</Filter>
     </ClInclude>
-    <ClInclude Include="Zstandard\common\xxhash.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
     <ClInclude Include="Zstandard\common\zstd_deps.h">
       <Filter>Zstandard\common</Filter>
     </ClInclude>
@@ -177,9 +174,6 @@
       <Filter>Zstandard\common</Filter>
     </ClCompile>
     <ClCompile Include="Zstandard\common\threading.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\common\xxhash.c">
       <Filter>Zstandard\common</Filter>
     </ClCompile>
     <ClCompile Include="Zstandard\common\zstd_common.c">
