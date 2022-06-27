@@ -576,6 +576,7 @@ Creative Commons may be contacted at creativecommons.org.
 
 ### The third-party libraries used in NanaZip
 
+- BLAKE3, https://github.com/BLAKE3-team/BLAKE3
 - Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
 - Lizard, https://github.com/inikep/lizard
