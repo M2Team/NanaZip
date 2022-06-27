@@ -578,6 +578,7 @@ Creative Commons may be contacted at creativecommons.org.
 
 - Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
+- LZ4, https://github.com/lz4/lz4
 - Mile.Cpp, https://github.com/ProjectMile/Mile.Cpp
 - RHash, https://github.com/rhash/RHash
 - VC-LTL, https://github.com/Chuyu-Team/VC-LTL5
