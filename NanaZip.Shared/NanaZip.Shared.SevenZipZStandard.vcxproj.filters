@@ -78,9 +78,6 @@
     <ClInclude Include="..\SevenZip\C\fast-lzma2\util.h">
       <Filter>fast-lzma2</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\hashes\blake3.h">
-      <Filter>hashes</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\hashes\hash.h">
       <Filter>hashes</Filter>
     </ClInclude>
@@ -142,9 +139,6 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\fast-lzma2\util.c">
       <Filter>fast-lzma2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\hashes\blake3.c">
-      <Filter>hashes</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\hashes\md2.c">
       <Filter>hashes</Filter>

@@ -53,7 +53,6 @@
     <ClInclude Include="..\SevenZip\C\fast-lzma2\radix_mf.h" />
     <ClInclude Include="..\SevenZip\C\fast-lzma2\range_enc.h" />
     <ClInclude Include="..\SevenZip\C\fast-lzma2\util.h" />
-    <ClInclude Include="..\SevenZip\C\hashes\blake3.h" />
     <ClInclude Include="..\SevenZip\C\hashes\hash.h" />
     <ClInclude Include="..\SevenZip\C\hashes\md2.h" />
     <ClInclude Include="..\SevenZip\C\zstdmt\brotli-mt.h" />
@@ -76,7 +75,6 @@
     <ClCompile Include="..\SevenZip\C\fast-lzma2\radix_struct.c" />
     <ClCompile Include="..\SevenZip\C\fast-lzma2\range_enc.c" />
     <ClCompile Include="..\SevenZip\C\fast-lzma2\util.c" />
-    <ClCompile Include="..\SevenZip\C\hashes\blake3.c" />
     <ClCompile Include="..\SevenZip\C\hashes\md2.c" />
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_common.c" />
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_compress.c" />

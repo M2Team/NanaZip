@@ -14,6 +14,7 @@
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipHardwareAcceleration.props" />
+  <Import Project="..\ThirdParty\BLAKE3.props" />
   <Import Project="..\ThirdParty\Brotli.props" />
   <Import Project="..\ThirdParty\Lizard.props" />
   <Import Project="..\ThirdParty\LZ4.props" />
@@ -60,7 +61,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdEncoder.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\Blake3Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\Md2Reg.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\PropVariantConv.cpp" />
     <ClCompile Include="..\SevenZip\C\7zBuf2.c" />
@@ -322,6 +322,7 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\ZipCrypto.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\ZipStrong.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.cpp" />
+    <ClCompile Include="..\SevenZip\Extensions\BLAKE3\Blake3Handler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\AichHandler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Blake2bHandler.cpp" />
     <ClCompile Include="..\SevenZip\Extensions\RHash\Ed2kHandler.cpp" />
