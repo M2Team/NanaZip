@@ -19,9 +19,6 @@
   <PropertyGroup>
     <IncludePath>..\SevenZip\C\fast-lzma2\;$(IncludePath)</IncludePath>
     <IncludePath>..\SevenZip\C\hashes\;$(IncludePath)</IncludePath>
-    <IncludePath>..\SevenZip\C\lizard\;$(IncludePath)</IncludePath>
-    <IncludePath>..\SevenZip\C\lz4\;$(IncludePath)</IncludePath>
-    <IncludePath>..\SevenZip\C\lz5\;$(IncludePath)</IncludePath>
     <IncludePath>..\SevenZip\C\zstdmt\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
