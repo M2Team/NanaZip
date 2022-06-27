@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6B2B7DA0-6FCD-40AC-8F96-148586054A07}</ProjectGuid>
+    <RootNamespace>Lizard</RootNamespace>
+    <MileProjectType>StaticLibrary</MileProjectType>
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+  </PropertyGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Project="xxHash.props" />
+  <Import Project="Zstandard.props" />
+  <ItemGroup>
+    <None Include="Lizard.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Lizard\lizard_common.h" />
+    <ClInclude Include="Lizard\lizard_compress.h" />
+    <ClInclude Include="Lizard\lizard_compress_liz.h" />
+    <ClInclude Include="Lizard\lizard_compress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_decompress.h" />
+    <ClInclude Include="Lizard\lizard_decompress_liz.h" />
+    <ClInclude Include="Lizard\lizard_decompress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_frame.h" />
+    <ClInclude Include="Lizard\lizard_frame_static.h" />
+    <ClInclude Include="Lizard\lizard_parser_fast.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastbig.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastsmall.h" />
+    <ClInclude Include="Lizard\lizard_parser_hashchain.h" />
+    <ClInclude Include="Lizard\lizard_parser_lowestprice.h" />
+    <ClInclude Include="Lizard\lizard_parser_nochain.h" />
+    <ClInclude Include="Lizard\lizard_parser_optimal.h" />
+    <ClInclude Include="Lizard\lizard_parser_pricefast.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lizard\lizard_compress.c" />
+    <ClCompile Include="Lizard\lizard_decompress.c" />
+    <ClCompile Include="Lizard\lizard_frame.c" />
+  </ItemGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+</Project>
