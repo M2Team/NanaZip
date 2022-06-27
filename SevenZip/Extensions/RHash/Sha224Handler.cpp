@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:   NanaZip
  * FILE:      Sha224Handler.cpp
- * PURPOSE:   Implementation for SHA-512 hash algorithm
+ * PURPOSE:   Implementation for SHA-224 hash algorithm
  *
  * LICENSE:   The MIT License
  *

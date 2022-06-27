@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:   NanaZip
  * FILE:      Ed2kHandler.cpp
- * PURPOSE:   Implementation for EDonkey 2000 hash algorithm
+ * PURPOSE:   Implementation for ED2K hash algorithm
  *
  * LICENSE:   The MIT License
  *

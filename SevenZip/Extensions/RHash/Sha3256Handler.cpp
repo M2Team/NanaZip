@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:   NanaZip
  * FILE:      Sha3256Handler.cpp
- * PURPOSE:   Implementation for SHA3 256 hash algorithm
+ * PURPOSE:   Implementation for SHA3-256 hash algorithm
  *
  * LICENSE:   The MIT License
  *

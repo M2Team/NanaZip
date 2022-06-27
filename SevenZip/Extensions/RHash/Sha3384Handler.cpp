@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:   NanaZip
  * FILE:      Sha3384Handler.cpp
- * PURPOSE:   Implementation for SHA3 384 hash algorithm
+ * PURPOSE:   Implementation for SHA3-384 hash algorithm
  *
  * LICENSE:   The MIT License
  *

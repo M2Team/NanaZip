@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:   NanaZip
  * FILE:      Sha3512Handler.cpp
- * PURPOSE:   Implementation for SHA3 512 hash algorithm
+ * PURPOSE:   Implementation for SHA3-512 hash algorithm
  *
  * LICENSE:   The MIT License
  *
