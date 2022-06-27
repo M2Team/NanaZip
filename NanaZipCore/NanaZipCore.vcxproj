@@ -15,6 +15,7 @@
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.SevenZipHardwareAcceleration.props" />
   <Import Project="..\ThirdParty\Brotli.props" />
+  <Import Project="..\ThirdParty\LZ4.props" />
   <Import Project="..\ThirdParty\RHash.props" />
   <Import Project="..\ThirdParty\xxHash.props" />
   <Import Project="..\ThirdParty\Zstandard.props" />

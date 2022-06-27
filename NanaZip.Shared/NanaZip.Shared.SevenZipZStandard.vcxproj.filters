@@ -13,9 +13,6 @@
     <Filter Include="lizard">
       <UniqueIdentifier>{9a136d88-9896-4d2d-b694-55b7738124d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lz4">
-      <UniqueIdentifier>{1a0cb235-a453-4b1b-80cc-40db347b18d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="lz5">
       <UniqueIdentifier>{67bb3148-9b04-4d01-bb65-052ce6317515}</UniqueIdentifier>
     </Filter>
@@ -147,18 +144,6 @@
     <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_pricefast.h">
       <Filter>lizard</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz4\lz4.h">
-      <Filter>lz4</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz4\lz4frame.h">
-      <Filter>lz4</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz4\lz4frame_static.h">
-      <Filter>lz4</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz4\lz4hc.h">
-      <Filter>lz4</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\lz5\lz5.h">
       <Filter>lz5</Filter>
     </ClInclude>
@@ -248,15 +233,6 @@
     <ClCompile Include="..\SevenZip\C\lizard\lizard_frame.c">
       <Filter>lizard</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lz4\lz4.c">
-      <Filter>lz4</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lz4\lz4frame.c">
-      <Filter>lz4</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lz4\lz4hc.c">
-      <Filter>lz4</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\C\lz5\lz5.c">
       <Filter>lz5</Filter>
     </ClCompile>
@@ -321,12 +297,6 @@
     </None>
     <None Include="..\SevenZip\C\lizard\README.md">
       <Filter>lizard</Filter>
-    </None>
-    <None Include="..\SevenZip\C\lz4\LICENSE">
-      <Filter>lz4</Filter>
-    </None>
-    <None Include="..\SevenZip\C\lz4\README.md">
-      <Filter>lz4</Filter>
     </None>
     <None Include="..\SevenZip\C\lz5\LICENSE">
       <Filter>lz5</Filter>

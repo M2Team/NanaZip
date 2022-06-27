@@ -15,7 +15,7 @@
 #include <string.h>
 
 #define LZ4F_DISABLE_OBSOLETE_ENUMS
-#include "lz4frame.h"
+#include <lz4frame.h>
 
 #include "memmt.h"
 #include "threading.h"

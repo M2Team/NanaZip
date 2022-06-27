@@ -3,7 +3,7 @@
 #define LZ4_STATIC_LINKING_ONLY
 #include "../../../C/Alloc.h"
 #include "../../../C/Threads.h"
-#include "../../../C/lz4/lz4.h"
+#include <lz4.h>
 #include "../../../C/zstdmt/lz4-mt.h"
 
 #include "../../Windows/System.h"

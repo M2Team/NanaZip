@@ -6,7 +6,7 @@
 #include "../../../C/CpuArch.h"
 #include "../../../C/LzmaDec.h"
 #include "../../../C/Xz.h"
-#include "../../../C/lz4/lz4.h"
+#include <lz4.h>
 
 #include "../../Common/ComTry.h"
 #include "../../Common/MyLinux.h"

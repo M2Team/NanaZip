@@ -11,6 +11,7 @@
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\ThirdParty\Brotli.props" />
+  <Import Project="..\ThirdParty\LZ4.props" />
   <Import Project="..\ThirdParty\xxHash.props" />
   <Import Project="..\ThirdParty\Zstandard.props" />
   <PropertyGroup>
@@ -73,10 +74,6 @@
     <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_nochain.h" />
     <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_optimal.h" />
     <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_pricefast.h" />
-    <ClInclude Include="..\SevenZip\C\lz4\lz4.h" />
-    <ClInclude Include="..\SevenZip\C\lz4\lz4frame.h" />
-    <ClInclude Include="..\SevenZip\C\lz4\lz4frame_static.h" />
-    <ClInclude Include="..\SevenZip\C\lz4\lz4hc.h" />
     <ClInclude Include="..\SevenZip\C\lz5\lz5.h" />
     <ClInclude Include="..\SevenZip\C\lz5\lz5common.h" />
     <ClInclude Include="..\SevenZip\C\lz5\lz5frame.h" />
@@ -108,9 +105,6 @@
     <ClCompile Include="..\SevenZip\C\lizard\lizard_compress.c" />
     <ClCompile Include="..\SevenZip\C\lizard\lizard_decompress.c" />
     <ClCompile Include="..\SevenZip\C\lizard\lizard_frame.c" />
-    <ClCompile Include="..\SevenZip\C\lz4\lz4.c" />
-    <ClCompile Include="..\SevenZip\C\lz4\lz4frame.c" />
-    <ClCompile Include="..\SevenZip\C\lz4\lz4hc.c" />
     <ClCompile Include="..\SevenZip\C\lz5\lz5.c" />
     <ClCompile Include="..\SevenZip\C\lz5\lz5frame.c" />
     <ClCompile Include="..\SevenZip\C\lz5\lz5hc.c" />
@@ -134,8 +128,6 @@
     <None Include="..\SevenZip\C\hashes\README.md" />
     <None Include="..\SevenZip\C\lizard\LICENSE" />
     <None Include="..\SevenZip\C\lizard\README.md" />
-    <None Include="..\SevenZip\C\lz4\LICENSE" />
-    <None Include="..\SevenZip\C\lz4\README.md" />
     <None Include="..\SevenZip\C\lz5\LICENSE" />
     <None Include="..\SevenZip\C\lz5\README.md" />
     <None Include="..\SevenZip\C\zstdmt\LICENSE" />
