@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{32815BCD-B616-4253-9401-7C742C4CF0C2}</ProjectGuid>
+    <RootNamespace>LZ4</RootNamespace>
+    <MileProjectType>StaticLibrary</MileProjectType>
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+  </PropertyGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Project="xxHash.props" />
+  <ItemGroup>
+    <None Include="LZ4.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LZ4\lz4.c" />
+    <ClCompile Include="LZ4\lz4frame.c" />
+    <ClCompile Include="LZ4\lz4hc.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LZ4\lz4.h" />
+    <ClInclude Include="LZ4\lz4frame.h" />
+    <ClInclude Include="LZ4\lz4frame_static.h" />
+    <ClInclude Include="LZ4\lz4hc.h" />
+  </ItemGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+</Project>
