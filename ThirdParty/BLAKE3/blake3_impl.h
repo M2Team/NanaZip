@@ -1,4 +1,4 @@
-#ifndef BLAKE3_IMPL_H
+﻿#ifndef BLAKE3_IMPL_H
 #define BLAKE3_IMPL_H
 
 #include <assert.h>

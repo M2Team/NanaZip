@@ -1,4 +1,4 @@
-#ifndef BLAKE3_H
+﻿#ifndef BLAKE3_H
 #define BLAKE3_H
 
 #include <stddef.h>
