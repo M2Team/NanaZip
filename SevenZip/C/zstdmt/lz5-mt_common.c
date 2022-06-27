@@ -9,7 +9,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#include "lz5frame.h"
+#include <lz5frame.h>
 #include "lz5-mt.h"
 
 /* will be used for lib errors */

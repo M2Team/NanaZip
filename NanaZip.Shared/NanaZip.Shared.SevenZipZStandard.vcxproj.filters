@@ -13,9 +13,6 @@
     <Filter Include="lizard">
       <UniqueIdentifier>{9a136d88-9896-4d2d-b694-55b7738124d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lz5">
-      <UniqueIdentifier>{67bb3148-9b04-4d01-bb65-052ce6317515}</UniqueIdentifier>
-    </Filter>
     <Filter Include="zstdmt">
       <UniqueIdentifier>{b1f269d6-df54-46ea-82aa-8d1c85a8def5}</UniqueIdentifier>
     </Filter>
@@ -144,24 +141,6 @@
     <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_pricefast.h">
       <Filter>lizard</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz5\lz5.h">
-      <Filter>lz5</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz5\lz5common.h">
-      <Filter>lz5</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz5\lz5frame.h">
-      <Filter>lz5</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz5\lz5frame_static.h">
-      <Filter>lz5</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz5\lz5hc.h">
-      <Filter>lz5</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lz5\mem.h">
-      <Filter>lz5</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\zstdmt\brotli-mt.h">
       <Filter>zstdmt</Filter>
     </ClInclude>
@@ -233,15 +212,6 @@
     <ClCompile Include="..\SevenZip\C\lizard\lizard_frame.c">
       <Filter>lizard</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lz5\lz5.c">
-      <Filter>lz5</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lz5\lz5frame.c">
-      <Filter>lz5</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lz5\lz5hc.c">
-      <Filter>lz5</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_common.c">
       <Filter>zstdmt</Filter>
     </ClCompile>
@@ -297,12 +267,6 @@
     </None>
     <None Include="..\SevenZip\C\lizard\README.md">
       <Filter>lizard</Filter>
-    </None>
-    <None Include="..\SevenZip\C\lz5\LICENSE">
-      <Filter>lz5</Filter>
-    </None>
-    <None Include="..\SevenZip\C\lz5\README.md">
-      <Filter>lz5</Filter>
     </None>
     <None Include="..\SevenZip\C\zstdmt\LICENSE">
       <Filter>zstdmt</Filter>
