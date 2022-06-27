@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="LZ5.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="LZ5">
+      <UniqueIdentifier>{0abe4bf4-497b-45da-9e02-1841c1df4d6d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LZ5\lz5.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ5\lz5frame.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ5\lz5hc.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LZ5\lz5.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5common.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5frame.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5frame_static.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5hc.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\mem.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F3F1F2B3-0525-4782-813B-89A04CABFDD4}</ProjectGuid>
+    <RootNamespace>LZ5</RootNamespace>
+    <MileProjectType>StaticLibrary</MileProjectType>
+    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+  </PropertyGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Project="xxHash.props" />
+  <ItemGroup>
+    <None Include="LZ5.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LZ5\lz5.c" />
+    <ClCompile Include="LZ5\lz5frame.c" />
+    <ClCompile Include="LZ5\lz5hc.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LZ5\lz5.h" />
+    <ClInclude Include="LZ5\lz5common.h" />
+    <ClInclude Include="LZ5\lz5frame.h" />
+    <ClInclude Include="LZ5\lz5frame_static.h" />
+    <ClInclude Include="LZ5\lz5hc.h" />
+    <ClInclude Include="LZ5\mem.h" />
+  </ItemGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+</Project>
