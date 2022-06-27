@@ -1,4 +1,4 @@
-/*
+﻿/*
    LZ5 - Fast LZ compression algorithm
    Header File
    Copyright (C) 2011-2015, Yann Collet.

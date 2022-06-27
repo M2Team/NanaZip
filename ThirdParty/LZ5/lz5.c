@@ -1,4 +1,4 @@
-/*
+﻿/*
    LZ5 - Fast LZ compression algorithm
    Copyright (C) 2011-2015, Yann Collet.
    Copyright (C) 2015, Przemyslaw Skibinski <inikep@gmail.com>

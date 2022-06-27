@@ -1,4 +1,4 @@
-/*
+﻿/*
    LZ5 HC - High Compression Mode of LZ5
    Header File
    Copyright (C) 2011-2015, Yann Collet.
