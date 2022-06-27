@@ -15,7 +15,7 @@
 #include <string.h>
 
 #define LizardF_DISABLE_OBSOLETE_ENUMS
-#include "lizard_frame.h"
+#include <lizard_frame.h>
 
 #include "memmt.h"
 #include "threading.h"

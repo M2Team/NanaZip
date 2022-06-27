@@ -10,9 +10,6 @@
     <Filter Include="hashes">
       <UniqueIdentifier>{6ef82289-2c45-4244-9992-3279bf0aee06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lizard">
-      <UniqueIdentifier>{9a136d88-9896-4d2d-b694-55b7738124d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="zstdmt">
       <UniqueIdentifier>{b1f269d6-df54-46ea-82aa-8d1c85a8def5}</UniqueIdentifier>
     </Filter>
@@ -90,57 +87,6 @@
     <ClInclude Include="..\SevenZip\C\hashes\md2.h">
       <Filter>hashes</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_common.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_compress.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_compress_liz.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_compress_lz4.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_decompress.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_decompress_liz.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_decompress_lz4.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_frame.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_frame_static.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_fast.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_fastbig.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_fastsmall.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_hashchain.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_lowestprice.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_nochain.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_optimal.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_pricefast.h">
-      <Filter>lizard</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\zstdmt\brotli-mt.h">
       <Filter>zstdmt</Filter>
     </ClInclude>
@@ -203,15 +149,6 @@
     <ClCompile Include="..\SevenZip\C\hashes\md2.c">
       <Filter>hashes</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lizard\lizard_compress.c">
-      <Filter>lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lizard\lizard_decompress.c">
-      <Filter>lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\lizard\lizard_frame.c">
-      <Filter>lizard</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_common.c">
       <Filter>zstdmt</Filter>
     </ClCompile>
@@ -261,12 +198,6 @@
     </None>
     <None Include="..\SevenZip\C\hashes\README.md">
       <Filter>hashes</Filter>
-    </None>
-    <None Include="..\SevenZip\C\lizard\LICENSE">
-      <Filter>lizard</Filter>
-    </None>
-    <None Include="..\SevenZip\C\lizard\README.md">
-      <Filter>lizard</Filter>
     </None>
     <None Include="..\SevenZip\C\zstdmt\LICENSE">
       <Filter>zstdmt</Filter>

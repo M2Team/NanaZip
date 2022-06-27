@@ -11,6 +11,7 @@
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\ThirdParty\Brotli.props" />
+  <Import Project="..\ThirdParty\Lizard.props" />
   <Import Project="..\ThirdParty\LZ4.props" />
   <Import Project="..\ThirdParty\LZ5.props" />
   <Import Project="..\ThirdParty\xxHash.props" />
@@ -58,23 +59,6 @@
     <ClInclude Include="..\SevenZip\C\hashes\blake3.h" />
     <ClInclude Include="..\SevenZip\C\hashes\hash.h" />
     <ClInclude Include="..\SevenZip\C\hashes\md2.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_common.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_compress.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_compress_liz.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_compress_lz4.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_decompress.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_decompress_liz.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_decompress_lz4.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_frame.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_frame_static.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_fast.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_fastbig.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_fastsmall.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_hashchain.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_lowestprice.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_nochain.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_optimal.h" />
-    <ClInclude Include="..\SevenZip\C\lizard\lizard_parser_pricefast.h" />
     <ClInclude Include="..\SevenZip\C\zstdmt\brotli-mt.h" />
     <ClInclude Include="..\SevenZip\C\zstdmt\list.h" />
     <ClInclude Include="..\SevenZip\C\zstdmt\lizard-mt.h" />
@@ -97,9 +81,6 @@
     <ClCompile Include="..\SevenZip\C\fast-lzma2\util.c" />
     <ClCompile Include="..\SevenZip\C\hashes\blake3.c" />
     <ClCompile Include="..\SevenZip\C\hashes\md2.c" />
-    <ClCompile Include="..\SevenZip\C\lizard\lizard_compress.c" />
-    <ClCompile Include="..\SevenZip\C\lizard\lizard_decompress.c" />
-    <ClCompile Include="..\SevenZip\C\lizard\lizard_frame.c" />
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_common.c" />
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_compress.c" />
     <ClCompile Include="..\SevenZip\C\zstdmt\brotli-mt_decompress.c" />
@@ -118,8 +99,6 @@
     <None Include="..\SevenZip\C\fast-lzma2\COPYING" />
     <None Include="..\SevenZip\C\fast-lzma2\LICENSE" />
     <None Include="..\SevenZip\C\hashes\README.md" />
-    <None Include="..\SevenZip\C\lizard\LICENSE" />
-    <None Include="..\SevenZip\C\lizard\README.md" />
     <None Include="..\SevenZip\C\zstdmt\LICENSE" />
     <None Include="..\SevenZip\C\zstdmt\README.md" />
   </ItemGroup>

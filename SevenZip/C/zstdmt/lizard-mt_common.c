@@ -9,7 +9,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#include "lizard_frame.h"
+#include <lizard_frame.h>
 #include "lizard-mt.h"
 
 /* will be used for lib errors */
