@@ -578,6 +578,7 @@ Creative Commons may be contacted at creativecommons.org.
 
 - Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
+- Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4
 - LZ5, https://github.com/inikep/lizard
 - Mile.Cpp, https://github.com/ProjectMile/Mile.Cpp
