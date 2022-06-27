@@ -1,4 +1,4 @@
-#define LIZARD_FREQ_DIV   5
+﻿#define LIZARD_FREQ_DIV   5
 
 FORCE_INLINE void Lizard_setLog2Prices(Lizard_stream_t* ctx)
 {

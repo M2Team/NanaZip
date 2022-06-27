@@ -1,4 +1,4 @@
-/*
+﻿/*
   [0_MMMM_LLL] - 16-bit offset, 4-bit match length (4-15+), 3-bit literal length (0-7+)
   [1_MMMM_LLL] -   last offset, 4-bit match length (0-15+), 3-bit literal length (0-7+)
   flag 31      - 24-bit offset,        match length (47+),    no literal length

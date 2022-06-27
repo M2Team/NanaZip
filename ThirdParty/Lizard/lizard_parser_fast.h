@@ -1,4 +1,4 @@
-#define LIZARD_FAST_MIN_OFFSET 8
+﻿#define LIZARD_FAST_MIN_OFFSET 8
 #define LIZARD_FAST_LONGOFF_MM 0 /* not used with offsets > 1<<16 */
 
 /**************************************

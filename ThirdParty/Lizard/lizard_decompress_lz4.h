@@ -1,4 +1,4 @@
-/*! Lizard_decompress_LZ4() :
+﻿/*! Lizard_decompress_LZ4() :
  *  This generic decompression function cover all use cases.
  *  It shall be instantiated several times, using different sets of directives
  *  Note that it is important this generic function is really inlined,

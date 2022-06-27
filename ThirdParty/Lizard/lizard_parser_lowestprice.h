@@ -1,4 +1,4 @@
-#define LIZARD_LOWESTPRICE_MIN_OFFSET 8
+﻿#define LIZARD_LOWESTPRICE_MIN_OFFSET 8
 
 
 FORCE_INLINE size_t Lizard_more_profitable(Lizard_stream_t* const ctx, const BYTE *best_ip, size_t best_off, size_t best_common, const BYTE *ip, size_t off, size_t common, size_t literals, int last_off)

@@ -1,4 +1,4 @@
-#define LIZARD_LENGTH_SIZE_LZ4(len) ((len >= (1<<16)+RUN_MASK_LZ4) ? 5 : ((len >= 254+RUN_MASK_LZ4) ? 3 : ((len >= RUN_MASK_LZ4) ? 1 : 0)))
+﻿#define LIZARD_LENGTH_SIZE_LZ4(len) ((len >= (1<<16)+RUN_MASK_LZ4) ? 5 : ((len >= 254+RUN_MASK_LZ4) ? 3 : ((len >= RUN_MASK_LZ4) ? 1 : 0)))
 
 FORCE_INLINE int Lizard_encodeSequence_LZ4 (
     Lizard_stream_t* ctx,
