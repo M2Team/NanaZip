@@ -10,6 +10,11 @@
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <DisableSpecificWarnings>4244;4702;</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="BLAKE3.props" />
   </ItemGroup>
