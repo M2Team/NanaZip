@@ -2,6 +2,22 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 2.0 Preview 1 (2.0.301.0)**
+
+- Fix the shell extension issue which cause Everything crashed. (Thanks to 
+  No5972, startkkkkkk, SakuraNeko, bfgxp and riverar.)
+- Allow NanaZip to be associated with any file type. (Contributed by 
+  manfromarce.)
+- Update 7-Zip to 22.00. (Thanks to Igor Pavlov. Noticed by HylianSteel.)
+- Integrate the following HASH algorithms to NanaZip via integrating RHash and
+  xxHash: AICH, BLAKE2b, ED2K, EDON-R 224, EDON-R 256, EDON-R 384, EDON-R 512,
+  GOST R 34.11-94, GOST R 34.11-94 CryptoPro, GOST R 34.11-2012 256, 
+  GOST R 34.11-2012 512, HAS-160, RIPEMD-160, SHA-224, SHA3-224, SHA3-256,
+  SHA3-384, SHA3-512, Snefru-128, Snefru-256, Tiger, Tiger2, TTH, BTIH,
+  Whirlpool, XXH3_64bits, XXH3_128bits
+- Update Zstandard to 1.5.2.
+- Update BLAKE3 to 1.3.1.
+
 **NanaZip 1.2 Update 1 Preview 1 (1.2.253.0)**
 
 - Fix the issue of the i18n implementation of File Type Association. 
