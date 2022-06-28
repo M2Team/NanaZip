@@ -172,7 +172,7 @@
     <value>Ligação</value>
   </data>
   <data name="Resource559" xml:space="preserve">
-    <value>&amp;Alternar fluxo</value>
+    <value>&amp;Alternar fluxos</value>
   </data>
   <data name="Resource600" xml:space="preserve">
     <value>Seleccionar &amp;tudo</value>
@@ -220,7 +220,7 @@
     <value>&amp;Barras de ferramentas</value>
   </data>
   <data name="Resource734" xml:space="preserve">
-    <value>Abrir pasta root</value>
+    <value>Abrir pasta principal</value>
   </data>
   <data name="Resource735" xml:space="preserve">
     <value>Subir um nível</value>
@@ -511,7 +511,13 @@
     <value>iNode</value>
   </data>
   <data name="Resource1093" xml:space="preserve">
-    <value>Só de leitura</value>
+    <value>Apenas leitura</value>
+  </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Copiar ligação</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Metadados alterados</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Opções</value>
@@ -550,7 +556,7 @@
     <value>Itens do menu de contexto:</value>
   </data>
   <data name="Resource2304" xml:space="preserve">
-    <value>Icons no menu de contexto</value>
+    <value>Ícones no menu de contexto</value>
   </data>
   <data name="Resource2320" xml:space="preserve">
     <value>&lt;Pasta&gt;</value>
@@ -789,6 +795,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>Restaurar segurança de ficheiros</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Propagar fluxo Zone.Id:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Para ficheiros do Office</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Confirmar substituição de ficheiro</value>
   </data>
@@ -1022,6 +1034,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>Sólido</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Precisão da data:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Última modificação</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Data de criação</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Último acesso</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Definir data de arquivo para a última data de arquivo</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Não alterar a data do último acesso</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Copiar</value>

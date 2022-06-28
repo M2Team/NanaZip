@@ -517,7 +517,7 @@
     <value>复制链接</value>
   </data>
   <data name="Resource1098" xml:space="preserve">
-    <value>元数据已变更</value>
+    <value>原数据已改变</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
     <value>选项</value>
@@ -796,10 +796,10 @@
     <value>恢复文件安全设置</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
-    <value>传递 Zone.Id 流：</value>
+    <value>传播 Zone.Id 数据流：</value>
   </data>
   <data name="Resource3441" xml:space="preserve">
-    <value>仅 Office 文档</value>
+    <value>仅限 Office 文件</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
     <value>确认文件替换</value>
@@ -1042,25 +1042,25 @@
     <value>时间戳精度：</value>
   </data>
   <data name="Resource4082" xml:space="preserve">
-    <value>保存修改时间</value>
+    <value>存储修改时间</value>
   </data>
   <data name="Resource4083" xml:space="preserve">
-    <value>保存创建时间</value>
+    <value>存储创建时间</value>
   </data>
   <data name="Resource4084" xml:space="preserve">
-    <value>保存上次访问时间</value>
+    <value>存储最后访问时间</value>
   </data>
   <data name="Resource4085" xml:space="preserve">
-    <value>设置档案文件时间为档案内最新的文件时间</value>
+    <value>设置压缩包时间为当前文件时间</value>
   </data>
   <data name="Resource4086" xml:space="preserve">
-    <value>不要修改源文件的上次访问时间</value>
+    <value>不更改源文件最后访问时间</value>
   </data>
   <data name="Resource4090" xml:space="preserve">
-    <value>秒</value>
+    <value>sec</value>
   </data>
   <data name="Resource4091" xml:space="preserve">
-    <value>纳秒</value>
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>复制</value>
