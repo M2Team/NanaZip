@@ -29,6 +29,7 @@
 #include "../../../../../NanaZipSfxConsole/Mile.Project.Properties.h"
 
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -139,6 +140,8 @@ static const char * const kIncorrectWildcardInCommandLine  = "Incorrect wildcard
 // static const char * const kProcessArchiveMessage = " archive: ";
 
 static const char * const kCantFindSFX = " cannot find sfx";
+
+static const char * const kMitigationErrorMessage = "Cannot enable security mitigations: ";
 
 namespace NCommandType
 {
@@ -263,6 +266,8 @@ int Main2(
 )
 {
   #ifdef _WIN32
+  if (!EnableMitigations())
+    g_StdOut << kMitigationErrorMessage << endl;
   // do we need load Security DLLs for console program?
   LoadSecurityDlls();
   #endif

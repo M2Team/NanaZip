@@ -24,6 +24,7 @@
 #include "ExtractEngine.h"
 
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 
 #include "resource.h"
 
@@ -142,6 +143,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   NT_CHECK
 
   #ifdef _WIN32
+  if (!EnableMitigations())
+    ShowErrorMessage(L"Cannot enable security mitigations");
   LoadSecurityDlls();
   #endif
 

@@ -9,6 +9,7 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 #endif
 
 #include "../../../Common/StringConvert.h"
@@ -676,6 +677,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     try
     {
       #ifdef _WIN32
+      if (!EnableMitigations())
+        ErrorMessage(L"Cannot enable security mitigations");
       My_SetDefaultDllDirectories();
       #endif
       return WinMain2(nCmdShow);

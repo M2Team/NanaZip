@@ -29,6 +29,7 @@
 #include "../../UI/GUI/ExtractRes.h"
 
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -227,6 +228,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   try
   {
     #ifdef _WIN32
+    if (!EnableMitigations())
+      ShowErrorMessage(L"Cannot enable security mitigations");
     LoadSecurityDlls();
     #endif
 

@@ -4,6 +4,7 @@
 
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 #endif
 
 #include "../../../Common/MyWindows.h"
@@ -393,6 +394,8 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
 
   #ifdef _WIN32
   NT_CHECK
+  if (!EnableMitigations())
+    ErrorMessage("Cannot enable security mitigations");
   #endif
 
   InitCommonControls();
