@@ -111,6 +111,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lizard", "ThirdParty\Lizard
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BLAKE3", "ThirdParty\BLAKE3.vcxproj", "{7ACD5879-D2BC-4062-A065-78E2603DFE4E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mile.Library.Windows", "Mile.Library.Windows\Mile.Library.Windows.vcxproj", "{2D142417-078E-4F56-8D8F-B26085AB5204}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -355,6 +357,18 @@ Global
 		{7ACD5879-D2BC-4062-A065-78E2603DFE4E}.Release|x64.Build.0 = Release|x64
 		{7ACD5879-D2BC-4062-A065-78E2603DFE4E}.Release|x86.ActiveCfg = Release|Win32
 		{7ACD5879-D2BC-4062-A065-78E2603DFE4E}.Release|x86.Build.0 = Release|Win32
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Debug|ARM64.Build.0 = Debug|ARM64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Debug|x64.ActiveCfg = Debug|x64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Debug|x64.Build.0 = Debug|x64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Debug|x86.ActiveCfg = Debug|Win32
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Debug|x86.Build.0 = Debug|Win32
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Release|ARM64.ActiveCfg = Release|ARM64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Release|ARM64.Build.0 = Release|ARM64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Release|x64.ActiveCfg = Release|x64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Release|x64.Build.0 = Release|x64
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Release|x86.ActiveCfg = Release|Win32
+		{2D142417-078E-4F56-8D8F-B26085AB5204}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

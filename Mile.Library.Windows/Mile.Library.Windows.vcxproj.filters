@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="Mile.Library.Windows.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Mile.Windows.DpiHelpers">
+      <UniqueIdentifier>{37b80698-7e33-452e-b174-8e9748653bc0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Mile.Windows.DpiHelpers.cpp">
+      <Filter>Mile.Windows.DpiHelpers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Mile.Windows.DpiHelpers.h">
+      <Filter>Mile.Windows.DpiHelpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
