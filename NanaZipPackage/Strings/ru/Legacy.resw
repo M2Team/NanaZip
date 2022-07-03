@@ -661,10 +661,12 @@
     <value>Файл {0} уже существует</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Файл '{0}' был изменен.\nВы хотите обновить его в архиве?</value>
+    <value>Файл '{0}' был изменен.
+Вы хотите обновить его в архиве?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Не удалось обновить файл\n'{0}'</value>
+    <value>Не удалось обновить файл
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Не удалось запустить редактор</value>
@@ -1222,7 +1224,8 @@
     <value>Ошибка в поле для задания размера томов</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Установленный размер тома: {0} байтов.\nВы действительно хотите разбить архив на такие тома?</value>
+    <value>Установленный размер тома: {0} байтов.
+Вы действительно хотите разбить архив на такие тома?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Объединить файлы</value>

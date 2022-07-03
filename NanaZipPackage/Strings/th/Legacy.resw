@@ -577,10 +577,12 @@
     <value>ไฟล์ {0} มีอยู่แล้ว</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>ไฟล์ '{0}' ได้ถูกดัดแปรแล้ว\nคุณต้องการจะปรับปรุงเอกสารหรือไม่</value>
+    <value>ไฟล์ '{0}' ได้ถูกดัดแปรแล้ว
+คุณต้องการจะปรับปรุงเอกสารหรือไม่</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>ไม่สามารถปรับปรุงไฟล์\n'{0}'</value>
+    <value>ไม่สามารถปรับปรุงไฟล์
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>ไม่สามารถเปิดตัวแก้ไขได้</value>
@@ -1000,7 +1002,8 @@
     <value>ขนาด volume ไม่ถูกต้อง</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>ระบุขนาด volume: {0} ไบท์.\nท่านมั่นใจว่าต้องการแบ่งไฟล์เป็น volumes ดังกล่าว?</value>
+    <value>ระบุขนาด volume: {0} ไบท์.
+ท่านมั่นใจว่าต้องการแบ่งไฟล์เป็น volumes ดังกล่าว?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>รวมไฟล์</value>

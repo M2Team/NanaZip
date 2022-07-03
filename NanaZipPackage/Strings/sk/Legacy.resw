@@ -661,10 +661,12 @@
     <value>Súbor {0} už existuje.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Súbor '{0}' bol zmenený.\nChcete ho aktualizovať v archíve?</value>
+    <value>Súbor '{0}' bol zmenený.
+Chcete ho aktualizovať v archíve?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Nie je možné aktualizovať súbor\n'{0}'</value>
+    <value>Nie je možné aktualizovať súbor
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Nie je možné spustiť editor.</value>
@@ -1150,7 +1152,8 @@
     <value>Nesprávna veľkosť zväzku</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Určená veľkosť zväzku: {0} bajtov.\nSte si istý, že chcete rozdeliť archív na také zväzky?</value>
+    <value>Určená veľkosť zväzku: {0} bajtov.
+Ste si istý, že chcete rozdeliť archív na také zväzky?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Zlúčiť súbory</value>

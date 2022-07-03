@@ -667,10 +667,12 @@
     <value>Failas pavadinimu {0} yra</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Failas „{0}“ buvo pakeistas.\nAr norite jį atnaujinti archyve?</value>
+    <value>Failas „{0}“ buvo pakeistas.
+Ar norite jį atnaujinti archyve?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Negalima atnaujinti failo\n„{0}“</value>
+    <value>Negalima atnaujinti failo
+„{0}“</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Negalima paleisti redaktoriaus.</value>
@@ -1195,7 +1197,8 @@
     <value>Neteisingas dalies dydis</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Nurodytas dalies dydis: {0} baitai.\nAr jūs esate įsitikinę, jog norite archyvą skaidyti į tokias dalis?</value>
+    <value>Nurodytas dalies dydis: {0} baitai.
+Ar jūs esate įsitikinę, jog norite archyvą skaidyti į tokias dalis?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Sujungti failus</value>

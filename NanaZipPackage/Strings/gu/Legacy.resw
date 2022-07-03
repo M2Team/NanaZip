@@ -577,10 +577,12 @@
     <value>ફાઇલ {0} પહેલાથી હયાત છે</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' ફ઼ાઇલ પરિવર્ધિત થઈ છે.\nશું તમે સંગ્રહમાં આને અદ્યતનીકૃત કરવા માગો છો?</value>
+    <value>'{0}' ફ઼ાઇલ પરિવર્ધિત થઈ છે.
+શું તમે સંગ્રહમાં આને અદ્યતનીકૃત કરવા માગો છો?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>ફ઼ાઇલ ને અદ્યતનીકૃત નથી કરી શકતું\n'{0}'</value>
+    <value>ફ઼ાઇલ ને અદ્યતનીકૃત નથી કરી શકતું
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>સંપાદકને શરૂ નથી કરી શકતું.</value>
@@ -1003,7 +1005,8 @@
     <value>જત્થાનો આકાર ખોટું છે</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>નિર્દેશિત જત્થા આકાર: {0} બાઇટસ.\n આપ સંગ્રહને એવા જત્થાઓમાં વિભાજિત કરવા ચાહો છો, શું તમને યકીન છે?</value>
+    <value>નિર્દેશિત જત્થા આકાર: {0} બાઇટસ.
+ આપ સંગ્રહને એવા જત્થાઓમાં વિભાજિત કરવા ચાહો છો, શું તમને યકીન છે?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ફાઇલો સંયોજિત કરો</value>

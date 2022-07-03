@@ -577,10 +577,12 @@
     <value>ფაილი '{0}' უკვე არსებობს</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>ფაილი '{0}' შეიცვალა.\nგნებავთ მისი არქივში განახლება?</value>
+    <value>ფაილი '{0}' შეიცვალა.
+გნებავთ მისი არქივში განახლება?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>შეუძლებელია \n'{0}'-ის განახლება</value>
+    <value>შეუძლებელია 
+'{0}'-ის განახლება</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>შეუძლებელია რედაქტორის გაშვება.</value>
@@ -1003,7 +1005,8 @@
     <value>ნაწილის ზომა მიუღებელია</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>მითითებული ნაწილის ზომა: {0} ბაიტი.\nნამდვილად გსურთ ასეთი ზომის ნაწილებას დაყოთ ფაილი?</value>
+    <value>მითითებული ნაწილის ზომა: {0} ბაიტი.
+ნამდვილად გსურთ ასეთი ზომის ნაწილებას დაყოთ ფაილი?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ფაილების შეერთება</value>

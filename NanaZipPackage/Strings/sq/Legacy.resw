@@ -484,10 +484,12 @@
     <value>Operacionet e azhurnimit për këtë arkiv s'përkrahen.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Skedari '{0}' u modifikua.\nDoni ta azhurnoni atë edhe në arkiv?</value>
+    <value>Skedari '{0}' u modifikua.
+Doni ta azhurnoni atë edhe në arkiv?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>S'mund të azhurnojë skedarin\n'{0}'</value>
+    <value>S'mund të azhurnojë skedarin
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>S'mund të hap redaktuesin.</value>

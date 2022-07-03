@@ -655,10 +655,12 @@
     <value>Файли {0} аллакай мавҷуд аст.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Файли '{0}' тағйир дода шудааст. \nШумо мехоҳед онро дар бойгонӣ навсозӣ кардан?</value>
+    <value>Файли '{0}' тағйир дода шудааст. 
+Шумо мехоҳед онро дар бойгонӣ навсозӣ кардан?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Навсозии файли \n'{0}' ноком шуд</value>
+    <value>Навсозии файли 
+'{0}' ноком шуд</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Оғози муҳаррир ноком аст</value>
@@ -1183,7 +1185,8 @@
     <value>Хато дар майдон барои муайян кардани ҳаҷмҳо</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Андозаи ҳаҷми муайяншуда {0} байт аст. \nДар ҳақиқат шумо мехоҳед бойгониро ба чунин ҷилдҳо тақсим кардан?</value>
+    <value>Андозаи ҳаҷми муайяншуда {0} байт аст. 
+Дар ҳақиқат шумо мехоҳед бойгониро ба чунин ҷилдҳо тақсим кардан?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Якҷоя кардани файлҳо</value>

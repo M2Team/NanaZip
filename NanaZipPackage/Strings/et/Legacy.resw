@@ -547,7 +547,10 @@
     <value>Teave NanaZipi kohta</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>NanaZip on vaba tarkvara. Kuid kui soovite toetada NanaZipi arendamist, siis saate programmi registreerida.\n\nNanaZipi Eesti koduleht:\nhttp://www.hot.ee/somberg/7zip.html</value>
+    <value>NanaZip on vaba tarkvara. Kuid kui soovite toetada NanaZipi arendamist, siis saate programmi registreerida.
+
+NanaZipi Eesti koduleht:
+http://www.hot.ee/somberg/7zip.html</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>Süsteem ei saa eraldada nõutavat mälumahtu.</value>
@@ -577,10 +580,12 @@
     <value>Fail {0} on juba olemas.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Faili {0} on muudetud.\nKas soovite selle arhiivis värskendada?</value>
+    <value>Faili {0} on muudetud.
+Kas soovite selle arhiivis värskendada?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Ei saa värskendada faili\n{0}</value>
+    <value>Ei saa värskendada faili
+{0}</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Ei saa käivitada redaktorit.</value>
@@ -1003,7 +1008,8 @@
     <value>Sobimatu köitemaht.</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Määratud köitemaht: {0} baiti.\nKas soovite kindlasti tükeldada arhiivi niisugusteks köideteks?</value>
+    <value>Määratud köitemaht: {0} baiti.
+Kas soovite kindlasti tükeldada arhiivi niisugusteks köideteks?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Failide ühendamine:</value>

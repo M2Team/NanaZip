@@ -484,10 +484,12 @@
     <value>Ĝisdatigoperacioj ne estas subtenataj por ĉi-tiu arĥivo.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Dosiero '{0}' ŝanĝiĝis.\nĈu vi volas ĝistadigi ĝin enraĥive?</value>
+    <value>Dosiero '{0}' ŝanĝiĝis.
+Ĉu vi volas ĝistadigi ĝin enraĥive?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Fiaskis ĝisdatigi dosieron\n'{0}''</value>
+    <value>Fiaskis ĝisdatigi dosieron
+'{0}''</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Fiaskis startigi redaktilon.</value>

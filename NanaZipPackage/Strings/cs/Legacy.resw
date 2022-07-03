@@ -670,10 +670,12 @@
     <value>Soubor {0} již existuje</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Soubor '{0}' byl změněn.\nChcete ho aktualizovat v archivu?</value>
+    <value>Soubor '{0}' byl změněn.
+Chcete ho aktualizovat v archivu?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Nelze aktualizovat soubor\n'{0}'</value>
+    <value>Nelze aktualizovat soubor
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Editor nelze spustit.</value>
@@ -1198,7 +1200,8 @@
     <value>Nesprávná velikost dílu</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Zadaná velikost dílu: {0} bytů.\nJste si jistí, že chcete rozdělit archiv do takových dílů?</value>
+    <value>Zadaná velikost dílu: {0} bytů.
+Jste si jistí, že chcete rozdělit archiv do takových dílů?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Sloučit soubory</value>

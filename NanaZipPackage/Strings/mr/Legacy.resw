@@ -481,10 +481,12 @@
     <value>या दफ़तरासाठी नुतनीकरण शक्य नाही.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' ही फ़ाइल बदलली आहे.\nतुम्हाला हे दफ़तरात नुतन करायचे आहे का?</value>
+    <value>'{0}' ही फ़ाइल बदलली आहे.
+तुम्हाला हे दफ़तरात नुतन करायचे आहे का?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>फ़ाइल नुतन करता येत नाही\n'{0}'</value>
+    <value>फ़ाइल नुतन करता येत नाही
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>संपादक सुरु होत नाही.</value>

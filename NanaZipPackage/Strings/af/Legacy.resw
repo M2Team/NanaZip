@@ -469,10 +469,12 @@
     <value>Bywerk-funksie word vir hierdie argief nie ondersteun nie.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Lêer '{0}' is gewysig.\nWil u dit bywerk in die argief?</value>
+    <value>Lêer '{0}' is gewysig.
+Wil u dit bywerk in die argief?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Kan lêer\n'{0}' nie bywerk nie</value>
+    <value>Kan lêer
+'{0}' nie bywerk nie</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Redigeerder nie aan die gang gesit word nie.</value>

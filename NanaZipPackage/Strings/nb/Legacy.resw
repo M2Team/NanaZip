@@ -490,10 +490,12 @@
     <value>Kan ikke åpne det krypterte arkivet «{0}». Sjekk at du har riktig passord.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Filen «{0}» har blitt endret.\nVil du oppdatere den i arkivet?</value>
+    <value>Filen «{0}» har blitt endret.
+Vil du oppdatere den i arkivet?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Klarte ikke oppdatere filen\n«{0}»</value>
+    <value>Klarte ikke oppdatere filen
+«{0}»</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Klarte ikke starte redigeringsprogram.</value>
@@ -883,7 +885,8 @@
     <value>Ugyldig delarkivstørrelse</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Valgt delarkivstørrelse: {0} byte.\nEr du sikker på at du vil dele arkivet med denne størrelsen?</value>
+    <value>Valgt delarkivstørrelse: {0} byte.
+Er du sikker på at du vil dele arkivet med denne størrelsen?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Sett sammen arkiv</value>

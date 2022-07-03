@@ -667,10 +667,12 @@
     <value>{0} agiria badago jadanik</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' agiria aldatu egin da.\nArtxioboan eguneratzea nahi duzu?</value>
+    <value>'{0}' agiria aldatu egin da.
+Artxioboan eguneratzea nahi duzu?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Ezinezkoa agiria eguneratzea\n'{0}'</value>
+    <value>Ezinezkoa agiria eguneratzea
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Ezin da editatzailea abiarazi.</value>
@@ -1195,7 +1197,8 @@
     <value>Bolumen neurri okerra</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Adierazitako bolumen neurria: {0} byte.\nZihur zaude artxiboa bolumenetan banantzea nahi duzula?</value>
+    <value>Adierazitako bolumen neurria: {0} byte.
+Zihur zaude artxiboa bolumenetan banantzea nahi duzula?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Nahastu Agiriak</value>

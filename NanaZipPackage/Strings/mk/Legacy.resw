@@ -469,10 +469,12 @@
     <value>Оваа операција не е поддржана за овој тип на архива.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Датотеката '{0}' е модифицирана.\nДали сакате да ја обновите во архивата?</value>
+    <value>Датотеката '{0}' е модифицирана.
+Дали сакате да ја обновите во архивата?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Не е можно обновување на датотеката\n'{0}'</value>
+    <value>Не е можно обновување на датотеката
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Грешка при стартување на Едиторот.</value>

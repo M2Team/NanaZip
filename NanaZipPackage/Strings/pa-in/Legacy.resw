@@ -496,7 +496,11 @@
     <value>7-ਜ਼ਿੱਪ ਬਾਰੇ</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>7-ਜ਼ਿੱਪ ਇੱਕ ਮੁਫ਼ਤ ਸਾਫ਼ਟਵੇਅਰ ਹੈ। ਪਰ ਫੇਰ ਵੀ, ਤੁਸੀਂ ਰਜਿਸਟਰ ਕਰਕੇ 7-ਜ਼ਿੱਪ ਦੇ ਵਿਕਾਸ ਵਿੱਚ ਸਮਰਥਨ ਪਾ ਸੱਕਦੇ ਹੋ।\n\nਪੰਜਾਬੀ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤਾ (Translation Done By):\nGurmeet Singh Kochar (ਗੁਰਮੀਤ ਸਿੰਘ ਕੋਚਰ)\n&lt;gomikochar@yahoo.com&gt;</value>
+    <value>7-ਜ਼ਿੱਪ ਇੱਕ ਮੁਫ਼ਤ ਸਾਫ਼ਟਵੇਅਰ ਹੈ। ਪਰ ਫੇਰ ਵੀ, ਤੁਸੀਂ ਰਜਿਸਟਰ ਕਰਕੇ 7-ਜ਼ਿੱਪ ਦੇ ਵਿਕਾਸ ਵਿੱਚ ਸਮਰਥਨ ਪਾ ਸੱਕਦੇ ਹੋ।
+
+ਪੰਜਾਬੀ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤਾ (Translation Done By):
+Gurmeet Singh Kochar (ਗੁਰਮੀਤ ਸਿੰਘ ਕੋਚਰ)
+&lt;gomikochar@yahoo.com&gt;</value>
   </data>
   <data name="Resource3001" xml:space="preserve">
     <value>ਕੋਈ ਸਮੱਸਿਆਵਾਂ ਨਹੀਂ ਹਨ</value>
@@ -517,10 +521,12 @@
     <value>'{0}' ਐਨਕ੍ਰਿਪਟਡ ਆਕਾਈਵ ਨਹੀਂ ਖੋਲਿਆ ਜਾ ਸੱਕਿਆ। ਗਲ਼ਤ ਪਾਸਵਰਡ?</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' ਫਾਇਲ ਸੋਧ ਦਿੱਤੀ ਗਈ ਹੈ।\nਕੀ ਤੁਸੀਂ ਉਸਨੂੰ ਆਕਾਈਵ ਵਿੱਚ ਅੱਪਡੇਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</value>
+    <value>'{0}' ਫਾਇਲ ਸੋਧ ਦਿੱਤੀ ਗਈ ਹੈ।
+ਕੀ ਤੁਸੀਂ ਉਸਨੂੰ ਆਕਾਈਵ ਵਿੱਚ ਅੱਪਡੇਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>ਫਾਇਲ ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸੱਕੀ\n'{0}'</value>
+    <value>ਫਾਇਲ ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸੱਕੀ
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>ਐਡੀਟਰ ਚਾਲੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸੱਕਿਆ।</value>
@@ -925,7 +931,8 @@
     <value>ਵੋਲੁੱਮ ਸਾਈਜ਼ ਗਲ਼ਤ ਹੈ</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>ਦਿੱਤਾ ਗਿਆ ਵੋਲੁੱਮ ਸਾਈਜ਼: {0} ਬਾਈਟ।\nਕੀ ਤੁਸੀਂ ਨਿਸ਼ਚਿੱਤ ਆਕਾਈਵ ਨੂੰ ਦਿੱਤੇ ਗਏ ਵੋਲੁੱਮਾਂ ਵਿੱਚ ਵੰਡਣਾ ਚਾਹੁੰਦੇ ਹੋ?</value>
+    <value>ਦਿੱਤਾ ਗਿਆ ਵੋਲੁੱਮ ਸਾਈਜ਼: {0} ਬਾਈਟ।
+ਕੀ ਤੁਸੀਂ ਨਿਸ਼ਚਿੱਤ ਆਕਾਈਵ ਨੂੰ ਦਿੱਤੇ ਗਏ ਵੋਲੁੱਮਾਂ ਵਿੱਚ ਵੰਡਣਾ ਚਾਹੁੰਦੇ ਹੋ?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ਫਾਇਲ ਦੇ ਹਿੱਸੇ ਜੋੜੋ</value>

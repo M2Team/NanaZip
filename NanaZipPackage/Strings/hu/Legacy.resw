@@ -670,10 +670,13 @@
     <value>A(z) {0} fájl már létezik</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}'\nA fájl tartalma megváltozott.\nKívánja aktualizálni az archívumban?</value>
+    <value>'{0}'
+A fájl tartalma megváltozott.
+Kívánja aktualizálni az archívumban?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>A fájl nem aktualizálható:\n'{0}'</value>
+    <value>A fájl nem aktualizálható:
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>A szerkesztő nem indítható.</value>
@@ -1198,7 +1201,8 @@
     <value>Hibás kötet méret</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>A megadott kötet mérete: {0} byte.\nBiztos fel akarja darabolni az archívumot ilyen kötetre?</value>
+    <value>A megadott kötet mérete: {0} byte.
+Biztos fel akarja darabolni az archívumot ilyen kötetre?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Fájlegyesítés</value>

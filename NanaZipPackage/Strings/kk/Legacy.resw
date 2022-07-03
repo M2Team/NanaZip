@@ -577,10 +577,12 @@
     <value>{0} деген файл бар</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' файлы өзгерді.\nОны мұрағатта жаңарту керек пе?</value>
+    <value>'{0}' файлы өзгерді.
+Оны мұрағатта жаңарту керек пе?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>\n'{0}' файлды жаңарту мүмкін емес</value>
+    <value>
+'{0}' файлды жаңарту мүмкін емес</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Өңдегішті ашу мүмкін емес</value>
@@ -1003,7 +1005,8 @@
     <value>Томның көлемін енгізу қате</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Томның орнатылған көлемі: {0} байт.\nМұрағатты томға бөлшектеу керек пе?</value>
+    <value>Томның орнатылған көлемі: {0} байт.
+Мұрағатты томға бөлшектеу керек пе?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Файлдарды біріктіру</value>

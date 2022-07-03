@@ -550,10 +550,12 @@
     <value>Fișierul {0} există deja</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Fişierul '{0}' a fost modificat.\nDoreşti să îl actualizez în arhivă?</value>
+    <value>Fişierul '{0}' a fost modificat.
+Doreşti să îl actualizez în arhivă?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Nu pot actualiza fişierul\n'{0}'</value>
+    <value>Nu pot actualiza fişierul
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Nu pot porni editorul.</value>
@@ -976,7 +978,8 @@
     <value>Dimensiunea volumului este incorectă</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Dimensiunea volumului specificat: {0} octeţi.\nEşti sigur că vrei să împarţi arhiva în mai multe volume (părţi)?</value>
+    <value>Dimensiunea volumului specificat: {0} octeţi.
+Eşti sigur că vrei să împarţi arhiva în mai multe volume (părţi)?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Uneşte fişierele</value>

@@ -670,10 +670,12 @@
     <value>O ficheiro {0} xa existe</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Modificouse o ficheiro '{0}'.\nQuéreo actualizar no arquivo?</value>
+    <value>Modificouse o ficheiro '{0}'.
+Quéreo actualizar no arquivo?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Non se pode actualizar o ficheiro\n'{0}'</value>
+    <value>Non se pode actualizar o ficheiro
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Non se pode iniciar o editor.</value>
@@ -1198,7 +1200,8 @@
     <value>Tamaño de volume incorrecto</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Tamaño de volume especificado: {0} bytes.\nTen a certeza de dividir o arquivo nestes volumes?</value>
+    <value>Tamaño de volume especificado: {0} bytes.
+Ten a certeza de dividir o arquivo nestes volumes?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combinar ficheiros</value>

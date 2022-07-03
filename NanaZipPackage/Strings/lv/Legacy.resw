@@ -469,10 +469,12 @@
     <value>Šis arhīvs neatbalsta pārveidošanu.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Fails '{0}' ir pārveidots.\nVai vēlaties to atjaunināt arī arhīvā?</value>
+    <value>Fails '{0}' ir pārveidots.
+Vai vēlaties to atjaunināt arī arhīvā?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Failu nav iespējams uzlabot\n'{0}'</value>
+    <value>Failu nav iespējams uzlabot
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Nav iespējams palaist labošanas programmu.</value>

@@ -472,7 +472,8 @@
     <value>Mae NanaZip yn meddalwedd am ddim. Ond, gallwch cefnogi yNanaZip</value>
   </data>
   <data name="Resource2902" xml:space="preserve">
-    <value>\ndatblygiad o NanaZip trwy cofrestru.</value>
+    <value>
+datblygiad o NanaZip trwy cofrestru.</value>
   </data>
   <data name="Resource3001" xml:space="preserve">
     <value>Mae na ddim wallau</value>
@@ -487,13 +488,16 @@
     <value>Mae gweithrediadau diweddaru ddim yn ateg am yr archif hyn.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Roedd ffeil '{0}' wedi'i addasu.\nWyt ti moen ei diweddaru yn yr</value>
+    <value>Roedd ffeil '{0}' wedi'i addasu.
+Wyt ti moen ei diweddaru yn yr</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>\narchif?</value>
+    <value>
+archif?</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
-    <value>Ddim yn gallu diweddaru ffeil\n'{0}'</value>
+    <value>Ddim yn gallu diweddaru ffeil
+'{0}'</value>
   </data>
   <data name="Resource3012" xml:space="preserve">
     <value>Ddim yn gallu dechrau golygydd.</value>
@@ -733,7 +737,8 @@
     <value>Ydych chi'n siŵr eich bod am dileu y ffolder '{0}' ac ei holl</value>
   </data>
   <data name="Resource6105" xml:space="preserve">
-    <value>\ncynnwys?</value>
+    <value>
+cynnwys?</value>
   </data>
   <data name="Resource6106" xml:space="preserve">
     <value>Ydych chi'n siŵr eich bod am dileu yr eitemau hyn {0}?</value>

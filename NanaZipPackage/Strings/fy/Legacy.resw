@@ -517,10 +517,12 @@
     <value>Kin fersifere argyf '{0}' net iepenje. Ferkeard wachtwurd?</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Triem '{0}' is wizige.\nWolle jo it bywurkje yn it argyf?</value>
+    <value>Triem '{0}' is wizige.
+Wolle jo it bywurkje yn it argyf?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Kin triem '{0}'\nnet bywurkje</value>
+    <value>Kin triem '{0}'
+net bywurkje</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Kin bewurker net starte.</value>
@@ -925,7 +927,8 @@
     <value>Net juste folumegrutte</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Oantsjutte folumegrutte: {0} bytes.\nWolle jo it argyf yn sokke folumes spjalte?</value>
+    <value>Oantsjutte folumegrutte: {0} bytes.
+Wolle jo it argyf yn sokke folumes spjalte?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Triemmen kombinearje</value>

@@ -577,10 +577,12 @@
     <value>फाइल {0} पहले से मौजूद है</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' फ़ाइल परिवर्धित हुई है.\nक्या तुम संग्रह में इसे अद्यतनीकृत करना चाहते हो?</value>
+    <value>'{0}' फ़ाइल परिवर्धित हुई है.
+क्या तुम संग्रह में इसे अद्यतनीकृत करना चाहते हो?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>फ़ाइल को अद्यतनीकृत नही कर सकता\n'{0}'</value>
+    <value>फ़ाइल को अद्यतनीकृत नही कर सकता
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>संपादक को शुरू नही कर सकता.</value>
@@ -1003,7 +1005,8 @@
     <value>जत्थे का आकार गलत है</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>निर्देशित जत्था आकार: {0} बाइटस.\n आप संग्रह को ऎसे जत्थों में विभाजित करना चाहते है, क्या आपको यकीन है?</value>
+    <value>निर्देशित जत्था आकार: {0} बाइटस.
+ आप संग्रह को ऎसे जत्थों में विभाजित करना चाहते है, क्या आपको यकीन है?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>फ़ाइले संयोजित करें</value>

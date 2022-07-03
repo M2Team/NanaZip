@@ -670,10 +670,12 @@
     <value>Die Datei {0} existiert bereits.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Die Datei "{0}" wurde geändert.\nSoll sie im Archiv aktualisiert werden?</value>
+    <value>Die Datei "{0}" wurde geändert.
+Soll sie im Archiv aktualisiert werden?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Die Datei konnte nicht aktualisiert werden.\n"{0}"</value>
+    <value>Die Datei konnte nicht aktualisiert werden.
+"{0}"</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Kann Editor nicht starten</value>
@@ -1198,7 +1200,8 @@
     <value>Ungültiger Wert für Dateigrößen</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Angegebene Größe für Teildateien: {0} Bytes.\nSind Sie sicher, dass das Archiv dementsprechend aufgesplittet werden soll?</value>
+    <value>Angegebene Größe für Teildateien: {0} Bytes.
+Sind Sie sicher, dass das Archiv dementsprechend aufgesplittet werden soll?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Dateien zusammenfügen</value>

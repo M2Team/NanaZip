@@ -667,10 +667,12 @@
     <value>{0} faýly öňden hem bar</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' faýly üýtgäpdir. \nOny arhiwiň içinde de üýtgetmeli mi?</value>
+    <value>'{0}' faýly üýtgäpdir. 
+Ony arhiwiň içinde de üýtgetmeli mi?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Faýlda üýtgeşme girizilmeýär \n'{0}'</value>
+    <value>Faýlda üýtgeşme girizilmeýär 
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Editor acylmady.</value>
@@ -1195,7 +1197,8 @@
     <value>Göwrüm ulylygy ýalňyş Incorrect volume size</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Bellenen göwrüm ulylygy: {0} baýt.\nArhiwi şeýle göwrümlere bölmäge kesgitlimisiňiz?</value>
+    <value>Bellenen göwrüm ulylygy: {0} baýt.
+Arhiwi şeýle göwrümlere bölmäge kesgitlimisiňiz?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Faýllary Birleşdir</value>

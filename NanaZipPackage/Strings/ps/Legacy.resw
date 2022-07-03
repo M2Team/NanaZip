@@ -517,10 +517,12 @@
     <value>کوډييز ارشيو پرانيستلی نه شي '{0}'. ناسمه تېرنويې؟</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>.'{0}' دوتنه کښې بدلون راغلی\nپه ارشيو کښې يې اوسمهالول غواړئ؟</value>
+    <value>.'{0}' دوتنه کښې بدلون راغلی
+په ارشيو کښې يې اوسمهالول غواړئ؟</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>'{0}'\nدوتنه اوسمهالولی نه شي</value>
+    <value>'{0}'
+دوتنه اوسمهالولی نه شي</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>سمونګر پېلولی نه شي</value>
@@ -925,7 +927,8 @@
     <value>ناسم ډکون کچ</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>.باېټه {0} :ټاکلی ډکون کچ\nپه ډاډمنه توګه غواړئ چې ارشيو په داسې ډکونونو وويشئ؟</value>
+    <value>.باېټه {0} :ټاکلی ډکون کچ
+په ډاډمنه توګه غواړئ چې ارشيو په داسې ډکونونو وويشئ؟</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>دوتنې يوځايول</value>

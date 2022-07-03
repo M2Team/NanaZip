@@ -673,10 +673,12 @@
     <value>File {0} is already exist</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>File '{0}' was modified.\nDo you want to update it in the archive?</value>
+    <value>File '{0}' was modified.
+Do you want to update it in the archive?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Cannot update file\n'{0}'</value>
+    <value>Cannot update file
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Cannot start editor.</value>
@@ -1234,7 +1236,8 @@
     <value>Incorrect volume size</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Specified volume size: {0} bytes.\nAre you sure you want to split archive into such volumes?</value>
+    <value>Specified volume size: {0} bytes.
+Are you sure you want to split archive into such volumes?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combine Files</value>

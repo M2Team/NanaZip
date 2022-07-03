@@ -673,10 +673,12 @@
     <value>文件 {0} 已存在</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>文件「{0}」已修改。\n你想在压缩文件中更新它？</value>
+    <value>文件「{0}」已修改。
+你想在压缩文件中更新它？</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>无法更新文件\n「{0}」。</value>
+    <value>无法更新文件
+「{0}」。</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>无法运行外部编辑。</value>
@@ -1234,7 +1236,8 @@
     <value>分卷大小错误</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>指定分卷大小：{0} 字节。\n您确定要分割当前文件吗？</value>
+    <value>指定分卷大小：{0} 字节。
+您确定要分割当前文件吗？</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>合并文件</value>

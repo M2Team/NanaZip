@@ -655,10 +655,12 @@
     <value>Файл {0} вже існує</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Файл '{0}' було змінено.\nБажаєте оновити його в архіві?</value>
+    <value>Файл '{0}' було змінено.
+Бажаєте оновити його в архіві?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Неможливо оновити файл\n'{0}'</value>
+    <value>Неможливо оновити файл
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Не вдається запустити редактор.</value>
@@ -1183,7 +1185,8 @@
     <value>Неправильний розмір тому</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Задано розмір тому: {0} байт.\nВи впевнені, що бажаєте розбити архів на такі томи?</value>
+    <value>Задано розмір тому: {0} байт.
+Ви впевнені, що бажаєте розбити архів на такі томи?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Об'єднати файли</value>

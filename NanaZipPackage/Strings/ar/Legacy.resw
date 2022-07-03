@@ -667,10 +667,12 @@
     <value>موجود مسبقا {0} الملف</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>هل تريد تحديثه في الأرشيف؟\nالملف '{0}' تم تعديله</value>
+    <value>هل تريد تحديثه في الأرشيف؟
+الملف '{0}' تم تعديله</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>لا يمكن تحديث الملف\n'{0}'</value>
+    <value>لا يمكن تحديث الملف
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>لا يمكن بدء المحرر</value>
@@ -1195,7 +1197,8 @@
     <value>كتلة الحجم غير صحيحة</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>حجم الكتلة المعين: {0} بايت\nهل تريد فعلاً تقسيم الأرشيف إلى مثل هذه الكتل؟</value>
+    <value>حجم الكتلة المعين: {0} بايت
+هل تريد فعلاً تقسيم الأرشيف إلى مثل هذه الكتل؟</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>دمج الملفات</value>

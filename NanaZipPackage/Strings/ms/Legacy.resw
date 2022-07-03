@@ -475,10 +475,12 @@
     <value>Tidak menyokong pengemaskinian untuk arkib ini.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Fail '{0}' telah terubah suai.\nApakah anda ingin mengemaskininya pada arkib?</value>
+    <value>Fail '{0}' telah terubah suai.
+Apakah anda ingin mengemaskininya pada arkib?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Tidak dapat mengemaskini fail\n'{0}'</value>
+    <value>Tidak dapat mengemaskini fail
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Tidak dapat membuka editor.</value>

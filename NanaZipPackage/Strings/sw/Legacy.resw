@@ -670,10 +670,12 @@
     <value>Faili {0} tayari ipo</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Faili '{0}' ilibadilishwa.\nJe, unataka kuisasisha katika kihifadhi?</value>
+    <value>Faili '{0}' ilibadilishwa.
+Je, unataka kuisasisha katika kihifadhi?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Haiwezi kusasisha faili\n'{0}'</value>
+    <value>Haiwezi kusasisha faili
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Haiwezi fungua kihariri.</value>
@@ -1198,7 +1200,8 @@
     <value>Ukubwa wa kihifadhi data sio sahihi</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Ukubwa wa kihifadhi data uliobainishwa: {0} bytes.\nUna uhakika unataka kugawiza hifadhi hadi vihifadhi kama hivi?</value>
+    <value>Ukubwa wa kihifadhi data uliobainishwa: {0} bytes.
+Una uhakika unataka kugawiza hifadhi hadi vihifadhi kama hivi?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Unganisha faili</value>

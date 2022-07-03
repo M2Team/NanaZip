@@ -640,7 +640,9 @@
     <value>Quant al NanaZip</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>	El NanaZip és programari lliure.\n       Traducció realitzada per: Softcatalà\n	https://www.softcatala.org</value>
+    <value>	El NanaZip és programari lliure.
+       Traducció realitzada per: Softcatalà
+	https://www.softcatala.org</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>El sistema no pot assignar la quantitat de memòria requerida</value>
@@ -670,10 +672,12 @@
     <value>El fitxer {0} ja existeix</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>S'ha modificat el fitxer «{0}».\nVoleu actualitzar-lo a l'arxiu?</value>
+    <value>S'ha modificat el fitxer «{0}».
+Voleu actualitzar-lo a l'arxiu?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>No es pot actualitzar el fitxer\n«{0}»</value>
+    <value>No es pot actualitzar el fitxer
+«{0}»</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>No es pot executar l'editor.</value>
@@ -1198,7 +1202,8 @@
     <value>Mida del volum no valida</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Mida de volum especificada: {0} bytes.\nSegur que voleu dividir el fitxer en aquests volums?</value>
+    <value>Mida de volum especificada: {0} bytes.
+Segur que voleu dividir el fitxer en aquests volums?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combina fitxers</value>

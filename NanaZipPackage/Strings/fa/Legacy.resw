@@ -577,10 +577,12 @@
     <value>فایل {0} از قبل موجود است</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>فایل '{0}' تغییر کرده است.\n آیا میخواهید این فایل در آرشیو بروزرسانی شود؟</value>
+    <value>فایل '{0}' تغییر کرده است.
+ آیا میخواهید این فایل در آرشیو بروزرسانی شود؟</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>این فایل قابل بروزرسانی نمی‌باشد\n'{0}'</value>
+    <value>این فایل قابل بروزرسانی نمی‌باشد
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>ویرایشگر را نمیتوان اجرا کرد</value>
@@ -1003,7 +1005,8 @@
     <value>حجم بخش نادرست است</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>حجم بخش های مشخص شده: {0} بايت.\nآیا میخواهید آرشيو را به بخش هایی به اين اندازه تقسيم كنيد؟</value>
+    <value>حجم بخش های مشخص شده: {0} بايت.
+آیا میخواهید آرشيو را به بخش هایی به اين اندازه تقسيم كنيد؟</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ادغام فایل ها</value>

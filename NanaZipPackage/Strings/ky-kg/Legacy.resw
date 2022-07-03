@@ -577,10 +577,12 @@
     <value>{0} деген файл бар</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' файлы өзгөртүлгөн.\nСиз аны архивде жаңырткыңыз келип жатабы?</value>
+    <value>'{0}' файлы өзгөртүлгөн.
+Сиз аны архивде жаңырткыңыз келип жатабы?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>\n'{0}' файлын жаңыртуу ишке ашкан жок</value>
+    <value>
+'{0}' файлын жаңыртуу ишке ашкан жок</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Редакторду иштетүү, ишке ашкан жок</value>
@@ -1003,7 +1005,8 @@
     <value>Томдордун көлөмүн берүүдө ката</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Отургузулган томдун көлөмү: {0} байт.\nСиз чын эле архивди ушундай томдорго бөлгүңүз келип жатабы?</value>
+    <value>Отургузулган томдун көлөмү: {0} байт.
+Сиз чын эле архивди ушундай томдорго бөлгүңүз келип жатабы?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Файлдарды бириктирүү</value>

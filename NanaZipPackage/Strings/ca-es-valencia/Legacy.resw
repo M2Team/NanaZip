@@ -490,10 +490,12 @@
     <value>No es pot obrir l'arxiu xifrat '{0}'. contrasenya incorrecta?</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>El fitxer '{0}' ha sigut modificat.\nVol actualitzar-lo a l'arxiu?</value>
+    <value>El fitxer '{0}' ha sigut modificat.
+Vol actualitzar-lo a l'arxiu?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>No es pot actualitzar el fitxer\n'{0}'</value>
+    <value>No es pot actualitzar el fitxer
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>No es pot executar l'editor.</value>
@@ -871,7 +873,8 @@
     <value>Mida incorrecta de volum</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Mida del volum especificada: {0} bytes.\nEsteu segurs que voleu dividir l'arxiu en volums?</value>
+    <value>Mida del volum especificada: {0} bytes.
+Esteu segurs que voleu dividir l'arxiu en volums?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combinar fitxers</value>

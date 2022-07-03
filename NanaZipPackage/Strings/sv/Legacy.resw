@@ -673,10 +673,12 @@
     <value>Filen '{0}' finns redan</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Filen '{0}' har blivit ändrad.\nVill du uppdatera den i arkivet?</value>
+    <value>Filen '{0}' har blivit ändrad.
+Vill du uppdatera den i arkivet?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Det går inte att uppdatera filen\n'{0}'</value>
+    <value>Det går inte att uppdatera filen
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Det går inte att starta redigeraren.</value>
@@ -1234,7 +1236,8 @@
     <value>Felaktig volymstorlek.</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Angiven volymstorlek: {0} byte.\nÄr du säker du vill dela arkivet i sådana delar?</value>
+    <value>Angiven volymstorlek: {0} byte.
+Är du säker du vill dela arkivet i sådana delar?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Sammanfoga filer</value>

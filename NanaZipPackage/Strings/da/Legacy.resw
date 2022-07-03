@@ -667,10 +667,12 @@
     <value>Filen {0} findes allerede</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Filen "{0}" er blevet ændret.\nVil du opdatere den i arkivet?</value>
+    <value>Filen "{0}" er blevet ændret.
+Vil du opdatere den i arkivet?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Kan ikke opdatere filen\n"{0}"</value>
+    <value>Kan ikke opdatere filen
+"{0}"</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Kan ikke starte redigering.</value>
@@ -1195,7 +1197,8 @@
     <value>Forkert størrelse på bind</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Angivet størrelse på bind: {0} byte.\nEr du sikker på, at du vil opdele arkivet i disse bind?</value>
+    <value>Angivet størrelse på bind: {0} byte.
+Er du sikker på, at du vil opdele arkivet i disse bind?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Kombiner filer</value>

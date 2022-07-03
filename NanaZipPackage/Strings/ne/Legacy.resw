@@ -484,10 +484,12 @@
     <value>यो सङ्ग्रहका लागि अद्यावधिक सञ्चालन समर्थन गर्दैन</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}'फाइल परिमार्जन गरिएको छ ।\nतपाईँले यसलाई सङ्ग्रहमा अद्यावधिक गर्न चाहनुहुन्छ ?</value>
+    <value>'{0}'फाइल परिमार्जन गरिएको छ ।
+तपाईँले यसलाई सङ्ग्रहमा अद्यावधिक गर्न चाहनुहुन्छ ?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>फाइल अद्यावधिक गर्न सकिदैन\n'{0}'</value>
+    <value>फाइल अद्यावधिक गर्न सकिदैन
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>सम्पादक सुरु गर्न सकिदैन</value>

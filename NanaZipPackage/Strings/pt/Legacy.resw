@@ -643,7 +643,10 @@
     <value>Acerca do NanaZip</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>O NanaZip é um programa gratuito.\n\nO NanaZip foi traduzido por: Hugo Carvalho\n\thugokarvalho@hotmail.com</value>
+    <value>O NanaZip é um programa gratuito.
+
+O NanaZip foi traduzido por: Hugo Carvalho
+\thugokarvalho@hotmail.com</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>O sistema não consegue atribuir a memória necessária</value>
@@ -673,10 +676,12 @@
     <value>Já existe o ficheiro {0}</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>O ficheiro '{0}' foi modificado.\nQuer actualizá-lo no arquivo?</value>
+    <value>O ficheiro '{0}' foi modificado.
+Quer actualizá-lo no arquivo?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Não foi possível actualizar o ficheiro\n'{0}'</value>
+    <value>Não foi possível actualizar o ficheiro
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Não foi possível iniciar o editor.</value>
@@ -1234,7 +1239,8 @@
     <value>Tamanho do volume incorrecto</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Tamanho do volume especificado: {0} bytes.\nQuer mesmo dividir o arquivo nestes volumes?</value>
+    <value>Tamanho do volume especificado: {0} bytes.
+Quer mesmo dividir o arquivo nestes volumes?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combinar ficheiros</value>

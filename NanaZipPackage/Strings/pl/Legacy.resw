@@ -667,10 +667,12 @@
     <value>Plik {0} już istnieje</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Plik „{0}” został zmodyfikowany.\nCzy chcesz zaktualizować go w archiwum?</value>
+    <value>Plik „{0}” został zmodyfikowany.
+Czy chcesz zaktualizować go w archiwum?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Nie można zaktualizować pliku\n„{0}”</value>
+    <value>Nie można zaktualizować pliku
+„{0}”</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Nie można uruchomić edytora.</value>
@@ -1195,7 +1197,8 @@
     <value>Nieprawidłowy rozmiar woluminu</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Określony rozmiar woluminu: {0} bajtów.\nCzy na pewno chcesz podzielić archiwum na takie woluminy?</value>
+    <value>Określony rozmiar woluminu: {0} bajtów.
+Czy na pewno chcesz podzielić archiwum na takie woluminy?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Złącz pliki</value>

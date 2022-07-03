@@ -577,10 +577,12 @@
     <value>Tá an comhad {0} ann cheana</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Mionathraíodh an comhad '{0}'.\nAr mhaith leat é a nuashonrú sa chartlann?</value>
+    <value>Mionathraíodh an comhad '{0}'.
+Ar mhaith leat é a nuashonrú sa chartlann?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Ní féidir an comhad a leanas a nuashonrú\n'{0}'</value>
+    <value>Ní féidir an comhad a leanas a nuashonrú
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Ní féidir an t-eagarthóir a thosú.</value>
@@ -1003,7 +1005,8 @@
     <value>Tá méid an cholúin mícheart</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Méid an cholúin sonraithe: {0} bearta.\nAn bhfuil tú cinnte gur mian leat an chartlann a roinnt in imleabhair?</value>
+    <value>Méid an cholúin sonraithe: {0} bearta.
+An bhfuil tú cinnte gur mian leat an chartlann a roinnt in imleabhair?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Cumaisc comhaid</value>

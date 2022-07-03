@@ -667,10 +667,12 @@
     <value>Le fichier {0} existe déjà</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Le fichier '{0}' a été modifié.\nVoulez-vous le mettre à jour dans l'archive ?</value>
+    <value>Le fichier '{0}' a été modifié.
+Voulez-vous le mettre à jour dans l'archive ?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Impossible de mettre à jour\n'{0}'</value>
+    <value>Impossible de mettre à jour
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Impossible de démarrer l'éditeur.</value>
@@ -1195,7 +1197,8 @@
     <value>Taille de volume incorrecte</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Taille de volume spécifiée : {0} octets.\nÊtes-vous sûr de vouloir découper l'archive dans de tels volumes ?</value>
+    <value>Taille de volume spécifiée : {0} octets.
+Êtes-vous sûr de vouloir découper l'archive dans de tels volumes ?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combiner les fichiers</value>

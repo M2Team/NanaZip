@@ -667,10 +667,12 @@
     <value>{0} ගොනුව දැනටමත් තිබේ</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' ගොනුව සංශෝධිතයි.\nහැකිළුමෙහි එය යාවත්කාල කිරීමට ඔබට ඇවැසිද?</value>
+    <value>'{0}' ගොනුව සංශෝධිතයි.
+හැකිළුමෙහි එය යාවත්කාල කිරීමට ඔබට ඇවැසිද?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>ගොනුව යාවත්කාල කළ නොහැකිය\n'{0}'</value>
+    <value>ගොනුව යාවත්කාල කළ නොහැකිය
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>සංස්කාරකය ඇරඹීමට නොහැකිය.</value>
@@ -1195,7 +1197,8 @@
     <value>වෙළුමේ විශාලත්වය සාවද්‍යයි</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>නිශ්චිත වෙළුමේ විශාලත්වය: බයිට {0}.\nහැකිළුම මෙවැනි වෙළුම් වලට භේදනය කළ යුතු බව විශ්වාසද?</value>
+    <value>නිශ්චිත වෙළුමේ විශාලත්වය: බයිට {0}.
+හැකිළුම මෙවැනි වෙළුම් වලට භේදනය කළ යුතු බව විශ්වාසද?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ගොනු සංයෝග කරන්න</value>

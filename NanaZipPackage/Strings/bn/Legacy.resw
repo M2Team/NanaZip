@@ -490,10 +490,12 @@
     <value>'{0}' বদ্ধ সংকুচিত ফাইল চালু করা সম্ভব হচ্ছেনা. ভুল পাসওয়ার্ড?</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>ফাইলটি '{0}' পরিমার্জিত.\nআপনি সংকুচিত ফাইলটি ও পরিমার্জন করতে চান?</value>
+    <value>ফাইলটি '{0}' পরিমার্জিত.
+আপনি সংকুচিত ফাইলটি ও পরিমার্জন করতে চান?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>পরিমার্জন করা সম্ভব হয়নি\n'{0}'</value>
+    <value>পরিমার্জন করা সম্ভব হয়নি
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>সম্পাদক চালু করা সম্ভব নয়</value>
@@ -886,7 +888,8 @@
     <value>খন্ডের আকারে ভুল</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>উল্লেক্ষিত খন্ডের আকার : {0} bytes.\nআপনি কি সংকোচিত ফাইলটিকে এ ভাবেই খন্ডে খন্ডায়ন করতে চান?</value>
+    <value>উল্লেক্ষিত খন্ডের আকার : {0} bytes.
+আপনি কি সংকোচিত ফাইলটিকে এ ভাবেই খন্ডে খন্ডায়ন করতে চান?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ফাইল একীভূতি করণ</value>

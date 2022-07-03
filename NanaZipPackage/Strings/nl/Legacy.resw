@@ -667,10 +667,12 @@
     <value>Bestand {0} bestaat al</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Bestand '{0}' is gewijzigd.\nWilt u het bijwerken in het archief?</value>
+    <value>Bestand '{0}' is gewijzigd.
+Wilt u het bijwerken in het archief?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Kan bestand\n'{0}' niet bijwerken</value>
+    <value>Kan bestand
+'{0}' niet bijwerken</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Kan de bewerker niet starten.</value>
@@ -1195,7 +1197,8 @@
     <value>Onjuiste volumegrootte</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Opgegeven volumegrootte: {0} bytes.\nWeet u zeker dat u het archief zo wilt opsplitsen?</value>
+    <value>Opgegeven volumegrootte: {0} bytes.
+Weet u zeker dat u het archief zo wilt opsplitsen?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Bestanden samenvoegen</value>

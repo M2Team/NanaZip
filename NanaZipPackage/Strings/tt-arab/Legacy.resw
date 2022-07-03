@@ -655,10 +655,12 @@
     <value>{0} файлы инде бар</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' файлы үзгәртелде.\nАны архивта яңартыргамы?</value>
+    <value>'{0}' файлы үзгәртелде.
+Аны архивта яңартыргамы?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Файлны яңартып булмады\n'{0}'</value>
+    <value>Файлны яңартып булмады
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Мөхәррирне җибәреп булмады</value>
@@ -1183,7 +1185,8 @@
     <value>Томнар үлчәмен бирү кырында хата</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Томның бирелгән үлчәме: {0} байт.\nЧыннан да архивны шундый томнарга бүлергәме?</value>
+    <value>Томның бирелгән үлчәме: {0} байт.
+Чыннан да архивны шундый томнарга бүлергәме?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Файлларны берләштерергә</value>

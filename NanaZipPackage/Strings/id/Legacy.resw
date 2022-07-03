@@ -637,7 +637,9 @@
     <value>Mengenai NanaZip</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>NanaZip merupakan perangkat lunak gratis.\n\nTerjemahan oleh Frans Liando.</value>
+    <value>NanaZip merupakan perangkat lunak gratis.
+
+Terjemahan oleh Frans Liando.</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>Sistem tidak bisa mengalokasikan jumlah memori yang diperlukan</value>
@@ -667,10 +669,12 @@
     <value>Berkas {0} telah ada</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Berkas '{0}' telah diubah.\nAnda ingin memperbarui berkas dalam arsip?</value>
+    <value>Berkas '{0}' telah diubah.
+Anda ingin memperbarui berkas dalam arsip?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Tidak bisa perbarui berkas\n'{0}'</value>
+    <value>Tidak bisa perbarui berkas
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Tidak bisa memulai editor.</value>
@@ -1195,7 +1199,8 @@
     <value>Ukuran volume salah</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Ukuran volume yang ditentukan: {0} bita.\nAnda Yakin ingin membelah arsip menjadi volume demikian?</value>
+    <value>Ukuran volume yang ditentukan: {0} bita.
+Anda Yakin ingin membelah arsip menjadi volume demikian?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Gabung Berkas</value>

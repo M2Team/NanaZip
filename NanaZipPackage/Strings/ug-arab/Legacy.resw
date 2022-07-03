@@ -550,10 +550,12 @@
     <value>{0} ھۆججەت مەۋجۇد</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>“{0}”ئۆزگەرتىلدى\nپرىس ھۆججىتىدە يېڭىلامسىز؟</value>
+    <value>“{0}”ئۆزگەرتىلدى
+پرىس ھۆججىتىدە يېڭىلامسىز؟</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>“{0}”ھۆججەتنى يېڭىلىيالمىدى\n</value>
+    <value>“{0}”ھۆججەتنى يېڭىلىيالمىدى
+</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>تەھرىرلىگۈچنى قوزغىتالمىدى</value>
@@ -976,7 +978,8 @@
     <value>پارچە چوڭلۇقى خاتا</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>بايت{0} بەلگىلەنگەن پارچە چوڭلۇقى\nنۆۋەتتىكى ھۆججەتنى پارچىلامسىز؟</value>
+    <value>بايت{0} بەلگىلەنگەن پارچە چوڭلۇقى
+نۆۋەتتىكى ھۆججەتنى پارچىلامسىز؟</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ھۆججەت بىرلەشتۈر</value>

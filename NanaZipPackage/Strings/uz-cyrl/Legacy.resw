@@ -667,10 +667,12 @@
     <value>{0} файли аллақачон мавжуд.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' файли янгиланди.\nБу файлни архив ичида янгилашни хоҳлайсизми?</value>
+    <value>'{0}' файли янгиланди.
+Бу файлни архив ичида янгилашни хоҳлайсизми?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Файлни янгилаб бўлмади\n'{0}'</value>
+    <value>Файлни янгилаб бўлмади
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Муҳаррирни очиб бўлмади.</value>
@@ -1195,7 +1197,8 @@
     <value>Қисм ҳажми нотўғри</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Белгиланган қисм ҳажми: {0} байт. \nAрхивни бундай ҳажмларга бўлишни хоҳлайсизми?</value>
+    <value>Белгиланган қисм ҳажми: {0} байт. 
+Aрхивни бундай ҳажмларга бўлишни хоҳлайсизми?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Файлларни бирлаштирмоқ</value>

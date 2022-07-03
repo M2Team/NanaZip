@@ -577,10 +577,12 @@
     <value>Датотека {0} већ постоји</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Датотека '{0}' је измјењена.\nДа ли желите ажурирати архиву?</value>
+    <value>Датотека '{0}' је измјењена.
+Да ли желите ажурирати архиву?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Није могуће ажурирати датотеку\n'{0}'</value>
+    <value>Није могуће ажурирати датотеку
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Није могуће започети уређивање.</value>
@@ -1003,7 +1005,8 @@
     <value>Неисправна величина волумена</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Одређена величина волумена: {0} бајтова.\nДа ли сте сигурни да желите да поделите архиву у тих волумена?</value>
+    <value>Одређена величина волумена: {0} бајтова.
+Да ли сте сигурни да желите да поделите архиву у тих волумена?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Састави датотеке</value>

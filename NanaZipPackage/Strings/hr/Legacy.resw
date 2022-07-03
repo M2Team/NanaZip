@@ -667,10 +667,12 @@
     <value>Datoteka {0} već postoji</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Datoteka '{0}' je izmijenjena.\nObnoviti arhiv?</value>
+    <value>Datoteka '{0}' je izmijenjena.
+Obnoviti arhiv?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Nije moguće obnoviti datoteku\n'{0}'</value>
+    <value>Nije moguće obnoviti datoteku
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Nije moguće započeti uređivanje.</value>
@@ -1195,7 +1197,8 @@
     <value>Netočna veličina bloka</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Veličina bloka: {0} bajtova.\nJeste li sigurni da želite podijeliti u takve dijelove?</value>
+    <value>Veličina bloka: {0} bajtova.
+Jeste li sigurni da želite podijeliti u takve dijelove?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Spoji datoteke</value>

@@ -667,10 +667,12 @@
     <value>{0} fayli allaqachon mavjud.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' fayli yangilandi.\nBu faylni arxiv ichida yangilashni xohlaysizmi?</value>
+    <value>'{0}' fayli yangilandi.
+Bu faylni arxiv ichida yangilashni xohlaysizmi?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Faylni yangilab bo‘lmadi\n'{0}'</value>
+    <value>Faylni yangilab bo‘lmadi
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Muharrirni ochib bo‘lmadi.</value>
@@ -1195,7 +1197,8 @@
     <value>Qism hajmi noto‘g‘ri</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Belgilangan qism hajmi: {0} bayt. \nArxivni bunday hajmlarga bo‘lishni xohlaysizmi?</value>
+    <value>Belgilangan qism hajmi: {0} bayt. 
+Arxivni bunday hajmlarga bo‘lishni xohlaysizmi?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Fayllarni birlashtirmoq</value>

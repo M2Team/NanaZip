@@ -655,10 +655,12 @@
     <value>{0} faylı artıq mövcuddur</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' faylına dəyişiklik edildi.\nSiz onu arxivdə yeniləmək istəyirsiz? </value>
+    <value>'{0}' faylına dəyişiklik edildi.
+Siz onu arxivdə yeniləmək istəyirsiz? </value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>\n'{0}' faylını yeniləmək alınmadı</value>
+    <value>
+'{0}' faylını yeniləmək alınmadı</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Redaktəni işə salmaq alınmadı</value>
@@ -1183,7 +1185,8 @@
     <value>Cildlərin ölçü təyin etmə sahəsində xəta</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Təyin edilmiş cild ölçüsü: {0} bayt.\nSiz həqiqətən arxivi belə cildlərə bölmək istəyirsiniz?</value>
+    <value>Təyin edilmiş cild ölçüsü: {0} bayt.
+Siz həqiqətən arxivi belə cildlərə bölmək istəyirsiniz?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Faylları Birləşdir</value>

@@ -577,10 +577,12 @@
     <value>Tệp {0} đang tồn tại</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Tệp '{0}' đã bị thay đổi.\nBạn có muốn cập nhật nó vào tập tin nén?</value>
+    <value>Tệp '{0}' đã bị thay đổi.
+Bạn có muốn cập nhật nó vào tập tin nén?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Không thể cập nhật tệp\n'{0}'</value>
+    <value>Không thể cập nhật tệp
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Không thể khởi động trình biên tập.</value>
@@ -1003,7 +1005,8 @@
     <value>Kích cỡ phần chia chưa đúng</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Kích cỡ phần chia đã đặt: {0} bytes.\nBạn chắc chắn muốn chia tệp nén theo kích cỡ chia đã đặt?</value>
+    <value>Kích cỡ phần chia đã đặt: {0} bytes.
+Bạn chắc chắn muốn chia tệp nén theo kích cỡ chia đã đặt?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Nối tệp</value>

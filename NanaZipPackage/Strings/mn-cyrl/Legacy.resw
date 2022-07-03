@@ -475,10 +475,12 @@
     <value>Дэмжигдээгүй архивийг задлах шинэчлэлт хийх.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Файл '{0}' өөрчлөгдлөө.\nТа архивт шинэчлэлт хиймээр байна уу?</value>
+    <value>Файл '{0}' өөрчлөгдлөө.
+Та архивт шинэчлэлт хиймээр байна уу?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Файлыг шинэчилж чадсангүй\n'{0}</value>
+    <value>Файлыг шинэчилж чадсангүй
+'{0}</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Засварлагчийг нээж чадсангүй.</value>

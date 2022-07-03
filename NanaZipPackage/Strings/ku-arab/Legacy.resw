@@ -553,7 +553,8 @@
     <value>پەڕگەی '{0}' دەستکاریکراوە. ئەتەوێت لە ئەرشیڤەکەدا نوێی بکەیتەوە؟</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>ناتوانرێ پەڕگەی \n'{0}' نوێبکرێتەوە</value>
+    <value>ناتوانرێ پەڕگەی 
+'{0}' نوێبکرێتەوە</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>ناتوانرێ دەستکاریکەر دەستپێبکرێت.</value>
@@ -976,7 +977,8 @@
     <value>قەبارەی لەتکراوەکە هەڵەیە</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>قەبارەی دیاریکراوی لەتکراوەکە: {0} بایت.\nدڵنیایت لە لەتکردنی ئەرشیڤەکە بۆ ئەو قەبارانە؟</value>
+    <value>قەبارەی دیاریکراوی لەتکراوەکە: {0} بایت.
+دڵنیایت لە لەتکردنی ئەرشیڤەکە بۆ ئەو قەبارانە؟</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>پێکەوەلکاندنی پەڕگەکان</value>

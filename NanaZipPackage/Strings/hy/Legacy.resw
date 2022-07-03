@@ -655,10 +655,12 @@
     <value>{0} ֆայլը արդեն գոյություն ունի</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' ֆայլը փոփոխվել է:\n Թարմացնե՞լ այն արխիվում:</value>
+    <value>'{0}' ֆայլը փոփոխվել է:
+ Թարմացնե՞լ այն արխիվում:</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Հնարավոր չէ թարմացնել ֆայլը \n'{0}'</value>
+    <value>Հնարավոր չէ թարմացնել ֆայլը 
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Հնարավոր չէ բացել խմբագիրը:</value>
@@ -1183,7 +1185,8 @@
     <value>Գործողության սխալ</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Հատորի նշված չափը. {0} բայթ:\nՏրոհե˚լ արխիվը հատորների:</value>
+    <value>Հատորի նշված չափը. {0} բայթ:
+Տրոհե˚լ արխիվը հատորների:</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Համակցել ֆայլը</value>

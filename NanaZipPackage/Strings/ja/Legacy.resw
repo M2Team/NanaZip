@@ -673,10 +673,12 @@
     <value>ファイル {0} は既に存在しています</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>ファイル "{0}" は変更されました。\nアーカイブを更新しますか?</value>
+    <value>ファイル "{0}" は変更されました。
+アーカイブを更新しますか?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>ファイルを更新できません\n"{0}"</value>
+    <value>ファイルを更新できません
+"{0}"</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>外部ツールを起動できません。</value>
@@ -1234,7 +1236,8 @@
     <value>不正なボリューム サイズ</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>指定されたボリューム サイズ: {0} バイト\nこのサイズにアーカイブを分割してよろしいですか?</value>
+    <value>指定されたボリューム サイズ: {0} バイト
+このサイズにアーカイブを分割してよろしいですか?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>ファイル結合</value>

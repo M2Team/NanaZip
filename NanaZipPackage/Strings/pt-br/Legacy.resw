@@ -673,10 +673,12 @@
     <value>O arquivo {0} já existe</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>O arquivo '{0}' foi modificado.\nVocê quer atualizá-lo no arquivo compactado?</value>
+    <value>O arquivo '{0}' foi modificado.
+Você quer atualizá-lo no arquivo compactado?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Não pôde atualizar o arquivo\n'{0}'</value>
+    <value>Não pôde atualizar o arquivo
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Não pôde iniciar o editor.</value>
@@ -1234,7 +1236,8 @@
     <value>Tamanho do volume incorreto</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Tamanho do volume especificado: {0} bytes.\nVocê tem certeza que você quer dividir o arquivo compactado em tais volumes?</value>
+    <value>Tamanho do volume especificado: {0} bytes.
+Você tem certeza que você quer dividir o arquivo compactado em tais volumes?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combinar Arquivos</value>

@@ -577,10 +577,12 @@
     <value>Файл {0} ужо існуе</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Файл '{0}' быў зменены.\nВы жадаеце абнавіць яго ў архіве?</value>
+    <value>Файл '{0}' быў зменены.
+Вы жадаеце абнавіць яго ў архіве?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Не атрымалася абнавіць файл\n'{0}'</value>
+    <value>Не атрымалася абнавіць файл
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Не атрымалася запусціць рэдактар</value>
@@ -1003,7 +1005,8 @@
     <value>Памылка ў поле для задання памеру тамоў</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Усталяваны памер тома: {0} байтаў.\nВы сапраўды жадаеце разбіць архіў на такія тамы?</value>
+    <value>Усталяваны памер тома: {0} байтаў.
+Вы сапраўды жадаеце разбіць архіў на такія тамы?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Аб'яднаць файлы</value>

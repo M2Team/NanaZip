@@ -667,10 +667,12 @@
     <value>El fichero {0} ya existe</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>El fichero '{0}' ha sido modificado.\n¿Quieres actualizarlo en el archivo?</value>
+    <value>El fichero '{0}' ha sido modificado.
+¿Quieres actualizarlo en el archivo?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>No puede actualizarse el fichero\n'{0}'</value>
+    <value>No puede actualizarse el fichero
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>No puede ejecutarse el editor.</value>
@@ -1195,7 +1197,8 @@
     <value>Tamaño de fragmento incorrecto</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Tamaño de fragmento especificado: {0} bytes.\n¿Estás seguro de que deseas dividir el archivo en fragmentos de ese tamaño?</value>
+    <value>Tamaño de fragmento especificado: {0} bytes.
+¿Estás seguro de que deseas dividir el archivo en fragmentos de ese tamaño?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Combinar archivos</value>

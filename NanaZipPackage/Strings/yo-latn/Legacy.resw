@@ -670,10 +670,12 @@
     <value>Faíli {0} ti wà níbẹ</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Faíli '{0}' títúnṣe.\n ṣe ẹ fẹ̀  túnṣe si inú àpò faíli àkójọ́pọ?</value>
+    <value>Faíli '{0}' títúnṣe.
+ ṣe ẹ fẹ̀  túnṣe si inú àpò faíli àkójọ́pọ?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Kò le ṣàfikún fun faíli yí \n'{0}'</value>
+    <value>Kò le ṣàfikún fun faíli yí 
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Kò le ṣí Olótùú.</value>
@@ -1198,7 +1200,8 @@
     <value>ìwọn ọ̀pọ̀ òǹlò láìpé </value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Yan ìwọn ọ̀pọ̀ òǹlò: {0} báìtì.\nṢe ẹ́ dájú pe ẹ fẹ́  pín àpò faíli àkójọ́pọ si ọ̀pọ̀ òǹlò awọn yí?</value>
+    <value>Yan ìwọn ọ̀pọ̀ òǹlò: {0} báìtì.
+Ṣe ẹ́ dájú pe ẹ fẹ́  pín àpò faíli àkójọ́pọ si ọ̀pọ̀ òǹlò awọn yí?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Kó faíli pọ̀ </value>

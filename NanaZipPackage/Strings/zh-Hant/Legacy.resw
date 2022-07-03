@@ -667,10 +667,12 @@
     <value>檔案 {0} 已存在</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>檔案 '{0}' 已被修改過。\n您是否要在此壓縮檔內更新檔案?</value>
+    <value>檔案 '{0}' 已被修改過。
+您是否要在此壓縮檔內更新檔案?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>無法更新檔案\n'{0}'</value>
+    <value>無法更新檔案
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>無法啟動編輯器。</value>
@@ -1195,7 +1197,8 @@
     <value>不正確的分割大小</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>指定的分割大小: {0} 位元組。\n您確定要分割為這些壓縮檔嗎?</value>
+    <value>指定的分割大小: {0} 位元組。
+您確定要分割為這些壓縮檔嗎?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>合併檔案</value>

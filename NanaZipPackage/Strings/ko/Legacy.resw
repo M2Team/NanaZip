@@ -670,7 +670,8 @@
     <value>{0} 파일은 이미 존재함</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>파일 '{0}'이 수정되었습니다.\n압축파일에 업데이트 하시겠습니까?</value>
+    <value>파일 '{0}'이 수정되었습니다.
+압축파일에 업데이트 하시겠습니까?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
     <value>'{0}' 파일을 업데이트 할 수 없습니다.</value>
@@ -1198,7 +1199,8 @@
     <value>볼륨 크기가 부적절합니다.</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>지정된 볼륨 크기: {0} 바이트.\n이 볼륨 크기로 분할 하시겠습니까?</value>
+    <value>지정된 볼륨 크기: {0} 바이트.
+이 볼륨 크기로 분할 하시겠습니까?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>파일 합치기</value>

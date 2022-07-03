@@ -667,10 +667,12 @@
     <value>Το αρχείο {0} ήδη υπάρχει.</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Το αρχείο '{0}' τροποποιήθηκε.\nΘέλετε να ενημερώσετε το αρχείο συμπίεσης;</value>
+    <value>Το αρχείο '{0}' τροποποιήθηκε.
+Θέλετε να ενημερώσετε το αρχείο συμπίεσης;</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Αδυνατή η ενημέρωση του αρχείου\n'{0}'</value>
+    <value>Αδυνατή η ενημέρωση του αρχείου
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Δεν είναι δυνατή η εκκίνηση του προγράμματος επεξεργασίας.</value>
@@ -1195,7 +1197,8 @@
     <value>Λάθος μέγεθος τόμου</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Καθορισμένο μέγεθος τόμου: {0} bytes.\nΕίστε σίγουρος ότι θέλετε να χωρίσετε το αρχείο σε τέτοιους τόμους;</value>
+    <value>Καθορισμένο μέγεθος τόμου: {0} bytes.
+Είστε σίγουρος ότι θέλετε να χωρίσετε το αρχείο σε τέτοιους τόμους;</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Συνένωση αρχείων</value>

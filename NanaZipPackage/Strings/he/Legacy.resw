@@ -655,7 +655,9 @@
     <value>.פעולות עדכון אינן נתמכות עבור ארכיון זה</value>
   </data>
   <data name="Resource3005" xml:space="preserve">
-    <value>לא ניתן לפתוח את הקובץ\n'{0}'\nכארכיון</value>
+    <value>לא ניתן לפתוח את הקובץ
+'{0}'
+כארכיון</value>
   </data>
   <data name="Resource3006" xml:space="preserve">
     <value>?סיסמה שגויה .'{0}' לא ניתן לפתוח את הארכיון המוצפן</value>
@@ -664,13 +666,18 @@
     <value>סוג בלתי נתמך של ארכיון</value>
   </data>
   <data name="Resource3008" xml:space="preserve">
-    <value>הקובץ\n{0}\nקיים כבר</value>
+    <value>הקובץ
+{0}
+קיים כבר</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>הקובץ הבא השתנה\n'{0}'\n?האם אתה רוצה לעדכן אותו בתוך הארכיון</value>
+    <value>הקובץ הבא השתנה
+'{0}'
+?האם אתה רוצה לעדכן אותו בתוך הארכיון</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>לא ניתן לעדכן את הקובץ\n'{0}'</value>
+    <value>לא ניתן לעדכן את הקובץ
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>.לא ניתן להתחיל את העורך</value>
@@ -811,16 +818,24 @@
     <value>.'{0}' שיטה בלתי נתמכת של דחיסה עבור </value>
   </data>
   <data name="Resource3701" xml:space="preserve">
-    <value>שגיאת נתונים בקובץ\n'{0}'\nהקובץ שבור</value>
+    <value>שגיאת נתונים בקובץ
+'{0}'
+הקובץ שבור</value>
   </data>
   <data name="Resource3702" xml:space="preserve">
-    <value>נכשל בקובץ CRC\n'{0}'\nהקובץ שבור</value>
+    <value>נכשל בקובץ CRC
+'{0}'
+הקובץ שבור</value>
   </data>
   <data name="Resource3703" xml:space="preserve">
-    <value>שגיאת נתונים בקובץ מוצפן\n'{0}'\n?סיסמה שגויה</value>
+    <value>שגיאת נתונים בקובץ מוצפן
+'{0}'
+?סיסמה שגויה</value>
   </data>
   <data name="Resource3704" xml:space="preserve">
-    <value>נכשל בקובץ מוצפן CRC\n'{0}'\n?סיסמה שגויה</value>
+    <value>נכשל בקובץ מוצפן CRC
+'{0}'
+?סיסמה שגויה</value>
   </data>
   <data name="Resource3710" xml:space="preserve">
     <value>?סיסמה שגויה</value>
@@ -1069,10 +1084,13 @@
     <value>אישור מחיקת קבצים רבים</value>
   </data>
   <data name="Resource6103" xml:space="preserve">
-    <value>האם אתה בטוח שאתה רוצה למחוק את\n?'{0}'</value>
+    <value>האם אתה בטוח שאתה רוצה למחוק את
+?'{0}'</value>
   </data>
   <data name="Resource6104" xml:space="preserve">
-    <value>האם בטוח שאתה רוצה למחוק את התיקייה\n'{0}'\n?ואת כל תכניה</value>
+    <value>האם בטוח שאתה רוצה למחוק את התיקייה
+'{0}'
+?ואת כל תכניה</value>
   </data>
   <data name="Resource6105" xml:space="preserve">
     <value>?האם אתה בטוח שאתה רוצה למחוק {0} פריטים אלו</value>
@@ -1195,7 +1213,8 @@
     <value>גודל שגוי של כרך</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>.גודל מצוין של כרך: {0} בתים\n?האם אתה בטוח שאתה רוצה לפצל את הארכיון אל כרכים כאלו</value>
+    <value>.גודל מצוין של כרך: {0} בתים
+?האם אתה בטוח שאתה רוצה לפצל את הארכיון אל כרכים כאלו</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>איחוד קבצים</value>

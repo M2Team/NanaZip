@@ -667,10 +667,12 @@
     <value>{0}dosyası zaten var</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>'{0}' dosyası değiştirilmiş\nArşivdeki dosyayı güncellemek ister misiniz?</value>
+    <value>'{0}' dosyası değiştirilmiş
+Arşivdeki dosyayı güncellemek ister misiniz?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Dosya güncellenemedi.}\n'{0}'</value>
+    <value>Dosya güncellenemedi.}
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Düzenleyici başlatılamadı</value>
@@ -1195,7 +1197,8 @@
     <value>Parça boyutu hatalı</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Belirtilen parça boyutu: {0} bayt.\nArşiv dosyasını parçalara bölmek istediğinize emin misiniz?</value>
+    <value>Belirtilen parça boyutu: {0} bayt.
+Arşiv dosyasını parçalara bölmek istediğinize emin misiniz?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Dosyaları Birleştir</value>

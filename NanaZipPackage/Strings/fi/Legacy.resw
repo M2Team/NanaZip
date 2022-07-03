@@ -670,10 +670,12 @@
     <value>Tiedosto {0} on jo olemassa</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Tiedostoa '{0}' on muutettu.\nHaluatko päivittää paketin?</value>
+    <value>Tiedostoa '{0}' on muutettu.
+Haluatko päivittää paketin?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Ei voida päivittää tiedostoa \n'{0}'.</value>
+    <value>Ei voida päivittää tiedostoa 
+'{0}'.</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Muokkainta ei voida käynnistää.</value>
@@ -1198,7 +1200,8 @@
     <value>Jaetun osan koko ei kelpaa</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Jaettavien osien koko: {0} tavua.\nJaetaanko tiedosto sen kokoisiin osiin?</value>
+    <value>Jaettavien osien koko: {0} tavua.
+Jaetaanko tiedosto sen kokoisiin osiin?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Yhdistä jaetut tiedostot</value>

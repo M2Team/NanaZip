@@ -667,10 +667,12 @@
     <value>Datoteka {0} že obstaja</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Datoteka '{0}' je bila spremenjena.\nAli jo želite posodobiti v arhivu?</value>
+    <value>Datoteka '{0}' je bila spremenjena.
+Ali jo želite posodobiti v arhivu?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Datoteke ni mogoče posodobiti\n'{0}'</value>
+    <value>Datoteke ni mogoče posodobiti
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Ni mogoče zagnati urejevalnika.</value>
@@ -1195,7 +1197,8 @@
     <value>Neveljavna velikost nosilca</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Navedena velikost nosilca: {0} bajtov.\nAli ste prepričani, da želite razdeliti arhiv na takšne nosilce?</value>
+    <value>Navedena velikost nosilca: {0} bajtov.
+Ali ste prepričani, da želite razdeliti arhiv na takšne nosilce?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Spoji datoteke</value>

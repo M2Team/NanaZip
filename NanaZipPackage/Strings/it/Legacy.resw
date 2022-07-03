@@ -643,7 +643,10 @@
     <value>Informazioni su NanaZip</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>NanaZip è un software libero.\n\nTraduzione italiana a cura di:\nTJL73 &lt;https://tjl73.altervista.org/&gt;</value>
+    <value>NanaZip è un software libero.
+
+Traduzione italiana a cura di:
+TJL73 &lt;https://tjl73.altervista.org/&gt;</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>Non è possibile allocare la quantità di memoria richiesta</value>
@@ -673,10 +676,12 @@
     <value>Il file {0} è già presente</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Il file '{0}' è stato modificato.\nVuoi aggiornare l'archivio?</value>
+    <value>Il file '{0}' è stato modificato.
+Vuoi aggiornare l'archivio?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Impossibile aggiornare il file\n'{0}'</value>
+    <value>Impossibile aggiornare il file
+'{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Impossibile avviare l'editor.</value>
@@ -1243,7 +1248,8 @@
     <value>Dimensione non corretta</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Dimensione specificata: {0} byte.\nSicuro di voler dividere l'archivio in questo modo?</value>
+    <value>Dimensione specificata: {0} byte.
+Sicuro di voler dividere l'archivio in questo modo?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Unisci i file</value>

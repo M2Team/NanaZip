@@ -667,10 +667,12 @@
     <value>Skráin „{0}“ er nú þegar til</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>Skránni „{0}“ var breytt.\nVilt þú uppfæra hana í safninu?</value>
+    <value>Skránni „{0}“ var breytt.
+Vilt þú uppfæra hana í safninu?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>Getur ekki uppfært skrána\n„{0}“</value>
+    <value>Getur ekki uppfært skrána
+„{0}“</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Getur ekki ræst ritilinn.</value>
@@ -1195,7 +1197,8 @@
     <value>Röng bindisstærð</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>Tilgreindu bindisstærð: {0} bæti.\nErt þú viss um að þú viljir kljúfa safnið í slík bindi?</value>
+    <value>Tilgreindu bindisstærð: {0} bæti.
+Ert þú viss um að þú viljir kljúfa safnið í slík bindi?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>Sameina skrár</value>
