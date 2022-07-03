@@ -127,45 +127,7 @@ static void ShowErrorMessageSpec(const UString &name)
   ShowErrorMessage(NULL, message);
 }
 
-#include <VersionHelpers.h>
-
-INT EnablePerMonitorDialogScaling()
-{
-    // This hack is only for Windows 10 only.
-    if (!::IsWindowsVersionOrGreater(10, 0, 0))
-    {
-        return -1;
-    }
-
-    // We don't need this hack if the Per Monitor Aware V2 is existed.
-    OSVERSIONINFOEXW OSVersionInfoEx = { 0 };
-    OSVersionInfoEx.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEXW);
-    OSVersionInfoEx.dwBuildNumber = 14393;
-    if (::VerifyVersionInfoW(
-        &OSVersionInfoEx,
-        VER_BUILDNUMBER,
-        ::VerSetConditionMask(0, VER_BUILDNUMBER, VER_GREATER_EQUAL)))
-    {
-        return -1;
-    }
-
-    HMODULE ModuleHandle = ::GetModuleHandleW(L"user32.dll");
-    if (!ModuleHandle)
-    {
-        return -1;
-    }
-
-    typedef INT(WINAPI* ProcType)();
-
-    ProcType ProcAddress = reinterpret_cast<ProcType>(
-        ::GetProcAddress(ModuleHandle, reinterpret_cast<LPCSTR>(2577)));
-    if (!ProcAddress)
-    {
-        return -1;
-    }
-
-    return ProcAddress();
-}
+#include <Mile.Windows.DpiHelpers.h>
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef UNDER_CE
@@ -183,7 +145,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   LoadSecurityDlls();
   #endif
 
-  ::EnablePerMonitorDialogScaling();
+  ::MileEnablePerMonitorDialogScaling();
 
   // InitCommonControls();
 
