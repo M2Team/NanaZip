@@ -17,6 +17,9 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   Whirlpool, XXH3_64bits, XXH3_128bits
 - Update Zstandard to 1.5.2.
 - Update BLAKE3 to 1.3.1.
+- Improve the Per-Monitor DPI Awareness support in Windows 10 Version 1607 for
+  Self Extracting Executable stubs.
+- Fix line break issue for i18n resource files. (Thanks to ygjsz.)
 
 **NanaZip 1.2 Update 1 Preview 1 (1.2.253.0)**
 
