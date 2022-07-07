@@ -17,6 +17,8 @@
     <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <AppxBundle>Always</AppxBundle>
+    <AppxBundleAutoResourcePackageQualifiers>DXFeatureLevel</AppxBundleAutoResourcePackageQualifiers>
+    <AppxDefaultResourceQualifiers>Language=en</AppxDefaultResourceQualifiers>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -33,8 +35,6 @@
     <PRIResource Include="Strings\**\*">
       <Link>Strings\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </PRIResource>
-    <None Include="priconfig.default.xml" />
-    <None Include="priconfig.packaging.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NanaZip\NanaZip.vcxproj" />
