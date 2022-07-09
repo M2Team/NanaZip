@@ -9,6 +9,7 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 #endif
 
 #include "../../../Common/StringConvert.h"
@@ -670,6 +671,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     /* lpCmdLine */, int nCmdShow)
 {
   g_hInstance = hInstance;
+
+  if (!::NanaZipEnableMitigations())
+  {
+    ErrorMessage("Cannot enable security mitigations");
+  }
 
   try
   {

@@ -29,6 +29,7 @@
 #include "../../UI/GUI/ExtractRes.h"
 
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -223,6 +224,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   g_hInstance = (HINSTANCE)hInstance;
 
   NT_CHECK
+
+  if (!::NanaZipEnableMitigations())
+  {
+    ShowErrorMessage(L"Cannot enable security mitigations");
+  }
 
   try
   {

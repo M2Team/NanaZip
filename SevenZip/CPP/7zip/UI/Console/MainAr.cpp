@@ -4,6 +4,7 @@
 
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 #endif
 
 #include "../../../Common/MyException.h"
@@ -68,9 +69,18 @@ int MY_CDECL main
 
   NT_CHECK
 
+  if (!::NanaZipEnableMitigations())
+  {
+    FlushStreams();
+    *g_ErrStream
+      << "Cannot enable security mitigations: "
+      << NError::MyFormatMessage(GetLastError())
+      << endl;
+  }
+
   NConsoleClose::CCtrlHandlerSetter ctrlHandlerSetter;
   int res = 0;
-  
+
   try
   {
     #ifdef _WIN32

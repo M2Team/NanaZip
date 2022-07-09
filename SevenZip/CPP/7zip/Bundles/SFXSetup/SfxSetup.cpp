@@ -24,6 +24,7 @@
 #include "ExtractEngine.h"
 
 #include "../../../../C/DllSecur.h"
+#include "Mitigations.h"
 
 #include "resource.h"
 
@@ -140,6 +141,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   g_hInstance = (HINSTANCE)hInstance;
 
   NT_CHECK
+
+  if (!::NanaZipEnableMitigations())
+  {
+    ShowErrorMessage(L"Cannot enable security mitigations");
+  }
 
   #ifdef _WIN32
   LoadSecurityDlls();
