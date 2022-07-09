@@ -154,6 +154,14 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <ControlFlowGuard Condition="'$(Configuration)'=='Release'">Guard</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <CETCompat Condition="'$(Platform)'=='Win32' Or '$(Platform)'=='x64'">true</CETCompat>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <PackageReference Include="VC-LTL" Condition="'$(MileProjectEnableVCLTLSupport)' == 'true'">
       <Version>5.0.5</Version>
