@@ -142,9 +142,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 
   NT_CHECK
 
+  if (!::NanaZipEnableMitigations())
+  {
+    ErrorMessage("Cannot enable security mitigations");
+  }
+
   #ifdef _WIN32
-  if (!EnableMitigations())
-    ShowErrorMessage(L"Cannot enable security mitigations");
   LoadSecurityDlls();
   #endif
 

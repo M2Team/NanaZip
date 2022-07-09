@@ -39,7 +39,6 @@ static const char * const kUserBreakMessage  = "Break signaled";
 static const char * const kMemoryExceptionMessage = "ERROR: Can't allocate required memory!";
 static const char * const kUnknownExceptionMessage = "Unknown Error";
 static const char * const kInternalExceptionMessage = "\n\nInternal Error #";
-static const char * const kMitigationErrorMessage = "Cannot enable security mitigations: ";
 
 static void FlushStreams()
 {
@@ -70,16 +69,21 @@ int MY_CDECL main
 
   NT_CHECK
 
+  if (!::NanaZipEnableMitigations())
+  {
+    FlushStreams();
+    *g_ErrStream
+      << "Cannot enable security mitigations: "
+      << NError::MyFormatMessage(GetLastError())
+      << endl;
+  }
+
   NConsoleClose::CCtrlHandlerSetter ctrlHandlerSetter;
   int res = 0;
-  
+
   try
   {
     #ifdef _WIN32
-    if (!EnableMitigations()) {
-      FlushStreams();
-      *g_ErrStream << kMitigationErrorMessage << NError::MyFormatMessage(GetLastError()) << endl;
-    }
     My_SetDefaultDllDirectories();
     #endif
 

@@ -394,9 +394,12 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
 
   #ifdef _WIN32
   NT_CHECK
-  if (!EnableMitigations())
-    ErrorMessage("Cannot enable security mitigations");
   #endif
+
+  if (!::NanaZipEnableMitigations())
+  {
+    ErrorMessage("Cannot enable security mitigations");
+  }
 
   InitCommonControls();
 

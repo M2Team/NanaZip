@@ -672,13 +672,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 {
   g_hInstance = hInstance;
 
+  if (!::NanaZipEnableMitigations())
+  {
+    ErrorMessage("Cannot enable security mitigations");
+  }
+
   try
   {
     try
     {
       #ifdef _WIN32
-      if (!EnableMitigations())
-        ErrorMessage(L"Cannot enable security mitigations");
       My_SetDefaultDllDirectories();
       #endif
       return WinMain2(nCmdShow);

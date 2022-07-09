@@ -29,7 +29,6 @@
 #include "../../../../../NanaZipSfxConsole/Mile.Project.Properties.h"
 
 #include "../../../../C/DllSecur.h"
-#include "Mitigations.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -140,8 +139,6 @@ static const char * const kIncorrectWildcardInCommandLine  = "Incorrect wildcard
 // static const char * const kProcessArchiveMessage = " archive: ";
 
 static const char * const kCantFindSFX = " cannot find sfx";
-
-static const char * const kMitigationErrorMessage = "Cannot enable security mitigations: ";
 
 namespace NCommandType
 {
@@ -266,8 +263,6 @@ int Main2(
 )
 {
   #ifdef _WIN32
-  if (!EnableMitigations())
-    g_StdOut << kMitigationErrorMessage << endl;
   // do we need load Security DLLs for console program?
   LoadSecurityDlls();
   #endif
@@ -275,7 +270,7 @@ int Main2(
   #if defined(_WIN32) && !defined(UNDER_CE)
   SetFileApisToOEM();
   #endif
-  
+
   #ifdef ENV_HAVE_LOCALE
   MY_SetLocale();
   #endif
@@ -290,7 +285,7 @@ int Main2(
   #endif
 
   #ifdef _WIN32
-  
+
   FString arcPath;
   {
     FString path;
@@ -317,7 +312,7 @@ int Main2(
   #endif
 
   NCommandLineParser::CParser parser;
-  
+
   try
   {
     if (!parser.ParseStrings(kSwitchForms, kNumSwitches, commandStrings))
@@ -338,7 +333,7 @@ int Main2(
     PrintHelp();
     return 0;
   }
-  
+
   const UStringVector &nonSwitchStrings = parser.NonSwitchStrings;
 
   unsigned curCommandIndex = 0;
@@ -362,7 +357,7 @@ int Main2(
   recursedType = command.DefaultRecursedType();
 
   NWildcard::CCensor wildcardCensor;
-  
+
   {
     if (nonSwitchStrings.Size() == curCommandIndex)
       AddCommandLineWildcardToCensor(wildcardCensor, (UString)kUniversalWildcard, true, recursedType);
@@ -388,7 +383,7 @@ int Main2(
 
   if (!NFind::DoesFileExist_FollowLink(arcPath))
     throw kCantFindSFX;
-  
+
   FString outputDir;
   if (parser[NKey::kOutputDir].ThereIs)
   {
@@ -398,7 +393,7 @@ int Main2(
 
 
   wildcardCensor.AddPathsToCensor(NWildcard::k_RelatPath);
-  
+
   {
     UStringVector v1, v2;
     v1.Add(fs2us(arcPath));

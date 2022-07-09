@@ -1,18 +1,19 @@
-﻿#ifndef __NANAZIP_MITIGATIONS_H
-#define __NANAZIP_MITIGATIONS_H
+﻿/*
+ * PROJECT:   NanaZip
+ * FILE:      Mitigations.h
+ * PURPOSE:   Definition for applied mitigation policy
+ *
+ * LICENSE:   The MIT License
+ *
+ * DEVELOPER: dinhngtu (contact@tudinh.xyz)
+ *            Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef NANAZIP_SHARED_MITIGATIONS
+#define NANAZIP_SHARED_MITIGATIONS
 
-#ifdef _WIN32
+#include <Windows.h>
 
-BOOL EnableMitigations(void);
+EXTERN_C BOOL WINAPI NanaZipEnableMitigations();
 
-#endif
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif
+#endif // !NANAZIP_SHARED_MITIGATIONS

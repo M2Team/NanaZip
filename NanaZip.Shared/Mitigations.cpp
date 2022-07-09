@@ -1,19 +1,29 @@
-﻿#include <Windows.h>
-#include <VersionHelpers.h>
+﻿/*
+ * PROJECT:   NanaZip
+ * FILE:      Mitigations.cpp
+ * PURPOSE:   Implementation for applied mitigation policy
+ *
+ * LICENSE:   The MIT License
+ *
+ * DEVELOPER: dinhngtu (contact@tudinh.xyz)
+ *            Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+ */
 
 #include "Mitigations.h"
+
+#include <VersionHelpers.h>
 
 typedef BOOL(WINAPI* Func_SetProcessMitigationPolicy)(
     _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
     _In_reads_bytes_(dwLength) PVOID lpBuffer,
     _In_ SIZE_T dwLength);
 
-BOOL EnableMitigations()
+EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 {
     if (!IsWindows8OrGreater())
         return TRUE;
 
-    HMODULE mod = GetModuleHandleW(L"kernel32.dll");
+    HMODULE mod = ::GetModuleHandleW(L"kernel32.dll");
     if (!mod)
         return FALSE;
 
