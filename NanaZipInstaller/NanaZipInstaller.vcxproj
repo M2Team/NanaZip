@@ -15,7 +15,6 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <GuardEHContMetadata>false</GuardEHContMetadata>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
