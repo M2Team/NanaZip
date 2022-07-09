@@ -144,7 +144,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 
   if (!::NanaZipEnableMitigations())
   {
-    ErrorMessage("Cannot enable security mitigations");
+    ShowErrorMessage(L"Cannot enable security mitigations");
   }
 
   #ifdef _WIN32
