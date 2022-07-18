@@ -24,6 +24,7 @@
 - AndromedaMelody, https://github.com/AndromedaMelody
 - Blueberryy, https://github.com/Blueberryy
 - ChuckMichael, https://github.com/ChuckMichael
+- dinhngtu, https://github.com/dinhngtu
 - Hen Ry, https://github.com/Henry2o1o
 - Maicol Battistini, https://github.com/maicol07
 - Manfredi, https://github.com/manfromarce
