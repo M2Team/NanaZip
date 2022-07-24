@@ -1,4 +1,4 @@
-﻿// PanelOperations.cpp
+// PanelOperations.cpp
 
 #include "StdAfx.h"
 
@@ -23,6 +23,9 @@
 using namespace NWindows;
 using namespace NFile;
 using namespace NName;
+
+#define MY_CAST_FUNC  (void(*)())
+// #define MY_CAST_FUNC
 
 #ifndef _UNICODE
 extern bool g_IsNT;
@@ -96,7 +99,7 @@ HRESULT CThreadFolderOperations::DoOperation(CPanel &panel, const UString &progr
 }
 
 #ifndef _UNICODE
-typedef int (WINAPI * SHFileOperationWP)(LPSHFILEOPSTRUCTW lpFileOp);
+typedef int (WINAPI * Func_SHFileOperationW)(LPSHFILEOPSTRUCTW lpFileOp);
 #endif
 
 /*
@@ -192,9 +195,10 @@ void CPanel::DeleteItems(bool NON_CE_VAR(toRecycleBin))
         #ifdef _UNICODE
         /* res = */ ::SHFileOperationW(&fo);
         #else
-        SHFileOperationWP shFileOperationW = (SHFileOperationWP)
+        Func_SHFileOperationW shFileOperationW = (Func_SHFileOperationW)
+          MY_CAST_FUNC
           ::GetProcAddress(::GetModuleHandleW(L"shell32.dll"), "SHFileOperationW");
-        if (shFileOperationW == 0)
+        if (!shFileOperationW)
           return;
         /* res = */ shFileOperationW(&fo);
         #endif

@@ -1,4 +1,4 @@
-﻿// EnumDirItems.cpp
+// EnumDirItems.cpp
 
 #include "StdAfx.h"
 
@@ -187,7 +187,7 @@ CDirItems::CDirItems():
     , ReadSecure(false)
    #endif
    #ifndef _WIN32
-    , StoreOwnerName(true)
+    , StoreOwnerName(false)
    #endif
     , Callback(NULL)
 {
@@ -1361,6 +1361,7 @@ HRESULT CDirItems::FillDeviceSizes()
         // 200K/sec speed
         u.Empty();
         const passwd *pw = getpwuid(OwnerNameMap.Numbers[i]);
+        // printf("\ngetpwuid=%s\n", pw->pw_name);
         if (pw)
         {
           a = pw->pw_name;

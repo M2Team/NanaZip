@@ -861,7 +861,7 @@
     <value>Неподтвержденное начало архива</value>
   </data>
   <data name="Resource3768" xml:space="preserve">
-    <value>Неподдерживаемая функциональность </value>
+    <value>Неподдерживаемая функциональность</value>
   </data>
   <data name="Resource3800" xml:space="preserve">
     <value>Ввод пароля</value>
@@ -1306,7 +1306,7 @@
     <value>Тип ссылки</value>
   </data>
   <data name="Resource7711" xml:space="preserve">
-    <value>Жесткая ссылка </value>
+    <value>Жесткая ссылка</value>
   </data>
   <data name="Resource7712" xml:space="preserve">
     <value>Символьная ссылка (Файл)</value>

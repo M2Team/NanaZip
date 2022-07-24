@@ -1,4 +1,4 @@
-﻿// Windows/MemoryLock.cpp
+// Windows/MemoryLock.cpp
 
 #include "StdAfx.h"
 
@@ -21,7 +21,7 @@ typedef BOOL (WINAPI * Func_LookupPrivilegeValue)(LPCTSTR lpSystemName, LPCTSTR 
 typedef BOOL (WINAPI * Func_AdjustTokenPrivileges)(HANDLE TokenHandle, BOOL DisableAllPrivileges,
     PTOKEN_PRIVILEGES NewState, DWORD BufferLength, PTOKEN_PRIVILEGES PreviousState, PDWORD ReturnLength);
 }
-#define GET_PROC_ADDR(fff, name) Func_ ## fff  my_ ## fff  = (Func_ ## fff)GetProcAddress(hModule, name)
+#define GET_PROC_ADDR(fff, name) Func_ ## fff  my_ ## fff  = (Func_ ## fff) (void(*)()) GetProcAddress(hModule, name)
 #endif
 
 bool EnablePrivilege(LPCTSTR privilegeName, bool enable)

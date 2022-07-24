@@ -1,4 +1,4 @@
-﻿// DmgHandler.cpp
+// DmgHandler.cpp
 
 #include "StdAfx.h"
 
@@ -1063,6 +1063,8 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
               subName.DeleteFrom(pos1);
           }
         }
+        else
+          subName = item.Name; // new apfs dmg can be without braces
         subName.Trim();
         if (!subName.IsEmpty())
         {

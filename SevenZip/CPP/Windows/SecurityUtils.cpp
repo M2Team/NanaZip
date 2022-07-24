@@ -1,8 +1,11 @@
-﻿// Windows/SecurityUtils.cpp
+// Windows/SecurityUtils.cpp
 
 #include "StdAfx.h"
 
 #include "SecurityUtils.h"
+
+#define MY_CAST_FUNC  (void(*)())
+// #define MY_CAST_FUNC
 
 namespace NWindows {
 namespace NSecurity {
@@ -50,8 +53,10 @@ static void MyLookupSids(CPolicy &policy, PSID ps)
 }
 */
 
+extern "C" {
+
 #ifndef _UNICODE
-typedef BOOL (WINAPI * LookupAccountNameWP)(
+typedef BOOL (WINAPI * Func_LookupAccountNameW)(
     LPCWSTR lpSystemName,
     LPCWSTR lpAccountName,
     PSID Sid,
@@ -62,13 +67,17 @@ typedef BOOL (WINAPI * LookupAccountNameWP)(
     );
 #endif
 
+}
+
 static PSID GetSid(LPWSTR accountName)
 {
   #ifndef _UNICODE
   HMODULE hModule = GetModuleHandle(TEXT("Advapi32.dll"));
   if (hModule == NULL)
     return NULL;
-  LookupAccountNameWP lookupAccountNameW = (LookupAccountNameWP)GetProcAddress(hModule, "LookupAccountNameW");
+  Func_LookupAccountNameW lookupAccountNameW = (Func_LookupAccountNameW)
+      MY_CAST_FUNC
+      GetProcAddress(hModule, "LookupAccountNameW");
   if (lookupAccountNameW == NULL)
     return NULL;
   #endif

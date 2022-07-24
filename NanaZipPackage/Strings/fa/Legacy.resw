@@ -55,7 +55,7 @@
     <value>لغو</value>
   </data>
   <data name="Resource406" xml:space="preserve">
-    <value>بله&amp;ه</value>
+    <value>بله&amp;</value>
   </data>
   <data name="Resource407" xml:space="preserve">
     <value>&amp;خیر</value>
@@ -97,7 +97,7 @@
     <value>آیا میخواهید عملکرد را لغو میکنید؟</value>
   </data>
   <data name="Resource500" xml:space="preserve">
-    <value>فایل</value>
+    <value>پرونده</value>
   </data>
   <data name="Resource501" xml:space="preserve">
     <value>ویرایش</value>
@@ -106,7 +106,7 @@
     <value>مشاهده</value>
   </data>
   <data name="Resource503" xml:space="preserve">
-    <value>موردعلاقه ها</value>
+    <value>موردعلاقه‌ها</value>
   </data>
   <data name="Resource504" xml:space="preserve">
     <value>ابزارها</value>
@@ -142,10 +142,10 @@
     <value>حذف</value>
   </data>
   <data name="Resource549" xml:space="preserve">
-    <value>تقسیم فایل...</value>
+    <value>تقسیم پرونده...</value>
   </data>
   <data name="Resource550" xml:space="preserve">
-    <value>ادغام فایل..</value>
+    <value>ادغام پرونده..</value>
   </data>
   <data name="Resource551" xml:space="preserve">
     <value>مشخصات</value>
@@ -163,10 +163,16 @@
     <value>ایجاد پوشه</value>
   </data>
   <data name="Resource556" xml:space="preserve">
-    <value>ایجاد فایل</value>
+    <value>ایجاد پرونده</value>
   </data>
   <data name="Resource557" xml:space="preserve">
-    <value>خروج</value>
+    <value>خرو&amp;ج</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>پیوند</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;جریان‌های جایگزین</value>
   </data>
   <data name="Resource600" xml:space="preserve">
     <value>انتخاب همه</value>
@@ -175,7 +181,7 @@
     <value>لغو انتخاب‌ همه</value>
   </data>
   <data name="Resource602" xml:space="preserve">
-    <value>انتخاب معکوس</value>
+    <value>معکوس کردن انتخاب</value>
   </data>
   <data name="Resource603" xml:space="preserve">
     <value>انتخاب...</value>
@@ -184,10 +190,10 @@
     <value>لغو انتخاب...</value>
   </data>
   <data name="Resource605" xml:space="preserve">
-    <value>انتخاب بر حسب نوع</value>
+    <value>انتخاب بر اساس نوع</value>
   </data>
   <data name="Resource606" xml:space="preserve">
-    <value>لغو انتخاب بر حسب نوع</value>
+    <value>لغو انتخاب بر اساس نوع</value>
   </data>
   <data name="Resource700" xml:space="preserve">
     <value>آیکون‌ بزرگ</value>
@@ -208,22 +214,25 @@
     <value>مشاهده یکنواخت</value>
   </data>
   <data name="Resource732" xml:space="preserve">
-    <value>2 پانل</value>
+    <value>پنل &amp;2</value>
   </data>
   <data name="Resource733" xml:space="preserve">
     <value>نوارابزارها</value>
   </data>
   <data name="Resource734" xml:space="preserve">
-    <value>بازکردن ریشه پوشه</value>
+    <value>بازکردن پوشه ریشه</value>
   </data>
   <data name="Resource735" xml:space="preserve">
     <value>یک مرحله به بالا</value>
   </data>
   <data name="Resource736" xml:space="preserve">
-    <value>تاریخچه پوشه ها..</value>
+    <value>تاریخچه پوشه‌ها..</value>
   </data>
   <data name="Resource737" xml:space="preserve">
     <value>تازه کردن</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>تازه کردن خودکار</value>
   </data>
   <data name="Resource750" xml:space="preserve">
     <value>نوارابزار آرشیو</value>
@@ -232,19 +241,19 @@
     <value>نوارابزار استاندارد</value>
   </data>
   <data name="Resource752" xml:space="preserve">
-    <value>دکمه بزرگ</value>
+    <value>دکمه‌های بزرگ</value>
   </data>
   <data name="Resource753" xml:space="preserve">
-    <value>نمایش متن دکمه ها</value>
+    <value>نمایش متن دکمه‌ها</value>
   </data>
   <data name="Resource800" xml:space="preserve">
     <value>افزودن پوشه به مورد علاقه بعنوان</value>
   </data>
   <data name="Resource801" xml:space="preserve">
-    <value>بوکمارک</value>
+    <value>نشانک</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>گزینه ها..</value>
+    <value>گزینه‌ها...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
     <value>سنجش</value>
@@ -303,9 +312,6 @@
   <data name="Resource1018" xml:space="preserve">
     <value>لغت نامه</value>
   </data>
-  <data name="Resource1019" xml:space="preserve">
-    <value>سی آر سی</value>
-  </data>
   <data name="Resource1020" xml:space="preserve">
     <value>نوع</value>
   </data>
@@ -319,7 +325,7 @@
     <value>سیستم میزبان</value>
   </data>
   <data name="Resource1024" xml:space="preserve">
-    <value>فایل سیستمی</value>
+    <value>پرونده سیستمی</value>
   </data>
   <data name="Resource1025" xml:space="preserve">
     <value>کاربر</value>
@@ -340,10 +346,10 @@
     <value>مسیر پیشوند</value>
   </data>
   <data name="Resource1031" xml:space="preserve">
-    <value>پوشه ها</value>
+    <value>پوشه‌ها</value>
   </data>
   <data name="Resource1032" xml:space="preserve">
-    <value>فایل ها</value>
+    <value>پرونده‌ها</value>
   </data>
   <data name="Resource1033" xml:space="preserve">
     <value>نسخه</value>
@@ -358,13 +364,13 @@
     <value>آفست</value>
   </data>
   <data name="Resource1037" xml:space="preserve">
-    <value>لینک</value>
+    <value>پیوند</value>
   </data>
   <data name="Resource1038" xml:space="preserve">
-    <value>بلوک ها</value>
+    <value>بلوک‌ها</value>
   </data>
   <data name="Resource1039" xml:space="preserve">
-    <value>بخش ها</value>
+    <value>بخش‌ها</value>
   </data>
   <data name="Resource1041" xml:space="preserve">
     <value>64 بیت</value>
@@ -379,10 +385,10 @@
     <value>حجم فیزیکی</value>
   </data>
   <data name="Resource1045" xml:space="preserve">
-    <value>حجم سرساز ها</value>
+    <value>حجم سرسازها</value>
   </data>
   <data name="Resource1046" xml:space="preserve">
-    <value>مجموع مقابله ای</value>
+    <value>جمع آزما</value>
   </data>
   <data name="Resource1047" xml:space="preserve">
     <value>خصوصیات</value>
@@ -406,7 +412,7 @@
     <value>حالت</value>
   </data>
   <data name="Resource1054" xml:space="preserve">
-    <value>لینک</value>
+    <value>پیوند نمادین</value>
   </data>
   <data name="Resource1055" xml:space="preserve">
     <value>خطا</value>
@@ -429,8 +435,92 @@
   <data name="Resource1061" xml:space="preserve">
     <value>ارائه دهنده</value>
   </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>امنیت NT</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>جریان جایگزین</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Aux</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>درخت است</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>نوع خطا</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>خطاها</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>خطاها</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>هشدارها</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>هشدار</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>جریان‌ها</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>جریان‌های جایگزین</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>اندازه جریان‌های جایگزین</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>اندازه مجازی</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>اندازه بعد از استخراج</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>مجموع اندازه فیزیکی</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>اندیس بخش</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>زیر نوع</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>نظر کوتاه</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>صفحه کد</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>اندازه دم</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>اندازه درون داده‌ها</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>پیوند</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
+    <value>پیوند سخت</value>
+  </data>
+  <data name="Resource1091" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1093" xml:space="preserve">
+    <value>فقط-خواندنی</value>
+  </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>کپی پیوند</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>فراداده‌ها تغییر کردند</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
-    <value>گزینه ها</value>
+    <value>گزینه‌ها</value>
   </data>
   <data name="Resource2101" xml:space="preserve">
     <value>زبان</value>
@@ -442,16 +532,19 @@
     <value>ویرایشگر</value>
   </data>
   <data name="Resource2104" xml:space="preserve">
-    <value>ویرایشگر:</value>
+    <value>&amp;ویرایشگر:</value>
   </data>
   <data name="Resource2105" xml:space="preserve">
-    <value>مقایسه گر:</value>
+    <value>&amp;مقایسه گر:</value>
   </data>
   <data name="Resource2200" xml:space="preserve">
     <value>سیستم</value>
   </data>
   <data name="Resource2201" xml:space="preserve">
     <value>وابسته سازی برنامه با:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>تمام کاربران</value>
   </data>
   <data name="Resource2301" xml:space="preserve">
     <value>افزودن منوی برنامه به منوی ویندوز</value>
@@ -460,7 +553,10 @@
     <value>منوها به صورت آبشاری در یک منو</value>
   </data>
   <data name="Resource2303" xml:space="preserve">
-    <value>آیتم های منوی برنامه:</value>
+    <value>آیتم‌های منوی ویندوز:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>آیکون‌ها در منوی ویندوز</value>
   </data>
   <data name="Resource2320" xml:space="preserve">
     <value>&lt;پوشه&gt;</value>
@@ -472,7 +568,7 @@
     <value>بازکردن آرشیو</value>
   </data>
   <data name="Resource2323" xml:space="preserve">
-    <value>استخراج فایل‌ها...</value>
+    <value>استخراج پرونده‌ها...</value>
   </data>
   <data name="Resource2324" xml:space="preserve">
     <value>افزودن به آرشیو...</value>
@@ -496,7 +592,7 @@
     <value>فشرده‌سازی در {0} و ارسال با ایمیل</value>
   </data>
   <data name="Resource2400" xml:space="preserve">
-    <value>پوشه ها</value>
+    <value>پوشه‌ها</value>
   </data>
   <data name="Resource2401" xml:space="preserve">
     <value>پوشه در حال کار</value>
@@ -505,7 +601,7 @@
     <value>پوشه موقت سیستم</value>
   </data>
   <data name="Resource2403" xml:space="preserve">
-    <value>فعلی</value>
+    <value>کنونی</value>
   </data>
   <data name="Resource2404" xml:space="preserve">
     <value>مشخص کنید:</value>
@@ -514,7 +610,7 @@
     <value>فقط برای درایوهای پرتابل استفاده شود</value>
   </data>
   <data name="Resource2406" xml:space="preserve">
-    <value>یک مکان برای فایل های موقتی آرشیو مشخص کنید</value>
+    <value>یک مکان برای پرونده‌های موقتی آرشیو مشخص کنید</value>
   </data>
   <data name="Resource2500" xml:space="preserve">
     <value>تنظیمات</value>
@@ -523,7 +619,7 @@
     <value>نمایش آیتم ".."</value>
   </data>
   <data name="Resource2502" xml:space="preserve">
-    <value>نمایش آیکون واقعی فایل</value>
+    <value>نمایش آیکون واقعی پرونده</value>
   </data>
   <data name="Resource2503" xml:space="preserve">
     <value>نمایش منوی سیستم</value>
@@ -547,7 +643,7 @@
     <value>درباره برنامه</value>
   </data>
   <data name="Resource2901" xml:space="preserve">
-    <value>برنامه‌ای که در پیش رو دارید یک برنامه رایگان است، اما شما می توانید با پرداخت مبلغی جزئی به توسعه این نرم‌افزار کمک کنید.</value>
+    <value>برنامه‌ای که در پیش رو دارید یک برنامه رایگان است، اما شما می‌توانید با پرداخت مبلغی جزئی به توسعه این نرم‌افزار کمک کنید.</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
     <value>سیستم مقدار حافظه موردنیاز را نمیتواند اختصاص دهد</value>
@@ -565,7 +661,7 @@
     <value>عملکرد بروزرسانی برای این آرشیو بروزرسانی نمیشود</value>
   </data>
   <data name="Resource3005" xml:space="preserve">
-    <value>فایل '{0}' را بعنوان یک آرشیو نمیتوان باز کرد</value>
+    <value>پرونده '{0}' را بعنوان یک آرشیو نمیتوان باز کرد</value>
   </data>
   <data name="Resource3006" xml:space="preserve">
     <value>آرشیو رمزگذاری شده '{0}' را نمیتوان باز کرد.رمزعبور اشتباه است؟</value>
@@ -574,48 +670,84 @@
     <value>نوع آرشیو پشتیبانی نشده</value>
   </data>
   <data name="Resource3008" xml:space="preserve">
-    <value>فایل {0} از قبل موجود است</value>
+    <value>پرونده {0} از قبل موجود است</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>فایل '{0}' تغییر کرده است.
- آیا میخواهید این فایل در آرشیو بروزرسانی شود؟</value>
+    <value>پرونده '{0}' تغییر کرده است.
+ آیا میخواهید این پرونده در آرشیو بروزرسانی شود؟</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
-    <value>این فایل قابل بروزرسانی نمی‌باشد
+    <value>این پرونده قابل بروزرسانی نمی‌باشد
 '{0}'</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>ویرایشگر را نمیتوان اجرا کرد</value>
   </data>
   <data name="Resource3012" xml:space="preserve">
-    <value>فایل شبیه ویروس است (نام فایل حاوی فضای بلندی در نام هست).</value>
+    <value>پرونده شبیه ویروس است (نام پرونده حاوی فضای بلندی در نام هست).</value>
   </data>
   <data name="Resource3013" xml:space="preserve">
     <value>عملکرد نمیتواند از پوشه ای که مسیر بلند دارد فراخوانی شود</value>
   </data>
   <data name="Resource3014" xml:space="preserve">
-    <value>شما باید یک فایل انتخاب کنید</value>
+    <value>شما باید یک پرونده انتخاب کنید</value>
   </data>
   <data name="Resource3015" xml:space="preserve">
-    <value>شما باید یک یا تعداد بیشتری فایل انتخاب کنید</value>
+    <value>شما باید یک یا تعداد بیشتری پرونده انتخاب کنید</value>
   </data>
   <data name="Resource3016" xml:space="preserve">
-    <value>تعداد آیتم ها بسیار زیاد است</value>
+    <value>تعداد آیتم‌ها بسیار زیاد است</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>امکان بازکردن پرونده به عنوان آرشیو {0} وجود ندارد</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>پرونده به عنوان آرشیو {0} باز است</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>آرشیو با افست باز شده است</value>
   </data>
   <data name="Resource3300" xml:space="preserve">
     <value>در حال استخراج</value>
   </data>
   <data name="Resource3301" xml:space="preserve">
-    <value>فشرده سازی</value>
+    <value>در حال فشرده سازی</value>
   </data>
   <data name="Resource3302" xml:space="preserve">
-    <value>تست</value>
+    <value>در حال تست</value>
   </data>
   <data name="Resource3303" xml:space="preserve">
     <value>درحال بازکردن..</value>
   </data>
   <data name="Resource3304" xml:space="preserve">
     <value>در حال اسکن..</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>در حال حذف</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>در حال افزودن</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>در حال بروزرسانی</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>در حال آنالیز</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>در حال بازتولید</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>در حال بسته بندی</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>در حال عبور</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>در حال پاک کردن</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>در حال ساخت سرساز</value>
   </data>
   <data name="Resource3400" xml:space="preserve">
     <value>استخراج</value>
@@ -624,19 +756,25 @@
     <value>استخراج به:</value>
   </data>
   <data name="Resource3402" xml:space="preserve">
-    <value>یک مکان برای فایل های استخراج شده تعیین کنید</value>
+    <value>یک مکان برای پرونده‌های استخراج شده تعیین کنید</value>
   </data>
   <data name="Resource3410" xml:space="preserve">
     <value>نوع مسیر</value>
   </data>
   <data name="Resource3411" xml:space="preserve">
-    <value>نام مسیر کامل</value>
+    <value>مسیر کامل</value>
   </data>
   <data name="Resource3412" xml:space="preserve">
-    <value>بدون نام مسیر</value>
+    <value>بدون مسیر</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>مسیر ثابت</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>مسیر نسبی</value>
   </data>
   <data name="Resource3420" xml:space="preserve">
-    <value>حالت جایگزینی</value>
+    <value>حالت جایگزینی:</value>
   </data>
   <data name="Resource3421" xml:space="preserve">
     <value>پرسش قبل از جایگزینی</value>
@@ -645,22 +783,34 @@
     <value>جایگزینی بدون اخطار</value>
   </data>
   <data name="Resource3423" xml:space="preserve">
-    <value>چشمپوشی فایل‌های موجود</value>
+    <value>چشمپوشی پرونده‌های موجود</value>
   </data>
   <data name="Resource3424" xml:space="preserve">
     <value>تغییرنام خودکار</value>
   </data>
   <data name="Resource3425" xml:space="preserve">
-    <value>تغییرنام خودکار فایل های موجود</value>
+    <value>تغییرنام خودکار پرونده‌های موجود</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>حذف دوگانگی پوشه ریشه</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>بازگردانی امنیت پرونده</value>
+  </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Propagate Zone.Id stream:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>برای پرونده‌های آفیس</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
-    <value>تایید جایگزینی فایل</value>
+    <value>تایید جایگزینی پرونده</value>
   </data>
   <data name="Resource3501" xml:space="preserve">
-    <value>پوشه مقصد از قبل حاوی فایل در حال پردازش هست</value>
+    <value>پوشه مقصد از قبل حاوی پرونده در حال پردازش هست</value>
   </data>
   <data name="Resource3502" xml:space="preserve">
-    <value>آیا میخواهید فایل موجود با</value>
+    <value>آیا میخواهید پرونده موجود با</value>
   </data>
   <data name="Resource3503" xml:space="preserve">
     <value>این یکی جایگزین شود؟</value>
@@ -675,16 +825,55 @@
     <value>روش فشرده سازی برای '{0}' پشتیبانی نشذه است</value>
   </data>
   <data name="Resource3701" xml:space="preserve">
-    <value>خطای داده در '{0}'. اين فايل شکسته هست</value>
+    <value>خطای داده در '{0}'. اين فايل خراب است</value>
   </data>
   <data name="Resource3702" xml:space="preserve">
-    <value>سی آر سی در '{0}' موفق نشد.فایل شکسته هست</value>
+    <value>سی آر سی در '{0}' موفق نشد.پرونده خراب است</value>
   </data>
   <data name="Resource3703" xml:space="preserve">
     <value>خطای داده در فايل رمزگذارى شده '{0}'. رمزعبور اشتباه است؟</value>
   </data>
   <data name="Resource3704" xml:space="preserve">
-    <value>سی آر سی در فایل رمزگذاری شده '{0}' موفق نشد.رمزعبور اشتباه است</value>
+    <value>سی آر سی در پرونده رمزگذاری شده '{0}' موفق نشد.رمزعبور اشتباه است</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>گذرواژه اشتباه؟</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>روش فشرده سازی پشتیبانی نشده</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>خطای داده</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>سی آر سی اشتباه</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>داده ناموجود</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>پایان داده غیرمنتظره</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>هنوز داده‌هایی پس از پایان بار مفید داده‌ها وجود دارد</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>آرشیو نیست</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>خطای سرساز</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>گذرواژه اشتباه</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>شروع آرشیو خارج از دسترسی</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>شروع آرشیو تایید نشده</value>
+  </data>
+  <data name="Resource3768" xml:space="preserve">
+    <value>قابلیت پشتیبانی نشده</value>
   </data>
   <data name="Resource3800" xml:space="preserve">
     <value>رمزعبور</value>
@@ -768,13 +957,13 @@
     <value>پارامترها:</value>
   </data>
   <data name="Resource4011" xml:space="preserve">
-    <value>گزینه ها</value>
+    <value>گزینه‌ها</value>
   </data>
   <data name="Resource4012" xml:space="preserve">
     <value>ایجاد ارشیو خوداستخراجگر</value>
   </data>
   <data name="Resource4013" xml:space="preserve">
-    <value>فشرده سازی فایل های مشترک درسایر برنامه ها</value>
+    <value>فشرده سازی پرونده‌های مشترک درسایر برنامه‌ها</value>
   </data>
   <data name="Resource4014" xml:space="preserve">
     <value>رمزگذاری</value>
@@ -783,13 +972,28 @@
     <value>روش رمزگذاری:</value>
   </data>
   <data name="Resource4016" xml:space="preserve">
-    <value>رمزگذاری نام فایل ها</value>
+    <value>رمزگذاری نام پرونده‌ها</value>
   </data>
   <data name="Resource4017" xml:space="preserve">
     <value>حافظه مصرفی برای فشرده سازی:</value>
   </data>
   <data name="Resource4018" xml:space="preserve">
     <value>حافظه مصرفی برای استخراج:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>حذف پرونده‌ها پس از فشرده سازی</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>ذخیره پیوندهای نمادین</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>ذخیره پیوندهای سخت</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>ذخیره جریان داده‌های جایگزین</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>ذخیره امنیت پرونده</value>
   </data>
   <data name="Resource4050" xml:space="preserve">
     <value>ذخیره</value>
@@ -810,28 +1014,55 @@
     <value>مافوق</value>
   </data>
   <data name="Resource4060" xml:space="preserve">
-    <value>افزودن و جایگزینی فایل ها</value>
+    <value>افزودن و جایگزینی پرونده‌ها</value>
   </data>
   <data name="Resource4061" xml:space="preserve">
-    <value>بروزرسانی و افزودن فایل ها</value>
+    <value>بروزرسانی و افزودن پرونده‌ها</value>
   </data>
   <data name="Resource4062" xml:space="preserve">
-    <value>تازه کردن فایل های موجود</value>
+    <value>تازه کردن پرونده‌های موجود</value>
   </data>
   <data name="Resource4063" xml:space="preserve">
-    <value>همگامسازی فایل ها</value>
+    <value>همگامسازی پرونده‌ها</value>
   </data>
   <data name="Resource4070" xml:space="preserve">
     <value>جستجو</value>
   </data>
   <data name="Resource4071" xml:space="preserve">
-    <value>همه فایل ها</value>
+    <value>همه پرونده‌ها</value>
   </data>
   <data name="Resource4072" xml:space="preserve">
     <value>غیر-یکدست</value>
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>یکدست</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>زمان</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>دقت زمان:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>ذخیره زمان تغییرات</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>ذخیره زمان ساخت</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>ذخیره اخرین زمان دسترسی</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>تنظیم زمان آرشیو روی زمان آخرین پرونده</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>آخرین زمان دسترسی پرونده‌های مبدا را تغییر نده</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>کپی</value>
@@ -861,22 +1092,22 @@
     <value>عملکرد برای این پوشه پشتیبانی نمیشود</value>
   </data>
   <data name="Resource6009" xml:space="preserve">
-    <value>خطای تغییر نام فایل یا پوشه</value>
+    <value>خطای تغییر نام پرونده یا پوشه</value>
   </data>
   <data name="Resource6010" xml:space="preserve">
-    <value>تایید کپی فایل</value>
+    <value>تایید کپی پرونده</value>
   </data>
   <data name="Resource6011" xml:space="preserve">
-    <value>آیا میخواهید فایل ها را به ارشیو کپی کنید</value>
+    <value>آیا میخواهید پرونده‌ها را به ارشیو کپی کنید</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
-    <value>تایید حذف فایل</value>
+    <value>تایید حذف پرونده</value>
   </data>
   <data name="Resource6101" xml:space="preserve">
     <value>تایید حذف پوشه</value>
   </data>
   <data name="Resource6102" xml:space="preserve">
-    <value>تایید حذف فایل ها</value>
+    <value>تایید حذف پرونده‌ها</value>
   </data>
   <data name="Resource6103" xml:space="preserve">
     <value>آیا میخواهید '{0}' را حذف کنید؟</value>
@@ -891,34 +1122,34 @@
     <value>در حال حذف...</value>
   </data>
   <data name="Resource6107" xml:space="preserve">
-    <value>خطای حذف فایل یا پوشه</value>
+    <value>خطای حذف پرونده یا پوشه</value>
   </data>
   <data name="Resource6108" xml:space="preserve">
-    <value>سیستم فایل با مسیر بلند را نمیتواند به سطل زباله انتقال دهد</value>
+    <value>سیستم پرونده با مسیر بلند را نمیتواند به سطل زباله انتقال دهد</value>
   </data>
   <data name="Resource6300" xml:space="preserve">
     <value>ایجاد پوشه</value>
   </data>
   <data name="Resource6301" xml:space="preserve">
-    <value>ایجاد فایل</value>
+    <value>ایجاد پرونده</value>
   </data>
   <data name="Resource6302" xml:space="preserve">
     <value>نام پوشه:</value>
   </data>
   <data name="Resource6303" xml:space="preserve">
-    <value>نام فایل:</value>
+    <value>نام پرونده:</value>
   </data>
   <data name="Resource6304" xml:space="preserve">
     <value>پوشه جدید</value>
   </data>
   <data name="Resource6305" xml:space="preserve">
-    <value>فایل جدید</value>
+    <value>پرونده جدید</value>
   </data>
   <data name="Resource6306" xml:space="preserve">
     <value>خطای ایجاد پوشه</value>
   </data>
   <data name="Resource6307" xml:space="preserve">
-    <value>خطای ایجاد فایل</value>
+    <value>خطای ایجاد پرونده</value>
   </data>
   <data name="Resource6400" xml:space="preserve">
     <value>توضيح</value>
@@ -981,7 +1212,7 @@
     <value>اطلاعات</value>
   </data>
   <data name="Resource7300" xml:space="preserve">
-    <value>تقسیم فایل</value>
+    <value>تقسیم پرونده</value>
   </data>
   <data name="Resource7301" xml:space="preserve">
     <value>تقسیم در:</value>
@@ -993,23 +1224,23 @@
     <value>در حال تقسیم...</value>
   </data>
   <data name="Resource7304" xml:space="preserve">
-    <value>تاييد تقسیم فایل</value>
+    <value>تاييد تقسیم پرونده</value>
   </data>
   <data name="Resource7305" xml:space="preserve">
     <value>آیا میخواهید اين فايل را به {0} بخش تقسيم كنيد؟</value>
   </data>
   <data name="Resource7306" xml:space="preserve">
-    <value>حجم بخش ها باید کوچکتر از اندازه فایل اصلی باشد</value>
+    <value>حجم بخش‌ها باید کوچکتر از اندازه پرونده اصلی باشد</value>
   </data>
   <data name="Resource7307" xml:space="preserve">
     <value>حجم بخش نادرست است</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>حجم بخش های مشخص شده: {0} بايت.
-آیا میخواهید آرشيو را به بخش هایی به اين اندازه تقسيم كنيد؟</value>
+    <value>حجم بخش‌های مشخص شده: {0} بايت.
+آیا میخواهید آرشيو را به بخش‌هایی به اين اندازه تقسيم كنيد؟</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
-    <value>ادغام فایل ها</value>
+    <value>ادغام پرونده‌ها</value>
   </data>
   <data name="Resource7401" xml:space="preserve">
     <value>ادغام در:</value>
@@ -1018,13 +1249,13 @@
     <value>در حال ادغام...</value>
   </data>
   <data name="Resource7403" xml:space="preserve">
-    <value>فقط اولین بخش فایل را انتخاب کنید</value>
+    <value>فقط اولین بخش پرونده را انتخاب کنید</value>
   </data>
   <data name="Resource7404" xml:space="preserve">
-    <value>فایل را نمی تواند بعنوان فایل تقسیمی تشخیص دهد</value>
+    <value>پرونده را نمی‌تواند بعنوان پرونده تقسیمی تشخیص دهد</value>
   </data>
   <data name="Resource7405" xml:space="preserve">
-    <value>بیشتر از یک بخش از فایل تقسیمی را نمیتواند پیدا کند</value>
+    <value>بیشتر از یک بخش از پرونده تقسیمی را نمیتواند پیدا کند</value>
   </data>
   <data name="Resource7500" xml:space="preserve">
     <value>محاسبه مجموع مقابله ای..</value>
@@ -1070,5 +1301,32 @@
   </data>
   <data name="Resource7610" xml:space="preserve">
     <value>تعداد عبور:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>پیوند</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>پیوند</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>پیوند از:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>پیوند به:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>نوع پیوند</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>پیوند سخت</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>پیوند نمادین پرونده</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>پیوند نمادین پوشه</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>اتصال پوشه</value>
   </data>
 </root>

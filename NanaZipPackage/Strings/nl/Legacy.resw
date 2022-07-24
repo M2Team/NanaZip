@@ -172,7 +172,7 @@
     <value>Koppeling</value>
   </data>
   <data name="Resource559" xml:space="preserve">
-    <value>&amp;Alternate streams</value>
+    <value>&amp;Alternatieve streams</value>
   </data>
   <data name="Resource600" xml:space="preserve">
     <value>&amp;Alles selecteren</value>
@@ -232,7 +232,7 @@
     <value>&amp;Verversen</value>
   </data>
   <data name="Resource738" xml:space="preserve">
-    <value>Automatisch verversen </value>
+    <value>Automatisch verversen</value>
   </data>
   <data name="Resource750" xml:space="preserve">
     <value>Archiefwerkbalk</value>
@@ -322,7 +322,7 @@
     <value>Methode</value>
   </data>
   <data name="Resource1023" xml:space="preserve">
-    <value>Host-besturingssysteem</value>
+    <value>Hostbesturingssysteem</value>
   </data>
   <data name="Resource1024" xml:space="preserve">
     <value>Bestandssysteem</value>
@@ -439,7 +439,7 @@
     <value>NT-beveiliging</value>
   </data>
   <data name="Resource1063" xml:space="preserve">
-    <value>Alternate stream</value>
+    <value>Alternatieve stream</value>
   </data>
   <data name="Resource1064" xml:space="preserve">
     <value>Aux</value>
@@ -469,10 +469,10 @@
     <value>Streams</value>
   </data>
   <data name="Resource1075" xml:space="preserve">
-    <value>Alternate streams</value>
+    <value>Alternatieve streams</value>
   </data>
   <data name="Resource1076" xml:space="preserve">
-    <value>Grootte alternate streams</value>
+    <value>Grootte alternatieve streams</value>
   </data>
   <data name="Resource1077" xml:space="preserve">
     <value>Virtuele grootte</value>
@@ -512,6 +512,12 @@
   </data>
   <data name="Resource1093" xml:space="preserve">
     <value>Alleen lezen</value>
+  </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Kopieer Koppeling</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Metadata Gewijzigd</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Opties</value>
@@ -786,10 +792,16 @@ Wilt u het bijwerken in het archief?</value>
     <value>Bestaande bestanden automatisch hernoemen</value>
   </data>
   <data name="Resource3430" xml:space="preserve">
-    <value>Duplicaat van hoogste niveau verwijderen </value>
+    <value>Duplicaat van hoogste niveau verwijderen</value>
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Bestandsbeveiliging herstellen</value>
+  </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Doorgeven Zone.Id stream:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Voor Office Bestanden</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Bevestigen om een bestand te vervangen</value>
@@ -978,7 +990,7 @@ Wilt u het bijwerken in het archief?</value>
     <value>Harde koppelingen opslaan</value>
   </data>
   <data name="Resource4042" xml:space="preserve">
-    <value>Alternate data streams opslaan</value>
+    <value>Alternatieve gegevensstreams opslaan</value>
   </data>
   <data name="Resource4043" xml:space="preserve">
     <value>Bestandsbeveiliging opslaan</value>
@@ -1024,6 +1036,33 @@ Wilt u het bijwerken in het archief?</value>
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>Compact</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Tijdstempel precisie:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Bewaar wijzigingstijd</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Bewaar aanmaaktjjd</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Bewaar laatste toegangstijd</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Stel archieftijd in op de laatste bestandstijd</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Wijzig laatste toegangstijd van de bronbestanden niet</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Kopiëren</value>
@@ -1279,7 +1318,7 @@ Weet u zeker dat u het archief zo wilt opsplitsen?</value>
     <value>Koppelingstype</value>
   </data>
   <data name="Resource7711" xml:space="preserve">
-    <value>Harde koppeling</value>
+    <value>Vaste  koppeling</value>
   </data>
   <data name="Resource7712" xml:space="preserve">
     <value>Symbolische bestandskoppeling</value>
@@ -1288,6 +1327,6 @@ Weet u zeker dat u het archief zo wilt opsplitsen?</value>
     <value>Symbolische mapkoppeling</value>
   </data>
   <data name="Resource7714" xml:space="preserve">
-    <value>Map knooppunt</value>
+    <value>Mapsplitsing</value>
   </data>
 </root>

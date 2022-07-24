@@ -1,4 +1,4 @@
-﻿// MyCom2.h
+// MyCom2.h
 
 #ifndef __MYCOM2_H
 #define __MYCOM2_H
@@ -7,8 +7,9 @@
 
 #define MY_ADDREF_RELEASE_MT \
 STDMETHOD_(ULONG, AddRef)() { InterlockedIncrement((LONG *)&__m_RefCount); return __m_RefCount; } \
-STDMETHOD_(ULONG, Release)() { InterlockedDecrement((LONG *)&__m_RefCount); if (__m_RefCount != 0) \
-  return __m_RefCount; delete this; return 0; }
+STDMETHOD_(ULONG, Release)() { InterlockedDecrement((LONG *)&__m_RefCount); \
+  if (__m_RefCount != 0) return __m_RefCount; \
+  delete this; return 0; }
 
 #define MY_UNKNOWN_IMP_SPEC_MT2(i1, i) \
   MY_QUERYINTERFACE_BEGIN \

@@ -513,6 +513,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>唯讀</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>複製連結</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>詮釋資料已變更</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>選項</value>
   </data>
@@ -791,6 +797,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>恢復檔案安全設定</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>傳遞 Zone.Id 資料流:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>適用於 Office 檔案</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>確認取代檔案</value>
   </data>
@@ -1024,6 +1036,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>結實</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>時間戳記精確度:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>儲存修改時間</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>儲存建立時間</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>儲存最後存取時間</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>設定壓縮檔的修改時間為原始檔案的最後修改時間</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>不要改變原始檔案的最後存取時間</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>複製</value>

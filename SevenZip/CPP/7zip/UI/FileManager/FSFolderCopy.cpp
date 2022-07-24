@@ -1,4 +1,4 @@
-﻿// FSFolderCopy.cpp
+// FSFolderCopy.cpp
 
 #include "StdAfx.h"
 
@@ -28,6 +28,9 @@ using namespace NFind;
 #ifndef _UNICODE
 extern bool g_IsNT;
 #endif
+
+#define MY_CAST_FUNC  (void(*)())
+// #define MY_CAST_FUNC
 
 namespace NFsFolder {
 
@@ -245,7 +248,9 @@ void CCopyState::Prepare()
   my_CopyFileExA = NULL;
   if (!g_IsNT)
   {
-    my_CopyFileExA = (Func_CopyFileExA)::GetProcAddress(::GetModuleHandleA("kernel32.dll"), "CopyFileExA");
+    my_CopyFileExA = (Func_CopyFileExA)
+      MY_CAST_FUNC
+      ::GetProcAddress(::GetModuleHandleA("kernel32.dll"), "CopyFileExA");
   }
   else
   #endif

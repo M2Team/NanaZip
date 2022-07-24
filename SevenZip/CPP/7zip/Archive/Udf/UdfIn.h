@@ -1,4 +1,4 @@
-﻿// Archive/UdfIn.h -- UDF / ECMA-167
+// Archive/UdfIn.h -- UDF / ECMA-167
 
 #ifndef __ARCHIVE_UDF_IN_H
 #define __ARCHIVE_UDF_IN_H
@@ -17,16 +17,15 @@ namespace NUdf {
 // ---------- ECMA Part 1 ----------
 
 // ECMA 1/7.2.12
+// UDF 2.1.3
 
-/*
 struct CDString32
 {
   Byte Data[32];
 
-  void Parse(const Byte *buf);
-  // UString GetString() const;
+  void Parse(const Byte *buf) { memcpy(Data, buf, sizeof(Data)); }
+  UString GetString() const;
 };
-*/
 
 struct CDString128
 {
@@ -46,6 +45,7 @@ struct CDString
 
 
 // ECMA 1/7.3
+// UDF 2.1.4 timestamp
 
 struct CTime
 {
@@ -65,9 +65,9 @@ struct CTime
 };
 
 
-// ECMA 1/7.4
+// ECMA 1/7.4 regid
+// UDF 2.1.5 EntityID
 
-/*
 struct CRegId
 {
   Byte Flags;
@@ -75,43 +75,96 @@ struct CRegId
   char Suffix[8];
 
   void Parse(const Byte *buf);
+  void AddCommentTo(UString &s) const;
+  void AddUdfVersionTo(UString &s) const;
 };
-*/
+
+
 
 // ---------- ECMA Part 3: Volume Structure ----------
 
+// ECMA 3/7.1
+
+struct CExtent
+{
+  UInt32 Len;
+  UInt32 Pos; // logical sector number
+
+  void Parse(const Byte *p);
+};
+
+
+// ECMA 3/10.1
+// UDF 2.2.2 PrimaryVolumeDescriptor
+
+struct CPrimeVol
+{
+  // UInt32 VolumeDescriptorSequenceNumber;
+  UInt32 PrimaryVolumeDescriptorNumber;
+  CDString32 VolumeId;
+  UInt16 VolumeSequenceNumber;
+  UInt16 MaximumVolumeSequenceNumber;
+  // UInt16 InterchangeLevel;
+  // UInt16 MaximumInterchangeLevel;
+  // UInt32 CharacterSetList;
+  // UInt32 MaximumCharacterSetList;
+  CDString128 VolumeSetId;
+  // charspec DescriptorCharacterSet; // (1/7.2.1)
+  // charspec ExplanatoryCharacterSet; // (1/7.2.1)
+  // CExtent VolumeAbstract;
+  // CExtent VolumeCopyrightNotice;
+  CRegId ApplicationId;
+  CTime RecordingTime;
+  CRegId ImplId;
+  // bytes ImplementationUse
+  // UInt32 PredecessorVolumeDescriptorSequenceLocation;
+  // UInt16 Flags;
+
+  void Parse(const Byte *p);
+};
+
+
 // ECMA 3/10.5
+// UDF 2.2.14 PartitionDescriptor
 
 struct CPartition
 {
-  // UInt16 Flags;
-  UInt16 Number;
-  // CRegId ContentsId;
-  // Byte ContentsUse[128];
-  // UInt32 AccessType;
-
   UInt32 Pos;
   UInt32 Len;
 
-  // CRegId ImplId;
+  UInt16 Flags;
+  UInt16 Number;
+  CRegId ContentsId;
+  // Byte ContentsUse[128];
+  UInt32 AccessType;
+
+  CRegId ImplId;
   // Byte ImplUse[128];
 
-  int VolIndex;
+  // int VolIndex;
   CMap32 Map;
 
-  CPartition(): VolIndex(-1) {}
+  bool IsMetadata;
+
+  CPartition():
+    //  VolIndex(-1),
+    IsMetadata(false) {}
 
   // bool IsNsr() const { return (strncmp(ContentsId.Id, "+NSR0", 5) == 0); }
   // bool IsAllocated() const { return ((Flags & 1) != 0); }
 };
+
+
+// ECMA 4/7.1 lb_addr
 
 struct CLogBlockAddr
 {
   UInt32 Pos;
   UInt16 PartitionRef;
 
-  void Parse(const Byte *buf);
+  void Parse(const Byte *p);
 };
+
 
 enum EShortAllocDescType
 {
@@ -121,16 +174,18 @@ enum EShortAllocDescType
   SHORT_ALLOC_DESC_TYPE_NextExtent = 3
 };
 
+
+// ECMA 4/14.14.1 short_ad
+
 struct CShortAllocDesc
 {
   UInt32 Len;
   UInt32 Pos;
 
-  // 4/14.14.1
   // UInt32 GetLen() const { return Len & 0x3FFFFFFF; }
   // UInt32 GetType() const { return Len >> 30; }
   // bool IsRecAndAlloc() const { return GetType() == SHORT_ALLOC_DESC_TYPE_RecordedAndAllocated; }
-  void Parse(const Byte *buf);
+  void Parse(const Byte *p);
 };
 
 /*
@@ -138,9 +193,12 @@ struct CADImpUse
 {
   UInt16 Flags;
   UInt32 UdfUniqueId;
-  void Parse(const Byte *buf);
+  void Parse(const Byte *p);
 };
 */
+
+// ECMA 4/14.14.2 long_ad
+// UDF 2.3.10.1
 
 struct CLongAllocDesc
 {
@@ -153,29 +211,48 @@ struct CLongAllocDesc
   UInt32 GetLen() const { return Len & 0x3FFFFFFF; }
   UInt32 GetType() const { return Len >> 30; }
   bool IsRecAndAlloc() const { return GetType() == SHORT_ALLOC_DESC_TYPE_RecordedAndAllocated; }
-  void Parse(const Byte *buf);
+  void Parse(const Byte *p);
 };
+
+
+// ECMA 3/10.7 Partition maps
+// UDF 2.2.8-2.2.10 Partition Maps
 
 struct CPartitionMap
 {
+  unsigned PartitionIndex;
+
   Byte Type;
   // Byte Len;
 
-  // Type - 1
-  // UInt16 VolSeqNumber;
+  // ECMA 10.7.2
+  UInt16 VolumeSequenceNumber;
   UInt16 PartitionNumber;
 
-  // Byte Data[256];
+  CRegId PartitionTypeId;
 
-  int PartitionIndex;
+  // UDF 2.2.10 Metadata Partition Map
+  UInt32 MetadataFileLocation;
+  // UInt32 MetadataMirrorFileLocation;
+  // UInt32 MetadataBitmapFileLocation;
+  // UInt32 AllocationUnitSize; // (Blocks)
+  // UInt16 AlignmentUnitSize; // (Blocks)
+  // Byte Flags;
+
+  // Byte Data[256];
+  // CPartitionMap(): PartitionIndex(-1) {}
 };
 
-// ECMA 4/14.6
+
+// ECMA 4/14.6.6
 
 enum EIcbFileType
 {
   ICB_FILE_TYPE_DIR = 4,
-  ICB_FILE_TYPE_FILE = 5
+  ICB_FILE_TYPE_FILE = 5,
+
+  ICB_FILE_TYPE_METADATA = 250,        // 2.2.13.1 Metadata File
+  ICB_FILE_TYPE_METADATA_MIRROR = 251
 };
 
 enum EIcbDescriptorType
@@ -185,6 +262,9 @@ enum EIcbDescriptorType
   ICB_DESC_TYPE_EXTENDED = 2,
   ICB_DESC_TYPE_INLINE = 3
 };
+
+// ECMA 4/14.6
+// UDF 3.3.2
 
 struct CIcbTag
 {
@@ -201,32 +281,34 @@ struct CIcbTag
   void Parse(const Byte *p);
 };
 
+// ECMA 4/14.4.3
 // const Byte FILEID_CHARACS_Existance = (1 << 0);
 const Byte FILEID_CHARACS_Parent = (1 << 3);
 
 struct CFile
 {
+  int ItemIndex;
   // UInt16 FileVersion;
   // Byte FileCharacteristics;
   // CByteBuffer ImplUse;
   CDString Id;
 
-  int ItemIndex;
-
   CFile(): /* FileVersion(0), FileCharacteristics(0), */ ItemIndex(-1) {}
   UString GetName() const { return Id.GetString(); }
 };
+
 
 struct CMyExtent
 {
   UInt32 Pos;
   UInt32 Len;
-  unsigned PartitionRef;
+  unsigned PartitionRef; // index in CLogVol::PartitionMaps
 
   UInt32 GetLen() const { return Len & 0x3FFFFFFF; }
   UInt32 GetType() const { return Len >> 30; }
   bool IsRecAndAlloc() const { return GetType() == SHORT_ALLOC_DESC_TYPE_RecordedAndAllocated; }
 };
+
 
 struct CItem
 {
@@ -235,26 +317,30 @@ struct CItem
   // UInt32 Uid;
   // UInt32 Gid;
   // UInt32 Permissions;
-  // UInt16 FileLinkCount;
+  UInt16 FileLinkCount;
   // Byte RecordFormat;
   // Byte RecordDisplayAttr;
   // UInt32 RecordLen;
   UInt64 Size;
   UInt64 NumLogBlockRecorded;
+  // UInt64 ObjectSize;
+
   CTime ATime;
   CTime MTime;
   CTime AttribTime; // Attribute time : most recent date and time of the day of file creation or modification of the attributes of.
+  CTime CreateTime;
   // UInt32 CheckPoint;
   // CLongAllocDesc ExtendedAttrIcb;
   // CRegId ImplId;
   // UInt64 UniqueId;
 
+  bool IsExtended;
   bool IsInline;
   CByteBuffer InlineData;
   CRecordVector<CMyExtent> Extents;
   CUIntVector SubFiles;
 
-  void Parse(const Byte *buf);
+  void Parse(const Byte *p);
 
   bool IsRecAndAlloc() const
   {
@@ -279,52 +365,64 @@ struct CItem
   bool IsDir() const { return IcbTag.IsDir(); }
 };
 
+
 struct CRef
 {
-  int Parent;
   unsigned FileIndex;
+  int Parent;
 };
 
 
 // ECMA 4 / 14.1
 struct CFileSet
 {
-  CTime RecodringTime;
+  CRecordVector<CRef> Refs;
+
+  CTime RecordingTime;
   // UInt16 InterchangeLevel;
   // UInt16 MaxInterchangeLevel;
-  // UInt32 FileSetNumber;
-  // UInt32 FileSetDescNumber;
-  // CDString32 Id;
-  // CDString32 CopyrightId;
-  // CDString32 AbstractId;
+  UInt32 FileSetNumber;
+  UInt32 FileSetDescNumber;
+  CDString128 LogicalVolumeId;
+  CDString32 Id;
+  CDString32 CopyrightId;
+  CDString32 AbstractId;
 
   CLongAllocDesc RootDirICB;
-  // CRegId DomainId;
+  CRegId DomainId;
   // CLongAllocDesc SystemStreamDirICB;
-
-  CRecordVector<CRef> Refs;
 };
 
 
+/* 8.3 Volume descriptors
+8.4
+A Volume Descriptor Sequence:
+ shall contain one or more Primary Volume Descriptors.
+*/
+
 // ECMA 3/10.6
+// UDF 2.2.4  LogicalVolumeDescriptor
 
 struct CLogVol
 {
-  CDString128 Id;
+  CObjectVector<CPartitionMap> PartitionMaps;
+  CObjectVector<CFileSet> FileSets;
+
   UInt32 BlockSize;
-  // CRegId DomainId;
+  CDString128 Id;
+  CRegId DomainId;
 
   // Byte ContentsUse[16];
   CLongAllocDesc FileSetLocation; // UDF
 
-  // CRegId ImplId;
+  CRegId ImplId;
   // Byte ImplUse[128];
-
-  CObjectVector<CPartitionMap> PartitionMaps;
-  CObjectVector<CFileSet> FileSets;
+  // CExtent IntegritySequenceExtent;
 
   UString GetName() const { return Id.GetString(); }
 };
+
+
 
 struct CProgressVirt
 {
@@ -335,33 +433,11 @@ struct CProgressVirt
 
 class CInArchive
 {
-  IInStream *_stream;
-  CProgressVirt *_progress;
-
-  HRESULT Read(int volIndex, int partitionRef, UInt32 blockPos, UInt32 len, Byte *buf);
-  HRESULT Read(int volIndex, const CLongAllocDesc &lad, Byte *buf);
-  HRESULT ReadFromFile(int volIndex, const CItem &item, CByteBuffer &buf);
-
-  HRESULT ReadFileItem(int volIndex, int fsIndex, const CLongAllocDesc &lad, int numRecurseAllowed);
-  HRESULT ReadItem(int volIndex, int fsIndex, const CLongAllocDesc &lad, int numRecurseAllowed);
-
-  HRESULT Open2();
-  HRESULT FillRefs(CFileSet &fs, unsigned fileIndex, int parent, int numRecurseAllowed);
-
-  UInt64 _processedProgressBytes;
-
-  UInt64 _fileNameLengthTotal;
-  unsigned _numRefs;
-  UInt32 _numExtents;
-  UInt64 _inlineExtentsSize;
-  bool CheckExtent(int volIndex, int partitionRef, UInt32 blockPos, UInt32 len) const;
-
 public:
-  CObjectVector<CPartition> Partitions;
   CObjectVector<CLogVol> LogVols;
-
   CObjectVector<CItem> Items;
   CObjectVector<CFile> Files;
+  CObjectVector<CPartition> Partitions;
 
   unsigned SecLogSize;
   UInt64 PhySize;
@@ -372,19 +448,49 @@ public:
   bool UnexpectedEnd;
   bool NoEndAnchor;
 
+  CObjectVector<CPrimeVol> PrimeVols;
+
+  HRESULT Open(IInStream *inStream, CProgressVirt *progress);
+  void Clear();
+
+  UString GetComment() const;
+  UString GetItemPath(unsigned volIndex, unsigned fsIndex, unsigned refIndex,
+      bool showVolName, bool showFsName) const;
+
+  bool CheckItemExtents(unsigned volIndex, const CItem &item) const;
+
+private:
+  IInStream *_stream;
+  CProgressVirt *_progress;
+
+  HRESULT Read(unsigned volIndex, unsigned partitionRef, UInt32 blockPos, UInt32 len, Byte *buf);
+  HRESULT ReadLad(unsigned volIndex, const CLongAllocDesc &lad, Byte *buf);
+  HRESULT ReadFromFile(unsigned volIndex, const CItem &item, CByteBuffer &buf);
+
+  HRESULT ReadFileItem(unsigned volIndex, unsigned fsIndex, const CLongAllocDesc &lad, int numRecurseAllowed);
+  HRESULT ReadItem(unsigned volIndex, int fsIndex, const CLongAllocDesc &lad, int numRecurseAllowed);
+
+  HRESULT Open2();
+  HRESULT FillRefs(CFileSet &fs, unsigned fileIndex, int parent, int numRecurseAllowed);
+
+  UInt64 _processedProgressBytes;
+
+  UInt64 _fileNameLengthTotal;
+  unsigned _numRefs;
+  UInt32 _numExtents;
+  UInt64 _inlineExtentsSize;
+  bool CheckExtent(unsigned volIndex, unsigned partitionRef, UInt32 blockPos, UInt32 len) const;
+
   void UpdatePhySize(UInt64 val)
   {
     if (PhySize < val)
       PhySize = val;
   }
-  HRESULT Open(IInStream *inStream, CProgressVirt *progress);
-  void Clear();
 
-  UString GetComment() const;
-  UString GetItemPath(int volIndex, int fsIndex, int refIndex,
-      bool showVolName, bool showFsName) const;
-
-  bool CheckItemExtents(int volIndex, const CItem &item) const;
+  void UpdatePhySize(const CExtent &e)
+  {
+    UpdatePhySize(((UInt64)e.Pos << SecLogSize) + e.Len);
+  }
 };
 
 API_FUNC_IsArc IsArc_Udf(const Byte *p, size_t size);

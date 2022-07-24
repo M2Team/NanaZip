@@ -1,4 +1,4 @@
-﻿// SysIconUtils.cpp
+// SysIconUtils.cpp
 
 #include "StdAfx.h"
 
@@ -11,6 +11,9 @@
 #include "SysIconUtils.h"
 
 #include <ShlObj.h>
+
+#define MY_CAST_FUNC  (void(*)())
+// #define MY_CAST_FUNC
 
 #ifndef _UNICODE
 extern bool g_IsNT;
@@ -39,15 +42,16 @@ int GetIconIndexForCSIDL(int csidl)
 }
 
 #ifndef _UNICODE
-typedef int (WINAPI * SHGetFileInfoWP)(LPCWSTR pszPath, DWORD attrib, SHFILEINFOW *psfi, UINT cbFileInfo, UINT uFlags);
+typedef int (WINAPI * Func_SHGetFileInfoW)(LPCWSTR pszPath, DWORD attrib, SHFILEINFOW *psfi, UINT cbFileInfo, UINT uFlags);
 
 static struct CSHGetFileInfoInit
 {
-  SHGetFileInfoWP shGetFileInfoW;
+  Func_SHGetFileInfoW shGetFileInfoW;
   CSHGetFileInfoInit()
   {
-    shGetFileInfoW = (SHGetFileInfoWP)
-    ::GetProcAddress(::GetModuleHandleW(L"shell32.dll"), "SHGetFileInfoW");
+    shGetFileInfoW = (Func_SHGetFileInfoW)
+        MY_CAST_FUNC
+        ::GetProcAddress(::GetModuleHandleW(L"shell32.dll"), "SHGetFileInfoW");
   }
 } g_SHGetFileInfoInit;
 #endif

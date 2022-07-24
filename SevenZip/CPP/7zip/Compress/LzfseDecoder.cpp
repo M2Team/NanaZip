@@ -1,4 +1,4 @@
-﻿// LzfseDecoder.cpp
+// LzfseDecoder.cpp
 
 /*
 This code implements LZFSE data decompressing.
@@ -89,11 +89,8 @@ HRESULT CDecoder::DecodeUncompressed(UInt32 unpackSize)
 
 
 
-HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize)
+HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
 {
-  UInt32 packSize;
-  RINOK(GetUInt32(packSize));
-
   PRF(printf("\nLZVN %7u %7u", unpackSize, packSize));
   
   UInt32 D = 0;
@@ -854,6 +851,16 @@ STDMETHODIMP CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStr
   UInt64 prevOut = 0;
   UInt64 prevIn = 0;
 
+  if (LzvnMode)
+  {
+    const UInt64 unpackSize = *outSize;
+    const UInt64 packSize = *inSize;
+    if (unpackSize > (UInt32)(Int32)-1
+        || packSize > (UInt32)(Int32)-1)
+      return S_FALSE;
+    RINOK(DecodeLzvn((UInt32)unpackSize, (UInt32)packSize));
+  }
+  else
   for (;;)
   {
     const UInt64 pos = m_OutWindowStream.GetProcessedSize();
@@ -889,7 +896,12 @@ STDMETHODIMP CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStr
     if (v == kSignature_LZFSE_V1 || v == kSignature_LZFSE_V2)
       res = DecodeLzfse(cur, (Byte)v);
     else if (v == 0x6E) // 'n'
-      res = DecodeLzvn(cur);
+    {
+      UInt32 packSize;
+      res = GetUInt32(packSize);
+      if (res == S_OK)
+        res = DecodeLzvn(cur, packSize);
+    }
     else if (v == 0x2D) // '-'
       res = DecodeUncompressed(cur);
     else

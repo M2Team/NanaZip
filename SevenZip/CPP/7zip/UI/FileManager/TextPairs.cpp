@@ -1,4 +1,4 @@
-﻿// TextPairs.cpp
+// TextPairs.cpp
 
 #include "StdAfx.h"
 
@@ -104,13 +104,16 @@ void CPairsStorage::Sort() { Pairs.Sort(ComparePairItems, 0); }
 
 int CPairsStorage::FindID(const UString &id, int &insertPos) const
 {
-  int left = 0, right = Pairs.Size();
+  unsigned left = 0, right = Pairs.Size();
   while (left != right)
   {
-    int mid = (left + right) / 2;
-    int compResult = ComparePairIDs(id, Pairs[mid].ID);
+    const unsigned mid = (left + right) / 2;
+    const int compResult = ComparePairIDs(id, Pairs[mid].ID);
     if (compResult == 0)
+    {
+      insertPos = mid; // to disable GCC warning
       return mid;
+    }
     if (compResult < 0)
       right = mid;
     else
@@ -129,7 +132,7 @@ int CPairsStorage::FindID(const UString &id) const
 void CPairsStorage::AddPair(const CTextPair &pair)
 {
   int insertPos;
-  int pos = FindID(pair.ID, insertPos);
+  const int pos = FindID(pair.ID, insertPos);
   if (pos >= 0)
     Pairs[pos] = pair;
   else
@@ -138,7 +141,7 @@ void CPairsStorage::AddPair(const CTextPair &pair)
 
 void CPairsStorage::DeletePair(const UString &id)
 {
-  int pos = FindID(id);
+  const int pos = FindID(id);
   if (pos >= 0)
     Pairs.Delete(pos);
 }
@@ -146,7 +149,7 @@ void CPairsStorage::DeletePair(const UString &id)
 bool CPairsStorage::GetValue(const UString &id, UString &value) const
 {
   value.Empty();
-  int pos = FindID(id);
+  const int pos = FindID(id);
   if (pos < 0)
     return false;
   value = Pairs[pos].Value;
@@ -155,7 +158,7 @@ bool CPairsStorage::GetValue(const UString &id, UString &value) const
 
 UString CPairsStorage::GetValue(const UString &id) const
 {
-  int pos = FindID(id);
+  const int pos = FindID(id);
   if (pos < 0)
     return UString();
   return Pairs[pos].Value;

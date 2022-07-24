@@ -1,4 +1,4 @@
-﻿// UdfHandler.h
+// UdfHandler.h
 
 #ifndef __UDF_HANDLER_H
 #define __UDF_HANDLER_H
@@ -24,9 +24,9 @@ class CHandler:
   public IInArchiveGetStream,
   public CMyUnknownImp
 {
+  CRecordVector<CRef2> _refs2;
   CMyComPtr<IInStream> _inStream;
   CInArchive _archive;
-  CRecordVector<CRef2> _refs2;
 public:
   MY_UNKNOWN_IMP2(IInArchive, IInArchiveGetStream)
   INTERFACE_IInArchive(;)

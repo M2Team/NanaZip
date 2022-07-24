@@ -1,4 +1,4 @@
-﻿// ApfsHandler.cpp
+// ApfsHandler.cpp
 
 #include "StdAfx.h"
 
@@ -31,6 +31,8 @@
 #include "../Compress/CopyCoder.h"
 
 #include "Common/ItemNameUtils.h"
+
+#include "HfsHandler.h"
 
 // if APFS_SHOW_ALT_STREAMS is defined, the handler will show attribute files.
 #define APFS_SHOW_ALT_STREAMS
@@ -934,11 +936,12 @@ struct CItem
   unsigned RefIndex;
   // unsigned  iNode_Index;
 
-  CItem():
-      ParentItemIndex(VI_MINUS1),
-      RefIndex(VI_MINUS1)
-      // iNode_Index(VI_MINUS1)
-      {}
+  void Clear()
+  {
+    Name.Empty();
+    ParentItemIndex = VI_MINUS1;
+    RefIndex = VI_MINUS1;
+  }
 };
 
 
@@ -956,9 +959,9 @@ struct CItem
 #define UNIFIED_ID_SPACE_MARK 0x0800000000000000
 */
 
-/*
 typedef enum
 {
+/*
 INODE_IS_APFS_PRIVATE         = 0x00000001,
 INODE_MAINTAIN_DIR_STATS      = 0x00000002,
 INODE_DIR_STATS_ORIGIN        = 0x00000004,
@@ -973,11 +976,15 @@ INODE_WAS_EVER_CLONED         = 0x00000400,
 INODE_ACTIVE_FILE_TRIMMED     = 0x00000800,
 INODE_PINNED_TO_MAIN          = 0x00001000,
 INODE_PINNED_TO_TIER2         = 0x00002000,
+*/
 INODE_HAS_RSRC_FORK           = 0x00004000,
+/*
 INODE_NO_RSRC_FORK            = 0x00008000,
 INODE_ALLOCATION_SPILLEDOVER  = 0x00010000,
 INODE_FAST_PROMOTE            = 0x00020000,
+*/
 INODE_HAS_UNCOMPRESSED_SIZE   = 0x00040000,
+/*
 INODE_IS_PURGEABLE            = 0x00080000,
 INODE_WANTS_TO_BE_PURGEABLE   = 0x00100000,
 INODE_IS_SYNC_ROOT            = 0x00200000,
@@ -993,10 +1000,12 @@ INODE_CLONED_INTERNAL_FLAGS = \
     | INODE_NO_RSRC_FORK \
     | INODE_HAS_FINDER_INFO \
     | INODE_SNAPSHOT_COW_EXEMPTION),
+*/
 }
 j_inode_flags;
 
 
+/*
 #define APFS_VALID_INTERNAL_INODE_FLAGS \
 ( INODE_IS_APFS_PRIVATE \
 | INODE_MAINTAIN_DIR_STATS \
@@ -1192,10 +1201,11 @@ struct CAttr
 {
   AString Name;
   UInt32 flags;
+  bool dstream_defined;
+  bool NeedShow;
   CByteBuffer Data;
 
   j_dstream dstream;
-  bool dstream_defined;
   UInt64 Id;
 
   bool Is_dstream_OK_for_SymLink() const
@@ -1203,11 +1213,22 @@ struct CAttr
     return dstream_defined && dstream.size <= (1 << 12) && dstream.size != 0;
   }
 
-  CAttr():
-      dstream_defined(false)
-      {}
+  UInt64 GetSize() const
+  {
+    if (dstream_defined) // dstream has more priority
+      return dstream.size;
+    return Data.Size();
+  }
 
-  bool Is_STREAM() const { return (flags & XATTR_DATA_STREAM) != 0; }
+  void Clear()
+  {
+    dstream_defined = false;
+    NeedShow = true;
+    Data.Free();
+    Name.Empty();
+  }
+
+  bool Is_STREAM()   const { return (flags & XATTR_DATA_STREAM) != 0; }
   bool Is_EMBEDDED() const { return (flags & XATTR_DATA_EMBEDDED) != 0; }
 };
 
@@ -1245,16 +1266,22 @@ struct CNode
   MY__gid_t group;
   MY__mode_t mode;
   UInt16 pad1;
-  // UInt64 uncompressed_size;
+  UInt64 uncompressed_size;
 
   j_dstream dstream;
   AString PrimaryName;
+
   bool dstream_defined;
   bool refcnt_defined;
+
   UInt32 refcnt; // j_dstream_id_val_t
   CRecordVector<CExtent> Extents;
   CObjectVector<CAttr> Attrs;
   unsigned SymLinkIndex; // index in Attrs
+  unsigned DecmpfsIndex; // index in Attrs
+  unsigned ResourceIndex; // index in Attrs
+
+  NHfs::CCompressHeader CompressHeader;
 
   CNode():
       ItemIndex(VI_MINUS1),
@@ -1262,11 +1289,16 @@ struct CNode
       // NumItems(0),
       dstream_defined(false),
       refcnt_defined(false),
-      SymLinkIndex(VI_MINUS1)
+      SymLinkIndex(VI_MINUS1),
+      DecmpfsIndex(VI_MINUS1),
+      ResourceIndex(VI_MINUS1)
       {}
 
   bool IsDir() const { return MY_LIN_S_ISDIR(mode); }
   bool IsSymLink() const { return MY_LIN_S_ISLNK(mode); }
+
+  bool Has_UNCOMPRESSED_SIZE() const { return (internal_flags & INODE_HAS_UNCOMPRESSED_SIZE) != 0; }
+
   unsigned Get_Type_From_mode() const { return mode >> 12; }
 
   bool GetSize(unsigned attrIndex, UInt64 &size) const
@@ -1276,6 +1308,12 @@ struct CNode
       if (dstream_defined)
       {
         size = dstream.size;
+        return true;
+      }
+      size = 0;
+      if (Has_UNCOMPRESSED_SIZE())
+      {
+        size = uncompressed_size;
         return true;
       }
       if (!IsSymLink())
@@ -1301,9 +1339,23 @@ struct CNode
         size = dstream.alloced_size;
         return true;
       }
-      if (!IsSymLink())
-        return false;
-      attrIndex = SymLinkIndex;
+      size = 0;
+
+      if (IsSymLink())
+        attrIndex = SymLinkIndex;
+      else
+      {
+        if (!CompressHeader.IsCorrect ||
+            !CompressHeader.IsSupported)
+          return false;
+        const CAttr &attr = Attrs[DecmpfsIndex];
+        if (!CompressHeader.IsMethod_Resource())
+        {
+          size = attr.Data.Size() - CompressHeader.DataPos;
+          return true;
+        }
+        attrIndex = ResourceIndex;
+      }
       if (IsViNotDef(attrIndex))
         return false;
     }
@@ -1339,17 +1391,17 @@ void CNode::Parse(const Byte *p)
   G64 (0x28, access_time);
   G64 (0x30, internal_flags);
   {
-    G32(0x38, nchildren);
-    //  G32(0x38, nlink);
+    G32 (0x38, nchildren);
+    //  G32 (0x38, nlink);
   }
-  // G32(0x3c, default_protection_class);
-  G32(0x40, write_generation_counter);
-  G32(0x44, bsd_flags);
-  G32(0x48, owner);
-  G32(0x4c, group);
-  G16(0x50, mode);
-  // G16(0x52, pad1);
-  // G64 (0x54, uncompressed_size);
+  // G32 (0x3c, default_protection_class);
+  G32 (0x40, write_generation_counter);
+  G32 (0x44, bsd_flags);
+  G32 (0x48, owner);
+  G32 (0x4c, group);
+  G16 (0x50, mode);
+  // G16 (0x52, pad1);
+  G64 (0x54, uncompressed_size);
 }
 
 
@@ -1364,6 +1416,7 @@ struct CRef
   bool IsAltStream() const { return IsViDef(AttrIndex); }
   unsigned GetAttrIndex() const { return AttrIndex; };
  #else
+  // bool IsAltStream() const { return false; }
   unsigned GetAttrIndex() const { return VI_MINUS1; };
  #endif
 };
@@ -1667,6 +1720,7 @@ struct CDatabase
   UInt64 ProgressVal_NumFilesTotal;
   CObjectVector<CByteBuffer> Buffers;
 
+  UInt32 MethodsMask;
   UInt64 GetSize(const UInt32 index) const;
 
   void Clear()
@@ -1679,6 +1733,8 @@ struct CDatabase
     ProgressVal_Prev = 0;
     ProgressVal_NumFilesTotal = 0;
 
+    MethodsMask = 0;
+
     Vols.Clear();
     Refs2.Clear();
     Buffers.Clear();
@@ -1690,6 +1746,12 @@ struct CDatabase
   HRESULT ReadObjectMap(UInt64 oid, CObjectMap &map);
   HRESULT OpenVolume(const CObjectMap &omap, const oid_t fs_oid);
   HRESULT Open2();
+
+  HRESULT GetAttrStream(IInStream *apfsInStream, const CVol &vol,
+      const CAttr &attr, ISequentialInStream **stream);
+
+  HRESULT GetAttrStream_dstream(IInStream *apfsInStream, const CVol &vol,
+      const CAttr &attr, ISequentialInStream **stream);
 
   HRESULT GetStream2(
       IInStream *apfsInStream,
@@ -2070,7 +2132,7 @@ HRESULT CDatabase::OpenVolume(const CObjectMap &omap, const oid_t fs_oid)
     RINOK(ReadMap(ov.paddr, map, 0));
   }
 
-  bool NeedReadSymLink = false;
+  bool needParseAttr = false;
 
   {
     const bool isHashed = apfs.IsHashedName();
@@ -2093,6 +2155,9 @@ HRESULT CDatabase::OpenVolume(const CObjectMap &omap, const oid_t fs_oid)
         RINOK(OpenCallback->SetTotal(&numFiles, NULL));
       }
     }
+
+    CAttr attr;
+    CItem item;
 
     FOR_VECTOR (i, map.Pairs)
     {
@@ -2232,7 +2297,7 @@ HRESULT CDatabase::OpenVolume(const CObjectMap &omap, const oid_t fs_oid)
         if (nameOffset + len != pair.Key.Size())
           return S_FALSE;
 
-        CAttr attr;
+        attr.Clear();
         attr.Name.SetFrom_CalcLen((const char *)p + nameOffset, len);
         if (attr.Name.Len() != len - 1)
           return S_FALSE;
@@ -2287,15 +2352,25 @@ HRESULT CDatabase::OpenVolume(const CObjectMap &omap, const oid_t fs_oid)
           // UnsupportedFeature = true;
           // continue;
         }
+
         CNode &inode = vol.Nodes.Back();
+
         if (attr.Name.IsEqualTo("com.apple.fs.symlink"))
         {
           inode.SymLinkIndex = inode.Attrs.Size();
           if (attr.Is_dstream_OK_for_SymLink())
-            NeedReadSymLink = true;
+            needParseAttr = true;
         }
-        else
-          vol.NumAltStreams++;
+        else if (attr.Name.IsEqualTo("com.apple.decmpfs"))
+        {
+          inode.DecmpfsIndex = inode.Attrs.Size();
+          // if (attr.dstream_defined)
+          needParseAttr = true;
+        }
+        else if (attr.Name.IsEqualTo("com.apple.ResourceFork"))
+        {
+          inode.ResourceIndex = inode.Attrs.Size();
+        }
         inode.Attrs.Add(attr);
         continue;
       }
@@ -2431,7 +2506,10 @@ HRESULT CDatabase::OpenVolume(const CObjectMap &omap, const oid_t fs_oid)
         }
         if (nameOffset + len != pair.Key.Size())
           return S_FALSE;
-        CItem item;
+
+        // CItem item;
+        item.Clear();
+
         item.ParentId = id;
         item.Name.SetFrom_CalcLen((const char *)p + nameOffset, len);
         if (item.Name.Len() != len - 1)
@@ -2471,35 +2549,82 @@ HRESULT CDatabase::OpenVolume(const CObjectMap &omap, const oid_t fs_oid)
     ProgressVal_NumFilesTotal += vol.Items.Size();
   }
 
-  if (NeedReadSymLink)
+
+  if (needParseAttr)
   {
-    /* we read external streams for SymLinks to CAttr.Data
+    /* we read external streams for attributes
        So we can get SymLink for GetProperty(kpidSymLink) later */
     FOR_VECTOR (i, vol.Nodes)
     {
       CNode &node = vol.Nodes[i];
-      if (IsViNotDef(node.SymLinkIndex))
-        continue;
-      CAttr &attr = node.Attrs[(unsigned)node.SymLinkIndex];
-      // FOR_VECTOR (k, node.Attrs) { CAttr &attr = node.Attrs[(unsigned)k]; // for debug
-      if (attr.Data.Size() != 0
-          || !attr.Is_dstream_OK_for_SymLink())
-        continue;
-      const UInt32 size = (UInt32)attr.dstream.size;
-      const int idIndex = vol.SmallNodeIDs.FindInSorted(attr.Id);
-      if (idIndex == -1)
-        continue;
-      CMyComPtr<ISequentialInStream> inStream;
-      const HRESULT res = GetStream2(
-          OpenInStream,
-          &vol.SmallNodes[(unsigned)idIndex].Extents,
-          size, &inStream);
-      if (res == S_OK && inStream)
+
+      FOR_VECTOR (a, node.Attrs)
       {
-        CByteBuffer buf2;
-        buf2.Alloc(size);
-        if (ReadStream_FAIL(inStream, buf2, size) == S_OK)
-          attr.Data = buf2;
+        CAttr &attr = node.Attrs[a];
+        if (attr.Data.Size() != 0 || !attr.dstream_defined)
+          continue;
+        if (a == node.SymLinkIndex)
+        {
+          if (!attr.Is_dstream_OK_for_SymLink())
+            continue;
+        }
+        else
+        {
+          if (a != node.DecmpfsIndex
+              // && a != node.ResourceIndex
+              )
+          continue;
+        }
+        // we don't expect big streams here
+        // largest dstream for Decmpfs attribute is (2Kib+17)
+        if (attr.dstream.size > ((UInt32)1 << 16))
+          continue;
+        CMyComPtr<ISequentialInStream> inStream;
+        const HRESULT res = GetAttrStream_dstream(OpenInStream, vol, attr, &inStream);
+        if (res == S_OK && inStream)
+        {
+          CByteBuffer buf2;
+          const size_t size = (size_t)attr.dstream.size;
+          buf2.Alloc(size);
+          if (ReadStream_FAIL(inStream, buf2, size) == S_OK)
+            attr.Data = buf2;
+
+          ProgressVal_Cur += size;
+          if (OpenCallback)
+          if (ProgressVal_Cur - ProgressVal_Prev >= (1 << 22))
+          {
+
+            RINOK(OpenCallback->SetCompleted(
+                &ProgressVal_NumFilesTotal,
+                &ProgressVal_Cur));
+            ProgressVal_Prev = ProgressVal_Cur;
+          }
+        }
+      }
+
+      if (node.Has_UNCOMPRESSED_SIZE())
+      if (IsViDef(node.DecmpfsIndex))
+      {
+        CAttr &attr = node.Attrs[node.DecmpfsIndex];
+        node.CompressHeader.Parse(attr.Data, attr.Data.Size());
+
+        if (node.CompressHeader.IsCorrect)
+          if (node.CompressHeader.Method < sizeof(MethodsMask) * 8)
+            MethodsMask |= ((UInt32)1 << node.CompressHeader.Method);
+
+        if (node.CompressHeader.IsCorrect
+            && node.CompressHeader.IsSupported
+            && node.CompressHeader.UnpackSize == node.uncompressed_size)
+        {
+          attr.NeedShow = false;
+          if (node.CompressHeader.IsMethod_Resource()
+              && IsViDef(node.ResourceIndex))
+            node.Attrs[node.ResourceIndex].NeedShow = false;
+        }
+        else
+        {
+          vol.UnsupportedFeature = true;
+        }
       }
     }
   }
@@ -2521,9 +2646,10 @@ HRESULT CDatabase::OpenVolume(const CObjectMap &omap, const oid_t fs_oid)
 HRESULT CVol::FillRefs()
 {
   {
+    Refs.Reserve(Items.Size());
     // we fill Refs[*]
     // we
-    // and set Nodes[*].ItemIndex for Nodes that are dictories;
+    // and set Nodes[*].ItemIndex for Nodes that are directories;
     FOR_VECTOR (i, Items)
     {
       CItem &item = Items[i];
@@ -2593,12 +2719,17 @@ HRESULT CVol::FillRefs()
           ref.ParentRefIndex = item.RefIndex;
           for (unsigned k = 0; k < numAttrs; k++)
           {
+            // comment it for debug
+            const CAttr &attr = inode.Attrs[k];
+            if (!attr.NeedShow)
+              continue;
+
             if (k == inode.SymLinkIndex)
               continue;
             ref.AttrIndex = k;
+            NumAltStreams++;
             Refs.Add(ref);
             /*
-            const CAttr &attr = inode.Attrs[k];
             if (attr.dstream_defined)
             {
               const int idIndex = SmallNodeIDs.FindInSorted(attr.Id);
@@ -2780,6 +2911,7 @@ enum
   kpidAddTime,
   kpidGeneration,
   kpidBsdFlags
+  // kpidUncompressedSize
 };
 
 static const CStatProp kProps[] =
@@ -2793,11 +2925,13 @@ static const CStatProp kProps[] =
   { NULL, kpidATime, VT_FILETIME },
   { NULL, kpidChangeTime, VT_FILETIME },
   { "Added Time", kpidAddTime, VT_FILETIME },
+  { NULL, kpidMethod, VT_BSTR },
   { NULL, kpidINode, VT_UI8 },
   { NULL, kpidLinks, VT_UI4 },
   { NULL, kpidSymLink, VT_BSTR },
   { NULL, kpidUserId, VT_UI4 },
   { NULL, kpidGroupId, VT_UI4 },
+  { NULL, kpidCharacts, VT_BSTR },
  #ifdef APFS_SHOW_ALT_STREAMS
   { NULL, kpidIsAltStream, VT_BOOL },
  #endif
@@ -2807,12 +2941,14 @@ static const CStatProp kProps[] =
   { "Written Size", kpidBytesWritten, VT_UI8 },
   { "Read Size", kpidBytesRead, VT_UI8 },
   { "BSD Flags", kpidBsdFlags, VT_UI4 }
+  // , { "Uncompressed Size", kpidUncompressedSize, VT_UI8 }
 };
 
 
 static const Byte kArcProps[] =
 {
   kpidName,
+  kpidCharacts,
   kpidId,
   kpidClusterSize,
   kpidCTime,
@@ -2848,6 +2984,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
       prop = (UInt64)sb.block_count << sb.block_size_Log;
       break;
     case kpidClusterSize: prop = (UInt32)(sb.block_size); break;
+    case kpidCharacts: NHfs::MethodsMaskToProp(MethodsMask, prop); break;
     case kpidMTime:
       if (apfs)
         ApfsTimeToProp(apfs->modified_by[0].timestamp, prop);
@@ -2953,7 +3090,6 @@ STDMETHODIMP CHandler::GetParent(UInt32 index, UInt32 *parent, UInt32 *parentTyp
   const CRef2 &ref2 = Refs2[index];
   const CVol &vol = Vols[ref2.VolIndex];
   UInt32 parentIndex = (UInt32)(Int32)-1;
-  *parentType = NParentType::kDir;
 
   if (IsViDef(ref2.RefIndex))
   {
@@ -3017,6 +3153,7 @@ void CDatabase::GetItemPath(unsigned index, const CNode *inode, NWindows::NCOM::
   {
     const CRef &ref = vol.Refs[ref2.RefIndex];
     unsigned cur = ref.ItemIndex;
+    UString s2;
     if (IsViNotDef(cur))
     {
       if (inode)
@@ -3032,14 +3169,13 @@ void CDatabase::GetItemPath(unsigned index, const CNode *inode, NWindows::NCOM::
           break;
         }
         const CItem &item = vol.Items[(unsigned)cur];
-        UString s2;
         Utf8Name_to_InterName(item.Name, s2);
         // s2 += "a\\b"; // for debug
         s.Insert(0, s2);
         cur = item.ParentItemIndex;
         if (IsViNotDef(cur))
           break;
-        // ParentItemIndex was not set for sch items
+        // ParentItemIndex was not set for such items
         // if (item.ParentId == ROOT_DIR_INO_NUM) break;
         s.InsertAtFront(WCHAR_PATH_SEPARATOR);
       }
@@ -3049,7 +3185,6 @@ void CDatabase::GetItemPath(unsigned index, const CNode *inode, NWindows::NCOM::
     if (IsViDef(ref.AttrIndex) && inode)
     {
       s += ':';
-      UString s2;
       Utf8Name_to_InterName(inode->Attrs[(unsigned)ref.AttrIndex].Name, s2);
       // s2 += "a\\b"; // for debug
       s += s2;
@@ -3110,11 +3245,10 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
     case kpidPrimeName:
     {
-      if (inode
-         #ifdef APFS_SHOW_ALT_STREAMS
-          && !ref.IsAltStream()
-         #endif
-          && !inode->PrimaryName.IsEmpty())
+     #ifdef APFS_SHOW_ALT_STREAMS
+      if (!ref.IsAltStream())
+     #endif
+      if (inode && !inode->PrimaryName.IsEmpty())
       {
         UString s;
         ConvertUTF8ToUnicode(inode->PrimaryName, s);
@@ -3155,6 +3289,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     }
 
     case kpidSymLink:
+     #ifdef APFS_SHOW_ALT_STREAMS
+      if (!ref.IsAltStream())
+     #endif
       if (inode)
       {
         if (inode->IsSymLink() && IsViDef(inode->SymLinkIndex))
@@ -3178,8 +3315,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidSize:
       if (inode)
       {
-        UInt64 size;
-        if (inode->GetSize(ref.GetAttrIndex(), size))
+        UInt64 size = 0;
+        if (inode->GetSize(ref.GetAttrIndex(), size) ||
+            !inode->IsDir())
           prop = size;
       }
       break;
@@ -3188,18 +3326,53 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       if (inode)
       {
         UInt64 size;
-        if (inode->GetPackSize(ref.GetAttrIndex(), size))
+        if (inode->GetPackSize(ref.GetAttrIndex(), size) ||
+            !inode->IsDir())
           prop = size;
       }
       break;
 
+    case kpidMethod:
+     #ifdef APFS_SHOW_ALT_STREAMS
+      if (!ref.IsAltStream())
+     #endif
+      if (inode)
+      {
+        if (inode->CompressHeader.IsCorrect)
+          inode->CompressHeader.MethodToProp(prop);
+        else if (IsViDef(inode->DecmpfsIndex))
+          prop = "decmpfs";
+        else if (!inode->IsDir() && !inode->dstream_defined)
+        {
+          if (inode->IsSymLink())
+          {
+            if (IsViDef(inode->SymLinkIndex))
+              prop = "symlink";
+          }
+          // else prop = "no_dstream";
+        }
+      }
+      break;
+
+    /*
+    case kpidUncompressedSize:
+      if (inode && inode->Has_UNCOMPRESSED_SIZE())
+        prop = inode->uncompressed_size;
+      break;
+    */
+
     case kpidIsDir:
     {
       bool isDir = false;
-      if (inode)
-        isDir = inode->IsDir();
-      else if (item)
-        isDir = item->Val.IsFlags_Dir();
+     #ifdef APFS_SHOW_ALT_STREAMS
+      if (!ref.IsAltStream())
+     #endif
+      {
+        if (inode)
+          isDir = inode->IsDir();
+        else if (item)
+          isDir = item->Val.IsFlags_Dir();
+      }
       prop = isDir;
       break;
     }
@@ -3251,6 +3424,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
    #endif
 
     case kpidCharacts:
+     #ifdef APFS_SHOW_ALT_STREAMS
+      if (!ref.IsAltStream())
+     #endif
       if (inode)
       {
         FLAGS_TO_PROP(g_INODE_Flags, (UInt32)inode->internal_flags, prop);
@@ -3258,6 +3434,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
 
     case kpidBsdFlags:
+     #ifdef APFS_SHOW_ALT_STREAMS
+      if (!ref.IsAltStream())
+     #endif
       if (inode)
       {
         FLAGS_TO_PROP(g_INODE_BSD_Flags, inode->bsd_flags, prop);
@@ -3265,6 +3444,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
 
     case kpidGeneration:
+     #ifdef APFS_SHOW_ALT_STREAMS
+      // if (!ref.IsAltStream())
+     #endif
       if (inode)
         prop = inode->write_generation_counter;
       break;
@@ -3280,6 +3462,9 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
 
     case kpidLinks:
+     #ifdef APFS_SHOW_ALT_STREAMS
+      if (!ref.IsAltStream())
+     #endif
       if (inode && !inode->IsDir())
         prop = (UInt32)inode->nlink;
       break;
@@ -3287,13 +3472,16 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidINode:
      #ifdef APFS_SHOW_ALT_STREAMS
       // here we can disable iNode for alt stream.
-      // if (!ref.IsAltStream())
+      if (!ref.IsAltStream())
      #endif
       if (IsViDef(ref.NodeIndex))
         prop = (UInt32)vol.NodeIDs[ref.NodeIndex];
       break;
 
     case kpidParentINode:
+       #ifdef APFS_SHOW_ALT_STREAMS
+        if (!ref.IsAltStream())
+       #endif
       if (inode)
         prop = (UInt32)inode->parent_id;
       break;
@@ -3351,6 +3539,8 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
+  NHfs::CDecoder decoder;
+
   for (i = 0; i < numItems; i++, currentTotalSize += currentItemSize)
   {
     lps->InSize = currentTotalSize;
@@ -3399,15 +3589,68 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(extractCallback->PrepareOperation(askMode));
     int opRes = NExtract::NOperationResult::kDataError;
 
-    CMyComPtr<ISequentialInStream> inStream;
-    if (GetStream(index, &inStream) == S_OK && inStream)
+    if (IsViDef(ref.NodeIndex))
     {
-      RINOK(copyCoder->Code(inStream, realOutStream, NULL, NULL, progress));
-      opRes = NExtract::NOperationResult::kDataError;
-      if (copyCoderSpec->TotalSize == currentItemSize)
-        opRes = NExtract::NOperationResult::kOK;
-      else if (copyCoderSpec->TotalSize < currentItemSize)
-        opRes = NExtract::NOperationResult::kUnexpectedEnd;
+      const CNode &inode = vol.Nodes[ref.NodeIndex];
+      if (
+        #ifdef APFS_SHOW_ALT_STREAMS
+          !ref.IsAltStream() &&
+        #endif
+             !inode.dstream_defined
+          && inode.Extents.IsEmpty()
+          && inode.Has_UNCOMPRESSED_SIZE()
+          && inode.uncompressed_size == inode.CompressHeader.UnpackSize)
+      {
+        if (inode.CompressHeader.IsSupported)
+        {
+          CMyComPtr<ISequentialInStream> inStreamFork;
+          UInt64 forkSize = 0;
+          const CByteBuffer *decmpfs_Data = NULL;
+
+          if (inode.CompressHeader.IsMethod_Resource())
+          {
+            if (IsViDef(inode.ResourceIndex))
+            {
+              const CAttr &attr = inode.Attrs[inode.ResourceIndex];
+              forkSize = attr.GetSize();
+              GetAttrStream(_stream, vol, attr, &inStreamFork);
+            }
+          }
+          else
+          {
+            const CAttr &attr = inode.Attrs[inode.DecmpfsIndex];
+            decmpfs_Data = &attr.Data;
+          }
+
+          if (inStreamFork || decmpfs_Data)
+          {
+            const HRESULT hres = decoder.Extract(
+                inStreamFork, realOutStream,
+                forkSize,
+                inode.CompressHeader,
+                decmpfs_Data,
+                currentTotalSize, extractCallback,
+                opRes);
+            if (hres != S_FALSE && hres != S_OK)
+              return hres;
+          }
+        }
+        else
+          opRes = NExtract::NOperationResult::kUnsupportedMethod;
+      }
+      else
+      {
+        CMyComPtr<ISequentialInStream> inStream;
+        if (GetStream(index, &inStream) == S_OK && inStream)
+        {
+          RINOK(copyCoder->Code(inStream, realOutStream, NULL, NULL, progress));
+          opRes = NExtract::NOperationResult::kDataError;
+          if (copyCoderSpec->TotalSize == currentItemSize)
+            opRes = NExtract::NOperationResult::kOK;
+          else if (copyCoderSpec->TotalSize < currentItemSize)
+            opRes = NExtract::NOperationResult::kUnexpectedEnd;
+        }
+      }
     }
 
     realOutStream.Release();
@@ -3478,12 +3721,48 @@ STDMETHODIMP CHandler::GetStream(UInt32 index, ISequentialInStream **stream)
     if (inode.IsDir())
       return S_FALSE;
     if (inode.dstream_defined)
+    {
       rem = inode.dstream.size;
+    }
+    else
+    {
+      // return S_FALSE; // check it !!!  How zero size files are stored with dstream_defined?
+    }
+
     extents = &inode.Extents;
   }
   return GetStream2(_stream, extents, rem, stream);
 }
 
+
+
+HRESULT CDatabase::GetAttrStream(IInStream *apfsInStream, const CVol &vol,
+    const CAttr &attr, ISequentialInStream **stream)
+{
+  *stream = NULL;
+  if (!attr.dstream_defined)
+  {
+    CBufInStream *streamSpec = new CBufInStream;
+    CMyComPtr<ISequentialInStream> streamTemp = streamSpec;
+    streamSpec->Init(attr.Data, attr.Data.Size(), (IInArchive *)this);
+    *stream = streamTemp.Detach();
+    return S_OK;
+  }
+  return GetAttrStream_dstream(apfsInStream, vol, attr, stream);
+}
+
+
+HRESULT CDatabase::GetAttrStream_dstream( IInStream *apfsInStream, const CVol &vol,
+    const CAttr &attr, ISequentialInStream **stream)
+{
+  const int idIndex = vol.SmallNodeIDs.FindInSorted(attr.Id);
+  if (idIndex == -1)
+    return S_FALSE;
+  return GetStream2(apfsInStream,
+      &vol.SmallNodes[(unsigned)idIndex].Extents,
+      attr.dstream.size,
+      stream);
+}
 
 
 HRESULT CDatabase::GetStream2(

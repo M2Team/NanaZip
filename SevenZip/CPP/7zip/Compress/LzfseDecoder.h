@@ -1,4 +1,4 @@
-﻿// LzfseDecoder.h
+// LzfseDecoder.h
 
 #ifndef __LZFSE_DECODER_H
 #define __LZFSE_DECODER_H
@@ -41,13 +41,22 @@ class CDecoder:
   HRESULT GetUInt32(UInt32 &val);
 
   HRESULT DecodeUncompressed(UInt32 unpackSize);
-  HRESULT DecodeLzvn(UInt32 unpackSize);
+  HRESULT DecodeLzvn(UInt32 unpackSize, UInt32 packSize);
   HRESULT DecodeLzfse(UInt32 unpackSize, Byte version);
 
   STDMETHOD(CodeReal)(ISequentialInStream *inStream, ISequentialOutStream *outStream,
       const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
 public:
+  bool LzvnMode;
   MY_UNKNOWN_IMP
+
+  CDecoder():
+    LzvnMode(false)
+    {}
+
+  // sizes are checked in Code()
+  // UInt64 GetInputProcessedSize() const { return m_InStream.GetProcessedSize(); }
+  // UInt64 GetOutputProcessedSize() const { return m_OutWindowStream.GetProcessedSize(); }
 
   STDMETHOD(Code)(ISequentialInStream *inStream, ISequentialOutStream *outStream, const UInt64 *inSize,
       const UInt64 *outSize, ICompressProgressInfo *progress);

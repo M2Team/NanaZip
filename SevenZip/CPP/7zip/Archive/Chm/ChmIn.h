@@ -1,4 +1,4 @@
-﻿// Archive/ChmIn.h
+// Archive/ChmIn.h
 
 #ifndef __ARCHIVE_CHM_IN_H
 #define __ARCHIVE_CHM_IN_H
@@ -126,6 +126,7 @@ struct CLzxInfo
   CLzxInfo():
       Version(0),
       ResetIntervalBits(0),
+      WindowSizeBits(0),
       CacheSize(0)
       {}
 

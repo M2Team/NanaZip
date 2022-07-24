@@ -1341,10 +1341,4 @@ Sicuro di voler dividere l'archivio in questo modo?</value>
   <data name="Resource7714" xml:space="preserve">
     <value>Giunzione cartella</value>
   </data>
-  <data name="Resource12200" xml:space="preserve">
-    <value>Integrazione</value>
-  </data>
-  <data name="Resource12201" xml:space="preserve">
-    <value>Apri l'app Impostazioni di Windows per associare i tipi di file con NanaZip</value>
-  </data>
 </root>

@@ -1,4 +1,4 @@
-﻿// Windows/Shell.cpp
+// Windows/Shell.cpp
 
 #include "StdAfx.h"
 
@@ -258,14 +258,21 @@ bool BrowseForFolder(HWND owner, LPCTSTR title,
 
 #ifndef _UNICODE
 
-typedef BOOL (WINAPI * SHGetPathFromIDListWP)(LPCITEMIDLIST pidl, LPWSTR pszPath);
+extern "C" {
+typedef BOOL (WINAPI * Func_SHGetPathFromIDListW)(LPCITEMIDLIST pidl, LPWSTR pszPath);
+typedef LPITEMIDLIST (WINAPI * Func_SHBrowseForFolderW)(LPBROWSEINFOW lpbi);
+}
+
+#define MY_CAST_FUNC  (void(*)())
+// #define MY_CAST_FUNC
 
 bool GetPathFromIDList(LPCITEMIDLIST itemIDList, UString &path)
 {
   path.Empty();
-  SHGetPathFromIDListWP shGetPathFromIDListW = (SHGetPathFromIDListWP)
+  Func_SHGetPathFromIDListW shGetPathFromIDListW = (Func_SHGetPathFromIDListW)
+    MY_CAST_FUNC
     ::GetProcAddress(::GetModuleHandleW(L"shell32.dll"), "SHGetPathFromIDListW");
-  if (shGetPathFromIDListW == 0)
+  if (!shGetPathFromIDListW)
     return false;
   const unsigned len = MAX_PATH * 2;
   bool result = BOOLToBool(shGetPathFromIDListW(itemIDList, path.GetBuf(len)));
@@ -273,14 +280,14 @@ bool GetPathFromIDList(LPCITEMIDLIST itemIDList, UString &path)
   return result;
 }
 
-typedef LPITEMIDLIST (WINAPI * SHBrowseForFolderWP)(LPBROWSEINFOW lpbi);
 
 static bool BrowseForFolder(LPBROWSEINFOW browseInfo, UString &resultPath)
 {
   NWindows::NCOM::CComInitializer comInitializer;
-  SHBrowseForFolderWP shBrowseForFolderW = (SHBrowseForFolderWP)
+  Func_SHBrowseForFolderW shBrowseForFolderW = (Func_SHBrowseForFolderW)
+    MY_CAST_FUNC
     ::GetProcAddress(::GetModuleHandleW(L"shell32.dll"), "SHBrowseForFolderW");
-  if (shBrowseForFolderW == 0)
+  if (!shBrowseForFolderW)
     return false;
   LPITEMIDLIST itemIDList = shBrowseForFolderW(browseInfo);
   if (itemIDList == NULL)

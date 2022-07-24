@@ -508,13 +508,19 @@
     <value>연결</value>
   </data>
   <data name="Resource1090" xml:space="preserve">
-    <value>하드 연결</value>
+    <value>Hard Link</value>
   </data>
   <data name="Resource1091" xml:space="preserve">
     <value>iNode</value>
   </data>
   <data name="Resource1093" xml:space="preserve">
     <value>읽기 전용</value>
+  </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>연결 복사</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>변경된 메타데이터</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
     <value>옵션</value>
@@ -793,6 +799,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>파일 보안 속성을 복원</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>영역 전파. ID 스트림:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Office 파일의 경우</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>파일 덮어쓰기 확인</value>
   </data>
@@ -1026,6 +1038,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>솔리드</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>시간</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>타임스탬프 정밀도:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>보관 수정 시간</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>보관 생성 시간</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>마지막 액세스 시간 저장</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>보관 시간을 최신 파일 시간으로 설정</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>마지막 액세스 시간에 원본 파일 변경 안 함</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>초</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>복사</value>

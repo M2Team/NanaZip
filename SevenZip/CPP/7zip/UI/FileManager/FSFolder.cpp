@@ -1,12 +1,17 @@
-﻿// FSFolder.cpp
+// FSFolder.cpp
 
 #include "StdAfx.h"
 
 #if defined(_MSC_VER)
 #include <winternl.h>
 #else
-// mingw
-#include <ddk/winddk.h>
+#if defined(__GNUC__) && (__GNUC__ >= 10)
+    // new mingw:
+    #include <winternl.h>
+#else
+    // old mingw:
+    #include <ddk/winddk.h>
+#endif
 #endif
 
 #include "../../../Common/ComTry.h"

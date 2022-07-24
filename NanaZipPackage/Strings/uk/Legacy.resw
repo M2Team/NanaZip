@@ -415,7 +415,7 @@
     <value>Вільний простір</value>
   </data>
   <data name="Resource1058" xml:space="preserve">
-    <value>Розмір кластеру</value>
+    <value>Розмір кластера</value>
   </data>
   <data name="Resource1059" xml:space="preserve">
     <value>Мітка</value>
@@ -487,7 +487,7 @@
     <value>Розмір залишку</value>
   </data>
   <data name="Resource1088" xml:space="preserve">
-    <value>Розмір вбудованої заглушки </value>
+    <value>Розмір вбудованої заглушки</value>
   </data>
   <data name="Resource1089" xml:space="preserve">
     <value>Посилання</value>
@@ -500,6 +500,12 @@
   </data>
   <data name="Resource1093" xml:space="preserve">
     <value>Лише для читання</value>
+  </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Посилання копіювання</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Метадані змінилися</value>
   </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Опції</value>
@@ -779,6 +785,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>Відновляти дані безпеки файлу</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Поширювати потік Zone.Id:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Для файлів Office</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Підтвердіть заміну файлу</value>
   </data>
@@ -795,7 +807,7 @@
     <value>{0} байт</value>
   </data>
   <data name="Resource3505" xml:space="preserve">
-    <value>&amp;Автоматично перейменовувати</value>
+    <value>Перейменовувати &amp;автом.</value>
   </data>
   <data name="Resource3700" xml:space="preserve">
     <value>Непідтривуваний метод стиснення для '{0}'.</value>
@@ -1011,7 +1023,34 @@
     <value>За розміром файлу</value>
   </data>
   <data name="Resource4073" xml:space="preserve">
-    <value>Неперервний</value>
+    <value>Не неперервний</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Точність часової позначки:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Зберігати час модифікації</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Зберігати час створення</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Зберігати час останнього доступу</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Встановити час архіву за часом найновішого файлу</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Не змінювати час останнього доступу вихідних файлів</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Копіювати</value>
