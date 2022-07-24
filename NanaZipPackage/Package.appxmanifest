@@ -139,6 +139,7 @@
               <uap:FileType>.gz</uap:FileType>
               <uap:FileType>.gzip</uap:FileType>
               <uap:FileType>.hfs</uap:FileType>
+              <uap:FileType>.hfsx</uap:FileType>
               <uap:FileType>.iso</uap:FileType>
               <uap:FileType>.lha</uap:FileType>
               <uap:FileType>.liz</uap:FileType>
