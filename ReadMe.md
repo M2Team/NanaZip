@@ -62,7 +62,7 @@ requests and issues are welcome.**
 
 ## System Requirements
 
-- Supported OS: Windows 10, version 1809 or later
+- Supported OS: Windows 10 Version 2004 (Build 19041) or later
 - Supported Platforms: x86, x86-64(AMD64) and ARM64.
 
 ## Download and Installation
