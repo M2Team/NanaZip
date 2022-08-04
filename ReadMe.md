@@ -24,7 +24,7 @@ requests and issues are welcome.**
 
 ## Features
 
-- Inherit all features from 7-Zip 22.00.
+- Inherit all features from 7-Zip 22.01.
 - Packaging with MSIX for modern deployment experience.
 - Support the context menu in Windows 10/11 File Explorer.
 - Enable NSIS script decompiling support for the NSIS archives. (Merged from 
