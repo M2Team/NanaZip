@@ -1,4 +1,4 @@
-/*
+﻿/*
    LZ4F - LZ4-Frame library
    Header File
    Copyright (C) 2011-2020, Yann Collet.
