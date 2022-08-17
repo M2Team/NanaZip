@@ -1,4 +1,4 @@
-// CompressDialog.cpp
+﻿// CompressDialog.cpp
 
 #include "StdAfx.h"
 

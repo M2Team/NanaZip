@@ -1,4 +1,4 @@
-// HfsHandler.h
+﻿// HfsHandler.h
 
 #ifndef __HFS_HANDLER_H
 #define __HFS_HANDLER_H

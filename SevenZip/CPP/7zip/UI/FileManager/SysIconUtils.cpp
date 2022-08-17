@@ -1,4 +1,4 @@
-// SysIconUtils.cpp
+﻿// SysIconUtils.cpp
 
 #include "StdAfx.h"
 

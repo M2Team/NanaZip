@@ -1,4 +1,4 @@
-// Windows/SecurityUtils.cpp
+﻿// Windows/SecurityUtils.cpp
 
 #include "StdAfx.h"
 

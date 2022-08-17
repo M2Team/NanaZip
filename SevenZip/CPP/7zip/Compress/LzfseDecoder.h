@@ -1,4 +1,4 @@
-// LzfseDecoder.h
+﻿// LzfseDecoder.h
 
 #ifndef __LZFSE_DECODER_H
 #define __LZFSE_DECODER_H

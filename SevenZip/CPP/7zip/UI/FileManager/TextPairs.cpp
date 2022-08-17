@@ -1,4 +1,4 @@
-// TextPairs.cpp
+﻿// TextPairs.cpp
 
 #include "StdAfx.h"
 
