@@ -24,6 +24,9 @@
     <DisplayName>NanaZip Preview</DisplayName>
     <PublisherDisplayName>Kenji Mouri</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
+    <uap10:PackageIntegrity>
+      <uap10:Content Enforcement="on" />
+    </uap10:PackageIntegrity>
     <virtualization:FileSystemWriteVirtualization>
       <virtualization:ExcludedDirectories>
         <virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)</virtualization:ExcludedDirectory>
