@@ -45,6 +45,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
         }
     }
 
+#ifdef NDEBUG
     if (IsWindows8Point1OrGreater())
     {
         PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = { 0 };
@@ -57,6 +58,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
             return FALSE;
         }
     }
+#endif // NDEBUG
 
     if (IsWindows10OrGreater())
     {
