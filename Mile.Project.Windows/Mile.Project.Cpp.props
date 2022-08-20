@@ -157,6 +157,8 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <ControlFlowGuard Condition="'$(Configuration)'=='Release'">Guard</ControlFlowGuard>
+      <GuardEHContMetadata Condition="'$(Platform)'=='ARM64' Or '$(Platform)'=='x64'">true</GuardEHContMetadata>
+      <GuardSignedReturns Condition="'$(Platform)'=='ARM64'">true</GuardSignedReturns>
     </ClCompile>
     <Link>
       <CETCompat Condition="'$(Platform)'=='Win32' Or '$(Platform)'=='x64'">true</CETCompat>
@@ -164,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <PackageReference Include="VC-LTL" Condition="'$(MileProjectEnableVCLTLSupport)' == 'true'">
-      <Version>5.0.5</Version>
+      <Version>5.0.6-Beta1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.CppWinRT" Condition="'$(MileProjectEnableCppWinRTSupport)' == 'true'">
       <Version>2.0.220418.1</Version>
