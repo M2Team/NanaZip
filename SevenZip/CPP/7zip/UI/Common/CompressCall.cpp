@@ -243,14 +243,15 @@ HRESULT CompressFiles(
         params += fo.Method;
       }
 
-      if (fo.Level)
+      /* Level = 0 is meaningful */
+      if (fo.Level != static_cast<UInt32>(-1))
       {
         params += " -mx=";
         ConvertUInt32ToString(fo.Level, temp);
         params += temp;
       }
 
-      if (fo.Dictionary)
+      if (fo.Dictionary && fo.Dictionary != static_cast<UInt32>(-1))
       {
         params += " -md=";
         ConvertUInt32ToString(fo.Dictionary, temp);
@@ -258,7 +259,7 @@ HRESULT CompressFiles(
         params += "b";
       }
 
-      if (fo.BlockLogSize)
+      if (fo.BlockLogSize && fo.BlockLogSize != static_cast<UInt32>(-1))
       {
         params += " -ms=";
         ConvertUInt64ToString(1ULL << fo.BlockLogSize, temp);
@@ -266,7 +267,7 @@ HRESULT CompressFiles(
         params += "b";
       }
 
-      if (fo.NumThreads)
+      if (fo.NumThreads && fo.NumThreads != static_cast<UInt32>(-1))
       {
         params += " -mmt=";
         ConvertUInt32ToString(fo.NumThreads, temp);
