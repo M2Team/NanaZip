@@ -8,6 +8,10 @@
 
 #include "../Windows/FileIO.h"
 
+#ifdef _SFX
+#define LANG_NO_WINRT
+#endif
+
 void CLang::Clear() throw()
 {
 
@@ -26,7 +30,7 @@ bool CLang::Open(CFSTR fileName, const char *id)
     return true;
 }
 
-#ifdef _SFX
+#ifdef LANG_NO_WINRT
 #include "../Windows/ResourceString.h"
 #else
 #include <winrt/windows.foundation.h>
@@ -36,7 +40,7 @@ bool CLang::Open(CFSTR fileName, const char *id)
 
 #include <map>
 
-#ifdef _SFX
+#ifdef LANG_NO_WINRT
 std::map<UInt32, UString> g_LanguageMap;
 #else
 std::map<UInt32, winrt::hstring> g_LanguageMap;
@@ -47,7 +51,7 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
     auto Iterator = g_LanguageMap.find(id);
     if (Iterator == g_LanguageMap.end())
     {
-#ifdef _SFX
+#ifdef LANG_NO_WINRT
         UString Content = NWindows::MyLoadString(id);
         if (Content.IsEmpty())
         {
@@ -78,7 +82,7 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
 #endif    
     }
 
-#ifdef _SFX
+#ifdef LANG_NO_WINRT
     return Iterator->second;
 #else
     return Iterator->second.data();
