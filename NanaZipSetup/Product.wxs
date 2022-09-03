@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?if $(var.Platform) = x86 ?>
+  <?define upgradeCode = "C23EAF1E-2EC1-491A-AA65-57149E095AFD" ?>
+  <?define isWin64 = "no" ?>
+  <?define installDir = "ProgramFilesFolder" ?>
+
+  <?elseif $(var.Platform) = x64 ?>
+  <?define upgradeCode = "92A1E85A-6147-4474-83A0-9DD09B9B8692" ?>
+  <?define isWin64 = "yes" ?>
+  <?define installDir = "ProgramFiles64Folder" ?>
+
+  <?else ?>
+  <?error Unsupported platform ?>
+  <?endif ?>
+
+  <?define sourcePath = "$(var.SolutionDir)\Output\Binaries\$(var.Configuration)\NanaZipPackage\$(var.Platform)" ?>
+
+  <Product
+    Id="*"
+    Name="NanaZip"
+    Language="1033"
+    Version="2.0.313.0"
+    Manufacturer="Kenji Mouri"
+    UpgradeCode="$(var.upgradeCode)">
+
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <?if $(var.Platform) = x86 ?>
+    <Condition Message="32-bit setup can only run on a 32-bit OS.">Installed OR (NOT VersionNT64)</Condition>
+    <?endif ?>
+
+    <Feature Id="ProductFeature" Title="NanaZip" AllowAdvertise="no" Absent="disallow">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="SfxComponents" />
+    </Feature>
+
+    <Feature Id="ShellExtensionFeature" Title="NanaZip Shell Extension" AllowAdvertise="no">
+      <ComponentGroupRef Id="ShellExtensionComponents" />
+    </Feature>
+
+    <!--<UIRef Id="WixUI_FeatureTree" />-->
+
+    <PropertyRef Id="ARPPRODUCTICON" />
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="$(var.installDir)">
+        <Directory Id="INSTALLFOLDER" Name="NanaZip" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="TARGETDIR">
+      <Directory Id="ProgramMenuFolder" />
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <Icon Id="NanaZip.ico" SourceFile="$(var.SolutionDir)\Assets\NanaZip.ico" />
+    <Property Id="ARPPRODUCTICON" Value="NanaZip.ico" />
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER" Source="$(var.sourcePath)">
+      <Component Win64="$(var.isWin64)">
+        <File Name="NanaZip.exe" />
+        <Shortcut Id="NanaZip" Directory="ProgramMenuFolder" Name="NanaZip" WorkingDirectory="INSTALLFOLDER" Advertise="yes" Icon="NanaZip.ico" />
+      </Component>
+      <Component Win64="$(var.isWin64)">
+        <File Name="NanaZipC.exe" />
+      </Component>
+      <Component Win64="$(var.isWin64)">
+        <File Name="NanaZipCore.dll" />
+      </Component>
+      <Component Win64="$(var.isWin64)">
+        <File Name="NanaZipG.exe" />
+      </Component>
+      <Component Win64="$(var.isWin64)">
+        <File Name="resources.pri" DefaultLanguage="!(bind.fileLanguage.NanaZip.exe)" DefaultVersion="!(bind.fileVersion.NanaZip.exe)" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="SfxComponents" Directory="INSTALLFOLDER" Source="$(var.sourcePath)">
+      <!-- We want our SFX files to stay along with EXE files so we have to specify a matching Win64 attribute -->
+      <Component Win64="$(var.isWin64)">
+        <File Name="NanaZipConsole.sfx" />
+      </Component>
+      <Component Win64="$(var.isWin64)">
+        <File Name="NanaZipWindows.sfx" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ShellExtensionComponents" Directory="INSTALLFOLDER" Source="$(var.sourcePath)">
+      <Component Win64="$(var.isWin64)">
+        <File Name="NanaZipShellExtension.dll">
+          <Class Id="469D94E9-6AF4-4395-B396-99B1308F8CE5" Context="InprocServer32" ThreadingModel="apartment" />
+        </File>
+      </Component>
+      <Component Win64="$(var.isWin64)">
+        <RegistryValue Root="HKCR" Key="*\Shell\NanaZipShellExtension" Name="ExplorerCommandHandler" Type="string" Value="{469D94E9-6AF4-4395-B396-99B1308F8CE5}" />
+      </Component>
+      <Component Win64="$(var.isWin64)">
+        <RegistryValue Root="HKCR" Key="Directory\Shell\NanaZipShellExtension" Name="ExplorerCommandHandler" Type="string" Value="{469D94E9-6AF4-4395-B396-99B1308F8CE5}" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
