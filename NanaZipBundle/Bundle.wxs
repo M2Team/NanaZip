@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+  <Bundle
+    Name="NanaZip"
+    Version="2.0.313.0"
+    Manufacturer="Kenji Mouri"
+    UpgradeCode="6c83627d-24a4-4cf4-81fd-3caac89b69d1">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <bal:WixStandardBootstrapperApplication
+        LicenseUrl="https://github.com/M2Team/NanaZip/blob/main/License.md"
+        ShowVersion="yes"
+        SuppressOptionsUI="yes"
+        LogoFile="$(var.SolutionDir)\Assets\NanaZip.png" />
+    </BootstrapperApplicationRef>
+
+    <Chain>
+      <MsiPackage Id="NanaZip_x86" InstallCondition="NOT VersionNT64" SourceFile="$(var.SolutionDir)\Output\Binaries\Setup\$(var.Configuration)\x86\NanaZipSetup.msi" />
+      <MsiPackage Id="NanaZip_x64" InstallCondition="VersionNT64" SourceFile="$(var.SolutionDir)\Output\Binaries\Setup\$(var.Configuration)\x64\NanaZipSetup.msi" />
+    </Chain>
+  </Bundle>
+</Wix>

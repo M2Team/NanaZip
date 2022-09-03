@@ -128,6 +128,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "NanaZipSetup", "NanaZipSetu
 		{9A119A76-97CB-4490-B8C2-651576CB9302} = {9A119A76-97CB-4490-B8C2-651576CB9302}
 	EndProjectSection
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "NanaZipBundle", "NanaZipBundle\NanaZipBundle.wixproj", "{5D871FD0-EBC2-43F6-8BD8-BB7722624500}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -408,6 +410,18 @@ Global
 		{CB53F1CA-3FD2-4394-A635-15161C26668A}.Release|x64.Build.0 = Release|x64
 		{CB53F1CA-3FD2-4394-A635-15161C26668A}.Release|x86.ActiveCfg = Release|x86
 		{CB53F1CA-3FD2-4394-A635-15161C26668A}.Release|x86.Build.0 = Release|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Debug|ARM64.ActiveCfg = Debug|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Debug|ARM64.Build.0 = Debug|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Debug|x64.ActiveCfg = Debug|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Debug|x64.Build.0 = Debug|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Debug|x86.ActiveCfg = Debug|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Debug|x86.Build.0 = Debug|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Release|ARM64.ActiveCfg = Release|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Release|ARM64.Build.0 = Release|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Release|x64.ActiveCfg = Release|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Release|x64.Build.0 = Release|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Release|x86.ActiveCfg = Release|x86
+		{5D871FD0-EBC2-43F6-8BD8-BB7722624500}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
