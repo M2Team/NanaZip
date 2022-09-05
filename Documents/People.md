@@ -11,6 +11,10 @@
 
 ## Logo Designers
 
+### 2.x Series
+
+- Shomnipotence, https://github.com/Shomnipotence
+
 ### 1.x Series
 
 - Alice (四月天), https://twitter.com/alice_alice49
