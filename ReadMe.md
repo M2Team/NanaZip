@@ -59,6 +59,9 @@ requests and issues are welcome.**
   - Disable dynamic code generation prevents generating malicious code at
     runtime.
   - Block loading unexpected libraries from remote sources at runtime.
+  - Enable Package Integrity.
+  - Enable EH Continuation Metadata.
+  - Enable Signed Returns.
 
 ## System Requirements
 

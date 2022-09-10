@@ -2,6 +2,28 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 2.0 Preview 2 (2.0.376.0)**
+
+- Update 7-Zip to 22.01. (Thanks to Igor Pavlov. Noticed by HylianSteel, 
+  Random-name-hi and DJxSpeedy.)
+- Add hfsx to file type association. (Suggested by AndromedaMelody.)
+- Update the minimum system requirement to Windows 10 Version 2004 (Build 19041)
+  or later for solving issues in the XAML Islands.
+- Update LZ4 to v1.9.4.
+- Enable Package Integrity. (Contributed by AndromedaMelody.)
+- Don't enable "Disable dynamic code generation" mitigation in Debug builds for
+  solving codec load error issue. (Thanks to AndromedaMelody.)
+- Continue to enable several security mitigations.
+  - Enable EH Continuation Metadata.
+  - Enable Signed Returns.
+- Generate resource identities for package manifest manually. (Suggested by 
+  AndromedaMelody.)
+- Add workaround for NanaZip not appearing in classic context menu. 
+  (Contributed by dinhngtu.)
+- Check 7z compression parameter validity upon start of compression.
+  (Contributed by dinhngtu.)
+- Update icons. (Designed by Shomnipotence.)
+
 **NanaZip 2.0 Preview 1 (2.0.313.0)**
 
 - Fix the shell extension issue which cause Everything crashed. (Thanks to 
