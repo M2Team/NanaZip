@@ -6,6 +6,7 @@
 
 ## Development Team
 
+- AndromedaMelody, https://github.com/AndromedaMelody
 - Kenji Mouri, https://github.com/MouriNaruto
 - Sakura Neko, https://github.com/SakuraNeko
 
@@ -25,7 +26,6 @@
 
 ## Contributors
 
-- AndromedaMelody, https://github.com/AndromedaMelody
 - Blueberryy, https://github.com/Blueberryy
 - ChuckMichael, https://github.com/ChuckMichael
 - dinhngtu, https://github.com/dinhngtu
