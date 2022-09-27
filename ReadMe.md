@@ -90,7 +90,8 @@ You also can download the MSIX Package in
 [GitHub Releases](https://github.com/M2Team/NanaZip/releases).
 
 After you have downloaded the MSIX Package, you can double click to install it,
-or you can execute the following command in the Command Prompt which is run as the Administrator.
+or you can execute the following command in the PowerShell which is run as 
+the Administrator.
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
 
@@ -98,6 +99,29 @@ P.S. All needed dependencies are included in the MSIX Package of NanaZip
 because we known that it's very difficult for users who do not have access to 
 the store to get our dependency packages, and we want to be robust and 
 deployable everywhere.
+
+If you want to install NanaZip for all users, you can execute the following 
+command in the PowerShell which is run as the Administrator.
+
+> PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxProvisionedPackage -Online -PackagePath `The path of the MSIX package` -SkipLicense
+
+You also can execute the following command in the Command Prompt which is run
+as the Administrator instead.
+
+> DISM.exe /Online /Add-ProvisionedAppxPackage /PackagePath:`The path of the MSIX package` /SkipLicense
+
+For more information, please read documents for [PowerShell](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps) and 
+[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-app-package--appx-or-appxbundle--servicing-command-line-options?view=windows-11)
+
+P.S. Due to the policy from Microsoft Store, you need to run NanaZip with the
+internet connection at the first time for getting the license if you install
+NanaZip without the internet connection, otherwise Windows won't launch NanaZip
+properly.
+
+If you want to uninstall NanaZip you installed for all users, you can execute
+the following command in the PowerShell which is run as the Administrator.
+
+> Get-AppxPackage -Name *40174MouriNaruto.NanaZip* -AllUsers | Remove-AppxPackage -AllUsers -Confirm
 
 ## Known issues
 
