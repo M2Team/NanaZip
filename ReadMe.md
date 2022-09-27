@@ -91,7 +91,7 @@ You also can download the MSIX Package in
 
 After you have downloaded the MSIX Package, you can double click to install it,
 or you can execute the following command in the PowerShell which is run as 
-the Administrator.
+administrator.
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
 
@@ -101,12 +101,12 @@ the store to get our dependency packages, and we want to be robust and
 deployable everywhere.
 
 If you want to install NanaZip for all users, you can execute the following 
-command in the PowerShell which is run as the Administrator.
+command in the PowerShell which is run as administrator.
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxProvisionedPackage -Online -PackagePath `The path of the MSIX package` -SkipLicense
 
 You also can execute the following command in the Command Prompt which is run
-as the Administrator instead.
+as administrator instead.
 
 > DISM.exe /Online /Add-ProvisionedAppxPackage /PackagePath:`The path of the MSIX package` /SkipLicense
 
@@ -119,7 +119,7 @@ NanaZip without the internet connection, otherwise Windows won't launch NanaZip
 properly.
 
 If you want to uninstall NanaZip you installed for all users, you can execute
-the following command in the PowerShell which is run as the Administrator.
+the following command in the PowerShell which is run as administrator.
 
 > Get-AppxPackage -Name *40174MouriNaruto.NanaZip* -AllUsers | Remove-AppxPackage -AllUsers -Confirm
 
