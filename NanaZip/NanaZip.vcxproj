@@ -8,7 +8,13 @@
     <RootNamespace>NanaZip</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZip.manifest</MileProjectManifestFile>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <MinimalCoreWin>false</MinimalCoreWin>
+    <DefaultLanguage>en</DefaultLanguage>
+    <AppContainerApplication>false</AppContainerApplication>
+    <AppxPackage>false</AppxPackage>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
   </PropertyGroup>
@@ -27,21 +33,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="Assets\ParentFolder.bmp" />
-    <Image Include="Assets\Toolbar\Add_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Add_32x32.bmp" />
-    <Image Include="Assets\Toolbar\Copy_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Copy_32x32.bmp" />
-    <Image Include="Assets\Toolbar\Delete_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Delete_32x32.bmp" />
-    <Image Include="Assets\Toolbar\Extract_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Extract_32x32.bmp" />
-    <Image Include="Assets\Toolbar\Info_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Info_32x32.bmp" />
-    <Image Include="Assets\Toolbar\Move_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Move_32x32.bmp" />
-    <Image Include="Assets\Toolbar\Test_24x24.bmp" />
-    <Image Include="Assets\Toolbar\Test_32x32.bmp" />
+    <Image Include="Assets\ParentFolder.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Add_24x24.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Add_32x32.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Copy_24x24.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Copy_32x32.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Delete_24x24.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Delete_32x32.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Extract_24x24.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Extract_32x32.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Info_24x24.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Info_32x32.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Move_24x24.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Move_32x32.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Test_24x24.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\Toolbar\Test_32x32.bmp">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
@@ -193,6 +229,7 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\VerCtrl.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.cpp" />
     <ClCompile Include="AboutDialog.cpp" />
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
@@ -369,12 +406,39 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.h" />
     <ClInclude Include="AboutDialog.h" />
     <ClInclude Include="Mile.Project.Properties.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZip.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="App.xaml.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="App.idl">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Xaml">
+      <Version>1.0.361</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

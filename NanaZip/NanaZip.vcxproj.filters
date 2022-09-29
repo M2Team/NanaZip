@@ -569,6 +569,8 @@
     <ClCompile Include="AboutDialog.cpp">
       <Filter>AboutDialog</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\MyWindowsNew.h">
@@ -1091,6 +1093,7 @@
     <ClInclude Include="AboutDialog.h">
       <Filter>AboutDialog</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZip.manifest" />
@@ -1099,5 +1102,8 @@
     <ResourceCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\resource.rc">
       <Filter>SevenZip\Spec</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
 </Project>

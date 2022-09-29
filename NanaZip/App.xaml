@@ -1,0 +1,12 @@
+﻿<MileXaml:Application
+  x:Class="NanaZip.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:MileXaml="using:Mile.Xaml"
+  xmlns:local="using:NanaZip">
+  <MileXaml:Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries />
+    </ResourceDictionary>
+  </MileXaml:Application.Resources>
+</MileXaml:Application>

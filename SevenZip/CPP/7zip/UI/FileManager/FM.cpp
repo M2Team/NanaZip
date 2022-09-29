@@ -37,6 +37,9 @@
 #include "StringUtils.h"
 #include "ViewSettings.h"
 
+#include "../../../../../NanaZip/pch.h"
+#include "../../../../../NanaZip/App.h"
+
 using namespace NWindows;
 using namespace NFile;
 using namespace NFind;
@@ -515,6 +518,9 @@ static int WINAPI WinMain2(int nCmdShow)
   #endif
   // Maybe needs CoInitializeEx also ?
   // NCOM::CComInitializer comInitializer;
+
+  winrt::NanaZip::App app =
+      winrt::make<winrt::NanaZip::implementation::App>();
 
   UString commandsString;
   // MessageBoxW(0, GetCommandLineW(), L"", 0);
