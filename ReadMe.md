@@ -167,13 +167,17 @@ the following command in the PowerShell which is run as administrator.
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
   - [x] Add i18n support for Self Extracting Executables.
 - 2.x Series (2023 Q3)
-  - [ ] Add the UI stack based on XAML Islands which is used in NanaZip.
-  - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
-        Mica material, dark and light mode support.
+  - [x] Provide the new icons.
+  - [x] Start modernizing the core implementation.
+  - [x] Add the UI stack based on XAML Islands which is used in NanaZip.
+  - [x] Start modernizing the UI with XAML Islands with the Windows 11 control
+        style, dark and light mode support.
+  - [ ] Continue to modernize the UI with XAML Islands with the Windows 11 
+        control style, dark and light mode support.
   - [ ] Full Accessibility support in all UI components.
   - [ ] Migrate configurations from registry to json. (Suggested by 
         AndromedaMelody.)
-  - [ ] Try to modernize the core implementation.
+  - [ ] Continue to modernize the core implementation.
   - [ ] Try to Windows Runtime component for interoperability.
   - [ ] Provide NanaZip Installer for simplify the deployment.
 - 3.x Series (2024 Q3)
