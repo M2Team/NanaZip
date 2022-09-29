@@ -162,7 +162,7 @@ the following command in the PowerShell which is run as administrator.
   - [x] Reimplement the about dialog with Task Dialog.
   - [x] Modernize the message boxes with Task Dialog.
 - 1.2 (May 11, 2022)
-  - [x] Add Per-Monitor DPI-Aware support for Self Extracting Executables.
+  - [x] Add Per-Monitor DPI-Aware support for all UI components.
   - [x] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
   - [x] Add i18n support for Self Extracting Executables.
@@ -170,7 +170,7 @@ the following command in the PowerShell which is run as administrator.
   - [ ] Add the UI stack based on XAML Islands which is used in NanaZip.
   - [ ] Modernize the UI with XAML Islands with the Windows 11 control style, 
         Mica material, dark and light mode support.
-  - [ ] Full High DPI and Accessibility support in all UI components.
+  - [ ] Full Accessibility support in all UI components.
   - [ ] Migrate configurations from registry to json. (Suggested by 
         AndromedaMelody.)
   - [ ] Try to modernize the core implementation.
