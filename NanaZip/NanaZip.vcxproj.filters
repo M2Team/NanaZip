@@ -1106,4 +1106,7 @@
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Include="AboutPage.xaml" />
+  </ItemGroup>
 </Project>

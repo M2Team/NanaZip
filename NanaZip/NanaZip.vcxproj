@@ -229,6 +229,10 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\VerCtrl.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.cpp" />
     <ClCompile Include="AboutDialog.cpp" />
+    <ClCompile Include="AboutPage.cpp">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -405,6 +409,10 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\UpdateCallback100.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\ViewSettings.h" />
     <ClInclude Include="AboutDialog.h" />
+    <ClInclude Include="AboutPage.h">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="Mile.Project.Properties.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
@@ -426,6 +434,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Midl Include="AboutPage.idl">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
@@ -439,6 +451,11 @@
     <PackageReference Include="Mile.Xaml">
       <Version>1.0.361</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

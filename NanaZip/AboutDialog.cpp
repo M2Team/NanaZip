@@ -13,25 +13,92 @@
 #include <CommCtrl.h>
 #pragma comment(lib,"comctl32.lib")
 
-#include <string>
-
-#include "../SevenZip/CPP/Common/Common.h"
-#include "Mile.Project.Properties.h"
-#include "../SevenZip/C/CpuArch.h"
-#include "../SevenZip/CPP/7zip/UI/Common/LoadCodecs.h"
-#include "../SevenZip/CPP/7zip/UI/FileManager/LangUtils.h"
-#include "../SevenZip/CPP/7zip/UI/FileManager/resourceGui.h"
-
-extern CCodecs* g_CodecsObj;
-
-#define IDD_ABOUT  2900
-#define IDT_ABOUT_INFO  2901
-#define IDB_ABOUT_HOMEPAGE   110
+#include "pch.h"
+#include "AboutPage.h"
 
 void NanaZip::FileManager::AboutDialog::Show(
     _In_opt_ HWND ParentWindowHandle)
 {
-    std::wstring HomePageButton = std::wstring(
+    winrt::NanaZip::AboutPage XamlWindowContent =
+        winrt::make<winrt::NanaZip::implementation::AboutPage>();
+
+    HWND WindowHandle = ::CreateWindowExW(
+        WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
+        L"Mile.Xaml.ContentWindow",
+        nullptr,
+        WS_CAPTION | WS_SYSMENU,
+        CW_USEDEFAULT,
+        0,
+        CW_USEDEFAULT,
+        0,
+        ParentWindowHandle,
+        nullptr,
+        ::GetModuleHandleW(nullptr),
+        winrt::get_abi(XamlWindowContent));
+    if (!WindowHandle)
+    {
+        return;
+    }
+
+    HMENU MenuHandle = ::GetSystemMenu(WindowHandle, FALSE);
+    if (MenuHandle)
+    {
+        ::RemoveMenu(MenuHandle, 0, MF_SEPARATOR);
+        ::RemoveMenu(MenuHandle, SC_RESTORE, MF_BYCOMMAND);
+        ::RemoveMenu(MenuHandle, SC_SIZE, MF_BYCOMMAND);
+        ::RemoveMenu(MenuHandle, SC_MINIMIZE, MF_BYCOMMAND);
+        ::RemoveMenu(MenuHandle, SC_MAXIMIZE, MF_BYCOMMAND);
+        ::RemoveMenu(MenuHandle, SC_TASKLIST, MF_BYCOMMAND);
+    }
+
+    const int Width = 768;
+    const int Height = 400;
+
+    UINT DpiValue = ::GetDpiForWindow(WindowHandle);
+
+    int ScaledWidth = ::MulDiv(Width, DpiValue, USER_DEFAULT_SCREEN_DPI);
+    int ScaledHeight = ::MulDiv(Height, DpiValue, USER_DEFAULT_SCREEN_DPI);
+
+    RECT ParentWindowRect;
+    ::GetWindowRect(ParentWindowHandle, &ParentWindowRect);
+
+    int ParentWidth = ParentWindowRect.right - ParentWindowRect.left;
+    int ParentHeight = ParentWindowRect.bottom - ParentWindowRect.top;
+
+    ::SetWindowPos(
+        WindowHandle,
+        nullptr,
+        ParentWindowRect.left + ((ParentWidth - ScaledWidth) / 2),
+        ParentWindowRect.top + ((ParentHeight - ScaledHeight) / 2),
+        ScaledWidth,
+        ScaledHeight,
+        SWP_NOZORDER | SWP_NOACTIVATE);
+    ::ShowWindow(WindowHandle, SW_SHOW);
+    ::UpdateWindow(WindowHandle);
+
+    MSG Message;
+    while (::GetMessageW(&Message, nullptr, 0, 0))
+    {
+        // Workaround for capturing Alt+F4 in applications with XAML Islands.
+        // Reference: https://github.com/microsoft/microsoft-ui-xaml/issues/2408
+        if (Message.message == WM_SYSKEYDOWN && Message.wParam == VK_F4)
+        {
+            ::SendMessageW(
+                ::GetAncestor(Message.hwnd, GA_ROOT),
+                Message.message,
+                Message.wParam,
+                Message.lParam);
+
+            continue;
+        }
+
+        ::TranslateMessage(&Message);
+        ::DispatchMessageW(&Message);
+    }
+
+
+
+    /*std::wstring HomePageButton = std::wstring(
         ::LangString(IDB_ABOUT_HOMEPAGE));
 
     const TASKDIALOG_BUTTON Buttons[] =
@@ -70,38 +137,7 @@ void NanaZip::FileManager::AboutDialog::Show(
         return S_OK;
     };
 
-    std::wstring WindowTitle = std::wstring(
-        ::LangString(IDD_ABOUT));
-    if (WindowTitle.empty())
-    {
-        WindowTitle = L"About NanaZip";
-    }
-
-    std::wstring WindowMainInstruction = std::wstring(
-        "NanaZip " MILE_PROJECT_VERSION_STRING);
-    WindowMainInstruction.append(
-        L" (" MILE_PROJECT_DOT_VERSION_STRING L")");
-    WindowMainInstruction.append(
-        UString(" (" MY_CPU_NAME ")"));
-
-    std::wstring WindowContent = std::wstring(
-        ::LangString(IDT_ABOUT_INFO));
-    if (WindowContent.empty())
-    {
-        WindowContent = L"NanaZip is free software";
-    }
-#ifdef EXTERNAL_CODECS
-    if (g_CodecsObj)
-    {
-        UString s;
-        g_CodecsObj->GetCodecsErrorMessage(s);
-        if (!s.IsEmpty())
-        {
-            WindowContent.append(L"\r\n\r\n");
-            WindowContent.append(s);
-        }
-    }
-#endif
+    
 
     TASKDIALOGCONFIG TaskDialogConfig = { 0 };
     TaskDialogConfig.cbSize = sizeof(TASKDIALOGCONFIG);
@@ -121,5 +157,5 @@ void NanaZip::FileManager::AboutDialog::Show(
         &TaskDialogConfig,
         nullptr,
         nullptr,
-        nullptr);
+        nullptr);*/
 }
