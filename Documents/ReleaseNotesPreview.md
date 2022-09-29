@@ -2,6 +2,16 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 2.1 Preview 1 (2.1.xxx.0)**
+
+- Update icons. (Designed by Shomnipotence. Updated in NanaZip 2.0 Stable.)
+- Add instructions for installing NanaZip for all users. (Updated in NanaZip
+  2.0 Stable.)
+- Add Mile.Xaml to NanaZip project. (Updated in NanaZip 2.0 Stable.)
+- Refresh the about dialog with XAML Islands. (Updated in NanaZip 2.0 Stable.)
+- Start adding prerequisite support for unpackaged mode. (Updated in NanaZip 
+  2.0 Stable.)
+
 **NanaZip 2.0 Preview 2 (2.0.376.0)**
 
 - Update 7-Zip to 22.01. (Thanks to Igor Pavlov. Noticed by HylianSteel, 

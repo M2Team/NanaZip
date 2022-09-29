@@ -3,6 +3,64 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 2.0 (2.0.xxx.0)**
+
+- Fix the shell extension issue which cause Everything crashed. (Thanks to 
+  No5972, startkkkkkk, SakuraNeko, bfgxp and riverar.)
+- Allow NanaZip to be associated with any file type. (Contributed by 
+  manfromarce.)
+- Integrate the following HASH algorithms to NanaZip from RHash and xxHash.
+  - AICH
+  - BLAKE2b
+  - BTIH
+  - ED2K
+  - EDON-R 224, EDON-R 256, EDON-R 384, EDON-R 512
+  - GOST R 34.11-94, GOST R 34.11-94 CryptoPro
+  - GOST R 34.11-2012 256, GOST R 34.11-2012 512
+  - HAS-160, RIPEMD-160
+  - SHA-224
+  - SHA3-224, SHA3-256, SHA3-384, SHA3-512
+  - Snefru-128, Snefru-256
+  - Tiger, Tiger2
+  - TTH
+  - Whirlpool
+  - XXH3_64bits, XXH3_128bits
+- Update Zstandard to 1.5.2.
+- Update BLAKE3 to 1.3.1.
+- Improve the Per-Monitor DPI Awareness support in Windows 10 Version 1607 for
+  Self Extracting Executable stubs.
+- Fix line break issue for i18n resource files. (Thanks to ygjsz.)
+- Enable several security mitigations. (Contributed by dinhngtu and 
+  AndromedaMelody.)
+  - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP 
+    attacks.
+  - Mark all x86 and x64 target binaries as compatible with Control-flow 
+    Enforcement Technology (CET) Shadow Stack.
+  - Strict handle checks at runtime to block the use of invalid handles.
+  - Disable dynamic code generation in Release builds prevents generating 
+    malicious code at runtime.
+  - Block loading unexpected libraries from remote sources at runtime.
+  - Enable Package Integrity.
+  - Enable EH Continuation Metadata.
+  - Enable Signed Returns.
+- Update 7-Zip to 22.01. (Thanks to Igor Pavlov. Noticed by HylianSteel, 
+  Random-name-hi and DJxSpeedy.)
+- Add hfsx to file type association. (Suggested by AndromedaMelody.)
+- Update the minimum system requirement to Windows 10 Version 2004 (Build 19041)
+  or later for solving issues in the XAML Islands.
+- Update LZ4 to v1.9.4.
+- Generate resource identities for package manifest manually. (Suggested by 
+  AndromedaMelody.)
+- Add workaround for NanaZip not appearing in classic context menu. 
+  (Contributed by dinhngtu.)
+- Check 7z compression parameter validity upon start of compression.
+  (Contributed by dinhngtu.)
+- Update icons. (Designed by Shomnipotence.)
+- Add instructions for installing NanaZip for all users.
+- Add Mile.Xaml to NanaZip project.
+- Refresh the about dialog with XAML Islands.
+- Start adding prerequisite support for unpackaged mode.
+
 **NanaZip 1.2 (1.2.252.0)**
 
 - Fix no ordinal 345 was found in the dynamically attached library issue in 
