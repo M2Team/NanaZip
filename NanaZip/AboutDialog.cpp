@@ -51,8 +51,8 @@ void NanaZip::FileManager::AboutDialog::Show(
         ::RemoveMenu(MenuHandle, SC_TASKLIST, MF_BYCOMMAND);
     }
 
-    const int Width = 768;
-    const int Height = 400;
+    const int Width = 600;
+    const int Height = 192 + (32 + 8) * 2;
 
     UINT DpiValue = ::GetDpiForWindow(WindowHandle);
 
@@ -95,67 +95,4 @@ void NanaZip::FileManager::AboutDialog::Show(
         ::TranslateMessage(&Message);
         ::DispatchMessageW(&Message);
     }
-
-
-
-    /*std::wstring HomePageButton = std::wstring(
-        ::LangString(IDB_ABOUT_HOMEPAGE));
-
-    const TASKDIALOG_BUTTON Buttons[] =
-    {
-        { IDB_ABOUT_HOMEPAGE, L"GitHub" }
-    };
-
-    auto TaskDialogCallback = [](
-        _In_ HWND hwnd,
-        _In_ UINT msg,
-        _In_ WPARAM wParam,
-        _In_ LPARAM lParam,
-        _In_ LONG_PTR lpRefData) -> HRESULT
-    {
-        UNREFERENCED_PARAMETER(hwnd);
-        UNREFERENCED_PARAMETER(lParam);
-        UNREFERENCED_PARAMETER(lpRefData);
-
-        auto OpenWebSite = [](
-            _In_ LPCWSTR Url)
-        {
-            SHELLEXECUTEINFOW ExecInfo = { 0 };
-            ExecInfo.cbSize = sizeof(SHELLEXECUTEINFOW);
-            ExecInfo.lpVerb = L"open";
-            ExecInfo.lpFile = Url;
-            ExecInfo.nShow = SW_SHOWNORMAL;
-            ::ShellExecuteExW(&ExecInfo);
-        };
-
-        if (msg == TDN_BUTTON_CLICKED && wParam == IDB_ABOUT_HOMEPAGE)
-        {
-            OpenWebSite(L"https://github.com/M2Team/NanaZip");
-            return S_FALSE;
-        }
-
-        return S_OK;
-    };
-
-    
-
-    TASKDIALOGCONFIG TaskDialogConfig = { 0 };
-    TaskDialogConfig.cbSize = sizeof(TASKDIALOGCONFIG);
-    TaskDialogConfig.hwndParent = ParentWindowHandle;
-    TaskDialogConfig.hInstance = ::GetModuleHandleW(nullptr);
-    TaskDialogConfig.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION;
-    TaskDialogConfig.dwCommonButtons = TDCBF_OK_BUTTON;
-    TaskDialogConfig.pszWindowTitle = WindowTitle.c_str();
-    TaskDialogConfig.pszMainIcon = MAKEINTRESOURCEW(IDI_ICON);
-    TaskDialogConfig.pszMainInstruction = WindowMainInstruction.c_str();
-    TaskDialogConfig.pszContent = WindowContent.c_str();
-    TaskDialogConfig.cButtons = ARRAYSIZE(Buttons);
-    TaskDialogConfig.pButtons = Buttons;
-    TaskDialogConfig.pfCallback = TaskDialogCallback;
-
-    ::TaskDialogIndirect(
-        &TaskDialogConfig,
-        nullptr,
-        nullptr,
-        nullptr);*/
 }
