@@ -11,22 +11,12 @@ For preview versions, please read
   - Add instructions for installing NanaZip for all users. (Contributed by
     AndromedaMelody. Suggested by Wolverine1977.)
 - Features
-  - Integrate the following HASH algorithms to NanaZip from RHash and xxHash.
-    - AICH
-    - BLAKE2b
-    - BTIH
-    - ED2K
-    - EDON-R 224, EDON-R 256, EDON-R 384, EDON-R 512
-    - GOST R 34.11-94, GOST R 34.11-94 CryptoPro
-    - GOST R 34.11-2012 256, GOST R 34.11-2012 512
-    - HAS-160, RIPEMD-160
-    - SHA-224
-    - SHA3-224, SHA3-256, SHA3-384, SHA3-512
-    - Snefru-128, Snefru-256
-    - Tiger, Tiger2
-    - TTH
-    - Whirlpool
-    - XXH3_64bits, XXH3_128bits
+  - Integrate the following HASH algorithms to NanaZip from RHash (AICH, 
+    BLAKE2b, BTIH, ED2K, EDON-R 224, EDON-R 256, EDON-R 384, EDON-R 512, 
+    GOST R 34.11-94, GOST R 34.11-94 CryptoPro, GOST R 34.11-2012 256, 
+    GOST R 34.11-2012 512, HAS-160, RIPEMD-160, SHA-224, SHA3-224, SHA3-256, 
+    SHA3-384, SHA3-512, Snefru-128, Snefru-256, Tiger, Tiger2, TTH, Whirlpool) 
+    and xxHash (XXH3_64bits, XXH3_128bits).
   - Allow NanaZip to be associated with any file type. (Contributed by 
     manfromarce.)
   - Add hfsx to file type association. (Suggested by AndromedaMelody.)
