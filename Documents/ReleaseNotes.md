@@ -9,7 +9,7 @@ For preview versions, please read
   - Update the minimum system requirement to Windows 10 Version 2004
     (Build 19041) or later for solving issues in the XAML Islands.
 - User Interaction
-  - Update icons. (Designed by Shomnipotence.)
+  - Update the app icons. (Designed by Shomnipotence.)
   - Add Mile.Xaml to NanaZip project.
   - Refresh the about dialog with XAML Islands.
   - Improve the Per-Monitor DPI Awareness support in Windows 10 Version 1607
