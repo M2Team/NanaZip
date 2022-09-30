@@ -23,7 +23,7 @@ For preview versions, please read
     (Contributed by dinhngtu.)
   - Allow NanaZip to be associated with any file type. (Contributed by
     manfromarce.)
-  - Add hfsx to file type association. (Suggested by AndromedaMelody.)
+  - Add `.hfsx` to file type association. (Suggested by AndromedaMelody.)
 - HASH Algorithms
   - Integrate the following HASH algorithms to NanaZip from RHash and xxHash.
     - AICH
