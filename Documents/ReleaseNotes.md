@@ -62,7 +62,7 @@ For preview versions, please read
   - Generate resource identities for package manifest manually for solving
     issues in Application Packaging Project. (Suggested by AndromedaMelody.)
 - Core Update
-  - Update 7-Zip to [22.01](https://www.7-zip.org/history.txt) form 21.07.
+  - Update 7-Zip form 21.07 to [22.01](https://www.7-zip.org/history.txt).
     (Thanks to Igor Pavlov. Noticed by HylianSteel, Random-name-hi and
     DJxSpeedy.)
   - Update BLAKE3 to
