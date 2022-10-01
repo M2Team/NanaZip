@@ -3,7 +3,7 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
-**NanaZip 2.0 (2.0.xxx.0)**
+**NanaZip 2.0 (2.0.396.0)**
 
 - Notes
   - Update the minimum system requirement to Windows 10 Version 2004 (Build 
