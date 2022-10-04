@@ -7,7 +7,7 @@
 #define xc 240
 #define yc 64
 
-IDI_ICON ICON "../../../../../Assets/NanaZipSfx.ico"
+IDI_ICON ICON "../../../../../Assets/NanaZipPreviewSfx.ico"
 
 IDD_EXTRACT  DIALOG  0, 0, xs, ys  MY_MODAL_DIALOG_STYLE  MY_FONT
 CAPTION "NanaZip SFX"
