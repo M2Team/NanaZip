@@ -155,12 +155,13 @@ the following command in the PowerShell which is run as administrator.
   - [x] Modernize the i18n implementation and migrate language files from 
         `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
   - [x] Add i18n support for Self Extracting Executables.
-- 2.x Series (2023 Q3)
+- 2.0 (October 4, 2022)
   - [x] Provide the new icons.
   - [x] Start modernizing the core implementation.
   - [x] Add the UI stack based on XAML Islands which is used in NanaZip.
   - [x] Start modernizing the UI with XAML Islands with the Windows 11 control
         style, dark and light mode support.
+- 2.x Series (2023 Q3)
   - [ ] Continue to modernize the UI with XAML Islands with the Windows 11 
         control style, dark and light mode support.
   - [ ] Full Accessibility support in all UI components.
