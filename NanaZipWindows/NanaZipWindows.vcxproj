@@ -9,7 +9,7 @@
     <MileProjectType>WindowsApplication</MileProjectType>
     <TargetName>NanaZipG</TargetName>
     <MileProjectManifestFile>NanaZipWindows.manifest</MileProjectManifestFile>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
   </PropertyGroup>

@@ -7,7 +7,7 @@
     <ProjectGuid>{86D65350-E2AE-47BC-AE05-FC35D3BAAE6C}</ProjectGuid>
     <RootNamespace>NanaZipCore</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
