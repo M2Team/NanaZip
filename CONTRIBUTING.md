@@ -6,6 +6,8 @@
   - **Create pull requests directly.**
   - Please send e-mails to Mouri_Naruto@Outlook.com if you have any
     questions.
+  - You are forbidden to modify any content in any files and folders start with
+    the "Mile." suffix, or your PR won't be merged and closed immediately.
 - Feedback suggestions and bugs.
   - We use GitHub issues to track bugs and features.
   - For bugs and general issues please 
