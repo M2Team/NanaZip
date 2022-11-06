@@ -128,7 +128,7 @@ static void ShowErrorMessageSpec(const UString &name)
   ShowErrorMessage(NULL, message);
 }
 
-#include <Mile.Windows.DpiHelpers.h>
+#include <Mile.Helpers.h>
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef UNDER_CE

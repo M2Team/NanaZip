@@ -211,7 +211,7 @@ static int APIENTRY WinMain2()
 #define NT_CHECK_FAIL_ACTION ShowErrorMessage(L"Unsupported Windows version"); return NExitCode::kFatalError;
 #endif
 
-#include <Mile.Windows.DpiHelpers.h>
+#include <Mile.Helpers.h>
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef UNDER_CE
