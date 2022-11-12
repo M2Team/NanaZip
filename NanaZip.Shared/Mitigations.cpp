@@ -50,6 +50,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
     {
         PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = { 0 };
         Policy.ProhibitDynamicCode = 1;
+        Policy.AllowThreadOptOut = 1;
         if (!my_SetProcessMitigationPolicy(
             ProcessDynamicCodePolicy,
             &Policy,
@@ -75,4 +76,27 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
     }
 
     return TRUE;
+}
+
+EXTERN_C BOOL WINAPI NanaZipThreadDynamicCodeAllow() {
+    if (!IsWindows8Point1OrGreater()) {
+        return TRUE;
+    }
+
+    HMODULE ModuleHandle = ::GetModuleHandleW(L"kernel32.dll");
+    if (!ModuleHandle)
+    {
+        return FALSE;
+    }
+
+    decltype(::SetThreadInformation)* my_SetThreadInformation =
+        reinterpret_cast<decltype(::SetThreadInformation)*>(
+            ::GetProcAddress(ModuleHandle, "SetThreadInformation"));
+    if (!my_SetThreadInformation)
+    {
+        return FALSE;
+    }
+
+    DWORD threadPolicy = THREAD_DYNAMIC_CODE_ALLOW;
+    return my_SetThreadInformation(GetCurrentThread(), ThreadDynamicCodePolicy, &threadPolicy, sizeof(threadPolicy));
 }
