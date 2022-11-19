@@ -76,6 +76,8 @@ void NanaZip::FileManager::AboutDialog::Show(
     ::ShowWindow(WindowHandle, SW_SHOW);
     ::UpdateWindow(WindowHandle);
 
+    ::EnableWindow(ParentWindowHandle, FALSE);
+
     MSG Message;
     while (::GetMessageW(&Message, nullptr, 0, 0))
     {
@@ -95,4 +97,7 @@ void NanaZip::FileManager::AboutDialog::Show(
         ::TranslateMessage(&Message);
         ::DispatchMessageW(&Message);
     }
+
+    ::EnableWindow(ParentWindowHandle, TRUE);
+    ::SetActiveWindow(ParentWindowHandle);
 }
