@@ -28,21 +28,23 @@
       <TextBlock
         x:Name="Title"
         Grid.Row="0"
-        FontSize="28"
+        FontSize="{StaticResource TitleTextBlockFontSize}"
         FontWeight="Bold"
         TextWrapping="Wrap" />
       <TextBlock
         x:Name="Version"
         Grid.Row="2"
-        FontSize="20"
+        FontSize="{StaticResource SubtitleTextBlockFontSize}"
         TextWrapping="Wrap" />
       <TextBlock
         x:Name="Content"
         Grid.Row="4"
+        FontSize="{StaticResource BodyTextBlockFontSize}"
         TextWrapping="Wrap" />
       <HyperlinkButton
         Grid.Row="5"
         Content="GitHub"
+        Padding="0"
         NavigateUri="https://github.com/M2Team/NanaZip" />
     </Grid>
   </Grid>
