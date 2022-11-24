@@ -3,6 +3,23 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 2.0 Update 1 (2.0.xxx.0)**
+
+- Optimize NanaZip binaries via adjusting the WindowsTargetPlatformMinVersion
+  to 10.0.19041.0 in all packaged NanaZip binaries projecta except the Self
+  Extracting Executable stubs projecta.
+- Opt out of dynamic code mitigation on main NanaZip thread for resolving the
+  compatibility issues with Explorer Patcher. (Contributed by dinhngtu.)
+- Update Mile.Xaml to 1.1.434.
+  (https://github.com/ProjectMile/Mile.Xaml/releases/tag/1.1.434.0)
+- Update Mile.Windows.Helpers to 1.0.8.
+  (https://github.com/ProjectMile/Mile.Windows.Helpers/commits/main)
+- Refresh the about dialog with Windows 11 XAML control styles and the 
+  immersive Mica effects.
+- Fix model dialog style behavior for About dialog.
+- Continue to refresh application and file type icons. (Designed by 
+  Shomnipotence.)
+
 **NanaZip 2.0 (2.0.396.0)**
 
 - Notes
