@@ -21,6 +21,7 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   (https://github.com/ProjectMile/Mile.Xaml/releases/tag/1.1.434.0)
 - Update Mile.Windows.Helpers to 1.0.8. (Updated in NanaZip 2.0 Update 1.)
   (https://github.com/ProjectMile/Mile.Windows.Helpers/commits/main)
+- Add dark mode support for context menus. (Updated in NanaZip 2.0 Update 1.)
 - Refresh the about dialog with Windows 11 XAML control styles and the 
   immersive Mica effects. (Updated in NanaZip 2.0 Update 1.)
 - Fix model dialog style behavior for About dialog. (Updated in NanaZip 2.0

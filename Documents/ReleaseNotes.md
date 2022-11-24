@@ -3,7 +3,7 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
-**NanaZip 2.0 Update 1 (2.0.xxx.0)**
+**NanaZip 2.0 Update 1 (2.0.450.0)**
 
 - Optimize NanaZip binaries via adjusting the WindowsTargetPlatformMinVersion
   to 10.0.19041.0 in all packaged NanaZip binaries projecta except the Self
@@ -14,6 +14,7 @@ For preview versions, please read
   (https://github.com/ProjectMile/Mile.Xaml/releases/tag/1.1.434.0)
 - Update Mile.Windows.Helpers to 1.0.8.
   (https://github.com/ProjectMile/Mile.Windows.Helpers/commits/main)
+- Add dark mode support for context menus.
 - Refresh the about dialog with Windows 11 XAML control styles and the 
   immersive Mica effects.
 - Fix model dialog style behavior for About dialog.
