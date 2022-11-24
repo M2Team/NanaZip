@@ -2,7 +2,7 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 2.1 Preview 0 (2.1.xxx.0)**
+**NanaZip 2.1 Preview 0 (2.1.451.0)**
 
 - Update icons. (Designed by Shomnipotence. Updated in NanaZip 2.0 Stable.)
 - Add instructions for installing NanaZip for all users. (Updated in NanaZip
@@ -12,8 +12,8 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 - Start adding prerequisite support for unpackaged mode. (Updated in NanaZip 
   2.0 Stable.)
 - Optimize NanaZip binaries via adjusting the WindowsTargetPlatformMinVersion
-  to 10.0.19041.0 in all packaged NanaZip binaries projecta except the Self
-  Extracting Executable stubs projecta. (Updated in NanaZip 2.0 Update 1.)
+  to 10.0.19041.0 in all packaged NanaZip binaries projects except the Self
+  Extracting Executable stubs projects. (Updated in NanaZip 2.0 Update 1.)
 - Opt out of dynamic code mitigation on main NanaZip thread for resolving the
   compatibility issues with Explorer Patcher. (Contributed by dinhngtu. Updated
   in NanaZip 2.0 Update 1.)

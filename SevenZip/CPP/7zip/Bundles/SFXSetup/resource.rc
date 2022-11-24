@@ -1,6 +1,6 @@
 #include "resource.h"
 
-IDI_ICON  ICON "../../../../../Assets/NanaZipSfx.ico"
+IDI_ICON  ICON "../../../../../Assets/NanaZipPreviewSfx.ico"
 
 STRINGTABLE
 BEGIN

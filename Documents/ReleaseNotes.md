@@ -6,8 +6,8 @@ For preview versions, please read
 **NanaZip 2.0 Update 1 (2.0.450.0)**
 
 - Optimize NanaZip binaries via adjusting the WindowsTargetPlatformMinVersion
-  to 10.0.19041.0 in all packaged NanaZip binaries projecta except the Self
-  Extracting Executable stubs projecta.
+  to 10.0.19041.0 in all packaged NanaZip binaries projects except the Self
+  Extracting Executable stubs projects.
 - Opt out of dynamic code mitigation on main NanaZip thread for resolving the
   compatibility issues with Explorer Patcher. (Contributed by dinhngtu.)
 - Update Mile.Xaml to 1.1.434.
