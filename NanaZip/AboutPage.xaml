@@ -23,6 +23,7 @@
         <RowDefinition Height="auto" />
         <RowDefinition Height="12" />
         <RowDefinition Height="*" />
+        <RowDefinition Height="12" />
         <RowDefinition Height="auto" />
       </Grid.RowDefinitions>
       <TextBlock
@@ -36,15 +37,18 @@
         Grid.Row="2"
         FontSize="{StaticResource SubtitleTextBlockFontSize}"
         TextWrapping="Wrap" />
-      <TextBlock
-        x:Name="Content"
-        Grid.Row="4"
-        FontSize="{StaticResource BodyTextBlockFontSize}"
-        TextWrapping="Wrap" />
+      <ScrollViewer Grid.Row="4" MaxWidth="360">
+
+
+        <TextBlock
+          x:Name="Content"
+          FontSize="{StaticResource BodyTextBlockFontSize}"
+          TextWrapping="Wrap" />
+      </ScrollViewer>
       <HyperlinkButton
-        Grid.Row="5"
-        Content="GitHub"
+        Grid.Row="6"
         Padding="0"
+        Content="GitHub"
         NavigateUri="https://github.com/M2Team/NanaZip" />
     </Grid>
   </Grid>
