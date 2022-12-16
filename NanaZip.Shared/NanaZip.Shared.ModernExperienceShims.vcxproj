@@ -8,6 +8,7 @@
     <RootNamespace>NanaZip.Shared.ModernExperienceShims</RootNamespace>
     <MileProjectType>StaticLibrary</MileProjectType>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <ItemDefinitionGroup>

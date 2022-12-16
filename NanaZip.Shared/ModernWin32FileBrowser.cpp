@@ -11,16 +11,11 @@
 
 #include <Windows.h>
 #include <ShlObj_core.h>
-#include <wrl.h>
+#include <winrt/base.h>
 
 EXTERN_C PIDLIST_ABSOLUTE WINAPI ModernSHBrowseForFolderW(LPBROWSEINFOW uType)
 {
-    using namespace Microsoft::WRL;
-    ComPtr<IFileDialog> fileDialog;
-    if (FAILED(CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&fileDialog))))
-    {
-        return nullptr;
-    }
+    winrt::com_ptr<IFileDialog> fileDialog = winrt::try_create_instance<IFileDialog>(CLSID_FileOpenDialog);
 
     if (!fileDialog)
     {
@@ -51,13 +46,14 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI ModernSHBrowseForFolderW(LPBROWSEINFOW uType)
     // Since we cannot augment the IFileDialog's message loop, we will reach into
     // the lParam given to us to find the initial path and hope that 7-Zip does
     // not change this behavior.
-    ComPtr<IShellItem> defaultFolder;
-    if (FAILED(SHCreateItemFromParsingName(reinterpret_cast<PCWSTR>(uType->lParam), nullptr, IID_IShellItem, &defaultFolder)))
+
+    winrt::com_ptr<IShellItem> defaultFolder;
+    if (FAILED(SHCreateItemFromParsingName(reinterpret_cast<PCWSTR>(uType->lParam), nullptr, IID_IShellItem, defaultFolder.put_void())))
     {
         return nullptr;
     }
 
-    if (FAILED(fileDialog->SetDefaultFolder(defaultFolder.Get())))
+    if (FAILED(fileDialog->SetDefaultFolder(defaultFolder.get())))
     {
         return nullptr;
     }
@@ -68,14 +64,14 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI ModernSHBrowseForFolderW(LPBROWSEINFOW uType)
         return nullptr;
     }
 
-    ComPtr<IShellItem> result;
-    if (FAILED(fileDialog->GetResult(&result)))
+    winrt::com_ptr<IShellItem> result;
+    if (FAILED(fileDialog->GetResult(result.put())))
     {
         return nullptr;
     }
 
     LPITEMIDLIST pidl;
-    if (FAILED(SHGetIDListFromObject(result.Get(), &pidl)))
+    if (FAILED(SHGetIDListFromObject(result.get(), &pidl)))
     {
         return nullptr;
     }
