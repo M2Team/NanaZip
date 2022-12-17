@@ -8,6 +8,7 @@
     <RootNamespace>NanaZip.Shared.ModernExperienceShims</RootNamespace>
     <MileProjectType>StaticLibrary</MileProjectType>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <ItemDefinitionGroup>
@@ -19,6 +20,7 @@
     <None Include="NanaZip.Shared.ModernExperienceShims.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ModernWin32FileBrowser.cpp" />
     <ClCompile Include="ModernWin32MessageBox.cpp" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />

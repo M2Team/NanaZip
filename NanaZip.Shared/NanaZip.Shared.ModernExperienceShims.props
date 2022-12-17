@@ -8,7 +8,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(MileProjectObjectsPath)$(Configuration)\NanaZip.Shared.ModernExperienceShims\$(Platform)\ModernWin32MessageBox.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(MileProjectObjectsPath)$(Configuration)\NanaZip.Shared.ModernExperienceShims\$(Platform)\ModernWin32MessageBox.obj;$(MileProjectObjectsPath)$(Configuration)\NanaZip.Shared.ModernExperienceShims\$(Platform)\ModernWin32FileBrowser.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
 </Project>
