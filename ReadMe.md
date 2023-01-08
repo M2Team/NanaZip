@@ -126,6 +126,9 @@ the following command in the PowerShell which is run as administrator.
 - Due to the Microsoft Store limitations, NanaZip 1.2 and later won't support 
   languages not mentioned in 
   https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages.
+- If you turn off the Windows Firewall, you may fail to install NanaZip.
+  (https://github.com/M2Team/NanaZip/issues/204)
+  (https://github.com/microsoft/terminal/issues/12269)
 
 ## Development Roadmap
 
