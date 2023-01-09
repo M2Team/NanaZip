@@ -1,43 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!--
-  PROJECT:   Mouri Internal Library Essentials
-  FILE:      Directory.Build.props
-  PURPOSE:   Global settings for Visual Studio C++ Project
-
-  LICENSE:   The MIT License
-
-  DEVELOPER: Mouri_Naruto (Mouri_Naruto AT Outlook.com)
--->
 <Project>
-  <PropertyGroup>
-    <MileProjectOutputPath>$(MSBuildThisFileDirectory)Output\</MileProjectOutputPath>
-    <MileProjectBinariesPath>$(MileProjectOutputPath)Binaries\</MileProjectBinariesPath>
-    <MileProjectObjectsPath>$(MileProjectOutputPath)Objects\</MileProjectObjectsPath>
-    <GenerateProjectSpecificOutputFolder>False</GenerateProjectSpecificOutputFolder>
-    <MSBuildProjectExtensionsPath>$(MileProjectObjectsPath)$(Configuration)\$(MSBuildProjectName)\obj\</MSBuildProjectExtensionsPath>
-    <AppxPackageDir>$(MileProjectBinariesPath)AppPackages\$(ProjectName)\</AppxPackageDir>
-  </PropertyGroup>
-    <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
-    <OutDir>$(MileProjectBinariesPath)$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(MileProjectObjectsPath)$(Configuration)\$(MSBuildProjectName)\$(Platform)\</IntDir>
-    <GeneratedFilesDir>$(IntDir)Generated Files\</GeneratedFilesDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.wapproj'">
-    <OutputPath>$(MileProjectBinariesPath)$(Configuration)\$(MSBuildProjectName)\$(Platform)\</OutputPath>
-    <IntermediateOutputPath>$(MileProjectObjectsPath)$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
-    <BaseIntermediateOutputPath>$(IntermediateOutputPath)</BaseIntermediateOutputPath>
-  </PropertyGroup>
-  <ItemGroup Label="NuGet" Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
-    <ProjectCapability Include="PackageReferences" />
-  </ItemGroup>
-  <PropertyGroup Label="NuGet" Condition="('$(MSBuildProjectExtension)' == '.vcxproj') Or ('$(MSBuildProjectExtension)' == '.wapproj')">
-    <!-- https://github.com/microsoft/react-native-windows/pull/8195 -->
-    <AssetTargetFallback>$(AssetTargetFallback);native;uap$(TargetPlatformVersion);</AssetTargetFallback>
-    <!-- https://github.com/microsoft/react-native-windows/pull/8195 -->
-    <TargetFrameworkMoniker>native,Version=v0.0</TargetFrameworkMoniker>
-    <NuGetTargetMoniker>native,Version=v0.0</NuGetTargetMoniker>
-    <TargetFrameworkMoniker Condition ="'$(DesignTimeBuild)' == 'true'">.NETCore,Version=v5.0</TargetFrameworkMoniker>
-    <NuGetTargetMoniker Condition ="'$(DesignTimeBuild)' == 'true'">.NETCore,Version=v5.0</NuGetTargetMoniker>
-    <RuntimeIdentifiers>win;win-x86;win-x64;win-arm;win-arm64;win10-x86;win10-x64;win10-arm;win10-arm64</RuntimeIdentifiers>
-  </PropertyGroup>
+  <Import Project="$(MSBuildThisFileDirectory)Mile.Project.Windows\Mile.Project.Build.props" />
 </Project>
