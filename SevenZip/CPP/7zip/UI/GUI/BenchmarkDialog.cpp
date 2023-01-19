@@ -25,7 +25,7 @@
 #include "../FileManager/LangUtils.h"
 #endif
 
-#include "../../../../../NanaZipSfxWindows/Mile.Project.Properties.h"
+#include <Mile.Project.Version.h>
 
 #include "../Common/Bench.h"
 

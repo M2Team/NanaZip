@@ -1733,7 +1733,6 @@
     <ClInclude Include="..\SevenZip\CPP\Windows\TimeUtils.h">
       <Filter>SevenZip\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Mile.Project.Properties.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BrotliDecoder.h">
       <Filter>SevenZip\Compress\Brotli Compress</Filter>
     </ClInclude>

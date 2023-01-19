@@ -9,7 +9,7 @@
 
 #include "../../ICoder.h"
 #include "../../IPassword.h"
-#include "../../../../../NanaZipCore/Mile.Project.Properties.h"
+#include <Mile.Project.Version.h>
 
 #include "../../Common/CreateCoder.h"
 #include "../../Common/StreamObjects.h"

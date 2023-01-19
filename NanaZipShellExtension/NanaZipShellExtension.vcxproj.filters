@@ -315,9 +315,6 @@
     <ClCompile Include="NanaZipShellExtension.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mile.Project.Properties.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="NanaZipShellExtension.def" />
   </ItemGroup>
 </Project>

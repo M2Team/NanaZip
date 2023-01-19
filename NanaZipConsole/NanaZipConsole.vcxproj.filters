@@ -584,7 +584,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\..\..\PropID.h">
       <Filter>SevenZip\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Mile.Project.Properties.h" />
     <ClInclude Include="..\SevenZip\CPP\Common\DynLimBuf.h">
       <Filter>SevenZip\Common</Filter>
     </ClInclude>

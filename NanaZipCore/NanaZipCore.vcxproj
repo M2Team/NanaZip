@@ -9,6 +9,15 @@
     <MileProjectType>DynamicLibrary</MileProjectType>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Core</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZipCore</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZipCore.dll</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+    <MileProjectVersion>2.1.451.0</MileProjectVersion>
+    <MileProjectVersionTag>Preview 0</MileProjectVersionTag>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
@@ -588,7 +597,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\IStream.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\PropID.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.h" />
-    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />

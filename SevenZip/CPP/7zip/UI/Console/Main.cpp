@@ -48,7 +48,7 @@
 #include "OpenCallbackConsole.h"
 #include "UpdateCallbackConsole.h"
 
-#include "../../../../../NanaZipConsole/Mile.Project.Properties.h"
+#include <Mile.Project.Version.h>
 
 using namespace NWindows;
 using namespace NFile;
@@ -91,7 +91,7 @@ DECLARE_AND_SET_CLIENT_VERSION_VAR
 static const char * const kCopyrightString = "\nNanaZip"
   PROG_POSTFIX_2
   " " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")"
-  " : " MILE_PROJECT_LEGAL_COPYRIGHT "\n";
+  " : " "(c) M2-Team and Contributors. All rights reserved." "\n";
 
 static const char * const kHelpString =
     "Usage: NanaZipConsole"

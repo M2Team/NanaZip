@@ -7,6 +7,15 @@
     <MileProjectType>ConsoleApplication</MileProjectType>
     <MileProjectManifestFile>NanaZipSfxConsole.manifest</MileProjectManifestFile>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Self Extracting Executable (Console)</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZipSfxConsole</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZipConsole.sfx</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+    <MileProjectVersion>2.1.451.0</MileProjectVersion>
+    <MileProjectVersionTag>Preview 0</MileProjectVersionTag>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
@@ -115,7 +124,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Console\UserInputUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\resource.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\StdAfx.h" />
-    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXCon\resource.rc" />

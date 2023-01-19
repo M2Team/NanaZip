@@ -7,6 +7,15 @@
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZipSfxSetup.manifest</MileProjectManifestFile>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Self Extracting Executable (Setup)</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZipSfxSetup</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZipSetup.sfx</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+    <MileProjectVersion>2.1.451.0</MileProjectVersion>
+    <MileProjectVersionTag>Preview 0</MileProjectVersionTag>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
@@ -188,7 +197,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractCallbackSfx.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractEngine.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\StdAfx.h" />
-    <ClInclude Include="Mile.Project.Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\setup.ico" />

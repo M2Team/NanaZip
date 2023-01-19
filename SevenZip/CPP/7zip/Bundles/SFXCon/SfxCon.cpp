@@ -26,7 +26,7 @@
 #include "../../UI/Console/List.h"
 #include "../../UI/Console/OpenCallbackConsole.h"
 
-#include "../../../../../NanaZipSfxConsole/Mile.Project.Properties.h"
+#include <Mile.Project.Version.h>
 
 #include "../../../../C/DllSecur.h"
 
@@ -42,7 +42,8 @@ int g_CodePage = -1;
 extern CStdOutStream *g_StdStream;
 
 static const char * const kCopyrightString =
-"\nNanaZip SFX " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")" " : " MILE_PROJECT_LEGAL_COPYRIGHT "\n";
+"\nNanaZip SFX " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")"
+" : " "(c) M2-Team and Contributors. All rights reserved." "\n";
 
 static const int kNumSwitches = 6;
 

@@ -1080,7 +1080,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\TextPairs.h">
       <Filter>SevenZip\Spec</Filter>
     </ClInclude>
-    <ClInclude Include="Mile.Project.Properties.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h">
       <Filter>SevenZip\Archive Common</Filter>
     </ClInclude>

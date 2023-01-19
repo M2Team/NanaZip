@@ -511,7 +511,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractEngine.h">
       <Filter>SevenZip\Spec</Filter>
     </ClInclude>
-    <ClInclude Include="Mile.Project.Properties.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
       <Filter>SevenZip\Compress</Filter>
     </ClInclude>
