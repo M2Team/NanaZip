@@ -1,37 +1,16 @@
 ﻿/*
- * xxHash - Extremely Fast Hash algorithm
- * Header File
- * Copyright (C) 2012-2020 Yann Collet
+ *  xxHash - Fast Hash algorithm
+ *  Copyright (c) Meta Platforms, Inc. and affiliates.
  *
- * BSD 2-Clause License (https://www.opensource.org/licenses/bsd-license.php)
+ *  You can contact the author at :
+ *  - xxHash homepage: https://cyan4973.github.io/xxHash/
+ *  - xxHash source repository : https://github.com/Cyan4973/xxHash
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *
- *    * Redistributions of source code must retain the above copyright
- *      notice, this list of conditions and the following disclaimer.
- *    * Redistributions in binary form must reproduce the above
- *      copyright notice, this list of conditions and the following disclaimer
- *      in the documentation and/or other materials provided with the
- *      distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * You can contact the author at:
- *   - xxHash homepage: https://www.xxhash.com
- *   - xxHash source repository: https://github.com/Cyan4973/xxHash
- */
+ * This source code is licensed under both the BSD-style license (found in the
+ * LICENSE file in the root directory of this source tree) and the GPLv2 (found
+ * in the COPYING file in the root directory of this source tree).
+ * You may select, at your option, one of the above-listed licenses.
+*/
 /*!
  * @mainpage xxHash
  *
@@ -728,6 +707,7 @@ typedef struct { unsigned char digest[sizeof(XXH64_hash_t)]; } XXH64_canonical_t
 XXH_PUBLIC_API void XXH64_canonicalFromHash(XXH64_canonical_t* dst, XXH64_hash_t hash);
 XXH_PUBLIC_API XXH64_hash_t XXH64_hashFromCanonical(const XXH64_canonical_t* src);
 
+#ifndef XXH_NO_XXH3
 /*!
  * @}
  * ************************************************************************
@@ -935,6 +915,7 @@ XXH_PUBLIC_API void XXH128_canonicalFromHash(XXH128_canonical_t* dst, XXH128_has
 XXH_PUBLIC_API XXH128_hash_t XXH128_hashFromCanonical(const XXH128_canonical_t* src);
 
 
+#endif  /* !XXH_NO_XXH3 */
 #endif  /* XXH_NO_LONG_LONG */
 
 /*!
@@ -978,7 +959,7 @@ struct XXH32_state_s {
    XXH32_hash_t v[4];         /*!< Accumulator lanes */
    XXH32_hash_t mem32[4];     /*!< Internal buffer for partial reads. Treated as unsigned char[16]. */
    XXH32_hash_t memsize;      /*!< Amount of data in @ref mem32 */
-   XXH32_hash_t reserved;     /*!< Reserved field. Do not read or write to it, it may be removed. */
+   XXH32_hash_t reserved;     /*!< Reserved field. Do not read nor write to it. */
 };   /* typedef'd to XXH32_state_t */
 
 
@@ -1002,8 +983,11 @@ struct XXH64_state_s {
    XXH64_hash_t mem64[4];     /*!< Internal buffer for partial reads. Treated as unsigned char[32]. */
    XXH32_hash_t memsize;      /*!< Amount of data in @ref mem64 */
    XXH32_hash_t reserved32;   /*!< Reserved field, needed for padding anyways*/
-   XXH64_hash_t reserved64;   /*!< Reserved field. Do not read or write to it, it may be removed. */
+   XXH64_hash_t reserved64;   /*!< Reserved field. Do not read or write to it. */
 };   /* typedef'd to XXH64_state_t */
+
+
+#ifndef XXH_NO_XXH3
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L) /* >= C11 */
 #  include <stdalign.h>
@@ -1216,6 +1200,7 @@ XXH3_128bits_reset_withSecretandSeed(XXH3_state_t* statePtr,
                                      XXH64_hash_t seed64);
 
 
+#endif  /* XXH_NO_XXH3 */
 #endif  /* XXH_NO_LONG_LONG */
 #if defined(XXH_INLINE_ALL) || defined(XXH_PRIVATE_API)
 #  define XXH_IMPLEMENTATION
@@ -1319,7 +1304,7 @@ XXH3_128bits_reset_withSecretandSeed(XXH3_state_t* statePtr,
  *   care, as what works on one compiler/platform/optimization level may cause
  *   another to read garbage data or even crash.
  *
- * See http://fastcompression.blogspot.com/2015/08/accessing-unaligned-memory.html for details.
+ * See https://fastcompression.blogspot.com/2015/08/accessing-unaligned-memory.html for details.
  *
  * Prefer these methods in priority order (0 > 3 > 1 > 2)
  */
@@ -1562,7 +1547,7 @@ static void* XXH_memcpy(void* dest, const void* src, size_t size)
  * @brief Used to prevent unwanted optimizations for @p var.
  *
  * It uses an empty GCC inline assembly statement with a register constraint
- * which forces @p var into a general purpose register (eg eax, ebx, ecx
+ * which forces @p var into a general purpose register (e.g. eax, ebx, ecx
  * on x86) and marks it as modified.
  *
  * This is used in a few places to avoid unwanted autovectorization (e.g.
@@ -1683,7 +1668,7 @@ static xxh_u32 XXH_read32(const void* ptr)
 
 /*
  * Portable and safe solution. Generally efficient.
- * see: http://fastcompression.blogspot.com/2015/08/accessing-unaligned-memory.html
+ * see: https://fastcompression.blogspot.com/2015/08/accessing-unaligned-memory.html
  */
 static xxh_u32 XXH_read32(const void* memPtr)
 {
@@ -2158,14 +2143,12 @@ XXH_PUBLIC_API void XXH32_copyState(XXH32_state_t* dstState, const XXH32_state_t
 /*! @ingroup xxh32_family */
 XXH_PUBLIC_API XXH_errorcode XXH32_reset(XXH32_state_t* statePtr, XXH32_hash_t seed)
 {
-    XXH32_state_t state;   /* using a local state to memcpy() in order to avoid strict-aliasing warnings */
-    memset(&state, 0, sizeof(state));
-    state.v[0] = seed + XXH_PRIME32_1 + XXH_PRIME32_2;
-    state.v[1] = seed + XXH_PRIME32_2;
-    state.v[2] = seed + 0;
-    state.v[3] = seed - XXH_PRIME32_1;
-    /* do not write into reserved, planned to be removed in a future version */
-    XXH_memcpy(statePtr, &state, sizeof(state) - sizeof(state.reserved));
+    XXH_ASSERT(statePtr != NULL);
+    memset(statePtr, 0, sizeof(*statePtr));
+    statePtr->v[0] = seed + XXH_PRIME32_1 + XXH_PRIME32_2;
+    statePtr->v[1] = seed + XXH_PRIME32_2;
+    statePtr->v[2] = seed + 0;
+    statePtr->v[3] = seed - XXH_PRIME32_1;
     return XXH_OK;
 }
 
@@ -2263,7 +2246,7 @@ XXH_PUBLIC_API XXH32_hash_t XXH32_digest(const XXH32_state_t* state)
  */
 XXH_PUBLIC_API void XXH32_canonicalFromHash(XXH32_canonical_t* dst, XXH32_hash_t hash)
 {
-    XXH_STATIC_ASSERT(sizeof(XXH32_canonical_t) == sizeof(XXH32_hash_t));
+    /* XXH_STATIC_ASSERT(sizeof(XXH32_canonical_t) == sizeof(XXH32_hash_t)); */
     if (XXH_CPU_LITTLE_ENDIAN) hash = XXH_swap32(hash);
     XXH_memcpy(dst, &hash, sizeof(*dst));
 }
@@ -2326,7 +2309,7 @@ static xxh_u64 XXH_read64(const void* ptr)
 
 /*
  * Portable and safe solution. Generally efficient.
- * see: http://fastcompression.blogspot.com/2015/08/accessing-unaligned-memory.html
+ * see: https://fastcompression.blogspot.com/2015/08/accessing-unaligned-memory.html
  */
 static xxh_u64 XXH_read64(const void* memPtr)
 {
@@ -2574,14 +2557,12 @@ XXH_PUBLIC_API void XXH64_copyState(XXH64_state_t* dstState, const XXH64_state_t
 /*! @ingroup xxh64_family */
 XXH_PUBLIC_API XXH_errorcode XXH64_reset(XXH64_state_t* statePtr, XXH64_hash_t seed)
 {
-    XXH64_state_t state;   /* use a local state to memcpy() in order to avoid strict-aliasing warnings */
-    memset(&state, 0, sizeof(state));
-    state.v[0] = seed + XXH_PRIME64_1 + XXH_PRIME64_2;
-    state.v[1] = seed + XXH_PRIME64_2;
-    state.v[2] = seed + 0;
-    state.v[3] = seed - XXH_PRIME64_1;
-     /* do not write into reserved64, might be removed in a future version */
-    XXH_memcpy(statePtr, &state, sizeof(state) - sizeof(state.reserved64));
+    XXH_ASSERT(statePtr != NULL);
+    memset(statePtr, 0, sizeof(*statePtr));
+    statePtr->v[0] = seed + XXH_PRIME64_1 + XXH_PRIME64_2;
+    statePtr->v[1] = seed + XXH_PRIME64_2;
+    statePtr->v[2] = seed + 0;
+    statePtr->v[3] = seed - XXH_PRIME64_1;
     return XXH_OK;
 }
 
@@ -2663,7 +2644,7 @@ XXH_PUBLIC_API XXH64_hash_t XXH64_digest(const XXH64_state_t* state)
 /*! @ingroup xxh64_family */
 XXH_PUBLIC_API void XXH64_canonicalFromHash(XXH64_canonical_t* dst, XXH64_hash_t hash)
 {
-    XXH_STATIC_ASSERT(sizeof(XXH64_canonical_t) == sizeof(XXH64_hash_t));
+    /* XXH_STATIC_ASSERT(sizeof(XXH64_canonical_t) == sizeof(XXH64_hash_t)); */
     if (XXH_CPU_LITTLE_ENDIAN) hash = XXH_swap64(hash);
     XXH_memcpy(dst, &hash, sizeof(*dst));
 }
@@ -2708,17 +2689,21 @@ XXH_PUBLIC_API XXH64_hash_t XXH64_hashFromCanonical(const XXH64_canonical_t* src
 #    define XXH_unlikely(x) (x)
 #endif
 
-#if defined(__GNUC__)
-#  if defined(__AVX2__)
-#    include <immintrin.h>
-#  elif defined(__SSE2__)
-#    include <emmintrin.h>
-#  elif defined(__ARM_NEON__) || defined(__ARM_NEON)
+#if defined(__GNUC__) || defined(__clang__)
+#  if defined(__ARM_NEON__) || defined(__ARM_NEON) \
+   || defined(__aarch64__)  || defined(_M_ARM) \
+   || defined(_M_ARM64)     || defined(_M_ARM64EC)
 #    define inline __inline__  /* circumvent a clang bug */
 #    include <arm_neon.h>
 #    undef inline
+#  elif defined(__AVX2__)
+#    include <immintrin.h>
+#  elif defined(__SSE2__)
+#    include <emmintrin.h>
 #  endif
-#elif defined(_MSC_VER)
+#endif
+
+#if defined(_MSC_VER)
 #  include <intrin.h>
 #endif
 
@@ -2837,7 +2822,7 @@ enum XXH_VECTOR_TYPE /* fake enum */ {
  * @ingroup tuning
  * @brief Selects the minimum alignment for XXH3's accumulators.
  *
- * When using SIMD, this should match the alignment reqired for said vector
+ * When using SIMD, this should match the alignment required for said vector
  * type, so, for example, 32 for AVX2.
  *
  * Default: Auto detected.
@@ -2856,20 +2841,20 @@ enum XXH_VECTOR_TYPE /* fake enum */ {
 #endif
 
 #ifndef XXH_VECTOR    /* can be defined on command line */
-#  if defined(__AVX512F__)
-#    define XXH_VECTOR XXH_AVX512
-#  elif defined(__AVX2__)
-#    define XXH_VECTOR XXH_AVX2
-#  elif defined(__SSE2__) || defined(_M_AMD64) || defined(_M_X64) || (defined(_M_IX86_FP) && (_M_IX86_FP == 2))
-#    define XXH_VECTOR XXH_SSE2
-#  elif ( \
+#  if ( \
         defined(__ARM_NEON__) || defined(__ARM_NEON) /* gcc */ \
-     || defined(_M_ARM64) || defined(_M_ARM_ARMV7VE) /* msvc */ \
+     || defined(_M_ARM) || defined(_M_ARM64) || defined(_M_ARM64EC) /* msvc */ \
    ) && ( \
         defined(_WIN32) || defined(__LITTLE_ENDIAN__) /* little endian only */ \
     || (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__) \
    )
 #    define XXH_VECTOR XXH_NEON
+#  elif defined(__AVX512F__)
+#    define XXH_VECTOR XXH_AVX512
+#  elif defined(__AVX2__)
+#    define XXH_VECTOR XXH_AVX2
+#  elif defined(__SSE2__) || defined(_M_AMD64) || defined(_M_X64) || (defined(_M_IX86_FP) && (_M_IX86_FP == 2))
+#    define XXH_VECTOR XXH_SSE2
 #  elif (defined(__PPC64__) && defined(__POWER8_VECTOR__)) \
      || (defined(__s390x__) && defined(__VEC__)) \
      && defined(__GNUC__) /* TODO: IBM XL */
@@ -3019,8 +3004,8 @@ enum XXH_VECTOR_TYPE /* fake enum */ {
  * }
  */
 # if !defined(XXH_NO_VZIP_HACK) /* define to disable */ \
-   && defined(__GNUC__) \
-   && !defined(__aarch64__) && !defined(__arm64__) && !defined(_M_ARM64)
+   && (defined(__GNUC__) || defined(__clang__)) \
+   && (defined(__arm__) || defined(__thumb__) || defined(_M_ARM))
 #  define XXH_SPLIT_IN_PLACE(in, outLo, outHi)                                              \
     do {                                                                                    \
       /* Undocumented GCC/Clang operand modifier: %e0 = lower D half, %f0 = upper D half */ \
@@ -3036,6 +3021,52 @@ enum XXH_VECTOR_TYPE /* fake enum */ {
       (outLo) = vmovn_u64    (in);                                                        \
       (outHi) = vshrn_n_u64  ((in), 32);                                                  \
     } while (0)
+# endif
+
+/*!
+ * @ingroup tuning
+ * @brief Controls the NEON to scalar ratio for XXH3
+ *
+ * On AArch64 when not optimizing for size, XXH3 will run 6 lanes using NEON and
+ * 2 lanes on scalar by default.
+ *
+ * This can be set to 2, 4, 6, or 8. ARMv7 will default to all 8 NEON lanes, as the
+ * emulated 64-bit arithmetic is too slow.
+ *
+ * Modern ARM CPUs are _very_ sensitive to how their pipelines are used.
+ *
+ * For example, the Cortex-A73 can dispatch 3 micro-ops per cycle, but it can't
+ * have more than 2 NEON (F0/F1) micro-ops. If you are only using NEON instructions,
+ * you are only using 2/3 of the CPU bandwidth.
+ *
+ * This is even more noticeable on the more advanced cores like the A76 which
+ * can dispatch 8 micro-ops per cycle, but still only 2 NEON micro-ops at once.
+ *
+ * Therefore, @ref XXH3_NEON_LANES lanes will be processed using NEON, and the
+ * remaining lanes will use scalar instructions. This improves the bandwidth
+ * and also gives the integer pipelines something to do besides twiddling loop
+ * counters and pointers.
+ *
+ * This change benefits CPUs with large micro-op buffers without negatively affecting
+ * other CPUs:
+ *
+ *  | Chipset               | Dispatch type       | NEON only | 6:2 hybrid | Diff. |
+ *  |:----------------------|:--------------------|----------:|-----------:|------:|
+ *  | Snapdragon 730 (A76)  | 2 NEON/8 micro-ops  |  8.8 GB/s |  10.1 GB/s |  ~16% |
+ *  | Snapdragon 835 (A73)  | 2 NEON/3 micro-ops  |  5.1 GB/s |   5.3 GB/s |   ~5% |
+ *  | Marvell PXA1928 (A53) | In-order dual-issue |  1.9 GB/s |   1.9 GB/s |    0% |
+ *
+ * It also seems to fix some bad codegen on GCC, making it almost as fast as clang.
+ *
+ * @see XXH3_accumulate_512_neon()
+ */
+# ifndef XXH3_NEON_LANES
+#  if (defined(__aarch64__) || defined(__arm64__) || defined(_M_ARM64) || defined(_M_ARM64EC)) \
+   && !defined(__OPTIMIZE_SIZE__)
+#   define XXH3_NEON_LANES 6
+#  else
+#   define XXH3_NEON_LANES XXH_ACC_NB
+#  endif
 # endif
 #endif  /* XXH_VECTOR == XXH_NEON */
 
@@ -3213,7 +3244,6 @@ XXH_mult32to64(xxh_u64 x, xxh_u64 y)
    return (x & 0xFFFFFFFF) * (y & 0xFFFFFFFF);
 }
 #elif defined(_MSC_VER) && defined(_M_IX86)
-#    include <intrin.h>
 #    define XXH_mult32to64(x, y) __emulu((unsigned)(x), (unsigned)(y))
 #else
 /*
@@ -3253,7 +3283,7 @@ XXH_mult64to128(xxh_u64 lhs, xxh_u64 rhs)
      * In that case it is best to use the portable one.
      * https://github.com/Cyan4973/xxHash/issues/211#issuecomment-515575677
      */
-#if defined(__GNUC__) && !defined(__wasm__) \
+#if (defined(__GNUC__) || defined(__clang__)) && !defined(__wasm__) \
     && defined(__SIZEOF_INT128__) \
     || (defined(_INTEGRAL_MAX_BITS) && _INTEGRAL_MAX_BITS >= 128)
 
@@ -3270,7 +3300,7 @@ XXH_mult64to128(xxh_u64 lhs, xxh_u64 rhs)
      *
      * This compiles to single operand MUL on x64.
      */
-#elif defined(_M_X64) || defined(_M_IA64)
+#elif (defined(_M_X64) || defined(_M_IA64)) && !defined(_M_ARM64EC)
 
 #ifndef _MSC_VER
 #   pragma intrinsic(_umul128)
@@ -3287,7 +3317,7 @@ XXH_mult64to128(xxh_u64 lhs, xxh_u64 rhs)
      *
      * This compiles to the same MUL + UMULH as GCC/Clang's __uint128_t method.
      */
-#elif defined(_M_ARM64)
+#elif defined(_M_ARM64) || defined(_M_ARM64EC)
 
 #ifndef _MSC_VER
 #   pragma intrinsic(__umulh)
@@ -3684,6 +3714,7 @@ XXH_FORCE_INLINE void XXH_writeLE64(void* dst, xxh_u64 v64)
     typedef long long xxh_i64;
 #endif
 
+
 /*
  * XXH3_accumulate_512 is the tightest loop for long inputs, and it is the most optimized.
  *
@@ -4029,12 +4060,32 @@ XXH_FORCE_INLINE XXH_TARGET_SSE2 void XXH3_initCustomSecret_sse2(void* XXH_RESTR
 
 #if (XXH_VECTOR == XXH_NEON)
 
+/* forward declarations for the scalar routines */
+XXH_FORCE_INLINE void
+XXH3_scalarRound(void* XXH_RESTRICT acc, void const* XXH_RESTRICT input,
+                 void const* XXH_RESTRICT secret, size_t lane);
+
+XXH_FORCE_INLINE void
+XXH3_scalarScrambleRound(void* XXH_RESTRICT acc,
+                         void const* XXH_RESTRICT secret, size_t lane);
+
+/*!
+ * @internal
+ * @brief The bulk processing loop for NEON.
+ *
+ * The NEON code path is actually partially scalar when running on AArch64. This
+ * is to optimize the pipelining and can have up to 15% speedup depending on the
+ * CPU, and it also mitigates some GCC codegen issues.
+ *
+ * @see XXH3_NEON_LANES for configuring this and details about this optimization.
+ */
 XXH_FORCE_INLINE void
 XXH3_accumulate_512_neon( void* XXH_RESTRICT acc,
                     const void* XXH_RESTRICT input,
                     const void* XXH_RESTRICT secret)
 {
     XXH_ASSERT((((size_t)acc) & 15) == 0);
+    XXH_STATIC_ASSERT(XXH3_NEON_LANES > 0 && XXH3_NEON_LANES <= XXH_ACC_NB && XXH3_NEON_LANES % 2 == 0);
     {
         uint64x2_t* const xacc = (uint64x2_t *) acc;
         /* We don't use a uint32x4_t pointer because it causes bus errors on ARMv7. */
@@ -4042,7 +4093,8 @@ XXH3_accumulate_512_neon( void* XXH_RESTRICT acc,
         uint8_t const* const xsecret  = (const uint8_t *) secret;
 
         size_t i;
-        for (i=0; i < XXH_STRIPE_LEN / sizeof(uint64x2_t); i++) {
+        /* NEON for the first few lanes (these loops are normally interleaved) */
+        for (i=0; i < XXH3_NEON_LANES / 2; i++) {
             /* data_vec = xinput[i]; */
             uint8x16_t data_vec    = vld1q_u8(xinput  + (i * 16));
             /* key_vec  = xsecret[i];  */
@@ -4063,6 +4115,10 @@ XXH3_accumulate_512_neon( void* XXH_RESTRICT acc,
             xacc[i] = vmlal_u32 (xacc[i], data_key_lo, data_key_hi);
 
         }
+        /* Scalar for the remainder. This may be a zero iteration loop. */
+        for (i = XXH3_NEON_LANES; i < XXH_ACC_NB; i++) {
+            XXH3_scalarRound(acc, input, secret, i);
+        }
     }
 }
 
@@ -4076,7 +4132,8 @@ XXH3_scrambleAcc_neon(void* XXH_RESTRICT acc, const void* XXH_RESTRICT secret)
         uint32x2_t prime       = vdup_n_u32 (XXH_PRIME32_1);
 
         size_t i;
-        for (i=0; i < XXH_STRIPE_LEN/sizeof(uint64x2_t); i++) {
+        /* NEON for the first few lanes (these loops are normally interleaved) */
+        for (i=0; i < XXH3_NEON_LANES / 2; i++) {
             /* xacc[i] ^= (xacc[i] >> 47); */
             uint64x2_t acc_vec  = xacc[i];
             uint64x2_t shifted  = vshrq_n_u64 (acc_vec, 47);
@@ -4116,7 +4173,12 @@ XXH3_scrambleAcc_neon(void* XXH_RESTRICT acc, const void* XXH_RESTRICT secret)
                 /* xacc[i] += (prod_hi & 0xFFFFFFFF) * XXH_PRIME32_1; */
                 xacc[i] = vmlal_u32(xacc[i], data_key_lo, prime);
             }
-    }   }
+        }
+        /* Scalar for the remainder. This may be a zero iteration loop. */
+        for (i = XXH3_NEON_LANES; i < XXH_ACC_NB; i++) {
+            XXH3_scalarScrambleRound(acc, secret, i);
+        }
+    }
 }
 
 #endif
@@ -4129,7 +4191,7 @@ XXH3_accumulate_512_vsx(  void* XXH_RESTRICT acc,
                     const void* XXH_RESTRICT secret)
 {
     /* presumed aligned */
-    unsigned long long* const xacc = (unsigned long long*) acc;
+    unsigned int* const xacc = (unsigned int*) acc;
     xxh_u64x2 const* const xinput   = (xxh_u64x2 const*) input;   /* no alignment restriction */
     xxh_u64x2 const* const xsecret  = (xxh_u64x2 const*) secret;    /* no alignment restriction */
     xxh_u64x2 const v32 = { 32, 32 };
@@ -4145,7 +4207,7 @@ XXH3_accumulate_512_vsx(  void* XXH_RESTRICT acc,
         /* product = ((xxh_u64x2)data_key & 0xFFFFFFFF) * ((xxh_u64x2)shuffled & 0xFFFFFFFF); */
         xxh_u64x2 const product  = XXH_vec_mulo((xxh_u32x4)data_key, shuffled);
         /* acc_vec = xacc[i]; */
-        xxh_u64x2 acc_vec        = vec_xl(0, xacc + 2 * i);
+        xxh_u64x2 acc_vec        = (xxh_u64x2)vec_xl(0, xacc + 4 * i);
         acc_vec += product;
 
         /* swap high and low halves */
@@ -4155,7 +4217,7 @@ XXH3_accumulate_512_vsx(  void* XXH_RESTRICT acc,
         acc_vec += vec_xxpermdi(data_vec, data_vec, 2);
 #endif
         /* xacc[i] = acc_vec; */
-        vec_xst(acc_vec, 0, xacc + 2 * i);
+        vec_xst((xxh_u32x4)acc_vec, 0, xacc + 4 * i);
     }
 }
 
@@ -4193,38 +4255,83 @@ XXH3_scrambleAcc_vsx(void* XXH_RESTRICT acc, const void* XXH_RESTRICT secret)
 
 /* scalar variants - universal */
 
+/*!
+ * @internal
+ * @brief Scalar round for @ref XXH3_accumulate_512_scalar().
+ *
+ * This is extracted to its own function because the NEON path uses a combination
+ * of NEON and scalar.
+ */
+XXH_FORCE_INLINE void
+XXH3_scalarRound(void* XXH_RESTRICT acc,
+                 void const* XXH_RESTRICT input,
+                 void const* XXH_RESTRICT secret,
+                 size_t lane)
+{
+    xxh_u64* xacc = (xxh_u64*) acc;
+    xxh_u8 const* xinput  = (xxh_u8 const*) input;
+    xxh_u8 const* xsecret = (xxh_u8 const*) secret;
+    XXH_ASSERT(lane < XXH_ACC_NB);
+    XXH_ASSERT(((size_t)acc & (XXH_ACC_ALIGN-1)) == 0);
+    {
+        xxh_u64 const data_val = XXH_readLE64(xinput + lane * 8);
+        xxh_u64 const data_key = data_val ^ XXH_readLE64(xsecret + lane * 8);
+        xacc[lane ^ 1] += data_val; /* swap adjacent lanes */
+        xacc[lane] += XXH_mult32to64(data_key & 0xFFFFFFFF, data_key >> 32);
+    }
+}
+
+/*!
+ * @internal
+ * @brief Processes a 64 byte block of data using the scalar path.
+ */
 XXH_FORCE_INLINE void
 XXH3_accumulate_512_scalar(void* XXH_RESTRICT acc,
                      const void* XXH_RESTRICT input,
                      const void* XXH_RESTRICT secret)
 {
-    xxh_u64* const xacc = (xxh_u64*) acc; /* presumed aligned */
-    const xxh_u8* const xinput  = (const xxh_u8*) input;  /* no alignment restriction */
-    const xxh_u8* const xsecret = (const xxh_u8*) secret;   /* no alignment restriction */
     size_t i;
-    XXH_ASSERT(((size_t)acc & (XXH_ACC_ALIGN-1)) == 0);
     for (i=0; i < XXH_ACC_NB; i++) {
-        xxh_u64 const data_val = XXH_readLE64(xinput + 8*i);
-        xxh_u64 const data_key = data_val ^ XXH_readLE64(xsecret + i*8);
-        xacc[i ^ 1] += data_val; /* swap adjacent lanes */
-        xacc[i] += XXH_mult32to64(data_key & 0xFFFFFFFF, data_key >> 32);
+        XXH3_scalarRound(acc, input, secret, i);
     }
 }
 
+/*!
+ * @internal
+ * @brief Scalar scramble step for @ref XXH3_scrambleAcc_scalar().
+ *
+ * This is extracted to its own function because the NEON path uses a combination
+ * of NEON and scalar.
+ */
 XXH_FORCE_INLINE void
-XXH3_scrambleAcc_scalar(void* XXH_RESTRICT acc, const void* XXH_RESTRICT secret)
+XXH3_scalarScrambleRound(void* XXH_RESTRICT acc,
+                         void const* XXH_RESTRICT secret,
+                         size_t lane)
 {
     xxh_u64* const xacc = (xxh_u64*) acc;   /* presumed aligned */
     const xxh_u8* const xsecret = (const xxh_u8*) secret;   /* no alignment restriction */
-    size_t i;
     XXH_ASSERT((((size_t)acc) & (XXH_ACC_ALIGN-1)) == 0);
-    for (i=0; i < XXH_ACC_NB; i++) {
-        xxh_u64 const key64 = XXH_readLE64(xsecret + 8*i);
-        xxh_u64 acc64 = xacc[i];
+    XXH_ASSERT(lane < XXH_ACC_NB);
+    {
+        xxh_u64 const key64 = XXH_readLE64(xsecret + lane * 8);
+        xxh_u64 acc64 = xacc[lane];
         acc64 = XXH_xorshift64(acc64, 47);
         acc64 ^= key64;
         acc64 *= XXH_PRIME32_1;
-        xacc[i] = acc64;
+        xacc[lane] = acc64;
+    }
+}
+
+/*!
+ * @internal
+ * @brief Scrambles the accumulators after a large chunk has been read
+ */
+XXH_FORCE_INLINE void
+XXH3_scrambleAcc_scalar(void* XXH_RESTRICT acc, const void* XXH_RESTRICT secret)
+{
+    size_t i;
+    for (i=0; i < XXH_ACC_NB; i++) {
+        XXH3_scalarScrambleRound(acc, secret, i);
     }
 }
 
@@ -4246,8 +4353,9 @@ XXH3_initCustomSecret_scalar(void* XXH_RESTRICT customSecret, xxh_u64 seed64)
      * placed sequentially, in order, at the top of the unrolled loop.
      *
      * While MOVK is great for generating constants (2 cycles for a 64-bit
-     * constant compared to 4 cycles for LDR), long MOVK chains stall the
-     * integer pipelines:
+     * constant compared to 4 cycles for LDR), it fights for bandwidth with
+     * the arithmetic instructions.
+     *
      *   I   L   S
      * MOVK
      * MOVK
@@ -4264,6 +4372,9 @@ XXH3_initCustomSecret_scalar(void* XXH_RESTRICT customSecret, xxh_u64 seed64)
      *  ADD LDR
      *  SUB     STR
      *          STR
+     *
+     * See XXH3_NEON_LANES for details on the pipsline.
+     *
      * XXH3_64bits_withSeed, len == 256, Snapdragon 835
      *   without hack: 2654.4 MB/s
      *   with hack:    3202.9 MB/s
@@ -4843,7 +4954,7 @@ XXH3_update(XXH3_state_t* XXH_RESTRICT const state,
             XXH_ASSERT(state->nbStripesPerBlock >= state->nbStripesSoFar);
             /* join to current block's end */
             {   size_t const nbStripesToEnd = state->nbStripesPerBlock - state->nbStripesSoFar;
-                XXH_ASSERT(nbStripes <= nbStripes);
+                XXH_ASSERT(nbStripesToEnd <= nbStripes);
                 XXH3_accumulate(acc, input, secret + state->nbStripesSoFar * XXH_SECRET_CONSUME_RATE, nbStripesToEnd, f_acc512);
                 f_scramble(acc, secret + state->secretLimit);
                 state->nbStripesSoFar = 0;
@@ -5503,7 +5614,7 @@ XXH128_hashFromCanonical(const XXH128_canonical_t* src)
  */
 #define XXH_MIN(x, y) (((x) > (y)) ? (y) : (x))
 
-static void XXH3_combine16(void* dst, XXH128_hash_t h128)
+XXH_FORCE_INLINE void XXH3_combine16(void* dst, XXH128_hash_t h128)
 {
     XXH_writeLE64( dst, XXH_readLE64(dst) ^ h128.low64 );
     XXH_writeLE64( (char*)dst+8, XXH_readLE64((char*)dst+8) ^ h128.high64 );
@@ -5513,16 +5624,24 @@ static void XXH3_combine16(void* dst, XXH128_hash_t h128)
 XXH_PUBLIC_API XXH_errorcode
 XXH3_generateSecret(void* secretBuffer, size_t secretSize, const void* customSeed, size_t customSeedSize)
 {
+#if (XXH_DEBUGLEVEL >= 1)
     XXH_ASSERT(secretBuffer != NULL);
-    if (secretBuffer == NULL) return XXH_ERROR;
     XXH_ASSERT(secretSize >= XXH3_SECRET_SIZE_MIN);
+#else
+    /* production mode, assert() are disabled */
+    if (secretBuffer == NULL) return XXH_ERROR;
     if (secretSize < XXH3_SECRET_SIZE_MIN) return XXH_ERROR;
+#endif
+
     if (customSeedSize == 0) {
         customSeed = XXH3_kSecret;
         customSeedSize = XXH_SECRET_DEFAULT_SIZE;
     }
+#if (XXH_DEBUGLEVEL >= 1)
     XXH_ASSERT(customSeed != NULL);
+#else
     if (customSeed == NULL) return XXH_ERROR;
+#endif
 
     /* Fill secretBuffer with a copy of customSeed - repeat as needed */
     {   size_t pos = 0;
