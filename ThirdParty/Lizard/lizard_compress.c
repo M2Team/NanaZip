@@ -51,6 +51,15 @@
 #include "lizard_compress_lz4.h"
 #include <common/huf.h>
 
+#define HUF_WORKSPACE_SIZE_U32 (HUF_WORKSPACE_SIZE / 4)
+static inline size_t HUF_compress(void* dst, size_t dstSize, const void* src, size_t srcSize)
+{
+    unsigned workSpace[HUF_WORKSPACE_SIZE_U32];
+    return HUF_compress1X_repeat(dst, dstSize, src, srcSize,
+        HUF_SYMBOLVALUE_MAX, HUF_TABLELOG_DEFAULT,
+        workSpace, sizeof(workSpace),
+        NULL, NULL, 0);
+}
 
 /* *************************************
 *  Local Macros
