@@ -156,6 +156,12 @@
     <ClInclude Include="Zstandard\zstd_errors.h">
       <Filter>Zstandard</Filter>
     </ClInclude>
+    <ClInclude Include="Zstandard\common\allocations.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\bits.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Zstandard\common\debug.c">

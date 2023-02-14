@@ -23,6 +23,8 @@
     <None Include="Zstandard.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Zstandard\common\allocations.h" />
+    <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />
     <ClInclude Include="Zstandard\common\compiler.h" />
     <ClInclude Include="Zstandard\common\cpu.h" />
