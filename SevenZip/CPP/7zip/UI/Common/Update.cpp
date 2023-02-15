@@ -1,4 +1,4 @@
-﻿// Update.cpp
+// Update.cpp
 
 #include "StdAfx.h"
 
@@ -839,6 +839,7 @@ static HRESULT Compress(
     }
     else
     {
+    single:
       outStreamSpec = new COutFileStream;
       outSeekStream = outStreamSpec;
       outStream = outSeekStream;
@@ -881,6 +882,36 @@ static HRESULT Compress(
     if (arc && arc->GetGlobalOffset() > 0)
       return E_NOTIMPL;
 
+    CMyComPtr<IMultiVolumeOutArchive> multiVolArch;
+    outArchive->QueryInterface(IID_IMultiVolumeOutArchive, (void**)&multiVolArch);
+    if (multiVolArch)
+    {
+      CPropVariant prefix, postfix, name;
+      name = archivePath.Name;
+      BOOL numberAfterExt = FALSE;
+      UInt32 numberCount = 2;
+      RINOK(multiVolArch->GetMultiArchiveNameFmt(&name, &prefix, &postfix, &numberAfterExt, &numberCount));
+      if (prefix.vt != VT_EMPTY && prefix.vt != VT_BSTR)
+        return E_FAIL;
+      if (postfix.vt != VT_EMPTY && postfix.vt != VT_BSTR)
+        return E_FAIL;
+      updateCallbackSpec->VolumesSizes = options.VolumesSizes;
+      if (name.vt == VT_BSTR)
+        updateCallbackSpec->VolName = archivePath.Prefix + name.bstrVal;
+      else
+        updateCallbackSpec->VolName = archivePath.Prefix + archivePath.Name;
+      updateCallbackSpec->VolNumberAfterExt = numberAfterExt != FALSE;
+      if (prefix.vt == VT_BSTR)
+        updateCallbackSpec->VolPrefix.SetFromBstr(prefix.bstrVal);
+      if (postfix.vt == VT_BSTR)
+        updateCallbackSpec->VolPostfix.SetFromBstr(postfix.bstrVal);
+      if (!archivePath.VolExtension.IsEmpty())
+        updateCallbackSpec->VolExt = UString('.') + archivePath.VolExtension;
+      updateCallbackSpec->DigitCount = numberCount;
+      const_cast<CRecordVector<UInt64>&>(options.VolumesSizes).Clear();
+      goto single;
+    }
+
     volStreamSpec = new COutMultiVolStream;
     outSeekStream = volStreamSpec;
     outStream = outSeekStream;
@@ -889,13 +920,6 @@ static HRESULT Compress(
     volStreamSpec->Prefix += '.';
     volStreamSpec->TempFiles = &tempFiles;
     volStreamSpec->Init();
-
-    /*
-    updateCallbackSpec->VolumesSizes = volumesSizes;
-    updateCallbackSpec->VolName = archivePath.Prefix + archivePath.Name;
-    if (!archivePath.VolExtension.IsEmpty())
-      updateCallbackSpec->VolExt = UString('.') + archivePath.VolExtension;
-    */
   }
 
   if (options.SfxMode)

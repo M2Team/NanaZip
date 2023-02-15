@@ -1,4 +1,4 @@
-﻿// UpdateCallback.cpp
+// UpdateCallback.cpp
 
 #include "StdAfx.h"
 
@@ -92,7 +92,9 @@ CArchiveUpdateCallback::CArchiveUpdateCallback():
     Need_LatestMTime(false),
     LatestMTime_Defined(false),
 
-    ProcessedItemsStatuses(NULL)
+    ProcessedItemsStatuses(NULL),
+    VolNumberAfterExt(false),
+    DigitCount(2)
 {
   #ifdef _USE_SECURITY_CODE
   _saclEnabled = InitLocalPrivileges();
@@ -907,12 +909,31 @@ STDMETHODIMP CArchiveUpdateCallback::GetVolumeStream(UInt32 index, ISequentialOu
   char temp[16];
   ConvertUInt32ToString(index + 1, temp);
   FString res (temp);
-  while (res.Len() < 2)
+  while (res.Len() < DigitCount)
     res.InsertAtFront(FTEXT('0'));
   FString fileName = VolName;
-  fileName += '.';
-  fileName += res;
-  fileName += VolExt;
+  if (VolNumberAfterExt)
+  {
+    if (!VolPrefix.IsEmpty())
+      fileName += VolPrefix;
+    fileName += VolExt;
+    if (!VolPostfix.IsEmpty())
+      fileName += VolPostfix;
+    else
+      fileName += '.';
+    fileName += res;
+  }
+  else
+  {
+    if (!VolPrefix.IsEmpty())
+      fileName += VolPrefix;
+    else
+      fileName += '.';
+    fileName += res;
+    if (!VolPostfix.IsEmpty())
+      fileName += VolPostfix;
+    fileName += VolExt;
+  }
   COutFileStream *streamSpec = new COutFileStream;
   CMyComPtr<ISequentialOutStream> streamLoc(streamSpec);
   if (!streamSpec->Create(fileName, false))

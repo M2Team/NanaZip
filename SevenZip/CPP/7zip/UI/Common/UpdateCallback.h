@@ -1,4 +1,4 @@
-﻿// UpdateCallback.h
+// UpdateCallback.h
 
 #ifndef __UPDATE_CALLBACK_H
 #define __UPDATE_CALLBACK_H
@@ -135,6 +135,10 @@ public:
   FString VolName;
   FString VolExt;
   UString ArcFileName; // without path prefix
+  FString VolPrefix;
+  FString VolPostfix;
+  bool VolNumberAfterExt;
+  UInt32 DigitCount;
 
   IUpdateCallbackUI *Callback;
 

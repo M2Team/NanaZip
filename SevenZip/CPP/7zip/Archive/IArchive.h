@@ -1,4 +1,4 @@
-﻿// IArchive.h
+// IArchive.h
 
 #ifndef __IARCHIVE_H
 #define __IARCHIVE_H
@@ -209,7 +209,7 @@ IArchiveExtractCallback::GetStream()
 if (IProgress::SetTotal() was called)
 {
   IProgress::SetCompleted(completeValue) uses
-    packSize   - for some stream formats (xz, gz, bz2, lzma, z, ppmd).
+    packSize   - for some stream formats (xz, gz, bz2, lz, lzma, z, ppmd).
     unpackSize - for another formats.
 }
 else
@@ -565,6 +565,10 @@ ARCHIVE_INTERFACE(IOutArchive, 0xA0)
   INTERFACE_IOutArchive(PURE)
 };
 
+ARCHIVE_INTERFACE(IMultiVolumeOutArchive, 0xFF)
+{
+  STDMETHOD(GetMultiArchiveNameFmt)(PROPVARIANT* nameMod, PROPVARIANT* prefix, PROPVARIANT* postfix, BOOL* numberAfterExt, UInt32* digitCount) PURE;
+};
 
 /*
 ISetProperties::SetProperties()
@@ -671,6 +675,7 @@ extern "C"
 
   typedef UInt32 (WINAPI *Func_IsArc)(const Byte *p, size_t size);
   typedef HRESULT (WINAPI *Func_GetIsArc)(UInt32 formatIndex, Func_IsArc *isArc);
+  typedef HRESULT (WINAPI *Func_GetFormatLevelMask)(UInt32 formatIndex, UInt32 *mask);
 
   typedef HRESULT (WINAPI *Func_GetNumberOfFormats)(UInt32 *numFormats);
   typedef HRESULT (WINAPI *Func_GetHandlerProperty)(PROPID propID, PROPVARIANT *value);

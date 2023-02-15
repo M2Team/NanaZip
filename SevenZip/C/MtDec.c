@@ -1,4 +1,4 @@
-﻿/* MtDec.c -- Multi-thread Decoder
+/* MtDec.c -- Multi-thread Decoder
 2021-12-21 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
@@ -102,7 +102,7 @@ typedef struct __CMtDecBufLink CMtDecBufLink;
 
 
 
-static THREAD_FUNC_DECL ThreadFunc(void *pp);
+static MY_NO_INLINE THREAD_FUNC_DECL ThreadFunc(void *pp);
 
 
 static WRes MtDecThread_CreateEvents(CMtDecThread *t)
