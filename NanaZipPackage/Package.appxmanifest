@@ -214,6 +214,7 @@
               <uap:FileType>.7z</uap:FileType>
               <uap:FileType>.apfs</uap:FileType>
               <uap:FileType>.arj</uap:FileType>
+              <uap:FileType>.br</uap:FileType>
               <uap:FileType>.bz2</uap:FileType>
               <uap:FileType>.bzip2</uap:FileType>
               <uap:FileType>.cab</uap:FileType>
@@ -234,6 +235,7 @@
               <uap:FileType>.lz5</uap:FileType>
               <uap:FileType>.lzh</uap:FileType>
               <uap:FileType>.lzma</uap:FileType>
+              <uap:FileType>.lzma2</uap:FileType>
               <uap:FileType>.ntfs</uap:FileType>
               <uap:FileType>.rar</uap:FileType>
               <uap:FileType>.rpm</uap:FileType>
@@ -255,6 +257,7 @@
               <uap:FileType>.z</uap:FileType>
               <uap:FileType>.zip</uap:FileType>
               <uap:FileType>.zst</uap:FileType>
+              <uap:FileType>.zstd</uap:FileType>
               <uap10:FileType>*</uap10:FileType>
             </uap:SupportedFileTypes>
           </uap3:FileTypeAssociation>

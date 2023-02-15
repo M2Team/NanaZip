@@ -311,7 +311,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
   if (!updateCallback)
     return E_FAIL;
   RINOK(updateCallback->GetUpdateItemInfo(0, &newData, &newProps, &indexInArchive));
- 
+
   if ((newProps))
   {
     {
@@ -322,7 +322,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
           return E_INVALIDARG;
     }
   }
-  
+
   if ((newData))
   {
     UInt64 size;
@@ -368,7 +368,7 @@ STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
 static const Byte k_Signature[] = "0xFD2FB522..28";
 
 REGISTER_ARC_IO(
-  "zstd", "zst tzstd", "* .tar", 0x0e,
+  "zstd", "zstd tzstd", "* .tar", 0x0e,
   k_Signature,
   0,
   NArcInfoFlags::kKeepName,
