@@ -653,15 +653,17 @@ static inline char GetHex_Upper(unsigned v)
 {
 #ifdef WANT_OPTIONAL_LOWERCASE
   if (WantLowercaseHashes())
-  {
     return (char)((v < 10) ? ('0' + v) : ('a' + (v - 10)));
-  }
 #endif
   return (char)((v < 10) ? ('0' + v) : ('A' + (v - 10)));
 }
 
 static inline char GetHex_Lower(unsigned v)
 {
+#ifdef WANT_OPTIONAL_LOWERCASE
+  if (!WantLowercaseHashes())
+    return (char)((v < 10) ? ('0' + v) : ('A' + (v - 10)));
+#endif
   return (char)((v < 10) ? ('0' + v) : ('a' + (v - 10)));
 }
 
