@@ -81,7 +81,9 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
     if (ZSTD_isError(result))
       return E_OUTOFMEMORY;
   } else {
-    ZSTD_resetDStream(_ctx);
+    result = ZSTD_DCtx_reset(_ctx, ZSTD_reset_session_only);
+    if (ZSTD_isError(result))
+      return E_FAIL;
   }
 
   zOut.dst = _dstBuf;
@@ -136,7 +138,7 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
 
       /* end of frame */
       if (result == 0) {
-        result = ZSTD_resetDStream(_ctx);
+        result = ZSTD_DCtx_reset(_ctx, ZSTD_reset_session_only);
         if (ZSTD_isError(result))
           return E_FAIL;
 
