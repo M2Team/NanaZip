@@ -58,6 +58,9 @@ bool InitLocalPrivileges();
 CArchiveUpdateCallback::CArchiveUpdateCallback():
     _hardIndex_From((UInt32)(Int32)-1),
 
+    VolNumberAfterExt(false),
+    DigitCount(2),
+
     Callback(NULL),
 
     DirItems(NULL),
@@ -92,9 +95,7 @@ CArchiveUpdateCallback::CArchiveUpdateCallback():
     Need_LatestMTime(false),
     LatestMTime_Defined(false),
 
-    ProcessedItemsStatuses(NULL),
-    VolNumberAfterExt(false),
-    DigitCount(2)
+    ProcessedItemsStatuses(NULL)
 {
   #ifdef _USE_SECURITY_CODE
   _saclEnabled = InitLocalPrivileges();
