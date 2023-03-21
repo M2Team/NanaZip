@@ -25,5 +25,47 @@
       <AdditionalProperties>Configuration=Release;Platform=ARM64</AdditionalProperties>   
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildThisFileDirectory)Mile.Project.Windows\Mile.Project.Build.targets" />
+  <ItemGroup>
+    <!-- <PackagingProjectReference Include="$(MSBuildThisFileDirectory)Mile.Project.Windows\Mile.Project.NuGetPackaging.proj">
+      <AdditionalProperties>NuspecFile=$(MSBuildThisFileDirectory)SampleProject\SampleProject.nuspec</AdditionalProperties>   
+    </PackagingProjectReference> -->
+  </ItemGroup>
+  <Target Name="Restore" >
+    <MSBuild
+      Projects="@(ProjectReference)"
+      Targets="Restore"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+    <MSBuild
+      Projects="@(PackagingProjectReference)"
+      Targets="Restore"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+  </Target>
+  <Target Name="Build" >
+    <MSBuild
+      Projects="@(ProjectReference)"
+      Targets="Build"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+    <MSBuild
+      Projects="@(PackagingProjectReference)"
+      Targets="Build"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+  </Target>
+  <Target Name="Rebuild" >
+    <MSBuild
+      Projects="@(ProjectReference)"
+      Targets="Rebuild"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+    <MSBuild
+      Projects="@(PackagingProjectReference)"
+      Targets="Rebuild"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+  </Target>
 </Project>
