@@ -248,5 +248,16 @@
       <Version>1.0.11</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThirdParty\xxHash.vcxproj">
+      <Project>{5E684BBF-9DAA-4014-986A-463C282D6086}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\Zstandard.vcxproj">
+      <Project>{5054B943-8518-4FCC-B819-685D01104DCC}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.Mitigations.vcxproj">
+      <Project>{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

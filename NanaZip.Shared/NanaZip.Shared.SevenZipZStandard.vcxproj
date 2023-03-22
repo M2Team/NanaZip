@@ -98,5 +98,25 @@
     <None Include="..\SevenZip\C\zstdmt\LICENSE" />
     <None Include="..\SevenZip\C\zstdmt\README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThirdParty\Brotli.vcxproj">
+      <Project>{A210FEF5-7149-420C-AF3B-7A049952475A}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\Lizard.vcxproj">
+      <Project>{6B2B7DA0-6FCD-40AC-8F96-148586054A07}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\LZ4.vcxproj">
+      <Project>{32815BCD-B616-4253-9401-7C742C4CF0C2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\LZ5.vcxproj">
+      <Project>{F3F1F2B3-0525-4782-813B-89A04CABFDD4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\xxHash.vcxproj">
+      <Project>{5E684BBF-9DAA-4014-986A-463C282D6086}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\Zstandard.vcxproj">
+      <Project>{5054B943-8518-4FCC-B819-685D01104DCC}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

@@ -107,5 +107,10 @@
     <ClCompile Include="Zstandard\legacy\zstd_v06.c" />
     <ClCompile Include="Zstandard\legacy\zstd_v07.c" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThirdParty\xxHash.vcxproj">
+      <Project>{5E684BBF-9DAA-4014-986A-463C282D6086}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

@@ -229,5 +229,16 @@
       <Version>1.0.11</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.Mitigations.vcxproj">
+      <Project>{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZipCore\NanaZipCore.vcxproj">
+      <Project>{86D65350-E2AE-47BC-AE05-FC35D3BAAE6C}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZipSfxConsole\NanaZipSfxConsole.vcxproj">
+      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

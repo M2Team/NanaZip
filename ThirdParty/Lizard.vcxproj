@@ -40,5 +40,13 @@
     <ClCompile Include="Lizard\lizard_decompress.c" />
     <ClCompile Include="Lizard\lizard_frame.c" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThirdParty\xxHash.vcxproj">
+      <Project>{5E684BBF-9DAA-4014-986A-463C282D6086}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\Zstandard.vcxproj">
+      <Project>{5054B943-8518-4FCC-B819-685D01104DCC}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

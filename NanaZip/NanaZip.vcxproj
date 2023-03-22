@@ -469,5 +469,22 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.Mitigations.vcxproj">
+      <Project>{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.vcxproj">
+      <Project>{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZipCore\NanaZipCore.vcxproj">
+      <Project>{86D65350-E2AE-47BC-AE05-FC35D3BAAE6C}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZipShellExtension\NanaZipShellExtension.vcxproj">
+      <Project>{F17D4837-7943-4361-9527-2AF9CACE477D}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZipWindows\NanaZipWindows.vcxproj">
+      <Project>{D33E771E-6B30-4EFB-9DEC-A9148D50080D}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

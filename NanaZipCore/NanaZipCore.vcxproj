@@ -599,6 +599,35 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\PropID.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\Format7zF\StdAfx.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThirdParty\BLAKE3.vcxproj">
+      <Project>{7ACD5879-D2BC-4062-A065-78E2603DFE4E}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\Brotli.vcxproj">
+      <Project>{A210FEF5-7149-420C-AF3B-7A049952475A}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\Lizard.vcxproj">
+      <Project>{6B2B7DA0-6FCD-40AC-8F96-148586054A07}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\LZ4.vcxproj">
+      <Project>{32815BCD-B616-4253-9401-7C742C4CF0C2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\LZ5.vcxproj">
+      <Project>{F3F1F2B3-0525-4782-813B-89A04CABFDD4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\RHash.vcxproj">
+      <Project>{28416944-5B8C-447D-ACDE-5BBEAC8A3F28}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\xxHash.vcxproj">
+      <Project>{5E684BBF-9DAA-4014-986A-463C282D6086}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\Zstandard.vcxproj">
+      <Project>{5054B943-8518-4FCC-B819-685D01104DCC}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.SevenZipZStandard.vcxproj">
+      <Project>{6F0E7455-ECE1-440D-9EA2-8C18E4F1CBE6}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>
