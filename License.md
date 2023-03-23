@@ -580,9 +580,10 @@ Creative Commons may be contacted at creativecommons.org.
 - Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4
 - LZ5, https://github.com/inikep/lizard
-- Mile.Cpp, https://github.com/ProjectMile/Mile.Cpp
+- Mile.Project.Windows, https://github.com/ProjectMile/Mile.Project.Windows
+- Mile.Windows.Helpers, https://github.com/ProjectMile/Mile.Windows.Helpers
+- Mile.Xaml, https://github.com/ProjectMile/Mile.Xaml
 - RHash, https://github.com/rhash/RHash
 - VC-LTL, https://github.com/Chuyu-Team/VC-LTL5
-- Windows UI Library, https://github.com/microsoft/microsoft-ui-xaml
 - xxHash, https://github.com/Cyan4973/xxHash
 - Zstandard, https://github.com/facebook/zstd
