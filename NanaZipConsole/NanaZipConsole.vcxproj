@@ -238,6 +238,7 @@
     </ProjectReference>
     <ProjectReference Include="..\NanaZipSfxConsole\NanaZipSfxConsole.vcxproj">
       <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
+      <SetPlatform>Platform=Win32</SetPlatform>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
