@@ -1,70 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project 
-  DefaultTargets="Restore;Build"
+  DefaultTargets="Restore;Build;BuildSfxSetup;BuildInstaller"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <SolutionPath>$(MSBuildThisFileDirectory)*.sln</SolutionPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="$(SolutionPath)">
-      <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionPath)">
-      <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionPath)">
-      <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionPath)">
-      <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionPath)">
-      <AdditionalProperties>Configuration=Debug;Platform=ARM64</AdditionalProperties>   
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionPath)">
-      <AdditionalProperties>Configuration=Release;Platform=ARM64</AdditionalProperties>   
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <!-- <PackagingProjectReference Include="$(MSBuildThisFileDirectory)Mile.Project.Windows\Mile.Project.NuGetPackaging.proj">
-      <AdditionalProperties>NuspecFile=$(MSBuildThisFileDirectory)SampleProject\SampleProject.nuspec</AdditionalProperties>   
-    </PackagingProjectReference> -->
-  </ItemGroup>
-  <Target Name="Restore" >
+  <Target Name="Restore">
+    <ItemGroup>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
+      </ProjectReference>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
+      </ProjectReference>
+    </ItemGroup>
     <MSBuild
       Projects="@(ProjectReference)"
       Targets="Restore"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
-    <MSBuild
-      Projects="@(PackagingProjectReference)"
-      Targets="Restore"
-      StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64" />
   </Target>
-  <Target Name="Build" >
+  <Target Name="Build">
     <MSBuild
-      Projects="@(ProjectReference)"
+      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
       Targets="Build"
       BuildInParallel="True"
       StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64" />
+      Properties="PreferredToolArchitecture=x64;Configuration=Debug;Platform=x86" />
     <MSBuild
-      Projects="@(PackagingProjectReference)"
+      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
       Targets="Build"
+      BuildInParallel="True"
       StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64" />
+      Properties="PreferredToolArchitecture=x64;Configuration=Release;Platform=x86" />
   </Target>
-  <Target Name="Rebuild" >
+  <Target Name="BuildSfxSetup">
+    <ItemGroup>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
+      </ProjectReference>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
+      </ProjectReference>
+    </ItemGroup>
     <MSBuild
       Projects="@(ProjectReference)"
-      Targets="Rebuild"
+      Targets="NanaZipSfxSetup"
       BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
+  </Target>
+  <Target Name="BuildInstaller">
+    <ItemGroup>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
+      </ProjectReference>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
+      </ProjectReference>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
+      </ProjectReference>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
+      </ProjectReference>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Debug;Platform=ARM64</AdditionalProperties>   
+      </ProjectReference>
+      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Release;Platform=ARM64</AdditionalProperties>   
+      </ProjectReference>
+    </ItemGroup>
     <MSBuild
-      Projects="@(PackagingProjectReference)"
-      Targets="Rebuild"
+      Projects="@(ProjectReference)"
+      Targets="NanaZipInstaller"
+      BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
   </Target>
