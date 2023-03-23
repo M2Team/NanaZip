@@ -22,9 +22,6 @@
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
-  <PropertyGroup Label="Globals">
-    <CppWinRTGenerateWindowsMetadata>false</CppWinRTGenerateWindowsMetadata>
-  </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <ItemDefinitionGroup>

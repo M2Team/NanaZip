@@ -11,9 +11,6 @@
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
-  <PropertyGroup Label="Globals">
-    <CppWinRTGenerateWindowsMetadata>false</CppWinRTGenerateWindowsMetadata>
-  </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <ItemDefinitionGroup>
     <ClCompile>
