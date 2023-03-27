@@ -2,13 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+    <LibraryPath>$(MileProjectObjectsPath)$(Configuration)\NanaZip.Shared.ModernExperienceShims\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(MileProjectObjectsPath)$(Configuration)\NanaZip.Shared.ModernExperienceShims\$(Platform)\ModernWin32MessageBox.obj;$(MileProjectObjectsPath)$(Configuration)\NanaZip.Shared.ModernExperienceShims\$(Platform)\ModernWin32FileBrowser.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ModernWin32MessageBox.obj;ModernWin32FileBrowser.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
 </Project>
