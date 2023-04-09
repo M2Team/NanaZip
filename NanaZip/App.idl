@@ -1,8 +1,4 @@
 ﻿namespace NanaZip
 {
-    [default_interface]
-    runtimeclass App : Mile.Xaml.Application
-    {
-        App();
-    }
+
 }

@@ -1,20 +1,19 @@
 ﻿#include "pch.h"
 
 #include "App.h"
-#include "App.g.cpp"
+
+#include <Mile.Xaml.h>
 
 namespace winrt::NanaZip::implementation
 {
     App::App()
     {
-        this->Initialize();
-
-        this->AddRef();
-        m_inner.as<::IUnknown>()->Release();
+        ::MileXamlGlobalInitialize();
     }
 
-    App::~App()
+    void App::Close()
     {
-        this->Close();
+        Exit();
+        ::MileXamlGlobalUninitialize();
     }
 }

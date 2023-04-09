@@ -458,7 +458,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">
-      <Version>1.2.495</Version>
+      <Version>2.0.573-preview</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
       <Version>1.0.11</Version>
