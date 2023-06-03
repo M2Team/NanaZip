@@ -242,8 +242,22 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     {
         try
         {
+            // GetCurrentApplicationUserModelId can't work properly when the
+            // program starts from Visual Studio, because NanaZip will be
+            // allocated a wrong AUMID.
+            UINT32 nLength = 0;
+            ::GetCurrentApplicationUserModelId(
+                &nLength,
+                nullptr);
+            std::wstring AUMID(
+                nLength,
+                '\0');
+            winrt::check_hresult(::GetCurrentApplicationUserModelId(
+                &nLength,
+                AUMID.data()));
             winrt::Uri NavigateURI(
-                L"ms-settings:defaultapps");
+                L"ms-settings:defaultapps?registeredAUMID="
+                + AUMID);
             winrt::LauncherOptions Options;
             Options.TargetApplicationPackageFamilyName(
                 L"windows.immersivecontrolpanel_cw5n1h2txyewy");
