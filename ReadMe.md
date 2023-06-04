@@ -132,6 +132,10 @@ the following command in the PowerShell which is run as administrator.
 - If you turn off the Windows Firewall, you may fail to install NanaZip.
   (https://github.com/M2Team/NanaZip/issues/204)
   (https://github.com/microsoft/terminal/issues/12269)
+- Due to the System Settings APP limitations, only starting with Windows 11+ 
+  (Build 22000.1817+ & 22621.1555+), you can launch directly to the settings 
+  page of file association for NanaZip.
+  (https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-default-apps-settings)
 
 ## Development Roadmap
 
