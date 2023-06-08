@@ -119,6 +119,8 @@ the following command in the PowerShell which is run as administrator.
 
 - If you can't find NanaZip in the context menu, please restart all File 
   Explorer processes via Task Manager.
+- Due to the design of MSIX, drives' context menu in Explorer only show in
+  Windows 11(22H2)+.
 - Due to the issues in Desktop Bridge file system virtualization, you are 
   unable to use NanaZip in the Safe Mode of Windows.
 - Due to the policy from Microsoft Store, NanaZip is unable to disable Desktop 
