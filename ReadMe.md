@@ -136,6 +136,7 @@ the following command in the PowerShell which is run as administrator.
   (Build 22000.1817+ & 22621.1555+), you can launch directly to the settings 
   page of file association for NanaZip.
   (https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-default-apps-settings)
+- Due to the design of MSIX, drives' context menu in Explorer only show in Windows 11(22H2)+.
 
 ## Development Roadmap
 
