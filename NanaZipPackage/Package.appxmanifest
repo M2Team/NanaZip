@@ -10,10 +10,11 @@
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
+  xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
-  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 uap8 uap10 virtualization">
+  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 desktop10 uap8 uap10 virtualization">
 
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
@@ -266,12 +267,15 @@
           <desktop4:FileExplorerContextMenus>
             <!-- Our verb name starts with "C" to work around a bug preventing our shell menu from appearing in the
                  classic context menu. -->
+            <desktop4:ItemType Type="*">
+              <desktop4:Verb Id="CNanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
+            </desktop4:ItemType>
             <desktop5:ItemType Type="Directory">
               <desktop5:Verb Id="CNanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
             </desktop5:ItemType>
-            <desktop5:ItemType Type="*">
-              <desktop5:Verb Id="CNanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
-            </desktop5:ItemType>
+            <desktop10:ItemType Type="Drive">
+              <desktop10:Verb Id="CNanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
+            </desktop10:ItemType>
           </desktop4:FileExplorerContextMenus>
         </desktop4:Extension>
         <com:Extension Category="windows.comServer">
