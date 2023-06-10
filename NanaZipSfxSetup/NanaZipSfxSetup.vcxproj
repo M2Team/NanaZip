@@ -7,6 +7,7 @@
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZipSfxSetup.manifest</MileProjectManifestFile>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Self Extracting Executable (Setup)</MileProjectFileDescription>
