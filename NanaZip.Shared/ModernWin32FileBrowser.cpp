@@ -6,7 +6,7 @@
  * LICENSE:   The MIT License
  *
  * DEVELOPER: reflectronic (john-tur@outlook.com)
- *            Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+ *            MouriNaruto (KurikoMouri@outlook.jp)
  */
 
 #include <Windows.h>
@@ -42,7 +42,7 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI ModernSHBrowseForFolderW(LPBROWSEINFOW uType)
     // Instead, it sets it by configuring the message loop for the shell dialog,
     // passing the path of the default folder through the lParam, and navigating
     // to that folder inside the message loop.
-    // 
+    //
     // Since we cannot augment the IFileDialog's message loop, we will reach into
     // the lParam given to us to find the initial path and hope that 7-Zip does
     // not change this behavior.

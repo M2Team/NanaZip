@@ -6,7 +6,7 @@
  * LICENSE:   The MIT License
  *
  * DEVELOPER: dinhngtu (contact@tudinh.xyz)
- *            Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+ *            MouriNaruto (KurikoMouri@outlook.jp)
  */
 
 #include "Mitigations.h"

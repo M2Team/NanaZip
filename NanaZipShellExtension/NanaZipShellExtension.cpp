@@ -5,7 +5,7 @@
  *
  * LICENSE:   The MIT License
  *
- * DEVELOPER: Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+ * DEVELOPER: MouriNaruto (KurikoMouri@outlook.jp)
  */
 
 #include <Windows.h>
@@ -909,7 +909,7 @@ namespace NanaZip::ShellExtension
             _Outptr_ LPWSTR* ppszName)
         {
             this->Initialize(psiItemArray);
-            
+
             if (this->m_SubCommands.empty())
             {
                 *ppszName = nullptr;

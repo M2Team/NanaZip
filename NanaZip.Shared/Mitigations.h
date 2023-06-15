@@ -6,7 +6,7 @@
  * LICENSE:   The MIT License
  *
  * DEVELOPER: dinhngtu (contact@tudinh.xyz)
- *            Mouri_Naruto (Mouri_Naruto AT Outlook.com)
+ *            MouriNaruto (KurikoMouri@outlook.jp)
  */
 
 #ifndef NANAZIP_SHARED_MITIGATIONS
