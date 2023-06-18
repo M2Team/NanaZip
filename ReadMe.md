@@ -173,7 +173,7 @@ the following command in the PowerShell which is run as administrator.
   - [x] Add the UI stack based on XAML Islands which is used in NanaZip.
   - [x] Start modernizing the UI with XAML Islands with the Windows 11 control
         style, dark and light mode support.
-- 2.x Series (2023 Q3)
+- Blue Moon (3.x) Series (Before 2024 Q3)
   - [ ] Continue to modernize the UI with XAML Islands with the Windows 11 
         control style, dark and light mode support.
   - [ ] Full Accessibility support in all UI components.
@@ -182,7 +182,6 @@ the following command in the PowerShell which is run as administrator.
   - [ ] Continue to modernize the core implementation.
   - [ ] Try to Windows Runtime component for interoperability.
   - [ ] Provide NanaZip Installer for simplify the deployment.
-- 3.x Series (2024 Q3)
   - [ ] Try to add option for save file names with UTF-8 in 7z archives.
   - [ ] Add batch task support. (Suggested by 刘泪.)
   - [ ] Try to design the new UI layout. (Suggested by wangwenx190.)
@@ -198,7 +197,7 @@ the following command in the PowerShell which is run as administrator.
   - [ ] Try to add an option when extracting an archive to open the folder 
         where you extracted the files, like WinRAR. (Suggested by maicol07.)
   - [ ] Try to add ISO creation support.
-- 5.x Series (2025 Q3)
+- Sherlock Holmes (5.x) Series (Before 2025 Q3)
   - Currently no new feature plans for this series.
 - Unpredictable Future Series (T.B.D.)
   - [ ] Try to create a new archive file format optimized for software 
