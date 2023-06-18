@@ -368,7 +368,7 @@ STDMETHODIMP CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
 static const Byte k_Signature[] = "0xFD2FB522..28";
 
 REGISTER_ARC_IO(
-  "zstd", "zstd tzstd", "* .tar", 0x0e,
+  "zstd", "zst zstd tzst tzstd", "* * .tar .tar", 0x0e,
   k_Signature,
   0,
   NArcInfoFlags::kKeepName,
