@@ -1,5 +1,5 @@
 #include "SplitDialogRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 288
 #define yc 96

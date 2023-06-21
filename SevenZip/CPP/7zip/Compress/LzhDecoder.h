@@ -3,11 +3,11 @@
 #ifndef __COMPRESS_LZH_DECODER_H
 #define __COMPRESS_LZH_DECODER_H
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 #include "BitmDecoder.h"
 #include "HuffmanDecoder.h"
@@ -63,7 +63,7 @@ public:
       const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
 
   void SetDictSize(unsigned dictSize) { DictSize = dictSize; }
-  
+
   CCoder(): DictSize(1 << 16), FinishMode(false) {}
 
   UInt64 GetInputProcessedSize() const { return _inBitStream.GetProcessedSize(); }

@@ -1,3 +1,3 @@
 ﻿// DeflateProps.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"

@@ -1,6 +1,6 @@
 ﻿// UefiHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
 // #define SHOW_DEBUG_INFO
 
@@ -8,24 +8,24 @@
 #include <stdio.h>
 #endif
 
-#include "../../../C/7zCrc.h"
-#include "../../../C/Alloc.h"
-#include "../../../C/CpuArch.h"
-#include "../../../C/LzmaDec.h"
+#include "../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/LzmaDec.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/IntToString.h"
-#include "../../Common/MyBuffer.h"
-#include "../../Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamObjects.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 #include "../Compress/LzhDecoder.h"
 
 #ifdef SHOW_DEBUG_INFO
@@ -217,7 +217,7 @@ static int FindGuid(const Byte *p)
       return i;
   return -1;
 }
- 
+
 static bool IsFfs(const Byte *p)
 {
   if (Get32(p + 0x28) != kFvSignature)
@@ -245,7 +245,7 @@ static const CUInt32PCharPair g_FV_Attribs[] =
   {  9, "StickyWrite" },
   { 10, "MemoryMapped" },
   { 11, "ErasePolarity" },
-  
+
   { 12, "ReadLockCap" },
   { 13, "WriteLockCap" },
   { 14, "WriteLockCap" }
@@ -468,7 +468,7 @@ public:
   Byte GuidName[kGuidSize];
   Byte Type;
   UInt32 Size;
-  
+
   bool Parse(const Byte *p)
   {
     unsigned i;
@@ -497,7 +497,7 @@ public:
     UInt32 tailSize = GetTailSize();
     if (Size < kFileHeaderSize + tailSize)
       return false;
-    
+
     {
       unsigned checkSum = 0;
       for (UInt32 i = 0; i < kFileHeaderSize; i++)
@@ -507,7 +507,7 @@ public:
       if ((Byte)checkSum != 0)
         return false;
     }
-    
+
     if (IsThereFileChecksum())
     {
       unsigned checkSum = 0;
@@ -518,7 +518,7 @@ public:
       if ((Byte)checkSum != 0)
         return false;
     }
-    
+
     if (IsThereTail())
       if (GetTailReference() != (UInt16)~Get16(p + Size - 2))
         return false;
@@ -716,7 +716,7 @@ class CHandler:
   HRESULT DecodeLzma(const Byte *data, size_t inputSize);
 
   HRESULT ParseSections(int bufIndex, UInt32 pos, UInt32 size, int parent, int method, unsigned level, bool &error);
-  
+
   HRESULT ParseIntelMe(int bufIndex, UInt32 posBase,
       UInt32 exactSize, UInt32 limitSize,
       int parent, int method, unsigned level);
@@ -960,12 +960,12 @@ HRESULT CHandler::ParseSections(int bufIndex, UInt32 posBase, UInt32 size, int p
       return S_OK;
     if (rem < 4)
       return S_FALSE;
-    
+
     const Byte *p = bufData + posBase + pos;
-    
+
     const UInt32 sectSize = Get24(p);
     const Byte type = p[3];
-    
+
     // PrintLevel(level);
     PRF(printf(" type = %2x, sectSize = %6x", type, sectSize));
 
@@ -1019,7 +1019,7 @@ HRESULT CHandler::ParseSections(int bufIndex, UInt32 posBase, UInt32 size, int p
 
           NCompress::NLzh::NDecoder::CCoder *lzhDecoderSpec = 0;
           CMyComPtr<ICompressCoder> lzhDecoder;
- 
+
           lzhDecoderSpec = new NCompress::NLzh::NDecoder::CCoder;
           lzhDecoder = lzhDecoderSpec;
 
@@ -1122,7 +1122,7 @@ HRESULT CHandler::ParseSections(int bufIndex, UInt32 posBase, UInt32 size, int p
       bool needDir = true;
       unsigned newBufIndex = bufIndex;
       int newMethod = method;
-  
+
       if (AreGuidsEq(p + 0x4, k_Guid_LZMA_COMPRESSED))
       {
         // item.Name = "guid.lzma";
@@ -1191,7 +1191,7 @@ HRESULT CHandler::ParseSections(int bufIndex, UInt32 posBase, UInt32 size, int p
                   sectDataSize - kInsydeOffset,
                   newParent, method, level));
             }
-            
+
             if (needAdd)
             {
               const char *ext = FindExt(p + 4, sectDataSize);
@@ -1264,7 +1264,7 @@ HRESULT CHandler::ParseSections(int bufIndex, UInt32 posBase, UInt32 size, int p
           break;
         }
       }
-    
+
       if (needAdd)
         AddFileItemWithIndex(item);
     }
@@ -1289,7 +1289,7 @@ struct CVolFfsHeader
 {
   UInt32 HeaderLen;
   UInt64 VolSize;
-  
+
   bool Parse(const Byte *p);
 };
 
@@ -1337,18 +1337,18 @@ HRESULT CHandler::ParseVolume(
     AddItem(item);
     return S_OK;
   }
-  
+
   CVolFfsHeader ffsHeader;
   if (!ffsHeader.Parse(p))
     return S_FALSE;
   // if (parent >= 0) AddSpaceAndString(_items[parent].Characts, FLAGS_TO_STRING(g_FV_Attribs, attribs));
-  
+
   // VolSize > exactSize (fh.Size) for some UEFI archives (is it correct UEFI?)
   // so we check VolSize for limitSize instead.
 
   if (ffsHeader.HeaderLen > limitSize || ffsHeader.VolSize > limitSize)
     return S_FALSE;
-  
+
   {
     UInt32 checkCalc = 0;
     for (UInt32 i = 0; i < ffsHeader.HeaderLen; i += 2)
@@ -1356,11 +1356,11 @@ HRESULT CHandler::ParseVolume(
     if ((checkCalc & 0xFFFF) != 0)
       return S_FALSE;
   }
-  
+
   // 3 reserved bytes are not zeros sometimes.
   // UInt16 ExtHeaderOffset; // in new SPECIFICATION?
   // Byte revision = p[0x37];
-  
+
   UInt32 pos = kFvHeaderSize;
   for (;;)
   {
@@ -1374,9 +1374,9 @@ HRESULT CHandler::ParseVolume(
   }
   if (pos != ffsHeader.HeaderLen)
     return S_FALSE;
-  
+
   CRecordVector<UInt32> guidsVector;
-  
+
   for (;;)
   {
     UInt32 rem = (UInt32)ffsHeader.VolSize - pos;
@@ -1410,10 +1410,10 @@ HRESULT CHandler::ParseVolume(
     }
 
     PrintLevel(level); PRF(printf("%s, type = %3d,  pos = %7x, size = %7x", "FILE", fh.Type, posBase + pos, fh.Size));
-    
+
     if (!fh.Check(pFile, rem))
       return S_FALSE;
-    
+
     UInt32 offset = posBase + pos + kFileHeaderSize;
     UInt32 sectSize = fh.GetDataSize();
     item.Offset = offset;
@@ -1424,7 +1424,7 @@ HRESULT CHandler::ParseVolume(
     if (fh.Type == FV_FILETYPE_FFS_PAD)
       if (Is_FF_Stream(pFile + kFileHeaderSize, sectSize))
         continue;
-    
+
     UInt32 guid32 = Get32(fh.GuidName);
     bool full = true;
     if (guidsVector.FindInSorted(guid32) < 0)
@@ -1433,7 +1433,7 @@ HRESULT CHandler::ParseVolume(
       full = false;
     }
     item.SetGuid(fh.GuidName, full);
-    
+
     item.Characts = fh.GetCharacts();
     // PrintLevel(level);
     PRF(printf(" : %s", item.Characts));
@@ -1491,7 +1491,7 @@ HRESULT CHandler::ParseVolume(
       }
     }
   }
-  
+
   return S_OK;
 }
 
@@ -1527,7 +1527,7 @@ HRESULT CHandler::ParseIntelMe(
   UInt32 regAddr = (v0 >> 12) & 0xFF0;
   // UInt32 numComps  = (v0 >> 8) & 0x3;
   // UInt32 fcba = (v0 <<  4) & 0xFF0;
-  
+
   // (numRegions == 0) in header in some new images.
   // So we don't use the value from header
   UInt32 numRegions = 7;
@@ -1649,12 +1649,12 @@ HRESULT CHandler::Open2(IInStream *stream, const UInt64 *maxCheckStartPosition, 
 
   unsigned num = _items.Size();
   CIntArr numChilds(num);
-  
+
   unsigned i;
-  
+
   for (i = 0; i < num; i++)
     numChilds[i] = 0;
-  
+
   for (i = 0; i < num; i++)
   {
     int parent = _items[i].Parent;
@@ -1676,7 +1676,7 @@ HRESULT CHandler::Open2(IInStream *stream, const UInt64 *maxCheckStartPosition, 
   }
 
   CUIntVector mainToReduced;
-  
+
   for (i = 0; i < _items.Size(); i++)
   {
     mainToReduced.Add(_items2.Size());
@@ -1692,7 +1692,7 @@ HRESULT CHandler::Open2(IInStream *stream, const UInt64 *maxCheckStartPosition, 
     AString characts2 (item.Characts);
     if (item.KeepName)
       name = name2;
-    
+
     while (parent >= 0)
     {
       const CItem &item3 = _items[(unsigned)parent];
@@ -1709,10 +1709,10 @@ HRESULT CHandler::Open2(IInStream *stream, const UInt64 *maxCheckStartPosition, 
       AddSpaceAndString(characts2, item3.Characts);
       parent = item3.Parent;
     }
-    
+
     if (name.IsEmpty())
       name = name2;
-    
+
     CItem2 item2;
     item2.MainIndex = i;
     item2.Name = name;
@@ -1728,7 +1728,7 @@ HRESULT CHandler::Open2(IInStream *stream, const UInt64 *maxCheckStartPosition, 
     _items2.Add(item2);
     */
   }
-  
+
   return S_OK;
 }
 
@@ -1783,7 +1783,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   extractCallback->SetTotal(totalSize);
 
   UInt64 currentTotalSize = 0;
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
@@ -1803,7 +1803,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     const CItem &item = _items[_items2[index].MainIndex];
     RINOK(extractCallback->GetStream(index, &realOutStream, askMode));
     currentTotalSize += item.Size;
-    
+
     if (!testMode && !realOutStream)
       continue;
     RINOK(extractCallback->PrepareOperation(askMode));
@@ -1850,7 +1850,7 @@ STDMETHODIMP CHandler::GetStream(UInt32 index, ISequentialInStream **stream)
 
 
 namespace UEFIc {
-  
+
 static const Byte k_Capsule_Signatures[] =
 {
    16, CAPSULE_SIGNATURE,
@@ -1866,11 +1866,11 @@ REGISTER_ARC_I_CLS(
   NArcInfoFlags::kMultiSignature |
   NArcInfoFlags::kFindSignature,
   NULL)
-  
+
 }
 
 namespace UEFIf {
-  
+
 static const Byte k_FFS_Signatures[] =
 {
    16, FFS1_SIGNATURE,

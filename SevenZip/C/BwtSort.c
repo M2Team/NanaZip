@@ -1,10 +1,10 @@
 ﻿/* BwtSort.c -- BWT block sorting
 2021-04-01 : Igor Pavlov : Public domain */
 
-#include "Precomp.h"
+#include "../../ThirdParty/LZMA/C/Precomp.h"
 
 #include "BwtSort.h"
-#include "Sort.h"
+#include "../../ThirdParty/LZMA/C/Sort.h"
 
 /* #define BLOCK_SORT_USE_HEAP_SORT */
 

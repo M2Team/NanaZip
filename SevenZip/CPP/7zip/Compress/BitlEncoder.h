@@ -3,7 +3,7 @@
 #ifndef __BITL_ENCODER_H
 #define __BITL_ENCODER_H
 
-#include "../Common/OutBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/OutBuffer.h"
 
 class CBitlEncoder
 {

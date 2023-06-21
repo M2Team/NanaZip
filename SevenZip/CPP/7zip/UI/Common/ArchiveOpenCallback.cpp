@@ -2,12 +2,12 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
 
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../../Common/FileStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
 
 #include "ArchiveOpenCallback.h"
 

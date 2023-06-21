@@ -3,11 +3,11 @@
 #ifndef __HASH_CALC_H
 #define __HASH_CALC_H
 
-#include "../../../Common/UTFConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../Common/CreateCoder.h"
-#include "../../Common/MethodProps.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/MethodProps.h"
 
 #include "DirItem.h"
 #include "IFileExtractCallback.h"

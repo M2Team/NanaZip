@@ -3,9 +3,9 @@
 #ifndef __AGENT_AGENT_H
 #define __AGENT_AGENT_H
 
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
 #include "../Common/OpenArchive.h"
 #include "../Common/UpdateAction.h"

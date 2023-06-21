@@ -1,8 +1,8 @@
 ﻿// Rar2Decoder.cpp
 // According to unRAR license, this code may not be used to develop
 // a program that creates RAR archives
- 
-#include "StdAfx.h"
+
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
 #include <stdlib.h>
 
@@ -22,7 +22,7 @@ Byte CFilter::Decode(int &channelDelta, Byte deltaByte)
   int predictedValue = ((8 * LastChar + K1 * D1 + K2 * D2 + K3 * D3 + K4 * D4 + K5 * channelDelta) >> 3);
 
   Byte realValue = (Byte)(predictedValue - deltaByte);
-  
+
   {
     int i = ((int)(signed char)deltaByte) << 3;
 
@@ -47,7 +47,7 @@ Byte CFilter::Decode(int &channelDelta, Byte deltaByte)
     UInt32 minDif = Dif[0];
     UInt32 numMinDif = 0;
     Dif[0] = 0;
-    
+
     for (unsigned i = 1; i < ARRAY_SIZE(Dif); i++)
     {
       if (Dif[i] < minDif)
@@ -57,7 +57,7 @@ Byte CFilter::Decode(int &channelDelta, Byte deltaByte)
       }
       Dif[i] = 0;
     }
-    
+
     switch (numMinDif)
     {
       case 1: if (K1 >= -16) K1--; break;
@@ -72,7 +72,7 @@ Byte CFilter::Decode(int &channelDelta, Byte deltaByte)
       case 10:if (K5 <   16) K5++; break;
     }
   }
-  
+
   return realValue;
 }
 }
@@ -108,14 +108,14 @@ bool CDecoder::ReadTables(void)
 
   Byte levelLevels[kLevelTableSize];
   Byte lens[kMaxTableSize];
-  
+
   m_AudioMode = (ReadBits(1) == 1);
 
   if (ReadBits(1) == 0)
     memset(m_LastLevels, 0, kMaxTableSize);
-  
+
   unsigned numLevels;
-  
+
   if (m_AudioMode)
   {
     m_NumChannels = ReadBits(2) + 1;
@@ -125,14 +125,14 @@ bool CDecoder::ReadTables(void)
   }
   else
     numLevels = kHeapTablesSizesSum;
- 
+
   unsigned i;
   for (i = 0; i < kLevelTableSize; i++)
     levelLevels[i] = (Byte)ReadBits(4);
   RIF(m_LevelDecoder.Build(levelLevels));
-  
+
   i = 0;
-  
+
   do
   {
     UInt32 sym = m_LevelDecoder.Decode(&m_InBitStream);
@@ -196,7 +196,7 @@ bool CDecoder::ReadTables(void)
     RIF(m_DistDecoder.Build(&lens[kMainTableSize]));
     RIF(m_LenDecoder.Build(&lens[kMainTableSize + kDistTableSize]));
   }
-  
+
   memcpy(m_LastLevels, lens, kMaxTableSize);
 
   m_TablesOK = true;
@@ -351,7 +351,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
   m_PackSize = *inSize;
 
   UInt64 pos = 0, unPackSize = *outSize;
-  
+
   m_OutWindowStream.SetStream(outStream);
   m_OutWindowStream.Init(_isSolid);
   m_InBitStream.SetStream(inStream);

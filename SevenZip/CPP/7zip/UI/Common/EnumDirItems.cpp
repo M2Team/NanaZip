@@ -8,18 +8,18 @@
 #ifndef _WIN32
 #include <grp.h>
 #include <pwd.h>
-#include "../../../Common/UTFConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
 #endif
 
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileIO.h"
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #if defined(_WIN32) && !defined(UNDER_CE)
 #define _USE_SECURITY_CODE
-#include "../../../Windows/SecurityUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/SecurityUtils.h"
 #endif
 
 #include "EnumDirItems.h"

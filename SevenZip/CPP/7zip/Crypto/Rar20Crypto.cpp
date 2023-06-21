@@ -1,10 +1,10 @@
 ﻿// Crypto/Rar20Crypto.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/StdAfx.h"
 
-#include "../../../C/7zCrc.h"
-#include "../../../C/CpuArch.h"
-#include "../../../C/RotateDefs.h"
+#include "../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/RotateDefs.h"
 
 #include "Rar20Crypto.h"
 
@@ -52,7 +52,7 @@ void CData::SetPassword(const Byte *data, unsigned size)
   Keys[1] = 0x3F6D12F7L;
   Keys[2] = 0x7515A235L;
   Keys[3] = 0xA4E7F123L;
-  
+
   Byte psw[128];
   MY_memset_0_ARRAY(psw);
   if (size != 0)
@@ -72,7 +72,7 @@ void CData::SetPassword(const Byte *data, unsigned size)
       for (unsigned k = 1; (n1 & 0xFF) != n2; n1++, k++)
         Swap(SubstTable[n1 & 0xFF], SubstTable[(n1 + i + k) & 0xFF]);
     }
-  
+
   for (unsigned i = 0; i < size; i += 16)
     EncryptBlock(psw + i);
 }
@@ -89,7 +89,7 @@ void CData::CryptBlock(Byte *buf, bool encrypt)
 
   if (!encrypt)
     memcpy(inBuf, buf, sizeof(inBuf));
-  
+
   for (unsigned i = 0; i < kNumRounds; i++)
   {
     UInt32 key = Keys[(encrypt ? i : (kNumRounds - 1 - i)) & 3];

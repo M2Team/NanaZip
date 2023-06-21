@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
 #include "SortUtils.h"
 

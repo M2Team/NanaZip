@@ -580,6 +580,7 @@ Creative Commons may be contacted at creativecommons.org.
 - Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4
 - LZ5, https://github.com/inikep/lizard
+- LZMA SDK, https://www.7-zip.org/sdk.html
 - Mile.Project.Windows, https://github.com/ProjectMile/Mile.Project.Windows
 - Mile.Windows.Helpers, https://github.com/ProjectMile/Mile.Windows.Helpers
 - Mile.Xaml, https://github.com/ProjectMile/Mile.Xaml

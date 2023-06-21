@@ -1,8 +1,8 @@
 ﻿// PropVariantUtils.cpp
 
-#include "StdAfx.h"
+#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
 
-#include "../Common/IntToString.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
 
 #include "PropVariantUtils.h"
 

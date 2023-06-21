@@ -1,12 +1,12 @@
 ﻿// FindSignature.cpp
 
-#include "StdAfx.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/StdAfx.h"
 
 #include <string.h>
 
-#include "../../../Common/MyBuffer.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
 
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "FindSignature.h"
 

@@ -2,13 +2,13 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
 
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #ifndef _7ZIP_ST
-#include "../../../Windows/Synchronization.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 #endif
 
 // #include "../Common/PropIDUtils.h"

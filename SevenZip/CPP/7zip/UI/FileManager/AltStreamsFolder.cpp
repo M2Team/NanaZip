@@ -2,15 +2,15 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/ComTry.h"
-#include "../../../Common/StringConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileIO.h"
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
 #include "../Common/ExtractingFilePath.h"
 
@@ -252,13 +252,13 @@ STDMETHODIMP_(Int32) CAltStreamsFolder::CompareItems(UInt32 index1, UInt32 index
           ss2.PackSize);
       #endif
     }
-    
+
     case kpidExtension:
       return CompareFileNames_ForFolderList(
           GetExtensionPtr(ss1.Name),
           GetExtensionPtr(ss2.Name));
   }
-  
+
   return 0;
 }
 
@@ -296,10 +296,10 @@ STDMETHODIMP CAltStreamsFolder::BindToParentFolder(IFolderFolder **resultFolder)
     *resultFolder = drivesFolder.Detach();
     return S_OK;
   }
-  
+
   /*
   parentPath.DeleteFrom(pos + 1);
-  
+
   if (parentPath == kSuperPrefix)
   {
     #ifdef UNDER_CE
@@ -314,7 +314,7 @@ STDMETHODIMP CAltStreamsFolder::BindToParentFolder(IFolderFolder **resultFolder)
   }
 
   FString parentPathReduced = parentPath.Left(pos);
-  
+
   #ifndef UNDER_CE
   pos = parentPathReduced.ReverseFind_PathSepar();
   if (pos == 1)
@@ -328,7 +328,7 @@ STDMETHODIMP CAltStreamsFolder::BindToParentFolder(IFolderFolder **resultFolder)
     return S_OK;
   }
   #endif
-  
+
   CFSFolder *parentFolderSpec = new CFSFolder;
   CMyComPtr<IFolderFolder> parentFolder = parentFolderSpec;
   RINOK(parentFolderSpec->Init(parentPath, 0));
@@ -384,7 +384,7 @@ STDMETHODIMP CAltStreamsFolder::WasChanged(Int32 *wasChanged)
   *wasChanged = BoolToInt(wasChangedMain);
   return S_OK;
 }
- 
+
 STDMETHODIMP CAltStreamsFolder::Clone(IFolderFolder **resultFolder)
 {
   CAltStreamsFolder *folderSpec = new CAltStreamsFolder;
@@ -772,9 +772,9 @@ STDMETHODIMP CAltStreamsFolder::CopyFrom(Int32 /* moveMode */, const wchar_t * /
     RINOK(callback->SetNumFiles(numItems));
 
   UInt64 totalSize = 0;
-  
+
   UInt32 i;
-  
+
   FString path;
   for (i = 0; i < numItems; i++)
   {
@@ -788,11 +788,11 @@ STDMETHODIMP CAltStreamsFolder::CopyFrom(Int32 /* moveMode */, const wchar_t * /
       return E_NOTIMPL;
     totalSize += fi.Size;
   }
-  
+
   RINOK(progress->SetTotal(totalSize));
 
   // UInt64 completedSize = 0;
-   
+
   NFsFolder::CCopyStateIO state;
   state.Progress = progress;
   state.DeleteSrcFile = IntToBool(moveMode);
@@ -815,7 +815,7 @@ STDMETHODIMP CAltStreamsFolder::CopyFrom(Int32 /* moveMode */, const wchar_t * /
       }
     }
   }
-  
+
   for (i = 0; i < numItems; i++)
   {
     path = us2fs(fromFolderPath);

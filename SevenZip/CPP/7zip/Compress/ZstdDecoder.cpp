@@ -1,6 +1,6 @@
 ﻿// (C) 2016 - 2020 Tino Reichardt
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 #include "ZstdDecoder.h"
 
 namespace NCompress {

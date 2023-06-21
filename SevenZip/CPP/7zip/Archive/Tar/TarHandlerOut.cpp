@@ -4,13 +4,13 @@
 
 // #include <stdio.h>
 
-#include "../../../Common/ComTry.h"
-#include "../../../Common/MyLinux.h"
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../Common/ItemNameUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
 
 #include "TarHandler.h"
 #include "TarUpdate.h"

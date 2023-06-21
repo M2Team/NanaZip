@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../Windows/DLL.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
 
 #include "Agent.h"
 
@@ -31,9 +31,9 @@ STDMETHODIMP CArchiveFolderManager::OpenFolderFile(IInStream *inStream,
   }
   CAgent *agent = new CAgent();
   CMyComPtr<IInFolderArchive> archive = agent;
-  
+
   HRESULT res = agent->Open(inStream, filePath, arcFormat, NULL, openArchiveCallback);
-  
+
   if (res != S_OK)
   {
     if (res != S_FALSE)
@@ -43,7 +43,7 @@ STDMETHODIMP CArchiveFolderManager::OpenFolderFile(IInStream *inStream,
     if (!agent->_archiveLink.NonOpen_ErrorInfo.IsThereErrorOrWarning())
       return res;
   }
-  
+
   RINOK(agent->BindToRootFolder(resultFolder));
   return res;
 }
@@ -83,14 +83,14 @@ STDMETHODIMP CArchiveFolderManager::GetExtensions(BSTR *extensions)
   LoadFormats();
   *extensions = 0;
   UString res;
-  
+
   #ifdef EXTERNAL_CODECS
-  
+
   FOR_VECTOR (i, g_CodecsObj->Libs)
     AddIconExt(g_CodecsObj->Libs[i], res);
-  
+
   #endif
-  
+
   AddIconExt(g_CodecsObj->InternalIcons, res);
   return StringToBstr(res, extensions);
 }
@@ -114,7 +114,7 @@ STDMETHODIMP CArchiveFolderManager::GetIconPath(const wchar_t *ext, BSTR *iconPa
       return StringToBstr(fs2us(lib.Path), iconPath);
     }
   }
-  
+
   #endif
 
   int ii;

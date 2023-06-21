@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
 
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #include "ConsoleClose.h"
 #include "HashCon.h"
@@ -173,7 +173,7 @@ void CHashCallbackConsole::PrintSeparatorLine(const CObjectVector<CHasherState> 
       AddMinuses(_s, kNameField_Len);
     }
   }
-  
+
   *_so << _s << endl;
 }
 
@@ -199,7 +199,7 @@ HRESULT CHashCallbackConsole::BeforeFirstFile(const CHashBundle &hb)
           AddSpaces_if_Positive(_s, (int)GetColumnWidth(h.DigestSize) - (int)h.Name.Len());
         }
       }
-      
+
       else if (c == 's')
       {
         AddSpace();
@@ -213,11 +213,11 @@ HRESULT CHashCallbackConsole::BeforeFirstFile(const CHashBundle &hb)
         _s += "Name";
       }
     }
-    
+
     *_so << _s << endl;
     PrintSeparatorLine(hb.Hashers);
   }
-  
+
   return CheckBreak2();
 }
 
@@ -258,7 +258,7 @@ void CHashCallbackConsole::PrintResultLine(UInt64 fileSize,
 
   _s.Empty();
   const AString fields = GetFields();
-  
+
   for (unsigned pos = 0; pos < fields.Len(); pos++)
   {
     const char c = fields[pos];
@@ -299,7 +299,7 @@ void CHashCallbackConsole::PrintResultLine(UInt64 fileSize,
       _s += path;
     }
   }
-  
+
   *_so << _s;
 }
 
@@ -332,7 +332,7 @@ HRESULT CHashCallbackConsole::SetOperationResult(UInt64 fileSize, const CHashBun
     // if (PrintNewLine)
       *_so << endl;
   }
-  
+
   if (NeedPercents())
   {
     _percent.Files++;
@@ -353,7 +353,7 @@ static const char * const k_DigestTitles[] =
 static void PrintSum(CStdOutStream &so, const CHasherState &h, unsigned digestIndex)
 {
   so << h.Name;
-  
+
   {
     AString temp;
     AddSpaces_if_Positive(temp, 6 - (int)h.Name.Len());
@@ -394,30 +394,30 @@ void CHashCallbackConsole::PrintProperty(const char *name, UInt64 value)
 HRESULT CHashCallbackConsole::AfterLastFile(CHashBundle &hb)
 {
   ClosePercents2();
-  
+
   if (PrintHeaders && _so)
   {
     PrintSeparatorLine(hb.Hashers);
-    
+
     PrintResultLine(hb.FilesSize, hb.Hashers, k_HashCalc_Index_DataSum, true, AString());
-    
+
     *_so << endl << endl;
-    
+
     if (hb.NumFiles != 1 || hb.NumDirs != 0)
     {
       if (hb.NumDirs != 0)
         PrintProperty("Folders", hb.NumDirs);
       PrintProperty("Files", hb.NumFiles);
     }
-    
+
     PrintProperty("Size", hb.FilesSize);
-    
+
     if (hb.NumAltStreams != 0)
     {
       PrintProperty("Alternate streams", hb.NumAltStreams);
       PrintProperty("Alternate streams size", hb.AltStreamsSize);
     }
-    
+
     *_so << endl;
     PrintHashStat(*_so, hb);
   }

@@ -1,22 +1,22 @@
 ﻿// MachoHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/MyBuffer.h"
-#include "../../Common/StringConvert.h"
-#include "../../Common/IntToString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
 
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../Common/LimitedStreams.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 static UInt32 Get32(const Byte *p, bool be) { if (be) return GetBe32(p); return GetUi32(p); }
 static UInt64 Get64(const Byte *p, bool be) { if (be) return GetBe64(p); return GetUi64(p); }
@@ -278,7 +278,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
           n = temp;
         }
         s = n;
-       
+
         if (flag64 != 0)
           s += " 64-bit";
         else if ((_cpuSubType & CPU_SUBTYPE_LIB64) && _cpuType != CPU_TYPE_AMD64)
@@ -406,7 +406,7 @@ HRESULT CHandler::Open2(ISequentialInStream *stream)
     case 0xFEEDFACF:  be = false; mode64 = true; break;
     default: return S_FALSE;
   }
-  
+
   _mode64 = mode64;
   _be = be;
 
@@ -487,7 +487,7 @@ HRESULT CHandler::Open2(ISequentialInStream *stream)
             _totalSize = totalSize;
         }
       }
-      
+
       CSegment seg;
       memcpy(seg.Name, buf + 8, kNameSize);
       _segments.Add(seg);
@@ -604,7 +604,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   UInt64 currentTotalSize = 0;
   UInt64 currentItemSize;
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
@@ -631,7 +631,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(extractCallback->GetStream(index, &outStream, askMode));
     if (!testMode && !outStream)
       continue;
-    
+
     RINOK(extractCallback->PrepareOperation(askMode));
     RINOK(_inStream->Seek(item.Pa, STREAM_SEEK_SET, NULL));
     streamSpec->Init(currentItemSize);

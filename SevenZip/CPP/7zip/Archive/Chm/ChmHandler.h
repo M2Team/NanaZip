@@ -3,9 +3,9 @@
 #ifndef __ARCHIVE_CHM_HANDLER_H
 #define __ARCHIVE_CHM_HANDLER_H
 
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "ChmIn.h"
 

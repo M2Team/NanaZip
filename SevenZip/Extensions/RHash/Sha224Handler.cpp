@@ -8,9 +8,9 @@
  * DEVELOPER: MouriNaruto (KurikoMouri@outlook.jp)
  */
 
-#include "../../C/CpuArch.h"
-#include "../../CPP/Common/MyCom.h"
-#include "../../CPP/7zip/Common/RegisterCodec.h"
+#include "../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
 
 #include "../../../ThirdParty/RHash/sha256.h"
 

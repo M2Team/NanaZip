@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #ifdef LANG
 #include "LangUtils.h"

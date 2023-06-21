@@ -1,30 +1,30 @@
 ﻿// LzhHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/MyBuffer.h"
-#include "../../Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 #include "../../Windows/PropVariantUtils.h"
-#include "../../Windows/TimeUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/LimitedStreams.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 #include "../Compress/LzhDecoder.h"
 
-#include "IArchive.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
-#include "Common/ItemNameUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
 
 using namespace NWindows;
 using namespace NTime;

@@ -1,6 +1,6 @@
 ﻿// MyXml.cpp
 
-#include "StdAfx.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
 
 #include "MyXml.h"
 
@@ -98,7 +98,7 @@ const char * CXmlItem::ParseItem(const char *s, int numAllowedLevels)
     Name.SetFrom(beg, (unsigned)(s - beg));
     return s;
   }
-  
+
   IsTag = true;
 
   s++;
@@ -167,7 +167,7 @@ const char * CXmlItem::ParseItem(const char *s, int numAllowedLevels)
     if (s == beg)
       return NULL;
     prop.Name.SetFrom(beg, (unsigned)(s - beg));
-    
+
     SKIP_SPACES(s);
     if (*s != '=')
       return NULL;
@@ -176,7 +176,7 @@ const char * CXmlItem::ParseItem(const char *s, int numAllowedLevels)
     if (*s != '\"')
       return NULL;
     s++;
-    
+
     beg = s;
     for (;;)
     {

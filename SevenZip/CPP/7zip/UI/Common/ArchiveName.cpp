@@ -2,10 +2,10 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #include "ExtractingFilePath.h"
 #include "ArchiveName.h"
@@ -130,7 +130,7 @@ UString CreateArchiveName(const UStringVector &paths, const NFind::CFileInfo *fi
     const UString name2_7z = name2 + L".7z";
     const UString name2_tar = name2 + L".tar";
     const UString name2_wim = name2 + L".wim";
-    
+
     unsigned i = 0;
 
     for (i = 0; i < names.Size(); i++)
@@ -142,14 +142,14 @@ UString CreateArchiveName(const UStringVector &paths, const NFind::CFileInfo *fi
           || 0 == CompareFileNames(fname, name2_wim))
         break;
     }
-    
+
     if (i == names.Size())
       break;
     index++;
     postfix = "_";
     postfix.Add_UInt32(index);
   }
-  
+
   name += postfix;
   return name;
 }

@@ -3,11 +3,11 @@
 #ifndef __SYS_ICON_UTILS_H
 #define __SYS_ICON_UTILS_H
 
-#include "../../../Common/MyWindows.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
 
 #include <CommCtrl.h>
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 struct CExtIconPair
 {
@@ -34,7 +34,7 @@ public:
   CObjectVector<CExtIconPair> _extMap;
   int SplitIconIndex;
   int SplitIconIndex_Defined;
-  
+
   CExtToIconMap(): SplitIconIndex_Defined(false) {}
 
   void Clear()

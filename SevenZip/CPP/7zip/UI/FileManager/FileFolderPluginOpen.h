@@ -3,7 +3,7 @@
 #ifndef __FILE_FOLDER_PLUGIN_OPEN_H
 #define __FILE_FOLDER_PLUGIN_OPEN_H
 
-#include "../../../Windows/DLL.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
 
 struct CFfpOpen
 {

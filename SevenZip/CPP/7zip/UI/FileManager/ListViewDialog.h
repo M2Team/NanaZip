@@ -3,8 +3,8 @@
 #ifndef __LISTVIEW_DIALOG_H
 #define __LISTVIEW_DIALOG_H
 
-#include "../../../Windows/Control/Dialog.h"
-#include "../../../Windows/Control/ListView.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ListView.h"
 
 #include "ListViewDialogRes.h"
 
@@ -21,14 +21,14 @@ class CListViewDialog: public NWindows::NControl::CModalDialog
   void OnEnter();
 public:
   UString Title;
-  
+
   bool SelectFirst;
   bool DeleteIsAllowed;
   bool StringsWereChanged;
-  
+
   UStringVector Strings;
   UStringVector Values;
-  
+
   int FocusedItemIndex;
   unsigned NumColumns;
 

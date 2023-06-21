@@ -16,22 +16,22 @@
 #include <stdio.h>
 
 #ifdef _7ZIP_LARGE_PAGES
-#include "../../../../C/Alloc.h"
+#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
 #endif
 
-#include "../../../Common/IntToString.h"
-#include "../../../Common/ListFileUtils.h"
-#include "../../../Common/StringConvert.h"
-#include "../../../Common/StringToInt.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ListFileUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
 
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/System.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/System.h"
 #ifdef _WIN32
-#include "../../../Windows/FileMapping.h"
-#include "../../../Windows/MemoryLock.h"
-#include "../../../Windows/Synchronization.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileMapping.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/MemoryLock.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 #endif
 
 #include "ArchiveCommandLine.h"

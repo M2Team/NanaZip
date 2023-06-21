@@ -5,9 +5,9 @@
 #include <time.h>
 // #include <stdio.h>
 
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
 #include "SortUtils.h"
 #include "UpdatePair.h"

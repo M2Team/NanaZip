@@ -1,5 +1,5 @@
 #include "MenuPageRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 240
 #define yc 224

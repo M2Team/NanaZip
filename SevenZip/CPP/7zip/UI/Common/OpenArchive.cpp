@@ -8,23 +8,23 @@
 #include <stdio.h>
 #endif
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../../Common/ComTry.h"
-#include "../../../Common/IntToString.h"
-#include "../../../Common/StringConvert.h"
-#include "../../../Common/StringToInt.h"
-#include "../../../Common/UTFConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
 
-#include "../../Common/FileStreams.h"
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/ProgressUtils.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #include "DefaultName.h"
 #include "OpenArchive.h"

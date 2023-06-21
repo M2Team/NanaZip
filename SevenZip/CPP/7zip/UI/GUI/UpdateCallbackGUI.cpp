@@ -2,10 +2,10 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/IntToString.h"
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
 #include "../FileManager/FormatUtils.h"
 #include "../FileManager/LangUtils.h"

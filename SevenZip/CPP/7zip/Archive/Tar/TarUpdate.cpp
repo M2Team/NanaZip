@@ -4,12 +4,12 @@
 
 // #include <stdio.h>
 
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/ProgressUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #include "TarOut.h"
 #include "TarUpdate.h"

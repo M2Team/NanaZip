@@ -3,18 +3,18 @@
 #ifndef __COMPRESS_BZIP2_ENCODER_H
 #define __COMPRESS_BZIP2_ENCODER_H
 
-#include "../../Common/Defs.h"
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
 #ifndef _7ZIP_ST
-#include "../../Windows/Synchronization.h"
-#include "../../Windows/Thread.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
 #endif
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/InBuffer.h"
-#include "../Common/OutBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/OutBuffer.h"
 
 #include "BitmEncoder.h"
 #include "BZip2Const.h"

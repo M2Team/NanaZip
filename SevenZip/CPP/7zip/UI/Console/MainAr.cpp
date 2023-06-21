@@ -3,15 +3,15 @@
 #include "StdAfx.h"
 
 #ifdef _WIN32
-#include "../../../../C/DllSecur.h"
+#include "../../../../../ThirdParty/LZMA/C/DllSecur.h"
 #include "Mitigations.h"
 #endif
 
-#include "../../../Common/MyException.h"
-#include "../../../Common/StdOutStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StdOutStream.h"
 
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/NtCheck.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/NtCheck.h"
 
 #include "../Common/ArchiveCommandLine.h"
 #include "../Common/ExitCode.h"

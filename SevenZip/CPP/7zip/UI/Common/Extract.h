@@ -3,9 +3,9 @@
 #ifndef __EXTRACT_H
 #define __EXTRACT_H
 
-#include "../../../Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
 
-#include "../../Archive/IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "ArchiveExtractCallback.h"
 #include "ArchiveOpenCallback.h"

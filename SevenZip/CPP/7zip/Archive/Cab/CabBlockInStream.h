@@ -3,8 +3,8 @@
 #ifndef __CAB_BLOCK_IN_STREAM_H
 #define __CAB_BLOCK_IN_STREAM_H
 
-#include "../../../Common/MyCom.h"
-#include "../../IStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
 
 namespace NArchive {
 namespace NCab {
@@ -25,11 +25,11 @@ public:
 
   CCabBlockInStream(): _buf(0), ReservedSize(0), MsZip(false) {}
   ~CCabBlockInStream();
-  
+
   bool Create();
-  
+
   void InitForNewBlock() { _size = 0; _pos = 0; }
-  
+
   HRESULT PreRead(ISequentialInStream *stream, UInt32 &packSize, UInt32 &unpackSize);
 
   UInt32 GetPackSizeAvail() const { return _size - _pos; }

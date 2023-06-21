@@ -5,11 +5,11 @@
 #ifndef __COMPRESS_RAR2_DECODER_H
 #define __COMPRESS_RAR2_DECODER_H
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 #include "BitmDecoder.h"
 #include "HuffmanDecoder.h"

@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/MyException.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
 
 #include "../../UI/Common/EnumDirItems.h"
 

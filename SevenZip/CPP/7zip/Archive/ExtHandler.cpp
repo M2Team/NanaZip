@@ -1,6 +1,6 @@
 ﻿// ExtHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
 // #define SHOW_DEBUG_INFO
 
@@ -16,23 +16,23 @@
 #define PRF(x)
 #endif
 
-#include "../../../C/Alloc.h"
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/MyLinux.h"
-#include "../../Common/StringConvert.h"
-#include "../../Common/UTFConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
 
 #include "../../Windows/PropVariantUtils.h"
-#include "../../Windows/TimeUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamObjects.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 using namespace NWindows;
 

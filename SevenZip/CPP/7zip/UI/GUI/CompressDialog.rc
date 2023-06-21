@@ -1,5 +1,5 @@
 #include "CompressDialogRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 400
 #define yc 320

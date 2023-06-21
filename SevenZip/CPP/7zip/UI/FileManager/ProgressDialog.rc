@@ -1,5 +1,5 @@
 #include "ProgressDialogRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 172
 #define yc 44

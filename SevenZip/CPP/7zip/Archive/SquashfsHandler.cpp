@@ -1,30 +1,30 @@
 ﻿// SquashfsHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/Alloc.h"
-#include "../../../C/CpuArch.h"
-#include "../../../C/LzmaDec.h"
-#include "../../../C/Xz.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/LzmaDec.h"
+#include "../../../../ThirdParty/LZMA/C/Xz.h"
 #include <lz4.h>
 
-#include "../../Common/ComTry.h"
-#include "../../Common/MyLinux.h"
-#include "../../Common/IntToString.h"
-#include "../../Common/StringConvert.h"
-#include "../../Common/UTFConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
 
 #include "../../Windows/PropVariantUtils.h"
-#include "../../Windows/TimeUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../Common/CWrappers.h"
-#include "../Common/LimitedStreams.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamObjects.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/CWrappers.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 #include "../Compress/ZlibDecoder.h"
 // #include "../Compress/LzmaDecoder.h"
 #include "../Compress/ZstdDecoder.h"

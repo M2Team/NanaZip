@@ -3,7 +3,7 @@
 #ifndef __BITL_DECODER_H
 #define __BITL_DECODER_H
 
-#include "../IStream.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
 
 namespace NBitl {
 

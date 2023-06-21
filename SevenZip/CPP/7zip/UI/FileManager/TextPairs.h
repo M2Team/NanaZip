@@ -3,7 +3,7 @@
 #ifndef __FM_TEXT_PAIRS_H
 #define __FM_TEXT_PAIRS_H
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 struct CTextPair
 {
@@ -14,7 +14,7 @@ struct CTextPair
 class CPairsStorage
 {
   CObjectVector<CTextPair> Pairs;
-  
+
   int FindID(const UString &id, int &insertPos) const;
   int FindID(const UString &id) const;
   void Sort();

@@ -3,7 +3,7 @@
 #ifndef __TEMP_FILES_H
 #define __TEMP_FILES_H
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 class CTempFiles
 {

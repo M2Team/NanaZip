@@ -2,15 +2,15 @@
 
 #include "StdAfx.h"
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../../Common/IntToString.h"
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../../Windows/FileIO.h"
-#include "../../../Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
 
-#include "../../PropID.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
 
 #include "PropIDUtils.h"
 

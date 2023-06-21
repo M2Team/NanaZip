@@ -1,21 +1,21 @@
 ﻿// ElfHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/IntToString.h"
-#include "../../Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
 
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../Common/LimitedStreams.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 using namespace NWindows;
 
@@ -779,7 +779,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
             s.Add_UInt32(abi);
           }
           flags &= ~((UInt32)7 << 12);
-          
+
           s.Add_Space();
           s += FlagsToString(g_MIPS_Flags, ARRAY_SIZE(g_MIPS_Flags), flags);
         }
@@ -845,7 +845,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       case kpidVirtualSize: prop = (UInt64)item.VSize; break;
       case kpidType: TYPE_TO_PROP(g_SegnmentTypes, item.Type, prop); break;
       case kpidCharacts: FLAGS_TO_PROP(g_SegmentFlags, item.Flags, prop); break;
-        
+
     }
   }
   else
@@ -896,17 +896,17 @@ HRESULT CHandler::Open2(IInStream *stream)
     if (_header.ProgOffset > (UInt64)1 << 60) return S_FALSE;
     RINOK(stream->Seek(_header.ProgOffset, STREAM_SEEK_SET, NULL));
     size_t size = (size_t)_header.SegmentEntrySize * _header.NumSegments;
-    
+
     CByteArr buf(size);
-    
+
     RINOK(ReadStream_FALSE(stream, buf, size));
-    
+
     UInt64 total = _header.ProgOffset + size;
     if (_totalSize < total)
       _totalSize = total;
 
     const Byte *p = buf;
-    
+
     if (addSegments)
       _segments.ClearAndReserve(_header.NumSegments);
     for (unsigned i = 0; i < _header.NumSegments; i++, p += _header.SegmentEntrySize)
@@ -925,9 +925,9 @@ HRESULT CHandler::Open2(IInStream *stream)
     if (_header.SectOffset > (UInt64)1 << 60) return S_FALSE;
     RINOK(stream->Seek(_header.SectOffset, STREAM_SEEK_SET, NULL));
     size_t size = (size_t)_header.SectionEntrySize * _header.NumSections;
-    
+
     CByteArr buf(size);
-    
+
     RINOK(ReadStream_FALSE(stream, buf, size));
 
     UInt64 total = _header.SectOffset + size;
@@ -935,7 +935,7 @@ HRESULT CHandler::Open2(IInStream *stream)
       _totalSize = total;
 
     const Byte *p = buf;
-    
+
     if (addSections)
       _sections.ClearAndReserve(_header.NumSections);
     for (unsigned i = 0; i < _header.NumSections; i++, p += _header.SectionEntrySize)
@@ -967,7 +967,7 @@ HRESULT CHandler::Open2(IInStream *stream)
         RINOK(ReadStream_FALSE(stream, _namesData, (size_t)size));
       }
     }
-    
+
     /*
     // we will not delete NULL sections, since we have links to section via indexes
     for (int i = _sections.Size() - 1; i >= 0; i--)
@@ -1039,7 +1039,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   UInt64 currentTotalSize = 0;
   UInt64 currentItemSize;
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
@@ -1072,12 +1072,12 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       currentItemSize = item.GetSize();
       offset = item.Offset;
     }
-    
+
     CMyComPtr<ISequentialOutStream> outStream;
     RINOK(extractCallback->GetStream(index, &outStream, askMode));
     if (!testMode && !outStream)
       continue;
-      
+
     RINOK(extractCallback->PrepareOperation(askMode));
     RINOK(_inStream->Seek(offset, STREAM_SEEK_SET, NULL));
     streamSpec->Init(currentItemSize);

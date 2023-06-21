@@ -3,14 +3,14 @@
 #ifndef __NSIS_DECODE_H
 #define __NSIS_DECODE_H
 
-#include "../../../Common/MyBuffer.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
 
-#include "../../Common/FilterCoder.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FilterCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "../../Compress/BZip2Decoder.h"
 #include "../../Compress/DeflateDecoder.h"
-#include "../../Compress/LzmaDecoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/LzmaDecoder.h"
 
 namespace NArchive {
 namespace NNsis {

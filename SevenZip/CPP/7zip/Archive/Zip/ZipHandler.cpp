@@ -2,22 +2,22 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/ComTry.h"
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 #include "../../../Windows/PropVariantUtils.h"
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../../IPassword.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 
-#include "../../Common/FilterCoder.h"
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/ProgressUtils.h"
-#include "../../Common/StreamObjects.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FilterCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #ifdef EXTERNAL_CODECS
 #ifndef SUPPORT_LZFSE
@@ -29,19 +29,19 @@
 #include "../../Compress/LzfseDecoder.h"
 #endif
 
-#include "../../Compress/LzmaDecoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/LzmaDecoder.h"
 #include "../../Compress/ImplodeDecoder.h"
 #include "../../Compress/PpmdZip.h"
 #include "../../Compress/ShrinkDecoder.h"
-#include "../../Compress/XzDecoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/XzDecoder.h"
 #include "../../Compress/ZstdDecoder.h"
 
 #include "../../Crypto/WzAes.h"
 #include "../../Crypto/ZipCrypto.h"
 #include "../../Crypto/ZipStrong.h"
 
-#include "../Common/ItemNameUtils.h"
-#include "../Common/OutStreamWithCRC.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/OutStreamWithCRC.h"
 
 
 #include "ZipHandler.h"

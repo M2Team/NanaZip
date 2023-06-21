@@ -4,16 +4,16 @@
 
 // #include <stdio.h>
 
-#include "../../../Common/DynamicBuffer.h"
-#include "../../../Common/IntToString.h"
-#include "../../../Common/MyException.h"
-#include "../../../Common/StringToInt.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/DynamicBuffer.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "ZipIn.h"
 

@@ -2,22 +2,22 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/ComTry.h"
-#include "../../../Common/IntToString.h"
-#include "../../../Common/MyBuffer2.h"
-#include "../../../Common/StringToInt.h"
-#include "../../../Common/UTFConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/ProgressUtils.h"
-#include "../../Common/StreamUtils.h"
-#include "../../Common/UniqBlocks.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/UniqBlocks.h"
 
-#include "../../Crypto/RandGen.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Crypto/RandGen.h"
 #include "../../Crypto/Sha1Cls.h"
 
 #include "WimHandler.h"

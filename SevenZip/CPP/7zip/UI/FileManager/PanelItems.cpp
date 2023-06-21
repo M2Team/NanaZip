@@ -2,14 +2,14 @@
 
 #include "StdAfx.h"
 
-#include "../../../../C/Sort.h"
+#include "../../../../../ThirdParty/LZMA/C/Sort.h"
 
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 #include "../../../Windows/Menu.h"
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
 
-#include "../../PropID.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
 
 #include "../Common/ExtractingFilePath.h"
 

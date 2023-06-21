@@ -6,20 +6,20 @@
 
 #include "Update.h"
 
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../../Windows/DLL.h"
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileFind.h"
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/PropVariantConv.h"
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../../Common/FileStreams.h"
-#include "../../Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #include "../Common/DirItem.h"
 #include "../Common/EnumDirItems.h"

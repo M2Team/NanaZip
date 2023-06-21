@@ -3,7 +3,7 @@
 #ifndef __PROPID_UTILS_H
 #define __PROPID_UTILS_H
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 // provide at least 64 bytes for buffer including zero-end
 void ConvertPropertyToShortString2(char *dest, const PROPVARIANT &propVariant, PROPID propID, int level = 0) throw();

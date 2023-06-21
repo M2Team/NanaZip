@@ -1,12 +1,12 @@
 ﻿// Crypto/ZipCrypto.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/StdAfx.h"
 
-#include "../../../C/7zCrc.h"
+#include "../../../../ThirdParty/LZMA/C/7zCrc.h"
 
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "RandGen.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/RandGen.h"
 #include "ZipCrypto.h"
 
 namespace NCrypto {
@@ -25,14 +25,14 @@ STDMETHODIMP CCipher::CryptoSetPassword(const Byte *data, UInt32 size)
   UInt32 key0 = 0x12345678;
   UInt32 key1 = 0x23456789;
   UInt32 key2 = 0x34567890;
-  
+
   for (UInt32 i = 0; i < size; i++)
     UPDATE_KEYS(data[i]);
 
   KeyMem0 = key0;
   KeyMem1 = key1;
   KeyMem2 = key2;
-  
+
   return S_OK;
 }
 
@@ -44,7 +44,7 @@ STDMETHODIMP CCipher::Init()
 HRESULT CEncoder::WriteHeader_Check16(ISequentialOutStream *outStream, UInt16 crc)
 {
   Byte h[kHeaderSize];
-  
+
   /* PKZIP before 2.0 used 2 byte CRC check.
      PKZIP 2.0+ used 1 byte CRC check. It's more secure.
      We also use 1 byte CRC. */
@@ -52,7 +52,7 @@ HRESULT CEncoder::WriteHeader_Check16(ISequentialOutStream *outStream, UInt16 cr
   MY_RAND_GEN(h, kHeaderSize - 1);
   // h[kHeaderSize - 2] = (Byte)(crc);
   h[kHeaderSize - 1] = (Byte)(crc >> 8);
-  
+
   RestoreKeys();
   Filter(h, kHeaderSize);
   return WriteStream(outStream, h, kHeaderSize);
@@ -95,7 +95,7 @@ STDMETHODIMP_(UInt32) CDecoder::Filter(Byte *data, UInt32 size)
   UInt32 key0 = this->Key0;
   UInt32 key1 = this->Key1;
   UInt32 key2 = this->Key2;
-  
+
   for (UInt32 i = 0; i < size; i++)
   {
     DECRYPT_BYTE_1
@@ -103,11 +103,11 @@ STDMETHODIMP_(UInt32) CDecoder::Filter(Byte *data, UInt32 size)
     UPDATE_KEYS(b);
     data[i] = b;
   }
-  
+
   this->Key0 = key0;
   this->Key1 = key1;
   this->Key2 = key2;
-  
+
   return size;
 }
 

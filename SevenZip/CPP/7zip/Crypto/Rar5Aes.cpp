@@ -1,11 +1,11 @@
 ﻿// Crypto/Rar5Aes.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
 #ifndef _7ZIP_ST
-#include "../../Windows/Synchronization.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 #endif
 
 #include "Rar5Aes.h"
@@ -47,7 +47,7 @@ static unsigned ReadVarInt(const Byte *p, unsigned maxSize, UInt64 *val)
 HRESULT CDecoder::SetDecoderProps(const Byte *p, unsigned size, bool includeIV, bool isService)
 {
   UInt64 Version;
-  
+
   unsigned num = ReadVarInt(p, size, &Version);
   if (num == 0)
     return E_NOTIMPL;
@@ -56,7 +56,7 @@ HRESULT CDecoder::SetDecoderProps(const Byte *p, unsigned size, bool includeIV, 
 
   if (Version != 0)
     return E_NOTIMPL;
-  
+
   num = ReadVarInt(p, size, &Flags);
   if (num == 0)
     return E_NOTIMPL;
@@ -74,23 +74,23 @@ HRESULT CDecoder::SetDecoderProps(const Byte *p, unsigned size, bool includeIV, 
   }
 
   p++;
-    
+
   if (memcmp(_salt, p, kSaltSize) != 0)
   {
     memcpy(_salt, p, kSaltSize);
     _needCalc = true;
   }
-  
+
   p += kSaltSize;
-  
+
   if (includeIV)
   {
     memcpy(_iv, p, AES_BLOCK_SIZE);
     p += AES_BLOCK_SIZE;
   }
-  
+
   _canCheck = true;
-  
+
   if (isCheck)
   {
     memcpy(_check, p, kPswCheckSize);
@@ -187,7 +187,7 @@ bool CDecoder::CalcKey_and_CheckPassword()
         _needCalc = false;
       }
     }
-    
+
     if (_needCalc)
     {
       Byte pswCheck[SHA256_DIGEST_SIZE];
@@ -198,31 +198,31 @@ bool CDecoder::CalcKey_and_CheckPassword()
         MY_ALIGN (16)
         NSha256::CHmac baseCtx;
         baseCtx.SetKey(_password, _password.Size());
-        
+
         NSha256::CHmac ctx = baseCtx;
         ctx.Update(_salt, sizeof(_salt));
-        
+
         MY_ALIGN (16)
         Byte u[NSha256::kDigestSize];
         MY_ALIGN (16)
         Byte key[NSha256::kDigestSize];
-        
+
         u[0] = 0;
         u[1] = 0;
         u[2] = 0;
         u[3] = 1;
-        
+
         ctx.Update(u, 4);
         ctx.Final(u);
-        
+
         memcpy(key, u, NSha256::kDigestSize);
-        
+
         UInt32 numIterations = ((UInt32)1 << _numIterationsLog) - 1;
-        
+
         for (unsigned i = 0; i < 3; i++)
         {
           UInt32 j = numIterations;
-          
+
           for (; j != 0; j--)
           {
             ctx = baseCtx;
@@ -231,7 +231,7 @@ bool CDecoder::CalcKey_and_CheckPassword()
             for (unsigned s = 0; s < NSha256::kDigestSize; s++)
               key[s] ^= u[s];
           }
-          
+
           // RAR uses additional iterations for additional keys
           memcpy((i == 0 ? _key : (i == 1 ? _hashKey : pswCheck)), key, NSha256::kDigestSize);
           numIterations = 16;
@@ -240,23 +240,23 @@ bool CDecoder::CalcKey_and_CheckPassword()
 
       {
         unsigned i;
-       
+
         for (i = 0; i < kPswCheckSize; i++)
           _check_Calced[i] = pswCheck[i];
-      
+
         for (i = kPswCheckSize; i < SHA256_DIGEST_SIZE; i++)
           _check_Calced[i & (kPswCheckSize - 1)] ^= pswCheck[i];
       }
 
       _needCalc = false;
-      
+
       {
         MT_LOCK
         g_Key = *this;
       }
     }
   }
-  
+
   if (IsThereCheck() && _canCheck)
     return (memcmp(_check_Calced, _check, kPswCheckSize) == 0);
   return true;

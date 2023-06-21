@@ -3,10 +3,10 @@
 #ifndef __ZIP_IN_H
 #define __ZIP_IN_H
 
-#include "../../../Common/MyBuffer2.h"
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../../IStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
 
 #include "ZipHeader.h"
 #include "ZipItem.h"

@@ -3,11 +3,11 @@
 #ifndef __DEFLATE_DECODER_H
 #define __DEFLATE_DECODER_H
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 #include "BitlDecoder.h"
 #include "DeflateConst.h"
@@ -50,7 +50,7 @@ class CCoder:
   bool _deflate64Mode;
   bool _keepHistory;
   bool _needFinishInput;
-  
+
   bool _needInitInStream;
   bool _needReadTable;
   Int32 _remainLen;
@@ -67,7 +67,7 @@ class CCoder:
 
   bool DecodeLevels(Byte *levels, unsigned numSymbols);
   bool ReadTables();
-  
+
   HRESULT Flush() { return m_OutWindowStream.Flush(); }
   class CCoderReleaser
   {
@@ -126,7 +126,7 @@ public:
   STDMETHOD(SetInStream)(ISequentialInStream *inStream);
   STDMETHOD(ReleaseInStream)();
   STDMETHOD(SetOutStreamSize)(const UInt64 *outSize);
-  
+
   #ifndef NO_READ_FROM_CODER
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
   #endif

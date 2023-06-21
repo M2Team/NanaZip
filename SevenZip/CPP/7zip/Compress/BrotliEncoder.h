@@ -1,15 +1,15 @@
 ﻿// (C) 2017 Tino Reichardt
 
 #define BROTLI_STATIC_LINKING_ONLY
-#include "../../../C/Alloc.h"
-#include "../../../C/Threads.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Threads.h"
 #include <brotli/encode.h>
 #include "../../../C/zstdmt/brotli-mt.h"
 
-#include "../../Common/Common.h"
-#include "../../Common/MyCom.h"
-#include "../ICoder.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/Common.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #ifndef EXTRACT_ONLY
 namespace NCompress {

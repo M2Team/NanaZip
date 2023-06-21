@@ -2,12 +2,12 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/StringConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/ResourceString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
 
 #include "../FileManager/BrowseDialog.h"
 #include "../FileManager/LangUtils.h"

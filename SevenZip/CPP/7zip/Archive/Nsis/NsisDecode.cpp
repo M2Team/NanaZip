@@ -2,15 +2,15 @@
 
 #include "StdAfx.h"
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
 #include "NsisDecode.h"
 
-#include "../../Common/CreateCoder.h"
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/MethodId.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/MethodId.h"
 
-#include "../../Compress/BcjCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/BcjCoder.h"
 
 #define Get32(p) GetUi32(p)
 
@@ -37,7 +37,7 @@ HRESULT CDecoder::Init(ISequentialInStream *inStream, bool &useFilter)
     if (Method != _curMethod)
       Release();
   _curMethod = Method;
-  
+
   if (!_codecInStream)
   {
     switch (Method)
@@ -70,7 +70,7 @@ HRESULT CDecoder::Init(ISequentialInStream *inStream, bool &useFilter)
       return E_NOTIMPL;
     useFilter = (flag != 0);
   }
-  
+
   if (!useFilter)
     _decoderInStream = _codecInStream;
   else
@@ -187,7 +187,7 @@ HRESULT CDecoder::Decode(CByteBuffer *outBuf, bool unpackSizeDefined, UInt32 unp
         outBuf->Alloc(size);
 
       UInt64 offset = 0;
-      
+
       while (size > 0)
       {
         UInt32 curSize = (UInt32)MyMin((size_t)size, Buffer.Size());
@@ -208,7 +208,7 @@ HRESULT CDecoder::Decode(CByteBuffer *outBuf, bool unpackSizeDefined, UInt32 unp
 
       return S_OK;
     }
-    
+
     size &= ~kMask_IsCompressed;
     packSizeRes = size;
     limitedStreamSpec = new CLimitedSequentialInStream;
@@ -220,7 +220,7 @@ HRESULT CDecoder::Decode(CByteBuffer *outBuf, bool unpackSizeDefined, UInt32 unp
       RINOK(Init(limitedStream, useFilter));
     }
   }
-  
+
   if (outBuf)
   {
     if (unpackSizeDefined)
@@ -251,7 +251,7 @@ HRESULT CDecoder::Decode(CByteBuffer *outBuf, bool unpackSizeDefined, UInt32 unp
         res = S_FALSE;
       break;
     }
-    
+
     if (outBuf)
     {
       size_t nextSize = offset + size;
@@ -266,7 +266,7 @@ HRESULT CDecoder::Decode(CByteBuffer *outBuf, bool unpackSizeDefined, UInt32 unp
       }
       memcpy((Byte *)*outBuf + (size_t)offset, Buffer, size);
     }
-    
+
     StreamPos += size;
     offset += (UInt32)size;
 
@@ -275,7 +275,7 @@ HRESULT CDecoder::Decode(CByteBuffer *outBuf, bool unpackSizeDefined, UInt32 unp
     if (Solid)
       packSizeRes = (UInt32)inSize;
     unpackSizeRes += (UInt32)size;
-    
+
     UInt64 outSize = offset;
     RINOK(progress->SetRatioInfo(&inSize, &outSize));
     if (realOutStream)
@@ -288,7 +288,7 @@ HRESULT CDecoder::Decode(CByteBuffer *outBuf, bool unpackSizeDefined, UInt32 unp
 
   if (outBuf && offset != outBuf->Size())
     outBuf->ChangeSize_KeepData(offset, offset);
-  
+
   return res;
 }
 

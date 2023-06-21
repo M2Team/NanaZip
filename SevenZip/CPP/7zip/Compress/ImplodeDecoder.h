@@ -3,11 +3,11 @@
 #ifndef __COMPRESS_IMPLODE_DECODER_H
 #define __COMPRESS_IMPLODE_DECODER_H
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 #include "BitlDecoder.h"
 #include "LzOutWindow.h"
@@ -41,7 +41,7 @@ class CCoder:
 {
   CLzOutWindow _outWindowStream;
   CInBit _inBitStream;
-  
+
   CHuffmanDecoder _litDecoder;
   CHuffmanDecoder _lenDecoder;
   CHuffmanDecoder _distDecoder;

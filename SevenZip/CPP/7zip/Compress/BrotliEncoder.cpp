@@ -1,6 +1,6 @@
 ﻿// (C) 2017 Tino Reichardt
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 #include "BrotliEncoder.h"
 #include "BrotliDecoder.h"
 
@@ -74,7 +74,7 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
   BROTLIMT_RdWr_t rdwr;
   size_t result;
   HRESULT res = S_OK;
-  
+
   _processedIn = 0;
   _processedOut = 0;
 

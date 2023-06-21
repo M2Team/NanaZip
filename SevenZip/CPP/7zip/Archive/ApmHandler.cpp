@@ -1,16 +1,16 @@
 ﻿// ApmHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/Defs.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
 
-#include "../../Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "HandlerCont.h"
 
@@ -140,13 +140,13 @@ HRESULT CHandler::ReadTables(IInStream *stream)
   }
 
   UInt32 numBlocksInMap = 0;
-  
+
   for (unsigned i = 0;;)
   {
     RINOK(ReadStream_FALSE(stream, buf, kSectorSize));
- 
+
     CItem item;
-    
+
     UInt32 numBlocksInMap2 = 0;
     if (!item.Parse(buf, numBlocksInMap2))
       return S_FALSE;
@@ -163,7 +163,7 @@ HRESULT CHandler::ReadTables(IInStream *stream)
     if (finish < item.StartBlock)
       return S_FALSE;
     _numBlocks = MyMax(_numBlocks, finish);
-    
+
     _items.Add(item);
     for (unsigned j = 1; j < numSkips; j++)
     {
@@ -172,7 +172,7 @@ HRESULT CHandler::ReadTables(IInStream *stream)
     if (++i == numBlocksInMap)
       break;
   }
-  
+
   _phySize = BlocksToBytes(_numBlocks);
   _isArc = true;
   return S_OK;

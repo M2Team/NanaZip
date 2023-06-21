@@ -3,8 +3,8 @@
 #ifndef __LINK_DIALOG_H
 #define __LINK_DIALOG_H
 
-#include "../../../Windows/Control/Dialog.h"
-#include "../../../Windows/Control/ComboBox.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
 
 #include "LinkDialogRes.h"
 
@@ -12,7 +12,7 @@ class CLinkDialog: public NWindows::NControl::CModalDialog
 {
   NWindows::NControl::CComboBox _pathFromCombo;
   NWindows::NControl::CComboBox _pathToCombo;
-  
+
   virtual bool OnInit();
   virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
@@ -26,7 +26,7 @@ public:
   UString CurDirPrefix;
   UString FilePath;
   UString AnotherPath;
-  
+
   INT_PTR Create(HWND parentWindow = 0)
     { return CModalDialog::Create(IDD_LINK, parentWindow); }
 };

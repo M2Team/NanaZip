@@ -2,8 +2,8 @@
 
 #include "StdAfx.h"
 
-#include "../../../Windows/Control/Dialog.h"
-#include "../../../Windows/Control/PropertyPage.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/PropertyPage.h"
 
 #include "DialogSize.h"
 

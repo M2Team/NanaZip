@@ -3,9 +3,9 @@
 #ifndef __WINDOWS_MENU_H
 #define __WINDOWS_MENU_H
 
-#include "../Common/MyString.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
-#include "Defs.h"
+#include "../../../ThirdParty/LZMA/CPP/Windows/Defs.h"
 
 namespace NWindows {
 
@@ -37,14 +37,14 @@ public:
   CMenu(): _menu(NULL) {};
   operator HMENU() const { return _menu; }
   void Attach(HMENU menu) { _menu = menu; }
-  
+
   HMENU Detach()
   {
     HMENU menu = _menu;
     _menu = NULL;
     return menu;
   }
-  
+
   bool Create()
   {
     _menu = ::CreateMenu();
@@ -56,14 +56,14 @@ public:
     _menu = ::CreatePopupMenu();
     return (_menu != NULL);
   }
-  
+
   bool Destroy()
   {
     if (_menu == NULL)
       return false;
     return BOOLToBool(::DestroyMenu(Detach()));
   }
-  
+
   int GetItemCount()
   {
     #ifdef UNDER_CE
@@ -96,7 +96,7 @@ public:
   UINT GetItemID(int pos) { return ::GetMenuItemID(_menu, pos);   }
   UINT GetItemState(UINT id, UINT flags) { return ::GetMenuState(_menu, id, flags);   }
   #endif
-  
+
   bool GetItemInfo(UINT itemIndex, bool byPosition, LPMENUITEMINFO itemInfo)
     { return BOOLToBool(::GetMenuItemInfo(_menu, itemIndex, BoolToBOOL(byPosition), itemInfo)); }
   bool SetItemInfo(UINT itemIndex, bool byPosition, LPMENUITEMINFO itemInfo)

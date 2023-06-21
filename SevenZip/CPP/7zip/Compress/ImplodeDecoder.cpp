@@ -1,8 +1,8 @@
 ﻿// ImplodeDecoder.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
-#include "../../Common/Defs.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
 
 #include "ImplodeDecoder.h"
 
@@ -13,17 +13,17 @@ namespace NDecoder {
 bool CHuffmanDecoder::Build(const Byte *lens, unsigned numSymbols) throw()
 {
   unsigned counts[kNumHuffmanBits + 1];
-  
+
   unsigned i;
   for (i = 0; i <= kNumHuffmanBits; i++)
     counts[i] = 0;
-  
+
   unsigned sym;
   for (sym = 0; sym < numSymbols; sym++)
     counts[lens[sym]]++;
 
   const UInt32 kMaxValue = (UInt32)1 << kNumHuffmanBits;
-  
+
   // _limits[0] = kMaxValue;
 
   UInt32 startPos = kMaxValue;
@@ -139,7 +139,7 @@ HRESULT CCoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *ou
     return S_FALSE;
   if (!BuildHuff(_distDecoder, kDistTableSize))
     return S_FALSE;
- 
+
   UInt64 prevProgress = 0;
   bool moreOut = false;
   UInt64 pos = 0, unPackSize = *outSize;
@@ -194,7 +194,7 @@ HRESULT CCoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *ou
         pos++;
         len--;
       }
-      
+
       if (len != 0)
       {
         _outWindowStream.CopyBlock(dist, len);

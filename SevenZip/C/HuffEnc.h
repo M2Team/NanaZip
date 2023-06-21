@@ -4,7 +4,7 @@
 #ifndef __HUFF_ENC_H
 #define __HUFF_ENC_H
 
-#include "7zTypes.h"
+#include "../../ThirdParty/LZMA/C/7zTypes.h"
 
 EXTERN_C_BEGIN
 

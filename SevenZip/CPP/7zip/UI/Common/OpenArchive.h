@@ -3,7 +3,7 @@
 #ifndef __OPEN_ARCHIVE_H
 #define __OPEN_ARCHIVE_H
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
 #include "ArchiveOpenCallback.h"
 #include "LoadCodecs.h"

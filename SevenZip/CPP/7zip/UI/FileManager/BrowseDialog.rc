@@ -1,5 +1,5 @@
 #include "BrowseDialogRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 256
 #define yc 320

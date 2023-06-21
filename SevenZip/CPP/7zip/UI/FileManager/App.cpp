@@ -5,8 +5,8 @@
 #include "resource.h"
 #include "OverwriteDialogRes.h"
 
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
 
 /*
 #include "Windows/COM.h"

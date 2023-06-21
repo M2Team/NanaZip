@@ -3,8 +3,8 @@
 #ifndef __APP_H
 #define __APP_H
 
-#include "../../../Windows/Control/CommandBar.h"
-#include "../../../Windows/Control/ImageList.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/CommandBar.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ImageList.h"
 
 #include "AppState.h"
 #include "Panel.h"
@@ -137,7 +137,7 @@ public:
   CMyComPtr<IDropTarget> _dropTarget;
 
   UString LangString_N_SELECTED_ITEMS;
-  
+
   void ReloadLang();
 
   CApp(): _window(0), NumPanels(2), LastFocusedPanel(0),
@@ -171,7 +171,7 @@ public:
     _dropTargetSpec->SrcPanelIndex = -1;
   }
 
-  
+
   void OnCopy(bool move, bool copyToSame, int srcPanelIndex);
   void OnSetSameFolder(int srcPanelIndex);
   void OnSetSubFolder(int srcPanelIndex);
@@ -202,14 +202,14 @@ public:
 
   void DiffFiles(const UString &path1, const UString &path2);
   void DiffFiles();
-  
+
   void VerCtrl(unsigned id);
 
   void Split();
   void Combine();
   void Properties() { GetFocusedPanel().Properties(); }
   void Comment() { GetFocusedPanel().ChangeComment(); }
-  
+
   #ifndef UNDER_CE
   void Link();
   void OpenAltStreams() { GetFocusedPanel().OpenAltStreams(); }
@@ -266,7 +266,7 @@ public:
 
   void SetListSettings();
   HRESULT SwitchOnOffOnePanel();
-  
+
   CIntVector _timestampLevels;
 
   bool GetFlatMode() { return Panels[LastFocusedPanel].GetFlatMode(); }
@@ -285,7 +285,7 @@ public:
   }
 
   // bool Get_ShowNtfsStrems_Mode() { return Panels[LastFocusedPanel].Get_ShowNtfsStrems_Mode(); }
-  
+
   void ChangeFlatMode() { Panels[LastFocusedPanel].ChangeFlatMode(); }
   // void Change_ShowNtfsStrems_Mode() { Panels[LastFocusedPanel].Change_ShowNtfsStrems_Mode(); }
   // void Change_ShowDeleted() { ShowDeletedFiles = !ShowDeletedFiles; }
@@ -337,7 +337,7 @@ public:
     if (ShowArchiveToolbar) mask |= 8;
     SaveToolbarsMask(mask);
   }
-  
+
   void SaveToolbarChanges();
 
   void SwitchStandardToolbar()

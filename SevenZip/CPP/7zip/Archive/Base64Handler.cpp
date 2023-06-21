@@ -1,20 +1,20 @@
 ﻿// Base64Handler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/MyBuffer.h"
-#include "../../Common/IntToString.h"
-#include "../../Common/MyVector.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyVector.h"
 
-#include "../../Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
-#include "../Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 /*
 spaces:
@@ -132,7 +132,7 @@ static EBase64Res Base64ToBin(Byte *p, size_t size, const Byte **srcEnd, Byte **
   Byte *dest = p;
   UInt32 val = 1;
   EBase64Res res = k_Base64_RES_NeedMoreInput;
-  
+
   for (;;)
   {
     if (size == 0)
@@ -158,7 +158,7 @@ static EBase64Res Base64ToBin(Byte *p, size_t size, const Byte **srcEnd, Byte **
 
     if (c == k_Code_Space)
       continue;
-    
+
     if (c == k_Code_Equals)
     {
       if (val >= (1 << 12))
@@ -194,7 +194,7 @@ static EBase64Res Base64ToBin(Byte *p, size_t size, const Byte **srcEnd, Byte **
     }
     *dest++ = (Byte)(val >> 4);
   }
-  
+
   *srcEnd = p;
   *destEnd = dest;
   return res;
@@ -222,7 +222,7 @@ Byte *Base64ToBin(Byte *dest, const char *src);
 Byte *Base64ToBin(Byte *dest, const char *src)
 {
   UInt32 val = 1;
-  
+
   for (;;)
   {
     UInt32 c = k_Base64Table[(Byte)(*src++)];
@@ -239,16 +239,16 @@ Byte *Base64ToBin(Byte *dest, const char *src)
       val = 1;
       continue;
     }
-    
+
     if (c == k_Code_Space)
       continue;
-    
+
     if (c == k_Code_Equals)
       break;
-    
+
     if (c == k_Code_Zero && val == 1) // end of string
       return dest;
-    
+
     return NULL;
   }
 
@@ -394,10 +394,10 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
     for (;;)
     {
       RINOK(stream->Seek(0, STREAM_SEEK_SET, NULL));
-      
+
       _data.Alloc(curSize);
       RINOK(ReadStream_OpenProgress(stream, _data, curSize, openCallback));
-      
+
       const Byte *srcEnd;
       Byte *dest;
       _sres = Base64ToBin(_data, curSize, &srcEnd, &dest);
@@ -416,7 +416,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
 
       if (curSize == packSize64)
         break;
-      
+
       UInt64 curSize64 = packSize64;
       if (curSize < (packSize64 >> kLogStep))
         curSize64 = (UInt64)curSize << kLogStep;
@@ -468,9 +468,9 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
         NExtract::NAskMode::kExtract;
-    
+
     RINOK(extractCallback->GetStream(0, &realOutStream, askMode));
-    
+
     if (!testMode && !realOutStream)
       return S_OK;
 
@@ -481,7 +481,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       RINOK(WriteStream(realOutStream, (const Byte *)_data, _size));
       realOutStream.Release();
     }
-  
+
     Int32 opRes = NExtract::NOperationResult::kOK;
 
     if (_sres != k_Base64_RES_Finished)
@@ -494,7 +494,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
     RINOK(extractCallback->SetOperationResult(opRes));
   }
-  
+
   lps->InSize = _phySize;
   lps->OutSize = _size;
   return lps->SetCur();

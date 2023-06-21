@@ -3,13 +3,13 @@
 #ifndef __ZIP_ADD_COMMON_H
 #define __ZIP_ADD_COMMON_H
 
-#include "../../ICoder.h"
-#include "../../IProgress.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IProgress.h"
 
-#include "../../Common/CreateCoder.h"
-#include "../../Common/FilterCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FilterCoder.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #include "../../Crypto/ZipCrypto.h"
 #include "../../Crypto/WzAes.h"
@@ -53,7 +53,7 @@ class CAddCommon  MY_UNCOPYABLE
   NCrypto::NWzAes::CEncoder *_filterAesSpec;
 
   Byte *_buf;
-  
+
   HRESULT CalcStreamCRC(ISequentialInStream *inStream, UInt32 &resultCRC);
 public:
   // CAddCommon(const CCompressionMethodMode &options);
@@ -63,7 +63,7 @@ public:
 
   HRESULT Set_Pre_CompressionResult(bool inSeqMode, bool outSeqMode, UInt64 unpackSize,
       CCompressingResult &opRes) const;
-  
+
   HRESULT Compress(
       DECL_EXTERNAL_CODECS_LOC_VARS
       ISequentialInStream *inStream, IOutStream *outStream,

@@ -3,11 +3,11 @@
 #ifndef __PROGRESS_DIALOG_H
 #define __PROGRESS_DIALOG_H
 
-#include "../../../Windows/Synchronization.h"
-#include "../../../Windows/Thread.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
 
-#include "../../../Windows/Control/Dialog.h"
-#include "../../../Windows/Control/ProgressBar.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ProgressBar.h"
 
 #include "ProgressDialogRes.h"
 

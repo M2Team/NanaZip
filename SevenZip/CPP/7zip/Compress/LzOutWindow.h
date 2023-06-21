@@ -3,7 +3,7 @@
 #ifndef __LZ_OUT_WINDOW_H
 #define __LZ_OUT_WINDOW_H
 
-#include "../Common/OutBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/OutBuffer.h"
 
 #ifndef _NO_EXCEPTIONS
 typedef COutBufferException CLzOutWindowException;
@@ -13,7 +13,7 @@ class CLzOutWindow: public COutBuffer
 {
 public:
   void Init(bool solid = false) throw();
-  
+
   // distance >= 0, len > 0,
   bool CopyBlock(UInt32 distance, UInt32 len)
   {
@@ -47,7 +47,7 @@ public:
     while (--len != 0);
     return true;
   }
-  
+
   void PutByte(Byte b)
   {
     UInt32 pos = _pos;
@@ -76,10 +76,10 @@ public:
         pos = _pos;
         continue;
       }
-      
+
       if (size == 0)
         break;
-      
+
       if (rem > size)
         rem = size;
       size -= rem;
@@ -89,7 +89,7 @@ public:
     }
     _pos = pos;
   }
-  
+
   Byte GetByte(UInt32 distance) const
   {
     UInt32 pos = _pos - distance - 1;

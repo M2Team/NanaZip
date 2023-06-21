@@ -3,12 +3,12 @@
 #ifndef __ARCHIVE_ISO_ITEM_H
 #define __ARCHIVE_ISO_ITEM_H
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../../Common/MyString.h"
-#include "../../../Common/MyBuffer.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
 
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
 #include "IsoHeader.h"
 

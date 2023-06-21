@@ -5,8 +5,8 @@
 
 #include "ExtractDialogRes.h"
 
-#include "../../../Windows/Control/ComboBox.h"
-#include "../../../Windows/Control/Edit.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
 
 #include "../Common/ExtractMode.h"
 

@@ -2,14 +2,14 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
 
-#include "../../../Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
 
-#include "../../Common/FileStreams.h"
-#include "../../Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #include "../Common/WorkDir.h"
 

@@ -3,7 +3,7 @@
 #ifndef __ARCHIVE_WIM_HANDLER_H
 #define __ARCHIVE_WIM_HANDLER_H
 
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
 #include "WimIn.h"
 
@@ -30,7 +30,7 @@ class CHandler:
   CObjectVector<CWimXml> _xmls;
   // unsigned _nameLenForStreams;
   bool _xmlInComments;
-  
+
   unsigned _numXmlItems;
   unsigned _numIgnoreItems;
 
@@ -66,13 +66,13 @@ class CHandler:
 
     if (_volumes.Size() == 0)
       return true;
-    
+
     if (_volumes.Size() != 2) return false;
     if (_volumes[0].Stream) return false;
     if (_version != k_Version_NonSolid
         // && _version != k_Version_Solid
         ) return false;
-    
+
     return true;
   }
 

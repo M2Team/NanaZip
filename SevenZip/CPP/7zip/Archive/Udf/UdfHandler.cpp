@@ -2,17 +2,17 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
 
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/ProgressUtils.h"
-#include "../../Common/RegisterArc.h"
-#include "../../Common/StreamObjects.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #include "UdfHandler.h"
 

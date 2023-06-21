@@ -3,8 +3,8 @@
 #ifndef __REGISTRY_UTILS_H
 #define __REGISTRY_UTILS_H
 
-#include "../../../Common/MyTypes.h"
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 void SaveRegLang(const UString &path);
 void ReadRegLang(UString &path);

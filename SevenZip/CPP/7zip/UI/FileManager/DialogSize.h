@@ -3,7 +3,7 @@
 #ifndef __DIALOG_SIZE_H
 #define __DIALOG_SIZE_H
 
-#include "../../../Windows/Control/Dialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
 
 #ifdef UNDER_CE
 #define BIG_DIALOG_SIZE(x, y) bool isBig = NWindows::NControl::IsDialogSizeOK(x, y);

@@ -1,26 +1,26 @@
 ﻿// PeHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
 // #include <stdio.h>
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/DynamicBuffer.h"
-#include "../../Common/ComTry.h"
-#include "../../Common/IntToString.h"
-#include "../../Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/DynamicBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
 #include "../../Windows/PropVariantUtils.h"
-#include "../../Windows/TimeUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../Common/LimitedStreams.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamObjects.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #define Get16(p) GetUi16(p)
 #define Get32(p) GetUi32(p)

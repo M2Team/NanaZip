@@ -3,7 +3,7 @@
 #ifndef __MYCOM2_H
 #define __MYCOM2_H
 
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
 #define MY_ADDREF_RELEASE_MT \
 STDMETHOD_(ULONG, AddRef)() { InterlockedIncrement((LONG *)&__m_RefCount); return __m_RefCount; } \

@@ -3,11 +3,11 @@
 #ifndef __MEM_BLOCKS_H
 #define __MEM_BLOCKS_H
 
-#include "../../Common/MyVector.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyVector.h"
 
-#include "../../Windows/Synchronization.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 
-#include "../IStream.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
 
 class CMemBlockManager
 {
@@ -51,7 +51,7 @@ class CMemBlocks
 public:
   CRecordVector<void *> Blocks;
   UInt64 TotalSize;
-  
+
   CMemBlocks(): TotalSize(0) {}
 
   void FreeOpt(CMemBlockManagerMt *manager);

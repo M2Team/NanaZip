@@ -3,9 +3,9 @@
 #ifndef __ZIP_OUT_H
 #define __ZIP_OUT_H
 
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../../Common/OutBuffer.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/OutBuffer.h"
 
 #include "ZipItem.h"
 

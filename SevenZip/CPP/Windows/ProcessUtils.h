@@ -5,10 +5,10 @@
 
 #include <Psapi.h>
 
-#include "../Common/MyString.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
-#include "Defs.h"
-#include "Handle.h"
+#include "../../../ThirdParty/LZMA/CPP/Windows/Defs.h"
+#include "../../../ThirdParty/LZMA/CPP/Windows/Handle.h"
 
 namespace NWindows {
 

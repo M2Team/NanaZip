@@ -1,9 +1,9 @@
 ﻿// LzmsDecoder.cpp
 // The code is based on LZMS description from wimlib code
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
-#include "../../../C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
 
 #include "LzmsDecoder.h"
 
@@ -68,7 +68,7 @@ static unsigned GetNumPosSlots(size_t size)
 {
   if (size < 2)
     return 0;
-  
+
   size--;
 
   if (size >= g_PosBases[k_NumPosSyms - 1])
@@ -120,7 +120,7 @@ static void x86_Filter(Byte *data, UInt32 size, Int32 *history)
 
   // first byte is ignored
   Int32 i = 0;
-  
+
   for (;;)
   {
     Byte *p = data + (UInt32)i;
@@ -130,7 +130,7 @@ static void x86_Filter(Byte *data, UInt32 size, Int32 *history)
       if (isCode[*(++p)]) break;
       if (isCode[*(++p)]) break;
     }
-    
+
     i = (Int32)(p - data);
     if ((UInt32)i >= size)
       break;
@@ -138,9 +138,9 @@ static void x86_Filter(Byte *data, UInt32 size, Int32 *history)
     UInt32 codeLen;
 
     Int32 maxTransOffset = k_x86_TransOffset;
-    
+
     Byte b = p[0];
-    
+
     if (b == 0x48)
     {
       if (p[1] == 0x8B)
@@ -257,7 +257,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
 
   CBitDecoder _bs;
   CRangeDecoder _rc;
- 
+
   if (inSize < 8 || (inSize & 1) != 0)
     return S_FALSE;
   _rc.Init(in, inSize);
@@ -313,7 +313,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
 
   {
     unsigned prevType = 0;
-    
+
     while (_pos < outSize)
     {
       if (_rc.Decode(&mainState, k_NumMainProbs, mainProbs) == 0)
@@ -327,7 +327,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
       else if (_rc.Decode(&matchState, k_NumMatchProbs, matchProbs) == 0)
       {
         UInt32 distance;
-        
+
         if (_rc.Decode(&lzRepStates[0], k_NumRepProbs, lzRepProbs[0]) == 0)
         {
           UInt32 number;
@@ -426,7 +426,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
 
         UInt32 power;
         UInt32 distance32;
-        
+
         if (_rc.Decode(&deltaRepStates[0], k_NumRepProbs, deltaRepProbs[0]) == 0)
         {
           HUFF_DEC(power, m_PowerDecoder);
@@ -501,7 +501,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
         }
 
         UInt32 dist = (distance32 << power);
-        
+
         UInt32 lenSlot;
         HUFF_DEC(lenSlot, m_LenDecoder);
         LIMIT_CHECK

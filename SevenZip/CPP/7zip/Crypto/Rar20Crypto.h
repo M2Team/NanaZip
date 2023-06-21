@@ -3,9 +3,9 @@
 #ifndef __CRYPTO_RAR20_CRYPTO_H
 #define __CRYPTO_RAR20_CRYPTO_H
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
 namespace NCrypto {
 namespace NRar2 {
@@ -17,7 +17,7 @@ class CData
 {
   Byte SubstTable[256];
   UInt32 Keys[4];
-  
+
   UInt32 SubstLong(UInt32 t) const
   {
     return (UInt32)SubstTable[(unsigned)t         & 255]

@@ -3,10 +3,10 @@
 #ifndef __ZIP_UPDATE_H
 #define __ZIP_UPDATE_H
 
-#include "../../ICoder.h"
-#include "../IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
-#include "../../Common/CreateCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
 
 #include "ZipCompressionMode.h"
 #include "ZipIn.h"

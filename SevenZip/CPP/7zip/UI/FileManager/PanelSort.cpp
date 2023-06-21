@@ -2,10 +2,10 @@
 
 #include "StdAfx.h"
 
-#include "../../../../C/CpuArch.h"
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../../PropID.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
 
 #include "Panel.h"
 
@@ -100,7 +100,7 @@ static int CALLBACK CompareItems2(LPARAM lParam1, LPARAM lParam2, LPARAM lpData)
   if (lpData == 0)
     return 0;
   CPanel *panel = (CPanel*)lpData;
-  
+
 
   PROPID propID = panel->_sortID;
 
@@ -136,7 +136,7 @@ static int CALLBACK CompareItems2(LPARAM lParam1, LPARAM lParam2, LPARAM lpData)
 
   if (panel->_folderCompare)
     return panel->_folderCompare->CompareItems((UInt32)lParam1, (UInt32)lParam2, propID, panel->_isRawSortProp);
-  
+
   switch (propID)
   {
     // if (panel->_sortIndex == 0)
@@ -193,7 +193,7 @@ int CALLBACK CompareItems(LPARAM lParam1, LPARAM lParam2, LPARAM lpData)
 
   bool isDir1 = panel->IsItem_Folder((int)lParam1);
   bool isDir2 = panel->IsItem_Folder((int)lParam2);
-  
+
   if (isDir1 && !isDir2) return -1;
   if (isDir2 && !isDir1) return 1;
 

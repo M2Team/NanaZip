@@ -3,7 +3,7 @@
 #ifndef __REGISTRY_ASSOCIATIONS_H
 #define __REGISTRY_ASSOCIATIONS_H
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 namespace NRegistryAssoc {
 

@@ -3,7 +3,7 @@
 #ifndef __UPDATE_CALLBACK_CONSOLE_H
 #define __UPDATE_CALLBACK_CONSOLE_H
 
-#include "../../../Common/StdOutStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StdOutStream.h"
 
 #include "../Common/Update.h"
 

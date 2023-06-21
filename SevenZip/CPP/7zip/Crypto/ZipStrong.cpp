@@ -1,11 +1,11 @@
 ﻿// Crypto/ZipStrong.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/StdAfx.h"
 
-#include "../../../C/7zCrc.h"
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "Sha1Cls.h"
 #include "ZipStrong.h"
@@ -37,7 +37,7 @@ static void DeriveKey2(const Byte *digest, Byte c, Byte *dest)
   sha.Update(buf, 64);
   sha.Final(dest);
 }
- 
+
 static void DeriveKey(NSha1::CContext &sha, Byte *key)
 {
   MY_ALIGN (16)
@@ -167,7 +167,7 @@ HRESULT CDecoder::Init_and_CheckPassword(bool &passwOK)
   const Byte *p2 = p + rdSize + 10;
   UInt32 reserved = GetUi32(p2);
   p2 += 4;
-  
+
   /*
   if (cert)
   {
@@ -227,7 +227,7 @@ HRESULT CDecoder::Init_and_CheckPassword(bool &passwOK)
   sha.Update(_iv, _ivSize);
   sha.Update(p, rdSize);
   DeriveKey(sha, fileKey);
-  
+
   RINOK(SetKey(fileKey, _key.KeySize));
   RINOK(SetInitVector(_iv, 16));
   Init();

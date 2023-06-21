@@ -3,6 +3,6 @@
 #ifndef __STDAFX_H
 #define __STDAFX_H
 
-#include "../../../Common/Common.h"
+#include "../../../../../ThirdParty/LZMA/CPP//Common/Common.h"
 
 #endif

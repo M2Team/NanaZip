@@ -4,10 +4,10 @@
 
 // #include <stdio.h>
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "CabIn.h"
 
@@ -47,7 +47,7 @@ void CInArchive::ReadName(AString &s)
       _tempBuf.ChangeSize_KeepData(i * 2, i);
     _tempBuf[i] = b;
   }
-  
+
   for (;;)
   {
     Byte b;
@@ -56,7 +56,7 @@ void CInArchive::ReadName(AString &s)
     if (b == 0)
       break;
   }
-  
+
   ErrorInNames = true;
   s = "[ERROR-LONG-PATH]";
 }
@@ -75,7 +75,7 @@ struct CSignatureFinder
   UInt32 End;
   const Byte *Signature;
   UInt32 SignatureSize;
-  
+
   UInt32 _HeaderSize;
   UInt32 _AlignSize;
   UInt32 _BufUseCapacity;
@@ -147,7 +147,7 @@ HRESULT CSignatureFinder::Find()
       if (rem > rem2)
         rem = (UInt32)rem2;
     }
-    
+
     UInt32 processedSize;
     if (Processed == 0 && rem == _BufUseCapacity - _HeaderSize)
       rem -= _AlignSize; // to make reads more aligned.
@@ -179,7 +179,7 @@ bool CInArcInfo::Parse(const Byte *p)
   NumFiles = Get16(p + 0x1C);
   return true;
 }
-  
+
 
 HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
 {
@@ -202,7 +202,7 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
   // for (int iii = 0; iii < 10000; iii++)
   {
     // db.StartPosition = temp; RINOK(db.Stream->Seek(db.StartPosition, STREAM_SEEK_SET, NULL));
-    
+
     const UInt32 kMainHeaderSize = 32;
     Byte header[kMainHeaderSize];
     const UInt32 kBufSize = 1 << 15;
@@ -238,7 +238,7 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
       finder.Processed = db.StartPosition;
       finder.End = kMainHeaderSize;
       finder.Pos = 1;
-  
+
       for (;;)
       {
         RINOK(finder.Find());
@@ -265,7 +265,7 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
       }
     }
   }
-  
+
   IsArc = true;
 
   _inBuffer.SetStream(limitedStream);
@@ -288,11 +288,11 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
 
   if (ai.IsTherePrev()) ReadOtherArc(ai.PrevArc);
   if (ai.IsThereNext()) ReadOtherArc(ai.NextArc);
-  
+
   UInt32 i;
-  
+
   db.Folders.ClearAndReserve(ai.NumFolders);
-  
+
   for (i = 0; i < ai.NumFolders; i++)
   {
     Read(p, 8);
@@ -304,7 +304,7 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     Skip(ai.PerFolder_AreaSize);
     db.Folders.AddInReserved(folder);
   }
-  
+
   // for (int iii = 0; iii < 10000; iii++) {
 
   if (_inBuffer.GetProcessedSize() - startInBuf != ai.FileHeadersOffset)
@@ -331,16 +331,16 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     item.Attributes = Get16(p + 14);
 
     ReadName(item.Name);
-    
+
     if (item.GetFolderIndex(db.Folders.Size()) >= (int)db.Folders.Size())
     {
       HeaderError = true;
       return S_FALSE;
     }
   }
-  
+
   // }
-  
+
   return S_OK;
 }
 
@@ -400,9 +400,9 @@ void CMvDatabaseEx::FillSortAndShrink()
   Items.Clear();
   StartFolderOfVol.Clear();
   FolderStartFileIndex.Clear();
-  
+
   int offset = 0;
-  
+
   FOR_VECTOR (v, Volumes)
   {
     const CDatabaseEx &db = Volumes[v];
@@ -462,7 +462,7 @@ bool CMvDatabaseEx::Check()
   UInt32 beginPos = 0;
   UInt64 endPos = 0;
   int prevFolder = -2;
-  
+
   FOR_VECTOR (i, Items)
   {
     const CMvItem &mvItem = Items[i];
@@ -472,19 +472,19 @@ bool CMvDatabaseEx::Check()
     const CItem &item = Volumes[mvItem.VolumeIndex].Items[mvItem.ItemIndex];
     if (item.IsDir())
       continue;
-    
+
     int folderIndex = GetFolderIndex(&mvItem);
-  
+
     if (folderIndex != prevFolder)
       prevFolder = folderIndex;
     else if (item.Offset < endPos &&
         (item.Offset != beginPos || item.GetEndOffset() != endPos))
       return false;
-    
+
     beginPos = item.Offset;
     endPos = item.GetEndOffset();
   }
-  
+
   return true;
 }
 

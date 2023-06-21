@@ -8,12 +8,12 @@
 #include <stdio.h>
 #endif
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
 #include "../../../Windows/PropVariantUtils.h"
 
-#include "../../Common/RegisterArc.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "UdfIn.h"
 

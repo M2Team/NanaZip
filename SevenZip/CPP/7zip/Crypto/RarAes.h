@@ -3,13 +3,13 @@
 #ifndef __CRYPTO_RAR_AES_H
 #define __CRYPTO_RAR_AES_H
 
-#include "../../../C/Aes.h"
+#include "../../../../ThirdParty/LZMA/C/Aes.h"
 
-#include "../../Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
 
-#include "../IPassword.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 
-#include "MyAes.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/MyAes.h"
 
 namespace NCrypto {
 namespace NRar3 {
@@ -25,9 +25,9 @@ class CDecoder:
   bool _thereIsSalt;
   bool _needCalc;
   // bool _rar350Mode;
-  
+
   CByteBuffer _password;
-  
+
   Byte _key[kAesKeySize];
   Byte _iv[AES_BLOCK_SIZE];
 
@@ -39,7 +39,7 @@ public:
     // ICompressSetDecoderProperties2
   */
   STDMETHOD(Init)();
-  
+
   void SetPassword(const Byte *data, unsigned size);
   HRESULT SetDecoderProperties2(const Byte *data, UInt32 size);
 

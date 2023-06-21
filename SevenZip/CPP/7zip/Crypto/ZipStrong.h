@@ -3,11 +3,11 @@
 #ifndef __CRYPTO_ZIP_STRONG_H
 #define __CRYPTO_ZIP_STRONG_H
 
-#include "../../Common/MyBuffer2.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
 
-#include "../IPassword.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 
-#include "MyAes.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/MyAes.h"
 
 namespace NCrypto {
 namespace NZipStrong {
@@ -25,7 +25,7 @@ struct CKeyInfo
 {
   Byte MasterKey[32];
   UInt32 KeySize;
-  
+
   void SetPassword(const Byte *data, UInt32 size);
 
   ~CKeyInfo() { Wipe(); }

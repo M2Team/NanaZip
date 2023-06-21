@@ -3,11 +3,11 @@
 #ifndef __CRYPTO_RAR5_AES_H
 #define __CRYPTO_RAR5_AES_H
 
-#include "../../../C/Sha256.h"
+#include "../../../../ThirdParty/LZMA/C/Sha256.h"
 
-#include "../../Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
 
-#include "MyAes.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/MyAes.h"
 
 namespace NCrypto {
 namespace NRar5 {
@@ -29,7 +29,7 @@ struct CKey
   unsigned _numIterationsLog;
   Byte _salt[kSaltSize];
   CByteBuffer _password;
-  
+
   Byte _key[kAesKeySize];
   Byte _check_Calced[kPswCheckSize];
   Byte _hashKey[SHA256_DIGEST_SIZE];
@@ -47,7 +47,7 @@ struct CKey
         && memcmp(_salt, key._salt, sizeof(_salt)) == 0
         && _password == key._password);
   }
-  
+
   CKey();
 
   void Wipe()
@@ -74,7 +74,7 @@ class CDecoder:
   bool IsThereCheck() const { return ((Flags & NCryptoFlags::kPswCheck) != 0); }
 public:
   Byte _iv[AES_BLOCK_SIZE];
-  
+
   CDecoder();
 
   STDMETHOD(Init)();

@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/StringToInt.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
 
 #include "SplitUtils.h"
 

@@ -6,7 +6,7 @@
 #include "DirItem.h"
 #include "UpdateAction.h"
 
-#include "../../Archive/IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 struct CUpdatePair
 {

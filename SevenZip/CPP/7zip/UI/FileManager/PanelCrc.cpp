@@ -2,11 +2,11 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/MyException.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
 
-#include "../../../Windows/FileFind.h"
-#include "../../../Windows/FileIO.h"
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #include "../Common/LoadCodecs.h"
 

@@ -2,10 +2,10 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
 
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #include "../GUI/ExtractRes.h"
 

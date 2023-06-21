@@ -3,8 +3,8 @@
 #ifndef __VIEW_SETTINGS_H
 #define __VIEW_SETTINGS_H
 
-#include "../../../Common/MyTypes.h"
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 struct CColumnInfo
 {
@@ -87,10 +87,10 @@ const UInt32 kListMode_Report = 3;
 struct CListMode
 {
   UInt32 Panels[2];
-  
+
   void Init() { Panels[0] = Panels[1] = kListMode_Report; }
   CListMode() { Init(); }
-  
+
   void Save() const ;
   void Read();
 };

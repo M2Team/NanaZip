@@ -2,25 +2,25 @@
 
 #include "StdAfx.h"
 
-#include "../../../../C/7zCrc.h"
-#include "../../../../C/Alloc.h"
+#include "../../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../../ICoder.h"
-#include "../../IPassword.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 #include <Mile.Project.Version.h>
 
-#include "../../Common/CreateCoder.h"
-#include "../../Common/StreamObjects.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../../Compress/LzmaEncoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/LzmaEncoder.h"
 #include "../../Compress/PpmdZip.h"
-#include "../../Compress/XzEncoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/XzEncoder.h"
 #include "../../Compress/ZstdEncoder.h"
 
-#include "../Common/InStreamWithCRC.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/InStreamWithCRC.h"
 
 #include "ZipAddCommon.h"
 #include "ZipHeader.h"

@@ -4,8 +4,8 @@
 
 #include "resource.h"
 
-#include "../../../Common/StringConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
 #include "ComboDialog.h"
 #include "LangUtils.h"
@@ -22,7 +22,7 @@ void CPanel::OnShiftSelectMessage()
     return;
   int startItem = MyMin(focusedItem, _prevFocusedItem);
   int finishItem = MyMax(focusedItem, _prevFocusedItem);
-    
+
   int numItems = _listView.GetItemCount();
   for (int i = 0; i < numItems; i++)
   {
@@ -48,7 +48,7 @@ void CPanel::OnArrowWithShift()
   if (focusedItem < 0)
     return;
   int realIndex = GetRealItemIndex(focusedItem);
-  
+
   if (_selectionIsDefined)
   {
     if (realIndex != kParentIndex)
@@ -68,7 +68,7 @@ void CPanel::OnArrowWithShift()
       _selectedStatusVector[realIndex] = _selectMark;
     }
   }
-  
+
   _prevFocusedItem = focusedItem;
   PostMsg(kShiftSelectMessage);
   _listView.RedrawItem(focusedItem);
@@ -87,7 +87,7 @@ void CPanel::OnInsert()
   int focusedItem = _listView.GetFocusedItem();
   if (focusedItem < 0)
     return;
-  
+
   int realIndex = GetRealItemIndex(focusedItem);
   if (realIndex != kParentIndex)
   {
@@ -268,7 +268,7 @@ void CPanel::OnLeftClick(MY_NMLISTVIEW_NMITEMACTIVATE *itemActivate)
   int indexInList = itemActivate->iItem;
   if (indexInList < 0)
     return;
-  
+
   #ifndef UNDER_CE
   if ((itemActivate->uKeyFlags & LVKF_SHIFT) != 0)
   {
@@ -297,7 +297,7 @@ void CPanel::OnLeftClick(MY_NMLISTVIEW_NMITEMACTIVATE *itemActivate)
   #endif
   {
     _startGroupSelect = indexInList;
-  
+
     #ifndef UNDER_CE
     if ((itemActivate->uKeyFlags & LVKF_CONTROL) != 0)
     {

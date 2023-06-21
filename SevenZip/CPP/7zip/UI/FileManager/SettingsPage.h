@@ -3,9 +3,9 @@
 #ifndef __SETTINGS_PAGE_H
 #define __SETTINGS_PAGE_H
 
-#include "../../../Windows/Control/PropertyPage.h"
-#include "../../../Windows/Control/ComboBox.h"
-#include "../../../Windows/Control/Edit.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/PropertyPage.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
 
 class CSettingsPage: public NWindows::NControl::CPropertyPage
 {

@@ -3,9 +3,9 @@
 #ifndef __7ZIP_BENCH_H
 #define __7ZIP_BENCH_H
 
-#include "../../../Windows/System.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/System.h"
 
-#include "../../Common/CreateCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
 #include "../../UI/Common/Property.h"
 
 UInt64 Benchmark_GetUsage_Percents(UInt64 usage);
@@ -19,7 +19,7 @@ struct CBenchInfo
   UInt64 UnpackSize;
   UInt64 PackSize;
   UInt64 NumIterations;
-    
+
   /*
      during Code(): we track benchInfo only from one thread (theads with index[0])
        NumIterations means number of threads
@@ -28,7 +28,7 @@ struct CBenchInfo
        NumIterations means the number of Iterations
        UnpackSize and PackSize are total sizes of all threads
   */
-  
+
   CBenchInfo(): NumIterations(0) {}
 
   UInt64 GetUsage() const;
@@ -52,7 +52,7 @@ struct CTotalBenchRes
   UInt64 Usage;
   UInt64 RPU;
   UInt64 Speed;
-  
+
   void Init() { /* NumIterations1 = 0; */ NumIterations2 = 0; Rating = 0; Usage = 0; RPU = 0; Speed = 0; }
 
   void SetSum(const CTotalBenchRes &r1, const CTotalBenchRes &r2)

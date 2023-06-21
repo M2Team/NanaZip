@@ -3,12 +3,12 @@
 #ifndef __PROGRESSMT_H
 #define __PROGRESSMT_H
 
-#include "../../Common/MyCom.h"
-#include "../../Common/MyVector.h"
-#include "../../Windows/Synchronization.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyVector.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 
-#include "../ICoder.h"
-#include "../IProgress.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/IProgress.h"
 
 class CMtCompressProgressMixer
 {

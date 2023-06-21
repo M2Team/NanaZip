@@ -3,33 +3,33 @@
 #ifndef __PANEL_H
 #define __PANEL_H
 
-#include "../../../Common/MyWindows.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
 
 #include <ShlObj.h>
 
-#include "../../../../C/Alloc.h"
+#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
 
-#include "../../../Common/Defs.h"
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../../../Windows/DLL.h"
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileFind.h"
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/Handle.h"
-#include "../../../Windows/PropVariantConv.h"
-#include "../../../Windows/Synchronization.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Handle.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 
-#include "../../../Windows/Control/ComboBox.h"
-#include "../../../Windows/Control/Edit.h"
-#include "../../../Windows/Control/ListView.h"
-#include "../../../Windows/Control/ReBar.h"
-#include "../../../Windows/Control/Static.h"
-#include "../../../Windows/Control/StatusBar.h"
-#include "../../../Windows/Control/ToolBar.h"
-#include "../../../Windows/Control/Window2.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ListView.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ReBar.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Static.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/StatusBar.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ToolBar.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Window2.h"
 
-#include "../../Archive/IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "ExtractCallback.h"
 

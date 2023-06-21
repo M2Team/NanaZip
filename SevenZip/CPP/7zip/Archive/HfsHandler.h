@@ -3,7 +3,7 @@
 #ifndef __HFS_HANDLER_H
 #define __HFS_HANDLER_H
 
-#include "../../Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
 #include "../Compress/LzfseDecoder.h"
 #include "../Compress/ZlibDecoder.h"

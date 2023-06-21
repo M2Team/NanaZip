@@ -1,5 +1,5 @@
 #include "BenchmarkDialogRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 332
 #define yc 248
@@ -271,7 +271,7 @@ END
 
 #endif
 
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 360
 #define yc 260

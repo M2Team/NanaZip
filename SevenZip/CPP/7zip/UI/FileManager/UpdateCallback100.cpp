@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
 
 #include "../GUI/resource3.h"
 

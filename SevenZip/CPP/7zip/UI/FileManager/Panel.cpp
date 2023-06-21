@@ -5,15 +5,15 @@
 #include <WindowsX.h>
 // #include <stdio.h>
 
-#include "../../../Common/IntToString.h"
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/Thread.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
 
-#include "../../PropID.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
 
 #include "resource.h"
 #include "../GUI/ExtractRes.h"

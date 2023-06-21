@@ -1,25 +1,25 @@
 ﻿// CramfsHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/7zCrc.h"
-#include "../../../C/Alloc.h"
-#include "../../../C/CpuArch.h"
-#include "../../../C/LzmaDec.h"
+#include "../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/LzmaDec.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/MyLinux.h"
-#include "../../Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../Common/LimitedStreams.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamObjects.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 #include "../Compress/ZlibDecoder.h"
 
 namespace NArchive {
@@ -272,7 +272,7 @@ HRESULT CHandler::OpenDir(int parent, UInt32 baseOffset, unsigned level)
     _headersSize = end;
 
   unsigned startIndex = _items.Size();
-  
+
   while (size != 0)
   {
     if (size < kNodeSize || (UInt32)_items.Size() >= kNumFilesMax)
@@ -350,9 +350,9 @@ HRESULT CHandler::Open2(IInStream *inStream)
     if (_h.NumFiles >= 1)
       _items.ClearAndReserve(_h.NumFiles - 1);
   }
-  
+
   RINOK(OpenDir(-1, kHeaderSize, 0));
-  
+
   if (!_h.IsVer2())
   {
     FOR_VECTOR (i, _items)
@@ -653,7 +653,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
-  
+
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 

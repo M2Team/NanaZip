@@ -1,9 +1,9 @@
 ﻿// Windows/Menu.cpp
 
-#include "StdAfx.h"
+#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
 
 #ifndef _UNICODE
-#include "../Common/StringConvert.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 #endif
 #include "Menu.h"
 

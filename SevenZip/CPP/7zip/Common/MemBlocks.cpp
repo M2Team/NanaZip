@@ -1,11 +1,11 @@
 ﻿// MemBlocks.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StdAfx.h"
 
-#include "../../../C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
 
 #include "MemBlocks.h"
-#include "StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 bool CMemBlockManager::AllocateSpace_bool(size_t numBlocks)
 {
@@ -82,7 +82,7 @@ HRes CMemBlockManagerMt::AllocateSpace(size_t numBlocks, size_t numNoLockBlocks)
   #else
   wres = Semaphore.OptCreateInit((UInt32)numLockBlocks, maxCount);
   #endif
-  
+
   return HRESULT_FROM_WIN32(wres);
 }
 

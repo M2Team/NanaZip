@@ -4,14 +4,14 @@
 
 #include "resource.h"
 
-#include "../../../Common/IntToString.h"
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
 
 #include "../Common/PropIDUtils.h"
-#include "../../PropID.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
 
 #include "App.h"
 #include "Panel.h"

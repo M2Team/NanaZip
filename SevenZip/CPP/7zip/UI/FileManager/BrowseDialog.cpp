@@ -2,17 +2,17 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/MyWindows.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
 
 #include <CommCtrl.h>
 
 #ifndef UNDER_CE
-#include "../../../Windows/CommonDialog.h"
-#include "../../../Windows/Shell.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/CommonDialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Shell.h"
 #endif
 
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
 
 #ifdef UNDER_CE
 #include <commdlg.h>
@@ -24,17 +24,17 @@
 
 #ifdef USE_MY_BROWSE_DIALOG
 
-#include "../../../Common/Defs.h"
-#include "../../../Common/IntToString.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
 
-#include "../../../Windows/Control/ComboBox.h"
-#include "../../../Windows/Control/Dialog.h"
-#include "../../../Windows/Control/Edit.h"
-#include "../../../Windows/Control/ListView.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ListView.h"
 
 #include "BrowseDialogRes.h"
 #include "PropertyNameRes.h"

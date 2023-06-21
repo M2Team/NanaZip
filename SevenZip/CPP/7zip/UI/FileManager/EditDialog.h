@@ -3,8 +3,8 @@
 #ifndef __EDIT_DIALOG_H
 #define __EDIT_DIALOG_H
 
-#include "../../../Windows/Control/Dialog.h"
-#include "../../../Windows/Control/Edit.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
 
 #include "EditDialogRes.h"
 

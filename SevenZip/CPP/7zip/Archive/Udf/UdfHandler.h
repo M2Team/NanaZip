@@ -3,9 +3,9 @@
 #ifndef __UDF_HANDLER_H
 #define __UDF_HANDLER_H
 
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "UdfIn.h"
 

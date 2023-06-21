@@ -3,9 +3,9 @@
 #ifndef __ARCHIVE_TAR_OUT_H
 #define __ARCHIVE_TAR_OUT_H
 
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../../IStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
 
 #include "TarItem.h"
 

@@ -2,13 +2,13 @@
 
 #include "StdAfx.h"
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../../Common/StringToInt.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
 
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "TarIn.h"
 

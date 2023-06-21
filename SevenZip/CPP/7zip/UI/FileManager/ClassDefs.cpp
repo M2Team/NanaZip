@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/MyWindows.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
 
-#include "../../../Common/MyInitGuid.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
 
 #include "../Agent/Agent.h"
 

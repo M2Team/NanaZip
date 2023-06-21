@@ -6,14 +6,14 @@ specified in "A Password Based File Encryption Utility".
 Note: you must include MyAes.cpp to project to initialize AES tables
 */
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "Pbkdf2HmacSha1.h"
-#include "RandGen.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/RandGen.h"
 #include "WzAes.h"
 
 namespace NCrypto {
@@ -39,7 +39,7 @@ void CBaseCoder::Init2()
 
   const unsigned keySize = _key.GetKeySize();
   const unsigned dkSize = 2 * keySize + ((kPwdVerifSize + 3) & ~(unsigned)3);
-  
+
   // for (unsigned ii = 0; ii < 1000; ii++)
   {
     NSha1::Pbkdf2Hmac(
@@ -159,7 +159,7 @@ void AesCtr2_Code(CAesCtr2 *p, Byte *data, SizeT size)
   UInt32 *buf32 = p->Aes();
   if (size == 0)
     return;
-  
+
   if (pos != AES_BLOCK_SIZE)
   {
     const Byte *buf = (const Byte *)buf32;
@@ -169,7 +169,7 @@ void AesCtr2_Code(CAesCtr2 *p, Byte *data, SizeT size)
   }
 
   // (size == 0 || pos == AES_BLOCK_SIZE)
-  
+
   if (size >= 16)
   {
     SizeT size2 = size >> 4;
@@ -181,7 +181,7 @@ void AesCtr2_Code(CAesCtr2 *p, Byte *data, SizeT size)
   }
 
   // (size < 16)
-  
+
   if (size != 0)
   {
     unsigned j;
@@ -195,7 +195,7 @@ void AesCtr2_Code(CAesCtr2 *p, Byte *data, SizeT size)
       *data++ ^= buf[pos++];
     while (--size != 0);
   }
-  
+
   p->pos = pos;
 }
 */
@@ -214,7 +214,7 @@ STDMETHODIMP_(UInt32) CDecoder::Filter(Byte *data, UInt32 size)
 {
   if (size >= 16)
     size &= ~(UInt32)15;
-  
+
   Hmac()->Update(data, size);
   // AesCtr2_Code(&_aes, data, size);
   size = _aesCoder->Filter(data, size);

@@ -17,11 +17,11 @@
 
 #include <winrt/Windows.Foundation.h>
 
-#include "../SevenZip/CPP/Common/Common.h"
-#include "../SevenZip/CPP/Windows/DLL.h"
-#include "../SevenZip/CPP/Windows/FileDir.h"
-#include "../SevenZip/CPP/Windows/FileFind.h"
-#include "../SevenZip/CPP/Windows/FileName.h"
+#include "../ThirdParty/LZMA/CPP/Common/Common.h"
+#include "../ThirdParty/LZMA/CPP/Windows/DLL.h"
+#include "../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../ThirdParty/LZMA/CPP/Windows/FileName.h"
 #include "../SevenZip/CPP/Windows/ProcessUtils.h"
 #include "../SevenZip/CPP/7zip/UI/Common/ArchiveName.h"
 #include "../SevenZip/CPP/7zip/UI/Common/CompressCall.h"

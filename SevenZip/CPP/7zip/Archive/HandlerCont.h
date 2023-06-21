@@ -3,9 +3,9 @@
 #ifndef __HANDLER_CONT_H
 #define __HANDLER_CONT_H
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "IArchive.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 namespace NArchive {
 

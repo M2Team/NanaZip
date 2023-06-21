@@ -1,24 +1,24 @@
 ﻿// DLLExports.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
 #if defined(_7ZIP_LARGE_PAGES)
-#include "../../../C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
 #endif
 
-#include "../../Common/MyInitGuid.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
 
-#include "../../Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
 
-#include "../../Windows/NtCheck.h"
-#include "../../Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/NtCheck.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../ICoder.h"
-#include "../IPassword.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 
-#include "../Common/CreateCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
 
-#include "IArchive.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 HINSTANCE g_hInstance;
 

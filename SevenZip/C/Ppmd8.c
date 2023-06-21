@@ -2,7 +2,7 @@
 2021-04-13 : Igor Pavlov : Public domain
 This code is based on PPMd var.I (2002): Dmitry Shkarin : Public domain */
 
-#include "Precomp.h"
+#include "../../ThirdParty/LZMA/C/Precomp.h"
 
 #include <string.h>
 

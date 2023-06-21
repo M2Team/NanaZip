@@ -1,13 +1,13 @@
 ﻿// DeflateEncoder.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
-#include "../../../C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
 #include "../../../C/HuffEnc.h"
 
-#include "../../Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
 
-#include "../Common/CWrappers.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/CWrappers.h"
 
 #include "DeflateEncoder.h"
 
@@ -61,7 +61,7 @@ public:
       for (unsigned k = 0; k < j; k++, c++)
         g_LenSlots[c] = (Byte)i;
     }
-    
+
     const unsigned kFastSlots = kNumLogBits * 2;
     unsigned c = 0;
     for (Byte slotFast = 0; slotFast < kFastSlots; slotFast++)
@@ -236,7 +236,7 @@ HRESULT CCoder::BaseSetEncoderProperties2(const PROPID *propIDs, const PROPVARIA
   SetProps(&props);
   return S_OK;
 }
-  
+
 void CCoder::Free()
 {
   ::MidFree(m_OnePosMatchesMemory); m_OnePosMatchesMemory = 0;
@@ -264,13 +264,13 @@ NO_INLINE void CCoder::GetMatches()
   }
 
   UInt32 distanceTmp[kMatchMaxLen * 2 + 3];
-  
+
   const UInt32 numPairs = (UInt32)((_btMode ?
       Bt3Zip_MatchFinder_GetMatches(&_lzInWindow, distanceTmp):
       Hc3Zip_MatchFinder_GetMatches(&_lzInWindow, distanceTmp)) - distanceTmp);
 
   *m_MatchDistances = (UInt16)numPairs;
-   
+
   if (numPairs != 0)
   {
     UInt32 i;
@@ -342,7 +342,7 @@ NO_INLINE UInt32 CCoder::GetOptimal(UInt32 &backRes)
     return len;
   }
   m_OptimumCurrentIndex = m_OptimumEndIndex = 0;
-  
+
   GetMatches();
 
   UInt32 lenEnd;
@@ -352,7 +352,7 @@ NO_INLINE UInt32 CCoder::GetOptimal(UInt32 &backRes)
       return 1;
     const UInt16 *matchDistances = m_MatchDistances + 1;
     lenEnd = matchDistances[(size_t)numDistancePairs - 2];
-    
+
     if (lenEnd > m_NumFastBytes)
     {
       backRes = matchDistances[(size_t)numDistancePairs - 1];
@@ -362,12 +362,12 @@ NO_INLINE UInt32 CCoder::GetOptimal(UInt32 &backRes)
 
     m_Optimum[1].Price = m_LiteralPrices[*(Inline_MatchFinder_GetPointerToCurrentPos(&_lzInWindow) - m_AdditionalOffset)];
     m_Optimum[1].PosPrev = 0;
-    
+
     m_Optimum[2].Price = kIfinityPrice;
     m_Optimum[2].PosPrev = 1;
-    
+
     UInt32 offs = 0;
-  
+
     for (UInt32 i = kMatchMinLen; i <= lenEnd; i++)
     {
       UInt32 distance = matchDistances[(size_t)offs + 1];
@@ -474,13 +474,13 @@ NO_INLINE void CCoder::LevelTableDummy(const Byte *levels, unsigned numLevels, U
   unsigned count = 0;
   unsigned maxCount = 7;
   unsigned minCount = 4;
-  
+
   if (nextLen == 0)
   {
     maxCount = 138;
     minCount = 3;
   }
-  
+
   for (unsigned n = 0; n < numLevels; n++)
   {
     unsigned curLen = nextLen;
@@ -488,7 +488,7 @@ NO_INLINE void CCoder::LevelTableDummy(const Byte *levels, unsigned numLevels, U
     count++;
     if (count < maxCount && curLen == nextLen)
       continue;
-    
+
     if (count < minCount)
       freqs[curLen] += (UInt32)count;
     else if (curLen != 0)
@@ -507,7 +507,7 @@ NO_INLINE void CCoder::LevelTableDummy(const Byte *levels, unsigned numLevels, U
 
     count = 0;
     prevLen = curLen;
-    
+
     if (nextLen == 0)
     {
       maxCount = 138;
@@ -541,13 +541,13 @@ NO_INLINE void CCoder::LevelTableCode(const Byte *levels, unsigned numLevels, co
   unsigned count = 0;
   unsigned maxCount = 7;
   unsigned minCount = 4;
-  
+
   if (nextLen == 0)
   {
     maxCount = 138;
     minCount = 3;
   }
-  
+
   for (unsigned n = 0; n < numLevels; n++)
   {
     unsigned curLen = nextLen;
@@ -555,7 +555,7 @@ NO_INLINE void CCoder::LevelTableCode(const Byte *levels, unsigned numLevels, co
     count++;
     if (count < maxCount && curLen == nextLen)
       continue;
-    
+
     if (count < minCount)
       for (unsigned i = 0; i < count; i++)
         WRITE_HF(curLen);
@@ -582,7 +582,7 @@ NO_INLINE void CCoder::LevelTableCode(const Byte *levels, unsigned numLevels, co
 
     count = 0;
     prevLen = curLen;
-    
+
     if (nextLen == 0)
     {
       maxCount = 138;
@@ -686,14 +686,14 @@ NO_INLINE void CCoder::SetPrices(const CLevels &levels)
     Byte price = levels.litLenLevels[i];
     m_LiteralPrices[i] = ((price != 0) ? price : kNoLiteralStatPrice);
   }
-  
+
   for (i = 0; i < m_NumLenCombinations; i++)
   {
     UInt32 slot = g_LenSlots[i];
     Byte price = levels.litLenLevels[kSymbolMatch + (size_t)slot];
     m_LenPrices[i] = (Byte)(((price != 0) ? price : kNoLenStatPrice) + m_LenDirectBits[slot]);
   }
-  
+
   for (i = 0; i < kDistTableSize64; i++)
   {
     Byte price = levels.distLevels[i];
@@ -797,19 +797,19 @@ NO_INLINE UInt32 CCoder::TryDynBlock(unsigned tableIndex, UInt32 numPasses)
   m_NumLitLenLevels = kMainTableSize;
   while (m_NumLitLenLevels > kNumLitLenCodesMin && m_NewLevels.litLenLevels[(size_t)m_NumLitLenLevels - 1] == 0)
     m_NumLitLenLevels--;
-  
+
   m_NumDistLevels = kDistTableSize64;
   while (m_NumDistLevels > kNumDistCodesMin && m_NewLevels.distLevels[(size_t)m_NumDistLevels - 1] == 0)
     m_NumDistLevels--;
-  
+
   UInt32 levelFreqs[kLevelTableSize];
   memset(levelFreqs, 0, sizeof(levelFreqs));
 
   LevelTableDummy(m_NewLevels.litLenLevels, m_NumLitLenLevels, levelFreqs);
   LevelTableDummy(m_NewLevels.distLevels, m_NumDistLevels, levelFreqs);
-  
+
   Huffman_Generate(levelFreqs, levelCodes, levelLens, kLevelTableSize, kMaxLevelBitLength);
-  
+
   m_NumLevelCodes = kNumLevelCodesMin;
   for (UInt32 i = 0; i < kLevelTableSize; i++)
   {
@@ -818,7 +818,7 @@ NO_INLINE UInt32 CCoder::TryDynBlock(unsigned tableIndex, UInt32 numPasses)
       m_NumLevelCodes = i + 1;
     m_LevelLevels[i] = level;
   }
-  
+
   return GetLzBlockPrice() +
       Huffman_GetPrice_Spec(levelFreqs, levelLens, kLevelTableSize, kLevelDirectBits, kTableDirectLevels) +
       kNumLenCodesFieldSize + kNumDistCodesFieldSize + kNumLevelCodesFieldSize +
@@ -845,7 +845,7 @@ NO_INLINE UInt32 CCoder::GetBlockPrice(unsigned tableIndex, unsigned numDivPasse
   UInt32 numValues = m_ValueIndex;
   UInt32 posTemp = m_Pos;
   UInt32 additionalOffsetEnd = m_AdditionalOffset;
-  
+
   if (m_CheckStatic && m_ValueIndex <= kFixedHuffmanCodeBlockSizeMax)
   {
     const UInt32 fixedPrice = TryFixedBlock(tableIndex);
@@ -883,7 +883,7 @@ NO_INLINE UInt32 CCoder::GetBlockPrice(unsigned tableIndex, unsigned numDivPasse
         price = subPrice;
     }
   }
-  
+
   m_AdditionalOffset = additionalOffsetEnd;
   m_Pos = posTemp;
   return price;
@@ -924,10 +924,10 @@ void CCoder::CodeBlock(unsigned tableIndex, bool finalBlock)
         WriteBits(m_NumLitLenLevels - kNumLitLenCodesMin, kNumLenCodesFieldSize);
         WriteBits(m_NumDistLevels - kNumDistCodesMin, kNumDistCodesFieldSize);
         WriteBits(m_NumLevelCodes - kNumLevelCodesMin, kNumLevelCodesFieldSize);
-        
+
         for (UInt32 i = 0; i < m_NumLevelCodes; i++)
           WriteBits(m_LevelLevels[i], kLevelFieldSize);
-        
+
         Huffman_ReverseBits(levelCodes, levelLens, kLevelTableSize);
         LevelTableCode(m_NewLevels.litLenLevels, m_NumLitLenLevels, levelLens, levelCodes);
         LevelTableCode(m_NewLevels.distLevels, m_NumDistLevels, levelLens, levelCodes);
@@ -952,7 +952,7 @@ HRESULT CCoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *ou
   UInt64 nowPos = 0;
 
   CSeqInStreamWrap _seqInStream;
-  
+
   _seqInStream.Init(inStream);
 
   _lzInWindow.stream = &_seqInStream.vt;
@@ -982,7 +982,7 @@ HRESULT CCoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *ou
     }
   }
   while (Inline_MatchFinder_GetNumAvailableBytes(&_lzInWindow) != 0);
-  
+
   if (_seqInStream.Res != S_OK)
     return _seqInStream.Res;
 

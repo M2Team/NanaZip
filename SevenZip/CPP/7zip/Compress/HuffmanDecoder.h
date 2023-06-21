@@ -3,7 +3,7 @@
 #ifndef __COMPRESS_HUFFMAN_DECODER_H
 #define __COMPRESS_HUFFMAN_DECODER_H
 
-#include "../../Common/MyTypes.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
 
 namespace NCompress {
 namespace NHuffman {
@@ -23,23 +23,23 @@ public:
   bool Build(const Byte *lens) throw()
   {
     UInt32 counts[kNumBitsMax + 1];
-    
+
     unsigned i;
     for (i = 0; i <= kNumBitsMax; i++)
       counts[i] = 0;
-    
+
     UInt32 sym;
-    
+
     for (sym = 0; sym < m_NumSymbols; sym++)
       counts[lens[sym]]++;
-    
+
     const UInt32 kMaxValue = (UInt32)1 << kNumBitsMax;
 
     _limits[0] = 0;
-    
+
     UInt32 startPos = 0;
     UInt32 sum = 0;
-    
+
     for (i = 1; i <= kNumBitsMax; i++)
     {
       const UInt32 cnt = counts[i];
@@ -55,7 +55,7 @@ public:
     counts[0] = sum;
     _poses[0] = sum;
     _limits[kNumBitsMax + 1] = kMaxValue;
-    
+
     for (sym = 0; sym < m_NumSymbols; sym++)
     {
       unsigned len = lens[sym];
@@ -75,7 +75,7 @@ public:
           dest[k] = val;
       }
     }
-    
+
     return true;
   }
 
@@ -83,23 +83,23 @@ public:
   bool BuildFull(const Byte *lens, UInt32 numSymbols = m_NumSymbols) throw()
   {
     UInt32 counts[kNumBitsMax + 1];
-    
+
     unsigned i;
     for (i = 0; i <= kNumBitsMax; i++)
       counts[i] = 0;
-    
+
     UInt32 sym;
-    
+
     for (sym = 0; sym < numSymbols; sym++)
       counts[lens[sym]]++;
-    
+
     const UInt32 kMaxValue = (UInt32)1 << kNumBitsMax;
 
     _limits[0] = 0;
-    
+
     UInt32 startPos = 0;
     UInt32 sum = 0;
-    
+
     for (i = 1; i <= kNumBitsMax; i++)
     {
       const UInt32 cnt = counts[i];
@@ -115,7 +115,7 @@ public:
     counts[0] = sum;
     _poses[0] = sum;
     _limits[kNumBitsMax + 1] = kMaxValue;
-    
+
     for (sym = 0; sym < numSymbols; sym++)
     {
       unsigned len = lens[sym];
@@ -135,17 +135,17 @@ public:
           dest[k] = val;
       }
     }
-    
+
     return startPos == kMaxValue;
   }
 
-  
+
   template <class TBitDecoder>
   MY_FORCE_INLINE
   UInt32 Decode(TBitDecoder *bitStream) const
   {
     UInt32 val = bitStream->GetValue(kNumBitsMax);
-    
+
     if (val < _limits[kNumTableBits])
     {
       UInt32 pair = _lens[val >> (kNumBitsMax - kNumTableBits)];
@@ -155,7 +155,7 @@ public:
 
     unsigned numBits;
     for (numBits = kNumTableBits + 1; val >= _limits[numBits]; numBits++);
-    
+
     if (numBits > kNumBitsMax)
       return 0xFFFFFFFF;
 
@@ -164,13 +164,13 @@ public:
     return _symbols[index];
   }
 
-  
+
   template <class TBitDecoder>
   MY_FORCE_INLINE
   UInt32 DecodeFull(TBitDecoder *bitStream) const
   {
     UInt32 val = bitStream->GetValue(kNumBitsMax);
-    
+
     if (val < _limits[kNumTableBits])
     {
       UInt32 pair = _lens[val >> (kNumBitsMax - kNumTableBits)];
@@ -180,7 +180,7 @@ public:
 
     unsigned numBits;
     for (numBits = kNumTableBits + 1; val >= _limits[numBits]; numBits++);
-    
+
     bitStream->MovePos(numBits);
     UInt32 index = _poses[numBits] + ((val - _limits[(size_t)numBits - 1]) >> (kNumBitsMax - numBits));
     return _symbols[index];
@@ -198,27 +198,27 @@ public:
   bool Build(const Byte *lens) throw()
   {
     const unsigned kNumBitsMax = 7;
-    
+
     UInt32 counts[kNumBitsMax + 1];
     UInt32 _poses[kNumBitsMax + 1];
     UInt32 _limits[kNumBitsMax + 1];
-      
+
     unsigned i;
     for (i = 0; i <= kNumBitsMax; i++)
       counts[i] = 0;
-    
+
     UInt32 sym;
-    
+
     for (sym = 0; sym < m_NumSymbols; sym++)
       counts[lens[sym]]++;
-    
+
     const UInt32 kMaxValue = (UInt32)1 << kNumBitsMax;
 
     _limits[0] = 0;
-    
+
     UInt32 startPos = 0;
     UInt32 sum = 0;
-    
+
     for (i = 1; i <= kNumBitsMax; i++)
     {
       const UInt32 cnt = counts[i];
@@ -259,7 +259,7 @@ public:
       for (UInt32 k = 0; k < num; k++)
         dest[k] = (Byte)(0x1F << 3);
     }
-    
+
     return true;
   }
 

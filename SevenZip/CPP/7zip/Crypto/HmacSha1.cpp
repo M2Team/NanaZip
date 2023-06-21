@@ -1,8 +1,8 @@
 ﻿// HmacSha1.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
 #include "HmacSha1.h"
 
@@ -14,10 +14,10 @@ void CHmac::SetKey(const Byte *key, size_t keySize)
   MY_ALIGN (16)
   UInt32 temp[SHA1_NUM_BLOCK_WORDS];
   size_t i;
-  
+
   for (i = 0; i < SHA1_NUM_BLOCK_WORDS; i++)
     temp[i] = 0;
-  
+
   if (keySize > kBlockSize)
   {
     _sha.Init();
@@ -26,13 +26,13 @@ void CHmac::SetKey(const Byte *key, size_t keySize)
   }
   else
     memcpy(temp, key, keySize);
-  
+
   for (i = 0; i < SHA1_NUM_BLOCK_WORDS; i++)
     temp[i] ^= 0x36363636;
-  
+
   _sha.Init();
   _sha.Update((const Byte *)temp, kBlockSize);
-  
+
   for (i = 0; i < SHA1_NUM_BLOCK_WORDS; i++)
     temp[i] ^= 0x36363636 ^ 0x5C5C5C5C;
 
@@ -54,7 +54,7 @@ void CHmac::GetLoopXorDigest1(void *mac, UInt32 numIteration)
   MY_ALIGN (16)  UInt32 block [SHA1_NUM_BLOCK_WORDS];
   MY_ALIGN (16)  UInt32 block2[SHA1_NUM_BLOCK_WORDS];
   MY_ALIGN (16)  UInt32 mac2  [SHA1_NUM_BLOCK_WORDS];
-  
+
   _sha. PrepareBlock((Byte *)block,  SHA1_DIGEST_SIZE);
   _sha2.PrepareBlock((Byte *)block2, SHA1_DIGEST_SIZE);
 

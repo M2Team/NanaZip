@@ -3,7 +3,7 @@
 #ifndef __APP_STATE_H
 #define __APP_STATE_H
 
-#include "../../../Windows/Synchronization.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 
 #include "ViewSettings.h"
 
@@ -44,15 +44,15 @@ class CFolderHistory
   UStringVector Strings;
 
   void Normalize();
-  
+
 public:
-  
+
   void GetList(UStringVector &foldersHistory)
   {
     NWindows::NSynchronization::CCriticalSectionLock lock(_criticalSection);
     foldersHistory = Strings;
   }
-  
+
   void AddString(const UString &s);
 
   void RemoveAll()
@@ -60,13 +60,13 @@ public:
     NWindows::NSynchronization::CCriticalSectionLock lock(_criticalSection);
     Strings.Clear();
   }
-  
+
   void Save()
   {
     NWindows::NSynchronization::CCriticalSectionLock lock(_criticalSection);
     SaveFolderHistory(Strings);
   }
-  
+
   void Read()
   {
     NWindows::NSynchronization::CCriticalSectionLock lock(_criticalSection);

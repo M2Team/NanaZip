@@ -7,13 +7,13 @@
 #ifndef __COMPRESS_RAR3_DECODER_H
 #define __COMPRESS_RAR3_DECODER_H
 
-#include "../../../C/Ppmd7.h"
+#include "../../../../ThirdParty/LZMA/C/Ppmd7.h"
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 #include "BitmDecoder.h"
 #include "HuffmanDecoder.h"
@@ -54,7 +54,7 @@ public:
     _bitPos = 0;
     _value = 0;
   }
-  
+
   bool ExtraBitsWereRead() const
   {
     return (Stream.NumExtraBytes > 4 || _bitPos < (Stream.NumExtraBytes << 3));
@@ -67,7 +67,7 @@ public:
     _bitPos &= ~(unsigned)7;
     _value = _value & ((1 << _bitPos) - 1);
   }
-  
+
   UInt32 GetValue(unsigned numBits)
   {
     if (_bitPos < numBits)
@@ -82,13 +82,13 @@ public:
     }
     return _value >> (_bitPos - numBits);
   }
-  
+
   void MovePos(unsigned numBits)
   {
     _bitPos -= numBits;
     _value = _value & ((1 << _bitPos) - 1);
   }
-  
+
   UInt32 ReadBits(unsigned numBits)
   {
     UInt32 res = GetValue(numBits);
@@ -135,7 +135,7 @@ struct CFilter: public NVm::CProgram
   UInt32 BlockStart;
   UInt32 BlockSize;
   UInt32 ExecCount;
-  
+
   CFilter(): BlockStart(0), BlockSize(0), ExecCount(0) {}
 };
 
@@ -144,7 +144,7 @@ struct CTempFilter: public NVm::CProgramInitState
   UInt32 BlockStart;
   UInt32 BlockSize;
   bool NextWindow;
-  
+
   UInt32 FilterIndex;
 
   CTempFilter()
@@ -178,7 +178,7 @@ class CDecoder:
 
   UInt32 _reps[kNumReps];
   UInt32 _lastLength;
-  
+
   Byte m_LastLevels[kTablesSizesSum];
 
   Byte *_vmData;
@@ -205,7 +205,7 @@ class CDecoder:
   CPpmd7 _ppmd;
   int PpmEscChar;
   bool PpmError;
-  
+
   HRESULT WriteDataToStream(const Byte *data, UInt32 size);
   HRESULT WriteData(const Byte *data, UInt32 size);
   HRESULT WriteArea(UInt32 startPtr, UInt32 endPtr);
@@ -216,7 +216,7 @@ class CDecoder:
   bool AddVmCode(UInt32 firstByte, UInt32 codeSize);
   bool ReadVmCodeLZ();
   bool ReadVmCodePPM();
-  
+
   UInt32 ReadBits(unsigned numBits);
 
   HRESULT InitPPM();
@@ -227,7 +227,7 @@ class CDecoder:
   HRESULT ReadEndOfBlock(bool &keepDecompressing);
   HRESULT DecodeLZ(bool &keepDecompressing);
   HRESULT CodeReal(ICompressProgressInfo *progress);
-  
+
   bool InputEofError() const { return m_InBitStream.BitDecoder.ExtraBitsWereRead(); }
   bool InputEofError_Fast() const { return (m_InBitStream.BitDecoder.Stream.NumExtraBytes > 2); }
 
@@ -267,7 +267,7 @@ public:
     while (--len != 0);
     _winPos = winPos;
   }
-  
+
   void PutByte(Byte b)
   {
     UInt32 wp = _winPos;

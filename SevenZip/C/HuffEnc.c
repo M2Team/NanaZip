@@ -1,10 +1,10 @@
 ﻿/* HuffEnc.c -- functions for Huffman encoding
 2021-02-09 : Igor Pavlov : Public domain */
 
-#include "Precomp.h"
+#include "../../ThirdParty/LZMA/C/Precomp.h"
 
 #include "HuffEnc.h"
-#include "Sort.h"
+#include "../../ThirdParty/LZMA/C/Sort.h"
 
 #define kMaxLen 16
 #define NUM_BITS 10

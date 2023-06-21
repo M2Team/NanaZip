@@ -3,10 +3,10 @@
 #include "StdAfx.h"
 
 #ifndef _UNICODE
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 #endif
 
-#include "../../../Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
 
 #include "SysIconUtils.h"
 

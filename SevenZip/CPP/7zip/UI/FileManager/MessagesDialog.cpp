@@ -1,10 +1,10 @@
 ﻿// MessagesDialog.cpp
- 
+
 #include "StdAfx.h"
 
-#include "../../../Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
 
-#include "../../../Windows/ResourceString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
 
 #include "MessagesDialog.h"
 

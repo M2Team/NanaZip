@@ -2,20 +2,20 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/MyWindows.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
 
 #include <WinBase.h>
 
-#include "../../../Common/Defs.h"
-#include "../../../Common/StringConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/DLL.h"
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
-#include "../../Common/FilePathAutoRename.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FilePathAutoRename.h"
 
 #include "FSFolder.h"
 
@@ -43,22 +43,22 @@ HRESULT CCopyStateIO::MyCopyFile(CFSTR inPath, CFSTR outPath, DWORD attrib)
   {
     const size_t kBufSize = 1 << 16;
     CByteArr buf(kBufSize);
-    
+
     NIO::CInFile inFile;
     NIO::COutFile outFile;
-    
+
     if (!inFile.Open(inPath))
     {
       ErrorFileIndex = 0;
       return S_OK;
     }
-    
+
     if (!outFile.Create(outPath, true))
     {
       ErrorFileIndex = 1;
       return S_OK;
     }
-    
+
     for (;;)
     {
       UInt32 num;
@@ -69,7 +69,7 @@ HRESULT CCopyStateIO::MyCopyFile(CFSTR inPath, CFSTR outPath, DWORD attrib)
       }
       if (num == 0)
         break;
-      
+
       UInt32 written = 0;
       if (!outFile.Write(buf, num, written))
       {
@@ -101,7 +101,7 @@ HRESULT CCopyStateIO::MyCopyFile(CFSTR inPath, CFSTR outPath, DWORD attrib)
       return S_OK;
     }
   }
-  
+
   return S_OK;
 }
 
@@ -417,7 +417,7 @@ static HRESULT CopyFile_Ask(
       fs2us(destPath),
       &destPathResult,
       &writeAskResult));
-  
+
   if (IntToBool(writeAskResult))
   {
     FString destPathNew = us2fs((LPCOLESTR)destPathResult);
@@ -432,7 +432,7 @@ static HRESULT CopyFile_Ask(
       state2.StartPos = state.ProgressInfo.StartPos;
 
       RINOK(state2.MyCopyFile(srcPath, destPathNew, srcFileInfo.Attrib));
-      
+
       if (state2.ErrorFileIndex >= 0)
       {
         if (state2.ErrorMessage.IsEmpty())
@@ -527,7 +527,7 @@ static HRESULT CopyFolder(
 
   CEnumerator enumerator;
   enumerator.SetDirPrefix(CombinePath(srcPath, FString()));
-  
+
   for (;;)
   {
     NFind::CFileInfo fi;
@@ -559,7 +559,7 @@ static HRESULT CopyFolder(
       return E_ABORT;
     }
   }
-  
+
   return S_OK;
 }
 
@@ -617,7 +617,7 @@ STDMETHODIMP CFSFolder::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 num
       destPath2 += fi.Name;
     FString srcPath;
     GetFullPath(fi, srcPath);
-  
+
     if (fi.IsDir())
     {
       RINOK(CopyFolder(state, srcPath, destPath2));

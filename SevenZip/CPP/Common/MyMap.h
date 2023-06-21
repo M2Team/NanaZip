@@ -3,8 +3,8 @@
 #ifndef __COMMON_MYMAP_H
 #define __COMMON_MYMAP_H
 
-#include "MyTypes.h"
-#include "MyVector.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/MyVector.h"
 
 class CMap32
 {

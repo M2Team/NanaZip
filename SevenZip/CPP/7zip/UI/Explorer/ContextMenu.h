@@ -3,13 +3,13 @@
 #ifndef __CONTEXT_MENU_H
 #define __CONTEXT_MENU_H
 
-#include "../../../Common/MyWindows.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
 
 #include <ShlObj.h>
 
 #include "MyExplorerCommand.h"
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 #include "../FileManager/MyCom2.h"
 

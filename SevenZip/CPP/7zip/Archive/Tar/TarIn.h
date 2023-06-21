@@ -3,7 +3,7 @@
 #ifndef __ARCHIVE_TAR_IN_H
 #define __ARCHIVE_TAR_IN_H
 
-#include "../IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "TarItem.h"
 

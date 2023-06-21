@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../Windows/Clipboard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Clipboard.h"
 
 #include "EditDialog.h"
 #include "ListViewDialog.h"
@@ -49,7 +49,7 @@ bool CListViewDialog::OnInit()
   st.Load();
 
   DWORD exStyle = 0;
-  
+
   if (st.SingleClick)
     exStyle |= LVS_EX_ONECLICKACTIVATE | LVS_EX_TRACKSELECT;
 
@@ -61,7 +61,7 @@ bool CListViewDialog::OnInit()
   SetText(Title);
 
   const int kWidth = 400;
-  
+
   LVCOLUMN columnInfo;
   columnInfo.mask = LVCF_FMT | LVCF_WIDTH | LVCF_SUBITEM;
   columnInfo.fmt = LVCFMT_LEFT;
@@ -78,7 +78,7 @@ bool CListViewDialog::OnInit()
 
     // columnInfo.mask |= LVCF_TEXT;
     _listView.InsertColumn(0, &columnInfo);
-  
+
     columnInfo.iSubItem = 1;
     columnInfo.fmt = LVCFMT_RIGHT;
     _listView.InsertColumn(1, &columnInfo);
@@ -99,7 +99,7 @@ bool CListViewDialog::OnInit()
 
 
   UString s;
-  
+
   FOR_VECTOR (i, Strings)
   {
     _listView.InsertItem(i, Strings[i]);
@@ -166,7 +166,7 @@ void CListViewDialog::CopyToClipboard()
   CUIntVector indexes;
   ListView_GetSelected(_listView, indexes);
   UString s;
-  
+
   FOR_VECTOR (i, indexes)
   {
     unsigned index = indexes[i];
@@ -191,7 +191,7 @@ void CListViewDialog::CopyToClipboard()
         ;
     }
   }
-  
+
   ClipboardSetText(*this, s);
 }
 
@@ -213,7 +213,7 @@ void CListViewDialog::ShowItemInfo()
     if (index < Values.Size())
       dlg.Text = Values[index];
   }
-  
+
   #ifdef _WIN32
   if (dlg.Text.Find(L'\r') < 0)
     dlg.Text.Replace(L"\n", L"\r\n");

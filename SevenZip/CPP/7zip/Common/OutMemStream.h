@@ -3,7 +3,7 @@
 #ifndef __OUT_MEM_STREAM_H
 #define __OUT_MEM_STREAM_H
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
 #include "MemBlocks.h"
 
@@ -31,7 +31,7 @@ class COutMemStream:
 
 public:
 
-  
+
   HRes CreateEvents(SYNC_PARAM_DECL(synchro))
   {
     WRes wres = StopWritingEvent.CreateIfNotCreated_Reset(SYNC_WFMO(synchro));

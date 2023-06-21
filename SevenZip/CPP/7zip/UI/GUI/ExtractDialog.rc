@@ -1,5 +1,5 @@
 #include "ExtractDialogRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 336
 #define yc 168

@@ -3,7 +3,7 @@
 #ifndef __ARCHIVE_CAB_ITEM_H
 #define __ARCHIVE_CAB_ITEM_H
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 #include "CabHeader.h"
 
@@ -18,7 +18,7 @@ struct CFolder
   UInt16 NumDataBlocks; // number of CFDATA blocks in this folder
   Byte MethodMajor;
   Byte MethodMinor;
-  
+
   Byte GetMethod() const { return (Byte)(MethodMajor & 0xF); }
 };
 
@@ -31,7 +31,7 @@ struct CItem
   UInt32 FolderIndex;
   UInt16 Flags;
   UInt16 Attributes;
-  
+
   UInt64 GetEndOffset() const { return (UInt64)Offset + Size; }
   UInt32 GetWinAttrib() const { return (UInt32)Attributes & ~(UInt32)NHeader::kFileNameIsUtf8_Mask; }
   bool IsNameUTF() const { return (Attributes & NHeader::kFileNameIsUtf8_Mask) != 0; }
@@ -43,7 +43,7 @@ struct CItem
       FolderIndex == NHeader::NFolderIndex::kContinuedFromPrev ||
       FolderIndex == NHeader::NFolderIndex::kContinuedPrevAndNext;
   }
-  
+
   bool ContinuedToNext() const
   {
     return

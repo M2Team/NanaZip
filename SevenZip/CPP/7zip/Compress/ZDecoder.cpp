@@ -1,13 +1,13 @@
 ﻿// ZDecoder.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
 // #include <stdio.h>
 
-#include "../../../C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
 
-#include "../Common/InBuffer.h"
-#include "../Common/OutBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/OutBuffer.h"
 
 #include "ZDecoder.h"
 
@@ -36,7 +36,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
   COutBuffer outBuffer;
 
   PackSize = 0;
-  
+
   if (!inBuffer.Create(kBufferSize))
     return E_OUTOFMEMORY;
   inBuffer.SetStream(inStream);

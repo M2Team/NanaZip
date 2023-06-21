@@ -2,20 +2,20 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/IntToString.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileFind.h"
-#include "../../../Windows/TimeUtils.h"
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
 
 #ifndef _7ZIP_ST
-#include "../../../Windows/Synchronization.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
 #endif
 
-#include "../../Common/FilePathAutoRename.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FilePathAutoRename.h"
 
 #include "../Common/ExtractingFilePath.h"
 

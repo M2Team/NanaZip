@@ -2,13 +2,13 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/MyCom.h"
-#include "../../../Common/MyString.h"
-#include "../../../Common/StringToInt.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../../Archive/IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 #include "SetProperties.h"
 
@@ -81,7 +81,7 @@ HRESULT SetProperties(IUnknown *unknown, const CObjectVector<CProperty> &propert
     CRecordVector<const wchar_t *> names;
     for (i = 0; i < realNames.Size(); i++)
       names.Add((const wchar_t *)realNames[i]);
-    
+
     return setProperties->SetProperties(&names.Front(), values.values, names.Size());
   }
 }

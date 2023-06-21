@@ -3,7 +3,7 @@
 #ifndef __FIND_SIGNATURE_H
 #define __FIND_SIGNATURE_H
 
-#include "../../IStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
 
 HRESULT FindSignatureInStream(ISequentialInStream *stream,
     const Byte *signature, unsigned signatureSize,

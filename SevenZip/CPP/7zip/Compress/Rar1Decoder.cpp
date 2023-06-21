@@ -1,8 +1,8 @@
 ﻿// Rar1Decoder.cpp
 // According to unRAR license, this code may not be used to develop
 // a program that creates RAR archives
- 
-#include "StdAfx.h"
+
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
 #include "Rar1Decoder.h"
 
@@ -106,7 +106,7 @@ HRESULT CDecoder::ShortLZ()
     for (len = 0; ((bitField ^ xors[len]) >> (8 - lens[len])) != 0; len++);
     m_InBitStream.MovePos(lens[len]);
   }
-  
+
   if (len >= 9)
   {
     if (len == 9)
@@ -128,9 +128,9 @@ HRESULT CDecoder::ShortLZ()
 
     UInt32 saveLen = len;
     dist = m_RepDists[(m_RepDistPtr - (len - 9)) & 3];
-    
+
     len = DecodeNum(PosL1);
-    
+
     if (len == 0xff && saveLen == 10)
     {
       Buf60 ^= 16;
@@ -148,11 +148,11 @@ HRESULT CDecoder::ShortLZ()
     LCount = 0;
     AvrLn1 += len;
     AvrLn1 -= AvrLn1 >> 4;
-    
+
     unsigned distancePlace = DecodeNum(PosHf2) & 0xff;
-    
+
     dist = ChSetA[distancePlace];
-    
+
     if (distancePlace != 0)
     {
       PlaceA[dist]--;
@@ -201,7 +201,7 @@ HRESULT CDecoder::LongLZ()
     else
     {
       for (len = 0; ((bitField << len) & 0x8000) == 0; len++);
-      
+
       m_InBitStream.MovePos(len + 1);
     }
   }
@@ -221,7 +221,7 @@ HRESULT CDecoder::LongLZ()
   AvrPlcB -= AvrPlcB >> 8;
 
   distancePlace &= 0xff;
-  
+
   for (;;)
   {
     dist = ChSetB[distancePlace];
@@ -237,7 +237,7 @@ HRESULT CDecoder::LongLZ()
   dist = ((dist & 0xff00) >> 1) | ReadBits(7);
 
   oldAvr3 = AvrLn3;
-  
+
   if (len != 1 && len != 4)
   {
     if (len == 0 && dist <= MaxDist3)
@@ -248,24 +248,24 @@ HRESULT CDecoder::LongLZ()
     else if (AvrLn3 > 0)
       AvrLn3--;
   }
-  
+
   len += 3;
-  
+
   if (dist >= MaxDist3)
     len++;
   if (dist <= 256)
     len += 8;
-  
+
   if (oldAvr3 > 0xb0 || (AvrPlc >= 0x2a00 && oldAvr2 < 0x40))
     MaxDist3 = 0x7f00;
   else
     MaxDist3 = 0x2001;
-  
+
   m_RepDists[m_RepDistPtr++] = --dist;
   m_RepDistPtr &= 3;
   LastLength = len;
   LastDist = dist;
-  
+
   return CopyBlock(dist, len);
 }
 
@@ -278,16 +278,16 @@ HRESULT CDecoder::HuffDecode()
   unsigned bytePlace;
   {
     const Byte *tab;
-    
+
     if      (AvrPlc >= 0x7600)  tab = PosHf4;
     else if (AvrPlc >= 0x5e00)  tab = PosHf3;
     else if (AvrPlc >= 0x3600)  tab = PosHf2;
     else if (AvrPlc >= 0x0e00)  tab = PosHf1;
     else                        tab = PosHf0;
-    
+
     bytePlace = DecodeNum(tab); // [0, 256]
   }
-  
+
   if (StMode)
   {
     if (bytePlace == 0)
@@ -309,12 +309,12 @@ HRESULT CDecoder::HuffDecode()
   }
   else if (NumHuf++ >= 16 && FlagsCnt == 0)
     StMode = true;
-  
+
   bytePlace &= 0xff;
   AvrPlc += bytePlace;
   AvrPlc -= AvrPlc >> 8;
   Nhfb += 16;
-  
+
   if (Nhfb > 0xff)
   {
     Nhfb = 0x90;
@@ -420,9 +420,9 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
       LastLength = 0;
       LastDist = 0;
     }
-    
+
     // InitHuff
-    
+
     for (UInt32 i = 0; i < 256; i++)
     {
       Place[i] = PlaceA[i] = PlaceB[i] = i;
@@ -437,7 +437,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
     memset(NToPlC, 0, sizeof(NToPlC));
     CorrHuff(ChSetB, NToPlB);
   }
-   
+
   if (m_UnpackSize > 0)
   {
     GetFlagsBuf();
@@ -453,7 +453,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
         GetFlagsBuf();
         FlagsCnt = 7;
       }
-      
+
       if (FlagBuf & 0x80)
       {
         FlagBuf <<= 1;
@@ -466,7 +466,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
       else
       {
         FlagBuf <<= 1;
-        
+
         if (--FlagsCnt < 0)
         {
           GetFlagsBuf();
@@ -479,9 +479,9 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
           RINOK(ShortLZ());
           continue;
         }
-        
+
         FlagBuf <<= 1;
-        
+
         if (Nlzb <= Nhfb)
         {
           RINOK(LongLZ());
@@ -492,7 +492,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
 
     RINOK(HuffDecode());
   }
-  
+
   _solidAllowed = true;
   return m_OutWindowStream.Flush();
 }

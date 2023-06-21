@@ -3,7 +3,7 @@
 #ifndef __ARCHIVE_RAR_ITEM_H
 #define __ARCHIVE_RAR_ITEM_H
 
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
 #include "RarHeader.h"
 
@@ -21,7 +21,7 @@ struct CItem
 {
   UInt64 Size;
   UInt64 PackSize;
-  
+
   CRarTime CTime;
   CRarTime ATime;
   CRarTime MTime;
@@ -41,7 +41,7 @@ struct CItem
   UString UnicodeName;
 
   Byte Salt[8];
-  
+
   bool Is_Size_Defined() const { return Size != (UInt64)(Int64)-1; }
 
   bool IsEncrypted()   const { return (Flags & NHeader::NFile::kEncrypted) != 0; }
@@ -53,7 +53,7 @@ struct CItem
   bool HasExtTime()    const { return (Flags & NHeader::NFile::kExtTime) != 0; }
   bool HasUnicodeName()const { return (Flags & NHeader::NFile::kUnicodeName) != 0; }
   bool IsOldVersion()  const { return (Flags & NHeader::NFile::kOldVersion) != 0; }
-  
+
   UInt32 GetDictSize() const { return (Flags >> NHeader::NFile::kDictBitStart) & NHeader::NFile::kDictMask; }
   bool IsDir() const;
   bool IgnoreItem() const;

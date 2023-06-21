@@ -1,5 +1,5 @@
 #include "MessagesDialogRes.h"
-#include "../../GuiCommon.rc"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
 
 #define xc 440
 #define yc 160

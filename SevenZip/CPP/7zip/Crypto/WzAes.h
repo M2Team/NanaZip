@@ -12,12 +12,12 @@ specified in "A Password Based File Encryption Utility":
 #ifndef __CRYPTO_WZ_AES_H
 #define __CRYPTO_WZ_AES_H
 
-#include "../../Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
 
-#include "../IPassword.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 
 #include "HmacSha1.h"
-#include "MyAes.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/MyAes.h"
 
 namespace NCrypto {
 namespace NWzAes {
@@ -119,7 +119,7 @@ public:
   STDMETHOD(CryptoSetPassword)(const Byte *data, UInt32 size);
 
   STDMETHOD(Init)();
-  
+
   unsigned GetHeaderSize() const { return _key.GetSaltSize() + kPwdVerifSize; }
   unsigned GetAddPackSize() const { return GetHeaderSize() + kMacSize; }
 

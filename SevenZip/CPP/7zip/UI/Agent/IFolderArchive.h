@@ -3,9 +3,9 @@
 #ifndef __IFOLDER_ARCHIVE_H
 #define __IFOLDER_ARCHIVE_H
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
-#include "../../Archive/IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 #include "../../UI/Common/LoadCodecs.h"
 #include "../../UI/FileManager/IFolder.h"
 

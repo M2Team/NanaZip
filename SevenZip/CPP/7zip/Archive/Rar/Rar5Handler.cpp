@@ -2,34 +2,34 @@
 
 #include "StdAfx.h"
 
-#include "../../../../C/7zCrc.h"
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../../Common/ComTry.h"
-#include "../../../Common/IntToString.h"
-#include "../../../Common/MyBuffer2.h"
-#include "../../../Common/UTFConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
 
 #include "../../../Windows/PropVariantUtils.h"
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../../IPassword.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 
-#include "../../Common/FilterCoder.h"
-#include "../../Common/LimitedStreams.h"
-#include "../../Common/ProgressUtils.h"
-#include "../../Common/RegisterArc.h"
-#include "../../Common/StreamObjects.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FilterCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "../../Common/RegisterCodec.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../Compress/CopyCoder.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
 #include "../../Crypto/Rar5Aes.h"
 
 #include "../Common/FindSignature.h"
-#include "../Common/ItemNameUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
 
 #include "../HandlerCont.h"
 

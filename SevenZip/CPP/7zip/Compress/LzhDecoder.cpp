@@ -1,6 +1,6 @@
 ﻿// LzhDecoder.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
 #include "LzhDecoder.h"
 
@@ -43,12 +43,12 @@ bool CCoder::ReadTP(unsigned num, unsigned numBits, int spec)
       lens[i] = 0;
 
     i = 0;
-    
+
     do
     {
       UInt32 val = _inBitStream.GetValue(16);
       unsigned c = val >> 13;
-      
+
       if (c == 7)
       {
         UInt32 mask = 1 << 12;
@@ -60,15 +60,15 @@ bool CCoder::ReadTP(unsigned num, unsigned numBits, int spec)
         if (c > 16)
           return false;
       }
-      
+
       _inBitStream.MovePos(c < 7 ? 3 : c - 3);
       lens[i++] = (Byte)c;
-      
+
       if (i == (unsigned)spec)
         i += _inBitStream.ReadBits(2);
     }
     while (i < n);
-    
+
     if (!CheckCodeLens(lens, NPT))
       return false;
     return _decoderT.Build(lens);
@@ -82,7 +82,7 @@ bool CCoder::ReadC()
   _symbolC = -1;
 
   unsigned n = _inBitStream.ReadBits(NUM_C_BITS);
-  
+
   if (n == 0)
   {
     _symbolC = _inBitStream.ReadBits(NUM_C_BITS);
@@ -96,13 +96,13 @@ bool CCoder::ReadC()
     Byte lens[NC];
 
     unsigned i = 0;
-  
+
     do
     {
       UInt32 c = (unsigned)_symbolT;
       if (_symbolT < 0)
         c = _decoderT.Decode(&_inBitStream);
-      
+
       if (c <= 2)
       {
         if (c == 0)
@@ -111,10 +111,10 @@ bool CCoder::ReadC()
           c = _inBitStream.ReadBits(4) + 3;
         else
           c = _inBitStream.ReadBits(NUM_C_BITS) + 20;
-    
+
         if (i + c > n)
           return false;
-        
+
         do
           lens[i++] = 0;
         while (--c);
@@ -123,10 +123,10 @@ bool CCoder::ReadC()
         lens[i++] = (Byte)(c - 2);
     }
     while (i < n);
-    
+
     while (i < NC)
       lens[i++] = 0;
-    
+
     if (!CheckCodeLens(lens, NC))
       return false;
     return _decoderC.Build(lens);
@@ -152,11 +152,11 @@ HRESULT CCoder::CodeReal(UInt64 rem, ICompressProgressInfo *progress)
         UInt64 pos = _outWindow.GetProcessedSize();
         RINOK(progress->SetRatioInfo(&packSize, &pos));
       }
-      
+
       blockSize = _inBitStream.ReadBits(16);
       if (blockSize == 0)
         return S_FALSE;
-      
+
       if (!ReadTP(NT, 5, 3))
         return S_FALSE;
       if (!ReadC())
@@ -164,7 +164,7 @@ HRESULT CCoder::CodeReal(UInt64 rem, ICompressProgressInfo *progress)
       if (!ReadTP(NP, pbit, -1))
         return S_FALSE;
     }
-  
+
     blockSize--;
 
     UInt32 number = (unsigned)_symbolC;
@@ -183,13 +183,13 @@ HRESULT CCoder::CodeReal(UInt64 rem, ICompressProgressInfo *progress)
       UInt32 dist = (unsigned)_symbolT;
       if (_symbolT < 0)
         dist = _decoderT.Decode(&_inBitStream);
-      
+
       if (dist > 1)
       {
         dist--;
         dist = ((UInt32)1 << dist) + _inBitStream.ReadBits((unsigned)dist);
       }
-      
+
       if (dist >= DictSize)
         return S_FALSE;
 
@@ -224,19 +224,19 @@ STDMETHODIMP CCoder::Code(ISequentialInStream *inStream, ISequentialOutStream *o
   {
     if (!outSize)
       return E_INVALIDARG;
-    
+
     if (!_outWindow.Create(DictSize > kWindowSizeMin ? DictSize : kWindowSizeMin))
       return E_OUTOFMEMORY;
     if (!_inBitStream.Create(1 << 17))
       return E_OUTOFMEMORY;
-    
+
     _outWindow.SetStream(outStream);
     _outWindow.Init(false);
     _inBitStream.SetStream(inStream);
     _inBitStream.Init();
-    
+
     CCoderReleaser coderReleaser(this);
-    
+
     RINOK(CodeReal(*outSize, progress));
 
     coderReleaser.Disable();

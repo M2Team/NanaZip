@@ -1,8 +1,8 @@
 ﻿// (C) 2017 Tino Reichardt
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
-#include "../Common/RegisterCodec.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
 
 #include "LizardDecoder.h"
 

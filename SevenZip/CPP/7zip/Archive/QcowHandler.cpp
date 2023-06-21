@@ -1,20 +1,20 @@
 ﻿// QcowHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
 // #include <stdio.h>
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/IntToString.h"
-#include "../../Common/MyBuffer2.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
 
-#include "../../Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamObjects.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "../Compress/DeflateDecoder.h"
 
@@ -29,7 +29,7 @@ namespace NArchive {
 namespace NQcow {
 
 #define SIGNATURE { 'Q', 'F', 'I', 0xFB, 0, 0, 0 }
-  
+
 static const Byte k_Signature[] = SIGNATURE;
 
 /*
@@ -71,7 +71,7 @@ class CHandler: public CHandlerImg
 
   UInt32 _version;
   UInt32 _cryptMethod;
-  
+
   HRESULT Seek2(UInt64 offset)
   {
     _posInArc = offset;
@@ -112,7 +112,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
     if (size == 0)
       return S_OK;
   }
- 
+
   for (;;)
   {
     const UInt64 cluster = _virtPos >> _clusterBits;
@@ -129,20 +129,20 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
       memcpy(data, _cache + lowBits, size);
       break;
     }
-    
+
     const UInt64 high = cluster >> _numMidBits;
- 
+
     if (high < _dir.Size())
     {
       const UInt32 tabl = _dir[(unsigned)high];
-    
+
       if (tabl != kEmptyDirItem)
       {
         const Byte *buffer = _table + ((size_t)tabl << (_numMidBits + 3));
         const size_t midBits = (size_t)cluster & (((size_t)1 << _numMidBits) - 1);
         const Byte *p = (const Byte *)buffer + (midBits << 3);
         UInt64 v = Get64(p);
-        
+
         if (v != 0)
         {
           if ((v & _compressedFlag) != 0)
@@ -164,7 +164,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
             const size_t dataSize = ((size_t)(offset >> numOffsetBits) + 1) << 9;
             UInt64 sectorOffset = offset & (((UInt64)1 << numOffsetBits) - (1 << 9));
             const UInt64 offset2inCache = sectorOffset - _comprPos;
-            
+
             // _comprPos is aligned for 512-bytes
             // we try to use previous _cacheCompressed that contains compressed data
             // that was read for previous unpacking
@@ -184,7 +184,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
               _comprPos = sectorOffset;
               _comprSize = 0;
             }
-            
+
             if (dataSize > _comprSize)
             {
               if (sectorOffset != _posInArc)
@@ -203,16 +203,16 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
                 return E_FAIL;
               _comprSize += dataSize2;
             }
-            
+
             const size_t kSectorMask = (1 << 9) - 1;
             const size_t offsetInSector = ((size_t)offset & kSectorMask);
             _bufInStreamSpec->Init(_cacheCompressed + offsetInSector, dataSize - offsetInSector);
-            
+
             _cacheCluster = (UInt64)(Int64)-1;
             if (_cache.Size() < clusterSize)
               return E_FAIL;
             _bufOutStreamSpec->Init(_cache, clusterSize);
-            
+
             // Do we need to use smaller block than clusterSize for last cluster?
             const UInt64 blockSize64 = clusterSize;
             HRESULT res = _deflateDecoderSpec->Code(_bufInStream, _bufOutStream, NULL, &blockSize64, NULL);
@@ -229,7 +229,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
 
             RINOK(res);
             _cacheCluster = cluster;
-            
+
             continue;
             /*
             memcpy(data, _cache + lowBits, size);
@@ -257,7 +257,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
         }
       }
     }
-    
+
     memset(data, 0, size);
     break;
   }
@@ -312,7 +312,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
         else
           s.Add_UInt32(_cryptMethod);
       }
-      
+
       if (!s.IsEmpty())
         prop = s;
 
@@ -332,7 +332,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
       break;
     }
   }
-  
+
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
@@ -350,7 +350,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIAN
     case kpidPackSize: prop = _phySize; break;
     case kpidExtension: prop = (_imgExt ? _imgExt : "img"); break;
   }
-  
+
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
@@ -369,10 +369,10 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
   _version = Get32(buf + 4);
   if (_version < 1 || _version > 3)
     return S_FALSE;
-  
+
   const UInt64 backOffset = Get64(buf + 8);
   // UInt32 backSize = Get32(buf + 0x10);
-  
+
   UInt64 l1Offset;
   UInt32 l1Size;
 
@@ -406,10 +406,10 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
     _cryptMethod = Get32(buf + 0x20);
     l1Size = Get32(buf + 0x24);
     l1Offset = Get64(buf + 0x28); // must be aligned for cluster
-    
+
     const UInt64 refOffset = Get64(buf + 0x30); // must be aligned for cluster
     const UInt32 refClusters = Get32(buf + 0x38);
-    
+
     // UInt32 numSnapshots = Get32(buf + 0x3C);
     // UInt64 snapshotsOffset = Get64(buf + 0x40); // must be aligned for cluster
     /*
@@ -458,7 +458,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
     table.Alloc(t1SizeBytes);
     RINOK(stream->Seek(l1Offset, STREAM_SEEK_SET, NULL));
     RINOK(ReadStream_FALSE(stream, table, t1SizeBytes));
-    
+
     {
       UInt64 end = l1Offset + t1SizeBytes;
       // we need to uses align end for empty qcow files
@@ -473,7 +473,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
 
   UInt32 numTables = 0;
   UInt32 i;
-  
+
   for (i = 0; i < l1Size; i++)
   {
     const UInt64 v = Get64((const Byte *)table + (size_t)i * 8) & offsetMask;
@@ -505,7 +505,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
   {
     Byte *buf2;
     const size_t midSize = (size_t)1 << (_numMidBits + 3);
-   
+
     {
       const UInt64 v = Get64((const Byte *)table + (size_t)i * 8) & offsetMask;
       if (v == 0)
@@ -524,7 +524,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
         const UInt64 numBytes = tableOffset;
         RINOK(openCallback->SetCompleted(NULL, &numBytes));
       }
-      
+
       RINOK(stream->Seek(v, STREAM_SEEK_SET, NULL));
       RINOK(ReadStream_FALSE(stream, buf2, midSize));
 
@@ -540,7 +540,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
         continue;
       UInt64 offset = v & offsetMask;
       size_t dataSize = clusterSize;
-      
+
       if ((v & _compressedFlag) != 0)
       {
         if (_version <= 1)
@@ -575,7 +575,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
           }
         }
       }
-      
+
       const UInt64 end = offset + dataSize;
       if (_phySize < end)
         _phySize = end;
@@ -635,7 +635,7 @@ STDMETHODIMP CHandler::GetStream(UInt32 /* index */, ISequentialInStream **strea
       _bufInStreamSpec = new CBufInStream;
       _bufInStream = _bufInStreamSpec;
     }
-    
+
     if (!_bufOutStream)
     {
       _bufOutStreamSpec = new CBufPtrSeqOutStream();
@@ -648,12 +648,12 @@ STDMETHODIMP CHandler::GetStream(UInt32 /* index */, ISequentialInStream **strea
       _deflateDecoder = _deflateDecoderSpec;
       _deflateDecoderSpec->Set_NeedFinishInput(true);
     }
-    
+
     const size_t clusterSize = (size_t)1 << _clusterBits;
     _cache.AllocAtLeast(clusterSize);
     _cacheCompressed.AllocAtLeast(clusterSize * 2);
   }
-    
+
   CMyComPtr<ISequentialInStream> streamTemp = this;
   RINOK(InitAndSeek());
   *stream = streamTemp.Detach();

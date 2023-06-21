@@ -1,21 +1,21 @@
 ﻿// LizardHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
-#include "../../Common/ComTry.h"
-#include "../../Common/Defs.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
 
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "../Compress/LizardDecoder.h"
 #include "../Compress/LizardEncoder.h"
-#include "../Compress/CopyCoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
 
-#include "Common/DummyOutStream.h"
-#include "Common/HandlerOut.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/DummyOutStream.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/HandlerOut.h"
 
 using namespace NWindows;
 
@@ -300,7 +300,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
   if (!updateCallback)
     return E_FAIL;
   RINOK(updateCallback->GetUpdateItemInfo(0, &newData, &newProps, &indexInArchive));
- 
+
   if ((newProps))
   {
     {
@@ -311,7 +311,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
           return E_INVALIDARG;
     }
   }
-  
+
   if ((newData))
   {
     UInt64 size;

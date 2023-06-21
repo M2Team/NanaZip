@@ -1,20 +1,20 @@
 ﻿// MslzHandler.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/MyString.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
-#include "../../Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../Common/InBuffer.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
-#include "Common/DummyOutStream.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/DummyOutStream.h"
 
 namespace NArchive {
 namespace NMslz {
@@ -138,10 +138,10 @@ void CHandler::ParseName(Byte replaceByte, IArchiveOpenCallback *callback)
   if (s.IsEmpty() ||
       s.Back() != L'_')
     return;
-  
+
   s.DeleteBack();
   _name = s;
-   
+
   if (replaceByte == 0)
   {
     if (s.Len() < 3 || s[s.Len() - 3] != '.')
@@ -157,7 +157,7 @@ void CHandler::ParseName(Byte replaceByte, IArchiveOpenCallback *callback)
       }
     }
   }
-  
+
   if (replaceByte >= 0x20 && replaceByte < 0x80)
     _name += (char)replaceByte;
 }
@@ -228,7 +228,7 @@ static HRESULT MslzDec(CInBuffer &inStream, ISequentialOutStream *outStream, UIn
   Byte buf[kBufSize];
   UInt32 dest = 0;
   memset(buf, ' ', kBufSize);
-  
+
   while (dest < unpackSize)
   {
     Byte b;
@@ -237,7 +237,7 @@ static HRESULT MslzDec(CInBuffer &inStream, ISequentialOutStream *outStream, UIn
       needMoreData = true;
       return S_FALSE;
     }
-    
+
     for (unsigned mask = (unsigned)b | 0x100; mask > 1 && dest < unpackSize; mask >>= 1)
     {
       if (!inStream.ReadByte(b))
@@ -245,7 +245,7 @@ static HRESULT MslzDec(CInBuffer &inStream, ISequentialOutStream *outStream, UIn
         needMoreData = true;
         return S_FALSE;
       }
-  
+
       if (mask & 1)
       {
         buf[dest++ & kMask] = b;
@@ -264,7 +264,7 @@ static HRESULT MslzDec(CInBuffer &inStream, ISequentialOutStream *outStream, UIn
         unsigned len = (b1 & 0xF) + 3;
         if (len > kMaxLen || dest + len > unpackSize)
           return S_FALSE;
-    
+
         do
         {
           buf[dest++ & kMask] = buf[src++ & kMask];
@@ -274,7 +274,7 @@ static HRESULT MslzDec(CInBuffer &inStream, ISequentialOutStream *outStream, UIn
       }
     }
   }
-  
+
   if (outStream)
     RINOK(WriteStream(outStream, buf, dest & kMask));
   return S_OK;
@@ -341,7 +341,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       return E_OUTOFMEMORY;
     s.SetStream(_seqStream);
     s.Init();
-    
+
     Byte buffer[kHeaderSize];
     if (s.ReadBytes(buffer, kHeaderSize) == kHeaderSize)
     {
@@ -364,7 +364,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
           if (_inStream && _packSize < _originalFileSize)
             _dataAfterEnd = true;
-          
+
           isArc = true;
         }
       }

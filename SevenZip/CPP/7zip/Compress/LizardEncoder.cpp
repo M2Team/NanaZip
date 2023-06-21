@@ -1,6 +1,6 @@
 ﻿// (C) 2017 Tino Reichardt
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 #include "LizardEncoder.h"
 #include "LizardDecoder.h"
 

@@ -3,7 +3,7 @@
 #ifndef __OPEN_CALLBACK_CONSOLE_H
 #define __OPEN_CALLBACK_CONSOLE_H
 
-#include "../../../Common/StdOutStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StdOutStream.h"
 
 #include "../Common/ArchiveOpenCallback.h"
 
@@ -39,16 +39,16 @@ public:
       // _totalBytesDefined(false),
       _totalBytes(0),
       MultiArcMode(false)
-      
+
       #ifndef _NO_CRYPTO
       , PasswordIsDefined(false)
       // , PasswordWasAsked(false)
       #endif
-      
+
       {}
 
   virtual ~COpenCallbackConsole() {}
-  
+
   void Init(CStdOutStream *outStream, CStdOutStream *errorStream, CStdOutStream *percentStream)
   {
     _so = outStream;
@@ -57,7 +57,7 @@ public:
   }
 
   INTERFACE_IOpenCallbackUI(;)
-  
+
   #ifndef _NO_CRYPTO
   bool PasswordIsDefined;
   // bool PasswordWasAsked;

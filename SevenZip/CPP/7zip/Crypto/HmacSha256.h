@@ -4,7 +4,7 @@
 #ifndef __CRYPTO_HMAC_SHA256_H
 #define __CRYPTO_HMAC_SHA256_H
 
-#include "../../../C/Sha256.h"
+#include "../../../../ThirdParty/LZMA/C/Sha256.h"
 
 namespace NCrypto {
 namespace NSha256 {

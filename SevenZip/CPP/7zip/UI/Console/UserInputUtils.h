@@ -3,7 +3,7 @@
 #ifndef __USER_INPUT_UTILS_H
 #define __USER_INPUT_UTILS_H
 
-#include "../../../Common/StdOutStream.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StdOutStream.h"
 
 namespace NUserAnswerMode {
 

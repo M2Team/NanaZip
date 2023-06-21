@@ -3,7 +3,7 @@
 #ifndef __LIST_H
 #define __LIST_H
 
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
 #include "../Common/LoadCodecs.h"
 

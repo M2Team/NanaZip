@@ -1,6 +1,6 @@
 ﻿// Sha1Prepare.cpp
 
-#include "StdAfx.h"
+#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
 
 #include "../../C/Sha1.h"
 

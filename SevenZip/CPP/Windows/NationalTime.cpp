@@ -1,6 +1,6 @@
 ﻿// Windows/NationalTime.cpp
 
-#include "StdAfx.h"
+#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
 
 #include "NationalTime.h"
 

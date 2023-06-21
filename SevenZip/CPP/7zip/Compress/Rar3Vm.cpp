@@ -10,14 +10,14 @@ Note:
   to see if it sets flags right.
 */
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
 #include <stdlib.h>
 
-#include "../../../C/7zCrc.h"
-#include "../../../C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
 
-#include "../../Common/Defs.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
 
 #include "Rar3Vm.h"
 
@@ -152,7 +152,7 @@ bool CVm::Execute(CProgram *prg, const CProgramInitState *initState,
     memcpy(Mem + kGlobalOffset + globalSize, &prg->StaticData[0], staticSize);
 
   bool res = true;
-  
+
   #ifdef RARVM_STANDARD_FILTERS
   if (prg->StandardFilterIndex >= 0)
     res = ExecuteStandardFilter(prg->StandardFilterIndex);
@@ -171,7 +171,7 @@ bool CVm::Execute(CProgram *prg, const CProgramInitState *initState,
     res = false;
     #endif
   }
-  
+
   UInt32 newBlockPos = GetFixedGlobalValue32(NGlobalOffset::kBlockPos) & kSpaceMask;
   UInt32 newBlockSize = GetFixedGlobalValue32(NGlobalOffset::kBlockSize) & kSpaceMask;
   if (newBlockPos + newBlockSize >= kSpaceSize)
@@ -559,7 +559,7 @@ bool CVm::ExecuteCode(const CProgram *prg)
           continue;
         }
         break;
-      
+
       case CMD_PUSH:
         R[kStackRegIndex] -= 4;
         SetValue32(&Mem[R[kStackRegIndex] & kSpaceMask], GetOperand32(&cmd->Op1));
@@ -595,7 +595,7 @@ bool CVm::ExecuteCode(const CProgram *prg)
         Flags = GetValue32(&Mem[R[kStackRegIndex] & kSpaceMask]);
         R[kStackRegIndex] += 4;
         break;
-      
+
       case CMD_MOVZX:
         SetOperand32(&cmd->Op1, GetOperand8(&cmd->Op2));
         break;
@@ -631,7 +631,7 @@ bool CVm::ExecuteCode(const CProgram *prg)
           }
         }
         break;
-      
+
       case CMD_RET:
         {
           if (R[kStackRegIndex] >= kSpaceSize)
@@ -692,19 +692,19 @@ void CProgram::ReadProgram(const Byte *code, UInt32 codeSize)
   inp.Init(code, codeSize);
 
   StaticData.Clear();
-  
+
   if (inp.ReadBit())
   {
     UInt32 dataSize = inp.ReadEncodedUInt32() + 1;
     for (UInt32 i = 0; inp.Avail() && i < dataSize; i++)
       StaticData.Add((Byte)inp.ReadBits(8));
   }
-  
+
   while (inp.Avail())
   {
     Commands.Add(CCommand());
     CCommand *cmd = &Commands.Back();
-    
+
     if (inp.ReadBit() == 0)
       cmd->OpCode = (ECommand)inp.ReadBits(3);
     else
@@ -714,9 +714,9 @@ void CProgram::ReadProgram(const Byte *code, UInt32 codeSize)
       cmd->ByteMode = (inp.ReadBit()) ? true : false;
     else
       cmd->ByteMode = 0;
-    
+
     int opNum = (kCmdFlags[(unsigned)cmd->OpCode] & CF_OPMASK);
-    
+
     if (opNum > 0)
     {
       DecodeArg(inp, cmd->Op1, cmd->ByteMode);
@@ -823,7 +823,7 @@ bool CProgram::PrepareProgram(const Byte *code, UInt32 codeSize)
   #ifdef RARVM_VM_ENABLE
   Commands.Clear();
   #endif
-  
+
   #ifdef RARVM_STANDARD_FILTERS
   StandardFilterIndex = -1;
   #endif
@@ -843,19 +843,19 @@ bool CProgram::PrepareProgram(const Byte *code, UInt32 codeSize)
     if (StandardFilterIndex >= 0)
       return true;
     #endif
-  
+
     #ifdef RARVM_VM_ENABLE
     ReadProgram(code + 1, codeSize - 1);
     #else
     IsSupported = false;
     #endif
   }
-  
+
   #ifdef RARVM_VM_ENABLE
   Commands.Add(CCommand());
   Commands.Back().OpCode = CMD_RET;
   #endif
-  
+
   return isOK;
 }
 
@@ -948,11 +948,11 @@ static void RgbDecode(Byte *srcData, UInt32 dataSize, UInt32 width, UInt32 posR)
 {
   Byte *destData = srcData + dataSize;
   const UInt32 kNumChannels = 3;
-  
+
   for (UInt32 curChannel = 0; curChannel < kNumChannels; curChannel++)
   {
     Byte prevByte = 0;
-    
+
     for (UInt32 i = curChannel; i < dataSize; i += kNumChannels)
     {
       unsigned int predicted;
@@ -997,25 +997,25 @@ static void AudioDecode(Byte *srcData, UInt32 dataSize, UInt32 numChannels)
     Int32 D1 = 0, D2 = 0, D3;
     Int32 K1 = 0, K2 = 0, K3 = 0;
     memset(dif, 0, sizeof(dif));
-    
+
     for (UInt32 i = curChannel, byteCount = 0; i < dataSize; i += numChannels, byteCount++)
     {
       D3 = D2;
       D2 = prevDelta - D1;
       D1 = prevDelta;
-      
+
       UInt32 predicted = 8 * prevByte + K1 * D1 + K2 * D2 + K3 * D3;
       predicted = (predicted >> 3) & 0xFF;
-      
+
       UInt32 curByte = *(srcData++);
-      
+
       predicted -= curByte;
       destData[i] = (Byte)predicted;
       prevDelta = (UInt32)(Int32)(signed char)(predicted - prevByte);
       prevByte = predicted;
-      
+
       Int32 D = ((Int32)(signed char)curByte) << 3;
-      
+
       dif[0] += abs(D);
       dif[1] += abs(D - D1);
       dif[2] += abs(D + D1);
@@ -1023,7 +1023,7 @@ static void AudioDecode(Byte *srcData, UInt32 dataSize, UInt32 numChannels)
       dif[4] += abs(D + D2);
       dif[5] += abs(D - D3);
       dif[6] += abs(D + D3);
-      
+
       if ((byteCount & 0x1F) == 0)
       {
         UInt32 minDif = dif[0], numMinDif = 0;
@@ -1079,11 +1079,11 @@ bool CVm::ExecuteStandardFilter(unsigned filterIndex)
     case SF_E8E9:
       E8E9Decode(Mem, dataSize, R[6], (filterType == SF_E8E9));
       break;
-    
+
     case SF_ITANIUM:
       ItaniumDecode(Mem, dataSize, R[6]);
       break;
-    
+
     case SF_DELTA:
     {
       if (dataSize >= kGlobalOffset / 2)
@@ -1095,7 +1095,7 @@ bool CVm::ExecuteStandardFilter(unsigned filterIndex)
       DeltaDecode(Mem, dataSize, numChannels);
       break;
     }
-    
+
     case SF_RGB:
     {
       if (dataSize >= kGlobalOffset / 2 || dataSize < 3) // unrar 5.5.5
@@ -1108,7 +1108,7 @@ bool CVm::ExecuteStandardFilter(unsigned filterIndex)
       RgbDecode(Mem, dataSize, width, posR);
       break;
     }
-    
+
     case SF_AUDIO:
     {
       if (dataSize >= kGlobalOffset / 2)
@@ -1120,7 +1120,7 @@ bool CVm::ExecuteStandardFilter(unsigned filterIndex)
       AudioDecode(Mem, dataSize, numChannels);
       break;
     }
-    
+
     /*
     case SF_UPCASE:
       if (dataSize >= kGlobalOffset / 2)

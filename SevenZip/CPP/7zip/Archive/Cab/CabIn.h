@@ -3,10 +3,10 @@
 #ifndef __ARCHIVE_CAB_IN_H
 #define __ARCHIVE_CAB_IN_H
 
-#include "../../../Common/MyBuffer.h"
-#include "../../../Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../../Common/InBuffer.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 #include "CabItem.h"
 
@@ -17,7 +17,7 @@ struct COtherArc
 {
   AString FileName;
   AString DiskName;
-  
+
   void Clear()
   {
     FileName.Empty();
@@ -82,14 +82,14 @@ struct CDatabase
   CObjectVector<CItem> Items;
   UInt64 StartPosition;
   CInArcInfo ArcInfo;
-  
+
   void Clear()
   {
     ArcInfo.Clear();
     Folders.Clear();
     Items.Clear();
   }
-  
+
   bool IsTherePrevFolder() const
   {
     FOR_VECTOR (i, Items)
@@ -97,7 +97,7 @@ struct CDatabase
         return true;
     return false;
   }
-  
+
   int GetNumberOfNewFolders() const
   {
     int res = (int)Folders.Size();
@@ -145,7 +145,7 @@ public:
     StartFolderOfVol.Clear();
     FolderStartFileIndex.Clear();
   }
-  
+
   void FillSortAndShrink();
   bool Check();
 };
@@ -170,7 +170,7 @@ public:
 
   HRESULT Open(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit);
 };
-  
+
 }}
-  
+
 #endif

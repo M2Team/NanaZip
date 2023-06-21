@@ -1,6 +1,6 @@
 ﻿// (C) 2016 Tino Reichardt
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 #include "Lz5Decoder.h"
 
 int Lz5Read(void *arg, LZ5MT_Buffer * in)

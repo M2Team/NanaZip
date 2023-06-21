@@ -30,7 +30,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 ----
 */
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
 // #define SHOW_DEBUG_INFO
 
@@ -44,7 +44,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 #define PRF(x)
 #endif
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
 #include "LzfseDecoder.h"
 
@@ -92,7 +92,7 @@ HRESULT CDecoder::DecodeUncompressed(UInt32 unpackSize)
 HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
 {
   PRF(printf("\nLZVN %7u %7u", unpackSize, packSize));
-  
+
   UInt32 D = 0;
 
   for (;;)
@@ -112,11 +112,11 @@ HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
       /*
       large L   - 11100000 LLLLLLLL <LITERALS>
       small L   - 1110LLLL <LITERALS>
-      
+
       large Rep - 11110000 MMMMMMMM
       small Rep - 1111MMMM
       */
-        
+
       M = b & 0xF;
       if (M == 0)
       {
@@ -136,13 +136,13 @@ HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
         M = 0;
       }
     }
-      
+
     // ERROR codes
     else if ((b & 0xF0) == 0x70) // 0111xxxx
       return S_FALSE;
     else if ((b & 0xF0) == 0xD0) // 1101xxxx
       return S_FALSE;
-    
+
     else
     {
       if ((b & 0xE0) == 0xA0)
@@ -154,7 +154,7 @@ HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
         if (!m_InStream.ReadByte(b1))
           return S_FALSE;
         packSize--;
-        
+
         Byte b2;
         if (!m_InStream.ReadByte(b2))
           return S_FALSE;
@@ -188,7 +188,7 @@ HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
           if (!m_InStream.ReadByte(b1))
             return S_FALSE;
           packSize--;
-          
+
           // large - LLMMM111 DDDDDDDD DDDDDDDD <LITERALS>
           // small - LLMMMDDD DDDDDDDD <LITERALS>
           D  = ((UInt32)b & 7);
@@ -221,7 +221,7 @@ HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
         unpackSize--;
       }
     }
-    
+
     if (M != 0)
     {
       if (unpackSize == 0 || D == 0)
@@ -345,7 +345,7 @@ static MY_FORCE_INLINE void InitLitTable(const UInt16 *freqs, UInt32 *table)
 
     e--;
     step >>= 1;
-    
+
     for (j = j0; j < f; j++)
     {
       *table++ = e;
@@ -381,7 +381,7 @@ static void InitExtraDecoderTable(unsigned numStates,
     {
       unsigned k = CountZeroBits(f, numStates);
       unsigned j0 = ((2 * numStates) >> k) - f;
-      
+
       unsigned j = 0;
       do
       {
@@ -392,10 +392,10 @@ static void InitExtraDecoderTable(unsigned numStates,
         e->vbase = vbase;
       }
       while (++j < j0);
-      
+
       f -= j0;
       k--;
-      
+
       for (j = 0; j < f; j++)
       {
         CExtraEntry *e = table++;
@@ -588,9 +588,9 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
       Byte temp[kHeaderSize];
       if (m_InStream.ReadBytes(temp, kHeaderSize) != kHeaderSize)
         return S_FALSE;
-      
+
       UInt64 v;
-      
+
       v = GetUi64(temp);
       GET_BITS_64(v,  0, 20, numLiterals);
       GET_BITS_64(v, 20, 20, litPayloadSize);
@@ -600,7 +600,7 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
       if (literal_bits > 0)
         return S_FALSE;
       // GET_BITS_64(v, 63, 1, unused);
-      
+
       v = GetUi64(temp + 8);
       GET_BITS_64(v,  0, 10, lit_state_0);
       GET_BITS_64(v, 10, 10, lit_state_1);
@@ -612,7 +612,7 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
       if (lmd_bits > 0)
         return S_FALSE;
       // GET_BITS_64(v, 63, 1, unused)
-      
+
       UInt32 v32 = GetUi32(temp + 20);
       // (total header size in bytes; this does not
       // correspond to a field in the uncompressed header version,
@@ -622,7 +622,7 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
       GET_BITS_32(v32, 10, 10, m_state);
       GET_BITS_32(v32, 20, 10 + 2, d_state);
       // GET_BITS_64(v, 62, 2, unused);
-      
+
       headerSize = GetUi32(temp + 16);
       if (headerSize <= kPreHeaderSize + kHeaderSize)
         return S_FALSE;
@@ -638,7 +638,7 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
         2, 3, 2, 5, 2, 3, 2, 8, 2, 3, 2, 5, 2, 3, 2, 14,
         2, 3, 2, 5, 2, 3, 2, 8, 2, 3, 2, 5, 2, 3, 2, 14
       };
-  
+
       static const Byte valueTable[32] =
       {
         0, 2, 1, 4, 0, 3, 1, 8, 0, 2, 1, 5, 0, 3, 1, 24,
@@ -659,7 +659,7 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
           numBits += 8;
           headerSize--;
         }
-        
+
         unsigned b = (unsigned)accum & 31;
         unsigned n = numBitsTable[b];
         if (numBits < n)
@@ -671,7 +671,7 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
         accum >>= n;
         freqs[i] = (UInt16)f;
       }
-      
+
       if (numBits >= 8 || headerSize != 0)
         return S_FALSE;
     }
@@ -707,20 +707,20 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
     _literals.AllocAtLeast(LITERALS_PER_BLOCK + 16);
     _buffer.AllocAtLeast(kPad + litPayloadSize);
     memset(_buffer, 0, kPad);
-   
+
     if (m_InStream.ReadBytes(_buffer + kPad, litPayloadSize) != litPayloadSize)
       return S_FALSE;
 
     UInt32 lit_decoder[NUM_LIT_STATES];
     InitLitTable(freqs_LIT, lit_decoder);
-    
+
     const Byte *buf_start = _buffer + kPad;
     const Byte *buf_check = buf_start - 4;
     const Byte *buf = buf_start + litPayloadSize;
     CBitStream in;
     if (FseInStream_Init(&in, literal_bits, &buf) != 0)
       return S_FALSE;
-    
+
     Byte *lit = _literals;
     const Byte *lit_limit = lit + numLiterals;
     for (; lit < lit_limit; lit += 4)
@@ -732,12 +732,12 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
       DECODE_LIT (lit[2], lit_state_2);
       DECODE_LIT (lit[3], lit_state_3);
     }
-    
+
     if ((buf_start - buf) * 8 != (int)in.numBits)
       return S_FALSE;
   }
 
-  
+
   // ---------- Decode LMD ----------
 
   _buffer.AllocAtLeast(kPad + lmdPayloadSize);
@@ -759,10 +759,10 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
   CBitStream in;
   if (FseInStream_Init(&in, lmd_bits, &buf))
     return S_FALSE;
-    
+
   const Byte *lit = _literals;
   const Byte *lit_limit = lit + numLiterals;
-  
+
   UInt32 D = 0;
 
   for (;;)
@@ -776,7 +776,7 @@ HRESULT CDecoder::DecodeLzfse(UInt32 unpackSize, Byte version)
     unsigned L = (unsigned)FseDecodeExtra(&l_state, l_decoder, &in);
 
     FseInStream_FLUSH
-    
+
     unsigned M = (unsigned)FseDecodeExtra(&m_state, m_decoder, &in);
 
     FseInStream_FLUSH
@@ -845,7 +845,7 @@ STDMETHODIMP CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStr
   m_OutWindowStream.Init(false);
   m_InStream.SetStream(inStream);
   m_InStream.Init();
-  
+
   CCoderReleaser coderReleaser(this);
 
   UInt64 prevOut = 0;
@@ -879,19 +879,19 @@ STDMETHODIMP CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStr
     if ((v & 0xFFFFFF) != 0x787662) // bvx
       return S_FALSE;
     v >>= 24;
-    
+
     if (v == 0x24) // '$', end of stream
       break;
-    
+
     UInt32 unpackSize;
     RINOK(GetUInt32(unpackSize));
-    
+
     UInt32 cur = unpackSize;
     if (cur > rem)
       cur = (UInt32)rem;
-    
+
     unpackSize -= cur;
-    
+
     HRESULT res;
     if (v == kSignature_LZFSE_V1 || v == kSignature_LZFSE_V2)
       res = DecodeLzfse(cur, (Byte)v);
@@ -906,14 +906,14 @@ STDMETHODIMP CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStr
       res = DecodeUncompressed(cur);
     else
       return E_NOTIMPL;
-    
+
     if (res != S_OK)
       return res;
-    
+
     if (unpackSize != 0)
       return S_FALSE;
   }
-  
+
   coderReleaser.NeedFlush = false;
   HRESULT res = m_OutWindowStream.Flush();
   if (res == S_OK)

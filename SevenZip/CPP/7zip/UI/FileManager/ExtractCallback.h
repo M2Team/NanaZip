@@ -3,10 +3,10 @@
 #ifndef __EXTRACT_CALLBACK_H
 #define __EXTRACT_CALLBACK_H
 
-#include "../../../../C/Alloc.h"
+#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
 
-#include "../../../Common/MyCom.h"
-#include "../../../Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
 #ifndef _SFX
 #include "../Agent/IFolderArchive.h"
@@ -16,7 +16,7 @@
 #include "../Common/ArchiveOpenCallback.h"
 
 #ifndef _NO_CRYPTO
-#include "../../IPassword.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
 #endif
 
 #ifndef _SFX
@@ -63,7 +63,7 @@ public:
 struct CVirtFile
 {
   CGrowBuf Data;
-  
+
   UInt64 Size; // real size
   UInt64 ExpectedSize; // the size from props request. 0 if unknown
 
@@ -73,10 +73,10 @@ struct CVirtFile
   bool ATimeDefined;
   bool MTimeDefined;
   bool AttribDefined;
-  
+
   bool IsDir;
   bool IsAltStream;
-  
+
   DWORD Attrib;
 
   FILETIME CTime;
@@ -108,7 +108,7 @@ public:
   CObjectVector<CVirtFile> Files;
   UInt64 MaxTotalAllocSize;
   FString DirPrefix;
- 
+
   CVirtFile &AddNewFile()
   {
     if (!Files.IsEmpty())
@@ -162,7 +162,7 @@ public:
 };
 
 #endif
-  
+
 class CExtractCallbackImp:
   public IExtractCallbackUI, // it includes IFolderArchiveExtractCallback
   public IOpenCallbackUI,
@@ -304,7 +304,7 @@ public:
     _totalBytesDefined(false),
     MultiArcMode(false)
     {}
-   
+
   ~CExtractCallbackImp();
   void Init();
 

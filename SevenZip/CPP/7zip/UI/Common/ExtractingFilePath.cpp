@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
 
 #include "ExtractingFilePath.h"
 

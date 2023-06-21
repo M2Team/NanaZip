@@ -3,12 +3,12 @@
 #ifndef __LZFSE_DECODER_H
 #define __LZFSE_DECODER_H
 
-#include "../../Common/MyBuffer.h"
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/InBuffer.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
 
 #include "LzOutWindow.h"
 

@@ -1,10 +1,10 @@
 ﻿// XpressDecoder.cpp
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
 
 // #include <stdio.h>
 
-#include "../../../C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
 
 #include "HuffmanDecoder.h"
 #include "XpressDecoder.h"
@@ -21,7 +21,7 @@ struct CBitStream
   {
     return (Value >> (BitPos - numBits)) & ((1 << numBits) - 1);
   }
-  
+
   void MovePos(unsigned numBits)
   {
     BitPos -= numBits;
@@ -33,7 +33,7 @@ struct CBitStream
       if (in >= lim) return S_FALSE; \
       bs.Value = (bs.Value << 16) | GetUi16(in); \
       in += 2; bs.BitPos += 16; }
- 
+
 static const unsigned kNumHuffBits = 15;
 static const unsigned kNumLenBits = 4;
 static const unsigned kLenMask = (1 << kNumLenBits) - 1;
@@ -43,7 +43,7 @@ static const unsigned kNumSyms = 256 + (kNumPosSlots << kNumLenBits);
 HRESULT Decode(const Byte *in, size_t inSize, Byte *out, size_t outSize)
 {
   NCompress::NHuffman::CDecoder<kNumHuffBits, kNumSyms> huff;
-  
+
   if (inSize < kNumSyms / 2 + 4)
     return S_FALSE;
   {
@@ -87,7 +87,7 @@ HRESULT Decode(const Byte *in, size_t inSize, Byte *out, size_t outSize)
       sym -= 256;
       UInt32 dist = sym >> kNumLenBits;
       UInt32 len = sym & kLenMask;
-      
+
       if (len == kLenMask)
       {
         if (in > lim)
@@ -109,7 +109,7 @@ HRESULT Decode(const Byte *in, size_t inSize, Byte *out, size_t outSize)
       dist += ((bs.Value >> bs.BitPos) & (dist - 1));
 
       BIT_STREAM_NORMALIZE
-      
+
       if (len + 3 > outSize - pos)
         return S_FALSE;
       if (dist > pos)

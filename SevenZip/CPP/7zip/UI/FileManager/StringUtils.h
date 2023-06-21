@@ -3,7 +3,7 @@
 #ifndef __STRING_UTILS_H
 #define __STRING_UTILS_H
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
 void SplitStringToTwoStrings(const UString &src, UString &dest1, UString &dest2);
 

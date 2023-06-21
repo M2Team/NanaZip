@@ -4,23 +4,23 @@ This code is based on:
   PPMd var.H (2001) / var.I (2002): Dmitry Shkarin : Public domain
   Carryless rangecoder (1999): Dmitry Subbotin : Public domain */
 
-#include "StdAfx.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
 
-#include "../../../C/CpuArch.h"
-#include "../../../C/Alloc.h"
-#include "../../../C/Ppmd7.h"
+#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Ppmd7.h"
 #include "../../../C/Ppmd8.h"
 
-#include "../../Common/ComTry.h"
-#include "../../Common/StringConvert.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
 
-#include "../../Windows/PropVariant.h"
-#include "../../Windows/TimeUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../Common/CWrappers.h"
-#include "../Common/ProgressUtils.h"
-#include "../Common/RegisterArc.h"
-#include "../Common/StreamUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/CWrappers.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 using namespace NWindows;
 

@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
 
-#include "../../PropID.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
 
 #include "FSFolder.h"
 #include "NetFolder.h"
@@ -74,7 +74,7 @@ void CNetFolder::Init(const NWindows::NNet::CResourceW *netResource,
 
     // if (_netResource.DisplayType == RESOURCEDISPLAYTYPE_SERVER)
     _path = _netResource.RemoteName;
-    
+
     /* WinXP-64: When we move UP from Network share without _parentFolder chain,
          we can get empty _netResource.RemoteName. Do we need to use Provider there ? */
     if (_path.IsEmpty())

@@ -3,14 +3,14 @@
 #ifndef __COMPRESS_PPMD_ZIP_H
 #define __COMPRESS_PPMD_ZIP_H
 
-#include "../../../C/Alloc.h"
+#include "../../../../ThirdParty/LZMA/C/Alloc.h"
 #include "../../../C/Ppmd8.h"
 
-#include "../../Common/MyCom.h"
+#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
 
-#include "../ICoder.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
 
-#include "../Common/CWrappers.h"
+#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/CWrappers.h"
 
 namespace NCompress {
 namespace NPpmdZip {
@@ -20,7 +20,7 @@ static const UInt32 kBufSize = (1 << 20);
 struct CBuf
 {
   Byte *Buf;
-  
+
   CBuf(): Buf(NULL) {}
   ~CBuf() { ::MidFree(Buf); }
   bool Alloc()
@@ -63,7 +63,7 @@ struct CEncProps
   UInt32 ReduceSize;
   int Order;
   int Restor;
-  
+
   CEncProps()
   {
     MemSizeMB = (UInt32)(Int32)-1;

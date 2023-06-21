@@ -3,10 +3,10 @@
 #ifndef __ZIP_REGISTRY_H
 #define __ZIP_REGISTRY_H
 
-#include "../../../Common/MyTypes.h"
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
-#include "../../Common/MethodProps.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/MethodProps.h"
 
 #include "ExtractMode.h"
 

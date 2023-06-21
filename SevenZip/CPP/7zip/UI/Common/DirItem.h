@@ -4,18 +4,18 @@
 #define __DIR_ITEM_H
 
 #ifdef _WIN32
-#include "../../../Common/MyLinux.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
 #endif
 
-#include "../../../Common/MyString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
 
-#include "../../../Windows/FileFind.h"
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/TimeUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
 
-#include "../../Common/UniqBlocks.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/UniqBlocks.h"
 
-#include "../../Archive/IArchive.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
 
 struct CDirItemsStat
 {

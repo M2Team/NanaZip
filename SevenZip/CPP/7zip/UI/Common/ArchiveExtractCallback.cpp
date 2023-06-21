@@ -6,32 +6,32 @@
 #undef printf
 
 // #include <stdio.h>
-// #include "../../../../C/CpuTicks.h"
+// #include "../../../../../ThirdParty/LZMA/C/CpuTicks.h"
 
-#include "../../../../C/Alloc.h"
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
 
-#include "../../../Common/ComTry.h"
-#include "../../../Common/IntToString.h"
-#include "../../../Common/StringConvert.h"
-#include "../../../Common/UTFConvert.h"
-#include "../../../Common/Wildcard.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
 
-#include "../../../Windows/ErrorMsg.h"
-#include "../../../Windows/FileDir.h"
-#include "../../../Windows/FileFind.h"
-#include "../../../Windows/FileName.h"
-#include "../../../Windows/PropVariant.h"
-#include "../../../Windows/PropVariantConv.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
 
 #if defined(_WIN32) && !defined(UNDER_CE)  && !defined(_SFX)
 #define _USE_SECURITY_CODE
-#include "../../../Windows/SecurityUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Windows/SecurityUtils.h"
 #endif
 
-#include "../../Common/FilePathAutoRename.h"
-#include "../../Common/StreamUtils.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FilePathAutoRename.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
 
 #include "../Common/ExtractingFilePath.h"
 #include "../Common/PropIDUtils.h"

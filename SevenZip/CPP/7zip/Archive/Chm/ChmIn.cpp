@@ -4,12 +4,12 @@
 
 // #include <stdio.h>
 
-#include "../../../../C/CpuArch.h"
+#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
 
-#include "../../../Common/IntToString.h"
-#include "../../../Common/UTFConvert.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
 
-#include "../../Common/LimitedStreams.h"
+#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
 
 #include "ChmIn.h"
 
@@ -341,7 +341,7 @@ HRESULT CInArchive::OpenChm(IInStream *inStream, CDatabase &database)
       ReadUInt32(); // Chunk number of next  listing chunk when reading
                     // directory in sequence (-1 if this is the last listing chunk)
       unsigned numItems = 0;
-      
+
       for (;;)
       {
         UInt64 offset = _inBuffer.GetProcessedSize() - chunkPos;
@@ -353,9 +353,9 @@ HRESULT CInArchive::OpenChm(IInStream *inStream, CDatabase &database)
         RINOK(ReadDirEntry(database));
         numItems++;
       }
-      
+
       Skip(quickrefLength - 2);
-      
+
       unsigned rrr = ReadUInt16();
       if (rrr != numItems)
       {
@@ -398,7 +398,7 @@ HRESULT CInArchive::OpenHelp2(IInStream *inStream, CDatabase &database)
     UInt64 end = sectionOffsets[i] + sectionSizes[i];
     database.UpdatePhySize(end);
   }
-  
+
   // Post-Header
   ReadUInt32(); // 2
   ReadUInt32(); // 0x98: offset to CAOL from beginning of post-header)
@@ -426,7 +426,7 @@ HRESULT CInArchive::OpenHelp2(IInStream *inStream, CDatabase &database)
   ReadUInt64(); // Possibly flags -- sometimes 1, sometimes 0.
   ReadUInt64(); // Number of directory index entries (same as number of AOLL
                // chunks in main directory)
-  
+
   // (The obvious guess for the following two fields, which recur in a number
   // of places, is they are maximum sizes for the directory and directory index.
   // However, I have seen no direct evidence that this is the case.)
@@ -533,7 +533,7 @@ HRESULT CInArchive::OpenHelp2(IInStream *inStream, CDatabase &database)
       ReadUInt64(); // Number of first listing entry in this chunk
       ReadUInt32(); // 1 (unknown -- other values have also been seen here)
       ReadUInt32(); // 0 (unknown)
-      
+
       unsigned numItems = 0;
       for (;;)
       {
@@ -763,7 +763,7 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
     {
       // Control Data
       RINOK(DecompressStream(inStream, database, sectionPrefix + kControlData));
-      
+
       FOR_VECTOR (mi, section.Methods)
       {
         CMethodInfo &method = section.Methods[mi];
@@ -778,7 +778,7 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
           li.Version = ReadUInt32();
           if (li.Version != 2 && li.Version != 3)
             return S_FALSE;
-          
+
           {
             // There is bug in VC6, if we use function call as parameter for inline function
             UInt32 val32 = ReadUInt32();
@@ -787,7 +787,7 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
               return S_FALSE;
             li.ResetIntervalBits = n;
           }
-          
+
           {
             UInt32 val32 = ReadUInt32();
             int n = GetLog(val32);
@@ -826,7 +826,7 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
         RINOK(DecompressStream(inStream, database, transformPrefix +
             method.GetGuidString() + kResetTable));
         CResetTable &rt = method.LzxInfo.ResetTable;
-        
+
         if (_chunkSize < 4)
         {
           if (_chunkSize != 0)
@@ -862,9 +862,9 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
           if (numEntries != numBlocks &&
               numEntries != numBlocks + 1)
             return S_FALSE;
-  
+
           rt.ResetOffsets.ClearAndReserve(numEntries);
-          
+
           for (UInt32 i = 0; i < numEntries; i++)
           {
             UInt64 v = ReadUInt64();
@@ -912,19 +912,19 @@ HRESULT CInArchive::Open2(IInStream *inStream,
     return E_OUTOFMEMORY;
   _inBuffer.SetStream(inStream);
   _inBuffer.Init();
-  
+
   if (_help2)
   {
     const unsigned kSignatureSize = 8;
     const UInt64 signature = ((UInt64)kSignature_ITLS << 32) | kSignature_ITOL;
     UInt64 limit = 1 << 18;
-    
+
     if (searchHeaderSizeLimit)
       if (limit > *searchHeaderSizeLimit)
         limit = *searchHeaderSizeLimit;
 
     UInt64 val = 0;
-    
+
     for (;;)
     {
       Byte b;
@@ -940,7 +940,7 @@ HRESULT CInArchive::Open2(IInStream *inStream,
           return S_FALSE;
       }
     }
-    
+
     database.StartPosition += _inBuffer.GetProcessedSize() - kSignatureSize;
     RINOK(OpenHelp2(inStream, database));
     if (database.NewFormat)
@@ -957,7 +957,7 @@ HRESULT CInArchive::Open2(IInStream *inStream,
 
 
   #ifndef CHM_LOW
-  
+
   try
   {
     try
