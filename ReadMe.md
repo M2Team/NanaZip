@@ -225,6 +225,9 @@ the following command in the PowerShell which is run as administrator.
   - [ ] Try to add extension for Windows File Explorer for give user immersive 
         experience like builtin zip file support in Windows. (Suggested by 
         SakuraNeko and shuax.)
+  - [ ] Try to create isolated and portable plugin infrastructure based on
+        64-bit RISC-V Unprivileged ISA Specification.
+        Runtime Project: https://github.com/ChaosAIOfficial/RaySoul
 
 ## Documents
 
