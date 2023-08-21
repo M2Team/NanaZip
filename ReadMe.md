@@ -25,6 +25,26 @@ experience, forked from the source code of well-known open source file archiver
 **All kinds of contributions will be appreciated. All suggestions, pull 
 requests and issues are welcome.**
 
+Maybe everyone needs to know I am not a full-time or paid developer for NanaZip.
+I have my work to do. I need to work for Tencent-related company during the day.
+I develop individual open-source projects at night.
+
+I also need to port the project (I am a leader of a live-streaming project for
+Windows) which I maintained for the company to Linux in recent days. So, I am
+really busy. I sleep in midnight every day because I need to do both company
+project and individual projects. I hope I can have more sponsors and
+contributors for encouraging me not to give up. (I am afraid I would give up
+without the @AndromedaMelody's huge contributions for Mile.Xaml and NanaZip.)
+
+If you want to sponsor me, please read
+[this document](https://github.com/MouriNaruto/MouriNaruto/blob/main/Sponsor).
+
+I hope I can release at least one preview version of NanaZip 3.x in 2023. So,
+I am trying my best to implement the related infrastructures like
+[Mile.Xaml](https://github.com/ProjectMile/Mile.Xaml).
+
+Kenji Mouri
+
 ## Features
 
 - Inherit all features from 7-Zip 22.01.
