@@ -274,16 +274,45 @@ namespace NanaZip::ShellExtension
             return E_NOTIMPL;
         }
 
-        HRESULT STDMETHODCALLTYPE GetState(
-            _In_opt_ IShellItemArray* psiItemArray,
-            _In_ BOOL fOkToBeSlow,
-            _Out_ EXPCMDSTATE* pCmdState)
+       
+        bool IsWindows11OrLater()
+    {
+        OSVERSIONINFOEX osvi;
+        ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
+        osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+        osvi.dwBuildNumber = 22000; // Minimum build number for Windows 11
+        DWORDLONG dwlConditionMask = 0;
+        VER_SET_CONDITION(dwlConditionMask, VER_BUILDNUMBER, VER_GREATER_EQUAL);
+
+        return VerifyVersionInfo(&osvi, VER_BUILDNUMBER, dwlConditionMask);
+    }
+
+
+
+    IFACEMETHODIMP GetState(_In_opt_ IShellItemArray* selection, _In_ BOOL okToBeSlow, _Out_ EXPCMDSTATE* cmdState)
+    {
+        
+     
+        bool isWindows11OrLater = IsWindows11OrLater();
+
+      
+        if (isWindows11OrLater)
         {
-            UNREFERENCED_PARAMETER(psiItemArray);
-            UNREFERENCED_PARAMETER(fOkToBeSlow);
-            *pCmdState = ECS_ENABLED;
-            return S_OK;
+            if (selection && okToBeSlow)
+            {
+                *cmdState = ECS_ENABLED;
+                return S_OK;
+            }
+            *cmdState = ECS_HIDDEN; // Hides the classic context menu on Windows 11
         }
+        else
+        {
+            // Handle other cases, if necessary.
+            *cmdState = ECS_ENABLED; // Show the context menu item by default on other versions.
+        }
+
+        return S_OK;
+    }
 
         HRESULT STDMETHODCALLTYPE Invoke(
             _In_opt_ IShellItemArray* psiItemArray,
