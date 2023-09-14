@@ -113,6 +113,7 @@
     <ClCompile Include="FastLZMA2\range_enc.c" />
     <ClCompile Include="FastLZMA2\util.c" />
     <ClCompile Include="GmSSL\sm3.c" />
+    <ClCompile Include="Heimdal\md2.c" />
     <ClCompile Include="RHash\aich.c" />
     <ClCompile Include="RHash\blake2b.c" />
     <ClCompile Include="RHash\byte_order.c" />
@@ -510,6 +511,7 @@
     <ClInclude Include="FastLZMA2\util.h" />
     <ClInclude Include="GmSSL\endian.h" />
     <ClInclude Include="GmSSL\sm3.h" />
+    <ClInclude Include="Heimdal\md2.h" />
     <ClInclude Include="RHash\aich.h" />
     <ClInclude Include="RHash\blake2b.h" />
     <ClInclude Include="RHash\byte_order.h" />

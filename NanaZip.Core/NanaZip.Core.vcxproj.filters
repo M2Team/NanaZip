@@ -142,6 +142,9 @@
     <Filter Include="GmSSL">
       <UniqueIdentifier>{8b8b1e7e-3982-4e70-b765-39063e8c2eec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Heimdal">
+      <UniqueIdentifier>{a64dcde1-232e-4d2e-b0b9-7b0af332d234}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1451,6 +1454,9 @@
     <ClCompile Include="GmSSL\sm3.c">
       <Filter>GmSSL</Filter>
     </ClCompile>
+    <ClCompile Include="Heimdal\md2.c">
+      <Filter>Heimdal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\7zCrc.h">
@@ -2730,6 +2736,9 @@
     </ClInclude>
     <ClInclude Include="GmSSL\endian.h">
       <Filter>GmSSL</Filter>
+    </ClInclude>
+    <ClInclude Include="Heimdal\md2.h">
+      <Filter>Heimdal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
