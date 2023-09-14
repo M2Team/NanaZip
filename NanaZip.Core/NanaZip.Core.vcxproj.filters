@@ -1280,7 +1280,7 @@
     <ClCompile Include="RHash\tth.c">
       <Filter>RHash</Filter>
     </ClCompile>
-    <ClCompile Include="RHash\util.c">
+    <ClCompile Include="RHash\rhash_util.c">
       <Filter>RHash</Filter>
     </ClCompile>
     <ClCompile Include="RHash\whirlpool.c">

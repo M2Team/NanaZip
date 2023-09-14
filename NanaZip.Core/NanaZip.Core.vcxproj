@@ -36,6 +36,7 @@
     <ClCompile>
       <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;Z7_LARGE_PAGES;NSIS_SCRIPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4100;4127;4146;4189;4200;4201;4267;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
@@ -84,7 +85,7 @@
     <ClCompile Include="RHash\tiger_sbox.c" />
     <ClCompile Include="RHash\torrent.c" />
     <ClCompile Include="RHash\tth.c" />
-    <ClCompile Include="RHash\util.c" />
+    <ClCompile Include="RHash\rhash_util.c" />
     <ClCompile Include="RHash\whirlpool.c" />
     <ClCompile Include="RHash\whirlpool_sbox.c" />
     <ClCompile Include="LZ5\lz5.c" />
