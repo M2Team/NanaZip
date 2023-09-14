@@ -1,13 +1,13 @@
 ﻿// FastLzma2Register.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../Common/RegisterCodec.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/Lzma2Decoder.h"
+#include "Lzma2Decoder.h"
 
 #ifndef EXTRACT_ONLY
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/Lzma2Encoder.h"
+#include "Lzma2Encoder.h"
 #endif
 
 REGISTER_CODEC_E(

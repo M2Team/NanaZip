@@ -1,6 +1,6 @@
 ﻿// Windows/ProcessMessages.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
+#include "StdAfx.h"
 
 #include "ProcessMessages.h"
 

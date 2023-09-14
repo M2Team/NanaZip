@@ -1,11 +1,11 @@
 ﻿// PpmdZip.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/RegisterCodec.h"
+#include "../Common/StreamUtils.h"
 
 #include "PpmdZip.h"
 
@@ -43,22 +43,22 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
       buf[i] = _inStream.ReadByte();
     if (_inStream.Extra)
       return S_FALSE;
-
+    
     UInt32 val = GetUi16(buf);
     unsigned order = (val & 0xF) + 1;
     UInt32 mem = ((val >> 4) & 0xFF) + 1;
     unsigned restor = (val >> 12);
     if (order < 2 || restor > 2)
       return S_FALSE;
-
+    
     #ifndef PPMD8_FREEZE_SUPPORT
     if (restor == 2)
       return E_NOTIMPL;
     #endif
-
+    
     if (!Ppmd8_Alloc(&_ppmd, mem << 20, &g_BigAlloc))
       return E_OUTOFMEMORY;
-
+    
     if (!Ppmd8_Init_RangeDec(&_ppmd))
       return S_FALSE;
     Ppmd8_Init(&_ppmd, order, restor);
@@ -84,7 +84,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     int sym;
     Byte *buf = _outStream.Buf;
     const Byte *lim = buf + size;
-
+    
     do
     {
       sym = Ppmd8_DecodeSymbol(&_ppmd);
@@ -93,7 +93,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
       *buf++ = (Byte)sym;
     }
     while (buf != lim);
-
+    
     size_t cur = (size_t)(buf - _outStream.Buf);
     processedSize += cur;
 
@@ -110,16 +110,16 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
       wasFinished = true;
       break;
     }
-
+    
     if (progress)
     {
       const UInt64 inProccessed = _inStream.GetProcessed();
       RINOK(progress->SetRatioInfo(&inProccessed, &processedSize));
     }
   }
-
+  
   RINOK(_inStream.Res);
-
+  
   if (_fullFileMode)
   {
     if (!wasFinished)
@@ -135,7 +135,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     if (inSize && *inSize != _inStream.GetProcessed())
       return S_FALSE;
   }
-
+  
   return S_OK;
 
   // } catch (...) { return E_FAIL; }

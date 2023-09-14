@@ -1,8 +1,8 @@
 ﻿// (C) 2016 Tino Reichardt
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../Common/RegisterCodec.h"
 
 #include "Lz4Decoder.h"
 

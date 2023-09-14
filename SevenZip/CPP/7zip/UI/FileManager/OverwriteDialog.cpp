@@ -2,12 +2,12 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../../../Windows/PropVariantConv.h"
+#include "../../../Windows/ResourceString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Static.h"
+#include "../../../Windows/Control/Static.h"
 
 #include "FormatUtils.h"
 #include "LangUtils.h"
@@ -62,7 +62,7 @@ void COverwriteDialog::SetFileInfoControl(int textID, int iconID,
 
   ReduceString(s1);
   ReduceString(s2);
-
+  
   UString s = s1;
   s.Add_LF();
   s += s2;

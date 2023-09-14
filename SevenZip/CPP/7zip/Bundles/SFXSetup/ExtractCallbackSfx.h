@@ -5,12 +5,12 @@
 
 #include "resource.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../../../Windows/ResourceString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/IArchive.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../Common/FileStreams.h"
+#include "../../ICoder.h"
 
 #include "../../UI/FileManager/LangUtils.h"
 
@@ -25,7 +25,7 @@ class CExtractCallbackImp:
   public CMyUnknownImp
 {
 public:
-
+  
   MY_UNKNOWN_IMP
 
   INTERFACE_IArchiveExtractCallback(;)

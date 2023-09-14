@@ -3,7 +3,7 @@
 #ifndef __ROOT_FOLDER_H
 #define __ROOT_FOLDER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
 #include "IFolder.h"
 

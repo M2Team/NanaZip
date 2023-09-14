@@ -3,12 +3,12 @@
 #ifndef __UPDATE_CALLBACK_H
 #define __UPDATE_CALLBACK_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
+#include "../../Common/FileStreams.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../IPassword.h"
+#include "../../ICoder.h"
 
 #include "../Common/UpdatePair.h"
 #include "../Common/UpdateProduce.h"

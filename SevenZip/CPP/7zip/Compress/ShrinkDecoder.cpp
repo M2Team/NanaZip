@@ -1,11 +1,11 @@
 ﻿// ShrinkDecoder.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../C/Alloc.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/OutBuffer.h"
+#include "../Common/InBuffer.h"
+#include "../Common/OutBuffer.h"
 
 #include "BitlDecoder.h"
 #include "ShrinkDecoder.h"
@@ -89,7 +89,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
       res = S_OK;
       break;
     }
-
+    
     if (sym == 256)
     {
       sym = inBuffer.ReadBits(numBits);
@@ -163,7 +163,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
     lastSym = (int)sym;
     unsigned cur = sym;
     unsigned i = 0;
-
+    
     while (cur >= 256)
     {
       _stack[i++] = _suffixes[cur];
@@ -173,7 +173,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
       if (cur == kEmpty || i >= kNumItems)
         break;
     }
-
+    
     if (cur == kEmpty || i >= kNumItems)
       break;
 
@@ -197,7 +197,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
       outBuffer.WriteByte(_stack[--i]);
     while (i);
   }
-
+  
   RINOK(outBuffer.Flush());
 
   if (res == S_OK)
@@ -211,7 +211,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
       if (inSize && *inSize != _inProcessed)
         res = S_FALSE;
     }
-
+  
   return res;
 }
 

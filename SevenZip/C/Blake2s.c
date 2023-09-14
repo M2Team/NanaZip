@@ -5,8 +5,8 @@
 #include <string.h>
 
 #include "Blake2.h"
-#include "../../ThirdParty/LZMA/C/CpuArch.h"
-#include "../../ThirdParty/LZMA/C/RotateDefs.h"
+#include "CpuArch.h"
+#include "RotateDefs.h"
 
 #define rotr32 rotrFixed
 

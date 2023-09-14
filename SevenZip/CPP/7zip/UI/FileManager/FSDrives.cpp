@@ -2,20 +2,20 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../C/Alloc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/ComTry.h"
+#include "../../../Common/Defs.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileSystem.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileIO.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/FileSystem.h"
+#include "../../../Windows/PropVariant.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
+#include "../../PropID.h"
 
 #include "FSDrives.h"
 #include "FSFolder.h"
@@ -56,7 +56,7 @@ static HRESULT CopyFileSpec(CFSTR fromPath, CFSTR toPath, bool writeToDisk, UInt
     if (!inFile.GetLength(fileSize))
       ::GetLastError();
   }
-
+  
   NIO::COutFile outFile;
   if (writeToDisk)
   {
@@ -66,12 +66,12 @@ static HRESULT CopyFileSpec(CFSTR fromPath, CFSTR toPath, bool writeToDisk, UInt
   else
     if (!outFile.Create(toPath, true))
       return GetLastError();
-
+  
   CPhysTempBuffer tempBuffer;
   tempBuffer.buffer = MidAlloc(bufferSize);
   if (!tempBuffer.buffer)
     return E_OUTOFMEMORY;
-
+ 
   for (UInt64 pos = 0; pos < fileSize;)
   {
     UInt64 progressCur = progressStart + pos;
@@ -98,7 +98,7 @@ static HRESULT CopyFileSpec(CFSTR fromPath, CFSTR toPath, bool writeToDisk, UInt
       return E_FAIL;
     pos += curSize;
   }
-
+  
   return S_OK;
 }
 
@@ -131,7 +131,7 @@ STDMETHODIMP CFSDrives::LoadItems()
 
   FStringVector driveStrings;
   MyGetLogicalDriveStrings(driveStrings);
-
+  
   FOR_VECTOR (i, driveStrings)
   {
     CDriveInfo di;
@@ -158,7 +158,7 @@ STDMETHODIMP CFSDrives::LoadItems()
         needRead = false;
       }
     }
-
+    
     if (needRead)
     {
       DWORD volumeSerialNumber, maximumComponentLength, fileSystemFlags;
@@ -172,7 +172,7 @@ STDMETHODIMP CFSDrives::LoadItems()
       di.KnownSizes = true;
       di.KnownSize = true;
     }
-
+    
     _drives.Add(di);
   }
 
@@ -183,7 +183,7 @@ STDMETHODIMP CFSDrives::LoadItems()
     {
       FString name ("PhysicalDrive");
       name.Add_UInt32(n);
-
+      
       FString fullPath (kVolPrefix);
       fullPath += name;
 
@@ -201,7 +201,7 @@ STDMETHODIMP CFSDrives::LoadItems()
 
       di.IsPhysicalDrive = true;
       di.KnownSize = true;
-
+      
       _drives.Add(di);
     }
   }
@@ -368,7 +368,7 @@ STDMETHODIMP CFSDrives::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 num
 {
   if (numItems == 0)
     return S_OK;
-
+  
   if (moveMode)
     return E_NOTIMPL;
 
@@ -385,14 +385,14 @@ STDMETHODIMP CFSDrives::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 num
   }
   RINOK(callback->SetTotal(totalSize));
   RINOK(callback->SetNumFiles(numItems));
-
+  
   FString destPath = us2fs(path);
   if (destPath.IsEmpty())
     return E_INVALIDARG;
 
   bool isAltDest = NName::IsAltPathPrefix(destPath);
   bool isDirectPath = (!isAltDest && !IsPathSepar(destPath.Back()));
-
+  
   if (isDirectPath)
   {
     if (numItems > 1)
@@ -401,7 +401,7 @@ STDMETHODIMP CFSDrives::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 num
 
   UInt64 completedSize = 0;
   RINOK(callback->SetCompleted(&completedSize));
-
+  
   for (i = 0; i < numItems; i++)
   {
     unsigned index = indices[i];
@@ -418,7 +418,7 @@ STDMETHODIMP CFSDrives::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 num
       }
       destPath2 += destName;
     }
-
+    
     FString srcPath = di.GetDeviceFileIoName();
 
     UInt64 fileSize = 0;
@@ -431,7 +431,7 @@ STDMETHODIMP CFSDrives::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 num
       totalSize += fileSize;
       RINOK(callback->SetTotal(totalSize));
     }
-
+    
     Int32 writeAskResult;
     CMyComBSTR destPathResult;
     RINOK(callback->AskWrite(fs2us(srcPath), BoolToInt(false), NULL, &fileSize,
@@ -444,9 +444,9 @@ STDMETHODIMP CFSDrives::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 num
       RINOK(callback->SetTotal(totalSize));
       continue;
     }
-
+    
     RINOK(callback->SetCurrentFilePath(fs2us(srcPath)));
-
+    
     static const UInt32 kBufferSize = (4 << 20);
     UInt32 bufferSize = (di.DriveType == DRIVE_REMOVABLE) ? (18 << 10) * 4 : kBufferSize;
     RINOK(CopyFileSpec(srcPath, us2fs(destPathResult), false, fileSize, bufferSize, completedSize, callback));

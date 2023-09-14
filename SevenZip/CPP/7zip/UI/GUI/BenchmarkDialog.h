@@ -3,7 +3,7 @@
 #ifndef __BENCHMARK_DIALOG_H
 #define __BENCHMARK_DIALOG_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
+#include "../../Common/CreateCoder.h"
 #include "../../UI/Common/Property.h"
 
 const UInt32 k_NumBenchIterations_Default = 10;

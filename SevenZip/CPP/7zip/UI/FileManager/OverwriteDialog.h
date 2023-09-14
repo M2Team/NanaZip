@@ -3,7 +3,7 @@
 #ifndef __OVERWRITE_DIALOG_H
 #define __OVERWRITE_DIALOG_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../Windows/Control/Dialog.h"
 
 #include "DialogSize.h"
 #include "OverwriteDialogRes.h"
@@ -17,7 +17,7 @@ namespace NOverwriteDialog
     UInt64 Size;
     FILETIME Time;
     UString Name;
-
+    
     void SetTime(const FILETIME *t)
     {
       if (!t)

@@ -1,13 +1,13 @@
 ﻿// Sha1Reg.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
+#include "StdAfx.h"
 
 #include "../../C/Sha1.h"
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
-#include "../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../Common/MyBuffer2.h"
+#include "../Common/MyCom.h"
 
-#include "../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../7zip/Common/RegisterCodec.h"
 
 class CSha1Hasher:
   public IHasher,
@@ -16,7 +16,7 @@ class CSha1Hasher:
 {
   CAlignedBuffer _buf;
   Byte mtDummy[1 << 7];
-
+  
   CSha1 *Sha() { return (CSha1 *)(void *)(Byte *)_buf; }
 public:
   CSha1Hasher():

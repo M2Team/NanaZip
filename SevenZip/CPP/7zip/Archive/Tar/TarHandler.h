@@ -3,13 +3,13 @@
 #ifndef __TAR_HANDLER_H
 #define __TAR_HANDLER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/PropVariant.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../../Compress/CopyCoder.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/HandlerOut.h"
+#include "../Common/HandlerOut.h"
 
 #include "TarIn.h"
 

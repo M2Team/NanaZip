@@ -2,20 +2,20 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/Alloc.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/DynLimBuf.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../Common/DynLimBuf.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringToInt.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/FileStreams.h"
+#include "../../Common/ProgressUtils.h"
+#include "../../Common/StreamObjects.h"
+#include "../../Common/StreamUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/Common/ItemNameUtils.h"
+#include "../../Archive/IArchive.h"
 
 #ifdef WANT_OPTIONAL_LOWERCASE
 #include "../FileManager/RegistryUtils.h"

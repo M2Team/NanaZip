@@ -3,7 +3,7 @@
 #ifndef __COMPRESS_CALL_H
 #define __COMPRESS_CALL_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
 UString GetQuotedString(const UString &s);
 

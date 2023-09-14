@@ -3,13 +3,13 @@
 #ifndef __ARCHIVE_UDF_IN_H
 #define __ARCHIVE_UDF_IN_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/MyBuffer.h"
+#include "../../../Common/MyCom.h"
 #include "../../../Common/MyMap.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
+#include "../../IStream.h"
 
 namespace NArchive {
 namespace NUdf {

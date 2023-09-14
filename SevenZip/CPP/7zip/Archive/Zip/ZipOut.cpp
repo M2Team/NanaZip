@@ -2,10 +2,10 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../C/7zCrc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/OffsetStream.h"
+#include "../../../Windows/TimeUtils.h"
+#include "../../Common/OffsetStream.h"
 
 #include "ZipOut.h"
 

@@ -3,7 +3,7 @@
 #ifndef __ARCHIVE_CAB_HEADER_H
 #define __ARCHIVE_CAB_HEADER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../../Common/MyTypes.h"
 
 namespace NArchive {
 namespace NCab {

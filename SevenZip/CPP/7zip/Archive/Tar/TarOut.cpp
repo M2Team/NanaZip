@@ -2,11 +2,11 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../C/7zCrc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../Common/IntToString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/StreamUtils.h"
 
 #include "TarOut.h"
 

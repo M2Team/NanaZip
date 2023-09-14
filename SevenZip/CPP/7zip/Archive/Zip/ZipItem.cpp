@@ -2,16 +2,16 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
-#include "../../../../../ThirdParty/LZMA/C/7zCrc.h"
+#include "../../../../C/CpuArch.h"
+#include "../../../../C/7zCrc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/MyLinux.h"
+#include "../../../Common/StringConvert.h"
 
 #include "../../../Windows/PropVariantUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
+#include "../Common/ItemNameUtils.h"
 
 #include "ZipItem.h"
 

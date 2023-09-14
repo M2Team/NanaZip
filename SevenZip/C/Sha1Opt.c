@@ -1,7 +1,7 @@
 ﻿/* Sha1Opt.c -- SHA-1 optimized code for SHA-1 hardware instructions
 2021-04-01 : Igor Pavlov : Public domain */
 
-#include "../../ThirdParty/LZMA/C/Precomp.h"
+#include "Precomp.h"
 
 #if defined(_MSC_VER)
 #if (_MSC_VER < 1900) && (_MSC_VER >= 1200)
@@ -9,7 +9,7 @@
 #endif
 #endif
 
-#include "../../ThirdParty/LZMA/C/CpuArch.h"
+#include "CpuArch.h"
 
 #ifdef MY_CPU_X86_OR_AMD64
   #if defined(__clang__)

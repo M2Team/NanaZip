@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../Common/IntToString.h"
 
 #include "LangUtils.h"
 #include "PropertyName.h"

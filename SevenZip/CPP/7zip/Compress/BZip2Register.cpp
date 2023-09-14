@@ -1,8 +1,8 @@
 ﻿// BZip2Register.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../Common/RegisterCodec.h"
 
 #include "BZip2Decoder.h"
 #if !defined(EXTRACT_ONLY) && !defined(BZIP2_EXTRACT_ONLY)

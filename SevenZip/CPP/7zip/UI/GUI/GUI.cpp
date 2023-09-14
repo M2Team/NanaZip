@@ -3,22 +3,22 @@
 #include "StdAfx.h"
 
 #ifdef _WIN32
-#include "../../../../../ThirdParty/LZMA/C/DllSecur.h"
+#include "../../../../C/DllSecur.h"
 #include "Mitigations.h"
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
 #include <Shlwapi.h>
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
+#include "../../../Common/MyInitGuid.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/CommandLineParser.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/CommandLineParser.h"
+#include "../../../Common/MyException.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/NtCheck.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/NtCheck.h"
 
 #include "../Common/ArchiveCommandLine.h"
 #include "../Common/ExitCode.h"

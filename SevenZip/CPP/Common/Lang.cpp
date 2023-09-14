@@ -1,12 +1,12 @@
 ﻿// Common/Lang.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../ThirdParty/LZMA/CPP/Common/Lang.h"
-#include "../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
-#include "../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "Lang.h"
+#include "StringToInt.h"
+#include "UTFConvert.h"
 
-#include "../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
+#include "../Windows/FileIO.h"
 
 void CLang::Clear() throw()
 {
@@ -27,7 +27,7 @@ bool CLang::Open(CFSTR fileName, const char *id)
 }
 
 #ifdef _SFX
-#include "../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../Windows/ResourceString.h"
 #else
 #include <winrt/windows.foundation.h>
 #include <winrt/windows.foundation.collections.h>
@@ -75,7 +75,7 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
         {
             return nullptr;
         }
-#endif
+#endif    
     }
 
 #ifdef _SFX

@@ -2,11 +2,11 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/StringToInt.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Registry.h"
+#include "../../../Windows/Registry.h"
 
 #include "RegistryAssociations.h"
 

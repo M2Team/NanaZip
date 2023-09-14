@@ -1,5 +1,5 @@
 #include "EditDialogRes.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
+#include "../../GuiCommon.rc"
 
 #define xc 320
 #define yc 240

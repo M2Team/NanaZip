@@ -3,13 +3,13 @@
 #ifndef __OPEN_CALLBACK_H
 #define __OPEN_CALLBACK_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../Windows/FileFind.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
+#include "../../IPassword.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/IArchive.h"
 
 #ifdef _SFX
 #include "ProgressDialog.h"
@@ -74,7 +74,7 @@ public:
     _subArchiveMode = false;
   }
   */
-
+  
   HRESULT LoadFileInfo2(const FString &folderPrefix, const FString &fileName)
   {
     _folderPrefix = folderPrefix;

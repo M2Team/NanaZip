@@ -3,9 +3,9 @@
 #ifndef __PROP_VARIANT_UTILS_H
 #define __PROP_VARIANT_UTILS_H
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../Common/MyString.h"
 
-#include "../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "PropVariant.h"
 
 struct CUInt32PCharPair
 {

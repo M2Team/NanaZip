@@ -3,8 +3,8 @@
 #ifndef __FS_DRIVES_H
 #define __FS_DRIVES_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyCom.h"
+#include "../../../Common/MyString.h"
 
 #include "IFolder.h"
 

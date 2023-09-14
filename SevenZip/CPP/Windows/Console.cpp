@@ -1,6 +1,6 @@
 ﻿// Windows/Console.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
+#include "StdAfx.h"
 
 #include "Console.h"
 

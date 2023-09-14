@@ -2,13 +2,13 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Registry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
+#include "../../../Windows/Registry.h"
+#include "../../../Windows/Synchronization.h"
 
 #include "RegistryUtils.h"
 #include "ViewSettings.h"

@@ -1,20 +1,20 @@
 ﻿// VdiHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
 // #include <stdio.h>
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/IntToString.h"
+#include "../../Common/MyBuffer.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../Windows/PropVariant.h"
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamUtils.h"
 
 #include "HandlerCont.h"
 
@@ -27,7 +27,7 @@ namespace NArchive {
 namespace NVdi {
 
 #define SIGNATURE { 0x7F, 0x10, 0xDA, 0xBE }
-
+  
 static const Byte k_Signature[] = SIGNATURE;
 
 static const unsigned k_ClusterBits = 20;
@@ -131,7 +131,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
     if (size == 0)
       return S_OK;
   }
-
+ 
   {
     UInt64 cluster = _virtPos >> k_ClusterBits;
     UInt32 lowBits = (UInt32)_virtPos & (k_ClusterSize - 1);
@@ -162,7 +162,7 @@ STDMETHODIMP CHandler::Read(void *data, UInt32 size, UInt32 *processedSize)
         return res;
       }
     }
-
+    
     memset(data, 0, size);
     _virtPos += size;
     if (processedSize)
@@ -199,7 +199,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
     case kpidMainSubfile: prop = (UInt32)0; break;
     case kpidPhySize: if (_phySize != 0) prop = _phySize; break;
     case kpidHeadersSize: prop = _dataOffset; break;
-
+    
     case kpidMethod:
     {
       TYPE_TO_PROP(kDiskTypes, _imageType, prop);
@@ -255,7 +255,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
       break;
     }
   }
-
+  
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
@@ -297,7 +297,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallbac
     _unsupported = true;
     return S_FALSE;
   }
-
+  
   const unsigned kHeaderOffset = 0x48;
   const unsigned kGuidsOffsets = 0x188;
   const UInt32 headerSize = Get32(buf + kHeaderOffset);
@@ -315,7 +315,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallbac
   _dataOffset = Get32(buf + 0x158);
 
   // UInt32 geometry[3];
-
+  
   const UInt32 sectorSize = Get32(buf + 0x168);
   if (sectorSize != 0x200)
     return S_FALSE;
@@ -324,7 +324,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallbac
   const UInt32 blockSize = Get32(buf + 0x178);
   const UInt32 totalBlocks = Get32(buf + 0x180);
   const UInt32 numAllocatedBlocks = Get32(buf + 0x184);
-
+  
   _isArc = true;
 
   if (_dataOffset < tableOffset)
@@ -380,7 +380,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallbac
   _table.Alloc(numBytes);
   RINOK(stream->Seek(tableOffset, STREAM_SEEK_SET, NULL));
   RINOK(ReadStream_FALSE(stream, _table, numBytes));
-
+    
   const Byte *data = _table;
   for (UInt32 i = 0; i < totalBlocks; i++)
   {
@@ -393,7 +393,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallbac
       return S_FALSE;
     }
   }
-
+  
   Stream = stream;
   return S_OK;
 }

@@ -3,11 +3,11 @@
 #ifndef __DEFLATE_ENCODER_H
 #define __DEFLATE_ENCODER_H
 
-#include "../../../../ThirdParty/LZMA/C/LzFind.h"
+#include "../../../C/LzFind.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyCom.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../ICoder.h"
 
 #include "BitlEncoder.h"
 #include "DeflateConst.h"
@@ -109,7 +109,7 @@ public:
 
   UInt32 m_OptimumEndIndex;
   UInt32 m_OptimumCurrentIndex;
-
+  
   Byte  m_LiteralPrices[256];
   Byte  m_LenPrices[kNumLenSymbolsMax];
   Byte  m_PosPrices[kDistTableSize64];
@@ -155,7 +155,7 @@ public:
 
   void WriteStoreBlock(UInt32 blockSize, UInt32 additionalOffset, bool finalBlock);
   void WriteTables(bool writeMode, bool finalBlock);
-
+  
   void WriteBlockData(bool writeMode, bool finalBlock);
 
   UInt32 GetBlockPrice(unsigned tableIndex, unsigned numDivPasses);

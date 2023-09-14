@@ -1,5 +1,5 @@
 #include "ProgressDialog2Res.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
+#include "../../GuiCommon.rc"
 
 #undef DIALOG_ID
 #define DIALOG_ID  IDD_PROGRESS
@@ -11,7 +11,7 @@
 
 #ifdef UNDER_CE
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
+#include "../../GuiCommon.rc"
 
 
 #undef DIALOG_ID

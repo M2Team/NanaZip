@@ -40,7 +40,7 @@
 
 #include <string.h>
 
-#include "../../../ThirdParty/LZMA/C/7zTypes.h"
+#include "../7zTypes.h"
 
 #ifndef uint32_t
 typedef UInt32 uint32_t;

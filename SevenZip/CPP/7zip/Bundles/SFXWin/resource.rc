@@ -1,4 +1,4 @@
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
+#include "../../GuiCommon.rc"
 #include "../../UI/GUI/ExtractDialogRes.h"
 #include "../../UI/FileManager/PropertyNameRes.h"
 

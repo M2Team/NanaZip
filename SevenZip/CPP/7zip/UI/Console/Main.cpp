@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
 #ifdef _WIN32
 #include <Psapi.h>
@@ -13,21 +13,21 @@
 #include <sys/times.h>
 #endif
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
+#include "../../../Common/MyInitGuid.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/CommandLineParser.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StdInStream.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StdOutStream.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/CommandLineParser.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/MyException.h"
+#include "../../../Common/StdInStream.h"
+#include "../../../Common/StdOutStream.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/StringToInt.h"
+#include "../../../Common/UTFConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/TimeUtils.h"
 
 #include "../Common/ArchiveCommandLine.h"
 #include "../Common/Bench.h"
@@ -38,7 +38,7 @@
 #include "../Common/LoadCodecs.h"
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../../Common/RegisterCodec.h"
 
 #include "BenchCon.h"
 #include "ConsoleClose.h"

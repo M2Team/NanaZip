@@ -3,17 +3,17 @@
 #ifndef __COMPRESS_BZIP2_DECODER_H
 #define __COMPRESS_BZIP2_DECODER_H
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyCom.h"
 
 // #define NO_READ_FROM_CODER
 // #define _7ZIP_ST
 
 #ifndef _7ZIP_ST
-#include "../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
-#include "../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
+#include "../../Windows/Synchronization.h"
+#include "../../Windows/Thread.h"
 #endif
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../ICoder.h"
 
 #include "BZip2Const.h"
 #include "BZip2Crc.h"
@@ -37,7 +37,7 @@ struct CBlockProps
   UInt32 blockSize;
   UInt32 origPtr;
   unsigned randMode;
-
+  
   CBlockProps(): blockSize(0), origPtr(0), randMode(0) {}
 };
 
@@ -120,14 +120,14 @@ private:
 public:
   UInt32 crc;
   CBZip2CombinedCrc CombinedCrc;
-
+  
   bool IsBz;
   bool StreamCrcError;
   bool MinorError;
   bool NeedMoreInput;
 
   bool DecodeAllStreams;
-
+  
   UInt64 NumStreams;
   UInt64 NumBlocks;
   UInt64 FinishedPackSize;
@@ -144,7 +144,7 @@ public:
       NeedMoreInput(false),
 
       DecodeAllStreams(false),
-
+      
       NumStreams(0),
       NumBlocks(0),
       FinishedPackSize(0)
@@ -192,8 +192,8 @@ public:
 };
 
 
-
-
+  
+ 
 class CDecoder :
   public ICompressCoder,
   public ICompressSetFinishMode,
@@ -240,16 +240,16 @@ public:
   struct CBlock
   {
     bool StopScout;
-
+    
     bool WasFinished;
     bool Crc_Defined;
     // bool NextCrc_Defined;
-
+    
     UInt32 Crc;
     UInt32 NextCrc;
     HRESULT Res;
     UInt64 PackPos;
-
+    
     CBlockProps Props;
   };
 
@@ -262,7 +262,7 @@ public:
   NWindows::NSynchronization::CAutoResetEvent DecoderEvent;
   NWindows::NSynchronization::CAutoResetEvent ScoutEvent;
   // HRESULT ScoutRes;
-
+  
   Byte MtPad[1 << 7]; // It's pad for Multi-Threading. Must be >= Cache_Line_Size.
 
 
@@ -299,7 +299,7 @@ public:
   bool GetCrcError() const { return BlockCrcError || Base.StreamCrcError; }
 
   void InitOutSize(const UInt64 *outSize);
-
+  
   bool CreateInputBufer();
 
   void InitInputBuffer()
@@ -328,7 +328,7 @@ public:
   HRESULT ReadInput();
 
   void StartNewStream();
-
+  
   HRESULT ReadStreamSignature();
   HRESULT StartRead();
 
@@ -357,7 +357,7 @@ public:
   MY_QUERYINTERFACE_END
   MY_ADDREF_RELEASE
 
-
+  
   STDMETHOD(Code)(ISequentialInStream *inStream, ISequentialOutStream *outStream,
       const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
 

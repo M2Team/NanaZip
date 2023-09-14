@@ -1,20 +1,20 @@
 ﻿// IhexHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/DynamicBuffer.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyVector.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/DynamicBuffer.h"
+#include "../../Common/IntToString.h"
+#include "../../Common/MyVector.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../Windows/PropVariant.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamUtils.h"
+#include "../Common/InBuffer.h"
 
 namespace NArchive {
 namespace NIhex {
@@ -34,7 +34,7 @@ class CHandler:
   bool _isArc;
   bool _needMoreInput;
   bool _dataError;
-
+  
   UInt64 _phySize;
 
   CObjectVector<CBlock> _blocks;
@@ -117,7 +117,7 @@ static int Parse(const Byte *p)
   int c2 = HexToByte(p[1]); if (c2 < 0) return -1;
   return (c1 << 4) | c2;
 }
-
+  
 #define kType_Data 0
 #define kType_Eof  1
 #define kType_Seg  2
@@ -144,18 +144,18 @@ API_FUNC_static_IsArc IsArc_Ihex(const Byte *p, size_t size)
   {
     if (size < 4 * 2)
       return k_IsArc_Res_NEED_MORE;
-
+    
     int num = Parse(p);
     if (num < 0)
       return k_IsArc_Res_NO;
-
+    
     int type = Parse(p + 6);
     if (type < 0 || type > kType_MAX)
       return k_IsArc_Res_NO;
-
+    
     unsigned numChars = ((unsigned)num + 5) * 2;
     unsigned sum = 0;
-
+    
     for (unsigned i = 0; i < numChars; i += 2)
     {
       if (i + 2 > size)
@@ -165,7 +165,7 @@ API_FUNC_static_IsArc IsArc_Ihex(const Byte *p, size_t size)
         return k_IsArc_Res_NO;
       sum += (unsigned)v;
     }
-
+    
     if ((sum & 0xFF) != 0)
       return k_IsArc_Res_NO;
 
@@ -199,10 +199,10 @@ API_FUNC_static_IsArc IsArc_Ihex(const Byte *p, size_t size)
           return k_IsArc_Res_NO;
       }
     }
-
+    
     p += numChars;
     size -= numChars;
-
+    
     for (;;)
     {
       if (size == 0)
@@ -216,7 +216,7 @@ API_FUNC_static_IsArc IsArc_Ihex(const Byte *p, size_t size)
       return k_IsArc_Res_NO;
     }
   }
-
+  
   return k_IsArc_Res_YES;
 }
 }
@@ -277,7 +277,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
         _dataError = true;
         return S_FALSE;
       }
-
+      
       {
         size_t numPairs = ((unsigned)num + 4);
         size_t numBytes = numPairs * 2;
@@ -286,7 +286,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
           _needMoreInput = true;
           return S_FALSE;
         }
-
+        
         unsigned sum = num;
         for (size_t i = 0; i < numPairs; i++)
         {
@@ -416,7 +416,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
 STDMETHODIMP CHandler::Close()
 {
   _phySize = 0;
-
+  
   _isArc = false;
   _needMoreInput = false;
   _dataError = false;
@@ -458,28 +458,28 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     UInt32 index = allFilesMode ? i : indices[i];
     const CByteDynamicBuffer &data = _blocks[index].Data;
     currentItemSize = data.GetPos();
-
+    
     CMyComPtr<ISequentialOutStream> realOutStream;
     Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
         NExtract::NAskMode::kExtract;
-
+    
     RINOK(extractCallback->GetStream(index, &realOutStream, askMode));
-
+    
     if (!testMode && !realOutStream)
       continue;
-
+    
     extractCallback->PrepareOperation(askMode);
-
+    
     if (realOutStream)
     {
       RINOK(WriteStream(realOutStream, (const Byte *)data, data.GetPos()));
     }
-
+  
     realOutStream.Release();
     RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK));
   }
-
+  
   lps->InSize = lps->OutSize = currentTotalSize;
   return lps->SetCur();
 

@@ -1,17 +1,17 @@
 ﻿// MubHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/IntToString.h"
+#include "../../Common/MyString.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../Windows/PropVariant.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamUtils.h"
 
 #include "HandlerCont.h"
 
@@ -156,7 +156,7 @@ HRESULT CHandler::Open2(IInStream *stream)
   RINOK(ReadStream(stream, buf, &processed));
   if (processed < kHeaderSize)
     return S_FALSE;
-
+  
   bool be;
   switch (GetBe32(buf))
   {

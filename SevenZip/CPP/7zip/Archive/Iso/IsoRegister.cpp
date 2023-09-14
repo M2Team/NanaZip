@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../Common/RegisterArc.h"
 
 #include "IsoHandler.h"
 

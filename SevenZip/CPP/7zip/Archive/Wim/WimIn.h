@@ -3,18 +3,18 @@
 #ifndef __ARCHIVE_WIM_IN_H
 #define __ARCHIVE_WIM_IN_H
 
-#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../C/Alloc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../../../Common/MyBuffer.h"
 #include "../../../Common/MyXml.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/PropVariant.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../../Compress/CopyCoder.h"
 #include "../../Compress/LzmsDecoder.h"
 #include "../../Compress/LzxDecoder.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../IArchive.h"
 
 namespace NArchive {
 namespace NWim {
@@ -43,21 +43,21 @@ const unsigned kDirRecordSize = 102;
      0    UInt64  Len;
      8    UInt32  Attrib;
      C    UInt32  SecurityId;
-
+    
     10    UInt64  SubdirOffset; // = 0 for files
 
     18    UInt64  unused1; // = 0?
     20    UInt64  unused2; // = 0?
-
+    
     28    UInt64  CTime;
     30    UInt64  ATime;
     38    UInt64  MTime;
-
+    
     40    Byte    Sha1[20];
-
+    
     54    UInt32  Unknown1; // is it 0 always?
 
-
+       
     union
     {
     58    UInt64  NtNodeId;
@@ -68,10 +68,10 @@ const unsigned kDirRecordSize = 102;
     }
 
     60    UInt16  Streams;
-
+    
     62    UInt16  ShortNameLen;
     64    UInt16  FileNameLen;
-
+    
     66    UInt16  Name[];
           UInt16  ShortName[];
   }
@@ -95,7 +95,7 @@ const unsigned kDirRecordSize = 102;
     18    UInt64  CTime;
     20    UInt64  ATime;
     28    UInt64  MTime;
-
+    
     30    UInt64  Unknown; // NtNodeId ?
 
     38    UInt16  Streams;
@@ -187,9 +187,9 @@ struct CSolid
   unsigned StreamIndex;
   // unsigned NumRefs;
   int FirstSmallStream;
-
+  
   UInt64 SolidOffset;
-
+  
   UInt64 UnpackSize;
   int Method;
   int ChunkSizeBits;
@@ -217,7 +217,7 @@ namespace NHeaderFlags
   const UInt32 kMetadataOnly = 1 << 5;
   const UInt32 kWriteInProgress = 1 << 6;
   const UInt32 kReparsePointFixup = 1 << 7;
-
+  
   const UInt32 kXPRESS       = (UInt32)1 << 17;
   const UInt32 kLZX          = (UInt32)1 << 18;
   const UInt32 kLZMS         = (UInt32)1 << 19;
@@ -270,9 +270,9 @@ struct CHeader
 
   void WriteTo(Byte *p) const;
   HRESULT Parse(const Byte *p, UInt64 &phySize);
-
+  
   bool IsCompressed() const { return (Flags & NHeaderFlags::kCompression) != 0; }
-
+  
   bool IsSupported() const
   {
     return (!IsCompressed()
@@ -281,7 +281,7 @@ struct CHeader
         || (Flags & NHeaderFlags::kLZMS) != 0
         || (Flags & NHeaderFlags::kXPRESS2) != 0);
   }
-
+  
   unsigned GetMethod() const
   {
     if (!IsCompressed())
@@ -327,7 +327,7 @@ struct CStreamInfo
   Byte Hash[kHashSize];
 
   bool IsEmptyHash() const { return IsEmptySha(Hash); }
-
+  
   void WriteTo(Byte *p) const;
 };
 
@@ -374,7 +374,7 @@ struct CImageInfo
   bool MTimeDefined;
   bool NameDefined;
   bool IndexDefined;
-
+  
   FILETIME CTime;
   FILETIME MTime;
   UString Name;
@@ -386,7 +386,7 @@ struct CImageInfo
   int ItemIndexInXml;
 
   UInt64 GetTotalFilesAndDirs() const { return DirCount + FileCount; }
-
+  
   CImageInfo(): CTimeDefined(false), MTimeDefined(false), NameDefined(false),
       IndexDefined(false), ItemIndexInXml(-1) {}
   void Parse(const CXmlItem &item);
@@ -442,14 +442,14 @@ public:
   CRecordVector<CStreamInfo> MetaStreams;
 
   CObjectVector<CSolid> Solids;
-
+  
   CRecordVector<CItem> Items;
   CObjectVector<CByteBuffer> ReparseItems;
   CIntVector ItemToReparse; // from index_in_Items to index_in_ReparseItems
                             // -1 means no reparse;
-
+  
   CObjectVector<CImage> Images;
-
+  
   bool IsOldVersion9;
   bool IsOldVersion;
   bool ThereAreDeletedStreams;
@@ -459,11 +459,11 @@ public:
 
   bool GetStartImageIndex() const { return IsOldVersion9 ? 0 : 1; }
   unsigned GetDirAlignMask() const { return IsOldVersion9 ? 3 : 7; }
-
+  
   // User Items can contain all images or just one image from all.
   CUIntVector SortedItems;
   int IndexOfUserImage;    // -1 : if more than one images was filled to Sorted Items
-
+  
   unsigned NumExcludededItems;
   int ExludedItem;          // -1 : if there are no exclude items
   CUIntVector VirtualRoots; // we use them for old 1.10 WIM archives
@@ -527,13 +527,13 @@ public:
     DataStreams.Clear();
     MetaStreams.Clear();
     Solids.Clear();
-
+    
     Items.Clear();
     ReparseItems.Clear();
     ItemToReparse.Clear();
 
     SortedItems.Clear();
-
+    
     Images.Clear();
     VirtualRoots.Clear();
 
@@ -655,5 +655,5 @@ public:
 };
 
 }}
-
+  
 #endif

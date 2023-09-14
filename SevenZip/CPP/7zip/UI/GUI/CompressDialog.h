@@ -3,10 +3,10 @@
 #ifndef __COMPRESS_DIALOG_H
 #define __COMPRESS_DIALOG_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/Wildcard.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
+#include "../../../Windows/Control/ComboBox.h"
+#include "../../../Windows/Control/Edit.h"
 
 #include "../Common/LoadCodecs.h"
 #include "../Common/ZipRegistry.h"

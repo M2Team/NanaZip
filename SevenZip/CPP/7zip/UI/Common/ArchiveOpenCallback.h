@@ -3,15 +3,15 @@
 #ifndef __ARCHIVE_OPEN_CALLBACK_H
 #define __ARCHIVE_OPEN_CALLBACK_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
+#include "../../../Windows/FileFind.h"
+#include "../../../Windows/FileIO.h"
 
 #ifndef _NO_CRYPTO
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
+#include "../../IPassword.h"
 #endif
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/IArchive.h"
 
 #ifdef _NO_CRYPTO
 
@@ -24,7 +24,7 @@
   /* virtual HRESULT Open_GetPasswordIfAny(bool &passwordIsDefined, UString &password) x; */ \
   /* virtual bool Open_WasPasswordAsked() x; */ \
   /* virtual void Open_Clear_PasswordWasAsked_Flag() x; */  \
-
+  
 #endif
 
 #define INTERFACE_IOpenCallbackUI(x) \
@@ -82,7 +82,7 @@ public:
   UStringVector FileNames;
   CBoolVector FileNames_WasUsed;
   CRecordVector<UInt64> FileSizes;
-
+  
   bool PasswordWasAsked;
 
   IOpenCallbackUI *Callback;
@@ -90,7 +90,7 @@ public:
   // UInt64 TotalSize;
 
   COpenCallbackImp(): _subArchiveMode(false), Callback(NULL)  {}
-
+  
   HRESULT Init2(const FString &folderPrefix, const FString &fileName)
   {
     FileNames.Clear();

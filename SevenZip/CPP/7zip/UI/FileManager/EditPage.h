@@ -3,8 +3,8 @@
 #ifndef __EDIT_PAGE_H
 #define __EDIT_PAGE_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/PropertyPage.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
+#include "../../../Windows/Control/PropertyPage.h"
+#include "../../../Windows/Control/Edit.h"
 
 struct CEditPageCtrl
 {

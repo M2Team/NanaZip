@@ -3,7 +3,7 @@
 #ifndef __COMMON_UPDATE_H
 #define __COMMON_UPDATE_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/Wildcard.h"
 
 #include "ArchiveOpenCallback.h"
 #include "LoadCodecs.h"

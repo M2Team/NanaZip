@@ -13,38 +13,38 @@
   </ItemDefinitionGroup>
   <Target Name="SevenZipHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
     <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
-      <None Include="..\ThirdParty\LZMA\ASM\x86\7zAsm.asm" />
-      <MASM Include="..\ThirdParty\LZMA\ASM\x86\7zCrcOpt.asm" />
-      <MASM Include="..\ThirdParty\LZMA\ASM\x86\AesOpt.asm" />
+      <None Include="..\SevenZip\Asm\x86\7zAsm.asm" />
+      <MASM Include="..\SevenZip\Asm\x86\7zCrcOpt.asm" />
+      <MASM Include="..\SevenZip\Asm\x86\AesOpt.asm" />
       <MASM Include="..\SevenZip\Asm\x86\Sha1Opt.asm" />
-      <MASM Include="..\ThirdParty\LZMA\ASM\x86\Sha256Opt.asm" />
-      <MASM Include="..\ThirdParty\LZMA\ASM\x86\XzCrc64Opt.asm" />
+      <MASM Include="..\SevenZip\Asm\x86\Sha256Opt.asm" />
+      <MASM Include="..\SevenZip\Asm\x86\XzCrc64Opt.asm" />
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='x64'">
-      <MASM Include="..\ThirdParty\LZMA\ASM\x86\LzFindOpt.asm" />
-      <MASM Include="..\ThirdParty\LZMA\ASM\x86\LzmaDecOpt.asm" />
+      <MASM Include="..\SevenZip\Asm\x86\LzFindOpt.asm" />
+      <MASM Include="..\SevenZip\Asm\x86\LzmaDecOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="SevenZipHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
-      <ClCompile Include="..\ThirdParty\LZMA\C\7zCrcOpt.c">
+      <ClCompile Include="..\SevenZip\C\7zCrcOpt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
-      <ClCompile Include="..\ThirdParty\LZMA\C\AesOpt.c">
+      <ClCompile Include="..\SevenZip\C\AesOpt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
       <ClCompile Include="..\SevenZip\C\Sha1Opt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
-      <ClCompile Include="..\ThirdParty\LZMA\C\Sha256Opt.c">
+      <ClCompile Include="..\SevenZip\C\Sha256Opt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
-      <ClCompile Include="..\ThirdParty\LZMA\C\XzCrc64Opt.c">
+      <ClCompile Include="..\SevenZip\C\XzCrc64Opt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'!='x64'">
-      <ClCompile Include="..\ThirdParty\LZMA\C\LzFindOpt.c">
+      <ClCompile Include="..\SevenZip\C\LzFindOpt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>

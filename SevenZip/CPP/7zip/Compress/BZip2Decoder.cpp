@@ -1,12 +1,12 @@
 ﻿// BZip2Decoder.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
 // #include "CopyCoder.h"
 
 /*
 #include <stdio.h>
-#include "../../../../ThirdParty/LZMA/C/CpuTicks.h"
+#include "../../../C/CpuTicks.h"
 */
 #define TICKS_START
 #define TICKS_UPDATE(n)
@@ -21,9 +21,9 @@
 #define PRIN_VAL(s, val)
 
 
-#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../C/Alloc.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/StreamUtils.h"
 
 #include "BZip2Decoder.h"
 
@@ -113,7 +113,7 @@ enum EState
   STATE_NUM_SELECTORS,
   STATE_SELECTORS,
   STATE_LEVELS,
-
+  
   STATE_BLOCK_SYMBOLS,
 
   STATE_STREAM_FINISHED
@@ -252,7 +252,7 @@ SRes CBase::ReadBlockSignature2()
     state = STATE_BLOCK_START;
     return SZ_OK;
   }
-
+  
   if (!IsEndSig(temp))
     return SZ_ERROR_DATA;
 
@@ -298,7 +298,7 @@ SRes CBase::ReadBlock2()
       return SZ_ERROR_DATA;
     state = STATE_IN_USE;
   }
-
+  
   // why original code compares origPtr to (UInt32)(10 + blockSizeMax)) ?
 
   if (state == STATE_IN_USE)
@@ -325,7 +325,7 @@ SRes CBase::ReadBlock2()
     state = STATE_NUM_TABLES;
   }
 
-
+  
   if (state == STATE_NUM_TABLES)
   {
     READ_BITS_8(numTables, kNumTablesBits);
@@ -333,7 +333,7 @@ SRes CBase::ReadBlock2()
     if (numTables < kNumTablesMin || numTables > kNumTablesMax)
       return SZ_ERROR_DATA;
   }
-
+  
   if (state == STATE_NUM_SELECTORS)
   {
     READ_BITS(numSelectors, kNumSelectorsBits);
@@ -403,7 +403,7 @@ SRes CBase::ReadBlock2()
         {
           if (state3 < 1 || state3 > kMaxHuffmanLen)
             return SZ_ERROR_DATA;
-
+          
           if (state5 == 0)
           {
             unsigned b;
@@ -423,7 +423,7 @@ SRes CBase::ReadBlock2()
         lens[state4] = (Byte)state3;
         state5 = 0;
       }
-
+      
       // 19.03: we use Build() instead of BuildFull() to support lbzip2 archives
       // lbzip2 2.5 can produce dummy tree, where lens[i] = kMaxHuffmanLen
       // BuildFull() returns error for such tree
@@ -452,7 +452,7 @@ SRes CBase::ReadBlock2()
     runCounter = 0;
     blockSize = 0;
   }
-
+  
   if (state != STATE_BLOCK_SYMBOLS)
     return SZ_ERROR_DATA;
 
@@ -489,7 +489,7 @@ SRes CBase::ReadBlock2()
         val = VAL >> (32 - kMaxHuffmanLen);
         unsigned len;
         for (len = kNumTableBits + 1; val >= huff->_limits[len]; len++);
-
+        
         // 19.03: we use that check to support partial trees created Build() for lbzip2 archives
         if (len > kNumBitsMax)
           return SZ_ERROR_DATA; // that check is required, if NHuffman::Build() was used instead of BuildFull()
@@ -564,7 +564,7 @@ SRes CBase::ReadBlock2()
           while (dest < limit);
         #endif
       }
-
+      
       sym -= 1;
       if (sym < numInUse)
       {
@@ -577,7 +577,7 @@ SRes CBase::ReadBlock2()
         const unsigned pos = (sym & MTF_MASK) << 3;
         CMtfVar next = mtf.Buf[lim];
         CMtfVar prev = (next >> pos) & 0xFF;
-
+        
         #ifdef BZIP2_BYTE_MODE
           ((Byte *)(counters + 256 + kBlockSizeMax))[BLOCK_SIZE++] = (Byte)prev;
         #else
@@ -602,7 +602,7 @@ SRes CBase::ReadBlock2()
         *mLim = (next & ~mask) | (((next << 8) | prev) & mask);
         continue;
       }
-
+      
       if (sym != numInUse)
         return SZ_ERROR_DATA;
       break;
@@ -640,7 +640,7 @@ static void DecodeBlock1(UInt32 *counters, UInt32 blockSize)
       sum += v;
     }
   }
-
+  
   UInt32 *tt = counters + 256;
   // Compute the T^(-1) vector
 
@@ -649,7 +649,7 @@ static void DecodeBlock1(UInt32 *counters, UInt32 blockSize)
   #ifdef BZIP2_BYTE_MODE
 
   unsigned c = ((const Byte *)(tt + kBlockSizeMax))[0];
-
+  
   for (UInt32 i = 0; i < blockSize; i++)
   {
     unsigned c1 = c;
@@ -671,7 +671,7 @@ static void DecodeBlock1(UInt32 *counters, UInt32 blockSize)
   #else
 
   unsigned c = (unsigned)(tt[0] & 0xFF);
-
+  
   for (UInt32 i = 0; i < blockSize; i++)
   {
     unsigned c1 = c;
@@ -824,7 +824,7 @@ Byte * CSpecState::Decode(Byte *data, size_t size) throw()
   _reps = reps;
   _crc = crc;
   _blockSize = blockSize;
-
+  
   return data;
 }
 
@@ -858,7 +858,7 @@ HRESULT CDecoder::DecodeBlock(const CBlockProps &props)
   {
     Byte *data = _outBuf + _outPos;
     size_t size = kOutBufSize - _outPos;
-
+    
     if (_outSizeDefined)
     {
       const UInt64 rem = _outSize - _outPosTotal;
@@ -876,12 +876,12 @@ HRESULT CDecoder::DecodeBlock(const CBlockProps &props)
 
     _outPosTotal += processed;
     _outPos += processed;
-
+    
     if (processed >= size)
     {
       RINOK(Flush());
     }
-
+    
     if (block.Finished())
     {
       _blockFinished = true;
@@ -913,7 +913,7 @@ CDecoder::~CDecoder()
   PRIN("\n~CDecoder()");
 
   #ifndef _7ZIP_ST
-
+  
   if (Thread.IsCreated())
   {
     WaitScout();
@@ -929,7 +929,7 @@ CDecoder::~CDecoder()
 
     // if (ScoutRes != S_OK) throw ScoutRes;
   }
-
+  
   #endif
 
   BigFree(_counters);
@@ -993,9 +993,9 @@ HRESULT CDecoder::ReadBlockSignature()
   for (;;)
   {
     RINOK(ReadInput());
-
+    
     SRes res = Base.ReadBlockSignature2();
-
+    
     if (Base.state == STATE_STREAM_FINISHED)
       Base.FinishedPackSize = GetInputProcessedSize();
     if (res != SZ_OK)
@@ -1104,9 +1104,9 @@ HRESULT CDecoder::DecodeStreams(ICompressProgressInfo *progress)
             wasFinished = true;
             continue;
           }
-
+          
           nextRes = StartRead();
-
+         
           if (Base.NeedMoreInput)
           {
             if (Base.state2 == 0)
@@ -1115,7 +1115,7 @@ HRESULT CDecoder::DecodeStreams(ICompressProgressInfo *progress)
             nextRes = S_OK;
             continue;
           }
-
+          
           if (nextRes != S_OK)
             continue;
 
@@ -1147,7 +1147,7 @@ HRESULT CDecoder::DecodeStreams(ICompressProgressInfo *progress)
       if (props.blockSize == 0)
       {
         crc = nextCrc;
-
+        
         #ifndef _7ZIP_ST
         if (useMt)
         {
@@ -1177,7 +1177,7 @@ HRESULT CDecoder::DecodeStreams(ICompressProgressInfo *progress)
           Base.Props.randMode = 1;
           RINOK(ReadBlock());
           TICKS_UPDATE(0)
-
+          
           props = Base.Props;
           continue;
         }
@@ -1189,7 +1189,7 @@ HRESULT CDecoder::DecodeStreams(ICompressProgressInfo *progress)
         DecodeBlock1(_counters, props.blockSize);
         TICKS_UPDATE(1)
       }
-
+      
       #ifndef _7ZIP_ST
       if (useMt && !wasFinished)
       {
@@ -1202,7 +1202,7 @@ HRESULT CDecoder::DecodeStreams(ICompressProgressInfo *progress)
           continue;
           }
         */
-
+        
         PRIN("ScoutEvent.Set()");
         {
           WRes wres = ScoutEvent.Set();
@@ -1212,7 +1212,7 @@ HRESULT CDecoder::DecodeStreams(ICompressProgressInfo *progress)
         NeedWaitScout = true;
       }
       #endif
-
+        
       if (props.blockSize == 0)
         continue;
 
@@ -1263,7 +1263,7 @@ bool CDecoder::CreateInputBufer()
 void CDecoder::InitOutSize(const UInt64 *outSize)
 {
   _outPosTotal = 0;
-
+  
   _outSizeDefined = false;
   _outSize = 0;
   if (outSize)
@@ -1271,9 +1271,9 @@ void CDecoder::InitOutSize(const UInt64 *outSize)
     _outSize = *outSize;
     _outSizeDefined = true;
   }
-
+  
   BlockCrcError = false;
-
+  
   Base.InitNumStreams2();
 }
 
@@ -1298,7 +1298,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
   try {
 
   InitOutSize(outSize);
-
+  
   // we can request data from InputBuffer after Code().
   // so we init InputBuffer before any function return.
 
@@ -1315,9 +1315,9 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
   }
 
   Base.InStream = inStream;
-
+  
   // InitInputBuffer();
-
+  
   _outStream = outStream;
   _outWritten = 0;
   _outPos = 0;
@@ -1428,7 +1428,7 @@ void CDecoder::RunScout()
       block.Crc_Defined = false;
       // block.NextCrc_Defined = false;
       block.NextCrc = 0;
-
+      
       for (;;)
       {
         if (Base.state == STATE_BLOCK_SIGNATURE)
@@ -1437,7 +1437,7 @@ void CDecoder::RunScout()
 
           if (res != S_OK)
             break;
-
+          
           if (block.Props.blockSize == 0)
           {
             block.Crc = Base.crc;
@@ -1460,7 +1460,7 @@ void CDecoder::RunScout()
           Base.Props.randMode = 1;
 
           res = ReadBlock();
-
+          
           PRIN_MT("-- Base.ReadBlock");
           if (res != S_OK)
             break;
@@ -1475,9 +1475,9 @@ void CDecoder::RunScout()
             block.WasFinished = true;
             break;
           }
-
+          
           res = StartRead();
-
+          
           if (Base.NeedMoreInput)
           {
             if (Base.state2 == 0)
@@ -1486,23 +1486,23 @@ void CDecoder::RunScout()
             res = S_OK;
             break;
           }
-
+          
           if (res != S_OK)
             break;
-
+          
           if (GetInputProcessedSize() - packPos > 0) // kProgressStep
             break;
           continue;
         }
-
+        
         // throw 1;
         res = E_FAIL;
         break;
       }
     }
-
+      
     catch (...) { res = E_FAIL; }
-
+      
     if (res != S_OK)
     {
       PRIN_MT("error");
@@ -1563,7 +1563,7 @@ STDMETHODIMP CDecoder::SetOutStreamSize(const UInt64 *outSize)
   InitOutSize(outSize);
 
   InitInputBuffer();
-
+  
   if (!CreateInputBufer())
     return E_OUTOFMEMORY;
 
@@ -1617,14 +1617,14 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
         return ErrorResult;
       continue;
     }
-
+    
     if (_blockFinished && Base.state == STATE_BLOCK_SIGNATURE)
     {
       ErrorResult = ReadBlockSignature();
-
+      
       if (ErrorResult != S_OK)
         return ErrorResult;
-
+      
       continue;
     }
 
@@ -1636,7 +1636,7 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
     }
     if (size == 0)
       return S_OK;
-
+    
     if (_blockFinished)
     {
       if (Base.state != STATE_BLOCK_START)
@@ -1644,15 +1644,15 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
         ErrorResult = E_FAIL;
         return ErrorResult;
       }
-
+      
       Base.Props.randMode = 1;
       ErrorResult = ReadBlock();
-
+      
       if (ErrorResult != S_OK)
         return ErrorResult;
-
+      
       DecodeBlock1(_counters, Base.Props.blockSize);
-
+      
       _spec._blockSize = Base.Props.blockSize;
       _spec._tt = _counters + 256;
       _spec.Init(Base.Props.origPtr, Base.Props.randMode);
@@ -1662,13 +1662,13 @@ STDMETHODIMP CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
 
     {
       Byte *ptr = _spec.Decode((Byte *)data, size);
-
+      
       const UInt32 processed = (UInt32)(ptr - (Byte *)data);
       data = ptr;
       size -= processed;
       (*processedSize) += processed;
       _outPosTotal += processed;
-
+      
       if (_spec.Finished())
       {
         _blockFinished = true;
@@ -1697,7 +1697,7 @@ STDMETHODIMP CNsisDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
 
   if (ErrorResult != S_OK)
     return ErrorResult;
-
+    
   if (Base.state == STATE_STREAM_FINISHED)
     return S_OK;
 
@@ -1715,7 +1715,7 @@ STDMETHODIMP CNsisDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
       ErrorResult = ReadInput();
       if (ErrorResult != S_OK)
         return ErrorResult;
-
+      
       int b;
       Base.ReadByte(b);
       if (b < 0)
@@ -1723,7 +1723,7 @@ STDMETHODIMP CNsisDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
         ErrorResult = S_FALSE;
         return ErrorResult;
       }
-
+      
       if (b == kFinSig0)
       {
         /*
@@ -1733,13 +1733,13 @@ STDMETHODIMP CNsisDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
         Base.state = STATE_STREAM_FINISHED;
         return ErrorResult;
       }
-
+      
       if (b != kBlockSig0)
       {
         ErrorResult = S_FALSE;
         return ErrorResult;
       }
-
+      
       Base.state = STATE_BLOCK_START;
     }
 
@@ -1751,7 +1751,7 @@ STDMETHODIMP CNsisDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
     }
     if (size == 0)
       return S_OK;
-
+    
     if (_blockFinished)
     {
       if (Base.state != STATE_BLOCK_START)
@@ -1762,28 +1762,28 @@ STDMETHODIMP CNsisDecoder::Read(void *data, UInt32 size, UInt32 *processedSize)
 
       Base.Props.randMode = 0;
       ErrorResult = ReadBlock();
-
+      
       if (ErrorResult != S_OK)
         return ErrorResult;
-
+      
       DecodeBlock1(_counters, Base.Props.blockSize);
-
+      
       _spec._blockSize = Base.Props.blockSize;
       _spec._tt = _counters + 256;
       _spec.Init(Base.Props.origPtr, Base.Props.randMode);
-
+      
       _blockFinished = false;
     }
-
+    
     {
       Byte *ptr = _spec.Decode((Byte *)data, size);
-
+      
       const UInt32 processed = (UInt32)(ptr - (Byte *)data);
       data = ptr;
       size -= processed;
       (*processedSize) += processed;
       _outPosTotal += processed;
-
+      
       if (_spec.Finished())
         _blockFinished = true;
     }

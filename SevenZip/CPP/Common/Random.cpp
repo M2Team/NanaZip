@@ -1,13 +1,13 @@
 ﻿// Common/Random.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
+#include "StdAfx.h"
 
 #include <stdlib.h>
 
 #ifndef _WIN32
 #include <time.h>
 #else
-#include "../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "MyWindows.h"
 #endif
 
 #include "Random.h"

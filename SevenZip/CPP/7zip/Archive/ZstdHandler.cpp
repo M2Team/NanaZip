@@ -1,21 +1,21 @@
 ﻿// ZstdHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
+#include "../../../C/CpuArch.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/Defs.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamUtils.h"
 
 #include "../Compress/ZstdDecoder.h"
 #include "../Compress/ZstdEncoder.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../Compress/CopyCoder.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/DummyOutStream.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/HandlerOut.h"
+#include "Common/DummyOutStream.h"
+#include "Common/HandlerOut.h"
 
 using namespace NWindows;
 

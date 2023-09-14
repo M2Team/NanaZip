@@ -2,11 +2,11 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
+#include "../../../Common/MyException.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/StreamUtils.h"
 
 #include "../HandlerCont.h"
 

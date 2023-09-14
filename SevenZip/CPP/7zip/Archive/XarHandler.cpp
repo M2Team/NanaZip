@@ -1,26 +1,26 @@
 ﻿// XarHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/MyLinux.h"
 #include "../../Common/MyXml.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../Common/StringToInt.h"
+#include "../../Common/UTFConvert.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../Windows/PropVariant.h"
+#include "../../Windows/TimeUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/LimitedStreams.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamObjects.h"
+#include "../Common/StreamUtils.h"
 
 #include "../Compress/BZip2Decoder.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../Compress/CopyCoder.h"
 #include "../Compress/ZlibDecoder.h"
 
 #include "Common/OutStreamWithSha1.h"
@@ -62,7 +62,7 @@ struct CFile
   UInt64 Size;
   UInt64 PackSize;
   UInt64 Offset;
-
+  
   UInt64 CTime;
   UInt64 MTime;
   UInt64 ATime;
@@ -70,7 +70,7 @@ struct CFile
 
   AString User;
   AString Group;
-
+  
   bool IsDir;
   bool HasData;
   bool ModeDefined;
@@ -180,7 +180,7 @@ static UInt64 ParseTime(const CXmlItem &item, const char *name)
   PARSE_NUM(2, hour)
   PARSE_NUM(2, min)
   PARSE_NUM(2, sec)
-
+  
   UInt64 numSecs;
   if (!NTime::GetSecondsSince1601(year, month, day, hour, min, sec, numSecs))
     return 0;
@@ -328,7 +328,7 @@ HRESULT CHandler::Open2(IInStream *stream)
 
   _xml.Alloc((size_t)unpackSize + 1);
   _xmlLen = (size_t)unpackSize;
-
+  
   NCompress::NZlib::CDecoder *zlibCoderSpec = new NCompress::NZlib::CDecoder();
   CMyComPtr<ICompressCoder> zlibCoder = zlibCoderSpec;
 
@@ -352,7 +352,7 @@ HRESULT CHandler::Open2(IInStream *stream)
   CXml xml;
   if (!xml.Parse((const char *)(const Byte *)_xml))
     return S_FALSE;
-
+  
   if (!xml.Root.IsTagged("xar") || xml.Root.SubItems.Size() != 1)
     return S_FALSE;
   const CXmlItem &toc = xml.Root.SubItems[0];
@@ -363,7 +363,7 @@ HRESULT CHandler::Open2(IInStream *stream)
 
   UInt64 totalPackSize = 0;
   unsigned numMainFiles = 0;
-
+  
   FOR_VECTOR (i, _files)
   {
     const CFile &file = _files[i];
@@ -379,7 +379,7 @@ HRESULT CHandler::Open2(IInStream *stream)
 
   if (numMainFiles > 1)
     _mainSubfile = -1;
-
+  
   _phySize = _dataStartPos + totalPackSize;
 
   return S_OK;
@@ -464,7 +464,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
 {
   COM_TRY_BEGIN
   NCOM::CPropVariant prop;
-
+  
   #ifdef XAR_SHOW_RAW
   if (index == _files.Size())
   {
@@ -503,11 +503,11 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         Utf8StringToProp(path, prop);
         break;
       }
-
+      
       case kpidIsDir: prop = item.IsDir; break;
       case kpidSize: if (!item.IsDir) prop = item.Size; break;
       case kpidPackSize: if (!item.IsDir) prop = item.PackSize; break;
-
+      
       case kpidMTime: TimeToProp(item.MTime, prop); break;
       case kpidCTime: TimeToProp(item.CTime, prop); break;
       case kpidATime: TimeToProp(item.ATime, prop); break;
@@ -560,13 +560,13 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   const UInt32 kZeroBufSize = (1 << 14);
   CByteBuffer zeroBuf(kZeroBufSize);
   memset(zeroBuf, 0, kZeroBufSize);
-
+  
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
   NCompress::NZlib::CDecoder *zlibCoderSpec = new NCompress::NZlib::CDecoder();
   CMyComPtr<ICompressCoder> zlibCoder = zlibCoderSpec;
-
+  
   NCompress::NBZip2::CDecoder *bzip2CoderSpec = new NCompress::NBZip2::CDecoder();
   CMyComPtr<ICompressCoder> bzip2Coder = bzip2CoderSpec;
 
@@ -581,7 +581,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   CMyComPtr<ISequentialInStream> inStream(inStreamSpec);
   inStreamSpec->SetStream(_inStream);
 
-
+  
   CLimitedSequentialOutStream *outStreamLimSpec = new CLimitedSequentialOutStream;
   CMyComPtr<ISequentialOutStream> outStream(outStreamLimSpec);
 
@@ -604,7 +604,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         NExtract::NAskMode::kExtract;
     UInt32 index = allFilesMode ? i : indices[i];
     RINOK(extractCallback->GetStream(index, &realOutStream, askMode));
-
+    
     if (index < _files.Size())
     {
       const CFile &item = _files[index];
@@ -640,13 +640,13 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       {
         currentPackSize = item.PackSize;
         currentUnpSize = item.Size;
-
+        
         RINOK(_inStream->Seek(_dataStartPos + item.Offset, STREAM_SEEK_SET, NULL));
         inStreamSpec->Init(item.PackSize);
         outStreamSha1Spec->Init(item.Sha1IsDefined);
         outStreamLimSpec->Init(item.Size);
         HRESULT res = S_OK;
-
+        
         ICompressCoder *coder = NULL;
         if (item.IsCopyMethod())
           if (item.PackSize == item.Size)
@@ -659,10 +659,10 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           coder = bzip2Coder;
         else
           opRes = NExtract::NOperationResult::kUnsupportedMethod;
-
+        
         if (coder)
           res = coder->Code(inStream, outStream, NULL, NULL, progress);
-
+        
         if (res != S_OK)
         {
           if (!outStreamLimSpec->IsFinishedOK())

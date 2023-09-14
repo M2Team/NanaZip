@@ -1,8 +1,8 @@
 ﻿// QuantumDecoder.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
+#include "../../Common/Defs.h"
 
 #include "QuantumDecoder.h"
 
@@ -36,14 +36,14 @@ unsigned CModelDecoder::Decode(CRangeDecoder *rc)
   UInt32 threshold = rc->GetThreshold(Freqs[0]);
   unsigned i;
   for (i = 1; Freqs[i] > threshold; i++);
-
+  
   rc->Decode(Freqs[i], Freqs[(size_t)i - 1], Freqs[0]);
   unsigned res = Vals[--i];
-
+  
   do
     Freqs[i] = (UInt16)(Freqs[i] + kUpdateStep);
   while (i--);
-
+  
   if (Freqs[0] > kFreqSumMax)
   {
     if (--ReorderCount == 0)
@@ -62,7 +62,7 @@ unsigned CModelDecoder::Decode(CRangeDecoder *rc)
             Freqs[j] = tmpFreq;
             Vals[j] = tmpVal;
           }
-
+      
       do
         Freqs[i] = (UInt16)(Freqs[i] + Freqs[(size_t)i + 1]);
       while (i--);
@@ -79,7 +79,7 @@ unsigned CModelDecoder::Decode(CRangeDecoder *rc)
       while (i--);
     }
   }
-
+  
   return res;
 }
 
@@ -113,7 +113,7 @@ HRESULT CDecoder::CodeSpec(const Byte *inData, size_t inSize, UInt32 outSize)
       return S_FALSE;
 
     unsigned selector = m_Selector.Decode(&rc);
-
+    
     if (selector < kNumLitSelectors)
     {
       Byte b = (Byte)((selector << (8 - kNumLitSelectorBits)) + m_Literals[selector].Decode(&rc));
@@ -124,7 +124,7 @@ HRESULT CDecoder::CodeSpec(const Byte *inData, size_t inSize, UInt32 outSize)
     {
       selector -= kNumLitSelectors;
       unsigned len = selector + kMatchMinLen;
-
+    
       if (selector == 2)
       {
         unsigned lenSlot = m_LenSlot.Decode(&rc);
@@ -139,15 +139,15 @@ HRESULT CDecoder::CodeSpec(const Byte *inData, size_t inSize, UInt32 outSize)
         else
           len += lenSlot;
       }
-
+      
       UInt32 dist = m_PosSlot[selector].Decode(&rc);
-
+      
       if (dist >= kNumSimplePosSlots)
       {
         unsigned numDirectBits = (unsigned)((dist >> 1) - 1);
         dist = ((2 | (dist & 1)) << numDirectBits) + rc.Stream.ReadBits(numDirectBits);
       }
-
+      
       unsigned locLen = len;
       if (len > outSize)
         locLen = (unsigned)outSize;
@@ -173,7 +173,7 @@ HRESULT CDecoder::Code(const Byte *inData, size_t inSize,
     _outWindow.Init(keepHistory);
     if (!keepHistory)
       Init();
-
+    
     HRESULT res = CodeSpec(inData, inSize, outSize);
     HRESULT res2 = _outWindow.Flush();
     return res != S_OK ? res : res2;

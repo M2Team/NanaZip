@@ -13,13 +13,13 @@
 // #define PRF(x)
 #endif
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 #include "../../../C/HuffEnc.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyBuffer.h"
+#include "../../Common/MyCom.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../ICoder.h"
 
 #include "HuffmanDecoder.h"
 
@@ -44,7 +44,7 @@ public:
     v >>= (24 - numBits - _bitPos);
     return v & ((1 << numBits) - 1);
   }
-
+  
   void MovePos(unsigned numBits)
   {
     _bitPos += numBits;
@@ -112,7 +112,7 @@ public:
     */
     this->BuildFull(levels, NumSyms);
   }
-
+  
   void Rebuild() throw()
   {
     Generate();
@@ -209,7 +209,7 @@ struct CRangeDecoder
     }
 
     UInt32 bound = (range >> k_NumProbBits) * prob;
-
+    
     if (code < bound)
     {
       range = bound;
@@ -245,7 +245,7 @@ class CDecoder
 
   struct CProbEntry mainProbs[k_NumMainProbs];
   struct CProbEntry matchProbs[k_NumMatchProbs];
-
+  
   struct CProbEntry lzRepProbs[k_NumReps][k_NumRepProbs];
   struct CProbEntry deltaRepProbs[k_NumReps][k_NumRepProbs];
 

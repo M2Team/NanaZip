@@ -1,6 +1,6 @@
 ﻿// ProgressMt.h
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StdAfx.h"
+#include "StdAfx.h"
 
 #include "ProgressMt.h"
 

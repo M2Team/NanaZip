@@ -1,15 +1,15 @@
 ﻿// Md2Reg.cpp /TR 2018-11-02
 
-#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../C/CpuArch.h"
 
 EXTERN_C_BEGIN
 #include "../../C/hashes/md2.h"
 EXTERN_C_END
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../Common/MyCom.h"
+#include "../7zip/Common/RegisterCodec.h"
 
 // MD2
 class CMD2Hasher:

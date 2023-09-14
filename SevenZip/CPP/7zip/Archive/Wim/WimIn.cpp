@@ -11,15 +11,15 @@
 #define PRF(x)
 #endif
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringToInt.h"
+#include "../../../Common/UTFConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/LimitedStreams.h"
+#include "../../Common/StreamObjects.h"
+#include "../../Common/StreamUtils.h"
 
 #include "../../Compress/XpressDecoder.h"
 

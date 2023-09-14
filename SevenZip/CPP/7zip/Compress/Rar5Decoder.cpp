@@ -2,11 +2,11 @@
 // According to unRAR license, this code may not be used to develop
 // a program that creates RAR archives
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
 // #include <stdio.h>
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/StreamUtils.h"
 
 #include "Rar5Decoder.h"
 
@@ -14,7 +14,7 @@ namespace NCompress {
 namespace NRar5 {
 
 static const size_t kInputBufSize = 1 << 20;
-
+ 
 void CBitDecoder::Prepare2() throw()
 {
   const unsigned kSize = 16;
@@ -110,9 +110,9 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
 
   Byte *data = _filterSrc;
   UInt32 dataSize = f.Size;
-
+  
   // printf("\nType = %d offset = %9d  size = %5d", f.Type, (unsigned)(f.Start - _lzFileStart), dataSize);
-
+  
   switch (f.Type)
   {
     case FILTER_E8:
@@ -123,10 +123,10 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
       {
         dataSize -= 4;
         UInt32 fileOffset = (UInt32)(f.Start - _lzFileStart);
-
+        
         const UInt32 kFileSize = (UInt32)1 << 24;
         Byte cmpMask = (Byte)(f.Type == FILTER_E8 ? 0xFF : 0xFE);
-
+        
         for (UInt32 curPos = 0; curPos < dataSize;)
         {
           curPos++;
@@ -134,7 +134,7 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
           {
             UInt32 offset = (curPos + fileOffset) & (kFileSize - 1);
             UInt32 addr = GetUi32(data);
-
+            
             if (addr < kFileSize)
             {
               SetUi32(data, addr - offset);
@@ -143,7 +143,7 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
             {
               SetUi32(data, addr + kFileSize);
             }
-
+              
             data += 4;
             curPos += 4;
           }
@@ -158,7 +158,7 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
       {
         dataSize -= 4;
         UInt32 fileOffset = (UInt32)(f.Start - _lzFileStart);
-
+        
         for (UInt32 curPos = 0; curPos <= dataSize; curPos += 4)
         {
           Byte *d = data + curPos;
@@ -174,7 +174,7 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
       }
       break;
     }
-
+    
     case FILTER_DELTA:
     {
       // printf("  channels = %d", f.Channels);
@@ -184,7 +184,7 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
 
       Byte *dest = _filterDst;
       UInt32 numChannels = f.Channels;
-
+      
       for (UInt32 curChannel = 0; curChannel < numChannels; curChannel++)
       {
         Byte prevByte = 0;
@@ -215,13 +215,13 @@ HRESULT CDecoder::WriteBuf()
   for (unsigned i = 0; i < _filters.Size();)
   {
     const CFilter &f = _filters[i];
-
+    
     UInt64 blockStart = f.Start;
 
     size_t lzAvail = (size_t)(_lzSize - _lzWritten);
     if (lzAvail == 0)
       break;
-
+    
     if (blockStart > _lzWritten)
     {
       UInt64 rem = blockStart - _lzWritten;
@@ -235,7 +235,7 @@ HRESULT CDecoder::WriteBuf()
       }
       continue;
     }
-
+    
     UInt32 blockSize = f.Size;
     size_t offset = (size_t)(_lzWritten - blockStart);
     if (offset == 0)
@@ -244,7 +244,7 @@ HRESULT CDecoder::WriteBuf()
       if (!_filterSrc.IsAllocated())
         return E_OUTOFMEMORY;
     }
-
+    
     size_t blockRem = (size_t)blockSize - offset;
     size_t size = lzAvail;
     if (size > blockRem)
@@ -258,12 +258,12 @@ HRESULT CDecoder::WriteBuf()
     _numUnusedFilters = ++i;
     RINOK(ExecuteFilter(f));
   }
-
+      
   DeleteUnusedFilters();
 
   if (!_filters.IsEmpty())
     return S_OK;
-
+  
   size_t lzAvail = (size_t)(_lzSize - _lzWritten);
   RINOK(WriteData(_window + _winPos - lzAvail, lzAvail));
   _lzWritten += lzAvail;
@@ -341,7 +341,7 @@ HRESULT CDecoder::ReadTables(CBitDecoder &_bitStream)
 
   _bitStream.AlignToByte();
   _bitStream.Prepare();
-
+  
   {
     unsigned flags = _bitStream.ReadByteInAligned();
     unsigned checkSum = _bitStream.ReadByteInAligned();
@@ -364,7 +364,7 @@ HRESULT CDecoder::ReadTables(CBitDecoder &_bitStream)
         blockSize += (UInt32)b << 16;
       }
     }
-
+    
     if (checkSum != 0x5A)
       return S_FALSE;
 
@@ -377,11 +377,11 @@ HRESULT CDecoder::ReadTables(CBitDecoder &_bitStream)
 
     _bitStream._blockEndBits7 = (Byte)blockSizeBits7;
     _bitStream._blockEnd = _bitStream.GetProcessedSize_Round() + blockSize;
-
+    
     _bitStream.SetCheck2();
-
+    
     _isLastBlock = ((flags & 0x40) != 0);
-
+    
     if ((flags & 0x80) == 0)
     {
       if (!_tableWasFilled)
@@ -389,13 +389,13 @@ HRESULT CDecoder::ReadTables(CBitDecoder &_bitStream)
           return S_FALSE;
       return S_OK;
     }
-
+    
     _tableWasFilled = false;
   }
 
   {
     Byte lens2[kLevelTableSize];
-
+    
     for (unsigned i = 0; i < kLevelTableSize;)
     {
       _bitStream.Prepare();
@@ -420,13 +420,13 @@ HRESULT CDecoder::ReadTables(CBitDecoder &_bitStream)
 
     if (_bitStream.IsBlockOverRead())
       return S_FALSE;
-
+    
     RIF(m_LevelDecoder.Build(lens2));
   }
-
+  
   Byte lens[kTablesSizesSum];
   unsigned i = 0;
-
+  
   do
   {
     if (_bitStream._buf >= _bitStream._bufCheck2)
@@ -436,9 +436,9 @@ HRESULT CDecoder::ReadTables(CBitDecoder &_bitStream)
       if (_bitStream.IsBlockOverRead())
         return S_FALSE;
     }
-
+    
     UInt32 sym = m_LevelDecoder.Decode(&_bitStream);
-
+    
     if (sym < 16)
       lens[i++] = (Byte)sym;
     else if (sym > kLevelTableSize)
@@ -518,7 +518,7 @@ HRESULT CDecoder::DecodeLZ()
       rem = kWriteStep;
     limit = _winPos + rem;
   }
-
+  
   for (;;)
   {
     if (_winPos >= limit)
@@ -526,10 +526,10 @@ HRESULT CDecoder::DecodeLZ()
       RINOK(WriteBuf());
       if (_unpackSize_Defined && _writtenFileSize > _unpackSize)
         break; // return S_FALSE;
-
+      
       {
         size_t rem = _winSize - _winPos;
-
+        
         if (rem == 0)
         {
           _winPos = 0;
@@ -545,7 +545,7 @@ HRESULT CDecoder::DecodeLZ()
         size_t winPos = _winPos;
         size_t winMask = _winMask;
         size_t pos = (winPos - (size_t)rep0 - 1) & winMask;
-
+        
         Byte *win = _window;
         do
         {
@@ -556,7 +556,7 @@ HRESULT CDecoder::DecodeLZ()
           pos = (pos + 1) & winMask;
         }
         while (--remLen != 0);
-
+        
         _lzSize += winPos - _winPos;
         _winPos = winPos;
         continue;
@@ -584,16 +584,16 @@ HRESULT CDecoder::DecodeLZ()
             if (_isLastBlock)
             {
               _reps[0] = rep0;
-
+              
               if (_bitStream.InputEofError())
                 break;
-
+              
               /*
               // packSize can be 15 bytes larger for encrypted archive
               if (_packSize_Defined && _packSize < _bitStream.GetProcessedSize())
                 break;
               */
-
+              
               return _bitStream._hres;
               // break;
             }
@@ -609,7 +609,7 @@ HRESULT CDecoder::DecodeLZ()
     }
 
     UInt32 sym = m_MainDecoder.Decode(&_bitStream);
-
+    
     if (sym < 256)
     {
       size_t winPos = _winPos;
@@ -618,7 +618,7 @@ HRESULT CDecoder::DecodeLZ()
       _lzSize++;
       continue;
     }
-
+   
     UInt32 len;
 
     if (sym < kSymbolRep + kNumReps)
@@ -644,7 +644,7 @@ HRESULT CDecoder::DecodeLZ()
           _reps[1] = rep0;
           rep0 = dist;
         }
-
+        
         const UInt32 sym2 = m_LenDecoder.Decode(&_bitStream);
         if (sym2 >= kLenTableSize)
           break; // return S_FALSE;
@@ -675,16 +675,16 @@ HRESULT CDecoder::DecodeLZ()
       _reps[2] = _reps[1];
       _reps[1] = rep0;
       len = SlotToLen(_bitStream, sym - (kSymbolRep + kNumReps));
-
+      
       rep0 = m_DistDecoder.Decode(&_bitStream);
-
+      
       if (rep0 >= 4)
       {
         if (rep0 >= _numCorrectDistSymbols)
           break; // return S_FALSE;
         unsigned numBits = (rep0 >> 1) - 1;
         rep0 = (2 | (rep0 & 1)) << numBits;
-
+        
         if (numBits < kNumAlignBits)
           rep0 += _bitStream.ReadBits9(numBits);
         else
@@ -692,7 +692,7 @@ HRESULT CDecoder::DecodeLZ()
           len += (numBits >= 7);
           len += (numBits >= 12);
           len += (numBits >= 17);
-
+        
           if (_useAlignBits)
           {
             // if (numBits > kNumAlignBits)
@@ -712,7 +712,7 @@ HRESULT CDecoder::DecodeLZ()
 
     if (rep0 >= _lzSize)
       _lzError = true;
-
+    
     {
       UInt32 lenCur = len;
       size_t winPos = _winPos;
@@ -727,7 +727,7 @@ HRESULT CDecoder::DecodeLZ()
           remLen = len - lenCur;
         }
       }
-
+      
       Byte *win = _window;
       _lzSize += lenCur;
       _winPos = winPos + lenCur;
@@ -751,7 +751,7 @@ HRESULT CDecoder::DecodeLZ()
       }
     }
   }
-
+  
   if (_bitStream._hres != S_OK)
     return _bitStream._hres;
 
@@ -776,7 +776,7 @@ HRESULT CDecoder::CodeReal()
     _lzSize = 0;
     _lzWritten = 0;
     _winPos = 0;
-
+    
     for (unsigned i = 0; i < kNumReps; i++)
       _reps[i] = (UInt32)0 - 1;
 
@@ -793,7 +793,7 @@ HRESULT CDecoder::CodeReal()
 
   _lzFileStart = _lzSize;
   _lzWritten = _lzSize;
-
+  
   HRESULT res = DecodeLZ();
 
   HRESULT res2 = S_OK;
@@ -811,7 +811,7 @@ HRESULT CDecoder::CodeReal()
     _solidAllowed = true;
     res = res2;
   }
-
+     
   if (res == S_OK && _unpackSize_Defined && _writtenFileSize != _unpackSize)
     return S_FALSE;
   return res;
@@ -897,13 +897,13 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
           return E_OUTOFMEMORY;
         memset(win, 0, newSize);
       }
-
+      
       if (_isSolid && _window)
       {
         // original unRAR claims:
         // "Archiving code guarantees that win size does not grow in the same solid stream",
         // but the original unRAR decoder still supports such grow case.
-
+        
         Byte *winOld = _window;
         size_t oldSize = _winSize;
         size_t newMask = newSize - 1;
@@ -913,7 +913,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
           win[(winPos - i) & newMask] = winOld[(winPos - i) & oldMask];
         ::MidFree(_window);
       }
-
+      
       _window = win;
       _winSizeAllocated = newSize;
       _winSize = newSize;
@@ -938,7 +938,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     if (_packSize_Defined)
       _packSize = *inSize;
     */
-
+    
     _unpackSize = 0;
     _unpackSize_Defined = (outSize != NULL);
     if (_unpackSize_Defined)
@@ -948,11 +948,11 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
       _lzEnd += _unpackSize;
     else
       _lzEnd = 0;
-
+    
     _progress = progress;
-
+    
     HRESULT res = CodeReal();
-
+    
     if (res != S_OK)
       return res;
     if (_lzError)

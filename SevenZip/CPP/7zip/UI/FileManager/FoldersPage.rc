@@ -1,5 +1,5 @@
 #include "FoldersPageRes.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
+#include "../../GuiCommon.rc"
 
 #define xc 240
 #define yc 100

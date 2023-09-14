@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../Windows/FileDir.h"
 
 #include "TempFiles.h"
 

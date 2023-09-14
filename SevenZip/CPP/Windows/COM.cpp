@@ -1,11 +1,11 @@
 ﻿// Windows/COM.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
+#include "StdAfx.h"
 
 /*
 
 #include "COM.h"
-#include "../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../Common/StringConvert.h"
 
 namespace NWindows {
 namespace NCOM {

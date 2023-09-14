@@ -5,10 +5,10 @@
 
 #include "../../../../C/Sha1.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyBuffer2.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
+#include "../../IStream.h"
 
 class COutStreamWithSha1:
   public ISequentialOutStream,

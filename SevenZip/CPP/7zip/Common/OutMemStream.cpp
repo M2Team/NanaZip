@@ -1,6 +1,6 @@
 ﻿// OutMemStream.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StdAfx.h"
+#include "StdAfx.h"
 
 // #include <stdio.h>
 

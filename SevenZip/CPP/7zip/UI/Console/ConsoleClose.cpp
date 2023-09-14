@@ -7,7 +7,7 @@
 #ifndef UNDER_CE
 
 #ifdef _WIN32
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 #else
 #include <stdlib.h>
 #include <signal.h>

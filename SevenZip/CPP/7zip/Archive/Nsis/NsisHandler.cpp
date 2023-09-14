@@ -2,17 +2,17 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../Common/ComTry.h"
+#include "../../../Common/IntToString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/PropVariant.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/ProgressUtils.h"
+#include "../../Common/StreamUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
+#include "../Common/ItemNameUtils.h"
 
 #include "NsisHandler.h"
 
@@ -142,7 +142,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
     case kpidPhySize: prop = (UInt64)((UInt64)_archive.ExeStub.Size() + _archive.FirstHeader.ArcSize); break;
     case kpidEmbeddedStubSize: prop = (UInt64)_archive.ExeStub.Size(); break;
     case kpidHeadersSize: prop = _archive.FirstHeader.HeaderSize; break;
-
+    
     case kpidErrorFlags:
     {
       UInt32 v = 0;
@@ -151,11 +151,11 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
       prop = v;
       break;
     }
-
+    
     case kpidName:
     {
       AString s;
-
+      
       #ifdef NSIS_SCRIPT
         if (!_archive.Name.IsEmpty())
           s = _archive.Name;
@@ -174,7 +174,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
       prop = _archive.ConvertToUnicode(s);
       break;
     }
-
+    
     #ifdef NSIS_SCRIPT
     case kpidShortComment:
     {
@@ -342,7 +342,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
           prop = item.Attrib;
         break;
       }
-
+      
       case kpidMethod:
         if (_archive.IsSolid)
           prop = _methodString;
@@ -350,7 +350,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
           prop = GetMethod(_archive.UseFilter, item.IsCompressed ? _archive.Method :
               NMethodType::kCopy, item.DictionarySize);
         break;
-
+      
       case kpidSolid:  prop = _archive.IsSolid; break;
     }
   }
@@ -392,7 +392,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     GetNumberOfItems(&numItems);
   if (numItems == 0)
     return S_OK;
-
+  
   UInt64 totalSize = 0;
   UInt64 solidPosMax = 0;
 
@@ -400,7 +400,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   for (i = 0; i < numItems; i++)
   {
     UInt32 index = (allFilesMode ? i : indices[i]);
-
+    
     #ifdef NSIS_SCRIPT
     if (index >= _archive.Items.Size())
     {
@@ -449,15 +449,15 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   CByteBuffer tempBuf;
   CByteBuffer tempBuf2;
-
+  
   /* tempPos is pos in uncompressed stream of previous item for solid archive, that
      was written to tempBuf  */
   UInt64 tempPos = (UInt64)(Int64)-1;
-
+  
   /* prevPos is pos in uncompressed stream of previous item for solid archive.
      It's used for test mode (where we don't need to test same file second time */
   UInt64 prevPos =  (UInt64)(Int64)-1;
-
+  
   // if there is error in solid archive, we show error for all subsequent files
   bool solidDataError = false;
 
@@ -519,15 +519,15 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     #endif
     {
       const CItem &item = _archive.Items[index];
-
+      
       if (!_archive.IsSolid)
         GetCompressedSize(index, curPacked);
-
+      
       if (!testMode && !realOutStream)
         continue;
-
+      
       RINOK(extractCallback->PrepareOperation(askMode));
-
+      
       dataError = solidDataError;
 
       bool needDecompress = !solidDataError;
@@ -628,18 +628,18 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
             }
           }
         }
-
+        
         if (!dataError && item.IsUninstaller)
         {
           if (_archive.ExeStub.Size() != 0)
           {
             CByteBuffer destBuf = _archive.ExeStub;
             dataError = !UninstallerPatch(tempBuf, tempBuf.Size(), destBuf);
-
+           
             if (realOutStream)
               RINOK(WriteStream(realOutStream, destBuf, destBuf.Size()));
           }
-
+          
           if (readFromTemp)
           {
             if (realOutStream)

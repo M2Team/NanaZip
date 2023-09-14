@@ -3,8 +3,8 @@
 #ifndef __PASSWORD_DIALOG_H
 #define __PASSWORD_DIALOG_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
+#include "../../../Windows/Control/Dialog.h"
+#include "../../../Windows/Control/Edit.h"
 
 #include "PasswordDialogRes.h"
 
@@ -20,7 +20,7 @@ class CPasswordDialog: public NWindows::NControl::CModalDialog
 public:
   UString Password;
   bool ShowPassword;
-
+  
   CPasswordDialog(): ShowPassword(false) {}
   INT_PTR Create(HWND parentWindow = 0) { return CModalDialog::Create(IDD_PASSWORD, parentWindow); }
 };

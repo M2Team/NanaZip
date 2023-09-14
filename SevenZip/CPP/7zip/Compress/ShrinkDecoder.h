@@ -3,9 +3,9 @@
 #ifndef __COMPRESS_SHRINK_DECODER_H
 #define __COMPRESS_SHRINK_DECODER_H
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyCom.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../ICoder.h"
 
 namespace NCompress {
 namespace NShrink {

@@ -3,8 +3,8 @@
 #ifndef __ARCHIVE_TAR_ITEM_H
 #define __ARCHIVE_TAR_ITEM_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/MyLinux.h"
+#include "../../../Common/UTFConvert.h"
 
 #include "TarHeader.h"
 

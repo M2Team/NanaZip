@@ -1,15 +1,15 @@
 ﻿// (C) 2016 Tino Reichardt
 
 #define LZ4_STATIC_LINKING_ONLY
-#include "../../../../ThirdParty/LZMA/C/Alloc.h"
-#include "../../../../ThirdParty/LZMA/C/Threads.h"
+#include "../../../C/Alloc.h"
+#include "../../../C/Threads.h"
 #include <lz4.h>
 #include "../../../C/zstdmt/lz4-mt.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/Common.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/Common.h"
+#include "../../Common/MyCom.h"
+#include "../ICoder.h"
+#include "../Common/StreamUtils.h"
 
 #ifndef EXTRACT_ONLY
 namespace NCompress {

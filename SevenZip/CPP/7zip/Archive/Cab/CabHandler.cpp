@@ -4,25 +4,25 @@
 
 // #include <stdio.h>
 
-#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../C/Alloc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/ComTry.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/UTFConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../../Windows/PropVariant.h"
+#include "../../../Windows/TimeUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/ProgressUtils.h"
+#include "../../Common/StreamUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../../Compress/CopyCoder.h"
 #include "../../Compress/DeflateDecoder.h"
 #include "../../Compress/LzxDecoder.h"
 #include "../../Compress/QuantumDecoder.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
+#include "../Common/ItemNameUtils.h"
 
 #include "CabBlockInStream.h"
 #include "CabHandler.h"

@@ -7,7 +7,7 @@ This code is based on:
 #ifndef __PPMD8_H
 #define __PPMD8_H
 
-#include "../../ThirdParty/LZMA/C/Ppmd.h"
+#include "Ppmd.h"
 
 EXTERN_C_BEGIN
 

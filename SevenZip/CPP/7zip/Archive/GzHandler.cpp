@@ -1,30 +1,30 @@
 ﻿// GzHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
 // #include  <stdio.h>
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/Defs.h"
+#include "../../Common/StringConvert.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../Windows/PropVariant.h"
 #include "../../Windows/PropVariantUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../Windows/TimeUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../Compress/CopyCoder.h"
 #include "../Compress/DeflateDecoder.h"
 #include "../Compress/DeflateEncoder.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/HandlerOut.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/InStreamWithCRC.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/OutStreamWithCRC.h"
+#include "Common/HandlerOut.h"
+#include "Common/InStreamWithCRC.h"
+#include "Common/OutStreamWithCRC.h"
 
 #define Get32(p) GetUi32(p)
 

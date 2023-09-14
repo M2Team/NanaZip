@@ -1,8 +1,8 @@
 ﻿// DeflateRegister.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../Common/RegisterCodec.h"
 
 #include "DeflateDecoder.h"
 #if !defined(EXTRACT_ONLY) && !defined(DEFLATE_EXTRACT_ONLY)

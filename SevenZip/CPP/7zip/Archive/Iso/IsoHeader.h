@@ -3,7 +3,7 @@
 #ifndef __ARCHIVE_ISO_HEADER_H
 #define __ARCHIVE_ISO_HEADER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../../Common/MyTypes.h"
 
 namespace NArchive {
 namespace NIso {
@@ -37,7 +37,7 @@ namespace NBootEntryId
 
   const Byte kMoreHeaders = 0x90;
   const Byte kFinalHeader = 0x91;
-
+  
   const Byte kExtensionIndicator = 0x44;
 }
 

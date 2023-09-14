@@ -1,18 +1,18 @@
 ﻿// ZHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../Common/ComTry.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../Windows/PropVariant.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamUtils.h"
 
 #include "../Compress/ZDecoder.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/DummyOutStream.h"
+#include "Common/DummyOutStream.h"
 
 namespace NArchive {
 namespace NZ {
@@ -120,7 +120,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream,
     UInt64 endPos;
     RINOK(stream->Seek(0, STREAM_SEEK_END, &endPos));
     _packSize = endPos;
-
+  
     /*
     bool fullCheck = false;
     if (fullCheck)
@@ -176,16 +176,16 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   extractCallback->SetTotal(_packSize);
 
   UInt64 currentTotalPacked = 0;
-
+  
   RINOK(extractCallback->SetCompleted(&currentTotalPacked));
-
+  
   CMyComPtr<ISequentialOutStream> realOutStream;
   Int32 askMode = testMode ?
       NExtract::NAskMode::kTest :
       NExtract::NAskMode::kExtract;
-
+  
   RINOK(extractCallback->GetStream(0, &realOutStream, askMode));
-
+    
   if (!testMode && !realOutStream)
     return S_OK;
 
@@ -200,7 +200,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   CLocalProgress *lps = new CLocalProgress;
   CMyComPtr<ICompressProgressInfo> progress = lps;
   lps->Init(extractCallback, true);
-
+  
   RINOK(_stream->Seek(0, STREAM_SEEK_SET, NULL));
 
   NCompress::NZ::CDecoder *decoderSpec = new NCompress::NZ::CDecoder;

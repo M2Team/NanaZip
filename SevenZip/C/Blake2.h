@@ -5,7 +5,7 @@
 #ifndef __BLAKE2_H
 #define __BLAKE2_H
 
-#include "../../ThirdParty/LZMA/C/7zTypes.h"
+#include "7zTypes.h"
 
 EXTERN_C_BEGIN
 

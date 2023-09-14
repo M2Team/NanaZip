@@ -1,6 +1,6 @@
 ﻿// LzxDecoder.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
 #include <string.h>
 
@@ -13,7 +13,7 @@
 #define PRF(x)
 #endif
 
-#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../C/Alloc.h"
 
 #include "LzxDecoder.h"
 
@@ -26,10 +26,10 @@ static void x86_Filter(Byte *data, UInt32 size, UInt32 processedSize, UInt32 tra
   if (size <= kResidue)
     return;
   size -= kResidue;
-
+  
   Byte save = data[(size_t)size + 4];
   data[(size_t)size + 4] = 0xE8;
-
+  
   for (UInt32 i = 0;;)
   {
     Byte *p = data + i;
@@ -110,7 +110,7 @@ HRESULT CDecoder::Flush()
     if (_x86_processedSize >= ((UInt32)1 << 30))
       _x86_translationSize = 0;
   }
-
+ 
   return S_OK;
 }
 
@@ -127,7 +127,7 @@ bool CDecoder::ReadTable(Byte *levels, unsigned numSymbols)
       levels2[i] = (Byte)ReadBits(kNumLevelBits);
     RIF(_levelDecoder.Build(levels2));
   }
-
+  
   unsigned i = 0;
   do
   {
@@ -139,7 +139,7 @@ bool CDecoder::ReadTable(Byte *levels, unsigned numSymbols)
       levels[i++] = (Byte)delta;
       continue;
     }
-
+    
     unsigned num;
     Byte symbol;
 
@@ -191,7 +191,7 @@ bool CDecoder::ReadTables(void)
     unsigned blockType = (unsigned)ReadBits(kBlockType_NumBits);
     if (blockType > kBlockType_Uncompressed)
       return false;
-
+    
     _unpackBlockSize = (1 << 15);
     if (!_wimMode || ReadBits(1) == 0)
     {
@@ -232,7 +232,7 @@ bool CDecoder::ReadTables(void)
           return false;
         _reps[i] = rep;
       }
-
+      
       return true;
     }
 
@@ -262,7 +262,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
 {
   if (!_keepHistory || !_isUncompressedBlock)
     _bitStream.NormalizeBig();
-
+ 
   if (!_keepHistory)
   {
     _skipByte = false;
@@ -270,7 +270,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
 
     memset(_mainLevels, 0, kMainTableSize);
     memset(_lenLevels, 0, kNumLenSymbols);
-
+    
     {
       _x86_translationSize = 12000000;
       if (!_wimMode)
@@ -283,7 +283,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
           _x86_translationSize = v;
         }
       }
-
+      
       _x86_processedSize = 0;
     }
 
@@ -296,7 +296,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
   {
     if (_bitStream.WasExtraReadError_Fast())
       return S_FALSE;
-
+    
     if (_unpackBlockSize == 0)
     {
       if (!ReadTables())
@@ -307,7 +307,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
     UInt32 next = _unpackBlockSize;
     if (next > curSize)
       next = curSize;
-
+    
     if (_isUncompressedBlock)
     {
       size_t rem = _bitStream.GetRem();
@@ -333,13 +333,13 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
         if (_bitStream.DirectReadByte() != 0)
           return S_FALSE;
       }
-
+      
       continue;
     }
 
     curSize -= next;
     _unpackBlockSize -= next;
-
+    
     Byte *win = _win;
 
     while (next > 0)
@@ -348,7 +348,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
         return S_FALSE;
 
       UInt32 sym = _mainDecoder.Decode(&_bitStream);
-
+      
       if (sym < 256)
       {
         win[_pos++] = (Byte)sym;
@@ -362,7 +362,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
         UInt32 posSlot = sym / kNumLenSlots;
         UInt32 lenSlot = sym % kNumLenSlots;
         UInt32 len = kMatchMinLen + lenSlot;
-
+        
         if (lenSlot == kNumLenSlots - 1)
         {
           UInt32 lenTemp = _lenDecoder.Decode(&_bitStream);
@@ -370,9 +370,9 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
             return S_FALSE;
           len = kMatchMinLen + kNumLenSlots - 1 + lenTemp;
         }
-
+        
         UInt32 dist;
-
+        
         if (posSlot < kNumReps)
         {
           dist = _reps[posSlot];
@@ -382,7 +382,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
         else
         {
           unsigned numDirectBits;
-
+          
           if (posSlot < kNumPowerPosSlots)
           {
             numDirectBits = (unsigned)(posSlot >> 1) - 1;
@@ -404,7 +404,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
           }
           else
             dist += _bitStream.ReadBitsBig(numDirectBits);
-
+          
           dist -= kNumReps - 1;
           _reps[2] = _reps[1];
           _reps[1] = _reps[0];
@@ -422,7 +422,7 @@ HRESULT CDecoder::CodeSpec(UInt32 curSize)
         UInt32 srcPos = (_pos - dist) & mask;
 
         next -= len;
-
+        
         if (len > _winSize - srcPos)
         {
           _pos += len;
@@ -470,7 +470,7 @@ HRESULT CDecoder::Code(const Byte *inData, size_t inSize, UInt32 outSize)
 
   _writePos = _pos;
   _unpackedData = _win + _pos;
-
+  
   if (outSize > _winSize - _pos)
     return S_FALSE;
 
@@ -502,14 +502,14 @@ HRESULT CDecoder::SetParams2(unsigned numDictBits)
   _numPosLenSlots = numPosSlots * kNumLenSlots;
   return S_OK;
 }
-
+  
 
 HRESULT CDecoder::SetParams_and_Alloc(unsigned numDictBits)
 {
   RINOK(SetParams2(numDictBits));
-
+  
   UInt32 newWinSize = (UInt32)1 << numDictBits;
-
+ 
   if (NeedAlloc)
   {
     if (!_win || newWinSize != _winSize)

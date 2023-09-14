@@ -1,24 +1,24 @@
 ﻿// ComHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/Alloc.h"
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/Alloc.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../Common/IntToString.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/MyCom.h"
+#include "../../Common/MyBuffer.h"
+#include "../../Common/MyString.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../Windows/PropVariant.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/LimitedStreams.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../Compress/CopyCoder.h"
 
 #define Get16(p) GetUi16(p)
 #define Get32(p) GetUi32(p)
@@ -106,7 +106,7 @@ public:
 
   CObjArray<UInt32> Fat;
   UInt32 FatSize;
-
+  
   CObjArray<UInt32> Mat;
   UInt32 MatSize;
 
@@ -305,7 +305,7 @@ static bool CompoundMsiNameToFileName(const UString &name, UString &res)
       res += k_Msi_ID;
     */
     c -= k_Msi_StartUnicodeChar;
-
+    
     unsigned c0 = (unsigned)c & k_Msi_CharMask;
     unsigned c1 = (unsigned)c >> k_Msi_NumBits;
 
@@ -326,7 +326,7 @@ static UString ConvertName(const Byte *p, bool &isMsi)
 {
   isMsi = false;
   UString s;
-
+  
   for (unsigned i = 0; i < kNameSizeMax; i += 2)
   {
     wchar_t c = Get16(p + i);
@@ -334,7 +334,7 @@ static UString ConvertName(const Byte *p, bool &isMsi)
       break;
     s += c;
   }
-
+  
   UString msiName;
   if (CompoundMsiNameToFileName(s, msiName))
   {
@@ -373,14 +373,14 @@ HRESULT CDatabase::Update_PhySize_WithItem(unsigned index)
     return S_OK;
   unsigned bsLog = isLargeStream ? SectorSizeBits : MiniSectorSizeBits;
   // streamSpec->Size = item.Size;
-
+  
   UInt32 clusterSize = (UInt32)1 << bsLog;
   UInt64 numClusters64 = (item.Size + clusterSize - 1) >> bsLog;
   if (numClusters64 >= ((UInt32)1 << 31))
     return S_FALSE;
   UInt32 sid = item.Sid;
   UInt64 size = item.Size;
-
+  
   if (size != 0)
   {
     for (;; size -= clusterSize)
@@ -436,7 +436,7 @@ HRESULT CDatabase::Open(IInStream *inStream)
     return S_FALSE;
   UInt32 numSectorsForFAT = Get32(p + 0x2C); // SAT
   LongStreamMinSize = Get32(p + 0x38);
-
+  
   UInt32 sectSize = (UInt32)1 << sectorSizeBits;
 
   CByteBuffer sect(sectSize);
@@ -466,10 +466,10 @@ HRESULT CDatabase::Open(IInStream *inStream)
       sid = bat[i];
     }
     numBatItems = i;
-
+    
     Fat.Alloc(numFatItems);
     UInt32 j = 0;
-
+      
     for (i = 0; i < numFatItems; j++, i += numSidsInSec)
     {
       if (j >= numBatItems)
@@ -564,9 +564,9 @@ HRESULT CDatabase::Open(IInStream *inStream)
   }
 
   RINOK(AddNode(-1, root.SonDid));
-
+  
   unsigned numCabs = 0;
-
+  
   FOR_VECTOR (i, Refs)
   {
     const CItem &item = Items[Refs[i].Did];
@@ -588,7 +588,7 @@ HRESULT CDatabase::Open(IInStream *inStream)
       }
     }
   }
-
+  
   if (numCabs > 1)
     MainSubfile = -1;
 
@@ -690,7 +690,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   NWindows::NCOM::CPropVariant prop;
   const CRef &ref = _db.Refs[index];
   const CItem &item = _db.Items[ref.Did];
-
+    
   switch (propID)
   {
     case kpidPath:  prop = _db.GetItemPath(index); break;
@@ -750,7 +750,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
-
+  
   NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
   CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
@@ -781,7 +781,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
     totalPackSize += _db.GetItemPackSize(item.Size);
     totalSize += item.Size;
-
+    
     if (!testMode && !outStream)
       continue;
     RINOK(extractCallback->PrepareOperation(askMode));

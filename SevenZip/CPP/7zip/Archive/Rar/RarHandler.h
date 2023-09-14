@@ -3,9 +3,9 @@
 #ifndef __RAR_HANDLER_H
 #define __RAR_HANDLER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../IArchive.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
+#include "../../Common/CreateCoder.h"
 
 #include "RarItem.h"
 
@@ -16,7 +16,7 @@ struct CInArcInfo
 {
   UInt32 Flags;
   Byte EncryptVersion;
-
+  
   UInt64 StartPos;
   UInt64 EndPos;
   UInt64 FileSize;
@@ -86,7 +86,7 @@ class CHandler:
 
   UInt64 GetPackSize(unsigned refIndex) const;
   bool IsSolid(unsigned refIndex) const;
-
+  
   /*
   void AddErrorMessage(const AString &s)
   {
@@ -105,7 +105,7 @@ public:
   QUERY_ENTRY_ISetCompressCodecsInfo
   MY_QUERYINTERFACE_END
   MY_ADDREF_RELEASE
-
+  
   INTERFACE_IInArchive(;)
 
   DECL_ISetCompressCodecsInfo

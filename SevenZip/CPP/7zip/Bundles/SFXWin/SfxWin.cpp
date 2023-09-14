@@ -2,25 +2,25 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
 #include <Shlwapi.h>
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
+#include "../../../Common/MyInitGuid.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/CommandLineParser.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/CommandLineParser.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/NtCheck.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/NtCheck.h"
+#include "../../../Windows/ResourceString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../ICoder.h"
+#include "../../IPassword.h"
+#include "../../Archive/IArchive.h"
 #include "../../UI/Common/Extract.h"
 #include "../../UI/Common/ExitCode.h"
 #include "../../UI/Explorer/MyMessages.h"
@@ -28,7 +28,7 @@
 #include "../../UI/GUI/ExtractGUI.h"
 #include "../../UI/GUI/ExtractRes.h"
 
-#include "../../../../../ThirdParty/LZMA/C/DllSecur.h"
+#include "../../../../C/DllSecur.h"
 #include "Mitigations.h"
 
 using namespace NWindows;

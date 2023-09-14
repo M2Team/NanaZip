@@ -3,7 +3,7 @@
 #ifndef __LANG_UTILS_H
 #define __LANG_UTILS_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../../../Windows/ResourceString.h"
 
 #ifdef LANG
 
@@ -28,7 +28,7 @@ UString LangString(UInt32 langID);
 void AddLangString(UString &s, UInt32 langID);
 void LangString(UInt32 langID, UString &dest);
 void LangString_OnlyFromLangFile(UInt32 langID, UString &dest);
-
+ 
 #else
 
 inline UString LangString(UInt32 langID) { return NWindows::MyLoadString(langID); }

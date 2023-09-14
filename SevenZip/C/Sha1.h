@@ -4,7 +4,7 @@
 #ifndef __7Z_SHA1_H
 #define __7Z_SHA1_H
 
-#include "../../ThirdParty/LZMA/C/7zTypes.h"
+#include "7zTypes.h"
 
 EXTERN_C_BEGIN
 

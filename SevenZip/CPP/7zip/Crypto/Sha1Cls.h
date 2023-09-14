@@ -17,7 +17,7 @@ const unsigned kDigestSize = SHA1_DIGEST_SIZE;
 class CContext
 {
   CSha1 _s;
-
+ 
 public:
   void Init() throw() { Sha1_Init(&_s); }
   void Update(const Byte *data, size_t size) throw() { Sha1_Update(&_s, data, size); }

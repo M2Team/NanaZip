@@ -1,14 +1,14 @@
 ﻿// HandlerCont.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../Common/ComTry.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/LimitedStreams.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/StreamUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../Compress/CopyCoder.h"
 
 #include "HandlerCont.h"
 

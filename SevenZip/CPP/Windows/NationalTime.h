@@ -3,7 +3,7 @@
 #ifndef __WINDOWS_NATIONAL_TIME_H
 #define __WINDOWS_NATIONAL_TIME_H
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../Common/MyString.h"
 
 namespace NWindows {
 namespace NNational {

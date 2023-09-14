@@ -3,9 +3,9 @@
 #ifndef __ARCHIVE_ISO_IN_H
 #define __ARCHIVE_ISO_IN_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
+#include "../../IStream.h"
 
 #include "IsoHeader.h"
 #include "IsoItem.h"

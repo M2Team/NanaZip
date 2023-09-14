@@ -3,9 +3,9 @@
 #ifndef __UPDATE_CALLBACK100_H
 #define __UPDATE_CALLBACK100_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
+#include "../../IPassword.h"
 
 #include "../Agent/IFolderArchive.h"
 

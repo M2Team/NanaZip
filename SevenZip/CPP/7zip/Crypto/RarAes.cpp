@@ -1,9 +1,9 @@
 ﻿// Crypto/RarAes.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Crypto/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
-#include "../../../../ThirdParty/LZMA/C/RotateDefs.h"
+#include "../../../C/CpuArch.h"
+#include "../../../C/RotateDefs.h"
 
 #include "RarAes.h"
 #include "Sha1Cls.h"
@@ -90,7 +90,7 @@ STDMETHODIMP CDecoder::Init()
 // if (password_size_in_bytes + SaltSize > 64),
 // the original rar code updates password_with_salt buffer
 // with some generated data from SHA1 code.
-
+ 
 // #define RAR_SHA1_REDUCE
 
 #ifdef RAR_SHA1_REDUCE
@@ -105,15 +105,15 @@ static void UpdatePswDataSha1(Byte *data)
 {
   UInt32 W[kNumW];
   size_t i;
-
+  
   for (i = 0; i < SHA1_NUM_BLOCK_WORDS; i++)
     W[i] = GetBe32(data + i * 4);
-
+  
   for (i = 16; i < 80; i++)
   {
     WW(i) = rotlFixed(WW((i)-3) ^ WW((i)-8) ^ WW((i)-14) ^ WW((i)-16), 1);
   }
-
+  
   for (i = 0; i < SHA1_NUM_BLOCK_WORDS; i++)
   {
     SetUi32(data + i * 4, W[kNumW - SHA1_NUM_BLOCK_WORDS + i]);
@@ -127,24 +127,24 @@ void CDecoder::CalcKey()
     return;
 
   const unsigned kSaltSize = 8;
-
+  
   Byte buf[kPasswordLen_Bytes_MAX + kSaltSize];
-
+  
   if (_password.Size() != 0)
     memcpy(buf, _password, _password.Size());
-
+  
   size_t rawSize = _password.Size();
-
+  
   if (_thereIsSalt)
   {
     memcpy(buf + rawSize, _salt, kSaltSize);
     rawSize += kSaltSize;
   }
-
+  
   MY_ALIGN (16)
   NSha1::CContext sha;
   sha.Init();
-
+  
   MY_ALIGN (16)
   Byte digest[NSha1::kDigestSize];
   // rar reverts hash for sha.
@@ -182,12 +182,12 @@ void CDecoder::CalcKey()
       _iv[i / (kNumRounds / 16)] = (Byte)digest[4 * 4 + 3];
     }
   }
-
+  
   sha.Final(digest);
   for (i = 0; i < 4; i++)
     for (unsigned j = 0; j < 4; j++)
       _key[i * 4 + j] = (digest[i * 4 + 3 - j]);
-
+    
   _needCalc = false;
 }
 

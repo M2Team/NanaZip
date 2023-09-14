@@ -3,7 +3,7 @@
 #ifndef __BITM_ENCODER_H
 #define __BITM_ENCODER_H
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
+#include "../IStream.h"
 
 template<class TOutByte>
 class CBitmEncoder

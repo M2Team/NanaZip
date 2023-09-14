@@ -3,7 +3,7 @@
 #ifndef __COMPRESS_MTF8_H
 #define __COMPRESS_MTF8_H
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
 namespace NCompress {
 
@@ -91,7 +91,7 @@ struct CMtf8Decoder
     CMtfVar prev = (Buf[lim] >> pos) & 0xFF;
 
     UInt32 i = 0;
-
+    
 
     /*
     if ((lim & 1) != 0)
@@ -184,7 +184,7 @@ public:
           Buf[i] = Buf[offset + t];
       }
       while (g != 0);
-
+      
       for (i = kSmallSize - 1; i >= 0; i--)
         Buf[i] = SmallBuffer[i];
       Init(Size);
@@ -197,7 +197,7 @@ public:
     Byte res = Buf[offset + pos];
     for (pos; pos < 16 - 1; pos++)
       Buf[offset + pos] = Buf[offset + pos + 1];
-
+    
     SmallSize++;
     SmallBuffer[kSmallSize - SmallSize] = res;
 

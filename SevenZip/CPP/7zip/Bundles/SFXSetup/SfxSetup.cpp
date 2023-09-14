@@ -2,28 +2,28 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
+#include "../../../Common/MyInitGuid.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/CommandLineParser.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/TextConfig.h"
+#include "../../../Common/CommandLineParser.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/TextConfig.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/NtCheck.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileFind.h"
+#include "../../../Windows/FileIO.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/NtCheck.h"
+#include "../../../Windows/ResourceString.h"
 
 #include "../../UI/Explorer/MyMessages.h"
 
 #include "ExtractEngine.h"
 
-#include "../../../../../ThirdParty/LZMA/C/DllSecur.h"
+#include "../../../../C/DllSecur.h"
 #include "Mitigations.h"
 
 #include "resource.h"

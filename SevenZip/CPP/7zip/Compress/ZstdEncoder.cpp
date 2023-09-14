@@ -1,6 +1,6 @@
 ﻿// (C) 2016 - 2020 Tino Reichardt
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 #include "ZstdEncoder.h"
 #include "ZstdDecoder.h"
 

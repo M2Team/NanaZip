@@ -2,16 +2,16 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/System.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/System.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/MethodProps.h"
+#include "../../Common/MethodProps.h"
 
 #include "../FileManager/BrowseDialog.h"
 #include "../FileManager/FormatUtils.h"
@@ -1165,7 +1165,7 @@ void CCompressDialog::OnOK()
         wchar_t s[32];
         ConvertUInt64ToString(volumeSize, s);
         if (::MessageBoxW(*this, MyFormatNew(IDS_SPLIT_CONFIRM, s),
-            L"NanaZip", MB_YESNOCANCEL | MB_ICONQUESTION) != IDYES)
+            L"7-Zip", MB_YESNOCANCEL | MB_ICONQUESTION) != IDYES)
           return;
       }
     }

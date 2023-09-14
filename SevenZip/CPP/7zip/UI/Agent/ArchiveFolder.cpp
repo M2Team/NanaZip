@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../Common/ComTry.h"
 
 #include "../Common/ArchiveExtractCallback.h"
 

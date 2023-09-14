@@ -1,6 +1,6 @@
 ﻿// NtfsHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
 // #define SHOW_DEBUG_INFO
 // #define SHOW_DEBUG_INFO2
@@ -9,25 +9,25 @@
 #include <stdio.h>
 #endif
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/IntToString.h"
+#include "../../Common/MyBuffer.h"
+#include "../../Common/MyCom.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../Windows/PropVariant.h"
+#include "../../Windows/TimeUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/MethodProps.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/MethodProps.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamObjects.h"
+#include "../Common/StreamUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../Compress/CopyCoder.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/DummyOutStream.h"
+#include "Common/DummyOutStream.h"
 
 #ifdef SHOW_DEBUG_INFO
 #define PRF(x) x

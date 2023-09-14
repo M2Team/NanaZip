@@ -1,6 +1,6 @@
 ﻿// OutStreamWithSha1.cpp
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/StdAfx.h"
+#include "StdAfx.h"
 
 #include "OutStreamWithSha1.h"
 

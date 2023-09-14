@@ -3,15 +3,15 @@
 #ifndef __PROGRESS_DIALOG_2_H
 #define __PROGRESS_DIALOG_2_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/Synchronization.h"
+#include "../../../Windows/Thread.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ListView.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ProgressBar.h"
+#include "../../../Windows/Control/Dialog.h"
+#include "../../../Windows/Control/ListView.h"
+#include "../../../Windows/Control/ProgressBar.h"
 
 #include "MyWindowsNew.h"
 
@@ -42,7 +42,7 @@ public:
   UInt64 _curFiles;
   UInt64 _inSize;
   UInt64 _outSize;
-
+  
   UString _titleFileName;
   UString _status;
   UString _filePath;
@@ -65,20 +65,20 @@ public:
     NWindows::NSynchronization::CCriticalSectionLock lock(_cs);
     _stopped = val;
   }
-
+  
   bool Get_Paused();
   void Set_Paused(bool val)
   {
     NWindows::NSynchronization::CCriticalSectionLock lock(_cs);
     _paused = val;
   }
-
+  
   void Set_BytesProgressMode(bool bytesProgressMode)
   {
     NWindows::NSynchronization::CCriticalSectionLock lock(_cs);
     _bytesProgressMode = bytesProgressMode;
   }
-
+  
   HRESULT CheckStop();
   HRESULT ScanProgress(UInt64 numFiles, UInt64 totalSize, const FString &fileName, bool isDir = false);
 
@@ -143,14 +143,14 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
       return res;
     }
   };
-
+  
   CU64ToI32Converter _progressConv;
   UInt64 _progressBar_Pos;
   UInt64 _progressBar_Range;
-
+  
   NWindows::NControl::CProgressBar m_ProgressBar;
   NWindows::NControl::CListView _messageList;
-
+  
   int _numMessages;
   UStringVector _messageStrings;
 
@@ -191,7 +191,7 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
 
   bool _waitCloseByCancelButton;
   bool _cancelWasPressed;
-
+  
   bool _inCancelMessageBox;
   bool _externalCloseMessageWasReceived;
 

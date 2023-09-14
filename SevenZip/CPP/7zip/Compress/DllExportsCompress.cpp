@@ -1,12 +1,12 @@
 ﻿// DllExportsCompress.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
+#include "../../Common/MyInitGuid.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../ICoder.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../Common/RegisterCodec.h"
 
 static const unsigned kNumCodecsMax = 48;
 unsigned g_NumCodecs = 0;

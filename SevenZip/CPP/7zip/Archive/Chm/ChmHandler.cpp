@@ -2,22 +2,22 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/ComTry.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/UTFConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../../Windows/PropVariant.h"
+#include "../../../Windows/TimeUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
+#include "../../Common/LimitedStreams.h"
+#include "../../Common/ProgressUtils.h"
+#include "../../Common/StreamUtils.h"
+#include "../../Common/RegisterArc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../../Compress/CopyCoder.h"
 #include "../../Compress/LzxDecoder.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
+#include "../Common/ItemNameUtils.h"
 
 #include "ChmHandler.h"
 
@@ -44,7 +44,7 @@ static const Byte kProps[] =
   kpidSize,
   kpidMethod,
   kpidBlock
-
+  
   #ifdef _CHM_DETAILS
   ,
   L"Section", kpidSection,
@@ -101,7 +101,7 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
 {
   COM_TRY_BEGIN
   NCOM::CPropVariant prop;
-
+  
   if (m_Database.NewFormat)
   {
     switch (propID)
@@ -113,15 +113,15 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     prop.Detach(value);
     return S_OK;
   }
-
+  
   unsigned entryIndex;
   if (m_Database.LowLevel)
     entryIndex = index;
   else
     entryIndex = m_Database.Indices[index];
-
+  
   const CItem &item = m_Database.Items[entryIndex];
-
+  
   switch (propID)
   {
     case kpidPath:
@@ -159,15 +159,15 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       else if (item.Section != 0 && item.Section < m_Database.Sections.Size())
         prop = m_Database.GetFolder(index);
       break;
-
+    
     #ifdef _CHM_DETAILS
-
+    
     case kpidSection:  prop = (UInt32)item.Section; break;
     case kpidOffset:  prop = (UInt32)item.Offset; break;
 
     #endif
   }
-
+  
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
@@ -213,7 +213,7 @@ STDMETHODIMP CHandler::Open(IInStream *inStream,
     if (archive.HeadersError) m_ErrorFlags |= kpv_ErrorFlags_HeadersError;
     if (archive.UnexpectedEnd)  m_ErrorFlags |= kpv_ErrorFlags_UnexpectedEnd;
     if (archive.UnsupportedFeature)  m_ErrorFlags |= kpv_ErrorFlags_UnsupportedFeature;
-
+    
     RINOK(res);
     /*
     if (m_Database.LowLevel)
@@ -324,7 +324,7 @@ HRESULT CChmFolderOutStream::Write2(const void *data, UInt32 size, UInt32 *proce
   UInt32 realProcessed = 0;
   if (processedSize)
    *processedSize = 0;
-
+  
   while (size != 0)
   {
     if (m_FileIsOpen)
@@ -380,7 +380,7 @@ HRESULT CChmFolderOutStream::Write2(const void *data, UInt32 size, UInt32 *proce
       UInt64 fileOffset = m_Database->GetFileOffset(fullIndex);
       if (fileOffset < m_PosInSection)
         return E_FAIL;
-
+      
       if (fileOffset > m_PosInSection)
       {
         UInt32 numBytesToWrite = (UInt32)MyMin(fileOffset - m_PosInSection, UInt64(size));
@@ -392,7 +392,7 @@ HRESULT CChmFolderOutStream::Write2(const void *data, UInt32 size, UInt32 *proce
         m_PosInSection += numBytesToWrite;
         m_PosInFolder += numBytesToWrite;
       }
-
+      
       if (fileOffset == m_PosInSection)
       {
         RINOK(OpenFile());
@@ -402,7 +402,7 @@ HRESULT CChmFolderOutStream::Write2(const void *data, UInt32 size, UInt32 *proce
       }
     }
   }
-
+  
   return WriteEmptyFiles();
 }
 
@@ -464,15 +464,15 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   {
     UInt64 currentItemSize = 0;
     UInt64 totalSize = 0;
-
+    
     if (m_Database.NewFormat)
       totalSize = m_Database.NewFormatString.Len();
     else
       for (i = 0; i < numItems; i++)
         totalSize += m_Database.Items[allFilesMode ? i : indices[i]].Size;
-
+    
     extractCallback->SetTotal(totalSize);
-
+    
     for (i = 0; i < numItems; i++, currentTotalSize += currentItemSize)
     {
       currentItemSize = 0;
@@ -501,11 +501,11 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK));
         continue;
       }
-
+      
       const CItem &item = m_Database.Items[index];
-
+      
       currentItemSize = item.Size;
-
+      
       if (!testMode && !realOutStream)
         continue;
       RINOK(extractCallback->PrepareOperation(askMode));
@@ -520,10 +520,10 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK));
         continue;
       }
-
+      
       RINOK(m_Stream->Seek(m_Database.ContentOffset + item.Offset, STREAM_SEEK_SET, NULL));
       streamSpec->Init(item.Size);
-
+      
       RINOK(copyCoder->Code(inStream, realOutStream, NULL, NULL, progress));
       realOutStream.Release();
       RINOK(extractCallback->SetOperationResult((copyCoderSpec->TotalSize == item.Size) ?
@@ -532,9 +532,9 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     }
     return S_OK;
   }
-
+  
   UInt64 lastFolderIndex = ((UInt64)0 - 1);
-
+  
   for (i = 0; i < numItems; i++)
   {
     UInt32 index = allFilesMode ? i : indices[i];
@@ -576,7 +576,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   CRecordVector<bool> extractStatuses;
 
   CByteBuffer packBuf;
-
+  
   for (i = 0;;)
   {
     RINOK(extractCallback->SetCompleted(&currentTotalSize));
@@ -591,7 +591,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     Int32 askMode= testMode ?
         NExtract::NAskMode::kTest :
         NExtract::NAskMode::kExtract;
-
+    
     if (item.IsDir())
     {
       CMyComPtr<ISequentialOutStream> realOutStream;
@@ -626,7 +626,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       currentTotalSize += item.Size;
       continue;
     }
-
+  
     if (sectionIndex >= m_Database.Sections.Size())
     {
       // we must report error here;
@@ -688,12 +688,12 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       lastFolderIndex = m_Database.GetLastFolder(index);
       UInt64 folderSize = lzxInfo.GetFolderSize();
       UInt64 unPackSize = folderSize;
-
+      
       if (extractStatuses.IsEmpty())
         chmFolderOutStream->m_StartIndex = index + 1;
       else
         chmFolderOutStream->m_StartIndex = index;
-
+      
       if (limitFolderIndex == folderIndex)
       {
         for (; i < numItems; i++)
@@ -715,7 +715,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           lastFolderIndex = m_Database.GetLastFolder(index);
         }
       }
-
+      
       unPackSize = MyMin(finishPos - startPos, unPackSize);
 
       chmFolderOutStream->m_FolderSize = folderSize;
@@ -724,13 +724,13 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       chmFolderOutStream->m_ExtractStatuses = &extractStatuses;
       chmFolderOutStream->m_NumFiles = extractStatuses.Size();
       chmFolderOutStream->m_CurrentIndex = 0;
-
+      
       try
       {
         UInt64 startBlock = lzxInfo.GetBlockIndexFromFolderIndex(folderIndex);
         const CResetTable &rt = lzxInfo.ResetTable;
         UInt32 numBlocks = (UInt32)rt.GetNumBlocks(unPackSize);
-
+        
         for (UInt32 b = 0; b < numBlocks; b++)
         {
           UInt64 completedSize = currentTotalSize + chmFolderOutStream->m_PosInSection - startPos;
@@ -741,22 +741,22 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           UInt64 offset = rt.ResetOffsets[(unsigned)bCur];
           UInt64 compressedSize;
           rt.GetCompressedSizeOfBlock(bCur, compressedSize);
-
+          
           // chm writes full blocks. So we don't need to use reduced size for last block
 
           RINOK(m_Stream->Seek(compressedPos + offset, STREAM_SEEK_SET, NULL));
           streamSpec->SetStream(m_Stream);
           streamSpec->Init(compressedSize);
-
+          
           lzxDecoderSpec->SetKeepHistory(b > 0);
-
+      
           size_t compressedSizeT = (size_t)compressedSize;
           if (compressedSizeT != compressedSize)
             throw 2;
           packBuf.AllocAtLeast(compressedSizeT);
 
           HRESULT res = ReadStream_FALSE(inStream, packBuf, compressedSizeT);
-
+          
           if (res == S_OK)
           {
             lzxDecoderSpec->KeepHistoryForNext = true;
@@ -766,7 +766,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
                   lzxDecoderSpec->GetUnpackData(),
                   lzxDecoderSpec->GetUnpackSize());
           }
-
+          
           if (res != S_OK)
           {
             if (res != S_FALSE)
@@ -779,7 +779,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       {
         RINOK(chmFolderOutStream->FlushCorrupted(unPackSize));
       }
-
+      
       currentTotalSize += folderSize;
       if (folderIndex == lastFolderIndex)
         break;

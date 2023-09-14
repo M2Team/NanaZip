@@ -5,14 +5,14 @@
 #ifndef __COMPRESS_RAR5_DECODER_H
 #define __COMPRESS_RAR5_DECODER_H
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer2.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyVector.h"
+#include "../../Common/MyBuffer2.h"
+#include "../../Common/MyCom.h"
+#include "../../Common/MyException.h"
+#include "../../Common/MyVector.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../ICoder.h"
 
 #include "HuffmanDecoder.h"
 
@@ -133,7 +133,7 @@ public:
     v >>= (24 - numBits - _bitPos);
     return v & ((1 << numBits) - 1);
   }
-
+  
   void MovePos(unsigned numBits)
   {
     _bitPos += numBits;
@@ -214,7 +214,7 @@ class CDecoder:
   bool _isLastBlock;
   bool _unpackSize_Defined;
   // bool _packSize_Defined;
-
+  
   bool _unsupportedFilter;
   bool _lzError;
   bool _writeError;
@@ -225,7 +225,7 @@ class CDecoder:
   bool _wasInit;
 
   Byte _dictSizeLog;
-
+  
   // CBitDecoder _bitStream;
   Byte *_window;
   size_t _winPos;
@@ -247,7 +247,7 @@ class CDecoder:
 
   UInt32 _reps[kNumReps];
   UInt32 _lastLen;
-
+  
   UInt64 _filterEnd;
   CMidBuffer _filterSrc;
   CMidBuffer _filterDst;
@@ -289,7 +289,7 @@ class CDecoder:
   HRESULT ReadTables(CBitDecoder &_bitStream);
   HRESULT DecodeLZ();
   HRESULT CodeReal();
-
+  
 public:
   CDecoder();
   ~CDecoder();

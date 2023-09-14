@@ -2,17 +2,17 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
 #include <ShlObj.h>
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/PropVariant.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
+#include "../../PropID.h"
 
 #if defined(_WIN32) && !defined(UNDER_CE)
 #define USE_WIN_PATHS
@@ -207,7 +207,7 @@ STDMETHODIMP CRootFolder::BindToFolder(const wchar_t *name, IFolderFolder **resu
   *resultFolder = 0;
   UString name2 = name;
   name2.Trim();
-
+  
   if (name2.IsEmpty())
   {
     CRootFolder *rootFolderSpec = new CRootFolder;
@@ -216,11 +216,11 @@ STDMETHODIMP CRootFolder::BindToFolder(const wchar_t *name, IFolderFolder **resu
     *resultFolder = rootFolder.Detach();
     return S_OK;
   }
-
+  
   for (unsigned i = 0; i < kNumRootFolderItems; i++)
     if (AreEqualNames(name2, _names[i]))
       return BindToFolder((UInt32)i, resultFolder);
-
+  
   #ifdef USE_WIN_PATHS
   if (AreEqualNames(name2, L"My Documents") ||
       AreEqualNames(name2, L"Documents"))
@@ -229,11 +229,11 @@ STDMETHODIMP CRootFolder::BindToFolder(const wchar_t *name, IFolderFolder **resu
   if (name2 == WSTRING_PATH_SEPARATOR)
     return BindToFolder((UInt32)ROOT_INDEX_COMPUTER, resultFolder);
   #endif
-
+  
   if (AreEqualNames(name2, L"My Computer") ||
       AreEqualNames(name2, L"Computer"))
     return BindToFolder((UInt32)ROOT_INDEX_COMPUTER, resultFolder);
-
+  
   if (name2 == WSTRING_PATH_SEPARATOR)
   {
     CMyComPtr<IFolderFolder> subFolder = this;
@@ -245,7 +245,7 @@ STDMETHODIMP CRootFolder::BindToFolder(const wchar_t *name, IFolderFolder **resu
     return E_INVALIDARG;
 
   CMyComPtr<IFolderFolder> subFolder;
-
+  
   #ifdef USE_WIN_PATHS
   if (name2.IsPrefixedBy_Ascii_NoCase(kVolPrefix))
   {
@@ -286,7 +286,7 @@ STDMETHODIMP CRootFolder::BindToFolder(const wchar_t *name, IFolderFolder **resu
         return E_INVALIDARG;
     }
   }
-
+  
   *resultFolder = subFolder.Detach();
   return S_OK;
 }

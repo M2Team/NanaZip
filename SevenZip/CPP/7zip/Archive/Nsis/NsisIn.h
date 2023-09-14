@@ -3,19 +3,19 @@
 #ifndef __ARCHIVE_NSIS_IN_H
 #define __ARCHIVE_NSIS_IN_H
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/DynLimBuf.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/DynLimBuf.h"
+#include "../../../Common/MyBuffer.h"
+#include "../../../Common/MyCom.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/UTFConvert.h"
 
 #include "NsisDecode.h"
 
 /* If NSIS_SCRIPT is defined, it will decompile NSIS script to [NSIS].nsi file.
    The code is much larger in that case. */
-
+ 
 // #define NSIS_SCRIPT
 
 namespace NArchive {
@@ -75,7 +75,7 @@ struct CItem
   bool Attrib_Defined;
   bool IsUninstaller;
   // bool UseFilter;
-
+  
   UInt32 Attrib;
   UInt32 Pos;
   UInt32 Size;
@@ -88,7 +88,7 @@ struct CItem
   FILETIME MTime;
   AString NameA;
   UString NameU;
-
+  
   CItem():
       IsCompressed(true),
       Size_Defined(false),
@@ -179,12 +179,12 @@ private:
   bool IsNsis3_OrHigher() const { return NsisType == k_NsisType_Nsis3; }
 
   UInt64 _fileSize;
-
+  
   bool _headerIsCompressed;
   UInt32 _nonSolidStartOffset;
 
   #ifdef NSIS_SCRIPT
-
+  
   CByteBuffer strUsed;
 
   CBlockHeader bhPages;
@@ -226,7 +226,7 @@ public:
   bool IsSolid;
   bool UseFilter;
   bool FilterFlag;
-
+  
   bool IsInstaller;
   AString Name;
   AString BrandingText;
@@ -277,7 +277,7 @@ private:
   void Add_GotoVars2(const UInt32 *params);
 
 
-
+ 
   bool PrintSectionBegin(const CSection &sect, unsigned index);
   void PrintSectionEnd();
 
@@ -295,7 +295,7 @@ private:
   void AddOptionalParams(const UInt32 *params, unsigned num);
   void AddRegRoot(UInt32 value);
 
-
+ 
   void ClearLangComment();
   void Separator();
   void Space();
@@ -383,7 +383,7 @@ public:
     const CItem &item = Items[index];
     return 4 + (UInt64)FirstHeader.HeaderSize + item.Pos;
   }
-
+  
   UInt64 GetPosOfNonSolidItem(unsigned index) const
   {
     const CItem &item = Items[index];
@@ -425,7 +425,7 @@ public:
       if (item.NameA.IsEmpty())
         s += "file";
     }
-
+    
     const char * const kRemoveStr = "$INSTDIR\\";
     if (s.IsPrefixedBy_Ascii_NoCase(kRemoveStr))
     {
@@ -448,5 +448,5 @@ public:
 };
 
 }}
-
+  
 #endif

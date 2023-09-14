@@ -3,12 +3,12 @@
 // a program that creates RAR archives
 
 /* This code uses Carryless rangecoder (1999): Dmitry Subbotin : Public domain */
+ 
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "../../../C/Alloc.h"
 
-#include "../../../../ThirdParty/LZMA/C/Alloc.h"
-
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/StreamUtils.h"
 
 #include "Rar3Decoder.h"
 
@@ -65,7 +65,7 @@ CDecoder::CDecoder():
   _solidAllowed(false)
 {
   Ppmd7_Construct(&_ppmd);
-
+  
   UInt32 start = 0;
   for (UInt32 i = 0; i < kDistTableSize; i++)
   {
@@ -192,7 +192,7 @@ HRESULT CDecoder::WriteBuf()
       }
     }
   }
-
+      
   _wrPtr = _winPos;
   return WriteArea(writtenBorder, _winPos);
 }
@@ -218,7 +218,7 @@ bool CDecoder::AddVmCode(UInt32 firstByte, UInt32 codeSize)
   inp.Init(_vmData, codeSize);
 
   UInt32 filterIndex;
-
+  
   if (firstByte & 0x80)
   {
     filterIndex = inp.ReadEncodedUInt32();
@@ -229,7 +229,7 @@ bool CDecoder::AddVmCode(UInt32 firstByte, UInt32 codeSize)
   }
   else
     filterIndex = _lastFilter;
-
+  
   if (filterIndex > (UInt32)_filters.Size())
     return false;
   _lastFilter = filterIndex;
@@ -254,7 +254,7 @@ bool CDecoder::AddVmCode(UInt32 firstByte, UInt32 codeSize)
   {
     unsigned num = _tempFilters.Size();
     CTempFilter **tempFilters = &_tempFilters.Front();
-
+    
     unsigned w = 0;
     for (unsigned i = 0; i < num; i++)
     {
@@ -266,13 +266,13 @@ bool CDecoder::AddVmCode(UInt32 firstByte, UInt32 codeSize)
     _tempFilters.DeleteFrom(w);
     _numEmptyTempFilters = 0;
   }
-
+  
   if (_tempFilters.Size() > MAX_UNPACK_FILTERS)
     return false;
   CTempFilter *tempFilter = new CTempFilter;
   _tempFilters.Add(tempFilter);
   tempFilter->FilterIndex = filterIndex;
-
+ 
   UInt32 blockStart = inp.ReadEncodedUInt32();
   if (firstByte & 0x40)
     blockStart += 258;
@@ -327,7 +327,7 @@ bool CDecoder::AddVmCode(UInt32 firstByte, UInt32 codeSize)
     for (UInt32 i = 0; i < dataSize; i++)
       dest[i] = (Byte)inp.ReadBits(8);
   }
-
+  
   return isOK;
 }
 
@@ -567,11 +567,11 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
     }
     levelLevels[i] = (Byte)len;
   }
-
+  
   RIF(m_LevelDecoder.Build(levelLevels));
-
+  
   i = 0;
-
+  
   do
   {
     UInt32 sym = m_LevelDecoder.Decode(&m_InBitStream.BitDecoder);
@@ -674,7 +674,7 @@ HRESULT CDecoder::DecodeLZ(bool &keepDecompressing)
         return S_OK;
       }
     }
-
+    
     if (InputEofError_Fast())
       return S_FALSE;
 
@@ -808,7 +808,7 @@ HRESULT CDecoder::CodeReal(ICompressProgressInfo *progress)
 {
   _writtenFileSize = 0;
   _unsupportedFilter = false;
-
+  
   if (!_isSolid)
   {
     _lzSize = 0;
@@ -897,7 +897,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
         return E_OUTOFMEMORY;
       _vmCode = _vmData + kVmDataSizeMax;
     }
-
+    
     if (!_window)
     {
       _window = (Byte *)::MidAlloc(kWindowSize);
@@ -909,11 +909,11 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     if (!_vm.Create())
       return E_OUTOFMEMORY;
 
-
+    
     m_InBitStream.BitDecoder.SetStream(inStream);
     m_InBitStream.BitDecoder.Init();
     _outStream = outStream;
-
+   
     // CCoderReleaser coderReleaser(this);
     _unpackSize = outSize ? *outSize : (UInt64)(Int64)-1;
     return CodeReal(progress);

@@ -3,10 +3,10 @@
 #ifndef __CRYPTO_ZIP_CRYPTO_H
 #define __CRYPTO_ZIP_CRYPTO_H
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyCom.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
+#include "../ICoder.h"
+#include "../IPassword.h"
 
 namespace NCrypto {
 namespace NZip {
@@ -34,7 +34,7 @@ protected:
   UInt32 Key0;
   UInt32 Key1;
   UInt32 Key2;
-
+  
   UInt32 KeyMem0;
   UInt32 KeyMem1;
   UInt32 KeyMem2;
@@ -50,7 +50,7 @@ public:
   MY_UNKNOWN_IMP1(ICryptoSetPassword)
   STDMETHOD(Init)();
   STDMETHOD(CryptoSetPassword)(const Byte *data, UInt32 size);
-
+  
   virtual ~CCipher()
   {
     Key0 = KeyMem0 =

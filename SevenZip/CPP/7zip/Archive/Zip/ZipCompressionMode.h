@@ -3,13 +3,13 @@
 #ifndef __ZIP_COMPRESSION_MODE_H
 #define __ZIP_COMPRESSION_MODE_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
 #ifndef _7ZIP_ST
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/System.h"
+#include "../../../Windows/System.h"
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/HandlerOut.h"
+#include "../Common/HandlerOut.h"
 
 namespace NArchive {
 namespace NZip {
@@ -25,7 +25,7 @@ struct CBaseProps: public CMultiMethodProps
   void Init()
   {
     CMultiMethodProps::Init();
-
+    
     IsAesMode = false;
     AesKeyMode = 3;
   }
@@ -39,7 +39,7 @@ struct CCompressionMethodMode: public CBaseProps
 
   UInt64 _dataSizeReduce;
   bool _dataSizeReduceDefined;
-
+  
   bool IsRealAesMode() const { return PasswordIsDefined && IsAesMode; }
 
   CCompressionMethodMode(): PasswordIsDefined(false)

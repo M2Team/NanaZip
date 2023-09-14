@@ -3,7 +3,7 @@
 #ifndef __BITM_DECODER_H
 #define __BITM_DECODER_H
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/IStream.h"
+#include "../IStream.h"
 
 namespace NBitm {
 
@@ -33,7 +33,7 @@ public:
     _value = 0;
     Normalize();
   }
-
+  
   UInt64 GetStreamSize() const { return _stream.GetStreamSize(); }
   UInt64 GetProcessedSize() const { return _stream.GetProcessedSize() - ((kNumBigValueBits - _bitPos) >> 3); }
 
@@ -46,7 +46,7 @@ public:
   {
     return (_stream.NumExtraBytes > 4);
   }
-
+  
   MY_FORCE_INLINE
   void Normalize()
   {

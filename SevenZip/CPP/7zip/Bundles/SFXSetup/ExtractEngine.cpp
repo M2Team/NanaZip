@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/Thread.h"
 
 #include "../../UI/Common/OpenArchive.h"
 
@@ -51,7 +51,7 @@ struct CThreadExtracting
     options.types = &incl;
     options.excludedFormats = &excl;
     options.filePath = fs2us(FileName);
-
+    
     Result = ArchiveLink.Open2(options, ExtractCallbackSpec);
     if (Result != S_OK)
     {
@@ -61,7 +61,7 @@ struct CThreadExtracting
 
     FString dirPath = DestFolder;
     NName::NormalizeDirPathPrefix(dirPath);
-
+    
     if (!CreateComplexDir(dirPath))
     {
       ErrorMessage = MyFormatNew(IDS_CANNOT_CREATE_FOLDER,
@@ -89,7 +89,7 @@ struct CThreadExtracting
     }
     catch(...) { Result = E_FAIL; }
   }
-
+  
   static THREAD_FUNC_DECL MyThreadFunction(void *param)
   {
     ((CThreadExtracting *)param)->Process();
@@ -109,7 +109,7 @@ HRESULT ExtractArchive(CCodecs *codecs, const FString &fileName, const FString &
 
   t.ExtractCallbackSpec = new CExtractCallbackImp;
   t.ExtractCallback = t.ExtractCallbackSpec;
-
+  
   #ifndef _NO_PROGRESS
 
   if (showProgress)
@@ -117,7 +117,7 @@ HRESULT ExtractArchive(CCodecs *codecs, const FString &fileName, const FString &
     t.ExtractCallbackSpec->ProgressDialog.IconID = IDI_ICON;
     NWindows::CThread thread;
     RINOK(thread.Create(CThreadExtracting::MyThreadFunction, &t));
-
+    
     UString title;
     LangString(IDS_PROGRESS_EXTRACTING, title);
     t.ExtractCallbackSpec->StartProgressDialog(title, thread);

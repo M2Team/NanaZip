@@ -6,7 +6,7 @@
 
 #include <stddef.h>
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../Common/MyTypes.h"
 
 namespace NCrypto {
 namespace NSha1 {

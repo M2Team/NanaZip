@@ -1,8 +1,8 @@
 ﻿// ZlibDecoder.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/StreamUtils.h"
 
 #include "ZlibDecoder.h"
 
@@ -71,7 +71,7 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
 
   AdlerSpec->SetStream(outStream);
   AdlerSpec->Init();
-
+  
   UInt64 inSize2 = 0;
   if (inSize)
     inSize2 = *inSize - 2;

@@ -2,21 +2,21 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../Common/ComTry.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/StringToInt.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
+#include "../../../Windows/PropVariant.h"
+#include "../../../Windows/TimeUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
+#include "../../IPassword.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/OutBuffer.h"
+#include "../../Common/OutBuffer.h"
 
 #include "../../Crypto/WzAes.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ParseProperties.h"
+#include "../Common/ItemNameUtils.h"
+#include "../Common/ParseProperties.h"
 
 #include "ZipHandler.h"
 #include "ZipUpdate.h"

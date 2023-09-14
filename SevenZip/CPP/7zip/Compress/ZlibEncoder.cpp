@@ -1,8 +1,8 @@
 ﻿// ZlibEncoder.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/StreamUtils.h"
 
 #include "ZlibEncoder.h"
 

@@ -3,15 +3,15 @@
 #ifndef __COMPRESS_Z_DECODER_H
 #define __COMPRESS_Z_DECODER_H
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyCom.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../ICoder.h"
 
 namespace NCompress {
 namespace NZ {
 
 // Z decoder decodes Z data stream, including 3 bytes of header.
-
+  
 class CDecoder:
   public ICompressCoder,
   public CMyUnknownImp
@@ -39,7 +39,7 @@ public:
 /*
   There is no end_of_payload_marker in Z stream.
   Z decoder stops decoding, if it reaches end of input stream.
-
+   
   CheckStream function:
     (size) must be at least 3 bytes (size of Z header).
     if (size) is larger than size of real Z stream in (data), CheckStream can return false.

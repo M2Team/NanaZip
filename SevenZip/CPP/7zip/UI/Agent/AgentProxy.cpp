@@ -9,16 +9,16 @@
 #include <ctype.h>
 #endif
 
-#include "../../../../../ThirdParty/LZMA/C/Sort.h"
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/Sort.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/UTFConvert.h"
+#include "../../../Common/Wildcard.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
+#include "../../../Windows/PropVariant.h"
+#include "../../../Windows/PropVariantConv.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/ItemNameUtils.h"
+#include "../../Archive/Common/ItemNameUtils.h"
 
 #include "AgentProxy.h"
 

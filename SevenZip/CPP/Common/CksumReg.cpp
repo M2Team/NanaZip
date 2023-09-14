@@ -1,12 +1,12 @@
 ﻿// CksumReg.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../C/CpuArch.h"
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../Common/MyCom.h"
 
-#include "../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../7zip/Common/RegisterCodec.h"
 
 #include "../7zip/Compress/BZip2Crc.h"
 
@@ -17,7 +17,7 @@ class CCksumHasher:
   CBZip2Crc _crc;
   UInt64 _size;
   Byte mtDummy[1 << 7];
-
+  
 public:
   CCksumHasher()
   {

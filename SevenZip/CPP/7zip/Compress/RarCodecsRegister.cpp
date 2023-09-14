@@ -1,8 +1,8 @@
 ﻿// RarCodecsRegister.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../Common/RegisterCodec.h"
 
 #include "Rar1Decoder.h"
 #include "Rar2Decoder.h"

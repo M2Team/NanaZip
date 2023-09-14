@@ -3,11 +3,11 @@
 #ifndef __ARCHIVE_ZIP_ITEM_H
 #define __ARCHIVE_ZIP_ITEM_H
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/MyBuffer.h"
+#include "../../../Common/MyString.h"
+#include "../../../Common/UTFConvert.h"
 
 #include "ZipHeader.h"
 

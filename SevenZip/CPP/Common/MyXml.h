@@ -3,7 +3,7 @@
 #ifndef __MY_XML_H
 #define __MY_XML_H
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "MyString.h"
 
 struct CXmlProp
 {

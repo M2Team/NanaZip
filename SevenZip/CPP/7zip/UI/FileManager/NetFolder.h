@@ -3,7 +3,7 @@
 #ifndef __NET_FOLDER_H
 #define __NET_FOLDER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
 #include "../../../Windows/Net.h"
 

@@ -5,9 +5,9 @@
 #ifndef __COMPRESS_RAR3_VM_H
 #define __COMPRESS_RAR3_VM_H
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyVector.h"
+#include "../../Common/MyVector.h"
 
 #define RARVM_STANDARD_FILTERS
 // #define RARVM_VM_ENABLE
@@ -109,12 +109,12 @@ class CProgram
 public:
   CRecordVector<CCommand> Commands;
   #endif
-
+  
 public:
   #ifdef RARVM_STANDARD_FILTERS
   int StandardFilterIndex;
   #endif
-
+  
   bool IsSupported;
   CRecordVector<Byte> StaticData;
 
@@ -171,11 +171,11 @@ private:
   void SetOperand(bool byteMode, const COperand *op, UInt32 val);
   bool ExecuteCode(const CProgram *prg);
   #endif
-
+  
   #ifdef RARVM_STANDARD_FILTERS
   bool ExecuteStandardFilter(unsigned filterIndex);
   #endif
-
+  
   Byte *Mem;
   UInt32 R[kNumRegs + 1]; // R[kNumRegs] = 0 always (speed optimization)
   UInt32 Flags;

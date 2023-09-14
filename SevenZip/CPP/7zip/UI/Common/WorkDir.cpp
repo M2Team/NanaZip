@@ -2,11 +2,11 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/Wildcard.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../Windows/FileFind.h"
+#include "../../../Windows/FileName.h"
 
 #include "WorkDir.h"
 
@@ -17,7 +17,7 @@ using namespace NDir;
 FString GetWorkDir(const NWorkDir::CInfo &workDirInfo, const FString &path, FString &fileName)
 {
   NWorkDir::NMode::EEnum mode = workDirInfo.Mode;
-
+  
   #if defined(_WIN32) && !defined(UNDER_CE)
   if (workDirInfo.ForRemovableOnly)
   {
@@ -38,10 +38,10 @@ FString GetWorkDir(const NWorkDir::CInfo &workDirInfo, const FString &path, FStr
     */
   }
   #endif
-
+  
   int pos = path.ReverseFind_PathSepar() + 1;
   fileName = path.Ptr((unsigned)pos);
-
+  
   switch (mode)
   {
     case NWorkDir::NMode::kCurrent:

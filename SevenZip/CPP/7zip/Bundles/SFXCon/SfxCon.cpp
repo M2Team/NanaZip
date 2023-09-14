@@ -2,22 +2,22 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyInitGuid.h"
+#include "../../../Common/MyInitGuid.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/CommandLineParser.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
+#include "../../../Common/CommandLineParser.h"
+#include "../../../Common/MyException.h"
 
 #ifdef _WIN32
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
+#include "../../../Windows/DLL.h"
 #else
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/StringConvert.h"
 #endif
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
 
 #include "../../UI/Common/ExitCode.h"
 #include "../../UI/Common/Extract.h"
@@ -28,7 +28,7 @@
 
 #include <Mile.Project.Version.h>
 
-#include "../../../../../ThirdParty/LZMA/C/DllSecur.h"
+#include "../../../../C/DllSecur.h"
 
 using namespace NWindows;
 using namespace NFile;

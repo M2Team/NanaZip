@@ -4,7 +4,7 @@
 
 #include "Panel.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
+#include "../../PropID.h"
 #include "App.h"
 
 using namespace NWindows;

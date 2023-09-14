@@ -3,7 +3,7 @@
 #ifndef __EXTRACTING_FILE_PATH_H
 #define __EXTRACTING_FILE_PATH_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
 // #ifdef _WIN32
 void Correct_AltStream_Name(UString &s);

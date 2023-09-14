@@ -33,25 +33,25 @@ EXPORT_CODECS
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/MyCom.h"
+#include "../../../Common/StringToInt.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileIO.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/FileIO.h"
+#include "../../../Windows/PropVariant.h"
 
 #include "LoadCodecs.h"
 
 using namespace NWindows;
 
 #ifdef NEW_FOLDER_INTERFACE
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../Common/StringToInt.h"
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterCodec.h"
+#include "../../ICoder.h"
+#include "../../Common/RegisterArc.h"
+#include "../../Common/RegisterCodec.h"
 
 #ifdef EXTERNAL_CODECS
 
@@ -61,18 +61,18 @@ using namespace NWindows;
 
 #ifdef NEW_FOLDER_INTERFACE
 extern HINSTANCE g_hInstance;
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../../../Windows/ResourceString.h"
 static const UINT kIconTypesResId = 100;
 #endif
 
 #ifdef EXTERNAL_CODECS
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
+#include "../../../Windows/FileFind.h"
+#include "../../../Windows/DLL.h"
 
 #ifdef _WIN32
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Registry.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/Registry.h"
 #endif
 
 using namespace NFile;

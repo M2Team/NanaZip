@@ -2,23 +2,23 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../../C/CpuArch.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyException.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../Common/Defs.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/MyException.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/StringToInt.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/System.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/SystemInfo.h"
+#include "../../../Windows/Synchronization.h"
+#include "../../../Windows/System.h"
+#include "../../../Windows/Thread.h"
+#include "../../../Windows/SystemInfo.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Edit.h"
+#include "../../../Windows/Control/ComboBox.h"
+#include "../../../Windows/Control/Edit.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/MethodProps.h"
+#include "../../Common/MethodProps.h"
 
 #include "../FileManager/DialogSize.h"
 #ifdef LANG

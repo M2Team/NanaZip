@@ -7,7 +7,7 @@
 // #define _WIN32_WINNT 0x0500
 // #define WINVER _WIN32_WINNT
 
-#include "../../../../../ThirdParty/LZMA/CPP//Common/Common.h"
+#include "../../../Common/Common.h"
 
 #include <ShlObj.h>
 

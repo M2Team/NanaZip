@@ -3,9 +3,9 @@
 #ifndef __LZX_DECODER_H
 #define __LZX_DECODER_H
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyCom.h"
 
 #include "HuffmanDecoder.h"
 #include "Lzx.h"
@@ -42,7 +42,7 @@ public:
     unsigned numBits = _bitPos & 15;
     return (((_value >> (_bitPos - numBits)) & (((UInt32)1 << numBits) - 1)) == 0);
   }
-
+  
   void NormalizeSmall()
   {
     if (_bitPos <= 16)
@@ -105,7 +105,7 @@ public:
   {
     return (_value >> (_bitPos - numBits)) & (((UInt32)1 << numBits) - 1);
   }
-
+  
   void MovePos(unsigned numBits)
   {
     _bitPos -= numBits;
@@ -199,7 +199,7 @@ private:
   UInt32 _x86_processedSize;
 
   Byte *_unpackedData;
-
+  
   NHuffman::CDecoder<kNumHuffmanBits, kMainTableSize> _mainDecoder;
   NHuffman::CDecoder<kNumHuffmanBits, kNumLenSymbols> _lenDecoder;
   NHuffman::CDecoder7b<kAlignTableSize> _alignDecoder;
@@ -235,7 +235,7 @@ public:
   HRESULT SetParams_and_Alloc(unsigned numDictBits);
 
   HRESULT Code(const Byte *inData, size_t inSize, UInt32 outSize);
-
+  
   bool WasBlockFinished() const { return _unpackBlockSize == 0; }
   const Byte *GetUnpackData() const { return _unpackedData; }
   UInt32 GetUnpackSize() const { return _pos - _writePos; }

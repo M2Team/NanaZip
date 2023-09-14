@@ -2,12 +2,12 @@
 2021-07-13 : Igor Pavlov : Public domain
 This code is based on public domain code of Steve Reid from Wei Dai's Crypto++ library. */
 
-#include "../../ThirdParty/LZMA/C/Precomp.h"
+#include "Precomp.h"
 
 #include <string.h>
 
-#include "../../ThirdParty/LZMA/C/CpuArch.h"
-#include "../../ThirdParty/LZMA/C/RotateDefs.h"
+#include "CpuArch.h"
+#include "RotateDefs.h"
 #include "Sha1.h"
 
 #if defined(_MSC_VER) && (_MSC_VER < 1900)

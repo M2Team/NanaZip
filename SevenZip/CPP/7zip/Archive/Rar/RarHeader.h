@@ -3,14 +3,14 @@
 #ifndef __ARCHIVE_RAR_HEADER_H
 #define __ARCHIVE_RAR_HEADER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyTypes.h"
+#include "../../../Common/MyTypes.h"
 
 namespace NArchive {
 namespace NRar {
 namespace NHeader {
 
 const unsigned kMarkerSize = 7;
-
+  
 const unsigned kArchiveSolid = 0x1;
 
 namespace NBlockType
@@ -50,7 +50,7 @@ namespace NArchive
   const UInt16 kEndOfArc_Flags_VolNumber = 8;
 
   const unsigned kHeaderSizeMin = 7;
-
+  
   const unsigned kArchiveHeaderSize = 13;
 
   const unsigned kBlockHeadersAreEncrypted = 0x80;
@@ -63,12 +63,12 @@ namespace NFile
   const unsigned kEncrypted   = 1 << 2;
   const unsigned kComment     = 1 << 3;
   const unsigned kSolid       = 1 << 4;
-
+  
   const unsigned kDictBitStart     = 5;
   const unsigned kNumDictBits  = 3;
   const unsigned kDictMask         = (1 << kNumDictBits) - 1;
   const unsigned kDictDirectoryValue  = 0x7;
-
+  
   const unsigned kSize64Bits    = 1 << 8;
   const unsigned kUnicodeName   = 1 << 9;
   const unsigned kSalt          = 1 << 10;
@@ -78,7 +78,7 @@ namespace NFile
   // const unsigned kSkipIfUnknown = 1 << 14;
 
   const unsigned kLongBlock    = 1 << 15;
-
+  
   /*
   struct CBlock
   {
@@ -137,10 +137,10 @@ namespace NFile
     UInt16 GetRealCRC(const void *aName, UInt32 aNameSize) const;
   };
   */
-
+  
   const unsigned kLabelFileAttribute            = 0x08;
   const unsigned kWinFileDirectoryAttributeMask = 0x10;
-
+  
   enum CHostOS
   {
     kHostMSDOS = 0,

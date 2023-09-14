@@ -1,29 +1,29 @@
 ﻿// SwfHandler.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/CpuArch.h"
+#include "../../../C/CpuArch.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../Common/ComTry.h"
+#include "../../Common/IntToString.h"
+#include "../../Common/MyBuffer.h"
+#include "../../Common/MyString.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../Windows/PropVariant.h"
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/InBuffer.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/RegisterArc.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../Common/InBuffer.h"
+#include "../Common/LimitedStreams.h"
+#include "../Common/ProgressUtils.h"
+#include "../Common/RegisterArc.h"
+#include "../Common/StreamObjects.h"
+#include "../Common/StreamUtils.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/LzmaDecoder.h"
+#include "../Compress/CopyCoder.h"
+#include "../Compress/LzmaDecoder.h"
 #include "../Compress/ZlibDecoder.h"
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Archive/Common/DummyOutStream.h"
+#include "Common/DummyOutStream.h"
 
 // #define SWF_UPDATE
 
@@ -33,7 +33,7 @@
 #include "../Compress/ZlibEncoder.h"
 
 #include "Common/HandlerOut.h"
-
+ 
 #endif
 
 using namespace NWindows;
@@ -358,7 +358,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   lps->InSize = _item.HeaderSize;
   lps->OutSize = outStreamSpec->GetSize();
   RINOK(lps->SetCur());
-
+  
   CItem item = _item;
   item.MakeUncompressed();
   if (_stream)
@@ -382,7 +382,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
        in uncompressed stream.
        What does that data mean ???
        We don't decompress these additional 8 bytes */
-
+    
     // unpackSize = _item.GetSize();
     // SetUi32(item.Buf + 4, (UInt32)(unpackSize + 8));
     CLimitedSequentialInStream *limitedStreamSpec = new CLimitedSequentialInStream;
@@ -493,7 +493,7 @@ static HRESULT UpdateArchive(ISequentialOutStream *outStream, UInt64 size,
   CLocalProgress *lps = new CLocalProgress;
   CMyComPtr<ICompressProgressInfo> progress = lps;
   lps->Init(updateCallback, true);
-
+  
   RINOK(encoder->Code(fileInStream, outStream, NULL, NULL, progress));
   UInt64 inputProcessed;
   if (lzmaMode)
@@ -562,7 +562,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     }
     return UpdateArchive(outStream, size, _lzmaMode, _props, updateCallback);
   }
-
+    
   if (indexInArchive != 0)
     return E_INVALIDARG;
 
@@ -871,7 +871,7 @@ HRESULT CHandler::OpenSeq3(ISequentialInStream *stream, IArchiveOpenCallback *ca
   if (uncompressedSize > kFileSizeMax)
     return S_FALSE;
 
-
+  
   CInBuffer s;
   if (!s.Create(1 << 20))
     return E_OUTOFMEMORY;
@@ -979,7 +979,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(extractCallback->GetStream(index, &outStream, askMode));
     if (!testMode && !outStream)
       continue;
-
+      
     RINOK(extractCallback->PrepareOperation(askMode));
     if (outStream)
       RINOK(WriteStream(outStream, buf, buf.Size()));

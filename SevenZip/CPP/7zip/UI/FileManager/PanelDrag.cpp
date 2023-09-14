@@ -6,13 +6,13 @@
 #include <winuserm.h>
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/Wildcard.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/MemoryGlobal.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Shell.h"
+#include "../../../Windows/MemoryGlobal.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/Shell.h"
 
 #include "../Common/ArchiveName.h"
 #include "../Common/CompressCall.h"

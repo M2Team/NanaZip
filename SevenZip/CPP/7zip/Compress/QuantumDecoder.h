@@ -3,7 +3,7 @@
 #ifndef __COMPRESS_QUANTUM_DECODER_H
 #define __COMPRESS_QUANTUM_DECODER_H
 
-#include "../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../Common/MyCom.h"
 
 #include "LzOutWindow.h"
 
@@ -31,7 +31,7 @@ public:
   {
     return !_extra && _buf == _bufLim;
   }
-
+  
   UInt32 ReadBit()
   {
     if (Value >= 0x10000)
@@ -165,7 +165,7 @@ public:
       bool keepHistory);
 
   HRESULT SetParams(unsigned numDictBits);
-
+  
   CDecoder(): _numDictBits(0) {}
   virtual ~CDecoder() {}
 };

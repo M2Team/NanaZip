@@ -2,25 +2,25 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../C/Alloc.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/AutoPtr.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Defs.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/AutoPtr.h"
+#include "../../../Common/Defs.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
+#include "../../../Windows/TimeUtils.h"
+#include "../../../Windows/Thread.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/LimitedStreams.h"
+#include "../../Common/CreateCoder.h"
+#include "../../Common/LimitedStreams.h"
 #include "../../Common/OutMemStream.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
+#include "../../Common/ProgressUtils.h"
 #ifndef _7ZIP_ST
 #include "../../Common/ProgressMt.h"
 #endif
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamUtils.h"
+#include "../../Common/StreamUtils.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Compress/CopyCoder.h"
+#include "../../Compress/CopyCoder.h"
 
 #include "ZipAddCommon.h"
 #include "ZipOut.h"

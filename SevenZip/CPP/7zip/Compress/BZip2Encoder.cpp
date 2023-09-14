@@ -1,8 +1,8 @@
 ﻿// BZip2Encoder.cpp
 
-#include "../../../../ThirdParty/LZMA/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../C/Alloc.h"
 #include "../../../C/BwtSort.h"
 #include "../../../C/HuffEnc.h"
 
