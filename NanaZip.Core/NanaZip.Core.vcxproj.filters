@@ -139,6 +139,9 @@
     <Filter Include="Extensions\BLAKE3">
       <UniqueIdentifier>{34442b48-4143-4b7e-9938-cdba163435cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GmSSL">
+      <UniqueIdentifier>{8b8b1e7e-3982-4e70-b765-39063e8c2eec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1445,6 +1448,9 @@
     <ClCompile Include="Extensions\BLAKE3\Blake3Handler.cpp">
       <Filter>Extensions\BLAKE3</Filter>
     </ClCompile>
+    <ClCompile Include="GmSSL\sm3.c">
+      <Filter>GmSSL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\7zCrc.h">
@@ -2718,6 +2724,12 @@
     </ClInclude>
     <ClInclude Include="FastLZMA2\util.h">
       <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="GmSSL\sm3.h">
+      <Filter>GmSSL</Filter>
+    </ClInclude>
+    <ClInclude Include="GmSSL\endian.h">
+      <Filter>GmSSL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
