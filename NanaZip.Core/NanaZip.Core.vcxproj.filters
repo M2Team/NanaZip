@@ -145,6 +145,12 @@
     <Filter Include="Heimdal">
       <UniqueIdentifier>{a64dcde1-232e-4d2e-b0b9-7b0af332d234}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extensions\GmSSL">
+      <UniqueIdentifier>{baef296e-0f61-471a-bb7f-7d6563aa3de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\Heimdal">
+      <UniqueIdentifier>{701a7d7d-83e8-41f3-b23a-bd456521f062}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1456,6 +1462,12 @@
     </ClCompile>
     <ClCompile Include="Heimdal\md2.c">
       <Filter>Heimdal</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\GmSSL\Sm3Handler.cpp">
+      <Filter>Extensions\GmSSL</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\Heimdal\Md2Handler.cpp">
+      <Filter>Extensions\Heimdal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

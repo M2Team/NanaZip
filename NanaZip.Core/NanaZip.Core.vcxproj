@@ -32,6 +32,8 @@
     <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -68,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Extensions\BLAKE3\Blake3Handler.cpp" />
+    <ClCompile Include="Extensions\GmSSL\Sm3Handler.cpp" />
+    <ClCompile Include="Extensions\Heimdal\Md2Handler.cpp" />
     <ClCompile Include="Extensions\RHash\AichHandler.cpp" />
     <ClCompile Include="Extensions\RHash\Blake2bHandler.cpp" />
     <ClCompile Include="Extensions\RHash\Ed2kHandler.cpp" />
