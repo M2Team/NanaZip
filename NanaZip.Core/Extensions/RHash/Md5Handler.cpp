@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/md5.h"
+#include <md5.h>
 
 class CMd5Handler final :
     public IHasher,

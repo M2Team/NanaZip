@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/edonr.h"
+#include <edonr.h>
 
 class CEdonR224Handler final :
     public IHasher,

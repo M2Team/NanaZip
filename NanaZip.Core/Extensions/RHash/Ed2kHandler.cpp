@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/ed2k.h"
+#include <ed2k.h>
 
 class CEd2kHandler final :
     public IHasher,

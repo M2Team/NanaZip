@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/whirlpool.h"
+#include <whirlpool.h>
 
 class CWhirlpoolHandler final :
     public IHasher,

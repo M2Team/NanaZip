@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/blake2b.h"
+#include <blake2b.h>
 
 class CBlake2bHandler final :
     public IHasher,

@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/snefru.h"
+#include <snefru.h>
 
 class CSnefru256Handler final :
     public IHasher,

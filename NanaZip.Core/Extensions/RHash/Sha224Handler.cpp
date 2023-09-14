@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/sha256.h"
+#include <sha256.h>
 
 class CSha224Handler final :
     public IHasher,

@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/gost12.h"
+#include <gost12.h>
 
 class CGost12256Handler final :
     public IHasher,

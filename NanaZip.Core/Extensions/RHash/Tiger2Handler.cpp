@@ -12,7 +12,7 @@
 #include "../../SevenZip/CPP/Common/MyCom.h"
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "../../RHash/tiger.h"
+#include <tiger.h>
 
 class CTiger2Handler final :
     public IHasher,
