@@ -22,6 +22,9 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;Z7_LARGE_PAGES;NSIS_SCRIPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -53,6 +56,7 @@
     <None Include="SevenZip\C\Sha1Opt.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="xxHash\xxhash.c" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zEncode.cpp" />
@@ -319,6 +323,7 @@
     <ClCompile Include="SevenZip\C\XzIn.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="xxHash\xxhash.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zEncode.h" />

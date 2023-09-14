@@ -70,6 +70,9 @@
     <Filter Include="SevenZip\CPP\7zip\Archive\Udf">
       <UniqueIdentifier>{dc789ffa-7db5-46a0-91e2-c2d6f1a5fe3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="xxHash">
+      <UniqueIdentifier>{7d6bf32f-613b-4465-adb3-9f438c12aea7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -911,6 +914,9 @@
     <ClCompile Include="SevenZip\CPP\Common\Sha1Prepare.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
+    <ClCompile Include="xxHash\xxhash.c">
+      <Filter>xxHash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\7zCrc.h">
@@ -1644,6 +1650,9 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\MyInitGuid.h">
       <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xxHash\xxhash.h">
+      <Filter>xxHash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
