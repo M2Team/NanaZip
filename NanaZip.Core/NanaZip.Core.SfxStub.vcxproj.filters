@@ -46,6 +46,18 @@
     <Filter Include="xxHash">
       <UniqueIdentifier>{ece8cf21-93f6-410b-a751-f639ab55ffdb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Zstandard">
+      <UniqueIdentifier>{2936146f-34bd-49b6-a3d7-88ee1f816e65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\common">
+      <UniqueIdentifier>{cffe370f-0b87-4dc3-91da-582a89390355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\decompress">
+      <UniqueIdentifier>{a7d780ce-6b10-4973-8e3a-59ed56e3017a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\dictBuilder">
+      <UniqueIdentifier>{2622d6dc-a466-4ec3-b8b5-21d0178b296f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -310,6 +322,51 @@
     </ClCompile>
     <ClCompile Include="xxHash\xxhash.c">
       <Filter>xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\debug.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\entropy_common.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\error_private.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\fse_decompress.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\pool.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\threading.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\zstd_common.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\dictBuilder\cover.c">
+      <Filter>Zstandard\dictBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\dictBuilder\divsufsort.c">
+      <Filter>Zstandard\dictBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\dictBuilder\fastcover.c">
+      <Filter>Zstandard\dictBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\dictBuilder\zdict.c">
+      <Filter>Zstandard\dictBuilder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -621,6 +678,78 @@
     </ClInclude>
     <ClInclude Include="xxHash\xxhash.h">
       <Filter>xxHash</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\zdict.h">
+      <Filter>Zstandard</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\zstd.h">
+      <Filter>Zstandard</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\zstd_errors.h">
+      <Filter>Zstandard</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\allocations.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\bits.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\bitstream.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\compiler.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\cpu.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\debug.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\error_private.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\fse.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\huf.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\mem.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\pool.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\portability_macros.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\threading.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_deps.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_internal.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_trace.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\dictBuilder\cover.h">
+      <Filter>Zstandard\dictBuilder</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\dictBuilder\divsufsort.h">
+      <Filter>Zstandard\dictBuilder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
