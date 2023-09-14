@@ -121,6 +121,9 @@
     <Filter Include="LZ5">
       <UniqueIdentifier>{918fd1fb-4664-4f98-8a3b-2cfb349cdaa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RHash">
+      <UniqueIdentifier>{5c013723-a643-4ac8-9fee-b2cdbcbf9af9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1213,6 +1216,78 @@
     </ClCompile>
     <ClCompile Include="LZ5\lz5hc.c">
       <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\aich.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\blake2b.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\byte_order.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\ed2k.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\edonr.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\gost12.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\gost94.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\has160.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\hex.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\md4.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\md5.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\ripemd-160.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\rhash_sha1.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\rhash_sha256.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\sha3.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\sha512.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\snefru.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger_sbox.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\torrent.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tth.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\util.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\whirlpool.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\whirlpool_sbox.c">
+      <Filter>RHash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2355,6 +2430,75 @@
     </ClInclude>
     <ClInclude Include="LZ5\mem.h">
       <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\aich.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\blake2b.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\byte_order.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ed2k.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\edonr.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\gost12.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\gost94.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\has160.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\hex.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\md4.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\md5.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ripemd-160.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha1.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha256.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha3.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha512.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\snefru.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\tiger.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\torrent.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\tth.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ustd.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\util.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\whirlpool.h">
+      <Filter>RHash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
