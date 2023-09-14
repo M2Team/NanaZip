@@ -9,11 +9,18 @@
     <MileProjectType>StaticLibrary</MileProjectType>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
   </PropertyGroup>
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
+  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <PreprocessorDefinitions>Z7_EXTRACT_ONLY;Z7_NO_READ_FROM_CODER;Z7_SFX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <MASM>
+      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
@@ -24,6 +31,9 @@
     <None Include="SevenZip\ASM\x86\Sha1Opt.asm" />
     <None Include="SevenZip\ASM\x86\Sha256Opt.asm" />
     <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm" />
+    <None Include="SevenZip\C\7zCrcOpt.c" />
+    <None Include="SevenZip\C\AesOpt.c" />
+    <None Include="SevenZip\C\Sha256Opt.c" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
@@ -71,6 +81,7 @@
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
@@ -82,7 +93,9 @@
     <ClCompile Include="SevenZip\CPP\Windows\PropVariantConv.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\Synchronization.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\System.cpp" />
+    <ClCompile Include="SevenZip\C\7zCrc.c" />
     <ClCompile Include="SevenZip\C\7zStream.c" />
+    <ClCompile Include="SevenZip\C\Aes.c" />
     <ClCompile Include="SevenZip\C\Alloc.c" />
     <ClCompile Include="SevenZip\C\Bcj2.c" />
     <ClCompile Include="SevenZip\C\Bra.c" />
@@ -96,6 +109,7 @@
     <ClCompile Include="SevenZip\C\MtDec.c" />
     <ClCompile Include="SevenZip\C\Ppmd7.c" />
     <ClCompile Include="SevenZip\C\Ppmd7Dec.c" />
+    <ClCompile Include="SevenZip\C\Sha256.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
   </ItemGroup>
   <ItemGroup>
@@ -205,7 +219,47 @@
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
   </ItemGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Target Name="NanaZipCoreAesHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+      <MASM Include="SevenZip\ASM\x86\AesOpt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreAesHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+      <ClCompile Include="SevenZip\C\AesOpt.c">
+        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+      <MASM Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+      <ClCompile Include="SevenZip\C\7zCrcOpt.c">
+        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreLzmaDecHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="'$(Platform)'=='x64'">
+      <MASM Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+      <MASM Include="SevenZip\ASM\x86\Sha256Opt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+      <ClCompile Include="SevenZip\C\Sha256Opt.c">
+        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>
