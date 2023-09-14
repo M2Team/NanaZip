@@ -127,6 +127,18 @@
     <Filter Include="fast-lzma2">
       <UniqueIdentifier>{4d033b0f-6065-4d51-a2f8-736b34eb0a97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extensions">
+      <UniqueIdentifier>{ad1ce36b-5416-4c51-bdd0-26e4d2afe6b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\RHash">
+      <UniqueIdentifier>{b543a475-0264-4c89-8a4e-c73cd2e62099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\xxHash">
+      <UniqueIdentifier>{645dc51c-50e1-4522-a47e-09ead38b6df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\BLAKE3">
+      <UniqueIdentifier>{34442b48-4143-4b7e-9938-cdba163435cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1330,6 +1342,108 @@
     </ClCompile>
     <ClCompile Include="FastLZMA2\util.c">
       <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\AichHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Blake2bHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Ed2kHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\EdonR224Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\EdonR256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\EdonR384Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\EdonR512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Gost12256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Gost12512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Gost94CryptoProHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Gost94Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Has160Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Md4Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Md5Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Ripemd160Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Sha224Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Sha3224Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Sha3256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Sha3384Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Sha3512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Sha384Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Sha512Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Snefru128Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Snefru256Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\Tiger2Handler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\TigerHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\TorrentHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\TthHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\RHash\WhirlpoolHandler.cpp">
+      <Filter>Extensions\RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\xxHash\Xxh3128Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\xxHash\Xxh32Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\xxHash\Xxh364Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\xxHash\Xxh64Handler.cpp">
+      <Filter>Extensions\xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\BLAKE3\Blake3Handler.cpp">
+      <Filter>Extensions\BLAKE3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
