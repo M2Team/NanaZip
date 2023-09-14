@@ -31,6 +31,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -47,6 +48,8 @@
     </MASM>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="FastLZMA2\COPYING" />
+    <None Include="FastLZMA2\LICENSE" />
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     <None Include="SevenZip\ASM\x86\AesOpt.asm" />
@@ -64,6 +67,17 @@
     <None Include="SevenZip\C\Sha1Opt.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FastLZMA2\dict_buffer.c" />
+    <ClCompile Include="FastLZMA2\fl2_common.c" />
+    <ClCompile Include="FastLZMA2\fl2_compress.c" />
+    <ClCompile Include="FastLZMA2\fl2_pool.c" />
+    <ClCompile Include="FastLZMA2\fl2_threading.c" />
+    <ClCompile Include="FastLZMA2\lzma2_enc.c" />
+    <ClCompile Include="FastLZMA2\radix_bitpack.c" />
+    <ClCompile Include="FastLZMA2\radix_mf.c" />
+    <ClCompile Include="FastLZMA2\radix_struct.c" />
+    <ClCompile Include="FastLZMA2\range_enc.c" />
+    <ClCompile Include="FastLZMA2\util.c" />
     <ClCompile Include="RHash\aich.c" />
     <ClCompile Include="RHash\blake2b.c" />
     <ClCompile Include="RHash\byte_order.c" />
@@ -438,6 +452,27 @@
     <ClCompile Include="SevenZip\C\XzIn.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FastLZMA2\atomic.h" />
+    <ClInclude Include="FastLZMA2\compiler.h" />
+    <ClInclude Include="FastLZMA2\count.h" />
+    <ClInclude Include="FastLZMA2\data_block.h" />
+    <ClInclude Include="FastLZMA2\dict_buffer.h" />
+    <ClInclude Include="FastLZMA2\fast-lzma2.h" />
+    <ClInclude Include="FastLZMA2\fastpos_table.h" />
+    <ClInclude Include="FastLZMA2\fl2_compress_internal.h" />
+    <ClInclude Include="FastLZMA2\fl2_errors.h" />
+    <ClInclude Include="FastLZMA2\fl2_internal.h" />
+    <ClInclude Include="FastLZMA2\fl2_pool.h" />
+    <ClInclude Include="FastLZMA2\fl2_threading.h" />
+    <ClInclude Include="FastLZMA2\lzma2_enc.h" />
+    <ClInclude Include="FastLZMA2\mem.h" />
+    <ClInclude Include="FastLZMA2\platform.h" />
+    <ClInclude Include="FastLZMA2\radix_engine.h" />
+    <ClInclude Include="FastLZMA2\radix_get.h" />
+    <ClInclude Include="FastLZMA2\radix_internal.h" />
+    <ClInclude Include="FastLZMA2\radix_mf.h" />
+    <ClInclude Include="FastLZMA2\range_enc.h" />
+    <ClInclude Include="FastLZMA2\util.h" />
     <ClInclude Include="RHash\aich.h" />
     <ClInclude Include="RHash\blake2b.h" />
     <ClInclude Include="RHash\byte_order.h" />

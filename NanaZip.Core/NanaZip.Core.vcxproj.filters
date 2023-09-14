@@ -124,6 +124,9 @@
     <Filter Include="RHash">
       <UniqueIdentifier>{5c013723-a643-4ac8-9fee-b2cdbcbf9af9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="fast-lzma2">
+      <UniqueIdentifier>{4d033b0f-6065-4d51-a2f8-736b34eb0a97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -170,6 +173,12 @@
     </None>
     <None Include="SevenZip\C\XzCrc64Opt.c">
       <Filter>SevenZip\C</Filter>
+    </None>
+    <None Include="FastLZMA2\COPYING">
+      <Filter>fast-lzma2</Filter>
+    </None>
+    <None Include="FastLZMA2\LICENSE">
+      <Filter>fast-lzma2</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1288,6 +1297,39 @@
     </ClCompile>
     <ClCompile Include="RHash\whirlpool_sbox.c">
       <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\dict_buffer.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_common.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_compress.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_pool.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_threading.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\lzma2_enc.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\radix_bitpack.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\radix_mf.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\radix_struct.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\range_enc.c">
+      <Filter>fast-lzma2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\util.c">
+      <Filter>fast-lzma2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2499,6 +2541,69 @@
     </ClInclude>
     <ClInclude Include="RHash\whirlpool.h">
       <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\atomic.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\compiler.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\count.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\data_block.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\dict_buffer.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fast-lzma2.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fastpos_table.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_compress_internal.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_errors.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_internal.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_pool.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_threading.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\lzma2_enc.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\mem.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\platform.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_engine.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_get.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_internal.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_mf.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\range_enc.h">
+      <Filter>fast-lzma2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\util.h">
+      <Filter>fast-lzma2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
