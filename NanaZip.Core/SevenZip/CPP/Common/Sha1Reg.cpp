@@ -1,4 +1,4 @@
-// Sha1Reg.cpp
+﻿// Sha1Reg.cpp
 
 #include "StdAfx.h"
 

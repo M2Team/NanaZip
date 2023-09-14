@@ -1,4 +1,4 @@
-// Common/Defs.h
+﻿// Common/Defs.h
 
 #ifndef ZIP7_INC_COMMON_DEFS_H
 #define ZIP7_INC_COMMON_DEFS_H

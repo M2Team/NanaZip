@@ -1,4 +1,4 @@
-// BitmDecoder.h -- the Most Significant Bit of byte is First
+﻿// BitmDecoder.h -- the Most Significant Bit of byte is First
 
 #ifndef ZIP7_INC_BITM_DECODER_H
 #define ZIP7_INC_BITM_DECODER_H

@@ -1,4 +1,4 @@
-// OutBuffer.h
+﻿// OutBuffer.h
 
 #ifndef ZIP7_INC_OUT_BUFFER_H
 #define ZIP7_INC_OUT_BUFFER_H

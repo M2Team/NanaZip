@@ -1,4 +1,4 @@
-// Archive/UdfIn.h -- UDF / ECMA-167
+﻿// Archive/UdfIn.h -- UDF / ECMA-167
 
 #ifndef ZIP7_INC_ARCHIVE_UDF_IN_H
 #define ZIP7_INC_ARCHIVE_UDF_IN_H

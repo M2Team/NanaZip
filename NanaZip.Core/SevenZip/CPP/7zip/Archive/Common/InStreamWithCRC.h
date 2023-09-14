@@ -1,4 +1,4 @@
-// InStreamWithCRC.h
+﻿// InStreamWithCRC.h
 
 #ifndef ZIP7_INC_IN_STREAM_WITH_CRC_H
 #define ZIP7_INC_IN_STREAM_WITH_CRC_H

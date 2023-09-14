@@ -1,4 +1,4 @@
-// MultiStream.h
+﻿// MultiStream.h
 
 #ifndef ZIP7_INC_MULTI_STREAM_H
 #define ZIP7_INC_MULTI_STREAM_H

@@ -1,4 +1,4 @@
-// BranchMisc.h
+﻿// BranchMisc.h
 
 #ifndef ZIP7_INC_COMPRESS_BRANCH_MISC_H
 #define ZIP7_INC_COMPRESS_BRANCH_MISC_H

@@ -1,4 +1,4 @@
-// TarUpdate.h
+﻿// TarUpdate.h
 
 #ifndef ZIP7_INC_TAR_UPDATE_H
 #define ZIP7_INC_TAR_UPDATE_H

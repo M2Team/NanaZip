@@ -1,4 +1,4 @@
-// CodecExports.cpp
+﻿// CodecExports.cpp
 
 #include "StdAfx.h"
 

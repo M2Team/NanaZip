@@ -1,4 +1,4 @@
-/* Delta.h -- Delta converter
+﻿/* Delta.h -- Delta converter
 2023-03-03 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_DELTA_H

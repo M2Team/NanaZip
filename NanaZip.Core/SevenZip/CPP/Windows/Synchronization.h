@@ -1,4 +1,4 @@
-// Windows/Synchronization.h
+﻿// Windows/Synchronization.h
 
 #ifndef ZIP7_INC_WINDOWS_SYNCHRONIZATION_H
 #define ZIP7_INC_WINDOWS_SYNCHRONIZATION_H

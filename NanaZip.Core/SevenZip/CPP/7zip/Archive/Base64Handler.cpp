@@ -1,4 +1,4 @@
-// Base64Handler.cpp
+﻿// Base64Handler.cpp
 
 #include "StdAfx.h"
 

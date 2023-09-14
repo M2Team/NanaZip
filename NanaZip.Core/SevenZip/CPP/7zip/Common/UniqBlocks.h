@@ -1,4 +1,4 @@
-// UniqBlocks.h
+﻿// UniqBlocks.h
 
 #ifndef ZIP7_INC_UNIQ_BLOCKS_H
 #define ZIP7_INC_UNIQ_BLOCKS_H

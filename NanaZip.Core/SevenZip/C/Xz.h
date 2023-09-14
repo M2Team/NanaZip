@@ -1,4 +1,4 @@
-/* Xz.h - Xz interface
+﻿/* Xz.h - Xz interface
 2023-04-13 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_XZ_H

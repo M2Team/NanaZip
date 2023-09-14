@@ -1,4 +1,4 @@
-// OutStreamWithSha1.h
+﻿// OutStreamWithSha1.h
 
 #ifndef ZIP7_INC_OUT_STREAM_WITH_SHA1_H
 #define ZIP7_INC_OUT_STREAM_WITH_SHA1_H

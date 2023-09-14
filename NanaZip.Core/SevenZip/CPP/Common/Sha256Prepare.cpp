@@ -1,4 +1,4 @@
-// Sha256Prepare.cpp
+﻿// Sha256Prepare.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Rar5Handler.h
+﻿// Rar5Handler.h
 
 #ifndef ZIP7_INC_RAR5_HANDLER_H
 #define ZIP7_INC_RAR5_HANDLER_H

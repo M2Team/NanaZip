@@ -1,4 +1,4 @@
-/* Sort.h -- Sort functions
+﻿/* Sort.h -- Sort functions
 2023-03-05 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SORT_H

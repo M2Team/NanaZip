@@ -1,4 +1,4 @@
-// WimHandler.h
+﻿// WimHandler.h
 
 #ifndef ZIP7_INC_ARCHIVE_WIM_HANDLER_H
 #define ZIP7_INC_ARCHIVE_WIM_HANDLER_H

@@ -1,4 +1,4 @@
-// CrcReg.cpp
+﻿// CrcReg.cpp
 
 #include "StdAfx.h"
 

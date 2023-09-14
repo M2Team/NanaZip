@@ -1,4 +1,4 @@
-// DLLExports2.cpp
+﻿// DLLExports2.cpp
 
 #include "StdAfx.h"
 

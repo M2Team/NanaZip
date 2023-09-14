@@ -1,4 +1,4 @@
-// PeHandler.cpp
+﻿// PeHandler.cpp
 
 #include "StdAfx.h"
 

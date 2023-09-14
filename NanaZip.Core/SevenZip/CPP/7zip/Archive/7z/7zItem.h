@@ -1,4 +1,4 @@
-// 7zItem.h
+﻿// 7zItem.h
 
 #ifndef ZIP7_INC_7Z_ITEM_H
 #define ZIP7_INC_7Z_ITEM_H

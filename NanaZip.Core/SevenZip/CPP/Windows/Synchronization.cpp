@@ -1,4 +1,4 @@
-// Windows/Synchronization.cpp
+﻿// Windows/Synchronization.cpp
 
 #include "StdAfx.h"
 

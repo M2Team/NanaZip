@@ -1,4 +1,4 @@
-/* CpuArch.h -- CPU specific code
+﻿/* CpuArch.h -- CPU specific code
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_CPU_ARCH_H

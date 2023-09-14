@@ -1,4 +1,4 @@
-// OffsetStream.h
+﻿// OffsetStream.h
 
 #ifndef ZIP7_INC_OFFSET_STREAM_H
 #define ZIP7_INC_OFFSET_STREAM_H

@@ -1,4 +1,4 @@
-// Rar3Vm.cpp
+﻿// Rar3Vm.cpp
 // According to unRAR license, this code may not be used to develop
 // a program that creates RAR archives
 

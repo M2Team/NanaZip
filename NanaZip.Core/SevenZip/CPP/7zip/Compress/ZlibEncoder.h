@@ -1,4 +1,4 @@
-// ZlibEncoder.h
+﻿// ZlibEncoder.h
 
 #ifndef ZIP7_INC_ZLIB_ENCODER_H
 #define ZIP7_INC_ZLIB_ENCODER_H

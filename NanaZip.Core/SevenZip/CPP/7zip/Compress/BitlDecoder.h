@@ -1,4 +1,4 @@
-// BitlDecoder.h -- the Least Significant Bit of byte is First
+﻿// BitlDecoder.h -- the Least Significant Bit of byte is First
 
 #ifndef ZIP7_INC_BITL_DECODER_H
 #define ZIP7_INC_BITL_DECODER_H

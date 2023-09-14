@@ -1,4 +1,4 @@
-// Windows/PropVariant.h
+﻿// Windows/PropVariant.h
 
 #ifndef ZIP7_INC_WINDOWS_PROP_VARIANT_H
 #define ZIP7_INC_WINDOWS_PROP_VARIANT_H

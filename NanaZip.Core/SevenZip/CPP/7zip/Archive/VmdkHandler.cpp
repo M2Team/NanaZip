@@ -1,4 +1,4 @@
-// VmdkHandler.cpp
+﻿// VmdkHandler.cpp
 
 #include "StdAfx.h"
 

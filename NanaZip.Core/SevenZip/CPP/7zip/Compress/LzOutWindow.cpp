@@ -1,4 +1,4 @@
-// LzOutWindow.cpp
+﻿// LzOutWindow.cpp
 
 #include "StdAfx.h"
 

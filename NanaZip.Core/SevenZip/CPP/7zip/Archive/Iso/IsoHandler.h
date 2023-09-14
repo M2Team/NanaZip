@@ -1,4 +1,4 @@
-// IsoHandler.h
+﻿// IsoHandler.h
 
 #ifndef ZIP7_INC_ISO_HANDLER_H
 #define ZIP7_INC_ISO_HANDLER_H

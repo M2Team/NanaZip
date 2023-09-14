@@ -1,4 +1,4 @@
-// VirtThread.h
+﻿// VirtThread.h
 
 #ifndef ZIP7_INC_VIRT_THREAD_H
 #define ZIP7_INC_VIRT_THREAD_H

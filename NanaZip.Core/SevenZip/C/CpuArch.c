@@ -1,4 +1,4 @@
-/* CpuArch.c -- CPU specific code
+﻿/* CpuArch.c -- CPU specific code
 2023-05-18 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

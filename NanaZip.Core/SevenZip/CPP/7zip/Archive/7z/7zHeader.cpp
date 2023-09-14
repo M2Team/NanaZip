@@ -1,4 +1,4 @@
-// 7zHeader.cpp
+﻿// 7zHeader.cpp
 
 #include "StdAfx.h"
 

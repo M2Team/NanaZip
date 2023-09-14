@@ -1,4 +1,4 @@
-// XzCrc64Init.cpp
+﻿// XzCrc64Init.cpp
 
 #include "StdAfx.h"
 

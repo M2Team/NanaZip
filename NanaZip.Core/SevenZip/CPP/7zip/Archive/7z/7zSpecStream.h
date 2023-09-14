@@ -1,4 +1,4 @@
-// 7zSpecStream.h
+﻿// 7zSpecStream.h
 
 #ifndef ZIP7_INC_7Z_SPEC_STREAM_H
 #define ZIP7_INC_7Z_SPEC_STREAM_H

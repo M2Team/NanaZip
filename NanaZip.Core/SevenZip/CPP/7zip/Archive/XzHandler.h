@@ -1,4 +1,4 @@
-// XzHandler.h
+﻿// XzHandler.h
 
 #ifndef ZIP7_INC_XZ_HANDLER_H
 #define ZIP7_INC_XZ_HANDLER_H

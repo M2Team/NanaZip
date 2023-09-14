@@ -1,4 +1,4 @@
-// IStream.h
+﻿// IStream.h
 
 #ifndef ZIP7_INC_ISTREAM_H
 #define ZIP7_INC_ISTREAM_H

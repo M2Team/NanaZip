@@ -1,4 +1,4 @@
-// CabRegister.cpp
+﻿// CabRegister.cpp
 
 #include "StdAfx.h"
 

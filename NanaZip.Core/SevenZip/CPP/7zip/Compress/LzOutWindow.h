@@ -1,4 +1,4 @@
-// LzOutWindow.h
+﻿// LzOutWindow.h
 
 #ifndef ZIP7_INC_LZ_OUT_WINDOW_H
 #define ZIP7_INC_LZ_OUT_WINDOW_H

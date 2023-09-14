@@ -1,4 +1,4 @@
-// DummyOutStream.cpp
+﻿// DummyOutStream.cpp
 
 #include "StdAfx.h"
 

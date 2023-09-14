@@ -1,4 +1,4 @@
-// Lzma2Encoder.h
+﻿// Lzma2Encoder.h
 
 #ifndef ZIP7_INC_LZMA2_ENCODER_H
 #define ZIP7_INC_LZMA2_ENCODER_H

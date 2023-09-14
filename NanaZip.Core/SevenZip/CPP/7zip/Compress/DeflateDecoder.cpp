@@ -1,4 +1,4 @@
-// DeflateDecoder.cpp
+﻿// DeflateDecoder.cpp
 
 #include "StdAfx.h"
 

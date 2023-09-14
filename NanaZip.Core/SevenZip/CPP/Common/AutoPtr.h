@@ -1,4 +1,4 @@
-// Common/AutoPtr.h
+﻿// Common/AutoPtr.h
 
 #ifndef ZIP7_INC_COMMON_AUTOPTR_H
 #define ZIP7_INC_COMMON_AUTOPTR_H

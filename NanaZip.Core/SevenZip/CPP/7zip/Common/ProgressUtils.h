@@ -1,4 +1,4 @@
-// ProgressUtils.h
+﻿// ProgressUtils.h
 
 #ifndef ZIP7_INC_PROGRESS_UTILS_H
 #define ZIP7_INC_PROGRESS_UTILS_H

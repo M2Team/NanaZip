@@ -1,4 +1,4 @@
-// FindSignature.cpp
+﻿// FindSignature.cpp
 
 #include "StdAfx.h"
 

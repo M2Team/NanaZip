@@ -1,4 +1,4 @@
-// InOutTempBuffer.cpp
+﻿// InOutTempBuffer.cpp
 
 #include "StdAfx.h"
 

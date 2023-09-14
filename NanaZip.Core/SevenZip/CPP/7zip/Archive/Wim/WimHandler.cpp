@@ -1,4 +1,4 @@
-// WimHandler.cpp
+﻿// WimHandler.cpp
 
 #include "StdAfx.h"
 

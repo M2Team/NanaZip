@@ -1,4 +1,4 @@
-// NtfsHandler.cpp
+﻿// NtfsHandler.cpp
 
 #include "StdAfx.h"
 

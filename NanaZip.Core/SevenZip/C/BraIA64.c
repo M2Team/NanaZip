@@ -1,4 +1,4 @@
-/* BraIA64.c -- Converter for IA-64 code
+﻿/* BraIA64.c -- Converter for IA-64 code
 2023-02-20 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

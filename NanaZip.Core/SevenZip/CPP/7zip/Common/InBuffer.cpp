@@ -1,4 +1,4 @@
-// InBuffer.cpp
+﻿// InBuffer.cpp
 
 #include "StdAfx.h"
 

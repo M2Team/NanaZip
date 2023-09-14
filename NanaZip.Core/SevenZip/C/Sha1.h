@@ -1,4 +1,4 @@
-/* Sha1.h -- SHA-1 Hash
+﻿/* Sha1.h -- SHA-1 Hash
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SHA1_H

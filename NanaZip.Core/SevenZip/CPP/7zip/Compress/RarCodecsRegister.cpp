@@ -1,4 +1,4 @@
-// RarCodecsRegister.cpp
+﻿// RarCodecsRegister.cpp
 
 #include "StdAfx.h"
 

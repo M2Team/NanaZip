@@ -1,4 +1,4 @@
-// Windows/TimeUtils.h
+﻿// Windows/TimeUtils.h
 
 #ifndef ZIP7_INC_WINDOWS_TIME_UTILS_H
 #define ZIP7_INC_WINDOWS_TIME_UTILS_H

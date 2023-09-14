@@ -1,4 +1,4 @@
-// 7zCompressionMode.h
+﻿// 7zCompressionMode.h
 
 #ifndef ZIP7_INC_7Z_COMPRESSION_MODE_H
 #define ZIP7_INC_7Z_COMPRESSION_MODE_H

@@ -1,4 +1,4 @@
-// NSisHandler.h
+﻿// NSisHandler.h
 
 #ifndef ZIP7_INC_NSIS_HANDLER_H
 #define ZIP7_INC_NSIS_HANDLER_H

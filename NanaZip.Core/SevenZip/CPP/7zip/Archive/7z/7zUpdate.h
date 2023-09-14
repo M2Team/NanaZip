@@ -1,4 +1,4 @@
-// 7zUpdate.h
+﻿// 7zUpdate.h
 
 #ifndef ZIP7_INC_7Z_UPDATE_H
 #define ZIP7_INC_7Z_UPDATE_H

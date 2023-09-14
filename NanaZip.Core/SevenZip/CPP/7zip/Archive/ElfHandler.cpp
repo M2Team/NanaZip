@@ -1,4 +1,4 @@
-// ElfHandler.cpp
+﻿// ElfHandler.cpp
 
 #include "StdAfx.h"
 

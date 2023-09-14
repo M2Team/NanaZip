@@ -1,4 +1,4 @@
-/* Sha1.c -- SHA-1 Hash
+﻿/* Sha1.c -- SHA-1 Hash
 2023-04-02 : Igor Pavlov : Public domain
 This code is based on public domain code of Steve Reid from Wei Dai's Crypto++ library. */
 

@@ -1,4 +1,4 @@
-// PpmdEncoder.cpp
+﻿// PpmdEncoder.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// CabHandler.h
+﻿// CabHandler.h
 
 #ifndef ZIP7_INC_CAB_HANDLER_H
 #define ZIP7_INC_CAB_HANDLER_H

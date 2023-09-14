@@ -1,4 +1,4 @@
-// Archive/CabHeader.h
+﻿// Archive/CabHeader.h
 
 #ifndef ZIP7_INC_ARCHIVE_CAB_HEADER_H
 #define ZIP7_INC_ARCHIVE_CAB_HEADER_H

@@ -1,4 +1,4 @@
-// RarItem.h
+﻿// RarItem.h
 
 #ifndef ZIP7_INC_ARCHIVE_RAR_ITEM_H
 #define ZIP7_INC_ARCHIVE_RAR_ITEM_H

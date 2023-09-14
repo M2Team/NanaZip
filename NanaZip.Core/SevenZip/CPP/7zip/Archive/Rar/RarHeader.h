@@ -1,4 +1,4 @@
-// Archive/RarHeader.h
+﻿// Archive/RarHeader.h
 
 #ifndef ZIP7_INC_ARCHIVE_RAR_HEADER_H
 #define ZIP7_INC_ARCHIVE_RAR_HEADER_H

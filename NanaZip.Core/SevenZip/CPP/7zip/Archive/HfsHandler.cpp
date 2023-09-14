@@ -1,4 +1,4 @@
-// HfsHandler.cpp
+﻿// HfsHandler.cpp
 
 #include "StdAfx.h"
 

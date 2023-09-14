@@ -1,4 +1,4 @@
-// Archive/CabIn.h
+﻿// Archive/CabIn.h
 
 #ifndef ZIP7_INC_ARCHIVE_CAB_IN_H
 #define ZIP7_INC_ARCHIVE_CAB_IN_H

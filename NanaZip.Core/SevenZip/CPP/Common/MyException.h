@@ -1,4 +1,4 @@
-// Common/Exception.h
+﻿// Common/Exception.h
 
 #ifndef ZIP7_INC_COMMON_EXCEPTION_H
 #define ZIP7_INC_COMMON_EXCEPTION_H

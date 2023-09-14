@@ -1,4 +1,4 @@
-// QuantumDecoder.h
+﻿// QuantumDecoder.h
 
 #ifndef ZIP7_INC_COMPRESS_QUANTUM_DECODER_H
 #define ZIP7_INC_COMPRESS_QUANTUM_DECODER_H

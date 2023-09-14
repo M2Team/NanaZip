@@ -1,4 +1,4 @@
-/* LzmaEnc.c -- LZMA Encoder
+﻿/* LzmaEnc.c -- LZMA Encoder
 2023-04-13: Igor Pavlov : Public domain */
 
 #include "Precomp.h"

@@ -1,4 +1,4 @@
-// IDecl.h
+﻿// IDecl.h
 
 #ifndef ZIP7_INC_IDECL_H
 #define ZIP7_INC_IDECL_H

@@ -1,4 +1,4 @@
-// Crypto/MyAes.h
+﻿// Crypto/MyAes.h
 
 #ifndef ZIP7_INC_CRYPTO_MY_AES_H
 #define ZIP7_INC_CRYPTO_MY_AES_H

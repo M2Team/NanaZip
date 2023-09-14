@@ -1,4 +1,4 @@
-// CabHandler.cpp
+﻿// CabHandler.cpp
 
 #include "StdAfx.h"
 

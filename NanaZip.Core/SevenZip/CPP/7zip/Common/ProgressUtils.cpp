@@ -1,4 +1,4 @@
-// ProgressUtils.cpp
+﻿// ProgressUtils.cpp
 
 #include "StdAfx.h"
 

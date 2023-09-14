@@ -1,4 +1,4 @@
-// ComHandler.cpp
+﻿// ComHandler.cpp
 
 #include "StdAfx.h"
 

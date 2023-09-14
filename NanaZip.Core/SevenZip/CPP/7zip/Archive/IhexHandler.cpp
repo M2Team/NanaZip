@@ -1,4 +1,4 @@
-// IhexHandler.cpp
+﻿// IhexHandler.cpp
 
 #include "StdAfx.h"
 

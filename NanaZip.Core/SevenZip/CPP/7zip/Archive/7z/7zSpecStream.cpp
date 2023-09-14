@@ -1,4 +1,4 @@
-// 7zSpecStream.cpp
+﻿// 7zSpecStream.cpp
 
 #include "StdAfx.h"
 

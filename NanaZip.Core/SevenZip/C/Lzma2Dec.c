@@ -1,4 +1,4 @@
-/* Lzma2Dec.c -- LZMA2 Decoder
+﻿/* Lzma2Dec.c -- LZMA2 Decoder
 2023-03-03 : Igor Pavlov : Public domain */
 
 /* #define SHOW_DEBUG_INFO */

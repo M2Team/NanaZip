@@ -1,4 +1,4 @@
-// DeflateDecoder.h
+﻿// DeflateDecoder.h
 
 #ifndef ZIP7_INC_DEFLATE_DECODER_H
 #define ZIP7_INC_DEFLATE_DECODER_H

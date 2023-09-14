@@ -1,4 +1,4 @@
-// Windows/FileName.h
+﻿// Windows/FileName.h
 
 #ifndef ZIP7_INC_WINDOWS_FILE_NAME_H
 #define ZIP7_INC_WINDOWS_FILE_NAME_H

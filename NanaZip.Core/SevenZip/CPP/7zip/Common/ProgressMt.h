@@ -1,4 +1,4 @@
-// ProgressMt.h
+﻿// ProgressMt.h
 
 #ifndef ZIP7_INC_PROGRESSMT_H
 #define ZIP7_INC_PROGRESSMT_H

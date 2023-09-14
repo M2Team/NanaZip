@@ -1,4 +1,4 @@
-// Compress/CopyCoder.h
+﻿// Compress/CopyCoder.h
 
 #ifndef ZIP7_INC_COMPRESS_COPY_CODER_H
 #define ZIP7_INC_COMPRESS_COPY_CODER_H

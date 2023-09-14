@@ -1,4 +1,4 @@
-// LzfseDecoder.h
+﻿// LzfseDecoder.h
 
 #ifndef ZIP7_INC_LZFSE_DECODER_H
 #define ZIP7_INC_LZFSE_DECODER_H

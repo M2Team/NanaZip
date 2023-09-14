@@ -1,4 +1,4 @@
-#define MY_VER_MAJOR 23
+﻿#define MY_VER_MAJOR 23
 #define MY_VER_MINOR 01
 #define MY_VER_BUILD 0
 #define MY_VERSION_NUMBERS "23.01"

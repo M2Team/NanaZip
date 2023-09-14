@@ -1,4 +1,4 @@
-// XpressDecoder.h
+﻿// XpressDecoder.h
 
 #ifndef ZIP7_INC_XPRESS_DECODER_H
 #define ZIP7_INC_XPRESS_DECODER_H

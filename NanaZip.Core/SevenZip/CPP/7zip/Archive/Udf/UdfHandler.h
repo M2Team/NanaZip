@@ -1,4 +1,4 @@
-// UdfHandler.h
+﻿// UdfHandler.h
 
 #ifndef ZIP7_INC_UDF_HANDLER_H
 #define ZIP7_INC_UDF_HANDLER_H

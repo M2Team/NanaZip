@@ -1,4 +1,4 @@
-// Archive/IsoItem.h
+﻿// Archive/IsoItem.h
 
 #ifndef ZIP7_INC_ARCHIVE_ISO_ITEM_H
 #define ZIP7_INC_ARCHIVE_ISO_ITEM_H

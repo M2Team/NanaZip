@@ -1,4 +1,4 @@
-// HfsHandler.h
+﻿// HfsHandler.h
 
 #ifndef ZIP7_INC_HFS_HANDLER_H
 #define ZIP7_INC_HFS_HANDLER_H

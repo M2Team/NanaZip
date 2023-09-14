@@ -1,4 +1,4 @@
-// XzEncoder.cpp
+﻿// XzEncoder.cpp
 
 #include "StdAfx.h"
 

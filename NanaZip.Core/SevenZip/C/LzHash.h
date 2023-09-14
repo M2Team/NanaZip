@@ -1,4 +1,4 @@
-/* LzHash.h -- HASH constants for LZ algorithms
+﻿/* LzHash.h -- HASH constants for LZ algorithms
 2023-03-05 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_LZ_HASH_H

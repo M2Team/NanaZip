@@ -1,4 +1,4 @@
-// Archive/ZipItem.h
+﻿// Archive/ZipItem.h
 
 #ifndef ZIP7_INC_ARCHIVE_ZIP_ITEM_H
 #define ZIP7_INC_ARCHIVE_ZIP_ITEM_H

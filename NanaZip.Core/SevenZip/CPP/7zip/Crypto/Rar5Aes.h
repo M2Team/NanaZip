@@ -1,4 +1,4 @@
-// Crypto/Rar5Aes.h
+﻿// Crypto/Rar5Aes.h
 
 #ifndef ZIP7_INC_CRYPTO_RAR5_AES_H
 #define ZIP7_INC_CRYPTO_RAR5_AES_H

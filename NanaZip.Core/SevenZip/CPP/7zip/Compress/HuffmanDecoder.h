@@ -1,4 +1,4 @@
-// Compress/HuffmanDecoder.h
+﻿// Compress/HuffmanDecoder.h
 
 #ifndef ZIP7_INC_COMPRESS_HUFFMAN_DECODER_H
 #define ZIP7_INC_COMPRESS_HUFFMAN_DECODER_H

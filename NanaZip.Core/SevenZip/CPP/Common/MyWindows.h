@@ -1,4 +1,4 @@
-// MyWindows.h
+﻿// MyWindows.h
 
 #ifdef Z7_DEFINE_GUID
 #undef Z7_DEFINE_GUID

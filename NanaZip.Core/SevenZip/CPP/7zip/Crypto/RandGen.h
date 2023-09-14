@@ -1,4 +1,4 @@
-// RandGen.h
+﻿// RandGen.h
 
 #ifndef ZIP7_INC_CRYPTO_RAND_GEN_H
 #define ZIP7_INC_CRYPTO_RAND_GEN_H

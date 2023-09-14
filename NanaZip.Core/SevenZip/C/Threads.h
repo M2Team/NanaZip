@@ -1,4 +1,4 @@
-/* Threads.h -- multithreading library
+﻿/* Threads.h -- multithreading library
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_THREADS_H

@@ -1,4 +1,4 @@
-// FilterCoder.cpp
+﻿// FilterCoder.cpp
 
 #include "StdAfx.h"
 

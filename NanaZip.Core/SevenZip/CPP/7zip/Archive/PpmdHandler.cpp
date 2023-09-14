@@ -1,4 +1,4 @@
-/* PpmdHandler.cpp -- PPMd format handler
+﻿/* PpmdHandler.cpp -- PPMd format handler
 2020 : Igor Pavlov : Public domain
 This code is based on:
   PPMd var.H (2001) / var.I (2002): Dmitry Shkarin : Public domain

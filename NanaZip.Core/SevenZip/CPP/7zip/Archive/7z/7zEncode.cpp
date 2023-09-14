@@ -1,4 +1,4 @@
-// 7zEncode.cpp
+﻿// 7zEncode.cpp
 
 #include "StdAfx.h"
 

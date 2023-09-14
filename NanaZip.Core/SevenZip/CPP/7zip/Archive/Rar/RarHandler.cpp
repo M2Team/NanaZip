@@ -1,4 +1,4 @@
-// RarHandler.cpp
+﻿// RarHandler.cpp
 
 #include "StdAfx.h"
 

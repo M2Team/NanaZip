@@ -1,4 +1,4 @@
-// IPassword.h
+﻿// IPassword.h
 
 #ifndef ZIP7_INC_IPASSWORD_H
 #define ZIP7_INC_IPASSWORD_H

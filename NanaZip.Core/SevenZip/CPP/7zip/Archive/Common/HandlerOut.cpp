@@ -1,4 +1,4 @@
-// HandlerOut.cpp
+﻿// HandlerOut.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Archive/IsoHeader.h
+﻿// Archive/IsoHeader.h
 
 #ifndef ZIP7_INC_ARCHIVE_ISO_HEADER_H
 #define ZIP7_INC_ARCHIVE_ISO_HEADER_H

@@ -1,4 +1,4 @@
-// Crypto/Rar20Crypto.h
+﻿// Crypto/Rar20Crypto.h
 
 #ifndef ZIP7_INC_CRYPTO_RAR20_CRYPTO_H
 #define ZIP7_INC_CRYPTO_RAR20_CRYPTO_H

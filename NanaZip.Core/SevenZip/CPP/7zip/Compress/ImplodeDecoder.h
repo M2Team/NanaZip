@@ -1,4 +1,4 @@
-// ImplodeDecoder.h
+﻿// ImplodeDecoder.h
 
 #ifndef ZIP7_INC_COMPRESS_IMPLODE_DECODER_H
 #define ZIP7_INC_COMPRESS_IMPLODE_DECODER_H

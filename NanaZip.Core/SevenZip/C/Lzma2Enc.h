@@ -1,4 +1,4 @@
-/* Lzma2Enc.h -- LZMA2 Encoder
+﻿/* Lzma2Enc.h -- LZMA2 Encoder
 2023-04-13 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_LZMA2_ENC_H

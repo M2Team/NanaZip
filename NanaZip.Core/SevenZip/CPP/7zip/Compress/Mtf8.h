@@ -1,4 +1,4 @@
-// Mtf8.h
+﻿// Mtf8.h
 
 #ifndef ZIP7_INC_COMPRESS_MTF8_H
 #define ZIP7_INC_COMPRESS_MTF8_H

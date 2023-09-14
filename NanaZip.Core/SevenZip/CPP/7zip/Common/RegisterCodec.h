@@ -1,4 +1,4 @@
-// RegisterCodec.h
+﻿// RegisterCodec.h
 
 #ifndef ZIP7_INC_REGISTER_CODEC_H
 #define ZIP7_INC_REGISTER_CODEC_H

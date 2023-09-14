@@ -1,4 +1,4 @@
-// MyMap.h
+﻿// MyMap.h
 
 #ifndef ZIP7_INC_COMMON_MY_MAP_H
 #define ZIP7_INC_COMMON_MY_MAP_H

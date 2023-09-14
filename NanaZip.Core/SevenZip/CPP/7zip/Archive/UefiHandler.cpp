@@ -1,4 +1,4 @@
-// UefiHandler.cpp
+﻿// UefiHandler.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// LimitedStreams.h
+﻿// LimitedStreams.h
 
 #ifndef ZIP7_INC_LIMITED_STREAMS_H
 #define ZIP7_INC_LIMITED_STREAMS_H

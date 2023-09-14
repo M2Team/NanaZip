@@ -1,4 +1,4 @@
-// Common/IntToString.cpp
+﻿// Common/IntToString.cpp
 
 #include "StdAfx.h"
 

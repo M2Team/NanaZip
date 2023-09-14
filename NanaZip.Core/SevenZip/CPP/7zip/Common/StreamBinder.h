@@ -1,4 +1,4 @@
-// StreamBinder.h
+﻿// StreamBinder.h
 
 #ifndef ZIP7_INC_STREAM_BINDER_H
 #define ZIP7_INC_STREAM_BINDER_H

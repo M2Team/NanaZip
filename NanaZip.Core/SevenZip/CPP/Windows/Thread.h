@@ -1,4 +1,4 @@
-// Windows/Thread.h
+﻿// Windows/Thread.h
 
 #ifndef ZIP7_INC_WINDOWS_THREAD_H
 #define ZIP7_INC_WINDOWS_THREAD_H

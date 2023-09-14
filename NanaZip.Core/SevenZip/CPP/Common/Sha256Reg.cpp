@@ -1,4 +1,4 @@
-// Sha256Reg.cpp
+﻿// Sha256Reg.cpp
 
 #include "StdAfx.h"
 

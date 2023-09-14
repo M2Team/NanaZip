@@ -1,4 +1,4 @@
-// Windows/FileIO.h
+﻿// Windows/FileIO.h
 
 #ifndef ZIP7_INC_WINDOWS_FILE_IO_H
 #define ZIP7_INC_WINDOWS_FILE_IO_H

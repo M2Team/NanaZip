@@ -1,4 +1,4 @@
-// Crypto/ZipStrong.h
+﻿// Crypto/ZipStrong.h
 
 #ifndef ZIP7_INC_CRYPTO_ZIP_STRONG_H
 #define ZIP7_INC_CRYPTO_ZIP_STRONG_H

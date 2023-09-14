@@ -1,4 +1,4 @@
-// NsisDecode.h
+﻿// NsisDecode.h
 
 #ifndef ZIP7_INC_NSIS_DECODE_H
 #define ZIP7_INC_NSIS_DECODE_H

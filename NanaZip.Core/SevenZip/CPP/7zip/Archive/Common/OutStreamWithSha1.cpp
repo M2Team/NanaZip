@@ -1,4 +1,4 @@
-// OutStreamWithSha1.cpp
+﻿// OutStreamWithSha1.cpp
 
 #include "StdAfx.h"
 

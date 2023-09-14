@@ -1,4 +1,4 @@
-// PropVariantConv.cpp
+﻿// PropVariantConv.cpp
 
 #include "StdAfx.h"
 

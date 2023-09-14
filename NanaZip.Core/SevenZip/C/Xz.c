@@ -1,4 +1,4 @@
-/* Xz.c - Xz
+﻿/* Xz.c - Xz
 2023-04-02 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

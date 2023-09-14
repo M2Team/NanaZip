@@ -1,4 +1,4 @@
-/* Aes.h -- AES encryption / decryption
+﻿/* Aes.h -- AES encryption / decryption
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_AES_H

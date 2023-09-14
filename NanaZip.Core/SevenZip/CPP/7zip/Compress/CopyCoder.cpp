@@ -1,4 +1,4 @@
-// Compress/CopyCoder.cpp
+﻿// Compress/CopyCoder.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Rar3Decoder.cpp
+﻿// Rar3Decoder.cpp
 // According to unRAR license, this code may not be used to develop
 // a program that creates RAR archives
 

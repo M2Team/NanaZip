@@ -1,4 +1,4 @@
-// BZip2Crc.cpp
+﻿// BZip2Crc.cpp
 
 #include "StdAfx.h"
 

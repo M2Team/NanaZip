@@ -1,4 +1,4 @@
-/* Sha256.h -- SHA-256 Hash
+﻿/* Sha256.h -- SHA-256 Hash
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SHA256_H

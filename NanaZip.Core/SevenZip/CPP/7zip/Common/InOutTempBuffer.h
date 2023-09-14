@@ -1,4 +1,4 @@
-// InOutTempBuffer.h
+﻿// InOutTempBuffer.h
 
 #ifndef ZIP7_INC_IN_OUT_TEMP_BUFFER_H
 #define ZIP7_INC_IN_OUT_TEMP_BUFFER_H

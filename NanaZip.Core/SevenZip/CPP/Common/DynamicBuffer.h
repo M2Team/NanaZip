@@ -1,4 +1,4 @@
-// Common/DynamicBuffer.h
+﻿// Common/DynamicBuffer.h
 
 #ifndef ZIP7_INC_COMMON_DYNAMIC_BUFFER_H
 #define ZIP7_INC_COMMON_DYNAMIC_BUFFER_H

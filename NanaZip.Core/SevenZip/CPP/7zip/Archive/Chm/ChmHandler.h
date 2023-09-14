@@ -1,4 +1,4 @@
-// ChmHandler.h
+﻿// ChmHandler.h
 
 #ifndef ZIP7_INC_ARCHIVE_CHM_HANDLER_H
 #define ZIP7_INC_ARCHIVE_CHM_HANDLER_H

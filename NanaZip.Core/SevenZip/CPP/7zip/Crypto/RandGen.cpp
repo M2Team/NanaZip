@@ -1,4 +1,4 @@
-// RandGen.cpp
+﻿// RandGen.cpp
 
 #include "StdAfx.h"
 

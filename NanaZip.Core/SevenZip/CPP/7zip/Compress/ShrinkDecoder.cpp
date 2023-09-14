@@ -1,4 +1,4 @@
-// ShrinkDecoder.cpp
+﻿// ShrinkDecoder.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// Archive/WimIn.h
+﻿// Archive/WimIn.h
 
 #ifndef ZIP7_INC_ARCHIVE_WIM_IN_H
 #define ZIP7_INC_ARCHIVE_WIM_IN_H

@@ -1,4 +1,4 @@
-// OutMemStream.h
+﻿// OutMemStream.h
 
 #ifndef ZIP7_INC_OUT_MEM_STREAM_H
 #define ZIP7_INC_OUT_MEM_STREAM_H

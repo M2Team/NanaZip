@@ -1,4 +1,4 @@
-// LzfseDecoder.cpp
+﻿// LzfseDecoder.cpp
 
 /*
 This code implements LZFSE data decompressing.

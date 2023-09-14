@@ -1,4 +1,4 @@
-// MethodProps.h
+﻿// MethodProps.h
 
 #ifndef ZIP7_INC_7Z_METHOD_PROPS_H
 #define ZIP7_INC_7Z_METHOD_PROPS_H

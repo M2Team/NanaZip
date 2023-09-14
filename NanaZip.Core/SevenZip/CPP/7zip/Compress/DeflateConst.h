@@ -1,4 +1,4 @@
-// DeflateConst.h
+﻿// DeflateConst.h
 
 #ifndef ZIP7_INC_DEFLATE_CONST_H
 #define ZIP7_INC_DEFLATE_CONST_H

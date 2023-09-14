@@ -1,4 +1,4 @@
-// Crypto/Rar20Crypto.cpp
+﻿// Crypto/Rar20Crypto.cpp
 
 #include "StdAfx.h"
 

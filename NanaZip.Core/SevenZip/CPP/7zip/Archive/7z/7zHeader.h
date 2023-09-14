@@ -1,4 +1,4 @@
-// 7z/7zHeader.h
+﻿// 7z/7zHeader.h
 
 #ifndef ZIP7_INC_7Z_HEADER_H
 #define ZIP7_INC_7Z_HEADER_H

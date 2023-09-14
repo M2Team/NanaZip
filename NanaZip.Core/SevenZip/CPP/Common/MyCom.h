@@ -1,4 +1,4 @@
-// MyCom.h
+﻿// MyCom.h
 
 #ifndef ZIP7_INC_MY_COM_H
 #define ZIP7_INC_MY_COM_H

@@ -1,4 +1,4 @@
-// MyLinux.h
+﻿// MyLinux.h
 
 #ifndef ZIP7_INC_COMMON_MY_LINUX_H
 #define ZIP7_INC_COMMON_MY_LINUX_H

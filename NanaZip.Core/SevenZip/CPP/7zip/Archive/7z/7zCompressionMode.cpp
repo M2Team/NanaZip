@@ -1,3 +1,3 @@
-// CompressionMethod.cpp
+﻿// CompressionMethod.cpp
 
 #include "StdAfx.h"

@@ -1,4 +1,4 @@
-// CabBlockInStream.h
+﻿// CabBlockInStream.h
 
 #ifndef ZIP7_INC_CAB_BLOCK_IN_STREAM_H
 #define ZIP7_INC_CAB_BLOCK_IN_STREAM_H

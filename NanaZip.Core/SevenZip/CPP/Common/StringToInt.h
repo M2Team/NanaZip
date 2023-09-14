@@ -1,4 +1,4 @@
-// Common/StringToInt.h
+﻿// Common/StringToInt.h
 
 #ifndef ZIP7_INC_COMMON_STRING_TO_INT_H
 #define ZIP7_INC_COMMON_STRING_TO_INT_H

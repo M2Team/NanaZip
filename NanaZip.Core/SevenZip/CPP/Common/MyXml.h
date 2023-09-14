@@ -1,4 +1,4 @@
-// MyXml.h
+﻿// MyXml.h
 
 #ifndef ZIP7_INC_MY_XML_H
 #define ZIP7_INC_MY_XML_H

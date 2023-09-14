@@ -1,4 +1,4 @@
-// ArjHandler.cpp
+﻿// ArjHandler.cpp
 
 #include "StdAfx.h"
 

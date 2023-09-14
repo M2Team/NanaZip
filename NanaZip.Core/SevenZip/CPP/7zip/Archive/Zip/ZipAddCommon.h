@@ -1,4 +1,4 @@
-// ZipAddCommon.h
+﻿// ZipAddCommon.h
 
 #ifndef ZIP7_INC_ZIP_ADD_COMMON_H
 #define ZIP7_INC_ZIP_ADD_COMMON_H

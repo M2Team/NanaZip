@@ -1,4 +1,4 @@
-// 7zOut.h
+﻿// 7zOut.h
 
 #ifndef ZIP7_INC_7Z_OUT_H
 #define ZIP7_INC_7Z_OUT_H

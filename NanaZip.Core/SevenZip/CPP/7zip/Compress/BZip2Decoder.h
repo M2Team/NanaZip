@@ -1,4 +1,4 @@
-// Compress/BZip2Decoder.h
+﻿// Compress/BZip2Decoder.h
 
 #ifndef ZIP7_INC_COMPRESS_BZIP2_DECODER_H
 #define ZIP7_INC_COMPRESS_BZIP2_DECODER_H

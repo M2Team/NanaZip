@@ -1,4 +1,4 @@
-// HmacSha1.cpp
+﻿// HmacSha1.cpp
 
 #include "StdAfx.h"
 

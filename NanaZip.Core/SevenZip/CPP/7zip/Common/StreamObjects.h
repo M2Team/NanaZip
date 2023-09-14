@@ -1,4 +1,4 @@
-// StreamObjects.h
+﻿// StreamObjects.h
 
 #ifndef ZIP7_INC_STREAM_OBJECTS_H
 #define ZIP7_INC_STREAM_OBJECTS_H

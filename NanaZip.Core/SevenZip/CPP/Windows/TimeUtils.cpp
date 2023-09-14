@@ -1,4 +1,4 @@
-// Windows/TimeUtils.cpp
+﻿// Windows/TimeUtils.cpp
 
 #include "StdAfx.h"
 

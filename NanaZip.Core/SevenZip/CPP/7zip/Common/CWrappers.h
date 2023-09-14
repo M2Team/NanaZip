@@ -1,4 +1,4 @@
-// CWrappers.h
+﻿// CWrappers.h
 
 #ifndef ZIP7_INC_C_WRAPPERS_H
 #define ZIP7_INC_C_WRAPPERS_H

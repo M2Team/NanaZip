@@ -1,4 +1,4 @@
-// Archive/Common/ItemNameUtils.h
+﻿// Archive/Common/ItemNameUtils.h
 
 #ifndef ZIP7_INC_ARCHIVE_ITEM_NAME_UTILS_H
 #define ZIP7_INC_ARCHIVE_ITEM_NAME_UTILS_H

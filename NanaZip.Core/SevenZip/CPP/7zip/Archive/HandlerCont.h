@@ -1,4 +1,4 @@
-// HandlerCont.h
+﻿// HandlerCont.h
 
 #ifndef ZIP7_INC_HANDLER_CONT_H
 #define ZIP7_INC_HANDLER_CONT_H

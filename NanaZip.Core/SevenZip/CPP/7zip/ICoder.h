@@ -1,4 +1,4 @@
-// ICoder.h
+﻿// ICoder.h
 
 #ifndef ZIP7_INC_ICODER_H
 #define ZIP7_INC_ICODER_H

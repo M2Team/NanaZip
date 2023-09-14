@@ -1,4 +1,4 @@
-// SparseHandler.cpp
+﻿// SparseHandler.cpp
 
 #include "StdAfx.h"
 

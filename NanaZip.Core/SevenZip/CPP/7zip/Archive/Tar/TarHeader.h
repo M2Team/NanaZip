@@ -1,4 +1,4 @@
-// Archive/TarHeader.h
+﻿// Archive/TarHeader.h
 
 #ifndef ZIP7_INC_ARCHIVE_TAR_HEADER_H
 #define ZIP7_INC_ARCHIVE_TAR_HEADER_H

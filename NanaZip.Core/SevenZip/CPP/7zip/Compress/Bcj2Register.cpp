@@ -1,4 +1,4 @@
-// Bcj2Register.cpp
+﻿// Bcj2Register.cpp
 
 #include "StdAfx.h"
 

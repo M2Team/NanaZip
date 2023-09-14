@@ -1,4 +1,4 @@
-// Crypto/Sha1Cls.h
+﻿// Crypto/Sha1Cls.h
 
 #ifndef ZIP7_INC_CRYPTO_SHA1_CLS_H
 #define ZIP7_INC_CRYPTO_SHA1_CLS_H

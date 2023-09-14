@@ -1,4 +1,4 @@
-// MemBlocks.h
+﻿// MemBlocks.h
 
 #ifndef ZIP7_INC_MEM_BLOCKS_H
 #define ZIP7_INC_MEM_BLOCKS_H

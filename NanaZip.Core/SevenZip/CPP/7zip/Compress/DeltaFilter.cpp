@@ -1,4 +1,4 @@
-// DeltaFilter.cpp
+﻿// DeltaFilter.cpp
 
 #include "StdAfx.h"
 

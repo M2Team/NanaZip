@@ -1,4 +1,4 @@
-// PpmdEncoder.h
+﻿// PpmdEncoder.h
 
 #ifndef ZIP7_INC_COMPRESS_PPMD_ENCODER_H
 #define ZIP7_INC_COMPRESS_PPMD_ENCODER_H

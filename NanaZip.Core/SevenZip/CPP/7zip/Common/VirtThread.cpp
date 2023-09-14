@@ -1,4 +1,4 @@
-// VirtThread.cpp
+﻿// VirtThread.cpp
 
 #include "StdAfx.h"
 

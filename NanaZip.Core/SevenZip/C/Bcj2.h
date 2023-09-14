@@ -1,4 +1,4 @@
-/* Bcj2.h -- BCJ2 converter for x86 code (Branch CALL/JUMP variant2)
+﻿/* Bcj2.h -- BCJ2 converter for x86 code (Branch CALL/JUMP variant2)
 2023-03-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_BCJ2_H

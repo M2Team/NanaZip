@@ -1,4 +1,4 @@
-// StreamUtils.h
+﻿// StreamUtils.h
 
 #ifndef ZIP7_INC_STREAM_UTILS_H
 #define ZIP7_INC_STREAM_UTILS_H

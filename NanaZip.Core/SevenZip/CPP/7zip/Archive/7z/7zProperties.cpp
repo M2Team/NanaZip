@@ -1,4 +1,4 @@
-// 7zProperties.cpp
+﻿// 7zProperties.cpp
 
 #include "StdAfx.h"
 

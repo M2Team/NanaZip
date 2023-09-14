@@ -1,4 +1,4 @@
-// Common/MyTypes.h
+﻿// Common/MyTypes.h
 
 #ifndef ZIP7_INC_COMMON_MY_TYPES_H
 #define ZIP7_INC_COMMON_MY_TYPES_H

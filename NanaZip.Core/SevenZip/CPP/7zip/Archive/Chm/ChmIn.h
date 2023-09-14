@@ -1,4 +1,4 @@
-// Archive/ChmIn.h
+﻿// Archive/ChmIn.h
 
 #ifndef ZIP7_INC_ARCHIVE_CHM_IN_H
 #define ZIP7_INC_ARCHIVE_CHM_IN_H

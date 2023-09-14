@@ -1,4 +1,4 @@
-// Windows/FileFind.h
+﻿// Windows/FileFind.h
 
 #ifndef ZIP7_INC_WINDOWS_FILE_FIND_H
 #define ZIP7_INC_WINDOWS_FILE_FIND_H

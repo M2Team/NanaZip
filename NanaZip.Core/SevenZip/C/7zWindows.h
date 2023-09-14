@@ -1,4 +1,4 @@
-/* 7zWindows.h -- StdAfx
+﻿/* 7zWindows.h -- StdAfx
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_7Z_WINDOWS_H

@@ -1,4 +1,4 @@
-// TarHandler.h
+﻿// TarHandler.h
 
 #ifndef ZIP7_INC_TAR_HANDLER_H
 #define ZIP7_INC_TAR_HANDLER_H

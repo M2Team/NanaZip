@@ -1,4 +1,4 @@
-// OffsetStream.cpp
+﻿// OffsetStream.cpp
 
 #include "StdAfx.h"
 

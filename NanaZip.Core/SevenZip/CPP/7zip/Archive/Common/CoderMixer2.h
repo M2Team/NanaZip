@@ -1,4 +1,4 @@
-// CoderMixer2.h
+﻿// CoderMixer2.h
 
 #ifndef ZIP7_INC_CODER_MIXER2_H
 #define ZIP7_INC_CODER_MIXER2_H

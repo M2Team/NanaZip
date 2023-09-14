@@ -1,4 +1,4 @@
-// 7zAes.h
+﻿// 7zAes.h
 
 #ifndef ZIP7_INC_CRYPTO_7Z_AES_H
 #define ZIP7_INC_CRYPTO_7Z_AES_H

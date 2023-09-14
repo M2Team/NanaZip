@@ -1,4 +1,4 @@
-// IArchive.h
+﻿// IArchive.h
 
 #ifndef ZIP7_INC_IARCHIVE_H
 #define ZIP7_INC_IARCHIVE_H

@@ -1,4 +1,4 @@
-// Lzx.h
+﻿// Lzx.h
 
 #ifndef ZIP7_INC_COMPRESS_LZX_H
 #define ZIP7_INC_COMPRESS_LZX_H

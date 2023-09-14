@@ -1,4 +1,4 @@
-// Common/StringConvert.h
+﻿// Common/StringConvert.h
 
 #ifndef ZIP7_INC_COMMON_STRING_CONVERT_H
 #define ZIP7_INC_COMMON_STRING_CONVERT_H

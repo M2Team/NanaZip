@@ -1,4 +1,4 @@
-/* BwtSort.h -- BWT block sorting
+﻿/* BwtSort.h -- BWT block sorting
 2023-03-03 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_BWT_SORT_H

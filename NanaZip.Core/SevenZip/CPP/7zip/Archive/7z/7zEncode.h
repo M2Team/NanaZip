@@ -1,4 +1,4 @@
-// 7zEncode.h
+﻿// 7zEncode.h
 
 #ifndef ZIP7_INC_7Z_ENCODE_H
 #define ZIP7_INC_7Z_ENCODE_H

@@ -1,4 +1,4 @@
-// LzmsDecoder.cpp
+﻿// LzmsDecoder.cpp
 // The code is based on LZMS description from wimlib code
 
 #include "StdAfx.h"

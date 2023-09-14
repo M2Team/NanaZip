@@ -1,4 +1,4 @@
-// BranchMisc.cpp
+﻿// BranchMisc.cpp
 
 #include "StdAfx.h"
 

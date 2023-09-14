@@ -1,4 +1,4 @@
-// RarVol.h
+﻿// RarVol.h
 
 #ifndef ZIP7_INC_ARCHIVE_RAR_VOL_H
 #define ZIP7_INC_ARCHIVE_RAR_VOL_H

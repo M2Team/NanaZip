@@ -1,4 +1,4 @@
-// HandlerOut.h
+﻿// HandlerOut.h
 
 #ifndef ZIP7_INC_HANDLER_OUT_H
 #define ZIP7_INC_HANDLER_OUT_H

@@ -1,4 +1,4 @@
-// LzxDecoder.cpp
+﻿// LzxDecoder.cpp
 
 #include "StdAfx.h"
 

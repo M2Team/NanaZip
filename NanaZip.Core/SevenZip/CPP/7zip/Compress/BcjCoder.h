@@ -1,4 +1,4 @@
-// BcjCoder.h
+﻿// BcjCoder.h
 
 #ifndef ZIP7_INC_COMPRESS_BCJ_CODER_H
 #define ZIP7_INC_COMPRESS_BCJ_CODER_H

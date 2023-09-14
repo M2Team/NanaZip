@@ -1,4 +1,4 @@
-/* Ppmd8Enc.c -- Ppmd8 (PPMdI) Encoder
+﻿/* Ppmd8Enc.c -- Ppmd8 (PPMdI) Encoder
 2023-04-02 : Igor Pavlov : Public domain
 This code is based on:
   PPMd var.I (2002): Dmitry Shkarin : Public domain

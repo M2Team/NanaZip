@@ -1,4 +1,4 @@
-/* 7zCrc.c -- CRC32 calculation and init
+﻿/* 7zCrc.c -- CRC32 calculation and init
 2023-04-02 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

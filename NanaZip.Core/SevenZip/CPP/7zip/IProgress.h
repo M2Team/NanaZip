@@ -1,4 +1,4 @@
-// IProgress.h
+﻿// IProgress.h
 
 #ifndef ZIP7_INC_IPROGRESS_H
 #define ZIP7_INC_IPROGRESS_H

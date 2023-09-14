@@ -1,4 +1,4 @@
-// ShrinkDecoder.h
+﻿// ShrinkDecoder.h
 
 #ifndef ZIP7_INC_COMPRESS_SHRINK_DECODER_H
 #define ZIP7_INC_COMPRESS_SHRINK_DECODER_H

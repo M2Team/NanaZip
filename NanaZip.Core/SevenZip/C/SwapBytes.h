@@ -1,4 +1,4 @@
-/* SwapBytes.h -- Byte Swap conversion filter
+﻿/* SwapBytes.h -- Byte Swap conversion filter
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SWAP_BYTES_H

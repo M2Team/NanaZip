@@ -1,4 +1,4 @@
-// CreateCoder.h
+﻿// CreateCoder.h
 
 #ifndef ZIP7_INC_CREATE_CODER_H
 #define ZIP7_INC_CREATE_CODER_H

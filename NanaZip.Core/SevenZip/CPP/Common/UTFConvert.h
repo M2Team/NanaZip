@@ -1,4 +1,4 @@
-// Common/UTFConvert.h
+﻿// Common/UTFConvert.h
 
 #ifndef ZIP7_INC_COMMON_UTF_CONVERT_H
 #define ZIP7_INC_COMMON_UTF_CONVERT_H

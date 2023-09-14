@@ -1,4 +1,4 @@
-// 7zFolderInStream.cpp
+﻿// 7zFolderInStream.cpp
 
 #include "StdAfx.h"
 

@@ -1,4 +1,4 @@
-// NsisIn.h
+﻿// NsisIn.h
 
 #ifndef ZIP7_INC_ARCHIVE_NSIS_IN_H
 #define ZIP7_INC_ARCHIVE_NSIS_IN_H

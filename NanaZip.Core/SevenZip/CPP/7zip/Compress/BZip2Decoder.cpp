@@ -1,4 +1,4 @@
-// BZip2Decoder.cpp
+﻿// BZip2Decoder.cpp
 
 #include "StdAfx.h"
 

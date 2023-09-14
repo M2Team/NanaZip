@@ -1,4 +1,4 @@
-/* XzIn.c - Xz input
+﻿/* XzIn.c - Xz input
 2023-04-02 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

@@ -1,4 +1,4 @@
-// ComTry.h
+﻿// ComTry.h
 
 #ifndef ZIP7_INC_COM_TRY_H
 #define ZIP7_INC_COM_TRY_H

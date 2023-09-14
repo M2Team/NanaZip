@@ -1,4 +1,4 @@
-// UTFConvert.cpp
+﻿// UTFConvert.cpp
 
 #include "StdAfx.h"
 

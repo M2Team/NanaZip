@@ -1,4 +1,4 @@
-/* Lzma2Dec.h -- LZMA2 Decoder
+﻿/* Lzma2Dec.h -- LZMA2 Decoder
 2023-03-03 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_LZMA2_DEC_H

@@ -1,4 +1,4 @@
-// Windows/Defs.h
+﻿// Windows/Defs.h
 
 #ifndef ZIP7_INC_WINDOWS_DEFS_H
 #define ZIP7_INC_WINDOWS_DEFS_H

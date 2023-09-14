@@ -1,4 +1,4 @@
-// DummyOutStream.h
+﻿// DummyOutStream.h
 
 #ifndef ZIP7_INC_DUMMY_OUT_STREAM_H
 #define ZIP7_INC_DUMMY_OUT_STREAM_H

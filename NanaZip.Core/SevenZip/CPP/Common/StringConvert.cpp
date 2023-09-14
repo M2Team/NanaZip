@@ -1,4 +1,4 @@
-// Common/StringConvert.cpp
+﻿// Common/StringConvert.cpp
 
 #include "StdAfx.h"
 

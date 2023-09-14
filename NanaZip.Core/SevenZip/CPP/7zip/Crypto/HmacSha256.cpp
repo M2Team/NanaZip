@@ -1,4 +1,4 @@
-// HmacSha256.cpp
+﻿// HmacSha256.cpp
 
 #include "StdAfx.h"
 

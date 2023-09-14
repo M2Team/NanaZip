@@ -1,4 +1,4 @@
-// LzmsDecoder.h
+﻿// LzmsDecoder.h
 // The code is based on LZMS description from wimlib code
 
 #ifndef ZIP7_INC_LZMS_DECODER_H

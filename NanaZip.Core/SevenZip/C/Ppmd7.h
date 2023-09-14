@@ -1,4 +1,4 @@
-/* Ppmd7.h -- Ppmd7 (PPMdH) compression codec
+﻿/* Ppmd7.h -- Ppmd7 (PPMdH) compression codec
 2023-04-02 : Igor Pavlov : Public domain
 This code is based on:
   PPMd var.H (2001): Dmitry Shkarin : Public domain */

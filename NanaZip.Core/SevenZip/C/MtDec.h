@@ -1,4 +1,4 @@
-/* MtDec.h -- Multi-thread Decoder
+﻿/* MtDec.h -- Multi-thread Decoder
 2023-04-02 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_MT_DEC_H

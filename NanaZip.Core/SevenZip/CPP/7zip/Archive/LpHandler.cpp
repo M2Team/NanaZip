@@ -1,4 +1,4 @@
-// LpHandler.cpp
+﻿// LpHandler.cpp
 
 #include "StdAfx.h"
 

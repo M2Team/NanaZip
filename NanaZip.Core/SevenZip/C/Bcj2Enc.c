@@ -1,4 +1,4 @@
-/* Bcj2Enc.c -- BCJ2 Encoder converter for x86 code (Branch CALL/JUMP variant2)
+﻿/* Bcj2Enc.c -- BCJ2 Encoder converter for x86 code (Branch CALL/JUMP variant2)
 2023-04-02 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

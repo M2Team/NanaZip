@@ -1,4 +1,4 @@
-// Common/MyString.h
+﻿// Common/MyString.h
 
 #ifndef ZIP7_INC_COMMON_MY_STRING_H
 #define ZIP7_INC_COMMON_MY_STRING_H

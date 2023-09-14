@@ -1,4 +1,4 @@
-// Archive/TarOut.h
+﻿// Archive/TarOut.h
 
 #ifndef ZIP7_INC_ARCHIVE_TAR_OUT_H
 #define ZIP7_INC_ARCHIVE_TAR_OUT_H

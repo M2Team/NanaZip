@@ -1,4 +1,4 @@
-// Common/DynLimBuf.h
+﻿// Common/DynLimBuf.h
 
 #ifndef ZIP7_INC_COMMON_DYN_LIM_BUF_H
 #define ZIP7_INC_COMMON_DYN_LIM_BUF_H

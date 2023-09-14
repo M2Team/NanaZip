@@ -1,4 +1,4 @@
-// Common/CRC.cpp
+﻿// Common/CRC.cpp
 
 #include "StdAfx.h"
 

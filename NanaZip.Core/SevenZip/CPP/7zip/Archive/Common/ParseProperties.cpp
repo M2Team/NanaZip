@@ -1,3 +1,3 @@
-// ParseProperties.cpp
+﻿// ParseProperties.cpp
 
 #include "StdAfx.h"

@@ -1,4 +1,4 @@
-// Common/MyBuffer.h
+﻿// Common/MyBuffer.h
 
 #ifndef ZIP7_INC_COMMON_MY_BUFFER_H
 #define ZIP7_INC_COMMON_MY_BUFFER_H

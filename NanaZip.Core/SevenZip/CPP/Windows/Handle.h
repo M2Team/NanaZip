@@ -1,4 +1,4 @@
-// Windows/Handle.h
+﻿// Windows/Handle.h
 
 #ifndef ZIP7_INC_WINDOWS_HANDLE_H
 #define ZIP7_INC_WINDOWS_HANDLE_H

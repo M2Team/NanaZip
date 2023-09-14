@@ -1,4 +1,4 @@
-// Common/MyInitGuid.h
+﻿// Common/MyInitGuid.h
 
 #ifndef ZIP7_INC_COMMON_MY_INITGUID_H
 #define ZIP7_INC_COMMON_MY_INITGUID_H
