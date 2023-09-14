@@ -16,7 +16,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <DisableSpecificWarnings>4100;4127;4189;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4100;4127;4189;4201;4334;</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -27,6 +27,7 @@
     <ClCompile Include="Brotli\common\context.c" />
     <ClCompile Include="Brotli\common\dictionary.c" />
     <ClCompile Include="Brotli\common\platform.c" />
+    <ClCompile Include="Brotli\common\shared_dictionary.c" />
     <ClCompile Include="Brotli\common\transform.c" />
     <ClCompile Include="Brotli\dec\bit_reader.c" />
     <ClCompile Include="Brotli\dec\decode.c" />
@@ -39,6 +40,7 @@
     <ClCompile Include="Brotli\enc\brotli_bit_stream.c" />
     <ClCompile Include="Brotli\enc\cluster.c" />
     <ClCompile Include="Brotli\enc\command.c" />
+    <ClCompile Include="Brotli\enc\compound_dictionary.c" />
     <ClCompile Include="Brotli\enc\compress_fragment.c" />
     <ClCompile Include="Brotli\enc\compress_fragment_two_pass.c" />
     <ClCompile Include="Brotli\enc\dictionary_hash.c" />
@@ -58,6 +60,7 @@
     <ClInclude Include="Brotli\common\context.h" />
     <ClInclude Include="Brotli\common\dictionary.h" />
     <ClInclude Include="Brotli\common\platform.h" />
+    <ClInclude Include="Brotli\common\shared_dictionary_internal.h" />
     <ClInclude Include="Brotli\common\transform.h" />
     <ClInclude Include="Brotli\common\version.h" />
     <ClInclude Include="Brotli\dec\bit_reader.h" />
@@ -76,6 +79,7 @@
     <ClInclude Include="Brotli\enc\cluster.h" />
     <ClInclude Include="Brotli\enc\cluster_inc.h" />
     <ClInclude Include="Brotli\enc\command.h" />
+    <ClInclude Include="Brotli\enc\compound_dictionary.h" />
     <ClInclude Include="Brotli\enc\compress_fragment.h" />
     <ClInclude Include="Brotli\enc\compress_fragment_two_pass.h" />
     <ClInclude Include="Brotli\enc\dictionary_hash.h" />
@@ -102,6 +106,7 @@
     <ClInclude Include="Brotli\enc\prefix.h" />
     <ClInclude Include="Brotli\enc\quality.h" />
     <ClInclude Include="Brotli\enc\ringbuffer.h" />
+    <ClInclude Include="Brotli\enc\state.h" />
     <ClInclude Include="Brotli\enc\static_dict.h" />
     <ClInclude Include="Brotli\enc\static_dict_lut.h" />
     <ClInclude Include="Brotli\enc\utf8_util.h" />
@@ -109,6 +114,7 @@
     <ClInclude Include="Brotli\include\brotli\decode.h" />
     <ClInclude Include="Brotli\include\brotli\encode.h" />
     <ClInclude Include="Brotli\include\brotli\port.h" />
+    <ClInclude Include="Brotli\include\brotli\shared_dictionary.h" />
     <ClInclude Include="Brotli\include\brotli\types.h" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />

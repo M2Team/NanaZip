@@ -111,6 +111,12 @@
     <ClCompile Include="Brotli\enc\utf8_util.c">
       <Filter>Brotli\enc</Filter>
     </ClCompile>
+    <ClCompile Include="Brotli\common\shared_dictionary.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compound_dictionary.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brotli\common\constants.h">
@@ -279,6 +285,18 @@
       <Filter>Brotli\include\brotli</Filter>
     </ClInclude>
     <ClInclude Include="Brotli\include\brotli\types.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\shared_dictionary_internal.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\compound_dictionary.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\state.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\shared_dictionary.h">
       <Filter>Brotli\include\brotli</Filter>
     </ClInclude>
   </ItemGroup>
