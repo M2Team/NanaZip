@@ -25,6 +25,7 @@
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -57,6 +58,14 @@
     <None Include="SevenZip\C\Sha1Opt.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BLAKE3\blake3.c" />
+    <ClCompile Include="BLAKE3\blake3_avx2.c" />
+    <ClCompile Include="BLAKE3\blake3_avx512.c" />
+    <ClCompile Include="BLAKE3\blake3_dispatch.c" />
+    <ClCompile Include="BLAKE3\blake3_neon.c" />
+    <ClCompile Include="BLAKE3\blake3_portable.c" />
+    <ClCompile Include="BLAKE3\blake3_sse2.c" />
+    <ClCompile Include="BLAKE3\blake3_sse41.c" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />
@@ -359,6 +368,8 @@
     <ClCompile Include="SevenZip\C\XzIn.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BLAKE3\blake3.h" />
+    <ClInclude Include="BLAKE3\blake3_impl.h" />
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />

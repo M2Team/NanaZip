@@ -91,6 +91,9 @@
     <Filter Include="Zstandard\legacy">
       <UniqueIdentifier>{451278d5-bc5b-477e-aadd-2703390ee5da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BLAKE3">
+      <UniqueIdentifier>{ba43ff25-dbd5-48ff-a704-56465e51a31b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1040,6 +1043,30 @@
     <ClCompile Include="Zstandard\legacy\zstd_v07.c">
       <Filter>Zstandard\legacy</Filter>
     </ClCompile>
+    <ClCompile Include="BLAKE3\blake3.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_avx2.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_avx512.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_dispatch.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_neon.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_portable.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_sse2.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_sse41.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\7zCrc.h">
@@ -1914,6 +1941,12 @@
     </ClInclude>
     <ClInclude Include="Zstandard\legacy\zstd_v07.h">
       <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="BLAKE3\blake3.h">
+      <Filter>BLAKE3</Filter>
+    </ClInclude>
+    <ClInclude Include="BLAKE3\blake3_impl.h">
+      <Filter>BLAKE3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
