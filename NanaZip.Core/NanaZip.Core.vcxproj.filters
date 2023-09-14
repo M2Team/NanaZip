@@ -112,6 +112,9 @@
     <Filter Include="Brotli\include\brotli">
       <UniqueIdentifier>{2ef869d5-91ec-44f4-9dea-3636454ece79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lizard">
+      <UniqueIdentifier>{a582978d-3bd4-4092-a86b-72bb8f96c971}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1178,6 +1181,15 @@
     <ClCompile Include="Brotli\enc\utf8_util.c">
       <Filter>Brotli\enc</Filter>
     </ClCompile>
+    <ClCompile Include="Lizard\lizard_compress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\lizard_decompress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\lizard_frame.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\7zCrc.h">
@@ -2238,6 +2250,57 @@
     </ClInclude>
     <ClInclude Include="Brotli\include\brotli\types.h">
       <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_common.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress_liz.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress_lz4.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress_liz.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress_lz4.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_frame.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_frame_static.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fast.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fastbig.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fastsmall.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_hashchain.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_lowestprice.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_nochain.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_optimal.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_pricefast.h">
+      <Filter>Lizard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

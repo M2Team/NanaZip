@@ -27,6 +27,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Lizard\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -59,6 +60,9 @@
     <None Include="SevenZip\C\Sha1Opt.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lizard\lizard_compress.c" />
+    <ClCompile Include="Lizard\lizard_decompress.c" />
+    <ClCompile Include="Lizard\lizard_frame.c" />
     <ClCompile Include="Brotli\common\constants.c" />
     <ClCompile Include="Brotli\common\context.c" />
     <ClCompile Include="Brotli\common\dictionary.c" />
@@ -400,6 +404,23 @@
     <ClCompile Include="SevenZip\C\XzIn.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Lizard\lizard_common.h" />
+    <ClInclude Include="Lizard\lizard_compress.h" />
+    <ClInclude Include="Lizard\lizard_compress_liz.h" />
+    <ClInclude Include="Lizard\lizard_compress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_decompress.h" />
+    <ClInclude Include="Lizard\lizard_decompress_liz.h" />
+    <ClInclude Include="Lizard\lizard_decompress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_frame.h" />
+    <ClInclude Include="Lizard\lizard_frame_static.h" />
+    <ClInclude Include="Lizard\lizard_parser_fast.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastbig.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastsmall.h" />
+    <ClInclude Include="Lizard\lizard_parser_hashchain.h" />
+    <ClInclude Include="Lizard\lizard_parser_lowestprice.h" />
+    <ClInclude Include="Lizard\lizard_parser_nochain.h" />
+    <ClInclude Include="Lizard\lizard_parser_optimal.h" />
+    <ClInclude Include="Lizard\lizard_parser_pricefast.h" />
     <ClInclude Include="Brotli\common\constants.h" />
     <ClInclude Include="Brotli\common\context.h" />
     <ClInclude Include="Brotli\common\dictionary.h" />
