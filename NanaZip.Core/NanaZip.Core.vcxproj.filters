@@ -115,6 +115,9 @@
     <Filter Include="Lizard">
       <UniqueIdentifier>{a582978d-3bd4-4092-a86b-72bb8f96c971}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LZ4">
+      <UniqueIdentifier>{271fd7e0-f850-4705-85e5-49b6f2f97bb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -1189,6 +1192,15 @@
     </ClCompile>
     <ClCompile Include="Lizard\lizard_frame.c">
       <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4frame.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4hc.c">
+      <Filter>LZ4</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2301,6 +2313,18 @@
     </ClInclude>
     <ClInclude Include="Lizard\lizard_parser_pricefast.h">
       <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4frame.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4frame_static.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4hc.h">
+      <Filter>LZ4</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
