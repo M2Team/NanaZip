@@ -13,8 +13,9 @@ the `Assets` folder) are designed by Shomnipotence and authorized to the
 NanaZip project, and it is distributed under the CC BY-ND 4.0 License.
 
 The source code from 7-Zip or other 7-Zip derivatives (these contents are only 
-in the `NanaZip.Core\SevenZip`, `SevenZip\Asm`, `SevenZip\C` and `SevenZip\CPP`
-folders) is distributed under the 7-Zip License.
+in the `NanaZip.Core\SevenZip`, `NanaZip.Core\Extensions\ZSCodecs`,
+`SevenZip\Asm`, `SevenZip\C` and `SevenZip\CPP` folders) is distributed under
+the 7-Zip License.
 
 The source code from the third-party libraries is distributed under the original
 license used in the third-party libraries.

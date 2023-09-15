@@ -203,8 +203,13 @@ HRESULT CMultiMethodProps::SetProperty(const wchar_t *nameSpec, const PROPVARIAN
 
   {
     HRESULT hres;
-    if (SetCommonProperty(name, value, hres))
-      return hres;
+    // **************** 7-Zip ZS Modification Start ****************
+    /*if (SetCommonProperty(name, value, hres))
+        return hres;*/
+    SetCommonProperty(name, value, hres);
+    /* don't return here, since many handlers set common properties (e. g. kNumThreads)
+       with SetCoderProperties, so add it also as prop by its ID from name below */
+    // **************** 7-Zip ZS Modification End ****************
   }
   
   UInt32 number;
@@ -258,11 +263,16 @@ HRESULT CSingleMethodProps::SetProperty(const wchar_t *name2, const PROPVARIANT 
   }
   {
     HRESULT hres;
-    if (SetCommonProperty(name, value, hres))
-    {
-      // processed = true;
-      return S_OK;
-    }
+    // **************** 7-Zip ZS Modification Start ****************
+    //if (SetCommonProperty(name, value, hres))
+    //{
+    //  // processed = true;
+    //  return S_OK;
+    //}
+    SetCommonProperty(name, value, hres);
+    /* don't return here, since many handlers set common properties (e. g. kNumThreads)
+       with SetCoderProperties, so add it also as prop by its ID from name below */
+    // **************** 7-Zip ZS Modification End ****************
   }
   RINOK(ParseMethodFromPROPVARIANT(name, value))
   return S_OK;

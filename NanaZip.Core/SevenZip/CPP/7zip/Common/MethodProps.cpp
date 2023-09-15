@@ -406,7 +406,7 @@ static const CNameToPropID g_NameToPropID[] =
   { VT_UI8, "memuse" },
   { VT_UI8, "aff" },
   { VT_UI4, "offset" },
-  { VT_UI4, "zhb" }
+  { VT_UI4, "zhb" },
   /*
   ,
   // { VT_UI4, "zhc" },
@@ -434,6 +434,22 @@ static const CNameToPropID g_NameToPropID[] =
   */
   // { VT_UI4, "mcb" }, // mc log version
   // { VT_UI4, "ztlen" },  // fb ?
+  // **************** 7-Zip ZS Modification Start ****************
+  { VT_UI4, "strat" },
+  { VT_UI4, "fast" },
+  { VT_UI4, "long" },
+  { VT_UI4, "wlog" },
+  { VT_UI4, "hlog" },
+  { VT_UI4, "clog" },
+  { VT_UI4, "slog" },
+  { VT_UI4, "slen" },
+  { VT_UI4, "tlen" },
+  { VT_UI4, "ovlog" },
+  { VT_UI4, "ldmhlog" },
+  { VT_UI4, "ldmslen" },
+  { VT_UI4, "ldmblog" },
+  { VT_UI4, "ldmhevery" }
+  // **************** 7-Zip ZS Modification End ****************
 };
 
 /*

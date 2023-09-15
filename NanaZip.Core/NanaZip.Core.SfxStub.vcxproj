@@ -40,6 +40,8 @@
     <None Include="SevenZip\C\Sha256Opt.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />
@@ -133,6 +135,7 @@
     <ClCompile Include="SevenZip\C\Threads.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />

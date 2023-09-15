@@ -74,7 +74,10 @@ private:
     m_ForceAesMode = false;
     _removeSfxBlock = false;
     m_ForceLocal = false;
-    m_ForceUtf8 = false;
+    // **************** 7-Zip ZS Modification Start ****************
+    // m_ForceUtf8 = false;
+    m_ForceUtf8 = true;
+    // **************** 7-Zip ZS Modification End ****************
     _force_SeqOutMode = false;
     _force_OpenSeq = false;
     _forceCodePage = false;

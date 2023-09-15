@@ -108,6 +108,29 @@
     <ClCompile Include="Extensions\xxHash\Xxh32Handler.cpp" />
     <ClCompile Include="Extensions\xxHash\Xxh364Handler.cpp" />
     <ClCompile Include="Extensions\xxHash\Xxh64Handler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\BrotliDecoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\BrotliEncoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\BrotliHandler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\BrotliRegister.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\FastLzma2Encoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\FastLzma2Register.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\LizardDecoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\LizardEncoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\LizardHandler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\LizardRegister.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz4Decoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz4Encoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz4Handler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz4Register.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz5Decoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz5Encoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz5Handler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Lz5Register.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\LzHandler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
     <ClCompile Include="FastLZMA2\dict_buffer.c" />
     <ClCompile Include="FastLZMA2\fl2_common.c" />
     <ClCompile Include="FastLZMA2\fl2_compress.c" />
@@ -508,6 +531,17 @@
     <ClCompile Include="ZSTDMT\zstd-mt_threading.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Extensions\ZSCodecs\BrotliDecoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\BrotliEncoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\FastLzma2Encoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\LizardDecoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\LizardEncoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\Lz4Decoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\Lz4Encoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\Lz5Decoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\Lz5Encoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\ZstdEncoder.h" />
     <ClInclude Include="FastLZMA2\atomic.h" />
     <ClInclude Include="FastLZMA2\compiler.h" />
     <ClInclude Include="FastLZMA2\count.h" />

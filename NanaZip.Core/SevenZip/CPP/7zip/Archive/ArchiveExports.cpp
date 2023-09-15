@@ -10,7 +10,7 @@
 
 #include "../Common/RegisterArc.h"
 
-static const unsigned kNumArcsMax = 72;
+static const unsigned kNumArcsMax = 256;
 static unsigned g_NumArcs = 0;
 static unsigned g_DefaultArcIndex = 0;
 static const CArcInfo *g_Arcs[kNumArcsMax];

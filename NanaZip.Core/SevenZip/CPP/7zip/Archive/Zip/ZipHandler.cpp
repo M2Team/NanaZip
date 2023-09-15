@@ -34,6 +34,9 @@
 #include "../../Compress/PpmdZip.h"
 #include "../../Compress/ShrinkDecoder.h"
 #include "../../Compress/XzDecoder.h"
+// **************** 7-Zip ZS Modification Start ****************
+#include "../../../../../Extensions/ZSCodecs/ZstdDecoder.h"
+// **************** 7-Zip ZS Modification End ****************
 
 #include "../../Crypto/WzAes.h"
 #include "../../Crypto/ZipCrypto.h"
@@ -800,6 +803,30 @@ Z7_COM7F_IMF(CHandler::Close())
   return S_OK;
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+Z7_CLASS_IMP_NOQIB_1(
+    CZstdDecoder
+    , ICompressCoder
+)
+public:
+    NCompress::NZSTD::CDecoder* DecoderSpec;
+    CMyComPtr<ICompressCoder> Decoder;
+
+    CZstdDecoder();
+};
+
+CZstdDecoder::CZstdDecoder()
+{
+    DecoderSpec = new NCompress::NZSTD::CDecoder;
+    Decoder = DecoderSpec;
+}
+
+Z7_COM7F_IMF(CZstdDecoder::Code(ISequentialInStream* inStream, ISequentialOutStream* outStream,
+    const UInt64* /* inSize */, const UInt64* outSize, ICompressProgressInfo* progress))
+{
+    return Decoder->Code(inStream, outStream, NULL, outSize, progress);
+}
+// **************** 7-Zip ZS Modification End ****************
 
 Z7_CLASS_IMP_NOQIB_3(
   CLzmaDecoder
@@ -1198,6 +1225,12 @@ HRESULT CZipDecoder::Decode(
       lzmaDecoderSpec = new CLzmaDecoder;
       mi.Coder = lzmaDecoderSpec;
     }
+    // **************** 7-Zip ZS Modification Start ****************
+    else if (id == NFileHeader::NCompressionMethod::kZstdWz)
+        mi.Coder = new CZstdDecoder();
+    else if (id == NFileHeader::NCompressionMethod::kZstdPk)
+        mi.Coder = new CZstdDecoder();
+    // **************** 7-Zip ZS Modification End ****************
     else if (id == NFileHeader::NCompressionMethod::kXz)
       mi.Coder = new NCompress::NXz::CComDecoder;
     else if (id == NFileHeader::NCompressionMethod::kPPMd)

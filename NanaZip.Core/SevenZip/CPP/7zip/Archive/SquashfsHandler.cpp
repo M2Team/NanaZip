@@ -6,6 +6,9 @@
 #include "../../../C/CpuArch.h"
 #include "../../../C/LzmaDec.h"
 #include "../../../C/Xz.h"
+// **************** 7-Zip ZS Modification Start ****************
+#include <lz4.h>
+// **************** 7-Zip ZS Modification End ****************
 
 #include "../../Common/ComTry.h"
 #include "../../Common/MyLinux.h"
@@ -26,6 +29,9 @@
 #include "../Compress/CopyCoder.h"
 #include "../Compress/ZlibDecoder.h"
 // #include "../Compress/LzmaDecoder.h"
+// **************** 7-Zip ZS Modification Start ****************
+#include "../../../../Extensions/ZSCodecs/ZstdDecoder.h"
+// **************** 7-Zip ZS Modification End ****************
 
 namespace NArchive {
 namespace NSquashfs {
@@ -66,6 +72,10 @@ static const UInt32 kSignature32_B2 = 0x73687371;
 #define kMethod_LZMA 2
 #define kMethod_LZO  3
 #define kMethod_XZ   4
+// **************** 7-Zip ZS Modification Start ****************
+#define kMethod_LZ4  5
+#define kMethod_ZSTD 6
+// **************** 7-Zip ZS Modification End ****************
 
 static const char * const k_Methods[] =
 {
@@ -74,6 +84,10 @@ static const char * const k_Methods[] =
   , "LZMA"
   , "LZO"
   , "XZ"
+  // **************** 7-Zip ZS Modification Start ****************
+  , "LZ4"
+  , "ZSTD"
+  // **************** 7-Zip ZS Modification End ****************
 };
 
 static const unsigned kMetadataBlockSizeLog = 13;
@@ -875,6 +889,11 @@ Z7_CLASS_IMP_CHandler_IInArchive_1(
 
   NCompress::NZlib::CDecoder *_zlibDecoderSpec;
   CMyComPtr<ICompressCoder> _zlibDecoder;
+
+  // **************** 7-Zip ZS Modification Start ****************
+  NCompress::NZSTD::CDecoder* _zstdDecoderSpec;
+  CMyComPtr<ICompressCoder> _zstdDecoder;
+  // **************** 7-Zip ZS Modification End ****************
   
   CXzUnpacker _xz;
 
@@ -1122,6 +1141,23 @@ static HRESULT LzoDecode(Byte *dest, SizeT *destLen, const Byte *src, SizeT *src
   }
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+static HRESULT Lz4Decode(Byte* dest, SizeT* destLen, const Byte* src, SizeT* srcLen)
+{
+    const char* Src = (const char*)src;
+    char* Dst = (char*)dest;
+    int compressedSize = (int)*srcLen;
+    int dstCapacity = (int)*destLen;
+    // int LZ4_decompress_safe (const char* src, char* dst, int compressedSize, int dstCapacity);
+    int rv = LZ4_decompress_safe(Src, Dst, compressedSize, dstCapacity);
+    if (rv == 0)
+        return S_FALSE;
+
+    *destLen = rv;
+    return S_OK;
+}
+// **************** 7-Zip ZS Modification End ****************
+
 HRESULT CHandler::Decompress(ISequentialOutStream *outStream, Byte *outBuf, bool *outBufWasWritten, UInt32 *outBufWasWrittenSize, UInt32 inSize, UInt32 outSizeMax)
 {
   if (outBuf)
@@ -1162,6 +1198,19 @@ HRESULT CHandler::Decompress(ISequentialOutStream *outStream, Byte *outBuf, bool
     if (inSize != _zlibDecoderSpec->GetInputProcessedSize())
       return S_FALSE;
   }
+  // **************** 7-Zip ZS Modification Start ****************
+  else if (method == kMethod_ZSTD)
+  {
+    if (!_zstdDecoder)
+    {
+      _zstdDecoderSpec = new NCompress::NZSTD::CDecoder();
+      _zstdDecoder = _zstdDecoderSpec;
+    }
+    RINOK(_zstdDecoder->Code(_limitedInStream, outStream, NULL, NULL, NULL));
+    if (inSize != _zstdDecoderSpec->GetInputProcessedSize())
+      return S_FALSE;
+  }
+  // **************** 7-Zip ZS Modification End ****************
   /*
   else if (method == kMethod_LZMA)
   {
@@ -1216,6 +1265,12 @@ HRESULT CHandler::Decompress(ISequentialOutStream *outStream, Byte *outBuf, bool
     {
       RINOK(LzoDecode(dest, &destLen, _inputBuffer, &srcLen))
     }
+    // **************** 7-Zip ZS Modification Start ****************
+    else if (method == kMethod_LZ4)
+    {
+      RINOK(Lz4Decode(dest, &destLen, _inputBuffer, &srcLen));
+    }
+    // **************** 7-Zip ZS Modification End ****************
     else if (method == kMethod_LZMA)
     {
       Byte props[5];
@@ -1557,6 +1612,10 @@ HRESULT CHandler::Open2(IInStream *inStream)
       case kMethod_LZMA:
       case kMethod_LZO:
       case kMethod_XZ:
+      // **************** 7-Zip ZS Modification Start ****************
+      case kMethod_LZ4:
+      case kMethod_ZSTD:
+      // **************** 7-Zip ZS Modification End ****************
         break;
       default:
         return E_NOTIMPL;

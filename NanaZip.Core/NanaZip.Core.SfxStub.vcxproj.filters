@@ -58,6 +58,12 @@
     <Filter Include="Zstandard\dictBuilder">
       <UniqueIdentifier>{2622d6dc-a466-4ec3-b8b5-21d0178b296f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extensions">
+      <UniqueIdentifier>{603f3b98-10fa-4703-a074-78a3a0575141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extensions\ZSCodecs">
+      <UniqueIdentifier>{de1196d7-993c-4105-b0c0-be4dabfcad93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -367,6 +373,12 @@
     </ClCompile>
     <ClCompile Include="Zstandard\dictBuilder\zdict.c">
       <Filter>Zstandard\dictBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
+      <Filter>Extensions\ZSCodecs</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp">
+      <Filter>Extensions\ZSCodecs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -750,6 +762,9 @@
     </ClInclude>
     <ClInclude Include="Zstandard\dictBuilder\divsufsort.h">
       <Filter>Zstandard\dictBuilder</Filter>
+    </ClInclude>
+    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
+      <Filter>Extensions\ZSCodecs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

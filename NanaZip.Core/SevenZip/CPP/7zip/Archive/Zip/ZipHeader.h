@@ -80,6 +80,9 @@ namespace NFileHeader
     const Byte kExtractVersion_LZMA = 63;
     const Byte kExtractVersion_PPMd = 63;
     const Byte kExtractVersion_Xz = 20; // test it
+    // **************** 7-Zip ZS Modification Start ****************
+    const Byte kExtractVersion_Zstd = 20; // WinZip mark it
+    // **************** 7-Zip ZS Modification End ****************
   }
 
   namespace NExtraID

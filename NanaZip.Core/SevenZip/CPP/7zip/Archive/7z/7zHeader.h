@@ -121,6 +121,15 @@ const UInt32 k_ARM   = 0x3030501;
 const UInt32 k_ARMT  = 0x3030701;
 const UInt32 k_SPARC = 0x3030805;
 
+// **************** 7-Zip ZS Modification Start ****************
+const UInt32 k_LZHAM = 0x4F71001;
+const UInt32 k_ZSTD = 0x4F71101;
+const UInt32 k_BROTLI = 0x4F71102;
+const UInt32 k_LZ4 = 0x4F71104;
+const UInt32 k_LZ5 = 0x4F71105;
+const UInt32 k_LIZARD = 0x4F71106;
+// **************** 7-Zip ZS Modification End ****************
+
 const UInt32 k_AES   = 0x6F10701;
 
 // const UInt32 k_ZSTD = 0x4015D; // winzip zstd
