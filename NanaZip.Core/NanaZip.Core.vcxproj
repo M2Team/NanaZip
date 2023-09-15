@@ -34,6 +34,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)ZSTDMT\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -67,6 +68,8 @@
     <None Include="SevenZip\C\XzCrc64Opt.c" />
     <None Include="SevenZip\C\LzFindOpt.c" />
     <None Include="SevenZip\C\Sha1Opt.c" />
+    <None Include="ZSTDMT\LICENSE" />
+    <None Include="ZSTDMT\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Extensions\BLAKE3\Blake3Handler.cpp" />
@@ -490,6 +493,19 @@
     <ClCompile Include="SevenZip\C\XzDec.c" />
     <ClCompile Include="SevenZip\C\XzEnc.c" />
     <ClCompile Include="SevenZip\C\XzIn.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_common.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\zstd-mt_threading.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FastLZMA2\atomic.h" />
@@ -919,6 +935,13 @@
     <ClInclude Include="SevenZip\C\Xz.h" />
     <ClInclude Include="SevenZip\C\XzCrc64.h" />
     <ClInclude Include="SevenZip\C\XzEnc.h" />
+    <ClInclude Include="ZSTDMT\brotli-mt.h" />
+    <ClInclude Include="ZSTDMT\list.h" />
+    <ClInclude Include="ZSTDMT\lizard-mt.h" />
+    <ClInclude Include="ZSTDMT\lz4-mt.h" />
+    <ClInclude Include="ZSTDMT\lz5-mt.h" />
+    <ClInclude Include="ZSTDMT\memmt.h" />
+    <ClInclude Include="ZSTDMT\threading.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />

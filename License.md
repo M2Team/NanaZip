@@ -591,3 +591,4 @@ Creative Commons may be contacted at creativecommons.org.
 - VC-LTL, https://github.com/Chuyu-Team/VC-LTL5
 - xxHash, https://github.com/Cyan4973/xxHash
 - Zstandard, https://github.com/facebook/zstd
+- ZSTDMT, https://github.com/mcmilk/zstdmt

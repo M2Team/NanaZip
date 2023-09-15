@@ -151,6 +151,9 @@
     <Filter Include="FastLZMA2">
       <UniqueIdentifier>{4d033b0f-6065-4d51-a2f8-736b34eb0a97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ZSTDMT">
+      <UniqueIdentifier>{02539d4f-19f3-4cf5-b37c-9e09fefd1b41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -203,6 +206,12 @@
     </None>
     <None Include="FastLZMA2\LICENSE">
       <Filter>FastLZMA2</Filter>
+    </None>
+    <None Include="ZSTDMT\LICENSE">
+      <Filter>ZSTDMT</Filter>
+    </None>
+    <None Include="ZSTDMT\README.md">
+      <Filter>ZSTDMT</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1468,6 +1477,45 @@
     </ClCompile>
     <ClCompile Include="Extensions\Heimdal\Md2Handler.cpp">
       <Filter>Extensions\Heimdal</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\zstd-mt_threading.c">
+      <Filter>ZSTDMT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2751,6 +2799,27 @@
     </ClInclude>
     <ClInclude Include="Heimdal\md2.h">
       <Filter>Heimdal</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\brotli-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\list.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lizard-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lz4-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lz5-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\memmt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\threading.h">
+      <Filter>ZSTDMT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
