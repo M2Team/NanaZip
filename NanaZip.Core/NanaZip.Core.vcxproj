@@ -1052,7 +1052,7 @@
   </Target>
   <Target Name="NanaZipCoreSha1HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
-      <ClCompile Include="..\SevenZip\C\Sha1Opt.c">
+      <ClCompile Include="SevenZip\C\Sha1Opt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
