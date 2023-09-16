@@ -288,8 +288,8 @@
     <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.vcxproj">
       <Project>{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZipCore\NanaZipCore.vcxproj">
-      <Project>{86D65350-E2AE-47BC-AE05-FC35D3BAAE6C}</Project>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
+      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZipSfxWindows\NanaZipSfxWindows.vcxproj">
       <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>

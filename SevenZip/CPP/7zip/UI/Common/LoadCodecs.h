@@ -23,7 +23,7 @@ EXTERNAL_CODECS
        - NanaZipC.exe, NanaZipG.exe, NanaZip.exe
 
      Note: EXTERNAL_CODECS is used also in CPP/7zip/Common/CreateCoder.h
-           that code is used in plugin module (NanaZipCore.dll).
+           that code is used in plugin module (NanaZip.Core.dll).
 
   2) Standalone modules are compiled without EXTERNAL_CODECS:
     - SFX modules: NanaZipWindows.sfx, NanaZipConsole.sfx

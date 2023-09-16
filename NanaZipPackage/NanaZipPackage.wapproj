@@ -46,8 +46,8 @@
       <Project>{D866CA04-DF51-4660-BA4D-F82426A3A522}</Project>
       <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZipCore\NanaZipCore.vcxproj">
-      <Project>{86D65350-E2AE-47BC-AE05-FC35D3BAAE6C}</Project>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
+      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
       <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>
     <ProjectReference Include="..\NanaZipSfxConsole\NanaZipSfxConsole.vcxproj">
