@@ -30,11 +30,8 @@
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     <None Include="SevenZip\ASM\x86\AesOpt.asm" />
-    <None Include="SevenZip\ASM\x86\LzFindOpt.asm" />
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
-    <None Include="SevenZip\ASM\x86\Sha1Opt.asm" />
     <None Include="SevenZip\ASM\x86\Sha256Opt.asm" />
-    <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\AesOpt.c" />
     <None Include="SevenZip\C\Sha256Opt.c" />

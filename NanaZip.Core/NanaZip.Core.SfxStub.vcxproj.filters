@@ -72,19 +72,10 @@
     <None Include="SevenZip\ASM\x86\AesOpt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
-    <None Include="SevenZip\ASM\x86\LzFindOpt.asm">
-      <Filter>SevenZip\ASM\x86</Filter>
-    </None>
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
-    <None Include="SevenZip\ASM\x86\Sha1Opt.asm">
-      <Filter>SevenZip\ASM\x86</Filter>
-    </None>
     <None Include="SevenZip\ASM\x86\Sha256Opt.asm">
-      <Filter>SevenZip\ASM\x86</Filter>
-    </None>
-    <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
     <None Include="SevenZip\C\7zCrcOpt.c">
