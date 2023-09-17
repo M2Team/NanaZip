@@ -15,7 +15,8 @@ CEncoder::CEncoder():
   _numThreads(NWindows::NSystem::GetNumberOfProcessors()),
   _Long(-1),
   _WindowLog(-1),
-  _ctx(NULL)
+  _ctx(NULL),
+  unpackSize(0)
 {
   _props.clear();
 }

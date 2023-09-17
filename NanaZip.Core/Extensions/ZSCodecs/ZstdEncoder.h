@@ -67,6 +67,11 @@ class CEncoder:
   Int32 _LdmHashRateLog;
 
 public:
+
+  int dictIDFlag;
+  int checksumFlag;
+  UInt64 unpackSize;
+
   Z7_COM_QI_BEGIN2(ICompressCoder)
   Z7_COM_QI_ENTRY(ICompressSetCoderMt)
   Z7_COM_QI_ENTRY(ICompressSetCoderProperties)

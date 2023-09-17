@@ -30,7 +30,10 @@ CEncoder::CEncoder():
   _LdmHashLog(-1),
   _LdmMinMatch(-1),
   _LdmBucketSizeLog(-1),
-  _LdmHashRateLog(-1)
+  _LdmHashRateLog(-1),
+  dictIDFlag(-1),
+  checksumFlag(-1),
+  unpackSize(0)
 {
   _props.clear();
 }
@@ -251,6 +254,20 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
     err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_contentSizeFlag, 1);
     if (ZSTD_isError(err)) return E_INVALIDARG;
 
+    if (dictIDFlag != -1) {
+      err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_dictIDFlag, dictIDFlag);
+      if (ZSTD_isError(err)) return E_INVALIDARG;
+    }
+    if (checksumFlag != -1) {
+      err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_checksumFlag, checksumFlag);
+      if (ZSTD_isError(err)) return E_INVALIDARG;
+    }
+
+    if (unpackSize && unpackSize != (UInt64)(Int64)-1) { // size is known
+      err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_srcSizeHint, (int)(unpackSize <= INT_MAX ? unpackSize : INT_MAX));
+      if (ZSTD_isError(err)) return E_INVALIDARG;
+    }
+
     /* enable ldm for large windowlog values */
     if (_WindowLog > 27 && _Long == 0)
       _Long = 1;
@@ -320,6 +337,12 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
       err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_ldmHashRateLog, _LdmHashRateLog);
       if (ZSTD_isError(err)) return E_INVALIDARG;
     }
+
+    //err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_literalCompressionMode, (int)ZSTD_ps_auto);
+    //if (ZSTD_isError(err)) return E_INVALIDARG;
+
+    //err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_enableDedicatedDictSearch, 1);
+    //if (ZSTD_isError(err)) return E_INVALIDARG;
   }
 
   for (;;) {

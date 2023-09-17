@@ -383,7 +383,7 @@ static size_t st_compress(void *arg)
 	  /* 0, or not specified by user; could be chosen by compressor. */
 	  uint32_t lgwin = 24 /* DEFAULT_LGWIN */;
 	  /* Use file size to limit lgwin. */
-	  if (ctx->unpackSize >= 0) {
+	  if (ctx->unpackSize >= 0 && ctx->unpackSize != (uint64_t)(int64_t)-1) {
 	    lgwin = BROTLI_MIN_WINDOW_BITS;
 	    while (BROTLI_MAX_BACKWARD_LIMIT(lgwin) <
 	           (uint64_t)ctx->unpackSize) {
@@ -393,7 +393,7 @@ static size_t st_compress(void *arg)
 	  }
 	  BrotliEncoderSetParameter(state, BROTLI_PARAM_LGWIN, lgwin);
 	}
-	if (ctx->unpackSize > 0) {
+	if (ctx->unpackSize > 0 && ctx->unpackSize != (uint64_t)(int64_t)-1) {
 		uint32_t size_hint = ctx->unpackSize < (1 << 30) ?
 	    (uint32_t)ctx->unpackSize : (1u << 30);
 		BrotliEncoderSetParameter(state, BROTLI_PARAM_SIZE_HINT, size_hint);
