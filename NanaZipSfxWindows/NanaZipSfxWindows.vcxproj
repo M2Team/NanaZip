@@ -22,8 +22,7 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
-  <Import Project="..\ThirdParty\xxHash.props" />
-  <Import Project="..\ThirdParty\Zstandard.props" />
+  <Import Project="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.props" />
   <PropertyGroup>
     <TargetName>NanaZipWindows</TargetName>
     <TargetExt>.sfx</TargetExt>
@@ -267,11 +266,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ThirdParty\xxHash.vcxproj">
-      <Project>{5E684BBF-9DAA-4014-986A-463C282D6086}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\ThirdParty\Zstandard.vcxproj">
-      <Project>{5054B943-8518-4FCC-B819-685D01104DCC}</Project>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.vcxproj">
+      <Project>{7262BA1E-732D-4814-972F-698F0B4330A1}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.Mitigations.vcxproj">
       <Project>{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}</Project>
