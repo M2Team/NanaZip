@@ -37,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core", "NanaZip.Cor
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core.SfxStub", "NanaZip.Core\NanaZip.Core.SfxStub.vcxproj", "{070D3B18-7850-4F61-9A56-002879E59959}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core.Sfx.Shared", "NanaZip.Core\NanaZip.Core.Sfx.Shared.vcxproj", "{7262BA1E-732D-4814-972F-698F0B4330A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -221,6 +223,18 @@ Global
 		{070D3B18-7850-4F61-9A56-002879E59959}.Release|x64.Build.0 = Release|x64
 		{070D3B18-7850-4F61-9A56-002879E59959}.Release|x86.ActiveCfg = Release|Win32
 		{070D3B18-7850-4F61-9A56-002879E59959}.Release|x86.Build.0 = Release|Win32
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Debug|ARM64.Build.0 = Debug|ARM64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Debug|x64.ActiveCfg = Debug|x64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Debug|x64.Build.0 = Debug|x64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Debug|x86.ActiveCfg = Debug|Win32
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Debug|x86.Build.0 = Debug|Win32
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Release|ARM64.ActiveCfg = Release|ARM64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Release|ARM64.Build.0 = Release|ARM64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Release|x64.ActiveCfg = Release|x64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Release|x64.Build.0 = Release|x64
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Release|x86.ActiveCfg = Release|Win32
+		{7262BA1E-732D-4814-972F-698F0B4330A1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
