@@ -41,40 +41,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\Lang.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\Clipboard.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\MemoryGlobal.cpp" />
     <ClCompile Include="..\SevenZip\C\7zCrc.c" />
     <ClCompile Include="..\SevenZip\C\7zCrcOpt.c" />
-    <ClCompile Include="..\SevenZip\C\Aes.c" />
-    <ClCompile Include="..\SevenZip\C\AesOpt.c" />
     <ClCompile Include="..\SevenZip\C\Alloc.c" />
-    <ClCompile Include="..\SevenZip\C\Bcj2.c" />
-    <ClCompile Include="..\SevenZip\C\Bra.c" />
-    <ClCompile Include="..\SevenZip\C\Bra86.c" />
-    <ClCompile Include="..\SevenZip\C\BraIA64.c" />
     <ClCompile Include="..\SevenZip\C\CpuArch.c" />
     <ClCompile Include="..\SevenZip\C\Delta.c" />
     <ClCompile Include="..\SevenZip\C\DllSecur.c" />
-    <ClCompile Include="..\SevenZip\C\Lzma2Dec.c" />
-    <ClCompile Include="..\SevenZip\C\Lzma2DecMt.c" />
-    <ClCompile Include="..\SevenZip\C\LzmaDec.c" />
-    <ClCompile Include="..\SevenZip\C\MtDec.c" />
-    <ClCompile Include="..\SevenZip\C\Ppmd7.c" />
-    <ClCompile Include="..\SevenZip\C\Ppmd7Dec.c" />
-    <ClCompile Include="..\SevenZip\C\Sha256.c" />
-    <ClCompile Include="..\SevenZip\C\Sha256Opt.c" />
-    <ClCompile Include="..\SevenZip\C\Threads.c" />
     <ClCompile Include="..\SevenZip\CPP\Common\CommandLineParser.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\CRC.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\MyString.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\NewHandler.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\Common\Sha256Prepare.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Common\Wildcard.cpp" />
     <ClCompile Include="..\SevenZip\CPP\Windows\CommonDialog.cpp" />
@@ -119,24 +101,9 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\StreamObjects.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\StreamUtils.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\VirtThread.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Bcj2Coder.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Bcj2Register.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BcjCoder.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BcjRegister.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BranchMisc.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BranchRegister.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyCoder.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyRegister.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\DeltaFilter.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lzma2Decoder.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lzma2Register.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LzmaDecoder.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LzmaRegister.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\PpmdDecoder.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\7zAes.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
-    <ClCompile Include="..\SevenZip\CPP\7zip\Crypto\MyAes.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveExtractCallback.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveOpenCallback.cpp" />
     <ClCompile Include="..\SevenZip\CPP\7zip\UI\Common\DefaultName.cpp" />
@@ -160,24 +127,14 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\Common\Lang.h" />
     <ClInclude Include="..\SevenZip\CPP\Windows\Clipboard.h" />
     <ClInclude Include="..\SevenZip\CPP\Windows\MemoryGlobal.h" />
     <ClInclude Include="..\SevenZip\C\7zCrc.h" />
-    <ClInclude Include="..\SevenZip\C\Aes.h" />
     <ClInclude Include="..\SevenZip\C\Alloc.h" />
-    <ClInclude Include="..\SevenZip\C\Bcj2.h" />
-    <ClInclude Include="..\SevenZip\C\Bra.h" />
     <ClInclude Include="..\SevenZip\C\Delta.h" />
     <ClInclude Include="..\SevenZip\C\DllSecur.h" />
-    <ClInclude Include="..\SevenZip\C\Lzma2Dec.h" />
-    <ClInclude Include="..\SevenZip\C\Lzma2DecMt.h" />
-    <ClInclude Include="..\SevenZip\C\LzmaDec.h" />
-    <ClInclude Include="..\SevenZip\C\MtDec.h" />
-    <ClInclude Include="..\SevenZip\C\Ppmd7.h" />
-    <ClInclude Include="..\SevenZip\C\Threads.h" />
     <ClInclude Include="..\SevenZip\CPP\Common\CommandLineParser.h" />
     <ClInclude Include="..\SevenZip\CPP\Common\CRC.h" />
     <ClInclude Include="..\SevenZip\CPP\Common\IntToString.h" />
@@ -225,9 +182,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\StreamObjects.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\StreamUtils.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\VirtThread.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BranchMisc.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\Crypto\7zAes.h" />
-    <ClInclude Include="..\SevenZip\CPP\7zip\Crypto\MyAes.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveExtractCallback.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\ArchiveOpenCallback.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\Common\DefaultName.h" />
@@ -248,6 +202,7 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractDialog.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\UI\GUI\ExtractGUI.h" />
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXWin\StdAfx.h" />
+    <ClInclude Include="..\SevenZip\C\Threads.h" />
     <ClInclude Include="NanaZipSfxWindowsResources.h" />
   </ItemGroup>
   <ItemGroup>

@@ -25,9 +25,6 @@
     <Filter Include="SevenZip\File Manager">
       <UniqueIdentifier>{5800100c-c54b-46fd-81d3-3308a10fab43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SevenZip\Interface">
-      <UniqueIdentifier>{c6b5d793-a533-4a10-87a7-d39fc0831bd3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SevenZip\Spec">
       <UniqueIdentifier>{c0148d63-b44f-4707-97dc-aabd16cfa981}</UniqueIdentifier>
     </Filter>
@@ -80,24 +77,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp">
       <Filter>SevenZip\Archive Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Bcj2Coder.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Bcj2Register.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BcjCoder.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BcjRegister.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BranchMisc.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\BranchRegister.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyCoder.cpp">
       <Filter>SevenZip\Compress</Filter>
     </ClCompile>
@@ -105,18 +84,6 @@
       <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Compress\DeltaFilter.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lzma2Decoder.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\Lzma2Register.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LzmaDecoder.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\LzmaRegister.cpp">
       <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Common\CommandLineParser.cpp">
@@ -254,18 +221,6 @@
     <ClCompile Include="..\SevenZip\C\Alloc.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Bcj2.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Bra.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Bra86.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\BraIA64.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\C\CpuArch.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
@@ -273,21 +228,6 @@
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\DllSecur.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Lzma2Dec.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Lzma2DecMt.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\LzmaDec.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\MtDec.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Threads.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractCallbackSfx.cpp">
@@ -298,12 +238,6 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\SfxSetup.cpp">
       <Filter>SevenZip\Spec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\ZstdRegister.cpp">
-      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -333,12 +267,6 @@
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.h">
       <Filter>SevenZip\Archive Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\BranchMisc.h">
-      <Filter>SevenZip\Compress</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\Lzma2Decoder.h">
-      <Filter>SevenZip\Compress</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\Common\CommandLineParser.h">
       <Filter>SevenZip\Common</Filter>
@@ -475,12 +403,6 @@
     <ClInclude Include="..\SevenZip\C\Alloc.h">
       <Filter>SevenZip\C</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\Bcj2.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\Bra.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\CpuArch.h">
       <Filter>SevenZip\C</Filter>
     </ClInclude>
@@ -488,18 +410,6 @@
       <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\DllSecur.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\Lzma2Dec.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\Lzma2DecMt.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\LzmaDec.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\C\MtDec.h">
       <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\C\Threads.h">
@@ -510,9 +420,6 @@
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractEngine.h">
       <Filter>SevenZip\Spec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
-      <Filter>SevenZip\Compress</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
