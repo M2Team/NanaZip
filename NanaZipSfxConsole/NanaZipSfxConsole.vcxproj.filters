@@ -19,9 +19,6 @@
     <Filter Include="SevenZip\Common">
       <UniqueIdentifier>{beb10c23-b790-461d-87e3-df8c963482fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SevenZip\Compress">
-      <UniqueIdentifier>{4843794e-e288-4703-b23b-28ef342f0a45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SevenZip\Console">
       <UniqueIdentifier>{07026c13-6f22-4f31-92ef-c7a64715bb75}</UniqueIdentifier>
     </Filter>
@@ -52,9 +49,6 @@
       <Filter>SevenZip\Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h">
-      <Filter>SevenZip\Archive Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\MultiStream.h">
       <Filter>SevenZip\Archive Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.h">
@@ -159,9 +153,6 @@
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\CreateCoder.h">
       <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Common\CWrappers.h">
-      <Filter>SevenZip\7zip Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\FilePathAutoRename.h">
       <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
@@ -178,12 +169,6 @@
       <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\LockedStream.h">
-      <Filter>SevenZip\7zip Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Common\OffsetStream.h">
-      <Filter>SevenZip\7zip Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SevenZip\CPP\7zip\Common\OutBuffer.h">
       <Filter>SevenZip\7zip Common</Filter>
     </ClInclude>
     <ClInclude Include="..\SevenZip\CPP\7zip\Common\ProgressUtils.h">
@@ -243,9 +228,6 @@
     <ClInclude Include="..\SevenZip\C\Alloc.h">
       <Filter>SevenZip\C</Filter>
     </ClInclude>
-    <ClInclude Include="..\SevenZip\C\Delta.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
     <ClInclude Include="..\SevenZip\C\DllSecur.h">
       <Filter>SevenZip\C</Filter>
     </ClInclude>
@@ -269,9 +251,6 @@
       <Filter>SevenZip\Archive Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp">
-      <Filter>SevenZip\Archive Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\MultiStream.cpp">
       <Filter>SevenZip\Archive Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp">
@@ -312,18 +291,6 @@
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp">
       <Filter>SevenZip\7z</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Archive\SplitHandler.cpp">
-      <Filter>SevenZip\7z</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyCoder.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\CopyRegister.cpp">
-      <Filter>SevenZip\Compress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Compress\DeltaFilter.cpp">
-      <Filter>SevenZip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\Windows\DLL.cpp">
       <Filter>SevenZip\Windows</Filter>
@@ -391,9 +358,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\CreateCoder.cpp">
       <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Common\CWrappers.cpp">
-      <Filter>SevenZip\7zip Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\FilePathAutoRename.cpp">
       <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
@@ -412,12 +376,6 @@
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\LockedStream.cpp">
       <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Common\OffsetStream.cpp">
-      <Filter>SevenZip\7zip Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Common\OutBuffer.cpp">
-      <Filter>SevenZip\7zip Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\ProgressUtils.cpp">
       <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
@@ -428,9 +386,6 @@
       <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\StreamObjects.cpp">
-      <Filter>SevenZip\7zip Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\CPP\7zip\Common\StreamUtils.cpp">
       <Filter>SevenZip\7zip Common</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\CPP\7zip\Common\VirtThread.cpp">
@@ -470,9 +425,6 @@
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\CpuArch.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SevenZip\C\Delta.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="..\SevenZip\C\DllSecur.c">

@@ -216,6 +216,33 @@
     <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\MultiStream.cpp">
+      <Filter>SevenZip\CPP\7zip\Archive\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\SplitHandler.cpp">
+      <Filter>SevenZip\CPP\7zip\Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Common\StreamUtils.cpp">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\CopyCoder.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\CopyRegister.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Common\CWrappers.cpp">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\DeltaFilter.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Delta.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Common\OutBuffer.cpp">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xxHash\xxhash.h">
@@ -349,6 +376,27 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\RandGen.h">
       <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\MultiStream.h">
+      <Filter>SevenZip\CPP\7zip\Archive\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Common\StreamUtils.h">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\CopyCoder.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Common\CWrappers.h">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\StdAfx.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\Delta.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Common\OutBuffer.h">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

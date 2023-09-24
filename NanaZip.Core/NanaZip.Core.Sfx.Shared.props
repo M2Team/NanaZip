@@ -18,11 +18,12 @@
     <ItemGroup>
       <ClCompile Include="$(MSBuildThisFileDirectory)Extensions\ZSCodecs\ZstdRegister.cpp" />
       <!-- <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp" /> -->
-      <!-- <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\SplitHandler.cpp" /> -->
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\SplitHandler.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\Bcj2Register.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\BcjRegister.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\BranchRegister.cpp" />
-      <!-- <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\CopyRegister.cpp" /> -->
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\CopyRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\DeltaFilter.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\Lzma2Register.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\LzmaRegister.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
