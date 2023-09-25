@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipShellExtension", "NanaZipShellExtension\NanaZipShellExtension.vcxproj", "{F17D4837-7943-4361-9527-2AF9CACE477D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipSfxWindows", "NanaZipSfxWindows\NanaZipSfxWindows.vcxproj", "{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core.Sfx.Windows", "NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj", "{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipSfxConsole", "NanaZipSfxConsole\NanaZipSfxConsole.vcxproj", "{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core.Sfx.Console", "NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj", "{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipSfxSetup", "NanaZipSfxSetup\NanaZipSfxSetup.vcxproj", "{43308629-5328-46BF-8E1C-A258A937B981}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core.Sfx.Setup", "NanaZip.Core\NanaZip.Core.Sfx.Setup.vcxproj", "{43308629-5328-46BF-8E1C-A258A937B981}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip", "NanaZip\NanaZip.vcxproj", "{97894839-6677-49D2-BA7C-39ED0C8D4FDB}"
 EndProject

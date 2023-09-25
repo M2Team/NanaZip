@@ -50,11 +50,11 @@
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
       <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZipSfxConsole\NanaZipSfxConsole.vcxproj">
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
       <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
       <SetPlatform>Platform=Win32</SetPlatform>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZipSfxWindows\NanaZipSfxWindows.vcxproj">
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj">
       <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
       <SetPlatform>Platform=Win32</SetPlatform>
     </ProjectReference>

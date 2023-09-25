@@ -28,7 +28,7 @@ using namespace NWindows;
 using namespace NFile;
 using namespace NDir;
 
-static const char * const kDefaultSfxModule = "NanaZipWindows.sfx";
+static const char * const kDefaultSfxModule = "NanaZip.Core.Windows.sfx";
 static const char * const kSFXExtension = "exe";
 
 extern void AddMessageToString(UString &dest, const UString &src);

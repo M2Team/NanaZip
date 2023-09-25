@@ -171,7 +171,7 @@ static const char * const kNoFormats = "NanaZip cannot find the code that works 
 static const char * const kUnsupportedArcTypeMessage = "Unsupported archive type";
 // static const char * const kUnsupportedUpdateArcType = "Can't create archive for that type";
 
-#define kDefaultSfxModule "NanaZipConsole.sfx"
+#define kDefaultSfxModule "NanaZip.Core.Console.sfx"
 
 MY_ATTR_NORETURN
 static void ShowMessageAndThrowException(LPCSTR message, NExitCode::EEnum code)

@@ -42,7 +42,7 @@
     </ItemGroup>
     <MSBuild
       Projects="@(ProjectReference)"
-      Targets="NanaZipSfxSetup"
+      Targets="NanaZip_Core_Sfx_Setup"
       BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
