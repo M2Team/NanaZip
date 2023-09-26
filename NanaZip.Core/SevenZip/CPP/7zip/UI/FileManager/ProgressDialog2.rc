@@ -30,11 +30,13 @@
 
 #endif
 
-STRINGTABLE DISCARDABLE
-{
-  IDS_PROGRESS_PAUSED     "Paused"
-  IDS_PROGRESS_FOREGROUND "&Foreground"
-  IDS_CONTINUE            "&Continue"
-  IDS_PROGRESS_ASK_CANCEL "Are you sure you want to cancel?"
-  IDS_CLOSE "&Close"
-}
+// **************** NanaZip Modification Start ****************
+//STRINGTABLE DISCARDABLE
+//{
+//  IDS_PROGRESS_PAUSED     "Paused"
+//  IDS_PROGRESS_FOREGROUND "&Foreground"
+//  IDS_CONTINUE            "&Continue"
+//  IDS_PROGRESS_ASK_CANCEL "Are you sure you want to cancel?"
+//  IDS_CLOSE "&Close"
+//}
+// **************** NanaZip Modification End ****************

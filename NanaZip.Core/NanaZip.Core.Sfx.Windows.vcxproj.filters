@@ -413,9 +413,6 @@
     <None Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2a.rc">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </None>
-    <None Include="SevenZip\CPP\7zip\UI\GUI\Extract.rc">
-      <Filter>SevenZip\CPP\7zip\UI\GUI</Filter>
-    </None>
     <None Include="SevenZip\CPP\7zip\UI\GUI\ExtractDialog.rc">
       <Filter>SevenZip\CPP\7zip\UI\GUI</Filter>
     </None>

@@ -180,7 +180,6 @@
     <None Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2a.rc" />
-    <None Include="SevenZip\CPP\7zip\UI\GUI\Extract.rc" />
     <None Include="SevenZip\CPP\7zip\UI\GUI\ExtractDialog.rc" />
     <ResourceCompile Include="SevenZip\CPP\7zip\Bundles\SFXWin\resource.rc" />
     <None Include="SevenZip\CPP\7zip\GuiCommon.rc" />

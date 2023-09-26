@@ -85,7 +85,9 @@ END
 #endif
 
 
-STRINGTABLE
-BEGIN
-  IDS_FILE_SIZE  "{0} bytes"
-END
+// **************** NanaZip Modification Start ****************
+//STRINGTABLE
+//BEGIN
+//  IDS_FILE_SIZE  "{0} bytes"
+//END
+// **************** NanaZip Modification End ****************
