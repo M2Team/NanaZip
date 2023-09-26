@@ -77,8 +77,13 @@ Kenji Mouri
 
 ## System Requirements
 
-- Supported OS: Windows 10 Version 2004 (Build 19041) or later
-- Supported Platforms: x86, x86-64(AMD64) and ARM64.
+- NanaZip (Graphical User Interface, Command Line Interface and MSIX package)
+  - Supported OS: Windows 10 Version 2004 (Build 19041) or later
+  - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
+
+- NanaZip.Core (Core Library and the Self Extracting Executables)
+  - Supported OS: Windows Vista RTM (Build 6000.16386) or later.
+  - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
 
 ## Download and Installation
 
