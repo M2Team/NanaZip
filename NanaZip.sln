@@ -21,8 +21,6 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "NanaZipPackage", "NanaZipPa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipInstaller", "NanaZipInstaller\NanaZipInstaller.vcxproj", "{7FD9CD52-4A25-41B0-B3C6-5CE92681DD52}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NanaZip.Shared", "NanaZip.Shared", "{685BAF3E-2C48-4904-B37E-EBEA67680327}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Shared.ModernExperienceShims", "NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.vcxproj", "{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Shared.Mitigations", "NanaZip.Shared\NanaZip.Shared.Mitigations.vcxproj", "{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}"
@@ -194,10 +192,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{501956AB-67C3-47FA-BE2B-8AEFF463AF1C} = {685BAF3E-2C48-4904-B37E-EBEA67680327}
-		{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B} = {685BAF3E-2C48-4904-B37E-EBEA67680327}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE2C16C4-5306-4103-9C2A-749DC32B5CA6}
