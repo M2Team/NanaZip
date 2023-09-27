@@ -13,7 +13,7 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   (https://www.7-zip.org/history.txt)
 - Synchronize the 7-Zip ZS implementations to the latest master branch.
   (https://github.com/mcmilk/7-Zip-zstd/commit/ce27b4a0d3a94313d256c3d077f1784baffb9eee)
-- Add the SM3 HASH algorithms from GmSSL.
+- Add the SM3 HASH algorithm from GmSSL.
   (https://github.com/guanzhi/GmSSL)
 - Synchronize Zstandard and builtin xxHash implementations to v1.5.5.
   (https://github.com/facebook/zstd/releases/tag/v1.5.5)
@@ -26,7 +26,7 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 - Update Mile.Windows.Helpers to 1.0.15.
   (https://github.com/ProjectMile/Mile.Windows.Helpers/commit/b522a956f7dd42dc205869d362f96a777bcb2aa0)
 - Update Mile.Xaml to 2.1.661.
-  (https://github.com/ProjectMile/Mile.Xaml/releases/tag/2.0.661)
+  (https://github.com/ProjectMile/Mile.Xaml/releases/tag/2.1.661.0)
 - Update russian translation. (Contributed by Blueberryy.）
 - Fix the text wrapping issue in the About dialog. (Thanks to MenschenToaster.)
 - Use modern IFileDialog for folder picker dialog. (Contributed by 
