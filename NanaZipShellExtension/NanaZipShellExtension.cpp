@@ -297,20 +297,38 @@ namespace NanaZip::ShellExtension
             return S_OK;
         }
 
-// Open the specified folder in Windows Explorer and select it
-// Parameters:
-//   - folderPath: The full path of the folder to open
+
+  bool isExtractionCompleted = ExtractLocation();
+
   void OpenFolderInExplorer(const std::wstring& folderPath)
   {
-      std::wstring explorerCommand = L"explorer.exe /select,\"" + folderPath + L"\"";
-      HINSTANCE result = ShellExecuteW(nullptr, L"open", explorerCommand.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+     
+
+      // Use ShellExecute to open the folder
+      HINSTANCE result = ShellExecuteW(nullptr, L"open", L"explorer.exe", folderPath.c_str(), nullptr, SW_SHOWNORMAL);
+
+      // Check if ShellExecute was successful
       if (reinterpret_cast<intptr_t>(result) <= 32)
       {
           // Display an error message or log the error.
+          DWORD error = GetLastError();
+          std::wstring errorMessage = L"Failed to open folder. Error code: " + std::to_wstring(error);
+
+          // Provide additional details based on error codes if needed
+          switch (error)
+          {
+          case ERROR_FILE_NOT_FOUND:
+              errorMessage += L"\nFile not found.";
+              break;
+              // Add more cases as needed
+          }
+
+          // Handle the error or log it
           // For example:
-          // MessageBoxW(nullptr, L"Failed to open folder.", L"Error", MB_OK | MB_ICONERROR);
+          MessageBox(nullptr, errorMessage.c_str(), L"Error", MB_OK | MB_ICONERROR);
       }
   }
+
         HRESULT STDMETHODCALLTYPE Invoke(
             _In_opt_ IShellItemArray* psiItemArray,
             _In_opt_ IBindCtx* pbc)
@@ -489,8 +507,12 @@ namespace NanaZip::ShellExtension
                     && this->m_ElimDup.Val),
                     this->m_WriteZone);
                 // Open Windows Explorer and select the extracted folder
-                OpenFolderInExplorer(Folder); 
-
+              
+                if (isExtractionCompleted)
+                {
+                  
+                    OpenFolderInExplorer(Folder);
+                }
                 break;
             }
             case CommandID::Compress:
