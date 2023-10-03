@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h"
+#include "../../Common/CreateCoder.h"
 #include "../../UI/Common/Property.h"
 
 HRESULT BenchCon(DECL_EXTERNAL_CODECS_LOC_VARS

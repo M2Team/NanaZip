@@ -47,7 +47,7 @@ Kenji Mouri
 
 ## Features
 
-- Inherit all features from 7-Zip 22.01.
+- Inherit all features from 7-Zip 23.01.
 - Packaging with MSIX for modern deployment experience.
 - Support the context menu in Windows 10/11 File Explorer.
 - Enable NSIS script decompiling support for the NSIS archives. (Merged from 
@@ -61,8 +61,8 @@ Kenji Mouri
   BTIH, ED2K, EDON-R 224, EDON-R 256, EDON-R 384, EDON-R 512, GOST R 34.11-94, 
   GOST R 34.11-94 CryptoPro, GOST R 34.11-2012 256, GOST R 34.11-2012 512, 
   HAS-160, RIPEMD-160, SHA-224, SHA3-224, SHA3-256, SHA3-384, SHA3-512, 
-  Snefru-128, Snefru-256, Tiger, Tiger2, TTH, Whirlpool) and xxHash 
-  (XXH3_64bits, XXH3_128bits).
+  Snefru-128, Snefru-256, Tiger, Tiger2, TTH, Whirlpool), xxHash (XXH3_64bits,
+  XXH3_128bits) and GmSSL (SM3).
 - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP 
   attacks.
 - Mark all x86 and x64 target binaries as compatible with Control-flow 
@@ -77,8 +77,13 @@ Kenji Mouri
 
 ## System Requirements
 
-- Supported OS: Windows 10 Version 2004 (Build 19041) or later
-- Supported Platforms: x86, x86-64(AMD64) and ARM64.
+- NanaZip (Graphical User Interface, Command Line Interface and MSIX package)
+  - Supported OS: Windows 10 Version 2004 (Build 19041) or later
+  - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
+
+- NanaZip.Core (Core Library and the Self Extracting Executables)
+  - Supported OS: Windows Vista RTM (Build 6000.16386) or later.
+  - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
 
 ## Download and Installation
 

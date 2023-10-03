@@ -1,8 +1,8 @@
 ﻿// ProcessUtils.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../Common/StringConvert.h"
 
 #include "ProcessUtils.h"
 
@@ -63,7 +63,7 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
     si.dwFlags = 0;
     si.cbReserved2 = 0;
     si.lpReserved2 = 0;
-
+    
     CSysString curDirA;
     if (curDir != 0)
       curDirA = GetSystemString(curDir);
@@ -82,7 +82,7 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
     si.dwFlags = 0;
     si.cbReserved2 = 0;
     si.lpReserved2 = 0;
-
+    
     result = CreateProcessW(imageName, params2.Ptr_non_const(),
         NULL, NULL, FALSE, 0, NULL, curDir, &si, &pi);
   }

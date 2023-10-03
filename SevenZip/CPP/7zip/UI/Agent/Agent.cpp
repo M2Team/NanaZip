@@ -4,16 +4,16 @@
 
 #include <wchar.h>
 
-#include "../../../../../ThirdParty/LZMA/C/Sort.h"
+#include "../../../../C/Sort.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../Common/ComTry.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/PropVariantConv.h"
 
 #ifndef _7ZIP_ST
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
+#include "../../../Windows/Synchronization.h"
 #endif
 
 #include "../Common/ArchiveExtractCallback.h"

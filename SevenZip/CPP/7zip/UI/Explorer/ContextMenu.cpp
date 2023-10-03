@@ -2,21 +2,21 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/ComTry.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/COM.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/MemoryGlobal.h"
+#include "../../../Windows/COM.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileFind.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/MemoryGlobal.h"
 #include "../../../Windows/Menu.h"
 #include "../../../Windows/ProcessUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Shell.h"
+#include "../../../Windows/Shell.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
+#include "../../PropID.h"
 
 #include "../Common/ArchiveName.h"
 #include "../Common/CompressCall.h"

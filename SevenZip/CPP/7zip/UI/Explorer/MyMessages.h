@@ -3,7 +3,7 @@
 #ifndef __MY_MESSAGES_H
 #define __MY_MESSAGES_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
 void ShowErrorMessage(HWND window, LPCWSTR message);
 inline void ShowErrorMessage(LPCWSTR message) { ShowErrorMessage(0, message); }

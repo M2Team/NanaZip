@@ -3,10 +3,10 @@
 #include "StdAfx.h"
 
 #include "../../../Windows/Menu.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/TimeUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../Windows/TimeUtils.h"
+#include "../../../Windows/Control/Dialog.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
+#include "../../PropID.h"
 
 #include "../Common/CompressCall.h"
 

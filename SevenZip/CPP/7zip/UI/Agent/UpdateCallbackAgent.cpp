@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../Common/IntToString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
+#include "../../../Windows/ErrorMsg.h"
 
 #include "UpdateCallbackAgent.h"
 
@@ -79,7 +79,7 @@ HRESULT CUpdateCallbackAgent::OpenFileError(const FString &path, DWORD systemErr
       RINOK(Callback2->OpenFileError(fs2us(path), hres));
       return S_FALSE;
     }
-
+    
     if (Callback)
     {
       UString s ("WARNING: ");

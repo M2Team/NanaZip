@@ -1,15 +1,15 @@
 ﻿#include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/COM.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Clipboard.h"
+#include "../../../Windows/COM.h"
+#include "../../../Windows/Clipboard.h"
 #include "../../../Windows/Menu.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
+#include "../../../Windows/PropVariant.h"
+#include "../../../Windows/PropVariantConv.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/PropID.h"
+#include "../../PropID.h"
 #include "../Common/PropIDUtils.h"
 #include "../Explorer/ContextMenu.h"
 
@@ -585,7 +585,7 @@ HRESULT CPanel::CreateShellContextMenu(
 
 #include <stdio.h>
 
-// #include ../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+// #include Common/IntToString.h"
 
 static void PrintHex(UString &s, UInt32 v)
 {

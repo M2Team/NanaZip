@@ -2,22 +2,22 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
 #include <TlHelp32.h>
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../Common/IntToString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/AutoPtr.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/AutoPtr.h"
+#include "../../../Common/StringConvert.h"
 
 #include "../../../Windows/ProcessUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariantConv.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/PropVariant.h"
+#include "../../../Windows/PropVariantConv.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../Common/FileStreams.h"
+#include "../../Common/StreamObjects.h"
 
 #include "../Common/ExtractingFilePath.h"
 

@@ -3,11 +3,11 @@
 #ifndef __EXTRACT_CALLBACK_CONSOLE_H
 #define __EXTRACT_CALLBACK_CONSOLE_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StdOutStream.h"
+#include "../../../Common/StdOutStream.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
+#include "../../IPassword.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/IArchive.h"
 
 #include "../Common/ArchiveExtractCallback.h"
 

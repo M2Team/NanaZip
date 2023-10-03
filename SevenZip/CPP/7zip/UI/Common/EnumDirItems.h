@@ -3,7 +3,7 @@
 #ifndef __ENUM_DIR_ITEMS_H
 #define __ENUM_DIR_ITEMS_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/Wildcard.h"
 
 #include "DirItem.h"
 

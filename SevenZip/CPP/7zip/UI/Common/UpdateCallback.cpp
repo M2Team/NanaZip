@@ -18,26 +18,26 @@
 #endif
 
 #ifndef _7ZIP_ST
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
+#include "../../../Windows/Synchronization.h"
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/UTFConvert.h"
+#include "../../../Common/ComTry.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/Wildcard.h"
+#include "../../../Common/UTFConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/PropVariant.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../Common/StreamObjects.h"
 
 #include "UpdateCallback.h"
 
 #if defined(_WIN32) && !defined(UNDER_CE)
 #define _USE_SECURITY_CODE
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/SecurityUtils.h"
+#include "../../../Windows/SecurityUtils.h"
 #endif
 
 using namespace NWindows;

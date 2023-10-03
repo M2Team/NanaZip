@@ -3,9 +3,9 @@
 #ifndef __MENU_PAGE_H
 #define __MENU_PAGE_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/PropertyPage.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ListView.h"
+#include "../../../Windows/Control/PropertyPage.h"
+#include "../../../Windows/Control/ComboBox.h"
+#include "../../../Windows/Control/ListView.h"
 
 class CMenuPage: public NWindows::NControl::CPropertyPage
 {

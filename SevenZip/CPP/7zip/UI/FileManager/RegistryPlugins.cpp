@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/PropVariant.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/FileFind.h"
+#include "../../../Windows/PropVariant.h"
 
 #include "IFolder.h"
 #include "RegistryPlugins.h"

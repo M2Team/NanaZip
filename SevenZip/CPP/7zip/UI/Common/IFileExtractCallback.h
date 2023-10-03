@@ -3,9 +3,9 @@
 #ifndef __I_FILE_EXTRACT_CALLBACK_H
 #define __I_FILE_EXTRACT_CALLBACK_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IDecl.h"
+#include "../../IDecl.h"
 
 #include "LoadCodecs.h"
 #include "OpenArchive.h"

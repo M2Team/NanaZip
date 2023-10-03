@@ -1,0 +1,25 @@
+#include "BrowseDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 256
+#define yc 320
+
+#define k_BROWSE_y_CtrlSize 14
+
+#define k_BROWSE_y_List  24
+
+IDD_BROWSE  DIALOG 0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
+CAPTION "7-Zip: Browse"
+{
+  EDITTEXT  IDE_BROWSE_PATH,   m, by - m - k_BROWSE_y_CtrlSize - k_BROWSE_y_CtrlSize - m, xc, k_BROWSE_y_CtrlSize, ES_AUTOHSCROLL
+  COMBOBOX  IDC_BROWSE_FILTER, m, by - m - k_BROWSE_y_CtrlSize, xc, 30, MY_COMBO
+
+  PUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys
+  PUSHBUTTON  "Cancel", IDCANCEL, bx1, by, bxs, bys
+  PUSHBUTTON  "<--", IDB_BROWSE_PARENT,     m,      m, 24, bys
+  PUSHBUTTON  "+",  IDB_BROWSE_CREATE_DIR, m + 32, m, 24, bys
+  LTEXT    "", IDT_BROWSE_FOLDER, m + 64, m + 3, xc - 20, 8
+  CONTROL  "List1", IDL_BROWSE, "SysListView32",
+           LVS_REPORT | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,
+           m, m + k_BROWSE_y_List, xc, yc - bys - m - k_BROWSE_y_List - k_BROWSE_y_CtrlSize - m - k_BROWSE_y_CtrlSize - m
+}

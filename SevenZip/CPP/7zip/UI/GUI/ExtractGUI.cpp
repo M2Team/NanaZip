@@ -2,13 +2,13 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileFind.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/Thread.h"
 
 #include "../FileManager/ExtractCallback.h"
 #include "../FileManager/FormatUtils.h"
@@ -101,7 +101,7 @@ void CThreadExtracting::ProcessWasFinished_GuiVirt()
 HRESULT CThreadExtracting::ProcessVirt()
 {
   CDecompressStat Stat;
-
+  
   #ifndef _SFX
   /*
   if (HashBundle)
@@ -123,7 +123,7 @@ HRESULT CThreadExtracting::ProcessVirt()
         HashBundle,
       #endif
       FinalMessage.ErrorMessage.Message, Stat);
-
+  
   #ifndef _SFX
   if (res == S_OK && ExtractCallbackSpec->IsOK())
   {
@@ -136,7 +136,7 @@ HRESULT CThreadExtracting::ProcessVirt()
     else if (Options->TestMode)
     {
       UString s;
-
+    
       AddValuePair(s, IDS_ARCHIVES_COLON, Stat.NumArchives, false);
       AddSizePair(s, IDS_PROP_PACKED_SIZE, Stat.PackSize);
 
@@ -237,7 +237,7 @@ HRESULT ExtractGUI(
       options.OverwriteMode = dialog.OverwriteMode;
       options.PathMode = dialog.PathMode;
       options.ElimDup = dialog.ElimDup;
-
+      
       #ifndef _SFX
       // options.NtOptions.AltStreams = dialog.AltStreams;
       options.NtOptions.NtSecurity = dialog.NtSecurity;
@@ -252,7 +252,7 @@ HRESULT ExtractGUI(
       return E_FAIL;
     }
     NName::NormalizeDirPathPrefix(options.OutputDir);
-
+    
     /*
     if (!CreateComplexDirectory(options.OutputDir))
     {
@@ -269,7 +269,7 @@ HRESULT ExtractGUI(
     }
     */
   }
-
+  
   UString title = LangString(options.TestMode ? IDS_PROGRESS_TESTING : IDS_PROGRESS_EXTRACTING);
 
   extracter.Title = title;

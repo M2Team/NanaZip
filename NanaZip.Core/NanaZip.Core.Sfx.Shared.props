@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>Z7_EXTRACT_ONLY;Z7_NO_READ_FROM_CODER;Z7_SFX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(OutDir)NanaZip.Core.Sfx.Shared.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Target Name="NanaZipCoreSfxSharedBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup>
+      <ClCompile Include="$(MSBuildThisFileDirectory)Extensions\ZSCodecs\ZstdRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\SplitHandler.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\Bcj2Register.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\BcjRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\BranchRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\CopyRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\DeltaFilter.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\Lzma2Register.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\LzmaRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\Common\CRC.cpp" />
+    </ItemGroup>
+  </Target>
+</Project>

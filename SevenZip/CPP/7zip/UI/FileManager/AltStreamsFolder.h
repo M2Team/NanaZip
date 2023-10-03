@@ -3,11 +3,11 @@
 #ifndef __ALT_STREAMS_FOLDER_H
 #define __ALT_STREAMS_FOLDER_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/MyCom.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../Windows/FileFind.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/IArchive.h"
 
 #include "IFolder.h"
 
@@ -68,7 +68,7 @@ public:
 private:
   FString _pathBaseFile;  // folder
   FString _pathPrefix;    // folder:
-
+  
   CObjectVector<CAltStream> Streams;
   // CMyComPtr<IFolderFolder> _parentFolder;
 

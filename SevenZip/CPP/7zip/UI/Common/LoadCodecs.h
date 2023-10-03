@@ -22,11 +22,11 @@ EXTERNAL_CODECS
      with EXTERNAL_CODECS defined:
        - NanaZipC.exe, NanaZipG.exe, NanaZip.exe
 
-     Note: EXTERNAL_CODECS is used also in CPP/7zip/../../../ThirdParty/LZMA/CPP/7zip/Common/CreateCoder.h
-           that code is used in plugin module (NanaZipCore.dll).
+     Note: EXTERNAL_CODECS is used also in CPP/7zip/Common/CreateCoder.h
+           that code is used in plugin module (NanaZip.Core.dll).
 
   2) Standalone modules are compiled without EXTERNAL_CODECS:
-    - SFX modules: NanaZipWindows.sfx, NanaZipConsole.sfx
+    - SFX modules: NanaZip.Core.Windows.sfx, NanaZip.Core.Console.sfx
 
   if EXTERNAL_CODECS is defined, CCodecs class implements interfaces:
     - ICompressCodecsInfo : for Codecs
@@ -45,18 +45,18 @@ EXTERNAL_CODECS
         b) call SetCodecs(compressCodecsInfo) function from DLL file
 */
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/ComTry.h"
+#include "../../../Common/MyBuffer.h"
+#include "../../../Common/MyCom.h"
+#include "../../../Common/MyString.h"
+#include "../../../Common/ComTry.h"
 
 #ifdef EXTERNAL_CODECS
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
+#include "../../../Windows/DLL.h"
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/ICoder.h"
+#include "../../ICoder.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/IArchive.h"
 
 
 #ifdef EXTERNAL_CODECS

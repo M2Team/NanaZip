@@ -2,6 +2,47 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 3.0 Preview 0 (3.0.756.0)**
+
+- Rewrite and split the implementation of the Core Library and the Self
+  Extracting Executable to the separate NanaZip.Core project.
+- Ensure the implementation of Core Library and the Self Extracting Executable
+  supports Windows Vista RTM (Build 6000.16386).
+- Reduce the binary size for the Self Extracting Executables.
+- Synchronize the 7-Zip mainline implementations to 23.01.
+  (https://www.7-zip.org/history.txt)
+- Synchronize the 7-Zip ZS implementations to the latest master branch.
+  (https://github.com/mcmilk/7-Zip-zstd/commit/ce27b4a0d3a94313d256c3d077f1784baffb9eee)
+- Add the SM3 HASH algorithm from GmSSL.
+  (https://github.com/guanzhi/GmSSL)
+- Synchronize Zstandard and builtin xxHash implementations to v1.5.5.
+  (https://github.com/facebook/zstd/releases/tag/v1.5.5)
+- Synchronize Brotli implementations to v1.1.0.
+  (https://github.com/google/brotli/releases/tag/v1.1.0)
+- Synchronize the RHash implementation to the latest master branch.
+  (https://github.com/rhash/RHash/commit/b8c91ea6551e99e10352386cd46ea26973bb4a4d)
+- Update to Git submodule version of Mile.Project.Windows.
+  (https://github.com/ProjectMile/Mile.Project.Windows)
+- Update Mile.Windows.Helpers to 1.0.15.
+  (https://github.com/ProjectMile/Mile.Windows.Helpers/commit/b522a956f7dd42dc205869d362f96a777bcb2aa0)
+- Update Mile.Xaml to 2.1.661.
+  (https://github.com/ProjectMile/Mile.Xaml/releases/tag/2.1.661.0)
+- Update russian translation. (Contributed by Blueberryy.）
+- Fix the text wrapping issue in the About dialog. (Thanks to MenschenToaster.)
+- Use modern IFileDialog for folder picker dialog. (Contributed by 
+  reflectronic.）
+- Launch directly to the settings page of association for NanaZip. (Contributed
+  by AndromedaMelody.）
+- Show NanaZip in Drives' ContextMenu. (Contributed by AndromedaMelody.）
+- Sync file extension support from https://github.com/mcmilk/7-Zip-zstd.
+- Add other methods to compression dialog.
+  (https://github.com/mcmilk/7-Zip-zstd/commit/cf29d0c1babcd5ddf2c67eda8bb36e11f9c643b9)
+- Reorder initialization in constructor matching to member declaration order.
+  (https://github.com/mcmilk/7-Zip-zstd/commit/8b011d230f1ccd8990943bd2eaad38d70e6e3fdf)
+- Fix selectable uppercase / lowercase hash formatting.
+  (https://github.com/mcmilk/7-Zip-zstd/commit/4fae369d2d6aa60e2bb45eea1fb05659a2599caa)
+- Other adjustments for project development.
+
 **NanaZip 2.1 Preview 0 (2.1.451.0)**
 
 - Update icons. (Designed by Shomnipotence. Updated in NanaZip 2.0 Stable.)

@@ -4,8 +4,8 @@
 
 #include "resource.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/Thread.h"
 
 #include "../Agent/Agent.h"
 #include "../GUI/ExtractRes.h"

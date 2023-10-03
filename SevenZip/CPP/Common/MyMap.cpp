@@ -1,6 +1,6 @@
 ﻿// MyMap.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Common/StdAfx.h"
+#include "StdAfx.h"
 
 #include "MyMap.h"
 
@@ -93,7 +93,7 @@ bool CMap32::Set(UInt32 key, UInt32 value)
     {
       unsigned i = n.Len - 1;
       for (; GetSubBit(key, bitPos + i) == GetSubBit(n.Key, bitPos + i); i--);
-
+      
       CNode e2(n);
       e2.Len = (UInt16)i;
 
@@ -118,9 +118,9 @@ bool CMap32::Set(UInt32 key, UInt32 value)
       }
       unsigned i = bitPos - 1;
       for (; GetSubBit(key, i) == GetSubBit(n.Keys[bit], i); i--);
-
+     
       CNode e2;
-
+      
       unsigned newBit = GetSubBit(key, i);
       e2.Values[newBit] = value;
       e2.Values[1 - newBit] = n.Values[bit];

@@ -3,7 +3,7 @@
 #ifndef __REGISTRY_PLUGINS_H
 #define __REGISTRY_PLUGINS_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../../../Common/MyString.h"
 
 enum EPluginType
 {

@@ -4,8 +4,8 @@
 
 #include "MyMessages.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ResourceString.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/ResourceString.h"
 
 #include "../FileManager/LangUtils.h"
 

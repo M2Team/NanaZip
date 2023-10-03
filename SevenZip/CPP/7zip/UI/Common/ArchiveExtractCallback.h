@@ -3,17 +3,17 @@
 #ifndef __ARCHIVE_EXTRACT_CALLBACK_H
 #define __ARCHIVE_EXTRACT_CALLBACK_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyLinux.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/MyCom.h"
+#include "../../../Common/MyLinux.h"
+#include "../../../Common/Wildcard.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/IPassword.h"
+#include "../../IPassword.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/ProgressUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/StreamObjects.h"
+#include "../../Common/FileStreams.h"
+#include "../../Common/ProgressUtils.h"
+#include "../../Common/StreamObjects.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Archive/IArchive.h"
+#include "../../Archive/IArchive.h"
 
 #include "ExtractMode.h"
 #include "IFileExtractCallback.h"

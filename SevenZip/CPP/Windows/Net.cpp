@@ -1,11 +1,11 @@
 ﻿// Windows/Net.cpp
 
-#include "../../../ThirdParty/LZMA/CPP/Windows/StdAfx.h"
+#include "StdAfx.h"
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyBuffer.h"
+#include "../Common/MyBuffer.h"
 
 #ifndef _UNICODE
-#include "../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../Common/StringConvert.h"
 #endif
 
 #include "Net.h"

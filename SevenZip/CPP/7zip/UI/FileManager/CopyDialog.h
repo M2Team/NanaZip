@@ -3,8 +3,8 @@
 #ifndef __COPY_DIALOG_H
 #define __COPY_DIALOG_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/ComboBox.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Dialog.h"
+#include "../../../Windows/Control/ComboBox.h"
+#include "../../../Windows/Control/Dialog.h"
 
 #include "CopyDialogRes.h"
 

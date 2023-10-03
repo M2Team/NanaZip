@@ -2,11 +2,11 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Lang.h"
+#include "../../../Common/Lang.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Window.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/Synchronization.h"
+#include "../../../Windows/Window.h"
 
 #include "LangUtils.h"
 #include "RegistryUtils.h"
@@ -189,7 +189,7 @@ static void FindShortNames(UInt32 primeLang, AStringVector &names)
 }
 
 /*
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
+#include "../../../Common/IntToString.h"
 
 static struct CC1Lang
 {

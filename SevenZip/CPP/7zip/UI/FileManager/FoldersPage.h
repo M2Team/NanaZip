@@ -3,7 +3,7 @@
 #ifndef __FOLDERS_PAGE_H
 #define __FOLDERS_PAGE_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/PropertyPage.h"
+#include "../../../Windows/Control/PropertyPage.h"
 
 #include "../Common/ZipRegistry.h"
 

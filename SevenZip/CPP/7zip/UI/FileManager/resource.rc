@@ -1,4 +1,4 @@
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/GuiCommon.rc"
+#include "../../GuiCommon.rc"
 #include "resource.h"
 
 IDR_ACCELERATOR1 ACCELERATORS

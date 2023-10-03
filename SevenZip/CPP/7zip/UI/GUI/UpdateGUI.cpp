@@ -2,14 +2,14 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/StringToInt.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Thread.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileName.h"
+#include "../../../Windows/Thread.h"
 
 #include "../Common/WorkDir.h"
 
@@ -28,7 +28,7 @@ using namespace NWindows;
 using namespace NFile;
 using namespace NDir;
 
-static const char * const kDefaultSfxModule = "NanaZipWindows.sfx";
+static const char * const kDefaultSfxModule = "NanaZip.Core.Windows.sfx";
 static const char * const kSFXExtension = "exe";
 
 extern void AddMessageToString(UString &dest, const UString &src);
@@ -47,7 +47,7 @@ public:
   CUpdateOptions *Options;
   bool needSetPath;
 };
-
+ 
 HRESULT CThreadUpdating::ProcessVirt()
 {
   CUpdateErrorInfo ei;
@@ -231,7 +231,7 @@ static void SetOutProperties(
       AddProp_UInt32(properties, name, (UInt32)di.Order);
     }
   }
-
+    
   if (!di.EncryptionMethod.IsEmpty())
     AddProp_UString(properties, "em", di.EncryptionMethod);
 
@@ -240,12 +240,12 @@ static void SetOutProperties(
 
   if (di.SolidIsSpecified)
     AddProp_Size(properties, "s", di.SolidBlockSize);
-
+  
   if (
       // di.MultiThreadIsAllowed &&
       di.NumThreads != (UInt32)(Int32)-1)
     AddProp_UInt32(properties, "mt", di.NumThreads);
-
+  
   const NCompression::CMemUse &memUse = di.MemUsage;
   if (memUse.IsDefined)
   {
@@ -324,7 +324,7 @@ static HRESULT ShowDialog(
   bool oneFile = false;
   NFind::CFileInfo fileInfo;
   UString name;
-
+  
   /*
   if (censor.Pairs.Size() > 0)
   {
@@ -365,7 +365,7 @@ static HRESULT ShowDialog(
     }
   }
 
-
+  
   #if defined(_WIN32) && !defined(UNDER_CE)
   CCurrentDirRestorer curDirRestorer;
   #endif
@@ -380,7 +380,7 @@ static HRESULT ShowDialog(
 
   if (options.MethodMode.Type_Defined)
     di.FormatIndex = options.MethodMode.Type.FormatIndex;
-
+  
   FOR_VECTOR (i, codecs->Formats)
   {
     const CArcInfoEx &ai = codecs->Formats[i];
@@ -409,7 +409,7 @@ static HRESULT ShowDialog(
   dialog.OriginalFileName = fs2us(fileInfo.Name);
 
   di.PathMode = options.PathMode;
-
+    
   // di.CurrentDirPrefix = currentDirPrefix;
   di.SFXMode = options.SfxMode;
   di.OpenShareForWrite = options.OpenShareForWrite;
@@ -423,14 +423,14 @@ static HRESULT ShowDialog(
     di.SetArcMTime.SetTrueTrue();
   if (options.PreserveATime)
     di.PreserveATime.SetTrueTrue();
-
+  
   if (callback->PasswordIsDefined)
     di.Password = callback->Password;
-
+    
   di.KeepName = !oneFile;
 
   NUpdateArchive::CActionSet &actionSet = options.Commands.Front().ActionSet;
-
+ 
   {
     int index = FindActionSet(actionSet);
     if (index < 0)
@@ -452,11 +452,11 @@ static HRESULT ShowDialog(
   options.SetArcMTime = di.SetArcMTime.Val;
   if (di.PreserveATime.Def)
     options.PreserveATime = di.PreserveATime.Val;
-
+ 
   #if defined(_WIN32) && !defined(UNDER_CE)
   curDirRestorer.NeedRestore = dialog.CurrentDirWasChanged;
   #endif
-
+  
   options.VolumesSizes = di.VolumeSizes;
   /*
   if (di.VolumeSizeIsDefined)
@@ -466,7 +466,7 @@ static HRESULT ShowDialog(
   }
   */
 
-
+ 
   {
     int index = FindUpdateMode(di.UpdateMode);
     if (index < 0)
@@ -493,7 +493,7 @@ static HRESULT ShowDialog(
   SetOutProperties(options.MethodMode.Properties, di,
       is7z,
       !methodOverride); // setMethod
-
+  
   options.OpenShareForWrite = di.OpenShareForWrite;
   ParseAndAddPropertires(options.MethodMode.Properties, optionStrings);
 

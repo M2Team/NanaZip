@@ -3,7 +3,7 @@
 #ifndef __WINDOWS_NET_H
 #define __WINDOWS_NET_H
 
-#include "../../../ThirdParty/LZMA/CPP/Common/MyString.h"
+#include "../Common/MyString.h"
 
 namespace NWindows {
 namespace NNet {

@@ -2,26 +2,26 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyWindows.h"
+#include "../../../Common/MyWindows.h"
 
 #include <Shlwapi.h>
 
-#include "../../../../../ThirdParty/LZMA/C/Alloc.h"
+#include "../../../../C/Alloc.h"
 #ifdef _WIN32
-#include "../../../../../ThirdParty/LZMA/C/DllSecur.h"
+#include "../../../../C/DllSecur.h"
 #include "Mitigations.h"
 #endif
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringToInt.h"
+#include "../../../Common/StringConvert.h"
+#include "../../../Common/StringToInt.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/MemoryLock.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/NtCheck.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/System.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/MemoryLock.h"
+#include "../../../Windows/NtCheck.h"
+#include "../../../Windows/System.h"
 
 #ifndef UNDER_CE
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/SecurityUtils.h"
+#include "../../../Windows/SecurityUtils.h"
 #endif
 
 #include "../GUI/ExtractRes.h"

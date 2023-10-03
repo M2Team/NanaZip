@@ -2,8 +2,8 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StdInStream.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/StdInStream.h"
+#include "../../../Common/StringConvert.h"
 
 #include "UserInputUtils.h"
 
@@ -72,7 +72,7 @@ static bool GetPassword(CStdOutStream *outStream, UString &psw)
   }
 
   #ifdef MY_DISABLE_ECHO
-
+  
   HANDLE console = GetStdHandle(STD_INPUT_HANDLE);
   bool wasChanged = false;
   DWORD mode = 0;
@@ -82,11 +82,11 @@ static bool GetPassword(CStdOutStream *outStream, UString &psw)
   bool res = g_StdIn.ScanUStringUntilNewLine(psw);
   if (wasChanged)
     SetConsoleMode(console, mode);
-
+  
   #else
-
+  
   bool res = g_StdIn.ScanUStringUntilNewLine(psw);
-
+  
   #endif
 
   if (outStream)

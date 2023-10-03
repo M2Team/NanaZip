@@ -13,8 +13,8 @@ the `Assets` folder) are designed by Shomnipotence and authorized to the
 NanaZip project, and it is distributed under the CC BY-ND 4.0 License.
 
 The source code from 7-Zip or other 7-Zip derivatives (these contents are only 
-in the `SevenZip\Asm`, `SevenZip\C` and `SevenZip\CPP` folders) is distributed
-under the 7-Zip License.
+in the `NanaZip.Core\SevenZip`, `NanaZip.Core\Extensions\ZSCodecs`, `SevenZip\C`
+and `SevenZip\CPP` folders) is distributed under the 7-Zip License.
 
 The source code from the third-party libraries is distributed under the original
 license used in the third-party libraries.
@@ -577,6 +577,9 @@ Creative Commons may be contacted at creativecommons.org.
 - BLAKE3, https://github.com/BLAKE3-team/BLAKE3
 - Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
+- Fast LZMA2, https://github.com/conor42/fast-lzma2
+- GmSSL, https://github.com/guanzhi/GmSSL
+- Heimdal, https://github.com/heimdal/heimdal
 - Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4
 - LZ5, https://github.com/inikep/lizard
@@ -588,3 +591,4 @@ Creative Commons may be contacted at creativecommons.org.
 - VC-LTL, https://github.com/Chuyu-Team/VC-LTL5
 - xxHash, https://github.com/Cyan4973/xxHash
 - Zstandard, https://github.com/facebook/zstd
+- ZSTDMT, https://github.com/mcmilk/zstdmt

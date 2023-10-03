@@ -3,8 +3,8 @@
 #ifndef __ARCHIVE_COMMAND_LINE_H
 #define __ARCHIVE_COMMAND_LINE_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/CommandLineParser.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/Wildcard.h"
+#include "../../../Common/CommandLineParser.h"
+#include "../../../Common/Wildcard.h"
 
 #include "EnumDirItems.h"
 

@@ -4,9 +4,9 @@
 
 #include "../Common/ZipRegistry.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileFind.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/FileFind.h"
 
 #include "../Explorer/ContextMenuFlags.h"
 #include "../Explorer/resource.h"

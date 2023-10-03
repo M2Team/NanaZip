@@ -3,9 +3,9 @@
 #ifndef __WORK_DIR_H
 #define __WORK_DIR_H
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
+#include "../../../Windows/FileDir.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/7zip/Common/FileStreams.h"
+#include "../../Common/FileStreams.h"
 
 #include "ZipRegistry.h"
 

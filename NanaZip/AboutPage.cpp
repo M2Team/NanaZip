@@ -6,9 +6,9 @@
 
 #include <string>
 
-#include "../ThirdParty/LZMA/CPP/Common/Common.h"
+#include "../SevenZip/CPP/Common/Common.h"
 #include <Mile.Project.Version.h>
-#include "../ThirdParty/LZMA/C/CpuArch.h"
+#include "../SevenZip/C/CpuArch.h"
 #include "../SevenZip/CPP/7zip/UI/Common/LoadCodecs.h"
 #include "../SevenZip/CPP/7zip/UI/FileManager/LangUtils.h"
 #include "../SevenZip/CPP/7zip/UI/FileManager/resourceGui.h"

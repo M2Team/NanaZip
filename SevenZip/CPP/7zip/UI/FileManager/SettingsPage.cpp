@@ -2,12 +2,12 @@
 
 #include "StdAfx.h"
 
-// #include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+// #include "../../../Common/IntToString.h"
+#include "../../../Common/StringConvert.h"
 
 #ifndef UNDER_CE
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/MemoryLock.h"
-// #include "../../../../../ThirdParty/LZMA/CPP/Windows/System.h"
+#include "../../../Windows/MemoryLock.h"
+// #include "../../../Windows/System.h"
 #endif
 
 // #include "../Common/ZipRegistry.h"

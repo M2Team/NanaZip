@@ -4,18 +4,18 @@
 
 #include <wchar.h>
 
-#include "../../../../../ThirdParty/LZMA/CPP/Common/IntToString.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/MyCom.h"
+#include "../../../Common/IntToString.h"
+#include "../../../Common/MyCom.h"
 #include "../../../Common/Random.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Common/StringConvert.h"
+#include "../../../Common/StringConvert.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/DLL.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/ErrorMsg.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileDir.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileMapping.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/MemoryLock.h"
+#include "../../../Windows/DLL.h"
+#include "../../../Windows/ErrorMsg.h"
+#include "../../../Windows/FileDir.h"
+#include "../../../Windows/FileMapping.h"
+#include "../../../Windows/MemoryLock.h"
 #include "../../../Windows/ProcessUtils.h"
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Synchronization.h"
+#include "../../../Windows/Synchronization.h"
 
 #include "../FileManager/StringUtils.h"
 #include "../FileManager/RegistryUtils.h"

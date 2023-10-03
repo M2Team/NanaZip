@@ -2,9 +2,9 @@
 
 #include "StdAfx.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/FileName.h"
+#include "../../../Windows/FileName.h"
 
-#include "../../../../../ThirdParty/LZMA/CPP/Windows/Control/Static.h"
+#include "../../../Windows/Control/Static.h"
 
 #include "BrowseDialog.h"
 #include "CopyDialog.h"
