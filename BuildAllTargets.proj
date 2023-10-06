@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project 
-  DefaultTargets="Restore;Build;BuildSfxSetup;BuildInstaller"
+  DefaultTargets="Restore;Build;BuildSfxSetup"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Restore">
     <ItemGroup>
@@ -43,34 +43,6 @@
     <MSBuild
       Projects="@(ProjectReference)"
       Targets="NanaZip_Core_Sfx_Setup"
-      BuildInParallel="True"
-      StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64" />
-  </Target>
-  <Target Name="BuildInstaller">
-    <ItemGroup>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
-      </ProjectReference>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
-      </ProjectReference>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
-      </ProjectReference>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
-      </ProjectReference>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Debug;Platform=ARM64</AdditionalProperties>   
-      </ProjectReference>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Release;Platform=ARM64</AdditionalProperties>   
-      </ProjectReference>
-    </ItemGroup>
-    <MSBuild
-      Projects="@(ProjectReference)"
-      Targets="NanaZipInstaller"
       BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
