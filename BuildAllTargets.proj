@@ -1,48 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project 
-  DefaultTargets="Restore;Build;BuildSfxSetup"
+  DefaultTargets="Restore;Build"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Restore">
     <ItemGroup>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
         <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
-      </ProjectReference>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      </RestoreProjectReference>
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
         <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
-      </ProjectReference>
+      </RestoreProjectReference>
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
+      </RestoreProjectReference>
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
+      </RestoreProjectReference>
     </ItemGroup>
     <MSBuild
-      Projects="@(ProjectReference)"
+      Projects="@(RestoreProjectReference)"
       Targets="Restore"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
   </Target>
   <Target Name="Build">
-    <MSBuild
-      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
-      Targets="Build"
-      BuildInParallel="True"
-      StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64;Configuration=Debug;Platform=x86" />
-    <MSBuild
-      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
-      Targets="Build"
-      BuildInParallel="True"
-      StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64;Configuration=Release;Platform=x86" />
-  </Target>
-  <Target Name="BuildSfxSetup">
     <ItemGroup>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      <BuildDebugProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <Targets>NanaZip_Core;NanaZip_Core_Sfx_Setup;NanaZipConsole;NanaZip</Targets>
         <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
-      </ProjectReference>
-      <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      </BuildDebugProjectReference>
+      <BuildDebugProjectReference Include="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj">
+        <Targets>Build</Targets>
+        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
+      </BuildDebugProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <BuildReleaseProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+        <Targets>NanaZip_Core;NanaZip_Core_Sfx_Setup;NanaZipConsole;NanaZip</Targets>
         <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
-      </ProjectReference>
+      </BuildReleaseProjectReference>
+      <BuildReleaseProjectReference Include="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj">
+        <Targets>Build</Targets>
+        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
+      </BuildReleaseProjectReference>
     </ItemGroup>
     <MSBuild
-      Projects="@(ProjectReference)"
-      Targets="NanaZip_Core_Sfx_Setup"
+      Projects="@(BuildDebugProjectReference)"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64" />
+    <MSBuild
+      Projects="@(BuildReleaseProjectReference)"
       BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
