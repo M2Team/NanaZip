@@ -10,7 +10,7 @@
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <DefaultLanguage>en</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <EntryPointProjectUniqueName>..\NanaZip\NanaZip.vcxproj</EntryPointProjectUniqueName>
+    <EntryPointProjectUniqueName>..\NanaZip.UI.Classic\NanaZip.vcxproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -37,11 +37,11 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanaZip\NanaZip.vcxproj">
+    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZip.vcxproj">
       <Project>{97894839-6677-49D2-BA7C-39ED0C8D4FDB}</Project>
       <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZipConsole\NanaZipConsole.vcxproj">
+    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipConsole.vcxproj">
       <Project>{D866CA04-DF51-4660-BA4D-F82426A3A522}</Project>
       <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>
@@ -57,11 +57,11 @@
       <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
       <SetPlatform>Platform=Win32</SetPlatform>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZipShellExtension\NanaZipShellExtension.vcxproj">
+    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipShellExtension.vcxproj">
       <Project>{F17D4837-7943-4361-9527-2AF9CACE477D}</Project>
       <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZipWindows\NanaZipWindows.vcxproj">
+    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipWindows.vcxproj">
       <Project>{D33E771E-6B30-4EFB-9DEC-A9148D50080D}</Project>
       <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>

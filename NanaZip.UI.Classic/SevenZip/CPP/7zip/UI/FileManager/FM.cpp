@@ -37,8 +37,8 @@
 #include "StringUtils.h"
 #include "ViewSettings.h"
 
-#include "../../../../../NanaZip/pch.h"
-#include "../../../../../NanaZip/App.h"
+#include "../../../../../pch.h"
+#include "../../../../../App.h"
 
 using namespace NWindows;
 using namespace NFile;

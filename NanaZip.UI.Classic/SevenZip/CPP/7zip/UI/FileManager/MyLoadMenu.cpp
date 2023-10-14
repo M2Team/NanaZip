@@ -10,7 +10,7 @@
 
 #include "../Common/CompressCall.h"
 
-#include "../../../../../NanaZip/AboutDialog.h"
+#include "../../../../../AboutDialog.h"
 #include "App.h"
 #include "LangUtils.h"
 #include "MyLoadMenu.h"

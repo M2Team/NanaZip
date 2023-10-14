@@ -138,24 +138,24 @@ BEGIN
 END
 
 
-IDI_ICON  ICON  "../../../../../Assets/NanaZipPreview.ico"
+IDI_ICON  ICON  "../../../../../../Assets/NanaZipPreview.ico"
 
-IDB_ADD        BITMAP  "../../../../../NanaZip/Assets/Toolbar/Add_32x32.bmp"
-IDB_EXTRACT    BITMAP  "../../../../../NanaZip/Assets/Toolbar/Extract_32x32.bmp"
-IDB_TEST       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Test_32x32.bmp"
-IDB_COPY       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Copy_32x32.bmp"
-IDB_MOVE       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Move_32x32.bmp"
-IDB_DELETE     BITMAP  "../../../../../NanaZip/Assets/Toolbar/Delete_32x32.bmp"
-IDB_INFO       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Info_32x32.bmp"
-IDB_ADD2       BITMAP  "../../../../../NanaZip/Assets/Toolbar/Add_24x24.bmp"
-IDB_EXTRACT2   BITMAP  "../../../../../NanaZip/Assets/Toolbar/Extract_24x24.bmp"
-IDB_TEST2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Test_24x24.bmp"
-IDB_COPY2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Copy_24x24.bmp"
-IDB_MOVE2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Move_24x24.bmp"
-IDB_DELETE2    BITMAP  "../../../../../NanaZip/Assets/Toolbar/Delete_24x24.bmp"
-IDB_INFO2      BITMAP  "../../../../../NanaZip/Assets/Toolbar/Info_24x24.bmp"
+IDB_ADD        BITMAP  "../../../../../Assets/Toolbar/Add_32x32.bmp"
+IDB_EXTRACT    BITMAP  "../../../../../Assets/Toolbar/Extract_32x32.bmp"
+IDB_TEST       BITMAP  "../../../../../Assets/Toolbar/Test_32x32.bmp"
+IDB_COPY       BITMAP  "../../../../../Assets/Toolbar/Copy_32x32.bmp"
+IDB_MOVE       BITMAP  "../../../../../Assets/Toolbar/Move_32x32.bmp"
+IDB_DELETE     BITMAP  "../../../../../Assets/Toolbar/Delete_32x32.bmp"
+IDB_INFO       BITMAP  "../../../../../Assets/Toolbar/Info_32x32.bmp"
+IDB_ADD2       BITMAP  "../../../../../Assets/Toolbar/Add_24x24.bmp"
+IDB_EXTRACT2   BITMAP  "../../../../../Assets/Toolbar/Extract_24x24.bmp"
+IDB_TEST2      BITMAP  "../../../../../Assets/Toolbar/Test_24x24.bmp"
+IDB_COPY2      BITMAP  "../../../../../Assets/Toolbar/Copy_24x24.bmp"
+IDB_MOVE2      BITMAP  "../../../../../Assets/Toolbar/Move_24x24.bmp"
+IDB_DELETE2    BITMAP  "../../../../../Assets/Toolbar/Delete_24x24.bmp"
+IDB_INFO2      BITMAP  "../../../../../Assets/Toolbar/Info_24x24.bmp"
 
-IDB_PARENT_FOLDER      BITMAP  "../../../../../NanaZip/Assets/ParentFolder.bmp"
+IDB_PARENT_FOLDER      BITMAP  "../../../../../Assets/ParentFolder.bmp"
 
 STRINGTABLE
 BEGIN
