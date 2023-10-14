@@ -75,10 +75,33 @@ Kenji Mouri
 - Enable EH Continuation Metadata.
 - Enable Signed Returns.
 
+## Differences between NanaZip and NanaZip Classic
+
+NanaZip 3.0 and onwards will have two distribution flavors called NanaZip and
+NanaZip Classic. Here are the differences between them.
+
+- NanaZip
+  - Only 64-Bit support.
+  - Only MSIX packaged version.
+  - Support new context menu introduced by Windows 11.
+  - Only support Windows 10 Version 2004 (Build 19041) or later.
+  - Have XAML-based GUI and VT-based CLI.
+
+- NanaZip Classic
+  - Have 32-Bit support.
+  - Only unpackaged version (installer or portable).
+  - Only support legacy context menu.
+  - Support Windows Vista RTM (Build 6000.16386) or later.
+  - Keep Win32 GUI and Win32 CLI.
+
 ## System Requirements
 
-- NanaZip (GUI, CLI and MSIX package)
+- NanaZip (XAML-based GUI, VT-based CLI and MSIX package)
   - Supported OS: Windows 10 Version 2004 (Build 19041) or later
+  - Supported Platforms: x86 (64-bit) and ARM (64-bit)
+
+- NanaZip Classic (Win32 GUI and Win32 CLI)
+  - Supported OS: Windows Vista RTM (Build 6000.16386) or later
   - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
 
 - NanaZip.Core (Core Library and the Self Extracting Executables)

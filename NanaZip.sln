@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NanaZip.Shared Project", "N
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NanaZip.UI.Classic Project", "NanaZip.UI.Classic Project", "{FB9122A4-25AA-405E-9EE1-886274614847}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NanaZip.UI.Modern Project", "NanaZip.UI.Modern Project", "{B954CA12-11FE-45D8-A4D2-562560E1CD4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
