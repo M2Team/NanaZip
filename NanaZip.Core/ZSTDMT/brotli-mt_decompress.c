@@ -363,12 +363,7 @@ static void *pt_decompress(void *arg)
 	}
 
 	/* everything is okay */
-	pthread_mutex_lock(&ctx->write_mutex);
-	list_move(&wl->node, &ctx->writelist_free);
-	pthread_mutex_unlock(&ctx->write_mutex);
-	if (in->allocated)
-		free(in->buf);
-	return 0;
+    result = 0;
 
  error_lock:
 	pthread_mutex_lock(&ctx->write_mutex);
@@ -508,8 +503,8 @@ size_t BROTLIMT_decompressDCtx(BROTLIMT_DCtx * ctx, BROTLIMT_RdWr_t * rdwr)
 		/* no pthread_create() needed! */
 		void *p = pt_decompress(w);
 		if (p)
-			return (size_t) p;
-		goto okay;
+            retval_of_thread = p;
+        goto done;
 	}
 
 	/* multi threaded */
@@ -530,7 +525,16 @@ size_t BROTLIMT_decompressDCtx(BROTLIMT_DCtx * ctx, BROTLIMT_RdWr_t * rdwr)
 			retval_of_thread = p;
 	}
 
- okay:
+done:
+    /* move remaining done/busy entries to free list */
+    while (!list_empty(&ctx->writelist_done)) {
+        struct list_head* entry = list_first(&ctx->writelist_done);
+        list_move(entry, &ctx->writelist_free);
+    }
+    while (!list_empty(&ctx->writelist_busy)) {
+        struct list_head* entry = list_first(&ctx->writelist_busy);
+        list_move(entry, &ctx->writelist_free);
+    }
 	/* clean up the buffers */
 	while (!list_empty(&ctx->writelist_free)) {
 		struct writelist *wl;
