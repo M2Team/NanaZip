@@ -479,10 +479,10 @@
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipShellExtension.vcxproj">
+    <ProjectReference Include="NanaZipShellExtension.vcxproj">
       <Project>{F17D4837-7943-4361-9527-2AF9CACE477D}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipWindows.vcxproj">
+    <ProjectReference Include="NanaZipWindows.vcxproj">
       <Project>{D33E771E-6B30-4EFB-9DEC-A9148D50080D}</Project>
     </ProjectReference>
   </ItemGroup>
