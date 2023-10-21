@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D866CA04-DF51-4660-BA4D-F82426A3A522}</ProjectGuid>
+    <ProjectGuid>{DB46C965-5F44-4414-8E75-BA9C0858A1AF}</ProjectGuid>
     <RootNamespace>NanaZipConsole</RootNamespace>
     <MileProjectType>ConsoleApplication</MileProjectType>
     <TargetName>NanaZipC</TargetName>

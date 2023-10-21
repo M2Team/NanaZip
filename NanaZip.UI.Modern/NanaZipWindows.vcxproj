@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D33E771E-6B30-4EFB-9DEC-A9148D50080D}</ProjectGuid>
+    <ProjectGuid>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</ProjectGuid>
     <RootNamespace>NanaZipWindows</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <TargetName>NanaZipG</TargetName>
