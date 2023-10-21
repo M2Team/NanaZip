@@ -1,0 +1,16 @@
+CAPTION "Folders"
+BEGIN
+  // GROUPBOX   "&Working folder", IDT_FOLDERS_WORKING_FOLDER, m, m, xc, 98
+
+  LTEXT      "&Working folder", IDT_FOLDERS_WORKING_FOLDER, m, m, xc, 8
+  CONTROL    "&System temp folder", IDR_FOLDERS_WORK_SYSTEM,    "Button", BS_AUTORADIOBUTTON | WS_GROUP,
+             m, 20, xc, 10
+  CONTROL    "&Current",            IDR_FOLDERS_WORK_CURRENT,   "Button", BS_AUTORADIOBUTTON,
+             m, 34, xc, 10
+  CONTROL    "Specified:",          IDR_FOLDERS_WORK_SPECIFIED, "Button", BS_AUTORADIOBUTTON,
+             m, 48, xc, 10
+  EDITTEXT   IDE_FOLDERS_WORK_PATH, m + m, 62, xc - m - m - bxsDots, 14, ES_AUTOHSCROLL
+  PUSHBUTTON "...", IDB_FOLDERS_WORK_PATH, xs - m - bxsDots, 61, bxsDots, bys
+  CONTROL    "Use for removable drives only", IDX_FOLDERS_WORK_FOR_REMOVABLE, MY_CHECKBOX,
+             m, 86, xc, 10
+END

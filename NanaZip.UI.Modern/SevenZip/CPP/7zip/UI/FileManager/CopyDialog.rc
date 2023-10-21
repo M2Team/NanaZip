@@ -1,0 +1,20 @@
+#include "CopyDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 320
+#define yc 144
+
+#define y 40
+
+IDD_COPY  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
+CAPTION "Copy"
+{
+  LTEXT       "",    IDT_COPY, m, m, xc, 8
+  COMBOBOX           IDC_COPY, m, 20, xc - bxsDots - m, 65, MY_COMBO_WITH_EDIT
+  PUSHBUTTON  "...", IDB_COPY_SET_PATH, xs - m - bxsDots, 18, bxsDots, bys, WS_GROUP
+  LTEXT       "",    IDT_COPY_INFO, m, y, xc, by - y - 1, SS_NOPREFIX | SS_LEFTNOWORDWRAP
+  OK_CANCEL
+}
+
+#undef xc
+#undef yc

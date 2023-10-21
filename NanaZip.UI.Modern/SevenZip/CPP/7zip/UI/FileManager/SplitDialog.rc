@@ -1,0 +1,16 @@
+#include "SplitDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 288
+#define yc 96
+
+IDD_SPLIT  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
+CAPTION "Split File"
+BEGIN
+  LTEXT       "&Split to:", IDT_SPLIT_PATH, m, m, xc, 8
+  COMBOBOX    IDC_SPLIT_PATH, m, 20, xc - bxsDots - m, 64, MY_COMBO_WITH_EDIT
+  PUSHBUTTON  "...", IDB_SPLIT_PATH, xs - m - bxsDots, 18, bxsDots, bys, WS_GROUP
+  LTEXT       "Split to &volumes,  bytes:", IDT_SPLIT_VOLUME, m, 44, xc, 8
+  COMBOBOX    IDC_SPLIT_VOLUME, m, 56, 96, 52, MY_COMBO_WITH_EDIT
+  OK_CANCEL
+END
