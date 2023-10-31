@@ -189,38 +189,6 @@ the following command in the PowerShell which is run as administrator.
 
 ## Development Roadmap
 
-- 1.0 (December 8, 2021)
-  - [x] Modernize the build toolchain with MSBuild for using MSIX packaging and
-        parallel compilation support.
-  - [x] Use [VC-LTL 5.x](https://github.com/Chuyu-Team/VC-LTL5) toolchain to 
-        make the binary size even smaller than the official 7-Zip because we
-        can use ucrtbase.dll directly and the optimizations from modern compile
-        toolchain.
-  - [x] Add the context menu support in Windows 10/11 File Explorer.
-  - [x] New icons and minor UI tweaks.
-  - [x] Merge NSIS script decompiling support from 
-        [7-Zip NSIS branch](https://github.com/myfreeer/7z-build-nsis).
-        (Suggested by alanfox2000.)
-  - [x] Provide 7-Zip execution alias for helping users to migrate to NanaZip. 
-        (Suggested by AndromedaMelody.)
-  - [x] Add support for Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard
-        from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd). (Suggested
-        by fcharlie.)
-- 1.1 (March 17, 2022)
-  - [x] Add assembly implementations from 7-Zip back for improving performance.
-  - [x] Reimplement the about dialog with Task Dialog.
-  - [x] Modernize the message boxes with Task Dialog.
-- 1.2 (May 11, 2022)
-  - [x] Add Per-Monitor DPI-Aware support for all UI components.
-  - [x] Modernize the i18n implementation and migrate language files from 
-        `.txt`  to `.resw`. (Suggested by Maicol Battistini.)
-  - [x] Add i18n support for Self Extracting Executables.
-- 2.0 (October 4, 2022)
-  - [x] Provide the new icons.
-  - [x] Start modernizing the core implementation.
-  - [x] Add the UI stack based on XAML Islands which is used in NanaZip.
-  - [x] Start modernizing the UI with XAML Islands with the Windows 11 control
-        style, dark and light mode support.
 - Blue Moon (3.x) Series (Before 2024 Q3)
   - [ ] Continue to modernize the UI with XAML Islands with the Windows 11 
         control style, dark and light mode support.
