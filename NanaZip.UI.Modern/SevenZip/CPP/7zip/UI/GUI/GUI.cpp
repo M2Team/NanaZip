@@ -400,6 +400,10 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   {
     ErrorMessage("Cannot enable security mitigations");
   }
+  if (!::NanaZipDisableChildProcesses())
+  {
+    ErrorMessage("Cannot disable child processes");
+  }
 
   InitCommonControls();
 
