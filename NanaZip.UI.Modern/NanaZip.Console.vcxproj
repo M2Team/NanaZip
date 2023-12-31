@@ -2,23 +2,22 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB46C965-5F44-4414-8E75-BA9C0858A1AF}</ProjectGuid>
-    <RootNamespace>NanaZipConsole</RootNamespace>
+    <RootNamespace>NanaZip.Console</RootNamespace>
     <MileProjectType>ConsoleApplication</MileProjectType>
-    <TargetName>NanaZipC</TargetName>
-    <MileProjectManifestFile>NanaZipConsole.manifest</MileProjectManifestFile>
+    <TargetName>NanaZip.Console</TargetName>
+    <MileProjectManifestFile>NanaZip.Console.manifest</MileProjectManifestFile>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
-    <MileProjectFileDescription>NanaZip Command Line Interface (Console)</MileProjectFileDescription>
-    <MileProjectInternalName>NanaZipConsole</MileProjectInternalName>
+    <MileProjectFileDescription>NanaZip Modern Command Line Interface (Console)</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Console</MileProjectInternalName>
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
-    <MileProjectOriginalFilename>NanaZipC.exe</MileProjectOriginalFilename>
+    <MileProjectOriginalFilename>NanaZip.Console.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileProjectVersion>3.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
@@ -222,7 +221,7 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\Console\UserInputUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="NanaZipConsole.manifest" />
+    <Manifest Include="NanaZip.Console.manifest" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.Helpers">

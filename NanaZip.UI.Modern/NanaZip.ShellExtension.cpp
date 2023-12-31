@@ -1,6 +1,6 @@
 ﻿/*
  * PROJECT:   NanaZip
- * FILE:      NanaZipShellExtension.cpp
+ * FILE:      NanaZip.ShellExtension.cpp
  * PURPOSE:   Implementation for NanaZip Shell Extension
  *
  * LICENSE:   The MIT License
@@ -163,7 +163,7 @@ namespace
 
     static UString GetNanaZipPath()
     {
-        return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.exe";
+        return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.Modern.exe";
     }
 }
 

@@ -19,8 +19,8 @@
 void NanaZip::FileManager::AboutDialog::Show(
     _In_opt_ HWND ParentWindowHandle)
 {
-    winrt::NanaZip::AboutPage XamlWindowContent =
-        winrt::make<winrt::NanaZip::implementation::AboutPage>();
+    winrt::NanaZip::Modern::AboutPage XamlWindowContent =
+        winrt::make<winrt::NanaZip::Modern::implementation::AboutPage>();
 
     HWND WindowHandle = ::CreateWindowExW(
         WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,

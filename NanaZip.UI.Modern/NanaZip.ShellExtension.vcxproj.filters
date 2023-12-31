@@ -309,12 +309,12 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="NanaZipShellExtension.manifest" />
+    <Manifest Include="NanaZip.ShellExtension.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NanaZipShellExtension.cpp" />
+    <ClCompile Include="NanaZip.ShellExtension.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NanaZipShellExtension.def" />
+    <None Include="NanaZip.ShellExtension.def" />
   </ItemGroup>
 </Project>

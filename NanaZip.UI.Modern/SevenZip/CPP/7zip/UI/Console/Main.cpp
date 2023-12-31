@@ -94,7 +94,7 @@ static const char * const kCopyrightString = "\nNanaZip"
   " : " "(c) M2-Team and Contributors. All rights reserved." "\n";
 
 static const char * const kHelpString =
-    "Usage: NanaZipConsole"
+    "Usage: NanaZip.Console"
     PROG_POSTFIX
     " <command> [<switches>...] <archive_name> [<file_names>...] [@listfile]\n"
     "\n"

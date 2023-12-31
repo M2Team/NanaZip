@@ -4,7 +4,7 @@
 
 #include <Mile.Xaml.h>
 
-namespace winrt::NanaZip::implementation
+namespace winrt::NanaZip::Modern::implementation
 {
     App::App()
     {

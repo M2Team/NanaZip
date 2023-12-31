@@ -2,9 +2,9 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F4511F91-B0EB-41B4-99D6-AEB48169132B}</ProjectGuid>
-    <RootNamespace>NanaZip</RootNamespace>
+    <RootNamespace>NanaZip.Modern</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
-    <MileProjectManifestFile>NanaZip.manifest</MileProjectManifestFile>
+    <MileProjectManifestFile>NanaZip.Modern.manifest</MileProjectManifestFile>
     <MinimalCoreWin>false</MinimalCoreWin>
     <DefaultLanguage>en</DefaultLanguage>
     <AppContainerApplication>false</AppContainerApplication>
@@ -16,15 +16,14 @@
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
-    <MileProjectFileDescription>NanaZip Graphical User Interface</MileProjectFileDescription>
-    <MileProjectInternalName>NanaZip</MileProjectInternalName>
+    <MileProjectFileDescription>NanaZip Modern Graphical User Interface</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Modern</MileProjectInternalName>
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
-    <MileProjectOriginalFilename>NanaZip.exe</MileProjectOriginalFilename>
+    <MileProjectOriginalFilename>NanaZip.Modern.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileProjectVersion>3.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
@@ -429,7 +428,7 @@
     <ResourceCompile Include="SevenZip\CPP\7zip\UI\FileManager\resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="NanaZip.manifest" />
+    <Manifest Include="NanaZip.Modern.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
@@ -479,10 +478,10 @@
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
-    <ProjectReference Include="NanaZipShellExtension.vcxproj">
+    <ProjectReference Include="NanaZip.ShellExtension.vcxproj">
       <Project>{53934E7A-686E-42F1-8A80-4299CDE30564}</Project>
     </ProjectReference>
-    <ProjectReference Include="NanaZipWindows.vcxproj">
+    <ProjectReference Include="NanaZip.Windows.vcxproj">
       <Project>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</Project>
     </ProjectReference>
   </ItemGroup>

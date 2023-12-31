@@ -2,7 +2,7 @@
 
 #include "AboutPage.g.h"
 
-namespace winrt::NanaZip::implementation
+namespace winrt::NanaZip::Modern::implementation
 {
     struct AboutPage : AboutPageT<AboutPage>
     {
@@ -10,7 +10,7 @@ namespace winrt::NanaZip::implementation
     };
 }
 
-namespace winrt::NanaZip::factory_implementation
+namespace winrt::NanaZip::Modern::factory_implementation
 {
     struct AboutPage : AboutPageT<AboutPage, implementation::AboutPage>
     {

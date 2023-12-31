@@ -20,7 +20,7 @@ EXTERNAL_CODECS
 
   1) Executable that uses external plugins must be compiled
      with EXTERNAL_CODECS defined:
-       - NanaZipC.exe, NanaZipG.exe, NanaZip.exe
+       - NanaZip.Console.exe, NanaZip.Windows.exe, NanaZip.Modern.exe
 
      Note: EXTERNAL_CODECS is used also in CPP/7zip/Common/CreateCoder.h
            that code is used in plugin module (NanaZip.Core.dll).

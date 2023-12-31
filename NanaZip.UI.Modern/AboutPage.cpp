@@ -22,7 +22,7 @@ extern CCodecs* g_CodecsObj;
 #define IDT_ABOUT_INFO  2901
 #define IDB_ABOUT_HOMEPAGE   110
 
-namespace winrt::NanaZip::implementation
+namespace winrt::NanaZip::Modern::implementation
 {
     AboutPage::AboutPage()
     {

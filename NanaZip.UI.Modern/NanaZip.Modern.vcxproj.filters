@@ -1095,7 +1095,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="NanaZip.manifest" />
+    <Manifest Include="NanaZip.Modern.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SevenZip\CPP\7zip\UI\FileManager\resource.rc">

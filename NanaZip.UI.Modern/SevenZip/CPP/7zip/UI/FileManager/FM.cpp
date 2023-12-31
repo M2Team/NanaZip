@@ -519,8 +519,8 @@ static int WINAPI WinMain2(int nCmdShow)
   // Maybe needs CoInitializeEx also ?
   // NCOM::CComInitializer comInitializer;
 
-  winrt::com_ptr<winrt::NanaZip::implementation::App> app =
-      winrt::make_self<winrt::NanaZip::implementation::App>();
+  winrt::com_ptr<winrt::NanaZip::Modern::implementation::App> app =
+      winrt::make_self<winrt::NanaZip::Modern::implementation::App>();
 
   UString commandsString;
   // MessageBoxW(0, GetCommandLineW(), L"", 0);

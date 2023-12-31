@@ -45,7 +45,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="NanaZipWindows.manifest" />
+    <Manifest Include="NanaZip.Windows.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\ExtractRes.h">

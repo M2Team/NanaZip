@@ -2,23 +2,22 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{53934E7A-686E-42F1-8A80-4299CDE30564}</ProjectGuid>
-    <RootNamespace>NanaZipShellExtension</RootNamespace>
+    <RootNamespace>NanaZip.ShellExtension</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
-    <MileProjectManifestFile>NanaZipShellExtension.manifest</MileProjectManifestFile>
+    <MileProjectManifestFile>NanaZip.ShellExtension.manifest</MileProjectManifestFile>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
-    <MileProjectFileDescription>NanaZip Shell Extension</MileProjectFileDescription>
-    <MileProjectInternalName>NanaZipShellExtension</MileProjectInternalName>
+    <MileProjectFileDescription>NanaZip Modern Shell Extension</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.ShellExtension</MileProjectInternalName>
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
-    <MileProjectOriginalFilename>NanaZipShellExtension.dll</MileProjectOriginalFilename>
+    <MileProjectOriginalFilename>NanaZip.ShellExtension.dll</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileProjectVersion>3.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
@@ -31,7 +30,7 @@
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
-      <ModuleDefinitionFile>NanaZipShellExtension.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>NanaZip.ShellExtension.def</ModuleDefinitionFile>
       <AdditionalDependencies>comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -133,13 +132,13 @@
     <ResourceCompile Include="SevenZip\CPP\7zip\UI\Explorer\resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="NanaZipShellExtension.manifest" />
+    <Manifest Include="NanaZip.ShellExtension.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NanaZipShellExtension.cpp" />
+    <ClCompile Include="NanaZip.ShellExtension.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NanaZipShellExtension.def" />
+    <None Include="NanaZip.ShellExtension.def" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.vcxproj">

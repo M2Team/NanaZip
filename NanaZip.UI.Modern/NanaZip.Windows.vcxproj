@@ -2,24 +2,23 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</ProjectGuid>
-    <RootNamespace>NanaZipWindows</RootNamespace>
+    <RootNamespace>NanaZip.Windows</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
-    <TargetName>NanaZipG</TargetName>
-    <MileProjectManifestFile>NanaZipWindows.manifest</MileProjectManifestFile>
+    <TargetName>NanaZip.Windows</TargetName>
+    <MileProjectManifestFile>NanaZip.Windows.manifest</MileProjectManifestFile>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
-    <MileProjectFileDescription>NanaZip Command Line Interface (Windows)</MileProjectFileDescription>
-    <MileProjectInternalName>NanaZipWindows</MileProjectInternalName>
+    <MileProjectFileDescription>NanaZip Modern Command Line Interface (Windows)</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Windows</MileProjectInternalName>
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
-    <MileProjectOriginalFilename>NanaZipG.exe</MileProjectOriginalFilename>
+    <MileProjectOriginalFilename>NanaZip.Windows.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileProjectVersion>3.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
@@ -37,7 +36,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Manifest Include="NanaZipWindows.manifest" />
+    <Manifest Include="NanaZip.Windows.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />

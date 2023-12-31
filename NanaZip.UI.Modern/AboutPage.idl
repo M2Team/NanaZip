@@ -1,4 +1,4 @@
-﻿namespace NanaZip
+﻿namespace NanaZip.Modern
 {
     [default_interface]
     runtimeclass AboutPage : Windows.UI.Xaml.Controls.Page

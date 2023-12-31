@@ -97,7 +97,7 @@ void ReadPluginInfoList(CObjectVector<CPluginInfo> &plugins)
   FString baseFolderPrefix = NDLL::GetModuleDirPrefix();
   {
     CPluginInfo pluginInfo;
-    pluginInfo.FilePath = baseFolderPrefix + FTEXT("NanaZipShellExtension.dll");
+    pluginInfo.FilePath = baseFolderPrefix + FTEXT("NanaZip.ShellExtension.dll");
     if (::ReadPluginInfo(pluginInfo, false))
       plugins.Add(pluginInfo);
   }

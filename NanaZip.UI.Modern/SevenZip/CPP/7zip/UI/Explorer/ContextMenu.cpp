@@ -1035,7 +1035,7 @@ int CZipContextMenu::FindVerb(const UString &verb)
 
 static UString Get7zFmPath()
 {
-  return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.exe";
+  return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.Modern.exe";
 }
 
 
@@ -1535,7 +1535,7 @@ STDMETHODIMP CZipExplorerCommand::GetIcon(IShellItemArray * /* psiItemArray */, 
   *ppszIcon = NULL;
   // return E_NOTIMPL;
   UString imageName = fs2us(NWindows::NDLL::GetModuleDirPrefix());
-  // imageName += "NanaZipG.exe";
+  // imageName += "NanaZip.Windows.exe";
   imageName += "NanaZip.dll";
   // imageName += ",190";
   return My_SHStrDupW(imageName, ppszIcon);
