@@ -10,7 +10,7 @@
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <DefaultLanguage>en</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <EntryPointProjectUniqueName>..\NanaZip.UI.Classic\NanaZip.vcxproj</EntryPointProjectUniqueName>
+    <EntryPointProjectUniqueName>..\NanaZip.UI.Modern\NanaZip.Modern.vcxproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -37,17 +37,14 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZip.vcxproj">
-      <Project>{97894839-6677-49D2-BA7C-39ED0C8D4FDB}</Project>
-      <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.vcxproj">
+      <Project>{F4511F91-B0EB-41B4-99D6-AEB48169132B}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipConsole.vcxproj">
-      <Project>{D866CA04-DF51-4660-BA4D-F82426A3A522}</Project>
-      <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Console.vcxproj">
+      <Project>{DB46C965-5F44-4414-8E75-BA9C0858A1AF}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
-      <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
       <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
@@ -57,13 +54,11 @@
       <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
       <SetPlatform>Platform=Win32</SetPlatform>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipShellExtension.vcxproj">
-      <Project>{F17D4837-7943-4361-9527-2AF9CACE477D}</Project>
-      <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.ShellExtension.vcxproj">
+      <Project>{53934E7A-686E-42F1-8A80-4299CDE30564}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Classic\NanaZipWindows.vcxproj">
-      <Project>{D33E771E-6B30-4EFB-9DEC-A9148D50080D}</Project>
-      <SetPlatform Condition="'$(Platform)'=='x86'">Platform=Win32</SetPlatform>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Windows.vcxproj">
+      <Project>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Wap.targets" />

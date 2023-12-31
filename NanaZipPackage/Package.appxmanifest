@@ -130,8 +130,8 @@
 
   <Applications>
     <Application 
-      Id="NanaZipC" 
-      Executable="NanaZipC.exe" 
+      Id="NanaZip.Console" 
+      Executable="NanaZip.Console.exe" 
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
@@ -143,7 +143,7 @@
       <Extensions>
         <uap3:Extension 
           Category="windows.appExecutionAlias" 
-          Executable="NanaZipC.exe" 
+          Executable="NanaZip.Console.exe" 
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipC.exe" />
@@ -153,8 +153,8 @@
       </Extensions>
     </Application>
     <Application 
-      Id="NanaZipG" 
-      Executable="NanaZipG.exe" 
+      Id="NanaZip.Windows" 
+      Executable="NanaZip.Windows.exe" 
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
@@ -166,7 +166,7 @@
       <Extensions>
         <uap3:Extension 
           Category="windows.appExecutionAlias" 
-          Executable="NanaZipG.exe" 
+          Executable="NanaZip.Windows.exe" 
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipG.exe" />
@@ -176,8 +176,8 @@
       </Extensions>
     </Application>
     <Application 
-      Id="NanaZip"
-      Executable="NanaZip.exe"
+      Id="NanaZip.Modern"
+      Executable="NanaZip.Modern.exe"
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
         DisplayName="NanaZip Preview"
@@ -200,7 +200,7 @@
       <Extensions>
         <uap3:Extension
             Category="windows.appExecutionAlias"
-            Executable="NanaZip.exe"
+            Executable="NanaZip.Modern.exe"
             EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZip.exe" />
