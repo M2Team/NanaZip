@@ -5,7 +5,7 @@
  *
  * LICENSE:   The MIT License
  *
- * DEVELOPER: MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #include "AboutDialog.h"
@@ -13,91 +13,113 @@
 #include <CommCtrl.h>
 #pragma comment(lib,"comctl32.lib")
 
-#include "pch.h"
-#include "AboutPage.h"
+#include <string>
+
+#include "../SevenZip/CPP/Common/Common.h"
+#include <Mile.Project.Version.h>
+#include "../SevenZip/C/CpuArch.h"
+#include "../SevenZip/CPP/7zip/UI/Common/LoadCodecs.h"
+#include "../SevenZip/CPP/7zip/UI/FileManager/LangUtils.h"
+#include "../SevenZip/CPP/7zip/UI/FileManager/resourceGui.h"
+
+extern CCodecs* g_CodecsObj;
+
+#define IDD_ABOUT  2900
+#define IDT_ABOUT_INFO  2901
+#define IDB_ABOUT_HOMEPAGE   110
 
 void NanaZip::FileManager::AboutDialog::Show(
     _In_opt_ HWND ParentWindowHandle)
 {
-    winrt::NanaZip::AboutPage XamlWindowContent =
-        winrt::make<winrt::NanaZip::implementation::AboutPage>();
+    std::wstring HomePageButton = std::wstring(
+        ::LangString(IDB_ABOUT_HOMEPAGE));
 
-    HWND WindowHandle = ::CreateWindowExW(
-        WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
-        L"Mile.Xaml.ContentWindow",
-        nullptr,
-        WS_CAPTION | WS_SYSMENU,
-        CW_USEDEFAULT,
-        0,
-        CW_USEDEFAULT,
-        0,
-        ParentWindowHandle,
-        nullptr,
-        ::GetModuleHandleW(nullptr),
-        winrt::get_abi(XamlWindowContent));
-    if (!WindowHandle)
+    const TASKDIALOG_BUTTON Buttons[] =
     {
-        return;
-    }
+        { IDB_ABOUT_HOMEPAGE, L"GitHub" }
+    };
 
-    HMENU MenuHandle = ::GetSystemMenu(WindowHandle, FALSE);
-    if (MenuHandle)
+    auto TaskDialogCallback = [](
+        _In_ HWND hwnd,
+        _In_ UINT msg,
+        _In_ WPARAM wParam,
+        _In_ LPARAM lParam,
+        _In_ LONG_PTR lpRefData) -> HRESULT
     {
-        ::RemoveMenu(MenuHandle, 0, MF_SEPARATOR);
-        ::RemoveMenu(MenuHandle, SC_RESTORE, MF_BYCOMMAND);
-        ::RemoveMenu(MenuHandle, SC_SIZE, MF_BYCOMMAND);
-        ::RemoveMenu(MenuHandle, SC_MINIMIZE, MF_BYCOMMAND);
-        ::RemoveMenu(MenuHandle, SC_MAXIMIZE, MF_BYCOMMAND);
-        ::RemoveMenu(MenuHandle, SC_TASKLIST, MF_BYCOMMAND);
-    }
+        UNREFERENCED_PARAMETER(hwnd);
+        UNREFERENCED_PARAMETER(lParam);
+        UNREFERENCED_PARAMETER(lpRefData);
 
-    const int Width = 600;
-    const int Height = 192 + (32 + 8) * 2;
-
-    UINT DpiValue = ::GetDpiForWindow(WindowHandle);
-
-    int ScaledWidth = ::MulDiv(Width, DpiValue, USER_DEFAULT_SCREEN_DPI);
-    int ScaledHeight = ::MulDiv(Height, DpiValue, USER_DEFAULT_SCREEN_DPI);
-
-    RECT ParentWindowRect;
-    ::GetWindowRect(ParentWindowHandle, &ParentWindowRect);
-
-    int ParentWidth = ParentWindowRect.right - ParentWindowRect.left;
-    int ParentHeight = ParentWindowRect.bottom - ParentWindowRect.top;
-
-    ::SetWindowPos(
-        WindowHandle,
-        nullptr,
-        ParentWindowRect.left + ((ParentWidth - ScaledWidth) / 2),
-        ParentWindowRect.top + ((ParentHeight - ScaledHeight) / 2),
-        ScaledWidth,
-        ScaledHeight,
-        SWP_NOZORDER | SWP_NOACTIVATE);
-    ::ShowWindow(WindowHandle, SW_SHOW);
-    ::UpdateWindow(WindowHandle);
-
-    ::EnableWindow(ParentWindowHandle, FALSE);
-
-    MSG Message;
-    while (::GetMessageW(&Message, nullptr, 0, 0))
-    {
-        // Workaround for capturing Alt+F4 in applications with XAML Islands.
-        // Reference: https://github.com/microsoft/microsoft-ui-xaml/issues/2408
-        if (Message.message == WM_SYSKEYDOWN && Message.wParam == VK_F4)
+        auto OpenWebSite = [](
+            _In_ LPCWSTR Url)
         {
-            ::SendMessageW(
-                ::GetAncestor(Message.hwnd, GA_ROOT),
-                Message.message,
-                Message.wParam,
-                Message.lParam);
+            SHELLEXECUTEINFOW ExecInfo = { 0 };
+            ExecInfo.cbSize = sizeof(SHELLEXECUTEINFOW);
+            ExecInfo.lpVerb = L"open";
+            ExecInfo.lpFile = Url;
+            ExecInfo.nShow = SW_SHOWNORMAL;
+            ::ShellExecuteExW(&ExecInfo);
+        };
 
-            continue;
+        if (msg == TDN_BUTTON_CLICKED && wParam == IDB_ABOUT_HOMEPAGE)
+        {
+            OpenWebSite(L"https://github.com/M2Team/NanaZip");
+            return S_FALSE;
         }
 
-        ::TranslateMessage(&Message);
-        ::DispatchMessageW(&Message);
+        return S_OK;
+    };
+
+    std::wstring WindowTitle = std::wstring(
+        ::LangString(IDD_ABOUT));
+    if (WindowTitle.empty())
+    {
+        WindowTitle = L"About NanaZip";
     }
 
-    ::EnableWindow(ParentWindowHandle, TRUE);
-    ::SetActiveWindow(ParentWindowHandle);
+    std::wstring WindowMainInstruction = std::wstring(
+        "NanaZip " MILE_PROJECT_VERSION_STRING);
+    WindowMainInstruction.append(
+        L" (" MILE_PROJECT_DOT_VERSION_STRING L")");
+    WindowMainInstruction.append(
+        UString(" (" MY_CPU_NAME ")"));
+
+    std::wstring WindowContent = std::wstring(
+        ::LangString(IDT_ABOUT_INFO));
+    if (WindowContent.empty())
+    {
+        WindowContent = L"NanaZip is free software";
+    }
+#ifdef EXTERNAL_CODECS
+    if (g_CodecsObj)
+    {
+        UString s;
+        g_CodecsObj->GetCodecsErrorMessage(s);
+        if (!s.IsEmpty())
+        {
+            WindowContent.append(L"\r\n\r\n");
+            WindowContent.append(s);
+        }
+    }
+#endif
+
+    TASKDIALOGCONFIG TaskDialogConfig = { 0 };
+    TaskDialogConfig.cbSize = sizeof(TASKDIALOGCONFIG);
+    TaskDialogConfig.hwndParent = ParentWindowHandle;
+    TaskDialogConfig.hInstance = ::GetModuleHandleW(nullptr);
+    TaskDialogConfig.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION;
+    TaskDialogConfig.dwCommonButtons = TDCBF_OK_BUTTON;
+    TaskDialogConfig.pszWindowTitle = WindowTitle.c_str();
+    TaskDialogConfig.pszMainIcon = MAKEINTRESOURCEW(IDI_ICON);
+    TaskDialogConfig.pszMainInstruction = WindowMainInstruction.c_str();
+    TaskDialogConfig.pszContent = WindowContent.c_str();
+    TaskDialogConfig.cButtons = ARRAYSIZE(Buttons);
+    TaskDialogConfig.pButtons = Buttons;
+    TaskDialogConfig.pfCallback = TaskDialogCallback;
+
+    ::TaskDialogIndirect(
+        &TaskDialogConfig,
+        nullptr,
+        nullptr,
+        nullptr);
 }
