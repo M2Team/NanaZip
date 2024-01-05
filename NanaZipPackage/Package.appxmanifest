@@ -285,7 +285,7 @@
         <com:Extension Category="windows.comServer">
           <com:ComServer>
             <com:SurrogateServer DisplayName="NanaZip Shell Extension">
-              <com:Class Id="469D94E9-6AF4-4395-B396-99B1308F8CE5" Path="NanaZipShellExtension.dll" ThreadingModel="STA"/>
+              <com:Class Id="469D94E9-6AF4-4395-B396-99B1308F8CE5" Path="NanaZip.ShellExtension.dll" ThreadingModel="STA"/>
             </com:SurrogateServer>
           </com:ComServer>
         </com:Extension>
