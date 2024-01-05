@@ -5,12 +5,6 @@
     <RootNamespace>NanaZip</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZip.manifest</MileProjectManifestFile>
-    <MinimalCoreWin>false</MinimalCoreWin>
-    <DefaultLanguage>en</DefaultLanguage>
-    <AppContainerApplication>false</AppContainerApplication>
-    <AppxPackage>false</AppxPackage>
-    <ApplicationType>Windows Store</ApplicationType>
-    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
@@ -239,11 +233,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\VerCtrl.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ViewSettings.cpp" />
     <ClCompile Include="AboutDialog.cpp" />
-    <ClCompile Include="AboutPage.cpp">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
@@ -419,11 +408,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\UpdateCallback100.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ViewSettings.h" />
     <ClInclude Include="AboutDialog.h" />
-    <ClInclude Include="AboutPage.h">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SevenZip\CPP\7zip\UI\FileManager\resource.rc" />
@@ -432,42 +416,9 @@
     <Manifest Include="NanaZip.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="App.xaml.cpp">
-      <DependentUpon>App.xaml</DependentUpon>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="AboutPage.idl">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="App.idl">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Midl>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="App.h">
-      <DependentUpon>App.xaml</DependentUpon>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Mile.Xaml">
-      <Version>2.1.661</Version>
-    </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
       <Version>1.0.15</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="AboutPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.Mitigations.vcxproj">
