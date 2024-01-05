@@ -5,7 +5,6 @@
     <RootNamespace>NanaZip</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZip.manifest</MileProjectManifestFile>
-    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>

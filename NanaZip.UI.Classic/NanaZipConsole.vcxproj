@@ -6,7 +6,6 @@
     <MileProjectType>ConsoleApplication</MileProjectType>
     <TargetName>NanaZipC</TargetName>
     <MileProjectManifestFile>NanaZipConsole.manifest</MileProjectManifestFile>
-    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
