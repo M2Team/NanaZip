@@ -24,35 +24,17 @@
       Properties="PreferredToolArchitecture=x64" />
   </Target>
   <Target Name="Build">
-    <ItemGroup>
-      <BuildDebugProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <Targets>NanaZip_Core;NanaZip_Core_Sfx_Setup;NanaZipConsole;NanaZip</Targets>
-        <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
-      </BuildDebugProjectReference>
-      <BuildDebugProjectReference Include="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj">
-        <Targets>Build</Targets>
-        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
-      </BuildDebugProjectReference>
-    </ItemGroup>
-    <ItemGroup>
-      <BuildReleaseProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <Targets>NanaZip_Core;NanaZip_Core_Sfx_Setup;NanaZipConsole;NanaZip</Targets>
-        <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
-      </BuildReleaseProjectReference>
-      <BuildReleaseProjectReference Include="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj">
-        <Targets>Build</Targets>
-        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
-      </BuildReleaseProjectReference>
-    </ItemGroup>
     <MSBuild
-      Projects="@(BuildDebugProjectReference)"
+      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
+      Targets="Build"
       BuildInParallel="True"
       StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64" />
+      Properties="PreferredToolArchitecture=x64;Configuration=Debug;Platform=x64" />
     <MSBuild
-      Projects="@(BuildReleaseProjectReference)"
+      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
+      Targets="Build"
       BuildInParallel="True"
       StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64" />
+      Properties="PreferredToolArchitecture=x64;Configuration=Release;Platform=x64" />
   </Target>
 </Project>
