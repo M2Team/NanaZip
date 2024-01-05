@@ -27,7 +27,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <PreprocessorDefinitions>EXTERNAL_CODECS;LANG;NEW_FOLDER_INTERFACE;WIN_LONG_PATH;SUPPORT_DEVICE_FILE;WANT_OPTIONAL_LOWERCASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXTERNAL_CODECS;LANG;NEW_FOLDER_INTERFACE;WIN_LONG_PATH;SUPPORT_DEVICE_FILE;WANT_OPTIONAL_LOWERCASE;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
