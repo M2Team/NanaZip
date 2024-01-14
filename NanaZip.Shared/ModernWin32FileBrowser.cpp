@@ -5,78 +5,79 @@
  *
  * LICENSE:   The MIT License
  *
- * DEVELOPER: reflectronic (john-tur@outlook.com)
- *            MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+ *             reflectronic (john-tur@outlook.com)
  */
 
 #include <Windows.h>
 #include <ShlObj_core.h>
-#include <winrt/base.h>
 
-EXTERN_C PIDLIST_ABSOLUTE WINAPI ModernSHBrowseForFolderW(LPBROWSEINFOW uType)
+EXTERN_C PIDLIST_ABSOLUTE WINAPI ModernSHBrowseForFolderW(
+    _In_ LPBROWSEINFOW lpbi)
 {
-    winrt::com_ptr<IFileDialog> fileDialog = winrt::try_create_instance<IFileDialog>(CLSID_FileOpenDialog);
+    LPITEMIDLIST IDList = nullptr;
 
-    if (!fileDialog)
+    IFileDialog* FileDialog = nullptr;
+    if (SUCCEEDED(::CoCreateInstance(
+        CLSID_FileOpenDialog,
+        nullptr,
+        CLSCTX_INPROC_SERVER,
+        IID_PPV_ARGS(&FileDialog))))
     {
-        return nullptr;
+        DWORD Flags = 0;
+        if (SUCCEEDED(FileDialog->GetOptions(
+            &Flags)))
+        {
+            if (SUCCEEDED(FileDialog->SetOptions(
+                Flags | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM)))
+            {
+                if (SUCCEEDED(FileDialog->SetTitle(
+                    lpbi->lpszTitle)))
+                {
+                    // 7-Zip does not use the pidlRoot parameter to configure
+                    // the default folder. Instead, it sets it by configuring
+                    // the message loop for the shell dialog, passing the path
+                    // of the default folder through the lParam, and navigating
+                    // to that folder inside the message loop.
+                    //
+                    // Since we cannot augment the IFileDialog's message loop,
+                    // we will reach into the lParam given to us to find the
+                    // initial path and hope that 7-Zip does not change this
+                    // behavior.
+
+                    IShellItem* DefaultFolder = nullptr;
+                    if (SUCCEEDED(::SHCreateItemFromParsingName(
+                        reinterpret_cast<PCWSTR>(lpbi->lParam),
+                        nullptr,
+                        IID_PPV_ARGS(&DefaultFolder))))
+                    {
+                        if (SUCCEEDED(FileDialog->SetDefaultFolder(
+                            DefaultFolder)))
+                        {
+                            if (SUCCEEDED(FileDialog->Show(
+                                lpbi->hwndOwner)))
+                            {
+                                IShellItem* Result = nullptr;
+                                if (SUCCEEDED(FileDialog->GetResult(
+                                    &Result)))
+                                {
+                                    ::SHGetIDListFromObject(Result, &IDList);
+
+                                    Result->Release();
+                                }
+                            }
+                        }
+
+                        DefaultFolder->Release();
+                    }
+                }
+            }
+        }
+
+        FileDialog->Release();
     }
 
-    DWORD flags;
-    if (FAILED(fileDialog->GetOptions(&flags)))
-    {
-        return nullptr;
-    }
-
-    if (FAILED(fileDialog->SetOptions(flags | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM)))
-    {
-        return nullptr;
-    }
-
-    if (FAILED(fileDialog->SetTitle(uType->lpszTitle)))
-    {
-        return nullptr;
-    }
-
-    // 7-Zip does not use the pidlRoot parameter to configure the default folder.
-    // Instead, it sets it by configuring the message loop for the shell dialog,
-    // passing the path of the default folder through the lParam, and navigating
-    // to that folder inside the message loop.
-    //
-    // Since we cannot augment the IFileDialog's message loop, we will reach into
-    // the lParam given to us to find the initial path and hope that 7-Zip does
-    // not change this behavior.
-
-    winrt::com_ptr<IShellItem> defaultFolder;
-    if (FAILED(SHCreateItemFromParsingName(reinterpret_cast<PCWSTR>(uType->lParam), nullptr, IID_IShellItem, defaultFolder.put_void())))
-    {
-        return nullptr;
-    }
-
-    if (FAILED(fileDialog->SetDefaultFolder(defaultFolder.get())))
-    {
-        return nullptr;
-    }
-
-    HRESULT hr = fileDialog->Show(uType->hwndOwner);
-    if (FAILED(hr))
-    {
-        return nullptr;
-    }
-
-    winrt::com_ptr<IShellItem> result;
-    if (FAILED(fileDialog->GetResult(result.put())))
-    {
-        return nullptr;
-    }
-
-    LPITEMIDLIST pidl;
-    if (FAILED(SHGetIDListFromObject(result.get(), &pidl)))
-    {
-        return nullptr;
-    }
-
-    return pidl;
+    return IDList;
 }
 
 #if defined(_M_IX86)
