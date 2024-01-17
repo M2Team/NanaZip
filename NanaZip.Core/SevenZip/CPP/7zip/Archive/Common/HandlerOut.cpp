@@ -203,13 +203,18 @@ HRESULT CMultiMethodProps::SetProperty(const wchar_t *nameSpec, const PROPVARIAN
 
   {
     HRESULT hres;
-    // **************** 7-Zip ZS Modification Start ****************
-    /*if (SetCommonProperty(name, value, hres))
-        return hres;*/
-    SetCommonProperty(name, value, hres);
-    /* don't return here, since many handlers set common properties (e. g. kNumThreads)
-       with SetCoderProperties, so add it also as prop by its ID from name below */
-    // **************** 7-Zip ZS Modification End ****************
+    // **************** NanaZip Modification Start ****************
+    if (SetCommonProperty(name, value, hres))
+    {
+        if (name.IsPrefixedBy_Ascii_NoCase("mt"))
+        {
+            // pass through kNumThreads to handler
+        }
+        else {
+            return hres;
+        }
+    }
+    // **************** NanaZip Modification End ****************
   }
   
   UInt32 number;
