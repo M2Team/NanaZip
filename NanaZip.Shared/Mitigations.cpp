@@ -100,6 +100,12 @@ namespace
         static bool CachedResult = ::MileIsWindowsVersionAtLeast(10, 0, 0);
         return CachedResult;
     }
+
+    static bool IsWindows10_1709OrLater()
+    {
+        static bool CachedResult = ::MileIsWindowsVersionAtLeast(10, 0, 16299);
+        return CachedResult;
+    }
 }
 
 EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
@@ -168,4 +174,24 @@ EXTERN_C BOOL WINAPI NanaZipThreadDynamicCodeAllow()
         ThreadDynamicCodePolicy,
         &ThreadPolicy,
         sizeof(DWORD));
+}
+
+EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
+{
+    if (!::IsWindows10_1709OrLater())
+    {
+        return TRUE;
+    }
+
+    PROCESS_MITIGATION_CHILD_PROCESS_POLICY Policy = { 0 };
+    Policy.NoChildProcessCreation = 1;
+    if (!::SetProcessMitigationPolicyWrapper(
+        ProcessChildProcessPolicy,
+        &Policy,
+        sizeof(PROCESS_MITIGATION_CHILD_PROCESS_POLICY)))
+    {
+        return FALSE;
+    }
+
+    return TRUE;
 }

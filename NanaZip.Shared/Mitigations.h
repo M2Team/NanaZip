@@ -16,5 +16,6 @@
 
 EXTERN_C BOOL WINAPI NanaZipEnableMitigations();
 EXTERN_C BOOL WINAPI NanaZipThreadDynamicCodeAllow();
+EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses();
 
 #endif // !NANAZIP_SHARED_MITIGATIONS
