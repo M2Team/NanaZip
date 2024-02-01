@@ -13,6 +13,8 @@
 
 #include <Mile.Helpers.h>
 
+#include <Detours.h>
+
 namespace
 {
     static HMODULE GetKernel32ModuleHandle()
