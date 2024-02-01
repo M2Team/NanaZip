@@ -50,9 +50,6 @@
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.vcxproj">
       <Project>{7262BA1E-732D-4814-972F-698F0B4330A1}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.Mitigations.vcxproj">
-      <Project>{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.vcxproj">
       <Project>{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}</Project>
     </ProjectReference>
