@@ -10,6 +10,8 @@
 
 #include <Windows.h>
 
+#include <NanaZip.Specification.SevenZip.h>
+
 EXTERN_C int WINAPI NanaZipCodecsTestFunction()
 {
     return 0;
