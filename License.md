@@ -578,6 +578,7 @@ Creative Commons may be contacted at creativecommons.org.
 - BLAKE3, https://github.com/BLAKE3-team/BLAKE3
 - Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
+- Detours, https://github.com/microsoft/Detours
 - Fast LZMA2, https://github.com/conor42/fast-lzma2
 - GmSSL, https://github.com/guanzhi/GmSSL
 - Heimdal, https://github.com/heimdal/heimdal
