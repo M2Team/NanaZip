@@ -469,9 +469,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.vcxproj">
-      <Project>{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>

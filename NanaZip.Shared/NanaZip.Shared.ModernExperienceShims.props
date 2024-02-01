@@ -12,4 +12,9 @@
       <AdditionalDependencies>ModernWin32MessageBox.obj;ModernWin32FileBrowser.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.Shared.ModernExperienceShims.vcxproj">
+      <Project>{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}</Project>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

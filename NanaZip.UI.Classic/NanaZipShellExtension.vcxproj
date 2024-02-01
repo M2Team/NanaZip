@@ -140,10 +140,5 @@
   <ItemGroup>
     <None Include="NanaZipShellExtension.def" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.vcxproj">
-      <Project>{501956AB-67C3-47FA-BE2B-8AEFF463AF1C}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>
