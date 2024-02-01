@@ -46,6 +46,9 @@
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Codecs\NanaZip.Codecs.vcxproj">
+      <Project>{89B81A5B-FF0D-4193-9CB1-738692775DD2}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
       <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
       <SetPlatform>Platform=Win32</SetPlatform>
