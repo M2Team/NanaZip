@@ -44,7 +44,9 @@
   <ItemGroup>
     <ClCompile Include="RHash\aich.c" />
     <ClCompile Include="RHash\blake2b.c" />
-    <ClCompile Include="RHash\byte_order.c" />
+    <ClCompile Include="RHash\byte_order.c">
+      <DisableSpecificWarnings>4146;</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="RHash\ed2k.c" />
     <ClCompile Include="RHash\edonr.c" />
     <ClCompile Include="RHash\gost12.c">
@@ -79,7 +81,9 @@
     <ClCompile Include="BLAKE3\blake3.c" />
     <ClCompile Include="BLAKE3\blake3_avx2.c" />
     <ClCompile Include="BLAKE3\blake3_avx512.c" />
-    <ClCompile Include="BLAKE3\blake3_dispatch.c" />
+    <ClCompile Include="BLAKE3\blake3_dispatch.c">
+      <DisableSpecificWarnings>4702;</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="BLAKE3\blake3_neon.c" />
     <ClCompile Include="BLAKE3\blake3_portable.c" />
     <ClCompile Include="BLAKE3\blake3_sse2.c" />
