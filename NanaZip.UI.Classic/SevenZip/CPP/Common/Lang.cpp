@@ -56,7 +56,7 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
 
         return g_LanguageMap.emplace(id, Content).first->second;
 #else
-        using winrt::Windows::ApplicationModel::Resources::Core::ResourceManager;
+        /*using winrt::Windows::ApplicationModel::Resources::Core::ResourceManager;
         using winrt::Windows::ApplicationModel::Resources::Core::ResourceMap;
 
         ResourceMap CurrentResourceMap =
@@ -74,7 +74,8 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
         else
         {
             return nullptr;
-        }
+        }*/
+        return nullptr;
 #endif    
     }
 
