@@ -13,6 +13,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>

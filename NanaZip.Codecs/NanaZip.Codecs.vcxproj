@@ -26,6 +26,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -41,6 +42,36 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="RHash\aich.c" />
+    <ClCompile Include="RHash\blake2b.c" />
+    <ClCompile Include="RHash\byte_order.c" />
+    <ClCompile Include="RHash\ed2k.c" />
+    <ClCompile Include="RHash\edonr.c" />
+    <ClCompile Include="RHash\gost12.c">
+      <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="RHash\gost94.c" />
+    <ClCompile Include="RHash\has160.c" />
+    <ClCompile Include="RHash\hex.c" />
+    <ClCompile Include="RHash\md4.c" />
+    <ClCompile Include="RHash\md5.c" />
+    <ClCompile Include="RHash\rhash_sha1.c" />
+    <ClCompile Include="RHash\rhash_sha256.c" />
+    <ClCompile Include="RHash\rhash_util.c" />
+    <ClCompile Include="RHash\ripemd-160.c" />
+    <ClCompile Include="RHash\sha3.c" />
+    <ClCompile Include="RHash\sha512.c" />
+    <ClCompile Include="RHash\snefru.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger.c" />
+    <ClCompile Include="RHash\tiger_sbox.c" />
+    <ClCompile Include="RHash\torrent.c">
+      <DisableSpecificWarnings>4146;4200;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="RHash\tth.c" />
+    <ClCompile Include="RHash\whirlpool.c" />
+    <ClCompile Include="RHash\whirlpool_sbox.c" />
     <ClCompile Include="Heimdal\md2.c">
       <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
     </ClCompile>
@@ -56,6 +87,29 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RHash\aich.h" />
+    <ClInclude Include="RHash\blake2b.h" />
+    <ClInclude Include="RHash\byte_order.h" />
+    <ClInclude Include="RHash\ed2k.h" />
+    <ClInclude Include="RHash\edonr.h" />
+    <ClInclude Include="RHash\gost12.h" />
+    <ClInclude Include="RHash\gost94.h" />
+    <ClInclude Include="RHash\has160.h" />
+    <ClInclude Include="RHash\hex.h" />
+    <ClInclude Include="RHash\md4.h" />
+    <ClInclude Include="RHash\md5.h" />
+    <ClInclude Include="RHash\ripemd-160.h" />
+    <ClInclude Include="RHash\sha1.h" />
+    <ClInclude Include="RHash\sha256.h" />
+    <ClInclude Include="RHash\sha3.h" />
+    <ClInclude Include="RHash\sha512.h" />
+    <ClInclude Include="RHash\snefru.h" />
+    <ClInclude Include="RHash\tiger.h" />
+    <ClInclude Include="RHash\torrent.h" />
+    <ClInclude Include="RHash\tth.h" />
+    <ClInclude Include="RHash\ustd.h" />
+    <ClInclude Include="RHash\util.h" />
+    <ClInclude Include="RHash\whirlpool.h" />
     <ClInclude Include="Heimdal\md2.h" />
     <ClInclude Include="GmSSL\endian.h" />
     <ClInclude Include="GmSSL\sm3.h" />

@@ -30,7 +30,6 @@
     <IncludePath>$(MSBuildThisFileDirectory)Lizard\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)ZSTDMT\;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -141,30 +140,6 @@
     <ClCompile Include="FastLZMA2\radix_struct.c" />
     <ClCompile Include="FastLZMA2\range_enc.c" />
     <ClCompile Include="FastLZMA2\util.c" />
-    <ClCompile Include="RHash\aich.c" />
-    <ClCompile Include="RHash\blake2b.c" />
-    <ClCompile Include="RHash\byte_order.c" />
-    <ClCompile Include="RHash\ed2k.c" />
-    <ClCompile Include="RHash\edonr.c" />
-    <ClCompile Include="RHash\gost12.c" />
-    <ClCompile Include="RHash\gost94.c" />
-    <ClCompile Include="RHash\has160.c" />
-    <ClCompile Include="RHash\hex.c" />
-    <ClCompile Include="RHash\md4.c" />
-    <ClCompile Include="RHash\md5.c" />
-    <ClCompile Include="RHash\ripemd-160.c" />
-    <ClCompile Include="RHash\rhash_sha1.c" />
-    <ClCompile Include="RHash\rhash_sha256.c" />
-    <ClCompile Include="RHash\sha3.c" />
-    <ClCompile Include="RHash\sha512.c" />
-    <ClCompile Include="RHash\snefru.c" />
-    <ClCompile Include="RHash\tiger.c" />
-    <ClCompile Include="RHash\tiger_sbox.c" />
-    <ClCompile Include="RHash\torrent.c" />
-    <ClCompile Include="RHash\tth.c" />
-    <ClCompile Include="RHash\rhash_util.c" />
-    <ClCompile Include="RHash\whirlpool.c" />
-    <ClCompile Include="RHash\whirlpool_sbox.c" />
     <ClCompile Include="LZ5\lz5.c" />
     <ClCompile Include="LZ5\lz5frame.c" />
     <ClCompile Include="LZ5\lz5hc.c" />
@@ -552,29 +527,6 @@
     <ClInclude Include="FastLZMA2\radix_mf.h" />
     <ClInclude Include="FastLZMA2\range_enc.h" />
     <ClInclude Include="FastLZMA2\util.h" />
-    <ClInclude Include="RHash\aich.h" />
-    <ClInclude Include="RHash\blake2b.h" />
-    <ClInclude Include="RHash\byte_order.h" />
-    <ClInclude Include="RHash\ed2k.h" />
-    <ClInclude Include="RHash\edonr.h" />
-    <ClInclude Include="RHash\gost12.h" />
-    <ClInclude Include="RHash\gost94.h" />
-    <ClInclude Include="RHash\has160.h" />
-    <ClInclude Include="RHash\hex.h" />
-    <ClInclude Include="RHash\md4.h" />
-    <ClInclude Include="RHash\md5.h" />
-    <ClInclude Include="RHash\ripemd-160.h" />
-    <ClInclude Include="RHash\sha1.h" />
-    <ClInclude Include="RHash\sha256.h" />
-    <ClInclude Include="RHash\sha3.h" />
-    <ClInclude Include="RHash\sha512.h" />
-    <ClInclude Include="RHash\snefru.h" />
-    <ClInclude Include="RHash\tiger.h" />
-    <ClInclude Include="RHash\torrent.h" />
-    <ClInclude Include="RHash\tth.h" />
-    <ClInclude Include="RHash\ustd.h" />
-    <ClInclude Include="RHash\util.h" />
-    <ClInclude Include="RHash\whirlpool.h" />
     <ClInclude Include="LZ5\lz5.h" />
     <ClInclude Include="LZ5\lz5common.h" />
     <ClInclude Include="LZ5\lz5frame.h" />
