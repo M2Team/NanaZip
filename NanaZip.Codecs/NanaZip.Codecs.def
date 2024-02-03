@@ -85,3 +85,16 @@ rhash_tth_update
 rhash_whirlpool_final
 rhash_whirlpool_init
 rhash_whirlpool_update
+
+BrotliDecoderCreateInstance
+BrotliDecoderDecompress
+BrotliDecoderDecompressStream
+BrotliDecoderDestroyInstance
+BrotliDecoderSetParameter
+BrotliEncoderCompress
+BrotliEncoderCompressStream
+BrotliEncoderCreateInstance
+BrotliEncoderDestroyInstance
+BrotliEncoderIsFinished
+BrotliEncoderMaxCompressedSize
+BrotliEncoderSetParameter

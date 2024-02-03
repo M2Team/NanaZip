@@ -24,6 +24,7 @@
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
@@ -42,6 +43,61 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Brotli\common\constants.c" />
+    <ClCompile Include="Brotli\common\context.c" />
+    <ClCompile Include="Brotli\common\dictionary.c" />
+    <ClCompile Include="Brotli\common\platform.c" />
+    <ClCompile Include="Brotli\common\shared_dictionary.c" />
+    <ClCompile Include="Brotli\common\transform.c" />
+    <ClCompile Include="Brotli\dec\bit_reader.c">
+      <DisableSpecificWarnings>4100;4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\decode.c">
+      <DisableSpecificWarnings>4100;4127;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\huffman.c" />
+    <ClCompile Include="Brotli\dec\state.c">
+      <DisableSpecificWarnings>4100;4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references_hq.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\bit_cost.c" />
+    <ClCompile Include="Brotli\enc\block_splitter.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\brotli_bit_stream.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\cluster.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\command.c" />
+    <ClCompile Include="Brotli\enc\compound_dictionary.c">
+      <DisableSpecificWarnings>4127;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compress_fragment.c" />
+    <ClCompile Include="Brotli\enc\compress_fragment_two_pass.c" />
+    <ClCompile Include="Brotli\enc\dictionary_hash.c" />
+    <ClCompile Include="Brotli\enc\encode.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\encoder_dict.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\entropy_encode.c" />
+    <ClCompile Include="Brotli\enc\fast_log.c" />
+    <ClCompile Include="Brotli\enc\histogram.c" />
+    <ClCompile Include="Brotli\enc\literal_cost.c" />
+    <ClCompile Include="Brotli\enc\memory.c" />
+    <ClCompile Include="Brotli\enc\metablock.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\static_dict.c" />
+    <ClCompile Include="Brotli\enc\utf8_util.c" />
     <ClCompile Include="RHash\aich.c" />
     <ClCompile Include="RHash\blake2b.c" />
     <ClCompile Include="RHash\byte_order.c">
@@ -91,6 +147,66 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Brotli\common\constants.h" />
+    <ClInclude Include="Brotli\common\context.h" />
+    <ClInclude Include="Brotli\common\dictionary.h" />
+    <ClInclude Include="Brotli\common\platform.h" />
+    <ClInclude Include="Brotli\common\shared_dictionary_internal.h" />
+    <ClInclude Include="Brotli\common\transform.h" />
+    <ClInclude Include="Brotli\common\version.h" />
+    <ClInclude Include="Brotli\dec\bit_reader.h" />
+    <ClInclude Include="Brotli\dec\huffman.h" />
+    <ClInclude Include="Brotli\dec\prefix.h" />
+    <ClInclude Include="Brotli\dec\state.h" />
+    <ClInclude Include="Brotli\enc\backward_references.h" />
+    <ClInclude Include="Brotli\enc\backward_references_hq.h" />
+    <ClInclude Include="Brotli\enc\backward_references_inc.h" />
+    <ClInclude Include="Brotli\enc\bit_cost.h" />
+    <ClInclude Include="Brotli\enc\bit_cost_inc.h" />
+    <ClInclude Include="Brotli\enc\block_encoder_inc.h" />
+    <ClInclude Include="Brotli\enc\block_splitter.h" />
+    <ClInclude Include="Brotli\enc\block_splitter_inc.h" />
+    <ClInclude Include="Brotli\enc\brotli_bit_stream.h" />
+    <ClInclude Include="Brotli\enc\cluster.h" />
+    <ClInclude Include="Brotli\enc\cluster_inc.h" />
+    <ClInclude Include="Brotli\enc\command.h" />
+    <ClInclude Include="Brotli\enc\compound_dictionary.h" />
+    <ClInclude Include="Brotli\enc\compress_fragment.h" />
+    <ClInclude Include="Brotli\enc\compress_fragment_two_pass.h" />
+    <ClInclude Include="Brotli\enc\dictionary_hash.h" />
+    <ClInclude Include="Brotli\enc\encoder_dict.h" />
+    <ClInclude Include="Brotli\enc\entropy_encode.h" />
+    <ClInclude Include="Brotli\enc\entropy_encode_static.h" />
+    <ClInclude Include="Brotli\enc\fast_log.h" />
+    <ClInclude Include="Brotli\enc\find_match_length.h" />
+    <ClInclude Include="Brotli\enc\hash.h" />
+    <ClInclude Include="Brotli\enc\hash_composite_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_forgetful_chain_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match64_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match_quickly_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_rolling_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_to_binary_tree_inc.h" />
+    <ClInclude Include="Brotli\enc\histogram.h" />
+    <ClInclude Include="Brotli\enc\histogram_inc.h" />
+    <ClInclude Include="Brotli\enc\literal_cost.h" />
+    <ClInclude Include="Brotli\enc\memory.h" />
+    <ClInclude Include="Brotli\enc\metablock.h" />
+    <ClInclude Include="Brotli\enc\metablock_inc.h" />
+    <ClInclude Include="Brotli\enc\params.h" />
+    <ClInclude Include="Brotli\enc\prefix.h" />
+    <ClInclude Include="Brotli\enc\quality.h" />
+    <ClInclude Include="Brotli\enc\ringbuffer.h" />
+    <ClInclude Include="Brotli\enc\state.h" />
+    <ClInclude Include="Brotli\enc\static_dict.h" />
+    <ClInclude Include="Brotli\enc\static_dict_lut.h" />
+    <ClInclude Include="Brotli\enc\utf8_util.h" />
+    <ClInclude Include="Brotli\enc\write_bits.h" />
+    <ClInclude Include="Brotli\include\brotli\decode.h" />
+    <ClInclude Include="Brotli\include\brotli\encode.h" />
+    <ClInclude Include="Brotli\include\brotli\port.h" />
+    <ClInclude Include="Brotli\include\brotli\shared_dictionary.h" />
+    <ClInclude Include="Brotli\include\brotli\types.h" />
     <ClInclude Include="RHash\aich.h" />
     <ClInclude Include="RHash\blake2b.h" />
     <ClInclude Include="RHash\byte_order.h" />
