@@ -32,7 +32,6 @@
     <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)ZSTDMT\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -142,7 +141,6 @@
     <ClCompile Include="FastLZMA2\radix_struct.c" />
     <ClCompile Include="FastLZMA2\range_enc.c" />
     <ClCompile Include="FastLZMA2\util.c" />
-    <ClCompile Include="Heimdal\md2.c" />
     <ClCompile Include="RHash\aich.c" />
     <ClCompile Include="RHash\blake2b.c" />
     <ClCompile Include="RHash\byte_order.c" />
@@ -554,7 +552,6 @@
     <ClInclude Include="FastLZMA2\radix_mf.h" />
     <ClInclude Include="FastLZMA2\range_enc.h" />
     <ClInclude Include="FastLZMA2\util.h" />
-    <ClInclude Include="Heimdal\md2.h" />
     <ClInclude Include="RHash\aich.h" />
     <ClInclude Include="RHash\blake2b.h" />
     <ClInclude Include="RHash\byte_order.h" />

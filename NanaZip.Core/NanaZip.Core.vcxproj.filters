@@ -133,9 +133,6 @@
     <Filter Include="Extensions\BLAKE3">
       <UniqueIdentifier>{34442b48-4143-4b7e-9938-cdba163435cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Heimdal">
-      <UniqueIdentifier>{a64dcde1-232e-4d2e-b0b9-7b0af332d234}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Extensions\GmSSL">
       <UniqueIdentifier>{baef296e-0f61-471a-bb7f-7d6563aa3de0}</UniqueIdentifier>
     </Filter>
@@ -1438,9 +1435,6 @@
     </ClCompile>
     <ClCompile Include="Extensions\BLAKE3\Blake3Handler.cpp">
       <Filter>Extensions\BLAKE3</Filter>
-    </ClCompile>
-    <ClCompile Include="Heimdal\md2.c">
-      <Filter>Heimdal</Filter>
     </ClCompile>
     <ClCompile Include="Extensions\GmSSL\Sm3Handler.cpp">
       <Filter>Extensions\GmSSL</Filter>
@@ -2823,9 +2817,6 @@
     </ClInclude>
     <ClInclude Include="FastLZMA2\util.h">
       <Filter>FastLZMA2</Filter>
-    </ClInclude>
-    <ClInclude Include="Heimdal\md2.h">
-      <Filter>Heimdal</Filter>
     </ClInclude>
     <ClInclude Include="ZSTDMT\brotli-mt.h">
       <Filter>ZSTDMT</Filter>

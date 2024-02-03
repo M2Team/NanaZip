@@ -11,3 +11,7 @@ blake3_hasher_finalize
 sm3_init
 sm3_update
 sm3_finish
+
+MD2_Init
+MD2_Update
+MD2_Final
