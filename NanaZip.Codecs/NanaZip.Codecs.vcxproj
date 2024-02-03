@@ -33,6 +33,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
+    <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZip.Codecs.cpp" />
