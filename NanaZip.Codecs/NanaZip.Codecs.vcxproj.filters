@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="NanaZip.Codecs.cpp" />
+    <ClCompile Include="BLAKE3\blake3.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_avx2.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_avx512.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_dispatch.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_neon.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_portable.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_sse2.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <ClCompile Include="BLAKE3\blake3_sse41.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanaZip.Codecs.def" />
+    <None Include="NanaZip.Codecs.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BLAKE3">
+      <UniqueIdentifier>{8780e049-c08c-40bf-a1ef-6ac34ab857a4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BLAKE3\blake3.h">
+      <Filter>BLAKE3</Filter>
+    </ClInclude>
+    <ClInclude Include="BLAKE3\blake3_impl.h">
+      <Filter>BLAKE3</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

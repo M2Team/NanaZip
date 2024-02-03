@@ -3,3 +3,7 @@
 EXPORTS
 
 GetHashers
+
+blake3_hasher_init
+blake3_hasher_update
+blake3_hasher_finalize

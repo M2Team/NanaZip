@@ -22,6 +22,9 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
@@ -36,7 +39,19 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BLAKE3\blake3.c" />
+    <ClCompile Include="BLAKE3\blake3_avx2.c" />
+    <ClCompile Include="BLAKE3\blake3_avx512.c" />
+    <ClCompile Include="BLAKE3\blake3_dispatch.c" />
+    <ClCompile Include="BLAKE3\blake3_neon.c" />
+    <ClCompile Include="BLAKE3\blake3_portable.c" />
+    <ClCompile Include="BLAKE3\blake3_sse2.c" />
+    <ClCompile Include="BLAKE3\blake3_sse41.c" />
     <ClCompile Include="NanaZip.Codecs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BLAKE3\blake3.h" />
+    <ClInclude Include="BLAKE3\blake3_impl.h" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

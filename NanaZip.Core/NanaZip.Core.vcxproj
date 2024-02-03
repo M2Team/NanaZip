@@ -21,6 +21,7 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
@@ -208,14 +209,6 @@
     <ClCompile Include="Brotli\enc\metablock.c" />
     <ClCompile Include="Brotli\enc\static_dict.c" />
     <ClCompile Include="Brotli\enc\utf8_util.c" />
-    <ClCompile Include="BLAKE3\blake3.c" />
-    <ClCompile Include="BLAKE3\blake3_avx2.c" />
-    <ClCompile Include="BLAKE3\blake3_avx512.c" />
-    <ClCompile Include="BLAKE3\blake3_dispatch.c" />
-    <ClCompile Include="BLAKE3\blake3_neon.c" />
-    <ClCompile Include="BLAKE3\blake3_portable.c" />
-    <ClCompile Include="BLAKE3\blake3_sse2.c" />
-    <ClCompile Include="BLAKE3\blake3_sse41.c" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />
@@ -676,8 +669,6 @@
     <ClInclude Include="Brotli\include\brotli\port.h" />
     <ClInclude Include="Brotli\include\brotli\shared_dictionary.h" />
     <ClInclude Include="Brotli\include\brotli\types.h" />
-    <ClInclude Include="BLAKE3\blake3.h" />
-    <ClInclude Include="BLAKE3\blake3_impl.h" />
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />
