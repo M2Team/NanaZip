@@ -24,6 +24,7 @@
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -39,6 +40,7 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GmSSL\sm3.c" />
     <ClCompile Include="BLAKE3\blake3.c" />
     <ClCompile Include="BLAKE3\blake3_avx2.c" />
     <ClCompile Include="BLAKE3\blake3_avx512.c" />
@@ -50,6 +52,8 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GmSSL\endian.h" />
+    <ClInclude Include="GmSSL\sm3.h" />
     <ClInclude Include="BLAKE3\blake3.h" />
     <ClInclude Include="BLAKE3\blake3_impl.h" />
   </ItemGroup>

@@ -7,3 +7,7 @@ GetHashers
 blake3_hasher_init
 blake3_hasher_update
 blake3_hasher_finalize
+
+sm3_init
+sm3_update
+sm3_finish

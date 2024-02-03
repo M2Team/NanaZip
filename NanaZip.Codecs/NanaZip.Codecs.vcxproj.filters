@@ -26,6 +26,9 @@
     <ClCompile Include="BLAKE3\blake3_sse41.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
+    <ClCompile Include="GmSSL\sm3.c">
+      <Filter>GmSSL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -35,6 +38,9 @@
     <Filter Include="BLAKE3">
       <UniqueIdentifier>{8780e049-c08c-40bf-a1ef-6ac34ab857a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GmSSL">
+      <UniqueIdentifier>{650c97a1-a641-4c99-8209-76a265fbfc24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BLAKE3\blake3.h">
@@ -42,6 +48,12 @@
     </ClInclude>
     <ClInclude Include="BLAKE3\blake3_impl.h">
       <Filter>BLAKE3</Filter>
+    </ClInclude>
+    <ClInclude Include="GmSSL\endian.h">
+      <Filter>GmSSL</Filter>
+    </ClInclude>
+    <ClInclude Include="GmSSL\sm3.h">
+      <Filter>GmSSL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
