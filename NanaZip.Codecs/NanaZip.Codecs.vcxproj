@@ -28,6 +28,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -43,6 +44,9 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="xxHash\xxhash.c">
+      <DisableSpecificWarnings>4113;</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="Brotli\common\constants.c" />
     <ClCompile Include="Brotli\common\context.c" />
     <ClCompile Include="Brotli\common\dictionary.c" />
@@ -147,6 +151,7 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="xxHash\xxhash.h" />
     <ClInclude Include="Brotli\common\constants.h" />
     <ClInclude Include="Brotli\common\context.h" />
     <ClInclude Include="Brotli\common\dictionary.h" />

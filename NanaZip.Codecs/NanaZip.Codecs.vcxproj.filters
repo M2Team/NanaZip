@@ -197,6 +197,9 @@
     <ClCompile Include="Brotli\enc\utf8_util.c">
       <Filter>Brotli\enc</Filter>
     </ClCompile>
+    <ClCompile Include="xxHash\xxhash.c">
+      <Filter>xxHash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -232,6 +235,9 @@
     </Filter>
     <Filter Include="Brotli\include\brotli">
       <UniqueIdentifier>{fbcd39e0-c2a1-4146-92e5-4e217a1f49bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="xxHash">
+      <UniqueIdentifier>{4a2fdc00-56e0-4024-b1e4-65edd9491b7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -498,6 +504,9 @@
     </ClInclude>
     <ClInclude Include="Brotli\include\brotli\types.h">
       <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="xxHash\xxhash.h">
+      <Filter>xxHash</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
