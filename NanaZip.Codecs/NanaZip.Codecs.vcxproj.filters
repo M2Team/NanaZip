@@ -218,6 +218,30 @@
     <ClCompile Include="LZ5\lz5hc.c">
       <Filter>LZ5</Filter>
     </ClCompile>
+    <ClCompile Include="Lizard\lizard_compress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\lizard_decompress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\lizard_frame.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\liz_entropy_common.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\liz_fse_compress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\liz_fse_decompress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\liz_huf_compress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\liz_huf_decompress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -262,6 +286,9 @@
     </Filter>
     <Filter Include="LZ5">
       <UniqueIdentifier>{50cd4f8e-720b-44a2-912e-8febdaa5c7c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lizard">
+      <UniqueIdentifier>{3bd67c07-e7a9-462e-bfa1-a18141e2e67c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -561,6 +588,75 @@
     </ClInclude>
     <ClInclude Include="LZ5\mem.h">
       <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_common.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress_liz.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress_lz4.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress_liz.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress_lz4.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_frame.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_frame_static.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fast.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fastbig.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fastsmall.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_hashchain.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_lowestprice.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_nochain.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_optimal.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_pricefast.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\bitstream.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\error_private.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\error_public.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\fse.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\huf.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\mem.h">
+      <Filter>Lizard</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

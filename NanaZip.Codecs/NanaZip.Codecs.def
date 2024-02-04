@@ -115,3 +115,11 @@ LZ5F_decompress
 LZ5F_freeDecompressionContext
 LZ5F_getErrorName
 LZ5F_isError
+
+LizardF_compressFrame
+LizardF_compressFrameBound
+LizardF_createDecompressionContext
+LizardF_decompress
+LizardF_freeDecompressionContext
+LizardF_getErrorName
+LizardF_isError

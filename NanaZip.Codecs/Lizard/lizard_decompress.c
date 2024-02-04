@@ -62,12 +62,8 @@ typedef enum { full = 0, partial = 1 } earlyEnd_directive;
         #include "lizard_decompress_liz.h"
     #endif
 #endif
-#include <common/huf.h>
+#include "huf.h"
 
-static inline size_t HUF_decompress(void* dst, size_t maxDstSize, const void* src, size_t srcSize)
-{
-    return HUF_decompress1X_usingDTable(dst, maxDstSize, src, srcSize, NULL, 0);
-}
 
 /*-*****************************
 *  Decompression functions
@@ -97,7 +93,7 @@ FORCE_INLINE size_t Lizard_readStream(int flag, const BYTE** ip, const BYTE* con
 
         if ((op > oend - streamLen) || (*ip + comprStreamLen > iend - 6)) return 0;
         res = HUF_decompress(op, streamLen, *ip + 6, comprStreamLen);
-        if (HUF_isError(res) || (res != streamLen)) return 0;
+        if (LIZ_HUF_isError(res) || (res != streamLen)) return 0;
         
         *ip += comprStreamLen + 6;
         *streamPtr = op;

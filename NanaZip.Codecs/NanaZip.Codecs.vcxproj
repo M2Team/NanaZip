@@ -27,6 +27,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Lizard\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
@@ -46,6 +47,14 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lizard\lizard_compress.c" />
+    <ClCompile Include="Lizard\lizard_decompress.c" />
+    <ClCompile Include="Lizard\lizard_frame.c" />
+    <ClCompile Include="Lizard\liz_entropy_common.c" />
+    <ClCompile Include="Lizard\liz_fse_compress.c" />
+    <ClCompile Include="Lizard\liz_fse_decompress.c" />
+    <ClCompile Include="Lizard\liz_huf_compress.c" />
+    <ClCompile Include="Lizard\liz_huf_decompress.c" />
     <ClCompile Include="LZ5\lz5.c" />
     <ClCompile Include="LZ5\lz5frame.c" />
     <ClCompile Include="LZ5\lz5hc.c" />
@@ -159,6 +168,29 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Lizard\bitstream.h" />
+    <ClInclude Include="Lizard\error_private.h" />
+    <ClInclude Include="Lizard\error_public.h" />
+    <ClInclude Include="Lizard\fse.h" />
+    <ClInclude Include="Lizard\huf.h" />
+    <ClInclude Include="Lizard\lizard_common.h" />
+    <ClInclude Include="Lizard\lizard_compress.h" />
+    <ClInclude Include="Lizard\lizard_compress_liz.h" />
+    <ClInclude Include="Lizard\lizard_compress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_decompress.h" />
+    <ClInclude Include="Lizard\lizard_decompress_liz.h" />
+    <ClInclude Include="Lizard\lizard_decompress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_frame.h" />
+    <ClInclude Include="Lizard\lizard_frame_static.h" />
+    <ClInclude Include="Lizard\lizard_parser_fast.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastbig.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastsmall.h" />
+    <ClInclude Include="Lizard\lizard_parser_hashchain.h" />
+    <ClInclude Include="Lizard\lizard_parser_lowestprice.h" />
+    <ClInclude Include="Lizard\lizard_parser_nochain.h" />
+    <ClInclude Include="Lizard\lizard_parser_optimal.h" />
+    <ClInclude Include="Lizard\lizard_parser_pricefast.h" />
+    <ClInclude Include="Lizard\mem.h" />
     <ClInclude Include="LZ5\lz5.h" />
     <ClInclude Include="LZ5\lz5common.h" />
     <ClInclude Include="LZ5\lz5frame.h" />

@@ -46,7 +46,7 @@ extern "C" {
 #include <stdlib.h>   /* malloc, calloc, free */
 #include <string.h>   /* memset, memcpy */
 #include <stdint.h>   /* intptr_t */
-#include <common/mem.h>
+#include "mem.h"
 #include "lizard_compress.h"      /* LIZARD_GCC_VERSION */
 
 //#define LIZARD_USE_LOGS
@@ -85,7 +85,7 @@ extern "C" {
 #define LIZARD_BLOCK_SIZE_PAD      (LIZARD_BLOCK_SIZE+32)
 #define LIZARD_COMPRESS_ADD_BUF    (5*LIZARD_BLOCK_SIZE_PAD)
 #ifndef LIZARD_NO_HUFFMAN
-    #define LIZARD_COMPRESS_ADD_HUF    HUF_compressBound(LIZARD_BLOCK_SIZE_PAD)
+    #define LIZARD_COMPRESS_ADD_HUF    LIZ_HUF_compressBound(LIZARD_BLOCK_SIZE_PAD)
     #define LIZARD_HUF_BLOCK_SIZE      LIZARD_BLOCK_SIZE
 #else
     #define LIZARD_COMPRESS_ADD_HUF    0
@@ -190,6 +190,13 @@ struct Lizard_stream_s
     const BYTE* diffBase;
     const BYTE* srcBase;
     const BYTE* destBase;
+};
+
+struct Lizard_streamDecode_s {
+    const BYTE* externalDict;
+    size_t extDictSize;
+    const BYTE* prefixEnd;
+    size_t prefixSize;
 };
 
 struct Lizard_dstream_s

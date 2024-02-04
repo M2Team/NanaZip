@@ -147,7 +147,7 @@ FORCE_INLINE int Lizard_decompress_LZ4(
     /* last literals */
     length = ctx->literalsEnd - ctx->literalsPtr;
     cpy = op + length;
-    if ((ctx->literalsPtr+length != iend) || (cpy > oend)) { LIZARD_LOG_DECOMPRESS_LZ4("9"); goto _output_error; }   /* Error : input must be consumed */
+    if ((length < 0) || (ctx->literalsPtr+length != iend) || (cpy > oend)) { LIZARD_LOG_DECOMPRESS_LZ4("9"); goto _output_error; }   /* Error : input must be consumed */
     memcpy(op, ctx->literalsPtr, length);
     ctx->literalsPtr += length;
     op += length;

@@ -103,7 +103,7 @@ FORCE_INLINE int Lizard_decompress_LIZv1(
                 ctx->offset16Ptr = (BYTE*)((uintptr_t)ctx->offset16Ptr + (not_repCode & 2));
             }
 #else
-            if ((token >> ML_RUN_BITS_LIZv1) == 0)
+            if ((token >> ML_RUN_BITS) == 0)
             {
                 last_off = -(intptr_t)MEM_readLE16(ctx->offset16Ptr); 
                 ctx->offset16Ptr += 2;
@@ -203,7 +203,7 @@ FORCE_INLINE int Lizard_decompress_LIZv1(
     /* last literals */
     length = ctx->literalsEnd - ctx->literalsPtr;
     cpy = op + length;
-    if ((ctx->literalsPtr+length != iend) || (cpy > oend)) { LIZARD_LOG_DECOMPRESS_LIZv1("14"); goto _output_error; }   /* Error : input must be consumed */
+    if ((length < 0) || (ctx->literalsPtr+length != iend) || (cpy > oend)) { LIZARD_LOG_DECOMPRESS_LIZv1("14"); goto _output_error; }   /* Error : input must be consumed */
     memcpy(op, ctx->literalsPtr, length);
     ctx->literalsPtr += length;
     op += length;

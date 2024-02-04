@@ -39,8 +39,6 @@
 extern "C" {
 #endif
 
-#include <common/mem.h>     /* U32 */
-
 
 /*^***************************************************************
 *  Export parameters
@@ -95,12 +93,7 @@ LIZARDDLIB_API int Lizard_decompress_safe_partial (const char* source, char* des
 /*-**********************************************
 *  Streaming Decompression Functions
 ************************************************/
-typedef struct {
-    const BYTE* externalDict;
-    size_t extDictSize;
-    const BYTE* prefixEnd;
-    size_t prefixSize;
-} Lizard_streamDecode_t;
+typedef struct Lizard_streamDecode_s Lizard_streamDecode_t;
 
 /*
  * Lizard_streamDecode_t
