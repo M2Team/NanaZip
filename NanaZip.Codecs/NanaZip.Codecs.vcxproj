@@ -169,7 +169,9 @@
       <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
     </ClCompile>
     <ClCompile Include="GmSSL\sm3.c" />
-    <ClCompile Include="BLAKE3\blake3.c" />
+    <ClCompile Include="BLAKE3\blake3.c">
+      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="BLAKE3\blake3_avx2.c" />
     <ClCompile Include="BLAKE3\blake3_avx512.c" />
     <ClCompile Include="BLAKE3\blake3_dispatch.c">
