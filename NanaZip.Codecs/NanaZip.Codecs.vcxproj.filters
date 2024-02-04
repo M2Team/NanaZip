@@ -242,6 +242,45 @@
     <ClCompile Include="Lizard\liz_huf_decompress.c">
       <Filter>Lizard</Filter>
     </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\zstd-mt_threading.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -289,6 +328,9 @@
     </Filter>
     <Filter Include="Lizard">
       <UniqueIdentifier>{3bd67c07-e7a9-462e-bfa1-a18141e2e67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZSTDMT">
+      <UniqueIdentifier>{0f78d39c-0bbe-4715-9237-133b2a02b2fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -657,6 +699,27 @@
     </ClInclude>
     <ClInclude Include="Lizard\mem.h">
       <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\brotli-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\list.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lizard-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lz4-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lz5-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\memmt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\threading.h">
+      <Filter>ZSTDMT</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

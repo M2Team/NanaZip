@@ -32,6 +32,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)ZSTDMT\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -47,6 +48,19 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ZSTDMT\brotli-mt_common.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\zstd-mt_threading.c" />
     <ClCompile Include="Lizard\lizard_compress.c" />
     <ClCompile Include="Lizard\lizard_decompress.c" />
     <ClCompile Include="Lizard\lizard_frame.c" />
@@ -168,6 +182,13 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ZSTDMT\brotli-mt.h" />
+    <ClInclude Include="ZSTDMT\list.h" />
+    <ClInclude Include="ZSTDMT\lizard-mt.h" />
+    <ClInclude Include="ZSTDMT\lz4-mt.h" />
+    <ClInclude Include="ZSTDMT\lz5-mt.h" />
+    <ClInclude Include="ZSTDMT\memmt.h" />
+    <ClInclude Include="ZSTDMT\threading.h" />
     <ClInclude Include="Lizard\bitstream.h" />
     <ClInclude Include="Lizard\error_private.h" />
     <ClInclude Include="Lizard\error_public.h" />
