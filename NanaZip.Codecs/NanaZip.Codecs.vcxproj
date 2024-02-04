@@ -27,6 +27,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -44,6 +45,9 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LZ4\lz4.c" />
+    <ClCompile Include="LZ4\lz4frame.c" />
+    <ClCompile Include="LZ4\lz4hc.c" />
     <ClCompile Include="xxHash\xxhash.c">
       <DisableSpecificWarnings>4113;</DisableSpecificWarnings>
     </ClCompile>
@@ -151,6 +155,10 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LZ4\lz4.h" />
+    <ClInclude Include="LZ4\lz4frame.h" />
+    <ClInclude Include="LZ4\lz4frame_static.h" />
+    <ClInclude Include="LZ4\lz4hc.h" />
     <ClInclude Include="xxHash\xxhash.h" />
     <ClInclude Include="Brotli\common\constants.h" />
     <ClInclude Include="Brotli\common\context.h" />

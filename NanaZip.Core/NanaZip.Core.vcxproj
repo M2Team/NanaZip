@@ -26,7 +26,6 @@
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Lizard\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)ZSTDMT\;$(IncludePath)</IncludePath>
@@ -141,9 +140,6 @@
     <ClCompile Include="LZ5\lz5.c" />
     <ClCompile Include="LZ5\lz5frame.c" />
     <ClCompile Include="LZ5\lz5hc.c" />
-    <ClCompile Include="LZ4\lz4.c" />
-    <ClCompile Include="LZ4\lz4frame.c" />
-    <ClCompile Include="LZ4\lz4hc.c" />
     <ClCompile Include="Lizard\lizard_compress.c" />
     <ClCompile Include="Lizard\lizard_decompress.c" />
     <ClCompile Include="Lizard\lizard_frame.c" />
@@ -500,10 +496,6 @@
     <ClInclude Include="LZ5\lz5frame_static.h" />
     <ClInclude Include="LZ5\lz5hc.h" />
     <ClInclude Include="LZ5\mem.h" />
-    <ClInclude Include="LZ4\lz4.h" />
-    <ClInclude Include="LZ4\lz4frame.h" />
-    <ClInclude Include="LZ4\lz4frame_static.h" />
-    <ClInclude Include="LZ4\lz4hc.h" />
     <ClInclude Include="Lizard\lizard_common.h" />
     <ClInclude Include="Lizard\lizard_compress.h" />
     <ClInclude Include="Lizard\lizard_compress_liz.h" />

@@ -200,6 +200,15 @@
     <ClCompile Include="xxHash\xxhash.c">
       <Filter>xxHash</Filter>
     </ClCompile>
+    <ClCompile Include="LZ4\lz4.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4frame.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4hc.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -238,6 +247,9 @@
     </Filter>
     <Filter Include="xxHash">
       <UniqueIdentifier>{4a2fdc00-56e0-4024-b1e4-65edd9491b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LZ4">
+      <UniqueIdentifier>{a09b9f72-7fa1-4190-a850-c3ff3c812272}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -507,6 +519,18 @@
     </ClInclude>
     <ClInclude Include="xxHash\xxhash.h">
       <Filter>xxHash</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4frame.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4frame_static.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4hc.h">
+      <Filter>LZ4</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
