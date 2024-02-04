@@ -25,12 +25,11 @@
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;Z7_LARGE_PAGES;NSIS_SCRIPT;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;NO_XXHASH;FL2_7ZIP_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;Z7_LARGE_PAGES;NSIS_SCRIPT;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4100;4113;4127;4146;4189;4200;4244;4267;4334;4702;</DisableSpecificWarnings>
     </ClCompile>
@@ -43,8 +42,6 @@
     </MASM>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="FastLZMA2\COPYING" />
-    <None Include="FastLZMA2\LICENSE" />
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     <None Include="SevenZip\ASM\x86\AesOpt.asm" />
@@ -121,17 +118,6 @@
     <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
-    <ClCompile Include="FastLZMA2\dict_buffer.c" />
-    <ClCompile Include="FastLZMA2\fl2_common.c" />
-    <ClCompile Include="FastLZMA2\fl2_compress.c" />
-    <ClCompile Include="FastLZMA2\fl2_pool.c" />
-    <ClCompile Include="FastLZMA2\fl2_threading.c" />
-    <ClCompile Include="FastLZMA2\lzma2_enc.c" />
-    <ClCompile Include="FastLZMA2\radix_bitpack.c" />
-    <ClCompile Include="FastLZMA2\radix_mf.c" />
-    <ClCompile Include="FastLZMA2\radix_struct.c" />
-    <ClCompile Include="FastLZMA2\range_enc.c" />
-    <ClCompile Include="FastLZMA2\util.c" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />
@@ -445,27 +431,6 @@
     <ClInclude Include="Extensions\ZSCodecs\Lz5Encoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\ZstdEncoder.h" />
-    <ClInclude Include="FastLZMA2\atomic.h" />
-    <ClInclude Include="FastLZMA2\compiler.h" />
-    <ClInclude Include="FastLZMA2\count.h" />
-    <ClInclude Include="FastLZMA2\data_block.h" />
-    <ClInclude Include="FastLZMA2\dict_buffer.h" />
-    <ClInclude Include="FastLZMA2\fast-lzma2.h" />
-    <ClInclude Include="FastLZMA2\fastpos_table.h" />
-    <ClInclude Include="FastLZMA2\fl2_compress_internal.h" />
-    <ClInclude Include="FastLZMA2\fl2_errors.h" />
-    <ClInclude Include="FastLZMA2\fl2_internal.h" />
-    <ClInclude Include="FastLZMA2\fl2_pool.h" />
-    <ClInclude Include="FastLZMA2\fl2_threading.h" />
-    <ClInclude Include="FastLZMA2\lzma2_enc.h" />
-    <ClInclude Include="FastLZMA2\mem.h" />
-    <ClInclude Include="FastLZMA2\platform.h" />
-    <ClInclude Include="FastLZMA2\radix_engine.h" />
-    <ClInclude Include="FastLZMA2\radix_get.h" />
-    <ClInclude Include="FastLZMA2\radix_internal.h" />
-    <ClInclude Include="FastLZMA2\radix_mf.h" />
-    <ClInclude Include="FastLZMA2\range_enc.h" />
-    <ClInclude Include="FastLZMA2\util.h" />
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />

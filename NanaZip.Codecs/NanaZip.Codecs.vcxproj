@@ -25,6 +25,7 @@
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Lizard\;$(IncludePath)</IncludePath>
@@ -37,6 +38,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
+      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>NanaZip.Codecs.def</ModuleDefinitionFile>
@@ -48,6 +50,17 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FastLZMA2\dict_buffer.c" />
+    <ClCompile Include="FastLZMA2\fl2_common.c" />
+    <ClCompile Include="FastLZMA2\fl2_compress.c" />
+    <ClCompile Include="FastLZMA2\fl2_pool.c" />
+    <ClCompile Include="FastLZMA2\fl2_threading.c" />
+    <ClCompile Include="FastLZMA2\lzma2_enc.c" />
+    <ClCompile Include="FastLZMA2\radix_bitpack.c" />
+    <ClCompile Include="FastLZMA2\radix_mf.c" />
+    <ClCompile Include="FastLZMA2\radix_struct.c" />
+    <ClCompile Include="FastLZMA2\range_enc.c" />
+    <ClCompile Include="FastLZMA2\util.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_common.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_compress.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_decompress.c" />
@@ -184,6 +197,27 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FastLZMA2\atomic.h" />
+    <ClInclude Include="FastLZMA2\compiler.h" />
+    <ClInclude Include="FastLZMA2\count.h" />
+    <ClInclude Include="FastLZMA2\data_block.h" />
+    <ClInclude Include="FastLZMA2\dict_buffer.h" />
+    <ClInclude Include="FastLZMA2\fast-lzma2.h" />
+    <ClInclude Include="FastLZMA2\fastpos_table.h" />
+    <ClInclude Include="FastLZMA2\fl2_compress_internal.h" />
+    <ClInclude Include="FastLZMA2\fl2_errors.h" />
+    <ClInclude Include="FastLZMA2\fl2_internal.h" />
+    <ClInclude Include="FastLZMA2\fl2_pool.h" />
+    <ClInclude Include="FastLZMA2\fl2_threading.h" />
+    <ClInclude Include="FastLZMA2\lzma2_enc.h" />
+    <ClInclude Include="FastLZMA2\mem.h" />
+    <ClInclude Include="FastLZMA2\platform.h" />
+    <ClInclude Include="FastLZMA2\radix_engine.h" />
+    <ClInclude Include="FastLZMA2\radix_get.h" />
+    <ClInclude Include="FastLZMA2\radix_internal.h" />
+    <ClInclude Include="FastLZMA2\radix_mf.h" />
+    <ClInclude Include="FastLZMA2\range_enc.h" />
+    <ClInclude Include="FastLZMA2\util.h" />
     <ClInclude Include="ZSTDMT\brotli-mt.h" />
     <ClInclude Include="ZSTDMT\list.h" />
     <ClInclude Include="ZSTDMT\lizard-mt.h" />
