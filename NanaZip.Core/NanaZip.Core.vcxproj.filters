@@ -94,9 +94,6 @@
     <Filter Include="Lizard">
       <UniqueIdentifier>{a582978d-3bd4-4092-a86b-72bb8f96c971}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LZ5">
-      <UniqueIdentifier>{918fd1fb-4664-4f98-8a3b-2cfb349cdaa5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Extensions">
       <UniqueIdentifier>{ad1ce36b-5416-4c51-bdd0-26e4d2afe6b5}</UniqueIdentifier>
     </Filter>
@@ -1093,15 +1090,6 @@
     </ClCompile>
     <ClCompile Include="Lizard\lizard_frame.c">
       <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="LZ5\lz5.c">
-      <Filter>LZ5</Filter>
-    </ClCompile>
-    <ClCompile Include="LZ5\lz5frame.c">
-      <Filter>LZ5</Filter>
-    </ClCompile>
-    <ClCompile Include="LZ5\lz5hc.c">
-      <Filter>LZ5</Filter>
     </ClCompile>
     <ClCompile Include="FastLZMA2\dict_buffer.c">
       <Filter>FastLZMA2</Filter>
@@ -2277,24 +2265,6 @@
     </ClInclude>
     <ClInclude Include="Lizard\lizard_parser_pricefast.h">
       <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5common.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5frame.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5frame_static.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5hc.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\mem.h">
-      <Filter>LZ5</Filter>
     </ClInclude>
     <ClInclude Include="FastLZMA2\atomic.h">
       <Filter>FastLZMA2</Filter>

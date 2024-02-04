@@ -209,6 +209,15 @@
     <ClCompile Include="LZ4\lz4hc.c">
       <Filter>LZ4</Filter>
     </ClCompile>
+    <ClCompile Include="LZ5\lz5.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ5\lz5frame.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ5\lz5hc.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -250,6 +259,9 @@
     </Filter>
     <Filter Include="LZ4">
       <UniqueIdentifier>{a09b9f72-7fa1-4190-a850-c3ff3c812272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LZ5">
+      <UniqueIdentifier>{50cd4f8e-720b-44a2-912e-8febdaa5c7c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -531,6 +543,24 @@
     </ClInclude>
     <ClInclude Include="LZ4\lz4hc.h">
       <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5common.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5frame.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5frame_static.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5hc.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\mem.h">
+      <Filter>LZ5</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

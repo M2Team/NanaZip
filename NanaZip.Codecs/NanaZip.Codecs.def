@@ -107,3 +107,11 @@ LZ4F_decompress
 LZ4F_freeDecompressionContext
 LZ4F_getErrorName
 LZ4F_isError
+
+LZ5F_compressFrame
+LZ5F_compressFrameBound
+LZ5F_createDecompressionContext
+LZ5F_decompress
+LZ5F_freeDecompressionContext
+LZ5F_getErrorName
+LZ5F_isError

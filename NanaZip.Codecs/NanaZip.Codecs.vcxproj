@@ -28,6 +28,7 @@
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -45,6 +46,9 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LZ5\lz5.c" />
+    <ClCompile Include="LZ5\lz5frame.c" />
+    <ClCompile Include="LZ5\lz5hc.c" />
     <ClCompile Include="LZ4\lz4.c" />
     <ClCompile Include="LZ4\lz4frame.c" />
     <ClCompile Include="LZ4\lz4hc.c" />
@@ -155,6 +159,12 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LZ5\lz5.h" />
+    <ClInclude Include="LZ5\lz5common.h" />
+    <ClInclude Include="LZ5\lz5frame.h" />
+    <ClInclude Include="LZ5\lz5frame_static.h" />
+    <ClInclude Include="LZ5\lz5hc.h" />
+    <ClInclude Include="LZ5\mem.h" />
     <ClInclude Include="LZ4\lz4.h" />
     <ClInclude Include="LZ4\lz4frame.h" />
     <ClInclude Include="LZ4\lz4frame_static.h" />
