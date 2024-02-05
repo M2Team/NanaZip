@@ -16,17 +16,17 @@ jobs:
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         submodules: 'recursive'
-    - uses: microsoft/setup-msbuild@v1
+    - uses: microsoft/setup-msbuild@v2
     - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
       run: dotnet nuget locals all --clear
     - name: Build
       run: msbuild BuildAllTargets.proj
     - name: Prepare artifacts
       run: rm Output\Binaries\* -vb -Recurse -Force -Include *.exp, *.idb, *.ilk, *.iobj, *.ipdb, *.lastbuildstate, *.lib, *.obj, *.res, *.tlog
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: NanaZip_All_Binaries_GitHubActions
         path: Output\Binaries
