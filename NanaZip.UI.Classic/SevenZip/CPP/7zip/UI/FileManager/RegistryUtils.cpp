@@ -32,6 +32,7 @@ static LPCTSTR const kSingleClick = TEXT("SingleClick");
 static LPCTSTR const kAlternativeSelection = TEXT("AlternativeSelection");
 // **************** NanaZip Modification Start ****************
 static LPCTSTR const kOpenFolderAfterExtract = TEXT("OpenFolderAfterExtract");
+static LPCTSTR const kFastDragDrop = TEXT("FastDragDrop");
 // **************** NanaZip Modification End ****************
 // static LPCTSTR const kUnderline = TEXT("Underline");
 
@@ -157,6 +158,7 @@ void CFmSettings::Save() const
   SaveOption(kLowercaseHashes, LowercaseHashes);
   // **************** NanaZip Modification Start ****************
   SaveOption(kOpenFolderAfterExtract, OpenFolderAfterExtract);
+  SaveOption(kFastDragDrop, FastDragDrop);
   // **************** NanaZip Modification End ****************
   // SaveOption(kUnderline, Underline);
 
@@ -176,7 +178,10 @@ void CFmSettings::Load()
   CopyHistory = false;
   FolderHistory = false;
   LowercaseHashes = false;
+  // **************** NanaZip Modification Start ****************
   OpenFolderAfterExtract = false;
+  FastDragDrop = false;
+  // **************** NanaZip Modification End ****************
   // Underline = false;
 
   ShowSystemMenu = false;
@@ -197,6 +202,7 @@ void CFmSettings::Load()
     ReadOption(key, kLowercaseHashes, LowercaseHashes);
     // **************** NanaZip Modification Start ****************
     ReadOption(key, kOpenFolderAfterExtract, OpenFolderAfterExtract);
+    ReadOption(key, kFastDragDrop, FastDragDrop);
     // **************** NanaZip Modification End ****************
     // ReadOption(key, kUnderline, Underline);
 
@@ -218,6 +224,7 @@ bool WantFolderHistory() { return ReadFMOption(kFolderHistory); }
 bool WantLowercaseHashes() { return ReadFMOption(kLowercaseHashes); }
 // **************** NanaZip Modification Start ****************
 bool WantOpenFolderAfterExtract() { return ReadFMOption(kOpenFolderAfterExtract); }
+bool WantFastDragDrop() { return ReadFMOption(kFastDragDrop); }
 // **************** NanaZip Modification End ****************
 
 static CSysString GetFlatViewName(UInt32 panelIndex)
