@@ -31,6 +31,8 @@ BEGIN
   CONTROL  "Want CopyHistory",   IDX_SETTINGS_WANT_COPY_HISTORY,      MY_CHECKBOX, m, 182, xc, 10
   CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 196, xc, 10
   CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 220, xc, 10
+
+  CONTROL  "Use fast drag-and-drop (Experimental)", IDX_SETTINGS_FAST_DRAG_DROP, MY_CHECKBOX, m, 234, xc, 10
   // **************** NanaZip Modification End ****************
 
   // LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY, m, 140, xc, 8

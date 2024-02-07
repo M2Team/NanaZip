@@ -32,6 +32,7 @@ struct CFmSettings
   bool LowercaseHashes;
   // **************** NanaZip Modification Start ****************
   bool OpenFolderAfterExtract;
+  bool FastDragDrop;
   // **************** NanaZip Modification End ****************
   // bool Underline;
 
@@ -54,6 +55,7 @@ bool WantFolderHistory();
 bool WantLowercaseHashes();
 // **************** NanaZip Modification Start ****************
 bool WantOpenFolderAfterExtract();
+bool WantFastDragDrop();
 // **************** NanaZip Modification End ****************
 
 void SaveFlatView(UInt32 panelIndex, bool enable);

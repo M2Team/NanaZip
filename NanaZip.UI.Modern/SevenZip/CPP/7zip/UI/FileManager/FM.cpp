@@ -27,6 +27,10 @@
 
 #include "../GUI/ExtractRes.h"
 
+// **************** NanaZip Modification Start ****************
+#include "../Explorer/CopyHook.h"
+// **************** NanaZip Modification End ****************
+
 #include "resource.h"
 
 #include "App.h"
@@ -1065,6 +1069,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         break;
     }
+
+    // **************** NanaZip Modification Start ****************
+    case WM_COPYDATA:
+    {
+        PCOPYDATASTRUCT lpCds = (PCOPYDATASTRUCT)lParam;
+        if (lpCds->dwData == COPYHOOK_COPY && lpCds->cbData == sizeof(CopyHookData)) {
+            CPanel& panel = g_App.Panels[g_App.LastFocusedPanel];
+            CCopyToOptions options;
+            CopyHookData* data = static_cast<CopyHookData*>(lpCds->lpData);
+            options.folder = UString(data->filename);
+            options.showErrorMessages = true;
+            CRecordVector<UInt32> indices;
+            panel.GetOperatedItemIndices(indices);
+            if (indices.Size() > 0) {
+                panel.CopyTo(options, indices, NULL);
+            }
+            return TRUE;
+        }
+        break;
+    }
+    // **************** NanaZip Modification End ****************
     default:
         break;
   }
