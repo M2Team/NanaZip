@@ -688,12 +688,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     ErrorMessage("Cannot enable security mitigations");
   }
 
-#ifdef NDEBUG
-  // opt out of dynamic code policy on UI thread to prevent Explorer extension incompatibility
-  // ignore errors since they shouldn't be fatal
-  ::NanaZipThreadDynamicCodeAllow();
-#endif
-
   try
   {
     try

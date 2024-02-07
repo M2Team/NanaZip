@@ -53,49 +53,19 @@ namespace
             dwLength);
     }
 
-    static BOOL SetThreadInformationWrapper(
-        _In_ HANDLE hThread,
-        _In_ THREAD_INFORMATION_CLASS ThreadInformationClass,
-        _In_ LPVOID ThreadInformation,
-        _In_ DWORD ThreadInformationSize)
-    {
-        static FARPROC CachedProcAddress = ([]() -> FARPROC
-        {
-            HMODULE ModuleHandle = ::GetKernel32ModuleHandle();
-            if (ModuleHandle)
-            {
-                return ::GetProcAddress(
-                    ModuleHandle,
-                    "SetThreadInformation");
-            }
-            return nullptr;
-        }());
-
-        if (!CachedProcAddress)
-        {
-            return FALSE;
-        }
-
-        using ProcType = decltype(::SetThreadInformation)*;
-
-        return reinterpret_cast<ProcType>(CachedProcAddress)(
-            hThread,
-            ThreadInformationClass,
-            ThreadInformation,
-            ThreadInformationSize);
-    }
-
     static bool IsWindows8OrLater()
     {
         static bool CachedResult = ::MileIsWindowsVersionAtLeast(6, 2, 0);
         return CachedResult;
     }
 
+#ifdef NDEBUG
     static bool IsWindows8Point1OrLater()
     {
         static bool CachedResult = ::MileIsWindowsVersionAtLeast(6, 3, 0);
         return CachedResult;
     }
+#endif
 
     static bool IsWindows10OrLater()
     {
@@ -135,7 +105,6 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
     {
         PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = { 0 };
         Policy.ProhibitDynamicCode = 1;
-        Policy.AllowThreadOptOut = 1;
         if (!::SetProcessMitigationPolicyWrapper(
             ProcessDynamicCodePolicy,
             &Policy,
@@ -161,21 +130,6 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
     }
 
     return TRUE;
-}
-
-EXTERN_C BOOL WINAPI NanaZipThreadDynamicCodeAllow()
-{
-    if (!::IsWindows8Point1OrLater())
-    {
-        return TRUE;
-    }
-
-    DWORD ThreadPolicy = THREAD_DYNAMIC_CODE_ALLOW;
-    return ::SetThreadInformationWrapper(
-        ::GetCurrentThread(),
-        ThreadDynamicCodePolicy,
-        &ThreadPolicy,
-        sizeof(DWORD));
 }
 
 EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
