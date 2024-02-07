@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}</ProjectGuid>
@@ -21,9 +21,11 @@
     <None Include="NanaZip.Shared.Mitigations.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DllBlock.h" />
     <ClInclude Include="Mitigations.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DllBlock.cpp" />
     <ClCompile Include="Mitigations.cpp" />
   </ItemGroup>
   <ItemGroup>

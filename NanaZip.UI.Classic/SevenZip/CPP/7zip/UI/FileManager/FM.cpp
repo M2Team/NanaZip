@@ -9,6 +9,7 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
+#include "DllBlock.h"
 #include "Mitigations.h"
 #endif
 
@@ -672,6 +673,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 {
   g_hInstance = hInstance;
 
+  if (!::NanaZipBlockDlls())
+  {
+    ErrorMessage("Cannot block DLL loading");
+  }
   if (!::NanaZipEnableMitigations())
   {
     ErrorMessage("Cannot enable security mitigations");
