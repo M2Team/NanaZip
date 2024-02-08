@@ -31,7 +31,7 @@
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
-      <AdditionalDependencies>comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>runtimeobject.lib;comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>mpr.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>

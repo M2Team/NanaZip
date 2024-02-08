@@ -31,7 +31,7 @@
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
       <ModuleDefinitionFile>NanaZipShellExtension.def</ModuleDefinitionFile>
-      <AdditionalDependencies>comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>runtimeobject.lib;comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
