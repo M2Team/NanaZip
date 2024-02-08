@@ -1,4 +1,4 @@
-﻿/* DllSecur.c -- DLL loading security
+/* DllSecur.c -- DLL loading security
 2022-07-15 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
@@ -19,6 +19,7 @@ typedef BOOL (WINAPI *Func_SetDefaultDllDirectories)(DWORD DirectoryFlags);
 
 #define MY_LOAD_LIBRARY_SEARCH_USER_DIRS 0x400
 #define MY_LOAD_LIBRARY_SEARCH_SYSTEM32  0x800
+#define MY_LOAD_LIBRARY_SEARCH_APPLICATION_DIR 0x200
 
 static const char * const g_Dlls =
   #ifndef _CONSOLE
@@ -51,7 +52,9 @@ void My_SetDefaultDllDirectories()
       Func_SetDefaultDllDirectories setDllDirs = (Func_SetDefaultDllDirectories)
           MY_CAST_FUNC GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "SetDefaultDllDirectories");
       if (setDllDirs)
-        if (setDllDirs(MY_LOAD_LIBRARY_SEARCH_SYSTEM32 | MY_LOAD_LIBRARY_SEARCH_USER_DIRS))
+        if (setDllDirs(MY_LOAD_LIBRARY_SEARCH_SYSTEM32 |
+            MY_LOAD_LIBRARY_SEARCH_USER_DIRS |
+            MY_LOAD_LIBRARY_SEARCH_APPLICATION_DIR))
           return;
     }
 
@@ -74,7 +77,9 @@ void LoadSecurityDlls()
       Func_SetDefaultDllDirectories setDllDirs = (Func_SetDefaultDllDirectories)
           MY_CAST_FUNC GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "SetDefaultDllDirectories");
       if (setDllDirs)
-        if (setDllDirs(MY_LOAD_LIBRARY_SEARCH_SYSTEM32 | MY_LOAD_LIBRARY_SEARCH_USER_DIRS))
+        if (setDllDirs(MY_LOAD_LIBRARY_SEARCH_SYSTEM32 |
+            MY_LOAD_LIBRARY_SEARCH_USER_DIRS |
+            MY_LOAD_LIBRARY_SEARCH_APPLICATION_DIR))
           return;
     }
   }
