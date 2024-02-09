@@ -9,6 +9,7 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
+#include "DllBlock.h"
 #include "Mitigations.h"
 #endif
 
@@ -672,16 +673,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 {
   g_hInstance = hInstance;
 
+  if (!::NanaZipBlockDlls())
+  {
+    ErrorMessage("Cannot block DLL loading");
+  }
   if (!::NanaZipEnableMitigations())
   {
     ErrorMessage("Cannot enable security mitigations");
   }
-
-#ifdef NDEBUG
-  // opt out of dynamic code policy on UI thread to prevent Explorer extension incompatibility
-  // ignore errors since they shouldn't be fatal
-  ::NanaZipThreadDynamicCodeAllow();
-#endif
 
   try
   {
