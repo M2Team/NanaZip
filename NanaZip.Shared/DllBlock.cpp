@@ -14,64 +14,13 @@
 #ifdef NDEBUG
 
 #include <Detours.h>
+#include <MINT.h>
 
 namespace
 {
-    // The following definitions are part of the Process Hacker project - https://processhacker.sourceforge.io/
-
-    typedef enum _SECTION_INHERIT
-    {
-        ViewShare = 1,
-        ViewUnmap = 2
-    } SECTION_INHERIT;
-
-    typedef enum _SECTION_INFORMATION_CLASS
-    {
-        SectionBasicInformation, // q; SECTION_BASIC_INFORMATION
-        SectionImageInformation, // q; SECTION_IMAGE_INFORMATION
-        SectionRelocationInformation, // q; PVOID RelocationAddress // name:wow64:whNtQuerySection_SectionRelocationInformation // since WIN7
-        SectionOriginalBaseInformation, // PVOID BaseAddress
-        SectionInternalImageInformation, // SECTION_INTERNAL_IMAGE_INFORMATION // since REDSTONE2
-        MaxSectionInfoClass
-    } SECTION_INFORMATION_CLASS;
-
-    typedef struct _SECTION_BASIC_INFORMATION
-    {
-        PVOID BaseAddress;
-        ULONG AllocationAttributes;
-        LARGE_INTEGER MaximumSize;
-    } SECTION_BASIC_INFORMATION, * PSECTION_BASIC_INFORMATION;
-
-    typedef NTSTATUS(NTAPI* NtMapViewOfSectionType)(
-        _In_ HANDLE SectionHandle,
-        _In_ HANDLE ProcessHandle,
-        _Inout_ _At_(*BaseAddress, _Readable_bytes_(*ViewSize) _Writable_bytes_(*ViewSize) _Post_readable_byte_size_(*ViewSize)) PVOID* BaseAddress,
-        _In_ ULONG_PTR ZeroBits,
-        _In_ SIZE_T CommitSize,
-        _Inout_opt_ PLARGE_INTEGER SectionOffset,
-        _Inout_ PSIZE_T ViewSize,
-        _In_ SECTION_INHERIT InheritDisposition,
-        _In_ ULONG AllocationType,
-        _In_ ULONG Win32Protect);
-
-    typedef NTSTATUS(NTAPI* NtQuerySectionType)(
-        _In_ HANDLE SectionHandle,
-        _In_ SECTION_INFORMATION_CLASS SectionInformationClass,
-        _Out_writes_bytes_(SectionInformationLength) PVOID SectionInformation,
-        _In_ SIZE_T SectionInformationLength,
-        _Out_opt_ PSIZE_T ReturnLength);
-
-    typedef NTSTATUS(NTAPI* NtUnmapViewOfSectionType)(
-        _In_ HANDLE ProcessHandle,
-        _In_opt_ PVOID BaseAddress);
-
-    // End PHNT definitions
-
-    static constexpr NTSTATUS STATUS_ACCESS_DENIED = 0xC0000022;
-
-    static NtMapViewOfSectionType RealNtMapViewOfSection = NULL;
-    static NtQuerySectionType RealNtQuerySection = NULL;
-    static NtUnmapViewOfSectionType RealNtUnmapViewOfSection = NULL;
+    static decltype(NtMapViewOfSection)* RealNtMapViewOfSection = nullptr;
+    static decltype(NtQuerySection)* RealNtQuerySection = nullptr;
+    static decltype(NtUnmapViewOfSection)* RealNtUnmapViewOfSection = nullptr;
 
     static bool DllNeedsBlocking(const char* dllName) {
         if (!::_stricmp(dllName, "ExplorerPatcher.amd64.dll")) {
@@ -175,9 +124,9 @@ EXTERN_C BOOL WINAPI NanaZipBlockDlls()
 {
     DetourTransactionBegin();
     DetourUpdateThread(GetCurrentThread());
-    RealNtMapViewOfSection = static_cast<NtMapViewOfSectionType>(DetourFindFunction("ntdll.dll", "NtMapViewOfSection"));
-    RealNtQuerySection = static_cast<NtQuerySectionType>(DetourFindFunction("ntdll.dll", "NtQuerySection"));
-    RealNtUnmapViewOfSection = static_cast<NtUnmapViewOfSectionType>(DetourFindFunction("ntdll.dll", "NtUnmapViewOfSection"));
+    RealNtMapViewOfSection = static_cast<decltype(NtMapViewOfSection)*>(DetourFindFunction("ntdll.dll", "NtMapViewOfSection"));
+    RealNtQuerySection = static_cast<decltype(NtQuerySection)*>(DetourFindFunction("ntdll.dll", "NtQuerySection"));
+    RealNtUnmapViewOfSection = static_cast<decltype(NtUnmapViewOfSection)*>(DetourFindFunction("ntdll.dll", "NtUnmapViewOfSection"));
     if (DetourAttach(&RealNtMapViewOfSection, MyNtMapViewOfSection) != NO_ERROR) {
         DetourTransactionAbort();
         return FALSE;
