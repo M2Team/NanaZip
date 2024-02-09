@@ -9,12 +9,13 @@
  *            MouriNaruto (KurikoMouri@outlook.jp)
  */
 
+#include <MINT.h>
+
+#include <Detours.h>
+
 #include "DllBlock.h"
 
 #ifdef NDEBUG
-
-#include <Detours.h>
-#include <MINT.h>
 
 namespace
 {
