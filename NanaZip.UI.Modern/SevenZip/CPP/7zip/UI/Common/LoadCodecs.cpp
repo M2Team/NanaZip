@@ -1,4 +1,4 @@
-// LoadCodecs.cpp
+﻿// LoadCodecs.cpp
 
 /*
 EXTERNAL_CODECS
@@ -781,6 +781,11 @@ HRESULT CCodecs::Load()
   #ifdef EXTERNAL_CODECS
     const FString baseFolder = GetBaseFolderPrefixFromRegistry();
     {
+      // ******** NanaZip.Codecs.dll development workaround start ********
+      // For workaround https://github.com/M2Team/NanaZip/pull/379
+      if (!::LoadLibraryW(baseFolder + L"NanaZip.Codecs.dll"))
+          MainDll_ErrorPath = L"NanaZip.Codecs.dll";
+      // ******** NanaZip.Codecs.dll development workaround end ********
       bool loadedOK;
       RINOK(LoadDll(baseFolder + kMainDll, false, &loadedOK));
       if (!loadedOK)
