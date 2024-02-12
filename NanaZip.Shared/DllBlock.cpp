@@ -9,7 +9,7 @@
  *            MouriNaruto (KurikoMouri@outlook.jp)
  */
 
-#include <MINT.h>
+#include <Mint.h>
 
 #include <Detours.h>
 
