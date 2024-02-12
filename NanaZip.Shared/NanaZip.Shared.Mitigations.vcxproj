@@ -33,7 +33,7 @@
       <Version>1.0.15</Version>
     </PackageReference>
     <PackageReference Include="Chuyu.Mint">
-      <Version>2024.0.0</Version>
+      <Version>2024.1.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
