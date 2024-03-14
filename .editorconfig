@@ -1,7 +1,7 @@
 ﻿## 
 ## PROJECT:   Mouri Internal Library Essentials
 ## FILE:      .editorconfig
-## PURPOSE:   The root .editorconfig file for C++ Project
+## PURPOSE:   The root .editorconfig file
 ## 
 ## LICENSE:   The MIT License
 ## 
@@ -17,14 +17,14 @@ end_of_line = crlf
 [*.md]
 insert_final_newline = true
 
-[*.{c,c++,cc,cpp,cxx,h,h++,hh,hpp,hxx,idl,inl,ipp,tlh,tli}]
+[*.{c,c++,cc,cpp,cxx,h,h++,hh,hpp,hxx,ixx,cppm,ipp,odl,idl,inl,ipp,tlh,tli}]
 indent_style = space
 indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 vc_generate_documentation_comments = doxygen_slash_star
 
-[*.{cs,csx,vb,vbx}]
+[*.{cs,csx,vb,vbx,asmx}]
 indent_style = space
 indent_size = 4
 insert_final_newline = true
@@ -39,12 +39,6 @@ trim_trailing_whitespace = true
 [*.rc]
 charset = utf-16le
 
-[Mile.Project.Properties.Template.h]
-charset = utf-16le
-
-[Mile.Project.Properties.h]
-charset = utf-16le
-
 [*.bat]
 charset = utf-8
 insert_final_newline = true
@@ -53,3 +47,10 @@ insert_final_newline = true
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
+
+[*.{asm,inc,s,nasm}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
