@@ -589,8 +589,8 @@ Creative Commons may be contacted at creativecommons.org.
 - LZMA SDK, https://www.7-zip.org/sdk.html
 - Mile.Project.Windows, https://github.com/ProjectMile/Mile.Project.Windows
 - Mile.Windows.Helpers, https://github.com/ProjectMile/Mile.Windows.Helpers
+- Mile.Windows.Internal, https://github.com/ProjectMile/Mile.Windows.Internal
 - Mile.Xaml, https://github.com/ProjectMile/Mile.Xaml
-- MINT, https://github.com/Chuyu-Team/MINT
 - RHash, https://github.com/rhash/RHash
 - VC-LTL, https://github.com/Chuyu-Team/VC-LTL5
 - xxHash, https://github.com/Cyan4973/xxHash
