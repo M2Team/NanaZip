@@ -579,7 +579,6 @@ Creative Commons may be contacted at creativecommons.org.
 - BLAKE3, https://github.com/BLAKE3-team/BLAKE3
 - Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
-- Detours, https://github.com/microsoft/Detours
 - Fast LZMA2, https://github.com/conor42/fast-lzma2
 - GmSSL, https://github.com/guanzhi/GmSSL
 - Heimdal, https://github.com/heimdal/heimdal
@@ -587,6 +586,7 @@ Creative Commons may be contacted at creativecommons.org.
 - LZ4, https://github.com/lz4/lz4
 - LZ5, https://github.com/inikep/lizard
 - LZMA SDK, https://www.7-zip.org/sdk.html
+- Mile.Detours, https://github.com/ProjectMile/Mile.Detours
 - Mile.Project.Windows, https://github.com/ProjectMile/Mile.Project.Windows
 - Mile.Windows.Helpers, https://github.com/ProjectMile/Mile.Windows.Helpers
 - Mile.Windows.Internal, https://github.com/ProjectMile/Mile.Windows.Internal
