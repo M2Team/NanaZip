@@ -49,7 +49,7 @@
 #include "../common/fse.h"           /* FSE_normalizeCount, FSE_writeNCount */
 #include "../common/huf.h"           /* HUF_buildCTable, HUF_writeCTable */
 #include "../common/zstd_internal.h" /* includes zstd.h */
-#include <xxhash.h>        /* XXH64 */
+#include <xxhash.h>                  /* XXH64 */
 #include "../compress/zstd_compress_internal.h" /* ZSTD_loadCEntropy() */
 #include "../zdict.h"
 #include "divsufsort.h"
@@ -74,9 +74,9 @@ static const U32 g_selectivity_default = 9;
 *  Console display
 ***************************************/
 #undef  DISPLAY
-#define DISPLAY(...)         { fprintf(stderr, __VA_ARGS__); fflush( stderr ); }
+#define DISPLAY(...)         do { fprintf(stderr, __VA_ARGS__); fflush( stderr ); } while (0)
 #undef  DISPLAYLEVEL
-#define DISPLAYLEVEL(l, ...) if (notificationLevel>=l) { DISPLAY(__VA_ARGS__); }    /* 0 : no display;   1: errors;   2: default;  3: details;  4: debug */
+#define DISPLAYLEVEL(l, ...) do { if (notificationLevel>=l) { DISPLAY(__VA_ARGS__); } } while (0)    /* 0 : no display;   1: errors;   2: default;  3: details;  4: debug */
 
 static clock_t ZDICT_clockSpan(clock_t nPrevious) { return clock() - nPrevious; }
 
@@ -477,10 +477,16 @@ static size_t ZDICT_trainBuffer_legacy(dictItem* dictList, U32 dictListSize,
     clock_t const refreshRate = CLOCKS_PER_SEC * 3 / 10;
 
 #   undef  DISPLAYUPDATE
-#   define DISPLAYUPDATE(l, ...) if (notificationLevel>=l) { \
-            if (ZDICT_clockSpan(displayClock) > refreshRate)  \
-            { displayClock = clock(); DISPLAY(__VA_ARGS__); \
-            if (notificationLevel>=4) fflush(stderr); } }
+#   define DISPLAYUPDATE(l, ...)                                   \
+        do {                                                       \
+            if (notificationLevel>=l) {                            \
+                if (ZDICT_clockSpan(displayClock) > refreshRate) { \
+                    displayClock = clock();                        \
+                    DISPLAY(__VA_ARGS__);                          \
+                }                                                  \
+                if (notificationLevel>=4) fflush(stderr);          \
+            }                                                      \
+        } while (0)
 
     /* init */
     DISPLAYLEVEL(2, "\r%70s\r", "");   /* clean display line */
