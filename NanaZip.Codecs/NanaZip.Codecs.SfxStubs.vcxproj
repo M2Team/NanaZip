@@ -11,8 +11,55 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Mile.Samples.StaticLibrary.cpp" />
+    <ClCompile Include="xxHash\xxhash.c" />
+    <ClCompile Include="Zstandard\common\debug.c" />
+    <ClCompile Include="Zstandard\common\entropy_common.c" />
+    <ClCompile Include="Zstandard\common\error_private.c" />
+    <ClCompile Include="Zstandard\common\fse_decompress.c" />
+    <ClCompile Include="Zstandard\common\pool.c" />
+    <ClCompile Include="Zstandard\common\threading.c" />
+    <ClCompile Include="Zstandard\common\zstd_common.c" />
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xxHash\xxhash.h" />
+    <ClInclude Include="Zstandard\common\allocations.h" />
+    <ClInclude Include="Zstandard\common\bits.h" />
+    <ClInclude Include="Zstandard\common\bitstream.h" />
+    <ClInclude Include="Zstandard\common\compiler.h" />
+    <ClInclude Include="Zstandard\common\cpu.h" />
+    <ClInclude Include="Zstandard\common\debug.h" />
+    <ClInclude Include="Zstandard\common\error_private.h" />
+    <ClInclude Include="Zstandard\common\fse.h" />
+    <ClInclude Include="Zstandard\common\huf.h" />
+    <ClInclude Include="Zstandard\common\mem.h" />
+    <ClInclude Include="Zstandard\common\pool.h" />
+    <ClInclude Include="Zstandard\common\portability_macros.h" />
+    <ClInclude Include="Zstandard\common\threading.h" />
+    <ClInclude Include="Zstandard\common\zstd_deps.h" />
+    <ClInclude Include="Zstandard\common\zstd_internal.h" />
+    <ClInclude Include="Zstandard\common\zstd_trace.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h" />
+    <ClInclude Include="Zstandard\zstd.h" />
+    <ClInclude Include="Zstandard\zstd_errors.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanaZip.Codecs.SfxStubs.props" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>
