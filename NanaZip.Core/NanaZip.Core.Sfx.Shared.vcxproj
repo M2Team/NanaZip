@@ -11,8 +11,8 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <PropertyGroup>
-    <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)..\NanaZip.Codecs\xxHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)..\NanaZip.Codecs\Zstandard\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -114,18 +114,18 @@
     <ClCompile Include="SevenZip\C\Ppmd7Dec.c" />
     <ClCompile Include="SevenZip\C\Sha256.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
-    <ClCompile Include="Zstandard\common\debug.c" />
-    <ClCompile Include="Zstandard\common\entropy_common.c" />
-    <ClCompile Include="Zstandard\common\error_private.c" />
-    <ClCompile Include="Zstandard\common\fse_decompress.c" />
-    <ClCompile Include="Zstandard\common\pool.c" />
-    <ClCompile Include="Zstandard\common\threading.c" />
-    <ClCompile Include="Zstandard\common\zstd_common.c" />
-    <ClCompile Include="Zstandard\decompress\huf_decompress.c" />
-    <ClCompile Include="Zstandard\decompress\zstd_ddict.c" />
-    <ClCompile Include="Zstandard\decompress\zstd_decompress.c" />
-    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c" />
-    <ClCompile Include="xxHash\xxhash.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\debug.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\entropy_common.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\error_private.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\fse_decompress.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\pool.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\threading.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\zstd_common.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\huf_decompress.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_ddict.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress.c" />
+    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress_block.c" />
+    <ClCompile Include="..\NanaZip.Codecs\xxHash\xxhash.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
@@ -231,28 +231,28 @@
     <ClInclude Include="SevenZip\C\RotateDefs.h" />
     <ClInclude Include="SevenZip\C\Sha256.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
-    <ClInclude Include="Zstandard\common\allocations.h" />
-    <ClInclude Include="Zstandard\common\bits.h" />
-    <ClInclude Include="Zstandard\common\bitstream.h" />
-    <ClInclude Include="Zstandard\common\compiler.h" />
-    <ClInclude Include="Zstandard\common\cpu.h" />
-    <ClInclude Include="Zstandard\common\debug.h" />
-    <ClInclude Include="Zstandard\common\error_private.h" />
-    <ClInclude Include="Zstandard\common\fse.h" />
-    <ClInclude Include="Zstandard\common\huf.h" />
-    <ClInclude Include="Zstandard\common\mem.h" />
-    <ClInclude Include="Zstandard\common\pool.h" />
-    <ClInclude Include="Zstandard\common\portability_macros.h" />
-    <ClInclude Include="Zstandard\common\threading.h" />
-    <ClInclude Include="Zstandard\common\zstd_deps.h" />
-    <ClInclude Include="Zstandard\common\zstd_internal.h" />
-    <ClInclude Include="Zstandard\common\zstd_trace.h" />
-    <ClInclude Include="Zstandard\decompress\zstd_ddict.h" />
-    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h" />
-    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h" />
-    <ClInclude Include="Zstandard\zstd.h" />
-    <ClInclude Include="Zstandard\zstd_errors.h" />
-    <ClInclude Include="xxHash\xxhash.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\allocations.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\bits.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\bitstream.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\compiler.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\cpu.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\debug.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\error_private.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\fse.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\huf.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\mem.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\pool.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\portability_macros.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\threading.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\zstd_deps.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\zstd_internal.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\zstd_trace.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_ddict.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress_block.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress_internal.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\zstd.h" />
+    <ClInclude Include="..\NanaZip.Codecs\Zstandard\zstd_errors.h" />
+    <ClInclude Include="..\NanaZip.Codecs\xxHash\xxhash.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
