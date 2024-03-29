@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.SfxStubs.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)..\NanaZip.Codecs\xxHash\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)..\NanaZip.Codecs\Zstandard\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -31,4 +30,9 @@
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\Common\CRC.cpp" />
     </ItemGroup>
   </Target>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.Core.Sfx.Shared.vcxproj">
+      <Project>{7262BA1E-732D-4814-972F-698F0B4330A1}</Project>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -49,18 +49,6 @@
     <Filter Include="SevenZip\CPP\7zip\Archive\Common">
       <UniqueIdentifier>{90bdad4f-0ef4-4cb5-a451-71a8b415d708}</UniqueIdentifier>
     </Filter>
-    <Filter Include="xxHash">
-      <UniqueIdentifier>{ece8cf21-93f6-410b-a751-f639ab55ffdb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Zstandard">
-      <UniqueIdentifier>{2936146f-34bd-49b6-a3d7-88ee1f816e65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="..\NanaZip.Codecs\Zstandard\common">
-      <UniqueIdentifier>{cffe370f-0b87-4dc3-91da-582a89390355}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="..\NanaZip.Codecs\Zstandard\decompress">
-      <UniqueIdentifier>{a7d780ce-6b10-4973-8e3a-59ed56e3017a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Core.Sfx.Shared.props" />
@@ -90,42 +78,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\NanaZip.Codecs\xxHash\xxhash.c">
-      <Filter>xxHash</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\debug.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\entropy_common.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\error_private.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\fse_decompress.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\pool.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\threading.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\common\zstd_common.c">
-      <Filter>Zstandard\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\huf_decompress.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_ddict.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress_block.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
     </ClCompile>
@@ -359,72 +311,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\NanaZip.Codecs\xxHash\xxhash.h">
-      <Filter>xxHash</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\zstd.h">
-      <Filter>Zstandard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\zstd_errors.h">
-      <Filter>Zstandard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\allocations.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\bits.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\bitstream.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\compiler.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\cpu.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\debug.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\error_private.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\fse.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\huf.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\mem.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\pool.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\portability_macros.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\threading.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\zstd_deps.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\zstd_internal.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\common\zstd_trace.h">
-      <Filter>Zstandard\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_ddict.h">
-      <Filter>Zstandard\decompress</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress_block.h">
-      <Filter>Zstandard\decompress</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NanaZip.Codecs\Zstandard\decompress\zstd_decompress_internal.h">
-      <Filter>Zstandard\decompress</Filter>
-    </ClInclude>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
       <Filter>Extensions\ZSCodecs</Filter>
     </ClInclude>

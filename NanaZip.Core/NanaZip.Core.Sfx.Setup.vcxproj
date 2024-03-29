@@ -47,11 +47,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.vcxproj">
-      <Project>{7262BA1E-732D-4814-972F-698F0B4330A1}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractCallbackSfx.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Bundles\SFXSetup\ExtractEngine.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Bundles\SFXSetup\SfxSetup.cpp" />
