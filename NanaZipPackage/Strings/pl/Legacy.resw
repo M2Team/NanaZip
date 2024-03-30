@@ -513,6 +513,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>Tylko do odczytu</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Kopiuj odnośnik</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Zmienione metadane</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Opcje</value>
   </data>
@@ -791,6 +797,12 @@ Czy chcesz zaktualizować go w archiwum?</value>
   <data name="Resource3431" xml:space="preserve">
     <value>Przywróć zabezpieczenia plików</value>
   </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Propagowanie strumienia Zone.Id:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Dla dokumentów MS Office</value>
+  </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Potwierdź zamianę pliku</value>
   </data>
@@ -1024,6 +1036,33 @@ Czy chcesz zaktualizować go w archiwum?</value>
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>Ciągły</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Czas</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Precyzja znacznika czasu:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Przechowuj czas ostatniej modyfikacji</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Przechowuj czas utworzenia</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Przechowuj czas ostatniego dostępu</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Ustaw czas archiwizacji na czas ostatniego pliku</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Nie zmieniaj czasu ostatniego dostępu do plików źródłowych</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>sek.</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Kopiuj</value>
