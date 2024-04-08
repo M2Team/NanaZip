@@ -10,6 +10,10 @@
 - Kenji Mouri, https://github.com/MouriNaruto
 - Sakura Neko, https://github.com/SakuraNeko
 
+## Microsoft Store preinstall permission OEM Sponsor
+
+- Moespirit Tech, https://github.com/Moespirit
+
 ## Logo Designers
 
 ### 2.x Series
