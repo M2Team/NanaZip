@@ -2,6 +2,8 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+#include <stdlib.h> /* for aligned_alloc and __GLIBC__ version macros */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -42,11 +44,11 @@ extern "C" {
 # define rhash_aligned_free(ptr) _aligned_free(ptr)
 
 #elif !defined(NO_STDC_ALIGNED_ALLOC) && (__STDC_VERSION__ >= 201112L || defined(_ISOC11_SOURCE)) \
-	&& !defined(__APPLE__) && !defined(__HAIKU__) \
+	&& !defined(__APPLE__) && !defined(__HAIKU__) && !defined(__sun) \
+	&& (!defined(__GLIBC__) || __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 15)) \
 	&& (!defined(__ANDROID_API__) || __ANDROID_API__ >= 28)
 
 # define HAS_STDC_ALIGNED_ALLOC
-# include <stdlib.h>
 # define rhash_aligned_alloc(alignment, size) aligned_alloc((alignment), ALIGN_SIZE_BY(size, alignment))
 # define rhash_aligned_free(ptr) free(ptr)
 
@@ -57,7 +59,6 @@ extern "C" {
 # if !defined(NO_POSIX_ALIGNED_ALLOC) && (_POSIX_VERSION >= 200112L || _XOPEN_SOURCE >= 600)
 
 #  define HAS_POSIX_ALIGNED_ALLOC
-#  include <stdlib.h>
 #  define rhash_aligned_alloc(alignment, size) rhash_px_aalloc((alignment), ALIGN_SIZE_BY(size, sizeof(void*)))
 #  define rhash_aligned_free(ptr) free(ptr)
 void* rhash_px_aalloc(size_t size, size_t alignment);

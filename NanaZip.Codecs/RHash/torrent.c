@@ -254,9 +254,9 @@ void bt_final(torrent_ctx* ctx, unsigned char result[20])
 static int bt_str_ensure_length(torrent_ctx* ctx, size_t length)
 {
 	char* new_str;
-    if (ctx->error)
-        return 0;
-    if (length >= ctx->content.allocated) {
+	if (ctx->error)
+		return 0;
+	if (length >= ctx->content.allocated) {
 		length++; /* allocate one character more */
 		if (length < 64) length = 64;
 		else length = (length + 255) & ~255;
@@ -529,10 +529,10 @@ static void bt_generate_torrent(torrent_ctx* ctx)
 
 	/* calculate BTIH */
 	SHA1_INIT(ctx);
-    if (ctx->content.str) {
-        SHA1_UPDATE(ctx, (unsigned char*)ctx->content.str + info_start_pos,
-            ctx->content.length - info_start_pos - 1);
-    }
+	if (ctx->content.str) {
+		SHA1_UPDATE(ctx, (unsigned char*)ctx->content.str + info_start_pos,
+			ctx->content.length - info_start_pos - 1);
+	}
 	SHA1_FINAL(ctx, ctx->btih);
 }
 
@@ -764,7 +764,7 @@ size_t bt_export(const torrent_ctx* ctx, void* out, size_t size)
 		if (out_ptr) {
 			if (size < exported_size)
 				return 0;
-            assert(ctx->content.str != NULL);
+			assert(ctx->content.str != NULL);
 			memcpy(out_ptr, ctx->content.str, ctx->content.length + 1);
 			out_ptr += aligned_length;
 		}
@@ -773,11 +773,11 @@ size_t bt_export(const torrent_ctx* ctx, void* out, size_t size)
 	assert(!out || (size_t)(out_ptr - (char*)out) == exported_size);
 
 #if defined(USE_OPENSSL)
-    if (out_ptr && ARE_OPENSSL_METHODS(ctx->sha1_methods)) {
-        size_t* error_ptr = (size_t*)((char*)out + head_size + offsetof(torrent_ctx, error));
-        *error_ptr |= BT_CTX_OSSL_FLAG;
-        RHASH_ASSERT(sizeof(*error_ptr) == sizeof(ctx->error));
-    }
+	if (out_ptr && ARE_OPENSSL_METHODS(ctx->sha1_methods)) {
+		size_t* error_ptr = (size_t*)((char*)out + head_size + offsetof(torrent_ctx, error));
+		*error_ptr |= BT_CTX_OSSL_FLAG;
+		RHASH_ASSERT(sizeof(*error_ptr) == sizeof(ctx->error));
+	}
 #endif
 	return exported_size;
 }

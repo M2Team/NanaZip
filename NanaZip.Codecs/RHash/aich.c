@@ -451,7 +451,7 @@ size_t rhash_aich_export(const aich_ctx* ctx, void* out, size_t size)
 	if (out_ptr && ARE_OPENSSL_METHODS(ctx->sha1_methods)) {
 		int* error_ptr = (int*)((char*)out + head_size + offsetof(aich_ctx, error));
 		*error_ptr |= AICH_CTX_OSSL_FLAG;
-        RHASH_ASSERT(sizeof(*error_ptr) == sizeof(ctx->error));
+		RHASH_ASSERT(sizeof(*error_ptr) == sizeof(ctx->error));
 	}
 #endif
 	return exported_size;
