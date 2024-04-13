@@ -5,27 +5,27 @@
     <ClCompile Include="BLAKE3\blake3.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
-    <ClCompile Include="BLAKE3\blake3_avx2.c">
+    <None Include="BLAKE3\blake3_avx2.c">
       <Filter>BLAKE3</Filter>
-    </ClCompile>
-    <ClCompile Include="BLAKE3\blake3_avx512.c">
+    </None>
+    <None Include="BLAKE3\blake3_avx512.c">
       <Filter>BLAKE3</Filter>
-    </ClCompile>
+    </None>
     <ClCompile Include="BLAKE3\blake3_dispatch.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
-    <ClCompile Include="BLAKE3\blake3_neon.c">
+    <None Include="BLAKE3\blake3_neon.c">
       <Filter>BLAKE3</Filter>
-    </ClCompile>
+    </None>
     <ClCompile Include="BLAKE3\blake3_portable.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
-    <ClCompile Include="BLAKE3\blake3_sse2.c">
+    <None Include="BLAKE3\blake3_sse2.c">
       <Filter>BLAKE3</Filter>
-    </ClCompile>
-    <ClCompile Include="BLAKE3\blake3_sse41.c">
+    </None>
+    <None Include="BLAKE3\blake3_sse41.c">
       <Filter>BLAKE3</Filter>
-    </ClCompile>
+    </None>
     <ClCompile Include="GmSSL\sm3.c">
       <Filter>GmSSL</Filter>
     </ClCompile>

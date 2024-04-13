@@ -221,15 +221,15 @@
     <ClCompile Include="BLAKE3\blake3.c">
       <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
     </ClCompile>
-    <ClCompile Include="BLAKE3\blake3_avx2.c" />
-    <ClCompile Include="BLAKE3\blake3_avx512.c" />
+    <None Include="BLAKE3\blake3_avx2.c" />
+    <None Include="BLAKE3\blake3_avx512.c" />
     <ClCompile Include="BLAKE3\blake3_dispatch.c">
       <DisableSpecificWarnings>4702;</DisableSpecificWarnings>
     </ClCompile>
-    <ClCompile Include="BLAKE3\blake3_neon.c" />
+    <None Include="BLAKE3\blake3_neon.c" />
     <ClCompile Include="BLAKE3\blake3_portable.c" />
-    <ClCompile Include="BLAKE3\blake3_sse2.c" />
-    <ClCompile Include="BLAKE3\blake3_sse41.c" />
+    <None Include="BLAKE3\blake3_sse2.c" />
+    <None Include="BLAKE3\blake3_sse41.c" />
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -431,4 +431,15 @@
     <ClInclude Include="BLAKE3\blake3_impl.h" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+  <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+      <ClCompile Include="BLAKE3\blake3_avx2.c" />
+      <ClCompile Include="BLAKE3\blake3_avx512.c" />
+      <ClCompile Include="BLAKE3\blake3_sse2.c" />
+      <ClCompile Include="BLAKE3\blake3_sse41.c" />
+    </ItemGroup>
+    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+      <ClCompile Include="BLAKE3\blake3_neon.c" />
+    </ItemGroup>
+  </Target>
 </Project>
