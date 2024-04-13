@@ -4,20 +4,50 @@
 
 #include "blake3_impl.h"
 
+#if defined(_MSC_VER)
+#include <Windows.h>
+#endif
+
 #if defined(IS_X86)
 #if defined(_MSC_VER)
 #include <intrin.h>
 #elif defined(__GNUC__)
 #include <immintrin.h>
 #else
-#error "Unimplemented!"
+#undef IS_X86 /* Unimplemented! */
 #endif
+#endif
+
+#if !defined(BLAKE3_ATOMICS)
+#if defined(__has_include)
+#if __has_include(<stdatomic.h>) && !defined(_MSC_VER)
+#define BLAKE3_ATOMICS 1
+#else
+#define BLAKE3_ATOMICS 0
+#endif /* __has_include(<stdatomic.h>) && !defined(_MSC_VER) */
+#else
+#define BLAKE3_ATOMICS 0
+#endif /* defined(__has_include) */
+#endif /* BLAKE3_ATOMICS */
+
+#if BLAKE3_ATOMICS
+#define ATOMIC_INT _Atomic int
+#define ATOMIC_LOAD(x) x
+#define ATOMIC_STORE(x, y) x = y
+#elif defined(_MSC_VER)
+#define ATOMIC_INT LONG
+#define ATOMIC_LOAD(x) InterlockedOr(&x, 0)
+#define ATOMIC_STORE(x, y) InterlockedExchange(&x, y)
+#else
+#define ATOMIC_INT int
+#define ATOMIC_LOAD(x) x
+#define ATOMIC_STORE(x, y) x = y
 #endif
 
 #define MAYBE_UNUSED(x) (void)((x))
 
 #if defined(IS_X86)
-static uint64_t xgetbv() {
+static uint64_t xgetbv(void) {
 #if defined(_MSC_VER)
   return _xgetbv(0);
 #else
@@ -76,22 +106,24 @@ enum cpu_feature {
 #if !defined(BLAKE3_TESTING)
 static /* Allow the variable to be controlled manually for testing */
 #endif
-    enum cpu_feature g_cpu_features = UNDEFINED;
+    ATOMIC_INT g_cpu_features = UNDEFINED;
 
 #if !defined(BLAKE3_TESTING)
 static
 #endif
     enum cpu_feature
-    get_cpu_features() {
+    get_cpu_features(void) {
 
-  if (g_cpu_features != UNDEFINED) {
-    return g_cpu_features;
+  /* If TSAN detects a data race here, try compiling with -DBLAKE3_ATOMICS=1 */
+  enum cpu_feature features = ATOMIC_LOAD(g_cpu_features);
+  if (features != UNDEFINED) {
+    return features;
   } else {
 #if defined(IS_X86)
     uint32_t regs[4] = {0};
     uint32_t *eax = &regs[0], *ebx = &regs[1], *ecx = &regs[2], *edx = &regs[3];
     (void)edx;
-    enum cpu_feature features = 0;
+    features = 0;
     cpuid(regs, 0);
     const int max_id = *eax;
     cpuid(regs, 1);
@@ -101,7 +133,7 @@ static
     if (*edx & (1UL << 26))
       features |= SSE2;
 #endif
-    if (*ecx & (1UL << 0))
+    if (*ecx & (1UL << 9))
       features |= SSSE3;
     if (*ecx & (1UL << 19))
       features |= SSE41;
@@ -124,7 +156,7 @@ static
         }
       }
     }
-    g_cpu_features = features;
+    ATOMIC_STORE(g_cpu_features, features);
     return features;
 #else
     /* How to detect NEON? */

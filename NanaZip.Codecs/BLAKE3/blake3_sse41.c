@@ -1,8 +1,5 @@
 ﻿#include "blake3_impl.h"
 
-#if defined(IS_X86)
-#if !defined(BLAKE3_NO_SSE41)
-
 #include <immintrin.h>
 
 #define DEGREE 4
@@ -393,7 +390,7 @@ INLINE void round_fn(__m128i v[16], __m128i m[16], size_t r) {
 }
 
 INLINE void transpose_vecs(__m128i vecs[DEGREE]) {
-  // Interleave 32-bit lates. The low unpack is lanes 00/11 and the high is
+  // Interleave 32-bit lanes. The low unpack is lanes 00/11 and the high is
   // 22/33. Note that this doesn't split the vector into two lanes, as the
   // AVX2 counterparts do.
   __m128i ab_01 = _mm_unpacklo_epi32(vecs[0], vecs[1]);
@@ -561,6 +558,3 @@ void blake3_hash_many_sse41(const uint8_t *const *inputs, size_t num_inputs,
     out = &out[BLAKE3_OUT_LEN];
   }
 }
-
-#endif
-#endif

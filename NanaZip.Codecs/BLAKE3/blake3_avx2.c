@@ -1,8 +1,5 @@
 ﻿#include "blake3_impl.h"
 
-#if defined(IS_X86)
-#if !defined(BLAKE3_NO_AVX2)
-
 #include <immintrin.h>
 
 #define DEGREE 8
@@ -170,7 +167,7 @@ INLINE void transpose_vecs(__m256i vecs[DEGREE]) {
   __m256i gh_0145 = _mm256_unpacklo_epi32(vecs[6], vecs[7]);
   __m256i gh_2367 = _mm256_unpackhi_epi32(vecs[6], vecs[7]);
 
-  // Interleave 64-bit lates. The low unpack is lanes 00/22 and the high is
+  // Interleave 64-bit lanes. The low unpack is lanes 00/22 and the high is
   // 11/33.
   __m256i abcd_04 = _mm256_unpacklo_epi64(ab_0145, cd_0145);
   __m256i abcd_15 = _mm256_unpackhi_epi64(ab_0145, cd_0145);
@@ -327,6 +324,3 @@ void blake3_hash_many_avx2(const uint8_t *const *inputs, size_t num_inputs,
                             out);
 #endif
 }
-
-#endif
-#endif
