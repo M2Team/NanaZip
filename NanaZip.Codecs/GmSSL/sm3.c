@@ -1,5 +1,5 @@
 ﻿/*
- *  Copyright 2014-2022 The GmSSL Project. All Rights Reserved.
+ *  Copyright 2014-2023 The GmSSL Project. All Rights Reserved.
  *
  *  Licensed under the Apache License, Version 2.0 (the License); you may
  *  not use this file except in compliance with the License.
@@ -363,7 +363,6 @@ void sm3_finish(SM3_CTX *ctx, uint8_t *digest)
 	for (i = 0; i < 8; i++) {
 		PUTU32(digest + i*4, ctx->digest[i]);
 	}
-	memset(ctx, 0, sizeof(SM3_CTX));
 }
 
 void sm3_digest(const uint8_t *msg, size_t msglen,
@@ -373,4 +372,5 @@ void sm3_digest(const uint8_t *msg, size_t msglen,
 	sm3_init(&ctx);
 	sm3_update(&ctx, msg, msglen);
 	sm3_finish(&ctx, dgst);
+	memset(&ctx, 0, sizeof(ctx));
 }
