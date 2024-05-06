@@ -51,6 +51,7 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />

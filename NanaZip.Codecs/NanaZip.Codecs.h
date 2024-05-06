@@ -15,4 +15,9 @@
 
 #include <NanaZip.Specification.SevenZip.h>
 
+namespace NanaZip::Codecs::Hash
+{
+    IHasher* CreateBlake3();
+}
+
 #endif // !NANAZIP_CODECS

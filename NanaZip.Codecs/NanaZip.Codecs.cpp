@@ -32,7 +32,10 @@ namespace
     // 0x4823374B is big-endian representation of K7#H (H -> Hash)
     const UINT64 NanaZipHasherIdBase = 0x4823374B00000000;
 
-    std::vector<std::pair<std::string, IHasher*>> g_Hashers;
+    std::vector<std::pair<std::string, IHasher*>> g_Hashers =
+    {
+        { "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3() },
+    };
 }
 
 struct HasherFactory : public winrt::implements<

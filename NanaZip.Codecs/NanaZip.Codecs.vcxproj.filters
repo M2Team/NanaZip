@@ -419,6 +419,7 @@
     <ClCompile Include="Zstandard\legacy\zstd_v07.c">
       <Filter>Zstandard\legacy</Filter>
     </ClCompile>
+    <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
