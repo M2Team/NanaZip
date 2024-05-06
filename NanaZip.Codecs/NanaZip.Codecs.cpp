@@ -8,9 +8,7 @@
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#include <Windows.h>
-
-#include <NanaZip.Specification.SevenZip.h>
+#include "NanaZip.Codecs.h"
 
 #include <Mile.Helpers.CppBase.h>
 

@@ -1081,5 +1081,6 @@
     <ClInclude Include="Zstandard\legacy\zstd_v07.h">
       <Filter>Zstandard\legacy</Filter>
     </ClInclude>
+    <ClInclude Include="NanaZip.Codecs.h" />
   </ItemGroup>
 </Project>
