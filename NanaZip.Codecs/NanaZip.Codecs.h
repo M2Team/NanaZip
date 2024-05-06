@@ -39,6 +39,7 @@ namespace NanaZip::Codecs::Hash
 {
     IHasher* CreateBlake3();
     IHasher* CreateSm3();
+    IHasher* CreateMd2();
 }
 
 #endif // !NANAZIP_CODECS

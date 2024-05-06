@@ -4,10 +4,6 @@ EXPORTS
 
 GetHashers
 
-MD2_Init
-MD2_Update
-MD2_Final
-
 bt_cleanup
 bt_final
 bt_init

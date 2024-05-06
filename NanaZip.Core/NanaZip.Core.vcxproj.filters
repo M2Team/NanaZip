@@ -79,9 +79,6 @@
     <Filter Include="Extensions\xxHash">
       <UniqueIdentifier>{645dc51c-50e1-4522-a47e-09ead38b6df4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Extensions\Heimdal">
-      <UniqueIdentifier>{701a7d7d-83e8-41f3-b23a-bd456521f062}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Extensions\ZSCodecs">
       <UniqueIdentifier>{c1700c83-d324-448c-99e2-b2cb2b51d3ad}</UniqueIdentifier>
     </Filter>
@@ -1024,9 +1021,6 @@
     </ClCompile>
     <ClCompile Include="Extensions\xxHash\Xxh64Handler.cpp">
       <Filter>Extensions\xxHash</Filter>
-    </ClCompile>
-    <ClCompile Include="Extensions\Heimdal\Md2Handler.cpp">
-      <Filter>Extensions\Heimdal</Filter>
     </ClCompile>
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
