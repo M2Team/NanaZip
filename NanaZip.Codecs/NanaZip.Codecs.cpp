@@ -20,18 +20,6 @@
 
 namespace
 {
-    // Definition of NanaZip interface constants
-    // I had mentioned one of the reasons that I call this project NanaZip
-    // because Nana is the romaji of なな which means seven in Japanese. But
-    // I had not mentioned the way I confirm that: I had recalled one of the
-    // Japanese VTubers called Kagura Nana when I waiting my elder sister for
-    // dinner at Taiyanggong subway station, Beijing.
-    // For playing more puns, NanaZip uses the K7 prefix in some definitions.
-    // (K -> Kagura, 7 -> Nana)
-
-    // 0x4823374B is big-endian representation of K7#H (H -> Hash)
-    const UINT64 NanaZipHasherIdBase = 0x4823374B00000000;
-
     std::vector<std::pair<std::string, IHasher*>> g_Hashers =
     {
         { "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3() },
@@ -69,7 +57,8 @@ public:
         {
         case SevenZipHasherId:
         {
-            Value->uhVal.QuadPart = NanaZipHasherIdBase | Index;
+            Value->uhVal.QuadPart =
+                NanaZip::Codecs::HashProviderIdBase | Index;
             Value->vt = VT_UI8;
             break;
         }
@@ -90,7 +79,7 @@ public:
             EncoderGuid.Data2 = SevenZipGuidData2;
             EncoderGuid.Data3 = SevenZipGuidData3Hasher;
             *reinterpret_cast<PUINT64>(EncoderGuid.Data4) =
-                NanaZipHasherIdBase | Index;
+                NanaZip::Codecs::HashProviderIdBase | Index;
             Value->bstrVal = ::SysAllocStringByteLen(
                 reinterpret_cast<LPCSTR>(&EncoderGuid),
                 sizeof(EncoderGuid));
