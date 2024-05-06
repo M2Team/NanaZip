@@ -430,6 +430,11 @@
     <ClInclude Include="BLAKE3\blake3.h" />
     <ClInclude Include="BLAKE3\blake3_impl.h" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.534</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
   <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
