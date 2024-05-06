@@ -31,9 +31,13 @@ public:
     virtual UINT32 STDMETHODCALLTYPE GetDigestSize() = 0;
 };
 
-#define SEVENZIP_HASHER_PROPID_ID 0 /* VT_UI8 */
-#define SEVENZIP_HASHER_PROPID_NAME 1 /* VT_BSTR */
-#define SEVENZIP_HASHER_PROPID_DIGEST_SIZE 9 /* VT_UI4 */
+typedef enum _SEVENZIP_HASHER_PROPERTY_TYPE
+{
+    SevenZipHasherId = 0, // VT_UI8
+    SevenZipHasherName = 1, // VT_BSTR
+    SevenZipHasherEncoder = 3, // VT_BSTR (Actually GUID structure)
+    SevenZipHasherDigestSize = 9, // VT_UI4
+} SEVENZIP_HASHER_PROPERTY_TYPE, *PSEVENZIP_HASHER_PROPERTY_TYPE;
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C10000")
 IHashers: public IUnknown
@@ -44,7 +48,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE GetHasherProp(
         _In_ UINT32 Index,
         _In_ PROPID PropID,
-        _Out_ LPPROPVARIANT Value) = 0;
+        _Inout_ LPPROPVARIANT Value) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE CreateHasher(
         _In_ UINT32 Index,

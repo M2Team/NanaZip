@@ -27,7 +27,7 @@ public:
     HRESULT STDMETHODCALLTYPE GetHasherProp(
         _In_ UINT32 Index,
         _In_ PROPID PropID,
-        _Out_ LPPROPVARIANT Value)
+        _Inout_ LPPROPVARIANT Value)
     {
         UNREFERENCED_PARAMETER(Index);
         UNREFERENCED_PARAMETER(PropID);
