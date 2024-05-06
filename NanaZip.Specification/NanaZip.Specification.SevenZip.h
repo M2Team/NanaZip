@@ -13,7 +13,14 @@
 
 #include <Windows.h>
 
-/* 7-Zip Interface GUID Format: 23170F69-40C1-278A-0000-00yy00xx0000 */
+// 7-Zip Interface GUID Format: 23170F69-40C1-278A-0000-00yy00xx0000
+
+const UINT32 SevenZipGuidData1 = 0x23170F69;
+const UINT16 SevenZipGuidData2 = 0x40C1;
+const UINT16 SevenZipGuidData3Common = 0x278A;
+const UINT16 SevenZipGuidData3Decoder = 0x2790;
+const UINT16 SevenZipGuidData3Encoder = 0x2791;
+const UINT16 SevenZipGuidData3Hasher = 0x2792;
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C00000")
 IHasher : public IUnknown
