@@ -50,7 +50,7 @@ public:
 
     HRESULT STDMETHODCALLTYPE GetHasherProp(
         _In_ UINT32 Index,
-        _In_ PROPID PropID,
+        _In_ PROPID PropId,
         _Inout_ LPPROPVARIANT Value)
     {
         if (!(Index < this->GetNumHashers()))
@@ -65,7 +65,7 @@ public:
 
         ::PropVariantClear(Value);
 
-        switch (PropID)
+        switch (PropId)
         {
         case SevenZipHasherId:
         {

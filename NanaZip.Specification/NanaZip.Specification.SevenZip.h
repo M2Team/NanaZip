@@ -54,7 +54,7 @@ public:
 
     virtual HRESULT STDMETHODCALLTYPE GetHasherProp(
         _In_ UINT32 Index,
-        _In_ PROPID PropID,
+        _In_ PROPID PropId,
         _Inout_ LPPROPVARIANT Value) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE CreateHasher(
