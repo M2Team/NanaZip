@@ -55,7 +55,6 @@
     <None Include="SevenZip\C\Sha1Opt.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Extensions\GmSSL\Sm3Handler.cpp" />
     <ClCompile Include="Extensions\Heimdal\Md2Handler.cpp" />
     <ClCompile Include="Extensions\RHash\AichHandler.cpp" />
     <ClCompile Include="Extensions\RHash\Blake2bHandler.cpp" />

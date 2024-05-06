@@ -23,6 +23,7 @@ namespace
     std::vector<std::pair<std::string, IHasher*>> g_Hashers =
     {
         { "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3() },
+        { "SM3", NanaZip::Codecs::Hash::CreateSm3() }
     };
 }
 

@@ -420,6 +420,7 @@
       <Filter>Zstandard\legacy</Filter>
     </ClCompile>
     <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sm3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
