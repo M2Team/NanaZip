@@ -25,6 +25,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
+      <PreprocessorDefinitions>ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalDependencies>$(OutDir)NanaZip.Codecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
