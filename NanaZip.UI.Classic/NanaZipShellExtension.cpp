@@ -1006,9 +1006,9 @@ namespace NanaZip::ShellExtension
                 (this->m_CurrentSubCommand != this->m_SubCommands.cend());
                 ++i)
             {
-                this->m_CurrentSubCommand->copy_to(&pUICommand[0]);
-                ++this->m_CurrentSubCommand;
+                this->m_CurrentSubCommand->copy_to(&pUICommand[i]);
                 ++Fetched;
+                ++this->m_CurrentSubCommand;
             }
 
             if (pceltFetched)
