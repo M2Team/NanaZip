@@ -40,6 +40,35 @@ namespace NanaZip::Codecs::Hash
     IHasher* CreateBlake3();
     IHasher* CreateSm3();
     IHasher* CreateMd2();
+    IHasher* CreateAich();
+    IHasher* CreateBlake2b();
+    IHasher* CreateEd2k();
+    IHasher* CreateEdonR224();
+    IHasher* CreateEdonR256();
+    IHasher* CreateEdonR384();
+    IHasher* CreateEdonR512();
+    IHasher* CreateGost94();
+    IHasher* CreateGost94CryptoPro();
+    IHasher* CreateGost12256();
+    IHasher* CreateGost12512();
+    IHasher* CreateHas160();
+    IHasher* CreateMd4();
+    IHasher* CreateMd5();
+    IHasher* CreateRipemd160();
+    IHasher* CreateSha224();
+    IHasher* CreateSha384();
+    IHasher* CreateSha512();
+    IHasher* CreateSha3224();
+    IHasher* CreateSha3256();
+    IHasher* CreateSha3384();
+    IHasher* CreateSha3512();
+    IHasher* CreateSnefru128();
+    IHasher* CreateSnefru256();
+    IHasher* CreateTiger();
+    IHasher* CreateTiger2();
+    IHasher* CreateTorrent();
+    IHasher* CreateTth();
+    IHasher* CreateWhirlpool();
 }
 
 #endif // !NANAZIP_CODECS

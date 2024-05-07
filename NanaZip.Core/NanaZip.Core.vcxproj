@@ -55,35 +55,6 @@
     <None Include="SevenZip\C\Sha1Opt.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Extensions\RHash\AichHandler.cpp" />
-    <ClCompile Include="Extensions\RHash\Blake2bHandler.cpp" />
-    <ClCompile Include="Extensions\RHash\Ed2kHandler.cpp" />
-    <ClCompile Include="Extensions\RHash\EdonR224Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\EdonR256Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\EdonR384Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\EdonR512Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Gost12256Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Gost12512Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Gost94CryptoProHandler.cpp" />
-    <ClCompile Include="Extensions\RHash\Gost94Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Has160Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Md4Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Md5Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Ripemd160Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Sha224Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Sha3224Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Sha3256Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Sha3384Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Sha3512Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Sha384Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Sha512Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Snefru128Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Snefru256Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\Tiger2Handler.cpp" />
-    <ClCompile Include="Extensions\RHash\TigerHandler.cpp" />
-    <ClCompile Include="Extensions\RHash\TorrentHandler.cpp" />
-    <ClCompile Include="Extensions\RHash\TthHandler.cpp" />
-    <ClCompile Include="Extensions\RHash\WhirlpoolHandler.cpp" />
     <ClCompile Include="Extensions\xxHash\Xxh3128Handler.cpp" />
     <ClCompile Include="Extensions\xxHash\Xxh32Handler.cpp" />
     <ClCompile Include="Extensions\xxHash\Xxh364Handler.cpp" />
