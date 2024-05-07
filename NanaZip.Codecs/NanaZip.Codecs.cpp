@@ -23,47 +23,47 @@ namespace
     struct HashProviderItem
     {
         const char* Name;
-        IHasher* Interface;
+        IHasher*(*Create)();
     };
 
     HashProviderItem g_Hashers[] =
     {
-        { "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3() },
-        { "SM3", NanaZip::Codecs::Hash::CreateSm3() },
-        { "MD2", NanaZip::Codecs::Hash::CreateMd2() },
-        { "AICH", NanaZip::Codecs::Hash::CreateAich() },
-        { "BLAKE2b", NanaZip::Codecs::Hash::CreateBlake2b() },
-        { "ED2K", NanaZip::Codecs::Hash::CreateEd2k() },
-        { "EDON-R-224", NanaZip::Codecs::Hash::CreateEdonR224() },
-        { "EDON-R-256", NanaZip::Codecs::Hash::CreateEdonR256() },
-        { "EDON-R-384", NanaZip::Codecs::Hash::CreateEdonR384() },
-        { "EDON-R-512", NanaZip::Codecs::Hash::CreateEdonR512() },
-        { "GOST94", NanaZip::Codecs::Hash::CreateGost94() },
-        { "GOST94CryptoPro", NanaZip::Codecs::Hash::CreateGost94CryptoPro() },
-        { "GOST12-256", NanaZip::Codecs::Hash::CreateGost12256() },
-        { "GOST12-512", NanaZip::Codecs::Hash::CreateGost12512() },
-        { "HAS-160", NanaZip::Codecs::Hash::CreateHas160() },
-        { "MD4", NanaZip::Codecs::Hash::CreateMd4() },
-        { "MD5", NanaZip::Codecs::Hash::CreateMd5() },
-        { "RIPEMD-160", NanaZip::Codecs::Hash::CreateRipemd160() },
-        { "SHA224", NanaZip::Codecs::Hash::CreateSha224() },
-        { "SHA384", NanaZip::Codecs::Hash::CreateSha384() },
-        { "SHA512", NanaZip::Codecs::Hash::CreateSha512() },
-        { "SHA3-224", NanaZip::Codecs::Hash::CreateSha3224() },
-        { "SHA3-256", NanaZip::Codecs::Hash::CreateSha3256() },
-        { "SHA3-384", NanaZip::Codecs::Hash::CreateSha3384() },
-        { "SHA3-512", NanaZip::Codecs::Hash::CreateSha3512() },
-        { "SNEFRU-128", NanaZip::Codecs::Hash::CreateSnefru128() },
-        { "SNEFRU-256", NanaZip::Codecs::Hash::CreateSnefru256() },
-        { "TIGER", NanaZip::Codecs::Hash::CreateTiger() },
-        { "TIGER2", NanaZip::Codecs::Hash::CreateTiger2() },
-        { "BTIH", NanaZip::Codecs::Hash::CreateTorrent() },
-        { "TTH", NanaZip::Codecs::Hash::CreateTth() },
-        { "WHIRLPOOL", NanaZip::Codecs::Hash::CreateWhirlpool() },
-        { "XXH32", NanaZip::Codecs::Hash::CreateXxh32() },
-        { "XXH64", NanaZip::Codecs::Hash::CreateXxh64() },
-        { "XXH3_64bits", NanaZip::Codecs::Hash::CreateXxh364() },
-        { "XXH3_128bits", NanaZip::Codecs::Hash::CreateXxh3128() },
+        { "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3 },
+        { "SM3", NanaZip::Codecs::Hash::CreateSm3 },
+        { "MD2", NanaZip::Codecs::Hash::CreateMd2 },
+        { "AICH", NanaZip::Codecs::Hash::CreateAich },
+        { "BLAKE2b", NanaZip::Codecs::Hash::CreateBlake2b },
+        { "ED2K", NanaZip::Codecs::Hash::CreateEd2k },
+        { "EDON-R-224", NanaZip::Codecs::Hash::CreateEdonR224 },
+        { "EDON-R-256", NanaZip::Codecs::Hash::CreateEdonR256 },
+        { "EDON-R-384", NanaZip::Codecs::Hash::CreateEdonR384 },
+        { "EDON-R-512", NanaZip::Codecs::Hash::CreateEdonR512 },
+        { "GOST94", NanaZip::Codecs::Hash::CreateGost94 },
+        { "GOST94CryptoPro", NanaZip::Codecs::Hash::CreateGost94CryptoPro },
+        { "GOST12-256", NanaZip::Codecs::Hash::CreateGost12256 },
+        { "GOST12-512", NanaZip::Codecs::Hash::CreateGost12512 },
+        { "HAS-160", NanaZip::Codecs::Hash::CreateHas160 },
+        { "MD4", NanaZip::Codecs::Hash::CreateMd4 },
+        { "MD5", NanaZip::Codecs::Hash::CreateMd5 },
+        { "RIPEMD-160", NanaZip::Codecs::Hash::CreateRipemd160 },
+        { "SHA224", NanaZip::Codecs::Hash::CreateSha224 },
+        { "SHA384", NanaZip::Codecs::Hash::CreateSha384 },
+        { "SHA512", NanaZip::Codecs::Hash::CreateSha512 },
+        { "SHA3-224", NanaZip::Codecs::Hash::CreateSha3224 },
+        { "SHA3-256", NanaZip::Codecs::Hash::CreateSha3256 },
+        { "SHA3-384", NanaZip::Codecs::Hash::CreateSha3384 },
+        { "SHA3-512", NanaZip::Codecs::Hash::CreateSha3512 },
+        { "SNEFRU-128", NanaZip::Codecs::Hash::CreateSnefru128 },
+        { "SNEFRU-256", NanaZip::Codecs::Hash::CreateSnefru256 },
+        { "TIGER", NanaZip::Codecs::Hash::CreateTiger },
+        { "TIGER2", NanaZip::Codecs::Hash::CreateTiger2 },
+        { "BTIH", NanaZip::Codecs::Hash::CreateTorrent },
+        { "TTH", NanaZip::Codecs::Hash::CreateTth },
+        { "WHIRLPOOL", NanaZip::Codecs::Hash::CreateWhirlpool },
+        { "XXH32", NanaZip::Codecs::Hash::CreateXxh32 },
+        { "XXH64", NanaZip::Codecs::Hash::CreateXxh64 },
+        { "XXH3_64bits", NanaZip::Codecs::Hash::CreateXxh364 },
+        { "XXH3_128bits", NanaZip::Codecs::Hash::CreateXxh3128 },
     };
 
     const size_t g_HashersCount = sizeof(g_Hashers) / sizeof(*g_Hashers);
@@ -134,11 +134,12 @@ public:
         }
         case SevenZipHasherDigestSize:
         {
-            IHasher* Hasher = g_Hashers[Index].Interface;
+            IHasher* Hasher = g_Hashers[Index].Create();
             if (Hasher)
             {
                 Value->ulVal = Hasher->GetDigestSize();
                 Value->vt = VT_UI4;
+                Hasher->Release();
             }
             break;
         }
@@ -163,14 +164,8 @@ public:
             return E_INVALIDARG;
         }
 
-        *Hasher = g_Hashers[Index].Interface;
-        if (*Hasher)
-        {
-            (*Hasher)->AddRef();
-            return S_OK;
-        }
-
-        return E_NOINTERFACE;
+        *Hasher = g_Hashers[Index].Create();
+        return *Hasher ? S_OK : E_NOINTERFACE;
     }
 };
 
