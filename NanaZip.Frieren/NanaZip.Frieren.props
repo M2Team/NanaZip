@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:   NanaZip
+  FILE:      NanaZip.Frieren.props
+  PURPOSE:   MSBuild Properties for NanaZip.Frieren
+
+  LICENSE:   The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>$(OutDir)NanaZip.Frieren.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.Frieren.vcxproj">
+      <Project>{4E78AF72-D7EF-4769-B64B-95E7EDF05FA2}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
