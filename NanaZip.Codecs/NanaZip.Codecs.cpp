@@ -20,7 +20,13 @@
 
 namespace
 {
-    std::vector<std::pair<std::string, IHasher*>> g_Hashers =
+    struct HashProviderItem
+    {
+        const char* Name;
+        IHasher* Interface;
+    };
+
+    HashProviderItem g_Hashers[] =
     {
         { "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3() },
         { "SM3", NanaZip::Codecs::Hash::CreateSm3() },
@@ -55,6 +61,8 @@ namespace
         { "TTH", NanaZip::Codecs::Hash::CreateTth() },
         { "WHIRLPOOL", NanaZip::Codecs::Hash::CreateWhirlpool() },
     };
+
+    const size_t g_HashersCount = sizeof(g_Hashers) / sizeof(*g_Hashers);
 }
 
 struct HasherFactory : public winrt::implements<
@@ -64,7 +72,7 @@ public:
 
     UINT32 STDMETHODCALLTYPE GetNumHashers()
     {
-        return static_cast<UINT32>(g_Hashers.size());
+        return static_cast<UINT32>(g_HashersCount);
     }
 
     HRESULT STDMETHODCALLTYPE GetHasherProp(
@@ -96,7 +104,7 @@ public:
         case SevenZipHasherName:
         {
             Value->bstrVal = ::SysAllocString(
-                Mile::ToWideString(CP_UTF8, g_Hashers[Index].first).c_str());
+                Mile::ToWideString(CP_UTF8, g_Hashers[Index].Name).c_str());
             if (Value->bstrVal)
             {
                 Value->vt = VT_BSTR;
@@ -122,7 +130,7 @@ public:
         }
         case SevenZipHasherDigestSize:
         {
-            IHasher* Hasher = g_Hashers[Index].second;
+            IHasher* Hasher = g_Hashers[Index].Interface;
             if (Hasher)
             {
                 Value->ulVal = Hasher->GetDigestSize();
@@ -151,7 +159,7 @@ public:
             return E_INVALIDARG;
         }
 
-        *Hasher = g_Hashers[Index].second;
+        *Hasher = g_Hashers[Index].Interface;
         if (*Hasher)
         {
             (*Hasher)->AddRef();
