@@ -780,12 +780,14 @@ HRESULT CCodecs::Load()
 
   #ifdef EXTERNAL_CODECS
     const FString baseFolder = GetBaseFolderPrefixFromRegistry();
+    // **************** NanaZip Modification Start ****************
     {
       bool loadedOK;
       RINOK(LoadDll(baseFolder + L"NanaZip.Codecs.dll", false, &loadedOK));
       if (!loadedOK)
         MainDll_ErrorPath = L"NanaZip.Codecs.dll";
     }
+    // **************** NanaZip Modification End ****************
     {
       bool loadedOK;
       RINOK(LoadDll(baseFolder + kMainDll, false, &loadedOK));
