@@ -55,10 +55,6 @@
     <None Include="SevenZip\C\Sha1Opt.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Extensions\xxHash\Xxh3128Handler.cpp" />
-    <ClCompile Include="Extensions\xxHash\Xxh32Handler.cpp" />
-    <ClCompile Include="Extensions\xxHash\Xxh364Handler.cpp" />
-    <ClCompile Include="Extensions\xxHash\Xxh64Handler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliDecoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliHandler.cpp" />

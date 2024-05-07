@@ -60,6 +60,10 @@ namespace
         { "BTIH", NanaZip::Codecs::Hash::CreateTorrent() },
         { "TTH", NanaZip::Codecs::Hash::CreateTth() },
         { "WHIRLPOOL", NanaZip::Codecs::Hash::CreateWhirlpool() },
+        { "XXH32", NanaZip::Codecs::Hash::CreateXxh32() },
+        { "XXH64", NanaZip::Codecs::Hash::CreateXxh64() },
+        { "XXH3_64bits", NanaZip::Codecs::Hash::CreateXxh364() },
+        { "XXH3_128bits", NanaZip::Codecs::Hash::CreateXxh3128() },
     };
 
     const size_t g_HashersCount = sizeof(g_Hashers) / sizeof(*g_Hashers);

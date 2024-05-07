@@ -451,6 +451,10 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Torrent.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Tth.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Whirlpool.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh32.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh64.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh364.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh3128.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />

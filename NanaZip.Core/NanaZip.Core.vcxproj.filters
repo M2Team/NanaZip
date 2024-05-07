@@ -73,9 +73,6 @@
     <Filter Include="Extensions">
       <UniqueIdentifier>{ad1ce36b-5416-4c51-bdd0-26e4d2afe6b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Extensions\xxHash">
-      <UniqueIdentifier>{645dc51c-50e1-4522-a47e-09ead38b6df4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Extensions\ZSCodecs">
       <UniqueIdentifier>{c1700c83-d324-448c-99e2-b2cb2b51d3ad}</UniqueIdentifier>
     </Filter>
@@ -919,18 +916,6 @@
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\Sha1Prepare.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Extensions\xxHash\Xxh3128Handler.cpp">
-      <Filter>Extensions\xxHash</Filter>
-    </ClCompile>
-    <ClCompile Include="Extensions\xxHash\Xxh32Handler.cpp">
-      <Filter>Extensions\xxHash</Filter>
-    </ClCompile>
-    <ClCompile Include="Extensions\xxHash\Xxh364Handler.cpp">
-      <Filter>Extensions\xxHash</Filter>
-    </ClCompile>
-    <ClCompile Include="Extensions\xxHash\Xxh64Handler.cpp">
-      <Filter>Extensions\xxHash</Filter>
     </ClCompile>
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
       <Filter>Extensions\ZSCodecs</Filter>

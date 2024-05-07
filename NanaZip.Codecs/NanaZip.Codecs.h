@@ -69,6 +69,10 @@ namespace NanaZip::Codecs::Hash
     IHasher* CreateTorrent();
     IHasher* CreateTth();
     IHasher* CreateWhirlpool();
+    IHasher* CreateXxh32();
+    IHasher* CreateXxh64();
+    IHasher* CreateXxh364();
+    IHasher* CreateXxh3128();
 }
 
 #endif // !NANAZIP_CODECS

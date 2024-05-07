@@ -83,6 +83,10 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Torrent.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Tth.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Whirlpool.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh3128.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh32.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh364.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh64.cpp" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />
