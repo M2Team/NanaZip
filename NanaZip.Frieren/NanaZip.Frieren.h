@@ -13,4 +13,18 @@
 
 #include <Windows.h>
 
+/**
+ * @brief Initialize NanaZip.Frieren for thread.
+ * @return If the function succeeds, it returns S_OK. Otherwise, it returns an
+ *         HRESULT error code.
+*/
+EXTERN_C HRESULT WINAPI NanaZipFrierenThreadInitialize();
+
+/**
+ * @brief Uninitialize NanaZip.Frieren for thread.
+ * @return If the function succeeds, it returns S_OK. Otherwise, it returns an
+ *         HRESULT error code.
+*/
+EXTERN_C HRESULT WINAPI NanaZipFrierenThreadUninitialize();
+
 #endif // !NANAZIP_FRIEREN
