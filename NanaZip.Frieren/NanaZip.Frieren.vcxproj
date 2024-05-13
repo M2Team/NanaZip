@@ -30,5 +30,11 @@
       <Version>1.0.1542</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NanaZip.Frieren.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NanaZip.Frieren.cpp" />
+  </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>
