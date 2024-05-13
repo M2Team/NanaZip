@@ -77,14 +77,14 @@ NanaZip Classic. Here are the differences between them.
 - NanaZip
   - Only 64-Bit support.
   - Only MSIX packaged version.
-  - Support new context menu introduced by Windows 11.
+  - Support the context menu in Windows 10/11 File Explorer.
   - Only support Windows 10 Version 2004 (Build 19041) or later.
   - Have XAML-based GUI and VT-based CLI.
 
 - NanaZip Classic
   - Have 32-Bit support.
-  - Only unpackaged version (installer or portable).
-  - Only support legacy context menu.
+  - Only unpackaged portable version.
+  - Don't have the context menu support.
   - Support Windows Vista RTM (Build 6000.16386) or later.
   - Keep Win32 GUI and Win32 CLI.
 

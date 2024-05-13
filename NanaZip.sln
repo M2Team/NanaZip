@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZipShellExtension", "NanaZip.UI.Classic\NanaZipShellExtension.vcxproj", "{F17D4837-7943-4361-9527-2AF9CACE477D}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core.Sfx.Windows", "NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj", "{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Core.Sfx.Console", "NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj", "{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}"
@@ -61,18 +59,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Debug|ARM64.Build.0 = Debug|ARM64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Debug|x64.ActiveCfg = Debug|x64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Debug|x64.Build.0 = Debug|x64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Debug|x86.ActiveCfg = Debug|Win32
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Debug|x86.Build.0 = Debug|Win32
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Release|ARM64.ActiveCfg = Release|ARM64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Release|ARM64.Build.0 = Release|ARM64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Release|x64.ActiveCfg = Release|x64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Release|x64.Build.0 = Release|x64
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Release|x86.ActiveCfg = Release|Win32
-		{F17D4837-7943-4361-9527-2AF9CACE477D}.Release|x86.Build.0 = Release|Win32
 		{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}.Debug|ARM64.ActiveCfg = Debug|Win32
 		{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}.Debug|x64.ActiveCfg = Debug|Win32
 		{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}.Debug|x86.ActiveCfg = Debug|Win32
@@ -268,7 +254,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F17D4837-7943-4361-9527-2AF9CACE477D} = {6666CFC3-1986-469A-9266-0FD8C2674DF6}
 		{C11F288B-9E3C-4DA9-8206-852BB91C7E4C} = {94A1E11C-B722-4BAE-9B12-1495F5EF3CC9}
 		{96C0A1A0-D964-4725-AFDC-73EBF7FC1416} = {94A1E11C-B722-4BAE-9B12-1495F5EF3CC9}
 		{43308629-5328-46BF-8E1C-A258A937B981} = {94A1E11C-B722-4BAE-9B12-1495F5EF3CC9}
