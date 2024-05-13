@@ -22,6 +22,51 @@ const UINT16 SevenZipGuidData3Decoder = 0x2790;
 const UINT16 SevenZipGuidData3Encoder = 0x2791;
 const UINT16 SevenZipGuidData3Hasher = 0x2792;
 
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000300010000")
+ISequentialOutStream : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE Read(
+        _Out_opt_ LPVOID Data,
+        _In_ UINT32 Size,
+        _Out_ PUINT32 ProcessedSize) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000300020000")
+ISequentialInStream : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE Write(
+        _In_opt_ LPCVOID Data,
+        _In_ UINT32 Size,
+        _Out_ PUINT32 ProcessedSize) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400040000")
+ICompressProgressInfo : public IUnknown
+{
+public:
+
+     virtual HRESULT STDMETHODCALLTYPE SetRatioInfo(
+         _In_opt_ const PUINT64 InSize,
+         _In_opt_ const PUINT64 OutSize) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400050000")
+ICompressCoder : public IUnknown
+{
+public:
+
+     virtual HRESULT STDMETHODCALLTYPE Code(
+         _In_ ISequentialInStream* InStream,
+         _In_ ISequentialOutStream* OutStream,
+         _In_opt_ const PUINT64 InSize,
+         _In_opt_ const PUINT64 OutSize,
+         _In_opt_ ICompressProgressInfo* Progress) = 0;
+};
+
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C00000")
 IHasher : public IUnknown
 {
@@ -64,5 +109,23 @@ public:
 
 EXTERN_C HRESULT WINAPI GetHashers(
     _Out_ IHashers** Hashers);
+
+// IArchiveOpenSeq
+
+// ICompressSetCoderMt
+
+// ICompressSetCoderProperties
+
+// ICompressSetDecoderProperties2
+
+// ICompressSetInStream
+
+// ICompressWriteCoderProperties
+
+// IInArchive
+
+// IOutArchive
+
+// ISetProperties
 
 #endif /* !NANAZIP_SPECIFICATION_SEVENZIP */
