@@ -83,7 +83,7 @@ NanaZip Classic. Here are the differences between them.
 
 - NanaZip Classic
   - Have 32-Bit support.
-  - Only unpackaged portable version.
+  - Only portable version.
   - Don't have the context menu support.
   - Support Windows Vista RTM (Build 6000.16386) or later.
   - Keep Win32 GUI and Win32 CLI.
@@ -98,9 +98,23 @@ NanaZip Classic. Here are the differences between them.
   - Supported OS: Windows Vista RTM (Build 6000.16386) or later
   - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
 
-- NanaZip.Core (Core Library and the Self Extracting Executables)
+- NanaZip Core (Core Library and the Self Extracting Executables)
   - Supported OS: Windows Vista RTM (Build 6000.16386) or later
   - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
+  
+We only choose Windows as the major platform for the NanaZip project supported
+because Windows has maintained a good and proven ABI and compatibility, and
+stands out in the whole history. But we also care about the non-Windows
+platform. Here are the policy for non-Windows platform support:
+
+- The modern flavor of NanaZip won't support non-Windows unless someguys ported
+  WinRT XAML to POSIX. So, non-Windows support policy is only for NanaZip Core
+  and NanaZip Classic.
+- The developer team will try best to support Wine which has the Windows Vista
+  or later feature level. Currenly tested simply under Wine 9.x.
+- We don't support the ReactOS and its derivatives because they are too hard to
+  support. But the topic will always be open for testing under the ReactOS and
+  its derivatives.
 
 ## Download and Installation
 
