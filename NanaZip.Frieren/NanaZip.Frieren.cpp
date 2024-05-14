@@ -38,9 +38,10 @@ namespace
         PVOID Detoured;
     };
 
+    FunctionItem g_FunctionTable[FunctionType::MaximumFunction];
+
     thread_local bool volatile g_ThreadInitialized = false;
     thread_local HHOOK volatile g_WindowsHookHandle = nullptr;
-    thread_local FunctionItem g_FunctionTable[FunctionType::MaximumFunction];
 
     LRESULT CALLBACK WindowSubclassCallback(
         _In_ HWND hWnd,
@@ -262,6 +263,28 @@ EXTERN_C HRESULT WINAPI NanaZipFrierenThreadInitialize()
         return HRESULT_FROM_WIN32(::GetLastError());
     }
 
+    g_ThreadInitialized = true;
+
+    return S_OK;
+}
+
+EXTERN_C HRESULT WINAPI NanaZipFrierenThreadUninitialize()
+{
+    if (!g_ThreadInitialized)
+    {
+        return S_OK;
+    }
+
+    g_ThreadInitialized = false;
+
+    ::UnhookWindowsHookEx(g_WindowsHookHandle);
+    g_WindowsHookHandle = nullptr;
+
+    return S_OK;
+}
+
+EXTERN_C HRESULT WINAPI NanaZipFrierenGlobalInitialize()
+{
     g_FunctionTable[FunctionType::GetSysColor].Original =
         ::GetSysColor;
     g_FunctionTable[FunctionType::GetSysColor].Detoured =
@@ -295,19 +318,14 @@ EXTERN_C HRESULT WINAPI NanaZipFrierenThreadInitialize()
     }
     ::DetourTransactionCommit();
 
-    g_ThreadInitialized = true;
+    ::NanaZipFrierenThreadInitialize();
 
     return S_OK;
 }
 
-EXTERN_C HRESULT WINAPI NanaZipFrierenThreadUninitialize()
+EXTERN_C HRESULT WINAPI NanaZipFrierenGlobalUninitialize()
 {
-    if (!g_ThreadInitialized)
-    {
-        return S_OK;
-    }
-
-    g_ThreadInitialized = false;
+    ::NanaZipFrierenThreadUninitialize();
 
     ::DetourTransactionBegin();
     ::DetourUpdateThread(::GetCurrentThread());
@@ -323,9 +341,6 @@ EXTERN_C HRESULT WINAPI NanaZipFrierenThreadUninitialize()
         }
     }
     ::DetourTransactionCommit();
-
-    ::UnhookWindowsHookEx(g_WindowsHookHandle);
-    g_WindowsHookHandle = nullptr;
 
     return S_OK;
 }
