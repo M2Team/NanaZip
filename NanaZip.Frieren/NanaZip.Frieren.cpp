@@ -39,7 +39,65 @@ namespace
     };
 
     thread_local bool volatile g_ThreadInitialized = false;
+    thread_local HHOOK volatile g_WindowsHookHandle = nullptr;
     thread_local FunctionItem g_FunctionTable[FunctionType::MaximumFunction];
+
+    LRESULT CALLBACK WindowSubclassCallback(
+        _In_ HWND hWnd,
+        _In_ UINT uMsg,
+        _In_ WPARAM wParam,
+        _In_ LPARAM lParam,
+        _In_ UINT_PTR uIdSubclass,
+        _In_ DWORD_PTR dwRefData)
+    {
+        LRESULT Result = ::DefSubclassProc(
+            hWnd,
+            uMsg,
+            wParam,
+            lParam);
+        return Result;
+    }
+
+    static LRESULT CALLBACK CallWndProcCallback(
+        _In_ int nCode,
+        _In_ WPARAM wParam,
+        _In_ LPARAM lParam)
+    {
+        if (nCode == HC_ACTION)
+        {
+            PCWPSTRUCT WndProcStruct =
+                reinterpret_cast<PCWPSTRUCT>(lParam);
+
+            switch (WndProcStruct->message)
+            {
+            case WM_CREATE:
+            case WM_INITDIALOG:
+                wchar_t ClassName[256] = { 0 };
+                if (0 != ::GetClassNameW(
+                    WndProcStruct->hwnd,
+                    ClassName,
+                    256))
+                {
+                    if (!std::wcsstr(ClassName, L"Windows.UI.") &&
+                        !std::wcsstr(ClassName, L"Mile.Xaml."))
+                    {
+                ::SetWindowSubclass(
+                    WndProcStruct->hwnd,
+                    ::WindowSubclassCallback,
+                    0,
+                    0);
+                    }
+                }
+                break;
+            }
+        }
+
+        return ::CallNextHookEx(
+            nullptr,
+            nCode,
+            wParam,
+            lParam);
+    }
 
     static DWORD WINAPI OriginalGetSysColor(
         _In_ int nIndex)
@@ -52,6 +110,11 @@ namespace
     static DWORD WINAPI DetouredGetSysColor(
         _In_ int nIndex)
     {
+        if (!g_ThreadInitialized)
+        {
+            return ::OriginalGetSysColor(nIndex);
+        }
+
         return ::OriginalGetSysColor(nIndex);
     }
 
@@ -66,6 +129,11 @@ namespace
     static HBRUSH WINAPI DetouredGetSysColorBrush(
         _In_ int nIndex)
     {
+        if (!g_ThreadInitialized)
+        {
+            return ::OriginalGetSysColorBrush(nIndex);
+        }
+
         return ::OriginalGetSysColorBrush(nIndex);
     }
 
@@ -104,7 +172,20 @@ namespace
         _In_ DWORD dwTextFlags2,
         _In_ LPCRECT pRect)
     {
-        return OriginalDrawThemeText(
+        if (!g_ThreadInitialized)
+        {
+            return ::OriginalDrawThemeText(
+                hTheme,
+                hdc,
+                iPartId,
+                iStateId,
+                pszText,
+                cchText,
+                dwTextFlags,
+                dwTextFlags2,
+                pRect);
+        }
+
         return ::OriginalDrawThemeText(
             hTheme,
             hdc,
@@ -143,7 +224,17 @@ namespace
         _In_ LPCRECT pRect,
         _In_opt_ LPCRECT pClipRect)
     {
-        return OriginalDrawThemeBackground(
+        if (!g_ThreadInitialized)
+        {
+            return ::OriginalDrawThemeBackground(
+                hTheme,
+                hdc,
+                iPartId,
+                iStateId,
+                pRect,
+                pClipRect);
+        }
+
         return ::OriginalDrawThemeBackground(
             hTheme,
             hdc,
@@ -159,6 +250,16 @@ EXTERN_C HRESULT WINAPI NanaZipFrierenThreadInitialize()
     if (g_ThreadInitialized)
     {
         return S_OK;
+    }
+
+    g_WindowsHookHandle = ::SetWindowsHookExW(
+        WH_CALLWNDPROC,
+        ::CallWndProcCallback,
+        nullptr,
+        ::GetCurrentThreadId());
+    if (!g_WindowsHookHandle)
+    {
+        return HRESULT_FROM_WIN32(::GetLastError());
     }
 
     g_FunctionTable[FunctionType::GetSysColor].Original =
@@ -222,6 +323,9 @@ EXTERN_C HRESULT WINAPI NanaZipFrierenThreadUninitialize()
         }
     }
     ::DetourTransactionCommit();
+
+    ::UnhookWindowsHookEx(g_WindowsHookHandle);
+    g_WindowsHookHandle = nullptr;
 
     return S_OK;
 }
