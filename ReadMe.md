@@ -113,8 +113,7 @@ platform. Here are the policy for non-Windows platform support:
 - The developer team will try best to support Wine which has the Windows Vista
   or later feature level. Currenly tested simply under Wine 9.x.
 - We don't support the ReactOS and its derivatives because they are too hard to
-  support. But the topic will always be open for testing under the ReactOS and
-  its derivatives.
+  support. But testing under the ReactOS and its derivatives may be interesting.
 
 ## Download and Installation
 
