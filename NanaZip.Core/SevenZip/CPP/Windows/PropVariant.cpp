@@ -252,6 +252,7 @@ CPropVariant::~CPropVariant() throw()
     CASE_SIMPLE_VT_VALUES
       // vt = VT_EMPTY; // it's optional
       return;
+    default: break;
   }
   ::VariantClear((tagVARIANT *)this);
 }
@@ -296,6 +297,7 @@ HRESULT CPropVariant::Copy(const PROPVARIANT* pSrc) throw()
     CASE_SIMPLE_VT_VALUES
       memmove((PROPVARIANT*)this, pSrc, sizeof(PROPVARIANT));
       return S_OK;
+    default: break;
   }
   return ::VariantCopy((tagVARIANT *)this, (tagVARIANT *)const_cast<PROPVARIANT *>(pSrc));
 }

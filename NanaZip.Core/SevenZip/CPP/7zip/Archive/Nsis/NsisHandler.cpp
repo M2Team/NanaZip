@@ -73,7 +73,7 @@ static void AddDictProp(AString &s, UInt32 val)
   if      ((val & ((1 << 20) - 1)) == 0) { val >>= 20; c = 'm'; }
   else if ((val & ((1 << 10) - 1)) == 0) { val >>= 10; c = 'k'; }
   s.Add_UInt32(val);
-  s += c;
+  s.Add_Char(c);
 }
 
 static AString GetMethod(bool useFilter, NMethodType::EEnum method, UInt32 dict)
@@ -87,7 +87,7 @@ static AString GetMethod(bool useFilter, NMethodType::EEnum method, UInt32 dict)
   s += ((unsigned)method < Z7_ARRAY_SIZE(kMethods)) ? kMethods[(unsigned)method] : kUnknownMethod;
   if (method == NMethodType::kLZMA)
   {
-    s += ':';
+    s.Add_Colon();
     AddDictProp(s, dict);
   }
   return s;
@@ -105,7 +105,7 @@ AString CHandler::GetMethod(NMethodType::EEnum method, bool useItemFilter, UInt3
   s += (method < Z7_ARRAY_SIZE(kMethods)) ? kMethods[method] : kUnknownMethod;
   if (method == NMethodType::kLZMA)
   {
-    s += ':';
+    s.Add_Colon();
     s += GetStringForSizeValue(_archive.IsSolid ? _archive.DictionarySize: dictionary);
   }
   return s;
@@ -427,8 +427,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   extractCallback->SetTotal(totalSize + solidPosMax);
 
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, !_archive.IsSolid);
 
   if (_archive.IsSolid)
@@ -559,7 +558,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           }
           else
           {
-            HRESULT res = _archive.Decoder.SetToPos(pos, progress);
+            HRESULT res = _archive.Decoder.SetToPos(pos, lps);
             if (res != S_OK)
             {
               if (res != S_FALSE)
@@ -620,7 +619,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
                 writeToTemp1 ? &tempBuf : NULL,
                 is_PatchedUninstaller, item.PatchSize,
                 is_PatchedUninstaller ? NULL : (ISequentialOutStream *)realOutStream,
-                progress,
+                lps,
                 curPacked, curUnpacked32);
             curUnpacked = curUnpacked32;
             if (_archive.IsSolid)
@@ -665,7 +664,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
                 writeToTemp ? &tempBuf2 : NULL,
                 false, 0,
                 realOutStream,
-                progress,
+                lps,
                 curPacked2, curUnpacked2);
             curPacked += curPacked2;
             if (!_archive.IsSolid)

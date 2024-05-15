@@ -85,6 +85,7 @@ Z7_COM7F_IMF(COpenCallbackImp::GetProperty(PROPID propID, PROPVARIANT *value))
     {
       case kpidName: prop = _subArchiveName; break;
       // case kpidSize:  prop = _subArchiveSize; break; // we don't use it now
+      default: break;
     }
   else
     switch (propID)
@@ -97,6 +98,7 @@ Z7_COM7F_IMF(COpenCallbackImp::GetProperty(PROPID propID, PROPVARIANT *value))
       case kpidCTime:  PropVariant_SetFrom_FiTime(prop, _fileInfo.CTime); break;
       case kpidATime:  PropVariant_SetFrom_FiTime(prop, _fileInfo.ATime); break;
       case kpidMTime:  PropVariant_SetFrom_FiTime(prop, _fileInfo.MTime); break;
+      default: break;
     }
   prop.Detach(value);
   return S_OK;
@@ -106,12 +108,15 @@ Z7_COM7F_IMF(COpenCallbackImp::GetProperty(PROPID propID, PROPVARIANT *value))
 
 // ---------- CInFileStreamVol ----------
 
-Z7_CLASS_IMP_COM_2(
-  CInFileStreamVol
-  , IInStream
-  , IStreamGetSize
-)
-  Z7_IFACE_COM7_IMP(ISequentialInStream)
+Z7_class_final(CInFileStreamVol):
+    public IInStream
+  , public IStreamGetSize
+  , public CMyUnknownImp
+{
+  Z7_IFACES_IMP_UNK_3(
+    IInStream,
+    ISequentialInStream,
+    IStreamGetSize)
 public:
   unsigned FileIndex;
   COpenCallbackImp *OpenCallbackImp;

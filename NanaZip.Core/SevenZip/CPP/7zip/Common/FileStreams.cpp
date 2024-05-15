@@ -11,13 +11,25 @@
 #include <grp.h>
 #include <pwd.h>
 
+/*
+inclusion of <sys/sysmacros.h> by <sys/types.h> is deprecated since glibc 2.25.
+Since glibc 2.3.3, macros have been aliases for three GNU-specific
+functions: gnu_dev_makedev(), gnu_dev_major(), and gnu_dev_minor()
+
+Warning in GCC:
+In the GNU C Library, "major" is defined by <sys/sysmacros.h>.
+For historical compatibility, it is currently defined by
+<sys/types.h> as well, but we plan to remove this soon.
+To use "major", include <sys/sysmacros.h> directly.
+If you did not intend to use a system-defined macro "major",
+you should undefine it after including <sys/types.h>
+*/
 // for major()/minor():
+#if defined(__APPLE__) || defined(__DragonFly__) || \
+    defined(BSD) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
 #include <sys/types.h>
-#if defined(__FreeBSD__) || defined(BSD) || defined(__APPLE__)
 #else
-#ifndef major
 #include <sys/sysmacros.h>
-#endif
 #endif
 
 #endif // _WIN32
@@ -85,6 +97,8 @@ CInFileStream::~CInFileStream()
 
 Z7_COM7F_IMF(CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize))
 {
+  // printf("\nCInFileStream::Read size=%d, VirtPos=%8d\n", (unsigned)size, (int)VirtPos);
+
   #ifdef Z7_FILE_STREAMS_USE_WIN_FILE
   
   #ifdef Z7_DEVICE_FILE
@@ -205,6 +219,10 @@ Z7_COM7F_IMF(CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
 
   {
     const DWORD error = ::GetLastError();
+#if 0
+    if (File.IsStdStream && error == ERROR_BROKEN_PIPE)
+      return S_OK; // end of stream
+#endif
     if (Callback)
       return Callback->InFileStream_On_Error(CallbackRef, error);
     if (error == 0)
@@ -227,13 +245,35 @@ Z7_COM7F_IMF(CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
 #else
 Z7_COM7F_IMF(CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize))
 {
+  // printf("\nCStdInFileStream::Read size = %d\n", (unsigned)size);
   #ifdef _WIN32
   
   DWORD realProcessedSize;
   UInt32 sizeTemp = (1 << 20);
   if (sizeTemp > size)
     sizeTemp = size;
+  /* in GUI mode : GetStdHandle(STD_INPUT_HANDLE) returns NULL,
+     and it doesn't set LastError.  */
+  /*
+  SetLastError(0);
+  const HANDLE h = GetStdHandle(STD_INPUT_HANDLE);
+  if (!h || h == INVALID_HANDLE_VALUE)
+  {
+    if (processedSize)
+      *processedSize = 0;
+    if (GetLastError() == 0)
+      SetLastError(ERROR_INVALID_HANDLE);
+    return GetLastError_noZero_HRESULT();
+  }
+  */
   BOOL res = ::ReadFile(GetStdHandle(STD_INPUT_HANDLE), data, sizeTemp, &realProcessedSize, NULL);
+
+  /*
+  printf("\nCInFileStream::Read: size=%d, processed=%8d res=%d 4rror=%3d\n",
+    (unsigned)size, (int)realProcessedSize,
+    (int)res, GetLastError());
+  */
+
   if (processedSize)
     *processedSize = realProcessedSize;
   if (res == FALSE && GetLastError() == ERROR_BROKEN_PIPE)
@@ -261,8 +301,62 @@ Z7_COM7F_IMF(CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
   
 #endif
 
+
+/*
+bool CreateStdInStream(CMyComPtr<ISequentialInStream> &str)
+{
+#if 0
+  CInFileStream *inStreamSpec = new CInFileStream;
+  CMyComPtr<ISequentialInStream> inStreamLoc(inStreamSpec);;
+  if (!inStreamSpec->OpenStdIn())
+    return false;
+  if (!inStreamSpec->File.IsStdPipeStream)
+    str = inStreamLoc.Detach();
+  else
+#endif
+  str = new CStdInFileStream;
+  return true;
+}
+*/
+
+#if 0
+bool CInFileStream::OpenStdIn()
+{
+  _info_WasLoaded = false;
+  // Sleep(100);
+  bool res = File.AttachStdIn();
+  if (!res)
+    return false;
+#if 1
+  CStreamFileProps props;
+  if (GetProps2(&props) != S_OK)
+  {
+    // we can ignore that error
+    return false;
+  }
+  // we can't use Size, because Size can be set for pipe streams for some value.
+  // Seek() sees only current chunk in pipe buffer.
+  // So Seek() can move across only current unread chunk.
+  // But after reading that chunk. it can't move position back.
+  // We need safe check that shows that we can use seek (non-pipe mode)
+  // Is it safe check that shows that pipe mode was used?
+  File.IsStdPipeStream = (props.VolID == 0);
+    // && FILETIME_IsZero(props.CTime)
+    // && FILETIME_IsZero(props.ATime)
+    // && FILETIME_IsZero(props.MTime);
+#endif
+  // printf("\n######## pipe=%d", (unsigned)File.IsStdPipeStream);
+  return true;
+}
+#endif
+
+
 Z7_COM7F_IMF(CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition))
 {
+  /*
+  printf("\nCInFileStream::Seek seekOrigin=%d, offset=%8d, VirtPos=%8d\n",
+      (unsigned)seekOrigin, (int)offset, (int)VirtPos);
+  */
   if (seekOrigin >= 3)
     return STG_E_INVALIDFUNCTION;
 
@@ -463,6 +557,31 @@ Z7_COM7F_IMF(CInFileStream::ReloadProps())
   _info_WasLoaded = File.GetFileInformation(&_info);
   if (!_info_WasLoaded)
     return GetLastError_HRESULT();
+#ifdef _WIN32
+#if 0
+  printf(
+    "\ndwFileAttributes = %8x"
+    "\nftCreationTime   = %8x"
+    "\nftLastAccessTime = %8x"
+    "\nftLastWriteTime  = %8x"
+    "\ndwVolumeSerialNumber  = %8x"
+    "\nnFileSizeHigh  = %8x"
+    "\nnFileSizeLow   = %8x"
+    "\nnNumberOfLinks  = %8x"
+    "\nnFileIndexHigh  = %8x"
+    "\nnFileIndexLow   = %8x \n",
+      (unsigned)_info.dwFileAttributes,
+      (unsigned)_info.ftCreationTime.dwHighDateTime,
+      (unsigned)_info.ftLastAccessTime.dwHighDateTime,
+      (unsigned)_info.ftLastWriteTime.dwHighDateTime,
+      (unsigned)_info.dwVolumeSerialNumber,
+      (unsigned)_info.nFileSizeHigh,
+      (unsigned)_info.nFileSizeLow,
+      (unsigned)_info.nNumberOfLinks,
+      (unsigned)_info.nFileIndexHigh,
+      (unsigned)_info.nFileIndexLow);
+#endif
+#endif
   return S_OK;
 }
 
@@ -471,6 +590,7 @@ Z7_COM7F_IMF(CInFileStream::ReloadProps())
 
 Z7_COM7F_IMF(CInFileStream::GetProps(UInt64 *size, FILETIME *cTime, FILETIME *aTime, FILETIME *mTime, UInt32 *attrib))
 {
+  // printf("\nCInFileStream::GetProps VirtPos = %8d\n", (int)VirtPos);
   if (!_info_WasLoaded)
   {
     RINOK(ReloadProps())
@@ -495,6 +615,7 @@ Z7_COM7F_IMF(CInFileStream::GetProps(UInt64 *size, FILETIME *cTime, FILETIME *aT
 
 Z7_COM7F_IMF(CInFileStream::GetProps2(CStreamFileProps *props))
 {
+  // printf("\nCInFileStream::GetProps2 VirtPos = %8d\n", (int)VirtPos);
   if (!_info_WasLoaded)
   {
     RINOK(ReloadProps())
@@ -535,6 +656,7 @@ Z7_COM7F_IMF(CInFileStream::GetProps2(CStreamFileProps *props))
 
 Z7_COM7F_IMF(CInFileStream::GetProperty(PROPID propID, PROPVARIANT *value))
 {
+  // printf("\nCInFileStream::GetProperty VirtPos = %8d propID = %3d\n", (int)VirtPos, propID);
   if (!_info_WasLoaded)
   {
     RINOK(ReloadProps())
@@ -648,6 +770,7 @@ Z7_COM7F_IMF(CInFileStream::GetProperty(PROPID propID, PROPVARIANT *value))
         }
         break;
       }
+      default: break;
     }
   }
   prop.Detach(value);

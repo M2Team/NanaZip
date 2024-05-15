@@ -190,7 +190,7 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream(UInt32 index,
     {
       _outFileStreamSpec = new COutFileStream;
       CMyComPtr<ISequentialOutStream> outStreamLoc(_outFileStreamSpec);
-      if (!_outFileStreamSpec->Create(fullProcessedPath, true))
+      if (!_outFileStreamSpec->Create_ALWAYS(fullProcessedPath))
       {
         _message = kCantOpenFile;
         return E_FAIL;

@@ -1673,8 +1673,8 @@ Z7_COM7F_IMF(CHandler::GetRawProp(UInt32 index, PROPID propID, const void **data
     return S_OK;
   }
   #else
-  UNUSED_VAR(index);
-  UNUSED_VAR(propID);
+  UNUSED_VAR(index)
+  UNUSED_VAR(propID)
   #endif
   return S_OK;
 }
@@ -1786,14 +1786,14 @@ Z7_COM7F_IMF(CHandler::Close())
 
 static const UInt32 kCompressionBlockSize = 1 << 16;
 
-CDecoder::CDecoder()
+CDecoder::CDecoder(bool IsAdlerOptional)
 {
-  _zlibDecoderSpec = new NCompress::NZlib::CDecoder();
-  _zlibDecoder = _zlibDecoderSpec;
-  
-  _lzfseDecoderSpec = new NCompress::NLzfse::CDecoder();
-  _lzfseDecoder = _lzfseDecoderSpec;
-  _lzfseDecoderSpec->LzvnMode = true;
+  /* Some new hfs files contain zlib resource fork without Adler checksum.
+     We do not know how we must detect case where there is Adler
+     checksum or there is no Adler checksum.
+  */
+  _zlibDecoder->IsAdlerOptional = IsAdlerOptional;
+  _lzfseDecoder->LzvnMode = true;
 }
 
 HRESULT CDecoder::ExtractResourceFork_ZLIB(
@@ -1862,8 +1862,7 @@ HRESULT CDecoder::ExtractResourceFork_ZLIB(
   if (prev != dataSize2)
     return S_FALSE;
 
-  CBufInStream *bufInStreamSpec = new CBufInStream;
-  CMyComPtr<ISequentialInStream> bufInStream = bufInStreamSpec;
+  CMyComPtr2_Create<ISequentialInStream, CBufInStream> bufInStream;
 
   // bool padError = false;
   UInt64 outPos = 0;
@@ -1899,11 +1898,11 @@ HRESULT CDecoder::ExtractResourceFork_ZLIB(
     else
     {
       const UInt64 blockSize64 = blockSize;
-      bufInStreamSpec->Init(buf, size);
-      RINOK(_zlibDecoder->Code(bufInStream, outStream, NULL, &blockSize64, NULL))
-      if (_zlibDecoderSpec->GetOutputProcessedSize() != blockSize)
+      bufInStream->Init(buf, size);
+      RINOK(_zlibDecoder.Interface()->Code(bufInStream, outStream, NULL, &blockSize64, NULL))
+      if (_zlibDecoder->GetOutputProcessedSize() != blockSize)
         return S_FALSE;
-      const UInt64 inSize = _zlibDecoderSpec->GetInputProcessedSize();
+      const UInt64 inSize = _zlibDecoder->GetInputProcessedSize();
       if (inSize != size)
       {
         if (inSize > size)
@@ -2005,8 +2004,7 @@ HRESULT CDecoder::ExtractResourceFork_LZFSE(
   const size_t kBufSize = kCompressionBlockSize;
   _buf.Alloc(kBufSize + 0x10); // we need 1 additional bytes for uncompressed chunk header
 
-  CBufInStream *bufInStreamSpec = new CBufInStream;
-  CMyComPtr<ISequentialInStream> bufInStream = bufInStreamSpec;
+  CMyComPtr2_Create<ISequentialInStream, CBufInStream> bufInStream;
 
   UInt64 outPos = 0;
 
@@ -2042,8 +2040,8 @@ HRESULT CDecoder::ExtractResourceFork_LZFSE(
     {
       const UInt64 blockSize64 = blockSize;
       const UInt64 packSize64 = size;
-      bufInStreamSpec->Init(buf, size);
-      RINOK(_lzfseDecoder->Code(bufInStream, outStream, &packSize64, &blockSize64, NULL))
+      bufInStream->Init(buf, size);
+      RINOK(_lzfseDecoder.Interface()->Code(bufInStream, outStream, &packSize64, &blockSize64, NULL))
       // in/out sizes were checked in Code()
     }
     
@@ -2100,8 +2098,8 @@ HRESULT CDecoder::ExtractResourceFork_ZBM(
   const size_t kBufSize = kCompressionBlockSize;
   _buf.Alloc(kBufSize + 0x10); // we need 1 additional bytes for uncompressed chunk header
 
-  CBufInStream *bufInStreamSpec = new CBufInStream;
-  CMyComPtr<ISequentialInStream> bufInStream = bufInStreamSpec;
+  CBufInStream *bufInStream = new CBufInStream;
+  CMyComPtr<ISequentialInStream> bufInStream = bufInStream;
 
   UInt64 outPos = 0;
 
@@ -2222,7 +2220,7 @@ HRESULT CDecoder::ExtractResourceFork_ZBM(
 
       // const UInt64 blockSize64 = blockSize;
       // const UInt64 packSize64 = size;
-      // bufInStreamSpec->Init(buf, size);
+      // bufInStream->Init(buf, size);
       // RINOK(_zbmDecoderSpec->Code(bufInStream, outStream, &packSize64, &blockSize64, NULL));
       // in/out sizes were checked in Code()
     }
@@ -2263,24 +2261,23 @@ HRESULT CDecoder::Extract(
   if (compressHeader.Method == kMethod_ZLIB_ATTR ||
       compressHeader.Method == kMethod_LZVN_ATTR)
   {
-    CBufInStream *bufInStreamSpec = new CBufInStream;
-    CMyComPtr<ISequentialInStream> bufInStream = bufInStreamSpec;
+    CMyComPtr2_Create<ISequentialInStream, CBufInStream> bufInStream;
     const size_t packSize = data->Size() - compressHeader.DataPos;
-    bufInStreamSpec->Init(*data + compressHeader.DataPos, packSize);
+    bufInStream->Init(*data + compressHeader.DataPos, packSize);
     
     if (compressHeader.Method == kMethod_ZLIB_ATTR)
     {
-      const HRESULT hres = _zlibDecoder->Code(bufInStream, realOutStream,
+      const HRESULT hres = _zlibDecoder.Interface()->Code(bufInStream, realOutStream,
           NULL, &compressHeader.UnpackSize, NULL);
       if (hres == S_OK)
-        if (_zlibDecoderSpec->GetOutputProcessedSize() == compressHeader.UnpackSize
-            && _zlibDecoderSpec->GetInputProcessedSize() == packSize)
+        if (_zlibDecoder->GetOutputProcessedSize() == compressHeader.UnpackSize
+            && _zlibDecoder->GetInputProcessedSize() == packSize)
           opRes = NExtract::NOperationResult::kOK;
       return hres;
     }
     {
       const UInt64 packSize64 = packSize;
-      const HRESULT hres = _lzfseDecoder->Code(bufInStream, realOutStream,
+      const HRESULT hres = _lzfseDecoder.Interface()->Code(bufInStream, realOutStream,
           &packSize64, &compressHeader.UnpackSize, NULL);
       if (hres == S_OK)
       {
@@ -2298,6 +2295,8 @@ HRESULT CDecoder::Extract(
         inStreamFork, realOutStream,
         forkSize, compressHeader.UnpackSize,
         progressStart, extractCallback);
+    // for debug:
+    // hres = NCompress::CopyStream(inStreamFork, realOutStream, NULL);
   }
   else if (compressHeader.Method == NHfs::kMethod_LZVN_RSRC)
   {
@@ -2350,18 +2349,21 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   const size_t kBufSize = kCompressionBlockSize;
   CByteBuffer buf(kBufSize + 0x10); // we need 1 additional bytes for uncompressed chunk header
 
-  CDecoder decoder;
+  // there are hfs without adler in zlib.
+  CDecoder decoder(true); // IsAdlerOptional
 
   for (i = 0;; i++, currentTotalSize += currentItemSize)
   {
     RINOK(extractCallback->SetCompleted(&currentTotalSize))
-    if (i == numItems)
+    if (i >= numItems)
       break;
     const UInt32 index = allFilesMode ? i : indices[i];
     const CRef &ref = Refs[index];
     const CItem &item = Items[ref.ItemIndex];
     currentItemSize = Get_UnpackSize_of_Ref(ref);
 
+    int opRes;
+   {
     CMyComPtr<ISequentialOutStream> realOutStream;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
@@ -2380,7 +2382,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(extractCallback->PrepareOperation(askMode))
     
     UInt64 pos = 0;
-    int opRes = NExtract::NOperationResult::kDataError;
+    opRes = NExtract::NOperationResult::kDataError;
     const CFork *fork = NULL;
     
     if (ref.AttrIndex >= 0)
@@ -2488,7 +2490,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           opRes = NExtract::NOperationResult::kDataError;
       }
     }
-    realOutStream.Release();
+   }
     RINOK(extractCallback->SetOperationResult(opRes))
   }
   return S_OK;
@@ -2508,8 +2510,8 @@ HRESULT CHandler::GetForkStream(const CFork &fork, ISequentialInStream **stream)
   if (!fork.IsOk(Header.BlockSizeLog))
     return S_FALSE;
 
-  CExtentsStream *extentStreamSpec = new CExtentsStream();
-  CMyComPtr<ISequentialInStream> extentStream = extentStreamSpec;
+  CMyComPtr2<ISequentialInStream, CExtentsStream> extentStream;
+  extentStream.Create_if_Empty();
 
   UInt64 rem = fork.Size;
   UInt64 virt = 0;
@@ -2531,7 +2533,7 @@ HRESULT CHandler::GetForkStream(const CFork &fork, ISequentialInStream **stream)
     se.Virt = virt;
     virt += cur;
     rem -= cur;
-    extentStreamSpec->Extents.Add(se);
+    extentStream->Extents.Add(se);
   }
   
   if (rem != 0)
@@ -2540,9 +2542,9 @@ HRESULT CHandler::GetForkStream(const CFork &fork, ISequentialInStream **stream)
   CSeekExtent se;
   se.Phy = 0;
   se.Virt = virt;
-  extentStreamSpec->Extents.Add(se);
-  extentStreamSpec->Stream = _stream;
-  extentStreamSpec->Init();
+  extentStream->Extents.Add(se);
+  extentStream->Stream = _stream;
+  extentStream->Init();
   *stream = extentStream.Detach();
   return S_OK;
 }

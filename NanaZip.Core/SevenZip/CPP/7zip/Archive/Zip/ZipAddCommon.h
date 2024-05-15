@@ -39,15 +39,13 @@ struct CCompressingResult
 class CAddCommon  MY_UNCOPYABLE
 {
   CCompressionMethodMode _options;
-  NCompress::CCopyCoder *_copyCoderSpec;
-  CMyComPtr<ICompressCoder> _copyCoder;
+  CMyComPtr2<ICompressCoder, NCompress::CCopyCoder> _copyCoder;
 
   CMyComPtr<ICompressCoder> _compressEncoder;
   Byte _compressExtractVersion;
   bool _isLzmaEos;
 
-  CFilterCoder *_cryptoStreamSpec;
-  CMyComPtr<ISequentialOutStream> _cryptoStream;
+  CMyComPtr2<ISequentialOutStream, CFilterCoder> _cryptoStream;
 
   NCrypto::NZip::CEncoder *_filterSpec;
   NCrypto::NWzAes::CEncoder *_filterAesSpec;

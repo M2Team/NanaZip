@@ -89,6 +89,8 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialogRes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MyWindowsNew.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialogRes.h" />

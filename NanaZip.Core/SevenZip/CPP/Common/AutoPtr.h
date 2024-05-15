@@ -3,20 +3,32 @@
 #ifndef ZIP7_INC_COMMON_AUTOPTR_H
 #define ZIP7_INC_COMMON_AUTOPTR_H
 
-template<class T> class CMyAutoPtr
+template<class T> class CMyUniquePtr
+// CMyAutoPtr
 {
   T *_p;
-public:
-  CMyAutoPtr(T *p = NULL) : _p(p) {}
-  CMyAutoPtr(CMyAutoPtr<T>& p): _p(p.release()) {}
-  CMyAutoPtr<T>& operator=(CMyAutoPtr<T>& p)
+  
+  CMyUniquePtr(CMyUniquePtr<T>& p); // : _p(p.release()) {}
+  CMyUniquePtr<T>& operator=(T *p);
+  CMyUniquePtr<T>& operator=(CMyUniquePtr<T>& p);
+  /*
   {
     reset(p.release());
     return (*this);
   }
-  ~CMyAutoPtr() { delete _p; }
+  */
+  void reset(T* p = NULL)
+  {
+    if (p != _p)
+      delete _p;
+    _p = p;
+  }
+public:
+  CMyUniquePtr(T *p = NULL) : _p(p) {}
+  ~CMyUniquePtr() { delete _p; }
   T& operator*() const { return *_p; }
-  // T* operator->() const { return (&**this); }
+  T* operator->() const { return _p; }
+  // operator bool() const { return _p != NULL; }
   T* get() const { return _p; }
   T* release()
   {
@@ -24,11 +36,10 @@ public:
     _p = NULL;
     return tmp;
   }
-  void reset(T* p = NULL)
+  void Create_if_Empty()
   {
-    if (p != _p)
-      delete _p;
-    _p = p;
+    if (!_p)
+      _p = new T;
   }
 };
 

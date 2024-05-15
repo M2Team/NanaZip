@@ -64,7 +64,7 @@ HRESULT CExtractScanConsole::ScanError(const FString &path, DWORD systemError)
   if (_se)
   {
     *_se << endl << kError << NError::MyFormatMessage(systemError) << endl;
-    _se->NormalizePrint_UString(fs2us(path));
+    _se->NormalizePrint_UString_Path(fs2us(path));
     *_se << endl << endl;
     _se->Flush();
   }
@@ -102,7 +102,7 @@ void PrintSize_bytes_Smart(AString &s, UInt64 val)
   temp[0] = c;
   s += " (";
   Print_UInt64_and_String(s, ((val + ((UInt64)1 << numBits) - 1) >> numBits), temp);
-  s += ')';
+  s.Add_Char(')');
 }
 
 static void PrintSize_bytes_Smart_comma(AString &s, UInt64 val)
@@ -265,7 +265,7 @@ static const char * const kTab = "  ";
 static void PrintFileInfo(CStdOutStream *_so, const wchar_t *path, const FILETIME *ft, const UInt64 *size)
 {
   *_so << kTab << "Path:     ";
-  _so->NormalizePrint_wstr(path);
+  _so->NormalizePrint_wstr_Path(path);
   *_so << endl;
   if (size && *size != (UInt64)(Int64)-1)
   {
@@ -358,7 +358,7 @@ Z7_COM7F_IMF(CExtractCallbackConsole::PrepareOperation(const wchar_t *name, Int3
     if (name)
     {
       _tempU = name;
-      _so->Normalize_UString(_tempU);
+      _so->Normalize_UString_Path(_tempU);
       // 21.04
       if (isFolder)
       {
@@ -448,6 +448,7 @@ void SetExtractErrorMessage(Int32 opRes, Int32 encrypted, AString &dest)
       case NArchive::NExtract::NOperationResult::kWrongPassword:
         s = kWrongPassword;
         break;
+      default: break;
     }
     
     dest += kError;
@@ -489,7 +490,7 @@ Z7_COM7F_IMF(CExtractCallbackConsole::SetOperationResult(Int32 opRes, Int32 encr
       if (!_currentName.IsEmpty())
       {
         *_se << " : ";
-        _se->NormalizePrint_UString(_currentName);
+        _se->NormalizePrint_UString_Path(_currentName);
       }
       *_se << endl;
       _se->Flush();
@@ -531,8 +532,100 @@ Z7_COM7F_IMF(CExtractCallbackConsole::CryptoGetTextPassword(BSTR *password))
 
 #endif
 
+
+#ifndef Z7_SFX
+
+void CExtractCallbackConsole::PrintTo_se_Path_WithTitle(const UString &path, const char *title)
+{
+  *_se << title;
+  _se->NormalizePrint_UString_Path(path);
+  *_se << endl;
+}
+
+void CExtractCallbackConsole::Add_ArchiveName_Error()
+{
+  if (_needWriteArchivePath)
+  {
+    PrintTo_se_Path_WithTitle(_currentArchivePath, "Archive: ");
+    _needWriteArchivePath = false;
+  }
+}
+
+
+Z7_COM7F_IMF(CExtractCallbackConsole::RequestMemoryUse(
+    UInt32 flags, UInt32 /* indexType */, UInt32 /* index */, const wchar_t *path,
+    UInt64 requiredSize, UInt64 *allowedSize, UInt32 *answerFlags))
+{
+  if ((flags & NRequestMemoryUseFlags::k_IsReport) == 0
+      && requiredSize <= *allowedSize)
+  {
+#if 0
+    // it's expected, that *answerFlags was set to NRequestMemoryAnswerFlags::k_Allow already,
+    // because it's default answer for (requiredSize <= *allowedSize) case.
+    // optional code:
+    *answerFlags = NRequestMemoryAnswerFlags::k_Allow;
+#endif
+  }
+  else
+  {
+    if ((flags & NRequestMemoryUseFlags::k_NoErrorMessage) == 0)
+    if (_se)
+    {
+      const UInt64 num_GB_allowed  = (*allowedSize + ((1u << 30) - 1)) >> 30;
+      const UInt64 num_GB_required = (requiredSize + ((1u << 30) - 1)) >> 30;
+      ClosePercentsAndFlush();
+      Add_ArchiveName_Error();
+      if (path)
+        PrintTo_se_Path_WithTitle(path, "File: ");
+      *_se << "The extraction operation requires big amount memory (RAM):" << endl
+        << "  " << num_GB_required  << " GB : required memory usage size" << endl
+        << "  " << num_GB_allowed   << " GB : allowed memory usage limit" << endl
+        << "  Use -smemx{size}g switch to set allowed memory usage limit for extraction." << endl;
+      *_se << "ERROR: Memory usage limit was exceeded." << endl;
+      const char *m = NULL;
+      // if (indexType == NArchive::NEventIndexType::kNoIndex)
+           if ((flags & NRequestMemoryUseFlags::k_SkipArc_IsExpected) ||
+               (flags & NRequestMemoryUseFlags::k_Report_SkipArc))
+          m = "Archive unpacking was skipped.";
+/*
+      else if ((flags & NRequestMemoryUseFlags::k_SkipBigFiles_IsExpected) ||
+               (flags & NRequestMemoryUseFlags::k_Report_SkipBigFiles))
+          m = "Extraction for some files will be skipped.";
+      else if ((flags & NRequestMemoryUseFlags::k_SkipBigFile_IsExpected) ||
+               (flags & NRequestMemoryUseFlags::k_Report_SkipBigFile))
+          m = "File extraction was skipped.";
+*/
+      if (m)
+        *_se << m;
+      _se->Flush();
+    }
+
+    if ((flags & NRequestMemoryUseFlags::k_IsReport) == 0)
+    {
+      // default answer can be k_Allow, if limit was not forced,
+      // so we change answer to non-allowed here.
+      *answerFlags = NRequestMemoryAnswerFlags::k_Limit_Exceeded;
+           if (flags & NRequestMemoryUseFlags::k_SkipArc_IsExpected)
+        *answerFlags |= NRequestMemoryAnswerFlags::k_SkipArc;
+/*
+      else if (flags & NRequestMemoryUseFlags::k_SkipBigFile_IsExpected)
+        *answerFlags |= NRequestMemoryAnswerFlags::k_SkipBigFile;
+      else if (flags & NRequestMemoryUseFlags::k_SkipBigFiles_IsExpected)
+        *answerFlags |= NRequestMemoryAnswerFlags::k_SkipBigFiles;
+*/
+    }
+  }
+  return CheckBreak2();
+}
+
+#endif
+
+
 HRESULT CExtractCallbackConsole::BeforeOpen(const wchar_t *name, bool testMode)
 {
+  _currentArchivePath = name;
+  _needWriteArchivePath = true;
+
   RINOK(CheckBreak2())
 
   NumTryArcs++;
@@ -544,7 +637,7 @@ HRESULT CExtractCallbackConsole::BeforeOpen(const wchar_t *name, bool testMode)
   if (_so)
   {
     *_so << endl << (testMode ? kTesting : kExtracting);
-    _so->NormalizePrint_wstr(name);
+    _so->NormalizePrint_wstr_Path(name);
     *_so << endl;
   }
 
@@ -609,7 +702,7 @@ void Print_ErrorFormatIndex_Warning(CStdOutStream *_so, const CCodecs *codecs, c
   const CArcErrorInfo &er = arc.ErrorInfo;
   
   *_so << "WARNING:\n";
-  _so->NormalizePrint_UString(arc.Path);
+  _so->NormalizePrint_UString_Path(arc.Path);
   UString s;
   if (arc.FormatIndex == er.ErrorFormatIndex)
   {
@@ -630,6 +723,9 @@ HRESULT CExtractCallbackConsole::OpenResult(
     const CCodecs *codecs, const CArchiveLink &arcLink,
     const wchar_t *name, HRESULT result)
 {
+  _currentArchivePath = name;
+  _needWriteArchivePath = true;
+
   ClosePercents();
 
   if (NeedPercents())
@@ -656,7 +752,7 @@ HRESULT CExtractCallbackConsole::OpenResult(
         *_se << endl;
         if (level != 0)
         {
-          _se->NormalizePrint_UString(arc.Path);
+          _se->NormalizePrint_UString_Path(arc.Path);
           *_se << endl;
         }
       }
@@ -693,7 +789,7 @@ HRESULT CExtractCallbackConsole::OpenResult(
         *_so << endl;
         if (level != 0)
         {
-          _so->NormalizePrint_UString(arc.Path);
+          _so->NormalizePrint_UString_Path(arc.Path);
           *_so << endl;
         }
       }
@@ -751,7 +847,7 @@ HRESULT CExtractCallbackConsole::OpenResult(
     if (_se)
     {
       *_se << kError;
-      _se->NormalizePrint_wstr(name);
+      _se->NormalizePrint_wstr_Path(name);
       *_se << endl;
       const HRESULT res = Print_OpenArchive_Error(*_se, codecs, arcLink);
       RINOK(res)

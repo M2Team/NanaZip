@@ -18,6 +18,8 @@ typedef NTSTATUS (NTAPI *Func_LsaAddAccountRights)(LSA_HANDLE PolicyHandle,
 #define MY_STATUS_NOT_IMPLEMENTED  ((NTSTATUS)0xC0000002L)
 }
 
+Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
+
 #define POLICY_FUNC_CALL(fff, str)  \
   if (hModule == NULL) return MY_STATUS_NOT_IMPLEMENTED; \
   const Func_ ## fff v = Z7_GET_PROC_ADDRESS(Func_ ## fff, hModule, str); \

@@ -309,6 +309,9 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp">
       <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\Windows\TimeUtils.cpp">
+      <Filter>SevenZip\CPP\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
@@ -619,6 +622,9 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\StdAfx.h">
       <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Common\Common0.h">
+      <Filter>SevenZip\CPP\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

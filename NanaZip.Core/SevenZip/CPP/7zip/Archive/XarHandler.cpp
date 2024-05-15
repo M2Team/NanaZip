@@ -2,6 +2,7 @@
 
 #include "StdAfx.h"
 
+#include "../../../C/Sha256.h"
 #include "../../../C/CpuArch.h"
 
 #include "../../Common/ComTry.h"
@@ -36,58 +37,205 @@ using namespace NWindows;
 namespace NArchive {
 namespace NXar {
 
-static const size_t kXmlSizeMax = ((size_t )1 << 30) - (1 << 14);
+Z7_CLASS_IMP_NOQIB_1(
+  CInStreamWithSha256
+  , ISequentialInStream
+)
+  CMyComPtr<ISequentialInStream> _stream;
+  CAlignedBuffer1 _sha;
+  UInt64 _size;
+
+  CSha256 *Sha() { return (CSha256 *)(void *)(Byte *)_sha; }
+public:
+  CInStreamWithSha256(): _sha(sizeof(CSha256)) {}
+  void SetStream(ISequentialInStream *stream) { _stream = stream;  }
+  void Init()
+  {
+    _size = 0;
+    Sha256_Init(Sha());
+  }
+  void ReleaseStream() { _stream.Release(); }
+  UInt64 GetSize() const { return _size; }
+  void Final(Byte *digest) { Sha256_Final(Sha(), digest); }
+};
+
+Z7_COM7F_IMF(CInStreamWithSha256::Read(void *data, UInt32 size, UInt32 *processedSize))
+{
+  UInt32 realProcessedSize;
+  const HRESULT result = _stream->Read(data, size, &realProcessedSize);
+  _size += realProcessedSize;
+  Sha256_Update(Sha(), (const Byte *)data, realProcessedSize);
+  if (processedSize)
+    *processedSize = realProcessedSize;
+  return result;
+}
+
+
+Z7_CLASS_IMP_NOQIB_1(
+  COutStreamWithSha256
+  , ISequentialOutStream
+)
+  // bool _calculate;
+  CMyComPtr<ISequentialOutStream> _stream;
+  CAlignedBuffer1 _sha;
+  UInt64 _size;
+
+  CSha256 *Sha() { return (CSha256 *)(void *)(Byte *)_sha; }
+public:
+  COutStreamWithSha256(): _sha(sizeof(CSha256)) {}
+  void SetStream(ISequentialOutStream *stream) { _stream = stream; }
+  void ReleaseStream() { _stream.Release(); }
+  void Init(/* bool calculate = true */ )
+  {
+    // _calculate = calculate;
+    _size = 0;
+    Sha256_Init(Sha());
+  }
+  void InitSha256() { Sha256_Init(Sha()); }
+  UInt64 GetSize() const { return _size; }
+  void Final(Byte *digest) { Sha256_Final(Sha(), digest); }
+};
+
+Z7_COM7F_IMF(COutStreamWithSha256::Write(const void *data, UInt32 size, UInt32 *processedSize))
+{
+  HRESULT result = S_OK;
+  if (_stream)
+    result = _stream->Write(data, size, &size);
+  // if (_calculate)
+  Sha256_Update(Sha(), (const Byte *)data, size);
+  _size += size;
+  if (processedSize)
+    *processedSize = size;
+  return result;
+}
+
+// we limit supported xml sizes:
+// ((size_t)1 << (sizeof(size_t) / 2 + 28)) - (1u << 14);
+static const size_t kXmlSizeMax = ((size_t)1 << 30) - (1u << 14);
 static const size_t kXmlPackSizeMax = kXmlSizeMax;
 
-/*
-#define XAR_CKSUM_NONE  0
-#define XAR_CKSUM_SHA1  1
-#define XAR_CKSUM_MD5   2
+#define XAR_CKSUM_NONE    0
+#define XAR_CKSUM_SHA1    1
+#define XAR_CKSUM_MD5     2
+#define XAR_CKSUM_SHA256  3
+#define XAR_CKSUM_SHA512  4
+// #define XAR_CKSUM_OTHER   3
+// fork version of xar can use (3) as special case,
+// where name of hash is stored as string at the end of header
+// we do not support such hash still.
 
-static const char * const k_ChecksumAlgos[] =
+static const char * const k_ChecksumNames[] =
 {
-    "None"
-  , "SHA-1"
+    "NONE"
+  , "SHA1"
   , "MD5"
+  , "SHA256"
+  , "SHA512"
 };
-*/
 
-#define METHOD_NAME_ZLIB "zlib"
+static unsigned GetHashSize(int algo)
+{
+  if (algo <= XAR_CKSUM_NONE || algo > XAR_CKSUM_SHA512)
+    return 0;
+  if (algo == XAR_CKSUM_SHA1)
+    return SHA1_DIGEST_SIZE;
+  return (16u >> XAR_CKSUM_MD5) << algo;
+}
+
+#define METHOD_NAME_ZLIB  "zlib"
+
+static int Find_ChecksumId_for_Name(const AString &style)
+{
+  for (unsigned i = 0; i < Z7_ARRAY_SIZE(k_ChecksumNames); i++)
+  {
+    // old xars used upper case in "style"
+    // new xars use  lower case in "style"
+    if (style.IsEqualTo_Ascii_NoCase(k_ChecksumNames[i]))
+      return (int)i;
+  }
+  return -1;
+}
+
+
+struct CCheckSum
+{
+  int AlgoNumber;
+  bool Error;
+  CByteBuffer Data;
+  AString Style;
+  
+  CCheckSum(): AlgoNumber(-1), Error(false) {}
+  void AddNameToString(AString &s) const;
+};
+
+void CCheckSum::AddNameToString(AString &s) const
+{
+  if (Style.IsEmpty())
+    s.Add_OptSpaced("NO-CHECKSUM");
+  else
+  {
+    s.Add_OptSpaced(Style);
+    if (Error)
+      s += "-ERROR";
+  }
+}
 
 
 struct CFile
 {
-  AString Name;
-  AString Method;
+  bool IsDir;
+  bool Is_SymLink;
+  bool HasData;
+  bool Mode_Defined;
+  bool INode_Defined;
+  bool UserId_Defined;
+  bool GroupId_Defined;
+  // bool Device_Defined;
+  bool Id_Defined;
+
+  int Parent;
+  UInt32 Mode;
+
   UInt64 Size;
   UInt64 PackSize;
   UInt64 Offset;
-  
-  UInt64 CTime;
   UInt64 MTime;
+  UInt64 CTime;
   UInt64 ATime;
-  UInt32 Mode;
+  UInt64 INode;
+  UInt64 UserId;
+  UInt64 GroupId;
+  // UInt64 Device;
 
+  AString Name;
+  AString Method;
   AString User;
   AString Group;
+  // AString Id;
+  AString Type;
+  AString Link;
+  // AString LinkType;
+  // AString LinkFrom;
   
-  bool IsDir;
-  bool HasData;
-  bool ModeDefined;
-  bool Sha1IsDefined;
-  // bool packSha1IsDefined;
+  UInt64 Id;
+  CCheckSum extracted_checksum;
+  CCheckSum archived_checksum;
 
-  Byte Sha1[SHA1_DIGEST_SIZE];
-  // Byte packSha1[SHA1_DIGEST_SIZE];
-
-  int Parent;
-
-  CFile():
+  CFile(int parent):
+      IsDir(false),
+      Is_SymLink(false),
+      HasData(false),
+      Mode_Defined(false),
+      INode_Defined(false),
+      UserId_Defined(false),
+      GroupId_Defined(false),
+      // Device_Defined(false),
+      Id_Defined(false),
+      Parent(parent),
+      Mode(0),
       Size(0), PackSize(0), Offset(0),
-      CTime(0), MTime(0), ATime(0), Mode(0),
-      IsDir(false), HasData(false), ModeDefined(false), Sha1IsDefined(false),
-      /* packSha1IsDefined(false), */
-      Parent(-1)
+      MTime(0), CTime(0), ATime(0),
+      INode(0)
       {}
 
   bool IsCopyMethod() const
@@ -97,35 +245,45 @@ struct CFile
 
   void UpdateTotalPackSize(UInt64 &totalSize) const
   {
-    UInt64 t = Offset + PackSize;
+    const UInt64 t = Offset + PackSize;
+    if (t >= Offset)
     if (totalSize < t)
-      totalSize = t;
+        totalSize = t;
   }
 };
 
 
-Z7_CLASS_IMP_CHandler_IInArchive_1(
+Z7_CLASS_IMP_CHandler_IInArchive_2(
+    IArchiveGetRawProps,
     IInArchiveGetStream
 )
-  UInt64 _dataStartPos;
-  CMyComPtr<IInStream> _inStream;
-  CByteArr _xml;
-  size_t _xmlLen;
-  CObjectVector<CFile> _files;
-  // UInt32 _checkSumAlgo;
-  UInt64 _phySize;
-  Int32 _mainSubfile;
   bool _is_pkg;
+  bool _toc_CrcError;
+  CObjectVector<CFile> _files;
+  CMyComPtr<IInStream> _inStream;
+  UInt64 _dataStartPos;
+  UInt64 _phySize;
+  CAlignedBuffer _xmlBuf;
+  size_t _xmlLen;
+  // UInt64 CreationTime;
+  AString CreationTime_String;
+  UInt32 _checkSumAlgo;
+  Int32 _mainSubfile;
 
   HRESULT Open2(IInStream *stream);
-  HRESULT Extract(IInStream *stream);
 };
+
 
 static const Byte kArcProps[] =
 {
   kpidSubType,
-  kpidHeadersSize
+  // kpidHeadersSize,
+  kpidMethod,
+  kpidCTime
 };
+
+// #define kpidLinkType 250
+// #define kpidLinkFrom 251
 
 static const Byte kProps[] =
 {
@@ -136,18 +294,24 @@ static const Byte kProps[] =
   kpidCTime,
   kpidATime,
   kpidPosixAttrib,
+  kpidType,
   kpidUser,
   kpidGroup,
-  kpidMethod
+  kpidUserId,
+  kpidGroupId,
+  kpidINode,
+  // kpidDeviceMajor,
+  // kpidDeviceMinor,
+  kpidSymLink,
+  // kpidLinkType,
+  // kpidLinkFrom,
+  kpidMethod,
+  kpidId,
+  kpidOffset
 };
 
 IMP_IInArchive_Props
 IMP_IInArchive_ArcProps
-
-#define PARSE_NUM(_num_, _dest_) \
-    { const char *end; _dest_ = ConvertStringToUInt32(p, &end); \
-    if ((unsigned)(end - p) != _num_) return 0; \
-    p += _num_ + 1; }
 
 static bool ParseUInt64(const CXmlItem &item, const char *name, UInt64 &res)
 {
@@ -159,14 +323,26 @@ static bool ParseUInt64(const CXmlItem &item, const char *name, UInt64 &res)
   return *end == 0;
 }
 
-static UInt64 ParseTime(const CXmlItem &item, const char *name)
+
+#define PARSE_NUM(_num_, _dest_) \
+    { const char *end; _dest_ = ConvertStringToUInt32(p, &end); \
+    if ((unsigned)(end - p) != _num_) return 0; \
+    p += _num_ + 1; }
+
+static UInt64 ParseTime(const CXmlItem &item, const char *name /* , bool z_isRequired */ )
 {
   const AString s (item.GetSubStringForTag(name));
-  if (s.Len() < 20)
+  if (s.Len() < 20 /* (z_isRequired ? 20u : 19u) */)
     return 0;
   const char *p = s;
-  if (p[ 4] != '-' || p[ 7] != '-' || p[10] != 'T' ||
-      p[13] != ':' || p[16] != ':' || p[19] != 'Z')
+  if (p[ 4] != '-' ||
+      p[ 7] != '-' ||
+      p[10] != 'T' ||
+      p[13] != ':' ||
+      p[16] != ':')
+    return 0;
+  // if (z_isRequired)
+  if (p[19] != 'Z')
     return 0;
   UInt32 year, month, day, hour, min, sec;
   PARSE_NUM(4, year)
@@ -175,176 +351,261 @@ static UInt64 ParseTime(const CXmlItem &item, const char *name)
   PARSE_NUM(2, hour)
   PARSE_NUM(2, min)
   PARSE_NUM(2, sec)
-  
   UInt64 numSecs;
   if (!NTime::GetSecondsSince1601(year, month, day, hour, min, sec, numSecs))
     return 0;
   return numSecs * 10000000;
 }
 
-static int HexToByte(char c)
-{
-  if (c >= '0' && c <= '9') return c - '0';
-  if (c >= 'A' && c <= 'F') return c - 'A' + 10;
-  if (c >= 'a' && c <= 'f') return c - 'a' + 10;
-  return -1;
-}
 
-static bool ParseSha1(const CXmlItem &item, const char *name, Byte *digest)
+static void ParseChecksum(const CXmlItem &item, const char *name, CCheckSum &checksum)
 {
-  const int index = item.FindSubTag(name);
-  if (index < 0)
-    return false;
-  const CXmlItem &checkItem = item.SubItems[index];
-  const AString style (checkItem.GetPropVal("style"));
-  if (style == "SHA1")
+  const CXmlItem *checkItem = item.FindSubTag_GetPtr(name);
+  if (!checkItem)
+    return; // false;
+  checksum.Style = checkItem->GetPropVal("style");
+  const AString s (checkItem->GetSubString());
+  if ((s.Len() & 1) == 0 && s.Len() <= (2u << 7)) // 1024-bit max
   {
-    const AString s (checkItem.GetSubString());
-    if (s.Len() != SHA1_DIGEST_SIZE * 2)
-      return false;
-    for (unsigned i = 0; i < s.Len(); i += 2)
+    const size_t size = s.Len() / 2;
+    CByteBuffer temp(size);
+    if ((size_t)(ParseHexString(s, temp) - temp) == size)
     {
-      const int b0 = HexToByte(s[i]);
-      const int b1 = HexToByte(s[i + 1]);
-      if (b0 < 0 || b1 < 0)
-        return false;
-      digest[i / 2] = (Byte)((b0 << 4) | b1);
+      checksum.Data = temp;
+      const int index = Find_ChecksumId_for_Name(checksum.Style);
+      if (index >= 0 && checksum.Data.Size() == GetHashSize(index))
+      {
+        checksum.AlgoNumber = index;
+        return;
+      }
     }
-    return true;
   }
-  return false;
+  checksum.Error = true;
 }
 
-static bool AddItem(const CXmlItem &item, CObjectVector<CFile> &files, int parent)
+
+static bool AddItem(const CXmlItem &item, CObjectVector<CFile> &files, int parent, int level)
 {
   if (!item.IsTag)
     return true;
+  if (level >= 1024)
+    return false;
   if (item.Name == "file")
   {
-    CFile file;
-    file.Parent = parent;
+    CFile file(parent);
     parent = (int)files.Size();
+    {
+      const AString id = item.GetPropVal("id");
+      const char *end;
+      file.Id = ConvertStringToUInt64(id, &end);
+      if (*end == 0)
+        file.Id_Defined = true;
+    }
     file.Name = item.GetSubStringForTag("name");
-    const AString type (item.GetSubStringForTag("type"));
-    if (type == "directory")
-      file.IsDir = true;
-    else if (type == "file")
-      file.IsDir = false;
-    else
-      return false;
+    z7_xml_DecodeString(file.Name);
+    {
+      const CXmlItem *typeItem = item.FindSubTag_GetPtr("type");
+      if (typeItem)
+      {
+        file.Type = typeItem->GetSubString();
+        // file.LinkFrom = typeItem->GetPropVal("link");
+        if (file.Type == "directory")
+          file.IsDir = true;
+        else
+        {
+          // file.IsDir = false;
+          /*
+          else if (file.Type == "file")
+          {}
+          else if (file.Type == "hardlink")
+          {}
+          else
+          */
+          if (file.Type == "symlink")
+            file.Is_SymLink = true;
+          // file.IsDir = false;
+        }
+      }
+    }
+    {
+      const CXmlItem *linkItem = item.FindSubTag_GetPtr("link");
+      if (linkItem)
+      {
+        // file.LinkType = linkItem->GetPropVal("type");
+        file.Link = linkItem->GetSubString();
+        z7_xml_DecodeString(file.Link);
+      }
+    }
 
-    int dataIndex = item.FindSubTag("data");
-    if (dataIndex >= 0 && !file.IsDir)
+    const CXmlItem *dataItem = item.FindSubTag_GetPtr("data");
+    if (dataItem && !file.IsDir)
     {
       file.HasData = true;
-      const CXmlItem &dataItem = item.SubItems[dataIndex];
-      if (!ParseUInt64(dataItem, "size", file.Size))
+      if (!ParseUInt64(*dataItem, "size", file.Size))
         return false;
-      if (!ParseUInt64(dataItem, "length", file.PackSize))
+      if (!ParseUInt64(*dataItem, "length", file.PackSize))
         return false;
-      if (!ParseUInt64(dataItem, "offset", file.Offset))
+      if (!ParseUInt64(*dataItem, "offset", file.Offset))
         return false;
-      file.Sha1IsDefined = ParseSha1(dataItem, "extracted-checksum", file.Sha1);
-      // file.packSha1IsDefined = ParseSha1(dataItem, "archived-checksum",  file.packSha1);
-      int encodingIndex = dataItem.FindSubTag("encoding");
-      if (encodingIndex >= 0)
+      ParseChecksum(*dataItem, "extracted-checksum", file.extracted_checksum);
+      ParseChecksum(*dataItem, "archived-checksum",  file.archived_checksum);
+      const CXmlItem *encodingItem = dataItem->FindSubTag_GetPtr("encoding");
+      if (encodingItem)
       {
-        const CXmlItem &encodingItem = dataItem.SubItems[encodingIndex];
-        if (encodingItem.IsTag)
+        AString s (encodingItem->GetPropVal("style"));
+        if (!s.IsEmpty())
         {
-          AString s (encodingItem.GetPropVal("style"));
-          if (!s.IsEmpty())
+          const AString appl ("application/");
+          if (s.IsPrefixedBy(appl))
           {
-            const AString appl ("application/");
-            if (s.IsPrefixedBy(appl))
+            s.DeleteFrontal(appl.Len());
+            const AString xx ("x-");
+            if (s.IsPrefixedBy(xx))
             {
-              s.DeleteFrontal(appl.Len());
-              const AString xx ("x-");
-              if (s.IsPrefixedBy(xx))
-              {
-                s.DeleteFrontal(xx.Len());
-                if (s == "gzip")
-                  s = METHOD_NAME_ZLIB;
-              }
+              s.DeleteFrontal(xx.Len());
+              if (s == "gzip")
+                s = METHOD_NAME_ZLIB;
             }
-            file.Method = s;
           }
+          file.Method = s;
         }
       }
     }
 
+    file.INode_Defined = ParseUInt64(item, "inode", file.INode);
+    file.UserId_Defined = ParseUInt64(item, "uid", file.UserId);
+    file.GroupId_Defined = ParseUInt64(item, "gid", file.GroupId);
+    // file.Device_Defined = ParseUInt64(item, "deviceno", file.Device);
+    file.MTime = ParseTime(item, "mtime"); // z_IsRequied = true
     file.CTime = ParseTime(item, "ctime");
-    file.MTime = ParseTime(item, "mtime");
     file.ATime = ParseTime(item, "atime");
-
     {
       const AString s (item.GetSubStringForTag("mode"));
       if (s[0] == '0')
       {
         const char *end;
         file.Mode = ConvertOctStringToUInt32(s, &end);
-        file.ModeDefined = (*end == 0);
+        file.Mode_Defined = (*end == 0);
       }
     }
-
     file.User = item.GetSubStringForTag("user");
     file.Group = item.GetSubStringForTag("group");
 
     files.Add(file);
   }
+
   FOR_VECTOR (i, item.SubItems)
-    if (!AddItem(item.SubItems[i], files, parent))
+    if (!AddItem(item.SubItems[i], files, parent, level + 1))
       return false;
   return true;
 }
 
+
+
+struct CInStreamWithHash
+{
+  CMyComPtr2_Create<ISequentialInStream, CInStreamWithSha1> inStreamSha1;
+  CMyComPtr2_Create<ISequentialInStream, CInStreamWithSha256> inStreamSha256;
+  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStreamLim;
+
+  void SetStreamAndInit(ISequentialInStream *stream, int algo);
+  bool CheckHash(int algo, const Byte *digest_from_arc) const;
+};
+
+
+void CInStreamWithHash::SetStreamAndInit(ISequentialInStream *stream, int algo)
+{
+  if (algo == XAR_CKSUM_SHA1)
+  {
+    inStreamSha1->SetStream(stream);
+    inStreamSha1->Init();
+    stream = inStreamSha1;
+  }
+  else if (algo == XAR_CKSUM_SHA256)
+  {
+    inStreamSha256->SetStream(stream);
+    inStreamSha256->Init();
+    stream = inStreamSha256;
+  }
+  inStreamLim->SetStream(stream);
+}
+
+bool CInStreamWithHash::CheckHash(int algo, const Byte *digest_from_arc) const
+{
+  if (algo == XAR_CKSUM_SHA1)
+  {
+    Byte digest[SHA1_DIGEST_SIZE];
+    inStreamSha1->Final(digest);
+    if (memcmp(digest, digest_from_arc, sizeof(digest)) != 0)
+      return false;
+  }
+  else if (algo == XAR_CKSUM_SHA256)
+  {
+    Byte digest[SHA256_DIGEST_SIZE];
+    inStreamSha256->Final(digest);
+    if (memcmp(digest, digest_from_arc, sizeof(digest)) != 0)
+      return false;
+  }
+  return true;
+}
+
+
 HRESULT CHandler::Open2(IInStream *stream)
 {
-  const UInt32 kHeaderSize = 0x1C;
-  Byte buf[kHeaderSize];
-  RINOK(ReadStream_FALSE(stream, buf, kHeaderSize))
-  UInt32 size = Get16(buf + 4);
-  // UInt32 ver = Get16(buf + 6); // == 1
-  if (Get32(buf) != 0x78617221 || size != kHeaderSize)
+  const unsigned kHeaderSize = 28;
+  UInt32 buf32[kHeaderSize / sizeof(UInt32)];
+  RINOK(ReadStream_FALSE(stream, buf32, kHeaderSize))
+  const unsigned headerSize = Get16((const Byte *)(const void *)buf32 + 4);
+  // xar library now writes 1 to version field.
+  // some old xars could have version == 0 ?
+  // specification allows (headerSize != 28),
+  // but we don't expect big value in (headerSize).
+  // so we restrict (headerSize) with 64 bytes to reduce false open.
+  const unsigned kHeaderSize_MAX = 64;
+  if (Get32(buf32) != 0x78617221  // signature: "xar!"
+      || headerSize < kHeaderSize
+      || headerSize > kHeaderSize_MAX
+      || Get16((const Byte *)(const void *)buf32 + 6) > 1 // version
+      )
     return S_FALSE;
-
-  UInt64 packSize = Get64(buf + 8);
-  UInt64 unpackSize = Get64(buf + 0x10);
-
-  // _checkSumAlgo = Get32(buf + 0x18);
-
+  _checkSumAlgo = Get32(buf32 + 6);
+  const UInt64 packSize = Get64(buf32 + 2);
+  const UInt64 unpackSize = Get64(buf32 + 4);
   if (packSize >= kXmlPackSizeMax ||
       unpackSize >= kXmlSizeMax)
     return S_FALSE;
-
-  _dataStartPos = kHeaderSize + packSize;
+  /* some xar archives can have padding bytes at offset 28,
+     or checksum algorithm name at offset 28 (in xar fork, if cksum_alg==3)
+     But we didn't see such xar archives.
+  */
+  if (headerSize != kHeaderSize)
+  {
+    RINOK(InStream_SeekSet(stream, headerSize))
+  }
+  _dataStartPos = headerSize + packSize;
   _phySize = _dataStartPos;
 
-  _xml.Alloc((size_t)unpackSize + 1);
+  _xmlBuf.Alloc((size_t)unpackSize + 1);
+  if (!_xmlBuf.IsAllocated())
+    return E_OUTOFMEMORY;
   _xmlLen = (size_t)unpackSize;
   
-  NCompress::NZlib::CDecoder *zlibCoderSpec = new NCompress::NZlib::CDecoder();
-  CMyComPtr<ICompressCoder> zlibCoder = zlibCoderSpec;
-
-  CLimitedSequentialInStream *inStreamLimSpec = new CLimitedSequentialInStream;
-  CMyComPtr<ISequentialInStream> inStreamLim(inStreamLimSpec);
-  inStreamLimSpec->SetStream(stream);
-  inStreamLimSpec->Init(packSize);
-
-  CBufPtrSeqOutStream *outStreamLimSpec = new CBufPtrSeqOutStream;
-  CMyComPtr<ISequentialOutStream> outStreamLim(outStreamLimSpec);
-  outStreamLimSpec->Init(_xml, (size_t)unpackSize);
-
-  RINOK(zlibCoder->Code(inStreamLim, outStreamLim, NULL, NULL, NULL))
-
-  if (outStreamLimSpec->GetPos() != (size_t)unpackSize)
+  CInStreamWithHash hashStream;
+  {
+    CMyComPtr2_Create<ICompressCoder, NCompress::NZlib::CDecoder> zlibCoder;
+    hashStream.SetStreamAndInit(stream, (int)(unsigned)_checkSumAlgo);
+    hashStream.inStreamLim->Init(packSize);
+    CMyComPtr2_Create<ISequentialOutStream, CBufPtrSeqOutStream> outStreamLim;
+    outStreamLim->Init(_xmlBuf, (size_t)unpackSize);
+    RINOK(zlibCoder.Interface()->Code(hashStream.inStreamLim, outStreamLim, NULL, &unpackSize, NULL))
+    if (outStreamLim->GetPos() != (size_t)unpackSize)
+      return S_FALSE;
+  }
+  _xmlBuf[(size_t)unpackSize] = 0;
+  if (strlen((const char *)(const Byte *)_xmlBuf) != (size_t)unpackSize)
     return S_FALSE;
-
-  _xml[(size_t)unpackSize] = 0;
-  if (strlen((const char *)(const Byte *)_xml) != unpackSize) return S_FALSE;
-
   CXml xml;
-  if (!xml.Parse((const char *)(const Byte *)_xml))
+  if (!xml.Parse((const char *)(const Byte *)_xmlBuf))
     return S_FALSE;
   
   if (!xml.Root.IsTagged("xar") || xml.Root.SubItems.Size() != 1)
@@ -352,7 +613,40 @@ HRESULT CHandler::Open2(IInStream *stream)
   const CXmlItem &toc = xml.Root.SubItems[0];
   if (!toc.IsTagged("toc"))
     return S_FALSE;
-  if (!AddItem(toc, _files, -1))
+
+  // CreationTime = ParseTime(toc, "creation-time", false); // z_IsRequied
+  CreationTime_String = toc.GetSubStringForTag("creation-time");
+  {
+    // we suppose that offset of checksum is always 0;
+    // but [TOC].xml contains exact offset value in <checksum> block.
+    const UInt64 offset = 0;
+    const unsigned hashSize = GetHashSize((int)(unsigned)_checkSumAlgo);
+    if (hashSize)
+    {
+      /*
+      const CXmlItem *csItem = toc.FindSubTag_GetPtr("checksum");
+      if (csItem)
+      {
+        const int checkSumAlgo2 = Find_ChecksumId_for_Name(csItem->GetPropVal("style"));
+        UInt64 csSize, csOffset;
+        if (ParseUInt64(*csItem, "size", csSize) &&
+            ParseUInt64(*csItem, "offset", csOffset)  &&
+            csSize == hashSize &&
+            (unsigned)checkSumAlgo2 == _checkSumAlgo)
+          offset = csOffset;
+      }
+      */
+      CByteBuffer digest_from_arc(hashSize);
+      RINOK(InStream_SeekSet(stream, _dataStartPos + offset))
+      RINOK(ReadStream_FALSE(stream, digest_from_arc, hashSize))
+      if (!hashStream.CheckHash((int)(unsigned)_checkSumAlgo, digest_from_arc))
+        _toc_CrcError = true;
+    }
+  }
+    
+  if (!AddItem(toc, _files,
+      -1, // parent
+      0)) // level
     return S_FALSE;
 
   UInt64 totalPackSize = 0;
@@ -362,19 +656,25 @@ HRESULT CHandler::Open2(IInStream *stream)
   {
     const CFile &file = _files[i];
     file.UpdateTotalPackSize(totalPackSize);
-    if (file.Name == "Payload" || file.Name == "Content")
+    if (file.Parent == -1)
     {
-      _mainSubfile = (Int32)(int)i;
-      numMainFiles++;
+      if (file.Name == "Payload" || file.Name == "Content")
+      {
+        _mainSubfile = (Int32)(int)i;
+        numMainFiles++;
+      }
+      else if (file.Name == "PackageInfo")
+        _is_pkg = true;
     }
-    else if (file.Name == "PackageInfo")
-      _is_pkg = true;
   }
 
   if (numMainFiles > 1)
     _mainSubfile = -1;
-  
-  _phySize = _dataStartPos + totalPackSize;
+
+  const UInt64 k_PhySizeLim = (UInt64)1 << 62;
+  _phySize = (totalPackSize > k_PhySizeLim - _dataStartPos) ?
+      k_PhySizeLim :
+      _dataStartPos + totalPackSize;
 
   return S_OK;
 }
@@ -386,8 +686,7 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream,
   COM_TRY_BEGIN
   {
     Close();
-    if (Open2(stream) != S_OK)
-      return S_FALSE;
+    RINOK(Open2(stream))
     _inStream = stream;
   }
   return S_OK;
@@ -397,21 +696,26 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream,
 Z7_COM7F_IMF(CHandler::Close())
 {
   _phySize = 0;
+  _dataStartPos = 0;
   _inStream.Release();
   _files.Clear();
   _xmlLen = 0;
-  _xml.Free();
+  _xmlBuf.Free();
   _mainSubfile = -1;
   _is_pkg = false;
+  _toc_CrcError = false;
+  _checkSumAlgo = 0;
+  // CreationTime = 0;
+  CreationTime_String.Empty();
   return S_OK;
 }
 
 Z7_COM7F_IMF(CHandler::GetNumberOfItems(UInt32 *numItems))
 {
   *numItems = _files.Size()
-    #ifdef XAR_SHOW_RAW
+#ifdef XAR_SHOW_RAW
     + 1
-    #endif
+#endif
   ;
   return S_OK;
 }
@@ -443,40 +747,82 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
   NCOM::CPropVariant prop;
   switch (propID)
   {
-    case kpidHeadersSize: prop = _dataStartPos; break;
+    // case kpidHeadersSize: prop = _dataStartPos; break;
     case kpidPhySize: prop = _phySize; break;
     case kpidMainSubfile: if (_mainSubfile >= 0) prop = (UInt32)_mainSubfile; break;
     case kpidSubType: if (_is_pkg) prop = "pkg"; break;
     case kpidExtension: prop = _is_pkg ? "pkg" : "xar"; break;
+    case kpidCTime:
+    {
+      // it's local time. We can transfer it to UTC time, if we use FILETIME.
+      // TimeToProp(CreationTime, prop); break;
+      if (!CreationTime_String.IsEmpty())
+        prop = CreationTime_String;
+      break;
+    }
+    case kpidMethod:
+    {
+      AString s;
+      if (_checkSumAlgo < Z7_ARRAY_SIZE(k_ChecksumNames))
+        s = k_ChecksumNames[_checkSumAlgo];
+      else
+      {
+        s += "Checksum";
+        s.Add_UInt32(_checkSumAlgo);
+      }
+      prop = s;
+      break;
+    }
+    case kpidWarningFlags:
+    {
+      UInt32 v = 0;
+      if (_toc_CrcError) v |= kpv_ErrorFlags_CrcError;
+      prop = v;
+      break;
+    }
+    case kpidINode: prop = true; break;
+    case kpidIsTree: prop = true; break;
   }
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
 }
 
+
+/*
+inline UInt32 MY_dev_major(UInt64 dev)
+{
+  return ((UInt32)(dev >> 8) & (UInt32)0xfff) | ((UInt32)(dev >> 32) & ~(UInt32)0xfff);
+}
+inline UInt32 MY_dev_minor(UInt64 dev)
+{
+  return ((UInt32)(dev) & 0xff) | ((UInt32)(dev >> 12) & ~(UInt32)0xff);
+}
+*/
+
 Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *value))
 {
   COM_TRY_BEGIN
   NCOM::CPropVariant prop;
   
-  #ifdef XAR_SHOW_RAW
-  if (index == _files.Size())
+#ifdef XAR_SHOW_RAW
+  if (index >= _files.Size())
   {
     switch (propID)
     {
-      case kpidPath: prop = "[TOC].xml"; break;
+      case kpidName:
+      case kpidPath:
+        prop = "[TOC].xml"; break;
       case kpidSize:
       case kpidPackSize: prop = (UInt64)_xmlLen; break;
     }
   }
   else
-  #endif
+#endif
   {
     const CFile &item = _files[index];
     switch (propID)
     {
-      case kpidMethod: Utf8StringToProp(item.Method, prop); break;
-
       case kpidPath:
       {
         AString path;
@@ -486,37 +832,98 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
           const CFile &item2 = _files[cur];
           if (!path.IsEmpty())
             path.InsertAtFront(CHAR_PATH_SEPARATOR);
+// #define XAR_EMPTY_NAME_REPLACEMENT "[]"
           if (item2.Name.IsEmpty())
-            path.Insert(0, "unknown");
+          {
+            AString s('[');
+            s.Add_UInt32(cur);
+            s.Add_Char(']');
+            path.Insert(0, s);
+          }
           else
             path.Insert(0, item2.Name);
-          cur = (unsigned)item2.Parent;
           if (item2.Parent < 0)
             break;
+          cur = (unsigned)item2.Parent;
         }
-
         Utf8StringToProp(path, prop);
         break;
       }
-      
+
+      case kpidName:
+      {
+        if (item.Name.IsEmpty())
+        {
+          AString s('[');
+          s.Add_UInt32(index);
+          s.Add_Char(']');
+          prop = s;
+        }
+        else
+          Utf8StringToProp(item.Name, prop);
+        break;
+      }
+
       case kpidIsDir: prop = item.IsDir; break;
-      case kpidSize: if (!item.IsDir) prop = item.Size; break;
-      case kpidPackSize: if (!item.IsDir) prop = item.PackSize; break;
       
+      case kpidSize:     if (item.HasData && !item.IsDir) prop = item.Size; break;
+      case kpidPackSize: if (item.HasData && !item.IsDir) prop = item.PackSize; break;
+
+      case kpidMethod:
+      {
+        if (item.HasData)
+        {
+          AString s = item.Method;
+          item.extracted_checksum.AddNameToString(s);
+          item.archived_checksum.AddNameToString(s);
+          Utf8StringToProp(s, prop);
+        }
+        break;
+      }
+        
       case kpidMTime: TimeToProp(item.MTime, prop); break;
       case kpidCTime: TimeToProp(item.CTime, prop); break;
       case kpidATime: TimeToProp(item.ATime, prop); break;
+      
       case kpidPosixAttrib:
-        if (item.ModeDefined)
+        if (item.Mode_Defined)
         {
           UInt32 mode = item.Mode;
           if ((mode & MY_LIN_S_IFMT) == 0)
-            mode |= (item.IsDir ? MY_LIN_S_IFDIR : MY_LIN_S_IFREG);
+            mode |= (
+                item.Is_SymLink ? MY_LIN_S_IFLNK :
+                item.IsDir      ? MY_LIN_S_IFDIR :
+                                  MY_LIN_S_IFREG);
           prop = mode;
         }
         break;
-      case kpidUser: Utf8StringToProp(item.User, prop); break;
+      
+      case kpidType:  Utf8StringToProp(item.Type, prop); break;
+      case kpidUser:  Utf8StringToProp(item.User, prop); break;
       case kpidGroup: Utf8StringToProp(item.Group, prop); break;
+      case kpidSymLink: if (item.Is_SymLink) Utf8StringToProp(item.Link, prop); break;
+      
+      case kpidUserId:  if (item.UserId_Defined)  prop = item.UserId;   break;
+      case kpidGroupId: if (item.GroupId_Defined) prop = item.GroupId;  break;
+      case kpidINode:   if (item.INode_Defined)   prop = item.INode;    break;
+      case kpidId:      if (item.Id_Defined)      prop = item.Id;       break;
+      // Utf8StringToProp(item.Id, prop);
+      /*
+      case kpidDeviceMajor: if (item.Device_Defined) prop = (UInt32)MY_dev_major(item.Device);  break;
+      case kpidDeviceMinor: if (item.Device_Defined) prop = (UInt32)MY_dev_minor(item.Device);  break;
+      case kpidLinkType:
+        if (!item.LinkType.IsEmpty())
+          Utf8StringToProp(item.LinkType, prop);
+        break;
+      case kpidLinkFrom:
+        if (!item.LinkFrom.IsEmpty())
+          Utf8StringToProp(item.LinkFrom, prop);
+        break;
+      */
+      case kpidOffset:
+        if (item.HasData)
+          prop = _dataStartPos + item.Offset;
+        break;
     }
   }
   prop.Detach(value);
@@ -524,75 +931,170 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   COM_TRY_END
 }
 
+
+// for debug:
+// #define Z7_XAR_SHOW_CHECKSUM_PACK
+
+#ifdef Z7_XAR_SHOW_CHECKSUM_PACK
+enum
+{
+  kpidChecksumPack = kpidUserDefined
+};
+#endif
+
+static const Byte kRawProps[] =
+{
+  kpidChecksum
+#ifdef Z7_XAR_SHOW_CHECKSUM_PACK
+  , kpidCRC // instead of kpidUserDefined / kpidCRC
+#endif
+};
+
+Z7_COM7F_IMF(CHandler::GetNumRawProps(UInt32 *numProps))
+{
+  *numProps = Z7_ARRAY_SIZE(kRawProps);
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CHandler::GetRawPropInfo(UInt32 index, BSTR *name, PROPID *propID))
+{
+  *propID = kRawProps[index];
+  *name = NULL;
+
+#ifdef Z7_XAR_SHOW_CHECKSUM_PACK
+  if (index != 0)
+  {
+    *propID = kpidChecksumPack;
+    *name = NWindows::NCOM::AllocBstrFromAscii("archived-checksum");
+  }
+#endif
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CHandler::GetParent(UInt32 index, UInt32 *parent, UInt32 *parentType))
+{
+  *parentType = NParentType::kDir;
+  *parent = (UInt32)(Int32)-1;
+#ifdef XAR_SHOW_RAW
+  if (index >= _files.Size())
+    return S_OK;
+#endif
+  {
+    const CFile &item = _files[index];
+    *parent = (UInt32)(Int32)item.Parent;
+  }
+  return S_OK;
+}
+
+
+Z7_COM7F_IMF(CHandler::GetRawProp(UInt32 index, PROPID propID, const void **data, UInt32 *dataSize, UInt32 *propType))
+{
+  *data = NULL;
+  *dataSize = 0;
+  *propType = 0;
+
+  // COM_TRY_BEGIN
+  NCOM::CPropVariant prop;
+
+  if (propID == kpidChecksum)
+  {
+#ifdef XAR_SHOW_RAW
+    if (index >= _files.Size())
+    {
+      // case kpidPath: prop = "[TOC].xml"; break;
+    }
+    else
+#endif
+    {
+      const CFile &item = _files[index];
+      const size_t size = item.extracted_checksum.Data.Size();
+      if (size != 0)
+      {
+        *dataSize = (UInt32)size;
+        *propType = NPropDataType::kRaw;
+        *data = item.extracted_checksum.Data;
+      }
+    }
+  }
+
+#ifdef Z7_XAR_SHOW_CHECKSUM_PACK
+  if (propID == kpidChecksumPack)
+  {
+#ifdef XAR_SHOW_RAW
+    if (index >= _files.Size())
+    {
+      // we can show digest check sum here
+    }
+    else
+#endif
+    {
+      const CFile &item = _files[index];
+      const size_t size = (UInt32)item.archived_checksum.Data.Size();
+      if (size != 0)
+      {
+        *dataSize = (UInt32)size;
+        *propType = NPropDataType::kRaw;
+        *data = item.archived_checksum.Data;
+      }
+    }
+  }
+#endif
+  return S_OK;
+}
+
+
+
+
 Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     Int32 testMode, IArchiveExtractCallback *extractCallback))
 {
   COM_TRY_BEGIN
   const bool allFilesMode = (numItems == (UInt32)(Int32)-1);
   if (allFilesMode)
-    numItems = _files.Size();
+    numItems = _files.Size()
+#ifdef XAR_SHOW_RAW
+    + 1
+#endif
+    ;
   if (numItems == 0)
     return S_OK;
   UInt64 totalSize = 0;
   UInt32 i;
   for (i = 0; i < numItems; i++)
   {
-    UInt32 index = (allFilesMode ? i : indices[i]);
-    #ifdef XAR_SHOW_RAW
-    if (index == _files.Size())
+    const UInt32 index = allFilesMode ? i : indices[i];
+#ifdef XAR_SHOW_RAW
+    if (index >= _files.Size())
       totalSize += _xmlLen;
     else
-    #endif
+#endif
       totalSize += _files[index].Size;
   }
-  extractCallback->SetTotal(totalSize);
+  RINOK(extractCallback->SetTotal(totalSize))
 
-  UInt64 currentPackTotal = 0;
-  UInt64 currentUnpTotal = 0;
-  UInt64 currentPackSize = 0;
-  UInt64 currentUnpSize = 0;
-
-  const UInt32 kZeroBufSize = (1 << 14);
-  CByteBuffer zeroBuf(kZeroBufSize);
-  memset(zeroBuf, 0, kZeroBufSize);
-  
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  NCompress::NZlib::CDecoder *zlibCoderSpec = new NCompress::NZlib::CDecoder();
-  CMyComPtr<ICompressCoder> zlibCoder = zlibCoderSpec;
-  
-  NCompress::NBZip2::CDecoder *bzip2CoderSpec = new NCompress::NBZip2::CDecoder();
-  CMyComPtr<ICompressCoder> bzip2Coder = bzip2CoderSpec;
-
-  NCompress::NDeflate::NDecoder::CCOMCoder *deflateCoderSpec = new NCompress::NDeflate::NDecoder::CCOMCoder();
-  CMyComPtr<ICompressCoder> deflateCoder = deflateCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-
-  CLimitedSequentialInStream *inStreamSpec = new CLimitedSequentialInStream;
-  CMyComPtr<ISequentialInStream> inStream(inStreamSpec);
-  inStreamSpec->SetStream(_inStream);
-
+  CInStreamWithHash inHashStream;
+  CMyComPtr2_Create<ISequentialOutStream, COutStreamWithSha1> outStreamSha1;
+  CMyComPtr2_Create<ISequentialOutStream, COutStreamWithSha256> outStreamSha256;
+  CMyComPtr2_Create<ISequentialOutStream, CLimitedSequentialOutStream> outStreamLim;
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  CMyComPtr2_Create<ICompressCoder, NCompress::NZlib::CDecoder> zlibCoder;
+  CMyComPtr2_Create<ICompressCoder, NCompress::NBZip2::CDecoder> bzip2Coder;
+  bzip2Coder->FinishMode = true;
   
-  CLimitedSequentialOutStream *outStreamLimSpec = new CLimitedSequentialOutStream;
-  CMyComPtr<ISequentialOutStream> outStream(outStreamLimSpec);
+  UInt64 cur_PackSize, cur_UnpSize;
 
-  COutStreamWithSha1 *outStreamSha1Spec = new COutStreamWithSha1;
+  for (i = 0;; i++,
+      lps->InSize += cur_PackSize,
+      lps->OutSize += cur_UnpSize)
   {
-    CMyComPtr<ISequentialOutStream> outStreamSha1(outStreamSha1Spec);
-    outStreamLimSpec->SetStream(outStreamSha1);
-  }
-
-  for (i = 0; i < numItems; i++, currentPackTotal += currentPackSize, currentUnpTotal += currentUnpSize)
-  {
-    lps->InSize = currentPackTotal;
-    lps->OutSize = currentUnpTotal;
-    currentPackSize = 0;
-    currentUnpSize = 0;
+    cur_PackSize = 0;
+    cur_UnpSize = 0;
     RINOK(lps->SetCur())
+    if (i >= numItems)
+      break;
+
     CMyComPtr<ISequentialOutStream> realOutStream;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
@@ -606,6 +1108,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       if (item.IsDir)
       {
         RINOK(extractCallback->PrepareOperation(askMode))
+        realOutStream.Release();
         RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
         continue;
       }
@@ -615,39 +1118,63 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       continue;
     RINOK(extractCallback->PrepareOperation(askMode))
 
-    outStreamSha1Spec->SetStream(realOutStream);
-    realOutStream.Release();
-
     Int32 opRes = NExtract::NOperationResult::kOK;
-    #ifdef XAR_SHOW_RAW
-    if (index == _files.Size())
+
+#ifdef XAR_SHOW_RAW
+    if (index >= _files.Size())
     {
-      outStreamSha1Spec->Init(false);
-      outStreamLimSpec->Init(_xmlLen);
-      RINOK(WriteStream(outStream, _xml, _xmlLen))
-      currentPackSize = currentUnpSize = _xmlLen;
+      cur_PackSize = cur_UnpSize = _xmlLen;
+      if (realOutStream)
+        RINOK(WriteStream(realOutStream, _xmlBuf, _xmlLen))
+      realOutStream.Release();
     }
     else
-    #endif
+#endif
     {
       const CFile &item = _files[index];
-      if (item.HasData)
+      if (!item.HasData)
+        realOutStream.Release();
+      else
       {
-        currentPackSize = item.PackSize;
-        currentUnpSize = item.Size;
+        cur_PackSize = item.PackSize;
+        cur_UnpSize = item.Size;
         
         RINOK(InStream_SeekSet(_inStream, _dataStartPos + item.Offset))
-        inStreamSpec->Init(item.PackSize);
-        outStreamSha1Spec->Init(item.Sha1IsDefined);
-        outStreamLimSpec->Init(item.Size);
+
+        inHashStream.SetStreamAndInit(_inStream, item.archived_checksum.AlgoNumber);
+        inHashStream.inStreamLim->Init(item.PackSize);
+
+        const int checksum_method = item.extracted_checksum.AlgoNumber;
+        if (checksum_method == XAR_CKSUM_SHA1)
+        {
+          outStreamLim->SetStream(outStreamSha1);
+          outStreamSha1->SetStream(realOutStream);
+          outStreamSha1->Init();
+        }
+        else if (checksum_method == XAR_CKSUM_SHA256)
+        {
+          outStreamLim->SetStream(outStreamSha256);
+          outStreamSha256->SetStream(realOutStream);
+          outStreamSha256->Init();
+        }
+        else
+          outStreamLim->SetStream(realOutStream);
+
+        realOutStream.Release();
+
+        // outStreamSha1->Init(item.Sha1IsDefined);
+
+        outStreamLim->Init(item.Size);
         HRESULT res = S_OK;
         
         ICompressCoder *coder = NULL;
         if (item.IsCopyMethod())
+        {
           if (item.PackSize == item.Size)
             coder = copyCoder;
           else
             opRes = NExtract::NOperationResult::kUnsupportedMethod;
+        }
         else if (item.Method == METHOD_NAME_ZLIB)
           coder = zlibCoder;
         else if (item.Method == "bzip2")
@@ -656,11 +1183,11 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           opRes = NExtract::NOperationResult::kUnsupportedMethod;
         
         if (coder)
-          res = coder->Code(inStream, outStream, NULL, NULL, progress);
+          res = coder->Code(inHashStream.inStreamLim, outStreamLim, NULL, &item.Size, lps);
         
         if (res != S_OK)
         {
-          if (!outStreamLimSpec->IsFinishedOK())
+          if (!outStreamLim->IsFinishedOK())
             opRes = NExtract::NOperationResult::kDataError;
           else if (res != S_FALSE)
             return res;
@@ -670,27 +1197,38 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
         if (opRes == NExtract::NOperationResult::kOK)
         {
-          if (outStreamLimSpec->IsFinishedOK() &&
-              outStreamSha1Spec->GetSize() == item.Size)
+          if (outStreamLim->IsFinishedOK())
           {
-            if (!outStreamLimSpec->IsFinishedOK())
-            {
-              opRes = NExtract::NOperationResult::kDataError;
-            }
-            else if (item.Sha1IsDefined)
+            if (checksum_method == XAR_CKSUM_SHA1)
             {
               Byte digest[SHA1_DIGEST_SIZE];
-              outStreamSha1Spec->Final(digest);
-              if (memcmp(digest, item.Sha1, SHA1_DIGEST_SIZE) != 0)
+              outStreamSha1->Final(digest);
+              if (memcmp(digest, item.extracted_checksum.Data, SHA1_DIGEST_SIZE) != 0)
                 opRes = NExtract::NOperationResult::kCRCError;
             }
+            else if (checksum_method == XAR_CKSUM_SHA256)
+            {
+              Byte digest[SHA256_DIGEST_SIZE];
+              outStreamSha256->Final(digest);
+              if (memcmp(digest, item.extracted_checksum.Data, SHA256_DIGEST_SIZE) != 0)
+                opRes = NExtract::NOperationResult::kCRCError;
+            }
+            if (opRes == NExtract::NOperationResult::kOK)
+              if (!inHashStream.CheckHash(
+                    item.archived_checksum.AlgoNumber,
+                    item.archived_checksum.Data))
+                opRes = NExtract::NOperationResult::kCRCError;
           }
           else
             opRes = NExtract::NOperationResult::kDataError;
         }
+        if (checksum_method == XAR_CKSUM_SHA1)
+          outStreamSha1->ReleaseStream();
+        else if (checksum_method == XAR_CKSUM_SHA256)
+          outStreamSha256->ReleaseStream();
       }
+      outStreamLim->ReleaseStream();
     }
-    outStreamSha1Spec->ReleaseStream();
     RINOK(extractCallback->SetOperationResult(opRes))
   }
   return S_OK;
@@ -701,14 +1239,14 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
 {
   *stream = NULL;
   COM_TRY_BEGIN
-  #ifdef XAR_SHOW_RAW
-  if (index == _files.Size())
+#ifdef XAR_SHOW_RAW
+  if (index >= _files.Size())
   {
-    Create_BufInStream_WithNewBuffer(_xml, _xmlLen, stream);
+    Create_BufInStream_WithNewBuffer(_xmlBuf, _xmlLen, stream);
     return S_OK;
   }
   else
-  #endif
+#endif
   {
     const CFile &item = _files[index];
     if (item.HasData && item.IsCopyMethod() && item.PackSize == item.Size)
@@ -718,7 +1256,12 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
   COM_TRY_END
 }
 
-static const Byte k_Signature[] = { 'x', 'a', 'r', '!', 0, 0x1C };
+// 0x1c == 28 is expected header size value for most archives.
+// but we want to support another (rare case) headers sizes.
+// so we must reduce signature to 4 or 5 bytes.
+static const Byte k_Signature[] =
+//  { 'x', 'a', 'r', '!', 0, 0x1C, 0 };
+    { 'x', 'a', 'r', '!', 0 };
 
 REGISTER_ARC_I(
   "Xar", "xar pkg xip", NULL, 0xE1,

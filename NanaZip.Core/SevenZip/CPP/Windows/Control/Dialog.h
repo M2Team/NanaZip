@@ -8,6 +8,10 @@
 namespace NWindows {
 namespace NControl {
 
+#ifndef IDCONTINUE
+#define IDCONTINUE 11
+#endif
+
 class CDialog: public CWindow
 {
   // Z7_CLASS_NO_COPY(CDialog)
@@ -64,12 +68,24 @@ public:
     return window.GetText(s);
   }
 
+/*
   bool SetItemInt(unsigned itemID, UINT value, bool isSigned)
     { return BOOLToBool(SetDlgItemInt(_window, (int)itemID, value, BoolToBOOL(isSigned))); }
+*/
+  bool SetItemUInt(unsigned itemID, UINT value)
+    { return BOOLToBool(SetDlgItemInt(_window, (int)itemID, value, FALSE)); }
+/*
   bool GetItemInt(unsigned itemID, bool isSigned, UINT &value)
   {
     BOOL result;
     value = GetDlgItemInt(_window, (int)itemID, &result, BoolToBOOL(isSigned));
+    return BOOLToBool(result);
+  }
+*/
+  bool GetItemUInt(unsigned itemID, UINT &value)
+  {
+    BOOL result;
+    value = GetDlgItemInt(_window, (int)itemID, &result, FALSE);
     return BOOLToBool(result);
   }
 
@@ -126,6 +142,7 @@ public:
 
   virtual bool OnButtonClicked(unsigned buttonID, HWND buttonHWND);
   virtual void OnOK() {}
+  virtual void OnContinue() {}
   virtual void OnCancel() {}
   virtual void OnClose() {}
   virtual bool OnNotify(UINT /* controlID */, LPNMHDR /* lParam */) { return false; }
@@ -157,6 +174,7 @@ public:
   bool Create(LPCWSTR templateName, HWND parentWindow);
   #endif
   virtual void OnOK() Z7_override { Destroy(); }
+  virtual void OnContinue() Z7_override { Destroy(); }
   virtual void OnCancel() Z7_override { Destroy(); }
   virtual void OnClose() Z7_override { Destroy(); }
 };
@@ -172,6 +190,7 @@ public:
 
   bool End(INT_PTR result) { return BOOLToBool(::EndDialog(_window, result)); }
   virtual void OnOK() Z7_override { End(IDOK); }
+  virtual void OnContinue() Z7_override { End(IDCONTINUE); }
   virtual void OnCancel() Z7_override { End(IDCANCEL); }
   virtual void OnClose() Z7_override { End(IDCLOSE); }
 };

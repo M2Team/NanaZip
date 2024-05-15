@@ -26,6 +26,8 @@
 
 #define Get16(p) GetUi16(p)
 #define Get32(p) GetUi32(p)
+#define Get16a(p) GetUi16a(p)
+#define Get32a(p) GetUi32a(p)
 
 #define PRF(x) /* x */
 
@@ -57,6 +59,7 @@ struct CHeader
   UInt32 NumHiddenSectors;
 
   bool VolFieldsDefined;
+  bool HeadersWarning;
   
   UInt32 VolId;
   // Byte VolName[11];
@@ -124,6 +127,8 @@ bool CHeader::Parse(const Byte *p)
 {
   if (p[0x1FE] != 0x55 || p[0x1FF] != 0xAA)
     return false;
+
+  HeadersWarning = false;
 
   int codeOffset = 0;
   switch (p[0])
@@ -259,8 +264,22 @@ bool CHeader::Parse(const Byte *p)
   }
 
   FatSize = numClusters + 2;
-  if (FatSize > BadCluster || CalcFatSizeInSectors() > NumFatSectors)
+  if (FatSize > BadCluster)
     return false;
+  if (CalcFatSizeInSectors() > NumFatSectors)
+  {
+    /* some third-party program can create such FAT image, where
+       size of FAT table (NumFatSectors from headers) is smaller than
+       required value that is calculated from calculated (FatSize) value.
+       Another FAT unpackers probably ignore that error.
+       v23.02: we also ignore that error, and
+       we recalculate (FatSize) value from (NumFatSectors).
+       New (FatSize) will be smaller than original "full" (FatSize) value.
+       So we will have some unused clusters at the end of archive.
+    */
+    FatSize = (UInt32)(((UInt64)NumFatSectors << (3 + SectorSizeLog)) / NumFatBits);
+    HeadersWarning = true;
+  }
   return true;
 }
 
@@ -410,7 +429,7 @@ HRESULT CDatabase::OpenProgressFat(bool changeTotal)
     return S_OK;
   if (changeTotal)
   {
-    UInt64 numTotalBytes = (Header.CalcFatSizeInSectors() << Header.SectorSizeLog) +
+    const UInt64 numTotalBytes = (Header.CalcFatSizeInSectors() << Header.SectorSizeLog) +
         ((UInt64)(Header.FatSize - NumFreeClusters) << Header.ClusterSizeLog);
     RINOK(OpenCallback->SetTotal(NULL, &numTotalBytes))
   }
@@ -494,7 +513,7 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
           return S_FALSE;
         PRF(printf("\nCluster = %4X", cluster));
         RINOK(SeekToCluster(cluster))
-        UInt32 newCluster = Fat[cluster];
+        const UInt32 newCluster = Fat[cluster];
         if ((newCluster & kFatItemUsedByDirMask) != 0)
           return S_FALSE;
         Fat[cluster] |= kFatItemUsedByDirMask;
@@ -650,15 +669,18 @@ HRESULT CDatabase::Open()
 
     if (Header.IsFat32())
     {
-      SeekToSector(Header.FsInfoSector);
-      RINOK(ReadStream_FALSE(InStream, buf, kHeaderSize))
-      if (buf[0x1FE] != 0x55 || buf[0x1FF] != 0xAA)
-        return S_FALSE;
-      if (Get32(buf) == 0x41615252 && Get32(buf + 484) == 0x61417272)
+      if (((UInt32)Header.FsInfoSector << Header.SectorSizeLog) + kHeaderSize <= fileSize
+          && SeekToSector(Header.FsInfoSector) == S_OK
+          && ReadStream_FALSE(InStream, buf, kHeaderSize) == S_OK
+          && 0xaa550000 == Get32(buf + 508)
+          && 0x41615252 == Get32(buf)
+          && 0x61417272 == Get32(buf + 484))
       {
         NumFreeClusters = Get32(buf + 488);
         numFreeClustersDefined = (NumFreeClusters <= Header.FatSize);
       }
+      else
+        Header.HeadersWarning = true;
     }
   }
 
@@ -675,30 +697,35 @@ HRESULT CDatabase::Open()
   {
     const UInt32 kBufSize = (1 << 15);
     byteBuf.Alloc(kBufSize);
-    for (UInt32 i = 0; i < Header.FatSize;)
+    for (UInt32 i = 0;;)
     {
       UInt32 size = Header.FatSize - i;
+      if (size == 0)
+        break;
       const UInt32 kBufSize32 = kBufSize / 4;
       if (size > kBufSize32)
         size = kBufSize32;
-      UInt32 readSize = Header.SizeToSectors(size * 4) << Header.SectorSizeLog;
+      const UInt32 readSize = Header.SizeToSectors(size * 4) << Header.SectorSizeLog;
       RINOK(ReadStream_FALSE(InStream, byteBuf, readSize))
       NumCurUsedBytes += readSize;
 
       const UInt32 *src = (const UInt32 *)(const void *)(const Byte *)byteBuf;
       UInt32 *dest = Fat + i;
+      const UInt32 *srcLim = src + size;
       if (numFreeClustersDefined)
-        for (UInt32 j = 0; j < size; j++)
-          dest[j] = Get32(src + j) & 0x0FFFFFFF;
+        do
+          *dest++ = Get32a(src) & 0x0FFFFFFF;
+        while (++src != srcLim);
       else
       {
         UInt32 numFreeClusters = 0;
-        for (UInt32 j = 0; j < size; j++)
+        do
         {
-          UInt32 v = Get32(src + j) & 0x0FFFFFFF;
+          const UInt32 v = Get32a(src) & 0x0FFFFFFF;
+          *dest++ = v;
           numFreeClusters += (UInt32)(v - 1) >> 31;
-          dest[j] = v;
         }
+        while (++src != srcLim);
         NumFreeClusters += numFreeClusters;
       }
       i += size;
@@ -715,11 +742,11 @@ HRESULT CDatabase::Open()
     byteBuf.Alloc(kBufSize);
     Byte *p = byteBuf;
     RINOK(ReadStream_FALSE(InStream, p, kBufSize))
-    UInt32 fatSize = Header.FatSize;
+    const UInt32 fatSize = Header.FatSize;
     UInt32 *fat = &Fat[0];
     if (Header.NumFatBits == 16)
       for (UInt32 j = 0; j < fatSize; j++)
-        fat[j] = Get16(p + j * 2);
+        fat[j] = Get16a(p + j * 2);
     else
       for (UInt32 j = 0; j < fatSize; j++)
         fat[j] = (Get16(p + j * 3 / 2) >> ((j & 1) << 2)) & 0xFFF;
@@ -773,7 +800,7 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
   streamSpec->BlockSizeLog = Header.ClusterSizeLog;
   streamSpec->Size = item.Size;
 
-  UInt32 numClusters = Header.GetNumClusters(item.Size);
+  const UInt32 numClusters = Header.GetNumClusters(item.Size);
   streamSpec->Vector.ClearAndReserve(numClusters);
   UInt32 cluster = item.Cluster;
   UInt32 size = item.Size;
@@ -785,7 +812,7 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
   }
   else
   {
-    UInt32 clusterSize = Header.ClusterSize();
+    const UInt32 clusterSize = Header.ClusterSize();
     for (;; size -= clusterSize)
     {
       if (!Header.IsValidCluster(cluster))
@@ -907,6 +934,14 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     // case kpidVolName: if (Header.VolFieldsDefined) STRING_TO_PROP(Header.VolName, prop); break;
     // case kpidFileSysType: if (Header.VolFieldsDefined) STRING_TO_PROP(Header.FileSys, prop); break;
     // case kpidHiddenSectors: prop = Header.NumHiddenSectors; break;
+    case kpidWarningFlags:
+    {
+      UInt32 v = 0;
+      if (Header.HeadersWarning) v |= kpv_ErrorFlags_HeadersError;
+      if (v != 0)
+        prop = v;
+      break;
+    }
   }
   prop.Detach(value);
   return S_OK;

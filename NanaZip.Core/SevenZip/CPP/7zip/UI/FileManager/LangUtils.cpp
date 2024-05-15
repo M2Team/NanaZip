@@ -66,6 +66,10 @@ void LangSetDlgItemText(HWND dialog, UInt32 controlID, UInt32 langID)
   }
 }
 
+#ifndef IDCONTINUE
+#define IDCONTINUE 11
+#endif
+
 static const CIDLangPair kLangPairs[] =
 {
   { IDOK,     401 },
@@ -73,7 +77,8 @@ static const CIDLangPair kLangPairs[] =
   { IDYES,    406 },
   { IDNO,     407 },
   { IDCLOSE,  408 },
-  { IDHELP,   409 }
+  { IDHELP,   409 },
+  { IDCONTINUE, 411 }
 };
 
 
@@ -109,7 +114,7 @@ void LangSetDlgItems_Colon(HWND dialog, const UInt32 *ids, unsigned numItems)
     {
       CWindow window(GetDlgItem(dialog, (int)id));
       UString s2 = s;
-      s2 += ':';
+      s2.Add_Colon();
       window.SetText(s2);
     }
   }
@@ -173,7 +178,7 @@ void LangString_OnlyFromLangFile(UInt32 langID, UString &dest)
 
 static const char * const kLangs =
   "ar.bg.ca.zh.-tw.-cn.cs.da.de.el.en.es.fi.fr.he.hu.is."
-  "it.ja.ko.nl.no.=nb.=nn.pl.pt.-br.rm.ro.ru.sr.=hr.-spl.-spc.sk.sq.sv.th.tr."
+  "it.ja.ko.nl.no.=nb.=nn.pl.pt.-br.rm.ro.ru.sr.=hr.-spl.-spc.=hr.=bs.sk.sq.sv.th.tr."
   "ur.id.uk.be.sl.et.lv.lt.tg.fa.vi.hy.az.eu.hsb.mk."
   "st.ts.tn.ve.xh.zu.af.ka.fo.hi.mt.se.ga.yi.ms.kk."
   "ky.sw.tk.uz.-latn.-cyrl.tt.bn.pa.-in.gu.or.ta.te.kn.ml.as.mr.sa."
@@ -208,7 +213,7 @@ static void FindShortNames(UInt32 primeLang, AStringVector &names)
           p++;
       }
       while (p != p2)
-        s += (char)(Byte)*p++;
+        s.Add_Char((char)(Byte)*p++);
       names.Add(s);
     }
     p = p2 + 1;
@@ -248,10 +253,14 @@ void Lang_GetShortNames_for_DefaultLang(AStringVector &names, unsigned &subLang)
 {
   names.Clear();
   subLang = 0;
-  const LANGID sysLang = GetSystemDefaultLangID(); // "Language for non-Unicode programs" in XP64
-  const LANGID userLang = GetUserDefaultLangID(); // "Standards and formats" language in XP64
+  // Region / Administative / Language for non-Unicode programs:
+  const LANGID sysLang = GetSystemDefaultLangID();
 
-  if (sysLang != userLang)
+  // Region / Formats / Format:
+  const LANGID userLang = GetUserDefaultLangID();
+
+  if (PRIMARYLANGID(sysLang) !=
+      PRIMARYLANGID(userLang))
     return;
   const LANGID langID = userLang;
 

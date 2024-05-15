@@ -157,7 +157,7 @@ HRESULT CEncoder::SetCoderProp(PROPID propID, const PROPVARIANT &prop)
           const int filterId = FilterIdFromName(prop.bstrVal);
           if (filterId < 0 /* || filterId == XZ_ID_LZMA2 */)
             return E_INVALIDARG;
-          id32 = (unsigned)filterId;
+          id32 = (UInt32)(unsigned)filterId;
         }
       }
       

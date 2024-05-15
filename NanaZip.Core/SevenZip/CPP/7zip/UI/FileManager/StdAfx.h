@@ -7,23 +7,7 @@
 #pragma warning(disable : 4464) // relative include path contains '..'
 #endif
 
-#include "../../../../C/Compiler.h"
-
-Z7_DIAGNOSCTIC_IGNORE_BEGIN_RESERVED_MACRO_IDENTIFIER
-#ifndef _WIN32_WINNT
-// #define _WIN32_WINNT 0x0400
-#define _WIN32_WINNT 0x0500
-// #define _WIN32_WINNT 0x0600
-// #define _WIN32_WINNT 0x0A00
-#endif
-#ifndef WINVER
-#define WINVER _WIN32_WINNT
-#endif
-// #define _WIN32_IE 0x400 // for debug
-Z7_DIAGNOSCTIC_IGNORE_END_RESERVED_MACRO_IDENTIFIER
-
 #include "../../../Common/Common.h"
-#include "../../../Common/MyWindows.h"
 
 #endif
 

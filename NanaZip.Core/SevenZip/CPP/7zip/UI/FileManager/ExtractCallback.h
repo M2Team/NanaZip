@@ -103,13 +103,14 @@ Z7_CLASS_IMP_NOQIB_1(
   unsigned _numFlushed;
   bool _fileIsOpen;
   bool _fileMode;
-  COutFileStream *_outFileStreamSpec;
-  CMyComPtr<ISequentialOutStream> _outFileStream;
+  CMyComPtr2<ISequentialOutStream, COutFileStream> _outFileStream;
 public:
   CObjectVector<CVirtFile> Files;
   UInt64 MaxTotalAllocSize;
   FString DirPrefix;
- 
+  CByteBuffer ZoneBuf;
+
+
   CVirtFile &AddNewFile()
   {
     if (!Files.IsEmpty())
@@ -143,7 +144,9 @@ public:
 
   size_t GetMemStreamWrittenSize() const { return _pos; }
 
-  CVirtFileSystem(): _outFileStreamSpec(NULL), MaxTotalAllocSize((UInt64)0 - 1) {}
+  CVirtFileSystem():
+    MaxTotalAllocSize((UInt64)0 - 1)
+    {}
 
   void Init()
   {
@@ -161,6 +164,8 @@ public:
 
 #endif
   
+
+
 class CExtractCallbackImp Z7_final:
   public IFolderArchiveExtractCallback,
   /* IExtractCallbackUI:
@@ -174,6 +179,7 @@ class CExtractCallbackImp Z7_final:
   public IFolderOperationsExtractCallback,
   public IFolderExtractToStreamCallback,
   public ICompressProgressInfo,
+  public IArchiveRequestMemoryUseCallback,
  #endif
  #ifndef Z7_NO_CRYPTO
   public ICryptoGetTextPassword,
@@ -186,6 +192,7 @@ class CExtractCallbackImp Z7_final:
   Z7_COM_QI_ENTRY(IFolderOperationsExtractCallback)
   Z7_COM_QI_ENTRY(IFolderExtractToStreamCallback)
   Z7_COM_QI_ENTRY(ICompressProgressInfo)
+  Z7_COM_QI_ENTRY(IArchiveRequestMemoryUseCallback)
  #endif
  #ifndef Z7_NO_CRYPTO
   Z7_COM_QI_ENTRY(ICryptoGetTextPassword)
@@ -202,65 +209,70 @@ class CExtractCallbackImp Z7_final:
   Z7_IFACE_COM7_IMP(IFolderOperationsExtractCallback)
   Z7_IFACE_COM7_IMP(IFolderExtractToStreamCallback)
   Z7_IFACE_COM7_IMP(ICompressProgressInfo)
+  Z7_IFACE_COM7_IMP(IArchiveRequestMemoryUseCallback)
  #endif
  #ifndef Z7_NO_CRYPTO
   Z7_IFACE_COM7_IMP(ICryptoGetTextPassword)
  #endif
 
-
-  UString _currentArchivePath;
   bool _needWriteArchivePath;
-
   bool _isFolder;
-  UString _currentFilePath;
-  UString _filePath;
+  bool _totalFilesDefined;
+  bool _totalBytesDefined;
+public:
+  bool MultiArcMode;
+  bool ProcessAltStreams;
+  bool StreamMode;
+  bool ThereAreMessageErrors;
+#ifndef Z7_NO_CRYPTO
+  bool PasswordIsDefined;
+  bool PasswordWasAsked;
+#endif
 
- #ifndef Z7_SFX
+private:
+#ifndef Z7_SFX
   bool _needUpdateStat;
   bool _newVirtFileWasAdded;
   bool _isAltStream;
-  bool _curSize_Defined;
-  UInt64 _curSize;
   // bool _extractMode;
   // bool _testMode;
-  bool _hashStreamWasUsed;
-  COutStreamWithHash *_hashStreamSpec;
-  CMyComPtr<ISequentialOutStream> _hashStream;
-  IHashCalc *_hashCalc; // it's for stat in Test operation
- #endif
+  bool _hashStream_WasUsed;
+  bool _curSize_Defined;
+  bool NeedAddFile;
 
-  HRESULT SetCurrentFilePath2(const wchar_t *filePath);
-  void AddError_Message(LPCWSTR message);
-  HRESULT MessageError(const char *message, const FString &path);
-  void Add_ArchiveName_Error();
+  bool _remember;
+  bool _skipArc;
+#endif
+
+  UString _currentArchivePath;
+  UString _currentFilePath;
+  UString _filePath;
+
+#ifndef Z7_SFX
+  UInt64 _curSize;
+  CMyComPtr2<ISequentialOutStream, COutStreamWithHash> _hashStream;
+  IHashCalc *_hashCalc; // it's for stat in Test operation
+#endif
 
 public:
+  CProgressDialog *ProgressDialog;
 
-  #ifndef Z7_SFX
+#ifndef Z7_SFX
   CVirtFileSystem *VirtFileSystemSpec;
   CMyComPtr<ISequentialOutStream> VirtFileSystem;
-  #endif
-
-  bool ProcessAltStreams;
-
-  bool StreamMode;
-
-  CProgressDialog *ProgressDialog;
-  #ifndef Z7_SFX
   UInt64 NumFolders;
   UInt64 NumFiles;
-  bool NeedAddFile;
-  #endif
+#endif
+
   UInt32 NumArchiveErrors;
-  bool ThereAreMessageErrors;
   NExtract::NOverwriteMode::EEnum OverwriteMode;
 
-  #ifndef Z7_NO_CRYPTO
-  bool PasswordIsDefined;
-  bool PasswordWasAsked;
-  UString Password;
-  #endif
+  bool YesToAll;
+  bool TestMode;
 
+#ifndef Z7_NO_CRYPTO
+  UString Password;
+#endif
 
   UString _lang_Extracting;
   UString _lang_Testing;
@@ -268,28 +280,34 @@ public:
   UString _lang_Reading;
   UString _lang_Empty;
 
-  bool _totalFilesDefined;
-  bool _totalBytesDefined;
-  bool MultiArcMode;
-
   CExtractCallbackImp():
-    #ifndef Z7_SFX
-    _hashCalc(NULL),
-    #endif
-    ProcessAltStreams(true),
-    StreamMode(false),
-    OverwriteMode(NExtract::NOverwriteMode::kAsk),
-    #ifndef Z7_NO_CRYPTO
-    PasswordIsDefined(false),
-    PasswordWasAsked(false),
-    #endif
-    _totalFilesDefined(false),
-    _totalBytesDefined(false),
-    MultiArcMode(false)
+      _totalFilesDefined(false)
+    , _totalBytesDefined(false)
+    , MultiArcMode(false)
+    , ProcessAltStreams(true)
+    , StreamMode(false)
+#ifndef Z7_NO_CRYPTO
+    , PasswordIsDefined(false)
+    , PasswordWasAsked(false)
+#endif
+#ifndef Z7_SFX
+    , _remember(false)
+    , _skipArc(false)
+    , _hashCalc(NULL)
+#endif
+    , OverwriteMode(NExtract::NOverwriteMode::kAsk)
+    , YesToAll(false)
+    , TestMode(false)
     {}
    
   ~CExtractCallbackImp();
   void Init();
+
+  HRESULT SetCurrentFilePath2(const wchar_t *filePath);
+  void AddError_Message(LPCWSTR message);
+  void AddError_Message_ShowArcPath(LPCWSTR message);
+  HRESULT MessageError(const char *message, const FString &path);
+  void Add_ArchiveName_Error();
 
   #ifndef Z7_SFX
   void SetHashCalc(IHashCalc *hashCalc) { _hashCalc = hashCalc; }
@@ -298,9 +316,8 @@ public:
   {
     if (!hash)
       return;
-    _hashStreamSpec = new COutStreamWithHash;
-    _hashStream = _hashStreamSpec;
-    _hashStreamSpec->_hash = hash;
+    _hashStream.Create_if_Empty();
+    _hashStream->_hash = hash;
   }
   #endif
 

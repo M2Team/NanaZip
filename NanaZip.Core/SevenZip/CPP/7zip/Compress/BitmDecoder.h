@@ -62,6 +62,12 @@ public:
   }
 
   Z7_FORCE_INLINE
+  UInt32 GetValue_InHigh32bits() const
+  {
+    return this->_value << this->_bitPos;
+  }
+
+  Z7_FORCE_INLINE
   void MovePos(unsigned numBits)
   {
     _bitPos += numBits;

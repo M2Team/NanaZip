@@ -68,9 +68,10 @@ class CHandlerImg:
   public IInStream,
   public CMyUnknownImp
 {
-  Z7_COM_UNKNOWN_IMP_3(
+  Z7_COM_UNKNOWN_IMP_4(
       IInArchive,
       IInArchiveGetStream,
+      ISequentialInStream,
       IInStream)
 
   Z7_COM7F_IMP(Open(IInStream *stream, const UInt64 *maxCheckStartPosition, IArchiveOpenCallback *openCallback))
@@ -80,18 +81,17 @@ class CHandlerImg:
   // Z7_IFACEM_IInArchive_Img(Z7_COM7F_PUREO)
 
 protected:
+  bool _stream_unavailData;
+  bool _stream_unsupportedMethod;
+  bool _stream_dataError;
+  // bool _stream_UsePackSize;
+  // UInt64 _stream_PackSize;
   UInt64 _virtPos;
   UInt64 _posInArc;
   UInt64 _size;
   CMyComPtr<IInStream> Stream;
   const char *_imgExt;
   
-  bool _stream_unavailData;
-  bool _stream_unsupportedMethod;
-  bool _stream_dataError;
-  // bool _stream_UsePackSize;
-  // UInt64 _stream_PackSize;
-
   void Reset_PosInArc() { _posInArc = (UInt64)0 - 1; }
   void Reset_VirtPos() { _virtPos = (UInt64)0; }
 

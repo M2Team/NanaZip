@@ -100,6 +100,7 @@ namespace NID
 const UInt32 k_Copy = 0;
 const UInt32 k_Delta = 3;
 const UInt32 k_ARM64 = 0xa;
+const UInt32 k_RISCV = 0xb;
 
 const UInt32 k_LZMA2 = 0x21;
 
@@ -135,7 +136,7 @@ const UInt32 k_AES   = 0x6F10701;
 // const UInt32 k_ZSTD = 0x4015D; // winzip zstd
 // 0x4F71101, 7z-zstd
 
-static inline bool IsFilterMethod(UInt64 m)
+inline bool IsFilterMethod(UInt64 m)
 {
   if (m > (UInt32)0xFFFFFFFF)
     return false;
@@ -143,6 +144,7 @@ static inline bool IsFilterMethod(UInt64 m)
   {
     case k_Delta:
     case k_ARM64:
+    case k_RISCV:
     case k_BCJ:
     case k_BCJ2:
     case k_PPC:
@@ -153,6 +155,7 @@ static inline bool IsFilterMethod(UInt64 m)
     case k_SWAP2:
     case k_SWAP4:
       return true;
+    default: break;
   }
   return false;
 }

@@ -769,8 +769,8 @@ HRESULT CMixerST::Code(
     }
   }
 
-  const UInt64 * const *isSizes2 = EncodeMode ? &mainCoder.UnpackSizePointer : &mainCoder.PackSizePointers.Front();
-  const UInt64 * const *outSizes2 = EncodeMode ? &mainCoder.PackSizePointers.Front() : &mainCoder.UnpackSizePointer;
+  const UInt64 * const *isSizes2 = EncodeMode ? &mainCoder.UnpackSizePointer : mainCoder.PackSizePointers.ConstData();
+  const UInt64 * const *outSizes2 = EncodeMode ? mainCoder.PackSizePointers.ConstData() : &mainCoder.UnpackSizePointer;
 
   HRESULT res;
   if (mainCoder.Coder)
@@ -783,8 +783,8 @@ HRESULT CMixerST::Code(
   else
   {
     res = mainCoder.Coder2->Code(
-        &seqInStreamsSpec.Front(), isSizes2, numInStreams,
-        &seqOutStreamsSpec.Front(), outSizes2, numOutStreams,
+        seqInStreamsSpec.ConstData(), isSizes2, numInStreams,
+        seqOutStreamsSpec.ConstData(), outSizes2, numOutStreams,
         progress);
   }
 
@@ -909,8 +909,8 @@ void CCoderMT::Code(ICompressProgressInfo *progress)
         progress);
   else
     Result = Coder2->Code(
-        &InStreamPointers.Front(),  EncodeMode ? &UnpackSizePointer : &PackSizePointers.Front(), numInStreams,
-        &OutStreamPointers.Front(), EncodeMode ? &PackSizePointers.Front(): &UnpackSizePointer, numOutStreams,
+        InStreamPointers.ConstData(),  EncodeMode ? &UnpackSizePointer : PackSizePointers.ConstData(), numInStreams,
+        OutStreamPointers.ConstData(), EncodeMode ? PackSizePointers.ConstData(): &UnpackSizePointer, numOutStreams,
         progress);
 }
 

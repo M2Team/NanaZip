@@ -10,6 +10,61 @@
 namespace NCompress {
 namespace NLzms {
 
+class CBitDecoder
+{
+public:
+  const Byte *_buf;
+  unsigned _bitPos;
+
+  void Init(const Byte *buf, size_t size) throw()
+  {
+    _buf = buf + size;
+    _bitPos = 0;
+  }
+
+  Z7_FORCE_INLINE
+  UInt32 GetValue(unsigned numBits) const
+  {
+    UInt32 v =
+        ((UInt32)_buf[-1] << 16) |
+        ((UInt32)_buf[-2] << 8) |
+         (UInt32)_buf[-3];
+    v >>= 24 - numBits - _bitPos;
+    return v & ((1u << numBits) - 1);
+  }
+
+  Z7_FORCE_INLINE
+  UInt32 GetValue_InHigh32bits()
+  {
+    return GetUi32(_buf - 4) << _bitPos;
+  }
+  
+  void MovePos(unsigned numBits)
+  {
+    _bitPos += numBits;
+    _buf -= (_bitPos >> 3);
+    _bitPos &= 7;
+  }
+
+  UInt32 ReadBits32(unsigned numBits)
+  {
+    UInt32 mask = (((UInt32)1 << numBits) - 1);
+    numBits += _bitPos;
+    const Byte *buf = _buf;
+    UInt32 v = GetUi32(buf - 4);
+    if (numBits > 32)
+    {
+      v <<= (numBits - 32);
+      v |= (UInt32)buf[-5] >> (40 - numBits);
+    }
+    else
+      v >>= (32 - numBits);
+    _buf = buf - (numBits >> 3);
+    _bitPos = numBits & 7;
+    return v & mask;
+  }
+};
+
 static UInt32 g_PosBases[k_NumPosSyms /* + 1 */];
 
 static Byte g_PosDirectBits[k_NumPosSyms];
@@ -91,7 +146,7 @@ static unsigned GetNumPosSlots(size_t size)
 static const Int32 k_x86_WindowSize = 65535;
 static const Int32 k_x86_TransOffset = 1023;
 
-static const size_t k_x86_HistorySize = (1 << 16);
+static const size_t k_x86_HistorySize = 1 << 16;
 
 static void x86_Filter(Byte *data, UInt32 size, Int32 *history)
 {
@@ -318,7 +373,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
     {
       if (_rc.Decode(&mainState, k_NumMainProbs, mainProbs) == 0)
       {
-        UInt32 number;
+        unsigned number;
         HUFF_DEC(number, m_LitDecoder)
         LIMIT_CHECK
         _win[_pos++] = (Byte)number;
@@ -330,7 +385,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
         
         if (_rc.Decode(&lzRepStates[0], k_NumRepProbs, lzRepProbs[0]) == 0)
         {
-          UInt32 number;
+          unsigned number;
           HUFF_DEC(number, m_PosDecoder)
           LIMIT_CHECK
 
@@ -393,7 +448,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
           }
         }
 
-        UInt32 lenSlot;
+        unsigned lenSlot;
         HUFF_DEC(lenSlot, m_LenDecoder)
         LIMIT_CHECK
 
@@ -424,7 +479,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
       {
         UInt64 distance;
 
-        UInt32 power;
+        unsigned power;
         UInt32 distance32;
         
         if (_rc.Decode(&deltaRepStates[0], k_NumRepProbs, deltaRepProbs[0]) == 0)
@@ -432,7 +487,7 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
           HUFF_DEC(power, m_PowerDecoder)
           LIMIT_CHECK
 
-          UInt32 number;
+          unsigned number;
           HUFF_DEC(number, m_DeltaDecoder)
           LIMIT_CHECK
 
@@ -502,13 +557,13 @@ HRESULT CDecoder::CodeReal(const Byte *in, size_t inSize, Byte *_win, size_t out
 
         const UInt32 dist = (distance32 << power);
         
-        UInt32 lenSlot;
+        unsigned lenSlot;
         HUFF_DEC(lenSlot, m_LenDecoder)
         LIMIT_CHECK
 
         UInt32 len = g_LenBases[lenSlot];
         {
-          unsigned numDirectBits = k_LenDirectBits[lenSlot];
+          const unsigned numDirectBits = k_LenDirectBits[lenSlot];
           READ_BITS_CHECK(numDirectBits)
           len += _bs.ReadBits32(numDirectBits);
         }

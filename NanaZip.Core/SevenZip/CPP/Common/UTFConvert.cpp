@@ -135,7 +135,7 @@ we can place 128 ESCAPE chars to
 #endif
 
 #define IS_SURROGATE_POINT(v)     (((v) & (UInt32)0xfffff800) == 0xd800)
-#define IS_LOW_SURROGATE_POINT(v) (((v) & (UInt32)0xfffffC00) == 0xdc00)
+#define IS_LOW_SURROGATE_POINT(v) (((v) & (UInt32)0xfffffc00) == 0xdc00)
 
 
 #define UTF_ERROR_UTF8_CHECK \
@@ -168,14 +168,14 @@ void CUtf8Check::Check_Buf(const char *src, size_t size) throw()
     if (c < 0x80)
       continue;
     
-    if (c < 0xc0 + 2) // it's limit for 0x140000 unicode codes : win32 compatibility
+    if (c < 0xc0 + 2)
       UTF_ERROR_UTF8_CHECK
 
     unsigned numBytes;
-
     UInt32 val = c;
          MY_UTF8_HEAD_PARSE2(1)
     else MY_UTF8_HEAD_PARSE2(2)
+    else MY_UTF8_HEAD_PARSE2(3)
     else MY_UTF8_HEAD_PARSE2(4)
     else MY_UTF8_HEAD_PARSE2(5)
     else
@@ -768,7 +768,7 @@ void Convert_UTF16_To_UTF32(const UString &src, UString &dest)
     if (c >= 0xd800 && c < 0xdc00 && i < src.Len())
     {
       const wchar_t c2 = src[i];
-      if (c2 >= 0xdc00 && c2 < 0x10000)
+      if (c2 >= 0xdc00 && c2 < 0xe000)
       {
         // printf("\nSurragate [%d]: %4x %4x -> ", i, (int)c, (int)c2);
         c = 0x10000 + ((c & 0x3ff) << 10) + (c2 & 0x3ff);

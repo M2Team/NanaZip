@@ -46,11 +46,18 @@ using namespace NDir;
 extern
 HINSTANCE g_hInstance;
 HINSTANCE g_hInstance;
+extern
+bool g_DisableUserQuestions;
+bool g_DisableUserQuestions;
 
 #ifndef UNDER_CE
 
-static
-DWORD g_ComCtl32Version;
+#if !defined(Z7_WIN32_WINNT_MIN) || Z7_WIN32_WINNT_MIN < 0x0500 // win2000
+#define Z7_USE_DYN_ComCtl32Version
+#endif
+
+#ifdef Z7_USE_DYN_ComCtl32Version
+Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
 
 static DWORD GetDllVersion(LPCTSTR dllName)
 {
@@ -76,6 +83,7 @@ static DWORD GetDllVersion(LPCTSTR dllName)
 }
 
 #endif
+#endif
 
 extern
 bool g_LVN_ITEMACTIVATE_Support;
@@ -91,14 +99,18 @@ static void ErrorMessageForHRESULT(HRESULT res)
 static int APIENTRY WinMain2()
 {
   // OleInitialize is required for ProgressBar in TaskBar.
-  #ifndef UNDER_CE
+#ifndef UNDER_CE
   OleInitialize(NULL);
-  #endif
+#endif
 
-  #ifndef UNDER_CE
-  g_ComCtl32Version = ::GetDllVersion(TEXT("comctl32.dll"));
-  g_LVN_ITEMACTIVATE_Support = (g_ComCtl32Version >= MAKELONG(71, 4));
-  #endif
+#ifndef UNDER_CE
+#ifdef Z7_USE_DYN_ComCtl32Version
+  {
+    const DWORD g_ComCtl32Version = ::GetDllVersion(TEXT("comctl32.dll"));
+    g_LVN_ITEMACTIVATE_Support = (g_ComCtl32Version >= MAKELONG(71, 4));
+  }
+#endif
+#endif
   
   UString password;
   bool assumeYes = false;
@@ -139,6 +151,8 @@ static int APIENTRY WinMain2()
       }
     }
   }
+
+  g_DisableUserQuestions = assumeYes;
 
   FString path;
   NDLL::MyGetModuleFileName(path);

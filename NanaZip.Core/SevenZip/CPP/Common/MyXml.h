@@ -27,8 +27,8 @@ public:
   AString GetSubString() const;
   const AString * GetSubStringPtr() const throw();
   int FindSubTag(const char *tag) const throw();
+  const CXmlItem *FindSubTag_GetPtr(const char *tag) const throw();
   AString GetSubStringForTag(const char *tag) const;
-
   void AppendTo(AString &s) const;
 };
 
@@ -39,5 +39,7 @@ struct CXml
   bool Parse(const char *s);
   // void AppendTo(AString &s) const;
 };
+
+void z7_xml_DecodeString(AString &s);
 
 #endif

@@ -52,7 +52,9 @@ const unsigned kNumDictBits_Max = 21;
 const UInt32 kDictSize_Max = (UInt32)1 << kNumDictBits_Max;
 
 const unsigned kNumLinearPosSlotBits = 17;
-const unsigned kNumPowerPosSlots = 38;
+// const unsigned kNumPowerPosSlots = 38;
+// const unsigned kNumPowerPosSlots = (kNumLinearPosSlotBits + 1) * 2; // non-including two first linear slots.
+const unsigned kNumPowerPosSlots = (kNumLinearPosSlotBits + 2) * 2; // including two first linear slots.
 
 }}
 

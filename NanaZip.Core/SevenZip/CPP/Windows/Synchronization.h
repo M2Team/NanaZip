@@ -234,6 +234,11 @@ public:
   }
   WRes Enter()
   {
+#if defined(Z7_LLVM_CLANG_VERSION) && (__clang_major__ == 13) \
+      && defined(__FreeBSD__)
+  #pragma GCC diagnostic ignored "-Wthread-safety-negative"
+  #pragma GCC diagnostic ignored "-Wthread-safety-analysis"
+#endif
     return ::pthread_mutex_lock(&_mutex);
   }
   WRes Leave()

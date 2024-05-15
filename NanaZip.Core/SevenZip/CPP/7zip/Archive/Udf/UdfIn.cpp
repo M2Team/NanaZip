@@ -1731,7 +1731,7 @@ UString CInArchive::GetItemPath(unsigned volIndex, unsigned fsIndex, unsigned re
     UString newName2 = vol.GetName();
     if (newName2.IsEmpty())
       newName2 = "Volume";
-    newName += '-';
+    newName.Add_Minus();
     newName += newName2;
     UpdateWithName(name, newName);
   }

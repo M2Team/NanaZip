@@ -129,7 +129,7 @@ struct CUInt32DefVector
   bool CheckSize(unsigned size) const { return Defs.Size() == size || Defs.Size() == 0; }
 
   void SetItem(unsigned index, bool defined, UInt32 value);
-  void if_NonEmpty_FillResedue_with_false(unsigned numItems)
+  void if_NonEmpty_FillResidue_with_false(unsigned numItems)
   {
     if (Defs.Size() != 0 && Defs.Size() < numItems)
       SetItem(numItems - 1, false, 0);

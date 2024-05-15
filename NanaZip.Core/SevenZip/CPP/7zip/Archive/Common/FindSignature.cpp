@@ -21,10 +21,10 @@ HRESULT FindSignatureInStream(ISequentialInStream *stream,
   if (memcmp(byteBuffer2, signature, signatureSize) == 0)
     return S_OK;
 
-  const UInt32 kBufferSize = (1 << 16);
+  const size_t kBufferSize = 1 << 16;
   CByteBuffer byteBuffer(kBufferSize);
   Byte *buffer = byteBuffer;
-  UInt32 numPrevBytes = signatureSize - 1;
+  size_t numPrevBytes = signatureSize - 1;
   memcpy(buffer, (const Byte *)byteBuffer2 + 1, numPrevBytes);
   resPos = 1;
   for (;;)
@@ -34,16 +34,16 @@ HRESULT FindSignatureInStream(ISequentialInStream *stream,
         return S_FALSE;
     do
     {
-      const UInt32 numReadBytes = kBufferSize - numPrevBytes;
+      const size_t numReadBytes = kBufferSize - numPrevBytes;
       UInt32 processedSize;
-      RINOK(stream->Read(buffer + numPrevBytes, numReadBytes, &processedSize))
-      numPrevBytes += processedSize;
+      RINOK(stream->Read(buffer + numPrevBytes, (UInt32)numReadBytes, &processedSize))
+      numPrevBytes += (size_t)processedSize;
       if (processedSize == 0)
         return S_FALSE;
     }
     while (numPrevBytes < signatureSize);
-    const UInt32 numTests = numPrevBytes - signatureSize + 1;
-    for (UInt32 pos = 0; pos < numTests; pos++)
+    const size_t numTests = numPrevBytes - signatureSize + 1;
+    for (size_t pos = 0; pos < numTests; pos++)
     {
       const Byte b = signature[0];
       for (; buffer[pos] != b && pos < numTests; pos++);
@@ -59,4 +59,32 @@ HRESULT FindSignatureInStream(ISequentialInStream *stream,
     numPrevBytes -= numTests;
     memmove(buffer, buffer + numTests, numPrevBytes);
   }
+}
+
+namespace NArchive {
+HRESULT ReadZeroTail(ISequentialInStream *stream, bool &areThereNonZeros, UInt64 &numZeros, UInt64 maxSize);
+HRESULT ReadZeroTail(ISequentialInStream *stream, bool &areThereNonZeros, UInt64 &numZeros, UInt64 maxSize)
+{
+  areThereNonZeros = false;
+  numZeros = 0;
+  const size_t kBufSize = 1 << 11;
+  Byte buf[kBufSize];
+  for (;;)
+  {
+    UInt32 size = 0;
+    RINOK(stream->Read(buf, kBufSize, &size))
+    if (size == 0)
+      return S_OK;
+    for (UInt32 i = 0; i < size; i++)
+      if (buf[i] != 0)
+      {
+        areThereNonZeros = true;
+        numZeros += i;
+        return S_OK;
+      }
+    numZeros += size;
+    if (numZeros > maxSize)
+      return S_OK;
+  }
+}
 }

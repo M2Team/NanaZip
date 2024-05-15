@@ -4,6 +4,7 @@
 
 #include "../../../C/CpuArch.h"
 
+#include "../../Common/AutoPtr.h"
 #include "../../Common/ComTry.h"
 #include "../../Common/MyBuffer.h"
 #include "../../Common/StringConvert.h"
@@ -37,6 +38,7 @@ using namespace NTime;
 
 static const UInt16 kCrc16Poly = 0xA001;
 
+MY_ALIGN(64)
 static UInt16 g_LzhCrc16Table[256];
 
 #define CRC16_UPDATE_BYTE(crc, b) (g_LzhCrc16Table[((crc) ^ (b)) & 0xFF] ^ ((crc) >> 8))
@@ -219,7 +221,7 @@ struct CItem
     AString s (GetDirName());
     const char kDirSeparator = '\\';
     // check kDirSeparator in Linux
-    s.Replace((char)(unsigned char)0xFF, kDirSeparator);
+    s.Replace((char)(Byte)0xFF, kDirSeparator);
     if (!s.IsEmpty() && s.Back() != kDirSeparator)
       s += kDirSeparator;
     s += GetFileName();
@@ -552,8 +554,8 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream,
         }
         if (_items.Size() % 100 == 0)
         {
-          UInt64 numFiles = _items.Size();
-          UInt64 numBytes = item.DataPosition;
+          const UInt64 numFiles = _items.Size();
+          const UInt64 numBytes = item.DataPosition;
           RINOK(callback->SetCompleted(&numFiles, &numBytes))
         }
       }
@@ -600,91 +602,76 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalUnPacked))
 
-  UInt64 currentItemUnPacked, currentItemPacked;
-  
-  NCompress::NLzh::NDecoder::CCoder *lzhDecoderSpec = NULL;
-  CMyComPtr<ICompressCoder> lzhDecoder;
-  // CMyComPtr<ICompressCoder> lzh1Decoder;
-  // CMyComPtr<ICompressCoder> arj2Decoder;
+  UInt32 cur_Unpacked, cur_Packed;
 
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-
-  CLimitedSequentialInStream *streamSpec = new CLimitedSequentialInStream;
-  CMyComPtr<ISequentialInStream> inStream(streamSpec);
-  streamSpec->SetStream(_stream);
+  CMyUniquePtr<NCompress::NLzh::NDecoder::CCoder> lzhDecoder;
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
+  inStream->SetStream(_stream);
 
   for (i = 0;; i++,
-      lps->OutSize += currentItemUnPacked,
-      lps->InSize += currentItemPacked)
+      lps->OutSize += cur_Unpacked,
+      lps->InSize += cur_Packed)
   {
-    currentItemUnPacked = 0;
-    currentItemPacked = 0;
-
+    cur_Unpacked = 0;
+    cur_Packed = 0;
     RINOK(lps->SetCur())
-
     if (i >= numItems)
       break;
 
-    CMyComPtr<ISequentialOutStream> realOutStream;
-    const Int32 askMode = testMode ?
-        NExtract::NAskMode::kTest :
-        NExtract::NAskMode::kExtract;
-    const UInt32 index = allFilesMode ? i : indices[i];
-    const CItemEx &item = _items[index];
-    RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
-
-    if (item.IsDir())
+    Int32 opRes;
     {
-      // if (!testMode)
+      CMyComPtr<ISequentialOutStream> realOutStream;
+      const Int32 askMode = testMode ?
+          NExtract::NAskMode::kTest :
+          NExtract::NAskMode::kExtract;
+      const UInt32 index = allFilesMode ? i : indices[i];
+      const CItemEx &item = _items[index];
+      RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
+        
+      if (item.IsDir())
       {
-        RINOK(extractCallback->PrepareOperation(askMode))
-        RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
+        // if (!testMode)
+        {
+          RINOK(extractCallback->PrepareOperation(askMode))
+          RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
+        }
+        continue;
       }
-      continue;
-    }
+      
+      if (!testMode && !realOutStream)
+        continue;
+      
+      RINOK(extractCallback->PrepareOperation(askMode))
+      cur_Unpacked = item.Size;
+      cur_Packed = item.PackSize;
 
-    if (!testMode && !realOutStream)
-      continue;
-
-    RINOK(extractCallback->PrepareOperation(askMode))
-    currentItemUnPacked = item.Size;
-    currentItemPacked = item.PackSize;
-
-    {
-      COutStreamWithCRC *outStreamSpec = new COutStreamWithCRC;
-      CMyComPtr<ISequentialOutStream> outStream(outStreamSpec);
-      outStreamSpec->Init(realOutStream);
+      CMyComPtr2_Create<ISequentialOutStream, COutStreamWithCRC> outStream;
+      outStream->Init(realOutStream);
       realOutStream.Release();
       
       RINOK(InStream_SeekSet(_stream, item.DataPosition))
 
-      streamSpec->Init(item.PackSize);
+      inStream->Init(item.PackSize);
 
       HRESULT res = S_OK;
-      Int32 opRes = NExtract::NOperationResult::kOK;
+      opRes = NExtract::NOperationResult::kOK;
 
       if (item.IsCopyMethod())
       {
-        res = copyCoder->Code(inStream, outStream, NULL, NULL, progress);
-        if (res == S_OK && copyCoderSpec->TotalSize != item.PackSize)
+        res = copyCoder.Interface()->Code(inStream, outStream, NULL, NULL, lps);
+        if (res == S_OK && copyCoder->TotalSize != item.PackSize)
           res = S_FALSE;
       }
       else if (item.IsLh4GroupMethod())
       {
-        if (!lzhDecoder)
-        {
-          lzhDecoderSpec = new NCompress::NLzh::NDecoder::CCoder;
-          lzhDecoder = lzhDecoderSpec;
-        }
-        lzhDecoderSpec->FinishMode = true;
-        lzhDecoderSpec->SetDictSize(1 << item.GetNumDictBits());
-        res = lzhDecoder->Code(inStream, outStream, NULL, &currentItemUnPacked, progress);
-        if (res == S_OK && lzhDecoderSpec->GetInputProcessedSize() != item.PackSize)
+        lzhDecoder.Create_if_Empty();
+        // lzhDecoder->FinishMode = true;
+        lzhDecoder->SetDictSize((UInt32)1 << item.GetNumDictBits());
+        res = lzhDecoder->Code(inStream, outStream, cur_Unpacked, lps);
+        if (res == S_OK && lzhDecoder->GetInputProcessedSize() != item.PackSize)
           res = S_FALSE;
       }
       /*
@@ -696,7 +683,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           lzh1Decoder = lzh1DecoderSpec;
         }
         lzh1DecoderSpec->SetDictionary(item.GetNumDictBits());
-        res = lzh1Decoder->Code(inStream, outStream, NULL, &currentItemUnPacked, progress);
+        res = lzh1Decoder->Code(inStream, outStream, NULL, &cur_Unpacked, progress);
       }
       */
       else
@@ -709,13 +696,12 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         else
         {
           RINOK(res)
-          if (outStreamSpec->GetCRC() != item.CRC)
+          if (outStream->GetCRC() != item.CRC)
             opRes = NExtract::NOperationResult::kCRCError;
         }
       }
-      outStream.Release();
-      RINOK(extractCallback->SetOperationResult(opRes))
     }
+    RINOK(extractCallback->SetOperationResult(opRes))
   }
   return S_OK;
   COM_TRY_END

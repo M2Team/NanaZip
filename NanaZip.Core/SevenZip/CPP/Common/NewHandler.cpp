@@ -65,6 +65,13 @@ operator new(size_t size)
   return p;
 }
 
+
+#if defined(_MSC_VER) && _MSC_VER == 1600
+// vs2010 has no throw() by default ?
+#pragma warning(push)
+#pragma warning(disable : 4986) // 'operator delete': exception specification does not match previous declaration
+#endif
+
 void
 #ifdef _MSC_VER
 __cdecl
@@ -75,6 +82,27 @@ operator delete(void *p) throw()
   // MyFree(p);
   ::free(p);
 }
+
+/* we define operator delete(void *p, size_t n) because
+   vs2022 compiler uses delete(void *p, size_t n), and
+   we want to mix files from different compilers:
+     - old vc6 linker
+     - old vc6 complier
+     - new vs2022 complier
+*/
+void
+#ifdef _MSC_VER
+__cdecl
+#endif
+operator delete(void *p, size_t n) throw()
+{
+  UNUSED_VAR(n)
+  ::free(p);
+}
+
+#if defined(_MSC_VER) && _MSC_VER == 1600
+#pragma warning(pop)
+#endif
 
 /*
 void *
@@ -205,11 +233,9 @@ operator delete(void *p) throw()
       a[i] = 0;
   */
   HeapFree(GetProcessHeap(), 0, p);
-  if (numAllocs == 0)
-    numAllocs = numAllocs; // ERROR
+  // if (numAllocs == 0) numAllocs = numAllocs; // ERROR
   numAllocs--;
-  if (numAllocs == 0)
-    numAllocs = numAllocs; // OK: all objects were deleted
+  // if (numAllocs == 0) numAllocs = numAllocs; // OK: all objects were deleted
   printf("Free %d\n", numAllocs);
   LeaveCriticalSection(&cs);
  #else
@@ -217,6 +243,22 @@ operator delete(void *p) throw()
   numAllocs--;
   printf("Free %d\n", numAllocs);
  #endif
+}
+
+void
+#ifdef _MSC_VER
+__cdecl
+#endif
+operator delete(void *p, size_t n) throw();
+void
+#ifdef _MSC_VER
+__cdecl
+#endif
+operator delete(void *p, size_t n) throw()
+{
+  UNUSED_VAR(n)
+  printf("delete_WITH_SIZE=%u, ptr = %p\n", (unsigned)n, p);
+  operator delete(p);
 }
 
 /*

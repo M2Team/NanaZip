@@ -395,6 +395,12 @@
     <ClInclude Include="SevenZip\CPP\Windows\Registry.h">
       <Filter>SevenZip\CPP\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.h">
+      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialogRes.h">
+      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="NanaZip.Core.Sfx.Windows.Resources.rc" />

@@ -43,24 +43,18 @@ Z7_CLASS_IMP_NOQIB_3(
   , ICompressSetCoderPropertiesOpt
 )
 public:
-  NCompress::NLzma::CEncoder *EncoderSpec;
-  CMyComPtr<ICompressCoder> Encoder;
+  CMyComPtr2<ICompressCoder, NCompress::NLzma::CEncoder> Encoder;
   Byte Header[kLzmaHeaderSize];
 };
 
 Z7_COM7F_IMF(CLzmaEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps))
 {
-  if (!Encoder)
-  {
-    EncoderSpec = new NCompress::NLzma::CEncoder;
-    Encoder = EncoderSpec;
-  }
-  CBufPtrSeqOutStream *outStreamSpec = new CBufPtrSeqOutStream;
-  CMyComPtr<ISequentialOutStream> outStream(outStreamSpec);
-  outStreamSpec->Init(Header + 4, kLzmaPropsSize);
-  RINOK(EncoderSpec->SetCoderProperties(propIDs, props, numProps))
-  RINOK(EncoderSpec->WriteCoderProperties(outStream))
-  if (outStreamSpec->GetPos() != kLzmaPropsSize)
+  Encoder.Create_if_Empty();
+  CMyComPtr2_Create<ISequentialOutStream, CBufPtrSeqOutStream> outStream;
+  outStream->Init(Header + 4, kLzmaPropsSize);
+  RINOK(Encoder->SetCoderProperties(propIDs, props, numProps))
+  RINOK(Encoder->WriteCoderProperties(outStream))
+  if (outStream->GetPos() != kLzmaPropsSize)
     return E_FAIL;
   Header[0] = MY_VER_MAJOR;
   Header[1] = MY_VER_MINOR;
@@ -71,21 +65,19 @@ Z7_COM7F_IMF(CLzmaEncoder::SetCoderProperties(const PROPID *propIDs, const PROPV
 
 Z7_COM7F_IMF(CLzmaEncoder::SetCoderPropertiesOpt(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps))
 {
-  return EncoderSpec->SetCoderPropertiesOpt(propIDs, props, numProps);
+  return Encoder->SetCoderPropertiesOpt(propIDs, props, numProps);
 }
 
 Z7_COM7F_IMF(CLzmaEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream *outStream,
     const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress))
 {
   RINOK(WriteStream(outStream, Header, kLzmaHeaderSize))
-  return Encoder->Code(inStream, outStream, inSize, outSize, progress);
+  return Encoder.Interface()->Code(inStream, outStream, inSize, outSize, progress);
 }
 
 
 CAddCommon::CAddCommon():
-    _copyCoderSpec(NULL),
     _isLzmaEos(false),
-    _cryptoStreamSpec(NULL),
     _buf(NULL)
     {}
 
@@ -187,9 +179,10 @@ HRESULT CAddCommon::Set_Pre_CompressionResult(bool inSeqMode, bool outSeqMode, U
       opRes.LzmaEos = oneMethodMain->Get_Lzma_Eos();
       break;
     }
+    default: break;
   }
   if (opRes.ExtractVersion < ver)
-    opRes.ExtractVersion = ver;
+      opRes.ExtractVersion = ver;
 
   return S_OK;
 }
@@ -211,8 +204,7 @@ HRESULT CAddCommon::Compress(
     return E_INVALIDARG;
   }
 
-  CSequentialInStreamWithCRC *inSecCrcStreamSpec = new CSequentialInStreamWithCRC;
-  CMyComPtr<ISequentialInStream> inCrcStream = inSecCrcStreamSpec;
+  CMyComPtr2_Create<ISequentialInStream, CSequentialInStreamWithCRC> inCrcStream;
   
   CMyComPtr<IInStream> inStream2;
   if (!inSeqMode)
@@ -226,9 +218,9 @@ HRESULT CAddCommon::Compress(
     }
   }
 
-  inSecCrcStreamSpec->SetStream(inStream);
-  inSecCrcStreamSpec->SetFullSize(expectedDataSize_IsConfirmed ? expectedDataSize : (UInt64)(Int64)-1);
-  // inSecCrcStreamSpec->Init();
+  inCrcStream->SetStream(inStream);
+  inCrcStream->SetFullSize(expectedDataSize_IsConfirmed ? expectedDataSize : (UInt64)(Int64)-1);
+  // inCrcStream->Init();
 
   unsigned numTestMethods = _options.MethodSequence.Size();
   // numTestMethods != 0
@@ -256,7 +248,7 @@ HRESULT CAddCommon::Compress(
   
   for (unsigned i = 0; i < numTestMethods; i++)
   {
-    inSecCrcStreamSpec->Init();
+    inCrcStream->Init();
 
     if (i != 0)
     {
@@ -284,18 +276,15 @@ HRESULT CAddCommon::Compress(
     {
       opRes.ExtractVersion = NCompressionMethod::kExtractVersion_ZipCrypto;
 
-      if (!_cryptoStream)
-      {
-        _cryptoStreamSpec = new CFilterCoder(true);
-        _cryptoStream = _cryptoStreamSpec;
-      }
+      if (!_cryptoStream.IsDefined())
+        _cryptoStream.SetFromCls(new CFilterCoder(true));
       
       if (_options.IsAesMode)
       {
         opRes.ExtractVersion = NCompressionMethod::kExtractVersion_Aes;
-        if (!_cryptoStreamSpec->Filter)
+        if (!_cryptoStream->Filter)
         {
-          _cryptoStreamSpec->Filter = _filterAesSpec = new NCrypto::NWzAes::CEncoder;
+          _cryptoStream->Filter = _filterAesSpec = new NCrypto::NWzAes::CEncoder;
           _filterAesSpec->SetKeyMode(_options.AesKeyMode);
           RINOK(_filterAesSpec->CryptoSetPassword((const Byte *)(const char *)_options.Password, _options.Password.Len()))
         }
@@ -303,9 +292,9 @@ HRESULT CAddCommon::Compress(
       }
       else
       {
-        if (!_cryptoStreamSpec->Filter)
+        if (!_cryptoStream->Filter)
         {
-          _cryptoStreamSpec->Filter = _filterSpec = new NCrypto::NZip::CEncoder;
+          _cryptoStream->Filter = _filterSpec = new NCrypto::NZip::CEncoder;
           _filterSpec->CryptoSetPassword((const Byte *)(const char *)_options.Password, _options.Password.Len());
         }
         
@@ -323,7 +312,7 @@ HRESULT CAddCommon::Compress(
             RINOK(CalcStreamCRC(inStream, crc))
             crc_IsCalculated = true;
             RINOK(InStream_SeekToBegin(inStream2))
-            inSecCrcStreamSpec->Init();
+            inCrcStream->Init();
           }
           check = (crc >> 16);
         }
@@ -334,13 +323,13 @@ HRESULT CAddCommon::Compress(
       if (method == NCompressionMethod::kStore)
       {
         needCode = false;
-        RINOK(_cryptoStreamSpec->Code(inCrcStream, outStream, NULL, NULL, progress))
+        RINOK(_cryptoStream->Code(inCrcStream, outStream, NULL, NULL, progress))
       }
       else
       {
-        RINOK(_cryptoStreamSpec->SetOutStream(outStream))
-        RINOK(_cryptoStreamSpec->InitEncoder())
-        outStreamReleaser.FilterCoder = _cryptoStreamSpec;
+        RINOK(_cryptoStream->SetOutStream(outStream))
+        RINOK(_cryptoStream->InitEncoder())
+        outStreamReleaser.FilterCoder = _cryptoStream.ClsPtr();
       }
     }
 
@@ -350,17 +339,13 @@ HRESULT CAddCommon::Compress(
       {
       case NCompressionMethod::kStore:
       {
-        if (!_copyCoderSpec)
-        {
-          _copyCoderSpec = new NCompress::CCopyCoder;
-          _copyCoder = _copyCoderSpec;
-        }
+        _copyCoder.Create_if_Empty();
         CMyComPtr<ISequentialOutStream> outStreamNew;
         if (_options.Password_Defined)
           outStreamNew = _cryptoStream;
         else
           outStreamNew = outStream;
-        RINOK(_copyCoder->Code(inCrcStream, outStreamNew, NULL, NULL, progress))
+        RINOK(_copyCoder.Interface()->Code(inCrcStream, outStreamNew, NULL, NULL, progress))
         break;
       }
       
@@ -387,7 +372,7 @@ HRESULT CAddCommon::Compress(
           {
             _compressExtractVersion = NCompressionMethod::kExtractVersion_Xz;
             NCompress::NXz::CEncoder *encoder = new NCompress::NXz::CEncoder();
-            _compressEncoder = encoder;
+              _compressEncoder = encoder;
           }
           else if (method == NCompressionMethod::kPPMd)
           {
@@ -440,7 +425,7 @@ HRESULT CAddCommon::Compress(
             }
           }
           if (method == NCompressionMethod::kLZMA)
-            _isLzmaEos = _lzmaEncoder->EncoderSpec->IsWriteEndMark();
+            _isLzmaEos = _lzmaEncoder->Encoder->IsWriteEndMark();
         }
 
         if (method == NCompressionMethod::kLZMA)
@@ -474,7 +459,7 @@ HRESULT CAddCommon::Compress(
 
       if (_options.Password_Defined)
       {
-        RINOK(_cryptoStreamSpec->OutStreamFinish())
+        RINOK(_cryptoStream->OutStreamFinish())
       }
     }
 
@@ -489,12 +474,12 @@ HRESULT CAddCommon::Compress(
     RINOK(outStream->Seek(0, STREAM_SEEK_CUR, &opRes.PackSize))
 
     {
-      opRes.CRC = inSecCrcStreamSpec->GetCRC();
-      opRes.UnpackSize = inSecCrcStreamSpec->GetSize();
+      opRes.CRC = inCrcStream->GetCRC();
+      opRes.UnpackSize = inCrcStream->GetSize();
       opRes.Method = method;
     }
 
-    if (!inSecCrcStreamSpec->WasFinished())
+    if (!inCrcStream->WasFinished())
       return E_FAIL;
 
     if (_options.Password_Defined)

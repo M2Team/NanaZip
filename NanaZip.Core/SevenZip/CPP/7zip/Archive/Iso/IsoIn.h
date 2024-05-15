@@ -214,17 +214,19 @@ struct CVolumeDescriptor
   CDateTime MTime;
   CDateTime ExpirationTime;
   CDateTime EffectiveTime;
-  Byte FileStructureVersion; // = 1;
+  // Byte FileStructureVersion; // = 1;
   Byte ApplicationUse[512];
 
   bool IsJoliet() const
   {
     if ((VolFlags & 1) != 0)
       return false;
-    Byte b = EscapeSequence[2];
+    const Byte b = EscapeSequence[2];
     return (EscapeSequence[0] == 0x25 && EscapeSequence[1] == 0x2F &&
       (b == 0x40 || b == 0x43 || b == 0x45));
   }
+
+  UInt64 Get_VolumeSpaceSize_inBytes() const { return (UInt64)VolumeSpaceSize * LogicalBlockSize; }
 };
 
 struct CRef
@@ -292,6 +294,8 @@ public:
   bool SelfLinkedDirs;
   bool IsSusp;
   unsigned SuspSkipSize;
+
+  int _expand_BootEntries_index;
 
   CRecordVector<UInt32> UniqStartLocations;
 

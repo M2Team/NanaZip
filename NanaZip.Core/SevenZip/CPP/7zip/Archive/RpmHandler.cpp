@@ -97,7 +97,15 @@ static const char * const k_CPUs[] =
   , "ppc64"
   , "sh"
   , "xtensa"
-  , "aarch64"  // 19
+  , "aarch64"       // 19
+  , "mipsr6"        // 20
+  , "mips64r6"      // 21
+  , "riscv64"       // 22
+  , "loongarch64"   // 23
+  // , "24"
+  // , "25"
+  // , "loongarch64"   // 26  : why 23 and 26 for loongarch64?
+  // 255 for some non specified arch
 };
 
 static const char * const k_OS[] =
@@ -128,8 +136,8 @@ static const char * const k_OS[] =
 
 struct CLead
 {
-  unsigned char Major;
-  unsigned char Minor;
+  Byte Major;
+  // Byte Minor;
   UInt16 Type;
   UInt16 Cpu;
   UInt16 Os;
@@ -140,7 +148,7 @@ struct CLead
   void Parse(const Byte *p)
   {
     Major = p[4];
-    Minor = p[5];
+    // Minor = p[5];
     Type = Get16(p + 6);
     Cpu= Get16(p + 8);
     memcpy(Name, p + 10, kNameSize);
@@ -205,7 +213,7 @@ Z7_class_CHandler_final: public CHandlerCont
   AString _os;      // linux
   
   AString _format;      // cpio
-  AString _compressor;  // xz, gzip, bzip2
+  AString _compressor;  // xz, gzip, bzip2, lzma, zstd
 
   CLead _lead;
 
@@ -326,16 +334,20 @@ void CHandler::AddSubFileExtension(AString &res) const
       s = "bz2";
     else if (_compressor == "gzip")
       s = "gz";
+    else if (_compressor == "zstd")
+      s = "zst";
   }
   else
   {
     const Byte *p = _payloadSig;
-    if (p[0] == 0x1F && p[1] == 0x8B)
+    if (p[0] == 0x1F && p[1] == 0x8B && p[2] == 8)
       s = "gz";
     else if (p[0] == 0xFD && p[1] == '7' && p[2] == 'z' && p[3] == 'X' && p[4] == 'Z' && p[5] == 0)
       s = "xz";
     else if (p[0] == 'B' && p[1] == 'Z' && p[2] == 'h' && p[3] >= '1' && p[3] <= '9')
       s = "bz2";
+    else if (p[0] == 0x28 && p[1] == 0xb5 && p[2] == 0x2f && p[3] == 0xfd)
+      s = "zst";
     else
       s = "lzma";
   }
@@ -466,12 +478,6 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   return S_OK;
 }
 
-#ifdef Z7_RPM_SHOW_METADATA
-static inline char GetHex(unsigned value)
-{
-  return (char)((value < 10) ? ('0' + value) : ('A' + (value - 10)));
-}
-#endif
 
 HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
 {
@@ -585,7 +591,7 @@ HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
           if (rem2 == 0)
             return S_FALSE;
           if (t != 0)
-            _metadata += '\n';
+            _metadata.Add_LF();
           size_t j;
           for (j = 0; j < rem2 && p2[j] != 0; j++);
           if (j == rem2)
@@ -614,8 +620,8 @@ HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
         for (UInt32 t = 0; t < entry.Count; t++)
         {
           const unsigned b = p[t];
-          _metadata += GetHex((b >> 4) & 0xF);
-          _metadata += GetHex(b & 0xF);
+          _metadata += GET_HEX_CHAR_UPPER(b >> 4);
+          _metadata += GET_HEX_CHAR_UPPER(b & 0xF);
         }
       }
       else
@@ -623,7 +629,7 @@ HRESULT CHandler::ReadHeader(ISequentialInStream *stream, bool isMainHeader)
         // p = p;
       }
 
-      _metadata += '\n';
+      _metadata.Add_LF();
       #endif
     }
     

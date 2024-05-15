@@ -299,7 +299,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
 
       if (numMethods == 1 && chunkSizeBits != 0)
       {
-        res += ':';
+        res.Add_Colon();
         res.Add_UInt32((UInt32)chunkSizeBits);
       }
 
@@ -1055,27 +1055,23 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   RINOK(extractCallback->SetTotal(totalSize))
 
-  UInt64 currentTotalUnPacked = 0;
+  totalSize = 0;
   UInt64 currentItemUnPacked;
   
   int prevSuccessStreamIndex = -1;
 
   CUnpacker unpacker;
 
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
 
   for (i = 0;; i++,
-      currentTotalUnPacked += currentItemUnPacked)
+      totalSize += currentItemUnPacked)
   {
     currentItemUnPacked = 0;
-
     lps->InSize = unpacker.TotalPacked;
-    lps->OutSize = currentTotalUnPacked;
-
+    lps->OutSize = totalSize;
     RINOK(lps->SetCur())
-
     if (i >= numItems)
       break;
 
@@ -1108,7 +1104,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     }
 
     const CItem &item = _db.Items[_db.SortedItems[index]];
-    int streamIndex = item.StreamIndex;
+    const int streamIndex = item.StreamIndex;
     if (streamIndex < 0)
     {
       if (!item.IsDir)
@@ -1135,10 +1131,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     {
       Byte digest[kHashSize];
       const CVolume &vol = _volumes[si.PartNumber];
-      bool needDigest = !si.IsEmptyHash();
-      
-      HRESULT res = unpacker.Unpack(vol.Stream, si.Resource, vol.Header, &_db,
-          realOutStream, progress, needDigest ? digest : NULL);
+      const bool needDigest = !si.IsEmptyHash() && !_disable_Sha1Check;
+      const HRESULT res = unpacker.Unpack(vol.Stream, si.Resource, vol.Header, &_db,
+          realOutStream, lps, needDigest ? digest : NULL);
       
       if (res == S_OK)
       {
@@ -1215,6 +1210,13 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
     }
     else if (name.IsPrefixedBy_Ascii_NoCase("memuse"))
     {
+    }
+    else if (name.IsPrefixedBy_Ascii_NoCase("crc"))
+    {
+      name.Delete(0, 3);
+      UInt32 crcSize = 1;
+      RINOK(ParsePropToUInt32(name, prop, crcSize))
+      _disable_Sha1Check = (crcSize == 0);
     }
     else
     {

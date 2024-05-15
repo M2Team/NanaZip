@@ -25,6 +25,8 @@
 #define IDM_CRC64                103
 #define IDM_SHA1                 104
 #define IDM_SHA256               105
+#define IDM_XXH64                106
+#define IDM_BLAKE2SP             107
 
 
 #define IDM_FILE                 500
@@ -100,6 +102,7 @@
 
 #define IDM_VIEW_TIME_POPUP      760
 #define IDM_VIEW_TIME            761
+#define IDM_VIEW_TIME_UTC        799
 
 #define IDM_ADD_TO_FAVORITES     800
 #define IDS_BOOKMARK             801
@@ -107,6 +110,7 @@
 #define IDM_OPTIONS              900
 #define IDM_BENCHMARK            901
 #define IDM_BENCHMARK2           902
+#define IDM_TEMP_DIR             910
 
 #define IDM_HELP_CONTENTS        960
 #define IDM_ABOUT                961

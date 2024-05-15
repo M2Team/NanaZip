@@ -33,7 +33,7 @@ Z7_CLASS_IMP_NOQIB_1(
 
 public:
 
-  HRes CreateEvents(SYNC_PARAM_DECL(synchro))
+  HRESULT CreateEvents(SYNC_PARAM_DECL(synchro))
   {
     WRes wres = StopWritingEvent.CreateIfNotCreated_Reset(SYNC_WFMO(synchro));
     if (wres == 0)

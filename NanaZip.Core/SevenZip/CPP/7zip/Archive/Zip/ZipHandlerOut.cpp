@@ -515,17 +515,25 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
         return E_INVALIDARG;
       {
         const wchar_t *m = prop.bstrVal;
-        if (IsString1PrefixedByString2_NoCase_Ascii(m, "aes"))
+        if (IsString1PrefixedByString2_NoCase_Ascii(m, "AES"))
         {
           m += 3;
-          if (StringsAreEqual_Ascii(m, "128"))
-            _props.AesKeyMode = 1;
-          else if (StringsAreEqual_Ascii(m, "192"))
-            _props.AesKeyMode = 2;
-          else if (StringsAreEqual_Ascii(m, "256") || m[0] == 0)
-            _props.AesKeyMode = 3;
-          else
-            return E_INVALIDARG;
+          UInt32 v = 3;
+          if (*m != 0)
+          {
+            if (*m == '-')
+              m++;
+            const wchar_t *end;
+            v = ConvertStringToUInt32(m,  &end);
+            if (*end != 0 || v % 64 != 0)
+              return E_INVALIDARG;
+            v /= 64;
+            v -= 2;
+            if (v >= 3)
+              return E_INVALIDARG;
+            v++;
+          }
+          _props.AesKeyMode = (Byte)v;
           _props.IsAesMode = true;
           m_ForceAesMode = true;
         }

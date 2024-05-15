@@ -51,6 +51,12 @@ public:
 
   operator       T *()       { return _items; }
   operator const T *() const { return _items; }
+  const T* ConstData()    const { return _items; }
+        T* NonConstData() const { return _items; }
+        T* NonConstData()       { return _items; }
+  // const T* Data() const         { return _items; }
+  //       T* Data()               { return _items; }
+
   size_t Size() const { return _size; }
 
   void Alloc(size_t size)
@@ -140,15 +146,15 @@ bool operator!=(const CBuffer<T>& b1, const CBuffer<T>& b2)
 
 // typedef CBuffer<char> CCharBuffer;
 // typedef CBuffer<wchar_t> CWCharBuffer;
-typedef CBuffer<unsigned char> CByteBuffer;
+typedef CBuffer<Byte> CByteBuffer;
 
 
 class CByteBuffer_Wipe: public CByteBuffer
 {
   Z7_CLASS_NO_COPY(CByteBuffer_Wipe)
 public:
-  // CByteBuffer_Wipe(): CBuffer<unsigned char>() {}
-  CByteBuffer_Wipe(size_t size): CBuffer<unsigned char>(size) {}
+  // CByteBuffer_Wipe(): CBuffer<Byte>() {}
+  CByteBuffer_Wipe(size_t size): CBuffer<Byte>(size) {}
   ~CByteBuffer_Wipe() { Wipe(); }
 };
 
@@ -181,6 +187,11 @@ public:
   
   operator       T *()       { return _items; }
   operator const T *() const { return _items; }
+  const T* ConstData()    const { return _items; }
+        T* NonConstData() const { return _items; }
+        T* NonConstData()       { return _items; }
+  // const T* Data() const         { return _items; }
+  //       T* Data()               { return _items; }
   
   void Alloc(size_t newSize)
   {
@@ -191,7 +202,7 @@ public:
   }
 };
 
-typedef CObjArray<unsigned char> CByteArr;
+typedef CObjArray<Byte> CByteArr;
 typedef CObjArray<bool> CBoolArr;
 typedef CObjArray<int> CIntArr;
 typedef CObjArray<unsigned> CUIntArr;

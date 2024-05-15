@@ -40,12 +40,9 @@ public:
 };
 
 
-Z7_CLASS_IMP_COM_1(
-  CInStreamWithCRC,
-  IInStream
+Z7_CLASS_IMP_IInStream(
+  CInStreamWithCRC
 )
-  Z7_IFACE_COM7_IMP(ISequentialInStream)
-
   CMyComPtr<IInStream> _stream;
   UInt64 _size;
   UInt32 _crc;

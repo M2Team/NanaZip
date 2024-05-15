@@ -47,7 +47,9 @@ static const char * const kCantRenameFile = "Cannot rename existing file";
 static const char * const kCantDeleteOutputFile = "Cannot delete output file";
 static const char * const kCantDeleteOutputDir = "Cannot delete output folder";
 static const char * const kCantOpenOutFile = "Cannot open output file";
+#ifndef Z7_SFX
 static const char * const kCantOpenInFile = "Cannot open input file";
+#endif
 static const char * const kCantSetFileLen = "Cannot set length for output file";
 #ifdef SUPPORT_LINKS
 static const char * const kCantCreateHardLink = "Cannot create hard link";
@@ -124,7 +126,7 @@ static bool FindExt2(const char *p, const UString &name)
       break;
     if (c >= 0x80)
       return false;
-    s += (char)MyCharLower_Ascii((char)c);
+    s.Add_Char((char)MyCharLower_Ascii((char)c));
   }
   for (unsigned i = 0; p[i] != 0;)
   {
@@ -161,10 +163,12 @@ void ReadZoneFile_Of_BaseFile(CFSTR fileName2, CByteBuffer &buf)
   buf.Free();
 }
 
-static bool WriteZoneFile(CFSTR fileName, const CByteBuffer &buf)
+bool WriteZoneFile_To_BaseFile(CFSTR fileName, const CByteBuffer &buf)
 {
+  FString path (fileName);
+  path += k_ZoneId_StreamName;
   NIO::COutFile file;
-  if (!file.Create(fileName, true))
+  if (!file.Create_ALWAYS(path))
     return false;
   return file.WriteFull(buf, buf.Size());
 }
@@ -275,6 +279,7 @@ CArchiveExtractCallback::CArchiveExtractCallback():
     Write_CTime(true),
     Write_ATime(true),
     Write_MTime(true),
+    Is_elimPrefix_Mode(false),
     _multiArchives(false)
 {
   LocalProgressSpec = new CLocalProgress();
@@ -497,16 +502,15 @@ void CArchiveExtractCallback::CreateComplexDirectory(const UStringVector &dirPat
       }
     #endif
 
-    // bool res =
-    CreateDir(fullPath);
-    // if (!res)
+    HRESULT hres = S_OK;
+    if (!CreateDir(fullPath))
+      hres = GetLastError_noZero_HRESULT();
     if (isFinalDir)
     {
       if (!NFile::NFind::DoesDirExist(fullPath))
       {
         _itemFailure = true;
-        SendMessageError("Cannot create folder", fullPath);
-        // SendMessageError_with_LastError()
+        SendMessageError_with_Error(hres, "Cannot create folder", fullPath);
       }
     }
   }
@@ -544,18 +548,23 @@ HRESULT CArchiveExtractCallback::SendMessageError(const char *message, const FSt
   return _extractCallback2->MessageError(s);
 }
 
-HRESULT CArchiveExtractCallback::SendMessageError_with_LastError(const char *message, const FString &path)
+
+HRESULT CArchiveExtractCallback::SendMessageError_with_Error(HRESULT errorCode, const char *message, const FString &path)
 {
-  DWORD errorCode = GetLastError();
-  if (errorCode == 0)
-    errorCode = (DWORD)E_FAIL;
   UString s (message);
+  if (errorCode != S_OK)
   {
     s += " : ";
     s += NError::MyFormatMessage(errorCode);
   }
   AddPathToMessage(s, path);
   return _extractCallback2->MessageError(s);
+}
+
+HRESULT CArchiveExtractCallback::SendMessageError_with_LastError(const char *message, const FString &path)
+{
+  const HRESULT errorCode = GetLastError_noZero_HRESULT();
+  return SendMessageError_with_Error(errorCode, message, path);
 }
 
 HRESULT CArchiveExtractCallback::SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2)
@@ -692,7 +701,7 @@ bool CensorNode_CheckPath2(const NWildcard::CCensorNode &node, const CReadArcIte
   if (pathParts2.IsEmpty())
     pathParts2.AddNew();
   UString &back = pathParts2.Back();
-  back += ':';
+  back.Add_Colon();
   back += item.AltStreamName;
   bool include2;
   
@@ -1064,7 +1073,7 @@ void CArchiveExtractCallback::CorrectPathParts()
     
     UString &name = pathParts.Back();
     if (needColon)
-      name += (char)(_ntOptions.ReplaceColonForAltStream ? '_' : ':');
+      name.Add_Char((char)(_ntOptions.ReplaceColonForAltStream ? '_' : ':'));
     name += s;
   }
     
@@ -1111,6 +1120,7 @@ void CArchiveExtractCallback::CreateFolders()
   // 21.04 : we don't change original (_item.PathParts) here
   UStringVector pathParts = _item.PathParts;
 
+  // bool is_DirOp = false;
   if (!pathParts.IsEmpty())
   {
     /* v23: if we extract symlink, and we know that it links to dir:
@@ -1125,15 +1135,44 @@ void CArchiveExtractCallback::CreateFolders()
         #endif
        )
       pathParts.DeleteBack();
+    // else is_DirOp = true;
   }
     
   if (pathParts.IsEmpty())
-    return;
+  {
+    /* if (_some_pathParts_wereRemoved && Is_elimPrefix_Mode),
+       then we can have empty pathParts() here for root folder.
+       v24.00: fixed: we set timestamps for such folder still.
+    */
+    if (!_some_pathParts_wereRemoved ||
+        !Is_elimPrefix_Mode)
+      return;
+    // return; // ignore empty paths case
+  }
+  /*
+  if (is_DirOp)
+  {
+    RINOK(PrepareOperation(NArchive::NExtract::NAskMode::kExtract))
+    _op_WasReported = true;
+  }
+  */
 
   FString fullPathNew;
   CreateComplexDirectory(pathParts, fullPathNew);
-        
+
+  /*
+  if (is_DirOp)
+  {
+    RINOK(SetOperationResult(
+        // _itemFailure ? NArchive::NExtract::NOperationResult::kDataError :
+        NArchive::NExtract::NOperationResult::kOK
+        ))
+  }
+  */
+  
   if (!_item.IsDir)
+    return;
+  if (fullPathNew.IsEmpty())
     return;
 
   if (_itemFailure)
@@ -1326,7 +1365,7 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
     {
       const CIndexToPathPair &pair = _renamedFiles[(unsigned)renIndex];
       fullProcessedPath = pair.Path;
-      fullProcessedPath += ':';
+      fullProcessedPath.Add_Colon();
       UString s (_item.AltStreamName);
       Correct_AltStream_Name(s);
       fullProcessedPath += us2fs(s);
@@ -1408,7 +1447,7 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
         {
           if (!MyCreateHardLink(fullProcessedPath, hl))
           {
-            HRESULT errorCode = GetLastError_noZero_HRESULT();
+            const HRESULT errorCode = GetLastError_noZero_HRESULT();
             RINOK(SendMessageError2(errorCode, kCantCreateHardLink, fullProcessedPath, hl))
             return S_OK;
           }
@@ -1431,7 +1470,7 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
   _outFileStreamSpec = new COutFileStream;
   CMyComPtr<IOutStream> outFileStream_Loc(_outFileStreamSpec);
   
-  if (!_outFileStreamSpec->Open(fullProcessedPath, _isSplit ? OPEN_ALWAYS: CREATE_ALWAYS))
+  if (!_outFileStreamSpec->Create_ALWAYS_or_Open_ALWAYS(fullProcessedPath, !_isSplit))
   {
     // if (::GetLastError() != ERROR_FILE_EXISTS || !isSplit)
     {
@@ -1590,6 +1629,9 @@ Z7_COM7F_IMF(CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
   _isSymLinkCreated = false;
   _itemFailure = false;
 
+  _some_pathParts_wereRemoved = false;
+  // _op_WasReported = false;
+
   #ifdef SUPPORT_LINKS
   // _copyFile_Path.Empty();
   _link.Clear();
@@ -1607,6 +1649,7 @@ Z7_COM7F_IMF(CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
       else
         _extractMode = true;
       break;
+    default: break;
   }
 
 
@@ -1684,7 +1727,7 @@ Z7_COM7F_IMF(CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
 
     unsigned numRemovePathParts = 0;
     
-    switch (_pathMode)
+    switch ((int)_pathMode)
     {
       case NExtract::NPathMode::kFullPaths:
       case NExtract::NPathMode::kCurPaths:
@@ -1730,7 +1773,10 @@ Z7_COM7F_IMF(CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
             return E_FAIL;
         }
         else
+        {
           numRemovePathParts = _removePathParts.Size();
+          _some_pathParts_wereRemoved = true;
+        }
         break;
       }
       
@@ -1752,7 +1798,7 @@ Z7_COM7F_IMF(CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
         break;
       }
       case NExtract::NPathMode::kAbsPaths:
-      // default:
+      default:
         break;
     }
     
@@ -1777,7 +1823,7 @@ Z7_COM7F_IMF(CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
     if (_item.IsAltStream)
     {
       if (!pathParts.IsEmpty() || (!_removePartsForAltStreams && _pathMode != NExtract::NPathMode::kNoPathsAlt))
-        name += ':';
+        name.Add_Colon();
       name += _item.AltStreamName;
     }
     #endif
@@ -1854,6 +1900,7 @@ Z7_COM7F_IMF(CArchiveExtractCallback::PrepareOperation(Int32 askExtractMode))
   COM_TRY_BEGIN
 
   #ifndef Z7_SFX
+  // if (!_op_WasReported)
   if (ExtractToStreamCallback)
     return ExtractToStreamCallback->PrepareOperation7(askExtractMode);
   #endif
@@ -1868,7 +1915,10 @@ Z7_COM7F_IMF(CArchiveExtractCallback::PrepareOperation(Int32 askExtractMode))
       else
         _extractMode = true;
       break;
+    default: break;
   }
+
+  // if (_op_WasReported) return S_OK;
   
   return _extractCallback2->PrepareOperation(_item.Path, BoolToInt(_item.IsDir),
       askExtractMode, _isSplit ? &_position: NULL);
@@ -1912,8 +1962,7 @@ HRESULT CArchiveExtractCallback::CloseFile()
         FindExt2(kOfficeExtensions, fs2us(_diskFilePath)))
     {
       // we must write zone file before setting of timestamps
-      const FString path = _diskFilePath + k_ZoneId_StreamName;
-      if (!WriteZoneFile(path, ZoneBuf))
+      if (!WriteZoneFile_To_BaseFile(_diskFilePath, ZoneBuf))
       {
         // we can't write it in FAT
         // SendMessageError_with_LastError("Can't write Zone.Identifier stream", path);
@@ -1998,6 +2047,11 @@ HRESULT CArchiveExtractCallback::SetFromLinkPath(
         const HRESULT errorCode = GetLastError_noZero_HRESULT();
         RINOK(SendMessageError2(errorCode, kCantCreateHardLink, fullProcessedPath, existPath))
       }
+      /*
+      RINOK(PrepareOperation(NArchive::NExtract::NAskMode::kExtract))
+      _op_WasReported = true;
+      RINOK(SetOperationResult(NArchive::NExtract::NOperationResult::kOK))
+      */
       linkWasSet = true;
       return S_OK;
     }
@@ -2427,6 +2481,8 @@ Z7_COM7F_IMF(CArchiveExtractCallback::CryptoGetTextPassword(BSTR *password))
 }
 
 
+#ifndef Z7_SFX
+
 // ---------- HASH functions ----------
 
 FString CArchiveExtractCallback::Hash_GetFullFilePath()
@@ -2499,6 +2555,79 @@ Z7_COM7F_IMF(CArchiveExtractCallback::ReportOperation(
   return S_OK;
   // COM_TRY_END
 }
+
+
+Z7_COM7F_IMF(CArchiveExtractCallback::RequestMemoryUse(
+    UInt32 flags, UInt32 indexType, UInt32 index, const wchar_t *path,
+    UInt64 requiredSize, UInt64 *allowedSize, UInt32 *answerFlags))
+{
+  if ((flags & NRequestMemoryUseFlags::k_IsReport) == 0)
+  {
+    const UInt64 memLimit = _ntOptions.MemLimit;
+    if (memLimit != (UInt64)(Int64)-1)
+    {
+      // we overwrite allowedSize
+      *allowedSize = memLimit;
+      if (requiredSize <= memLimit)
+      {
+        *answerFlags = NRequestMemoryAnswerFlags::k_Allow;
+        return S_OK;
+      }
+      *answerFlags = NRequestMemoryAnswerFlags::k_Limit_Exceeded;
+      if (flags & NRequestMemoryUseFlags::k_SkipArc_IsExpected)
+        *answerFlags |= NRequestMemoryAnswerFlags::k_SkipArc;
+      flags |= NRequestMemoryUseFlags::k_SLimit_Exceeded
+            |  NRequestMemoryUseFlags::k_AllowedSize_WasForced;
+    }
+  }
+
+  if (!_requestMemoryUseCallback)
+  {
+    _extractCallback2.QueryInterface(IID_IArchiveRequestMemoryUseCallback,
+        &_requestMemoryUseCallback);
+    if (!_requestMemoryUseCallback)
+    {
+      // keep default (answerFlags) from caller or (answerFlags) that was set in this function
+      return S_OK;
+    }
+  }
+
+#if 0
+  if ((flags & NRequestMemoryUseFlags::k_IsReport) == 0)
+  if (requiredSize <= *allowedSize)
+  {
+    // it's expected, that *answerFlags was set to NRequestMemoryAnswerFlags::k_Allow already,
+    // because it's default answer for (requiredSize <= *allowedSize) case.
+    *answerFlags = NRequestMemoryAnswerFlags::k_Allow; // optional code
+  }
+  else
+  {
+    // we clear *answerFlags, because we want to disable dafault "Allow", if it's set.
+    // *answerFlags = 0;
+  /*
+      NRequestMemoryAnswerFlags::k_SkipArc |
+      NRequestMemoryAnswerFlags::k_Limit_Exceeded;
+  */
+  }
+#endif
+  
+  UString s;
+  if (!path
+      && indexType == NArchive::NEventIndexType::kInArcIndex
+      && index != (UInt32)(Int32)-1
+      && _arc)
+  {
+    RINOK(_arc->GetItem_Path(index, s))
+    path = s.Ptr();
+  }
+  
+  return _requestMemoryUseCallback->RequestMemoryUse(
+      flags, indexType, index, path,
+      requiredSize, allowedSize, answerFlags);
+}
+
+#endif // Z7_SFX
+
 
 
 // ------------ After Extracting functions ------------

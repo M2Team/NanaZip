@@ -257,8 +257,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
 
       RINOK(GetPropString(callback, i, kpidPath, ui.Name, codePage, utfFlags, true))
       if (ui.IsDir && !ui.Name.IsEmpty() && ui.Name.Back() != '/')
-        ui.Name += '/';
-      // ui.Name += '/'; // for debug
+        ui.Name.Add_Slash();
+      // ui.Name.Add_Slash(); // for debug
 
       if (_posixMode)
       {

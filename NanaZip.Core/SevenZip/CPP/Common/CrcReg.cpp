@@ -11,14 +11,6 @@
 
 EXTERN_C_BEGIN
 
-// UInt32 Z7_FASTCALL CrcUpdateT1(UInt32 v, const void *data, size_t size, const UInt32 *table);
-
-extern CRC_FUNC g_CrcUpdate;
-// extern CRC_FUNC g_CrcUpdateT4;
-extern CRC_FUNC g_CrcUpdateT8;
-extern CRC_FUNC g_CrcUpdateT0_32;
-extern CRC_FUNC g_CrcUpdateT0_64;
-
 EXTERN_C_END
 
 Z7_CLASS_IMP_COM_2(
@@ -27,7 +19,7 @@ Z7_CLASS_IMP_COM_2(
   , ICompressSetCoderProperties
 )
   UInt32 _crc;
-  CRC_FUNC _updateFunc;
+  Z7_CRC_UPDATE_FUNC _updateFunc;
 
   Z7_CLASS_NO_COPY(CCrcHasher)
 
@@ -40,17 +32,10 @@ public:
 
 bool CCrcHasher::SetFunctions(UInt32 tSize)
 {
-  CRC_FUNC f = NULL;
-       if (tSize ==  0) f = g_CrcUpdate;
-  // else if (tSize ==  1) f = CrcUpdateT1;
-  // else if (tSize ==  4) f = g_CrcUpdateT4;
-  else if (tSize ==  8) f = g_CrcUpdateT8;
-  else if (tSize == 32) f = g_CrcUpdateT0_32;
-  else if (tSize == 64) f = g_CrcUpdateT0_64;
-  
+  const Z7_CRC_UPDATE_FUNC f = z7_GetFunc_CrcUpdate(tSize);
   if (!f)
   {
-    _updateFunc = g_CrcUpdate;
+    _updateFunc = CrcUpdate;
     return false;
   }
   _updateFunc = f;
@@ -80,7 +65,7 @@ Z7_COM7F_IMF2(void, CCrcHasher::Init())
 
 Z7_COM7F_IMF2(void, CCrcHasher::Update(const void *data, UInt32 size))
 {
-  _crc = _updateFunc(_crc, data, size, g_CrcTable);
+  _crc = _updateFunc(_crc, data, size);
 }
 
 Z7_COM7F_IMF2(void, CCrcHasher::Final(Byte *digest))

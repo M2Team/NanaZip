@@ -54,31 +54,18 @@
 namespace NArchive {
 namespace NApfs {
 
-#define ValToHex(t) ((char)(((t) < 10) ? ('0' + (t)) : ('a' + ((t) - 10))))
-
-static void ConvertByteToHex(unsigned val, char *s)
-{
-  unsigned t;
-  t = val >> 4;
-  s[0] = ValToHex(t);
-  t = val & 0xF;
-  s[1] = ValToHex(t);
-}
-
 struct CUuid
 {
   Byte Data[16];
 
   void SetHex_To_str(char *s) const
   {
-    for (unsigned i = 0; i < 16; i++)
-      ConvertByteToHex(Data[i], s + i * 2);
-    s[32] = 0;
+    ConvertDataToHex_Lower(s, Data, sizeof(Data));
   }
 
   void AddHexToString(UString &dest) const
   {
-    char temp[32 + 4];
+    char temp[sizeof(Data) * 2 + 4];
     SetHex_To_str(temp);
     dest += temp;
   }
@@ -2151,7 +2138,7 @@ HRESULT CDatabase::ReadMap(UInt64 oid, bool noHeader,
     if (bti.Is_NOHEADER() != noHeader)
       return S_FALSE;
     // we don't allow volumes with big number of Keys
-    const UInt32 kNumItemsMax = k_VectorSizeMax;
+    const unsigned kNumItemsMax = k_VectorSizeMax;
     if (map.bti.node_count > kNumItemsMax)
       return S_FALSE;
     if (map.bti.key_count > kNumItemsMax)
@@ -3759,7 +3746,7 @@ void CDatabase::GetItemPath(unsigned index, const CNode *inode, NWindows::NCOM::
    #ifdef APFS_SHOW_ALT_STREAMS
     if (IsViDef(ref.AttrIndex) && inode)
     {
-      s += ':';
+      s.Add_Colon();
       Utf8Name_to_InterName(inode->Attrs[(unsigned)ref.AttrIndex].Name, s2);
       // s2 += "a\\b"; // for debug
       s += s2;
@@ -4094,7 +4081,6 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   if (numItems == 0)
     return S_OK;
   UInt32 i;
-  
   {
     UInt64 totalSize = 0;
     for (i = 0; i < numItems; i++)
@@ -4107,14 +4093,15 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   UInt64 currentTotalSize = 0, currentItemSize = 0;
   
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
 
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
-  NHfs::CDecoder decoder;
+  // We don't know if zlib without Adler is allowed in APFS.
+  // But zlib without Adler is allowed in HFS.
+  // So here we allow apfs/zlib without Adler:
+  NHfs::CDecoder decoder(true); // IsAdlerOptional
 
   for (i = 0;; i++, currentTotalSize += currentItemSize)
   {
@@ -4131,8 +4118,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
     currentItemSize = GetSize(index);
 
+    int opRes;
+   {
     CMyComPtr<ISequentialOutStream> realOutStream;
-
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
         NExtract::NAskMode::kExtract;
@@ -4165,7 +4153,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     if (!testMode && !realOutStream)
       continue;
     RINOK(extractCallback->PrepareOperation(askMode))
-    int opRes = NExtract::NOperationResult::kDataError;
+    opRes = NExtract::NOperationResult::kDataError;
 
     if (IsViDef(ref.NodeIndex))
     {
@@ -4221,38 +4209,38 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         CMyComPtr<ISequentialInStream> inStream;
         if (GetStream(index, &inStream) == S_OK && inStream)
         {
-          COutStreamWithHash *hashStreamSpec = NULL;
-          CMyComPtr<ISequentialOutStream> hashStream;
-          
+          CMyComPtr2<ISequentialOutStream, COutStreamWithHash> hashStream;
+         
           if (vol.integrity.Is_SHA256())
           {
             const int hashIndex = FindHashIndex_for_Item(index);
             if (hashIndex != -1)
             {
-              hashStreamSpec = new COutStreamWithHash;
-              hashStream = hashStreamSpec;
-              hashStreamSpec->SetStream(realOutStream);
-              hashStreamSpec->Init(&(vol.Hash_Vectors[(unsigned)hashIndex]), sb.block_size_Log);
+              hashStream.Create_if_Empty();
+              hashStream->SetStream(realOutStream);
+              hashStream->Init(&(vol.Hash_Vectors[(unsigned)hashIndex]), sb.block_size_Log);
             }
           }
           
-          RINOK(copyCoder->Code(inStream,
-              hashStream ? hashStream : realOutStream, NULL, NULL, progress))
+          RINOK(copyCoder.Interface()->Code(inStream,
+              hashStream.IsDefined() ?
+                  hashStream.Interface() :
+                  realOutStream.Interface(),
+              NULL, NULL, lps))
           opRes = NExtract::NOperationResult::kDataError;
-          if (copyCoderSpec->TotalSize == currentItemSize)
+          if (copyCoder->TotalSize == currentItemSize)
           {
             opRes = NExtract::NOperationResult::kOK;
-            if (hashStream)
-              if (!hashStreamSpec->FinalCheck())
+            if (hashStream.IsDefined())
+              if (!hashStream->FinalCheck())
                 opRes = NExtract::NOperationResult::kCRCError;
           }
-          else if (copyCoderSpec->TotalSize < currentItemSize)
+          else if (copyCoder->TotalSize < currentItemSize)
             opRes = NExtract::NOperationResult::kUnexpectedEnd;
         }
       }
     }
-    
-    realOutStream.Release();
+   }
     RINOK(extractCallback->SetOperationResult(opRes))
   }
   return S_OK;
@@ -4340,9 +4328,9 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
     const CAttr &attr = inode.Attrs[(unsigned)attrIndex];
     if (!attr.dstream_defined)
     {
-      CBufInStream *streamSpec = new CBufInStream;
-      CMyComPtr<ISequentialInStream> streamTemp = streamSpec;
-      streamSpec->Init(attr.Data, attr.Data.Size(), (IInArchive *)this);
+      CMyComPtr2<ISequentialInStream, CBufInStream> streamTemp;
+      streamTemp.Create_if_Empty();
+      streamTemp->Init(attr.Data, attr.Data.Size(), (IInArchive *)this);
       *stream = streamTemp.Detach();
       return S_OK;
     }
@@ -4392,9 +4380,9 @@ HRESULT CDatabase::GetAttrStream(IInStream *apfsInStream, const CVol &vol,
   *stream = NULL;
   if (!attr.dstream_defined)
   {
-    CBufInStream *streamSpec = new CBufInStream;
-    CMyComPtr<ISequentialInStream> streamTemp = streamSpec;
-    streamSpec->Init(attr.Data, attr.Data.Size(), (IInArchive *)this);
+    CMyComPtr2<ISequentialInStream, CBufInStream> streamTemp;
+    streamTemp.Create_if_Empty();
+    streamTemp->Init(attr.Data, attr.Data.Size(), (IInArchive *)this);
     *stream = streamTemp.Detach();
     return S_OK;
   }
@@ -4427,8 +4415,8 @@ HRESULT CDatabase::GetStream2(
     const CRecordVector<CExtent> *extents, UInt64 rem,
     ISequentialInStream **stream)
 {
-  CExtentsStream *extentStreamSpec = new CExtentsStream();
-  CMyComPtr<ISequentialInStream> extentStream = extentStreamSpec;
+  CMyComPtr2<ISequentialInStream, CExtentsStream> extentStream;
+  extentStream.Create_if_Empty();
 
   UInt64 virt = 0;
   FOR_VECTOR (i, *extents)
@@ -4452,7 +4440,7 @@ HRESULT CDatabase::GetStream2(
     se.Virt = virt;
     virt += cur;
     rem -= cur;
-    extentStreamSpec->Extents.Add(se);
+    extentStream->Extents.Add(se);
     if (rem == 0)
       if (i != extents->Size() - 1)
         return S_FALSE;
@@ -4464,9 +4452,9 @@ HRESULT CDatabase::GetStream2(
   CSeekExtent se;
   se.Phy = 0;
   se.Virt = virt;
-  extentStreamSpec->Extents.Add(se);
-  extentStreamSpec->Stream = apfsInStream;
-  extentStreamSpec->Init();
+  extentStream->Extents.Add(se);
+  extentStream->Stream = apfsInStream;
+  extentStream->Init();
   *stream = extentStream.Detach();
   return S_OK;
 }

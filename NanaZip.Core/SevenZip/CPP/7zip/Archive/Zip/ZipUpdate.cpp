@@ -976,7 +976,7 @@ static HRESULT Update2(
   
   complexity = 0;
   
-  const Byte method = options.MethodSequence.Front();
+  const Byte method = options.MethodSequence.FrontItem();
 
   COneMethodInfo *oneMethodMain = NULL;
   if (!options2._methods.IsEmpty())
@@ -1310,7 +1310,7 @@ static HRESULT Update2(
 
       {
         NWindows::NSynchronization::CCriticalSectionLock lock(mtProgressMixerSpec->Mixer2->CriticalSection);
-        HRESULT res = updateCallback->GetStream(ui.IndexInClient, &fileInStream);
+        const HRESULT res = updateCallback->GetStream(ui.IndexInClient, &fileInStream);
         if (res == S_FALSE)
         {
           complexity += ui.Size;
@@ -1395,7 +1395,7 @@ static HRESULT Update2(
     if (ui.NewData)
     {
       // bool isDir = ((ui.NewProps) ? ui.IsDir : item.IsDir());
-      bool isDir = ui.IsDir;
+      const bool isDir = ui.IsDir;
       
       if (isDir)
       {
@@ -1471,7 +1471,7 @@ static HRESULT Update2(
           }
 
           {
-            CThreadInfo &thread = threads.Threads[threadIndices.Front()];
+            CThreadInfo &thread = threads.Threads[threadIndices.FrontItem()];
             if (!thread.OutStreamSpec->WasUnlockEventSent())
             {
               CMyComPtr<IOutStream> outStream;
@@ -1481,11 +1481,11 @@ static HRESULT Update2(
             }
           }
 
-          WRes wres = mtSem.Semaphore.Lock();
+          const WRes wres = mtSem.Semaphore.Lock();
           if (wres != 0)
             return HRESULT_FROM_WIN32(wres);
 
-          int ti = mtSem.GetFreeItem();
+          const int ti = mtSem.GetFreeItem();
           if (ti < 0)
             return E_FAIL;
 
@@ -1617,9 +1617,9 @@ Z7_COM7F_IMF(CSeekOutStream::SetSize(UInt64 newSize))
 }
 */
 
-static const size_t kCacheBlockSize = (1 << 20);
-static const size_t kCacheSize = (kCacheBlockSize << 2);
-static const size_t kCacheMask = (kCacheSize - 1);
+static const size_t kCacheBlockSize = 1 << 20;
+static const size_t kCacheSize = kCacheBlockSize << 2;
+static const size_t kCacheMask = kCacheSize - 1;
 
 Z7_CLASS_IMP_NOQIB_2(
   CCacheOutStream
@@ -1628,55 +1628,66 @@ Z7_CLASS_IMP_NOQIB_2(
 )
   Z7_IFACE_COM7_IMP(ISequentialOutStream)
 
-  CMyComPtr<IOutStream> _stream;
+  HRESULT _hres;
   CMyComPtr<ISequentialOutStream> _seqStream;
+  CMyComPtr<IOutStream> _stream;
+  CMyComPtr<IStreamSetRestriction> _setRestriction;
   Byte *_cache;
+  size_t _cachedSize;
+  UInt64 _cachedPos;
   UInt64 _virtPos;
   UInt64 _virtSize;
   UInt64 _phyPos;
-  UInt64 _phySize; // <= _virtSize
-  UInt64 _cachedPos; // (_cachedPos + _cachedSize) <= _virtSize
-  size_t _cachedSize;
-  HRESULT _hres;
-
+  UInt64 _phySize;
   UInt64 _restrict_begin;
   UInt64 _restrict_end;
-  UInt64 _restrict_phy; // begin
-  CMyComPtr<IStreamSetRestriction> _setRestriction;
 
-  HRESULT MyWrite(size_t size);
-  HRESULT MyWriteBlock()
-  {
-    return MyWrite(kCacheBlockSize - ((size_t)_cachedPos & (kCacheBlockSize - 1)));
-  }
-  HRESULT WriteNonRestrictedBlocks();
+  HRESULT FlushFromCache(size_t size);
+  HRESULT FlushNonRestrictedBlocks();
   HRESULT FlushCache();
+  HRESULT SetRestriction_ForWrite(size_t writeSize) const;
+
+  HRESULT SeekPhy(UInt64 pos)
+  {
+    if (pos == _phyPos)
+      return S_OK;
+    if (!_stream)
+      return E_NOTIMPL;
+    _hres = _stream->Seek((Int64)pos, STREAM_SEEK_SET, &_phyPos);
+    if (_hres == S_OK && _phyPos != pos)
+      _hres = E_FAIL;
+    return _hres;
+  }
+
 public:
   CCacheOutStream(): _cache(NULL) {}
   ~CCacheOutStream();
-  bool Allocate();
+  bool Allocate()
+  {
+    if (!_cache)
+      _cache = (Byte *)::MidAlloc(kCacheSize);
+    return _cache != NULL;
+  }
   HRESULT Init(ISequentialOutStream *seqStream, IOutStream *stream, IStreamSetRestriction *setRestriction);
   HRESULT FinalFlush();
 };
 
-
-bool CCacheOutStream::Allocate()
+CCacheOutStream::~CCacheOutStream()
 {
-  if (!_cache)
-    _cache = (Byte *)::MidAlloc(kCacheSize);
-  return (_cache != NULL);
+  ::MidFree(_cache);
 }
+
 
 HRESULT CCacheOutStream::Init(ISequentialOutStream *seqStream, IOutStream *stream, IStreamSetRestriction *setRestriction)
 {
-  _cachedPos = 0;
-  _cachedSize = 0;
   _hres = S_OK;
-  _restrict_begin = 0;
-  _restrict_end = 0;
-  _restrict_phy = 0;
+  _cachedSize = 0;
+  _cachedPos = 0;
   _virtPos = 0;
   _virtSize = 0;
+  // by default we have no restriction
+  _restrict_begin = 0;
+  _restrict_end = 0;
   _seqStream = seqStream;
   _stream = stream;
   _setRestriction = setRestriction;
@@ -1692,63 +1703,99 @@ HRESULT CCacheOutStream::Init(ISequentialOutStream *seqStream, IOutStream *strea
 }
 
 
-/* it writes up to (size) bytes from cache.
-   (size > _cachedSize) is allowed */
-
-HRESULT CCacheOutStream::MyWrite(size_t size)
+/* we call SetRestriction_ForWrite() just before Write() from cache.
+   (_phyPos == _cachedPos)
+   (writeSize != 0)
+*/
+HRESULT CCacheOutStream::SetRestriction_ForWrite(size_t writeSize) const
 {
-  PRF(printf("\n-- CCacheOutStream::MyWrite %u\n", (unsigned)size));
-  if (_hres != S_OK)
-    return _hres;
-  while (size != 0 && _cachedSize != 0)
+  if (!_setRestriction)
+    return S_OK;
+  PRF(printf("\n-- CCacheOutStream::SetRestriction_ForWrite _cachedPos = 0x%x, writeSize = %d\n", (unsigned)_cachedPos, (unsigned)writeSize));
+  UInt64 begin = _restrict_begin;
+  UInt64 end = _restrict_end;
+  const UInt64 phyPos = _phyPos;
+  if (phyPos != _cachedPos) return E_FAIL;
+  if (phyPos == _phySize)
   {
-    if (_phyPos != _cachedPos)
+    // The writing will be to the end of phy stream.
+    // So we will try to use non-restricted write, if possible.
+    if (begin == end)
+      begin = _virtPos; // _virtSize; // it's supposed that (_virtSize == _virtPos)
+    if (phyPos + writeSize <= begin)
     {
-      if (!_stream)
-        return E_FAIL;
-      _hres = _stream->Seek((Int64)_cachedPos, STREAM_SEEK_SET, &_phyPos);
-      RINOK(_hres)
-      if (_phyPos != _cachedPos)
-      {
-        _hres = E_FAIL;
-        return _hres;
-      }
+      // the write is not restricted
+      PRF(printf("\n+++ write is not restricted \n"));
+      begin = 0;
+      end = 0;
     }
-    const size_t pos = (size_t)_cachedPos & kCacheMask;
-    size_t curSize = kCacheSize - pos;
-    curSize = MyMin(curSize, _cachedSize);
-    curSize = MyMin(curSize, size);
-    _hres = WriteStream(_seqStream, _cache + pos, curSize);
-    RINOK(_hres)
-    _phyPos += curSize;
-    if (_phySize < _phyPos)
-      _phySize = _phyPos;
-    _cachedPos += curSize;
-    _cachedSize -= curSize;
-    size -= curSize;
+    else
+    {
+      if (begin > phyPos)
+        begin = phyPos;
+      end = (UInt64)(Int64)-1;
+    }
   }
-  
-  if (_setRestriction)
-  if (_restrict_begin == _restrict_end || _cachedPos <= _restrict_begin)
-  if (_restrict_phy < _cachedPos)
+  else
   {
-    _restrict_phy = _cachedPos;
-    return _setRestriction->SetRestriction(_cachedPos, (UInt64)(Int64)-1);
+    // (phyPos != _phySize)
+    if (begin == end || begin > phyPos)
+      begin = phyPos;
+    end = (UInt64)(Int64)-1;
   }
-  return S_OK;
+  return _setRestriction->SetRestriction(begin, end);
 }
 
 
-HRESULT CCacheOutStream::WriteNonRestrictedBlocks()
+/* it writes up to (size) bytes from cache.
+   (size > _cachedSize) is allowed
+*/
+HRESULT CCacheOutStream::FlushFromCache(size_t size)
+{
+  PRF(printf("\n-- CCacheOutStream::FlushFromCache %u\n", (unsigned)size));
+  if (_hres != S_OK)
+    return _hres;
+  if (size == 0 || _cachedSize == 0)
+    return S_OK;
+  RINOK(SeekPhy(_cachedPos))
+  for (;;)
+  {
+    // (_phyPos == _cachedPos)
+    const size_t pos = (size_t)_cachedPos & kCacheMask;
+    size_t cur = kCacheSize - pos;
+    cur = MyMin(cur, _cachedSize);
+    cur = MyMin(cur, size);
+    _hres = SetRestriction_ForWrite(cur);
+    RINOK(_hres)
+    PRF(printf("\n-- CCacheOutStream::WriteFromCache _phyPos = 0x%x, size = %d\n", (unsigned)_phyPos, (unsigned)cur));
+    _hres = WriteStream(_seqStream, _cache + pos, cur);
+    RINOK(_hres)
+    _phyPos += cur;
+    if (_phySize < _phyPos)
+      _phySize = _phyPos;
+    _cachedPos += cur;
+    _cachedSize -= cur;
+    size -= cur;
+    if (size == 0 || _cachedSize == 0)
+      return S_OK;
+  }
+}
+
+
+HRESULT CCacheOutStream::FlushNonRestrictedBlocks()
 {
   for (;;)
   {
     const size_t size = kCacheBlockSize - ((size_t)_cachedPos & (kCacheBlockSize - 1));
     if (_cachedSize < size)
       break;
-    if (_restrict_begin != _restrict_end && _cachedPos + size > _restrict_begin)
+    UInt64 begin = _restrict_begin;
+    if (begin == _restrict_end)
+      begin = _virtPos;
+    // we don't flush the data to restricted area
+    if (_cachedPos + size > begin)
       break;
-    RINOK(MyWrite(size))
+    RINOK(FlushFromCache(size))
   }
   return S_OK;
 }
@@ -1756,7 +1803,7 @@ HRESULT CCacheOutStream::WriteNonRestrictedBlocks()
 
 HRESULT CCacheOutStream::FlushCache()
 {
-  return MyWrite(_cachedSize);
+  return FlushFromCache(_cachedSize);
 }
 
 HRESULT CCacheOutStream::FinalFlush()
@@ -1770,25 +1817,17 @@ HRESULT CCacheOutStream::FinalFlush()
     {
       // it's unexpected
       RINOK(_stream->SetSize(_virtSize))
+      _phySize = _virtSize;
     }
-    if (_virtPos != _phyPos)
-    {
-      RINOK(_stream->Seek((Int64)_virtPos, STREAM_SEEK_SET, NULL))
-    }
+    _hres = SeekPhy(_virtPos);
   }
-  return S_OK;
-}
-
-
-CCacheOutStream::~CCacheOutStream()
-{
-  ::MidFree(_cache);
+  return _hres;
 }
 
 
 Z7_COM7F_IMF(CCacheOutStream::Write(const void *data, UInt32 size, UInt32 *processedSize))
 {
-  PRF(printf("\n-- CCacheOutStream::Write %u\n", (unsigned)size));
+  PRF(printf("\n==== CCacheOutStream::Write virtPos=0x%x, %u\n", (unsigned)_virtPos, (unsigned)size));
 
   if (processedSize)
     *processedSize = 0;
@@ -1804,38 +1843,74 @@ Z7_COM7F_IMF(CCacheOutStream::Write(const void *data, UInt32 size, UInt32 *proce
     RINOK(FlushCache())
   }
 
-  // ---------- Writing data to cache ----------
-
   if (_cachedSize == 0)
     _cachedPos = _virtPos;
 
   const size_t pos = (size_t)_virtPos & kCacheMask;
-  size = (UInt32)MyMin((size_t)size, kCacheSize - pos);
-  const UInt64 cachedEnd = _cachedPos + _cachedSize;
-  
-  // (_virtPos >= _cachedPos) (_virtPos <= cachedEnd)
-  
-  if (_virtPos != cachedEnd)
   {
-    // _virtPos < cachedEnd
+    const size_t blockRem = kCacheBlockSize - ((size_t)_virtPos & (kCacheBlockSize - 1));
+    if (size > blockRem)
+      size = (UInt32)blockRem;
+  }
+  // _cachedPos <= _virtPos <= _cachedPos + _cachedSize
+  const UInt64 cachedRem = _cachedPos + _cachedSize - _virtPos;
+  if (cachedRem)
+  {
+    // _virtPos < _cachedPos + _cachedSize
     // we rewrite only existing data in cache. So _cachedSize will be not changed
-    size = (UInt32)MyMin((size_t)size, (size_t)(cachedEnd - _virtPos));
+    if (size > cachedRem)
+      size = (UInt32)cachedRem;
   }
   else
   {
-    // _virtPos == cachedEnd
+    // _virtPos == _cachedPos + _cachedSize
     // so we need to add new data to the end of cache
     if (_cachedSize == kCacheSize)
     {
-      // cache is full. So we flush part of cache
-      RINOK(MyWriteBlock())
+      // cache is full. So we need to flush some part of cache.
+      // we flush only one block, but we are allowed to flush any size here
+      RINOK(FlushFromCache(kCacheBlockSize - ((size_t)_cachedPos & (kCacheBlockSize - 1))))
     }
     // _cachedSize != kCacheSize
     // so we have some space for new data in cache
-    const size_t startPos = (size_t)_cachedPos & kCacheMask;
-    // we don't allow new data to overwrite old start data in cache.
-    if (startPos > pos)
-      size = (UInt32)MyMin((size_t)size, (size_t)(startPos - pos));
+    if (_cachedSize == 0)
+    {
+      /* this code is optional (for optimization):
+         we write data directly without cache,
+         if there is no restriction and we have full block. */
+      if (_restrict_begin == _restrict_end
+          && size == kCacheBlockSize)
+      {
+        RINOK(SeekPhy(_virtPos))
+        if (_setRestriction)
+        {
+          _hres = _setRestriction->SetRestriction(_restrict_begin, _restrict_end);
+          RINOK(_hres)
+        }
+        PRF(printf("\n-- CCacheOutStream::WriteDirectly _phyPos = 0x%x, size = %d\n", (unsigned)_phyPos, (unsigned)size));
+        _hres = WriteStream(_seqStream, data, size);
+        RINOK(_hres)
+        if (processedSize)
+          *processedSize = size;
+        _virtPos += size;
+        if (_virtSize < _virtPos)
+          _virtSize = _virtPos;
+        _phyPos += size;
+        if (_phySize < _phyPos)
+          _phySize = _phyPos;
+        return S_OK;
+      }
+    }
+    else // (_cachedSize != 0)
+    {
+      const size_t startPos = (size_t)_cachedPos & kCacheMask;
+      // we don't allow new data to overwrite old start data in cache.
+      // (startPos == pos) here means that cache is empty.
+      // (startPos == pos) is not possible here.
+      if (startPos > pos)
+        size = (UInt32)MyMin((size_t)size, (size_t)(startPos - pos));
+    }
+    // _virtPos == (_cachedPos + _cachedSize) still
     _cachedSize += size;
   }
   
@@ -1845,13 +1920,13 @@ Z7_COM7F_IMF(CCacheOutStream::Write(const void *data, UInt32 size, UInt32 *proce
   _virtPos += size;
   if (_virtSize < _virtPos)
     _virtSize = _virtPos;
-  return WriteNonRestrictedBlocks();
+  return FlushNonRestrictedBlocks();
 }
 
 
 Z7_COM7F_IMF(CCacheOutStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition))
 {
-  PRF(printf("\n-- CCacheOutStream::Seek seekOrigin=%d Seek =%u\n", seekOrigin, (unsigned)offset));
+  PRF(printf("\n==== CCacheOutStream::Seek seekOrigin=%d Seek =%u\n", seekOrigin, (unsigned)offset));
   switch (seekOrigin)
   {
     case STREAM_SEEK_SET: break;
@@ -1872,35 +1947,63 @@ Z7_COM7F_IMF(CCacheOutStream::SetSize(UInt64 newSize))
 {
   if (_hres != S_OK)
     return _hres;
-  _virtSize = newSize;
- 
-  if (newSize <= _cachedPos)
+
+  if (newSize <= _cachedPos || _cachedSize == 0)
   {
     _cachedSize = 0;
     _cachedPos = newSize;
   }
   else
   {
+    // _cachedSize != 0
     // newSize > _cachedPos
     const UInt64 offset = newSize - _cachedPos;
     if (offset <= _cachedSize)
     {
+      // newSize is inside cached block or is touching cached block.
+      // so we reduce cache
       _cachedSize = (size_t)offset;
       if (_phySize <= newSize)
-        return S_OK;
+        return S_OK; // _phySize will be restored later after cache flush
+      // (_phySize > newSize)
+      // so we must reduce phyStream size to (newSize) or to (_cachedPos)
+      // newPhySize = _cachedPos; // optional reduce to _cachedPos
     }
     else
     {
       // newSize > _cachedPos + _cachedSize
-      // So we flush cache
-      RINOK(FlushCache())
+      /* It's possible that we need to write zeros,
+         if new size is larger than old size.
+         We don't optimize for possible cases here.
+         So we just flush the cache. */
+      _hres = FlushCache();
     }
   }
+
+  _virtSize = newSize;
+
+  if (_hres != S_OK)
+    return _hres;
 
   if (newSize != _phySize)
   {
     if (!_stream)
       return E_NOTIMPL;
+    // if (_phyPos > newSize)
+    RINOK(SeekPhy(newSize))
+    if (_setRestriction)
+    {
+      UInt64 begin = _restrict_begin;
+      UInt64 end = _restrict_end;
+      if (_cachedSize != 0)
+      {
+        if (begin > _cachedPos)
+          begin = _cachedPos;
+        end = (UInt64)(Int64)-1;
+      }
+      _hres = _setRestriction->SetRestriction(begin, end);
+      RINOK(_hres)
+    }
     _hres = _stream->SetSize(newSize);
     RINOK(_hres)
     _phySize = newSize;
@@ -1911,10 +2014,10 @@ Z7_COM7F_IMF(CCacheOutStream::SetSize(UInt64 newSize))
 
 Z7_COM7F_IMF(CCacheOutStream::SetRestriction(UInt64 begin, UInt64 end))
 {
-  PRF(printf("\n============ CCacheOutStream::SetRestriction %u, %u\n", (unsigned)begin, (unsigned)end));
+  PRF(printf("\n============ CCacheOutStream::SetRestriction 0x%x, %u\n", (unsigned)begin, (unsigned)end));
   _restrict_begin = begin;
   _restrict_end = end;
-  return WriteNonRestrictedBlocks();
+  return FlushNonRestrictedBlocks();
 }
 
 
@@ -1971,6 +2074,11 @@ HRESULT Update(
       }
     }
 
+    outSeqMode = (outStreamReal == NULL);
+    if (outSeqMode)
+      setRestriction.Release();
+    /* CCacheOutStream works as non-restricted by default.
+       So we use (setRestriction == NULL) for outSeqMode */
     // bool use_cacheStream = true;
     // if (use_cacheStream)
     {
@@ -1980,7 +2088,8 @@ HRESULT Update(
         return E_OUTOFMEMORY;
       RINOK(cacheStream->Init(seqOutStream, outStreamReal, setRestriction))
       setRestriction.Release();
-      setRestriction = cacheStream;
+      if (!outSeqMode)
+        setRestriction = cacheStream;
     }
     /*
     else if (!outStreamReal)
@@ -1992,7 +2101,6 @@ HRESULT Update(
     else
       outStream = outStreamReal;
     */
-    outSeqMode = (outStreamReal == NULL);
   }
 
   COutArchive outArchive;

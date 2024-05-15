@@ -80,7 +80,7 @@ HRESULT CDecoder::DecodeUncompressed(UInt32 unpackSize)
     UInt32 cur = unpackSize;
     if (cur > kBufSize)
       cur = kBufSize;
-    UInt32 cur2 = (UInt32)m_InStream.ReadBytes(buf, cur);
+    const UInt32 cur2 = (UInt32)m_InStream.ReadBytes(buf, cur);
     m_OutWindowStream.PutBytes(buf, cur2);
     if (cur != cur2)
       return S_FALSE;
@@ -91,7 +91,7 @@ HRESULT CDecoder::DecodeUncompressed(UInt32 unpackSize)
 
 HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
 {
-  PRF(printf("\nLZVN %7u %7u", unpackSize, packSize));
+  PRF(printf("\nLZVN 0x%07x 0x%07x\n", unpackSize, packSize));
   
   UInt32 D = 0;
 
@@ -241,19 +241,27 @@ HRESULT CDecoder::DecodeLzvn(UInt32 unpackSize, UInt32 packSize)
     return S_FALSE;
 
   // LZVN encoder writes 7 additional zero bytes
-  if (packSize != 7)
+  if (packSize < 7)
     return S_FALSE;
-  do
+  for (unsigned i = 0; i < 7; i++)
   {
     Byte b;
     if (!m_InStream.ReadByte(b))
       return S_FALSE;
-    packSize--;
     if (b != 0)
       return S_FALSE;
   }
-  while (packSize != 0);
-
+  packSize -= 7;
+  if (packSize)
+  {
+    PRF(printf("packSize after unused = %u\n", packSize));
+    // if (packSize <= 0x100) { Byte buf[0x100]; m_InStream.ReadBytes(buf, packSize); }
+    /* Lzvn block that is used in HFS can contain junk data
+       (at least 256 bytes) after payload data. Why?
+       We ignore that junk data, if it's HFS (LzvnMode) mode. */
+    if (!LzvnMode)
+      return S_FALSE;
+  }
   return S_OK;
 }
 
@@ -479,7 +487,7 @@ static Z7_FORCE_INLINE int FseInStream_Init(CBitStream *s,
 static Z7_FORCE_INLINE UInt32 BitStream_Pull(CBitStream *s, unsigned numBits)
 {
   s->numBits -= numBits;
-  UInt32 v = s->accum >> s->numBits;
+  const UInt32 v = s->accum >> s->numBits;
   s->accum = mask31(s->accum, s->numBits);
   return v;
 }
@@ -922,7 +930,7 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
   coderReleaser.NeedFlush = false;
   HRESULT res = m_OutWindowStream.Flush();
   if (res == S_OK)
-    if ((inSize && *inSize != m_InStream.GetProcessedSize())
+    if ((!LzvnMode && inSize && *inSize != m_InStream.GetProcessedSize())
         || (outSize && *outSize != m_OutWindowStream.GetProcessedSize()))
       res = S_FALSE;
   return res;

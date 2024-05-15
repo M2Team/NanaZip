@@ -99,12 +99,12 @@ public:
 
   CFileInfoBase() { ClearBase(); }
   void ClearBase() throw();
+  bool SetAs_StdInFile();
 
  #ifdef _WIN32
  
   bool Fill_From_ByHandleFileInfo(CFSTR path);
   void SetAsDir()  { Attrib = FILE_ATTRIBUTE_DIRECTORY; } // |= (FILE_ATTRIBUTE_UNIX_EXTENSION + (S_IFDIR << 16));
-  void SetAsFile() { Attrib = 0; }
 
   bool IsArchived() const { return MatchesMask(FILE_ATTRIBUTE_ARCHIVE); }
   bool IsCompressed() const { return MatchesMask(FILE_ATTRIBUTE_COMPRESSED); }
@@ -132,8 +132,8 @@ public:
   UInt32 GetWinAttrib() const { return Get_WinAttribPosix_From_PosixMode(mode); }
 
   bool IsDir() const { return S_ISDIR(mode); }
-  void SetAsDir()  { mode = S_IFDIR; }
-  void SetAsFile() { mode = S_IFREG; }
+  void SetAsDir()  { mode = S_IFDIR | 0777; }
+  void SetFrom_stat(const struct stat &st);
 
   bool IsReadOnly() const
   {
@@ -173,7 +173,6 @@ struct CFileInfo: public CFileInfoBase
   // bool FollowReparse(CFSTR path, bool isDir);
   #else
   bool Find_DontFill_Name(CFSTR path, bool followLink = false);
-  void SetFrom_stat(const struct stat &st);
   #endif
 };
 
@@ -278,19 +277,19 @@ typedef CFileInfo CDirEntry;
 struct CDirEntry
 {
   ino_t iNode;
-  #if !defined(_AIX)
+#if !defined(_AIX) && !defined(__sun)
   Byte Type;
-  #endif
+#endif
   FString Name;
 
   /*
-  #if !defined(_AIX)
+#if !defined(_AIX) && !defined(__sun)
   bool IsDir() const
   {
     // (Type == DT_UNKNOWN) on some systems
     return Type == DT_DIR;
   }
-  #endif
+#endif
   */
 
   bool IsDots() const throw();
@@ -311,12 +310,12 @@ public:
   bool Fill_FileInfo(const CDirEntry &de, CFileInfo &fileInfo, bool followLink) const;
   bool DirEntry_IsDir(const CDirEntry &de, bool followLink) const
   {
-    #if !defined(_AIX)
+#if !defined(_AIX) && !defined(__sun)
     if (de.Type == DT_DIR)
       return true;
     if (de.Type != DT_UNKNOWN)
       return false;
-    #endif
+#endif
     CFileInfo fileInfo;
     if (Fill_FileInfo(de, fileInfo, followLink))
     {

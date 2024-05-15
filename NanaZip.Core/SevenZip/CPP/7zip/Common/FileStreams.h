@@ -46,8 +46,9 @@ Z7_class_final(CInFileStream) :
   public IStreamGetProp,
   public CMyUnknownImp
 {
-  Z7_COM_UNKNOWN_IMP_5(
+  Z7_COM_UNKNOWN_IMP_6(
       IInStream,
+      ISequentialInStream,
       IStreamGetSize,
       IStreamGetProps,
       IStreamGetProps2,
@@ -108,6 +109,10 @@ public:
   {
     return File.GetLength(length);
   }
+
+#if 0
+  bool OpenStdIn();
+#endif
   
   bool Open(CFSTR fileName)
   {
@@ -122,6 +127,7 @@ public:
   }
 };
 
+// bool CreateStdInStream(CMyComPtr<ISequentialInStream> &str);
 
 Z7_CLASS_IMP_NOQIB_1(
   CStdInFileStream
@@ -139,15 +145,28 @@ public:
 
   NWindows::NFile::NIO::COutFile File;
 
-  bool Create(CFSTR fileName, bool createAlways)
+  bool Create_NEW(CFSTR fileName)
   {
     ProcessedSize = 0;
-    return File.Create(fileName, createAlways);
+    return File.Create_NEW(fileName);
   }
-  bool Open(CFSTR fileName, DWORD creationDisposition)
+
+  bool Create_ALWAYS(CFSTR fileName)
   {
     ProcessedSize = 0;
-    return File.Open(fileName, creationDisposition);
+    return File.Create_ALWAYS(fileName);
+  }
+
+  bool Open_EXISTING(CFSTR fileName)
+  {
+    ProcessedSize = 0;
+    return File.Open_EXISTING(fileName);
+  }
+
+  bool Create_ALWAYS_or_Open_ALWAYS(CFSTR fileName, bool createAlways)
+  {
+    ProcessedSize = 0;
+    return File.Create_ALWAYS_or_Open_ALWAYS(fileName, createAlways);
   }
 
   HRESULT Close();

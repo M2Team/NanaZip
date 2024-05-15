@@ -26,8 +26,6 @@ Z7_COM7F_IMF2(UInt32, CCoder::Filter(Byte *data, UInt32 size))
 }
 
 
-namespace NArm64 {
-
 #ifndef Z7_EXTRACT_ONLY
 
 Z7_COM7F_IMF(CEncoder::Init())
@@ -38,7 +36,7 @@ Z7_COM7F_IMF(CEncoder::Init())
 
 Z7_COM7F_IMF2(UInt32, CEncoder::Filter(Byte *data, UInt32 size))
 {
-  const UInt32 processed = (UInt32)(size_t)(Z7_BRANCH_CONV_ENC(ARM64)(data, size, _pc) - data);
+  const UInt32 processed = (UInt32)(size_t)(BraFunc(data, size, _pc) - data);
   _pc += processed;
   return processed;
 }
@@ -56,7 +54,7 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIA
       if (prop.vt != VT_UI4)
         return E_INVALIDARG;
       pc = prop.ulVal;
-      if ((pc & 3) != 0)
+      if (pc & _alignment)
         return E_INVALIDARG;
     }
   }
@@ -69,9 +67,9 @@ Z7_COM7F_IMF(CEncoder::WriteCoderProperties(ISequentialOutStream *outStream))
 {
   if (_pc_Init == 0)
     return S_OK;
-  Byte buf[4];
-  SetUi32(buf, _pc_Init)
-  return WriteStream(outStream, buf, 4);
+  UInt32 buf32[1];
+  SetUi32(buf32, _pc_Init)
+  return WriteStream(outStream, buf32, 4);
 }
 
 #endif
@@ -85,7 +83,7 @@ Z7_COM7F_IMF(CDecoder::Init())
 
 Z7_COM7F_IMF2(UInt32, CDecoder::Filter(Byte *data, UInt32 size))
 {
-  const UInt32 processed = (UInt32)(size_t)(Z7_BRANCH_CONV_DEC(ARM64)(data, size, _pc) - data);
+  const UInt32 processed = (UInt32)(size_t)(BraFunc(data, size, _pc) - data);
   _pc += processed;
   return processed;
 }
@@ -98,13 +96,11 @@ Z7_COM7F_IMF(CDecoder::SetDecoderProperties2(const Byte *props, UInt32 size))
     if (size != 4)
       return E_NOTIMPL;
     val = GetUi32(props);
-    if ((val & 3) != 0)
+    if (val & _alignment)
       return E_NOTIMPL;
   }
   _pc_Init = val;
   return S_OK;
-}
-
 }
 
 }}

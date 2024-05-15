@@ -16,3 +16,14 @@ Z7_COM7F_IMF(COutStreamWithSha1::Write(const void *data, UInt32 size, UInt32 *pr
     *processedSize = size;
   return result;
 }
+
+Z7_COM7F_IMF(CInStreamWithSha1::Read(void *data, UInt32 size, UInt32 *processedSize))
+{
+  UInt32 realProcessedSize;
+  const HRESULT result = _stream->Read(data, size, &realProcessedSize);
+  _size += realProcessedSize;
+  Sha1_Update(Sha(), (const Byte *)data, realProcessedSize);
+  if (processedSize)
+    *processedSize = realProcessedSize;
+  return result;
+}

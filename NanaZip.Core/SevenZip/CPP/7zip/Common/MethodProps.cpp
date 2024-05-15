@@ -60,6 +60,7 @@ HRESULT PROPVARIANT_to_bool(const PROPVARIANT &prop, bool &dest)
     case VT_EMPTY: dest = true; return S_OK;
     case VT_BOOL: dest = (prop.boolVal != VARIANT_FALSE); return S_OK;
     case VT_BSTR: return StringToBool(prop.bstrVal, dest) ? S_OK : E_INVALIDARG;
+    default: break;
   }
   return E_INVALIDARG;
 }
@@ -557,6 +558,7 @@ static bool IsLogSizeProp(PROPID propid)
     */
     // case NCoderPropID::kReduceSize:
       return true;
+    default: break;
   }
   return false;
 }

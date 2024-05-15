@@ -74,7 +74,7 @@ HRESULT CItem::ReadHeader(ISequentialInStream *s, UInt32 &headerSize)
     return S_FALSE;
   Attrib = GetUi32(h + 4);
   Time = GetUi32(h + 12);
-  unsigned info = GetUi16(h + 8);
+  const unsigned info = GetUi16(h + 8);
   Order = (info & 0xF) + 1;
   MemInMB = ((info >> 4) & 0xFF) + 1;
   Ver = info >> 12;
@@ -90,7 +90,7 @@ HRESULT CItem::ReadHeader(ISequentialInStream *s, UInt32 &headerSize)
   if (nameLen > (1 << 9))
     return S_FALSE;
   char *name = Name.GetBuf(nameLen);
-  HRESULT res = ReadStream_FALSE(s, name, nameLen);
+  const HRESULT res = ReadStream_FALSE(s, name, nameLen);
   Name.ReleaseBuf_CalcLen(nameLen);
   headerSize = kHeaderSize + nameLen;
   return res;
@@ -128,12 +128,12 @@ IMP_IInArchive_ArcProps
 void CHandler::GetVersion(NCOM::CPropVariant &prop)
 {
   AString s ("PPMd");
-  s += (char)('A' + _item.Ver);
+  s.Add_Char((char)('A' + _item.Ver));
   s += ":o";
   s.Add_UInt32(_item.Order);
   s += ":mem";
   s.Add_UInt32(_item.MemInMB);
-  s += 'm';
+  s.Add_Char('m');
   if (_item.Ver >= kNewHeaderVer && _item.Restor != 0)
   {
     s += ":r";
@@ -287,6 +287,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   // extractCallback->SetTotal(_packSize);
   UInt64 currentTotalPacked = 0;
   RINOK(extractCallback->SetCompleted(&currentTotalPacked))
+  Int32 opRes;
+{
   CMyComPtr<ISequentialOutStream> realOutStream;
   const Int32 askMode = testMode ?
       NExtract::NAskMode::kTest :
@@ -295,7 +297,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   if (!testMode && !realOutStream)
     return S_OK;
 
-  extractCallback->PrepareOperation(askMode);
+  RINOK(extractCallback->PrepareOperation(askMode))
 
   CByteInBufWrap inBuf;
   if (!inBuf.Alloc(1 << 20))
@@ -306,15 +308,14 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   if (!outBuf.Alloc())
     return E_OUTOFMEMORY;
 
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, true);
 
   CPpmdCpp ppmd(_item.Ver);
   if (!ppmd.Alloc(_item.MemInMB))
     return E_OUTOFMEMORY;
   
-  Int32 opRes = NExtract::NOperationResult::kUnsupportedMethod;
+  opRes = NExtract::NOperationResult::kUnsupportedMethod;
 
   if (_item.IsSupported())
   {
@@ -380,8 +381,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     
     RINOK(inBuf.Res)
   }
-  
-  realOutStream.Release();
+}
   return extractCallback->SetOperationResult(opRes);
 }
 

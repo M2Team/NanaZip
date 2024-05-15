@@ -76,26 +76,26 @@ bool ReadNamesFromListFile2(CFSTR fileName, UStringVector &strings, UINT codePag
       return false;
 
     file.Close();
-    const unsigned num = (unsigned)fileSize / 2;
-    wchar_t *p = u.GetBuf(num);
+    const size_t num = (size_t)fileSize / 2;
+    wchar_t *p = u.GetBuf((unsigned)num);
     if (codePage == Z7_WIN_CP_UTF16)
-      for (unsigned i = 0; i < num; i++)
+      for (size_t i = 0; i < num; i++)
       {
-        wchar_t c = GetUi16(buf + (size_t)i * 2);
+        const wchar_t c = GetUi16(buf.ConstData() + (size_t)i * 2);
         if (c == 0)
           return false;
         p[i] = c;
       }
     else
-      for (unsigned i = 0; i < num; i++)
+      for (size_t i = 0; i < num; i++)
       {
-        wchar_t c = (wchar_t)GetBe16(buf + (size_t)i * 2);
+        const wchar_t c = (wchar_t)GetBe16(buf.ConstData() + (size_t)i * 2);
         if (c == 0)
           return false;
         p[i] = c;
       }
     p[num] = 0;
-    u.ReleaseBuf_SetLen(num);
+    u.ReleaseBuf_SetLen((unsigned)num);
   }
   else
   {

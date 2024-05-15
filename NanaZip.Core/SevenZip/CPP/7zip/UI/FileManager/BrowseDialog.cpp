@@ -58,13 +58,16 @@ using namespace NFind;
 static void MessageBox_Error_Global(HWND wnd, const wchar_t *message)
 {
   // **************** NanaZip Modification Start ****************
-  /*::MessageBoxW(wnd, message, L"7-Zip", MB_ICONERROR);*/
+  //::MessageBoxW(wnd, message, L"7-Zip", MB_ICONERROR);
   ::MessageBoxW(wnd, message, L"NanaZip", MB_ICONERROR);
   // **************** NanaZip Modification End ****************
 }
 
 #ifdef USE_MY_BROWSE_DIALOG
 
+#if 0
+extern HINSTANCE g_hInstance;
+#endif
 extern bool g_LVN_ITEMACTIVATE_Support;
 
 static const int kParentIndex = -1;
@@ -289,6 +292,39 @@ bool CBrowseDialog::OnInit()
   PostMsg(Z7_WIN_WM_UPDATEUISTATE, MAKEWPARAM(Z7_WIN_UIS_CLEAR, Z7_WIN_UISF_HIDEFOCUS));
   #endif
 
+#if 0
+  {
+    const HWND hwndTool = GetItem(IDB_BROWSE_CREATE_DIR);
+    if (hwndTool)
+    {
+      // Create the tooltip:
+      const HWND hwndTip = CreateWindowEx(0, TOOLTIPS_CLASS, NULL,
+          WS_POPUP | TTS_ALWAYSTIP
+          // | TTS_BALLOON
+          , CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+          *this, NULL, g_hInstance, NULL);
+      if (hwndTip)
+      {
+        // Associate the tooltip with the tool:
+        TOOLINFOW toolInfo;
+        memset(&toolInfo, 0, sizeof(toolInfo));
+        toolInfo.cbSize = sizeof(toolInfo);
+        toolInfo.hwnd = *this;
+        toolInfo.uFlags = TTF_IDISHWND | TTF_SUBCLASS;
+        toolInfo.uId = (UINT_PTR)hwndTool;
+        UString s;
+#ifdef Z7_LANG
+        LangString_OnlyFromLangFile(IDM_CREATE_FOLDER, s);
+        s.RemoveChar(L'&');
+        if (s.IsEmpty())
+#endif
+          s = "Create Folder";
+        toolInfo.lpszText = s.Ptr_non_const();
+        SendMessage(hwndTip, TTM_ADDTOOLW, 0, (LPARAM)&toolInfo);
+      }
+    }
+  }
+#endif
   return CModalDialog::OnInit();
 }
 
@@ -382,7 +418,7 @@ bool CBrowseDialog::OnNotify(UINT /* controlID */, LPNMHDR header)
         OnItemEnter();
       break;
     case NM_DBLCLK:
-    case NM_RETURN: // probabably it's unused
+    case NM_RETURN: // probably it's unused
       if (!g_LVN_ITEMACTIVATE_Support)
         OnItemEnter();
       break;
@@ -486,15 +522,19 @@ bool CBrowseDialog::GetParentPath(const UString &path, UString &parentPrefix, US
 
 int CBrowseDialog::CompareItems(LPARAM lParam1, LPARAM lParam2) const
 {
+  if (lParam1 == lParam2)      return 0;
   if (lParam1 == kParentIndex) return -1;
   if (lParam2 == kParentIndex) return 1;
+
   const CFileInfo &f1 = _files[(int)lParam1];
   const CFileInfo &f2 = _files[(int)lParam2];
 
-  const bool isDir1 = f1.IsDir();
   const bool isDir2 = f2.IsDir();
-  if (isDir1 && !isDir2) return -1;
-  if (isDir2 && !isDir1) return 1;
+  if (f1.IsDir())
+  {
+    if (!isDir2) return -1;
+  }
+  else if (isDir2) return 1;
   
   int res = 0;
   switch (_sortIndex)
@@ -511,7 +551,8 @@ static int CALLBACK CompareItems2(LPARAM lParam1, LPARAM lParam2, LPARAM lpData)
   return ((CBrowseDialog *)lpData)->CompareItems(lParam1, lParam2);
 }
 
-static void ConvertSizeToString(UInt64 v, wchar_t *s)
+wchar_t *Browse_ConvertSizeToString(UInt64 v, wchar_t *s);
+wchar_t *Browse_ConvertSizeToString(UInt64 v, wchar_t *s)
 {
   char c = 0;
        if (v >= ((UInt64)10000 << 20)) { v >>= 30; c = 'G'; }
@@ -523,8 +564,9 @@ static void ConvertSizeToString(UInt64 v, wchar_t *s)
     *s++ = ' ';
     *s++ = (wchar_t)c;
     *s++ = 'B';
-    *s++ = 0;
+    *s = 0;
   }
+  return s;
 }
 
 // Reload changes DirPrefix. Don't send DirPrefix in pathPrefix parameter
@@ -660,7 +702,7 @@ HRESULT CBrowseDialog::Reload(const UString &pathPrefix, const UString &selected
     if (item.iImage < 0)
       item.iImage = 0;
     _list.InsertItem(&item);
-    wchar_t s[32];
+    wchar_t s[64];
     {
       s[0] = 0;
       ConvertUtcFileTimeToString(fi.MTime, s,
@@ -675,7 +717,7 @@ HRESULT CBrowseDialog::Reload(const UString &pathPrefix, const UString &selected
     {
       s[0] = 0;
       if (!fi.IsDir())
-        ConvertSizeToString(fi.Size, s);
+        Browse_ConvertSizeToString(fi.Size, s);
       _list.SetSubItem(index, subItem++, s);
     }
   }

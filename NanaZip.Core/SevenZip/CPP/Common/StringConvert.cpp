@@ -267,8 +267,10 @@ void MultiByteToUnicodeString2(UString &dest, const AString &src, UINT codePage)
 
   if (codePage == CP_UTF8 || g_ForceToUTF8)
   {
+#if 1
     ConvertUTF8ToUnicode(src, dest);
     return;
+#endif
   }
 
   const size_t limit = ((size_t)src.Len() + 1) * 2;
@@ -278,48 +280,47 @@ void MultiByteToUnicodeString2(UString &dest, const AString &src, UINT codePage)
   {
     dest.ReleaseBuf_SetEnd((unsigned)len);
 
-    #if WCHAR_MAX > 0xffff
+#if WCHAR_MAX > 0xffff
     d = dest.GetBuf();
     for (size_t i = 0;; i++)
     {
-      // wchar_t c = dest[i];
       wchar_t c = d[i];
+      // printf("\ni=%2d c = %4x\n", (unsigned)i, (unsigned)c);
       if (c == 0)
         break;
       if (c >= 0x10000 && c < 0x110000)
       {
-        /*
-        c -= 0x10000;
-        unsigned c0 = 0xd800 + ((c >> 10) & 0x3FF);
-        dest.ReplaceOneCharAtPos(i, c0);
-        i++;
-        c = 0xdc00 + (c & 0x3FF);
-        dest.Insert_wchar_t(i, c);
-        */
-        UString temp = d + i;
+        UString tempString = d + i;
+        const wchar_t *t = tempString.Ptr();
 
-        for (size_t t = 0;; t++)
+        for (;;)
         {
-          wchar_t w = temp[t];
+          wchar_t w = *t++;
+          // printf("\nchar=%x\n", w);
           if (w == 0)
             break;
           if (i == limit)
             break; // unexpected error
           if (w >= 0x10000 && w < 0x110000)
           {
+#if 1
             if (i + 1 == limit)
               break; // unexpected error
             w -= 0x10000;
-            d[i++] = (unsigned)0xd800 + (((unsigned)w >> 10) & 0x3FF);
-            w = 0xdc00 + (w & 0x3FF);
+            d[i++] = (unsigned)0xd800 + (((unsigned)w >> 10) & 0x3ff);
+            w = 0xdc00 + (w & 0x3ff);
+#else
+            // w = '_'; // for debug
+#endif
           }
           d[i++] = w;
         }
         dest.ReleaseBuf_SetEnd((unsigned)i);
+        break;
       }
     }
 
-    #endif
+#endif
  
     /*
     printf("\nMultiByteToUnicodeString2 (%d) %s\n", (int)src.Len(),  src.Ptr());
@@ -395,34 +396,39 @@ static void UnicodeStringToMultiByte2(AString &dest, const UString &src2, UINT c
   // if (codePage == 1234567) // for debug purposes
   if (codePage == CP_UTF8 || g_ForceToUTF8)
   {
+#if 1
     defaultCharWasUsed = false;
     ConvertUnicodeToUTF8(src2, dest);
     return;
+#endif
   }
 
   UString src = src2;
-  #if WCHAR_MAX > 0xffff
+#if WCHAR_MAX > 0xffff
   {
     src.Empty();
     for (unsigned i = 0; i < src2.Len();)
     {
-      wchar_t c = src2[i];
-      if (c >= 0xd800 && c < 0xdc00 && i + 1 != src2.Len())
+      wchar_t c = src2[i++];
+      if (c >= 0xd800 && c < 0xdc00 && i != src2.Len())
       {
-        const wchar_t c2 = src2[i + 1];
-        if (c2 >= 0xdc00 && c2 < 0x10000)
+        const wchar_t c2 = src2[i];
+        if (c2 >= 0xdc00 && c2 < 0xe000)
         {
+#if 1
           // printf("\nSurragate [%d]: %4x %4x -> ", i, (int)c, (int)c2);
           c = 0x10000 + ((c & 0x3ff) << 10) + (c2 & 0x3ff);
           // printf("%4x\n", (int)c);
           i++;
+#else
+          // c = '_'; // for debug
+#endif
         }
       }
       src += c;
-      i++;
     }
   }
-  #endif
+#endif
 
   dest.Empty();
   defaultCharWasUsed = false;

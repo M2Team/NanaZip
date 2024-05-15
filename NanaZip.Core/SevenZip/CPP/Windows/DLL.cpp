@@ -61,14 +61,14 @@ bool CLibrary::Load(CFSTR path) throw()
 
 bool MyGetModuleFileName(FString &path)
 {
-  HMODULE hModule = g_hInstance;
+  const HMODULE hModule = g_hInstance;
   path.Empty();
   #ifndef _UNICODE
   if (!g_IsNT)
   {
     TCHAR s[MAX_PATH + 2];
     s[0] = 0;
-    DWORD size = ::GetModuleFileName(hModule, s, MAX_PATH + 1);
+    const DWORD size = ::GetModuleFileName(hModule, s, MAX_PATH + 1);
     if (size <= MAX_PATH && size != 0)
     {
       path = fas2fs(s);
@@ -80,7 +80,7 @@ bool MyGetModuleFileName(FString &path)
   {
     WCHAR s[MAX_PATH + 2];
     s[0] = 0;
-    DWORD size = ::GetModuleFileNameW(hModule, s, MAX_PATH + 1);
+    const DWORD size = ::GetModuleFileNameW(hModule, s, MAX_PATH + 1);
     if (size <= MAX_PATH && size != 0)
     {
       path = us2fs(s);
@@ -97,7 +97,7 @@ FString GetModuleDirPrefix()
   FString s;
   if (MyGetModuleFileName(s))
   {
-    int pos = s.ReverseFind_PathSepar();
+    const int pos = s.ReverseFind_PathSepar();
     if (pos >= 0)
       s.DeleteFrom((unsigned)(pos + 1));
   }
@@ -114,7 +114,6 @@ FString GetModuleDirPrefix()
 
 #include <dlfcn.h>
 #include <stdlib.h>
-#include "../Common/Common.h"
 
 // FARPROC
 void *GetProcAddress(HMODULE module, LPCSTR procName)

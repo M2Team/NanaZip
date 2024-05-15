@@ -77,6 +77,15 @@ struct CChunk
   UInt32 VirtBlock;
   Byte Fill [kFillSize];
   UInt64 PhyOffset;
+
+  CChunk()
+  {
+    Fill[0] =
+    Fill[1] =
+    Fill[2] =
+    Fill[3] =
+      0;
+  }
 };
 
 static const Byte k_Signature[] = { 0x3a, 0xff, 0x26, 0xed, 1, 0 };

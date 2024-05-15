@@ -20,6 +20,9 @@ using namespace NWindows;
 namespace NArchive {
 namespace N7z {
 
+static const UInt32 k_decoderCompatibilityVersion = 2301;
+// 7-Zip version 2301 supports ARM64 filter
+
 #define k_LZMA_Name "LZMA"
 #define kDefaultMethodName "LZMA2"
 #define k_Copy_Name "Copy"
@@ -774,6 +777,11 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
   options.MaxFilter = (level >= 8);
   options.AnalysisLevel = GetAnalysisLevel();
 
+  options.SetFilterSupporting_ver_enabled_disabled(
+      _decoderCompatibilityVersion,
+      _enabledFilters,
+      _disabledFilters);
+
   options.HeaderOptions.CompressMainHeader = compressMainHeader;
   /*
   options.HeaderOptions.WriteCTime = Write_CTime;
@@ -858,6 +866,10 @@ void COutHandler::InitProps7z()
 
   InitSolid();
   _useTypeSorting = false;
+
+  _decoderCompatibilityVersion = k_decoderCompatibilityVersion;
+  _enabledFilters.Clear();
+  _disabledFilters.Clear();
 }
 
 void COutHandler::InitProps()
@@ -944,6 +956,29 @@ static HRESULT PROPVARIANT_to_BoolPair(const PROPVARIANT &prop, CBoolPair &dest)
   return S_OK;
 }
 
+struct C_Id_Name_pair
+{
+  UInt32 Id;
+  const char *Name;
+};
+
+static const C_Id_Name_pair g_filter_pairs[] =
+{
+  { k_Delta, "Delta" },
+  { k_ARM64, "ARM64" },
+  { k_RISCV, "RISCV" },
+  { k_SWAP2, "SWAP2" },
+  { k_SWAP4, "SWAP4" },
+  { k_BCJ,   "BCJ" },
+  { k_BCJ2 , "BCJ2" },
+  { k_PPC,   "PPC" },
+  { k_IA64,  "IA64" },
+  { k_ARM,   "ARM" },
+  { k_ARMT,  "ARMT" },
+  { k_SPARC, "SPARC" }
+};
+
+
 HRESULT COutHandler::SetProperty(const wchar_t *nameSpec, const PROPVARIANT &value)
 {
   UString name = nameSpec;
@@ -1003,6 +1038,43 @@ HRESULT COutHandler::SetProperty(const wchar_t *nameSpec, const PROPVARIANT &val
     if (name.IsEqualTo("mtf")) return PROPVARIANT_to_bool(value, _useMultiThreadMixer);
 
     if (name.IsEqualTo("qs")) return PROPVARIANT_to_bool(value, _useTypeSorting);
+
+    if (name.IsPrefixedBy_Ascii_NoCase("yv"))
+    {
+      name.Delete(0, 2);
+      UInt32 v = 1 << 16;  // if no number is noit specified, we use big value
+      RINOK(ParsePropToUInt32(name, value, v))
+      _decoderCompatibilityVersion = v;
+      // if (v == 0) _decoderCompatibilityVersion = k_decoderCompatibilityVersion;
+      return S_OK;
+    }
+
+    if (name.IsPrefixedBy_Ascii_NoCase("yf"))
+    {
+      name.Delete(0, 2);
+      CUIntVector *vec;
+           if (name.IsEqualTo_Ascii_NoCase("a")) vec = &_enabledFilters;
+      else if (name.IsEqualTo_Ascii_NoCase("d")) vec = &_disabledFilters;
+      else return E_INVALIDARG;
+
+      if (value.vt != VT_BSTR)
+        return E_INVALIDARG;
+      for (unsigned k = 0;; k++)
+      {
+        if (k == Z7_ARRAY_SIZE(g_filter_pairs))
+        {
+          // maybe we can ignore unsupported filter names here?
+          return E_INVALIDARG;
+        }
+        const C_Id_Name_pair &pair = g_filter_pairs[k];
+        if (StringsAreEqualNoCase_Ascii(value.bstrVal, pair.Name))
+        {
+          vec->AddToUniqueSorted(pair.Id);
+          break;
+        }
+      }
+      return S_OK;
+    }
 
     // if (name.IsEqualTo("v"))  return PROPVARIANT_to_bool(value, _volumeMode);
   }

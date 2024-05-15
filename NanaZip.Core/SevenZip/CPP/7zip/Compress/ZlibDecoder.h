@@ -14,8 +14,8 @@ Z7_CLASS_IMP_NOQIB_1(
   COutStreamWithAdler
   , ISequentialOutStream
 )
-  CMyComPtr<ISequentialOutStream> _stream;
   UInt32 _adler;
+  CMyComPtr<ISequentialOutStream> _stream;
   UInt64 _size;
 public:
   void SetStream(ISequentialOutStream *stream) { _stream = stream; }
@@ -29,13 +29,20 @@ Z7_CLASS_IMP_NOQIB_1(
   CDecoder
   , ICompressCoder
 )
-  COutStreamWithAdler *AdlerSpec;
-  CMyComPtr<ISequentialOutStream> AdlerStream;
-  NCompress::NDeflate::NDecoder::CCOMCoder *DeflateDecoderSpec;
-  CMyComPtr<ICompressCoder> DeflateDecoder;
+  CMyComPtr2<ISequentialOutStream, COutStreamWithAdler> AdlerStream;
+  CMyComPtr2<ICompressCoder, NDeflate::NDecoder::CCOMCoder> DeflateDecoder;
+  Int32 _inputProcessedSize_Additional;
 public:
-  UInt64 GetInputProcessedSize() const { return DeflateDecoderSpec->GetInputProcessedSize() + 2; }
-  UInt64 GetOutputProcessedSize() const { return AdlerSpec->GetSize(); }
+  bool IsAdlerOptional;
+  
+  CDecoder(): IsAdlerOptional(false) {}
+  UInt64 GetInputProcessedSize() const
+  {
+    return (UInt64)(
+      (Int64)DeflateDecoder->GetInputProcessedSize() +
+      (Int64)_inputProcessedSize_Additional);
+  }
+  UInt64 GetOutputProcessedSize() const { return AdlerStream->GetSize(); }
 };
 
 static bool inline IsZlib(const Byte *p)

@@ -65,11 +65,34 @@ __cdecl
 #endif
 operator new(size_t size);
 
+/*
+#if 0 && defined(_MSC_VER) && _MSC_VER == 1600
+  #define Z7_OPERATOR_DELETE_SPEC_THROW0
+#else
+  #define Z7_OPERATOR_DELETE_SPEC_THROW0 throw()
+#endif
+*/
+#if defined(_MSC_VER) && _MSC_VER == 1600
+#pragma warning(push)
+#pragma warning(disable : 4986) // 'operator delete': exception specification does not match previous declaration
+#endif
+
 void
 #ifdef _MSC_VER
 __cdecl
 #endif
 operator delete(void *p) throw();
+
+void
+#ifdef _MSC_VER
+__cdecl
+#endif
+operator delete(void *p, size_t n) throw();
+
+#if defined(_MSC_VER) && _MSC_VER == 1600
+#pragma warning(pop)
+#endif
+
 
 #else
 

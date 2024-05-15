@@ -31,11 +31,14 @@
 #ifndef Z7_NO_CRYPTO
 #include "PasswordDialog.h"
 #endif
+#include "MemDialog.h"
 #include "PropertyName.h"
 
 using namespace NWindows;
 using namespace NFile;
 using namespace NFind;
+
+extern bool g_DisableUserQuestions;
 
 CExtractCallbackImp::~CExtractCallbackImp() {}
 
@@ -59,6 +62,13 @@ void CExtractCallbackImp::AddError_Message(LPCWSTR s)
   ThereAreMessageErrors = true;
   ProgressDialog->Sync.AddError_Message(s);
 }
+
+void CExtractCallbackImp::AddError_Message_ShowArcPath(LPCWSTR s)
+{
+  Add_ArchiveName_Error();
+  AddError_Message(s);
+}
+
 
 #ifndef Z7_SFX
 
@@ -371,11 +381,11 @@ Z7_COM7F_IMF(CExtractCallbackImp::SetOperationResult(Int32 opRes, Int32 encrypte
     {
       UString s;
       SetExtractErrorMessage(opRes, encrypted, _currentFilePath, s);
-      Add_ArchiveName_Error();
-      AddError_Message(s);
+      AddError_Message_ShowArcPath(s);
     }
   }
   
+  _currentFilePath.Empty();
   #ifndef Z7_SFX
   if (_isFolder)
     NumFolders++;
@@ -393,8 +403,7 @@ Z7_COM7F_IMF(CExtractCallbackImp::ReportExtractResult(Int32 opRes, Int32 encrypt
   {
     UString s;
     SetExtractErrorMessage(opRes, encrypted, name, s);
-    Add_ArchiveName_Error();
-    AddError_Message(s);
+    AddError_Message_ShowArcPath(s);
   }
   return S_OK;
 }
@@ -404,11 +413,12 @@ Z7_COM7F_IMF(CExtractCallbackImp::ReportExtractResult(Int32 opRes, Int32 encrypt
 
 HRESULT CExtractCallbackImp::BeforeOpen(const wchar_t *name, bool /* testMode */)
 {
+  _currentArchivePath = name;
+  _needWriteArchivePath = true;
   #ifndef Z7_SFX
   RINOK(ProgressDialog->Sync.CheckStop())
   ProgressDialog->Sync.Set_TitleFileName(name);
   #endif
-  _currentArchivePath = name;
   return S_OK;
 }
 
@@ -530,7 +540,7 @@ static UString GetBracedType(const wchar_t *type)
 {
   UString s ('[');
   s += type;
-  s += ']';
+  s.Add_Char(']');
   return s;
 }
 
@@ -641,6 +651,10 @@ void CExtractCallbackImp::Add_ArchiveName_Error()
 
 HRESULT CExtractCallbackImp::ExtractResult(HRESULT result)
 {
+  #ifndef Z7_SFX
+  ProgressDialog->Sync.Set_FilePath(L"");
+  #endif
+
   if (result == S_OK)
     return result;
   NumArchiveErrors++;
@@ -834,11 +848,11 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
   COM_TRY_BEGIN
   *outStream = NULL;
   _newVirtFileWasAdded = false;
-  _hashStreamWasUsed = false;
+  _hashStream_WasUsed = false;
   _needUpdateStat = false;
 
   if (_hashStream)
-    _hashStreamSpec->ReleaseStream();
+    _hashStream->ReleaseStream();
 
   GetItemBoolProp(getProp, kpidIsAltStream, _isAltStream);
 
@@ -903,10 +917,10 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
   if (_hashStream)
   {
     {
-      _hashStreamSpec->SetStream(outStreamLoc);
+      _hashStream->SetStream(outStreamLoc);
       outStreamLoc = _hashStream;
-      _hashStreamSpec->Init(true);
-      _hashStreamWasUsed = true;
+      _hashStream->Init(true);
+      _hashStream_WasUsed = true;
     }
   }
 
@@ -951,13 +965,13 @@ Z7_COM7F_IMF(CExtractCallbackImp::SetOperationResult8(Int32 opRes, Int32 encrypt
     // _curSize_Defined = true;
     RINOK(VirtFileSystemSpec->CloseMemFile())
   }
-  if (_hashStream && _hashStreamWasUsed)
+  if (_hashStream && _hashStream_WasUsed)
   {
-    _hashStreamSpec->_hash->Final(_isFolder, _isAltStream, _filePath);
-    _curSize = _hashStreamSpec->GetSize();
+    _hashStream->_hash->Final(_isFolder, _isAltStream, _filePath);
+    _curSize = _hashStream->GetSize();
     _curSize_Defined = true;
-    _hashStreamSpec->ReleaseStream();
-    _hashStreamWasUsed = false;
+    _hashStream->ReleaseStream();
+    _hashStream_WasUsed = false;
   }
   else if (_hashCalc && _needUpdateStat)
   {
@@ -966,6 +980,114 @@ Z7_COM7F_IMF(CExtractCallbackImp::SetOperationResult8(Int32 opRes, Int32 encrypt
   }
   return SetOperationResult(opRes, encrypted);
   COM_TRY_END
+}
+
+
+Z7_COM7F_IMF(CExtractCallbackImp::RequestMemoryUse(
+    UInt32 flags, UInt32 indexType, UInt32 /* index */, const wchar_t *path,
+    UInt64 requiredSize, UInt64 *allowedSize, UInt32 *answerFlags))
+{
+  UInt32 limit_GB = (UInt32)((*allowedSize + ((1u << 30) - 1)) >> 30);
+
+  if ((flags & NRequestMemoryUseFlags::k_IsReport) == 0)
+  {
+    UInt64 limit_bytes = *allowedSize;
+    const UInt32 limit_GB_Registry = NExtract::Read_LimitGB();
+    if (limit_GB_Registry != 0 && limit_GB_Registry != (UInt32)(Int32)-1)
+    {
+      const UInt64 limit_bytes_Registry = (UInt64)limit_GB_Registry << 30;
+      // registry_WasForced = true;
+      if ((flags & NRequestMemoryUseFlags::k_AllowedSize_WasForced) == 0
+          || limit_bytes < limit_bytes_Registry)
+      {
+        limit_bytes = limit_bytes_Registry;
+        limit_GB = limit_GB_Registry;
+      }
+    }
+    *allowedSize = limit_bytes;
+    if (requiredSize <= limit_bytes)
+    {
+      *answerFlags = NRequestMemoryAnswerFlags::k_Allow;
+      return S_OK;
+    }
+    // default answer can be k_Allow, if limit was not forced,
+    // so we change answer to non-allowed here,
+    // because user has chance to change limit in GUI.
+    *answerFlags = NRequestMemoryAnswerFlags::k_Limit_Exceeded;
+    if (flags & NRequestMemoryUseFlags::k_SkipArc_IsExpected)
+      *answerFlags |= NRequestMemoryAnswerFlags::k_SkipArc;
+  }
+
+  const UInt32 required_GB = (UInt32)((requiredSize + ((1u << 30) - 1)) >> 30);
+
+  CMemDialog dialog;
+  dialog.Limit_GB = limit_GB;
+  dialog.Required_GB = required_GB;
+  dialog.TestMode = TestMode;
+  if (MultiArcMode)
+    dialog.ArcPath = _currentArchivePath;
+  if (path)
+    dialog.FilePath = path;
+  
+  if (!g_DisableUserQuestions
+      && (flags & NRequestMemoryUseFlags::k_IsReport) == 0)
+  {
+    if (_remember)
+      dialog.SkipArc = _skipArc;
+    else
+    {
+      dialog.ShowRemember =
+        (MultiArcMode
+          || indexType != NArchive::NEventIndexType::kNoIndex
+          || path);
+      ProgressDialog->WaitCreating();
+      if (dialog.Create(*ProgressDialog) != IDCONTINUE)
+      {
+        *answerFlags = NRequestMemoryAnswerFlags::k_Stop;
+        return E_ABORT;
+      }
+      if (dialog.NeedSave)
+        NExtract::Save_LimitGB(dialog.Limit_GB);
+      if (dialog.Remember)
+      {
+        _remember = true;
+        _skipArc = dialog.SkipArc;
+      }
+    }
+    
+    *allowedSize = (UInt64)dialog.Limit_GB << 30;
+    if (!dialog.SkipArc)
+    {
+      *answerFlags = NRequestMemoryAnswerFlags::k_Allow;
+      return S_OK;
+    }
+    *answerFlags =
+        NRequestMemoryAnswerFlags::k_SkipArc
+      | NRequestMemoryAnswerFlags::k_Limit_Exceeded;
+    flags |= NRequestMemoryUseFlags::k_Report_SkipArc;
+  }
+  
+  if ((flags & NRequestMemoryUseFlags::k_NoErrorMessage) == 0)
+  {
+    UString s ("ERROR: ");
+    dialog.AddInfoMessage_To_String(s);
+    s.Add_LF();
+    // if (indexType == NArchive::NEventIndexType::kNoIndex)
+    if ((flags & NRequestMemoryUseFlags::k_SkipArc_IsExpected) ||
+        (flags & NRequestMemoryUseFlags::k_Report_SkipArc))
+      s += LangString(IDS_MSG_ARC_UNPACKING_WAS_SKIPPED);
+/*
+    else
+      s += LangString(IDS_MSG_ARC_FILES_UNPACKING_WAS_SKIPPED);
+*/
+    AddError_Message_ShowArcPath(s);
+  }
+  
+/*
+  if ((flags & NRequestMemoryUseFlags::k_IsReport) == 0)
+    *answerFlags |= NRequestMemoryAnswerFlags::k_Limit_Exceeded;
+*/
+  return S_OK;
 }
 
 
@@ -1010,25 +1132,23 @@ Z7_COM7F_IMF(CVirtFileSystem::Write(const void *data, UInt32 size, UInt32 *proce
     _fileMode = true;
   }
   RINOK(FlushToDisk(false))
-  return _outFileStream->Write(data, size, processedSize);
+  return _outFileStream.Interface()->Write(data, size, processedSize);
 }
+
 
 HRESULT CVirtFileSystem::FlushToDisk(bool closeLast)
 {
-  if (!_outFileStream)
-  {
-    _outFileStreamSpec = new COutFileStream;
-    _outFileStream = _outFileStreamSpec;
-  }
+  _outFileStream.Create_if_Empty();
   while (_numFlushed < Files.Size())
   {
     const CVirtFile &file = Files[_numFlushed];
     const FString path = DirPrefix + us2fs(Get_Correct_FsFile_Name(file.Name));
     if (!_fileIsOpen)
     {
-      if (!_outFileStreamSpec->Create(path, false))
+      if (!_outFileStream->Create_NEW(path))
       {
-        _outFileStream.Release();
+        // do we need to release stream here?
+        // _outFileStream.Release();
         return E_FAIL;
         // MessageBoxMyError(UString("Can't create file ") + fs2us(tempFilePath));
       }
@@ -1040,13 +1160,17 @@ HRESULT CVirtFileSystem::FlushToDisk(bool closeLast)
     if (file.CTimeDefined ||
         file.ATimeDefined ||
         file.MTimeDefined)
-      _outFileStreamSpec->SetTime(
+      _outFileStream->SetTime(
           file.CTimeDefined ? &file.CTime : NULL,
           file.ATimeDefined ? &file.ATime : NULL,
           file.MTimeDefined ? &file.MTime : NULL);
-    _outFileStreamSpec->Close();
+    _outFileStream->Close();
     _numFlushed++;
     _fileIsOpen = false;
+
+    if (ZoneBuf.Size() != 0)
+      WriteZoneFile_To_BaseFile(path, ZoneBuf);
+
     if (file.AttribDefined)
       NDir::SetFileAttrib_PosixHighDetect(path, file.Attrib);
   }

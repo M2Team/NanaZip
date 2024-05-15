@@ -252,9 +252,9 @@ static UString CompoundNameToFileName(const UString &s)
     const wchar_t c = s[i];
     if ((unsigned)(int)c < 0x20)
     {
-      res += '[';
+      res.Add_Char('[');
       res.Add_UInt32((UInt32)(unsigned)(int)c);
-      res += ']';
+      res.Add_Char(']');
     }
     else
       res += c;
@@ -309,20 +309,20 @@ static bool CompoundMsiNameToFileName(const UString &name, UString &res)
     if (i == 0)
       res += k_Msi_ID;
     */
-    c -= k_Msi_StartUnicodeChar;
+    c -= (wchar_t)k_Msi_StartUnicodeChar;
     
-    unsigned c0 = (unsigned)c & k_Msi_CharMask;
-    unsigned c1 = (unsigned)c >> k_Msi_NumBits;
+    const unsigned c0 = (unsigned)c & k_Msi_CharMask;
+    const unsigned c1 = (unsigned)c >> k_Msi_NumBits;
 
     if (c1 <= k_Msi_NumChars)
     {
-      res += k_Msi_Chars[c0];
+      res.Add_Char(k_Msi_Chars[c0]);
       if (c1 == k_Msi_NumChars)
         break;
-      res += k_Msi_Chars[c1];
+      res.Add_Char(k_Msi_Chars[c1]);
     }
     else
-      res += k_Msi_SpecChar;
+      res.Add_Char(k_Msi_SpecChar);
   }
   return true;
 }

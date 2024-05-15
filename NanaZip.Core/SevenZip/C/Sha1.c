@@ -1,5 +1,5 @@
 ﻿/* Sha1.c -- SHA-1 Hash
-2023-04-02 : Igor Pavlov : Public domain
+2024-03-01 : Igor Pavlov : Public domain
 This code is based on public domain code of Steve Reid from Wei Dai's Crypto++ library. */
 
 #include "Precomp.h"
@@ -15,35 +15,35 @@ This code is based on public domain code of Steve Reid from Wei Dai's Crypto++ l
 #endif
 
 #ifdef MY_CPU_X86_OR_AMD64
-  #ifdef _MSC_VER
-    #if _MSC_VER >= 1200
+  #if   defined(Z7_LLVM_CLANG_VERSION)  && (Z7_LLVM_CLANG_VERSION  >= 30800) \
+     || defined(Z7_APPLE_CLANG_VERSION) && (Z7_APPLE_CLANG_VERSION >= 50100) \
+     || defined(Z7_GCC_VERSION)         && (Z7_GCC_VERSION         >= 40900) \
+     || defined(__INTEL_COMPILER) && (__INTEL_COMPILER >= 1600) \
+     || defined(_MSC_VER) && (_MSC_VER >= 1200)
       #define Z7_COMPILER_SHA1_SUPPORTED
-    #endif
-  #elif defined(__clang__)
-    #if (__clang_major__ >= 8) // fix that check
-      #define Z7_COMPILER_SHA1_SUPPORTED
-    #endif
-  #elif defined(__GNUC__)
-    #if (__GNUC__ >= 8) // fix that check
-      #define Z7_COMPILER_SHA1_SUPPORTED
-    #endif
-  #elif defined(__INTEL_COMPILER)
-    #if (__INTEL_COMPILER >= 1800) // fix that check
-      #define Z7_COMPILER_SHA1_SUPPORTED
-    #endif
   #endif
-#elif defined(MY_CPU_ARM_OR_ARM64)
-  #ifdef _MSC_VER
-    #if _MSC_VER >= 1910 && _MSC_VER >= 1929 && _MSC_FULL_VER >= 192930037
+#elif defined(MY_CPU_ARM_OR_ARM64) && defined(MY_CPU_LE) \
+   && (!defined(Z7_MSC_VER_ORIGINAL) || (_MSC_VER >= 1929) && (_MSC_FULL_VER >= 192930037))
+  #if   defined(__ARM_FEATURE_SHA2) \
+     || defined(__ARM_FEATURE_CRYPTO)
+    #define Z7_COMPILER_SHA1_SUPPORTED
+  #else
+    #if  defined(MY_CPU_ARM64) \
+      || defined(__ARM_ARCH) && (__ARM_ARCH >= 4) \
+      || defined(Z7_MSC_VER_ORIGINAL)
+    #if  defined(__ARM_FP) && \
+          (   defined(Z7_CLANG_VERSION) && (Z7_CLANG_VERSION >= 30800) \
+           || defined(__GNUC__) && (__GNUC__ >= 6) \
+          ) \
+      || defined(Z7_MSC_VER_ORIGINAL) && (_MSC_VER >= 1910)
+    #if  defined(MY_CPU_ARM64) \
+      || !defined(Z7_CLANG_VERSION) \
+      || defined(__ARM_NEON) && \
+          (Z7_CLANG_VERSION < 170000 || \
+           Z7_CLANG_VERSION > 170001)
       #define Z7_COMPILER_SHA1_SUPPORTED
     #endif
-  #elif defined(__clang__)
-    #if (__clang_major__ >= 8) // fix that check
-      #define Z7_COMPILER_SHA1_SUPPORTED
     #endif
-  #elif defined(__GNUC__)
-    #if (__GNUC__ >= 6) // fix that check
-      #define Z7_COMPILER_SHA1_SUPPORTED
     #endif
   #endif
 #endif
@@ -436,7 +436,7 @@ void Sha1Prepare(void)
   #endif
   {
     // printf("\n========== HW SHA1 ======== \n");
-    #if defined(MY_CPU_ARM_OR_ARM64) && defined(_MSC_VER)
+    #if 0 && defined(MY_CPU_ARM_OR_ARM64) && defined(_MSC_VER)
     /* there was bug in MSVC compiler for ARM64 -O2 before version VS2019 16.10 (19.29.30037).
        It generated incorrect SHA-1 code.
        21.03 : we test sha1-hardware code at runtime initialization */

@@ -105,7 +105,7 @@ struct CProcessAffinity
   }
   
   void CpuZero() { }
-  void CpuSet(unsigned cpuIndex) { UNUSED_VAR(cpuIndex); }
+  void CpuSet(unsigned /* cpuIndex */) { /* UNUSED_VAR(cpuIndex) */ }
   int IsCpuSet(unsigned cpuIndex) const { return (cpuIndex < numSysThreads) ? 1 : 0; }
 
   BOOL SetProcAffinity() const

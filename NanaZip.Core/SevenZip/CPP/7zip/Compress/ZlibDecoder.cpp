@@ -17,25 +17,41 @@ namespace NZlib {
 #define ADLER_MOD 65521
 #define ADLER_LOOP_MAX 5550
 
-UInt32 Adler32_Update(UInt32 adler, const Byte *buf, size_t size);
-UInt32 Adler32_Update(UInt32 adler, const Byte *buf, size_t size)
+UInt32 Adler32_Update(UInt32 adler, const Byte *data, size_t size);
+UInt32 Adler32_Update(UInt32 adler, const Byte *data, size_t size)
 {
-  UInt32 a = adler & 0xFFFF;
-  UInt32 b = (adler >> 16) & 0xFFFF;
-  while (size > 0)
+  if (size == 0)
+    return adler;
+  UInt32 a = adler & 0xffff;
+  UInt32 b = adler >> 16;
+  do
   {
-    const unsigned curSize = (size > ADLER_LOOP_MAX) ? ADLER_LOOP_MAX : (unsigned )size;
-    unsigned i;
-    for (i = 0; i < curSize; i++)
+    size_t cur = size;
+    if (cur > ADLER_LOOP_MAX)
+        cur = ADLER_LOOP_MAX;
+    size -= cur;
+    const Byte *lim = data + cur;
+    if (cur >= 4)
     {
-      a += buf[i];
-      b += a;
+      lim -= 4 - 1;
+      do
+      {
+        a += data[0];  b += a;
+        a += data[1];  b += a;
+        a += data[2];  b += a;
+        a += data[3];  b += a;
+        data += 4;
+      }
+      while (data < lim);
+      lim += 4 - 1;
     }
-    buf += curSize;
-    size -= curSize;
+    if (data != lim) { a += *data++;  b += a;
+    if (data != lim) { a += *data++;  b += a;
+    if (data != lim) { a += *data++;  b += a; }}}
     a %= ADLER_MOD;
     b %= ADLER_MOD;
   }
+  while (size);
   return (b << 16) + a;
 }
 
@@ -55,38 +71,63 @@ Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress))
 {
   DEFLATE_TRY_BEGIN
-  if (!AdlerStream)
-    AdlerStream = AdlerSpec = new COutStreamWithAdler;
-  if (!DeflateDecoder)
-  {
-    DeflateDecoderSpec = new NDeflate::NDecoder::CCOMCoder;
-    DeflateDecoderSpec->ZlibMode = true;
-    DeflateDecoder = DeflateDecoderSpec;
-  }
+  _inputProcessedSize_Additional = 0;
+  AdlerStream.Create_if_Empty();
+  DeflateDecoder.Create_if_Empty();
+  DeflateDecoder->Set_NeedFinishInput(true);
 
   if (inSize && *inSize < 2)
     return S_FALSE;
-  Byte buf[2];
-  RINOK(ReadStream_FALSE(inStream, buf, 2))
-  if (!IsZlib(buf))
-    return S_FALSE;
-
-  AdlerSpec->SetStream(outStream);
-  AdlerSpec->Init();
-  
+  {
+    Byte buf[2];
+    RINOK(ReadStream_FALSE(inStream, buf, 2))
+    if (!IsZlib(buf))
+      return S_FALSE;
+  }
+  _inputProcessedSize_Additional = 2;
+  AdlerStream->SetStream(outStream);
+  AdlerStream->Init();
+  // NDeflate::NDecoder::Code() ignores inSize
+  /*
   UInt64 inSize2 = 0;
   if (inSize)
     inSize2 = *inSize - 2;
-
-  const HRESULT res = DeflateDecoder->Code(inStream, AdlerStream, inSize ? &inSize2 : NULL, outSize, progress);
-  AdlerSpec->ReleaseStream();
+  */
+  const HRESULT res = DeflateDecoder.Interface()->Code(inStream, AdlerStream,
+      /* inSize ? &inSize2 : */ NULL, outSize, progress);
+  AdlerStream->ReleaseStream();
 
   if (res == S_OK)
   {
-    const Byte *p = DeflateDecoderSpec->ZlibFooter;
-    const UInt32 adler = GetBe32(p);
-    if (adler != AdlerSpec->GetAdler())
-      return S_FALSE;
+    UInt32 footer32[1];
+    UInt32 processedSize;
+    RINOK(DeflateDecoder->ReadUnusedFromInBuf(footer32, 4, &processedSize))
+    if (processedSize != 4)
+    {
+      size_t processedSize2 = 4 - processedSize;
+      RINOK(ReadStream(inStream, (Byte *)(void *)footer32 + processedSize, &processedSize2))
+      _inputProcessedSize_Additional += (Int32)processedSize2;
+      processedSize += (UInt32)processedSize2;
+    }
+    
+    if (processedSize == 4)
+    {
+      const UInt32 adler = GetBe32a(footer32);
+      if (adler != AdlerStream->GetAdler())
+        return S_FALSE; // adler error
+    }
+    else if (!IsAdlerOptional)
+      return S_FALSE; // unexpeced end of stream (can't read adler)
+    else
+    {
+      // IsAdlerOptional == true
+      if (processedSize != 0)
+      {
+         // we exclude adler bytes from processed size:
+        _inputProcessedSize_Additional -= (Int32)processedSize;
+        return S_FALSE;
+      }
+    }
   }
   return res;
   DEFLATE_TRY_END

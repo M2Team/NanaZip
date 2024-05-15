@@ -416,7 +416,7 @@ public:
         s = MultiByteToUnicodeString(APrefixes[item.Prefix]);
       if (s.Len() > 0)
         if (s.Back() != L'\\')
-          s += '\\';
+          s.Add_Char('\\');
     }
 
     if (IsUnicode)

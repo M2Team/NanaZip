@@ -565,6 +565,56 @@ Z7_IFACE_CONSTR_ARCHIVE(IArchiveKeepModeForNextOpen, 0x04)
 Z7_IFACE_CONSTR_ARCHIVE(IArchiveAllowTail, 0x05)
 
 
+namespace NRequestMemoryUseFlags
+{
+  const UInt32 k_AllowedSize_WasForced    = 1 << 0;  // (*allowedSize) was forced by -mmemx or -smemx
+  const UInt32 k_DefaultLimit_Exceeded    = 1 << 1;  // default limit of archive format was exceeded
+  const UInt32 k_MLimit_Exceeded          = 1 << 2;  // -mmemx value was exceeded
+  const UInt32 k_SLimit_Exceeded          = 1 << 3;  // -smemx value was exceeded
+  
+  const UInt32 k_NoErrorMessage           = 1 << 10; // do not show error message, and show only request
+  const UInt32 k_IsReport                 = 1 << 11; // only report is required, without user request
+  
+  const UInt32 k_SkipArc_IsExpected       = 1 << 12; // NRequestMemoryAnswerFlags::k_SkipArc flag answer is expected
+  const UInt32 k_Report_SkipArc           = 1 << 13; // report about SkipArc operation
+
+  // const UInt32 k_SkipBigFile_IsExpected   = 1 << 14; // NRequestMemoryAnswerFlags::k_SkipBigFiles flag answer is expected (unused)
+  // const UInt32 k_Report_SkipBigFile       = 1 << 15; // report about SkipFile operation (unused)
+
+  // const UInt32 k_SkipBigFiles_IsExpected  = 1 << 16; // NRequestMemoryAnswerFlags::k_SkipBigFiles flag answer is expected (unused)
+  // const UInt32 k_Report_SkipBigFiles      = 1 << 17; // report that all big files will be skipped (unused)
+}
+
+namespace NRequestMemoryAnswerFlags
+{
+  const UInt32 k_Allow          = 1 << 0;  // allow further archive extraction
+  const UInt32 k_Stop           = 1 << 1;  // for exit (and return_code == E_ABORT is used)
+  const UInt32 k_SkipArc        = 1 << 2;  // skip current archive extraction
+  // const UInt32 k_SkipBigFile    = 1 << 4;  // skip extracting of files that exceed limit (unused)
+  // const UInt32 k_SkipBigFiles   = 1 << 5;  // skip extracting of files that exceed limit (unused)
+  const UInt32 k_Limit_Exceeded  = 1 << 10;  // limit was exceeded
+}
+
+/*
+  *allowedSize is in/out:
+    in  : default allowed memory usage size or forced size, if it was changed by switch -mmemx.
+    out : value specified by user or unchanged value.
+
+  *answerFlags is in/out:
+    *answerFlags must be set by caller before calling for default action,
+
+  indexType : must be set with NEventIndexType::* constant
+          (indexType == kNoIndex), if request for whole archive.
+  index : must be set for some (indexType) types (if
+          fileIndex , if (indexType == NEventIndexType::kInArcIndex)
+          0, if       if (indexType == kNoIndex)
+  path : NULL can be used for any indexType.
+*/
+#define Z7_IFACEM_IArchiveRequestMemoryUseCallback(x) \
+  x(RequestMemoryUse(UInt32 flags, UInt32 indexType, UInt32 index, const wchar_t *path, \
+    UInt64 requiredSize, UInt64 *allowedSize, UInt32 *answerFlags))
+Z7_IFACE_CONSTR_ARCHIVE(IArchiveRequestMemoryUseCallback, 0x09)
+
 
 struct CStatProp
 {

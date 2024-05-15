@@ -15,18 +15,18 @@ namespace NBranch {
 #else
 #define GET_CREATE_FUNC(x) x
 #define CREATE_BRA_E(n) \
-    REGISTER_FILTER_CREATE(CreateBra_Encoder_ ## n, CCoder(Z7_BRANCH_CONV_ENC(n)))
+    REGISTER_FILTER_CREATE(CreateBra_Encoder_ ## n, CCoder(Z7_BRANCH_CONV_ENC_2(n)))
 #endif
 
 #define CREATE_BRA(n) \
-    REGISTER_FILTER_CREATE(CreateBra_Decoder_ ## n, CCoder(Z7_BRANCH_CONV_DEC(n))) \
+    REGISTER_FILTER_CREATE(CreateBra_Decoder_ ## n, CCoder(Z7_BRANCH_CONV_DEC_2(n))) \
     CREATE_BRA_E(n)
 
-CREATE_BRA(PPC)
-CREATE_BRA(IA64)
-CREATE_BRA(ARM)
-CREATE_BRA(ARMT)
-CREATE_BRA(SPARC)
+CREATE_BRA(BranchConv_PPC)
+CREATE_BRA(BranchConv_IA64)
+CREATE_BRA(BranchConv_ARM)
+CREATE_BRA(BranchConv_ARMT)
+CREATE_BRA(BranchConv_SPARC)
 
 #define METHOD_ITEM(n, id, name) \
     REGISTER_FILTER_ITEM( \
@@ -36,20 +36,23 @@ CREATE_BRA(SPARC)
 
 REGISTER_CODECS_VAR
 {
-  METHOD_ITEM(PPC,   0x205, "PPC"),
-  METHOD_ITEM(IA64,  0x401, "IA64"),
-  METHOD_ITEM(ARM,   0x501, "ARM"),
-  METHOD_ITEM(ARMT,  0x701, "ARMT"),
-  METHOD_ITEM(SPARC, 0x805, "SPARC")
+  METHOD_ITEM(BranchConv_PPC,   0x205, "PPC"),
+  METHOD_ITEM(BranchConv_IA64,  0x401, "IA64"),
+  METHOD_ITEM(BranchConv_ARM,   0x501, "ARM"),
+  METHOD_ITEM(BranchConv_ARMT,  0x701, "ARMT"),
+  METHOD_ITEM(BranchConv_SPARC, 0x805, "SPARC")
 };
 
 REGISTER_CODECS(Branch)
 
-namespace NArm64 {
-REGISTER_FILTER_E(ARM64,
-    CDecoder(),
-    CEncoder(),
-    0xa, "ARM64")
-}
+
+#define REGISTER_FILTER_E_BRANCH(id, n, name, alignment) \
+    REGISTER_FILTER_E(n, \
+      CDecoder(Z7_BRANCH_CONV_DEC(n), alignment), \
+      CEncoder(Z7_BRANCH_CONV_ENC(n), alignment), \
+      id, name)
+
+REGISTER_FILTER_E_BRANCH(0xa, ARM64, "ARM64", 3)
+REGISTER_FILTER_E_BRANCH(0xb, RISCV, "RISCV", 1)
 
 }}

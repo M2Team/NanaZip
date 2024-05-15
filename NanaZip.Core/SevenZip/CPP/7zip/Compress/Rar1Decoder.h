@@ -12,19 +12,22 @@
 #include "../Common/InBuffer.h"
 
 #include "BitmDecoder.h"
-#include "HuffmanDecoder.h"
 #include "LzOutWindow.h"
 
 namespace NCompress {
 namespace NRar1 {
 
-const UInt32 kNumRepDists = 4;
+const unsigned kNumRepDists = 4;
 
 Z7_CLASS_IMP_COM_2(
   CDecoder
   , ICompressCoder
   , ICompressSetDecoderProperties2
 )
+  bool _isSolid;
+  bool _solidAllowed;
+  bool StMode;
+
   CLzOutWindow m_OutWindowStream;
   NBitm::CDecoder<CInBuffer> m_InBitStream;
 
@@ -36,10 +39,6 @@ Z7_CLASS_IMP_COM_2(
   UInt32 m_RepDistPtr;
   UInt32 m_RepDists[kNumRepDists];
 
-  bool _isSolid;
-  bool _solidAllowed;
-
-  bool StMode;
   int FlagsCnt;
   UInt32 FlagBuf, AvrPlc, AvrPlcB, AvrLn1, AvrLn2, AvrLn3;
   unsigned Buf60, NumHuf, LCount;

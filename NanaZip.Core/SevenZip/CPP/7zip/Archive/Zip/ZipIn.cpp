@@ -2282,10 +2282,10 @@ HRESULT CInArchive::ReadVols2(IArchiveOpenVolumeCallback *volCallback,
     {
       UString volName = Vols.BaseName;
       {
-        volName += (char)(Vols.IsUpperCase ? 'Z' : 'z');
-        unsigned v = i + 1;
+        volName.Add_Char(Vols.IsUpperCase ? 'Z' : 'z');
+        const unsigned v = i + 1;
         if (v < 10)
-          volName += '0';
+          volName.Add_Char('0');
         volName.Add_UInt32(v);
       }
         

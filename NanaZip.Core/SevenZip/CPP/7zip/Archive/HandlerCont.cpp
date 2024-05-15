@@ -37,26 +37,24 @@ Z7_COM7F_IMF(CHandlerCont::Extract(const UInt32 *indices, UInt32 numItems,
     GetItem_ExtractInfo(allFilesMode ? i : indices[i], pos, size);
     totalSize += size;
   }
-  extractCallback->SetTotal(totalSize);
+  RINOK(extractCallback->SetTotal(totalSize))
 
   totalSize = 0;
   
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-
-  CLimitedSequentialInStream *streamSpec = new CLimitedSequentialInStream;
-  CMyComPtr<ISequentialInStream> inStream(streamSpec);
+  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> streamSpec;
   streamSpec->SetStream(_stream);
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
-  for (i = 0; i < numItems; i++)
+  for (i = 0;; i++)
   {
     lps->InSize = totalSize;
     lps->OutSize = totalSize;
     RINOK(lps->SetCur())
+    if (i >= numItems)
+      break;
+
     CMyComPtr<ISequentialOutStream> outStream;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
@@ -78,13 +76,12 @@ Z7_COM7F_IMF(CHandlerCont::Extract(const UInt32 *indices, UInt32 numItems,
       RINOK(InStream_SeekSet(_stream, pos))
       streamSpec->Init(size);
     
-      RINOK(copyCoder->Code(inStream, outStream, NULL, NULL, progress))
+      RINOK(copyCoder.Interface()->Code(streamSpec, outStream, NULL, NULL, lps))
       
       opRes = NExtract::NOperationResult::kDataError;
-      
-      if (copyCoderSpec->TotalSize == size)
+      if (copyCoder->TotalSize == size)
         opRes = NExtract::NOperationResult::kOK;
-      else if (copyCoderSpec->TotalSize < size)
+      else if (copyCoder->TotalSize < size)
         opRes = NExtract::NOperationResult::kUnexpectedEnd;
     }
     
@@ -135,23 +132,28 @@ Z7_COM7F_IMF(CHandlerImg::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosit
   return S_OK;
 }
 
-static const Byte k_GDP_Signature[] = { 'E', 'F', 'I', ' ', 'P', 'A', 'R', 'T' };
+static const Byte k_GDP_Signature[] =
+    { 'E', 'F', 'I', ' ', 'P', 'A', 'R', 'T', 0, 0, 1, 0 };
 // static const Byte k_Ext_Signature[] = { 0x53, 0xEF };
 // static const unsigned k_Ext_Signature_offset = 0x438;
 
 static const char *GetImgExt(ISequentialInStream *stream)
 {
-  const size_t kHeaderSize = 1 << 11;
+  // const size_t kHeaderSize_for_Ext = (1 << 11); // for ext
+  const size_t kHeaderSize = 2 << 12; // for 4 KB sector GPT
   Byte buf[kHeaderSize];
-  if (ReadStream_FAIL(stream, buf, kHeaderSize) == S_OK)
+  size_t processed = kHeaderSize;
+  if (ReadStream(stream, buf, &processed) == S_OK)
   {
+    if (processed >= kHeaderSize)
     if (buf[0x1FE] == 0x55 && buf[0x1FF] == 0xAA)
     {
-      if (memcmp(buf + 512, k_GDP_Signature, sizeof(k_GDP_Signature)) == 0)
-        return "gpt";
+      for (unsigned k = (1 << 9); k <= (1u << 12); k <<= 3)
+        if (memcmp(buf + k, k_GDP_Signature, sizeof(k_GDP_Signature)) == 0)
+          return "gpt";
       return "mbr";
     }
-    if (NExt::IsArc_Ext(buf, kHeaderSize) == k_IsArc_Res_YES)
+    if (NExt::IsArc_Ext(buf, processed) == k_IsArc_Res_YES)
       return "ext";
   }
   return NULL;
@@ -280,13 +282,12 @@ Z7_COM7F_IMF(CHandlerImg::Extract(const UInt32 *indices, UInt32 numItems,
       progress = imgProgress;
     }
 
-    NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-    CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
+    CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
-    hres = copyCoder->Code(inStream, outStream, NULL, &_size, progress);
+    hres = copyCoder.Interface()->Code(inStream, outStream, NULL, &_size, progress);
     if (hres == S_OK)
     {
-      if (copyCoderSpec->TotalSize == _size)
+      if (copyCoder->TotalSize == _size)
         opRes = NExtract::NOperationResult::kOK;
       
       if (_stream_unavailData)
@@ -295,7 +296,7 @@ Z7_COM7F_IMF(CHandlerImg::Extract(const UInt32 *indices, UInt32 numItems,
         opRes = NExtract::NOperationResult::kUnsupportedMethod;
       else if (_stream_dataError)
         opRes = NExtract::NOperationResult::kDataError;
-      else if (copyCoderSpec->TotalSize < _size)
+      else if (copyCoder->TotalSize < _size)
         opRes = NExtract::NOperationResult::kUnexpectedEnd;
     }
   }
@@ -315,32 +316,6 @@ Z7_COM7F_IMF(CHandlerImg::Extract(const UInt32 *indices, UInt32 numItems,
  
   return extractCallback->SetOperationResult(opRes);
   COM_TRY_END
-}
-
-
-HRESULT ReadZeroTail(ISequentialInStream *stream, bool &areThereNonZeros, UInt64 &numZeros, UInt64 maxSize)
-{
-  areThereNonZeros = false;
-  numZeros = 0;
-  const size_t kBufSize = 1 << 11;
-  Byte buf[kBufSize];
-  for (;;)
-  {
-    UInt32 size = 0;
-    RINOK(stream->Read(buf, kBufSize, &size))
-    if (size == 0)
-      return S_OK;
-    for (UInt32 i = 0; i < size; i++)
-      if (buf[i] != 0)
-      {
-        areThereNonZeros = true;
-        numZeros += i;
-        return S_OK;
-      }
-    numZeros += size;
-    if (numZeros > maxSize)
-      return S_OK;
-  }
 }
 
 }

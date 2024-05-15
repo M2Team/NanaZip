@@ -3,13 +3,33 @@
 #include "StdAfx.h"
 
 #include "../../../../C/7zCrc.h"
+#include "../../../../C/CpuArch.h"
 
 #include "../../../Common/AutoPtr.h"
 // #include "../../../Common/UTFConvert.h"
 
 #include "../../Common/StreamObjects.h"
+#include "../Common/OutStreamWithCRC.h"
 
 #include "7zOut.h"
+
+unsigned BoolVector_CountSum(const CBoolVector &v);
+
+static UInt64 UInt64Vector_CountSum(const CRecordVector<UInt64> &v)
+{
+  UInt64 sum = 0;
+  const unsigned size = v.Size();
+  if (size)
+  {
+    const UInt64 *p = v.ConstData();
+    const UInt64 * const lim = p + size;
+    do
+      sum += *p++;
+    while (p != lim);
+  }
+  return sum;
+}
+
 
 namespace NArchive {
 namespace N7z {
@@ -133,7 +153,7 @@ void COutArchive::WriteBytes(const void *data, size_t size)
   else if (_writeToStream)
   {
     _outByte.WriteBytes(data, size);
-    _crc = CrcUpdate(_crc, data, size);
+    // _crc = CrcUpdate(_crc, data, size);
   }
   else
     _outByte2.WriteBytes(data, size);
@@ -144,14 +164,12 @@ void COutArchive::WriteByte(Byte b)
   if (_countMode)
     _countSize++;
   else if (_writeToStream)
-  {
-    _outByte.WriteByte(b);
-    _crc = CRC_UPDATE_BYTE(_crc, b);
-  }
+    WriteByte_ToStream(b);
   else
     _outByte2.WriteByte(b);
 }
 
+/*
 void COutArchive::WriteUInt32(UInt32 value)
 {
   for (int i = 0; i < 4; i++)
@@ -169,6 +187,7 @@ void COutArchive::WriteUInt64(UInt64 value)
     value >>= 8;
   }
 }
+*/
 
 void COutArchive::WriteNumber(UInt64 value)
 {
@@ -288,7 +307,7 @@ void COutArchive::WriteFolder(const CFolder &folder)
       WriteNumber(folder.PackStreams[i]);
 }
 
-void COutArchive::WriteBoolVector(const CBoolVector &boolVector)
+void COutArchive::Write_BoolVector(const CBoolVector &boolVector)
 {
   Byte b = 0;
   Byte mask = 0x80;
@@ -314,30 +333,31 @@ void COutArchive::WritePropBoolVector(Byte id, const CBoolVector &boolVector)
 {
   WriteByte(id);
   WriteNumber(Bv_GetSizeInBytes(boolVector));
-  WriteBoolVector(boolVector);
+  Write_BoolVector(boolVector);
 }
 
-unsigned BoolVector_CountSum(const CBoolVector &v);
+void COutArchive::Write_BoolVector_numDefined(const CBoolVector &boolVector, unsigned numDefined)
+{
+  if (numDefined == boolVector.Size())
+    WriteByte(1);
+  else
+  {
+    WriteByte(0);
+    Write_BoolVector(boolVector);
+  }
+}
+
 
 void COutArchive::WriteHashDigests(const CUInt32DefVector &digests)
 {
   const unsigned numDefined = BoolVector_CountSum(digests.Defs);
   if (numDefined == 0)
     return;
-
   WriteByte(NID::kCRC);
-  if (numDefined == digests.Defs.Size())
-    WriteByte(1);
-  else
-  {
-    WriteByte(0);
-    WriteBoolVector(digests.Defs);
-  }
-  
-  for (unsigned i = 0; i < digests.Defs.Size(); i++)
-    if (digests.Defs[i])
-      WriteUInt32(digests.Vals[i]);
+  Write_BoolVector_numDefined(digests.Defs, numDefined);
+  Write_UInt32DefVector_numDefined(digests, numDefined);
 }
+
 
 void COutArchive::WritePackInfo(
     UInt64 dataOffset,
@@ -467,17 +487,42 @@ void COutArchive::WriteAlignedBools(const CBoolVector &v, unsigned numDefined, B
 
   WriteByte(type);
   WriteNumber(dataSize);
-  if (numDefined == v.Size())
-    WriteByte(1);
-  else
-  {
-    WriteByte(0);
-    WriteBoolVector(v);
-  }
+  Write_BoolVector_numDefined(v, numDefined);
   WriteByte(0); // 0 means no switching to external stream
 }
 
-void COutArchive::WriteUInt64DefVector(const CUInt64DefVector &v, Byte type)
+
+void COutArchive::Write_UInt32DefVector_numDefined(const CUInt32DefVector &v, unsigned numDefined)
+{
+  if (_countMode)
+  {
+    _countSize += (size_t)numDefined * 4;
+    return;
+  }
+
+  const bool * const defs = v.Defs.ConstData();
+  const UInt32 * const vals = v.Vals.ConstData();
+  const size_t num = v.Defs.Size();
+
+  for (size_t i = 0; i < num; i++)
+    if (defs[i])
+    {
+      UInt32 value = vals[i];
+      for (int k = 0; k < 4; k++)
+      {
+        if (_writeToStream)
+          WriteByte_ToStream((Byte)value);
+        else
+          _outByte2.WriteByte((Byte)value);
+        // WriteByte((Byte)value);
+        value >>= 8;
+      }
+      // WriteUInt32(v.Vals[i]);
+    }
+}
+
+
+void COutArchive::Write_UInt64DefVector_type(const CUInt64DefVector &v, Byte type)
 {
   const unsigned numDefined = BoolVector_CountSum(v.Defs);
   if (numDefined == 0)
@@ -485,18 +530,40 @@ void COutArchive::WriteUInt64DefVector(const CUInt64DefVector &v, Byte type)
 
   WriteAlignedBools(v.Defs, numDefined, type, 3);
   
-  for (unsigned i = 0; i < v.Defs.Size(); i++)
-    if (v.Defs[i])
-      WriteUInt64(v.Vals[i]);
+  if (_countMode)
+  {
+    _countSize += (size_t)numDefined * 8;
+    return;
+  }
+
+  const bool * const defs = v.Defs.ConstData();
+  const UInt64 * const vals = v.Vals.ConstData();
+  const size_t num = v.Defs.Size();
+
+  for (size_t i = 0; i < num; i++)
+    if (defs[i])
+    {
+      UInt64 value = vals[i];
+      for (int k = 0; k < 8; k++)
+      {
+        if (_writeToStream)
+          WriteByte_ToStream((Byte)value);
+        else
+          _outByte2.WriteByte((Byte)value);
+        // WriteByte((Byte)value);
+        value >>= 8;
+      }
+      // WriteUInt64(v.Vals[i]);
+    }
 }
+
 
 HRESULT COutArchive::EncodeStream(
     DECL_EXTERNAL_CODECS_LOC_VARS
     CEncoder &encoder, const CByteBuffer &data,
     CRecordVector<UInt64> &packSizes, CObjectVector<CFolder> &folders, COutFolders &outFolders)
 {
-  CBufInStream *streamSpec = new CBufInStream;
-  CMyComPtr<ISequentialInStream> stream = streamSpec;
+  CMyComPtr2_Create<ISequentialInStream, CBufInStream> streamSpec;
   streamSpec->Init(data, data.Size());
   outFolders.FolderUnpackCRCs.Defs.Add(true);
   outFolders.FolderUnpackCRCs.Vals.Add(CrcCalc(data, data.Size()));
@@ -505,7 +572,7 @@ HRESULT COutArchive::EncodeStream(
   const UInt64 expectSize = data.Size();
   RINOK(encoder.Encode1(
       EXTERNAL_CODECS_LOC_VARS
-      stream,
+      streamSpec,
       // NULL,
       &dataSize64,  // inSizeForReduce
       expectSize,
@@ -528,13 +595,7 @@ void COutArchive::WriteHeader(
   */
   _useAlign = true;
 
-  {
-    UInt64 packSize = 0;
-    FOR_VECTOR (i, db.PackSizes)
-      packSize += db.PackSizes[i];
-    headerOffset = packSize;
-  }
-
+  headerOffset = UInt64Vector_CountSum(db.PackSizes);
 
   WriteByte(NID::kHeader);
 
@@ -655,81 +716,97 @@ void COutArchive::WriteHeader(
   {
     /* ---------- Names ---------- */
     
-    unsigned numDefined = 0;
     size_t namesDataSize = 0;
-    FOR_VECTOR (i, db.Files)
     {
-      const UString &name = db.Names[i];
-      if (!name.IsEmpty())
-        numDefined++;
-      const size_t numUtfChars =
-      /*
-      #if WCHAR_MAX > 0xffff
-        Get_Num_Utf16_chars_from_wchar_string(name.Ptr());
-      #else
-      */
-        name.Len();
-      // #endif
-      namesDataSize += (numUtfChars + 1) * 2;
-    }
-    
-    if (numDefined > 0)
-    {
-      namesDataSize++;
-      SkipToAligned(2 + GetBigNumberSize(namesDataSize), 4);
-
-      WriteByte(NID::kName);
-      WriteNumber(namesDataSize);
-      WriteByte(0);
       FOR_VECTOR (i, db.Files)
       {
         const UString &name = db.Names[i];
-        for (unsigned t = 0; t <= name.Len(); t++)
-        {
-          wchar_t c = name[t];
+        const size_t numUtfChars =
+        /*
+        #if WCHAR_MAX > 0xffff
+        Get_Num_Utf16_chars_from_wchar_string(name.Ptr());
+        #else
+        */
+        name.Len();
+        // #endif
+        namesDataSize += numUtfChars;
+      }
+    }
+    if (namesDataSize)
+    {
+      namesDataSize += db.Files.Size();  // we will write tail zero wchar for each name
+      namesDataSize *= 2;  // 2 bytes per wchar for UTF16 encoding
+      namesDataSize++;     // for additional switch byte (zero value)
+      SkipToAligned(2 + GetBigNumberSize(namesDataSize), 4);
+      WriteByte(NID::kName);
+      WriteNumber(namesDataSize);
 
-          /*
-          #if WCHAR_MAX > 0xffff
-          if (c >= 0x10000)
+      if (_countMode)
+        _countSize += namesDataSize;
+      else
+      {
+        WriteByte(0);
+        FOR_VECTOR (i, db.Files)
+        {
+          const UString &name = db.Names[i];
+          const wchar_t *p = name.Ptr();
+          const size_t len = (size_t)name.Len() + 1;
+          const wchar_t * const lim = p + len;
+          if (_writeToStream)
           {
-            c -= 0x10000;
-            if (c < (1 << 20))
+            do
             {
-              unsigned c0 = 0xd800 + ((c >> 10) & 0x3FF);
-              WriteByte((Byte)c0);
-              WriteByte((Byte)(c0 >> 8));
-              c = 0xdc00 + (c & 0x3FF);
+              const wchar_t c = *p++;
+              WriteByte_ToStream((Byte)c);
+              WriteByte_ToStream((Byte)(c >> 8));
             }
-            else
-              c = '_'; // we change character unsupported by UTF16
+            while (p != lim);
           }
-          #endif
-          */
-  
-          WriteByte((Byte)c);
-          WriteByte((Byte)(c >> 8));
+          else
+          {
+            Byte *dest = _outByte2.GetDest_and_Update(len * 2);
+            do
+            {
+              /*
+              #if WCHAR_MAX > 0xffff
+              if (c >= 0x10000)
+              {
+                c -= 0x10000;
+                if (c < (1 << 20))
+                {
+                  unsigned c0 = 0xd800 + ((c >> 10) & 0x3FF);
+                  WriteByte((Byte)c0);
+                  WriteByte((Byte)(c0 >> 8));
+                  c = 0xdc00 + (c & 0x3FF);
+                }
+                else
+                c = '_'; // we change character unsupported by UTF16
+              }
+              #endif
+              */
+              const wchar_t c = *p++;
+              SetUi16(dest, (UInt16)c)
+              dest += 2;
+            }
+            while (p != lim);
+          }
         }
       }
     }
   }
 
-  /* if (headerOptions.WriteCTime) */ WriteUInt64DefVector(db.CTime, NID::kCTime);
-  /* if (headerOptions.WriteATime) */ WriteUInt64DefVector(db.ATime, NID::kATime);
-  /* if (headerOptions.WriteMTime) */ WriteUInt64DefVector(db.MTime, NID::kMTime);
-  WriteUInt64DefVector(db.StartPos, NID::kStartPos);
+  /* if (headerOptions.WriteCTime) */ Write_UInt64DefVector_type(db.CTime, NID::kCTime);
+  /* if (headerOptions.WriteATime) */ Write_UInt64DefVector_type(db.ATime, NID::kATime);
+  /* if (headerOptions.WriteMTime) */ Write_UInt64DefVector_type(db.MTime, NID::kMTime);
+  Write_UInt64DefVector_type(db.StartPos, NID::kStartPos);
   
   {
     /* ---------- Write Attrib ---------- */
     const unsigned numDefined = BoolVector_CountSum(db.Attrib.Defs);
-    
     if (numDefined != 0)
     {
       WriteAlignedBools(db.Attrib.Defs, numDefined, NID::kWinAttrib, 2);
-      FOR_VECTOR (i, db.Attrib.Defs)
-      {
-        if (db.Attrib.Defs[i])
-          WriteUInt32(db.Attrib.Vals[i]);
-      }
+      Write_UInt32DefVector_numDefined(db.Attrib, numDefined);
     }
   }
 
@@ -765,13 +842,7 @@ void COutArchive::WriteHeader(
       
       WriteByte(NID::kParent);
       WriteNumber(dataSize);
-      if (numIsDir == boolVector.Size())
-        WriteByte(1);
-      else
-      {
-        WriteByte(0);
-        WriteBoolVector(boolVector);
-      }
+      Write_BoolVector_numDefined(boolVector, numIsDir);
       for (i = 0; i < db.Files.Size(); i++)
       {
         const CFileItem &file = db.Files[i];
@@ -818,17 +889,17 @@ HRESULT COutArchive::WriteDatabase(
   if (!db.CheckNumFiles())
     return E_FAIL;
 
-  UInt64 headerOffset;
-  UInt32 headerCRC;
-  UInt64 headerSize;
-  if (db.IsEmpty())
+  CStartHeader sh;
+  sh.NextHeaderOffset = 0;
+  sh.NextHeaderSize = 0;
+  sh.NextHeaderCRC = 0; // CrcCalc(NULL, 0);
+
+  if (!db.IsEmpty())
   {
-    headerSize = 0;
-    headerOffset = 0;
-    headerCRC = CrcCalc(NULL, 0);
-  }
-  else
-  {
+    CMyComPtr2_Create<ISequentialOutStream, COutStreamWithCRC> crcStream;
+    crcStream->SetStream(SeqStream);
+    crcStream->Init();
+
     bool encodeHeaders = false;
     if (options)
       if (options->IsEmpty())
@@ -837,13 +908,15 @@ HRESULT COutArchive::WriteDatabase(
       if (options->PasswordIsDefined || headerOptions.CompressMainHeader)
         encodeHeaders = true;
 
-    _outByte.SetStream(SeqStream);
+    if (!_outByte.Create(1 << 16))
+      return E_OUTOFMEMORY;
+    _outByte.SetStream(crcStream.Interface());
     _outByte.Init();
-    _crc = CRC_INIT_VAL;
+    // _crc = CRC_INIT_VAL;
     _countMode = encodeHeaders;
     _writeToStream = true;
     _countSize = 0;
-    WriteHeader(db, /* headerOptions, */ headerOffset);
+    WriteHeader(db, /* headerOptions, */ sh.NextHeaderOffset);
 
     if (encodeHeaders)
     {
@@ -852,7 +925,7 @@ HRESULT COutArchive::WriteDatabase(
       
       _countMode = false;
       _writeToStream = false;
-      WriteHeader(db, /* headerOptions, */ headerOffset);
+      WriteHeader(db, /* headerOptions, */ sh.NextHeaderOffset);
       
       if (_countSize != _outByte2.GetPos())
         return E_FAIL;
@@ -876,15 +949,17 @@ HRESULT COutArchive::WriteDatabase(
         throw 1;
 
       WriteID(NID::kEncodedHeader);
-      WritePackInfo(headerOffset, packSizes, CUInt32DefVector());
+      WritePackInfo(sh.NextHeaderOffset, packSizes, CUInt32DefVector());
       WriteUnpackInfo(folders, outFolders);
       WriteByte(NID::kEnd);
-      FOR_VECTOR (i, packSizes)
-        headerOffset += packSizes[i];
+
+      sh.NextHeaderOffset += UInt64Vector_CountSum(packSizes);
     }
     RINOK(_outByte.Flush())
-    headerCRC = CRC_GET_DIGEST(_crc);
-    headerSize = _outByte.GetProcessedSize();
+    sh.NextHeaderCRC = crcStream->GetCRC();
+    // sh.NextHeaderCRC = CRC_GET_DIGEST(_crc);
+    // if (CRC_GET_DIGEST(_crc) != sh.NextHeaderCRC) throw 1;
+    sh.NextHeaderSize = _outByte.GetProcessedSize();
   }
   #ifdef Z7_7Z_VOL
   if (_endMarker)
@@ -904,12 +979,8 @@ HRESULT COutArchive::WriteDatabase(
   #endif
   if (Stream)
   {
-    CStartHeader h;
-    h.NextHeaderSize = headerSize;
-    h.NextHeaderCRC = headerCRC;
-    h.NextHeaderOffset = headerOffset;
     RINOK(Stream->Seek((Int64)_signatureHeaderPos, STREAM_SEEK_SET, NULL))
-    return WriteStartHeader(h);
+    return WriteStartHeader(sh);
   }
   return S_OK;
 }

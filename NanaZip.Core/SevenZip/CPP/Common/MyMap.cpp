@@ -103,7 +103,7 @@ bool CMap32::Set(UInt32 key, UInt32 value)
       n.IsLeaf[newBit] = 1;
       n.IsLeaf[1 - newBit] = 0;
       n.Keys[newBit] = key;
-      n.Keys[1 - newBit] = Nodes.Size();
+      n.Keys[1 - newBit] = (UInt32)Nodes.Size();
       Nodes.Add(e2);
       return false;
     }
@@ -130,7 +130,7 @@ bool CMap32::Set(UInt32 key, UInt32 value)
       e2.Len = (UInt16)(bitPos - (1 + i));
 
       n.IsLeaf[bit] = 0;
-      n.Keys[bit] = Nodes.Size();
+      n.Keys[bit] = (UInt32)Nodes.Size();
 
       Nodes.Add(e2);
       return false;

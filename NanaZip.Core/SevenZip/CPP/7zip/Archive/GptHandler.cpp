@@ -24,6 +24,10 @@ using namespace NWindows;
 
 namespace NArchive {
 
+namespace NMbr {
+const char *GetFileSystem(ISequentialInStream *stream, UInt64 partitionSize);
+}
+
 namespace NFat {
 API_FUNC_IsArc IsArc_Fat(const Byte *p, size_t size);
 }
@@ -33,8 +37,6 @@ namespace NGpt {
 static const unsigned k_SignatureSize = 12;
 static const Byte k_Signature[k_SignatureSize] =
     { 'E', 'F', 'I', ' ', 'P', 'A', 'R', 'T', 0, 0, 1, 0 };
-
-static const UInt32 kSectorSize = 512;
 
 static const CUInt32PCharPair g_PartitionFlags[] =
 {
@@ -66,9 +68,9 @@ struct CPartition
     return true;
   }
 
-  UInt64 GetSize() const { return (LastLba - FirstLba + 1) * kSectorSize; }
-  UInt64 GetPos() const { return FirstLba * kSectorSize; }
-  UInt64 GetEnd() const { return (LastLba + 1) * kSectorSize; }
+  UInt64 GetSize(unsigned sectorSizeLog) const { return (LastLba - FirstLba + 1) << sectorSizeLog; }
+  UInt64 GetPos(unsigned sectorSizeLog) const { return FirstLba << sectorSizeLog; }
+  UInt64 GetEnd(unsigned sectorSizeLog) const { return (LastLba + 1) << sectorSizeLog; }
 
   void Parse(const Byte *p)
   {
@@ -144,6 +146,7 @@ Z7_class_CHandler_final: public CHandlerCont
 
   CRecordVector<CPartition> _items;
   UInt64 _totalSize;
+  unsigned _sectorSizeLog;
   Byte Guid[16];
 
   CByteBuffer _buffer;
@@ -153,8 +156,8 @@ Z7_class_CHandler_final: public CHandlerCont
   virtual int GetItem_ExtractInfo(UInt32 index, UInt64 &pos, UInt64 &size) const Z7_override
   {
     const CPartition &item = _items[index];
-    pos = item.GetPos();
-    size = item.GetSize();
+    pos = item.GetPos(_sectorSizeLog);
+    size = item.GetSize(_sectorSizeLog);
     return NExtract::NOperationResult::kOK;
   }
 };
@@ -162,22 +165,32 @@ Z7_class_CHandler_final: public CHandlerCont
 
 HRESULT CHandler::Open2(IInStream *stream)
 {
-  _buffer.Alloc(kSectorSize * 2);
-  RINOK(ReadStream_FALSE(stream, _buffer, kSectorSize * 2))
-  
+  const unsigned kBufSize = 2 << 12;
+  _buffer.Alloc(kBufSize);
+  RINOK(ReadStream_FALSE(stream, _buffer, kBufSize))
   const Byte *buf = _buffer;
   if (buf[0x1FE] != 0x55 || buf[0x1FF] != 0xAA)
     return S_FALSE;
-  
-  buf += kSectorSize;
-  if (memcmp(buf, k_Signature, k_SignatureSize) != 0)
-    return S_FALSE;
+  {
+    for (unsigned sectorSizeLog = 9;; sectorSizeLog += 3)
+    {
+      if (sectorSizeLog > 12)
+        return S_FALSE;
+      if (memcmp(buf + ((size_t)1 << sectorSizeLog), k_Signature, k_SignatureSize) == 0)
+      {
+        buf += ((size_t)1 << sectorSizeLog);
+        _sectorSizeLog = sectorSizeLog;
+        break;
+      }
+    }
+  }
+  const UInt32 kSectorSize = 1u << _sectorSizeLog;
   {
     // if (Get32(buf + 8) != 0x10000) return S_FALSE; // revision
-    UInt32 headerSize = Get32(buf + 12); // = 0x5C usually
+    const UInt32 headerSize = Get32(buf + 12); // = 0x5C usually
     if (headerSize > kSectorSize)
       return S_FALSE;
-    UInt32 crc = Get32(buf + 0x10);
+    const UInt32 crc = Get32(buf + 0x10);
     SetUi32(_buffer + kSectorSize + 0x10, 0)
     if (CrcCalc(_buffer + kSectorSize, headerSize) != crc)
       return S_FALSE;
@@ -191,18 +204,15 @@ HRESULT CHandler::Open2(IInStream *stream)
   // UInt64 lastUsableLba = Get64(buf + 0x30);
   memcpy(Guid, buf + 0x38, 16);
   const UInt64 tableLba = Get64(buf + 0x48);
-  if (tableLba < 2)
+  if (tableLba < 2 || (tableLba >> (63 - _sectorSizeLog)) != 0)
     return S_FALSE;
   const UInt32 numEntries = Get32(buf + 0x50);
-  const UInt32 entrySize = Get32(buf + 0x54); // = 128 usually
-  const UInt32 entriesCrc = Get32(buf + 0x58);
-  
-  if (entrySize < 128
-      || entrySize > (1 << 12)
-      || numEntries > (1 << 16)
-      || tableLba < 2
-      || tableLba >= ((UInt64)1 << (64 - 10)))
+  if (numEntries > (1 << 16))
     return S_FALSE;
+  const UInt32 entrySize = Get32(buf + 0x54); // = 128 usually
+  if (entrySize < 128 || entrySize > (1 << 12))
+    return S_FALSE;
+  const UInt32 entriesCrc = Get32(buf + 0x58);
   
   const UInt32 tableSize = entrySize * numEntries;
   const UInt32 tableSizeAligned = (tableSize + kSectorSize - 1) & ~(kSectorSize - 1);
@@ -222,18 +232,24 @@ HRESULT CHandler::Open2(IInStream *stream)
     item.Parse(_buffer + i * entrySize);
     if (item.IsUnused())
       continue;
-    UInt64 endPos = item.GetEnd();
+    if (item.LastLba < item.FirstLba)
+      return S_FALSE;
+    if ((item.LastLba >> (63 - _sectorSizeLog)) != 0)
+      return S_FALSE;
+    const UInt64 endPos = item.GetEnd(_sectorSizeLog);
     if (_totalSize < endPos)
       _totalSize = endPos;
     _items.Add(item);
   }
-  
+
+  _buffer.Free();
   {
+    if ((backupLba >> (63 - _sectorSizeLog)) != 0)
+      return S_FALSE;
     const UInt64 end = (backupLba + 1) * kSectorSize;
     if (_totalSize < end)
       _totalSize = end;
   }
-
   {
     UInt64 fileEnd;
     RINOK(InStream_GetSize_SeekToEnd(stream, fileEnd))
@@ -255,27 +271,6 @@ HRESULT CHandler::Open2(IInStream *stream)
   }
 
   return S_OK;
-}
-
-
-
-static const unsigned k_Ntfs_Fat_HeaderSize = 512;
-
-static const Byte k_NtfsSignature[] = { 'N', 'T', 'F', 'S', ' ', ' ', ' ', ' ', 0 };
-
-static bool IsNtfs(const Byte *p)
-{
-  if (p[0x1FE] != 0x55 || p[0x1FF] != 0xAA)
-    return false;
-  if (memcmp(p + 3, k_NtfsSignature, Z7_ARRAY_SIZE(k_NtfsSignature)) != 0)
-    return false;
-  switch (p[0])
-  {
-    case 0xE9: /* codeOffset = 3 + (Int16)Get16(p + 1); */ break;
-    case 0xEB: if (p[2] != 0x90) return false; /* codeOffset = 2 + (int)(signed char)p[1]; */ break;
-    default: return false;
-  }
-  return true;
 }
 
 
@@ -307,20 +302,9 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream,
           // ((IInArchiveGetStream *)this)->
           GetStream(fileIndex, &inStream) == S_OK && inStream)
       {
-        Byte temp[k_Ntfs_Fat_HeaderSize];
-        if (ReadStream_FAIL(inStream, temp, k_Ntfs_Fat_HeaderSize) == S_OK)
-        {
-          if (IsNtfs(temp))
-          {
-            item.Ext = "ntfs";
-            continue;
-          }
-          if (NFat::IsArc_Fat(temp, k_Ntfs_Fat_HeaderSize) == k_IsArc_Res_YES)
-          {
-            item.Ext = "fat";
-            continue;
-          }
-        }
+        const char *fs = NMbr::GetFileSystem(inStream, item.GetSize(_sectorSizeLog));
+        if (fs)
+          item.Ext = fs;
       }
     }
   }
@@ -331,6 +315,7 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream,
 
 Z7_COM7F_IMF(CHandler::Close())
 {
+  _sectorSizeLog = 0;
   _totalSize = 0;
   memset(Guid, 0, sizeof(Guid));
   _items.Clear();
@@ -350,6 +335,7 @@ static const Byte kProps[] =
 
 static const Byte kArcProps[] =
 {
+  kpidSectorSize,
   kpidId
 };
 
@@ -369,6 +355,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
       break;
     }
     case kpidPhySize: prop = _totalSize; break;
+    case kpidSectorSize: prop = (UInt32)((UInt32)1 << _sectorSizeLog); break;
     case kpidId:
     {
       char s[48];
@@ -420,15 +407,22 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       }
       {
         s.Add_Dot();
-        s += (item.Ext ? item.Ext : "img");
+        if (item.Ext)
+        {
+          AString fs (item.Ext);
+          fs.MakeLower_Ascii();
+          s += fs;
+        }
+        else
+          s += "img";
       }
       prop = s;
       break;
     }
     
     case kpidSize:
-    case kpidPackSize: prop = item.GetSize(); break;
-    case kpidOffset: prop = item.GetPos(); break;
+    case kpidPackSize: prop = item.GetSize(_sectorSizeLog); break;
+    case kpidOffset: prop = item.GetPos(_sectorSizeLog); break;
 
     case kpidFileSystem:
     {
@@ -462,10 +456,11 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   COM_TRY_END
 }
 
+// we suppport signature only for 512-bytes sector.
 REGISTER_ARC_I(
   "GPT", "gpt mbr", NULL, 0xCB,
   k_Signature,
-  kSectorSize,
+  1 << 9,
   0,
   NULL)
 

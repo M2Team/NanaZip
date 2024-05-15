@@ -22,21 +22,21 @@
 namespace NCompress {
 namespace NRar3 {
 
-const UInt32 kWindowSize = 1 << 22;
-const UInt32 kWindowMask = (kWindowSize - 1);
+const unsigned kNumHuffmanBits = 15;
 
-const UInt32 kNumReps = 4;
-const UInt32 kNumLen2Symbols = 8;
-const UInt32 kLenTableSize = 28;
-const UInt32 kMainTableSize = 256 + 1 + 1 + 1 + kNumReps + kNumLen2Symbols + kLenTableSize;
-const UInt32 kDistTableSize = 60;
+const UInt32 kWindowSize = 1 << 22;
+const UInt32 kWindowMask = kWindowSize - 1;
+
+const unsigned kNumReps = 4;
+const unsigned kNumLen2Symbols = 8;
+const unsigned kLenTableSize = 28;
+const unsigned kMainTableSize = 256 + 3 + kNumReps + kNumLen2Symbols + kLenTableSize;
+const unsigned kDistTableSize = 60;
 
 const unsigned kNumAlignBits = 4;
-const UInt32 kAlignTableSize = (1 << kNumAlignBits) + 1;
+const unsigned kAlignTableSize = (1 << kNumAlignBits) + 1;
 
-const UInt32 kLevelTableSize = 20;
-
-const UInt32 kTablesSizesSum = kMainTableSize + kDistTableSize + kAlignTableSize + kLenTableSize;
+const unsigned kTablesSizesSum = kMainTableSize + kDistTableSize + kAlignTableSize + kLenTableSize;
 
 class CBitDecoder
 {
@@ -68,6 +68,7 @@ public:
     _value = _value & ((1 << _bitPos) - 1);
   }
   
+  Z7_FORCE_INLINE
   UInt32 GetValue(unsigned numBits)
   {
     if (_bitPos < numBits)
@@ -82,7 +83,15 @@ public:
     }
     return _value >> (_bitPos - numBits);
   }
+
+  Z7_FORCE_INLINE
+  UInt32 GetValue_InHigh32bits()
+  {
+    return GetValue(kNumHuffmanBits) << (32 - kNumHuffmanBits);
+  }
+
   
+  Z7_FORCE_INLINE
   void MovePos(unsigned numBits)
   {
     _bitPos -= numBits;
@@ -91,7 +100,7 @@ public:
   
   UInt32 ReadBits(unsigned numBits)
   {
-    UInt32 res = GetValue(numBits);
+    const UInt32 res = GetValue(numBits);
     MovePos(numBits);
     return res;
   }
@@ -104,7 +113,7 @@ public:
       _value = (_value << 8) | Stream.ReadByte();
     }
     _bitPos -= numBits;
-    UInt32 res = _value >> _bitPos;
+    const UInt32 res = _value >> _bitPos;
     _value = _value & ((1 << _bitPos) - 1);
     return res;
   }
@@ -113,8 +122,8 @@ public:
   {
     if (_bitPos == 0)
       return Stream.ReadByte();
-    unsigned bitsPos = _bitPos - 8;
-    Byte b = (Byte)(_value >> bitsPos);
+    const unsigned bitsPos = _bitPos - 8;
+    const Byte b = (Byte)(_value >> bitsPos);
     _value = _value & ((1 << bitsPos) - 1);
     _bitPos = bitsPos;
     return b;
@@ -154,13 +163,19 @@ struct CTempFilter: public NVm::CProgramInitState
   }
 };
 
-const unsigned kNumHuffmanBits = 15;
 
 Z7_CLASS_IMP_NOQIB_2(
   CDecoder
   , ICompressCoder
   , ICompressSetDecoderProperties2
 )
+  bool _isSolid;
+  bool _solidAllowed;
+  // bool _errorMode;
+
+  bool _lzMode;
+  bool _unsupportedFilter;
+
   CByteIn m_InBitStream;
   Byte *_window;
   UInt32 _winPos;
@@ -169,12 +184,12 @@ Z7_CLASS_IMP_NOQIB_2(
   UInt64 _unpackSize;
   UInt64 _writtenFileSize; // if it's > _unpackSize, then _unpackSize only written
   ISequentialOutStream *_outStream;
-  NHuffman::CDecoder<kNumHuffmanBits, kMainTableSize> m_MainDecoder;
+
+  NHuffman::CDecoder<kNumHuffmanBits, kMainTableSize, 9> m_MainDecoder;
   UInt32 kDistStart[kDistTableSize];
-  NHuffman::CDecoder<kNumHuffmanBits, kDistTableSize> m_DistDecoder;
-  NHuffman::CDecoder<kNumHuffmanBits, kAlignTableSize> m_AlignDecoder;
-  NHuffman::CDecoder<kNumHuffmanBits, kLenTableSize> m_LenDecoder;
-  NHuffman::CDecoder<kNumHuffmanBits, kLevelTableSize> m_LevelDecoder;
+  NHuffman::CDecoder256<kNumHuffmanBits, kDistTableSize, 7> m_DistDecoder;
+  NHuffman::CDecoder256<kNumHuffmanBits, kAlignTableSize, 6> m_AlignDecoder;
+  NHuffman::CDecoder256<kNumHuffmanBits, kLenTableSize, 7> m_LenDecoder;
 
   UInt32 _reps[kNumReps];
   UInt32 _lastLength;
@@ -189,22 +204,15 @@ Z7_CLASS_IMP_NOQIB_2(
   unsigned _numEmptyTempFilters;
   UInt32 _lastFilter;
 
-  bool _isSolid;
-  bool _solidAllowed;
-  // bool _errorMode;
-
-  bool _lzMode;
-  bool _unsupportedFilter;
-
   UInt32 PrevAlignBits;
   UInt32 PrevAlignCount;
 
   bool TablesRead;
   bool TablesOK;
-
-  CPpmd7 _ppmd;
-  int PpmEscChar;
   bool PpmError;
+
+  int PpmEscChar;
+  CPpmd7 _ppmd;
   
   HRESULT WriteDataToStream(const Byte *data, UInt32 size);
   HRESULT WriteData(const Byte *data, UInt32 size);

@@ -25,7 +25,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;Z7_LARGE_PAGES;NSIS_SCRIPT;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;NSIS_SCRIPT;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4100;4113;4127;4146;4189;4200;4244;4267;4334;4702;</DisableSpecificWarnings>
     </ClCompile>
@@ -97,6 +97,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\ArchiveExports.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\ArHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\ArjHandler.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\AvbHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Base64Handler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Bz2Handler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Cab\CabBlockInStream.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Iso\IsoIn.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Iso\IsoRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\LpHandler.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\LvmHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\LzhHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\LzmaHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\MachoHandler.cpp" />
@@ -186,6 +188,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipOut.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipUpdate.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\ZstdHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\CreateCoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\CWrappers.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\FilterCoder.cpp" />
@@ -257,6 +260,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZlibDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZlibEncoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAes.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\HmacSha1.cpp" />
@@ -289,6 +293,7 @@
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Xxh64Reg.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\XzCrc64Init.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\XzCrc64Reg.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\FileDir.cpp" />
@@ -337,11 +342,13 @@
     <ClCompile Include="SevenZip\C\Sort.c" />
     <ClCompile Include="SevenZip\C\SwapBytes.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
+    <ClCompile Include="SevenZip\C\Xxh64.c" />
     <ClCompile Include="SevenZip\C\Xz.c" />
     <ClCompile Include="SevenZip\C\XzCrc64.c" />
     <ClCompile Include="SevenZip\C\XzDec.c" />
     <ClCompile Include="SevenZip\C\XzEnc.c" />
     <ClCompile Include="SevenZip\C\XzIn.c" />
+    <ClCompile Include="SevenZip\C\ZstdDec.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\BrotliDecoder.h" />
@@ -499,6 +506,7 @@
     <ClInclude Include="SevenZip\CPP\7zip\Compress\ZDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\ZlibDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\ZlibEncoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\7zAes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\HmacSha1.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\HmacSha256.h" />
@@ -522,6 +530,7 @@
     <ClInclude Include="SevenZip\CPP\7zip\PropID.h" />
     <ClInclude Include="SevenZip\CPP\Common\AutoPtr.h" />
     <ClInclude Include="SevenZip\CPP\Common\Common.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Common0.h" />
     <ClInclude Include="SevenZip\CPP\Common\ComTry.h" />
     <ClInclude Include="SevenZip\CPP\Common\Defs.h" />
     <ClInclude Include="SevenZip\CPP\Common\DynamicBuffer.h" />
@@ -596,9 +605,11 @@
     <ClInclude Include="SevenZip\C\Sort.h" />
     <ClInclude Include="SevenZip\C\SwapBytes.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
+    <ClInclude Include="SevenZip\C\Xxh64.h" />
     <ClInclude Include="SevenZip\C\Xz.h" />
     <ClInclude Include="SevenZip\C\XzCrc64.h" />
     <ClInclude Include="SevenZip\C\XzEnc.h" />
+    <ClInclude Include="SevenZip\C\ZstdDec.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />

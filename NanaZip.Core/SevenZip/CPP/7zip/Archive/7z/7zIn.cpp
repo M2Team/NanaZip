@@ -32,36 +32,44 @@
 using namespace NWindows;
 using namespace NCOM;
 
-namespace NArchive {
-namespace N7z {
-
-#define k_Scan_NumCoders_MAX 64
-#define k_Scan_NumCodersStreams_in_Folder_MAX 64
-
 unsigned BoolVector_CountSum(const CBoolVector &v);
+Z7_NO_INLINE
 unsigned BoolVector_CountSum(const CBoolVector &v)
 {
   unsigned sum = 0;
   const unsigned size = v.Size();
-  for (unsigned i = 0; i < size; i++)
-    if (v[i])
-      sum++;
+  if (size)
+  {
+    const bool *p = v.ConstData();
+    const bool * const lim = p + size;
+    do
+     if (*p)
+       sum++;
+    while (++p != lim);
+  }
   return sum;
 }
 
 static inline bool BoolVector_Item_IsValidAndTrue(const CBoolVector &v, unsigned i)
 {
-  return (i < v.Size() ? v[i] : false);
+  return i < v.Size() ? v[i] : false;
 }
 
+Z7_NO_INLINE
 static void BoolVector_Fill_False(CBoolVector &v, unsigned size)
 {
   v.ClearAndSetSize(size);
-  bool *p = &v[0];
+  bool *p = v.NonConstData();
   for (unsigned i = 0; i < size; i++)
     p[i] = false;
 }
 
+
+namespace NArchive {
+namespace N7z {
+
+#define k_Scan_NumCoders_MAX 64
+#define k_Scan_NumCodersStreams_in_Folder_MAX 64
 
 class CInArchiveException {};
 class CUnsupportedFeatureException: public CInArchiveException {};
@@ -510,7 +518,7 @@ void CFolders::ParseFolderInfo(unsigned folderIndex, CFolder &folder) const
 {
   const size_t startPos = FoCodersDataOffset[folderIndex];
   CInByte2 inByte;
-  inByte.Init(CodersData + startPos, FoCodersDataOffset[folderIndex + 1] - startPos);
+  inByte.Init(CodersData.ConstData() + startPos, FoCodersDataOffset[folderIndex + 1] - startPos);
   inByte.ParseFolder(folder);
   if (inByte.GetRem() != 0)
     throw 20120424;
@@ -1177,8 +1185,7 @@ HRESULT CInArchive::ReadAndDecodePackedStreams(
       ThrowUnsupported();
     data.Alloc(unpackSize);
     
-    CBufPtrSeqOutStream *outStreamSpec = new CBufPtrSeqOutStream;
-    CMyComPtr<ISequentialOutStream> outStream = outStreamSpec;
+    CMyComPtr2_Create<ISequentialOutStream, CBufPtrSeqOutStream> outStreamSpec;
     outStreamSpec->Init(data, unpackSize);
     
     bool dataAfterEnd_Error = false;
@@ -1189,7 +1196,7 @@ HRESULT CInArchive::ReadAndDecodePackedStreams(
         folders, i,
         NULL, // &unpackSize64
         
-        outStream,
+        outStreamSpec,
         NULL, // *compressProgress
 
         NULL  // **inStreamMainRes
@@ -1280,7 +1287,7 @@ HRESULT CInArchive::ReadHeader(
   CBoolVector emptyStreamVector;
   CBoolVector emptyFileVector;
   CBoolVector antiFileVector;
-  CNum numEmptyStreams = 0;
+  unsigned numEmptyStreams = 0;
 
   for (;;)
   {
@@ -1311,7 +1318,7 @@ HRESULT CInArchive::ReadHeader(
         for (i = 0; i < numFiles; i++)
         {
           const size_t curRem = (rem - pos) / 2;
-          const UInt16 *buf = (const UInt16 *)(const void *)(db.NamesBuf + pos);
+          const UInt16 *buf = (const UInt16 *)(const void *)(db.NamesBuf.ConstData() + pos);
           size_t j;
           for (j = 0; j < curRem && buf[j] != 0; j++);
           if (j == curRem)
@@ -1457,7 +1464,7 @@ HRESULT CInArchive::ReadHeader(
   CNum emptyFileIndex = 0;
   CNum sizeIndex = 0;
 
-  const CNum numAntiItems = BoolVector_CountSum(antiFileVector);
+  const unsigned numAntiItems = BoolVector_CountSum(antiFileVector);
 
   if (numAntiItems != 0)
     db.IsAnti.ClearAndSetSize(numFiles);
@@ -1649,7 +1656,7 @@ HRESULT CInArchive::ReadDatabase2(
 
   if (nextHeaderSize == 0)
   {
-    if (nextHeaderOffset != 0)
+    if (nextHeaderOffset != 0 || nextHeaderCRC != 0)
       return S_FALSE;
     db.IsArc = true;
     db.HeadersSize = HeadersSize;

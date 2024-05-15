@@ -442,9 +442,10 @@ HRESULT CDecoder::Decode(
           len = password.Len();
         }
         CByteBuffer_Wipe buffer(len * 2);
+        const LPCOLESTR psw = passwordBSTR;
         for (size_t k = 0; k < len; k++)
         {
-          const wchar_t c = passwordBSTR[k];
+          const wchar_t c = psw[k];
           ((Byte *)buffer)[k * 2] = (Byte)c;
           ((Byte *)buffer)[k * 2 + 1] = (Byte)(c >> 8);
         }
@@ -501,8 +502,7 @@ HRESULT CDecoder::Decode(
 
   CObjectVector< CMyComPtr<ISequentialInStream> > inStreams;
   
-  CLockedInStream *lockedInStreamSpec = new CLockedInStream;
-  CMyComPtr<IUnknown> lockedInStream = lockedInStreamSpec;
+  CMyComPtr2_Create<IUnknown, CLockedInStream> lockedInStream;
 
   #ifdef USE_MIXER_MT
   #ifdef USE_MIXER_ST
@@ -514,8 +514,8 @@ HRESULT CDecoder::Decode(
   {
     // lockedInStream.Pos = (UInt64)(Int64)-1;
     // RINOK(InStream_GetPos(inStream, lockedInStream.Pos))
-    RINOK(inStream->Seek((Int64)(startPos + packPositions[0]), STREAM_SEEK_SET, &lockedInStreamSpec->Pos))
-    lockedInStreamSpec->Stream = inStream;
+    RINOK(inStream->Seek((Int64)(startPos + packPositions[0]), STREAM_SEEK_SET, &lockedInStream->Pos))
+    lockedInStream->Stream = inStream;
 
     #ifdef USE_MIXER_MT
     #ifdef USE_MIXER_ST
@@ -551,7 +551,7 @@ HRESULT CDecoder::Decode(
       {
         CLockedSequentialInStreamMT *lockedStreamImpSpec = new CLockedSequentialInStreamMT;
         packStream = lockedStreamImpSpec;
-        lockedStreamImpSpec->Init(lockedInStreamSpec, packPos);
+        lockedStreamImpSpec->Init(lockedInStream.ClsPtr(), packPos);
       }
       #ifdef USE_MIXER_ST
       else
@@ -561,7 +561,7 @@ HRESULT CDecoder::Decode(
         #ifdef USE_MIXER_ST
         CLockedSequentialInStreamST *lockedStreamImpSpec = new CLockedSequentialInStreamST;
         packStream = lockedStreamImpSpec;
-        lockedStreamImpSpec->Init(lockedInStreamSpec, packPos);
+        lockedStreamImpSpec->Init(lockedInStream.ClsPtr(), packPos);
         #endif
       }
     }

@@ -74,7 +74,7 @@ void COverwriteDialog::SetFileInfoControl(unsigned textID, unsigned iconID,
   {
     AddLangString(s, IDS_PROP_MTIME);
     s += ": ";
-    char t[32];
+    char t[64];
     ConvertUtcFileTimeToString(fileInfo.Time, t);
     s += t;
   }

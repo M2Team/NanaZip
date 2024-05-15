@@ -26,9 +26,10 @@ struct CExtractOptionsBase
   NExtract::NPathMode::EEnum PathMode;
   NExtract::NOverwriteMode::EEnum OverwriteMode;
   NExtract::NZoneIdMode::EEnum ZoneMode;
+
+  CExtractNtOptions NtOptions;
   
   FString OutputDir;
-  CExtractNtOptions NtOptions;
   UString HashDir;
 
   CExtractOptionsBase():

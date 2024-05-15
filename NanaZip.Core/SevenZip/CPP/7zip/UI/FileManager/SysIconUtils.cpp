@@ -49,6 +49,7 @@ int GetIconIndexForCSIDL(int csidl)
 }
 
 #ifndef _UNICODE
+Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
 typedef DWORD_PTR (WINAPI * Func_SHGetFileInfoW)(LPCWSTR pszPath, DWORD attrib, SHFILEINFOW *psfi, UINT cbFileInfo, UINT uFlags);
 
 static struct C_SHGetFileInfo_Init

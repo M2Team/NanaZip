@@ -65,6 +65,8 @@ static inline bool CheckIsa()
 {
   // __try
   {
+    // some compilers (e2k) support SSE/AVX, but cpuid() can be unavailable or return lower isa support
+#ifdef MY_CPU_X86_OR_AMD64
     #if defined(__AVX2__)
       if (!CPU_IsSupported_AVX2())
         return false;
@@ -79,6 +81,7 @@ static inline bool CheckIsa()
           !CPU_IsSupported_CMOV())
         return false;
     #endif
+#endif
     /*
     __asm
     {

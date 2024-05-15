@@ -26,6 +26,7 @@ static HRESULT SResToHRESULT_Code(SRes res) throw()
     case SZ_OK: return S_OK;
     case SZ_ERROR_MEM: return E_OUTOFMEMORY;
     case SZ_ERROR_UNSUPPORTED: return E_NOTIMPL;
+    default: break;
   }
   return S_FALSE;
 }

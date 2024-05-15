@@ -28,7 +28,7 @@ class CHuffmanDecoder
   Byte _symbols[kMaxHuffTableSize];
 public:
   bool Build(const Byte *lens, unsigned numSymbols) throw();
-  UInt32 Decode(CInBit *inStream) const throw();
+  unsigned Decode(CInBit *inStream) const throw();
 };
 
 
@@ -39,15 +39,15 @@ Z7_CLASS_IMP_NOQIB_4(
   , ICompressSetFinishMode
   , ICompressGetInStreamProcessedSize
 )
+  Byte _flags;
+  bool _fullStreamMode;
+
   CLzOutWindow _outWindowStream;
   CInBit _inBitStream;
   
   CHuffmanDecoder _litDecoder;
   CHuffmanDecoder _lenDecoder;
   CHuffmanDecoder _distDecoder;
-
-  Byte _flags;
-  bool _fullStreamMode;
 
   bool BuildHuff(CHuffmanDecoder &table, unsigned numSymbols);
   HRESULT CodeReal(ISequentialInStream *inStream, ISequentialOutStream *outStream,

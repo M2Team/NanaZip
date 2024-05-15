@@ -57,7 +57,7 @@ void CMemBlockManager::FreeBlock(void *p)
 
 // #include <stdio.h>
 
-HRes CMemBlockManagerMt::AllocateSpace(size_t numBlocks, size_t numNoLockBlocks)
+HRESULT CMemBlockManagerMt::AllocateSpace(size_t numBlocks, size_t numNoLockBlocks)
 {
   if (numNoLockBlocks > numBlocks)
     return E_INVALIDARG;
@@ -87,7 +87,7 @@ HRes CMemBlockManagerMt::AllocateSpace(size_t numBlocks, size_t numNoLockBlocks)
 }
 
 
-HRes CMemBlockManagerMt::AllocateSpaceAlways(size_t desiredNumberOfBlocks, size_t numNoLockBlocks)
+HRESULT CMemBlockManagerMt::AllocateSpaceAlways(size_t desiredNumberOfBlocks, size_t numNoLockBlocks)
 {
   // desiredNumberOfBlocks = 0; // for debug
   if (numNoLockBlocks > desiredNumberOfBlocks)
@@ -95,7 +95,7 @@ HRes CMemBlockManagerMt::AllocateSpaceAlways(size_t desiredNumberOfBlocks, size_
   for (;;)
   {
     // if (desiredNumberOfBlocks == 0) return E_OUTOFMEMORY;
-    HRes hres = AllocateSpace(desiredNumberOfBlocks, numNoLockBlocks);
+    const HRESULT hres = AllocateSpace(desiredNumberOfBlocks, numNoLockBlocks);
     if (hres != E_OUTOFMEMORY)
       return hres;
     if (desiredNumberOfBlocks == numNoLockBlocks)

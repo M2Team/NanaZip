@@ -10,9 +10,10 @@
 
 #include "../../../C/7zCrc.h"
 #include "../../../C/Alloc.h"
-#include "../../../C/CpuArch.h"
 #include "../../../C/LzmaDec.h"
+#include "../../../C/CpuArch.h"
 
+#include "../../Common/AutoPtr.h"
 #include "../../Common/ComTry.h"
 #include "../../Common/IntToString.h"
 #include "../../Common/MyBuffer.h"
@@ -42,8 +43,8 @@
 namespace NArchive {
 namespace NUefi {
 
-static const size_t kBufTotalSizeMax = (1 << 29);
-static const unsigned kNumFilesMax = (1 << 18);
+static const size_t kBufTotalSizeMax = 1 << 29;
+static const unsigned kNumFilesMax = 1 << 18;
 static const unsigned kLevelMax = 64;
 
 static const Byte k_IntelMeSignature[] =
@@ -845,7 +846,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     case kpidErrorFlags:
     {
       UInt32 v = 0;
-      if (!_headersError) v |= kpv_ErrorFlags_HeadersError;
+      if (_headersError) v |= kpv_ErrorFlags_HeadersError;
       if (v != 0)
         prop = v;
       break;
@@ -990,8 +991,8 @@ HRESULT CHandler::ParseSections(unsigned bufIndex, UInt32 posBase, UInt32 size, 
     {
       if (sectSize < 4 + 5)
         return S_FALSE;
-      UInt32 uncompressedSize = Get32(p + 4);
-      Byte compressionType = p[8];
+      const UInt32 uncompressedSize = Get32(p + 4);
+      const Byte compressionType = p[8];
 
       UInt32 newSectSize = sectSize - 9;
       UInt32 newOffset = posBase + pos + 9;
@@ -1014,21 +1015,16 @@ HRESULT CHandler::ParseSections(unsigned bufIndex, UInt32 posBase, UInt32 size, 
         }
         else if (compressionType == COMPRESSION_TYPE_LZH)
         {
-          unsigned newBufIndex = AddBuf(uncompressedSize);
+          const unsigned newBufIndex = AddBuf(uncompressedSize);
           CByteBuffer &buf = _bufs[newBufIndex];
-
-          NCompress::NLzh::NDecoder::CCoder *lzhDecoderSpec = NULL;
-          CMyComPtr<ICompressCoder> lzhDecoder;
- 
-          lzhDecoderSpec = new NCompress::NLzh::NDecoder::CCoder;
-          lzhDecoder = lzhDecoderSpec;
-
+          CMyUniquePtr<NCompress::NLzh::NDecoder::CCoder> lzhDecoder;
+          lzhDecoder.Create_if_Empty();
           {
             const Byte *src = pStart;
             if (newSectSize < 8)
               return S_FALSE;
             UInt32 packSize = Get32(src);
-            UInt32 unpackSize = Get32(src + 4);
+            const UInt32 unpackSize = Get32(src + 4);
 
             PRF(printf(" LZH packSize = %6x, unpackSize = %6x", packSize, unpackSize));
 
@@ -1041,14 +1037,10 @@ HRESULT CHandler::ParseSections(unsigned bufIndex, UInt32 posBase, UInt32 size, 
             if (src[packSize] != 0)
               return S_FALSE;
 
-            CBufInStream *inStreamSpec = new CBufInStream;
-            CMyComPtr<IInStream> inStream = inStreamSpec;
-
-            CBufPtrSeqOutStream *outStreamSpec = new CBufPtrSeqOutStream;
-            CMyComPtr<ISequentialOutStream> outStream = outStreamSpec;
-
-            UInt64 uncompressedSize64 = uncompressedSize;
-            lzhDecoderSpec->FinishMode = true;
+            CMyComPtr2_Create<IInStream, CBufInStream> inStream;
+            CMyComPtr2_Create<ISequentialOutStream, CBufPtrSeqOutStream> outStream;
+            // const UInt64 uncompressedSize64 = uncompressedSize;
+            // lzhDecoder->FinishMode = true;
             /*
               EFI 1.1 probably used LZH with small dictionary and (pbit = 4). It was named "Efi compression".
               New version of compression code (named Tiano) uses LZH with (1 << 19) dictionary.
@@ -1056,19 +1048,17 @@ HRESULT CHandler::ParseSections(unsigned bufIndex, UInt32 posBase, UInt32 size, 
               We check both LZH versions: Tiano and then Efi.
             */
             HRESULT res = S_FALSE;
-
             for (unsigned m = 0 ; m < 2; m++)
             {
-              inStreamSpec->Init(src, packSize);
-              outStreamSpec->Init(buf, uncompressedSize);
-              lzhDecoderSpec->SetDictSize((m == 0) ? ((UInt32)1 << 19) : ((UInt32)1 << 14));
-              res = lzhDecoder->Code(inStream, outStream, NULL, &uncompressedSize64, NULL);
+              inStream->Init(src, packSize);
+              outStream->Init(buf, uncompressedSize);
+              lzhDecoder->SetDictSize(m == 0 ? ((UInt32)1 << 19) : ((UInt32)1 << 14));
+              res = lzhDecoder->Code(inStream, outStream, uncompressedSize, NULL);
               if (res == S_OK)
                 break;
             }
             RINOK(res)
           }
-
           bool error2;
           RINOK(ParseSections(newBufIndex, 0, uncompressedSize, parent, compressionType, level, error2))
         }
@@ -1781,49 +1771,48 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   UInt32 i;
   for (i = 0; i < numItems; i++)
     totalSize += _items[_items2[allFilesMode ? i : indices[i]].MainIndex].Size;
-  extractCallback->SetTotal(totalSize);
-
-  UInt64 currentTotalSize = 0;
+  RINOK(extractCallback->SetTotal(totalSize))
+  totalSize = 0;
   
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
-  for (i = 0; i < numItems; i++)
+  for (i = 0;; i++)
   {
-    lps->InSize = lps->OutSize = currentTotalSize;
+    lps->InSize = lps->OutSize = totalSize;
     RINOK(lps->SetCur())
-    CMyComPtr<ISequentialOutStream> realOutStream;
-    const Int32 askMode = testMode ?
-        NExtract::NAskMode::kTest :
-        NExtract::NAskMode::kExtract;
-    const UInt32 index = allFilesMode ? i : indices[i];
-    const CItem &item = _items[_items2[index].MainIndex];
-    RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
-    currentTotalSize += item.Size;
-    
-    if (!testMode && !realOutStream)
-      continue;
-    RINOK(extractCallback->PrepareOperation(askMode))
-    if (testMode || item.IsDir)
+    if (i >= numItems)
+      break;
+    Int32 opRes;
     {
-      RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
-      continue;
+      CMyComPtr<ISequentialOutStream> realOutStream;
+      const Int32 askMode = testMode ?
+          NExtract::NAskMode::kTest :
+          NExtract::NAskMode::kExtract;
+      const UInt32 index = allFilesMode ? i : indices[i];
+      const CItem &item = _items[_items2[index].MainIndex];
+      RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
+      totalSize += item.Size;
+      if (!testMode && !realOutStream)
+        continue;
+      RINOK(extractCallback->PrepareOperation(askMode))
+      if (testMode || item.IsDir)
+        opRes = NExtract::NOperationResult::kOK;
+      else
+      {
+        opRes = NExtract::NOperationResult::kDataError;
+        CMyComPtr<ISequentialInStream> inStream;
+        GetStream(index, &inStream);
+        if (inStream)
+        {
+          RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
+          if (copyCoder->TotalSize == item.Size)
+            opRes = NExtract::NOperationResult::kOK;
+        }
+      }
     }
-    int res = NExtract::NOperationResult::kDataError;
-    CMyComPtr<ISequentialInStream> inStream;
-    GetStream(index, &inStream);
-    if (inStream)
-    {
-      RINOK(copyCoder->Code(inStream, realOutStream, NULL, NULL, progress))
-      if (copyCoderSpec->TotalSize == item.Size)
-        res = NExtract::NOperationResult::kOK;
-    }
-    realOutStream.Release();
-    RINOK(extractCallback->SetOperationResult(res))
+    RINOK(extractCallback->SetOperationResult(opRes))
   }
   return S_OK;
   COM_TRY_END

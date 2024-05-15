@@ -5,7 +5,7 @@
 
 #include <string.h>
 
-#include "Common.h"
+#include "MyTypes.h"
 
 template <class T> class CDynamicBuffer
 {
@@ -43,6 +43,14 @@ public:
   operator const T *() const { return _items; }
   ~CDynamicBuffer() { delete []_items; }
 
+  void Free()
+  {
+    delete []_items;
+    _items = NULL;
+    _size = 0;
+    _pos = 0;
+  }
+
   T *GetCurPtrAndGrow(size_t addSize)
   {
     size_t rem = _size - _pos;
@@ -63,6 +71,6 @@ public:
   // void Empty() { _pos = 0; }
 };
 
-typedef CDynamicBuffer<unsigned char> CByteDynamicBuffer;
+typedef CDynamicBuffer<Byte> CByteDynamicBuffer;
 
 #endif

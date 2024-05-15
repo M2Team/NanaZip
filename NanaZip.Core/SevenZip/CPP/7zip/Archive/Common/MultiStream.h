@@ -9,11 +9,9 @@
 #include "../../IStream.h"
 #include "../../Archive/IArchive.h"
 
-Z7_CLASS_IMP_COM_1(
+Z7_CLASS_IMP_IInStream(
   CMultiStream
-  , IInStream
 )
-  Z7_IFACE_COM7_IMP(ISequentialInStream)
 
   unsigned _streamIndex;
   UInt64 _pos;

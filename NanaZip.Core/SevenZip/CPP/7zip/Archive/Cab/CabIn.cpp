@@ -80,10 +80,9 @@ struct CSignatureFinder
   UInt32 _alignSize;
   UInt32 _bufUseCapacity;
 
+  const UInt64 *SearchLimit;
   ISequentialInStream *Stream;
   UInt64 Processed; // Global offset of start of Buf
-
-  const UInt64 *SearchLimit;
 
   UInt32 GetTotalCapacity(UInt32 basicSize, UInt32 headerSize)
   {
@@ -111,7 +110,7 @@ HRESULT CSignatureFinder::Find()
     while (End - Pos >= _headerSize)
     {
       const Byte *p = Buf + Pos;
-      Byte b = Signature[0];
+      const Byte b = Signature[0];
       for (;;)
       {
         if (*p == b) { break; }  p++;
@@ -132,7 +131,7 @@ HRESULT CSignatureFinder::Find()
 
     if (Pos >= _alignSize)
     {
-      UInt32 num = (Pos & ~(_alignSize - 1));
+      const UInt32 num = (Pos & ~(_alignSize - 1));
       Processed += num;
       Pos -= num;
       End -= num;
@@ -143,7 +142,7 @@ HRESULT CSignatureFinder::Find()
     {
       if (Processed + Pos > *SearchLimit)
         return S_FALSE;
-      UInt64 rem2 = *SearchLimit - (Processed + End) + _headerSize;
+      const UInt64 rem2 = *SearchLimit - (Processed + End) + _headerSize;
       if (rem > rem2)
         rem = (UInt32)rem2;
     }
@@ -248,7 +247,7 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
           limitedStreamSpec = new CLimitedSequentialInStream;
           limitedStreamSpec->SetStream(db.Stream);
           limitedStream = limitedStreamSpec;
-          UInt32 remInFinder = finder.End - finder.Pos;
+          const UInt32 remInFinder = finder.End - finder.Pos;
           if (ai.Size <= remInFinder)
           {
             limitedStreamSpec->Init(0);
@@ -273,7 +272,7 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     _tempBuf.Alloc(1 << 12);
 
   Byte p[16];
-  unsigned nextSize = 4 + (ai.ReserveBlockPresent() ? 4 : 0);
+  const unsigned nextSize = 4 + (ai.ReserveBlockPresent() ? 4 : 0);
   Read(p, nextSize);
   ai.SetID = Get16(p);
   ai.CabinetNumber = Get16(p + 2);
@@ -325,8 +324,8 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     item.Size = Get32(p);
     item.Offset = Get32(p + 4);
     item.FolderIndex = Get16(p + 8);
-    UInt16 pureDate = Get16(p + 10);
-    UInt16 pureTime = Get16(p + 12);
+    const UInt16 pureDate = Get16(p + 10);
+    const UInt16 pureTime = Get16(p + 12);
     item.Time = (((UInt32)pureDate << 16)) | pureTime;
     item.Attributes = Get16(p + 14);
 
@@ -366,12 +365,12 @@ static int CompareMvItems(const CMvItem *p1, const CMvItem *p2, void *param)
   const CDatabaseEx &db2 = mvDb.Volumes[p2->VolumeIndex];
   const CItem &item1 = db1.Items[p1->ItemIndex];
   const CItem &item2 = db2.Items[p2->ItemIndex];
-  bool isDir1 = item1.IsDir();
-  bool isDir2 = item2.IsDir();
+  const bool isDir1 = item1.IsDir();
+  const bool isDir2 = item2.IsDir();
   if (isDir1 && !isDir2) return -1;
   if (isDir2 && !isDir1) return 1;
-  int f1 = mvDb.GetFolderIndex(p1);
-  int f2 = mvDb.GetFolderIndex(p2);
+  const int f1 = mvDb.GetFolderIndex(p1);
+  const int f2 = mvDb.GetFolderIndex(p2);
   RINOZ(MyCompare(f1, f2))
   RINOZ(MyCompare(item1.Offset, item2.Offset))
   RINOZ(MyCompare(item1.Size, item2.Size))
@@ -434,7 +433,7 @@ void CMvDatabaseEx::FillSortAndShrink()
 
   FOR_VECTOR (i, Items)
   {
-    int folderIndex = GetFolderIndex(&Items[i]);
+    const int folderIndex = GetFolderIndex(&Items[i]);
     while (folderIndex >= (int)FolderStartFileIndex.Size())
       FolderStartFileIndex.Add(i);
   }
@@ -452,7 +451,7 @@ bool CMvDatabaseEx::Check()
       if (db0.Folders.IsEmpty() || db1.Folders.IsEmpty())
         return false;
       const CFolder &f0 = db0.Folders.Back();
-      const CFolder &f1 = db1.Folders.Front();
+      const CFolder &f1 = db1.Folders.FrontItem();
       if (f0.MethodMajor != f1.MethodMajor ||
           f0.MethodMinor != f1.MethodMinor)
         return false;
@@ -466,14 +465,14 @@ bool CMvDatabaseEx::Check()
   FOR_VECTOR (i, Items)
   {
     const CMvItem &mvItem = Items[i];
-    int fIndex = GetFolderIndex(&mvItem);
+    const int fIndex = GetFolderIndex(&mvItem);
     if (fIndex >= (int)FolderStartFileIndex.Size())
       return false;
     const CItem &item = Volumes[mvItem.VolumeIndex].Items[mvItem.ItemIndex];
     if (item.IsDir())
       continue;
     
-    int folderIndex = GetFolderIndex(&mvItem);
+    const int folderIndex = GetFolderIndex(&mvItem);
   
     if (folderIndex != prevFolder)
       prevFolder = folderIndex;

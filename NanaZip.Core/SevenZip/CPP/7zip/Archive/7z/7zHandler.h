@@ -54,11 +54,13 @@ public:
   CBoolPair Write_Attrib;
 
   bool _useMultiThreadMixer;
-
   bool _removeSfxBlock;
-  
   // bool _volumeMode;
 
+  UInt32 _decoderCompatibilityVersion;
+  CUIntVector _enabledFilters;
+  CUIntVector _disabledFilters;
+  
   void InitSolidFiles() { _numSolidFiles = (UInt64)(Int64)(-1); }
   void InitSolidSize()  { _numSolidBytes = (UInt64)(Int64)(-1); }
   void InitSolid()

@@ -89,7 +89,7 @@ API_FUNC_static_IsArc IsArc_Z(const Byte *p, size_t size)
   if (size < 3)
     return k_IsArc_Res_NEED_MORE;
   if (size > NCompress::NZ::kRecommendedCheckSize)
-    size = NCompress::NZ::kRecommendedCheckSize;
+      size = NCompress::NZ::kRecommendedCheckSize;
   if (!NCompress::NZ::CheckStream(p, size))
     return k_IsArc_Res_NO;
   return k_IsArc_Res_YES;
@@ -166,13 +166,12 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     return S_OK;
   if (numItems != (UInt32)(Int32)-1 && (numItems != 1 || indices[0] != 0))
     return E_INVALIDARG;
-
-  extractCallback->SetTotal(_packSize);
-
+  RINOK(extractCallback->SetTotal(_packSize))
   UInt64 currentTotalPacked = 0;
-  
   RINOK(extractCallback->SetCompleted(&currentTotalPacked))
   
+  int opRes;
+  {
   CMyComPtr<ISequentialOutStream> realOutStream;
   const Int32 askMode = testMode ?
       NExtract::NAskMode::kTest :
@@ -183,37 +182,33 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   if (!testMode && !realOutStream)
     return S_OK;
 
-  extractCallback->PrepareOperation(askMode);
+  RINOK(extractCallback->PrepareOperation(askMode))
 
-  CDummyOutStream *outStreamSpec = new CDummyOutStream;
-  CMyComPtr<ISequentialOutStream> outStream(outStreamSpec);
-  outStreamSpec->SetStream(realOutStream);
-  outStreamSpec->Init();
-  realOutStream.Release();
+  CMyComPtr2_Create<ISequentialOutStream, CDummyOutStream> outStream;
+  outStream->SetStream(realOutStream);
+  outStream->Init();
+  // realOutStream.Release();
 
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, true);
   
   RINOK(InStream_SeekToBegin(_stream))
 
-  NCompress::NZ::CDecoder *decoderSpec = new NCompress::NZ::CDecoder;
-  CMyComPtr<ICompressCoder> decoder = decoderSpec;
-
-  int opRes;
+  NCompress::NZ::CDecoder decoder;
   {
-    HRESULT result = decoder->Code(_stream, outStream, NULL, NULL, progress);
-    if (result == S_FALSE)
+    const HRESULT hres = decoder.Code(_stream, outStream, lps);
+    if (hres == S_FALSE)
       opRes = NExtract::NOperationResult::kDataError;
     else
     {
-      RINOK(result)
+      RINOK(hres)
       opRes = NExtract::NOperationResult::kOK;
     }
   }
   // _unpackSize = outStreamSpec->GetSize();
   // _unpackSize_Defined = true;
-  outStream.Release();
+  // outStream.Release();
+  }
   return extractCallback->SetOperationResult(opRes);
   COM_TRY_END
 }

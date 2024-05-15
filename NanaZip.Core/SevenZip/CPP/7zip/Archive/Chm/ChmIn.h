@@ -45,9 +45,9 @@ struct CItem
 
 struct CDatabase
 {
+  CObjectVector<CItem> Items;
   UInt64 StartPosition;
   UInt64 ContentOffset;
-  CObjectVector<CItem> Items;
   AString NewFormatString;
   bool Help2Format;
   bool NewFormat;
@@ -137,14 +137,14 @@ struct CLzxInfo
     return 0;
   }
 
-  UInt64 GetFolderSize() const { return kBlockSize << ResetIntervalBits; }
+  UInt64 GetFolderSize() const { return (UInt64)kBlockSize << ResetIntervalBits; }
   UInt64 GetFolder(UInt64 offset) const { return offset / GetFolderSize(); }
   UInt64 GetFolderPos(UInt64 folderIndex) const { return folderIndex * GetFolderSize(); }
   UInt64 GetBlockIndexFromFolderIndex(UInt64 folderIndex) const { return folderIndex << ResetIntervalBits; }
 
   bool GetOffsetOfFolder(UInt64 folderIndex, UInt64 &offset) const
   {
-    UInt64 blockIndex = GetBlockIndexFromFolderIndex(folderIndex);
+    const UInt64 blockIndex = GetBlockIndexFromFolderIndex(folderIndex);
     if (blockIndex >= ResetTable.ResetOffsets.Size())
       return false;
     offset = ResetTable.ResetOffsets[(unsigned)blockIndex];
@@ -162,7 +162,7 @@ struct CLzxInfo
 struct CMethodInfo
 {
   Byte Guid[16];
-  CByteBuffer ControlData;
+  // CByteBuffer ControlData;
   CLzxInfo LzxInfo;
   
   bool IsLzx() const;
@@ -188,9 +188,9 @@ struct CSectionInfo
 class CFilesDatabase: public CDatabase
 {
 public:
-  bool LowLevel;
   CUIntVector Indices;
   CObjectVector<CSectionInfo> Sections;
+  bool LowLevel;
 
   UInt64 GetFileSize(unsigned fileIndex) const { return Items[Indices[fileIndex]].Size; }
   UInt64 GetFileOffset(unsigned fileIndex) const { return Items[Indices[fileIndex]].Offset; }

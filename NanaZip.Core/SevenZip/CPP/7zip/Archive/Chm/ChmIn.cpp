@@ -47,20 +47,15 @@ static bool inline AreGuidsEqual(const Byte *g1, const Byte *g2)
   return memcmp(g1, g2, 16) == 0;
 }
 
-static char GetHex(unsigned v)
+static void PrintByte(unsigned b, AString &s)
 {
-  return (char)((v < 10) ? ('0' + v) : ('A' + (v - 10)));
-}
-
-static void PrintByte(Byte b, AString &s)
-{
-  s += GetHex(b >> 4);
-  s += GetHex(b & 0xF);
+  s += (char)GET_HEX_CHAR_UPPER(b >> 4);
+  s += (char)GET_HEX_CHAR_LOWER(b & 0xF);
 }
 
 AString CMethodInfo::GetGuidString() const
 {
-  char s[48];
+  char s[16 * 2 + 8];
   RawLeGuidToString_Braced(Guid, s);
   // MyStringUpper_Ascii(s);
   return (AString)s;
@@ -93,12 +88,14 @@ AString CMethodInfo::GetName() const
     else
     {
       s = GetGuidString();
-      if (ControlData.Size() > 0)
+      /*
+      if (ControlData.Size() > 0 && ControlData.Size() <= (1 << 6))
       {
-        s += ':';
+        s.Add_Colon();
         for (size_t i = 0; i < ControlData.Size(); i++)
           PrintByte(ControlData[i], s);
       }
+      */
     }
   }
   return s;
@@ -177,7 +174,7 @@ UInt64 CInArchive::ReadEncInt()
   UInt64 val = 0;
   for (int i = 0; i < 9; i++)
   {
-    Byte b = ReadByte();
+    const unsigned b = ReadByte();
     val |= (b & 0x7F);
     if (b < 0x80)
       return val;
@@ -206,7 +203,7 @@ void CInArchive::ReadUString(unsigned size, UString &s)
   s.Empty();
   while (size-- != 0)
   {
-    wchar_t c = ReadUInt16();
+    const wchar_t c = ReadUInt16();
     if (c == 0)
     {
       Skip(2 * size);
@@ -232,7 +229,7 @@ HRESULT CInArchive::ReadChunk(IInStream *inStream, UInt64 pos, UInt64 size)
 HRESULT CInArchive::ReadDirEntry(CDatabase &database)
 {
   CItem item;
-  UInt64 nameLen = ReadEncInt();
+  const UInt64 nameLen = ReadEncInt();
   if (nameLen == 0 || nameLen > (1 << 13))
     return S_FALSE;
   ReadString((unsigned)nameLen, item.Name);
@@ -333,7 +330,7 @@ HRESULT CInArchive::OpenChm(IInStream *inStream, CDatabase &database)
       // One quickref entry exists for every n entries in the file, where n
       // is calculated as 1 + (1 << quickref density). So for density = 2, n = 5.
 
-      UInt32 quickrefLength = ReadUInt32(); // Len of free space and/or quickref area at end of directory chunk
+      const UInt32 quickrefLength = ReadUInt32(); // Len of free space and/or quickref area at end of directory chunk
       if (quickrefLength > dirChunkSize || quickrefLength < 2)
         return S_FALSE;
       ReadUInt32(); // Always 0
@@ -345,8 +342,8 @@ HRESULT CInArchive::OpenChm(IInStream *inStream, CDatabase &database)
       
       for (;;)
       {
-        UInt64 offset = _inBuffer.GetProcessedSize() - chunkPos;
-        UInt32 offsetLimit = dirChunkSize - quickrefLength;
+        const UInt64 offset = _inBuffer.GetProcessedSize() - chunkPos;
+        const UInt32 offsetLimit = dirChunkSize - quickrefLength;
         if (offset > offsetLimit)
           return S_FALSE;
         if (offset == offsetLimit)
@@ -357,7 +354,7 @@ HRESULT CInArchive::OpenChm(IInStream *inStream, CDatabase &database)
       
       Skip(quickrefLength - 2);
       
-      unsigned rrr = ReadUInt16();
+      const unsigned rrr = ReadUInt16();
       if (rrr != numItems)
       {
         // Lazarus 9-26-2 chm contains 0 here.
@@ -538,34 +535,40 @@ HRESULT CInArchive::OpenHelp2(IInStream *inStream, CDatabase &database)
       unsigned numItems = 0;
       for (;;)
       {
-        UInt64 offset = _inBuffer.GetProcessedSize() - chunkPos;
-        UInt32 offsetLimit = dirChunkSize - quickrefLength;
+        const UInt64 offset = _inBuffer.GetProcessedSize() - chunkPos;
+        const UInt32 offsetLimit = dirChunkSize - quickrefLength;
         if (offset > offsetLimit)
           return S_FALSE;
         if (offset == offsetLimit)
           break;
         if (database.NewFormat)
         {
-          UInt16 nameLen = ReadUInt16();
+          const unsigned nameLen = ReadUInt16();
           if (nameLen == 0)
             return S_FALSE;
           UString name;
-          ReadUString((unsigned)nameLen, name);
+          ReadUString(nameLen, name);
           AString s;
           ConvertUnicodeToUTF8(name, s);
-          Byte b = ReadByte();
-          s.Add_Space();
-          PrintByte(b, s);
+          {
+            const unsigned b = ReadByte();
+            s.Add_Space();
+            PrintByte(b, s);
+          }
           s.Add_Space();
           UInt64 len = ReadEncInt();
           // then number of items ?
           // then length ?
           // then some data (binary encoding?)
-          while (len-- != 0)
+          if (len > 1u << 29) // what limit here we need?
+            return S_FALSE;
+          if (len)
+          do
           {
-            b = ReadByte();
+            const unsigned b = ReadByte();
             PrintByte(b, s);
           }
+          while (--len);
           database.NewFormatString += s;
           database.NewFormatString += "\r\n";
         }
@@ -613,7 +616,7 @@ static AString GetSectionPrefix(const AString &name)
 {
   AString s (kStorage);
   s += name;
-  s += '/';
+  s.Add_Slash();
   return s;
 }
 
@@ -712,7 +715,7 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
     for (unsigned i = 0; i < numSections; i++)
     {
       CSectionInfo section;
-      UInt16 nameLen = ReadUInt16();
+      const unsigned nameLen = ReadUInt16();
       UString name;
       ReadUString(nameLen, name);
       if (ReadUInt16() != 0)
@@ -799,14 +802,19 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
 
           li.CacheSize = ReadUInt32();
           numDWORDS -= 5;
-          while (numDWORDS-- != 0)
+          if (numDWORDS)
+          do
             ReadUInt32();
+          while (--numDWORDS);
         }
         else
         {
-          UInt32 numBytes = numDWORDS * 4;
-          method.ControlData.Alloc(numBytes);
-          ReadBytes(method.ControlData, numBytes);
+          if (numDWORDS > 1u << 27)
+            return S_FALSE;
+          const size_t numBytes = (size_t)numDWORDS * 4;
+          // method.ControlData.Alloc(numBytes);
+          // ReadBytes(method.ControlData, numBytes);
+          Skip(numBytes);
         }
       }
     }
@@ -841,10 +849,10 @@ HRESULT CInArchive::OpenHighLevel(IInStream *inStream, CFilesDatabase &database)
         }
         else
         {
-          UInt32 ver = ReadUInt32(); // 2  unknown (possibly a version number)
+          const UInt32 ver = ReadUInt32(); // 2  unknown (possibly a version number)
           if (ver != 2 && ver != 3)
             return S_FALSE;
-          UInt32 numEntries = ReadUInt32();
+          const UInt32 numEntries = ReadUInt32();
           const unsigned kEntrySize = 8;
           if (ReadUInt32() != kEntrySize)
             return S_FALSE;

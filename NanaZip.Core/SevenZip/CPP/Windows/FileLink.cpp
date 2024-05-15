@@ -249,9 +249,13 @@ bool CReparseAttr::Parse(const Byte *p, size_t size)
   if (size < 8)
     return false;
   Tag = Get32(p);
-  UInt32 len = Get16(p + 4);
-  if (len + 8 != size)
-  // if (len + 8 > size)
+  if (Get16(p + 6) != 0) // padding
+    return false;
+  unsigned len = Get16(p + 4);
+  p += 8;
+  size -= 8;
+  if (len != size)
+  // if (len > size)
     return false;
   /*
   if ((type & kReparseFlags_Alias) == 0 ||
@@ -259,8 +263,6 @@ bool CReparseAttr::Parse(const Byte *p, size_t size)
       (type & 0xFFFF) != 3)
   */
 
-  if (Get16(p + 6) != 0) // padding
-    return false;
 
   HeaderError = false;
 
@@ -276,9 +278,6 @@ bool CReparseAttr::Parse(const Byte *p, size_t size)
 
   TagIsUnknown = false;
  
-  p += 8;
-  size -= 8;
-  
   if (Tag == Z7_WIN_IO_REPARSE_TAG_LX_SYMLINK)
   {
     if (len < 4)
@@ -518,7 +517,7 @@ bool SetReparseData(CFSTR path, bool isDir, const void *data, DWORD size)
     {
       CreatePrefixDirOfFile(path);
       COutFile file;
-      if (!file.Create(path, CREATE_NEW))
+      if (!file.Create_NEW(path))
         return false;
     }
   }

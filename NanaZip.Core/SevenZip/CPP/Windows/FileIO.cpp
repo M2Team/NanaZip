@@ -141,8 +141,17 @@ bool CFileBase::Close() throw()
 {
   if (_handle == INVALID_HANDLE_VALUE)
     return true;
-  if (!::CloseHandle(_handle))
-    return false;
+#if 0
+  if (!IsStdStream)
+#endif
+  {
+    if (!::CloseHandle(_handle))
+      return false;
+  }
+#if 0
+  IsStdStream = false;
+  IsStdPipeStream = false;
+#endif
   _handle = INVALID_HANDLE_VALUE;
   return true;
 }
@@ -457,7 +466,7 @@ bool CInFile::Open(CFSTR fileName)
 // for 32 MB (maybe also for 16 MB).
 // And message can be "Network connection was lost"
 
-static const UInt32 kChunkSizeMax = (1 << 22);
+static const UInt32 kChunkSizeMax = 1 << 22;
 
 bool CInFile::Read1(void *data, UInt32 size, UInt32 &processedSize) throw()
 {
@@ -469,8 +478,14 @@ bool CInFile::Read1(void *data, UInt32 size, UInt32 &processedSize) throw()
 
 bool CInFile::ReadPart(void *data, UInt32 size, UInt32 &processedSize) throw()
 {
+#if 0
+  const UInt32 chunkSizeMax = (0 || IsStdStream) ? (1 << 20) : kChunkSizeMax;
+  if (size > chunkSizeMax)
+      size = chunkSizeMax;
+#else
   if (size > kChunkSizeMax)
-    size = kChunkSizeMax;
+      size = kChunkSizeMax;
+#endif
   return Read1(data, size, processedSize);
 }
 
@@ -486,10 +501,10 @@ bool CInFile::Read(void *data, UInt32 size, UInt32 &processedSize) throw()
       return false;
     if (processedLoc == 0)
       return true;
-    data = (void *)((unsigned char *)data + processedLoc);
+    data = (void *)((Byte *)data + processedLoc);
     size -= processedLoc;
   }
-  while (size > 0);
+  while (size);
   return true;
 }
 
@@ -506,29 +521,23 @@ bool CInFile::ReadFull(void *data, size_t size, size_t &processedSize) throw()
       return false;
     if (processedLoc == 0)
       return true;
-    data = (void *)((unsigned char *)data + processedLoc);
+    data = (void *)((Byte *)data + processedLoc);
     size -= processedLoc;
   }
-  while (size > 0);
+  while (size);
   return true;
 }
 
 // ---------- COutFile ---------
 
-static inline DWORD GetCreationDisposition(bool createAlways)
-  { return createAlways? CREATE_ALWAYS: CREATE_NEW; }
-
 bool COutFile::Open(CFSTR fileName, DWORD shareMode, DWORD creationDisposition, DWORD flagsAndAttributes)
   { return CFileBase::Create(fileName, GENERIC_WRITE, shareMode, creationDisposition, flagsAndAttributes); }
 
-bool COutFile::Open(CFSTR fileName, DWORD creationDisposition)
+bool COutFile::Open_Disposition(CFSTR fileName, DWORD creationDisposition)
   { return Open(fileName, FILE_SHARE_READ, creationDisposition, FILE_ATTRIBUTE_NORMAL); }
 
-bool COutFile::Create(CFSTR fileName, bool createAlways)
-  { return Open(fileName, GetCreationDisposition(createAlways)); }
-
-bool COutFile::CreateAlways(CFSTR fileName, DWORD flagsAndAttributes)
-  { return Open(fileName, FILE_SHARE_READ, GetCreationDisposition(true), flagsAndAttributes); }
+bool COutFile::Create_ALWAYS_with_Attribs(CFSTR fileName, DWORD flagsAndAttributes)
+  { return Open(fileName, FILE_SHARE_READ, CREATE_ALWAYS, flagsAndAttributes); }
 
 bool COutFile::SetTime(const FILETIME *cTime, const FILETIME *aTime, const FILETIME *mTime) throw()
   { return BOOLToBool(::SetFileTime(_handle, cTime, aTime, mTime)); }
@@ -557,10 +566,10 @@ bool COutFile::Write(const void *data, UInt32 size, UInt32 &processedSize) throw
       return false;
     if (processedLoc == 0)
       return true;
-    data = (const void *)((const unsigned char *)data + processedLoc);
+    data = (const void *)((const Byte *)data + processedLoc);
     size -= processedLoc;
   }
-  while (size != 0);
+  while (size);
   return true;
 }
 
@@ -574,10 +583,10 @@ bool COutFile::WriteFull(const void *data, size_t size) throw()
       return false;
     if (processedLoc == 0)
       return (size == 0);
-    data = (const void *)((const unsigned char *)data + processedLoc);
+    data = (const void *)((const Byte *)data + processedLoc);
     size -= processedLoc;
   }
-  while (size != 0);
+  while (size);
   return true;
 }
 
@@ -786,11 +795,11 @@ bool CInFile::ReadFull(void *data, size_t size, size_t &processed) throw()
       return false;
     if (res == 0)
       break;
-    data = (void *)((unsigned char *)data + (size_t)res);
-    size -= (size_t)res;
+    data = (void *)((Byte *)data + (size_t)res);
     processed += (size_t)res;
+    size -= (size_t)res;
   }
-  while (size > 0);
+  while (size);
   return true;
 }
 
@@ -798,23 +807,63 @@ bool CInFile::ReadFull(void *data, size_t size, size_t &processed) throw()
 /////////////////////////
 // COutFile
 
-bool COutFile::Create(const char *name, bool createAlways)
+bool COutFile::OpenBinary_forWrite_oflag(const char *name, int oflag)
 {
   Path = name; // change it : set it only if open is success.
-  if (createAlways)
-  {
-    Close();
-    _handle = ::creat(name, mode_for_Create);
-    return _handle != -1;
-  }
-  return OpenBinary(name, O_CREAT | O_EXCL | O_WRONLY, mode_for_Create);
+  return OpenBinary(name, oflag, mode_for_Create);
 }
 
-bool COutFile::Open(const char *name, DWORD creationDisposition)
+
+/*
+  windows           exist  non-exist  posix
+  CREATE_NEW        Fail   Create     O_CREAT | O_EXCL
+  CREATE_ALWAYS     Trunc  Create     O_CREAT | O_TRUNC
+  OPEN_ALWAYS       Open   Create     O_CREAT
+  OPEN_EXISTING     Open   Fail       0
+  TRUNCATE_EXISTING Trunc  Fail       O_TRUNC ???
+
+  // O_CREAT = If the file exists, this flag has no effect except as noted under O_EXCL below.
+  // If O_CREAT and O_EXCL are set, open() shall fail if the file exists.
+  // O_TRUNC : If the file exists and the file is successfully opened, its length shall be truncated to 0.
+*/
+bool COutFile::Open_EXISTING(const char *name)
+  { return OpenBinary_forWrite_oflag(name, O_WRONLY); }
+bool COutFile::Create_ALWAYS(const char *name)
+  { return OpenBinary_forWrite_oflag(name, O_WRONLY | O_CREAT | O_TRUNC); }
+bool COutFile::Create_NEW(const char *name)
+  { return OpenBinary_forWrite_oflag(name, O_WRONLY | O_CREAT | O_EXCL);  }
+bool COutFile::Create_ALWAYS_or_Open_ALWAYS(const char *name, bool createAlways)
 {
-  UNUSED_VAR(creationDisposition) // FIXME
-  return Create(name, false);
+  return OpenBinary_forWrite_oflag(name,
+      createAlways ?
+        O_WRONLY | O_CREAT | O_TRUNC :
+        O_WRONLY | O_CREAT);
 }
+/*
+bool COutFile::Create_ALWAYS_or_NEW(const char *name, bool createAlways)
+{
+  return OpenBinary_forWrite_oflag(name,
+      createAlways ?
+        O_WRONLY | O_CREAT | O_TRUNC :
+        O_WRONLY | O_CREAT | O_EXCL);
+}
+bool COutFile::Open_Disposition(const char *name, DWORD creationDisposition)
+{
+  int flag;
+  switch (creationDisposition)
+  {
+    case CREATE_NEW:        flag = O_WRONLY | O_CREAT | O_EXCL;  break;
+    case CREATE_ALWAYS:     flag = O_WRONLY | O_CREAT | O_TRUNC;  break;
+    case OPEN_ALWAYS:       flag = O_WRONLY | O_CREAT;  break;
+    case OPEN_EXISTING:     flag = O_WRONLY;  break;
+    case TRUNCATE_EXISTING: flag = O_WRONLY | O_TRUNC; break;
+    default:
+      SetLastError(EINVAL);
+      return false;
+  }
+  return OpenBinary_forWrite_oflag(name, flag);
+}
+*/
 
 ssize_t COutFile::write_part(const void *data, size_t size) throw()
 {
@@ -833,11 +882,11 @@ ssize_t COutFile::write_full(const void *data, size_t size, size_t &processed) t
       return res;
     if (res == 0)
       break;
-    data = (const void *)((const unsigned char *)data + (size_t)res);
-    size -= (size_t)res;
+    data = (const void *)((const Byte *)data + (size_t)res);
     processed += (size_t)res;
+    size -= (size_t)res;
   }
-  while (size > 0);
+  while (size);
   return (ssize_t)processed;
 }
 

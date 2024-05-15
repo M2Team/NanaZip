@@ -3,7 +3,7 @@
 #ifndef ZIP7_INC_IDECL_H
 #define ZIP7_INC_IDECL_H
 
-#include "../Common/Common.h"
+#include "../Common/Common0.h"
 #include "../Common/MyUnknown.h"
 
 #define k_7zip_GUID_Data1 0x23170F69

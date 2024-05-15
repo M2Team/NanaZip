@@ -27,9 +27,9 @@ Z7_CLASS_IMP_NOQIB_1(
   COutStreamWithHash
   , ISequentialOutStream
 )
+  bool _calculate;
   CMyComPtr<ISequentialOutStream> _stream;
   UInt64 _size;
-  bool _calculate;
 public:
   IHashCalc *_hash;
 
@@ -66,12 +66,15 @@ struct CExtractNtOptions
   bool PreserveATime;
   bool OpenShareForWrite;
 
+  UInt64 MemLimit;
+
   CExtractNtOptions():
       ReplaceColonForAltStream(false),
       WriteToAltStreamIfColon(false),
       ExtractOwner(false),
       PreserveATime(false),
-      OpenShareForWrite(false)
+      OpenShareForWrite(false),
+      MemLimit((UInt64)(Int64)-1)
   {
     SymLinks.Val = true;
     SymLinks_AllowDangerous.Val = false;
@@ -249,25 +252,35 @@ class CArchiveExtractCallback Z7_final:
   public IArchiveExtractCallbackMessage2,
   public ICryptoGetTextPassword,
   public ICompressProgressInfo,
+#ifndef Z7_SFX
   public IArchiveUpdateCallbackFile,
   public IArchiveGetDiskProperty,
+  public IArchiveRequestMemoryUseCallback,
+#endif
   public CMyUnknownImp
 {
-  Z7_COM_UNKNOWN_IMP_5(
-      /* IArchiveExtractCallback, */
-      IArchiveExtractCallbackMessage2,
-      ICryptoGetTextPassword,
-      ICompressProgressInfo,
-      IArchiveUpdateCallbackFile,
-      IArchiveGetDiskProperty)
+  /* IArchiveExtractCallback, */
+  Z7_COM_QI_BEGIN2(IArchiveExtractCallbackMessage2)
+  Z7_COM_QI_ENTRY(ICryptoGetTextPassword)
+  Z7_COM_QI_ENTRY(ICompressProgressInfo)
+#ifndef Z7_SFX
+  Z7_COM_QI_ENTRY(IArchiveUpdateCallbackFile)
+  Z7_COM_QI_ENTRY(IArchiveGetDiskProperty)
+  Z7_COM_QI_ENTRY(IArchiveRequestMemoryUseCallback)
+#endif
+  Z7_COM_QI_END
+  Z7_COM_ADDREF_RELEASE
 
   Z7_IFACE_COM7_IMP(IProgress)
   Z7_IFACE_COM7_IMP(IArchiveExtractCallback)
   Z7_IFACE_COM7_IMP(IArchiveExtractCallbackMessage2)
   Z7_IFACE_COM7_IMP(ICryptoGetTextPassword)
   Z7_IFACE_COM7_IMP(ICompressProgressInfo)
+#ifndef Z7_SFX
   Z7_IFACE_COM7_IMP(IArchiveUpdateCallbackFile)
   Z7_IFACE_COM7_IMP(IArchiveGetDiskProperty)
+  Z7_IFACE_COM7_IMP(IArchiveRequestMemoryUseCallback)
+#endif
 
   const CArc *_arc;
   CExtractNtOptions _ntOptions;
@@ -290,6 +303,11 @@ class CArchiveExtractCallback Z7_final:
   bool _isSymLinkCreated;
   bool _itemFailure;
 
+  bool _some_pathParts_wereRemoved;
+public:
+  bool Is_elimPrefix_Mode;
+
+private:
   bool _curSize_Defined;
   bool _fileLength_WasSet;
 
@@ -317,6 +335,7 @@ class CArchiveExtractCallback Z7_final:
   CMyComPtr<IFolderExtractToStreamCallback> ExtractToStreamCallback;
   CGetProp *GetProp_Spec;
   CMyComPtr<IGetProp> GetProp;
+  CMyComPtr<IArchiveRequestMemoryUseCallback> _requestMemoryUseCallback;
   
   #endif
 
@@ -418,6 +437,7 @@ class CArchiveExtractCallback Z7_final:
 
 public:
   HRESULT SendMessageError(const char *message, const FString &path);
+  HRESULT SendMessageError_with_Error(HRESULT errorCode, const char *message, const FString &path);
   HRESULT SendMessageError_with_LastError(const char *message, const FString &path);
   HRESULT SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2);
 
@@ -580,5 +600,6 @@ struct CArchiveExtractCallback_Closer
 bool CensorNode_CheckPath(const NWildcard::CCensorNode &node, const CReadArcItem &item);
 
 void ReadZoneFile_Of_BaseFile(CFSTR fileName2, CByteBuffer &buf);
+bool WriteZoneFile_To_BaseFile(CFSTR fileName, const CByteBuffer &buf);
 
 #endif

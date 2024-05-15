@@ -11,15 +11,20 @@
 
 using namespace NWindows;
 
+extern bool g_DisableUserQuestions;
+
 void ShowErrorMessage(HWND window, LPCWSTR message)
 {
-  // **************** NanaZip Modification Start ****************
-  //::MessageBoxW(window, message, L"7-Zip", MB_OK | MB_ICONSTOP);
-  ::MessageBoxW(window, message, L"NanaZip", MB_OK | MB_ICONSTOP);
-  // **************** NanaZip Modification End ****************
+  if (!g_DisableUserQuestions)
+  {
+    // **************** NanaZip Modification Start ****************
+    //::MessageBoxW(window, message, L"7-Zip", MB_OK | MB_ICONSTOP);
+    ::MessageBoxW(window, message, L"NanaZip", MB_OK | MB_ICONSTOP);
+    // **************** NanaZip Modification End ****************
+  }
 }
 
-void ShowErrorMessageHwndRes(HWND window, UINT resID)
+void ShowErrorMessageHwndRes(HWND window, UInt32 resID)
 {
   UString s = LangString(resID);
   if (s.IsEmpty())
@@ -27,7 +32,7 @@ void ShowErrorMessageHwndRes(HWND window, UINT resID)
   ShowErrorMessage(window, s);
 }
 
-void ShowErrorMessageRes(UINT resID)
+void ShowErrorMessageRes(UInt32 resID)
 {
   ShowErrorMessageHwndRes(NULL, resID);
 }

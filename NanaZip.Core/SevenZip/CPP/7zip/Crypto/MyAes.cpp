@@ -155,22 +155,34 @@ Z7_COM7F_IMF2(UInt32, CAesCtrCoder::Filter(Byte *data, UInt32 size))
 #ifdef MY_CPU_X86_OR_AMD64
   #define USE_HW_AES
 #elif defined(MY_CPU_ARM_OR_ARM64) && defined(MY_CPU_LE)
-  #if defined(__clang__)
-    #if (__clang_major__ >= 8) // fix that check
+  
+  #if   defined(__ARM_FEATURE_AES) \
+     || defined(__ARM_FEATURE_CRYPTO)
+    #define USE_HW_AES
+  #else
+    #if  defined(MY_CPU_ARM64) \
+      || defined(__ARM_ARCH) && (__ARM_ARCH >= 4) \
+      || defined(Z7_MSC_VER_ORIGINAL)
+    #if  defined(__ARM_FP) && \
+          (   defined(Z7_CLANG_VERSION) && (Z7_CLANG_VERSION >= 30800) \
+           || defined(__GNUC__) && (__GNUC__ >= 6) \
+          ) \
+      || defined(Z7_MSC_VER_ORIGINAL) && (_MSC_VER >= 1910)
+    #if  defined(MY_CPU_ARM64) \
+      || !defined(Z7_CLANG_VERSION) \
+      || defined(__ARM_NEON) && \
+          (Z7_CLANG_VERSION < 170000 || \
+           Z7_CLANG_VERSION > 170001)
       #define USE_HW_AES
     #endif
-  #elif defined(__GNUC__)
-    #if (__GNUC__ >= 6) // fix that check
-      #define USE_HW_AES
     #endif
-  #elif defined(_MSC_VER)
-    #if _MSC_VER >= 1910
-      #define USE_HW_AES
     #endif
   #endif
 #endif
 
 #ifdef USE_HW_AES
+// #pragma message("=== MyAES.c USE_HW_AES === ")
+
     #define SET_AES_FUNC_2(f2) \
       if (algo == 2) if (g_Aes_SupportedFunctions_Flags & k_Aes_SupportedFunctions_HW) \
       { f = f2; }

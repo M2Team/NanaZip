@@ -516,8 +516,15 @@ static const CUInt32PCharPair g_MachinePairs[] =
   { 0x0520, "TriCore" },
   { 0x0CEF, "CEF" },
   { 0x0EBC, "EFI" },
+  { 0x5032, "RISCV32" },
+  { 0x5064, "RISCV64" },
+//  { 0x5128, "RISCV128" },
+  { 0x6232, "LOONGARCH32" },
+  { 0x6264, "LOONGARCH64" },
   { 0x8664, "x64" },
   { 0x9041, "M32R" },
+  { 0xA641, "ARM64EC" },
+  { 0xA64e, "ARM64X" },
   { 0xAA64, "ARM64" },
   { 0xC0EE, "CEE" }
 };

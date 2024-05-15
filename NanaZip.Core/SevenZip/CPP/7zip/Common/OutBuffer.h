@@ -60,6 +60,48 @@ public:
       WriteByte(((const Byte *)data)[i]);
   }
 
+  Byte *GetOutBuffer(size_t &avail)
+  {
+    const UInt32 pos = _pos;
+    avail = (size_t)(_limitPos - pos);
+    return _buf + pos;
+  }
+
+  void SkipWrittenBytes(size_t num)
+  {
+    const UInt32 pos = _pos;
+    const UInt32 rem = _limitPos - pos;
+    if (rem > num)
+    {
+      _pos = pos + (UInt32)num;
+      return;
+    }
+    // (rem <= num)
+    // the caller must not call it with (rem < num)
+    // so (rem == num)
+    _pos = _limitPos;
+    FlushWithCheck();
+  }
+  /*
+  void WriteBytesBig(const void *data, size_t size)
+  {
+    while (size)
+    {
+      UInt32 pos = _pos;
+      UInt32 rem = _limitPos - pos;
+      if (rem > size)
+      {
+        _pos = pos + size;
+        memcpy(_buf + pos, data, size);
+        return;
+      }
+      memcpy(_buf + pos, data, rem);
+      _pos = pos + rem;
+      FlushWithCheck();
+    }
+  }
+  */
+
   UInt64 GetProcessedSize() const throw();
 };
 

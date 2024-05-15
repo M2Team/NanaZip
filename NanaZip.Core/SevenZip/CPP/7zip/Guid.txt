@@ -94,6 +94,8 @@
   04  IArchiveKeepModeForNextOpen
   05  IArchiveAllowTail
 
+  09  IArchiveRequestMemoryUseCallback
+
   10  IArchiveOpenCallback
   
   20  IArchiveExtractCallback
@@ -176,7 +178,9 @@ Handler GUIDs:
   0B lzma86
   0C xz
   0D ppmd
+  0E zstd
 
+  BF LVM
   C0 AVB
   C1 LP
   C2 Sparse

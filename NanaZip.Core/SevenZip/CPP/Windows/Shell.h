@@ -3,7 +3,6 @@
 #ifndef ZIP7_WINDOWS_SHELL_H
 #define ZIP7_WINDOWS_SHELL_H
 
-#include "../Common/Common.h"
 #include "../Common/MyWindows.h"
 #if defined(__MINGW32__) || defined(__MINGW64__)
 #include <shlobj.h>

@@ -287,11 +287,17 @@ void CInArchive::ReadVolumeDescriptor(CVolumeDescriptor &d)
   ReadDateTime(d.MTime);
   ReadDateTime(d.ExpirationTime);
   ReadDateTime(d.EffectiveTime);
-  d.FileStructureVersion = ReadByte(); // = 1
-  SkipZeros(1);
+  const Byte fileStructureVersion = ReadByte();
+  // d.FileStructureVersion = fileStructureVersion;
+  if (fileStructureVersion != 1 &&  // ECMA-119
+      fileStructureVersion != 2)    // some ISO files have fileStructureVersion == 2.
+  {
+    // v24.05: we ignore that field, because we don't know what exact values are allowed there
+    // throw CHeaderErrorException();
+  }
+  SkipZeros(1); // (Reserved for future standardization)
   ReadBytes(d.ApplicationUse, sizeof(d.ApplicationUse));
-
-  // Most ISO contains zeros in the following field (reserved for future standardization).
+  // Most ISO contain zeros in the following field (reserved for future standardization).
   // But some ISO programs write some data to that area.
   // So we disable check for zeros.
   Skip(653); // SkipZeros(653);
@@ -595,7 +601,16 @@ HRESULT CInArchive::Open2()
   const CVolumeDescriptor &vd = VolDescs[MainVolDescIndex];
   if (vd.LogicalBlockSize != kBlockSize)
     return S_FALSE;
-  
+
+  {
+    FOR_VECTOR (i, VolDescs)
+    {
+      const CVolumeDescriptor &vd2 = VolDescs[i];
+      UpdatePhySize(0, vd2.Get_VolumeSpaceSize_inBytes());
+    }
+  }
+
+ 
   IsArc = true;
 
   (CDirRecord &)_rootDir = vd.RootDirRecord;
@@ -615,6 +630,21 @@ HRESULT CInArchive::Open2()
       }
     }
   }
+
+  {
+    // find boot item for expand:
+    // UEFI Specification : 13.3.2.1. ISO-9660 and El Torito
+    _expand_BootEntries_index = -1;
+    FOR_VECTOR (i, BootEntries)
+    {
+      const CBootInitialEntry &be = BootEntries[i];
+      if (be.SectorCount <= 1 && be.BootMediaType == NBootMediaType::kNoEmulation)
+        if (_expand_BootEntries_index == -1
+          || be.LoadRBA >= BootEntries[_expand_BootEntries_index].LoadRBA)
+        _expand_BootEntries_index = (int)i;
+    }
+  }
+
   {
     FOR_VECTOR (i, BootEntries)
     {
@@ -670,6 +700,8 @@ void CInArchive::Clear()
   BootEntries.Clear();
   SuspSkipSize = 0;
   IsSusp = false;
+
+  _expand_BootEntries_index = -1;
 }
 
 
@@ -684,7 +716,17 @@ UInt64 CInArchive::GetBootItemSize(unsigned index) const
   if (startPos < _fileSize)
   {
     const UInt64 rem = _fileSize - startPos;
-    if (rem < size)
+    /*
+       UEFI modification to ISO specification:
+       because SectorCount is 16-bit, size is limited by (32 MB).
+       UEFI Specification :
+        13.3.2.1. ISO-9660 and El Torito
+        If the value of Sector Count is set to 0 or 1,
+        EFI will assume the system partition consumes the space
+        from the beginning of the "no emulation" image to the end of the CD-ROM.
+    */
+    //
+    if ((int)index == _expand_BootEntries_index || rem < size)
       size = rem;
   }
   return size;

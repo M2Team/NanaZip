@@ -56,6 +56,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     case kpidPhySize: if (!_sizes.IsEmpty()) prop = _sizes[0]; break;
     case kpidTotalPhySize: prop = _totalSize; break;
     case kpidNumVolumes: prop = (UInt32)_streams.Size(); break;
+    default: break;
   }
   prop.Detach(value);
   return S_OK;
@@ -273,6 +274,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIAN
     case kpidPackSize:
       prop = _totalSize;
       break;
+    default: break;
   }
   prop.Detach(value);
   return S_OK;

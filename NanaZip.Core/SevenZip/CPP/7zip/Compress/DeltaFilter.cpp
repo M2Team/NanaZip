@@ -52,7 +52,7 @@ Z7_COM7F_IMF2(UInt32, CEncoder::Filter(Byte *data, UInt32 size))
 
 Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps))
 {
-  UInt32 delta = _delta;
+  unsigned delta = _delta;
   for (UInt32 i = 0; i < numProps; i++)
   {
     const PROPVARIANT &prop = props[i];
@@ -64,9 +64,9 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIA
     switch (propID)
     {
       case NCoderPropID::kDefaultProp:
-        delta = (UInt32)prop.ulVal;
-        if (delta < 1 || delta > 256)
+        if (prop.ulVal < 1 || prop.ulVal > 256)
           return E_INVALIDARG;
+        delta = prop.ulVal;
         break;
       case NCoderPropID::kNumThreads: break;
       case NCoderPropID::kLevel: break;

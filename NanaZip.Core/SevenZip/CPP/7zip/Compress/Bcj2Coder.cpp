@@ -506,7 +506,7 @@ void CBaseDecoder::ReadInStream(ISequentialInStream *inStream)
   
   if (BCJ2_IS_32BIT_STREAM(state))
   {
-    const unsigned extra = ((unsigned)total & 3);
+    const unsigned extra = (unsigned)total & 3;
     _extraSizes[state] = extra;
     if (total < 4)
     {
@@ -514,7 +514,7 @@ void CBaseDecoder::ReadInStream(ISequentialInStream *inStream)
         _readRes[state] = S_FALSE; // actually it's stream error. So maybe we need another error code.
       return;
     }
-    total -= extra;
+    total -= (UInt32)extra;
   }
   
   dec.lims[state] += total; // = _bufs[state] + total;
@@ -654,6 +654,20 @@ Z7_COM7F_IMF(CDecoder::Code(
         if (inSizes[i] && *inSizes[i] != GetProcessedSize_ForInStream(i))
           return S_FALSE;
       }
+    }
+
+    /* v23.02: we call Read(0) for BCJ2_STREAM_CALL and BCJ2_STREAM_JUMP streams,
+       if there were no Read() calls for such stream.
+       So the handlers of these input streams objects can do
+       Init/Flushing even for case when stream is empty:
+    */
+    for (unsigned i = BCJ2_STREAM_CALL; i < BCJ2_STREAM_CALL + 2; i++)
+    {
+      if (_readSizes[i])
+        continue;
+      Byte b;
+      UInt32 processed;
+      RINOK(inStreams[i]->Read(&b, 0, &processed))
     }
   }
 

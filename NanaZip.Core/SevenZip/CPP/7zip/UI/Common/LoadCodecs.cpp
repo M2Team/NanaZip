@@ -263,6 +263,10 @@ static HRESULT GetMethodBoolProp(Func_GetMethodProperty getMethodProperty, UInt3
 #pragma GCC diagnostic ignored "-Wc++98-compat-pedantic"
 #endif
 
+#ifdef _WIN32
+Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
+#endif
+
 #define MY_GET_FUNC(dest, type, lib, func)  \
   dest = Z7_GET_PROC_ADDRESS(type, lib.Get_HMODULE(), func);
 // #define MY_GET_FUNC(dest, type, func)  dest = (type)(func);

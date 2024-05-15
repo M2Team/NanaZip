@@ -20,6 +20,7 @@
 #include "../../../C/CpuArch.h"
 
 #include "../../Common/ComTry.h"
+#include "../../Common/IntToString.h"
 #include "../../Common/MyLinux.h"
 #include "../../Common/StringConvert.h"
 #include "../../Common/UTFConvert.h"
@@ -238,15 +239,6 @@ static const char * const g_NodeFlags[] =
   , NULL
   , "INLINE_DATA" // 28
 };
-
-
-static inline char GetHex(unsigned t) { return (char)(((t < 10) ? ('0' + t) : ('A' + (t - 10)))); }
-
-static inline void PrintHex(unsigned v, char *s)
-{
-  s[0] = GetHex((v >> 4) & 0xF);
-  s[1] = GetHex(v & 0xF);
-}
 
 
 enum
@@ -1860,12 +1852,10 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
 
     case kpidId:
     {
-      if (!IsEmptyData(_h.Uuid, 16))
+      if (!IsEmptyData(_h.Uuid, sizeof(_h.Uuid)))
       {
-        char s[16 * 2 + 2];
-        for (unsigned i = 0; i < 16; i++)
-          PrintHex(_h.Uuid[i], s + i * 2);
-        s[16 * 2] = 0;
+        char s[sizeof(_h.Uuid) * 2 + 2];
+        ConvertDataToHex_Lower(s, _h.Uuid, sizeof(_h.Uuid));
         prop = s;
       }
       break;
@@ -2602,7 +2592,7 @@ HRESULT CHandler::GetStream_Node(unsigned nodeIndex, ISequentialInStream **strea
 
   CMyComPtr<IInStream> streamTemp;
   
-  UInt64 numBlocks64 = (node.FileSize + (UInt64)(((UInt32)1 << _h.BlockBits) - 1)) >> _h.BlockBits;
+  const UInt64 numBlocks64 = (node.FileSize + (UInt64)(((UInt32)1 << _h.BlockBits) - 1)) >> _h.BlockBits;
   
   if (node.IsFlags_EXTENTS())
   {
@@ -2729,27 +2719,25 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       totalSize += node.FileSize;
   }
   
-  extractCallback->SetTotal(totalSize);
+  RINOK(extractCallback->SetTotal(totalSize))
 
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
   
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
   for (i = 0;; i++)
   {
     lps->InSize = totalPackSize;
     lps->OutSize = totalSize;
     RINOK(lps->SetCur())
-
-    if (i == numItems)
+    if (i >= numItems)
       break;
 
+    int opRes;
+   {
     CMyComPtr<ISequentialOutStream> outStream;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
@@ -2786,7 +2774,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       continue;
     RINOK(extractCallback->PrepareOperation(askMode))
 
-    int res = NExtract::NOperationResult::kDataError;
+    opRes = NExtract::NOperationResult::kDataError;
     {
       CMyComPtr<ISequentialInStream> inSeqStream;
       HRESULT hres = GetStream(index, &inSeqStream);
@@ -2794,21 +2782,21 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       {
         if (hres == E_OUTOFMEMORY)
           return hres;
-        res = NExtract::NOperationResult::kUnsupportedMethod;
+        opRes = NExtract::NOperationResult::kUnsupportedMethod;
       }
       else
       {
         RINOK(hres)
         {
-          hres = copyCoder->Code(inSeqStream, outStream, NULL, NULL, progress);
+          hres = copyCoder.Interface()->Code(inSeqStream, outStream, NULL, NULL, lps);
           if (hres == S_OK)
           {
-            if (copyCoderSpec->TotalSize == unpackSize)
-              res = NExtract::NOperationResult::kOK;
+            if (copyCoder->TotalSize == unpackSize)
+              opRes = NExtract::NOperationResult::kOK;
           }
           else if (hres == E_NOTIMPL)
           {
-            res = NExtract::NOperationResult::kUnsupportedMethod;
+            opRes = NExtract::NOperationResult::kUnsupportedMethod;
           }
           else if (hres != S_FALSE)
           {
@@ -2817,7 +2805,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         }
       }
     }
-    RINOK(extractCallback->SetOperationResult(res))
+   }
+    RINOK(extractCallback->SetOperationResult(opRes))
   }
 
   return S_OK;

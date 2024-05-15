@@ -273,33 +273,36 @@ struct CDbEx: public CDatabase
 
   void FillLinks();
   
-  UInt64 GetFolderStreamPos(CNum folderIndex, unsigned indexInFolder) const
+  UInt64 GetFolderStreamPos(size_t folderIndex, size_t indexInFolder) const
   {
-    return ArcInfo.DataStartPosition +
-        PackPositions[FoStartPackStreamIndex[folderIndex] + indexInFolder];
+    return ArcInfo.DataStartPosition + PackPositions.ConstData()
+        [FoStartPackStreamIndex.ConstData()[folderIndex] + indexInFolder];
   }
   
-  UInt64 GetFolderFullPackSize(CNum folderIndex) const
+  UInt64 GetFolderFullPackSize(size_t folderIndex) const
   {
     return
-      PackPositions[FoStartPackStreamIndex[folderIndex + 1]] -
-      PackPositions[FoStartPackStreamIndex[folderIndex]];
+      PackPositions[FoStartPackStreamIndex.ConstData()[folderIndex + 1]] -
+      PackPositions[FoStartPackStreamIndex.ConstData()[folderIndex]];
   }
   
-  UInt64 GetFolderPackStreamSize(CNum folderIndex, unsigned streamIndex) const
+  UInt64 GetFolderPackStreamSize(size_t folderIndex, size_t streamIndex) const
   {
-    size_t i = FoStartPackStreamIndex[folderIndex] + streamIndex;
-    return PackPositions[i + 1] - PackPositions[i];
+    const size_t i = FoStartPackStreamIndex.ConstData()[folderIndex] + streamIndex;
+    return PackPositions.ConstData()[i + 1] -
+           PackPositions.ConstData()[i];
   }
 
-  UInt64 GetFilePackSize(CNum fileIndex) const
+  /*
+  UInt64 GetFilePackSize(size_t fileIndex) const
   {
-    CNum folderIndex = FileIndexToFolderIndexMap[fileIndex];
+    const CNum folderIndex = FileIndexToFolderIndexMap[fileIndex];
     if (folderIndex != kNumNoIndex)
       if (FolderStartFileIndex[folderIndex] == fileIndex)
         return GetFolderFullPackSize(folderIndex);
     return 0;
   }
+  */
 };
 
 const unsigned kNumBufLevelsMax = 4;

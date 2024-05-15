@@ -1,5 +1,5 @@
 ﻿/* Sha1Opt.c -- SHA-1 optimized code for SHA-1 hardware instructions
-2023-04-02 : Igor Pavlov : Public domain */
+2024-03-01 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 #include "Compiler.h"
@@ -10,6 +10,8 @@
 // #define USE_MY_MM
 #endif
 #endif
+
+// #define Z7_USE_HW_SHA_STUB // for debug
 
 #ifdef MY_CPU_X86_OR_AMD64
   #if defined(__INTEL_COMPILER) && (__INTEL_COMPILER >= 1600) // fix that check
@@ -32,9 +34,14 @@
     #endif
     #if (_MSC_VER >= USE_VER_MIN)
       #define USE_HW_SHA
+    #else
+      #define Z7_USE_HW_SHA_STUB
     #endif
   #endif
 // #endif // MY_CPU_X86_OR_AMD64
+#ifndef USE_HW_SHA
+  // #define Z7_USE_HW_SHA_STUB // for debug
+#endif
 
 #ifdef USE_HW_SHA
 
@@ -202,46 +209,124 @@ void Z7_FASTCALL Sha1_UpdateBlocks_HW(UInt32 state[5], const Byte *data, size_t 
 
 #endif // USE_HW_SHA
 
-#elif defined(MY_CPU_ARM_OR_ARM64)
-
-  #if defined(__clang__)
-    #if (__clang_major__ >= 8) // fix that check
+#elif defined(MY_CPU_ARM_OR_ARM64) && defined(MY_CPU_LE) \
+   && (!defined(Z7_MSC_VER_ORIGINAL) || (_MSC_VER >= 1929) && (_MSC_FULL_VER >= 192930037))
+  #if   defined(__ARM_FEATURE_SHA2) \
+     || defined(__ARM_FEATURE_CRYPTO)
+    #define USE_HW_SHA
+  #else
+    #if  defined(MY_CPU_ARM64) \
+      || defined(__ARM_ARCH) && (__ARM_ARCH >= 4) \
+      || defined(Z7_MSC_VER_ORIGINAL)
+    #if  defined(__ARM_FP) && \
+          (   defined(Z7_CLANG_VERSION) && (Z7_CLANG_VERSION >= 30800) \
+           || defined(__GNUC__) && (__GNUC__ >= 6) \
+          ) \
+      || defined(Z7_MSC_VER_ORIGINAL) && (_MSC_VER >= 1910)
+    #if  defined(MY_CPU_ARM64) \
+      || !defined(Z7_CLANG_VERSION) \
+      || defined(__ARM_NEON) && \
+          (Z7_CLANG_VERSION < 170000 || \
+           Z7_CLANG_VERSION > 170001)
       #define USE_HW_SHA
     #endif
-  #elif defined(__GNUC__)
-    #if (__GNUC__ >= 6) // fix that check
-      #define USE_HW_SHA
     #endif
-  #elif defined(_MSC_VER)
-    #if _MSC_VER >= 1910
-      #define USE_HW_SHA
     #endif
   #endif
 
 #ifdef USE_HW_SHA
 
 // #pragma message("=== Sha1 HW === ")
+// __ARM_FEATURE_CRYPTO macro is deprecated in favor of the finer grained feature macro __ARM_FEATURE_SHA2
 
 #if defined(__clang__) || defined(__GNUC__)
+#if !defined(__ARM_FEATURE_SHA2) && \
+    !defined(__ARM_FEATURE_CRYPTO)
   #ifdef MY_CPU_ARM64
+#if defined(__clang__)
+    #define ATTRIB_SHA __attribute__((__target__("crypto")))
+#else
     #define ATTRIB_SHA __attribute__((__target__("+crypto")))
+#endif
   #else
+#if defined(__clang__) && (__clang_major__ >= 1)
+    #define ATTRIB_SHA __attribute__((__target__("armv8-a,sha2")))
+#else
     #define ATTRIB_SHA __attribute__((__target__("fpu=crypto-neon-fp-armv8")))
+#endif
   #endif
+#endif
 #else
   // _MSC_VER
   // for arm32
   #define _ARM_USE_NEW_NEON_INTRINSICS
 #endif
 
-#if defined(_MSC_VER) && defined(MY_CPU_ARM64)
+
+
+
+
+#if defined(Z7_MSC_VER_ORIGINAL) && defined(MY_CPU_ARM64)
 #include <arm64_neon.h>
 #else
-#include <arm_neon.h>
+
+
+
+
+
+
+
+
+
+#if defined(__clang__) && __clang_major__ < 16
+#if !defined(__ARM_FEATURE_SHA2) && \
+    !defined(__ARM_FEATURE_CRYPTO)
+//     #pragma message("=== we set __ARM_FEATURE_CRYPTO 1 === ")
+    Z7_DIAGNOSTIC_IGNORE_BEGIN_RESERVED_MACRO_IDENTIFIER
+    #define Z7_ARM_FEATURE_CRYPTO_WAS_SET 1
+// #if defined(__clang__) && __clang_major__ < 13
+    #define __ARM_FEATURE_CRYPTO 1
+// #else
+    #define __ARM_FEATURE_SHA2 1
+// #endif
+    Z7_DIAGNOSTIC_IGNORE_END_RESERVED_MACRO_IDENTIFIER
 #endif
+#endif // clang
+
+#if defined(__clang__)
+
+#if defined(__ARM_ARCH) && __ARM_ARCH < 8
+    Z7_DIAGNOSTIC_IGNORE_BEGIN_RESERVED_MACRO_IDENTIFIER
+//    #pragma message("#define __ARM_ARCH 8")
+    #undef  __ARM_ARCH
+    #define __ARM_ARCH 8
+    Z7_DIAGNOSTIC_IGNORE_END_RESERVED_MACRO_IDENTIFIER
+#endif
+
+#endif // clang
+
+#include <arm_neon.h>
+
+#if defined(Z7_ARM_FEATURE_CRYPTO_WAS_SET) && \
+    defined(__ARM_FEATURE_CRYPTO) && \
+    defined(__ARM_FEATURE_SHA2)
+Z7_DIAGNOSTIC_IGNORE_BEGIN_RESERVED_MACRO_IDENTIFIER
+    #undef __ARM_FEATURE_CRYPTO
+    #undef __ARM_FEATURE_SHA2
+    #undef Z7_ARM_FEATURE_CRYPTO_WAS_SET
+Z7_DIAGNOSTIC_IGNORE_END_RESERVED_MACRO_IDENTIFIER
+//    #pragma message("=== we undefine __ARM_FEATURE_CRYPTO === ")
+#endif
+
+#endif // Z7_MSC_VER_ORIGINAL
 
 typedef uint32x4_t v128;
 // typedef __n128 v128; // MSVC
+// the bug in clang 3.8.1:
+// __builtin_neon_vgetq_lane_i32((int8x16_t)__s0, __p1);
+#if defined(__clang__) && (__clang_major__ <= 9)
+#pragma GCC diagnostic ignored "-Wvector-conversion"
+#endif
 
 #ifdef MY_CPU_BE
   #define MY_rev32_for_LE(x)
@@ -256,11 +341,11 @@ typedef uint32x4_t v128;
     m = LOAD_128((data + (k) * 16)); \
     MY_rev32_for_LE(m); \
 
-#define SU0(dest, src2, src3) dest = vsha1su0q_u32(dest, src2, src3);
-#define SU1(dest, src)        dest = vsha1su1q_u32(dest, src);
-#define C(e)                  abcd = vsha1cq_u32(abcd, e, t);
-#define P(e)                  abcd = vsha1pq_u32(abcd, e, t);
-#define M(e)                  abcd = vsha1mq_u32(abcd, e, t);
+#define SU0(dest, src2, src3) dest = vsha1su0q_u32(dest, src2, src3)
+#define SU1(dest, src)        dest = vsha1su1q_u32(dest, src)
+#define C(e)                  abcd = vsha1cq_u32(abcd, e, t)
+#define P(e)                  abcd = vsha1pq_u32(abcd, e, t)
+#define M(e)                  abcd = vsha1mq_u32(abcd, e, t)
 #define H(e)                  e = vsha1h_u32(vgetq_lane_u32(abcd, 0))
 #define T(m, c)               t = vaddq_u32(m, c)
 
@@ -337,16 +422,17 @@ void Z7_FASTCALL Sha1_UpdateBlocks_HW(UInt32 state[8], const Byte *data, size_t 
 #endif // MY_CPU_ARM_OR_ARM64
 
 
-#ifndef USE_HW_SHA
-
+#if !defined(USE_HW_SHA) && defined(Z7_USE_HW_SHA_STUB)
 // #error Stop_Compiling_UNSUPPORTED_SHA
 // #include <stdlib.h>
 
+
+
 // #include "Sha1.h"
-void Z7_FASTCALL Sha1_UpdateBlocks(UInt32 state[5], const Byte *data, size_t numBlocks);
-
+// #if defined(_MSC_VER)
 #pragma message("Sha1   HW-SW stub was used")
-
+// #endif
+void Z7_FASTCALL Sha1_UpdateBlocks   (UInt32 state[5], const Byte *data, size_t numBlocks);
 void Z7_FASTCALL Sha1_UpdateBlocks_HW(UInt32 state[5], const Byte *data, size_t numBlocks);
 void Z7_FASTCALL Sha1_UpdateBlocks_HW(UInt32 state[5], const Byte *data, size_t numBlocks)
 {
@@ -359,7 +445,6 @@ void Z7_FASTCALL Sha1_UpdateBlocks_HW(UInt32 state[5], const Byte *data, size_t 
   return;
   */
 }
-
 #endif
 
 #undef SU0
@@ -384,3 +469,4 @@ void Z7_FASTCALL Sha1_UpdateBlocks_HW(UInt32 state[5], const Byte *data, size_t 
 #undef USE_HW_SHA
 #undef ATTRIB_SHA
 #undef USE_VER_MIN
+#undef Z7_USE_HW_SHA_STUB

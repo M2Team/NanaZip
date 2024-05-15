@@ -1,5 +1,5 @@
 ﻿/* Ppmd8Enc.c -- Ppmd8 (PPMdI) Encoder
-2023-04-02 : Igor Pavlov : Public domain
+2023-09-07 : Igor Pavlov : Public domain
 This code is based on:
   PPMd var.I (2002): Dmitry Shkarin : Public domain
   Carryless rangecoder (1999): Dmitry Subbotin : Public domain */
@@ -82,7 +82,7 @@ static void Ppmd8_RangeEnc_Encode(CPpmd8 *p, UInt32 start, UInt32 size, UInt32 t
 
 void Ppmd8_UpdateModel(CPpmd8 *p);
 
-#define MASK(sym) ((unsigned char *)charMask)[sym]
+#define MASK(sym)  ((Byte *)charMask)[sym]
 
 // Z7_FORCE_INLINE
 // static
@@ -139,8 +139,8 @@ void Ppmd8_EncodeSymbol(CPpmd8 *p, int symbol)
       MASK(s->Symbol) = 0;
       do
       {
-        unsigned sym0 = s2[0].Symbol;
-        unsigned sym1 = s2[1].Symbol;
+        const unsigned sym0 = s2[0].Symbol;
+        const unsigned sym1 = s2[1].Symbol;
         s2 += 2;
         MASK(sym0) = 0;
         MASK(sym1) = 0;
@@ -265,16 +265,15 @@ void Ppmd8_EncodeSymbol(CPpmd8 *p, int symbol)
         if (num2 != 0)
         {
           s += i;
-          for (;;)
+          do
           {
-            unsigned sym0 = s[0].Symbol;
-            unsigned sym1 = s[1].Symbol;
+            const unsigned sym0 = s[0].Symbol;
+            const unsigned sym1 = s[1].Symbol;
             s += 2;
             sum += (s[-2].Freq & (unsigned)(MASK(sym0)));
             sum += (s[-1].Freq & (unsigned)(MASK(sym1)));
-            if (--num2 == 0)
-              break;
           }
+          while (--num2);
         }
 
         PPMD8_CORRECT_SUM_RANGE(p, sum)

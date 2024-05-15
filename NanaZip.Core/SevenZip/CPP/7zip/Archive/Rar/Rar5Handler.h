@@ -48,12 +48,21 @@ namespace NArcFlags
   // const unsigned kLocked    = 1 << 4;
 }
 
-const unsigned kArcExtraRecordType_Locator = 1;
+const unsigned kArcExtraRecordType_Locator  = 1;
+const unsigned kArcExtraRecordType_Metadata = 2;
 
 namespace NLocatorFlags
 {
   const unsigned kQuickOpen  = 1 << 0;
   const unsigned kRecovery   = 1 << 1;
+}
+
+namespace NMetadataFlags
+{
+  const unsigned kArcName   = 1 << 0;
+  const unsigned kCTime     = 1 << 1;
+  const unsigned kUnixTime  = 1 << 2;
+  const unsigned kNanoSec   = 1 << 3;
 }
 
 namespace NFileFlags
@@ -68,6 +77,7 @@ namespace NMethodFlags
 {
   // const unsigned kVersionMask = 0x3F;
   const unsigned kSolid = 1 << 6;
+  const unsigned kRar5_Compat = 1u << 20;
 }
 
 namespace NArcEndFlags
@@ -181,7 +191,7 @@ struct CItem
   AString Name;
 
   unsigned VolIndex;
-  int NextItem;
+  int NextItem;        // in _items{}
 
   UInt32 UnixMTime;
   UInt32 CRC;
@@ -201,9 +211,12 @@ struct CItem
 
   void Clear()
   {
-    CommonFlags = 0;
-    Flags = 0;
+    // CommonFlags = 0;
+    // Flags = 0;
     
+    // UnixMTime = 0;
+    // CRC = 0;
+
     VolIndex = 0;
     NextItem = -1;
 
@@ -230,10 +243,46 @@ struct CItem
       // && false;
   }
 
-  bool IsSolid() const { return ((UInt32)Method & NMethodFlags::kSolid) != 0; }
-  unsigned GetAlgoVersion() const { return (unsigned)Method & 0x3F; }
-  unsigned GetMethod() const { return ((unsigned)Method >> 7) & 0x7; }
-  UInt32 GetDictSize() const { return (((UInt32)Method >> 10) & 0xF); }
+  // rar docs: Solid flag can be set only for file headers and is never set for service headers.
+  bool IsSolid()        const { return ((UInt32)Method & NMethodFlags::kSolid) != 0; }
+  bool Is_Rar5_Compat() const { return ((UInt32)Method & NMethodFlags::kRar5_Compat) != 0; }
+  unsigned Get_Rar5_CompatBit() const { return ((UInt32)Method >> 20) & 1; }
+
+  unsigned Get_AlgoVersion_RawBits() const { return (unsigned)Method & 0x3F; }
+  unsigned Get_AlgoVersion_HuffRev() const
+  {
+    unsigned w = (unsigned)Method & 0x3F;
+    if (w == 1 && Is_Rar5_Compat())
+      w = 0;
+    return w;
+  }
+  unsigned Get_Method() const { return ((unsigned)Method >> 7) & 0x7; }
+
+  unsigned Get_DictSize_Main() const
+    { return ((UInt32)Method >> 10) & (Get_AlgoVersion_RawBits() == 0 ? 0xf : 0x1f); }
+  unsigned Get_DictSize_Frac() const
+  {
+    // original-unrar ignores Frac, if (algo==0) (rar5):
+    if (Get_AlgoVersion_RawBits() == 0)
+      return 0;
+    return ((UInt32)Method >> 15) & 0x1f;
+  }
+  UInt64 Get_DictSize64() const
+  {
+    // ver 6.* check
+    // return (((UInt32)Method >> 10) & 0xF);
+    UInt64 winSize = 0;
+    const unsigned algo = Get_AlgoVersion_RawBits();
+    if (algo <= 1)
+    {
+      UInt32 w = 32;
+      if (algo == 1)
+        w += Get_DictSize_Frac();
+      winSize = (UInt64)w << (12 + Get_DictSize_Main());
+    }
+    return winSize;
+  }
+
 
   bool IsService() const { return RecordType == NHeaderType::kService; }
   
@@ -255,9 +304,9 @@ struct CItem
   int FindExtra_Blake() const
   {
     unsigned size = 0;
-    int offset = FindExtra(NExtraID::kHash, size);
+    const int offset = FindExtra(NExtraID::kHash, size);
     if (offset >= 0
-        && size == BLAKE2S_DIGEST_SIZE + 1
+        && size == Z7_BLAKE2S_DIGEST_SIZE + 1
         && Extra[(unsigned)offset] == kHashID_Blake2sp)
       return offset + 1;
     return -1;
@@ -282,11 +331,17 @@ struct CItem
     UInt32 a;
     switch (HostOS)
     {
-      case kHost_Windows: a = Attrib; break;
-      case kHost_Unix: a = (Attrib << 16); break;
-      default: a = 0;
+      case kHost_Windows:
+          a = Attrib;
+          break;
+      case kHost_Unix:
+          a = Attrib << 16;
+          a |= 0x8000; // add posix mode marker
+          break;
+      default:
+          a = 0;
     }
-    // if (IsDir()) a |= FILE_ATTRIBUTE_DIRECTORY;
+    if (IsDir()) a |= FILE_ATTRIBUTE_DIRECTORY;
     return a;
   }
 
@@ -305,10 +360,14 @@ struct CInArcInfo
   bool EndOfArchive_was_Read;
 
   bool IsEncrypted;
+  bool Locator_Defined;
+  bool Locator_Error;
+  bool Metadata_Defined;
+  bool Metadata_Error;
+  bool UnknownExtraRecord;
+  bool Extra_Error;
+  bool UnsupportedFeature;
 
-  // CByteBuffer Extra;
-
-  /*
   struct CLocator
   {
     UInt64 Flags;
@@ -317,11 +376,32 @@ struct CInArcInfo
     
     bool Is_QuickOpen() const { return (Flags & NLocatorFlags::kQuickOpen) != 0; }
     bool Is_Recovery() const { return (Flags & NLocatorFlags::kRecovery) != 0; }
+
+    bool Parse(const Byte *p, size_t size);
+    CLocator():
+      Flags(0),
+      QuickOpen(0),
+      Recovery(0)
+      {}
   };
 
-  int FindExtra(unsigned extraID, unsigned &recordDataSize) const;
-  bool FindExtra_Locator(CLocator &locator) const;
-  */
+  struct CMetadata
+  {
+    UInt64 Flags;
+    UInt64 CTime;
+    AString ArcName;
+
+    bool Parse(const Byte *p, size_t size);
+    CMetadata():
+      Flags(0),
+      CTime(0)
+      {}
+  };
+
+  CLocator Locator;
+  CMetadata Metadata;
+
+  bool ParseExtra(const Byte *p, size_t size);
 
   CInArcInfo():
     Flags(0),
@@ -330,7 +410,14 @@ struct CInArcInfo
     EndPos(0),
     EndFlags(0),
     EndOfArchive_was_Read(false),
-    IsEncrypted(false)
+    IsEncrypted(false),
+    Locator_Defined(false),
+    Locator_Error(false),
+    Metadata_Defined(false),
+    Metadata_Error(false),
+    UnknownExtraRecord(false),
+    Extra_Error(false),
+    UnsupportedFeature(false)
       {}
 
   /*
@@ -342,7 +429,6 @@ struct CInArcInfo
     EndPos = 0;
     EndFlags = 0;
     EndOfArchive_was_Read = false;
-    Extra.Free();
   }
   */
 
@@ -360,10 +446,10 @@ struct CInArcInfo
 
 struct CRefItem
 {
-  unsigned Item;
-  unsigned Last;
-  int Parent;
-  int Link;
+  unsigned Item;   // First item in _items[]
+  unsigned Last;   // Last  item in _items[]
+  int Parent;      // in _refs[], if alternate stream
+  int Link;        // in _refs[]
 };
 
 
@@ -377,31 +463,53 @@ struct CArc
 class CHandler Z7_final:
   public IInArchive,
   public IArchiveGetRawProps,
+  public ISetProperties,
   Z7_PUBLIC_ISetCompressCodecsInfo_IFEC
   public CMyUnknownImp
 {
   Z7_COM_QI_BEGIN2(IInArchive)
   Z7_COM_QI_ENTRY(IArchiveGetRawProps)
+  Z7_COM_QI_ENTRY(ISetProperties)
   Z7_COM_QI_ENTRY_ISetCompressCodecsInfo_IFEC
   Z7_COM_QI_END
   Z7_COM_ADDREF_RELEASE
   
   Z7_IFACE_COM7_IMP(IInArchive)
   Z7_IFACE_COM7_IMP(IArchiveGetRawProps)
+  Z7_IFACE_COM7_IMP(ISetProperties)
   DECL_ISetCompressCodecsInfo
 
+  void InitDefaults();
+
+  bool _isArc;
+  bool _needChecksumCheck;
+  bool _memUsage_WasSet;
+  bool _comment_WasUsedInArc;
+  bool _acl_Used;
+  bool _error_in_ACL;
+  bool _split_Error;
 public:
   CRecordVector<CRefItem> _refs;
   CObjectVector<CItem> _items;
+
+  CHandler();
 private:
   CObjectVector<CArc> _arcs;
   CObjectVector<CByteBuffer> _acls;
 
   UInt32 _errorFlags;
   // UInt32 _warningFlags;
-  bool _isArc;
+
+  UInt32 _numBlocks;
+  unsigned _rar5comapt_mask;
+  unsigned _methodMasks[2];
+  UInt64 _algo_Mask;
+  UInt64 _dictMaxSizes[2];
+
   CByteBuffer _comment;
   UString _missingVolName;
+
+  UInt64 _memUsage_Decompress;
 
   DECL_EXTERNAL_CODECS_VARS
 

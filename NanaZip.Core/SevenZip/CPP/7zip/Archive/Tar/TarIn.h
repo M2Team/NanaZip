@@ -61,6 +61,7 @@ public:
   bool _are_LongName;
   bool _are_LongLink;
   bool _pathPrefix_WasUsed;
+  bool _are_SCHILY_fflags;
   // bool _isSparse;
 
   // temp internal vars for ReadItem():
@@ -110,6 +111,7 @@ public:
     _are_LongName = false;
     _are_LongLink = false;
     _pathPrefix_WasUsed = false;
+    _are_SCHILY_fflags = false;
     // _isSparse = false;
 
     _is_Warning = false;

@@ -4,6 +4,7 @@
 
 #ifndef _WIN32
 #include <sys/time.h>
+#include <time.h>
 #endif
 
 #include "Defs.h"
@@ -13,13 +14,13 @@ namespace NWindows {
 namespace NTime {
 
 static const UInt32 kNumTimeQuantumsInSecond = 10000000;
-static const UInt32 kFileTimeStartYear = 1601;
+static const unsigned kFileTimeStartYear = 1601;
 #if !defined(_WIN32) || defined(UNDER_CE)
-static const UInt32 kDosTimeStartYear = 1980;
+static const unsigned kDosTimeStartYear = 1980;
 #endif
-static const UInt32 kUnixTimeStartYear = 1970;
+static const unsigned kUnixTimeStartYear = 1970;
 static const UInt64 kUnixTimeOffset =
-    (UInt64)60 * 60 * 24 * (89 + 365 * (kUnixTimeStartYear - kFileTimeStartYear));
+    (UInt64)60 * 60 * 24 * (89 + 365 * (UInt32)(kUnixTimeStartYear - kFileTimeStartYear));
 static const UInt64 kNumSecondsInFileTime = (UInt64)(Int64)-1 / kNumTimeQuantumsInSecond;
 
 bool DosTime_To_FileTime(UInt32 dosTime, FILETIME &ft) throw()
@@ -30,8 +31,14 @@ bool DosTime_To_FileTime(UInt32 dosTime, FILETIME &ft) throw()
   ft.dwLowDateTime = 0;
   ft.dwHighDateTime = 0;
   UInt64 res;
-  if (!GetSecondsSince1601(kDosTimeStartYear + (dosTime >> 25), (dosTime >> 21) & 0xF, (dosTime >> 16) & 0x1F,
-      (dosTime >> 11) & 0x1F, (dosTime >> 5) & 0x3F, (dosTime & 0x1F) * 2, res))
+  if (!GetSecondsSince1601(
+      kDosTimeStartYear + (unsigned)(dosTime >> 25),
+      (unsigned)((dosTime >> 21) & 0xF),
+      (unsigned)((dosTime >> 16) & 0x1F),
+      (unsigned)((dosTime >> 11) & 0x1F),
+      (unsigned)((dosTime >>  5) & 0x3F),
+      (unsigned)((dosTime & 0x1F)) * 2,
+      res))
     return false;
   res *= kNumTimeQuantumsInSecond;
   ft.dwLowDateTime = (UInt32)res;
@@ -77,7 +84,7 @@ bool FileTime_To_DosTime(const FILETIME &ft, UInt32 &dosTime) throw()
 
   v = (UInt32)v64;
 
-  year = (unsigned)(kFileTimeStartYear + v / PERIOD_400 * 400);
+  year = kFileTimeStartYear + (unsigned)(v / PERIOD_400 * 400);
   v %= PERIOD_400;
 
   temp = (unsigned)(v / PERIOD_100);
@@ -116,7 +123,13 @@ bool FileTime_To_DosTime(const FILETIME &ft, UInt32 &dosTime) throw()
   dosTime = kHighDosTime;
   if (year >= 128)
     return false;
-  dosTime = (year << 25) | (mon << 21) | (day << 16) | (hour << 11) | (min << 5) | (sec >> 1);
+  dosTime =
+      ((UInt32)year << 25)
+    | ((UInt32)mon  << 21)
+    | ((UInt32)day  << 16)
+    | ((UInt32)hour << 11)
+    | ((UInt32)min  << 5)
+    | ((UInt32)sec  >> 1);
   #endif
   return true;
 }
@@ -226,19 +239,33 @@ bool GetSecondsSince1601(unsigned year, unsigned month, unsigned day,
   if (year < kFileTimeStartYear || year >= 10000 || month < 1 || month > 12 ||
       day < 1 || day > 31 || hour > 23 || min > 59 || sec > 59)
     return false;
-  UInt32 numYears = year - kFileTimeStartYear;
-  UInt32 numDays = numYears * 365 + numYears / 4 - numYears / 100 + numYears / 400;
+  const unsigned numYears = year - kFileTimeStartYear;
+  UInt32 numDays = (UInt32)((UInt32)numYears * 365 + numYears / 4 - numYears / 100 + numYears / 400);
   Byte ms[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
   if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
     ms[1] = 29;
   month--;
   for (unsigned i = 0; i < month; i++)
     numDays += ms[i];
-  numDays += day - 1;
+  numDays += (UInt32)(day - 1);
   resSeconds = ((UInt64)(numDays * 24 + hour) * 60 + min) * 60 + sec;
   return true;
 }
 
+
+/* docs: TIME_UTC is not defined on many platforms:
+      glibc 2.15, macOS 10.13
+      FreeBSD 11.0, NetBSD 7.1, OpenBSD 6.0,
+      Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3,
+      Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+*/
+#if defined(TIME_UTC)
+#define ZIP7_USE_timespec_get
+// #pragma message("ZIP7_USE_timespec_get")
+#elif defined(CLOCK_REALTIME)
+#define ZIP7_USE_clock_gettime
+// #pragma message("ZIP7_USE_clock_gettime")
+#endif
 
 void GetCurUtc_FiTime(CFiTime &ft) throw()
 {
@@ -257,12 +284,33 @@ void GetCurUtc_FiTime(CFiTime &ft) throw()
  #else
   
   FiTime_Clear(ft);
+#ifdef ZIP7_USE_timespec_get
+  timespec_get(&ft, TIME_UTC);
+#elif defined ZIP7_USE_clock_gettime
+
+#if defined(_AIX)
+  {
+    timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    ft.tv_sec = ts.tv_sec;
+    ft.tv_nsec = ts.tv_nsec;
+  }
+#else
+  clock_gettime(CLOCK_REALTIME, &ft);
+#endif
+
+#else
   struct timeval now;
   if (gettimeofday(&now, NULL) == 0)
   {
     ft.tv_sec = now.tv_sec;
-    ft.tv_nsec = now.tv_usec * 1000;
+    // timeval::tv_usec   can be 64-bit signed in some cases
+    // timespec::tv_nsec  can be 32-bit signed in some cases
+    ft.tv_nsec =
+      (Int32) // to eliminate compiler conversion error
+      (now.tv_usec * 1000);
   }
+#endif
 
  #endif
 }
@@ -271,12 +319,26 @@ void GetCurUtc_FiTime(CFiTime &ft) throw()
 void GetCurUtcFileTime(FILETIME &ft) throw()
 {
   UInt64 v = 0;
+#if defined(ZIP7_USE_timespec_get) || \
+    defined(ZIP7_USE_clock_gettime)
+  timespec ts;
+#if defined(ZIP7_USE_timespec_get)
+  if (timespec_get(&ts, TIME_UTC))
+#else
+  if (clock_gettime(CLOCK_REALTIME, &ts) == 0)
+#endif
+  {
+    v = ((UInt64)ts.tv_sec + kUnixTimeOffset) *
+      kNumTimeQuantumsInSecond + (UInt64)ts.tv_nsec / 100;
+  }
+#else
   struct timeval now;
   if (gettimeofday(&now, NULL) == 0)
   {
     v = ((UInt64)now.tv_sec + kUnixTimeOffset) *
       kNumTimeQuantumsInSecond + (UInt64)now.tv_usec * 10;
   }
+#endif
   ft.dwLowDateTime  = (DWORD)v;
   ft.dwHighDateTime = (DWORD)(v >> 32);
 }
@@ -371,7 +433,7 @@ int Compare_FiTime(const CFiTime *a1, const CFiTime *a2)
   return 0;
 }
 
-bool FILETIME_To_timespec(const FILETIME &ft, timespec &ts)
+bool FILETIME_To_timespec(const FILETIME &ft, CFiTime &ts)
 {
   UInt32 quantums;
   const Int64 sec = NWindows::NTime::FileTime_To_UnixTime64_and_Quantums(ft, quantums);
@@ -380,7 +442,7 @@ bool FILETIME_To_timespec(const FILETIME &ft, timespec &ts)
   if (sec2 == sec)
   {
     ts.tv_sec = sec2;
-    ts.tv_nsec = (long)(quantums * 100);
+    ts.tv_nsec = (Int32)(quantums * 100);
     return true;
   }
   return false;

@@ -967,13 +967,13 @@ static void RgbDecode(Byte *srcData, UInt32 dataSize, UInt32 width, UInt32 posR)
     
     for (UInt32 i = curChannel; i < dataSize; i += kNumChannels)
     {
-      unsigned int predicted;
+      unsigned predicted;
       if (i < width)
         predicted = prevByte;
       else
       {
-        const unsigned int upperLeftByte = destData[i - width];
-        const unsigned int upperByte = destData[i - width + 3];
+        const unsigned upperLeftByte = destData[i - width];
+        const unsigned upperByte = destData[i - width + 3];
         predicted = prevByte + upperByte - upperLeftByte;
         const int pa = abs((int)(predicted - prevByte));
         const int pb = abs((int)(predicted - upperByte));

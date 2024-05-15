@@ -17,8 +17,8 @@ namespace NRar3 {
 
 static const UInt32 kNumAlignReps = 15;
 
-static const UInt32 kSymbolReadTable = 256;
-static const UInt32 kSymbolRep = 259;
+static const unsigned kSymbolReadTable = 256;
+static const unsigned kSymbolRep = 259;
 
 static const Byte kDistDirectBits[kDistTableSize] =
   {0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,
@@ -54,15 +54,15 @@ static Byte Wrap_ReadBits8(IByteInPtr pp) throw()
 
 
 CDecoder::CDecoder():
+  _isSolid(false),
+  _solidAllowed(false),
   _window(NULL),
   _winPos(0),
   _wrPtr(0),
   _lzSize(0),
   _writtenFileSize(0),
   _vmData(NULL),
-  _vmCode(NULL),
-  _isSolid(false),
-  _solidAllowed(false)
+  _vmCode(NULL)
 {
   Ppmd7_Construct(&_ppmd);
   
@@ -252,8 +252,8 @@ bool CDecoder::AddVmCode(UInt32 firstByte, UInt32 codeSize)
 
   if (_numEmptyTempFilters != 0)
   {
-    unsigned num = _tempFilters.Size();
-    CTempFilter **tempFilters = &_tempFilters.Front();
+    const unsigned num = _tempFilters.Size();
+    CTempFilter **tempFilters = _tempFilters.NonConstData();
     
     unsigned w = 0;
     for (unsigned i = 0; i < num; i++)
@@ -542,6 +542,7 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
   PrevAlignBits = 0;
   PrevAlignCount = 0;
 
+  const unsigned kLevelTableSize = 20;
   Byte levelLevels[kLevelTableSize];
   Byte lens[kTablesSizesSum];
 
@@ -568,23 +569,26 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
     levelLevels[i] = (Byte)len;
   }
   
-  RIF(m_LevelDecoder.Build(levelLevels))
+  NHuffman::CDecoder256<kNumHuffmanBits, kLevelTableSize, 6> m_LevelDecoder;
+  RIF(m_LevelDecoder.Build(levelLevels, NHuffman::k_BuildMode_Full))
   
   i = 0;
   
   do
   {
-    const UInt32 sym = m_LevelDecoder.Decode(&m_InBitStream.BitDecoder);
+    const unsigned sym = m_LevelDecoder.DecodeFull(&m_InBitStream.BitDecoder);
     if (sym < 16)
     {
       lens[i] = Byte((sym + m_LastLevels[i]) & 15);
       i++;
     }
+#if 0
     else if (sym > kLevelTableSize)
       return S_FALSE;
+#endif
     else
     {
-      unsigned num = ((sym - 16) & 1) * 4;
+      unsigned num = ((sym /* - 16 */) & 1) * 4;
       num += num + 3 + (unsigned)ReadBits(num + 3);
       num += i;
       if (num > kTablesSizesSum)
@@ -678,7 +682,7 @@ HRESULT CDecoder::DecodeLZ(bool &keepDecompressing)
     if (InputEofError_Fast())
       return S_FALSE;
 
-    UInt32 sym = m_MainDecoder.Decode(&m_InBitStream.BitDecoder);
+    unsigned sym = m_MainDecoder.Decode(&m_InBitStream.BitDecoder);
     if (sym < 256)
     {
       PutByte((Byte)sym);
@@ -722,14 +726,14 @@ HRESULT CDecoder::DecodeLZ(bool &keepDecompressing)
         rep0 = dist;
       }
 
-      const UInt32 sym2 = m_LenDecoder.Decode(&m_InBitStream.BitDecoder);
+      const unsigned sym2 = m_LenDecoder.Decode(&m_InBitStream.BitDecoder);
       if (sym2 >= kLenTableSize)
         return S_FALSE;
       len = 2 + sym2;
       if (sym2 >= 8)
       {
-        unsigned num = (sym2 >> 2) - 1;
-        len = 2 + ((4 + (sym2 & 3)) << num) + m_InBitStream.BitDecoder.ReadBits_upto8(num);
+        const unsigned num = (sym2 >> 2) - 1;
+        len = 2 + (UInt32)((4 + (sym2 & 3)) << num) + m_InBitStream.BitDecoder.ReadBits_upto8(num);
       }
     }
     else
@@ -750,9 +754,9 @@ HRESULT CDecoder::DecodeLZ(bool &keepDecompressing)
         if (sym >= 8)
         {
           const unsigned num = (sym >> 2) - 1;
-          len = kNormalMatchMinLen + ((4 + (sym & 3)) << num) + m_InBitStream.BitDecoder.ReadBits_upto8(num);
+          len = kNormalMatchMinLen + (UInt32)((4 + (sym & 3)) << num) + m_InBitStream.BitDecoder.ReadBits_upto8(num);
         }
-        const UInt32 sym2 = m_DistDecoder.Decode(&m_InBitStream.BitDecoder);
+        const unsigned sym2 = m_DistDecoder.Decode(&m_InBitStream.BitDecoder);
         if (sym2 >= kDistTableSize)
           return S_FALSE;
         rep0 = kDistStart[sym2];
@@ -768,7 +772,7 @@ HRESULT CDecoder::DecodeLZ(bool &keepDecompressing)
           }
           else
           {
-            const UInt32 sym3 = m_AlignDecoder.Decode(&m_InBitStream.BitDecoder);
+            const unsigned sym3 = m_AlignDecoder.Decode(&m_InBitStream.BitDecoder);
             if (sym3 < (1 << kNumAlignBits))
             {
               rep0 += sym3;

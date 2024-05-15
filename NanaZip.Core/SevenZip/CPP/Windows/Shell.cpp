@@ -162,7 +162,7 @@ static HRESULT ReadAnsiStrings(const char *p, size_t size, UStringVector &names)
       name.Empty();
     }
     else
-      name += c;
+      name.Add_Char(c);
   }
   return E_INVALIDARG;
 }
@@ -543,8 +543,18 @@ void CDrop::QueryFileNames(UStringVector &fileNames)
 typedef int Z7_WIN_GPFIDL_FLAGS;
 
 extern "C" {
-typedef BOOL (WINAPI * Func_SHGetPathFromIDListW)(LPCITEMIDLIST pidl, LPWSTR pszPath);
-typedef BOOL (WINAPI * Func_SHGetPathFromIDListEx)(LPCITEMIDLIST pidl, PWSTR pszPath, DWORD cchPath, Z7_WIN_GPFIDL_FLAGS uOpts);
+#ifndef _UNICODE
+typedef BOOL (WINAPI * Func_SHGetPathFromIDListW)(LPCITEMIDLIST pidl, LPWSTR pszPath); // nt4
+#endif
+
+#if !defined(Z7_WIN32_WINNT_MIN) || Z7_WIN32_WINNT_MIN < 0x0600  // Vista
+#define Z7_USE_DYN_SHGetPathFromIDListEx
+#endif
+
+#ifdef Z7_USE_DYN_SHGetPathFromIDListEx
+Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
+typedef BOOL (WINAPI * Func_SHGetPathFromIDListEx)(LPCITEMIDLIST pidl, PWSTR pszPath, DWORD cchPath, Z7_WIN_GPFIDL_FLAGS uOpts); // vista
+#endif
 }
 
 #ifndef _UNICODE
@@ -584,18 +594,26 @@ bool GetPathFromIDList(LPCITEMIDLIST itemIDList, UString &path)
     /* for long path we need SHGetPathFromIDListEx().
       win10: SHGetPathFromIDListEx() for long path returns path with
              with super path prefix "\\\\?\\". */
+#ifdef Z7_USE_DYN_SHGetPathFromIDListEx
     const
     Func_SHGetPathFromIDListEx
     func_SHGetPathFromIDListEx = Z7_GET_PROC_ADDRESS(
     Func_SHGetPathFromIDListEx, ::GetModuleHandleW(L"shell32.dll"),
         "SHGetPathFromIDListEx");
     if (func_SHGetPathFromIDListEx)
+#endif
     {
       ODS("==== GetPathFromIDList() (SHGetPathFromIDListEx)")
       do
       {
         len *= 4;
-        result = BOOLToBool(func_SHGetPathFromIDListEx(itemIDList, path.GetBuf(len), len, 0));
+        result = BOOLToBool(
+#ifdef Z7_USE_DYN_SHGetPathFromIDListEx
+          func_SHGetPathFromIDListEx
+#else
+          SHGetPathFromIDListEx
+#endif
+          (itemIDList, path.GetBuf(len), len, 0));
         if (result)
           break;
       }
