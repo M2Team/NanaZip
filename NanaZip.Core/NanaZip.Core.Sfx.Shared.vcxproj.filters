@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Extensions">
-      <UniqueIdentifier>{603f3b98-10fa-4703-a074-78a3a0575141}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Extensions\ZSCodecs">
-      <UniqueIdentifier>{de1196d7-993c-4105-b0c0-be4dabfcad93}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SevenZip">
       <UniqueIdentifier>{831b4812-8fbb-43f7-b499-2c0a9de0247f}</UniqueIdentifier>
     </Filter>
@@ -78,12 +72,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
-      <Filter>Extensions\ZSCodecs</Filter>
-    </ClCompile>
-    <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp">
-      <Filter>Extensions\ZSCodecs</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\C\Aes.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
@@ -312,11 +300,18 @@
     <ClCompile Include="SevenZip\CPP\Windows\TimeUtils.cpp">
       <Filter>SevenZip\CPP\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\C\ZstdDec.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Xxh64.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="NanaZip.Core.Sfx.ZstandardRegister.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
-      <Filter>Extensions\ZSCodecs</Filter>
-    </ClInclude>
     <ClInclude Include="SevenZip\C\Aes.h">
       <Filter>SevenZip\C</Filter>
     </ClInclude>
@@ -625,6 +620,15 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\Common0.h">
       <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\ZstdDec.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\Xxh64.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
