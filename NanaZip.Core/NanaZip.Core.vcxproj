@@ -74,9 +74,9 @@
     <ClCompile Include="Extensions\ZSCodecs\Lz5Handler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\Lz5Register.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\LzHandler.cpp" />
-    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Zstd2Decoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
-    <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\Zstd2Handler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
