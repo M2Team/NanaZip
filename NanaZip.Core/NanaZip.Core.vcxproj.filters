@@ -998,9 +998,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
       <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\Xxh64Reg.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\7zCrc.h">

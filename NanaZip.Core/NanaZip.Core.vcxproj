@@ -291,7 +291,6 @@
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\Xxh64Reg.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\XzCrc64Init.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\XzCrc64Reg.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\FileDir.cpp" />
