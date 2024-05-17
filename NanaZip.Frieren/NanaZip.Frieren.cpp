@@ -116,13 +116,14 @@ namespace
 
     FunctionItem g_FunctionTable[FunctionType::MaximumFunction];
 
-    const COLORREF DarkModeBackgroundColor = RGB(32, 32, 32);
+    const COLORREF DarkModeBackgroundColor = RGB(56, 56, 56);
     const COLORREF DarkModeForegroundColor = RGB(255, 255, 255);
 
     thread_local bool volatile g_ThreadInitialized = false;
     thread_local HHOOK volatile g_WindowsHookHandle = nullptr;
     thread_local bool volatile g_ShouldAppsUseDarkMode = false;
     thread_local HTHEME g_TabControlThemeHandle = nullptr;
+    thread_local HTHEME g_StatusBarThemeHandle = nullptr;
 
     static void RefreshWindowTheme(
         _In_ HWND WindowHandle)
@@ -193,14 +194,14 @@ namespace
                         ListView_SetTextColor(
                             WindowHandle,
                             DarkModeForegroundColor);
-                    }            
+                    }
 
                     ::CloseThemeData(ThemeHandle);
                 }
             }
             else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
             {
-                ::SetWindowTheme(WindowHandle, nullptr, L"ExplorerStatusBar");
+                // Do nothing.
             }
             else if (0 == std::wcscmp(ClassName, WC_TABCONTROLW))
             {
@@ -288,6 +289,8 @@ namespace
 
             if (Section && 0 == std::wcscmp(Section, L"ImmersiveColorSet"))
             {
+                ::MileRefreshImmersiveColorPolicyState();
+
                 g_ShouldAppsUseDarkMode =
                     ::MileShouldAppsUseDarkMode() &&
                     !::MileShouldAppsUseHighContrastMode();
@@ -306,7 +309,7 @@ namespace
                         ::RefreshWindowTheme(hWnd);
                         return TRUE;
                     },
-                    0); 
+                    0);
 
                 ::InvalidateRect(hWnd, nullptr, TRUE);
             }
@@ -340,6 +343,10 @@ namespace
                         | TCS_TABS);
                     ::SetWindowTheme(hWnd, nullptr, nullptr);
                     g_TabControlThemeHandle = ::GetWindowTheme(hWnd);
+                }
+                else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
+                {
+                    g_StatusBarThemeHandle = ::GetWindowTheme(hWnd);
                 }
             }
 
@@ -717,11 +724,11 @@ namespace
         if (hTheme == g_TabControlThemeHandle)
         {
             static HBRUSH TabControlButtonBorderBrush =
-                ::CreateSolidBrush(RGB(130, 135, 144));
+                ::CreateSolidBrush(RGB(127, 127, 127));
             static HBRUSH TabControlButtonFillBrush =
                 ::CreateSolidBrush(RGB(56, 56, 56));
 
-            int HoveredCheckStateId[] =
+            const int HoveredCheckStateId[] =
             {
                 -1,
                 TIS_HOT,
@@ -737,7 +744,7 @@ namespace
                 -1
             };
 
-            int SelectedCheckStateId[] =
+            const int SelectedCheckStateId[] =
             {
                 -1,
                 TIS_SELECTED,
@@ -798,6 +805,35 @@ namespace
             }
             case TABP_PANE:
                 return S_OK;
+            default:
+                break;
+            }
+        }
+        else if (hTheme == g_StatusBarThemeHandle)
+        {
+            static HBRUSH StatusBarBorderBrush =
+                ::CreateSolidBrush(RGB(127, 127, 127));
+            static HBRUSH StatusBarFillBrush =
+                ::CreateSolidBrush(RGB(56, 56, 56));
+
+            switch (iPartId)
+            {
+            case 0:
+            {
+                // Outside border (top, right)
+                ::FillRect(hdc, pRect, StatusBarBorderBrush);
+                return S_OK;
+            }
+            case SP_PANE:
+            case SP_GRIPPERPANE:
+            case SP_GRIPPER:
+            {
+                // Everything else
+                ::FillRect(hdc, pRect, StatusBarFillBrush);
+                return S_OK;
+            }
+            default:
+                break;
             }
         }
 
@@ -856,6 +892,7 @@ EXTERN_C HRESULT WINAPI NanaZipFrierenThreadUninitialize()
 EXTERN_C HRESULT WINAPI NanaZipFrierenGlobalInitialize()
 {
     ::MileAllowDarkModeForApp(true);
+    ::MileRefreshImmersiveColorPolicyState();
 
     g_FunctionTable[FunctionType::GetSysColor].Original =
         ::GetSysColor;
