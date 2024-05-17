@@ -25,7 +25,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;NSIS_SCRIPT;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;NSIS_SCRIPT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4100;4113;4127;4146;4189;4200;4244;4267;4334;4702;</DisableSpecificWarnings>
     </ClCompile>
@@ -74,9 +74,8 @@
     <ClCompile Include="Extensions\ZSCodecs\Lz5Handler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\Lz5Register.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\LzHandler.cpp" />
-    <ClCompile Include="Extensions\ZSCodecs\Zstd2Decoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
-    <ClCompile Include="Extensions\ZSCodecs\Zstd2Handler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
@@ -188,7 +187,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipOut.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipUpdate.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\ZstdHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\CreateCoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\CWrappers.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\FilterCoder.cpp" />
@@ -360,7 +358,6 @@
     <ClInclude Include="Extensions\ZSCodecs\Lz4Encoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\Lz5Decoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\Lz5Encoder.h" />
-    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\ZstdEncoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.h" />

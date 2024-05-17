@@ -4,14 +4,15 @@
 
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 
-#include "ZstdDecoder.h"
+#include "../../SevenZip/CPP/7zip/Compress/ZstdDecoder.h"
 
 #ifndef Z7_EXTRACT_ONLY
 #include "ZstdEncoder.h"
 #endif
 
 REGISTER_CODEC_E(
-  ZSTD,
-  NCompress::NZSTD::CDecoder(),
+  Zstd,
+  NCompress::NZstd::CDecoder(),
   NCompress::NZSTD::CEncoder(),
-  0x4F71101, "ZSTD")
+  0x4F71101,
+  "Zstd")

@@ -52,19 +52,12 @@ FL2_setCStreamTimeout
 FL2_updateDictionary
 FL2_waitCStream
 
-ZSTD_CCtx_setParameter
-ZSTD_compressStream2
-ZSTD_createCCtx
-ZSTD_createDCtx
-ZSTD_CStreamInSize
-ZSTD_CStreamOutSize
-ZSTD_DCtx_reset
-ZSTD_DCtx_setParameter
-ZSTD_decompressStream
-ZSTD_DStreamInSize
-ZSTD_DStreamOutSize
-ZSTD_freeCCtx
-ZSTD_freeDCtx
-ZSTD_getErrorCode
 ZSTD_isError
 ZSTD_maxCLevel
+ZSTD_createCCtx
+ZSTD_freeCCtx
+ZSTD_CCtx_setParameter
+ZSTD_compressStream2
+ZSTD_CStreamInSize
+ZSTD_CStreamOutSize
+ZSTD_getErrorCode

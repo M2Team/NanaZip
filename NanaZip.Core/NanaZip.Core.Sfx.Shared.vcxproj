@@ -31,9 +31,9 @@
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\AesOpt.c" />
     <None Include="SevenZip\C\Sha256Opt.c" />
+    <None Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NanaZip.Core.Sfx.ZstandardRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zHandler.cpp" />

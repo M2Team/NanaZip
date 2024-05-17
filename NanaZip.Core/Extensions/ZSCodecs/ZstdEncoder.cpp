@@ -2,7 +2,10 @@
 
 #include "../../SevenZip/CPP/7zip/Compress/StdAfx.h"
 #include "ZstdEncoder.h"
-#include "ZstdDecoder.h"
+#include "../../SevenZip/CPP/7zip/Compress/ZstdDecoder.h"
+#include <zstd_errors.h>
+#include "../../SevenZip/CPP/Windows/System.h"
+#define ZSTD_THREAD_MAX   256
 
 #ifndef Z7_EXTRACT_ONLY
 namespace NCompress {
