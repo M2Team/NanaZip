@@ -374,51 +374,6 @@
     <ClCompile Include="Zstandard\compress\zstd_opt.c">
       <Filter>Zstandard\compress</Filter>
     </ClCompile>
-    <ClCompile Include="Zstandard\decompress\huf_decompress.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\decompress\zstd_ddict.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\decompress\zstd_decompress.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c">
-      <Filter>Zstandard\decompress</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\dictBuilder\cover.c">
-      <Filter>Zstandard\dictBuilder</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\dictBuilder\divsufsort.c">
-      <Filter>Zstandard\dictBuilder</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\dictBuilder\fastcover.c">
-      <Filter>Zstandard\dictBuilder</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\dictBuilder\zdict.c">
-      <Filter>Zstandard\dictBuilder</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\legacy\zstd_v01.c">
-      <Filter>Zstandard\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\legacy\zstd_v02.c">
-      <Filter>Zstandard\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\legacy\zstd_v03.c">
-      <Filter>Zstandard\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\legacy\zstd_v04.c">
-      <Filter>Zstandard\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\legacy\zstd_v05.c">
-      <Filter>Zstandard\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\legacy\zstd_v06.c">
-      <Filter>Zstandard\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Zstandard\legacy\zstd_v07.c">
-      <Filter>Zstandard\legacy</Filter>
-    </ClCompile>
     <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sm3.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Md2.cpp" />
@@ -517,15 +472,6 @@
     </Filter>
     <Filter Include="Zstandard\compress">
       <UniqueIdentifier>{a75fe35b-0362-43ad-b9f2-29e3b7c0466a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Zstandard\decompress">
-      <UniqueIdentifier>{23437620-cb95-436b-897c-c3b273fdc12c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Zstandard\dictBuilder">
-      <UniqueIdentifier>{a78a0252-1f41-4b55-a04d-abcf400a505f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Zstandard\legacy">
-      <UniqueIdentifier>{2c487a51-89ef-4ae0-9fb4-d37c9de8fda6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -979,9 +925,6 @@
     <ClInclude Include="FastLZMA2\util.h">
       <Filter>FastLZMA2</Filter>
     </ClInclude>
-    <ClInclude Include="Zstandard\zdict.h">
-      <Filter>Zstandard</Filter>
-    </ClInclude>
     <ClInclude Include="Zstandard\zstd.h">
       <Filter>Zstandard</Filter>
     </ClInclude>
@@ -1077,45 +1020,6 @@
     </ClInclude>
     <ClInclude Include="Zstandard\compress\zstd_opt.h">
       <Filter>Zstandard\compress</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\decompress\zstd_ddict.h">
-      <Filter>Zstandard\decompress</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h">
-      <Filter>Zstandard\decompress</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h">
-      <Filter>Zstandard\decompress</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\dictBuilder\cover.h">
-      <Filter>Zstandard\dictBuilder</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\dictBuilder\divsufsort.h">
-      <Filter>Zstandard\dictBuilder</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_legacy.h">
-      <Filter>Zstandard\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_v01.h">
-      <Filter>Zstandard\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_v02.h">
-      <Filter>Zstandard\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_v03.h">
-      <Filter>Zstandard\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_v04.h">
-      <Filter>Zstandard\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_v05.h">
-      <Filter>Zstandard\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_v06.h">
-      <Filter>Zstandard\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Zstandard\legacy\zstd_v07.h">
-      <Filter>Zstandard\legacy</Filter>
     </ClInclude>
     <ClInclude Include="NanaZip.Codecs.h" />
   </ItemGroup>
