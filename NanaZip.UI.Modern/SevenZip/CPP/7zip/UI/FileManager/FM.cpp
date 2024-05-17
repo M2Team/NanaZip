@@ -681,6 +681,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 {
   g_hInstance = hInstance;
 
+  ::NanaZipFrierenGlobalInitialize();
+
   if (!::NanaZipBlockDlls())
   {
     ErrorMessage("Cannot block DLL loading");
@@ -689,8 +691,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   {
     ErrorMessage("Cannot enable security mitigations");
   }
-
-  ::NanaZipFrierenGlobalInitialize();
 
   try
   {
