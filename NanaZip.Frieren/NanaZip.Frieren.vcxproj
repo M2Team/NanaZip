@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NanaZip.Frieren.h" />
+    <ClInclude Include="NanaZip.Frieren.WinUserPrivate.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZip.Frieren.cpp" />
