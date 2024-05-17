@@ -25,6 +25,7 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
+  <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>

@@ -663,6 +663,8 @@ static int WINAPI WinMain2(int nCmdShow)
   return (int)msg.wParam;
 }
 
+#include <NanaZip.Frieren.h>
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef UNDER_CE
     LPWSTR
@@ -672,6 +674,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     /* lpCmdLine */, int nCmdShow)
 {
   g_hInstance = hInstance;
+
+  ::NanaZipFrierenGlobalInitialize();
 
   if (!::NanaZipBlockDlls())
   {

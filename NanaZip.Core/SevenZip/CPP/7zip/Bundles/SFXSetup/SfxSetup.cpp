@@ -29,6 +29,7 @@
 // **************** NanaZip Modification Start ****************
 #include "../../IPassword.h" // Only for passing the compilation.
 #include <Mile.Helpers.h>
+#include <NanaZip.Frieren.h>
 #include "Mitigations.h"
 // **************** NanaZip Modification End ****************
 
@@ -150,6 +151,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   NT_CHECK
 
   // **************** NanaZip Modification Start ****************
+  ::NanaZipFrierenGlobalInitialize();
+
   if (!::NanaZipEnableMitigations())
   {
     ShowErrorMessage(L"Cannot enable security mitigations");

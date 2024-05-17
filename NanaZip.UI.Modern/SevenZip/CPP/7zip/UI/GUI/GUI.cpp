@@ -382,6 +382,8 @@ static int Main2()
 #define NT_CHECK_FAIL_ACTION ErrorMessage("Unsupported Windows version"); return NExitCode::kFatalError;
 #endif
 
+#include <NanaZip.Frieren.h>
+
 int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef UNDER_CE
   LPWSTR
@@ -395,6 +397,8 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef _WIN32
   NT_CHECK
   #endif
+
+  ::NanaZipFrierenGlobalInitialize();
 
   if (!::NanaZipEnableMitigations())
   {
