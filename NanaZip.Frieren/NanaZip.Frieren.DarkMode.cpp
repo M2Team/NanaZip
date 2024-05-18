@@ -17,6 +17,9 @@
 #include <vssym32.h>
 #include <Richedit.h>
 
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
+
 #include <unordered_map>
 
 #include "NanaZip.Frieren.WinUserPrivate.h"
@@ -44,7 +47,7 @@ namespace
 
     FunctionItem g_FunctionTable[FunctionType::MaximumFunction];
 
-    const COLORREF DarkModeBackgroundColor = RGB(56, 56, 56);
+    const COLORREF DarkModeBackgroundColor = RGB(0, 0, 0);
     const COLORREF DarkModeForegroundColor = RGB(255, 255, 255);
 
     thread_local bool volatile g_ThreadInitialized = false;
@@ -78,53 +81,29 @@ namespace
             {
                 ::SetWindowTheme(WindowHandle, L"Explorer", nullptr);
 
-                HTHEME ThemeHandle = ::OpenThemeData(nullptr, L"ItemsView");
-                if (ThemeHandle)
+                if (g_ShouldAppsUseDarkMode)
                 {
-                    COLORREF BackgroundColor = 0;
-                    if (SUCCEEDED(::GetThemeColor(
-                        ThemeHandle,
-                        0,
-                        0,
-                        TMT_FILLCOLOR,
-                        &BackgroundColor)))
-                    {
-                        ListView_SetTextBkColor(
-                            WindowHandle,
-                            BackgroundColor);
-                        ListView_SetBkColor(
-                            WindowHandle,
-                            BackgroundColor);
-                    }
-                    else
-                    {
-                        ListView_SetTextBkColor(
-                            WindowHandle,
-                            DarkModeBackgroundColor);
-                        ListView_SetBkColor(
-                            WindowHandle,
-                            DarkModeBackgroundColor);
-                    }
-
-                    COLORREF ForegroundColor = 0;
-                    if (SUCCEEDED(::GetThemeColor(
-                        ThemeHandle,
-                        0,
-                        0,
-                        TMT_TEXTCOLOR,
-                        &ForegroundColor)))
-                    {
-                        ListView_SetTextColor(
-                            WindowHandle,
-                            ForegroundColor);
-                    }
-                    else {
-                        ListView_SetTextColor(
-                            WindowHandle,
-                            DarkModeForegroundColor);
-                    }
-
-                    ::CloseThemeData(ThemeHandle);
+                    ListView_SetTextBkColor(
+                        WindowHandle,
+                        DarkModeBackgroundColor);
+                    ListView_SetBkColor(
+                        WindowHandle,
+                        DarkModeBackgroundColor);
+                    ListView_SetTextColor(
+                        WindowHandle,
+                        DarkModeForegroundColor);
+                }
+                else
+                {
+                    ListView_SetTextBkColor(
+                        WindowHandle,
+                        RGB(255, 255, 255));
+                    ListView_SetBkColor(
+                        WindowHandle,
+                        RGB(255, 255, 255));
+                    ListView_SetTextColor(
+                        WindowHandle,
+                        RGB(0, 0, 0));
                 }
             }
             else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
@@ -227,6 +206,9 @@ namespace
                     hWnd,
                     g_ShouldAppsUseDarkMode);
 
+                MARGINS Margins = { (g_ShouldAppsUseDarkMode ? -1 : 0) };
+                ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
+
                 ::EnumChildWindows(
                     hWnd,
                     [](
@@ -247,12 +229,23 @@ namespace
         case WM_INITDIALOG:
         case WM_CREATE:
         {
-            ::MileEnableImmersiveDarkModeForWindow(
-                hWnd,
-                g_ShouldAppsUseDarkMode);
             ::MileAllowDarkModeForWindow(
                 hWnd,
                 TRUE);
+
+            ::MileSetWindowSystemBackdropTypeAttribute(
+                hWnd,
+                MILE_WINDOW_SYSTEM_BACKDROP_TYPE_MICA);
+
+            ::MileEnableImmersiveDarkModeForWindow(
+                hWnd,
+                g_ShouldAppsUseDarkMode);
+
+            if (g_ShouldAppsUseDarkMode)
+            {
+                MARGINS Margins = { -1 };
+                ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
+            }
 
             ::RefreshWindowTheme(hWnd);
 
@@ -276,6 +269,25 @@ namespace
                 {
                     g_StatusBarThemeHandle = ::GetWindowTheme(hWnd);
                 }
+            }
+
+            break;
+        }
+        case WM_ERASEBKGND:
+        {
+            if (g_ShouldAppsUseDarkMode)
+            {
+                RECT ClientArea = { 0 };
+                if (::GetClientRect(hWnd, &ClientArea))
+                {
+                    ::FillRect(
+                        reinterpret_cast<HDC>(wParam),
+                        &ClientArea,
+                        reinterpret_cast<HBRUSH>(
+                            ::GetStockObject(BLACK_BRUSH)));
+                }
+
+                return TRUE;
             }
 
             break;
@@ -654,7 +666,7 @@ namespace
             static HBRUSH TabControlButtonBorderBrush =
                 ::CreateSolidBrush(RGB(127, 127, 127));
             static HBRUSH TabControlButtonFillBrush =
-                ::CreateSolidBrush(RGB(56, 56, 56));
+                ::CreateSolidBrush(DarkModeBackgroundColor);
 
             const int HoveredCheckStateId[] =
             {
@@ -742,7 +754,7 @@ namespace
             static HBRUSH StatusBarBorderBrush =
                 ::CreateSolidBrush(RGB(127, 127, 127));
             static HBRUSH StatusBarFillBrush =
-                ::CreateSolidBrush(RGB(56, 56, 56));
+                ::CreateSolidBrush(DarkModeBackgroundColor);
 
             switch (iPartId)
             {
