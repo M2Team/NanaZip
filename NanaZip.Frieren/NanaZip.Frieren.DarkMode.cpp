@@ -47,8 +47,19 @@ namespace
 
     FunctionItem g_FunctionTable[FunctionType::MaximumFunction];
 
+    const COLORREF LightModeBackgroundColor = RGB(255, 255, 255);
+    const COLORREF LightModeForegroundColor = RGB(0, 0, 0);
+
     const COLORREF DarkModeBackgroundColor = RGB(0, 0, 0);
     const COLORREF DarkModeForegroundColor = RGB(255, 255, 255);
+    const COLORREF DarkModeBorderColor = RGB(127, 127, 127);
+
+    static const HBRUSH DarkModeBackgroundBrush =
+        ::CreateSolidBrush(DarkModeBackgroundColor);
+    static const HBRUSH DarkModeForegroundBrush =
+        ::CreateSolidBrush(DarkModeForegroundColor);
+    static const HBRUSH DarkModeBorderBrush =
+        ::CreateSolidBrush(DarkModeBorderColor);
 
     thread_local bool volatile g_ThreadInitialized = false;
     thread_local HHOOK volatile g_WindowsHookHandle = nullptr;
@@ -97,13 +108,13 @@ namespace
                 {
                     ListView_SetTextBkColor(
                         WindowHandle,
-                        RGB(255, 255, 255));
+                        LightModeBackgroundColor);
                     ListView_SetBkColor(
                         WindowHandle,
-                        RGB(255, 255, 255));
+                        LightModeBackgroundColor);
                     ListView_SetTextColor(
                         WindowHandle,
-                        RGB(0, 0, 0));
+                        LightModeForegroundColor);
                 }
             }
             else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
@@ -147,11 +158,8 @@ namespace
         _In_ UINT_PTR uIdSubclass,
         _In_ DWORD_PTR dwRefData)
     {
-        uIdSubclass;
-        dwRefData;
-
-        static HBRUSH DarkModeBackgroundBrush =
-            ::CreateSolidBrush(DarkModeBackgroundColor);
+        UNREFERENCED_PARAMETER(uIdSubclass);
+        UNREFERENCED_PARAMETER(dwRefData);
 
         switch (uMsg)
         {
@@ -385,7 +393,7 @@ namespace
                             // We have to specify the text colour explicitly as by default
                             // black would be used, making the menu label unreadable on the
                             // (almost) black background.
-                            DTTOPTS TextOptions;
+                            DTTOPTS TextOptions = { 0 };
                             TextOptions.dwSize = sizeof(DTTOPTS);
                             TextOptions.dwFlags = DTT_TEXTCOLOR;
                             TextOptions.crText = TextColor;
@@ -548,17 +556,12 @@ namespace
             return ::OriginalGetSysColorBrush(nIndex);
         }
 
-        static HBRUSH BackgroundBrush = ::CreateSolidBrush(
-            ::GetSysColor(COLOR_BTNFACE));
-        static HBRUSH ForegroundBrush = ::CreateSolidBrush(
-            ::GetSysColor(COLOR_BTNTEXT));
-
         switch (nIndex)
         {
         case COLOR_BTNFACE:
-            return BackgroundBrush;
+            return DarkModeBackgroundBrush;
         case COLOR_BTNTEXT:
-            return ForegroundBrush;
+            return DarkModeForegroundBrush;
         default:
             return ::OriginalGetSysColorBrush(nIndex);
         }
@@ -613,15 +616,21 @@ namespace
                 pRect);
         }
 
-        ::SetBkMode(hdc, TRANSPARENT);
-        ::SetTextColor(hdc, DarkModeForegroundColor);
-        ::DrawTextW(
+        DTTOPTS TextOptions = { 0 };
+        TextOptions.dwSize = sizeof(DTTOPTS);
+        TextOptions.dwFlags = DTT_TEXTCOLOR;
+        TextOptions.crText = DarkModeForegroundColor;
+
+        return ::DrawThemeTextEx(
+            hTheme,
             hdc,
+            iPartId,
+            iStateId,
             pszText,
             cchText,
+            dwTextFlags,
             const_cast<LPRECT>(pRect),
-            dwTextFlags);
-        return S_OK;
+            &TextOptions);
     }
 
     static HRESULT WINAPI OriginalDrawThemeBackground(
@@ -663,11 +672,6 @@ namespace
 
         if (hTheme == g_TabControlThemeHandle)
         {
-            static HBRUSH TabControlButtonBorderBrush =
-                ::CreateSolidBrush(RGB(127, 127, 127));
-            static HBRUSH TabControlButtonFillBrush =
-                ::CreateSolidBrush(DarkModeBackgroundColor);
-
             const int HoveredCheckStateId[] =
             {
                 -1,
@@ -733,13 +737,13 @@ namespace
                 ::FrameRect(
                     hdc,
                     &paddedRect,
-                    TabControlButtonBorderBrush);
+                    DarkModeBorderBrush);
                 ::FillRect(
                     hdc,
                     &insideRect,
                     iStateId == HoveredCheckStateId[iPartId]
-                    ? TabControlButtonBorderBrush
-                    : TabControlButtonFillBrush);
+                    ? DarkModeBorderBrush
+                    : DarkModeBackgroundBrush);
 
                 return S_OK;
             }
@@ -751,17 +755,12 @@ namespace
         }
         else if (hTheme == g_StatusBarThemeHandle)
         {
-            static HBRUSH StatusBarBorderBrush =
-                ::CreateSolidBrush(RGB(127, 127, 127));
-            static HBRUSH StatusBarFillBrush =
-                ::CreateSolidBrush(DarkModeBackgroundColor);
-
             switch (iPartId)
             {
             case 0:
             {
                 // Outside border (top, right)
-                ::FillRect(hdc, pRect, StatusBarBorderBrush);
+                ::FillRect(hdc, pRect, DarkModeBorderBrush);
                 return S_OK;
             }
             case SP_PANE:
@@ -769,7 +768,7 @@ namespace
             case SP_GRIPPER:
             {
                 // Everything else
-                ::FillRect(hdc, pRect, StatusBarFillBrush);
+                ::FillRect(hdc, pRect, DarkModeBackgroundBrush);
                 return S_OK;
             }
             default:
