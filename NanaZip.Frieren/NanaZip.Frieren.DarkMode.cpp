@@ -83,7 +83,7 @@ namespace
         return CachedResult;
     }
 
-    static NTSTATUS NTAPI GetDisplayConfigBufferSizesWrapper(
+    static LONG WINAPI GetDisplayConfigBufferSizesWrapper(
         _In_ UINT32 flags,
         _Out_ UINT32* numPathArrayElements,
         _Out_ UINT32* numModeInfoArrayElements)
@@ -104,7 +104,7 @@ namespace
         return ERROR_NOT_SUPPORTED;
     }
 
-    static NTSTATUS NTAPI QueryDisplayConfigWrapper(
+    static LONG WINAPI QueryDisplayConfigWrapper(
         _In_ UINT32 flags,
         _Inout_ UINT32* numPathArrayElements,
         _Out_ DISPLAYCONFIG_PATH_INFO* pathArray,
@@ -131,7 +131,7 @@ namespace
         return ERROR_NOT_SUPPORTED;
     }
 
-    static NTSTATUS NTAPI DisplayConfigGetDeviceInfoWrapper(
+    static LONG WINAPI DisplayConfigGetDeviceInfoWrapper(
         _Inout_ DISPLAYCONFIG_DEVICE_INFO_HEADER* requestPacket)
     {
         using ProcType = decltype(::DisplayConfigGetDeviceInfo)*;
