@@ -26,6 +26,187 @@
 
 namespace
 {
+    static HMODULE GetUser32ModuleHandle()
+    {
+        static HMODULE CachedResult = ::GetModuleHandleW(L"user32.dll");
+        return CachedResult;
+    }
+
+    static FARPROC GetGetDisplayConfigBufferSizesProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "GetDisplayConfigBufferSizes");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
+    static FARPROC GetQueryDisplayConfigProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "QueryDisplayConfig");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
+    static FARPROC GetDisplayConfigGetDeviceInfoProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "DisplayConfigGetDeviceInfo");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
+    static NTSTATUS NTAPI GetDisplayConfigBufferSizesWrapper(
+        _In_ UINT32 flags,
+        _Out_ UINT32* numPathArrayElements,
+        _Out_ UINT32* numModeInfoArrayElements)
+    {
+        using ProcType = decltype(::GetDisplayConfigBufferSizes)*;
+
+        ProcType ProcAddress = reinterpret_cast<ProcType>(
+            ::GetGetDisplayConfigBufferSizesProcAddress());
+
+        if (ProcAddress)
+        {
+            return ProcAddress(
+                flags,
+                numPathArrayElements,
+                numModeInfoArrayElements);
+        }
+
+        return ERROR_NOT_SUPPORTED;
+    }
+
+    static NTSTATUS NTAPI QueryDisplayConfigWrapper(
+        _In_ UINT32 flags,
+        _Inout_ UINT32* numPathArrayElements,
+        _Out_ DISPLAYCONFIG_PATH_INFO* pathArray,
+        _Inout_ UINT32* numModeInfoArrayElements,
+        _Out_ DISPLAYCONFIG_MODE_INFO* modeInfoArray,
+        _Out_opt_ DISPLAYCONFIG_TOPOLOGY_ID* currentTopologyId)
+    {
+        using ProcType = decltype(::QueryDisplayConfig)*;
+
+        ProcType ProcAddress = reinterpret_cast<ProcType>(
+            ::GetQueryDisplayConfigProcAddress());
+
+        if (ProcAddress)
+        {
+            return ProcAddress(
+                flags,
+                numPathArrayElements,
+                pathArray,
+                numModeInfoArrayElements,
+                modeInfoArray,
+                currentTopologyId);
+        }
+
+        return ERROR_NOT_SUPPORTED;
+    }
+
+    static NTSTATUS NTAPI DisplayConfigGetDeviceInfoWrapper(
+        _Inout_ DISPLAYCONFIG_DEVICE_INFO_HEADER* requestPacket)
+    {
+        using ProcType = decltype(::DisplayConfigGetDeviceInfo)*;
+
+        ProcType ProcAddress = reinterpret_cast<ProcType>(
+            ::GetDisplayConfigGetDeviceInfoProcAddress());
+
+        if (ProcAddress)
+        {
+            return ProcAddress(requestPacket);
+        }
+
+        return ERROR_NOT_SUPPORTED;
+    }
+
+    static bool IsStandardDynamicRangeMode()
+    {
+        static bool CachedResult = ([]() -> bool
+        {
+            bool Result = true;
+
+            UINT32 NumPathArrayElements = 0;
+            UINT32 NumModeInfoArrayElements = 0;
+            if (ERROR_SUCCESS == ::GetDisplayConfigBufferSizesWrapper(
+                QDC_ONLY_ACTIVE_PATHS,
+                &NumPathArrayElements,
+                &NumModeInfoArrayElements))
+            {
+                std::vector<DISPLAYCONFIG_PATH_INFO> PathArray(
+                    NumPathArrayElements);
+                std::vector<DISPLAYCONFIG_MODE_INFO> ModeInfoArray(
+                    NumModeInfoArrayElements);
+                if (ERROR_SUCCESS == ::QueryDisplayConfigWrapper(
+                    QDC_ONLY_ACTIVE_PATHS,
+                    &NumPathArrayElements,
+                    &PathArray[0],
+                    &NumModeInfoArrayElements,
+                    &ModeInfoArray[0],
+                    nullptr))
+                {
+                    for (DISPLAYCONFIG_PATH_INFO const& Path : PathArray)
+                    {
+                        DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO AdvancedColorInfo;
+                        std::memset(
+                            &AdvancedColorInfo,
+                            0,
+                            sizeof(DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO));
+                        AdvancedColorInfo.header.type =
+                            DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO;
+                        AdvancedColorInfo.header.size =
+                            sizeof(DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO);
+                        AdvancedColorInfo.header.adapterId =
+                            Path.targetInfo.adapterId;
+                        AdvancedColorInfo.header.id =
+                            Path.targetInfo.id;
+                        if (ERROR_SUCCESS ==
+                            ::DisplayConfigGetDeviceInfoWrapper(
+                                &AdvancedColorInfo.header))
+                        {
+                            if (AdvancedColorInfo.advancedColorEnabled)
+                            {
+                                Result = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return Result;
+        }());
+
+        return CachedResult;
+    }
+
     namespace FunctionType
     {
         enum
@@ -214,7 +395,9 @@ namespace
                     hWnd,
                     g_ShouldAppsUseDarkMode);
 
-                MARGINS Margins = { (g_ShouldAppsUseDarkMode ? -1 : 0) };
+                bool ShouldExtendFrame =
+                    (g_ShouldAppsUseDarkMode && ::IsStandardDynamicRangeMode());
+                MARGINS Margins = { (ShouldExtendFrame ? -1 : 0) };
                 ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
 
                 ::EnumChildWindows(
@@ -249,7 +432,9 @@ namespace
                 hWnd,
                 g_ShouldAppsUseDarkMode);
 
-            if (g_ShouldAppsUseDarkMode)
+            bool ShouldExtendFrame =
+                (g_ShouldAppsUseDarkMode && ::IsStandardDynamicRangeMode());
+            if (ShouldExtendFrame)
             {
                 MARGINS Margins = { -1 };
                 ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
