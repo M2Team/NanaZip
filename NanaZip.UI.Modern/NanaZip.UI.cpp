@@ -13,6 +13,8 @@
 #include <Mile.Helpers.h>
 #include <Mile.Xaml.h>
 
+#include "AboutPage.h"
+
 HWND NanaZip::UI::CreateXamlDialog(
     _In_opt_ HWND ParentWindowHandle)
 {
@@ -163,4 +165,31 @@ int NanaZip::UI::ShowXamlDialog(
     }
 
     return Result;
+}
+
+winrt::handle NanaZip::UI::ShowAboutDialog(
+    _In_ HWND ParentWindowHandle)
+{
+    return winrt::handle(Mile::CreateThread([=]()
+    {
+        winrt::check_hresult(::MileXamlThreadInitialize());
+
+        HWND WindowHandle = NanaZip::UI::CreateXamlDialog(ParentWindowHandle);
+        if (!WindowHandle)
+        {
+            return;
+        }
+
+        winrt::NanaZip::Modern::AboutPage Window =
+            winrt::make<winrt::NanaZip::Modern::implementation::AboutPage>(
+                WindowHandle);
+        NanaZip::UI::ShowXamlDialog(
+            WindowHandle,
+            600, // 480,
+            192 + (32 + 8) * 2, // 320,
+            winrt::get_abi(Window),
+            ParentWindowHandle);
+
+        winrt::check_hresult(::MileXamlThreadUninitialize());
+    }));
 }

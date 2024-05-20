@@ -70,9 +70,6 @@
     <Filter Include="SevenZip\Windows\Control">
       <UniqueIdentifier>{7129b3d3-8d4d-44d1-a771-d6314d17e0a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AboutDialog">
-      <UniqueIdentifier>{c8bf1ac8-1083-46a5-aa52-bcd9e29c6b69}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Toolbar\Add_24x24.bmp">
@@ -565,9 +562,6 @@
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\DynLimBuf.cpp">
       <Filter>SevenZip\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="AboutDialog.cpp">
-      <Filter>AboutDialog</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
@@ -1089,9 +1083,6 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\DynLimBuf.h">
       <Filter>SevenZip\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="AboutDialog.h">
-      <Filter>AboutDialog</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="NanaZip.UI.h" />

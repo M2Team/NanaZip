@@ -11,7 +11,15 @@
 #ifndef NANAZIP_UI
 #define NANAZIP_UI
 
-#include <Windows.h>
+#include "pch.h"
+
+#include <Mile.Helpers.CppBase.h>
+#include <Mile.Helpers.CppWinRT.h>
+
+namespace winrt::Mile
+{
+    using namespace ::Mile;
+}
 
 namespace NanaZip::UI
 {
@@ -30,6 +38,9 @@ namespace NanaZip::UI
         _In_ int Width,
         _In_ int Height,
         _In_ LPVOID Content,
+        _In_ HWND ParentWindowHandle);
+
+    winrt::handle ShowAboutDialog(
         _In_ HWND ParentWindowHandle);
 }
 

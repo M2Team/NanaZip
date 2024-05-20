@@ -10,7 +10,7 @@
 
 #include "../Common/CompressCall.h"
 
-#include "../../../../../AboutDialog.h"
+#include "../../../../../NanaZip.UI.h"
 #include "App.h"
 #include "LangUtils.h"
 #include "MyLoadMenu.h"
@@ -807,7 +807,7 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
 
     case IDM_ABOUT:
     {
-        NanaZip::FileManager::AboutDialog::Show(hWnd);
+        NanaZip::UI::ShowAboutDialog(hWnd);
         break;
     }
     default:

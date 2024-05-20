@@ -24,9 +24,16 @@ extern CCodecs* g_CodecsObj;
 
 namespace winrt::NanaZip::Modern::implementation
 {
-    AboutPage::AboutPage()
+    AboutPage::AboutPage(
+        _In_ HWND WindowHandle) :
+        m_WindowHandle(WindowHandle)
     {
-        InitializeComponent();
+
+    }
+
+    void AboutPage::InitializeComponent()
+    {
+        AboutPageT::InitializeComponent();
 
         std::wstring Title = std::wstring(
             ::LangString(IDD_ABOUT));
@@ -34,6 +41,9 @@ namespace winrt::NanaZip::Modern::implementation
         {
             Title = L"About NanaZip";
         }
+        ::SetWindowTextW(
+            this->m_WindowHandle,
+            Title.c_str());
 
         std::wstring Version = std::wstring(
             "NanaZip " MILE_PROJECT_VERSION_STRING);
