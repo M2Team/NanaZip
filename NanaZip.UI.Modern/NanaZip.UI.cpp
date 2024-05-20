@@ -185,8 +185,8 @@ winrt::handle NanaZip::UI::ShowAboutDialog(
                 WindowHandle);
         NanaZip::UI::ShowXamlDialog(
             WindowHandle,
-            600, // 480,
-            192 + (32 + 8) * 2, // 320,
+            480,
+            320,
             winrt::get_abi(Window),
             ParentWindowHandle);
 

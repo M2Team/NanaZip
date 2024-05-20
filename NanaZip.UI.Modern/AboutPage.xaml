@@ -6,50 +6,47 @@
   xmlns:local="using:NanaZip.Modern"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
-  <Grid Margin="8">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="auto" />
-      <ColumnDefinition Width="auto" />
-    </Grid.ColumnDefinitions>
-    <Image
-      Width="192"
-      Height="192"
-      VerticalAlignment="Top"
-      Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" />
-    <Grid Grid.Column="1" Margin="8,0,8,32">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="auto" />
-        <RowDefinition Height="12" />
-        <RowDefinition Height="auto" />
-        <RowDefinition Height="12" />
-        <RowDefinition Height="*" />
-        <RowDefinition Height="12" />
-        <RowDefinition Height="auto" />
-      </Grid.RowDefinitions>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0" Padding="24,0">
       <TextBlock
-        x:Name="Title"
-        Grid.Row="0"
-        FontSize="{StaticResource TitleTextBlockFontSize}"
-        FontWeight="Bold"
-        TextWrapping="Wrap" />
-      <TextBlock
-        x:Name="Version"
-        Grid.Row="2"
-        FontSize="{StaticResource SubtitleTextBlockFontSize}"
-        TextWrapping="Wrap" />
-      <ScrollViewer Grid.Row="4" MaxWidth="360">
-
-
-        <TextBlock
-          x:Name="Content"
-          FontSize="{StaticResource BodyTextBlockFontSize}"
-          TextWrapping="Wrap" />
-      </ScrollViewer>
-      <HyperlinkButton
-        Grid.Row="6"
-        Padding="0"
-        Content="GitHub"
-        NavigateUri="https://github.com/M2Team/NanaZip" />
+        x:Name="GridTitleTextBlock"
+        Margin="0,0,0,12"
+        FontSize="24"
+        FontWeight="SemiBold"
+        Text="[About NanaZip]" />
+      <TextBlock>
+        <Run x:Name="Version" />
+        <LineBreak />
+        <Run Text="© M2-Team and Contributors. All rights reserved." />
+        <LineBreak />
+        <LineBreak />
+        <Run x:Name="Content" />
+      </TextBlock>
+    </StackPanel>
+    <Grid Grid.Row="1" Padding="24">
+      <Grid.Background>
+        <SolidColorBrush Opacity="0.2" Color="{ThemeResource SystemChromeHighColor}" />
+      </Grid.Background>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="8" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Button
+        Grid.Column="0"
+        HorizontalAlignment="Stretch"
+        Click="GitHubButtonClick"
+        Content="GitHub" />
+      <Button
+        x:Name="CancelButton"
+        Grid.Column="2"
+        HorizontalAlignment="Stretch"
+        Click="CancelButtonClick"
+        Content="[Cancel]" />
     </Grid>
   </Grid>
 </Page>
