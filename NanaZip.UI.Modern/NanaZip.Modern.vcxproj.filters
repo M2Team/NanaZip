@@ -571,6 +571,7 @@
     </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="NanaZip.UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MyWindowsNew.h">
@@ -1093,6 +1094,7 @@
       <Filter>AboutDialog</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="NanaZip.UI.h" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZip.Modern.manifest" />
