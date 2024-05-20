@@ -90,6 +90,10 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MainWindowToolBarPage.cpp">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="NanaZip.UI.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\DynLimBuf.cpp" />
@@ -246,6 +250,10 @@
     <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MainWindowToolBarPage.h">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="NanaZip.UI.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h" />
@@ -450,6 +458,10 @@
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
+    <Midl Include="MainWindowToolBarPage.idl">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -466,6 +478,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindowToolBarPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
