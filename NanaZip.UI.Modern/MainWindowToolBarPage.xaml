@@ -6,10 +6,107 @@
   xmlns:local="using:NanaZip.Modern"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d">
-  <StackPanel
-    HorizontalAlignment="Center"
-    VerticalAlignment="Center"
-    Orientation="Horizontal">
-    <Button x:Name="Button">Click Me</Button>
-  </StackPanel>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+      <CommandBar
+        Grid.Column="0"
+        HorizontalAlignment="Left"
+        Background="Transparent"
+        DefaultLabelPosition="Collapsed"
+        IsDynamicOverflowEnabled="False"
+        IsOpen="False">
+        <AppBarButton
+          x:Name="AddButton"
+          Width="48"
+          AutomationProperties.Name="Add"
+          Icon="Add"
+          ToolTipService.ToolTip="Add" />
+        <AppBarButton
+          x:Name="ExtractButton"
+          Width="48"
+          AutomationProperties.Name="Extract"
+          Icon="MoveToFolder"
+          ToolTipService.ToolTip="Extract" />
+        <AppBarButton
+          x:Name="TestButton"
+          Width="48"
+          AutomationProperties.Name="Test"
+          Icon="Accept"
+          ToolTipService.ToolTip="Test" />
+        <AppBarSeparator />
+        <AppBarButton
+          x:Name="CopyButton"
+          Width="48"
+          AutomationProperties.Name="Copy"
+          Icon="Copy"
+          ToolTipService.ToolTip="Copy" />
+        <AppBarButton
+          x:Name="MoveButton"
+          Width="48"
+          AutomationProperties.Name="Move"
+          ToolTipService.ToolTip="Move">
+          <AppBarButton.Content>
+            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8C6;" />
+          </AppBarButton.Content>
+        </AppBarButton>
+        <AppBarButton
+          x:Name="DeleteButton"
+          Width="48"
+          AutomationProperties.Name="Delete"
+          Icon="Delete"
+          ToolTipService.ToolTip="Delete" />
+        <AppBarButton
+          x:Name="InfoButton"
+          Width="48"
+          AutomationProperties.Name="Info"
+          ToolTipService.ToolTip="Info">
+          <AppBarButton.Content>
+            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE946;" />
+          </AppBarButton.Content>
+        </AppBarButton>
+        <AppBarSeparator />
+        <AppBarButton
+          x:Name="OptionsButton"
+          Width="48"
+          AutomationProperties.Name="Options"
+          Icon="Setting"
+          ToolTipService.ToolTip="Options" />
+        <AppBarButton
+          x:Name="BenchmarkButton"
+          Width="48"
+          AutomationProperties.Name="Benchmark"
+          Icon="Play"
+          ToolTipService.ToolTip="Benchmark" />
+        <AppBarButton
+          x:Name="AboutButton"
+          Width="48"
+          AutomationProperties.Name="About"
+          Icon="Help"
+          ToolTipService.ToolTip="About" />
+        <AppBarSeparator />
+        <AppBarButton
+          x:Name="MoreButton"
+          Width="48"
+          AutomationProperties.Name="More"
+          Icon="More"
+          ToolTipService.ToolTip="More" />
+      </CommandBar>
+      <Button
+        x:Name="SponsorButton"
+        Grid.Column="2"
+        Margin="0,0,6,0"
+        VerticalAlignment="Center"
+        BorderThickness="0"
+        Content="[Sponsor NanaZip]" />
+    </Grid>
+  </Grid>
 </Page>
