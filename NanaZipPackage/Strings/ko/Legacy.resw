@@ -253,16 +253,16 @@
     <value>북마크</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>옵션(&amp;P)...</value>
+    <value>옵션...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>벤치마크(&amp;B)</value>
+    <value>벤치마크</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>도움말 항목(&amp;C)...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>NanaZip 정보(&amp;A)...</value>
+    <value>NanaZip 정보...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>경로</value>

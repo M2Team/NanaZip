@@ -96,11 +96,6 @@
 // #define IDM_VIEW_SHOW_DELETED    739
 // #define IDM_VIEW_SHOW_STREAMS    740
 
-#define IDM_VIEW_ARCHIVE_TOOLBAR            750
-#define IDM_VIEW_STANDARD_TOOLBAR           751
-#define IDM_VIEW_TOOLBARS_LARGE_BUTTONS     752
-#define IDM_VIEW_TOOLBARS_SHOW_BUTTONS_TEXT 753
-
 #define IDM_VIEW_TIME            761
 
 #define IDS_BOOKMARK             801

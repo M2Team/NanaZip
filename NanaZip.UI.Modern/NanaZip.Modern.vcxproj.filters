@@ -4,9 +4,6 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{768d4162-5afd-46ef-9aa1-8a652a1018c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Toolbar">
-      <UniqueIdentifier>{8e11afaf-a6e1-4ec6-92f1-db273897ef74}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SevenZip">
       <UniqueIdentifier>{736c445c-e291-48fb-9e1e-417ac64d388d}</UniqueIdentifier>
     </Filter>
@@ -70,50 +67,17 @@
     <Filter Include="SevenZip\Windows\Control">
       <UniqueIdentifier>{7129b3d3-8d4d-44d1-a771-d6314d17e0a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{92aa704d-4b05-48dd-ae91-5d2e02a11c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en">
+      <UniqueIdentifier>{a5210684-7934-4d34-94b0-f9ef3ae5c2f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\zh-Hans">
+      <UniqueIdentifier>{0237aed3-2eca-4267-a2e7-4c9e8e2f37f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Toolbar\Add_24x24.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Add_32x32.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Copy_24x24.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Copy_32x32.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Delete_24x24.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Delete_32x32.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Extract_24x24.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Extract_32x32.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Info_24x24.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Info_32x32.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Move_24x24.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Move_32x32.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Test_24x24.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
-    <Image Include="Assets\Toolbar\Test_32x32.bmp">
-      <Filter>Assets\Toolbar</Filter>
-    </Image>
     <Image Include="Assets\ParentFolder.bmp">
       <Filter>Assets</Filter>
     </Image>
@@ -1101,5 +1065,13 @@
   <ItemGroup>
     <Page Include="AboutPage.xaml" />
     <Page Include="MainWindowToolBarPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en\MainWindowToolBarPage.resw">
+      <Filter>Strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw">
+      <Filter>Strings\zh-Hans</Filter>
+    </PRIResource>
   </ItemGroup>
 </Project>

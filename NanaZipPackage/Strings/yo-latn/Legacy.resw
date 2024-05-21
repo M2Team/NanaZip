@@ -253,10 +253,10 @@
     <value>Àmì ìwé </value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Ìyàn...</value>
+    <value>Ìyàn...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Ala</value>
+    <value>Ala</value>
   </data>
   <data name="Resource902" xml:space="preserve">
     <value>960na</value>
@@ -264,8 +264,8 @@
   <data name="Resource903" xml:space="preserve">
     <value>&amp;Àkóónú...</value>
   </data>
-  <data name="Resource904" xml:space="preserve">
-    <value>&amp;Nípa NanaZip...</value>
+  <data name="Resource961" xml:space="preserve">
+    <value>Nípa NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Ọnà</value>

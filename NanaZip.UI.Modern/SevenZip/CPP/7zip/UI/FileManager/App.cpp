@@ -1,5 +1,7 @@
 ﻿// App.cpp
 
+#include "../../../../../pch.h"
+
 #include "StdAfx.h"
 
 #include "resource.h"
@@ -28,6 +30,9 @@
 #include "ViewSettings.h"
 
 #include "PropertyNameRes.h"
+
+#include <Mile.Xaml.h>
+#include "../../../../../MainWindowToolBarPage.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -141,161 +146,6 @@ HRESULT CApp::CreateOnePanel(int panelIndex, const UString &mainPath, const UStr
       openRes);
 }
 
-
-static void CreateToolbar(HWND parent,
-    NControl::CImageList &imageList,
-    NControl::CToolBar &toolBar,
-    bool largeButtons)
-{
-  toolBar.Attach(::CreateWindowEx(0, TOOLBARCLASSNAME, NULL, 0
-      | WS_CHILD
-      | WS_VISIBLE
-      | TBSTYLE_LIST
-      | TBSTYLE_TOOLTIPS
-      | TBSTYLE_WRAPABLE
-      // | TBSTYLE_AUTOSIZE
-      // | CCS_NORESIZE
-      #ifdef UNDER_CE
-      | CCS_NODIVIDER
-      | CCS_NOPARENTALIGN
-      #endif
-      ,0,0,0,0, parent, NULL, g_hInstance, NULL));
-
-  // TB_BUTTONSTRUCTSIZE message, which is required for
-  // backward compatibility.
-  toolBar.ButtonStructSize();
-
-  int ControlDpi = ::GetDpiForWindow(toolBar);
-  int LargeSize = ::MulDiv(32, ControlDpi, USER_DEFAULT_SCREEN_DPI);
-  int NormalSize = ::MulDiv(24, ControlDpi, USER_DEFAULT_SCREEN_DPI);
-
-  imageList.Create(
-      (largeButtons ? LargeSize : NormalSize),
-      (largeButtons ? LargeSize : NormalSize),
-      ILC_MASK | ILC_COLOR32, 0, 0);
-  toolBar.SetImageList(0, imageList);
-}
-
-
-struct CButtonInfo
-{
-  int CommandID;
-  UINT BitmapResID;
-  UINT Bitmap2ResID;
-  UINT StringResID;
-
-  UString GetText() const { return LangString(StringResID); }
-};
-
-static const CButtonInfo g_StandardButtons[] =
-{
-  { IDM_COPY_TO,    IDB_COPY,   IDB_COPY2,   IDS_BUTTON_COPY },
-  { IDM_MOVE_TO,    IDB_MOVE,   IDB_MOVE2,   IDS_BUTTON_MOVE },
-  { IDM_DELETE,     IDB_DELETE, IDB_DELETE2, IDS_BUTTON_DELETE } ,
-  { IDM_PROPERTIES, IDB_INFO,   IDB_INFO2,   IDS_BUTTON_INFO }
-};
-
-static const CButtonInfo g_ArchiveButtons[] =
-{
-  { kMenuCmdID_Toolbar_Add,     IDB_ADD,     IDB_ADD2,     IDS_ADD },
-  { kMenuCmdID_Toolbar_Extract, IDB_EXTRACT, IDB_EXTRACT2, IDS_EXTRACT },
-  { kMenuCmdID_Toolbar_Test,    IDB_TEST,    IDB_TEST2,    IDS_TEST }
-};
-
-static bool SetButtonText(int commandID, const CButtonInfo *buttons, unsigned numButtons, UString &s)
-{
-  for (unsigned i = 0; i < numButtons; i++)
-  {
-    const CButtonInfo &b = buttons[i];
-    if (b.CommandID == commandID)
-    {
-      s = b.GetText();
-      return true;
-    }
-  }
-  return false;
-}
-
-static void SetButtonText(int commandID, UString &s)
-{
-  if (SetButtonText(commandID, g_StandardButtons, ARRAY_SIZE(g_StandardButtons), s))
-    return;
-  SetButtonText(commandID, g_ArchiveButtons, ARRAY_SIZE(g_ArchiveButtons), s);
-}
-
-static void AddButton(
-    NControl::CImageList &imageList,
-    NControl::CToolBar &toolBar,
-    const CButtonInfo &butInfo, bool showText, bool large)
-{
-  TBBUTTON but;
-  but.iBitmap = 0;
-  but.idCommand = butInfo.CommandID;
-  but.fsState = TBSTATE_ENABLED;
-  but.fsStyle = TBSTYLE_BUTTON;
-  but.dwData = 0;
-
-  UString s = butInfo.GetText();
-  but.iString = 0;
-  if (showText)
-    but.iString = (INT_PTR)(LPCWSTR)s;
-
-  but.iBitmap = imageList.GetImageCount();
-
-  int ControlDpi = ::GetDpiForWindow(toolBar);
-  int LargeSize = ::MulDiv(32, ControlDpi, USER_DEFAULT_SCREEN_DPI);
-  int NormalSize = ::MulDiv(24, ControlDpi, USER_DEFAULT_SCREEN_DPI);
-
-  HBITMAP b = static_cast<HBITMAP>(::LoadImageW(
-      g_hInstance,
-      large
-      ? MAKEINTRESOURCEW(butInfo.BitmapResID)
-      : MAKEINTRESOURCEW(butInfo.Bitmap2ResID),
-      IMAGE_BITMAP,
-      (large ? LargeSize : NormalSize),
-      (large ? LargeSize : NormalSize),
-      0));
-  if (b != 0)
-  {
-    imageList.AddMasked(b, RGB(255, 0, 255));
-    ::DeleteObject(b);
-  }
-  #ifdef _UNICODE
-  toolBar.AddButton(1, &but);
-  #else
-  toolBar.AddButtonW(1, &but);
-  #endif
-}
-
-void CApp::ReloadToolbars()
-{
-  _buttonsImageList.Destroy();
-  _toolBar.Destroy();
-
-
-  if (ShowArchiveToolbar || ShowStandardToolbar)
-  {
-    CreateToolbar(_window, _buttonsImageList, _toolBar, LargeButtons);
-    unsigned i;
-    if (ShowArchiveToolbar)
-      for (i = 0; i < ARRAY_SIZE(g_ArchiveButtons); i++)
-        AddButton(_buttonsImageList, _toolBar, g_ArchiveButtons[i], ShowButtonsLables, LargeButtons);
-    if (ShowStandardToolbar)
-      for (i = 0; i < ARRAY_SIZE(g_StandardButtons); i++)
-        AddButton(_buttonsImageList, _toolBar, g_StandardButtons[i], ShowButtonsLables, LargeButtons);
-
-    _toolBar.AutoSize();
-  }
-}
-
-void CApp::SaveToolbarChanges()
-{
-  SaveToolbar();
-  ReloadToolbars();
-  MoveSubWindows();
-}
-
-
 HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcFormat, int xSizes[2], bool needOpenArc, COpenResult &openRes)
 {
   _window.Attach(hwnd);
@@ -310,8 +160,63 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
   _commandBar.AutoSize();
   #endif
 
-  ReadToolbar();
-  ReloadToolbars();
+  using MainWindowToolBarPageImplementation =
+      winrt::NanaZip::Modern::implementation::MainWindowToolBarPage;
+  winrt::NanaZip::Modern::MainWindowToolBarPage ToolBarPage =
+      winrt::make<MainWindowToolBarPageImplementation>(hwnd);
+
+  UINT DpiValue = ::GetDpiForWindow(hwnd);
+  int ToolBarControlHeight = ::MulDiv(48, DpiValue, USER_DEFAULT_SCREEN_DPI);
+
+  RECT ClientRect = { 0 };
+  ::GetClientRect(hwnd, &ClientRect);
+
+  this->m_ToolBar = ::CreateWindowExW(
+      WS_EX_NOREDIRECTIONBITMAP,
+      L"Mile.Xaml.ContentWindow",
+      nullptr,
+      WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS,
+      0,
+      0,
+      ClientRect.right - ClientRect.left,
+      ToolBarControlHeight,
+      hwnd,
+      nullptr,
+      nullptr,
+      winrt::get_abi(ToolBarPage));
+
+  ::SetWindowSubclass(
+      this->m_ToolBar,
+      [](
+          _In_ HWND hWnd,
+          _In_ UINT uMsg,
+          _In_ WPARAM wParam,
+          _In_ LPARAM lParam,
+          _In_ UINT_PTR uIdSubclass,
+          _In_ DWORD_PTR dwRefData) -> LRESULT
+  {
+      UNREFERENCED_PARAMETER(uIdSubclass);
+      UNREFERENCED_PARAMETER(dwRefData);
+
+      switch (uMsg)
+      {
+      case WM_ERASEBKGND:
+      {
+          ::RemovePropW(hWnd, L"BackgroundFallbackColor");
+          break;
+      }
+      default:
+          break;
+      }
+
+      return ::DefSubclassProc(
+          hWnd,
+          uMsg,
+          wParam,
+          lParam);
+  },
+      0,
+      0);
 
   unsigned i;
   for (i = 0; i < kNumPanelsMax; i++)
@@ -938,34 +843,9 @@ int CApp::GetFocusedPanelIndex() const
 }
 */
 
-static UString g_ToolTipBuffer;
-static CSysString g_ToolTipBufferSys;
-
-void CApp::OnNotify(int /* ctrlID */, LPNMHDR pnmh)
+void CApp::OnNotify(int /* ctrlID */, LPNMHDR /*pnmh*/)
 {
-  {
-    if (pnmh->code == TTN_GETDISPINFO)
-    {
-      LPNMTTDISPINFO info = (LPNMTTDISPINFO)pnmh;
-      info->hinst = 0;
-      g_ToolTipBuffer.Empty();
-      SetButtonText((int)info->hdr.idFrom, g_ToolTipBuffer);
-      g_ToolTipBufferSys = GetSystemString(g_ToolTipBuffer);
-      info->lpszText = g_ToolTipBufferSys.Ptr_non_const();
-      return;
-    }
-    #ifndef _UNICODE
-    if (pnmh->code == TTN_GETDISPINFOW)
-    {
-      LPNMTTDISPINFOW info = (LPNMTTDISPINFOW)pnmh;
-      info->hinst = 0;
-      g_ToolTipBuffer.Empty();
-      SetButtonText((int)info->hdr.idFrom, g_ToolTipBuffer);
-      info->lpszText = g_ToolTipBuffer.Ptr_non_const();
-      return;
-    }
-    #endif
-  }
+
 }
 
 void CApp::RefreshTitle(bool always)

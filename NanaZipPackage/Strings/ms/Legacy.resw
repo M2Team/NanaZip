@@ -235,16 +235,16 @@
     <value>Penanda Buku</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Opsyen...</value>
+    <value>Opsyen...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Tanda Aras</value>
+    <value>Tanda Aras</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Kandungan...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Perihal NanaZip...</value>
+    <value>Perihal NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Bahagian</value>

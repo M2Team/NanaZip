@@ -46,48 +46,6 @@
     <Image Include="Assets\ParentFolder.bmp">
       <DeploymentContent>false</DeploymentContent>
     </Image>
-    <Image Include="Assets\Toolbar\Add_24x24.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Add_32x32.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Copy_24x24.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Copy_32x32.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Delete_24x24.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Delete_32x32.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Extract_24x24.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Extract_32x32.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Info_24x24.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Info_32x32.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Move_24x24.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Move_32x32.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Test_24x24.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
-    <Image Include="Assets\Toolbar\Test_32x32.bmp">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainWindowToolBarPage.cpp">
@@ -494,6 +452,10 @@
     <ProjectReference Include="NanaZip.Windows.vcxproj">
       <Project>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

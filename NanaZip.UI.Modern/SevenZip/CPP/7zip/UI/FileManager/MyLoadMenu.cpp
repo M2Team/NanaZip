@@ -10,7 +10,6 @@
 
 #include "../Common/CompressCall.h"
 
-#include "../../../../../NanaZip.UI.h"
 #include "App.h"
 #include "LangUtils.h"
 #include "MyLoadMenu.h"
@@ -252,53 +251,28 @@ static void CopyMenu(HMENU srcMenuSpec, HMENU destMenuSpec)
   }
 }
 
+HMENU g_MoreMenu = nullptr;
+
 void MyLoadMenu()
 {
-  HMENU baseMenu;
-
-  #ifdef UNDER_CE
-
-  HMENU oldMenu = g_App._commandBar.GetMenu(0);
-  if (oldMenu)
-    ::DestroyMenu(oldMenu);
-  /* BOOL b = */ g_App._commandBar.InsertMenubar(g_hInstance, IDM_MENU, 0);
-  baseMenu = g_App._commandBar.GetMenu(0);
-  // if (startInit)
-  // SetIdsForSubMenes(baseMenu, 0, 0);
+  HMENU Menu = ::LoadMenuW(g_hInstance, MAKEINTRESOURCE(IDM_MENU));
   if (!g_LangID.IsEmpty())
-    MyChangeMenu(baseMenu, 0, 0);
-  g_App._commandBar.DrawMenuBar(0);
+    MyChangeMenu(Menu, 0, 0);
 
-  #else
+  g_MoreMenu = ::CreatePopupMenu();
+  ::CopyMenu(Menu, g_MoreMenu);
 
-  HWND hWnd = g_HWND;
-  HMENU oldMenu = ::GetMenu(hWnd);
-  ::SetMenu(hWnd, ::LoadMenu(g_hInstance, MAKEINTRESOURCE(IDM_MENU)));
-  ::DestroyMenu(oldMenu);
-  baseMenu = ::GetMenu(hWnd);
-  // if (startInit)
-  // SetIdsForSubMenes(baseMenu, 0, 0);
-  if (!g_LangID.IsEmpty())
-    MyChangeMenu(baseMenu, 0, 0);
-  ::DrawMenuBar(hWnd);
-
-  #endif
+  ::DestroyMenu(Menu);
 
   if ((HMENU)g_FileMenu != 0)
     g_FileMenu.Destroy();
   g_FileMenu.CreatePopup();
-  CopyMenu(::GetSubMenu(baseMenu, 0), g_FileMenu);
+  CopyMenu(::GetSubMenu(g_MoreMenu, 0), g_FileMenu);
 }
 
 void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
 {
-  HMENU mainMenu =
-    #ifdef UNDER_CE
-    g_App._commandBar.GetMenu(0);
-    #else
-    ::GetMenu(g_HWND)
-    #endif
-    ;
+  HMENU mainMenu = g_MoreMenu;
 
   if (::GetSubMenu(mainMenu, position) != hMenu)
     return;
@@ -333,10 +307,6 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
 
     menu.CheckItemByID(IDM_VIEW_TWO_PANELS, g_App.NumPanels == 2);
     menu.CheckItemByID(IDM_VIEW_FLAT_VIEW, g_App.GetFlatMode());
-    menu.CheckItemByID(IDM_VIEW_ARCHIVE_TOOLBAR, g_App.ShowArchiveToolbar);
-    menu.CheckItemByID(IDM_VIEW_STANDARD_TOOLBAR, g_App.ShowStandardToolbar);
-    menu.CheckItemByID(IDM_VIEW_TOOLBARS_LARGE_BUTTONS, g_App.LargeButtons);
-    menu.CheckItemByID(IDM_VIEW_TOOLBARS_SHOW_BUTTONS_TEXT, g_App.ShowButtonsLables);
     menu.CheckItemByID(IDM_VIEW_AUTO_REFRESH, g_App.Get_AutoRefresh_Mode());
     // menu.CheckItemByID(IDM_VIEW_SHOW_STREAMS, g_App.Get_ShowNtfsStrems_Mode());
     // menu.CheckItemByID(IDM_VIEW_SHOW_DELETED, g_App.ShowDeletedFiles);
@@ -454,7 +424,7 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
 It doesn't help
 void OnMenuUnActivating(HWND hWnd, HMENU hMenu, int id)
 {
-  if (::GetSubMenu(::GetMenu(g_HWND), 0) != hMenu)
+  if (::GetSubMenu(g_MoreMenu, 0) != hMenu)
     return;
 }
 */
@@ -762,7 +732,7 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
         g_App.SetListViewMode(index);
         /*
         CMenu menu;
-        menu.Attach(::GetSubMenu(::GetMenu(hWnd), kMenuIndex_View));
+        menu.Attach(::GetSubMenu(g_MoreMenu, kMenuIndex_View));
         menu.CheckRadioItem(IDM_VIEW_LARGE_ICONS, IDM_VIEW_DETAILS,
             id, MF_BYCOMMAND);
         */
@@ -793,11 +763,6 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     */
 
     case IDM_VIEW_TWO_PANELS:       g_App.SwitchOnOffOnePanel(); break;
-    case IDM_VIEW_STANDARD_TOOLBAR: g_App.SwitchStandardToolbar(); break;
-    case IDM_VIEW_ARCHIVE_TOOLBAR:  g_App.SwitchArchiveToolbar(); break;
-
-    case IDM_VIEW_TOOLBARS_SHOW_BUTTONS_TEXT: g_App.SwitchButtonsLables(); break;
-    case IDM_VIEW_TOOLBARS_LARGE_BUTTONS:     g_App.SwitchLargeButtons(); break;
 
     // Tools
     case IDM_OPTIONS: OptionsDialog(hWnd, g_hInstance); break;
@@ -805,11 +770,6 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     case IDM_BENCHMARK: MyBenchmark(false); break;
     case IDM_BENCHMARK2: MyBenchmark(true); break;
 
-    case IDM_ABOUT:
-    {
-        NanaZip::UI::ShowAboutDialog(hWnd);
-        break;
-    }
     default:
     {
       if (id >= kOpenBookmarkMenuID && id <= kOpenBookmarkMenuID + 9)

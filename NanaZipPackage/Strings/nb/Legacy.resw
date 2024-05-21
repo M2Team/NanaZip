@@ -241,16 +241,16 @@
     <value>Bokmerke</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Innstillinger …</value>
+    <value>Innstillinger …</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Yteprøve …</value>
+    <value>Yteprøve …</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Innhold</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Om NanaZip</value>
+    <value>Om NanaZip</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Plassering</value>

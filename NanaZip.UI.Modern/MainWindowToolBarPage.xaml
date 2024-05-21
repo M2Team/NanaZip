@@ -5,6 +5,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="using:NanaZip.Modern"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Loaded="PageLoaded"
   mc:Ignorable="d">
   <Grid>
     <Grid.RowDefinitions>
@@ -27,33 +28,38 @@
         <AppBarButton
           x:Name="AddButton"
           Width="48"
-          AutomationProperties.Name="Add"
+          AutomationProperties.Name="[Add]"
+          Click="AddButtonClick"
           Icon="Add"
-          ToolTipService.ToolTip="Add" />
+          ToolTipService.ToolTip="[Add]" />
         <AppBarButton
           x:Name="ExtractButton"
           Width="48"
-          AutomationProperties.Name="Extract"
+          AutomationProperties.Name="[Extract]"
+          Click="ExtractButtonClick"
           Icon="MoveToFolder"
-          ToolTipService.ToolTip="Extract" />
+          ToolTipService.ToolTip="[Extract]" />
         <AppBarButton
           x:Name="TestButton"
           Width="48"
-          AutomationProperties.Name="Test"
+          AutomationProperties.Name="[Test]"
+          Click="TestButtonClick"
           Icon="Accept"
-          ToolTipService.ToolTip="Test" />
+          ToolTipService.ToolTip="[Test]" />
         <AppBarSeparator />
         <AppBarButton
           x:Name="CopyButton"
           Width="48"
-          AutomationProperties.Name="Copy"
+          AutomationProperties.Name="[Copy]"
+          Click="CopyButtonClick"
           Icon="Copy"
-          ToolTipService.ToolTip="Copy" />
+          ToolTipService.ToolTip="[Copy]" />
         <AppBarButton
           x:Name="MoveButton"
           Width="48"
-          AutomationProperties.Name="Move"
-          ToolTipService.ToolTip="Move">
+          AutomationProperties.Name="[Move]"
+          Click="MoveButtonClick"
+          ToolTipService.ToolTip="[Move]">
           <AppBarButton.Content>
             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8C6;" />
           </AppBarButton.Content>
@@ -61,14 +67,16 @@
         <AppBarButton
           x:Name="DeleteButton"
           Width="48"
-          AutomationProperties.Name="Delete"
+          AutomationProperties.Name="[Delete]"
+          Click="DeleteButtonClick"
           Icon="Delete"
-          ToolTipService.ToolTip="Delete" />
+          ToolTipService.ToolTip="[Delete]" />
         <AppBarButton
           x:Name="InfoButton"
           Width="48"
-          AutomationProperties.Name="Info"
-          ToolTipService.ToolTip="Info">
+          AutomationProperties.Name="[Info]"
+          Click="InfoButtonClick"
+          ToolTipService.ToolTip="[Info]">
           <AppBarButton.Content>
             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE946;" />
           </AppBarButton.Content>
@@ -77,28 +85,32 @@
         <AppBarButton
           x:Name="OptionsButton"
           Width="48"
-          AutomationProperties.Name="Options"
+          AutomationProperties.Name="[Options]"
+          Click="OptionsButtonClick"
           Icon="Setting"
-          ToolTipService.ToolTip="Options" />
+          ToolTipService.ToolTip="[Options]" />
         <AppBarButton
           x:Name="BenchmarkButton"
           Width="48"
-          AutomationProperties.Name="Benchmark"
+          AutomationProperties.Name="[Benchmark]"
+          Click="BenchmarkButtonClick"
           Icon="Play"
-          ToolTipService.ToolTip="Benchmark" />
+          ToolTipService.ToolTip="[Benchmark]" />
         <AppBarButton
           x:Name="AboutButton"
           Width="48"
-          AutomationProperties.Name="About"
+          AutomationProperties.Name="[About]"
+          Click="AboutButtonClick"
           Icon="Help"
-          ToolTipService.ToolTip="About" />
+          ToolTipService.ToolTip="[About]" />
         <AppBarSeparator />
         <AppBarButton
-          x:Name="MoreButton"
+          x:Uid="/MainWindowToolBarPage/MoreButton"
           Width="48"
-          AutomationProperties.Name="More"
+          AutomationProperties.Name="[More]"
+          Click="MoreButtonClick"
           Icon="More"
-          ToolTipService.ToolTip="More" />
+          ToolTipService.ToolTip="[More]" />
       </CommandBar>
       <Button
         x:Name="SponsorButton"
@@ -106,6 +118,7 @@
         Margin="0,0,6,0"
         VerticalAlignment="Center"
         BorderThickness="0"
+        Click="SponsorButtonClick"
         Content="[Sponsor NanaZip]" />
     </Grid>
   </Grid>

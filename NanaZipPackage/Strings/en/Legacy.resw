@@ -253,16 +253,16 @@
     <value>Bookmark</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Options...</value>
+    <value>Options...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Benchmark</value>
+    <value>Benchmark</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Contents...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;About NanaZip...</value>
+    <value>About NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Path</value>

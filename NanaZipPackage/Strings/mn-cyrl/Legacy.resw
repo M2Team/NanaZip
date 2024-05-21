@@ -235,16 +235,16 @@
     <value>Хавчуурга</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Сонголтууд...</value>
+    <value>Сонголтууд...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Бэнчмарк</value>
+    <value>Бэнчмарк</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Агуулгууд...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;7-Зип-ийн тухай...</value>
+    <value>NanaZip тухай...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Зам</value>

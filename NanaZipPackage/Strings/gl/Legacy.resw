@@ -253,16 +253,16 @@
     <value>Marcador</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Opcións...</value>
+    <value>Opcións...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Rendemento</value>
+    <value>Rendemento</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Contidos...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Acerca de NanaZip...</value>
+    <value>Acerca de NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Camiño</value>

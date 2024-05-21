@@ -44,4 +44,9 @@ namespace NanaZip::UI
         _In_ HWND ParentWindowHandle);
 }
 
+namespace winrt::NanaZip
+{
+    using namespace ::NanaZip;
+}
+
 #endif // !NANAZIP_UI

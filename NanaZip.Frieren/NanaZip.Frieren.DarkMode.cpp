@@ -331,6 +331,21 @@ namespace
         }
     }
 
+    static bool IsFileManagerWindow(
+        _In_ HWND WindowHandle)
+    {
+        wchar_t ClassName[256] = { 0 };
+        if (0 != ::GetClassNameW(
+            WindowHandle,
+            ClassName,
+            256))
+        {
+            return (0 == std::wcscmp(ClassName, L"FM"));
+        }
+
+        return false;
+    }
+
     LRESULT CALLBACK WindowSubclassCallback(
         _In_ HWND hWnd,
         _In_ UINT uMsg,
@@ -397,7 +412,17 @@ namespace
 
                 bool ShouldExtendFrame =
                     (g_ShouldAppsUseDarkMode && ::IsStandardDynamicRangeMode());
-                MARGINS Margins = { (ShouldExtendFrame ? -1 : 0) };
+                MARGINS Margins = { 0 };
+                if (ShouldExtendFrame)
+                {
+                    Margins = { -1 };
+                }
+                else if (::IsFileManagerWindow(hWnd))
+                {
+                    UINT DpiValue = ::GetDpiForWindow(hWnd);
+                    Margins.cyTopHeight =
+                        ::MulDiv(48, DpiValue, USER_DEFAULT_SCREEN_DPI);
+                }
                 ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
 
                 ::EnumChildWindows(
@@ -437,6 +462,15 @@ namespace
             if (ShouldExtendFrame)
             {
                 MARGINS Margins = { -1 };
+                ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
+            }
+            else if (::IsFileManagerWindow(hWnd))
+            {
+                UINT DpiValue = ::GetDpiForWindow(hWnd);
+
+                MARGINS Margins = { 0 };
+                Margins.cyTopHeight =
+                    ::MulDiv(48, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
             }
 
@@ -481,6 +515,22 @@ namespace
                 }
 
                 return TRUE;
+            }
+
+            break;
+        }
+        case WM_DPICHANGED:
+        {
+            bool ShouldExtendFrame =
+                (g_ShouldAppsUseDarkMode && ::IsStandardDynamicRangeMode());
+            if (!ShouldExtendFrame && ::IsFileManagerWindow(hWnd))
+            {
+                UINT DpiValue = ::GetDpiForWindow(hWnd);
+
+                MARGINS Margins = { 0 };
+                Margins.cyTopHeight =
+                    ::MulDiv(48, DpiValue, USER_DEFAULT_SCREEN_DPI);
+                ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
             }
 
             break;

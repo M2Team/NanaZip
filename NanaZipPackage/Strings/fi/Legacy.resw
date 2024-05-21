@@ -253,16 +253,16 @@
     <value>Kirjanmerkki</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Asetukset...</value>
+    <value>Asetukset...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Nopeustesti</value>
+    <value>Nopeustesti</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Sisältö...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Tietoja ohjelmasta...</value>
+    <value>Tietoja ohjelmasta...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Polku</value>

@@ -253,16 +253,16 @@
     <value>Закладка</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Налаштування...</value>
+    <value>Налаштування...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Тестування продуктивності</value>
+    <value>Тестування продуктивності</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Зміст...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Про NanaZip...</value>
+    <value>Про NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Шлях</value>

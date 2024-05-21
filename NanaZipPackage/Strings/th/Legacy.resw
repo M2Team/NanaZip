@@ -244,16 +244,16 @@
     <value>คั่นหน้าที่</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;ตัวเลือก...</value>
+    <value>ตัวเลือก...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;เกณฑ์เปรียบเทียบสมรรถนะ</value>
+    <value>เกณฑ์เปรียบเทียบสมรรถนะ</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;เนื้อหาและดัชนี...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;เกี่ยวกับ NanaZip...</value>
+    <value>เกี่ยวกับ NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>ที่ตั้ง</value>

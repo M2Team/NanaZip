@@ -253,16 +253,16 @@
     <value>Yer İmi</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Ayarlar...</value>
+    <value>Ayarlar...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Başarım</value>
+    <value>Başarım</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Kullanım Kılavuzu...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>NanaZip &amp;Hakkında...</value>
+    <value>NanaZip Hakkında...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Yol</value>

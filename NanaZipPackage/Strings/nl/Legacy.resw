@@ -253,16 +253,16 @@
     <value>Bladwijzer toevoegen</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Opties...</value>
+    <value>Opties...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Benchmark</value>
+    <value>Benchmark</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Inhoud...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Over NanaZip...</value>
+    <value>Over NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Pad</value>

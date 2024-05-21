@@ -253,16 +253,16 @@
     <value>ブックマーク</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>オプション(&amp;O)...</value>
+    <value>オプション...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>ベンチマーク(&amp;B)</value>
+    <value>ベンチマーク</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>ヘルプの表示(&amp;C)...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>バージョン情報(&amp;A)...</value>
+    <value>バージョン情報...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>パス</value>

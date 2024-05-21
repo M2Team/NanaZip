@@ -244,16 +244,16 @@
     <value>Järjehoidja</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Häälestus...</value>
+    <value>Häälestus...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Jõudlustest</value>
+    <value>Jõudlustest</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Sisukord...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Teave NanaZipi kohta...</value>
+    <value>Teave NanaZipi kohta...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Tee</value>

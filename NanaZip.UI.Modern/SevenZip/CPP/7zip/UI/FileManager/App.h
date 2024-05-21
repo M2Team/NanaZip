@@ -131,7 +131,7 @@ public:
   #ifdef UNDER_CE
   NWindows::NControl::CCommandBar _commandBar;
   #endif
-  NWindows::NControl::CToolBar _toolBar;
+  HWND m_ToolBar = nullptr;
 
   CDropTarget *_dropTargetSpec;
   CMyComPtr<IDropTarget> _dropTarget;
@@ -309,57 +309,6 @@ public:
 
   void OpenBookmark(int index) { GetFocusedPanel().OpenBookmark(index); }
   void SetBookmark(int index) { GetFocusedPanel().SetBookmark(index); }
-
-  void ReloadToolbars();
-  void ReadToolbar()
-  {
-    UInt32 mask = ReadToolbarsMask();
-    if (mask & ((UInt32)1 << 31))
-    {
-      ShowButtonsLables = !g_IsSmallScreen;
-      LargeButtons = false;
-      ShowStandardToolbar = ShowArchiveToolbar = true;
-    }
-    else
-    {
-      ShowButtonsLables = ((mask & 1) != 0);
-      LargeButtons = ((mask & 2) != 0);
-      ShowStandardToolbar = ((mask & 4) != 0);
-      ShowArchiveToolbar  = ((mask & 8) != 0);
-    }
-  }
-  void SaveToolbar()
-  {
-    UInt32 mask = 0;
-    if (ShowButtonsLables) mask |= 1;
-    if (LargeButtons) mask |= 2;
-    if (ShowStandardToolbar) mask |= 4;
-    if (ShowArchiveToolbar) mask |= 8;
-    SaveToolbarsMask(mask);
-  }
-  
-  void SaveToolbarChanges();
-
-  void SwitchStandardToolbar()
-  {
-    ShowStandardToolbar = !ShowStandardToolbar;
-    SaveToolbarChanges();
-  }
-  void SwitchArchiveToolbar()
-  {
-    ShowArchiveToolbar = !ShowArchiveToolbar;
-    SaveToolbarChanges();
-  }
-  void SwitchButtonsLables()
-  {
-    ShowButtonsLables = !ShowButtonsLables;
-    SaveToolbarChanges();
-  }
-  void SwitchLargeButtons()
-  {
-    LargeButtons = !LargeButtons;
-    SaveToolbarChanges();
-  }
 
   void AddToArchive() { GetFocusedPanel().AddToArchive(); }
   void ExtractArchives() { GetFocusedPanel().ExtractArchives(); }

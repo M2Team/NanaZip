@@ -253,16 +253,16 @@
     <value>书签</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>选项(&amp;O)</value>
+    <value>选项</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>基准测试(&amp;B)</value>
+    <value>基准测试</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>查看帮助(&amp;C)</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>关于 NanaZip (&amp;A)</value>
+    <value>关于 NanaZip</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>路径</value>

@@ -231,13 +231,7 @@ static BOOL InitInstance(int nCmdShow)
   // wc.hbrBackground = (HBRUSH) GetStockObject(WHITE_BRUSH);
   wc.hbrBackground = (HBRUSH) (COLOR_BTNFACE + 1);
 
-  wc.lpszMenuName =
-    #ifdef UNDER_CE
-    0
-    #else
-    MAKEINTRESOURCEW(IDM_MENU)
-    #endif
-    ;
+  wc.lpszMenuName = nullptr;
 
   wc.lpszClassName = kWindowClass;
 
@@ -1044,8 +1038,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_DPICHANGED:
     {
-        g_App.ReloadToolbars();
-
         auto lprcNewScale = reinterpret_cast<RECT*>(lParam);
 
         ::SetWindowPos(
@@ -1058,7 +1050,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             SWP_NOZORDER | SWP_NOACTIVATE);
 
         ::UpdateWindow(hWnd);
+
+        break;
     }
+    case WM_SETTINGCHANGE:
+    {
+        ::SendMessageW(g_App.m_ToolBar, message, wParam, lParam);
+        
+        break;
+    }
+    default:
+        break;
   }
   #ifndef _UNICODE
   if (g_IsNT)
@@ -1067,19 +1069,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
   #endif
     return DefWindowProc(hWnd, message, wParam, lParam);
 
-}
-
-static int Window_GetRealHeight(NWindows::CWindow &w)
-{
-  RECT rect;
-  w.GetWindowRect(&rect);
-  int res = RECT_SIZE_Y(rect);
-  #ifndef UNDER_CE
-  WINDOWPLACEMENT placement;
-  if (w.GetPlacement(&placement))
-    res += placement.rcNormalPosition.top;
-  #endif
-  return res;
 }
 
 void CApp::MoveSubWindows()
@@ -1102,14 +1091,28 @@ void CApp::MoveSubWindows()
   }
   #endif
 
-  if (_toolBar)
+  if (this->m_ToolBar)
   {
-    _toolBar.AutoSize();
-    #ifdef UNDER_CE
-    int h2 = Window_GetRealHeight(_toolBar);
-    _toolBar.Move(0, headerSize, xSize, h2);
-    #endif
-    headerSize += Window_GetRealHeight(_toolBar);
+      UINT DpiValue = ::GetDpiForWindow(hWnd);
+
+      int MainWindowToolBarScaledHeight = ::MulDiv(
+          48,
+          DpiValue,
+          USER_DEFAULT_SCREEN_DPI);
+
+      RECT ClientRect = { 0 };
+      ::GetClientRect(hWnd, &ClientRect);
+
+      ::SetWindowPos(
+          this->m_ToolBar,
+          nullptr,
+          0,
+          0,
+          ClientRect.right - ClientRect.left,
+          MainWindowToolBarScaledHeight,
+          SWP_SHOWWINDOW);
+
+      headerSize += MainWindowToolBarScaledHeight;
   }
 
   int ySize = MyMax((int)(rect.bottom - headerSize), 0);

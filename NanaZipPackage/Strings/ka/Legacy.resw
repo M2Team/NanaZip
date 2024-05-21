@@ -244,10 +244,10 @@
     <value>სანიშნე</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;გამართვა...</value>
+    <value>გამართვა...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;წარმადობის შემოწმება</value>
+    <value>წარმადობის შემოწმება</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>სარჩევი...</value>

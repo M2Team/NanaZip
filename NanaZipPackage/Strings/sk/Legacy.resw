@@ -250,16 +250,16 @@
     <value>Záložka</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>N&amp;astavenia...</value>
+    <value>Nastavenia...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Skúšobný test</value>
+    <value>Skúšobný test</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Obsah pomocníka...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>O p&amp;rograme NanaZip</value>
+    <value>O programe NanaZip</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Cesta</value>

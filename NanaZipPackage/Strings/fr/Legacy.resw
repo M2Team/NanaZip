@@ -253,16 +253,16 @@
     <value>Signet</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Options...</value>
+    <value>Options...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Test de performance</value>
+    <value>Test de performance</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Contenu...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>À &amp;propos de NanaZip...</value>
+    <value>À propos de NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Chemin</value>

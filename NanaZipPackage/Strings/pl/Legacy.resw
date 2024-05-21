@@ -253,16 +253,16 @@
     <value>Zakładka</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Opcje...</value>
+    <value>Opcje...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Test wydajności</value>
+    <value>Test wydajności</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Zawartość</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>NanaZip - i&amp;nformacje</value>
+    <value>NanaZip - informacje</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Ścieżka</value>

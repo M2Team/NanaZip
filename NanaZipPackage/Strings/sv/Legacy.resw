@@ -253,16 +253,16 @@
     <value>Bokmärke</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Alternativ...</value>
+    <value>Alternativ...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Prestandamått</value>
+    <value>Prestandamått</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Hjälp...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Om NanaZip...</value>
+    <value>Om NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Sökväg</value>

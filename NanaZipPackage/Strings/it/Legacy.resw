@@ -253,16 +253,16 @@
     <value>Segnalibro</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Opzioni...</value>
+    <value>Opzioni...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Benchmark</value>
+    <value>Benchmark</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Guida...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Informazioni su NanaZip...</value>
+    <value>Informazioni su NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Percorso</value>

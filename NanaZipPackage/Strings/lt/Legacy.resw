@@ -253,16 +253,16 @@
     <value>Mėgiamiausias</value>
   </data>
   <data name="Resource900" xml:space="preserve">
-    <value>&amp;Nuostatos...</value>
+    <value>Nuostatos...</value>
   </data>
   <data name="Resource901" xml:space="preserve">
-    <value>&amp;Spartos bandymas</value>
+    <value>Spartos bandymas</value>
   </data>
   <data name="Resource960" xml:space="preserve">
     <value>&amp;Turinys...</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>&amp;Apie NanaZip...</value>
+    <value>Apie NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Kelias</value>
