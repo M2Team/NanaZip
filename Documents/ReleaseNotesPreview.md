@@ -2,7 +2,7 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 3.5 Preview 0 (3.5.1000.0)**
+**NanaZip 3.5 Preview 0 (3.5.996.0)**
 
 This version is same as NanaZip 3.0 (3.0.1000.0).
 
@@ -84,13 +84,13 @@ This version is same as NanaZip 3.0 (3.0.1000.0).
   (https://github.com/ProjectMile/Mile.Windows.Helpers/commit/b522a956f7dd42dc205869d362f96a777bcb2aa0)
 - Update Mile.Xaml to 2.1.661.
   (https://github.com/ProjectMile/Mile.Xaml/releases/tag/2.1.661.0)
-- Update russian translation. (Contributed by Blueberryy.）
+- Update russian translation. (Contributed by Blueberryy.)
 - Fix the text wrapping issue in the About dialog. (Thanks to MenschenToaster.)
 - Use modern IFileDialog for folder picker dialog. (Contributed by 
-  reflectronic.）
+  reflectronic.)
 - Launch directly to the settings page of association for NanaZip. (Contributed
-  by AndromedaMelody.）
-- Show NanaZip in Drives' ContextMenu. (Contributed by AndromedaMelody.）
+  by AndromedaMelody.)
+- Show NanaZip in Drives' ContextMenu. (Contributed by AndromedaMelody.)
 - Sync file extension support from https://github.com/mcmilk/7-Zip-zstd.
 - Add other methods to compression dialog.
   (https://github.com/mcmilk/7-Zip-zstd/commit/cf29d0c1babcd5ddf2c67eda8bb36e11f9c643b9)

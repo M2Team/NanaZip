@@ -3,7 +3,7 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
-**NanaZip 3.0 (3.0.1000.0)**
+**NanaZip 3.0 (3.0.996.0)**
 
 - Notes
   - NanaZip 3.0 and onwards will have two distribution flavors called NanaZip
@@ -35,12 +35,11 @@ For preview versions, please read
     - Remove 7-Zip mainline XXH64 Hash handler for NanaZip.Core because we
       have the xxHash-based implementation in NanaZip.Codecs. It will have
       much better performance, especially for non-x86 targets.
-    - Implement the new toolbar and use it to replace the old menubar and old
-      toolbar.
-    - Refresh the UI layout for About Dialog via following other Nana series
-      project design.
-    - Add the SM3 HASH algorithm from GmSSL.
-      (https://github.com/guanzhi/GmSSL)
+  - Implement the new toolbar and use it to replace the old menubar and old
+    toolbar.
+  - Refresh the UI layout for About Dialog via following other Nana series
+    project design.
+  - Add the SM3 HASH algorithm from GmSSL. (https://github.com/guanzhi/GmSSL)
 - Improvements
   - Rewrite and split the implementation of the Core Library and the Self
     Extracting Executable to the separate NanaZip.Codecs and NanaZip.Core
@@ -71,10 +70,10 @@ For preview versions, please read
   - Use Mile.Detours package.
     (https://github.com/ProjectMile/Mile.Detours)
   - Use modern IFileDialog for folder picker dialog. (Contributed by 
-    reflectronic.）
+    reflectronic.)
   - Launch directly to the settings page of association for NanaZip.
-    (Contributed by AndromedaMelody.）
-  - Show NanaZip in Drives' ContextMenu. (Contributed by AndromedaMelody.）
+    (Contributed by AndromedaMelody.)
+  - Show NanaZip in Drives' ContextMenu. (Contributed by AndromedaMelody.)
   - Sync file extension support from https://github.com/mcmilk/7-Zip-zstd.
   - Add other methods to compression dialog.
     (https://github.com/mcmilk/7-Zip-zstd/commit/cf29d0c1babcd5ddf2c67eda8bb36e11f9c643b9)
@@ -82,7 +81,7 @@ For preview versions, please read
     (https://github.com/mcmilk/7-Zip-zstd/commit/8b011d230f1ccd8990943bd2eaad38d70e6e3fdf)
   - Fix selectable uppercase / lowercase hash formatting.
     (https://github.com/mcmilk/7-Zip-zstd/commit/4fae369d2d6aa60e2bb45eea1fb05659a2599caa)
-  - Update russian translation. (Contributed by Blueberryy.）
+  - Update russian translation. (Contributed by Blueberryy.)
   - Update Polish translation. (Contributed by ChuckMichael.)
   - Add mitigation policy of disabling child process creation for command line
     version of NanaZip. (Contributed by dinhngtu.)
@@ -94,7 +93,6 @@ For preview versions, please read
   - Fix issue in IEnumExplorerCommand::Next for shell extension. (Thanks to
     cnbluefire.)
 - Other adjustments for project development.
-
 
 **NanaZip 2.0 Update 1 (2.0.450.0)**
 
@@ -118,7 +116,7 @@ For preview versions, please read
 
 - Notes
   - Update the minimum system requirement to Windows 10 Version 2004 (Build 
-    19041) or later for solving issues in the XAML Islands.
+    1)     or later for solving issues in the XAML Islands.
   - Add instructions for installing NanaZip for all users. (Contributed by
     AndromedaMelody. Suggested by Wolverine1977.)
 - Features
