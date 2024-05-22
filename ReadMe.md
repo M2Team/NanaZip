@@ -16,7 +16,8 @@
 [![Download NanaZip from SourceForge mirror](https://img.shields.io/badge/SourceForge-Download-orange)](https://sourceforge.net/projects/nanazip/files/latest/download)
 
 ![ContextMenu](Documents/ContextMenu.png)
-![MainWindow](Documents/MainWindow.png)
+![MainWindowLightMode](Documents/MainWindowLightMode.png)
+![MainWindowDarkMode](Documents/MainWindowDarkMode.png)
 
 NanaZip is an open source file archiver intended for the modern Windows 
 experience, forked from the source code of well-known open source file archiver
