@@ -42,6 +42,8 @@ namespace NanaZip::UI
 
     winrt::handle ShowAboutDialog(
         _In_ HWND ParentWindowHandle);
+
+    void SpecialCommandHandler();
 }
 
 namespace winrt::NanaZip

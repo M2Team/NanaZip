@@ -40,6 +40,7 @@
 
 #include "../../../../../pch.h"
 #include "../../../../../App.h"
+#include "../../../../../NanaZip.UI.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -516,6 +517,8 @@ static int WINAPI WinMain2(int nCmdShow)
 
   winrt::com_ptr<winrt::NanaZip::Modern::implementation::App> app =
       winrt::make_self<winrt::NanaZip::Modern::implementation::App>();
+
+  NanaZip::UI::SpecialCommandHandler();
 
   UString commandsString;
   // MessageBoxW(0, GetCommandLineW(), L"", 0);
