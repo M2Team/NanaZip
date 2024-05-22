@@ -138,6 +138,23 @@ namespace
             return S_OK;
         }
     };
+
+    static FARPROC GetRoFailFastWithErrorContextProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetComBaseModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "RoFailFastWithErrorContext");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
 }
 
 EXTERN_C HRESULT WINAPI RoGetActivationFactory(
@@ -178,4 +195,20 @@ EXTERN_C BOOL WINAPI RoOriginateLanguageException(
         winrt::make<ErrorInfoFallback>(error, message);
     ::SetErrorInfo(0, ErrorInfo.get());
     return TRUE;
+}
+
+EXTERN_C VOID WINAPI RoFailFastWithErrorContext(
+    _In_ HRESULT hrError)
+{
+    using ProcType = decltype(::RoFailFastWithErrorContext)*;
+
+    ProcType ProcAddress = reinterpret_cast<ProcType>(
+        ::GetRoFailFastWithErrorContextProcAddress());
+
+    if (ProcAddress)
+    {
+        ProcAddress(hrError);
+    }
+
+    std::abort();
 }
