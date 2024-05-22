@@ -206,6 +206,10 @@
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SponsorPage.cpp">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindowToolBarPage.h">
@@ -390,6 +394,10 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SponsorPage.h">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SevenZip\CPP\7zip\UI\FileManager\resource.rc" />
@@ -420,6 +428,10 @@
       <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
+    <Midl Include="SponsorPage.idl">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -441,6 +453,9 @@
     <Page Include="MainWindowToolBarPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SponsorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
@@ -455,7 +470,9 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\en\SponsorPage.resw" />
     <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\SponsorPage.resw" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>
