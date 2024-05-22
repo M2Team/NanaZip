@@ -34,15 +34,15 @@ If you'd like me to add features or improvements ahead of time, please use
 [this document to become a sponsor]: https://github.com/MouriNaruto/MouriNaruto/blob/main/Sponsor
 [paid services]: https://github.com/MouriNaruto/MouriNaruto/blob/main/PaidServices.md
 
-I hope I can release at least one preview version of NanaZip 3.x in 2023. So,
-I am trying my best to implement the related infrastructures like
-[Mile.Xaml](https://github.com/ProjectMile/Mile.Xaml).
-
 Kenji Mouri
 
 ## Features
 
-- Inherit all features from 7-Zip 23.01.
+- Inherit all features from 7-Zip 24.05.
+- Support the dark mode for all GUI components.
+- Support the Mica effect to the main window. You will enjoy the full window
+  immersive Mica for all GUI components if you are using dark mode with HDR
+  disabled.
 - Packaging with MSIX for modern deployment experience.
 - Support the context menu in Windows 10/11 File Explorer.
 - Enable NSIS script decompiling support for the NSIS archives. (Merged from 
@@ -69,6 +69,7 @@ Kenji Mouri
 - Enable Package Integrity Check.
 - Enable EH Continuation Metadata.
 - Enable Signed Returns.
+- Enable disabling child process creation for command line version of NanaZip.
 
 ## Differences between NanaZip and NanaZip Classic
 
@@ -195,7 +196,7 @@ the following command in the PowerShell which is run as administrator.
   page of file association for NanaZip.
   (https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-default-apps-settings)
 
-## Development Roadmap
+## Development Roadmap (Archived)
 
 - Blue Moon (3.x) Series (Before 2024 Q3)
   - [ ] Continue to modernize the UI with XAML Islands with the Windows 11 

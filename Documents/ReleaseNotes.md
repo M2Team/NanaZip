@@ -17,6 +17,8 @@ For preview versions, please read
   - NanaZip 3.0 and onwards will have NanaZip Sponsor Edition. Read
     https://github.com/M2Team/NanaZip/blob/main/Documents/SponsorEdition.md
     for more information.
+  - NanaZip has introduced the Preinstall Support. Read
+    https://github.com/M2Team/NanaZip/issues/398 for more information.
 - Features
   - Introducing dark mode support for all GUI components.
   - Introducing the Mica support. You will enjoy the full window immersive Mica
