@@ -3,6 +3,97 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 3.0 (3.0.1000.0)**
+
+- Notes
+  - NanaZip 3.0 and onwards will have two distribution flavors called NanaZip
+    and NanaZip Classic. But NanaZip 3.0 does not have the Classic flavor yet
+    because it's not ready. Read
+    https://github.com/M2Team/NanaZip#differences-between-nanazip-and-nanazip-classic
+    for more information.
+  - The 32-bit x86 support for NanaZip packaged version is removed because
+    supported 32-bit x86 Windows versions don't support running on 32-bit
+    only x86 processors.
+  - NanaZip 3.0 and onwards will have NanaZip Sponsor Edition. Read
+    https://github.com/M2Team/NanaZip/blob/main/Documents/SponsorEdition.md
+    for more information.
+- Features
+  - Introducing dark mode support for all GUI components.
+  - Introducing the Mica support. You will enjoy the full window immersive Mica
+    support for all GUI components if you are using dark mode with HDR disabled.
+    (Thanks to Andarwinux.)
+  - Synchronize the 7-Zip mainline implementations to 24.05.
+    (https://github.com/ip7z/7zip/releases/tag/24.05) (Thanks to Igor Pavlov.
+    Noticed by AVMLOVER-4885955 and PopuriAO29.)
+    - Make NanaZip Self Extracting Executable stubs use 7-Zip mainline
+      Zstandard decoder instead of Zstandard official's for reducing the
+      size for binaries.
+    - Use 7-Zip mainline Zstandard decoder instead of Zstandard official
+      decoder for NanaZip.Core project.
+    - Remove 7-Zip mainline XXH64 Hash handler for NanaZip.Core because we
+      have the xxHash-based implementation in NanaZip.Codecs. It will have
+      much better performance, especially for non-x86 targets.
+    - Implement the new toolbar and use it to replace the old menubar and old
+      toolbar.
+    - Refresh the UI layout for About Dialog via following other Nana series
+      project design.
+    - Add the SM3 HASH algorithm from GmSSL.
+      (https://github.com/guanzhi/GmSSL)
+- Improvements
+  - Rewrite and split the implementation of the Core Library and the Self
+    Extracting Executable to the separate NanaZip.Codecs and NanaZip.Core
+    projects. Read https://github.com/M2Team/NanaZip/issues/336 for more
+    information.
+  - Ensure the implementation of Core Library and the Self Extracting Executable
+    supports Windows Vista RTM (Build 6000.16386).
+  - Reduce the binary size for the Self Extracting Executables.
+  - Synchronize the 7-Zip ZS implementations to the latest master branch.
+    (https://github.com/mcmilk/7-Zip-zstd/commit/79b2c78e9e7735ddf90147129b75cf2797ff6522)
+  - Synchronize Zstandard and builtin xxHash implementations to v1.5.6.
+    (https://github.com/facebook/zstd/releases/tag/v1.5.6)
+  - Synchronize Brotli implementations to v1.1.0.
+    (https://github.com/google/brotli/releases/tag/v1.1.0)
+  - Synchronize the RHash implementation to the latest master branch which is
+    after v1.4.4.
+    (https://github.com/rhash/RHash/commit/d916787590b9dc57eb9d420fd13e469160e0b04c)
+  - Synchronize the BLAKE3 implementation to latest master which is after 1.5.1.
+    (https://github.com/BLAKE3-team/BLAKE3/commit/0816badf3ada3ec48e712dd4f4cbc2cd60828278)
+  - Update to Git submodule version of Mile.Project.Windows.
+    (https://github.com/ProjectMile/Mile.Project.Windows)
+  - Update Mile.Windows.Helpers to 1.0.558.
+    (https://github.com/ProjectMile/Mile.Windows.Helpers/tree/1.0.558.0)
+  - Update Mile.Xaml to 2.2.944.
+    (https://github.com/ProjectMile/Mile.Xaml/releases/tag/2.2.944.0)
+  - Use Mile.Windows.Internal package.
+    (https://github.com/ProjectMile/Mile.Windows.Internal)
+  - Use Mile.Detours package.
+    (https://github.com/ProjectMile/Mile.Detours)
+  - Use modern IFileDialog for folder picker dialog. (Contributed by 
+    reflectronic.）
+  - Launch directly to the settings page of association for NanaZip.
+    (Contributed by AndromedaMelody.）
+  - Show NanaZip in Drives' ContextMenu. (Contributed by AndromedaMelody.）
+  - Sync file extension support from https://github.com/mcmilk/7-Zip-zstd.
+  - Add other methods to compression dialog.
+    (https://github.com/mcmilk/7-Zip-zstd/commit/cf29d0c1babcd5ddf2c67eda8bb36e11f9c643b9)
+  - Reorder initialization in constructor matching to member declaration order.
+    (https://github.com/mcmilk/7-Zip-zstd/commit/8b011d230f1ccd8990943bd2eaad38d70e6e3fdf)
+  - Fix selectable uppercase / lowercase hash formatting.
+    (https://github.com/mcmilk/7-Zip-zstd/commit/4fae369d2d6aa60e2bb45eea1fb05659a2599caa)
+  - Update russian translation. (Contributed by Blueberryy.）
+  - Update Polish translation. (Contributed by ChuckMichael.)
+  - Add mitigation policy of disabling child process creation for command line
+    version of NanaZip. (Contributed by dinhngtu.)
+  - Add Explorer Patcher DLL blocking for NanaZip File Manager for reenabling
+    mitigation policy of blocking loading unexpected libraries from remote
+    sources at runtime for the main thread of NanaZip File Manager without the
+    stability issues. (Contributed by dinhngtu.)
+- Fixes
+  - Fix issue in IEnumExplorerCommand::Next for shell extension. (Thanks to
+    cnbluefire.)
+- Other adjustments for project development.
+
+
 **NanaZip 2.0 Update 1 (2.0.450.0)**
 
 - Optimize NanaZip binaries via adjusting the WindowsTargetPlatformMinVersion

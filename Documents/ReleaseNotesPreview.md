@@ -2,6 +2,63 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 3.5 Preview 0 (3.5.1000.0)**
+
+This version is same as NanaZip 3.0 (3.0.1000.0).
+
+- The 32-bit x86 support for NanaZip packaged version is removed because
+  supported 32-bit x86 Windows versions don't support running on 32-bit
+  only x86 processors.
+- NanaZip 3.0 and onwards will have NanaZip Sponsor Edition. Read
+  https://github.com/M2Team/NanaZip/blob/main/Documents/SponsorEdition.md
+  for more information.
+- Introducing dark mode support for all GUI components.
+- Introducing the Mica support. You will enjoy the full window immersive Mica
+  support for all GUI components if you are using dark mode with HDR disabled.
+  (Thanks to Andarwinux.)
+- Synchronize the 7-Zip mainline implementations to 24.05.
+  (https://github.com/ip7z/7zip/releases/tag/24.05) (Thanks to Igor Pavlov.
+  Noticed by AVMLOVER-4885955 and PopuriAO29.)
+  - Make NanaZip Self Extracting Executable stubs use 7-Zip mainline Zstandard
+    decoder instead of Zstandard official's for reducing the size for binaries.
+  - Use 7-Zip mainline Zstandard decoder instead of Zstandard official decoder
+    for NanaZip.Core project.
+  - Remove 7-Zip mainline XXH64 Hash handler for NanaZip.Core because we have
+    the xxHash-based implementation in NanaZip.Codecs. It will have much better
+    performance, especially for non-x86 targets.
+- Implement the new toolbar and use it to replace the old menubar and old
+  toolbar.
+- Refresh the UI layout for About Dialog via following other Nana series
+  project design.
+- Synchronize the 7-Zip ZS implementations to the latest master branch.
+  (https://github.com/mcmilk/7-Zip-zstd/commit/79b2c78e9e7735ddf90147129b75cf2797ff6522)
+- Synchronize Zstandard and builtin xxHash implementations to v1.5.6.
+  (https://github.com/facebook/zstd/releases/tag/v1.5.6)
+- Synchronize SM3 implementation from GmSSL v3.1.1.
+  (https://github.com/guanzhi/GmSSL/releases/tag/v3.1.1)
+- Synchronize the RHash implementation to the latest master branch which is
+  after v1.4.4.
+  (https://github.com/rhash/RHash/commit/d916787590b9dc57eb9d420fd13e469160e0b04c)
+- Synchronize the BLAKE3 implementation to latest master which is after 1.5.1.
+  (https://github.com/BLAKE3-team/BLAKE3/commit/0816badf3ada3ec48e712dd4f4cbc2cd60828278)
+- Update Mile.Windows.Helpers to 1.0.558.
+  (https://github.com/ProjectMile/Mile.Windows.Helpers/tree/1.0.558.0)
+- Update Mile.Xaml to 2.2.944.
+  (https://github.com/ProjectMile/Mile.Xaml/releases/tag/2.2.944.0)
+- Use Mile.Windows.Internal package.
+  (https://github.com/ProjectMile/Mile.Windows.Internal)
+- Use Mile.Detours package.
+  (https://github.com/ProjectMile/Mile.Detours)
+- Update Polish translation. (Contributed by ChuckMichael.)
+- Add mitigation policy of disabling child process creation for command line
+  version of NanaZip. (Contributed by dinhngtu.)
+- Add Explorer Patcher DLL blocking for NanaZip File Manager for reenabling
+  mitigation policy of blocking loading unexpected libraries from remote sources
+  at runtime for the main thread of NanaZip File Manager without the stability
+  issues. (Contributed by dinhngtu.)
+- Fix issue in IEnumExplorerCommand::Next for shell extension. (Thanks to
+  cnbluefire.)
+
 **NanaZip 3.0 Preview 0 (3.0.756.0)**
 
 - Rewrite and split the implementation of the Core Library and the Self
