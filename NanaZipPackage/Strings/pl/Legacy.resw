@@ -639,6 +639,21 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;Użyj dużych stron pamięci</value>
   </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>Zachowaj historię dostępu do archiwów</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>Zachowaj historię ścieżek do wypakowanych archiwów</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>Zachowaj historię kopiowania</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>Zachowaj historię folderów</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Małoliterowe sumy kontrolne</value>
+  </data> 
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip - informacje</value>
   </data>
