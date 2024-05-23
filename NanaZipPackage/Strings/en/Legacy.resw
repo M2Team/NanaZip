@@ -639,6 +639,21 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Use &amp;large memory pages</value>
   </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>Want ArcHistory</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>Want PathHistory</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>Want CopyHistory</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>Want FolderHistory</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Use Lowercase Hashes</value>
+  </data>  
   <data name="Resource2900" xml:space="preserve">
     <value>About NanaZip</value>
   </data>
