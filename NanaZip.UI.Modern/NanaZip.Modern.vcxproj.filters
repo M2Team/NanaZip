@@ -1071,11 +1071,17 @@
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw">
       <Filter>Strings\en</Filter>
     </PRIResource>
+    <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw">
+      <Filter>Strings\pl</Filter>
+    </PRIResource>
     <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw">
       <Filter>Strings\zh-Hans</Filter>
     </PRIResource>
     <PRIResource Include="Strings\en\SponsorPage.resw">
       <Filter>Strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pl\SponsorPage.resw">
+      <Filter>Strings\pl</Filter>
     </PRIResource>
     <PRIResource Include="Strings\zh-Hans\SponsorPage.resw">
       <Filter>Strings\zh-Hans</Filter>
