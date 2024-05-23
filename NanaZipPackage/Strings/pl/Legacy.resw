@@ -646,7 +646,7 @@
     <value>Zachowaj historię ścieżek do wypakowanych archiwów</value>
   </data>
   <data name="Resource2511" xml:space="preserve">
-    <value>Zachowaj historię kopiowania</value>
+    <value>Zachowaj historię ścieżek docelowych kopiowania</value>
   </data>
   <data name="Resource2512" xml:space="preserve">
     <value>Zachowaj historię folderów</value>
