@@ -32,7 +32,7 @@
       <Version>1.0.558</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Internal">
-      <Version>1.0.2818</Version>
+      <Version>1.0.2889</Version>
     </PackageReference>
     <PackageReference Include="Mile.Detours">
       <Version>1.0.1542</Version>
