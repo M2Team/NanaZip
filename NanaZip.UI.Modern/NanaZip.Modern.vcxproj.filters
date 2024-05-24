@@ -76,6 +76,9 @@
     <Filter Include="Strings\zh-Hans">
       <UniqueIdentifier>{0237aed3-2eca-4267-a2e7-4c9e8e2f37f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\pl">
+      <UniqueIdentifier>{41dcb6ac-4f56-4e58-9e96-f4337ba4619a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\ParentFolder.bmp">
@@ -1071,20 +1074,20 @@
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw">
       <Filter>Strings\en</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw">
-      <Filter>Strings\pl</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw">
       <Filter>Strings\zh-Hans</Filter>
     </PRIResource>
     <PRIResource Include="Strings\en\SponsorPage.resw">
       <Filter>Strings\en</Filter>
     </PRIResource>
+    <PRIResource Include="Strings\zh-Hans\SponsorPage.resw">
+      <Filter>Strings\zh-Hans</Filter>
+    </PRIResource>
     <PRIResource Include="Strings\pl\SponsorPage.resw">
       <Filter>Strings\pl</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\zh-Hans\SponsorPage.resw">
-      <Filter>Strings\zh-Hans</Filter>
+    <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw">
+      <Filter>Strings\pl</Filter>
     </PRIResource>
   </ItemGroup>
 </Project>
