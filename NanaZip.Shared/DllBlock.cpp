@@ -30,6 +30,10 @@ namespace
         else if (!::_stricmp(dllName, "ExplorerPatcher.IA-32.dll")) {
             return true;
         }
+        else if (!::_stricmp(dllName, "TFMain64.dll")) {
+            // Translucent Flyouts
+            return true;
+        }
         return false;
     }
 
