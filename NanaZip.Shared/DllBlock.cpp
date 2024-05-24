@@ -53,16 +53,16 @@ namespace
         if (ntHdr->Signature != IMAGE_NT_SIGNATURE || ntHdr->OptionalHeader.NumberOfRvaAndSizes < IMAGE_DIRECTORY_ENTRY_EXPORT)
             return false;
         const IMAGE_DATA_DIRECTORY* dirExport = &(ntHdr->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT]);
-        if (dirExport->Size < sizeof(IMAGE_EXPORT_DIRECTORY) || !CheckExtents(viewSize, dirExport->VirtualAddress, sizeof(IMAGE_EXPORT_DIRECTORY))) {
+        if (dirExport->Size < sizeof(IMAGE_EXPORT_DIRECTORY) || !dirExport->VirtualAddress || !CheckExtents(viewSize, dirExport->VirtualAddress, sizeof(IMAGE_EXPORT_DIRECTORY))) {
             return false;
         }
         const IMAGE_EXPORT_DIRECTORY* exports = reinterpret_cast<const IMAGE_EXPORT_DIRECTORY*>(base + dirExport->VirtualAddress);
         // we don't know the export directory name size so assume that at least 256 bytes after the name are safe
-        if (!CheckExtents(viewSize, exports->Name, ARRAYSIZE(dllName))) {
+        if (!exports->Name || !CheckExtents(viewSize, exports->Name, ARRAYSIZE(dllName))) {
             return false;
         }
         const char* name = base + exports->Name;
-        if (strcpy_s(dllName, name)) {
+        if (strncpy_s(dllName, name, _TRUNCATE)) {
             return false;
         }
         return true;
