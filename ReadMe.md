@@ -195,6 +195,9 @@ the following command in the PowerShell which is run as administrator.
   (Build 22000.1817+ & 22621.1555+), you can launch directly to the settings 
   page of file association for NanaZip.
   (https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-default-apps-settings)
+- Due to the Microsoft Store Licensing API implementation, you will find NanaZip
+  will try to access the Internet beginning with NanaZip 3.0 because NanaZip
+  needs to use that to check the Sponsor Edition addon licensing status.
 
 ## Development Roadmap (Archived)
 
@@ -261,6 +264,7 @@ the following command in the PowerShell which is run as administrator.
 - [Privacy Policy](Documents/Privacy.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contributing Guide](CONTRIBUTING.md)
+- [NanaZip Sponsor Edition](Documents/SponsorEdition.md)
 - [NanaZip Release Notes](Documents/ReleaseNotes.md)
 - [NanaZip Preview Release Notes](Documents/ReleaseNotesPreview.md)
 - [Versioning](Documents/Versioning.md)
