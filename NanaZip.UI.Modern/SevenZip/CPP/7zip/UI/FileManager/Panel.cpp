@@ -988,7 +988,7 @@ void CPanel::ExtractArchives()
 {
   if (_parentFolders.Size() > 0)
   {
-    _panelCallback->OnCopy(false, false);
+    ExtractFromArchive();
     return;
   }
   CRecordVector<UInt32> indices;
@@ -1004,6 +1004,41 @@ void CPanel::ExtractArchives()
   else
     outFolder += '*';
   outFolder.Add_PathSepar();
+
+  CContextMenuInfo ci;
+  ci.Load();
+
+  ::ExtractArchives(paths, outFolder
+      , true // showDialog
+      , false // elimDup
+      , ci.WriteZone
+      );
+}
+
+void CPanel::ExtractFromArchive()
+{
+  if (_parentFolders.Size() > 1) {
+    _panelCallback->OnCopy(false, false);
+    return;
+  }
+
+  CRecordVector<UInt32> indices;
+  GetOperatedItemIndices(indices);
+  if (indices.Size() > 0) {
+    _panelCallback->OnCopy(false, false);
+    return;
+  }
+
+  UString path = GetFsPath();
+  if (IsPathSepar(path.Back()))
+      path.DeleteBack();
+  if (path != _parentFolders[0].VirtualPath) {
+    _panelCallback->OnCopy(false, false);
+    return;
+  }
+  UStringVector paths;
+  paths.Add(path);
+  UString outFolder = GetSubFolderNameForExtract2(path);
 
   CContextMenuInfo ci;
   ci.Load();
