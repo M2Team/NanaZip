@@ -126,11 +126,11 @@
     <comment>More</comment>
   </data>
   <data name="SponsorButton.AcquireText" xml:space="preserve">
-    <value>☕ Sponsor NanaZip ☕</value>
-    <comment>☕ Sponsor NanaZip ☕</comment>
+    <value>Sponsor NanaZip</value>
+    <comment>Sponsor NanaZip</comment>
   </data>
   <data name="SponsorButton.SponsoredText" xml:space="preserve">
-    <value>❤️ Appreciate your sponsorship ❤️</value>
-    <comment>❤️ Appreciate your sponsorship ❤️</comment>
+    <value>Appreciate your sponsorship</value>
+    <comment>Appreciate your sponsorship</comment>
   </data>
 </root>

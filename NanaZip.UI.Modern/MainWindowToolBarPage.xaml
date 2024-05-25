@@ -117,7 +117,7 @@
         Grid.Column="2"
         Margin="0,0,6,0"
         VerticalAlignment="Center"
-        BorderThickness="0"
+        Background="Transparent"
         Click="SponsorButtonClick"
         Content="[Sponsor NanaZip]" />
     </Grid>
