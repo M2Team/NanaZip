@@ -198,6 +198,10 @@ the following command in the PowerShell which is run as administrator.
 - Due to the Microsoft Store Licensing API implementation, you will find NanaZip
   will try to access the Internet beginning with NanaZip 3.0 because NanaZip
   needs to use that to check the Sponsor Edition addon licensing status.
+- For optimizing the user experience, NanaZip will only check the Sponsor 
+  Edition addon licensing status at the first time your launch NanaZip File
+  Manager. You can click the sponsor button if you want to refresh the status
+  after you have purchased or redeemed the Sponsor Edition addon.
 
 ## Development Roadmap (Archived)
 

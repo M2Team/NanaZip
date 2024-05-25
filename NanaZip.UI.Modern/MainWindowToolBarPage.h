@@ -83,6 +83,8 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::DispatcherQueue m_DispatcherQueue = nullptr;
         winrt::StoreContext m_StoreContext = nullptr;
 
+        bool CheckSponsorEditionLicense();
+
         void RefreshSponsorButtonContent();
     };
 }

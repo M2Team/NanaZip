@@ -485,43 +485,82 @@ namespace winrt::NanaZip::Modern::implementation
             ::WaitForSingleObjectEx(ProcessInformation.hProcess, INFINITE, FALSE);
             ::CloseHandle(ProcessInformation.hProcess);
 
+            ::RegDeleteKeyValueW(
+                HKEY_CURRENT_USER,
+                L"Software\\NanaZip",
+                L"SponsorEdition");
+
             this->RefreshSponsorButtonContent();
         }));
+    }
+
+    bool MainWindowToolBarPage::CheckSponsorEditionLicense()
+    {
+        {
+            DWORD Data = 0;
+            DWORD Length = sizeof(DWORD);
+            if (ERROR_SUCCESS == ::RegGetValueW(
+                HKEY_CURRENT_USER,
+                L"Software\\NanaZip",
+                L"SponsorEdition",
+                RRF_RT_REG_DWORD | RRF_SUBKEY_WOW6464KEY,
+                nullptr,
+                &Data,
+                &Length))
+            {
+                return Data;
+            }
+        }
+
+        bool Sponsored = false;
+
+        if (this->m_StoreContext)
+        {
+            winrt::StoreProductQueryResult ProductQueryResult =
+                this->m_StoreContext.GetStoreProductsAsync(
+                    { L"Durable" },
+                    { L"9N9DNPT6D6Z9" }).get();
+            for (auto Item : ProductQueryResult.Products())
+            {
+                winrt::StoreProduct Product = Item.Value();
+                Sponsored = Product.IsInUserCollection();
+            }
+        }
+
+        {
+            DWORD Data = Sponsored;
+            ::RegSetKeyValueW(
+                HKEY_CURRENT_USER,
+                L"Software\\NanaZip",
+                L"SponsorEdition",
+                REG_DWORD,
+                &Data,
+                sizeof(DWORD));
+        }
+
+        return Sponsored;
     }
 
     void MainWindowToolBarPage::RefreshSponsorButtonContent()
     {
         winrt::handle(Mile::CreateThread([=]()
         {
-            if (this->m_StoreContext)
+            bool Sponsored = this->CheckSponsorEditionLicense();
+
+            if (!this->m_DispatcherQueue)
             {
-                bool Sponsored = false;
-
-                winrt::StoreProductQueryResult ProductQueryResult =
-                    this->m_StoreContext.GetStoreProductsAsync(
-                        { L"Durable" },
-                        { L"9N9DNPT6D6Z9" }).get();
-                for (auto Item : ProductQueryResult.Products())
-                {
-                    winrt::StoreProduct Product = Item.Value();
-                    Sponsored = Product.IsInUserCollection();
-                }
-
-                if (!this->m_DispatcherQueue)
-                {
-                    return;
-                }
-                this->m_DispatcherQueue.TryEnqueue(
-                    winrt::DispatcherQueuePriority::Normal,
-                    [=]()
-                {
-                    this->SponsorButton().Content(
-                        winrt::box_value(Mile::WinRT::GetLocalizedString(
-                            Sponsored
-                            ? L"MainWindowToolBarPage/SponsorButton/SponsoredText"
-                            : L"MainWindowToolBarPage/SponsorButton/AcquireText")));
-                });
+                return;
             }
+            this->m_DispatcherQueue.TryEnqueue(
+                winrt::DispatcherQueuePriority::Normal,
+                [=]()
+            {
+                this->SponsorButton().Content(
+                    winrt::box_value(Mile::WinRT::GetLocalizedString(
+                        Sponsored
+                        ? L"MainWindowToolBarPage/SponsorButton/SponsoredText"
+                        : L"MainWindowToolBarPage/SponsorButton/AcquireText")));
+            });
         }));
     }
 }
