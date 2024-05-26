@@ -3,6 +3,23 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 3.0 Update 1 (3.0.10xx.0)**
+
+- Update Mile.Windows.Internal to 1.0.2889.
+- Make the 7-Zip Zstandard branch's specific options translatable. (Contributed
+  by ChuckMichael.)
+- Polish translation for Sponsor dialog. (Contributed by ChuckMichael.)
+- Fix compatibility issues with iFlyIME, Sogou Pinyin, and Transparent Flyout.
+  (Contributed by dinhngtu.)
+- Update the UI layout for the sponsor button. (Suggested by namazso.)
+- NanaZip will only check the Sponsor Edition addon licensing status the first
+  time you launch NanaZip File Manager or click the sponsor button to optimize
+  the user experience.
+- Update NanaZip installation documentation. (Contributed by dongle-the-gadget.)
+- Use Extract dialog when extracting without selection. (Contributed by 
+  dinhngtu.)
+- Fix tooltips from XAML controls cannot be transparent.
+
 **NanaZip 3.0 (3.0.996.0)**
 
 - Notes
