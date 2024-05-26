@@ -726,7 +726,8 @@ namespace
                     256))
                 {
                     if (!std::wcsstr(ClassName, L"Windows.UI.") &&
-                        !std::wcsstr(ClassName, L"Mile.Xaml."))
+                        !std::wcsstr(ClassName, L"Mile.Xaml.") &&
+                        !std::wcsstr(ClassName, L"Xaml_WindowedPopupClass"))
                     {
                         ::SetWindowSubclass(
                             WndProcStruct->hwnd,
