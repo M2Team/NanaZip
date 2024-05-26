@@ -15,8 +15,14 @@
 
 #include <Detours.h>
 
+#include <atomic>
+
 namespace
 {
+#ifdef NDEBUG
+    static std::atomic<decltype(::SetThreadInformation)*> SetThreadInformationPtr = nullptr;
+#endif
+
     static HMODULE GetKernel32ModuleHandle()
     {
         static HMODULE CachedResult = ::GetModuleHandleW(L"kernel32.dll");
@@ -105,12 +111,25 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
     {
         PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = { 0 };
         Policy.ProhibitDynamicCode = 1;
+        Policy.AllowThreadOptOut = 1;
         if (!::SetProcessMitigationPolicyWrapper(
             ProcessDynamicCodePolicy,
             &Policy,
             sizeof(PROCESS_MITIGATION_DYNAMIC_CODE_POLICY)))
         {
             return FALSE;
+        }
+
+        HMODULE ModuleHandle = ::GetKernel32ModuleHandle();
+        if (ModuleHandle)
+        {
+            using ProcType = decltype(::SetThreadInformation)*;
+            FARPROC ProcAddress = ::GetProcAddress(
+                ModuleHandle,
+                "SetThreadInformation");
+            SetThreadInformationPtr.store(
+                reinterpret_cast<ProcType>(ProcAddress),
+                std::memory_order_relaxed);
         }
     }
 #endif // NDEBUG
@@ -151,3 +170,32 @@ EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 
     return TRUE;
 }
+
+#ifdef NDEBUG
+
+EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(BOOL optout)
+{
+    using ProcType = decltype(::SetThreadInformation)*;
+    ProcType SetThreadInformationWrapper = SetThreadInformationPtr.load(std::memory_order_relaxed);
+    if (SetThreadInformationWrapper) {
+        DWORD ThreadPolicy = optout ? THREAD_DYNAMIC_CODE_ALLOW : 0;
+        return SetThreadInformationWrapper(
+            ::GetCurrentThread(),
+            ThreadDynamicCodePolicy,
+            &ThreadPolicy,
+            sizeof(DWORD));
+    }
+    else {
+        return TRUE;
+    }
+}
+
+#else
+
+EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(BOOL optout)
+{
+    UNREFERENCED_PARAMETER(optout);
+    return TRUE;
+}
+
+#endif
