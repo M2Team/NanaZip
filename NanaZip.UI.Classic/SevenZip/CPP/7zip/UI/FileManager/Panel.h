@@ -850,6 +850,7 @@ public:
 
   void GetFilePaths(const CRecordVector<UInt32> &indices, UStringVector &paths, bool allowFolders = false);
   void ExtractArchives();
+  void ExtractFromArchive();
   void TestArchives();
 
   HRESULT CopyTo(CCopyToOptions &options,
