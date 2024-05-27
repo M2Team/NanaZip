@@ -2,9 +2,34 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 3.5 Preview 0 (3.5.1000.0)**
+
+This version is same as NanaZip 3.0 Update 1 (3.0.1000.0).
+
+- Update Mile.Windows.Internal to 1.0.2889.
+- Make the 7-Zip Zstandard branch's specific options translatable. (Contributed
+  by ChuckMichael.)
+- Polish translation for Sponsor dialog. (Contributed by ChuckMichael.)
+- Fix compatibility issues with iFlyIME, Sogou Pinyin, and Transparent Flyout.
+  (Contributed by dinhngtu.)
+- Update the UI layout for the sponsor button. (Suggested by namazso.)
+- NanaZip will only check the Sponsor Edition addon licensing status the first
+  time you launch NanaZip File Manager or click the sponsor button to optimize
+  the user experience.
+- Update NanaZip installation documentation. (Contributed by dongle-the-gadget.)
+- Use Extract dialog when extracting without selection. (Contributed by 
+  dinhngtu.)
+- Fix tooltips from XAML controls cannot be transparent.
+- Fix dark mode UI font rendering issues in some Windows 10 environments.
+- Adjust the dark mode text color for improving the user experience. (Suggested
+  by userzzzq.)
+- Synchronize the 7-Zip mainline implementations to 24.06.
+  (https://github.com/ip7z/7zip/releases/tag/24.06) (Thanks to Igor Pavlov.
+  Noticed by KsZAO.)
+
 **NanaZip 3.5 Preview 0 (3.5.996.0)**
 
-This version is same as NanaZip 3.0 (3.0.1000.0).
+This version is same as NanaZip 3.0 (3.0.996.0).
 
 - The 32-bit x86 support for NanaZip packaged version is removed because
   supported 32-bit x86 Windows versions don't support running on 32-bit

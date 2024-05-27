@@ -3,7 +3,7 @@
 
 #include "../FileManager/resourceGui.rc"
 
-IDI_ICON ICON "../../../../../../Assets/NanaZip.ico"
+IDI_ICON ICON "../../../../../../Assets/NanaZipPreview.ico"
 
 #include "../FileManager/PropertyName.rc"
 #include "../FileManager/OverwriteDialog.rc"
