@@ -1,5 +1,5 @@
 ﻿/* Blake2s.c -- BLAKE2sp Hash
-2024-01-29 : Igor Pavlov : Public domain
+2024-05-18 : Igor Pavlov : Public domain
 2015-2019 : Samuel Neves : original code : CC0 1.0 Universal (CC0 1.0). */
 
 #include "Precomp.h"
@@ -11,6 +11,17 @@
 #include "RotateDefs.h"
 #include "Compiler.h"
 #include "CpuArch.h"
+
+/*
+  if defined(__AVX512F__) && defined(__AVX512VL__)
+  {
+    we define Z7_BLAKE2S_USE_AVX512_ALWAYS,
+    but the compiler can use avx512 for any code.
+  }
+  else if defined(Z7_BLAKE2S_USE_AVX512_ALWAYS)
+    { we use avx512 only for sse* and avx* branches of code. }
+*/
+// #define Z7_BLAKE2S_USE_AVX512_ALWAYS // for debug
 
 #if defined(__SSE2__)
     #define Z7_BLAKE2S_USE_VECTORS
@@ -59,6 +70,9 @@
 #endif // SSSE3
 
 #if defined(__GNUC__) || defined(__clang__)
+#if defined(Z7_BLAKE2S_USE_AVX512_ALWAYS) && !(defined(__AVX512F__) && defined(__AVX512VL__))
+    #define BLAKE2S_ATTRIB_128BIT  __attribute__((__target__("avx512vl,avx512f")))
+#else
   #if defined(Z7_BLAKE2S_USE_SSE41)
     #define BLAKE2S_ATTRIB_128BIT  __attribute__((__target__("sse4.1")))
   #elif defined(Z7_BLAKE2S_USE_SSSE3)
@@ -66,6 +80,7 @@
   #else
     #define BLAKE2S_ATTRIB_128BIT  __attribute__((__target__("sse2")))
   #endif
+#endif
 #endif
 
 
@@ -77,7 +92,11 @@
       || defined(Z7_LLVM_CLANG_VERSION) && (Z7_LLVM_CLANG_VERSION >= 30100)
     #define Z7_BLAKE2S_USE_AVX2
     #ifdef Z7_BLAKE2S_USE_AVX2
+#if defined(Z7_BLAKE2S_USE_AVX512_ALWAYS) && !(defined(__AVX512F__) && defined(__AVX512VL__))
+      #define BLAKE2S_ATTRIB_AVX2  __attribute__((__target__("avx512vl,avx512f")))
+#else
       #define BLAKE2S_ATTRIB_AVX2  __attribute__((__target__("avx2")))
+#endif
     #endif
   #elif  defined(Z7_MSC_VER_ORIGINAL) && (Z7_MSC_VER_ORIGINAL >= 1800) \
       || defined(__INTEL_COMPILER) && (__INTEL_COMPILER >= 1400)
@@ -107,7 +126,9 @@
 
 #if defined(__AVX512F__) && defined(__AVX512VL__)
    // && defined(Z7_MSC_VER_ORIGINAL) && (Z7_MSC_VER_ORIGINAL > 1930)
+  #ifndef Z7_BLAKE2S_USE_AVX512_ALWAYS
   #define Z7_BLAKE2S_USE_AVX512_ALWAYS
+  #endif
   // #pragma message ("=== Blake2s AVX512")
 #endif
 
@@ -1164,7 +1185,9 @@ Blake2sp_Final_V128_Fast(UInt32 *states)
 #if 1 && defined(Z7_BLAKE2S_USE_AVX512_ALWAYS)
   #define MM256_ROR_EPI32  _mm256_ror_epi32
   #define Z7_MM256_ROR_EPI32_IS_SUPPORTED
+#ifdef Z7_BLAKE2S_USE_AVX2_WAY2
   #define LOAD_ROTATE_CONSTS_256
+#endif
 #else
 #ifdef Z7_BLAKE2S_USE_AVX2_WAY_SLOW
 #ifdef Z7_BLAKE2S_USE_AVX2_WAY2
@@ -2549,9 +2572,11 @@ void z7_Black2sp_Prepare(void)
 
 #if defined(MY_CPU_X86_OR_AMD64)
     #if defined(Z7_BLAKE2S_USE_AVX512_ALWAYS)
+      // optional check
+      #if 0 || !(defined(__AVX512F__) && defined(__AVX512VL__))
       if (CPU_IsSupported_AVX512F_AVX512VL())
-    #endif
-    #if defined(Z7_BLAKE2S_USE_SSE41)
+      #endif
+    #elif defined(Z7_BLAKE2S_USE_SSE41)
       if (CPU_IsSupported_SSE41())
     #elif defined(Z7_BLAKE2S_USE_SSSE3)
       if (CPU_IsSupported_SSSE3())
@@ -2584,12 +2609,14 @@ void z7_Black2sp_Prepare(void)
 
 #ifdef Z7_BLAKE2S_USE_AVX2
 #if defined(MY_CPU_X86_OR_AMD64)
-    if (
-    #if 0 && defined(Z7_BLAKE2S_USE_AVX512_ALWAYS)
-        CPU_IsSupported_AVX512F_AVX512VL() &&
+    
+    #if defined(Z7_BLAKE2S_USE_AVX512_ALWAYS)
+      #if 0
+        if (CPU_IsSupported_AVX512F_AVX512VL())
+      #endif
+    #else
+        if (CPU_IsSupported_AVX2())
     #endif
-        CPU_IsSupported_AVX2()
-        )
 #endif
     {
     // #pragma message ("=== Blake2s AVX2")

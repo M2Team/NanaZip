@@ -1,5 +1,5 @@
 ﻿/* CpuArch.c -- CPU specific code
-2024-03-02 : Igor Pavlov : Public domain */
+2024-05-18 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
@@ -638,7 +638,7 @@ BoolInt CPU_IsSupported_AVX(void)
 
   {
     const UInt32 bm = (UInt32)x86_xgetbv_0(MY_XCR_XFEATURE_ENABLED_MASK);
-    // printf("\n=== XGetBV=%d\n", bm);
+    // printf("\n=== XGetBV=0x%x\n", bm);
     return 1
         & (BoolInt)(bm >> 1)  // SSE state is supported (set by OS) for storing/restoring
         & (BoolInt)(bm >> 2); // AVX state is supported (set by OS) for storing/restoring
@@ -662,8 +662,7 @@ BoolInt CPU_IsSupported_AVX2(void)
   }
 }
 
-/*
-// fix it:
+#if 0
 BoolInt CPU_IsSupported_AVX512F_AVX512VL(void)
 {
   if (!CPU_IsSupported_AVX())
@@ -672,14 +671,25 @@ BoolInt CPU_IsSupported_AVX512F_AVX512VL(void)
     return False;
   {
     UInt32 d[4];
+    BoolInt v;
     z7_x86_cpuid(d, 7);
     // printf("\ncpuid(7): ebx=%8x ecx=%8x\n", d[1], d[2]);
+    v = 1
+      & (BoolInt)(d[1] >> 16)  // avx512f
+      & (BoolInt)(d[1] >> 31); // avx512vl
+    if (!v)
+      return False;
+  }
+  {
+    const UInt32 bm = (UInt32)x86_xgetbv_0(MY_XCR_XFEATURE_ENABLED_MASK);
+    // printf("\n=== XGetBV=0x%x\n", bm);
     return 1
-      & (BoolInt)(d[1] >> 16)  // avx512-f
-      & (BoolInt)(d[1] >> 31); // avx512-Vl
+        & (BoolInt)(bm >> 5)  // OPMASK
+        & (BoolInt)(bm >> 6)  // ZMM upper 256-bit
+        & (BoolInt)(bm >> 7); // ZMM16 ... ZMM31
   }
 }
-*/
+#endif
 
 BoolInt CPU_IsSupported_VAES_AVX2(void)
 {

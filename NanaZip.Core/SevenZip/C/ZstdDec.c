@@ -1,5 +1,5 @@
 ﻿/* ZstdDec.c -- Zstd Decoder
-2024-01-21 : the code was developed by Igor Pavlov, using Zstandard format
+2024-05-26 : the code was developed by Igor Pavlov, using Zstandard format
              specification and original zstd decoder code as reference code.
 original zstd decoder code: Copyright (c) Facebook, Inc. All rights reserved.
 This source code is licensed under BSD 3-Clause License.
@@ -2507,6 +2507,7 @@ SRes ZstdDec1_DecodeBlock(CZstdDec1 *p,
     if (vars.numSeqs == 0)
     {
       p->winPos += numLits;
+      UPDATE_TOTAL_OUT(p, numLits)
       return SZ_OK;
     }
   }
@@ -3310,11 +3311,11 @@ static SRes ZstdDec_DecodeBlock(CZstdDec * const p, CZstdDecState * const ds,
         {
           const SizeT xxh64_winPos = p->decoder.winPos - ZstdDec_GET_UNPROCESSED_XXH64_SIZE(p);
           p->decoder.winPos += outCur;
+          UPDATE_TOTAL_OUT(&p->decoder, outCur)
           p->contentProcessed += outCur;
           ZstdDec_Update_XXH(p, xxh64_winPos);
         }
         // ds->winPos = p->decoder.winPos;  // the caller does it instead. for debug:
-        UPDATE_TOTAL_OUT(&p->decoder, outCur)
         ds->outProcessed += outCur;
         if (p->blockSize -= (UInt32)outCur)
         {

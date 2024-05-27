@@ -1,5 +1,5 @@
 ﻿/* CpuArch.h -- CPU specific code
-2024-05-13 : Igor Pavlov : Public domain */
+2024-05-18 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_CPU_ARCH_H
 #define ZIP7_INC_CPU_ARCH_H
@@ -370,12 +370,12 @@ MY_CPU_64BIT means that processor can work with 64-bit registers.
 #define Z7_CPU_FAST_BSWAP_SUPPORTED
 
 /* GCC can generate slow code that calls function for __builtin_bswap32() for:
-     - GCC for RISCV, if Zbb extension is not used.
+     - GCC for RISCV, if Zbb/XTHeadBb extension is not used.
      - GCC for SPARC.
    The code from CLANG for SPARC also is not fastest.
    So we don't define Z7_CPU_FAST_BSWAP_SUPPORTED in some cases.
 */
-#elif (!defined(MY_CPU_RISCV) || defined (__riscv_zbb)) \
+#elif (!defined(MY_CPU_RISCV) || defined (__riscv_zbb) || defined(__riscv_xtheadbb)) \
     && !defined(MY_CPU_SPARC) \
     && ( \
        (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3))) \
@@ -607,7 +607,7 @@ UInt32 Z7_FASTCALL z7_x86_cpuid_GetMaxFunc(void);
 BoolInt CPU_IsSupported_AES(void);
 BoolInt CPU_IsSupported_AVX(void);
 BoolInt CPU_IsSupported_AVX2(void);
-// BoolInt CPU_IsSupported_AVX512F_AVX512VL(void);
+BoolInt CPU_IsSupported_AVX512F_AVX512VL(void);
 BoolInt CPU_IsSupported_VAES_AVX2(void);
 BoolInt CPU_IsSupported_CMOV(void);
 BoolInt CPU_IsSupported_SSE(void);
