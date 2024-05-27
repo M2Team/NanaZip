@@ -243,6 +243,7 @@ namespace
         ::CreateSolidBrush(DarkModeBorderColor);
 
     thread_local bool volatile g_ThreadInitialized = false;
+    thread_local bool volatile g_MicaBackdropAvailable = false;
     thread_local HHOOK volatile g_WindowsHookHandle = nullptr;
     thread_local bool volatile g_ShouldAppsUseDarkMode = false;
     thread_local HTHEME g_TabControlThemeHandle = nullptr;
@@ -410,8 +411,10 @@ namespace
                     hWnd,
                     g_ShouldAppsUseDarkMode);
 
-                bool ShouldExtendFrame =
-                    (g_ShouldAppsUseDarkMode && ::IsStandardDynamicRangeMode());
+                bool ShouldExtendFrame = (
+                    g_ShouldAppsUseDarkMode &&
+                    ::IsStandardDynamicRangeMode() &&
+                    g_MicaBackdropAvailable);
                 MARGINS Margins = { 0 };
                 if (ShouldExtendFrame)
                 {
@@ -453,12 +456,15 @@ namespace
                 hWnd,
                 MILE_WINDOW_SYSTEM_BACKDROP_TYPE_MICA);
 
-            ::MileEnableImmersiveDarkModeForWindow(
-                hWnd,
-                g_ShouldAppsUseDarkMode);
+            g_MicaBackdropAvailable =
+                (S_OK == ::MileEnableImmersiveDarkModeForWindow(
+                    hWnd,
+                    g_ShouldAppsUseDarkMode));
 
-            bool ShouldExtendFrame =
-                (g_ShouldAppsUseDarkMode && ::IsStandardDynamicRangeMode());
+            bool ShouldExtendFrame = (
+                g_ShouldAppsUseDarkMode &&
+                ::IsStandardDynamicRangeMode() &&
+                g_MicaBackdropAvailable);
             if (ShouldExtendFrame)
             {
                 MARGINS Margins = { -1 };
@@ -521,8 +527,10 @@ namespace
         }
         case WM_DPICHANGED:
         {
-            bool ShouldExtendFrame =
-                (g_ShouldAppsUseDarkMode && ::IsStandardDynamicRangeMode());
+            bool ShouldExtendFrame = (
+                g_ShouldAppsUseDarkMode &&
+                ::IsStandardDynamicRangeMode() &&
+                g_MicaBackdropAvailable);
             if (!ShouldExtendFrame && ::IsFileManagerWindow(hWnd))
             {
                 UINT DpiValue = ::GetDpiForWindow(hWnd);
