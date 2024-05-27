@@ -9,7 +9,7 @@
 
 // **************** NanaZip Modification Start ****************
 //IDI_ICON  ICON "setup.ico"
-IDI_ICON ICON "../../../../../../Assets/NanaZipPreviewSfx.ico"
+IDI_ICON ICON "../../../../../../Assets/NanaZipSfx.ico"
 // **************** NanaZip Modification End ****************
 
 STRINGTABLE

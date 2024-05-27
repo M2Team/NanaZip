@@ -3,7 +3,7 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
-**NanaZip 3.0 Update 1 (3.0.10xx.0)**
+**NanaZip 3.0 Update 1 (3.0.1000.0)**
 
 - Update Mile.Windows.Internal to 1.0.2889.
 - Make the 7-Zip Zstandard branch's specific options translatable. (Contributed
@@ -19,6 +19,12 @@ For preview versions, please read
 - Use Extract dialog when extracting without selection. (Contributed by 
   dinhngtu.)
 - Fix tooltips from XAML controls cannot be transparent.
+- Fix dark mode UI font rendering issues in some Windows 10 environments.
+- Adjust the dark mode text color for improving the user experience. (Suggested
+  by userzzzq.)
+- Synchronize the 7-Zip mainline implementations to 24.06.
+  (https://github.com/ip7z/7zip/releases/tag/24.06) (Thanks to Igor Pavlov.
+  Noticed by KsZAO.)
 
 **NanaZip 3.0 (3.0.996.0)**
 

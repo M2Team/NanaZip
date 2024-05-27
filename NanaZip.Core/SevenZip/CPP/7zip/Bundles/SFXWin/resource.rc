@@ -16,7 +16,7 @@
 
 // **************** NanaZip Modification Start ****************
 //IDI_ICON ICON "7z.ico"
-IDI_ICON ICON "../../../../../../Assets/NanaZipPreviewSfx.ico"
+IDI_ICON ICON "../../../../../../Assets/NanaZipSfx.ico"
 // **************** NanaZip Modification End ****************
 
 IDD_EXTRACT  DIALOG  0, 0, xs, ys  MY_MODAL_DIALOG_STYLE  MY_FONT

@@ -115,7 +115,7 @@ BEGIN
 END
 
 
-IDI_ICON  ICON  "../../../../../../Assets/NanaZipPreview.ico"
+IDI_ICON  ICON  "../../../../../../Assets/NanaZip.ico"
 
 IDB_PARENT_FOLDER      BITMAP  "../../../../../Assets/ParentFolder.bmp"
 
