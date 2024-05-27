@@ -186,7 +186,7 @@ CApp g_App;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-static const wchar_t * const kWindowClass = L"FM";
+static const wchar_t * const kWindowClass = L"NanaZip.Modern.FileManager";
 
 #ifdef UNDER_CE
 #define WS_OVERLAPPEDWINDOW ( \
@@ -1059,7 +1059,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SETTINGCHANGE:
     {
         ::SendMessageW(g_App.m_ToolBar, message, wParam, lParam);
-        
+
         break;
     }
     default:

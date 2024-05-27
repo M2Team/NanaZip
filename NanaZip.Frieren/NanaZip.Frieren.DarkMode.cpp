@@ -341,7 +341,9 @@ namespace
             ClassName,
             256))
         {
-            return (0 == std::wcscmp(ClassName, L"FM"));
+            return (0 == std::wcscmp(
+                ClassName,
+                L"NanaZip.Modern.FileManager"));
         }
 
         return false;
