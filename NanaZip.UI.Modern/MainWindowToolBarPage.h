@@ -6,6 +6,9 @@
 
 #include <winrt/Windows.System.h>
 #include <winrt/Windows.Services.Store.h>
+#include <winrt/Windows.UI.Composition.h>
+#include <winrt/Windows.UI.Xaml.Hosting.h>
+#include <winrt/Windows.Foundation.Numerics.h>
 
 namespace winrt
 {
@@ -13,6 +16,15 @@ namespace winrt
     using Windows::Services::Store::StoreContext;
     using Windows::System::DispatcherQueue;
     using Windows::UI::Xaml::RoutedEventArgs;
+    using Windows::UI::Composition::Compositor;
+    using Windows::UI::Composition::RectangleClip;
+    using Windows::UI::Composition::CompositionRoundedRectangleGeometry;
+    using Windows::UI::Composition::SpriteVisual;
+    using Windows::UI::Composition::ShapeVisual;
+    using Windows::UI::Composition::CompositionVisualSurface;
+    using Windows::UI::Composition::CompositionBrush;
+    using Windows::UI::Composition::Compositor;
+    using Windows::Foundation::Numerics::float2;
 }
 namespace winrt::NanaZip::Modern::implementation
 {
@@ -83,9 +95,27 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::DispatcherQueue m_DispatcherQueue = nullptr;
         winrt::StoreContext m_StoreContext = nullptr;
 
+        winrt::RectangleClip m_sponsorButtonShadowClip = nullptr;
+        winrt::CompositionRoundedRectangleGeometry m_sponsorButtonShadowMaskGeometry = nullptr;
+        winrt::CompositionRoundedRectangleGeometry m_sponsorButtonVisualMaskGeometry = nullptr;
+        winrt::ShapeVisual m_sponsorButtonVisualMaskShapeVisual = nullptr;
+        winrt::ShapeVisual m_sponsorButtonShadowMaskShapeVisual = nullptr;
+        winrt::SpriteVisual m_sponsorButtonShadowSpriteVisual = nullptr;
+        winrt::CompositionVisualSurface m_sponsorButtonVisualMaskVisualSurface = nullptr;
+        winrt::CompositionVisualSurface m_sponsorButtonShadowMaskVisualSurface = nullptr;
+        winrt::CompositionVisualSurface m_sponsorButtonShadowVisualSurface = nullptr;
+
         bool CheckSponsorEditionLicense();
 
         void RefreshSponsorButtonContent();
+
+        void CreateSponsorButtonShadow();
+
+        winrt::RectangleClip GetShadowClip(winrt::Compositor compositor, float CornerRadius);
+
+        winrt::CompositionBrush CreateVisualOpacityMask(winrt::Compositor compositor, float CornerRadius);
+
+        winrt::CompositionBrush GetShadowMask(winrt::Compositor compositor, float CornerRadius);
     };
 }
 
