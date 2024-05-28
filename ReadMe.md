@@ -26,8 +26,9 @@ experience, forked from the source code of well-known open source file archiver
 **All kinds of contributions will be appreciated. All suggestions, pull 
 requests and issues are welcome.**
 
-If you want to sponsor the development NanaZip of, please read the document of
-[NanaZip Sponsor Edition](Documents/SponsorEdition.md).
+If you want to sponsor the development of NanaZip, please read the document of
+[NanaZip Sponsor Edition](Documents/SponsorEdition.md). It's free for all
+NanaZip source code repository contributors.
 
 In general, NanaZip Sponsor Edition is more like contributor's edition, but
 we provide a way to buy the honor and make someone look like a source code
