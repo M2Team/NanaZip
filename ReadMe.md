@@ -26,13 +26,15 @@ experience, forked from the source code of well-known open source file archiver
 **All kinds of contributions will be appreciated. All suggestions, pull 
 requests and issues are welcome.**
 
-If you want to sponsor me, please read [this document to become a sponsor].
+If you want to sponsor the development NanaZip of, please read the document of
+[NanaZip Sponsor Edition](Documents/SponsorEdition.md).
+
+In general, NanaZip Sponsor Edition is more like contributor's edition, but
+we provide a way to buy the honor and make someone look like a source code
+contributor, because NanaZip is always a community-friendly open-source project.
 
 If you'd like me to add features or improvements ahead of time, please use
-[paid services].
-
-[this document to become a sponsor]: https://github.com/MouriNaruto/MouriNaruto/blob/main/Sponsor
-[paid services]: https://github.com/MouriNaruto/MouriNaruto/blob/main/PaidServices.md
+[paid services](https://github.com/MouriNaruto/MouriNaruto/blob/main/PaidServices.md).
 
 Kenji Mouri
 
