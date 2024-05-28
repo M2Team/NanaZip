@@ -24,7 +24,7 @@ experience, forked from the source code of well-known open source file archiver
 7-Zip.
 
 **All kinds of contributions will be appreciated. All suggestions, pull 
-requests and issues are welcome.**
+requests, and issues are welcome.**
 
 If you want to sponsor the development of NanaZip, please read the document of
 [NanaZip Sponsor Edition](Documents/SponsorEdition.md). It's free for all
@@ -43,7 +43,7 @@ Kenji Mouri
 
 - Inherit all features from 7-Zip 24.05.
 - Support the dark mode for all GUI components.
-- Support the Mica effect to the main window. You will enjoy the full window
+- Support the Mica effect on the main window. You will enjoy the full window
   immersive Mica for all GUI components if you are using dark mode with HDR
   disabled.
 - Packaging with MSIX for modern deployment experience.
@@ -51,7 +51,7 @@ Kenji Mouri
 - Enable NSIS script decompiling support for the NSIS archives. (Merged from 
   [7-Zip NSIS branch](https://github.com/myfreeer/7z-build-nsis).)
 - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
-- Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5 and Zstandard codecs. (Merged 
+- Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5, and Zstandard codecs. (Merged 
   from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd).)
 - Support the Per-Monitor DPI-Aware for all GUI components.
 - Support the i18n for GUI edition of Self Extracting Executable.
@@ -60,7 +60,7 @@ Kenji Mouri
   GOST R 34.11-94 CryptoPro, GOST R 34.11-2012 256, GOST R 34.11-2012 512, 
   HAS-160, RIPEMD-160, SHA-224, SHA3-224, SHA3-256, SHA3-384, SHA3-512, 
   Snefru-128, Snefru-256, Tiger, Tiger2, TTH, Whirlpool), xxHash (XXH3_64bits,
-  XXH3_128bits) and GmSSL (SM3).
+  XXH3_128bits), and GmSSL (SM3).
 - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP 
   attacks.
 - Mark all x86 and x64 target binaries as compatible with Control-flow 
@@ -82,7 +82,7 @@ NanaZip Classic. Here are the differences between them.
 - NanaZip
   - Only 64-Bit support.
   - Only MSIX packaged version.
-  - Support the context menu in Windows 10/11 File Explorer.
+  - Support for the context menu in Windows 10/11 File Explorer.
   - Only support Windows 10 Version 2004 (Build 19041) or later.
   - Have XAML-based GUI and VT-based CLI.
 
@@ -107,17 +107,17 @@ NanaZip Classic. Here are the differences between them.
   - Supported OS: Windows Vista RTM (Build 6000.16386) or later
   - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
   
-We only choose Windows as the major platform for the NanaZip project supported
+We chose Windows as the major platform for the NanaZip project supported
 because Windows has maintained a good and proven ABI and compatibility, and
-stands out in the whole history. But we also care about the non-Windows
+stands out in the history of computing. But we also care about the non-Windows
 platform. Here are the policy for non-Windows platform support:
 
-- The modern flavor of NanaZip won't support non-Windows unless someguys ported
+- The modern flavor of NanaZip won't support non-Windows unless someone ported
   WinRT XAML to POSIX. So, non-Windows support policy is only for NanaZip Core
   and NanaZip Classic.
 - The developer team will try best to support Wine which has the Windows Vista
   or later feature level. Currenly tested simply under Wine 9.x.
-- We don't support the ReactOS and its derivatives because they are too hard to
+- We don't support ReactOS and its derivatives because they are too hard to
   support. But testing under the ReactOS and its derivatives may be interesting.
 
 ## Download and Installation
@@ -128,8 +128,8 @@ Here are some available installation methods for NanaZip.
 
 This is the recommended way to install NanaZip.
 
-Search and install `NanaZip` in Windows Store for stable release, and `NanaZip
-Preview` for preview release.
+Search and install `NanaZip` in Windows Store for the stable release, and `NanaZip
+Preview` for the preview release.
 
 Also, you can also click the Microsoft Store link you needed.
 
@@ -147,7 +147,7 @@ administrator.
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
 
-P.S. All needed dependencies are included in the MSIX Package of NanaZip 
+Note: All needed dependencies are included in the MSIX Package of NanaZip 
 because we known that it's very difficult for users who do not have access to 
 the store to get our dependency packages, and we want to be robust and 
 deployable everywhere.
@@ -165,7 +165,7 @@ as administrator instead.
 For more information, please read documents for [PowerShell](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps) and 
 [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-app-package--appx-or-appxbundle--servicing-command-line-options?view=windows-11)
 
-P.S. Due to the policy from Microsoft Store, you need to run NanaZip with the
+Note: Due to the policy from Microsoft Store, you need to run NanaZip with the
 internet connection at the first time for getting the license if you install
 NanaZip without the internet connection, otherwise Windows won't launch NanaZip
 properly.
@@ -191,12 +191,12 @@ the following command in the PowerShell which is run as administrator.
 - Due to the Microsoft Store limitations, NanaZip 1.2 and later won't support 
   languages not mentioned in 
   https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages.
-- If you turn off the Windows Firewall, you may fail to install NanaZip.
+- If you turn off the Windows Firewall, NanaZip may fail to install.
   (https://github.com/M2Team/NanaZip/issues/204)
   (https://github.com/microsoft/terminal/issues/12269)
-- Due to the System Settings APP limitations, only starting with Windows 11+ 
-  (Build 22000.1817+ & 22621.1555+), you can launch directly to the settings 
-  page of file association for NanaZip.
+- Due to the System Settings limitations, starting with Windows 11+ 
+  (Build 22000.1817+ & 22621.1555+), you can launch directly to the Settings 
+  page for file association for NanaZip.
   (https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-default-apps-settings)
 - Due to the Microsoft Store Licensing API implementation, you will find NanaZip
   will try to access the Internet beginning with NanaZip 3.0 because NanaZip
