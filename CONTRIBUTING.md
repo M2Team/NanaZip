@@ -20,8 +20,8 @@
   - You also need install ARM64 components (MSVC Toolchain and ATL/MFC) if you
     want to compile the ARM64 version of NanaZip.
 - Windows 11 SDK or later.
-  - You also need to install ARM64 components if you want to compile the ARM64 version
-    of NanaZip.
+  - You also need to install ARM64 components if you want to compile the ARM64
+    version of NanaZip.
 
 #### How to build all targets of NanaZip
 
