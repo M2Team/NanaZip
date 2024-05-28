@@ -1110,7 +1110,7 @@
     <value>确认删除多个文件</value>
   </data>
   <data name="Resource6103" xml:space="preserve">
-    <value>确实要删除 「{0}」吗？</value>
+    <value>确实要删除「{0}」吗？</value>
   </data>
   <data name="Resource6104" xml:space="preserve">
     <value>确实要删除文件夹「{0}」以及全部内容吗？</value>
@@ -1327,7 +1327,7 @@
     <value>目录符号链接</value>
   </data>
   <data name="Resource7714" xml:space="preserve">
-    <value>目录连接（Directory Junction）</value>
+    <value>目录连接 (Directory Junction)</value>
   </data>
   <data name="Resource12200" xml:space="preserve">
     <value>集成</value>
