@@ -28,7 +28,7 @@ namespace
         return CachedResult;
     }
 
-    static FARPROC GetRoGetActivationFactoryProcAddress()
+    /*static FARPROC GetRoGetActivationFactoryProcAddress()
     {
         static FARPROC CachedResult = ([]() -> FARPROC
         {
@@ -43,7 +43,7 @@ namespace
         }());
 
         return CachedResult;
-    }
+    }*/
 
     static FARPROC GetRoOriginateLanguageExceptionProcAddress()
     {
@@ -157,24 +157,24 @@ namespace
     }
 }
 
-EXTERN_C HRESULT WINAPI RoGetActivationFactory(
-    _In_ HSTRING activatableClassId,
-    _In_ REFIID iid,
-    _Out_ LPVOID* factory)
-{
-    using ProcType = decltype(::RoGetActivationFactory)*;
-
-    ProcType ProcAddress = reinterpret_cast<ProcType>(
-        ::GetRoGetActivationFactoryProcAddress());
-
-    if (ProcAddress)
-    {
-        return ProcAddress(activatableClassId, iid, factory);
-    }
-
-    *factory = nullptr;
-    return CLASS_E_CLASSNOTAVAILABLE;
-}
+//EXTERN_C HRESULT WINAPI RoGetActivationFactory(
+//    _In_ HSTRING activatableClassId,
+//    _In_ REFIID iid,
+//    _Out_ LPVOID* factory)
+//{
+//    using ProcType = decltype(::RoGetActivationFactory)*;
+//
+//    ProcType ProcAddress = reinterpret_cast<ProcType>(
+//        ::GetRoGetActivationFactoryProcAddress());
+//
+//    if (ProcAddress)
+//    {
+//        return ProcAddress(activatableClassId, iid, factory);
+//    }
+//
+//    *factory = nullptr;
+//    return CLASS_E_CLASSNOTAVAILABLE;
+//}
 
 EXTERN_C BOOL WINAPI RoOriginateLanguageException(
     _In_ HRESULT error,
