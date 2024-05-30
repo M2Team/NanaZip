@@ -180,20 +180,20 @@ namespace winrt::NanaZip::Modern::implementation
         this->m_sponsorButtonShadowVisualSurface = Compositor.CreateVisualSurface();
         this->m_sponsorButtonShadowVisualSurface.SourceVisual(this->m_sponsorButtonShadowSpriteVisual = Compositor.CreateSpriteVisual());
 
-        this->m_sponsorButtonShadowSpriteVisual.Clip(GetShadowClip(Compositor, CornerRadius));
+        this->m_sponsorButtonShadowSpriteVisual.Clip(this->GetShadowClip(Compositor, CornerRadius));
         this->m_sponsorButtonShadowSpriteVisual.RelativeSizeAdjustment(float2::zero());
-        this->m_sponsorButtonShadowSpriteVisual.Size(ActualSize());
+        this->m_sponsorButtonShadowSpriteVisual.Size(this->SponsorButton().ActualSize());
 
         Windows::UI::Composition::DropShadow dropShadow = nullptr;
         this->m_sponsorButtonShadowSpriteVisual.Shadow(dropShadow = Compositor.CreateDropShadow());
-        dropShadow.Mask(GetShadowMask(Compositor, CornerRadius));
+        dropShadow.Mask(this->GetShadowMask(Compositor, CornerRadius));
         dropShadow.BlurRadius(14);
         dropShadow.Opacity(0.3f);
         dropShadow.Color(Windows::UI::Colors::Black());
 
         // Adjust the offset and size of the CompositionVisualSurface to accommodate the thick outline of the shape created in UpdateVisualOpacityMask().
         this->m_sponsorButtonShadowVisualSurface.SourceOffset(float2(-72));
-        this->m_sponsorButtonShadowVisualSurface.SourceSize(SponsorButton().ActualSize() + float2(144));
+        this->m_sponsorButtonShadowVisualSurface.SourceSize(this->SponsorButton().ActualSize() + float2(MaxBlurRadius * 2));
 
         // Create a CompositionSurfaceBrush from the CompositionVisualSurface. This allows us to render the shadow in a brush.
         Windows::UI::Composition::CompositionSurfaceBrush shadowSurfaceBrush = Compositor.CreateSurfaceBrush();
@@ -205,30 +205,35 @@ namespace winrt::NanaZip::Modern::implementation
         // This creates a brush that renders the shadow with its inner portion clipped out.
         Windows::UI::Composition::CompositionMaskBrush maskBrush = Compositor.CreateMaskBrush();
         maskBrush.Source(shadowSurfaceBrush);
-        maskBrush.Mask(CreateVisualOpacityMask(Compositor, CornerRadius));
+        maskBrush.Mask(this->CreateVisualOpacityMask(Compositor, CornerRadius));
 
         // Create a SpriteVisual and set its brush to the CompositionMaskBrush created in the previous step,
         // then set it as the child of the element in the context.
         SpriteVisual visual = Compositor.CreateSpriteVisual();
         visual.RelativeSizeAdjustment(float2::one());
         visual.Offset(Windows::Foundation::Numerics::float3(-72, -72, 0));
-        visual.Size(float2(144));
+        visual.Size(float2(MaxBlurRadius * 2));
         visual.Brush(maskBrush);
 
-        Windows::UI::Xaml::Hosting::ElementCompositionPreview::SetElementChildVisual(SponsorButton(), visual);
+        Windows::UI::Xaml::Hosting::ElementCompositionPreview::SetElementChildVisual(this->SponsorButton(), visual);
 
-        SponsorButton().SizeChanged([this](const auto&, const SizeChangedEventArgs& e) {
-            this->m_sponsorButtonVisualMaskGeometry.Size(e.NewSize() + float2(MaxBlurRadius));
-            auto sharedSize = e.NewSize() + float2(MaxBlurRadius * 2);
+        this->SponsorButton().SizeChanged([this, CornerRadius](const auto&, const SizeChangedEventArgs& e) {
+            float2 Size = e.NewSize();
+            this->m_sponsorButtonVisualMaskGeometry.Size(Size + float2(MaxBlurRadius));
+            auto sharedSize = Size + float2(MaxBlurRadius * 2);
             this->m_sponsorButtonVisualMaskShapeVisual.Size(sharedSize);
             this->m_sponsorButtonVisualMaskVisualSurface.SourceSize(sharedSize);
-            this->m_sponsorButtonShadowMaskGeometry.Size(e.NewSize());
-            this->m_sponsorButtonShadowMaskVisualSurface.SourceSize(e.NewSize());
-            this->m_sponsorButtonShadowMaskShapeVisual.Size(e.NewSize());
-            this->m_sponsorButtonShadowSpriteVisual.Size(e.NewSize());
-            this->m_sponsorButtonShadowVisualSurface.SourceSize(e.NewSize() + float2(144));
-            this->m_sponsorButtonShadowClip.Right(e.NewSize().Width + MaxBlurRadius);
-            this->m_sponsorButtonShadowClip.Bottom(e.NewSize().Height + MaxBlurRadius);
+            this->m_sponsorButtonShadowMaskGeometry.Size(Size);
+            this->m_sponsorButtonShadowMaskVisualSurface.SourceSize(Size);
+            this->m_sponsorButtonShadowMaskShapeVisual.Size(Size);
+            this->m_sponsorButtonShadowSpriteVisual.Size(Size);
+            this->m_sponsorButtonShadowVisualSurface.SourceSize(Size + float2(MaxBlurRadius * 2));
+            this->m_sponsorButtonShadowClipGeometry.Size(
+                float2(
+                    Size.x + CornerRadius * 2,
+                    Size.y + CornerRadius * 2
+                )
+            );
         });
     }
 
@@ -288,7 +293,7 @@ namespace winrt::NanaZip::Modern::implementation
         return surfaceBrush;
     }
 
-    RectangleClip MainWindowToolBarPage::GetShadowClip(Compositor Compositor, float CornerRadius)
+    CompositionClip MainWindowToolBarPage::GetShadowClip(Compositor Compositor, float CornerRadius)
     {
         // The way this shadow works without the need to project on another element is because
         // we're clipping the inner part of the shadow which would be cast on the element
@@ -296,17 +301,18 @@ namespace winrt::NanaZip::Modern::implementation
         // parts of the shadow that are outside the element's context.
         // Note: This does cause an issue if the element does clip itself to its bounds, as then
         // the shadowed area is clipped as well.
-        this->m_sponsorButtonShadowClip = Compositor.CreateRectangleClip(
-            -MaxBlurRadius / 2,
-            -MaxBlurRadius / 2,
-            SponsorButton().ActualSize().x + MaxBlurRadius,
-            SponsorButton().ActualSize().y + MaxBlurRadius,
-            float2((MaxBlurRadius / 2) + (float)CornerRadius),
-            float2((MaxBlurRadius / 2) + (float)CornerRadius),
-            float2((MaxBlurRadius / 2) + (float)CornerRadius),
-            float2((MaxBlurRadius / 2) + (float)CornerRadius));
+        this->m_sponsorButtonShadowClipGeometry = Compositor.CreateRoundedRectangleGeometry();
 
-        return this->m_sponsorButtonShadowClip;
+        this->m_sponsorButtonShadowClipGeometry.Offset(float2(-CornerRadius));
+        this->m_sponsorButtonShadowClipGeometry.Size(
+            float2(
+                SponsorButton().ActualSize().x + CornerRadius * 2,
+                SponsorButton().ActualSize().y + CornerRadius * 2
+            )
+        );
+        this->m_sponsorButtonShadowClipGeometry.CornerRadius(float2(CornerRadius));
+
+        return Compositor.CreateGeometricClip(this->m_sponsorButtonShadowClipGeometry);
     }
 
     void MainWindowToolBarPage::AddButtonClick(

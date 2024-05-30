@@ -17,7 +17,7 @@ namespace winrt
     using Windows::System::DispatcherQueue;
     using Windows::UI::Xaml::RoutedEventArgs;
     using Windows::UI::Composition::Compositor;
-    using Windows::UI::Composition::RectangleClip;
+    using Windows::UI::Composition::CompositionClip;
     using Windows::UI::Composition::CompositionRoundedRectangleGeometry;
     using Windows::UI::Composition::SpriteVisual;
     using Windows::UI::Composition::ShapeVisual;
@@ -95,7 +95,7 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::DispatcherQueue m_DispatcherQueue = nullptr;
         winrt::StoreContext m_StoreContext = nullptr;
 
-        winrt::RectangleClip m_sponsorButtonShadowClip = nullptr;
+        winrt::CompositionRoundedRectangleGeometry m_sponsorButtonShadowClipGeometry = nullptr;
         winrt::CompositionRoundedRectangleGeometry m_sponsorButtonShadowMaskGeometry = nullptr;
         winrt::CompositionRoundedRectangleGeometry m_sponsorButtonVisualMaskGeometry = nullptr;
         winrt::ShapeVisual m_sponsorButtonVisualMaskShapeVisual = nullptr;
@@ -111,7 +111,7 @@ namespace winrt::NanaZip::Modern::implementation
 
         void CreateSponsorButtonShadow();
 
-        winrt::RectangleClip GetShadowClip(winrt::Compositor compositor, float CornerRadius);
+        winrt::CompositionClip GetShadowClip(winrt::Compositor compositor, float CornerRadius);
 
         winrt::CompositionBrush CreateVisualOpacityMask(winrt::Compositor compositor, float CornerRadius);
 
