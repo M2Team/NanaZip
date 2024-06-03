@@ -43,7 +43,7 @@
     <value>NanaZip</value>
   </data>
   <data name="Resource1" xml:space="preserve">
-    <value>Portuguese Brazilian</value>
+    <value>Português Brasileiro</value>
   </data>
   <data name="Resource2" xml:space="preserve">
     <value>Português Brasileiro</value>
@@ -535,7 +535,7 @@
     <value>&amp;Editor:</value>
   </data>
   <data name="Resource2105" xml:space="preserve">
-    <value>&amp;Diff:</value>
+    <value>&amp;Diferença:</value>
   </data>
   <data name="Resource2200" xml:space="preserve">
     <value>Sistema</value>
@@ -638,6 +638,21 @@
   </data>
   <data name="Resource2508" xml:space="preserve">
     <value>Usar &amp;grandes páginas de memória</value>
+  </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>Manter Histórico de Arquivos</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>>Manter Histórico de Caminhos</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>Manter Histórico de Cópias</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>Manter Histórico de Pastas</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Use Hashes Minúsculos</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Sobre o NanaZip</value>
@@ -1328,5 +1343,11 @@ Você tem certeza que você quer dividir o arquivo compactado em tais volumes?</
   </data>
   <data name="Resource7714" xml:space="preserve">
     <value>Junção do Diretório</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>Integração</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Abra o aplicativo Configurações do Windows para associar arquivos ao NanaZip</value>
   </data>
 </root>
