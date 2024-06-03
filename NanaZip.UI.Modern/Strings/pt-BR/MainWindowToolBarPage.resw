@@ -117,32 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BuySponsorEditionButton.AutomationProperties.Name" xml:space="preserve">
-    <value>Comprar a Edição Patrocinada NanaZip</value>
-    <comment>Buy NanaZip Sponsor Edition</comment>
+  <data name="MoreButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Mais</value>
+    <comment>More</comment>
   </data>
-  <data name="BuySponsorEditionButtonTextBlock.Text" xml:space="preserve">
-    <value>Comprar a Edição Patrocinada NanaZip</value>
-    <comment>Buy NanaZip Sponsor Edition</comment>
+  <data name="MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Mais</value>
+    <comment>More</comment>
   </data>
-  <data name="ContributeButton.AutomationProperties.Name" xml:space="preserve">
-    <value>Torne-se um contribuidor de NanaZip</value>
-    <comment>Become a contributor of NanaZip</comment>
-  </data>
-  <data name="ContributeButtonTextBlock.Text" xml:space="preserve">
-    <value>Torne-se um contribuidor de NanaZip</value>
-    <comment>Become a contributor of NanaZip</comment>
-  </data>
-  <data name="GridTitleTextBlock.Text" xml:space="preserve">
+  <data name="SponsorButton.AcquireText" xml:space="preserve">
     <value>Patrocinar NanaZip</value>
     <comment>Sponsor NanaZip</comment>
   </data>
-  <data name="SponsorEditionPolicyButton.AutomationProperties.Name" xml:space="preserve">
-    <value>Política de Edição Patrocinada</value>
-    <comment>Sponsor Edition Policy</comment>
-  </data>
-  <data name="SponsorEditionPolicyButtonTextBlock.Text" xml:space="preserve">
-    <value>Política de Edição Patrocinada</value>
-    <comment>Sponsor Edition Policy</comment>
+  <data name="SponsorButton.SponsoredText" xml:space="preserve">
+    <value>Agradeço seu Patrocínio</value>
+    <comment>Appreciate your sponsorship</comment>
   </data>
 </root>
