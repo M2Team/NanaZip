@@ -79,6 +79,9 @@
     <Filter Include="Strings\pl">
       <UniqueIdentifier>{41dcb6ac-4f56-4e58-9e96-f4337ba4619a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\pt-BR">
+      <UniqueIdentifier>{448c6906-c923-4673-8ff3-5af434e99f42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\ParentFolder.bmp">
@@ -1088,6 +1091,12 @@
     </PRIResource>
     <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw">
       <Filter>Strings\pl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw">
+      <Filter>Strings\pt-BR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt-BR\SponsorPage.resw">
+      <Filter>Strings\pt-BR</Filter>
     </PRIResource>
   </ItemGroup>
 </Project>
