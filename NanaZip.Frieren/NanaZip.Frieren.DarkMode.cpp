@@ -262,9 +262,10 @@ namespace
             {
                 ::SetWindowTheme(WindowHandle, L"Explorer", nullptr);
             }
-            else if (0 == std::wcscmp(ClassName, WC_COMBOBOXW))
+            else if ((0 == std::wcscmp(ClassName, WC_COMBOBOXW)) || ( 0 == std::wcscmp(ClassName, WC_EDITW)))
             {
                 ::SetWindowTheme(WindowHandle, L"CFD", nullptr);
+                ::MileAllowDarkModeForWindow(WindowHandle, g_ShouldAppsUseDarkMode ? TRUE : FALSE);
             }
             else if (0 == std::wcscmp(ClassName, WC_HEADERW))
             {
@@ -276,6 +277,7 @@ namespace
 
                 if (g_ShouldAppsUseDarkMode)
                 {
+                    ::MileAllowDarkModeForWindow(WindowHandle, TRUE);
                     ListView_SetTextBkColor(
                         WindowHandle,
                         DarkModeBackgroundColor);
@@ -288,6 +290,7 @@ namespace
                 }
                 else
                 {
+                    ::MileAllowDarkModeForWindow(WindowHandle, FALSE);
                     ListView_SetTextBkColor(
                         WindowHandle,
                         LightModeBackgroundColor);
@@ -527,6 +530,15 @@ namespace
 
             break;
         }
+	    case WM_CTLCOLORBTN:
+	    {
+    	    // to fix white background on button
+            if (g_ShouldAppsUseDarkMode)
+            {
+                return reinterpret_cast<INT_PTR>(::GetStockObject(BLACK_BRUSH));
+            }
+            break;
+	    }
         case WM_DPICHANGED:
         {
             bool ShouldExtendFrame = (
