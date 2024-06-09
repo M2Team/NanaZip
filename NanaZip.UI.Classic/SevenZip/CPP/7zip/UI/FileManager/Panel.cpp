@@ -367,7 +367,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   */
 
   DWORD exStyle;
-  exStyle = WS_EX_CLIENTEDGE;
+  exStyle = WS_EX_CLIENTEDGE | WS_EX_COMPOSITED;
 
   if (!_listView.CreateEx(exStyle, style, 0, 0, 116, 260,
       *this, (HMENU)(UINT_PTR)(_baseID + 1), g_hInstance, NULL))
@@ -550,6 +550,8 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   }
 
   _statusBar.Create(WS_CHILD | WS_VISIBLE, L"Status", (*this), _statusBarID);
+  SetWindowLongW(_statusBar, GWL_EXSTYLE, WS_EX_COMPOSITED);
+  
   // _statusBar2.Create(WS_CHILD | WS_VISIBLE, L"Status", (*this), _statusBarID + 1);
 
   const int sizes[] = {220, 320, 420, -1};
