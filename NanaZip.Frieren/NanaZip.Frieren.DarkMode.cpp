@@ -277,7 +277,6 @@ namespace
 
                 if (g_ShouldAppsUseDarkMode)
                 {
-                    ::MileAllowDarkModeForWindow(WindowHandle, TRUE);
                     ListView_SetTextBkColor(
                         WindowHandle,
                         DarkModeBackgroundColor);
@@ -290,7 +289,6 @@ namespace
                 }
                 else
                 {
-                    ::MileAllowDarkModeForWindow(WindowHandle, FALSE);
                     ListView_SetTextBkColor(
                         WindowHandle,
                         LightModeBackgroundColor);
@@ -1119,7 +1117,6 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
         }
     }
     ::DetourTransactionCommit();
-
     ::NanaZipFrierenDarkModeThreadInitialize();
 }
 
