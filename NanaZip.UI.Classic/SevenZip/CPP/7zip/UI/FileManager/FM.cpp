@@ -1123,4 +1123,7 @@ void CApp::MoveSubWindows()
     */
     Panels[LastFocusedPanel].Move(0, headerSize, xSize, ySize);
   }
+
+  // fix status bar on resize
+  this->Refresh_StatusBar();
 }

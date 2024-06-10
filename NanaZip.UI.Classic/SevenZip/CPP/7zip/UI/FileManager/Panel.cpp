@@ -471,7 +471,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   InitCommonControlsEx(&icex);
   #endif
 
-  _headerComboBox.CreateEx(0,
+  _headerComboBox.CreateEx(WS_EX_COMPOSITED,
       #ifdef UNDER_CE
       WC_COMBOBOXW
       #else
