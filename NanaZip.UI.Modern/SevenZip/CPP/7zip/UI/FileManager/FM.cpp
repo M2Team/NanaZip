@@ -976,6 +976,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         g_CanChangeSplitter = true;
       }
 
+      // fix status bar on resize
+      g_App.Refresh_StatusBar();
+
       g_Maximized = (wParam == SIZE_MAXIMIZED) || (wParam == SIZE_MAXSHOW);
 
       g_App.MoveSubWindows();
@@ -1135,7 +1138,4 @@ void CApp::MoveSubWindows()
     */
     Panels[LastFocusedPanel].Move(0, headerSize, xSize, ySize);
   }
-
-  // fix status bar on resize
-  this->Refresh_StatusBar();
 }

@@ -471,7 +471,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   InitCommonControlsEx(&icex);
   #endif
 
-  _headerComboBox.CreateEx(WS_EX_COMPOSITED,
+  _headerComboBox.CreateEx(0,
       #ifdef UNDER_CE
       WC_COMBOBOXW
       #else
@@ -550,8 +550,6 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   }
 
   _statusBar.Create(WS_CHILD | WS_VISIBLE, L"Status", (*this), _statusBarID);
-  ::SetWindowLong(_statusBar, GWL_EXSTYLE, WS_EX_COMPOSITED);
-  
   // _statusBar2.Create(WS_CHILD | WS_VISIBLE, L"Status", (*this), _statusBarID + 1);
 
   const int sizes[] = {220, 320, 420, -1};
