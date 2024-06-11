@@ -326,33 +326,39 @@ namespace
                         WindowHandle,
                         GWL_EXSTYLE) | WS_EX_COMPOSITED);
             }
-            else if (0 == std::wcscmp(ClassName, TOOLBARCLASSNAMEW))
-            {   
-                // make it double bufferred
-                ::SetWindowLongW(
-                    WindowHandle,
-                    GWL_EXSTYLE,
-                    ::GetWindowLongW(
-                        WindowHandle,
-                        GWL_EXSTYLE) | WS_EX_COMPOSITED);
+            else
+            {
+                // DO NOT USE ELSE IF INSTEAD
+                // FOR HANDLING DYNAMIC DARK AND LIGHT MODE SWITCH PROPERLY
 
-                COLORSCHEME ColorScheme;
-                ColorScheme.dwSize = sizeof(COLORSCHEME);
-                ColorScheme.clrBtnHighlight = CLR_DEFAULT;
-                ColorScheme.clrBtnShadow = CLR_DEFAULT;
-                if (g_ShouldAppsUseDarkMode)
+                if (0 == std::wcscmp(ClassName, TOOLBARCLASSNAMEW))
                 {
-                    ColorScheme.clrBtnHighlight = DarkModeBackgroundColor;
-                    ColorScheme.clrBtnShadow = DarkModeBackgroundColor;
-                }
-                ::SendMessageW(
-                    WindowHandle,
-                    TB_SETCOLORSCHEME,
-                    0,
-                    reinterpret_cast<LPARAM>(&ColorScheme));
-            }
+                    // make it double bufferred
+                    ::SetWindowLongW(
+                        WindowHandle,
+                        GWL_EXSTYLE,
+                        ::GetWindowLongW(
+                            WindowHandle,
+                            GWL_EXSTYLE) | WS_EX_COMPOSITED);
 
-            ::SendMessageW(WindowHandle, WM_THEMECHANGED, 0, 0);
+                    COLORSCHEME ColorScheme;
+                    ColorScheme.dwSize = sizeof(COLORSCHEME);
+                    ColorScheme.clrBtnHighlight = CLR_DEFAULT;
+                    ColorScheme.clrBtnShadow = CLR_DEFAULT;
+                    if (g_ShouldAppsUseDarkMode)
+                    {
+                        ColorScheme.clrBtnHighlight = DarkModeBackgroundColor;
+                        ColorScheme.clrBtnShadow = DarkModeBackgroundColor;
+                    }
+                    ::SendMessageW(
+                        WindowHandle,
+                        TB_SETCOLORSCHEME,
+                        0,
+                        reinterpret_cast<LPARAM>(&ColorScheme));
+                }
+
+                ::SendMessageW(WindowHandle, WM_THEMECHANGED, 0, 0);
+            }
         }
     }
 
