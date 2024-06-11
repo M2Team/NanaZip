@@ -24,6 +24,9 @@
 
 #include "NanaZip.Frieren.WinUserPrivate.h"
 
+// TODO: Standardize OpenNcThemeData implementation.
+// TODO: Move some workaround for NanaZip.UI.* to this.
+
 namespace
 {
     static HMODULE GetUser32ModuleHandle()
@@ -265,10 +268,12 @@ namespace
             {
                 ::SetWindowTheme(WindowHandle, L"Explorer", nullptr);
             }
-            else if ((0 == std::wcscmp(ClassName, WC_COMBOBOXW)) || ( 0 == std::wcscmp(ClassName, WC_EDITW)))
+            else if (
+                (0 == std::wcscmp(ClassName, WC_COMBOBOXW)) ||
+                (0 == std::wcscmp(ClassName, WC_EDITW)))
             {
                 ::SetWindowTheme(WindowHandle, L"CFD", nullptr);
-                ::MileAllowDarkModeForWindow(WindowHandle, g_ShouldAppsUseDarkMode ? TRUE : FALSE);
+                ::MileAllowDarkModeForWindow(WindowHandle, TRUE);
             }
             else if (0 == std::wcscmp(ClassName, WC_HEADERW))
             {
@@ -305,19 +310,31 @@ namespace
             }
             else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
             {
-                SetWindowLongPtr(WindowHandle, GWL_EXSTYLE,
-                    GetWindowLongPtr(WindowHandle, GWL_EXSTYLE) | WS_EX_COMPOSITED);
+                ::SetWindowLongW(
+                    WindowHandle,
+                    GWL_EXSTYLE,
+                    ::GetWindowLongW(
+                        WindowHandle,
+                        GWL_EXSTYLE) | WS_EX_COMPOSITED);
             }
             else if (0 == std::wcscmp(ClassName, WC_TABCONTROLW))
             {
-                SetWindowLongPtr(WindowHandle, GWL_EXSTYLE,
-                    GetWindowLongPtr(WindowHandle, GWL_EXSTYLE) | WS_EX_COMPOSITED);
+                ::SetWindowLongW(
+                    WindowHandle,
+                    GWL_EXSTYLE,
+                    ::GetWindowLongW(
+                        WindowHandle,
+                        GWL_EXSTYLE) | WS_EX_COMPOSITED);
             }
             else if (0 == std::wcscmp(ClassName, TOOLBARCLASSNAMEW))
             {   
                 // make it double bufferred
-                SetWindowLongPtr(WindowHandle, GWL_EXSTYLE,
-                    GetWindowLongPtr(WindowHandle, GWL_EXSTYLE) | WS_EX_COMPOSITED);
+                ::SetWindowLongW(
+                    WindowHandle,
+                    GWL_EXSTYLE,
+                    ::GetWindowLongW(
+                        WindowHandle,
+                        GWL_EXSTYLE) | WS_EX_COMPOSITED);
 
                 COLORSCHEME ColorScheme;
                 ColorScheme.dwSize = sizeof(COLORSCHEME);
@@ -334,8 +351,8 @@ namespace
                     0,
                     reinterpret_cast<LPARAM>(&ColorScheme));
             }
-            ::SendMessageW(WindowHandle, WM_THEMECHANGED, 0, 0);
 
+            ::SendMessageW(WindowHandle, WM_THEMECHANGED, 0, 0);
         }
     }
 
@@ -373,6 +390,7 @@ namespace
         case WM_CTLCOLORLISTBOX:
         case WM_CTLCOLORDLG:
         case WM_CTLCOLORSTATIC:
+        case WM_CTLCOLORBTN:
         {
             if (g_ShouldAppsUseDarkMode)
             {
@@ -534,15 +552,6 @@ namespace
 
             break;
         }
-	    case WM_CTLCOLORBTN:
-	    {
-    	    // to fix white background on button
-            if (g_ShouldAppsUseDarkMode)
-            {
-                return reinterpret_cast<INT_PTR>(::GetStockObject(BLACK_BRUSH));
-            }
-            break;
-	    }
         case WM_DPICHANGED:
         {
             bool ShouldExtendFrame = (
@@ -1112,9 +1121,7 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeThreadUninitialize()
 
 EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
 {
-    //::MileAllowDarkModeForApp(true);
-    // newer api since 1903+
-    ::MileSetPreferredAppMode(MILE_PREFERRED_APP_MODE_AUTO);
+    ::MileAllowDarkModeForApp(true);
     ::MileRefreshImmersiveColorPolicyState();
 
     g_FunctionTable[FunctionType::GetSysColor].Original =
@@ -1158,6 +1165,7 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
         }
     }
     ::DetourTransactionCommit();
+
     ::NanaZipFrierenDarkModeThreadInitialize();
 }
 
