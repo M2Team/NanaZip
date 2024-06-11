@@ -14,6 +14,11 @@
 #include <Detours.h>
 
 #include <Uxtheme.h>
+
+EXTERN_C HTHEME WINAPI OpenNcThemeData(
+    _In_opt_ HWND hwnd,
+    _In_ LPCWSTR pszClassList);
+
 #include <vssym32.h>
 #include <Richedit.h>
 
@@ -24,7 +29,6 @@
 
 #include "NanaZip.Frieren.WinUserPrivate.h"
 
-// TODO: Standardize OpenNcThemeData implementation.
 // TODO: Move some workaround for NanaZip.UI.* to this.
 
 namespace
@@ -209,8 +213,6 @@ namespace
 
         return CachedResult;
     }
-
-    using OpenNcThemeDataT = HTHEME(WINAPI*)(HWND hWnd, LPCWSTR pszClassList);
 
     namespace FunctionType
     {
@@ -1063,27 +1065,26 @@ namespace
     }
 
     static HTHEME WINAPI OriginalOpenNcThemeData(
-        _In_ HWND hWnd,
+        _In_opt_ HWND hwnd,
         _In_ LPCWSTR pszClassList)
     {
-        return reinterpret_cast<OpenNcThemeDataT>(
+        return reinterpret_cast<decltype(OpenNcThemeData)*>(
             g_FunctionTable[FunctionType::OpenNcThemeData].Original)(
-                hWnd,
+                hwnd,
                 pszClassList);
     }
 
     static HTHEME WINAPI DetouredOpenNcThemeData(
-        _In_ HWND hWnd,
-        _In_ LPCWSTR pszClassList
-    )
+        _In_opt_ HWND hwnd,
+        _In_ LPCWSTR pszClassList)
     {
-        // dark scrollbar
-        if (wcscmp(pszClassList, L"ScrollBar") == 0)
+        // Workaround for dark mode scrollbar
+        if (0 == std::wcscmp(pszClassList, L"ScrollBar"))
         {
-            hWnd = nullptr;
-            pszClassList = L"Explorer::ScrollBar";
+            return ::OriginalOpenNcThemeData(nullptr, L"Explorer::ScrollBar");
         }
-        return OriginalOpenNcThemeData(hWnd, pszClassList);
+
+        return ::OriginalOpenNcThemeData(hwnd, pszClassList);
     }
 }
 
@@ -1150,14 +1151,23 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
     g_FunctionTable[FunctionType::DrawThemeBackground].Detoured =
         ::DetouredDrawThemeBackground;
 
-
-    HMODULE hUxTheme = GetModuleHandle(L"uxtheme.dll");
-    OpenNcThemeDataT OpenNcThemeData = reinterpret_cast<OpenNcThemeDataT>(GetProcAddress(hUxTheme, MAKEINTRESOURCEA(49)));
-
-    g_FunctionTable[FunctionType::OpenNcThemeData].Original =
-        OpenNcThemeData;
-    g_FunctionTable[FunctionType::OpenNcThemeData].Detoured =
-        ::DetouredOpenNcThemeData;
+    {
+        HMODULE ModuleHandle = ::GetModuleHandleW(
+            L"uxtheme.dll");
+        if (ModuleHandle)
+        {
+            PVOID ProcAddress = ::GetProcAddress(
+                ModuleHandle,
+                MAKEINTRESOURCEA(49));
+            if (ProcAddress)
+            {
+                g_FunctionTable[FunctionType::OpenNcThemeData].Original =
+                    ProcAddress;
+                g_FunctionTable[FunctionType::OpenNcThemeData].Detoured =
+                    ::DetouredOpenNcThemeData;
+            }
+        }
+    }  
 
     ::DetourTransactionBegin();
     ::DetourUpdateThread(::GetCurrentThread());
