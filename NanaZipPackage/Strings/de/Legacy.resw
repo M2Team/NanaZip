@@ -262,7 +262,7 @@
     <value>&amp;Hilfethemen</value>
   </data>
   <data name="Resource961" xml:space="preserve">
-    <value>ber NanaZip...</value>
+    <value>Über NanaZip...</value>
   </data>
   <data name="Resource1003" xml:space="preserve">
     <value>Pfad</value>
@@ -643,7 +643,7 @@
     <value>NanaZip ist freie Software. Sie können jedoch das Projekt durch eine Registrierung unterstützen.</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
-    <value>Das System kann die benötigte Speichermenge nicht bereit stellen.</value>
+    <value>Das System kann die benötigte Speichermenge nicht bereitstellen.</value>
   </data>
   <data name="Resource3001" xml:space="preserve">
     <value>Es sind keine Fehler aufgetreten.</value>
@@ -664,7 +664,7 @@
     <value>Das verschlüsselte Archiv "{0}" kann nicht geöffnet werden. Falsches Passwort?</value>
   </data>
   <data name="Resource3007" xml:space="preserve">
-    <value>Typ des Archives wird nicht unterstützt</value>
+    <value>Typ des Archivs wird nicht unterstützt</value>
   </data>
   <data name="Resource3008" xml:space="preserve">
     <value>Die Datei {0} existiert bereits.</value>
