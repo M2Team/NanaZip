@@ -207,6 +207,8 @@ namespace
         return CachedResult;
     }
 
+    using OpenNcThemeDataT = HTHEME(WINAPI*)(HWND hWnd, LPCWSTR pszClassList);
+
     namespace FunctionType
     {
         enum
@@ -215,6 +217,7 @@ namespace
             GetSysColorBrush,
             DrawThemeText,
             DrawThemeBackground,
+            OpenNcThemeData,
 
             MaximumFunction
         };
@@ -262,9 +265,10 @@ namespace
             {
                 ::SetWindowTheme(WindowHandle, L"Explorer", nullptr);
             }
-            else if (0 == std::wcscmp(ClassName, WC_COMBOBOXW))
+            else if ((0 == std::wcscmp(ClassName, WC_COMBOBOXW)) || ( 0 == std::wcscmp(ClassName, WC_EDITW)))
             {
                 ::SetWindowTheme(WindowHandle, L"CFD", nullptr);
+                ::MileAllowDarkModeForWindow(WindowHandle, g_ShouldAppsUseDarkMode ? TRUE : FALSE);
             }
             else if (0 == std::wcscmp(ClassName, WC_HEADERW))
             {
@@ -272,7 +276,7 @@ namespace
             }
             else if (0 == std::wcscmp(ClassName, WC_LISTVIEWW))
             {
-                ::SetWindowTheme(WindowHandle, L"Explorer", nullptr);
+                ::SetWindowTheme(WindowHandle, L"ItemsView", nullptr);
 
                 if (g_ShouldAppsUseDarkMode)
                 {
@@ -301,34 +305,37 @@ namespace
             }
             else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
             {
-                // Do nothing.
+                SetWindowLongPtr(WindowHandle, GWL_EXSTYLE,
+                    GetWindowLongPtr(WindowHandle, GWL_EXSTYLE) | WS_EX_COMPOSITED);
             }
             else if (0 == std::wcscmp(ClassName, WC_TABCONTROLW))
             {
-                // Do nothing.
+                SetWindowLongPtr(WindowHandle, GWL_EXSTYLE,
+                    GetWindowLongPtr(WindowHandle, GWL_EXSTYLE) | WS_EX_COMPOSITED);
             }
-            else
-            {
-                if (0 == std::wcscmp(ClassName, TOOLBARCLASSNAMEW))
-                {
-                    COLORSCHEME ColorScheme;
-                    ColorScheme.dwSize = sizeof(COLORSCHEME);
-                    ColorScheme.clrBtnHighlight = CLR_DEFAULT;
-                    ColorScheme.clrBtnShadow = CLR_DEFAULT;
-                    if (g_ShouldAppsUseDarkMode)
-                    {
-                        ColorScheme.clrBtnHighlight = DarkModeBackgroundColor;
-                        ColorScheme.clrBtnShadow = DarkModeBackgroundColor;
-                    }
-                    ::SendMessageW(
-                        WindowHandle,
-                        TB_SETCOLORSCHEME,
-                        0,
-                        reinterpret_cast<LPARAM>(&ColorScheme));
-                }
+            else if (0 == std::wcscmp(ClassName, TOOLBARCLASSNAMEW))
+            {   
+                // make it double bufferred
+                SetWindowLongPtr(WindowHandle, GWL_EXSTYLE,
+                    GetWindowLongPtr(WindowHandle, GWL_EXSTYLE) | WS_EX_COMPOSITED);
 
-                ::SendMessageW(WindowHandle, WM_THEMECHANGED, 0, 0);
+                COLORSCHEME ColorScheme;
+                ColorScheme.dwSize = sizeof(COLORSCHEME);
+                ColorScheme.clrBtnHighlight = CLR_DEFAULT;
+                ColorScheme.clrBtnShadow = CLR_DEFAULT;
+                if (g_ShouldAppsUseDarkMode)
+                {
+                    ColorScheme.clrBtnHighlight = DarkModeBackgroundColor;
+                    ColorScheme.clrBtnShadow = DarkModeBackgroundColor;
+                }
+                ::SendMessageW(
+                    WindowHandle,
+                    TB_SETCOLORSCHEME,
+                    0,
+                    reinterpret_cast<LPARAM>(&ColorScheme));
             }
+            ::SendMessageW(WindowHandle, WM_THEMECHANGED, 0, 0);
+
         }
     }
 
@@ -527,6 +534,15 @@ namespace
 
             break;
         }
+	    case WM_CTLCOLORBTN:
+	    {
+    	    // to fix white background on button
+            if (g_ShouldAppsUseDarkMode)
+            {
+                return reinterpret_cast<INT_PTR>(::GetStockObject(BLACK_BRUSH));
+            }
+            break;
+	    }
         case WM_DPICHANGED:
         {
             bool ShouldExtendFrame = (
@@ -1030,6 +1046,30 @@ namespace
             pRect,
             pClipRect);
     }
+
+    static HTHEME WINAPI OriginalOpenNcThemeData(
+        _In_ HWND hWnd,
+        _In_ LPCWSTR pszClassList)
+    {
+        return reinterpret_cast<OpenNcThemeDataT>(
+            g_FunctionTable[FunctionType::OpenNcThemeData].Original)(
+                hWnd,
+                pszClassList);
+    }
+
+    static HTHEME WINAPI DetouredOpenNcThemeData(
+        _In_ HWND hWnd,
+        _In_ LPCWSTR pszClassList
+    )
+    {
+        // dark scrollbar
+        if (wcscmp(pszClassList, L"ScrollBar") == 0)
+        {
+            hWnd = nullptr;
+            pszClassList = L"Explorer::ScrollBar";
+        }
+        return OriginalOpenNcThemeData(hWnd, pszClassList);
+    }
 }
 
 EXTERN_C VOID WINAPI NanaZipFrierenDarkModeThreadInitialize()
@@ -1072,7 +1112,9 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeThreadUninitialize()
 
 EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
 {
-    ::MileAllowDarkModeForApp(true);
+    //::MileAllowDarkModeForApp(true);
+    // newer api since 1903+
+    ::MileSetPreferredAppMode(MILE_PREFERRED_APP_MODE_AUTO);
     ::MileRefreshImmersiveColorPolicyState();
 
     g_FunctionTable[FunctionType::GetSysColor].Original =
@@ -1095,6 +1137,15 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
     g_FunctionTable[FunctionType::DrawThemeBackground].Detoured =
         ::DetouredDrawThemeBackground;
 
+
+    HMODULE hUxTheme = GetModuleHandle(L"uxtheme.dll");
+    OpenNcThemeDataT OpenNcThemeData = reinterpret_cast<OpenNcThemeDataT>(GetProcAddress(hUxTheme, MAKEINTRESOURCEA(49)));
+
+    g_FunctionTable[FunctionType::OpenNcThemeData].Original =
+        OpenNcThemeData;
+    g_FunctionTable[FunctionType::OpenNcThemeData].Detoured =
+        ::DetouredOpenNcThemeData;
+
     ::DetourTransactionBegin();
     ::DetourUpdateThread(::GetCurrentThread());
     for (size_t i = 0; i < FunctionType::MaximumFunction; ++i)
@@ -1107,7 +1158,6 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
         }
     }
     ::DetourTransactionCommit();
-
     ::NanaZipFrierenDarkModeThreadInitialize();
 }
 

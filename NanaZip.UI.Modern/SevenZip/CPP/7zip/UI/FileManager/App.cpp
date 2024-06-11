@@ -98,6 +98,9 @@ void CApp::SetListSettings()
     */
   }
 
+  // fix black artifacts and flicker
+  extendedStyle |= LVS_EX_DOUBLEBUFFER;
+
   for (unsigned i = 0; i < kNumPanelsMax; i++)
   {
     CPanel &panel = Panels[i];
