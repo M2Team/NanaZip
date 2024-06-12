@@ -247,7 +247,7 @@
     <value>Shfaq tekstin e butonave</value>
   </data>
   <data name="Resource800" xml:space="preserve">
-    <value>&amp;Shto dosjen tek të Parapëlqyerit si</value>
+    <value>&amp;Shto dosjen te të Parapëlqyerit si</value>
   </data>
   <data name="Resource801" xml:space="preserve">
     <value>Shënjuesi</value>
@@ -376,7 +376,7 @@
     <value>64-bit</value>
   </data>
   <data name="Resource1042" xml:space="preserve">
-    <value>Nga skaji më i madh</value>
+    <value>Big-endian</value>
   </data>
   <data name="Resource1043" xml:space="preserve">
     <value>CPU</value>
@@ -394,7 +394,7 @@
     <value>Karakteristikat</value>
   </data>
   <data name="Resource1048" xml:space="preserve">
-    <value>Adresat virtuale</value>
+    <value>Adresa virtuale</value>
   </data>
   <data name="Resource1049" xml:space="preserve">
     <value>ID</value>
@@ -403,7 +403,7 @@
     <value>Emri i shkurtër</value>
   </data>
   <data name="Resource1051" xml:space="preserve">
-    <value>Aplikimi burimor</value>
+    <value>Aplikacioni Krijues</value>
   </data>
   <data name="Resource1052" xml:space="preserve">
     <value>Madhësia e sektorit</value>
@@ -583,7 +583,7 @@
     <value>Nxirr në {0}</value>
   </data>
   <data name="Resource2328" xml:space="preserve">
-    <value>Shto tek {0}</value>
+    <value>Shto te {0}</value>
   </data>
   <data name="Resource2329" xml:space="preserve">
     <value>Ngjish dhe dërgo me postë elektronike...</value>
@@ -607,7 +607,7 @@
     <value>&amp;I caktuar:</value>
   </data>
   <data name="Resource2405" xml:space="preserve">
-    <value>Përdor vetëm për njësitë e diskut të largueshme</value>
+    <value>Përdor vetëm për njësitë e disqeve të largueshme</value>
   </data>
   <data name="Resource2406" xml:space="preserve">
     <value>Cakto një vendndodhje për skedarët e përkohshëm të arkivit.</value>
@@ -670,10 +670,10 @@
     <value>{0} objekt(e) të përzgjedhur(a)</value>
   </data>
   <data name="Resource3003" xml:space="preserve">
-    <value>S'mund të krijoj dosjen '{0}'</value>
+    <value>Nuk mund të krijoj dosjen '{0}'</value>
   </data>
   <data name="Resource3004" xml:space="preserve">
-    <value>Operacionet e përditësimit për këtë arkiv s'mbështeten.</value>
+    <value>Operacionet e përditësimit për këtë arkiv nuk mbështeten.</value>
   </data>
   <data name="Resource3005" xml:space="preserve">
     <value>Skedari "{0}" nuk mund të hapet si arkiv</value>
@@ -693,7 +693,7 @@ Do ta përditësosh atë edhe në arkiv?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
     <value>Skedari '{0}'
-s'mund të përditësohet</value>
+nuk mund të përditësohet</value>
   </data>
   <data name="Resource3011" xml:space="preserve">
     <value>Redaktuesi nuk mund të niset.</value>
@@ -855,7 +855,7 @@ s'mund të përditësohet</value>
     <value>Fjalëkalim i gabuar?</value>
   </data>
   <data name="Resource3721" xml:space="preserve">
-    <value>Metodë e ngjeshjesh nuk mbështetet</value>
+    <value>Metoda e ngjeshjesh nuk mbështetet</value>
   </data>
   <data name="Resource3722" xml:space="preserve">
     <value>Gabim të dhënash</value>
