@@ -14,6 +14,11 @@
 #include <Detours.h>
 
 #include <Uxtheme.h>
+
+EXTERN_C HTHEME WINAPI OpenNcThemeData(
+    _In_opt_ HWND hwnd,
+    _In_ LPCWSTR pszClassList);
+
 #include <vssym32.h>
 #include <Richedit.h>
 
@@ -23,6 +28,8 @@
 #include <unordered_map>
 
 #include "NanaZip.Frieren.WinUserPrivate.h"
+
+// TODO: Move some workaround for NanaZip.UI.* to this.
 
 namespace
 {
@@ -215,6 +222,7 @@ namespace
             GetSysColorBrush,
             DrawThemeText,
             DrawThemeBackground,
+            OpenNcThemeData,
 
             MaximumFunction
         };
@@ -262,9 +270,12 @@ namespace
             {
                 ::SetWindowTheme(WindowHandle, L"Explorer", nullptr);
             }
-            else if (0 == std::wcscmp(ClassName, WC_COMBOBOXW))
+            else if (
+                (0 == std::wcscmp(ClassName, WC_COMBOBOXW)) ||
+                (0 == std::wcscmp(ClassName, WC_EDITW)))
             {
                 ::SetWindowTheme(WindowHandle, L"CFD", nullptr);
+                ::MileAllowDarkModeForWindow(WindowHandle, TRUE);
             }
             else if (0 == std::wcscmp(ClassName, WC_HEADERW))
             {
@@ -272,7 +283,7 @@ namespace
             }
             else if (0 == std::wcscmp(ClassName, WC_LISTVIEWW))
             {
-                ::SetWindowTheme(WindowHandle, L"Explorer", nullptr);
+                ::SetWindowTheme(WindowHandle, L"ItemsView", nullptr);
 
                 if (g_ShouldAppsUseDarkMode)
                 {
@@ -301,16 +312,37 @@ namespace
             }
             else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
             {
-                // Do nothing.
+                ::SetWindowLongW(
+                    WindowHandle,
+                    GWL_EXSTYLE,
+                    ::GetWindowLongW(
+                        WindowHandle,
+                        GWL_EXSTYLE) | WS_EX_COMPOSITED);
             }
             else if (0 == std::wcscmp(ClassName, WC_TABCONTROLW))
             {
-                // Do nothing.
+                ::SetWindowLongW(
+                    WindowHandle,
+                    GWL_EXSTYLE,
+                    ::GetWindowLongW(
+                        WindowHandle,
+                        GWL_EXSTYLE) | WS_EX_COMPOSITED);
             }
             else
             {
+                // DO NOT USE ELSE IF INSTEAD
+                // FOR HANDLING DYNAMIC DARK AND LIGHT MODE SWITCH PROPERLY
+
                 if (0 == std::wcscmp(ClassName, TOOLBARCLASSNAMEW))
                 {
+                    // make it double bufferred
+                    ::SetWindowLongW(
+                        WindowHandle,
+                        GWL_EXSTYLE,
+                        ::GetWindowLongW(
+                            WindowHandle,
+                            GWL_EXSTYLE) | WS_EX_COMPOSITED);
+
                     COLORSCHEME ColorScheme;
                     ColorScheme.dwSize = sizeof(COLORSCHEME);
                     ColorScheme.clrBtnHighlight = CLR_DEFAULT;
@@ -366,6 +398,7 @@ namespace
         case WM_CTLCOLORLISTBOX:
         case WM_CTLCOLORDLG:
         case WM_CTLCOLORSTATIC:
+        case WM_CTLCOLORBTN:
         {
             if (g_ShouldAppsUseDarkMode)
             {
@@ -1030,6 +1063,29 @@ namespace
             pRect,
             pClipRect);
     }
+
+    static HTHEME WINAPI OriginalOpenNcThemeData(
+        _In_opt_ HWND hwnd,
+        _In_ LPCWSTR pszClassList)
+    {
+        return reinterpret_cast<decltype(OpenNcThemeData)*>(
+            g_FunctionTable[FunctionType::OpenNcThemeData].Original)(
+                hwnd,
+                pszClassList);
+    }
+
+    static HTHEME WINAPI DetouredOpenNcThemeData(
+        _In_opt_ HWND hwnd,
+        _In_ LPCWSTR pszClassList)
+    {
+        // Workaround for dark mode scrollbar
+        if (0 == std::wcscmp(pszClassList, L"ScrollBar"))
+        {
+            return ::OriginalOpenNcThemeData(nullptr, L"Explorer::ScrollBar");
+        }
+
+        return ::OriginalOpenNcThemeData(hwnd, pszClassList);
+    }
 }
 
 EXTERN_C VOID WINAPI NanaZipFrierenDarkModeThreadInitialize()
@@ -1094,6 +1150,24 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
         ::DrawThemeBackground;
     g_FunctionTable[FunctionType::DrawThemeBackground].Detoured =
         ::DetouredDrawThemeBackground;
+
+    {
+        HMODULE ModuleHandle = ::GetModuleHandleW(
+            L"uxtheme.dll");
+        if (ModuleHandle)
+        {
+            PVOID ProcAddress = ::GetProcAddress(
+                ModuleHandle,
+                MAKEINTRESOURCEA(49));
+            if (ProcAddress)
+            {
+                g_FunctionTable[FunctionType::OpenNcThemeData].Original =
+                    ProcAddress;
+                g_FunctionTable[FunctionType::OpenNcThemeData].Detoured =
+                    ::DetouredOpenNcThemeData;
+            }
+        }
+    }  
 
     ::DetourTransactionBegin();
     ::DetourUpdateThread(::GetCurrentThread());

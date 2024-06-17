@@ -93,6 +93,9 @@ void CApp::SetListSettings()
     */
   }
 
+  // fix black artifacts and flicker
+  extendedStyle |= LVS_EX_DOUBLEBUFFER;
+
   for (unsigned i = 0; i < kNumPanelsMax; i++)
   {
     CPanel &panel = Panels[i];
@@ -147,7 +150,8 @@ static void CreateToolbar(HWND parent,
     NControl::CToolBar &toolBar,
     bool largeButtons)
 {
-  toolBar.Attach(::CreateWindowEx(0, TOOLBARCLASSNAME, NULL, 0
+  // fix black artifacts
+  toolBar.Attach(::CreateWindowEx(WS_EX_COMPOSITED, TOOLBARCLASSNAME, NULL, 0
       | WS_CHILD
       | WS_VISIBLE
       | TBSTYLE_LIST
