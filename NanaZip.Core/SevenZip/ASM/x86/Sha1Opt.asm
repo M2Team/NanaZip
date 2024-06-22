@@ -1,5 +1,5 @@
 ; Sha1Opt.asm -- SHA-1 optimized code for SHA-1 x86 hardware instructions
-; 2021-03-10 : Igor Pavlov : Public domain
+; 2024-06-16 : Igor Pavlov : Public domain
 
 include 7zAsm.asm
 
@@ -20,7 +20,7 @@ MY_ASM_START
 
 
 
-CONST   SEGMENT
+CONST   SEGMENT READONLY
 
 align 16
 Reverse_Endian_Mask db 15,14,13,12, 11,10,9,8, 7,6,5,4, 3,2,1,0

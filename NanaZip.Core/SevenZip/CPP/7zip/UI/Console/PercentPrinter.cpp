@@ -88,6 +88,8 @@ void CPercentPrinter::GetPercents()
 
 void CPercentPrinter::Print()
 {
+  if (DisablePrint)
+    return;
   DWORD tick = 0;
   if (_tickStep != 0)
     tick = GetTickCount();

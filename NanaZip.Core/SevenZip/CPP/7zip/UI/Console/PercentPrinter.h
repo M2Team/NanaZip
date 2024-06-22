@@ -43,12 +43,14 @@ class CPercentPrinter: public CPercentPrinterState
 public:
   CStdOutStream *_so;
 
+  bool DisablePrint;
   bool NeedFlush;
   unsigned MaxLen;
   
   CPercentPrinter(UInt32 tickStep = 200):
       _tickStep(tickStep),
       _prevTick(0),
+      DisablePrint(false),
       NeedFlush(true),
       MaxLen(80 - 1)
   {}

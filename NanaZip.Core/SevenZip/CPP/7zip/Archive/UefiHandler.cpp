@@ -1579,6 +1579,8 @@ HRESULT CHandler::OpenCapsule(IInStream *stream)
        || _h.CapsuleImageSize < _h.HeaderSize
        || _h.OffsetToCapsuleBody < _h.HeaderSize
        || _h.OffsetToCapsuleBody > _h.CapsuleImageSize
+       || _h.CapsuleImageSize > (1u << 30) // to reduce false detection
+       || _h.HeaderSize > (1u << 28) // to reduce false detection
       )
     return S_FALSE;
   _phySize = _h.CapsuleImageSize;
@@ -1587,7 +1589,7 @@ HRESULT CHandler::OpenCapsule(IInStream *stream)
       _h.OffsetToSplitInformation != 0 )
     return E_NOTIMPL;
 
-  unsigned bufIndex = AddBuf(_h.CapsuleImageSize);
+  const unsigned bufIndex = AddBuf(_h.CapsuleImageSize);
   CByteBuffer &buf0 = _bufs[bufIndex];
   memcpy(buf0, buf, kHeaderSize);
   ReadStream_FALSE(stream, buf0 + kHeaderSize, _h.CapsuleImageSize - kHeaderSize);

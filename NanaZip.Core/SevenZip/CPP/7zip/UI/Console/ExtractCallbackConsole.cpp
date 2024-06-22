@@ -343,7 +343,7 @@ Z7_COM7F_IMF(CExtractCallbackConsole::PrepareOperation(const wchar_t *name, Int3
     default: s = "???"; requiredLevel = 2;
   }
 
-  bool show2 = (LogLevel >= requiredLevel && _so);
+  const bool show2 = (LogLevel >= requiredLevel && _so);
 
   if (show2)
   {
@@ -373,6 +373,7 @@ Z7_COM7F_IMF(CExtractCallbackConsole::PrepareOperation(const wchar_t *name, Int3
  
     if (NeedFlush)
       _so->Flush();
+    // _so->Flush();  // for debug only
   }
 
   if (NeedPercents())

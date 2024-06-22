@@ -22,7 +22,7 @@ protected:
   bool _totalFilesDefined;
   // bool _totalBytesDefined;
 
-  bool NeedPercents() const { return _percent._so != NULL; }
+  bool NeedPercents() const { return _percent._so && !_percent.DisablePrint; }
 
 public:
 
@@ -49,11 +49,16 @@ public:
 
   virtual ~COpenCallbackConsole() {}
   
-  void Init(CStdOutStream *outStream, CStdOutStream *errorStream, CStdOutStream *percentStream)
+  void Init(
+      CStdOutStream *outStream,
+      CStdOutStream *errorStream,
+      CStdOutStream *percentStream,
+      bool disablePercents)
   {
     _so = outStream;
     _se = errorStream;
     _percent._so = percentStream;
+    _percent.DisablePrint = disablePercents;
   }
 
   Z7_IFACE_IMP(IOpenCallbackUI)

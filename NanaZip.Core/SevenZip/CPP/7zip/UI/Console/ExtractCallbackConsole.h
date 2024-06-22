@@ -44,7 +44,7 @@ class CExtractScanConsole Z7_final: public IDirItemsCallback
 
   // CErrorPathCodes2 ScanErrors;
 
-  bool NeedPercents() const { return _percent._so != NULL; }
+  bool NeedPercents() const { return _percent._so && !_percent.DisablePrint; }
   
   void ClosePercentsAndFlush()
   {
@@ -56,11 +56,16 @@ class CExtractScanConsole Z7_final: public IDirItemsCallback
 
 public:
 
-  void Init(CStdOutStream *outStream, CStdOutStream *errorStream, CStdOutStream *percentStream)
+  void Init(
+      CStdOutStream *outStream,
+      CStdOutStream *errorStream,
+      CStdOutStream *percentStream,
+      bool disablePercents)
   {
     _so = outStream;
     _se = errorStream;
     _percent._so = percentStream;
+    _percent.DisablePrint = disablePercents;
   }
   
   void SetWindowWidth(unsigned width) { _percent.MaxLen = width - 1; }
@@ -177,9 +182,13 @@ public:
 
   void SetWindowWidth(unsigned width) { _percent.MaxLen = width - 1; }
 
-  void Init(CStdOutStream *outStream, CStdOutStream *errorStream, CStdOutStream *percentStream)
+  void Init(
+      CStdOutStream *outStream,
+      CStdOutStream *errorStream,
+      CStdOutStream *percentStream,
+      bool disablePercents)
   {
-    COpenCallbackConsole::Init(outStream, errorStream, percentStream);
+    COpenCallbackConsole::Init(outStream, errorStream, percentStream, disablePercents);
 
     NumTryArcs = 0;
     

@@ -60,6 +60,8 @@ struct CArcCmdLineOptions
   bool StdInMode;
   bool StdOutMode;
   bool EnableHeaders;
+  bool DisablePercents;
+
 
   bool YesToAll;
   bool ShowDialog;
@@ -132,6 +134,7 @@ struct CArcCmdLineOptions
       StdOutMode(false),
 
       EnableHeaders(false),
+      DisablePercents(false),
       
       YesToAll(false),
       ShowDialog(false),

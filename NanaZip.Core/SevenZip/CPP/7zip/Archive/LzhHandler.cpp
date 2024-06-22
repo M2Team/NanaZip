@@ -473,8 +473,8 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
     }
     case kpidIsDir:  prop = item.IsDir(); break;
-    case kpidSize:   prop = item.Size; break;
-    case kpidPackSize:  prop = item.PackSize; break;
+    case kpidSize:   prop = (UInt64)item.Size; break;
+    case kpidPackSize:  prop = (UInt64)item.PackSize; break;
     case kpidCRC:  prop = (UInt32)item.CRC; break;
     case kpidHostOS:  PAIR_TO_PROP(g_OsPairs, item.OsId, prop); break;
     case kpidMTime:
