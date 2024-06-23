@@ -67,15 +67,78 @@ public:
          _In_opt_ ICompressProgressInfo* Progress) = 0;
 };
 
-// ICompressSetCoderProperties
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400200000")
+ICompressSetCoderProperties : public IUnknown
+{
+public:
 
-// ICompressSetDecoderProperties2
+    virtual HRESULT STDMETHODCALLTYPE SetCoderProperties(
+        _In_ const PROPID* PropIDs,
+        _In_ REFPROPVARIANT Props,
+        _In_ UINT32 NumProps) = 0;
+};
 
-// ICompressWriteCoderProperties
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400220000")
+ICompressSetDecoderProperties2 : public IUnknown
+{
+public:
 
-// ICompressSetCoderMt
+    /**
+     * @return S_OK for success, E_NOTIMPL for unsupported properties,
+     *         E_INVALIDARG for incorrect (or unsupported) properties,
+     *         and E_OUTOFMEMORY for memory allocation error.
+     */
+    virtual HRESULT STDMETHODCALLTYPE SetDecoderProperties2(
+        _In_ LPCBYTE Data,
+        _In_ UINT32 Size) = 0; 
+};
 
-// ICompressSetInStream
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400230000")
+ICompressWriteCoderProperties : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE WriteCoderProperties(
+        _In_ ISequentialOutStream* OutStream) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400250000")
+ICompressSetCoderMt : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE SetNumberOfThreads(
+        _In_ UINT32 NumThreads) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400310000")
+ICompressSetInStream : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE SetInStream(
+        _In_ ISequentialInStream* InStream) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE ReleaseInStream() = 0;
+};
+
+EXTERN_C HRESULT WINAPI GetNumberOfMethods(
+    _Out_ PUINT32 NumMethods);
+
+EXTERN_C HRESULT WINAPI GetMethodProperty(
+    _In_ UINT32 Index,
+    _In_ PROPID PropId,
+    _Inout_ LPPROPVARIANT Value);
+
+EXTERN_C HRESULT WINAPI CreateDecoder(
+    _In_ UINT32 Index,
+    _In_ REFIID Iid,
+    _Out_ LPVOID* OutObject);
+
+EXTERN_C HRESULT WINAPI CreateEncoder(
+    _In_ UINT32 Index,
+    _In_ REFIID Iid,
+    _Out_ LPVOID* OutObject);
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C00000")
 IHasher : public IUnknown
