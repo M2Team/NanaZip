@@ -67,6 +67,16 @@ public:
          _In_opt_ ICompressProgressInfo* Progress) = 0;
 };
 
+// ICompressSetCoderProperties
+
+// ICompressSetDecoderProperties2
+
+// ICompressWriteCoderProperties
+
+// ICompressSetCoderMt
+
+// ICompressSetInStream
+
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C00000")
 IHasher : public IUnknown
 {
@@ -110,22 +120,16 @@ public:
 EXTERN_C HRESULT WINAPI GetHashers(
     _Out_ IHashers** Hashers);
 
-// IArchiveOpenSeq
+// ISetProperties
 
-// ICompressSetCoderMt
-
-// ICompressSetCoderProperties
-
-// ICompressSetDecoderProperties2
-
-// ICompressSetInStream
-
-// ICompressWriteCoderProperties
+// IInArchiveGetStream
 
 // IInArchive
 
-// IOutArchive
+// IArchiveOpenSeq
 
-// ISetProperties
+// IArchiveGetRawProps
+
+// IOutArchive
 
 #endif /* !NANAZIP_SPECIFICATION_SEVENZIP */
