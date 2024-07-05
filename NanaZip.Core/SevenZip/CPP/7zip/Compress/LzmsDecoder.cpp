@@ -196,29 +196,17 @@ static void x86_Filter(Byte *data, UInt32 size, Int32 *history)
     
     const Byte b = p[0];
     
-    if (b == 0x48)
+    if ((b & 0x80) == 0) // REX (0x48 or 0x4c)
     {
-      if (p[1] == 0x8B)
+      const unsigned b2 = p[2] - 0x5; // [RIP + disp32]
+      if (b2 & 0x7)
+        continue;
+      if (p[1] != 0x8d) // LEA
       {
-        if ((p[2] & 0xF7) != 0x5)
+        if (p[1] != 0x8b || b != 0x48 || (b2 & 0xf7))
           continue;
         // MOV RAX / RCX, [RIP + disp32]
       }
-      else if (p[1] == 0x8D) // LEA
-      {
-        if ((p[2] & 0x7) != 0x5)
-          continue;
-        // LEA R**, []
-      }
-      else
-        continue;
-      codeLen = 3;
-    }
-    else if (b == 0x4C)
-    {
-      if (p[1] != 0x8D || (p[2] & 0x7) != 0x5)
-        continue;
-      // LEA R*, []
       codeLen = 3;
     }
     else if (b == 0xE8)

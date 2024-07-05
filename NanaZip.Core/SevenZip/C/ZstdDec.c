@@ -1,5 +1,5 @@
 ﻿/* ZstdDec.c -- Zstd Decoder
-2024-05-26 : the code was developed by Igor Pavlov, using Zstandard format
+2024-06-18 : the code was developed by Igor Pavlov, using Zstandard format
              specification and original zstd decoder code as reference code.
 original zstd decoder code: Copyright (c) Facebook, Inc. All rights reserved.
 This source code is licensed under BSD 3-Clause License.
@@ -1308,8 +1308,10 @@ FSE_Decode_SeqTable(CFseRecord * const table,
   in->len--;
   {
     const Byte *ptr = in->ptr;
-    const Byte sym = ptr[0];
+    const unsigned sym = ptr[0];
     in->ptr = ptr + 1;
+    if (sym >= numSymbolsMax)
+      return SZ_ERROR_DATA;
     table[0] = (FastInt32)sym
       #if defined(Z7_ZSTD_DEC_USE_ML_PLUS3)
         + (numSymbolsMax == NUM_ML_SYMBOLS ? MATCH_LEN_MIN : 0)

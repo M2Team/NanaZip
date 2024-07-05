@@ -1155,7 +1155,7 @@ HRESULT ListArchives(
     CArchiveLink arcLink;
 
     COpenCallbackConsole openCallback;
-    openCallback.Init(&g_StdOut, g_ErrStream, NULL);
+    openCallback.Init(&g_StdOut, g_ErrStream, NULL, listOptions.DisablePercents);
 
     #ifndef Z7_NO_CRYPTO
 

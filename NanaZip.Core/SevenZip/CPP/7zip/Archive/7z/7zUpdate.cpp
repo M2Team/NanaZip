@@ -219,6 +219,14 @@ static int Parse_EXE(const Byte *buf, size_t size, CFilterMode *filterMode)
 }
 
 
+/*
+  Filters don't improve the compression ratio for relocatable object files (".o").
+  But we can get compression ratio gain, if we compress object
+  files and executables in same solid block.
+  So we use filters for relocatable object files (".o"):
+*/
+// #define Z7_7Z_CREATE_ARC_DISABLE_FILTER_FOR_OBJ
+
 /* ---------- ELF ---------- */
 
 #define ELF_SIG 0x464C457F
@@ -257,6 +265,12 @@ static int Parse_ELF(const Byte *buf, size_t size, CFilterMode *filterMode)
     case ELF_DATA_2MSB: be = True; break;
     default: return 0;
   }
+
+#ifdef Z7_7Z_CREATE_ARC_DISABLE_FILTER_FOR_OBJ
+#define ELF_ET_REL  1
+  if (Get16(buf + 0x10, be) == ELF_ET_REL)
+    return 0;
+#endif
 
   switch (Get16(buf + 0x12, be))
   {
@@ -317,6 +331,12 @@ static unsigned Parse_MACH(const Byte *buf, size_t size, CFilterMode *filterMode
     case MACH_SIG_LE_64: /* mode64 = True;  */ be = False; break;
     default: return 0;
   }
+
+#ifdef Z7_7Z_CREATE_ARC_DISABLE_FILTER_FOR_OBJ
+#define MACH_TYPE_OBJECT 1
+  if (Get32(buf + 0xC, be) == MACH_TYPE_OBJECT)
+      return 0;
+#endif
 
   switch (Get32(buf + 4, be))
   {

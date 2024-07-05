@@ -11,10 +11,12 @@ struct CListOptions
 {
   bool ExcludeDirItems;
   bool ExcludeFileItems;
+  bool DisablePercents;
 
   CListOptions():
     ExcludeDirItems(false),
-    ExcludeFileItems(false)
+    ExcludeFileItems(false),
+    DisablePercents(false)
     {}
 };
 

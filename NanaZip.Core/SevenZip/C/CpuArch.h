@@ -1,5 +1,5 @@
 ﻿/* CpuArch.h -- CPU specific code
-2024-05-18 : Igor Pavlov : Public domain */
+2024-06-17 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_CPU_ARCH_H
 #define ZIP7_INC_CPU_ARCH_H
@@ -564,6 +564,7 @@ problem-4 : performace:
 #define SetBe32a(p, v)   { *(UInt32 *)(void *)(p) = (v); }
 #define SetBe16a(p, v)   { *(UInt16 *)(void *)(p) = (v); }
 
+#define GetUi64a(p)      GetUi64(p)
 #define GetUi32a(p)      GetUi32(p)
 #define GetUi16a(p)      GetUi16(p)
 #define SetUi32a(p, v)   SetUi32(p, v)
@@ -571,6 +572,7 @@ problem-4 : performace:
 
 #elif defined(MY_CPU_LE)
 
+#define GetUi64a(p)      (*(const UInt64 *)(const void *)(p))
 #define GetUi32a(p)      (*(const UInt32 *)(const void *)(p))
 #define GetUi16a(p)      (*(const UInt16 *)(const void *)(p))
 #define SetUi32a(p, v)   { *(UInt32 *)(void *)(p) = (v); }

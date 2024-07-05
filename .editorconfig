@@ -39,6 +39,9 @@ trim_trailing_whitespace = true
 [*.rc]
 charset = utf-16le
 
+[*.inf]
+charset = utf-16le
+
 [*.bat]
 charset = utf-8
 insert_final_newline = true

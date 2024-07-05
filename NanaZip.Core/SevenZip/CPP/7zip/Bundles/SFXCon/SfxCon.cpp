@@ -31,6 +31,7 @@
 #include <Mile.Project.Version.h>
 // **************** NanaZip Modification End ****************
 
+
 using namespace NWindows;
 using namespace NFile;
 using namespace NDir;
@@ -432,7 +433,7 @@ int Main2(
     {
       CExtractCallbackConsole *ecs = new CExtractCallbackConsole;
       CMyComPtr<IFolderArchiveExtractCallback> extractCallback = ecs;
-      ecs->Init(g_StdStream, &g_StdErr, g_StdStream);
+      ecs->Init(g_StdStream, &g_StdErr, g_StdStream, false);
 
       #ifndef Z7_NO_CRYPTO
       ecs->PasswordIsDefined = passwordEnabled;

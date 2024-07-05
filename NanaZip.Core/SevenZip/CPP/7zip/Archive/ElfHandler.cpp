@@ -17,11 +17,13 @@
 
 #include "../Compress/CopyCoder.h"
 
+// #define Z7_ELF_SHOW_DETAILS
+
 using namespace NWindows;
 
-static UInt16 Get16(const Byte *p, bool be) { if (be) return GetBe16(p); return GetUi16(p); }
-static UInt32 Get32(const Byte *p, bool be) { if (be) return GetBe32(p); return GetUi32(p); }
-static UInt64 Get64(const Byte *p, bool be) { if (be) return GetBe64(p); return GetUi64(p); }
+static UInt16 Get16(const Byte *p, bool be) { if (be) return GetBe16a(p); return GetUi16a(p); }
+static UInt32 Get32(const Byte *p, bool be) { if (be) return GetBe32a(p); return GetUi32a(p); }
+static UInt64 Get64(const Byte *p, bool be) { if (be) return GetBe64a(p); return GetUi64a(p); }
 
 #define G16(offs, v) v = Get16(p + (offs), be)
 #define G32(offs, v) v = Get32(p + (offs), be)
@@ -31,14 +33,51 @@ namespace NArchive {
 namespace NElf {
 
 /*
-   ELF Structure for most files (real order can be different):
-   Header
-   Program (segment) header table (used at runtime)
-     Segment1 (Section ... Section)
-     Segment2
-     ...
-     SegmentN
-   Section header table (the data for linking and relocation)
+ELF Structure example:
+{
+  Header
+  Program header table (is used at runtime) (list of segment metadata records)
+  {
+    Segment (Read)
+      Segment : PT_PHDR : header table itself
+      Segment : PT_INTERP
+      Segment : PT_NOTE
+      .rela.dyn (RELA, ALLOC)
+    Segment (Execute/Read)
+      .text section (PROGBITS, SHF_ALLOC | SHF_EXECINSTR)
+    Segment (Read)
+      .rodata (PROGBITS, SHF_ALLOC | SHF_WRITE)
+      Segment : PT_GNU_EH_FRAME
+        .eh_frame_hdr
+      .eh_frame
+      .gcc_except_table
+    ...
+    Segment (Write/Read) (VaSize > Size)
+      Segment (Read) : PT_GNU_RELRO
+      Segment (Write/Read)
+      .data
+      .bss (Size == 0) (VSize != 0)
+  }
+  .comment (VA == 0)
+  .shstrtab (VA == 0)
+  Section header table (the data for linking and relocation)
+}
+
+  Last top level segment contains .bss section that requires additional VA space.
+  So (VaSize > Size) for that segment.
+
+  Segments can be unsorted (by offset) in table.
+  Top level segments has Type=PT_LOAD : "Loadable segment".
+  Top level segments usually are aligned for page size (4 KB).
+  Another segments (non PT_LOAD segments) are inside PT_LOAD segments.
+
+  (VA-offset == 0) is possible for some sections and segments at the beginning of file.
+  (VA-offset == 4KB*N) for most sections and segments where (Size != 0),
+  (VA-offset != 4KB*N) for .bss section (last section), because (Size == 0),
+    and that section is not mapped from image file.
+  Some files contain additional "virtual" 4 KB page in VA space after
+  end of data of top level segments (PT_LOAD) before new top level segments.
+  So (VA-offset) value can increase by 4 KB step.
 */
 
 #define ELF_CLASS_32 1
@@ -47,14 +86,14 @@ namespace NElf {
 #define ELF_DATA_2LSB 1
 #define ELF_DATA_2MSB 2
 
-static const UInt32 kHeaderSize32 = 0x34;
-static const UInt32 kHeaderSize64 = 0x40;
+static const unsigned kHeaderSize32 = 0x34;
+static const unsigned kHeaderSize64 = 0x40;
 
-static const UInt32 kSegmentSize32 = 0x20;
-static const UInt32 kSegmentSize64 = 0x38;
+static const unsigned kSegmentSize32 = 0x20;
+static const unsigned kSegmentSize64 = 0x38;
 
-static const UInt32 kSectionSize32 = 0x28;
-static const UInt32 kSectionSize64 = 0x40;
+static const unsigned kSectionSize32 = 0x28;
+static const unsigned kSectionSize64 = 0x40;
 
 struct CHeader
 {
@@ -78,9 +117,9 @@ struct CHeader
   UInt16 NumSections;
   UInt16 NamesSectIndex;
 
-  bool Parse(const Byte *buf);
+  bool Parse(const Byte *p);
 
-  UInt64 GetHeadersSize() const { return (UInt64)HeaderSize +
+  UInt32 GetHeadersSize() const { return (UInt32)HeaderSize +
       (UInt32)NumSegments * SegmentEntrySize +
       (UInt32)NumSections * SectionEntrySize; }
 };
@@ -104,7 +143,7 @@ bool CHeader::Parse(const Byte *p)
   if (p[6] != 1) // Version
     return false;
   Os = p[7];
-  AbiVer = p[8];
+  // AbiVer = p[8];
   for (int i = 9; i < 16; i++)
     if (p[i] != 0)
       return false;
@@ -117,16 +156,21 @@ bool CHeader::Parse(const Byte *p)
   if (Mode64)
   {
     // G64(0x18, EntryVa);
-    G64(0x20, ProgOffset);
+    G64(0x20, ProgOffset); // == kHeaderSize64 == 0x40 usually
     G64(0x28, SectOffset);
     p += 0x30;
+    // we expect that fields are aligned
+    if (ProgOffset & 7) return false;
+    if (SectOffset & 7) return false;
   }
   else
   {
     // G32(0x18, EntryVa);
-    G32(0x1C, ProgOffset);
+    G32(0x1C, ProgOffset); // == kHeaderSize32 == 0x34 usually
     G32(0x20, SectOffset);
     p += 0x24;
+    if (ProgOffset & 3) return false;
+    if (SectOffset & 3) return false;
   }
 
   G32(0, Flags);
@@ -140,21 +184,20 @@ bool CHeader::Parse(const Byte *p)
   G16(12, NumSections);
   G16(14, NamesSectIndex);
 
-  if (ProgOffset < HeaderSize && (ProgOffset != 0 || NumSegments != 0)) return false;
-  if (SectOffset < HeaderSize && (SectOffset != 0 || NumSections != 0)) return false;
+  if (ProgOffset < HeaderSize && (ProgOffset || NumSegments)) return false;
+  if (SectOffset < HeaderSize && (SectOffset || NumSections)) return false;
 
-  if (SegmentEntrySize == 0) { if (NumSegments != 0) return false; }
+  if (SegmentEntrySize == 0) { if (NumSegments) return false; }
   else if (SegmentEntrySize != (Mode64 ? kSegmentSize64 : kSegmentSize32)) return false;
 
-  if (SectionEntrySize == 0) { if (NumSections != 0) return false; }
+  if (SectionEntrySize == 0) { if (NumSections) return false; }
   else if (SectionEntrySize != (Mode64 ? kSectionSize64 : kSectionSize32)) return false;
 
   return true;
 }
 
-// The program header table itself.
 
-#define PT_PHDR 6
+#define PT_PHDR 6  // The program header table itself.
 #define PT_GNU_STACK 0x6474e551
 
 static const CUInt32PCharPair g_SegnmentTypes[] =
@@ -186,16 +229,18 @@ struct CSegment
   UInt32 Flags;
   UInt64 Offset;
   UInt64 Va;
-  // UInt64 Pa;
-  UInt64 Size;
-  UInt64 VSize;
-  UInt64 Align;
-
+  UInt64 Size;  // size in file
+  UInt64 VSize; // size in memory
+#ifdef Z7_ELF_SHOW_DETAILS
+  UInt64 Pa;    // usually == Va, or == 0
+  UInt64 Align; // if (Align != 0), condition must be met:
+                //   (VSize % Align == Offset % Alig)
+#endif
   void UpdateTotalSize(UInt64 &totalSize)
   {
-    UInt64 t = Offset + Size;
+    const UInt64 t = Offset + Size;
     if (totalSize < t)
-      totalSize = t;
+        totalSize = t;
   }
   void Parse(const Byte *p, bool mode64, bool be);
 };
@@ -208,20 +253,24 @@ void CSegment::Parse(const Byte *p, bool mode64, bool be)
     G32(4, Flags);
     G64(8, Offset);
     G64(0x10, Va);
-    // G64(0x18, Pa);
     G64(0x20, Size);
     G64(0x28, VSize);
+#ifdef Z7_ELF_SHOW_DETAILS
+    G64(0x18, Pa);
     G64(0x30, Align);
+#endif
   }
   else
   {
     G32(4, Offset);
     G32(8, Va);
-    // G32(0x0C, Pa);
     G32(0x10, Size);
     G32(0x14, VSize);
     G32(0x18, Flags);
+#ifdef Z7_ELF_SHOW_DETAILS
+    G32(0x0C, Pa);
     G32(0x1C, Align);
+#endif
   }
 }
 
@@ -290,6 +339,8 @@ static const CUInt32PCharPair g_SectTypes[] =
   { 0x70000005, "ARM_OVERLAYSECTION" }
 };
 
+
+// SHF_ flags
 static const CUInt32PCharPair g_SectionFlags[] =
 {
   { 0, "WRITE" },
@@ -303,7 +354,7 @@ static const CUInt32PCharPair g_SectionFlags[] =
   { 8, "OS_NONCONFORMING" },
   { 9, "GROUP" },
   { 10, "TLS" },
-  { 11, "CP_SECTION" },
+  { 11, "COMPRESSED" },
   { 12, "DP_SECTION" },
   { 13, "XCORE_SHF_CP_SECTION" },
   { 28, "64_LARGE" },
@@ -326,9 +377,9 @@ struct CSection
 
   void UpdateTotalSize(UInt64 &totalSize)
   {
-    UInt64 t = Offset + GetSize();
+    const UInt64 t = Offset + GetSize();
     if (totalSize < t)
-      totalSize = t;
+        totalSize = t;
   }
   bool Parse(const Byte *p, bool mode64, bool be);
 };
@@ -412,7 +463,7 @@ static const char * const g_Machines[] =
   , "TRW RH-32"
   , "Motorola RCE"
   , "ARM"
-  , "Alpha"
+  , "Alpha-STD"
   , "Hitachi SH"
   , "SPARC-V9"
   , "Siemens Tricore"
@@ -577,8 +628,8 @@ static const char * const g_Machines[] =
 static const CUInt32PCharPair g_MachinePairs[] =
 {
   { 243, "RISC-V" },
-  { 47787, "Xilinx MicroBlaze" }
-  // { 0x9026, "Alpha" }
+  { 0x9026, "Alpha" },  // EM_ALPHA_EXP, obsolete, (used by NetBSD/alpha) (written in the absence of an ABI)
+  { 0xbaab, "Xilinx MicroBlaze" }
 };
 
 static const CUInt32PCharPair g_OS[] =
@@ -600,6 +651,8 @@ static const CUInt32PCharPair g_OS[] =
   { 14, "HP NSK" },
   { 15, "AROS" },
   { 16, "FenixOS" },
+  { 17, "CloudABI" },
+  { 18, "OpenVOS" },
   { 64, "Bare-metal TMS320C6000" },
   { 65, "Linux TMS320C6000" },
   { 97, "ARM" },
@@ -693,23 +746,27 @@ public:
 void CHandler::GetSectionName(UInt32 index, NCOM::CPropVariant &prop, bool showNULL) const
 {
   if (index >= _sections.Size())
-    return;
-  const CSection &section = _sections[index];
-  const UInt32 offset = section.Name;
-  if (index == SHN_UNDEF /* && section.Type == SHT_NULL && offset == 0 */)
+    prop = index; // it's possible for some file, but maybe it's ERROR case
+  else
   {
-    if (showNULL)
-      prop = "NULL";
-    return;
-  }
-  const Byte *p = _namesData;
-  size_t size = _namesData.Size();
-  for (size_t i = offset; i < size; i++)
-    if (p[i] == 0)
+    const CSection &section = _sections[index];
+    const UInt32 offset = section.Name;
+    if (index == SHN_UNDEF /* && section.Type == SHT_NULL && offset == 0 */)
     {
-      prop = (const char *)(p + offset);
+      if (showNULL)
+        prop = "NULL";
       return;
     }
+    const Byte *p = _namesData;
+    const size_t size = _namesData.Size();
+    for (size_t i = offset; i < size; i++)
+      if (p[i] == 0)
+      {
+        prop = (const char *)(p + offset);
+        return;
+      }
+    prop = "ERROR";
+  }
 }
 
 static const Byte kArcProps[] =
@@ -726,7 +783,14 @@ static const Byte kArcProps[] =
 enum
 {
   kpidLinkSection = kpidUserDefined,
-  kpidInfoSection
+  kpidInfoSection,
+  kpidEntrySize
+#ifdef Z7_ELF_SHOW_DETAILS
+  // , kpidAlign
+  , kpidPa
+  , kpidDelta
+  , kpidOffsetEnd
+#endif
 };
 
 static const CStatProp kProps[] =
@@ -738,6 +802,14 @@ static const CStatProp kProps[] =
   { NULL, kpidVa, VT_UI8 },
   { NULL, kpidType, VT_BSTR },
   { NULL, kpidCharacts, VT_BSTR }
+#ifdef Z7_ELF_SHOW_DETAILS
+  // , { "Align", kpidAlign, VT_UI8 }
+  , { NULL, kpidClusterSize, VT_UI8 }
+  , { "PA", kpidPa, VT_UI8 }
+  , { "End offset", kpidOffsetEnd, VT_UI8 }
+  , { "Delta (VA-Offset)", kpidDelta, VT_UI8 }
+#endif
+  , { "Entry Size", kpidEntrySize, VT_UI8}
   , { "Link Section", kpidLinkSection, VT_BSTR}
   , { "Info Section", kpidInfoSection, VT_BSTR}
 };
@@ -769,7 +841,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
       if (s.IsEmpty())
         s = TypePairToString(g_MachinePairs, Z7_ARRAY_SIZE(g_MachinePairs), _header.Machine);
       UInt32 flags = _header.Flags;
-      if (flags != 0)
+      if (flags)
       {
         s.Add_Space();
         if (_header.Machine == k_Machine_ARM)
@@ -783,10 +855,10 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
           const UInt32 ver = flags >> 28;
           s += "v";
           s.Add_UInt32(ver);
-          flags &= (((UInt32)1 << 28) - 1);
+          flags &= ((UInt32)1 << 28) - 1;
 
-          UInt32 abi = (flags >> 12) & 7;
-          if (abi != 0)
+          const UInt32 abi = (flags >> 12) & 7;
+          if (abi)
           {
             s += " ABI:";
             s.Add_UInt32(abi);
@@ -827,13 +899,39 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     case kpidHostOS: PAIR_TO_PROP(g_OS, _header.Os, prop); break;
     case kpidCharacts: TYPE_TO_PROP(g_Types, _header.Type, prop); break;
     case kpidComment:
+    {
+      AString s;
       if (_stackFlags_Defined)
       {
-        AString s ("STACK: ");
+        s += "STACK: ";
         s += FlagsToString(g_SegmentFlags, Z7_ARRAY_SIZE(g_SegmentFlags), _stackFlags);
-        prop = s;
+        s.Add_LF();
+        /*
+        if (_header.EntryVa)
+        {
+          s += "Entry point: 0x";
+          char temp[16 + 4];
+          ConvertUInt64ToHex(_header.EntryVa, temp);
+          s += temp;
+          s.Add_LF();
+        }
+        */
       }
+      if (_header.NumSegments)
+      {
+        s += "Segments: ";
+        s.Add_UInt32(_header.NumSegments);
+        s.Add_LF();
+      }
+      if (_header.NumSections)
+      {
+        s += "Sections: ";
+        s.Add_UInt32(_header.NumSections);
+        s.Add_LF();
+      }
+      prop = s;
       break;
+    }
     case kpidExtension:
     {
       const char *s = NULL;
@@ -878,12 +976,17 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       }
       case kpidOffset: prop = item.Offset; break;
       case kpidVa: prop = item.Va; break;
+#ifdef Z7_ELF_SHOW_DETAILS
+      case kpidDelta: if (item.Va) { prop = item.Va - item.Offset; } break;
+      case kpidOffsetEnd: prop = item.Offset + item.Size; break;
+      case kpidPa: prop = item.Pa; break;
+      case kpidClusterSize: prop = item.Align; break;
+#endif
       case kpidSize:
       case kpidPackSize: prop = (UInt64)item.Size; break;
       case kpidVirtualSize: prop = (UInt64)item.VSize; break;
       case kpidType: PAIR_TO_PROP(g_SegnmentTypes, item.Type, prop); break;
       case kpidCharacts: FLAGS_TO_PROP(g_SegmentFlags, item.Flags, prop); break;
-        
     }
   }
   else
@@ -895,13 +998,19 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       case kpidPath: GetSectionName(index, prop, true); break;
       case kpidOffset: prop = item.Offset; break;
       case kpidVa: prop = item.Va; break;
+#ifdef Z7_ELF_SHOW_DETAILS
+      case kpidDelta: if (item.Va) { prop = item.Va - item.Offset; } break;
+      case kpidOffsetEnd: prop = item.Offset + item.GetSize(); break;
+#endif
       case kpidSize:
       case kpidPackSize: prop = (UInt64)(item.Type == SHT_NOBITS ? 0 : item.VSize); break;
       case kpidVirtualSize: prop = item.GetSize(); break;
       case kpidType: PAIR_TO_PROP(g_SectTypes, item.Type, prop); break;
       case kpidCharacts: FLAGS_TO_PROP(g_SectionFlags, (UInt32)item.Flags, prop); break;
+      // case kpidAlign: prop = item.Align; break;
       case kpidLinkSection: GetSectionName(item.Link, prop, false); break;
       case kpidInfoSection: GetSectionName(item.Info, prop, false); break;
+      case kpidEntrySize: prop = (UInt64)item.EntSize; break;
     }
   }
   prop.Detach(value);
@@ -911,42 +1020,46 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
 
 HRESULT CHandler::Open2(IInStream *stream)
 {
-  const UInt32 kStartSize = kHeaderSize64;
-  Byte h[kStartSize];
-  RINOK(ReadStream_FALSE(stream, h, kStartSize))
-  if (h[0] != 0x7F || h[1] != 'E' || h[2] != 'L' || h[3] != 'F')
-    return S_FALSE;
-  if (!_header.Parse(h))
-    return S_FALSE;
+  {
+    const UInt32 kStartSize = kHeaderSize64;
+    UInt64 h64[kStartSize / 8];
+    RINOK(ReadStream_FALSE(stream, h64, kStartSize))
+    const Byte *h = (const Byte *)(const void *)h64;
+    if (GetUi32a(h) != 0x464c457f)
+      return S_FALSE;
+    if (!_header.Parse(h))
+      return S_FALSE;
+  }
 
   _totalSize = _header.HeaderSize;
 
   bool addSegments = false;
   bool addSections = false;
-
-  if (_header.NumSections > 1)
+  // first section usually is NULL (with zero offsets and zero sizes).
+  if (_header.NumSegments == 0 || _header.NumSections > 1)
     addSections = true;
   else
     addSegments = true;
+#ifdef Z7_ELF_SHOW_DETAILS
+  addSections = true;
+  addSegments = true;
+#endif
 
-  if (_header.NumSegments != 0)
+  if (_header.NumSegments)
   {
     if (_header.ProgOffset > (UInt64)1 << 60) return S_FALSE;
     RINOK(InStream_SeekSet(stream, _header.ProgOffset))
     const size_t size = (size_t)_header.SegmentEntrySize * _header.NumSegments;
-    
     CByteArr buf(size);
-    
     RINOK(ReadStream_FALSE(stream, buf, size))
-    
-    const UInt64 total = _header.ProgOffset + size;
-    if (_totalSize < total)
-      _totalSize = total;
-
-    const Byte *p = buf;
-    
+    {
+      const UInt64 total = _header.ProgOffset + size;
+      if (_totalSize < total)
+          _totalSize = total;
+    }
     if (addSegments)
       _segments.ClearAndReserve(_header.NumSegments);
+    const Byte *p = buf;
     for (unsigned i = 0; i < _header.NumSegments; i++, p += _header.SegmentEntrySize)
     {
       CSegment seg;
@@ -957,29 +1070,29 @@ HRESULT CHandler::Open2(IInStream *stream)
         _stackFlags = seg.Flags;
         _stackFlags_Defined = true;
       }
-      if (addSegments && seg.Type != PT_PHDR)
+      if (addSegments
+          // we don't show program header table segment
+          && seg.Type != PT_PHDR
+          )
         _segments.AddInReserved(seg);
     }
   }
 
-  if (_header.NumSections != 0)
+  if (_header.NumSections)
   {
     if (_header.SectOffset > (UInt64)1 << 60) return S_FALSE;
     RINOK(InStream_SeekSet(stream, _header.SectOffset))
-    size_t size = (size_t)_header.SectionEntrySize * _header.NumSections;
-    
+    const size_t size = (size_t)_header.SectionEntrySize * _header.NumSections;
     CByteArr buf(size);
-    
     RINOK(ReadStream_FALSE(stream, buf, size))
-
-    UInt64 total = _header.SectOffset + size;
-    if (_totalSize < total)
-      _totalSize = total;
-
-    const Byte *p = buf;
-    
+    {
+      const UInt64 total = _header.SectOffset + size;
+      if (_totalSize < total)
+          _totalSize = total;
+    }
     if (addSections)
       _sections.ClearAndReserve(_header.NumSections);
+    const Byte *p = buf;
     for (unsigned i = 0; i < _header.NumSections; i++, p += _header.SectionEntrySize)
     {
       CSection sect;
@@ -1000,18 +1113,17 @@ HRESULT CHandler::Open2(IInStream *stream)
     {
       const CSection &sect = _sections[_header.NamesSectIndex];
       const UInt64 size = sect.GetSize();
-      if (size != 0
-        && size < ((UInt64)1 << 31)
-        && (Int64)sect.Offset >= 0)
+      if (size && size < ((UInt64)1 << 31)
+          && (Int64)sect.Offset >= 0)
       {
         _namesData.Alloc((size_t)size);
         RINOK(InStream_SeekSet(stream, sect.Offset))
         RINOK(ReadStream_FALSE(stream, _namesData, (size_t)size))
       }
     }
-    
     /*
-    // we will not delete NULL sections, since we have links to section via indexes
+    // we cannot delete "NULL" sections,
+    // because we have links to sections array via indexes
     for (int i = _sections.Size() - 1; i >= 0; i--)
       if (_sections[i].Type == SHT_NULL)
         _items.Delete(i);
@@ -1080,7 +1192,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
-  UInt64 currentTotalSize = 0;
+  totalSize = 0;
   UInt64 currentItemSize;
   
   CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
@@ -1089,9 +1201,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
   inStream->SetStream(_inStream);
 
-  for (i = 0;; i++, currentTotalSize += currentItemSize)
+  for (i = 0;; i++, totalSize += currentItemSize)
   {
-    lps->InSize = lps->OutSize = currentTotalSize;
+    lps->InSize = lps->OutSize = totalSize;
     RINOK(lps->SetCur())
     if (i >= numItems)
       break;

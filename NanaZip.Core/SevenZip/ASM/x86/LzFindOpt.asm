@@ -1,5 +1,5 @@
 ; LzFindOpt.asm -- ASM version of GetMatchesSpecN_2() function
-; 2021-07-21: Igor Pavlov : Public domain
+; 2024-06-18: Igor Pavlov : Public domain
 ;
 
 ifndef x64
@@ -11,10 +11,31 @@ include 7zAsm.asm
 
 MY_ASM_START
 
-_TEXT$LZFINDOPT SEGMENT ALIGN(64) 'CODE'
+ifndef Z7_LZ_FIND_OPT_ASM_USE_SEGMENT
+if (IS_LINUX gt 0)
+  Z7_LZ_FIND_OPT_ASM_USE_SEGMENT equ 1
+else
+  Z7_LZ_FIND_OPT_ASM_USE_SEGMENT equ 1
+endif
+endif
 
+ifdef Z7_LZ_FIND_OPT_ASM_USE_SEGMENT
+_TEXT$LZFINDOPT SEGMENT ALIGN(64) 'CODE'
 MY_ALIGN macro num:req
         align  num
+        ; align  16
+endm
+else
+MY_ALIGN macro num:req
+        ; We expect that ".text" is aligned for 16-bytes.
+        ; So we don't need large alignment inside our function.
+        align  16
+endm
+endif
+
+
+MY_ALIGN_16 macro
+        MY_ALIGN 16
 endm
 
 MY_ALIGN_32 macro
@@ -136,7 +157,11 @@ COPY_VAR_64 macro dest_var, src_var
 endm
 
 
+ifdef Z7_LZ_FIND_OPT_ASM_USE_SEGMENT
 ; MY_ALIGN_64
+else
+  MY_ALIGN_16
+endif
 MY_PROC GetMatchesSpecN_2, 13
 MY_PUSH_PRESERVED_ABI_REGS
         mov     r0, RSP
@@ -508,6 +533,8 @@ fin:
 MY_POP_PRESERVED_ABI_REGS
 MY_ENDP
 
+ifdef Z7_LZ_FIND_OPT_ASM_USE_SEGMENT
 _TEXT$LZFINDOPT ENDS
+endif
 
 end

@@ -41,7 +41,7 @@ Kenji Mouri
 
 ## Features
 
-- Inherit all features from 7-Zip 24.06.
+- Inherit all features from 7-Zip 24.07.
 - Support the dark mode for all GUI components.
 - Support the Mica effect on the main window. You will enjoy the full window
   immersive Mica for all GUI components if you are using dark mode with HDR
