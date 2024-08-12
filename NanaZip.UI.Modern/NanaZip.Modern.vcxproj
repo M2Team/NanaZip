@@ -440,7 +440,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">
-      <Version>2.2.944</Version>
+      <Version>2.3.1064</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
       <Version>1.0.645</Version>
