@@ -443,7 +443,7 @@
       <Version>2.2.944</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.558</Version>
+      <Version>1.0.645</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
