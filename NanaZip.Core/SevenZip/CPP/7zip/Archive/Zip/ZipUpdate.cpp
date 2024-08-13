@@ -1755,16 +1755,17 @@ HRESULT CCacheOutStream::FlushFromCache(size_t size)
   PRF(printf("\n-- CCacheOutStream::FlushFromCache %u\n", (unsigned)size));
   if (_hres != S_OK)
     return _hres;
-  if (size == 0 || _cachedSize == 0)
+  if (size > _cachedSize)
+      size = _cachedSize;
+  // (size <= _cachedSize)
+  if (size == 0)
     return S_OK;
   RINOK(SeekPhy(_cachedPos))
   for (;;)
   {
     // (_phyPos == _cachedPos)
     const size_t pos = (size_t)_cachedPos & kCacheMask;
-    size_t cur = kCacheSize - pos;
-    cur = MyMin(cur, _cachedSize);
-    cur = MyMin(cur, size);
+    const size_t cur = MyMin(kCacheSize - pos, size);
     _hres = SetRestriction_ForWrite(cur);
     RINOK(_hres)
     PRF(printf("\n-- CCacheOutStream::WriteFromCache _phyPos = 0x%x, size = %d\n", (unsigned)_phyPos, (unsigned)cur));
@@ -1776,7 +1777,7 @@ HRESULT CCacheOutStream::FlushFromCache(size_t size)
     _cachedPos += cur;
     _cachedSize -= cur;
     size -= cur;
-    if (size == 0 || _cachedSize == 0)
+    if (size == 0)
       return S_OK;
   }
 }
@@ -1964,7 +1965,11 @@ Z7_COM7F_IMF(CCacheOutStream::SetSize(UInt64 newSize))
       // so we reduce cache
       _cachedSize = (size_t)offset;
       if (_phySize <= newSize)
-        return S_OK; // _phySize will be restored later after cache flush
+      {
+        // _phySize will be restored later after cache flush
+        _virtSize = newSize;
+        return S_OK;
+      }
       // (_phySize > newSize)
       // so we must reduce phyStream size to (newSize) or to (_cachedPos)
       // newPhySize = _cachedPos; // optional reduce to _cachedPos

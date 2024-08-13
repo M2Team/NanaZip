@@ -1,5 +1,5 @@
 ﻿/* CpuArch.c -- CPU specific code
-2024-05-18 : Igor Pavlov : Public domain */
+2024-07-04 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
@@ -848,7 +848,11 @@ static unsigned long MY_getauxval(int aux)
 
   #define MY_HWCAP_CHECK_FUNC(name) \
   BoolInt CPU_IsSupported_ ## name(void) { return 0; }
+#if defined(__ARM_NEON)
+  BoolInt CPU_IsSupported_NEON(void) { return True; }
+#else
   MY_HWCAP_CHECK_FUNC(NEON)
+#endif
 
 #endif // USE_HWCAP
 

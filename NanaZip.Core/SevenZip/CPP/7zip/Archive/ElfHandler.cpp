@@ -628,6 +628,7 @@ static const char * const g_Machines[] =
 static const CUInt32PCharPair g_MachinePairs[] =
 {
   { 243, "RISC-V" },
+  { 258, "LoongArch" },
   { 0x9026, "Alpha" },  // EM_ALPHA_EXP, obsolete, (used by NetBSD/alpha) (written in the absence of an ABI)
   { 0xbaab, "Xilinx MicroBlaze" }
 };
@@ -853,10 +854,9 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
         else if (_header.Machine == k_Machine_MIPS)
         {
           const UInt32 ver = flags >> 28;
-          s += "v";
+          s.Add_Char('v');
           s.Add_UInt32(ver);
           flags &= ((UInt32)1 << 28) - 1;
-
           const UInt32 abi = (flags >> 12) & 7;
           if (abi)
           {
@@ -864,7 +864,6 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
             s.Add_UInt32(abi);
           }
           flags &= ~((UInt32)7 << 12);
-          
           s.Add_Space();
           s += FlagsToString(g_MIPS_Flags, Z7_ARRAY_SIZE(g_MIPS_Flags), flags);
         }
@@ -885,6 +884,31 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
           flags &= ~(UInt32)6;
           s += FlagsToString(g_RISCV_Flags, Z7_ARRAY_SIZE(g_RISCV_Flags), flags);
         }
+#if 0
+#define k_Machine_LOONGARCH 258
+        else if (_header.Machine == k_Machine_LOONGARCH)
+        {
+          s += "ABI:";
+          s.Add_UInt32((flags >> 6) & 3);
+          s.Add_Dot();
+          s.Add_UInt32((flags >> 3) & 7);
+          s.Add_Dot();
+#if 1
+          s.Add_UInt32(flags & 7);
+#else
+          static const char k_LoongArch_Float_Type[8] = { '0', 's', 'f', 'd', '4' ,'5', '6', '7' };
+          s.Add_Char(k_LoongArch_Float_Type[flags & 7]);
+#endif
+          flags &= ~(UInt32)0xff;
+          if (flags)
+          {
+            s.Add_Colon();
+            char sz[16];
+            ConvertUInt32ToHex(flags, sz);
+            s += sz;
+          }
+        }
+#endif
         else
         {
           char sz[16];
