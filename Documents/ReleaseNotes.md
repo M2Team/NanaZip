@@ -3,6 +3,33 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 3.1 (3.1.1080.0)**
+
+- Try to discover the new Sponsor button design but finally reverted to the old
+  design for more natural looking. (Contributed by dongle-the-gadget and
+  Gaoyifei1011.)
+- Improve Simplified Chinese translation. (Contributed by DeepChirp.)
+- Improve the Sponsor Edition documentation. (Contributed by sirredbeard.)
+- Improve Albanian translation. (Contributed by RDN000.)
+- Improve German translation. (Contributed by CennoxX.)
+- Fix several dark mode UI style issues. (Contributed by rounk-ctrl.)
+- Ignore the text scale factor for solving the UI layout issues.
+- Synchronize the 7-Zip mainline implementations to 24.08.
+  (https://github.com/ip7z/7zip/releases/tag/24.08) (Thanks to Igor Pavlov.
+  Noticed by atplsx and wallrik.)
+- Synchronize the LZ4 implementations to 1.10.0.
+  (https://github.com/lz4/lz4/releases/tag/v1.10.0)
+- Update Mile.Project.Windows submodule to the August 12, 2024 latest.
+- Update VC-LTL to 5.1.1.
+- Update YY-Thunks to 1.1.2.
+- Update Mile.Windows.Helpers to 1.0.645.
+- Update Mile.Xaml to 2.3.1064.
+- Update Mile.Windows.Internal to 1.0.2971.
+- Defer package updates while the app is running in Windows 11 23H2 or later.
+  (Suggested by AndromedaMelody.)
+- Improve maintainer tools for introducing automatic packaging support when
+  building all targets for NanaZip.
+
 **NanaZip 3.0 Update 1 (3.0.1000.0)**
 
 - Update Mile.Windows.Internal to 1.0.2889.
@@ -139,7 +166,7 @@ For preview versions, please read
 
 - Notes
   - Update the minimum system requirement to Windows 10 Version 2004 (Build 
-    1)     or later for solving issues in the XAML Islands.
+    19041) or later for solving issues in the XAML Islands.
   - Add instructions for installing NanaZip for all users. (Contributed by
     AndromedaMelody. Suggested by Wolverine1977.)
 - Features
