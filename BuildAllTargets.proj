@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project 
-  DefaultTargets="Restore;Build"
+  DefaultTargets="Restore;Build;Packaging"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Restore">
     <ItemGroup>
@@ -36,5 +36,39 @@
       BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64;Configuration=Release;Platform=x64" />
+  </Target>
+  <Target Name="Packaging">
+    <PropertyGroup>
+      <InputBinariesPath>$(MSBuildThisFileDirectory)Output\Binaries\Release\</InputBinariesPath>
+      <OutputSymbolsPath>$(MSBuildThisFileDirectory)Output\Binaries\Root\Symbols\</OutputSymbolsPath>
+      <OutputFileNamePrefix>NanaZip_3.5.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</OutputFileNamePrefix>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(OutputSymbolsPath)arm64" />
+    <MakeDir Directories="$(OutputSymbolsPath)x64" />
+    <MakeDir Directories="$(OutputSymbolsPath)x86" />
+
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)License.md" DestinationFiles="$(OutputSymbolsPath)License.txt" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Codecs.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Console.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Modern.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Codecs.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Modern.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />
+    <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Sfx.Shared.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />
+    <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />   
+
+    <Exec Command="7z a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
   </Target>
 </Project>
