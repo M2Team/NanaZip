@@ -126,11 +126,65 @@ namespace NanaZip.RefreshPackageVersion
             }
         }
 
+        static void GenerateAppxManifestResourceIdentifies()
+        {
+            string FilePath = string.Format(
+                @"{0}\NanaZipPackage\Package.appxmanifest",
+                RepositoryRoot);
+
+            string Content = File.ReadAllText(FilePath);
+
+            string PreviousContent = string.Empty;
+            {
+                string StartString = "  <Resources>\r\n";
+                string EndString = "  </Resources>";
+
+                int Start = Content.IndexOf(StartString) + StartString.Length;
+                int End = Content.IndexOf(EndString);
+
+                PreviousContent = Content.Substring(Start, End - Start);
+            }
+
+            if (string.IsNullOrEmpty(PreviousContent))
+            {
+                return;
+            }
+
+            string NewContent = string.Empty;
+            {
+                DirectoryInfo Folder = new DirectoryInfo(string.Format(
+                    @"{0}\NanaZipPackage\Strings",
+                    RepositoryRoot));
+                foreach (var item in Folder.GetDirectories())
+                {
+                    NewContent += string.Format(
+                        "    <Resource Language=\"{0}\" />\r\n",
+                        item.Name);
+                }
+
+                int[] Scales = [100, 125, 150, 200, 400];
+                foreach (var Scale in Scales)
+                {
+                    NewContent += string.Format(
+                        "    <Resource uap:Scale=\"{0}\" />\r\n",
+                        Scale.ToString());
+                }
+            }
+
+            FileUtilities.SaveTextToFileAsUtf8Bom(
+                FilePath,
+                File.ReadAllText(FilePath).Replace(
+                    PreviousContent,
+                    NewContent));
+        }
+
         static void Main(string[] args)
         {
             RefreshAppxManifestVersion();
 
             SwitchDevelopmentChannel();
+
+            GenerateAppxManifestResourceIdentifies();
 
             Console.WriteLine(
                "NanaZip.RefreshPackageVersion task has been completed.");
