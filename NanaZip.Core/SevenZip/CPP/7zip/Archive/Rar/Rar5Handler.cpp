@@ -1456,7 +1456,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
             }
             if (arcInfo->Locator.Is_Recovery())
             {
-              s += "Recovery:";
+              s.Add_OptSpaced("Recovery:");
               s.Add_UInt64(arcInfo->Locator.Recovery);
             }
           }

@@ -111,6 +111,12 @@ static const CPartType kPartTypes[] =
 
   { 0x0FC63DAF, NULL, "Linux Data" },
   { 0x0657FD6D, NULL, "Linux Swap" },
+  { 0x44479540, NULL, "Linux root (x86)" },
+  { 0x4F68BCE3, NULL, "Linux root (x86-64)" },
+  { 0x69DAD710, NULL, "Linux root (ARM)" },
+  { 0xB921B045, NULL, "Linux root (ARM64)" },
+  { 0x993D8D3D, NULL, "Linux root (IA-64)" },
+  
 
   { 0x83BD6B9D, NULL, "FreeBSD Boot" },
   { 0x516E7CB4, NULL, "FreeBSD Data" },

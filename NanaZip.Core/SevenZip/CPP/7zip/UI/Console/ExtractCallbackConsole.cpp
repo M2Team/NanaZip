@@ -924,11 +924,11 @@ HRESULT CExtractCallbackConsole::ExtractResult(HRESULT result)
   }
   else
   {
-    NumArcsWithError++;
+    // we don't update NumArcsWithError, if error is not related to archive data.
     if (result == E_ABORT
-        || result == HRESULT_FROM_WIN32(ERROR_DISK_FULL)
-        )
+        || result == HRESULT_FROM_WIN32(ERROR_DISK_FULL))
       return result;
+    NumArcsWithError++; 
     
     if (_se)
     {

@@ -206,13 +206,15 @@ Z7_COM7F_IMF(CExtractCallbackImp::AskOverwrite(
 {
   COverwriteDialog dialog;
 
-  dialog.OldFileInfo.SetTime(existTime);
-  dialog.OldFileInfo.SetSize(existSize);
-  dialog.OldFileInfo.Name = existName;
+  dialog.OldFileInfo.SetTime2(existTime);
+  dialog.OldFileInfo.SetSize2(existSize);
+  dialog.OldFileInfo.Path = existName;
+  dialog.OldFileInfo.Is_FileSystemFile = true;
 
-  dialog.NewFileInfo.SetTime(newTime);
-  dialog.NewFileInfo.SetSize(newSize);
-  dialog.NewFileInfo.Name = newName;
+  dialog.NewFileInfo.SetTime2(newTime);
+  dialog.NewFileInfo.SetSize2(newSize);
+  dialog.NewFileInfo.Path = newName;
+  dialog.NewFileInfo.Is_FileSystemFile = Src_Is_IO_FS_Folder;
   
   ProgressDialog->WaitCreating();
   INT_PTR writeAnswer = dialog.Create(*ProgressDialog);

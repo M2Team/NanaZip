@@ -224,6 +224,8 @@ public:
   bool ProcessAltStreams;
   bool StreamMode;
   bool ThereAreMessageErrors;
+  bool Src_Is_IO_FS_Folder;
+
 #ifndef Z7_NO_CRYPTO
   bool PasswordIsDefined;
   bool PasswordWasAsked;
@@ -286,6 +288,8 @@ public:
     , MultiArcMode(false)
     , ProcessAltStreams(true)
     , StreamMode(false)
+    , ThereAreMessageErrors(false)
+    , Src_Is_IO_FS_Folder(false)
 #ifndef Z7_NO_CRYPTO
     , PasswordIsDefined(false)
     , PasswordWasAsked(false)

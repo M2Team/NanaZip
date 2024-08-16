@@ -14,12 +14,14 @@
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
-  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 desktop10 uap8 uap10 virtualization">
+  xmlns:uap16="http://schemas.microsoft.com/appx/manifest/uap/windows10/16"
+  xmlns:uap17="http://schemas.microsoft.com/appx/manifest/uap/windows10/17"
+  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 desktop10 uap8 uap10 virtualization uap16 uap17">
 
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
     Publisher="CN=E310A153-74A9-4D81-800B-857A8D58408A"
-    Version="3.5.1000.0" />
+    Version="3.5.1080.0" />
 
   <Properties>
     <DisplayName>NanaZip Preview</DisplayName>
@@ -35,6 +37,8 @@
         <virtualization:ExcludedDirectory>$(KnownFolder:RoamingAppData)</virtualization:ExcludedDirectory>
       </virtualization:ExcludedDirectories>
     </virtualization:FileSystemWriteVirtualization>
+    <uap16:UpdateWhileInUse>defer</uap16:UpdateWhileInUse>
+    <uap17:UpdateWhileInUse>defer</uap17:UpdateWhileInUse>
   </Properties>
 
   <Dependencies>

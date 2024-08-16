@@ -21,8 +21,8 @@
 
 using namespace NWindows;
 
-static const unsigned kNumWinAtrribFlags = 21;
-static const char g_WinAttribChars[kNumWinAtrribFlags + 1] = "RHS8DAdNTsLCOIEV.X.PU";
+static const unsigned kNumWinAtrribFlags = 30;
+static const char g_WinAttribChars[kNumWinAtrribFlags + 1] = "RHS8DAdNTsLCOIEVvX.PU.M......B";
 
 /*
 FILE_ATTRIBUTE_
@@ -48,8 +48,9 @@ FILE_ATTRIBUTE_
 18 RECALL_ON_OPEN or EA
 19 PINNED
 20 UNPINNED
-21 STRICTLY_SEQUENTIAL
+21 STRICTLY_SEQUENTIAL  (10.0.16267)
 22 RECALL_ON_DATA_ACCESS
+29 STRICTLY_SEQUENTIAL  (10.0.17134+) (SMR Blob)
 */
 
 
@@ -107,10 +108,10 @@ void ConvertWinAttribToString(char *s, UInt32 wa) throw()
 
   for (unsigned i = 0; i < kNumWinAtrribFlags; i++)
   {
-    UInt32 flag = (1 << i);
-    if ((wa & flag) != 0)
+    const UInt32 flag = (UInt32)1 << i;
+    if (wa & flag)
     {
-      char c = g_WinAttribChars[i];
+      const char c = g_WinAttribChars[i];
       if (c != '.')
       {
         wa &= ~flag;

@@ -11,7 +11,9 @@
 #define IDB_NO_TO_ALL                  441
 
 #define IDI_OVERWRITE_OLD_FILE             100
-#define IDI_OVERWRITE_NEW_FILE             101
-
+#define IDI_OVERWRITE_OLD_FILE_2           101
 #define IDT_OVERWRITE_OLD_FILE_SIZE_TIME   102
-#define IDT_OVERWRITE_NEW_FILE_SIZE_TIME   103
+
+#define IDI_OVERWRITE_NEW_FILE             110
+#define IDI_OVERWRITE_NEW_FILE_2           111
+#define IDT_OVERWRITE_NEW_FILE_SIZE_TIME   112
