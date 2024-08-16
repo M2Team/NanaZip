@@ -643,7 +643,7 @@
     <value>Manter Histórico de Arquivos</value>
   </data>
   <data name="Resource2510" xml:space="preserve">
-    <value>>Manter Histórico de Caminhos</value>
+    <value>Manter Histórico de Caminhos</value>
   </data>
   <data name="Resource2511" xml:space="preserve">
     <value>Manter Histórico de Cópias</value>
@@ -1348,6 +1348,6 @@ Você tem certeza que você quer dividir o arquivo compactado em tais volumes?</
     <value>Integração</value>
   </data>
   <data name="Resource12201" xml:space="preserve">
-    <value>Abra o aplicativo Configurações do Windows para associar arquivos ao NanaZip</value>
+    <value>Abrir a Configurações do Windows para associar arquivos ao NanaZip</value>
   </data>
 </root>
