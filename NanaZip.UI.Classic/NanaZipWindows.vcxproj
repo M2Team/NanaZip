@@ -5,6 +5,8 @@
     <RootNamespace>NanaZipWindows</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <TargetName>NanaZipG</TargetName>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <YY_Thunks_File>YY_Thunks_for_Vista.obj</YY_Thunks_File>
     <MileProjectManifestFile>NanaZipWindows.manifest</MileProjectManifestFile>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>

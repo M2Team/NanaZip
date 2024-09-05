@@ -4,6 +4,8 @@
     <ProjectGuid>{97894839-6677-49D2-BA7C-39ED0C8D4FDB}</ProjectGuid>
     <RootNamespace>NanaZip</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <YY_Thunks_File>YY_Thunks_for_Vista.obj</YY_Thunks_File>
     <MileProjectManifestFile>NanaZip.manifest</MileProjectManifestFile>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
@@ -32,7 +34,7 @@
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
-      <AdditionalDependencies>runtimeobject.lib;comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies);runtimeobject.lib;</AdditionalDependencies>
       <DelayLoadDLLs>mpr.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
