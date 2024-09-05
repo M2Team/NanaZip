@@ -82,31 +82,40 @@ NanaZip Classic. Here are the differences between them.
 - NanaZip
   - Only 64-Bit support.
   - Only MSIX packaged version.
-  - Support for the context menu in Windows 10/11 File Explorer.
+  - Support the context menu in Windows 10/11 File Explorer.
+  - Support the file associations.
+  - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
   - Only support Windows 10 Version 2004 (Build 19041) or later.
-  - Have XAML-based GUI and VT-based CLI.
+  - XAML-based GUI.
 
 - NanaZip Classic
   - Have 32-Bit support.
   - Only portable version.
   - Don't have the context menu support.
+  - Don't have the file associations support.
+  - Don't have the 7-Zip execution alias support.
   - Support Windows Vista RTM (Build 6000.16386) or later.
-  - Keep Win32 GUI and Win32 CLI.
+  - Win32 GUI.
 
 ## System Requirements
 
-- NanaZip (XAML-based GUI, VT-based CLI and MSIX package)
+- NanaZip (XAML-based GUI and MSIX package)
   - Supported OS: Windows 10 Version 2004 (Build 19041) or later
-  - Supported Platforms: x86 (64-bit) and ARM (64-bit)
+  - Supported Platforms: x86 (64-bit) and ARM (64-bit) 
 
-- NanaZip Classic (Win32 GUI and Win32 CLI)
+- NanaZip Classic (Win32 GUI)
   - Supported OS: Windows Vista RTM (Build 6000.16386) or later
   - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
 
-- NanaZip Core (Core Library and the Self Extracting Executables)
+- NanaZip Core (Core, Codecs, CLI and the Self Extracting Executables)
   - Supported OS: Windows Vista RTM (Build 6000.16386) or later
   - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
-  
+
+Note: Except the Self Extracting Executables, the ucrtbase.dll with 10.0.19041.0
+version or later need to be existed in the binary folder if you want to use
+NanaZip components on Windows versions earlier than Windows 10 Version 2004
+(Build 19041).
+
 We chose Windows as the major platform for the NanaZip project supported
 because Windows has maintained a good and proven ABI and compatibility, and
 stands out in the history of computing. But we also care about the non-Windows
