@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <sha256.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Sha224 : public winrt::implements<Sha224, IHasher>
+    struct Sha224 : public Mile::ComObject<Sha224, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateSha224()
     {
-        return winrt::make<Sha224>().detach();
+        return new Sha224();
     }
 }

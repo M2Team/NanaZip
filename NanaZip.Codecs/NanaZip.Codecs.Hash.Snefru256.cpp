@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <snefru.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Snefru256 : public winrt::implements<Snefru256, IHasher>
+    struct Snefru256 : public Mile::ComObject<Snefru256, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateSnefru256()
     {
-        return winrt::make<Snefru256>().detach();
+        return new Snefru256();
     }
 }

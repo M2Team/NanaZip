@@ -5,9 +5,7 @@
     <RootNamespace>NanaZip.Codecs</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-    <YY_Thunks_File>YY_Thunks_for_Vista.obj</YY_Thunks_File>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
-    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Codecs</MileProjectFileDescription>
@@ -17,6 +15,7 @@
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileProjectVersion>3.5.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
+    <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
@@ -24,7 +23,6 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
-  <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
@@ -42,11 +40,10 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_MULTITHREAD;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>NanaZip.Codecs.def</ModuleDefinitionFile>
-      <AdditionalDependencies>%(AdditionalDependencies);runtimeobject.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

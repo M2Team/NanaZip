@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <whirlpool.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Whirlpool : public winrt::implements<Whirlpool, IHasher>
+    struct Whirlpool : public Mile::ComObject<Whirlpool, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateWhirlpool()
     {
-        return winrt::make<Whirlpool>().detach();
+        return new Whirlpool();
     }
 }

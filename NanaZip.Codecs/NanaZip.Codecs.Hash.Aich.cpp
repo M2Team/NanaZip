@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <aich.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Aich : public winrt::implements<Aich, IHasher>
+    struct Aich : public Mile::ComObject<Aich, IHasher>
     {
     private:
 
@@ -67,6 +65,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateAich()
     {
-        return winrt::make<Aich>().detach();
+        return new Aich();
     }
 }

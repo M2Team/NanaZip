@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <sm3.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Sm3 : public winrt::implements<Sm3, IHasher>
+    struct Sm3 : public Mile::ComObject<Sm3, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateSm3()
     {
-        return winrt::make<Sm3>().detach();
+        return new Sm3();
     }
 }

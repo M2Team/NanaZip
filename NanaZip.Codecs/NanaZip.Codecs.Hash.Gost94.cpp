@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <gost94.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Gost94 : public winrt::implements<Gost94, IHasher>
+    struct Gost94 : public Mile::ComObject<Gost94, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateGost94()
     {
-        return winrt::make<Gost94>().detach();
+        return new Gost94();
     }
 }

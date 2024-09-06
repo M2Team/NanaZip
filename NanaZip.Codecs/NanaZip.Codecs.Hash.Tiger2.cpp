@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <tiger.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Tiger2 : public winrt::implements<Tiger2, IHasher>
+    struct Tiger2 : public Mile::ComObject<Tiger2, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateTiger2()
     {
-        return winrt::make<Tiger2>().detach();
+        return new Tiger2();
     }
 }

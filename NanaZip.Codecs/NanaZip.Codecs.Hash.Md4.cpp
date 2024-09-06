@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <md4.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Md4 : public winrt::implements<Md4, IHasher>
+    struct Md4 : public Mile::ComObject<Md4, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateMd4()
     {
-        return winrt::make<Md4>().detach();
+        return new Md4();
     }
 }

@@ -12,8 +12,6 @@
 
 #include <Mile.Helpers.CppBase.h>
 
-#include <winrt/Windows.Foundation.h>
-
 #include <string>
 #include <vector>
 #include <utility>
@@ -69,7 +67,7 @@ namespace
     const size_t g_HashersCount = sizeof(g_Hashers) / sizeof(*g_Hashers);
 }
 
-struct HasherFactory : public winrt::implements<
+struct HasherFactory : public Mile::ComObject<
     HasherFactory, IHashers>
 {
 public:
@@ -177,14 +175,6 @@ EXTERN_C HRESULT WINAPI GetHashers(
         return E_INVALIDARG;
     }
 
-    try
-    {
-        *Hashers = winrt::make<HasherFactory>().detach();
-    }
-    catch (...)
-    {
-        return winrt::to_hresult();
-    }
-
+    *Hashers = new HasherFactory();
     return S_OK;
 }

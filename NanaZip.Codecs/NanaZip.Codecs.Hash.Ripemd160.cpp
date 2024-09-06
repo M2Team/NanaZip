@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <ripemd-160.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Ripemd160 : public winrt::implements<Ripemd160, IHasher>
+    struct Ripemd160 : public Mile::ComObject<Ripemd160, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateRipemd160()
     {
-        return winrt::make<Ripemd160>().detach();
+        return new Ripemd160();
     }
 }

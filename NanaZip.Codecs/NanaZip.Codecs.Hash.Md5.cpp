@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <md5.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Md5 : public winrt::implements<Md5, IHasher>
+    struct Md5 : public Mile::ComObject<Md5, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateMd5()
     {
-        return winrt::make<Md5>().detach();
+        return new Md5();
     }
 }

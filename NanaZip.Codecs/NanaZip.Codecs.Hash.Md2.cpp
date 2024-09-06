@@ -10,15 +10,13 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 EXTERN_C_START
 #include <md2.h>
 EXTERN_C_END
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Md2 : public winrt::implements<Md2, IHasher>
+    struct Md2 : public Mile::ComObject<Md2, IHasher>
     {
     private:
 
@@ -63,6 +61,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateMd2()
     {
-        return winrt::make<Md2>().detach();
+        return new Md2();
     }
 }

@@ -15,6 +15,8 @@
 
 #include <NanaZip.Specification.SevenZip.h>
 
+#include <Mile.Helpers.CppBase.h>
+
 /**
  * Definition of NanaZip interface constants
  * 

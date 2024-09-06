@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <ed2k.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Ed2k : public winrt::implements<Ed2k, IHasher>
+    struct Ed2k : public Mile::ComObject<Ed2k, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateEd2k()
     {
-        return winrt::make<Ed2k>().detach();
+        return new Ed2k();
     }
 }

@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <edonr.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct EdonR512 : public winrt::implements<EdonR512, IHasher>
+    struct EdonR512 : public Mile::ComObject<EdonR512, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateEdonR512()
     {
-        return winrt::make<EdonR512>().detach();
+        return new EdonR512();
     }
 }

@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <torrent.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Torrent : public winrt::implements<Torrent, IHasher>
+    struct Torrent : public Mile::ComObject<Torrent, IHasher>
     {
     private:
 
@@ -67,6 +65,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateTorrent()
     {
-        return winrt::make<Torrent>().detach();
+        return new Torrent();
     }
 }

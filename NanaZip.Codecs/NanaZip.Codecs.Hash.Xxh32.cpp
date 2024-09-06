@@ -10,14 +10,12 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #define XXH_STATIC_LINKING_ONLY
 #include <xxhash.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Xxh32 : public winrt::implements<Xxh32, IHasher>
+    struct Xxh32 : public Mile::ComObject<Xxh32, IHasher>
     {
     private:
 
@@ -73,6 +71,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateXxh32()
     {
-        return winrt::make<Xxh32>().detach();
+        return new Xxh32();
     }
 }

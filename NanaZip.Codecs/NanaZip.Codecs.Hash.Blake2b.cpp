@@ -10,13 +10,11 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <winrt/Windows.Foundation.h>
-
 #include <blake2b.h>
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Blake2b : public winrt::implements<Blake2b, IHasher>
+    struct Blake2b : public Mile::ComObject<Blake2b, IHasher>
     {
     private:
 
@@ -61,6 +59,6 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateBlake2b()
     {
-        return winrt::make<Blake2b>().detach();
+        return new Blake2b();
     }
 }
