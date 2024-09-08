@@ -15,7 +15,29 @@
 
 #include <roerrorapi.h>
 
-#include <winrt/Windows.Foundation.h>
+#include <hstring.h>
+#include <winstring.h>
+
+// WINDOWS_RUNTIME_HSTRING_FLAGS
+
+#define WRHF_NONE 0x00000000
+#define WRHF_STRING_REFERENCE 0x00000001
+#define WRHF_VALID_UNICODE_FORMAT_INFO 0x00000002
+#define WRHF_WELL_FORMED_UNICODE 0x00000004
+#define WRHF_HAS_EMBEDDED_NULLS 0x00000008
+#define WRHF_EMBEDDED_NULLS_COMPUTED 0x00000010
+#define WRHF_RESERVED_FOR_PREALLOCATED_STRING_BUFFER 0x80000000
+
+typedef struct _HSTRING_HEADER_INTERNAL
+{
+    UINT32 Flags;
+    UINT32 Length;
+    UINT32 Padding1;
+    UINT32 Padding2;
+    PCWSTR StringRef;
+} HSTRING_HEADER_INTERNAL;
+
+#include <Mile.Helpers.CppBase.h>
 
 namespace
 {
@@ -45,7 +67,7 @@ namespace
         return CachedResult;
     }
 
-    struct ErrorInfoFallback : public winrt::implements<
+    struct ErrorInfoFallback : public Mile::ComObject<
         ErrorInfoFallback,
         IErrorInfo,
         IRestrictedErrorInfo>
@@ -53,17 +75,25 @@ namespace
     private:
 
         HRESULT m_Code;
-        winrt::hstring m_Message;
+        BSTR m_Message;
 
     public:
 
         ErrorInfoFallback(
             _In_ HRESULT Code,
-            _In_ HSTRING Message) :
+            _In_opt_ HSTRING Message) :
             m_Code(Code),
-            m_Message(*reinterpret_cast<winrt::hstring*>(&Message))
+            m_Message(::SysAllocString(Message
+                ? reinterpret_cast<HSTRING_HEADER_INTERNAL*>(
+                    this->m_Message)->StringRef
+                : nullptr))
         {
 
+        }
+
+        ~ErrorInfoFallback()
+        {
+            ::SysFreeString(this->m_Message);
         }
 
         HRESULT STDMETHODCALLTYPE GetGUID(
@@ -83,7 +113,7 @@ namespace
         HRESULT STDMETHODCALLTYPE GetDescription(
             _Out_ BSTR* pBstrDescription)
         {
-            *pBstrDescription = ::SysAllocString(this->m_Message.c_str());
+            *pBstrDescription = ::SysAllocString(this->m_Message);
             return *pBstrDescription ? S_OK : E_OUTOFMEMORY;
         }
 
@@ -110,7 +140,7 @@ namespace
             *description = nullptr;
             *error = this->m_Code;
             *capabilitySid = nullptr;
-            *restrictedDescription = ::SysAllocString(this->m_Message.c_str());
+            *restrictedDescription = ::SysAllocString(this->m_Message);
             return *restrictedDescription ? S_OK : E_OUTOFMEMORY;
         }
 
@@ -155,9 +185,8 @@ EXTERN_C BOOL WINAPI RoOriginateLanguageException(
         return ProcAddress(error, message, languageException);
     }
 
-    winrt::com_ptr<IErrorInfo> ErrorInfo =
-        winrt::make<ErrorInfoFallback>(error, message);
-    ::SetErrorInfo(0, ErrorInfo.get());
+    IErrorInfo* ErrorInfo = new ErrorInfoFallback(error, message);
+    ::SetErrorInfo(0, ErrorInfo);
     return TRUE;
 }
 

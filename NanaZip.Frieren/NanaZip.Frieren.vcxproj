@@ -4,6 +4,7 @@
     <ProjectGuid>{4E78AF72-D7EF-4769-B64B-95E7EDF05FA2}</ProjectGuid>
     <RootNamespace>NanaZip.Frieren</RootNamespace>
     <MileProjectType>StaticLibrary</MileProjectType>
+    <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
