@@ -25,6 +25,8 @@ EXTERN_C HTHEME WINAPI OpenNcThemeData(
 #include <dwmapi.h>
 #pragma comment(lib, "dwmapi.lib")
 
+#include <ShellScalingApi.h>
+
 #include <unordered_map>
 
 #include "NanaZip.Frieren.WinUserPrivate.h"
@@ -33,6 +35,29 @@ EXTERN_C HTHEME WINAPI OpenNcThemeData(
 
 namespace
 {
+    static HMODULE GetSHCoreModuleHandle()
+    {
+        static HMODULE CachedResult = ::GetModuleHandleW(L"SHCore.dll");
+        return CachedResult;
+    }
+
+    static FARPROC GetGetDpiForMonitorProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetSHCoreModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "GetDpiForMonitor");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
     static HMODULE GetUser32ModuleHandle()
     {
         static HMODULE CachedResult = ::GetModuleHandleW(L"user32.dll");
@@ -83,6 +108,23 @@ namespace
                 return ::GetProcAddress(
                     ModuleHandle,
                     "DisplayConfigGetDeviceInfo");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
+    static FARPROC GetGetDpiForWindowProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "GetDpiForWindow");
             }
             return nullptr;
         }());
@@ -152,6 +194,61 @@ namespace
         }
 
         return ERROR_NOT_SUPPORTED;
+    }
+
+    static UINT WINAPI GetDpiForWindowWrapper(
+        _In_ HWND hWnd)
+    {
+        {
+            using ProcType = decltype(::GetDpiForWindow)*;
+
+            ProcType ProcAddress = reinterpret_cast<ProcType>(
+                ::GetGetDpiForWindowProcAddress());
+
+            if (ProcAddress)
+            {
+                return ProcAddress(hWnd);
+            }
+        }
+
+        {
+            using ProcType = decltype(::GetDpiForMonitor)*;
+
+            ProcType ProcAddress = reinterpret_cast<ProcType>(
+                ::GetGetDpiForMonitorProcAddress());
+
+            if (ProcAddress)
+            {
+                HMONITOR MonitorHandle = ::MonitorFromWindow(
+                    hWnd,
+                    MONITOR_DEFAULTTONEAREST);
+                if (MonitorHandle)
+                {
+                    UINT DpiX = 0;
+                    UINT DpiY = 0;
+                    if (SUCCEEDED(ProcAddress(
+                        MonitorHandle,
+                        MDT_EFFECTIVE_DPI,
+                        &DpiX,
+                        &DpiY)))
+                    {
+                        return DpiX;
+                    }
+                }
+            }
+        }
+
+        UINT DpiValue = USER_DEFAULT_SCREEN_DPI;
+        {
+            HDC WindowContextHandle = ::GetDC(hWnd);
+            if (WindowContextHandle)
+            {
+                DpiValue = ::GetDeviceCaps(WindowContextHandle, LOGPIXELSX);
+                ::ReleaseDC(hWnd, WindowContextHandle);
+            }
+        }
+
+        return DpiValue;
     }
 
     static bool IsStandardDynamicRangeMode()
@@ -457,7 +554,7 @@ namespace
                 }
                 else if (::IsFileManagerWindow(hWnd))
                 {
-                    UINT DpiValue = ::GetDpiForWindow(hWnd);
+                    UINT DpiValue = ::GetDpiForWindowWrapper(hWnd);
                     Margins.cyTopHeight =
                         ::MulDiv(48, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 }
@@ -507,7 +604,7 @@ namespace
             }
             else if (::IsFileManagerWindow(hWnd))
             {
-                UINT DpiValue = ::GetDpiForWindow(hWnd);
+                UINT DpiValue = ::GetDpiForWindowWrapper(hWnd);
 
                 MARGINS Margins = { 0 };
                 Margins.cyTopHeight =
@@ -568,7 +665,7 @@ namespace
                 g_MicaBackdropAvailable);
             if (!ShouldExtendFrame && ::IsFileManagerWindow(hWnd))
             {
-                UINT DpiValue = ::GetDpiForWindow(hWnd);
+                UINT DpiValue = ::GetDpiForWindowWrapper(hWnd);
 
                 MARGINS Margins = { 0 };
                 Margins.cyTopHeight =
