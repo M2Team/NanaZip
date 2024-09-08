@@ -5,7 +5,6 @@
     <RootNamespace>NanaZip.Core.Sfx.Windows</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZip.Core.Sfx.Windows.manifest</MileProjectManifestFile>
-    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Self Extracting Executable (Windows)</MileProjectFileDescription>
@@ -23,6 +22,12 @@
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
   <Import Project="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.props" />
   <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <PropertyGroup>
     <TargetName>NanaZip.Core.Windows</TargetName>
     <TargetExt>.sfx</TargetExt>
