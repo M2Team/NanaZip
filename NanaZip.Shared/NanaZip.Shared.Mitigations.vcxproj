@@ -4,6 +4,7 @@
     <ProjectGuid>{3B6BA400-CFE5-44E1-A8E3-2DF0CCC5492B}</ProjectGuid>
     <RootNamespace>NanaZip.Shared.Mitigations</RootNamespace>
     <MileProjectType>StaticLibrary</MileProjectType>
+    <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
