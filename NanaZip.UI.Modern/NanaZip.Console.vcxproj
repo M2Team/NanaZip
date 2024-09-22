@@ -7,7 +7,7 @@
     <TargetName>NanaZip.Console</TargetName>
     <MileProjectManifestFile>NanaZip.Console.manifest</MileProjectManifestFile>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Modern Command Line Interface (Console)</MileProjectFileDescription>
@@ -31,6 +31,12 @@
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
@@ -226,6 +232,9 @@
   <ItemGroup>
     <PackageReference Include="Mile.Windows.Helpers">
       <Version>1.0.671</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.0.187</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
