@@ -19,7 +19,7 @@
 
 /**
  * Definition of NanaZip interface constants
- * 
+ *
  * I had mentioned one of the reasons that I call this project NanaZip because
  * Nana is the romaji of なな which means seven in Japanese. But I had not
  * mentioned the way I confirm that: I had recalled one of the Japanese VTubers
@@ -31,8 +31,8 @@
 namespace NanaZip::Codecs
 {
     /**
-     * @brief The ID base value of NanaZip Hash Provider.
-     * @remark 0x4823374B is big-endian representation of K7#H (H -> Hash)
+     * @brief The ID base value of NanaZip Hash Providers.
+     * @remark 0x4823374B is little-endian representation of K7#H (H -> Hash)
      */
     const UINT64 HashProviderIdBase = 0x4823374B00000000;
 }
