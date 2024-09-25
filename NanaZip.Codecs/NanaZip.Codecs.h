@@ -89,4 +89,14 @@ namespace NanaZip::Codecs::Hash
     IHasher* CreateXxh3128();
 }
 
+namespace NanaZip::Codecs::Decoder
+{
+
+}
+
+namespace NanaZip::Codecs::Encoder
+{
+
+}
+
 #endif // !NANAZIP_CODECS
