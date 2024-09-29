@@ -59,12 +59,12 @@ ICompressCoder : public IUnknown
 {
 public:
 
-     virtual HRESULT STDMETHODCALLTYPE Code(
-         _In_ ISequentialInStream* InStream,
-         _In_ ISequentialOutStream* OutStream,
-         _In_opt_ const PUINT64 InSize,
-         _In_opt_ const PUINT64 OutSize,
-         _In_opt_ ICompressProgressInfo* Progress) = 0;
+    virtual HRESULT STDMETHODCALLTYPE Code(
+        _In_ ISequentialInStream* InStream,
+        _In_ ISequentialOutStream* OutStream,
+        _In_opt_ const PUINT64 InSize,
+        _In_opt_ const PUINT64 OutSize,
+        _In_opt_ ICompressProgressInfo* Progress) = 0;
 };
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400200000")
@@ -102,6 +102,15 @@ public:
         _In_ ISequentialOutStream* OutStream) = 0;
 };
 
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400240000")
+ICompressGetInStreamProcessedSize : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE GetInStreamProcessedSize(
+        _Out_ PUINT64 Value) = 0;
+};
+
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400250000")
 ICompressSetCoderMt : public IUnknown
 {
@@ -120,6 +129,15 @@ public:
         _In_ ISequentialInStream* InStream) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE ReleaseInStream() = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400340000")
+ICompressSetOutStreamSize : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE SetOutStreamSize(
+        _In_ const PUINT64 OutSize) = 0;
 };
 
 EXTERN_C HRESULT WINAPI GetNumberOfMethods(
