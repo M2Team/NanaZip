@@ -410,6 +410,7 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh64.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh364.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh3128.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Wrappers.ZSTDMT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -1022,5 +1023,6 @@
       <Filter>Zstandard\compress</Filter>
     </ClInclude>
     <ClInclude Include="NanaZip.Codecs.h" />
+    <ClInclude Include="NanaZip.Codecs.Wrappers.ZSTDMT.h" />
   </ItemGroup>
 </Project>
