@@ -23,7 +23,7 @@ const UINT16 SevenZipGuidData3Encoder = 0x2791;
 const UINT16 SevenZipGuidData3Hasher = 0x2792;
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000300010000")
-ISequentialOutStream : public IUnknown
+ISequentialInStream : public IUnknown
 {
 public:
 
@@ -34,7 +34,7 @@ public:
 };
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000300020000")
-ISequentialInStream : public IUnknown
+ISequentialOutStream : public IUnknown
 {
 public:
 
