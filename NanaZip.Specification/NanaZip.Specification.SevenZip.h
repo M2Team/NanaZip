@@ -13,6 +13,8 @@
 
 #include <Windows.h>
 
+#define SEVENZIP_ERROR_WRITING_WAS_CUT ((HRESULT)0x20000010)
+
 // 7-Zip Interface GUID Format: 23170F69-40C1-278A-0000-00yy00xx0000
 
 const UINT32 SevenZipGuidData1 = 0x23170F69;

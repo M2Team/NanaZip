@@ -4,6 +4,9 @@ EXPORTS
 
 GetHashers
 
+NanaZipCodecsBrotliRead
+NanaZipCodecsBrotliWrite
+
 LZ4_decompress_safe
 
 BROTLIMT_compressCCtx

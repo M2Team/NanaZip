@@ -14,16 +14,7 @@
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 #include "../../SevenZip/CPP/7zip/Common/ProgressMt.h"
 
-struct BrotliStream {
-  ISequentialInStream *inStream;
-  ISequentialOutStream *outStream;
-  ICompressProgressInfo *progress;
-  UInt64 *processedIn;
-  UInt64 *processedOut;
-};
-
-extern int BrotliRead(void *Stream, BROTLIMT_Buffer * in);
-extern int BrotliWrite(void *Stream, BROTLIMT_Buffer * in);
+#include <NanaZip.Codecs.Wrappers.ZSTDMT.h>
 
 namespace NCompress {
 namespace NBROTLI {
