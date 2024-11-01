@@ -1,5 +1,5 @@
 ﻿/*
- * PROJECT:   Mile.Samples.DynamicLibrary
+ * PROJECT:   NanaZip
  * FILE:      NanaZip.Codecs.cpp
  * PURPOSE:   Implementation for NanaZip.Codecs
  *
