@@ -120,6 +120,21 @@ public:
         _In_ UINT32 NumThreads) = 0;
 };
 
+typedef enum _SEVENZIP_FINISH_MODE_TYPE
+{
+    SevenZipFinishModePartialDecoding = 0,
+    SevenZipFinishModeFullDecoding = 1,
+} SEVENZIP_FINISH_MODE_TYPE, *PSEVENZIP_FINISH_MODE_TYPE;
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000400260000")
+ICompressSetFinishMode : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE SetFinishMode(
+        _In_ UINT32 FinishMode) = 0;
+};
+
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400310000")
 ICompressSetInStream : public IUnknown
 {
