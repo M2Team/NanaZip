@@ -33,6 +33,7 @@ static LPCTSTR const kAlternativeSelection = TEXT("AlternativeSelection");
 // static LPCTSTR const kUnderline = TEXT("Underline");
 
 static LPCTSTR const kShowSystemMenu = TEXT("ShowSystemMenu");
+static LPCTSTR const kFastDragDrop = TEXT("FastDragDrop");
 
 // static LPCTSTR const kLockMemoryAdd = TEXT("LockMemoryAdd");
 static LPCTSTR const kLargePages = TEXT("LargePages");
@@ -155,6 +156,7 @@ void CFmSettings::Save() const
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
+  SaveOption(kFastDragDrop, FastDragDrop);
 }
 
 void CFmSettings::Load()
@@ -173,6 +175,7 @@ void CFmSettings::Load()
   // Underline = false;
 
   ShowSystemMenu = false;
+  FastDragDrop = false;
 
   CKey key;
   if (key.Open(HKEY_CURRENT_USER, kCU_FMPath, KEY_READ) == ERROR_SUCCESS)
@@ -191,6 +194,7 @@ void CFmSettings::Load()
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );
+    ReadOption(key, kFastDragDrop, FastDragDrop);
   }
 }
 

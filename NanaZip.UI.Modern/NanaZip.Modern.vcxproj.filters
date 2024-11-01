@@ -1054,6 +1054,9 @@
     <ClInclude Include="SevenZip\CPP\Common\DynLimBuf.h">
       <Filter>SevenZip\Common</Filter>
     </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\CopyHook.h">
+      <Filter>SevenZip\UI\Explorer</Filter>
+    </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="NanaZip.UI.h" />
   </ItemGroup>
