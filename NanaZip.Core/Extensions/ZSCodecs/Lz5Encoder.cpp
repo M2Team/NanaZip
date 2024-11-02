@@ -75,27 +75,27 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
   size_t result;
   HRESULT res = S_OK;
 
-  struct Lz5Stream Rd;
-  Rd.inStream = inStream;
-  Rd.outStream = outStream;
-  Rd.processedIn = &_processedIn;
-  Rd.processedOut = &_processedOut;
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT ReadContext = { 0 };
+  ReadContext.InputStream = inStream;
+  ReadContext.OutputStream = outStream;
+  ReadContext.ProcessedInputSize = &_processedIn;
+  ReadContext.ProcessedOutputSize = &_processedOut;
 
-  struct Lz5Stream Wr;
-  if (_processedIn == 0)
-    Wr.progress = progress;
-  else
-    Wr.progress = 0;
-  Wr.inStream = inStream;
-  Wr.outStream = outStream;
-  Wr.processedIn = &_processedIn;
-  Wr.processedOut = &_processedOut;
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT WriteContext = { 0 };
+  if (0 == _processedIn)
+  {
+      WriteContext.Progress = progress;
+  }
+  WriteContext.InputStream = inStream;
+  WriteContext.OutputStream = outStream;
+  WriteContext.ProcessedInputSize = &_processedIn;
+  WriteContext.ProcessedOutputSize = &_processedOut;
 
   /* 1) setup read/write functions */
-  rdwr.fn_read = ::Lz5Read;
-  rdwr.fn_write = ::Lz5Write;
-  rdwr.arg_read = (void *)&Rd;
-  rdwr.arg_write = (void *)&Wr;
+  rdwr.fn_read = ::NanaZipCodecsLz5Read;
+  rdwr.fn_write = ::NanaZipCodecsLz5Write;
+  rdwr.arg_read = reinterpret_cast<void*>(&ReadContext);
+  rdwr.arg_write = reinterpret_cast<void*>(&WriteContext);
 
   /* 2) create compression context, if needed */
   if (!_ctx)

@@ -4,7 +4,6 @@
 #include "../../SevenZip/C/Alloc.h"
 #include "../../SevenZip/C/Threads.h"
 #include <lz5.h>
-#include <lz5-mt.h>
 
 #include "../../SevenZip/CPP/Windows/System.h"
 #include "../../SevenZip/CPP/Common/Common.h"
@@ -14,16 +13,7 @@
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 #include "../../SevenZip/CPP/7zip/Common/ProgressMt.h"
 
-struct Lz5Stream {
-  ISequentialInStream *inStream;
-  ISequentialOutStream *outStream;
-  ICompressProgressInfo *progress;
-  UInt64 *processedIn;
-  UInt64 *processedOut;
-};
-
-extern int Lz5Read(void *Stream, LZ5MT_Buffer * in);
-extern int Lz5Write(void *Stream, LZ5MT_Buffer * in);
+#include <NanaZip.Codecs.MultiThreadWrapper.LZ5.h>
 
 namespace NCompress {
 namespace NLZ5 {

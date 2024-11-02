@@ -8,6 +8,10 @@ NanaZipCodecsBrotliRead
 NanaZipCodecsBrotliWrite
 NanaZipCodecsLizardRead
 NanaZipCodecsLizardWrite
+NanaZipCodecsLz4Read
+NanaZipCodecsLz4Write
+NanaZipCodecsLz5Read
+NanaZipCodecsLz5Write
 
 LZ4_decompress_safe
 

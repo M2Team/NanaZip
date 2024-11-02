@@ -3,70 +3,6 @@
 #include "../../SevenZip/CPP/7zip/Compress/StdAfx.h"
 #include "Lz5Decoder.h"
 
-int Lz5Read(void *arg, LZ5MT_Buffer * in)
-{
-  struct Lz5Stream *x = (struct Lz5Stream*)arg;
-  size_t size = in->size;
-
-  HRESULT res = ReadStream(x->inStream, in->buf, &size);
-
-  /* catch errors */
-  switch (res) {
-  case E_ABORT:
-    return -2;
-  case E_OUTOFMEMORY:
-    return -3;
-  }
-
-  /* some other error -> read_fail */
-  if (res != S_OK)
-    return -1;
-
-  in->size = size;
-  *x->processedIn += size;
-
-  return 0;
-}
-
-int Lz5Write(void *arg, LZ5MT_Buffer * out)
-{
-  struct Lz5Stream *x = (struct Lz5Stream*)arg;
-  UInt32 todo = (UInt32)out->size;
-  UInt32 done = 0;
-
-  while (todo != 0)
-  {
-    UInt32 block;
-    HRESULT res = x->outStream->Write((char*)out->buf + done, todo, &block);
-
-    /* catch errors */
-    switch (res) {
-    case E_ABORT:
-      return -2;
-    case E_OUTOFMEMORY:
-      return -3;
-    }
-
-    done += block;
-    if (res == k_My_HRESULT_WritingWasCut)
-      break;
-    /* some other error -> write_fail */
-    if (res != S_OK)
-      return -1;
-
-    if (block == 0)
-      return -1;
-    todo -= block;
-  }
-
-  *x->processedOut += done;
-  /* we need no lock here, cause only one thread can write... */
-  if (x->progress)
-    x->progress->SetRatioInfo(x->processedIn, x->processedOut);
-
-  return 0;
-}
-
 namespace NCompress {
 namespace NLZ5 {
 
@@ -128,21 +64,21 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
   size_t result;
   HRESULT res = S_OK;
 
-  struct Lz5Stream Rd;
-  Rd.inStream = inStream;
-  Rd.processedIn = &_processedIn;
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT ReadContext = { 0 };
+  ReadContext.InputStream = inStream;
+  ReadContext.ProcessedInputSize = &_processedIn;
 
-  struct Lz5Stream Wr;
-  Wr.progress = progress;
-  Wr.outStream = outStream;
-  Wr.processedIn = &_processedIn;
-  Wr.processedOut = &_processedOut;
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT WriteContext = { 0 };
+  WriteContext.Progress = progress;
+  WriteContext.OutputStream = outStream;
+  WriteContext.ProcessedInputSize = &_processedIn;
+  WriteContext.ProcessedOutputSize = &_processedOut;
 
   /* 1) setup read/write functions */
-  rdwr.fn_read = ::Lz5Read;
-  rdwr.fn_write = ::Lz5Write;
-  rdwr.arg_read = (void *)&Rd;
-  rdwr.arg_write = (void *)&Wr;
+  rdwr.fn_read = ::NanaZipCodecsLz5Read;
+  rdwr.fn_write = ::NanaZipCodecsLz5Write;
+  rdwr.arg_read = reinterpret_cast<void*>(&ReadContext);
+  rdwr.arg_write = reinterpret_cast<void*>(&WriteContext);
 
   /* 2) create decompression context */
   LZ5MT_DCtx *ctx = LZ5MT_createDCtx(_numThreads, _inputSize);
