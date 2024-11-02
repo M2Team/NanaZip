@@ -6,6 +6,8 @@ GetHashers
 
 NanaZipCodecsBrotliRead
 NanaZipCodecsBrotliWrite
+NanaZipCodecsLizardRead
+NanaZipCodecsLizardWrite
 
 LZ4_decompress_safe
 

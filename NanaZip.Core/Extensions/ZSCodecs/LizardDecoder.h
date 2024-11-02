@@ -6,7 +6,6 @@
 #include <lizard_compress.h>
 #include <lizard_decompress.h>
 #include <lizard_frame.h>
-#include <lizard-mt.h>
 
 #include "../../SevenZip/CPP/Windows/System.h"
 #include "../../SevenZip/CPP/Common/Common.h"
@@ -16,16 +15,7 @@
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 #include "../../SevenZip/CPP/7zip/Common/ProgressMt.h"
 
-struct LizardStream {
-  ISequentialInStream *inStream;
-  ISequentialOutStream *outStream;
-  ICompressProgressInfo *progress;
-  UInt64 *processedIn;
-  UInt64 *processedOut;
-};
-
-extern int LizardRead(void *Stream, LIZARDMT_Buffer * in);
-extern int LizardWrite(void *Stream, LIZARDMT_Buffer * in);
+#include <NanaZip.Codecs.MultiThreadWrapper.Lizard.h>
 
 namespace NCompress {
 namespace NLIZARD {

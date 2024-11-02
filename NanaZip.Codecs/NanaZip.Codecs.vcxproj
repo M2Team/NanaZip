@@ -95,6 +95,7 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh64.cpp" />
     <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.cpp" />
     <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Common.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />
@@ -265,6 +266,7 @@
     <ClInclude Include="NanaZip.Codecs.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Common.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.h" />
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />

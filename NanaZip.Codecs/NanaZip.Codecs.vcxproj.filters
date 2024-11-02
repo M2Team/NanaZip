@@ -412,6 +412,7 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh3128.cpp" />
     <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Common.cpp" />
     <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -1026,5 +1027,6 @@
     <ClInclude Include="NanaZip.Codecs.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Common.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.h" />
   </ItemGroup>
 </Project>
