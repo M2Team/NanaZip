@@ -14,7 +14,7 @@
 #include "../../SevenZip/CPP/7zip/Common/RegisterCodec.h"
 #include "../../SevenZip/CPP/7zip/Common/ProgressMt.h"
 
-#include <NanaZip.Codecs.Wrappers.ZSTDMT.h>
+#include <NanaZip.Codecs.MultiThreadWrapper.Brotli.h>
 
 namespace NCompress {
 namespace NBROTLI {

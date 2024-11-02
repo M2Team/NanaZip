@@ -1,23 +1,16 @@
 ﻿/*
  * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Wrappers.ZSTDMT.cpp
- * PURPOSE:   Implementation for NanaZip.Codecs ZSTDMT Wrappers
+ * FILE:      NanaZip.Codecs.MultiThreadWrapper.Common.cpp
+ * PURPOSE:   Implementation for Common Multi Thread Wrapper
  *
  * LICENSE:   The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#include "NanaZip.Codecs.Wrappers.ZSTDMT.h"
+#include "NanaZip.Codecs.MultiThreadWrapper.Common.h"
 
-typedef struct _NANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT
-{
-    PVOID Buffer;
-    SIZE_T Size;
-    SIZE_T Allocated;
-} NANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT, *PNANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT;
-
-static int NanaZipCodecsCommonRead(
+EXTERN_C int NanaZipCodecsCommonRead(
     PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context,
     PNANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT Input)
 {
@@ -76,7 +69,7 @@ static int NanaZipCodecsCommonRead(
     return 0;
 }
 
-static int NanaZipCodecsCommonWrite(
+EXTERN_C int NanaZipCodecsCommonWrite(
     PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context,
     PNANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT Output)
 {
@@ -134,30 +127,4 @@ static int NanaZipCodecsCommonWrite(
     }
 
     return 0;
-}
-
-EXTERN_C int NanaZipCodecsBrotliRead(
-    void* Context,
-    BROTLIMT_Buffer* Input)
-{
-    NANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT ConvertedInput;
-    ConvertedInput.Buffer = Input->buf;
-    ConvertedInput.Size = Input->size;
-    ConvertedInput.Allocated = Input->allocated;
-    return ::NanaZipCodecsCommonRead(
-        reinterpret_cast<PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT>(Context),
-        &ConvertedInput);
-}
-
-EXTERN_C int NanaZipCodecsBrotliWrite(
-    void* Context,
-    BROTLIMT_Buffer* Output)
-{
-    NANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT ConvertedOutput;
-    ConvertedOutput.Buffer = Output->buf;
-    ConvertedOutput.Size = Output->size;
-    ConvertedOutput.Allocated = Output->allocated;
-    return ::NanaZipCodecsCommonWrite(
-        reinterpret_cast<PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT>(Context),
-        &ConvertedOutput);
 }
