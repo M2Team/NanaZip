@@ -112,24 +112,18 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
   _processedIn = 0;
   _processedOut = 0;
 
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT ReadContext = { 0 };
-  ReadContext.InputStream = inStream;
-  ReadContext.OutputStream = outStream;
-  ReadContext.ProcessedInputSize = &_processedIn;
-  ReadContext.ProcessedOutputSize = &_processedOut;
-
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT WriteContext = { 0 };
-  WriteContext.Progress = progress;
-  WriteContext.InputStream = inStream;
-  WriteContext.OutputStream = outStream;
-  WriteContext.ProcessedInputSize = &_processedIn;
-  WriteContext.ProcessedOutputSize = &_processedOut;
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
+  Context.InputStream = inStream;
+  Context.OutputStream = outStream;
+  Context.Progress = progress;
+  Context.ProcessedInputSize = &_processedIn;
+  Context.ProcessedOutputSize = &_processedOut;
 
   /* 1) setup read/write functions */
   rdwr.fn_read = ::NanaZipCodecsBrotliRead;
   rdwr.fn_write = ::NanaZipCodecsBrotliWrite;
-  rdwr.arg_read = reinterpret_cast<void*>(&ReadContext);
-  rdwr.arg_write = reinterpret_cast<void*>(&WriteContext);
+  rdwr.arg_read = reinterpret_cast<void*>(&Context);
+  rdwr.arg_write = reinterpret_cast<void*>(&Context);
 
   /* 2) create compression context, if needed */
   if (!_ctx)

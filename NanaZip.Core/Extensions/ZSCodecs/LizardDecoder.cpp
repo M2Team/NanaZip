@@ -60,21 +60,18 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
   size_t result;
   HRESULT res = S_OK;
 
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT ReadContext = { 0 };
-  ReadContext.InputStream = inStream;
-  ReadContext.ProcessedInputSize = &_processedIn;
-
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT WriteContext = { 0 };
-  WriteContext.Progress = progress;
-  WriteContext.OutputStream = outStream;
-  WriteContext.ProcessedInputSize = &_processedIn;
-  WriteContext.ProcessedOutputSize = &_processedOut;
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
+  Context.InputStream = inStream;
+  Context.OutputStream = outStream;
+  Context.Progress = progress;
+  Context.ProcessedInputSize = &_processedIn;
+  Context.ProcessedOutputSize = &_processedOut;
 
   /* 1) setup read/write functions */
   rdwr.fn_read = ::NanaZipCodecsLizardRead;
   rdwr.fn_write = ::NanaZipCodecsLizardWrite;
-  rdwr.arg_read = reinterpret_cast<void*>(&ReadContext);
-  rdwr.arg_write = reinterpret_cast<void*>(&WriteContext);
+  rdwr.arg_read = reinterpret_cast<void*>(&Context);
+  rdwr.arg_write = reinterpret_cast<void*>(&Context);
 
   /* 2) create decompression context */
   LIZARDMT_DCtx *ctx = LIZARDMT_createDCtx(_numThreads, _inputSize);
