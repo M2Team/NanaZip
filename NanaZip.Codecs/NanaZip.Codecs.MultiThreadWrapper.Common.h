@@ -11,7 +11,7 @@
 #ifndef NANAZIP_CODECS_MULTI_THREAD_WRAPPER_COMMON
 #define NANAZIP_CODECS_MULTI_THREAD_WRAPPER_COMMON
 
-#ifdef ZIP7_INC_ICODER_H
+#if defined(ZIP7_INC_COMPILER_H) || defined(__7Z_COMPILER_H)
 #include <Windows.h>
 #else
 #include <NanaZip.Specification.SevenZip.h>
