@@ -60,39 +60,13 @@ STDMETHODIMP CDecoder::SetOutStreamSize(const UInt64 * outSize)
 HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
   ISequentialOutStream * outStream, ICompressProgressInfo * progress)
 {
-  LZ4MT_RdWr_t rdwr;
-  size_t result;
-  HRESULT res = S_OK;
-
   NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
   Context.InputStream = inStream;
   Context.OutputStream = outStream;
   Context.Progress = progress;
   Context.ProcessedInputSize = &_processedIn;
   Context.ProcessedOutputSize = &_processedOut;
-
-  /* 1) setup read/write functions */
-  rdwr.fn_read = ::NanaZipCodecsLz4Read;
-  rdwr.fn_write = ::NanaZipCodecsLz4Write;
-  rdwr.arg_read = reinterpret_cast<void*>(&Context);
-  rdwr.arg_write = reinterpret_cast<void*>(&Context);
-
-  /* 2) create decompression context */
-  LZ4MT_DCtx *ctx = LZ4MT_createDCtx(_numThreads, _inputSize);
-  if (!ctx)
-      return S_FALSE;
-
-  /* 3) decompress */
-  result = LZ4MT_decompressDCtx(ctx, &rdwr);
-  if (LZ4MT_isError(result)) {
-    if (result == (size_t)-LZ4MT_error_canceled)
-      return E_ABORT;
-    return E_FAIL;
-  }
-
-  /* 4) free resources */
-  LZ4MT_freeDCtx(ctx);
-  return res;
+  return ::NanaZipCodecsLz4Decode(&Context, _numThreads, _inputSize);
 }
 
 STDMETHODIMP CDecoder::Code(ISequentialInStream * inStream, ISequentialOutStream * outStream,

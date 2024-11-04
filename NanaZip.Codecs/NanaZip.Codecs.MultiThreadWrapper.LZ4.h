@@ -24,4 +24,9 @@ EXTERN_C int NanaZipCodecsLz4Write(
     void* Context,
     LZ4MT_Buffer* Output);
 
+EXTERN_C HRESULT WINAPI NanaZipCodecsLz4Decode(
+    _In_ PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT StreamContext,
+    _In_ UINT32 NumberOfThreads,
+    _In_ UINT32 InputSize);
+
 #endif // !NANAZIP_CODECS_MULTI_THREAD_WRAPPER_LZ4

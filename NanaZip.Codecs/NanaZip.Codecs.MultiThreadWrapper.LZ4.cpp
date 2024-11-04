@@ -10,6 +10,8 @@
 
 #include "NanaZip.Codecs.MultiThreadWrapper.LZ4.h"
 
+#include <cstddef>
+
 EXTERN_C int NanaZipCodecsLz4Read(
     void* Context,
     LZ4MT_Buffer* Input)
@@ -34,4 +36,37 @@ EXTERN_C int NanaZipCodecsLz4Write(
     return ::NanaZipCodecsCommonWrite(
         reinterpret_cast<PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT>(Context),
         &ConvertedOutput);
+}
+
+EXTERN_C HRESULT WINAPI NanaZipCodecsLz4Decode(
+    _In_ PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT StreamContext,
+    _In_ UINT32 NumberOfThreads,
+    _In_ UINT32 InputSize)
+{
+    LZ4MT_RdWr_t ReadWrite = { 0 };
+    ReadWrite.fn_read = ::NanaZipCodecsLz4Read;
+    ReadWrite.fn_write = ::NanaZipCodecsLz4Write;
+    ReadWrite.arg_read = reinterpret_cast<void*>(&StreamContext);
+    ReadWrite.arg_write = reinterpret_cast<void*>(&StreamContext);
+
+    LZ4MT_DCtx* Context = ::LZ4MT_createDCtx(NumberOfThreads, InputSize);
+    if (!Context)
+    {
+        return S_FALSE;
+    }
+
+    std::size_t Result = ::LZ4MT_decompressDCtx(Context, &ReadWrite);
+    if (::LZ4MT_isError(Result))
+    {
+        if (ERROR(canceled) == Result)
+        {
+            return E_ABORT;
+        }
+
+        return E_FAIL;
+    }
+
+    ::LZ4MT_freeDCtx(Context);
+
+    return S_OK;
 }

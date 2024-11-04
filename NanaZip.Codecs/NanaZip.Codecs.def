@@ -14,6 +14,9 @@ NanaZipCodecsLz5Read
 NanaZipCodecsLz5Write
 
 NanaZipCodecsBrotliDecode
+NanaZipCodecsLizardDecode
+NanaZipCodecsLz4Decode
+NanaZipCodecsLz5Decode
 
 LZ4_decompress_safe
 
@@ -23,24 +26,15 @@ BROTLIMT_freeCCtx
 BROTLIMT_isError
 LIZARDMT_compressCCtx
 LIZARDMT_createCCtx
-LIZARDMT_createDCtx
-LIZARDMT_decompressDCtx
 LIZARDMT_freeCCtx
-LIZARDMT_freeDCtx
 LIZARDMT_isError
 LZ4MT_compressCCtx
 LZ4MT_createCCtx
-LZ4MT_createDCtx
-LZ4MT_decompressDCtx
 LZ4MT_freeCCtx
-LZ4MT_freeDCtx
 LZ4MT_isError
 LZ5MT_compressCCtx
 LZ5MT_createCCtx
-LZ5MT_createDCtx
-LZ5MT_decompressDCtx
 LZ5MT_freeCCtx
-LZ5MT_freeDCtx
 LZ5MT_isError
 
 FL2_cancelCStream
