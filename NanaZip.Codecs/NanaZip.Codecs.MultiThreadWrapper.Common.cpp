@@ -10,42 +10,18 @@
 
 #include "NanaZip.Codecs.MultiThreadWrapper.Common.h"
 
+#include "NanaZip.Codecs.SevenZipWrapper.h"
+
 EXTERN_C int NanaZipCodecsCommonRead(
     PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context,
     PNANAZIP_CODECS_ZSTDMT_BUFFER_CONTEXT Input)
 {
-    const UINT32 BlockSize = static_cast<UINT32>(1) << 31;
-
-    HRESULT hr = S_OK;
-    SIZE_T UnprocessedSize = Input->Size;
     SIZE_T ProcessedSize = 0;
-    PVOID CurrentBuffer = Input->Buffer;
-
-    while (UnprocessedSize)
-    {
-        UINT32 CurrentSize =
-            UnprocessedSize < BlockSize
-            ? static_cast<UINT32>(UnprocessedSize)
-            : BlockSize;
-        UINT32 CurrentProcessedSize = 0;
-        hr = Context->InputStream->Read(
-            CurrentBuffer,
-            CurrentSize,
-            &CurrentProcessedSize);
-        ProcessedSize += CurrentProcessedSize;
-        CurrentBuffer = static_cast<PVOID>(
-            static_cast<PBYTE>(CurrentBuffer) + CurrentProcessedSize);
-        UnprocessedSize -= CurrentProcessedSize;
-        if (S_OK != hr)
-        {
-            break;
-        }
-        if (CurrentProcessedSize == 0)
-        {
-            hr = S_OK;
-            break;
-        }
-    }
+    HRESULT hr = ::NanaZipCodecsReadInputStream(
+        Context->InputStream,
+        Input->Buffer,
+        Input->Size,
+        &ProcessedSize);
 
     // catch errors
     if (E_ABORT == hr)

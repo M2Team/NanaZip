@@ -98,6 +98,7 @@
     <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp" />
     <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.cpp" />
     <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.cpp" />
+    <ClCompile Include="NanaZip.Codecs.SevenZipWrapper.cpp" />
     <ClCompile Include="Zstandard\common\debug.c" />
     <ClCompile Include="Zstandard\common\entropy_common.c" />
     <ClCompile Include="Zstandard\common\error_private.c" />
@@ -271,6 +272,7 @@
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.h" />
+    <ClInclude Include="NanaZip.Codecs.SevenZipWrapper.h" />
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />
