@@ -13,14 +13,13 @@ NanaZipCodecsLz4Write
 NanaZipCodecsLz5Read
 NanaZipCodecsLz5Write
 
+NanaZipCodecsBrotliDecode
+
 LZ4_decompress_safe
 
 BROTLIMT_compressCCtx
 BROTLIMT_createCCtx
-BROTLIMT_createDCtx
-BROTLIMT_decompressDCtx
 BROTLIMT_freeCCtx
-BROTLIMT_freeDCtx
 BROTLIMT_isError
 LIZARDMT_compressCCtx
 LIZARDMT_createCCtx

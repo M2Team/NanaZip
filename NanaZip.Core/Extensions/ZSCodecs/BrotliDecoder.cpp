@@ -60,42 +60,13 @@ STDMETHODIMP CDecoder::SetOutStreamSize(const UInt64 * outSize)
 HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
   ISequentialOutStream * outStream, ICompressProgressInfo * progress)
 {
-  BROTLIMT_RdWr_t rdwr;
-  size_t result;
-  HRESULT res = S_OK;
-
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT ReadContext = { 0 };
-  ReadContext.InputStream = inStream;
-  ReadContext.ProcessedInputSize = &_processedIn;
-
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT WriteContext = { 0 };
-  WriteContext.Progress = progress;
-  WriteContext.OutputStream = outStream;
-  WriteContext.ProcessedInputSize = &_processedIn;
-  WriteContext.ProcessedOutputSize = &_processedOut;
-
-  /* 1) setup read/write functions */
-  rdwr.fn_read = ::NanaZipCodecsBrotliRead;
-  rdwr.fn_write = ::NanaZipCodecsBrotliWrite;
-  rdwr.arg_read = reinterpret_cast<void*>(&ReadContext);
-  rdwr.arg_write = reinterpret_cast<void*>(&WriteContext);
-
-  /* 2) create decompression context */
-  BROTLIMT_DCtx *ctx = BROTLIMT_createDCtx(_numThreads, _inputSize);
-  if (!ctx)
-      return S_FALSE;
-
-  /* 3) decompress */
-  result = BROTLIMT_decompressDCtx(ctx, &rdwr);
-  if (BROTLIMT_isError(result)) {
-    if (result == (size_t)-BROTLIMT_error_canceled)
-      return E_ABORT;
-    return E_FAIL;
-  }
-
-  /* 4) free resources */
-  BROTLIMT_freeDCtx(ctx);
-  return res;
+    NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
+    Context.InputStream = inStream;
+    Context.OutputStream = outStream;
+    Context.Progress = progress;
+    Context.ProcessedInputSize = &_processedIn;
+    Context.ProcessedOutputSize = &_processedOut;
+    return ::NanaZipCodecsBrotliDecode(&Context, _numThreads, _inputSize);
 }
 
 STDMETHODIMP CDecoder::Code(ISequentialInStream * inStream, ISequentialOutStream * outStream,
