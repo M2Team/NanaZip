@@ -257,7 +257,7 @@
     <None Include="BLAKE3\blake3_avx2.c" />
     <None Include="BLAKE3\blake3_avx512.c" />
     <ClCompile Include="BLAKE3\blake3_dispatch.c">
-      <DisableSpecificWarnings>4702;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4189;4702;</DisableSpecificWarnings>
     </ClCompile>
     <None Include="BLAKE3\blake3_neon.c" />
     <ClCompile Include="BLAKE3\blake3_portable.c" />
