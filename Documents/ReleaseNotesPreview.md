@@ -2,7 +2,7 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 5.0 Preview 0 (5.0.11xx.0)**
+**NanaZip 5.0 Preview 0 (5.0.1188.0)**
 
 - This release includes all the improvements from NanaZip 3.1 (3.1.1080.0)
   (https://github.com/M2Team/NanaZip/releases/tag/3.1.1080.0).
@@ -11,7 +11,9 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   Classic using ucrtbase.dll with 10.0.19041.0 version or later.
 - Update Mile.Windows.Helpers to 1.0.671.
     (https://github.com/ProjectMile/Mile.Windows.Helpers/tree/1.0.671.0)
-- Move NanaZip console version to NanaZip.Core project.
+- Move NanaZip console version to NanaZip.Core project. (Not used in NanaZip
+  MSIX package because we need to release the next preview to contain the
+  CVE-2024-11477 fix in NanaZip 3.1.)
 - Remove C++/WinRT dependency for NanaZip.Codecs and NanaZip.Frieren.
 - Add GetDpiForWindowWrapper for NanaZip.Frieren.DarkMode to fix the legacy
   Windows compatibility issues.
