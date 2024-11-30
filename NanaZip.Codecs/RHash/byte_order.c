@@ -61,6 +61,22 @@ unsigned rhash_ctz(unsigned x)
 #  endif /* _MSC_VER >= 1300... */
 #endif /* rhash_ctz */
 
+#ifndef rhash_popcount
+/**
+ * Returns the number of 1-bits in x.
+ *
+ * @param x the value to process
+ * @return the number of 1-bits
+ */
+unsigned rhash_popcount(unsigned x)
+{
+    x -= (x >>1) & 0x55555555;
+    x = ((x >> 2) & 0x33333333) + (x & 0x33333333);
+    x = ((x >> 4) + x) & 0x0f0f0f0f;
+    return (x * 0x01010101) >> 24;
+}
+#endif /* rhash_popcount */
+
 /**
  * Copy a memory block with simultaneous exchanging byte order.
  * The byte order is changed from little-endian 32-bit integers
