@@ -133,6 +133,15 @@ int Z7_CDECL main
       << NError::MyFormatMessage(GetLastError())
       << endl;
   }
+
+  if (!::NanaZipDisableChildProcesses())
+  {
+    FlushStreams();
+    *g_ErrStream
+      << "Cannot disable child processes: "
+      << NError::MyFormatMessage(GetLastError())
+      << endl;
+  }
   // **************** NanaZip Modification End ****************
 
   NConsoleClose::CCtrlHandlerSetter ctrlHandlerSetter;

@@ -261,6 +261,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     ShowErrorMessage(L"Cannot enable security mitigations");
   }
 
+  if (!::NanaZipDisableChildProcesses())
+  {
+    ShowErrorMessage(L"Cannot enable security mitigations");
+  }
+
   ::MileEnablePerMonitorDialogScaling();
   // **************** NanaZip Modification End ****************
 

@@ -72,7 +72,8 @@ Kenji Mouri
 - Enable Package Integrity Check.
 - Enable EH Continuation Metadata.
 - Enable Signed Returns.
-- Enable disabling child process creation for command line version of NanaZip.
+- Enable disabling child process creation for NanaZip CLI and Self Extracting
+  Executables.
 
 ## Differences between NanaZip and NanaZip Classic
 
