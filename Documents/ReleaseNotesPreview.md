@@ -28,7 +28,8 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   after v1.4.5.
   (https://github.com/rhash/RHash/commit/cf2adf22ae7c39d9b8e5e7b87222046a8f42b3dc)
 - Enable disabling child process creation for NanaZip Self Extracting
-  Executables.
+  Executables. (Except installer mode of Self Extracting Executables, which
+  compiled binaries is not provided in the NanaZip MSIX package.)
 
 **NanaZip 3.5 Preview 0 (3.5.1000.0)**
 

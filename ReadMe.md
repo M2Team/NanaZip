@@ -73,7 +73,8 @@ Kenji Mouri
 - Enable EH Continuation Metadata.
 - Enable Signed Returns.
 - Enable disabling child process creation for NanaZip CLI and Self Extracting
-  Executables.
+  Executables. (Except installer mode of Self Extracting Executables, which
+  compiled binaries is not provided in the NanaZip MSIX package.)
 
 ## Differences between NanaZip and NanaZip Classic
 
