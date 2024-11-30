@@ -2,6 +2,29 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 5.0 Preview 0 (5.0.11xx.0)**
+
+- This release includes all the improvements from NanaZip 3.1 (3.1.1080.0)
+  (https://github.com/M2Team/NanaZip/releases/tag/3.1.1080.0).
+- Update Brazilian Portuguese translation. (Contributed by maisondasilva.)
+- Make sure NanaZip Core (except the Self Extracting Executables) and NanaZip
+  Classic using ucrtbase.dll with 10.0.19041.0 version or later.
+- Update Mile.Windows.Helpers to 1.0.671.
+    (https://github.com/ProjectMile/Mile.Windows.Helpers/tree/1.0.671.0)
+- Move NanaZip console version to NanaZip.Core project.
+- Remove C++/WinRT dependency for NanaZip.Codecs and NanaZip.Frieren.
+- Add GetDpiForWindowWrapper for NanaZip.Frieren.DarkMode to fix the legacy
+  Windows compatibility issues.
+- Remove VC-LTL dependency for the Self Extracting Executables related projects.
+- Adjust the compilation configurations to optimize the binary size for the Self
+  Extracting Executables.
+- Use Mile.Windows.UniCrt (https://github.com/ProjectMile/Mile.Windows.UniCrt)
+  instead of VC-LTL.
+- Update NanaZip.Specification.SevenZip header file.
+- Start to simplify the NanaZip specific decoders and encoders implementation.
+- Synchronize the BLAKE3 implementation to 1.5.5.
+  (https://github.com/BLAKE3-team/BLAKE3/releases/tag/1.5.5)
+
 **NanaZip 3.5 Preview 0 (3.5.1000.0)**
 
 This release includes all the improvements from NanaZip 3.0 Update 1
