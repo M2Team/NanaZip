@@ -78,8 +78,6 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3256.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3384.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3512.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Sha384.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Sha512.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sm3.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Snefru128.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Snefru256.cpp" />
@@ -233,7 +231,6 @@
     <ClCompile Include="RHash\rhash_util.c" />
     <ClCompile Include="RHash\ripemd-160.c" />
     <ClCompile Include="RHash\sha3.c" />
-    <ClCompile Include="RHash\sha512.c" />
     <ClCompile Include="RHash\snefru.c">
       <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
     </ClCompile>
@@ -436,7 +433,6 @@
     <ClInclude Include="RHash\sha1.h" />
     <ClInclude Include="RHash\sha256.h" />
     <ClInclude Include="RHash\sha3.h" />
-    <ClInclude Include="RHash\sha512.h" />
     <ClInclude Include="RHash\snefru.h" />
     <ClInclude Include="RHash\tiger.h" />
     <ClInclude Include="RHash\torrent.h" />

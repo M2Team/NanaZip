@@ -178,4 +178,14 @@ namespace NanaZip::Codecs::Hash
     {
         return new BCryptProvider(BCRYPT_MD5_ALGORITHM);
     }
+
+    IHasher* CreateSha384()
+    {
+        return new BCryptProvider(BCRYPT_SHA384_ALGORITHM);
+    }
+
+    IHasher* CreateSha512()
+    {
+        return new BCryptProvider(BCRYPT_SHA512_ALGORITHM);
+    }
 }

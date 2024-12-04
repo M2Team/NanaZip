@@ -60,7 +60,7 @@ Kenji Mouri
   GOST R 34.11-94 CryptoPro, GOST R 34.11-2012 256, GOST R 34.11-2012 512, 
   HAS-160, RIPEMD-160, SHA-224, SHA3-224, SHA3-256, SHA3-384, SHA3-512, 
   Snefru-128, Snefru-256, Tiger, Tiger2, TTH, Whirlpool), xxHash (XXH3_64bits,
-  XXH3_128bits), GmSSL (SM3), and Windows CNG API (MD2, MD5).
+  XXH3_128bits), GmSSL (SM3), and Windows CNG API (MD2, MD5, SHA-384, SHA-512).
 - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP 
   attacks.
 - Mark all x86 and x64 target binaries as compatible with Control-flow 

@@ -59,9 +59,6 @@
     <ClCompile Include="RHash\md4.c">
       <Filter>RHash</Filter>
     </ClCompile>
-    <ClCompile Include="RHash\md5.c">
-      <Filter>RHash</Filter>
-    </ClCompile>
     <ClCompile Include="RHash\ripemd-160.c">
       <Filter>RHash</Filter>
     </ClCompile>
@@ -72,9 +69,6 @@
       <Filter>RHash</Filter>
     </ClCompile>
     <ClCompile Include="RHash\sha3.c">
-      <Filter>RHash</Filter>
-    </ClCompile>
-    <ClCompile Include="RHash\sha512.c">
       <Filter>RHash</Filter>
     </ClCompile>
     <ClCompile Include="RHash\snefru.c">
@@ -386,11 +380,8 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Gost12512.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Has160.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Md4.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Md5.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Ripemd160.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha224.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Sha384.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Sha512.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3224.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3256.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3384.cpp" />
@@ -517,9 +508,6 @@
     <ClInclude Include="RHash\md4.h">
       <Filter>RHash</Filter>
     </ClInclude>
-    <ClInclude Include="RHash\md5.h">
-      <Filter>RHash</Filter>
-    </ClInclude>
     <ClInclude Include="RHash\ripemd-160.h">
       <Filter>RHash</Filter>
     </ClInclude>
@@ -530,9 +518,6 @@
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\sha3.h">
-      <Filter>RHash</Filter>
-    </ClInclude>
-    <ClInclude Include="RHash\sha512.h">
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\snefru.h">
