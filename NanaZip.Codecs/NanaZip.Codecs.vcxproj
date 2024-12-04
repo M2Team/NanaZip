@@ -71,7 +71,6 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Gost94.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Gost94CryptoPro.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Has160.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Md2.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Md4.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Md5.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Ripemd160.cpp" />
@@ -248,9 +247,6 @@
     <ClCompile Include="RHash\tth.c" />
     <ClCompile Include="RHash\whirlpool.c" />
     <ClCompile Include="RHash\whirlpool_sbox.c" />
-    <ClCompile Include="Heimdal\md2.c">
-      <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
-    </ClCompile>
     <ClCompile Include="GmSSL\sm3.c" />
     <ClCompile Include="BLAKE3\blake3.c">
       <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
@@ -451,7 +447,6 @@
     <ClInclude Include="RHash\ustd.h" />
     <ClInclude Include="RHash\util.h" />
     <ClInclude Include="RHash\whirlpool.h" />
-    <ClInclude Include="Heimdal\md2.h" />
     <ClInclude Include="GmSSL\endian.h" />
     <ClInclude Include="GmSSL\sm3.h" />
     <ClInclude Include="BLAKE3\blake3.h" />

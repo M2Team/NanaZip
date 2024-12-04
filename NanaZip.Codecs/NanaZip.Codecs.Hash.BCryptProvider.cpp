@@ -168,4 +168,9 @@ namespace NanaZip::Codecs::Hash
             return this->m_HashLength;
         }
     };
+
+    IHasher* CreateMd2()
+    {
+        return new BCryptProvider(BCRYPT_MD2_ALGORITHM);
+    }
 }

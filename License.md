@@ -581,7 +581,6 @@ Creative Commons may be contacted at creativecommons.org.
 - C++/WinRT, https://github.com/microsoft/cppwinrt
 - Fast LZMA2, https://github.com/conor42/fast-lzma2
 - GmSSL, https://github.com/guanzhi/GmSSL
-- Heimdal, https://github.com/heimdal/heimdal
 - Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4
 - LZ5, https://github.com/inikep/lizard

@@ -29,9 +29,6 @@
     <ClCompile Include="GmSSL\sm3.c">
       <Filter>GmSSL</Filter>
     </ClCompile>
-    <ClCompile Include="Heimdal\md2.c">
-      <Filter>Heimdal</Filter>
-    </ClCompile>
     <ClCompile Include="RHash\aich.c">
       <Filter>RHash</Filter>
     </ClCompile>
@@ -376,7 +373,6 @@
     </ClCompile>
     <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sm3.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Md2.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Aich.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Blake2b.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Ed2k.cpp" />
@@ -428,9 +424,6 @@
     </Filter>
     <Filter Include="GmSSL">
       <UniqueIdentifier>{650c97a1-a641-4c99-8209-76a265fbfc24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Heimdal">
-      <UniqueIdentifier>{4641c110-c238-4da5-a120-e50ba45bca8c}</UniqueIdentifier>
     </Filter>
     <Filter Include="RHash">
       <UniqueIdentifier>{c13ab0bc-bcc5-44ec-8b4b-8f3ee60c2ec1}</UniqueIdentifier>
@@ -493,9 +486,6 @@
     </ClInclude>
     <ClInclude Include="GmSSL\sm3.h">
       <Filter>GmSSL</Filter>
-    </ClInclude>
-    <ClInclude Include="Heimdal\md2.h">
-      <Filter>Heimdal</Filter>
     </ClInclude>
     <ClInclude Include="RHash\aich.h">
       <Filter>RHash</Filter>
