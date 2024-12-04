@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZip.Codecs.Hash.Aich.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.BCryptProvider.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Blake2b.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Ed2k.cpp" />
