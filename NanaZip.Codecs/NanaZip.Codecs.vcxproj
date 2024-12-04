@@ -72,7 +72,6 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Gost94CryptoPro.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Has160.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Md4.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Md5.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Ripemd160.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha224.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3224.cpp" />
@@ -229,7 +228,6 @@
     <ClCompile Include="RHash\has160.c" />
     <ClCompile Include="RHash\hex.c" />
     <ClCompile Include="RHash\md4.c" />
-    <ClCompile Include="RHash\md5.c" />
     <ClCompile Include="RHash\rhash_sha1.c" />
     <ClCompile Include="RHash\rhash_sha256.c" />
     <ClCompile Include="RHash\rhash_util.c" />
@@ -434,7 +432,6 @@
     <ClInclude Include="RHash\has160.h" />
     <ClInclude Include="RHash\hex.h" />
     <ClInclude Include="RHash\md4.h" />
-    <ClInclude Include="RHash\md5.h" />
     <ClInclude Include="RHash\ripemd-160.h" />
     <ClInclude Include="RHash\sha1.h" />
     <ClInclude Include="RHash\sha256.h" />

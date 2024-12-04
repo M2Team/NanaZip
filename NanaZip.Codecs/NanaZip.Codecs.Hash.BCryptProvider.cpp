@@ -173,4 +173,9 @@ namespace NanaZip::Codecs::Hash
     {
         return new BCryptProvider(BCRYPT_MD2_ALGORITHM);
     }
+
+    IHasher* CreateMd5()
+    {
+        return new BCryptProvider(BCRYPT_MD5_ALGORITHM);
+    }
 }
