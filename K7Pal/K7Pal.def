@@ -1,3 +1,9 @@
 ﻿LIBRARY
 
 EXPORTS
+
+K7PalHashCreate
+K7PalHashDestroy
+K7PalHashUpdate
+K7PalHashFinal
+K7PalHashGetSize
