@@ -6,7 +6,6 @@
     <MileProjectType>DynamicLibrary</MileProjectType>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
-    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Platform Abstraction Layer</MileProjectFileDescription>
@@ -24,6 +23,10 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.props" />
   <Import Project="$(MSBuildThisFileDirectory)K7PalStatic.props" />
   <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
     <Link>
       <ModuleDefinitionFile>K7Pal.def</ModuleDefinitionFile>
     </Link>
