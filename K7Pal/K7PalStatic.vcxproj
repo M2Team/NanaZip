@@ -25,5 +25,8 @@
   <ItemGroup>
     <ClInclude Include="K7Pal.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="K7PalHash.cpp" />
+  </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
 </Project>
