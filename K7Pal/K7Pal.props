@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:   NanaZip Platform Abstraction Layer (K7Pal)
+  FILE:      K7Pal.props
+  PURPOSE:   MSBuild Properties for referencing the K7Pal dynamic library
+
+  LICENSE:   The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>$(OutDir)K7Pal.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)K7Pal.vcxproj">
+      <Project>{279F7FA5-7DDC-4635-99B0-3C7F2179DAE0}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
