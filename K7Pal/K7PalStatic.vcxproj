@@ -22,5 +22,8 @@
   <ItemGroup>
     <None Include="K7PalStatic.props" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="K7Pal.h" />
+  </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
 </Project>
