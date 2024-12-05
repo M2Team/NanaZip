@@ -226,7 +226,7 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
 }
 
 EXTERN_C HRESULT WINAPI K7PalHashDestroy(
-    _Inout_ K7_PAL_HASH_HANDLE HashHandle)
+    _Inout_opt_ K7_PAL_HASH_HANDLE HashHandle)
 {
     PK7_PAL_HASH_CONTEXT Context =
         ::K7PalHashInternalGetContextFromHandle(HashHandle);

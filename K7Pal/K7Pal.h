@@ -23,7 +23,7 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
     _In_ UINT32 SecretSize);
 
 EXTERN_C HRESULT WINAPI K7PalHashDestroy(
-    _Inout_ K7_PAL_HASH_HANDLE HashHandle);
+    _Inout_opt_ K7_PAL_HASH_HANDLE HashHandle);
 
 EXTERN_C HRESULT WINAPI K7PalHashUpdate(
     _Inout_ K7_PAL_HASH_HANDLE HashHandle,
