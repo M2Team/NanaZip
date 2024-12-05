@@ -92,7 +92,7 @@ public:
      */
     virtual HRESULT STDMETHODCALLTYPE SetDecoderProperties2(
         _In_ LPCBYTE Data,
-        _In_ UINT32 Size) = 0; 
+        _In_ UINT32 Size) = 0;
 };
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400230000")
@@ -200,7 +200,7 @@ typedef enum _SEVENZIP_HASHER_PROPERTY_TYPE
 } SEVENZIP_HASHER_PROPERTY_TYPE, *PSEVENZIP_HASHER_PROPERTY_TYPE;
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C10000")
-IHashers: public IUnknown
+IHashers : public IUnknown
 {
 public:
     virtual UINT32 STDMETHODCALLTYPE GetNumHashers() = 0;
