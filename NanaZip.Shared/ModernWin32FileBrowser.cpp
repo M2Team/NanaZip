@@ -51,24 +51,22 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI ModernSHBrowseForFolderW(
                         nullptr,
                         IID_PPV_ARGS(&DefaultFolder))))
                     {
-                        if (SUCCEEDED(FileDialog->SetDefaultFolder(
-                            DefaultFolder)))
-                        {
-                            if (SUCCEEDED(FileDialog->Show(
-                                lpbi->hwndOwner)))
-                            {
-                                IShellItem* Result = nullptr;
-                                if (SUCCEEDED(FileDialog->GetResult(
-                                    &Result)))
-                                {
-                                    ::SHGetIDListFromObject(Result, &IDList);
-
-                                    Result->Release();
-                                }
-                            }
-                        }
+                        FileDialog->SetDefaultFolder(DefaultFolder);
 
                         DefaultFolder->Release();
+                    }
+
+                    if (SUCCEEDED(FileDialog->Show(
+                        lpbi->hwndOwner)))
+                    {
+                        IShellItem* Result = nullptr;
+                        if (SUCCEEDED(FileDialog->GetResult(
+                            &Result)))
+                        {
+                            ::SHGetIDListFromObject(Result, &IDList);
+
+                            Result->Release();
+                        }
                     }
                 }
             }
