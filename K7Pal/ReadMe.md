@@ -18,7 +18,11 @@ But the K7Pal interfaces are designed to be platform-independent. The K7Pal
 interfaces will have the implementations for Linux and FreeBSD in the future,
 although the implementation may not in this repository.
 
-## Features
+## Features used in NanaZip
 
 - Cryptography
   - Hash Functions
+    - MD2
+    - MD5
+    - SHA-384
+    - SHA-512
