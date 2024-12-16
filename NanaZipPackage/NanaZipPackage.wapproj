@@ -40,8 +40,8 @@
     <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.vcxproj">
       <Project>{F4511F91-B0EB-41B4-99D6-AEB48169132B}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Console.vcxproj">
-      <Project>{DB46C965-5F44-4414-8E75-BA9C0858A1AF}</Project>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Console.vcxproj">
+      <Project>{86E818B3-D657-4E03-9336-48EE242A79D1}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
