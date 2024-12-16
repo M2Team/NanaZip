@@ -697,7 +697,7 @@
   </Target>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.UniCrt">
-      <Version>1.0.187</Version>
+      <Version>1.0.199</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
