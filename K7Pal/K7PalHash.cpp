@@ -187,7 +187,7 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
             break;
         }
         *HashHandle = reinterpret_cast<K7_PAL_HASH_HANDLE>(Context);
-        Context->ContextSize = sizeof(sizeof(K7_PAL_HASH_CONTEXT));
+        Context->ContextSize = sizeof(K7_PAL_HASH_CONTEXT);
 
         SIZE_T AlgorithmIdentifierSize =
             sizeof(wchar_t) * (std::wcslen(AlgorithmIdentifier) + 1);
