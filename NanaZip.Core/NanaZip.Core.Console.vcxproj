@@ -5,7 +5,6 @@
     <RootNamespace>NanaZip.Core.Console</RootNamespace>
     <MileProjectType>ConsoleApplication</MileProjectType>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-    <YY_Thunks_File>YY_Thunks_for_Vista.obj</YY_Thunks_File>
     <MileProjectManifestFile>NanaZip.Core.Console.manifest</MileProjectManifestFile>
     <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
