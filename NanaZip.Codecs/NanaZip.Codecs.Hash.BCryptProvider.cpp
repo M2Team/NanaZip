@@ -8,14 +8,9 @@
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#define WIN32_NO_STATUS
-
 #include "NanaZip.Codecs.h"
 
-#include <Mile.Internal.h>
-
-#include <bcrypt.h>
-#pragma comment(lib, "bcrypt.lib")
+#include <K7Pal.h>
 
 namespace NanaZip::Codecs::Hash
 {
@@ -23,149 +18,58 @@ namespace NanaZip::Codecs::Hash
     {
     private:
 
-        BCRYPT_ALG_HANDLE m_AlgorithmHandle = nullptr;
-        BCRYPT_HASH_HANDLE m_HashHandle = nullptr;
-        PUCHAR m_HashObject = nullptr;
-        DWORD m_HashLength = 0;
-
-        void CloseAlgorithmProvider()
-        {
-            if (this->m_AlgorithmHandle)
-            {
-                ::BCryptCloseAlgorithmProvider(this->m_AlgorithmHandle, 0);
-                this->m_AlgorithmHandle = nullptr;
-            }
-        }
-
-        void DestroyHash()
-        {
-            if (this->m_HashHandle)
-            {
-                ::BCryptDestroyHash(this->m_HashHandle);
-                this->m_HashHandle = nullptr;
-            }
-
-            this->m_HashLength = 0;
-
-            if (this->m_HashObject)
-            {
-                ::MileFreeMemory(this->m_HashObject);
-                this->m_HashObject = nullptr;
-            }
-        }
+        K7_PAL_HASH_HANDLE m_HashHandle = nullptr;
 
     public:
 
         BCryptProvider(
             _In_ LPCWSTR AlgorithmIdentifier)
         {
-            if (!NT_SUCCESS(::BCryptOpenAlgorithmProvider(
-                &this->m_AlgorithmHandle,
+            ::K7PalHashCreate(
+                &this->m_HashHandle,
                 AlgorithmIdentifier,
                 nullptr,
-                0)))
-            {
-                this->CloseAlgorithmProvider();
-            }
-
-            this->Init();
+                0);
         }
 
         ~BCryptProvider()
         {
-            this->DestroyHash();
-            this->CloseAlgorithmProvider();
+            if (this->m_HashHandle)
+            {
+                ::K7PalHashDestroy(this->m_HashHandle);
+                this->m_HashHandle = nullptr;
+            }
         }
 
         void STDMETHODCALLTYPE Init()
         {
-            this->DestroyHash();
-
-            ULONG ReturnLength = 0;
-
-            DWORD HashObjectLength = 0;
-            {
-                ReturnLength = 0;
-                if (!NT_SUCCESS(::BCryptGetProperty(
-                    this->m_AlgorithmHandle,
-                    BCRYPT_OBJECT_LENGTH,
-                    reinterpret_cast<PUCHAR>(&HashObjectLength),
-                    sizeof(HashObjectLength),
-                    &ReturnLength,
-                    0)))
-                {
-                    return;
-                }
-            }
-
-            DWORD HashLength = 0;
-            {
-                ReturnLength = 0;
-                if (!NT_SUCCESS(::BCryptGetProperty(
-                    this->m_AlgorithmHandle,
-                    BCRYPT_HASH_LENGTH,
-                    reinterpret_cast<PUCHAR>(&HashLength),
-                    sizeof(HashLength),
-                    &ReturnLength,
-                    0)))
-                {
-                    return;
-                }
-            }
-            this->m_HashLength = HashLength;
-
-            this->m_HashObject = reinterpret_cast<PUCHAR>(
-                ::MileAllocateMemory(HashObjectLength));
-            if (!this->m_HashObject)
-            {
-                return;
-            }
-
-            if (!NT_SUCCESS(::BCryptCreateHash(
-                this->m_AlgorithmHandle,
-                &this->m_HashHandle,
-                this->m_HashObject,
-                HashObjectLength,
-                nullptr,
-                0,
-                0)))
-            {
-                this->DestroyHash();
-            }
+            ::K7PalHashReset(this->m_HashHandle);
         }
 
         void STDMETHODCALLTYPE Update(
             _In_ LPCVOID Data,
             _In_ UINT32 Size)
         {
-            ::BCryptHashData(
+            ::K7PalHashUpdate(
                 this->m_HashHandle,
-                reinterpret_cast<PUCHAR>(const_cast<LPVOID>(Data)),
-                Size,
-                0);
+                const_cast<LPVOID>(Data),
+                Size);
         }
 
         void STDMETHODCALLTYPE Final(
             _Out_ PBYTE Digest)
         {
-            if (!NT_SUCCESS(::BCryptFinishHash(
+            ::K7PalHashFinal(
                 this->m_HashHandle,
                 Digest,
-                this->m_HashLength,
-                0)))
-            {
-                if (Digest)
-                {
-                    std::memset(Digest, 0, this->m_HashLength);
-                }
-            }
-
-            this->DestroyHash();
+                this->GetDigestSize());
         }
 
         UINT32 STDMETHODCALLTYPE GetDigestSize()
         {
-            return this->m_HashLength;
+            UINT32 HashSize = 0;
+            ::K7PalHashGetSize(this->m_HashHandle, &HashSize);
+            return HashSize;
         }
     };
 

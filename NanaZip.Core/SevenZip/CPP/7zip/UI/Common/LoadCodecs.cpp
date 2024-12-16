@@ -47,6 +47,10 @@ EXPORT_CODECS
 #include "../../Common/RegisterArc.h"
 #include "../../Common/RegisterCodec.h"
 
+// **************** NanaZip Modification Start ****************
+#include <Mile.Helpers.Base.h>
+// **************** NanaZip Modification End ****************
+
 #ifdef Z7_EXTERNAL_CODECS
 // #define EXPORT_CODECS
 #endif
@@ -844,6 +848,7 @@ HRESULT CCodecs::Load()
     const FString baseFolder = GetBaseFolderPrefixFromRegistry();
     // **************** NanaZip Modification Start ****************
     {
+      ::MileLoadLibraryFromSystem32(baseFolder + L"K7Pal.dll");
       bool loadedOK;
       RINOK(LoadDll(baseFolder + L"NanaZip.Codecs.dll", false, &loadedOK));
       if (!loadedOK)

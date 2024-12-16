@@ -43,6 +43,10 @@ EXPORT_CODECS
 
 #include "LoadCodecs.h"
 
+// **************** NanaZip Modification Start ****************
+#include <Mile.Helpers.Base.h>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 
 #ifdef NEW_FOLDER_INTERFACE
@@ -782,6 +786,7 @@ HRESULT CCodecs::Load()
     const FString baseFolder = GetBaseFolderPrefixFromRegistry();
     // **************** NanaZip Modification Start ****************
     {
+      ::MileLoadLibraryFromSystem32(baseFolder + L"K7Pal.dll");
       bool loadedOK;
       RINOK(LoadDll(baseFolder + L"NanaZip.Codecs.dll", false, &loadedOK));
       if (!loadedOK)

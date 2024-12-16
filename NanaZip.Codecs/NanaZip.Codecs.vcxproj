@@ -22,6 +22,7 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Project="..\K7Pal\K7Pal.props" />
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
@@ -451,9 +452,6 @@
     </PackageReference>
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.0.187</Version>
-    </PackageReference>
-    <PackageReference Include="Mile.Windows.Internal">
-      <Version>1.0.2971</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
