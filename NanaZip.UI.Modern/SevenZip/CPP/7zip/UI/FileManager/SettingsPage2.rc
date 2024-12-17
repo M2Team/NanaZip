@@ -19,6 +19,8 @@ BEGIN
   CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 182, xc, 10
   CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 196, xc, 10
 
+  CONTROL  "Use fast drag-and-drop (Experimental)", IDX_SETTINGS_FAST_DRAG_DROP, MY_CHECKBOX, m, 218, xc, 10
+
   // LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY, m, 140, xc, 8
   // COMBOBOX  IDC_SETTINGS_MEM, m , 152, g1xs, yc - 152, MY_COMBO
   // LTEXT     "/ RAM", IDT_SETTINGS_MEM_RAM, m + g1xs + m, 154, xc - g1xs - m, MY_TEXT_NOPREFIX
