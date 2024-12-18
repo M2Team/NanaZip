@@ -639,6 +639,21 @@
   <data name="Resource2508" xml:space="preserve">
     <value>使用大内存页(&amp;L)</value>
   </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>保存文件压缩历史记录</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>保存路径历史记录</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>保存复制历史记录</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>保存文件夹历史记录</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>使用小写校验值</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>关于 NanaZip</value>
   </data>
