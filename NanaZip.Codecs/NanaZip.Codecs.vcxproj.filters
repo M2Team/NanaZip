@@ -38,9 +38,6 @@
     <ClCompile Include="RHash\byte_order.c">
       <Filter>RHash</Filter>
     </ClCompile>
-    <ClCompile Include="RHash\ed2k.c">
-      <Filter>RHash</Filter>
-    </ClCompile>
     <ClCompile Include="RHash\edonr.c">
       <Filter>RHash</Filter>
     </ClCompile>
@@ -485,9 +482,6 @@
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\byte_order.h">
-      <Filter>RHash</Filter>
-    </ClInclude>
-    <ClInclude Include="RHash\ed2k.h">
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\edonr.h">

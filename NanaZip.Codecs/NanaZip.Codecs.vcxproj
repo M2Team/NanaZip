@@ -218,7 +218,6 @@
     <ClCompile Include="RHash\byte_order.c">
       <DisableSpecificWarnings>4146;</DisableSpecificWarnings>
     </ClCompile>
-    <ClCompile Include="RHash\ed2k.c" />
     <ClCompile Include="RHash\edonr.c" />
     <ClCompile Include="RHash\gost12.c">
       <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
@@ -423,7 +422,6 @@
     <ClInclude Include="RHash\aich.h" />
     <ClInclude Include="RHash\blake2b.h" />
     <ClInclude Include="RHash\byte_order.h" />
-    <ClInclude Include="RHash\ed2k.h" />
     <ClInclude Include="RHash\edonr.h" />
     <ClInclude Include="RHash\gost12.h" />
     <ClInclude Include="RHash\gost94.h" />
