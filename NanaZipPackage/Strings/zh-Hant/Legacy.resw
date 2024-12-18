@@ -639,6 +639,21 @@
   <data name="Resource2508" xml:space="preserve">
     <value>使用大記憶體分頁(&amp;L)</value>
   </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>儲存檔案壓縮歷程記錄</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>儲存路徑歷程記錄</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>儲存複製歷程記錄</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>儲存資料夾歷程記錄</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>使用小寫字母驗證值</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>關於 NanaZip</value>
   </data>
