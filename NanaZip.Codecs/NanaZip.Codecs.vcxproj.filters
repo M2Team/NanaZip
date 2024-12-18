@@ -53,9 +53,6 @@
     <ClCompile Include="RHash\hex.c">
       <Filter>RHash</Filter>
     </ClCompile>
-    <ClCompile Include="RHash\md4.c">
-      <Filter>RHash</Filter>
-    </ClCompile>
     <ClCompile Include="RHash\ripemd-160.c">
       <Filter>RHash</Filter>
     </ClCompile>
@@ -376,7 +373,6 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Gost12256.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Gost12512.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Has160.cpp" />
-    <ClCompile Include="NanaZip.Codecs.Hash.Md4.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Ripemd160.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha224.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Sha3224.cpp" />
@@ -497,9 +493,6 @@
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\hex.h">
-      <Filter>RHash</Filter>
-    </ClInclude>
-    <ClInclude Include="RHash\md4.h">
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\ripemd-160.h">

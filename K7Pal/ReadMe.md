@@ -23,6 +23,7 @@ although the implementation may not in this repository.
 - Cryptography
   - Hash Functions
     - MD2
+    - MD4
     - MD5
     - SHA-384
     - SHA-512
