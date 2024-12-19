@@ -452,7 +452,7 @@
       <Version>1.0.671</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.UniCrt">
-      <Version>1.0.199</Version>
+      <Version>1.1.274</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
