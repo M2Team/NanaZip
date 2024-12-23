@@ -27,4 +27,3 @@ although the implementation may not in this repository.
     - MD5
     - SHA-384
     - SHA-512
-    - ED2K (Based on MD4 implementation because it's a MD4 variant)
