@@ -98,3 +98,61 @@ namespace NanaZip::Codecs::Hash
         return new BCryptProvider(BCRYPT_SHA512_ALGORITHM);
     }
 }
+
+#pragma region RHash Wrappers
+
+#include "RHash/sha1.h"
+
+void rhash_sha1_init(
+    sha1_ctx* ctx)
+{
+    if (!ctx)
+    {
+        return;
+    }
+    std::memset(ctx, 0, sizeof(sha1_ctx));
+
+    ::K7PalHashCreate(
+        &ctx->context,
+        BCRYPT_SHA1_ALGORITHM,
+        nullptr,
+        0);
+}
+
+void rhash_sha1_update(
+    sha1_ctx* ctx,
+    const unsigned char* msg,
+    size_t size)
+{
+    if (!ctx)
+    {
+        return;
+    }
+
+    ::K7PalHashUpdate(
+        ctx->context,
+        const_cast<LPVOID>(reinterpret_cast<LPCVOID>(msg)),
+        static_cast<UINT32>(size));
+    ctx->length += size;
+}
+
+void rhash_sha1_final(
+    sha1_ctx* ctx,
+    unsigned char* result)
+{
+    if (!ctx)
+    {
+        return;
+    }
+
+    ::K7PalHashFinal(
+        ctx->context,
+        ctx->hash,
+        sha1_hash_size);
+    if (result)
+    {
+        std::memcpy(result, ctx->hash, sha1_hash_size);
+    }
+}
+
+#pragma endregion

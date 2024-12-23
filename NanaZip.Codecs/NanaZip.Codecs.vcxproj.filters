@@ -56,9 +56,6 @@
     <ClCompile Include="RHash\ripemd-160.c">
       <Filter>RHash</Filter>
     </ClCompile>
-    <ClCompile Include="RHash\rhash_sha1.c">
-      <Filter>RHash</Filter>
-    </ClCompile>
     <ClCompile Include="RHash\rhash_sha256.c">
       <Filter>RHash</Filter>
     </ClCompile>

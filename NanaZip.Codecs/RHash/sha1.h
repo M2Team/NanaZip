@@ -2,6 +2,7 @@
 #ifndef SHA1_H
 #define SHA1_H
 #include "ustd.h"
+#include <K7Pal.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -13,7 +14,7 @@ extern "C" {
 /* algorithm context */
 typedef struct sha1_ctx
 {
-	unsigned char message[sha1_block_size]; /* 512-bit buffer for leftovers */
+    K7_PAL_HASH_HANDLE context; /* internal context */
 	uint64_t length;   /* number of processed bytes */
 	unsigned hash[5];  /* 160-bit algorithm internal hashing state */
 } sha1_ctx;
