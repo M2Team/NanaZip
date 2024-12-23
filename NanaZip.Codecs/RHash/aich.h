@@ -1,6 +1,7 @@
 ﻿/* aich.h */
 #ifndef AICH_H
 #define AICH_H
+#include "byte_order.h"
 #include "sha1.h"
 
 #ifdef __cplusplus
