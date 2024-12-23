@@ -2,7 +2,6 @@
 
 #include "StdAfx.h"
 
-
 #include "../../../Common/ComTry.h"
 #include "../../../Common/IntToString.h"
 #include "../../../Common/Lang.h"
@@ -27,11 +26,11 @@
 #include "ExtractCallback.h"
 #include "FormatUtils.h"
 #include "LangUtils.h"
+#include "MemDialog.h"
 #include "OverwriteDialog.h"
 #ifndef Z7_NO_CRYPTO
 #include "PasswordDialog.h"
 #endif
-#include "MemDialog.h"
 #include "PropertyName.h"
 
 using namespace NWindows;
@@ -44,9 +43,9 @@ CExtractCallbackImp::~CExtractCallbackImp() {}
 
 void CExtractCallbackImp::Init()
 {
-  _lang_Extracting = LangString(IDS_PROGRESS_EXTRACTING);
-  _lang_Testing = LangString(IDS_PROGRESS_TESTING);
-  _lang_Skipping = LangString(IDS_PROGRESS_SKIPPING);
+  LangString(IDS_PROGRESS_EXTRACTING, _lang_Extracting);
+  LangString(IDS_PROGRESS_TESTING, _lang_Testing);
+  LangString(IDS_PROGRESS_SKIPPING, _lang_Skipping);
   _lang_Reading = "Reading";
 
   NumArchiveErrors = 0;
@@ -107,19 +106,19 @@ HRESULT CExtractCallbackImp::Open_SetTotal(const UInt64 *files, const UInt64 *by
   {
     if (files)
     {
-      _totalFilesDefined = true;
+      _totalFiles_Defined = true;
       // res = ProgressDialog->Sync.Set_NumFilesTotal(*files);
     }
     else
-      _totalFilesDefined = false;
+      _totalFiles_Defined = false;
 
     if (bytes)
     {
-      _totalBytesDefined = true;
+      _totalBytes_Defined = true;
       ProgressDialog->Sync.Set_NumBytesTotal(*bytes);
     }
     else
-      _totalBytesDefined = false;
+      _totalBytes_Defined = false;
   }
 
   return res;
@@ -217,7 +216,7 @@ Z7_COM7F_IMF(CExtractCallbackImp::AskOverwrite(
   dialog.NewFileInfo.Is_FileSystemFile = Src_Is_IO_FS_Folder;
   
   ProgressDialog->WaitCreating();
-  INT_PTR writeAnswer = dialog.Create(*ProgressDialog);
+  const INT_PTR writeAnswer = dialog.Create(*ProgressDialog);
   
   switch (writeAnswer)
   {
@@ -478,10 +477,10 @@ UString GetOpenArcErrorMessage(UInt32 errorFlags)
 
   for (unsigned i = 0; i < Z7_ARRAY_SIZE(k_ErrorFlagsIds); i++)
   {
-    UInt32 f = ((UInt32)1 << i);
+    const UInt32 f = (UInt32)1 << i;
     if ((errorFlags & f) == 0)
       continue;
-    UInt32 id = k_ErrorFlagsIds[i];
+    const UInt32 id = k_ErrorFlagsIds[i];
     UString m = LangString(id);
     if (m.IsEmpty())
       continue;
@@ -512,8 +511,8 @@ UString GetOpenArcErrorMessage(UInt32 errorFlags)
 
 static void ErrorInfo_Print(UString &s, const CArcErrorInfo &er)
 {
-  UInt32 errorFlags = er.GetErrorFlags();
-  UInt32 warningFlags = er.GetWarningFlags();
+  const UInt32 errorFlags = er.GetErrorFlags();
+  const UInt32 warningFlags = er.GetWarningFlags();
 
   if (errorFlags != 0)
     AddNewLineString(s, GetOpenArcErrorMessage(errorFlags));
@@ -524,7 +523,7 @@ static void ErrorInfo_Print(UString &s, const CArcErrorInfo &er)
   if (warningFlags != 0)
   {
     s += GetNameOfProperty(kpidWarningFlags, L"Warnings");
-    s += ":";
+    s.Add_Colon();
     s.Add_LF();
     AddNewLineString(s, GetOpenArcErrorMessage(warningFlags));
   }
@@ -852,33 +851,34 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
   _newVirtFileWasAdded = false;
   _hashStream_WasUsed = false;
   _needUpdateStat = false;
+  _isFolder = IntToBool(isDir);
+  _curSize_Defined = false;
+  _curSize = 0;
 
   if (_hashStream)
     _hashStream->ReleaseStream();
 
-  GetItemBoolProp(getProp, kpidIsAltStream, _isAltStream);
-
-  if (!ProcessAltStreams && _isAltStream)
-    return S_OK;
-
   _filePath = name;
-  _isFolder = IntToBool(isDir);
-  _curSize = 0;
-  _curSize_Defined = false;
 
   UInt64 size = 0;
-  bool sizeDefined;
+  bool size_Defined;
   {
     NCOM::CPropVariant prop;
     RINOK(getProp->GetProp(kpidSize, &prop))
-    sizeDefined = ConvertPropVariantToUInt64(prop, size);
+    size_Defined = ConvertPropVariantToUInt64(prop, size);
   }
-
-  if (sizeDefined)
+  if (size_Defined)
   {
     _curSize = size;
     _curSize_Defined = true;
   }
+
+  GetItemBoolProp(getProp, kpidIsAltStream, _isAltStream);
+  if (!ProcessAltStreams && _isAltStream)
+    return S_OK;
+
+  if (isDir) // we don't support dir items extraction in this code
+    return S_OK;
 
   if (askExtractMode != NArchive::NExtract::NAskMode::kExtract &&
       askExtractMode != NArchive::NExtract::NAskMode::kTest)
@@ -890,40 +890,64 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
   
   if (VirtFileSystem && askExtractMode == NArchive::NExtract::NAskMode::kExtract)
   {
-    CVirtFile &file = VirtFileSystemSpec->AddNewFile();
+    if (!VirtFileSystemSpec->Files.IsEmpty())
+      VirtFileSystemSpec->MaxTotalAllocSize -= VirtFileSystemSpec->Files.Back().Data.Size();
+    CVirtFile &file = VirtFileSystemSpec->Files.AddNew();
     _newVirtFileWasAdded = true;
-    file.Name = name;
-    file.IsDir = IntToBool(isDir);
+    // file.IsDir = _isFolder;
     file.IsAltStream = _isAltStream;
-    file.Size = 0;
-
-    RINOK(GetTime(getProp, kpidCTime, file.CTime, file.CTimeDefined))
-    RINOK(GetTime(getProp, kpidATime, file.ATime, file.ATimeDefined))
-    RINOK(GetTime(getProp, kpidMTime, file.MTime, file.MTimeDefined))
-
-    NCOM::CPropVariant prop;
-    RINOK(getProp->GetProp(kpidAttrib, &prop))
-    if (prop.vt == VT_UI4)
-    {
-      file.Attrib = prop.ulVal;
-      file.AttribDefined = true;
-    }
-    // else if (isDir) file.Attrib = FILE_ATTRIBUTE_DIRECTORY;
-
+    file.WrittenSize = 0;
     file.ExpectedSize = 0;
-    if (sizeDefined)
+    if (size_Defined)
       file.ExpectedSize = size;
+
+    if (VirtFileSystemSpec->Index_of_MainExtractedFile_in_Files < 0)
+      if (!file.IsAltStream || VirtFileSystemSpec->IsAltStreamFile)
+        VirtFileSystemSpec->Index_of_MainExtractedFile_in_Files =
+            (int)(VirtFileSystemSpec->Files.Size() - 1);
+
+    /* if we open only AltStream, then (name) contains only name without "fileName:" prefix */
+    file.BaseName = name;
+
+    if (file.IsAltStream
+        && !VirtFileSystemSpec->IsAltStreamFile
+        && file.BaseName.IsPrefixedBy_NoCase(VirtFileSystemSpec->FileName))
+    {
+      const unsigned colonPos = VirtFileSystemSpec->FileName.Len();
+      if (file.BaseName[colonPos] == ':')
+      {
+        file.ColonWasUsed = true;
+        file.AltStreamName = name + (size_t)colonPos + 1;
+        file.BaseName.DeleteFrom(colonPos);
+        if (Is_ZoneId_StreamName(file.AltStreamName))
+        {
+          if (VirtFileSystemSpec->Index_of_ZoneBuf_AltStream_in_Files < 0)
+            VirtFileSystemSpec->Index_of_ZoneBuf_AltStream_in_Files =
+              (int)(VirtFileSystemSpec->Files.Size() - 1);
+        }
+      }
+    }
+    RINOK(GetTime(getProp, kpidCTime, file.CTime, file.CTime_Defined))
+    RINOK(GetTime(getProp, kpidATime, file.ATime, file.ATime_Defined))
+    RINOK(GetTime(getProp, kpidMTime, file.MTime, file.MTime_Defined))
+    {
+      NCOM::CPropVariant prop;
+      RINOK(getProp->GetProp(kpidAttrib, &prop))
+      if (prop.vt == VT_UI4)
+      {
+        file.Attrib = prop.ulVal;
+        file.Attrib_Defined = true;
+      }
+    }
     outStreamLoc = VirtFileSystem;
   }
 
   if (_hashStream)
   {
-    {
-      _hashStream->SetStream(outStreamLoc);
-      outStreamLoc = _hashStream;
-      _hashStream->Init(true);
-      _hashStream_WasUsed = true;
-    }
+    _hashStream->SetStream(outStreamLoc);
+    outStreamLoc = _hashStream;
+    _hashStream->Init(true);
+    _hashStream_WasUsed = true;
   }
 
   if (outStreamLoc)
@@ -1077,10 +1101,10 @@ Z7_COM7F_IMF(CExtractCallbackImp::RequestMemoryUse(
     // if (indexType == NArchive::NEventIndexType::kNoIndex)
     if ((flags & NRequestMemoryUseFlags::k_SkipArc_IsExpected) ||
         (flags & NRequestMemoryUseFlags::k_Report_SkipArc))
-      s += LangString(IDS_MSG_ARC_UNPACKING_WAS_SKIPPED);
+      AddLangString(s, IDS_MSG_ARC_UNPACKING_WAS_SKIPPED);
 /*
     else
-      s += LangString(IDS_MSG_ARC_FILES_UNPACKING_WAS_SKIPPED);
+      AddLangString(, IDS_MSG_ARC_FILES_UNPACKING_WAS_SKIPPED);
 */
     AddError_Message_ShowArcPath(s);
   }
@@ -1093,88 +1117,154 @@ Z7_COM7F_IMF(CExtractCallbackImp::RequestMemoryUse(
 }
 
 
-
-// static const UInt32 kBlockSize = ((UInt32)1 << 31);
-
 Z7_COM7F_IMF(CVirtFileSystem::Write(const void *data, UInt32 size, UInt32 *processedSize))
 {
   if (processedSize)
     *processedSize = 0;
   if (size == 0)
     return S_OK;
-  if (!_fileMode)
+  if (!_wasSwitchedToFsMode)
   {
     CVirtFile &file = Files.Back();
-    size_t rem = file.Data.Size() - (size_t)file.Size;
+    const size_t rem = file.Data.Size() - file.WrittenSize;
     bool useMem = true;
     if (rem < size)
     {
       UInt64 b = 0;
       if (file.Data.Size() == 0)
         b = file.ExpectedSize;
-      UInt64 a = file.Size + size;
+      UInt64 a = (UInt64)file.WrittenSize + size;
       if (b < a)
         b = a;
       a = (UInt64)file.Data.Size() * 2;
       if (b < a)
         b = a;
       useMem = false;
-      const size_t b_sizet = (size_t)b;
-      if (b == b_sizet && b <= MaxTotalAllocSize)
-        useMem = file.Data.ReAlloc_KeepData(b_sizet, (size_t)file.Size);
+      if (b <= MaxTotalAllocSize)
+        useMem = file.Data.ReAlloc_KeepData((size_t)b, file.WrittenSize);
     }
+
+#if 0 // 1 for debug : FLUSHING TO FS
+    useMem = false;
+#endif
+
     if (useMem)
     {
-      memcpy(file.Data + file.Size, data, size);
-      file.Size += size;
+      memcpy(file.Data + file.WrittenSize, data, size);
+      file.WrittenSize += size;
       if (processedSize)
         *processedSize = (UInt32)size;
       return S_OK;
     }
-    _fileMode = true;
+    _wasSwitchedToFsMode = true;
   }
-  RINOK(FlushToDisk(false))
-  return _outFileStream.Interface()->Write(data, size, processedSize);
+  
+  if (!_newVirtFileStream_IsReadyToWrite) // we check for _newVirtFileStream_IsReadyToWrite to optimize execution
+  {
+    RINOK(FlushToDisk(false))
+  }
+
+  if (_needWriteToRealFile)
+    return _outFileStream.Interface()->Write(data, size, processedSize);
+  if (processedSize)
+    *processedSize = size;
+  return S_OK;
 }
 
 
 HRESULT CVirtFileSystem::FlushToDisk(bool closeLast)
 {
-  _outFileStream.Create_if_Empty();
   while (_numFlushed < Files.Size())
   {
-    const CVirtFile &file = Files[_numFlushed];
-    const FString path = DirPrefix + us2fs(Get_Correct_FsFile_Name(file.Name));
-    if (!_fileIsOpen)
+    CVirtFile &file = Files[_numFlushed];
+    const FString basePath = DirPrefix + us2fs(Get_Correct_FsFile_Name(file.BaseName));
+    FString path = basePath;
+
+    if (file.ColonWasUsed)
     {
-      if (!_outFileStream->Create_NEW(path))
+      if (ZoneBuf.Size() != 0
+          && Is_ZoneId_StreamName(file.AltStreamName))
       {
-        // do we need to release stream here?
-        // _outFileStream.Release();
-        return E_FAIL;
-        // MessageBoxMyError(UString("Can't create file ") + fs2us(tempFilePath));
+        // it's expected that
+        // CArchiveExtractCallback::GetStream() have excluded
+        // ZoneId alt stream from extraction already.
+        // But we exclude alt stream extraction here too.
+        _numFlushed++;
+        continue;
       }
-      _fileIsOpen = true;
-      RINOK(WriteStream(_outFileStream, file.Data, (size_t)file.Size))
+      path.Add_Colon();
+      path += us2fs(Get_Correct_FsFile_Name(file.AltStreamName));
     }
+
+    if (!_newVirtFileStream_IsReadyToWrite)
+    {
+      if (file.ColonWasUsed)
+      {
+        NFind::CFileInfo parentFi;
+        if (parentFi.Find(basePath)
+            && parentFi.IsReadOnly())
+        {
+          _altStream_NeedRestore_Attrib_bool = true;
+          _altStream_NeedRestore_AttribVal = parentFi.Attrib;
+          NDir::SetFileAttrib(basePath, parentFi.Attrib & ~(DWORD)FILE_ATTRIBUTE_READONLY);
+        }
+      }
+      _outFileStream.Create_if_Empty();
+      _needWriteToRealFile = _outFileStream->Create_NEW(path);
+      if (!_needWriteToRealFile)
+      {
+        if (!file.ColonWasUsed)
+          return GetLastError_noZero_HRESULT(); // it's main file and we can't ignore such error.
+        // (file.ColonWasUsed == true)
+        // So it's additional alt stream.
+        // And we ignore file creation error for additional alt stream.
+        // ShowErrorMessage(UString("Can't create file ") + fs2us(path));
+      }
+      _newVirtFileStream_IsReadyToWrite = true;
+      // _openFilePath = path;
+      HRESULT hres = S_OK;
+      if (_needWriteToRealFile)
+        hres = WriteStream(_outFileStream, file.Data, file.WrittenSize);
+      // we free allocated memory buffer after data flushing:
+      file.WrittenSize = 0;
+      file.Data.Free();
+      RINOK(hres)
+    }
+    
     if (_numFlushed == Files.Size() - 1 && !closeLast)
       break;
-    if (file.CTimeDefined ||
-        file.ATimeDefined ||
-        file.MTimeDefined)
-      _outFileStream->SetTime(
-          file.CTimeDefined ? &file.CTime : NULL,
-          file.ATimeDefined ? &file.ATime : NULL,
-          file.MTimeDefined ? &file.MTime : NULL);
-    _outFileStream->Close();
+    
+    if (_needWriteToRealFile)
+    {
+      if (file.CTime_Defined ||
+          file.ATime_Defined ||
+          file.MTime_Defined)
+        _outFileStream->SetTime(
+          file.CTime_Defined ? &file.CTime : NULL,
+          file.ATime_Defined ? &file.ATime : NULL,
+          file.MTime_Defined ? &file.MTime : NULL);
+      _outFileStream->Close();
+    }
+    
     _numFlushed++;
-    _fileIsOpen = false;
+    _newVirtFileStream_IsReadyToWrite = false;
 
-    if (ZoneBuf.Size() != 0)
-      WriteZoneFile_To_BaseFile(path, ZoneBuf);
-
-    if (file.AttribDefined)
-      NDir::SetFileAttrib_PosixHighDetect(path, file.Attrib);
+    if (_needWriteToRealFile)
+    {
+      if (!file.ColonWasUsed
+          && ZoneBuf.Size() != 0)
+        WriteZoneFile_To_BaseFile(path, ZoneBuf);
+      if (file.Attrib_Defined)
+        NDir::SetFileAttrib_PosixHighDetect(path, file.Attrib);
+      // _openFilePath.Empty();
+      _needWriteToRealFile = false;
+    }
+      
+    if (_altStream_NeedRestore_Attrib_bool)
+    {
+      _altStream_NeedRestore_Attrib_bool = false;
+      NDir::SetFileAttrib(basePath, _altStream_NeedRestore_AttribVal);
+    }
   }
   return S_OK;
 }

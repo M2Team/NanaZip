@@ -3,6 +3,7 @@
 #include "StdAfx.h"
 
 #include "../../../C/Sha256.h"
+#include "../../../C/Sha512.h"
 #include "../../../C/CpuArch.h"
 
 #include "../../Common/ComTry.h"
@@ -41,22 +42,33 @@ Z7_CLASS_IMP_NOQIB_1(
   CInStreamWithSha256
   , ISequentialInStream
 )
+  bool _sha512Mode;
   CMyComPtr<ISequentialInStream> _stream;
-  CAlignedBuffer1 _sha;
+  CAlignedBuffer1 _sha256;
+  CAlignedBuffer1 _sha512;
   UInt64 _size;
 
-  CSha256 *Sha() { return (CSha256 *)(void *)(Byte *)_sha; }
+  CSha256 *Sha256() { return (CSha256 *)(void *)(Byte *)_sha256; }
+  CSha512 *Sha512() { return (CSha512 *)(void *)(Byte *)_sha512; }
 public:
-  CInStreamWithSha256(): _sha(sizeof(CSha256)) {}
+  CInStreamWithSha256():
+      _sha256(sizeof(CSha256)),
+      _sha512(sizeof(CSha512))
+      {}
   void SetStream(ISequentialInStream *stream) { _stream = stream;  }
-  void Init()
+  void Init(bool sha512Mode)
   {
+    _sha512Mode = sha512Mode;
     _size = 0;
-    Sha256_Init(Sha());
+    if (sha512Mode)
+      Sha512_Init(Sha512(), SHA512_DIGEST_SIZE);
+    else
+      Sha256_Init(Sha256());
   }
   void ReleaseStream() { _stream.Release(); }
   UInt64 GetSize() const { return _size; }
-  void Final(Byte *digest) { Sha256_Final(Sha(), digest); }
+  void Final256(Byte *digest) { Sha256_Final(Sha256(), digest); }
+  void Final512(Byte *digest) { Sha512_Final(Sha512(), digest, SHA512_DIGEST_SIZE); }
 };
 
 Z7_COM7F_IMF(CInStreamWithSha256::Read(void *data, UInt32 size, UInt32 *processedSize))
@@ -64,7 +76,10 @@ Z7_COM7F_IMF(CInStreamWithSha256::Read(void *data, UInt32 size, UInt32 *processe
   UInt32 realProcessedSize;
   const HRESULT result = _stream->Read(data, size, &realProcessedSize);
   _size += realProcessedSize;
-  Sha256_Update(Sha(), (const Byte *)data, realProcessedSize);
+  if (_sha512Mode)
+    Sha512_Update(Sha512(), (const Byte *)data, realProcessedSize);
+  else
+    Sha256_Update(Sha256(), (const Byte *)data, realProcessedSize);
   if (processedSize)
     *processedSize = realProcessedSize;
   return result;
@@ -75,25 +90,33 @@ Z7_CLASS_IMP_NOQIB_1(
   COutStreamWithSha256
   , ISequentialOutStream
 )
-  // bool _calculate;
+  bool _sha512Mode;
   CMyComPtr<ISequentialOutStream> _stream;
-  CAlignedBuffer1 _sha;
+  CAlignedBuffer1 _sha256;
+  CAlignedBuffer1 _sha512;
   UInt64 _size;
 
-  CSha256 *Sha() { return (CSha256 *)(void *)(Byte *)_sha; }
+  CSha256 *Sha256() { return (CSha256 *)(void *)(Byte *)_sha256; }
+  CSha512 *Sha512() { return (CSha512 *)(void *)(Byte *)_sha512; }
 public:
-  COutStreamWithSha256(): _sha(sizeof(CSha256)) {}
+  COutStreamWithSha256():
+      _sha256(sizeof(CSha256)),
+      _sha512(sizeof(CSha512))
+      {}
   void SetStream(ISequentialOutStream *stream) { _stream = stream; }
   void ReleaseStream() { _stream.Release(); }
-  void Init(/* bool calculate = true */ )
+  void Init(bool sha512Mode)
   {
-    // _calculate = calculate;
+    _sha512Mode = sha512Mode;
     _size = 0;
-    Sha256_Init(Sha());
+    if (sha512Mode)
+      Sha512_Init(Sha512(), SHA512_DIGEST_SIZE);
+    else
+      Sha256_Init(Sha256());
   }
-  void InitSha256() { Sha256_Init(Sha()); }
   UInt64 GetSize() const { return _size; }
-  void Final(Byte *digest) { Sha256_Final(Sha(), digest); }
+  void Final256(Byte *digest) { Sha256_Final(Sha256(), digest); }
+  void Final512(Byte *digest) { Sha512_Final(Sha512(), digest, SHA512_DIGEST_SIZE); }
 };
 
 Z7_COM7F_IMF(COutStreamWithSha256::Write(const void *data, UInt32 size, UInt32 *processedSize))
@@ -102,7 +125,10 @@ Z7_COM7F_IMF(COutStreamWithSha256::Write(const void *data, UInt32 size, UInt32 *
   if (_stream)
     result = _stream->Write(data, size, &size);
   // if (_calculate)
-  Sha256_Update(Sha(), (const Byte *)data, size);
+  if (_sha512Mode)
+    Sha512_Update(Sha512(), (const Byte *)data, size);
+  else
+    Sha256_Update(Sha256(), (const Byte *)data, size);
   _size += size;
   if (processedSize)
     *processedSize = size;
@@ -521,10 +547,11 @@ void CInStreamWithHash::SetStreamAndInit(ISequentialInStream *stream, int algo)
     inStreamSha1->Init();
     stream = inStreamSha1;
   }
-  else if (algo == XAR_CKSUM_SHA256)
+  else if (algo == XAR_CKSUM_SHA256
+        || algo == XAR_CKSUM_SHA512)
   {
     inStreamSha256->SetStream(stream);
-    inStreamSha256->Init();
+    inStreamSha256->Init(algo == XAR_CKSUM_SHA512);
     stream = inStreamSha256;
   }
   inStreamLim->SetStream(stream);
@@ -542,7 +569,14 @@ bool CInStreamWithHash::CheckHash(int algo, const Byte *digest_from_arc) const
   else if (algo == XAR_CKSUM_SHA256)
   {
     Byte digest[SHA256_DIGEST_SIZE];
-    inStreamSha256->Final(digest);
+    inStreamSha256->Final256(digest);
+    if (memcmp(digest, digest_from_arc, sizeof(digest)) != 0)
+      return false;
+  }
+  else if (algo == XAR_CKSUM_SHA512)
+  {
+    Byte digest[SHA512_DIGEST_SIZE];
+    inStreamSha256->Final512(digest);
     if (memcmp(digest, digest_from_arc, sizeof(digest)) != 0)
       return false;
   }
@@ -1151,11 +1185,12 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           outStreamSha1->SetStream(realOutStream);
           outStreamSha1->Init();
         }
-        else if (checksum_method == XAR_CKSUM_SHA256)
+        else if (checksum_method == XAR_CKSUM_SHA256
+              || checksum_method == XAR_CKSUM_SHA512)
         {
           outStreamLim->SetStream(outStreamSha256);
           outStreamSha256->SetStream(realOutStream);
-          outStreamSha256->Init();
+          outStreamSha256->Init(checksum_method == XAR_CKSUM_SHA512);
         }
         else
           outStreamLim->SetStream(realOutStream);
@@ -1209,8 +1244,15 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
             else if (checksum_method == XAR_CKSUM_SHA256)
             {
               Byte digest[SHA256_DIGEST_SIZE];
-              outStreamSha256->Final(digest);
-              if (memcmp(digest, item.extracted_checksum.Data, SHA256_DIGEST_SIZE) != 0)
+              outStreamSha256->Final256(digest);
+              if (memcmp(digest, item.extracted_checksum.Data, sizeof(digest)) != 0)
+                opRes = NExtract::NOperationResult::kCRCError;
+            }
+            else if (checksum_method == XAR_CKSUM_SHA512)
+            {
+              Byte digest[SHA512_DIGEST_SIZE];
+              outStreamSha256->Final512(digest);
+              if (memcmp(digest, item.extracted_checksum.Data, sizeof(digest)) != 0)
                 opRes = NExtract::NOperationResult::kCRCError;
             }
             if (opRes == NExtract::NOperationResult::kOK)

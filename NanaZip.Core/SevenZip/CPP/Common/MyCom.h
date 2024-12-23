@@ -468,6 +468,19 @@ EXTERN_C_END
   Z7_COM_QI_ENTRY(i7) \
   )
 
+#define Z7_COM_UNKNOWN_IMP_8(i1, i2, i3, i4, i5, i6, i7, i8) \
+  Z7_COM_UNKNOWN_IMP_SPEC( \
+  Z7_COM_QI_ENTRY_UNKNOWN(i1) \
+  Z7_COM_QI_ENTRY(i1) \
+  Z7_COM_QI_ENTRY(i2) \
+  Z7_COM_QI_ENTRY(i3) \
+  Z7_COM_QI_ENTRY(i4) \
+  Z7_COM_QI_ENTRY(i5) \
+  Z7_COM_QI_ENTRY(i6) \
+  Z7_COM_QI_ENTRY(i7) \
+  Z7_COM_QI_ENTRY(i8) \
+  )
+
 
 #define Z7_IFACES_IMP_UNK_1(i1) \
   Z7_COM_UNKNOWN_IMP_1(i1) \
@@ -507,6 +520,16 @@ EXTERN_C_END
   Z7_IFACE_COM7_IMP(i4) \
   Z7_IFACE_COM7_IMP(i5) \
   Z7_IFACE_COM7_IMP(i6) \
+
+#define Z7_IFACES_IMP_UNK_7(i1, i2, i3, i4, i5, i6, i7) \
+  Z7_COM_UNKNOWN_IMP_7(i1, i2, i3, i4, i5, i6, i7) \
+  Z7_IFACE_COM7_IMP(i1) \
+  Z7_IFACE_COM7_IMP(i2) \
+  Z7_IFACE_COM7_IMP(i3) \
+  Z7_IFACE_COM7_IMP(i4) \
+  Z7_IFACE_COM7_IMP(i5) \
+  Z7_IFACE_COM7_IMP(i6) \
+  Z7_IFACE_COM7_IMP(i7) \
 
 
 #define Z7_CLASS_IMP_COM_0(c) \
@@ -571,6 +594,20 @@ EXTERN_C_END
   public i6, \
   public CMyUnknownImp { \
   Z7_IFACES_IMP_UNK_6(i1, i2, i3, i4, i5, i6) \
+  private:
+
+
+#define Z7_CLASS_IMP_COM_7(c, i1, i2, i3, i4, i5, i6, i7) \
+  Z7_class_final(c) : \
+  public i1, \
+  public i2, \
+  public i3, \
+  public i4, \
+  public i5, \
+  public i6, \
+  public i7, \
+  public CMyUnknownImp { \
+  Z7_IFACES_IMP_UNK_7(i1, i2, i3, i4, i5, i6, i7) \
   private:
 
 

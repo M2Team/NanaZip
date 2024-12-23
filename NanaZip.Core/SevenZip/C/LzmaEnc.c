@@ -1,5 +1,5 @@
 ﻿/* LzmaEnc.c -- LZMA Encoder
-2023-04-13: Igor Pavlov : Public domain */
+Igor Pavlov : Public domain */
 
 #include "Precomp.h"
 
@@ -72,11 +72,11 @@ void LzmaEncProps_Normalize(CLzmaEncProps *p)
   p->level = level;
   
   if (p->dictSize == 0)
-    p->dictSize =
-      ( level <= 3 ? ((UInt32)1 << (level * 2 + 16)) :
-      ( level <= 6 ? ((UInt32)1 << (level + 19)) :
-      ( level <= 7 ? ((UInt32)1 << 25) : ((UInt32)1 << 26)
-      )));
+    p->dictSize = (unsigned)level <= 4 ?
+        (UInt32)1 << (level * 2 + 16) :
+        (unsigned)level <= sizeof(size_t) / 2 + 4 ?
+          (UInt32)1 << (level + 20) :
+          (UInt32)1 << (sizeof(size_t) / 2 + 24);
 
   if (p->dictSize > p->reduceSize)
   {
@@ -92,8 +92,8 @@ void LzmaEncProps_Normalize(CLzmaEncProps *p)
   if (p->lp < 0) p->lp = 0;
   if (p->pb < 0) p->pb = 2;
 
-  if (p->algo < 0) p->algo = (level < 5 ? 0 : 1);
-  if (p->fb < 0) p->fb = (level < 7 ? 32 : 64);
+  if (p->algo < 0) p->algo = (unsigned)level < 5 ? 0 : 1;
+  if (p->fb < 0) p->fb = (unsigned)level < 7 ? 32 : 64;
   if (p->btMode < 0) p->btMode = (p->algo == 0 ? 0 : 1);
   if (p->numHashBytes < 0) p->numHashBytes = (p->btMode ? 4 : 5);
   if (p->mc == 0) p->mc = (16 + ((unsigned)p->fb >> 1)) >> (p->btMode ? 0 : 1);
@@ -195,11 +195,11 @@ unsigned GetPosSlot1(UInt32 pos);
 unsigned GetPosSlot1(UInt32 pos)
 {
   unsigned res;
-  BSR2_RET(pos, res);
+  BSR2_RET(pos, res)
   return res;
 }
-#define GetPosSlot2(pos, res) { BSR2_RET(pos, res); }
-#define GetPosSlot(pos, res) { if (pos < 2) res = pos; else BSR2_RET(pos, res); }
+#define GetPosSlot2(pos, res) { BSR2_RET(pos, res) }
+#define GetPosSlot(pos, res) { if (pos < 2) res = pos; else BSR2_RET(pos, res) }
 
 
 #else // ! LZMA_LOG_BSR
@@ -512,7 +512,7 @@ struct CLzmaEnc
   COPY_ARR(d, s, posEncoders)  \
   (d)->lenProbs = (s)->lenProbs;  \
   (d)->repLenProbs = (s)->repLenProbs;  \
-  memcpy((d)->litProbs, (s)->litProbs, ((UInt32)0x300 << (p)->lclp) * sizeof(CLzmaProb));
+  memcpy((d)->litProbs, (s)->litProbs, ((size_t)0x300 * sizeof(CLzmaProb)) << (p)->lclp);
 
 void LzmaEnc_SaveState(CLzmaEncHandle p)
 {
@@ -1040,14 +1040,14 @@ Z7_NO_INLINE static void Z7_FASTCALL LenPriceEnc_UpdateTables(
         UInt32 price = b;
         do
         {
-          unsigned bit = sym & 1;
+          const unsigned bit = sym & 1;
           sym >>= 1;
           price += GET_PRICEa(probs[sym], bit);
         }
         while (sym >= 2);
 
         {
-          unsigned prob = probs[(size_t)i + (1 << (kLenNumHighBits - 1))];
+          const unsigned prob = probs[(size_t)i + (1 << (kLenNumHighBits - 1))];
           prices[(size_t)i * 2    ] = price + GET_PRICEa_0(prob);
           prices[(size_t)i * 2 + 1] = price + GET_PRICEa_1(prob);
         }
@@ -1056,7 +1056,7 @@ Z7_NO_INLINE static void Z7_FASTCALL LenPriceEnc_UpdateTables(
 
       {
         unsigned posState;
-        size_t num = (p->tableSize - kLenNumLowSymbols * 2) * sizeof(p->prices[0][0]);
+        const size_t num = (p->tableSize - kLenNumLowSymbols * 2) * sizeof(p->prices[0][0]);
         for (posState = 1; posState < numPosStates; posState++)
           memcpy(p->prices[posState] + kLenNumLowSymbols * 2, p->prices[0] + kLenNumLowSymbols * 2, num);
       }
@@ -2696,12 +2696,12 @@ static SRes LzmaEnc_Alloc(CLzmaEnc *p, UInt32 keepWindowSize, ISzAllocPtr alloc,
   #endif
 
   {
-    unsigned lclp = p->lc + p->lp;
+    const unsigned lclp = p->lc + p->lp;
     if (!p->litProbs || !p->saveState.litProbs || p->lclp != lclp)
     {
       LzmaEnc_FreeLits(p, alloc);
-      p->litProbs = (CLzmaProb *)ISzAlloc_Alloc(alloc, ((UInt32)0x300 << lclp) * sizeof(CLzmaProb));
-      p->saveState.litProbs = (CLzmaProb *)ISzAlloc_Alloc(alloc, ((UInt32)0x300 << lclp) * sizeof(CLzmaProb));
+      p->litProbs =           (CLzmaProb *)ISzAlloc_Alloc(alloc, ((size_t)0x300 * sizeof(CLzmaProb)) << lclp);
+      p->saveState.litProbs = (CLzmaProb *)ISzAlloc_Alloc(alloc, ((size_t)0x300 * sizeof(CLzmaProb)) << lclp);
       if (!p->litProbs || !p->saveState.litProbs)
       {
         LzmaEnc_FreeLits(p, alloc);
@@ -2802,8 +2802,8 @@ static void LzmaEnc_Init(CLzmaEnc *p)
   }
 
   {
-    UInt32 num = (UInt32)0x300 << (p->lp + p->lc);
-    UInt32 k;
+    const size_t num = (size_t)0x300 << (p->lp + p->lc);
+    size_t k;
     CLzmaProb *probs = p->litProbs;
     for (k = 0; k < num; k++)
       probs[k] = kProbInitValue;

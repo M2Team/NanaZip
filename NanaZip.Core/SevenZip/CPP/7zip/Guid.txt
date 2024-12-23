@@ -20,6 +20,8 @@
   10  IFolderArchiveUpdateCallback2
   11  IFolderScanProgress
   12  IFolderSetZoneIdMode
+  13  IFolderSetZoneIdFile
+  14  IFolderArchiveUpdateCallback_MoveArc
   
   20  IFileExtractCallback.h::IGetProp
   30  IFileExtractCallback.h::IFolderExtractToStreamCallback (old)

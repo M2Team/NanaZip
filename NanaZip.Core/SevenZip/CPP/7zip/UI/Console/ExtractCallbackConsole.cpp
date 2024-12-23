@@ -928,7 +928,7 @@ HRESULT CExtractCallbackConsole::ExtractResult(HRESULT result)
     if (result == E_ABORT
         || result == HRESULT_FROM_WIN32(ERROR_DISK_FULL))
       return result;
-    NumArcsWithError++; 
+    NumArcsWithError++;
     
     if (_se)
     {

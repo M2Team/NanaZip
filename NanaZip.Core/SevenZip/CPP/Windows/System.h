@@ -122,7 +122,7 @@ struct CProcessAffinity
 
 UInt32 GetNumberOfProcessors();
 
-bool GetRamSize(UInt64 &size); // returns false, if unknown ram size
+bool GetRamSize(size_t &size); // returns false, if unknown ram size
 
 unsigned long Get_File_OPEN_MAX();
 unsigned Get_File_OPEN_MAX_Reduced_for_3_tasks();

@@ -41,7 +41,26 @@ int my_chown(CFSTR path, uid_t owner, gid_t group);
 bool SetFileAttrib_PosixHighDetect(CFSTR path, DWORD attrib);
 
 
+#ifndef _WIN32
+#define PROGRESS_CONTINUE   0
+#define PROGRESS_CANCEL     1
+// #define PROGRESS_STOP       2
+// #define PROGRESS_QUIET      3
+#endif
+Z7_PURE_INTERFACES_BEGIN
+DECLARE_INTERFACE(ICopyFileProgress)
+{
+  // in: total, current: include all/processed alt streams.
+  // it returns PROGRESS_CONTINUE or PROGRESS_CANCEL.
+  virtual DWORD CopyFileProgress(UInt64 total, UInt64 current) = 0;
+};
+Z7_PURE_INTERFACES_END
+
 bool MyMoveFile(CFSTR existFileName, CFSTR newFileName);
+// (progress == NULL) is allowed
+bool MyMoveFile_with_Progress(CFSTR oldFile, CFSTR newFile,
+    ICopyFileProgress *progress);
+
 
 #ifndef UNDER_CE
 bool MyCreateHardLink(CFSTR newFileName, CFSTR existFileName);
@@ -87,7 +106,9 @@ public:
   bool Create(CFSTR pathPrefix, NIO::COutFile *outFile); // pathPrefix is not folder prefix
   bool CreateRandomInTempFolder(CFSTR namePrefix, NIO::COutFile *outFile);
   bool Remove();
-  bool MoveTo(CFSTR name, bool deleteDestBefore);
+  // bool MoveTo(CFSTR name, bool deleteDestBefore);
+  bool MoveTo(CFSTR name, bool deleteDestBefore,
+      ICopyFileProgress *progress);
 };
 
 

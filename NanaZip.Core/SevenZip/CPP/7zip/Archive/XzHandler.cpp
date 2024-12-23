@@ -967,9 +967,9 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
       || _maxBlocksSize != (size_t)_maxBlocksSize)
     return S_FALSE;
 
-  UInt64 memSize;
+  size_t memSize;
   if (!NSystem::GetRamSize(memSize))
-    memSize = (UInt64)(sizeof(size_t)) << 28;
+    memSize = (size_t)sizeof(size_t) << 28;
   {
     if (_maxBlocksSize > memSize / 4)
       return S_FALSE;

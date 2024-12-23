@@ -25,9 +25,12 @@
 #define IDM_CRC64                103
 #define IDM_SHA1                 104
 #define IDM_SHA256               105
-#define IDM_XXH64                106
-#define IDM_BLAKE2SP             107
-
+#define IDM_SHA384               106
+#define IDM_SHA512               107
+#define IDM_SHA3_256             108
+#define IDM_XXH64                120
+#define IDM_BLAKE2SP             121
+#define IDM_MD5                  122
 
 #define IDM_FILE                 500
 #define IDM_EDIT                 501
@@ -134,7 +137,7 @@
 #define IDS_COPY_TO                     6002
 #define IDS_MOVE_TO                     6003
 #define IDS_COPYING                     6004
-#define IDS_MOVING                      6005
+// #define IDS_MOVING                      6005
 #define IDS_RENAMING                    6006
 
 #define IDS_OPERATION_IS_NOT_SUPPORTED  6008

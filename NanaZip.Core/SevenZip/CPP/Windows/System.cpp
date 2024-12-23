@@ -142,9 +142,9 @@ typedef BOOL (WINAPI *Func_GlobalMemoryStatusEx)(MY_LPMEMORYSTATUSEX lpBuffer);
 #endif // !UNDER_CE
 
   
-bool GetRamSize(UInt64 &size)
+bool GetRamSize(size_t &size)
 {
-  size = (UInt64)(sizeof(size_t)) << 29;
+  size = (size_t)sizeof(size_t) << 29;
 
   #ifndef UNDER_CE
     MY_MEMORYSTATUSEX stat;
@@ -167,11 +167,23 @@ bool GetRamSize(UInt64 &size)
           "GlobalMemoryStatusEx");
       if (fn && fn(&stat))
       {
-        size = MyMin(stat.ullTotalVirtual, stat.ullTotalPhys);
+        // (MY_MEMORYSTATUSEX::ullTotalVirtual) < 4 GiB in 32-bit mode
+        size_t size2 = (size_t)0 - 1;
+        if (size2 > stat.ullTotalPhys)
+            size2 = (size_t)stat.ullTotalPhys;
+        if (size2 > stat.ullTotalVirtual)
+            size2 = (size_t)stat.ullTotalVirtual;
+        size = size2;
         return true;
       }
     #endif
   
+    // On computers with more than 4 GB of memory:
+    //   new docs  : GlobalMemoryStatus can report (-1) value to indicate an overflow.
+    //   some old docs : GlobalMemoryStatus can report (modulo 4 GiB) value.
+    //                   (for example, if 5 GB total memory, it could report 1 GB).
+    // We don't want to get (modulo 4 GiB) value.
+    // So we use GlobalMemoryStatusEx() instead.
     {
       MEMORYSTATUS stat2;
       stat2.dwLength = sizeof(stat2);
@@ -187,9 +199,11 @@ bool GetRamSize(UInt64 &size)
 // POSIX
 // #include <stdio.h>
 
-bool GetRamSize(UInt64 &size)
+bool GetRamSize(size_t &size)
 {
-  size = (UInt64)(sizeof(size_t)) << 29;
+  UInt64 size64;
+  size = (size_t)sizeof(size_t) << 29;
+  size64 = size;
 
 #if defined(__APPLE__) || defined(__DragonFly__) || \
     defined(BSD) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
@@ -215,7 +229,7 @@ bool GetRamSize(UInt64 &size)
     // we use strict check (size_sys == sizeof(val)) for returned value
     // because big-endian encoding is possible:
     if (res == 0 && size_sys == sizeof(val) && val)
-      size = val;
+      size64 = val;
     else
     {
       uint32_t val32 = 0;
@@ -223,12 +237,12 @@ bool GetRamSize(UInt64 &size)
       res = sysctl(mib, 2, &val32, &size_sys, NULL, 0);
       // printf("\n sysctl res=%d val=%llx size_sys = %d, %d\n", res, (long long int)val32, (int)size_sys, errno);
       if (res == 0 && size_sys == sizeof(val32) && val32)
-        size = val32;
+        size64 = val32;
     }
 
   #elif defined(_AIX)
     #if defined(_SC_AIX_REALMEM) // AIX
-      size = (UInt64)sysconf(_SC_AIX_REALMEM) * 1024;
+      size64 = (UInt64)sysconf(_SC_AIX_REALMEM) * 1024;
     #endif
   #elif 0 || defined(__sun)
     #if defined(_SC_PHYS_PAGES) && defined(_SC_PAGESIZE)
@@ -240,7 +254,7 @@ bool GetRamSize(UInt64 &size)
       // printf("\n_SC_PHYS_PAGES (hex) = %lx", (unsigned long)phys_pages);
       // printf("\n_SC_PAGESIZE = %lu\n", (unsigned long)page_size);
       if (phys_pages != -1 && page_size != -1)
-        size = (UInt64)(Int64)phys_pages * (UInt64)(Int64)page_size;
+        size64 = (UInt64)(Int64)phys_pages * (UInt64)(Int64)page_size;
     }
     #endif
   #elif defined(__gnu_hurd__)
@@ -253,7 +267,7 @@ bool GetRamSize(UInt64 &size)
   struct sysinfo info;
   if (::sysinfo(&info) != 0)
     return false;
-  size = (UInt64)info.mem_unit * info.totalram;
+  size64 = (UInt64)info.mem_unit * info.totalram;
   /*
   printf("\n mem_unit  = %lld", (UInt64)info.mem_unit);
   printf("\n totalram  = %lld", (UInt64)info.totalram);
@@ -262,10 +276,9 @@ bool GetRamSize(UInt64 &size)
 
   #endif
 
-  const UInt64 kLimit = (UInt64)1 << (sizeof(size_t) * 8 - 1);
-  if (size > kLimit)
-    size = kLimit;
-
+  size = (size_t)1 << (sizeof(size_t) * 8 - 1);
+  if (size > size64)
+      size = (size_t)size64;
   return true;
 }
 

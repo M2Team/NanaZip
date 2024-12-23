@@ -6,6 +6,8 @@
 #define IDS_OPENNING                    3303
 #define IDS_SCANNING                    3304
 
+#define IDS_MOVING                      6005
+
 #define IDS_CHECKSUM_CALCULATING        7500
 #define IDS_CHECKSUM_INFORMATION        7501
 #define IDS_CHECKSUM_CRC_DATA           7502

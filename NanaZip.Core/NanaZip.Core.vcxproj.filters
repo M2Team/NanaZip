@@ -998,6 +998,15 @@
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
       <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha512Opt.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha512.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\Common\Sha512Prepare.cpp">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\7zCrc.h">
@@ -1773,6 +1782,9 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\Common0.h">
       <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\Sha512.h">
+      <Filter>SevenZip\C</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

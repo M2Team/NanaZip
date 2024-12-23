@@ -13,7 +13,7 @@ namespace NCrypto {
 namespace NRar5 {
 
 const unsigned kSaltSize = 16;
-const unsigned kPswCheckSize = 8;
+const unsigned kPswCheckSize32 = 2;
 const unsigned kAesKeySize = 32;
 
 namespace NCryptoFlags
@@ -22,48 +22,47 @@ namespace NCryptoFlags
   const unsigned kUseMAC   = 1 << 1;
 }
 
-struct CKey
+struct CKeyBase
 {
-  bool _needCalc;
-
-  unsigned _numIterationsLog;
-  Byte _salt[kSaltSize];
-  CByteBuffer _password;
-  
-  Byte _key[kAesKeySize];
-  Byte _check_Calced[kPswCheckSize];
-  Byte _hashKey[SHA256_DIGEST_SIZE];
-
-  void CopyCalcedKeysFrom(const CKey &k)
-  {
-    memcpy(_key, k._key, sizeof(_key));
-    memcpy(_check_Calced, k._check_Calced, sizeof(_check_Calced));
-    memcpy(_hashKey, k._hashKey, sizeof(_hashKey));
-  }
-
-  bool IsKeyEqualTo(const CKey &key)
-  {
-    return (_numIterationsLog == key._numIterationsLog
-        && memcmp(_salt, key._salt, sizeof(_salt)) == 0
-        && _password == key._password);
-  }
-  
-  CKey();
+protected:
+  UInt32 _key32[kAesKeySize / 4];
+  UInt32 _hashKey32[SHA256_NUM_DIGEST_WORDS];
+  UInt32 _check_Calced32[kPswCheckSize32];
 
   void Wipe()
   {
-    _password.Wipe();
-    Z7_memset_0_ARRAY(_salt);
-    Z7_memset_0_ARRAY(_key);
-    Z7_memset_0_ARRAY(_check_Calced);
-    Z7_memset_0_ARRAY(_hashKey);
+    memset(this, 0, sizeof(*this));
   }
+  
+  void CopyCalcedKeysFrom(const CKeyBase &k)
+  {
+    *this = k;
+  }
+};
+
+struct CKey: public CKeyBase
+{
+  CByteBuffer _password;
+  bool _needCalc;
+  unsigned _numIterationsLog;
+  Byte _salt[kSaltSize];
+  
+  bool IsKeyEqualTo(const CKey &key)
+  {
+    return _numIterationsLog == key._numIterationsLog
+        && memcmp(_salt, key._salt, sizeof(_salt)) == 0
+        && _password == key._password;
+  }
+
+  CKey();
+  ~CKey();
+  
+  void Wipe();
 
 #ifdef Z7_CPP_IS_SUPPORTED_default
   // CKey(const CKey &) = default;
   CKey& operator =(const CKey &) = default;
 #endif
-  ~CKey() { Wipe(); }
 };
 
 
@@ -71,11 +70,11 @@ class CDecoder Z7_final:
   public CAesCbcDecoder,
   public CKey
 {
-  Byte _check[kPswCheckSize];
+  UInt32 _check32[kPswCheckSize32];
   bool _canCheck;
   UInt64 Flags;
 
-  bool IsThereCheck() const { return ((Flags & NCryptoFlags::kPswCheck) != 0); }
+  bool IsThereCheck() const { return (Flags & NCryptoFlags::kPswCheck) != 0; }
 public:
   Byte _iv[AES_BLOCK_SIZE];
   

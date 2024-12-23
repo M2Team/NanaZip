@@ -111,7 +111,8 @@ static void UpdatePswDataSha1(Byte *data)
   
   for (i = 16; i < 80; i++)
   {
-    WW(i) = rotlFixed(WW((i)-3) ^ WW((i)-8) ^ WW((i)-14) ^ WW((i)-16), 1);
+    const UInt32 t = WW((i)-3) ^ WW((i)-8) ^ WW((i)-14) ^ WW((i)-16);
+    WW(i) = rotlFixed(t, 1);
   }
   
   for (i = 0; i < SHA1_NUM_BLOCK_WORDS; i++)
@@ -128,6 +129,7 @@ void CDecoder::CalcKey()
 
   const unsigned kSaltSize = 8;
   
+  MY_ALIGN (16)
   Byte buf[kPasswordLen_Bytes_MAX + kSaltSize];
   
   if (_password.Size() != 0)
@@ -148,7 +150,7 @@ void CDecoder::CalcKey()
   MY_ALIGN (16)
   Byte digest[NSha1::kDigestSize];
   // rar reverts hash for sha.
-  const UInt32 kNumRounds = ((UInt32)1 << 18);
+  const UInt32 kNumRounds = (UInt32)1 << 18;
   UInt32 pos = 0;
   UInt32 i;
   for (i = 0; i < kNumRounds; i++)
@@ -171,8 +173,14 @@ void CDecoder::CalcKey()
       }
     }
     pos += (UInt32)rawSize;
+#if 1
+    UInt32 pswNum;
+    SetUi32a(&pswNum, i)
+    sha.Update((const Byte *)&pswNum, 3);
+#else
     Byte pswNum[3] = { (Byte)i, (Byte)(i >> 8), (Byte)(i >> 16) };
     sha.Update(pswNum, 3);
+#endif
     pos += 3;
     if (i % (kNumRounds / 16) == 0)
     {

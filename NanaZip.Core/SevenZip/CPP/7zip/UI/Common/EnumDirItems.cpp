@@ -671,7 +671,7 @@ static HRESULT EnumerateForItem(
   }
   
   #if defined(_WIN32)
-  if (needAltStreams && dirItems.ScanAltStreams)
+  if (needAltStreams && dirItems.ScanAltStreams && !fi.IsAltStream)
   {
     RINOK(EnumerateAltStreams(fi, curNode, phyParent, logParent,
         phyPrefix + fi.Name,    // with (fi.Name)
@@ -929,7 +929,7 @@ static HRESULT EnumerateDirItems(
         }
         
         #if defined(_WIN32)
-        if (needAltStreams && dirItems.ScanAltStreams)
+        if (needAltStreams && dirItems.ScanAltStreams && !fi.IsAltStream)
         {
           UStringVector pathParts;
           pathParts.Add(fs2us(fi.Name));

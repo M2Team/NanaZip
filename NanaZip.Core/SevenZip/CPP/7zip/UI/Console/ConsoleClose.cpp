@@ -16,7 +16,7 @@
 namespace NConsoleClose {
 
 unsigned g_BreakCounter = 0;
-static const unsigned kBreakAbortThreshold = 2;
+static const unsigned kBreakAbortThreshold = 3;
 
 #ifdef _WIN32
 
@@ -28,8 +28,7 @@ static BOOL WINAPI HandlerRoutine(DWORD ctrlType)
     return TRUE;
   }
 
-  g_BreakCounter++;
-  if (g_BreakCounter < kBreakAbortThreshold)
+  if (++g_BreakCounter < kBreakAbortThreshold)
     return TRUE;
   return FALSE;
   /*
@@ -47,7 +46,7 @@ static BOOL WINAPI HandlerRoutine(DWORD ctrlType)
 CCtrlHandlerSetter::CCtrlHandlerSetter()
 {
   if (!SetConsoleCtrlHandler(HandlerRoutine, TRUE))
-    throw "SetConsoleCtrlHandler fails";
+    throw 1019; // "SetConsoleCtrlHandler fails";
 }
 
 CCtrlHandlerSetter::~CCtrlHandlerSetter()
@@ -63,8 +62,7 @@ CCtrlHandlerSetter::~CCtrlHandlerSetter()
 
 static void HandlerRoutine(int)
 {
-  g_BreakCounter++;
-  if (g_BreakCounter < kBreakAbortThreshold)
+  if (++g_BreakCounter < kBreakAbortThreshold)
     return;
   exit(EXIT_FAILURE);
 }

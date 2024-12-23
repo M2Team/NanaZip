@@ -164,11 +164,13 @@ int Z7_CDECL main
     PrintError(kMemoryExceptionMessage);
     return (NExitCode::kMemoryError);
   }
+/*
   catch(const NConsoleClose::CCtrlBreakException &)
   {
     PrintError(kUserBreakMessage);
     return (NExitCode::kUserBreak);
   }
+*/
   catch(const CMessagePathException &e)
   {
     PrintError(kException_CmdLine_Error_Message);

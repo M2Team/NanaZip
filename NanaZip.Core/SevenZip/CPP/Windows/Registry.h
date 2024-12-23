@@ -14,6 +14,13 @@ LONG SetValue(HKEY parentKey, LPCTSTR keyName, LPCTSTR valueName, LPCTSTR value)
 class CKey
 {
   HKEY _object;
+
+  LONG QueryValueEx(LPCTSTR lpValueName, LPDWORD lpType,
+      LPBYTE lpData, LPDWORD lpcbData)
+  {
+    return RegQueryValueEx(_object, lpValueName, NULL, lpType, lpData, lpcbData);
+  }
+
 public:
   CKey(): _object(NULL) {}
   ~CKey() { Close(); }
@@ -22,13 +29,14 @@ public:
   void Attach(HKEY key) { _object = key; }
   HKEY Detach()
   {
-    HKEY key = _object;
+    const HKEY key = _object;
     _object = NULL;
     return key;
   }
 
   LONG Create(HKEY parentKey, LPCTSTR keyName,
-      LPTSTR keyClass = REG_NONE, DWORD options = REG_OPTION_NON_VOLATILE,
+      LPTSTR keyClass = REG_NONE,
+      DWORD options = REG_OPTION_NON_VOLATILE,
       REGSAM accessMask = KEY_ALL_ACCESS,
       LPSECURITY_ATTRIBUTES securityAttributes = NULL,
       LPDWORD disposition = NULL) throw();
@@ -40,18 +48,18 @@ public:
   LONG RecurseDeleteKey(LPCTSTR subKeyName) throw();
 
   LONG DeleteValue(LPCTSTR name) throw();
-  #ifndef _UNICODE
+#ifndef _UNICODE
   LONG DeleteValue(LPCWSTR name);
-  #endif
+#endif
 
   LONG SetValue(LPCTSTR valueName, UInt32 value) throw();
   LONG SetValue(LPCTSTR valueName, bool value) throw();
   LONG SetValue(LPCTSTR valueName, LPCTSTR value) throw();
   // LONG SetValue(LPCTSTR valueName, const CSysString &value);
-  #ifndef _UNICODE
+#ifndef _UNICODE
   LONG SetValue(LPCWSTR name, LPCWSTR value);
   // LONG SetValue(LPCWSTR name, const UString &value);
-  #endif
+#endif
 
   LONG SetValue(LPCTSTR name, const void *value, UInt32 size) throw();
 
@@ -60,21 +68,25 @@ public:
 
   LONG SetKeyValue(LPCTSTR keyName, LPCTSTR valueName, LPCTSTR value) throw();
 
-  LONG QueryValue(LPCTSTR name, UInt32 &value) throw();
-  LONG QueryValue(LPCTSTR name, bool &value) throw();
-  LONG QueryValue(LPCTSTR name, LPTSTR value, UInt32 &dataSize) throw();
+  // GetValue_[type]_IfOk():
+  //   if (return_result == ERROR_SUCCESS), (value) variable was read from registry
+  //   if (return_result != ERROR_SUCCESS), (value) variable was not changed
+  LONG GetValue_UInt32_IfOk(LPCTSTR name, UInt32 &value) throw();
+  LONG GetValue_UInt64_IfOk(LPCTSTR name, UInt64 &value) throw();
+  LONG GetValue_bool_IfOk(LPCTSTR name, bool &value) throw();
+
+  // QueryValue():
+  //   if (return_result == ERROR_SUCCESS), (value) string was read from registry
+  //   if (return_result != ERROR_SUCCESS), (value) string was cleared
   LONG QueryValue(LPCTSTR name, CSysString &value);
-
-  LONG GetValue_IfOk(LPCTSTR name, UInt32 &value) throw();
-  LONG GetValue_IfOk(LPCTSTR name, bool &value) throw();
-
-  #ifndef _UNICODE
-  LONG QueryValue(LPCWSTR name, LPWSTR value, UInt32 &dataSize);
+#ifndef _UNICODE
   LONG QueryValue(LPCWSTR name, UString &value);
-  #endif
+#endif
 
-  LONG QueryValue(LPCTSTR name, void *value, UInt32 &dataSize) throw();
-  LONG QueryValue(LPCTSTR name, CByteBuffer &value, UInt32 &dataSize);
+  // QueryValue_Binary():
+  //   if (return_result == ERROR_SUCCESS), (value) buffer was read from registry (BINARY data)
+  //   if (return_result != ERROR_SUCCESS), (value) buffer was cleared
+  LONG QueryValue_Binary(LPCTSTR name, CByteBuffer &value);
 
   LONG EnumKeys(CSysStringVector &keyNames);
 };

@@ -10,6 +10,9 @@ class CTempFiles
   void Clear();
 public:
   FStringVector Paths;
+  bool NeedDeleteFiles;
+
+  CTempFiles(): NeedDeleteFiles(true) {}
   ~CTempFiles() { Clear(); }
 };
 

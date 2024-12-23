@@ -6,7 +6,7 @@
 #include "../Common/MyString.h"
 
 
-void GetCpuName_MultiLine(AString &s);
+void GetCpuName_MultiLine(AString &s, AString &registers);
 
 void GetOsInfoText(AString &sRes);
 void GetSystemInfoText(AString &s);

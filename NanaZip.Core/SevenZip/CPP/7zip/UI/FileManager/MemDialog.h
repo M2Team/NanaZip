@@ -30,7 +30,7 @@ public:
   UString ArcPath;
   UString FilePath;
 
-  void AddInfoMessage_To_String(UString &s, UInt64 *ramSize_GB = NULL);
+  void AddInfoMessage_To_String(UString &s, const UInt32 *ramSize_GB = NULL);
   
   CMemDialog():
     NeedSave(false),

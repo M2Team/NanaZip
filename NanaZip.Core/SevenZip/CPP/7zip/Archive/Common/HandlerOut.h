@@ -22,7 +22,7 @@ protected:
     _numThreads_WasForced = false;
     #endif
 
-    UInt64 memAvail = (UInt64)(sizeof(size_t)) << 28;
+    size_t memAvail = (size_t)sizeof(size_t) << 28;
     _memAvail = memAvail;
     _memUsage_Compress = memAvail;
     _memUsage_Decompress = memAvail;
@@ -55,7 +55,7 @@ public:
   bool _memUsage_WasSet;
   UInt64 _memUsage_Compress;
   UInt64 _memUsage_Decompress;
-  UInt64 _memAvail;
+  size_t _memAvail;
 
   bool SetCommonProperty(const UString &name, const PROPVARIANT &value, HRESULT &hres);
 

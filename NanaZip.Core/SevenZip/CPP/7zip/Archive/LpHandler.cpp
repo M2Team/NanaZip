@@ -460,9 +460,11 @@ struct LpMetadataHeader
 
 static bool CheckSha256(const Byte *data, size_t size, const Byte *checksum)
 {
+  MY_ALIGN (16)
   CSha256 sha;
   Sha256_Init(&sha);
   Sha256_Update(&sha, data, size);
+  MY_ALIGN (16)
   Byte calced[32];
   Sha256_Final(&sha, calced);
   return memcmp(checksum, calced, 32) == 0;
@@ -470,6 +472,7 @@ static bool CheckSha256(const Byte *data, size_t size, const Byte *checksum)
 
 static bool CheckSha256_csOffset(Byte *data, size_t size, unsigned hashOffset)
 {
+  MY_ALIGN (4)
   Byte checksum[32];
   Byte *shaData = &data[hashOffset];
   memcpy(checksum, shaData, 32);
@@ -528,6 +531,7 @@ HRESULT CHandler::Open2(IInStream *stream)
 {
   RINOK(InStream_SeekSet(stream, LP_PARTITION_RESERVED_BYTES))
   {
+    MY_ALIGN (4)
     Byte buf[k_Geometry_Size];
     RINOK(ReadStream_FALSE(stream, buf, k_Geometry_Size))
     if (memcmp(buf, k_Signature, k_SignatureSize) != 0)

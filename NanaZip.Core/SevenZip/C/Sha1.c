@@ -1,18 +1,14 @@
 ﻿/* Sha1.c -- SHA-1 Hash
-2024-03-01 : Igor Pavlov : Public domain
+: Igor Pavlov : Public domain
 This code is based on public domain code of Steve Reid from Wei Dai's Crypto++ library. */
 
 #include "Precomp.h"
 
 #include <string.h>
 
-#include "CpuArch.h"
-#include "RotateDefs.h"
 #include "Sha1.h"
-
-#if defined(_MSC_VER) && (_MSC_VER < 1900)
-// #define USE_MY_MM
-#endif
+#include "RotateDefs.h"
+#include "CpuArch.h"
 
 #ifdef MY_CPU_X86_OR_AMD64
   #if   defined(Z7_LLVM_CLANG_VERSION)  && (Z7_LLVM_CLANG_VERSION  >= 30800) \
@@ -56,7 +52,7 @@ void Z7_FASTCALL Sha1_UpdateBlocks(UInt32 state[5], const Byte *data, size_t num
   static SHA1_FUNC_UPDATE_BLOCKS g_SHA1_FUNC_UPDATE_BLOCKS = Sha1_UpdateBlocks;
   static SHA1_FUNC_UPDATE_BLOCKS g_SHA1_FUNC_UPDATE_BLOCKS_HW;
 
-  #define SHA1_UPDATE_BLOCKS(p) p->func_UpdateBlocks
+  #define SHA1_UPDATE_BLOCKS(p) p->v.vars.func_UpdateBlocks
 #else
   #define SHA1_UPDATE_BLOCKS(p) Sha1_UpdateBlocks
 #endif
@@ -85,7 +81,7 @@ BoolInt Sha1_SetFunction(CSha1 *p, unsigned algo)
       return False;
   #endif
 
-  p->func_UpdateBlocks = func;
+  p->v.vars.func_UpdateBlocks = func;
   return True;
 }
 
@@ -225,7 +221,7 @@ BoolInt Sha1_SetFunction(CSha1 *p, unsigned algo)
 
 void Sha1_InitState(CSha1 *p)
 {
-  p->count = 0;
+  p->v.vars.count = 0;
   p->state[0] = 0x67452301;
   p->state[1] = 0xEFCDAB89;
   p->state[2] = 0x98BADCFE;
@@ -235,7 +231,7 @@ void Sha1_InitState(CSha1 *p)
 
 void Sha1_Init(CSha1 *p)
 {
-  p->func_UpdateBlocks =
+  p->v.vars.func_UpdateBlocks =
   #ifdef Z7_COMPILER_SHA1_SUPPORTED
       g_SHA1_FUNC_UPDATE_BLOCKS;
   #else
@@ -250,7 +246,7 @@ void Z7_FASTCALL Sha1_UpdateBlocks(UInt32 state[5], const Byte *data, size_t num
 {
   UInt32 a, b, c, d, e;
   UInt32 W[kNumW];
-  // if (numBlocks != 0x1264378347) return;
+
   if (numBlocks == 0)
     return;
 
@@ -283,7 +279,7 @@ void Z7_FASTCALL Sha1_UpdateBlocks(UInt32 state[5], const Byte *data, size_t num
   state[3] = d;
   state[4] = e;
 
-  data += 64;
+  data += SHA1_BLOCK_SIZE;
   }
   while (--numBlocks);
 }
@@ -295,20 +291,15 @@ void Sha1_Update(CSha1 *p, const Byte *data, size_t size)
 {
   if (size == 0)
     return;
-
   {
-    unsigned pos = (unsigned)p->count & 0x3F;
-    unsigned num;
-    
-    p->count += size;
-    
-    num = 64 - pos;
+    const unsigned pos = (unsigned)p->v.vars.count & (SHA1_BLOCK_SIZE - 1);
+    const unsigned num = SHA1_BLOCK_SIZE - pos;
+    p->v.vars.count += size;
     if (num > size)
     {
       memcpy(p->buffer + pos, data, size);
       return;
     }
-    
     if (pos != 0)
     {
       size -= num;
@@ -318,9 +309,10 @@ void Sha1_Update(CSha1 *p, const Byte *data, size_t size)
     }
   }
   {
-    size_t numBlocks = size >> 6;
+    const size_t numBlocks = size >> 6;
+    // if (numBlocks)
     SHA1_UPDATE_BLOCKS(p)(p->state, data, numBlocks);
-    size &= 0x3F;
+    size &= SHA1_BLOCK_SIZE - 1;
     if (size == 0)
       return;
     data += (numBlocks << 6);
@@ -331,42 +323,21 @@ void Sha1_Update(CSha1 *p, const Byte *data, size_t size)
 
 void Sha1_Final(CSha1 *p, Byte *digest)
 {
-  unsigned pos = (unsigned)p->count & 0x3F;
-  
-
+  unsigned pos = (unsigned)p->v.vars.count & (SHA1_BLOCK_SIZE - 1);
   p->buffer[pos++] = 0x80;
-  
-  if (pos > (64 - 8))
+  if (pos > (SHA1_BLOCK_SIZE - 4 * 2))
   {
-    while (pos != 64) { p->buffer[pos++] = 0; }
-    // memset(&p->buf.buffer[pos], 0, 64 - pos);
+    while (pos != SHA1_BLOCK_SIZE) { p->buffer[pos++] = 0; }
+    // memset(&p->buf.buffer[pos], 0, SHA1_BLOCK_SIZE - pos);
     Sha1_UpdateBlock(p);
     pos = 0;
   }
-
-  /*
-  if (pos & 3)
+  memset(&p->buffer[pos], 0, (SHA1_BLOCK_SIZE - 4 * 2) - pos);
   {
-    p->buffer[pos] = 0;
-    p->buffer[pos + 1] = 0;
-    p->buffer[pos + 2] = 0;
-    pos += 3;
-    pos &= ~3;
+    const UInt64 numBits = p->v.vars.count << 3;
+    SetBe32(p->buffer + SHA1_BLOCK_SIZE - 4 * 2, (UInt32)(numBits >> 32))
+    SetBe32(p->buffer + SHA1_BLOCK_SIZE - 4 * 1, (UInt32)(numBits))
   }
-  {
-    for (; pos < 64 - 8; pos += 4)
-      *(UInt32 *)(&p->buffer[pos]) = 0;
-  }
-  */
-
-  memset(&p->buffer[pos], 0, (64 - 8) - pos);
-
-  {
-    const UInt64 numBits = (p->count << 3);
-    SetBe32(p->buffer + 64 - 8, (UInt32)(numBits >> 32))
-    SetBe32(p->buffer + 64 - 4, (UInt32)(numBits))
-  }
-  
   Sha1_UpdateBlock(p);
 
   SetBe32(digest,      p->state[0])
@@ -375,16 +346,13 @@ void Sha1_Final(CSha1 *p, Byte *digest)
   SetBe32(digest + 12, p->state[3])
   SetBe32(digest + 16, p->state[4])
   
-
-
-
   Sha1_InitState(p);
 }
 
 
 void Sha1_PrepareBlock(const CSha1 *p, Byte *block, unsigned size)
 {
-  const UInt64 numBits = (p->count + size) << 3;
+  const UInt64 numBits = (p->v.vars.count + size) << 3;
   SetBe32(&((UInt32 *)(void *)block)[SHA1_NUM_BLOCK_WORDS - 2], (UInt32)(numBits >> 32))
   SetBe32(&((UInt32 *)(void *)block)[SHA1_NUM_BLOCK_WORDS - 1], (UInt32)(numBits))
   // SetBe32((UInt32 *)(block + size), 0x80000000);
@@ -420,57 +388,32 @@ void Sha1_GetBlockDigest(const CSha1 *p, const Byte *data, Byte *destDigest)
 
 void Sha1Prepare(void)
 {
-  #ifdef Z7_COMPILER_SHA1_SUPPORTED
+#ifdef Z7_COMPILER_SHA1_SUPPORTED
   SHA1_FUNC_UPDATE_BLOCKS f, f_hw;
   f = Sha1_UpdateBlocks;
   f_hw = NULL;
-  #ifdef MY_CPU_X86_OR_AMD64
-  #ifndef USE_MY_MM
+#ifdef MY_CPU_X86_OR_AMD64
   if (CPU_IsSupported_SHA()
       && CPU_IsSupported_SSSE3()
-      // && CPU_IsSupported_SSE41()
       )
-  #endif
-  #else
+#else
   if (CPU_IsSupported_SHA1())
-  #endif
+#endif
   {
     // printf("\n========== HW SHA1 ======== \n");
-    #if 0 && defined(MY_CPU_ARM_OR_ARM64) && defined(_MSC_VER)
+#if 1 && defined(MY_CPU_ARM_OR_ARM64) && defined(Z7_MSC_VER_ORIGINAL) && (_MSC_FULL_VER < 192930037)
     /* there was bug in MSVC compiler for ARM64 -O2 before version VS2019 16.10 (19.29.30037).
-       It generated incorrect SHA-1 code.
-       21.03 : we test sha1-hardware code at runtime initialization */
-
-      #pragma message("== SHA1 code: MSC compiler : failure-check code was inserted")
-
-      UInt32 state[5] = { 0, 1, 2, 3, 4 } ;
-      Byte data[64];
-      unsigned i;
-      for (i = 0; i < sizeof(data); i += 2)
-      {
-        data[i    ] = (Byte)(i);
-        data[i + 1] = (Byte)(i + 1);
-      }
-
-      Sha1_UpdateBlocks_HW(state, data, sizeof(data) / 64);
-    
-      if (   state[0] != 0x9acd7297
-          || state[1] != 0x4624d898
-          || state[2] != 0x0bf079f0
-          || state[3] != 0x031e61b3
-          || state[4] != 0x8323fe20)
-      {
-        // printf("\n========== SHA-1 hardware version failure ======== \n");
-      }
-      else
-    #endif
+       It generated incorrect SHA-1 code. */
+      #pragma message("== SHA1 code can work incorrectly with this compiler")
+      #error Stop_Compiling_MSC_Compiler_BUG_SHA1
+#endif
       {
         f = f_hw = Sha1_UpdateBlocks_HW;
       }
   }
   g_SHA1_FUNC_UPDATE_BLOCKS    = f;
   g_SHA1_FUNC_UPDATE_BLOCKS_HW = f_hw;
-  #endif
+#endif
 }
 
 #undef kNumW

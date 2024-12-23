@@ -109,7 +109,7 @@ DWORD_PTR Shell_GetFileInfo_SysIconIndex_for_Path_attrib_iconIndexRef(
     iconIndex = shFileInfo.iIcon;
     // we use SHGFI_USEFILEATTRIBUTES, and
     //   (res != 0) is expected for main cases, even if there are no such file.
-    //   (res == 0) for path with kSuperPrefix \\?\
+    //   (res == 0) for path with kSuperPrefix "\\?\"
     // Also SHGFI_USEFILEATTRIBUTES still returns icon inside exe.
     // So we can use SHGFI_USEFILEATTRIBUTES for any case.
     // UString temp = fs2us(path); // for debug

@@ -89,17 +89,15 @@ static bool Read7ZipOption(LPCTSTR value, bool defaultValue)
   if (key.Open(HKEY_CURRENT_USER, kCUBasePath, KEY_READ) == ERROR_SUCCESS)
   {
     bool enabled;
-    if (key.QueryValue(value, enabled) == ERROR_SUCCESS)
+    if (key.GetValue_bool_IfOk(value, enabled) == ERROR_SUCCESS)
       return enabled;
   }
   return defaultValue;
 }
 
-static void ReadOption(CKey &key, LPCTSTR value, bool &dest)
+static void ReadOption(CKey &key, LPCTSTR name, bool &dest)
 {
-  bool enabled = false;
-  if (key.QueryValue(value, enabled) == ERROR_SUCCESS)
-    dest = enabled;
+  key.GetValue_bool_IfOk(name, dest);
 }
 
 /*

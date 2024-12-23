@@ -361,6 +361,119 @@ HRESULT CUpdateCallbackConsole::WriteSfx(const wchar_t *name, UInt64 size)
 }
 
 
+
+HRESULT CUpdateCallbackConsole::MoveArc_UpdateStatus()
+{
+  if (NeedPercents())
+  {
+    AString &s = _percent.Command;
+    s = " : ";
+    s.Add_UInt64(_arcMoving_percents);
+    s.Add_Char('%');
+    const bool totalDefined = (_arcMoving_total != 0 && _arcMoving_total != (UInt64)(Int64)-1);
+    if (_arcMoving_current != 0 || totalDefined)
+    {
+      s += " : ";
+      s.Add_UInt64(_arcMoving_current >> 20);
+      s += " MiB";
+    }
+    if (totalDefined)
+    {
+      s += " / ";
+      s.Add_UInt64((_arcMoving_total + ((1 << 20) - 1)) >> 20);
+      s += " MiB";
+    }
+    s += " : temporary archive moving ...";
+    _percent.Print();
+  }
+
+  // we ignore single Ctrl-C, if (_arcMoving_updateMode) mode
+  // because we want to get good final archive instead of temp archive.
+  if (NConsoleClose::g_BreakCounter == 1 && _arcMoving_updateMode)
+    return S_OK;
+  return CheckBreak();
+}
+
+
+HRESULT CUpdateCallbackConsole::MoveArc_Start(
+    const wchar_t *srcTempPath, const wchar_t *destFinalPath,
+    UInt64 size, Int32 updateMode)
+{
+#if 0 // 1 : for debug
+  if (LogLevel > 0 && _so)
+  {
+    ClosePercents_for_so();
+    *_so << "Temporary archive moving:" << endl;
+    _tempU = srcTempPath;
+    _so->Normalize_UString_Path(_tempU);
+    _so->PrintUString(_tempU, _tempA);
+    *_so << endl;
+    _tempU = destFinalPath;
+    _so->Normalize_UString_Path(_tempU);
+    _so->PrintUString(_tempU, _tempA);
+    *_so << endl;
+  }
+#else
+  UNUSED_VAR(srcTempPath)
+  UNUSED_VAR(destFinalPath)
+#endif
+
+  _arcMoving_updateMode = updateMode;
+  _arcMoving_total = size;
+  _arcMoving_current = 0;
+  _arcMoving_percents = 0;
+  return MoveArc_UpdateStatus();
+}
+
+
+HRESULT CUpdateCallbackConsole::MoveArc_Progress(UInt64 totalSize, UInt64 currentSize)
+{
+#if 0 // 1 : for debug
+  if (_so)
+  {
+    ClosePercents_for_so();
+    *_so << totalSize << " : " << currentSize << endl;
+  }
+#endif
+
+  UInt64 percents = 0;
+  if (totalSize != 0)
+  {
+    if (totalSize < ((UInt64)1 << 57))
+      percents = currentSize * 100 / totalSize;
+    else
+      percents = currentSize / (totalSize / 100);
+  }
+
+#ifdef _WIN32
+  // Sleep(300); // for debug
+#endif
+  // totalSize = (UInt64)(Int64)-1; // for debug
+
+  if (percents == _arcMoving_percents)
+    return CheckBreak();
+  _arcMoving_current = currentSize;
+  _arcMoving_total = totalSize;
+  _arcMoving_percents = percents;
+  return MoveArc_UpdateStatus();
+}
+
+
+HRESULT CUpdateCallbackConsole::MoveArc_Finish()
+{
+  // _arcMoving_percents = 0;
+  if (NeedPercents())
+  {
+    _percent.Command.Empty();
+    _percent.Print();
+  }
+  // it can return delayed user break (E_ABORT) status,
+  // if it ignored single CTRL+C in MoveArc_Progress().
+  return CheckBreak();
+}
+
+
+
 HRESULT CUpdateCallbackConsole::DeletingAfterArchiving(const FString &path, bool /* isDir */)
 {
   if (LogLevel > 0 && _so)

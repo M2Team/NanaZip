@@ -1096,6 +1096,30 @@ typedef Z7_WIN_MAPISENDMAILW FAR *Z7_WIN_LPMAPISENDMAILW;
 #endif // _WIN32
 
 
+struct C_CopyFileProgress_to_IUpdateCallbackUI2 Z7_final:
+  public ICopyFileProgress
+{
+  IUpdateCallbackUI2 *Callback;
+  HRESULT CallbackResult;
+  // bool Disable_Break;
+
+  virtual DWORD CopyFileProgress(UInt64 total, UInt64 current) Z7_override
+  {
+    const HRESULT res = Callback->MoveArc_Progress(total, current);
+    CallbackResult = res;
+    // if (Disable_Break && res == E_ABORT) res = S_OK;
+    return res == S_OK ? PROGRESS_CONTINUE : PROGRESS_CANCEL;
+  }
+
+  C_CopyFileProgress_to_IUpdateCallbackUI2(
+      IUpdateCallbackUI2 *callback) :
+    Callback(callback),
+    CallbackResult(S_OK)
+    // , Disable_Break(false)
+    {}
+};
+
+
 HRESULT UpdateArchive(
     CCodecs *codecs,
     const CObjectVector<COpenType> &types,
@@ -1311,7 +1335,7 @@ HRESULT UpdateArchive(
       return E_NOTIMPL;
   }
 
-  bool thereIsInArchive = arcLink.IsOpen;
+  const bool thereIsInArchive = arcLink.IsOpen;
   if (!thereIsInArchive && renameMode)
     return E_FAIL;
   
@@ -1588,7 +1612,14 @@ HRESULT UpdateArchive(
   multiStreams.DisableDeletion();
   RINOK(multiStreams.Destruct())
 
-  tempFiles.Paths.Clear();
+  // here we disable deleting of temp archives.
+  // note: archive moving can fail, or it can be interrupted,
+  // if we move new temp update from another volume.
+  // And we still want to keep temp archive in that case,
+  // because we will have deleted original archive.
+  tempFiles.NeedDeleteFiles = false;
+  // tempFiles.Paths.Clear();
+
   if (createTempFile)
   {
     try
@@ -1603,16 +1634,29 @@ HRESULT UpdateArchive(
         if (!DeleteFileAlways(us2fs(arcPath)))
           return errorInfo.SetFromLastError("cannot delete the file", us2fs(arcPath));
       }
-      
-      if (!MyMoveFile(tempPath, us2fs(arcPath)))
+
+      UInt64 totalArcSize = 0;
+      {
+        NFind::CFileInfo fi;
+        if (fi.Find(tempPath))
+          totalArcSize = fi.Size;
+      }
+      RINOK(callback->MoveArc_Start(fs2us(tempPath), arcPath,
+          totalArcSize, BoolToInt(thereIsInArchive)))
+
+      C_CopyFileProgress_to_IUpdateCallbackUI2 prox(callback);
+      // if we update archive, we have removed original archive.
+      // So if we break archive moving, we will have only temporary archive.
+      // We can disable breaking here:
+      // prox.Disable_Break = thereIsInArchive;
+
+      if (!MyMoveFile_with_Progress(tempPath, us2fs(arcPath), &prox))
       {
         errorInfo.SystemError = ::GetLastError();
         errorInfo.Message = "cannot move the file";
         if (errorInfo.SystemError == ERROR_INVALID_PARAMETER)
         {
-          NFind::CFileInfo fi;
-          if (fi.Find(tempPath) &&
-              fi.Size > (UInt32)(Int32)-1)
+          if (totalArcSize > (UInt32)(Int32)-1)
           {
             // bool isFsDetected = false;
             // if (NSystem::Is_File_LimitedBy_4GB(us2fs(arcPath), isFsDetected) || !isFsDetected)
@@ -1622,10 +1666,20 @@ HRESULT UpdateArchive(
             }
           }
         }
+        // if there was no input archive, and we have operation breaking.
+        // then we can remove temporary archive, because we still have original uncompressed files.
+        if (!thereIsInArchive
+            && prox.CallbackResult == E_ABORT)
+          tempFiles.NeedDeleteFiles = true;
         errorInfo.FileNames.Add(tempPath);
         errorInfo.FileNames.Add(us2fs(arcPath));
+        RINOK(prox.CallbackResult)
         return errorInfo.Get_HRESULT_Error();
       }
+
+      // MoveArc_Finish() can return delayed user break (E_ABORT) status,
+      // if callback callee ignored interruption to finish archive creation operation.
+      RINOK(callback->MoveArc_Finish())
       
       /*
       if (attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_READONLY))

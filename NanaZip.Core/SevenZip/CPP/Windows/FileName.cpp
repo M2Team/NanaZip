@@ -278,12 +278,14 @@ bool IsAbsolutePath(const wchar_t *s) throw()
 int FindAltStreamColon(CFSTR path) throw()
 {
   unsigned i = 0;
-  if (IsDrivePath2(path))
-    i = 2;
+  if (IsSuperPath(path))
+    i = kSuperPathPrefixSize;
+  if (IsDrivePath2(path + i))
+    i += 2;
   int colonPos = -1;
   for (;; i++)
   {
-    FChar c = path[i];
+    const FChar c = path[i];
     if (c == 0)
       return colonPos;
     if (c == ':')

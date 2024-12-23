@@ -125,7 +125,7 @@ public:
 
   UInt32 Get_Lzma_Algo() const
   {
-    int i = FindProp(NCoderPropID::kAlgorithm);
+    const int i = FindProp(NCoderPropID::kAlgorithm);
     if (i >= 0)
     {
       const NWindows::NCOM::CPropVariant &val = Props[(unsigned)i].Value;
@@ -141,11 +141,11 @@ public:
     if (Get_DicSize(v))
       return v;
     const unsigned level = GetLevel();
-    const UInt32 dictSize =
-        ( level <= 3 ? ((UInt32)1 << (level * 2 + 16)) :
-        ( level <= 6 ? ((UInt32)1 << (level + 19)) :
-        ( level <= 7 ? ((UInt32)1 << 25) : ((UInt32)1 << 26)
-        )));
+    const UInt32 dictSize = level <= 4 ?
+        (UInt32)1 << (level * 2 + 16) :
+        level <= sizeof(size_t) / 2 + 4 ?
+          (UInt32)1 << (level + 20) :
+          (UInt32)1 << (sizeof(size_t) / 2 + 24);
     return dictSize;
   }
 

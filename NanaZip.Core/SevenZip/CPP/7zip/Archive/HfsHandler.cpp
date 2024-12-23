@@ -25,6 +25,9 @@
 #define Get32(p) GetBe32(p)
 #define Get64(p) GetBe64(p)
 
+#define Get16a(p) GetBe16a(p)
+#define Get32a(p) GetBe32a(p)
+
 namespace NArchive {
 namespace NHfs {
 
@@ -104,23 +107,21 @@ UInt32 CFork::Calc_NumBlocks_from_Extents() const
 {
   UInt32 num = 0;
   FOR_VECTOR (i, Extents)
-  {
     num += Extents[i].NumBlocks;
-  }
   return num;
 }
 
 bool CFork::Check_NumBlocks() const
 {
-  UInt32 num = 0;
+  UInt32 num = NumBlocks;
   FOR_VECTOR (i, Extents)
   {
-    UInt32 next = num + Extents[i].NumBlocks;
-    if (next < num)
+    const UInt32 cur = Extents[i].NumBlocks;
+    if (num < cur)
       return false;
-    num = next;
+    num -= cur;
   }
-  return num == NumBlocks;
+  return num == 0;
 }
 
 struct CIdIndexPair
@@ -175,7 +176,7 @@ static int Find_in_IdExtents(const CObjectVector<CIdExtents> &items, UInt32 id)
 
 bool CFork::Upgrade(const CObjectVector<CIdExtents> &items, UInt32 id)
 {
-  int index = Find_in_IdExtents(items, id);
+  const int index = Find_in_IdExtents(items, id);
   if (index < 0)
     return true;
   const CIdExtents &item = items[index];
@@ -188,8 +189,13 @@ bool CFork::Upgrade(const CObjectVector<CIdExtents> &items, UInt32 id)
 
 struct CVolHeader
 {
-  Byte Header[2];
-  UInt16 Version;
+  unsigned BlockSizeLog;
+  UInt32 NumFiles;
+  UInt32 NumFolders;
+  UInt32 NumBlocks;
+  UInt32 NumFreeBlocks;
+
+  bool Is_Hsfx_ver5;
   // UInt32 Attr;
   // UInt32 LastMountedVersion;
   // UInt32 JournalInfoBlock;
@@ -199,19 +205,13 @@ struct CVolHeader
   // UInt32 BackupTime;
   // UInt32 CheckedTime;
   
-  UInt32 NumFiles;
-  UInt32 NumFolders;
-  unsigned BlockSizeLog;
-  UInt32 NumBlocks;
-  UInt32 NumFreeBlocks;
-
   // UInt32 WriteCount;
   // UInt32 FinderInfo[8];
   // UInt64 VolID;
 
   UInt64 GetPhySize() const { return (UInt64)NumBlocks << BlockSizeLog; }
   UInt64 GetFreeSize() const { return (UInt64)NumFreeBlocks << BlockSizeLog; }
-  bool IsHfsX() const { return Version > 4; }
+  bool IsHfsX() const { return Is_Hsfx_ver5; }
 };
 
 inline void HfsTimeToFileTime(UInt32 hfsTime, FILETIME &ft)
@@ -463,18 +463,18 @@ public:
   bool UnsupportedFeature;
   bool ThereAreAltStreams;
   // bool CaseSensetive;
+  UInt32 MethodsMask;
   UString ResFileName;
 
   UInt64 SpecOffset;
-  UInt64 PhySize;
+  // UInt64 PhySize;
   UInt64 PhySize2;
   UInt64 ArcFileSize;
-  UInt32 MethodsMask;
 
   void Clear()
   {
     SpecOffset = 0;
-    PhySize = 0;
+    // PhySize = 0;
     PhySize2 = 0;
     ArcFileSize = 0;
     MethodsMask = 0;
@@ -596,7 +596,7 @@ HRESULT CDatabase::ReadFile(const CFork &fork, CByteBuffer &buf, IInStream *inSt
 {
   if (fork.NumBlocks >= Header.NumBlocks)
     return S_FALSE;
-  if ((ArcFileSize >> Header.BlockSizeLog) + 1 < fork.NumBlocks)
+  if (((ArcFileSize - SpecOffset) >> Header.BlockSizeLog) + 1 < fork.NumBlocks)
     return S_FALSE;
 
   const size_t totalSize = (size_t)fork.NumBlocks << Header.BlockSizeLog;
@@ -1328,28 +1328,26 @@ HRESULT CDatabase::LoadCatalog(const CFork &fork, const CObjectVector<CIdExtents
   return S_OK;
 }
 
-static const unsigned kHeaderPadSize = (1 << 10);
+static const unsigned kHeaderPadSize = 1 << 10;
 static const unsigned kMainHeaderSize = 512;
 static const unsigned kHfsHeaderSize = kHeaderPadSize + kMainHeaderSize;
+
+static const unsigned k_Signature_LE16_HFS_BD = 'B' + ((unsigned)'D' << 8);
+static const unsigned k_Signature_LE16_HPLUS  = 'H' + ((unsigned)'+' << 8);
+static const UInt32   k_Signature_LE32_HFSP_VER4 = 'H' + ((UInt32)'+' << 8) + ((UInt32)4 << 24);
+static const UInt32   k_Signature_LE32_HFSX_VER5 = 'H' + ((UInt32)'X' << 8) + ((UInt32)5 << 24);
 
 API_FUNC_static_IsArc IsArc_HFS(const Byte *p, size_t size)
 {
   if (size < kHfsHeaderSize)
     return k_IsArc_Res_NEED_MORE;
   p += kHeaderPadSize;
-  if (p[0] == 'B' && p[1] == 'D')
-  {
-    if (p[0x7C] != 'H' || p[0x7C + 1] != '+')
-      return k_IsArc_Res_NO;
-  }
-  else
-  {
-    if (p[0] != 'H' || (p[1] != '+' && p[1] != 'X'))
-      return k_IsArc_Res_NO;
-    UInt32 version = Get16(p + 2);
-    if (version < 4 || version > 5)
-      return k_IsArc_Res_NO;
-  }
+  const UInt32 sig = GetUi32(p);
+  if (sig != k_Signature_LE32_HFSP_VER4)
+  if (sig != k_Signature_LE32_HFSX_VER5)
+  if ((UInt16)sig != k_Signature_LE16_HFS_BD
+      || GetUi16(p + 0x7c) != k_Signature_LE16_HPLUS)
+    return k_IsArc_Res_NO;
   return k_IsArc_Res_YES;
 }
 }
@@ -1357,30 +1355,42 @@ API_FUNC_static_IsArc IsArc_HFS(const Byte *p, size_t size)
 HRESULT CDatabase::Open2(IInStream *inStream, IArchiveOpenCallback *progress)
 {
   Clear();
-  Byte buf[kHfsHeaderSize];
-  RINOK(ReadStream_FALSE(inStream, buf, kHfsHeaderSize))
-  {
-    for (unsigned i = 0; i < kHeaderPadSize; i++)
-      if (buf[i] != 0)
-        return S_FALSE;
-  }
-  const Byte *p = buf + kHeaderPadSize;
+  UInt32 buf32[kHfsHeaderSize / 4];
+  RINOK(ReadStream_FALSE(inStream, buf32, kHfsHeaderSize))
+  const Byte *p = (const Byte *)buf32 + kHeaderPadSize;
   CVolHeader &h = Header;
 
-  h.Header[0] = p[0];
-  h.Header[1] = p[1];
-
-  if (p[0] == 'B' && p[1] == 'D')
+  if (GetUi16a(p) == k_Signature_LE16_HFS_BD)
   {
     /*
     It's header for old HFS format.
     We don't support old HFS format, but we support
-    special HFS volume that contains embedded HFS+ volume
+    special HFS volume that contains embedded HFS+ volume.
+    HFS MDB : Master directory block
+    HFS VIB : Volume information block
+    some old images contain boot data with "LK" signature at start of buf32.
     */
-
-    if (p[0x7C] != 'H' || p[0x7C + 1] != '+')
+#if 1
+    // here we check first bytes of archive,
+    // because start data can contain signature of some another
+    // archive type that could have priority over HFS.
+    const void *buf_ptr = (const void *)buf32;
+    const unsigned sig = GetUi16a(buf_ptr);
+    if (sig != 'L' + ((unsigned)'K' << 8))
+    {
+      // some old HFS (non HFS+) files have no "LK" signature,
+      // but have non-zero data after 2 first bytes in start 1 KiB.
+      if (sig != 0)
+        return S_FALSE;
+/*
+      for (unsigned i = 0; i < kHeaderPadSize / 4; i++)
+        if (buf32[i] != 0)
+          return S_FALSE;
+*/
+    }
+#endif
+    if (GetUi16a(p + 0x7c) != k_Signature_LE16_HPLUS) // signature of embedded HFS+ volume
       return S_FALSE;
-
     /*
     h.CTime = Get32(p + 0x2);
     h.MTime = Get32(p + 0x6);
@@ -1399,80 +1409,104 @@ HRESULT CDatabase::Open2(IInStream *inStream, IArchiveOpenCallback *progress)
     h.NumFreeBlocks = Get16(p + 0x22);
     */
     
-    UInt32 blockSize = Get32(p + 0x14);
-    
-    {
-      unsigned i;
-      for (i = 9; ((UInt32)1 << i) != blockSize; i++)
-        if (i == 31)
-          return S_FALSE;
-      h.BlockSizeLog = i;
-    }
-    
-    h.NumBlocks = Get16(p + 0x12);
+    // v24.09: blockSize in old HFS image can be non-power of 2.
+    const UInt32 blockSize = Get32a(p + 0x14); // drAlBlkSiz
+    if (blockSize == 0 || (blockSize & 0x1ff))
+      return S_FALSE;
+    const unsigned numBlocks = Get16a(p + 0x12); // drNmAlBlks
+    // UInt16 drFreeBks = Get16a(p + 0x22); // number of unused allocation blocks
     /*
-    we suppose that it has the follwing layout
+    we suppose that it has the following layout:
     {
-      start block with header
-      [h.NumBlocks]
-      end block with header
+      start data with header
+      blocks[h.NumBlocks]
+      end data with header (probably size_of_footer <= blockSize).
     }
     */
-    PhySize2 = ((UInt64)h.NumBlocks + 2) << h.BlockSizeLog;
-
-    UInt32 startBlock = Get16(p + 0x7C + 2);
-    UInt32 blockCount = Get16(p + 0x7C + 4);
-    SpecOffset = (UInt64)(1 + startBlock) << h.BlockSizeLog;
-    UInt64 phy = SpecOffset + ((UInt64)blockCount << h.BlockSizeLog);
+    // PhySize2 = ((UInt64)numBlocks + 2) * blockSize;
+    const unsigned sector_of_FirstBlock = Get16a(p + 0x1c); // drAlBlSt : first allocation block in volume
+    const UInt32 startBlock = Get16a(p + 0x7c + 2);
+    const UInt32 blockCount = Get16a(p + 0x7c + 4);
+    SpecOffset = (UInt32)sector_of_FirstBlock << 9; // it's 32-bit here
+    PhySize2 = SpecOffset + (UInt64)numBlocks * blockSize;
+    SpecOffset += (UInt64)startBlock * blockSize;
+    // before v24.09: // SpecOffset = (UInt64)(1 + startBlock) * blockSize;
+    const UInt64 phy = SpecOffset + (UInt64)blockCount * blockSize;
     if (PhySize2 < phy)
-      PhySize2 = phy;
+        PhySize2 = phy;
+    UInt32 tail = 1 << 10; // at least 1 KiB tail (for footer MDB) is expected.
+    if (tail < blockSize)
+        tail = blockSize;
+    RINOK(InStream_GetSize_SeekToEnd(inStream, ArcFileSize))
+    if (ArcFileSize > PhySize2 &&
+        ArcFileSize - PhySize2 <= tail)
+    {
+      // data after blocks[h.NumBlocks] must contain another copy of MDB.
+      // In example where blockSize is not power of 2, we have
+      //   (ArcFileSize - PhySize2) < blockSize.
+      // We suppose that data after blocks[h.NumBlocks] is part of HFS archive.
+      // Maybe we should scan for footer MDB data (in last 1 KiB)?
+      PhySize2 = ArcFileSize;
+    }
     RINOK(InStream_SeekSet(inStream, SpecOffset))
-    RINOK(ReadStream_FALSE(inStream, buf, kHfsHeaderSize))
+    RINOK(ReadStream_FALSE(inStream, buf32, kHfsHeaderSize))
   }
 
-  if (p[0] != 'H' || (p[1] != '+' && p[1] != 'X'))
-    return S_FALSE;
-  h.Version = Get16(p + 2);
-  if (h.Version < 4 || h.Version > 5)
-    return S_FALSE;
-
-  // h.Attr = Get32(p + 4);
-  // h.LastMountedVersion = Get32(p + 8);
-  // h.JournalInfoBlock = Get32(p + 0xC);
-
-  h.CTime = Get32(p + 0x10);
-  h.MTime = Get32(p + 0x14);
-  // h.BackupTime = Get32(p + 0x18);
-  // h.CheckedTime = Get32(p + 0x1C);
-
-  h.NumFiles = Get32(p + 0x20);
-  h.NumFolders = Get32(p + 0x24);
-  
-  if (h.NumFolders > ((UInt32)1 << 29) ||
-      h.NumFiles > ((UInt32)1 << 30))
-    return S_FALSE;
-
-  RINOK(InStream_GetSize_SeekToEnd(inStream, ArcFileSize))
-
-  if (progress)
+  // HFS+ / HFSX volume header (starting from offset==1024):
   {
-    const UInt64 numFiles = (UInt64)h.NumFiles + h.NumFolders + 1;
-    RINOK(progress->SetTotal(&numFiles, NULL))
+    // v24.09: we use strict condition test for pair signature(Version):
+    // H+(4), HX(5):
+    const UInt32 sig = GetUi32a(p);
+    // h.Version = Get16(p + 2);
+    h.Is_Hsfx_ver5 = false;
+    if (sig != k_Signature_LE32_HFSP_VER4)
+    {
+      if (sig != k_Signature_LE32_HFSX_VER5)
+        return S_FALSE;
+      h.Is_Hsfx_ver5 = true;
+    }
   }
-
-  UInt32 blockSize = Get32(p + 0x28);
-
   {
+    const UInt32 blockSize = Get32a(p + 0x28);
     unsigned i;
     for (i = 9; ((UInt32)1 << i) != blockSize; i++)
       if (i == 31)
         return S_FALSE;
     h.BlockSizeLog = i;
   }
+#if 1
+  // HFS Plus DOCs: The first 1024 bytes are reserved for use as boot blocks
+  // v24.09: we don't check starting 1 KiB before old (HFS MDB) block ("BD" signture) .
+  //     but we still check starting 1 KiB before HFS+ / HFSX volume header.
+  // are there HFS+ / HFSX images with non-zero data in this reserved area?
+  {
+    for (unsigned i = 0; i < kHeaderPadSize / 4; i++)
+      if (buf32[i] != 0)
+        return S_FALSE;
+  }
+#endif
+  // h.Attr = Get32a(p + 4);
+  // h.LastMountedVersion = Get32a(p + 8);
+  // h.JournalInfoBlock = Get32a(p + 0xC);
+  h.CTime = Get32a(p + 0x10);
+  h.MTime = Get32a(p + 0x14);
+  // h.BackupTime = Get32a(p + 0x18);
+  // h.CheckedTime = Get32a(p + 0x1C);
+  h.NumFiles = Get32a(p + 0x20);
+  h.NumFolders = Get32a(p + 0x24);
+  if (h.NumFolders > ((UInt32)1 << 29) ||
+      h.NumFiles > ((UInt32)1 << 30))
+    return S_FALSE;
 
-  h.NumBlocks = Get32(p + 0x2C);
-  h.NumFreeBlocks = Get32(p + 0x30);
+  RINOK(InStream_GetSize_SeekToEnd(inStream, ArcFileSize))
+  if (progress)
+  {
+    const UInt64 numFiles = (UInt64)h.NumFiles + h.NumFolders + 1;
+    RINOK(progress->SetTotal(&numFiles, NULL))
+  }
 
+  h.NumBlocks = Get32a(p + 0x2C);
+  h.NumFreeBlocks = Get32a(p + 0x30);
   /*
   h.NextCalatlogNodeID = Get32(p + 0x40);
   h.WriteCount = Get32(p + 0x44);
@@ -1495,7 +1529,7 @@ HRESULT CDatabase::Open2(IInStream *inStream, IArchiveOpenCallback *progress)
     HeadersError = true;
   else
   {
-    HRESULT res = LoadExtentFile(extentsFork, inStream, overflowExtents);
+    const HRESULT res = LoadExtentFile(extentsFork, inStream, overflowExtents);
     if (res == S_FALSE)
       HeadersError = true;
     else if (res != S_OK)
@@ -1515,7 +1549,7 @@ HRESULT CDatabase::Open2(IInStream *inStream, IArchiveOpenCallback *progress)
   
   RINOK(LoadCatalog(catalogFork, overflowExtents, inStream, progress))
 
-  PhySize = Header.GetPhySize();
+  // PhySize = Header.GetPhySize();
   return S_OK;
 }
 
@@ -1591,7 +1625,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     case kpidCharacts: MethodsMaskToProp(MethodsMask, prop); break;
     case kpidPhySize:
     {
-      UInt64 v = SpecOffset + PhySize;
+      UInt64 v = SpecOffset + Header.GetPhySize(); // PhySize;
       if (v < PhySize2)
         v = PhySize2;
       prop = v;
@@ -2529,7 +2563,7 @@ HRESULT CHandler::GetForkStream(const CFork &fork, ISequentialInStream **stream)
         return S_FALSE;
     }
     CSeekExtent se;
-    se.Phy = (UInt64)e.Pos << Header.BlockSizeLog;
+    se.Phy = SpecOffset + ((UInt64)e.Pos << Header.BlockSizeLog);
     se.Virt = virt;
     virt += cur;
     rem -= cur;
@@ -2540,7 +2574,7 @@ HRESULT CHandler::GetForkStream(const CFork &fork, ISequentialInStream **stream)
     return S_FALSE;
   
   CSeekExtent se;
-  se.Phy = 0;
+  se.Phy = 0; // = SpecOffset ?
   se.Virt = virt;
   extentStream->Extents.Add(se);
   extentStream->Stream = _stream;

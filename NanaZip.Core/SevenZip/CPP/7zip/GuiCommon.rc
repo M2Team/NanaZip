@@ -115,5 +115,5 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
       _x + _xSize, _y, 8, 12  // these values are unused
 
 
-#define OPTIONS_PAGE_XC_SIZE 280
+#define OPTIONS_PAGE_XC_SIZE 300
 #define OPTIONS_PAGE_YC_SIZE 280

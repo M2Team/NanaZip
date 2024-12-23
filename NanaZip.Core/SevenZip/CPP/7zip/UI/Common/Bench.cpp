@@ -2298,6 +2298,28 @@ HRESULT CCrcInfo_Base::Generate(const Byte *data, size_t size)
 }
 
 
+#if 1
+#define HashUpdate(hf, data, size)  hf->Update(data, size)
+#else
+// for debug:
+static void HashUpdate(IHasher *hf, const void *data, UInt32 size)
+{
+  for (;;)
+  {
+    if (size == 0)
+      return;
+    UInt32 size2 = (size * 0x85EBCA87) % size / 8;
+    // UInt32 size2 = size / 2;
+    if (size2 == 0)
+      size2 = 1;
+    hf->Update(data, size2);
+    data = (const void *)((const Byte *)data + size2);
+    size -= size2;
+  }
+}
+#endif
+
+
 HRESULT CCrcInfo_Base::CrcProcess(UInt64 numIterations,
     const UInt32 *checkSum, IHasher *hf,
     IBenchPrintCallback *callback)
@@ -2328,7 +2350,7 @@ HRESULT CCrcInfo_Base::CrcProcess(UInt64 numIterations,
       const size_t rem = size - pos;
       const UInt32 kStep = ((UInt32)1 << 31);
       const UInt32 curSize = (rem < kStep) ? (UInt32)rem : kStep;
-      hf->Update(buf + pos, curSize);
+      HashUpdate(hf, buf + pos, curSize);
       pos += curSize;
     }
     while (pos != size);
@@ -2742,14 +2764,20 @@ static const CBenchHash g_Hash[] =
   {  2,   128 *ARM_CRC_MUL, 0x21e207bb, "CRC32:32" },
   {  2,    64 *ARM_CRC_MUL, 0x21e207bb, "CRC32:64" },
   { 10,   256, 0x41b901d1, "CRC64" },
-  { 10,    64, 0x43eac94f, "XXH64" },
-  
-  { 10, 5100,       0x7913ba03, "SHA256:1" },
-  {  2, CMPLX((32 * 4 + 1) * 4 + 4), 0x7913ba03, "SHA256:2" },
-  
-  { 10, 2340,       0xff769021, "SHA1:1" },
+  {  5,    64, 0x43eac94f, "XXH64" },
+  {  2,  2340, 0x3398a904, "MD5" },
+  { 10,  2340,                       0xff769021, "SHA1:1" },
   {  2, CMPLX((20 * 6 + 1) * 4 + 4), 0xff769021, "SHA1:2" },
-  
+  { 10,  5100,                       0x7913ba03, "SHA256:1" },
+  {  2, CMPLX((32 * 4 + 1) * 4 + 4), 0x7913ba03, "SHA256:2" },
+  {  5,  3200,                       0xe7aeb394, "SHA512:1" },
+  {  2, CMPLX((40 * 4 + 1) * 4 + 4), 0xe7aeb394, "SHA512:2" },
+  // { 10, 3428,       0x1cc99b18, "SHAKE128" },
+  // { 10, 4235,       0x74eaddc3, "SHAKE256" },
+  // { 10, 4000,       0xdf3e6863, "SHA3-224" },
+  {  5, 4200,       0xcecac10d, "SHA3-256" },
+  // { 10, 5538,       0x4e5d9163, "SHA3-384" },
+  // { 10, 8000,       0x96a58289, "SHA3-512" },
   {  2,  4096, 0x85189d02, "BLAKE2sp:1" },
   {  2,  1024, 0x85189d02, "BLAKE2sp:2" }, // sse2-way4-fast
   {  2,   512, 0x85189d02, "BLAKE2sp:3" }  // avx2-way8-fast
@@ -3687,7 +3715,7 @@ HRESULT Bench(
     return E_FAIL;
 
   UInt32 numCPUs = 1;
-  UInt64 ramSize = (UInt64)(sizeof(size_t)) << 29;
+  size_t ramSize = (size_t)sizeof(size_t) << 29;
 
   NSystem::CProcessAffinity threadsInfo;
   threadsInfo.InitST();
@@ -4580,6 +4608,8 @@ HRESULT Bench(
 
   if (!dictIsDefined && !onlyHashBench)
   {
+    // we use dicSizeLog and dicSizeLog_Main for data size.
+    // also we use it to reduce dictionary size of LZMA encoder via NCoderPropID::kReduceSize.
     const unsigned dicSizeLog_Main = (totalBenchMode ? 24 : 25);
     unsigned dicSizeLog = dicSizeLog_Main;
     
