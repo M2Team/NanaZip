@@ -10,12 +10,20 @@
 
 #include "Sha512Wrapper.h"
 
+#include <cstring>
+
 BoolInt Sha512_SetFunction(
     CSha512* p,
     unsigned algo)
 {
-    UNREFERENCED_PARAMETER(p);
     UNREFERENCED_PARAMETER(algo);
+
+    if (p)
+    {
+        // Workaround for using the uninitialized memory.
+        std::memset(p, 0, sizeof(CSha512));
+    }
+
     // Only return true because it's a wrapper to K7Pal.
     return True;
 }

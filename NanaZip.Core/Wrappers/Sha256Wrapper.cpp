@@ -10,12 +10,20 @@
 
 #include "Sha256Wrapper.h"
 
+#include <cstring>
+
 BoolInt Sha256_SetFunction(
     CSha256* p,
     unsigned algo)
 {
-    UNREFERENCED_PARAMETER(p);
     UNREFERENCED_PARAMETER(algo);
+
+    if (p)
+    {
+        // Workaround for using the uninitialized memory.
+        std::memset(p, 0, sizeof(CSha256));
+    }
+
     // Only return true because it's a wrapper to K7Pal.
     return True;
 }
