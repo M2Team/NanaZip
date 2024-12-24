@@ -88,6 +88,16 @@ namespace NanaZip::Codecs::Hash
         return new BCryptProvider(BCRYPT_MD5_ALGORITHM);
     }
 
+    IHasher* CreateSha1()
+    {
+        return new BCryptProvider(BCRYPT_SHA1_ALGORITHM);
+    }
+
+    IHasher* CreateSha256()
+    {
+        return new BCryptProvider(BCRYPT_SHA256_ALGORITHM);
+    }
+
     IHasher* CreateSha384()
     {
         return new BCryptProvider(BCRYPT_SHA384_ALGORITHM);

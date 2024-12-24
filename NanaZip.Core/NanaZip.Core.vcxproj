@@ -291,8 +291,6 @@
     <ClCompile Include="SevenZip\CPP\Common\MyXml.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha1Prepare.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\Sha1Reg.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\Sha256Reg.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />

@@ -413,12 +413,6 @@
     <ClCompile Include="SevenZip\CPP\Common\MyXml.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\Sha1Reg.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\Sha256Reg.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>

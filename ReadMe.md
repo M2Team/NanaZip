@@ -61,7 +61,7 @@ Kenji Mouri
   HAS-160, RIPEMD-160, SHA-224, SHA3-224, SHA3-256, SHA3-384, SHA3-512, 
   Snefru-128, Snefru-256, Tiger, Tiger2, BTIH, TTH, Whirlpool), xxHash
   (XXH3_64bits, XXH3_128bits), GmSSL (SM3), and Windows CNG API (MD2, MD4, MD5,
-  SHA-384, SHA-512, ED2K).
+  SHA-1, SHA-256, SHA-384, SHA-512, ED2K).
 - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP 
   attacks.
 - Mark all x86 and x64 target binaries as compatible with Control-flow 
