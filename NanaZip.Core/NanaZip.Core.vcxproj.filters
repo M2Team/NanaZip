@@ -76,6 +76,9 @@
     <Filter Include="Extensions\ZSCodecs">
       <UniqueIdentifier>{c1700c83-d324-448c-99e2-b2cb2b51d3ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Wrappers">
+      <UniqueIdentifier>{7054b707-7fa9-4e3a-bc77-e5cc37eb9200}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm">
@@ -998,14 +1001,8 @@
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
       <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\C\Sha512Opt.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\C\Sha512.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\Sha512Prepare.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
+    <ClCompile Include="Wrappers\Sha512Wrapper.cpp">
+      <Filter>Wrappers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1785,6 +1782,9 @@
     </ClInclude>
     <ClInclude Include="SevenZip\C\Sha512.h">
       <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrappers\Sha512Wrapper.h">
+      <Filter>Wrappers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

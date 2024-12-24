@@ -23,6 +23,7 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Project="..\K7Pal\K7Pal.props" />
   <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.props" />
   <ItemDefinitionGroup>
     <ClCompile>
@@ -295,7 +296,6 @@
     <ClCompile Include="SevenZip\CPP\Common\Sha1Reg.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha256Reg.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\Sha512Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
@@ -345,8 +345,6 @@
     <ClCompile Include="SevenZip\C\Ppmd8Enc.c" />
     <ClCompile Include="SevenZip\C\Sha1.c" />
     <ClCompile Include="SevenZip\C\Sha256.c" />
-    <ClCompile Include="SevenZip\C\Sha512.c" />
-    <ClCompile Include="SevenZip\C\Sha512Opt.c" />
     <ClCompile Include="SevenZip\C\Sort.c" />
     <ClCompile Include="SevenZip\C\SwapBytes.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
@@ -357,6 +355,7 @@
     <ClCompile Include="SevenZip\C\XzEnc.c" />
     <ClCompile Include="SevenZip\C\XzIn.c" />
     <ClCompile Include="SevenZip\C\ZstdDec.c" />
+    <ClCompile Include="Wrappers\Sha512Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\BrotliDecoder.h" />
@@ -618,6 +617,7 @@
     <ClInclude Include="SevenZip\C\XzCrc64.h" />
     <ClInclude Include="SevenZip\C\XzEnc.h" />
     <ClInclude Include="SevenZip\C\ZstdDec.h" />
+    <ClInclude Include="Wrappers\Sha512Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
