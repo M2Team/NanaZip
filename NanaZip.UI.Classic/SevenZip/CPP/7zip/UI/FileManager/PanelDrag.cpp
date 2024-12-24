@@ -18,10 +18,13 @@
 #include "../Common/CompressCall.h"
 #include "../Common/ExtractingFilePath.h"
 
+#include "../Explorer/CopyHook.h"
+
 #include "MessagesDialog.h"
 
 #include "App.h"
 #include "EnumFormatEtc.h"
+#include "RegistryUtils.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -333,6 +336,10 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
   FString dirPrefix;
   CTempDir tempDirectory;
 
+  CFmSettings st;
+  st.Load();
+  FString fakeDirPath;
+
   bool isFSFolder = IsFSFolder();
   if (isFSFolder)
     dirPrefix = us2fs(GetFsPath());
@@ -346,6 +353,16 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
     dirPrefix = tempDirectory.GetPath();
     // dirPrefix2 = dirPrefix;
     NFile::NName::NormalizeDirPathPrefix(dirPrefix);
+    if (st.FastDragDrop) {
+      fakeDirPath = dirPrefix;
+      fakeDirPath += FTEXT(COPYHOOK_UUID) FTEXT(".");
+      fakeDirPath.Add_UInt64(reinterpret_cast<UInt64>(g_App._window.operator HWND()));
+      if (!CreateDir(fakeDirPath))
+      {
+          MessageBox_Error(L"Can't create fake folder");
+          return;
+      }
+    }
   }
 
   CDataObject *dataObjectSpec = new CDataObject;
@@ -357,35 +374,40 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
     // names variable is     USED for drag and drop from NanaZip to Explorer or to NanaZip archive folder.
     // names variable is NOT USED for drag and drop from NanaZip to NanaZip File System folder.
 
-    FOR_VECTOR (i, indices)
-    {
-      UInt32 index = indices[i];
-      UString s;
-      if (isFSFolder)
-        s = GetItemRelPath(index);
-      else
+    if (!isFSFolder && st.FastDragDrop) {
+      names.Add(fs2us(fakeDirPath));
+    }
+    else {
+      FOR_VECTOR(i, indices)
       {
-        s = GetItemName(index);
-        /*
-        // We use (keepAndReplaceEmptyPrefixes = true) in CAgentFolder::Extract
-        // So the following code is not required.
-        // Maybe we also can change IFolder interface and send some flag also.
-
-        if (s.IsEmpty())
+        UInt32 index = indices[i];
+        UString s;
+        if (isFSFolder)
+          s = GetItemRelPath(index);
+        else
         {
-          // Correct_FsFile_Name("") returns "_".
-          // If extracting code removes empty folder prefixes from path (as it was in old version),
-          // Explorer can't find "_" folder in temp folder.
-          // We can ask Explorer to copy parent temp folder "7zE" instead.
+          s = GetItemName(index);
+          /*
+          // We use (keepAndReplaceEmptyPrefixes = true) in CAgentFolder::Extract
+          // So the following code is not required.
+          // Maybe we also can change IFolder interface and send some flag also.
 
-          names.Clear();
-          names.Add(dirPrefix2);
-          break;
+          if (s.IsEmpty())
+          {
+            // Correct_FsFile_Name("") returns "_".
+            // If extracting code removes empty folder prefixes from path (as it was in old version),
+            // Explorer can't find "_" folder in temp folder.
+            // We can ask Explorer to copy parent temp folder "7zE" instead.
+
+            names.Clear();
+            names.Add(dirPrefix2);
+            break;
+          }
+          */
+          s = Get_Correct_FsFile_Name(s);
         }
-        */
-        s = Get_Correct_FsFile_Name(s);
+        names.Add(fs2us(dirPrefix) + s);
       }
-      names.Add(fs2us(dirPrefix) + s);
     }
     if (!CopyNamesToHGlobal(dataObjectSpec->hGlobal, names))
       return;
@@ -393,7 +415,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
 
   CDropSource *dropSourceSpec = new CDropSource;
   CMyComPtr<IDropSource> dropSource = dropSourceSpec;
-  dropSourceSpec->NeedExtract = !isFSFolder;
+  dropSourceSpec->NeedExtract = !st.FastDragDrop && !isFSFolder;
   dropSourceSpec->Panel = this;
   dropSourceSpec->Indices = indices;
   dropSourceSpec->Folder = fs2us(dirPrefix);
