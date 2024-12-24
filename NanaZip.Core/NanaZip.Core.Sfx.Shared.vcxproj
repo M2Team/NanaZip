@@ -9,6 +9,7 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Project="..\K7Pal\K7PalStatic.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
@@ -34,10 +35,8 @@
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     <None Include="SevenZip\ASM\x86\AesOpt.asm" />
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
-    <None Include="SevenZip\ASM\x86\Sha256Opt.asm" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\AesOpt.c" />
-    <None Include="SevenZip\C\Sha256Opt.c" />
     <None Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +86,6 @@
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
@@ -116,10 +114,10 @@
     <ClCompile Include="SevenZip\C\MtDec.c" />
     <ClCompile Include="SevenZip\C\Ppmd7.c" />
     <ClCompile Include="SevenZip\C\Ppmd7Dec.c" />
-    <ClCompile Include="SevenZip\C\Sha256.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
     <ClCompile Include="SevenZip\C\Xxh64.c" />
     <ClCompile Include="SevenZip\C\ZstdDec.c" />
+    <ClCompile Include="Wrappers\Sha256Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.h" />
@@ -228,6 +226,7 @@
     <ClInclude Include="SevenZip\C\Threads.h" />
     <ClInclude Include="SevenZip\C\Xxh64.h" />
     <ClInclude Include="SevenZip\C\ZstdDec.h" />
+    <ClInclude Include="Wrappers\Sha256Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
@@ -247,18 +246,6 @@
   <Target Name="NanaZipCoreLzmaDecHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
     <ItemGroup Condition="'$(Platform)'=='x64'">
       <MASM Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
-    </ItemGroup>
-  </Target>
-  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
-      <MASM Include="SevenZip\ASM\x86\Sha256Opt.asm" />
-    </ItemGroup>
-  </Target>
-  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
-      <ClCompile Include="SevenZip\C\Sha256Opt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-      </ClCompile>
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">

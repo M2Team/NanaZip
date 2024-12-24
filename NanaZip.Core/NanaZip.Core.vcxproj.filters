@@ -99,9 +99,6 @@
     <None Include="SevenZip\ASM\x86\Sha1Opt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
-    <None Include="SevenZip\ASM\x86\Sha256Opt.asm">
-      <Filter>SevenZip\ASM\x86</Filter>
-    </None>
     <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
@@ -112,9 +109,6 @@
       <Filter>SevenZip\C</Filter>
     </None>
     <None Include="SevenZip\C\AesOpt.c">
-      <Filter>SevenZip\C</Filter>
-    </None>
-    <None Include="SevenZip\C\Sha256Opt.c">
       <Filter>SevenZip\C</Filter>
     </None>
     <None Include="SevenZip\C\LzFindOpt.c">
@@ -905,12 +899,6 @@
     <ClCompile Include="SevenZip\C\Aes.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\C\Sha256.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\C\Sha1.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
@@ -1002,6 +990,9 @@
       <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="Wrappers\Sha512Wrapper.cpp">
+      <Filter>Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrappers\Sha256Wrapper.cpp">
       <Filter>Wrappers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1784,6 +1775,9 @@
       <Filter>SevenZip\C</Filter>
     </ClInclude>
     <ClInclude Include="Wrappers\Sha512Wrapper.h">
+      <Filter>Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrappers\Sha256Wrapper.h">
       <Filter>Wrappers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -53,12 +53,10 @@
     <None Include="SevenZip\ASM\x86\LzFindOpt.asm" />
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
     <None Include="SevenZip\ASM\x86\Sha1Opt.asm" />
-    <None Include="SevenZip\ASM\x86\Sha256Opt.asm" />
     <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm" />
     <None Include="SevenZip\CPP\7zip\Archive\Archive2.def" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\AesOpt.c" />
-    <None Include="SevenZip\C\Sha256Opt.c" />
     <None Include="SevenZip\C\XzCrc64Opt.c" />
     <None Include="SevenZip\C\LzFindOpt.c" />
     <None Include="SevenZip\C\Sha1Opt.c" />
@@ -294,7 +292,6 @@
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha1Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha1Reg.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha256Reg.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
@@ -344,7 +341,6 @@
     <ClCompile Include="SevenZip\C\Ppmd8Dec.c" />
     <ClCompile Include="SevenZip\C\Ppmd8Enc.c" />
     <ClCompile Include="SevenZip\C\Sha1.c" />
-    <ClCompile Include="SevenZip\C\Sha256.c" />
     <ClCompile Include="SevenZip\C\Sort.c" />
     <ClCompile Include="SevenZip\C\SwapBytes.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
@@ -355,6 +351,7 @@
     <ClCompile Include="SevenZip\C\XzEnc.c" />
     <ClCompile Include="SevenZip\C\XzIn.c" />
     <ClCompile Include="SevenZip\C\ZstdDec.c" />
+    <ClCompile Include="Wrappers\Sha256Wrapper.cpp" />
     <ClCompile Include="Wrappers\Sha512Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -617,6 +614,7 @@
     <ClInclude Include="SevenZip\C\XzCrc64.h" />
     <ClInclude Include="SevenZip\C\XzEnc.h" />
     <ClInclude Include="SevenZip\C\ZstdDec.h" />
+    <ClInclude Include="Wrappers\Sha256Wrapper.h" />
     <ClInclude Include="Wrappers\Sha512Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
@@ -649,18 +647,6 @@
   <Target Name="NanaZipCoreLzmaDecHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
     <ItemGroup Condition="'$(Platform)'=='x64'">
       <MASM Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
-    </ItemGroup>
-  </Target>
-  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
-      <MASM Include="SevenZip\ASM\x86\Sha256Opt.asm" />
-    </ItemGroup>
-  </Target>
-  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
-      <ClCompile Include="SevenZip\C\Sha256Opt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
-      </ClCompile>
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrc64HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">

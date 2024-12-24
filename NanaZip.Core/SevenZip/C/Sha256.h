@@ -1,4 +1,8 @@
-﻿/* Sha256.h -- SHA-256 Hash
+﻿// **************** NanaZip Modification Start ****************
+// Redirect to K7Pal Wrapper
+#include "../../Wrappers/Sha256Wrapper.h"
+// **************** NanaZip Modification End ****************
+/* Sha256.h -- SHA-256 Hash
 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SHA256_H
