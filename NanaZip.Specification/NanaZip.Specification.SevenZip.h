@@ -24,11 +24,61 @@ const UINT16 SevenZipGuidData3Decoder = 0x2790;
 const UINT16 SevenZipGuidData3Encoder = 0x2791;
 const UINT16 SevenZipGuidData3Hasher = 0x2792;
 
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000000050000")
+IProgress : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE SetTotal(
+        _In_ UINT64 Total) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE SetCompleted(
+        _In_ const PUINT64 CompleteValue) = 0;
+};
+
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000300010000")
 ISequentialInStream : public IUnknown
 {
 public:
 
+    /**
+     * @brief Reads data from the sequential input stream.
+     * @param Data The buffer for data.
+     * @param Size The size of the buffer.
+     * @param ProcessedSize The processed size. It must not be nullptr.
+     * @return If the function succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     * @remark The caller must call Read() in a loop if the caller needs to read
+     *         exact amount of data.
+     *         The callee should accept (ProcessedSize == nullptr) for
+     *         compatibility reasons.
+     *         The callee need to process the Size parameter as follows:
+     *         if (Size == 0)
+     *         {
+     *             // Returns S_OK and (*ProcessedSize) is set to 0.
+     *         }
+     *         else
+     *         {
+     *             // If partial read is allowed, the following conditions must
+     *             // be met:
+     *             // - (*ProcessedSize <= AvailableSize)
+     *             // - (*ProcessedSize <= Size)
+     *             // Where (AvailableSize) is the size of the remaining bytes
+     *             // in the stream.
+     *             // If (AvailableSize) is not zero, the function must read at
+     *             // least one byte and (*ProcessedSize > 0).
+     *         }
+     *         If the seek pointer before Read() call was changed to a position
+     *         past the end of the stream, the function returns S_OK and
+     *         (*ProcessedSize) is set to 0.
+     *         If the function returns error code, then (*ProcessedSize) is size
+     *         of data written to (Data) buffer which can be data before error
+     *         or data with errors. The recommended way for callee to work with
+     *         reading errors:
+     *           - Write part of data before error to (Data) buffer and return
+     *             S_OK.
+     *           - Return error code for further calls of Read().
+     */
     virtual HRESULT STDMETHODCALLTYPE Read(
         _Out_opt_ LPVOID Data,
         _In_ UINT32 Size,
@@ -40,10 +90,94 @@ ISequentialOutStream : public IUnknown
 {
 public:
 
+    /**
+     * @brief Writes data to the sequential output stream.
+     * @param Data The buffer for data.
+     * @param Size The size of the buffer.
+     * @param ProcessedSize The processed size. It must not be nullptr.
+     * @return If the function succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     * @remark The caller must call Write() in a loop if the caller needs to
+     *         write exact amount of data.
+     *         The callee should accept (ProcessedSize == nullptr) for
+     *         compatibility reasons.
+     *         The callee need to process the Size parameter as follows:
+     *         if (Size != 0)
+     *         {
+     *             // If partial write is allowed, the following conditions must
+     *             // be met:
+     *             // - (*ProcessedSize <= Size)
+     *             // But this function must write at least 1 byte and
+     *             // (*ProcessedSize > 0).
+     *         }
+     *         If the function returns error code, then (*ProcessedSize) is size
+     *         of data written from (Data) buffer.
+     */
     virtual HRESULT STDMETHODCALLTYPE Write(
         _In_opt_ LPCVOID Data,
         _In_ UINT32 Size,
         _Out_ PUINT32 ProcessedSize) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000300030000")
+IInStream : public ISequentialInStream
+{
+public:
+
+    /**
+     * @brief Seeks to the specified position in the input stream.
+     * @param Offset The offset relative to the origin.
+     * @param SeekOrigin The origin of the seek operation.
+     * @param NewPosition The new position.
+     * @return If the function succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     * @remark If the caller seek to the position before the beginning of the
+     *         stream, the callee is recommended to return the error code
+     *         HRESULT_FROM_WIN32(ERROR_NEGATIVE_SEEK), but the error code
+     *         STG_E_INVALIDFUNCTION is also acceptable.
+     *         It is allowed to seek past the end of the stream.
+     *         If Seek() returns error, then the value of (*NewPosition) is
+     *         undefined.
+     */
+    virtual HRESULT STDMETHODCALLTYPE Seek(
+        _In_ INT64 Offset,
+        _In_ UINT32 SeekOrigin,
+        _Out_ PUINT64 NewPosition) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000300040000")
+IOutStream : public ISequentialOutStream
+{
+public:
+
+    /**
+     * @brief Seeks to the specified position in the input stream.
+     * @param Offset The offset relative to the origin.
+     * @param SeekOrigin The origin of the seek operation.
+     * @param NewPosition The new position.
+     * @return If the function succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     * @remark If the caller seek to the position before the beginning of the
+     *         stream, the callee is recommended to return the error code
+     *         HRESULT_FROM_WIN32(ERROR_NEGATIVE_SEEK), but the error code
+     *         STG_E_INVALIDFUNCTION is also acceptable.
+     *         It is allowed to seek past the end of the stream.
+     *         If Seek() returns error, then the value of (*NewPosition) is
+     *         undefined.
+     */
+    virtual HRESULT STDMETHODCALLTYPE Seek(
+        _In_ INT64 Offset,
+        _In_ UINT32 SeekOrigin,
+        _Out_ PUINT64 NewPosition) = 0;
+
+    /**
+     * @brief Sets the size of the output stream.
+     * @param NewSize The new size of the output stream.
+     * @return If the function succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
+    virtual HRESULT STDMETHODCALLTYPE SetSize(
+        _In_ UINT64 NewSize) = 0;
 };
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400040000")
@@ -51,9 +185,17 @@ ICompressProgressInfo : public IUnknown
 {
 public:
 
-     virtual HRESULT STDMETHODCALLTYPE SetRatioInfo(
-         _In_opt_ const PUINT64 InSize,
-         _In_opt_ const PUINT64 OutSize) = 0;
+    /**
+     * @brief Reports the progress for the compression or decompression.
+     * @param InSize The size of the processed input data.
+     * @param OutSize The size of the processed output data.
+     * @return If the function succeeds, it returns S_OK. If the user canceled
+     *         the operation, it returns E_ABORT. Otherwise, it returns an
+     *         HRESULT error code.
+     */
+    virtual HRESULT STDMETHODCALLTYPE SetRatioInfo(
+        _In_opt_ const PUINT64 InSize,
+        _In_opt_ const PUINT64 OutSize) = 0;
 };
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000400050000")
@@ -179,6 +321,7 @@ MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C00000")
 IHasher : public IUnknown
 {
 public:
+
     virtual void STDMETHODCALLTYPE Init() = 0;
 
     virtual void STDMETHODCALLTYPE Update(
@@ -203,6 +346,7 @@ MIDL_INTERFACE("23170F69-40C1-278A-0000-000400C10000")
 IHashers : public IUnknown
 {
 public:
+
     virtual UINT32 STDMETHODCALLTYPE GetNumHashers() = 0;
 
     virtual HRESULT STDMETHODCALLTYPE GetHasherProp(
@@ -220,7 +364,117 @@ EXTERN_C HRESULT WINAPI GetHashers(
 
 // ISetProperties
 
-// IInArchiveGetStream
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000600100000")
+IArchiveOpenCallback : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE SetTotal(
+        _In_ const PUINT64 Files,
+        _In_ const PUINT64 Bytes) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE SetCompleted(
+        _In_ const PUINT64 Files,
+        _In_ const PUINT64 Bytes) = 0;
+};
+
+typedef enum _SEVENZIP_EXTRACT_ASK_MODE
+{
+    SevenZipExtractAskModeExtract = 0,
+    SevenZipExtractAskModeTest = 1,
+    SevenZipExtractAskModeSkip = 2,
+    SevenZipExtractAskModeReadExternal = 3,
+} SEVENZIP_EXTRACT_ASK_MODE, *PSEVENZIP_EXTRACT_ASK_MODE;
+
+typedef enum _SEVENZIP_EXTRACT_OPERATION_RESULT
+{
+    SevenZipExtractOperationResultSuccess = 0,
+    SevenZipExtractOperationResultUnsupportedMethod = 1,
+    SevenZipExtractOperationResultDataError = 2,
+    SevenZipExtractOperationResultCRCError = 3,
+    SevenZipExtractOperationResultUnavailable = 4,
+    SevenZipExtractOperationResultUnexpectedEnd = 5,
+    SevenZipExtractOperationResultDataAfterEnd = 6,
+    SevenZipExtractOperationResultIsNotArchive = 7,
+    SevenZipExtractOperationResultHeadersError = 8,
+    SevenZipExtractOperationResultWrongPassword = 9,
+} SEVENZIP_EXTRACT_OPERATION_RESULT, *PSEVENZIP_EXTRACT_OPERATION_RESULT;
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000600200000")
+IArchiveExtractCallback : public IProgress
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE GetStream(
+        _In_ UINT32 Index,
+        _Out_ ISequentialOutStream** Stream,
+        _In_ INT32 AskExtractMode) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE PrepareOperation(
+        _In_ INT32 AskExtractMode) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE SetOperationResult(
+        _In_ INT32 OperationResult) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000600400000")
+IInArchiveGetStream : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE GetStream(
+        _In_ UINT32 Index,
+        _Out_ ISequentialInStream** Stream) = 0;
+};
+
+MIDL_INTERFACE("23170F69-40C1-278A-0000-000600600000")
+IInArchive : public IUnknown
+{
+public:
+
+    virtual HRESULT STDMETHODCALLTYPE Open(
+        _In_ IInStream* Stream,
+        _In_opt_ const PUINT64 MaxCheckStartPosition,
+        _In_opt_ IArchiveOpenCallback* OpenCallback) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE Close() = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE GetNumberOfItems(
+        _Out_ PUINT32 NumItems) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE GetProperty(
+        _In_ UINT32 Index,
+        _In_ PROPID PropID,
+        _Inout_ LPPROPVARIANT Value) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE Extract(
+        _In_ const PUINT32 Indices,
+        _In_ UINT32 NumItems,
+        _In_ BOOL TestMode,
+        _In_ IArchiveExtractCallback* ExtractCallback) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE GetArchiveProperty(
+        _In_ PROPID PropID,
+        _Inout_ LPPROPVARIANT Value) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE GetNumberOfProperties(
+        _Out_ PUINT32 NumProps) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE GetPropertyInfo(
+        _In_ UINT32 Index,
+        _Out_ BSTR* Name,
+        _Out_ PROPID* PropID,
+        _Out_ VARTYPE* varType) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE GetNumberOfArchiveProperties(
+        _Out_ PUINT32 NumProps) = 0;
+
+    virtual HRESULT STDMETHODCALLTYPE GetArchivePropertyInfo(
+        _In_ UINT32 Index,
+        _Out_ BSTR* Name,
+        _Out_ PROPID* PropID,
+        _Out_ VARTYPE* VarType) = 0;
+};
 
 // IInArchive
 
