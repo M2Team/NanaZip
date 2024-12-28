@@ -2,6 +2,29 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 5.0 Preview 1 (5.0.1215.0)**
+
+- Introduce NanaZip Platform Abstraction Layer (K7Pal) for wrapping the platform
+  specific infrastructures. (https://github.com/M2Team/NanaZip/tree/main/K7Pal)
+  (Work In Progress)
+  - Provide hash functions interfaces implemented with Windows CNG API. NanaZip
+    uses these hash functions from K7Pal:
+    - MD2
+    - MD4
+    - MD5
+    - SHA-1
+    - SHA-256
+    - SHA-384
+    - SHA-512
+    - ED2K (Implemented as the K7Pal MD4 wrapper in NanaZip.Codecs.)
+- Synchronize the 7-Zip mainline implementations to 24.09.
+  (https://github.com/ip7z/7zip/releases/tag/24.09) (Thanks to Igor Pavlov.
+  Noticed by FadeMind and peashooter2.)
+- Finally move NanaZip console version to NanaZip.Core project.
+- Don't fail ModernSHBrowseForFolderW when DefaultFolder cannot be set.
+  (Contributed by dinhngtu.)
+- Update Mile.Windows.UniCrt to 1.1.278.
+
 **NanaZip 5.0 Preview 0 (5.0.1188.0)**
 
 - This release includes all the improvements from NanaZip 3.1 (3.1.1080.0)
