@@ -14,7 +14,7 @@
     <MileProjectOriginalFilename>NanaZip.Codecs.dll</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileProjectVersion>5.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
-    <MileProjectVersionTag>Preview 0</MileProjectVersionTag>
+    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
