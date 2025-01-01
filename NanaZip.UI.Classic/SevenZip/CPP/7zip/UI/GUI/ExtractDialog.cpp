@@ -188,18 +188,30 @@ bool CExtractDialog::OnInit()
 
   #ifndef _SFX
 
+  // **************** NanaZip Modification Start ****************
+  UString pathName;
+  SplitPathToParts_Smart(DirPath, pathPrefix, pathName);
+  if (pathPrefix.IsEmpty())
+    pathPrefix = pathName;
+  else
+    _pathName.SetText(pathName);
+
+  //if (_info.SplitDest.Val)
+  //{
+  //  CheckButton(IDX_EXTRACT_NAME_ENABLE, true);
+  //  UString pathName;
+  //  SplitPathToParts_Smart(DirPath, pathPrefix, pathName);
+  //  if (pathPrefix.IsEmpty())
+  //    pathPrefix = pathName;
+  //  else
+  //    _pathName.SetText(pathName);
+  //}
+
   if (_info.SplitDest.Val)
-  {
     CheckButton(IDX_EXTRACT_NAME_ENABLE, true);
-    UString pathName;
-    SplitPathToParts_Smart(DirPath, pathPrefix, pathName);
-    if (pathPrefix.IsEmpty())
-      pathPrefix = pathName;
-    else
-      _pathName.SetText(pathName);
-  }
   else
     ShowItem_Bool(IDE_EXTRACT_NAME, false);
+  // **************** NanaZip Modification End ****************
 
   #endif
 
