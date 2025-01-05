@@ -25,6 +25,7 @@
 
 #include "../FileManager/StringUtils.h"
 #include "../FileManager/MyWindowsNew.h"
+#include "../FileManager/RegistryUtils.h"
 
 #include "BenchmarkDialog.h"
 #include "ExtractGUI.h"
@@ -299,6 +300,9 @@ static int Main2()
       if (result != E_ABORT && messageWasDisplayed)
         return NExitCode::kFatalError;
       throw CSystemException(result);
+    }
+    else if (WantOpenFolderAfterExtract()) {
+        ShellExecuteW(NULL, NULL, eo.OutputDir, NULL, NULL, SW_SHOWNORMAL);
     }
     if (!ecs->IsOK())
       return NExitCode::kFatalError;

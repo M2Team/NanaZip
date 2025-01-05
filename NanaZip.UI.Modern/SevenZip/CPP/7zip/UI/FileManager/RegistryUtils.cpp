@@ -30,6 +30,7 @@ static LPCTSTR const kFullRow = TEXT("FullRow");
 static LPCTSTR const kShowGrid = TEXT("ShowGrid");
 static LPCTSTR const kSingleClick = TEXT("SingleClick");
 static LPCTSTR const kAlternativeSelection = TEXT("AlternativeSelection");
+static LPCTSTR const kOpenFolderAfterExtract = TEXT("OpenFolderAfterExtract");
 // static LPCTSTR const kUnderline = TEXT("Underline");
 
 static LPCTSTR const kShowSystemMenu = TEXT("ShowSystemMenu");
@@ -152,6 +153,7 @@ void CFmSettings::Save() const
   SaveOption(kCopyHistory, CopyHistory);
   SaveOption(kFolderHistory, FolderHistory);
   SaveOption(kLowercaseHashes, LowercaseHashes);
+  SaveOption(kOpenFolderAfterExtract, OpenFolderAfterExtract);
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
@@ -170,6 +172,7 @@ void CFmSettings::Load()
   CopyHistory = false;
   FolderHistory = false;
   LowercaseHashes = false;
+  OpenFolderAfterExtract = false;
   // Underline = false;
 
   ShowSystemMenu = false;
@@ -188,6 +191,7 @@ void CFmSettings::Load()
     ReadOption(key, kCopyHistory, CopyHistory);
     ReadOption(key, kFolderHistory, FolderHistory);
     ReadOption(key, kLowercaseHashes, LowercaseHashes);
+    ReadOption(key, kOpenFolderAfterExtract, OpenFolderAfterExtract);
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );
@@ -206,6 +210,7 @@ bool WantPathHistory() { return ReadFMOption(kPathHistory); }
 bool WantCopyHistory() { return ReadFMOption(kCopyHistory); }
 bool WantFolderHistory() { return ReadFMOption(kFolderHistory); }
 bool WantLowercaseHashes() { return ReadFMOption(kLowercaseHashes); }
+bool WantOpenFolderAfterExtract() { return ReadFMOption(kOpenFolderAfterExtract); }
 
 static CSysString GetFlatViewName(UInt32 panelIndex)
 {
