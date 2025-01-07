@@ -54,6 +54,12 @@ void Sha256_InitState(
 void Sha256_Init(
     CSha256* p)
 {
+    if (p)
+    {
+        // Workaround for using the uninitialized memory.
+        std::memset(p, 0, sizeof(CSha256));
+    }
+
     ::Sha256_InitState(p);
 }
 

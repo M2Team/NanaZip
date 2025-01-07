@@ -67,6 +67,12 @@ void Sha512_Init(
     CSha512* p,
     unsigned digestSize)
 {
+    if (p)
+    {
+        // Workaround for using the uninitialized memory.
+        std::memset(p, 0, sizeof(CSha512));
+    }
+
     ::Sha512_InitState(p, digestSize);
 }
 
