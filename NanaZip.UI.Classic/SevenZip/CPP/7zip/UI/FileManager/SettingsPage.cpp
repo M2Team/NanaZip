@@ -33,10 +33,10 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_WANT_PATH_HISTORY,
   IDX_SETTINGS_WANT_COPY_HISTORY,
   IDX_SETTINGS_WANT_FOLDER_HISTORY,
-  // **************** NanaZip Modification Start ****************
   IDX_SETTINGS_LOWERCASE_HASHES,
-  // **************** NanaZip Modification End ****************
+  // **************** NanaZip Modification Start ****************
   IDX_SETTINGS_OPEN_FOLDER_AFTER
+  // **************** NanaZip Modification End ****************
   // , IDT_COMPRESS_MEMORY
 };
 
