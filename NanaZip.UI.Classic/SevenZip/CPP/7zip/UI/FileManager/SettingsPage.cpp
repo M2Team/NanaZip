@@ -128,6 +128,7 @@ bool CSettingsPage::OnInit()
   // CheckButton(IDX_SETTINGS_UNDERLINE, st.Underline);
 
   CheckButton(IDX_SETTINGS_SHOW_SYSTEM_MENU, st.ShowSystemMenu);
+  CheckButton(IDX_SETTINGS_FAST_DRAG_DROP, st.FastDragDrop);
 
   if (IsLargePageSupported())
     CheckButton(IDX_SETTINGS_LARGE_PAGES, ReadLockMemoryEnable());
@@ -227,6 +228,7 @@ LONG CSettingsPage::OnApply()
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
 
     st.ShowSystemMenu = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SYSTEM_MENU);
+    st.FastDragDrop = IsButtonCheckedBool(IDX_SETTINGS_FAST_DRAG_DROP);
 
     st.Save();
     _wasChanged = false;
@@ -346,6 +348,7 @@ bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SETTINGS_WANT_COPY_HISTORY:
     case IDX_SETTINGS_WANT_FOLDER_HISTORY:
     case IDX_SETTINGS_LOWERCASE_HASHES:
+    case IDX_SETTINGS_FAST_DRAG_DROP:
       _wasChanged = true;
       break;
 

@@ -33,6 +33,7 @@ struct CFmSettings
   // bool Underline;
 
   bool ShowSystemMenu;
+  bool FastDragDrop;
 
   void Save() const;
   void Load();
