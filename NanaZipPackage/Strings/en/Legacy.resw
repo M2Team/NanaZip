@@ -653,6 +653,9 @@
   </data>
   <data name="Resource2513" xml:space="preserve">
     <value>Use Lowercase Hashes</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Open folder after extracting</value>
   </data>  
   <data name="Resource2900" xml:space="preserve">
     <value>About NanaZip</value>
@@ -1350,4 +1353,5 @@ Are you sure you want to split archive into such volumes?</value>
   <data name="Resource12201" xml:space="preserve">
     <value>Open Windows Settings app to associate files with NanaZip</value>
   </data>
+
 </root>

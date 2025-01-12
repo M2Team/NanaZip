@@ -25,6 +25,7 @@
 
 #include "../FileManager/StringUtils.h"
 #include "../FileManager/MyWindowsNew.h"
+#include "../FileManager/RegistryUtils.h"
 
 #include "BenchmarkDialog.h"
 #include "ExtractGUI.h"
@@ -300,8 +301,14 @@ static int Main2()
         return NExitCode::kFatalError;
       throw CSystemException(result);
     }
+    // **************** NanaZip Modification Start ****************
+    else if (WantOpenFolderAfterExtract()) {
+        ShellExecuteW(NULL, NULL, eo.OutputDir, NULL, NULL, SW_SHOWNORMAL);
+    }
+    // **************** NanaZip Modification End ****************
     if (!ecs->IsOK())
       return NExitCode::kFatalError;
+    
   }
   else if (options.Command.IsFromUpdateGroup())
   {

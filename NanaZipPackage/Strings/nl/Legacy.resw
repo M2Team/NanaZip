@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;Gebruik grote geheugenpagina's</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Map openen na uitpakken</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Over NanaZip</value>
   </data>

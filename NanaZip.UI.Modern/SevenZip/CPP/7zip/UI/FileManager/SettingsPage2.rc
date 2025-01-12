@@ -8,16 +8,30 @@ BEGIN
   CONTROL  "Show &grid lines",      IDX_SETTINGS_SHOW_GRID,            MY_CHECKBOX, m, 50, xc, 10
   CONTROL  "&Single-click to open an item", IDX_SETTINGS_SINGLE_CLICK, MY_CHECKBOX, m, 64, xc, 10
   CONTROL  "&Alternative selection mode", IDX_SETTINGS_ALTERNATIVE_SELECTION, MY_CHECKBOX, m, 78, xc, 10
+  // **************** NanaZip Modification Start ****************
+	
+  // CONTROL  "Show system &menu",     IDX_SETTINGS_SHOW_SYSTEM_MENU,     MY_CHECKBOX, m, 100, xc, 10
+  // CONTROL  "Use &large memory pages", IDX_SETTINGS_LARGE_PAGES,        MY_CHECKBOX, m, 122, xc, 10
 
-  CONTROL  "Show system &menu",     IDX_SETTINGS_SHOW_SYSTEM_MENU,     MY_CHECKBOX, m, 100, xc, 10
+  // CONTROL  "Want ArcHistory",    IDX_SETTINGS_WANT_ARC_HISTORY,       MY_CHECKBOX, m, 140, xc, 10
+  // CONTROL  "Want PathHistory",   IDX_SETTINGS_WANT_PATH_HISTORY,      MY_CHECKBOX, m, 154, xc, 10
+  // CONTROL  "Want CopyHistory",   IDX_SETTINGS_WANT_COPY_HISTORY,      MY_CHECKBOX, m, 168, xc, 10
+  // CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 182, xc, 10
+  // CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 196, xc, 10
+	
+  
+  CONTROL  "&Open folder after extract", IDX_SETTINGS_OPEN_FOLDER_AFTER, MY_CHECKBOX, m, 92, xc, 10
 
-  CONTROL  "Use &large memory pages", IDX_SETTINGS_LARGE_PAGES,        MY_CHECKBOX, m, 122, xc, 10
+  CONTROL  "Show system &menu",     IDX_SETTINGS_SHOW_SYSTEM_MENU,     MY_CHECKBOX, m, 114, xc, 10
 
-  CONTROL  "Want ArcHistory",    IDX_SETTINGS_WANT_ARC_HISTORY,       MY_CHECKBOX, m, 140, xc, 10
-  CONTROL  "Want PathHistory",   IDX_SETTINGS_WANT_PATH_HISTORY,      MY_CHECKBOX, m, 154, xc, 10
-  CONTROL  "Want CopyHistory",   IDX_SETTINGS_WANT_COPY_HISTORY,      MY_CHECKBOX, m, 168, xc, 10
-  CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 182, xc, 10
-  CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 196, xc, 10
+  CONTROL  "Use &large memory pages", IDX_SETTINGS_LARGE_PAGES,        MY_CHECKBOX, m, 136, xc, 10
+
+  CONTROL  "Want ArcHistory",    IDX_SETTINGS_WANT_ARC_HISTORY,       MY_CHECKBOX, m, 154, xc, 10
+  CONTROL  "Want PathHistory",   IDX_SETTINGS_WANT_PATH_HISTORY,      MY_CHECKBOX, m, 168, xc, 10
+  CONTROL  "Want CopyHistory",   IDX_SETTINGS_WANT_COPY_HISTORY,      MY_CHECKBOX, m, 182, xc, 10
+  CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 196, xc, 10
+  CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 220, xc, 10
+  // **************** NanaZip Modification End ****************
 
   // LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY, m, 140, xc, 8
   // COMBOBOX  IDC_SETTINGS_MEM, m , 152, g1xs, yc - 152, MY_COMBO
