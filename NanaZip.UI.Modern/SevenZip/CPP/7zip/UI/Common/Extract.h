@@ -17,6 +17,9 @@
 struct CExtractOptionsBase
 {
   CBoolPair ElimDup;
+// **************** NanaZip Modification Start ****************
+  CBoolPair SmartExtract;
+// **************** NanaZip Modification End ****************
 
   bool ExcludeDirItems;
   bool ExcludeFileItems;

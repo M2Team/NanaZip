@@ -471,10 +471,6 @@
   <data name="Resource2901" xml:space="preserve">
     <value>Mae NanaZip yn meddalwedd am ddim. Ond, gallwch cefnogi yNanaZip</value>
   </data>
-  <data name="Resource2902" xml:space="preserve">
-    <value>
-datblygiad o NanaZip trwy cofrestru.</value>
-  </data>
   <data name="Resource3001" xml:space="preserve">
     <value>Mae na ddim wallau</value>
   </data>

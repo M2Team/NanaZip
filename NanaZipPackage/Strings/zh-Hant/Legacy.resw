@@ -312,6 +312,9 @@
   <data name="Resource1018" xml:space="preserve">
     <value>字典大小</value>
   </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
   <data name="Resource1020" xml:space="preserve">
     <value>類型</value>
   </data>
@@ -591,6 +594,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>壓縮成 {0} 並郵寄</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>解壓縮至此(自動)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>資料夾</value>
   </data>
@@ -653,6 +659,9 @@
   </data>
   <data name="Resource2513" xml:space="preserve">
     <value>使用小寫字母驗證值</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>解壓縮後開啟目標資料夾</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>關於 NanaZip</value>

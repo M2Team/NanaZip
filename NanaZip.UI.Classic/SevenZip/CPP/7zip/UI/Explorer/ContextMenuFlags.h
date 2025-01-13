@@ -8,6 +8,9 @@ namespace NContextMenuFlags
   const UInt32 kExtract = 1 << 0;
   const UInt32 kExtractHere = 1 << 1;
   const UInt32 kExtractTo = 1 << 2;
+// **************** NanaZip Modification Start ****************
+  const UInt32 kExtractHereSmart = 1 << 3;
+// **************** NanaZip Modification End ****************
 
   const UInt32 kTest = 1 << 4;
   const UInt32 kOpen = 1 << 5;

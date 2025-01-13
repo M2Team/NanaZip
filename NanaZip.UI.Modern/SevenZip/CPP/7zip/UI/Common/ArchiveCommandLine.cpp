@@ -154,6 +154,9 @@ enum Enum
   kUseSlashMark,
   kDisableWildcardParsing,
   kElimDup,
+// **************** NanaZip Modification Start ****************
+  kSmartExtract,
+// **************** NanaZip Modification End ****************
   kFullPathMode,
 
   kHardLinks,
@@ -302,6 +305,9 @@ static const CSwitchForm kSwitchForms[] =
   { "spm", SWFRM_STRING_SINGL(0) },
   { "spd", SWFRM_SIMPLE },
   { "spe", SWFRM_MINUS },
+// **************** NanaZip Modification Start ****************
+  { "sps", SWFRM_MINUS },
+// **************** NanaZip Modification End ****************
   { "spf", SWFRM_STRING_SINGL(0) },
 
   { "snh", SWFRM_MINUS },
@@ -1255,6 +1261,14 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
     options.ExtractOptions.ElimDup.Def = true;
     options.ExtractOptions.ElimDup.Val = !parser[NKey::kElimDup].WithMinus;
   }
+
+  // **************** NanaZip Modification Start ****************
+  if (parser[NKey::kSmartExtract].ThereIs)
+  {
+    options.ExtractOptions.SmartExtract.Def = true;
+    options.ExtractOptions.SmartExtract.Val = !parser[NKey::kSmartExtract].WithMinus;
+  }
+  // **************** NanaZip Modification End ****************
 
   NWildcard::ECensorPathMode censorPathMode = NWildcard::k_RelatPath;
   bool fullPathMode = parser[NKey::kFullPathMode].ThereIs;

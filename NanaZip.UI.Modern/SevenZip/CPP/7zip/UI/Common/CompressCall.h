@@ -15,7 +15,10 @@ HRESULT CompressFiles(
     const UStringVector &names,
     bool email, bool showDialog, bool waitFinish);
 
-void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone);
+// **************** NanaZip Modification Start ****************
+// void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone);
+void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone, bool smartExtract = false);
+// **************** NanaZip Modification End ****************
 void TestArchives(const UStringVector &arcPaths, bool hashMode = false);
 
 void CalcChecksum(const UStringVector &paths,

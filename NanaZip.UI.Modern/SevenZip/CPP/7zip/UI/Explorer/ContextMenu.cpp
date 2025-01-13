@@ -214,6 +214,9 @@ static const CContextMenuCommand g_Commands[] =
   CMD_REC( kOpen,        "Open",        IDS_CONTEXT_OPEN),
   CMD_REC( kExtract,     "Extract",     IDS_CONTEXT_EXTRACT),
   CMD_REC( kExtractHere, "ExtractHere", IDS_CONTEXT_EXTRACT_HERE),
+  // **************** NanaZip Modification Start ****************
+  CMD_REC( kExtractHereSmart, "ExtractHereSmart", IDS_CONTEXT_EXTRACT_HERE_SMART),
+  // **************** NanaZip Modification End ****************
   CMD_REC( kExtractTo,   "ExtractTo",   IDS_CONTEXT_EXTRACT_TO),
   CMD_REC( kTest,        "Test",        IDS_CONTEXT_TEST),
   CMD_REC( kCompress,           "Compress",           IDS_CONTEXT_COMPRESS),
@@ -753,6 +756,17 @@ STDMETHODIMP CZipContextMenu::QueryContextMenu(HMENU hMenu, UINT indexMenu,
           MyInsertMenu(popupMenu, subIndex++, currentCommandID++, mainString, bitmap);
         }
 
+        // **************** NanaZip Modification Start ****************
+        if ((contextMenuFlags & NContextMenuFlags::kExtractHereSmart) != 0)
+        {
+          // Extract Here
+          CCommandMapItem cmi;
+          cmi.Folder = baseFolder;
+          AddCommand(kExtractHereSmart, mainString, cmi);
+          MyInsertMenu(popupMenu, subIndex++, currentCommandID++, mainString, bitmap);
+        }
+        // **************** NanaZip Modification End ****************
+
         if ((contextMenuFlags & NContextMenuFlags::kExtractTo) != 0)
         {
           // Extract To
@@ -1179,15 +1193,19 @@ HRESULT CZipContextMenu::InvokeCommandCommon(const CCommandMapItem &cmi)
       }
       case kExtract:
       case kExtractHere:
+      // **************** NanaZip Modification Start ****************
+      case kExtractHereSmart:
       case kExtractTo:
       {
         ExtractArchives(_fileNames, cmi.Folder,
             (cmdID == kExtract), // showDialog
             (cmdID == kExtractTo) && _elimDup.Val, // elimDup
-            _writeZone
+            _writeZone,
+            (cmdID == kExtractHereSmart)
             );
         break;
       }
+      // **************** NanaZip Modification End ****************
       case kTest:
       {
         TestArchives(_fileNames);

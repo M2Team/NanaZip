@@ -312,6 +312,9 @@
   <data name="Resource1018" xml:space="preserve">
     <value>字典大小</value>
   </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
   <data name="Resource1020" xml:space="preserve">
     <value>类型</value>
   </data>
@@ -591,6 +594,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>压缩 {0} 并邮寄</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>提取到当前位置(智能)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>文件夹</value>
   </data>
@@ -653,6 +659,9 @@
   </data>
   <data name="Resource2513" xml:space="preserve">
     <value>使用小写校验值</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>解压后打开目标文件夹</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>关于 NanaZip</value>

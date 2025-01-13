@@ -180,6 +180,7 @@ namespace NanaZip::ShellExtension
 
             Extract,
             ExtractHere,
+            ExtractHereSmart,
             ExtractTo,
 
             Compress,
@@ -442,6 +443,7 @@ namespace NanaZip::ShellExtension
             }
             case CommandID::Extract:
             case CommandID::ExtractHere:
+            case CommandID::ExtractHereSmart:
             case CommandID::ExtractTo:
             {
                 if (!NeedExtract)
@@ -461,7 +463,8 @@ namespace NanaZip::ShellExtension
                     (this->m_CommandID == CommandID::Extract),
                     ((this->m_CommandID == CommandID::ExtractTo)
                     && this->m_ElimDup.Val),
-                    this->m_WriteZone);
+                    this->m_WriteZone,
+                    (this->m_CommandID == CommandID::ExtractHereSmart));
 
                 break;
             }
@@ -761,6 +764,20 @@ namespace NanaZip::ShellExtension
                                 TranslatedString.Ptr(),
                                 TranslatedString.Len()),
                             CommandID::ExtractHere,
+                            ContextMenuElimDup,
+                            ContextMenuWriteZone));
+                }
+
+                if (ContextMenuFlags & NContextMenuFlags::kExtractHereSmart)
+                {
+                    UString TranslatedString;
+                    LangString(IDS_CONTEXT_EXTRACT_HERE_SMART, TranslatedString);
+                    this->m_SubCommands.push_back(
+                        winrt::make<ExplorerCommandBase>(
+                            std::wstring(
+                                TranslatedString.Ptr(),
+                                TranslatedString.Len()),
+                            CommandID::ExtractHereSmart,
                             ContextMenuElimDup,
                             ContextMenuWriteZone));
                 }
