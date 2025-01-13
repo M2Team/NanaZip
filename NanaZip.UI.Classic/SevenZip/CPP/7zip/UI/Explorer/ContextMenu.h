@@ -38,6 +38,9 @@ public:
     kOpen,
     kExtract,
     kExtractHere,
+    // **************** NanaZip Modification Start ****************
+    kExtractHereSmart,
+    // **************** NanaZip Modification End ****************
     kExtractTo,
     kTest,
     kCompress,

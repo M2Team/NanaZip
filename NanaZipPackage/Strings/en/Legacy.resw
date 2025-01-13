@@ -591,6 +591,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Compress to {0} and email</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Extract Here (Smart)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Folders</value>
   </data>
@@ -656,7 +659,7 @@
   </data>
   <data name="Resource2514" xml:space="preserve">
     <value>Open folder after extracting</value>
-  </data>  
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>About NanaZip</value>
   </data>

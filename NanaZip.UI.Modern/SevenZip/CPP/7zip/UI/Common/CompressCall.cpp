@@ -334,7 +334,10 @@ static void ExtractGroupCommand(const UStringVector &arcPaths, UString &params, 
     ErrorMessageHRESULT(result);
 }
 
-void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone)
+// **************** NanaZip Modification Start ****************
+// void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone);
+void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone, bool smartExtract)
+// **************** NanaZip Modification End ****************
 {
   MY_TRY_BEGIN
   UString params ('x');
@@ -345,6 +348,10 @@ void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bo
   }
   if (elimDup)
     params += " -spe";
+  // **************** NanaZip Modification Start ****************
+  if (smartExtract)
+    params += " -sps";
+  // **************** NanaZip Modification End ****************
   if (writeZone != (UInt32)(Int32)-1)
   {
     params += " -snz";

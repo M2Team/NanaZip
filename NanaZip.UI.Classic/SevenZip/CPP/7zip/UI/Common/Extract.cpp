@@ -157,6 +157,29 @@ static HRESULT DecompressArchive(
       realIndices.Add(i);
     }
 
+    // **************** NanaZip Modification Start ****************
+    if (options.SmartExtract.Val)
+    {
+      UInt32 firstLevelCount = 0;
+      for (UInt32 i = 0; i < numItems; i++)
+      {
+        RINOK(arc.GetItem(i, item));
+        const UString &path =
+          #ifdef SUPPORT_ALT_STREAMS
+            item.MainPath;
+          #else
+            item.Path;
+          #endif
+        if (path.Find(L'/') == -1 && path.Find(L'\\') == -1)
+          firstLevelCount++;
+        if (firstLevelCount > 1)
+          break;
+      }
+      if (firstLevelCount > 1)
+        outDir += replaceName;
+    }
+    // **************** NanaZip Modification End ****************
+
     if (realIndices.Size() == 0)
     {
       callback->ThereAreNoFiles();

@@ -9,5 +9,8 @@
 #define IDS_CONTEXT_COMPRESS_TO         2328
 #define IDS_CONTEXT_COMPRESS_EMAIL      2329
 #define IDS_CONTEXT_COMPRESS_TO_EMAIL   2330
+// **************** NanaZip Modification Start ****************
+#define IDS_CONTEXT_EXTRACT_HERE_SMART  2331
+// **************** NanaZip Modification End ****************
 
 #define IDB_MENU_LOGO  190
