@@ -452,7 +452,7 @@ namespace NanaZip::ShellExtension
                 }
 
                 std::wstring Folder = BaseFolder;
-                if (this->m_CommandID != CommandID::ExtractHere)
+                if (this->m_CommandID != CommandID::ExtractHere && this->m_CommandID != CommandID::ExtractHereSmart)
                 {
                     Folder += SpecFolder;
                 }
