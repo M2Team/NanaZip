@@ -481,6 +481,8 @@ namespace winrt::NanaZip::Modern::implementation
                 return;
             }
 
+            AllowSetForegroundWindow(GetProcessId(ProcessInformation.hProcess));
+
             ::CloseHandle(ProcessInformation.hThread);
             ::WaitForSingleObjectEx(ProcessInformation.hProcess, INFINITE, FALSE);
             ::CloseHandle(ProcessInformation.hProcess);
