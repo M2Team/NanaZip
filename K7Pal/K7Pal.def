@@ -8,3 +8,4 @@ K7PalHashDestroy
 K7PalHashUpdate
 K7PalHashFinal
 K7PalHashGetSize
+K7PalHashDuplicate

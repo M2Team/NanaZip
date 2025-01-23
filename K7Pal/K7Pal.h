@@ -42,4 +42,8 @@ EXTERN_C HRESULT WINAPI K7PalHashGetSize(
     _In_ K7_PAL_HASH_HANDLE HashHandle,
     _Out_ PUINT32 HashSize);
 
+EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
+    _In_ K7_PAL_HASH_HANDLE SourceHashHandle,
+    _Out_ PK7_PAL_HASH_HANDLE DestinationHashHandle);
+
 #endif // !K7_PAL

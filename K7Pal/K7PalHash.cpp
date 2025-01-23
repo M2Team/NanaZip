@@ -341,3 +341,126 @@ EXTERN_C HRESULT WINAPI K7PalHashGetSize(
     *HashSize = Context->HashSize;
     return S_OK;
 }
+
+EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
+    _In_ K7_PAL_HASH_HANDLE SourceHashHandle,
+    _Out_ PK7_PAL_HASH_HANDLE DestinationHashHandle)
+{
+    if (!DestinationHashHandle)
+    {
+        return E_INVALIDARG;
+    }
+    *DestinationHashHandle = nullptr;
+
+    if (!SourceHashHandle)
+    {
+        return E_INVALIDARG;
+    }
+    PK7_PAL_HASH_CONTEXT SourceContext =
+        ::K7PalHashInternalGetContextFromHandle(SourceHashHandle);
+
+    bool Result = false;
+
+    do
+    {
+        PK7_PAL_HASH_CONTEXT Context = reinterpret_cast<PK7_PAL_HASH_CONTEXT>(
+            ::MileAllocateMemory(sizeof(K7_PAL_HASH_CONTEXT)));
+        if (!Context)
+        {
+            break;
+        }
+        *DestinationHashHandle = reinterpret_cast<K7_PAL_HASH_HANDLE>(Context);
+        Context->ContextSize = sizeof(K7_PAL_HASH_CONTEXT);
+
+        SIZE_T AlgorithmIdentifierSize =
+            sizeof(wchar_t) * (std::wcslen(
+                SourceContext->AlgorithmIdentifier) + 1);
+        Context->AlgorithmIdentifier = reinterpret_cast<LPWSTR>(
+            ::MileAllocateMemory(AlgorithmIdentifierSize));
+        if (!Context->AlgorithmIdentifier)
+        {
+            break;
+        }
+        std::memcpy(
+            Context->AlgorithmIdentifier,
+            SourceContext->AlgorithmIdentifier,
+            AlgorithmIdentifierSize);
+
+        if (SourceContext->SecretBuffer)
+        {
+            Context->SecretBuffer = ::MileAllocateMemory(
+                SourceContext->SecretSize);
+            if (!Context->SecretBuffer)
+            {
+                break;
+            }
+            std::memcpy(
+                Context->SecretBuffer,
+                SourceContext->SecretBuffer,
+                SourceContext->SecretSize);
+            Context->SecretSize = SourceContext->SecretSize;
+        }
+
+        if (!BCRYPT_SUCCESS(::BCryptOpenAlgorithmProvider(
+            &Context->AlgorithmHandle,
+            Context->AlgorithmIdentifier,
+            nullptr,
+            Context->SecretBuffer ? BCRYPT_ALG_HANDLE_HMAC_FLAG : 0)))
+        {
+            break;
+        }
+
+        DWORD HashObjectSize = 0;
+        {
+            DWORD ReturnLength = 0;
+            if (!BCRYPT_SUCCESS(::BCryptGetProperty(
+                Context->AlgorithmHandle,
+                BCRYPT_OBJECT_LENGTH,
+                reinterpret_cast<PUCHAR>(&HashObjectSize),
+                sizeof(HashObjectSize),
+                &ReturnLength,
+                0)))
+            {
+                break;
+            }
+        }
+
+        DWORD HashSize = 0;
+        {
+            DWORD ReturnLength = 0;
+            if (!BCRYPT_SUCCESS(::BCryptGetProperty(
+                Context->AlgorithmHandle,
+                BCRYPT_HASH_LENGTH,
+                reinterpret_cast<PUCHAR>(&HashSize),
+                sizeof(HashSize),
+                &ReturnLength,
+                0)))
+            {
+                break;
+            }
+        }
+        Context->HashSize = HashSize;
+
+        Context->HashObject = ::MileAllocateMemory(HashObjectSize);
+        if (!Context->HashObject)
+        {
+            break;
+        }
+
+        Result = BCRYPT_SUCCESS(::BCryptDuplicateHash(
+            SourceContext->HashHandle,
+            &Context->HashHandle,
+            reinterpret_cast<PUCHAR>(Context->HashObject),
+            HashObjectSize,
+            0));
+
+    } while (false);
+
+    if (!Result)
+    {
+        ::K7PalHashDestroy(*DestinationHashHandle);
+        *DestinationHashHandle = nullptr;
+    }
+
+    return Result ? S_OK : E_FAIL;
+}
