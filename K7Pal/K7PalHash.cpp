@@ -352,12 +352,12 @@ EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
     }
     *DestinationHashHandle = nullptr;
 
-    if (!SourceHashHandle)
+    PK7_PAL_HASH_CONTEXT SourceContext =
+        ::K7PalHashInternalGetContextFromHandle(SourceHashHandle);
+    if (!SourceContext)
     {
         return E_INVALIDARG;
     }
-    PK7_PAL_HASH_CONTEXT SourceContext =
-        ::K7PalHashInternalGetContextFromHandle(SourceHashHandle);
 
     bool Result = false;
 
