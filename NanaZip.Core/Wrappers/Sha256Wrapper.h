@@ -23,9 +23,14 @@ EXTERN_C_BEGIN
 #define SHA256_BLOCK_SIZE   (SHA256_NUM_BLOCK_WORDS * 4)
 #define SHA256_DIGEST_SIZE  (SHA256_NUM_DIGEST_WORDS * 4)
 
-typedef struct
+typedef struct CSha256
 {
     K7_PAL_HASH_HANDLE HashHandle;
+
+#ifdef __cplusplus
+    CSha256& operator=(
+        CSha256 const& Source);
+#endif // __cplusplus
 } CSha256;
 
 #define SHA256_ALGO_DEFAULT 0

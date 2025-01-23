@@ -12,6 +12,24 @@
 
 #include <cstring>
 
+CSha512& CSha512::operator=(
+    CSha512 const& Source)
+{
+    if (this != &Source)
+    {
+        if (this->HashHandle)
+        {
+            ::K7PalHashDestroy(this->HashHandle);
+            this->HashHandle = nullptr;
+        }
+        if (Source.HashHandle)
+        {
+            ::K7PalHashDuplicate(Source.HashHandle, &this->HashHandle);
+        }
+    }
+    return *this;
+}
+
 BoolInt Sha512_SetFunction(
     CSha512* p,
     unsigned algo)

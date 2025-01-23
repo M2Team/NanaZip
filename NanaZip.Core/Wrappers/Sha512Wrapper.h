@@ -22,9 +22,14 @@ EXTERN_C_BEGIN
 #define SHA512_DIGEST_SIZE  (SHA512_NUM_DIGEST_WORDS * 8)
 #define SHA512_384_DIGEST_SIZE  (384 / 8)
 
-typedef struct
+typedef struct CSha512
 {
     K7_PAL_HASH_HANDLE HashHandle;
+
+#ifdef __cplusplus
+    CSha512& operator=(
+        CSha512 const& Source);
+#endif // __cplusplus
 } CSha512;
 
 #define SHA512_ALGO_DEFAULT 0

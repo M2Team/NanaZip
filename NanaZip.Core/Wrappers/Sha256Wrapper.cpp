@@ -12,6 +12,24 @@
 
 #include <cstring>
 
+CSha256& CSha256::operator=(
+    CSha256 const& Source)
+{
+    if (this != &Source)
+    {
+        if (this->HashHandle)
+        {
+            ::K7PalHashDestroy(this->HashHandle);
+            this->HashHandle = nullptr;
+        }
+        if (Source.HashHandle)
+        {
+            ::K7PalHashDuplicate(Source.HashHandle, &this->HashHandle);
+        }
+    }
+    return *this;
+}
+
 BoolInt Sha256_SetFunction(
     CSha256* p,
     unsigned algo)
