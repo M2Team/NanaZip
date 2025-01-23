@@ -216,6 +216,10 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
             {
                 break;
             }
+            std::memcpy(
+                Context->SecretBuffer,
+                SecretBuffer,
+                SecretSize);
             Context->SecretSize = SecretSize;
         }
 
