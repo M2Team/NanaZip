@@ -1,6 +1,6 @@
 ﻿/*
  * PROJECT:   NanaZip
- * FILE:      Sha1Wrapper.h
+ * FILE:      Sha256Wrapper.h
  * PURPOSE:   Definition for SHA-256 wrapper for 7-Zip
  *
  * LICENSE:   The MIT License

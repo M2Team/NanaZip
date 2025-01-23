@@ -1,6 +1,6 @@
 ﻿/*
  * PROJECT:   NanaZip
- * FILE:      Sha1Wrapper.cpp
+ * FILE:      Sha256Wrapper.cpp
  * PURPOSE:   Implementation for SHA-256 wrapper for 7-Zip
  *
  * LICENSE:   The MIT License
@@ -100,7 +100,6 @@ void Sha256_Update(
 void Sha256_Final(
     CSha256* p,
     Byte* digest)
-
 {
     if (!p)
     {
