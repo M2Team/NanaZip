@@ -38,11 +38,18 @@ namespace
     {
         if (HashHandle)
         {
-            PK7_PAL_HASH_CONTEXT Context =
-                reinterpret_cast<PK7_PAL_HASH_CONTEXT>(HashHandle);
-            if (sizeof(K7_PAL_HASH_CONTEXT) == Context->ContextSize)
+            __try
             {
-                return Context;
+                PK7_PAL_HASH_CONTEXT Context =
+                    reinterpret_cast<PK7_PAL_HASH_CONTEXT>(HashHandle);
+                if (sizeof(K7_PAL_HASH_CONTEXT) == Context->ContextSize)
+                {
+                    return Context;
+                }
+            }
+            __except (EXCEPTION_EXECUTE_HANDLER)
+            {
+                // Fall through.
             }
         }
 
