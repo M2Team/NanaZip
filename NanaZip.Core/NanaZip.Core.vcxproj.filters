@@ -96,9 +96,6 @@
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
-    <None Include="SevenZip\ASM\x86\Sha1Opt.asm">
-      <Filter>SevenZip\ASM\x86</Filter>
-    </None>
     <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
@@ -112,9 +109,6 @@
       <Filter>SevenZip\C</Filter>
     </None>
     <None Include="SevenZip\C\LzFindOpt.c">
-      <Filter>SevenZip\C</Filter>
-    </None>
-    <None Include="SevenZip\C\Sha1Opt.c">
       <Filter>SevenZip\C</Filter>
     </None>
     <None Include="SevenZip\C\XzCrc64Opt.c">
@@ -893,14 +887,8 @@
     <ClCompile Include="SevenZip\C\Aes.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\C\Sha1.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\C\XzCrc64.c">
       <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\Sha1Prepare.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
@@ -987,6 +975,9 @@
       <Filter>Wrappers</Filter>
     </ClCompile>
     <ClCompile Include="Wrappers\Sha256Wrapper.cpp">
+      <Filter>Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrappers\Sha1Wrapper.cpp">
       <Filter>Wrappers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1772,6 +1763,9 @@
       <Filter>Wrappers</Filter>
     </ClInclude>
     <ClInclude Include="Wrappers\Sha256Wrapper.h">
+      <Filter>Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrappers\Sha1Wrapper.h">
       <Filter>Wrappers</Filter>
     </ClInclude>
   </ItemGroup>
