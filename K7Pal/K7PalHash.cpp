@@ -243,19 +243,6 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
     return Result ? S_OK : E_FAIL;
 }
 
-EXTERN_C HRESULT WINAPI K7PalHashReset(
-    _Inout_ K7_PAL_HASH_HANDLE HashHandle)
-{
-    PK7_PAL_HASH_CONTEXT Context =
-        ::K7PalHashInternalGetContextFromHandle(HashHandle);
-    if (!Context)
-    {
-        return E_INVALIDARG;
-    }
-
-    return ::K7PalHashInternalResetVolatileContext(Context) ? S_OK : E_FAIL;
-}
-
 EXTERN_C HRESULT WINAPI K7PalHashDestroy(
     _Inout_opt_ K7_PAL_HASH_HANDLE HashHandle)
 {

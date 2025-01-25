@@ -53,10 +53,35 @@ namespace NanaZip::Codecs::Hash
         // The processed size for hash block hashes.
         UINT32 m_HashesProcessedSize = 0;
 
+        void DestroyContext()
+        {
+            if (this->m_BlockHashHandle)
+            {
+                ::K7PalHashDestroy(this->m_BlockHashHandle);
+                this->m_BlockHashHandle = nullptr;
+            }
+            if (this->m_HashesHashHandle)
+            {
+                ::K7PalHashDestroy(this->m_HashesHashHandle);
+                this->m_HashesHashHandle = nullptr;
+            }
+        }
+
     public:
 
         Ed2k()
         {
+            this->Init();
+        }
+
+        ~Ed2k()
+        {
+            this->DestroyContext();
+        }
+
+        void STDMETHODCALLTYPE Init()
+        {
+            this->DestroyContext();
             ::K7PalHashCreate(
                 &this->m_BlockHashHandle,
                 BCRYPT_MD4_ALGORITHM,
@@ -67,14 +92,6 @@ namespace NanaZip::Codecs::Hash
                 BCRYPT_MD4_ALGORITHM,
                 nullptr,
                 0);
-            this->m_NotEmule = false;
-            this->m_BlockProcessedSize = 0;
-        }
-
-        void STDMETHODCALLTYPE Init()
-        {
-            ::K7PalHashReset(this->m_BlockHashHandle);
-            ::K7PalHashReset(this->m_HashesHashHandle);
             this->m_NotEmule = false;
             this->m_BlockProcessedSize = 0;
         }

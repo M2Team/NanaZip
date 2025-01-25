@@ -55,29 +55,27 @@ void Sha512_InitState(
         return;
     }
 
-    if (!p->HashHandle)
-    {
-        if (SHA512_DIGEST_SIZE == digestSize)
-        {
-            ::K7PalHashCreate(
-                &p->HashHandle,
-                BCRYPT_SHA512_ALGORITHM,
-                nullptr,
-                0);
-        }
-        else if (SHA512_384_DIGEST_SIZE == digestSize)
-        {
-            ::K7PalHashCreate(
-                &p->HashHandle,
-                BCRYPT_SHA384_ALGORITHM,
-                nullptr,
-                0);
-        }
-    }
-
     if (p->HashHandle)
     {
-        ::K7PalHashReset(p->HashHandle);
+        ::K7PalHashDestroy(p->HashHandle);
+        p->HashHandle = nullptr;
+    }
+
+    if (SHA512_DIGEST_SIZE == digestSize)
+    {
+        ::K7PalHashCreate(
+            &p->HashHandle,
+            BCRYPT_SHA512_ALGORITHM,
+            nullptr,
+            0);
+    }
+    else if (SHA512_384_DIGEST_SIZE == digestSize)
+    {
+        ::K7PalHashCreate(
+            &p->HashHandle,
+            BCRYPT_SHA384_ALGORITHM,
+            nullptr,
+            0);
     }
 }
 

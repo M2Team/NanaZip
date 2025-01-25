@@ -3,7 +3,6 @@
 EXPORTS
 
 K7PalHashCreate
-K7PalHashReset
 K7PalHashDestroy
 K7PalHashUpdate
 K7PalHashFinal

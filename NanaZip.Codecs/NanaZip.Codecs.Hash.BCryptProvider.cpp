@@ -12,27 +12,18 @@
 
 #include <K7Pal.h>
 
+#include <string>
+
 namespace NanaZip::Codecs::Hash
 {
     struct BCryptProvider : public Mile::ComObject<BCryptProvider, IHasher>
     {
     private:
 
+        std::wstring m_AlgorithmIdentifier;
         K7_PAL_HASH_HANDLE m_HashHandle = nullptr;
 
-    public:
-
-        BCryptProvider(
-            _In_ LPCWSTR AlgorithmIdentifier)
-        {
-            ::K7PalHashCreate(
-                &this->m_HashHandle,
-                AlgorithmIdentifier,
-                nullptr,
-                0);
-        }
-
-        ~BCryptProvider()
+        void DestroyContext()
         {
             if (this->m_HashHandle)
             {
@@ -41,9 +32,28 @@ namespace NanaZip::Codecs::Hash
             }
         }
 
+    public:
+
+        BCryptProvider(
+            _In_ LPCWSTR AlgorithmIdentifier)
+        {
+            this->m_AlgorithmIdentifier = std::wstring(AlgorithmIdentifier);
+            this->Init();
+        }
+
+        ~BCryptProvider()
+        {
+            this->DestroyContext();
+        }
+
         void STDMETHODCALLTYPE Init()
         {
-            ::K7PalHashReset(this->m_HashHandle);
+            this->DestroyContext();
+            ::K7PalHashCreate(
+                &this->m_HashHandle,
+                this->m_AlgorithmIdentifier.c_str(),
+                nullptr,
+                0);
         }
 
         void STDMETHODCALLTYPE Update(

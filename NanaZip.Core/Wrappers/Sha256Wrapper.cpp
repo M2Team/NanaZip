@@ -54,19 +54,17 @@ void Sha256_InitState(
         return;
     }
 
-    if (!p->HashHandle)
-    {
-        ::K7PalHashCreate(
-            &p->HashHandle,
-            BCRYPT_SHA256_ALGORITHM,
-            nullptr,
-            0);
-    }
-
     if (p->HashHandle)
     {
-        ::K7PalHashReset(p->HashHandle);
+        ::K7PalHashDestroy(p->HashHandle);
+        p->HashHandle = nullptr;
     }
+
+    ::K7PalHashCreate(
+        &p->HashHandle,
+        BCRYPT_SHA256_ALGORITHM,
+        nullptr,
+        0);
 }
 
 void Sha256_Init(
