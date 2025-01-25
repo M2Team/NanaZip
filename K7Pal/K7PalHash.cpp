@@ -20,12 +20,32 @@
 
 namespace
 {
+    typedef struct _K7_PAL_HASH_ALGORITHM
+    {
+        LPCWSTR Identifier;
+        BCRYPT_ALG_HANDLE Handle;
+        BCRYPT_ALG_HANDLE HmacHandle;
+    } K7_PAL_HASH_ALGORITHM, *PK7_PAL_HASH_ALGORITHM;
+
+    K7_PAL_HASH_ALGORITHM g_HashAlgorithms[] =
+    {
+        { BCRYPT_MD2_ALGORITHM, nullptr, nullptr },
+        { BCRYPT_MD4_ALGORITHM, nullptr, nullptr },
+        { BCRYPT_MD5_ALGORITHM, nullptr, nullptr },
+        { BCRYPT_SHA1_ALGORITHM, nullptr, nullptr },
+        { BCRYPT_SHA256_ALGORITHM, nullptr, nullptr },
+        { BCRYPT_SHA384_ALGORITHM, nullptr, nullptr },
+        { BCRYPT_SHA512_ALGORITHM, nullptr, nullptr },
+    };
+
+    const std::size_t g_HashAlgorithmsCount =
+        sizeof(g_HashAlgorithms) / sizeof(*g_HashAlgorithms);
+
     typedef struct _K7_PAL_HASH_CONTEXT
     {
         UINT32 ContextSize;
         UINT32 SecretSize;
         PVOID SecretBuffer;
-        LPWSTR AlgorithmIdentifier;
         BCRYPT_ALG_HANDLE AlgorithmHandle;
         PVOID HashObject;
         UINT32 HashSize;
@@ -59,15 +79,6 @@ namespace
     static bool K7PalHashInternalInitializeVolatileContext(
         _Inout_ PK7_PAL_HASH_CONTEXT Context)
     {
-        if (!BCRYPT_SUCCESS(::BCryptOpenAlgorithmProvider(
-            &Context->AlgorithmHandle,
-            Context->AlgorithmIdentifier,
-            nullptr,
-            Context->SecretBuffer ? BCRYPT_ALG_HANDLE_HMAC_FLAG : 0)))
-        {
-            return false;
-        }
-
         {
             DWORD ReturnLength = 0;
             if (!BCRYPT_SUCCESS(::BCryptGetProperty(
@@ -135,7 +146,6 @@ namespace
 
         if (Context->AlgorithmHandle)
         {
-            ::BCryptCloseAlgorithmProvider(Context->AlgorithmHandle, 0);
             Context->AlgorithmHandle = nullptr;
         }
     }
@@ -154,12 +164,6 @@ namespace
             ::MileFreeMemory(Context->SecretBuffer);
             Context->SecretBuffer = nullptr;
         }
-
-        if (Context->AlgorithmIdentifier)
-        {
-            ::MileFreeMemory(Context->AlgorithmIdentifier);
-            Context->AlgorithmIdentifier = nullptr;
-        }
     }
 }
 
@@ -170,6 +174,21 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
     _In_ UINT32 SecretSize)
 {
     if (!AlgorithmIdentifier)
+    {
+        return E_INVALIDARG;
+    }
+    PK7_PAL_HASH_ALGORITHM CurrentAlgorithm = nullptr;
+    for (std::size_t i = 0; i < g_HashAlgorithmsCount; ++i)
+    {
+        if (0 == std::wcscmp(
+            AlgorithmIdentifier,
+            g_HashAlgorithms[i].Identifier))
+        {
+            CurrentAlgorithm = &g_HashAlgorithms[i];
+            break;
+        }
+    }
+    if (!CurrentAlgorithm)
     {
         return E_INVALIDARG;
     }
@@ -193,19 +212,6 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
         *HashHandle = reinterpret_cast<K7_PAL_HASH_HANDLE>(Context);
         Context->ContextSize = sizeof(K7_PAL_HASH_CONTEXT);
 
-        SIZE_T AlgorithmIdentifierSize =
-            sizeof(wchar_t) * (std::wcslen(AlgorithmIdentifier) + 1);
-        Context->AlgorithmIdentifier = reinterpret_cast<LPWSTR>(
-            ::MileAllocateMemory(AlgorithmIdentifierSize));
-        if (!Context->AlgorithmIdentifier)
-        {
-            break;
-        }
-        std::memcpy(
-            Context->AlgorithmIdentifier,
-            AlgorithmIdentifier,
-            AlgorithmIdentifierSize);
-
         if (SecretBuffer)
         {
             Context->SecretBuffer = ::MileAllocateMemory(SecretSize);
@@ -218,6 +224,37 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
                 SecretBuffer,
                 SecretSize);
             Context->SecretSize = SecretSize;
+        }
+
+        if (SecretBuffer)
+        {
+            if (!CurrentAlgorithm->HmacHandle)
+            {
+                if (!BCRYPT_SUCCESS(::BCryptOpenAlgorithmProvider(
+                    &CurrentAlgorithm->HmacHandle,
+                    CurrentAlgorithm->Identifier,
+                    nullptr,
+                    BCRYPT_ALG_HANDLE_HMAC_FLAG)))
+                {
+                    break;
+                }
+            }
+            Context->AlgorithmHandle = CurrentAlgorithm->HmacHandle;
+        }
+        else
+        {
+            if (!CurrentAlgorithm->Handle)
+            {
+                if (!BCRYPT_SUCCESS(::BCryptOpenAlgorithmProvider(
+                    &CurrentAlgorithm->Handle,
+                    CurrentAlgorithm->Identifier,
+                    nullptr,
+                    0)))
+                {
+                    break;
+                }
+            }
+            Context->AlgorithmHandle = CurrentAlgorithm->Handle;
         }
 
         Result = ::K7PalHashInternalInitializeVolatileContext(Context);
@@ -368,20 +405,6 @@ EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
         *DestinationHashHandle = reinterpret_cast<K7_PAL_HASH_HANDLE>(Context);
         Context->ContextSize = sizeof(K7_PAL_HASH_CONTEXT);
 
-        SIZE_T AlgorithmIdentifierSize =
-            sizeof(wchar_t) * (std::wcslen(
-                SourceContext->AlgorithmIdentifier) + 1);
-        Context->AlgorithmIdentifier = reinterpret_cast<LPWSTR>(
-            ::MileAllocateMemory(AlgorithmIdentifierSize));
-        if (!Context->AlgorithmIdentifier)
-        {
-            break;
-        }
-        std::memcpy(
-            Context->AlgorithmIdentifier,
-            SourceContext->AlgorithmIdentifier,
-            AlgorithmIdentifierSize);
-
         if (SourceContext->SecretBuffer)
         {
             Context->SecretBuffer = ::MileAllocateMemory(
@@ -397,14 +420,7 @@ EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
             Context->SecretSize = SourceContext->SecretSize;
         }
 
-        if (!BCRYPT_SUCCESS(::BCryptOpenAlgorithmProvider(
-            &Context->AlgorithmHandle,
-            Context->AlgorithmIdentifier,
-            nullptr,
-            Context->SecretBuffer ? BCRYPT_ALG_HANDLE_HMAC_FLAG : 0)))
-        {
-            break;
-        }
+        Context->AlgorithmHandle = SourceContext->AlgorithmHandle;
 
         Context->HashObjectSize = SourceContext->HashObjectSize;
 
