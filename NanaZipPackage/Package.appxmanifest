@@ -21,7 +21,7 @@
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
     Publisher="CN=E310A153-74A9-4D81-800B-857A8D58408A"
-    Version="5.0.1215.0" />
+    Version="5.0.1243.0" />
 
   <Properties>
     <DisplayName>NanaZip Preview</DisplayName>

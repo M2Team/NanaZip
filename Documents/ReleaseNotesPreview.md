@@ -2,6 +2,28 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 5.0 Preview 2 (5.0.1243.0)**
+
+- Continue to improve the work-in-progress NanaZip Platform Abstraction Layer
+  (K7Pal). (https://github.com/M2Team/NanaZip/tree/main/K7Pal)
+  - Fix the crash and encrypted RAR5 format extraction wrong password issue for
+    7-Zip's hash algorithms wrappers which mentioned in
+    https://github.com/M2Team/NanaZip/issues/542. (Thanks to RuesanG.)
+  - Introduce K7PalHashDuplicate API.
+  - Remove K7PalHashReset API for improving the security.
+  - Reduce the saved information in hash contexts to improve the security.
+  - Use NanaZip Platform Abstraction Layer (K7Pal) to implement 7-Zip's SHA-1
+    hash algorithms.
+- Update zh-Hans and zh-Hant translations for 'Want * History' strings. 
+  (Contributed by R-YaTian.) (Forget to mentioned in NanaZip 5.0 Preview 1.)
+- Adds a setting for opening the folder after extracting from archive.
+  (Contributing by DaxDupont.)
+- Introduce the Smart Extraction. (Contributed by R-YaTian.)
+- Fix the issue that which NanaZip windows and dialogs will be opened in the
+  background when using NanaZip from context menu. (Contributed by R-YaTian.)
+- Update xxHash to v0.8.3.
+  (https://github.com/Cyan4973/xxHash/releases/tag/v0.8.3)
+
 **NanaZip 5.0 Preview 1 (5.0.1215.0)**
 
 - Introduce NanaZip Platform Abstraction Layer (K7Pal) for wrapping the platform
