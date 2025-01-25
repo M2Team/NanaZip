@@ -70,6 +70,7 @@
 #define	_UFS_UFS_DINODE_H_
 
 #include <stdint.h>
+#include <sys/types.h>
 
 /*
  * The root inode is the root of the filesystem.  Inode 0 can't be used for
