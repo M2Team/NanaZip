@@ -39,6 +39,8 @@
 #ifndef _UFS_UFS_DIR_H_
 #define	_UFS_UFS_DIR_H_
 
+#include <stdint.h>
+
 /*
  * Theoretically, directories can be more than 2Gb in length, however, in
  * practice this seems unlikely. So, we define the type doff_t as a 32-bit

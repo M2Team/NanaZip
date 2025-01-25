@@ -69,6 +69,8 @@
 #ifndef _UFS_UFS_DINODE_H_
 #define	_UFS_UFS_DINODE_H_
 
+#include <stdint.h>
+
 /*
  * The root inode is the root of the filesystem.  Inode 0 can't be used for
  * normal purposes and historically bad blocks were linked to inode 1, thus
