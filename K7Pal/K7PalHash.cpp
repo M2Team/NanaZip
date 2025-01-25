@@ -29,7 +29,7 @@ namespace
         BCRYPT_ALG_HANDLE AlgorithmHandle;
         PVOID HashObject;
         UINT32 HashSize;
-        UINT32 Reserved;
+        UINT32 HashObjectSize;
         BCRYPT_HASH_HANDLE HashHandle;
     } K7_PAL_HASH_CONTEXT, *PK7_PAL_HASH_CONTEXT;
 
@@ -68,14 +68,13 @@ namespace
             return false;
         }
 
-        DWORD HashObjectSize = 0;
         {
             DWORD ReturnLength = 0;
             if (!BCRYPT_SUCCESS(::BCryptGetProperty(
                 Context->AlgorithmHandle,
                 BCRYPT_OBJECT_LENGTH,
-                reinterpret_cast<PUCHAR>(&HashObjectSize),
-                sizeof(HashObjectSize),
+                reinterpret_cast<PUCHAR>(&Context->HashObjectSize),
+                sizeof(Context->HashObjectSize),
                 &ReturnLength,
                 0)))
             {
@@ -83,23 +82,21 @@ namespace
             }
         }
 
-        DWORD HashSize = 0;
         {
             DWORD ReturnLength = 0;
             if (!BCRYPT_SUCCESS(::BCryptGetProperty(
                 Context->AlgorithmHandle,
                 BCRYPT_HASH_LENGTH,
-                reinterpret_cast<PUCHAR>(&HashSize),
-                sizeof(HashSize),
+                reinterpret_cast<PUCHAR>(&Context->HashSize),
+                sizeof(Context->HashSize),
                 &ReturnLength,
                 0)))
             {
                 return false;
             }
         }
-        Context->HashSize = HashSize;
 
-        Context->HashObject = ::MileAllocateMemory(HashObjectSize);
+        Context->HashObject = ::MileAllocateMemory(Context->HashObjectSize);
         if (!Context->HashObject)
         {
             return false;
@@ -109,7 +106,7 @@ namespace
             Context->AlgorithmHandle,
             &Context->HashHandle,
             reinterpret_cast<PUCHAR>(Context->HashObject),
-            HashObjectSize,
+            Context->HashObjectSize,
             Context->SecretBuffer
                 ? reinterpret_cast<PUCHAR>(Context->SecretBuffer)
                 : nullptr,
@@ -163,13 +160,6 @@ namespace
             ::MileFreeMemory(Context->AlgorithmIdentifier);
             Context->AlgorithmIdentifier = nullptr;
         }
-    }
-
-    static bool K7PalHashInternalResetVolatileContext(
-        _Inout_ PK7_PAL_HASH_CONTEXT Context)
-    {
-        ::K7PalHashInternalUninitializeVolatileContext(Context);
-        return ::K7PalHashInternalInitializeVolatileContext(Context);
     }
 }
 
@@ -291,11 +281,32 @@ EXTERN_C HRESULT WINAPI K7PalHashFinal(
         return E_INVALIDARG;
     }
 
-    bool Result = BCRYPT_SUCCESS(::BCryptFinishHash(
-        Context->HashHandle,
-        reinterpret_cast<PUCHAR>(OutputBuffer),
-        OutputSize,
-        0));
+    bool Result = false;
+
+    PVOID FinishHashObject = ::MileAllocateMemory(
+        Context->HashObjectSize);
+    if (FinishHashObject)
+    {
+        BCRYPT_HASH_HANDLE FinishHashHandle = nullptr;
+        if (BCRYPT_SUCCESS(::BCryptDuplicateHash(
+            Context->HashHandle,
+            &FinishHashHandle,
+            reinterpret_cast<PUCHAR>(FinishHashObject),
+            Context->HashObjectSize,
+            0)))
+        {
+            Result = BCRYPT_SUCCESS(::BCryptFinishHash(
+                FinishHashHandle,
+                reinterpret_cast<PUCHAR>(OutputBuffer),
+                OutputSize,
+                0));
+
+            ::BCryptDestroyHash(FinishHashHandle);
+        }
+
+        ::MileFreeMemory(FinishHashObject);
+    }
+
     if (!Result)
     {
         if (OutputBuffer)
@@ -303,8 +314,6 @@ EXTERN_C HRESULT WINAPI K7PalHashFinal(
             std::memset(OutputBuffer, 0, OutputSize);
         }
     }
-
-    ::K7PalHashInternalResetVolatileContext(Context);
 
     return Result ? S_OK : E_FAIL;
 }
@@ -397,38 +406,11 @@ EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
             break;
         }
 
-        DWORD HashObjectSize = 0;
-        {
-            DWORD ReturnLength = 0;
-            if (!BCRYPT_SUCCESS(::BCryptGetProperty(
-                Context->AlgorithmHandle,
-                BCRYPT_OBJECT_LENGTH,
-                reinterpret_cast<PUCHAR>(&HashObjectSize),
-                sizeof(HashObjectSize),
-                &ReturnLength,
-                0)))
-            {
-                break;
-            }
-        }
+        Context->HashObjectSize = SourceContext->HashObjectSize;
 
-        DWORD HashSize = 0;
-        {
-            DWORD ReturnLength = 0;
-            if (!BCRYPT_SUCCESS(::BCryptGetProperty(
-                Context->AlgorithmHandle,
-                BCRYPT_HASH_LENGTH,
-                reinterpret_cast<PUCHAR>(&HashSize),
-                sizeof(HashSize),
-                &ReturnLength,
-                0)))
-            {
-                break;
-            }
-        }
-        Context->HashSize = HashSize;
+        Context->HashSize = SourceContext->HashSize;
 
-        Context->HashObject = ::MileAllocateMemory(HashObjectSize);
+        Context->HashObject = ::MileAllocateMemory(Context->HashObjectSize);
         if (!Context->HashObject)
         {
             break;
@@ -438,7 +420,7 @@ EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
             SourceContext->HashHandle,
             &Context->HashHandle,
             reinterpret_cast<PUCHAR>(Context->HashObject),
-            HashObjectSize,
+            Context->HashObjectSize,
             0));
 
     } while (false);
