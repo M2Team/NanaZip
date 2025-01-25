@@ -454,6 +454,9 @@
     <Filter Include="Zstandard\compress">
       <UniqueIdentifier>{a75fe35b-0362-43ad-b9f2-29e3b7c0466a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FreeBSD">
+      <UniqueIdentifier>{70c4b67c-1fa7-4430-a788-11ad86f1ac56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BLAKE3\blake3.h">
@@ -994,5 +997,14 @@
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.h" />
     <ClInclude Include="NanaZip.Codecs.SevenZipWrapper.h" />
+    <ClInclude Include="FreeBSD\dir.h">
+      <Filter>FreeBSD</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeBSD\fs.h">
+      <Filter>FreeBSD</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeBSD\dinode.h">
+      <Filter>FreeBSD</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

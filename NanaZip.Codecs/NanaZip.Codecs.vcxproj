@@ -255,6 +255,9 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FreeBSD\dinode.h" />
+    <ClInclude Include="FreeBSD\dir.h" />
+    <ClInclude Include="FreeBSD\fs.h" />
     <ClInclude Include="NanaZip.Codecs.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Common.h" />

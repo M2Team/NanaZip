@@ -580,6 +580,7 @@ Creative Commons may be contacted at creativecommons.org.
 - Brotli, https://github.com/google/brotli
 - C++/WinRT, https://github.com/microsoft/cppwinrt
 - Fast LZMA2, https://github.com/conor42/fast-lzma2
+- FreeBSD, https://github.com/freebsd/freebsd-src
 - GmSSL, https://github.com/guanzhi/GmSSL
 - Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4
