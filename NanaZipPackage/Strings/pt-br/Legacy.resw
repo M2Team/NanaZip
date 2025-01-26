@@ -157,7 +157,7 @@
     <value>Calcular checksum</value>
   </data>
   <data name="Resource554" xml:space="preserve">
-    <value>Diff</value>
+    <value>Comparar</value>
   </data>
   <data name="Resource555" xml:space="preserve">
     <value>Criar Pasta</value>
@@ -535,7 +535,7 @@
     <value>&amp;Editor:</value>
   </data>
   <data name="Resource2105" xml:space="preserve">
-    <value>&amp;Diferença:</value>
+    <value>&amp;Comparar:</value>
   </data>
   <data name="Resource2200" xml:space="preserve">
     <value>Sistema</value>
@@ -577,19 +577,19 @@
     <value>Testar arquivo compactado</value>
   </data>
   <data name="Resource2326" xml:space="preserve">
-    <value>Extrair Aqui</value>
+    <value>Extrair aqui</value>
   </data>
   <data name="Resource2327" xml:space="preserve">
-    <value>Extrair para {0}</value>
+    <value>Extrair em {0}</value>
   </data>
   <data name="Resource2328" xml:space="preserve">
-    <value>Adicionar para {0}</value>
+    <value>Adicionar como {0}</value>
   </data>
   <data name="Resource2329" xml:space="preserve">
     <value>Comprimir e enviar por email...</value>
   </data>
   <data name="Resource2330" xml:space="preserve">
-    <value>Comprimir para {0} e enviar por email</value>
+    <value>Comprimir como {0} e enviar por email</value>
   </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Pastas</value>
