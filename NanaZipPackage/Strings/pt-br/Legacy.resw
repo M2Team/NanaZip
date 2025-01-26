@@ -591,6 +591,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Comprimir como {0} e enviar por email</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Extrair aqui (Inteligente)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Pastas</value>
   </data>
@@ -653,6 +656,9 @@
   </data>
   <data name="Resource2513" xml:space="preserve">
     <value>Use Hashes Minúsculos</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Abrir pasta após extrair</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Sobre o NanaZip</value>
@@ -1350,4 +1356,5 @@ Você tem certeza que você quer dividir o arquivo compactado em tais volumes?</
   <data name="Resource12201" xml:space="preserve">
     <value>Abrir a Configurações do Windows para associar arquivos ao NanaZip</value>
   </data>
+
 </root>
