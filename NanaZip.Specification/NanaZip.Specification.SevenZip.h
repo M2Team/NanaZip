@@ -427,6 +427,117 @@ public:
         _Out_ ISequentialInStream** Stream) = 0;
 };
 
+typedef enum _SEVENZIP_ARCHIVE_PROPERTY_TYPE
+{
+    SevenZipArchiveNoProperty = 0, // VT_EMPTY
+    SevenZipArchiveMainSubfile, // VT_UI4
+    SevenZipArchiveHandlerItemIndex, // VT_UI4
+    SevenZipArchivePath, // VT_BSTR
+    SevenZipArchiveName, // VT_BSTR
+    SevenZipArchiveExtension, // VT_BSTR
+    SevenZipArchiveIsDirectory, // VT_BOOL
+    SevenZipArchiveSize, // VT_UI8
+    SevenZipArchivePackSize, // VT_UI8
+    SevenZipArchiveAttributes, // VT_UI4
+    SevenZipArchiveCreationTime, // VT_FILETIME
+    SevenZipArchiveAccessTime, // VT_FILETIME
+    SevenZipArchiveModifiedTime, // VT_FILETIME
+    SevenZipArchiveSolid, // VT_BOOL
+    SevenZipArchiveCommented, // VT_BOOL
+    SevenZipArchiveEncrypted, // VT_BOOL
+    SevenZipArchiveSplitBefore, // VT_BOOL
+    SevenZipArchiveSplitAfter, // VT_BOOL
+    SevenZipArchiveDictionarySize, // VT_UI4
+    SevenZipArchiveCrc, // VT_UI4
+    SevenZipArchiveType, // VT_BSTR
+    SevenZipArchiveIsAnti, // VT_BOOL
+    SevenZipArchiveMethod, // VT_BSTR
+    SevenZipArchiveHostOs, // VT_BSTR
+    SevenZipArchiveFileSystem, // VT_BSTR
+    SevenZipArchiveUser, // VT_BSTR
+    SevenZipArchiveGroup, // VT_BSTR
+    SevenZipArchiveBlock, // VT_UI8
+    SevenZipArchiveComment, // VT_BSTR
+    SevenZipArchivePosition, // VT_UI8
+    SevenZipArchivePrefix, // VT_BSTR
+    SevenZipArchiveNumberOfSubDirectories, // VT_UI8
+    SevenZipArchiveNumberOfSubFiles, // VT_UI8
+    SevenZipArchiveUnpackVersion, // VT_BSTR or VT_UI8
+    SevenZipArchiveVolume, // VT_UI4 or VT_UI8
+    SevenZipArchiveIsVolume, // VT_BOOL
+    SevenZipArchiveOffset, // VT_UI8
+    SevenZipArchiveLinks, // VT_UI8
+    SevenZipArchiveNumberOfBlocks, // VT_UI8
+    SevenZipArchiveNumberOfVolumes, // VT_UI8
+    SevenZipArchiveTimeType, // VT_UI4
+    SevenZipArchiveIs64Bit, // VT_BOOL
+    SevenZipArchiveBigEndian, // VT_BOOL
+    SevenZipArchiveCpu, // VT_BSTR
+    SevenZipArchivePhySize, // VT_UI8
+    SevenZipArchiveHeadersSize, // VT_UI8
+    SevenZipArchiveChecksum, // VT_UI4
+    SevenZipArchiveCharacteristics, // VT_BSTR
+    SevenZipArchiveVirtualAddress, // VT_UI8
+    SevenZipArchiveId, // VT_BSTR or VT_UI8
+    SevenZipArchiveShortName, // VT_BSTR
+    SevenZipArchiveCreatorApplication, // VT_BSTR
+    SevenZipArchiveSectorSize, // VT_UI4
+    SevenZipArchivePosixAttributes, // VT_UI4
+    SevenZipArchiveSymbolicLink, // VT_BSTR
+    SevenZipArchiveError, // VT_BSTR
+    SevenZipArchiveTotalSize, // VT_UI8
+    SevenZipArchiveFreeSpace, // VT_UI8
+    SevenZipArchiveClusterSize, // VT_UI4
+    SevenZipArchiveVolumeName, // VT_BSTR
+    SevenZipArchiveLocalName, // VT_BSTR
+    SevenZipArchiveProvider, // VT_BSTR
+    SevenZipArchiveNtSecurity, // VT_BSTR
+    SevenZipArchiveIsAlternateStream, // VT_BOOL
+    SevenZipArchiveIsAux, // VT_BOOL
+    SevenZipArchiveIsDeleted, // VT_BOOL
+    SevenZipArchiveIsTree, // VT_BOOL
+    SevenZipArchiveSha1, // VT_BSTR (Actually SHA-1 structure)
+    SevenZipArchiveSha256, // VT_BSTR (Actually SHA-256 structure)
+    SevenZipArchiveErrorType, // VT_BSTR
+    SevenZipArchiveNumberOfErrors, // VT_UI8
+    SevenZipArchiveErrorFlags, // VT_UI4
+    SevenZipArchiveWarningFlags, // VT_UI4
+    SevenZipArchiveWarning, // VT_BSTR
+    SevenZipArchiveNumberOfStreams, // VT_UI8
+    SevenZipArchiveNumberOfAlternateStreams, // VT_UI8
+    SevenZipArchiveAlternateStreamsSize, // VT_UI8
+    SevenZipArchiveVirtualSize, // VT_UI8
+    SevenZipArchiveUnpackSize, // VT_UI8
+    SevenZipArchiveTotalPhysicalSize, // VT_UI8
+    SevenZipArchiveVolumeIndex, // VT_UI8
+    SevenZipArchiveSubType, // VT_BSTR
+    SevenZipArchiveShortComment, // VT_BSTR
+    SevenZipArchiveCodePage, // VT_BSTR
+    SevenZipArchiveIsNotArchiveType, // VT_BOOL
+    SevenZipArchivePhySizeCantBeDetected, // VT_BOOL
+    SevenZipArchiveZerosTailIsAllowed, // VT_BOOL
+    SevenZipArchiveTailSize, // VT_UI8
+    SevenZipArchiveEmbeddedStubSize, // VT_UI8
+    SevenZipArchiveNtReparsePoint, // VT_BSTR
+    SevenZipArchiveHardLink, // VT_BSTR
+    SevenZipArchiveINode, // VT_UI8
+    SevenZipArchiveStreamId, // VT_UI8
+    SevenZipArchiveReadOnly, // VT_BOOL
+    SevenZipArchiveOutputName, // VT_BSTR
+    SevenZipArchiveCopyLink, // VT_BSTR
+    SevenZipArchiveArchiveFileName, // VT_BSTR
+    SevenZipArchiveIsHash, // VT_BOOL
+    SevenZipArchiveMetadataChangedTime, // VT_FILETIME
+    SevenZipArchiveUserId, // VT_UI4
+    SevenZipArchiveGroupId, // VT_UI4
+    SevenZipArchiveDeviceMajor, // VT_UI4
+    SevenZipArchiveDeviceMinor, // VT_UI4
+    SevenZipArchiveDevMajor, // VT_UI4
+    SevenZipArchiveDevMinor, // VT_UI4
+    SevenZipArchiveMaximumDefined,
+    SevenZipArchiveUserDefined = 0x10000
+} SEVENZIP_ARCHIVE_PROPERTY_TYPE, *PSEVENZIP_ARCHIVE_PROPERTY_TYPE;
+
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000600600000")
 IInArchive : public IUnknown
 {
