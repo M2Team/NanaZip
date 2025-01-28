@@ -606,11 +606,49 @@ typedef enum _SEVENZIP_HANDLER_PROPERTY_TYPE
     SevenZipHandlerSignature, // VT_BSTR (Actually BYTE array)
     SevenZipHandlerMultiSignature, // VT_BSTR (Actually BYTE array)
     SevenZipHandlerSignatureOffset, // VT_UI4
-    SevenZipHandlerAltStreams, // VT_BOOL
-    SevenZipHandlerNtSecure, // VT_BOOL
+    SevenZipHandlerAlternateStream, // VT_BOOL
+    SevenZipHandlerNtSecurity, // VT_BOOL
     SevenZipHandlerFlags, // VT_UI4
     SevenZipHandlerTimeFlags, // VT_UI4
 } SEVENZIP_HANDLER_PROPERTY_TYPE, *PSEVENZIP_HANDLER_PROPERTY_TYPE;
+
+typedef enum _SEVENZIP_HANDLER_FLAG_TYPE
+{
+    // Keep name of file in archive name
+    SevenZipHandlerFlagKeepName = 1 << 0,
+    // The handler supports alternate streams
+    SevenZipHandlerFlagAlternateStreams = 1 << 1,
+    // The handler supports NT security
+    SevenZipHandlerFlagNtSecurity = 1 << 2,
+    // The handler can find start of archive
+    SevenZipHandlerFlagFindSignature = 1 << 3,
+    // There are several signatures
+    SevenZipHandlerFlagMultiSignature = 1 << 4,
+    // The seek position of stream must be set as global offset
+    SevenZipHandlerFlagUseGlobalOffset = 1 << 5,
+    // Call handler for each start position
+    SevenZipHandlerFlagStartOpen = 1 << 6,
+    // Call handler only for start of file
+    SevenZipHandlerFlagPureStartOpen = 1 << 7,
+    // Archive can be open backward
+    SevenZipHandlerFlagBackwardOpen = 1 << 8,
+    // Such archive can be stored before real archive (like SFX stub)
+    SevenZipHandlerFlagPreArchive = 1 << 9,
+    // The handler supports symbolic links
+    SevenZipHandlerFlagSymbolicLinks = 1 << 10,
+    // The handler supports hard links
+    SevenZipHandlerFlagHardLinks = 1 << 11,
+    // Call handler only if file extension matches
+    SevenZipHandlerFlagByExtensionOnlyOpen = 1 << 12,
+    // The handler contains the hashes (checksums)
+    SevenZipHandlerFlagHashHandler = 1 << 13,
+    SevenZipHandlerFlagCreationTime = 1 << 14,
+    SevenZipHandlerFlagCreationTimeDefault = 1 << 15,
+    SevenZipHandlerFlagAccessTime = 1 << 16,
+    SevenZipHandlerFlagAccessTimeDefault = 1 << 17,
+    SevenZipHandlerFlagModifiedTime = 1 << 18,
+    SevenZipHandlerFlagModifiedTimeDefault = 1 << 19,
+} SEVENZIP_HANDLER_FLAG_TYPE, *PSEVENZIP_HANDLER_FLAG_TYPE;
 
 EXTERN_C HRESULT WINAPI CreateObject(
     _In_ REFCLSID Clsid,
