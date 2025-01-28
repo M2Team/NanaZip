@@ -591,6 +591,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Skompresuj do {0} i wyślij e-mailem</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Wypakuj tutaj (Inteligentnie)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Foldery</value>
   </data>
@@ -654,6 +657,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Małoliterowe sumy kontrolne</value>
   </data> 
+  <data name="Resource2514" xml:space="preserve">
+    <value>Otwórz folder po wypakowaniu</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip - informacje</value>
   </data>
