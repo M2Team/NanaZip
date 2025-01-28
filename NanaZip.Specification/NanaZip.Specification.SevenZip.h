@@ -595,4 +595,34 @@ public:
 
 // IOutArchive
 
+typedef enum _SEVENZIP_HANDLER_PROPERTY_TYPE
+{
+    SevenZipHandlerName = 0, // VT_BSTR
+    SevenZipHandlerClassId, // VT_BSTR (Actually GUID structure)
+    SevenZipHandlerExtension, // VT_BSTR
+    SevenZipHandlerAddExtension, // VT_BSTR
+    SevenZipHandlerUpdate, // VT_BOOL
+    SevenZipHandlerKeepName, // VT_BOOL
+    SevenZipHandlerSignature, // VT_BSTR (Actually BYTE array)
+    SevenZipHandlerMultiSignature, // VT_BSTR (Actually BYTE array)
+    SevenZipHandlerSignatureOffset, // VT_UI4
+    SevenZipHandlerAltStreams, // VT_BOOL
+    SevenZipHandlerNtSecure, // VT_BOOL
+    SevenZipHandlerFlags, // VT_UI4
+    SevenZipHandlerTimeFlags, // VT_UI4
+} SEVENZIP_HANDLER_PROPERTY_TYPE, *PSEVENZIP_HANDLER_PROPERTY_TYPE;
+
+EXTERN_C HRESULT WINAPI CreateObject(
+    _In_ REFCLSID Clsid,
+    _In_ REFIID Iid,
+    _Out_ LPVOID* OutObject);
+
+EXTERN_C HRESULT WINAPI GetNumberOfFormats(
+    _Out_ PUINT32 NumFormats);
+
+EXTERN_C HRESULT WINAPI GetHandlerProperty2(
+    _In_ UINT32 Index,
+    _In_ PROPID PropId,
+    _Inout_ LPPROPVARIANT Value);
+
 #endif /* !NANAZIP_SPECIFICATION_SEVENZIP */
