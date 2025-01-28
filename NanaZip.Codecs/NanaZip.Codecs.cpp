@@ -1,4 +1,4 @@
-﻿/*
+/*
  * PROJECT:   NanaZip
  * FILE:      NanaZip.Codecs.cpp
  * PURPOSE:   Implementation for NanaZip.Codecs
@@ -21,9 +21,11 @@ namespace
     struct HashProviderItem
     {
         const char* Name;
-        IHasher*(*Create)();
+        IHasher* (*Create)();
     };
 
+    // Registered Hashers
+    // DO NOT CHANGE THE SEQUENCE FOR COMPATIBILITY
     HashProviderItem g_Hashers[] =
     {
         { "MD2", NanaZip::Codecs::Hash::CreateMd2 },
