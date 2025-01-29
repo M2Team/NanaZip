@@ -10,6 +10,8 @@
 
 #include "NanaZip.Codecs.h"
 
+#include "NanaZip.Codecs.SevenZipWrapper.h"
+
 #ifdef _MSC_VER
 #if _MSC_VER > 1000
 #pragma once
@@ -31,10 +33,103 @@
 #endif
 #endif
 
+namespace
+{
+    const std::int32_t g_SuperBlockSearchList[] = SBLOCKSEARCH;
+}
+
 namespace NanaZip::Codecs::Archive
 {
     struct Ufs : public Mile::ComObject<Ufs, IInArchive>
     {
+    private:
+
+        bool m_IsUfs2 = false;
+        bool m_IsBigEndian = false;
+
+    private:
+
+        std::uint8_t ReadUInt8(
+            void* BaseAddress,
+            std::size_t Offset = 0)
+        {
+            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            return Base[Offset];
+        }
+
+        std::uint16_t ReadUInt16(
+            void* BaseAddress,
+            std::size_t Offset = 0)
+        {
+            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            if (this->m_IsBigEndian)
+            {
+                return
+                    (static_cast<std::uint16_t>(Base[Offset]) << 8) |
+                    (static_cast<std::uint16_t>(Base[Offset + 1]));
+            }
+            else
+            {
+                return
+                    (static_cast<std::uint16_t>(Base[Offset])) |
+                    (static_cast<std::uint16_t>(Base[Offset + 1]) << 8);
+            }
+        }
+
+        std::uint32_t ReadUInt32(
+            void* BaseAddress,
+            std::size_t Offset = 0)
+        {
+            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            if (this->m_IsBigEndian)
+            {
+                return
+                    (static_cast<std::uint32_t>(Base[Offset]) << 24) |
+                    (static_cast<std::uint32_t>(Base[Offset + 1]) << 16) |
+                    (static_cast<std::uint32_t>(Base[Offset + 2]) << 8) |
+                    (static_cast<std::uint32_t>(Base[Offset + 3]));
+            }
+            else
+            {
+                return
+                    (static_cast<std::uint32_t>(Base[Offset])) |
+                    (static_cast<std::uint32_t>(Base[Offset + 1]) << 8) |
+                    (static_cast<std::uint32_t>(Base[Offset + 2]) << 16) |
+                    (static_cast<std::uint32_t>(Base[Offset + 3]) << 24);
+            }
+        }
+
+        std::uint64_t ReadUInt64(
+            void* BaseAddress,
+            std::size_t Offset = 0)
+        {
+            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            if (this->m_IsBigEndian)
+            {
+                return
+                    (static_cast<std::uint64_t>(Base[Offset]) << 56) |
+                    (static_cast<std::uint64_t>(Base[Offset + 1]) << 48) |
+                    (static_cast<std::uint64_t>(Base[Offset + 2]) << 40) |
+                    (static_cast<std::uint64_t>(Base[Offset + 3]) << 32) |
+                    (static_cast<std::uint64_t>(Base[Offset + 4]) << 24) |
+                    (static_cast<std::uint64_t>(Base[Offset + 5]) << 16) |
+                    (static_cast<std::uint64_t>(Base[Offset + 6]) << 8) |
+                    (static_cast<std::uint64_t>(Base[Offset + 7]));
+            }
+            else
+            {
+                return
+                    (static_cast<std::uint64_t>(Base[Offset])) |
+                    (static_cast<std::uint64_t>(Base[Offset + 1]) << 8) |
+                    (static_cast<std::uint64_t>(Base[Offset + 2]) << 16) |
+                    (static_cast<std::uint64_t>(Base[Offset + 3]) << 24) |
+                    (static_cast<std::uint64_t>(Base[Offset + 4]) << 32) |
+                    (static_cast<std::uint64_t>(Base[Offset + 5]) << 40) |
+                    (static_cast<std::uint64_t>(Base[Offset + 6]) << 48) |
+                    (static_cast<std::uint64_t>(Base[Offset + 7]) << 56);
+            }
+        }
+
     public:
 
         Ufs()
@@ -50,12 +145,100 @@ namespace NanaZip::Codecs::Archive
             UNREFERENCED_PARAMETER(Stream);
             UNREFERENCED_PARAMETER(MaxCheckStartPosition);
             UNREFERENCED_PARAMETER(OpenCallback);
-            return E_NOTIMPL;
+
+            if (!Stream)
+            {
+                return E_INVALIDARG;
+            }
+
+            HRESULT hr = S_OK;
+            SIZE_T NumberOfBytesRead = 0;
+            fs SuperBlock = { 0 };
+
+            do
+            {
+                this->Close();
+
+                for (size_t i = 0; -1 != g_SuperBlockSearchList[i]; ++i)
+                {
+                    hr = Stream->Seek(
+                        g_SuperBlockSearchList[i],
+                        STREAM_SEEK_SET,
+                        nullptr);
+                    if (FAILED(hr))
+                    {
+                        break;
+                    }
+
+                    NumberOfBytesRead = 0;
+                    hr = ::NanaZipCodecsReadInputStream(
+                        Stream,
+                        &SuperBlock,
+                        sizeof(SuperBlock),
+                        &NumberOfBytesRead);
+                    if (FAILED(hr))
+                    {
+                        break;
+                    }
+                    if (sizeof(fs) != NumberOfBytesRead)
+                    {
+                        hr = S_FALSE;
+                        break;
+                    }
+
+                    this->m_IsBigEndian = false;
+                    std::uint32_t Signature =
+                        this->ReadUInt32(&SuperBlock.fs_magic);
+                    if (FS_UFS2_MAGIC == Signature)
+                    {
+                        this->m_IsUfs2 = true;
+                        break;
+                    }
+                    else if (FS_UFS1_MAGIC == Signature)
+                    {
+                        this->m_IsUfs2 = false;
+                        break;
+                    }
+                    else
+                    {
+                        this->m_IsBigEndian = true;
+                        Signature = this->ReadUInt32(&SuperBlock.fs_magic);
+                        if (FS_UFS2_MAGIC == Signature)
+                        {
+                            this->m_IsUfs2 = true;
+                            break;
+                        }
+                        else if (FS_UFS1_MAGIC == Signature)
+                        {
+                            this->m_IsUfs2 = false;
+                            break;
+                        }
+                    }
+
+                    hr = S_FALSE;
+                }
+                if (FAILED(hr))
+                {
+                    break;
+                }
+
+                SuperBlock = SuperBlock;
+
+            } while (false);
+
+            if (FAILED(hr))
+            {
+                this->Close();
+            }
+
+            return hr;
         }
 
         HRESULT STDMETHODCALLTYPE Close()
         {
-            return E_NOTIMPL;
+            this->m_IsBigEndian = false;
+            this->m_IsUfs2 = false;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetNumberOfItems(
