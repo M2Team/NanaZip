@@ -127,7 +127,12 @@ public:
     /**
      * @brief Seeks to the specified position in the input stream.
      * @param Offset The offset relative to the origin.
-     * @param SeekOrigin The origin of the seek operation.
+     * 
+     * @param SeekOrigin The origin of the seek operation. Here are available
+     *                   modes:
+     *                       STREAM_SEEK_SET
+     *                       STREAM_SEEK_CUR
+     *                       STREAM_SEEK_END
      * @param NewPosition The new position.
      * @return If the function succeeds, it returns S_OK. Otherwise, it returns
      *         an HRESULT error code.
@@ -142,7 +147,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE Seek(
         _In_ INT64 Offset,
         _In_ UINT32 SeekOrigin,
-        _Out_ PUINT64 NewPosition) = 0;
+        _Out_opt_ PUINT64 NewPosition) = 0;
 };
 
 MIDL_INTERFACE("23170F69-40C1-278A-0000-000300040000")
@@ -153,7 +158,11 @@ public:
     /**
      * @brief Seeks to the specified position in the input stream.
      * @param Offset The offset relative to the origin.
-     * @param SeekOrigin The origin of the seek operation.
+     * @param SeekOrigin The origin of the seek operation. Here are available
+     *                   modes:
+     *                       STREAM_SEEK_SET
+     *                       STREAM_SEEK_CUR
+     *                       STREAM_SEEK_END
      * @param NewPosition The new position.
      * @return If the function succeeds, it returns S_OK. Otherwise, it returns
      *         an HRESULT error code.
@@ -168,7 +177,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE Seek(
         _In_ INT64 Offset,
         _In_ UINT32 SeekOrigin,
-        _Out_ PUINT64 NewPosition) = 0;
+        _Out_opt_ PUINT64 NewPosition) = 0;
 
     /**
      * @brief Sets the size of the output stream.
