@@ -93,13 +93,13 @@ namespace
             "UFS",
             "ufs ufs2 img",
             nullptr,
-            SevenZipHandlerFlagBackwardOpen,
+            SevenZipHandlerFlagStartOpen,
             0,
             nullptr,
             0,
             0,
             false,
-            nullptr // Currently not implemented.
+            NanaZip::Codecs::Archive::CreateUfs
         },
     };
 

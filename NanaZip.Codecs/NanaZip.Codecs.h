@@ -107,4 +107,9 @@ namespace NanaZip::Codecs::Encoder
 
 }
 
+namespace NanaZip::Codecs::Archive
+{
+    IInArchive* CreateUfs();
+}
+
 #endif // !NANAZIP_CODECS

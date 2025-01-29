@@ -58,6 +58,7 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NanaZip.Codecs.Archive.Ufs.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Aich.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.BCryptProvider.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Blake2b.cpp" />
