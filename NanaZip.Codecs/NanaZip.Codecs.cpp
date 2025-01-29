@@ -224,7 +224,7 @@ EXTERN_C HRESULT WINAPI CreateObject(
     _In_ REFIID Iid,
     _Out_ LPVOID* OutObject)
 {
-    if (OutObject)
+    if (!OutObject)
     {
         return E_INVALIDARG;
     }
@@ -237,8 +237,7 @@ EXTERN_C HRESULT WINAPI CreateObject(
         {
             std::uint64_t ProviderId =
                 *reinterpret_cast<const std::uint64_t*>(Clsid.Data4);
-            std::uint32_t ProviderIdBase =
-                static_cast<std::uint32_t>(ProviderId >> 32);
+            std::uint64_t ProviderIdBase = ProviderId & 0xFFFFFFFF00000000;
             std::uint32_t ProviderIndex =
                 static_cast<std::uint32_t>(ProviderId);
             if (NanaZip::Codecs::HashProviderIdBase == ProviderIdBase)
@@ -259,8 +258,7 @@ EXTERN_C HRESULT WINAPI CreateObject(
         {
             std::uint64_t ProviderId =
                 *reinterpret_cast<const std::uint64_t*>(Clsid.Data4);
-            std::uint32_t ProviderIdBase =
-                static_cast<std::uint32_t>(ProviderId >> 32);
+            std::uint64_t ProviderIdBase = ProviderId & 0xFFFFFFFF00000000;
             std::uint32_t ProviderIndex =
                 static_cast<std::uint32_t>(ProviderId);
             if (NanaZip::Codecs::ArchiverProviderIdBase == ProviderIdBase)
