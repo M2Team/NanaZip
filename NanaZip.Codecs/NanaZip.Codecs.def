@@ -4,6 +4,10 @@ EXPORTS
 
 GetHashers
 
+CreateObject
+GetNumberOfFormats
+GetHandlerProperty2
+
 NanaZipCodecsBrotliRead
 NanaZipCodecsBrotliWrite
 NanaZipCodecsLizardRead

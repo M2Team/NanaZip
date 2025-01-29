@@ -1,4 +1,4 @@
-/*
+﻿/*
  * PROJECT:   NanaZip
  * FILE:      NanaZip.Codecs.cpp
  * PURPOSE:   Implementation for NanaZip.Codecs
@@ -68,7 +68,43 @@ namespace
         { "XXH3_128bits", NanaZip::Codecs::Hash::CreateXxh3128 },
     };
 
-    const size_t g_HashersCount = sizeof(g_Hashers) / sizeof(*g_Hashers);
+    const std::size_t g_HashersCount =
+        sizeof(g_Hashers) / sizeof(*g_Hashers);
+
+    struct ArchiverProviderItem
+    {
+        const char* Name;
+        const char* Extension;
+        const char* AddExtension;
+        std::uint32_t Flags;
+        std::uint32_t TimeFlags;
+        const uint8_t* Signature;
+        std::uint16_t SignatureOffset;
+        std::uint8_t SignatureSize;
+        bool Update;
+        IInArchive* (*CreateIn)();
+    };
+
+    // Registered Archivers
+    // DO NOT CHANGE THE SEQUENCE FOR COMPATIBILITY
+    ArchiverProviderItem g_Archivers[] =
+    {
+        {
+            "UFS",
+            "ufs ufs2 img",
+            nullptr,
+            SevenZipHandlerFlagBackwardOpen,
+            0,
+            nullptr,
+            0,
+            0,
+            false,
+            nullptr // Currently not implemented.
+        },
+    };
+
+    const std::size_t g_ArchiversCount =
+        sizeof(g_Archivers) / sizeof(*g_Archivers);
 }
 
 struct HasherFactory : public Mile::ComObject<
@@ -180,5 +216,239 @@ EXTERN_C HRESULT WINAPI GetHashers(
     }
 
     *Hashers = new HasherFactory();
+    return S_OK;
+}
+
+EXTERN_C HRESULT WINAPI CreateObject(
+    _In_ REFCLSID Clsid,
+    _In_ REFIID Iid,
+    _Out_ LPVOID* OutObject)
+{
+    if (OutObject)
+    {
+        return E_INVALIDARG;
+    }
+
+    if (Iid == __uuidof(IHasher))
+    {
+        if (Clsid.Data1 == SevenZipGuidData1 &&
+            Clsid.Data2 == SevenZipGuidData2 &&
+            Clsid.Data3 == SevenZipGuidData3Hasher)
+        {
+            std::uint64_t ProviderId =
+                *reinterpret_cast<const std::uint64_t*>(Clsid.Data4);
+            std::uint32_t ProviderIdBase =
+                static_cast<std::uint32_t>(ProviderId >> 32);
+            std::uint32_t ProviderIndex =
+                static_cast<std::uint32_t>(ProviderId);
+            if (NanaZip::Codecs::HashProviderIdBase == ProviderIdBase)
+            {
+                if (ProviderIndex < g_HashersCount)
+                {
+                    *OutObject = g_Hashers[ProviderIndex].Create();
+                    return S_OK;
+                }
+            }
+        }
+    }
+    else if (Iid == __uuidof(IInArchive))
+    {
+        if (Clsid.Data1 == SevenZipGuidData1 &&
+            Clsid.Data2 == SevenZipGuidData2 &&
+            Clsid.Data3 == SevenZipGuidData3Common)
+        {
+            std::uint64_t ProviderId =
+                *reinterpret_cast<const std::uint64_t*>(Clsid.Data4);
+            std::uint32_t ProviderIdBase =
+                static_cast<std::uint32_t>(ProviderId >> 32);
+            std::uint32_t ProviderIndex =
+                static_cast<std::uint32_t>(ProviderId);
+            if (NanaZip::Codecs::ArchiverProviderIdBase == ProviderIdBase)
+            {
+                if (ProviderIndex < g_ArchiversCount)
+                {
+                    *OutObject = g_Archivers[ProviderIndex].CreateIn();
+                    return S_OK;
+                }
+            }
+        }
+    }
+
+    return E_NOINTERFACE;
+}
+
+EXTERN_C HRESULT WINAPI GetNumberOfFormats(
+    _Out_ PUINT32 NumFormats)
+{
+    if (!NumFormats)
+    {
+        return E_INVALIDARG;
+    }
+
+    *NumFormats = g_ArchiversCount;
+    return S_OK;
+}
+
+EXTERN_C HRESULT WINAPI GetHandlerProperty2(
+    _In_ UINT32 Index,
+    _In_ PROPID PropId,
+    _Inout_ LPPROPVARIANT Value)
+{
+    if (!(Index < g_ArchiversCount))
+    {
+        return E_INVALIDARG;
+    }
+
+    if (!Value)
+    {
+        return E_INVALIDARG;
+    }
+
+    switch (PropId)
+    {
+    case SevenZipHandlerName:
+    {
+        Value->bstrVal = ::SysAllocString(Mile::ToWideString(
+            CP_UTF8,
+            g_Archivers[Index].Name).c_str());
+        if (Value->bstrVal)
+        {
+            Value->vt = VT_BSTR;
+        }
+        break;
+    }
+    case SevenZipHandlerClassId:
+    {
+        GUID ClassId;
+        ClassId.Data1 = SevenZipGuidData1;
+        ClassId.Data2 = SevenZipGuidData2;
+        ClassId.Data3 = SevenZipGuidData3Common;
+        *reinterpret_cast<PUINT64>(ClassId.Data4) =
+            NanaZip::Codecs::ArchiverProviderIdBase | Index;
+        Value->bstrVal = ::SysAllocStringByteLen(
+            reinterpret_cast<LPCSTR>(&ClassId),
+            sizeof(ClassId));
+        if (Value->bstrVal)
+        {
+            Value->vt = VT_BSTR;
+        }
+        break;
+    }
+    case SevenZipHandlerExtension:
+    {
+        if (g_Archivers[Index].Extension)
+        {
+            Value->bstrVal = ::SysAllocString(Mile::ToWideString(
+                CP_UTF8,
+                g_Archivers[Index].Extension).c_str());
+            if (Value->bstrVal)
+            {
+                Value->vt = VT_BSTR;
+            }
+        }
+        break;
+    }
+    case SevenZipHandlerAddExtension:
+    {
+        if (g_Archivers[Index].AddExtension)
+        {
+            Value->bstrVal = ::SysAllocString(Mile::ToWideString(
+                CP_UTF8,
+                g_Archivers[Index].AddExtension).c_str());
+            if (Value->bstrVal)
+            {
+                Value->vt = VT_BSTR;
+            }
+        }
+        break;
+    }
+    case SevenZipHandlerUpdate:
+    {
+        Value->boolVal =
+            g_Archivers[Index].Update
+            ? VARIANT_TRUE
+            : VARIANT_FALSE;
+        Value->vt = VT_BOOL;
+        break;
+    }
+    case SevenZipHandlerKeepName:
+    {
+        Value->boolVal =
+            g_Archivers[Index].Flags & SevenZipHandlerFlagKeepName
+            ? VARIANT_TRUE
+            : VARIANT_FALSE;
+        Value->vt = VT_BOOL;
+        break;
+    }
+    case SevenZipHandlerSignature:
+    {
+        if (g_Archivers[Index].SignatureSize &&
+            !(g_Archivers[Index].Flags & SevenZipHandlerFlagMultiSignature))
+        {
+            Value->bstrVal = ::SysAllocStringByteLen(
+                reinterpret_cast<LPCSTR>(&g_Archivers[Index].Signature),
+                g_Archivers[Index].SignatureSize);
+            if (Value->bstrVal)
+            {
+                Value->vt = VT_BSTR;
+            }
+        }
+        break;
+    }
+    case SevenZipHandlerMultiSignature:
+    {
+        if (g_Archivers[Index].SignatureSize &&
+            g_Archivers[Index].Flags & SevenZipHandlerFlagMultiSignature)
+        {
+            Value->bstrVal = ::SysAllocStringByteLen(
+                reinterpret_cast<LPCSTR>(&g_Archivers[Index].Signature),
+                g_Archivers[Index].SignatureSize);
+            if (Value->bstrVal)
+            {
+                Value->vt = VT_BSTR;
+            }
+        }
+        break;
+    }
+    case SevenZipHandlerSignatureOffset:
+    {
+        Value->ulVal = g_Archivers[Index].SignatureOffset;
+        Value->vt = VT_UI4;
+        break;
+    }
+    case SevenZipHandlerAlternateStream:
+    {
+        Value->boolVal =
+            g_Archivers[Index].Flags & SevenZipHandlerFlagAlternateStreams
+            ? VARIANT_TRUE
+            : VARIANT_FALSE;
+        Value->vt = VT_BOOL;
+        break;
+    }
+    case SevenZipHandlerNtSecurity:
+    {
+        Value->boolVal =
+            g_Archivers[Index].Flags & SevenZipHandlerFlagNtSecurity
+            ? VARIANT_TRUE
+            : VARIANT_FALSE;
+        Value->vt = VT_BOOL;
+        break;
+    }
+    case SevenZipHandlerFlags:
+    {
+        Value->ulVal = g_Archivers[Index].Flags;
+        Value->vt = VT_UI4;
+        break;
+    }
+    case SevenZipHandlerTimeFlags:
+    {
+        Value->ulVal = g_Archivers[Index].TimeFlags;
+        Value->vt = VT_UI4;
+        break;
+    }
+    default:
+        return E_INVALIDARG;
+    }
+
     return S_OK;
 }

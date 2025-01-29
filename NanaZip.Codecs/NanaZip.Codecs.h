@@ -47,6 +47,12 @@ namespace NanaZip::Codecs
      * @remark 0x4523374B is little-endian representation of K7#E (E -> Encoder)
      */
     const UINT64 EncoderProviderIdBase = 0x4523374B00000000;
+
+    /**
+     * @brief The ID base value of NanaZip Archiver Providers.
+     * @remark 0x4523374B is little-endian representation of K7#A (A -> Archiver)
+     */
+    const UINT64 ArchiverProviderIdBase = 0x4123374B00000000;
 }
 
 namespace NanaZip::Codecs::Hash
