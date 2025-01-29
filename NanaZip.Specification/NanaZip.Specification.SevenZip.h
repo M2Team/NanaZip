@@ -575,7 +575,7 @@ public:
         _In_ UINT32 Index,
         _Out_ BSTR* Name,
         _Out_ PROPID* PropID,
-        _Out_ VARTYPE* varType) = 0;
+        _Out_ VARTYPE* VarType) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE GetNumberOfArchiveProperties(
         _Out_ PUINT32 NumProps) = 0;
