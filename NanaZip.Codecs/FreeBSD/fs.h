@@ -37,6 +37,12 @@
 #include <stdint.h>
 #include "dinode.h"
 
+#define NBBY 8 /* number of bits in a byte */
+
+#ifndef howmany
+#define howmany(x, y) (((x)+((y)-1))/(y))
+#endif
+
 /*
  * Each disk drive contains some number of filesystems.
  * A filesystem consists of a number of cylinder groups.
