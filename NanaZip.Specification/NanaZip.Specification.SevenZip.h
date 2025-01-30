@@ -226,7 +226,7 @@ ICompressSetCoderProperties : public IUnknown
 public:
 
     virtual HRESULT STDMETHODCALLTYPE SetCoderProperties(
-        _In_ const PROPID* PropIDs,
+        _In_ const PROPID* PropIds,
         _In_ REFPROPVARIANT Props,
         _In_ UINT32 NumProps) = 0;
 };
@@ -482,7 +482,7 @@ typedef enum _SEVENZIP_ARCHIVE_PROPERTY_TYPE
     SevenZipArchiveIs64Bit, // VT_BOOL
     SevenZipArchiveBigEndian, // VT_BOOL
     SevenZipArchiveCpu, // VT_BSTR
-    SevenZipArchivePhySize, // VT_UI8
+    SevenZipArchivePhysicalSize, // VT_UI8
     SevenZipArchiveHeadersSize, // VT_UI8
     SevenZipArchiveChecksum, // VT_UI4
     SevenZipArchiveCharacteristics, // VT_BSTR
@@ -523,7 +523,7 @@ typedef enum _SEVENZIP_ARCHIVE_PROPERTY_TYPE
     SevenZipArchiveShortComment, // VT_BSTR
     SevenZipArchiveCodePage, // VT_BSTR
     SevenZipArchiveIsNotArchiveType, // VT_BOOL
-    SevenZipArchivePhySizeCantBeDetected, // VT_BOOL
+    SevenZipArchivePhysicalSizeCantBeDetected, // VT_BOOL
     SevenZipArchiveZerosTailIsAllowed, // VT_BOOL
     SevenZipArchiveTailSize, // VT_UI8
     SevenZipArchiveEmbeddedStubSize, // VT_UI8
@@ -564,7 +564,7 @@ public:
 
     virtual HRESULT STDMETHODCALLTYPE GetProperty(
         _In_ UINT32 Index,
-        _In_ PROPID PropID,
+        _In_ PROPID PropId,
         _Inout_ LPPROPVARIANT Value) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE Extract(
@@ -574,7 +574,7 @@ public:
         _In_ IArchiveExtractCallback* ExtractCallback) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE GetArchiveProperty(
-        _In_ PROPID PropID,
+        _In_ PROPID PropId,
         _Inout_ LPPROPVARIANT Value) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE GetNumberOfProperties(
@@ -583,7 +583,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE GetPropertyInfo(
         _In_ UINT32 Index,
         _Out_ BSTR* Name,
-        _Out_ PROPID* PropID,
+        _Out_ PROPID* PropId,
         _Out_ VARTYPE* VarType) = 0;
 
     virtual HRESULT STDMETHODCALLTYPE GetNumberOfArchiveProperties(
@@ -592,7 +592,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE GetArchivePropertyInfo(
         _In_ UINT32 Index,
         _Out_ BSTR* Name,
-        _Out_ PROPID* PropID,
+        _Out_ PROPID* PropId,
         _Out_ VARTYPE* VarType) = 0;
 };
 
