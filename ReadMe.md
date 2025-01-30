@@ -41,41 +41,84 @@ Kenji Mouri
 
 ## Features
 
-- Inherit all features from 7-Zip 24.08.
+- Inherit all features from 7-Zip 24.08, [7-Zip ZS] and [7-Zip NSIS].
 - Support the dark mode for all GUI components.
 - Support the Mica effect on the main window. You will enjoy the full window
   immersive Mica for all GUI components if you are using dark mode with HDR
   disabled.
 - Packaging with MSIX for modern deployment experience.
 - Support the context menu in Windows 10/11 File Explorer.
-- Enable NSIS script decompiling support for the NSIS archives. (Merged from 
-  [7-Zip NSIS branch](https://github.com/myfreeer/7z-build-nsis).)
 - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
-- Support the Brotli, Fast-LZMA2, Lizard, LZ4, LZ5, and Zstandard codecs. (Merged 
-  from [7-Zip ZS branch](https://github.com/mcmilk/7-Zip-zstd).)
 - Support the Per-Monitor DPI-Aware for all GUI components.
 - Support the i18n for GUI edition of Self Extracting Executable.
-- Integrate the following hash algorithms to NanaZip from RHash (AICH, BLAKE2b,
-  BTIH, EDON-R 224, EDON-R 256, EDON-R 384, EDON-R 512, GOST R 34.11-94, 
-  GOST R 34.11-94 CryptoPro, GOST R 34.11-2012 256, GOST R 34.11-2012 512, 
-  HAS-160, RIPEMD-160, SHA-224, SHA3-224, SHA3-256, SHA3-384, SHA3-512, 
-  Snefru-128, Snefru-256, Tiger, Tiger2, BTIH, TTH, Whirlpool), xxHash
-  (XXH3_64bits, XXH3_128bits), GmSSL (SM3), and Windows CNG API (MD2, MD4, MD5,
-  SHA-1, SHA-256, SHA-384, SHA-512, ED2K).
-- Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP 
-  attacks.
-- Mark all x86 and x64 target binaries as compatible with Control-flow 
-  Enforcement Technology (CET) Shadow Stack.
-- Strict handle checks at runtime to block the use of invalid handles.
-- Disable dynamic code generation in Release builds prevents generating 
-  malicious code at runtime.
-- Block loading unexpected libraries from remote sources at runtime.
-- Enable Package Integrity Check.
-- Enable EH Continuation Metadata.
-- Enable Signed Returns.
-- Enable disabling child process creation for NanaZip CLI and Self Extracting
-  Executables. (Except installer mode of Self Extracting Executables, which
-  compiled binaries is not provided in the NanaZip MSIX package.)
+- Provide additional hash algorithms.
+  - MD2 (Inherit from 7-Zip ZS, but reimplemented with Windows CNG API)
+  - MD4 (Inherit from 7-Zip ZS, but reimplemented with Windows CNG API)
+  - MD5 (Inherit from 7-Zip, but reimplemented with Windows CNG API)
+  - SHA-1 (Inherit from 7-Zip, but reimplemented with Windows CNG API)
+  - SHA-256 (Inherit from 7-Zip, but reimplemented with Windows CNG API)
+  - SHA-384 (Inherit from 7-Zip, but reimplemented with Windows CNG API)
+  - SHA-512 (Inherit from 7-Zip, but reimplemented with Windows CNG API)
+  - ED2K (Implemented with Windows CNG API)
+  - AICH (Implemented with RHash)
+  - BLAKE2b (Implemented with RHash)
+  - BTIH (Implemented with RHash)
+  - EDON-R 224 (Implemented with RHash)
+  - EDON-R 256 (Implemented with RHash)
+  - EDON-R 384 (Implemented with RHash)
+  - EDON-R 512 (Implemented with RHash)
+  - GOST R 34.11-94 (Implemented with RHash)
+  - GOST R 34.11-94 CryptoPro (Implemented with RHash)
+  - GOST R 34.11-2012 256 (Implemented with RHash)
+  - GOST R 34.11-2012 512 (Implemented with RHash)
+  - HAS-160 (Implemented with RHash)
+  - RIPEMD-160 (Implemented with RHash)
+  - SHA-224 (Implemented with RHash)
+  - SHA3-224 (Inherit from 7-Zip, but reimplemented with RHash)
+  - SHA3-256 (Inherit from 7-Zip, but reimplemented with RHash)
+  - SHA3-384 (Inherit from 7-Zip, but reimplemented with RHash)
+  - SHA3-512 (Inherit from 7-Zip, but reimplemented with RHash)
+  - Snefru-128 (Implemented with RHash)
+  - Snefru-256 (Implemented with RHash)
+  - Tiger (Implemented with RHash)
+  - Tiger2 (Implemented with RHash)
+  - BTIH (Implemented with RHash)
+  - TTH (Implemented with RHash)
+  - Whirlpool (Implemented with RHash)
+  - XXH32 (Implemented with xxHash)
+  - XXH64 (Implemented with xxHash)
+  - XXH3_64bits (Implemented with xxHash)
+  - XXH3_128bits (Implemented with xxHash)
+  - SM3 (Implemented with GmSSL)
+- Provide additional codecs. (Note: Decoder can be considered as decompression
+  support, Encoder can be considered as compression support, and Archiver can be
+  considered as archive format support)
+  - Brotli (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
+  - Fast-LZMA2 (Encoder, inherited from 7-Zip ZS)
+  - Lizard (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
+  - LZ4 (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
+  - LZ5 (Decoder & Encoder & Archiver, Both inherited from 7-Zip ZS)
+  - Zstandard (Decoder inherited from 7-Zip, Encoder & Archiver inherited from
+    7-Zip ZS)
+  - NSIS (Decoder's NSIS script decompiling support, inherited from 7-Zip NSIS)
+- Provide additional security mitigations.
+  - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP
+    attacks.
+  - Mark all x86 and x64 target binaries as compatible with Control-flow
+    Enforcement Technology (CET) Shadow Stack.
+  - Strict handle checks at runtime to block the use of invalid handles.
+  - Disable dynamic code generation in Release builds prevents generating
+    malicious code at runtime.
+  - Block loading unexpected libraries from remote sources at runtime.
+  - Enable Package Integrity Check.
+  - Enable EH Continuation Metadata.
+  - Enable Signed Returns.
+  - Enable disabling child process creation for NanaZip CLI and Self Extracting
+    Executables. (Except installer mode of Self Extracting Executables, which
+    compiled binaries is not provided in the NanaZip MSIX package.)
+
+[7-Zip ZS]: https://github.com/mcmilk/7-Zip-zstd
+[7-Zip NSIS]: https://github.com/myfreeer/7z-build-nsis
 
 ## Differences between NanaZip and NanaZip Classic
 
