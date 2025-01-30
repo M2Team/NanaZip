@@ -384,7 +384,7 @@ EXTERN_C HRESULT WINAPI GetHandlerProperty2(
             !(g_Archivers[Index].Flags & SevenZipHandlerFlagMultiSignature))
         {
             Value->bstrVal = ::SysAllocStringByteLen(
-                reinterpret_cast<LPCSTR>(&g_Archivers[Index].Signature),
+                reinterpret_cast<LPCSTR>(g_Archivers[Index].Signature),
                 g_Archivers[Index].SignatureSize);
             if (Value->bstrVal)
             {
@@ -399,7 +399,7 @@ EXTERN_C HRESULT WINAPI GetHandlerProperty2(
             g_Archivers[Index].Flags & SevenZipHandlerFlagMultiSignature)
         {
             Value->bstrVal = ::SysAllocStringByteLen(
-                reinterpret_cast<LPCSTR>(&g_Archivers[Index].Signature),
+                reinterpret_cast<LPCSTR>(g_Archivers[Index].Signature),
                 g_Archivers[Index].SignatureSize);
             if (Value->bstrVal)
             {
