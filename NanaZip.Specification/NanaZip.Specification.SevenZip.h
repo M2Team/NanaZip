@@ -529,7 +529,7 @@ typedef enum _SEVENZIP_ARCHIVE_PROPERTY_TYPE
     SevenZipArchiveEmbeddedStubSize, // VT_UI8
     SevenZipArchiveNtReparsePoint, // VT_BSTR
     SevenZipArchiveHardLink, // VT_BSTR
-    SevenZipArchiveINode, // VT_UI8
+    SevenZipArchiveInode, // VT_UI8
     SevenZipArchiveStreamId, // VT_UI8
     SevenZipArchiveReadOnly, // VT_BOOL
     SevenZipArchiveOutputName, // VT_BSTR
