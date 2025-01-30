@@ -35,6 +35,25 @@
 
 namespace
 {
+    // Win32 time epoch is 00:00:00, January 1 1601.
+    // UNIX time epoch is 00:00:00, January 1 1970.
+    // There are 11644473600 seconds between these two epochs.
+    const std::uint64_t SecondsBetweenWin32TimeAndUnixTime = 11644473600ULL;
+
+    FILETIME ToFileTime(
+        std::uint64_t UnixTimeSeconds,
+        std::uint64_t UnixTimeNanoseconds)
+    {
+        std::uint64_t RawResult = UnixTimeSeconds;
+        RawResult += SecondsBetweenWin32TimeAndUnixTime;
+        RawResult *= 1000 * 1000 * 10;
+        RawResult += UnixTimeNanoseconds / 100;
+        FILETIME Result;
+        Result.dwLowDateTime = static_cast<DWORD>(RawResult);
+        Result.dwHighDateTime = static_cast<DWORD>(RawResult >> 32);
+        return Result;
+    }
+
     const std::int32_t g_SuperBlockSearchList[] = SBLOCKSEARCH;
 
     struct ArchivePropertyItem
@@ -45,6 +64,7 @@ namespace
 
     const ArchivePropertyItem g_ArchivePropertyItems[] =
     {
+        { SevenZipArchiveModifiedTime, VT_FILETIME },
         { SevenZipArchiveFreeSpace, VT_UI8 },
         { SevenZipArchiveClusterSize, VT_UI4 },
         { SevenZipArchiveVolumeName, VT_BSTR },
@@ -63,6 +83,7 @@ namespace NanaZip::Codecs::Archive
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
         fs m_SuperBlock = { 0 };
+        IInStream* m_FileStream = nullptr;
         bool m_IsInitialized = false;
 
     private:
@@ -170,6 +191,60 @@ namespace NanaZip::Codecs::Archive
             const void* BaseAddress)
         {
             return static_cast<std::int64_t>(this->ReadUInt64(BaseAddress));
+        }
+
+    private:
+
+        std::uint64_t GetTotalBlocks()
+        {
+            return this->m_IsUfs2
+                ? this->ReadInt64(&this->m_SuperBlock.fs_dsize)
+                : this->ReadInt32(&this->m_SuperBlock.fs_old_dsize);
+        }
+
+        std::uint64_t GetCylinderGroupStart(
+            std::uint64_t const& CylinderGroup)
+        {
+            std::uint64_t Result = CylinderGroup;
+            Result *= this->ReadInt32(&this->m_SuperBlock.fs_fpg);
+            if (!this->m_IsUfs2)
+            {
+                std::int32_t Offset = this->ReadInt32(
+                    &this->m_SuperBlock.fs_old_cgoffset);
+                std::int32_t Mask = this->ReadInt32(
+                    &this->m_SuperBlock.fs_old_cgmask);
+                Result += Offset * (CylinderGroup & ~Mask);
+            }
+            return Result;
+        }
+
+        std::int32_t GetFragmentBlockSize()
+        {
+            return this->ReadInt32(&this->m_SuperBlock.fs_fsize);
+        }
+
+        std::int32_t GetBlockSize()
+        {
+            return this->ReadInt32(&this->m_SuperBlock.fs_bsize);
+        }
+
+        std::uint64_t GetDirectoryInodeSize()
+        {
+            return this->m_IsUfs2 ? sizeof(ufs2_dinode) : sizeof(ufs1_dinode);
+        }
+
+        std::uint64_t GetInodeOffset(
+            std::uint64_t const& Inode)
+        {
+            std::uint32_t InodePerCylinderGroup = this->ReadInt32(
+                &this->m_SuperBlock.fs_fpg);
+            std::uint64_t CylinderGroup = Inode / InodePerCylinderGroup;
+            std::uint64_t SubIndex = Inode % InodePerCylinderGroup;
+            std::uint64_t Result = this->GetCylinderGroupStart(CylinderGroup);
+            Result += this->ReadInt32(&this->m_SuperBlock.fs_iblkno);
+            Result *= this->GetFragmentBlockSize();
+            Result += SubIndex * this->GetDirectoryInodeSize();
+            return Result;
         }
 
     public:
@@ -318,11 +393,65 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                this->m_SuperBlock = this->m_SuperBlock;
+                this->m_FileStream = Stream;
+                this->m_FileStream->AddRef();
 
-                std::uint64_t x = freespace(&this->m_SuperBlock, 0);
+                if (OpenCallback)
+                {
+                    std::uint64_t TotalFiles =
+                        this->ReadUInt32(&this->m_SuperBlock.fs_ncg);
+                    TotalFiles *= this->ReadUInt32(&this->m_SuperBlock.fs_ipg);
+                    TotalFiles -= UFS_ROOTINO;
+                    std::uint64_t TotalBytes =
+                        this->GetTotalBlocks() * this->GetFragmentBlockSize();
+                    OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
+                }
 
-                x = x;
+                if (SUCCEEDED(Stream->Seek(
+                    this->GetInodeOffset(UFS_ROOTINO),
+                    STREAM_SEEK_SET,
+                    nullptr)))
+                {
+                    std::vector<std::uint8_t> DirectoryInodeBuffer(
+                        this->GetDirectoryInodeSize());
+                    NumberOfBytesRead = 0;
+                    if (SUCCEEDED(::NanaZipCodecsReadInputStream(
+                        Stream,
+                        &DirectoryInodeBuffer[0],
+                        DirectoryInodeBuffer.size(),
+                        &NumberOfBytesRead)))
+                    {
+                        ufs2_dinode* DirectoryInode =
+                            reinterpret_cast<ufs2_dinode*>(
+                                &DirectoryInodeBuffer[0]);
+
+                        std::uint64_t FileSize =
+                            this->ReadUInt64(&DirectoryInode->di_size);
+
+                        std::uint64_t ActualFileSize = 0;
+
+                        std::vector<std::uint64_t> BlockOffsets;
+
+                        for (size_t i = 0; i < UFS_NDADDR; ++i)
+                        {
+                            BlockOffsets.emplace_back(
+                                this->ReadInt64(&DirectoryInode->di_db[i]));
+                            ActualFileSize += GetBlockSize();
+                            if (ActualFileSize >= FileSize)
+                            {
+                                break;
+                            }
+                        }
+
+                        if (ActualFileSize < FileSize)
+                        {
+
+                        }
+
+
+                        DirectoryInode = DirectoryInode;
+                    }
+                }
 
             } while (false);
 
@@ -341,6 +470,11 @@ namespace NanaZip::Codecs::Archive
         HRESULT STDMETHODCALLTYPE Close()
         {
             this->m_IsInitialized = false;
+            if (this->m_FileStream)
+            {
+                this->m_FileStream->Release();
+                this->m_FileStream = nullptr;
+            }
             std::memset(&this->m_SuperBlock, 0, sizeof(this->m_SuperBlock));
             this->m_IsBigEndian = false;
             this->m_IsUfs2 = false;
@@ -399,25 +533,28 @@ namespace NanaZip::Codecs::Archive
 
             switch (PropId)
             {
-            case SevenZipArchivePhysicalSize:
+            case SevenZipArchiveModifiedTime:
             {
-                std::uint64_t TotalBlocks = 0;
+                std::uint64_t PosixModifiedTimeSecond = 0;
                 if (this->m_IsUfs2)
                 {
-                    TotalBlocks = this->ReadInt64(
-                        &this->m_SuperBlock.fs_dsize);
+                    PosixModifiedTimeSecond = this->ReadInt64(
+                        &this->m_SuperBlock.fs_time);
                 }
                 else
                 {
-                    TotalBlocks = this->ReadInt32(
-                        &this->m_SuperBlock.fs_old_dsize);
+                    PosixModifiedTimeSecond = this->ReadInt32(
+                        &this->m_SuperBlock.fs_old_time);
                 }
 
-                std::uint64_t TotalSize = this->ReadInt32(
-                    &this->m_SuperBlock.fs_fsize);
-                TotalSize *= TotalBlocks;
-
-                Value->uhVal.QuadPart = TotalSize;
+                Value->filetime = ::ToFileTime(PosixModifiedTimeSecond, 0);
+                Value->vt = VT_FILETIME;
+                break;
+            }
+            case SevenZipArchivePhysicalSize:
+            {
+                Value->uhVal.QuadPart =
+                    this->GetTotalBlocks() * this->GetFragmentBlockSize();
                 Value->vt = VT_UI8;
                 break;
             }
@@ -450,8 +587,7 @@ namespace NanaZip::Codecs::Archive
                     this->ReadInt64(&this->m_SuperBlock.fs_pendingblocks)
                     >> this->ReadInt32(&this->m_SuperBlock.fs_fsbtodb);
 
-                std::uint64_t FreeSize = this->ReadInt32(
-                    &this->m_SuperBlock.fs_fsize);
+                std::uint64_t FreeSize = this->GetFragmentBlockSize();
                 FreeSize *= FreeBlocks;
 
                 Value->uhVal.QuadPart = FreeSize;
@@ -460,8 +596,7 @@ namespace NanaZip::Codecs::Archive
             }
             case SevenZipArchiveClusterSize:
             {
-                Value->ulVal = this->ReadInt32(
-                    &this->m_SuperBlock.fs_fsize);
+                Value->ulVal = this->GetFragmentBlockSize();
                 Value->vt = VT_UI4;
                 break;
             }
