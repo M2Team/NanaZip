@@ -72,6 +72,11 @@ namespace
 
     const std::size_t g_ArchivePropertyItemsCount =
         sizeof(g_ArchivePropertyItems) / sizeof(*g_ArchivePropertyItems);
+
+    struct UfsInodeInformation
+    {
+        std::vector<std::uint64_t> BlockOffsets;
+    };
 }
 
 namespace NanaZip::Codecs::Archive
@@ -80,10 +85,10 @@ namespace NanaZip::Codecs::Archive
     {
     private:
 
+        IInStream* m_FileStream = nullptr;
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
         fs m_SuperBlock = { 0 };
-        IInStream* m_FileStream = nullptr;
         bool m_IsInitialized = false;
 
     private:
@@ -247,6 +252,219 @@ namespace NanaZip::Codecs::Archive
             return Result;
         }
 
+        HRESULT ReadFileStream(
+            _In_ INT64 Offset,
+            _Out_ PVOID Buffer,
+            _In_ SIZE_T NumberOfBytesToRead)
+        {
+            if (!this->m_FileStream)
+            {
+                return S_FALSE;
+            }
+
+            if (SUCCEEDED(this->m_FileStream->Seek(
+                Offset,
+                STREAM_SEEK_SET,
+                nullptr)))
+            {
+                SIZE_T NumberOfBytesRead = 0;
+                if (SUCCEEDED(::NanaZipCodecsReadInputStream(
+                    this->m_FileStream,
+                    Buffer,
+                    NumberOfBytesToRead,
+                    &NumberOfBytesRead)))
+                {
+                    if (NumberOfBytesToRead == NumberOfBytesRead)
+                    {
+                        return S_OK;
+                    }
+                }
+            }
+
+            return S_FALSE;
+        }
+
+        bool GetInodeInformation(
+            std::uint64_t const& Inode,
+            UfsInodeInformation& Information)
+        {
+            std::vector<std::uint8_t> DirectoryInodeBuffer(
+                this->GetDirectoryInodeSize());
+            ufs1_dinode* Ufs1DirectoryInode = reinterpret_cast<ufs1_dinode*>(
+                &DirectoryInodeBuffer[0]);
+            ufs2_dinode* Ufs2DirectoryInode = reinterpret_cast<ufs2_dinode*>(
+                &DirectoryInodeBuffer[0]);
+
+            if (FAILED(this->ReadFileStream(
+                this->GetInodeOffset(Inode),
+                &DirectoryInodeBuffer[0],
+                DirectoryInodeBuffer.size())))
+            {
+                return false;
+            }
+
+            std::int32_t BlockSize = this->GetBlockSize();
+            std::int32_t FragmentBlockSize = this->GetFragmentBlockSize();
+            std::uint64_t FileSize = this->ReadUInt64(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_size
+                : &Ufs1DirectoryInode->di_size);
+            std::uint64_t ActualFileSize = 0;
+
+            for (size_t i = 0; i < UFS_NDADDR; ++i)
+            {
+                std::int64_t CurrentBlock = this->m_IsUfs2
+                    ? this->ReadInt64(&Ufs2DirectoryInode->di_db[i])
+                    : this->ReadInt32(&Ufs1DirectoryInode->di_db[i]);
+                Information.BlockOffsets.emplace_back(
+                    CurrentBlock * FragmentBlockSize);
+                ActualFileSize += BlockSize;
+                if (ActualFileSize >= FileSize)
+                {
+                    return true;
+                }
+            }
+
+            std::vector<std::uint8_t> IndirectBuffer0(BlockSize);
+            std::vector<std::uint8_t> IndirectBuffer1(BlockSize);
+            std::vector<std::uint8_t> IndirectBuffer2(BlockSize);
+
+            std::int32_t* Ufs1IndirectBlocks0 =
+                reinterpret_cast<std::int32_t*>(&IndirectBuffer0[0]);
+            std::int32_t* Ufs1IndirectBlocks1 =
+                reinterpret_cast<std::int32_t*>(&IndirectBuffer1[0]);
+            std::int32_t* Ufs1IndirectBlocks2 =
+                reinterpret_cast<std::int32_t*>(&IndirectBuffer2[0]);
+            std::uint64_t Ufs1IndirectBlockMaximum =
+                BlockSize / sizeof(std::int32_t);
+
+            std::int64_t* Ufs2IndirectBlocks0 =
+                reinterpret_cast<std::int64_t*>(&IndirectBuffer0[0]);
+            std::int64_t* Ufs2IndirectBlocks1 =
+                reinterpret_cast<std::int64_t*>(&IndirectBuffer1[0]);
+            std::int64_t* Ufs2IndirectBlocks2 =
+                reinterpret_cast<std::int64_t*>(&IndirectBuffer2[0]);
+            std::uint64_t Ufs2IndirectBlockMaximum =
+                BlockSize / sizeof(std::int64_t);
+
+            std::uint64_t CurrentIndirectBlockMaximum = this->m_IsUfs2
+                ? Ufs2IndirectBlockMaximum
+                : Ufs1IndirectBlockMaximum;
+
+            if (FAILED(this->ReadFileStream(
+                FragmentBlockSize * (this->m_IsUfs2
+                    ? this->ReadInt64(&Ufs2DirectoryInode->di_ib[0])
+                    : this->ReadInt32(&Ufs1DirectoryInode->di_ib[0])),
+                &IndirectBuffer0[0],
+                BlockSize)))
+            {
+                return false;
+            }
+
+            for (size_t i = 0; i < CurrentIndirectBlockMaximum; ++i)
+            {
+                std::int64_t CurrentBlock = this->m_IsUfs2
+                    ? this->ReadInt64(&Ufs2IndirectBlocks0[i])
+                    : this->ReadInt32(&Ufs1IndirectBlocks0[i]);
+                Information.BlockOffsets.emplace_back(
+                    CurrentBlock * FragmentBlockSize);
+                ActualFileSize += BlockSize;
+                if (ActualFileSize >= FileSize)
+                {
+                    return true;
+                }
+            }
+
+            if (FAILED(this->ReadFileStream(
+                FragmentBlockSize * (this->m_IsUfs2
+                    ? this->ReadInt64(&Ufs2DirectoryInode->di_ib[1])
+                    : this->ReadInt32(&Ufs1DirectoryInode->di_ib[1])),
+                &IndirectBuffer1[0],
+                BlockSize)))
+            {
+                return false;
+            }
+
+            for (size_t j = 0; j < CurrentIndirectBlockMaximum; ++j)
+            {
+                if (FAILED(this->ReadFileStream(
+                    FragmentBlockSize * (this->m_IsUfs2
+                        ? this->ReadInt64(&Ufs2IndirectBlocks1[j])
+                        : this->ReadInt32(&Ufs1IndirectBlocks1[j])),
+                    &IndirectBuffer0[0],
+                    BlockSize)))
+                {
+                    return false;
+                }
+
+                for (size_t i = 0; i < CurrentIndirectBlockMaximum; ++i)
+                {
+                    std::int64_t CurrentBlock = this->m_IsUfs2
+                        ? this->ReadInt64(&Ufs2IndirectBlocks0[i])
+                        : this->ReadInt32(&Ufs1IndirectBlocks0[i]);
+                    Information.BlockOffsets.emplace_back(
+                        CurrentBlock * FragmentBlockSize);
+                    ActualFileSize += BlockSize;
+                    if (ActualFileSize >= FileSize)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            if (FAILED(this->ReadFileStream(
+                FragmentBlockSize * (this->m_IsUfs2
+                    ? this->ReadInt64(&Ufs2DirectoryInode->di_ib[2])
+                    : this->ReadInt32(&Ufs1DirectoryInode->di_ib[2])),
+                &IndirectBuffer2[0],
+                BlockSize)))
+            {
+                return false;
+            }
+
+            for (size_t k = 0; k < CurrentIndirectBlockMaximum; ++k)
+            {
+                if (FAILED(this->ReadFileStream(
+                    FragmentBlockSize * (this->m_IsUfs2
+                        ? this->ReadInt64(&Ufs2IndirectBlocks2[k])
+                        : this->ReadInt32(&Ufs1IndirectBlocks2[k])),
+                    &IndirectBuffer1[0],
+                    BlockSize)))
+                {
+                    return false;
+                }
+
+                for (size_t j = 0; j < CurrentIndirectBlockMaximum; ++j)
+                {
+                    if (FAILED(this->ReadFileStream(
+                        FragmentBlockSize * (this->m_IsUfs2
+                            ? this->ReadInt64(&Ufs2IndirectBlocks1[j])
+                            : this->ReadInt32(&Ufs1IndirectBlocks1[j])),
+                        &IndirectBuffer0[0],
+                        BlockSize)))
+                    {
+                        return false;
+                    }
+
+                    for (size_t i = 0; i < CurrentIndirectBlockMaximum; ++i)
+                    {
+                        std::int64_t CurrentBlock = this->m_IsUfs2
+                            ? this->ReadInt64(&Ufs2IndirectBlocks0[i])
+                            : this->ReadInt32(&Ufs1IndirectBlocks0[i]);
+                        Information.BlockOffsets.emplace_back(
+                            CurrentBlock * FragmentBlockSize);
+                        ActualFileSize += BlockSize;
+                        if (ActualFileSize >= FileSize)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
     public:
 
         Ufs()
@@ -268,36 +486,22 @@ namespace NanaZip::Codecs::Archive
             }
 
             HRESULT hr = S_OK;
-            SIZE_T NumberOfBytesRead = 0;
 
             do
             {
                 this->Close();
 
+                this->m_FileStream = Stream;
+                this->m_FileStream->AddRef();
+
                 for (size_t i = 0; -1 != g_SuperBlockSearchList[i]; ++i)
                 {
-                    hr = Stream->Seek(
+                    hr = this->ReadFileStream(
                         g_SuperBlockSearchList[i],
-                        STREAM_SEEK_SET,
-                        nullptr);
-                    if (FAILED(hr))
-                    {
-                        break;
-                    }
-
-                    NumberOfBytesRead = 0;
-                    hr = ::NanaZipCodecsReadInputStream(
-                        Stream,
                         &this->m_SuperBlock,
-                        sizeof(this->m_SuperBlock),
-                        &NumberOfBytesRead);
+                        sizeof(this->m_SuperBlock));
                     if (FAILED(hr))
                     {
-                        break;
-                    }
-                    if (sizeof(fs) != NumberOfBytesRead)
-                    {
-                        hr = S_FALSE;
                         break;
                     }
 
@@ -393,9 +597,6 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                this->m_FileStream = Stream;
-                this->m_FileStream->AddRef();
-
                 if (OpenCallback)
                 {
                     std::uint64_t TotalFiles =
@@ -407,51 +608,15 @@ namespace NanaZip::Codecs::Archive
                     OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
                 }
 
-                if (SUCCEEDED(Stream->Seek(
-                    this->GetInodeOffset(UFS_ROOTINO),
-                    STREAM_SEEK_SET,
-                    nullptr)))
+                UfsInodeInformation RootInodeInformation;
+                if (!this->GetInodeInformation(
+                    UFS_ROOTINO,
+                    RootInodeInformation))
                 {
-                    std::vector<std::uint8_t> DirectoryInodeBuffer(
-                        this->GetDirectoryInodeSize());
-                    NumberOfBytesRead = 0;
-                    if (SUCCEEDED(::NanaZipCodecsReadInputStream(
-                        Stream,
-                        &DirectoryInodeBuffer[0],
-                        DirectoryInodeBuffer.size(),
-                        &NumberOfBytesRead)))
-                    {
-                        ufs2_dinode* DirectoryInode =
-                            reinterpret_cast<ufs2_dinode*>(
-                                &DirectoryInodeBuffer[0]);
-
-                        std::uint64_t FileSize =
-                            this->ReadUInt64(&DirectoryInode->di_size);
-
-                        std::uint64_t ActualFileSize = 0;
-
-                        std::vector<std::uint64_t> BlockOffsets;
-
-                        for (size_t i = 0; i < UFS_NDADDR; ++i)
-                        {
-                            BlockOffsets.emplace_back(
-                                this->ReadInt64(&DirectoryInode->di_db[i]));
-                            ActualFileSize += GetBlockSize();
-                            if (ActualFileSize >= FileSize)
-                            {
-                                break;
-                            }
-                        }
-
-                        if (ActualFileSize < FileSize)
-                        {
-
-                        }
-
-
-                        DirectoryInode = DirectoryInode;
-                    }
+                    break;
                 }
+
+                RootInodeInformation = RootInodeInformation;
 
             } while (false);
 
@@ -470,14 +635,14 @@ namespace NanaZip::Codecs::Archive
         HRESULT STDMETHODCALLTYPE Close()
         {
             this->m_IsInitialized = false;
+            std::memset(&this->m_SuperBlock, 0, sizeof(this->m_SuperBlock));
+            this->m_IsBigEndian = false;
+            this->m_IsUfs2 = false;
             if (this->m_FileStream)
             {
                 this->m_FileStream->Release();
                 this->m_FileStream = nullptr;
             }
-            std::memset(&this->m_SuperBlock, 0, sizeof(this->m_SuperBlock));
-            this->m_IsBigEndian = false;
-            this->m_IsUfs2 = false;
             return S_OK;
         }
 
