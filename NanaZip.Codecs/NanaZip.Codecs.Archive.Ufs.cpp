@@ -46,87 +46,84 @@ namespace NanaZip::Codecs::Archive
 
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
+        fs m_SuperBlock = { 0 };
 
     private:
 
         std::uint8_t ReadUInt8(
-            void* BaseAddress,
-            std::size_t Offset = 0)
+            void* BaseAddress)
         {
             std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
-            return Base[Offset];
+            return Base[0];
         }
 
         std::uint16_t ReadUInt16(
-            void* BaseAddress,
-            std::size_t Offset = 0)
+            void* BaseAddress)
         {
             std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
             if (this->m_IsBigEndian)
             {
                 return
-                    (static_cast<std::uint16_t>(Base[Offset]) << 8) |
-                    (static_cast<std::uint16_t>(Base[Offset + 1]));
+                    (static_cast<std::uint16_t>(Base[0]) << 8) |
+                    (static_cast<std::uint16_t>(Base[1]));
             }
             else
             {
                 return
-                    (static_cast<std::uint16_t>(Base[Offset])) |
-                    (static_cast<std::uint16_t>(Base[Offset + 1]) << 8);
+                    (static_cast<std::uint16_t>(Base[0])) |
+                    (static_cast<std::uint16_t>(Base[1]) << 8);
             }
         }
 
         std::uint32_t ReadUInt32(
-            void* BaseAddress,
-            std::size_t Offset = 0)
+            void* BaseAddress)
         {
             std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
             if (this->m_IsBigEndian)
             {
                 return
-                    (static_cast<std::uint32_t>(Base[Offset]) << 24) |
-                    (static_cast<std::uint32_t>(Base[Offset + 1]) << 16) |
-                    (static_cast<std::uint32_t>(Base[Offset + 2]) << 8) |
-                    (static_cast<std::uint32_t>(Base[Offset + 3]));
+                    (static_cast<std::uint32_t>(Base[0]) << 24) |
+                    (static_cast<std::uint32_t>(Base[1]) << 16) |
+                    (static_cast<std::uint32_t>(Base[2]) << 8) |
+                    (static_cast<std::uint32_t>(Base[3]));
             }
             else
             {
                 return
-                    (static_cast<std::uint32_t>(Base[Offset])) |
-                    (static_cast<std::uint32_t>(Base[Offset + 1]) << 8) |
-                    (static_cast<std::uint32_t>(Base[Offset + 2]) << 16) |
-                    (static_cast<std::uint32_t>(Base[Offset + 3]) << 24);
+                    (static_cast<std::uint32_t>(Base[0])) |
+                    (static_cast<std::uint32_t>(Base[1]) << 8) |
+                    (static_cast<std::uint32_t>(Base[2]) << 16) |
+                    (static_cast<std::uint32_t>(Base[3]) << 24);
             }
         }
 
         std::uint64_t ReadUInt64(
-            void* BaseAddress,
-            std::size_t Offset = 0)
+            void* BaseAddress)
         {
             std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
             if (this->m_IsBigEndian)
             {
                 return
-                    (static_cast<std::uint64_t>(Base[Offset]) << 56) |
-                    (static_cast<std::uint64_t>(Base[Offset + 1]) << 48) |
-                    (static_cast<std::uint64_t>(Base[Offset + 2]) << 40) |
-                    (static_cast<std::uint64_t>(Base[Offset + 3]) << 32) |
-                    (static_cast<std::uint64_t>(Base[Offset + 4]) << 24) |
-                    (static_cast<std::uint64_t>(Base[Offset + 5]) << 16) |
-                    (static_cast<std::uint64_t>(Base[Offset + 6]) << 8) |
-                    (static_cast<std::uint64_t>(Base[Offset + 7]));
+                    (static_cast<std::uint64_t>(Base[0]) << 56) |
+                    (static_cast<std::uint64_t>(Base[1]) << 48) |
+                    (static_cast<std::uint64_t>(Base[2]) << 40) |
+                    (static_cast<std::uint64_t>(Base[3]) << 32) |
+                    (static_cast<std::uint64_t>(Base[4]) << 24) |
+                    (static_cast<std::uint64_t>(Base[5]) << 16) |
+                    (static_cast<std::uint64_t>(Base[6]) << 8) |
+                    (static_cast<std::uint64_t>(Base[7]));
             }
             else
             {
                 return
-                    (static_cast<std::uint64_t>(Base[Offset])) |
-                    (static_cast<std::uint64_t>(Base[Offset + 1]) << 8) |
-                    (static_cast<std::uint64_t>(Base[Offset + 2]) << 16) |
-                    (static_cast<std::uint64_t>(Base[Offset + 3]) << 24) |
-                    (static_cast<std::uint64_t>(Base[Offset + 4]) << 32) |
-                    (static_cast<std::uint64_t>(Base[Offset + 5]) << 40) |
-                    (static_cast<std::uint64_t>(Base[Offset + 6]) << 48) |
-                    (static_cast<std::uint64_t>(Base[Offset + 7]) << 56);
+                    (static_cast<std::uint64_t>(Base[0])) |
+                    (static_cast<std::uint64_t>(Base[1]) << 8) |
+                    (static_cast<std::uint64_t>(Base[2]) << 16) |
+                    (static_cast<std::uint64_t>(Base[3]) << 24) |
+                    (static_cast<std::uint64_t>(Base[4]) << 32) |
+                    (static_cast<std::uint64_t>(Base[5]) << 40) |
+                    (static_cast<std::uint64_t>(Base[6]) << 48) |
+                    (static_cast<std::uint64_t>(Base[7]) << 56);
             }
         }
 
@@ -153,7 +150,6 @@ namespace NanaZip::Codecs::Archive
 
             HRESULT hr = S_OK;
             SIZE_T NumberOfBytesRead = 0;
-            fs SuperBlock = { 0 };
 
             do
             {
@@ -173,8 +169,8 @@ namespace NanaZip::Codecs::Archive
                     NumberOfBytesRead = 0;
                     hr = ::NanaZipCodecsReadInputStream(
                         Stream,
-                        &SuperBlock,
-                        sizeof(SuperBlock),
+                        &this->m_SuperBlock,
+                        sizeof(this->m_SuperBlock),
                         &NumberOfBytesRead);
                     if (FAILED(hr))
                     {
@@ -187,42 +183,98 @@ namespace NanaZip::Codecs::Archive
                     }
 
                     this->m_IsBigEndian = false;
-                    std::uint32_t Signature =
-                        this->ReadUInt32(&SuperBlock.fs_magic);
+                    std::uint32_t Signature = this->ReadUInt32(
+                        &this->m_SuperBlock.fs_magic);
                     if (FS_UFS2_MAGIC == Signature)
                     {
                         this->m_IsUfs2 = true;
-                        break;
                     }
                     else if (FS_UFS1_MAGIC == Signature)
                     {
                         this->m_IsUfs2 = false;
-                        break;
                     }
                     else
                     {
                         this->m_IsBigEndian = true;
-                        Signature = this->ReadUInt32(&SuperBlock.fs_magic);
+                        Signature = this->ReadUInt32(
+                            &this->m_SuperBlock.fs_magic);
                         if (FS_UFS2_MAGIC == Signature)
                         {
                             this->m_IsUfs2 = true;
-                            break;
                         }
                         else if (FS_UFS1_MAGIC == Signature)
                         {
                             this->m_IsUfs2 = false;
-                            break;
+                        }
+                        else
+                        {
+                            hr = S_FALSE;
+                            continue;
                         }
                     }
 
-                    hr = S_FALSE;
+                    std::int64_t SuperBlockLocation = static_cast<std::int64_t>(
+                        this->ReadUInt64(&this->m_SuperBlock.fs_sblockloc));
+                    if (this->m_IsUfs2)
+                    {
+                        if (SBLOCK_UFS2 != SuperBlockLocation)
+                        {
+                            hr = S_FALSE;
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if (SuperBlockLocation < 0 ||
+                            SuperBlockLocation > SBLOCK_UFS1)
+                        {
+                            hr = S_FALSE;
+                            continue;
+                        }
+                    }
+
+                    std::int32_t FragmentsCount = static_cast<std::int32_t>(
+                        this->ReadUInt32(&this->m_SuperBlock.fs_frag));
+                    if (FragmentsCount < 1)
+                    {
+                        hr = S_FALSE;
+                        continue;
+                    }
+
+                    std::uint32_t CylinderGroupsCount =
+                        this->ReadUInt32(&this->m_SuperBlock.fs_ncg);
+                    if (CylinderGroupsCount < 1)
+                    {
+                        hr = S_FALSE;
+                        continue;
+                    }
+
+                    std::int32_t BlockSize = static_cast<std::int32_t>(
+                        this->ReadUInt32(&this->m_SuperBlock.fs_bsize));
+                    if (BlockSize < MINBSIZE)
+                    {
+                        hr = S_FALSE;
+                        continue;
+                    }
+
+                    std::int32_t SuperBlockSize = static_cast<std::int32_t>(
+                        this->ReadUInt32(&this->m_SuperBlock.fs_sbsize));
+                    if (SuperBlockSize > SBLOCKSIZE ||
+                        SuperBlockSize < sizeof(fs))
+                    {
+                        hr = S_FALSE;
+                        continue;
+                    }
+
+                    hr = S_OK;
+                    break;
                 }
                 if (FAILED(hr))
                 {
                     break;
                 }
 
-                SuperBlock = SuperBlock;
+                // this->m_SuperBlock = this->m_SuperBlock;
 
             } while (false);
 
@@ -236,6 +288,7 @@ namespace NanaZip::Codecs::Archive
 
         HRESULT STDMETHODCALLTYPE Close()
         {
+            std::memset(&this->m_SuperBlock, 0, sizeof(this->m_SuperBlock));
             this->m_IsBigEndian = false;
             this->m_IsUfs2 = false;
             return S_OK;
@@ -244,8 +297,12 @@ namespace NanaZip::Codecs::Archive
         HRESULT STDMETHODCALLTYPE GetNumberOfItems(
             _Out_ PUINT32 NumItems)
         {
-            UNREFERENCED_PARAMETER(NumItems);
-            return E_NOTIMPL;
+            if (!NumItems)
+            {
+                return E_INVALIDARG;
+            }
+            *NumItems = 0;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetProperty(
@@ -256,7 +313,7 @@ namespace NanaZip::Codecs::Archive
             UNREFERENCED_PARAMETER(Index);
             UNREFERENCED_PARAMETER(PropID);
             UNREFERENCED_PARAMETER(Value);
-            return E_NOTIMPL;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE Extract(
@@ -278,14 +335,18 @@ namespace NanaZip::Codecs::Archive
         {
             UNREFERENCED_PARAMETER(PropID);
             UNREFERENCED_PARAMETER(Value);
-            return E_NOTIMPL;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetNumberOfProperties(
             _Out_ PUINT32 NumProps)
         {
-            UNREFERENCED_PARAMETER(NumProps);
-            return E_NOTIMPL;
+            if (!NumProps)
+            {
+                return E_INVALIDARG;
+            }
+            *NumProps = 0;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetPropertyInfo(
@@ -298,14 +359,18 @@ namespace NanaZip::Codecs::Archive
             UNREFERENCED_PARAMETER(Name);
             UNREFERENCED_PARAMETER(PropID);
             UNREFERENCED_PARAMETER(VarType);
-            return E_NOTIMPL;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetNumberOfArchiveProperties(
             _Out_ PUINT32 NumProps)
         {
-            UNREFERENCED_PARAMETER(NumProps);
-            return E_NOTIMPL;
+            if (!NumProps)
+            {
+                return E_INVALIDARG;
+            }
+            *NumProps = 0;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetArchivePropertyInfo(
@@ -318,7 +383,7 @@ namespace NanaZip::Codecs::Archive
             UNREFERENCED_PARAMETER(Name);
             UNREFERENCED_PARAMETER(PropID);
             UNREFERENCED_PARAMETER(VarType);
-            return E_NOTIMPL;
+            return S_OK;
         }
     };
 
