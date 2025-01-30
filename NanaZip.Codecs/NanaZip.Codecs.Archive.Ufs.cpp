@@ -36,6 +36,22 @@
 namespace
 {
     const std::int32_t g_SuperBlockSearchList[] = SBLOCKSEARCH;
+
+    struct ArchivePropertyItem
+    {
+        PROPID Property;
+        VARTYPE Type;
+    };
+
+    const ArchivePropertyItem g_ArchivePropertyItems[] =
+    {
+        { SevenZipArchiveFreeSpace, VT_UI8 },
+        { SevenZipArchiveClusterSize, VT_UI4 },
+        { SevenZipArchiveVolumeName, VT_BSTR },
+    };
+
+    const std::size_t g_ArchivePropertyItemsCount =
+        sizeof(g_ArchivePropertyItems) / sizeof(*g_ArchivePropertyItems);
 }
 
 namespace NanaZip::Codecs::Archive
@@ -47,20 +63,23 @@ namespace NanaZip::Codecs::Archive
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
         fs m_SuperBlock = { 0 };
+        bool m_IsInitialized = false;
 
     private:
 
         std::uint8_t ReadUInt8(
-            void* BaseAddress)
+            const void* BaseAddress)
         {
-            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            const std::uint8_t* Base =
+                reinterpret_cast<const std::uint8_t*>(BaseAddress);
             return Base[0];
         }
 
         std::uint16_t ReadUInt16(
-            void* BaseAddress)
+            const void* BaseAddress)
         {
-            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            const std::uint8_t* Base =
+                reinterpret_cast<const std::uint8_t*>(BaseAddress);
             if (this->m_IsBigEndian)
             {
                 return
@@ -76,9 +95,10 @@ namespace NanaZip::Codecs::Archive
         }
 
         std::uint32_t ReadUInt32(
-            void* BaseAddress)
+            const void* BaseAddress)
         {
-            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            const std::uint8_t* Base =
+                reinterpret_cast<const std::uint8_t*>(BaseAddress);
             if (this->m_IsBigEndian)
             {
                 return
@@ -98,9 +118,10 @@ namespace NanaZip::Codecs::Archive
         }
 
         std::uint64_t ReadUInt64(
-            void* BaseAddress)
+            const void* BaseAddress)
         {
-            std::uint8_t* Base = reinterpret_cast<std::uint8_t*>(BaseAddress);
+            const std::uint8_t* Base =
+                reinterpret_cast<const std::uint8_t*>(BaseAddress);
             if (this->m_IsBigEndian)
             {
                 return
@@ -127,6 +148,30 @@ namespace NanaZip::Codecs::Archive
             }
         }
 
+        std::int8_t ReadInt8(
+            const void* BaseAddress)
+        {
+            return static_cast<std::int8_t>(this->ReadUInt8(BaseAddress));
+        }
+
+        std::int16_t ReadInt16(
+            const void* BaseAddress)
+        {
+            return static_cast<std::int16_t>(this->ReadUInt16(BaseAddress));
+        }
+
+        std::int32_t ReadInt32(
+            const void* BaseAddress)
+        {
+            return static_cast<std::int32_t>(this->ReadUInt32(BaseAddress));
+        }
+
+        std::int64_t ReadInt64(
+            const void* BaseAddress)
+        {
+            return static_cast<std::int64_t>(this->ReadUInt64(BaseAddress));
+        }
+
     public:
 
         Ufs()
@@ -139,7 +184,6 @@ namespace NanaZip::Codecs::Archive
             _In_opt_ const PUINT64 MaxCheckStartPosition,
             _In_opt_ IArchiveOpenCallback* OpenCallback)
         {
-            UNREFERENCED_PARAMETER(Stream);
             UNREFERENCED_PARAMETER(MaxCheckStartPosition);
             UNREFERENCED_PARAMETER(OpenCallback);
 
@@ -213,8 +257,8 @@ namespace NanaZip::Codecs::Archive
                         }
                     }
 
-                    std::int64_t SuperBlockLocation = static_cast<std::int64_t>(
-                        this->ReadUInt64(&this->m_SuperBlock.fs_sblockloc));
+                    std::int64_t SuperBlockLocation = this->ReadInt64(
+                        &this->m_SuperBlock.fs_sblockloc);
                     if (this->m_IsUfs2)
                     {
                         if (SBLOCK_UFS2 != SuperBlockLocation)
@@ -233,32 +277,32 @@ namespace NanaZip::Codecs::Archive
                         }
                     }
 
-                    std::int32_t FragmentsCount = static_cast<std::int32_t>(
-                        this->ReadUInt32(&this->m_SuperBlock.fs_frag));
+                    std::int32_t FragmentsCount = this->ReadInt32(
+                        &this->m_SuperBlock.fs_frag);
                     if (FragmentsCount < 1)
                     {
                         hr = S_FALSE;
                         continue;
                     }
 
-                    std::uint32_t CylinderGroupsCount =
-                        this->ReadUInt32(&this->m_SuperBlock.fs_ncg);
+                    std::uint32_t CylinderGroupsCount = this->ReadUInt32(
+                        &this->m_SuperBlock.fs_ncg);
                     if (CylinderGroupsCount < 1)
                     {
                         hr = S_FALSE;
                         continue;
                     }
 
-                    std::int32_t BlockSize = static_cast<std::int32_t>(
-                        this->ReadUInt32(&this->m_SuperBlock.fs_bsize));
+                    std::int32_t BlockSize = this->ReadInt32(
+                        &this->m_SuperBlock.fs_bsize);
                     if (BlockSize < MINBSIZE)
                     {
                         hr = S_FALSE;
                         continue;
                     }
 
-                    std::int32_t SuperBlockSize = static_cast<std::int32_t>(
-                        this->ReadUInt32(&this->m_SuperBlock.fs_sbsize));
+                    std::int32_t SuperBlockSize = this->ReadInt32(
+                        &this->m_SuperBlock.fs_sbsize);
                     if (SuperBlockSize > SBLOCKSIZE ||
                         SuperBlockSize < sizeof(fs))
                     {
@@ -274,7 +318,11 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                // this->m_SuperBlock = this->m_SuperBlock;
+                this->m_SuperBlock = this->m_SuperBlock;
+
+                std::uint64_t x = freespace(&this->m_SuperBlock, 0);
+
+                x = x;
 
             } while (false);
 
@@ -282,12 +330,17 @@ namespace NanaZip::Codecs::Archive
             {
                 this->Close();
             }
+            else
+            {
+                this->m_IsInitialized = true;
+            }
 
             return hr;
         }
 
         HRESULT STDMETHODCALLTYPE Close()
         {
+            this->m_IsInitialized = false;
             std::memset(&this->m_SuperBlock, 0, sizeof(this->m_SuperBlock));
             this->m_IsBigEndian = false;
             this->m_IsUfs2 = false;
@@ -301,17 +354,18 @@ namespace NanaZip::Codecs::Archive
             {
                 return E_INVALIDARG;
             }
+
             *NumItems = 0;
             return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetProperty(
             _In_ UINT32 Index,
-            _In_ PROPID PropID,
+            _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
             UNREFERENCED_PARAMETER(Index);
-            UNREFERENCED_PARAMETER(PropID);
+            UNREFERENCED_PARAMETER(PropId);
             UNREFERENCED_PARAMETER(Value);
             return S_OK;
         }
@@ -330,11 +384,106 @@ namespace NanaZip::Codecs::Archive
         }
 
         HRESULT STDMETHODCALLTYPE GetArchiveProperty(
-            _In_ PROPID PropID,
+            _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            UNREFERENCED_PARAMETER(PropID);
-            UNREFERENCED_PARAMETER(Value);
+            if (!this->m_IsInitialized)
+            {
+                return S_FALSE;
+            }
+
+            if (!Value)
+            {
+                return E_INVALIDARG;
+            }
+
+            switch (PropId)
+            {
+            case SevenZipArchivePhysicalSize:
+            {
+                std::uint64_t TotalBlocks = 0;
+                if (this->m_IsUfs2)
+                {
+                    TotalBlocks = this->ReadInt64(
+                        &this->m_SuperBlock.fs_dsize);
+                }
+                else
+                {
+                    TotalBlocks = this->ReadInt32(
+                        &this->m_SuperBlock.fs_old_dsize);
+                }
+
+                std::uint64_t TotalSize = this->ReadInt32(
+                    &this->m_SuperBlock.fs_fsize);
+                TotalSize *= TotalBlocks;
+
+                Value->uhVal.QuadPart = TotalSize;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchiveFreeSpace:
+            {
+                std::uint64_t FreeBlocks = 0;
+                if (this->m_IsUfs2)
+                {
+                    FreeBlocks = this->ReadInt64(
+                        &this->m_SuperBlock.fs_cstotal.cs_nbfree);
+                }
+                else
+                {
+                    FreeBlocks = this->ReadInt32(
+                        &this->m_SuperBlock.fs_old_cstotal.cs_nbfree);
+                }
+                FreeBlocks *= this->ReadInt32(
+                    &this->m_SuperBlock.fs_frag);
+                if (this->m_IsUfs2)
+                {
+                    FreeBlocks += this->ReadInt64(
+                        &this->m_SuperBlock.fs_cstotal.cs_nffree);
+                }
+                else
+                {
+                    FreeBlocks += this->ReadInt32(
+                        &this->m_SuperBlock.fs_old_cstotal.cs_nffree);
+                }
+                FreeBlocks +=
+                    this->ReadInt64(&this->m_SuperBlock.fs_pendingblocks)
+                    >> this->ReadInt32(&this->m_SuperBlock.fs_fsbtodb);
+
+                std::uint64_t FreeSize = this->ReadInt32(
+                    &this->m_SuperBlock.fs_fsize);
+                FreeSize *= FreeBlocks;
+
+                Value->uhVal.QuadPart = FreeSize;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchiveClusterSize:
+            {
+                Value->ulVal = this->ReadInt32(
+                    &this->m_SuperBlock.fs_fsize);
+                Value->vt = VT_UI4;
+                break;
+            }
+            case SevenZipArchiveVolumeName:
+            {
+                std::string VolumeName = std::string(
+                    reinterpret_cast<char*>(this->m_SuperBlock.fs_volname),
+                    MAXVOLLEN);
+                VolumeName.resize(std::strlen(VolumeName.c_str()));
+                Value->bstrVal = ::SysAllocString(Mile::ToWideString(
+                    CP_UTF8,
+                    VolumeName).c_str());
+                if (Value->bstrVal)
+                {
+                    Value->vt = VT_BSTR;
+                }
+                break;
+            }
+            default:
+                break;
+            }
+
             return S_OK;
         }
 
@@ -345,6 +494,7 @@ namespace NanaZip::Codecs::Archive
             {
                 return E_INVALIDARG;
             }
+
             *NumProps = 0;
             return S_OK;
         }
@@ -352,12 +502,12 @@ namespace NanaZip::Codecs::Archive
         HRESULT STDMETHODCALLTYPE GetPropertyInfo(
             _In_ UINT32 Index,
             _Out_ BSTR* Name,
-            _Out_ PROPID* PropID,
+            _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType)
         {
             UNREFERENCED_PARAMETER(Index);
             UNREFERENCED_PARAMETER(Name);
-            UNREFERENCED_PARAMETER(PropID);
+            UNREFERENCED_PARAMETER(PropId);
             UNREFERENCED_PARAMETER(VarType);
             return S_OK;
         }
@@ -369,20 +519,29 @@ namespace NanaZip::Codecs::Archive
             {
                 return E_INVALIDARG;
             }
-            *NumProps = 0;
+            *NumProps = g_ArchivePropertyItemsCount;
             return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetArchivePropertyInfo(
             _In_ UINT32 Index,
             _Out_ BSTR* Name,
-            _Out_ PROPID* PropID,
+            _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType)
         {
-            UNREFERENCED_PARAMETER(Index);
-            UNREFERENCED_PARAMETER(Name);
-            UNREFERENCED_PARAMETER(PropID);
-            UNREFERENCED_PARAMETER(VarType);
+            if (!(Index < g_ArchivePropertyItemsCount))
+            {
+                return E_INVALIDARG;
+            }
+
+            if (!Name || !PropId || !VarType)
+            {
+                return E_INVALIDARG;
+            }
+
+            *Name = nullptr;
+            *PropId = g_ArchivePropertyItems[Index].Property;
+            *VarType = g_ArchivePropertyItems[Index].Type;
             return S_OK;
         }
     };
