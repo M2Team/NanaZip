@@ -1017,7 +1017,7 @@ namespace NanaZip::Codecs::Archive
         }
 
         HRESULT STDMETHODCALLTYPE Extract(
-            _In_ const PUINT32 Indices,
+            _In_opt_ const PUINT32 Indices,
             _In_ UINT32 NumItems,
             _In_ BOOL TestMode,
             _In_ IArchiveExtractCallback* ExtractCallback)
