@@ -135,7 +135,7 @@ NanaZip Classic. Here are the differences between them.
   - Only support Windows 10 Version 2004 (Build 19041) or later.
   - XAML-based GUI.
 
-- NanaZip Classic
+- NanaZip Classic (Work In Progress)
   - Have 32-Bit support.
   - Only portable version.
   - Don't have the context menu support.
