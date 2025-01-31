@@ -93,7 +93,7 @@ namespace
             "UFS",
             "ufs ufs2 img",
             nullptr,
-            SevenZipHandlerFlagStartOpen,
+            SevenZipHandlerFlagBackwardOpen,
             0,
             nullptr,
             0,

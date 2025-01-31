@@ -1027,11 +1027,123 @@ namespace NanaZip::Codecs::Archive
                 return S_FALSE;
             }
 
+            HRESULT hr = S_OK;
+
+            INT32 AskMode = TestMode
+                ? SevenZipExtractAskModeTest
+                : SevenZipExtractAskModeExtract;
+
+            const bool AllFilesMode =
+                static_cast<UINT32>(-1) == NumItems;
+            if (AllFilesMode)
+            {
+                NumItems = static_cast<UINT32>(this->m_FilePaths.size());
+            }
+
+            ExtractCallback->SetTotal(
+                this->GetTotalBlocks() * this->GetFragmentBlockSize());
+
+            UINT64 Completed = 0;
+            
+            for (UINT32 i = 0; i < NumItems; ++i)
+            {
+                UfsInodeInformation Information;
+                if (!this->GetInodeInformation(
+                    this->m_FilePaths[AllFilesMode ? i : Indices[i]].second,
+                    Information))
+                {
+                    ExtractCallback->SetOperationResult(
+                        SevenZipExtractOperationResultUnavailable);
+                    continue;
+                }
+
+                Completed += Information.FileSize;
+                ExtractCallback->SetCompleted(&Completed);
+
+                hr = ExtractCallback->PrepareOperation(AskMode);
+                if (FAILED(hr))
+                {
+                    ExtractCallback->SetOperationResult(
+                        SevenZipExtractOperationResultUnavailable);
+                    continue;
+                }
+
+                ISequentialOutStream* OutputStream = nullptr;
+                hr = ExtractCallback->GetStream(
+                    Indices[i],
+                    &OutputStream,
+                    AskMode);
+                if (FAILED(hr))
+                {
+                    ExtractCallback->SetOperationResult(
+                        SevenZipExtractOperationResultUnavailable);
+                    continue;
+                }
+
+                if (!OutputStream)
+                {
+                    continue;
+                }
+
+                if (Information.Mode & IFDIR)
+                {
+                    OutputStream->Release();
+                    continue;
+                }
+
+                std::uint32_t BlockSize = this->GetBlockSize();
+
+                UINT32 Todo = static_cast<UINT32>(Information.FileSize);
+                UINT32 Done = 0;
+
+                bool Failed = false;
+                for (std::uint64_t const& Offset : Information.BlockOffsets)
+                {
+                    if (!Todo)
+                    {
+                        // Done
+                        break;
+                    }
+
+                    UINT32 CurrentDo = Todo > BlockSize ? BlockSize : Todo;
+
+                    std::vector<std::uint8_t> Buffer(CurrentDo);
+                    if (FAILED(this->ReadFileStream(
+                        Offset,
+                        &Buffer[0],
+                        CurrentDo)))
+                    {
+                        Failed = true;
+                        break;
+                    }
+
+                    UINT32 ProceededSize = 0;
+                    hr = OutputStream->Write(
+                        &Buffer[0],
+                        CurrentDo,
+                        &ProceededSize);
+                    if (FAILED(hr))
+                    {
+                        Failed = true;
+                        break;
+                    }
+
+                    Todo -= CurrentDo;
+                    Done += CurrentDo;
+                }
+
+                OutputStream->Release();
+
+                ExtractCallback->SetOperationResult(
+                    Failed
+                    ? SevenZipExtractOperationResultUnavailable
+                    : SevenZipExtractOperationResultSuccess);
+            }
+
             UNREFERENCED_PARAMETER(Indices);
-            UNREFERENCED_PARAMETER(NumItems);
             UNREFERENCED_PARAMETER(TestMode);
             UNREFERENCED_PARAMETER(ExtractCallback);
-            return E_NOTIMPL;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE GetArchiveProperty(
