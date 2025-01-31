@@ -33,6 +33,8 @@
 #endif
 #endif
 
+#include <map>
+
 namespace
 {
     // Win32 time epoch is 00:00:00, January 1 1601.
@@ -56,13 +58,13 @@ namespace
 
     const std::int32_t g_SuperBlockSearchList[] = SBLOCKSEARCH;
 
-    struct ArchivePropertyItem
+    struct PropertyItem
     {
         PROPID Property;
         VARTYPE Type;
     };
 
-    const ArchivePropertyItem g_ArchivePropertyItems[] =
+    const PropertyItem g_ArchivePropertyItems[] =
     {
         { SevenZipArchiveModifiedTime, VT_FILETIME },
         { SevenZipArchiveFreeSpace, VT_UI8 },
@@ -73,8 +75,44 @@ namespace
     const std::size_t g_ArchivePropertyItemsCount =
         sizeof(g_ArchivePropertyItems) / sizeof(*g_ArchivePropertyItems);
 
+    const PropertyItem g_PropertyItems[] =
+    {
+        { SevenZipArchivePath, VT_BSTR },
+        { SevenZipArchiveIsDirectory, VT_BOOL },
+        { SevenZipArchiveSize, VT_UI8 },
+        { SevenZipArchivePackSize, VT_UI8 },
+        { SevenZipArchiveCreationTime, VT_FILETIME },
+        { SevenZipArchiveAccessTime, VT_FILETIME },
+        { SevenZipArchiveModifiedTime, VT_FILETIME },
+        { SevenZipArchiveLinks, VT_UI8 },
+        { SevenZipArchivePosixAttributes, VT_UI4 },
+        { SevenZipArchiveSymbolicLink, VT_BSTR },
+        { SevenZipArchiveInode, VT_UI8 },
+        { SevenZipArchiveUserId, VT_UI4 },
+        { SevenZipArchiveGroupId, VT_UI4 },
+    };
+
+    const std::size_t g_PropertyItemsCount =
+        sizeof(g_PropertyItems) / sizeof(*g_PropertyItems);
+
     struct UfsInodeInformation
     {
+        std::uint16_t Mode;
+        std::uint16_t NumberOfHardLinks;
+        std::uint32_t OwnerUserId;
+        std::uint32_t GroupId;
+        std::int64_t DeviceId;
+        std::uint64_t FileSize;
+        std::uint64_t AllocatedBlocks;
+        std::int64_t LastAccessTimeSeconds;
+        std::int64_t LastWriteTimeSeconds;
+        std::int64_t ChangeTimeSeconds;
+        std::int64_t BirthTimeSeconds;
+        std::int32_t LastAccessTimeNanoseconds;
+        std::int32_t LastWriteTimeNanoseconds;
+        std::int32_t ChangeTimeNanoseconds;
+        std::int32_t BirthTimeNanoseconds;
+        std::string EmbeddedSymbolLink;
         std::vector<std::uint64_t> BlockOffsets;
     };
 }
@@ -89,6 +127,8 @@ namespace NanaZip::Codecs::Archive
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
         fs m_SuperBlock = { 0 };
+        std::map<std::string, std::uint32_t> m_TemporaryFilePaths;
+        std::vector<std::pair<std::string, std::uint32_t>> m_FilePaths;
         bool m_IsInitialized = false;
 
     private:
@@ -238,13 +278,18 @@ namespace NanaZip::Codecs::Archive
             return this->m_IsUfs2 ? sizeof(ufs2_dinode) : sizeof(ufs1_dinode);
         }
 
+        std::int32_t GetMaximumEmbeddedSymbolLinkLength()
+        {
+            return this->ReadInt32(&this->m_SuperBlock.fs_maxsymlinklen);
+        }
+
         std::uint64_t GetInodeOffset(
-            std::uint64_t const& Inode)
+            std::uint32_t const& Inode)
         {
             std::uint32_t InodePerCylinderGroup = this->ReadInt32(
                 &this->m_SuperBlock.fs_fpg);
-            std::uint64_t CylinderGroup = Inode / InodePerCylinderGroup;
-            std::uint64_t SubIndex = Inode % InodePerCylinderGroup;
+            std::uint32_t CylinderGroup = Inode / InodePerCylinderGroup;
+            std::uint32_t SubIndex = Inode % InodePerCylinderGroup;
             std::uint64_t Result = this->GetCylinderGroupStart(CylinderGroup);
             Result += this->ReadInt32(&this->m_SuperBlock.fs_iblkno);
             Result *= this->GetFragmentBlockSize();
@@ -285,9 +330,11 @@ namespace NanaZip::Codecs::Archive
         }
 
         bool GetInodeInformation(
-            std::uint64_t const& Inode,
+            std::uint32_t const& Inode,
             UfsInodeInformation& Information)
         {
+            Information = UfsInodeInformation();
+
             std::vector<std::uint8_t> DirectoryInodeBuffer(
                 this->GetDirectoryInodeSize());
             ufs1_dinode* Ufs1DirectoryInode = reinterpret_cast<ufs1_dinode*>(
@@ -303,15 +350,88 @@ namespace NanaZip::Codecs::Archive
                 return false;
             }
 
-            std::int32_t BlockSize = this->GetBlockSize();
-            std::int32_t FragmentBlockSize = this->GetFragmentBlockSize();
-            std::uint64_t FileSize = this->ReadUInt64(
+            Information.Mode = this->ReadUInt16(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_mode
+                : &Ufs1DirectoryInode->di_mode);
+            Information.NumberOfHardLinks = this->ReadUInt16(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_nlink
+                : &Ufs1DirectoryInode->di_nlink);
+            Information.OwnerUserId = this->ReadUInt32(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_uid
+                : &Ufs1DirectoryInode->di_uid);
+            Information.GroupId = this->ReadUInt32(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_gid
+                : &Ufs1DirectoryInode->di_gid);
+            Information.DeviceId = this->m_IsUfs2
+                ? this->ReadInt64(&Ufs2DirectoryInode->di_db[0])
+                : this->ReadInt32(&Ufs1DirectoryInode->di_db[0]);
+            Information.FileSize = this->ReadUInt64(
                 this->m_IsUfs2
                 ? &Ufs2DirectoryInode->di_size
                 : &Ufs1DirectoryInode->di_size);
+            Information.AllocatedBlocks = this->m_IsUfs2
+                ? this->ReadInt64(&Ufs2DirectoryInode->di_blocks)
+                : this->ReadInt32(&Ufs1DirectoryInode->di_blocks);
+            Information.LastAccessTimeSeconds = this->m_IsUfs2
+                ? this->ReadInt64(&Ufs2DirectoryInode->di_atime)
+                : this->ReadInt32(&Ufs1DirectoryInode->di_atime);
+            Information.LastWriteTimeSeconds = this->m_IsUfs2
+                ? this->ReadInt64(&Ufs2DirectoryInode->di_mtime)
+                : this->ReadInt32(&Ufs1DirectoryInode->di_mtime);
+            Information.ChangeTimeSeconds = this->m_IsUfs2
+                ? this->ReadInt64(&Ufs2DirectoryInode->di_ctime)
+                : this->ReadInt32(&Ufs1DirectoryInode->di_ctime);
+            if (this->m_IsUfs2)
+            {
+                Information.BirthTimeSeconds = this->ReadInt64(
+                    &Ufs2DirectoryInode->di_birthtime);
+            }
+            Information.LastAccessTimeNanoseconds = this->ReadInt32(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_atimensec
+                : &Ufs1DirectoryInode->di_atimensec);
+            Information.LastWriteTimeNanoseconds = this->ReadInt32(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_mtimensec
+                : &Ufs1DirectoryInode->di_mtimensec);
+            Information.ChangeTimeNanoseconds = this->ReadInt32(
+                this->m_IsUfs2
+                ? &Ufs2DirectoryInode->di_ctimensec
+                : &Ufs1DirectoryInode->di_ctimensec);
+            if (this->m_IsUfs2)
+            {
+                Information.BirthTimeNanoseconds = this->ReadInt32(
+                    &Ufs2DirectoryInode->di_birthnsec);
+            }
+
+            if ((Information.Mode & IFMT) == IFLNK)
+            {
+                if (Information.FileSize
+                    <= this->GetMaximumEmbeddedSymbolLinkLength())
+                {
+                    std::string EmbeddedSymbolLink = std::string(
+                        reinterpret_cast<char*>(this->m_IsUfs2
+                            ? Ufs2DirectoryInode->di_shortlink
+                            : Ufs1DirectoryInode->di_shortlink),
+                        this->m_IsUfs2
+                        ? sizeof(Ufs2DirectoryInode->di_shortlink)
+                        : sizeof(Ufs1DirectoryInode->di_shortlink));
+                    EmbeddedSymbolLink.resize(
+                        std::strlen(EmbeddedSymbolLink.c_str()));
+                    Information.EmbeddedSymbolLink = EmbeddedSymbolLink;
+                    return true;
+                }
+            }
+
+            std::int32_t BlockSize = this->GetBlockSize();
+            std::int32_t FragmentBlockSize = this->GetFragmentBlockSize();
             std::uint64_t ActualFileSize = 0;
 
-            for (size_t i = 0; i < UFS_NDADDR; ++i)
+            for (std::size_t i = 0; i < UFS_NDADDR; ++i)
             {
                 std::int64_t CurrentBlock = this->m_IsUfs2
                     ? this->ReadInt64(&Ufs2DirectoryInode->di_db[i])
@@ -319,7 +439,7 @@ namespace NanaZip::Codecs::Archive
                 Information.BlockOffsets.emplace_back(
                     CurrentBlock * FragmentBlockSize);
                 ActualFileSize += BlockSize;
-                if (ActualFileSize >= FileSize)
+                if (ActualFileSize >= Information.FileSize)
                 {
                     return true;
                 }
@@ -347,7 +467,7 @@ namespace NanaZip::Codecs::Archive
             std::uint64_t Ufs2IndirectBlockMaximum =
                 BlockSize / sizeof(std::int64_t);
 
-            std::uint64_t CurrentIndirectBlockMaximum = this->m_IsUfs2
+            std::uint64_t IndirectBlockMaximum = this->m_IsUfs2
                 ? Ufs2IndirectBlockMaximum
                 : Ufs1IndirectBlockMaximum;
 
@@ -361,7 +481,7 @@ namespace NanaZip::Codecs::Archive
                 return false;
             }
 
-            for (size_t i = 0; i < CurrentIndirectBlockMaximum; ++i)
+            for (std::size_t i = 0; i < IndirectBlockMaximum; ++i)
             {
                 std::int64_t CurrentBlock = this->m_IsUfs2
                     ? this->ReadInt64(&Ufs2IndirectBlocks0[i])
@@ -369,7 +489,7 @@ namespace NanaZip::Codecs::Archive
                 Information.BlockOffsets.emplace_back(
                     CurrentBlock * FragmentBlockSize);
                 ActualFileSize += BlockSize;
-                if (ActualFileSize >= FileSize)
+                if (ActualFileSize >= Information.FileSize)
                 {
                     return true;
                 }
@@ -385,7 +505,7 @@ namespace NanaZip::Codecs::Archive
                 return false;
             }
 
-            for (size_t j = 0; j < CurrentIndirectBlockMaximum; ++j)
+            for (std::size_t j = 0; j < IndirectBlockMaximum; ++j)
             {
                 if (FAILED(this->ReadFileStream(
                     FragmentBlockSize * (this->m_IsUfs2
@@ -397,7 +517,7 @@ namespace NanaZip::Codecs::Archive
                     return false;
                 }
 
-                for (size_t i = 0; i < CurrentIndirectBlockMaximum; ++i)
+                for (std::size_t i = 0; i < IndirectBlockMaximum; ++i)
                 {
                     std::int64_t CurrentBlock = this->m_IsUfs2
                         ? this->ReadInt64(&Ufs2IndirectBlocks0[i])
@@ -405,7 +525,7 @@ namespace NanaZip::Codecs::Archive
                     Information.BlockOffsets.emplace_back(
                         CurrentBlock * FragmentBlockSize);
                     ActualFileSize += BlockSize;
-                    if (ActualFileSize >= FileSize)
+                    if (ActualFileSize >= Information.FileSize)
                     {
                         return true;
                     }
@@ -422,7 +542,7 @@ namespace NanaZip::Codecs::Archive
                 return false;
             }
 
-            for (size_t k = 0; k < CurrentIndirectBlockMaximum; ++k)
+            for (std::size_t k = 0; k < IndirectBlockMaximum; ++k)
             {
                 if (FAILED(this->ReadFileStream(
                     FragmentBlockSize * (this->m_IsUfs2
@@ -434,7 +554,7 @@ namespace NanaZip::Codecs::Archive
                     return false;
                 }
 
-                for (size_t j = 0; j < CurrentIndirectBlockMaximum; ++j)
+                for (std::size_t j = 0; j < IndirectBlockMaximum; ++j)
                 {
                     if (FAILED(this->ReadFileStream(
                         FragmentBlockSize * (this->m_IsUfs2
@@ -446,7 +566,7 @@ namespace NanaZip::Codecs::Archive
                         return false;
                     }
 
-                    for (size_t i = 0; i < CurrentIndirectBlockMaximum; ++i)
+                    for (std::size_t i = 0; i < IndirectBlockMaximum; ++i)
                     {
                         std::int64_t CurrentBlock = this->m_IsUfs2
                             ? this->ReadInt64(&Ufs2IndirectBlocks0[i])
@@ -454,7 +574,7 @@ namespace NanaZip::Codecs::Archive
                         Information.BlockOffsets.emplace_back(
                             CurrentBlock * FragmentBlockSize);
                         ActualFileSize += BlockSize;
-                        if (ActualFileSize >= FileSize)
+                        if (ActualFileSize >= Information.FileSize)
                         {
                             return true;
                         }
@@ -463,6 +583,61 @@ namespace NanaZip::Codecs::Archive
             }
 
             return true;
+        }
+
+        void GetAllPaths(
+            std::uint32_t const& RootInode,
+            std::string const& RootPath)
+        {
+            UfsInodeInformation Information;
+            if (!this->GetInodeInformation(RootInode, Information))
+            {
+                return;
+            }
+
+            std::int32_t BlockSize = this->GetBlockSize();
+
+            std::size_t BlockOffsetsCount = Information.BlockOffsets.size();
+
+            std::vector<std::uint8_t> Buffer(BlockOffsetsCount * BlockSize);
+            direct* DirectoryEntries = reinterpret_cast<direct*>(&Buffer[0]);
+            for (std::size_t i = 0; i < BlockOffsetsCount; ++i)
+            {
+                if (FAILED(this->ReadFileStream(
+                    Information.BlockOffsets[i],
+                    &Buffer[i * BlockSize],
+                    BlockSize)))
+                {
+                    return;
+                }
+            }
+
+            direct* End = reinterpret_cast<direct*>(
+                &Buffer[Information.FileSize]);
+
+            for (direct* Current = DirectoryEntries; Current < End;)
+            {
+                std::uint32_t Inode = this->ReadUInt32(&Current->d_ino);
+                std::uint16_t RecordLength = this->ReadUInt16(&Current->d_reclen);
+                std::uint8_t Type = this->ReadUInt8(&Current->d_type);
+                std::uint8_t NameLength = this->ReadUInt8(&Current->d_namlen);
+                Current->d_name[NameLength] = '\0';
+                std::string Name = std::string(Current->d_name);
+                if (Name == "." || Name == "..")
+                {
+                    // Just Skip
+                }
+                else if (DT_DIR == Type)
+                {
+                    this->GetAllPaths(Inode, RootPath + Name + "/");
+                }
+                else
+                {
+                    this->m_TemporaryFilePaths.emplace(RootPath + Name, Inode);
+                }
+                Current = reinterpret_cast<direct*>(
+                    reinterpret_cast<std::size_t>(Current) + RecordLength);
+            }
         }
 
     public:
@@ -597,26 +772,29 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
+                std::uint64_t TotalFiles = 0;
+                std::uint64_t TotalBytes =
+                    this->GetTotalBlocks() * this->GetFragmentBlockSize();
+
                 if (OpenCallback)
                 {
-                    std::uint64_t TotalFiles =
-                        this->ReadUInt32(&this->m_SuperBlock.fs_ncg);
-                    TotalFiles *= this->ReadUInt32(&this->m_SuperBlock.fs_ipg);
-                    TotalFiles -= UFS_ROOTINO;
-                    std::uint64_t TotalBytes =
-                        this->GetTotalBlocks() * this->GetFragmentBlockSize();
                     OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
                 }
 
-                UfsInodeInformation RootInodeInformation;
-                if (!this->GetInodeInformation(
-                    UFS_ROOTINO,
-                    RootInodeInformation))
+                this->GetAllPaths(UFS_ROOTINO, "");
+                TotalFiles = this->m_FilePaths.size();
+
+                if (OpenCallback)
                 {
-                    break;
+                    OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
                 }
 
-                RootInodeInformation = RootInodeInformation;
+                this->m_FilePaths.clear();
+                for (auto const& Item : this->m_TemporaryFilePaths)
+                {
+                    this->m_FilePaths.emplace_back(Item.first, Item.second);
+                }
+                this->m_TemporaryFilePaths.clear();
 
             } while (false);
 
@@ -635,6 +813,7 @@ namespace NanaZip::Codecs::Archive
         HRESULT STDMETHODCALLTYPE Close()
         {
             this->m_IsInitialized = false;
+            this->m_FilePaths.clear();
             std::memset(&this->m_SuperBlock, 0, sizeof(this->m_SuperBlock));
             this->m_IsBigEndian = false;
             this->m_IsUfs2 = false;
@@ -649,12 +828,17 @@ namespace NanaZip::Codecs::Archive
         HRESULT STDMETHODCALLTYPE GetNumberOfItems(
             _Out_ PUINT32 NumItems)
         {
+            if (!this->m_IsInitialized)
+            {
+                return S_FALSE;
+            }
+
             if (!NumItems)
             {
                 return E_INVALIDARG;
             }
 
-            *NumItems = 0;
+            *NumItems = static_cast<UINT32>(this->m_FilePaths.size());
             return S_OK;
         }
 
@@ -663,8 +847,171 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            UNREFERENCED_PARAMETER(Index);
-            UNREFERENCED_PARAMETER(PropId);
+            if (!this->m_IsInitialized)
+            {
+                return S_FALSE;
+            }
+
+            if (!(Index < this->m_FilePaths.size()))
+            {
+                return E_INVALIDARG;
+            }
+
+            UfsInodeInformation Information;
+            if (!this->GetInodeInformation(
+                this->m_FilePaths[Index].second,
+                Information))
+            {
+                return S_FALSE;
+            }
+
+            switch (PropId)
+            {
+            case SevenZipArchivePath:
+            {
+                Value->bstrVal = ::SysAllocString(Mile::ToWideString(
+                    CP_UTF8,
+                    this->m_FilePaths[Index].first).c_str());
+                if (Value->bstrVal)
+                {
+                    Value->vt = VT_BSTR;
+                }
+                break;
+            }
+            case SevenZipArchiveIsDirectory:
+            {
+                Value->boolVal =
+                    Information.Mode & IFDIR
+                    ? VARIANT_TRUE
+                    : VARIANT_FALSE;
+                Value->vt = VT_BOOL;
+                break;
+            }
+            case SevenZipArchiveSize:
+            {
+                Value->uhVal.QuadPart = Information.FileSize;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchivePackSize:
+            {
+                // block size used in the stat struct
+                const std::uint64_t S_BLKSIZE = 512;
+                Value->uhVal.QuadPart = Information.AllocatedBlocks * S_BLKSIZE;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchiveCreationTime:
+            {
+                if (this->m_IsUfs2)
+                {
+                    Value->filetime = ::ToFileTime(
+                        Information.BirthTimeSeconds,
+                        Information.BirthTimeNanoseconds);
+                    Value->vt = VT_FILETIME;
+                }
+                break;
+            }
+            case SevenZipArchiveAccessTime:
+            {
+                Value->filetime = ::ToFileTime(
+                    Information.LastAccessTimeSeconds,
+                    Information.LastAccessTimeNanoseconds);
+                Value->vt = VT_FILETIME;
+                break;
+            }
+            case SevenZipArchiveModifiedTime:
+            {
+                Value->filetime = ::ToFileTime(
+                    Information.LastWriteTimeSeconds,
+                    Information.LastWriteTimeNanoseconds);
+                Value->vt = VT_FILETIME;
+                break;
+            }
+            case SevenZipArchiveLinks:
+            {
+                Value->uhVal.QuadPart = Information.NumberOfHardLinks;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchivePosixAttributes:
+            {
+                Value->ulVal = Information.Mode;
+                Value->vt = VT_UI4;
+                break;
+            }
+            case SevenZipArchiveSymbolicLink:
+            {
+                if ((Information.Mode & IFMT) == IFLNK)
+                {
+                    std::string SymbolLink;
+
+                    if (!Information.EmbeddedSymbolLink.empty())
+                    {
+                        SymbolLink = Information.EmbeddedSymbolLink;
+                    }
+                    else
+                    {
+                        std::int32_t BlockSize =
+                            this->GetBlockSize();
+                        std::size_t BlockOffsetsCount =
+                            Information.BlockOffsets.size();
+                        std::vector<std::uint8_t> Buffer(
+                            BlockOffsetsCount * BlockSize);
+                        for (std::size_t i = 0; i < BlockOffsetsCount; ++i)
+                        {
+                            if (FAILED(this->ReadFileStream(
+                                Information.BlockOffsets[i],
+                                &Buffer[i * BlockSize],
+                                BlockSize)))
+                            {
+                                Buffer.clear();
+                                break;
+                            }
+                        }
+                        if (!Buffer.empty())
+                        {
+                            SymbolLink = std::string(
+                                reinterpret_cast<char*>(&Buffer[0]),
+                                Information.FileSize);
+                        }
+                    }
+
+                    if (!SymbolLink.empty())
+                    {
+                        Value->bstrVal = ::SysAllocString(Mile::ToWideString(
+                            CP_UTF8,
+                            SymbolLink).c_str());
+                        if (Value->bstrVal)
+                        {
+                            Value->vt = VT_BSTR;
+                        }
+                    }
+                }
+                break;
+            }
+            case SevenZipArchiveInode:
+            {
+                Value->uhVal.QuadPart = this->m_FilePaths[Index].second;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchiveUserId:
+            {
+                Value->ulVal = Information.OwnerUserId;
+                Value->vt = VT_UI4;
+                break;
+            }
+            case SevenZipArchiveGroupId:
+            {
+                Value->ulVal = Information.GroupId;
+                Value->vt = VT_UI4;
+                break;
+            }
+            default:
+                break;
+            }
+
             UNREFERENCED_PARAMETER(Value);
             return S_OK;
         }
@@ -675,6 +1022,11 @@ namespace NanaZip::Codecs::Archive
             _In_ BOOL TestMode,
             _In_ IArchiveExtractCallback* ExtractCallback)
         {
+            if (!this->m_IsInitialized)
+            {
+                return S_FALSE;
+            }
+
             UNREFERENCED_PARAMETER(Indices);
             UNREFERENCED_PARAMETER(NumItems);
             UNREFERENCED_PARAMETER(TestMode);
@@ -795,7 +1147,7 @@ namespace NanaZip::Codecs::Archive
                 return E_INVALIDARG;
             }
 
-            *NumProps = 0;
+            *NumProps = g_PropertyItemsCount;
             return S_OK;
         }
 
@@ -805,10 +1157,19 @@ namespace NanaZip::Codecs::Archive
             _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType)
         {
-            UNREFERENCED_PARAMETER(Index);
-            UNREFERENCED_PARAMETER(Name);
-            UNREFERENCED_PARAMETER(PropId);
-            UNREFERENCED_PARAMETER(VarType);
+            if (!(Index < g_PropertyItemsCount))
+            {
+                return E_INVALIDARG;
+            }
+
+            if (!Name || !PropId || !VarType)
+            {
+                return E_INVALIDARG;
+            }
+
+            *Name = nullptr;
+            *PropId = g_PropertyItems[Index].Property;
+            *VarType = g_PropertyItems[Index].Type;
             return S_OK;
         }
 
