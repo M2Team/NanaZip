@@ -293,8 +293,8 @@ namespace NanaZip::Codecs::Archive
         std::uint64_t GetInodeOffset(
             std::uint32_t const& Inode)
         {
-            std::uint32_t InodePerCylinderGroup = this->ReadInt32(
-                &this->m_SuperBlock.fs_fpg);
+            std::uint32_t InodePerCylinderGroup = this->ReadUInt32(
+                &this->m_SuperBlock.fs_ipg);
             std::uint32_t CylinderGroup = Inode / InodePerCylinderGroup;
             std::uint32_t SubIndex = Inode % InodePerCylinderGroup;
             std::uint64_t Result = this->GetCylinderGroupStart(CylinderGroup);
@@ -1079,12 +1079,6 @@ namespace NanaZip::Codecs::Archive
 
                 if (!OutputStream)
                 {
-                    continue;
-                }
-
-                if (Information.Mode & IFDIR)
-                {
-                    OutputStream->Release();
                     continue;
                 }
 
