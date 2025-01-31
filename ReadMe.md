@@ -101,6 +101,7 @@ Kenji Mouri
   - Zstandard (Decoder inherited from 7-Zip, Encoder & Archiver inherited from
     7-Zip ZS)
   - NSIS (Decoder's NSIS script decompiling support, inherited from 7-Zip NSIS)
+  - UFS/UFS2 file system image (Archiver, read-only, both big and little endian)
 - Provide additional security mitigations.
   - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP
     attacks.

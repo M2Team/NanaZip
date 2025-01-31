@@ -115,6 +115,13 @@ namespace
         std::string EmbeddedSymbolLink;
         std::vector<std::uint64_t> BlockOffsets;
     };
+
+    struct UfsFilePathInformation
+    {
+        std::string Path;
+        std::uint32_t Inode;
+        UfsInodeInformation Information;
+    };
 }
 
 namespace NanaZip::Codecs::Archive
@@ -128,7 +135,7 @@ namespace NanaZip::Codecs::Archive
         bool m_IsBigEndian = false;
         fs m_SuperBlock = { 0 };
         std::map<std::string, std::uint32_t> m_TemporaryFilePaths;
-        std::vector<std::pair<std::string, std::uint32_t>> m_FilePaths;
+        std::vector<UfsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;
 
     private:
@@ -660,7 +667,7 @@ namespace NanaZip::Codecs::Archive
                 return E_INVALIDARG;
             }
 
-            HRESULT hr = S_OK;
+            HRESULT hr = S_FALSE;
 
             do
             {
@@ -671,11 +678,10 @@ namespace NanaZip::Codecs::Archive
 
                 for (size_t i = 0; -1 != g_SuperBlockSearchList[i]; ++i)
                 {
-                    hr = this->ReadFileStream(
+                    if (FAILED(this->ReadFileStream(
                         g_SuperBlockSearchList[i],
                         &this->m_SuperBlock,
-                        sizeof(this->m_SuperBlock));
-                    if (FAILED(hr))
+                        sizeof(this->m_SuperBlock))))
                     {
                         break;
                     }
@@ -706,7 +712,6 @@ namespace NanaZip::Codecs::Archive
                         }
                         else
                         {
-                            hr = S_FALSE;
                             continue;
                         }
                     }
@@ -717,7 +722,6 @@ namespace NanaZip::Codecs::Archive
                     {
                         if (SBLOCK_UFS2 != SuperBlockLocation)
                         {
-                            hr = S_FALSE;
                             continue;
                         }
                     }
@@ -726,7 +730,6 @@ namespace NanaZip::Codecs::Archive
                         if (SuperBlockLocation < 0 ||
                             SuperBlockLocation > SBLOCK_UFS1)
                         {
-                            hr = S_FALSE;
                             continue;
                         }
                     }
@@ -735,7 +738,6 @@ namespace NanaZip::Codecs::Archive
                         &this->m_SuperBlock.fs_frag);
                     if (FragmentsCount < 1)
                     {
-                        hr = S_FALSE;
                         continue;
                     }
 
@@ -743,7 +745,6 @@ namespace NanaZip::Codecs::Archive
                         &this->m_SuperBlock.fs_ncg);
                     if (CylinderGroupsCount < 1)
                     {
-                        hr = S_FALSE;
                         continue;
                     }
 
@@ -751,7 +752,6 @@ namespace NanaZip::Codecs::Archive
                         &this->m_SuperBlock.fs_bsize);
                     if (BlockSize < MINBSIZE)
                     {
-                        hr = S_FALSE;
                         continue;
                     }
 
@@ -760,14 +760,13 @@ namespace NanaZip::Codecs::Archive
                     if (SuperBlockSize > SBLOCKSIZE ||
                         SuperBlockSize < sizeof(fs))
                     {
-                        hr = S_FALSE;
                         continue;
                     }
 
                     hr = S_OK;
                     break;
                 }
-                if (FAILED(hr))
+                if (S_OK != hr)
                 {
                     break;
                 }
@@ -792,7 +791,16 @@ namespace NanaZip::Codecs::Archive
                 this->m_FilePaths.clear();
                 for (auto const& Item : this->m_TemporaryFilePaths)
                 {
-                    this->m_FilePaths.emplace_back(Item.first, Item.second);
+                    UfsFilePathInformation Current;
+                    Current.Path = Item.first;
+                    Current.Inode = Item.second;
+                    if (!this->GetInodeInformation(
+                        Current.Inode,
+                        Current.Information))
+                    {
+                        continue;
+                    }
+                    this->m_FilePaths.emplace_back(Current);
                 }
                 this->m_TemporaryFilePaths.clear();
 
@@ -857,13 +865,8 @@ namespace NanaZip::Codecs::Archive
                 return E_INVALIDARG;
             }
 
-            UfsInodeInformation Information;
-            if (!this->GetInodeInformation(
-                this->m_FilePaths[Index].second,
-                Information))
-            {
-                return S_FALSE;
-            }
+            UfsInodeInformation& Information =
+                this->m_FilePaths[Index].Information;
 
             switch (PropId)
             {
@@ -871,7 +874,7 @@ namespace NanaZip::Codecs::Archive
             {
                 Value->bstrVal = ::SysAllocString(Mile::ToWideString(
                     CP_UTF8,
-                    this->m_FilePaths[Index].first).c_str());
+                    this->m_FilePaths[Index].Path).c_str());
                 if (Value->bstrVal)
                 {
                     Value->vt = VT_BSTR;
@@ -992,7 +995,7 @@ namespace NanaZip::Codecs::Archive
             }
             case SevenZipArchiveInode:
             {
-                Value->uhVal.QuadPart = this->m_FilePaths[Index].second;
+                Value->uhVal.QuadPart = this->m_FilePaths[Index].Inode;
                 Value->vt = VT_UI8;
                 break;
             }
@@ -1047,15 +1050,9 @@ namespace NanaZip::Codecs::Archive
             
             for (UINT32 i = 0; i < NumItems; ++i)
             {
-                UfsInodeInformation Information;
-                if (!this->GetInodeInformation(
-                    this->m_FilePaths[AllFilesMode ? i : Indices[i]].second,
-                    Information))
-                {
-                    ExtractCallback->SetOperationResult(
-                        SevenZipExtractOperationResultUnavailable);
-                    continue;
-                }
+                UINT32 ActualFileIndex = AllFilesMode ? i : Indices[i];
+                UfsInodeInformation& Information =
+                    this->m_FilePaths[ActualFileIndex].Information;
 
                 Completed += Information.FileSize;
                 ExtractCallback->SetCompleted(&Completed);
