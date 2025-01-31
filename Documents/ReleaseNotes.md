@@ -3,6 +3,67 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 5.0 (5.0.1250.0)**
+
+- Features
+  - Introduce the UFS/UFS2 file system image readonly support. (Thanks to
+    NishiOwO.)
+  - Introduce work-in-progress NanaZip Platform Abstraction Layer (K7Pal) for
+    wrapping the platform specific infrastructures. (Thanks to RuesanG's 
+    feedback.) (https://github.com/M2Team/NanaZip/tree/main/K7Pal)
+    - Provide hash functions interfaces implemented with Windows CNG API.
+      NanaZip uses these hash functions from K7Pal:
+      - MD2
+      - MD4
+      - MD5
+      - SHA-1
+      - SHA-256
+      - SHA-384
+      - SHA-512
+      - ED2K (Implemented as the K7Pal MD4 wrapper in NanaZip.Codecs.)
+  - Update NanaZip.Specification.SevenZip header file.
+  - Introduce the Smart Extraction. (Contributed by R-YaTian.)
+  - Adds a setting for opening the folder after extracting from archive.
+    (Contributing by DaxDupont.)
+- Improvements
+  - Synchronize the 7-Zip mainline implementations to 24.09.
+    (https://github.com/ip7z/7zip/releases/tag/24.09) (Thanks to Igor Pavlov.
+    Noticed by FadeMind and peashooter2.)
+  - Synchronize the BLAKE3 implementation to 1.5.5.
+    (https://github.com/BLAKE3-team/BLAKE3/releases/tag/1.5.5)
+  - Synchronize the RHash implementation to the latest master branch which is
+    after v1.4.5.
+    (https://github.com/rhash/RHash/commit/cf2adf22ae7c39d9b8e5e7b87222046a8f42b3dc)
+  - Synchronize the xxHash implementation to v0.8.3.
+    (https://github.com/Cyan4973/xxHash/releases/tag/v0.8.3)
+  - Update Mile.Windows.Helpers to 1.0.671.
+    (https://github.com/ProjectMile/Mile.Windows.Helpers/tree/1.0.671.0)
+  - Update Brazilian Portuguese translation. (Contributed by maisondasilva.)
+  - Update Polish translation. (Contributed by ChuckMichael.)
+  - Update zh-Hans and zh-Hant translations for 'Want * History' strings. 
+    (Contributed by R-YaTian.) (Forget to mentioned in NanaZip 5.0 Preview 1.)
+  - Make sure NanaZip Core (except the Self Extracting Executables) and NanaZip
+    Classic using ucrtbase.dll with 10.0.19041.0 version or later.
+  - Move NanaZip console version to NanaZip.Core project.
+  - Remove C++/WinRT dependency for NanaZip.Codecs and NanaZip.Frieren.
+  - Remove VC-LTL dependency for all components, and also use 
+    Mile.Windows.UniCrt (https://github.com/ProjectMile/Mile.Windows.UniCrt)
+    instead of VC-LTL for non Self Extracting Executables stub components.
+  - Adjust the compilation configurations to optimize the binary size for the
+    Self Extracting Executables.
+  - Start to simplify the NanaZip specific decoders and encoders implementation.
+  - Enable disabling child process creation for NanaZip Self Extracting
+    Executables. (Except installer mode of Self Extracting Executables, which
+    compiled binaries is not provided in the NanaZip MSIX package.)
+- Fixes
+  - Add GetDpiForWindowWrapper for NanaZip.Frieren.DarkMode to fix the legacy
+    Windows compatibility issues.
+  - Don't fail ModernSHBrowseForFolderW when DefaultFolder cannot be set.
+    (Contributed by dinhngtu.)
+  - Fix the issue that which NanaZip windows and dialogs will be opened in the
+    background when using NanaZip from context menu. (Contributed by R-YaTian.)
+
+
 **NanaZip 3.1 (3.1.1080.0)**
 
 - Try to discover the new Sponsor button design but finally reverted to the old
