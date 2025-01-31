@@ -63,7 +63,6 @@ For preview versions, please read
   - Fix the issue that which NanaZip windows and dialogs will be opened in the
     background when using NanaZip from context menu. (Contributed by R-YaTian.)
 
-
 **NanaZip 3.1 (3.1.1080.0)**
 
 - Try to discover the new Sponsor button design but finally reverted to the old
