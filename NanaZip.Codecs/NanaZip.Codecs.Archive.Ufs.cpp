@@ -1043,8 +1043,15 @@ namespace NanaZip::Codecs::Archive
                 NumItems = static_cast<UINT32>(this->m_FilePaths.size());
             }
 
-            ExtractCallback->SetTotal(
-                this->GetTotalBlocks() * this->GetFragmentBlockSize());
+            UINT64 TotalSize = 0;
+            for (UINT32 i = 0; i < NumItems; ++i)
+            {
+                UINT32 ActualFileIndex = AllFilesMode ? i : Indices[i];
+                UfsInodeInformation& Information =
+                    this->m_FilePaths[ActualFileIndex].Information;
+                TotalSize += Information.FileSize;
+            }
+            ExtractCallback->SetTotal(TotalSize);
 
             UINT64 Completed = 0;
             
