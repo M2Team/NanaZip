@@ -372,6 +372,12 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Частин</value>
   </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>64 біта</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Порядок від старшого до молодшого</value>
+  </data>
   <data name="Resource1043" xml:space="preserve">
     <value>Процесор</value>
   </data>
@@ -389,6 +395,9 @@
   </data>
   <data name="Resource1048" xml:space="preserve">
     <value>Віртуальна адреса</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Серійний номер тому</value>
   </data>
   <data name="Resource1050" xml:space="preserve">
     <value>Коротке ім'я</value>
@@ -431,6 +440,9 @@
   </data>
   <data name="Resource1063" xml:space="preserve">
     <value>Альтернативний потік</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Aux</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
     <value>Видалено</value>
@@ -579,6 +591,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Стиснути до {0} та надіслати</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Видобути до поточної папки (Інтелектуально)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Папки</value>
   </data>
@@ -626,6 +641,24 @@
   </data>
   <data name="Resource2508" xml:space="preserve">
     <value>Використовувати &amp;великі сторінки пам'яті</value>
+  </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>Зберігати історію доступу до архівів</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>Зберігати історію шляхів до видобутих архівів</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>Зберігати історію цільових шляхів копіювання</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>Зберігати історію каталогів</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Контрольні суми малими символами</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Відкрити каталог після видобування</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Про NanaZip</value>
@@ -1316,5 +1349,11 @@
   </data>
   <data name="Resource7714" xml:space="preserve">
     <value>Точка з'єднання (каталог)</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>Інтеграція</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Відкрити параметри Windows, щоб асоціювати файли з NanaZip</value>
   </data>
 </root>
