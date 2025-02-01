@@ -1149,9 +1149,6 @@ namespace NanaZip::Codecs::Archive
                     : SevenZipExtractOperationResultSuccess);
             }
 
-            UNREFERENCED_PARAMETER(Indices);
-            UNREFERENCED_PARAMETER(TestMode);
-            UNREFERENCED_PARAMETER(ExtractCallback);
             return S_OK;
         }
 
