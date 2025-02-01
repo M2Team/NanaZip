@@ -602,6 +602,17 @@ namespace NanaZip::Codecs::Archive
                 return;
             }
 
+            if (!RootPath.empty())
+            {
+                UfsFilePathInformation Current;
+                Current.Path = RootPath;
+                // Remove the slash.
+                Current.Path.resize(Current.Path.size() - 1);
+                Current.Inode = RootInode;
+                Current.Information = Information;
+                this->m_FilePaths.emplace_back(Current);
+            }
+
             std::int32_t BlockSize = this->GetBlockSize();
 
             std::size_t BlockOffsetsCount = Information.BlockOffsets.size();
@@ -780,6 +791,8 @@ namespace NanaZip::Codecs::Archive
                     OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
                 }
 
+                this->m_FilePaths.clear();
+
                 this->GetAllPaths(UFS_ROOTINO, "");
                 TotalFiles = this->m_FilePaths.size();
 
@@ -788,7 +801,6 @@ namespace NanaZip::Codecs::Archive
                     OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
                 }
 
-                this->m_FilePaths.clear();
                 for (auto const& Item : this->m_TemporaryFilePaths)
                 {
                     UfsFilePathInformation Current;
