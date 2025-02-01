@@ -372,6 +372,12 @@
   <data name="Resource1039" xml:space="preserve">
     <value>Томов</value>
   </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>64 бита</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Порядок от старшего к младшему</value>
+  </data>
   <data name="Resource1043" xml:space="preserve">
     <value>Процессор</value>
   </data>
@@ -389,6 +395,9 @@
   </data>
   <data name="Resource1048" xml:space="preserve">
     <value>Виртуальный адрес</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>Серийный номер тома</value>
   </data>
   <data name="Resource1050" xml:space="preserve">
     <value>Короткое имя</value>
@@ -431,6 +440,9 @@
   </data>
   <data name="Resource1063" xml:space="preserve">
     <value>Альтернативный поток</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Aux</value>
   </data>
   <data name="Resource1065" xml:space="preserve">
     <value>Удалённый</value>
@@ -579,6 +591,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Сжать в {0} и отправить по эл. почте</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Распаковать здесь (Интеллектуально)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Папки</value>
   </data>
@@ -626,6 +641,24 @@
   </data>
   <data name="Resource2508" xml:space="preserve">
     <value>Использовать большие страницы памяти</value>
+  </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>Сохранять историю доступа к архивам</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>Сохранять историю путей к извлеченным архивам</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>Сохранять историю целевых путей копирования</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>Сохранять историю папок</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Контрольные суммы строчными символами</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Открыть папку после распаковки</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>О программе NanaZip</value>
