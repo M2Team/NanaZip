@@ -97,21 +97,21 @@ namespace
 
     struct UfsInodeInformation
     {
-        std::uint16_t Mode;
-        std::uint16_t NumberOfHardLinks;
-        std::uint32_t OwnerUserId;
-        std::uint32_t GroupId;
-        std::int64_t DeviceId;
-        std::uint64_t FileSize;
-        std::uint64_t AllocatedBlocks;
-        std::int64_t LastAccessTimeSeconds;
-        std::int64_t LastWriteTimeSeconds;
-        std::int64_t ChangeTimeSeconds;
-        std::int64_t BirthTimeSeconds;
-        std::int32_t LastAccessTimeNanoseconds;
-        std::int32_t LastWriteTimeNanoseconds;
-        std::int32_t ChangeTimeNanoseconds;
-        std::int32_t BirthTimeNanoseconds;
+        std::uint16_t Mode = 0;
+        std::uint16_t NumberOfHardLinks = 0;
+        std::uint32_t OwnerUserId = 0;
+        std::uint32_t GroupId = 0;
+        std::int64_t DeviceId = 0;
+        std::uint64_t FileSize = 0;
+        std::uint64_t AllocatedBlocks = 0;
+        std::int64_t LastAccessTimeSeconds = 0;
+        std::int64_t LastWriteTimeSeconds = 0;
+        std::int64_t ChangeTimeSeconds = 0;
+        std::int64_t BirthTimeSeconds = 0;
+        std::int32_t LastAccessTimeNanoseconds = 0;
+        std::int32_t LastWriteTimeNanoseconds = 0;
+        std::int32_t ChangeTimeNanoseconds = 0;
+        std::int32_t BirthTimeNanoseconds = 0;
         std::string EmbeddedSymbolLink;
         std::vector<std::uint64_t> BlockOffsets;
     };
@@ -119,7 +119,7 @@ namespace
     struct UfsFilePathInformation
     {
         std::string Path;
-        std::uint32_t Inode;
+        std::uint32_t Inode = 0;
         UfsInodeInformation Information;
     };
 }
