@@ -1074,13 +1074,15 @@ namespace NanaZip::Codecs::Archive
                     this->m_FilePaths[ActualFileIndex].Information;
 
                 Completed += Information.FileSize;
-                ExtractCallback->SetCompleted(&Completed);
+                hr = ExtractCallback->SetCompleted(&Completed);
+                if (FAILED(hr))
+                {
+                    continue;
+                }
 
                 hr = ExtractCallback->PrepareOperation(AskMode);
                 if (FAILED(hr))
                 {
-                    ExtractCallback->SetOperationResult(
-                        SevenZipExtractOperationResultUnavailable);
                     continue;
                 }
 
@@ -1091,11 +1093,8 @@ namespace NanaZip::Codecs::Archive
                     AskMode);
                 if (FAILED(hr))
                 {
-                    ExtractCallback->SetOperationResult(
-                        SevenZipExtractOperationResultUnavailable);
                     continue;
                 }
-
                 if (!OutputStream)
                 {
                     continue;
