@@ -245,6 +245,38 @@ namespace NanaZip::Codecs::Archive
             return static_cast<std::int64_t>(this->ReadUInt64(BaseAddress));
         }
 
+        HRESULT ReadFileStream(
+            _In_ INT64 Offset,
+            _Out_ PVOID Buffer,
+            _In_ SIZE_T NumberOfBytesToRead)
+        {
+            if (!this->m_FileStream)
+            {
+                return S_FALSE;
+            }
+
+            if (SUCCEEDED(this->m_FileStream->Seek(
+                Offset,
+                STREAM_SEEK_SET,
+                nullptr)))
+            {
+                SIZE_T NumberOfBytesRead = 0;
+                if (SUCCEEDED(::NanaZipCodecsReadInputStream(
+                    this->m_FileStream,
+                    Buffer,
+                    NumberOfBytesToRead,
+                    &NumberOfBytesRead)))
+                {
+                    if (NumberOfBytesToRead == NumberOfBytesRead)
+                    {
+                        return S_OK;
+                    }
+                }
+            }
+
+            return S_FALSE;
+        }
+
     private:
 
         std::uint64_t GetTotalBlocks()
@@ -302,38 +334,6 @@ namespace NanaZip::Codecs::Archive
             Result *= this->GetFragmentBlockSize();
             Result += SubIndex * this->GetDirectoryInodeSize();
             return Result;
-        }
-
-        HRESULT ReadFileStream(
-            _In_ INT64 Offset,
-            _Out_ PVOID Buffer,
-            _In_ SIZE_T NumberOfBytesToRead)
-        {
-            if (!this->m_FileStream)
-            {
-                return S_FALSE;
-            }
-
-            if (SUCCEEDED(this->m_FileStream->Seek(
-                Offset,
-                STREAM_SEEK_SET,
-                nullptr)))
-            {
-                SIZE_T NumberOfBytesRead = 0;
-                if (SUCCEEDED(::NanaZipCodecsReadInputStream(
-                    this->m_FileStream,
-                    Buffer,
-                    NumberOfBytesToRead,
-                    &NumberOfBytesRead)))
-                {
-                    if (NumberOfBytesToRead == NumberOfBytesRead)
-                    {
-                        return S_OK;
-                    }
-                }
-            }
-
-            return S_FALSE;
         }
 
         bool GetInodeInformation(
