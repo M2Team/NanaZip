@@ -113,6 +113,18 @@ namespace
             false,
             NanaZip::Codecs::Archive::CreateDotNetSingleFile
         },
+        {
+            ".Electron Archive (asar)",
+            "asar",
+            nullptr,
+            SevenZipHandlerFlagBackwardOpen,
+            0,
+            nullptr,
+            0,
+            0,
+            false,
+            NanaZip::Codecs::Archive::CreateElectronAsar
+        },
     };
 
     const std::size_t g_ArchiversCount =

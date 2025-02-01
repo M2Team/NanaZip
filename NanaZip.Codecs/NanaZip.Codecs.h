@@ -111,6 +111,7 @@ namespace NanaZip::Codecs::Archive
 {
     IInArchive* CreateUfs();
     IInArchive* CreateDotNetSingleFile();
+    IInArchive* CreateElectronAsar();
 }
 
 #endif // !NANAZIP_CODECS
