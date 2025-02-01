@@ -125,6 +125,18 @@ namespace
             false,
             NanaZip::Codecs::Archive::CreateElectronAsar
         },
+        {
+            "ROMFS",
+            "romfs",
+            nullptr,
+            SevenZipHandlerFlagFindSignature,
+            0,
+            reinterpret_cast<const std::uint8_t*>("-rom1fs-"),
+            0,
+            8,
+            false,
+            NanaZip::Codecs::Archive::CreateRomfs
+        },
     };
 
     const std::size_t g_ArchiversCount =
