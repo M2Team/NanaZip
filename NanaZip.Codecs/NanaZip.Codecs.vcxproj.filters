@@ -395,6 +395,7 @@
     <ClCompile Include="NanaZip.Codecs.SevenZipWrapper.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.BCryptProvider.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.Ufs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.DotNetSingleFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />

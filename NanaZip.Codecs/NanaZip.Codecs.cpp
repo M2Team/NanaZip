@@ -101,6 +101,18 @@ namespace
             false,
             NanaZip::Codecs::Archive::CreateUfs
         },
+        {
+            ".NET Single File Application",
+            "coreclrapphost",
+            nullptr,
+            SevenZipHandlerFlagBackwardOpen,
+            0,
+            nullptr,
+            0,
+            0,
+            false,
+            NanaZip::Codecs::Archive::CreateDotNetSingleFile
+        },
     };
 
     const std::size_t g_ArchiversCount =

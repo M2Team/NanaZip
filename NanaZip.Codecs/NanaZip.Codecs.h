@@ -110,6 +110,7 @@ namespace NanaZip::Codecs::Encoder
 namespace NanaZip::Codecs::Archive
 {
     IInArchive* CreateUfs();
+    IInArchive* CreateDotNetSingleFile();
 }
 
 #endif // !NANAZIP_CODECS
