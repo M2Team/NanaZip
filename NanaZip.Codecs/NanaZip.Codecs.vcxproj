@@ -453,6 +453,9 @@
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.1.278</Version>
     </PackageReference>
+    <PackageReference Include="Mile.Json">
+      <Version>1.0.659</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
   <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
