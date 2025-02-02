@@ -107,6 +107,7 @@ Kenji Mouri
   - Electron Archive (asar) (Archiver, read-only)
   - ROMFS file system image (Archiver, read-only)
   - ZealFS file system image (Archiver, read-only)
+  - WebAssembly (WASM) binary file (Archiver, read-only)
 - Provide additional security mitigations.
   - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP
     attacks.
