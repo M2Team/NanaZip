@@ -47,7 +47,7 @@ namespace
     // Every multi byte value (32 bit words, I’ll use the longwords term from
     // now on) must be in big endian order.
 
-    const char g_RomfsSignature[] = { '-','r','o','m','1','f','s','-' };
+    const char g_RomfsSignature[] = { '-', 'r', 'o', 'm', '1', 'f', 's', '-' };
 
     // The Windows MAX_PATH as the maximum path length should enough for most
     // ROMFS cases.
