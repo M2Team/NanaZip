@@ -106,6 +106,7 @@ Kenji Mouri
     compressed files in the bundle are not supported)
   - Electron Archive (asar) (Archiver, read-only)
   - ROMFS file system image (Archiver, read-only)
+  - ZealFS file system image (Archiver, read-only)
 - Provide additional security mitigations.
   - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP
     attacks.
