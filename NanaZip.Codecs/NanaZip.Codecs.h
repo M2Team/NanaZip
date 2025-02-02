@@ -113,6 +113,7 @@ namespace NanaZip::Codecs::Archive
     IInArchive* CreateDotNetSingleFile();
     IInArchive* CreateElectronAsar();
     IInArchive* CreateRomfs();
+    IInArchive* CreateZealfs();
 }
 
 #endif // !NANAZIP_CODECS

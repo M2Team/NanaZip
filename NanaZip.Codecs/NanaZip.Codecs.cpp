@@ -137,6 +137,18 @@ namespace
             false,
             NanaZip::Codecs::Archive::CreateRomfs
         },
+        {
+            "ZealFS",
+            "zealfs",
+            nullptr,
+            SevenZipHandlerFlagFindSignature,
+            0,
+            reinterpret_cast<const std::uint8_t*>("Z"),
+            0,
+            1,
+            false,
+            NanaZip::Codecs::Archive::CreateZealfs
+        },
     };
 
     const std::size_t g_ArchiversCount =
