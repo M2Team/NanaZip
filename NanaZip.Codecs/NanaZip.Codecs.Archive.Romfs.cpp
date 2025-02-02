@@ -35,6 +35,7 @@ namespace
         { SevenZipArchivePath, VT_BSTR },
         { SevenZipArchiveIsDirectory, VT_BOOL },
         { SevenZipArchiveSize, VT_UI8 },
+        { SevenZipArchivePackSize, VT_UI8 },
         { SevenZipArchiveSymbolicLink, VT_BSTR },
         { SevenZipArchiveHardLink, VT_BSTR },
         { SevenZipArchiveInode, VT_UI8 },
@@ -447,6 +448,12 @@ namespace NanaZip::Codecs::Archive
                 break;
             }
             case SevenZipArchiveSize:
+            {
+                Value->uhVal.QuadPart = Information.Size;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchivePackSize:
             {
                 Value->uhVal.QuadPart = Information.Size;
                 Value->vt = VT_UI8;

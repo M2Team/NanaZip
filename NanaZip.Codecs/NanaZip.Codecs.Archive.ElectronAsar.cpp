@@ -27,6 +27,7 @@ namespace
     {
         { SevenZipArchivePath, VT_BSTR },
         { SevenZipArchiveSize, VT_UI8 },
+        { SevenZipArchivePackSize, VT_UI8 },
     };
 
     const std::size_t g_PropertyItemsCount =
@@ -330,6 +331,12 @@ namespace NanaZip::Codecs::Archive
                 break;
             }
             case SevenZipArchiveSize:
+            {
+                Value->uhVal.QuadPart = Information.Size;
+                Value->vt = VT_UI8;
+                break;
+            }
+            case SevenZipArchivePackSize:
             {
                 Value->uhVal.QuadPart = Information.Size;
                 Value->vt = VT_UI8;
