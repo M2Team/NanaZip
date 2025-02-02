@@ -149,6 +149,18 @@ namespace
             false,
             NanaZip::Codecs::Archive::CreateZealfs
         },
+        {
+            "WebAssembly (WASM)",
+            "wasm",
+            nullptr,
+            SevenZipHandlerFlagFindSignature,
+            0,
+            reinterpret_cast<const std::uint8_t*>("\0asm"),
+            0,
+            4,
+            false,
+            NanaZip::Codecs::Archive::CreateWebAssembly
+        },
     };
 
     const std::size_t g_ArchiversCount =
