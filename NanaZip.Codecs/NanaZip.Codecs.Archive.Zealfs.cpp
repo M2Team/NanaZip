@@ -197,7 +197,7 @@ namespace NanaZip::Codecs::Archive
             ZealfsFileEntry const& Entry)
         {
             SYSTEMTIME SystemTime = { 0 };
-            SystemTime.wYear = this->ReadBcd(&Entry.Year[0]) * 100 - 1900;
+            SystemTime.wYear = this->ReadBcd(&Entry.Year[0]) * 100;
             SystemTime.wYear += this->ReadBcd(&Entry.Year[1]);
             SystemTime.wMonth = this->ReadBcd(&Entry.Month) - 1;
             SystemTime.wDayOfWeek = this->ReadBcd(&Entry.Date);
