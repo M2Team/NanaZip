@@ -119,14 +119,23 @@ namespace NanaZip::Codecs::Archive
         }
 
         std::uint32_t ReadUleb128(
-            const void* BaseAddress)
+            const void* BaseAddress,
+            std::uint8_t* ProcessedBytes = nullptr)
         {
+            if (ProcessedBytes)
+            {
+                *ProcessedBytes = 0;
+            }
             const std::uint8_t* Base =
                 reinterpret_cast<const std::uint8_t*>(BaseAddress);
             std::uint32_t Result = 0;
             std::uint8_t Shift = 0;
             while (true)
             {
+                if (ProcessedBytes)
+                {
+                    ++(*ProcessedBytes);
+                }
                 std::uint8_t Byte = *(Base++);
                 Result |= (Byte & 0x7F) << Shift;
                 if (!(Byte & 0x80))
@@ -247,42 +256,29 @@ namespace NanaZip::Codecs::Archive
                 std::multimap<std::string, WebAssemblySection> Sections;
                 for (UINT64 i = HeaderSize; i < BundleSize;)
                 {
-                    const std::size_t MaximumSize =
-                        sizeof(std::uint8_t) * (1 + 5);
-                    std::size_t AcquireSize =
-                        BundleSize - i < MaximumSize
-                        ? BundleSize - i
-                        : MaximumSize;
-                    std::uint8_t Buffer[MaximumSize] = { 0 };
-                    if (FAILED(this->ReadFileStream(
-                        i,
-                        Buffer,
-                        AcquireSize)))
+                    std::uint8_t Type = 0;
+                    std::uint32_t Size = 0;
                     {
-                        break;
-                    }
-                    std::uint8_t Type = Buffer[0];
-                    std::uint32_t Size = this->ReadUleb128(&Buffer[1]);
-                    ++i;
-                    if (Size < (1 << 7))
-                    {
-                        i += 1;
-                    }
-                    else if (Size < (1 << 14))
-                    {
-                        i += 2;
-                    }
-                    else if (Size < (1 << 21))
-                    {
-                        i += 3;
-                    }
-                    else if (Size < (1 << 28))
-                    {
-                        i += 4;
-                    }
-                    else
-                    {
-                        i += 5;
+                        const std::size_t MaximumSize =
+                            sizeof(std::uint8_t) * (1 + 5);
+                        std::size_t AcquireSize =
+                            BundleSize - i < MaximumSize
+                            ? BundleSize - i
+                            : MaximumSize;
+                        std::uint8_t Buffer[MaximumSize] = { 0 };
+                        if (FAILED(this->ReadFileStream(
+                            i,
+                            Buffer,
+                            AcquireSize)))
+                        {
+                            break;
+                        }
+                        Type = Buffer[0];
+                        std::uint8_t ProcessedBytes = 0;
+                        Size = this->ReadUleb128(
+                            &Buffer[1],
+                            &ProcessedBytes);
+                        i += sizeof(std::uint8_t) + ProcessedBytes;
                     }
                     if (WebAssemblySectionType::Custom == Type && 0 == Size)
                     {
@@ -290,10 +286,52 @@ namespace NanaZip::Codecs::Archive
                         break;
                     }
 
+                    std::string CustomName;
+                    if (WebAssemblySectionType::Custom == Type)
+                    {
+                        std::uint32_t NameSize = 0;
+                        {
+                            const std::size_t MaximumSize =
+                                sizeof(std::uint8_t) * 5;
+                            std::size_t AcquireSize =
+                                BundleSize - i < MaximumSize
+                                ? BundleSize - i
+                                : MaximumSize;
+                            std::uint8_t Buffer[MaximumSize] = { 0 };
+                            if (FAILED(this->ReadFileStream(
+                                i,
+                                Buffer,
+                                AcquireSize)))
+                            {
+                                break;
+                            }
+                            std::uint8_t ProcessedBytes = 0;
+                            NameSize = this->ReadUleb128(
+                                Buffer,
+                                &ProcessedBytes);
+                            i += ProcessedBytes;
+                            Size -= ProcessedBytes;
+                        }
+                        if (NameSize)
+                        {
+                            CustomName = std::string(NameSize, '\0');
+                            if (FAILED(this->ReadFileStream(
+                                i,
+                                &CustomName[0],
+                                NameSize)))
+                            {
+                                break;
+                            }
+                            i += sizeof(char) * NameSize;
+                            Size -= sizeof(char) * NameSize;
+                        }
+                    }
                     WebAssemblySection Section;
                     Section.Offset = i;
                     Section.Size = Size;
-                    Section.Name = ::ToWebAssemblySectionTypeName(Type);
+                    Section.Name = CustomName.empty()
+                        ? ::ToWebAssemblySectionTypeName(Type)
+                        : std::string(".") + CustomName;
                     Sections.emplace(Section.Name, Section);
                     i += Size;
                 }
