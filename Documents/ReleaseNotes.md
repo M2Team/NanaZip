@@ -3,6 +3,27 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 5.0 Update 1 (5.0.1252.0)**
+
+- Features
+  - Introduce the .NET Single File Application bundle readonly support which
+    currently extracting compressed files in the bundle are not supported.
+  - Introduce the Electron Archive (asar) readonly support.
+  - Introduce the ROMFS file system image readonly support.
+  - Introduce the ZealFS file system image readonly support.
+  - Introduce the WebAssembly (WASM) binary file readonly support.
+  - Introduce the **Work In Progress** littlefs file system image readonly
+    support which currently only block information can acquired.
+- Improvements
+  - Update Ukrainian and Russian translation. (Contributed by SlowDancer011.)
+  - Update Hungarian translation. (Contributed by JohnFowler58.)
+  - Update packages for maintainer tools.
+- Fixes
+  - Fix the empty folders are excluded issue for the UFS/UFS2 file system image
+    readonly support.
+  - Fix the unavailable issue when cancelling the extraction for the UFS/UFS2
+    file system image readonly support.
+
 **NanaZip 5.0 (5.0.1250.0)**
 
 - Features
