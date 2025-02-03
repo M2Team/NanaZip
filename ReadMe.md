@@ -108,6 +108,8 @@ Kenji Mouri
   - ROMFS file system image (Archiver, read-only)
   - ZealFS file system image (Archiver, read-only)
   - WebAssembly (WASM) binary file (Archiver, read-only)
+  - littlefs file system image (**Work In Progress**) (Archiver, only block
+    information can acquired)
 - Provide additional security mitigations.
   - Enable Control Flow Guard (CFG) to all target binaries for mitigating ROP
     attacks.
@@ -141,7 +143,7 @@ NanaZip Classic. Here are the differences between them.
   - Only support Windows 10 Version 2004 (Build 19041) or later.
   - XAML-based GUI.
 
-- NanaZip Classic (Work In Progress)
+- NanaZip Classic (**Work In Progress**)
   - Have 32-Bit support.
   - Only portable version.
   - Don't have the context menu support.
