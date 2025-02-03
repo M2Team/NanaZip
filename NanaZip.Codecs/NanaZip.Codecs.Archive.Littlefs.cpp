@@ -113,6 +113,30 @@ namespace
         LfsFromUserAttributes = 0x102,
     };
 
+    union LfsMetadataTag
+    {
+        std::uint32_t AsRaw;
+        struct
+        {
+            std::uint32_t Length : 10;
+            std::uint32_t Id : 10;
+            std::uint32_t Type : 11;
+            std::uint32_t Invalid : 1;
+        } Information;
+
+        bool CheckWith(
+            std::uint16_t const& Type,
+            std::uint16_t const& Id,
+            std::uint16_t const& Size)
+        {
+            return (
+                !this->Information.Invalid &&
+                Type == this->Information.Type &&
+                Id == this->Information.Id &&
+                Size == this->Information.Length);
+        }
+    };
+
     // The superblock must always be the first entry (id 0) in the metadata
     // pair, and the name tag must always be the first tag in the metadata pair.
     // This makes it so that the magic string "littlefs" will always reside at
@@ -139,6 +163,15 @@ namespace
         std::uint32_t MaximumAttributeLength;
     };
 
+    struct LfsSuperMetadataHeader
+    {
+        std::uint32_t RawRevisionCount;
+        std::uint32_t RawSuperBlockTag;
+        char RawSignature[8];
+        std::uint32_t RawStructureTag;
+        LfsSuperBlockInlineStructure RawStructure;
+    };
+
     struct LittlefsFilePathInformation
     {
         std::uint32_t Inode = 0;
@@ -146,7 +179,9 @@ namespace
         std::uint8_t Type = 0;
         std::uint32_t Size = 0;
         std::string Path;
-        std::vector<std::uint32_t> BlockOffsets;
+        // TODO: Currently just ultimate raw block extractor for analyzing
+        std::uint64_t Offset = 0;
+        //std::vector<std::uint32_t> BlockOffsets;
     };
 }
 
@@ -157,6 +192,7 @@ namespace NanaZip::Codecs::Archive
     private:
 
         IInStream* m_FileStream = nullptr;
+        LfsSuperMetadataHeader m_SuperMetadataHeader = { 0 };
         std::vector<LittlefsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;
 
@@ -242,6 +278,22 @@ namespace NanaZip::Codecs::Archive
             return S_FALSE;
         }
 
+    private:
+
+        std::uint32_t ReadRawMetadataTag(
+            const void* BaseAddress)
+        {
+            const std::uint8_t* Base =
+                reinterpret_cast<const std::uint8_t*>(BaseAddress);
+            // Tags stored in commits are actually stored in big-endian (and is
+            // the only thing in littlefs stored in big-endian).
+            return
+                (static_cast<std::uint32_t>(Base[3])) |
+                (static_cast<std::uint32_t>(Base[2]) << 8) |
+                (static_cast<std::uint32_t>(Base[1]) << 16) |
+                (static_cast<std::uint32_t>(Base[0]) << 24);
+        }
+
     public:
 
         Littlefs()
@@ -280,34 +332,62 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                const std::uint32_t MinimumMetadataHeaderSize =
-                    sizeof(std::uint32_t) + // Revision Count
-                    sizeof(std::uint32_t) + // Super Block Tag
-                    (8 * sizeof(std::uint8_t)) + // Super Block Signature
-                    sizeof(std::uint32_t) + // Super Block Inline Structure Tag
-                    sizeof(LfsSuperBlockInlineStructure);
+                LfsMetadataTag PreviousTag = { 0 };
+                PreviousTag.AsRaw = g_LfsInitialTag;
 
-                if (BundleSize < MinimumMetadataHeaderSize)
+                if (BundleSize < sizeof(LfsSuperMetadataHeader))
                 {
                     break;
                 }
 
-                std::uint8_t MetadataHeader[MinimumMetadataHeaderSize];
                 if (FAILED(this->ReadFileStream(
                     0,
-                    MetadataHeader,
-                    MinimumMetadataHeaderSize)))
+                    &this->m_SuperMetadataHeader,
+                    sizeof(LfsSuperMetadataHeader))))
+                {
+                    break;
+                }
+
+                PreviousTag.AsRaw ^= this->ReadRawMetadataTag(
+                    &this->m_SuperMetadataHeader.RawSuperBlockTag);
+                if (!PreviousTag.CheckWith(
+                    LfsTypeSuperBlock,
+                    0,
+                    sizeof(g_LfsSignature)))
                 {
                     break;
                 }
 
                 if (0 != std::memcmp(
-                    &MetadataHeader[8],
+                    this->m_SuperMetadataHeader.RawSignature,
                     g_LfsSignature,
                     sizeof(g_LfsSignature)))
                 {
                     break;
                 }
+
+                PreviousTag.AsRaw ^= this->ReadRawMetadataTag(
+                    &this->m_SuperMetadataHeader.RawStructureTag);
+                if (!PreviousTag.CheckWith(
+                    LfsTypeInlineStructure,
+                    0,
+                    sizeof(LfsSuperBlockInlineStructure)))
+                {
+                    break;
+                }
+
+                std::uint32_t DiskVersion = this->ReadUInt32(
+                    &this->m_SuperMetadataHeader.RawStructure.Version);
+                if (g_LfsDiskVersionMajor != static_cast<const std::uint16_t>(
+                    DiskVersion >> 16))
+                {
+                    break;
+                }
+
+                std::uint32_t BlockSize = this->ReadUInt32(
+                    &this->m_SuperMetadataHeader.RawStructure.BlockSize);
+                std::uint32_t BlockCount = this->ReadUInt32(
+                    &this->m_SuperMetadataHeader.RawStructure.BlockCount);
 
                 std::uint64_t TotalFiles = 0;
                 std::uint64_t TotalBytes = 0;
@@ -323,7 +403,17 @@ namespace NanaZip::Codecs::Archive
 
                 this->m_FilePaths.clear();
 
-                // TODO: Add this->GetAllPaths contents to this->m_FilePaths
+                // TODO: Currently just ultimate raw block extractor for analyzing
+                for (std::uint32_t i = 0; i < BlockCount; ++i)
+                {
+                    LittlefsFilePathInformation Information;
+                    Information.Inode = i;
+                    Information.Type = LfsTypeRegular;
+                    Information.Size = BlockSize;
+                    Information.Path = Mile::FormatString("[%d]", i);
+                    Information.Offset = i * BlockSize;
+                    this->m_FilePaths.emplace_back(Information);
+                }
 
                 hr = S_OK;
 
@@ -345,6 +435,7 @@ namespace NanaZip::Codecs::Archive
         {
             this->m_IsInitialized = false;
             this->m_FilePaths.clear();
+            this->m_SuperMetadataHeader = { 0 };
             if (this->m_FileStream)
             {
                 this->m_FileStream->Release();
@@ -503,16 +594,29 @@ namespace NanaZip::Codecs::Archive
                     continue;
                 }
 
-                bool Failed = false;
+                bool Succeeded = false;
 
-                // TODO: Extract Files
+                // TODO: Currently just ultimate raw block extractor for analyzing
+
+                std::vector<std::uint8_t> Buffer(Information.Size);
+                if (SUCCEEDED(this->ReadFileStream(
+                    Information.Offset,
+                    &Buffer[0],
+                    Information.Size)))
+                {
+                    UINT32 ProceededSize = 0;
+                    Succeeded = SUCCEEDED(OutputStream->Write(
+                        &Buffer[0],
+                        static_cast<UINT32>(Information.Size),
+                        &ProceededSize));
+                }
 
                 OutputStream->Release();
 
                 ExtractCallback->SetOperationResult(
-                    Failed
-                    ? SevenZipExtractOperationResultUnavailable
-                    : SevenZipExtractOperationResultSuccess);
+                    Succeeded
+                    ? SevenZipExtractOperationResultSuccess
+                    : SevenZipExtractOperationResultUnavailable);
             }
 
             return S_OK;
@@ -536,8 +640,12 @@ namespace NanaZip::Codecs::Archive
             {
             case SevenZipArchivePhysicalSize:
             {
-                // TODO: Unimplemented
-                Value->uhVal.QuadPart = 0;
+                std::uint32_t BlockSize = this->ReadUInt32(
+                    &this->m_SuperMetadataHeader.RawStructure.BlockSize);
+                std::uint32_t BlockCount = this->ReadUInt32(
+                    &this->m_SuperMetadataHeader.RawStructure.BlockCount);
+
+                Value->uhVal.QuadPart = BlockSize * BlockCount;
                 Value->vt = VT_UI8;
                 break;
             }
@@ -550,8 +658,10 @@ namespace NanaZip::Codecs::Archive
             }
             case SevenZipArchiveClusterSize:
             {
-                // TODO: Unimplemented
-                Value->ulVal = 0;
+                std::uint32_t BlockSize = this->ReadUInt32(
+                    &this->m_SuperMetadataHeader.RawStructure.BlockSize);
+
+                Value->ulVal = BlockSize;
                 Value->vt = VT_UI4;
                 break;
             }
