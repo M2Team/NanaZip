@@ -2,6 +2,11 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 5.1 Preview 0 (5.1.1252.0)**
+
+This release includes all the improvements from NanaZip 5.0 Update 1
+(5.0.1252.0).
+
 **NanaZip 5.0 Preview 2 (5.0.1243.0)**
 
 - Continue to improve the work-in-progress NanaZip Platform Abstraction Layer
