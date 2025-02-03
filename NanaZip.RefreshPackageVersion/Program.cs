@@ -6,7 +6,7 @@ namespace NanaZip.RefreshPackageVersion
 {
     internal class Program
     {
-        static (int Major, int Minor) Version = (5, 1);
+        static (int Major, int Minor) Version = (5, 0);
         static string BuildStartDay = "2021-08-31";
 
         static string GenerateVersionString()
@@ -77,7 +77,7 @@ namespace NanaZip.RefreshPackageVersion
             }
         }
 
-        static bool SwitchToPreview = true;
+        static bool SwitchToPreview = false;
 
         static List<string> ReleaseStringList = new List<string>
         {
