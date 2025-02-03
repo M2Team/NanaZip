@@ -161,6 +161,18 @@ namespace
             false,
             NanaZip::Codecs::Archive::CreateWebAssembly
         },
+        {
+            "littlefs",
+            "littlefs",
+            nullptr,
+            SevenZipHandlerFlagFindSignature,
+            0,
+            reinterpret_cast<const std::uint8_t*>("littlefs"),
+            8,
+            8,
+            false,
+            NanaZip::Codecs::Archive::CreateLittlefs
+        },
     };
 
     const std::size_t g_ArchiversCount =

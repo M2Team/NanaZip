@@ -115,6 +115,7 @@ namespace NanaZip::Codecs::Archive
     IInArchive* CreateRomfs();
     IInArchive* CreateZealfs();
     IInArchive* CreateWebAssembly();
+    IInArchive* CreateLittlefs();
 }
 
 #endif // !NANAZIP_CODECS

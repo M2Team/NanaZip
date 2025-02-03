@@ -400,6 +400,7 @@
     <ClCompile Include="NanaZip.Codecs.Archive.Romfs.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.Zealfs.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.WebAssembly.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Littlefs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
