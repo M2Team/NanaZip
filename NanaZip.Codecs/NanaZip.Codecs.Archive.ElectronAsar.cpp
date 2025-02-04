@@ -48,6 +48,7 @@ namespace NanaZip::Codecs::Archive
     private:
 
         IInStream* m_FileStream = nullptr;
+        std::uint64_t m_FullSize = 0;
         std::uint64_t m_GlobalOffset = 0;
         std::map<std::string, BundleFileEntry> m_TemporaryFilePaths;
         std::vector<BundleFileEntry> m_FilePaths;
@@ -221,14 +222,6 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                std::uint64_t TotalFiles = 0;
-                std::uint64_t TotalBytes = BundleSize;
-
-                if (OpenCallback)
-                {
-                    OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
-                }
-
                 try
                 {
                     nlohmann::json HeaderObject =
@@ -240,7 +233,14 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                TotalFiles = this->m_TemporaryFilePaths.size();
+                this->m_FullSize = this->m_GlobalOffset;
+                for (auto const& Item : this->m_TemporaryFilePaths)
+                {
+                    this->m_FullSize += Item.second.Size;
+                }
+
+                std::uint64_t TotalFiles = this->m_TemporaryFilePaths.size();
+                std::uint64_t TotalBytes = this->m_FullSize;
                 if (OpenCallback)
                 {
                     OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
@@ -275,6 +275,7 @@ namespace NanaZip::Codecs::Archive
             this->m_IsInitialized = false;
             this->m_FilePaths.clear();
             this->m_GlobalOffset = 0;
+            this->m_FullSize = 0;
             if (this->m_FileStream)
             {
                 this->m_FileStream->Release();
@@ -448,8 +449,6 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            UNREFERENCED_PARAMETER(PropId);
-
             if (!this->m_IsInitialized)
             {
                 return S_FALSE;
@@ -458,6 +457,18 @@ namespace NanaZip::Codecs::Archive
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            switch (PropId)
+            {
+            case SevenZipArchivePhysicalSize:
+            {
+                Value->uhVal.QuadPart = this->m_FullSize;
+                Value->vt = VT_UI8;
+                break;
+            }
+            default:
+                break;
             }
 
             return S_OK;
