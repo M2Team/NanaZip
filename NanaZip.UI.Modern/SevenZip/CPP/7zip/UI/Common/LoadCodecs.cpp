@@ -723,7 +723,17 @@ void CCodecs::CloseLibs()
 }
 
 #endif // EXTERNAL_CODECS
+#include <shlobj.h>
 
+const FString GetDocumentsFolderPath()
+{
+    wchar_t path[MAX_PATH];
+    if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, path)))
+    {
+        return FString(path);
+    }
+    return FString();
+}
 
 HRESULT CCodecs::Load()
 {
@@ -784,6 +794,7 @@ HRESULT CCodecs::Load()
 
   #ifdef EXTERNAL_CODECS
     const FString baseFolder = GetBaseFolderPrefixFromRegistry();
+    const FString customPath = GetDocumentsFolderPath() + L"\\7zip plugins\\";
     // **************** NanaZip Modification Start ****************
     {
       ::MileLoadLibraryFromSystem32(baseFolder + L"K7Pal.dll");
@@ -801,7 +812,9 @@ HRESULT CCodecs::Load()
     }
     RINOK(LoadDllsFromFolder(baseFolder + kCodecsFolderName));
     RINOK(LoadDllsFromFolder(baseFolder + kFormatsFolderName));
-
+    RINOK(LoadDllsFromFolder(customPath + kCodecsFolderName));
+    RINOK(LoadDllsFromFolder(customPath + kFormatsFolderName));
+    
   NeedSetLibCodecs = true;
 
   if (Libs.Size() == 0)
