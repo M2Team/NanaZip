@@ -335,6 +335,10 @@ namespace NanaZip::Codecs::Archive
                     Sections.emplace(Section.Name, Section);
                     i += Size;
                 }
+                if (!this->m_FullSize && !Sections.empty())
+                {
+                    this->m_FullSize = BundleSize;
+                }
 
                 std::uint64_t TotalFiles = Sections.size();
                 std::uint64_t TotalBytes = this->m_FullSize;
@@ -551,8 +555,6 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            UNREFERENCED_PARAMETER(PropId);
-
             if (!this->m_IsInitialized)
             {
                 return S_FALSE;
@@ -561,6 +563,18 @@ namespace NanaZip::Codecs::Archive
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            switch (PropId)
+            {
+            case SevenZipArchivePhysicalSize:
+            {
+                Value->uhVal.QuadPart = this->m_FullSize;
+                Value->vt = VT_UI8;
+                break;
+            }
+            default:
+                break;
             }
 
             return S_OK;
