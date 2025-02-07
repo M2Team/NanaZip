@@ -151,6 +151,7 @@
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipC.exe" />
+            <desktop:ExecutionAlias Alias="K7C.exe" />
             <desktop:ExecutionAlias Alias="7z.exe" uap8:AllowOverride="true"/>
           </uap3:AppExecutionAlias>
         </uap3:Extension>
@@ -174,6 +175,7 @@
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipG.exe" />
+            <desktop:ExecutionAlias Alias="K7G.exe" />
             <desktop:ExecutionAlias Alias="7zG.exe" uap8:AllowOverride="true"/>
           </uap3:AppExecutionAlias>
         </uap3:Extension>
@@ -208,6 +210,7 @@
             EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZip.exe" />
+            <desktop:ExecutionAlias Alias="K7.exe" />
             <desktop:ExecutionAlias Alias="7zFM.exe" uap8:AllowOverride="true"/>
           </uap3:AppExecutionAlias>
         </uap3:Extension>
