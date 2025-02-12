@@ -455,7 +455,7 @@
       <Version>1.0.671</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.UniCrt">
-      <Version>1.1.278</Version>
+      <Version>1.2.328</Version>
     </PackageReference>
     <PackageReference Include="Mile.Json">
       <Version>1.0.659</Version>
