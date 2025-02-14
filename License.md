@@ -588,7 +588,6 @@ Creative Commons may be contacted at creativecommons.org.
 - LZMA SDK, https://www.7-zip.org/sdk.html
 - Mile.Detours, https://github.com/ProjectMile/Mile.Detours
 - Mile.Json, https://github.com/ProjectMile/Mile.Json
-- Mile.Project.Windows, https://github.com/ProjectMile/Mile.Project.Windows
 - Mile.Windows.Helpers, https://github.com/ProjectMile/Mile.Windows.Helpers
 - Mile.Windows.Internal, https://github.com/ProjectMile/Mile.Windows.Internal
 - Mile.Windows.UniCrt, https://github.com/ProjectMile/Mile.Windows.UniCrt
