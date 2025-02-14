@@ -55,9 +55,11 @@ namespace NanaZip::Codecs::Hash
         {
             XXH128_hash_t FinalDigest = ::XXH3_128bits_digest(
                 this->Context);
+            XXH128_canonical_t CanonicalDigest = { 0 };
+            ::XXH128_canonicalFromHash(&CanonicalDigest, FinalDigest);
             std::memcpy(
                 Digest,
-                &FinalDigest,
+                &CanonicalDigest.digest,
                 this->GetDigestSize());
         }
 

@@ -57,6 +57,8 @@ namespace NanaZip::Codecs::Hash
         {
             XXH32_hash_t FinalDigest = ::XXH32_digest(
                 this->Context);
+            // Warning: The 7-Zip Plugin Host will use little-endian for digest
+            // not longer than 8 bytes.
             std::memcpy(
                 Digest,
                 &FinalDigest,

@@ -337,6 +337,8 @@ public:
         _In_ LPCVOID Data,
         _In_ UINT32 Size) = 0;
 
+    // Warning: The 7-Zip Plugin Host will use little-endian for digest not
+    // longer than 8 bytes.
     virtual void STDMETHODCALLTYPE Final(
         _Out_ PBYTE Digest) = 0;
 
