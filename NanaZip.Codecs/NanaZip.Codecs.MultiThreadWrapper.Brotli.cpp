@@ -46,8 +46,8 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsBrotliDecode(
     BROTLIMT_RdWr_t ReadWrite = { 0 };
     ReadWrite.fn_read = ::NanaZipCodecsBrotliRead;
     ReadWrite.fn_write = ::NanaZipCodecsBrotliWrite;
-    ReadWrite.arg_read = reinterpret_cast<void*>(&StreamContext);
-    ReadWrite.arg_write = reinterpret_cast<void*>(&StreamContext);
+    ReadWrite.arg_read = reinterpret_cast<void*>(StreamContext);
+    ReadWrite.arg_write = reinterpret_cast<void*>(StreamContext);
 
     BROTLIMT_DCtx* Context = ::BROTLIMT_createDCtx(NumberOfThreads, InputSize);
     if (!Context)

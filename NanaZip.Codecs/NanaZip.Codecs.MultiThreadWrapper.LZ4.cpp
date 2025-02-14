@@ -46,8 +46,8 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLz4Decode(
     LZ4MT_RdWr_t ReadWrite = { 0 };
     ReadWrite.fn_read = ::NanaZipCodecsLz4Read;
     ReadWrite.fn_write = ::NanaZipCodecsLz4Write;
-    ReadWrite.arg_read = reinterpret_cast<void*>(&StreamContext);
-    ReadWrite.arg_write = reinterpret_cast<void*>(&StreamContext);
+    ReadWrite.arg_read = reinterpret_cast<void*>(StreamContext);
+    ReadWrite.arg_write = reinterpret_cast<void*>(StreamContext);
 
     LZ4MT_DCtx* Context = ::LZ4MT_createDCtx(NumberOfThreads, InputSize);
     if (!Context)

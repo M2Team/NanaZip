@@ -46,8 +46,8 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLizardDecode(
     LIZARDMT_RdWr_t ReadWrite = { 0 };
     ReadWrite.fn_read = ::NanaZipCodecsLizardRead;
     ReadWrite.fn_write = ::NanaZipCodecsLizardWrite;
-    ReadWrite.arg_read = reinterpret_cast<void*>(&StreamContext);
-    ReadWrite.arg_write = reinterpret_cast<void*>(&StreamContext);
+    ReadWrite.arg_read = reinterpret_cast<void*>(StreamContext);
+    ReadWrite.arg_write = reinterpret_cast<void*>(StreamContext);
 
     LIZARDMT_DCtx* Context = ::LIZARDMT_createDCtx(NumberOfThreads, InputSize);
     if (!Context)
