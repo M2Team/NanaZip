@@ -3,6 +3,27 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 5.0 Update 2 (5.0.1263.0)**
+
+- Features
+  - Provide K7 style execution aliases (K7.exe, K7C.exe, and K7G.exe) for
+    simplifying the command line user experience and providing the same command
+    names in work-in-progress NanaZip for POSIX a.k.a. AptxZip.
+- Improvements
+  - Update Mile.Windows.UniCrt to 1.2.328.
+  - Update Mile.Xaml to 2.5.1250.
+  - Migrate from Mile.Project.Windows to Mile.Project.Configurations.
+- Fixes
+  - Fix crash issue when using Open Inside # mode for the WebAssembly (WASM)
+    binary file readonly support for NanaZip.Codecs.
+  - Fix crash issue when using Open Inside # mode for the .NET Single File
+    Application bundle readonly support for NanaZip.Codecs.
+  - Fix crash issue when using Open Inside # mode for the Electron Archive
+    (asar) readonly support for NanaZip.Codecs.
+  - Fix the crash issue when extracting *.br archives. (Thanks to HikariCalyx.)
+  - Fix the XXH3_128bits printable results with wrong byte order. (Thanks to
+    fuchanghao.)
+
 **NanaZip 5.0 Update 1 (5.0.1252.0)**
 
 - Features
