@@ -8,7 +8,7 @@ For preview versions, please read
 - Features
   - Provide K7 style execution aliases (K7.exe, K7C.exe, and K7G.exe) for
     simplifying the command line user experience and providing the same command
-    names in work-in-progress NanaZip for POSIX a.k.a. AptxZip.
+    name style in work-in-progress NanaZip for POSIX a.k.a. AptxZip.
 - Improvements
   - Update Mile.Windows.UniCrt to 1.2.328.
   - Update Mile.Xaml to 2.5.1250.
