@@ -17,11 +17,11 @@
     <MileProjectVersionTag>Preview 0</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x64.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Platform.x86.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.props" />
   <Import Project="..\K7Pal\K7Pal.props" />
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
   <PropertyGroup>
@@ -461,7 +461,7 @@
       <Version>1.0.659</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
   <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
       <ClCompile Include="BLAKE3\blake3_avx2.c" />

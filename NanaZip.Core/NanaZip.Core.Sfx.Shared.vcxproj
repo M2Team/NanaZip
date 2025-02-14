@@ -5,9 +5,9 @@
     <RootNamespace>NanaZip.Core.Sfx.Shared</RootNamespace>
     <MileProjectType>StaticLibrary</MileProjectType>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Platform.x86.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\K7Pal\K7PalStatic.props" />
   <ItemDefinitionGroup>
@@ -260,6 +260,6 @@
       </ClCompile>
     </ItemGroup>
   </Target>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>

@@ -16,9 +16,9 @@
     <MileProjectVersionTag>Preview 0</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.x86.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Platform.x86.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
   <Import Project="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.props" />
@@ -245,5 +245,5 @@
     <ClCompile Include="SevenZip\CPP\Windows\Window.cpp" />
     <ClCompile Include="SevenZip\C\DllSecur.c" />
   </ItemGroup>
-  <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
 </Project>
