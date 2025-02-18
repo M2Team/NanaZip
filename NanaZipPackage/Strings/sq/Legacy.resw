@@ -591,6 +591,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Ngjish në {0} dhe dërgo me postë elektronike</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Shpaketo këtu (Smart)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Dosjet</value>
   </data>
@@ -653,6 +656,9 @@
   </data>
   <data name="Resource2513" xml:space="preserve">
     <value>Përdor hash-et me shkronja të vogla</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Hap dosjen pas shpaketimit</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Rreth NanaZip</value>
@@ -1350,4 +1356,5 @@ Je i sigurt që dëshiron të ndash arkivin në vëllime të tilla?</value>
   <data name="Resource12201" xml:space="preserve">
     <value>Hapni aplikacionin Cilësimet e Windows për të lidhur skedarët me NanaZip</value>
   </data>
+
 </root>
