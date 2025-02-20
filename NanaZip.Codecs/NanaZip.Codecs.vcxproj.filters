@@ -401,6 +401,9 @@
     <ClCompile Include="NanaZip.Codecs.Archive.Zealfs.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.WebAssembly.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.Littlefs.cpp" />
+    <ClCompile Include="Zstandard\compress\zstd_preSplit.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -1012,6 +1015,9 @@
     </ClInclude>
     <ClInclude Include="FreeBSD\dinode.h">
       <Filter>FreeBSD</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_preSplit.h">
+      <Filter>Zstandard\compress</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

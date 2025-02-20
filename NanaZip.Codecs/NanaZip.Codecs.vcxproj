@@ -134,6 +134,7 @@
     <ClCompile Include="FastLZMA2\radix_struct.c" />
     <ClCompile Include="FastLZMA2\range_enc.c" />
     <ClCompile Include="FastLZMA2\util.c" />
+    <ClCompile Include="Zstandard\compress\zstd_preSplit.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_common.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_compress.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_decompress.c" />
@@ -302,6 +303,7 @@
     <ClInclude Include="Zstandard\compress\zstd_ldm.h" />
     <ClInclude Include="Zstandard\compress\zstd_ldm_geartab.h" />
     <ClInclude Include="Zstandard\compress\zstd_opt.h" />
+    <ClInclude Include="Zstandard\compress\zstd_preSplit.h" />
     <ClInclude Include="Zstandard\zstd.h" />
     <ClInclude Include="Zstandard\zstd_errors.h" />
     <ClInclude Include="FastLZMA2\atomic.h" />
