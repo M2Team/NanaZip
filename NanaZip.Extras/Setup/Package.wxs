@@ -1,0 +1,45 @@
+﻿<Wix
+  xmlns="http://wixtoolset.org/schemas/v4/wxs"
+  xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package
+    Name="NanaZip Extras"
+    Manufacturer="M2-Team"
+    Version="!(bind.fileVersion.NanaZip.Extras.ShellExtension.dll)"
+    UpgradeCode="{49A00978-12FB-4443-A816-4F10D29C4B12}"
+    Scope="perUserOrMachine">
+    <?if $(Platform) = x86?>
+    <Launch Condition="NOT VersionNT64" Message="!(loc.WrongArchError)" />
+    <?endif?>
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+    <MediaTemplate EmbedCab="yes" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+    <Feature Id="ShellExtensionFeature" Title="!(loc.ShellExtensionFeatureTitle)">
+      <ComponentGroupRef Id="ShellExtensionComponents" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="NanaZip.Extras" />
+    </StandardDirectory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ShellExtensionComponents" Directory="INSTALLFOLDER">
+      <Component>
+        <File
+          Id="NanaZip.Extras.ShellExtension.dll"
+          Source="$(SolutionDir)Output\Binaries\$(Configuration)\$(Platform)\NanaZip.Extras.ShellExtension.dll">
+          <Class Id="{542CE69A-6EA7-4D77-9B8F-8F56CEA2BF16}" Context="InprocServer32"
+            ThreadingModel="apartment" Advertise="no" />
+        </File>
+      </Component>
+      <Component>
+        <RegistryKey Root="HKCR"
+          Key="Directory\shellex\CopyHookHandlers\{542CE69A-6EA7-4D77-9B8F-8F56CEA2BF16}">
+          <RegistryValue Value="{542CE69A-6EA7-4D77-9B8F-8F56CEA2BF16}" />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

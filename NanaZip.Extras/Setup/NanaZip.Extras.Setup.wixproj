@@ -1,0 +1,5 @@
+﻿<Project Sdk="WixToolset.Sdk/5.0.2">
+  <ItemGroup>
+    <ProjectReference Include="..\NanaZip.Extras.ShellExtension.vcxproj" />
+  </ItemGroup>
+</Project>
