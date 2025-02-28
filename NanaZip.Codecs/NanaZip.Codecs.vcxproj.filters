@@ -441,9 +441,6 @@
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
     <None Include="NanaZip.Codecs.props" />
-    <None Include="Zstandard\decompress\huf_decompress_amd64.S">
-      <Filter>Zstandard\decompress</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BLAKE3">
