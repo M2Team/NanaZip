@@ -323,10 +323,10 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                std::size_t SearchBufferSize =
+                std::size_t SearchBufferSize = static_cast<std::size_t>(
                     BundleSize < g_SignatureSearchBufferSize
                     ? BundleSize
-                    : g_SignatureSearchBufferSize;
+                    : g_SignatureSearchBufferSize);
 
                 std::vector<std::uint8_t> SearchBuffer(SearchBufferSize);
                 if (FAILED(this->ReadFileStream(
@@ -369,7 +369,8 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                std::size_t HeaderBufferSize = BundleSize - BundleHeaderOffset;
+                std::size_t HeaderBufferSize = static_cast<std::size_t>(
+                    BundleSize - BundleHeaderOffset);
 
                 std::vector<std::uint8_t> HeaderBuffer(HeaderBufferSize);
                 if (FAILED(this->ReadFileStream(
@@ -421,7 +422,9 @@ namespace NanaZip::Codecs::Archive
                         Current += sizeof(std::uint64_t);
                     }
 
-                    for (size_t i = 0; i < Header.NumberOfEmbeddedFiles; ++i)
+                    for (std::int32_t i = 0;
+                        i < Header.NumberOfEmbeddedFiles;
+                        ++i)
                     {
                         BundleFileEntry Entry;
                         Entry.Offset =
@@ -646,11 +649,12 @@ namespace NanaZip::Codecs::Archive
                 bool Succeeded = false;
                 if (Information.Size == Information.CompressedSize)
                 {
-                    std::vector<std::uint8_t> Buffer(Information.Size);
+                    std::vector<std::uint8_t> Buffer(
+                        static_cast<std::size_t>(Information.Size));
                     if (SUCCEEDED(this->ReadFileStream(
                         Information.Offset,
                         &Buffer[0],
-                        Information.Size)))
+                        static_cast<std::size_t>(Information.Size))))
                     {
                         UINT32 ProceededSize = 0;
                         Succeeded = SUCCEEDED(OutputStream->Write(

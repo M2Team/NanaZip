@@ -421,11 +421,12 @@ namespace NanaZip::Codecs::Archive
                 }
 
                 bool Succeeded = false;
-                std::vector<std::uint8_t> Buffer(Information.Size);
+                std::vector<std::uint8_t> Buffer(
+                    static_cast<std::size_t>(Information.Size));
                 if (SUCCEEDED(this->ReadFileStream(
                     this->m_GlobalOffset + Information.Offset,
                     &Buffer[0],
-                    Information.Size)))
+                    static_cast<std::size_t>(Information.Size))))
                 {
                     UINT32 ProceededSize = 0;
                     Succeeded = SUCCEEDED(OutputStream->Write(

@@ -88,7 +88,10 @@ namespace
     struct WebAssemblySection
     {
         std::uint64_t Offset = 0;
-        std::uint64_t Size = 0;
+        // According to https://www.w3.org/TR/wasm-core-1/#sections%E2%91%A0 ,
+        // we will know each section consists of the u32 size of the contents,
+        // in bytes.
+        std::uint32_t Size = 0;
         std::string Name;
     };
 }
@@ -261,10 +264,10 @@ namespace NanaZip::Codecs::Archive
                     {
                         const std::size_t MaximumSize =
                             sizeof(std::uint8_t) * (1 + 5);
-                        std::size_t AcquireSize =
+                        std::size_t AcquireSize = static_cast<std::size_t>(
                             BundleSize - i < MaximumSize
                             ? BundleSize - i
-                            : MaximumSize;
+                            : MaximumSize);
                         std::uint8_t Buffer[MaximumSize] = { 0 };
                         if (FAILED(this->ReadFileStream(
                             i,
@@ -293,10 +296,10 @@ namespace NanaZip::Codecs::Archive
                         {
                             const std::size_t MaximumSize =
                                 sizeof(std::uint8_t) * 5;
-                            std::size_t AcquireSize =
+                            std::size_t AcquireSize = static_cast<std::size_t>(
                                 BundleSize - i < MaximumSize
                                 ? BundleSize - i
-                                : MaximumSize;
+                                : MaximumSize);
                             std::uint8_t Buffer[MaximumSize] = { 0 };
                             if (FAILED(this->ReadFileStream(
                                 i,

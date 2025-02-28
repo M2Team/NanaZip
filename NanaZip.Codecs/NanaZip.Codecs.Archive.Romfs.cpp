@@ -320,9 +320,10 @@ namespace NanaZip::Codecs::Archive
                 this->m_FullSize = this->ReadUInt32(
                     &HeaderBuffer[offsetof(RomfsHeader, FullSize)]);
                 this->m_VolumeName = std::string(
-                    BundleSize - Offset < g_RomfsMaximumPathLength
-                    ? BundleSize - Offset
-                    : g_RomfsMaximumPathLength,
+                    static_cast<std::size_t>(
+                        BundleSize - Offset < g_RomfsMaximumPathLength
+                        ? BundleSize - Offset
+                        : g_RomfsMaximumPathLength),
                     '\0');
                 if (FAILED(this->ReadFileStream(
                     Offset,

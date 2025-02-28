@@ -312,7 +312,7 @@ namespace NanaZip::Codecs::Archive
             return this->ReadInt32(&this->m_SuperBlock.fs_bsize);
         }
 
-        std::uint64_t GetDirectoryInodeSize()
+        std::size_t GetDirectoryInodeSize()
         {
             return this->m_IsUfs2 ? sizeof(ufs2_dinode) : sizeof(ufs1_dinode);
         }
@@ -630,8 +630,11 @@ namespace NanaZip::Codecs::Archive
                 }
             }
 
+            // Information.FileSize will be smaller than the actual size a.k.a.
+            // BlockOffsetsCount * BlockSize which should be less than
+            // MAXDIRSIZE (0x7FFFFFFF).
             direct* End = reinterpret_cast<direct*>(
-                &Buffer[Information.FileSize]);
+                &Buffer[static_cast<std::size_t>(Information.FileSize)]);
 
             for (direct* Current = DirectoryEntries; Current < End;)
             {
@@ -986,9 +989,11 @@ namespace NanaZip::Codecs::Archive
                         }
                         if (!Buffer.empty())
                         {
+                            // The path length of the symbolic link should be
+                            // less than MAXDIRSIZE (0x7FFFFFFF).
                             SymbolLink = std::string(
                                 reinterpret_cast<char*>(&Buffer[0]),
-                                Information.FileSize);
+                                static_cast<std::size_t>(Information.FileSize));
                         }
                     }
 
