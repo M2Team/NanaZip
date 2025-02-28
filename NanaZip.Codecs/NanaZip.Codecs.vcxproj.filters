@@ -404,10 +404,46 @@
     <ClCompile Include="Zstandard\compress\zstd_preSplit.c">
       <Filter>Zstandard\compress</Filter>
     </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v03.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v04.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v05.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v06.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v07.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v01.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v02.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
     <None Include="NanaZip.Codecs.props" />
+    <None Include="Zstandard\decompress\huf_decompress_amd64.S">
+      <Filter>Zstandard\decompress</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BLAKE3">
@@ -466,6 +502,12 @@
     </Filter>
     <Filter Include="FreeBSD">
       <UniqueIdentifier>{70c4b67c-1fa7-4430-a788-11ad86f1ac56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\decompress">
+      <UniqueIdentifier>{50d76346-416e-4ceb-90d4-9a78fcd52386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\legacy">
+      <UniqueIdentifier>{b18e7303-5e49-475c-aefe-4b289407e2fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1018,6 +1060,39 @@
     </ClInclude>
     <ClInclude Include="Zstandard\compress\zstd_preSplit.h">
       <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v03.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v04.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v05.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v06.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v07.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_legacy.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v01.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v02.h">
+      <Filter>Zstandard\legacy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

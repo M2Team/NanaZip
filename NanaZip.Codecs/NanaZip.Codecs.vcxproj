@@ -41,7 +41,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>NanaZip.Codecs.def</ModuleDefinitionFile>
@@ -56,6 +56,7 @@
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
     <None Include="NanaZip.Codecs.props" />
+    <None Include="Zstandard\decompress\huf_decompress_amd64.S" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZip.Codecs.Archive.DotNetSingleFile.cpp" />
@@ -135,6 +136,17 @@
     <ClCompile Include="FastLZMA2\range_enc.c" />
     <ClCompile Include="FastLZMA2\util.c" />
     <ClCompile Include="Zstandard\compress\zstd_preSplit.c" />
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v01.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v02.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v03.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v04.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v05.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v06.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v07.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_common.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_compress.c" />
     <ClCompile Include="ZSTDMT\brotli-mt_decompress.c" />
@@ -304,6 +316,17 @@
     <ClInclude Include="Zstandard\compress\zstd_ldm_geartab.h" />
     <ClInclude Include="Zstandard\compress\zstd_opt.h" />
     <ClInclude Include="Zstandard\compress\zstd_preSplit.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_legacy.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v01.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v02.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v03.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v04.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v05.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v06.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v07.h" />
     <ClInclude Include="Zstandard\zstd.h" />
     <ClInclude Include="Zstandard\zstd_errors.h" />
     <ClInclude Include="FastLZMA2\atomic.h" />
