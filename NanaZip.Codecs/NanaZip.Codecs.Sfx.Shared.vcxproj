@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1E894B34-F9D2-4258-9401-6519AAE91620}</ProjectGuid>
+    <RootNamespace>NanaZip.Codecs.Sfx.Shared</RootNamespace>
+    <MileProjectType>StaticLibrary</MileProjectType>
+  </PropertyGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Platform.x86.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
+      <Optimization Condition="'$(Configuration)' == 'Release'">MinSpace</Optimization>
+      <FavorSizeOrSpeed Condition="'$(Configuration)' == 'Release'">Size</FavorSizeOrSpeed>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="xxHash\xxhash.c" />
+    <ClCompile Include="Zstandard\common\debug.c" />
+    <ClCompile Include="Zstandard\common\entropy_common.c" />
+    <ClCompile Include="Zstandard\common\error_private.c" />
+    <ClCompile Include="Zstandard\common\fse_decompress.c" />
+    <ClCompile Include="Zstandard\common\pool.c" />
+    <ClCompile Include="Zstandard\common\threading.c" />
+    <ClCompile Include="Zstandard\common\zstd_common.c" />
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xxHash\xxhash.h" />
+    <ClInclude Include="Zstandard\common\allocations.h" />
+    <ClInclude Include="Zstandard\common\bits.h" />
+    <ClInclude Include="Zstandard\common\bitstream.h" />
+    <ClInclude Include="Zstandard\common\compiler.h" />
+    <ClInclude Include="Zstandard\common\cpu.h" />
+    <ClInclude Include="Zstandard\common\debug.h" />
+    <ClInclude Include="Zstandard\common\error_private.h" />
+    <ClInclude Include="Zstandard\common\fse.h" />
+    <ClInclude Include="Zstandard\common\huf.h" />
+    <ClInclude Include="Zstandard\common\mem.h" />
+    <ClInclude Include="Zstandard\common\pool.h" />
+    <ClInclude Include="Zstandard\common\portability_macros.h" />
+    <ClInclude Include="Zstandard\common\threading.h" />
+    <ClInclude Include="Zstandard\common\zstd_deps.h" />
+    <ClInclude Include="Zstandard\common\zstd_internal.h" />
+    <ClInclude Include="Zstandard\common\zstd_trace.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h" />
+    <ClInclude Include="Zstandard\zstd.h" />
+    <ClInclude Include="Zstandard\zstd_errors.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanaZip.Codecs.Sfx.Shared.props" />
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
+</Project>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="xxHash\xxhash.c">
+      <Filter>xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\debug.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\entropy_common.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\error_private.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\fse_decompress.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\pool.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\threading.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\zstd_common.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="xxHash">
+      <UniqueIdentifier>{c1b717a9-c9d9-472f-ba5c-dc5fe82b7cc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard">
+      <UniqueIdentifier>{f48719f6-2f78-4486-8e50-29c661801111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\common">
+      <UniqueIdentifier>{6c79f254-3586-4307-bf3f-707a5567916f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\decompress">
+      <UniqueIdentifier>{aba1fb7a-0be1-4311-8d33-9d8ae70b3e17}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xxHash\xxhash.h">
+      <Filter>xxHash</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\zstd.h">
+      <Filter>Zstandard</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\zstd_errors.h">
+      <Filter>Zstandard</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\allocations.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\bits.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\bitstream.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\compiler.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\cpu.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\debug.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\error_private.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\fse.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\huf.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\mem.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\pool.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\portability_macros.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\threading.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_deps.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_internal.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_trace.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanaZip.Codecs.Sfx.Shared.props" />
+  </ItemGroup>
+</Project>
