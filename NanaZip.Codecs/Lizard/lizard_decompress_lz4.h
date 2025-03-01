@@ -27,7 +27,7 @@ FORCE_INLINE int Lizard_decompress_LZ4(
     BYTE* cpy = NULL;
     BYTE* oexit = op + targetOutputSize;
     const BYTE* const lowLimit = lowPrefix - dictSize;
-    const BYTE* const dictEnd = (const BYTE*)dictStart + dictSize;
+    const BYTE* const dictEnd = dictStart ? (const BYTE*)dictStart + dictSize : NULL;
 
     const int checkOffset = (dictSize < (int)(LIZARD_DICT_SIZE));
 

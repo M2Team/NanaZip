@@ -39,9 +39,9 @@ extern "C" {
 #endif
 
 
-/* ****************************************
-*  error codes list
-******************************************/
+/* *****************************************
+ *  error codes list
+ ******************************************/
 typedef enum {
   FSE_error_no_error,
   FSE_error_GENERIC,
@@ -51,11 +51,12 @@ typedef enum {
   FSE_error_tableLog_tooLarge,
   FSE_error_maxSymbolValue_tooLarge,
   FSE_error_maxSymbolValue_tooSmall,
+  FSE_error_workSpace_tooSmall,
   FSE_error_maxCode
 } FSE_ErrorCode;
 
 /* note : compare with size_t function results using FSE_getError() */
-        
+
 
 #if defined (__cplusplus)
 }

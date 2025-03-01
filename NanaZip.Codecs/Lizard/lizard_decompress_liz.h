@@ -60,19 +60,21 @@ FORCE_INLINE int Lizard_decompress_LIZv1(
         if (token >= 32)
         {
             if ((length=(token & MAX_SHORT_LITLEN)) == MAX_SHORT_LITLEN) {
-                if (unlikely(ctx->literalsPtr > iend - 1)) { LIZARD_LOG_DECOMPRESS_LIZv1("1"); goto _output_error; } 
+                if (unlikely(ctx->literalsPtr > iend - 1)) { LIZARD_LOG_DECOMPRESS_LIZv1("1A"); goto _output_error; }
                 length = *ctx->literalsPtr;
+                ctx->literalsPtr++;
                 if unlikely(length >= 254) {
                     if (length == 254) {
-                        length = MEM_readLE16(ctx->literalsPtr+1);
+                        if (unlikely(ctx->literalsPtr > iend - 2)) { LIZARD_LOG_DECOMPRESS_LIZv1("1B"); goto _output_error; }  /* overflow detection */
+                        length = MEM_readLE16(ctx->literalsPtr);
                         ctx->literalsPtr += 2;
                     } else {
-                        length = MEM_readLE24(ctx->literalsPtr+1);
+                        if (unlikely(ctx->literalsPtr > iend - 3)) { LIZARD_LOG_DECOMPRESS_LIZv1("1C"); goto _output_error; }  /* overflow detection */
+                        length = MEM_readLE24(ctx->literalsPtr);
                         ctx->literalsPtr += 3;
                     }
                 }
                 length += MAX_SHORT_LITLEN;
-                ctx->literalsPtr++;
                 if (unlikely((size_t)(op+length)<(size_t)(op))) { LIZARD_LOG_DECOMPRESS_LIZv1("2"); goto _output_error; }  /* overflow detection */
                 if (unlikely((size_t)(ctx->literalsPtr+length)<(size_t)(ctx->literalsPtr))) { LIZARD_LOG_DECOMPRESS_LIZv1("3"); goto _output_error; }   /* overflow detection */
             }
@@ -94,17 +96,18 @@ FORCE_INLINE int Lizard_decompress_LIZv1(
     #endif
 
             /* get offset */
-            if (unlikely(ctx->offset16Ptr > ctx->offset16End)) { LIZARD_LOG_DECOMPRESS_LIZv1("(ctx->offset16Ptr > ctx->offset16End\n"); goto _output_error; } 
 #if 1
-            { /* branchless */
+            if (likely(ctx->offset16End - ctx->offset16Ptr >= 2)) {
+                /* branchless */
                 intptr_t new_off = MEM_readLE16(ctx->offset16Ptr);
                 uintptr_t not_repCode = (uintptr_t)(token >> ML_RUN_BITS) - 1;
                 last_off ^= not_repCode & (last_off ^ -new_off);
                 ctx->offset16Ptr = (BYTE*)((uintptr_t)ctx->offset16Ptr + (not_repCode & 2));
             }
 #else
-            if ((token >> ML_RUN_BITS) == 0)
-            {
+            int has_offset = ((token >> ML_RUN_BITS) == 0) && (ctx->offset16End - ctx->offset16Ptr >= 2);
+
+            if (likely(has_offset)) {
                 last_off = -(intptr_t)MEM_readLE16(ctx->offset16Ptr); 
                 ctx->offset16Ptr += 2;
             }

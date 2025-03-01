@@ -1,36 +1,16 @@
-﻿/*
-   Common functions of New Generation Entropy library
-   Copyright (C) 2016, Yann Collet.
-
-   BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
-
-   Redistribution and use in source and binary forms, with or without
-   modification, are permitted provided that the following conditions are
-   met:
-
-       * Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-       * Redistributions in binary form must reproduce the above
-   copyright notice, this list of conditions and the following disclaimer
-   in the documentation and/or other materials provided with the
-   distribution.
-
-   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-   OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-    You can contact the author at :
-    - FSE+HUF source repository : https://github.com/Cyan4973/FiniteStateEntropy
-    - Public forum : https://groups.google.com/forum/#!forum/lz4c
-*************************************************************************** */
+﻿/* ******************************************************************
+ * Common functions of New Generation Entropy library
+ * Copyright (c) 2016-2020, Yann Collet, Facebook, Inc.
+ *
+ *  You can contact the author at :
+ *  - FSE+HUF source repository : https://github.com/Cyan4973/FiniteStateEntropy
+ *  - Public forum : https://groups.google.com/forum/#!forum/lz4c
+ *
+ * This source code is licensed under both the BSD-style license (found in the
+ * LICENSE file in the root directory of this source tree) and the GPLv2 (found
+ * in the COPYING file in the root directory of this source tree).
+ * You may select, at your option, one of the above-listed licenses.
+****************************************************************** */
 
 /* *************************************
 *  Dependencies
@@ -43,32 +23,22 @@
 #include "huf.h"
 
 
-/*-****************************************
-*  Version
-******************************************/
-unsigned LIZ_FSE_versionNumber(void) { return FSE_VERSION_NUMBER; }
+/*===   Version   ===*/
+unsigned FSE_versionNumber(void) { return FSE_VERSION_NUMBER; }
 
 
-/*-****************************************
-*  FSE Error Management
-******************************************/
-unsigned LIZ_FSE_isError(size_t code) { return ERR_isError(code); }
+/*===   Error Management   ===*/
+unsigned FSE_isError(size_t code) { return ERR_isError(code); }
+const char* FSE_getErrorName(size_t code) { return ERR_getErrorName(code); }
 
-const char* LIZ_FSE_getErrorName(size_t code) { return ERR_getErrorName(code); }
-
-
-/* **************************************************************
-*  HUF Error Management
-****************************************************************/
-unsigned LIZ_HUF_isError(size_t code) { return ERR_isError(code); }
-
-const char* LIZ_HUF_getErrorName(size_t code) { return ERR_getErrorName(code); }
+unsigned HUF_isError(size_t code) { return ERR_isError(code); }
+const char* HUF_getErrorName(size_t code) { return ERR_getErrorName(code); }
 
 
 /*-**************************************************************
 *  FSE NCount encoding-decoding
 ****************************************************************/
-size_t LIZ_FSE_readNCount (short* normalizedCounter, unsigned* maxSVPtr, unsigned* tableLogPtr,
+size_t FSE_readNCount (short* normalizedCounter, unsigned* maxSVPtr, unsigned* tableLogPtr,
                  const void* headerBuffer, size_t hbSize)
 {
     const BYTE* const istart = (const BYTE*) headerBuffer;
@@ -82,7 +52,20 @@ size_t LIZ_FSE_readNCount (short* normalizedCounter, unsigned* maxSVPtr, unsigne
     unsigned charnum = 0;
     int previous0 = 0;
 
-    if (hbSize < 4) return ERROR(srcSize_wrong);
+    if (hbSize < 4) {
+        /* This function only works when hbSize >= 4 */
+        char buffer[4] = {0};
+        memcpy(buffer, headerBuffer, hbSize);
+        {   size_t const countSize = FSE_readNCount(normalizedCounter, maxSVPtr, tableLogPtr,
+                                                    buffer, sizeof(buffer));
+            if (FSE_isError(countSize)) return countSize;
+            if (countSize > hbSize) return ERROR(corruption_detected);
+            return countSize;
+    }   }
+    assert(hbSize >= 4);
+
+    /* init */
+    memset(normalizedCounter, 0, (*maxSVPtr+1) * sizeof(normalizedCounter[0]));   /* all symbols not present in NCount have a frequency of 0 */
     bitStream = MEM_readLE32(ip);
     nbBits = (bitStream & 0xF) + FSE_MIN_TABLELOG;   /* extract tableLog */
     if (nbBits > FSE_TABLELOG_ABSOLUTE_MAX) return ERROR(tableLog_tooLarge);
@@ -115,6 +98,7 @@ size_t LIZ_FSE_readNCount (short* normalizedCounter, unsigned* maxSVPtr, unsigne
             if (n0 > *maxSVPtr) return ERROR(maxSymbolValue_tooSmall);
             while (charnum < n0) normalizedCounter[charnum++] = 0;
             if ((ip <= iend-7) || (ip + (bitCount>>3) <= iend-4)) {
+                assert((bitCount >> 3) <= 3); /* For first condition to work */
                 ip += bitCount>>3;
                 bitCount &= 7;
                 bitStream = MEM_readLE32(ip) >> bitCount;
@@ -160,14 +144,14 @@ size_t LIZ_FSE_readNCount (short* normalizedCounter, unsigned* maxSVPtr, unsigne
 }
 
 
-/*! LIZ_HUF_readStats() :
+/*! HUF_readStats() :
     Read compact Huffman tree, saved by HUF_writeCTable().
     `huffWeight` is destination buffer.
     `rankStats` is assumed to be a table of at least HUF_TABLELOG_MAX U32.
     @return : size read from `src` , or an error Code .
-    Note : Needed by LIZ_HUF_readCTable() and HUF_readDTableX?() .
+    Note : Needed by HUF_readCTable() and HUF_readDTableX?() .
 */
-size_t LIZ_HUF_readStats(BYTE* huffWeight, size_t hwSize, U32* rankStats,
+size_t HUF_readStats(BYTE* huffWeight, size_t hwSize, U32* rankStats,
                      U32* nbSymbolsPtr, U32* tableLogPtr,
                      const void* src, size_t srcSize)
 {
@@ -195,7 +179,7 @@ size_t LIZ_HUF_readStats(BYTE* huffWeight, size_t hwSize, U32* rankStats,
         FSE_DTable fseWorkspace[FSE_DTABLE_SIZE_U32(6)];  /* 6 is max possible tableLog for HUF header (maybe even 5, to be tested) */
         if (iSize+1 > srcSize) return ERROR(srcSize_wrong);
         oSize = FSE_decompress_wksp(huffWeight, hwSize-1, ip+1, iSize, fseWorkspace, 6);   /* max (hwSize-1) values decoded, as last one is implied */
-        if (LIZ_FSE_isError(oSize)) return oSize;
+        if (FSE_isError(oSize)) return oSize;
     }
 
     /* collect weight stats */

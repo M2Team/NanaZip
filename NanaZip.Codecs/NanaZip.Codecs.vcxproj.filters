@@ -209,21 +209,6 @@
     <ClCompile Include="Lizard\lizard_frame.c">
       <Filter>Lizard</Filter>
     </ClCompile>
-    <ClCompile Include="Lizard\liz_entropy_common.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\liz_fse_compress.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\liz_fse_decompress.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\liz_huf_compress.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\liz_huf_decompress.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
     <ClCompile Include="ZSTDMT\brotli-mt_common.c">
       <Filter>ZSTDMT</Filter>
     </ClCompile>
@@ -437,6 +422,24 @@
     <ClCompile Include="Zstandard\legacy\zstd_v02.c">
       <Filter>Zstandard\legacy</Filter>
     </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_huf_compress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_huf_decompress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_fse_compress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_hist.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_entropy_common.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -505,6 +508,9 @@
     </Filter>
     <Filter Include="Zstandard\legacy">
       <UniqueIdentifier>{b18e7303-5e49-475c-aefe-4b289407e2fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lizard\entropy">
+      <UniqueIdentifier>{114a5a2f-28cd-4e17-9570-ecf119db33d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -841,24 +847,6 @@
     <ClInclude Include="Lizard\lizard_parser_pricefast.h">
       <Filter>Lizard</Filter>
     </ClInclude>
-    <ClInclude Include="Lizard\bitstream.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\error_private.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\error_public.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\fse.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\huf.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\mem.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
     <ClInclude Include="ZSTDMT\brotli-mt.h">
       <Filter>ZSTDMT</Filter>
     </ClInclude>
@@ -1090,6 +1078,33 @@
     </ClInclude>
     <ClInclude Include="Zstandard\legacy\zstd_v02.h">
       <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\mem.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\huf.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\error_private.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\fse.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\bitstream.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\compiler.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\debug.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\error_public.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\hist.h">
+      <Filter>Lizard\entropy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
