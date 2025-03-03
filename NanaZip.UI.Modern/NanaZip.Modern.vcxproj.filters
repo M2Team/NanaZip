@@ -85,6 +85,9 @@
     <Filter Include="Strings\sq">
       <UniqueIdentifier>{d10b2367-f27a-4724-8ef0-13d65c9689ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\hu">
+      <UniqueIdentifier>{59cf925d-a83a-4c58-92a5-dfa5ee26caf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\ParentFolder.bmp">
@@ -1106,6 +1109,12 @@
     </PRIResource>
     <PRIResource Include="Strings\sq\SponsorPage.resw">
       <Filter>Strings\sq</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw">
+      <Filter>Strings\hu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hu\SponsorPage.resw">
+      <Filter>Strings\hu</Filter>
     </PRIResource>
   </ItemGroup>
 </Project>

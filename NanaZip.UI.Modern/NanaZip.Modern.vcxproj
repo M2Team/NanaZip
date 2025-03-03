@@ -480,6 +480,8 @@
   <ItemGroup>
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\en\SponsorPage.resw" />
+    <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\hu\SponsorPage.resw" />
     <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\pl\SponsorPage.resw" />
     <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw" />
