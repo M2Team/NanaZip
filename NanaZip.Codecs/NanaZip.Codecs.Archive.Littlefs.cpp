@@ -12,6 +12,8 @@
 
 #include "NanaZip.Codecs.SevenZipWrapper.h"
 
+#include "Mile.Helpers.Portable.Base.Unstaged.h"
+
 namespace
 {
     struct PropertyItem
@@ -201,31 +203,19 @@ namespace NanaZip::Codecs::Archive
         std::uint8_t ReadUInt8(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return Base[0];
+            return ::MileReadUInt8(BaseAddress);
         }
 
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return
-                (static_cast<std::uint16_t>(Base[0])) |
-                (static_cast<std::uint16_t>(Base[1]) << 8);
+            ::MileReadUInt16Little(BaseAddress);
         }
 
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return
-                (static_cast<std::uint32_t>(Base[0])) |
-                (static_cast<std::uint32_t>(Base[1]) << 8) |
-                (static_cast<std::uint32_t>(Base[2]) << 16) |
-                (static_cast<std::uint32_t>(Base[3]) << 24);
+            return ::MileReadUInt32Little(BaseAddress);
         }
 
         std::int8_t ReadInt8(

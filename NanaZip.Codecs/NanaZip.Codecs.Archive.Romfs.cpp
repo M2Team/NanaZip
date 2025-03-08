@@ -14,6 +14,8 @@
 
 #include <map>
 
+#include "Mile.Helpers.Portable.Base.Unstaged.h"
+
 namespace
 {
     struct PropertyItem
@@ -45,7 +47,7 @@ namespace
         sizeof(g_PropertyItems) / sizeof(*g_PropertyItems);
 
     // Reference: https://www.kernel.org/doc/html/v6.12/filesystems/romfs.html
-    // Every multi byte value (32 bit words, I’ll use the longwords term from
+    // Every multi byte value (32 bit words, I will use the longwords term from
     // now on) must be in big endian order.
 
     const char g_RomfsSignature[] = { '-', 'r', 'o', 'm', '1', 'f', 's', '-' };
@@ -130,13 +132,7 @@ namespace NanaZip::Codecs::Archive
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return
-                (static_cast<std::uint32_t>(Base[0]) << 24) |
-                (static_cast<std::uint32_t>(Base[1]) << 16) |
-                (static_cast<std::uint32_t>(Base[2]) << 8) |
-                (static_cast<std::uint32_t>(Base[3]));
+            return ::MileReadUInt32Big(BaseAddress);
         }
 
         std::uint32_t GetAlignedSize(

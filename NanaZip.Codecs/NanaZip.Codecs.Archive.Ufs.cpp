@@ -35,6 +35,8 @@
 
 #include <map>
 
+#include "Mile.Helpers.Portable.Base.Unstaged.h"
+
 namespace
 {
     // Win32 time epoch is 00:00:00, January 1 1601.
@@ -143,82 +145,31 @@ namespace NanaZip::Codecs::Archive
         std::uint8_t ReadUInt8(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return Base[0];
+            return ::MileReadUInt8(BaseAddress);
         }
 
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            if (this->m_IsBigEndian)
-            {
-                return
-                    (static_cast<std::uint16_t>(Base[0]) << 8) |
-                    (static_cast<std::uint16_t>(Base[1]));
-            }
-            else
-            {
-                return
-                    (static_cast<std::uint16_t>(Base[0])) |
-                    (static_cast<std::uint16_t>(Base[1]) << 8);
-            }
+            return this->m_IsBigEndian
+                ? ::MileReadUInt16Big(BaseAddress)
+                : ::MileReadUInt16Little(BaseAddress);
         }
 
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            if (this->m_IsBigEndian)
-            {
-                return
-                    (static_cast<std::uint32_t>(Base[0]) << 24) |
-                    (static_cast<std::uint32_t>(Base[1]) << 16) |
-                    (static_cast<std::uint32_t>(Base[2]) << 8) |
-                    (static_cast<std::uint32_t>(Base[3]));
-            }
-            else
-            {
-                return
-                    (static_cast<std::uint32_t>(Base[0])) |
-                    (static_cast<std::uint32_t>(Base[1]) << 8) |
-                    (static_cast<std::uint32_t>(Base[2]) << 16) |
-                    (static_cast<std::uint32_t>(Base[3]) << 24);
-            }
+            return this->m_IsBigEndian
+                ? ::MileReadUInt32Big(BaseAddress)
+                : ::MileReadUInt32Little(BaseAddress);
         }
 
         std::uint64_t ReadUInt64(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            if (this->m_IsBigEndian)
-            {
-                return
-                    (static_cast<std::uint64_t>(Base[0]) << 56) |
-                    (static_cast<std::uint64_t>(Base[1]) << 48) |
-                    (static_cast<std::uint64_t>(Base[2]) << 40) |
-                    (static_cast<std::uint64_t>(Base[3]) << 32) |
-                    (static_cast<std::uint64_t>(Base[4]) << 24) |
-                    (static_cast<std::uint64_t>(Base[5]) << 16) |
-                    (static_cast<std::uint64_t>(Base[6]) << 8) |
-                    (static_cast<std::uint64_t>(Base[7]));
-            }
-            else
-            {
-                return
-                    (static_cast<std::uint64_t>(Base[0])) |
-                    (static_cast<std::uint64_t>(Base[1]) << 8) |
-                    (static_cast<std::uint64_t>(Base[2]) << 16) |
-                    (static_cast<std::uint64_t>(Base[3]) << 24) |
-                    (static_cast<std::uint64_t>(Base[4]) << 32) |
-                    (static_cast<std::uint64_t>(Base[5]) << 40) |
-                    (static_cast<std::uint64_t>(Base[6]) << 48) |
-                    (static_cast<std::uint64_t>(Base[7]) << 56);
-            }
+            return this->m_IsBigEndian
+                ? ::MileReadUInt64Big(BaseAddress)
+                : ::MileReadUInt64Little(BaseAddress);
         }
 
         std::int8_t ReadInt8(

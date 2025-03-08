@@ -14,6 +14,8 @@
 
 #include <map>
 
+#include "Mile.Helpers.Portable.Base.Unstaged.h"
+
 namespace
 {
     struct PropertyItem
@@ -108,18 +110,6 @@ namespace NanaZip::Codecs::Archive
         bool m_IsInitialized = false;
 
     private:
-
-        std::uint32_t ReadUInt32(
-            const void* BaseAddress)
-        {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return
-                (static_cast<std::uint32_t>(Base[0])) |
-                (static_cast<std::uint32_t>(Base[1]) << 8) |
-                (static_cast<std::uint32_t>(Base[2]) << 16) |
-                (static_cast<std::uint32_t>(Base[3]) << 24);
-        }
 
         std::uint32_t ReadUleb128(
             const void* BaseAddress,
@@ -249,7 +239,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                std::uint32_t Version = this->ReadUInt32(
+                std::uint32_t Version = ::MileReadUInt32Little(
                     &HeaderBuffer[sizeof(std::uint32_t)]);
                 if (1 != Version)
                 {

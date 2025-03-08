@@ -14,6 +14,8 @@
 
 #include <map>
 
+#include "Mile.Helpers.Portable.Base.Unstaged.h"
+
 namespace
 {
     struct PropertyItem
@@ -138,11 +140,7 @@ namespace NanaZip::Codecs::Archive
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return
-                (static_cast<std::uint16_t>(Base[0])) |
-                (static_cast<std::uint16_t>(Base[1]) << 8);
+            return ::MileReadUInt16Little(BaseAddress);
         }
 
         std::uint32_t GetAlignedSize(

@@ -15,6 +15,8 @@
 #include <map>
 #include <Mile.Json.h>
 
+#include "Mile.Helpers.Portable.Base.Unstaged.h"
+
 namespace
 {
     struct PropertyItem
@@ -59,13 +61,7 @@ namespace NanaZip::Codecs::Archive
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            return
-                (static_cast<std::uint32_t>(Base[0])) |
-                (static_cast<std::uint32_t>(Base[1]) << 8) |
-                (static_cast<std::uint32_t>(Base[2]) << 16) |
-                (static_cast<std::uint32_t>(Base[3]) << 24);
+            return ::MileReadUInt32Little(BaseAddress);
         }
 
         HRESULT ReadFileStream(
