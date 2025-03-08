@@ -64,6 +64,7 @@
     <ClCompile Include="Lizard\entropy\lizard_hist.c" />
     <ClCompile Include="Lizard\entropy\lizard_huf_compress.c" />
     <ClCompile Include="Lizard\entropy\lizard_huf_decompress.c" />
+    <ClCompile Include="Mile.Helpers.Portable.Base.Unstaged.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.DotNetSingleFile.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.ElectronAsar.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.Littlefs.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Lizard\entropy\hist.h" />
     <ClInclude Include="Lizard\entropy\huf.h" />
     <ClInclude Include="Lizard\entropy\mem.h" />
+    <ClInclude Include="Mile.Helpers.Portable.Base.Unstaged.h" />
     <ClInclude Include="NanaZip.Codecs.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Common.h" />

@@ -440,6 +440,9 @@
     <ClCompile Include="Lizard\entropy\lizard_entropy_common.c">
       <Filter>Lizard\entropy</Filter>
     </ClCompile>
+    <ClCompile Include="Mile.Helpers.Portable.Base.Unstaged.cpp">
+      <Filter>Mile.Portable.Helpers.Unstaged</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -511,6 +514,9 @@
     </Filter>
     <Filter Include="Lizard\entropy">
       <UniqueIdentifier>{114a5a2f-28cd-4e17-9570-ecf119db33d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mile.Portable.Helpers.Unstaged">
+      <UniqueIdentifier>{2ede4493-6888-4402-aa9d-823628b6bd21}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1105,6 +1111,9 @@
     </ClInclude>
     <ClInclude Include="Lizard\entropy\hist.h">
       <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Mile.Helpers.Portable.Base.Unstaged.h">
+      <Filter>Mile.Portable.Helpers.Unstaged</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
