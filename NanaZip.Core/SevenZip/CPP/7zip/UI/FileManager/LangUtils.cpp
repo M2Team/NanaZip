@@ -77,7 +77,6 @@ static const CIDLangPair kLangPairs[] =
   { IDYES,    406 },
   { IDNO,     407 },
   { IDCLOSE,  408 },
-  { IDHELP,   409 },
   { IDCONTINUE, 411 }
 };
 
