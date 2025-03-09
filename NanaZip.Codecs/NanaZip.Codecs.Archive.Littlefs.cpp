@@ -209,13 +209,13 @@ namespace NanaZip::Codecs::Archive
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
-            ::MileReadUInt16Little(BaseAddress);
+            ::MileReadUInt16LittleEndian(BaseAddress);
         }
 
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            return ::MileReadUInt32Little(BaseAddress);
+            return ::MileReadUInt32LittleEndian(BaseAddress);
         }
 
         std::int8_t ReadInt8(

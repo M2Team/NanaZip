@@ -43,7 +43,7 @@ EXTERN_C uint8_t MileReadUInt8(
 *                     readable memory.
  * @return The unsigned 16-bit integer value.
  */
-EXTERN_C uint16_t MileReadUInt16Big(
+EXTERN_C uint16_t MileReadUInt16BigEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -54,7 +54,7 @@ EXTERN_C uint16_t MileReadUInt16Big(
 *                     readable memory.
  * @return The unsigned 16-bit integer value.
  */
-EXTERN_C uint16_t MileReadUInt16Little(
+EXTERN_C uint16_t MileReadUInt16LittleEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -65,7 +65,7 @@ EXTERN_C uint16_t MileReadUInt16Little(
 *                     readable memory.
  * @return The unsigned 32-bit integer value.
  */
-EXTERN_C uint32_t MileReadUInt32Big(
+EXTERN_C uint32_t MileReadUInt32BigEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -76,7 +76,7 @@ EXTERN_C uint32_t MileReadUInt32Big(
 *                     readable memory.
  * @return The unsigned 32-bit integer value.
  */
-EXTERN_C uint32_t MileReadUInt32Little(
+EXTERN_C uint32_t MileReadUInt32LittleEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -87,7 +87,7 @@ EXTERN_C uint32_t MileReadUInt32Little(
 *                     readable memory.
  * @return The unsigned 64-bit integer value.
  */
-EXTERN_C uint64_t MileReadUInt64Big(
+EXTERN_C uint64_t MileReadUInt64BigEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -98,7 +98,7 @@ EXTERN_C uint64_t MileReadUInt64Big(
 *                     readable memory.
  * @return The unsigned 64-bit integer value.
  */
-EXTERN_C uint64_t MileReadUInt64Little(
+EXTERN_C uint64_t MileReadUInt64LittleEndian(
     _In_ const void* BaseAddress);
 
 #endif // !MILE_PORTABLE_HELPERS_BASE_UNSTAGED

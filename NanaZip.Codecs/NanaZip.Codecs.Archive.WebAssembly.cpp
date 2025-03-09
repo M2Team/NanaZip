@@ -239,7 +239,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                std::uint32_t Version = ::MileReadUInt32Little(
+                std::uint32_t Version = ::MileReadUInt32LittleEndian(
                     &HeaderBuffer[sizeof(std::uint32_t)]);
                 if (1 != Version)
                 {

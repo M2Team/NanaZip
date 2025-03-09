@@ -17,7 +17,7 @@ EXTERN_C uint8_t MileReadUInt8(
     return Base[0];
 }
 
-EXTERN_C uint16_t MileReadUInt16Big(
+EXTERN_C uint16_t MileReadUInt16BigEndian(
     _In_ const void* BaseAddress)
 {
     const uint8_t* Base = reinterpret_cast<const uint8_t*>(BaseAddress);
@@ -26,7 +26,7 @@ EXTERN_C uint16_t MileReadUInt16Big(
         (static_cast<uint16_t>(Base[1]));
 }
 
-EXTERN_C uint16_t MileReadUInt16Little(
+EXTERN_C uint16_t MileReadUInt16LittleEndian(
     _In_ const void* BaseAddress)
 {
     const uint8_t* Base = reinterpret_cast<const uint8_t*>(BaseAddress);
@@ -35,7 +35,7 @@ EXTERN_C uint16_t MileReadUInt16Little(
         (static_cast<uint16_t>(Base[1]) << 8);
 }
 
-EXTERN_C uint32_t MileReadUInt32Big(
+EXTERN_C uint32_t MileReadUInt32BigEndian(
     _In_ const void* BaseAddress)
 {
     const uint8_t* Base = reinterpret_cast<const uint8_t*>(BaseAddress);
@@ -46,7 +46,7 @@ EXTERN_C uint32_t MileReadUInt32Big(
         (static_cast<uint32_t>(Base[3]));
 }
 
-EXTERN_C uint32_t MileReadUInt32Little(
+EXTERN_C uint32_t MileReadUInt32LittleEndian(
     _In_ const void* BaseAddress)
 {
     const uint8_t* Base = reinterpret_cast<const uint8_t*>(BaseAddress);
@@ -58,7 +58,7 @@ EXTERN_C uint32_t MileReadUInt32Little(
 }
 
 
-EXTERN_C uint64_t MileReadUInt64Big(
+EXTERN_C uint64_t MileReadUInt64BigEndian(
     _In_ const void* BaseAddress)
 {
     const uint8_t* Base = reinterpret_cast<const uint8_t*>(BaseAddress);
@@ -73,7 +73,7 @@ EXTERN_C uint64_t MileReadUInt64Big(
         (static_cast<uint64_t>(Base[7]));
 }
 
-EXTERN_C uint64_t MileReadUInt64Little(
+EXTERN_C uint64_t MileReadUInt64LittleEndian(
     _In_ const void* BaseAddress)
 {
     const uint8_t* Base = reinterpret_cast<const uint8_t*>(BaseAddress);

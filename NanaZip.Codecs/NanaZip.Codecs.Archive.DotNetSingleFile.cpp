@@ -43,14 +43,14 @@ namespace
     // - src/installer/managed/Microsoft.NET.HostModel/Bundle/Manifest.cs
     //
     // FileEntry: Records information about embedded files.
-    // 
-    // The bundle manifest records the following meta-data for each 
+    //
+    // The bundle manifest records the following meta-data for each
     // file embedded in the bundle:
     // Fixed size portion (file_entry_fixed_t)
-    //   - Offset     
-    //   - Size       
+    //   - Offset
+    //   - Size
     //   - CompressedSize  - only in bundleVersion 6+
-    //   - File Entry Type       
+    //   - File Entry Type
     // Variable Size portion
     //   - relative path (7-bit extension encoded length prefixed string)
     //
@@ -186,19 +186,19 @@ namespace NanaZip::Codecs::Archive
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
-            return ::MileReadUInt16Little(BaseAddress);
+            return ::MileReadUInt16LittleEndian(BaseAddress);
         }
 
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            return ::MileReadUInt32Little(BaseAddress);
+            return ::MileReadUInt32LittleEndian(BaseAddress);
         }
 
         std::uint64_t ReadUInt64(
             const void* BaseAddress)
         {
-            return ::MileReadUInt64Little(BaseAddress);
+            return ::MileReadUInt64LittleEndian(BaseAddress);
         }
 
         std::int8_t ReadInt8(

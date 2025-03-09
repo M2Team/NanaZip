@@ -152,24 +152,24 @@ namespace NanaZip::Codecs::Archive
             const void* BaseAddress)
         {
             return this->m_IsBigEndian
-                ? ::MileReadUInt16Big(BaseAddress)
-                : ::MileReadUInt16Little(BaseAddress);
+                ? ::MileReadUInt16BigEndian(BaseAddress)
+                : ::MileReadUInt16LittleEndian(BaseAddress);
         }
 
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
             return this->m_IsBigEndian
-                ? ::MileReadUInt32Big(BaseAddress)
-                : ::MileReadUInt32Little(BaseAddress);
+                ? ::MileReadUInt32BigEndian(BaseAddress)
+                : ::MileReadUInt32LittleEndian(BaseAddress);
         }
 
         std::uint64_t ReadUInt64(
             const void* BaseAddress)
         {
             return this->m_IsBigEndian
-                ? ::MileReadUInt64Big(BaseAddress)
-                : ::MileReadUInt64Little(BaseAddress);
+                ? ::MileReadUInt64BigEndian(BaseAddress)
+                : ::MileReadUInt64LittleEndian(BaseAddress);
         }
 
         std::int8_t ReadInt8(
@@ -1022,7 +1022,7 @@ namespace NanaZip::Codecs::Archive
             ExtractCallback->SetTotal(TotalSize);
 
             UINT64 Completed = 0;
-            
+
             for (UINT32 i = 0; i < NumItems; ++i)
             {
                 UINT32 ActualFileIndex = AllFilesMode ? i : Indices[i];

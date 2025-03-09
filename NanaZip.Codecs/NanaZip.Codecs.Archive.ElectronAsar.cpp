@@ -61,7 +61,7 @@ namespace NanaZip::Codecs::Archive
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            return ::MileReadUInt32Little(BaseAddress);
+            return ::MileReadUInt32LittleEndian(BaseAddress);
         }
 
         HRESULT ReadFileStream(

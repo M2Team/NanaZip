@@ -140,7 +140,7 @@ namespace NanaZip::Codecs::Archive
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
-            return ::MileReadUInt16Little(BaseAddress);
+            return ::MileReadUInt16LittleEndian(BaseAddress);
         }
 
         std::uint32_t GetAlignedSize(
