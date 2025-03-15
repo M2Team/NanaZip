@@ -594,6 +594,7 @@ Creative Commons may be contacted at creativecommons.org.
 - Mile.Windows.UniCrt, https://github.com/ProjectMile/Mile.Windows.UniCrt
 - Mile.Xaml, https://github.com/ProjectMile/Mile.Xaml
 - RHash, https://github.com/rhash/RHash
+- Windows-driver-samples, https://github.com/microsoft/Windows-driver-samples
 - xxHash, https://github.com/Cyan4973/xxHash
 - Zstandard, https://github.com/facebook/zstd
 - ZSTDMT, https://github.com/mcmilk/zstdmt
