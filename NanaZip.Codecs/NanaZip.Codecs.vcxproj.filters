@@ -1115,5 +1115,6 @@
     <ClInclude Include="Mile.Helpers.Portable.Base.Unstaged.h">
       <Filter>Mile.Portable.Helpers.Unstaged</Filter>
     </ClInclude>
+    <ClInclude Include="NanaZip.Codecs.Specification.Fat.h" />
   </ItemGroup>
 </Project>

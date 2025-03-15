@@ -296,6 +296,7 @@
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.h" />
     <ClInclude Include="NanaZip.Codecs.SevenZipWrapper.h" />
+    <ClInclude Include="NanaZip.Codecs.Specification.Fat.h" />
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />
