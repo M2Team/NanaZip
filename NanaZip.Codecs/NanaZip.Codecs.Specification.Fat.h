@@ -39,10 +39,6 @@ typedef LBO *PLBO;
 typedef ULONG32 VBO;
 typedef VBO *PVBO;
 
-// *****************************************************************************
-// Packed and Unpacked BIOS Parameter Block
-//
-
 // The boot sector is the first physical sector (LBN == 0) on the volume. Part
 // of the sector contains a BIOS Parameter Block. The BIOS in the sector is
 // packed (i.e., unaligned) so we'll supply a unpacking macro to translate a
