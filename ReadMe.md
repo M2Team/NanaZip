@@ -180,7 +180,7 @@ platform. Here are the policy for non-Windows platform support:
   WinRT XAML to POSIX. So, non-Windows support policy is only for NanaZip Core
   and NanaZip Classic.
 - The developer team will try best to support Wine which has the Windows Vista
-  or later feature level. Currenly tested simply under Wine 9.x.
+  or later feature level. Currently tested simply under Wine 9.x.
 - We don't support ReactOS and its derivatives because they are too hard to
   support. But testing under the ReactOS and its derivatives may be interesting.
 
