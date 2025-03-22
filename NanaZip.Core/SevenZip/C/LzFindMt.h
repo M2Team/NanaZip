@@ -59,7 +59,7 @@ typedef struct CMatchFinderMt_
   const UInt32 *crc;
 
   Mf_Mix_Matches MixMatchesFunc;
-  UInt32 failure_LZ_BT; // failure in BT transfered to LZ
+  UInt32 failure_LZ_BT; // failure in BT transferred to LZ
   // UInt32 failure_LZ_LZ; // failure in LZ tables
   UInt32 failureBuf[1];
   // UInt32 crc[256];
