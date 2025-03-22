@@ -607,7 +607,7 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
         item.Cluster |= ((UInt32)Get16(p + 20) << 16);
       else
       {
-        // OS/2 and WinNT probably can store EA (extended atributes) in that field.
+        // OS/2 and WinNT probably can store EA (extended attributes) in that field.
       }
 
       item.CTime = Get32(p + 14);
