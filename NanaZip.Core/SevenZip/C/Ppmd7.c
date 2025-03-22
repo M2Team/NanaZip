@@ -8,8 +8,8 @@ This code is based on PPMd var.H (2001): Dmitry Shkarin : Public domain */
 
 #include "Ppmd7.h"
 
-/* define PPMD7_ORDER_0_SUPPPORT to suport order-0 mode, unsupported by orignal PPMd var.H. code */
-// #define PPMD7_ORDER_0_SUPPPORT
+/* define PPMD7_ORDER_0_SUPPORT to support order-0 mode, unsupported by original PPMd var.H. code */
+// #define PPMD7_ORDER_0_SUPPORT
  
 MY_ALIGN(16)
 static const Byte PPMD7_kExpEscape[16] = { 25, 14, 9, 7, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2 };
@@ -1052,7 +1052,7 @@ The code can free UNITs memory blocks that were allocated to store CPpmd_State v
 The code doesn't free UNITs allocated for CPpmd7_Context records.
 
 The code calls Ppmd7_RestartModel(), when there is no free memory for allocation.
-And Ppmd7_RestartModel() changes the state to orignal start state, with full free block.
+And Ppmd7_RestartModel() changes the state to original start state, with full free block.
 
 
 The code allocates UNITs with the following order:
