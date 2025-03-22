@@ -3926,7 +3926,7 @@ SRes ZstdDec_Decode(CZstdDecHandle dec, CZstdDecState *p)
              if defined(Z7_STD_DEC_USE_AFTER_CYC_BUF)
              {
                we can read (COPY_CHUNK_SIZE - 1) bytes after (cycSize)
-               but we aready allocate additional kBlockSizeMax that
+               but we already allocate additional kBlockSizeMax that
                is larger than COPY_CHUNK_SIZE.
                So we don't need additional space of COPY_CHUNK_SIZE after (cycSize).
              }

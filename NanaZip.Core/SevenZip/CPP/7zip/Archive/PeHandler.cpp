@@ -2493,7 +2493,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
         /* we corrected that case in 7-zip before 22.02: */
         // prev.PSize = sect.Pa - prev.Pa;
 
-        /* 22.02: here we can try to change bad section position to expected postion.
+        /* 22.02: here we can try to change bad section position to expected position.
            but original Windows code probably will not do same things. */
         // if (prev.PSize <= sect.Va - prev.Va) sect.Pa = prev.Pa + prev.PSize;
       }

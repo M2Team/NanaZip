@@ -30,7 +30,7 @@ struct CHeader
 {
   // UInt32 magic;          /* 0xed26ff3a */
   // UInt16 major_version;  /* (0x1) - reject images with higher major versions */
-  // UInt16 minor_version;  /* (0x0) - allow images with higer minor versions */
+  // UInt16 minor_version;  /* (0x0) - allow images with higher minor versions */
   UInt16 file_hdr_sz;    /* 28 bytes for first revision of the file format */
   UInt16 chunk_hdr_sz;   /* 12 bytes for first revision of the file format */
   UInt32 BlockSize;      /* block size in bytes, must be a multiple of 4 (4096) */

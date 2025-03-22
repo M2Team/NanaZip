@@ -112,7 +112,7 @@ we can place 128 ESCAPE chars to
       from same BMP-Escapes-16 stored in 7z.
       And if we want to restore any 8-bit from 7z archive,
       we still must use Z7_UTF_FLAG_FROM_UTF8_BMP_ESCAPE_CONVERT for (utf-8 -> utf-16)
-      Also we need additional Conversions to tranform from utf-16 to utf-16-With-Escapes-21
+      Also we need additional Conversions to transform from utf-16 to utf-16-With-Escapes-21
     }
     else (UTF_ESCAPE_PLANE == 0)
     {
