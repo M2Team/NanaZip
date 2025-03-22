@@ -78,7 +78,7 @@ HRESULT CInOutTempBuffer::Write_HRESULT(const void *data, UInt32 size)
  #ifdef USE_InOutTempBuffer_FILE
   if (!_tempFile_Created)
  #endif
-  for (;;)  // loop for additional attemp to allocate memory after file creation error
+  for (;;)  // loop for additional attempt to allocate memory after file creation error
   {
    #ifdef USE_InOutTempBuffer_FILE
     bool allocError = false;
