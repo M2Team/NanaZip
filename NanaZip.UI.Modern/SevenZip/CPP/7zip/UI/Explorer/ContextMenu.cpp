@@ -496,7 +496,7 @@ static bool DoNeedExtract(const FString &name)
   return !FindExt(kExtractExcludeExtensions, name);
 }
 
-// we must use diferent Verbs for Popup subMenu.
+// we must use different Verbs for Popup subMenu.
 void CZipContextMenu::AddMapItem_ForSubMenu(const char *verb)
 {
   CCommandMapItem cmi;
