@@ -87,8 +87,8 @@ operator delete(void *p) throw()
    vs2022 compiler uses delete(void *p, size_t n), and
    we want to mix files from different compilers:
      - old vc6 linker
-     - old vc6 complier
-     - new vs2022 complier
+     - old vc6 compiler
+     - new vs2022 compiler
 */
 void
 #ifdef _MSC_VER
