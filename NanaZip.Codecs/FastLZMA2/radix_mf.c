@@ -495,7 +495,7 @@ void RMF_recurseListChunk_generic(RMF_builder* const tbl,
                 U32 const prev = tbl->tails_8[radix_8].prev_index;
                 tbl->tails_8[radix_8].prev_index = (U32)pos;
                 if (prev != RADIX_NULL_LINK) {
-                    /* This char has occurred before in the chain. Link the previous (> pos) occurance with this */
+                    /* This char has occurred before in the chain. Link the previous (> pos) occurrence with this */
                     ++tbl->tails_8[radix_8].list_count;
                     tbl->match_buffer[prev].next = (U32)pos | (depth << 24);
                 }
