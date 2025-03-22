@@ -88,7 +88,7 @@ LZMA2 parser doesn't decode LZMA chunks, so we must read
 
 Lzma2Dec_GetUnpackExtra() returns the value that shows
     max possible number of output bytes that can be output by decoder
-    at current input positon.
+    at current input position.
 */
 
 #define Lzma2Dec_GetUnpackExtra(p)  ((p)->isExtraMode ? (p)->unpackSize : 0)
