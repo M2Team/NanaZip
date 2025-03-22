@@ -699,7 +699,7 @@ void MY_SetLocale()
       // newLocale = ".utf8";    // supported in new Windows 10 build 17134 (April 2018 Update), the Universal C Runtime
       // newLocale = "en_US.utf8"; // supported by ubuntu ?
       // newLocale = "en_US.UTF-8";
-      /* setlocale() in ubuntu allows locales with minor chracter changes in strings
+      /* setlocale() in ubuntu allows locales with minor character changes in strings
         "en_US.UTF-8" /  "en_US.utf8" */
     }
     
