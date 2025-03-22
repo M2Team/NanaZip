@@ -72,8 +72,8 @@ Archives created by pax -o linkdata shall include these data
 blocks with the hard links.
 *
 
-compatiblity
-------------
+compatibility
+-------------
   7-Zip 16.03 supports "PaxHeader/"
   7-Zip 20.01 supports "PaxHeaders.X/" with optional "./"
   7-Zip 21.02 supports "@PaxHeader" with optional "./" "./"
