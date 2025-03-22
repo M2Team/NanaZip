@@ -72,7 +72,7 @@ extern "C" {
       defined(__s390__) || defined(__s390x__) || defined(sel) || defined(__hppa__)
 # define RHASH_BYTE_ORDER RHASH_BYTE_ORDER_BE
 #else
-#  error "Can't detect CPU architechture"
+#  error "Can't detect CPU architecture"
 #endif
 
 #define IS_BIG_ENDIAN (RHASH_BYTE_ORDER == RHASH_BYTE_ORDER_BE)
