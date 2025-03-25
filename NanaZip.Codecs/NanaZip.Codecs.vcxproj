@@ -491,6 +491,9 @@
     <PackageReference Include="Mile.Json">
       <Version>1.0.659</Version>
     </PackageReference>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.142</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
   <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
