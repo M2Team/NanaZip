@@ -11,19 +11,9 @@
 #ifndef MILE_PORTABLE_HELPERS_BASE_UNSTAGED
 #define MILE_PORTABLE_HELPERS_BASE_UNSTAGED
 
+#include <Mile.Mobility.Portable.Types.h>
+
 #include <stdint.h>
-
-#ifndef EXTERN_C
-#ifdef __cplusplus
-#define EXTERN_C extern "C"
-#else
-#define EXTERN_C extern
-#endif
-#endif // !EXTERN_C
-
-#ifndef _In_
-#define _In_
-#endif // !_In_
 
 /**
  * @brief Reads an unsigned 8-bit integer from the specified memory address.
@@ -32,7 +22,7 @@
 *                     readable memory.
  * @return The unsigned 8-bit integer value.
  */
-EXTERN_C uint8_t MileReadUInt8(
+EXTERN_C MO_UINT8 MileReadUInt8(
     _In_ const void* BaseAddress);
 
 /**
@@ -43,7 +33,7 @@ EXTERN_C uint8_t MileReadUInt8(
 *                     readable memory.
  * @return The unsigned 16-bit integer value.
  */
-EXTERN_C uint16_t MileReadUInt16BigEndian(
+EXTERN_C MO_UINT16 MileReadUInt16BigEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -54,7 +44,7 @@ EXTERN_C uint16_t MileReadUInt16BigEndian(
 *                     readable memory.
  * @return The unsigned 16-bit integer value.
  */
-EXTERN_C uint16_t MileReadUInt16LittleEndian(
+EXTERN_C MO_UINT16 MileReadUInt16LittleEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -65,7 +55,7 @@ EXTERN_C uint16_t MileReadUInt16LittleEndian(
 *                     readable memory.
  * @return The unsigned 32-bit integer value.
  */
-EXTERN_C uint32_t MileReadUInt32BigEndian(
+EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -76,7 +66,7 @@ EXTERN_C uint32_t MileReadUInt32BigEndian(
 *                     readable memory.
  * @return The unsigned 32-bit integer value.
  */
-EXTERN_C uint32_t MileReadUInt32LittleEndian(
+EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -87,7 +77,7 @@ EXTERN_C uint32_t MileReadUInt32LittleEndian(
 *                     readable memory.
  * @return The unsigned 64-bit integer value.
  */
-EXTERN_C uint64_t MileReadUInt64BigEndian(
+EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
     _In_ const void* BaseAddress);
 
 /**
@@ -98,7 +88,7 @@ EXTERN_C uint64_t MileReadUInt64BigEndian(
 *                     readable memory.
  * @return The unsigned 64-bit integer value.
  */
-EXTERN_C uint64_t MileReadUInt64LittleEndian(
+EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
     _In_ const void* BaseAddress);
 
 #endif // !MILE_PORTABLE_HELPERS_BASE_UNSTAGED
