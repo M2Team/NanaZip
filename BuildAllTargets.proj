@@ -16,6 +16,9 @@
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
         <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
       </RestoreProjectReference>
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj">
+        <AdditionalProperties>Configuration=Release</AdditionalProperties>
+      </RestoreProjectReference>
     </ItemGroup>
     <MSBuild
       Projects="@(RestoreProjectReference)"
@@ -36,6 +39,12 @@
       BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64;Configuration=Release;Platform=x64" />
+    <MSBuild
+      Projects="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj"
+      Targets="Build"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="Configuration=Release" />
   </Target>
   <Target Name="Packaging">
     <PropertyGroup>
