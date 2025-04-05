@@ -1,0 +1,23 @@
+﻿<Wix
+  xmlns="http://wixtoolset.org/schemas/v4/wxs"
+  xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package
+    Name="NanaZip Extension Package"
+    Manufacturer="M2-Team"
+    Version="$(Version)"
+    UpgradeCode="{B7B9FCEB-89F6-40AD-B2B3-CD86C8D1C8B2}"
+    Scope="perUserOrMachine">
+    <?if $(Platform) = x86?>
+    <Launch Condition="NOT VersionNT64" Message="!(loc.WrongArchError)" />
+    <?endif?>
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+    <MediaTemplate EmbedCab="yes" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+  </Package>
+
+  <Fragment>
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="NanaZip.ExtensionPackage" />
+    </StandardDirectory>
+  </Fragment>
+</Wix>
