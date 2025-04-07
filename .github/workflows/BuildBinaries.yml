@@ -23,24 +23,19 @@ jobs:
     - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
       run: dotnet nuget locals all --clear
     - name: Build
-      run: msbuild BuildAllTargets.proj
+      run: MSBuild -binaryLogger:Output\BuildAllTargets.binlog -m BuildAllTargets.proj
     - name: Upload MSIX Bundle
       uses: actions/upload-artifact@v4
       with:
-        name: NanaZip_Mainline.msixbundle
-        path: Output/Binaries/AppPackages/**/NanaZipPackage_*_x64_arm64.msixbundle
+        name: NanaZip_Mainline_ApplicationPackages
+        path: Output/Binaries/AppPackages
     - name: Upload Extension Package Installer
       uses: actions/upload-artifact@v4
       with:
         name: NanaZip_Mainline_ExtensionPackage.exe
         path: Output/NanaZip.ExtensionPackage_*.exe
-    - name: Upload Debug Symbols
-      uses: actions/upload-artifact@v4
-      with:
-        name: NanaZip_Mainline_DebugSymbols.zip
-        path: Output/*_DebugSymbols.zip
     - name: Upload MSBuild Build Process Binary Log
       uses: actions/upload-artifact@v4
       with:
-        name: NanaZip_Mainline_BuildAllTargets.binlog
+        name: NanaZip_Mainline_BuildBinaryLog
         path: Output/BuildAllTargets.binlog
