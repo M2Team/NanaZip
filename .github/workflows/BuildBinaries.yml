@@ -24,9 +24,23 @@ jobs:
       run: dotnet nuget locals all --clear
     - name: Build
       run: msbuild BuildAllTargets.proj
-    - name: Prepare artifacts
-      run: rm Output\Binaries\* -vb -Recurse -Force -Include *.exp, *.idb, *.ilk, *.iobj, *.ipdb, *.lastbuildstate, *.lib, *.obj, *.res, *.tlog
-    - uses: actions/upload-artifact@v4
+    - name: Upload MSIX Bundle
+      uses: actions/upload-artifact@v4
       with:
-        name: NanaZip_All_Binaries_GitHubActions
-        path: Output\Binaries
+        name: NanaZip_Mainline.msixbundle
+        path: Output/Binaries/AppPackages/**/NanaZipPackage_*_x64_arm64.msixbundle
+    - name: Upload Extension Package Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: NanaZip_Mainline_ExtensionPackage.exe
+        path: Output/NanaZip.ExtensionPackage_*.exe
+    - name: Upload Debug Symbols
+      uses: actions/upload-artifact@v4
+      with:
+        name: NanaZip_Mainline_DebugSymbols.zip
+        path: Output/*_DebugSymbols.zip
+    - name: Upload MSBuild Build Process Binary Log
+      uses: actions/upload-artifact@v4
+      with:
+        name: NanaZip_Mainline_BuildAllTargets.binlog
+        path: Output/BuildAllTargets.binlog
