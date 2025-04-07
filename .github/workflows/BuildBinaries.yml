@@ -32,7 +32,7 @@ jobs:
     - name: Upload Extension Package Installer
       uses: actions/upload-artifact@v4
       with:
-        name: NanaZip_Mainline_ExtensionPackage.exe
+        name: NanaZip_Mainline_ExtensionPackageInstaller
         path: Output/NanaZip.ExtensionPackage_*.exe
     - name: Upload MSBuild Build Process Binary Log
       uses: actions/upload-artifact@v4
