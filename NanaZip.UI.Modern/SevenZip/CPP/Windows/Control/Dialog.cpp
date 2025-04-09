@@ -26,8 +26,10 @@ static INT_PTR APIENTRY DialogProcedure(HWND dialogHWND, UINT message, WPARAM wP
   CDialog *dialog = (CDialog *)(tempDialog.GetUserDataLongPtr());
   if (dialog == NULL)
     return FALSE;
-  if (message == WM_INITDIALOG)
+  if (message == WM_INITDIALOG) {
     dialog->Attach(dialogHWND);
+    BringToForeground(dialogHWND, 0);
+  }
 
   /* MSDN: The dialog box procedure should return
        TRUE  - if it processed the message

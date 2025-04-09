@@ -5,60 +5,11 @@
 #include "../Common/StringConvert.h"
 
 #include "ProcessUtils.h"
+#include "Window.h"
 
 #ifndef _UNICODE
 extern bool g_IsNT;
 #endif
-
-// **************** NanaZip Modification Start ****************
-static BOOL CALLBACK BringToForeground(
-    _In_ HWND hWnd,
-    _In_ LPARAM lParam)
-{
-    DWORD ProcessId;
-    ::GetWindowThreadProcessId(hWnd, &ProcessId);
-
-    if (ProcessId == (DWORD)lParam)
-    {
-        HWND ForegroundWindowHandle = ::GetForegroundWindow();
-        DWORD CurrentThreadId = ::GetCurrentThreadId();
-        DWORD CurrentWindowThreadId = ::GetWindowThreadProcessId(
-            ForegroundWindowHandle,
-            nullptr);
-        ::AttachThreadInput(
-            CurrentWindowThreadId,
-            CurrentThreadId,
-            TRUE);
-        ::SetWindowPos(
-            hWnd,
-            HWND_TOPMOST,
-            0,
-            0,
-            0,
-            0,
-            SWP_NOSIZE | SWP_NOMOVE);
-        ::SetWindowPos(
-            hWnd,
-            HWND_NOTOPMOST,
-            0,
-            0,
-            0,
-            0,
-            SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
-        ::SetForegroundWindow(hWnd);
-        ::SetFocus(hWnd);
-        ::SetActiveWindow(hWnd);
-        ::AttachThreadInput(
-            CurrentWindowThreadId,
-            CurrentThreadId,
-            FALSE);
-
-        return FALSE;
-    }
-
-    return TRUE;
-}
-// **************** NanaZip Modification End ****************
 
 namespace NWindows {
 
@@ -113,7 +64,7 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
     si.dwFlags = 0;
     si.cbReserved2 = 0;
     si.lpReserved2 = 0;
-    
+
     CSysString curDirA;
     if (curDir != 0)
       curDirA = GetSystemString(curDir);
@@ -132,7 +83,7 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
     si.dwFlags = 0;
     si.cbReserved2 = 0;
     si.lpReserved2 = 0;
-    
+
     result = CreateProcessW(imageName, params2.Ptr_non_const(),
         NULL, NULL, FALSE, 0, NULL, curDir, &si, &pi);
   }
@@ -143,7 +94,7 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
   ::AllowSetForegroundWindow(GetProcessId(pi.hProcess));
   ::WaitForInputIdle(pi.hProcess, 500);
   ::EnumWindows(
-      ::BringToForeground,
+      BringToForeground,
       static_cast<LPARAM>(::GetProcessId(pi.hProcess)));
   // **************** NanaZip Modification End ****************
 
