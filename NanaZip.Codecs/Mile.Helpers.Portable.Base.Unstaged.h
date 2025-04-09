@@ -12,8 +12,9 @@
 #define MILE_PORTABLE_HELPERS_BASE_UNSTAGED
 
 #include <Mile.Mobility.Portable.Types.h>
-
-#include <stdint.h>
+#ifndef MILE_MOBILITY_ENABLE_MINIMUM_SAL
+#include <sal.h>
+#endif // !MILE_MOBILITY_ENABLE_MINIMUM_SAL
 
 /**
  * @brief Reads an unsigned 8-bit integer from the specified memory address.
@@ -23,7 +24,7 @@
  * @return The unsigned 8-bit integer value.
  */
 EXTERN_C MO_UINT8 MileReadUInt8(
-    _In_ const void* BaseAddress);
+    _In_ MO_CONSTANT_POINTER BaseAddress);
 
 /**
  * @brief Reads an unsigned 16-bit integer from the specified memory address in
@@ -34,7 +35,7 @@ EXTERN_C MO_UINT8 MileReadUInt8(
  * @return The unsigned 16-bit integer value.
  */
 EXTERN_C MO_UINT16 MileReadUInt16BigEndian(
-    _In_ const void* BaseAddress);
+    _In_ MO_CONSTANT_POINTER BaseAddress);
 
 /**
  * @brief Reads an unsigned 16-bit integer from the specified memory address in
@@ -45,7 +46,7 @@ EXTERN_C MO_UINT16 MileReadUInt16BigEndian(
  * @return The unsigned 16-bit integer value.
  */
 EXTERN_C MO_UINT16 MileReadUInt16LittleEndian(
-    _In_ const void* BaseAddress);
+    _In_ MO_CONSTANT_POINTER BaseAddress);
 
 /**
  * @brief Reads an unsigned 32-bit integer from the specified memory address in
@@ -56,7 +57,7 @@ EXTERN_C MO_UINT16 MileReadUInt16LittleEndian(
  * @return The unsigned 32-bit integer value.
  */
 EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
-    _In_ const void* BaseAddress);
+    _In_ MO_CONSTANT_POINTER BaseAddress);
 
 /**
  * @brief Reads an unsigned 32-bit integer from the specified memory address in
@@ -67,7 +68,7 @@ EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
  * @return The unsigned 32-bit integer value.
  */
 EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
-    _In_ const void* BaseAddress);
+    _In_ MO_CONSTANT_POINTER BaseAddress);
 
 /**
  * @brief Reads an unsigned 64-bit integer from the specified memory address in
@@ -78,7 +79,7 @@ EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
  * @return The unsigned 64-bit integer value.
  */
 EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
-    _In_ const void* BaseAddress);
+    _In_ MO_CONSTANT_POINTER BaseAddress);
 
 /**
  * @brief Reads an unsigned 64-bit integer from the specified memory address in
@@ -89,6 +90,6 @@ EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
  * @return The unsigned 64-bit integer value.
  */
 EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
-    _In_ const void* BaseAddress);
+    _In_ MO_CONSTANT_POINTER BaseAddress);
 
 #endif // !MILE_PORTABLE_HELPERS_BASE_UNSTAGED

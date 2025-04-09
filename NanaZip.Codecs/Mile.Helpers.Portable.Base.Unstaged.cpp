@@ -11,34 +11,34 @@
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
 EXTERN_C MO_UINT8 MileReadUInt8(
-    _In_ const void* BaseAddress)
+    _In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    const MO_UINT8* Base = reinterpret_cast<const MO_UINT8*>(BaseAddress);
+    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
     return Base[0];
 }
 
 EXTERN_C MO_UINT16 MileReadUInt16BigEndian(
-    _In_ const void* BaseAddress)
+    _In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    const MO_UINT8* Base = reinterpret_cast<const MO_UINT8*>(BaseAddress);
+    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT16>(Base[0]) << 8) |
         (static_cast<MO_UINT16>(Base[1]));
 }
 
 EXTERN_C MO_UINT16 MileReadUInt16LittleEndian(
-    _In_ const void* BaseAddress)
+    _In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    const MO_UINT8* Base = reinterpret_cast<const MO_UINT8*>(BaseAddress);
+    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT16>(Base[0])) |
         (static_cast<MO_UINT16>(Base[1]) << 8);
 }
 
 EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
-    _In_ const void* BaseAddress)
+    _In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    const MO_UINT8* Base = reinterpret_cast<const MO_UINT8*>(BaseAddress);
+    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT32>(Base[0]) << 24) |
         (static_cast<MO_UINT32>(Base[1]) << 16) |
@@ -47,9 +47,9 @@ EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
 }
 
 EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
-    _In_ const void* BaseAddress)
+    _In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    const MO_UINT8* Base = reinterpret_cast<const MO_UINT8*>(BaseAddress);
+    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT32>(Base[0])) |
         (static_cast<MO_UINT32>(Base[1]) << 8) |
@@ -59,9 +59,9 @@ EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
 
 
 EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
-    _In_ const void* BaseAddress)
+    _In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    const MO_UINT8* Base = reinterpret_cast<const MO_UINT8*>(BaseAddress);
+    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT64>(Base[0]) << 56) |
         (static_cast<MO_UINT64>(Base[1]) << 48) |
@@ -74,9 +74,9 @@ EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
 }
 
 EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
-    _In_ const void* BaseAddress)
+    _In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    const MO_UINT8* Base = reinterpret_cast<const MO_UINT8*>(BaseAddress);
+    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT64>(Base[0])) |
         (static_cast<MO_UINT64>(Base[1]) << 8) |
