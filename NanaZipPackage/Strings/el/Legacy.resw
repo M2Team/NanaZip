@@ -369,7 +369,7 @@
   <data name="Resource1038" xml:space="preserve">
     <value>Μπλοκς</value>
   </data>
-  <data name="Resource103block9" xml:space="preserve">
+  <data name="Resource1039" xml:space="preserve">
     <value>Τόμοι</value>
   </data>
   <data name="Resource1041" xml:space="preserve">
@@ -1349,6 +1349,7 @@
   </data>
   <data name="Resource7714" xml:space="preserve">
     <value>Συνένωση καταλόγου</value>
+  </data>
   <data name="Resource12200" xml:space="preserve">
     <value>Ενσωμάτωση</value>
   </data>
