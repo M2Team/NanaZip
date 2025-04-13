@@ -5,6 +5,8 @@
     <RootNamespace>NanaZip.ModernExperience</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
     <MileProjectManifestFile>NanaZip.ModernExperience.manifest</MileProjectManifestFile>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Modern Experience</MileProjectFileDescription>
@@ -24,6 +26,12 @@
       <ModuleDefinitionFile>NanaZip.ModernExperience.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="NanaZip.ModernExperience.def" />
   </ItemGroup>
@@ -32,6 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="NanaZip.ModernExperience.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.328</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
 </Project>
