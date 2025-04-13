@@ -62,6 +62,7 @@
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.LegacyShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Modern.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
@@ -69,12 +70,15 @@
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.LegacyShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Modern.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />
     <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Sfx.Shared.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />
     <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />   
+    <Copy SourceFiles="$(InputBinariesPath)arm64\NanaZip.ExtensionPackage.Shell.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.ExtensionPackage.Shell.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
 
     <Exec Command="7z a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
   </Target>

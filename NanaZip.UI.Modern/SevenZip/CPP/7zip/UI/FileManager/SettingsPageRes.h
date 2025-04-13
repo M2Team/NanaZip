@@ -15,7 +15,8 @@
 #define IDX_SETTINGS_WANT_FOLDER_HISTORY    2512
 #define IDX_SETTINGS_LOWERCASE_HASHES       2513
 // **************** NanaZip Modification Start ****************
-#define IDX_SETTINGS_OPEN_FOLDER_AFTER       2514 
+#define IDX_SETTINGS_OPEN_FOLDER_AFTER       2514
+#define IDX_SETTINGS_FAST_DRAG_DROP         2515
 // **************** NanaZip Modification End ****************
 
 

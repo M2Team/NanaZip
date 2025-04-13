@@ -130,6 +130,7 @@ bool CSettingsPage::OnInit()
   CheckButton(IDX_SETTINGS_ALTERNATIVE_SELECTION, st.AlternativeSelection);
   // **************** NanaZip Modification Start ****************
   CheckButton(IDX_SETTINGS_OPEN_FOLDER_AFTER, st.OpenFolderAfterExtract);
+  CheckButton(IDX_SETTINGS_FAST_DRAG_DROP, st.FastDragDrop);
   // **************** NanaZip Modification End ****************
   // CheckButton(IDX_SETTINGS_UNDERLINE, st.Underline);
 
@@ -232,6 +233,7 @@ LONG CSettingsPage::OnApply()
     st.LowercaseHashes = IsButtonCheckedBool(IDX_SETTINGS_LOWERCASE_HASHES);
     // **************** NanaZip Modification Start ****************
     st.OpenFolderAfterExtract = IsButtonCheckedBool(IDX_SETTINGS_OPEN_FOLDER_AFTER);
+    st.FastDragDrop = IsButtonCheckedBool(IDX_SETTINGS_FAST_DRAG_DROP);
     // **************** NanaZip Modification End ****************
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
 
@@ -352,6 +354,7 @@ bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SETTINGS_ALTERNATIVE_SELECTION:
     // **************** NanaZip Modification Start ****************
     case IDX_SETTINGS_OPEN_FOLDER_AFTER:
+    case IDX_SETTINGS_FAST_DRAG_DROP:
     // **************** NanaZip Modification End ****************
     case IDX_SETTINGS_WANT_ARC_HISTORY:
     case IDX_SETTINGS_WANT_PATH_HISTORY:
