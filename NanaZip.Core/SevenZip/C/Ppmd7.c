@@ -869,7 +869,7 @@ static void Ppmd7_Rescale(CPpmd7 *p)
     i = 0; do { i++; } while ((--s)->Freq == 0);
     
     /* We increase (escFreq) for the number of removed symbols.
-       So we will have (0.5) increase for Escape_Freq in avarage per
+       So we will have (0.5) increase for Escape_Freq in average per
        removed symbol after Escape_Freq halving */
     escFreq += i;
     mc = p->MinContext;
