@@ -51,6 +51,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="NanaZip.ModernExperience.def" />
+    <None Include="NanaZip.ModernExperience.props" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZip.ModernExperience.cpp" />
