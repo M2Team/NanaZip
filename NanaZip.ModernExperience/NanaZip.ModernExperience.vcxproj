@@ -5,8 +5,15 @@
     <RootNamespace>NanaZip.ModernExperience</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
     <MileProjectManifestFile>NanaZip.ModernExperience.manifest</MileProjectManifestFile>
+    <MinimalCoreWin>false</MinimalCoreWin>
+    <DefaultLanguage>en</DefaultLanguage>
+    <AppContainerApplication>false</AppContainerApplication>
+    <AppxPackage>false</AppxPackage>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Modern Experience</MileProjectFileDescription>
@@ -21,9 +28,11 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.props" />
+  <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
   <ItemDefinitionGroup>
     <Link>
       <ModuleDefinitionFile>NanaZip.ModernExperience.def</ModuleDefinitionFile>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
@@ -31,6 +40,14 @@
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="NanaZip.ModernExperience.def" />
@@ -42,6 +59,12 @@
     <Manifest Include="NanaZip.ModernExperience.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Mile.Xaml">
+      <Version>2.5.1250</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.671</Version>
+    </PackageReference>
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.328</Version>
     </PackageReference>
