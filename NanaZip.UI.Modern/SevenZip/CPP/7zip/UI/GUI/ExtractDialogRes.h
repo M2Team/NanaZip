@@ -19,6 +19,9 @@
 #define IDX_EXTRACT_ELIM_DUP        3430
 #define IDX_EXTRACT_NT_SECUR        3431
 // #define IDX_EXTRACT_ALT_STREAMS     3432
+// **************** NanaZip Modification Start ****************
+#define IDX_EXTRACT_OPEN_FOLDER     3433
+// **************** NanaZip Modification End ****************
 
 #define IDX_PASSWORD_SHOW           3803
 #define IDG_PASSWORD                3807

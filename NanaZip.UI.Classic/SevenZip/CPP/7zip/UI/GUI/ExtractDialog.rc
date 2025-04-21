@@ -53,7 +53,11 @@ BEGIN
 //            g2x, m + 104, g2xs, 10
   CONTROL   "Restore file security", IDX_EXTRACT_NT_SECUR, MY_CHECKBOX,
             g2x, m + 104, g2xs, 10
-  
+  // **************** NanaZip Modification Start ****************
+  CONTROL   "&Open folder after extract", IDX_EXTRACT_OPEN_FOLDER, MY_CHECKBOX,
+            g2x, m + 118, g2xs, 10
+  // **************** NanaZip Modification End ****************
+
   DEFPUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys, WS_GROUP
   PUSHBUTTON     "Cancel", IDCANCEL, bx1, by, bxs, bys
 END
@@ -90,7 +94,7 @@ BEGIN
   LTEXT     "Password", IDG_PASSWORD, m, m + 76, g1xs, 8
   EDITTEXT  IDE_EXTRACT_PASSWORD, m + g1xs, m + 76, xc - g1xs, 14, ES_PASSWORD | ES_AUTOHSCROLL
   CONTROL   "Show Password", IDX_PASSWORD_SHOW, MY_CHECKBOX, m, m + 92, xc, 10
-  
+
   OK_CANCEL
 END
 

@@ -88,6 +88,9 @@ public:
   #endif
 
   CBoolPair ElimDup;
+  // **************** NanaZip Modification Start ****************
+  CBoolPair OpenFolder;
+  // **************** NanaZip Modification End ****************
 
   INT_PTR Create(HWND aWndParent = 0)
   {
