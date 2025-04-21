@@ -34,9 +34,6 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_WANT_COPY_HISTORY,
   IDX_SETTINGS_WANT_FOLDER_HISTORY,
   IDX_SETTINGS_LOWERCASE_HASHES,
-  // **************** NanaZip Modification Start ****************
-  IDX_SETTINGS_OPEN_FOLDER_AFTER
-  // **************** NanaZip Modification End ****************
   // , IDT_COMPRESS_MEMORY
 };
 
@@ -128,9 +125,6 @@ bool CSettingsPage::OnInit()
   CheckButton(IDX_SETTINGS_SHOW_GRID, st.ShowGrid);
   CheckButton(IDX_SETTINGS_SINGLE_CLICK, st.SingleClick);
   CheckButton(IDX_SETTINGS_ALTERNATIVE_SELECTION, st.AlternativeSelection);
-  // **************** NanaZip Modification Start ****************
-  CheckButton(IDX_SETTINGS_OPEN_FOLDER_AFTER, st.OpenFolderAfterExtract);
-  // **************** NanaZip Modification End ****************
   // CheckButton(IDX_SETTINGS_UNDERLINE, st.Underline);
 
   CheckButton(IDX_SETTINGS_SHOW_SYSTEM_MENU, st.ShowSystemMenu);
@@ -230,9 +224,6 @@ LONG CSettingsPage::OnApply()
     st.CopyHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_COPY_HISTORY);
     st.FolderHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_FOLDER_HISTORY);
     st.LowercaseHashes = IsButtonCheckedBool(IDX_SETTINGS_LOWERCASE_HASHES);
-    // **************** NanaZip Modification Start ****************
-    st.OpenFolderAfterExtract = IsButtonCheckedBool(IDX_SETTINGS_OPEN_FOLDER_AFTER);
-    // **************** NanaZip Modification End ****************
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
 
     st.ShowSystemMenu = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SYSTEM_MENU);
@@ -350,9 +341,6 @@ bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SETTINGS_FULL_ROW:
     case IDX_SETTINGS_SHOW_GRID:
     case IDX_SETTINGS_ALTERNATIVE_SELECTION:
-    // **************** NanaZip Modification Start ****************
-    case IDX_SETTINGS_OPEN_FOLDER_AFTER:
-    // **************** NanaZip Modification End ****************
     case IDX_SETTINGS_WANT_ARC_HISTORY:
     case IDX_SETTINGS_WANT_PATH_HISTORY:
     case IDX_SETTINGS_WANT_COPY_HISTORY:

@@ -49,6 +49,9 @@ struct CExtractOptions: public CExtractOptionsBase
 {
   bool StdInMode;
   bool StdOutMode;
+  // **************** NanaZip Modification Start ****************
+  CBoolPair OpenFolder;
+  // **************** NanaZip Modification End ****************
   bool YesToAll;
   bool TestMode;
 

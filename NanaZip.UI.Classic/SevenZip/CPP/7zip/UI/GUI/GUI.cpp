@@ -301,14 +301,13 @@ static int Main2()
         return NExitCode::kFatalError;
       throw CSystemException(result);
     }
+    if (!ecs->IsOK())
+      return NExitCode::kFatalError;
     // **************** NanaZip Modification Start ****************
-    else if (WantOpenFolderAfterExtract()) {
+    else if (eo.OpenFolder.Val) {
         ShellExecuteW(NULL, NULL, eo.OutputDir, NULL, NULL, SW_SHOWNORMAL);
     }
     // **************** NanaZip Modification End ****************
-    if (!ecs->IsOK())
-      return NExitCode::kFatalError;
-    
   }
   else if (options.Command.IsFromUpdateGroup())
   {
