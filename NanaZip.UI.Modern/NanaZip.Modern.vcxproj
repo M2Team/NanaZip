@@ -224,6 +224,7 @@
     </ClInclude>
     <ClInclude Include="NanaZip.UI.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\CopyHook.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h" />
     <ClInclude Include="SevenZip\CPP\Common\DynLimBuf.h" />
     <ClInclude Include="SevenZip\C\7zTypes.h" />
