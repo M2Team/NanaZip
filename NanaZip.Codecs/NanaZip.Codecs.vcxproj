@@ -492,7 +492,7 @@
       <Version>1.0.659</Version>
     </PackageReference>
     <PackageReference Include="Mile.Mobility">
-      <Version>1.0.165</Version>
+      <Version>1.0.172</Version>
     </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1426" Project="Mile.Project.Cpp.targets" />
