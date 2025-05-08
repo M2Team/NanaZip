@@ -671,7 +671,7 @@
   </Target>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.UniCrt">
-      <Version>1.2.328</Version>
+      <Version>1.2.410</Version>
     </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
