@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project 
+<Project
   DefaultTargets="RefreshVersion;Restore;Build;Packaging"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="NanaZip.Project\NanaZip.Project.props" />
@@ -30,10 +30,13 @@
   <Target Name="Restore">
     <ItemGroup>
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
-        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
+        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>
       </RestoreProjectReference>
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
-        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
+        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>
+      </RestoreProjectReference>
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.Extension.vcxproj">
+        <AdditionalProperties>Configuration=Release</AdditionalProperties>
       </RestoreProjectReference>
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj">
         <AdditionalProperties>Configuration=Release</AdditionalProperties>
@@ -58,6 +61,18 @@
       BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64;Configuration=Release;Platform=x64" />
+    <MSBuild
+      Projects="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.Extension.vcxproj"
+      Targets="Build"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="Configuration=Release;Platform=ARM64" />
+    <MSBuild
+      Projects="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.Extension.vcxproj"
+      Targets="Build"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="Configuration=Release;Platform=x64" />
     <MSBuild
       Projects="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj"
       Targets="Build"
@@ -92,9 +107,13 @@
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Modern.FileManager.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+
+    <Copy SourceFiles="$(InputBinariesPath)arm64\NanaZip.Extension.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Extension.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+
     <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Sfx.Shared.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
-    <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />   
+    <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
 
     <Exec Command="7z a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
   </Target>

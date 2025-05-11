@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{117927E0-D4CB-43E8-86DD-AB26A4845FF7}</ProjectGuid>
+    <RootNamespace>NanaZip.Extension</RootNamespace>
+    <MileProjectType>DynamicLibrary</MileProjectType>
+    <MileProjectManifestFile>NanaZip.Extension.manifest</MileProjectManifestFile>
+    <MinimalCoreWin>false</MinimalCoreWin>
+    <DefaultLanguage>en</DefaultLanguage>
+    <AppContainerApplication>false</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <XamlComponentResourceLocation>nested</XamlComponentResourceLocation>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Extension</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Extension</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZip.Extension.dll</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+  </PropertyGroup>
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
+  <ItemDefinitionGroup>
+    <Link>
+      <ModuleDefinitionFile>NanaZip.Extension.def</ModuleDefinitionFile>
+      <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="NanaZip.Extension.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZip.Extension.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CNanaZipCopyHook.cpp" />
+    <ClCompile Include="DllMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CopyHook.h" />
+    <ClInclude Include="CNanaZipCopyHook.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.952</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+</Project>
