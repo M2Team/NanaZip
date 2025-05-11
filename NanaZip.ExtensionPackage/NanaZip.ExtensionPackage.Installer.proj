@@ -9,7 +9,7 @@
 
   <!-- NOTE: verify Tools.InnoSetup package binaries with official binaries every upgrade -->
   <ItemGroup>
-    <PackageReference Include="Tools.InnoSetup" Version="6.4.2" />
+    <PackageReference Include="Tools.InnoSetup" Version="6.4.3" />
   </ItemGroup>
 
   <Target Name="BuildInstaller" BeforeTargets="AfterBuild">
