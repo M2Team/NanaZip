@@ -166,6 +166,8 @@
       <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="CNanaZipCopyHook.cpp" />
+    <ClCompile Include="DllMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">
