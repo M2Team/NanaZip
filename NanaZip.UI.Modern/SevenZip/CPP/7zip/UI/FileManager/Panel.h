@@ -262,7 +262,7 @@ struct CCopyToOptions
       replaceAltStreamChars(false),
       showErrorMessages(false),
       NeedRegistryZone(true),
-      ZoneIdMode(NExtract::NZoneIdMode::kNone),
+      ZoneIdMode(NExtract::NZoneIdMode::Default),  // NanaZip Modification
       VirtFileSystemSpec(NULL),
       VirtFileSystem(NULL)
       {}

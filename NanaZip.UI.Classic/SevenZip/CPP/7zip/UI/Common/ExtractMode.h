@@ -37,6 +37,10 @@ namespace NZoneIdMode
     kAll,
     kOffice
   };
+
+  // **************** NanaZip Modification Start ****************
+  static inline const EEnum Default = kAll;
+  // **************** NanaZip Modification End ****************
 }
 
 }

@@ -51,6 +51,12 @@ Kenji Mouri
 - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
 - Support the Per-Monitor DPI-Aware for all GUI components.
 - Support the i18n for GUI edition of Self Extracting Executable.
+- Modernize message boxes and folder browsers.
+- Provide the Smart Extraction feature.
+- Provide the Open folder after extraction option.
+- Policy mechanism for enforcing settings (see
+  [Policies.md](/Documents/Policies.md) for details)
+- Propagates Mark-of-the-Web to all files by default.
 - Provide additional hash algorithms.
   - MD2 (Inherit from 7-Zip ZS, but reimplemented with Windows CNG API)
   - MD4 (Inherit from 7-Zip ZS, but reimplemented with Windows CNG API)
@@ -125,6 +131,7 @@ Kenji Mouri
   - Enable disabling child process creation for NanaZip CLI and Self Extracting
     Executables. (Except installer mode of Self Extracting Executables, which
     compiled binaries is not provided in the NanaZip MSIX package.)
+- Various UI bug fixes and enhancements.
 
 [7-Zip ZS]: https://github.com/mcmilk/7-Zip-zstd
 [7-Zip NSIS]: https://github.com/myfreeer/7z-build-nsis
