@@ -25,6 +25,13 @@ static LPCTSTR const kCuPrefix = TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TE
 
 static CSysString GetKeyPath(LPCTSTR path) { return kCuPrefix + (CSysString)path; }
 
+// **************** NanaZip Modification Start ****************
+static LONG OpenMachineKey(CKey &key, LPCTSTR keyName)
+{
+  return key.Open(HKEY_LOCAL_MACHINE, GetKeyPath(keyName), KEY_READ);
+}
+// **************** NanaZip Modification End ****************
+
 static LONG OpenMainKey(CKey &key, LPCTSTR keyName)
 {
   return key.Open(HKEY_CURRENT_USER, GetKeyPath(keyName), KEY_READ);
@@ -486,6 +493,9 @@ bool MemLimit_Load(NCompression::CMemUse &mu)
 }
 
 static LPCTSTR const kOptionsInfoKeyName = TEXT("Options");
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const kPoliciesInfoKeyName = TEXT("Policies");
+// **************** NanaZip Modification End ****************
 
 namespace NWorkDir
 {
@@ -577,6 +587,13 @@ void CContextMenuInfo::Load()
 
   CS_LOCK
 
+  // **************** NanaZip Modification Start ****************
+  CKey policiesKey;
+  OpenMachineKey(policiesKey, kPoliciesInfoKeyName);
+
+  Key_Get_UInt32(policiesKey, kWriteZoneId, WriteZone);
+  // **************** NanaZip Modification End ****************
+
   CKey key;
   if (OpenMainKey(key, kOptionsInfoKeyName) != ERROR_SUCCESS)
     return;
@@ -585,7 +602,10 @@ void CContextMenuInfo::Load()
   Key_Get_BoolPair_true(key, kElimDup, ElimDup);
   Key_Get_BoolPair(key, kMenuIcons, MenuIcons);
 
-  Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+  // **************** NanaZip Modification Start ****************
+  if (WriteZone == (UInt32)(Int32)-1)
+    Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+  // **************** NanaZip Modification End ****************
 
   Flags_Def = (key.GetValue_IfOk(kContextMenu, Flags) == ERROR_SUCCESS);
 }

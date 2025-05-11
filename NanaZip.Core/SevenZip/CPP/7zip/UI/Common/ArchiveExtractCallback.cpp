@@ -107,6 +107,12 @@ static const char * const kOfficeExtensions =
   " xlsx xlsm xltx xltm xlsb xla xlam"
   " ppt pot pps ppa ppam"
   " pptx pptm potx potm ppam ppsx ppsm sldx sldm"
+  // **************** NanaZip Modification Start ****************
+  // Executable types
+  " bat cmd com exe hta js jse lnk msi pif ps1 scr vbe vbs wsf"
+  // Nested archives (subset). Note: only kAll fully works on nested archives!
+  " 7z iso rar tar vhd vhdx zip"
+  // **************** NanaZip Modification End ****************
   " ";
 
 static bool FindExt2(const char *p, const UString &name)

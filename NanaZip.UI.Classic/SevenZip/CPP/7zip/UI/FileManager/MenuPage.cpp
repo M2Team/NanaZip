@@ -117,7 +117,7 @@ bool CMenuPage::OnInit()
   {
     unsigned wz = ci.WriteZone;
     if (wz == (UInt32)(Int32)-1)
-      wz = 0;
+      wz = NExtract::NZoneIdMode::Default; // NanaZip Modification
     for (unsigned i = 0; i <= 3; i++)
     {
       unsigned val = i;
@@ -141,7 +141,7 @@ bool CMenuPage::OnInit()
       }
       if (s.IsEmpty())
         s.Add_UInt32(val);
-      if (i == 0)
+      if (i == NExtract::NZoneIdMode::Default) // NanaZip Modification
         s.Insert(0, L"* ");
       const int index = (int)_zoneCombo.AddString(s);
       _zoneCombo.SetItemData(index, val);

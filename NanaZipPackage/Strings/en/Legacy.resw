@@ -822,7 +822,7 @@ Do you want to update it in the archive?</value>
     <value>Propagate Zone.Id stream:</value>
   </data>
   <data name="Resource3441" xml:space="preserve">
-    <value>For Office files</value>
+    <value>For unsafe files</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Confirm File Replace</value>

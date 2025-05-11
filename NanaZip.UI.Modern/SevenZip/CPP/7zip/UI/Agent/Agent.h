@@ -123,7 +123,7 @@ public:
       _isAltStreamFolder(false),
       _flatMode(false),
       _loadAltStreams(false) // _loadAltStreams alt streams works in flat mode, but we don't use it now
-      , _zoneMode(NExtract::NZoneIdMode::kNone)
+      , _zoneMode(NExtract::NZoneIdMode::Default)  // NanaZip Modification
       /* , _replaceAltStreamCharsMode(0) */
       {}
 
