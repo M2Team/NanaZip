@@ -54,6 +54,8 @@
     <None Include="NanaZip.ModernExperience.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CNanaZipCopyHook.cpp" />
+    <ClCompile Include="NanaZip.ModernExperience.Com.cpp" />
     <ClCompile Include="NanaZip.ModernExperience.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +72,7 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CNanaZipCopyHook.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
