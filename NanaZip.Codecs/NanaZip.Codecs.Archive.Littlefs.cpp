@@ -12,6 +12,28 @@
 
 #include "NanaZip.Codecs.SevenZipWrapper.h"
 
+#ifdef _MSC_VER
+#if _MSC_VER > 1000
+#pragma once
+#endif
+#if (_MSC_VER >= 1200)
+#pragma warning(push)
+#endif
+// unary minus operator applied to unsigned type, result still unsigned
+#pragma warning(disable:4146)
+#endif
+
+#include "LittleFS/lfs.h"
+
+#ifdef _MSC_VER
+#if (_MSC_VER >= 1200)
+#pragma warning(pop)
+#else
+// unary minus operator applied to unsigned type, result still unsigned
+#pragma warning(default:4146)
+#endif
+#endif
+
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
 namespace
