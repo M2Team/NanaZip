@@ -443,6 +443,12 @@
     <ClCompile Include="Mile.Helpers.Portable.Base.Unstaged.cpp">
       <Filter>Mile.Portable.Helpers.Unstaged</Filter>
     </ClCompile>
+    <ClCompile Include="LittleFS\lfs.c">
+      <Filter>LittleFS</Filter>
+    </ClCompile>
+    <ClCompile Include="LittleFS\lfs_util.c">
+      <Filter>LittleFS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
@@ -517,6 +523,9 @@
     </Filter>
     <Filter Include="Mile.Portable.Helpers.Unstaged">
       <UniqueIdentifier>{2ede4493-6888-4402-aa9d-823628b6bd21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LittleFS">
+      <UniqueIdentifier>{f72fbfc5-1b3e-43d1-9a15-d52e8b570b3f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1116,5 +1125,11 @@
       <Filter>Mile.Portable.Helpers.Unstaged</Filter>
     </ClInclude>
     <ClInclude Include="NanaZip.Codecs.Specification.Fat.h" />
+    <ClInclude Include="LittleFS\lfs.h">
+      <Filter>LittleFS</Filter>
+    </ClInclude>
+    <ClInclude Include="LittleFS\lfs_util.h">
+      <Filter>LittleFS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -582,6 +582,7 @@ Creative Commons may be contacted at creativecommons.org.
 - Fast LZMA2, https://github.com/conor42/fast-lzma2
 - FreeBSD, https://github.com/freebsd/freebsd-src
 - GmSSL, https://github.com/guanzhi/GmSSL
+- littlefs, https://github.com/littlefs-project/littlefs
 - Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4
 - LZ5, https://github.com/inikep/lizard

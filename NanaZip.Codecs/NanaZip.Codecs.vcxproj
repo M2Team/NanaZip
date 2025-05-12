@@ -41,7 +41,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;LFS_READONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>NanaZip.Codecs.def</ModuleDefinitionFile>
@@ -58,6 +58,13 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LittleFS\lfs.c">
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4146;4244;4267;4456;4701;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="LittleFS\lfs_util.c">
+      <DisableSpecificWarnings>4146;</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="Lizard\entropy\lizard_entropy_common.c" />
     <ClCompile Include="Lizard\entropy\lizard_fse_compress.c" />
     <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c" />
@@ -279,6 +286,8 @@
     <ClInclude Include="FreeBSD\dinode.h" />
     <ClInclude Include="FreeBSD\dir.h" />
     <ClInclude Include="FreeBSD\fs.h" />
+    <ClInclude Include="LittleFS\lfs.h" />
+    <ClInclude Include="LittleFS\lfs_util.h" />
     <ClInclude Include="Lizard\entropy\bitstream.h" />
     <ClInclude Include="Lizard\entropy\compiler.h" />
     <ClInclude Include="Lizard\entropy\debug.h" />
