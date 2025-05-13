@@ -31,6 +31,7 @@
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
   <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
+  <Import Project="..\NanaZip.ModernExperience\NanaZip.ModernExperience.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
@@ -413,22 +414,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="App.xaml.cpp">
-      <DependentUpon>App.xaml</DependentUpon>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AboutPage.idl">
       <DependentUpon>AboutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="App.idl">
-      <DependentUpon>App.xaml</DependentUpon>
     </Midl>
     <Midl Include="MainWindowToolBarPage.idl">
       <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
@@ -438,11 +428,6 @@
       <DependentUpon>SponsorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="App.h">
-      <DependentUpon>App.xaml</DependentUpon>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">

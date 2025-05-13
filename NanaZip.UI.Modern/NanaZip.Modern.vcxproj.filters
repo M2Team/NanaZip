@@ -1078,9 +1078,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="AboutPage.xaml" />
     <Page Include="MainWindowToolBarPage.xaml" />
     <Page Include="SponsorPage.xaml" />
