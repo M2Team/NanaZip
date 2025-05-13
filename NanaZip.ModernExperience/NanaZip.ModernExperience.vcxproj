@@ -71,6 +71,7 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NanaZip.ModernExperience.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>

@@ -8,7 +8,7 @@
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#include <Windows.h>
+#include "NanaZip.ModernExperience.h"
 
 EXTERN_C int WINAPI NanaZipModernExperienceTestFunction()
 {
