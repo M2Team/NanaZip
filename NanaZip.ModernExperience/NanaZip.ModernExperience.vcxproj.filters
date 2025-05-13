@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Manifest Include="NanaZip.ModernExperience.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NanaZip.ModernExperience.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="NanaZip.ModernExperience.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mile.Xaml.Unstaged.targets" />
+    <None Include="NanaZip.ModernExperience.def" />
+    <None Include="NanaZip.ModernExperience.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="SponsorPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{aa892a24-e05a-4d90-ac40-9aca1b82e1ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en">
+      <UniqueIdentifier>{c42a7c05-d752-456a-9607-27c7580dcfb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\zh-Hans">
+      <UniqueIdentifier>{2585c4e7-3460-4b0e-b06b-3e01537ba4e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pl">
+      <UniqueIdentifier>{7ac42189-d980-4c72-ae5a-edfb08ebd533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pt-BR">
+      <UniqueIdentifier>{fe436437-65db-49ac-93e2-f6b51c8944e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\sq">
+      <UniqueIdentifier>{3b88d6dd-0db6-4d35-b45e-5056485106c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\hu">
+      <UniqueIdentifier>{0b024271-0fa4-499f-bb60-b9a1a53b7d27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\el">
+      <UniqueIdentifier>{f7a348ee-91df-4a79-97e8-516bcd024f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\de">
+      <UniqueIdentifier>{7c1672d6-0ce4-476d-9c5d-156b8afd248e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en\SponsorPage.resw">
+      <Filter>Strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-Hans\SponsorPage.resw">
+      <Filter>Strings\zh-Hans</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pl\SponsorPage.resw">
+      <Filter>Strings\pl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt-BR\SponsorPage.resw">
+      <Filter>Strings\pt-BR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sq\SponsorPage.resw">
+      <Filter>Strings\sq</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hu\SponsorPage.resw">
+      <Filter>Strings\hu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\el\SponsorPage.resw">
+      <Filter>Strings\el</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\de\SponsorPage.resw">
+      <Filter>Strings\de</Filter>
+    </PRIResource>
+  </ItemGroup>
+</Project>

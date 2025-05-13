@@ -13,8 +13,9 @@
 #include <Mile.Helpers.h>
 #include <Mile.Xaml.h>
 
+#include <NanaZip.ModernExperience.h>
+
 #include "AboutPage.h"
-#include "SponsorPage.h"
 
 HWND NanaZip::UI::CreateXamlDialog(
     _In_opt_ HWND ParentWindowHandle)
@@ -354,14 +355,11 @@ void NanaZip::UI::SpecialCommandHandler()
             ::ExitProcess(static_cast<UINT>(-1));
         }
 
-        winrt::NanaZip::Modern::SponsorPage Window =
-            winrt::make<winrt::NanaZip::Modern::implementation::SponsorPage>(
-                WindowHandle);
         NanaZip::UI::ShowXamlWindow(
             WindowHandle,
             460,
             320,
-            winrt::get_abi(Window),
+            ::K7ModernCreateSponsorPage(WindowHandle),
             nullptr);
 
         ::ExitProcess(0);

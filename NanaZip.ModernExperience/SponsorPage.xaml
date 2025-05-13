@@ -1,9 +1,9 @@
 ﻿<Page
-  x:Class="NanaZip.Modern.SponsorPage"
+  x:Class="NanaZip.ModernExperience.SponsorPage"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="using:NanaZip.Modern"
+  xmlns:local="using:NanaZip.ModernExperience"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   IsTextScaleFactorEnabled="False"
   mc:Ignorable="d">
@@ -14,7 +14,7 @@
     </Grid.RowDefinitions>
 
     <TextBlock
-      x:Uid="/SponsorPage/GridTitleTextBlock"
+      x:Uid="/NanaZip.ModernExperience/SponsorPage/GridTitleTextBlock"
       Margin="16,0"
       HorizontalAlignment="Center"
       FontSize="24"
@@ -30,7 +30,7 @@
         <RowDefinition Height="66" />
       </Grid.RowDefinitions>
       <Button
-        x:Uid="/SponsorPage/ContributeButton"
+        x:Uid="/NanaZip.ModernExperience/SponsorPage/ContributeButton"
         Grid.Row="0"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
@@ -39,11 +39,11 @@
         Click="ContributeButtonClick">
         <StackPanel Margin="16,0" Orientation="Horizontal">
           <SymbolIcon Margin="0,0,16,0" Symbol="Link" />
-          <TextBlock x:Uid="/SponsorPage/ContributeButtonTextBlock" Text="[Become a contributor of NanaZip]" />
+          <TextBlock x:Uid="/NanaZip.ModernExperience/SponsorPage/ContributeButtonTextBlock" Text="[Become a contributor of NanaZip]" />
         </StackPanel>
       </Button>
       <Button
-        x:Uid="/SponsorPage/BuySponsorEditionButton"
+        x:Uid="/NanaZip.ModernExperience/SponsorPage/BuySponsorEditionButton"
         Grid.Row="2"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
@@ -52,11 +52,11 @@
         Click="BuySponsorEditionButtonClick">
         <StackPanel Margin="16,0" Orientation="Horizontal">
           <SymbolIcon Margin="0,0,16,0" Symbol="Shop" />
-          <TextBlock x:Uid="/SponsorPage/BuySponsorEditionButtonTextBlock" Text="[Buy NanaZip Sponsor Edition]" />
+          <TextBlock x:Uid="/NanaZip.ModernExperience/SponsorPage/BuySponsorEditionButtonTextBlock" Text="[Buy NanaZip Sponsor Edition]" />
         </StackPanel>
       </Button>
       <Button
-        x:Uid="/SponsorPage/SponsorEditionPolicyButton"
+        x:Uid="/NanaZip.ModernExperience/SponsorPage/SponsorEditionPolicyButton"
         Grid.Row="4"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
@@ -65,7 +65,7 @@
         Click="SponsorEditionPolicyButtonClick">
         <StackPanel Margin="16,0" Orientation="Horizontal">
           <SymbolIcon Margin="0,0,16,0" Symbol="Help" />
-          <TextBlock x:Uid="/SponsorPage/SponsorEditionPolicyButtonTextBlock" Text="[Sponsor Edition Policy]" />
+          <TextBlock x:Uid="/NanaZip.ModernExperience/SponsorPage/SponsorEditionPolicyButtonTextBlock" Text="[Sponsor Edition Policy]" />
         </StackPanel>
       </Button>
     </Grid>

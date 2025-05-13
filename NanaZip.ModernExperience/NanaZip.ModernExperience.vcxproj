@@ -8,9 +8,9 @@
     <MinimalCoreWin>false</MinimalCoreWin>
     <DefaultLanguage>en</DefaultLanguage>
     <AppContainerApplication>false</AppContainerApplication>
-    <AppxPackage>false</AppxPackage>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <XamlComponentResourceLocation>nested</XamlComponentResourceLocation>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
@@ -64,10 +64,17 @@
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="SponsorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="SponsorPage.idl">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
   </ItemGroup>
   <ItemGroup>
@@ -76,12 +83,20 @@
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="SponsorPage.h">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="App.cpp">
       <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="SponsorPage.cpp">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +109,16 @@
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.410</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\de\SponsorPage.resw" />
+    <PRIResource Include="Strings\el\SponsorPage.resw" />
+    <PRIResource Include="Strings\en\SponsorPage.resw" />
+    <PRIResource Include="Strings\hu\SponsorPage.resw" />
+    <PRIResource Include="Strings\pl\SponsorPage.resw" />
+    <PRIResource Include="Strings\pt-BR\SponsorPage.resw" />
+    <PRIResource Include="Strings\sq\SponsorPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\SponsorPage.resw" />
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />

@@ -4,13 +4,22 @@
 #include "SponsorPage.g.cpp"
 #endif
 
-#include "NanaZip.UI.h"
+#include "NanaZip.ModernExperience.h"
+
+#include <Mile.Helpers.CppBase.h>
+#include <Mile.Helpers.CppWinRT.h>
+
+namespace winrt::Mile
+{
+    using namespace ::Mile;
+}
 
 #include <ShObjIdl_core.h>
 
 #include <winrt/Windows.Services.Store.h>
 
-#include "../SevenZip/CPP/7zip/UI/FileManager/resourceGui.h"
+// Defined in SevenZip/CPP/7zip/UI/FileManager/resourceGui.h
+#define IDI_ICON 1
 
 namespace winrt
 {
@@ -22,7 +31,7 @@ namespace winrt
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-namespace winrt::NanaZip::Modern::implementation
+namespace winrt::NanaZip::ModernExperience::implementation
 {
     SponsorPage::SponsorPage(
         _In_ HWND WindowHandle) :
@@ -31,7 +40,7 @@ namespace winrt::NanaZip::Modern::implementation
         ::SetWindowTextW(
             this->m_WindowHandle,
             Mile::WinRT::GetLocalizedString(
-                L"SponsorPage/GridTitleTextBlock/Text").c_str());
+                L"NanaZip.ModernExperience/SponsorPage/GridTitleTextBlock/Text").c_str());
 
         HICON ApplicationIconHandle = reinterpret_cast<HICON>(::LoadImageW(
             ::GetModuleHandleW(nullptr),
@@ -120,4 +129,16 @@ namespace winrt::NanaZip::Modern::implementation
         ExecInfo.nShow = SW_SHOWNORMAL;
         ::ShellExecuteExW(&ExecInfo);
     }
+}
+
+EXTERN_C LPVOID WINAPI K7ModernCreateSponsorPage(
+    _In_ HWND ParentWindowHandle)
+{
+    using Interface =
+        winrt::NanaZip::ModernExperience::SponsorPage;
+    using Implementation =
+        winrt::NanaZip::ModernExperience::implementation::SponsorPage;
+
+    Interface Window = winrt::make<Implementation>(ParentWindowHandle);
+    return winrt::detach_abi(Window);
 }
