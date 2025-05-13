@@ -31,6 +31,7 @@
       <DeploymentContent>true</DeploymentContent>
       <Link>Assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
+    <Content Include="Mile.Project.Wap.Unstaged.targets" />
     <!-- Internationalization Support -->
     <PRIResource Include="Strings\**\*">
       <Link>Strings\%(RecursiveDir)%(FileName)%(Extension)</Link>
@@ -71,4 +72,5 @@
     </ProjectReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Wap.targets" />
+  <Import Project="Mile.Project.Wap.Unstaged.targets" />
 </Project>
