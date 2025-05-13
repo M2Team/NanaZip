@@ -50,6 +50,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Mile.Xaml.Unstaged.targets" />
     <None Include="NanaZip.ModernExperience.def" />
     <None Include="NanaZip.ModernExperience.props" />
   </ItemGroup>
@@ -93,5 +94,6 @@
       <Version>1.2.410</Version>
     </PackageReference>
   </ItemGroup>
+  <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
 </Project>
