@@ -5,8 +5,7 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Wap.props" />
   <PropertyGroup>
     <ProjectGuid>9a119a76-97cb-4490-b8c2-651576cb9302</ProjectGuid>
-    <TargetPlatformVersion>10.0.22621.0</TargetPlatformVersion>
-    <AppxOSMaxVersionTested>10.0.22621.1555</AppxOSMaxVersionTested>
+    <TargetPlatformVersion>10.0.26100.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <DefaultLanguage>en</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
