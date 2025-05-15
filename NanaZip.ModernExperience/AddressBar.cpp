@@ -15,7 +15,10 @@ void AddressBar::OnApplyTemplate()
 
     // Workaround for https://github.com/microsoft/microsoft-ui-xaml/issues/5341
     winrt::Windows::UI::Xaml::Controls::TextCommandBarFlyout textFlyout;
-    textFlyout.Placement(winrt::Windows::UI::Xaml::Controls::Primitives::FlyoutPlacementMode::BottomEdgeAlignedLeft);
+    textFlyout.Placement(
+        winrt::Windows::UI::Xaml::Controls::Primitives::
+        FlyoutPlacementMode::
+        BottomEdgeAlignedLeft);
     m_textBoxElement.ContextFlyout(textFlyout);
     m_textBoxElement.SelectionFlyout(textFlyout);
 
