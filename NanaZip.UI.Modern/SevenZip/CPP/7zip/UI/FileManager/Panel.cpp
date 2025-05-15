@@ -471,6 +471,13 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
 
   _addressBarControl.QuerySubmitted({ this, &CPanel::OnAddressBarQuerySubmitted });
 
+  _addressBarControl.GotFocus(
+      [&](auto&&, auto&&)
+      {
+          _panelCallback->PanelWasFocused();
+      }
+  );
+
   //#ifndef UNDER_CE
   //if (g_ComCtl32Version >= MAKELONG(71, 4))
   //#endif
