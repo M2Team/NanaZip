@@ -512,7 +512,7 @@ HRESULT CPanel::RefreshListCtrl(const CSelectedState &state)
     SetToRootFolder();
   }
 
-  _headerToolBar.EnableButton(kParentFolderID, !IsRootFolder());
+  _addressBarControl.IsUpButtonEnabled(!IsRootFolder());
 
   {
     CMyComPtr<IFolderSetFlatMode> folderSetFlatMode;

@@ -10,10 +10,12 @@
     <ClCompile Include="NanaZip.ModernExperience.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="AddressBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="NanaZip.ModernExperience.h" />
+    <ClInclude Include="AddressBar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Mile.Xaml.Unstaged.targets" />
@@ -22,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="SponsorPage.xaml" />
+    <Page Include="AddressBarTemplate.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
@@ -77,5 +80,8 @@
     <PRIResource Include="Strings\de\SponsorPage.resw">
       <Filter>Strings\de</Filter>
     </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="AddressBar.idl" />
   </ItemGroup>
 </Project>
