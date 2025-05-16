@@ -132,9 +132,8 @@ BEGIN
   CONTROL   "Encrypt file &names", IDX_COMPRESS_ENCRYPT_FILE_NAMES, MY_CHECKBOX,
             g4x2, yPsw + 111, g4xs2, 10
   
-  DEFPUSHBUTTON  "OK",     IDOK,     bx3, by, bxs, bys, WS_GROUP
-  PUSHBUTTON     "Cancel", IDCANCEL, bx2, by, bxs, bys
-  PUSHBUTTON     "Help",   IDHELP,   bx1, by, bxs, bys
+  DEFPUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys, WS_GROUP
+  PUSHBUTTON     "Cancel", IDCANCEL, bx1, by, bxs, bys
 END
 
 
