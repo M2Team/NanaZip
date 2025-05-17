@@ -58,8 +58,11 @@ void CPanelCallbackImp::SetFocusToPath(unsigned index)
   if (g_App.NumPanels == 1)
     newPanelIndex = g_App.LastFocusedPanel;
   _app->RefreshTitle();
-  _app->Panels[newPanelIndex]._headerComboBox.SetFocus();
-  _app->Panels[newPanelIndex]._headerComboBox.ShowDropDown();
+
+  // TODO: Implement address bar focus.
+
+  // _app->Panels[newPanelIndex]._headerComboBox.SetFocus();
+  // _app->Panels[newPanelIndex]._headerComboBox.ShowDropDown();
 }
 
 

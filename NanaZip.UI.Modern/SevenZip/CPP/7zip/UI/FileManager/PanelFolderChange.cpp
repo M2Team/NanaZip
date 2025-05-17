@@ -11,6 +11,13 @@
 
 #include "../../PropID.h"
 
+#include "../../../../../pch.h"
+#include <winrt/NanaZip.Modern.h>
+#include <winrt/Windows.UI.Xaml.Media.h>
+#include <winrt/Windows.UI.Xaml.Media.Imaging.h>
+#include <winrt/Windows.Storage.Streams.h>
+#include <robuffer.h>
+
 #ifdef UNDER_CE
 #include "FSFolder.h"
 #else
@@ -346,12 +353,96 @@ static int GetRealIconIndex(CFSTR path, DWORD attributes)
   return -1;
 }
 
+static winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap ConvertIconToWritableBitmap(HICON hIcon)
+{
+    ICONINFO iconInfo = { 0 };
+    GetIconInfo(hIcon, &iconInfo);
+
+    // Get the screen DC
+    HDC dc = GetDC(NULL);
+
+    // Get icon size info
+    BITMAP bm = { 0 };
+    GetObject(iconInfo.hbmColor, sizeof(BITMAP), &bm);
+
+    // Set up BITMAPINFO
+    BITMAPINFO bmi = { 0 };
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = bm.bmWidth;
+    bmi.bmiHeader.biHeight = -bm.bmHeight;
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = 32;
+    bmi.bmiHeader.biCompression = BI_RGB;
+
+    // Extract the color bitmap
+    int nBits = bm.bmWidth * bm.bmHeight;
+    std::unique_ptr<int32_t[]> colorBits(new int32_t[nBits]);
+    GetDIBits(
+        dc,
+        iconInfo.hbmColor,
+        0,
+        bm.bmHeight,
+        colorBits.get(),
+        &bmi,
+        DIB_RGB_COLORS);
+
+    // If no alpha values available, apply the mask bitmap
+    if (!std::any_of(colorBits.get(), colorBits.get() + nBits,
+        [](int32_t c) { return (c & 0xff000000) != 0; }))
+    {
+        // Extract the mask bitmap
+        std::unique_ptr<int32_t[]> maskBits(new int32_t[nBits]);
+        GetDIBits(
+            dc,
+            iconInfo.hbmMask,
+            0,
+            bm.bmHeight,
+            maskBits.get(),
+            &bmi,
+            DIB_RGB_COLORS);
+        // Copy the mask alphas into the color bits
+        for (int i = 0; i < nBits; ++i) {
+            if (maskBits[colorBits[i]] == 0) {
+                colorBits[i] |= 0xff000000;
+            }
+        }
+    }
+
+    // Release DC and GDI bitmaps
+    ReleaseDC(NULL, dc);
+    DeleteObject(iconInfo.hbmColor);
+    DeleteObject(iconInfo.hbmMask);
+
+    winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap wb =
+        winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap(
+            bm.bmWidth,
+            bm.bmHeight);
+
+    winrt::com_ptr<::Windows::Storage::Streams::IBufferByteAccess> bufferAccess =
+        wb.PixelBuffer()
+        .as<::Windows::Storage::Streams::IBufferByteAccess>();
+
+    byte* pBuffer;
+    bufferAccess->Buffer(&pBuffer);
+
+    for (int i = 0; i < nBits; ++i)
+    {
+        int32_t color = colorBits[i];
+        *pBuffer++ = color & 0xff;
+        *pBuffer++ = (color >> 8) & 0xff;
+        *pBuffer++ = (color >> 16) & 0xff;
+        *pBuffer++ = (color >> 24) & 0xff;
+    }
+
+    return wb;
+}
+
 void CPanel::LoadFullPathAndShow()
 {
   LoadFullPath();
   _appState->FolderHistory.AddString(_currentFolderPrefix);
 
-  _headerComboBox.SetText(_currentFolderPrefix);
+  _addressBarControl.Text(_currentFolderPrefix.Ptr());
 
   #ifndef UNDER_CE
 
@@ -379,15 +470,22 @@ void CPanel::LoadFullPathAndShow()
     if (fi.Find(us2fs(path)))
       attrib = fi.Attrib;
   }
-  item.iImage = GetRealIconIndex(us2fs(path), attrib);
+  //item.iImage = GetRealIconIndex(us2fs(path), attrib);
 
-  if (item.iImage >= 0)
-  {
-    item.iSelectedImage = item.iImage;
-    item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
-  }
-  item.iItem = -1;
-  _headerComboBox.SetItem(&item);
+  //if (item.iImage >= 0)
+  //{
+  //  item.iSelectedImage = item.iImage;
+  //  item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
+  //}
+  //item.iItem = -1;
+  // _headerComboBox.SetItem(&item);
+  
+  int iconIndex = GetRealIconIndex(us2fs(path), attrib);
+  HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
+  winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap bitmap =
+      ConvertIconToWritableBitmap(icon);
+  _addressBarControl.IconSource(bitmap);
+  DestroyIcon(icon);
   
   #endif
 
@@ -405,11 +503,19 @@ LRESULT CPanel::OnNotifyComboBoxEnter(const UString &s)
   return FALSE;
 }
 
+void CPanel::OnAddressBarQuerySubmitted(
+    winrt::NanaZip::ModernExperience::AddressBar const& addressBar,
+    winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const& queryArgs)
+{
+    UNREFERENCED_PARAMETER(addressBar);
+    OnNotifyComboBoxEnter(queryArgs.QueryText().c_str());
+}
+
 bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
 {
   if (info->iWhy == CBENF_ESCAPE)
   {
-    _headerComboBox.SetText(_currentFolderPrefix);
+    // _headerComboBox.SetText(_currentFolderPrefix);
     PostMsg(kSetFocusToListView);
     result = FALSE;
     return true;
@@ -427,7 +533,7 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
   {
     // When we use Edit control and press Enter.
     UString s;
-    _headerComboBox.GetText(s);
+    // _headerComboBox.GetText(s);
     result = OnNotifyComboBoxEnter(s);
     return true;
   }
@@ -485,7 +591,7 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   item.iItem = -1;
   item.iIndent = indent;
   item.pszText = name.Ptr_non_const();
-  _headerComboBox.InsertItem(&item);
+  // _headerComboBox.InsertItem(&item);
   
   #endif
 
@@ -505,7 +611,7 @@ bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
     case CBN_DROPDOWN:
     {
       ComboBoxPaths.Clear();
-      _headerComboBox.ResetContent();
+      // _headerComboBox.ResetContent();
       
       unsigned i;
       UStringVector pathParts;
@@ -559,6 +665,7 @@ bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
 
     case CBN_SELENDOK:
     {
+        /*
       int index = _headerComboBox.GetCurSel();
       if (index >= 0)
       {
@@ -574,7 +681,8 @@ bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
           return true;
         }
       }
-      return false;
+      */
+      return true;
     }
     /*
     case CBN_CLOSEUP:

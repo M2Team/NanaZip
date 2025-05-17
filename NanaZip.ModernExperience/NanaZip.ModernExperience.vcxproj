@@ -55,20 +55,19 @@
     <None Include="NanaZip.ModernExperience.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NanaZip.ModernExperience.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Manifest Include="NanaZip.ModernExperience.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddressBarTemplate.xaml" />
     <Page Include="SponsorPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Midl Include="AddressBar.idl" />
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
@@ -78,6 +77,9 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddressBar.h">
+      <DependentUpon>AddressBar.idl</DependentUpon>
+    </ClInclude>
     <ClInclude Include="NanaZip.ModernExperience.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
@@ -98,6 +100,10 @@
       <DependentUpon>SponsorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="AddressBar.cpp">
+      <DependentUpon>AddressBar.idl</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="NanaZip.ModernExperience.cpp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">
@@ -122,4 +128,6 @@
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+
+  <Target Name="XamlAddCppWinRTMergedWinmd" AfterTargets="CppWinRTMergeProjectWinMDInputs" />
 </Project>

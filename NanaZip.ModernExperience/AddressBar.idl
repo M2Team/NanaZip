@@ -1,0 +1,26 @@
+﻿namespace NanaZip.ModernExperience
+{
+    [default_interface]
+    runtimeclass AddressBar : Windows.UI.Xaml.Controls.Control
+    {
+        AddressBar();
+
+        Windows.UI.Xaml.Media.ImageSource IconSource;
+        static Windows.UI.Xaml.DependencyProperty IconSourceProperty{ get; };
+
+        String Text;
+        static Windows.UI.Xaml.DependencyProperty TextProperty{ get; };
+
+        Boolean IsUpButtonEnabled;
+        static Windows.UI.Xaml.DependencyProperty IsUpButtonEnabledProperty{ get; };
+
+        event Windows.Foundation.TypedEventHandler<AddressBar, AddressBarQuerySubmittedEventArgs> QuerySubmitted;
+        event Windows.UI.Xaml.RoutedEventHandler UpButtonClicked;
+    }
+
+    runtimeclass AddressBarQuerySubmittedEventArgs : Windows.UI.Xaml.DependencyObject
+    {
+        Object ChosenSuggestion{ get; };
+        String QueryText{ get; };
+    }
+}

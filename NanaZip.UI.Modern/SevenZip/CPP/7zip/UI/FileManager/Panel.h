@@ -3,6 +3,9 @@
 #ifndef __PANEL_H
 #define __PANEL_H
 
+#include "../../../../../pch.h"
+#include <winrt/NanaZip.ModernExperience.h>
+
 #include "../../../Common/MyWindows.h"
 
 #include <ShlObj.h>
@@ -309,6 +312,10 @@ class CPanel: public NWindows::NControl::CWindow2
   #ifndef UNDER_CE
 
   LRESULT OnNotifyComboBoxEnter(const UString &s);
+  void OnAddressBarQuerySubmitted(
+      winrt::NanaZip::ModernExperience::AddressBar const&,
+      winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const&);
+
   bool OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result);
   #ifndef _UNICODE
   bool OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result);
@@ -371,24 +378,28 @@ private:
   // CRecordVector<PROPID> m_ColumnsPropIDs;
 
 public:
-  NWindows::NControl::CReBar _headerReBar;
-  NWindows::NControl::CToolBar _headerToolBar;
-  NWindows::NControl::
-    #ifdef UNDER_CE
-    CComboBox
-    #else
-    CComboBoxEx
-    #endif
-    _headerComboBox;
+  // NWindows::NControl::CReBar _headerReBar;
+  // NWindows::NControl::CToolBar _headerToolBar;
+  // NWindows::NControl::
+    // #ifdef UNDER_CE
+    // CComboBox
+    // #else
+    // CComboBoxEx
+    // #endif
+    // _headerComboBox;
   UStringVector ComboBoxPaths;
   // CMyComboBox _headerComboBox;
-  CMyComboBoxEdit _comboBoxEdit;
+  // CMyComboBoxEdit _comboBoxEdit;
   CMyListView _listView;
   bool _thereAre_ListView_Items;
   NWindows::NControl::CStatusBar _statusBar;
   bool _lastFocusedIsList;
   // NWindows::NControl::CStatusBar _statusBar2;
 
+  HWND _addressBarWindow{ nullptr };
+  winrt::NanaZip::ModernExperience::AddressBar _addressBarControl{ nullptr };
+  HIMAGELIST _sysImageList{ nullptr };
+  
   DWORD _exStyle;
   bool _showDots;
   bool _showRealFileIcons;
