@@ -55,10 +55,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainWindowToolBarPage.cpp">
-      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
     <ClCompile Include="NanaZip.UI.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\DynLimBuf.cpp" />
@@ -211,10 +207,6 @@
     <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MainWindowToolBarPage.h">
-      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
     <ClInclude Include="NanaZip.UI.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h" />
@@ -397,15 +389,6 @@
     <Manifest Include="NanaZip.Modern.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="MainWindowToolBarPage.idl">
-      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Mile.Xaml">
       <Version>2.5.1250</Version>
     </PackageReference>
@@ -417,11 +400,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainWindowToolBarPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
@@ -431,16 +409,6 @@
     <ProjectReference Include="NanaZip.Windows.vcxproj">
       <Project>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="Strings\de\MainWindowToolBarPage.resw" />
-    <PRIResource Include="Strings\el\MainWindowToolBarPage.resw" />
-    <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
-    <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw" />
-    <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw" />
-    <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw" />
-    <PRIResource Include="Strings\sq\MainWindowToolBarPage.resw" />
-    <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw" />
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
 

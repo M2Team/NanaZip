@@ -129,15 +129,3 @@ namespace winrt::NanaZip::ModernExperience::implementation
         ::ShellExecuteExW(&ExecInfo);
     }
 }
-
-EXTERN_C LPVOID WINAPI K7ModernCreateSponsorPage(
-    _In_opt_ HWND ParentWindowHandle)
-{
-    using Interface =
-        winrt::NanaZip::ModernExperience::SponsorPage;
-    using Implementation =
-        winrt::NanaZip::ModernExperience::implementation::SponsorPage;
-
-    Interface Window = winrt::make<Implementation>(ParentWindowHandle);
-    return winrt::detach_abi(Window);
-}

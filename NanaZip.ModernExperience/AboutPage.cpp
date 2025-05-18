@@ -100,18 +100,3 @@ namespace winrt::NanaZip::ModernExperience::implementation
         ::DestroyWindow(this->m_WindowHandle);
     }
 }
-
-EXTERN_C LPVOID WINAPI K7ModernCreateAboutPage(
-    _In_opt_ HWND ParentWindowHandle,
-    _In_opt_ LPCWSTR ExtendedMessage)
-{
-    using Interface =
-        winrt::NanaZip::ModernExperience::AboutPage;
-    using Implementation =
-        winrt::NanaZip::ModernExperience::implementation::AboutPage;
-
-    Interface Window = winrt::make<Implementation>(
-        ParentWindowHandle,
-        ExtendedMessage);
-    return winrt::detach_abi(Window);
-}

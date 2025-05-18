@@ -67,33 +67,6 @@
     <Filter Include="SevenZip\Windows\Control">
       <UniqueIdentifier>{7129b3d3-8d4d-44d1-a771-d6314d17e0a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Strings">
-      <UniqueIdentifier>{92aa704d-4b05-48dd-ae91-5d2e02a11c6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\en">
-      <UniqueIdentifier>{a5210684-7934-4d34-94b0-f9ef3ae5c2f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\zh-Hans">
-      <UniqueIdentifier>{0237aed3-2eca-4267-a2e7-4c9e8e2f37f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\pl">
-      <UniqueIdentifier>{41dcb6ac-4f56-4e58-9e96-f4337ba4619a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\pt-BR">
-      <UniqueIdentifier>{448c6906-c923-4673-8ff3-5af434e99f42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\sq">
-      <UniqueIdentifier>{d10b2367-f27a-4724-8ef0-13d65c9689ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\hu">
-      <UniqueIdentifier>{59cf925d-a83a-4c58-92a5-dfa5ee26caf4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\el">
-      <UniqueIdentifier>{8842390d-a28b-4c83-8f98-028c66bf3e41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\de">
-      <UniqueIdentifier>{49b0533b-79cd-4348-a63b-6b6029bae5db}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\ParentFolder.bmp">
@@ -546,7 +519,6 @@
       <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="NanaZip.UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -1076,35 +1048,5 @@
     <ResourceCompile Include="SevenZip\CPP\7zip\UI\FileManager\resource.rc">
       <Filter>SevenZip\Spec</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="AboutPage.xaml" />
-    <Page Include="MainWindowToolBarPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="Strings\en\MainWindowToolBarPage.resw">
-      <Filter>Strings\en</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw">
-      <Filter>Strings\zh-Hans</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw">
-      <Filter>Strings\pl</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw">
-      <Filter>Strings\pt-BR</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\sq\MainWindowToolBarPage.resw">
-      <Filter>Strings\sq</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw">
-      <Filter>Strings\hu</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\el\MainWindowToolBarPage.resw">
-      <Filter>Strings\el</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\de\MainWindowToolBarPage.resw">
-      <Filter>Strings\de</Filter>
-    </PRIResource>
   </ItemGroup>
 </Project>
