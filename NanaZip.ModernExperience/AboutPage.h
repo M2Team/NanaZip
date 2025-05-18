@@ -10,7 +10,7 @@ namespace winrt
     using Windows::UI::Xaml::RoutedEventArgs;
 }
 
-namespace winrt::NanaZip::Modern::implementation
+namespace winrt::NanaZip::ModernExperience::implementation
 {
     struct AboutPage : AboutPageT<AboutPage>
     {
@@ -37,7 +37,7 @@ namespace winrt::NanaZip::Modern::implementation
     };
 }
 
-namespace winrt::NanaZip::Modern::factory_implementation
+namespace winrt::NanaZip::ModernExperience::factory_implementation
 {
     struct AboutPage :
         AboutPageT<AboutPage, implementation::AboutPage>

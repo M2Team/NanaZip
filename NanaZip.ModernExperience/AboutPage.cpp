@@ -4,7 +4,15 @@
 #include "AboutPage.g.cpp"
 #endif
 
-#include "NanaZip.UI.h"
+#include "NanaZip.ModernExperience.h"
+
+#include <Mile.Helpers.CppBase.h>
+#include <Mile.Helpers.CppWinRT.h>
+
+namespace winrt::Mile
+{
+    using namespace ::Mile;
+}
 
 #include <winrt/Windows.UI.Xaml.Documents.h>
 
@@ -15,7 +23,7 @@
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-namespace winrt::NanaZip::Modern::implementation
+namespace winrt::NanaZip::ModernExperience::implementation
 {
     AboutPage::AboutPage(
         _In_opt_ HWND WindowHandle,
@@ -91,4 +99,19 @@ namespace winrt::NanaZip::Modern::implementation
 
         ::DestroyWindow(this->m_WindowHandle);
     }
+}
+
+EXTERN_C LPVOID WINAPI K7ModernCreateAboutPage(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR ExtendedMessage)
+{
+    using Interface =
+        winrt::NanaZip::ModernExperience::AboutPage;
+    using Implementation =
+        winrt::NanaZip::ModernExperience::implementation::AboutPage;
+
+    Interface Window = winrt::make<Implementation>(
+        ParentWindowHandle,
+        ExtendedMessage);
+    return winrt::detach_abi(Window);
 }
