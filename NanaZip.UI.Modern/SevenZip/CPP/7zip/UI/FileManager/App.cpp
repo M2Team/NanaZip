@@ -1,7 +1,5 @@
 ﻿// App.cpp
 
-#include "../../../../../pch.h"
-
 #include "StdAfx.h"
 
 #include "resource.h"
@@ -31,7 +29,6 @@
 
 #include "PropertyNameRes.h"
 
-#include <Mile.Xaml.h>
 #include <NanaZip.ModernExperience.h>
 
 using namespace NWindows;

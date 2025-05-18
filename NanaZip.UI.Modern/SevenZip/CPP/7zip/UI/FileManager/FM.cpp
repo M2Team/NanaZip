@@ -38,8 +38,8 @@
 #include "StringUtils.h"
 #include "ViewSettings.h"
 
-#include "../../../../../pch.h"
 #include "../../../../../NanaZip.UI.h"
+#include <winrt/NanaZip.ModernExperience.h>
 
 using namespace NWindows;
 using namespace NFile;
