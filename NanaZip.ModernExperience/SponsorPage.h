@@ -17,7 +17,7 @@ namespace winrt::NanaZip::ModernExperience::implementation
     public:
 
         SponsorPage(
-            _In_ HWND WindowHandle = nullptr);
+            _In_opt_ HWND WindowHandle = nullptr);
 
         void InitializeComponent();
 

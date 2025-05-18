@@ -34,13 +34,12 @@ using namespace Windows::UI::Xaml;
 namespace winrt::NanaZip::ModernExperience::implementation
 {
     SponsorPage::SponsorPage(
-        _In_ HWND WindowHandle) :
+        _In_opt_ HWND WindowHandle) :
         m_WindowHandle(WindowHandle)
     {
-        ::SetWindowTextW(
-            this->m_WindowHandle,
-            Mile::WinRT::GetLocalizedString(
-                L"NanaZip.ModernExperience/SponsorPage/GridTitleTextBlock/Text").c_str());
+        winrt::hstring WindowTitle = Mile::WinRT::GetLocalizedString(
+            L"NanaZip.ModernExperience/SponsorPage/GridTitleTextBlock/Text");
+        ::SetWindowTextW(this->m_WindowHandle, WindowTitle.c_str());
 
         HICON ApplicationIconHandle = reinterpret_cast<HICON>(::LoadImageW(
             ::GetModuleHandleW(nullptr),
@@ -132,7 +131,7 @@ namespace winrt::NanaZip::ModernExperience::implementation
 }
 
 EXTERN_C LPVOID WINAPI K7ModernCreateSponsorPage(
-    _In_ HWND ParentWindowHandle)
+    _In_opt_ HWND ParentWindowHandle)
 {
     using Interface =
         winrt::NanaZip::ModernExperience::SponsorPage;
