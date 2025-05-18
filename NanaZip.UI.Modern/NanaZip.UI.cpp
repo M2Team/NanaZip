@@ -15,7 +15,10 @@
 
 #include <NanaZip.ModernExperience.h>
 
-#include "AboutPage.h"
+#include "../SevenZip/CPP/Common/Common.h"
+#include "../SevenZip/CPP/7zip/UI/Common/LoadCodecs.h"
+
+extern CCodecs* g_CodecsObj;
 
 HWND NanaZip::UI::CreateXamlDialog(
     _In_opt_ HWND ParentWindowHandle)
@@ -182,14 +185,17 @@ winrt::handle NanaZip::UI::ShowAboutDialog(
             return;
         }
 
-        winrt::NanaZip::Modern::AboutPage Window =
-            winrt::make<winrt::NanaZip::Modern::implementation::AboutPage>(
-                WindowHandle);
+        UString ExtendedMessage;
+        if (g_CodecsObj)
+        {
+            g_CodecsObj->GetCodecsErrorMessage(ExtendedMessage);
+        }
+
         NanaZip::UI::ShowXamlDialog(
             WindowHandle,
             480,
             320,
-            winrt::get_abi(Window),
+            ::K7ModernCreateAboutPage(WindowHandle, ExtendedMessage),
             ParentWindowHandle);
 
         winrt::check_hresult(::MileXamlThreadUninitialize());

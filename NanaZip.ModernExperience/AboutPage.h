@@ -10,14 +10,15 @@ namespace winrt
     using Windows::UI::Xaml::RoutedEventArgs;
 }
 
-namespace winrt::NanaZip::Modern::implementation
+namespace winrt::NanaZip::ModernExperience::implementation
 {
     struct AboutPage : AboutPageT<AboutPage>
     {
     public:
 
         AboutPage(
-            _In_ HWND WindowHandle = nullptr);
+            _In_opt_ HWND WindowHandle = nullptr,
+            _In_opt_ LPCWSTR ExtendedMessage = nullptr);
 
         void InitializeComponent();
 
@@ -32,10 +33,11 @@ namespace winrt::NanaZip::Modern::implementation
     private:
 
         HWND m_WindowHandle;
+        std::wstring m_ExtendedMessage;
     };
 }
 
-namespace winrt::NanaZip::Modern::factory_implementation
+namespace winrt::NanaZip::ModernExperience::factory_implementation
 {
     struct AboutPage :
         AboutPageT<AboutPage, implementation::AboutPage>

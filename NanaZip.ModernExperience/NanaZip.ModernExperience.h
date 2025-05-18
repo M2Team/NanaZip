@@ -14,6 +14,10 @@
 #include <Windows.h>
 
 EXTERN_C LPVOID WINAPI K7ModernCreateSponsorPage(
-    _In_ HWND ParentWindowHandle);
+    _In_opt_ HWND ParentWindowHandle);
+
+EXTERN_C LPVOID WINAPI K7ModernCreateAboutPage(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR ExtendedMessage);
 
 #endif // !NANAZIP_MODERN_EXPERIENCE
