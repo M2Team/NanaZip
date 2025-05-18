@@ -148,8 +148,8 @@ void AddressBar::OnKeyUp(winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs con
 {
     if (args.Key() == winrt::Windows::System::VirtualKey::Enter)
     {
-        auto submitArgs = winrt::make_self<AddressBarQuerySubmittedEventArgs>(Text(), nullptr);
-        m_querySubmittedEvent(*this, *submitArgs);
+        auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(Text(), nullptr);
+        m_querySubmittedEvent(*this, submitArgs);
     }
     __super::OnKeyUp(args);
 }
