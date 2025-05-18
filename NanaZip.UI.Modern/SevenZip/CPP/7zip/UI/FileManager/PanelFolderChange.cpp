@@ -603,6 +603,36 @@ extern UString RootFolder_GetName_Computer(int &iconIndex);
 extern UString RootFolder_GetName_Network(int &iconIndex);
 extern UString RootFolder_GetName_Documents(int &iconIndex);
 
+void CPanel::OnDropDownOpened(
+    winrt::NanaZip::ModernExperience::AddressBar const&,
+    winrt::Windows::Foundation::IInspectable const&
+)
+{
+    _items.Clear();
+    ComboBoxPaths.Clear();
+
+    unsigned i;
+    UStringVector pathParts;
+
+    SplitPathToParts(_currentFolderPrefix, pathParts);
+    UString sumPass;
+    if (!pathParts.IsEmpty())
+        pathParts.DeleteBack();
+    for (i = 0; i < pathParts.Size(); i++)
+    {
+        UString name = pathParts[i];
+        sumPass += name;
+        sumPass.Add_PathSepar();
+        CFileInfo info;
+        DWORD attrib = FILE_ATTRIBUTE_DIRECTORY;
+        if (info.Find(us2fs(sumPass)))
+            attrib = info.Attrib;
+        // AddComboBoxItem(name.IsEmpty() ? UString(L"\\") : name, GetRealIconIndex(us2fs(sumPass), attrib), i, false);
+        _items.Append(name.IsEmpty() ? L"\\" : name.Ptr());
+        ComboBoxPaths.Add(sumPass);
+    }
+}
+
 bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
 {
   result = FALSE;

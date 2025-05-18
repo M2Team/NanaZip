@@ -25,6 +25,11 @@ namespace winrt::NanaZip::ModernExperience::implementation
 
         static winrt::Windows::UI::Xaml::DependencyProperty IconSourceProperty();
 
+        winrt::Windows::Foundation::IInspectable ItemsSource();
+        void ItemsSource(winrt::Windows::Foundation::IInspectable const&);
+
+        static winrt::Windows::UI::Xaml::DependencyProperty ItemsSourceProperty();
+
         bool IsUpButtonEnabled();
         void IsUpButtonEnabled(bool);
 
@@ -44,8 +49,17 @@ namespace winrt::NanaZip::ModernExperience::implementation
         );
         void UpButtonClicked(winrt::event_token const& token) noexcept;
 
+        winrt::event_token DropDownOpened(
+            winrt::Windows::Foundation::TypedEventHandler<
+            winrt::NanaZip::ModernExperience::AddressBar,
+            winrt::Windows::Foundation::IInspectable>
+            const&
+        );
+        void DropDownOpened(winrt::event_token const& token) noexcept;
 
     private:
+        void OpenSuggestionsPopup(bool isKeyboard);
+
         static void OnTextChanged(
             winrt::Windows::Foundation::IInspectable const&,
             winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const&
@@ -58,16 +72,22 @@ namespace winrt::NanaZip::ModernExperience::implementation
             winrt::Windows::Foundation::IInspectable const&,
             winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const&
         );
+        static void OnItemsSourceChanged(
+            winrt::Windows::Foundation::IInspectable const&,
+            winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const&
+        );
 
         inline static winrt::Windows::UI::Xaml::DependencyProperty s_textProperty{ nullptr };
         inline static winrt::Windows::UI::Xaml::DependencyProperty s_iconSourceProperty{ nullptr };
         inline static winrt::Windows::UI::Xaml::DependencyProperty s_upButtonEnabledProperty{ nullptr };
+        inline static winrt::Windows::UI::Xaml::DependencyProperty s_itemsSourceProperty{ nullptr };
 
         winrt::Windows::UI::Xaml::Controls::TextBox m_textBoxElement{ nullptr };
         winrt::Windows::UI::Xaml::Controls::Image m_iconElement{ nullptr };
         winrt::Windows::UI::Xaml::Controls::Primitives::Popup
             m_popup{ nullptr };
         winrt::Windows::UI::Xaml::Controls::Button m_upButtonElement{ nullptr };
+        winrt::Windows::UI::Xaml::Controls::ListView m_suggestionsList{ nullptr };
 
         winrt::event<
             winrt::Windows::Foundation::TypedEventHandler<
@@ -77,6 +97,12 @@ namespace winrt::NanaZip::ModernExperience::implementation
 
         winrt::event<winrt::Windows::UI::Xaml::RoutedEventHandler>
             m_upButtonClickedEvent;
+
+        winrt::event<
+            winrt::Windows::Foundation::TypedEventHandler<
+            winrt::NanaZip::ModernExperience::AddressBar,
+            winrt::Windows::Foundation::IInspectable>>
+            m_dropDownOpenedEvent;
     };
 
     struct AddressBarQuerySubmittedEventArgs : AddressBarQuerySubmittedEventArgsT<AddressBarQuerySubmittedEventArgs>

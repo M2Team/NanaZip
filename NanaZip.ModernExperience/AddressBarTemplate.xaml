@@ -259,29 +259,41 @@
               Content="&#xE74A;"
               FontFamily="{StaticResource SymbolThemeFontFamily}"
               FontSize="12" />
-            <Popup x:Name="SuggestionsPopup" IsLightDismissEnabled="True">
-              <Popup.ChildTransitions>
-                <PopupThemeTransition />
-              </Popup.ChildTransitions>
-              <ListView
-                x:Name="SuggestionsList"
-                Background="{ThemeResource FlyoutPresenterBackground}"
-                BorderBrush="{ThemeResource FlyoutBorderThemeBrush}"
-                BorderThickness="{StaticResource FlyoutBorderThemeThickness}"
-                CornerRadius="{StaticResource OverlayCornerRadius}"
-                IsItemClickEnabled="True"
-                SelectionMode="None"
-                Translation="0,0,32">
-                <ListView.Shadow>
-                  <ThemeShadow />
-                </ListView.Shadow>
-              </ListView>
-            </Popup>
-            <TextBox
-              x:Name="TextBoxElement"
-              Grid.Column="1"
-              Grid.ColumnSpan="3"
-              Style="{StaticResource DefaultAddressBarTextBoxStyle}" />
+            <RelativePanel Grid.Column="1" Grid.ColumnSpan="3">
+              <TextBox
+                x:Name="TextBoxElement"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                Style="{StaticResource DefaultAddressBarTextBoxStyle}" />
+              <Popup
+                x:Name="SuggestionsPopup"
+                AllowFocusOnInteraction="False"
+                IsLightDismissEnabled="True"
+                ShouldConstrainToRootBounds="False">
+                <Popup.ChildTransitions>
+                  <PopupThemeTransition />
+                </Popup.ChildTransitions>
+
+                <!--
+                  MaxHeight set here to prevent the suggestions
+                  from overflowing the screen. 400 is ~10 elements.
+                -->
+                <ListView
+                  x:Name="SuggestionsList"
+                  MaxHeight="400"
+                  Background="{ThemeResource FlyoutPresenterBackground}"
+                  BorderBrush="{ThemeResource FlyoutBorderThemeBrush}"
+                  BorderThickness="{StaticResource FlyoutBorderThemeThickness}"
+                  CornerRadius="{StaticResource OverlayCornerRadius}"
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  Translation="0,0,32">
+                  <ListView.Shadow>
+                    <ThemeShadow />
+                  </ListView.Shadow>
+                </ListView>
+              </Popup>
+            </RelativePanel>
             <Image
               x:Name="IconElement"
               Grid.Column="1"

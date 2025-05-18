@@ -478,6 +478,10 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       }
   );
 
+  _items = winrt::single_threaded_observable_vector<winrt::hstring>();
+  _addressBarControl.ItemsSource(_items);
+  _addressBarControl.DropDownOpened({ this, &CPanel::OnDropDownOpened });
+
   //#ifndef UNDER_CE
   //if (g_ComCtl32Version >= MAKELONG(71, 4))
   //#endif

@@ -405,6 +405,9 @@
     <Manifest Include="NanaZip.Modern.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <Midl Include="AboutPage.idl">
       <DependentUpon>AboutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -456,5 +459,30 @@
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
 
+  <!--
+  XamlAddCppWinRTMergedWinmd
+
+  This target is overriden to prevent the XAML compiler from enabling
+  hybrid C++/WinRT and C++/CX support, due to a bug in the check.
+  -->
   <Target Name="XamlAddCppWinRTMergedWinmd" AfterTargets="CppWinRTMergeProjectWinMDInputs" />
+
+  <!--
+  DeleteOutputWinMDBeforeMdMerge
+
+  This target deletes the output WinMD file from the previous build, if present.
+  This is to prevent a conflict between the output WinMD file and new WinMDs
+  that are to be merged.
+  -->
+  <Target Name="DeleteOutputWinMDBeforeMdMerge" BeforeTargets="CppWinRTMergeProjectWinMDInputs">
+    <Delete Files="$(CppWinRTProjectWinMD)" />
+  </Target>
+
+  <!--
+  _ComputeInputPriFiles
+
+  This target prevents PRIs from NZME from being merged with those from
+  NanaZip.Modern, which may cause issues in the WAP project.
+  -->
+  <Target Name="_ComputeInputPriFiles" />
 </Project>

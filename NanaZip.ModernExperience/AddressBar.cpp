@@ -41,6 +41,15 @@ void AddressBar::OnApplyTemplate()
             }
         });
 
+    m_textBoxElement.GotFocus(
+        []
+        (winrt::Windows::Foundation::IInspectable const& sender, auto&&)
+        {
+            winrt::Windows::UI::Xaml::Controls::TextBox textBox =
+                sender.as<winrt::Windows::UI::Xaml::Controls::TextBox>();
+            textBox.SelectAll();
+        });
+
     m_iconElement =
         GetTemplateChild(L"IconElement")
         .as<winrt::Windows::UI::Xaml::Controls::Image>();
@@ -53,9 +62,64 @@ void AddressBar::OnApplyTemplate()
         m_iconElement.Source(currentSource);
     }
 
+    m_popup =
+        GetTemplateChild(L"SuggestionsPopup")
+        .as<winrt::Windows::UI::Xaml::Controls::Primitives::Popup>();
+
+    m_popup.Closed(
+        [weak_this{ get_weak() }]
+        (auto&&, auto&&)
+        {
+            if (auto strong_this{ weak_this.get() })
+            {
+                if (!strong_this->m_textBoxElement)
+                    return;
+                auto tbCorner = strong_this->m_textBoxElement.CornerRadius();
+                tbCorner.BottomLeft = tbCorner.TopLeft;
+                tbCorner.BottomRight = tbCorner.TopRight;
+                strong_this->m_textBoxElement.CornerRadius(tbCorner);
+            }
+        });
+
+    m_suggestionsList =
+        GetTemplateChild(L"SuggestionsList")
+        .as<winrt::Windows::UI::Xaml::Controls::ListView>();
+
+    winrt::Windows::Foundation::IInspectable existingItemsSource =
+        ItemsSource();
+
+    if (existingItemsSource)
+    {
+        m_suggestionsList.ItemsSource(existingItemsSource);
+    }
+
+    m_suggestionsList.ItemClick(
+        [weak_this{ get_weak() }]
+        (auto&&, winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs const& args)
+        {
+            UNREFERENCED_PARAMETER(args);
+            if (auto strong_this{ weak_this.get() })
+            {
+                strong_this->m_popup.IsOpen(false);
+            }
+        }
+    );
+
     winrt::Windows::UI::Xaml::Controls::Button m_dropDownButton =
         GetTemplateChild(L"DropDownButton")
         .as<winrt::Windows::UI::Xaml::Controls::Button>();
+
+    m_dropDownButton.Click(
+        [ weak_this{ get_weak() }]
+        (
+            auto&&, auto&&
+        )
+        {
+            if (auto strong_this{ weak_this.get() })
+            {
+                strong_this->OpenSuggestionsPopup(false);
+            }
+        });
 
     m_upButtonElement =
         GetTemplateChild(L"UpButton")
@@ -206,6 +270,55 @@ void AddressBar::OnIconSourceChanged(
     }
 }
 
+winrt::Windows::Foundation::IInspectable AddressBar::ItemsSource()
+{
+    return GetValue(ItemsSourceProperty());
+}
+
+void AddressBar::ItemsSource(winrt::Windows::Foundation::IInspectable const& itemsSource)
+{
+    SetValue(
+        ItemsSourceProperty(),
+        itemsSource
+    );
+}
+
+winrt::Windows::UI::Xaml::DependencyProperty AddressBar::ItemsSourceProperty()
+{
+    if (!s_itemsSourceProperty)
+    {
+        s_itemsSourceProperty =
+            winrt::Windows::UI::Xaml::DependencyProperty::Register(
+                L"ItemsSource",
+                winrt::xaml_typename<winrt::Windows::Foundation::IInspectable>(),
+                winrt::xaml_typename<winrt::NanaZip::ModernExperience::AddressBar>(),
+                winrt::Windows::UI::Xaml::PropertyMetadata(
+                    winrt::Windows::Foundation::IInspectable(nullptr),
+                    &AddressBar::OnItemsSourceChanged
+                )
+            );
+    }
+    return s_itemsSourceProperty;
+}
+
+void AddressBar::OnItemsSourceChanged(
+    winrt::Windows::Foundation::IInspectable const& sender,
+    winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args)
+{
+    winrt::NanaZip::ModernExperience::AddressBar addressBar =
+        sender.as<winrt::NanaZip::ModernExperience::AddressBar>();
+
+    winrt::NanaZip::ModernExperience::implementation::AddressBar* addressBarImpl =
+        winrt::get_self<winrt::NanaZip::ModernExperience::implementation::AddressBar>(
+            addressBar
+        );
+
+    if (addressBarImpl->m_suggestionsList)
+    {
+        addressBarImpl->m_suggestionsList.ItemsSource(args.NewValue());
+    }
+}
+
 bool AddressBar::IsUpButtonEnabled()
 {
     return winrt::unbox_value<bool>(
@@ -295,6 +408,60 @@ void AddressBar::UpButtonClicked(
 ) noexcept
 {
     m_upButtonClickedEvent.remove(token);
+}
+
+winrt::event_token
+AddressBar::DropDownOpened(
+    winrt::Windows::Foundation::TypedEventHandler<
+    winrt::NanaZip::ModernExperience::AddressBar,
+    winrt::Windows::Foundation::IInspectable>
+    const& handler
+)
+{
+    return m_dropDownOpenedEvent.add(handler);
+}
+
+void AddressBar::DropDownOpened(
+    winrt::event_token const& token
+) noexcept
+{
+    m_dropDownOpenedEvent.remove(token);
+}
+
+void AddressBar::OpenSuggestionsPopup(
+    bool isKeyboard
+)
+{
+    if (!m_popup || !m_textBoxElement || !m_suggestionsList)
+        return;
+
+    m_dropDownOpenedEvent(*this, nullptr);
+
+    if (!isKeyboard)
+    {
+        m_suggestionsList.SelectionMode(
+            winrt::Windows::UI::Xaml::Controls::ListViewSelectionMode::None
+        );
+    }
+    else {
+        m_suggestionsList.SelectionMode(
+            winrt::Windows::UI::Xaml::Controls::ListViewSelectionMode::Single
+        );
+    }
+
+    m_suggestionsList.Width(m_textBoxElement.ActualWidth());
+    m_popup.VerticalOffset(m_textBoxElement.ActualHeight());
+
+    auto tbCorner = m_textBoxElement.CornerRadius();
+    tbCorner.BottomLeft = tbCorner.BottomRight = 0;
+    m_textBoxElement.CornerRadius(tbCorner);
+
+    auto slCorner = m_suggestionsList.CornerRadius();
+    slCorner.TopLeft = slCorner.TopRight = 0;
+    m_suggestionsList.CornerRadius(slCorner);
+
+    m_popup.IsOpen(true);
+    m_textBoxElement.Focus(winrt::Windows::UI::Xaml::FocusState::Programmatic);
 }
 
 AddressBarQuerySubmittedEventArgs::

@@ -309,6 +309,11 @@ class CPanel: public NWindows::NControl::CWindow2
 
   bool OnComboBoxCommand(UINT code, LPARAM param, LRESULT &result);
 
+  void OnDropDownOpened(
+      winrt::NanaZip::ModernExperience::AddressBar const&,
+      winrt::Windows::Foundation::IInspectable const&
+  );
+
   #ifndef UNDER_CE
 
   LRESULT OnNotifyComboBoxEnter(const UString &s);
@@ -395,6 +400,9 @@ public:
   NWindows::NControl::CStatusBar _statusBar;
   bool _lastFocusedIsList;
   // NWindows::NControl::CStatusBar _statusBar2;
+  winrt::Windows::Foundation::Collections::IObservableVector<
+      winrt::hstring>
+      _items{ nullptr };
 
   HWND _addressBarWindow{ nullptr };
   winrt::NanaZip::ModernExperience::AddressBar _addressBarControl{ nullptr };
