@@ -1107,7 +1107,4 @@
       <Filter>Strings\de</Filter>
     </PRIResource>
   </ItemGroup>
-  <ItemGroup>
-    <Midl Include="AddressBar.idl" />
-  </ItemGroup>
 </Project>
