@@ -17,7 +17,8 @@ namespace winrt::NanaZip::Modern::implementation
     public:
 
         AboutPage(
-            _In_ HWND WindowHandle = nullptr);
+            _In_opt_ HWND WindowHandle = nullptr,
+            _In_opt_ LPCWSTR ExtendedMessage = nullptr);
 
         void InitializeComponent();
 
@@ -32,6 +33,7 @@ namespace winrt::NanaZip::Modern::implementation
     private:
 
         HWND m_WindowHandle;
+        std::wstring m_ExtendedMessage;
     };
 }
 

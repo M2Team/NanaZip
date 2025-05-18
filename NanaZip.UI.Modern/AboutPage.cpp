@@ -10,27 +10,18 @@
 
 #include <string>
 
-#include "../SevenZip/CPP/Common/Common.h"
 #include <Mile.Project.Version.h>
-#include "../SevenZip/C/CpuArch.h"
-#include "../SevenZip/CPP/7zip/UI/Common/LoadCodecs.h"
-#include "../SevenZip/CPP/7zip/UI/FileManager/LangUtils.h"
-#include "../SevenZip/CPP/7zip/UI/FileManager/resourceGui.h"
 
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-extern CCodecs* g_CodecsObj;
-
-#define IDD_ABOUT  2900
-#define IDT_ABOUT_INFO  2901
-#define IDB_ABOUT_HOMEPAGE   110
-
 namespace winrt::NanaZip::Modern::implementation
 {
     AboutPage::AboutPage(
-        _In_ HWND WindowHandle) :
-        m_WindowHandle(WindowHandle)
+        _In_opt_ HWND WindowHandle,
+        _In_opt_ LPCWSTR ExtendedMessage) :
+        m_WindowHandle(WindowHandle),
+        m_ExtendedMessage(ExtendedMessage)
     {
 
     }
@@ -39,48 +30,41 @@ namespace winrt::NanaZip::Modern::implementation
     {
         AboutPageT::InitializeComponent();
 
-        std::wstring Title = std::wstring(
-            ::LangString(IDD_ABOUT));
-        if (Title.empty())
+        winrt::hstring WindowTitle = Mile::WinRT::GetLocalizedString(
+            L"Legacy/Resource2900");
+        if (WindowTitle.empty())
         {
-            Title = L"About NanaZip";
+            WindowTitle = L"About NanaZip";
         }
-        ::SetWindowTextW(
-            this->m_WindowHandle,
-            Title.c_str());
+        ::SetWindowTextW(this->m_WindowHandle, WindowTitle.c_str());
 
         std::wstring Version = std::wstring(
             "NanaZip " MILE_PROJECT_VERSION_STRING);
         Version.append(
             L" (" MILE_PROJECT_DOT_VERSION_STRING L")");
-        Version.append(
-            UString(" (" MY_CPU_NAME ")"));
+#if defined(_M_AMD64)
+        Version.append(L" (x64)");
+#elif defined(_M_ARM64)
+        Version.append(L" (arm64)");
+#endif
 
         std::wstring Content = std::wstring(
-            ::LangString(IDT_ABOUT_INFO));
+            Mile::WinRT::GetLocalizedString(L"Legacy/Resource2901"));
         if (Content.empty())
         {
             Content = L"NanaZip is free software";
         }
-#ifdef EXTERNAL_CODECS
-        if (g_CodecsObj)
+        if (!this->m_ExtendedMessage.empty())
         {
-            UString s;
-            g_CodecsObj->GetCodecsErrorMessage(s);
-            if (!s.IsEmpty())
-            {
-                Content.append(L"\r\n\r\n");
-                Content.append(s);
-            }
+            Content.append(L"\r\n\r\n");
+            Content.append(this->m_ExtendedMessage);
         }
-#endif
 
-        this->GridTitleTextBlock().Text(Title);
+        this->GridTitleTextBlock().Text(WindowTitle);
         this->Version().Text(Version);
         this->Content().Text(Content);
         this->CancelButton().Content(winrt::box_value(
-            Mile::WinRT::GetLocalizedString(
-                L"Legacy/Resource402")));
+            Mile::WinRT::GetLocalizedString(L"Legacy/Resource402")));
     }
 
     void AboutPage::GitHubButtonClick(
