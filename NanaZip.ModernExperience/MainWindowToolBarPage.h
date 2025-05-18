@@ -14,14 +14,15 @@ namespace winrt
     using Windows::System::DispatcherQueue;
     using Windows::UI::Xaml::RoutedEventArgs;
 }
-namespace winrt::NanaZip::Modern::implementation
+namespace winrt::NanaZip::ModernExperience::implementation
 {
     struct MainWindowToolBarPage : MainWindowToolBarPageT<MainWindowToolBarPage>
     {
     public:
 
         MainWindowToolBarPage(
-            _In_ HWND WindowHandle = nullptr);
+            _In_ HWND WindowHandle = nullptr,
+            _In_ HMENU MoreMenu = nullptr);
 
         void InitializeComponent();
 
@@ -80,6 +81,7 @@ namespace winrt::NanaZip::Modern::implementation
     private:
 
         HWND m_WindowHandle;
+        HMENU m_MoreMenu;
         winrt::DispatcherQueue m_DispatcherQueue = nullptr;
         winrt::StoreContext m_StoreContext = nullptr;
 
@@ -89,7 +91,7 @@ namespace winrt::NanaZip::Modern::implementation
     };
 }
 
-namespace winrt::NanaZip::Modern::factory_implementation
+namespace winrt::NanaZip::ModernExperience::factory_implementation
 {
     struct MainWindowToolBarPage : MainWindowToolBarPageT<
         MainWindowToolBarPage, implementation::MainWindowToolBarPage>

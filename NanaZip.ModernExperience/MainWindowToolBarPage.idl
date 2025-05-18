@@ -1,4 +1,4 @@
-﻿namespace NanaZip.Modern
+﻿namespace NanaZip.ModernExperience
 {
     [default_interface]
     runtimeclass MainWindowToolBarPage : Windows.UI.Xaml.Controls.Page

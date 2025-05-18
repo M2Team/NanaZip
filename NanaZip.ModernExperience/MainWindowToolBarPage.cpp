@@ -7,7 +7,15 @@
 #include <winrt/Windows.UI.Xaml.Automation.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 
-#include "NanaZip.UI.h"
+#include "NanaZip.ModernExperience.h"
+
+#include <Mile.Helpers.CppBase.h>
+#include <Mile.Helpers.CppWinRT.h>
+
+namespace winrt::Mile
+{
+    using namespace ::Mile;
+}
 
 #include <ShObjIdl_core.h>
 
@@ -70,6 +78,7 @@ namespace
             Info = 551,
             Options = 900,
             Benchmark = 901,
+            About = 961
         };
     }
 
@@ -85,11 +94,13 @@ namespace
     }
 }
 
-namespace winrt::NanaZip::Modern::implementation
+namespace winrt::NanaZip::ModernExperience::implementation
 {
     MainWindowToolBarPage::MainWindowToolBarPage(
-        _In_ HWND WindowHandle) :
-        m_WindowHandle(WindowHandle)
+        _In_ HWND WindowHandle,
+        _In_ HMENU MoreMenu) :
+        m_WindowHandle(WindowHandle),
+        m_MoreMenu(MoreMenu)
     {
 
     }
@@ -314,7 +325,13 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(e);
 
-        NanaZip::UI::ShowAboutDialog(this->m_WindowHandle);
+        ::PostMessageW(
+            this->m_WindowHandle,
+            WM_COMMAND,
+            MAKEWPARAM(
+                ToolBarCommandID::About,
+                BN_CLICKED),
+            0);
     }
 
     void MainWindowToolBarPage::MoreButtonClick(
@@ -330,8 +347,6 @@ namespace winrt::NanaZip::Modern::implementation
             Button.TransformToVisual(this->Content());
         winrt::Point LogicalPoint = Transform.TransformPoint(
             winrt::Point(0.0f, 0.0f));
-
-        extern HMENU g_MoreMenu;
 
         UINT DpiValue = ::GetDpiForWindow(this->m_WindowHandle);
 
@@ -354,33 +369,33 @@ namespace winrt::NanaZip::Modern::implementation
             this->m_WindowHandle,
             WM_INITMENUPOPUP,
             reinterpret_cast<WPARAM>(::GetSubMenu(
-                g_MoreMenu,
+                this->m_MoreMenu,
                 MenuIndex::File)),
             MenuIndex::File);
         ::SendMessageW(
             this->m_WindowHandle,
             WM_INITMENUPOPUP,
             reinterpret_cast<WPARAM>(::GetSubMenu(
-                g_MoreMenu,
+                this->m_MoreMenu,
                 MenuIndex::Edit)),
             MenuIndex::Edit);
         ::SendMessageW(
             this->m_WindowHandle,
             WM_INITMENUPOPUP,
             reinterpret_cast<WPARAM>(::GetSubMenu(
-                g_MoreMenu,
+                this->m_MoreMenu,
                 MenuIndex::View)),
             MenuIndex::View);
         ::SendMessageW(
             this->m_WindowHandle,
             WM_INITMENUPOPUP,
             reinterpret_cast<WPARAM>(::GetSubMenu(
-                g_MoreMenu,
+                this->m_MoreMenu,
                 MenuIndex::Bookmarks)),
             MenuIndex::Bookmarks);
 
         WPARAM Command = ::TrackPopupMenuEx(
-            g_MoreMenu,
+            this->m_MoreMenu,
             TPM_LEFTALIGN | TPM_NONOTIFY | TPM_RETURNCMD,
             MenuPosition.x,
             MenuPosition.y,
@@ -560,12 +575,29 @@ namespace winrt::NanaZip::Modern::implementation
                 winrt::DispatcherQueuePriority::Normal,
                 [=]()
             {
+                std::wstring ResourcePath = L"NanaZip.ModernExperience/";
+                ResourcePath += L"MainWindowToolBarPage/SponsorButton/";
+                ResourcePath += Sponsored ? L"SponsoredText" : L"AcquireText";
+                winrt::hstring ResourceContent =
+                    Mile::WinRT::GetLocalizedString(ResourcePath.c_str());
                 this->SponsorButton().Content(
-                    winrt::box_value(Mile::WinRT::GetLocalizedString(
-                        Sponsored
-                        ? L"MainWindowToolBarPage/SponsorButton/SponsoredText"
-                        : L"MainWindowToolBarPage/SponsorButton/AcquireText")));
+                    winrt::box_value(ResourceContent));
             });
         }));
     }
+}
+
+EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
+    _In_ HWND ParentWindowHandle,
+    _In_ HMENU MoreMenuHandle)
+{
+    using Interface =
+        winrt::NanaZip::ModernExperience::MainWindowToolBarPage;
+    using Implementation =
+        winrt::NanaZip::ModernExperience::implementation::MainWindowToolBarPage;
+
+    Interface Window = winrt::make<Implementation>(
+        ParentWindowHandle,
+        MoreMenuHandle);
+    return winrt::detach_abi(Window);
 }

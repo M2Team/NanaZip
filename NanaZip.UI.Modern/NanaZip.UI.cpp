@@ -169,6 +169,7 @@ void NanaZip::UI::SpecialCommandHandler()
 
     if (AcquireSponsorEdition)
     {
+        ::MileXamlThreadInitialize();
         ::ExitProcess(::K7ModernShowSponsorDialog(nullptr));
     }
 }

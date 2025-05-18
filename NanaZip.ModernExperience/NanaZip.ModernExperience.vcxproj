@@ -70,6 +70,9 @@
     <Page Include="AboutPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MainWindowToolBarPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">
@@ -81,6 +84,10 @@
     </Midl>
         <Midl Include="AboutPage.idl">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="MainWindowToolBarPage.idl">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
   </ItemGroup>
@@ -98,6 +105,10 @@
       <DependentUpon>AboutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="MainWindowToolBarPage.h">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -113,6 +124,10 @@
       <DependentUpon>AboutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="MainWindowToolBarPage.cpp">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">
@@ -126,13 +141,21 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="Strings\de\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\de\SponsorPage.resw" />
+    <PRIResource Include="Strings\el\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\el\SponsorPage.resw" />
+    <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\en\SponsorPage.resw" />
+    <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\hu\SponsorPage.resw" />
+    <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\pl\SponsorPage.resw" />
+    <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\pt-BR\SponsorPage.resw" />
+    <PRIResource Include="Strings\sq\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\sq\SponsorPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\zh-Hans\SponsorPage.resw" />
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />

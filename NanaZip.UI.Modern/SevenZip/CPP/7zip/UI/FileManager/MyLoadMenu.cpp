@@ -17,6 +17,9 @@
 
 #include "resource.h"
 
+#include <NanaZip.ModernExperience.h>
+extern CCodecs* g_CodecsObj;
+
 using namespace NWindows;
 
 static const UINT kOpenBookmarkMenuID = 830;
@@ -770,6 +773,16 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     case IDM_BENCHMARK: MyBenchmark(false); break;
     case IDM_BENCHMARK2: MyBenchmark(true); break;
 
+    case IDM_ABOUT:
+    {
+        UString ExtendedMessage;
+        if (g_CodecsObj)
+        {
+            g_CodecsObj->GetCodecsErrorMessage(ExtendedMessage);
+        }
+        ::K7ModernShowAboutDialog(hWnd, ExtendedMessage);
+        break;
+    }
     default:
     {
       if (id >= kOpenBookmarkMenuID && id <= kOpenBookmarkMenuID + 9)

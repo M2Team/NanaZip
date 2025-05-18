@@ -1,9 +1,9 @@
 ﻿<Page
-  x:Class="NanaZip.Modern.MainWindowToolBarPage"
+  x:Class="NanaZip.ModernExperience.MainWindowToolBarPage"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="using:NanaZip.Modern"
+  xmlns:local="using:NanaZip.ModernExperience"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   IsTextScaleFactorEnabled="False"
   Loaded="PageLoaded"
@@ -106,7 +106,7 @@
           ToolTipService.ToolTip="[About]" />
         <AppBarSeparator />
         <AppBarButton
-          x:Uid="/MainWindowToolBarPage/MoreButton"
+          x:Uid="/NanaZip.ModernExperience/MainWindowToolBarPage/MoreButton"
           Width="48"
           AutomationProperties.Name="[More]"
           Click="MoreButtonClick"

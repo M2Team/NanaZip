@@ -156,11 +156,6 @@ namespace
 EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
     _In_opt_ HWND ParentWindowHandle)
 {
-    if (FAILED(::MileXamlThreadInitialize()))
-    {
-        return -1;
-    }
-
     HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
     if (!WindowHandle)
     {
@@ -181,8 +176,6 @@ EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
         winrt::detach_abi(Window),
         ParentWindowHandle);
 
-    ::MileXamlThreadUninitialize();
-
     return Result;
 }
 
@@ -190,11 +183,6 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
     _In_opt_ HWND ParentWindowHandle,
     _In_opt_ LPCWSTR ExtendedMessage)
 {
-    if (FAILED(::MileXamlThreadInitialize()))
-    {
-        return -1;
-    }
-
     HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
     if (!WindowHandle)
     {
@@ -216,8 +204,6 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
         320,
         winrt::detach_abi(Window),
         ParentWindowHandle);
-
-    ::MileXamlThreadUninitialize();
 
     return Result;
 }
