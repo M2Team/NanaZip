@@ -143,12 +143,4 @@
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
-
-  <!--
-  XamlAddCppWinRTMergedWinmd
-
-  This target is overriden to prevent the XAML compiler from enabling
-  hybrid C++/WinRT and C++/CX support, due to a bug in the check.
-  -->
-  <Target Name="XamlAddCppWinRTMergedWinmd" AfterTargets="CppWinRTMergeProjectWinMDInputs" />
 </Project>

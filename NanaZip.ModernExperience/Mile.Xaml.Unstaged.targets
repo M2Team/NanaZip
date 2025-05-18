@@ -28,4 +28,12 @@
       </PackagingOutputs>
     </ItemGroup>
   </Target>
+
+  <!--
+  XamlAddCppWinRTMergedWinmd
+
+  This target is overriden to prevent the XAML compiler from enabling
+  hybrid C++/WinRT and C++/CX support, due to a bug in the check.
+  -->
+  <Target Name="XamlAddCppWinRTMergedWinmd" AfterTargets="CppWinRTMergeProjectWinMDInputs" />
 </Project>
