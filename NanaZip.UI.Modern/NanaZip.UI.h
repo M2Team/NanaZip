@@ -11,15 +11,8 @@
 #ifndef NANAZIP_UI
 #define NANAZIP_UI
 
-#include "pch.h"
-
 #include <Mile.Helpers.CppBase.h>
 #include <Mile.Helpers.CppWinRT.h>
-
-namespace winrt::Mile
-{
-    using namespace ::Mile;
-}
 
 namespace NanaZip::UI
 {
@@ -27,11 +20,6 @@ namespace NanaZip::UI
         _In_ HWND ParentWindowHandle);
 
     void SpecialCommandHandler();
-}
-
-namespace winrt::NanaZip
-{
-    using namespace ::NanaZip;
 }
 
 #endif // !NANAZIP_UI

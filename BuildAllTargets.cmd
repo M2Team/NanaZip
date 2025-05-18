@@ -18,6 +18,6 @@ popd
 call "%VisualStudioInstallDir%\VC\Auxiliary\Build\vcvarsall.bat" x86
 
 rem Build all targets
-MSBuild -binaryLogger:Output\BuildAllTargets.binlog -m BuildAllTargets.proj
+MSBuild -binaryLogger:Output\BuildAllTargets.binlog BuildAllTargets.proj
 
 @endlocal

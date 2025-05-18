@@ -518,7 +518,6 @@
     <ClCompile Include="SevenZip\CPP\Common\DynLimBuf.cpp">
       <Filter>SevenZip\Common</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="NanaZip.UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -1038,7 +1037,6 @@
     <ClInclude Include="SevenZip\CPP\Common\DynLimBuf.h">
       <Filter>SevenZip\Common</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h" />
     <ClInclude Include="NanaZip.UI.h" />
   </ItemGroup>
   <ItemGroup>
