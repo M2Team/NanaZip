@@ -573,6 +573,8 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result)
 
 void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, bool addToList)
 {
+  UNREFERENCED_PARAMETER(iconIndex);
+  UNREFERENCED_PARAMETER(indent);
   #ifdef UNDER_CE
 
   UString s;
@@ -583,15 +585,17 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   
   #else
   
-  COMBOBOXEXITEMW item;
-  item.mask = CBEIF_TEXT | CBEIF_INDENT;
-  item.iSelectedImage = item.iImage = iconIndex;
-  if (iconIndex >= 0)
-    item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
-  item.iItem = -1;
-  item.iIndent = indent;
-  item.pszText = name.Ptr_non_const();
+  // COMBOBOXEXITEMW item;
+  // item.mask = CBEIF_TEXT | CBEIF_INDENT;
+  // item.iSelectedImage = item.iImage = iconIndex;
+  // if (iconIndex >= 0)
+    // item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
+  // item.iItem = -1;
+  // item.iIndent = indent;
+  // item.pszText = name.Ptr_non_const();
   // _headerComboBox.InsertItem(&item);
+
+  _items.Append(name.Ptr());
   
   #endif
 
@@ -608,8 +612,8 @@ void CPanel::OnDropDownOpened(
     winrt::Windows::Foundation::IInspectable const&
 )
 {
-    _items.Clear();
     ComboBoxPaths.Clear();
+    _items.Clear();
 
     unsigned i;
     UStringVector pathParts;
@@ -627,10 +631,32 @@ void CPanel::OnDropDownOpened(
         DWORD attrib = FILE_ATTRIBUTE_DIRECTORY;
         if (info.Find(us2fs(sumPass)))
             attrib = info.Attrib;
-        // AddComboBoxItem(name.IsEmpty() ? UString(L"\\") : name, GetRealIconIndex(us2fs(sumPass), attrib), i, false);
-        _items.Append(name.IsEmpty() ? L"\\" : name.Ptr());
+        AddComboBoxItem(name.IsEmpty() ? UString(L"\\") : name, GetRealIconIndex(us2fs(sumPass), attrib), i, false);
         ComboBoxPaths.Add(sumPass);
     }
+
+    int iconIndex;
+    UString name;
+    name = RootFolder_GetName_Documents(iconIndex);
+    AddComboBoxItem(name, iconIndex, 0, true);
+
+    name = RootFolder_GetName_Computer(iconIndex);
+    AddComboBoxItem(name, iconIndex, 0, true);
+
+    FStringVector driveStrings;
+    MyGetLogicalDriveStrings(driveStrings);
+    for (i = 0; i < driveStrings.Size(); i++)
+    {
+        FString s = driveStrings[i];
+        ComboBoxPaths.Add(fs2us(s));
+        int iconIndex2 = GetRealIconIndex(s, 0);
+        if (s.Len() > 0 && s.Back() == FCHAR_PATH_SEPARATOR)
+            s.DeleteBack();
+        AddComboBoxItem(fs2us(s), iconIndex2, 1, false);
+    }
+
+    name = RootFolder_GetName_Network(iconIndex);
+    AddComboBoxItem(name, iconIndex, 0, true);
 }
 
 bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
