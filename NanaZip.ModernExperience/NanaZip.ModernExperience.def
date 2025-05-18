@@ -2,7 +2,5 @@
 
 EXPORTS
 
-K7ModernCreateSponsorPage
-K7ModernCreateAboutPage
-
-NanaZipModernExperienceTestFunction
+K7ModernShowSponsorDialog
+K7ModernShowAboutDialog

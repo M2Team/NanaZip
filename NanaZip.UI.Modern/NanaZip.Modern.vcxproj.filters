@@ -1078,7 +1078,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="AboutPage.xaml" />
     <Page Include="MainWindowToolBarPage.xaml" />
   </ItemGroup>
   <ItemGroup>

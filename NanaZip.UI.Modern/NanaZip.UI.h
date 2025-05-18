@@ -23,23 +23,6 @@ namespace winrt::Mile
 
 namespace NanaZip::UI
 {
-    HWND CreateXamlDialog(
-        _In_opt_ HWND ParentWindowHandle);
-
-    int ShowXamlWindow(
-        _In_opt_ HWND WindowHandle,
-        _In_ int Width,
-        _In_ int Height,
-        _In_ LPVOID Content,
-        _In_ HWND ParentWindowHandle);
-
-    int ShowXamlDialog(
-        _In_opt_ HWND WindowHandle,
-        _In_ int Width,
-        _In_ int Height,
-        _In_ LPVOID Content,
-        _In_ HWND ParentWindowHandle);
-
     winrt::handle ShowAboutDialog(
         _In_ HWND ParentWindowHandle);
 
