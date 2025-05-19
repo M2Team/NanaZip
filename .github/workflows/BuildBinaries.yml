@@ -36,6 +36,7 @@ jobs:
         path: Output/NanaZip.ExtensionPackage_*.exe
     - name: Upload MSBuild Build Process Binary Log
       uses: actions/upload-artifact@v4
+      if: '!cancelled()'
       with:
         name: NanaZip_Mainline_BuildBinaryLog
         path: Output/BuildAllTargets.binlog
