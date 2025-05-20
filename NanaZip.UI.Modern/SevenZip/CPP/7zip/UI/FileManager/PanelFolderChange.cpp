@@ -12,7 +12,6 @@
 #include "../../PropID.h"
 
 #undef GetCurrentTime
-#include <winrt/NanaZip.Modern.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Media.Imaging.h>
 #include <winrt/Windows.Storage.Streams.h>
