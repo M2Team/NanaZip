@@ -503,10 +503,9 @@ LRESULT CPanel::OnNotifyComboBoxEnter(const UString &s)
 }
 
 void CPanel::OnAddressBarQuerySubmitted(
-    winrt::NanaZip::ModernExperience::AddressBar const& addressBar,
+    winrt::NanaZip::ModernExperience::AddressBar const&,
     winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const& queryArgs)
 {
-    UNREFERENCED_PARAMETER(addressBar);
     OnNotifyComboBoxEnter(queryArgs.QueryText().c_str());
 }
 

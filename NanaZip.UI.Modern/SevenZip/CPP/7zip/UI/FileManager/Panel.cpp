@@ -467,6 +467,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       [this](auto&&, auto&&)
       {
           this->OpenParentFolder();
+          this->SetFocusToList();
       });
 
   _addressBarControl.QuerySubmitted({ this, &CPanel::OnAddressBarQuerySubmitted });
