@@ -27,7 +27,6 @@
         String QueryText{ get; };
     }
 
-    [bindable]
     runtimeclass AddressBarItem
     {
         AddressBarItem();
