@@ -35,6 +35,7 @@
 
 #include <Mile.Xaml.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
+#include <winrt/Windows.UI.Xaml.Input.h>
 
 using namespace NWindows;
 using namespace NControl;
@@ -485,6 +486,22 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   _addressBarControl.ItemsSource(_items);
   _addressBarControl.DropDownOpened({ this, &CPanel::OnDropDownOpened });
   _addressBarControl.ItemClick({ this, &CPanel::OnDropDownItemClick });
+
+  _addressBarControl.KeyUp(
+      [&]
+      (
+          auto&&,
+          winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs
+          const& args
+      )
+      {
+          if (args.Key() == winrt::Windows::System::VirtualKey::Escape)
+          {
+              _addressBarControl.Text(_currentFolderPrefix.Ptr());
+              PostMsg(kSetFocusToListView);
+          }
+      }
+  );
 
   //#ifndef UNDER_CE
   //if (g_ComCtl32Version >= MAKELONG(71, 4))
