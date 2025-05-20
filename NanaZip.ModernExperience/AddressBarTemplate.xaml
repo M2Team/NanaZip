@@ -1,9 +1,24 @@
 ﻿<ResourceDictionary
+  x:Class="NanaZip.ModernExperience.AddressBarTemplate"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:local="using:NanaZip.ModernExperience">
 
   <Thickness x:Key="AddressBarImageIconMargin">8,4,0,4</Thickness>
+
+  <DataTemplate x:Key="DefaultAddressBarItemTemplate" x:DataType="local:AddressBarItem">
+    <StackPanel
+      Margin="{x:Bind Padding}"
+      Orientation="Horizontal"
+      Spacing="4">
+      <Image
+        Width="16"
+        Height="16"
+        VerticalAlignment="Center"
+        Source="{x:Bind Icon}" />
+      <TextBlock VerticalAlignment="Center" Text="{x:Bind Text}" />
+    </StackPanel>
+  </DataTemplate>
 
   <Style x:Key="DefaultAddressBarTextBoxStyle" TargetType="TextBox">
     <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextControlSelectionHighlightColor}" />
@@ -286,6 +301,7 @@
                   BorderThickness="{StaticResource FlyoutBorderThemeThickness}"
                   CornerRadius="{StaticResource OverlayCornerRadius}"
                   IsItemClickEnabled="True"
+                  ItemTemplate="{StaticResource DefaultAddressBarItemTemplate}"
                   SelectionMode="None"
                   Translation="0,0,32">
                   <ListView.Shadow>

@@ -3,8 +3,10 @@
 #ifndef __PANEL_H
 #define __PANEL_H
 
-#include "../../../../../pch.h"
+#undef GetCurrentTime
+
 #include <winrt/NanaZip.ModernExperience.h>
+#include <winrt/Windows.Foundation.Collections.h>
 
 #include "../../../Common/MyWindows.h"
 
@@ -401,7 +403,7 @@ public:
   bool _lastFocusedIsList;
   // NWindows::NControl::CStatusBar _statusBar2;
   winrt::Windows::Foundation::Collections::IObservableVector<
-      winrt::hstring>
+      winrt::NanaZip::ModernExperience::AddressBarItem>
       _items{ nullptr };
 
   HWND _addressBarWindow{ nullptr };

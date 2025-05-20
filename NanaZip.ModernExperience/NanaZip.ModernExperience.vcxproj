@@ -74,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
+    <Midl Include="AddressBarTemplate.idl">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
@@ -81,7 +84,7 @@
       <DependentUpon>SponsorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
-        <Midl Include="AboutPage.idl">
+    <Midl Include="AboutPage.idl">
       <DependentUpon>AboutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
@@ -93,6 +96,9 @@
   <ItemGroup>
     <ClInclude Include="AddressBar.h">
       <DependentUpon>AddressBar.idl</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="AddressBarTemplate.h">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="NanaZip.ModernExperience.h" />
     <ClInclude Include="pch.h" />
@@ -113,6 +119,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddressBarTemplate.cpp">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="App.cpp">
@@ -166,7 +175,6 @@
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
-
   <!--
   XamlAddCppWinRTMergedWinmd
 

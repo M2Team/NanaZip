@@ -11,7 +11,7 @@
 
 #include "../../PropID.h"
 
-#include "../../../../../pch.h"
+#undef GetCurrentTime
 #include <winrt/NanaZip.Modern.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Media.Imaging.h>
@@ -595,7 +595,15 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   // item.pszText = name.Ptr_non_const();
   // _headerComboBox.InsertItem(&item);
 
-  _items.Append(name.Ptr());
+  winrt::NanaZip::ModernExperience::AddressBarItem item;
+  item.Text(name.Ptr());
+  item.Padding({ indent * 16.0, 0, 0, 0 });
+
+  HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
+  item.Icon(ConvertIconToWritableBitmap(icon));
+  DestroyIcon(icon);
+
+  _items.Append(item);
   
   #endif
 

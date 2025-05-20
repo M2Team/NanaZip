@@ -478,7 +478,9 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       }
   );
 
-  _items = winrt::single_threaded_observable_vector<winrt::hstring>();
+  _items =
+      winrt::single_threaded_observable_vector<
+      winrt::NanaZip::ModernExperience::AddressBarItem>();
   _addressBarControl.ItemsSource(_items);
   _addressBarControl.DropDownOpened({ this, &CPanel::OnDropDownOpened });
 

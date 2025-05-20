@@ -1,6 +1,5 @@
 ﻿namespace NanaZip.ModernExperience
 {
-    [default_interface]
     runtimeclass AddressBar : Windows.UI.Xaml.Controls.Control
     {
         AddressBar();
@@ -26,5 +25,21 @@
     {
         Object ChosenSuggestion{ get; };
         String QueryText{ get; };
+    }
+
+    [bindable]
+    runtimeclass AddressBarItem
+    {
+        AddressBarItem();
+
+        String Text;
+        Windows.UI.Xaml.Media.ImageSource Icon;
+        Windows.UI.Xaml.Thickness Padding;
+    }
+
+    [default_interface]
+    runtimeclass AddressBarTemplate : Windows.UI.Xaml.ResourceDictionary
+    {
+        AddressBarTemplate();
     }
 }

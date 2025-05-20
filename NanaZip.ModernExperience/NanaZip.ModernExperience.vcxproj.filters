@@ -24,7 +24,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="SponsorPage.xaml" />
-    <Page Include="AddressBarTemplate.xaml" />
+    <Page Include="AddressBar.xaml" />
+    <Page Include="AboutPage.xaml" />
+    <Page Include="MainWindowToolBarPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">

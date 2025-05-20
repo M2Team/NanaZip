@@ -2,6 +2,7 @@
 
 #include "AddressBar.g.h"
 #include "AddressBarQuerySubmittedEventArgs.g.h"
+#include "AddressBarItem.g.h"
 
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Input.h>
@@ -105,6 +106,25 @@ namespace winrt::NanaZip::ModernExperience::implementation
             m_dropDownOpenedEvent;
     };
 
+    struct AddressBarItem : AddressBarItemT<AddressBarItem>
+    {
+        AddressBarItem() = default;
+
+        winrt::hstring Text();
+        void Text(winrt::hstring const&);
+
+        winrt::Windows::UI::Xaml::Media::ImageSource Icon();
+        void Icon(winrt::Windows::UI::Xaml::Media::ImageSource const&);
+
+        winrt::Windows::UI::Xaml::Thickness Padding();
+        void Padding(winrt::Windows::UI::Xaml::Thickness const&);
+
+    private:
+        winrt::hstring m_text;
+        winrt::Windows::UI::Xaml::Media::ImageSource m_icon{ nullptr };
+        winrt::Windows::UI::Xaml::Thickness m_padding;
+    };
+
     struct AddressBarQuerySubmittedEventArgs : AddressBarQuerySubmittedEventArgsT<AddressBarQuerySubmittedEventArgs>
     {
         AddressBarQuerySubmittedEventArgs(
@@ -123,5 +143,8 @@ namespace winrt::NanaZip::ModernExperience::implementation
 namespace winrt::NanaZip::ModernExperience::factory_implementation
 {
     struct AddressBar : AddressBarT<AddressBar, implementation::AddressBar>
+    { };
+
+    struct AddressBarItem : AddressBarItemT<AddressBarItem, implementation::AddressBarItem>
     { };
 }

@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "AddressBar.h"
 #include "AddressBar.g.cpp"
+#include "AddressBarItem.g.cpp"
 #include "AddressBarQuerySubmittedEventArgs.g.cpp"
 
 #include <winrt/Windows.System.h>
@@ -462,6 +463,36 @@ void AddressBar::OpenSuggestionsPopup(
 
     m_popup.IsOpen(true);
     m_textBoxElement.Focus(winrt::Windows::UI::Xaml::FocusState::Programmatic);
+}
+
+winrt::hstring AddressBarItem::Text()
+{
+    return m_text;
+}
+
+void AddressBarItem::Text(winrt::hstring const& text)
+{
+    m_text = text;
+}
+
+winrt::Windows::UI::Xaml::Media::ImageSource AddressBarItem::Icon()
+{
+    return m_icon;
+}
+
+void AddressBarItem::Icon(winrt::Windows::UI::Xaml::Media::ImageSource const& icon)
+{
+    m_icon = icon;
+}
+
+winrt::Windows::UI::Xaml::Thickness AddressBarItem::Padding()
+{
+    return m_padding;
+}
+
+void AddressBarItem::Padding(winrt::Windows::UI::Xaml::Thickness const& padding)
+{
+    m_padding = padding;
 }
 
 AddressBarQuerySubmittedEventArgs::

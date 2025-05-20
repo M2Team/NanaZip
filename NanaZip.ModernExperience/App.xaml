@@ -7,7 +7,7 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Mile.Xaml.Styles.SunValley.xbf" />
-        <ResourceDictionary Source="ms-appx:///NanaZip.ModernExperience/AddressBarTemplate.xaml" />
+        <local:AddressBarTemplate />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
