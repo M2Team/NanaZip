@@ -19,6 +19,7 @@
         event Windows.Foundation.TypedEventHandler<AddressBar, AddressBarQuerySubmittedEventArgs> QuerySubmitted;
         event Windows.UI.Xaml.RoutedEventHandler UpButtonClicked;
         event Windows.Foundation.TypedEventHandler<AddressBar, Object> DropDownOpened;
+        event Windows.Foundation.TypedEventHandler<AddressBar, Windows.UI.Xaml.Controls.ItemClickEventArgs> ItemClick;
     }
 
     runtimeclass AddressBarQuerySubmittedEventArgs : Windows.UI.Xaml.DependencyObject

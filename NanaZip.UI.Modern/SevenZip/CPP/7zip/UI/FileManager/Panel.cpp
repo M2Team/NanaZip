@@ -484,6 +484,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       winrt::NanaZip::ModernExperience::AddressBarItem>();
   _addressBarControl.ItemsSource(_items);
   _addressBarControl.DropDownOpened({ this, &CPanel::OnDropDownOpened });
+  _addressBarControl.ItemClick({ this, &CPanel::OnDropDownItemClick });
 
   //#ifndef UNDER_CE
   //if (g_ComCtl32Version >= MAKELONG(71, 4))

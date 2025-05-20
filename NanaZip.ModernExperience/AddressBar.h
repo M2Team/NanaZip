@@ -58,6 +58,14 @@ namespace winrt::NanaZip::ModernExperience::implementation
         );
         void DropDownOpened(winrt::event_token const& token) noexcept;
 
+        winrt::event_token ItemClick(
+            winrt::Windows::Foundation::TypedEventHandler<
+            winrt::NanaZip::ModernExperience::AddressBar,
+            winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs>
+            const&
+        );
+        void ItemClick(winrt::event_token const& token) noexcept;
+
     private:
         void OpenSuggestionsPopup(bool isKeyboard);
 
@@ -104,6 +112,12 @@ namespace winrt::NanaZip::ModernExperience::implementation
             winrt::NanaZip::ModernExperience::AddressBar,
             winrt::Windows::Foundation::IInspectable>>
             m_dropDownOpenedEvent;
+
+        winrt::event<
+            winrt::Windows::Foundation::TypedEventHandler<
+            winrt::NanaZip::ModernExperience::AddressBar,
+            winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs>>
+            m_itemClickEvent;
     };
 
     struct AddressBarItem : AddressBarItemT<AddressBarItem>
@@ -122,7 +136,7 @@ namespace winrt::NanaZip::ModernExperience::implementation
     private:
         winrt::hstring m_text;
         winrt::Windows::UI::Xaml::Media::ImageSource m_icon{ nullptr };
-        winrt::Windows::UI::Xaml::Thickness m_padding;
+        winrt::Windows::UI::Xaml::Thickness m_padding = { 0, 0, 0, 0 };
     };
 
     struct AddressBarQuerySubmittedEventArgs : AddressBarQuerySubmittedEventArgsT<AddressBarQuerySubmittedEventArgs>

@@ -302,7 +302,6 @@
                   CornerRadius="{StaticResource OverlayCornerRadius}"
                   IsItemClickEnabled="True"
                   ItemTemplate="{StaticResource DefaultAddressBarItemTemplate}"
-                  SelectionMode="None"
                   Translation="0,0,32">
                   <ListView.Shadow>
                     <ThemeShadow />

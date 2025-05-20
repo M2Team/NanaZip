@@ -98,10 +98,10 @@ void AddressBar::OnApplyTemplate()
         [weak_this{ get_weak() }]
         (auto&&, winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs const& args)
         {
-            UNREFERENCED_PARAMETER(args);
             if (auto strong_this{ weak_this.get() })
             {
                 strong_this->m_popup.IsOpen(false);
+                strong_this->m_itemClickEvent(*strong_this, args);
             }
         }
     );
@@ -427,6 +427,21 @@ void AddressBar::DropDownOpened(
 ) noexcept
 {
     m_dropDownOpenedEvent.remove(token);
+}
+
+winrt::event_token AddressBar::ItemClick(
+    winrt::Windows::Foundation::TypedEventHandler<
+    winrt::NanaZip::ModernExperience::AddressBar,
+    winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs>
+    const& handler
+)
+{
+    return m_itemClickEvent.add(handler);
+}
+
+void AddressBar::ItemClick(winrt::event_token const& token) noexcept
+{
+    m_itemClickEvent.remove(token);
 }
 
 void AddressBar::OpenSuggestionsPopup(

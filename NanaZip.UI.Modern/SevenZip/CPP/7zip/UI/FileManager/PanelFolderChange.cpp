@@ -12,6 +12,7 @@
 #include "../../PropID.h"
 
 #undef GetCurrentTime
+#include <winrt/Windows.UI.Xaml.Controls.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Media.Imaging.h>
 #include <winrt/Windows.Storage.Streams.h>
@@ -663,6 +664,22 @@ void CPanel::OnDropDownOpened(
 
     name = RootFolder_GetName_Network(iconIndex);
     AddComboBoxItem(name, iconIndex, 0, true);
+}
+
+void CPanel::OnDropDownItemClick(
+    winrt::NanaZip::ModernExperience::AddressBar const&,
+    winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs const& args
+)
+{
+    unsigned int index;
+    _items.IndexOf(
+        args.ClickedItem().as<winrt::NanaZip::ModernExperience::AddressBarItem>(),
+        index);
+    UString pass = ComboBoxPaths[index];
+    if (BindToPathAndRefresh(pass) == S_OK)
+    {
+        PostMsg(kSetFocusToListView);
+    }
 }
 
 bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
