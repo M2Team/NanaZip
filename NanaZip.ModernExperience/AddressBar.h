@@ -14,7 +14,9 @@ namespace winrt::NanaZip::ModernExperience::implementation
         AddressBar() = default;
 
         void OnApplyTemplate();
-        void OnKeyUp(winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const&);
+        void OnTextBoxPreviewKeyDown(
+            winrt::Windows::Foundation::IInspectable const&,
+            winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const&);
 
         winrt::hstring Text();
         void Text(winrt::hstring const&);
@@ -61,13 +63,13 @@ namespace winrt::NanaZip::ModernExperience::implementation
         winrt::event_token ItemClick(
             winrt::Windows::Foundation::TypedEventHandler<
             winrt::NanaZip::ModernExperience::AddressBar,
-            winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs>
+            winrt::NanaZip::ModernExperience::AddressBarItem>
             const&
         );
         void ItemClick(winrt::event_token const& token) noexcept;
 
     private:
-        void OpenSuggestionsPopup(bool isKeyboard);
+        bool OpenSuggestionsPopup(bool isKeyboard);
 
         static void OnTextChanged(
             winrt::Windows::Foundation::IInspectable const&,
@@ -116,7 +118,7 @@ namespace winrt::NanaZip::ModernExperience::implementation
         winrt::event<
             winrt::Windows::Foundation::TypedEventHandler<
             winrt::NanaZip::ModernExperience::AddressBar,
-            winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs>>
+            winrt::NanaZip::ModernExperience::AddressBarItem>>
             m_itemClickEvent;
     };
 

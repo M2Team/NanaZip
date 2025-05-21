@@ -318,7 +318,7 @@ class CPanel: public NWindows::NControl::CWindow2
 
   void OnDropDownItemClick(
       winrt::NanaZip::ModernExperience::AddressBar const&,
-      winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs const&
+      winrt::NanaZip::ModernExperience::AddressBarItem const&
   );
 
   #ifndef UNDER_CE

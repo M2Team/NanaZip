@@ -668,13 +668,11 @@ void CPanel::OnDropDownOpened(
 
 void CPanel::OnDropDownItemClick(
     winrt::NanaZip::ModernExperience::AddressBar const&,
-    winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs const& args
+    winrt::NanaZip::ModernExperience::AddressBarItem const& item
 )
 {
     unsigned int index;
-    _items.IndexOf(
-        args.ClickedItem().as<winrt::NanaZip::ModernExperience::AddressBarItem>(),
-        index);
+    _items.IndexOf(item, index);
     UString pass = ComboBoxPaths[index];
     if (BindToPathAndRefresh(pass) == S_OK)
     {
