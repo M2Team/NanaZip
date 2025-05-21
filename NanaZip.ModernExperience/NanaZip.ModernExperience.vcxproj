@@ -55,15 +55,13 @@
     <None Include="NanaZip.ModernExperience.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NanaZip.ModernExperience.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Manifest Include="NanaZip.ModernExperience.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddressBarTemplate.xaml" />
     <Page Include="SponsorPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -75,6 +73,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Midl Include="AddressBar.idl" />
+    <Midl Include="AddressBarTemplate.idl">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
@@ -82,7 +84,7 @@
       <DependentUpon>SponsorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
-        <Midl Include="AboutPage.idl">
+    <Midl Include="AboutPage.idl">
       <DependentUpon>AboutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
@@ -92,6 +94,12 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddressBar.h">
+      <DependentUpon>AddressBar.idl</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="AddressBarTemplate.h">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="NanaZip.ModernExperience.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
@@ -111,6 +119,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddressBarTemplate.cpp">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="App.cpp">
@@ -128,6 +139,10 @@
       <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="AddressBar.cpp">
+      <DependentUpon>AddressBar.idl</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="NanaZip.ModernExperience.cpp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">
@@ -160,4 +175,11 @@
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <!--
+  XamlAddCppWinRTMergedWinmd
+
+  This target is overriden to prevent the XAML compiler from enabling
+  hybrid C++/WinRT and C++/CX support, due to a bug in the check.
+  -->
+  <Target Name="XamlAddCppWinRTMergedWinmd" AfterTargets="CppWinRTMergeProjectWinMDInputs" />
 </Project>

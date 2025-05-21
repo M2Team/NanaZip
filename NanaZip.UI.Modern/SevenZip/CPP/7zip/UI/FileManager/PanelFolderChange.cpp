@@ -11,6 +11,13 @@
 
 #include "../../PropID.h"
 
+#undef GetCurrentTime
+#include <winrt/Windows.UI.Xaml.Controls.h>
+#include <winrt/Windows.UI.Xaml.Media.h>
+#include <winrt/Windows.UI.Xaml.Media.Imaging.h>
+#include <winrt/Windows.Storage.Streams.h>
+#include <robuffer.h>
+
 #ifdef UNDER_CE
 #include "FSFolder.h"
 #else
@@ -346,12 +353,96 @@ static int GetRealIconIndex(CFSTR path, DWORD attributes)
   return -1;
 }
 
+static winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap ConvertIconToWritableBitmap(HICON hIcon)
+{
+    ICONINFO iconInfo = { 0 };
+    GetIconInfo(hIcon, &iconInfo);
+
+    // Get the screen DC
+    HDC dc = GetDC(NULL);
+
+    // Get icon size info
+    BITMAP bm = { 0 };
+    GetObject(iconInfo.hbmColor, sizeof(BITMAP), &bm);
+
+    // Set up BITMAPINFO
+    BITMAPINFO bmi = { 0 };
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = bm.bmWidth;
+    bmi.bmiHeader.biHeight = -bm.bmHeight;
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = 32;
+    bmi.bmiHeader.biCompression = BI_RGB;
+
+    // Extract the color bitmap
+    int nBits = bm.bmWidth * bm.bmHeight;
+    std::unique_ptr<int32_t[]> colorBits(new int32_t[nBits]);
+    GetDIBits(
+        dc,
+        iconInfo.hbmColor,
+        0,
+        bm.bmHeight,
+        colorBits.get(),
+        &bmi,
+        DIB_RGB_COLORS);
+
+    // If no alpha values available, apply the mask bitmap
+    if (!std::any_of(colorBits.get(), colorBits.get() + nBits,
+        [](int32_t c) { return (c & 0xff000000) != 0; }))
+    {
+        // Extract the mask bitmap
+        std::unique_ptr<int32_t[]> maskBits(new int32_t[nBits]);
+        GetDIBits(
+            dc,
+            iconInfo.hbmMask,
+            0,
+            bm.bmHeight,
+            maskBits.get(),
+            &bmi,
+            DIB_RGB_COLORS);
+        // Copy the mask alphas into the color bits
+        for (int i = 0; i < nBits; ++i) {
+            if (maskBits[colorBits[i]] == 0) {
+                colorBits[i] |= 0xff000000;
+            }
+        }
+    }
+
+    // Release DC and GDI bitmaps
+    ReleaseDC(NULL, dc);
+    DeleteObject(iconInfo.hbmColor);
+    DeleteObject(iconInfo.hbmMask);
+
+    winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap wb =
+        winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap(
+            bm.bmWidth,
+            bm.bmHeight);
+
+    winrt::com_ptr<::Windows::Storage::Streams::IBufferByteAccess> bufferAccess =
+        wb.PixelBuffer()
+        .as<::Windows::Storage::Streams::IBufferByteAccess>();
+
+    byte* pBuffer;
+    bufferAccess->Buffer(&pBuffer);
+
+    for (int i = 0; i < nBits; ++i)
+    {
+        int32_t color = colorBits[i];
+        *pBuffer++ = color & 0xff;
+        *pBuffer++ = (color >> 8) & 0xff;
+        *pBuffer++ = (color >> 16) & 0xff;
+        *pBuffer++ = (color >> 24) & 0xff;
+    }
+
+    return wb;
+}
+
 void CPanel::LoadFullPathAndShow()
 {
   LoadFullPath();
   _appState->FolderHistory.AddString(_currentFolderPrefix);
 
-  _headerComboBox.SetText(_currentFolderPrefix);
+  _addressBarControl.Text(_currentFolderPrefix.Ptr());
 
   #ifndef UNDER_CE
 
@@ -379,15 +470,22 @@ void CPanel::LoadFullPathAndShow()
     if (fi.Find(us2fs(path)))
       attrib = fi.Attrib;
   }
-  item.iImage = GetRealIconIndex(us2fs(path), attrib);
+  //item.iImage = GetRealIconIndex(us2fs(path), attrib);
 
-  if (item.iImage >= 0)
-  {
-    item.iSelectedImage = item.iImage;
-    item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
-  }
-  item.iItem = -1;
-  _headerComboBox.SetItem(&item);
+  //if (item.iImage >= 0)
+  //{
+  //  item.iSelectedImage = item.iImage;
+  //  item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
+  //}
+  //item.iItem = -1;
+  // _headerComboBox.SetItem(&item);
+  
+  int iconIndex = GetRealIconIndex(us2fs(path), attrib);
+  HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
+  winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap bitmap =
+      ConvertIconToWritableBitmap(icon);
+  _addressBarControl.IconSource(bitmap);
+  DestroyIcon(icon);
   
   #endif
 
@@ -405,11 +503,34 @@ LRESULT CPanel::OnNotifyComboBoxEnter(const UString &s)
   return FALSE;
 }
 
+void CPanel::OnAddressBarQuerySubmitted(
+    winrt::NanaZip::ModernExperience::AddressBar const&,
+    winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const& queryArgs)
+{
+    winrt::Windows::Foundation::IInspectable chosenSuggestion
+        = queryArgs.ChosenSuggestion();
+
+    if (chosenSuggestion)
+    {
+        winrt::NanaZip::ModernExperience::AddressBarItem item
+            = chosenSuggestion.as<winrt::NanaZip::ModernExperience::AddressBarItem>();
+        unsigned int index;
+        _items.IndexOf(item, index);
+        UString pass = ComboBoxPaths[index];
+        if (BindToPathAndRefresh(pass) == S_OK)
+        {
+            PostMsg(kSetFocusToListView);
+        }
+    }
+    else
+        OnNotifyComboBoxEnter(queryArgs.QueryText().c_str());
+}
+
 bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
 {
   if (info->iWhy == CBENF_ESCAPE)
   {
-    _headerComboBox.SetText(_currentFolderPrefix);
+    // _headerComboBox.SetText(_currentFolderPrefix);
     PostMsg(kSetFocusToListView);
     result = FALSE;
     return true;
@@ -427,7 +548,7 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
   {
     // When we use Edit control and press Enter.
     UString s;
-    _headerComboBox.GetText(s);
+    // _headerComboBox.GetText(s);
     result = OnNotifyComboBoxEnter(s);
     return true;
   }
@@ -467,6 +588,8 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result)
 
 void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, bool addToList)
 {
+  UNREFERENCED_PARAMETER(iconIndex);
+  UNREFERENCED_PARAMETER(indent);
   #ifdef UNDER_CE
 
   UString s;
@@ -477,15 +600,25 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   
   #else
   
-  COMBOBOXEXITEMW item;
-  item.mask = CBEIF_TEXT | CBEIF_INDENT;
-  item.iSelectedImage = item.iImage = iconIndex;
-  if (iconIndex >= 0)
-    item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
-  item.iItem = -1;
-  item.iIndent = indent;
-  item.pszText = name.Ptr_non_const();
-  _headerComboBox.InsertItem(&item);
+  // COMBOBOXEXITEMW item;
+  // item.mask = CBEIF_TEXT | CBEIF_INDENT;
+  // item.iSelectedImage = item.iImage = iconIndex;
+  // if (iconIndex >= 0)
+    // item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
+  // item.iItem = -1;
+  // item.iIndent = indent;
+  // item.pszText = name.Ptr_non_const();
+  // _headerComboBox.InsertItem(&item);
+
+  winrt::NanaZip::ModernExperience::AddressBarItem item;
+  item.Text(name.Ptr());
+  item.Padding({ indent * 16.0, 0, 0, 0 });
+
+  HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
+  item.Icon(ConvertIconToWritableBitmap(icon));
+  DestroyIcon(icon);
+
+  _items.Append(item);
   
   #endif
 
@@ -497,6 +630,58 @@ extern UString RootFolder_GetName_Computer(int &iconIndex);
 extern UString RootFolder_GetName_Network(int &iconIndex);
 extern UString RootFolder_GetName_Documents(int &iconIndex);
 
+void CPanel::OnDropDownOpened(
+    winrt::NanaZip::ModernExperience::AddressBar const&,
+    winrt::Windows::Foundation::IInspectable const&
+)
+{
+    ComboBoxPaths.Clear();
+    _items.Clear();
+
+    unsigned i;
+    UStringVector pathParts;
+
+    SplitPathToParts(_currentFolderPrefix, pathParts);
+    UString sumPass;
+    if (!pathParts.IsEmpty())
+        pathParts.DeleteBack();
+    for (i = 0; i < pathParts.Size(); i++)
+    {
+        UString name = pathParts[i];
+        sumPass += name;
+        sumPass.Add_PathSepar();
+        CFileInfo info;
+        DWORD attrib = FILE_ATTRIBUTE_DIRECTORY;
+        if (info.Find(us2fs(sumPass)))
+            attrib = info.Attrib;
+        AddComboBoxItem(name.IsEmpty() ? UString(L"\\") : name, GetRealIconIndex(us2fs(sumPass), attrib), i, false);
+        ComboBoxPaths.Add(sumPass);
+    }
+
+    int iconIndex;
+    UString name;
+    name = RootFolder_GetName_Documents(iconIndex);
+    AddComboBoxItem(name, iconIndex, 0, true);
+
+    name = RootFolder_GetName_Computer(iconIndex);
+    AddComboBoxItem(name, iconIndex, 0, true);
+
+    FStringVector driveStrings;
+    MyGetLogicalDriveStrings(driveStrings);
+    for (i = 0; i < driveStrings.Size(); i++)
+    {
+        FString s = driveStrings[i];
+        ComboBoxPaths.Add(fs2us(s));
+        int iconIndex2 = GetRealIconIndex(s, 0);
+        if (s.Len() > 0 && s.Back() == FCHAR_PATH_SEPARATOR)
+            s.DeleteBack();
+        AddComboBoxItem(fs2us(s), iconIndex2, 1, false);
+    }
+
+    name = RootFolder_GetName_Network(iconIndex);
+    AddComboBoxItem(name, iconIndex, 0, true);
+}
+
 bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
 {
   result = FALSE;
@@ -505,7 +690,7 @@ bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
     case CBN_DROPDOWN:
     {
       ComboBoxPaths.Clear();
-      _headerComboBox.ResetContent();
+      // _headerComboBox.ResetContent();
       
       unsigned i;
       UStringVector pathParts;
@@ -559,6 +744,7 @@ bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
 
     case CBN_SELENDOK:
     {
+        /*
       int index = _headerComboBox.GetCurSel();
       if (index >= 0)
       {
@@ -574,7 +760,8 @@ bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
           return true;
         }
       }
-      return false;
+      */
+      return true;
     }
     /*
     case CBN_CLOSEUP:

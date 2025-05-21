@@ -1,0 +1,8 @@
+﻿namespace NanaZip.ModernExperience
+{
+    [default_interface]
+    runtimeclass AddressBarTemplate : Windows.UI.Xaml.ResourceDictionary
+    {
+        AddressBarTemplate();
+    }
+}
