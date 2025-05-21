@@ -507,7 +507,23 @@ void CPanel::OnAddressBarQuerySubmitted(
     winrt::NanaZip::ModernExperience::AddressBar const&,
     winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const& queryArgs)
 {
-    OnNotifyComboBoxEnter(queryArgs.QueryText().c_str());
+    winrt::Windows::Foundation::IInspectable chosenSuggestion
+        = queryArgs.ChosenSuggestion();
+
+    if (chosenSuggestion)
+    {
+        winrt::NanaZip::ModernExperience::AddressBarItem item
+            = chosenSuggestion.as<winrt::NanaZip::ModernExperience::AddressBarItem>();
+        unsigned int index;
+        _items.IndexOf(item, index);
+        UString pass = ComboBoxPaths[index];
+        if (BindToPathAndRefresh(pass) == S_OK)
+        {
+            PostMsg(kSetFocusToListView);
+        }
+    }
+    else
+        OnNotifyComboBoxEnter(queryArgs.QueryText().c_str());
 }
 
 bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
@@ -664,20 +680,6 @@ void CPanel::OnDropDownOpened(
 
     name = RootFolder_GetName_Network(iconIndex);
     AddComboBoxItem(name, iconIndex, 0, true);
-}
-
-void CPanel::OnDropDownItemClick(
-    winrt::NanaZip::ModernExperience::AddressBar const&,
-    winrt::NanaZip::ModernExperience::AddressBarItem const& item
-)
-{
-    unsigned int index;
-    _items.IndexOf(item, index);
-    UString pass = ComboBoxPaths[index];
-    if (BindToPathAndRefresh(pass) == S_OK)
-    {
-        PostMsg(kSetFocusToListView);
-    }
 }
 
 bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)

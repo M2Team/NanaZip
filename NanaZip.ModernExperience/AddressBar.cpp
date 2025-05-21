@@ -106,9 +106,13 @@ void AddressBar::OnApplyTemplate()
             if (auto strong_this{ weak_this.get() })
             {
                 strong_this->m_popup.IsOpen(false);
-                strong_this->m_itemClickEvent(
+                auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(
+                    L"",
+                    args.ClickedItem()
+                );
+                strong_this->m_querySubmittedEvent(
                     *strong_this,
-                    args.ClickedItem().as<winrt::NanaZip::ModernExperience::AddressBarItem>()
+                    submitArgs
                 );
             }
         }
@@ -170,12 +174,10 @@ void AddressBar::OnTextBoxPreviewKeyDown(
                 m_suggestionsList.SelectionMode()
                 != winrt::Windows::UI::Xaml::Controls::ListViewSelectionMode::None)
             {
+                auto selectedItem = m_suggestionsList.SelectedItem();
+                auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(L"", selectedItem);
                 // The suggestions dropdown is opened via keyboard.
-                m_itemClickEvent(
-                    *this,
-                    m_suggestionsList.SelectedItem()
-                    .as<winrt::NanaZip::ModernExperience::AddressBarItem>()
-                );
+                m_querySubmittedEvent(*this, submitArgs);
             }
             else
             {
@@ -502,21 +504,6 @@ void AddressBar::DropDownOpened(
 ) noexcept
 {
     m_dropDownOpenedEvent.remove(token);
-}
-
-winrt::event_token AddressBar::ItemClick(
-    wf::TypedEventHandler<
-    winrt::NanaZip::ModernExperience::AddressBar,
-    winrt::NanaZip::ModernExperience::AddressBarItem>
-    const& handler
-)
-{
-    return m_itemClickEvent.add(handler);
-}
-
-void AddressBar::ItemClick(winrt::event_token const& token) noexcept
-{
-    m_itemClickEvent.remove(token);
 }
 
 bool AddressBar::OpenSuggestionsPopup(

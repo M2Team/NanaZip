@@ -316,11 +316,6 @@ class CPanel: public NWindows::NControl::CWindow2
       winrt::Windows::Foundation::IInspectable const&
   );
 
-  void OnDropDownItemClick(
-      winrt::NanaZip::ModernExperience::AddressBar const&,
-      winrt::NanaZip::ModernExperience::AddressBarItem const&
-  );
-
   #ifndef UNDER_CE
 
   LRESULT OnNotifyComboBoxEnter(const UString &s);

@@ -60,14 +60,6 @@ namespace winrt::NanaZip::ModernExperience::implementation
         );
         void DropDownOpened(winrt::event_token const& token) noexcept;
 
-        winrt::event_token ItemClick(
-            winrt::Windows::Foundation::TypedEventHandler<
-            winrt::NanaZip::ModernExperience::AddressBar,
-            winrt::NanaZip::ModernExperience::AddressBarItem>
-            const&
-        );
-        void ItemClick(winrt::event_token const& token) noexcept;
-
     private:
         bool OpenSuggestionsPopup(bool isKeyboard);
 
@@ -114,12 +106,6 @@ namespace winrt::NanaZip::ModernExperience::implementation
             winrt::NanaZip::ModernExperience::AddressBar,
             winrt::Windows::Foundation::IInspectable>>
             m_dropDownOpenedEvent;
-
-        winrt::event<
-            winrt::Windows::Foundation::TypedEventHandler<
-            winrt::NanaZip::ModernExperience::AddressBar,
-            winrt::NanaZip::ModernExperience::AddressBarItem>>
-            m_itemClickEvent;
     };
 
     struct AddressBarItem : AddressBarItemT<AddressBarItem>

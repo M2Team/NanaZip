@@ -485,7 +485,6 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       winrt::NanaZip::ModernExperience::AddressBarItem>();
   _addressBarControl.ItemsSource(_items);
   _addressBarControl.DropDownOpened({ this, &CPanel::OnDropDownOpened });
-  _addressBarControl.ItemClick({ this, &CPanel::OnDropDownItemClick });
 
   _addressBarControl.KeyUp(
       [&]
