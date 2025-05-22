@@ -25,7 +25,7 @@
 #include "../../../Windows/PropVariantConv.h"
 #include "../../../Windows/Synchronization.h"
 
-#include "../../../Windows/Control/ComboBox.h"
+// #include "../../../Windows/Control/ComboBox.h"
 #include "../../../Windows/Control/Edit.h"
 #include "../../../Windows/Control/ListView.h"
 #include "../../../Windows/Control/ReBar.h"
@@ -215,13 +215,13 @@ public:
   LRESULT OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
 };
 */
-class CMyComboBoxEdit: public NWindows::NControl::CEdit
-{
-public:
-  WNDPROC _origWindowProc;
-  CPanel *_panel;
-  LRESULT OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
-};
+// class CMyComboBoxEdit: public NWindows::NControl::CEdit
+// {
+// public:
+//   WNDPROC _origWindowProc;
+//   CPanel *_panel;
+//   LRESULT OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
+// };
 
 struct CSelectedState
 {
@@ -309,7 +309,7 @@ class CPanel: public NWindows::NControl::CWindow2
 
   void AddComboBoxItem(const UString &name, int iconIndex, int indent, bool addToList);
 
-  bool OnComboBoxCommand(UINT code, LPARAM param, LRESULT &result);
+  // bool OnComboBoxCommand(UINT code, LPARAM param, LRESULT &result);
 
   void OnDropDownOpened(
       winrt::NanaZip::ModernExperience::AddressBar const&,
@@ -323,7 +323,7 @@ class CPanel: public NWindows::NControl::CWindow2
       winrt::NanaZip::ModernExperience::AddressBar const&,
       winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const&);
 
-  bool OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result);
+  // bool OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result);
   #ifndef _UNICODE
   bool OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result);
   #endif
@@ -331,7 +331,7 @@ class CPanel: public NWindows::NControl::CWindow2
   #endif
 
   bool OnNotifyReBar(LPNMHDR lParam, LRESULT &result);
-  bool OnNotifyComboBox(LPNMHDR lParam, LRESULT &result);
+  // bool OnNotifyComboBox(LPNMHDR lParam, LRESULT &result);
   void OnItemChanged(NMLISTVIEW *item);
   void OnNotifyActivateItems();
   bool OnNotifyList(LPNMHDR lParam, LRESULT &result);
@@ -385,15 +385,17 @@ private:
   // CRecordVector<PROPID> m_ColumnsPropIDs;
 
 public:
-  // NWindows::NControl::CReBar _headerReBar;
-  // NWindows::NControl::CToolBar _headerToolBar;
-  // NWindows::NControl::
-    // #ifdef UNDER_CE
-    // CComboBox
-    // #else
-    // CComboBoxEx
-    // #endif
-    // _headerComboBox;
+  /*
+  NWindows::NControl::CReBar _headerReBar;
+  NWindows::NControl::CToolBar _headerToolBar;
+  NWindows::NControl::
+    #ifdef UNDER_CE
+    CComboBox
+    #else
+    CComboBoxEx
+    #endif
+    _headerComboBox;
+  */
   UStringVector ComboBoxPaths;
   // CMyComboBox _headerComboBox;
   // CMyComboBoxEdit _comboBoxEdit;
