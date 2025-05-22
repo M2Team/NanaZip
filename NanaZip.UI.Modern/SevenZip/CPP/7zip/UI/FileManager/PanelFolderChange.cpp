@@ -442,12 +442,15 @@ void CPanel::LoadFullPathAndShow()
   LoadFullPath();
   _appState->FolderHistory.AddString(_currentFolderPrefix);
 
+  // _headerComboBox.SetText(_currentFolderPrefix);
   _addressBarControl.Text(_currentFolderPrefix.Ptr());
 
   #ifndef UNDER_CE
 
+  /*
   COMBOBOXEXITEM item;
   item.mask = 0;
+  */
 
   UString path = _currentFolderPrefix;
   if (path.Len() >
@@ -470,15 +473,18 @@ void CPanel::LoadFullPathAndShow()
     if (fi.Find(us2fs(path)))
       attrib = fi.Attrib;
   }
-  //item.iImage = GetRealIconIndex(us2fs(path), attrib);
 
-  //if (item.iImage >= 0)
-  //{
-  //  item.iSelectedImage = item.iImage;
-  //  item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
-  //}
-  //item.iItem = -1;
-  // _headerComboBox.SetItem(&item);
+  /*
+  item.iImage = GetRealIconIndex(us2fs(path), attrib);
+  
+  if (item.iImage >= 0)
+  {
+    item.iSelectedImage = item.iImage;
+    item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
+  }
+  item.iItem = -1;
+  _headerComboBox.SetItem(&item);
+  */
   
   int iconIndex = GetRealIconIndex(us2fs(path), attrib);
   HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
@@ -526,23 +532,24 @@ void CPanel::OnAddressBarQuerySubmitted(
         OnNotifyComboBoxEnter(queryArgs.QueryText().c_str());
 }
 
+/*
 bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
 {
   if (info->iWhy == CBENF_ESCAPE)
   {
-    // _headerComboBox.SetText(_currentFolderPrefix);
+    _headerComboBox.SetText(_currentFolderPrefix);
     PostMsg(kSetFocusToListView);
     result = FALSE;
     return true;
   }
 
-  /*
+
   if (info->iWhy == CBENF_DROPDOWN)
   {
     result = FALSE;
     return true;
   }
-  */
+  
 
   if (info->iWhy == CBENF_RETURN)
   {
@@ -554,6 +561,7 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
   }
   return false;
 }
+*/
 #endif
 
 #ifndef _UNICODE
@@ -588,8 +596,6 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result)
 
 void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, bool addToList)
 {
-  UNREFERENCED_PARAMETER(iconIndex);
-  UNREFERENCED_PARAMETER(indent);
   #ifdef UNDER_CE
 
   UString s;
@@ -599,16 +605,18 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   _headerComboBox.AddString(s + name);
   
   #else
-  
-  // COMBOBOXEXITEMW item;
-  // item.mask = CBEIF_TEXT | CBEIF_INDENT;
-  // item.iSelectedImage = item.iImage = iconIndex;
-  // if (iconIndex >= 0)
-    // item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
-  // item.iItem = -1;
-  // item.iIndent = indent;
-  // item.pszText = name.Ptr_non_const();
-  // _headerComboBox.InsertItem(&item);
+
+  /*
+  COMBOBOXEXITEMW item;
+  item.mask = CBEIF_TEXT | CBEIF_INDENT;
+  item.iSelectedImage = item.iImage = iconIndex;
+  if (iconIndex >= 0)
+   item.mask |= (CBEIF_IMAGE | CBEIF_SELECTEDIMAGE);
+  item.iItem = -1;
+  item.iIndent = indent;
+  item.pszText = name.Ptr_non_const();
+  _headerComboBox.InsertItem(&item);
+  */
 
   winrt::NanaZip::ModernExperience::AddressBarItem item;
   item.Text(name.Ptr());
@@ -682,104 +690,101 @@ void CPanel::OnDropDownOpened(
     AddComboBoxItem(name, iconIndex, 0, true);
 }
 
-bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
-{
-  result = FALSE;
-  switch (code)
-  {
-    case CBN_DROPDOWN:
-    {
-      ComboBoxPaths.Clear();
-      // _headerComboBox.ResetContent();
-      
-      unsigned i;
-      UStringVector pathParts;
-      
-      SplitPathToParts(_currentFolderPrefix, pathParts);
-      UString sumPass;
-      if (!pathParts.IsEmpty())
-        pathParts.DeleteBack();
-      for (i = 0; i < pathParts.Size(); i++)
-      {
-        UString name = pathParts[i];
-        sumPass += name;
-        sumPass.Add_PathSepar();
-        CFileInfo info;
-        DWORD attrib = FILE_ATTRIBUTE_DIRECTORY;
-        if (info.Find(us2fs(sumPass)))
-          attrib = info.Attrib;
-        AddComboBoxItem(name.IsEmpty() ? UString(L"\\") : name, GetRealIconIndex(us2fs(sumPass), attrib), i, false);
-        ComboBoxPaths.Add(sumPass);
-      }
+// bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
+// {
+//   result = FALSE;
+//   switch (code)
+//   {
+//     case CBN_DROPDOWN:
+//     {
+//       ComboBoxPaths.Clear();
+//       // _headerComboBox.ResetContent();
+//       
+//       unsigned i;
+//       UStringVector pathParts;
+//       
+//       SplitPathToParts(_currentFolderPrefix, pathParts);
+//       UString sumPass;
+//       if (!pathParts.IsEmpty())
+//           pathParts.DeleteBack();
+//       for (i = 0; i < pathParts.Size(); i++)
+//       {
+//           UString name = pathParts[i];
+//           sumPass += name;
+//           sumPass.Add_PathSepar();
+//           CFileInfo info;
+//           DWORD attrib = FILE_ATTRIBUTE_DIRECTORY;
+//           if (info.Find(us2fs(sumPass)))
+//               attrib = info.Attrib;
+//           AddComboBoxItem(name.IsEmpty() ? UString(L"\\") : name, GetRealIconIndex(us2fs(sumPass), attrib), i, false);
+//           ComboBoxPaths.Add(sumPass);
+//       }
+// 
+//       #ifndef UNDER_CE
+// 
+//       int iconIndex;
+//       UString name;
+//       name = RootFolder_GetName_Documents(iconIndex);
+//       AddComboBoxItem(name, iconIndex, 0, true);
+//       
+//       name = RootFolder_GetName_Computer(iconIndex);
+//       AddComboBoxItem(name, iconIndex, 0, true);
+//       
+//       FStringVector driveStrings;
+//       MyGetLogicalDriveStrings(driveStrings);
+//       for (i = 0; i < driveStrings.Size(); i++)
+//       {
+//           FString s = driveStrings[i];
+//           ComboBoxPaths.Add(fs2us(s));
+//           int iconIndex2 = GetRealIconIndex(s, 0);
+//           if (s.Len() > 0 && s.Back() == FCHAR_PATH_SEPARATOR)
+//               s.DeleteBack();
+//           AddComboBoxItem(fs2us(s), iconIndex2, 1, false);
+//       }
+//       
+//       name = RootFolder_GetName_Network(iconIndex);
+//       AddComboBoxItem(name, iconIndex, 0, true);
+//       
+//       #endif
+//       
+//       return false;
+//     }
+//       
+//     case CBN_SELENDOK:
+//     {
+//       int index = _headerComboBox.GetCurSel();
+//       if (index >= 0)
+//       {
+//         UString pass = ComboBoxPaths[index];
+//         _headerComboBox.SetCurSel(-1);
+//         // _headerComboBox.SetText(pass); // it's fix for seclecting by mouse.
+//         if (BindToPathAndRefresh(pass) == S_OK)
+//         {
+//           PostMsg(kSetFocusToListView);
+//           #ifdef UNDER_CE
+//           PostMsg(kRefresh_HeaderComboBox);
+//       #endif
+//           return true;
+//         }
+//       }
+//       return true;
+//     }
+//     case CBN_CLOSEUP:
+//     {
+//       LoadFullPathAndShow();
+//       true;
+//     
+//     }
+//     case CBN_SELCHANGE:
+//     {
+//       // LoadFullPathAndShow();
+//       return true;
+//     }
+//   }
+//   return false;
+// }
 
-      #ifndef UNDER_CE
-
-      int iconIndex;
-      UString name;
-      name = RootFolder_GetName_Documents(iconIndex);
-      AddComboBoxItem(name, iconIndex, 0, true);
-
-      name = RootFolder_GetName_Computer(iconIndex);
-      AddComboBoxItem(name, iconIndex, 0, true);
-        
-      FStringVector driveStrings;
-      MyGetLogicalDriveStrings(driveStrings);
-      for (i = 0; i < driveStrings.Size(); i++)
-      {
-        FString s = driveStrings[i];
-        ComboBoxPaths.Add(fs2us(s));
-        int iconIndex2 = GetRealIconIndex(s, 0);
-        if (s.Len() > 0 && s.Back() == FCHAR_PATH_SEPARATOR)
-          s.DeleteBack();
-        AddComboBoxItem(fs2us(s), iconIndex2, 1, false);
-      }
-
-      name = RootFolder_GetName_Network(iconIndex);
-      AddComboBoxItem(name, iconIndex, 0, true);
-
-      #endif
-    
-      return false;
-    }
-
-    case CBN_SELENDOK:
-    {
-        /*
-      int index = _headerComboBox.GetCurSel();
-      if (index >= 0)
-      {
-        UString pass = ComboBoxPaths[index];
-        _headerComboBox.SetCurSel(-1);
-        // _headerComboBox.SetText(pass); // it's fix for seclecting by mouse.
-        if (BindToPathAndRefresh(pass) == S_OK)
-        {
-          PostMsg(kSetFocusToListView);
-          #ifdef UNDER_CE
-          PostMsg(kRefresh_HeaderComboBox);
-          #endif
-          return true;
-        }
-      }
-      */
-      return true;
-    }
-    /*
-    case CBN_CLOSEUP:
-    {
-      LoadFullPathAndShow();
-      true;
-
-    }
-    case CBN_SELCHANGE:
-    {
-      // LoadFullPathAndShow();
-      return true;
-    }
-    */
-  }
-  return false;
-}
-
+/*
 bool CPanel::OnNotifyComboBox(LPNMHDR NON_CE_VAR(header), LRESULT & NON_CE_VAR(result))
 {
   #ifndef UNDER_CE
@@ -805,6 +810,7 @@ bool CPanel::OnNotifyComboBox(LPNMHDR NON_CE_VAR(header), LRESULT & NON_CE_VAR(r
   #endif
   return false;
 }
+*/
 
 
 void CPanel::FoldersHistory()
