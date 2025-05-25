@@ -26,25 +26,6 @@ void AddressBar::OnApplyTemplate()
     m_textBoxElement.ContextFlyout(textFlyout);
     m_textBoxElement.SelectionFlyout(textFlyout);
 
-    winrt::hstring currentText = Text();
-    m_textBoxElement.Text(currentText);
-
-    m_textBoxElement.TextChanged(
-        [weak_this{ get_weak() }]
-        (wf::IInspectable const& sender, auto&&)
-        {
-            if (auto strong_this{ weak_this.get() })
-            {
-                winrt::Windows::UI::Xaml::Controls::TextBox textBox =
-                    sender.as<winrt::Windows::UI::Xaml::Controls::TextBox>();
-
-                if (textBox.Text() != strong_this->Text())
-                {
-                    strong_this->Text(textBox.Text());
-                }
-            }
-        });
-
     m_textBoxElement.GotFocus(
         []
         (wf::IInspectable const& sender, auto&&)
@@ -55,18 +36,6 @@ void AddressBar::OnApplyTemplate()
         });
 
     m_textBoxElement.PreviewKeyDown({ get_weak(), &AddressBar::OnTextBoxPreviewKeyDown });
-
-    m_iconElement =
-        GetTemplateChild(L"IconElement")
-        .as<winrt::Windows::UI::Xaml::Controls::Image>();
-
-    winrt::Windows::UI::Xaml::Media::ImageSource currentSource =
-        IconSource();
-
-    if (currentSource)
-    {
-        m_iconElement.Source(currentSource);
-    }
 
     m_popup =
         GetTemplateChild(L"SuggestionsPopup")
@@ -90,14 +59,6 @@ void AddressBar::OnApplyTemplate()
     m_suggestionsList =
         GetTemplateChild(L"SuggestionsList")
         .as<winrt::Windows::UI::Xaml::Controls::ListView>();
-
-    wf::IInspectable existingItemsSource =
-        ItemsSource();
-
-    if (existingItemsSource)
-    {
-        m_suggestionsList.ItemsSource(existingItemsSource);
-    }
 
     m_suggestionsList.ItemClick(
         [weak_this{ get_weak() }]
@@ -154,8 +115,6 @@ void AddressBar::OnApplyTemplate()
                 strong_this->m_upButtonClickedEvent(*strong_this, args);
             }
         });
-
-    m_upButtonElement.IsEnabled(IsUpButtonEnabled());
 
     __super::OnApplyTemplate();
 }
@@ -259,38 +218,10 @@ winrt::Windows::UI::Xaml::DependencyProperty AddressBar::TextProperty()
                 L"Text",
                 winrt::xaml_typename<winrt::hstring>(),
                 winrt::xaml_typename<winrt::NanaZip::ModernExperience::AddressBar>(),
-                winrt::Windows::UI::Xaml::PropertyMetadata(
-                    wf::IInspectable(nullptr),
-                    &AddressBar::OnTextChanged
-                )
+                nullptr
             );
     }
     return s_textProperty;
-}
-
-void AddressBar::OnTextChanged(
-    wf::IInspectable const& sender,
-    winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args)
-{
-    winrt::NanaZip::ModernExperience::AddressBar addressBar =
-        sender.as<winrt::NanaZip::ModernExperience::AddressBar>();
-
-    winrt::NanaZip::ModernExperience::implementation::AddressBar* addressBarImpl =
-        winrt::get_self<winrt::NanaZip::ModernExperience::implementation::AddressBar>(
-            addressBar
-        );
-
-    if (winrt::Windows::UI::Xaml::Controls::TextBox textBoxElement =
-        addressBarImpl->m_textBoxElement)
-    {
-        winrt::hstring newText =
-            winrt::unbox_value<winrt::hstring>(
-                args.NewValue()
-            );
-
-        if (textBoxElement.Text() != newText)
-            textBoxElement.Text(newText);
-    }
 }
 
 winrt::Windows::UI::Xaml::Media::ImageSource AddressBar::IconSource()
@@ -316,36 +247,10 @@ winrt::Windows::UI::Xaml::DependencyProperty AddressBar::IconSourceProperty()
                 L"IconSource",
                 winrt::xaml_typename<winrt::Windows::UI::Xaml::Media::ImageSource>(),
                 winrt::xaml_typename<winrt::NanaZip::ModernExperience::AddressBar>(),
-                winrt::Windows::UI::Xaml::PropertyMetadata(
-                    wf::IInspectable(nullptr),
-                    &AddressBar::OnIconSourceChanged
-                )
+                nullptr
             );
     }
     return s_iconSourceProperty;
-}
-
-void AddressBar::OnIconSourceChanged(
-    wf::IInspectable const& sender,
-    winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args)
-{
-    winrt::NanaZip::ModernExperience::AddressBar addressBar =
-        sender.as<winrt::NanaZip::ModernExperience::AddressBar>();
-
-    winrt::NanaZip::ModernExperience::implementation::AddressBar* addressBarImpl =
-        winrt::get_self<winrt::NanaZip::ModernExperience::implementation::AddressBar>(
-            addressBar
-        );
-
-    if (winrt::Windows::UI::Xaml::Controls::Image iconElement =
-        addressBarImpl->m_iconElement)
-    {
-        winrt::Windows::UI::Xaml::Media::ImageSource newSource =
-            args.NewValue()
-            .as<winrt::Windows::UI::Xaml::Media::ImageSource>();
-
-        iconElement.Source(newSource);
-    }
 }
 
 wf::IInspectable AddressBar::ItemsSource()
@@ -370,31 +275,10 @@ winrt::Windows::UI::Xaml::DependencyProperty AddressBar::ItemsSourceProperty()
                 L"ItemsSource",
                 winrt::xaml_typename<wf::IInspectable>(),
                 winrt::xaml_typename<winrt::NanaZip::ModernExperience::AddressBar>(),
-                winrt::Windows::UI::Xaml::PropertyMetadata(
-                    wf::IInspectable(nullptr),
-                    &AddressBar::OnItemsSourceChanged
-                )
+                nullptr
             );
     }
     return s_itemsSourceProperty;
-}
-
-void AddressBar::OnItemsSourceChanged(
-    wf::IInspectable const& sender,
-    winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args)
-{
-    winrt::NanaZip::ModernExperience::AddressBar addressBar =
-        sender.as<winrt::NanaZip::ModernExperience::AddressBar>();
-
-    winrt::NanaZip::ModernExperience::implementation::AddressBar* addressBarImpl =
-        winrt::get_self<winrt::NanaZip::ModernExperience::implementation::AddressBar>(
-            addressBar
-        );
-
-    if (addressBarImpl->m_suggestionsList)
-    {
-        addressBarImpl->m_suggestionsList.ItemsSource(args.NewValue());
-    }
 }
 
 bool AddressBar::IsUpButtonEnabled()
@@ -423,35 +307,11 @@ winrt::Windows::UI::Xaml::DependencyProperty AddressBar::IsUpButtonEnabledProper
                 winrt::xaml_typename<winrt::NanaZip::ModernExperience::AddressBar>(),
                 winrt::Windows::UI::Xaml::PropertyMetadata(
                     winrt::box_value(true),
-                    &AddressBar::OnUpButtonEnabledChanged
+                    nullptr
                 )
             );
     }
     return s_upButtonEnabledProperty;
-}
-
-void AddressBar::OnUpButtonEnabledChanged(
-    wf::IInspectable const& sender,
-    winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const& args)
-{
-    winrt::NanaZip::ModernExperience::AddressBar addressBar =
-        sender.as<winrt::NanaZip::ModernExperience::AddressBar>();
-
-    winrt::NanaZip::ModernExperience::implementation::AddressBar* addressBarImpl =
-        winrt::get_self<winrt::NanaZip::ModernExperience::implementation::AddressBar>(
-            addressBar
-        );
-
-    if (winrt::Windows::UI::Xaml::Controls::Button upButtonElement =
-        addressBarImpl->m_upButtonElement)
-    {
-        bool newValue =
-            winrt::unbox_value<bool>(
-                args.NewValue()
-            );
-
-        upButtonElement.IsEnabled(newValue);
-    }
 }
 
 winrt::event_token
