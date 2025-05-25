@@ -23,7 +23,7 @@ jobs:
     - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
       run: dotnet nuget locals all --clear
     - name: Build
-      run: MSBuild -binaryLogger:Output\BuildAllTargets.binlog BuildAllTargets.proj
+      run: MSBuild -binaryLogger:Output\BuildAllTargets.binlog -m BuildAllTargets.proj
     - name: Upload MSIX Bundle
       uses: actions/upload-artifact@v4
       with:
