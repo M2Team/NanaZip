@@ -273,13 +273,15 @@
               Padding="0"
               Content="&#xE74A;"
               FontFamily="{StaticResource SymbolThemeFontFamily}"
-              FontSize="12" />
+              FontSize="12"
+              IsEnabled="{TemplateBinding IsUpButtonEnabled}" />
             <RelativePanel Grid.Column="1" Grid.ColumnSpan="3">
               <TextBox
                 x:Name="TextBoxElement"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                Style="{StaticResource DefaultAddressBarTextBoxStyle}" />
+                Style="{StaticResource DefaultAddressBarTextBoxStyle}"
+                Text="{x:Bind Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
               <Popup
                 x:Name="SuggestionsPopup"
                 AllowFocusOnInteraction="False"
@@ -302,6 +304,7 @@
                   CornerRadius="{StaticResource OverlayCornerRadius}"
                   IsItemClickEnabled="True"
                   ItemTemplate="{StaticResource DefaultAddressBarItemTemplate}"
+                  ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
                   Translation="0,0,32">
                   <ListView.Shadow>
                     <ThemeShadow />
@@ -314,7 +317,8 @@
               Grid.Column="1"
               Width="16"
               Height="16"
-              Margin="{StaticResource AddressBarImageIconMargin}" />
+              Margin="{StaticResource AddressBarImageIconMargin}"
+              Source="{x:Bind IconSource, Mode=OneWay}" />
             <Button
               x:Name="DropDownButton"
               Grid.Column="3"
