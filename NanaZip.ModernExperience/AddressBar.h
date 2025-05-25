@@ -63,15 +63,6 @@ namespace winrt::NanaZip::ModernExperience::implementation
     private:
         bool OpenSuggestionsPopup(bool isKeyboard);
 
-        static void OnIconSourceChanged(
-            winrt::Windows::Foundation::IInspectable const&,
-            winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const&
-        );
-        static void OnItemsSourceChanged(
-            winrt::Windows::Foundation::IInspectable const&,
-            winrt::Windows::UI::Xaml::DependencyPropertyChangedEventArgs const&
-        );
-
         inline static winrt::Windows::UI::Xaml::DependencyProperty s_textProperty{ nullptr };
         inline static winrt::Windows::UI::Xaml::DependencyProperty s_iconSourceProperty{ nullptr };
         inline static winrt::Windows::UI::Xaml::DependencyProperty s_upButtonEnabledProperty{ nullptr };
