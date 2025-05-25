@@ -26,7 +26,7 @@ EXTERNAL_CODECS
            that code is used in plugin module (NanaZip.Core.dll).
 
   2) Standalone modules are compiled without EXTERNAL_CODECS:
-    - SFX modules: NanaZip.Core.Windows.sfx, NanaZip.Core.Console.sfx
+    - SFX modules: NanaZip.Core.Windows.sfx, NanaZip.Universal.Console.sfx
 
   if EXTERNAL_CODECS is defined, CCodecs class implements interfaces:
     - ICompressCodecsInfo : for Codecs

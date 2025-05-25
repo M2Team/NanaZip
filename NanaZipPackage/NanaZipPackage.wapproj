@@ -46,7 +46,7 @@
     <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.vcxproj">
       <Project>{F4511F91-B0EB-41B4-99D6-AEB48169132B}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Console.vcxproj">
+    <ProjectReference Include="..\NanaZip.Universal\NanaZip.Universal.Console.vcxproj">
       <Project>{86E818B3-D657-4E03-9336-48EE242A79D1}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">

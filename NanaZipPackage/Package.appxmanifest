@@ -57,7 +57,7 @@
   <Applications>
     <Application 
       Id="NanaZip.Console" 
-      Executable="NanaZip.Core.Console.exe" 
+      Executable="NanaZip.Universal.Console.exe" 
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements 
         AppListEntry="none"
@@ -69,7 +69,7 @@
       <Extensions>
         <uap3:Extension 
           Category="windows.appExecutionAlias" 
-          Executable="NanaZip.Core.Console.exe" 
+          Executable="NanaZip.Universal.Console.exe" 
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipC.exe" />
