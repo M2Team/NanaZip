@@ -43,7 +43,7 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsReadInputStream(
         }
         if (0 == CurrentProcessedBytes)
         {
-            return S_OK;
+            break;
         }
     }
     if (NumberOfBytesRead)
