@@ -20,9 +20,13 @@ EXTERN_C int NanaZipCodecsLizardRead(
     ConvertedInput.Buffer = Input->buf;
     ConvertedInput.Size = Input->size;
     ConvertedInput.Allocated = Input->allocated;
-    return ::NanaZipCodecsCommonRead(
+    int Result = ::NanaZipCodecsCommonRead(
         reinterpret_cast<PNANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT>(Context),
         &ConvertedInput);
+    Input->buf = ConvertedInput.Buffer;
+    Input->size = ConvertedInput.Size;
+    Input->allocated = ConvertedInput.Allocated;
+    return Result;
 }
 
 EXTERN_C int NanaZipCodecsLizardWrite(
