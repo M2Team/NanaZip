@@ -35,17 +35,15 @@ struct DProps
   Byte _reserved[2];
 };
 
-class CDecoder:
+class CDecoder Z7_final:
   public ICompressCoder,
   public ICompressSetDecoderProperties2,
-#ifndef Z7_NO_READ_FROM_CODER
-  public ICompressSetInStream,
-#endif
   public ICompressSetCoderMt,
   public CMyUnknownImp
 {
   CMyComPtr < ISequentialInStream > _inStream;
 
+public:
   DProps _props;
 
   UInt64 _processedIn;
@@ -54,32 +52,30 @@ class CDecoder:
   UInt32 _numThreads;
 
   HRESULT CodeSpec(ISequentialInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress);
+  HRESULT CodeResume(ISequentialOutStream * outStream, const UInt64 * outSize, ICompressProgressInfo * progress);
   HRESULT SetOutStreamSizeResume(const UInt64 *outSize);
-
-public:
 
   Z7_COM_QI_BEGIN2(ICompressCoder)
   Z7_COM_QI_ENTRY(ICompressSetDecoderProperties2)
 #ifndef Z7_NO_READ_FROM_CODER
-  Z7_COM_QI_ENTRY(ICompressSetInStream)
+  //Z7_COM_QI_ENTRY(ICompressSetInStream)
 #endif
   Z7_COM_QI_ENTRY(ICompressSetCoderMt)
   Z7_COM_QI_END
   Z7_COM_ADDREF_RELEASE
 
+  Z7_IFACE_COM7_IMP(ICompressCoder)
+  Z7_IFACE_COM7_IMP(ICompressSetDecoderProperties2)
 public:
-  STDMETHOD (Code)(ISequentialInStream *inStream, ISequentialOutStream *outStream, const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
-  STDMETHOD (SetDecoderProperties2)(const Byte *data, UInt32 size);
-  STDMETHOD (SetOutStreamSize)(const UInt64 *outSize);
-  STDMETHOD (SetNumberOfThreads)(UInt32 numThreads);
-
+  Z7_IFACE_COM7_IMP(ICompressSetCoderMt)
+  Z7_COM7F_IMF(SetOutStreamSize(const UInt64 *outSize));
 #ifndef Z7_NO_READ_FROM_CODER
-  STDMETHOD (SetInStream)(ISequentialInStream *inStream);
-  STDMETHOD (ReleaseInStream)();
+  Z7_COM7F_IMF(SetInStream(ISequentialInStream *inStream));
+  Z7_COM7F_IMF(ReleaseInStream());
   UInt64 GetInputProcessedSize() const { return _processedIn; }
 #endif
-  HRESULT CodeResume(ISequentialOutStream *outStream, const UInt64 *outSize, ICompressProgressInfo *progress);
 
+public:
   CDecoder();
   virtual ~CDecoder();
 };

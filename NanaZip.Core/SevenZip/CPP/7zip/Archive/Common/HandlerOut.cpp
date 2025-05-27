@@ -82,6 +82,8 @@ bool ParseSizeString(const wchar_t *s, const PROPVARIANT &prop, UInt64 percentsB
   return true;
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CCommonMethodProps::SetCommonProperty(const UString &name, const PROPVARIANT &value, HRESULT &hres)
 {
   hres = S_OK;
@@ -110,6 +112,35 @@ bool CCommonMethodProps::SetCommonProperty(const UString &name, const PROPVARIAN
 
   return false;
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+int CCommonMethodProps::SetCommonProperty(const UString &name, const PROPVARIANT &value, HRESULT &hres)
+{
+  hres = S_OK;
+
+  if (name.IsPrefixedBy_Ascii_NoCase("mt"))
+  {
+    #ifndef Z7_ST
+    hres = ParseMtProp(name.Ptr(2), value, _numProcessors, _numThreads);
+    // parameter "mt" specified, so it means "_numThreads_WasForced = true"
+    _numThreads_WasForced = true;
+    #endif
+    return -1; /* OK, but no return - could be also set by handler itself later */
+  }
+  
+  if (name.IsPrefixedBy_Ascii_NoCase("memuse"))
+  {
+    UInt64 v;
+    if (!ParseSizeString(name.Ptr(6), value, _memAvail, v))
+      hres = E_INVALIDARG;
+    _memUsage_Decompress = v;
+    _memUsage_Compress = v;
+    _memUsage_WasSet = true;
+    return 1;
+  }
+
+  return 0;
+}
+// **************** 7-Zip ZS Modification End ****************
 
 
 #ifndef Z7_EXTRACT_ONLY
@@ -184,6 +215,18 @@ HRESULT CMultiMethodProps::SetProperty(const wchar_t *nameSpec, const PROPVARIAN
     _level = 9;
     return ParsePropToUInt32(name, value, _level);
   }
+  // **************** 7-Zip ZS Modification Start ****************
+  if (name == L"max")
+  {
+    bool _max;
+    const HRESULT res = PROPVARIANT_to_bool(value, _max);
+    if (res == S_OK && _max) {
+      // adjust level (zstd --max), set it to the highest level too (e. g. setting of options.MaxFilter for BCJ2 etc)
+      _level = Z7_ZSTD_ULTIMATE_LEV;
+    }
+    return res;
+  }
+  // **************** 7-Zip ZS Modification End ****************
 
   if (name.IsPrefixedBy_Ascii_NoCase("yx"))
   {
@@ -204,17 +247,12 @@ HRESULT CMultiMethodProps::SetProperty(const wchar_t *nameSpec, const PROPVARIAN
   {
     HRESULT hres;
     // **************** NanaZip Modification Start ****************
-    if (SetCommonProperty(name, value, hres))
-    {
-        if (name.IsPrefixedBy_Ascii_NoCase("mt"))
-        {
-            // pass through kNumThreads to handler
-        }
-        else {
-            return hres;
-        }
-    }
+    // if (SetCommonProperty(name, value, hres))
+    /* don't return by -1, since many handlers set common properties (e. g. kNumThreads)
+       with SetCoderProperties, so add it also as prop by its ID from name below */
+    if (SetCommonProperty(name, value, hres) > 0) 
     // **************** NanaZip Modification End ****************
+      return hres;
   }
   
   UInt32 number;
@@ -274,9 +312,10 @@ HRESULT CSingleMethodProps::SetProperty(const wchar_t *name2, const PROPVARIANT 
     //  // processed = true;
     //  return S_OK;
     //}
-    SetCommonProperty(name, value, hres);
-    /* don't return here, since many handlers set common properties (e. g. kNumThreads)
+    /* don't return by -1, since many handlers set common properties (e. g. kNumThreads)
        with SetCoderProperties, so add it also as prop by its ID from name below */
+    if (SetCommonProperty(name, value, hres) > 0)
+      return hres;
     // **************** 7-Zip ZS Modification End ****************
   }
   RINOK(ParseMethodFromPROPVARIANT(name, value))

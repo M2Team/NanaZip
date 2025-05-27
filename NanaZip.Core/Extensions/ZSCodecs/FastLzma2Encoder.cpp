@@ -3,7 +3,7 @@
 #include "../../SevenZip/CPP/7zip/Compress/StdAfx.h"
 
 #include "../../SevenZip/C/Alloc.h"
-
+#include "../../SevenZip/C/Lzma2Enc.h"
 #include <fl2_errors.h>
 
 #include "../../SevenZip/CPP/7zip/Common/CWrappers.h"
@@ -230,25 +230,14 @@ void CFastEncoder::FastLzma2::Cancel()
   FL2_cancelCStream(fcs);
 }
 
-CFastEncoder::CFastEncoder()
-{
-}
-
-CFastEncoder::~CFastEncoder()
-{
-}
-
-
-STDMETHODIMP CFastEncoder::SetCoderProperties(const PROPID *propIDs,
-  const PROPVARIANT *coderProps, UInt32 numProps)
+Z7_COM7F_IMF(CFastEncoder::SetCoderProperties(const PROPID *propIDs,
+  const PROPVARIANT *coderProps, UInt32 numProps))
 {
   return _encoder.SetCoderProperties(propIDs, coderProps, numProps);
 }
 
-
 #define LZMA2_DIC_SIZE_FROM_PROP(p) (((UInt32)2 | ((p) & 1)) << ((p) / 2 + 11))
-
-STDMETHODIMP CFastEncoder::WriteCoderProperties(ISequentialOutStream *outStream)
+Z7_COM7F_IMF(CFastEncoder::WriteCoderProperties(ISequentialOutStream *outStream))
 {
   Byte prop;
   unsigned i;
@@ -261,8 +250,8 @@ STDMETHODIMP CFastEncoder::WriteCoderProperties(ISequentialOutStream *outStream)
 }
 
 
-STDMETHODIMP CFastEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream *outStream,
-  const UInt64 * /* inSize */, const UInt64 * /* outSize */, ICompressProgressInfo *progress)
+Z7_COM7F_IMF(CFastEncoder::Code(ISequentialInStream *inStream, ISequentialOutStream *outStream,
+  const UInt64 * /* inSize */, const UInt64 * /* outSize */, ICompressProgressInfo *progress))
 {
   CHECK_H(_encoder.Begin());
   size_t inSize;

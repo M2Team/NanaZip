@@ -163,6 +163,7 @@ namespace NCoderPropID
     // kTargetLen,         // VT_UI4 The minimum tlen is 0 and the maximum is 999.
     */
     // **************** 7-Zip ZS Modification Start ****************
+    /* zstd props */
     kStrategy,          // VT_UI4 1=ZSTD_fast, 2=ZSTD_dfast, 3=ZSTD_greedy, 4=ZSTD_lazy, 5=ZSTD_lazy2, 6=ZSTD_btlazy2, 7=ZSTD_btopt, 8=ZSTD_btultra
     kFast,              // VT_UI4 The minimum fast is 1 and the maximum is 64 (default: unused)
     kLong,              // VT_UI4 The minimum long is 10 (1KiB) and the maximum is 30 (1GiB) on x32 and 31 (2GiB) on x64
@@ -177,10 +178,20 @@ namespace NCoderPropID
     kLdmSearchLength,   // VT_UI4 The minimum ldmslen is 4 and the maximum is 4096 (default: 64).
     kLdmBucketSizeLog,  // VT_UI4 The minimum ldmblog is 0 and the maximum is 8 (default: 3).
     kLdmHashRateLog,    // VT_UI4 The default value is wlog - ldmhlog.
+    kAdvMax,            // VT_BOOL 1=ZSTD --max (advanced max compression)
     // **************** 7-Zip ZS Modification End ****************
     k_NUM_DEFINED
   };
 }
+
+// **************** 7-Zip ZS Modification Start ****************
+/* artificial level used to specify max possible level (for ZSTD advanced max compression, equivalent of --max) */
+#define Z7_ZSTD_ULTIMATE_LEV  255
+
+#if !defined (Z7_ZSTD_ADVMAX_ALLOWED) && INTPTR_MAX == INT64_MAX // allowed for 64-bit only
+#define Z7_ZSTD_ADVMAX_ALLOWED 1
+#endif
+// **************** 7-Zip ZS Modification End ****************
 
 #define Z7_IFACEM_ICompressSetCoderPropertiesOpt(x) \
   x(SetCoderPropertiesOpt(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps))

@@ -93,7 +93,10 @@ HRESULT CEncoder::SetCoderProp(PROPID propID, const PROPVARIANT &prop)
   {
     if (prop.vt != VT_UI4)
       return E_INVALIDARG;
-    xzProps.numTotalThreads = (int)(prop.ulVal);
+    // **************** 7-Zip ZS Modification Start ****************
+    // xzProps.numTotalThreads = (int)(prop.ulVal);
+    xzProps.numTotalThreads = ((int)prop.ulVal) > 1 ? (int)prop.ulVal : 1;
+    // **************** 7-Zip ZS Modification End ****************
     return S_OK;
   }
 

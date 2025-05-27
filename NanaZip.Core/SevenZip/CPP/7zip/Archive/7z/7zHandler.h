@@ -159,6 +159,14 @@ private:
   CRecordVector<UInt64> _fileInfoPopIDs;
   void FillPopIDs();
   void AddMethodName(AString &s, UInt64 id);
+  // **************** 7-Zip ZS Modification Start ****************
+  typedef struct MethodInfo {
+      AString methName;
+      int level;
+  } MethodInfo;
+  bool ObtainMethodFromBlocks(MethodInfo* info) const;
+  HRESULT ObtainBlockMethods(CNum folderIndex, PROPVARIANT* prop, MethodInfo* info) const;
+  // **************** 7-Zip ZS Modification End ****************
   HRESULT SetMethodToProp(CNum folderIndex, PROPVARIANT *prop) const;
 
   #endif

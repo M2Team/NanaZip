@@ -26,7 +26,10 @@
 #include "../../Compress/PpmdZip.h"
 #include "../../Compress/ShrinkDecoder.h"
 #include "../../Compress/XzDecoder.h"
-#include "../../Compress/ZstdDecoder.h"
+// **************** 7-Zip ZS Modification Start ****************
+// #include "../../Compress/ZstdDecoder.h"
+// **************** 7-Zip ZS Modification End ****************
+#include "../../../../../Extensions/ZSCodecs/ZstdDecoder.h"
 
 #include "../../Crypto/WzAes.h"
 #include "../../Crypto/ZipCrypto.h"
@@ -1166,8 +1169,12 @@ HRESULT CZipDecoder::Decode(
       mi.Coder = new NCompress::NXz::CComDecoder;
     else if (id == NFileHeader::NCompressionMethod::kPPMd)
       mi.Coder = new NCompress::NPpmdZip::CDecoder(true);
-    else if (id == NFileHeader::NCompressionMethod::kZstdWz)
-      mi.Coder = new NCompress::NZstd::CDecoder();
+    // **************** 7-Zip ZS Modification Start ****************
+    //else if (id == NFileHeader::NCompressionMethod::kZstdWz)
+    //  mi.Coder = new NCompress::NZstd::CDecoder();
+    else if (id == NFileHeader::NCompressionMethod::kZstd)
+      mi.Coder = new NCompress::NZSTD::CDecoder();
+    // **************** 7-Zip ZS Modification End ****************
 #ifndef Z7_ZIP_LZFSE_DISABLE
     else if (id == NFileHeader::NCompressionMethod::kWzAES)
       mi.Coder = new NCompress::NLzfse::CDecoder;

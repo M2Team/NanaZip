@@ -57,7 +57,10 @@ public:
   UInt64 _memUsage_Decompress;
   size_t _memAvail;
 
-  bool SetCommonProperty(const UString &name, const PROPVARIANT &value, HRESULT &hres);
+  // **************** 7-Zip ZS Modification Start ****************
+  // bool SetCommonProperty(const UString &name, const PROPVARIANT &value, HRESULT &hres);
+  int SetCommonProperty(const UString& name, const PROPVARIANT& value, HRESULT& hres);
+  // **************** 7-Zip ZS Modification End ****************
 
   CCommonMethodProps() { InitCommon(); }
 };
@@ -67,10 +70,17 @@ public:
 
 class CMultiMethodProps: public CCommonMethodProps
 {
+  // **************** 7-Zip ZS Modification Start ****************
+  void InitMulti();
+
+protected:
+  // **************** 7-Zip ZS Modification End ****************
   UInt32 _level;
   int _analysisLevel;
 
-  void InitMulti();
+  // **************** 7-Zip ZS Modification Start ****************
+  // void InitMulti();
+  // **************** 7-Zip ZS Modification End ****************
 public:
   UInt32 _crcSize;
   CObjectVector<COneMethodInfo> _methods;

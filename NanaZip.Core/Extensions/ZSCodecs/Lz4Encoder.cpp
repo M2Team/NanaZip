@@ -24,7 +24,7 @@ CEncoder::~CEncoder()
     LZ4MT_freeCCtx(_ctx);
 }
 
-STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARIANT * coderProps, UInt32 numProps)
+Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARIANT * coderProps, UInt32 numProps))
 {
   _props.clear();
 
@@ -62,14 +62,14 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
   return S_OK;
 }
 
-STDMETHODIMP CEncoder::WriteCoderProperties(ISequentialOutStream * outStream)
+Z7_COM7F_IMF(CEncoder::WriteCoderProperties(ISequentialOutStream * outStream))
 {
   return WriteStream(outStream, &_props, sizeof (_props));
 }
 
-STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
+Z7_COM7F_IMF(CEncoder::Code(ISequentialInStream *inStream,
   ISequentialOutStream *outStream, const UInt64 * /*inSize*/ ,
-  const UInt64 * /*outSize */, ICompressProgressInfo *progress)
+  const UInt64 * /*outSize */, ICompressProgressInfo *progress))
 {
   LZ4MT_RdWr_t rdwr;
   size_t result;
@@ -105,7 +105,7 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
   return res;
 }
 
-STDMETHODIMP CEncoder::SetNumberOfThreads(UInt32 numThreads)
+Z7_COM7F_IMF(CEncoder::SetNumberOfThreads(UInt32 numThreads))
 {
   const UInt32 kNumThreadsMax = LZ4MT_THREAD_MAX;
   if (numThreads < 1) numThreads = 1;

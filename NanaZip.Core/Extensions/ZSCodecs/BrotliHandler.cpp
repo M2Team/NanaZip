@@ -22,13 +22,11 @@ using namespace NWindows;
 namespace NArchive {
 namespace NBROTLI {
 
-class CHandler:
-  public IInArchive,
-  public IArchiveOpenSeq,
-  public IOutArchive,
-  public ISetProperties,
-  public CMyUnknownImp
-{
+Z7_CLASS_IMP_CHandler_IInArchive_3(
+  IArchiveOpenSeq,
+  IOutArchive,
+  ISetProperties
+)
   CMyComPtr<IInStream> _stream;
   CMyComPtr<ISequentialInStream> _seqStream;
 
@@ -45,13 +43,6 @@ class CHandler:
   UInt64 _numBlocks;
 
   CSingleMethodProps _props;
-
-public:
-  Z7_IFACES_IMP_UNK_4(
-      IInArchive,
-      IArchiveOpenSeq,
-      IOutArchive,
-      ISetProperties)
 };
 
 static const Byte kProps[] =
@@ -166,10 +157,13 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   {
 
   NCompress::NBROTLI::CDecoder *decoderSpec = new NCompress::NBROTLI::CDecoder;
-  decoderSpec->SetNumberOfThreads(0); /* .br - single threaded processing (without header/mt-frames) */
-  if (_props._numThreads_WasForced) {
-    decoderSpec->SetNumberOfThreads(_props._numThreads); // translate to decoder (important for -mmt>=2 to use brotli-mt)
-  }
+  /*
+   * Brotli stream doesn't contain info about threads and it is normally
+   * single-threaded by default (.br files without header/mt-frames),
+   * so force it here as 0 for brotli-st, unless it's specified (e. g. was compressed
+   * also multi-threaded, important for -mmt>=1 to use brotli-mt instead of brotli-st)
+   */
+  decoderSpec->SetNumberOfThreads(!_props._numThreads_WasForced ? 0 : _props._numThreads);
   CMyComPtr<ICompressCoder> decoder = decoderSpec;
   decoderSpec->SetInStream(_seqStream);
 
@@ -281,7 +275,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
   if (!updateCallback)
     return E_FAIL;
   RINOK(updateCallback->GetUpdateItemInfo(0, &newData, &newProps, &indexInArchive));
-
+ 
   if ((newProps))
   {
     {
@@ -292,7 +286,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
           return E_INVALIDARG;
     }
   }
-
+  
   if ((newData))
   {
     UInt64 size;
@@ -343,6 +337,6 @@ REGISTER_ARC_R(
   0,
   NArcInfoFlags::kKeepName | NArcInfoFlags::kPureStartOpen | NArcInfoFlags::kByExtOnlyOpen,
   0,
-  CreateArc, CreateArcOut,
+  CreateArc, CreateArcOut, 
   /* IsArc_Brotli */)
 }}

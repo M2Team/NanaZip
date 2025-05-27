@@ -35,6 +35,8 @@ if (name.IsEmpty() && prop.vt == VT_EMPTY), it doesn't change (resValue) and ret
 HRESULT ParsePropToUInt32(const UString &name, const PROPVARIANT &prop, UInt32 &resValue);
 
 /* input: (numThreads = the_number_of_processors) */
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 HRESULT ParseMtProp2(const UString &name, const PROPVARIANT &prop, UInt32 &numThreads, bool &force);
 
 inline HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 numCPUs, UInt32 &numThreads)
@@ -43,7 +45,9 @@ inline HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 
   numThreads = numCPUs;
   return ParseMtProp2(name, prop, numThreads, forced);
 }
-
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 numCPUs, UInt32 &numThreads);
+// **************** 7-Zip ZS Modification End ****************
 
 struct CProp
 {
@@ -86,6 +90,9 @@ struct CProps
 class CMethodProps: public CProps
 {
   HRESULT SetParam(const UString &name, const UString &value);
+  // **************** 7-Zip ZS Modification Start ****************
+  void setMaxCompression();
+  // **************** 7-Zip ZS Modification End ****************
 public:
   unsigned GetLevel() const;
   int Get_NumThreads() const

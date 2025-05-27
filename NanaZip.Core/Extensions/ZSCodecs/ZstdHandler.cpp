@@ -10,7 +10,7 @@
 #include "../../SevenZip/CPP/7zip/Common/RegisterArc.h"
 #include "../../SevenZip/CPP/7zip/Common/StreamUtils.h"
 
-#include "../../SevenZip/CPP/7zip/Compress/ZstdDecoder.h"
+#include "ZstdDecoder.h"
 #include "ZstdEncoder.h"
 #include "../../SevenZip/CPP/7zip/Compress/CopyCoder.h"
 
@@ -22,13 +22,11 @@ using namespace NWindows;
 namespace NArchive {
 namespace NZSTD {
 
-class CHandler:
-  public IInArchive,
-  public IArchiveOpenSeq,
-  public IOutArchive,
-  public ISetProperties,
-  public CMyUnknownImp
-{
+Z7_CLASS_IMP_CHandler_IInArchive_3(
+  IArchiveOpenSeq,
+  IOutArchive,
+  ISetProperties
+)
   CMyComPtr<IInStream> _stream;
   CMyComPtr<ISequentialInStream> _seqStream;
 
@@ -45,13 +43,6 @@ class CHandler:
   UInt64 _numBlocks;
 
   CSingleMethodProps _props;
-
-public:
-  Z7_IFACES_IMP_UNK_4(
-      IInArchive,
-      IArchiveOpenSeq,
-      IOutArchive,
-      ISetProperties)
 };
 
 static const Byte kProps[] =
@@ -108,9 +99,19 @@ API_FUNC_static_IsArc IsArc_zstd(const Byte *p, size_t size)
     magic = GetUi32(p+12);
   }
 
+#ifdef ZSTD_LEGACY_SUPPORT
+  // zstd 0.1
+  if (magic == 0xFD2FB51E)
+    return k_IsArc_Res_YES;
+
+  // zstd magic's for 0.2 .. 0.8 (aka 1.x)
+  if (magic >= 0xFD2FB522 && magic <= 0xFD2FB528)
+    return k_IsArc_Res_YES;
+#else
   /* only version 1.x */
   if (magic == 0xFD2FB528)
     return k_IsArc_Res_YES;
+#endif
 
   return k_IsArc_Res_NO;
 }
@@ -183,69 +184,74 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   Int32 opRes;
 
-  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
-  lps->Init(extractCallback, true);
+  {
 
-  CMyComPtr2_Create<ICompressCoder, NCompress::NZstd::CDecoder> decoder;
+  NCompress::NZSTD::CDecoder *decoderSpec = new NCompress::NZSTD::CDecoder;
+  CMyComPtr<ICompressCoder> decoder = decoderSpec;
+  decoderSpec->SetInStream(_seqStream);
 
-  CMyComPtr2_Create<ISequentialOutStream, CDummyOutStream> outStreamSpec;
+  CDummyOutStream *outStreamSpec = new CDummyOutStream;
+  CMyComPtr<ISequentialOutStream> outStream(outStreamSpec);
   outStreamSpec->SetStream(realOutStream);
   outStreamSpec->Init();
 
-  decoder->FinishMode = true;
+  realOutStream.Release();
 
-  const HRESULT hres = decoder.Interface()->Code(
-      _seqStream,
-      outStreamSpec,
-      nullptr,
-      nullptr,
-      lps);
+  CLocalProgress *lps = new CLocalProgress;
+  CMyComPtr<ICompressProgressInfo> progress = lps;
+  lps->Init(extractCallback, true);
 
-  const UInt64 outSize = outStreamSpec->GetSize();
+  UInt64 packSize = 0;
+  UInt64 unpackedSize = 0;
 
-  opRes = NExtract::NOperationResult::kDataError;
+  HRESULT result = S_OK;
 
-  if (hres == E_OUTOFMEMORY)
+  for (;;)
   {
-      return hres;
-  }
-  else if (hres == S_OK || hres == S_FALSE)
-  {
-      const UInt64 inSize = decoder->_inProcessed;
+    lps->InSize = packSize;
+    lps->OutSize = unpackedSize;
 
-      _unpackSize_Defined = true;
-      _unpackSize = outSize;
+    RINOK(lps->SetCur());
+    result = decoderSpec->CodeResume(outStream, &unpackedSize, progress);
+    UInt64 streamSize = decoderSpec->GetInputProcessedSize();
 
-      // RINOK(
-      lps.Interface()->SetRatioInfo(&inSize, &outSize);
+    if (result != S_FALSE && result != S_OK)
+      return result;
 
-      if (decoder->ResInfo.decode_SRes == SZ_ERROR_CRC)
-      {
-          opRes = NExtract::NOperationResult::kCRCError;
-      }
-      else if (decoder->ResInfo.decode_SRes == SZ_ERROR_NO_ARCHIVE)
-      {
-          _isArc = false;
-          opRes = NExtract::NOperationResult::kIsNotArc;
-      }
-      else if (decoder->ResInfo.decode_SRes == SZ_ERROR_INPUT_EOF)
-          opRes = NExtract::NOperationResult::kUnexpectedEnd;
-      else
-      {
-          if (hres == S_OK && decoder->ResInfo.decode_SRes == SZ_OK)
-              opRes = NExtract::NOperationResult::kOK;
-          if (decoder->ResInfo.extraSize)
-          {
-              opRes = NExtract::NOperationResult::kDataAfterEnd;
-          }
-      }
+    if (unpackedSize == 0)
+      break;
+
+    if (streamSize == packSize)
+    {
+      // no new bytes in input stream, So it's good end of archive.
+      result = S_OK;
+      break;
+    }
+
+    if (packSize > streamSize)
+      return E_FAIL;
+
+    if (result != S_OK)
+      break;
   }
-  else if (hres == E_NOTIMPL)
-  {
-      opRes = NExtract::NOperationResult::kUnsupportedMethod;
-  }
+
+  decoderSpec->ReleaseInStream();
+  outStream.Release();
+
+  if (!_isArc)
+    opRes = NExtract::NOperationResult::kIsNotArc;
+  else if (_needMoreInput)
+    opRes = NExtract::NOperationResult::kUnexpectedEnd;
+  else if (_dataAfterEnd)
+    opRes = NExtract::NOperationResult::kDataAfterEnd;
+  else if (result == S_FALSE)
+    opRes = NExtract::NOperationResult::kDataError;
+  else if (result == S_OK)
+    opRes = NExtract::NOperationResult::kOK;
   else
-      return hres;
+    return result;
+
+  }
 
   return extractCallback->SetOperationResult(opRes);
 
@@ -294,7 +300,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
   if (!updateCallback)
     return E_FAIL;
   RINOK(updateCallback->GetUpdateItemInfo(0, &newData, &newProps, &indexInArchive));
-
+ 
   if ((newProps))
   {
     {
@@ -305,7 +311,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
           return E_INVALIDARG;
     }
   }
-
+  
   if ((newData))
   {
     UInt64 size;
@@ -348,8 +354,7 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
   return _props.SetProperties(names, values, numProps);
 }
 
-static const unsigned kSignatureSize = 4;
-static const Byte k_Signature[kSignatureSize] = { 0x28, 0xb5, 0x2f, 0xfd };
+static const Byte k_Signature[] = "0xFD2FB522..28";
 
 REGISTER_ARC_IO(
   "zstd", "zst zstd tzst tzstd", "* * .tar .tar", 0x0e,

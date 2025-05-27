@@ -170,7 +170,7 @@ HRESULT CAddCommon::Set_Pre_CompressionResult(bool inSeqMode, bool outSeqMode, U
     case NCompressionMethod::kPPMd : ver = NCompressionMethod::kExtractVersion_PPMd; break;
     case NCompressionMethod::kBZip2: ver = NCompressionMethod::kExtractVersion_BZip2; break;
     // **************** 7-Zip ZS Modification Start ****************
-    case NCompressionMethod::kZstdWz: ver = NCompressionMethod::kExtractVersion_Zstd; break;
+    case NCompressionMethod::kZstd: ver = NCompressionMethod::kExtractVersion_Zstd; break;
     // **************** 7-Zip ZS Modification End ****************
     case NCompressionMethod::kLZMA :
     {
@@ -361,11 +361,11 @@ HRESULT CAddCommon::Compress(
             _compressEncoder = _lzmaEncoder;
           }
           // **************** 7-Zip ZS Modification Start ****************
-          else if (method == NCompressionMethod::kZstdWz)
+          else if (method == NCompressionMethod::kZstd)
           {
-              _compressExtractVersion = NCompressionMethod::kExtractVersion_Zstd;
-              NCompress::NZSTD::CEncoder* encoder = new NCompress::NZSTD::CEncoder();
-              _compressEncoder = encoder;
+            _compressExtractVersion = NCompressionMethod::kExtractVersion_Zstd;
+            NCompress::NZSTD::CEncoder *encoder = new NCompress::NZSTD::CEncoder();
+            _compressEncoder = encoder;
           }
           // **************** 7-Zip ZS Modification End ****************
           else if (method == NCompressionMethod::kXz)

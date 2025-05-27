@@ -122,6 +122,9 @@ struct CArcInfoEx
     int LibIndex;
     UInt32 FormatIndex;
     CLSID ClassID;
+  // **************** 7-Zip ZS Modification Start ****************
+    UInt32 LevelsMask;
+  // **************** 7-Zip ZS Modification End ****************
   #endif
 
   int Compare(const CArcInfoEx &a) const
@@ -227,6 +230,9 @@ struct CArcInfoEx
       #endif
       #ifdef Z7_EXTERNAL_CODECS
       , LibIndex(-1)
+      // **************** 7-Zip ZS Modification Start ****************
+      , LevelsMask(0xFFFFFFFF)
+      // **************** 7-Zip ZS Modification End ****************
       #endif
   {}
 };

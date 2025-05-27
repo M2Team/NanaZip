@@ -2,10 +2,7 @@
 
 #include "../../SevenZip/CPP/7zip/Compress/StdAfx.h"
 #include "ZstdEncoder.h"
-#include "../../SevenZip/CPP/7zip/Compress/ZstdDecoder.h"
-#include <zstd_errors.h>
-#include "../../SevenZip/CPP/Windows/System.h"
-#define ZSTD_THREAD_MAX   256
+#include "ZstdDecoder.h"
 
 #ifndef Z7_EXTRACT_ONLY
 namespace NCompress {
@@ -20,6 +17,7 @@ CEncoder::CEncoder():
   _processedIn(0),
   _processedOut(0),
   _numThreads(NWindows::NSystem::GetNumberOfProcessors()),
+  _Max(false),
   _Long(-1),
   _Level(ZSTD_CLEVEL_DEFAULT),
   _Strategy(-1),
@@ -50,7 +48,7 @@ CEncoder::~CEncoder()
   }
 }
 
-STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARIANT * coderProps, UInt32 numProps)
+Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARIANT * coderProps, UInt32 numProps))
 {
   _props.clear();
 
@@ -73,22 +71,33 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
         _Strategy = v;
         break;
       }
+    case NCoderPropID::kAdvMax:
+      if (!v)
+        break;
+    #if Z7_ZSTD_ADVMAX_ALLOWED // 64-bit only
+      _Max = true;
+    #endif
+      v = Z7_ZSTD_ULTIMATE_LEV;
     case NCoderPropID::kLevel:
       {
-        _Level = v;
+        _Level = !_Max ? v : Z7_ZSTD_ULTIMATE_LEV;
         if (v < 1) {
           _Level = 1;
         } else if ((Int32)v > ZSTD_maxCLevel()) {
+        #if Z7_ZSTD_ADVMAX_ALLOWED // 64-bit only
+          _Max = (_Level == Z7_ZSTD_ULTIMATE_LEV); // special case (level from GUI)
+        #endif
           _Level = ZSTD_maxCLevel();
         }
 
         /**
-         * zstd default levels: _Level => 1..ZSTD_maxCLevel()
+         * zstd default levels: _Level => 1..ZSTD_maxCLevel(), Z7_ZSTD_ULTIMATE_LEV (128) == --max
          */
-        _props._level = static_cast < Byte > (_Level);
+        _props._level = static_cast < Byte > (!_Max ? _Level : Z7_ZSTD_ULTIMATE_LEV);
         break;
       }
     case NCoderPropID::kFast:
+      if (!_Max)
       {
         /* like --fast in zstd cli program */
         UInt32 _Fast = v;
@@ -215,14 +224,28 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
   return S_OK;
 }
 
-STDMETHODIMP CEncoder::WriteCoderProperties(ISequentialOutStream * outStream)
+Z7_COM7F_IMF(CEncoder::SetCoderPropertiesOpt(const PROPID *propIDs,
+    const PROPVARIANT *coderProps, UInt32 numProps))
+{
+  for (UInt32 i = 0; i < numProps; i++)
+  {
+    const PROPVARIANT &prop = coderProps[i];
+    const PROPID propID = propIDs[i];
+    if (propID == NCoderPropID::kExpectedDataSize)
+      if (prop.vt == VT_UI8 && prop.uhVal.QuadPart)
+        unpackSize = prop.uhVal.QuadPart;
+  }
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CEncoder::WriteCoderProperties(ISequentialOutStream * outStream))
 {
   return WriteStream(outStream, &_props, sizeof (_props));
 }
 
-STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
+Z7_COM7F_IMF(CEncoder::Code(ISequentialInStream *inStream,
   ISequentialOutStream *outStream, const UInt64 * /*inSize*/ ,
-  const UInt64 * /*outSize */, ICompressProgressInfo *progress)
+  const UInt64 * /*outSize */, ICompressProgressInfo *progress))
 {
   ZSTD_EndDirective ZSTD_todo = ZSTD_e_continue;
   ZSTD_outBuffer outBuff;
@@ -244,6 +267,26 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
     _dstBuf = MyAlloc(_dstBufSize);
     if (!_dstBuf)
       return E_OUTOFMEMORY;
+
+  #if Z7_ZSTD_ADVMAX_ALLOWED // 64-bit only
+    // params from setMaxCompression(), https://github.com/facebook/zstd/blob/v1.5.7/programs/zstdcli.c#L642 :
+    if (_Max) {
+      _Long = 1;
+      _WindowLog = ZSTD_WINDOWLOG_MAX;
+      _ChainLog = ZSTD_CHAINLOG_MAX;
+      _HashLog = ZSTD_HASHLOG_MAX;
+      _SearchLog = ZSTD_SEARCHLOG_MAX;
+      _MinMatch = ZSTD_MINMATCH_MIN;
+      _TargetLen = ZSTD_TARGETLENGTH_MAX;
+      _Strategy = ZSTD_STRATEGY_MAX;
+      _OverlapLog = ZSTD_OVERLAPLOG_MAX;
+      _LdmHashLog = ZSTD_LDM_HASHLOG_MAX;
+      _LdmHashRateLog = 0; /* automatically derived */
+      _LdmMinMatch = 16; /* heuristic */
+      _LdmBucketSizeLog = ZSTD_LDM_BUCKETSIZELOG_MAX;
+      _Level = ZSTD_maxCLevel();
+    }
+  #endif
 
     /* setup level */
     err = ZSTD_CCtx_setParameter(_ctx, ZSTD_c_compressionLevel, (UInt32)_Level);
@@ -352,7 +395,7 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
 
     /* read input */
     srcSize = _srcBufSize;
-    RINOK(ReadStream(inStream, _srcBuf, &srcSize));
+    RINOK(ReadStream(inStream, _srcBuf, &srcSize))
 
     /* eof */
     if (srcSize == 0)
@@ -396,12 +439,12 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
 
       /* write output */
       if (outBuff.pos) {
-        RINOK(WriteStream(outStream, _dstBuf, outBuff.pos));
+        RINOK(WriteStream(outStream, _dstBuf, outBuff.pos))
         _processedOut += outBuff.pos;
       }
 
       if (progress)
-        RINOK(progress->SetRatioInfo(&_processedIn, &_processedOut));
+        RINOK(progress->SetRatioInfo(&_processedIn, &_processedOut))
 
       /* done */
       if (ZSTD_todo == ZSTD_e_end && err == 0)
@@ -414,7 +457,7 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
   }
 }
 
-STDMETHODIMP CEncoder::SetNumberOfThreads(UInt32 numThreads)
+Z7_COM7F_IMF(CEncoder::SetNumberOfThreads(UInt32 numThreads))
 {
   const UInt32 kNumThreadsMax = ZSTD_THREAD_MAX;
   if (numThreads < 1) numThreads = 1;

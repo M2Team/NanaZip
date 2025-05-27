@@ -161,7 +161,10 @@ HRESULT CHandler::SetMainMethod(CCompressionMethodMode &methodMode)
     if (methodFull.Id == k_ZSTD)
     {
       // continue;
-      NCompress::NZstd::CEncoderProps encoderProps;
+      // **************** 7-Zip ZS Modification Start ****************
+      // NCompress::NZstd::CEncoderProps encoderProps;
+      NCompress::NZSTD::CEncoderProps encoderProps;
+      // **************** 7-Zip ZS Modification End ****************
       RINOK(oneMethodInfo.Set_PropsTo_zstd(encoderProps));
       CZstdEncProps &zstdProps = encoderProps.EncProps;
       ZstdEncProps_NormalizeFull(&zstdProps);
@@ -441,6 +444,25 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     if (!TimeOptions.Write_MTime.Def) need_MTime = !db->MTime.Defs.IsEmpty();
     if (!Write_Attrib.Def) need_Attrib = !db->Attrib.Defs.IsEmpty();
   }
+
+  // **************** 7-Zip ZS Modification Start ****************
+  // if no methods specified in options (and not pure copy) - try to obtain it from archived item,
+  // (at the moment only once for 1st item block, because otherwise we'd need to rewrite every interface to set codecs per item):
+  if (_methods.IsEmpty() && _level != 0) {
+    CHandler::MethodInfo mInfo;
+    if (ObtainMethodFromBlocks(&mInfo)) {
+      //printf("************ fnd-block-method: %s, lev: %d\n", mInfo.methName.Ptr(), mInfo.level);
+      // set as default method (also _methods is not empty now, so this shall not be invoked anymore):
+      if (!mInfo.methName.IsEmpty()) {
+        COneMethodInfo &m = _methods.AddNew();
+        m.MethodName = mInfo.methName;
+        if ((_level == -1) && (mInfo.level != -1)) {
+          _level = mInfo.level;
+        }
+      }
+    }
+  }
+  // **************** 7-Zip ZS Modification End ****************
 
   // UString s;
   UString name;

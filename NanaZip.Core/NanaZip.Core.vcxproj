@@ -79,6 +79,7 @@
     <ClCompile Include="Extensions\ZSCodecs\Lz5Handler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\Lz5Register.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\LzHandler.cpp" />
+    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
@@ -263,7 +264,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZlibDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\ZlibEncoder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAes.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\HmacSha1.cpp" />
@@ -338,13 +338,11 @@
     <ClCompile Include="SevenZip\C\Sort.c" />
     <ClCompile Include="SevenZip\C\SwapBytes.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
-    <ClCompile Include="SevenZip\C\Xxh64.c" />
     <ClCompile Include="SevenZip\C\Xz.c" />
     <ClCompile Include="SevenZip\C\XzCrc64.c" />
     <ClCompile Include="SevenZip\C\XzDec.c" />
     <ClCompile Include="SevenZip\C\XzEnc.c" />
     <ClCompile Include="SevenZip\C\XzIn.c" />
-    <ClCompile Include="SevenZip\C\ZstdDec.c" />
     <ClCompile Include="Wrappers\Sha1Wrapper.cpp" />
     <ClCompile Include="Wrappers\Sha256Wrapper.cpp" />
     <ClCompile Include="Wrappers\Sha512Wrapper.cpp" />
@@ -359,6 +357,7 @@
     <ClInclude Include="Extensions\ZSCodecs\Lz4Encoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\Lz5Decoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\Lz5Encoder.h" />
+    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\ZstdEncoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.h" />
@@ -504,7 +503,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\Compress\ZDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\ZlibDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\ZlibEncoder.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\7zAes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\HmacSha1.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\HmacSha256.h" />
@@ -604,11 +602,9 @@
     <ClInclude Include="SevenZip\C\Sort.h" />
     <ClInclude Include="SevenZip\C\SwapBytes.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
-    <ClInclude Include="SevenZip\C\Xxh64.h" />
     <ClInclude Include="SevenZip\C\Xz.h" />
     <ClInclude Include="SevenZip\C\XzCrc64.h" />
     <ClInclude Include="SevenZip\C\XzEnc.h" />
-    <ClInclude Include="SevenZip\C\ZstdDec.h" />
     <ClInclude Include="Wrappers\Sha1Wrapper.h" />
     <ClInclude Include="Wrappers\Sha256Wrapper.h" />
     <ClInclude Include="Wrappers\Sha512Wrapper.h" />

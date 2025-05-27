@@ -160,6 +160,12 @@ public:
   FString VolName;
   FString VolExt;
   UString ArcFileName; // without path prefix
+  // **************** 7-Zip ZS Modification Start ****************
+  FString VolPrefix;
+  FString VolPostfix;
+  bool VolNumberAfterExt;
+  UInt32 DigitCount;
+  // **************** 7-Zip ZS Modification End ****************
 
   const UStringVector *NewNames;
   const UString *Comment;

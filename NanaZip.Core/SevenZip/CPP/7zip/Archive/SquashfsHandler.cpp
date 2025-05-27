@@ -5,11 +5,11 @@
 #include "../../../C/Alloc.h"
 #include "../../../C/LzmaDec.h"
 #include "../../../C/Xz.h"
-#include "../../../C/ZstdDec.h"
-#include "../../../C/CpuArch.h"
 // **************** 7-Zip ZS Modification Start ****************
+// #include "../../../C/ZstdDec.h"
 #include <lz4.h>
 // **************** 7-Zip ZS Modification End ****************
+#include "../../../C/CpuArch.h"
 
 #include "../../Common/ComTry.h"
 #include "../../Common/MyLinux.h"
@@ -30,6 +30,9 @@
 #include "../Compress/CopyCoder.h"
 #include "../Compress/ZlibDecoder.h"
 // #include "../Compress/LzmaDecoder.h"
+// **************** 7-Zip ZS Modification Start ****************
+#include "../../../../Extensions/ZSCodecs/ZstdDecoder.h"
+// **************** 7-Zip ZS Modification End ****************
 
 namespace NArchive {
 namespace NSquashfs {
@@ -881,9 +884,16 @@ Z7_CLASS_IMP_CHandler_IInArchive_1(
 
   // CMyComPtr2<ICompressCoder, NCompress::NLzma::CDecoder> _lzmaDecoder;
   CMyComPtr2<ICompressCoder, NCompress::NZlib::CDecoder> _zlibDecoder;
+
+  // **************** 7-Zip ZS Modification Start ****************
+  NCompress::NZSTD::CDecoder* _zstdDecoderSpec;
+  CMyComPtr<ICompressCoder> _zstdDecoder;
+  // **************** 7-Zip ZS Modification End ****************
   
   CXzUnpacker _xz;
-  CZstdDecHandle _zstd;
+  // **************** 7-Zip ZS Modification Start ****************
+  // CZstdDecHandle _zstd;
+  // **************** 7-Zip ZS Modification End ****************
 
   CByteBuffer _inputBuffer;
 
@@ -917,16 +927,20 @@ public:
   ~CHandler()
   {
     XzUnpacker_Free(&_xz);
-    if (_zstd)
-      ZstdDec_Destroy(_zstd);
+    // **************** 7-Zip ZS Modification Start ****************
+    // if (_zstd)
+    //   ZstdDec_Destroy(_zstd);
+    // **************** 7-Zip ZS Modification End ****************
   }
 
   HRESULT ReadBlock(UInt64 blockIndex, Byte *dest, size_t blockSize);
 };
 
-
-CHandler::CHandler():
-    _zstd(NULL)
+// **************** 7-Zip ZS Modification Start ****************
+// CHandler::CHandler():
+//     _zstd(NULL)
+CHandler::CHandler()
+// **************** 7-Zip ZS Modification End ****************
 {
   XzUnpacker_Construct(&_xz, &g_Alloc);
 }
@@ -1121,19 +1135,19 @@ static HRESULT LzoDecode(Byte *dest, SizeT *destLen, const Byte *src, SizeT *src
 }
 
 // **************** 7-Zip ZS Modification Start ****************
-static HRESULT Lz4Decode(Byte* dest, SizeT* destLen, const Byte* src, SizeT* srcLen)
+static HRESULT Lz4Decode(Byte *dest, SizeT *destLen, const Byte *src, SizeT *srcLen)
 {
-    const char* Src = (const char*)src;
-    char* Dst = (char*)dest;
-    int compressedSize = (int)*srcLen;
-    int dstCapacity = (int)*destLen;
-    // int LZ4_decompress_safe (const char* src, char* dst, int compressedSize, int dstCapacity);
-    int rv = LZ4_decompress_safe(Src, Dst, compressedSize, dstCapacity);
-    if (rv == 0)
-        return S_FALSE;
+  const char *Src = (const char *)src;
+  char *Dst = (char *)dest;
+  int compressedSize = (int)*srcLen;
+  int dstCapacity = (int)*destLen;
+  // int LZ4_decompress_safe (const char* src, char* dst, int compressedSize, int dstCapacity);
+  int rv = LZ4_decompress_safe(Src, Dst, compressedSize, dstCapacity);
+  if (rv == 0)
+    return S_FALSE;
 
-    *destLen = rv;
-    return S_OK;
+  *destLen = rv;
+  return S_OK;
 }
 // **************** 7-Zip ZS Modification End ****************
 
@@ -1173,6 +1187,19 @@ HRESULT CHandler::Decompress(ISequentialOutStream *outStream, Byte *outBuf, bool
     if (inSize != _zlibDecoder->GetInputProcessedSize())
       return S_FALSE;
   }
+  // **************** 7-Zip ZS Modification Start ****************
+  else if (method == kMethod_ZSTD)
+  {
+    if (!_zstdDecoder)
+    {
+      _zstdDecoderSpec = new NCompress::NZSTD::CDecoder();
+      _zstdDecoder = _zstdDecoderSpec;
+    }
+    RINOK(_zstdDecoder->Code(_limitedInStream, outStream, NULL, NULL, NULL));
+    if (inSize != _zstdDecoderSpec->GetInputProcessedSize())
+      return S_FALSE;
+  }
+  // **************** 7-Zip ZS Modification End ****************
   /*
   else if (method == kMethod_LZMA)
   {
@@ -1266,6 +1293,8 @@ HRESULT CHandler::Decompress(ISequentialOutStream *outStream, Byte *outBuf, bool
           && status != LZMA_STATUS_MAYBE_FINISHED_WITHOUT_MARK)
         return S_FALSE;
     }
+    // **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     else if (method == kMethod_ZSTD)
     {
       const Byte *src = _inputBuffer;
@@ -1323,6 +1352,8 @@ HRESULT CHandler::Decompress(ISequentialOutStream *outStream, Byte *outBuf, bool
       // memcpy(dest, state.dic, state.dicPos);
       destLen = state.winPos;
     }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    // **************** 7-Zip ZS Modification End ****************
     else
     {
       ECoderStatus status;
@@ -2392,11 +2423,21 @@ static const Byte k_Signature[] = {
     4, 's', 'h', 's', 'q',
     4, 'q', 's', 'h', 's' };
 
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 REGISTER_ARC_I(
   "SquashFS", "squashfs", NULL, 0xD2,
   k_Signature,
   0,
   NArcInfoFlags::kMultiSignature,
   NULL)
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+REGISTER_ARC_I(
+  "SquashFS", "sfs squashfs", NULL, 0xD2,
+  k_Signature,
+  0,
+  NArcInfoFlags::kMultiSignature,
+  NULL)
+// **************** 7-Zip ZS Modification End ****************
 
 }}

@@ -32,13 +32,14 @@ struct CProps
   Byte _reserved[2];
 };
 
-class CEncoder:
-  public ICompressCoder,
-  public ICompressSetCoderMt,
-  public ICompressSetCoderProperties,
-  public ICompressWriteCoderProperties,
-  public CMyUnknownImp
-{
+Z7_CLASS_IMP_COM_4(
+  CEncoder,
+  ICompressCoder,
+  ICompressSetCoderMt,
+  ICompressSetCoderProperties,
+  ICompressWriteCoderProperties
+)
+public:
   CProps _props;
 
   UInt64 _processedIn;
@@ -48,23 +49,8 @@ class CEncoder:
 
   LZ4MT_CCtx *_ctx;
 
-public:
-  Z7_COM_QI_BEGIN2(ICompressCoder)
-  Z7_COM_QI_ENTRY(ICompressSetCoderMt)
-  Z7_COM_QI_ENTRY(ICompressSetCoderProperties)
-  Z7_COM_QI_ENTRY(ICompressWriteCoderProperties)
-  Z7_COM_QI_END
-  Z7_COM_ADDREF_RELEASE
-
-public:
-
-  STDMETHOD (Code)(ISequentialInStream *inStream, ISequentialOutStream *outStream, const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
-  STDMETHOD (SetCoderProperties)(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps);
-  STDMETHOD (WriteCoderProperties)(ISequentialOutStream *outStream);
-  STDMETHOD (SetNumberOfThreads)(UInt32 numThreads);
-
   CEncoder();
-  virtual ~CEncoder();
+  ~CEncoder();
 };
 
 }}

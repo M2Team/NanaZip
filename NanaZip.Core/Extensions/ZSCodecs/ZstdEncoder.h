@@ -31,13 +31,15 @@ struct CProps
   Byte _reserved[2];
 };
 
-class CEncoder:
-  public ICompressCoder,
-  public ICompressSetCoderMt,
-  public ICompressSetCoderProperties,
-  public ICompressWriteCoderProperties,
-  public CMyUnknownImp
-{
+Z7_CLASS_IMP_COM_5(
+  CEncoder,
+  ICompressCoder,
+  ICompressSetCoderMt,
+  ICompressSetCoderProperties,
+  ICompressSetCoderPropertiesOpt,
+  ICompressWriteCoderProperties
+)
+public:
   CProps _props;
 
   ZSTD_CCtx* _ctx;
@@ -51,6 +53,7 @@ class CEncoder:
   UInt32 _numThreads;
 
   /* zstd advanced compression options */
+  bool  _Max;
   Int32 _Long;
   Int32 _Level;
   Int32 _Strategy;
@@ -66,28 +69,12 @@ class CEncoder:
   Int32 _LdmBucketSizeLog;
   Int32 _LdmHashRateLog;
 
-public:
-
   int dictIDFlag;
   int checksumFlag;
   UInt64 unpackSize;
 
-  Z7_COM_QI_BEGIN2(ICompressCoder)
-  Z7_COM_QI_ENTRY(ICompressSetCoderMt)
-  Z7_COM_QI_ENTRY(ICompressSetCoderProperties)
-  Z7_COM_QI_ENTRY(ICompressWriteCoderProperties)
-  Z7_COM_QI_END
-  Z7_COM_ADDREF_RELEASE
-
-public:
-
-  STDMETHOD (Code)(ISequentialInStream *inStream, ISequentialOutStream *outStream, const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
-  STDMETHOD (SetCoderProperties)(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps);
-  STDMETHOD (WriteCoderProperties)(ISequentialOutStream *outStream);
-  STDMETHOD (SetNumberOfThreads)(UInt32 numThreads);
-
   CEncoder();
-  virtual ~CEncoder();
+  ~CEncoder();
 };
 
 }}

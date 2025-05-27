@@ -382,7 +382,10 @@ void CExtractDialog::OnOK()
 
   s.Trim();
   NName::NormalizeDirPathPrefix(s);
-  
+
+  // **************** 7-Zip ZS Modification Start ****************
+  DirPath = s; // s remains path without subpath (to store it to history below)
+  // **************** 7-Zip ZS Modification End ****************
   #ifndef Z7_SFX
   
   const bool splitDest = IsButtonCheckedBool(IDX_EXTRACT_NAME_ENABLE);
@@ -391,8 +394,12 @@ void CExtractDialog::OnOK()
     UString pathName;
     _pathName.GetText(pathName);
     pathName.Trim();
-    s += pathName;
-    NName::NormalizeDirPathPrefix(s);
+    // **************** 7-Zip ZS Modification Start ****************
+    //s += pathName;
+    //NName::NormalizeDirPathPrefix(s);
+    DirPath += pathName;
+    NName::NormalizeDirPathPrefix(DirPath);
+    // **************** 7-Zip ZS Modification End ****************
   }
   if (splitDest != _info.SplitDest.Val)
   {
@@ -402,7 +409,9 @@ void CExtractDialog::OnOK()
 
   #endif
 
-  DirPath = s;
+  // **************** 7-Zip ZS Modification Start ****************
+  // DirPath = s;
+  // **************** 7-Zip ZS Modification End ****************
   
   #ifndef Z7_NO_REGISTRY
   _info.Paths.Clear();

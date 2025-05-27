@@ -25,6 +25,13 @@ struct CFmSettings
   bool ShowGrid;
   bool SingleClick;
   bool AlternativeSelection;
+  // **************** 7-Zip ZS Modification Start ****************
+  bool ArcHistory;
+  bool PathHistory;
+  bool CopyHistory;
+  bool FolderHistory;
+  bool LowercaseHashes;
+  // **************** 7-Zip ZS Modification End ****************
   // bool Underline;
 
   bool ShowSystemMenu;
@@ -38,6 +45,19 @@ struct CFmSettings
 
 bool ReadLockMemoryEnable();
 void SaveLockMemoryEnable(bool enable);
+
+// **************** 7-Zip ZS Modification Start ****************
+bool WantArcHistory();
+bool WantPathHistory();
+bool WantCopyHistory();
+bool WantFolderHistory();
+bool WantLowercaseHashes();
+
+bool WantArcHistory();
+bool WantPathHistory();
+bool WantCopyHistory();
+bool WantFolderHistory();
+// **************** 7-Zip ZS Modification End ****************
 
 void SaveFlatView(UInt32 panelIndex, bool enable);
 bool ReadFlatView(UInt32 panelIndex);

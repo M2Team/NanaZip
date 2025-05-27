@@ -19,7 +19,7 @@ CDecoder::~CDecoder()
 {
 }
 
-STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte * prop, UInt32 size)
+Z7_COM7F_IMF(CDecoder::SetDecoderProperties2(const Byte * prop, UInt32 size))
 {
   DProps *pProps = (DProps *)prop;
 
@@ -31,7 +31,7 @@ STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte * prop, UInt32 size)
   return S_OK;
 }
 
-STDMETHODIMP CDecoder::SetNumberOfThreads(UInt32 numThreads)
+Z7_COM7F_IMF(CDecoder::SetNumberOfThreads(UInt32 numThreads))
 {
   const UInt32 kNumThreadsMax = LIZARDMT_THREAD_MAX;
   if (numThreads < 1) numThreads = 1;
@@ -46,7 +46,7 @@ HRESULT CDecoder::SetOutStreamSizeResume(const UInt64 * /*outSize*/)
   return S_OK;
 }
 
-STDMETHODIMP CDecoder::SetOutStreamSize(const UInt64 * outSize)
+Z7_COM7F_IMF(CDecoder::SetOutStreamSize(const UInt64 * outSize))
 {
   _processedIn = 0;
   RINOK(SetOutStreamSizeResume(outSize));
@@ -65,21 +65,21 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
   return ::NanaZipCodecsLizardDecode(&Context, _numThreads, _inputSize);
 }
 
-STDMETHODIMP CDecoder::Code(ISequentialInStream * inStream, ISequentialOutStream * outStream,
-  const UInt64 * /*inSize */, const UInt64 *outSize, ICompressProgressInfo * progress)
+Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream * inStream, ISequentialOutStream * outStream,
+  const UInt64 * /*inSize */, const UInt64 *outSize, ICompressProgressInfo * progress))
 {
   SetOutStreamSize(outSize);
   return CodeSpec(inStream, outStream, progress);
 }
 
 #ifndef Z7_NO_READ_FROM_CODER
-STDMETHODIMP CDecoder::SetInStream(ISequentialInStream * inStream)
+Z7_COM7F_IMF(CDecoder::SetInStream(ISequentialInStream * inStream))
 {
   _inStream = inStream;
   return S_OK;
 }
 
-STDMETHODIMP CDecoder::ReleaseInStream()
+Z7_COM7F_IMF(CDecoder::ReleaseInStream())
 {
   _inStream.Release();
   return S_OK;

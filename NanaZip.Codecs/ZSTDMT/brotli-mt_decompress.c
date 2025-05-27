@@ -110,7 +110,7 @@ BROTLIMT_DCtx *BROTLIMT_createDCtx(int threads, int inputsize)
 	if (inputsize)
 		ctx->inputsize = inputsize;
 	else
-		ctx->inputsize = 1024 * 64;	/* 64K buffer */
+		ctx->inputsize = 1024 * 256; /* 256K buffer */
 
 	if (threads) {
 		pthread_mutex_init(&ctx->read_mutex, NULL);

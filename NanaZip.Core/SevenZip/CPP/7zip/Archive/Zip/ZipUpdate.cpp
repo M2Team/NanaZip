@@ -822,7 +822,10 @@ static UInt32 SetZstdThreads(
     UInt64 numFilesToCompress,
     UInt64 numBytesToCompress)
 {
-  NCompress::NZstd::CEncoderProps encoderProps;
+  // **************** 7-Zip ZS Modification Start ****************
+  // NCompress::NZstd::CEncoderProps encoderProps;
+  NCompress::NZSTD::CEncoderProps encoderProps;
+  // **************** 7-Zip ZS Modification End ****************
   RINOK(encoderProps.SetFromMethodProps(*oneMethodMain));
   CZstdEncProps &zstdProps = encoderProps.EncProps;
   ZstdEncProps_NormalizeFull(&zstdProps);
@@ -1046,7 +1049,9 @@ static HRESULT Update2(
   {
     // if (oneMethodMain) {
     /*
-    if (method == NFileHeader::NCompressionMethod::kZstdWz)
+    // **************** 7-Zip ZS Modification Start ****************
+    // if (method == NFileHeader::NCompressionMethod::kZstdWz)
+    if (method == NFileHeader::NCompressionMethod::kZstd)
     {
       if (oneMethodMain->FindProp(NCoderPropID::kNumThreads) < 0)
       {
@@ -1055,7 +1060,10 @@ static HRESULT Update2(
             && options._memUsage_WasSet
             && !options._numThreads_WasForced)
         {
-          NCompress::NZstd::CEncoderProps encoderProps;
+          // **************** 7-Zip ZS Modification Start ****************
+          // NCompress::NZstd::CEncoderProps encoderProps;
+          NCompress::NZSTD::CEncoderProps encoderProps;
+          // **************** 7-Zip ZS Modification End ****************
           RINOK(encoderProps.SetFromMethodProps(*oneMethodMain))
           CZstdEncProps &zstdProps = encoderProps.EncProps;
           ZstdEncProps_NormalizeFull(&zstdProps);
@@ -1065,7 +1073,10 @@ static HRESULT Update2(
         }
         oneMethodMain->AddProp_NumThreads(numThreads);
       }
-    } // kZstdWz
+    // **************** 7-Zip ZS Modification Start ****************
+    // } // kZstdWz
+    } // kZstd
+    // **************** 7-Zip ZS Modification End ****************
     */
     // } // oneMethodMain
 
@@ -1131,7 +1142,10 @@ static HRESULT Update2(
       numThreads /= (unsigned)numXzThreads;
     }
     /*
-    else if (method == NFileHeader::NCompressionMethod::kZstdWz)
+    // **************** 7-Zip ZS Modification Start ****************
+    // else if (method == NFileHeader::NCompressionMethod::kZstdWz)
+    else if (method == NFileHeader::NCompressionMethod::kZstd)
+    // **************** 7-Zip ZS Modification End ****************
     {
       numThreads = SetZstdThreads(options,
           oneMethodMain, numThreads,

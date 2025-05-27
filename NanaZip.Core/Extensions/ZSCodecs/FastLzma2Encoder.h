@@ -14,12 +14,22 @@
 namespace NCompress {
 namespace NLzma2 {
 
-class CFastEncoder :
+class CFastEncoder Z7_final:
   public ICompressCoder,
   public ICompressSetCoderProperties,
   public ICompressWriteCoderProperties,
   public CMyUnknownImp
 {
+  Z7_COM_UNKNOWN_IMP_3(
+      ICompressCoder,
+      ICompressSetCoderProperties,
+      ICompressWriteCoderProperties)
+
+  Z7_IFACE_COM7_IMP(ICompressCoder)
+  Z7_IFACE_COM7_IMP(ICompressSetCoderProperties)
+  Z7_IFACE_COM7_IMP(ICompressWriteCoderProperties)
+
+public:
   class FastLzma2
   {
   public:
@@ -47,22 +57,6 @@ class CFastEncoder :
   };
 
   FastLzma2 _encoder;
-
-public:
-  Z7_COM_UNKNOWN_IMP_3(
-    ICompressCoder,
-    ICompressSetCoderProperties,
-    ICompressWriteCoderProperties)
-
-public:
-
-  STDMETHOD(Code)(ISequentialInStream *inStream, ISequentialOutStream *outStream,
-    const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
-  STDMETHOD(SetCoderProperties)(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps);
-  STDMETHOD(WriteCoderProperties)(ISequentialOutStream *outStream);
-
-  CFastEncoder();
-  virtual ~CFastEncoder();
 };
 
 }}

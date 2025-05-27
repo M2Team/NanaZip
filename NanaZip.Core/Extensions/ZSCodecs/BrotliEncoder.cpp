@@ -27,7 +27,7 @@ CEncoder::~CEncoder()
     BROTLIMT_freeCCtx(_ctx);
 }
 
-STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARIANT * coderProps, UInt32 numProps)
+Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARIANT * coderProps, UInt32 numProps))
 {
   _props.clear();
 
@@ -96,19 +96,33 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
   return S_OK;
 }
 
-STDMETHODIMP CEncoder::WriteCoderProperties(ISequentialOutStream * outStream)
+Z7_COM7F_IMF(CEncoder::SetCoderPropertiesOpt(const PROPID *propIDs,
+    const PROPVARIANT *coderProps, UInt32 numProps))
+{
+  for (UInt32 i = 0; i < numProps; i++)
+  {
+    const PROPVARIANT &prop = coderProps[i];
+    const PROPID propID = propIDs[i];
+    if (propID == NCoderPropID::kExpectedDataSize)
+      if (prop.vt == VT_UI8 && prop.uhVal.QuadPart)
+        unpackSize = prop.uhVal.QuadPart;
+  }
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CEncoder::WriteCoderProperties(ISequentialOutStream * outStream))
 {
   return WriteStream(outStream, &_props, sizeof (_props));
 }
 
-STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
+Z7_COM7F_IMF(CEncoder::Code(ISequentialInStream *inStream,
   ISequentialOutStream *outStream, const UInt64 * /*inSize*/ ,
-  const UInt64 * /*outSize */, ICompressProgressInfo *progress)
+  const UInt64 * /*outSize */, ICompressProgressInfo *progress))
 {
   BROTLIMT_RdWr_t rdwr;
   size_t result;
   HRESULT res = S_OK;
-
+  
   _processedIn = 0;
   _processedOut = 0;
 
@@ -127,7 +141,7 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
 
   /* 2) create compression context, if needed */
   if (!_ctx)
-    _ctx = BROTLIMT_createCCtx(_numThreads, unpackSize, _props._level, _inputSize,
+    _ctx = BROTLIMT_createCCtx(_numThreads, unpackSize, _props._level, _inputSize, 
       _WindowLog >= 0 ? _WindowLog : BROTLI_MAX_WINDOW_BITS);
   if (!_ctx)
     return S_FALSE;
@@ -143,15 +157,15 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
   return res;
 }
 
-STDMETHODIMP CEncoder::SetNumberOfThreads(UInt32 numThreads)
+Z7_COM7F_IMF(CEncoder::SetNumberOfThreads(UInt32 numThreads))
 {
   const UInt32 kNumThreadsMax = BROTLIMT_THREAD_MAX;
-  if (numThreads < 0) numThreads = 0;
-  if (numThreads > kNumThreadsMax) numThreads = kNumThreadsMax;
   // if single-threaded, retain artificial number set in BrotliHandler (always prefer .br format):
-  if (_numThreads == 0 && numThreads == 1) {
+  if ((int)numThreads < 1) {
     numThreads = 0;
   }
+  else
+  if (numThreads > kNumThreadsMax) numThreads = kNumThreadsMax;
   _numThreads = numThreads;
   return S_OK;
 }

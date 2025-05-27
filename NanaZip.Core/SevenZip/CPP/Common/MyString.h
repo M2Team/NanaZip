@@ -670,6 +670,9 @@ public:
   UString &operator=(char c) { return (*this)=((wchar_t)(unsigned char)c); }
   UString &operator=(const wchar_t *s);
   UString &operator=(const UString &s);
+  // **************** 7-Zip ZS Modification Start ****************
+  void AddFrom(const wchar_t *s, unsigned len); // no check
+  // **************** 7-Zip ZS Modification End ****************
   void SetFrom(const wchar_t *s, unsigned len); // no check
   void SetFromBstr(LPCOLESTR s);
   UString &operator=(const char *s);
@@ -1058,7 +1061,9 @@ public:
 
 void SplitString(const UString &srcString, UStringVector &destStrings);
 
-#endif
+// **************** 7-Zip ZS Modification Start ****************
+// #endif
+// **************** 7-Zip ZS Modification End ****************
 
 
 
@@ -1076,3 +1081,9 @@ void SplitString(const UString &srcString, UStringVector &destStrings);
 #define WCHAR_IN_FILE_NAME_BACKSLASH_REPLACEMENT  ((wchar_t)((unsigned)(0xF000) + (unsigned)'\\'))
 // #define WCHAR_IN_FILE_NAME_BACKSLASH_REPLACEMENT  '_'
 #endif
+// **************** 7-Zip ZS Modification Start ****************
+
+UString GetQuotedString(const UString &s);
+
+#endif
+// **************** 7-Zip ZS Modification End ****************

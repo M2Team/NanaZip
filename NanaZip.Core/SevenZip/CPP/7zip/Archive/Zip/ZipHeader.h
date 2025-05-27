@@ -49,7 +49,9 @@ namespace NFileHeader
       kDeflate = 8,
       kDeflate64 = 9,
       kPKImploding = 10,
-      
+
+      // **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
       kBZip2 = 12,
       
       kLZMA = 14,
@@ -65,6 +67,23 @@ namespace NFileHeader
       kWavPack = 97,
       kPPMd = 98,
       kWzAES = 99
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+      kBZip2 = 12,   // File is compressed using BZIP2 algorithm
+
+      kLZMA = 14,    // LZMA
+
+      kTerse = 18,   // File is compressed using IBM TERSE (new)
+      kLz77 = 19,    // IBM LZ77 z Architecture
+      kZstdPk = 20,  // deprecated (use method 93 for zstd)
+
+      kZstd = 93,    // Zstandard (zstd) Compression
+      kMP3 = 94,     // MP3 Compression
+      kXz = 95,      // XZ Compression
+      kJpeg = 96,    // JPEG variant
+      kWavPack = 97, // WavPack compressed data
+      kPPMd = 98,    // PPMd version I, Rev 1
+      kWzAES = 99    // AE-x encryption marker (see APPENDIX E)
+      // **************** 7-Zip ZS Modification End ****************
     };
 
     const Byte kMadeByProgramVersion = 63;

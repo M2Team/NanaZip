@@ -22,13 +22,11 @@ using namespace NWindows;
 namespace NArchive {
 namespace NLIZARD {
 
-class CHandler:
-  public IInArchive,
-  public IArchiveOpenSeq,
-  public IOutArchive,
-  public ISetProperties,
-  public CMyUnknownImp
-{
+Z7_CLASS_IMP_CHandler_IInArchive_3(
+  IArchiveOpenSeq,
+  IOutArchive,
+  ISetProperties
+)
   CMyComPtr<IInStream> _stream;
   CMyComPtr<ISequentialInStream> _seqStream;
 
@@ -45,13 +43,6 @@ class CHandler:
   UInt64 _numBlocks;
 
   CSingleMethodProps _props;
-
-public:
-  Z7_IFACES_IMP_UNK_4(
-      IInArchive,
-      IArchiveOpenSeq,
-      IOutArchive,
-      ISetProperties)
 };
 
 static const Byte kProps[] =
@@ -294,7 +285,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
   if (!updateCallback)
     return E_FAIL;
   RINOK(updateCallback->GetUpdateItemInfo(0, &newData, &newProps, &indexInArchive));
-
+ 
   if ((newProps))
   {
     {
@@ -305,7 +296,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
           return E_INVALIDARG;
     }
   }
-
+  
   if ((newData))
   {
     UInt64 size;

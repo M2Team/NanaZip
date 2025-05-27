@@ -10,6 +10,7 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
   <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\K7Pal\K7PalStatic.props" />
+  <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.Sfx.Shared.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
@@ -40,6 +41,7 @@
     <None Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zHandler.cpp" />
@@ -77,7 +79,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\Compress\LzmaRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\PpmdDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAes.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\MyAes.cpp" />
@@ -115,11 +116,10 @@
     <ClCompile Include="SevenZip\C\Ppmd7.c" />
     <ClCompile Include="SevenZip\C\Ppmd7Dec.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
-    <ClCompile Include="SevenZip\C\Xxh64.c" />
-    <ClCompile Include="SevenZip\C\ZstdDec.c" />
     <ClCompile Include="Wrappers\Sha256Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zHandler.h" />
@@ -160,7 +160,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\Compress\LzmaDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\PpmdDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\StdAfx.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\7zAes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\MyAes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\RandGen.h" />
@@ -224,8 +223,6 @@
     <ClInclude Include="SevenZip\C\RotateDefs.h" />
     <ClInclude Include="SevenZip\C\Sha256.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
-    <ClInclude Include="SevenZip\C\Xxh64.h" />
-    <ClInclude Include="SevenZip\C\ZstdDec.h" />
     <ClInclude Include="Wrappers\Sha256Wrapper.h" />
   </ItemGroup>
   <ItemGroup>

@@ -61,9 +61,16 @@ FL2_waitCStream
 ZSTD_isError
 ZSTD_maxCLevel
 ZSTD_createCCtx
+ZSTD_createDCtx
 ZSTD_freeCCtx
+ZSTD_freeDCtx
 ZSTD_CCtx_setParameter
+ZSTD_DCtx_reset
+ZSTD_DCtx_setParameter
 ZSTD_compressStream2
+ZSTD_decompressStream
 ZSTD_CStreamInSize
 ZSTD_CStreamOutSize
+ZSTD_DStreamInSize
+ZSTD_DStreamOutSize
 ZSTD_getErrorCode

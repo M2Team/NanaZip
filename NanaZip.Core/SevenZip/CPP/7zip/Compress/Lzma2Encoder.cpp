@@ -6,6 +6,9 @@
 
 #include "../Common/CWrappers.h"
 #include "../Common/StreamUtils.h"
+// **************** 7-Zip ZS Modification Start ****************
+#include "../../Windows/System.h"
+// **************** 7-Zip ZS Modification End ****************
 
 #include "Lzma2Encoder.h"
 
@@ -50,10 +53,20 @@ HRESULT SetLzma2Prop(PROPID propID, const PROPVARIANT &prop, CLzma2EncProps &lzm
       break;
     }
     case NCoderPropID::kNumThreads:
+    // **************** 7-Zip ZS Modification Start ****************
+    {
+    // **************** 7-Zip ZS Modification End ****************
       if (prop.vt != VT_UI4)
         return E_INVALIDARG;
-      lzma2Props.numTotalThreads = (int)(prop.ulVal);
+      // **************** 7-Zip ZS Modification Start ****************
+      // lzma2Props.numTotalThreads = (int)(prop.ulVal);
+      int v = (int)prop.ulVal;
+      lzma2Props.numTotalThreads = v >= 0 ? (v ? v : 1) : NWindows::NSystem::GetNumberOfProcessors();;
+      // **************** 7-Zip ZS Modification End ****************
       break;
+    // **************** 7-Zip ZS Modification Start ****************
+    }
+    // **************** 7-Zip ZS Modification End ****************
     default:
       RINOK(NLzma::SetLzmaProp(propID, prop, lzma2Props.lzmaProps))
   }

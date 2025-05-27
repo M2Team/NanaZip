@@ -8,6 +8,9 @@
 
 #define k_7zip_GUID_Data1 0x23170F69
 #define k_7zip_GUID_Data2 0x40C1
+// **************** 7-Zip ZS Modification Start ****************
+#define k_7zip_GUID_Data2_ZS 0x20BB
+// **************** 7-Zip ZS Modification End ****************
 
 #define k_7zip_GUID_Data3_Common  0x278A
 

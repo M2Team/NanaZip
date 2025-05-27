@@ -956,20 +956,11 @@
     <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\C\Xxh64.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\C\ZstdDec.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\AvbHandler.cpp">
       <Filter>SevenZip\CPP\7zip\Archive</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\LvmHandler.cpp">
       <Filter>SevenZip\CPP\7zip\Archive</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.cpp">
-      <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClCompile>
     <ClCompile Include="Wrappers\Sha512Wrapper.cpp">
       <Filter>Wrappers</Filter>
@@ -979,6 +970,9 @@
     </ClCompile>
     <ClCompile Include="Wrappers\Sha1Wrapper.cpp">
       <Filter>Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
+      <Filter>Extensions\ZSCodecs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1744,15 +1738,6 @@
     <ClInclude Include="Extensions\ZSCodecs\FastLzma2Encoder.h">
       <Filter>Extensions\ZSCodecs</Filter>
     </ClInclude>
-    <ClInclude Include="SevenZip\C\Xxh64.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="SevenZip\C\ZstdDec.h">
-      <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\Compress\ZstdDecoder.h">
-      <Filter>SevenZip\CPP\7zip\Compress</Filter>
-    </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\Common0.h">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClInclude>
@@ -1767,6 +1752,9 @@
     </ClInclude>
     <ClInclude Include="Wrappers\Sha1Wrapper.h">
       <Filter>Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
+      <Filter>Extensions\ZSCodecs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
