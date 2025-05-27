@@ -77,6 +77,11 @@ CArchiveUpdateCallback::CArchiveUpdateCallback():
     */
     Need_LatestMTime(false),
     LatestMTime_Defined(false),
+
+    // **************** 7-Zip ZS Modification Start ****************
+    VolNumberAfterExt(false),
+    DigitCount(2),
+    // **************** 7-Zip ZS Modification End ****************
     
     Callback(NULL),
   
@@ -939,6 +944,8 @@ Z7_COM7F_IMF(CArchiveUpdateCallback::GetVolumeSize(UInt32 index, UInt64 *size))
   return S_OK;
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 Z7_COM7F_IMF(CArchiveUpdateCallback::GetVolumeStream(UInt32 index, ISequentialOutStream **volumeStream))
 {
   COM_TRY_BEGIN
@@ -959,6 +966,47 @@ Z7_COM7F_IMF(CArchiveUpdateCallback::GetVolumeStream(UInt32 index, ISequentialOu
   return S_OK;
   COM_TRY_END
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+Z7_COM7F_IMF(CArchiveUpdateCallback::GetVolumeStream(UInt32 index, ISequentialOutStream **volumeStream))
+{
+  COM_TRY_BEGIN
+  char temp[16];
+  ConvertUInt32ToString(index + 1, temp);
+  FString res (temp);
+  while (res.Len() < DigitCount)
+    res.InsertAtFront(FTEXT('0'));
+  FString fileName = VolName;
+  if (VolNumberAfterExt)
+  {
+    if (!VolPrefix.IsEmpty())
+      fileName += VolPrefix;
+    fileName += VolExt;
+    if (!VolPostfix.IsEmpty())
+      fileName += VolPostfix;
+    else
+      fileName.Add_Dot();
+    fileName += res;
+  }
+  else
+  {
+    if (!VolPrefix.IsEmpty())
+      fileName += VolPrefix;
+    else
+      fileName.Add_Dot();
+    fileName += res;
+    if (!VolPostfix.IsEmpty())
+      fileName += VolPostfix;
+    fileName += VolExt;
+  }
+  COutFileStream *streamSpec = new COutFileStream;
+  CMyComPtr<ISequentialOutStream> streamLoc(streamSpec);
+  if (!streamSpec->Create_NEW(fileName))
+    return GetLastError_noZero_HRESULT();
+  *volumeStream = streamLoc.Detach();
+  return S_OK;
+  COM_TRY_END
+}
+// **************** 7-Zip ZS Modification End ****************
 
 Z7_COM7F_IMF(CArchiveUpdateCallback::CryptoGetTextPassword2(Int32 *passwordIsDefined, BSTR *password))
 {

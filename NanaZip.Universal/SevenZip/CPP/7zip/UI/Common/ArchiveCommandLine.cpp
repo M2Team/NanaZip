@@ -663,7 +663,10 @@ static const char *ParseMapWithPaths(
     const wchar_t c = p[i];
     if (c == 0)
     {
-      // MessageBoxW(0, name, L"7-Zip", 0);
+      // **************** NanaZip Modification Start ****************
+      // // MessageBoxW(0, name, L"7-Zip", 0);
+      // MessageBoxW(0, name, L"NanaZip", 0);
+      // **************** NanaZip Modification End ****************
       AddNameToCensor(censor, nop, name);
       name.Empty();
     }

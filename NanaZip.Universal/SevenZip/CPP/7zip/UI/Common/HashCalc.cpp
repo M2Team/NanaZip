@@ -17,6 +17,12 @@
 #include "../../Archive/Common/ItemNameUtils.h"
 #include "../../Archive/IArchive.h"
 
+// **************** 7-Zip ZS Modification Start ****************
+#ifdef WANT_OPTIONAL_LOWERCASE
+#include "../FileManager/RegistryUtils.h"
+#endif
+// **************** 7-Zip ZS Modification End ****************
+
 #include "EnumDirItems.h"
 #include "HashCalc.h"
 
@@ -687,8 +693,23 @@ void HashHexToString(char *dest, const Byte *data, size_t size)
     {
       const size_t b = *data++;
       dest -= 2;
+      // **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
       dest[0] = GET_HEX_CHAR_UPPER(b >> 4);
       dest[1] = GET_HEX_CHAR_UPPER(b & 15);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+#ifdef WANT_OPTIONAL_LOWERCASE
+      if (!WantLowercaseHashes()) {
+#endif
+        dest[0] = GET_HEX_CHAR_UPPER(b >> 4);
+        dest[1] = GET_HEX_CHAR_UPPER(b & 15);
+#ifdef WANT_OPTIONAL_LOWERCASE
+      } else {
+        dest[0] = GET_HEX_CHAR_LOWER(b >> 4);
+        dest[1] = GET_HEX_CHAR_LOWER(b & 15);
+      }
+#endif
+      // **************** 7-Zip ZS Modification End ****************
     }
     while (dest != dest_start);
   }
@@ -779,8 +800,12 @@ static const char * const k_CsumMethodNames[] =
   , "sha512"
 //  , "sha3-224"
   , "sha3-256"
+    // **************** 7-Zip ZS Modification Start ****************
 //  , "sha3-384"
 //  , "sha3-512"
+    , "sha3-384"
+    , "sha3-512"
+// // **************** 7-Zip ZS Modification End ****************
 //  , "shake128"
 //  , "shake256"
   , "sha1"
@@ -1404,7 +1429,11 @@ static bool CheckDigests(const Byte *a, const Byte *b, size_t size)
 static void AddDefaultMethod(UStringVector &methods, unsigned size)
 {
   const char *m = NULL;
-       if (size == 32) m = "sha256";
+  // **************** 7-Zip ZS Modification Start ****************
+  //      if (size == 32) m = "sha256";
+       if (size == 64) m = "sha512";
+  else if (size == 32) m = "sha256";
+  // **************** 7-Zip ZS Modification End ****************
   else if (size == 20) m = "sha1";
   else if (size == 16) m = "md5";
   else if (size ==  8) m = "crc64";
@@ -2092,8 +2121,12 @@ void Codecs_AddHashArcHandler(CCodecs *codecs)
         // " sha512-256"
         // " sha3-224"
         " sha3-256"
+        // **************** 7-Zip ZS Modification Start ****************
         // " sha3-384"
         // " sha3-512"
+        " sha3-384"
+        " sha3-512"
+        // **************** 7-Zip ZS Modification End ****************
         // " shake128"
         // " shake256"
         " sha1"

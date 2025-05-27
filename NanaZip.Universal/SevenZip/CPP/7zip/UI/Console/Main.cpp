@@ -156,6 +156,9 @@ static const char * const kHelpString =
     "  t : Test integrity of archive\n"
     "  u : Update files to archive\n"
     "  x : eXtract files with full paths\n"
+    // **************** 7-Zip ZS Modification Start ****************
+    "  --version : Show version information\n"
+    // **************** 7-Zip ZS Modification End ****************
     "\n"
     "<Switches>\n"
     "  -- : Stop switches and @listfile parsing\n"
@@ -891,6 +894,18 @@ int Main2(
     ShowCopyrightAndHelp(g_StdStream, true);
     return 0;
   }
+
+  // **************** 7-Zip ZS Modification Start ****************
+  if (commandStrings.Size() == 1 && commandStrings[0] == L"--version") {
+    // **************** NanaZip Modification Start ****************
+    // *g_StdStream << kVersionString;
+    *g_StdStream <<
+      "NanaZip" PROG_POSTFIX_2 " "
+      MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")";
+    // **************** NanaZip Modification End ****************
+    return 0;
+  }
+  // **************** 7-Zip ZS Modification End ****************
 
   CArcCmdLineOptions options;
 
