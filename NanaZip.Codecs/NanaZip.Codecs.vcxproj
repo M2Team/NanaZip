@@ -498,7 +498,7 @@
       <Version>1.2.410</Version>
     </PackageReference>
     <PackageReference Include="Mile.Json">
-      <Version>1.0.659</Version>
+      <Version>1.0.1057</Version>
     </PackageReference>
     <PackageReference Include="Mile.Mobility">
       <Version>1.0.206</Version>
