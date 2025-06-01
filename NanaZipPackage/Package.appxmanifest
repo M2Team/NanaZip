@@ -56,54 +56,6 @@
 
   <Applications>
     <Application 
-      Id="NanaZip.Console" 
-      Executable="NanaZip.Universal.Console.exe" 
-      EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements 
-        AppListEntry="none"
-        DisplayName="NanaZip Preview"
-        Description="NanaZip"
-        BackgroundColor="transparent"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png" />
-      <Extensions>
-        <uap3:Extension 
-          Category="windows.appExecutionAlias" 
-          Executable="NanaZip.Universal.Console.exe" 
-          EntryPoint="Windows.FullTrustApplication">
-          <uap3:AppExecutionAlias>
-            <desktop:ExecutionAlias Alias="NanaZipC.exe" />
-            <desktop:ExecutionAlias Alias="K7C.exe" />
-            <desktop:ExecutionAlias Alias="7z.exe" uap8:AllowOverride="true"/>
-          </uap3:AppExecutionAlias>
-        </uap3:Extension>
-      </Extensions>
-    </Application>
-    <Application 
-      Id="NanaZip.Windows" 
-      Executable="NanaZip.Windows.exe" 
-      EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements 
-        AppListEntry="none"
-        DisplayName="NanaZip Preview"
-        Description="NanaZip"
-        BackgroundColor="transparent"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png" />
-      <Extensions>
-        <uap3:Extension 
-          Category="windows.appExecutionAlias" 
-          Executable="NanaZip.Windows.exe" 
-          EntryPoint="Windows.FullTrustApplication">
-          <uap3:AppExecutionAlias>
-            <desktop:ExecutionAlias Alias="NanaZipG.exe" />
-            <desktop:ExecutionAlias Alias="K7G.exe" />
-            <desktop:ExecutionAlias Alias="7zG.exe" uap8:AllowOverride="true"/>
-          </uap3:AppExecutionAlias>
-        </uap3:Extension>
-      </Extensions>
-    </Application>
-    <Application 
       Id="NanaZip.Modern"
       Executable="NanaZip.Modern.FileManager.exe"
       EntryPoint="Windows.FullTrustApplication">
@@ -220,6 +172,54 @@
             </com:SurrogateServer>
           </com:ComServer>
         </com:Extension>
+      </Extensions>
+    </Application>
+    <Application 
+      Id="NanaZip.Console" 
+      Executable="NanaZip.Universal.Console.exe" 
+      EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements 
+        AppListEntry="none"
+        DisplayName="NanaZip Preview"
+        Description="NanaZip"
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png" />
+      <Extensions>
+        <uap3:Extension 
+          Category="windows.appExecutionAlias" 
+          Executable="NanaZip.Universal.Console.exe" 
+          EntryPoint="Windows.FullTrustApplication">
+          <uap3:AppExecutionAlias>
+            <desktop:ExecutionAlias Alias="NanaZipC.exe" />
+            <desktop:ExecutionAlias Alias="K7C.exe" />
+            <desktop:ExecutionAlias Alias="7z.exe" uap8:AllowOverride="true"/>
+          </uap3:AppExecutionAlias>
+        </uap3:Extension>
+      </Extensions>
+    </Application>
+    <Application 
+      Id="NanaZip.Windows" 
+      Executable="NanaZip.Windows.exe" 
+      EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements 
+        AppListEntry="none"
+        DisplayName="NanaZip Preview"
+        Description="NanaZip"
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png" />
+      <Extensions>
+        <uap3:Extension 
+          Category="windows.appExecutionAlias" 
+          Executable="NanaZip.Windows.exe" 
+          EntryPoint="Windows.FullTrustApplication">
+          <uap3:AppExecutionAlias>
+            <desktop:ExecutionAlias Alias="NanaZipG.exe" />
+            <desktop:ExecutionAlias Alias="K7G.exe" />
+            <desktop:ExecutionAlias Alias="7zG.exe" uap8:AllowOverride="true"/>
+          </uap3:AppExecutionAlias>
+        </uap3:Extension>
       </Extensions>
     </Application>
   </Applications>
