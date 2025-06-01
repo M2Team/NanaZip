@@ -163,7 +163,7 @@ namespace
 
     static UString GetNanaZipPath()
     {
-        return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.Modern.exe";
+        return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.Modern.FileManager.exe";
     }
 }
 

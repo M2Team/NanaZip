@@ -9,7 +9,7 @@
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <DefaultLanguage>en</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <EntryPointProjectUniqueName>..\NanaZip.UI.Modern\NanaZip.Modern.vcxproj</EntryPointProjectUniqueName>
+    <EntryPointProjectUniqueName>..\NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -43,7 +43,7 @@
     <ProjectReference Include="..\NanaZip.ModernExperience\NanaZip.ModernExperience.vcxproj">
       <Project>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.vcxproj">
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj">
       <Project>{F4511F91-B0EB-41B4-99D6-AEB48169132B}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Universal\NanaZip.Universal.Console.vcxproj">

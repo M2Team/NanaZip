@@ -35,7 +35,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.ShellExtension", "N
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Windows", "NanaZip.UI.Modern\NanaZip.Windows.vcxproj", "{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Modern", "NanaZip.UI.Modern\NanaZip.Modern.vcxproj", "{F4511F91-B0EB-41B4-99D6-AEB48169132B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Modern.FileManager", "NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj", "{F4511F91-B0EB-41B4-99D6-AEB48169132B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Classic", "Classic", "{6666CFC3-1986-469A-9266-0FD8C2674DF6}"
 EndProject

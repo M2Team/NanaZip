@@ -1049,7 +1049,7 @@ int CZipContextMenu::FindVerb(const UString &verb)
 
 static UString Get7zFmPath()
 {
-  return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.Modern.exe";
+  return fs2us(NWindows::NDLL::GetModuleDirPrefix()) + L"NanaZip.Modern.FileManager.exe";
 }
 
 

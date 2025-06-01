@@ -1040,7 +1040,7 @@
     <ClInclude Include="NanaZip.UI.h" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="NanaZip.Modern.manifest" />
+    <Manifest Include="NanaZip.Modern.FileManager.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SevenZip\CPP\7zip\UI\FileManager\resource.rc">
