@@ -8,6 +8,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Mile.Xaml.Styles.SunValley.xbf" />
         <local:AddressBarTemplate />
+        <local:StatusBarTemplate />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

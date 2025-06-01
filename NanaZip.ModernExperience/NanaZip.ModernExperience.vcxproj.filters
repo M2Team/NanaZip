@@ -11,11 +11,13 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="AddressBar.cpp" />
+    <ClCompile Include="StatusBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="NanaZip.ModernExperience.h" />
     <ClInclude Include="AddressBar.h" />
+    <ClInclude Include="StatusBar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Mile.Xaml.Unstaged.targets" />
@@ -24,9 +26,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="SponsorPage.xaml" />
-    <Page Include="AddressBar.xaml" />
     <Page Include="AboutPage.xaml" />
     <Page Include="MainWindowToolBarPage.xaml" />
+    <Page Include="AddressBarTemplate.xaml" />
+    <Page Include="StatusBarTemplate.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
@@ -109,5 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
+    <Midl Include="StatusBar.idl" />
   </ItemGroup>
 </Project>

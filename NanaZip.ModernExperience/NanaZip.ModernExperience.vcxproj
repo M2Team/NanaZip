@@ -70,6 +70,9 @@
     <Page Include="MainWindowToolBarPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="StatusBarTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
@@ -89,6 +92,11 @@
     </Midl>
     <Midl Include="MainWindowToolBarPage.idl">
       <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="StatusBar.idl" />
+    <Midl Include="StatusBarTemplate.idl">
+      <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
   </ItemGroup>
@@ -114,6 +122,14 @@
     </ClInclude>
     <ClInclude Include="MainWindowToolBarPage.h">
       <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="StatusBar.h">
+      <DependentUpon>StatusBar.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="StatusBarTemplate.h">
+      <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
   </ItemGroup>
@@ -142,6 +158,14 @@
       <DependentUpon>AddressBar.idl</DependentUpon>
     </ClCompile>
     <ClCompile Include="NanaZip.ModernExperience.cpp" />
+    <ClCompile Include="StatusBar.cpp">
+      <DependentUpon>StatusBar.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="StatusBarTemplate.cpp">
+      <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Xaml">

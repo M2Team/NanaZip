@@ -55,6 +55,7 @@ extern HINSTANCE g_hInstance;
 extern DWORD g_ComCtl32Version;
 
 static const int AddressBarHeight = 32;
+static const int StatusBarHeight = 32;
 
 void CPanel::Release()
 {
@@ -94,8 +95,8 @@ HRESULT CPanel::Create(HWND mainWindow, HWND parentWindow, UINT id,
   _appState = appState;
   // _index = index;
   _baseID = id;
-  _comboBoxID = _baseID + 3;
-  _statusBarID = _comboBoxID + 1;
+  // _comboBoxID = _baseID + 3;
+  // _statusBarID = _comboBoxID + 1;
 
   UString cfp = currentFolderPrefix;
 
@@ -499,6 +500,55 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       }
   );
 
+  _statusBarControl = winrt::NanaZip::ModernExperience::StatusBar{};
+  _statusBarWindow = ::CreateWindowEx(
+      WS_EX_NOREDIRECTIONBITMAP,
+      L"Mile.Xaml.ContentWindow",
+      nullptr,
+      WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS,
+      0,
+      0,
+      0,
+      0,
+      *this,
+      nullptr,
+      nullptr,
+      winrt::get_abi(_statusBarControl)
+  );
+
+  ::SetWindowSubclass(
+      _statusBarWindow,
+      [](
+          _In_ HWND hWnd,
+          _In_ UINT uMsg,
+          _In_ WPARAM wParam,
+          _In_ LPARAM lParam,
+          _In_ UINT_PTR uIdSubclass,
+          _In_ DWORD_PTR dwRefData) -> LRESULT
+      {
+          UNREFERENCED_PARAMETER(uIdSubclass);
+          UNREFERENCED_PARAMETER(dwRefData);
+
+          switch (uMsg)
+          {
+          case WM_ERASEBKGND:
+          {
+              ::RemovePropW(hWnd, L"BackgroundFallbackColor");
+              break;
+          }
+          default:
+              break;
+          }
+
+          return ::DefSubclassProc(
+              hWnd,
+              uMsg,
+              wParam,
+              lParam);
+      },
+      0,
+      0);
+
   // #ifndef UNDER_CE
   // if (g_ComCtl32Version >= MAKELONG(71, 4))
   // #endif
@@ -637,11 +687,11 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //   _headerReBar.InsertBand(-1, &rbBand);
   //   // _headerReBar.MaximizeBand(1, false);
   // }
-  _statusBar.Create(WS_CHILD | WS_VISIBLE, L"Status", (*this), _statusBarID);
+  // _statusBar.Create(WS_CHILD | WS_VISIBLE, L"Status", (*this), _statusBarID);
   // _statusBar2.Create(WS_CHILD | WS_VISIBLE, L"Status", (*this), _statusBarID + 1);
 
-  const int sizes[] = {220, 320, 420, -1};
-  _statusBar.SetParts(4, sizes);
+  // const int sizes[] = {220, 320, 420, -1};
+  // _statusBar.SetParts(4, sizes);
   // _statusBar2.SetParts(5, sizes);
 
   /*
@@ -671,13 +721,14 @@ void CPanel::ChangeWindowSize(int xSize, int ySize)
   int kHeaderSize;
   int kStatusBarSize;
   // int kStatusBar2Size;
-  RECT rect;
+  // RECT rect;
 
   // kHeaderSize = RECT_SIZE_Y(rect);
   kHeaderSize = MulDiv(AddressBarHeight, ::GetDpiForWindow(*this), USER_DEFAULT_SCREEN_DPI);
 
-  _statusBar.GetWindowRect(&rect);
-  kStatusBarSize = RECT_SIZE_Y(rect);
+  // _statusBar.GetWindowRect(&rect);
+  // kStatusBarSize = RECT_SIZE_Y(rect);
+  kStatusBarSize = MulDiv(StatusBarHeight, ::GetDpiForWindow(*this), USER_DEFAULT_SCREEN_DPI);
 
   // _statusBar2.GetWindowRect(&rect);
   // kStatusBar2Size = RECT_SIZE_Y(rect);
@@ -705,7 +756,20 @@ void CPanel::ChangeWindowSize(int xSize, int ySize)
   */
 
   _listView.Move(0, kHeaderSize, xSize, yListViewSize);
-  _statusBar.Move(0, kHeaderSize + yListViewSize, xSize, kStatusBarSize);
+  if (_statusBarWindow)
+  {
+      ::SetWindowPos(
+          _statusBarWindow,
+          nullptr,
+          0,
+          kHeaderSize + yListViewSize,
+          xSize,
+          kStatusBarSize,
+          SWP_SHOWWINDOW
+      );
+  }
+
+  //_statusBar.Move(0, kHeaderSize + yListViewSize, xSize, kStatusBarSize);
   // _statusBar2.MoveWindow(0, kHeaderSize + yListViewSize + kStatusBarSize, xSize, kStatusBar2Size);
   // _statusBar.MoveWindow(0, 100, xSize, kStatusBarSize);
   // _statusBar2.MoveWindow(0, 200, xSize, kStatusBar2Size);
