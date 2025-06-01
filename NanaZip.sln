@@ -53,7 +53,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "K7Pal", "K7Pal\K7Pal.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Codecs.Sfx.Shared", "NanaZip.Codecs\NanaZip.Codecs.Sfx.Shared.vcxproj", "{1E894B34-F9D2-4258-9401-6519AAE91620}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.ModernExperience", "NanaZip.ModernExperience\NanaZip.ModernExperience.vcxproj", "{1AB11057-1F48-44D2-A913-C945BFC1AA93}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NanaZip.Modern", "NanaZip.Modern\NanaZip.Modern.vcxproj", "{1AB11057-1F48-44D2-A913-C945BFC1AA93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

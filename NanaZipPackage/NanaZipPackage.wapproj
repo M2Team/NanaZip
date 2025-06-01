@@ -40,7 +40,7 @@
     <ProjectReference Include="..\K7Pal\K7Pal.vcxproj">
       <Project>{279F7FA5-7DDC-4635-99B0-3C7F2179DAE0}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.ModernExperience\NanaZip.ModernExperience.vcxproj">
+    <ProjectReference Include="..\NanaZip.Modern\NanaZip.Modern.vcxproj">
       <Project>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj">

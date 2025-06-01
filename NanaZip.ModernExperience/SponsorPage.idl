@@ -1,8 +1,0 @@
-﻿namespace NanaZip.ModernExperience
-{
-    [default_interface]
-    runtimeclass SponsorPage : Windows.UI.Xaml.Controls.Page
-    {
-        SponsorPage();
-    }
-}

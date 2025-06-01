@@ -1,0 +1,17 @@
+﻿namespace NanaZip.Modern
+{
+    runtimeclass StatusBar : Windows.UI.Xaml.Controls.Control
+    {
+        StatusBar();
+
+        String Text1;
+        String Text2;
+        String Text3;
+        String Text4;
+
+        static Windows.UI.Xaml.DependencyProperty Text1Property{ get; };
+        static Windows.UI.Xaml.DependencyProperty Text2Property{ get; };
+        static Windows.UI.Xaml.DependencyProperty Text3Property{ get; };
+        static Windows.UI.Xaml.DependencyProperty Text4Property{ get; };
+    }
+}

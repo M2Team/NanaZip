@@ -411,7 +411,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
     // {VIEW_NEWFOLDER, kCreateFolderID, TBSTATE_ENABLED, BTNS_BUTTON, 0L, 0},
   };
 
-  _addressBarControl = winrt::NanaZip::ModernExperience::AddressBar{};
+  _addressBarControl = winrt::NanaZip::Modern::AddressBar{};
   _addressBarWindow = ::CreateWindowEx(
       WS_EX_NOREDIRECTIONBITMAP,
       L"Mile.Xaml.ContentWindow",
@@ -480,7 +480,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
 
   _items =
       winrt::single_threaded_observable_vector<
-      winrt::NanaZip::ModernExperience::AddressBarItem>();
+      winrt::NanaZip::Modern::AddressBarItem>();
   _addressBarControl.ItemsSource(_items);
   _addressBarControl.DropDownOpened({ this, &CPanel::OnDropDownOpened });
 
@@ -500,7 +500,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       }
   );
 
-  _statusBarControl = winrt::NanaZip::ModernExperience::StatusBar{};
+  _statusBarControl = winrt::NanaZip::Modern::StatusBar{};
   _statusBarWindow = ::CreateWindowEx(
       WS_EX_NOREDIRECTIONBITMAP,
       L"Mile.Xaml.ContentWindow",
@@ -556,9 +556,9 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //   icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
   //   icex.dwICC  = ICC_COOL_CLASSES | ICC_BAR_CLASSES;
   //   InitCommonControlsEx(&icex);
-     
+
   //   // if there is no CCS_NOPARENTALIGN, there is space of some pixels after rebar (Incorrect GetWindowRect ?)
-     
+
   //   _headerReBar.Attach(::CreateWindowEx(WS_EX_TOOLWINDOW,
   //     REBARCLASSNAME,
   //     NULL, WS_VISIBLE | WS_BORDER | WS_CHILD |
@@ -571,28 +571,28 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //     | RBS_BANDBORDERS
   //     ,0,0,0,0, *this, NULL, g_hInstance, NULL));
   // }
-     
+
   // DWORD toolbarStyle =  WS_CHILD | WS_VISIBLE ;
   // if (_headerReBar)
   // {
   //   toolbarStyle |= 0
   //     // | WS_CLIPCHILDREN
   //     // | WS_CLIPSIBLINGS
-     
+
   //     | TBSTYLE_TOOLTIPS
   //     | CCS_NODIVIDER
   //     | CCS_NORESIZE
   //     | TBSTYLE_FLAT
   //     ;
   // }
-     
+
   // _headerToolBar.Attach(::CreateToolbarEx ((*this), toolbarStyle,
   //     _baseID + 2, 11,
   //     g_hInstance,
   //     IDB_VIEW_SMALL_COLOR,
   //     nullptr, 0,
   //     0, 0, 0, 0, sizeof(TBBUTTON)));
-     
+
   // TBADDBITMAP ToolbarAddBitmap;
   // ToolbarAddBitmap.hInst = g_hInstance;
   // ToolbarAddBitmap.nID = IDB_PARENT_FOLDER;
@@ -601,20 +601,20 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //   TB_ADDBITMAP,
   //   (WPARAM)1,
   //   (LPARAM)&ToolbarAddBitmap);
-     
+
   // SendMessageW(
   //   _headerToolBar,
   //   TB_ADDBUTTONS,
   //   ARRAY_SIZE(tbb),
   //   (LPARAM)&tbb);
-     
+
   // #ifndef UNDER_CE
   // // Load ComboBoxEx class
   // icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
   // icex.dwICC = ICC_USEREX_CLASSES;
   // InitCommonControlsEx(&icex);
   // #endif
-     
+
   // _headerComboBox.CreateEx(0,
   //     #ifdef UNDER_CE
   //     WC_COMBOBOXW
@@ -627,7 +627,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //     ((_headerReBar == 0) ? (HWND)*this : _headerToolBar),
   //     (HMENU)(UINT_PTR)(_comboBoxID),
   //     g_hInstance, NULL);
-  // 
+  //
   // #ifndef UNDER_CE
   // _headerComboBox.SetUnicodeFormat(true);
   // _headerComboBox.SetImageList(GetSysImageList(true));
@@ -652,7 +652,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //    _comboBoxEdit._origWindowProc =
   //     (WNDPROC)_comboBoxEdit.SetLongPtr(GWLP_WNDPROC, LONG_PTR(ComboBoxEditSubclassProc));
   // #endif
-     
+
   // if (_headerReBar)
   // {
   //   REBARINFO     rbi;
@@ -660,13 +660,13 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //   rbi.fMask  = 0;
   //   rbi.himl   = (HIMAGELIST)NULL;
   //   _headerReBar.SetBarInfo(&rbi);
-     
+
   //   // Send the TB_BUTTONSTRUCTSIZE message, which is required for
   //   // backward compatibility.
   //   // _headerToolBar.SendMessage(TB_BUTTONSTRUCTSIZE, (WPARAM)sizeof(TBBUTTON), 0);
   //   SIZE size;
   //   _headerToolBar.GetMaxSize(&size);
-     
+
   //   REBARBANDINFO rbBand;
   //   rbBand.cbSize = sizeof(REBARBANDINFO);  // Required
   //   rbBand.fMask = RBBIM_STYLE | RBBIM_CHILD | RBBIM_CHILDSIZE | RBBIM_SIZE;
@@ -677,7 +677,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
   //   rbBand.cx = size.cx;
   //   rbBand.hwndChild  = _headerToolBar;
   //   _headerReBar.InsertBand(-1, &rbBand);
-     
+
   //   RECT rc;
   //   ::GetWindowRect(_headerComboBox, &rc);
   //   rbBand.cxMinChild = 30;

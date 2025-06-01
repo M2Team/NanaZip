@@ -29,7 +29,7 @@
 
 #include "PropertyNameRes.h"
 
-#include <NanaZip.ModernExperience.h>
+#include <NanaZip.Modern.h>
 
 using namespace NWindows;
 using namespace NFile;

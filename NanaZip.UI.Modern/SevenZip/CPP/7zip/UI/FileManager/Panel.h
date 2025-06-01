@@ -5,7 +5,7 @@
 
 #undef GetCurrentTime
 
-#include <winrt/NanaZip.ModernExperience.h>
+#include <winrt/NanaZip.Modern.h>
 #include <winrt/Windows.Foundation.Collections.h>
 
 #include "../../../Common/MyWindows.h"
@@ -312,7 +312,7 @@ class CPanel: public NWindows::NControl::CWindow2
   // bool OnComboBoxCommand(UINT code, LPARAM param, LRESULT &result);
 
   void OnDropDownOpened(
-      winrt::NanaZip::ModernExperience::AddressBar const&,
+      winrt::NanaZip::Modern::AddressBar const&,
       winrt::Windows::Foundation::IInspectable const&
   );
 
@@ -320,8 +320,8 @@ class CPanel: public NWindows::NControl::CWindow2
 
   LRESULT OnNotifyComboBoxEnter(const UString &s);
   void OnAddressBarQuerySubmitted(
-      winrt::NanaZip::ModernExperience::AddressBar const&,
-      winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const&);
+      winrt::NanaZip::Modern::AddressBar const&,
+      winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs const&);
 
   // bool OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result);
   #ifndef _UNICODE
@@ -405,15 +405,15 @@ public:
   bool _lastFocusedIsList;
   // NWindows::NControl::CStatusBar _statusBar2;
   winrt::Windows::Foundation::Collections::IObservableVector<
-      winrt::NanaZip::ModernExperience::AddressBarItem>
+      winrt::NanaZip::Modern::AddressBarItem>
       _items{ nullptr };
 
   HWND _addressBarWindow{ nullptr };
-  winrt::NanaZip::ModernExperience::AddressBar _addressBarControl{ nullptr };
+  winrt::NanaZip::Modern::AddressBar _addressBarControl{ nullptr };
   HWND _statusBarWindow{ nullptr };
-  winrt::NanaZip::ModernExperience::StatusBar _statusBarControl{ nullptr };
+  winrt::NanaZip::Modern::StatusBar _statusBarControl{ nullptr };
   HIMAGELIST _sysImageList{ nullptr };
-  
+
   DWORD _exStyle;
   bool _showDots;
   bool _showRealFileIcons;

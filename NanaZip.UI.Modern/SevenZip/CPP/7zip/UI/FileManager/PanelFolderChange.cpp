@@ -46,7 +46,7 @@ void CPanel::ReleaseFolder()
   _folderRawProps.Release();
   _folderAltStreams.Release();
   _folderOperations.Release();
-  
+
   _thereAreDeletedItems = false;
 }
 
@@ -68,7 +68,7 @@ void CPanel::SetToRootFolder()
 {
   ReleaseFolder();
   _library.Free();
-  
+
   CRootFolder *rootFolderSpec = new CRootFolder;
   SetNewFolder(rootFolderSpec);
   rootFolderSpec->Init();
@@ -89,7 +89,7 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
 
   openRes.ArchiveIsOpened = false;
   openRes.Encrypted = false;
-  
+
   CDisableTimerProcessing disableTimerProcessing(*this);
   CDisableNotify disableNotify(*this);
 
@@ -109,7 +109,7 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
       else
         relatPath.Delete(0);
     }
-    
+
     UString relatPath2 = relatPath;
     if (!relatPath2.IsEmpty() && !IS_PATH_SEPAR(relatPath2.Back()))
       relatPath2.Add_PathSepar();
@@ -140,11 +140,11 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
 
     CloseOpenFolders();
     UString sysPath = path;
-    
+
     unsigned prefixSize = NName::GetRootPrefixSize(sysPath);
     if (prefixSize == 0 || sysPath[prefixSize] == 0)
       sysPath.Empty();
-    
+
     #if defined(_WIN32) && !defined(UNDER_CE)
     if (!sysPath.IsEmpty() && sysPath.Back() == ':' &&
       (sysPath.Len() != 2 || !NName::IsDrivePath2(sysPath)))
@@ -155,9 +155,9 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
         sysPath.Empty();
     }
     #endif
-    
+
     CFileInfo fileInfo;
-    
+
     while (!sysPath.IsEmpty())
     {
       if (fileInfo.Find(us2fs(sysPath)))
@@ -179,11 +179,11 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
         sysPath.DeleteFrom((unsigned)pos);
       }
     }
-    
+
     SetToRootFolder();
 
     CMyComPtr<IFolderFolder> newFolder;
-  
+
     if (sysPath.IsEmpty())
     {
       _folder->BindToFolder(path, &newFolder);
@@ -207,11 +207,11 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
     else
     {
       FString dirPrefix, fileName;
-      
+
       NDir::GetFullPathAndSplit(us2fs(sysPath), dirPrefix, fileName);
 
       HRESULT res = S_OK;
-      
+
       #ifdef _WIN32
       if (DoesNameContainWildcard_SkipRoot(fs2us(dirPrefix)))
         return E_INVALIDARG;
@@ -227,7 +227,7 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
         tfi.FilePath = us2fs(sysPath);
         res = OpenAsArc(NULL, tfi, sysPath, arcFormat, openRes);
       }
-      
+
       if (res == S_FALSE)
         _folder->BindToFolder(fs2us(dirPrefix), &newFolder);
       else
@@ -240,7 +240,7 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
           path.Delete(0);
       }
     }
-    
+
     if (newFolder)
     {
       SetNewFolder(newFolder);
@@ -248,7 +248,7 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
       return S_OK;
     }
   }
-  
+
   {
     // ---------- we open folder remPath in archive and sub archives ----------
 
@@ -278,7 +278,7 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
             curPos += pos + 1;
         }
       }
-      
+
       if (!newFolder)
         break;
 
@@ -295,7 +295,7 @@ HRESULT CPanel::BindToPathAndRefresh(const UString &path)
   CDisableNotify disableNotify(*this);
   COpenResult openRes;
   UString s = path;
-  
+
   #ifdef _WIN32
     if (!s.IsEmpty() && s[0] == '\"' && s.Back() == '\"')
     {
@@ -476,7 +476,7 @@ void CPanel::LoadFullPathAndShow()
 
   /*
   item.iImage = GetRealIconIndex(us2fs(path), attrib);
-  
+
   if (item.iImage >= 0)
   {
     item.iSelectedImage = item.iImage;
@@ -485,14 +485,14 @@ void CPanel::LoadFullPathAndShow()
   item.iItem = -1;
   _headerComboBox.SetItem(&item);
   */
-  
+
   int iconIndex = GetRealIconIndex(us2fs(path), attrib);
   HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
   winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap bitmap =
       ConvertIconToWritableBitmap(icon);
   _addressBarControl.IconSource(bitmap);
   DestroyIcon(icon);
-  
+
   #endif
 
   RefreshTitle();
@@ -510,16 +510,16 @@ LRESULT CPanel::OnNotifyComboBoxEnter(const UString &s)
 }
 
 void CPanel::OnAddressBarQuerySubmitted(
-    winrt::NanaZip::ModernExperience::AddressBar const&,
-    winrt::NanaZip::ModernExperience::AddressBarQuerySubmittedEventArgs const& queryArgs)
+    winrt::NanaZip::Modern::AddressBar const&,
+    winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs const& queryArgs)
 {
     winrt::Windows::Foundation::IInspectable chosenSuggestion
         = queryArgs.ChosenSuggestion();
 
     if (chosenSuggestion)
     {
-        winrt::NanaZip::ModernExperience::AddressBarItem item
-            = chosenSuggestion.as<winrt::NanaZip::ModernExperience::AddressBarItem>();
+        winrt::NanaZip::Modern::AddressBarItem item
+            = chosenSuggestion.as<winrt::NanaZip::Modern::AddressBarItem>();
         unsigned int index;
         _items.IndexOf(item, index);
         UString pass = ComboBoxPaths[index];
@@ -549,7 +549,7 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
     result = FALSE;
     return true;
   }
-  
+
 
   if (info->iWhy == CBENF_RETURN)
   {
@@ -603,7 +603,7 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   for (int i = 0; i < indent; i++)
     s += "  ";
   _headerComboBox.AddString(s + name);
-  
+
   #else
 
   /*
@@ -618,7 +618,7 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   _headerComboBox.InsertItem(&item);
   */
 
-  winrt::NanaZip::ModernExperience::AddressBarItem item;
+  winrt::NanaZip::Modern::AddressBarItem item;
   item.Text(name.Ptr());
   item.Padding({ indent * 16.0, 0, 0, 0 });
 
@@ -627,7 +627,7 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   DestroyIcon(icon);
 
   _items.Append(item);
-  
+
   #endif
 
   if (addToList)
@@ -639,7 +639,7 @@ extern UString RootFolder_GetName_Network(int &iconIndex);
 extern UString RootFolder_GetName_Documents(int &iconIndex);
 
 void CPanel::OnDropDownOpened(
-    winrt::NanaZip::ModernExperience::AddressBar const&,
+    winrt::NanaZip::Modern::AddressBar const&,
     winrt::Windows::Foundation::IInspectable const&
 )
 {
@@ -699,10 +699,10 @@ void CPanel::OnDropDownOpened(
 //     {
 //       ComboBoxPaths.Clear();
 //       // _headerComboBox.ResetContent();
-//       
+//
 //       unsigned i;
 //       UStringVector pathParts;
-//       
+//
 //       SplitPathToParts(_currentFolderPrefix, pathParts);
 //       UString sumPass;
 //       if (!pathParts.IsEmpty())
@@ -719,17 +719,17 @@ void CPanel::OnDropDownOpened(
 //           AddComboBoxItem(name.IsEmpty() ? UString(L"\\") : name, GetRealIconIndex(us2fs(sumPass), attrib), i, false);
 //           ComboBoxPaths.Add(sumPass);
 //       }
-// 
+//
 //       #ifndef UNDER_CE
-// 
+//
 //       int iconIndex;
 //       UString name;
 //       name = RootFolder_GetName_Documents(iconIndex);
 //       AddComboBoxItem(name, iconIndex, 0, true);
-//       
+//
 //       name = RootFolder_GetName_Computer(iconIndex);
 //       AddComboBoxItem(name, iconIndex, 0, true);
-//       
+//
 //       FStringVector driveStrings;
 //       MyGetLogicalDriveStrings(driveStrings);
 //       for (i = 0; i < driveStrings.Size(); i++)
@@ -741,15 +741,15 @@ void CPanel::OnDropDownOpened(
 //               s.DeleteBack();
 //           AddComboBoxItem(fs2us(s), iconIndex2, 1, false);
 //       }
-//       
+//
 //       name = RootFolder_GetName_Network(iconIndex);
 //       AddComboBoxItem(name, iconIndex, 0, true);
-//       
+//
 //       #endif
-//       
+//
 //       return false;
 //     }
-//       
+//
 //     case CBN_SELENDOK:
 //     {
 //       int index = _headerComboBox.GetCurSel();
@@ -773,7 +773,7 @@ void CPanel::OnDropDownOpened(
 //     {
 //       LoadFullPathAndShow();
 //       true;
-//     
+//
 //     }
 //     case CBN_SELCHANGE:
 //     {
@@ -867,10 +867,10 @@ UString CPanel::GetParentDirPrefix() const
 void CPanel::OpenParentFolder()
 {
   LoadFullPath(); // Maybe we don't need it ??
-  
+
   UString parentFolderPrefix;
   UString focusedName;
-  
+
   if (!_currentFolderPrefix.IsEmpty())
   {
     wchar_t c = _currentFolderPrefix.Back();
@@ -901,12 +901,12 @@ void CPanel::OpenParentFolder()
 
   CDisableTimerProcessing disableTimerProcessing(*this);
   CDisableNotify disableNotify(*this);
-  
+
   CMyComPtr<IFolderFolder> newFolder;
   _folder->BindToParentFolder(&newFolder);
 
   // newFolder.Release(); // for test
-  
+
   if (newFolder)
     SetNewFolder(newFolder);
   else
@@ -922,7 +922,7 @@ void CPanel::OpenParentFolder()
       CloseOneLevel();
       needSetFolder = (!_folder);
     }
-    
+
     if (needSetFolder)
     {
       {
@@ -931,7 +931,7 @@ void CPanel::OpenParentFolder()
       }
     }
   }
-    
+
   CSelectedState state;
   state.FocusedName = focusedName;
   state.FocusedName_Defined = true;
@@ -1053,7 +1053,7 @@ void CPanel::OpenAltStreams()
     }
     return;
   }
-  
+
   #if defined(_WIN32) && !defined(UNDER_CE)
   UString path;
   if (realIndex >= 0)

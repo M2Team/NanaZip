@@ -39,7 +39,7 @@
 #include "ViewSettings.h"
 
 #include "../../../../../NanaZip.UI.h"
-#include <winrt/NanaZip.ModernExperience.h>
+#include <winrt/NanaZip.Modern.h>
 
 using namespace NWindows;
 using namespace NFile;
@@ -514,7 +514,7 @@ static int WINAPI WinMain2(int nCmdShow)
   // Maybe needs CoInitializeEx also ?
   // NCOM::CComInitializer comInitializer;
 
-  winrt::NanaZip::ModernExperience::App App;
+  winrt::NanaZip::Modern::App App;
 
   NanaZip::UI::SpecialCommandHandler();
 

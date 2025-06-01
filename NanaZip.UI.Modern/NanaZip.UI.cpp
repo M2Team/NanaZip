@@ -13,7 +13,7 @@
 #include <Mile.Helpers.h>
 #include <Mile.Xaml.h>
 
-#include <NanaZip.ModernExperience.h>
+#include <NanaZip.Modern.h>
 
 #include "../SevenZip/CPP/Common/Common.h"
 #include "../SevenZip/CPP/7zip/UI/Common/LoadCodecs.h"

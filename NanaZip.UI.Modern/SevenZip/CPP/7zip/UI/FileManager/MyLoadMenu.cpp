@@ -17,7 +17,7 @@
 
 #include "resource.h"
 
-#include <NanaZip.ModernExperience.h>
+#include <NanaZip.Modern.h>
 extern CCodecs* g_CodecsObj;
 
 using namespace NWindows;
