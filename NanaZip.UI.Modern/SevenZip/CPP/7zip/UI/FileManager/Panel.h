@@ -295,8 +295,8 @@ class CPanel: public NWindows::NControl::CWindow2
 {
   CExtToIconMap _extToIconMap;
   UINT _baseID;
-  int _comboBoxID;
-  UINT _statusBarID;
+  // int _comboBoxID;
+  // UINT _statusBarID;
 
   CAppState *_appState;
 
@@ -401,7 +401,7 @@ public:
   // CMyComboBoxEdit _comboBoxEdit;
   CMyListView _listView;
   bool _thereAre_ListView_Items;
-  NWindows::NControl::CStatusBar _statusBar;
+  // NWindows::NControl::CStatusBar _statusBar;
   bool _lastFocusedIsList;
   // NWindows::NControl::CStatusBar _statusBar2;
   winrt::Windows::Foundation::Collections::IObservableVector<
@@ -410,6 +410,8 @@ public:
 
   HWND _addressBarWindow{ nullptr };
   winrt::NanaZip::ModernExperience::AddressBar _addressBarControl{ nullptr };
+  HWND _statusBarWindow{ nullptr };
+  winrt::NanaZip::ModernExperience::StatusBar _statusBarControl{ nullptr };
   HIMAGELIST _sysImageList{ nullptr };
   
   DWORD _exStyle;

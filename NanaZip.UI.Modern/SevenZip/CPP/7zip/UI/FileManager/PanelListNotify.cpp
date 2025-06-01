@@ -802,7 +802,8 @@ void CPanel::Refresh_StatusBar()
 
   // UString s1 = MyFormatNew(g_App.LangString_N_SELECTED_ITEMS, NumberToString(indices.Size()));
   // UString s1 = MyFormatNew(IDS_N_SELECTED_ITEMS, NumberToString(indices.Size()));
-  _statusBar.SetText(0, MyFormatNew(g_App.LangString_N_SELECTED_ITEMS, temp));
+  // _statusBar.SetText(0, MyFormatNew(g_App.LangString_N_SELECTED_ITEMS, temp));
+  _statusBarControl.Text1(MyFormatNew(g_App.LangString_N_SELECTED_ITEMS, temp).Ptr());
   // _statusBar.SetText(0, MyFormatNew(IDS_N_SELECTED_ITEMS, NumberToString(indices.Size())));
 
   wchar_t selectSizeString[32];
@@ -817,7 +818,8 @@ void CPanel::Refresh_StatusBar()
     ConvertSizeToString(totalSize, selectSizeString);
     // }
   }
-  _statusBar.SetText(1, selectSizeString);
+  // _statusBar.SetText(1, selectSizeString);
+  _statusBarControl.Text2(selectSizeString);
 
   int focusedItem = _listView.GetFocusedItem();
   wchar_t sizeString[32];
@@ -846,8 +848,10 @@ void CPanel::Refresh_StatusBar()
       }
     }
   }
-  _statusBar.SetText(2, sizeString);
-  _statusBar.SetText(3, dateString);
+  // _statusBar.SetText(2, sizeString);
+  // _statusBar.SetText(3, dateString);
+  _statusBarControl.Text3(sizeString);
+  _statusBarControl.Text4(dateString);
 
   // _statusBar.SetText(4, nameString);
   // _statusBar2.SetText(1, MyFormatNew(L"{0} bytes", NumberToStringW(totalSize)));
