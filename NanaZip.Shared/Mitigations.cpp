@@ -15,14 +15,8 @@
 
 #include <Detours.h>
 
-#include <atomic>
-
 namespace
 {
-#ifdef NDEBUG
-    static std::atomic<decltype(::SetThreadInformation)*> SetThreadInformationPtr = nullptr;
-#endif
-
     static HMODULE GetKernel32ModuleHandle()
     {
         static HMODULE CachedResult = ::GetModuleHandleW(L"kernel32.dll");
@@ -59,6 +53,49 @@ namespace
             dwLength);
     }
 
+#ifdef NDEBUG
+
+    static FARPROC GetSetThreadInformationProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetKernel32ModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "SetThreadInformation");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
+    static BOOL SetThreadInformationWrapper(
+        _In_ HANDLE hThread,
+        _In_ THREAD_INFORMATION_CLASS ThreadInformationClass,
+        _In_ LPVOID ThreadInformation,
+        _In_ DWORD ThreadInformationSize)
+    {
+        using ProcType = decltype(::SetThreadInformation)*;
+
+        ProcType ProcAddress = reinterpret_cast<ProcType>(
+            ::GetSetThreadInformationProcAddress());
+
+        if (!ProcAddress)
+        {
+            return FALSE;
+        }
+
+        return ProcAddress(
+            hThread,
+            ThreadInformationClass,
+            ThreadInformation,
+            ThreadInformationSize);
+    }
+#endif
+
     static bool IsWindows8OrLater()
     {
         static bool CachedResult = ::MileIsWindowsVersionAtLeast(6, 2, 0);
@@ -88,24 +125,22 @@ namespace
 
 EXTERN_C DWORD WINAPI NanaZipGetMitigationDisable()
 {
-    static DWORD CachedResult = 0;
-    static bool IsCached = false;
-    DWORD _size = sizeof(CachedResult);
-
-    if (IsCached)
+    static DWORD CachedResult = ([]() -> DWORD
     {
-        return CachedResult;
-    }
+        DWORD Result = 0;
+        DWORD Length = sizeof(DWORD);
+        // Use RRF_ZEROONFAILURE to ensure the result is initialized.
+        ::RegGetValueW(
+            HKEY_LOCAL_MACHINE,
+            L"Software\\NanaZip\\Policies",
+            L"DisableMitigations",
+            RRF_RT_REG_DWORD | RRF_SUBKEY_WOW6464KEY | RRF_ZEROONFAILURE,
+            nullptr,
+            &CachedResult,
+            &Length);
+        return Result;
+    }());
 
-    (void)RegGetValueW(
-        HKEY_LOCAL_MACHINE,
-        L"Software\\NanaZip\\Policies",
-        L"DisableMitigations",
-        RRF_RT_DWORD | RRF_ZEROONFAILURE,
-        NULL,
-        &CachedResult,
-        &_size);
-    IsCached = true;
     return CachedResult;
 }
 
@@ -146,18 +181,6 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
             sizeof(PROCESS_MITIGATION_DYNAMIC_CODE_POLICY)))
         {
             return FALSE;
-        }
-
-        HMODULE ModuleHandle = ::GetKernel32ModuleHandle();
-        if (ModuleHandle)
-        {
-            using ProcType = decltype(::SetThreadInformation)*;
-            FARPROC ProcAddress = ::GetProcAddress(
-                ModuleHandle,
-                "SetThreadInformation");
-            SetThreadInformationPtr.store(
-                reinterpret_cast<ProcType>(ProcAddress),
-                std::memory_order_relaxed);
         }
     }
 #endif // NDEBUG
@@ -206,33 +229,35 @@ EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 
 #ifdef NDEBUG
 
-EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(BOOL optout)
+EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(
+    _In_ BOOL OptOut)
 {
     if (NanaZipGetMitigationDisable() & 1)
     {
         return TRUE;
     }
 
-    using ProcType = decltype(::SetThreadInformation)*;
-    ProcType SetThreadInformationWrapper = SetThreadInformationPtr.load(std::memory_order_relaxed);
-    if (SetThreadInformationWrapper) {
-        DWORD ThreadPolicy = optout ? THREAD_DYNAMIC_CODE_ALLOW : 0;
-        return SetThreadInformationWrapper(
+    if (::GetSetThreadInformationProcAddress())
+    {
+        DWORD ThreadPolicy = OptOut ? THREAD_DYNAMIC_CODE_ALLOW : 0;
+        return ::SetThreadInformationWrapper(
             ::GetCurrentThread(),
             ThreadDynamicCodePolicy,
             &ThreadPolicy,
             sizeof(DWORD));
     }
-    else {
+    else
+    {
         return TRUE;
     }
 }
 
 #else
 
-EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(BOOL optout)
+EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(
+    _In_ BOOL OptOut)
 {
-    UNREFERENCED_PARAMETER(optout);
+    UNREFERENCED_PARAMETER(OptOut);
     return TRUE;
 }
 
