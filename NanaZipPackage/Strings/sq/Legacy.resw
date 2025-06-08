@@ -657,9 +657,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Përdor hash-et me shkronja të vogla</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Hap dosjen pas shpaketimit</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Rreth NanaZip</value>
   </data>
@@ -817,6 +814,9 @@ nuk mund të përditësohet</value>
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Rivendos sigurinë e skedarit</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Hap dosjen pas shpaketimit</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Përhap rrymën Zone.Id:</value>

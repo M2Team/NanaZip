@@ -312,6 +312,9 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Dictionary</value>
   </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
   <data name="Resource1020" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -657,9 +660,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Use Lowercase Hashes</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Open folder after extracting</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>About NanaZip</value>
   </data>
@@ -817,6 +817,9 @@ Do you want to update it in the archive?</value>
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Restore file security</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Open folder after extracting</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Propagate Zone.Id stream:</value>

@@ -657,9 +657,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Контрольные суммы строчными символами</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Открыть папку после распаковки</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>О программе NanaZip</value>
   </data>
@@ -817,6 +814,9 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Устанавливать права доступа</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Открыть папку после распаковки</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Распространять поток Zone.Id:</value>

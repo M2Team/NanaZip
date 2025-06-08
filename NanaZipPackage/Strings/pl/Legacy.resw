@@ -657,9 +657,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Małoliterowe sumy kontrolne</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Otwórz folder po wypakowaniu</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip - informacje</value>
   </data>
@@ -817,6 +814,9 @@ Czy chcesz zaktualizować go w archiwum?</value>
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Przywróć zabezpieczenia plików</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Otwórz folder po wypakowaniu</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Propagowanie strumienia Zone.Id:</value>
