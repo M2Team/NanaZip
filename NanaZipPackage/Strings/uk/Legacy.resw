@@ -657,9 +657,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Контрольні суми малими символами</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Відкрити каталог після видобування</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Про NanaZip</value>
   </data>
@@ -817,6 +814,9 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Відновляти дані безпеки файлу</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Відкрити каталог після видобування</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Поширювати потік Zone.Id:</value>

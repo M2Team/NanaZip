@@ -657,9 +657,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Χρήση Καταρ/σμου Πεζών Χαρακτήρων</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Άνοιγμα φακέλου μετά την εξαγωγή</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Σχετικά με NanaZip</value>
   </data>
@@ -817,6 +814,9 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Επαναφορά ασφάλειας αρχείου</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Άνοιγμα φακέλου μετά την εξαγωγή</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Διάδωση ροής Zone.Id:</value>

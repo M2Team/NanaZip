@@ -660,9 +660,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Használjon kisbetűs kivonatot</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Mappa megnyitása a kibontás után</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>A NanaZip névjegye</value>
   </data>
@@ -821,6 +818,9 @@ Kívánja aktualizálni az archívumban?</value>
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Biztonsági adatok visszaállítása</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Mappa megnyitása a kibontás után</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Terjessze a Zone.Id adatfolyamot:</value>

@@ -639,9 +639,6 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;Gebruik grote geheugenpagina's</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Map openen na uitpakken</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Over NanaZip</value>
   </data>
@@ -799,6 +796,9 @@ Wilt u het bijwerken in het archief?</value>
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Bestandsbeveiliging herstellen</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Map openen na uitpakken</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Doorgeven Zone.Id stream:</value>

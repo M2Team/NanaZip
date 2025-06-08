@@ -660,9 +660,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>使用小寫字母驗證值</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>解壓縮後開啟目標資料夾</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>關於 NanaZip</value>
   </data>
@@ -820,6 +817,9 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>恢復檔案安全設定</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>解壓縮後開啟目標資料夾</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>傳遞 Zone.Id 資料流:</value>

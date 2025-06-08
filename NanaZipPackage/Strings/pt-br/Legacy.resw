@@ -657,9 +657,6 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Use Hashes Minúsculos</value>
   </data>
-  <data name="Resource3433" xml:space="preserve">
-    <value>Abrir pasta após extrair</value>
-  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Sobre o NanaZip</value>
   </data>
@@ -817,6 +814,9 @@ Você quer atualizá-lo no arquivo compactado?</value>
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Restaurar a segurança do arquivo</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Abrir pasta após extrair</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Propagar o fluxo do Zone.Id:</value>
