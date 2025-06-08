@@ -35,13 +35,15 @@ namespace
     static std::mutex dynamic_code_range_lock;
 
     using DllType = std::pair<const char*, DllFlags>;
-    static const std::array<DllType, 6> DllList = {
+    // Make sure that this list is sorted for _stricmp.
+    static const std::array<DllType, 7> DllList = {
         std::make_pair("BaseGUI.dll", DllNeedsDynamicCodeOptout),
         std::make_pair("ExplorerPatcher.amd64.dll", DllNeedsBlocking),
         std::make_pair("ExplorerPatcher.IA-32.dll", DllNeedsBlocking),
-        std::make_pair("TFMain64.dll", DllNeedsBlocking),
         std::make_pair("PrxDrvPE.dll", DllNeedsBlocking),
         std::make_pair("PrxDrvPE64.dll", DllNeedsBlocking),
+        std::make_pair("TFMain32.dll", DllNeedsBlocking),
+        std::make_pair("TFMain64.dll", DllNeedsBlocking),
     };
 
     static decltype(NtMapViewOfSection)* RealNtMapViewOfSection = nullptr;
