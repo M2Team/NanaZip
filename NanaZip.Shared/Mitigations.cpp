@@ -86,8 +86,36 @@ namespace
     }
 }
 
+EXTERN_C DWORD WINAPI NanaZipGetMitigationDisable()
+{
+    static DWORD CachedResult = 0;
+    static bool IsCached = false;
+    DWORD _size = sizeof(CachedResult);
+
+    if (IsCached)
+    {
+        return CachedResult;
+    }
+
+    (void)RegGetValueW(
+        HKEY_LOCAL_MACHINE,
+        L"Software\\NanaZip\\Policies",
+        L"DisableMitigations",
+        RRF_RT_DWORD | RRF_ZEROONFAILURE,
+        NULL,
+        &CachedResult,
+        &_size);
+    IsCached = true;
+    return CachedResult;
+}
+
 EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 {
+    if (NanaZipGetMitigationDisable() & 1)
+    {
+        return TRUE;
+    }
+
     if (!::IsWindows8OrLater())
     {
         return TRUE;
@@ -153,6 +181,11 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 
 EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 {
+    if (NanaZipGetMitigationDisable() & 1)
+    {
+        return TRUE;
+    }
+
     if (!::IsWindows10_1709OrLater())
     {
         return TRUE;
@@ -175,6 +208,11 @@ EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 
 EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(BOOL optout)
 {
+    if (NanaZipGetMitigationDisable() & 1)
+    {
+        return TRUE;
+    }
+
     using ProcType = decltype(::SetThreadInformation)*;
     ProcType SetThreadInformationWrapper = SetThreadInformationPtr.load(std::memory_order_relaxed);
     if (SetThreadInformationWrapper) {

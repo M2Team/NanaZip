@@ -14,6 +14,7 @@
 
 #include <Windows.h>
 
+// Affected by NanaZipGetMitigationDisable().
 EXTERN_C BOOL WINAPI NanaZipBlockDlls();
 
 #endif // !NANAZIP_SHARED_DLLBLOCK

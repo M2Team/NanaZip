@@ -13,8 +13,19 @@ Following is the list of currently-supported policy options.
 This value controls Mark-of-the-Web (MOTW) propagation of archive files.
 
 - Name: `WriteZoneIdExtract`
-- Type: REG_DWORD
+- Type: `REG_DWORD`
 - Value:
     - `0`: No
     - `1`: Yes (all files)
     - `2`: Only for unsafe extensions (does not support all nested archives)
+
+### Disable mitigations
+
+This value controls which security mitigations should not be applied by NanaZip.
+
+- Name: `DisableMitigations`
+- Type: `REG_DWORD`
+- Value:
+    - `0`: Don't disable mitigations
+    - `1`: Disable all mitigations
+    - Other values are reserved.

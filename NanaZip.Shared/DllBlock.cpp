@@ -261,6 +261,10 @@ namespace
 
 EXTERN_C BOOL WINAPI NanaZipBlockDlls()
 {
+    if (NanaZipGetMitigationDisable() & 1) {
+        return TRUE;
+    }
+
     DetourTransactionBegin();
     DetourUpdateThread(GetCurrentThread());
 
