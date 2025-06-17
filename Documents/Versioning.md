@@ -1,5 +1,9 @@
 ﻿# NanaZip Versioning
 
+| Language       | Link          |
+|----------------|---------------|
+| 简体中文       | [阅读](Versioning_zh-CN.md)  |
+
 This document applies to all versions of NanaZip.
 
 ## Version Format

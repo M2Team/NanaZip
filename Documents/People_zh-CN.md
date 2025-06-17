@@ -1,38 +1,38 @@
-﻿# Relevant People 
+﻿# 相关人员
 
 | Language       | Link          |
 |----------------|---------------|
-| 简体中文       | [阅读](People_zh-CN.md)  |
+| English        | [Read](People.md)  |
 
-## Notice
+## 说明
 
-- This list sort in alphabetical order.
+- 本列表按字母顺序排序。
 
-## Development Team
+## 开发团队
 
 - AndromedaMelody, https://github.com/AndromedaMelody
 - Kenji Mouri, https://github.com/MouriNaruto
 - Sakura Neko, https://github.com/SakuraNeko
 
-## Microsoft Store preinstall permission OEM Sponsor
+## 微软商店预装许可 OEM 赞助商
 
 - Moespirit Tech, https://github.com/Moespirit
 
-## Logo Designers
+## Logo 设计师
 
-### 2.x Series
+### 2.x 系列
 
 - Shomnipotence, https://github.com/Shomnipotence
 
-### 1.x Series
+### 1.x 系列
 
-- Alice (四月天), https://twitter.com/alice_alice49
+- Alice（四月天）, https://twitter.com/alice_alice49
 - Chi Lei, https://github.com/lychichem
 - Kenji Mouri, https://github.com/MouriNaruto
 - Rúben Garrido, https://github.com/RGarrido03
 - Sakura Neko, https://github.com/SakuraNeko
 
-## Contributors
+## 贡献者
 
 - Blueberryy, https://github.com/Blueberryy
 - ChuckMichael, https://github.com/ChuckMichael
@@ -42,7 +42,7 @@
 - Manfredi, https://github.com/manfromarce
 - wallrik, https://github.com/wallrik
 
-## Special thanks
+## 特别鸣谢
 
 - Belleve, https://github.com/be5invis
 - Igor Pavlov, https://sourceforge.net/u/ipavlov

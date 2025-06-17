@@ -15,6 +15,10 @@
 
 [![Download NanaZip from SourceForge mirror](https://img.shields.io/badge/SourceForge-Download-orange)](https://sourceforge.net/projects/nanazip/files/latest/download)
 
+| Language       | Link          |
+|----------------|---------------|
+| 简体中文       | [阅读](ReadMe_zh-CN.md)  |
+
 ![ContextMenu](Documents/ContextMenu.png)
 ![MainWindowLightMode](Documents/MainWindowLightMode.png)
 ![MainWindowDarkMode](Documents/MainWindowDarkMode.png)
@@ -280,12 +284,24 @@ the following command in the PowerShell which is run as administrator.
 ## Documents
 
 - [License](License.md)
-- [Relevant People](Documents/People.md)
-- [Privacy Policy](Documents/Privacy.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contributing Guide](CONTRIBUTING.md)
-- [NanaZip Sponsor Edition](Documents/SponsorEdition.md)
-- [NanaZip Release Notes](Documents/ReleaseNotes.md)
-- [NanaZip Preview Release Notes](Documents/ReleaseNotesPreview.md)
-- [Versioning](Documents/Versioning.md)
+- Relevant People
+  - [English Ver.](Documents/People.md)
+  - [中文版](Documents/People_zh-CN.md)
+- Privacy Policy
+  - [English Ver.](Documents/Privacy.md)
+  - [中文版](Documents/Privacy_zh-CN.md)
+- NanaZip Sponsor Edition
+  - [English Ver.](Documents/SponsorEdition.md)
+  - [中文版](Documents/SponsorEdition_zh-CN.md)
+- NanaZip Release Notes
+  - [English Ver.](Documents/ReleaseNotes.md)
+  - [中文版](Documents/ReleaseNotes_zh-CN.md)
+- NanaZip Preview Release Notes
+  - [English Ver.](Documents/ReleaseNotesPreview.md)
+  - [中文版](Documents/ReleaseNotesPreview_zh-CN.md)
+- Versioning
+  - [English Ver.](Documents/Versioning.md)
+  - [中文版](Documents/Versioning_zh-CN.md)
 - [My Digital Life Forums](https://forums.mydigitallife.net/threads/84171)
