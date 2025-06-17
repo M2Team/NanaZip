@@ -15,9 +15,7 @@
 
 [![从 SourceForge 镜像下载 NanaZip](https://img.shields.io/badge/SourceForge-Download-orange)](https://sourceforge.net/projects/nanazip/files/latest/download)
 
-| Language       | Link          |
-|----------------|---------------|
-| English        | [Read](ReadMe.md)  |
+[English](README.md)
 
 ![上下文菜单](Documents/ContextMenu.png)
 ![主窗口浅色模式](Documents/MainWindowLightMode.png)
@@ -209,24 +207,12 @@ Kenji Mouri
 ## 文档
 
 - [许可证](License.md)
+- [相关人员](Documents/People.md)
+- [隐私政策](Documents/zh-CN/Privacy.md)
 - [行为准则](CODE_OF_CONDUCT.md)
 - [贡献指南](CONTRIBUTING.md)
-- 相关人员
-  - [English Ver.](Documents/People.md)
-  - [中文版](Documents/People_zh-CN.md)
-- 隐私政策
-  - [English Ver.](Documents/Privacy.md)
-  - [中文版](Documents/Privacy_zh-CN.md)
-- NanaZip 赞助版
-  - [English Ver.](Documents/SponsorEdition.md)
-  - [中文版](Documents/SponsorEdition_zh-CN.md)
-- NanaZip 发布日志
-  - [English Ver.](Documents/ReleaseNotes.md)
-  - [中文版](Documents/ReleaseNotes_zh-CN.md)
-- NanaZip 预览版发布日志
-  - [English Ver.](Documents/ReleaseNotesPreview.md)
-  - [中文版](Documents/ReleaseNotesPreview_zh-CN.md)
-- 版本号规则
-  - [English Ver.](Documents/Versioning.md)
-  - [中文版](Documents/Versioning_zh-CN.md)
+- [NanaZip 赞助者版](Documents/zh-CN/SponsorEdition.md)
+- [NanaZip 更新日志](Documents/zh-CN/ReleaseNotes.md)
+- [NanaZip 预览版更新日志](Documents/zh-CN/ReleaseNotesPreview.md)
+- [版本说明](Documents/Versioning.md)
 - [My Digital Life 论坛](https://forums.mydigitallife.net/threads/84171)

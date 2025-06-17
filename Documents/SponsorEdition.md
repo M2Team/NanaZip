@@ -1,9 +1,5 @@
 ﻿# NanaZip Sponsor Edition
 
-| Language       | Link          |
-|----------------|---------------|
-| 简体中文       | [阅读](SponsorEdition_zh-CN.md)  |
-
 NanaZip provides a $99.99 USD Sponsor Edition addon to the Microsoft Store to 
 attract more sponsors and contributors.
 

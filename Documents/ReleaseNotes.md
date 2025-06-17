@@ -1,9 +1,5 @@
 ﻿# NanaZip Release Notes
 
-| Language       | Link          |
-|----------------|---------------|
-| 简体中文       | [阅读](ReleaseNotes_zh-CN.md)  |
-
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 

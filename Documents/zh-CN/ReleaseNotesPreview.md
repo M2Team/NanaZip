@@ -1,9 +1,5 @@
 ﻿# NanaZip 预览版发布日志
 
-| Language       | Link          |
-|----------------|---------------|
-| English        | [Read](ReleaseNotesPreview.md)  |
-
 如需稳定版发布日志，请参阅 [NanaZip 发布日志](ReleaseNotes.md)。
 
 **NanaZip 5.1 预览 0 (5.1.1263.0)**

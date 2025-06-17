@@ -1,9 +1,5 @@
 ﻿# NanaZip - Privacy Policy
 
-| Language       | Link          |
-|----------------|---------------|
-| 简体中文       | [阅读](Privacy_zh-CN.md)  |
-
 ## Information collected
 
 NanaZip does not collect any information. However it does provide you access to 

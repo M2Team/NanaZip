@@ -1,9 +1,5 @@
 ﻿# NanaZip Preview Release Notes
 
-| Language       | Link          |
-|----------------|---------------|
-| 简体中文       | [阅读](ReleaseNotesPreview_zh-CN.md)  |
-
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
 **NanaZip 5.1 Preview 0 (5.1.1263.0)**

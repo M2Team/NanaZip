@@ -1,9 +1,5 @@
 ﻿# Relevant People 
 
-| Language       | Link          |
-|----------------|---------------|
-| 简体中文       | [阅读](People_zh-CN.md)  |
-
 ## Notice
 
 - This list sort in alphabetical order.

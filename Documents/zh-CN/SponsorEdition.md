@@ -1,9 +1,5 @@
 ﻿# NanaZip 赞助版说明
 
-| Language       | Link          |
-|----------------|---------------|
-| English        | [Read](SponsorEdition.md)  |
-
 NanaZip 在微软商店提供 99.99 美元的赞助版附加组件（Sponsor Edition），以吸引更多赞助者与贡献者。
 
 对于 NanaZip 源代码仓库的贡献者及 2024 年 3 月 30 日前已赞助的用户，可免费获得赞助版。
@@ -12,7 +8,7 @@ NanaZip 在微软商店提供 99.99 美元的赞助版附加组件（Sponsor Edi
 
 NanaZip 赞助版与普通版的唯一区别是在即将发布的稳定版工具栏中，将“赞助 NanaZip”按钮替换为“感谢您的赞助”按钮，类似于 Visual Studio 的管理员模式提示。
 
-![VisualStudioAdministratorMode](VisualStudioAdministratorMode.png)
+![VisualStudioAdministratorMode](../VisualStudioAdministratorMode.png)
 
 ## 初衷
 
