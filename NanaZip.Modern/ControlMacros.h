@@ -6,7 +6,7 @@
     static ::winrt::Windows::UI::Xaml::DependencyProperty \
         name##Property();
 
-#define DEPENDENCY_PROPERTY_SOURCE_NOUNBOX(name, type, implType, projType) \
+#define DEPENDENCY_PROPERTY_SOURCE_NOBOX(name, type, implType, projType) \
     ::winrt::Windows::UI::Xaml::DependencyProperty s_##name##Property{ nullptr }; \
     type implType::name() \
     { \

@@ -198,14 +198,14 @@ DEPENDENCY_PROPERTY_SOURCE_BOX(
     winrt::NanaZip::Modern::AddressBar
 );
 
-DEPENDENCY_PROPERTY_SOURCE_NOUNBOX(
+DEPENDENCY_PROPERTY_SOURCE_NOBOX(
     IconSource,
     winrt::Windows::UI::Xaml::Media::ImageSource,
     AddressBar,
     winrt::NanaZip::Modern::AddressBar
 );
 
-DEPENDENCY_PROPERTY_SOURCE_NOUNBOX(
+DEPENDENCY_PROPERTY_SOURCE_NOBOX(
     ItemsSource,
     wf::IInspectable,
     AddressBar,
