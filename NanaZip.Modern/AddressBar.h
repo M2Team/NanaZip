@@ -58,8 +58,6 @@ namespace winrt::NanaZip::Modern::implementation
     private:
         bool OpenSuggestionsPopup(bool isKeyboard);
 
-        inline static winrt::Windows::UI::Xaml::DependencyProperty s_upButtonEnabledProperty{ nullptr };
-
         winrt::Windows::UI::Xaml::Controls::TextBox m_textBoxElement{ nullptr };
         winrt::Windows::UI::Xaml::Controls::Primitives::Popup
             m_popup{ nullptr };
