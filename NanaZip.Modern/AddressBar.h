@@ -7,6 +7,8 @@
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Input.h>
 
+#include "ControlMacros.h"
+
 namespace winrt::NanaZip::Modern::implementation
 {
     struct AddressBar : AddressBarT<AddressBar>
@@ -18,26 +20,19 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::Windows::Foundation::IInspectable const&,
             winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const&);
 
-        winrt::hstring Text();
-        void Text(winrt::hstring const&);
-
-        static winrt::Windows::UI::Xaml::DependencyProperty TextProperty();
-
-        winrt::Windows::UI::Xaml::Media::ImageSource IconSource();
-        void IconSource(winrt::Windows::UI::Xaml::Media::ImageSource const&);
-
-        static winrt::Windows::UI::Xaml::DependencyProperty IconSourceProperty();
-
-        winrt::Windows::Foundation::IInspectable ItemsSource();
-        void ItemsSource(winrt::Windows::Foundation::IInspectable const&);
-
-        static winrt::Windows::UI::Xaml::DependencyProperty ItemsSourceProperty();
-
-        bool IsUpButtonEnabled();
-        void IsUpButtonEnabled(bool);
-
-        static winrt::Windows::UI::Xaml::DependencyProperty
-            IsUpButtonEnabledProperty();
+        DEPENDENCY_PROPERTY_HEADER(Text, winrt::hstring);
+        DEPENDENCY_PROPERTY_HEADER(
+            IconSource,
+            winrt::Windows::UI::Xaml::Media::ImageSource
+        );
+        DEPENDENCY_PROPERTY_HEADER(
+            ItemsSource,
+            winrt::Windows::Foundation::IInspectable
+        );
+        DEPENDENCY_PROPERTY_HEADER(
+            IsUpButtonEnabled,
+            bool
+        );
 
         winrt::event_token QuerySubmitted(
             winrt::Windows::Foundation::TypedEventHandler<
@@ -63,10 +58,7 @@ namespace winrt::NanaZip::Modern::implementation
     private:
         bool OpenSuggestionsPopup(bool isKeyboard);
 
-        inline static winrt::Windows::UI::Xaml::DependencyProperty s_textProperty{ nullptr };
-        inline static winrt::Windows::UI::Xaml::DependencyProperty s_iconSourceProperty{ nullptr };
         inline static winrt::Windows::UI::Xaml::DependencyProperty s_upButtonEnabledProperty{ nullptr };
-        inline static winrt::Windows::UI::Xaml::DependencyProperty s_itemsSourceProperty{ nullptr };
 
         winrt::Windows::UI::Xaml::Controls::TextBox m_textBoxElement{ nullptr };
         winrt::Windows::UI::Xaml::Controls::Primitives::Popup

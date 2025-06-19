@@ -107,6 +107,7 @@
     <ClInclude Include="AddressBarTemplate.h">
       <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="ControlMacros.h" />
     <ClInclude Include="NanaZip.Modern.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">

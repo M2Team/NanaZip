@@ -18,6 +18,7 @@
     <ClInclude Include="NanaZip.Modern.h" />
     <ClInclude Include="AddressBar.h" />
     <ClInclude Include="StatusBar.h" />
+    <ClInclude Include="ControlMacros.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Mile.Xaml.Unstaged.targets" />
