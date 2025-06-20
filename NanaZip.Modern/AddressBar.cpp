@@ -71,7 +71,7 @@ void AddressBar::OnApplyTemplate()
                     L"",
                     args.ClickedItem()
                 );
-                strong_this->m_querySubmittedEvent(
+                strong_this->QuerySubmitted.invoke(
                     *strong_this,
                     submitArgs
                 );
@@ -112,7 +112,7 @@ void AddressBar::OnApplyTemplate()
         {
             if (auto strong_this{ weak_this.get() })
             {
-                strong_this->m_upButtonClickedEvent(*strong_this, args);
+                strong_this->UpButtonClicked.invoke(*strong_this, args);
             }
         });
 
@@ -136,12 +136,12 @@ void AddressBar::OnTextBoxPreviewKeyDown(
                 auto selectedItem = m_suggestionsList.SelectedItem();
                 auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(L"", selectedItem);
                 // The suggestions dropdown is opened via keyboard.
-                m_querySubmittedEvent(*this, submitArgs);
+                QuerySubmitted.invoke(*this, submitArgs);
             }
             else
             {
                 auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(Text(), nullptr);
-                m_querySubmittedEvent(*this, submitArgs);
+                QuerySubmitted.invoke(*this, submitArgs);
             }
             args.Handled(true);
             break;
@@ -220,58 +220,6 @@ DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
     true
 );
 
-winrt::event_token
-AddressBar::QuerySubmitted(
-    wf::TypedEventHandler<
-    winrt::NanaZip::Modern::AddressBar,
-    winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs>
-    const& handler
-)
-{
-    return m_querySubmittedEvent.add(handler);
-}
-
-void AddressBar::QuerySubmitted(
-    winrt::event_token const& token
-) noexcept
-{
-    m_querySubmittedEvent.remove(token);
-}
-
-winrt::event_token
-AddressBar::UpButtonClicked(
-    winrt::Windows::UI::Xaml::RoutedEventHandler const&
-    handler
-)
-{
-    return m_upButtonClickedEvent.add(handler);
-}
-
-void AddressBar::UpButtonClicked(
-    winrt::event_token const& token
-) noexcept
-{
-    m_upButtonClickedEvent.remove(token);
-}
-
-winrt::event_token
-AddressBar::DropDownOpened(
-    wf::TypedEventHandler<
-    winrt::NanaZip::Modern::AddressBar,
-    wf::IInspectable>
-    const& handler
-)
-{
-    return m_dropDownOpenedEvent.add(handler);
-}
-
-void AddressBar::DropDownOpened(
-    winrt::event_token const& token
-) noexcept
-{
-    m_dropDownOpenedEvent.remove(token);
-}
-
 bool AddressBar::OpenSuggestionsPopup(
     bool isKeyboard
 )
@@ -279,7 +227,7 @@ bool AddressBar::OpenSuggestionsPopup(
     if (!m_popup || !m_textBoxElement || !m_suggestionsList)
         return false;
 
-    m_dropDownOpenedEvent(*this, nullptr);
+    DropDownOpened.invoke(*this, nullptr);
 
     wfc::IVectorView<wf::IInspectable> source =
         ItemsSource().as<wfc::IVectorView<wf::IInspectable>>();

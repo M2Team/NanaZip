@@ -1,14 +1,14 @@
 ﻿#pragma once
 
 #define DEPENDENCY_PROPERTY_HEADER(name, type) \
-    type name(); \
+    type name() const; \
     void name(type const&); \
     static ::winrt::Windows::UI::Xaml::DependencyProperty \
         name##Property();
 
 #define DEPENDENCY_PROPERTY_SOURCE_NOBOX(name, type, implType, projType) \
     ::winrt::Windows::UI::Xaml::DependencyProperty s_##name##Property{ nullptr }; \
-    type implType::name() \
+    type implType::name() const \
     { \
         return GetValue(name##Property()).as<type>(); \
     } \
@@ -34,7 +34,7 @@
 
 #define DEPENDENCY_PROPERTY_SOURCE_BOX(name, type, implType, projType) \
     ::winrt::Windows::UI::Xaml::DependencyProperty s_##name##Property{ nullptr }; \
-    type implType::name() \
+    type implType::name() const \
     { \
         return ::winrt::unbox_value<type>(GetValue(name##Property())); \
     } \
@@ -60,7 +60,7 @@
 
 #define DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(name, type, implType, projType, default) \
     ::winrt::Windows::UI::Xaml::DependencyProperty s_##name##Property{ nullptr }; \
-    type implType::name() \
+    type implType::name() const \
     { \
         return ::winrt::unbox_value<type>(GetValue(name##Property())); \
     } \
@@ -86,3 +86,31 @@
         } \
         return s_##name##Property; \
     }
+
+// Copied from WIL
+
+namespace winrt
+{
+    template <typename T>
+    struct event_helper
+    {
+        winrt::event_token operator()(const T& handler)
+        {
+            return m_handler.add(handler);
+        }
+
+        auto operator()(const winrt::event_token& token) noexcept
+        {
+            return m_handler.remove(token);
+        }
+
+        template <typename... TArgs>
+        auto invoke(TArgs&&... args)
+        {
+            return m_handler(std::forward<TArgs>(args)...);
+        }
+
+    private:
+        winrt::event<T> m_handler;
+    };
+}

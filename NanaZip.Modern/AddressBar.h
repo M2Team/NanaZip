@@ -34,26 +34,20 @@ namespace winrt::NanaZip::Modern::implementation
             bool
         );
 
-        winrt::event_token QuerySubmitted(
+        winrt::event_helper<
             winrt::Windows::Foundation::TypedEventHandler<
             winrt::NanaZip::Modern::AddressBar,
-            winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs>
-            const&
-        );
-        void QuerySubmitted(winrt::event_token const& token) noexcept;
+            winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs>>
+            QuerySubmitted;
 
-        winrt::event_token UpButtonClicked(
-            winrt::Windows::UI::Xaml::RoutedEventHandler const&
-        );
-        void UpButtonClicked(winrt::event_token const& token) noexcept;
+        winrt::event_helper<winrt::Windows::UI::Xaml::RoutedEventHandler>
+            UpButtonClicked;
 
-        winrt::event_token DropDownOpened(
+        winrt::event_helper<
             winrt::Windows::Foundation::TypedEventHandler<
             winrt::NanaZip::Modern::AddressBar,
-            winrt::Windows::Foundation::IInspectable>
-            const&
-        );
-        void DropDownOpened(winrt::event_token const& token) noexcept;
+            winrt::Windows::Foundation::IInspectable>>
+            DropDownOpened;
 
     private:
         bool OpenSuggestionsPopup(bool isKeyboard);
@@ -63,21 +57,6 @@ namespace winrt::NanaZip::Modern::implementation
             m_popup{ nullptr };
         winrt::Windows::UI::Xaml::Controls::Button m_upButtonElement{ nullptr };
         winrt::Windows::UI::Xaml::Controls::ListView m_suggestionsList{ nullptr };
-
-        winrt::event<
-            winrt::Windows::Foundation::TypedEventHandler<
-            winrt::NanaZip::Modern::AddressBar,
-            winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs>>
-            m_querySubmittedEvent;
-
-        winrt::event<winrt::Windows::UI::Xaml::RoutedEventHandler>
-            m_upButtonClickedEvent;
-
-        winrt::event<
-            winrt::Windows::Foundation::TypedEventHandler<
-            winrt::NanaZip::Modern::AddressBar,
-            winrt::Windows::Foundation::IInspectable>>
-            m_dropDownOpenedEvent;
     };
 
     struct AddressBarItem : AddressBarItemT<AddressBarItem>
