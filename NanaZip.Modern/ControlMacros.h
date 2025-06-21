@@ -86,31 +86,3 @@
         } \
         return s_##name##Property; \
     }
-
-// Copied from WIL
-
-namespace winrt
-{
-    template <typename T>
-    struct event_helper
-    {
-        winrt::event_token operator()(const T& handler)
-        {
-            return m_handler.add(handler);
-        }
-
-        auto operator()(const winrt::event_token& token) noexcept
-        {
-            return m_handler.remove(token);
-        }
-
-        template <typename... TArgs>
-        auto invoke(TArgs&&... args)
-        {
-            return m_handler(std::forward<TArgs>(args)...);
-        }
-
-    private:
-        winrt::event<T> m_handler;
-    };
-}

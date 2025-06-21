@@ -7,6 +7,7 @@
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Input.h>
 
+#include <Mile.Helpers.CppWinRT.h>
 #include "ControlMacros.h"
 
 namespace winrt::NanaZip::Modern::implementation
@@ -34,16 +35,16 @@ namespace winrt::NanaZip::Modern::implementation
             bool
         );
 
-        winrt::event_helper<
+        Mile::WinRT::Event<
             winrt::Windows::Foundation::TypedEventHandler<
             winrt::NanaZip::Modern::AddressBar,
             winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs>>
             QuerySubmitted;
 
-        winrt::event_helper<winrt::Windows::UI::Xaml::RoutedEventHandler>
+        Mile::WinRT::Event<winrt::Windows::UI::Xaml::RoutedEventHandler>
             UpButtonClicked;
 
-        winrt::event_helper<
+        Mile::WinRT::Event<
             winrt::Windows::Foundation::TypedEventHandler<
             winrt::NanaZip::Modern::AddressBar,
             winrt::Windows::Foundation::IInspectable>>

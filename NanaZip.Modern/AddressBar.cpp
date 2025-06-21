@@ -71,7 +71,7 @@ void AddressBar::OnApplyTemplate()
                     L"",
                     args.ClickedItem()
                 );
-                strong_this->QuerySubmitted.invoke(
+                strong_this->QuerySubmitted(
                     *strong_this,
                     submitArgs
                 );
@@ -112,7 +112,7 @@ void AddressBar::OnApplyTemplate()
         {
             if (auto strong_this{ weak_this.get() })
             {
-                strong_this->UpButtonClicked.invoke(*strong_this, args);
+                strong_this->UpButtonClicked(*strong_this, args);
             }
         });
 
@@ -136,12 +136,12 @@ void AddressBar::OnTextBoxPreviewKeyDown(
                 auto selectedItem = m_suggestionsList.SelectedItem();
                 auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(L"", selectedItem);
                 // The suggestions dropdown is opened via keyboard.
-                QuerySubmitted.invoke(*this, submitArgs);
+                QuerySubmitted(*this, submitArgs);
             }
             else
             {
                 auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(Text(), nullptr);
-                QuerySubmitted.invoke(*this, submitArgs);
+                QuerySubmitted(*this, submitArgs);
             }
             args.Handled(true);
             break;
@@ -227,7 +227,7 @@ bool AddressBar::OpenSuggestionsPopup(
     if (!m_popup || !m_textBoxElement || !m_suggestionsList)
         return false;
 
-    DropDownOpened.invoke(*this, nullptr);
+    DropDownOpened(*this, nullptr);
 
     wfc::IVectorView<wf::IInspectable> source =
         ItemsSource().as<wfc::IVectorView<wf::IInspectable>>();
