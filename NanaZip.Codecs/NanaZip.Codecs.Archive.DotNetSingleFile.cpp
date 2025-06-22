@@ -24,6 +24,14 @@ namespace
         VARTYPE Type;
     };
 
+    const PropertyItem g_ArchivePropertyItems[] =
+    {
+        { SevenZipArchiveUnpackVersion, VT_UI8 },
+    };
+
+    const std::size_t g_ArchivePropertyItemsCount =
+        sizeof(g_ArchivePropertyItems) / sizeof(*g_ArchivePropertyItems);
+
     const PropertyItem g_PropertyItems[] =
     {
         { SevenZipArchivePath, VT_BSTR },
@@ -172,6 +180,7 @@ namespace NanaZip::Codecs::Archive
 
         IInStream* m_FileStream = nullptr;
         std::uint64_t m_FullSize = 0;
+        std::uint32_t m_MajorVersion = 0;
         std::vector<BundleFileEntry> m_FilePaths;
         bool m_IsInitialized = false;
 
@@ -369,6 +378,7 @@ namespace NanaZip::Codecs::Archive
                     std::size_t Current = 0;
                     Header.MajorVersion =
                         this->ReadUInt32(&HeaderBuffer[Current]);
+                    this->m_MajorVersion = Header.MajorVersion;
                     Current += sizeof(std::uint32_t);
                     Header.MinorVersion =
                         this->ReadUInt32(&HeaderBuffer[Current]);
@@ -481,6 +491,7 @@ namespace NanaZip::Codecs::Archive
         {
             this->m_IsInitialized = false;
             this->m_FilePaths.clear();
+            this->m_MajorVersion = 0;
             this->m_FullSize = 0;
             if (this->m_FileStream)
             {
@@ -677,6 +688,12 @@ namespace NanaZip::Codecs::Archive
                 Value->vt = VT_UI8;
                 break;
             }
+            case SevenZipArchiveUnpackVersion:
+            {
+                Value->uhVal.QuadPart = this->m_MajorVersion;
+                Value->vt = VT_UI8;
+                break;
+            }
             default:
                 break;
             }
@@ -725,7 +742,7 @@ namespace NanaZip::Codecs::Archive
             {
                 return E_INVALIDARG;
             }
-            *NumProps = 0;
+            *NumProps = g_ArchivePropertyItemsCount;
             return S_OK;
         }
 
@@ -735,11 +752,20 @@ namespace NanaZip::Codecs::Archive
             _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType)
         {
-            UNREFERENCED_PARAMETER(Index);
-            UNREFERENCED_PARAMETER(Name);
-            UNREFERENCED_PARAMETER(PropId);
-            UNREFERENCED_PARAMETER(VarType);
-            return E_INVALIDARG;
+            if (!(Index < g_ArchivePropertyItemsCount))
+            {
+                return E_INVALIDARG;
+            }
+
+            if (!Name || !PropId || !VarType)
+            {
+                return E_INVALIDARG;
+            }
+
+            *Name = nullptr;
+            *PropId = g_ArchivePropertyItems[Index].Property;
+            *VarType = g_ArchivePropertyItems[Index].Type;
+            return S_OK;
         }
     };
 
