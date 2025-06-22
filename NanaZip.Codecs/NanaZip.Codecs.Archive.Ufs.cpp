@@ -72,6 +72,7 @@ namespace
         { SevenZipArchiveFreeSpace, VT_UI8 },
         { SevenZipArchiveClusterSize, VT_UI4 },
         { SevenZipArchiveVolumeName, VT_BSTR },
+        { SevenZipArchiveUnpackVersion, VT_UI8 },
     };
 
     const std::size_t g_ArchivePropertyItemsCount =
@@ -1204,6 +1205,12 @@ namespace NanaZip::Codecs::Archive
                 {
                     Value->vt = VT_BSTR;
                 }
+                break;
+            }
+            case SevenZipArchiveUnpackVersion:
+            {
+                Value->uhVal.QuadPart = this->m_IsUfs2 ? 2 : 1;
+                Value->vt = VT_UI8;
                 break;
             }
             default:
