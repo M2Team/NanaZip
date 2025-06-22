@@ -48,6 +48,7 @@ namespace
     {
         { SevenZipArchiveFreeSpace, VT_UI8 },
         { SevenZipArchiveClusterSize, VT_UI4 },
+        { SevenZipArchiveUnpackVersion, VT_UI8 },
     };
 
     const std::size_t g_ArchivePropertyItemsCount =
@@ -675,6 +676,14 @@ namespace NanaZip::Codecs::Archive
 
                 Value->ulVal = BlockSize;
                 Value->vt = VT_UI4;
+                break;
+            }
+            case SevenZipArchiveUnpackVersion:
+            {
+                std::uint32_t DiskVersion = this->ReadUInt32(
+                    &this->m_SuperMetadataHeader.RawStructure.Version);
+                Value->uhVal.QuadPart = static_cast<UINT64>(DiskVersion >> 16);
+                Value->vt = VT_UI8;
                 break;
             }
             default:
