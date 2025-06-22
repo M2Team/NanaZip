@@ -67,8 +67,226 @@ namespace
         sizeof(g_PropertyItems) / sizeof(*g_PropertyItems);
 
     // References:
-    // - https://github.com/littlefs-project/littlefs/blob/master/SPEC.md
-    // - https://github.com/littlefs-project/littlefs/blob/master/lfs.h
+    // - https://github.com/littlefs-project/littlefs/blob/v1-prefix/SPEC.md
+    // - https://github.com/littlefs-project/littlefs/blob/v1-prefix/lfs1.h
+    // - https://github.com/littlefs-project/littlefs/blob/v2-prefix/SPEC.md
+    // - https://github.com/littlefs-project/littlefs/blob/v2-prefix/lfs2.h
+
+    // Notes:
+    // - All values in littlefs v1 are stored in little-endian byte order.
+    // - All values in littlefs v2 are stored in little-endian byte order, only
+    //   except the tags are stored in commits are stored in big-endian.
+    // - Block pointers are stored in 32 bits, with the special value 0xFFFFFFFF
+    //   representing a null block address.
+
+    const std::uint32_t LfsNullBlock = 0xFFFFFFFF;
+
+    const char LfsSuperBlockMagic[] = { 'l', 'i', 't', 't', 'l', 'e', 'f', 's' };
+
+    /**
+     * @brief Pair-pointer for pointing to the specific metadata-pair in the
+     *        filesystem. A null pair-pointer (0xffffffff, 0xffffffff) indicates
+     *        the end of the list.
+     */
+    struct Lfs1MetadataPairPointer
+    {
+        std::uint32_t Lower;
+        std::uint32_t Upper;
+    };
+
+    // Metadata pairs form the backbone of the littlefs and provide a system for
+    // atomic updates. Even the superblock is stored in a metadata pair.
+    // As their name suggests, a metadata pair is stored in two blocks, with one
+    // block acting as a redundant backup in case the other is corrupted. These
+    // two blocks could be anywhere in the disk and may not be next to each
+    // other, so any pointers to directory pairs need to be stored as two block
+    // pointers.
+
+    /**
+     * @brief The beginning of the metadata used in the metadata pairs.
+     */
+    struct Lfs1MetadataHeader
+    {
+        /**
+         * @brief Incremented every update, only the uncorrupted metadata-block
+         *        with the most recent revision count contains the valid
+         *        metadata. Comparison between revision counts must use sequence
+         *        comparison since the revision counts may overflow.
+         */
+        std::uint32_t Revision;
+
+        /**
+         * @brief Size in bytes of the contents in the current metadata block,
+         *        including the metadata-pair metadata. Additionally, the
+         *        highest bit of the dir size may be set to indicate that the
+         *        directory's contents continue on the next metadata-pair
+         *        pointed to by the tail pointer.
+         */
+        std::uint32_t Size;
+
+        /**
+         * @brief Pointer to the next metadata-pair in the filesystem. A null
+         *        pair-pointer (0xffffffff, 0xffffffff) indicates the end of the
+         *        list. If the highest bit in the dir size is set, this points
+         *        to the next metadata-pair in the current directory, otherwise
+         *        it points to an arbitrary metadata-pair. Starting with the
+         *        superblock, the tail-pointers form a linked-list containing
+         *        all metadata-pairs in the filesystem.
+         */
+        Lfs1MetadataPairPointer Tail;
+    };
+
+    /**
+     * @brief The ending‌ of the metadata used in the metadata pairs.
+     */
+    struct Lfs1MetadataFooter
+    {
+        /**
+         * @brief 32-bit CRC used to detect corruption from power-lost, from
+         *        block end-of-life, or just from noise on the storage bus. The
+         *        CRC is appended to the end of each metadata-block. The
+         *        littlefs uses the standard CRC-32, which uses a polynomial of
+         *        0x04c11db7, initialized with 0xffffffff.
+         */
+        std::uint32_t Crc;
+    };
+
+    /**
+     * @brief Type of the entry, currently this is limited to the following.
+     *        Additionally, the type is broken into two 4 bit nibbles, with the
+     *        upper nibble specifying the type's data structure used when
+     *        scanning the filesystem. The lower nibble clarifies the type
+     *        further when multiple entries share the same data structure.
+     *        The highest bit is reserved for marking the entry as "moved". If
+     *        an entry is marked as "moved", the entry may also exist somewhere
+     *        else in the filesystem. If the entry exists elsewhere, this entry
+     *        must be treated as though it does not exist.
+     */
+    enum Lfs1EntryTypes
+    {
+        Lfs1FileEntry = 0x11,
+        Lfs1DirectoryEntry = 0x22,
+        Lfs1SuperBlockEntry = 0x2E,
+    };
+
+    struct Lfs1EntryHeader
+    {
+        /**
+         * @brief Type of the entry, which is one of the Lfs1EntryTypes.
+         */
+        std::uint8_t EntryType;
+
+        /**
+         * @brief Length in bytes of the entry-specific data. This does not
+         *        include the entry type size, attributes, or name. The full
+         *        size in bytes of the entry is sizeof(Lfs1EntryHeader) +
+         *        EntryLength + AttributeLength + NameLength.
+         */
+        std::uint8_t EntryLength;
+
+        /**
+         * @brief Length of system-specific attributes in bytes. Since
+         *        attributes are system specific, there is not much
+         *        guarantee on the values in this section, and systems
+         *        are expected to work even when it is empty.
+         */
+        std::uint8_t AttributeLength;
+
+        /**
+         * @brief Length of the entry name. Entry names are stored as UTF8,
+         *        although most systems will probably only support ASCII. Entry
+         *        names can not contain '/' and can not be '.' or '..' as these
+         *        are a part of the syntax of filesystem paths.
+         */
+        std::uint8_t NameLength;
+    };
+
+    /**
+     * @brief The superblock is the anchor for the littlefs. The superblock is
+     *        stored as a metadata pair containing a single superblock entry.
+     *        It is through the superblock that littlefs can access the rest of
+     *        the filesystem.
+     *        The superblock can always be found in blocks 0 and 1, however
+     *        fetching the superblock requires knowing the block size. The block
+     *        size can be guessed by searching the beginning of disk for the
+     *        string "littlefs", although currently the filesystems relies on
+     *        the user providing the correct block size.
+     *        The superblock is the most valuable block in the filesystem. It is
+     *        updated very rarely, only during format or when the root directory
+     *        must be moved. It is encouraged to always write out both
+     *        superblock pairs even though it is not required.
+     */
+    struct Lfs1SuperBlockEntryContent
+    {
+        /**
+         * @brief Pointer to the root directory's metadata pair.
+         */
+        Lfs1MetadataPairPointer RootDirectory;
+
+        /**
+         * @brief Size of the logical block size used by the filesystem.
+         */
+        std::uint32_t BlockSize;
+
+        /**
+         * @brief Number of blocks in the filesystem.
+         */
+        std::uint32_t BlockCount;
+
+        /**
+         * @brief The littlefs version encoded as a 32 bit value. The upper 16
+         *        bits encodes the major version, which is incremented when a
+         *        breaking-change is introduced in the filesystem specification.
+         *        The lower 16 bits encodes the minor version, which is
+         *        incremented when a backwards-compatible change is introduced.
+         *        Non-standard Attribute changes do not change the version. This
+         *        specification describes version 1.1 (0x00010001), which is the
+         *        first version of littlefs.
+         */
+        std::uint32_t Version;
+    };
+
+    /**
+     * @brief Directories are stored in entries with a pointer to the first
+     *        metadata pair in the directory. Keep in mind that a directory
+     *        may be composed of multiple metadata pairs connected by the tail
+     *        pointer when the highest bit in the dir size is set.
+     */
+    struct Lfs1DirectoryEntryContent
+    {
+        /**
+         * @brief Pointer to the first metadata pair in the directory.
+         */
+        Lfs1MetadataPairPointer Directory;
+    };
+
+    /**
+     * @brief Files are stored in entries with a pointer to the head of the file
+     *        and the size of the file. This is enough information to determine
+     *        the state of the CTZ skip-list that is being referenced.
+     *        A terribly quick summary: For every nth block where n is divisible
+     *        by 2^x, the block contains a pointer to block n-2^x. These
+     *        pointers are stored in increasing order of x in each block of the
+     *        file preceding the data in the block.
+     *        The maximum number of pointers in a block is bounded by the
+     *        maximum file size divided by the block size. With 32 bits for file
+     *        size, this results in a minimum block size of 104 bytes.
+     */
+    struct Lfs1FileEntryContent
+    {
+        /**
+         * @brief Pointer to the block that is the head of the file's CTZ
+         *        skip-list.
+         */
+        std::uint32_t FileHead;
+
+        /**
+         * @brief Size of file in bytes.
+         */
+        std::uint32_t FileSize;
+    };
+
+    // littlefs v2 definitions (work in progress)
 
     const std::uint32_t g_LfsInitialTag = 0xffffffff;
 
@@ -166,8 +384,6 @@ namespace
     // pair, and the name tag must always be the first tag in the metadata pair.
     // This makes it so that the magic string "littlefs" will always reside at
     // offset = 8 in a valid littlefs superblock.
-
-    const char g_LfsSignature[] = { 'l', 'i', 't', 't', 'l', 'e', 'f', 's' };
 
     struct LfsSuperBlockInlineStructure
     {
@@ -366,15 +582,15 @@ namespace NanaZip::Codecs::Archive
                 if (!PreviousTag.CheckWith(
                     LfsTypeSuperBlock,
                     0,
-                    sizeof(g_LfsSignature)))
+                    sizeof(::LfsSuperBlockMagic)))
                 {
                     break;
                 }
 
                 if (0 != std::memcmp(
                     this->m_SuperMetadataHeader.RawSignature,
-                    g_LfsSignature,
-                    sizeof(g_LfsSignature)))
+                    ::LfsSuperBlockMagic,
+                    sizeof(::LfsSuperBlockMagic)))
                 {
                     break;
                 }
