@@ -10,6 +10,18 @@
 #include <Mile.Helpers.CppWinRT.h>
 #include "ControlMacros.h"
 
+namespace winrt
+{
+    using namespace Windows::Foundation;
+    using namespace Windows::Foundation::Collections;
+    using namespace Windows::UI::Xaml;
+    using namespace Windows::UI::Xaml::Controls;
+    using namespace Windows::UI::Xaml::Controls::Primitives;
+    using namespace Windows::UI::Xaml::Input;
+    using namespace Windows::UI::Xaml::Media;
+    using namespace Windows::System;
+}
+
 namespace winrt::NanaZip::Modern::implementation
 {
     struct AddressBar : AddressBarT<AddressBar>
@@ -18,17 +30,17 @@ namespace winrt::NanaZip::Modern::implementation
 
         void OnApplyTemplate();
         void OnTextBoxPreviewKeyDown(
-            winrt::Windows::Foundation::IInspectable const&,
-            winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const&);
+            winrt::IInspectable const&,
+            winrt::KeyRoutedEventArgs const&);
 
         DEPENDENCY_PROPERTY_HEADER(Text, winrt::hstring);
         DEPENDENCY_PROPERTY_HEADER(
             IconSource,
-            winrt::Windows::UI::Xaml::Media::ImageSource
+            winrt::ImageSource
         );
         DEPENDENCY_PROPERTY_HEADER(
             ItemsSource,
-            winrt::Windows::Foundation::IInspectable
+            winrt::IInspectable
         );
         DEPENDENCY_PROPERTY_HEADER(
             IsUpButtonEnabled,
@@ -36,7 +48,7 @@ namespace winrt::NanaZip::Modern::implementation
         );
 
         Mile::WinRT::Event<
-            winrt::Windows::Foundation::TypedEventHandler<
+            winrt::TypedEventHandler<
             winrt::NanaZip::Modern::AddressBar,
             winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs>>
             QuerySubmitted;
@@ -45,41 +57,34 @@ namespace winrt::NanaZip::Modern::implementation
             UpButtonClicked;
 
         Mile::WinRT::Event<
-            winrt::Windows::Foundation::TypedEventHandler<
+            winrt::TypedEventHandler<
             winrt::NanaZip::Modern::AddressBar,
-            winrt::Windows::Foundation::IInspectable>>
+            winrt::IInspectable>>
             DropDownOpened;
 
     private:
         bool OpenSuggestionsPopup(bool isKeyboard);
 
-        winrt::Windows::UI::Xaml::Controls::TextBox m_textBoxElement{ nullptr };
-        winrt::Windows::UI::Xaml::Controls::Primitives::Popup
+        winrt::TextBox m_textBoxElement{ nullptr };
+        winrt::Popup
             m_popup{ nullptr };
-        winrt::Windows::UI::Xaml::Controls::Button m_upButtonElement{ nullptr };
-        winrt::Windows::UI::Xaml::Controls::ListView m_suggestionsList{ nullptr };
+        winrt::Button m_upButtonElement{ nullptr };
+        winrt::ListView m_suggestionsList{ nullptr };
     };
 
     struct AddressBarItem : AddressBarItemT<AddressBarItem>
     {
         AddressBarItem() = default;
 
-        winrt::hstring Text();
-        void Text(winrt::hstring const&);
-
-        winrt::Windows::UI::Xaml::Media::ImageSource Icon();
-        void Icon(winrt::Windows::UI::Xaml::Media::ImageSource const&);
-
-        winrt::Windows::UI::Xaml::Thickness Padding();
-        void Padding(winrt::Windows::UI::Xaml::Thickness const&);
-
-    private:
-        winrt::hstring m_text;
-        winrt::Windows::UI::Xaml::Media::ImageSource m_icon{ nullptr };
-        winrt::Windows::UI::Xaml::Thickness m_padding = { 0, 0, 0, 0 };
+        Mile::WinRT::Property<winrt::hstring> Text;
+        Mile::WinRT::Property<winrt::ImageSource> Icon =
+            Mile::WinRT::Property<winrt::ImageSource>(nullptr);
+        Mile::WinRT::Property<winrt::Thickness> Padding;
     };
 
-    struct AddressBarQuerySubmittedEventArgs : AddressBarQuerySubmittedEventArgsT<AddressBarQuerySubmittedEventArgs>
+    struct AddressBarQuerySubmittedEventArgs :
+        AddressBarQuerySubmittedEventArgsT<
+        AddressBarQuerySubmittedEventArgs>
     {
         AddressBarQuerySubmittedEventArgs(
             winrt::hstring const&,

@@ -6,32 +6,27 @@
 
 #include <winrt/Windows.System.h>
 
-namespace wf = winrt::Windows::Foundation;
-namespace wfc = wf::Collections;
-
-using namespace winrt::NanaZip::Modern::implementation;
+using namespace ::winrt::NanaZip::Modern::implementation;
 
 void AddressBar::OnApplyTemplate()
 {
     m_textBoxElement =
         GetTemplateChild(L"TextBoxElement")
-        .as<winrt::Windows::UI::Xaml::Controls::TextBox>();
+        .as<winrt::TextBox>();
 
     // Workaround for https://github.com/microsoft/microsoft-ui-xaml/issues/5341
-    winrt::Windows::UI::Xaml::Controls::TextCommandBarFlyout textFlyout;
+    winrt::TextCommandBarFlyout textFlyout;
     textFlyout.Placement(
-        winrt::Windows::UI::Xaml::Controls::Primitives::
-        FlyoutPlacementMode::
-        BottomEdgeAlignedLeft);
+        winrt::FlyoutPlacementMode::BottomEdgeAlignedLeft);
     m_textBoxElement.ContextFlyout(textFlyout);
     m_textBoxElement.SelectionFlyout(textFlyout);
 
     m_textBoxElement.GotFocus(
         []
-        (wf::IInspectable const& sender, auto&&)
+        (winrt::IInspectable const& sender, auto&&)
         {
-            winrt::Windows::UI::Xaml::Controls::TextBox textBox =
-                sender.as<winrt::Windows::UI::Xaml::Controls::TextBox>();
+            winrt::TextBox textBox =
+                sender.as<winrt::TextBox>();
             textBox.SelectAll();
         });
 
@@ -39,7 +34,7 @@ void AddressBar::OnApplyTemplate()
 
     m_popup =
         GetTemplateChild(L"SuggestionsPopup")
-        .as<winrt::Windows::UI::Xaml::Controls::Primitives::Popup>();
+        .as<winrt::Primitives::Popup>();
 
     m_popup.Closed(
         [weak_this{ get_weak() }]
@@ -58,11 +53,11 @@ void AddressBar::OnApplyTemplate()
 
     m_suggestionsList =
         GetTemplateChild(L"SuggestionsList")
-        .as<winrt::Windows::UI::Xaml::Controls::ListView>();
+        .as<winrt::ListView>();
 
     m_suggestionsList.ItemClick(
         [weak_this{ get_weak() }]
-        (auto&&, winrt::Windows::UI::Xaml::Controls::ItemClickEventArgs const& args)
+        (auto&&, winrt::ItemClickEventArgs const& args)
         {
             if (auto strong_this{ weak_this.get() })
             {
@@ -79,9 +74,9 @@ void AddressBar::OnApplyTemplate()
         }
     );
 
-    winrt::Windows::UI::Xaml::Controls::Button m_dropDownButton =
+    winrt::Button m_dropDownButton =
         GetTemplateChild(L"DropDownButton")
-        .as<winrt::Windows::UI::Xaml::Controls::Button>();
+        .as<winrt::Button>();
 
     m_dropDownButton.Click(
         [ weak_this{ get_weak() }]
@@ -91,22 +86,22 @@ void AddressBar::OnApplyTemplate()
         {
             if (auto strong_this{ weak_this.get() })
             {
-                wfc::IVectorView<wf::IInspectable> source =
+                winrt::IVectorView<winrt::IInspectable> source =
                     strong_this->ItemsSource()
-                    .as<wfc::IVectorView<wf::IInspectable>>();
+                    .as<winrt::IVectorView<winrt::IInspectable>>();
                 strong_this->OpenSuggestionsPopup(false);
             }
         });
 
-    m_upButtonElement =
+    this->m_upButtonElement =
         GetTemplateChild(L"UpButton")
-        .as<winrt::Windows::UI::Xaml::Controls::Button>();
+        .as<winrt::Button>();
 
-    m_upButtonElement.Click(
+    this->m_upButtonElement.Click(
         [weak_this{ get_weak() }]
         (
             auto&&,
-            winrt::Windows::UI::Xaml::RoutedEventArgs const&
+            winrt::RoutedEventArgs const&
             args
         )
         {
@@ -120,18 +115,18 @@ void AddressBar::OnApplyTemplate()
 }
 
 void AddressBar::OnTextBoxPreviewKeyDown(
-    wf::IInspectable const&,
-    winrt::Windows::UI::Xaml::Input::KeyRoutedEventArgs const& args)
+    winrt::IInspectable const&,
+    winrt::KeyRoutedEventArgs const& args)
 {
     switch (args.Key())
     {
-        case winrt::Windows::System::VirtualKey::Enter:
+        case winrt::VirtualKey::Enter:
         {
             if (m_popup &&
                 m_suggestionsList &&
                 m_popup.IsOpen() &&
                 m_suggestionsList.SelectionMode()
-                != winrt::Windows::UI::Xaml::Controls::ListViewSelectionMode::None)
+                != winrt::ListViewSelectionMode::None)
             {
                 auto selectedItem = m_suggestionsList.SelectedItem();
                 auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(L"", selectedItem);
@@ -146,13 +141,13 @@ void AddressBar::OnTextBoxPreviewKeyDown(
             args.Handled(true);
             break;
         }
-        case winrt::Windows::System::VirtualKey::Down:
+        case winrt::VirtualKey::Down:
         {
             if (!m_popup || !m_suggestionsList)
                 break;
 
-            wfc::IVectorView<wf::IInspectable> source =
-                ItemsSource().as<wfc::IVectorView<wf::IInspectable>>();
+            winrt::IVectorView<winrt::IInspectable> source =
+                ItemsSource().as<winrt::IVectorView<winrt::IInspectable>>();
 
             if (!m_popup.IsOpen())
             {
@@ -173,7 +168,7 @@ void AddressBar::OnTextBoxPreviewKeyDown(
 
             break;
         }
-        case winrt::Windows::System::VirtualKey::Up:
+        case winrt::VirtualKey::Up:
         {
             if (!m_popup || !m_suggestionsList || !m_popup.IsOpen())
                 break;
@@ -200,14 +195,14 @@ DEPENDENCY_PROPERTY_SOURCE_BOX(
 
 DEPENDENCY_PROPERTY_SOURCE_NOBOX(
     IconSource,
-    winrt::Windows::UI::Xaml::Media::ImageSource,
+    winrt::ImageSource,
     AddressBar,
     winrt::NanaZip::Modern::AddressBar
 );
 
 DEPENDENCY_PROPERTY_SOURCE_NOBOX(
     ItemsSource,
-    wf::IInspectable,
+    winrt::IInspectable,
     AddressBar,
     winrt::NanaZip::Modern::AddressBar
 );
@@ -229,20 +224,20 @@ bool AddressBar::OpenSuggestionsPopup(
 
     DropDownOpened(*this, nullptr);
 
-    wfc::IVectorView<wf::IInspectable> source =
-        ItemsSource().as<wfc::IVectorView<wf::IInspectable>>();
+    winrt::IVectorView<winrt::IInspectable> source =
+        ItemsSource().as<winrt::IVectorView<winrt::IInspectable>>();
     if (source.Size() == 0)
         return false;
 
     if (!isKeyboard)
     {
         m_suggestionsList.SelectionMode(
-            winrt::Windows::UI::Xaml::Controls::ListViewSelectionMode::None
+            winrt::ListViewSelectionMode::None
         );
     }
     else {
         m_suggestionsList.SelectionMode(
-            winrt::Windows::UI::Xaml::Controls::ListViewSelectionMode::Single
+            winrt::ListViewSelectionMode::Single
         );
     }
 
@@ -258,45 +253,15 @@ bool AddressBar::OpenSuggestionsPopup(
     m_suggestionsList.CornerRadius(slCorner);
 
     m_popup.IsOpen(true);
-    m_textBoxElement.Focus(winrt::Windows::UI::Xaml::FocusState::Programmatic);
+    m_textBoxElement.Focus(winrt::FocusState::Programmatic);
 
     return true;
-}
-
-winrt::hstring AddressBarItem::Text()
-{
-    return m_text;
-}
-
-void AddressBarItem::Text(winrt::hstring const& text)
-{
-    m_text = text;
-}
-
-winrt::Windows::UI::Xaml::Media::ImageSource AddressBarItem::Icon()
-{
-    return m_icon;
-}
-
-void AddressBarItem::Icon(winrt::Windows::UI::Xaml::Media::ImageSource const& icon)
-{
-    m_icon = icon;
-}
-
-winrt::Windows::UI::Xaml::Thickness AddressBarItem::Padding()
-{
-    return m_padding;
-}
-
-void AddressBarItem::Padding(winrt::Windows::UI::Xaml::Thickness const& padding)
-{
-    m_padding = padding;
 }
 
 AddressBarQuerySubmittedEventArgs::
 AddressBarQuerySubmittedEventArgs(
     winrt::hstring const& queryText,
-    wf::IInspectable const& suggestionChosen
+    winrt::IInspectable const& suggestionChosen
 )
 {
     m_queryText = queryText;
@@ -310,7 +275,7 @@ QueryText()
     return m_queryText;
 }
 
-wf::IInspectable
+winrt::IInspectable
 AddressBarQuerySubmittedEventArgs::
 ChosenSuggestion()
 {
