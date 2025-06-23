@@ -34,7 +34,7 @@ void AddressBar::OnApplyTemplate()
 
     m_popup =
         GetTemplateChild(L"SuggestionsPopup")
-        .as<winrt::Primitives::Popup>();
+        .as<winrt::Popup>();
 
     m_popup.Closed(
         [weak_this{ get_weak() }]
