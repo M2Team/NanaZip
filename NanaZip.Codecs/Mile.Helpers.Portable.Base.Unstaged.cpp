@@ -87,3 +87,31 @@ EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
         (static_cast<MO_UINT64>(Base[6]) << 48) |
         (static_cast<MO_UINT64>(Base[7]) << 56);
 }
+
+EXTERN_C MO_INT8 MileSequenceCompare8(
+    _In_ MO_UINT8 Left,
+    _In_ MO_UINT8 Right)
+{
+    return static_cast<MO_INT8>(static_cast<MO_UINT8>(Left - Right));
+}
+
+EXTERN_C MO_INT16 MileSequenceCompare16(
+    _In_ MO_UINT16 Left,
+    _In_ MO_UINT16 Right)
+{
+    return static_cast<MO_INT16>(static_cast<MO_UINT16>(Left - Right));
+}
+
+EXTERN_C MO_INT32 MileSequenceCompare32(
+    _In_ MO_UINT32 Left,
+    _In_ MO_UINT32 Right)
+{
+    return static_cast<MO_INT32>(static_cast<MO_UINT32>(Left - Right));
+}
+
+EXTERN_C MO_INT64 MileSequenceCompare64(
+    _In_ MO_UINT64 Left,
+    _In_ MO_UINT64 Right)
+{
+    return static_cast<MO_INT64>(static_cast<MO_UINT64>(Left - Right));
+}

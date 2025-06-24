@@ -92,4 +92,60 @@ EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
 EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
     _In_ MO_CONSTANT_POINTER BaseAddress);
 
+/**
+ * @brief Calculates the distance between two 8-bit unsigned integers Left and
+ *        Right with sequence comparison which ignores overflow.
+ * @param Left The left operand you want to calculate the distance.
+ * @param Right The right operand you want to calculate the distance.
+ * @return The distance between Left and Right as an 8-bit signed integer, where
+ *         a positive value indicates Left is greater than Right, a negative
+ *         value indicates Left is less than Right, and zero indicates they are
+ *         equal.
+ */
+EXTERN_C MO_INT8 MileSequenceCompare8(
+    _In_ MO_UINT8 Left,
+    _In_ MO_UINT8 Right);
+
+/**
+ * @brief Calculates the distance between two 16-bit unsigned integers Left and
+ *        Right with sequence comparison which ignores overflow.
+ * @param Left The left operand you want to calculate the distance.
+ * @param Right The right operand you want to calculate the distance.
+ * @return The distance between Left and Right as a 16-bit signed integer, where
+ *         a positive value indicates Left is greater than Right, a negative
+ *         value indicates Left is less than Right, and zero indicates they are
+ *         equal.
+ */
+EXTERN_C MO_INT16 MileSequenceCompare16(
+    _In_ MO_UINT16 Left,
+    _In_ MO_UINT16 Right);
+
+/**
+ * @brief Calculates the distance between two 32-bit unsigned integers Left and
+ *        Right with sequence comparison which ignores overflow.
+ * @param Left The left operand you want to calculate the distance.
+ * @param Right The right operand you want to calculate the distance.
+ * @return The distance between Left and Right as a 32-bit signed integer, where
+ *         a positive value indicates Left is greater than Right, a negative
+ *         value indicates Left is less than Right, and zero indicates they are
+ *         equal.
+ */
+EXTERN_C MO_INT32 MileSequenceCompare32(
+    _In_ MO_UINT32 Left,
+    _In_ MO_UINT32 Right);
+
+/**
+ * @brief Calculates the distance between two 64-bit unsigned integers Left and
+ *        Right with sequence comparison which ignores overflow.
+ * @param Left The left operand you want to calculate the distance.
+ * @param Right The right operand you want to calculate the distance.
+ * @return The distance between Left and Right as a 64-bit signed integer, where
+ *         a positive value indicates Left is greater than Right, a negative
+ *         value indicates Left is less than Right, and zero indicates they are
+ *         equal.
+ */
+EXTERN_C MO_INT64 MileSequenceCompare64(
+    _In_ MO_UINT64 Left,
+    _In_ MO_UINT64 Right);
+
 #endif // !MILE_PORTABLE_HELPERS_BASE_UNSTAGED
