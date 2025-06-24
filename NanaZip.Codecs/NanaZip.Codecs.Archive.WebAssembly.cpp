@@ -119,30 +119,19 @@ namespace NanaZip::Codecs::Archive
             {
                 *ProcessedBytes = 0;
             }
-            const std::uint8_t* Base =
-                reinterpret_cast<const std::uint8_t*>(BaseAddress);
-            std::uint32_t Result = 0;
-            std::uint8_t Shift = 0;
-            while (true)
+
+            MO_UINT64 Value = 0;
+            MO_UINT8 Result = ::MileDecodeLeb128(BaseAddress, 32, false, &Value);
+            if (Result)
             {
                 if (ProcessedBytes)
                 {
-                    ++(*ProcessedBytes);
+                    *ProcessedBytes = Result;
                 }
-                std::uint8_t Byte = *(Base++);
-                Result |= (Byte & 0x7F) << Shift;
-                if (!(Byte & 0x80))
-                {
-                    break;
-                }
-                Shift += 7;
-                if (Shift >= 35)
-                {
-                    return static_cast<std::uint32_t>(-1);
-                }
+                return static_cast<std::uint32_t>(Value);
             }
 
-            return Result;
+            return static_cast<std::uint32_t>(-1);
         }
 
         HRESULT ReadFileStream(
