@@ -1,0 +1,52 @@
+﻿namespace NanaZip.Modern
+{
+    [default_interface]
+    runtimeclass ProgressPage : Windows.UI.Xaml.Controls.Page
+    {
+        ProgressPage();
+
+        String ActionText;
+        String FileNameText;
+        String ElapsedTimeText;
+        String RemainingTimeText;
+        String FilesText;
+        String SpeedText;
+        String TotalSizeText;
+        String ProcessedText;
+        String PackedSizeText;
+        String CompressionRatioText;
+
+        Double ProgressBarMinimum;
+        Double ProgressBarMaximum;
+        Double ProgressBarValue;
+
+        Boolean ShowBackgroundButton;
+        Boolean ShowPauseButton;
+        Boolean ShowPackedValue;
+        Boolean ShowCompressionRatioValue;
+
+        static Windows.UI.Xaml.DependencyProperty ActionTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty FileNameTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty ElapsedTimeTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty RemainingTimeTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty FilesTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty SpeedTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty TotalSizeTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty ProcessedTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty PackedSizeTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty CompressionRatioTextProperty{ get; };
+
+        static Windows.UI.Xaml.DependencyProperty ProgressBarMinimumProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty ProgressBarMaximumProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty ProgressBarValueProperty{ get; };
+
+        static Windows.UI.Xaml.DependencyProperty ShowBackgroundButtonProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty ShowPauseButtonProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty ShowPackedValueProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty ShowCompressionRatioValueProperty{ get; };
+
+        event Windows.UI.Xaml.RoutedEventHandler BackgroundButtonClicked;
+        event Windows.UI.Xaml.RoutedEventHandler PauseButtonClicked;
+        event Windows.UI.Xaml.RoutedEventHandler CancelButtonClicked;
+    }
+}
