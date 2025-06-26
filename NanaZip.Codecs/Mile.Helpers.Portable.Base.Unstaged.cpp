@@ -129,6 +129,12 @@ EXTERN_C MO_UINT8 MileDecodeLeb128(
     }
     *OutputValue = 0;
 
+    if (1 == MaximumBits && SignedMode)
+    {
+        // Signed mode with 1 bit is not valid.
+        return 0;
+    }
+
     MO_UINT8 MaximumByteCount = (MaximumBits + 6) / 7;
 
     MO_UINT8 MaximumByteValidBits = MaximumBits % 7;
@@ -177,6 +183,9 @@ EXTERN_C MO_UINT8 MileDecodeLeb128(
         }
         else
         {
+            // Clear the top bits beyond MaximumBits.
+            Value &= (static_cast<MO_UINT64>(1) << MaximumBits) - 1;
+
             MO_UINT8 SignBitMask = (1 << (MaximumByteValidBits - 1));
             MO_UINT8 TopBitsMask = ~MaximumByteMask;
             MO_UINT8 TopBitsValue = 0x7F - MaximumByteMask;
@@ -188,6 +197,15 @@ EXTERN_C MO_UINT8 MileDecodeLeb128(
             {
                 // Overflow.
                 return 0;
+            }
+
+            if (IsSignBitSet)
+            {
+                // Sign extend the value if the sign bit is set.
+                if (Value & (static_cast<MO_UINT64>(1) << (MaximumBits - 1)))
+                {
+                    Value |= static_cast<MO_UINT64>(-1) << MaximumBits;
+                }
             }
         }
     }
