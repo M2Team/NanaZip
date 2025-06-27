@@ -5,3 +5,8 @@ EXPORTS
 K7ModernShowSponsorDialog
 K7ModernShowAboutDialog
 K7ModernCreateMainWindowToolBarPage
+
+DllCanUnloadNow PRIVATE
+DllGetClassObject PRIVATE
+DllRegisterServer PRIVATE
+DllUnregisterServer PRIVATE
