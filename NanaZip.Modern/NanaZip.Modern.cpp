@@ -43,8 +43,7 @@ namespace
         _In_ int Width,
         _In_ int Height,
         _In_ LPVOID Content,
-        _In_ HWND ParentWindowHandle,
-        _In_ bool RunMessageLoop = true)
+        _In_ HWND ParentWindowHandle)
     {
         if (!WindowHandle)
         {
@@ -99,10 +98,7 @@ namespace
         ::ShowWindow(WindowHandle, SW_SHOW);
         ::UpdateWindow(WindowHandle);
 
-        if (RunMessageLoop)
-            return ::MileXamlContentWindowDefaultMessageLoop();
-        else
-            return 0;
+        return ::MileXamlContentWindowDefaultMessageLoop();;
     }
 
     int K7ModernShowXamlDialog(
