@@ -80,7 +80,7 @@
                     ::winrt::xaml_typename<type>(), \
                     ::winrt::xaml_typename<projType>(), \
                     ::winrt::Windows::UI::Xaml::PropertyMetadata( \
-                        ::winrt::box_value(default), nullptr \
+                        ::winrt::box_value((type)default), nullptr \
                     ) \
                 ); \
         } \

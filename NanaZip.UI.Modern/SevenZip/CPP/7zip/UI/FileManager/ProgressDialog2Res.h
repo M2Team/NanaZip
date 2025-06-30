@@ -4,12 +4,13 @@
 #define IDS_CLOSE                  408
 #define IDS_CONTINUE               411
 
-#define IDB_PROGRESS_BACKGROUND    444
+// #define IDB_PROGRESS_BACKGROUND    444
 #define IDS_PROGRESS_FOREGROUND    445
-#define IDB_PAUSE                  446
+// #define IDB_PAUSE                  446
 #define IDS_PROGRESS_PAUSED        447
 #define IDS_PROGRESS_ASK_CANCEL    448
 
+/*
 #define IDT_PROGRESS_PACKED       1008
 #define IDT_PROGRESS_FILES        1032
 
@@ -37,6 +38,7 @@
 #define IDT_PROGRESS_PROCESSED_VAL 124
 #define IDT_PROGRESS_RATIO_VAL     125
 #define IDT_PROGRESS_ERRORS_VAL    126
+*/
 
 
 #ifdef UNDER_CE

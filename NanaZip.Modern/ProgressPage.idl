@@ -16,6 +16,10 @@
         String PackedSizeText;
         String CompressionRatioText;
 
+        String BackgroundButtonText;
+        String PauseButtonText;
+        String CancelButtonText;
+
         Double ProgressBarMinimum;
         Double ProgressBarMaximum;
         Double ProgressBarValue;
@@ -24,6 +28,8 @@
         Boolean ShowPauseButton;
         Boolean ShowPackedValue;
         Boolean ShowCompressionRatioValue;
+
+        Boolean ShowPaused;
 
         static Windows.UI.Xaml.DependencyProperty ActionTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty FileNameTextProperty{ get; };
@@ -36,6 +42,10 @@
         static Windows.UI.Xaml.DependencyProperty PackedSizeTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty CompressionRatioTextProperty{ get; };
 
+        static Windows.UI.Xaml.DependencyProperty BackgroundButtonTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty PauseButtonTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty CancelButtonTextProperty{ get; };
+
         static Windows.UI.Xaml.DependencyProperty ProgressBarMinimumProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty ProgressBarMaximumProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty ProgressBarValueProperty{ get; };
@@ -44,6 +54,8 @@
         static Windows.UI.Xaml.DependencyProperty ShowPauseButtonProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty ShowPackedValueProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty ShowCompressionRatioValueProperty{ get; };
+
+        static Windows.UI.Xaml.DependencyProperty ShowPausedProperty{ get; };
 
         event Windows.UI.Xaml.RoutedEventHandler BackgroundButtonClicked;
         event Windows.UI.Xaml.RoutedEventHandler PauseButtonClicked;

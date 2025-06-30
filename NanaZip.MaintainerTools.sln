@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NanaZip.ProjectAssetsGenera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanaZip.RefreshPackageVersion", "NanaZip.RefreshPackageVersion\NanaZip.RefreshPackageVersion.csproj", "{55B17674-2F49-41D6-903F-454E0BDF8E9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanaZip.ResourceMigrator", "NanaZip.ResourceMigrator\NanaZip.ResourceMigrator.csproj", "{48147A61-A288-4F6E-BED4-D6802A379730}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{55B17674-2F49-41D6-903F-454E0BDF8E9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55B17674-2F49-41D6-903F-454E0BDF8E9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55B17674-2F49-41D6-903F-454E0BDF8E9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48147A61-A288-4F6E-BED4-D6802A379730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48147A61-A288-4F6E-BED4-D6802A379730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48147A61-A288-4F6E-BED4-D6802A379730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48147A61-A288-4F6E-BED4-D6802A379730}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

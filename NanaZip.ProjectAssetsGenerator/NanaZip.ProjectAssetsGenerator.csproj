@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="Mile.Project.Helpers" Version="1.0.643" />
+    <PackageReference Include="vswhere" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="$(VSWhereDir)\vswhere.exe" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

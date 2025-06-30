@@ -15,7 +15,7 @@
     <StackPanel
       Grid.Row="0"
       Grid.ColumnSpan="2"
-      Padding="16,16,16,16"
+      Padding="16,0,16,16"
       Orientation="Vertical">
       <TextBlock
         d:Text="[Adding]"
@@ -33,6 +33,7 @@
         d:Value="30"
         Maximum="{x:Bind ProgressBarMaximum, Mode=OneWay}"
         Minimum="{x:Bind ProgressBarMinimum, Mode=OneWay}"
+        ShowPaused="{x:Bind ShowPaused, Mode=OneWay}"
         Value="{x:Bind ProgressBarValue, Mode=OneWay}" />
 
       <Grid Margin="0,24,0,0" ColumnSpacing="32">
@@ -47,13 +48,22 @@
             <ColumnDefinition Width="Auto" />
           </Grid.ColumnDefinitions>
           <StackPanel Grid.Column="0">
-            <TextBlock Margin="0,4,0,0" Style="{ThemeResource BaseTextBlockStyle}">
+            <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/ElapsedTimeLabel"
+              Margin="0,4,0,0"
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Elapsed time]
             </TextBlock>
-            <TextBlock Margin="0,4,0,0" Style="{ThemeResource BaseTextBlockStyle}">
+            <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/RemainingTimeLabel"
+              Margin="0,4,0,0"
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Remaining time]
             </TextBlock>
-            <TextBlock Margin="0,4,0,0" Style="{ThemeResource BaseTextBlockStyle}">
+            <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/FilesLabel"
+              Margin="0,4,0,0"
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Files]
             </TextBlock>
           </StackPanel>
@@ -63,17 +73,20 @@
               Margin="0,4,0,0"
               d:Text="00:00:08"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind ElapsedTimeText, Mode=OneWay}" />
+              Text="{x:Bind ElapsedTimeText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular" />
             <TextBlock
               Margin="0,4,0,0"
               d:Text="00:01:49"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind RemainingTimeText, Mode=OneWay}" />
+              Text="{x:Bind RemainingTimeText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular" />
             <TextBlock
               Margin="0,4,0,0"
               d:Text="1/6"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind FilesText, Mode=OneWay}" />
+              Text="{x:Bind FilesText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular" />
           </StackPanel>
         </Grid>
 
@@ -83,22 +96,33 @@
             <ColumnDefinition Width="Auto" />
           </Grid.ColumnDefinitions>
           <StackPanel Grid.Column="0">
-            <TextBlock Margin="0,4,0,0" Style="{ThemeResource BaseTextBlockStyle}">
+            <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/SpeedLabel"
+              Margin="0,4,0,0"
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Speed]
             </TextBlock>
-            <TextBlock Margin="0,4,0,0" Style="{ThemeResource BaseTextBlockStyle}">
+            <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/TotalSizeLabel"
+              Margin="0,4,0,0"
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Total size]
             </TextBlock>
-            <TextBlock Margin="0,4,0,0" Style="{ThemeResource BaseTextBlockStyle}">
+            <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/ProcessedLabel"
+              Margin="0,4,0,0"
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Processed]
             </TextBlock>
             <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/PackedSizeLabel"
               Margin="0,4,0,0"
               Style="{ThemeResource BaseTextBlockStyle}"
               Visibility="{x:Bind ShowPackedValue, Mode=OneWay}">
               [Packed Size]
             </TextBlock>
             <TextBlock
+              x:Uid="/NanaZip.Modern/ProgressPage/CompressionRatioLabel"
               Margin="0,4,0,0"
               Style="{ThemeResource BaseTextBlockStyle}"
               Visibility="{x:Bind ShowCompressionRatioValue, Mode=OneWay}">
@@ -111,27 +135,34 @@
               Margin="0,4,0,0"
               d:Text="30 MB/s"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind SpeedText, Mode=OneWay}" />
+              Text="{x:Bind SpeedText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular" />
             <TextBlock
               Margin="0,4,0,0"
               d:Text="1886 MB"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind TotalSizeText, Mode=OneWay}" />
+              Text="{x:Bind TotalSizeText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular" />
             <TextBlock
               Margin="0,4,0,0"
               d:Text="204 MB"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind ProcessedText, Mode=OneWay}" />
+              Text="{x:Bind ProcessedText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular" />
             <TextBlock
               Margin="0,4,0,0"
               d:Text="182 MB"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind PackedSizeText, Mode=OneWay}" />
+              Text="{x:Bind PackedSizeText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular"
+              Visibility="{x:Bind ShowPackedValue, Mode=OneWay}" />
             <TextBlock
               Margin="0,4,0,0"
               d:Text="89%"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind CompressionRatioText, Mode=OneWay}" />
+              Text="{x:Bind CompressionRatioText, Mode=OneWay}"
+              Typography.NumeralAlignment="Tabular"
+              Visibility="{x:Bind ShowCompressionRatioValue, Mode=OneWay}" />
           </StackPanel>
         </Grid>
       </Grid>
@@ -141,35 +172,28 @@
       Background="#37C9C9C9"
       BorderBrush="{ThemeResource CardStrokeColorDefault}"
       BorderThickness="0,1,0,0">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="Auto" />
-      </Grid.ColumnDefinitions>
-      <HyperlinkButton Grid.Column="0" Margin="4,0,0,0">[More information]</HyperlinkButton>
       <StackPanel
         Grid.Column="1"
         Padding="0,0,12,0"
+        HorizontalAlignment="Right"
         Orientation="Horizontal">
         <Button
           Width="120"
           Margin="4,16,4,16"
           Click="BackgroundButtonClickedHandler"
-          Visibility="{x:Bind ShowBackgroundButton, Mode=OneWay}">
-          [Background]
-        </Button>
+          Content="{x:Bind BackgroundButtonText, Mode=OneWay}"
+          Visibility="{x:Bind ShowBackgroundButton, Mode=OneWay}" />
         <Button
           Width="120"
           Margin="4,16,4,16"
           Click="PauseButtonClickedHandler"
-          Visibility="{x:Bind ShowPauseButton, Mode=OneWay}">
-          [Pause]
-        </Button>
+          Content="{x:Bind PauseButtonText, Mode=OneWay}"
+          Visibility="{x:Bind ShowPauseButton, Mode=OneWay}" />
         <Button
           Width="120"
           Margin="4,16,4,16"
-          Click="CancelButtonClickedHandler">
-          [Cancel]
-        </Button>
+          Click="CancelButtonClickedHandler"
+          Content="{x:Bind CancelButtonText, Mode=OneWay}" />
       </StackPanel>
     </Grid>
   </Grid>

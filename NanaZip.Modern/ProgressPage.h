@@ -61,6 +61,20 @@ namespace winrt::NanaZip::Modern::implementation
             CompressionRatioText,
             winrt::hstring
         );
+
+        DEPENDENCY_PROPERTY_HEADER(
+            BackgroundButtonText,
+            winrt::hstring
+        );
+        DEPENDENCY_PROPERTY_HEADER(
+            PauseButtonText,
+            winrt::hstring
+        );
+        DEPENDENCY_PROPERTY_HEADER(
+            CancelButtonText,
+            winrt::hstring
+        );
+
         DEPENDENCY_PROPERTY_HEADER(
             ProgressBarMinimum,
             double
@@ -73,6 +87,7 @@ namespace winrt::NanaZip::Modern::implementation
             ProgressBarValue,
             double
         );
+
         DEPENDENCY_PROPERTY_HEADER(
             ShowBackgroundButton,
             bool
@@ -87,6 +102,11 @@ namespace winrt::NanaZip::Modern::implementation
         );
         DEPENDENCY_PROPERTY_HEADER(
             ShowCompressionRatioValue,
+            bool
+        );
+
+        DEPENDENCY_PROPERTY_HEADER(
+            ShowPaused,
             bool
         );
 
