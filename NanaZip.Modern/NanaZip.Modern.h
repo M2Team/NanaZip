@@ -24,10 +24,4 @@ EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
     _In_ HWND ParentWindowHandle,
     _In_ HMENU MoreMenuHandle);
 
-EXTERN_C HWND WINAPI K7ModernCreateAndShowXamlWindow(
-    _In_opt_ HWND ParentWindowHandle,
-    _In_ LPVOID Content,
-    _In_ int Width,
-    _In_ int Height);
-
 #endif // !NANAZIP_MODERN_EXPERIENCE

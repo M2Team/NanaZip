@@ -211,24 +211,3 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
 
     return Result;
 }
-
-EXTERN_C HWND WINAPI K7ModernCreateAndShowXamlWindow(
-    _In_opt_ HWND ParentWindowHandle,
-    _In_ LPVOID Content,
-    _In_ int Width,
-    _In_ int Height)
-{
-    HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
-    if (!WindowHandle)
-    {
-        return nullptr;
-    }
-    ::K7ModernShowXamlWindow(
-        WindowHandle,
-        Width,
-        Height,
-        Content,
-        ParentWindowHandle,
-        false);
-    return WindowHandle;
-}
