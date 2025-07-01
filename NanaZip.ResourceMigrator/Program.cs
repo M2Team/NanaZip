@@ -86,7 +86,7 @@ internal class Program
                 Directory.CreateDirectory($"{gitRoot}\\{NewDir}\\{language}");
                 files.Add((language, $"{StringsDir}\\{language}\\{fileName}.resw"));
                 using FileStream stream = new($"{gitRoot}\\{NewDir}\\{language}\\{fileName}.resw", FileMode.OpenOrCreate);
-                using XmlWriter writer = XmlWriter.Create(stream);
+                using XmlWriter writer = XmlWriter.Create(stream, new XmlWriterSettings() { Indent = true });
                 newDoc.WriteTo(writer);
             }
         }
