@@ -4,7 +4,12 @@ using System.Xml;
 
 namespace NanaZip.MigrateLegacyStringResources;
 
-public record ResourceMapping(int ResourceKey, string File, string NewResourcePath, bool RemoveAmpersand = false);
+public record ResourceMapping(
+    int ResourceKey,
+    string File,
+    string NewResourcePath,
+    bool RemoveAmpersand = false
+);
 
 internal class Program
 {
@@ -53,11 +58,17 @@ internal class Program
             return -2;
         }
 
-        string reswTemplatePath = $"{vslocation}\\Common7\\IDE\\ItemTemplates\\WapProj\\1033\\Resw\\Resources.resw";
+        string reswTemplatePath =
+            $"{vslocation}\\Common7\\IDE\\ItemTemplates\\WapProj\\" +
+            $"1033\\Resw\\Resources.resw";
 
         List<(string Lang, string File)> files = new();
 
-        foreach (DirectoryInfo oldSubDirs in new DirectoryInfo($"{gitRoot}\\{LegacyDir}").GetDirectories())
+        foreach (
+            DirectoryInfo oldSubDirs
+            in
+            new DirectoryInfo($"{gitRoot}\\{LegacyDir}")
+            .GetDirectories())
         {
             string language = oldSubDirs.Name;
             string oldFile = $"{oldSubDirs.FullName}\\{OldFileName}";
@@ -76,9 +87,12 @@ internal class Program
                 {
                     newDoc.Load(reswTemplatePath);
                 }
+
                 foreach (var mapping in file)
                 {
-                    XmlNode? oldNode = oldDoc.SelectSingleNode($"/root/data[@name='Resource{mapping.ResourceKey}']/value");
+                    XmlNode? oldNode = oldDoc.SelectSingleNode(
+                        $"/root/data[@name='Resource{mapping.ResourceKey}']/value"
+                    );
 
                     if (oldNode is null)
                         continue;
@@ -90,31 +104,50 @@ internal class Program
                     dataValue.InnerText = oldNode.InnerText ?? string.Empty;
                     if (mapping.RemoveAmpersand)
                     {
-                        dataValue.InnerText = dataValue.InnerText.Replace("&", string.Empty);
+                        dataValue.InnerText =
+                            dataValue.InnerText.Replace("&", string.Empty);
                     }
                     data.AppendChild(dataValue);
                     newDoc.DocumentElement!.AppendChild(data);
                 }
+
                 Directory.CreateDirectory($"{gitRoot}\\{NewDir}\\{language}");
                 files.Add((language, $"{StringsDir}\\{language}\\{fileName}.resw"));
-                using FileStream stream = new($"{gitRoot}\\{NewDir}\\{language}\\{fileName}.resw", FileMode.OpenOrCreate);
-                using XmlWriter writer = XmlWriter.Create(stream, new XmlWriterSettings() { Indent = true });
+
+                using FileStream stream = new(
+                    $"{gitRoot}\\{NewDir}\\{language}\\{fileName}.resw",
+                    FileMode.OpenOrCreate);
+                using XmlWriter writer = XmlWriter.Create(
+                    stream,
+                    new XmlWriterSettings() { Indent = true });
                 newDoc.WriteTo(writer);
             }
         }
 
-        var project = ProjectRootElement.Open($"{gitRoot}\\NanaZip.Modern\\NanaZip.Modern.vcxproj");
-        var excludedFiles = files.Select(x => x.File).Except(project.Items.Where(x => x.ItemType == "PRIResource").Select(x => x.Include));
+        var project = ProjectRootElement.Open(
+            $"{gitRoot}\\NanaZip.Modern\\NanaZip.Modern.vcxproj"
+        );
+
+        var excludedFiles = files
+            .Select(x => x.File)
+            .Except(
+            project.Items.Where(x => x.ItemType == "PRIResource")
+            .Select(x => x.Include));
         foreach (var file in excludedFiles)
         {
             var item = project.AddItem("PRIResource", file);
         }
         project.Save();
 
-        var filterProject = ProjectRootElement.Open($"{gitRoot}\\NanaZip.Modern\\NanaZip.Modern.vcxproj.filters");
+        var filterProject = ProjectRootElement.Open(
+            $"{gitRoot}\\NanaZip.Modern\\NanaZip.Modern.vcxproj.filters"
+        );
         foreach (var file in files)
         {
-            var hasItem = filterProject.Items.Any(x => x.ItemType == "PRIResource" && x.Include == file.File);
+            var hasItem = filterProject.Items
+                .Any(x =>
+                x.ItemType == "PRIResource" &&
+                x.Include == file.File);
             if (!hasItem)
             {
                 var item = filterProject.AddItem("PRIResource", file.File);
@@ -124,11 +157,18 @@ internal class Program
 
         foreach (var lang in files.Select(x => x.Lang).Distinct())
         {
-            var hasItem = filterProject.Items.Any(x => x.ItemType == "Filter" && x.Include == $"{StringsDir}\\{lang}");
+            var hasItem = filterProject.Items
+                .Any(
+                x =>
+                x.ItemType == "Filter" &&
+                x.Include == $"{StringsDir}\\{lang}");
             if (!hasItem)
             {
-                var item = filterProject.AddItem("Filter", $"{StringsDir}\\{lang}");
-                item.AddMetadata("UniqueIdentifier", Guid.NewGuid().ToString("B"));
+                var item = filterProject.AddItem(
+                    "Filter",
+                    $"{StringsDir}\\{lang}");
+                item.AddMetadata("UniqueIdentifier",
+                    Guid.NewGuid().ToString("B"));
             }
         }
         filterProject.Save();
