@@ -68,14 +68,26 @@ internal class Program
             {
                 string fileName = file.Key;
                 XmlDocument newDoc = new();
-                newDoc.Load(reswTemplatePath);
+                try
+                {
+                    newDoc.Load($"{gitRoot}\\{NewDir}\\{language}\\{fileName}.resw");
+                }
+                catch
+                {
+                    newDoc.Load(reswTemplatePath);
+                }
                 foreach (var mapping in file)
                 {
+                    XmlNode? oldNode = oldDoc.SelectSingleNode($"/root/data[@name='Resource{mapping.ResourceKey}']/value");
+
+                    if (oldNode is null)
+                        continue;
+
                     XmlElement data = newDoc.CreateElement("data");
                     data.SetAttribute("name", mapping.NewResourcePath);
                     data.SetAttribute("xml:space", "preserve");
                     XmlElement dataValue = newDoc.CreateElement("value");
-                    dataValue.InnerText = oldDoc.SelectSingleNode($"/root/data[@name='Resource{mapping.ResourceKey}']/value")?.InnerText ?? string.Empty;
+                    dataValue.InnerText = oldNode.InnerText ?? string.Empty;
                     if (mapping.RemoveAmpersand)
                     {
                         dataValue.InnerText = dataValue.InnerText.Replace("&", string.Empty);
