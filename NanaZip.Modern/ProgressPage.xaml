@@ -172,7 +172,7 @@
     </StackPanel>
     <TextBox
       Grid.Row="1"
-      Margin="16,4,16,16"
+      Margin="16,8,16,16"
       AcceptsReturn="True"
       IsReadOnly="True"
       Text="{x:Bind ResultsText, Mode=OneWay}"
