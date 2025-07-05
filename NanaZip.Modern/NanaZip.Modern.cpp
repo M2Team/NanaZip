@@ -98,7 +98,7 @@ namespace
         ::ShowWindow(WindowHandle, SW_SHOW);
         ::UpdateWindow(WindowHandle);
 
-        return ::MileXamlContentWindowDefaultMessageLoop();;
+        return ::MileXamlContentWindowDefaultMessageLoop();
     }
 
     int K7ModernShowXamlDialog(
