@@ -31,6 +31,7 @@
     <Page Include="MainWindowToolBarPage.xaml" />
     <Page Include="AddressBarTemplate.xaml" />
     <Page Include="StatusBarTemplate.xaml" />
+    <Page Include="InformationPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
