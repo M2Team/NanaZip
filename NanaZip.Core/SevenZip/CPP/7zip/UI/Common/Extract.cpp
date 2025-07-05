@@ -16,6 +16,11 @@
 #include "Extract.h"
 #include "SetProperties.h"
 
+// **************** NanaZip Modification Start ****************
+#include <set>
+#include <string>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 using namespace NFile;
 using namespace NDir;
@@ -159,7 +164,7 @@ static HRESULT DecompressArchive(
     // **************** NanaZip Modification Start ****************
     if (options.SmartExtract.Val)
     {
-      UInt32 firstLevelCount = 0;
+      std::set<std::wstring> firstLevelSet;
       for (UInt32 i = 0; i < numItems; i++)
       {
         RINOK(arc.GetItem(i, item));
@@ -169,12 +174,17 @@ static HRESULT DecompressArchive(
           #else
             item.Path;
           #endif
-        if (path.Find(L'/') == -1 && path.Find(L'\\') == -1)
-          firstLevelCount++;
-        if (firstLevelCount > 1)
+        int slashPos = path.Find(L'/');
+        if (slashPos == -1)
+          slashPos = path.Find(L'\\');
+        if (slashPos == -1)
+          firstLevelSet.insert(std::wstring(path.Ptr()));
+        else
+          firstLevelSet.insert(std::wstring(path.Left(slashPos).Ptr()));
+        if (firstLevelSet.size() > 1)
           break;
       }
-      if (firstLevelCount > 1)
+      if (firstLevelSet.size() > 1)
         outDir += replaceName;
     }
     // **************** NanaZip Modification End ****************
