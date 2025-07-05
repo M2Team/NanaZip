@@ -159,6 +159,28 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::NanaZip::Modern::ProgressPage,
         false
     );
+    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
+        ShowResults,
+        bool,
+        ProgressPage,
+        winrt::NanaZip::Modern::ProgressPage,
+        false
+    );
+    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
+        ShowProgress,
+        bool,
+        ProgressPage,
+        winrt::NanaZip::Modern::ProgressPage,
+        true
+    );
+
+    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
+        ResultsText,
+        winrt::hstring,
+        ProgressPage,
+        winrt::NanaZip::Modern::ProgressPage,
+        L""
+    );
 
     void ProgressPage::BackgroundButtonClickedHandler(
         winrt::IInspectable const&,

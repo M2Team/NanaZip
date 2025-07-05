@@ -109,6 +109,19 @@ namespace winrt::NanaZip::Modern::implementation
             ShowPaused,
             bool
         );
+        DEPENDENCY_PROPERTY_HEADER(
+            ShowResults,
+            bool
+        );
+        DEPENDENCY_PROPERTY_HEADER(
+            ShowProgress,
+            bool
+        );
+
+        DEPENDENCY_PROPERTY_HEADER(
+            ResultsText,
+            winrt::hstring
+        );
 
         void BackgroundButtonClickedHandler(
             winrt::IInspectable const&,

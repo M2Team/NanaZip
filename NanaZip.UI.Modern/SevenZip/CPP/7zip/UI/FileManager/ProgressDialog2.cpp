@@ -945,6 +945,9 @@ bool CProgressDialog::OnExternalCloseMessage()
 
   ProcessWasFinished_GuiVirt();
 
+  m_progressPage.ShowProgress(false);
+  m_progressPage.ShowResults(true);
+
   bool thereAreMessages;
   CProgressFinalMessage fm;
   {
@@ -953,12 +956,13 @@ bool CProgressDialog::OnExternalCloseMessage()
     fm = Sync.FinalMessage;
   }
 
+  bool needToShowMessages = thereAreMessages;
+
   if (!fm.ErrorMessage.Message.IsEmpty())
   {
     MessagesDisplayed = true;
-    if (fm.ErrorMessage.Title.IsEmpty())
-      fm.ErrorMessage.Title = "NanaZip";
-    MessageBoxW(*this, fm.ErrorMessage.Message, fm.ErrorMessage.Title, MB_ICONERROR);
+    needToShowMessages = true;
+    m_progressPage.ResultsText(fm.ErrorMessage.Message.Ptr());
   }
   else if (!thereAreMessages)
   {
@@ -966,16 +970,16 @@ bool CProgressDialog::OnExternalCloseMessage()
 
     if (!fm.OkMessage.Message.IsEmpty())
     {
-      if (fm.OkMessage.Title.IsEmpty())
-        fm.OkMessage.Title = "NanaZip";
-      MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK);
+        needToShowMessages = true;
+        m_progressPage.ResultsText(fm.OkMessage.Message.Ptr());
     }
   }
 
-  if (thereAreMessages && !_cancelWasPressed)
+  if (needToShowMessages && !_cancelWasPressed)
   {
     _waitCloseByCancelButton = true;
-    UpdateMessagesDialog();
+    if (thereAreMessages)
+        UpdateMessagesDialog();
     return true;
   }
 
@@ -1185,7 +1189,7 @@ void CProgressDialog::OnCancelButtonClicked(
     if (_waitCloseByCancelButton)
     {
       MessagesDisplayed = true;
-      DestroyWindow(m_islandsHwnd);
+      DestroyWindow(*this);
       return;
     }
 

@@ -9,19 +9,22 @@
 
   <Grid>
     <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
+    <TextBlock
+      Margin="16,0"
+      d:Text="[Adding]"
+      FontSize="24"
+      Style="{ThemeResource BaseTextBlockStyle}"
+      Text="{x:Bind ActionText, Mode=OneWay}" />
     <StackPanel
-      Grid.Row="0"
+      Grid.Row="1"
       Grid.ColumnSpan="2"
       Padding="16,0,16,16"
-      Orientation="Vertical">
-      <TextBlock
-        d:Text="[Adding]"
-        FontSize="24"
-        Style="{ThemeResource BaseTextBlockStyle}"
-        Text="{x:Bind ActionText, Mode=OneWay}" />
+      Orientation="Vertical"
+      Visibility="{x:Bind ShowProgress, Mode=OneWay}">
       <TextBlock
         Margin="0,4,0,0"
         d:Text="debian-12.0.0-amd64-netinst.iso"
@@ -167,8 +170,19 @@
         </Grid>
       </Grid>
     </StackPanel>
-    <Grid
+    <TextBox
       Grid.Row="1"
+      Margin="16,4,16,16"
+      AcceptsReturn="True"
+      IsReadOnly="True"
+      Text="{x:Bind ResultsText, Mode=OneWay}"
+      Visibility="{x:Bind ShowResults, Mode=OneWay}">
+      <TextBox.SelectionFlyout>
+        <TextCommandBarFlyout Placement="BottomEdgeAlignedLeft" />
+      </TextBox.SelectionFlyout>
+    </TextBox>
+    <Grid
+      Grid.Row="2"
       Background="#37C9C9C9"
       BorderBrush="{ThemeResource CardStrokeColorDefault}"
       BorderThickness="0,1,0,0">
