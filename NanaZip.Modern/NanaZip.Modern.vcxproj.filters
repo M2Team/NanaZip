@@ -31,22 +31,233 @@
     <Page Include="MainWindowToolBarPage.xaml" />
     <Page Include="AddressBarTemplate.xaml" />
     <Page Include="StatusBarTemplate.xaml" />
+    <Page Include="ProgressPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
       <UniqueIdentifier>{aa892a24-e05a-4d90-ac40-9aca1b82e1ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\af">
+      <UniqueIdentifier>{8779d250-2205-46e3-b91c-389890c7223c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ar">
+      <UniqueIdentifier>{243d7286-6458-478b-bb4d-70f1387845e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\az-arab">
+      <UniqueIdentifier>{6d8d851a-e72a-4f4b-9752-ef0485396c6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\be">
+      <UniqueIdentifier>{ed093702-d08d-40b4-9641-b3ecb649c25f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\bg">
+      <UniqueIdentifier>{a7735db0-c0ec-4dff-9cc9-f2a2945be79e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\bn">
+      <UniqueIdentifier>{6f22130e-ad48-4d90-b671-130be0218a9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ca">
+      <UniqueIdentifier>{88ffc9f4-26af-472d-9f17-5489a8d2a66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ca-es-valencia">
+      <UniqueIdentifier>{a2d97f64-6e2f-4ff1-adaa-d92f84548820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\cs">
+      <UniqueIdentifier>{c791738b-dccd-4781-9490-fbc4a31422e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\cy">
+      <UniqueIdentifier>{d54dea43-6188-4dfb-b25b-ce29997c88a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\da">
+      <UniqueIdentifier>{887c0130-c6ff-4b2a-a0ec-69cfff2cb568}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Strings\en">
       <UniqueIdentifier>{c42a7c05-d752-456a-9607-27c7580dcfb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\eo">
+      <UniqueIdentifier>{2aada4a2-4350-4730-9ef0-f04f705450c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\es">
+      <UniqueIdentifier>{ba9838a3-7ed2-471e-8ce9-2595664e94f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\et">
+      <UniqueIdentifier>{ab407375-9ade-4b73-bbae-8e55d9bdff5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\eu">
+      <UniqueIdentifier>{d5ae3653-b5fc-476e-86bd-c02ae371ba2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\fa">
+      <UniqueIdentifier>{288f2f28-0c29-45a6-a45a-d17f02a2a9a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\fi">
+      <UniqueIdentifier>{a6c52d96-5dba-4dfb-a152-970bb55b69ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\fr">
+      <UniqueIdentifier>{6ade1c34-54d7-4c6b-81ec-0620a12bb360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\fy">
+      <UniqueIdentifier>{3280dd07-4415-4f41-ac9a-9505614a4c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ga">
+      <UniqueIdentifier>{30243b9a-2346-471f-b58c-28b816b23d81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\gl">
+      <UniqueIdentifier>{a05b8f77-4c7b-4281-8146-4358a1be265a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\gu">
+      <UniqueIdentifier>{7987c05f-9d10-47a6-887b-a3d8b27236b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\he">
+      <UniqueIdentifier>{8d70564f-9cd2-4df0-af34-e0777b4d21d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\hi">
+      <UniqueIdentifier>{1f4af2c6-5cce-4a6d-a751-361f52c53542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\hr">
+      <UniqueIdentifier>{c369569a-629b-48e2-a983-daa2ed21ca98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\hy">
+      <UniqueIdentifier>{40ac4b13-02ea-47a0-a69a-da5c42abd043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\id">
+      <UniqueIdentifier>{18867243-df2c-49b1-a18a-8e61856ca5e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\is">
+      <UniqueIdentifier>{261242a5-3d77-421c-b04a-9441f92cad99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\it">
+      <UniqueIdentifier>{9d9c1a0c-c5d2-4f1b-bc46-66c5034fde44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ja">
+      <UniqueIdentifier>{dadc0b22-7f1c-4fb5-865c-00f787dfb995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ka">
+      <UniqueIdentifier>{19922fff-c2ff-47bd-be25-da122a76b246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\kk">
+      <UniqueIdentifier>{01dc84ad-256e-4e0b-a1d1-1cedd9929d6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ko">
+      <UniqueIdentifier>{49d8e9cf-2ad3-4b8c-8176-83c8da015890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ku-arab">
+      <UniqueIdentifier>{6a0c72d2-5282-4807-bd1c-bfe3addc3e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ky-kg">
+      <UniqueIdentifier>{19b52a67-f37a-4e2b-b9dd-be29b6a6f86e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\lt">
+      <UniqueIdentifier>{9c1d53c3-df35-4ab7-853d-20b77cbe6f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\lv">
+      <UniqueIdentifier>{1326f1f3-bbf0-48ec-946d-4bd9871d5eae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\mk">
+      <UniqueIdentifier>{b14e8556-42cf-4061-9049-b90d0794ce99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\mn-cyrl">
+      <UniqueIdentifier>{d18128dc-823d-48ef-a652-206b524a9968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\mn-mong">
+      <UniqueIdentifier>{89b61260-42a1-42c3-8963-f8dfc8de911a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\mr">
+      <UniqueIdentifier>{cae0387b-07a8-48dc-87b9-c81a87ad2d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ms">
+      <UniqueIdentifier>{7eea2c6d-7481-426e-8d03-bf8242f0a6e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\nb">
+      <UniqueIdentifier>{03a66179-3991-48ae-8a39-50d9a5ff6ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ne">
+      <UniqueIdentifier>{1045c01c-a287-4477-b5ec-cc09588af519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\nl">
+      <UniqueIdentifier>{acc30fde-f3cf-46e4-81af-6b558f4b190e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\nn">
+      <UniqueIdentifier>{5a76cc2b-339c-45e6-b394-eca688096435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pa-in">
+      <UniqueIdentifier>{b6d44ba0-119f-4d62-bd23-7fc798337b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ps">
+      <UniqueIdentifier>{438689c0-14f4-46f3-ad4f-57d6438bc295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pt">
+      <UniqueIdentifier>{1479a3a2-7e9b-4f2e-9234-47ce92fa3c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pt-BR">
+      <UniqueIdentifier>{2dce9427-95cc-47c3-8bfa-eda6e53539ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ro">
+      <UniqueIdentifier>{a549baf9-8220-47a5-ad6c-c87236aa5ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ru">
+      <UniqueIdentifier>{ef48b0e4-2691-4aca-a648-07f8db06d0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\si">
+      <UniqueIdentifier>{a615277b-f0b4-4d45-9a42-925e39375467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\sk">
+      <UniqueIdentifier>{3a90c5d3-053c-4cf8-b8ac-076902562073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\sl">
+      <UniqueIdentifier>{b4b424ac-fcbd-48a1-b25f-608b041a9048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\sr-cyrl">
+      <UniqueIdentifier>{9ed37681-3906-44c2-9842-d5d4e040c581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\sr-Latn">
+      <UniqueIdentifier>{e40ba9e4-acb1-4322-8bb8-574581a60dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\sv">
+      <UniqueIdentifier>{daed015a-51f3-48cf-b7fa-f4d08ba27002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\sw">
+      <UniqueIdentifier>{badd5412-b38f-46d8-adea-3410df8bfb54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ta">
+      <UniqueIdentifier>{3968412d-4789-43e2-9423-97a01530f685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\tg-arab">
+      <UniqueIdentifier>{66ce9138-86de-43bf-8002-d8fd6d295916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\th">
+      <UniqueIdentifier>{db8d7110-dcf5-4c16-938b-03446d801b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\tk-cyrl">
+      <UniqueIdentifier>{afb04736-6152-4b68-bd24-025c03b665ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\tr">
+      <UniqueIdentifier>{f955a94f-f6e7-42a8-b75b-b6069f2363ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\tt-arab">
+      <UniqueIdentifier>{d27aa79d-d400-426f-b978-106ad4dfcd70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ug-arab">
+      <UniqueIdentifier>{ec2e1787-0608-4ba2-9038-0d9964d18c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\uk">
+      <UniqueIdentifier>{1a64bf72-6480-4a6c-8f94-ea3e8a59d702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\uz-cyrl">
+      <UniqueIdentifier>{15e8cef3-9971-45f9-8f0b-2052044d7254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\uz-latn">
+      <UniqueIdentifier>{f8311d30-9af2-497b-a0ed-92d1ca9fbb41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\vi">
+      <UniqueIdentifier>{b391002a-276d-493a-a066-0571f9137d2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\yo-latn">
+      <UniqueIdentifier>{bae9a72f-1342-4bc0-bc70-7b8a614232cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Strings\zh-Hans">
       <UniqueIdentifier>{2585c4e7-3460-4b0e-b06b-3e01537ba4e4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Strings\pl">
       <UniqueIdentifier>{7ac42189-d980-4c72-ae5a-edfb08ebd533}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\pt-BR">
-      <UniqueIdentifier>{fe436437-65db-49ac-93e2-f6b51c8944e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Strings\sq">
       <UniqueIdentifier>{3b88d6dd-0db6-4d35-b45e-5056485106c8}</UniqueIdentifier>
@@ -59,6 +270,9 @@
     </Filter>
     <Filter Include="Strings\de">
       <UniqueIdentifier>{7c1672d6-0ce4-476d-9c5d-156b8afd248e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\zh-Hant">
+      <UniqueIdentifier>{92831d30-fd40-43b9-bd4d-67bfa81fb490}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +323,243 @@
     </PRIResource>
     <PRIResource Include="Strings\de\SponsorPage.resw">
       <Filter>Strings\de</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\af\ProgressPage.resw">
+      <Filter>Strings\af</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ar\ProgressPage.resw">
+      <Filter>Strings\ar</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\az-arab\ProgressPage.resw">
+      <Filter>Strings\az-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-Hant\ProgressPage.resw">
+      <Filter>Strings\zh-Hant</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\be\ProgressPage.resw">
+      <Filter>Strings\be</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\bg\ProgressPage.resw">
+      <Filter>Strings\bg</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\bn\ProgressPage.resw">
+      <Filter>Strings\bn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ca\ProgressPage.resw">
+      <Filter>Strings\ca</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ca-es-valencia\ProgressPage.resw">
+      <Filter>Strings\ca-es-valencia</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\cs\ProgressPage.resw">
+      <Filter>Strings\cs</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\cy\ProgressPage.resw">
+      <Filter>Strings\cy</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\da\ProgressPage.resw">
+      <Filter>Strings\da</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\de\ProgressPage.resw">
+      <Filter>Strings\de</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\el\ProgressPage.resw">
+      <Filter>Strings\el</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en\ProgressPage.resw">
+      <Filter>Strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\eo\ProgressPage.resw">
+      <Filter>Strings\eo</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\es\ProgressPage.resw">
+      <Filter>Strings\es</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\et\ProgressPage.resw">
+      <Filter>Strings\et</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\eu\ProgressPage.resw">
+      <Filter>Strings\eu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fa\ProgressPage.resw">
+      <Filter>Strings\fa</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fi\ProgressPage.resw">
+      <Filter>Strings\fi</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fr\ProgressPage.resw">
+      <Filter>Strings\fr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fy\ProgressPage.resw">
+      <Filter>Strings\fy</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ga\ProgressPage.resw">
+      <Filter>Strings\ga</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\gl\ProgressPage.resw">
+      <Filter>Strings\gl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\gu\ProgressPage.resw">
+      <Filter>Strings\gu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\he\ProgressPage.resw">
+      <Filter>Strings\he</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hi\ProgressPage.resw">
+      <Filter>Strings\hi</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hr\ProgressPage.resw">
+      <Filter>Strings\hr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hu\ProgressPage.resw">
+      <Filter>Strings\hu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hy\ProgressPage.resw">
+      <Filter>Strings\hy</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\id\ProgressPage.resw">
+      <Filter>Strings\id</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\is\ProgressPage.resw">
+      <Filter>Strings\is</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\it\ProgressPage.resw">
+      <Filter>Strings\it</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ja\ProgressPage.resw">
+      <Filter>Strings\ja</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ka\ProgressPage.resw">
+      <Filter>Strings\ka</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\kk\ProgressPage.resw">
+      <Filter>Strings\kk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ko\ProgressPage.resw">
+      <Filter>Strings\ko</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ku-arab\ProgressPage.resw">
+      <Filter>Strings\ku-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ky-kg\ProgressPage.resw">
+      <Filter>Strings\ky-kg</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\lt\ProgressPage.resw">
+      <Filter>Strings\lt</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\lv\ProgressPage.resw">
+      <Filter>Strings\lv</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mk\ProgressPage.resw">
+      <Filter>Strings\mk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mn-cyrl\ProgressPage.resw">
+      <Filter>Strings\mn-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mn-mong\ProgressPage.resw">
+      <Filter>Strings\mn-mong</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mr\ProgressPage.resw">
+      <Filter>Strings\mr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ms\ProgressPage.resw">
+      <Filter>Strings\ms</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\nb\ProgressPage.resw">
+      <Filter>Strings\nb</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ne\ProgressPage.resw">
+      <Filter>Strings\ne</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\nl\ProgressPage.resw">
+      <Filter>Strings\nl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\nn\ProgressPage.resw">
+      <Filter>Strings\nn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pa-in\ProgressPage.resw">
+      <Filter>Strings\pa-in</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pl\ProgressPage.resw">
+      <Filter>Strings\pl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ps\ProgressPage.resw">
+      <Filter>Strings\ps</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt\ProgressPage.resw">
+      <Filter>Strings\pt</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt-BR\ProgressPage.resw">
+      <Filter>Strings\pt-BR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ro\ProgressPage.resw">
+      <Filter>Strings\ro</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ru\ProgressPage.resw">
+      <Filter>Strings\ru</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\si\ProgressPage.resw">
+      <Filter>Strings\si</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sk\ProgressPage.resw">
+      <Filter>Strings\sk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sl\ProgressPage.resw">
+      <Filter>Strings\sl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sq\ProgressPage.resw">
+      <Filter>Strings\sq</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sr-cyrl\ProgressPage.resw">
+      <Filter>Strings\sr-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sr-Latn\ProgressPage.resw">
+      <Filter>Strings\sr-Latn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sv\ProgressPage.resw">
+      <Filter>Strings\sv</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sw\ProgressPage.resw">
+      <Filter>Strings\sw</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ta\ProgressPage.resw">
+      <Filter>Strings\ta</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tg-arab\ProgressPage.resw">
+      <Filter>Strings\tg-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\th\ProgressPage.resw">
+      <Filter>Strings\th</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tk-cyrl\ProgressPage.resw">
+      <Filter>Strings\tk-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tr\ProgressPage.resw">
+      <Filter>Strings\tr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tt-arab\ProgressPage.resw">
+      <Filter>Strings\tt-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ug-arab\ProgressPage.resw">
+      <Filter>Strings\ug-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\uk\ProgressPage.resw">
+      <Filter>Strings\uk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\uz-cyrl\ProgressPage.resw">
+      <Filter>Strings\uz-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\uz-latn\ProgressPage.resw">
+      <Filter>Strings\uz-latn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\vi\ProgressPage.resw">
+      <Filter>Strings\vi</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\yo-latn\ProgressPage.resw">
+      <Filter>Strings\yo-latn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-Hans\ProgressPage.resw">
+      <Filter>Strings\zh-Hans</Filter>
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
