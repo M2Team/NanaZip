@@ -427,9 +427,13 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     }
 
     CMethodProps props2 = _props;
-    #ifndef Z7_ST
+#ifndef Z7_ST
     props2.AddProp_NumThreads(_props._numThreads);
-    #endif
+#ifdef _WIN32
+    if (_props._numThreadGroups > 1)
+      props2.AddProp32(NCoderPropID::kNumThreadGroups, _props._numThreadGroups);
+#endif
+#endif
 
     return UpdateArchive(size, outStream, props2, updateCallback);
   }

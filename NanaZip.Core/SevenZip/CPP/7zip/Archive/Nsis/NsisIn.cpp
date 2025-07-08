@@ -4005,7 +4005,7 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
         AddParam_Var(params[0]);
         AString temp;
         ReadString2(temp, params[1]);
-        if (temp != "$TEMP")
+        if (!temp.IsEqualTo("$TEMP"))
           SpaceQuStr(temp);
         break;
       }
@@ -4410,7 +4410,7 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
         }
         else
         {
-          if (func == "DllUnregisterServer")
+          if (func.IsEqualTo("DllUnregisterServer"))
           {
             s += "UnRegDLL";
             printFunc = false;
@@ -4418,7 +4418,7 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
           else
           {
             s += "RegDLL";
-            if (func == "DllRegisterServer")
+            if (func.IsEqualTo("DllRegisterServer"))
               printFunc = false;
           }
           AddParam(params[0]);
@@ -4886,7 +4886,7 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
             AddParam_Var(params[1]);
             AddParam(params[2]);
             AddParam(params[4]);
-            // if (params[2] == "0") AddCommentAndString("GetWinVer");
+            // if (params[2].IsEqualTo("0")) AddCommentAndString("GetWinVer");
           }
           else
             s += "GetOsInfo";

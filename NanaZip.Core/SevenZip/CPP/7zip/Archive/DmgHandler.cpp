@@ -444,7 +444,7 @@ const char *Find_Apple_FS_Ext(const AString &name)
   {
     const CAppleName &a = k_Names[i];
     if (a.Ext)
-      if (name == a.AppleName)
+      if (name.IsEqualTo(a.AppleName))
         return a.Ext;
   }
   return NULL;
@@ -784,7 +784,7 @@ static const CXmlItem *FindKeyPair(const CXmlItem &item, const char *key, const 
   for (unsigned i = 0; i + 1 < item.SubItems.Size(); i++)
   {
     const CXmlItem &si = item.SubItems[i];
-    if (si.IsTagged("key") && si.GetSubString() == key)
+    if (si.IsTagged("key") && si.GetSubString().IsEqualTo(key))
     {
       const CXmlItem *si_1 = &item.SubItems[i + 1];
       if (si_1->IsTagged(nextTag))
@@ -1251,7 +1251,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openArchiveCall
 #endif
     }
     
-    if (xml.Root.Name != "plist")
+    if (!xml.Root.Name.IsEqualTo("plist"))
       return S_FALSE;
     
     const CXmlItem *dictItem = xml.Root.FindSubTag_GetPtr("dict");

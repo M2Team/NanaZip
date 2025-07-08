@@ -279,32 +279,25 @@ Z7_CLASS_IMP_CHandler_IInArchive_3(
   bool _isArc;
   bool _supportWindowsBackslash;
   bool _crcSize_WasSet;
-  UInt64 _phySize;
-  CObjectVector<CHashPair> HashPairs;
-  UString _nameExtenstion;
-  // UString _method_fromName;
-  AString _pgpMethod;
   bool _is_CksumMode;
   bool _is_PgpMethod;
   bool _is_ZeroMode;
   bool _are_there_Tags;
   bool _are_there_Dirs;
+  bool _is_KnownMethod_in_FileName;
   bool _hashSize_Defined;
   unsigned _hashSize;
   UInt32 _crcSize;
+  UInt64 _phySize;
+  CObjectVector<CHashPair> HashPairs;
   UStringVector _methods;
+  AString _method_from_FileName;
+  AString _pgpMethod;
+  AString _method_for_Extraction;
   CHashOptionsLocal _options;
 
   void ClearVars();
-
-  void InitProps()
-  {
-    _supportWindowsBackslash = true;
-    _crcSize_WasSet = false;
-    _crcSize = 4;
-    _methods.Clear();
-    _options.Init_HashOptionsLocal();
-  }
+  void InitProps();
 
   bool CanUpdate() const
   {

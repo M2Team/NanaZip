@@ -936,31 +936,30 @@ HRESULT CDecoder::ExecuteFilter(const CFilter &f)
 HRESULT CDecoder::WriteBuf()
 {
   DeleteUnusedFilters();
-
   const UInt64 lzSize = _lzSize + _winPos;
 
   for (unsigned i = 0; i < _numFilters;)
   {
-    const CFilter &f = _filters[i];
-    const UInt64 blockStart = f.Start;
     const size_t lzAvail = (size_t)(lzSize - _lzWritten);
     if (lzAvail == 0)
       break;
-    
+    // (lzAvail != 0)
+    const CFilter &f = _filters[i];
+    const UInt64 blockStart = f.Start;
     if (blockStart > _lzWritten)
     {
       const UInt64 rem = blockStart - _lzWritten;
+      // (rem != 0)
       size_t size = lzAvail;
       if (size > rem)
         size = (size_t)rem;
-      if (size != 0) // is it true always ?
-      {
-        RINOK(WriteData(_window + _winPos - lzAvail, size))
-        _lzWritten += size;
-      }
+      // (size != 0)
+      RINOK(WriteData(_window + _winPos - lzAvail, size))
+      _lzWritten += size;
       continue;
     }
-    
+
+    // (blockStart <= _lzWritten)
     const UInt32 blockSize = f.Size;
     size_t offset = (size_t)(_lzWritten - blockStart);
     if (offset == 0)
@@ -987,10 +986,8 @@ HRESULT CDecoder::WriteBuf()
   }
       
   DeleteUnusedFilters();
-
   if (_numFilters)
     return S_OK;
-  
   const size_t lzAvail = (size_t)(lzSize - _lzWritten);
   RINOK(WriteData(_window + _winPos - lzAvail, lzAvail))
   _lzWritten += lzAvail;
@@ -1367,6 +1364,12 @@ enum enum_exit_type
   Z7_HUFF_DECODE_CHECK(sym, huf, kNumHufBits, kNumTableBits, bitStream, { LZ_LOOP_BREAK_ERROR })
 
 
+/*
+  DecodeLZ2() will stop decoding if it reaches limit when (_winPos >= _limit)
+  at return:
+    (_winPos < _limit + kMaxMatchLen)
+    also it can write up to (COPY_CHUNK_SIZE - 1) additional junk bytes after (_winPos).
+*/
 HRESULT CDecoder::DecodeLZ2(const CBitDecoder &bitStream) throw()
 {
 #if 0
@@ -1656,6 +1659,13 @@ decode_error:
 
 
 
+/*
+input conditions:
+  _winPos < _winSize
+return:
+  _winPos <  _winSize is expected, if (return_res == S_OK)
+  _winPos >= _winSize is possible in (return_res != S_OK)
+*/
 HRESULT CDecoder::DecodeLZ()
 {
   CBitDecoder _bitStream;
@@ -1679,6 +1689,8 @@ HRESULT CDecoder::DecodeLZ()
     if (winPos >= limit)
     {
       _winPos = winPos < _winSize ? winPos : _winSize;
+      // _winPos == min(winPos, _winSize)
+      // we will not write data after _winSize
       RINOK(WriteBuf())
       if (_unpackSize_Defined && _writtenFileSize > _unpackSize)
         break; // return S_FALSE;
@@ -1854,7 +1866,15 @@ Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
   {
     // if (_winPos > 100) _winPos -= 100; // for debug: corruption
     const UInt64 lzSize = _lzSize + _winPos;
-    if (!_isSolid || !_wasInit
+/*
+    if previous file was decoded with error or for some another cases, then
+        (lzSize > _lzEnd)    is possible
+        (_winPos > _winSize) is possible
+        (_winPos < _winSize + kMaxMatchLen)
+*/
+    if (!_window
+        || !_isSolid
+        || !_wasInit
         || (lzSize < _lzEnd
 #if Z7_RAR_RECOVER_SOLID_LIMIT != 0
          && lzSize + Z7_RAR_RECOVER_SOLID_LIMIT < _lzEnd
@@ -1863,9 +1883,9 @@ Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     {
       if (_isSolid)
         _lzError = LZ_ERROR_TYPE_HEADER;
-      _lzEnd = 0;
       _lzSize = 0;
-      _lzWritten = 0;
+      // _lzEnd = 0;     // it will be set later
+      // _lzWritten = 0; // it will be set later
       _winPos = 0;
       for (unsigned i = 0; i < kNumReps; i++)
         _reps[i] = (size_t)0 - 1;
@@ -1873,51 +1893,67 @@ Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
       _tableWasFilled = false;
       _wasInit = true;
     }
-#if Z7_RAR_RECOVER_SOLID_LIMIT != 0
-    else if (lzSize < _lzEnd)
+    else
     {
-#if 0
-      return S_FALSE;
-#else
-      // we can report that recovering was made:
-      // _lzError = LZ_ERROR_TYPE_HEADER;
-      // We write zeros to area after corruption:
-      if (_window)
+      const size_t ws = _winSize;
+      if (_winPos >= ws)
       {
-        UInt64 rem = _lzEnd - lzSize;
-        const size_t ws = _winSize;
-        if (rem >= ws)
+        // we must normalize (_winPos) and data in _window,
+        _winPos -= ws;
+        _lzSize += ws;
+        // (_winPos < kMaxMatchLen < _winSize)
+        // if (_window)
+          memcpy(_window, _window + ws, _winPos); // memmove is not required here
+      }
+
+#if Z7_RAR_RECOVER_SOLID_LIMIT != 0
+      if (lzSize < _lzEnd)
+      {
+#if 0
+        return S_FALSE;
+#else
+        // we can report that recovering was made:
+        // _lzError = LZ_ERROR_TYPE_HEADER;
+        // We write zeros to area after corruption:
+        // if (_window)
         {
-          My_ZeroMemory(_window, ws);
-          _lzSize = ws;
-          _winPos = 0;
-        }
-        else
-        {
-          const size_t cur = ws - _winPos;
-          if (cur <= rem)
+          UInt64 rem = _lzEnd - lzSize;
+          if (rem >= ws)
           {
-            rem -= cur;
-            My_ZeroMemory(_window + _winPos, cur);
-            _lzSize += _winPos;
+            My_ZeroMemory(_window, ws);
+            _lzSize = ws;
             _winPos = 0;
           }
-          My_ZeroMemory(_window + _winPos, (size_t)rem);
-          _winPos += (size_t)rem;
+          else
+          {
+            // rem < _winSize
+            // _winPos <= ws
+            const size_t cur = ws - _winPos;
+            if (cur <= rem)
+            {
+              rem -= cur;
+              My_ZeroMemory(_window + _winPos, cur);
+              _lzSize = ws;
+              _winPos = 0;
+            }
+            My_ZeroMemory(_window + _winPos, (size_t)rem);
+            _winPos += (size_t)rem;
+          }
         }
-      }
-      // else return S_FALSE;
+        // else return S_FALSE;
 #endif
+      }
     }
 #endif
   }
 
+  // _winPos < _winSize
   // we don't want _lzSize overflow
   if (_lzSize >= DICT_SIZE_MAX)
       _lzSize  = DICT_SIZE_MAX;
   _lzEnd = _lzSize + _winPos;
   // _lzSize <= DICT_SIZE_MAX
-  // _lzEnd  <= DICT_SIZE_MAX * 2
+  // _lzEnd  <  DICT_SIZE_MAX + _winSize
 
   size_t newSize = _dictSize;
   if (newSize < kWinSize_Min)
@@ -1941,10 +1977,11 @@ Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
       // If dictionary was increased in solid, we don't want grow.
       return S_FALSE; // E_OUTOFMEMORY
     }
-    // (newSize <= _winSize)
+    // (newSize <= _dictSize_forCheck)
   }
   else
   {
+    // !_isSolid || !_window
     _dictSize_forCheck = newSize;
     {
       size_t newSize_small = newSize;
@@ -1964,7 +2001,7 @@ Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
     if (!_window || allocSize > _winSize_Allocated)
     {
       Z7_RAR_FREE_WINDOW
-        _window = NULL;
+      _window = NULL;
       _winSize_Allocated = 0;
       Byte *win = (Byte *)::BigAlloc(allocSize);
       if (!win)

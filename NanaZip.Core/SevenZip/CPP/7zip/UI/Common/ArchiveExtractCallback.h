@@ -178,36 +178,50 @@ struct CDirPathTime: public CFiTimesCAM
 
 #ifdef SUPPORT_LINKS
 
+
+enum ELinkType
+{
+  k_LinkType_HardLink,
+  k_LinkType_PureSymLink,
+  k_LinkType_Junction,
+  k_LinkType_WSL
+  // , k_LinkType_CopyLink;
+};
+
+
 struct CLinkInfo
 {
-  // bool isCopyLink;
-  bool isHardLink;
-  bool isJunction;
+  ELinkType LinkType;
   bool isRelative;
-  bool isWSL;
-  UString linkPath;
+    //  if (isRelative == false), then (LinkPath) is relative to root folder of archive
+    //  if (isRelative == true ), then (LinkPath) is relative to current item
+  bool isWindowsPath;
+  UString LinkPath;
 
-  bool IsSymLink() const { return !isHardLink; }
+  bool Is_HardLink() const { return LinkType == k_LinkType_HardLink; }
+  bool Is_AnySymLink() const { return LinkType != k_LinkType_HardLink; }
+
+  bool Is_WSL() const { return LinkType == k_LinkType_WSL; }
 
   CLinkInfo():
-    // IsCopyLink(false),
-    isHardLink(false),
-    isJunction(false),
+    LinkType(k_LinkType_PureSymLink),
     isRelative(false),
-    isWSL(false)
+    isWindowsPath(false)
     {}
 
   void Clear()
   {
-    // IsCopyLink = false;
-    isHardLink = false;
-    isJunction = false;
+    LinkType = k_LinkType_PureSymLink;
     isRelative = false;
-    isWSL = false;
-    linkPath.Empty();
+    isWindowsPath = false;
+    LinkPath.Empty();
   }
 
-  bool Parse(const Byte *data, size_t dataSize, bool isLinuxData);
+  bool Parse_from_WindowsReparseData(const Byte *data, size_t dataSize);
+  bool Parse_from_LinuxData(const Byte *data, size_t dataSize);
+  void Normalize_to_RelativeSafe(UStringVector &removePathParts);
+private:
+  void Remove_AbsPathPrefixes();
 };
 
 #endif // SUPPORT_LINKS
@@ -287,8 +301,8 @@ private:
 
   bool _isRenamed;
   bool _extractMode;
-  // bool _is_SymLink_in_Data;
-  bool _is_SymLink_in_Data_Linux; // false = WIN32, true = LINUX
+  bool _is_SymLink_in_Data_Linux; // false = WIN32, true = LINUX.
+      // _is_SymLink_in_Data_Linux is detected from Windows/Linux part of attributes of file.
   bool _needSetAttrib;
   bool _isSymLinkCreated;
   bool _itemFailure;
@@ -420,6 +434,7 @@ public:
   HRESULT SendMessageError_with_Error(HRESULT errorCode, const char *message, const FString &path);
   HRESULT SendMessageError_with_LastError(const char *message, const FString &path);
   HRESULT SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2);
+  HRESULT SendMessageError2_with_LastError(const char *message, const FString &path1, const FString &path2);
 
 #if defined(_WIN32) && !defined(UNDER_CE) && !defined(Z7_SFX)
   NExtract::NZoneIdMode::EEnum ZoneMode;
@@ -487,11 +502,16 @@ public:
 private:
   CHardLinks _hardLinks;
   CLinkInfo _link;
+  // const void *NtReparse_Data;
+  // UInt32 NtReparse_Size;
 
   // FString _copyFile_Path;
   // HRESULT MyCopyFile(ISequentialOutStream *outStream);
-  HRESULT Link(const FString &fullProcessedPath);
   HRESULT ReadLink();
+  HRESULT SetLink(
+      const FString &fullProcessedPath_from,
+      const CLinkInfo &linkInfo,
+      bool &linkWasSet);
 
 public:
   // call PrepareHardLinks() after Init()
@@ -538,16 +558,6 @@ private:
   HRESULT CloseReparseAndFile();
   HRESULT CloseReparseAndFile2();
   HRESULT SetDirsTimes();
-
-  const void *NtReparse_Data;
-  UInt32 NtReparse_Size;
-
-  #ifdef SUPPORT_LINKS
-  HRESULT SetFromLinkPath(
-      const FString &fullProcessedPath,
-      const CLinkInfo &linkInfo,
-      bool &linkWasSet);
-  #endif
 };
 
 

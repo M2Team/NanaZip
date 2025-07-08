@@ -136,6 +136,9 @@ namespace NCoderPropID
     kAffinity,          // VT_UI8
     kBranchOffset,      // VT_UI4
     kHashBits,          // VT_UI4
+    kNumThreadGroups,   // VT_UI4
+    kThreadGroup,       // VT_UI4
+    kAffinityInGroup,   // VT_UI8
     /*
     // kHash3Bits,          // VT_UI4
     // kHash2Bits,          // VT_UI4
