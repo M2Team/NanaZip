@@ -20,22 +20,6 @@ internal class Program
 
     static readonly ImmutableArray<ResourceMapping> map =
         [
-            new(3900, "ProgressPage", "ElapsedTimeLabel.Text"),
-            new(3901, "ProgressPage", "RemainingTimeLabel.Text"),
-            new(3902, "ProgressPage", "TotalSizeLabel.Text"),
-            new(3903, "ProgressPage", "SpeedLabel.Text"),
-            new(3904, "ProgressPage", "ProcessedLabel.Text"),
-            new(3905, "ProgressPage", "CompressionRatioLabel.Text"),
-            new(3906, "ProgressPage", "ErrorsLabel.Text"),
-            new(1032, "ProgressPage", "FilesLabel.Text"),
-            new(1008, "ProgressPage", "PackedSizeLabel.Text"),
-            new(444, "ProgressPage", "BackgroundButtonText", true),
-            new(445, "ProgressPage", "ForegroundButtonText", true),
-            new(446, "ProgressPage", "PauseButtonText", true),
-            new(411, "ProgressPage", "ContinueButtonText", true),
-            new(402, "ProgressPage", "CancelButtonText", true),
-            new(408, "ProgressPage", "CloseButtonText", true),
-            new(447, "ProgressPage", "PausedText")
         ];
 
     static readonly ImmutableArray<IGrouping<string, ResourceMapping>> Mappings
@@ -97,16 +81,27 @@ internal class Program
                     if (oldNode is null)
                         continue;
 
+                    string newText = oldNode.InnerText ?? string.Empty;
+                    if (mapping.RemoveAmpersand)
+                    {
+                        newText = newText.Replace("&", string.Empty);
+                    }
+
+                    XmlNode? newNode = newDoc.SelectSingleNode(
+                        $"/root/data[@name='{mapping.NewResourcePath}']/value"
+                    );
+
+                    if (newNode is not null)
+                    {
+                        newNode.InnerText = newText;
+                        continue;
+                    }
+
                     XmlElement data = newDoc.CreateElement("data");
                     data.SetAttribute("name", mapping.NewResourcePath);
                     data.SetAttribute("xml:space", "preserve");
                     XmlElement dataValue = newDoc.CreateElement("value");
-                    dataValue.InnerText = oldNode.InnerText ?? string.Empty;
-                    if (mapping.RemoveAmpersand)
-                    {
-                        dataValue.InnerText =
-                            dataValue.InnerText.Replace("&", string.Empty);
-                    }
+                    dataValue.InnerText = newText;
                     data.AppendChild(dataValue);
                     newDoc.DocumentElement!.AppendChild(data);
                 }
@@ -117,6 +112,7 @@ internal class Program
                 using FileStream stream = new(
                     $"{gitRoot}\\{NewDir}\\{language}\\{fileName}.resw",
                     FileMode.OpenOrCreate);
+                stream.SetLength(0);
                 using XmlWriter writer = XmlWriter.Create(
                     stream,
                     new XmlWriterSettings() { Indent = true });
