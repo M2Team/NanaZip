@@ -14,11 +14,7 @@ namespace winrt::NanaZip::Modern::implementation
 {
     struct InformationPage : InformationPageT<InformationPage>
     {
-        InformationPage() 
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
+        InformationPage(HWND windowHandle);
 
         DEPENDENCY_PROPERTY_HEADER(
             Text,
@@ -26,6 +22,9 @@ namespace winrt::NanaZip::Modern::implementation
         );
 
         void CloseButtonClickedHandler(winrt::IInspectable const& sender, winrt::RoutedEventArgs const& args);
+
+    private:
+        HWND m_WindowHandle{ nullptr };
     };
 }
 

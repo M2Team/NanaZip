@@ -6,6 +6,11 @@
 
 namespace winrt::NanaZip::Modern::implementation
 {
+    InformationPage::InformationPage(HWND windowHandle)
+        : m_WindowHandle(windowHandle)
+    {
+    }
+
     DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
         Text,
         winrt::hstring,
@@ -16,5 +21,6 @@ namespace winrt::NanaZip::Modern::implementation
 
     void InformationPage::CloseButtonClickedHandler(winrt::IInspectable const&, winrt::RoutedEventArgs const&)
     {
+        DestroyWindow(m_WindowHandle);
     }
 }

@@ -3,8 +3,6 @@
     [default_interface]
     runtimeclass InformationPage : Windows.UI.Xaml.Controls.Page
     {
-        InformationPage();
-
         String Text;
 
         static Windows.UI.Xaml.DependencyProperty TextProperty{ get; };

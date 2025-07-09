@@ -17,6 +17,7 @@
 
 #include "SponsorPage.h"
 #include "AboutPage.h"
+#include "InformationPage.h"
 
 namespace
 {
@@ -202,6 +203,35 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
         WindowHandle,
         480,
         320,
+        winrt::detach_abi(Window),
+        ParentWindowHandle);
+
+    return Result;
+}
+
+EXTERN_C INT WINAPI K7ModernShowInformationDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Text)
+{
+    HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
+    if (!WindowHandle)
+    {
+        return -1;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::InformationPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::InformationPage;
+
+    Interface Window = winrt::make<Implementation>(
+        WindowHandle);
+    Window.Text(Text);
+
+    int Result = ::K7ModernShowXamlDialog(
+        WindowHandle,
+        560,
+        560,
         winrt::detach_abi(Window),
         ParentWindowHandle);
 
