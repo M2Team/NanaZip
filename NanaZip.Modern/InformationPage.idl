@@ -4,7 +4,9 @@
     runtimeclass InformationPage : Windows.UI.Xaml.Controls.Page
     {
         String Text;
+        String Title;
 
         static Windows.UI.Xaml.DependencyProperty TextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty TitleProperty{ get; };
     }
 }

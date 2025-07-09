@@ -20,6 +20,10 @@ namespace winrt::NanaZip::Modern::implementation
             Text,
             winrt::hstring
         );
+        DEPENDENCY_PROPERTY_HEADER(
+            Title,
+            winrt::hstring
+        );
 
         void CloseButtonClickedHandler(winrt::IInspectable const& sender, winrt::RoutedEventArgs const& args);
 

@@ -211,6 +211,7 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
 
 EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
     _In_opt_ LPCWSTR Text)
 {
     HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
@@ -227,6 +228,7 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     Interface Window = winrt::make<Implementation>(
         WindowHandle);
     Window.Text(Text);
+    Window.Title(Title);
 
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,

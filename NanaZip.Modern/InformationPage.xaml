@@ -15,9 +15,10 @@
     </Grid.RowDefinitions>
     <TextBlock
       Margin="16,0"
+      d:Text="[Information]"
       FontSize="24"
       Style="{ThemeResource BaseTextBlockStyle}"
-      Text="[Information]" />
+      Text="{x:Bind Title, Mode=OneWay}" />
     <TextBox
       Grid.Row="1"
       Margin="16,8,16,16"
@@ -39,10 +40,11 @@
         HorizontalAlignment="Right"
         Orientation="Horizontal">
         <Button
+          x:Uid="/NanaZip.Modern/InformationPage/CloseButton"
           Width="120"
           Margin="4,16,4,16"
-          Click="CloseButtonClickedHandler"
-          Content="[Close]" />
+          d:Content="[Close]"
+          Click="CloseButtonClickedHandler" />
       </StackPanel>
     </Grid>
   </Grid>

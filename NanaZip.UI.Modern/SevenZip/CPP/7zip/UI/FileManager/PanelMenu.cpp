@@ -445,7 +445,7 @@ void CPanel::Properties()
     // message.Title = LangString(IDS_PROPERTIES);
     // message.NumColumns = 2;
     // message.Create(GetParent());
-    K7ModernShowInformationDialog(GetParent(), message.c_str());
+    K7ModernShowInformationDialog(GetParent(), LangString(IDS_PROPERTIES).Ptr(), message.c_str());
   }
 }
 
