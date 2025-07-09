@@ -2638,7 +2638,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
   {
     const CSection &sect = _sections[i];
     if (IsOpt())
-    if (_parseResources && sect.Name == ".rsrc")
+    if (_parseResources && sect.Name.IsEqualTo(".rsrc"))
     {
       // 20.01: we try to parse only first copy of .rsrc section.
       _parseResources = false;
@@ -2727,7 +2727,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
   for (i = 0; i < _mixItems.Size(); i++)
   {
     const CMixItem &mixItem = _mixItems[i];
-    if (mixItem.StringIndex < 0 && mixItem.ResourceIndex < 0 && _sections[mixItem.SectionIndex].Name == "_winzip_")
+    if (mixItem.StringIndex < 0 && mixItem.ResourceIndex < 0 && _sections[mixItem.SectionIndex].Name.IsEqualTo("_winzip_"))
     {
       _mainSubfile = (Int32)(int)i;
       break;

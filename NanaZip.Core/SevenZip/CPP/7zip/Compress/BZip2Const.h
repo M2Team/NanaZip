@@ -46,7 +46,7 @@ const UInt32 kBlockSizeStep = 100000;
 const UInt32 kBlockSizeMax = kBlockSizeMultMax * kBlockSizeStep;
 
 const unsigned kNumSelectorsBits = 15;
-const UInt32 kNumSelectorsMax = (2 + (kBlockSizeMax / kGroupSize));
+const unsigned kNumSelectorsMax = 2 + kBlockSizeMax / kGroupSize;
 
 const unsigned kRleModeRepSize = 4;
 

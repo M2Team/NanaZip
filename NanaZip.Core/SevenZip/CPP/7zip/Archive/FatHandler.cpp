@@ -2,13 +2,12 @@
 
 #include "StdAfx.h"
 
-// #include <stdio.h>
-
 #include "../../../C/CpuArch.h"
 
 #include "../../Common/ComTry.h"
 #include "../../Common/IntToString.h"
 #include "../../Common/MyBuffer.h"
+#include "../../Common/MyBuffer2.h"
 #include "../../Common/MyCom.h"
 #include "../../Common/StringConvert.h"
 
@@ -22,14 +21,19 @@
 
 #include "../Compress/CopyCoder.h"
 
-#include "Common/DummyOutStream.h"
+#include "Common/ItemNameUtils.h"
 
 #define Get16(p) GetUi16(p)
 #define Get32(p) GetUi32(p)
 #define Get16a(p) GetUi16a(p)
 #define Get32a(p) GetUi32a(p)
 
-#define PRF(x) /* x */
+#if 0
+#include <stdio.h>
+#define PRF(x) x
+#else
+#define PRF(x)
+#endif
 
 namespace NArchive {
 namespace NFat {
@@ -38,35 +42,34 @@ static const UInt32 kFatItemUsedByDirMask = (UInt32)1 << 31;
 
 struct CHeader
 {
-  UInt32 NumSectors;
-  UInt16 NumReservedSectors;
+  Byte NumFatBits;
+  Byte SectorSizeLog;
+  Byte SectorsPerClusterLog;
+  Byte ClusterSizeLog;
   Byte NumFats;
+  Byte MediaType;
+
+  bool VolFieldsDefined;
+  bool HeadersWarning;
+
+  UInt32 FatSize;
+  UInt32 BadCluster;
+
+  UInt16 NumReservedSectors;
+  UInt32 NumSectors;
   UInt32 NumFatSectors;
   UInt32 RootDirSector;
   UInt32 NumRootDirSectors;
   UInt32 DataSector;
 
-  UInt32 FatSize;
-  UInt32 BadCluster;
-
-  Byte NumFatBits;
-  Byte SectorSizeLog;
-  Byte SectorsPerClusterLog;
-  Byte ClusterSizeLog;
-  
   UInt16 SectorsPerTrack;
   UInt16 NumHeads;
   UInt32 NumHiddenSectors;
-
-  bool VolFieldsDefined;
-  bool HeadersWarning;
   
   UInt32 VolId;
   // Byte VolName[11];
   // Byte FileSys[8];
-
   // Byte OemName[5];
-  Byte MediaType;
 
   // 32-bit FAT
   UInt16 Flags;
@@ -104,15 +107,8 @@ struct CHeader
   bool Parse(const Byte *p);
 };
 
-static int GetLog(UInt32 num)
-{
-  for (int i = 0; i < 31; i++)
-    if (((UInt32)1 << i) == num)
-      return i;
-  return -1;
-}
 
-static const UInt32 kHeaderSize = 512;
+static const unsigned kHeaderSize = 512;
 
 API_FUNC_IsArc IsArc_Fat(const Byte *p, size_t size);
 API_FUNC_IsArc IsArc_Fat(const Byte *p, size_t size)
@@ -125,7 +121,7 @@ API_FUNC_IsArc IsArc_Fat(const Byte *p, size_t size)
 
 bool CHeader::Parse(const Byte *p)
 {
-  if (p[0x1FE] != 0x55 || p[0x1FF] != 0xAA)
+  if (Get16(p + 0x1FE) != 0xAA55)
     return false;
 
   HeadersWarning = false;
@@ -139,22 +135,40 @@ bool CHeader::Parse(const Byte *p)
   }
   {
     {
-      const UInt32 val32 = Get16(p + 11);
-      const int s = GetLog(val32);
-      if (s < 9 || s > 12)
-        return false;
-      SectorSizeLog = (Byte)s;
+      const unsigned num = Get16(p + 11);
+      unsigned i = 9;
+      unsigned m = 1 << i;
+      for (;;)
+      {
+        if (m == num)
+          break;
+        m <<= 1;
+        if (++i > 12)
+          return false;
+      }
+      SectorSizeLog = (Byte)i;
     }
     {
-      const UInt32 val32 = p[13];
-      const int s = GetLog(val32);
-      if (s < 0)
+      const unsigned num = p[13];
+      unsigned i = 0;
+      unsigned m = 1 << i;
+      for (;;)
+      {
+        if (m == num)
+          break;
+        m <<= 1;
+        if (++i > 7)
+          return false;
+      }
+      SectorsPerClusterLog = (Byte)i;
+      i += SectorSizeLog;
+      ClusterSizeLog = (Byte)i;
+      // (2^15 = 32 KB is safe cluster size that is suported by all system.
+      // (2^16 = 64 KB is supported by some systems
+      // (128 KB / 256 KB) can be created by some tools, but it is not supported by many tools.
+      if (i > 18) // 256 KB
         return false;
-      SectorsPerClusterLog = (Byte)s;
     }
-    ClusterSizeLog = (Byte)(SectorSizeLog + SectorsPerClusterLog);
-    if (ClusterSizeLog > 24)
-      return false;
   }
 
   NumReservedSectors = Get16(p + 14);
@@ -169,7 +183,7 @@ bool CHeader::Parse(const Byte *p)
   const bool isOkOffset = (codeOffset == 0)
       || (codeOffset == (p[0] == 0xEB ? 2 : 3));
 
-  const UInt16 numRootDirEntries = Get16(p + 17);
+  const unsigned numRootDirEntries = Get16(p + 17);
   if (numRootDirEntries == 0)
   {
     if (codeOffset < 90 && !isOkOffset)
@@ -183,10 +197,10 @@ bool CHeader::Parse(const Byte *p)
     if (codeOffset < 62 - 24 && !isOkOffset)
       return false;
     NumFatBits = 0;
-    const UInt32 mask = (1 << (SectorSizeLog - 5)) - 1;
-    if ((numRootDirEntries & mask) != 0)
+    const unsigned mask = (1u << (SectorSizeLog - 5)) - 1;
+    if (numRootDirEntries & mask)
       return false;
-    NumRootDirSectors = (numRootDirEntries + mask) >> (SectorSizeLog - 5);
+    NumRootDirSectors = (numRootDirEntries /* + mask */) >> (SectorSizeLog - 5);
   }
 
   NumSectors = Get16(p + 19);
@@ -198,7 +212,6 @@ bool CHeader::Parse(const Byte *p)
   else if (IsFat32())
     return false;
   */
-
   MediaType = p[21];
   NumFatSectors = Get16(p + 22);
   SectorsPerTrack = Get16(p + 24);
@@ -222,7 +235,7 @@ bool CHeader::Parse(const Byte *p)
       return false;
     RootCluster = Get32(p + 8);
     FsInfoSector = Get16(p + 12);
-    for (int i = 16; i < 28; i++)
+    for (unsigned i = 16; i < 28; i++)
       if (p[i] != 0)
         return false;
     p += 28;
@@ -260,7 +273,7 @@ bool CHeader::Parse(const Byte *p)
     if (numClusters >= 0xFFF5)
       return false;
     NumFatBits = (Byte)(numClusters < 0xFF5 ? 12 : 16);
-    BadCluster &= ((1 << NumFatBits) - 1);
+    BadCluster &= (((UInt32)1 << NumFatBits) - 1);
   }
 
   FatSize = numClusters + 2;
@@ -283,102 +296,156 @@ bool CHeader::Parse(const Byte *p)
   return true;
 }
 
-struct CItem
+
+
+class CItem
 {
-  UString UName;
-  char DosName[11];
-  Byte CTime2;
-  UInt32 CTime;
-  UInt32 MTime;
-  UInt16 ADate;
-  Byte Attrib;
-  Byte Flags;
+  Z7_CLASS_NO_COPY(CItem)
+public:
   UInt32 Size;
+  Byte Attrib;
+  Byte CTime2;
+  UInt16 ADate;
+  CByteBuffer LongName; // if LongName.Size() == 0 : no long name
+                        // if LongName.Size() != 0 : it's NULL terminated UTF16-LE string.
+  char DosName[11];
+  Byte Flags;
+  UInt32 MTime;
+  UInt32 CTime;
   UInt32 Cluster;
   Int32 Parent;
+
+  CItem() {}
 
   // NT uses Flags to store Low Case status
   bool NameIsLow() const { return (Flags & 0x8) != 0; }
   bool ExtIsLow() const { return (Flags & 0x10) != 0; }
   bool IsDir() const { return (Attrib & 0x10) != 0; }
-  UString GetShortName() const;
-  UString GetName() const;
-  UString GetVolName() const;
+  void GetShortName(UString &dest) const;
+  void GetName(UString &name) const;
 };
 
-static unsigned CopyAndTrim(char *dest, const char *src, unsigned size, bool toLower)
+
+static char *CopyAndTrim(char *dest, const char *src,
+    unsigned size, unsigned toLower)
 {
-  memcpy(dest, src, size);
-  if (toLower)
+  do
   {
-    for (unsigned i = 0; i < size; i++)
+    if (src[(size_t)size - 1] != ' ')
     {
-      char c = dest[i];
-      if (c >= 'A' && c <= 'Z')
-        dest[i] = (char)(c + 0x20);
+      const unsigned range = toLower ? 'Z' - 'A' + 1 : 0;
+      do
+      {
+        unsigned c = (Byte)*src++;
+        if ((unsigned)(c - 'A') < range)
+          c += 0x20;
+        *dest++ = (char)c;
+      }
+      while (--size);
+      break;
     }
   }
-  
-  for (unsigned i = size;;)
-  {
-    if (i == 0)
-      return 0;
-    if (dest[i - 1] != ' ')
-      return i;
-    i--;
-  }
+  while (--size);
+  *dest = 0;
+  return dest;
 }
 
-static UString FatStringToUnicode(const char *s)
+
+static void FatStringToUnicode(UString &dest, const char *s)
 {
-  return MultiByteToUnicodeString(s, CP_OEMCP);
+  MultiByteToUnicodeString2(dest, AString(s), CP_OEMCP);
 }
 
-UString CItem::GetShortName() const
+void CItem::GetShortName(UString &shortName) const
 {
   char s[16];
-  unsigned i = CopyAndTrim(s, DosName, 8, NameIsLow());
-  s[i++] = '.';
-  unsigned j = CopyAndTrim(s + i, DosName + 8, 3, ExtIsLow());
-  if (j == 0)
-    i--;
-  s[i + j] = 0;
-  return FatStringToUnicode(s);
+  char *dest = CopyAndTrim(s, DosName, 8, NameIsLow());
+  *dest++ = '.';
+  char *dest2 = CopyAndTrim(dest, DosName + 8, 3, ExtIsLow());
+  if (dest == dest2)
+    dest[-1] = 0;
+  FatStringToUnicode(shortName, s);
 }
 
-UString CItem::GetName() const
+
+
+// numWords != 0
+static unsigned ParseLongName(UInt16 *buf, unsigned numWords)
 {
-  if (!UName.IsEmpty())
-    return UName;
-  return GetShortName();
+  unsigned i;
+  for (i = 0; i < numWords; i++)
+  {
+    const unsigned c = buf[i];
+    if (c == 0)
+      break;
+    if (c == 0xFFFF)
+      return 0;
+  }
+  if (i == 0)
+    return 0;
+  buf[i] = 0;
+  numWords -= i;
+  i++;
+  if (numWords > 1)
+  {
+    numWords--;
+    buf += i;
+    do
+      if (*buf++ != 0xFFFF)
+        return 0;
+    while (--numWords);
+  }
+  return i; // it includes NULL terminator
 }
 
-UString CItem::GetVolName() const
+
+void CItem::GetName(UString &name) const
 {
-  if (!UName.IsEmpty())
-    return UName;
+  if (LongName.Size() >= 2)
+  {
+    const Byte * const p = LongName;
+    const unsigned numWords = ((unsigned)LongName.Size() - 2) / 2;
+    wchar_t *dest = name.GetBuf(numWords);
+    for (unsigned i = 0; i < numWords; i++)
+      dest[i] = (wchar_t)Get16(p + (size_t)i * 2);
+    name.ReleaseBuf_SetEnd(numWords);
+  }
+  else
+    GetShortName(name);
+  if (name.IsEmpty()) // it's unexpected
+    name = '_';
+  NItemName::NormalizeSlashes_in_FileName_for_OsPath(name);
+}
+
+
+static void GetVolName(const char dosName[11], NWindows::NCOM::CPropVariant &prop)
+{
   char s[12];
-  unsigned i = CopyAndTrim(s, DosName, 11, false);
-  s[i] = 0;
-  return FatStringToUnicode(s);
+  CopyAndTrim(s, dosName, 11, false);
+  UString u;
+  FatStringToUnicode(u, AString(s));
+  prop = u;
 }
+
 
 struct CDatabase
 {
-  CHeader Header;
   CObjectVector<CItem> Items;
   UInt32 *Fat;
+  CHeader Header;
   CMyComPtr<IInStream> InStream;
   IArchiveOpenCallback *OpenCallback;
+  CAlignedBuffer ByteBuf;
+  CByteBuffer LfnBuf;
 
   UInt32 NumFreeClusters;
-  bool VolItemDefined;
-  CItem VolItem;
   UInt32 NumDirClusters;
-  CByteBuffer ByteBuf;
   UInt64 NumCurUsedBytes;
-
   UInt64 PhySize;
+
+  UInt32 Vol_MTime;
+  char VolLabel[11];
+  bool VolItem_Defined;
 
   CDatabase(): Fat(NULL) {}
   ~CDatabase() { ClearAndClose(); }
@@ -388,7 +455,7 @@ struct CDatabase
   HRESULT OpenProgressFat(bool changeTotal = true);
   HRESULT OpenProgress();
 
-  UString GetItemPath(UInt32 index) const;
+  void GetItemPath(UInt32 index, UString &s) const;
   HRESULT Open();
   HRESULT ReadDir(Int32 parent, UInt32 cluster, unsigned level);
 
@@ -400,6 +467,7 @@ struct CDatabase
   HRESULT SeekToCluster(UInt32 cluster) { return SeekToSector(Header.ClusterToSector(cluster)); }
 };
 
+
 HRESULT CDatabase::SeekToSector(UInt32 sector)
 {
   return InStream_SeekSet(InStream, (UInt64)sector << Header.SectorSizeLog);
@@ -408,7 +476,7 @@ HRESULT CDatabase::SeekToSector(UInt32 sector)
 void CDatabase::Clear()
 {
   PhySize = 0;
-  VolItemDefined = false;
+  VolItem_Defined = false;
   NumDirClusters = 0;
   NumCurUsedBytes = 0;
 
@@ -440,49 +508,35 @@ HRESULT CDatabase::OpenProgress()
 {
   if (!OpenCallback)
     return S_OK;
-  UInt64 numItems = Items.Size();
+  const UInt64 numItems = Items.Size();
   return OpenCallback->SetCompleted(&numItems, &NumCurUsedBytes);
 }
 
-UString CDatabase::GetItemPath(UInt32 index) const
+void CDatabase::GetItemPath(UInt32 index, UString &s) const
 {
-  const CItem *item = &Items[index];
-  UString name = item->GetName();
+  UString name;
   for (;;)
   {
-    index = (UInt32)item->Parent;
-    if (item->Parent < 0)
-      return name;
-    item = &Items[index];
-    name.InsertAtFront(WCHAR_PATH_SEPARATOR);
-    if (item->UName.IsEmpty())
-      name.Insert(0, item->GetShortName());
-    else
-      name.Insert(0, item->UName);
+    const CItem &item = Items[index];
+    item.GetName(name);
+    if (item.Parent >= 0)
+      name.InsertAtFront(WCHAR_PATH_SEPARATOR);
+    s.Insert(0, name);
+    index = (UInt32)item.Parent;
+    if (item.Parent < 0)
+      break;
   }
 }
 
-static wchar_t *AddSubStringToName(wchar_t *dest, const Byte *p, unsigned numChars)
-{
-  for (unsigned i = 0; i < numChars; i++)
-  {
-    wchar_t c = Get16(p + i * 2);
-    if (c != 0 && c != 0xFFFF)
-      *dest++ = c;
-  }
-  *dest = 0;
-  return dest;
-}
 
 HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
 {
-  unsigned startIndex = Items.Size();
+  const unsigned startIndex = Items.Size();
   if (startIndex >= (1 << 30) || level > 256)
     return S_FALSE;
 
-  UInt32 sectorIndex = 0;
   UInt32 blockSize = Header.ClusterSize();
-  bool clusterMode = (Header.IsFat32() || parent >= 0);
+  const bool clusterMode = (Header.IsFat32() || parent >= 0);
   if (!clusterMode)
   {
     blockSize = Header.SectorSize();
@@ -490,20 +544,25 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
   }
 
   ByteBuf.Alloc(blockSize);
-  UString curName;
-  int checkSum = -1;
-  int numLongRecords = -1;
+
+  const unsigned k_NumLfnRecords_MAX = 20; // 260 symbols limit (strict limit)
+  // const unsigned k_NumLfnRecords_MAX = 0x40 - 1; // 1260 symbols limit (relaxed limit)
+  const unsigned k_NumLfnBytes_in_Record = 13 * 2;
+  // we reserve 2 additional bytes for NULL terminator
+  LfnBuf.Alloc(k_NumLfnRecords_MAX * k_NumLfnBytes_in_Record + 2 * 1);
   
+  UInt32 curDirBytes_read = 0;
+  UInt32 sectorIndex = 0;
+  unsigned num_lfn_records = 0;
+  unsigned lfn_RecordIndex = 0;
+  int checkSum = -1;
+  bool is_record_error = false;
+
   for (UInt32 pos = blockSize;; pos += 32)
   {
     if (pos == blockSize)
     {
       pos = 0;
-
-      if ((NumDirClusters & 0xFF) == 0)
-      {
-        RINOK(OpenProgress())
-      }
 
       if (clusterMode)
       {
@@ -514,21 +573,37 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
         PRF(printf("\nCluster = %4X", cluster));
         RINOK(SeekToCluster(cluster))
         const UInt32 newCluster = Fat[cluster];
-        if ((newCluster & kFatItemUsedByDirMask) != 0)
+        if (newCluster & kFatItemUsedByDirMask)
           return S_FALSE;
         Fat[cluster] |= kFatItemUsedByDirMask;
         cluster = newCluster;
         NumDirClusters++;
+        if ((NumDirClusters & 0xFF) == 0)
+        {
+          RINOK(OpenProgress())
+        }
         NumCurUsedBytes += Header.ClusterSize();
       }
       else if (sectorIndex++ >= Header.NumRootDirSectors)
         break;
       
+      // if (curDirBytes_read > (1u << 28)) // do we need some relaxed limit for non-MS FATs?
+      if (curDirBytes_read >= (1u << 21)) // 2MB limit from FAT specification.
+        return S_FALSE;
       RINOK(ReadStream_FALSE(InStream, ByteBuf, blockSize))
+      curDirBytes_read += blockSize;
     }
   
-    const Byte *p = ByteBuf + pos;
-    
+    if (is_record_error)
+    {
+      Header.HeadersWarning = true;
+      num_lfn_records = 0;
+      lfn_RecordIndex = 0;
+      checkSum = -1;
+    }
+
+    const Byte * const p = ByteBuf + pos;
+   
     if (p[0] == 0)
     {
       /*
@@ -538,125 +613,191 @@ HRESULT CDatabase::ReadDir(Int32 parent, UInt32 cluster, unsigned level)
       */
       break;
     }
-    
+
+    is_record_error = true;
+
     if (p[0] == 0xE5)
     {
-      if (numLongRecords > 0)
-        return S_FALSE;
+      // deleted entry
+      if (num_lfn_records == 0)
+        is_record_error = false;
       continue;
     }
-    
-    Byte attrib = p[11];
-    if ((attrib & 0x3F) == 0xF)
+    // else
     {
-      if (p[0] > 0x7F || Get16(p + 26) != 0)
-        return S_FALSE;
-      int longIndex = p[0] & 0x3F;
-      if (longIndex == 0)
-        return S_FALSE;
-      bool isLast = (p[0] & 0x40) != 0;
-      if (numLongRecords < 0)
+      const Byte attrib = p[11];
+      // maybe we can use more strick check : (attrib == 0xF) ?
+      if ((attrib & 0x3F) == 0xF)
       {
-        if (!isLast)
+        // long file name (LFN) entry
+        const unsigned longIndex = p[0] & 0x3F;
+        if (longIndex == 0
+            || longIndex > k_NumLfnRecords_MAX
+            || p[0] > 0x7F
+            || Get16a(p + 26) != 0 // LDIR_FstClusLO
+            )
+        {
           return S_FALSE;
-        numLongRecords = longIndex;
-      }
-      else if (isLast || numLongRecords != longIndex)
-        return S_FALSE;
-
-      numLongRecords--;
-      
-      if (p[12] == 0)
-      {
-        wchar_t nameBuf[14];
-        wchar_t *dest;
+          // break;
+        }
+        const bool isLast = (p[0] & 0x40) != 0;
+        if (num_lfn_records == 0)
+        {
+          if (!isLast)
+            continue; // orphan
+          num_lfn_records = longIndex;
+        }
+        else if (isLast || longIndex != lfn_RecordIndex)
+        {
+          return S_FALSE;
+          // break;
+        }
         
-        dest = AddSubStringToName(nameBuf, p + 1, 5);
-        dest = AddSubStringToName(dest, p + 14, 6);
-        AddSubStringToName(dest, p + 28, 2);
-        curName = nameBuf + curName;
-        if (isLast)
-          checkSum = p[13];
-        if (checkSum != p[13])
-          return S_FALSE;
+        lfn_RecordIndex = longIndex - 1;
+        
+        if (p[12] == 0)
+        {
+          Byte * const dest = LfnBuf + k_NumLfnBytes_in_Record * lfn_RecordIndex;
+          memcpy(dest,          p +  1, 5 * 2);
+          memcpy(dest +  5 * 2, p + 14, 6 * 2);
+          memcpy(dest + 11 * 2, p + 28, 2 * 2);
+          if (isLast)
+            checkSum = p[13];
+          if (checkSum == p[13])
+            is_record_error = false;
+          // else return S_FALSE;
+          continue;
+        }
+        // else
+        checkSum = -1; // we will ignore LfnBuf in this case
+        continue;
       }
-    }
-    else
-    {
-      if (numLongRecords > 0)
+      
+      if (lfn_RecordIndex)
+      {
+        Header.HeadersWarning = true;
+        // return S_FALSE;
+      }
+      // lfn_RecordIndex = 0;
+
+      const unsigned type_in_attrib = attrib & 0x18;
+      if (type_in_attrib == 0x18)
+      {
+        // invalid directory record (both flags are set: dir_flag and volume_flag)
         return S_FALSE;
-      CItem item;
-      memcpy(item.DosName, p, 11);
-
-      if (checkSum >= 0)
-      {
-        Byte sum = 0;
-        for (unsigned i = 0; i < 11; i++)
-          sum = (Byte)(((sum & 1) ? 0x80 : 0) + (sum >> 1) + (Byte)item.DosName[i]);
-        if (sum == checkSum)
-          item.UName = curName;
+        // break;
+        // continue;
       }
-
-      if (item.DosName[0] == 5)
-        item.DosName[0] = (char)(Byte)0xE5;
-      item.Attrib = attrib;
-      item.Flags = p[12];
-      item.Size = Get32(p + 28);
-      item.Cluster = Get16(p + 26);
-      if (Header.NumFatBits > 16)
-        item.Cluster |= ((UInt32)Get16(p + 20) << 16);
-      else
+      if (type_in_attrib == 8) // volume_flag
       {
-        // OS/2 and WinNT probably can store EA (extended atributes) in that field.
+        if (!VolItem_Defined && level == 0)
+        {
+          VolItem_Defined = true;
+          memcpy(VolLabel, p, 11);
+          Vol_MTime = Get32(p + 22);
+          is_record_error = false;
+        }
       }
-
-      item.CTime = Get32(p + 14);
-      item.CTime2 = p[13];
-      item.ADate = Get16(p + 18);
-      item.MTime = Get32(p + 22);
-      item.Parent = parent;
-
-      if (attrib == 8)
+      else if (memcmp(p, ".          ", 11) == 0
+            || memcmp(p, "..         ", 11) == 0)
       {
-        VolItem = item;
-        VolItemDefined = true;
+        if (num_lfn_records == 0 && type_in_attrib == 0x10) // dir_flag
+          is_record_error = false;
       }
       else
-        if (memcmp(item.DosName, ".          ", 11) != 0 &&
-            memcmp(item.DosName, "..         ", 11) != 0)
       {
-        if (!item.IsDir())
-          NumCurUsedBytes += Header.GetFilePackSize(item.Size);
-        Items.Add(item);
-        PRF(printf("\n%7d: %S", Items.Size(), GetItemPath(Items.Size() - 1)));
+        CItem &item = Items.AddNew();
+        memcpy(item.DosName, p, 11);
+        if (item.DosName[0] == 5)
+          item.DosName[0] = (char)(Byte)0xE5; // 0xE5 is valid KANJI lead byte value.
+        item.Attrib = attrib;
+        item.Flags = p[12];
+        item.Size = Get32a(p + 28);
+        item.Cluster = Get16a(p + 26);
+        if (Header.NumFatBits > 16)
+          item.Cluster |= ((UInt32)Get16a(p + 20) << 16);
+        else
+        {
+          // OS/2 and WinNT probably can store EA (extended atributes) in that field.
+        }
+        item.CTime = Get32(p + 14);
+        item.CTime2 = p[13];
+        item.ADate = Get16a(p + 18);
+        item.MTime = Get32(p + 22);
+        item.Parent = parent;
+        {
+          if (!item.IsDir())
+            NumCurUsedBytes += Header.GetFilePackSize(item.Size);
+          // PRF(printf("\n%7d: %S", Items.Size(), GetItemPath(Items.Size() - 1)));
+          PRF(printf("\n%7d" /* ": %S" */, Items.Size() /* , item.GetShortName() */ );)
+        }
+        if (num_lfn_records == 0)
+          is_record_error = false;
+        else if (checkSum >= 0 && lfn_RecordIndex == 0)
+        {
+          Byte sum = 0;
+          for (unsigned i = 0; i < 11; i++)
+            sum = (Byte)((sum << 7) + (sum >> 1) + (Byte)item.DosName[i]);
+          if (sum == checkSum)
+          {
+            const unsigned numWords = ParseLongName((UInt16 *)(void *)(Byte *)LfnBuf,
+                num_lfn_records * k_NumLfnBytes_in_Record / 2);
+            if (numWords > 1)
+            {
+              // numWords includes NULL terminator
+              item.LongName.CopyFrom(LfnBuf, numWords * 2);
+              is_record_error = false;
+            }
+          }
+        }
+        
+        if (
+            // item.LongName.Size() < 20 ||  // for debug
+            item.LongName.Size() <= 2 * 1
+            && memcmp(p, "           ", 11) == 0)
+        {
+          char s[16 + 16];
+          const size_t numChars = (size_t)(ConvertUInt32ToString(
+              Items.Size() - 1 - startIndex,
+              MyStpCpy(s, "[NONAME]-")) - s) + 1;
+          item.LongName.Alloc(numChars * 2);
+          for (size_t i = 0; i < numChars; i++)
+          {
+            SetUi16a(item.LongName + i * 2, (Byte)s[i])
+          }
+          Header.HeadersWarning = true;
+        }
       }
-      numLongRecords = -1;
-      curName.Empty();
-      checkSum = -1;
+      num_lfn_records = 0;
     }
   }
 
-  unsigned finishIndex = Items.Size();
+  if (is_record_error)
+    Header.HeadersWarning = true;
+
+  const unsigned finishIndex = Items.Size();
   for (unsigned i = startIndex; i < finishIndex; i++)
   {
     const CItem &item = Items[i];
     if (item.IsDir())
     {
-      PRF(printf("\n%S", GetItemPath(i)));
-      RINOK(CDatabase::ReadDir((int)i, item.Cluster, level + 1))
+      PRF(printf("\n---- %c%c%c%c%c", item.DosName[0], item.DosName[1], item.DosName[2], item.DosName[3], item.DosName[4]));
+      RINOK(ReadDir((int)i, item.Cluster, level + 1))
     }
   }
   return S_OK;
 }
 
+
+
 HRESULT CDatabase::Open()
 {
   Clear();
-  bool numFreeClustersDefined = false;
+  bool numFreeClusters_Defined = false;
   {
-    Byte buf[kHeaderSize];
-    RINOK(ReadStream_FALSE(InStream, buf, kHeaderSize))
-    if (!Header.Parse(buf))
+    UInt32 buf32[kHeaderSize / 4];
+    RINOK(ReadStream_FALSE(InStream, buf32, kHeaderSize))
+    if (!Header.Parse((Byte *)(void *)buf32))
       return S_FALSE;
     UInt64 fileSize;
     RINOK(InStream_GetSize_SeekToEnd(InStream, fileSize))
@@ -671,21 +812,21 @@ HRESULT CDatabase::Open()
     {
       if (((UInt32)Header.FsInfoSector << Header.SectorSizeLog) + kHeaderSize <= fileSize
           && SeekToSector(Header.FsInfoSector) == S_OK
-          && ReadStream_FALSE(InStream, buf, kHeaderSize) == S_OK
-          && 0xaa550000 == Get32(buf + 508)
-          && 0x41615252 == Get32(buf)
-          && 0x61417272 == Get32(buf + 484))
+          && ReadStream_FALSE(InStream, buf32, kHeaderSize) == S_OK
+          && 0xaa550000 == Get32a(buf32 + 508 / 4)
+          && 0x41615252 == Get32a(buf32)
+          && 0x61417272 == Get32a(buf32 + 484 / 4))
       {
-        NumFreeClusters = Get32(buf + 488);
-        numFreeClustersDefined = (NumFreeClusters <= Header.FatSize);
+        NumFreeClusters = Get32a(buf32 + 488 / 4);
+        numFreeClusters_Defined = (NumFreeClusters <= Header.FatSize);
       }
       else
         Header.HeadersWarning = true;
     }
   }
 
-  // numFreeClustersDefined = false; // to recalculate NumFreeClusters
-  if (!numFreeClustersDefined)
+  // numFreeClusters_Defined = false; // to recalculate NumFreeClusters
+  if (!numFreeClusters_Defined)
     NumFreeClusters = 0;
 
   CByteBuffer byteBuf;
@@ -695,7 +836,7 @@ HRESULT CDatabase::Open()
   RINOK(SeekToSector(Header.GetFatSector()))
   if (Header.NumFatBits == 32)
   {
-    const UInt32 kBufSize = (1 << 15);
+    const UInt32 kBufSize = 1 << 15;
     byteBuf.Alloc(kBufSize);
     for (UInt32 i = 0;;)
     {
@@ -712,7 +853,7 @@ HRESULT CDatabase::Open()
       const UInt32 *src = (const UInt32 *)(const void *)(const Byte *)byteBuf;
       UInt32 *dest = Fat + i;
       const UInt32 *srcLim = src + size;
-      if (numFreeClustersDefined)
+      if (numFreeClusters_Defined)
         do
           *dest++ = Get32a(src) & 0x0FFFFFFF;
         while (++src != srcLim);
@@ -731,7 +872,7 @@ HRESULT CDatabase::Open()
       i += size;
       if ((i & 0xFFFFF) == 0)
       {
-        RINOK(OpenProgressFat(!numFreeClustersDefined))
+        RINOK(OpenProgressFat(!numFreeClusters_Defined))
       }
     }
   }
@@ -751,7 +892,7 @@ HRESULT CDatabase::Open()
       for (UInt32 j = 0; j < fatSize; j++)
         fat[j] = (Get16(p + j * 3 / 2) >> ((j & 1) << 2)) & 0xFFF;
 
-    if (!numFreeClustersDefined)
+    if (!numFreeClusters_Defined)
     {
       UInt32 numFreeClusters = 0;
       for (UInt32 i = 0; i < fatSize; i++)
@@ -781,11 +922,12 @@ HRESULT CDatabase::Open()
 
 Z7_class_CHandler_final:
   public IInArchive,
+  public IArchiveGetRawProps,
   public IInArchiveGetStream,
   public CMyUnknownImp,
   CDatabase
 {
-  Z7_IFACES_IMP_UNK_2(IInArchive, IInArchiveGetStream)
+  Z7_IFACES_IMP_UNK_3(IInArchive, IArchiveGetRawProps, IInArchiveGetStream)
 };
 
 Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
@@ -831,6 +973,8 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
   COM_TRY_END
 }
 
+
+
 static const Byte kProps[] =
 {
   kpidPath,
@@ -842,6 +986,7 @@ static const Byte kProps[] =
   kpidATime,
   kpidAttrib,
   kpidShortName
+  // , kpidCharacts
 };
 
 enum
@@ -922,15 +1067,16 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     case kpidPhySize: prop = PhySize; break;
     case kpidFreeSpace: prop = (UInt64)NumFreeClusters << Header.ClusterSizeLog; break;
     case kpidHeadersSize: prop = GetHeadersSize(); break;
-    case kpidMTime: if (VolItemDefined) PropVariant_SetFrom_DosTime(prop, VolItem.MTime); break;
+    case kpidMTime: if (VolItem_Defined) PropVariant_SetFrom_DosTime(prop, Vol_MTime); break;
     case kpidShortComment:
-    case kpidVolumeName: if (VolItemDefined) prop = VolItem.GetVolName(); break;
+    case kpidVolumeName: if (VolItem_Defined) GetVolName(VolLabel, prop); break;
     case kpidNumFats: if (Header.NumFats != 2) prop = Header.NumFats; break;
     case kpidSectorSize: prop = (UInt32)1 << Header.SectorSizeLog; break;
     // case kpidSectorsPerTrack: prop = Header.SectorsPerTrack; break;
     // case kpidNumHeads: prop = Header.NumHeads; break;
     // case kpidOemName: STRING_TO_PROP(Header.OemName, prop); break;
     case kpidId: if (Header.VolFieldsDefined) prop = Header.VolId; break;
+    case kpidIsTree: prop = true; break;
     // case kpidVolName: if (Header.VolFieldsDefined) STRING_TO_PROP(Header.VolName, prop); break;
     // case kpidFileSysType: if (Header.VolFieldsDefined) STRING_TO_PROP(Header.FileSys, prop); break;
     // case kpidHiddenSectors: prop = Header.NumHiddenSectors; break;
@@ -948,6 +1094,52 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
   COM_TRY_END
 }
 
+
+Z7_COM7F_IMF(CHandler::GetNumRawProps(UInt32 *numProps))
+{
+  *numProps = 0;
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CHandler::GetRawPropInfo(UInt32 /* index */ , BSTR *name, PROPID *propID))
+{
+  *name = NULL;
+  *propID = 0;
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CHandler::GetParent(UInt32 index, UInt32 *parent, UInt32 *parentType))
+{
+  *parentType = NParentType::kDir;
+  int par = -1;
+  if (index < Items.Size())
+    par = Items[index].Parent;
+  *parent = (UInt32)(Int32)par;
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CHandler::GetRawProp(UInt32 index, PROPID propID, const void **data, UInt32 *dataSize, UInt32 *propType))
+{
+  *data = NULL;
+  *dataSize = 0;
+  *propType = 0;
+
+  if (index < Items.Size()
+      && propID == kpidName)
+  {
+    CByteBuffer &buf = Items[index].LongName;
+    const UInt32 size = (UInt32)buf.Size();
+    if (size != 0)
+    {
+      *dataSize = size;
+      *propType = NPropDataType::kUtf16z;
+      *data = (const void *)(const Byte *)buf;
+    }
+  }
+  return S_OK;
+}
+
+
 Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *value))
 {
   COM_TRY_BEGIN
@@ -955,8 +1147,28 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   const CItem &item = Items[index];
   switch (propID)
   {
-    case kpidPath: prop = GetItemPath(index); break;
-    case kpidShortName: prop = item.GetShortName(); break;
+    case kpidPath:
+    case kpidName:
+    case kpidShortName:
+    {
+      UString s;
+      if (propID == kpidPath)
+        GetItemPath(index, s);
+      else if (propID == kpidName)
+        item.GetName(s);
+      else
+        item.GetShortName(s);
+      prop = s;
+      break;
+    }
+/*
+    case kpidCharacts:
+    {
+      if (item.LongName.Size())
+        prop = "LFN";
+      break;
+    }
+*/
     case kpidIsDir: prop = item.IsDir(); break;
     case kpidMTime: PropVariant_SetFrom_DosTime(prop, item.MTime); break;
     case kpidCTime: FatTimeToProp(item.CTime, item.CTime2, prop); break;
@@ -1004,34 +1216,44 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     Int32 testMode, IArchiveExtractCallback *extractCallback))
 {
   COM_TRY_BEGIN
-  const bool allFilesMode = (numItems == (UInt32)(Int32)-1);
-  if (allFilesMode)
-    numItems = Items.Size();
-  if (numItems == 0)
-    return S_OK;
-  UInt32 i;
-  UInt64 totalSize = 0;
-  for (i = 0; i < numItems; i++)
+  if (numItems == (UInt32)(Int32)-1)
   {
-    const CItem &item = Items[allFilesMode ? i : indices[i]];
-    if (!item.IsDir())
-      totalSize += item.Size;
+    indices = NULL;
+    numItems = Items.Size();
+    if (numItems == 0)
+      return S_OK;
+  }
+  else
+  {
+    if (numItems == 0)
+      return S_OK;
+    if (!indices)
+      return E_INVALIDARG;
+  }
+  UInt64 totalSize = 0;
+  {
+    UInt32 i = 0;
+    do
+    {
+      UInt32 index = i;
+      if (indices)
+        index = indices[i];
+      const CItem &item = Items[index];
+      if (!item.IsDir())
+        totalSize += item.Size;
+    }
+    while (++i != numItems);
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
+  lps->Init(extractCallback, false);
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
-  
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
 
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
-  lps->Init(extractCallback, false);
-
-  CDummyOutStream *outStreamSpec = new CDummyOutStream;
-  CMyComPtr<ISequentialOutStream> outStream(outStreamSpec);
-
+  UInt32 i;
   for (i = 0;; i++)
   {
     lps->InSize = totalPackSize;
@@ -1039,46 +1261,45 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(lps->SetCur())
     if (i == numItems)
       break;
-    CMyComPtr<ISequentialOutStream> realOutStream;
-    const Int32 askMode = testMode ?
-        NExtract::NAskMode::kTest :
-        NExtract::NAskMode::kExtract;
-    const UInt32 index = allFilesMode ? i : indices[i];
-    const CItem &item = Items[index];
-    RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
-
-    if (item.IsDir())
+    int res;
     {
-      RINOK(extractCallback->PrepareOperation(askMode))
-      RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
-      continue;
-    }
-
-    totalPackSize += Header.GetFilePackSize(item.Size);
-    totalSize += item.Size;
-
-    if (!testMode && !realOutStream)
-      continue;
-    RINOK(extractCallback->PrepareOperation(askMode))
-
-    outStreamSpec->SetStream(realOutStream);
-    realOutStream.Release();
-    outStreamSpec->Init();
-
-    int res = NExtract::NOperationResult::kDataError;
-    CMyComPtr<ISequentialInStream> inStream;
-    HRESULT hres = GetStream(index, &inStream);
-    if (hres != S_FALSE)
-    {
-      RINOK(hres)
-      if (inStream)
+      CMyComPtr<ISequentialOutStream> realOutStream;
+      const Int32 askMode = testMode ?
+          NExtract::NAskMode::kTest :
+          NExtract::NAskMode::kExtract;
+      UInt32 index = i;
+      if (indices)
+        index = indices[i];
+      const CItem &item = Items[index];
+      RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
+        
+      if (item.IsDir())
       {
-        RINOK(copyCoder->Code(inStream, outStream, NULL, NULL, progress))
-        if (copyCoderSpec->TotalSize == item.Size)
-          res = NExtract::NOperationResult::kOK;
+        RINOK(extractCallback->PrepareOperation(askMode))
+        RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
+        continue;
+      }
+      
+      totalPackSize += Header.GetFilePackSize(item.Size);
+      totalSize += item.Size;
+      
+      if (!testMode && !realOutStream)
+        continue;
+      RINOK(extractCallback->PrepareOperation(askMode))
+      res = NExtract::NOperationResult::kDataError;
+      CMyComPtr<ISequentialInStream> inStream;
+      const HRESULT hres = GetStream(index, &inStream);
+      if (hres != S_FALSE)
+      {
+        RINOK(hres)
+        if (inStream)
+        {
+          RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
+          if (copyCoder->TotalSize == item.Size)
+            res = NExtract::NOperationResult::kOK;
+        }
       }
     }
-    outStreamSpec->ReleaseStream();
     RINOK(extractCallback->SetOperationResult(res))
   }
   return S_OK;

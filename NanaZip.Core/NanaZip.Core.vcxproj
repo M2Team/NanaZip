@@ -52,12 +52,14 @@
     <None Include="SevenZip\ASM\x86\AesOpt.asm" />
     <None Include="SevenZip\ASM\x86\LzFindOpt.asm" />
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
+    <None Include="SevenZip\ASM\x86\Sort.asm" />
     <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm" />
     <None Include="SevenZip\CPP\7zip\Archive\Archive2.def" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\AesOpt.c" />
     <None Include="SevenZip\C\XzCrc64Opt.c" />
     <None Include="SevenZip\C\LzFindOpt.c" />
+    <None Include="SevenZip\C\Sort.c" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Extensions\ZSCodecs\BrotliDecoder.cpp" />
@@ -335,7 +337,6 @@
     <ClCompile Include="SevenZip\C\Ppmd8.c" />
     <ClCompile Include="SevenZip\C\Ppmd8Dec.c" />
     <ClCompile Include="SevenZip\C\Ppmd8Enc.c" />
-    <ClCompile Include="SevenZip\C\Sort.c" />
     <ClCompile Include="SevenZip\C\SwapBytes.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
     <ClCompile Include="SevenZip\C\Xz.c" />
@@ -661,6 +662,18 @@
   <Target Name="NanaZipCoreLzFindOptHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)'!='x64'">
       <ClCompile Include="SevenZip\C\LzFindOpt.c">
+        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSortHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+      <MASM Include="SevenZip\ASM\x86\Sort.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSortHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+      <ClCompile Include="SevenZip\C\Sort.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>

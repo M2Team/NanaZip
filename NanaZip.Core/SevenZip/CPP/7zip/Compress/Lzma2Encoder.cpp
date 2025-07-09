@@ -67,6 +67,14 @@ HRESULT SetLzma2Prop(PROPID propID, const PROPVARIANT &prop, CLzma2EncProps &lzm
     // **************** 7-Zip ZS Modification Start ****************
     }
     // **************** 7-Zip ZS Modification End ****************
+    case NCoderPropID::kNumThreadGroups:
+      if (prop.vt != VT_UI4)
+        return E_INVALIDARG;
+      // 16-bit value supported by Windows
+      if (prop.ulVal >= (1u << 16))
+        return E_INVALIDARG;
+      lzma2Props.numThreadGroups = (unsigned)prop.ulVal;
+      break;
     default:
       RINOK(NLzma::SetLzmaProp(propID, prop, lzma2Props.lzmaProps))
   }

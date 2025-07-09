@@ -160,7 +160,7 @@ static HRESULT DecompressArchive(
 
       realIndices.Add(i);
     }
-
+    
     // **************** NanaZip Modification Start ****************
     if (options.SmartExtract.Val)
     {
@@ -422,7 +422,7 @@ HRESULT Extract(
       {
         UString s = arcPath.Ptr(pos + 1);
         int index = codecs->FindFormatForExtension(s);
-        if (index >= 0 && s == L"001")
+        if (index >= 0 && s.IsEqualTo("001"))
         {
           s = arcPath.Left(pos);
           pos = s.ReverseFind(L'.');

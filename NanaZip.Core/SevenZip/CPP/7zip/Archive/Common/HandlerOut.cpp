@@ -4,8 +4,6 @@
 
 #include "../../../Common/StringToInt.h"
 
-#include "../Common/ParseProperties.h"
-
 #include "HandlerOut.h"
 
 namespace NArchive {
@@ -180,6 +178,11 @@ void CMultiMethodProps::SetMethodThreadsTo_IfNotFinded(CMethodProps &oneMethodIn
 void CMultiMethodProps::SetMethodThreadsTo_Replace(CMethodProps &oneMethodInfo, UInt32 numThreads)
 {
   SetMethodProp32_Replace(oneMethodInfo, NCoderPropID::kNumThreads, numThreads);
+}
+
+void CMultiMethodProps::Set_Method_NumThreadGroups_IfNotFinded(CMethodProps &oneMethodInfo, UInt32 numThreadGroups)
+{
+  SetMethodProp32(oneMethodInfo, NCoderPropID::kNumThreadGroups, numThreadGroups);
 }
 
 #endif // Z7_ST

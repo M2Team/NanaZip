@@ -45,6 +45,7 @@ public:
   HRESULT Flush() throw();
   void FlushWithCheck();
 
+  Z7_FORCE_INLINE
   void WriteByte(Byte b)
   {
     UInt32 pos = _pos;
@@ -54,10 +55,34 @@ public:
     if (pos == _limitPos)
       FlushWithCheck();
   }
+  
   void WriteBytes(const void *data, size_t size)
   {
-    for (size_t i = 0; i < size; i++)
-      WriteByte(((const Byte *)data)[i]);
+    while (size)
+    {
+      UInt32 pos = _pos;
+      size_t cur = (size_t)(_limitPos - pos);
+      if (cur >= size)
+        cur = size;
+      size -= cur;
+      Byte *dest = _buf + pos;
+      pos += (UInt32)cur;
+      _pos = pos;
+#if 0
+      memcpy(dest, data, cur);
+      data = (const void *)((const Byte *)data + cur);
+#else
+      const Byte * const lim = (const Byte *)data + cur;
+      do
+      {
+        *dest++ = *(const Byte *)data;
+        data = (const void *)((const Byte *)data + 1);
+      }
+      while (data != lim);
+#endif
+      if (pos == _limitPos)
+        FlushWithCheck();
+    }
   }
 
   Byte *GetOutBuffer(size_t &avail)

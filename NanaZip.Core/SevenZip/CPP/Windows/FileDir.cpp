@@ -651,6 +651,35 @@ bool RemoveDirWithSubItems(const FString &path)
   return RemoveDir(path);
 }
 
+bool RemoveDirAlways_if_Empty(const FString &path)
+{
+  const DWORD attrib = NFind::GetFileAttrib(path);
+  if (attrib != INVALID_FILE_ATTRIBUTES
+      && (attrib & FILE_ATTRIBUTE_READONLY))
+  {
+    bool need_ClearAttrib = true;
+    if ((attrib & FILE_ATTRIBUTE_REPARSE_POINT) == 0)
+    {
+      FString s (path);
+      s.Add_PathSepar();
+      NFind::CEnumerator enumerator;
+      enumerator.SetDirPrefix(s);
+      NFind::CDirEntry fi;
+      if (enumerator.Next(fi))
+      {
+        // we don't want to change attributes, if there are files
+        // in directory, because RemoveDir(path) will fail.
+        need_ClearAttrib = false;
+        // SetLastError(ERROR_DIR_NOT_EMPTY);
+        // return false;
+      }
+    }
+    if (need_ClearAttrib)
+      SetFileAttrib(path, 0); // we clear read-only attrib to remove read-only dir
+  }
+  return RemoveDir(path);
+}
+
 #endif // _WIN32
 
 #ifdef UNDER_CE

@@ -33,6 +33,7 @@ public:
     _bitPos = 8;
     _curByte = 0;
   }
+  Z7_FORCE_INLINE
   void WriteBits(UInt32 value, unsigned numBits)
   {
     while (numBits > 0)

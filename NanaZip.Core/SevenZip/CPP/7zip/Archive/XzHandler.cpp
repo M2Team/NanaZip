@@ -446,7 +446,7 @@ void COpenCallbackWrap::Init(IArchiveOpenCallback *callback)
 struct CXzsCPP
 {
   CXzs p;
-  CXzsCPP() { Xzs_Construct(&p); }
+  CXzsCPP() { Xzs_CONSTRUCT(&p) }
   ~CXzsCPP() { Xzs_Free(&p, &g_Alloc); }
 };
 
@@ -536,6 +536,9 @@ HRESULT CHandler::Open2(IInStream *inStream, /* UInt32 flags, */ IArchiveOpenCal
 
         if (res2 == SZ_ERROR_ARCHIVE)
           return S_FALSE;
+        // what codes are possible here ?
+        // ?? res2 == SZ_ERROR_MEM           : is possible here
+        // ?? res2 == SZ_ERROR_UNSUPPORTED   : is possible here
       }
       else if (!isIndex)
       {
@@ -1159,6 +1162,13 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     */
 
     #ifndef Z7_ST
+
+#ifdef _WIN32
+    // we don't use chunk multithreading inside lzma2 stream.
+    // so we don't set xzProps.lzma2Props.numThreadGroups.
+    if (_numThreadGroups > 1)
+      xzProps.numThreadGroups = _numThreadGroups;
+#endif
     
     UInt32 numThreads = _numThreads;
 
@@ -1182,6 +1192,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
         // here we set the (NCoderPropID::kNumThreads) property in each method, only if there is no such property already
         CMultiMethodProps::SetMethodThreadsTo_IfNotFinded(oneMethodInfo, numThreads);
       }
+
+      // printf("\n====== GetProcessGroupAffinity : \n");
 
       UInt64 cs = _numSolidBytes;
       if (cs != XZ_PROPS_BLOCK_SIZE_AUTO)

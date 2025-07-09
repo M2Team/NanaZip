@@ -286,10 +286,10 @@ struct CItem
 
   bool IsService() const { return RecordType == NHeaderType::kService; }
   
-  bool Is_STM() const { return IsService() && Name == "STM"; }
-  bool Is_CMT() const { return IsService() && Name == "CMT"; }
-  bool Is_ACL() const { return IsService() && Name == "ACL"; }
-  // bool Is_QO()  const { return IsService() && Name == "QO"; }
+  bool Is_STM() const { return IsService() && Name.IsEqualTo("STM"); }
+  bool Is_CMT() const { return IsService() && Name.IsEqualTo("CMT"); }
+  bool Is_ACL() const { return IsService() && Name.IsEqualTo("ACL"); }
+  // bool Is_QO()  const { return IsService() && Name.IsEqualTo("QO"); }
 
   int FindExtra(unsigned extraID, unsigned &recordDataSize) const;
   void PrintInfo(AString &s) const;

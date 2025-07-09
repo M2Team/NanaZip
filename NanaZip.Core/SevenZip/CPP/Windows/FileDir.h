@@ -78,6 +78,11 @@ bool CreateComplexDir(CFSTR path);
 
 bool DeleteFileAlways(CFSTR name);
 bool RemoveDirWithSubItems(const FString &path);
+#ifdef _WIN32
+bool RemoveDirAlways_if_Empty(const FString &path);
+#else
+#define RemoveDirAlways_if_Empty RemoveDir
+#endif
 
 bool MyGetFullPathName(CFSTR path, FString &resFullPath);
 bool GetFullPathAndSplit(CFSTR path, FString &resDirPrefix, FString &resFileName);
