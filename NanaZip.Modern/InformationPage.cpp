@@ -7,27 +7,34 @@
 namespace winrt::NanaZip::Modern::implementation
 {
     InformationPage::InformationPage(
-        HWND windowHandle,
-        LPCWSTR title,
-        LPCWSTR text)
-        : m_WindowHandle(windowHandle),
-        m_Title(title),
-        m_Text(text)
+        HWND WindowHandle,
+        winrt::hstring WindowTitle,
+        winrt::hstring WindowContent) :
+        m_WindowHandle(WindowHandle),
+        m_WindowTitle(WindowTitle),
+        m_WindowContent(WindowContent)
     {
     }
 
     void InformationPage::InitializeComponent()
     {
         InformationPageT::InitializeComponent();
+
+        ::SetWindowTextW(
+            this->m_WindowHandle,
+            this->m_WindowTitle.c_str()
+        );
         
-        this->TitleTextBlock().Text(m_Title);
-        this->InformationTextBox().Text(m_Text);
+        this->TitleTextBlock().Text(this->m_WindowTitle);
+        this->InformationTextBox().Text(this->m_WindowContent);
     }
 
     void InformationPage::CloseButtonClickedHandler(
-        winrt::IInspectable const&,
-        winrt::RoutedEventArgs const&)
+        winrt::IInspectable const& sender,
+        winrt::RoutedEventArgs const& args)
     {
-        DestroyWindow(m_WindowHandle);
+        UNREFERENCED_PARAMETER(sender);
+        UNREFERENCED_PARAMETER(args);
+        DestroyWindow(this->m_WindowHandle);
     }
 }

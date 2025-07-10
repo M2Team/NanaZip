@@ -15,9 +15,9 @@ namespace winrt::NanaZip::Modern::implementation
     struct InformationPage : InformationPageT<InformationPage>
     {
         InformationPage(
-            HWND windowHandle,
-            LPCWSTR title,
-            LPCWSTR text);
+            _In_opt_ HWND WindowHandle,
+            winrt::hstring WindowTitle,
+            winrt::hstring WindowContent);
 
         void InitializeComponent();
 
@@ -27,7 +27,7 @@ namespace winrt::NanaZip::Modern::implementation
 
     private:
         HWND m_WindowHandle{ nullptr };
-        LPCWSTR m_Title{ nullptr };
-        LPCWSTR m_Text{ nullptr };
+        winrt::hstring m_WindowTitle;
+        winrt::hstring m_WindowContent;
     };
 }
