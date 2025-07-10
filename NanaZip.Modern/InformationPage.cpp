@@ -6,25 +6,23 @@
 
 namespace winrt::NanaZip::Modern::implementation
 {
-    InformationPage::InformationPage(HWND windowHandle)
-        : m_WindowHandle(windowHandle)
+    InformationPage::InformationPage(
+        HWND windowHandle,
+        LPCWSTR title,
+        LPCWSTR text)
+        : m_WindowHandle(windowHandle),
+        m_Title(title),
+        m_Text(text)
     {
     }
 
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        Text,
-        winrt::hstring,
-        winrt::NanaZip::Modern::implementation::InformationPage,
-        winrt::NanaZip::Modern::InformationPage,
-        L""
-    );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        Title,
-        winrt::hstring,
-        winrt::NanaZip::Modern::implementation::InformationPage,
-        winrt::NanaZip::Modern::InformationPage,
-        L"Information"
-    );
+    void InformationPage::InitializeComponent()
+    {
+        InformationPageT::InitializeComponent();
+        
+        this->TitleTextBlock().Text(m_Title);
+        this->InformationTextBox().Text(m_Text);
+    }
 
     void InformationPage::CloseButtonClickedHandler(
         winrt::IInspectable const&,

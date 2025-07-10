@@ -226,9 +226,9 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
         winrt::NanaZip::Modern::implementation::InformationPage;
 
     Interface Window = winrt::make<Implementation>(
-        WindowHandle);
-    Window.Text(Text);
-    Window.Title(Title);
+        WindowHandle,
+        Title,
+        Text);
 
     ::SetWindowTextW(
         WindowHandle,

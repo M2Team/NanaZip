@@ -14,19 +14,19 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <TextBlock
+      x:Name="TitleTextBlock"
       Margin="16,0"
       d:Text="[Information]"
       FontSize="24"
-      Style="{ThemeResource BaseTextBlockStyle}"
-      Text="{x:Bind Title, Mode=OneWay}" />
+      Style="{ThemeResource BaseTextBlockStyle}" />
     <TextBox
+      x:Name="InformationTextBox"
       Grid.Row="1"
       Margin="16,8,16,16"
       AcceptsReturn="True"
       IsReadOnly="True"
       ScrollViewer.HorizontalScrollBarVisibility="Auto"
-      ScrollViewer.VerticalScrollBarVisibility="Auto"
-      Text="{x:Bind Text, Mode=OneWay}">
+      ScrollViewer.VerticalScrollBarVisibility="Auto">
       <TextBox.SelectionFlyout>
         <TextCommandBarFlyout Placement="BottomEdgeAlignedLeft" />
       </TextBox.SelectionFlyout>

@@ -14,16 +14,12 @@ namespace winrt::NanaZip::Modern::implementation
 {
     struct InformationPage : InformationPageT<InformationPage>
     {
-        InformationPage(HWND windowHandle);
+        InformationPage(
+            HWND windowHandle,
+            LPCWSTR title,
+            LPCWSTR text);
 
-        DEPENDENCY_PROPERTY_HEADER(
-            Text,
-            winrt::hstring
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            Title,
-            winrt::hstring
-        );
+        void InitializeComponent();
 
         void CloseButtonClickedHandler(
             winrt::IInspectable const& sender,
@@ -31,12 +27,7 @@ namespace winrt::NanaZip::Modern::implementation
 
     private:
         HWND m_WindowHandle{ nullptr };
-    };
-}
-
-namespace winrt::NanaZip::Modern::factory_implementation
-{
-    struct InformationPage : InformationPageT<InformationPage, implementation::InformationPage>
-    {
+        LPCWSTR m_Title{ nullptr };
+        LPCWSTR m_Text{ nullptr };
     };
 }
