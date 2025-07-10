@@ -20,6 +20,7 @@ internal class Program
 
     static readonly ImmutableArray<ResourceMapping> map =
         [
+            new(408, "InformationPage", "CloseButton.Content", true)
         ];
 
     static readonly ImmutableArray<IGrouping<string, ResourceMapping>> Mappings

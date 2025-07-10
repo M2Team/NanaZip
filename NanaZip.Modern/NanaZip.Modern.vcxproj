@@ -61,6 +61,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="AddressBarTemplate.xaml" />
+    <Page Include="InformationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SponsorPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -81,6 +84,10 @@
     </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="InformationPage.idl">
+      <DependentUpon>InformationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
     <Midl Include="SponsorPage.idl">
       <DependentUpon>SponsorPage.xaml</DependentUpon>
@@ -108,6 +115,10 @@
       <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="ControlMacros.h" />
+    <ClInclude Include="InformationPage.h">
+      <DependentUpon>InformationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="NanaZip.Modern.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
@@ -137,6 +148,10 @@
   <ItemGroup>
     <ClCompile Include="AddressBarTemplate.cpp">
       <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="InformationPage.cpp">
+      <DependentUpon>InformationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
@@ -180,22 +195,101 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="Strings\af\InformationPage.resw" />
+    <PRIResource Include="Strings\ar\InformationPage.resw" />
+    <PRIResource Include="Strings\az-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\be\InformationPage.resw" />
+    <PRIResource Include="Strings\bg\InformationPage.resw" />
+    <PRIResource Include="Strings\bn\InformationPage.resw" />
+    <PRIResource Include="Strings\ca-es-valencia\InformationPage.resw" />
+    <PRIResource Include="Strings\ca\InformationPage.resw" />
+    <PRIResource Include="Strings\cs\InformationPage.resw" />
+    <PRIResource Include="Strings\cy\InformationPage.resw" />
+    <PRIResource Include="Strings\da\InformationPage.resw" />
+    <PRIResource Include="Strings\de\InformationPage.resw" />
     <PRIResource Include="Strings\de\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\de\SponsorPage.resw" />
+    <PRIResource Include="Strings\el\InformationPage.resw" />
     <PRIResource Include="Strings\el\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\el\SponsorPage.resw" />
+    <PRIResource Include="Strings\en\InformationPage.resw" />
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\en\SponsorPage.resw" />
+    <PRIResource Include="Strings\eo\InformationPage.resw" />
+    <PRIResource Include="Strings\es\InformationPage.resw" />
+    <PRIResource Include="Strings\et\InformationPage.resw" />
+    <PRIResource Include="Strings\eu\InformationPage.resw" />
+    <PRIResource Include="Strings\fa\InformationPage.resw" />
+    <PRIResource Include="Strings\fi\InformationPage.resw" />
+    <PRIResource Include="Strings\fr\InformationPage.resw" />
+    <PRIResource Include="Strings\fy\InformationPage.resw" />
+    <PRIResource Include="Strings\ga\InformationPage.resw" />
+    <PRIResource Include="Strings\gl\InformationPage.resw" />
+    <PRIResource Include="Strings\gu\InformationPage.resw" />
+    <PRIResource Include="Strings\he\InformationPage.resw" />
+    <PRIResource Include="Strings\hi\InformationPage.resw" />
+    <PRIResource Include="Strings\hr\InformationPage.resw" />
+    <PRIResource Include="Strings\hu\InformationPage.resw" />
     <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\hu\SponsorPage.resw" />
+    <PRIResource Include="Strings\hy\InformationPage.resw" />
+    <PRIResource Include="Strings\id\InformationPage.resw" />
+    <PRIResource Include="Strings\is\InformationPage.resw" />
+    <PRIResource Include="Strings\it\InformationPage.resw" />
+    <PRIResource Include="Strings\ja\InformationPage.resw" />
+    <PRIResource Include="Strings\ka\InformationPage.resw" />
+    <PRIResource Include="Strings\kk\InformationPage.resw" />
+    <PRIResource Include="Strings\ko\InformationPage.resw" />
+    <PRIResource Include="Strings\ku-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\ky-kg\InformationPage.resw" />
+    <PRIResource Include="Strings\lt\InformationPage.resw" />
+    <PRIResource Include="Strings\lv\InformationPage.resw" />
+    <PRIResource Include="Strings\mk\InformationPage.resw" />
+    <PRIResource Include="Strings\mn-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\mn-mong\InformationPage.resw" />
+    <PRIResource Include="Strings\mr\InformationPage.resw" />
+    <PRIResource Include="Strings\ms\InformationPage.resw" />
+    <PRIResource Include="Strings\nb\InformationPage.resw" />
+    <PRIResource Include="Strings\ne\InformationPage.resw" />
+    <PRIResource Include="Strings\nl\InformationPage.resw" />
+    <PRIResource Include="Strings\nn\InformationPage.resw" />
+    <PRIResource Include="Strings\pa-in\InformationPage.resw" />
+    <PRIResource Include="Strings\pl\InformationPage.resw" />
     <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\pl\SponsorPage.resw" />
+    <PRIResource Include="Strings\ps\InformationPage.resw" />
+    <PRIResource Include="Strings\pt-BR\InformationPage.resw" />
     <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\pt-BR\SponsorPage.resw" />
+    <PRIResource Include="Strings\pt\InformationPage.resw" />
+    <PRIResource Include="Strings\ro\InformationPage.resw" />
+    <PRIResource Include="Strings\ru\InformationPage.resw" />
+    <PRIResource Include="Strings\si\InformationPage.resw" />
+    <PRIResource Include="Strings\sk\InformationPage.resw" />
+    <PRIResource Include="Strings\sl\InformationPage.resw" />
+    <PRIResource Include="Strings\sq\InformationPage.resw" />
     <PRIResource Include="Strings\sq\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\sq\SponsorPage.resw" />
+    <PRIResource Include="Strings\sr-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\sr-Latn\InformationPage.resw" />
+    <PRIResource Include="Strings\sv\InformationPage.resw" />
+    <PRIResource Include="Strings\sw\InformationPage.resw" />
+    <PRIResource Include="Strings\ta\InformationPage.resw" />
+    <PRIResource Include="Strings\tg-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\th\InformationPage.resw" />
+    <PRIResource Include="Strings\tk-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\tr\InformationPage.resw" />
+    <PRIResource Include="Strings\tt-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\ug-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\uk\InformationPage.resw" />
+    <PRIResource Include="Strings\uz-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\uz-latn\InformationPage.resw" />
+    <PRIResource Include="Strings\vi\InformationPage.resw" />
+    <PRIResource Include="Strings\yo-latn\InformationPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\InformationPage.resw" />
     <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\zh-Hans\SponsorPage.resw" />
+    <PRIResource Include="Strings\zh-Hant\InformationPage.resw" />
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />

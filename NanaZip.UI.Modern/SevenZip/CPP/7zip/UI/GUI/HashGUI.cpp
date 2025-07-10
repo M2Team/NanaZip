@@ -18,6 +18,9 @@
 
 #include "HashGUI.h"
 
+#include <NanaZip.Modern.h>
+#include <string>
+
 using namespace NWindows;
 
 
@@ -327,6 +330,7 @@ HRESULT HashCalcGUI(
 
 void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
 {
+  /*
   CListViewDialog lv;
 
   FOR_VECTOR (i, propPairs)
@@ -342,6 +346,25 @@ void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
   lv.NumColumns = 2;
 
   lv.Create(hwnd);
+  */
+
+  std::wstring text;
+
+  FOR_VECTOR (i, propPairs)
+  {
+    if (!text.empty())
+      text += L"\n\n";
+    const CProperty &pair = propPairs[i];
+    text += pair.Name;
+    text += L"\n    ";
+    text += pair.Value;
+  }
+  
+  K7ModernShowInformationDialog(
+    hwnd,
+    LangString(IDS_CHECKSUM_INFORMATION).Ptr(),
+    text.c_str()
+  );
 }
 
 
