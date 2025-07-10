@@ -230,6 +230,11 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     Window.Text(Text);
     Window.Title(Title);
 
+    ::SetWindowTextW(
+        WindowHandle,
+        Title
+    );
+
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
         560,
