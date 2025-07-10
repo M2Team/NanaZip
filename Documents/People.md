@@ -7,6 +7,8 @@
 ## Development Team
 
 - AndromedaMelody, https://github.com/AndromedaMelody
+- dinhngtu, https://github.com/dinhngtu
+- Dongle, https://github.com/dongle-the-gadget
 - Kenji Mouri, https://github.com/MouriNaruto
 - Sakura Neko, https://github.com/SakuraNeko
 
@@ -30,13 +32,8 @@
 
 ## Contributors
 
-- Blueberryy, https://github.com/Blueberryy
-- ChuckMichael, https://github.com/ChuckMichael
-- dinhngtu, https://github.com/dinhngtu
-- Hen Ry, https://github.com/Henry2o1o
-- Maicol Battistini, https://github.com/maicol07
-- Manfredi, https://github.com/manfromarce
-- wallrik, https://github.com/wallrik
+Read https://github.com/M2Team/NanaZip/graphs/contributors for getting the
+contributors list.
 
 ## Special thanks
 
