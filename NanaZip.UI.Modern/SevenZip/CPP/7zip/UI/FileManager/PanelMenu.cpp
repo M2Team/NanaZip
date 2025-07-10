@@ -24,7 +24,6 @@
 #include "PropertyNameRes.h"
 
 #include <NanaZip.Modern.h>
-#include <regex>
 
 using namespace NWindows;
 

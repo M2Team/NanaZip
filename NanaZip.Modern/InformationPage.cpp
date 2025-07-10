@@ -26,7 +26,9 @@ namespace winrt::NanaZip::Modern::implementation
         L"Information"
     );
 
-    void InformationPage::CloseButtonClickedHandler(winrt::IInspectable const&, winrt::RoutedEventArgs const&)
+    void InformationPage::CloseButtonClickedHandler(
+        winrt::IInspectable const&,
+        winrt::RoutedEventArgs const&)
     {
         DestroyWindow(m_WindowHandle);
     }

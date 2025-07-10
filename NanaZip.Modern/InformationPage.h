@@ -25,7 +25,9 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::hstring
         );
 
-        void CloseButtonClickedHandler(winrt::IInspectable const& sender, winrt::RoutedEventArgs const& args);
+        void CloseButtonClickedHandler(
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& args);
 
     private:
         HWND m_WindowHandle{ nullptr };
