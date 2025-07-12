@@ -13,6 +13,18 @@ struct CMtf8Encoder
 
   unsigned FindAndMove(Byte v) throw()
   {
+#if 1
+    Byte b = Buf[0];
+    if (v == b)
+      return 0;
+    Buf[0] = v;
+    for (unsigned pos = 0;;)
+    {
+      Byte a;
+      a = Buf[++pos];  Buf[pos] = b;  if (v == a) return pos;
+      b = Buf[++pos];  Buf[pos] = a;  if (v == b) return pos;
+    }
+#else
     size_t pos;
     for (pos = 0; Buf[pos] != v; pos++);
     const unsigned resPos = (unsigned)pos;
@@ -31,6 +43,7 @@ struct CMtf8Encoder
       Buf[pos] = Buf[pos - 1];
     Buf[0] = v;
     return resPos;
+#endif
   }
 };
 

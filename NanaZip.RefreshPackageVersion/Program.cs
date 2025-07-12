@@ -6,7 +6,7 @@ namespace NanaZip.RefreshPackageVersion
 {
     internal class Program
     {
-        static (int Major, int Minor) Version = (5, 1);
+        static (int Major, int Minor) Version = (6, 0);
         static string BuildStartDay = "2021-08-31";
 
         static string GenerateVersionString()
@@ -152,15 +152,7 @@ namespace NanaZip.RefreshPackageVersion
 
             string NewContent = string.Empty;
             {
-                DirectoryInfo Folder = new DirectoryInfo(string.Format(
-                    @"{0}\NanaZipPackage\Strings",
-                    RepositoryRoot));
-                foreach (var item in Folder.GetDirectories())
-                {
-                    NewContent += string.Format(
-                        "    <Resource Language=\"{0}\" />\r\n",
-                        item.Name);
-                }
+                NewContent += "    <Resource Language=\"x-generate\"/>\r\n";
 
                 int[] Scales = [100, 125, 150, 200, 400];
                 foreach (var Scale in Scales)

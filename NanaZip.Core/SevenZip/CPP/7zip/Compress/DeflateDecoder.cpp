@@ -117,15 +117,13 @@ bool CCoder::ReadTables(void)
       if (_numDistLevels > kDistTableSize32)
         return false;
     
-    Byte levelLevels[kLevelTableSize];
-    for (unsigned i = 0; i < kLevelTableSize; i++)
-    {
-      const unsigned position = kCodeLengthAlphabetOrder[i];
-      if (i < numLevelCodes)
-        levelLevels[position] = (Byte)ReadBits(kLevelFieldSize);
-      else
-        levelLevels[position] = 0;
-    }
+    const unsigned kLevelTableSize_aligned4 = kLevelTableSize + 1;
+    Byte levelLevels[kLevelTableSize_aligned4];
+    memset (levelLevels, 0, sizeof(levelLevels));
+    unsigned i = 0;
+    do
+      levelLevels[kCodeLengthAlphabetOrder[i++]] = (Byte)ReadBits(kLevelFieldSize);
+    while (i != numLevelCodes);
     
     if (m_InBitStream.ExtraBitsWereRead())
       return false;

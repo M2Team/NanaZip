@@ -24,7 +24,7 @@ static bool IsSpaceChar(char c)
 int CXmlItem::FindProp(const char *propName) const throw()
 {
   FOR_VECTOR (i, Props)
-    if (Props[i].Name == propName)
+    if (Props[i].Name.IsEqualTo(propName))
       return (int)i;
   return -1;
 }
@@ -39,7 +39,7 @@ AString CXmlItem::GetPropVal(const char *propName) const
 
 bool CXmlItem::IsTagged(const char *tag) const throw()
 {
-  return (IsTag && Name == tag);
+  return (IsTag && Name.IsEqualTo(tag));
 }
 
 int CXmlItem::FindSubTag(const char *tag) const throw()

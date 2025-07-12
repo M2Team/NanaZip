@@ -96,6 +96,9 @@
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
+    <None Include="SevenZip\ASM\x86\Sort.asm">
+      <Filter>SevenZip\ASM\x86</Filter>
+    </None>
     <None Include="SevenZip\ASM\x86\XzCrc64Opt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
@@ -109,6 +112,9 @@
       <Filter>SevenZip\C</Filter>
     </None>
     <None Include="SevenZip\C\LzFindOpt.c">
+      <Filter>SevenZip\C</Filter>
+    </None>
+    <None Include="SevenZip\C\Sort.c">
       <Filter>SevenZip\C</Filter>
     </None>
     <None Include="SevenZip\C\XzCrc64Opt.c">
@@ -372,9 +378,6 @@
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\C\Ppmd8Enc.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\C\Sort.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\C\SwapBytes.c">

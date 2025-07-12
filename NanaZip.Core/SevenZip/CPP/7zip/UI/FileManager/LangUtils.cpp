@@ -319,15 +319,13 @@ void ReloadLang()
 {
   g_Lang.Clear();
   ReadRegLang(g_LangID);
-  #ifndef _UNICODE
-  if (g_IsNT)
-  #endif
+  if (g_LangID.IsEmpty())
   {
-    if (g_LangID.IsEmpty())
-    {
+#ifndef _UNICODE
+    if (g_IsNT)
+#endif
       OpenDefaultLang();
-      return;
-    }
+    return;
   }
   if (g_LangID.Len() > 1 || g_LangID[0] != L'-')
   {

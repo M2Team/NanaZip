@@ -68,7 +68,7 @@ namespace NItemType
   static const Byte kRootStorage = 5;
 }
 
-static const UInt32 kNameSizeMax = 64;
+static const unsigned kNameSizeMax = 64;
 
 struct CItem
 {
@@ -98,30 +98,30 @@ struct CRef
 
 class CDatabase
 {
-  UInt32 NumSectorsInMiniStream;
   CObjArray<UInt32> MiniSids;
 
   HRESULT AddNode(int parent, UInt32 did);
+
 public:
-
   CObjArray<UInt32> Fat;
-  UInt32 FatSize;
-  
   CObjArray<UInt32> Mat;
-  UInt32 MatSize;
-
   CObjectVector<CItem> Items;
   CRecordVector<CRef> Refs;
+private:
+  UInt32 NumSectorsInMiniStream;
+public:
+  UInt32 MatSize;
+  UInt32 FatSize;
 
   UInt32 LongStreamMinSize;
   unsigned SectorSizeBits;
   unsigned MiniSectorSizeBits;
 
   Int32 MainSubfile;
+  EType Type;
 
   UInt64 PhySize;
   UInt64 PhySize_Aligned;
-  EType Type;
 
   bool IsNotArcType() const
   {
@@ -148,14 +148,14 @@ public:
 
   UInt64 GetItemPackSize(UInt64 size) const
   {
-    UInt64 mask = ((UInt64)1 << (IsLargeStream(size) ? SectorSizeBits : MiniSectorSizeBits)) - 1;
+    const UInt64 mask = ((UInt32)1 << (IsLargeStream(size) ? SectorSizeBits : MiniSectorSizeBits)) - 1;
     return (size + mask) & ~mask;
   }
 
   bool GetMiniCluster(UInt32 sid, UInt64 &res) const
   {
-    unsigned subBits = SectorSizeBits - MiniSectorSizeBits;
-    UInt32 fid = sid >> subBits;
+    const unsigned subBits = SectorSizeBits - MiniSectorSizeBits;
+    const UInt32 fid = sid >> subBits;
     if (fid >= NumSectorsInMiniStream)
       return false;
     res = (((UInt64)MiniSids[fid] + 1) << subBits) + (sid & ((1 << subBits) - 1));
@@ -177,7 +177,7 @@ HRESULT CDatabase::ReadSector(IInStream *inStream, Byte *buf, unsigned sectorSiz
 HRESULT CDatabase::ReadIDs(IInStream *inStream, Byte *buf, unsigned sectorSizeBits, UInt32 sid, UInt32 *dest)
 {
   RINOK(ReadSector(inStream, buf, sectorSizeBits, sid))
-  UInt32 sectorSize = (UInt32)1 << sectorSizeBits;
+  const UInt32 sectorSize = (UInt32)1 << sectorSizeBits;
   for (UInt32 t = 0; t < sectorSize; t += 4)
     *dest++ = Get32(buf + t);
   return S_OK;
@@ -373,7 +373,7 @@ UString CDatabase::GetItemPath(UInt32 index) const
 HRESULT CDatabase::Update_PhySize_WithItem(unsigned index)
 {
   const CItem &item = Items[index];
-  bool isLargeStream = (index == 0 || IsLargeStream(item.Size));
+  const bool isLargeStream = (index == 0 || IsLargeStream(item.Size));
   if (!isLargeStream)
     return S_OK;
   const unsigned bsLog = isLargeStream ? SectorSizeBits : MiniSectorSizeBits;
@@ -527,6 +527,10 @@ HRESULT CDatabase::Open(IInStream *inStream)
       {
         CItem item;
         item.Parse(sect + i, mode64bit);
+        // we use (item.Size) check here.
+        // so we don't need additional overflow checks for (item.Size +) in another code
+        if (item.Size >= ((UInt64)1 << 63))
+          return S_FALSE;
         Items.Add(item);
       }
       sid = Fat[sid];
@@ -767,11 +771,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
   
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
 
   for (i = 0; i < numItems; i++)
@@ -781,7 +782,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(lps->SetCur())
     const UInt32 index = allFilesMode ? i : indices[i];
     const CItem &item = _db.Items[_db.Refs[index].Did];
-
+    Int32 res;
+   {
     CMyComPtr<ISequentialOutStream> outStream;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
@@ -801,7 +803,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     if (!testMode && !outStream)
       continue;
     RINOK(extractCallback->PrepareOperation(askMode))
-    Int32 res = NExtract::NOperationResult::kDataError;
+    res = NExtract::NOperationResult::kDataError;
     CMyComPtr<ISequentialInStream> inStream;
     HRESULT hres = GetStream(index, &inStream);
     if (hres == S_FALSE)
@@ -813,12 +815,12 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       RINOK(hres)
       if (inStream)
       {
-        RINOK(copyCoder->Code(inStream, outStream, NULL, NULL, progress))
-        if (copyCoderSpec->TotalSize == item.Size)
+        RINOK(copyCoder.Interface()->Code(inStream, outStream, NULL, NULL, lps))
+        if (copyCoder->TotalSize == item.Size)
           res = NExtract::NOperationResult::kOK;
       }
     }
-    outStream.Release();
+   }
     RINOK(extractCallback->SetOperationResult(res))
   }
   return S_OK;

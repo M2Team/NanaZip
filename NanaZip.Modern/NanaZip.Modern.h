@@ -24,4 +24,9 @@ EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
     _In_ HWND ParentWindowHandle,
     _In_ HMENU MoreMenuHandle);
 
+EXTERN_C INT WINAPI K7ModernShowInformationDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_opt_ LPCWSTR Text);
+
 #endif // !NANAZIP_MODERN_EXPERIENCE

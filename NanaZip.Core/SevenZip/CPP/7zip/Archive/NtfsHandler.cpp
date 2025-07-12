@@ -1907,7 +1907,7 @@ HRESULT CDatabase::Open()
   for (i = 0; i < SecurityAttrs.Size(); i++)
   {
     const CAttr &attr = SecurityAttrs[i];
-    if (attr.Name == L"$SII")
+    if (attr.Name.IsEqualTo("$SII"))
     {
       if (attr.Type == ATTR_TYPE_INDEX_ROOT)
       {

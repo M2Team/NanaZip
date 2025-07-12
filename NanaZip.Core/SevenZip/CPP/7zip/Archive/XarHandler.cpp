@@ -266,7 +266,7 @@ struct CFile
 
   bool IsCopyMethod() const
   {
-    return Method.IsEmpty() || Method == "octet-stream";
+    return Method.IsEmpty() || Method.IsEqualTo("octet-stream");
   }
 
   void UpdateTotalPackSize(UInt64 &totalSize) const
@@ -416,7 +416,7 @@ static bool AddItem(const CXmlItem &item, CObjectVector<CFile> &files, int paren
     return true;
   if (level >= 1024)
     return false;
-  if (item.Name == "file")
+  if (item.Name.IsEqualTo("file"))
   {
     CFile file(parent);
     parent = (int)files.Size();
@@ -435,19 +435,19 @@ static bool AddItem(const CXmlItem &item, CObjectVector<CFile> &files, int paren
       {
         file.Type = typeItem->GetSubString();
         // file.LinkFrom = typeItem->GetPropVal("link");
-        if (file.Type == "directory")
+        if (file.Type.IsEqualTo("directory"))
           file.IsDir = true;
         else
         {
           // file.IsDir = false;
           /*
-          else if (file.Type == "file")
+          else if (file.Type.IsEqualTo("file"))
           {}
-          else if (file.Type == "hardlink")
+          else if (file.Type.IsEqualTo("hardlink"))
           {}
           else
           */
-          if (file.Type == "symlink")
+          if (file.Type.IsEqualTo("symlink"))
             file.Is_SymLink = true;
           // file.IsDir = false;
         }
@@ -489,7 +489,7 @@ static bool AddItem(const CXmlItem &item, CObjectVector<CFile> &files, int paren
             if (s.IsPrefixedBy(xx))
             {
               s.DeleteFrontal(xx.Len());
-              if (s == "gzip")
+              if (s.IsEqualTo("gzip"))
                 s = METHOD_NAME_ZLIB;
             }
           }
@@ -692,12 +692,13 @@ HRESULT CHandler::Open2(IInStream *stream)
     file.UpdateTotalPackSize(totalPackSize);
     if (file.Parent == -1)
     {
-      if (file.Name == "Payload" || file.Name == "Content")
+      if (file.Name.IsEqualTo("Payload") ||
+          file.Name.IsEqualTo("Content"))
       {
         _mainSubfile = (Int32)(int)i;
         numMainFiles++;
       }
-      else if (file.Name == "PackageInfo")
+      else if (file.Name.IsEqualTo("PackageInfo"))
         _is_pkg = true;
     }
   }
@@ -1210,9 +1211,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           else
             opRes = NExtract::NOperationResult::kUnsupportedMethod;
         }
-        else if (item.Method == METHOD_NAME_ZLIB)
+        else if (item.Method.IsEqualTo(METHOD_NAME_ZLIB))
           coder = zlibCoder;
-        else if (item.Method == "bzip2")
+        else if (item.Method.IsEqualTo("bzip2"))
           coder = bzip2Coder;
         else
           opRes = NExtract::NOperationResult::kUnsupportedMethod;

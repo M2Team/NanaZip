@@ -6,17 +6,19 @@
 #include "../../../C/BwtSort.h"
 #include "../../../C/HuffEnc.h"
 
-#include "BZip2Crc.h"
 #include "BZip2Encoder.h"
-#include "Mtf8.h"
 
 namespace NCompress {
 namespace NBZip2 {
 
-const unsigned kMaxHuffmanLenForEncoding = 16; // it must be < kMaxHuffmanLen = 20
-
-static const UInt32 kBufferSize = (1 << 17);
+#define HUFFMAN_LEN 16
+#if HUFFMAN_LEN > Z7_HUFFMAN_LEN_MAX
+  #error Stop_Compiling_Bad_HUFFMAN_LEN_BZip2Encoder
+#endif
+  
+static const size_t kBufferSize = 1 << 17;
 static const unsigned kNumHuffPasses = 4;
+
 
 bool CThreadInfo::Alloc()
 {
@@ -27,11 +29,15 @@ bool CThreadInfo::Alloc()
       return false;
   }
 
-  if (!m_Block)
+  if (!m_Block_Base)
   {
-    m_Block = (Byte *)::MidAlloc(kBlockSizeMax * 5 + kBlockSizeMax / 10 + (20 << 10));
-    if (!m_Block)
+    const unsigned kPadSize = 1 << 7; // we need at least 1 byte backward padding, becuase we use (m_Block - 1) pointer;
+    m_Block_Base = (Byte *)::MidAlloc(kBlockSizeMax * 5
+        + kBlockSizeMax / 10 + (20 << 10)
+        + kPadSize);
+    if (!m_Block_Base)
       return false;
+    m_Block = m_Block_Base + kPadSize;
     m_MtfArray = m_Block + kBlockSizeMax;
     m_TempArray = m_MtfArray + kBlockSizeMax * 2 + 2;
   }
@@ -42,8 +48,8 @@ void CThreadInfo::Free()
 {
   ::BigFree(m_BlockSorterIndex);
   m_BlockSorterIndex = NULL;
-  ::MidFree(m_Block);
-  m_Block = NULL;
+  ::MidFree(m_Block_Base);
+  m_Block_Base = NULL;
 }
 
 #ifndef Z7_ST
@@ -60,6 +66,14 @@ HRESULT CThreadInfo::Create()
   if (wres == 0) { wres = CanWriteEvent.Create();
   if (wres == 0)
   {
+#ifdef _WIN32
+    if (Encoder->_props.NumThreadGroups != 0)
+    {
+       const UInt32 group = ThreadNextGroup_GetNext(&Encoder->ThreadNextGroup);
+      wres = Thread.Create_With_Group(MFThread, this, group, 0); // affinity
+    }
+    else
+#endif
     if (Encoder->_props.Affinity != 0)
       wres = Thread.Create_With_Affinity(MFThread, this, (CAffinityMask)Encoder->_props.Affinity);
     else
@@ -216,94 +230,251 @@ void CEncoder::Free()
 }
 #endif
 
+struct CRleEncoder
+{
+  const Byte *_src;
+  const Byte *_srcLim;
+  Byte *_dest;
+  const Byte *_destLim;
+  Byte _prevByte;
+  unsigned _numReps;
+
+  void Encode();
+};
+
+Z7_NO_INLINE
+void CRleEncoder::Encode()
+{
+  const Byte *src = _src;
+  const Byte * const srcLim = _srcLim;
+  Byte *dest = _dest;
+  const Byte * const destLim = _destLim;
+  Byte prev = _prevByte;
+  unsigned numReps = _numReps;
+  // (dest < destLim)
+  // src = srcLim; // for debug
+  while (dest < destLim)
+  {
+    if (src == srcLim)
+      break;
+    const Byte b = *src++;
+    if (b != prev)
+    {
+      if (numReps >= kRleModeRepSize)
+        *dest++ = (Byte)(numReps - kRleModeRepSize);
+      *dest++ = b;
+      numReps = 1;
+      prev = b;
+      /*
+      { // speed optimization code:
+        if (dest >= destLim || src == srcLim)
+          break;
+        const Byte b2 = *src++;
+        *dest++ = b2;
+        numReps += (prev == b2);
+        prev = b2;
+      }
+      */
+      continue;
+    }
+    numReps++;
+    if (numReps <= kRleModeRepSize)
+      *dest++ = b;
+    else if (numReps == kRleModeRepSize + 255)
+    {
+      *dest++ = (Byte)(numReps - kRleModeRepSize);
+      numReps = 0;
+    }
+  }
+  _src = src;
+  _dest = dest;
+  _prevByte = prev;
+  _numReps = numReps;
+  // (dest <= destLim + 1)
+}
+
+
+// out: return value is blockSize: size of data filled in buffer[]:
+// (returned_blockSize <= _props.BlockSizeMult * kBlockSizeStep)
 UInt32 CEncoder::ReadRleBlock(Byte *buffer)
 {
+  CRleEncoder rle;
   UInt32 i = 0;
-  Byte prevByte;
-  if (m_InStream.ReadByte(prevByte))
+  if (m_InStream.ReadByte(rle._prevByte))
   {
     NumBlocks++;
-    const UInt32 blockSize = _props.BlockSizeMult * kBlockSizeStep - 1;
-    unsigned numReps = 1;
-    buffer[i++] = prevByte;
-    while (i < blockSize) // "- 1" to support RLE
+    const UInt32 blockSize = _props.BlockSizeMult * kBlockSizeStep - 1; // -1 for RLE
+    rle._destLim = buffer + blockSize;
+    rle._numReps = 1;
+    buffer[i++] = rle._prevByte;
+    while (i < blockSize)
     {
-      Byte b;
-      if (!m_InStream.ReadByte(b))
+      rle._dest = buffer + i;
+      size_t rem;
+      const Byte * const ptr = m_InStream.Lookahead(rem);
+      if (rem == 0)
         break;
-      if (b != prevByte)
-      {
-        if (numReps >= kRleModeRepSize)
-          buffer[i++] = (Byte)(numReps - kRleModeRepSize);
-        buffer[i++] = b;
-        numReps = 1;
-        prevByte = b;
-        continue;
-      }
-      numReps++;
-      if (numReps <= kRleModeRepSize)
-        buffer[i++] = b;
-      else if (numReps == kRleModeRepSize + 255)
-      {
-        buffer[i++] = (Byte)(numReps - kRleModeRepSize);
-        numReps = 0;
-      }
+      rle._src = ptr;
+      rle._srcLim = ptr + rem;
+      rle.Encode();
+      m_InStream.Skip((size_t)(rle._src - ptr));
+      i = (UInt32)(size_t)(rle._dest - buffer);
+      // (i <= blockSize + 1)
     }
-    // it's to support original BZip2 decoder
-    if (numReps >= kRleModeRepSize)
-      buffer[i++] = (Byte)(numReps - kRleModeRepSize);
+    const int n = (int)rle._numReps - (int)kRleModeRepSize;
+    if (n >= 0)
+      buffer[i++] = (Byte)n;
   }
   return i;
 }
 
-void CThreadInfo::WriteBits2(UInt32 value, unsigned numBits) { m_OutStreamCurrent->WriteBits(value, numBits); }
-void CThreadInfo::WriteByte2(Byte b) { WriteBits2(b, 8); }
-void CThreadInfo::WriteBit2(Byte v) { WriteBits2(v, 1); }
-void CThreadInfo::WriteCrc2(UInt32 v)
-{
-  for (unsigned i = 0; i < 4; i++)
-    WriteByte2(((Byte)(v >> (24 - i * 8))));
+
+
+Z7_NO_INLINE
+void CThreadInfo::WriteBits2(UInt32 value, unsigned numBits)
+  { m_OutStreamCurrent.WriteBits(value, numBits); }
+/*
+Z7_NO_INLINE
+void CThreadInfo::WriteByte2(unsigned b)
+  { m_OutStreamCurrent.WriteByte(b); }
+*/
+// void CEncoder::WriteBits(UInt32 value, unsigned numBits) { m_OutStream.WriteBits(value, numBits); }
+Z7_NO_INLINE
+void CEncoder::WriteByte(Byte b) { m_OutStream.WriteByte(b); }
+
+
+#define WRITE_BITS_UPDATE(value, numBits) \
+{ \
+  numBits -= _bitPos; \
+  const UInt32 hi = value >> numBits; \
+  *_buf++ = (Byte)(_curByte | hi); \
+  value -= hi << numBits; \
+  _bitPos = 8; \
+  _curByte = 0; \
 }
 
-void CEncoder::WriteBits(UInt32 value, unsigned numBits) { m_OutStream.WriteBits(value, numBits); }
-void CEncoder::WriteByte(Byte b) { WriteBits(b, 8); }
-// void CEncoder::WriteBit(Byte v) { WriteBits(v, 1); }
-void CEncoder::WriteCrc(UInt32 v)
-{
-  for (unsigned i = 0; i < 4; i++)
-    WriteByte(((Byte)(v >> (24 - i * 8))));
+#if HUFFMAN_LEN > 16
+
+#define WRITE_BITS_HUFF(value2, numBits2) \
+{ \
+  UInt32 value = value2; \
+  unsigned numBits = numBits2; \
+  while (numBits >= _bitPos) { \
+    WRITE_BITS_UPDATE(value, numBits) \
+  } \
+  _bitPos -= numBits; \
+  _curByte |= (value << _bitPos); \
+}
+
+#else // HUFFMAN_LEN <= 16
+
+// numBits2 <= 16 is supported
+#define WRITE_BITS_HUFF(value2, numBits2) \
+{ \
+  UInt32 value = value2; \
+  unsigned numBits = numBits2; \
+  if (numBits >= _bitPos) \
+  { \
+    WRITE_BITS_UPDATE(value, numBits) \
+    if (numBits >= _bitPos) \
+    { \
+      numBits -= _bitPos; \
+      const UInt32 hi = value >> numBits; \
+      *_buf++ = (Byte)hi; \
+      value -= hi << numBits; \
+    } \
+  } \
+  _bitPos -= numBits; \
+  _curByte |= (value << _bitPos); \
+}
+
+#endif
+
+#define WRITE_BITS_8(value2, numBits2) \
+{ \
+  UInt32 value = value2; \
+  unsigned numBits = numBits2; \
+  if (numBits >= _bitPos) \
+  { \
+    WRITE_BITS_UPDATE(value, numBits) \
+  } \
+  _bitPos -= numBits; \
+  _curByte |= (value << _bitPos); \
+}
+
+#define WRITE_BIT_PRE \
+  { _bitPos--; }
+
+#define WRITE_BIT_POST \
+{ \
+  if (_bitPos == 0) \
+  { \
+    *_buf++ = (Byte)_curByte; \
+    _curByte = 0; \
+    _bitPos = 8; \
+  } \
+}
+
+#define WRITE_BIT_0 \
+{ \
+  WRITE_BIT_PRE \
+  WRITE_BIT_POST \
+}
+
+#define WRITE_BIT_1 \
+{ \
+  WRITE_BIT_PRE \
+  _curByte |= 1u << _bitPos; \
+  WRITE_BIT_POST \
 }
 
 
 // blockSize > 0
 void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
 {
-  WriteBit2(0); // Randomised = false
-  
+  // WriteBit2(0); // Randomised = false
   {
-    UInt32 origPtr = BlockSort(m_BlockSorterIndex, block, blockSize);
+    const UInt32 origPtr = BlockSort(m_BlockSorterIndex, block, blockSize);
     // if (m_BlockSorterIndex[origPtr] != 0) throw 1;
     m_BlockSorterIndex[origPtr] = blockSize;
-    WriteBits2(origPtr, kNumOrigBits);
+    WriteBits2(origPtr, kNumOrigBits + 1); // + 1 for additional high bit flag (Randomised = false)
   }
-
-  CMtf8Encoder mtf;
-  unsigned numInUse = 0;
+  Byte mtfBuf[256];
+  // memset(mtfBuf, 0, sizeof(mtfBuf)); // to disable MSVC warning
+  unsigned numInUse;
   {
     Byte inUse[256];
     Byte inUse16[16];
-    UInt32 i;
+    unsigned i;
     for (i = 0; i < 256; i++)
       inUse[i] = 0;
     for (i = 0; i < 16; i++)
       inUse16[i] = 0;
-    for (i = 0; i < blockSize; i++)
-      inUse[block[i]] = 1;
+    {
+      const Byte *       cur = block;
+      block = block + (size_t)blockSize - 1;
+      if (cur != block)
+      {
+        do
+        {
+          const unsigned b0 = cur[0];
+          const unsigned b1 = cur[1];
+          cur += 2;
+          inUse[b0] = 1;
+          inUse[b1] = 1;
+        }
+        while (cur < block);
+      }
+      if (cur == block)
+        inUse[cur[0]] = 1;
+      block -= blockSize; // block pointer is (original_block - 1)
+    }
+    numInUse = 0;
     for (i = 0; i < 256; i++)
       if (inUse[i])
       {
         inUse16[i >> 4] = 1;
-        mtf.Buf[numInUse++] = (Byte)i;
+        mtfBuf[numInUse++] = (Byte)i;
       }
     for (i = 0; i < 16; i++)
       WriteBit2(inUse16[i]);
@@ -311,64 +482,87 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
       if (inUse16[i >> 4])
         WriteBit2(inUse[i]);
   }
-  unsigned alphaSize = numInUse + 2;
+  const unsigned alphaSize = numInUse + 2;
 
-  Byte *mtfs = m_MtfArray;
-  UInt32 mtfArraySize = 0;
   UInt32 symbolCounts[kMaxAlphaSize];
   {
     for (unsigned i = 0; i < kMaxAlphaSize; i++)
       symbolCounts[i] = 0;
+    symbolCounts[(size_t)alphaSize - 1] = 1;
   }
 
+  Byte *mtfs = m_MtfArray;
   {
-    UInt32 rleSize = 0;
-    UInt32 i = 0;
     const UInt32 *bsIndex = m_BlockSorterIndex;
-    block--;
+    const UInt32 *bsIndex_rle = bsIndex;
+    const UInt32 * const bsIndex_end = bsIndex + blockSize;
+    // block--; // backward fix
+    // block pointer is (original_block - 1)
     do
     {
-      unsigned pos = mtf.FindAndMove(block[bsIndex[i]]);
-      if (pos == 0)
-        rleSize++;
-      else
+      const Byte v = block[*bsIndex++];
+      Byte a = mtfBuf[0];
+      if (v != a)
       {
-        while (rleSize != 0)
+        mtfBuf[0] = v;
         {
-          rleSize--;
-          mtfs[mtfArraySize++] = (Byte)(rleSize & 1);
-          symbolCounts[rleSize & 1]++;
-          rleSize >>= 1;
+          UInt32 rleSize = (UInt32)(size_t)(bsIndex - bsIndex_rle) - 1;
+          bsIndex_rle = bsIndex;
+          while (rleSize)
+          {
+            const unsigned sym = (unsigned)(--rleSize & 1);
+            *mtfs++ = (Byte)sym;
+            symbolCounts[sym]++;
+            rleSize >>= 1;
+          }
         }
-        if (pos >= 0xFE)
-        {
-          mtfs[mtfArraySize++] = 0xFF;
-          mtfs[mtfArraySize++] = (Byte)(pos - 0xFE);
-        }
+        unsigned pos1 = 2; // = real_pos + 1
+        Byte b;
+               b = mtfBuf[1];  mtfBuf[1] = a;  if (v != b)
+             { a = mtfBuf[2];  mtfBuf[2] = b;  if (v == a) pos1 = 3;
+        else { b = mtfBuf[3];  mtfBuf[3] = a;  if (v == b) pos1 = 4;
         else
-          mtfs[mtfArraySize++] = (Byte)(pos + 1);
-        symbolCounts[(size_t)pos + 1]++;
+        {
+          Byte *m = mtfBuf + 7;
+          for (;;)
+          {
+            a = m[-3];  m[-3] = b;           if (v == a) { pos1 = (unsigned)(size_t)(m - (mtfBuf + 2)); break; }
+            b = m[-2];  m[-2] = a;           if (v == b) { pos1 = (unsigned)(size_t)(m - (mtfBuf + 1)); break; }
+            a = m[-1];  m[-1] = b;           if (v == a) { pos1 = (unsigned)(size_t)(m - (mtfBuf    )); break; }
+            b = m[ 0];  m[ 0] = a;  m += 4;  if (v == b) { pos1 = (unsigned)(size_t)(m - (mtfBuf + 3)); break; }
+          }
+        }}}
+        symbolCounts[pos1]++;
+        if (pos1 >= 0xff)
+        {
+          *mtfs++ = 0xff;
+          // pos1 -= 0xff;
+          pos1++; // we need only low byte
+        }
+        *mtfs++ = (Byte)pos1;
       }
     }
-    while (++i < blockSize);
+    while (bsIndex < bsIndex_end);
 
-    while (rleSize != 0)
+    UInt32 rleSize = (UInt32)(size_t)(bsIndex - bsIndex_rle);
+    while (rleSize)
     {
-      rleSize--;
-      mtfs[mtfArraySize++] = (Byte)(rleSize & 1);
-      symbolCounts[rleSize & 1]++;
+      const unsigned sym = (unsigned)(--rleSize & 1);
+      *mtfs++ = (Byte)sym;
+      symbolCounts[sym]++;
       rleSize >>= 1;
     }
-
-    if (alphaSize < 256)
-      mtfs[mtfArraySize++] = (Byte)(alphaSize - 1);
-    else
+    
+    unsigned d = alphaSize - 1;
+    if (alphaSize >= 256)
     {
-      mtfs[mtfArraySize++] = 0xFF;
-      mtfs[mtfArraySize++] = (Byte)(alphaSize - 256);
+      *mtfs++ = 0xff;
+      d = alphaSize; // (-256)
     }
-    symbolCounts[(size_t)alphaSize - 1]++;
+    *mtfs++ = (Byte)d;
   }
+
+  const Byte * const mtf_lim = mtfs;
 
   UInt32 numSymbols = 0;
   {
@@ -378,34 +572,30 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
 
   unsigned bestNumTables = kNumTablesMin;
   UInt32 bestPrice = 0xFFFFFFFF;
-  UInt32 startPos = m_OutStreamCurrent->GetPos();
-  Byte startCurByte = m_OutStreamCurrent->GetCurByte();
+  const UInt32 startPos = m_OutStreamCurrent.GetPos();
+  const unsigned startCurByte = m_OutStreamCurrent.GetCurByte();
   for (unsigned nt = kNumTablesMin; nt <= kNumTablesMax + 1; nt++)
   {
     unsigned numTables;
 
     if (m_OptimizeNumTables)
     {
-      m_OutStreamCurrent->SetPos(startPos);
-      m_OutStreamCurrent->SetCurState((startPos & 7), startCurByte);
-      if (nt <= kNumTablesMax)
-        numTables = nt;
-      else
-        numTables = bestNumTables;
+      m_OutStreamCurrent.SetPos(startPos);
+      m_OutStreamCurrent.SetCurState(startPos & 7, startCurByte);
+      numTables = (nt <= kNumTablesMax ? nt : bestNumTables);
     }
     else
     {
-      if (numSymbols < 200)  numTables = 2;
-      else if (numSymbols < 600) numTables = 3;
+           if (numSymbols <  200) numTables = 2;
+      else if (numSymbols <  600) numTables = 3;
       else if (numSymbols < 1200) numTables = 4;
       else if (numSymbols < 2400) numTables = 5;
-      else numTables = 6;
+      else                        numTables = 6;
     }
 
     WriteBits2(numTables, kNumTablesBits);
-    
-    UInt32 numSelectors = (numSymbols + kGroupSize - 1) / kGroupSize;
-    WriteBits2(numSelectors, kNumSelectorsBits);
+    const unsigned numSelectors = (numSymbols + kGroupSize - 1) / kGroupSize;
+    WriteBits2((UInt32)numSelectors, kNumSelectorsBits);
     
     {
       UInt32 remFreq = numSymbols;
@@ -436,28 +626,23 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
     
     for (unsigned pass = 0; pass < kNumHuffPasses; pass++)
     {
+      memset(Freqs, 0, sizeof(Freqs[0]) * numTables);
+      // memset(Freqs, 0, sizeof(Freqs));
       {
-        unsigned t = 0;
-        do
-          memset(Freqs[t], 0, sizeof(Freqs[t]));
-        while (++t < numTables);
-      }
-      
-      {
-        UInt32 mtfPos = 0;
+        mtfs = m_MtfArray;
         UInt32 g = 0;
         do
         {
-          UInt32 symbols[kGroupSize];
+          unsigned symbols[kGroupSize];
           unsigned i = 0;
           do
           {
-            UInt32 symbol = mtfs[mtfPos++];
+            UInt32 symbol = *mtfs++;
             if (symbol >= 0xFF)
-              symbol += mtfs[mtfPos++];
+              symbol += *mtfs++;
             symbols[i] = symbol;
           }
-          while (++i < kGroupSize && mtfPos < mtfArraySize);
+          while (++i < kGroupSize && mtfs < mtf_lim);
           
           UInt32 bestPrice2 = 0xFFFFFFFF;
           unsigned t = 0;
@@ -482,7 +667,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
             freqs[symbols[j]]++;
           while (++j < i);
         }
-        while (mtfPos < mtfArraySize);
+        while (mtfs < mtf_lim);
       }
       
       unsigned t = 0;
@@ -494,11 +679,15 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
           if (freqs[i] == 0)
             freqs[i] = 1;
         while (++i < alphaSize);
-        Huffman_Generate(freqs, Codes[t], Lens[t], kMaxAlphaSize, kMaxHuffmanLenForEncoding);
+        Huffman_Generate(freqs, Codes[t], Lens[t], kMaxAlphaSize, HUFFMAN_LEN);
       }
       while (++t < numTables);
     }
     
+    unsigned _bitPos;  // 0 < _bitPos <= 8 : number of non-filled low bits in _curByte
+    unsigned _curByte; // low (_bitPos) bits are zeros
+                       // high (8 - _bitPos) bits are filled
+    Byte *_buf;
     {
       Byte mtfSel[kNumTablesMax];
       {
@@ -507,81 +696,97 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
           mtfSel[t] = (Byte)t;
         while (++t < numTables);
       }
+
+      _bitPos = m_OutStreamCurrent._bitPos;
+      _curByte = m_OutStreamCurrent._curByte;
+      _buf = m_OutStreamCurrent._buf;
+      // stream.Init_from_Global(m_OutStreamCurrent);
       
-      UInt32 i = 0;
+      const Byte *selectors = m_Selectors;
+      const Byte * const selectors_lim = selectors + numSelectors;
+      Byte prev = 0; // mtfSel[0];
       do
       {
-        Byte sel = m_Selectors[i];
-        unsigned pos;
-        for (pos = 0; mtfSel[pos] != sel; pos++)
-          WriteBit2(1);
-        WriteBit2(0);
-        for (; pos > 0; pos--)
-          mtfSel[pos] = mtfSel[(size_t)pos - 1];
-        mtfSel[0] = sel;
+        const Byte sel = *selectors++;
+        if (prev != sel)
+        {
+          Byte *mtfSel_cur = &mtfSel[1];
+          for (;;)
+          {
+            WRITE_BIT_1
+            const Byte next = *mtfSel_cur;
+            *mtfSel_cur++ = prev;
+            prev = next;
+            if (next == sel)
+              break;
+          }
+          // mtfSel[0] = sel;
+        }
+        WRITE_BIT_0
       }
-      while (++i < numSelectors);
+      while (selectors != selectors_lim);
     }
-    
     {
       unsigned t = 0;
       do
       {
         const Byte *lens = Lens[t];
-        UInt32 len = lens[0];
-        WriteBits2(len, kNumLevelsBits);
+        unsigned len = lens[0];
+        WRITE_BITS_8(len, kNumLevelsBits)
         unsigned i = 0;
         do
         {
-          UInt32 level = lens[i];
+          const unsigned level = lens[i];
           while (len != level)
           {
-            WriteBit2(1);
+            WRITE_BIT_1
             if (len < level)
             {
-              WriteBit2(0);
               len++;
+              WRITE_BIT_0
             }
             else
             {
-              WriteBit2(1);
               len--;
+              WRITE_BIT_1
             }
           }
-          WriteBit2(0);
+          WRITE_BIT_0
         }
         while (++i < alphaSize);
       }
       while (++t < numTables);
     }
-    
     {
-      UInt32 groupSize = 0;
-      UInt32 groupIndex = 0;
+      UInt32 groupSize = 1;
+      const Byte *selectors = m_Selectors;
       const Byte *lens = NULL;
       const UInt32 *codes = NULL;
-      UInt32 mtfPos = 0;
+      mtfs = m_MtfArray;
       do
       {
-        UInt32 symbol = mtfs[mtfPos++];
+        unsigned symbol = *mtfs++;
         if (symbol >= 0xFF)
-          symbol += mtfs[mtfPos++];
-        if (groupSize == 0)
+          symbol += *mtfs++;
+        if (--groupSize == 0)
         {
           groupSize = kGroupSize;
-          unsigned t = m_Selectors[groupIndex++];
+          const unsigned t = *selectors++;
           lens = Lens[t];
           codes = Codes[t];
         }
-        groupSize--;
-        m_OutStreamCurrent->WriteBits(codes[symbol], lens[symbol]);
+        WRITE_BITS_HUFF(codes[symbol], lens[symbol])
       }
-      while (mtfPos < mtfArraySize);
+      while (mtfs < mtf_lim);
     }
+    // Restore_from_Local:
+    m_OutStreamCurrent._bitPos = _bitPos;
+    m_OutStreamCurrent._curByte = _curByte;
+    m_OutStreamCurrent._buf = _buf;
 
     if (!m_OptimizeNumTables)
       break;
-    UInt32 price = m_OutStreamCurrent->GetPos() - startPos;
+    const UInt32 price = m_OutStreamCurrent.GetPos() - startPos;
     if (price <= bestPrice)
     {
       if (nt == kNumTablesMax)
@@ -591,6 +796,7 @@ void CThreadInfo::EncodeBlock(const Byte *block, UInt32 blockSize)
     }
   }
 }
+
 
 // blockSize > 0
 UInt32 CThreadInfo::EncodeBlockWithHeaders(const Byte *block, UInt32 blockSize)
@@ -603,148 +809,134 @@ UInt32 CThreadInfo::EncodeBlockWithHeaders(const Byte *block, UInt32 blockSize)
   WriteByte2(kBlockSig5);
 
   CBZip2Crc crc;
-  unsigned numReps = 0;
-  Byte prevByte = block[0];
-  UInt32 i = 0;
-  do
+  const Byte * const lim = block + blockSize;
+  unsigned b = *block++;
+  crc.UpdateByte(b);
+  for (;;)
   {
-    Byte b = block[i];
-    if (numReps == kRleModeRepSize)
-    {
-      for (; b > 0; b--)
-        crc.UpdateByte(prevByte);
-      numReps = 0;
-      continue;
-    }
-    if (prevByte == b)
-      numReps++;
-    else
-    {
-      numReps = 1;
-      prevByte = b;
-    }
-    crc.UpdateByte(b);
+    const unsigned prev = b;
+    if (block >= lim) { break; } b = *block++;  crc.UpdateByte(b);  if (prev != b) continue;
+    if (block >= lim) { break; } b = *block++;  crc.UpdateByte(b);  if (prev != b) continue;
+    if (block >= lim) { break; } b = *block++;  crc.UpdateByte(b);  if (prev != b) continue;
+    if (block >= lim) { break; } b = *block++;  if (b) do crc.UpdateByte(prev); while (--b);
+    if (block >= lim) { break; } b = *block++;  crc.UpdateByte(b);
   }
-  while (++i < blockSize);
-  UInt32 crcRes = crc.GetDigest();
-  WriteCrc2(crcRes);
-  EncodeBlock(block, blockSize);
+  const UInt32 crcRes = crc.GetDigest();
+  for (int i = 24; i >= 0; i -= 8)
+    WriteByte2((Byte)(crcRes >> i));
+  EncodeBlock(lim - blockSize, blockSize);
   return crcRes;
 }
 
+
 void CThreadInfo::EncodeBlock2(const Byte *block, UInt32 blockSize, UInt32 numPasses)
 {
-  UInt32 numCrcs = m_NumCrcs;
-  bool needCompare = false;
+  const UInt32 numCrcs = m_NumCrcs;
 
-  UInt32 startBytePos = m_OutStreamCurrent->GetBytePos();
-  UInt32 startPos = m_OutStreamCurrent->GetPos();
-  Byte startCurByte = m_OutStreamCurrent->GetCurByte();
-  Byte endCurByte = 0;
-  UInt32 endPos = 0;
+  const UInt32 startBytePos = m_OutStreamCurrent.GetBytePos();
+  const UInt32 startPos = m_OutStreamCurrent.GetPos();
+  const unsigned startCurByte = m_OutStreamCurrent.GetCurByte();
+  unsigned endCurByte = 0;
+  UInt32 endPos = 0; // 0 means no no additional passes
   if (numPasses > 1 && blockSize >= (1 << 10))
   {
-    UInt32 blockSize0 = blockSize / 2; // ????
+    UInt32 bs0 = blockSize / 2;
+    for (; bs0 < blockSize &&
+           (block[        bs0    ] ==
+            block[(size_t)bs0 - 1] ||
+            block[(size_t)bs0 - 1] ==
+            block[(size_t)bs0 - 2]);
+      bs0++)
+    {}
     
-    for (; (block[blockSize0] == block[(size_t)blockSize0 - 1]
-            || block[(size_t)blockSize0 - 1] == block[(size_t)blockSize0 - 2])
-          && blockSize0 < blockSize;
-        blockSize0++);
-    
-    if (blockSize0 < blockSize)
+    if (bs0 < blockSize)
     {
-      EncodeBlock2(block, blockSize0, numPasses - 1);
-      EncodeBlock2(block + blockSize0, blockSize - blockSize0, numPasses - 1);
-      endPos = m_OutStreamCurrent->GetPos();
-      endCurByte = m_OutStreamCurrent->GetCurByte();
-      if ((endPos & 7) > 0)
+      EncodeBlock2(block, bs0, numPasses - 1);
+      EncodeBlock2(block + bs0, blockSize - bs0, numPasses - 1);
+      endPos = m_OutStreamCurrent.GetPos();
+      endCurByte = m_OutStreamCurrent.GetCurByte();
+      // we prepare next byte as identical byte to starting byte for main encoding attempt:
+      if (endPos & 7)
         WriteBits2(0, 8 - (endPos & 7));
-      m_OutStreamCurrent->SetCurState((startPos & 7), startCurByte);
-      needCompare = true;
+      m_OutStreamCurrent.SetCurState((startPos & 7), startCurByte);
     }
   }
 
-  UInt32 startBytePos2 = m_OutStreamCurrent->GetBytePos();
-  UInt32 startPos2 = m_OutStreamCurrent->GetPos();
-  UInt32 crcVal = EncodeBlockWithHeaders(block, blockSize);
-  UInt32 endPos2 = m_OutStreamCurrent->GetPos();
+  const UInt32 startBytePos2 = m_OutStreamCurrent.GetBytePos();
+  const UInt32 startPos2 = m_OutStreamCurrent.GetPos();
+  const UInt32 crcVal = EncodeBlockWithHeaders(block, blockSize);
 
-  if (needCompare)
+  if (endPos)
   {
-    UInt32 size2 = endPos2 - startPos2;
-    if (size2 < endPos - startPos)
+    const UInt32 size2 = m_OutStreamCurrent.GetPos() - startPos2;
+    if (size2 >= endPos - startPos)
     {
-      UInt32 numBytes = m_OutStreamCurrent->GetBytePos() - startBytePos2;
-      Byte *buffer = m_OutStreamCurrent->GetStream();
-      for (UInt32 i = 0; i < numBytes; i++)
-        buffer[startBytePos + i] = buffer[startBytePos2 + i];
-      m_OutStreamCurrent->SetPos(startPos + endPos2 - startPos2);
-      m_NumCrcs = numCrcs;
-      m_CRCs[m_NumCrcs++] = crcVal;
+      m_OutStreamCurrent.SetPos(endPos);
+      m_OutStreamCurrent.SetCurState((endPos & 7), endCurByte);
+      return;
     }
-    else
-    {
-      m_OutStreamCurrent->SetPos(endPos);
-      m_OutStreamCurrent->SetCurState((endPos & 7), endCurByte);
-    }
+    const UInt32 numBytes = m_OutStreamCurrent.GetBytePos() - startBytePos2;
+    Byte * const buffer = m_OutStreamCurrent.GetStream();
+    memmove(buffer + startBytePos, buffer + startBytePos2, numBytes);
+    m_OutStreamCurrent.SetPos(startPos + size2);
+    // we don't call m_OutStreamCurrent.SetCurState() here because
+    // m_OutStreamCurrent._curByte is correct already
   }
-  else
-  {
-    m_NumCrcs = numCrcs;
-    m_CRCs[m_NumCrcs++] = crcVal;
-  }
+  m_CRCs[numCrcs] = crcVal;
+  m_NumCrcs = numCrcs + 1;
 }
+
 
 HRESULT CThreadInfo::EncodeBlock3(UInt32 blockSize)
 {
-  CMsbfEncoderTemp outStreamTemp;
+  CMsbfEncoderTemp &outStreamTemp = m_OutStreamCurrent;
   outStreamTemp.SetStream(m_TempArray);
   outStreamTemp.Init();
-  m_OutStreamCurrent = &outStreamTemp;
-
   m_NumCrcs = 0;
 
   EncodeBlock2(m_Block, blockSize, Encoder->_props.NumPasses);
 
-  #ifndef Z7_ST
+#ifndef Z7_ST
   if (Encoder->MtMode)
     Encoder->ThreadsInfo[m_BlockIndex].CanWriteEvent.Lock();
-  #endif
+#endif
+
   for (UInt32 i = 0; i < m_NumCrcs; i++)
     Encoder->CombinedCrc.Update(m_CRCs[i]);
-  Encoder->WriteBytes(m_TempArray, outStreamTemp.GetPos(), outStreamTemp.GetCurByte());
+  Encoder->WriteBytes(m_TempArray, outStreamTemp.GetPos(), outStreamTemp.GetNonFlushedByteBits());
   HRESULT res = S_OK;
-  #ifndef Z7_ST
+
+#ifndef Z7_ST
   if (Encoder->MtMode)
   {
     UInt32 blockIndex = m_BlockIndex + 1;
     if (blockIndex == Encoder->NumThreads)
       blockIndex = 0;
-
     if (Encoder->Progress)
     {
       const UInt64 packSize = Encoder->m_OutStream.GetProcessedSize();
       res = Encoder->Progress->SetRatioInfo(&m_UnpackSize, &packSize);
     }
-
     Encoder->ThreadsInfo[blockIndex].CanWriteEvent.Set();
   }
-  #endif
+#endif
   return res;
 }
 
-void CEncoder::WriteBytes(const Byte *data, UInt32 sizeInBits, Byte lastByte)
+void CEncoder::WriteBytes(const Byte *data, UInt32 sizeInBits, unsigned lastByteBits)
 {
-  UInt32 bytesSize = (sizeInBits >> 3);
-  for (UInt32 i = 0; i < bytesSize; i++)
-    m_OutStream.WriteBits(data[i], 8);
-  WriteBits(lastByte, (sizeInBits & 7));
+  m_OutStream.WriteBytes(data, sizeInBits >> 3);
+  sizeInBits &= 7;
+  if (sizeInBits)
+    m_OutStream.WriteBits(lastByteBits, sizeInBits);
 }
 
 
 HRESULT CEncoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *outStream,
     const UInt64 * /* inSize */, const UInt64 * /* outSize */, ICompressProgressInfo *progress)
 {
+  ThreadNextGroup_Init(&ThreadNextGroup, _props.NumThreadGroups, 0); // startGroup
+
   NumBlocks = 0;
   #ifndef Z7_ST
   Progress = progress;
@@ -823,11 +1015,11 @@ HRESULT CEncoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
     {
       CThreadInfo &ti =
       #ifndef Z7_ST
-      ThreadsInfo[0];
+          ThreadsInfo[0];
       #else
-      ThreadsInfo;
+          ThreadsInfo;
       #endif
-      UInt32 blockSize = ReadRleBlock(ti.m_Block);
+      const UInt32 blockSize = ReadRleBlock(ti.m_Block);
       if (blockSize == 0)
         break;
       RINOK(ti.EncodeBlock3(blockSize))
@@ -845,8 +1037,11 @@ HRESULT CEncoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
   WriteByte(kFinSig3);
   WriteByte(kFinSig4);
   WriteByte(kFinSig5);
-
-  WriteCrc(CombinedCrc.GetDigest());
+  {
+    const UInt32 v = CombinedCrc.GetDigest();
+    for (int i = 24; i >= 0; i -= 8)
+      WriteByte((Byte)(v >> i));
+  }
   RINOK(Flush())
   if (!m_InStream.WasFinished())
     return E_FAIL;
@@ -869,14 +1064,21 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIA
   for (UInt32 i = 0; i < numProps; i++)
   {
     const PROPVARIANT &prop = coderProps[i];
-    PROPID propID = propIDs[i];
+    const PROPID propID = propIDs[i];
 
     if (propID == NCoderPropID::kAffinity)
     {
-      if (prop.vt == VT_UI8)
-        props.Affinity = prop.uhVal.QuadPart;
-      else
+      if (prop.vt != VT_UI8)
         return E_INVALIDARG;
+      props.Affinity = prop.uhVal.QuadPart;
+      continue;
+    }
+
+    if (propID == NCoderPropID::kNumThreadGroups)
+    {
+      if (prop.vt != VT_UI4)
+        return E_INVALIDARG;
+      props.NumThreadGroups = (UInt32)prop.ulVal;
       continue;
     }
 
@@ -884,7 +1086,7 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID *propIDs, const PROPVARIA
       continue;
     if (prop.vt != VT_UI4)
       return E_INVALIDARG;
-    UInt32 v = (UInt32)prop.ulVal;
+    const UInt32 v = (UInt32)prop.ulVal;
     switch (propID)
     {
       case NCoderPropID::kNumPasses: props.NumPasses = v; break;
