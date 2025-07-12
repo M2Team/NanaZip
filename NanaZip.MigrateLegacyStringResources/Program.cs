@@ -20,7 +20,23 @@ internal class Program
 
     static readonly ImmutableArray<ResourceMapping> map =
         [
-            new(408, "InformationPage", "CloseButton.Content", true)
+            new(408, "InformationPage", "CloseButton.Content", true),
+            new(3900, "ProgressPage", "ElapsedTimeLabel.Text"),
+            new(3901, "ProgressPage", "RemainingTimeLabel.Text"),
+            new(3902, "ProgressPage", "TotalSizeLabel.Text"),
+            new(3903, "ProgressPage", "SpeedLabel.Text"),
+            new(3904, "ProgressPage", "ProcessedLabel.Text"),
+            new(3905, "ProgressPage", "CompressionRatioLabel.Text"),
+            new(3906, "ProgressPage", "ErrorsLabel.Text"),
+            new(1032, "ProgressPage", "FilesLabel.Text"),
+            new(1008, "ProgressPage", "PackedSizeLabel.Text"),
+            new(444, "ProgressPage", "BackgroundButtonText", true),
+            new(445, "ProgressPage", "ForegroundButtonText", true),
+            new(446, "ProgressPage", "PauseButtonText", true),
+            new(411, "ProgressPage", "ContinueButtonText", true),
+            new(402, "ProgressPage", "CancelButtonText", true),
+            new(408, "ProgressPage", "CloseButtonText", true),
+            new(447, "ProgressPage", "PausedText")
         ];
 
     static readonly ImmutableArray<IGrouping<string, ResourceMapping>> Mappings

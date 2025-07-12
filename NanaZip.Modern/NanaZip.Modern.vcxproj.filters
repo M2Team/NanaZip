@@ -188,6 +188,9 @@
     <Filter Include="Strings\pt">
       <UniqueIdentifier>{af053cea-1dc3-470d-b3ec-9767d14bd3b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\pt-BR">
+      <UniqueIdentifier>{b7cfbca0-080d-4a0f-9279-460e584c279d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Strings\ro">
       <UniqueIdentifier>{7e085344-923c-4476-a687-e279e326af71}</UniqueIdentifier>
     </Filter>
