@@ -390,6 +390,8 @@ static int Main2()
 
 #include <NanaZip.Frieren.h>
 
+winrt::NanaZip::Modern::App s_app{ nullptr };
+
 int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef UNDER_CE
   LPWSTR
@@ -428,6 +430,8 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #endif
 
   LoadLangOneTime();
+
+  s_app = {};
 
   // setlocale(LC_COLLATE, ".ACP");
   try

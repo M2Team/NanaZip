@@ -32,6 +32,7 @@
     <Page Include="AddressBarTemplate.xaml" />
     <Page Include="StatusBarTemplate.xaml" />
     <Page Include="InformationPage.xaml" />
+    <Page Include="ProgressPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
@@ -187,6 +188,9 @@
     <Filter Include="Strings\pt">
       <UniqueIdentifier>{af053cea-1dc3-470d-b3ec-9767d14bd3b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\pt-BR">
+      <UniqueIdentifier>{b7cfbca0-080d-4a0f-9279-460e584c279d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Strings\ro">
       <UniqueIdentifier>{7e085344-923c-4476-a687-e279e326af71}</UniqueIdentifier>
     </Filter>
@@ -255,9 +259,6 @@
     </Filter>
     <Filter Include="Strings\pl">
       <UniqueIdentifier>{7ac42189-d980-4c72-ae5a-edfb08ebd533}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Strings\pt-BR">
-      <UniqueIdentifier>{fe436437-65db-49ac-93e2-f6b51c8944e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Strings\sq">
       <UniqueIdentifier>{3b88d6dd-0db6-4d35-b45e-5056485106c8}</UniqueIdentifier>
@@ -560,6 +561,243 @@
     </PRIResource>
     <PRIResource Include="Strings\zh-Hant\InformationPage.resw">
       <Filter>Strings\zh-Hant</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\af\ProgressPage.resw">
+      <Filter>Strings\af</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ar\ProgressPage.resw">
+      <Filter>Strings\ar</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\az-arab\ProgressPage.resw">
+      <Filter>Strings\az-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-Hant\ProgressPage.resw">
+      <Filter>Strings\zh-Hant</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\be\ProgressPage.resw">
+      <Filter>Strings\be</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\bg\ProgressPage.resw">
+      <Filter>Strings\bg</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\bn\ProgressPage.resw">
+      <Filter>Strings\bn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ca\ProgressPage.resw">
+      <Filter>Strings\ca</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ca-es-valencia\ProgressPage.resw">
+      <Filter>Strings\ca-es-valencia</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\cs\ProgressPage.resw">
+      <Filter>Strings\cs</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\cy\ProgressPage.resw">
+      <Filter>Strings\cy</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\da\ProgressPage.resw">
+      <Filter>Strings\da</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\de\ProgressPage.resw">
+      <Filter>Strings\de</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\el\ProgressPage.resw">
+      <Filter>Strings\el</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en\ProgressPage.resw">
+      <Filter>Strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\eo\ProgressPage.resw">
+      <Filter>Strings\eo</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\es\ProgressPage.resw">
+      <Filter>Strings\es</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\et\ProgressPage.resw">
+      <Filter>Strings\et</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\eu\ProgressPage.resw">
+      <Filter>Strings\eu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fa\ProgressPage.resw">
+      <Filter>Strings\fa</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fi\ProgressPage.resw">
+      <Filter>Strings\fi</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fr\ProgressPage.resw">
+      <Filter>Strings\fr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fy\ProgressPage.resw">
+      <Filter>Strings\fy</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ga\ProgressPage.resw">
+      <Filter>Strings\ga</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\gl\ProgressPage.resw">
+      <Filter>Strings\gl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\gu\ProgressPage.resw">
+      <Filter>Strings\gu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\he\ProgressPage.resw">
+      <Filter>Strings\he</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hi\ProgressPage.resw">
+      <Filter>Strings\hi</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hr\ProgressPage.resw">
+      <Filter>Strings\hr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hu\ProgressPage.resw">
+      <Filter>Strings\hu</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\hy\ProgressPage.resw">
+      <Filter>Strings\hy</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\id\ProgressPage.resw">
+      <Filter>Strings\id</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\is\ProgressPage.resw">
+      <Filter>Strings\is</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\it\ProgressPage.resw">
+      <Filter>Strings\it</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ja\ProgressPage.resw">
+      <Filter>Strings\ja</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ka\ProgressPage.resw">
+      <Filter>Strings\ka</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\kk\ProgressPage.resw">
+      <Filter>Strings\kk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ko\ProgressPage.resw">
+      <Filter>Strings\ko</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ku-arab\ProgressPage.resw">
+      <Filter>Strings\ku-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ky-kg\ProgressPage.resw">
+      <Filter>Strings\ky-kg</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\lt\ProgressPage.resw">
+      <Filter>Strings\lt</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\lv\ProgressPage.resw">
+      <Filter>Strings\lv</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mk\ProgressPage.resw">
+      <Filter>Strings\mk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mn-cyrl\ProgressPage.resw">
+      <Filter>Strings\mn-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mn-mong\ProgressPage.resw">
+      <Filter>Strings\mn-mong</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\mr\ProgressPage.resw">
+      <Filter>Strings\mr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ms\ProgressPage.resw">
+      <Filter>Strings\ms</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\nb\ProgressPage.resw">
+      <Filter>Strings\nb</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ne\ProgressPage.resw">
+      <Filter>Strings\ne</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\nl\ProgressPage.resw">
+      <Filter>Strings\nl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\nn\ProgressPage.resw">
+      <Filter>Strings\nn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pa-in\ProgressPage.resw">
+      <Filter>Strings\pa-in</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pl\ProgressPage.resw">
+      <Filter>Strings\pl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ps\ProgressPage.resw">
+      <Filter>Strings\ps</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt\ProgressPage.resw">
+      <Filter>Strings\pt</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt-BR\ProgressPage.resw">
+      <Filter>Strings\pt-BR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ro\ProgressPage.resw">
+      <Filter>Strings\ro</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ru\ProgressPage.resw">
+      <Filter>Strings\ru</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\si\ProgressPage.resw">
+      <Filter>Strings\si</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sk\ProgressPage.resw">
+      <Filter>Strings\sk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sl\ProgressPage.resw">
+      <Filter>Strings\sl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sq\ProgressPage.resw">
+      <Filter>Strings\sq</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sr-cyrl\ProgressPage.resw">
+      <Filter>Strings\sr-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sr-Latn\ProgressPage.resw">
+      <Filter>Strings\sr-Latn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sv\ProgressPage.resw">
+      <Filter>Strings\sv</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\sw\ProgressPage.resw">
+      <Filter>Strings\sw</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ta\ProgressPage.resw">
+      <Filter>Strings\ta</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tg-arab\ProgressPage.resw">
+      <Filter>Strings\tg-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\th\ProgressPage.resw">
+      <Filter>Strings\th</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tk-cyrl\ProgressPage.resw">
+      <Filter>Strings\tk-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tr\ProgressPage.resw">
+      <Filter>Strings\tr</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\tt-arab\ProgressPage.resw">
+      <Filter>Strings\tt-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ug-arab\ProgressPage.resw">
+      <Filter>Strings\ug-arab</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\uk\ProgressPage.resw">
+      <Filter>Strings\uk</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\uz-cyrl\ProgressPage.resw">
+      <Filter>Strings\uz-cyrl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\uz-latn\ProgressPage.resw">
+      <Filter>Strings\uz-latn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\vi\ProgressPage.resw">
+      <Filter>Strings\vi</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\yo-latn\ProgressPage.resw">
+      <Filter>Strings\yo-latn</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-Hans\ProgressPage.resw">
+      <Filter>Strings\zh-Hans</Filter>
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
