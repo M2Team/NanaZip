@@ -967,7 +967,6 @@ bool CProgressDialog::OnExternalCloseMessage()
   else if (!thereAreMessages)
   {
     MessagesDisplayed = true;
-
     if (!fm.OkMessage.Message.IsEmpty())
     {
         needToShowMessages = true;
@@ -1125,6 +1124,11 @@ void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
     _messageStrings.Add(message);
   }
   */
+
+  std::wstring current = std::wstring((std::wstring_view)m_progressPage.ResultsText());
+  current += message;
+  current += L"\n------------------------\n";
+  m_progressPage.ResultsText(current);
 }
 
 void CProgressDialog::AddMessage(LPCWSTR message)
@@ -1154,7 +1158,6 @@ static unsigned GetNumDigits(UInt32 val)
 
 void CProgressDialog::UpdateMessagesDialog()
 {
-  /*
   UStringVector messages;
   {
     NSynchronization::CCriticalSectionLock lock(Sync._cs);
@@ -1178,7 +1181,6 @@ void CProgressDialog::UpdateMessagesDialog()
       _numAutoSizeMessages = _numPostedMessages;
     }
   }
-  */
 }
 
 void CProgressDialog::OnCancelButtonClicked(
