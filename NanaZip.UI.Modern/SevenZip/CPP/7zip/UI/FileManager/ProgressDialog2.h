@@ -238,7 +238,9 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void SetPriorityText();
   void OnPauseButton();
   void OnPriorityButton();
+  bool OnButtonClicked(int buttonID, HWND buttonHWND);
   bool OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
+  bool OnCancelClicked();
 
   void SetTitleText();
   winrt::hstring ShowSize(UInt64 val, UInt64 &prev);

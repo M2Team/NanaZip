@@ -986,6 +986,71 @@ bool CProgressDialog::OnExternalCloseMessage()
   return true;
 }
 
+bool CProgressDialog::OnCancelClicked()
+{
+    if (_waitCloseByCancelButton)
+    {
+        MessagesDisplayed = true;
+        DestroyWindow(*this);
+        return false;
+    }
+
+    if (_cancelWasPressed)
+        return true;
+
+    const bool paused = Sync.Get_Paused();
+
+    if (!paused)
+    {
+        OnPauseButton();
+    }
+
+    _inCancelMessageBox = true;
+    const int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
+    _inCancelMessageBox = false;
+    if (res == IDYES)
+        _cancelWasPressed = true;
+
+    if (!paused)
+    {
+        OnPauseButton();
+    }
+
+    if (_externalCloseMessageWasReceived)
+    {
+        /* we have received kCloseMessage while we were in MessageBoxW().
+           so we call OnExternalCloseMessage() here.
+           it can show MessageBox and it can close dialog */
+        OnExternalCloseMessage();
+        return true;
+    }
+
+    if (!_cancelWasPressed)
+        return true;
+
+    MessagesDisplayed = true;
+    // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
+    Sync.Set_Stopped(true);
+
+    return false;
+}
+
+bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
+{
+    switch (buttonID)
+    {
+        // case IDOK: // if IDCANCEL is not DEFPUSHBUTTON
+    case IDCANCEL:
+    {
+        bool click = OnCancelClicked();
+        if (click)
+            return true;
+        break;
+    }
+    }
+    return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
+}
+
 bool CProgressDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
 {
   switch (message)
@@ -1126,8 +1191,10 @@ void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
   */
 
   std::wstring current = std::wstring((std::wstring_view)m_progressPage.ResultsText());
+  if (needNumber && current.length() != 0)
+      current += L"------------------------\n";
   current += message;
-  current += L"\n------------------------\n";
+  current += L"\n";
   m_progressPage.ResultsText(current);
 }
 
@@ -1188,49 +1255,7 @@ void CProgressDialog::OnCancelButtonClicked(
     winrt::RoutedEventArgs const&
 )
 {
-    if (_waitCloseByCancelButton)
-    {
-      MessagesDisplayed = true;
-      DestroyWindow(*this);
-      return;
-    }
-
-    if (_cancelWasPressed)
-      return;
-
-    const bool paused = Sync.Get_Paused();
-
-    if (!paused)
-    {
-      OnPauseButton();
-    }
-
-    _inCancelMessageBox = true;
-      const int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
-    _inCancelMessageBox = false;
-    if (res == IDYES)
-      _cancelWasPressed = true;
-
-    if (!paused)
-    {
-      OnPauseButton();
-    }
-
-    if (_externalCloseMessageWasReceived)
-    {
-      /* we have received kCloseMessage while we were in MessageBoxW().
-         so we call OnExternalCloseMessage() here.
-         it can show MessageBox and it can close dialog */
-      OnExternalCloseMessage();
-      return;
-    }
-
-    if (!_cancelWasPressed)
-      return;
-
-    MessagesDisplayed = true;
-    // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
-    Sync.Set_Stopped(true);
+    OnCancelClicked();
 }
 
 void CProgressDialog::OnPauseButtonClicked(
