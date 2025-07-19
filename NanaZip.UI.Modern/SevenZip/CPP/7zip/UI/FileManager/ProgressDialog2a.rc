@@ -43,6 +43,7 @@
 DIALOG_ID  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
 CAPTION "Progress"
 {
+  /*
   DEFPUSHBUTTON  "&Background", IDB_PROGRESS_BACKGROUND, bx3, by, bxs, bys
   PUSHBUTTON     "&Pause",      IDB_PAUSE,               bx2, by, bxs, bys
   PUSHBUTTON     "Cancel",      IDCANCEL,                bx1, by, bxs, bys
@@ -82,4 +83,5 @@ CAPTION "Progress"
   CONTROL  "List1", IDL_PROGRESS_MESSAGES, "SysListView32",
            LVS_REPORT | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,
            m, z0, xc, z0s
+  */
 }

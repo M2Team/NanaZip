@@ -15,6 +15,23 @@
 
 #include "MyWindowsNew.h"
 
+#pragma push_macro("GetCurrentTime")
+#undef GetCurrentTime
+
+#include <Mile.Xaml.h>
+#include <winrt/Windows.Foundation.h>
+#include <winrt/Windows.UI.Xaml.h>
+#include <winrt/NanaZip.Modern.h>
+
+#pragma pop_macro("GetCurrentTime")
+
+namespace winrt
+{
+    using namespace NanaZip::Modern;
+    using namespace Windows::Foundation;
+    using namespace Windows::UI::Xaml;
+}
+
 struct CProgressMessageBoxPair
 {
   UString Title;
@@ -115,9 +132,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   UString _continue_String;
   UString _paused_String;
 
-  int _buttonSizeX;
-  int _buttonSizeY;
-
   UINT_PTR _timer;
 
   UString _title;
@@ -147,15 +161,17 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   CU64ToI32Converter _progressConv;
   UInt64 _progressBar_Pos;
   UInt64 _progressBar_Range;
-  
+
   NWindows::NControl::CProgressBar m_ProgressBar;
   NWindows::NControl::CListView _messageList;
+  winrt::ProgressPage m_progressPage{ nullptr };
+  HWND m_islandsHwnd = nullptr;
   
   int _numMessages;
   UStringVector _messageStrings;
 
   #ifdef __ITaskbarList3_INTERFACE_DEFINED__
-  CMyComPtr<ITaskbarList3> _taskbarList;
+  winrt::com_ptr<ITaskbarList3> _taskbarList;
   #endif
   HWND _hwndForTaskbar;
 
@@ -211,10 +227,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void SetProgressPos(UInt64 pos);
   virtual bool OnInit();
   virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
-  virtual void OnCancel();
-  virtual void OnOK();
-  virtual bool OnNotify(UINT /* controlID */, LPNMHDR header);
-  void CopyToClipboard();
 
   NWindows::NSynchronization::CManualResetEvent _createDialogEvent;
   NWindows::NSynchronization::CManualResetEvent _dialogCreatedEvent;
@@ -228,9 +240,10 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void OnPriorityButton();
   bool OnButtonClicked(int buttonID, HWND buttonHWND);
   bool OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
+  bool OnCancelClicked();
 
   void SetTitleText();
-  void ShowSize(int id, UInt64 val, UInt64 &prev);
+  winrt::hstring ShowSize(UInt64 val, UInt64 &prev);
 
   void UpdateMessagesDialog();
 
@@ -238,11 +251,23 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void AddMessage(LPCWSTR message);
 
   bool OnExternalCloseMessage();
-  void EnableErrorsControls(bool enable);
 
   void ShowAfterMessages(HWND wndParent);
 
   void CheckNeedClose();
+
+  void OnCancelButtonClicked(
+      winrt::IInspectable const&,
+      winrt::RoutedEventArgs const&
+  );
+  void OnPauseButtonClicked(
+      winrt::IInspectable const&,
+      winrt::RoutedEventArgs const&
+  );
+  void OnBackgroundButtonClicked(
+      winrt::IInspectable const&,
+      winrt::RoutedEventArgs const&
+  );
 public:
   CProgressSync Sync;
   bool CompressingMode;
