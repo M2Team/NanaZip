@@ -991,7 +991,7 @@ bool CProgressDialog::OnCancelClicked()
     if (_waitCloseByCancelButton)
     {
         MessagesDisplayed = true;
-        DestroyWindow(*this);
+        End(IDCLOSE);
         return false;
     }
 
