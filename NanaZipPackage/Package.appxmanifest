@@ -89,7 +89,7 @@
           </uap3:AppExecutionAlias>
         </uap3:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap3:FileTypeAssociation Name="fileassociations" Parameters="&quot;%1&quot;">
+          <uap3:FileTypeAssociation Name="fileassociations" Parameters="&quot;%1&quot; -open">
             <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
             <uap:SupportedFileTypes>
               <uap:FileType>.001</uap:FileType>

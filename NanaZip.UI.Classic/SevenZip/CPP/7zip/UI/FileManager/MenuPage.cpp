@@ -41,6 +41,9 @@ static const UInt32 kLangIDs[] =
   IDB_SYSTEM_ASSOCIATE,
   IDX_EXTRACT_ELIM_DUP,
   IDT_SYSTEM_ZONE,
+  // **************** NanaZip Modification Start ****************
+  IDX_EXTRACT_ON_OPEN,
+// **************** NanaZip Modification End ****************
   IDT_SYSTEM_CONTEXT_MENU_ITEMS
 };
 
@@ -110,6 +113,9 @@ bool CMenuPage::OnInit()
   ci.Load();
 
   CheckButton(IDX_EXTRACT_ELIM_DUP, ci.ElimDup.Val);
+  // **************** NanaZip Modification Start ****************
+  CheckButton(IDX_EXTRACT_ON_OPEN, ci.ExtractOnOpen);
+  // **************** NanaZip Modification End ****************
 
   _listView.Attach(GetItem(IDL_SYSTEM_OPTIONS));
   _zoneCombo.Attach(GetItem(IDC_SYSTEM_ZONE));
@@ -203,7 +209,9 @@ bool CMenuPage::OnInit()
 
 LONG CMenuPage::OnApply()
 {
-  if (_elimDup_Changed || _writeZone_Changed || _flags_Changed)
+  // **************** NanaZip Modification Start ****************
+  if (_elimDup_Changed || _writeZone_Changed || _flags_Changed || _extractOnOpen_Changed)
+  // **************** NanaZip Modification End ****************
   {
     CContextMenuInfo ci;
 
@@ -224,6 +232,11 @@ LONG CMenuPage::OnApply()
         ci.Flags |= kMenuItems[i].Flag;
 
     ci.Flags_Def = _flags_Changed;
+
+    // **************** NanaZip Modification Start ****************
+    ci.ExtractOnOpen = IsButtonCheckedBool(IDX_EXTRACT_ON_OPEN);
+    // **************** NanaZip Modification End ****************
+
     ci.Save();
 
     Clear_MenuChanged();
@@ -239,6 +252,9 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
   switch (buttonID)
   {
     case IDX_EXTRACT_ELIM_DUP: _elimDup_Changed = true; break;
+    // **************** NanaZip Modification Start ****************
+    case IDX_EXTRACT_ON_OPEN: _extractOnOpen_Changed = true; break;
+    // **************** NanaZip Modification End ****************
     // case IDX_EXTRACT_WRITE_ZONE: _writeZone_Changed = true; break;
 
     case IDB_SYSTEM_ASSOCIATE:
