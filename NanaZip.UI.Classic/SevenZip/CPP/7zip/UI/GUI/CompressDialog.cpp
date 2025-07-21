@@ -1,4 +1,4 @@
-// CompressDialog.cpp
+﻿// CompressDialog.cpp
 
 #include "StdAfx.h"
 
@@ -304,6 +304,7 @@ static const UInt32 kFF_Time_1ns  = 1 << 13;
 struct CFormatInfo
 {
   LPCSTR Name;
+  UInt32 Levels;
   UInt32 LevelsMask;
   unsigned NumMethods;
   const EMethodID *MethodIDs;
@@ -327,12 +328,14 @@ static const CFormatInfo g_Formats[] =
     "",
     // (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     ((UInt32)1 << 10) - 1,
+    ((UInt32)1 << 10) - 1,
     // (UInt32)(Int32)-1,
     0, NULL,
     kFF_MultiThread | kFF_MemUse
   },
   {
     "7z",
+    ((UInt32)1 << 10) - 1,
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_7zMethods),
     kFF_Filter | kFF_Solid | kFF_MultiThread | kFF_Encrypt |
@@ -342,12 +345,14 @@ static const CFormatInfo g_Formats[] =
   {
     "Zip",
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_ZipMethods),
     kFF_MultiThread | kFF_Encrypt | kFF_MemUse
     // | kFF_Time_Win | kFF_Time_Unix | kFF_Time_DOS
   },
   {
     "GZip",
+    (1 << 1) | (1 << 5) | (1 << 7) | (1 << 9),
     (1 << 1) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_GZipMethods),
     kFF_MemUse
@@ -356,53 +361,62 @@ static const CFormatInfo g_Formats[] =
   {
     "BZip2",
     (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_BZip2Methods),
     kFF_MultiThread | kFF_MemUse
   },
   {
     "xz",
+    (UInt32)((1 << 10) - 2),
     (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_XzMethods),
     kFF_Solid | kFF_MultiThread | kFF_MemUse
   },
   {
     "zstd",
+    (UInt32)((1U << 23) - 2),
     (1 << 1) | (1 << 3) | (1 << 5) | (1 << 11) | (1 << 17) | (1 << 22),
     METHODS_PAIR(g_ZstdMethods),
     kFF_MultiThread
   },
   {
     "Brotli",
+    (UInt32)((1 << 12) - 1),
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 6) | (1 << 9) | (1 << 11),
     METHODS_PAIR(g_BrotliMethods),
     kFF_MultiThread
   },
   {
     "Lizard",
+    ((1U << 20) - (1U << 10)),
     (1 << 10) | (1 << 11) | (1 << 13) | (1 << 15) | (1 << 17) | (1 << 19),
     METHODS_PAIR(g_LizardMethods),
     kFF_MultiThread
   },
   {
     "LZ4",
+    (1U << 13) - 2,
     (1 << 1) | (1 << 3) | (1 << 6) | (1 << 9) | (1 << 12),
     METHODS_PAIR(g_Lz4Methods),
     kFF_MultiThread
   },
   {
     "LZ5",
+    (1U << 16) - 2,
     (1 << 1) | (1 << 3) | (1 << 7) | (1 << 11) | (1 << 15),
     METHODS_PAIR(g_Lz5Methods),
     kFF_MultiThread
   },
   {
     "Swfc",
+    (1U << 10) - 2,
     (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_SwfcMethods),
     0
   },
   {
     "Tar",
+    1 << 0,
     (1 << 0),
     METHODS_PAIR(g_TarMethods),
     0
@@ -410,6 +424,7 @@ static const CFormatInfo g_Formats[] =
   },
   {
     "wim",
+    1 << 0,
     (1 << 0),
     0, NULL,
     0
@@ -417,6 +432,7 @@ static const CFormatInfo g_Formats[] =
   },
   {
     "Hash",
+    0 << 0,
     (0 << 0),
     METHODS_PAIR(g_HashMethods),
     0
@@ -1230,7 +1246,7 @@ bool CCompressDialog::OnCommand(int code, int itemID, LPARAM lParam)
       {
         Get_FormatOptions().ResetForLevelChange();
 
-        //SetMethod();
+        SetMethod();
         MethodChanged();
         SetSolidBlockSize();
         SetNumThreads();
@@ -1441,7 +1457,8 @@ void CCompressDialog::SetLevel2()
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
   const CArcInfoEx &ai = Get_ArcInfoEx();
   UInt32 LevelsMask = fi.LevelsMask;
-  UInt32 LevelsStart = 1;
+  UInt32 LevelsList = fi.Levels;
+  UInt32 LevelsStart = 0;
   UInt32 LevelsEnd = 9;
   if (ai.LevelsMask != 0xFFFFFFFF)
     LevelsMask = ai.LevelsMask;
@@ -1497,9 +1514,19 @@ void CCompressDialog::SetLevel2()
       ir = i;
     }
 
+    if ((LevelsList & (1 << ir)) == 0)
+        continue;
+
     // max reached
     if (LevelsMask < (UInt32)(1 << ir))
-      break;
+        break;
+
+    if (langID == 0 && ((LevelsMask & (1 << 0)) == 0) &&
+        !((GetMethodID() >= kLIZARD_M1 && GetMethodID() <= kLIZARD_M4) ||
+          GetMethodID() == kZSTD))
+    {
+        langID = 1;
+    }
 
     if ((LevelsMask & (1 << ir)) != 0)
     {
