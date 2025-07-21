@@ -304,7 +304,20 @@ static const UInt32 kFF_Time_1ns  = 1 << 13;
 struct CFormatInfo
 {
   LPCSTR Name;
+
+  // List of levels supported by the format.
+  // Format:
+  // - Values are represented by left shifts of 1.
+  //   (i.e. 1 << 9 means Level 9)
+  // - Multiple values are represented by bitwise OR.
+  //   (i.e. (1 << 6) | (1 << 9) means Level 6 and Level 9)
   UInt32 Levels;
+
+  // List of levels that needs a label.
+  // Labels (starting from smallest to largest):
+  //   Store, Fastest, Fast, Normal, Maximum, Ultra
+  // Typically, Store is Level 0.
+  // Format is the same as the Levels field.
   UInt32 LevelsMask;
   unsigned NumMethods;
   const EMethodID *MethodIDs;
@@ -1514,6 +1527,7 @@ void CCompressDialog::SetLevel2()
       ir = i;
     }
 
+    // If the level is not supported, ignore it.
     if ((LevelsList & (1 << ir)) == 0)
         continue;
 
@@ -1521,6 +1535,13 @@ void CCompressDialog::SetLevel2()
     if (LevelsMask < (UInt32)(1 << ir))
         break;
 
+    // As mentioned above, Store is typically Level 0.
+    // However, lizard and zstd use different numbers for Store.
+    //
+    // Hence, if the selected format is lizard or zstd,
+    // we let the LevelsMask of them determine the level value for Store.
+    // 
+    // Otherwise, hide the Store label if there's no Level 0.
     if (langID == 0 && ((LevelsMask & (1 << 0)) == 0) &&
         !((GetMethodID() >= kLIZARD_M1 && GetMethodID() <= kLIZARD_M4) ||
           GetMethodID() == kZSTD))
