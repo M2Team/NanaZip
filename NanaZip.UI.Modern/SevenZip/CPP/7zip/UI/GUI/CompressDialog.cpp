@@ -305,6 +305,8 @@ struct CFormatInfo
 {
   LPCSTR Name;
 
+  // **************** NanaZip Modification Start ****************
+
   // List of levels supported by the format.
   // Format:
   // - Values are represented by left shifts of 1.
@@ -319,6 +321,9 @@ struct CFormatInfo
   // Typically, Store is Level 0.
   // Format is the same as the Levels field.
   UInt32 LevelsMask;
+
+  // **************** NanaZip Modification End ****************
+
   unsigned NumMethods;
   const EMethodID *MethodIDs;
 
@@ -335,12 +340,13 @@ struct CFormatInfo
 
 #define METHODS_PAIR(x) ARRAY_SIZE(x), x
 
+// **************** NanaZip Modification Start ****************
 static const CFormatInfo g_Formats[] =
 {
+#if 0 // ******** 7-Zip Mainline Source Code snippet Start ********
   {
     "",
     // (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
-    ((UInt32)1 << 10) - 1,
     ((UInt32)1 << 10) - 1,
     // (UInt32)(Int32)-1,
     0, NULL,
@@ -348,11 +354,111 @@ static const CFormatInfo g_Formats[] =
   },
   {
     "7z",
-    ((UInt32)1 << 10) - 1,
     (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
     METHODS_PAIR(g_7zMethods),
     kFF_Filter | kFF_Solid | kFF_MultiThread | kFF_Encrypt |
     kFF_EncryptFileNames | kFF_MemUse | kFF_SFX
+    // | kFF_Time_Win
+  },
+  {
+    "Zip",
+    (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    METHODS_PAIR(g_ZipMethods),
+    kFF_MultiThread | kFF_Encrypt | kFF_MemUse
+    // | kFF_Time_Win | kFF_Time_Unix | kFF_Time_DOS
+  },
+  {
+    "GZip",
+    (1 << 1) | (1 << 5) | (1 << 7) | (1 << 9),
+    METHODS_PAIR(g_GZipMethods),
+    kFF_MemUse
+    // | kFF_Time_Unix
+  },
+  {
+    "BZip2",
+    (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    METHODS_PAIR(g_BZip2Methods),
+    kFF_MultiThread | kFF_MemUse
+  },
+  {
+    "xz",
+    (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    METHODS_PAIR(g_XzMethods),
+    kFF_Solid | kFF_MultiThread | kFF_MemUse
+  },
+  {
+    "zstd",
+    (1 << 1) | (1 << 3) | (1 << 5) | (1 << 11) | (1 << 17) | (1 << 22),
+    METHODS_PAIR(g_ZstdMethods),
+    kFF_MultiThread
+  },
+  {
+    "Brotli",
+    (1 << 0) | (1 << 1) | (1 << 3) | (1 << 6) | (1 << 9) | (1 << 11),
+    METHODS_PAIR(g_BrotliMethods),
+    kFF_MultiThread
+  },
+  {
+    "Lizard",
+    (1 << 10) | (1 << 11) | (1 << 13) | (1 << 15) | (1 << 17) | (1 << 19),
+    METHODS_PAIR(g_LizardMethods),
+    kFF_MultiThread
+  },
+  {
+    "LZ4",
+    (1 << 1) | (1 << 3) | (1 << 6) | (1 << 9) | (1 << 12),
+    METHODS_PAIR(g_Lz4Methods),
+    kFF_MultiThread
+  },
+  {
+    "LZ5",
+    (1 << 1) | (1 << 3) | (1 << 7) | (1 << 11) | (1 << 15),
+    METHODS_PAIR(g_Lz5Methods),
+    kFF_MultiThread
+  },
+  {
+    "Swfc",
+    (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    METHODS_PAIR(g_SwfcMethods),
+    0
+  },
+  {
+    "Tar",
+    (1 << 0),
+    METHODS_PAIR(g_TarMethods),
+    0
+    // kFF_Time_Unix | kFF_Time_Win // | kFF_Time_1ns
+  },
+  {
+    "wim",
+    (1 << 0),
+    0, NULL,
+    0
+    // | kFF_Time_Win
+  },
+  {
+    "Hash",
+    (0 << 0),
+    METHODS_PAIR(g_HashMethods),
+    0
+  }
+#endif // ******** 7-Zip Mainline Source Code snippet End ********
+  {
+    "",
+        // (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+        ((UInt32)1 << 10) - 1,
+        ((UInt32)1 << 10) - 1,
+        // (UInt32)(Int32)-1,
+        0, NULL,
+        kFF_MultiThread | kFF_MemUse
+      },
+      {
+        "7z",
+        ((UInt32)1 << 10) - 1,
+        (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+        METHODS_PAIR(g_7zMethods),
+        kFF_Filter | kFF_Solid | kFF_MultiThread | kFF_Encrypt |
+        kFF_EncryptFileNames | kFF_MemUse | kFF_SFX
     // | kFF_Time_Win
   },
   {
@@ -451,6 +557,7 @@ static const CFormatInfo g_Formats[] =
     0
   }
 };
+// **************** NanaZip Modification End ****************
 
 static const signed char g_LevelRanges[][2] = {
   { 1, 22 }, // zstd
@@ -1470,7 +1577,9 @@ void CCompressDialog::SetLevel2()
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
   const CArcInfoEx &ai = Get_ArcInfoEx();
   UInt32 LevelsMask = fi.LevelsMask;
+  // **************** NanaZip Modification Start ****************
   UInt32 LevelsList = fi.Levels;
+  // **************** NanaZip Modification End ****************
   UInt32 LevelsStart = 0;
   UInt32 LevelsEnd = 9;
   if (ai.LevelsMask != 0xFFFFFFFF)
@@ -1527,6 +1636,8 @@ void CCompressDialog::SetLevel2()
       ir = i;
     }
 
+    // **************** NanaZip Modification Start ****************
+
     // If the level is not supported, ignore it.
     if ((LevelsList & (1 << ir)) == 0)
         continue;
@@ -1548,6 +1659,8 @@ void CCompressDialog::SetLevel2()
     {
         langID = 1;
     }
+
+    // **************** NanaZip Modification End ****************
 
     if ((LevelsMask & (1 << ir)) != 0)
     {
