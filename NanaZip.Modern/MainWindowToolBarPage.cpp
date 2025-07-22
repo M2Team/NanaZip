@@ -157,7 +157,8 @@ namespace winrt::NanaZip::Modern::implementation
 
         std::wstring sponsorButtonLabel = L"[";
         sponsorButtonLabel += Mile::WinRT::GetLocalizedString(
-            L"NanaZip.Modern/MainWindowToolBarPage/SponsorButton/AcquireText");
+            L"NanaZip.Modern/MainWindowToolBarPage/SponsorButton/AcquireText",
+            L"Sponsor NanaZip");
         sponsorButtonLabel += L"]";
 
         this->SponsorButton().Content(winrt::box_value(sponsorButtonLabel));
