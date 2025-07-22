@@ -155,13 +155,13 @@ namespace winrt::NanaZip::Modern::implementation
         this->m_DispatcherQueue =
             winrt::DispatcherQueue::GetForCurrentThread();
 
-        this->m_StoreContext = winrt::StoreContext::GetDefault();
-        if (this->m_StoreContext)
-        {
-            winrt::check_hresult(
-                this->m_StoreContext.as<IInitializeWithWindow>()->Initialize(
-                    this->m_WindowHandle));
-        }
+        std::wstring sponsorButtonLabel = L"[";
+        sponsorButtonLabel += Mile::WinRT::GetLocalizedString(
+            L"NanaZip.Modern/MainWindowToolBarPage/SponsorButton/AcquireText",
+            L"Sponsor NanaZip");
+        sponsorButtonLabel += L"]";
+
+        this->SponsorButton().Content(winrt::box_value(sponsorButtonLabel));
     }
 
     void MainWindowToolBarPage::PageLoaded(
@@ -530,6 +530,11 @@ namespace winrt::NanaZip::Modern::implementation
             {
                 return Data;
             }
+        }
+
+        if (!this->m_StoreContext)
+        {
+            this->m_StoreContext = winrt::StoreContext::GetDefault();
         }
 
         bool Sponsored = false;
