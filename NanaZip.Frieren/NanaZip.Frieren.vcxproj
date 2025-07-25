@@ -6,7 +6,6 @@
     <MileProjectType>StaticLibrary</MileProjectType>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
@@ -15,13 +14,6 @@
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
-    <ClCompile>
-      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
-      <Optimization Condition="'$(Configuration)' == 'Release'">MinSpace</Optimization>
-      <FavorSizeOrSpeed Condition="'$(Configuration)' == 'Release'">Size</FavorSizeOrSpeed>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

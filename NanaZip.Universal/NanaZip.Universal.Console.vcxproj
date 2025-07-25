@@ -18,12 +18,11 @@
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
-  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Condition="'$(Platform)'=='x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
   <ItemDefinitionGroup>
     <ClCompile>
@@ -54,7 +53,7 @@
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
       <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
-      <SetPlatform>Platform=Win32</SetPlatform>
+      <SetPlatform>Platform=x64</SetPlatform>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -273,12 +272,12 @@
     <ClCompile Include="SevenZip\C\Threads.c" />
   </ItemGroup>
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+    <ItemGroup Condition="'$(Platform)'=='x64'">
       <MASM Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+    <ItemGroup Condition="'$(Platform)'!='x64'">
       <ClCompile Include="SevenZip\C\7zCrcOpt.c">
         <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
       </ClCompile>
@@ -290,5 +289,5 @@
     </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
-  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  <Import Condition="'$(Platform)'=='x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>

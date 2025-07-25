@@ -16,7 +16,6 @@
     <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />

@@ -17,7 +17,6 @@
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
@@ -40,7 +39,6 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;LFS_READONLY;LFS_MULTIVERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -506,13 +504,13 @@
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
   <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+    <ItemGroup Condition="'$(Platform)'=='x64'">
       <ClCompile Include="BLAKE3\blake3_avx2.c" />
       <ClCompile Include="BLAKE3\blake3_avx512.c" />
       <ClCompile Include="BLAKE3\blake3_sse2.c" />
       <ClCompile Include="BLAKE3\blake3_sse41.c" />
     </ItemGroup>
-    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+    <ItemGroup Condition="'$(Platform)'!='x64'">
       <ClCompile Include="BLAKE3\blake3_neon.c" />
     </ItemGroup>
   </Target>

@@ -6,7 +6,6 @@
     <MileProjectType>WindowsApplication</MileProjectType>
     <TargetName>NanaZipG</TargetName>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-    <YY_Thunks_File>YY_Thunks_for_Vista.obj</YY_Thunks_File>
     <MileProjectManifestFile>NanaZipWindows.manifest</MileProjectManifestFile>
     <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
@@ -21,7 +20,6 @@
     <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
@@ -299,7 +297,7 @@
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj">
       <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
-      <SetPlatform>Platform=Win32</SetPlatform>
+      <SetPlatform>Platform=x64</SetPlatform>
     </ProjectReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
