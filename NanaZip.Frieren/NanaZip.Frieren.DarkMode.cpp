@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Frieren.DarkMode.cpp
- * PURPOSE:   Implementation for NanaZip dark mode support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Frieren.DarkMode.cpp
+ * PURPOSE:    Implementation for NanaZip dark mode support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -35,222 +35,6 @@ EXTERN_C HTHEME WINAPI OpenNcThemeData(
 
 namespace
 {
-    static HMODULE GetSHCoreModuleHandle()
-    {
-        static HMODULE CachedResult = ::GetModuleHandleW(L"SHCore.dll");
-        return CachedResult;
-    }
-
-    static FARPROC GetGetDpiForMonitorProcAddress()
-    {
-        static FARPROC CachedResult = ([]() -> FARPROC
-        {
-            HMODULE ModuleHandle = ::GetSHCoreModuleHandle();
-            if (ModuleHandle)
-            {
-                return ::GetProcAddress(
-                    ModuleHandle,
-                    "GetDpiForMonitor");
-            }
-            return nullptr;
-        }());
-
-        return CachedResult;
-    }
-
-    static HMODULE GetUser32ModuleHandle()
-    {
-        static HMODULE CachedResult = ::GetModuleHandleW(L"user32.dll");
-        return CachedResult;
-    }
-
-    static FARPROC GetGetDisplayConfigBufferSizesProcAddress()
-    {
-        static FARPROC CachedResult = ([]() -> FARPROC
-        {
-            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
-            if (ModuleHandle)
-            {
-                return ::GetProcAddress(
-                    ModuleHandle,
-                    "GetDisplayConfigBufferSizes");
-            }
-            return nullptr;
-        }());
-
-        return CachedResult;
-    }
-
-    static FARPROC GetQueryDisplayConfigProcAddress()
-    {
-        static FARPROC CachedResult = ([]() -> FARPROC
-        {
-            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
-            if (ModuleHandle)
-            {
-                return ::GetProcAddress(
-                    ModuleHandle,
-                    "QueryDisplayConfig");
-            }
-            return nullptr;
-        }());
-
-        return CachedResult;
-    }
-
-    static FARPROC GetDisplayConfigGetDeviceInfoProcAddress()
-    {
-        static FARPROC CachedResult = ([]() -> FARPROC
-        {
-            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
-            if (ModuleHandle)
-            {
-                return ::GetProcAddress(
-                    ModuleHandle,
-                    "DisplayConfigGetDeviceInfo");
-            }
-            return nullptr;
-        }());
-
-        return CachedResult;
-    }
-
-    static FARPROC GetGetDpiForWindowProcAddress()
-    {
-        static FARPROC CachedResult = ([]() -> FARPROC
-        {
-            HMODULE ModuleHandle = ::GetUser32ModuleHandle();
-            if (ModuleHandle)
-            {
-                return ::GetProcAddress(
-                    ModuleHandle,
-                    "GetDpiForWindow");
-            }
-            return nullptr;
-        }());
-
-        return CachedResult;
-    }
-
-    static LONG WINAPI GetDisplayConfigBufferSizesWrapper(
-        _In_ UINT32 flags,
-        _Out_ UINT32* numPathArrayElements,
-        _Out_ UINT32* numModeInfoArrayElements)
-    {
-        using ProcType = decltype(::GetDisplayConfigBufferSizes)*;
-
-        ProcType ProcAddress = reinterpret_cast<ProcType>(
-            ::GetGetDisplayConfigBufferSizesProcAddress());
-
-        if (ProcAddress)
-        {
-            return ProcAddress(
-                flags,
-                numPathArrayElements,
-                numModeInfoArrayElements);
-        }
-
-        return ERROR_NOT_SUPPORTED;
-    }
-
-    static LONG WINAPI QueryDisplayConfigWrapper(
-        _In_ UINT32 flags,
-        _Inout_ UINT32* numPathArrayElements,
-        _Out_ DISPLAYCONFIG_PATH_INFO* pathArray,
-        _Inout_ UINT32* numModeInfoArrayElements,
-        _Out_ DISPLAYCONFIG_MODE_INFO* modeInfoArray,
-        _Out_opt_ DISPLAYCONFIG_TOPOLOGY_ID* currentTopologyId)
-    {
-        using ProcType = decltype(::QueryDisplayConfig)*;
-
-        ProcType ProcAddress = reinterpret_cast<ProcType>(
-            ::GetQueryDisplayConfigProcAddress());
-
-        if (ProcAddress)
-        {
-            return ProcAddress(
-                flags,
-                numPathArrayElements,
-                pathArray,
-                numModeInfoArrayElements,
-                modeInfoArray,
-                currentTopologyId);
-        }
-
-        return ERROR_NOT_SUPPORTED;
-    }
-
-    static LONG WINAPI DisplayConfigGetDeviceInfoWrapper(
-        _Inout_ DISPLAYCONFIG_DEVICE_INFO_HEADER* requestPacket)
-    {
-        using ProcType = decltype(::DisplayConfigGetDeviceInfo)*;
-
-        ProcType ProcAddress = reinterpret_cast<ProcType>(
-            ::GetDisplayConfigGetDeviceInfoProcAddress());
-
-        if (ProcAddress)
-        {
-            return ProcAddress(requestPacket);
-        }
-
-        return ERROR_NOT_SUPPORTED;
-    }
-
-    static UINT WINAPI GetDpiForWindowWrapper(
-        _In_ HWND hWnd)
-    {
-        {
-            using ProcType = decltype(::GetDpiForWindow)*;
-
-            ProcType ProcAddress = reinterpret_cast<ProcType>(
-                ::GetGetDpiForWindowProcAddress());
-
-            if (ProcAddress)
-            {
-                return ProcAddress(hWnd);
-            }
-        }
-
-        {
-            using ProcType = decltype(::GetDpiForMonitor)*;
-
-            ProcType ProcAddress = reinterpret_cast<ProcType>(
-                ::GetGetDpiForMonitorProcAddress());
-
-            if (ProcAddress)
-            {
-                HMONITOR MonitorHandle = ::MonitorFromWindow(
-                    hWnd,
-                    MONITOR_DEFAULTTONEAREST);
-                if (MonitorHandle)
-                {
-                    UINT DpiX = 0;
-                    UINT DpiY = 0;
-                    if (SUCCEEDED(ProcAddress(
-                        MonitorHandle,
-                        MDT_EFFECTIVE_DPI,
-                        &DpiX,
-                        &DpiY)))
-                    {
-                        return DpiX;
-                    }
-                }
-            }
-        }
-
-        UINT DpiValue = USER_DEFAULT_SCREEN_DPI;
-        {
-            HDC WindowContextHandle = ::GetDC(hWnd);
-            if (WindowContextHandle)
-            {
-                DpiValue = ::GetDeviceCaps(WindowContextHandle, LOGPIXELSX);
-                ::ReleaseDC(hWnd, WindowContextHandle);
-            }
-        }
-
-        return DpiValue;
-    }
-
     static bool IsStandardDynamicRangeMode()
     {
         static bool CachedResult = ([]() -> bool
@@ -259,7 +43,7 @@ namespace
 
             UINT32 NumPathArrayElements = 0;
             UINT32 NumModeInfoArrayElements = 0;
-            if (ERROR_SUCCESS == ::GetDisplayConfigBufferSizesWrapper(
+            if (ERROR_SUCCESS == ::GetDisplayConfigBufferSizes(
                 QDC_ONLY_ACTIVE_PATHS,
                 &NumPathArrayElements,
                 &NumModeInfoArrayElements))
@@ -268,7 +52,7 @@ namespace
                     NumPathArrayElements);
                 std::vector<DISPLAYCONFIG_MODE_INFO> ModeInfoArray(
                     NumModeInfoArrayElements);
-                if (ERROR_SUCCESS == ::QueryDisplayConfigWrapper(
+                if (ERROR_SUCCESS == ::QueryDisplayConfig(
                     QDC_ONLY_ACTIVE_PATHS,
                     &NumPathArrayElements,
                     &PathArray[0],
@@ -292,7 +76,7 @@ namespace
                         AdvancedColorInfo.header.id =
                             Path.targetInfo.id;
                         if (ERROR_SUCCESS ==
-                            ::DisplayConfigGetDeviceInfoWrapper(
+                            ::DisplayConfigGetDeviceInfo(
                                 &AdvancedColorInfo.header))
                         {
                             if (AdvancedColorInfo.advancedColorEnabled)
@@ -554,7 +338,7 @@ namespace
                 }
                 else if (::IsFileManagerWindow(hWnd))
                 {
-                    UINT DpiValue = ::GetDpiForWindowWrapper(hWnd);
+                    UINT DpiValue = ::GetDpiForWindow(hWnd);
                     Margins.cyTopHeight =
                         ::MulDiv(80, DpiValue, USER_DEFAULT_SCREEN_DPI);
                     Margins.cyBottomHeight =
@@ -606,7 +390,7 @@ namespace
             }
             else if (::IsFileManagerWindow(hWnd))
             {
-                UINT DpiValue = ::GetDpiForWindowWrapper(hWnd);
+                UINT DpiValue = ::GetDpiForWindow(hWnd);
 
                 MARGINS Margins = { 0 };
                 Margins.cyTopHeight =
@@ -669,7 +453,7 @@ namespace
                 g_MicaBackdropAvailable);
             if (!ShouldExtendFrame && ::IsFileManagerWindow(hWnd))
             {
-                UINT DpiValue = ::GetDpiForWindowWrapper(hWnd);
+                UINT DpiValue = ::GetDpiForWindow(hWnd);
 
                 MARGINS Margins = { 0 };
                 Margins.cyTopHeight =

@@ -26,7 +26,6 @@
   <ItemGroup>
     <ClCompile Include="NanaZip.Frieren.cpp" />
     <ClCompile Include="NanaZip.Frieren.DarkMode.cpp" />
-    <ClCompile Include="NanaZip.Frieren.RuntimeObjectWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.Helpers">

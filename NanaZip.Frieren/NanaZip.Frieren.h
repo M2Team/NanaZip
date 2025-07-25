@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Frieren.h
- * PURPOSE:   Definition for NanaZip.Frieren
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Frieren.h
+ * PURPOSE:    Definition for NanaZip.Frieren
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
