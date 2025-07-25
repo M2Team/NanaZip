@@ -167,7 +167,7 @@ Here are the system requirements starting with NanaZip 6.0:
   - x86 (64-bit)
   - ARM (64-bit)
 
-In general, NanaZip follows the 2025 Baseline defined by Kenji Mouri's document,
+In general, NanaZip follows the 2025 baseline defined by Kenji Mouri's document,
 read [MD23: The baselines of Windows targets for all my open-source projects]
 for more information.
 
@@ -180,7 +180,7 @@ PE and Windows RE instances:
 
 - For ARM (64-bit) Microsoft official Windows PE and Windows RE, you need to
   make sure you Windows PE and Windows RE images are built with Windows ADK
-  Build 25398 and integrated the [x64 emulation optional component].
+  Build 25398 or later and integrated the [x64 emulation optional component].
 - For ARM (64-bit) Windows 10, I suggest you to upgrade to Windows 11 because
   ARM (64-bit) Windows 11 provides x64 emulation support, and Windows 10 is
   nearly end of support from Microsoft.
