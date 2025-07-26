@@ -43,6 +43,7 @@
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>NanaZip.Codecs.def</ModuleDefinitionFile>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>

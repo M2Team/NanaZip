@@ -35,6 +35,7 @@
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
       <AdditionalDependencies>runtimeobject.lib;comctl32.lib;htmlhelp.lib;comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

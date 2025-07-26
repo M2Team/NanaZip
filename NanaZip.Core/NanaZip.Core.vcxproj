@@ -32,6 +32,7 @@
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
       <ModuleDefinitionFile>SevenZip\CPP\7zip\Archive\Archive2.def</ModuleDefinitionFile>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>

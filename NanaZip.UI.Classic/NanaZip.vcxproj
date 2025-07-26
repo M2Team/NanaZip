@@ -33,6 +33,7 @@
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
       <AdditionalDependencies>comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies);</AdditionalDependencies>
       <DelayLoadDLLs>mpr.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>

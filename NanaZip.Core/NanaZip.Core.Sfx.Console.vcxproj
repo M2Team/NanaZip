@@ -40,6 +40,7 @@
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
       <RandomizedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">false</RandomizedBaseAddress>
       <FixedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">true</FixedBaseAddress>
     </Link>

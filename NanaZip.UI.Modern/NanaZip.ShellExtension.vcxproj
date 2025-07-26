@@ -33,6 +33,7 @@
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
       <ModuleDefinitionFile>NanaZip.ShellExtension.def</ModuleDefinitionFile>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
       <AdditionalDependencies>runtimeobject.lib;comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

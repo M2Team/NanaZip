@@ -32,6 +32,7 @@
     <Link>
       <ModuleDefinitionFile>NanaZip.Modern.def</ModuleDefinitionFile>
       <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
