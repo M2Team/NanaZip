@@ -112,7 +112,7 @@ static int APIENTRY WinMain2()
   }
 #endif
 #endif
-  
+
   UString password;
   bool assumeYes = false;
   bool outputFolderDefined = false;
@@ -204,7 +204,7 @@ static int APIENTRY WinMain2()
       NExtract::NOverwriteMode::kAsk;
   eo.PathMode = NExtract::NPathMode::kFullPaths;
   eo.TestMode = false;
-  
+
   UStringVector v1, v2;
   v1.Add(fs2us(fullPath));
   v2.Add(fs2us(fullPath));
@@ -265,8 +265,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   {
     ShowErrorMessage(L"Cannot enable security mitigations");
   }
-
-  ::MileEnablePerMonitorDialogScaling();
   // **************** NanaZip Modification End ****************
 
   try
