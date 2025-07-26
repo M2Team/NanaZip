@@ -505,13 +505,13 @@
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
   <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <ClCompile Include="BLAKE3\blake3_avx2.c" />
       <ClCompile Include="BLAKE3\blake3_avx512.c" />
       <ClCompile Include="BLAKE3\blake3_sse2.c" />
       <ClCompile Include="BLAKE3\blake3_sse41.c" />
     </ItemGroup>
-    <ItemGroup Condition="'$(Platform)'!='x64'">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="BLAKE3\blake3_neon.c" />
     </ItemGroup>
   </Target>

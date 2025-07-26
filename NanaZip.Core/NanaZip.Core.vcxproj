@@ -20,13 +20,13 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
-  <Import Condition="'$(Platform)'=='x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\K7Pal\K7Pal.props" />
   <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;NSIS_SCRIPT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)' == 'x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4100;4113;4127;4146;4189;4200;4244;4267;4334;4702;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -609,67 +609,67 @@
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
   </ItemGroup>
   <Target Name="NanaZipCoreAesHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\AesOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreAesHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="'$(Platform)'!='x64'">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\AesOpt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="'$(Platform)'!='x64'">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\7zCrcOpt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreLzmaDecHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrc64HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\XzCrc64Opt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrc64HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="'$(Platform)'!='x64'">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\XzCrc64Opt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreLzFindOptHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\LzFindOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreLzFindOptHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="'$(Platform)'!='x64'">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\LzFindOpt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreSortHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\Sort.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreSortHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="'$(Platform)'!='x64'">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\Sort.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
@@ -679,5 +679,5 @@
     </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
-  <Import Condition="'$(Platform)'=='x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>
