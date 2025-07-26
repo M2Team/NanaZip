@@ -42,8 +42,8 @@
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
       <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
-      <RandomizedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">false</RandomizedBaseAddress>
-      <FixedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">true</FixedBaseAddress>
+      <RandomizedBaseAddress Condition="'$(Platform)'!='ARM64'">false</RandomizedBaseAddress>
+      <FixedBaseAddress Condition="'$(Platform)'!='ARM64'">true</FixedBaseAddress>
       <AdditionalDependencies>comctl32.lib;comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
