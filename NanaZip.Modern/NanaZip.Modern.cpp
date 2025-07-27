@@ -19,6 +19,16 @@
 #include "AboutPage.h"
 #include "InformationPage.h"
 
+#include <CommCtrl.h>
+#pragma comment(lib, "comctl32.lib")
+
+#include <winrt/Windows.UI.Xaml.Hosting.h>
+
+namespace winrt
+{
+    using Windows::UI::Xaml::Hosting::DesktopWindowXamlSource;
+}
+
 namespace
 {
     HWND K7ModernCreateXamlDialog(
@@ -219,6 +229,40 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     {
         return -1;
     }
+
+    ::SetWindowSubclass(
+        WindowHandle,
+        [](
+            _In_ HWND hWnd,
+            _In_ UINT uMsg,
+            _In_ WPARAM wParam,
+            _In_ LPARAM lParam,
+            _In_ UINT_PTR uIdSubclass,
+            _In_ DWORD_PTR dwRefData) -> LRESULT
+    {
+        UNREFERENCED_PARAMETER(uIdSubclass);
+        UNREFERENCED_PARAMETER(dwRefData);
+
+        switch (uMsg)
+        {
+        case WM_DESTROY:
+        {
+            winrt::DesktopWindowXamlSource XamlSource = nullptr;
+            winrt::copy_from_abi(
+                XamlSource,
+                ::GetPropW(hWnd, L"XamlWindowSource"));
+            XamlSource.Close();
+        }
+        }
+
+        return ::DefSubclassProc(
+            hWnd,
+            uMsg,
+            wParam,
+            lParam);
+    },
+        0,
+        0);
 
     using Interface =
         winrt::NanaZip::Modern::InformationPage;
