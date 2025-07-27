@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.Ufs.cpp
- * PURPOSE:   Implementation for UFS/UFS2 file system image readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.Ufs.cpp
+ * PURPOSE:    Implementation for UFS/UFS2 file system image readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

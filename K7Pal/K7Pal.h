@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip Platform Abstraction Layer (K7Pal)
- * FILE:      K7Pal.h
- * PURPOSE:   Definition for NanaZip Platform Abstraction Layer (K7Pal)
+ * PROJECT:    NanaZip Platform Abstraction Layer (K7Pal)
+ * FILE:       K7Pal.h
+ * PURPOSE:    Definition for NanaZip Platform Abstraction Layer (K7Pal)
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

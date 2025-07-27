@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Specification.SevenZip.h
- * PURPOSE:   Definition for 7-Zip Codec Interface Specification
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Specification.SevenZip.h
+ * PURPOSE:    Definition for 7-Zip Codec Interface Specification
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -127,7 +127,7 @@ public:
     /**
      * @brief Seeks to the specified position in the input stream.
      * @param Offset The offset relative to the origin.
-     * 
+     *
      * @param SeekOrigin The origin of the seek operation. Here are available
      *                   modes:
      *                       STREAM_SEEK_SET

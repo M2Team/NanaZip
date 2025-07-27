@@ -1,12 +1,12 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      Mitigations.h
- * PURPOSE:   Definition for applied mitigation policy
+ * PROJECT:    NanaZip
+ * FILE:       Mitigations.h
+ * PURPOSE:    Definition for applied mitigation policy
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
- * DEVELOPER: dinhngtu (contact@tudinh.xyz)
- *            MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: dinhngtu (contact@tudinh.xyz)
+ *             MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #ifndef NANAZIP_SHARED_MITIGATIONS

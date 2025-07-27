@@ -1,12 +1,12 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      DllBlock.cpp
- * PURPOSE:   Implementation for DLL blocker
+ * PROJECT:    NanaZip
+ * FILE:       DllBlock.cpp
+ * PURPOSE:    Implementation for DLL blocker
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
- * DEVELOPER: dinhngtu (contact@tudinh.xyz)
- *            MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: dinhngtu (contact@tudinh.xyz)
+ *             MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #include <Mile.Internal.h>

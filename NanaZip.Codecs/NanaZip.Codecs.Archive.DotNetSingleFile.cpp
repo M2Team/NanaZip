@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.DotNetSingleFile.cpp
- * PURPOSE:   Implementation for .NET Single File Application readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.DotNetSingleFile.cpp
+ * PURPOSE:    Implementation for .NET Single File Application readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

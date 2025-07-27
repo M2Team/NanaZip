@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Hash.BCryptProvider.cpp
- * PURPOSE:   Implementation for Windows CNG Hash Algorithm Provider
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Hash.BCryptProvider.cpp
+ * PURPOSE:    Implementation for Windows CNG Hash Algorithm Provider
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

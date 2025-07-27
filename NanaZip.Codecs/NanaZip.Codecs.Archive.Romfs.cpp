@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.Romfs.cpp
- * PURPOSE:   Implementation for ROMFS file system image readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.Romfs.cpp
+ * PURPOSE:    Implementation for ROMFS file system image readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

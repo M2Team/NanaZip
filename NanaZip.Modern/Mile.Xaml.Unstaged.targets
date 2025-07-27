@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-   PROJECT:   Mouri Internal Library Essentials
-   FILE:      Mile.Xaml.Unstaged.targets
-   PURPOSE:   MSBuild targets file for unstaged Mile.Xaml native target
+   PROJECT:    Mouri Internal Library Essentials
+   FILE:       Mile.Xaml.Unstaged.targets
+   PURPOSE:    MSBuild targets file for unstaged Mile.Xaml native target
 
-   LICENSE:   The MIT License
+   LICENSE:    The MIT License
 
    MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
 -->

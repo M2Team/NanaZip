@@ -1,12 +1,12 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      DllBlock.h
- * PURPOSE:   Definition for DLL blocker
+ * PROJECT:    NanaZip
+ * FILE:       DllBlock.h
+ * PURPOSE:    Definition for DLL blocker
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
- * DEVELOPER: dinhngtu (contact@tudinh.xyz)
- *            MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: dinhngtu (contact@tudinh.xyz)
+ *             MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #ifndef NANAZIP_SHARED_DLLBLOCK

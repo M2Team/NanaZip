@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.WebAssembly.cpp
- * PURPOSE:   Implementation for WebAssembly (WASM) binary file readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.WebAssembly.cpp
+ * PURPOSE:    Implementation for WebAssembly (WASM) binary file readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

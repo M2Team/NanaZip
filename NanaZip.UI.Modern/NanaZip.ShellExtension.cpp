@@ -1,11 +1,11 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.ShellExtension.cpp
- * PURPOSE:   Implementation for NanaZip Shell Extension
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.ShellExtension.cpp
+ * PURPOSE:    Implementation for NanaZip Shell Extension
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
- * DEVELOPER: MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #include <Windows.h>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-  PROJECT:   NanaZip
-  FILE:      NanaZip.Codecs.Sfx.Shared.props
-  PURPOSE:   MSBuild Properties for NanaZip.Codecs.Sfx.Shared
+  PROJECT:    NanaZip
+  FILE:       NanaZip.Codecs.Sfx.Shared.props
+  PURPOSE:    MSBuild Properties for NanaZip.Codecs.Sfx.Shared
 
-  LICENSE:   The MIT License
+  LICENSE:    The MIT License
 
   MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
 -->

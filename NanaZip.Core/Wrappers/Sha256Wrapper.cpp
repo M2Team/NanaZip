@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      Sha256Wrapper.cpp
- * PURPOSE:   Implementation for SHA-256 wrapper for 7-Zip
+ * PROJECT:    NanaZip
+ * FILE:       Sha256Wrapper.cpp
+ * PURPOSE:    Implementation for SHA-256 wrapper for 7-Zip
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

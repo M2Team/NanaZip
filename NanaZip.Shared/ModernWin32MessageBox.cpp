@@ -1,11 +1,11 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      ModernWin32MessageBox.cpp
- * PURPOSE:   Implementation for Modern Win32 Message Box
+ * PROJECT:    NanaZip
+ * FILE:       ModernWin32MessageBox.cpp
+ * PURPOSE:    Implementation for Modern Win32 Message Box
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
- * DEVELOPER: MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #include <Windows.h>

@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      AboutDialog.cpp
- * PURPOSE:   Implementation for About Dialog
+ * PROJECT:    NanaZip
+ * FILE:       AboutDialog.cpp
+ * PURPOSE:    Implementation for About Dialog
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

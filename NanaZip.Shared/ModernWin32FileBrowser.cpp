@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      ModernWin32FileBrowser.cpp
- * PURPOSE:   Implementation for Modern Win32 File Browser
+ * PROJECT:    NanaZip
+ * FILE:       ModernWin32FileBrowser.cpp
+ * PURPOSE:    Implementation for Modern Win32 File Browser
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  *             reflectronic (john-tur@outlook.com)

@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Frieren.WinUserPrivate.h
- * PURPOSE:   Definition for Windows undocumented window messages
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Frieren.WinUserPrivate.h
+ * PURPOSE:    Definition for Windows undocumented window messages
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

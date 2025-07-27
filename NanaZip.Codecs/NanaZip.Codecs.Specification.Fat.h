@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Specification.Fat.h
- * PURPOSE:   Definition for the on-disk structure of the FAT series file system
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Specification.Fat.h
+ * PURPOSE:    Definition for the on-disk structure of the FAT series file system
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -261,7 +261,7 @@ C_ASSERT(sizeof(PACKED_DIRENT) == 32);
 //       have to read in the first sector of the file stream to get the normal
 //       header size)
 
-#define FAT_DIRENT_NT_BYTE_ENCRYPTED 0x01 
+#define FAT_DIRENT_NT_BYTE_ENCRYPTED 0x01
 #define FAT_DIRENT_NT_BYTE_BIG_HEADER 0x02
 
 // These two bits optimize the case in which either the name or extension are
@@ -304,7 +304,7 @@ C_ASSERT(sizeof(PACKED_LFN_DIRENT) == 32);
 // Ordinal field
 #define FAT_LAST_LONG_ENTRY 0x40
 // Type field
-#define FAT_LONG_NAME_COMP 0x0  
+#define FAT_LONG_NAME_COMP 0x0
 
 // This is the largest size buffer we would ever need to read an LFN
 
