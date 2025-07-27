@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.671</Version>
+      <Version>1.0.952</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
