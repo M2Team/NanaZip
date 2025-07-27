@@ -84,14 +84,12 @@ static void AddPropertyPair(const UString &name, const UString &val, std::wstrin
   if (text.length() > 0)
     text += L"\n";
   text += name;
-  text += L"\n";
-  std::wstring str(val.Ptr(), val.Len());
-  std::wstring_view indent = L"    ";
-  for (size_t i = 0; (i = str.find('\n', i)) != std::string::npos; ++i) {
-      str.insert(i + 1, indent);
-  }
-  str.insert(0, indent);
-  text += str;
+  text += L" =";
+  if (val.Find(L"\n") != -1)
+      text += L"\n";
+  else
+      text += L" ";
+  text += val;
   text += L"\n";
 }
 
