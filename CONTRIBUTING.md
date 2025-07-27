@@ -33,8 +33,10 @@ Open `NanaZip.sln` in the root of the repository.
 
 #### Code style and conventions
 
-- C++: [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md)
-- C#: Follow the .NET Core team's [C# coding style](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/coding-style.md)
+Read Kenji Mouri's [MD24: The coding style for all my open-source projects] for
+more information.
+
+[MD24: The coding style for all my open-source projects]: https://github.com/MouriNaruto/MouriDocs/tree/main/docs/24
 
 For all languages respect the [.editorconfig](https://editorconfig.org/) file 
 specified in the source tree. Many IDEs natively support this or can with a 
