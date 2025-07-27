@@ -183,26 +183,26 @@ namespace winrt::NanaZip::Modern::implementation
     );
 
     void ProgressPage::BackgroundButtonClickedHandler(
-        winrt::IInspectable const&,
-        winrt::RoutedEventArgs const& args
-    )
+        winrt::IInspectable const& sender,
+        winrt::RoutedEventArgs const& e)
     {
-        this->BackgroundButtonClicked(*this, args);
+        UNREFERENCED_PARAMETER(sender);
+        this->BackgroundButtonClicked(*this, e);
     }
 
     void ProgressPage::PauseButtonClickedHandler(
-        winrt::IInspectable const&,
-        winrt::RoutedEventArgs const& args
-    )
+        winrt::IInspectable const& sender,
+        winrt::RoutedEventArgs const& e)
     {
-        this->PauseButtonClicked(*this, args);
+        UNREFERENCED_PARAMETER(sender);
+        this->PauseButtonClicked(*this, e);
     }
 
     void ProgressPage::CancelButtonClickedHandler(
-        winrt::IInspectable const&,
-        winrt::RoutedEventArgs const& args
-    )
+        winrt::IInspectable const& sender,
+        winrt::RoutedEventArgs const& e)
     {
-        this->CancelButtonClicked(*this, args);
+        UNREFERENCED_PARAMETER(sender);
+        this->CancelButtonClicked(*this, e);
     }
 }

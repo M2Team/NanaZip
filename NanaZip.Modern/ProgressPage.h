@@ -124,17 +124,14 @@ namespace winrt::NanaZip::Modern::implementation
         );
 
         void BackgroundButtonClickedHandler(
-            winrt::IInspectable const&,
-            winrt::RoutedEventArgs const&
-        );
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
         void PauseButtonClickedHandler(
-            winrt::IInspectable const&,
-            winrt::RoutedEventArgs const&
-        );
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
         void CancelButtonClickedHandler(
-            winrt::IInspectable const&,
-            winrt::RoutedEventArgs const&
-        );
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
 
         Mile::WinRT::Event<winrt::RoutedEventHandler>
             BackgroundButtonClicked;
@@ -147,7 +144,9 @@ namespace winrt::NanaZip::Modern::implementation
 
 namespace winrt::NanaZip::Modern::factory_implementation
 {
-    struct ProgressPage : ProgressPageT<ProgressPage, implementation::ProgressPage>
+    struct ProgressPage : ProgressPageT<
+        ProgressPage,
+        implementation::ProgressPage>
     {
     };
 }

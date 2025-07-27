@@ -7,9 +7,9 @@
 namespace winrt::NanaZip::Modern::implementation
 {
     InformationPage::InformationPage(
-        HWND WindowHandle,
-        winrt::hstring WindowTitle,
-        winrt::hstring WindowContent) :
+        _In_opt_ HWND WindowHandle,
+        winrt::hstring const& WindowTitle,
+        winrt::hstring const& WindowContent) :
         m_WindowHandle(WindowHandle),
         m_WindowTitle(WindowTitle),
         m_WindowContent(WindowContent)

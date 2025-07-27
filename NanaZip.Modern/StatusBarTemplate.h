@@ -16,7 +16,9 @@ namespace winrt::NanaZip::Modern::implementation
 
 namespace winrt::NanaZip::Modern::factory_implementation
 {
-    struct StatusBarTemplate : StatusBarTemplateT<StatusBarTemplate, implementation::StatusBarTemplate>
+    struct StatusBarTemplate : StatusBarTemplateT<
+        StatusBarTemplate,
+        implementation::StatusBarTemplate>
     {
     };
 }

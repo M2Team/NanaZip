@@ -2,12 +2,13 @@
 
 #include "InformationPage.g.h"
 #include "ControlMacros.h"
+#include <Windows.h>
 #include <Mile.Helpers.CppWinRT.h>
 
 namespace winrt
 {
-    using namespace Windows::Foundation;
-    using namespace Windows::UI::Xaml;
+    using Windows::Foundation::IInspectable;
+    using Windows::UI::Xaml::RoutedEventArgs;
 }
 
 namespace winrt::NanaZip::Modern::implementation
@@ -16,8 +17,8 @@ namespace winrt::NanaZip::Modern::implementation
     {
         InformationPage(
             _In_opt_ HWND WindowHandle,
-            winrt::hstring WindowTitle,
-            winrt::hstring WindowContent);
+            winrt::hstring const& WindowTitle,
+            winrt::hstring const& WindowContent);
 
         void InitializeComponent();
 
@@ -26,7 +27,7 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::RoutedEventArgs const& args);
 
     private:
-        HWND m_WindowHandle{ nullptr };
+        HWND m_WindowHandle = nullptr;
         winrt::hstring m_WindowTitle;
         winrt::hstring m_WindowContent;
     };

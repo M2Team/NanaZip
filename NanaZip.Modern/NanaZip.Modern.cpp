@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip.Modern
- * FILE:      NanaZip.Modern.cpp
- * PURPOSE:   Implementation for NanaZip Modern Experience
+ * PROJECT:    NanaZip.Modern
+ * FILE:       NanaZip.Modern.cpp
+ * PURPOSE:    Implementation for NanaZip Modern Experience
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
