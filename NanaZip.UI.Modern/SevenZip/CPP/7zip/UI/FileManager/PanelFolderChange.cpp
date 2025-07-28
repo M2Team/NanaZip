@@ -365,15 +365,19 @@ static winrt::Windows::Graphics::Imaging::SoftwareBitmap ConvertIconToSoftwareBi
             nullptr);
     }
 
+    static winrt::com_ptr<::ISoftwareBitmapNativeFactory> factory;
+    if (!factory)
+    {
+        factory =
+            winrt::get_activation_factory<
+            winrt::Windows::Graphics::Imaging::SoftwareBitmap,
+            ::ISoftwareBitmapNativeFactory>();
+    }
+
     winrt::com_ptr<::IWICBitmap> bitmap;
 
     winrt::check_hresult(
         wicFactory->CreateBitmapFromHICON(hIcon, bitmap.put()));
-
-    winrt::com_ptr<::ISoftwareBitmapNativeFactory> factory =
-        winrt::get_activation_factory<
-        winrt::Windows::Graphics::Imaging::SoftwareBitmap,
-        ::ISoftwareBitmapNativeFactory>();
 
     winrt::Windows::Graphics::Imaging::SoftwareBitmap winrtBitmap = nullptr;
 
