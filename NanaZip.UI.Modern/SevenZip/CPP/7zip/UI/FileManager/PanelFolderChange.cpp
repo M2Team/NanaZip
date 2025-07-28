@@ -381,11 +381,12 @@ static winrt::Windows::Graphics::Imaging::SoftwareBitmap ConvertIconToSoftwareBi
 
     winrt::Windows::Graphics::Imaging::SoftwareBitmap winrtBitmap = nullptr;
 
-    factory->CreateFromWICBitmap(
-        bitmap.get(),
-        TRUE,
-        winrt::guid_of<winrt::Windows::Graphics::Imaging::SoftwareBitmap>(),
-        winrt::put_abi(winrtBitmap));
+    winrt::check_hresult(
+        factory->CreateFromWICBitmap(
+            bitmap.get(),
+            TRUE,
+            winrt::guid_of<winrt::Windows::Graphics::Imaging::SoftwareBitmap>(),
+            winrt::put_abi(winrtBitmap)));
 
     return winrt::Windows::Graphics::Imaging::SoftwareBitmap::Convert(
         winrtBitmap,
