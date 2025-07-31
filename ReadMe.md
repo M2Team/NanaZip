@@ -37,6 +37,10 @@ contributor, because NanaZip is always a community-friendly open-source project.
 If you'd like me to add features or improvements ahead of time, please use
 [paid services](https://github.com/MouriNaruto/MouriNaruto/blob/main/PaidServices.md).
 
+Note: Only [GitHub](https://github.com/M2Team/NanaZip) and
+[SourceForge](https://sourceforge.net/projects/nanazip) have hosted NanaZip
+official project pages. 
+
 Kenji Mouri
 
 ## Features
