@@ -268,7 +268,7 @@
     <ClCompile Include="RHash\whirlpool_sbox.c" />
     <ClCompile Include="GmSSL\sm3.c" />
     <ClCompile Include="BLAKE3\blake3.c">
-      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4245;</DisableSpecificWarnings>
     </ClCompile>
     <None Include="BLAKE3\blake3_avx2.c" />
     <None Include="BLAKE3\blake3_avx512.c" />
