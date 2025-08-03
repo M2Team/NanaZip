@@ -52,7 +52,6 @@ struct CExtractNtOptions
 {
   CBoolPair NtSecurity;
   CBoolPair SymLinks;
-  CBoolPair SymLinks_AllowDangerous;
   CBoolPair HardLinks;
   CBoolPair AltStreams;
   bool ReplaceColonForAltStream;
@@ -66,6 +65,8 @@ struct CExtractNtOptions
   bool PreserveATime;
   bool OpenShareForWrite;
 
+  unsigned SymLinks_DangerousLevel;
+
   UInt64 MemLimit;
 
   CExtractNtOptions():
@@ -74,10 +75,10 @@ struct CExtractNtOptions
       ExtractOwner(false),
       PreserveATime(false),
       OpenShareForWrite(false),
+      SymLinks_DangerousLevel(5),
       MemLimit((UInt64)(Int64)-1)
   {
     SymLinks.Val = true;
-    SymLinks_AllowDangerous.Val = false;
     HardLinks.Val = true;
     AltStreams.Val = true;
 
@@ -166,18 +167,21 @@ struct CFiTimesCAM
       ATime_Defined |
       MTime_Defined;
   }
+  bool SetDirTime_to_FS(CFSTR path) const;
+#ifdef SUPPORT_LINKS
+  bool SetLinkFileTime_to_FS(CFSTR path) const;
+#endif
 };
 
 struct CDirPathTime: public CFiTimesCAM
 {
   FString Path;
   
-  bool SetDirTime() const;
+  bool SetDirTime_to_FS_2() const { return SetDirTime_to_FS(Path); }
 };
 
 
 #ifdef SUPPORT_LINKS
-
 
 enum ELinkType
 {
@@ -227,6 +231,15 @@ private:
 #endif // SUPPORT_LINKS
 
 
+
+struct CProcessedFileInfo
+{
+  CArcTime CTime;
+  CArcTime ATime;
+  CArcTime MTime;
+  UInt32 Attrib;
+  bool Attrib_Defined;
+  
 #ifndef _WIN32
 
 struct COwnerInfo
@@ -243,7 +256,75 @@ struct COwnerInfo
   }
 };
 
+  COwnerInfo Owner;
+  COwnerInfo Group;
 #endif
+
+  void Clear()
+  {
+#ifndef _WIN32
+    Attrib_Defined = false;
+    Owner.Clear();
+#endif
+  }
+
+    bool IsReparse() const
+    {
+      return (Attrib_Defined && (Attrib & FILE_ATTRIBUTE_REPARSE_POINT) != 0);
+    }
+    
+    bool IsLinuxSymLink() const
+    {
+      return (Attrib_Defined && MY_LIN_S_ISLNK(Attrib >> 16));
+    }
+
+    void SetFromPosixAttrib(UInt32 a)
+    {
+      // here we set only part of combined attribute required by SetFileAttrib() call
+      #ifdef _WIN32
+      // Windows sets FILE_ATTRIBUTE_NORMAL, if we try to set 0 as attribute.
+      Attrib = MY_LIN_S_ISDIR(a) ?
+          FILE_ATTRIBUTE_DIRECTORY :
+          FILE_ATTRIBUTE_ARCHIVE;
+      if ((a & 0222) == 0) // (& S_IWUSR) in p7zip
+        Attrib |= FILE_ATTRIBUTE_READONLY;
+      // 22.00 : we need type bits for (MY_LIN_S_IFLNK) for IsLinuxSymLink()
+      a &= MY_LIN_S_IFMT;
+      if (a == MY_LIN_S_IFLNK)
+        Attrib |= (a << 16);
+      #else
+      Attrib = (a << 16) | FILE_ATTRIBUTE_UNIX_EXTENSION;
+      #endif
+      Attrib_Defined = true;
+    }
+};
+
+
+#ifdef SUPPORT_LINKS
+
+struct CPostLink
+{
+  UInt32 Index_in_Arc;
+  bool item_IsDir;                // _item.IsDir
+  UString item_Path;              // _item.Path;
+  UStringVector item_PathParts;   // _item.PathParts;
+  CProcessedFileInfo item_FileInfo; // _fi
+  FString fullProcessedPath_from; // full file path in FS
+  CLinkInfo LinkInfo;
+};
+
+/*
+struct CPostLinks
+{
+  void Clear()
+  {
+    Links.Clear();
+  }
+};
+*/
+
+#endif // SUPPORT_LINKS
+
 
 
 class CArchiveExtractCallback Z7_final:
@@ -292,8 +373,9 @@ public:
 private:
 
   const CArc *_arc;
+public:
   CExtractNtOptions _ntOptions;
-
+private:
   bool _encrypted;
   bool _isSplit;
   bool _curSize_Defined;
@@ -325,7 +407,9 @@ private:
   CMyComPtr<ICryptoGetTextPassword> _cryptoGetTextPassword;
 
   FString _dirPathPrefix;
+public:
   FString _dirPathPrefix_Full;
+private:
 
   #ifndef Z7_SFX
 
@@ -337,49 +421,7 @@ private:
   CReadArcItem _item;
   FString _diskFilePath;
 
-  struct CProcessedFileInfo
-  {
-    CArcTime CTime;
-    CArcTime ATime;
-    CArcTime MTime;
-    UInt32 Attrib;
-    bool Attrib_Defined;
-
-   #ifndef _WIN32
-    COwnerInfo Owner;
-    COwnerInfo Group;
-   #endif
-
-    bool IsReparse() const
-    {
-      return (Attrib_Defined && (Attrib & FILE_ATTRIBUTE_REPARSE_POINT) != 0);
-    }
-    
-    bool IsLinuxSymLink() const
-    {
-      return (Attrib_Defined && MY_LIN_S_ISLNK(Attrib >> 16));
-    }
-
-    void SetFromPosixAttrib(UInt32 a)
-    {
-      // here we set only part of combined attribute required by SetFileAttrib() call
-      #ifdef _WIN32
-      // Windows sets FILE_ATTRIBUTE_NORMAL, if we try to set 0 as attribute.
-      Attrib = MY_LIN_S_ISDIR(a) ?
-          FILE_ATTRIBUTE_DIRECTORY :
-          FILE_ATTRIBUTE_ARCHIVE;
-      if ((a & 0222) == 0) // (& S_IWUSR) in p7zip
-        Attrib |= FILE_ATTRIBUTE_READONLY;
-      // 22.00 : we need type bits for (MY_LIN_S_IFLNK) for IsLinuxSymLink()
-      a &= MY_LIN_S_IFMT;
-      if (a == MY_LIN_S_IFLNK)
-        Attrib |= (a << 16);
-      #else
-      Attrib = (a << 16) | FILE_ATTRIBUTE_UNIX_EXTENSION;
-      #endif
-      Attrib_Defined = true;
-    }
-  } _fi;
+  CProcessedFileInfo _fi;
 
   UInt64 _position;
   UInt64 _curSize;
@@ -421,20 +463,21 @@ private:
   // CObjectVector<NWindows::NFile::NDir::CDelayedSymLink> _delayedSymLinks;
   #endif
 
-  void CreateComplexDirectory(const UStringVector &dirPathParts, FString &fullPath);
+  void CreateComplexDirectory(
+      const UStringVector &dirPathParts, bool isFinal, FString &fullPath);
   HRESULT GetTime(UInt32 index, PROPID propID, CArcTime &ft);
   HRESULT GetUnpackSize();
 
   FString Hash_GetFullFilePath();
 
-  void SetAttrib();
+  void SetAttrib() const;
 
 public:
-  HRESULT SendMessageError(const char *message, const FString &path);
-  HRESULT SendMessageError_with_Error(HRESULT errorCode, const char *message, const FString &path);
-  HRESULT SendMessageError_with_LastError(const char *message, const FString &path);
-  HRESULT SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2);
-  HRESULT SendMessageError2_with_LastError(const char *message, const FString &path1, const FString &path2);
+  HRESULT SendMessageError(const char *message, const FString &path) const;
+  HRESULT SendMessageError_with_Error(HRESULT errorCode, const char *message, const FString &path) const;
+  HRESULT SendMessageError_with_LastError(const char *message, const FString &path) const;
+  HRESULT SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2) const;
+  HRESULT SendMessageError2_with_LastError(const char *message, const FString &path1, const FString &path2) const;
 
 #if defined(_WIN32) && !defined(UNDER_CE) && !defined(Z7_SFX)
   NExtract::NZoneIdMode::EEnum ZoneMode;
@@ -497,10 +540,11 @@ public:
       UInt64 packSize);
 
 
-  #ifdef SUPPORT_LINKS
+#ifdef SUPPORT_LINKS
 
 private:
   CHardLinks _hardLinks;
+  CObjectVector<CPostLink> _postLinks;
   CLinkInfo _link;
   // const void *NtReparse_Data;
   // UInt32 NtReparse_Size;
@@ -512,13 +556,16 @@ private:
       const FString &fullProcessedPath_from,
       const CLinkInfo &linkInfo,
       bool &linkWasSet);
+  HRESULT SetPostLinks() const;
 
 public:
-  // call PrepareHardLinks() after Init()
+  HRESULT CreateHardLink2(const FString &newFilePath,
+      const FString &existFilePath, bool &link_was_Created) const;
+  HRESULT DeleteLinkFileAlways_or_RemoveEmptyDir(const FString &path, bool checkThatFileIsEmpty) const;
   HRESULT PrepareHardLinks(const CRecordVector<UInt32> *realIndices);  // NULL means all items
+#endif
 
-  #endif
-
+private:
 
   #ifdef SUPPORT_ALT_STREAMS
   CObjectVector<CIndexToPathPair> _renamedFiles;
@@ -526,6 +573,7 @@ public:
 
   // call it after Init()
 
+public:
   #ifndef Z7_SFX
   void SetBaseParentFolderIndex(UInt32 indexInArc)
   {
@@ -547,7 +595,6 @@ private:
 
   HRESULT Read_fi_Props();
   void CorrectPathParts();
-  void GetFiTimesCAM(CFiTimesCAM &pt);
   void CreateFolders();
   
   HRESULT CheckExistFile(FString &fullProcessedPath, bool &needExit);
@@ -556,8 +603,8 @@ private:
 
   HRESULT CloseFile();
   HRESULT CloseReparseAndFile();
-  HRESULT CloseReparseAndFile2();
   HRESULT SetDirsTimes();
+  HRESULT SetSecurityInfo(UInt32 indexInArc, const FString &path) const;
 };
 
 

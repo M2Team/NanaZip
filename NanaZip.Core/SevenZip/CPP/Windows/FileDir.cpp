@@ -124,7 +124,7 @@ bool GetSystemDir(FString &path)
 #endif // UNDER_CE
 
 
-bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+static bool SetFileTime_Base(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime, DWORD dwFlagsAndAttributes)
 {
   #ifndef _UNICODE
   if (!g_IsNT)
@@ -137,14 +137,14 @@ bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CF
   HANDLE hDir = INVALID_HANDLE_VALUE;
   IF_USE_MAIN_PATH
     hDir = ::CreateFileW(fs2us(path), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+        NULL, OPEN_EXISTING, dwFlagsAndAttributes, NULL);
   #ifdef Z7_LONG_PATH
   if (hDir == INVALID_HANDLE_VALUE && USE_SUPER_PATH)
   {
     UString superPath;
     if (GetSuperPath(path, superPath, USE_MAIN_PATH))
       hDir = ::CreateFileW(superPath, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-          NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+          NULL, OPEN_EXISTING, dwFlagsAndAttributes, NULL);
   }
   #endif
 
@@ -157,6 +157,15 @@ bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CF
   return res;
 }
 
+bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+{
+  return SetFileTime_Base(path, cTime, aTime, mTime, FILE_FLAG_BACKUP_SEMANTICS);
+}
+
+bool SetLinkFileTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+{
+  return SetFileTime_Base(path, cTime, aTime, mTime, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT);
+}
 
 
 bool SetFileAttrib(CFSTR path, DWORD attrib)
@@ -1173,17 +1182,15 @@ bool GetCurrentDir(FString &path)
 
 
 
-bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+static bool SetFileTime_Base(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime, const int flags)
 {
   // need testing
   /*
   struct utimbuf buf;
   struct stat st;
   UNUSED_VAR(cTime)
- 
   printf("\nstat = %s\n", path);
   int ret = stat(path, &st);
-
   if (ret == 0)
   {
     buf.actime  = st.st_atime;
@@ -1195,47 +1202,42 @@ bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CF
     buf.actime  = cur_time;
     buf.modtime = cur_time;
   }
-
   if (aTime)
   {
     UInt32 ut;
     if (NTime::FileTimeToUnixTime(*aTime, ut))
       buf.actime = ut;
   }
-
   if (mTime)
   {
     UInt32 ut;
     if (NTime::FileTimeToUnixTime(*mTime, ut))
       buf.modtime = ut;
   }
-
   return utime(path, &buf) == 0;
   */
 
   // if (!aTime && !mTime) return true;
-
   struct timespec times[2];
   UNUSED_VAR(cTime)
-  
   bool needChange;
   needChange  = FiTime_To_timespec(aTime, times[0]);
   needChange |= FiTime_To_timespec(mTime, times[1]);
-
-  /*
-  if (mTime)
-  {
-    printf("\n time = %ld.%9ld\n", mTime->tv_sec, mTime->tv_nsec);
-  }
-  */
-
+  // if (mTime) { printf("\n time = %ld.%9ld\n", mTime->tv_sec, mTime->tv_nsec);  }
   if (!needChange)
     return true;
-  const int flags = 0; // follow link
-    // = AT_SYMLINK_NOFOLLOW; // don't follow link
   return utimensat(AT_FDCWD, path, times, flags) == 0;
 }
 
+bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+{
+  return SetFileTime_Base(path, cTime, aTime, mTime, 0); // (flags = 0) means follow_link
+}
+
+bool SetLinkFileTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+{
+  return SetFileTime_Base(path, cTime, aTime, mTime, AT_SYMLINK_NOFOLLOW);
+}
 
 
 struct C_umask

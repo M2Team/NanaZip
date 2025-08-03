@@ -66,18 +66,14 @@ HRESULT CThreadInfo::Create()
   if (wres == 0) { wres = CanWriteEvent.Create();
   if (wres == 0)
   {
+    wres =
 #ifdef _WIN32
-    if (Encoder->_props.NumThreadGroups != 0)
-    {
-       const UInt32 group = ThreadNextGroup_GetNext(&Encoder->ThreadNextGroup);
-      wres = Thread.Create_With_Group(MFThread, this, group, 0); // affinity
-    }
-    else
+      Encoder->_props.NumThreadGroups > 1 ?
+        Thread.Create_With_Group(MFThread, this, ThreadNextGroup_GetNext(&Encoder->ThreadNextGroup), 0) : // affinity
 #endif
-    if (Encoder->_props.Affinity != 0)
-      wres = Thread.Create_With_Affinity(MFThread, this, (CAffinityMask)Encoder->_props.Affinity);
-    else
-      wres = Thread.Create(MFThread, this);
+      Encoder->_props.Affinity != 0 ?
+        Thread.Create_With_Affinity(MFThread, this, (CAffinityMask)Encoder->_props.Affinity) :
+        Thread.Create(MFThread, this);
   }}}
   return HRESULT_FROM_WIN32(wres);
 }
@@ -935,14 +931,13 @@ void CEncoder::WriteBytes(const Byte *data, UInt32 sizeInBits, unsigned lastByte
 HRESULT CEncoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *outStream,
     const UInt64 * /* inSize */, const UInt64 * /* outSize */, ICompressProgressInfo *progress)
 {
-  ThreadNextGroup_Init(&ThreadNextGroup, _props.NumThreadGroups, 0); // startGroup
-
   NumBlocks = 0;
-  #ifndef Z7_ST
+#ifndef Z7_ST
   Progress = progress;
+  ThreadNextGroup_Init(&ThreadNextGroup, _props.NumThreadGroups, 0); // startGroup
   RINOK(Create())
   for (UInt32 t = 0; t < NumThreads; t++)
-  #endif
+#endif
   {
     #ifndef Z7_ST
     CThreadInfo &ti = ThreadsInfo[t];

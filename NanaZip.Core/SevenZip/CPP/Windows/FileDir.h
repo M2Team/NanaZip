@@ -18,8 +18,19 @@ bool GetSystemDir(FString &path);
 WIN32 API : SetFileTime() doesn't allow to set zero timestamps in file
 but linux : allows unix time = 0 in filesystem
 */
-
+/*
+SetDirTime() can be used to set time for file or for dir.
+If path is symbolic link, SetDirTime() will follow symbolic link,
+and it will set timestamps of symbolic link's target file or dir.
+*/
 bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime);
+
+/*
+SetLinkFileTime() doesn't follow symbolic link,
+and it sets timestamps for symbolic link file itself.
+If (path) is not symbolic link, it still can work (at least in some new OS versions).
+*/
+bool SetLinkFileTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime);
 
 
 #ifdef _WIN32
