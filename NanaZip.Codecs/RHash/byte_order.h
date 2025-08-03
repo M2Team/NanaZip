@@ -125,8 +125,10 @@ extern "C" {
 /* rhash_ctz - count traling zero bits */
 #if HAS_GNUC(3, 4) || HAS_CLANG_BUILTIN(__builtin_ctz)
 # define rhash_ctz(x) __builtin_ctz(x)
+# define rhash_ctz64(x) __builtin_ctzll(x)
 #else
-unsigned rhash_ctz(unsigned); /* define as function */
+unsigned rhash_ctz(unsigned);
+unsigned rhash_ctz64(uint64_t);
 #endif
 
 /* rhash_popcount - count the number of 1-bits */
@@ -137,6 +139,7 @@ unsigned rhash_popcount(unsigned); /* define as function */
 #endif
 
 void rhash_swap_copy_str_to_u32(void* to, int index, const void* from, size_t length);
+void rhash_swap_memset_to_u32(void* to, int index, int c, size_t length);
 void rhash_swap_copy_str_to_u64(void* to, int index, const void* from, size_t length);
 void rhash_swap_copy_u64_to_str(void* to, const void* from, size_t length);
 void rhash_u32_mem_swap(unsigned* p, int length_in_u32);
@@ -182,6 +185,8 @@ static RHASH_INLINE uint64_t bswap_64(uint64_t x)
 
 # define be32_copy(to, index, from, length) memcpy((char*)(to) + (index), (from), (length))
 # define le32_copy(to, index, from, length) rhash_swap_copy_str_to_u32((to), (index), (from), (length))
+# define be32_memset(to, index, c, length) memset((char*)(to) + (index), (c), (length))
+# define le32_memset(to, index, c, length) rhash_swap_memset_to_u32((to), (index), (c), (length))
 # define be64_copy(to, index, from, length) memcpy((char*)(to) + (index), (from), (length))
 # define le64_copy(to, index, from, length) rhash_swap_copy_str_to_u64((to), (index), (from), (length))
 # define me64_to_be_str(to, from, length) memcpy((to), (from), (length))
@@ -195,6 +200,8 @@ static RHASH_INLINE uint64_t bswap_64(uint64_t x)
 
 # define be32_copy(to, index, from, length) rhash_swap_copy_str_to_u32((to), (index), (from), (length))
 # define le32_copy(to, index, from, length) memcpy((char*)(to) + (index), (from), (length))
+# define be32_memset(to, index, c, length) rhash_swap_memset_to_u32((to), (index), (c), (length))
+# define le32_memset(to, index, c, length) memset((char*)(to) + (index), (c), (length))
 # define be64_copy(to, index, from, length) rhash_swap_copy_str_to_u64((to), (index), (from), (length))
 # define le64_copy(to, index, from, length) memcpy((char*)(to) + (index), (from), (length))
 # define me64_to_be_str(to, from, length) rhash_swap_copy_u64_to_str((to), (from), (length))
@@ -208,11 +215,16 @@ static RHASH_INLINE uint64_t bswap_64(uint64_t x)
 #define ROTR64(qword, n) ((qword) >> (n) ^ ((qword) << (64 - (n))))
 
 #define CPU_FEATURE_SSE4_2 (52)
+#define CPU_FEATURE_SHANI (29)
 
-#if HAS_GNUC(4, 3) && (defined(CPU_X64) || defined(CPU_IA32))
-# define HAS_INTEL_CPUID
+#if (HAS_GNUC(3, 4) || defined(__clang__)) && (defined(CPU_X64) || defined(CPU_IA32))
+# define HAS_GCC_INTEL_CPUID
+int has_cpu_feature(unsigned feature_bit);
+#elif (_MSC_VER >= 1310) && (_M_IX86 || _M_AMD64)
+# define HAS_MSVC_INTEL_CPUID
 int has_cpu_feature(unsigned feature_bit);
 #else
+# define NO_HAS_CPU_FEATURE
 # define has_cpu_feature(x) (0)
 #endif
 

@@ -125,6 +125,7 @@ void rhash_tth_final(tth_ctx* ctx, unsigned char result[24])
 	if (result) memcpy(result, last_message, tiger_hash_length);
 }
 
+#if !defined(NO_IMPORT_EXPORT)
 static size_t tth_get_stack_size(uint64_t block_count)
 {
 	size_t stack_size = 0;
@@ -133,7 +134,6 @@ static size_t tth_get_stack_size(uint64_t block_count)
 	return stack_size;
 }
 
-#if !defined(NO_IMPORT_EXPORT)
 /**
  * Export tth context to a memory region, or calculate the
  * size required for context export.

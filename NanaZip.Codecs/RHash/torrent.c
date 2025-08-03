@@ -54,7 +54,7 @@ void bt_init(torrent_ctx* ctx)
 
 #ifdef USE_OPENSSL
 	/* get the methods of the selected SHA1 algorithm */
-	assert(rhash_info_table[3].info->hash_id == RHASH_SHA1);
+	assert(rhash_info_table[3].info->hash_id == EXTENDED_SHA1);
 	assert(rhash_info_table[3].context_size <= (sizeof(sha1_ctx) + sizeof(unsigned long)));
 	rhash_load_sha1_methods(&ctx->sha1_methods, METHODS_SELECTED);
 #endif
