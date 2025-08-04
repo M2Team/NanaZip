@@ -37,8 +37,8 @@ contributor, because NanaZip is always a community-friendly open-source project.
 If you'd like me to add features or improvements ahead of time, please use
 [paid services](https://github.com/MouriNaruto/MouriNaruto/blob/main/PaidServices.md).
 
-Note: Only GitHub, Microsoft Store, My Digital Life Forums and SourceForge have
-hosted NanaZip official project pages.
+Note: Only GitHub, Microsoft Store, My Digital Life Forums, SourceForge, and
+Windows App Community have hosted NanaZip official project pages.
 
 Kenji Mouri
 
