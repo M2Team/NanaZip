@@ -207,7 +207,12 @@ namespace NanaZip::Codecs::Archive
                 {
                     break;
                 }
-                this->m_GlobalOffset = BinaryHeaderSize + HeaderStringSize + 1;
+                this->m_GlobalOffset = BinaryHeaderSize + HeaderStringSize;
+
+                if (this->m_GlobalOffset % 4 != 0)
+                {
+                    this->m_GlobalOffset += 4 - this->m_GlobalOffset % 4;
+                }
 
                 std::string HeaderString(HeaderStringSize, '\0');
                 if (FAILED(this->ReadFileStream(
