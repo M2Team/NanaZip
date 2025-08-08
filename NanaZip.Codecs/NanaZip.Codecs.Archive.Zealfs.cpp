@@ -16,6 +16,8 @@
 
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
+#include "NanaZip.Codecs.Specification.Zealfs.h"
+
 namespace
 {
     struct PropertyItem
@@ -70,17 +72,8 @@ namespace
         std::uint8_t StartPage;
         // Size of the file in bytes, little-endian!
         std::uint16_t Size;
-
-        // Zeal 8-bit OS date format (BCD)
-
-        std::uint8_t Year[2];
-        std::uint8_t Month;
-        std::uint8_t Day;
-        std::uint8_t Date;
-        std::uint8_t Hours;
-        std::uint8_t Minutes;
-        std::uint8_t Seconds;
-
+        // Date of creation.
+        ZEALOS_TIME CreationTime;
         // Reserved for future use
         std::uint8_t Reserved[4];
     };
@@ -193,17 +186,19 @@ namespace NanaZip::Codecs::Archive
     private:
 
         FILETIME GetFileTime(
-            ZealfsFileEntry const& Entry)
+            ZEALOS_TIME const& Value)
         {
+            SYSTEMTIME LocalTime = { 0 };
+            LocalTime.wYear = this->ReadBcd(&Value.Year[0]) * 100;
+            LocalTime.wYear += this->ReadBcd(&Value.Year[1]);
+            LocalTime.wMonth = this->ReadBcd(&Value.Month);
+            LocalTime.wDayOfWeek = this->ReadBcd(&Value.Date) + 1;
+            LocalTime.wDay = this->ReadBcd(&Value.Day);
+            LocalTime.wHour = this->ReadBcd(&Value.Hours);
+            LocalTime.wMinute = this->ReadBcd(&Value.Minutes);
+            LocalTime.wSecond = this->ReadBcd(&Value.Seconds);
             SYSTEMTIME SystemTime = { 0 };
-            SystemTime.wYear = this->ReadBcd(&Entry.Year[0]) * 100;
-            SystemTime.wYear += this->ReadBcd(&Entry.Year[1]);
-            SystemTime.wMonth = this->ReadBcd(&Entry.Month) - 1;
-            SystemTime.wDayOfWeek = this->ReadBcd(&Entry.Date);
-            SystemTime.wDay = this->ReadBcd(&Entry.Day);
-            SystemTime.wHour = this->ReadBcd(&Entry.Hours);
-            SystemTime.wMinute = this->ReadBcd(&Entry.Minutes);
-            SystemTime.wSecond = this->ReadBcd(&Entry.Seconds);
+            ::TzSpecificLocalTimeToSystemTime(nullptr, &LocalTime, &SystemTime);
             FILETIME Result = { 0 };
             ::SystemTimeToFileTime(&SystemTime, &Result);
             return Result;
@@ -461,7 +456,7 @@ namespace NanaZip::Codecs::Archive
             }
             case SevenZipArchiveCreationTime:
             {
-                Value->filetime = this->GetFileTime(Information);
+                Value->filetime = this->GetFileTime(Information.CreationTime);
                 Value->vt = VT_FILETIME;
                 break;
             }
