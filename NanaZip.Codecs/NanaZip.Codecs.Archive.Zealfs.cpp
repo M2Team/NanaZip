@@ -50,13 +50,7 @@ namespace
 
     // Reference: https://github.com/Zeal8bit/ZealFS
 
-    const std::uint8_t g_ZealfsSignature = 'Z';
-
-    const std::uint16_t g_ZealfsPageSize = 256;
-    const std::uint16_t g_ZealfsMaximumPageCount = 256;
     const std::uint16_t g_ZealfsMaximumNameLength = 16;
-    const std::uint16_t g_ZealfsPageBitmapSize = g_ZealfsMaximumPageCount / 8;
-    const std::uint16_t g_ZealfsPartitionHeaderReservedSize = 28;
 
     const std::uint8_t ZealfsFileFlagDirectory = 0x01;
     const std::uint8_t ZealfsFileFlagOccupied = 0x80;
@@ -78,32 +72,6 @@ namespace
         std::uint8_t Reserved[4];
     };
 
-    // Type for partition header, which before the root directory, must be at an
-    // offset multiple of sizeof(ZealfsFileEntry)
-    struct ZealfsPartitionHeader
-    {
-        // Must be 'Z' ascii code
-        std::uint8_t Signature;
-        // Version of the file system
-        std::uint8_t Version;
-        // Number of bytes composing the bitmap.
-        // No matter how big the disk actually is, the bitmap is always
-        // g_ZealfsPageBitmapSize bytes big, thus we need field to mark the
-        // actual number of bytes we will be using.
-        std::uint8_t BitmapSize;
-        // Number of free pages
-        std::uint8_t FreePages;
-        // Bitmap for the free pages. A used page is marked as 1, else 0
-        // 256 pages/8-bit = 32
-        std::uint8_t PagesBitmap[g_ZealfsPageBitmapSize];
-        // Reserved bytes, to align the entries and for future use, such as
-        // extended root directory, volume name, extra bitmap, etc...
-        std::uint8_t Reserved[g_ZealfsPartitionHeaderReservedSize];
-    };
-
-    // According to zealfs_fuse.c's implementation
-    // Minimum BitmapSize seems to be 1 a.k.a. 8 bits which for 8 pages.
-    const std::uint16_t g_ZealfsMinimumPartitionSize = 8 * g_ZealfsPageSize;
     // According to zealfs_fuse.c's implementation
     const std::uint8_t g_ZealfsCurrentVersion = 1;
 
@@ -192,7 +160,7 @@ namespace NanaZip::Codecs::Archive
             LocalTime.wYear = this->ReadBcd(&Value.Year[0]) * 100;
             LocalTime.wYear += this->ReadBcd(&Value.Year[1]);
             LocalTime.wMonth = this->ReadBcd(&Value.Month);
-            LocalTime.wDayOfWeek = this->ReadBcd(&Value.Date) + 1;
+            LocalTime.wDayOfWeek = this->ReadBcd(&Value.Date);
             LocalTime.wDay = this->ReadBcd(&Value.Day);
             LocalTime.wHour = this->ReadBcd(&Value.Hours);
             LocalTime.wMinute = this->ReadBcd(&Value.Minutes);
@@ -209,7 +177,7 @@ namespace NanaZip::Codecs::Archive
             std::string const& RootPath)
         {
             std::uint32_t MaximumOffset =
-                this->GetAlignedSize(Offset, g_ZealfsPageSize);
+                this->GetAlignedSize(Offset, ZEALFS_V1_PAGE_SIZE);
 
             std::uint8_t MaximumCount = static_cast<std::uint8_t>(
                 (MaximumOffset - Offset) / sizeof(ZealfsFileEntry));
@@ -239,7 +207,7 @@ namespace NanaZip::Codecs::Archive
                 if (Information.Flags & ZealfsFileFlagDirectory)
                 {
                     this->GetAllPaths(
-                        Information.StartPage * g_ZealfsPageSize,
+                        Information.StartPage * ZEALFS_V1_PAGE_SIZE,
                         Path + "/");
                 }
 
@@ -285,26 +253,26 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                if (BundleSize < g_ZealfsMinimumPartitionSize)
+                if (BundleSize < ZEALFS_V1_MINIMUM_PARTITION_SIZE)
                 {
                     break;
                 }
 
-                ZealfsPartitionHeader Header = { 0 };
+                ZEALFS_V1_HEADER Header = { 0 };
                 if (FAILED(this->ReadFileStream(
                     0,
                     &Header,
-                    sizeof(ZealfsPartitionHeader))))
+                    sizeof(ZEALFS_V1_HEADER))))
                 {
                     break;
                 }
 
-                if (g_ZealfsSignature != Header.Signature)
+                if (ZEALFS_MAGIC != Header.Common.Magic)
                 {
                     break;
                 }
 
-                if (g_ZealfsCurrentVersion != Header.Version)
+                if (g_ZealfsCurrentVersion != Header.Common.Version)
                 {
                     break;
                 }
@@ -314,7 +282,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                this->m_PhysicalSize = g_ZealfsPageSize * Header.BitmapSize * 8;
+                this->m_PhysicalSize = ZEALFS_V1_PAGE_SIZE * Header.BitmapSize * 8;
                 this->m_FreeSpace = 0;
                 for (std::uint8_t i = 0; i < Header.BitmapSize; ++i)
                 {
@@ -327,7 +295,7 @@ namespace NanaZip::Codecs::Archive
                     this->m_FreeSpace += !(0x40 & Header.PagesBitmap[i]);
                     this->m_FreeSpace += !(0x80 & Header.PagesBitmap[i]);
                 }
-                this->m_FreeSpace *= g_ZealfsPageSize;
+                this->m_FreeSpace *= ZEALFS_V1_PAGE_SIZE;
 
                 std::uint64_t TotalFiles = 0;
                 std::uint64_t TotalBytes = this->m_PhysicalSize;
@@ -337,7 +305,7 @@ namespace NanaZip::Codecs::Archive
                     OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
                 }
 
-                this->GetAllPaths(sizeof(ZealfsPartitionHeader), "");
+                this->GetAllPaths(sizeof(ZEALFS_V1_HEADER), "");
 
                 TotalFiles = this->m_TemporaryFilePaths.size();
                 if (OpenCallback)
@@ -546,20 +514,20 @@ namespace NanaZip::Codecs::Archive
                 std::uint16_t Todo = this->ReadUInt16(&Information.Size);
                 std::uint16_t Done = 0;
                 std::uint16_t CurrentOffset =
-                    Information.StartPage * g_ZealfsPageSize;
+                    Information.StartPage * ZEALFS_V1_PAGE_SIZE;
 
                 bool Failed = false;
                 while (Todo && CurrentOffset)
                 {
-                    std::uint16_t CurrentDo = Todo > g_ZealfsPageSize - 1
-                        ? g_ZealfsPageSize - 1
+                    std::uint16_t CurrentDo = Todo > ZEALFS_V1_PAGE_SIZE - 1
+                        ? ZEALFS_V1_PAGE_SIZE - 1
                         : Todo;
 
-                    std::uint8_t Buffer[g_ZealfsPageSize];
+                    std::uint8_t Buffer[ZEALFS_V1_PAGE_SIZE];
                     if (FAILED(this->ReadFileStream(
                         CurrentOffset,
                         Buffer,
-                        CurrentDo)))
+                        ZEALFS_V1_PAGE_SIZE)))
                     {
                         Failed = true;
                         break;
@@ -578,7 +546,7 @@ namespace NanaZip::Codecs::Archive
 
                     Todo -= CurrentDo;
                     Done += CurrentDo;
-                    CurrentOffset = Buffer[0] * g_ZealfsPageSize;
+                    CurrentOffset = Buffer[0] * ZEALFS_V1_PAGE_SIZE;
                 }
 
                 OutputStream->Release();
@@ -622,7 +590,7 @@ namespace NanaZip::Codecs::Archive
             }
             case SevenZipArchiveClusterSize:
             {
-                Value->ulVal = g_ZealfsPageSize;
+                Value->ulVal = ZEALFS_V1_PAGE_SIZE;
                 Value->vt = VT_UI4;
                 break;
             }
