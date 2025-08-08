@@ -1131,5 +1131,6 @@
     <ClInclude Include="LittleFS\lfs_util.h">
       <Filter>LittleFS</Filter>
     </ClInclude>
+    <ClInclude Include="NanaZip.Codecs.Specification.Zealfs.h" />
   </ItemGroup>
 </Project>
