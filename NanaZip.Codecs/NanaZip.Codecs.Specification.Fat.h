@@ -1,7 +1,7 @@
 ﻿/*
  * PROJECT:    NanaZip
  * FILE:       NanaZip.Codecs.Specification.Fat.h
- * PURPOSE:    Definition for the on-disk structure of the FAT series file system
+ * PURPOSE:    Definition for the FAT series file system on-disk structure
  *
  * LICENSE:    The MIT License
  *
