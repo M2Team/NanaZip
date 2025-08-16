@@ -45,7 +45,7 @@ EXTERN_C int WINAPI ModernMessageBoxW(
         return ::OriginalMessageBoxW(hWnd, lpText, lpCaption, uType);
     }
 
-    TASKDIALOGCONFIG TaskDialogConfig = { 0 };
+    TASKDIALOGCONFIG TaskDialogConfig = {};
 
     TaskDialogConfig.cbSize = sizeof(TASKDIALOGCONFIG);
     TaskDialogConfig.hwndParent = hWnd;

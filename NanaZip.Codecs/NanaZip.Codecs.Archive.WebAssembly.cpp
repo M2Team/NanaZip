@@ -247,7 +247,7 @@ namespace NanaZip::Codecs::Archive
                             BundleSize - i < MaximumSize
                             ? BundleSize - i
                             : MaximumSize);
-                        std::uint8_t Buffer[MaximumSize] = { 0 };
+                        std::uint8_t Buffer[MaximumSize] = {};
                         if (FAILED(this->ReadFileStream(
                             i,
                             Buffer,
@@ -279,7 +279,7 @@ namespace NanaZip::Codecs::Archive
                                 BundleSize - i < MaximumSize
                                 ? BundleSize - i
                                 : MaximumSize);
-                            std::uint8_t Buffer[MaximumSize] = { 0 };
+                            std::uint8_t Buffer[MaximumSize] = {};
                             if (FAILED(this->ReadFileStream(
                                 i,
                                 Buffer,

@@ -126,7 +126,7 @@ Z7_COM7F_IMF(CEncoder::Code(ISequentialInStream *inStream,
   _processedIn = 0;
   _processedOut = 0;
 
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = {};
   Context.InputStream = inStream;
   Context.OutputStream = outStream;
   Context.Progress = progress;

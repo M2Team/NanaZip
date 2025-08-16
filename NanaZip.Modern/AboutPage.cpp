@@ -82,7 +82,7 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(e);
 
-        SHELLEXECUTEINFOW ExecInfo = { 0 };
+        SHELLEXECUTEINFOW ExecInfo = {};
         ExecInfo.cbSize = sizeof(SHELLEXECUTEINFOW);
         ExecInfo.lpVerb = L"open";
         ExecInfo.lpFile = L"https://github.com/M2Team/NanaZip";

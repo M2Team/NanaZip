@@ -433,7 +433,7 @@ namespace NanaZip::Codecs::Archive
     private:
 
         IInStream* m_FileStream = nullptr;
-        LfsSuperMetadataHeader m_SuperMetadataHeader = { 0 };
+        LfsSuperMetadataHeader m_SuperMetadataHeader = {};
         std::vector<LittlefsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;
 
@@ -561,7 +561,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                LfsMetadataTag PreviousTag = { 0 };
+                LfsMetadataTag PreviousTag = {};
                 PreviousTag.AsRaw = g_LfsInitialTag;
 
                 if (BundleSize < sizeof(LfsSuperMetadataHeader))
@@ -664,7 +664,7 @@ namespace NanaZip::Codecs::Archive
         {
             this->m_IsInitialized = false;
             this->m_FilePaths.clear();
-            this->m_SuperMetadataHeader = { 0 };
+            this->m_SuperMetadataHeader = {};
             if (this->m_FileStream)
             {
                 this->m_FileStream->Release();

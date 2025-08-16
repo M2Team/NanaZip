@@ -156,7 +156,7 @@ namespace NanaZip::Codecs::Archive
         FILETIME GetFileTime(
             ZEALOS_TIME const& Value)
         {
-            SYSTEMTIME LocalTime = { 0 };
+            SYSTEMTIME LocalTime = {};
             LocalTime.wYear = this->ReadBcd(&Value.Year[0]) * 100;
             LocalTime.wYear += this->ReadBcd(&Value.Year[1]);
             LocalTime.wMonth = this->ReadBcd(&Value.Month);
@@ -165,9 +165,9 @@ namespace NanaZip::Codecs::Archive
             LocalTime.wHour = this->ReadBcd(&Value.Hours);
             LocalTime.wMinute = this->ReadBcd(&Value.Minutes);
             LocalTime.wSecond = this->ReadBcd(&Value.Seconds);
-            SYSTEMTIME SystemTime = { 0 };
+            SYSTEMTIME SystemTime = {};
             ::TzSpecificLocalTimeToSystemTime(nullptr, &LocalTime, &SystemTime);
-            FILETIME Result = { 0 };
+            FILETIME Result = {};
             ::SystemTimeToFileTime(&SystemTime, &Result);
             return Result;
         }
@@ -184,7 +184,7 @@ namespace NanaZip::Codecs::Archive
 
             for (std::uint8_t i = 0; i < MaximumCount; ++i)
             {
-                ZealfsFileEntry Information = { 0 };
+                ZealfsFileEntry Information = {};
                 if (FAILED(this->ReadFileStream(
                     Offset + (i * sizeof(ZealfsFileEntry)),
                     &Information,
@@ -258,7 +258,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                ZEALFS_V1_HEADER Header = { 0 };
+                ZEALFS_V1_HEADER Header = {};
                 if (FAILED(this->ReadFileStream(
                     0,
                     &Header,

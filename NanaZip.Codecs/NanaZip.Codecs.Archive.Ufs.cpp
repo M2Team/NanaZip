@@ -136,7 +136,7 @@ namespace NanaZip::Codecs::Archive
         IInStream* m_FileStream = nullptr;
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
-        fs m_SuperBlock = { 0 };
+        fs m_SuperBlock = {};
         std::map<std::string, std::uint32_t> m_TemporaryFilePaths;
         std::vector<UfsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;

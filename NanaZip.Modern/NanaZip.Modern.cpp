@@ -73,7 +73,7 @@ namespace
         int ScaledWidth = ::MulDiv(Width, DpiValue, USER_DEFAULT_SCREEN_DPI);
         int ScaledHeight = ::MulDiv(Height, DpiValue, USER_DEFAULT_SCREEN_DPI);
 
-        RECT ParentRect = { 0 };
+        RECT ParentRect = {};
         if (ParentWindowHandle)
         {
             ::GetWindowRect(ParentWindowHandle, &ParentRect);

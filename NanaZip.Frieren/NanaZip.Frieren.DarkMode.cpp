@@ -141,7 +141,7 @@ namespace
     static void RefreshWindowTheme(
         _In_ HWND WindowHandle)
     {
-        wchar_t ClassName[256] = { 0 };
+        wchar_t ClassName[256] = {};
         if (0 != ::GetClassNameW(
             WindowHandle,
             ClassName,
@@ -248,7 +248,7 @@ namespace
     static bool IsFileManagerWindow(
         _In_ HWND WindowHandle)
     {
-        wchar_t ClassName[256] = { 0 };
+        wchar_t ClassName[256] = {};
         if (0 != ::GetClassNameW(
             WindowHandle,
             ClassName,
@@ -331,7 +331,7 @@ namespace
                     g_ShouldAppsUseDarkMode &&
                     ::IsStandardDynamicRangeMode() &&
                     g_MicaBackdropAvailable);
-                MARGINS Margins = { 0 };
+                MARGINS Margins = {};
                 if (ShouldExtendFrame)
                 {
                     Margins = { -1 };
@@ -392,7 +392,7 @@ namespace
             {
                 UINT DpiValue = ::GetDpiForWindow(hWnd);
 
-                MARGINS Margins = { 0 };
+                MARGINS Margins = {};
                 Margins.cyTopHeight =
                     ::MulDiv(80, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 Margins.cyBottomHeight =
@@ -402,7 +402,7 @@ namespace
 
             ::RefreshWindowTheme(hWnd);
 
-            wchar_t ClassName[256] = { 0 };
+            wchar_t ClassName[256] = {};
             if (0 != ::GetClassNameW(
                 hWnd,
                 ClassName,
@@ -430,7 +430,7 @@ namespace
         {
             if (g_ShouldAppsUseDarkMode)
             {
-                RECT ClientArea = { 0 };
+                RECT ClientArea = {};
                 if (::GetClientRect(hWnd, &ClientArea))
                 {
                     ::FillRect(
@@ -455,7 +455,7 @@ namespace
             {
                 UINT DpiValue = ::GetDpiForWindow(hWnd);
 
-                MARGINS Margins = { 0 };
+                MARGINS Margins = {};
                 Margins.cyTopHeight =
                     ::MulDiv(80, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 Margins.cyBottomHeight =
@@ -480,7 +480,7 @@ namespace
                     MenuBarInfo.cbSize = sizeof(MENUBARINFO);
                     if (::GetMenuBarInfo(hWnd, OBJID_MENU, 0, &MenuBarInfo))
                     {
-                        RECT WindowRect = { 0 };
+                        RECT WindowRect = {};
                         ::GetWindowRect(hWnd, &WindowRect);
 
                         RECT MenuRect = MenuBarInfo.rcBar;
@@ -507,7 +507,7 @@ namespace
                     PDRAWITEMSTRUCT DrawItemStruct = &UahDrawMenuItem->dis;
                     if (ODT_MENU == DrawItemStruct->CtlType)
                     {
-                        wchar_t Buffer[256] = { 0 };
+                        wchar_t Buffer[256] = {};
                         MENUITEMINFOW MenuItemInfo;
                         MenuItemInfo.cbSize = sizeof(MENUITEMINFOW);
                         MenuItemInfo.fMask = MIIM_STRING;
@@ -558,7 +558,7 @@ namespace
                             // We have to specify the text colour explicitly as by default
                             // black would be used, making the menu label unreadable on the
                             // (almost) black background.
-                            DTTOPTS TextOptions = { 0 };
+                            DTTOPTS TextOptions = {};
                             TextOptions.dwSize = sizeof(DTTOPTS);
                             TextOptions.dwFlags = DTT_TEXTCOLOR;
                             TextOptions.crText = TextColor;
@@ -597,7 +597,7 @@ namespace
                 MenuBarInfo.cbSize = sizeof(MENUBARINFO);
                 if (::GetMenuBarInfo(hWnd, OBJID_MENU, 0, &MenuBarInfo))
                 {
-                    RECT ClientRect = { 0 };
+                    RECT ClientRect = {};
                     ::GetClientRect(hWnd, &ClientRect);
 
                     ::MapWindowPoints(
@@ -606,7 +606,7 @@ namespace
                         reinterpret_cast<PPOINT>(&ClientRect),
                         2);
 
-                    RECT WindowRect = { 0 };
+                    RECT WindowRect = {};
                     ::GetWindowRect(hWnd, &WindowRect);
 
                     ::OffsetRect(
@@ -649,7 +649,7 @@ namespace
             {
             case WM_CREATE:
             case WM_INITDIALOG:
-                wchar_t ClassName[256] = { 0 };
+                wchar_t ClassName[256] = {};
                 if (0 != ::GetClassNameW(
                     WndProcStruct->hwnd,
                     ClassName,
@@ -782,7 +782,7 @@ namespace
                 pRect);
         }
 
-        DTTOPTS TextOptions = { 0 };
+        DTTOPTS TextOptions = {};
         TextOptions.dwSize = sizeof(DTTOPTS);
         TextOptions.dwFlags = DTT_TEXTCOLOR;
         TextOptions.crText = DarkModeForegroundColor;
@@ -1054,7 +1054,7 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
                     ::DetouredOpenNcThemeData;
             }
         }
-    }  
+    }
 
     ::DetourTransactionBegin();
     ::DetourUpdateThread(::GetCurrentThread());

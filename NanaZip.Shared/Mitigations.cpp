@@ -44,7 +44,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
     }
 
     {
-        PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY Policy = { 0 };
+        PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY Policy = {};
         Policy.RaiseExceptionOnInvalidHandleReference = 1;
         Policy.HandleExceptionsPermanentlyEnabled = 1;
         if (!::SetProcessMitigationPolicy(
@@ -58,7 +58,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 
 #ifdef NDEBUG
     {
-        PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = { 0 };
+        PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = {};
         Policy.ProhibitDynamicCode = 1;
         Policy.AllowThreadOptOut = 1;
         if (!::SetProcessMitigationPolicy(
@@ -72,7 +72,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 #endif // NDEBUG
 
     {
-        PROCESS_MITIGATION_IMAGE_LOAD_POLICY Policy = { 0 };
+        PROCESS_MITIGATION_IMAGE_LOAD_POLICY Policy = {};
         Policy.NoRemoteImages = 1;
         Policy.NoLowMandatoryLabelImages = 1;
         if (!::SetProcessMitigationPolicy(
@@ -94,7 +94,7 @@ EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
         return TRUE;
     }
 
-    PROCESS_MITIGATION_CHILD_PROCESS_POLICY Policy = { 0 };
+    PROCESS_MITIGATION_CHILD_PROCESS_POLICY Policy = {};
     Policy.NoChildProcessCreation = 1;
     if (!::SetProcessMitigationPolicy(
         ProcessChildProcessPolicy,

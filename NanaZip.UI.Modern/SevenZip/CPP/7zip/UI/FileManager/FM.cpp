@@ -1104,7 +1104,7 @@ void CApp::MoveSubWindows()
           DpiValue,
           USER_DEFAULT_SCREEN_DPI);
 
-      RECT ClientRect = { 0 };
+      RECT ClientRect = {};
       ::GetClientRect(hWnd, &ClientRect);
 
       ::SetWindowPos(

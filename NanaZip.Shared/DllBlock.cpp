@@ -139,12 +139,12 @@ namespace
         if (ret < 0 || !HandleIsCurrentProcess(ProcessHandle) || !ProtectionIsExecute(Win32Protect)) {
             return ret;
         }
-        SECTION_BASIC_INFORMATION sbi = { 0 };
+        SECTION_BASIC_INFORMATION sbi = {};
         status = RealNtQuerySection(SectionHandle, SectionBasicInformation, &sbi, sizeof(sbi), NULL);
         if (status < 0 || !(sbi.AllocationAttributes & SEC_IMAGE)) {
             return ret;
         }
-        char dllName[256] = { 0 };
+        char dllName[256] = {};
         if (!GetDllExportName(dllName, reinterpret_cast<const char*>(*BaseAddress), *ViewSize)) {
             return ret;
         }

@@ -60,7 +60,7 @@ Z7_COM7F_IMF(CDecoder::SetOutStreamSize(const UInt64 * outSize))
 HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
   ISequentialOutStream * outStream, ICompressProgressInfo * progress)
 {
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = {};
   Context.InputStream = inStream;
   Context.OutputStream = outStream;
   Context.Progress = progress;

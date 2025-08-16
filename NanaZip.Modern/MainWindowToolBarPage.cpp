@@ -350,7 +350,7 @@ namespace winrt::NanaZip::Modern::implementation
 
         UINT DpiValue = ::GetDpiForWindow(this->m_WindowHandle);
 
-        POINT MenuPosition = { 0 };
+        POINT MenuPosition = {};
         MenuPosition.x = ::MulDiv(
             static_cast<int>(LogicalPoint.X),
             DpiValue,
@@ -476,8 +476,8 @@ namespace winrt::NanaZip::Modern::implementation
                 return;
             }
 
-            STARTUPINFOEXW StartupInfoEx = { 0 };
-            PROCESS_INFORMATION ProcessInformation = { 0 };
+            STARTUPINFOEXW StartupInfoEx = {};
+            PROCESS_INFORMATION ProcessInformation = {};
             StartupInfoEx.StartupInfo.cb = sizeof(STARTUPINFOEXW);
             StartupInfoEx.lpAttributeList = AttributeList;
 

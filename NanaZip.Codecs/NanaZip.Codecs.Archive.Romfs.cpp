@@ -186,7 +186,7 @@ namespace NanaZip::Codecs::Archive
                 Information.Inode = Offset;
 
                 std::uint8_t FileHeaderBuffer[
-                    offsetof(RomfsFileHeader, FileName)] = { 0 };
+                    offsetof(RomfsFileHeader, FileName)] = {};
                 if (FAILED(this->ReadFileStream(
                     Offset,
                     &FileHeaderBuffer[0],
@@ -295,7 +295,7 @@ namespace NanaZip::Codecs::Archive
                 std::uint32_t Offset = 0;
 
                 std::uint8_t HeaderBuffer[
-                    offsetof(RomfsHeader, VolumeName)] = { 0 };
+                    offsetof(RomfsHeader, VolumeName)] = {};
                 if (FAILED(this->ReadFileStream(
                     0,
                     &HeaderBuffer[0],

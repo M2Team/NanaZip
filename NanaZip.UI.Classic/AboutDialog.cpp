@@ -53,7 +53,7 @@ void NanaZip::FileManager::AboutDialog::Show(
         auto OpenWebSite = [](
             _In_ LPCWSTR Url)
         {
-            SHELLEXECUTEINFOW ExecInfo = { 0 };
+            SHELLEXECUTEINFOW ExecInfo = {};
             ExecInfo.cbSize = sizeof(SHELLEXECUTEINFOW);
             ExecInfo.lpVerb = L"open";
             ExecInfo.lpFile = Url;
@@ -103,7 +103,7 @@ void NanaZip::FileManager::AboutDialog::Show(
     }
 #endif
 
-    TASKDIALOGCONFIG TaskDialogConfig = { 0 };
+    TASKDIALOGCONFIG TaskDialogConfig = {};
     TaskDialogConfig.cbSize = sizeof(TASKDIALOGCONFIG);
     TaskDialogConfig.hwndParent = ParentWindowHandle;
     TaskDialogConfig.hInstance = ::GetModuleHandleW(nullptr);
