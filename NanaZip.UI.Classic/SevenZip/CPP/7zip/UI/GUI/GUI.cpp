@@ -242,6 +242,9 @@ static int Main2()
     eo.StdOutMode = options.StdOutMode;
     eo.YesToAll = options.YesToAll;
     eo.TestMode = options.Command.IsTestCommand();
+    // **************** NanaZip Modification Start ****************
+    eo.OpenFolder = options.OpenFolder;
+    // **************** NanaZip Modification End ****************
 
     #ifndef _SFX
     eo.Properties = options.Properties;
