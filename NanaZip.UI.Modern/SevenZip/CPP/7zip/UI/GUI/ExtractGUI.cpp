@@ -100,7 +100,9 @@ void CThreadExtracting::ProcessWasFinished_GuiVirt()
 
 HRESULT CThreadExtracting::ProcessVirt()
 {
-  CDecompressStat Stat;
+  // **************** NanaZip Modification Start ****************
+  CDecompressStat &Stat = ExtractCallbackSpec->Stat;
+  // **************** NanaZip Modification End ****************
 
   #ifndef _SFX
   /*

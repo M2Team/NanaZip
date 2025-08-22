@@ -305,7 +305,7 @@ static int Main2()
       return NExitCode::kFatalError;
     // **************** NanaZip Modification Start ****************
     else if (eo.OpenFolder.Val) {
-        ShellExecuteW(NULL, NULL, eo.OutputDir, NULL, NULL, SW_SHOWNORMAL);
+      ShellExecuteW(NULL, NULL, ecs->Stat.OutDir, NULL, NULL, SW_SHOWNORMAL);
     }
     // **************** NanaZip Modification End ****************
   }

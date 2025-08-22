@@ -12,6 +12,9 @@
 #include "../Agent/IFolderArchive.h"
 #endif
 
+// **************** NanaZip Modification Start ****************
+#include "../Common/Extract.h"
+// **************** NanaZip Modification End ****************
 #include "../Common/ArchiveExtractCallback.h"
 #include "../Common/ArchiveOpenCallback.h"
 
@@ -271,6 +274,9 @@ public:
   UInt32 NumArchiveErrors;
   bool ThereAreMessageErrors;
   NExtract::NOverwriteMode::EEnum OverwriteMode;
+  // **************** NanaZip Modification Start ****************
+  CDecompressStat Stat;
+  // **************** NanaZip Modification End ****************
 
   #ifndef _NO_CRYPTO
   bool PasswordIsDefined;

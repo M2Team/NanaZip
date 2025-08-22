@@ -59,7 +59,9 @@ static HRESULT DecompressArchive(
 
   UStringVector removePathParts;
 
-  FString outDir = options.OutputDir;
+  // **************** NanaZip Modification Start ****************
+  ecs->OutDir = options.OutputDir;
+  // **************** NanaZip Modification End ****************
   UString replaceName = arc.DefaultName;
 
   if (arcLink.Arcs.Size() > 1)
@@ -72,16 +74,22 @@ static HRESULT DecompressArchive(
       replaceName = arc0.DefaultName;
   }
 
-  outDir.Replace(FString("*"), us2fs(Get_Correct_FsFile_Name(replaceName)));
+  // **************** NanaZip Modification Start ****************
+  ecs->OutDir.Replace(FString("*"), us2fs(Get_Correct_FsFile_Name(replaceName)));
+  // **************** NanaZip Modification End ****************
 
   bool elimIsPossible = false;
   UString elimPrefix; // only pure name without dir delimiter
-  FString outDirReduced = outDir;
+  // **************** NanaZip Modification Start ****************
+  FString outDirReduced = ecs->OutDir;
+  // **************** NanaZip Modification End ****************
 
   if (options.ElimDup.Val && options.PathMode != NExtract::NPathMode::kAbsPaths)
   {
     UString dirPrefix;
-    SplitPathToParts_Smart(fs2us(outDir), dirPrefix, elimPrefix);
+    // **************** NanaZip Modification Start ****************
+    SplitPathToParts_Smart(fs2us(ecs->OutDir), dirPrefix, elimPrefix);
+    // **************** NanaZip Modification End ****************
     if (!elimPrefix.IsEmpty())
     {
       if (IsPathSepar(elimPrefix.Back()))
@@ -186,7 +194,7 @@ static HRESULT DecompressArchive(
           break;
       }
       if (firstLevelSet.size() > 1)
-        outDir += replaceName;
+        ecs->OutDir += replaceName;
     }
     // **************** NanaZip Modification End ****************
 
@@ -209,19 +217,22 @@ static HRESULT DecompressArchive(
   // outDir = GetCorrectFullFsPath(outDir);
   #endif
 
-  if (outDir.IsEmpty())
-    outDir = "." STRING_PATH_SEPARATOR;
+  // **************** NanaZip Modification Start ****************
+  // outDir
+  if (ecs->OutDir.IsEmpty())
+    ecs->OutDir = "." STRING_PATH_SEPARATOR;
   /*
   #ifdef _WIN32
   else if (NName::IsAltPathPrefix(outDir)) {}
   #endif
   */
-  else if (!CreateComplexDir(outDir))
+  else if (!CreateComplexDir(ecs->OutDir))
   {
     const HRESULT res = GetLastError_noZero_HRESULT();
-    SetErrorMessage("Cannot create output directory", outDir, res, errorMessage);
+    SetErrorMessage("Cannot create output directory", ecs->OutDir, res, errorMessage);
     return res;
   }
+  // **************** NanaZip Modification End ****************
 
   ecs->Init(
       options.NtOptions,
@@ -229,7 +240,9 @@ static HRESULT DecompressArchive(
       &arc,
       callback,
       options.StdOutMode, options.TestMode,
-      outDir,
+      // **************** NanaZip Modification Start ****************
+      ecs->OutDir,
+      // **************** NanaZip Modification End ****************
       removePathParts, false,
       packSize);
 
@@ -590,5 +603,8 @@ HRESULT Extract(
   st.AltStreams_UnpackSize = ecs->AltStreams_UnpackSize;
   st.NumArchives = arcPaths.Size();
   st.PackSize = ecs->LocalProgressSpec->InSize;
+  // **************** NanaZip Modification Start ****************
+  st.OutDir = ecs->OutDir;
+  // **************** NanaZip Modification End ****************
   return S_OK;
 }
