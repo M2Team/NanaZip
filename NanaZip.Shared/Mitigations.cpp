@@ -28,7 +28,7 @@ EXTERN_C DWORD WINAPI NanaZipGetMitigationDisable()
             L"DisableMitigations",
             RRF_RT_REG_DWORD | RRF_SUBKEY_WOW6464KEY | RRF_ZEROONFAILURE,
             nullptr,
-            &CachedResult,
+            &Result,
             &Length);
         return Result;
     }());
