@@ -41,6 +41,11 @@
 #include "../../../../../NanaZip.UI.h"
 #include <winrt/NanaZip.Modern.h>
 
+// **************** NanaZip Modification Start ****************
+#include "../Common/ZipRegistry.h"
+#include "../Common/CompressCall.h"
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 using namespace NFile;
 using namespace NFind;
@@ -70,6 +75,11 @@ HWND g_HWND;
 
 static UString g_MainPath;
 static UString g_ArcFormat;
+
+// **************** NanaZip Modification Start ****************
+// Specified by the filetype handler for the extract-on-open feature.
+static bool g_IsFileTypeHandler;
+// **************** NanaZip Modification End ****************
 
 // HRESULT LoadGlobalCodecs();
 void FreeGlobalCodecs();
@@ -456,6 +466,29 @@ static void ErrorMessage(const char *s)
 #define NT_CHECK_FAIL_ACTION ErrorMessage("Unsupported Windows version"); return 1;
 #endif
 
+// **************** NanaZip Modification Start ****************
+static bool CallExtractOnOpen() {
+  UStringVector arcPaths;
+  CContextMenuInfo ci;
+  FString fullPathF;
+  FString parentFolder;
+
+  ci.Load();
+
+  if (!g_IsFileTypeHandler || !ci.ExtractOnOpen || g_MainPath.IsEmpty())
+    return false;
+  if (!NWindows::NFile::NName::GetFullPath(us2fs(g_MainPath), fullPathF))
+    return false;
+  if (!NWindows::NFile::NDir::GetOnlyDirPrefix(fullPathF, parentFolder))
+    return false;
+
+  arcPaths.Add(fs2us(fullPathF));
+  ExtractArchives(arcPaths, fs2us(parentFolder), false, false, ci.WriteZone,
+    true, true);
+  return true;
+}
+// **************** NanaZip Modification End ****************
+
 static int WINAPI WinMain2(int nCmdShow)
 {
   g_RAM_Size_Defined = NSystem::GetRamSize(g_RAM_Size);
@@ -535,6 +568,10 @@ static int WINAPI WinMain2(int nCmdShow)
   tailString.Trim();
   if (tailString.IsPrefixedBy(L"-t"))
     g_ArcFormat = tailString.Ptr(2);
+  // **************** NanaZip Modification Start ****************
+  else if (tailString.IsEqualTo_NoCase(L"-open"))
+    g_IsFileTypeHandler = true;
+  // **************** NanaZip Modification End ****************
 
   /*
   UStringVector switches;
@@ -605,6 +642,10 @@ static int WINAPI WinMain2(int nCmdShow)
   catch(...) { }
   */
 
+  // **************** NanaZip Modification Start ****************
+  if (CallExtractOnOpen())
+    return 0;
+  // **************** NanaZip Modification End ****************
 
   #if defined(_WIN32) && !defined(UNDER_CE)
   SetMemoryLock();

@@ -14,12 +14,18 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
   bool _elimDup_Changed;
   bool _writeZone_Changed;
   bool _flags_Changed;
+  // **************** NanaZip Modification Start ****************
+  bool _extractOnOpen_Changed;
+  // **************** NanaZip Modification End ****************
 
   void Clear_MenuChanged()
   {
     _elimDup_Changed = false;
     _writeZone_Changed = false;
     _flags_Changed = false;
+    // **************** NanaZip Modification Start ****************
+    _extractOnOpen_Changed = false;
+    // **************** NanaZip Modification End ****************
   }
 
   NWindows::NControl::CListView _listView;

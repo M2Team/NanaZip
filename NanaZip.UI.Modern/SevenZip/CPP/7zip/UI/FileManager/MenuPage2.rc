@@ -17,6 +17,10 @@ BEGIN
   CONTROL  "List", IDL_SYSTEM_OPTIONS, "SysListView32",
            LVS_REPORT | LVS_SINGLESEL | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,
            m, m + y, xc, yc - y
+
+  // **************** NanaZip Modification Start ****************
+  CONTROL  "Extract on open", IDX_EXTRACT_ON_OPEN, MY_CHECKBOX, m, m + yc + 14, xc, 10
+  // **************** NanaZip Modification End ****************
 END
 
 

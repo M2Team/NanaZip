@@ -552,6 +552,9 @@ static LPCTSTR const kContextMenu = TEXT("ContextMenu");
 static LPCTSTR const kMenuIcons = TEXT("MenuIcons");
 static LPCTSTR const kElimDup = TEXT("ElimDupExtract");
 static LPCTSTR const kWriteZoneId = TEXT("WriteZoneIdExtract");
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const kExtractOnOpen = TEXT("ExtractOnOpen");
+// **************** NanaZip Modification End ****************
 
 void CContextMenuInfo::Save() const
 {
@@ -564,6 +567,10 @@ void CContextMenuInfo::Save() const
   Key_Set_BoolPair(key, kElimDup, ElimDup);
 
   Key_Set_UInt32(key, kWriteZoneId, WriteZone);
+
+  // **************** NanaZip Modification Start ****************
+  Key_Set_UInt32(key, kExtractOnOpen, ExtractOnOpen);
+  // **************** NanaZip Modification End ****************
 
   if (Flags_Def)
     key.SetValue(kContextMenu, Flags);
@@ -605,6 +612,8 @@ void CContextMenuInfo::Load()
   // **************** NanaZip Modification Start ****************
   if (WriteZone == (UInt32)(Int32)-1)
     Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+
+  Key_Get_UInt32(key, kExtractOnOpen, ExtractOnOpen);
   // **************** NanaZip Modification End ****************
 
   Flags_Def = (key.GetValue_IfOk(kContextMenu, Flags) == ERROR_SUCCESS);

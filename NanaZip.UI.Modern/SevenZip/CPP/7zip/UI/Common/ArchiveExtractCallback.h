@@ -425,6 +425,10 @@ public:
 
   FString DirPathPrefix_for_HashFiles;
 
+  // **************** NanaZip Modification End ****************
+  FString OutDir;
+  // **************** NanaZip Modification End ****************
+
   MY_UNKNOWN_IMP5(
       IArchiveExtractCallbackMessage,
       ICryptoGetTextPassword,

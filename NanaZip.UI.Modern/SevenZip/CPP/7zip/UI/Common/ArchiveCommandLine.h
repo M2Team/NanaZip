@@ -106,6 +106,10 @@ struct CArcCmdLineOptions
   UString ArcType;
   UStringVector ExcludedArcTypes;
 
+  // **************** NanaZip Modification Start ****************
+  CBoolPair OpenFolder;
+  // **************** NanaZip Modification End ****************
+
   unsigned Number_for_Out;
   unsigned Number_for_Errors;
   unsigned Number_for_Percents;

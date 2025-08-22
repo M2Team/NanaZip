@@ -174,6 +174,10 @@ enum Enum
 
   kNameTrailReplace,
 
+// **************** NanaZip Modification Start ****************
+  kOpenFolder,
+// **************** NanaZip Modification End ****************
+
   kDeleteAfterCompressing,
   kSetArcMTime
 
@@ -324,6 +328,10 @@ static const CSwitchForm kSwitchForms[] =
   { "snc", SWFRM_SIMPLE },
 
   { "snt", SWFRM_MINUS },
+
+// **************** NanaZip Modification Start ****************
+  { "sre", SWFRM_MINUS },
+// **************** NanaZip Modification End ****************
 
   { "sdel", SWFRM_SIMPLE },
   { "stl", SWFRM_SIMPLE }
@@ -1267,6 +1275,11 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   {
     options.ExtractOptions.SmartExtract.Def = true;
     options.ExtractOptions.SmartExtract.Val = !parser[NKey::kSmartExtract].WithMinus;
+  }
+  if (parser[NKey::kOpenFolder].ThereIs)
+  {
+    options.OpenFolder.Def = true;
+    options.OpenFolder.Val = !parser[NKey::kOpenFolder].WithMinus;
   }
   // **************** NanaZip Modification End ****************
 
