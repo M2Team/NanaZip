@@ -95,6 +95,7 @@
 #define IDM_VIEW_AUTO_REFRESH    738
 // #define IDM_VIEW_SHOW_DELETED    739
 // #define IDM_VIEW_SHOW_STREAMS    740
+//toggle display filesize in KB,MB,GB,etc.
 #define IDM_SHOW_FILESIZE_UNIT   741
 
 #define IDM_VIEW_TIME            761
