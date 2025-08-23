@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{86E818B3-D657-4E03-9336-48EE242A79D1}</ProjectGuid>
+    <RootNamespace>NanaZip.Universal.Console</RootNamespace>
+    <MileProjectType>ConsoleApplication</MileProjectType>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <MileProjectManifestFile>NanaZip.Universal.Console.manifest</MileProjectManifestFile>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Command Line Interface (Console)</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Universal.Console</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZip.Universal.Console.exe</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+    <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
+    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
+    <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
+  </PropertyGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
+      <PreprocessorDefinitions>Z7_DEVICE_FILE;Z7_EXTERNAL_CODECS;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZip.Universal.Console.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.952</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
+      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
+      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
+      <SetPlatform>Platform=x64</SetPlatform>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SevenZip\ASM\x86\7zAsm.asm" />
+    <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
+    <None Include="SevenZip\C\7zCrcOpt.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\IArchive.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\CreateCoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\FilePathAutoRename.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\FileStreams.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\FilterCoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\LimitedStreams.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\MethodId.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\MethodProps.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\MultiOutStream.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\ProgressUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\RegisterArc.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\RegisterCodec.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\StreamObjects.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\StreamUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\UniqBlocks.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\CopyCoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\ICoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IDecl.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IPassword.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IProgress.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IStream.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\MyVersion.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\PropID.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ArchiveCommandLine.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ArchiveExtractCallback.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ArchiveOpenCallback.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\Bench.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\DefaultName.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\DirItem.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\EnumDirItems.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ExitCode.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\Extract.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ExtractMode.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\HashCalc.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\IFileExtractCallback.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\LoadCodecs.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\OpenArchive.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\Property.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\PropIDUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\SetProperties.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\SortUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\TempFiles.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\Update.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\UpdateAction.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\UpdateCallback.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\UpdatePair.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\UpdateProduce.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\BenchCon.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\ConsoleClose.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\ExtractCallbackConsole.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\HashCon.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\List.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\OpenCallbackConsole.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\PercentPrinter.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\UpdateCallbackConsole.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\UserInputUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Common\CommandLineParser.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Common.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Common0.h" />
+    <ClInclude Include="SevenZip\CPP\Common\ComTry.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Common\DynLimBuf.h" />
+    <ClInclude Include="SevenZip\CPP\Common\IntToString.h" />
+    <ClInclude Include="SevenZip\CPP\Common\ListFileUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyBuffer.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyBuffer2.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyCom.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyException.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyInitGuid.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyLinux.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyString.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyTypes.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyUnknown.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyVector.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyWindows.h" />
+    <ClInclude Include="SevenZip\CPP\Common\NewHandler.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StdInStream.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StdOutStream.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StringConvert.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StringToInt.h" />
+    <ClInclude Include="SevenZip\CPP\Common\UTFConvert.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Wildcard.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\DLL.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\ErrorMsg.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileDir.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileFind.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileIO.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileMapping.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileName.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileSystem.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Handle.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\MemoryLock.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\NtCheck.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\PropVariant.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\PropVariantConv.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Registry.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\SecurityUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Synchronization.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\System.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\SystemInfo.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Thread.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\TimeUtils.h" />
+    <ClInclude Include="SevenZip\C\7zCrc.h" />
+    <ClInclude Include="SevenZip\C\7zTypes.h" />
+    <ClInclude Include="SevenZip\C\7zVersion.h" />
+    <ClInclude Include="SevenZip\C\7zWindows.h" />
+    <ClInclude Include="SevenZip\C\Alloc.h" />
+    <ClInclude Include="SevenZip\C\Compiler.h" />
+    <ClInclude Include="SevenZip\C\CpuArch.h" />
+    <ClInclude Include="SevenZip\C\DllSecur.h" />
+    <ClInclude Include="SevenZip\C\Precomp.h" />
+    <ClInclude Include="SevenZip\C\RotateDefs.h" />
+    <ClInclude Include="SevenZip\C\Sort.h" />
+    <ClInclude Include="SevenZip\C\Threads.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\CreateCoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\FilePathAutoRename.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\FileStreams.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\FilterCoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\LimitedStreams.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\MethodProps.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\MultiOutStream.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\ProgressUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\PropId.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\StreamObjects.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\StreamUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\UniqBlocks.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\CopyCoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ArchiveCommandLine.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ArchiveExtractCallback.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ArchiveOpenCallback.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\Bench.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\DefaultName.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\EnumDirItems.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\Extract.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\HashCalc.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\LoadCodecs.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\OpenArchive.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\PropIDUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\SetProperties.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\SortUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\TempFiles.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\Update.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\UpdateAction.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\UpdateCallback.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\UpdatePair.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\UpdateProduce.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\BenchCon.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\ConsoleClose.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\ExtractCallbackConsole.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\HashCon.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\List.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\Main.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\MainAr.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\OpenCallbackConsole.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\PercentPrinter.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\UpdateCallbackConsole.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\UserInputUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\CommandLineParser.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\CRC.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\DynLimBuf.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\ListFileUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\StdInStream.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\StdOutStream.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\DLL.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\ErrorMsg.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileDir.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileFind.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileIO.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileLink.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileName.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileSystem.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\MemoryLock.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\PropVariant.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\PropVariantConv.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Registry.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\System.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\SystemInfo.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\TimeUtils.cpp" />
+    <ClCompile Include="SevenZip\C\7zCrc.c" />
+    <ClCompile Include="SevenZip\C\Alloc.c" />
+    <ClCompile Include="SevenZip\C\CpuArch.c" />
+    <ClCompile Include="SevenZip\C\DllSecur.c" />
+    <ClCompile Include="SevenZip\C\Sort.c" />
+    <ClCompile Include="SevenZip\C\Threads.c" />
+  </ItemGroup>
+  <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
+      <MASM Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
+      <ClCompile Include="SevenZip\C\7zCrcOpt.c">
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+</Project>

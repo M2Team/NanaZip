@@ -1,0 +1,11 @@
+﻿#define IDD_MENU    12200
+#define IDD_MENU_2  12300
+
+#define IDB_SYSTEM_ASSOCIATE  12201
+#define IDT_SYSTEM_CONTEXT_MENU_ITEMS   2303
+
+#define IDT_SYSTEM_ZONE                 3440
+#define IDT_ZONE_FOR_OFFICE             3441
+
+#define IDL_SYSTEM_OPTIONS  100
+#define IDC_SYSTEM_ZONE     101

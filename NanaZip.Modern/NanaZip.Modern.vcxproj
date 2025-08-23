@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</ProjectGuid>
+    <RootNamespace>NanaZip.Modern</RootNamespace>
+    <MileProjectType>DynamicLibrary</MileProjectType>
+    <MileProjectManifestFile>NanaZip.Modern.manifest</MileProjectManifestFile>
+    <MinimalCoreWin>false</MinimalCoreWin>
+    <DefaultLanguage>en</DefaultLanguage>
+    <AppContainerApplication>false</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <XamlComponentResourceLocation>nested</XamlComponentResourceLocation>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Modern Experience</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Modern</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZip.Modern.dll</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+    <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
+    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
+  </PropertyGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
+  <ItemDefinitionGroup>
+    <Link>
+      <ModuleDefinitionFile>NanaZip.Modern.def</ModuleDefinitionFile>
+      <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Mile.Xaml.Unstaged.targets" />
+    <None Include="NanaZip.Modern.def" />
+    <None Include="NanaZip.Modern.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="NanaZip.Modern.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="AddressBarTemplate.xaml" />
+    <Page Include="InformationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProgressPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SponsorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindowToolBarPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatusBarTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="AddressBar.idl" />
+    <Midl Include="AddressBarTemplate.idl">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="App.idl">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="InformationPage.idl">
+      <DependentUpon>InformationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="ProgressPage.idl">
+      <DependentUpon>ProgressPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="SponsorPage.idl">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="AboutPage.idl">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="MainWindowToolBarPage.idl">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="StatusBar.idl" />
+    <Midl Include="StatusBarTemplate.idl">
+      <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AddressBar.h">
+      <DependentUpon>AddressBar.idl</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="AddressBarTemplate.h">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="ControlMacros.h" />
+    <ClInclude Include="InformationPage.h">
+      <DependentUpon>InformationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="NanaZip.Modern.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.h">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="ProgressPage.h">
+      <DependentUpon>ProgressPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="SponsorPage.h">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="AboutPage.h">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="MainWindowToolBarPage.h">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="StatusBar.h">
+      <DependentUpon>StatusBar.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="StatusBarTemplate.h">
+      <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AddressBarTemplate.cpp">
+      <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="InformationPage.cpp">
+      <DependentUpon>InformationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="App.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="ProgressPage.cpp">
+      <DependentUpon>ProgressPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="SponsorPage.cpp">
+      <DependentUpon>SponsorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="AboutPage.cpp">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="MainWindowToolBarPage.cpp">
+      <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="AddressBar.cpp">
+      <DependentUpon>AddressBar.idl</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="NanaZip.Modern.cpp" />
+    <ClCompile Include="StatusBar.cpp">
+      <DependentUpon>StatusBar.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="StatusBarTemplate.cpp">
+      <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Xaml">
+      <Version>2.5.1250</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.952</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\af\InformationPage.resw" />
+    <PRIResource Include="Strings\af\ProgressPage.resw" />
+    <PRIResource Include="Strings\ar\InformationPage.resw" />
+    <PRIResource Include="Strings\ar\ProgressPage.resw" />
+    <PRIResource Include="Strings\az-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\az-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\be\InformationPage.resw" />
+    <PRIResource Include="Strings\be\ProgressPage.resw" />
+    <PRIResource Include="Strings\bg\InformationPage.resw" />
+    <PRIResource Include="Strings\bg\ProgressPage.resw" />
+    <PRIResource Include="Strings\bn\InformationPage.resw" />
+    <PRIResource Include="Strings\bn\ProgressPage.resw" />
+    <PRIResource Include="Strings\ca-es-valencia\InformationPage.resw" />
+    <PRIResource Include="Strings\ca-es-valencia\ProgressPage.resw" />
+    <PRIResource Include="Strings\ca\InformationPage.resw" />
+    <PRIResource Include="Strings\ca\ProgressPage.resw" />
+    <PRIResource Include="Strings\cs\InformationPage.resw" />
+    <PRIResource Include="Strings\cs\ProgressPage.resw" />
+    <PRIResource Include="Strings\cy\InformationPage.resw" />
+    <PRIResource Include="Strings\cy\ProgressPage.resw" />
+    <PRIResource Include="Strings\da\InformationPage.resw" />
+    <PRIResource Include="Strings\da\ProgressPage.resw" />
+    <PRIResource Include="Strings\de\InformationPage.resw" />
+    <PRIResource Include="Strings\de\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\de\ProgressPage.resw" />
+    <PRIResource Include="Strings\de\SponsorPage.resw" />
+    <PRIResource Include="Strings\el\InformationPage.resw" />
+    <PRIResource Include="Strings\el\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\el\ProgressPage.resw" />
+    <PRIResource Include="Strings\el\SponsorPage.resw" />
+    <PRIResource Include="Strings\en\InformationPage.resw" />
+    <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\en\ProgressPage.resw" />
+    <PRIResource Include="Strings\en\SponsorPage.resw" />
+    <PRIResource Include="Strings\eo\InformationPage.resw" />
+    <PRIResource Include="Strings\eo\ProgressPage.resw" />
+    <PRIResource Include="Strings\es\InformationPage.resw" />
+    <PRIResource Include="Strings\es\ProgressPage.resw" />
+    <PRIResource Include="Strings\et\InformationPage.resw" />
+    <PRIResource Include="Strings\et\ProgressPage.resw" />
+    <PRIResource Include="Strings\eu\InformationPage.resw" />
+    <PRIResource Include="Strings\eu\ProgressPage.resw" />
+    <PRIResource Include="Strings\fa\InformationPage.resw" />
+    <PRIResource Include="Strings\fa\ProgressPage.resw" />
+    <PRIResource Include="Strings\fi\InformationPage.resw" />
+    <PRIResource Include="Strings\fi\ProgressPage.resw" />
+    <PRIResource Include="Strings\fr\InformationPage.resw" />
+    <PRIResource Include="Strings\fr\ProgressPage.resw" />
+    <PRIResource Include="Strings\fy\InformationPage.resw" />
+    <PRIResource Include="Strings\fy\ProgressPage.resw" />
+    <PRIResource Include="Strings\ga\InformationPage.resw" />
+    <PRIResource Include="Strings\ga\ProgressPage.resw" />
+    <PRIResource Include="Strings\gl\InformationPage.resw" />
+    <PRIResource Include="Strings\gl\ProgressPage.resw" />
+    <PRIResource Include="Strings\gu\InformationPage.resw" />
+    <PRIResource Include="Strings\gu\ProgressPage.resw" />
+    <PRIResource Include="Strings\he\InformationPage.resw" />
+    <PRIResource Include="Strings\he\ProgressPage.resw" />
+    <PRIResource Include="Strings\hi\InformationPage.resw" />
+    <PRIResource Include="Strings\hi\ProgressPage.resw" />
+    <PRIResource Include="Strings\hr\InformationPage.resw" />
+    <PRIResource Include="Strings\hr\ProgressPage.resw" />
+    <PRIResource Include="Strings\hu\InformationPage.resw" />
+    <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\hu\ProgressPage.resw" />
+    <PRIResource Include="Strings\hu\SponsorPage.resw" />
+    <PRIResource Include="Strings\hy\InformationPage.resw" />
+    <PRIResource Include="Strings\hy\ProgressPage.resw" />
+    <PRIResource Include="Strings\id\InformationPage.resw" />
+    <PRIResource Include="Strings\id\ProgressPage.resw" />
+    <PRIResource Include="Strings\is\InformationPage.resw" />
+    <PRIResource Include="Strings\is\ProgressPage.resw" />
+    <PRIResource Include="Strings\it\InformationPage.resw" />
+    <PRIResource Include="Strings\it\ProgressPage.resw" />
+    <PRIResource Include="Strings\ja\InformationPage.resw" />
+    <PRIResource Include="Strings\ja\ProgressPage.resw" />
+    <PRIResource Include="Strings\ka\InformationPage.resw" />
+    <PRIResource Include="Strings\ka\ProgressPage.resw" />
+    <PRIResource Include="Strings\kk\InformationPage.resw" />
+    <PRIResource Include="Strings\kk\ProgressPage.resw" />
+    <PRIResource Include="Strings\ko\InformationPage.resw" />
+    <PRIResource Include="Strings\ko\ProgressPage.resw" />
+    <PRIResource Include="Strings\ku-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\ku-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\ky-kg\InformationPage.resw" />
+    <PRIResource Include="Strings\ky-kg\ProgressPage.resw" />
+    <PRIResource Include="Strings\lt\InformationPage.resw" />
+    <PRIResource Include="Strings\lt\ProgressPage.resw" />
+    <PRIResource Include="Strings\lv\InformationPage.resw" />
+    <PRIResource Include="Strings\lv\ProgressPage.resw" />
+    <PRIResource Include="Strings\mk\InformationPage.resw" />
+    <PRIResource Include="Strings\mk\ProgressPage.resw" />
+    <PRIResource Include="Strings\mn-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\mn-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\mn-mong\InformationPage.resw" />
+    <PRIResource Include="Strings\mn-mong\ProgressPage.resw" />
+    <PRIResource Include="Strings\mr\InformationPage.resw" />
+    <PRIResource Include="Strings\mr\ProgressPage.resw" />
+    <PRIResource Include="Strings\ms\InformationPage.resw" />
+    <PRIResource Include="Strings\ms\ProgressPage.resw" />
+    <PRIResource Include="Strings\nb\InformationPage.resw" />
+    <PRIResource Include="Strings\nb\ProgressPage.resw" />
+    <PRIResource Include="Strings\ne\InformationPage.resw" />
+    <PRIResource Include="Strings\ne\ProgressPage.resw" />
+    <PRIResource Include="Strings\nl\InformationPage.resw" />
+    <PRIResource Include="Strings\nl\ProgressPage.resw" />
+    <PRIResource Include="Strings\nn\InformationPage.resw" />
+    <PRIResource Include="Strings\nn\ProgressPage.resw" />
+    <PRIResource Include="Strings\pa-in\InformationPage.resw" />
+    <PRIResource Include="Strings\pa-in\ProgressPage.resw" />
+    <PRIResource Include="Strings\pl\InformationPage.resw" />
+    <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\pl\ProgressPage.resw" />
+    <PRIResource Include="Strings\pl\SponsorPage.resw" />
+    <PRIResource Include="Strings\ps\InformationPage.resw" />
+    <PRIResource Include="Strings\ps\ProgressPage.resw" />
+    <PRIResource Include="Strings\pt-BR\InformationPage.resw" />
+    <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\pt-BR\ProgressPage.resw" />
+    <PRIResource Include="Strings\pt-BR\SponsorPage.resw" />
+    <PRIResource Include="Strings\pt\InformationPage.resw" />
+    <PRIResource Include="Strings\pt\ProgressPage.resw" />
+    <PRIResource Include="Strings\ro\InformationPage.resw" />
+    <PRIResource Include="Strings\ro\ProgressPage.resw" />
+    <PRIResource Include="Strings\ru\InformationPage.resw" />
+    <PRIResource Include="Strings\ru\ProgressPage.resw" />
+    <PRIResource Include="Strings\si\InformationPage.resw" />
+    <PRIResource Include="Strings\si\ProgressPage.resw" />
+    <PRIResource Include="Strings\sk\InformationPage.resw" />
+    <PRIResource Include="Strings\sk\ProgressPage.resw" />
+    <PRIResource Include="Strings\sl\InformationPage.resw" />
+    <PRIResource Include="Strings\sl\ProgressPage.resw" />
+    <PRIResource Include="Strings\sq\InformationPage.resw" />
+    <PRIResource Include="Strings\sq\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\sq\ProgressPage.resw" />
+    <PRIResource Include="Strings\sq\SponsorPage.resw" />
+    <PRIResource Include="Strings\sr-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\sr-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\sr-Latn\InformationPage.resw" />
+    <PRIResource Include="Strings\sr-Latn\ProgressPage.resw" />
+    <PRIResource Include="Strings\sv\InformationPage.resw" />
+    <PRIResource Include="Strings\sv\ProgressPage.resw" />
+    <PRIResource Include="Strings\sw\InformationPage.resw" />
+    <PRIResource Include="Strings\sw\ProgressPage.resw" />
+    <PRIResource Include="Strings\ta\InformationPage.resw" />
+    <PRIResource Include="Strings\ta\ProgressPage.resw" />
+    <PRIResource Include="Strings\tg-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\tg-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\th\InformationPage.resw" />
+    <PRIResource Include="Strings\th\ProgressPage.resw" />
+    <PRIResource Include="Strings\tk-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\tk-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\tr\InformationPage.resw" />
+    <PRIResource Include="Strings\tr\ProgressPage.resw" />
+    <PRIResource Include="Strings\tt-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\tt-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\ug-arab\InformationPage.resw" />
+    <PRIResource Include="Strings\ug-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\uk\InformationPage.resw" />
+    <PRIResource Include="Strings\uk\ProgressPage.resw" />
+    <PRIResource Include="Strings\uz-cyrl\InformationPage.resw" />
+    <PRIResource Include="Strings\uz-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\uz-latn\InformationPage.resw" />
+    <PRIResource Include="Strings\uz-latn\ProgressPage.resw" />
+    <PRIResource Include="Strings\vi\InformationPage.resw" />
+    <PRIResource Include="Strings\vi\ProgressPage.resw" />
+    <PRIResource Include="Strings\yo-latn\InformationPage.resw" />
+    <PRIResource Include="Strings\yo-latn\ProgressPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\InformationPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\ProgressPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\SponsorPage.resw" />
+    <PRIResource Include="Strings\zh-Hant\InformationPage.resw" />
+    <PRIResource Include="Strings\zh-Hant\ProgressPage.resw" />
+  </ItemGroup>
+  <Import Project="Mile.Xaml.Unstaged.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <!--
+  XamlAddCppWinRTMergedWinmd
+
+  This target is overriden to prevent the XAML compiler from enabling
+  hybrid C++/WinRT and C++/CX support, due to a bug in the check.
+  -->
+  <Target Name="XamlAddCppWinRTMergedWinmd" AfterTargets="CppWinRTMergeProjectWinMDInputs" />
+</Project>

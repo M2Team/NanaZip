@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource0" xml:space="preserve">
+    <value>NanaZip</value>
+  </data>
+  <data name="Resource1" xml:space="preserve">
+    <value>Albanian</value>
+  </data>
+  <data name="Resource2" xml:space="preserve">
+    <value>Shqip</value>
+  </data>
+  <data name="Resource401" xml:space="preserve">
+    <value>Në rregull</value>
+  </data>
+  <data name="Resource402" xml:space="preserve">
+    <value>Anulo</value>
+  </data>
+  <data name="Resource406" xml:space="preserve">
+    <value>&amp;Po</value>
+  </data>
+  <data name="Resource407" xml:space="preserve">
+    <value>&amp;Jo</value>
+  </data>
+  <data name="Resource408" xml:space="preserve">
+    <value>&amp;Mbyll</value>
+  </data>
+  <data name="Resource409" xml:space="preserve">
+    <value>Ndihmë</value>
+  </data>
+  <data name="Resource411" xml:space="preserve">
+    <value>&amp;Vazhdo</value>
+  </data>
+  <data name="Resource440" xml:space="preserve">
+    <value>Po për të &amp;gjitha</value>
+  </data>
+  <data name="Resource441" xml:space="preserve">
+    <value>Jo për të gji&amp;tha</value>
+  </data>
+  <data name="Resource442" xml:space="preserve">
+    <value>Ndalo</value>
+  </data>
+  <data name="Resource443" xml:space="preserve">
+    <value>Rinis</value>
+  </data>
+  <data name="Resource444" xml:space="preserve">
+    <value>&amp;Në sfond</value>
+  </data>
+  <data name="Resource445" xml:space="preserve">
+    <value>&amp;Në plan të parë</value>
+  </data>
+  <data name="Resource446" xml:space="preserve">
+    <value>&amp;Pezullo</value>
+  </data>
+  <data name="Resource447" xml:space="preserve">
+    <value>Pezulluar</value>
+  </data>
+  <data name="Resource448" xml:space="preserve">
+    <value>Je i sigurt qe dëshiron ta anulosh?</value>
+  </data>
+  <data name="Resource500" xml:space="preserve">
+    <value>&amp;Skedari</value>
+  </data>
+  <data name="Resource501" xml:space="preserve">
+    <value>&amp;Redaktimi</value>
+  </data>
+  <data name="Resource502" xml:space="preserve">
+    <value>&amp;Pamja</value>
+  </data>
+  <data name="Resource503" xml:space="preserve">
+    <value>&amp;Të Parapëlqyerit</value>
+  </data>
+  <data name="Resource504" xml:space="preserve">
+    <value>&amp;Veglat</value>
+  </data>
+  <data name="Resource505" xml:space="preserve">
+    <value>&amp;Ndihma</value>
+  </data>
+  <data name="Resource540" xml:space="preserve">
+    <value>&amp;Hap</value>
+  </data>
+  <data name="Resource541" xml:space="preserve">
+    <value>Hap &amp;përbrenda</value>
+  </data>
+  <data name="Resource542" xml:space="preserve">
+    <value>Hap p&amp;ërjashta</value>
+  </data>
+  <data name="Resource543" xml:space="preserve">
+    <value>&amp;Pamja</value>
+  </data>
+  <data name="Resource544" xml:space="preserve">
+    <value>&amp;Redakto</value>
+  </data>
+  <data name="Resource545" xml:space="preserve">
+    <value>Riemë&amp;rto</value>
+  </data>
+  <data name="Resource546" xml:space="preserve">
+    <value>&amp;Kopjo në...</value>
+  </data>
+  <data name="Resource547" xml:space="preserve">
+    <value>&amp;Zhvendos në...</value>
+  </data>
+  <data name="Resource548" xml:space="preserve">
+    <value>&amp;Fshi</value>
+  </data>
+  <data name="Resource549" xml:space="preserve">
+    <value>&amp;Ndaj skedarin...</value>
+  </data>
+  <data name="Resource550" xml:space="preserve">
+    <value>Kom&amp;bino skedarët...</value>
+  </data>
+  <data name="Resource551" xml:space="preserve">
+    <value>V&amp;etitë</value>
+  </data>
+  <data name="Resource552" xml:space="preserve">
+    <value>Kome&amp;nti</value>
+  </data>
+  <data name="Resource553" xml:space="preserve">
+    <value>Llogarit shumën e vërtetësimit</value>
+  </data>
+  <data name="Resource554" xml:space="preserve">
+    <value>Krahasim i dallimeve (Diff)</value>
+  </data>
+  <data name="Resource555" xml:space="preserve">
+    <value>Krijo një dosje</value>
+  </data>
+  <data name="Resource556" xml:space="preserve">
+    <value>Krijo një skedar</value>
+  </data>
+  <data name="Resource557" xml:space="preserve">
+    <value>D&amp;il</value>
+  </data>
+  <data name="Resource558" xml:space="preserve">
+    <value>Lidhje</value>
+  </data>
+  <data name="Resource559" xml:space="preserve">
+    <value>&amp;Rrjedhat alternative të të dhënave</value>
+  </data>
+  <data name="Resource600" xml:space="preserve">
+    <value>Përzgjidh &amp;të gjithë</value>
+  </data>
+  <data name="Resource601" xml:space="preserve">
+    <value>Anulo përzgjedhjen e të gjithëve</value>
+  </data>
+  <data name="Resource602" xml:space="preserve">
+    <value>&amp;Anasill përzgjedhjen</value>
+  </data>
+  <data name="Resource603" xml:space="preserve">
+    <value>Përzgjidh...</value>
+  </data>
+  <data name="Resource604" xml:space="preserve">
+    <value>Anulo përzgjedhjen...</value>
+  </data>
+  <data name="Resource605" xml:space="preserve">
+    <value>Përzgjidh sipas llojit</value>
+  </data>
+  <data name="Resource606" xml:space="preserve">
+    <value>Anulo përzgjedhjen sipas llojit</value>
+  </data>
+  <data name="Resource700" xml:space="preserve">
+    <value>Iko&amp;na të mëdha</value>
+  </data>
+  <data name="Resource701" xml:space="preserve">
+    <value>I&amp;kona të vogla</value>
+  </data>
+  <data name="Resource702" xml:space="preserve">
+    <value>&amp;Listë</value>
+  </data>
+  <data name="Resource703" xml:space="preserve">
+    <value>&amp;Detaje</value>
+  </data>
+  <data name="Resource730" xml:space="preserve">
+    <value>Të parenditur</value>
+  </data>
+  <data name="Resource731" xml:space="preserve">
+    <value>Pamje e rrafshtë</value>
+  </data>
+  <data name="Resource732" xml:space="preserve">
+    <value>&amp;2 Panele</value>
+  </data>
+  <data name="Resource733" xml:space="preserve">
+    <value>&amp;Shiritat e veglave</value>
+  </data>
+  <data name="Resource734" xml:space="preserve">
+    <value>Hap dosjen rrënjësore</value>
+  </data>
+  <data name="Resource735" xml:space="preserve">
+    <value>Një nivel më lartë</value>
+  </data>
+  <data name="Resource736" xml:space="preserve">
+    <value>Historiku i dosjeve...</value>
+  </data>
+  <data name="Resource737" xml:space="preserve">
+    <value>&amp;Rifresko</value>
+  </data>
+  <data name="Resource738" xml:space="preserve">
+    <value>Rifreskim automatik</value>
+  </data>
+  <data name="Resource750" xml:space="preserve">
+    <value>Shiriti i veglave i arkivit</value>
+  </data>
+  <data name="Resource751" xml:space="preserve">
+    <value>Shiriti standard i veglave</value>
+  </data>
+  <data name="Resource752" xml:space="preserve">
+    <value>Butona të mëdhenj</value>
+  </data>
+  <data name="Resource753" xml:space="preserve">
+    <value>Shfaq tekstin e butonave</value>
+  </data>
+  <data name="Resource800" xml:space="preserve">
+    <value>&amp;Shto dosjen te të Parapëlqyerit si</value>
+  </data>
+  <data name="Resource801" xml:space="preserve">
+    <value>Shënjuesi</value>
+  </data>
+  <data name="Resource900" xml:space="preserve">
+    <value>Rregullimet...</value>
+  </data>
+  <data name="Resource901" xml:space="preserve">
+    <value>Provë e performancës</value>
+  </data>
+  <data name="Resource960" xml:space="preserve">
+    <value>&amp;Përmbajtjet...</value>
+  </data>
+  <data name="Resource961" xml:space="preserve">
+    <value>Rreth NanaZip...</value>
+  </data>
+  <data name="Resource1003" xml:space="preserve">
+    <value>Shtegu</value>
+  </data>
+  <data name="Resource1004" xml:space="preserve">
+    <value>Emri</value>
+  </data>
+  <data name="Resource1005" xml:space="preserve">
+    <value>Prapashtesa</value>
+  </data>
+  <data name="Resource1006" xml:space="preserve">
+    <value>Dosja</value>
+  </data>
+  <data name="Resource1007" xml:space="preserve">
+    <value>Madhësia</value>
+  </data>
+  <data name="Resource1008" xml:space="preserve">
+    <value>Madhësia e paketuar</value>
+  </data>
+  <data name="Resource1009" xml:space="preserve">
+    <value>Atributet</value>
+  </data>
+  <data name="Resource1010" xml:space="preserve">
+    <value>Krijuar më</value>
+  </data>
+  <data name="Resource1011" xml:space="preserve">
+    <value>Hyrë së fundi më</value>
+  </data>
+  <data name="Resource1012" xml:space="preserve">
+    <value>Modifikuar më</value>
+  </data>
+  <data name="Resource1013" xml:space="preserve">
+    <value>I qëndrueshëm</value>
+  </data>
+  <data name="Resource1014" xml:space="preserve">
+    <value>I komentuar</value>
+  </data>
+  <data name="Resource1015" xml:space="preserve">
+    <value>I shifruar</value>
+  </data>
+  <data name="Resource1016" xml:space="preserve">
+    <value>Ndaj para</value>
+  </data>
+  <data name="Resource1017" xml:space="preserve">
+    <value>Ndaj pas</value>
+  </data>
+  <data name="Resource1018" xml:space="preserve">
+    <value>Fjalori</value>
+  </data>
+  <data name="Resource1020" xml:space="preserve">
+    <value>Lloj</value>
+  </data>
+  <data name="Resource1021" xml:space="preserve">
+    <value>Anti</value>
+  </data>
+  <data name="Resource1022" xml:space="preserve">
+    <value>Metoda</value>
+  </data>
+  <data name="Resource1023" xml:space="preserve">
+    <value>Sistemi operativ kryesor</value>
+  </data>
+  <data name="Resource1024" xml:space="preserve">
+    <value>Sistemi i skedarit</value>
+  </data>
+  <data name="Resource1025" xml:space="preserve">
+    <value>Përdoruesi</value>
+  </data>
+  <data name="Resource1026" xml:space="preserve">
+    <value>Grupi</value>
+  </data>
+  <data name="Resource1027" xml:space="preserve">
+    <value>Blloku</value>
+  </data>
+  <data name="Resource1028" xml:space="preserve">
+    <value>Komenti</value>
+  </data>
+  <data name="Resource1029" xml:space="preserve">
+    <value>Pozicioni</value>
+  </data>
+  <data name="Resource1030" xml:space="preserve">
+    <value>Prefiksi i shtegut</value>
+  </data>
+  <data name="Resource1031" xml:space="preserve">
+    <value>Dosjet</value>
+  </data>
+  <data name="Resource1032" xml:space="preserve">
+    <value>Skedarët</value>
+  </data>
+  <data name="Resource1033" xml:space="preserve">
+    <value>Versioni</value>
+  </data>
+  <data name="Resource1034" xml:space="preserve">
+    <value>Njësia</value>
+  </data>
+  <data name="Resource1035" xml:space="preserve">
+    <value>Njësi të shumta</value>
+  </data>
+  <data name="Resource1036" xml:space="preserve">
+    <value>Ofset</value>
+  </data>
+  <data name="Resource1037" xml:space="preserve">
+    <value>Lidhjet</value>
+  </data>
+  <data name="Resource1038" xml:space="preserve">
+    <value>Blloqet</value>
+  </data>
+  <data name="Resource1039" xml:space="preserve">
+    <value>Njësitë</value>
+  </data>
+  <data name="Resource1041" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Resource1042" xml:space="preserve">
+    <value>Big-endian</value>
+  </data>
+  <data name="Resource1043" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Resource1044" xml:space="preserve">
+    <value>Madhësia fizike</value>
+  </data>
+  <data name="Resource1045" xml:space="preserve">
+    <value>Madhësia e krerëve</value>
+  </data>
+  <data name="Resource1046" xml:space="preserve">
+    <value>Shuma e vërtetësimit</value>
+  </data>
+  <data name="Resource1047" xml:space="preserve">
+    <value>Karakteristikat</value>
+  </data>
+  <data name="Resource1048" xml:space="preserve">
+    <value>Adresa virtuale</value>
+  </data>
+  <data name="Resource1049" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Resource1050" xml:space="preserve">
+    <value>Emri i shkurtër</value>
+  </data>
+  <data name="Resource1051" xml:space="preserve">
+    <value>Aplikacioni Krijues</value>
+  </data>
+  <data name="Resource1052" xml:space="preserve">
+    <value>Madhësia e sektorit</value>
+  </data>
+  <data name="Resource1053" xml:space="preserve">
+    <value>Mënyra</value>
+  </data>
+  <data name="Resource1054" xml:space="preserve">
+    <value>Lidhja simbolike</value>
+  </data>
+  <data name="Resource1055" xml:space="preserve">
+    <value>Gabim</value>
+  </data>
+  <data name="Resource1056" xml:space="preserve">
+    <value>Madhësia e përgjithshme</value>
+  </data>
+  <data name="Resource1057" xml:space="preserve">
+    <value>Hapësira e lirë</value>
+  </data>
+  <data name="Resource1058" xml:space="preserve">
+    <value>Madhësia e grumbullimit</value>
+  </data>
+  <data name="Resource1059" xml:space="preserve">
+    <value>Etiketa</value>
+  </data>
+  <data name="Resource1060" xml:space="preserve">
+    <value>Emri Lokal</value>
+  </data>
+  <data name="Resource1061" xml:space="preserve">
+    <value>Ofruesi</value>
+  </data>
+  <data name="Resource1062" xml:space="preserve">
+    <value>Siguria NT</value>
+  </data>
+  <data name="Resource1063" xml:space="preserve">
+    <value>Rrjedhë alternative</value>
+  </data>
+  <data name="Resource1064" xml:space="preserve">
+    <value>Ndihmës</value>
+  </data>
+  <data name="Resource1065" xml:space="preserve">
+    <value>I fshirë</value>
+  </data>
+  <data name="Resource1066" xml:space="preserve">
+    <value>Si pemë</value>
+  </data>
+  <data name="Resource1069" xml:space="preserve">
+    <value>Lloj i gabimit</value>
+  </data>
+  <data name="Resource1070" xml:space="preserve">
+    <value>Gabimet</value>
+  </data>
+  <data name="Resource1071" xml:space="preserve">
+    <value>Gabimet</value>
+  </data>
+  <data name="Resource1072" xml:space="preserve">
+    <value>Paralajmërimet</value>
+  </data>
+  <data name="Resource1073" xml:space="preserve">
+    <value>Paralajmërim</value>
+  </data>
+  <data name="Resource1074" xml:space="preserve">
+    <value>Rrjedhat</value>
+  </data>
+  <data name="Resource1075" xml:space="preserve">
+    <value>Rrjedhat alternative</value>
+  </data>
+  <data name="Resource1076" xml:space="preserve">
+    <value>Madhësia e rrjedhave alternative</value>
+  </data>
+  <data name="Resource1077" xml:space="preserve">
+    <value>Madhësia virtuale</value>
+  </data>
+  <data name="Resource1078" xml:space="preserve">
+    <value>Madhësia e shpaketuar</value>
+  </data>
+  <data name="Resource1079" xml:space="preserve">
+    <value>Madëshia fizike e përgjithshme</value>
+  </data>
+  <data name="Resource1080" xml:space="preserve">
+    <value>Tregues i vëllimit</value>
+  </data>
+  <data name="Resource1081" xml:space="preserve">
+    <value>Nënlloj</value>
+  </data>
+  <data name="Resource1082" xml:space="preserve">
+    <value>Koment i shkurtër</value>
+  </data>
+  <data name="Resource1083" xml:space="preserve">
+    <value>Faqja e kodit</value>
+  </data>
+  <data name="Resource1087" xml:space="preserve">
+    <value>Madhësia e bishtit</value>
+  </data>
+  <data name="Resource1088" xml:space="preserve">
+    <value>Madhësia e programit të përfshirë</value>
+  </data>
+  <data name="Resource1089" xml:space="preserve">
+    <value>Lidhja</value>
+  </data>
+  <data name="Resource1090" xml:space="preserve">
+    <value>Lidhje fizike</value>
+  </data>
+  <data name="Resource1091" xml:space="preserve">
+    <value>iNode</value>
+  </data>
+  <data name="Resource1093" xml:space="preserve">
+    <value>Vetëm për lexim</value>
+  </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Kopjo lidhjen</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Meta të dhënat të modifikuara</value>
+  </data>
+  <data name="Resource2100" xml:space="preserve">
+    <value>Rregullimet</value>
+  </data>
+  <data name="Resource2101" xml:space="preserve">
+    <value>Gjuha</value>
+  </data>
+  <data name="Resource2102" xml:space="preserve">
+    <value>Gjuha:</value>
+  </data>
+  <data name="Resource2103" xml:space="preserve">
+    <value>Redaktuesi</value>
+  </data>
+  <data name="Resource2104" xml:space="preserve">
+    <value>&amp;Redaktuesi:</value>
+  </data>
+  <data name="Resource2105" xml:space="preserve">
+    <value>&amp;Krahasues i dallimeve (Diff):</value>
+  </data>
+  <data name="Resource2200" xml:space="preserve">
+    <value>Sistemi</value>
+  </data>
+  <data name="Resource2201" xml:space="preserve">
+    <value>Lidh NanaZip me:</value>
+  </data>
+  <data name="Resource2202" xml:space="preserve">
+    <value>Çdo përdorues</value>
+  </data>
+  <data name="Resource2301" xml:space="preserve">
+    <value>Integro NanaZip në menynë e kontekstit të shellit</value>
+  </data>
+  <data name="Resource2302" xml:space="preserve">
+    <value>Meny e kontekstit ujëvarë</value>
+  </data>
+  <data name="Resource2303" xml:space="preserve">
+    <value>Elementë të menysë së kontekstit:</value>
+  </data>
+  <data name="Resource2304" xml:space="preserve">
+    <value>Ikonat në menynë e kontekstit</value>
+  </data>
+  <data name="Resource2320" xml:space="preserve">
+    <value>&lt;Dosja&gt;</value>
+  </data>
+  <data name="Resource2321" xml:space="preserve">
+    <value>&lt;Arkivi&gt;</value>
+  </data>
+  <data name="Resource2322" xml:space="preserve">
+    <value>Hap arkivin</value>
+  </data>
+  <data name="Resource2323" xml:space="preserve">
+    <value>Nxirr skedarët...</value>
+  </data>
+  <data name="Resource2324" xml:space="preserve">
+    <value>Shto në arkiv...</value>
+  </data>
+  <data name="Resource2325" xml:space="preserve">
+    <value>Provo arkivin</value>
+  </data>
+  <data name="Resource2326" xml:space="preserve">
+    <value>Nxirr këtu</value>
+  </data>
+  <data name="Resource2327" xml:space="preserve">
+    <value>Nxirr në {0}</value>
+  </data>
+  <data name="Resource2328" xml:space="preserve">
+    <value>Shto te {0}</value>
+  </data>
+  <data name="Resource2329" xml:space="preserve">
+    <value>Ngjish dhe dërgo me postë elektronike...</value>
+  </data>
+  <data name="Resource2330" xml:space="preserve">
+    <value>Ngjish në {0} dhe dërgo me postë elektronike</value>
+  </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Shpaketo këtu (Smart)</value>
+  </data>
+  <data name="Resource2400" xml:space="preserve">
+    <value>Dosjet</value>
+  </data>
+  <data name="Resource2401" xml:space="preserve">
+    <value>&amp;Dosja e punës</value>
+  </data>
+  <data name="Resource2402" xml:space="preserve">
+    <value>&amp;Dosja e përkohshme e sistemit</value>
+  </data>
+  <data name="Resource2403" xml:space="preserve">
+    <value>&amp;Aktuale</value>
+  </data>
+  <data name="Resource2404" xml:space="preserve">
+    <value>&amp;I caktuar:</value>
+  </data>
+  <data name="Resource2405" xml:space="preserve">
+    <value>Përdor vetëm për njësitë e disqeve të largueshme</value>
+  </data>
+  <data name="Resource2406" xml:space="preserve">
+    <value>Cakto një vendndodhje për skedarët e përkohshëm të arkivit.</value>
+  </data>
+  <data name="Resource2500" xml:space="preserve">
+    <value>Cilësimet</value>
+  </data>
+  <data name="Resource2501" xml:space="preserve">
+    <value>Shfaq artikullin ".."</value>
+  </data>
+  <data name="Resource2502" xml:space="preserve">
+    <value>Shfaq ikonat e vërteta të skedarëve</value>
+  </data>
+  <data name="Resource2503" xml:space="preserve">
+    <value>Shfaq menynë e sistemit</value>
+  </data>
+  <data name="Resource2504" xml:space="preserve">
+    <value>&amp;Përzgjidh të tërë rreshtin</value>
+  </data>
+  <data name="Resource2505" xml:space="preserve">
+    <value>Shfaq &amp;vijat e rrjetit</value>
+  </data>
+  <data name="Resource2506" xml:space="preserve">
+    <value>Klikim i vetëm për të hapur një artikull</value>
+  </data>
+  <data name="Resource2507" xml:space="preserve">
+    <value>&amp;Mënyrë alternative përzgjedhje</value>
+  </data>
+  <data name="Resource2508" xml:space="preserve">
+    <value>Përdor &amp;faqe të mëdha të kujtesës</value>
+  </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>Kërko ArcHistory</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>Kërko PathHistory</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>Kërko CopyHistory</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>Kërko FolderHistory</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Përdor hash-et me shkronja të vogla</value>
+  </data>
+  <data name="Resource2900" xml:space="preserve">
+    <value>Rreth NanaZip</value>
+  </data>
+  <data name="Resource2901" xml:space="preserve">
+    <value>NanaZip është program falas.</value>
+  </data>
+  <data name="Resource3000" xml:space="preserve">
+    <value>Sistemi nuk mund të ndajë sasinë e kërkuar të kujtesës</value>
+  </data>
+  <data name="Resource3001" xml:space="preserve">
+    <value>Nuk ka gabime</value>
+  </data>
+  <data name="Resource3002" xml:space="preserve">
+    <value>{0} objekt(e) të përzgjedhur(a)</value>
+  </data>
+  <data name="Resource3003" xml:space="preserve">
+    <value>Nuk mund të krijoj dosjen '{0}'</value>
+  </data>
+  <data name="Resource3004" xml:space="preserve">
+    <value>Operacionet e përditësimit për këtë arkiv nuk mbështeten.</value>
+  </data>
+  <data name="Resource3005" xml:space="preserve">
+    <value>Skedari "{0}" nuk mund të hapet si arkiv</value>
+  </data>
+  <data name="Resource3006" xml:space="preserve">
+    <value>Nuk mund të hapet arkivi i shifruar "{0}". Fjalëkalim i gabuar?</value>
+  </data>
+  <data name="Resource3007" xml:space="preserve">
+    <value>Lloji i arkivit nuk mbështetet</value>
+  </data>
+  <data name="Resource3008" xml:space="preserve">
+    <value>Skedari {0} ekziston tashmë</value>
+  </data>
+  <data name="Resource3009" xml:space="preserve">
+    <value>Skedari '{0}' u modifikua.
+Do ta përditësosh atë edhe në arkiv?</value>
+  </data>
+  <data name="Resource3010" xml:space="preserve">
+    <value>Skedari '{0}'
+nuk mund të përditësohet</value>
+  </data>
+  <data name="Resource3011" xml:space="preserve">
+    <value>Redaktuesi nuk mund të niset.</value>
+  </data>
+  <data name="Resource3012" xml:space="preserve">
+    <value>Skedari duket si një virus (emri i skedarit përmban hapësira të gjata në emër).</value>
+  </data>
+  <data name="Resource3013" xml:space="preserve">
+    <value>Operacioni nuk mund të thirret nga një dosje që ka një shteg të gjatë.</value>
+  </data>
+  <data name="Resource3014" xml:space="preserve">
+    <value>Duhet të zgjedhësh një skedar</value>
+  </data>
+  <data name="Resource3015" xml:space="preserve">
+    <value>Duhet të zgjedhësh një ose më shumë skedarë</value>
+  </data>
+  <data name="Resource3016" xml:space="preserve">
+    <value>Tepër shumë artikuj</value>
+  </data>
+  <data name="Resource3017" xml:space="preserve">
+    <value>Skedari nuk mund të hapet si arkiv {0}</value>
+  </data>
+  <data name="Resource3018" xml:space="preserve">
+    <value>Skedari është hapur si arkiv {0}</value>
+  </data>
+  <data name="Resource3019" xml:space="preserve">
+    <value>Arkivi është i hapur me ofset</value>
+  </data>
+  <data name="Resource3300" xml:space="preserve">
+    <value>Duke shpaketuar</value>
+  </data>
+  <data name="Resource3301" xml:space="preserve">
+    <value>Duke ngjeshur</value>
+  </data>
+  <data name="Resource3302" xml:space="preserve">
+    <value>Duke provuar</value>
+  </data>
+  <data name="Resource3303" xml:space="preserve">
+    <value>Duke hapur...</value>
+  </data>
+  <data name="Resource3304" xml:space="preserve">
+    <value>Duke skanuar...</value>
+  </data>
+  <data name="Resource3305" xml:space="preserve">
+    <value>Duke hequr</value>
+  </data>
+  <data name="Resource3320" xml:space="preserve">
+    <value>Duke shtuar</value>
+  </data>
+  <data name="Resource3321" xml:space="preserve">
+    <value>Duke përditësuar</value>
+  </data>
+  <data name="Resource3322" xml:space="preserve">
+    <value>Duke analizuar</value>
+  </data>
+  <data name="Resource3323" xml:space="preserve">
+    <value>Duke përsëritur</value>
+  </data>
+  <data name="Resource3324" xml:space="preserve">
+    <value>Duke paketuar përsëri</value>
+  </data>
+  <data name="Resource3325" xml:space="preserve">
+    <value>Duke kapërcyer</value>
+  </data>
+  <data name="Resource3326" xml:space="preserve">
+    <value>Duke fshirë</value>
+  </data>
+  <data name="Resource3327" xml:space="preserve">
+    <value>Krijimi i kokës</value>
+  </data>
+  <data name="Resource3400" xml:space="preserve">
+    <value>Shpaketo</value>
+  </data>
+  <data name="Resource3401" xml:space="preserve">
+    <value>Sh&amp;paketo në:</value>
+  </data>
+  <data name="Resource3402" xml:space="preserve">
+    <value>Cakto një vendndodhje për skedarët e nxjerrë.</value>
+  </data>
+  <data name="Resource3410" xml:space="preserve">
+    <value>Mënyra e Shtegut</value>
+  </data>
+  <data name="Resource3411" xml:space="preserve">
+    <value>Emra të plotë shtigjesh</value>
+  </data>
+  <data name="Resource3412" xml:space="preserve">
+    <value>Pa emra shtigjesh</value>
+  </data>
+  <data name="Resource3413" xml:space="preserve">
+    <value>Emra shtigjesh absolutë</value>
+  </data>
+  <data name="Resource3414" xml:space="preserve">
+    <value>Emra shtigjesh relativë</value>
+  </data>
+  <data name="Resource3420" xml:space="preserve">
+    <value>Mënyra e mbishkrimit:</value>
+  </data>
+  <data name="Resource3421" xml:space="preserve">
+    <value>Pyet para mbishkrimit</value>
+  </data>
+  <data name="Resource3422" xml:space="preserve">
+    <value>Mbishkruaj pa nxitje</value>
+  </data>
+  <data name="Resource3423" xml:space="preserve">
+    <value>Kapërce skedarët ekzistues</value>
+  </data>
+  <data name="Resource3424" xml:space="preserve">
+    <value>Riemërto automatikisht</value>
+  </data>
+  <data name="Resource3425" xml:space="preserve">
+    <value>Riemërto automatikisht skedarët ekzistues</value>
+  </data>
+  <data name="Resource3430" xml:space="preserve">
+    <value>Elimino dyfishimin e dosjes rrënjësore</value>
+  </data>
+  <data name="Resource3431" xml:space="preserve">
+    <value>Rivendos sigurinë e skedarit</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Hap dosjen pas shpaketimit</value>
+  </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Përhap rrymën Zone.Id:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Për skedarët e Office</value>
+  </data>
+  <data name="Resource3500" xml:space="preserve">
+    <value>Prano zëvendësimin e skedarëve</value>
+  </data>
+  <data name="Resource3501" xml:space="preserve">
+    <value>Dosja e vendarritjes e përmban tashmë skedarin e përpunuar.</value>
+  </data>
+  <data name="Resource3502" xml:space="preserve">
+    <value>Dëshiron ta zëvendësosh skedarin ekzistues</value>
+  </data>
+  <data name="Resource3503" xml:space="preserve">
+    <value>me këtë?</value>
+  </data>
+  <data name="Resource3504" xml:space="preserve">
+    <value>{0} bajt</value>
+  </data>
+  <data name="Resource3505" xml:space="preserve">
+    <value>R&amp;iemërtim automatik</value>
+  </data>
+  <data name="Resource3700" xml:space="preserve">
+    <value>Metoda e ngjeshjes për '{0}' nuk mbështetet.</value>
+  </data>
+  <data name="Resource3701" xml:space="preserve">
+    <value>Gabim të dhënash në '{0}'. Skedari është i prishur.</value>
+  </data>
+  <data name="Resource3702" xml:space="preserve">
+    <value>CRC dështoi në '{0}'. Skedari është i prishur.</value>
+  </data>
+  <data name="Resource3703" xml:space="preserve">
+    <value>gabim të dhënash në skedarin e shifruar '{0}'. Fjalëkalim i gabuar?</value>
+  </data>
+  <data name="Resource3704" xml:space="preserve">
+    <value>CRC dështoi në skedarin e shifruar '{0}'. Fjalëkalim i gabuar?</value>
+  </data>
+  <data name="Resource3710" xml:space="preserve">
+    <value>Fjalëkalim i gabuar?</value>
+  </data>
+  <data name="Resource3721" xml:space="preserve">
+    <value>Metoda e ngjeshjesh nuk mbështetet</value>
+  </data>
+  <data name="Resource3722" xml:space="preserve">
+    <value>Gabim të dhënash</value>
+  </data>
+  <data name="Resource3723" xml:space="preserve">
+    <value>CRC dështoi</value>
+  </data>
+  <data name="Resource3724" xml:space="preserve">
+    <value>Të dhënat nuk ofrohen</value>
+  </data>
+  <data name="Resource3725" xml:space="preserve">
+    <value>Fund i papritur i të dhënave</value>
+  </data>
+  <data name="Resource3726" xml:space="preserve">
+    <value>Ka disa të dhëna pas përfundimit të të dhënave të ngarkesës</value>
+  </data>
+  <data name="Resource3727" xml:space="preserve">
+    <value>Nuk është arkiv</value>
+  </data>
+  <data name="Resource3728" xml:space="preserve">
+    <value>Gabim i krerëve</value>
+  </data>
+  <data name="Resource3729" xml:space="preserve">
+    <value>Fjalëkalim i gabuar</value>
+  </data>
+  <data name="Resource3763" xml:space="preserve">
+    <value>Fillimi i arkivit nuk ofrohet</value>
+  </data>
+  <data name="Resource3764" xml:space="preserve">
+    <value>Fillimi i arkivit nuk është i vërtetuar</value>
+  </data>
+  <data name="Resource3768" xml:space="preserve">
+    <value>Veçoria nuk mbështetet</value>
+  </data>
+  <data name="Resource3800" xml:space="preserve">
+    <value>Fut fjalëkalimin</value>
+  </data>
+  <data name="Resource3801" xml:space="preserve">
+    <value>Fut fjalëkalimin:</value>
+  </data>
+  <data name="Resource3802" xml:space="preserve">
+    <value>Fut fjalëkalimin përsëri:</value>
+  </data>
+  <data name="Resource3803" xml:space="preserve">
+    <value>&amp;Trego fjalëkalimin</value>
+  </data>
+  <data name="Resource3804" xml:space="preserve">
+    <value>Fjalëkalimet nuk përputhen</value>
+  </data>
+  <data name="Resource3805" xml:space="preserve">
+    <value>Përdor vetëm shkronja, numra dhe shenja të veçanta Angleze (!, #, $, ...) për fjalëkalimin</value>
+  </data>
+  <data name="Resource3806" xml:space="preserve">
+    <value>Fjalëkalimi është shumë i gjatë</value>
+  </data>
+  <data name="Resource3807" xml:space="preserve">
+    <value>Fjalëkalimi</value>
+  </data>
+  <data name="Resource3900" xml:space="preserve">
+    <value>Koha e kaluar:</value>
+  </data>
+  <data name="Resource3901" xml:space="preserve">
+    <value>Koha e mbetur:</value>
+  </data>
+  <data name="Resource3902" xml:space="preserve">
+    <value>Madhësia e përgjithshme:</value>
+  </data>
+  <data name="Resource3903" xml:space="preserve">
+    <value>Shpejtësia:</value>
+  </data>
+  <data name="Resource3904" xml:space="preserve">
+    <value>Të përpunuara:</value>
+  </data>
+  <data name="Resource3905" xml:space="preserve">
+    <value>Përpjesëtim i ngjeshjes:</value>
+  </data>
+  <data name="Resource3906" xml:space="preserve">
+    <value>Gabime:</value>
+  </data>
+  <data name="Resource3907" xml:space="preserve">
+    <value>Arkivat:</value>
+  </data>
+  <data name="Resource4000" xml:space="preserve">
+    <value>Shto në arkiv</value>
+  </data>
+  <data name="Resource4001" xml:space="preserve">
+    <value>&amp;Arkivi:</value>
+  </data>
+  <data name="Resource4002" xml:space="preserve">
+    <value>&amp;Mënyra e përditësimit:</value>
+  </data>
+  <data name="Resource4003" xml:space="preserve">
+    <value>&amp;Formati i &amp;arkivit:</value>
+  </data>
+  <data name="Resource4004" xml:space="preserve">
+    <value>Niveli i &amp;ngjeshjes:</value>
+  </data>
+  <data name="Resource4005" xml:space="preserve">
+    <value>Metoda e &amp;ngjeshjes:</value>
+  </data>
+  <data name="Resource4006" xml:space="preserve">
+    <value>&amp;Madhësia e fjalorit:</value>
+  </data>
+  <data name="Resource4007" xml:space="preserve">
+    <value>&amp;Madhësia e fjalës:</value>
+  </data>
+  <data name="Resource4008" xml:space="preserve">
+    <value>Madhësia e bllokut të ngurtë:</value>
+  </data>
+  <data name="Resource4009" xml:space="preserve">
+    <value>Numri i fijeve të CPU-së:</value>
+  </data>
+  <data name="Resource4010" xml:space="preserve">
+    <value>&amp;Parametrat:</value>
+  </data>
+  <data name="Resource4011" xml:space="preserve">
+    <value>Rregullimet</value>
+  </data>
+  <data name="Resource4012" xml:space="preserve">
+    <value>Krijo një arkiv SF&amp;X</value>
+  </data>
+  <data name="Resource4013" xml:space="preserve">
+    <value>Ngjish skedarët e përbashkët</value>
+  </data>
+  <data name="Resource4014" xml:space="preserve">
+    <value>Shifrimi</value>
+  </data>
+  <data name="Resource4015" xml:space="preserve">
+    <value>Metoda e shifrimit:</value>
+  </data>
+  <data name="Resource4016" xml:space="preserve">
+    <value>Shifro &amp;emrat e skedarëve</value>
+  </data>
+  <data name="Resource4017" xml:space="preserve">
+    <value>Shfrytëzimi i kujtesës për Ngjeshje:</value>
+  </data>
+  <data name="Resource4018" xml:space="preserve">
+    <value>Shfrytëzimi i kujtesës për Shpaketim:</value>
+  </data>
+  <data name="Resource4019" xml:space="preserve">
+    <value>Fshi skedarët pas ngjeshjes</value>
+  </data>
+  <data name="Resource4040" xml:space="preserve">
+    <value>Ruaj lidhjet simbolike</value>
+  </data>
+  <data name="Resource4041" xml:space="preserve">
+    <value>Ruaj lidhjet fizike</value>
+  </data>
+  <data name="Resource4042" xml:space="preserve">
+    <value>Ruaj rrjedhat alternative të të dhënave</value>
+  </data>
+  <data name="Resource4043" xml:space="preserve">
+    <value>Ruaj sigurinë e skedarëve</value>
+  </data>
+  <data name="Resource4050" xml:space="preserve">
+    <value>Ruaj</value>
+  </data>
+  <data name="Resource4051" xml:space="preserve">
+    <value>Më i shpejti</value>
+  </data>
+  <data name="Resource4052" xml:space="preserve">
+    <value>I shpejtë</value>
+  </data>
+  <data name="Resource4053" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Resource4054" xml:space="preserve">
+    <value>Maksimal</value>
+  </data>
+  <data name="Resource4055" xml:space="preserve">
+    <value>Ultra</value>
+  </data>
+  <data name="Resource4060" xml:space="preserve">
+    <value>Shto dhe zëvendëso skedarët</value>
+  </data>
+  <data name="Resource4061" xml:space="preserve">
+    <value>Përditëso dhe shto skedarët</value>
+  </data>
+  <data name="Resource4062" xml:space="preserve">
+    <value>Përtëri skedarët ekzistues</value>
+  </data>
+  <data name="Resource4063" xml:space="preserve">
+    <value>Sinkronizo skedarët</value>
+  </data>
+  <data name="Resource4070" xml:space="preserve">
+    <value>Shfleto</value>
+  </data>
+  <data name="Resource4071" xml:space="preserve">
+    <value>Të gjithë skedarët</value>
+  </data>
+  <data name="Resource4072" xml:space="preserve">
+    <value>Jo të ngurtë</value>
+  </data>
+  <data name="Resource4073" xml:space="preserve">
+    <value>Të ngurtë</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Koha</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Saktësia e vulës kohore:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Ruaj kohën e modifikimit</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Ruaj kohën e krijimit</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Ruaj kohën e hyrjes së fundit</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Vendos kohën e arkivit si kohën më të fundit të skedarit</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>Mos e ndrysho kohën e hyrjes së fundit të skedarëve burim</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>sek</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
+  </data>
+  <data name="Resource6000" xml:space="preserve">
+    <value>Kopjo</value>
+  </data>
+  <data name="Resource6001" xml:space="preserve">
+    <value>Zhvendos</value>
+  </data>
+  <data name="Resource6002" xml:space="preserve">
+    <value>Kopjo në:</value>
+  </data>
+  <data name="Resource6003" xml:space="preserve">
+    <value>Zhvendos në:</value>
+  </data>
+  <data name="Resource6004" xml:space="preserve">
+    <value>Duke kopjuar...</value>
+  </data>
+  <data name="Resource6005" xml:space="preserve">
+    <value>Duke zhvendosur...</value>
+  </data>
+  <data name="Resource6006" xml:space="preserve">
+    <value>Duke riemërtuar...</value>
+  </data>
+  <data name="Resource6007" xml:space="preserve">
+    <value>Zgjidh dosjen e vendarritjes.</value>
+  </data>
+  <data name="Resource6008" xml:space="preserve">
+    <value>Operacioni nuk mbështetet për këtë dosje.</value>
+  </data>
+  <data name="Resource6009" xml:space="preserve">
+    <value>Gabim gjatë riemërtimit të skedarit ose dosjes</value>
+  </data>
+  <data name="Resource6010" xml:space="preserve">
+    <value>Prano për kopjimin e skedarëve</value>
+  </data>
+  <data name="Resource6011" xml:space="preserve">
+    <value>Je i sigurt që do të kopjosh skedarët në arkiv</value>
+  </data>
+  <data name="Resource6100" xml:space="preserve">
+    <value>Prano fshirjen e skedarit</value>
+  </data>
+  <data name="Resource6101" xml:space="preserve">
+    <value>Prano fshirjen e dosjes</value>
+  </data>
+  <data name="Resource6102" xml:space="preserve">
+    <value>Prano fshirjen e skedarëve të shumëfishtë</value>
+  </data>
+  <data name="Resource6103" xml:space="preserve">
+    <value>Je i sigurt që do të fshish '{0}'?</value>
+  </data>
+  <data name="Resource6104" xml:space="preserve">
+    <value>Je i sigurt që do të fshish dosjen '{0}' dhe tërë përmbajtjen e saj?</value>
+  </data>
+  <data name="Resource6105" xml:space="preserve">
+    <value>Je i sigurt që do t'i fshish këto {0} artikuj?</value>
+  </data>
+  <data name="Resource6106" xml:space="preserve">
+    <value>Duke fshirë...</value>
+  </data>
+  <data name="Resource6107" xml:space="preserve">
+    <value>Gabim gjatë fshirjes së skedarit apo dosjes</value>
+  </data>
+  <data name="Resource6108" xml:space="preserve">
+    <value>Sistemi nuk mund të zhvendos një skedar me shteg të gjatë në Koshin e Riciklimit</value>
+  </data>
+  <data name="Resource6300" xml:space="preserve">
+    <value>Krijo një dosje</value>
+  </data>
+  <data name="Resource6301" xml:space="preserve">
+    <value>Krijo një skedar</value>
+  </data>
+  <data name="Resource6302" xml:space="preserve">
+    <value>Emri i dosjes:</value>
+  </data>
+  <data name="Resource6303" xml:space="preserve">
+    <value>Emri i skedarit:</value>
+  </data>
+  <data name="Resource6304" xml:space="preserve">
+    <value>Dosje e re</value>
+  </data>
+  <data name="Resource6305" xml:space="preserve">
+    <value>Skedar i ri</value>
+  </data>
+  <data name="Resource6306" xml:space="preserve">
+    <value>Gabim gjatë krijimit të dosjes</value>
+  </data>
+  <data name="Resource6307" xml:space="preserve">
+    <value>Gabim gjatë krijimit të skedarit</value>
+  </data>
+  <data name="Resource6400" xml:space="preserve">
+    <value>Komenti</value>
+  </data>
+  <data name="Resource6401" xml:space="preserve">
+    <value>&amp;Komenti:</value>
+  </data>
+  <data name="Resource6402" xml:space="preserve">
+    <value>Përzgjidh</value>
+  </data>
+  <data name="Resource6403" xml:space="preserve">
+    <value>Hiq përzgjedhjen</value>
+  </data>
+  <data name="Resource6404" xml:space="preserve">
+    <value>Maska:</value>
+  </data>
+  <data name="Resource6600" xml:space="preserve">
+    <value>Vetitë</value>
+  </data>
+  <data name="Resource6601" xml:space="preserve">
+    <value>Historiku i dosjeve</value>
+  </data>
+  <data name="Resource6602" xml:space="preserve">
+    <value>Mesazhe diagnostikuese</value>
+  </data>
+  <data name="Resource6603" xml:space="preserve">
+    <value>Mesazhi</value>
+  </data>
+  <data name="Resource7100" xml:space="preserve">
+    <value>Kompjuteri</value>
+  </data>
+  <data name="Resource7101" xml:space="preserve">
+    <value>Rrjeti</value>
+  </data>
+  <data name="Resource7102" xml:space="preserve">
+    <value>Dokumentet</value>
+  </data>
+  <data name="Resource7103" xml:space="preserve">
+    <value>Sistemi</value>
+  </data>
+  <data name="Resource7200" xml:space="preserve">
+    <value>Shto</value>
+  </data>
+  <data name="Resource7201" xml:space="preserve">
+    <value>Shpaketo</value>
+  </data>
+  <data name="Resource7202" xml:space="preserve">
+    <value>Provo</value>
+  </data>
+  <data name="Resource7203" xml:space="preserve">
+    <value>Kopjo</value>
+  </data>
+  <data name="Resource7204" xml:space="preserve">
+    <value>Zhvendos</value>
+  </data>
+  <data name="Resource7205" xml:space="preserve">
+    <value>Fshi</value>
+  </data>
+  <data name="Resource7206" xml:space="preserve">
+    <value>Informacione</value>
+  </data>
+  <data name="Resource7300" xml:space="preserve">
+    <value>Ndaj skedarin</value>
+  </data>
+  <data name="Resource7301" xml:space="preserve">
+    <value>&amp;Ndaj në:</value>
+  </data>
+  <data name="Resource7302" xml:space="preserve">
+    <value>Ndaj në &amp;vëllime (madhësia jepet në bajt):</value>
+  </data>
+  <data name="Resource7303" xml:space="preserve">
+    <value>Duke ndarë...</value>
+  </data>
+  <data name="Resource7304" xml:space="preserve">
+    <value>Prano ndarjen</value>
+  </data>
+  <data name="Resource7305" xml:space="preserve">
+    <value>Je i sigurt që dëshiron të ndash skedarin në {0} vëllime?</value>
+  </data>
+  <data name="Resource7306" xml:space="preserve">
+    <value>Madhësia e vëllimit duhet të jetë më e vogël se madhësia e skedarit origjinal</value>
+  </data>
+  <data name="Resource7307" xml:space="preserve">
+    <value>Madhësia e vëllimit e gabuar</value>
+  </data>
+  <data name="Resource7308" xml:space="preserve">
+    <value>Madhësia e volumit të caktuar: {0} bajt.
+Je i sigurt që dëshiron të ndash arkivin në vëllime të tilla?</value>
+  </data>
+  <data name="Resource7400" xml:space="preserve">
+    <value>Kombino skedarët</value>
+  </data>
+  <data name="Resource7401" xml:space="preserve">
+    <value>&amp;Kombino në:</value>
+  </data>
+  <data name="Resource7402" xml:space="preserve">
+    <value>Duke kombinuar...</value>
+  </data>
+  <data name="Resource7403" xml:space="preserve">
+    <value>Përzgjidh vetëm pjesën e parë të skedarit të ndarë</value>
+  </data>
+  <data name="Resource7404" xml:space="preserve">
+    <value>Skedari nuk mund të zbulohet si pjesë e skedarit të ndarë</value>
+  </data>
+  <data name="Resource7405" xml:space="preserve">
+    <value>Nuk mund të gjendet më shumë se një pjesë të skedarit të ndarë</value>
+  </data>
+  <data name="Resource7500" xml:space="preserve">
+    <value>Duke llogaritur shumën e vërtetësimit...</value>
+  </data>
+  <data name="Resource7501" xml:space="preserve">
+    <value>Informacionet e shumës së vërtetësimit</value>
+  </data>
+  <data name="Resource7502" xml:space="preserve">
+    <value>Shuma e vërtetësimit CRC për të dhënat:</value>
+  </data>
+  <data name="Resource7503" xml:space="preserve">
+    <value>Shuma e vërtetësimit CRC për të dhënat dhe emrat:</value>
+  </data>
+  <data name="Resource7600" xml:space="preserve">
+    <value>Provë e performancës</value>
+  </data>
+  <data name="Resource7601" xml:space="preserve">
+    <value>Shfrytëzimi i memories:</value>
+  </data>
+  <data name="Resource7602" xml:space="preserve">
+    <value>Duke ngjeshur</value>
+  </data>
+  <data name="Resource7603" xml:space="preserve">
+    <value>Duke shpaketuar</value>
+  </data>
+  <data name="Resource7604" xml:space="preserve">
+    <value>Vlerësimi</value>
+  </data>
+  <data name="Resource7605" xml:space="preserve">
+    <value>Vlerësimi i përgjithshëm</value>
+  </data>
+  <data name="Resource7606" xml:space="preserve">
+    <value>Aktual</value>
+  </data>
+  <data name="Resource7607" xml:space="preserve">
+    <value>Rezultuar</value>
+  </data>
+  <data name="Resource7608" xml:space="preserve">
+    <value>Shfrytëzimi i CPU-së</value>
+  </data>
+  <data name="Resource7609" xml:space="preserve">
+    <value>Vlerësimi / Shfrytëzimi</value>
+  </data>
+  <data name="Resource7610" xml:space="preserve">
+    <value>Kalime:</value>
+  </data>
+  <data name="Resource7700" xml:space="preserve">
+    <value>Lidhje</value>
+  </data>
+  <data name="Resource7701" xml:space="preserve">
+    <value>Lidh</value>
+  </data>
+  <data name="Resource7702" xml:space="preserve">
+    <value>Burimi i lidhjes:</value>
+  </data>
+  <data name="Resource7703" xml:space="preserve">
+    <value>Vendarritja e burimit:</value>
+  </data>
+  <data name="Resource7710" xml:space="preserve">
+    <value>Lloj i lidhjes</value>
+  </data>
+  <data name="Resource7711" xml:space="preserve">
+    <value>Lidhje fizike</value>
+  </data>
+  <data name="Resource7712" xml:space="preserve">
+    <value>Lidhje simbolike e skedarit</value>
+  </data>
+  <data name="Resource7713" xml:space="preserve">
+    <value>Lidhje simbolike e dosjes</value>
+  </data>
+  <data name="Resource7714" xml:space="preserve">
+    <value>Kryqëzimi i dosjeve</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>Integrimi</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Hapni aplikacionin Cilësimet e Windows për të lidhur skedarët me NanaZip</value>
+  </data>
+
+</root>

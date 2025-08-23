@@ -1,0 +1,19 @@
+#include "resourceGui.h"
+
+STRINGTABLE
+BEGIN
+  IDS_MESSAGE_NO_ERRORS     "There are no errors"
+
+  IDS_PROGRESS_TESTING      "Testing"
+
+  IDS_CHECKSUM_CALCULATING    "Checksum calculating..."
+  IDS_CHECKSUM_INFORMATION    "Checksum information"
+  IDS_CHECKSUM_CRC_DATA       "CRC checksum for data:"
+  IDS_CHECKSUM_CRC_DATA_NAMES "CRC checksum for data and names:"
+  IDS_CHECKSUM_CRC_STREAMS_NAMES "CRC checksum for streams and names:"
+
+  IDS_INCORRECT_VOLUME_SIZE "Incorrect volume size"
+
+  IDS_OPENNING  "Opening..."
+  IDS_SCANNING  "Scanning..."
+END

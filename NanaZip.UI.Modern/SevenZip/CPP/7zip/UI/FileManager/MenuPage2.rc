@@ -1,0 +1,26 @@
+#include "../GUI/ExtractDialogRes.h"
+
+#define y 64
+
+#define zoneX 90
+
+CAPTION "Integration"
+BEGIN
+  PUSHBUTTON  "Open Windows Settings app to associate files with NanaZip", IDB_SYSTEM_ASSOCIATE, m, m, xc, bys
+
+  CONTROL   "Eliminate duplication of root folder", IDX_EXTRACT_ELIM_DUP, MY_CHECKBOX, m, m + 24, xc, 10
+
+  LTEXT    "Propagate Zone.Id stream:", IDT_SYSTEM_ZONE, m, m + 38, xc - zoneX, 8
+  COMBOBOX  IDC_SYSTEM_ZONE, m + xc - zoneX, m + 38 - 2, zoneX, 50, MY_COMBO
+
+  LTEXT    "Context menu items:", IDT_SYSTEM_CONTEXT_MENU_ITEMS, m, m + 52, xc, 8
+  CONTROL  "List", IDL_SYSTEM_OPTIONS, "SysListView32",
+           LVS_REPORT | LVS_SINGLESEL | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,
+           m, m + y, xc, yc - y
+END
+
+
+STRINGTABLE
+BEGIN
+    IDT_ZONE_FOR_OFFICE "For Office files"
+END

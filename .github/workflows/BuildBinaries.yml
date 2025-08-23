@@ -1,0 +1,42 @@
+﻿name: Build Binaries
+
+on:
+  push:
+    paths-ignore:
+      - '.github/*'
+      - '*.md'
+  pull_request:
+    paths-ignore:
+      - '.github/*'
+      - '*.md'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      POWERSHELL_TELEMETRY_OPTOUT: 1
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+    - uses: microsoft/setup-msbuild@v2
+    - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
+      run: dotnet nuget locals all --clear
+    - name: Build
+      run: MSBuild -binaryLogger:Output\BuildAllTargets.binlog -m BuildAllTargets.proj
+    - name: Upload MSIX Bundle
+      uses: actions/upload-artifact@v4
+      with:
+        name: NanaZip_Mainline_ApplicationPackages
+        path: Output/Binaries/AppPackages
+    - name: Upload Extension Package Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: NanaZip_Mainline_ExtensionPackageInstaller
+        path: Output/NanaZip.ExtensionPackage_*.exe
+    - name: Upload MSBuild Build Process Binary Log
+      uses: actions/upload-artifact@v4
+      if: '!cancelled()'
+      with:
+        name: NanaZip_Mainline_BuildBinaryLog
+        path: Output/BuildAllTargets.binlog

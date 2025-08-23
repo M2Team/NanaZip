@@ -1,0 +1,1136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="NanaZip.Codecs.cpp" />
+    <ClCompile Include="BLAKE3\blake3.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <None Include="BLAKE3\blake3_avx2.c">
+      <Filter>BLAKE3</Filter>
+    </None>
+    <None Include="BLAKE3\blake3_avx512.c">
+      <Filter>BLAKE3</Filter>
+    </None>
+    <ClCompile Include="BLAKE3\blake3_dispatch.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <None Include="BLAKE3\blake3_neon.c">
+      <Filter>BLAKE3</Filter>
+    </None>
+    <ClCompile Include="BLAKE3\blake3_portable.c">
+      <Filter>BLAKE3</Filter>
+    </ClCompile>
+    <None Include="BLAKE3\blake3_sse2.c">
+      <Filter>BLAKE3</Filter>
+    </None>
+    <None Include="BLAKE3\blake3_sse41.c">
+      <Filter>BLAKE3</Filter>
+    </None>
+    <ClCompile Include="GmSSL\sm3.c">
+      <Filter>GmSSL</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\aich.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\blake2b.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\byte_order.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\edonr.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\gost12.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\gost94.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\has160.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\hex.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\ripemd-160.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\rhash_sha256.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\sha3.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\snefru.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger_sbox.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\torrent.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\tth.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\rhash_util.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\whirlpool.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="RHash\whirlpool_sbox.c">
+      <Filter>RHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\constants.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\context.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\dictionary.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\platform.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\shared_dictionary.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\transform.c">
+      <Filter>Brotli\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\bit_reader.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\decode.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\huffman.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\state.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references_hq.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\bit_cost.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\block_splitter.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\brotli_bit_stream.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\cluster.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\command.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compound_dictionary.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compress_fragment.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compress_fragment_two_pass.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\dictionary_hash.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\encode.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\encoder_dict.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\entropy_encode.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\fast_log.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\histogram.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\literal_cost.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\memory.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\metablock.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\static_dict.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\utf8_util.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="xxHash\xxhash.c">
+      <Filter>xxHash</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4frame.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ4\lz4hc.c">
+      <Filter>LZ4</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ5\lz5.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ5\lz5frame.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="LZ5\lz5hc.c">
+      <Filter>LZ5</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\lizard_compress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\lizard_decompress.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\lizard_frame.c">
+      <Filter>Lizard</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\brotli-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lizard-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz4-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_common.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_compress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\lz5-mt_decompress.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSTDMT\zstd-mt_threading.c">
+      <Filter>ZSTDMT</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\dict_buffer.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_common.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_compress.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_pool.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\fl2_threading.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\lzma2_enc.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\radix_bitpack.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\radix_mf.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\radix_struct.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\range_enc.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLZMA2\util.c">
+      <Filter>FastLZMA2</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\debug.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\entropy_common.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\error_private.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\fse_decompress.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\pool.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\threading.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\common\zstd_common.c">
+      <Filter>Zstandard\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\fse_compress.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\hist.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\huf_compress.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstdmt_compress.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_compress.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_compress_literals.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_compress_sequences.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_compress_superblock.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_double_fast.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_fast.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_lazy.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_ldm.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\compress\zstd_opt.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sm3.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Aich.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Blake2b.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Ed2k.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR224.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR384.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR512.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost94.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost94CryptoPro.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost12256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost12512.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Has160.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Ripemd160.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha224.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3224.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3384.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3512.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Snefru128.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Snefru256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Tiger.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Tiger2.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Torrent.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Tth.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Whirlpool.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh32.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh64.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh364.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh3128.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Common.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.cpp" />
+    <ClCompile Include="NanaZip.Codecs.SevenZipWrapper.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.BCryptProvider.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Ufs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.DotNetSingleFile.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.ElectronAsar.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Romfs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Zealfs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.WebAssembly.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Littlefs.cpp" />
+    <ClCompile Include="Zstandard\compress\zstd_preSplit.c">
+      <Filter>Zstandard\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c">
+      <Filter>Zstandard\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v03.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v04.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v05.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v06.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v07.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v01.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zstandard\legacy\zstd_v02.c">
+      <Filter>Zstandard\legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_huf_compress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_huf_decompress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_fse_compress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_hist.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_entropy_common.c">
+      <Filter>Lizard\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Mile.Helpers.Portable.Base.Unstaged.cpp">
+      <Filter>Mile.Portable.Helpers.Unstaged</Filter>
+    </ClCompile>
+    <ClCompile Include="LittleFS\lfs.c">
+      <Filter>LittleFS</Filter>
+    </ClCompile>
+    <ClCompile Include="LittleFS\lfs_util.c">
+      <Filter>LittleFS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanaZip.Codecs.def" />
+    <None Include="NanaZip.Codecs.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BLAKE3">
+      <UniqueIdentifier>{8780e049-c08c-40bf-a1ef-6ac34ab857a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GmSSL">
+      <UniqueIdentifier>{650c97a1-a641-4c99-8209-76a265fbfc24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RHash">
+      <UniqueIdentifier>{c13ab0bc-bcc5-44ec-8b4b-8f3ee60c2ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli">
+      <UniqueIdentifier>{733d7abb-fff3-4dfd-a2fa-de0451280840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\common">
+      <UniqueIdentifier>{69f0ece3-1d69-4527-ae66-d992b96c6146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\dec">
+      <UniqueIdentifier>{82cb3ecc-338a-4805-9568-4b3cd99946c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\enc">
+      <UniqueIdentifier>{4299b44f-18e5-45ef-b87b-66dc2bd371ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\include">
+      <UniqueIdentifier>{988d17a2-5e4e-472a-9923-67a046c33253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brotli\include\brotli">
+      <UniqueIdentifier>{fbcd39e0-c2a1-4146-92e5-4e217a1f49bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="xxHash">
+      <UniqueIdentifier>{4a2fdc00-56e0-4024-b1e4-65edd9491b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LZ4">
+      <UniqueIdentifier>{a09b9f72-7fa1-4190-a850-c3ff3c812272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LZ5">
+      <UniqueIdentifier>{50cd4f8e-720b-44a2-912e-8febdaa5c7c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lizard">
+      <UniqueIdentifier>{3bd67c07-e7a9-462e-bfa1-a18141e2e67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZSTDMT">
+      <UniqueIdentifier>{0f78d39c-0bbe-4715-9237-133b2a02b2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FastLZMA2">
+      <UniqueIdentifier>{fd31c8de-7c34-43cb-abb3-ddc8bad2d7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard">
+      <UniqueIdentifier>{8d863b60-943f-4fda-8869-fa161291bb01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\common">
+      <UniqueIdentifier>{4b9b3550-9d14-47ac-8cd9-a96615b9ddda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\compress">
+      <UniqueIdentifier>{a75fe35b-0362-43ad-b9f2-29e3b7c0466a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeBSD">
+      <UniqueIdentifier>{70c4b67c-1fa7-4430-a788-11ad86f1ac56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\decompress">
+      <UniqueIdentifier>{50d76346-416e-4ceb-90d4-9a78fcd52386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zstandard\legacy">
+      <UniqueIdentifier>{b18e7303-5e49-475c-aefe-4b289407e2fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lizard\entropy">
+      <UniqueIdentifier>{114a5a2f-28cd-4e17-9570-ecf119db33d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mile.Portable.Helpers.Unstaged">
+      <UniqueIdentifier>{2ede4493-6888-4402-aa9d-823628b6bd21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LittleFS">
+      <UniqueIdentifier>{f72fbfc5-1b3e-43d1-9a15-d52e8b570b3f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BLAKE3\blake3.h">
+      <Filter>BLAKE3</Filter>
+    </ClInclude>
+    <ClInclude Include="BLAKE3\blake3_impl.h">
+      <Filter>BLAKE3</Filter>
+    </ClInclude>
+    <ClInclude Include="GmSSL\endian.h">
+      <Filter>GmSSL</Filter>
+    </ClInclude>
+    <ClInclude Include="GmSSL\sm3.h">
+      <Filter>GmSSL</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\aich.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\blake2b.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\byte_order.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\edonr.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\gost12.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\gost94.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\has160.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\hex.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ripemd-160.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha1.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha256.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\sha3.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\snefru.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\tiger.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\torrent.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\tth.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\ustd.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\util.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="RHash\whirlpool.h">
+      <Filter>RHash</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\constants.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\context.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\dictionary.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\platform.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\shared_dictionary_internal.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\transform.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\version.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\bit_reader.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\huffman.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\prefix.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\state.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\backward_references.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\backward_references_hq.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\backward_references_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\bit_cost.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\bit_cost_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\block_encoder_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\block_splitter.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\block_splitter_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\brotli_bit_stream.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\cluster.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\cluster_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\command.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\compound_dictionary.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\compress_fragment.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\compress_fragment_two_pass.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\dictionary_hash.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\encoder_dict.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\entropy_encode.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\entropy_encode_static.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\fast_log.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\find_match_length.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_composite_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_forgetful_chain_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match64_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match_quickly_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_rolling_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_to_binary_tree_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\histogram.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\histogram_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\literal_cost.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\memory.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\metablock.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\metablock_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\params.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\prefix.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\quality.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\ringbuffer.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\state.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\static_dict.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\static_dict_lut.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\utf8_util.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\write_bits.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\decode.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\encode.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\port.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\shared_dictionary.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\include\brotli\types.h">
+      <Filter>Brotli\include\brotli</Filter>
+    </ClInclude>
+    <ClInclude Include="xxHash\xxhash.h">
+      <Filter>xxHash</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4frame.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4frame_static.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ4\lz4hc.h">
+      <Filter>LZ4</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5common.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5frame.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5frame_static.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5hc.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\mem.h">
+      <Filter>LZ5</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_common.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress_liz.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_compress_lz4.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress_liz.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_decompress_lz4.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_frame.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_frame_static.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fast.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fastbig.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_fastsmall.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_hashchain.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_lowestprice.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_nochain.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_optimal.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\lizard_parser_pricefast.h">
+      <Filter>Lizard</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\brotli-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\list.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lizard-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lz4-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\lz5-mt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\memmt.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSTDMT\threading.h">
+      <Filter>ZSTDMT</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\atomic.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\compiler.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\count.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\data_block.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\dict_buffer.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fast-lzma2.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fastpos_table.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_compress_internal.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_errors.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_internal.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_pool.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\fl2_threading.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\lzma2_enc.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\mem.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\platform.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_engine.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_get.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_internal.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\radix_mf.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\range_enc.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLZMA2\util.h">
+      <Filter>FastLZMA2</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\zstd.h">
+      <Filter>Zstandard</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\zstd_errors.h">
+      <Filter>Zstandard</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\allocations.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\bits.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\bitstream.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\compiler.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\cpu.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\debug.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\error_private.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\fse.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\huf.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\mem.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\pool.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\portability_macros.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\threading.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_deps.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_internal.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\common\zstd_trace.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\clevels.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\hist.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstdmt_compress.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_compress_internal.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_compress_literals.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_compress_sequences.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_compress_superblock.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_cwksp.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_double_fast.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_fast.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_lazy.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_ldm.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_ldm_geartab.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_opt.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="NanaZip.Codecs.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Common.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.h" />
+    <ClInclude Include="NanaZip.Codecs.SevenZipWrapper.h" />
+    <ClInclude Include="FreeBSD\dir.h">
+      <Filter>FreeBSD</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeBSD\fs.h">
+      <Filter>FreeBSD</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeBSD\dinode.h">
+      <Filter>FreeBSD</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\compress\zstd_preSplit.h">
+      <Filter>Zstandard\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h">
+      <Filter>Zstandard\decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v03.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v04.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v05.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v06.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v07.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_legacy.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v01.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zstandard\legacy\zstd_v02.h">
+      <Filter>Zstandard\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\mem.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\huf.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\error_private.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\fse.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\bitstream.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\compiler.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\debug.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\error_public.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lizard\entropy\hist.h">
+      <Filter>Lizard\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Mile.Helpers.Portable.Base.Unstaged.h">
+      <Filter>Mile.Portable.Helpers.Unstaged</Filter>
+    </ClInclude>
+    <ClInclude Include="NanaZip.Codecs.Specification.Fat.h" />
+    <ClInclude Include="LittleFS\lfs.h">
+      <Filter>LittleFS</Filter>
+    </ClInclude>
+    <ClInclude Include="LittleFS\lfs_util.h">
+      <Filter>LittleFS</Filter>
+    </ClInclude>
+    <ClInclude Include="NanaZip.Codecs.Specification.Zealfs.h" />
+  </ItemGroup>
+</Project>

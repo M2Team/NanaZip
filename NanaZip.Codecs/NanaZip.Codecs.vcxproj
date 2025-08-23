@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{89B81A5B-FF0D-4193-9CB1-738692775DD2}</ProjectGuid>
+    <RootNamespace>NanaZip.Codecs</RootNamespace>
+    <MileProjectType>DynamicLibrary</MileProjectType>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Codecs</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Codecs</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZip.Codecs.dll</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+    <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
+    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
+    <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
+  </PropertyGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
+  <Import Project="..\K7Pal\K7Pal.props" />
+  <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Lizard\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)ZSTDMT\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>NO_XXHASH;FL2_7ZIP_BUILD;ZSTD_LEGACY_SUPPORT;ZSTD_MULTITHREAD;LFS_READONLY;LFS_MULTIVERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <ModuleDefinitionFile>NanaZip.Codecs.def</ModuleDefinitionFile>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="NanaZip.Codecs.def" />
+    <None Include="NanaZip.Codecs.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LittleFS\lfs.c">
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4146;4244;4267;4456;4701;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="LittleFS\lfs_util.c">
+      <DisableSpecificWarnings>4146;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Lizard\entropy\lizard_entropy_common.c" />
+    <ClCompile Include="Lizard\entropy\lizard_fse_compress.c" />
+    <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c" />
+    <ClCompile Include="Lizard\entropy\lizard_hist.c" />
+    <ClCompile Include="Lizard\entropy\lizard_huf_compress.c" />
+    <ClCompile Include="Lizard\entropy\lizard_huf_decompress.c" />
+    <ClCompile Include="Mile.Helpers.Portable.Base.Unstaged.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.DotNetSingleFile.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.ElectronAsar.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Littlefs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Romfs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Ufs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.WebAssembly.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Archive.Zealfs.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Aich.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.BCryptProvider.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Blake2b.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Blake3.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Ed2k.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR224.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR384.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.EdonR512.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost12256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost12512.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost94.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Gost94CryptoPro.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Has160.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Ripemd160.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha224.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3224.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3384.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sha3512.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Sm3.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Snefru128.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Snefru256.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Tiger.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Tiger2.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Torrent.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Tth.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Whirlpool.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh3128.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh32.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh364.cpp" />
+    <ClCompile Include="NanaZip.Codecs.Hash.Xxh64.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Common.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.cpp" />
+    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.cpp" />
+    <ClCompile Include="NanaZip.Codecs.SevenZipWrapper.cpp" />
+    <ClCompile Include="Zstandard\common\debug.c" />
+    <ClCompile Include="Zstandard\common\entropy_common.c" />
+    <ClCompile Include="Zstandard\common\error_private.c" />
+    <ClCompile Include="Zstandard\common\fse_decompress.c" />
+    <ClCompile Include="Zstandard\common\pool.c" />
+    <ClCompile Include="Zstandard\common\threading.c" />
+    <ClCompile Include="Zstandard\common\zstd_common.c" />
+    <ClCompile Include="Zstandard\compress\fse_compress.c" />
+    <ClCompile Include="Zstandard\compress\hist.c" />
+    <ClCompile Include="Zstandard\compress\huf_compress.c" />
+    <ClCompile Include="Zstandard\compress\zstdmt_compress.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress_literals.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress_sequences.c" />
+    <ClCompile Include="Zstandard\compress\zstd_compress_superblock.c" />
+    <ClCompile Include="Zstandard\compress\zstd_double_fast.c" />
+    <ClCompile Include="Zstandard\compress\zstd_fast.c" />
+    <ClCompile Include="Zstandard\compress\zstd_lazy.c" />
+    <ClCompile Include="Zstandard\compress\zstd_ldm.c" />
+    <ClCompile Include="Zstandard\compress\zstd_opt.c" />
+    <ClCompile Include="FastLZMA2\dict_buffer.c" />
+    <ClCompile Include="FastLZMA2\fl2_common.c" />
+    <ClCompile Include="FastLZMA2\fl2_compress.c" />
+    <ClCompile Include="FastLZMA2\fl2_pool.c" />
+    <ClCompile Include="FastLZMA2\fl2_threading.c" />
+    <ClCompile Include="FastLZMA2\lzma2_enc.c" />
+    <ClCompile Include="FastLZMA2\radix_bitpack.c" />
+    <ClCompile Include="FastLZMA2\radix_mf.c" />
+    <ClCompile Include="FastLZMA2\radix_struct.c" />
+    <ClCompile Include="FastLZMA2\range_enc.c" />
+    <ClCompile Include="FastLZMA2\util.c" />
+    <ClCompile Include="Zstandard\compress\zstd_preSplit.c" />
+    <ClCompile Include="Zstandard\decompress\huf_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_ddict.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress.c" />
+    <ClCompile Include="Zstandard\decompress\zstd_decompress_block.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v01.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v02.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v03.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v04.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v05.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v06.c" />
+    <ClCompile Include="Zstandard\legacy\zstd_v07.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_common.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\brotli-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lizard-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lz4-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_common.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_compress.c" />
+    <ClCompile Include="ZSTDMT\lz5-mt_decompress.c" />
+    <ClCompile Include="ZSTDMT\zstd-mt_threading.c" />
+    <ClCompile Include="Lizard\lizard_compress.c" />
+    <ClCompile Include="Lizard\lizard_decompress.c" />
+    <ClCompile Include="Lizard\lizard_frame.c" />
+    <ClCompile Include="LZ5\lz5.c" />
+    <ClCompile Include="LZ5\lz5frame.c" />
+    <ClCompile Include="LZ5\lz5hc.c" />
+    <ClCompile Include="LZ4\lz4.c" />
+    <ClCompile Include="LZ4\lz4frame.c" />
+    <ClCompile Include="LZ4\lz4hc.c" />
+    <ClCompile Include="xxHash\xxhash.c">
+      <DisableSpecificWarnings>4113;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\common\constants.c" />
+    <ClCompile Include="Brotli\common\context.c" />
+    <ClCompile Include="Brotli\common\dictionary.c" />
+    <ClCompile Include="Brotli\common\platform.c" />
+    <ClCompile Include="Brotli\common\shared_dictionary.c" />
+    <ClCompile Include="Brotli\common\transform.c" />
+    <ClCompile Include="Brotli\dec\bit_reader.c">
+      <DisableSpecificWarnings>4100;4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\decode.c">
+      <DisableSpecificWarnings>4100;4127;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\huffman.c" />
+    <ClCompile Include="Brotli\dec\state.c">
+      <DisableSpecificWarnings>4100;4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\backward_references_hq.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\bit_cost.c" />
+    <ClCompile Include="Brotli\enc\block_splitter.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\brotli_bit_stream.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\cluster.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\command.c" />
+    <ClCompile Include="Brotli\enc\compound_dictionary.c">
+      <DisableSpecificWarnings>4127;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\compress_fragment.c" />
+    <ClCompile Include="Brotli\enc\compress_fragment_two_pass.c" />
+    <ClCompile Include="Brotli\enc\dictionary_hash.c" />
+    <ClCompile Include="Brotli\enc\encode.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\encoder_dict.c">
+      <DisableSpecificWarnings>4127;4189;4334;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\entropy_encode.c" />
+    <ClCompile Include="Brotli\enc\fast_log.c" />
+    <ClCompile Include="Brotli\enc\histogram.c" />
+    <ClCompile Include="Brotli\enc\literal_cost.c" />
+    <ClCompile Include="Brotli\enc\memory.c" />
+    <ClCompile Include="Brotli\enc\metablock.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\static_dict.c" />
+    <ClCompile Include="Brotli\enc\utf8_util.c" />
+    <ClCompile Include="RHash\aich.c" />
+    <ClCompile Include="RHash\blake2b.c" />
+    <ClCompile Include="RHash\byte_order.c">
+      <DisableSpecificWarnings>4146;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="RHash\edonr.c" />
+    <ClCompile Include="RHash\gost12.c">
+      <DisableSpecificWarnings>4267;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="RHash\gost94.c" />
+    <ClCompile Include="RHash\has160.c" />
+    <ClCompile Include="RHash\hex.c" />
+    <ClCompile Include="RHash\rhash_sha256.c" />
+    <ClCompile Include="RHash\rhash_util.c" />
+    <ClCompile Include="RHash\ripemd-160.c" />
+    <ClCompile Include="RHash\sha3.c" />
+    <ClCompile Include="RHash\snefru.c">
+      <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="RHash\tiger.c" />
+    <ClCompile Include="RHash\tiger_sbox.c" />
+    <ClCompile Include="RHash\torrent.c">
+      <DisableSpecificWarnings>4146;4200;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="RHash\tth.c" />
+    <ClCompile Include="RHash\whirlpool.c" />
+    <ClCompile Include="RHash\whirlpool_sbox.c" />
+    <ClCompile Include="GmSSL\sm3.c" />
+    <ClCompile Include="BLAKE3\blake3.c">
+      <DisableSpecificWarnings>4244;4245;</DisableSpecificWarnings>
+    </ClCompile>
+    <None Include="BLAKE3\blake3_avx2.c" />
+    <None Include="BLAKE3\blake3_avx512.c" />
+    <ClCompile Include="BLAKE3\blake3_dispatch.c">
+      <DisableSpecificWarnings>4189;4702;</DisableSpecificWarnings>
+    </ClCompile>
+    <None Include="BLAKE3\blake3_neon.c" />
+    <ClCompile Include="BLAKE3\blake3_portable.c" />
+    <None Include="BLAKE3\blake3_sse2.c" />
+    <None Include="BLAKE3\blake3_sse41.c" />
+    <ClCompile Include="NanaZip.Codecs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FreeBSD\dinode.h" />
+    <ClInclude Include="FreeBSD\dir.h" />
+    <ClInclude Include="FreeBSD\fs.h" />
+    <ClInclude Include="LittleFS\lfs.h" />
+    <ClInclude Include="LittleFS\lfs_util.h" />
+    <ClInclude Include="Lizard\entropy\bitstream.h" />
+    <ClInclude Include="Lizard\entropy\compiler.h" />
+    <ClInclude Include="Lizard\entropy\debug.h" />
+    <ClInclude Include="Lizard\entropy\error_private.h" />
+    <ClInclude Include="Lizard\entropy\error_public.h" />
+    <ClInclude Include="Lizard\entropy\fse.h" />
+    <ClInclude Include="Lizard\entropy\hist.h" />
+    <ClInclude Include="Lizard\entropy\huf.h" />
+    <ClInclude Include="Lizard\entropy\mem.h" />
+    <ClInclude Include="Mile.Helpers.Portable.Base.Unstaged.h" />
+    <ClInclude Include="NanaZip.Codecs.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Common.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.h" />
+    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.h" />
+    <ClInclude Include="NanaZip.Codecs.SevenZipWrapper.h" />
+    <ClInclude Include="NanaZip.Codecs.Specification.Fat.h" />
+    <ClInclude Include="NanaZip.Codecs.Specification.Zealfs.h" />
+    <ClInclude Include="Zstandard\common\allocations.h" />
+    <ClInclude Include="Zstandard\common\bits.h" />
+    <ClInclude Include="Zstandard\common\bitstream.h" />
+    <ClInclude Include="Zstandard\common\compiler.h" />
+    <ClInclude Include="Zstandard\common\cpu.h" />
+    <ClInclude Include="Zstandard\common\debug.h" />
+    <ClInclude Include="Zstandard\common\error_private.h" />
+    <ClInclude Include="Zstandard\common\fse.h" />
+    <ClInclude Include="Zstandard\common\huf.h" />
+    <ClInclude Include="Zstandard\common\mem.h" />
+    <ClInclude Include="Zstandard\common\pool.h" />
+    <ClInclude Include="Zstandard\common\portability_macros.h" />
+    <ClInclude Include="Zstandard\common\threading.h" />
+    <ClInclude Include="Zstandard\common\zstd_deps.h" />
+    <ClInclude Include="Zstandard\common\zstd_internal.h" />
+    <ClInclude Include="Zstandard\common\zstd_trace.h" />
+    <ClInclude Include="Zstandard\compress\clevels.h" />
+    <ClInclude Include="Zstandard\compress\hist.h" />
+    <ClInclude Include="Zstandard\compress\zstdmt_compress.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_internal.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_literals.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_sequences.h" />
+    <ClInclude Include="Zstandard\compress\zstd_compress_superblock.h" />
+    <ClInclude Include="Zstandard\compress\zstd_cwksp.h" />
+    <ClInclude Include="Zstandard\compress\zstd_double_fast.h" />
+    <ClInclude Include="Zstandard\compress\zstd_fast.h" />
+    <ClInclude Include="Zstandard\compress\zstd_lazy.h" />
+    <ClInclude Include="Zstandard\compress\zstd_ldm.h" />
+    <ClInclude Include="Zstandard\compress\zstd_ldm_geartab.h" />
+    <ClInclude Include="Zstandard\compress\zstd_opt.h" />
+    <ClInclude Include="Zstandard\compress\zstd_preSplit.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_ddict.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_block.h" />
+    <ClInclude Include="Zstandard\decompress\zstd_decompress_internal.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_legacy.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v01.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v02.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v03.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v04.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v05.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v06.h" />
+    <ClInclude Include="Zstandard\legacy\zstd_v07.h" />
+    <ClInclude Include="Zstandard\zstd.h" />
+    <ClInclude Include="Zstandard\zstd_errors.h" />
+    <ClInclude Include="FastLZMA2\atomic.h" />
+    <ClInclude Include="FastLZMA2\compiler.h" />
+    <ClInclude Include="FastLZMA2\count.h" />
+    <ClInclude Include="FastLZMA2\data_block.h" />
+    <ClInclude Include="FastLZMA2\dict_buffer.h" />
+    <ClInclude Include="FastLZMA2\fast-lzma2.h" />
+    <ClInclude Include="FastLZMA2\fastpos_table.h" />
+    <ClInclude Include="FastLZMA2\fl2_compress_internal.h" />
+    <ClInclude Include="FastLZMA2\fl2_errors.h" />
+    <ClInclude Include="FastLZMA2\fl2_internal.h" />
+    <ClInclude Include="FastLZMA2\fl2_pool.h" />
+    <ClInclude Include="FastLZMA2\fl2_threading.h" />
+    <ClInclude Include="FastLZMA2\lzma2_enc.h" />
+    <ClInclude Include="FastLZMA2\mem.h" />
+    <ClInclude Include="FastLZMA2\platform.h" />
+    <ClInclude Include="FastLZMA2\radix_engine.h" />
+    <ClInclude Include="FastLZMA2\radix_get.h" />
+    <ClInclude Include="FastLZMA2\radix_internal.h" />
+    <ClInclude Include="FastLZMA2\radix_mf.h" />
+    <ClInclude Include="FastLZMA2\range_enc.h" />
+    <ClInclude Include="FastLZMA2\util.h" />
+    <ClInclude Include="ZSTDMT\brotli-mt.h" />
+    <ClInclude Include="ZSTDMT\list.h" />
+    <ClInclude Include="ZSTDMT\lizard-mt.h" />
+    <ClInclude Include="ZSTDMT\lz4-mt.h" />
+    <ClInclude Include="ZSTDMT\lz5-mt.h" />
+    <ClInclude Include="ZSTDMT\memmt.h" />
+    <ClInclude Include="ZSTDMT\threading.h" />
+    <ClInclude Include="Lizard\lizard_common.h" />
+    <ClInclude Include="Lizard\lizard_compress.h" />
+    <ClInclude Include="Lizard\lizard_compress_liz.h" />
+    <ClInclude Include="Lizard\lizard_compress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_decompress.h" />
+    <ClInclude Include="Lizard\lizard_decompress_liz.h" />
+    <ClInclude Include="Lizard\lizard_decompress_lz4.h" />
+    <ClInclude Include="Lizard\lizard_frame.h" />
+    <ClInclude Include="Lizard\lizard_frame_static.h" />
+    <ClInclude Include="Lizard\lizard_parser_fast.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastbig.h" />
+    <ClInclude Include="Lizard\lizard_parser_fastsmall.h" />
+    <ClInclude Include="Lizard\lizard_parser_hashchain.h" />
+    <ClInclude Include="Lizard\lizard_parser_lowestprice.h" />
+    <ClInclude Include="Lizard\lizard_parser_nochain.h" />
+    <ClInclude Include="Lizard\lizard_parser_optimal.h" />
+    <ClInclude Include="Lizard\lizard_parser_pricefast.h" />
+    <ClInclude Include="LZ5\lz5.h" />
+    <ClInclude Include="LZ5\lz5common.h" />
+    <ClInclude Include="LZ5\lz5frame.h" />
+    <ClInclude Include="LZ5\lz5frame_static.h" />
+    <ClInclude Include="LZ5\lz5hc.h" />
+    <ClInclude Include="LZ5\mem.h" />
+    <ClInclude Include="LZ4\lz4.h" />
+    <ClInclude Include="LZ4\lz4frame.h" />
+    <ClInclude Include="LZ4\lz4frame_static.h" />
+    <ClInclude Include="LZ4\lz4hc.h" />
+    <ClInclude Include="xxHash\xxhash.h" />
+    <ClInclude Include="Brotli\common\constants.h" />
+    <ClInclude Include="Brotli\common\context.h" />
+    <ClInclude Include="Brotli\common\dictionary.h" />
+    <ClInclude Include="Brotli\common\platform.h" />
+    <ClInclude Include="Brotli\common\shared_dictionary_internal.h" />
+    <ClInclude Include="Brotli\common\transform.h" />
+    <ClInclude Include="Brotli\common\version.h" />
+    <ClInclude Include="Brotli\dec\bit_reader.h" />
+    <ClInclude Include="Brotli\dec\huffman.h" />
+    <ClInclude Include="Brotli\dec\prefix.h" />
+    <ClInclude Include="Brotli\dec\state.h" />
+    <ClInclude Include="Brotli\enc\backward_references.h" />
+    <ClInclude Include="Brotli\enc\backward_references_hq.h" />
+    <ClInclude Include="Brotli\enc\backward_references_inc.h" />
+    <ClInclude Include="Brotli\enc\bit_cost.h" />
+    <ClInclude Include="Brotli\enc\bit_cost_inc.h" />
+    <ClInclude Include="Brotli\enc\block_encoder_inc.h" />
+    <ClInclude Include="Brotli\enc\block_splitter.h" />
+    <ClInclude Include="Brotli\enc\block_splitter_inc.h" />
+    <ClInclude Include="Brotli\enc\brotli_bit_stream.h" />
+    <ClInclude Include="Brotli\enc\cluster.h" />
+    <ClInclude Include="Brotli\enc\cluster_inc.h" />
+    <ClInclude Include="Brotli\enc\command.h" />
+    <ClInclude Include="Brotli\enc\compound_dictionary.h" />
+    <ClInclude Include="Brotli\enc\compress_fragment.h" />
+    <ClInclude Include="Brotli\enc\compress_fragment_two_pass.h" />
+    <ClInclude Include="Brotli\enc\dictionary_hash.h" />
+    <ClInclude Include="Brotli\enc\encoder_dict.h" />
+    <ClInclude Include="Brotli\enc\entropy_encode.h" />
+    <ClInclude Include="Brotli\enc\entropy_encode_static.h" />
+    <ClInclude Include="Brotli\enc\fast_log.h" />
+    <ClInclude Include="Brotli\enc\find_match_length.h" />
+    <ClInclude Include="Brotli\enc\hash.h" />
+    <ClInclude Include="Brotli\enc\hash_composite_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_forgetful_chain_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match64_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match_quickly_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_rolling_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_to_binary_tree_inc.h" />
+    <ClInclude Include="Brotli\enc\histogram.h" />
+    <ClInclude Include="Brotli\enc\histogram_inc.h" />
+    <ClInclude Include="Brotli\enc\literal_cost.h" />
+    <ClInclude Include="Brotli\enc\memory.h" />
+    <ClInclude Include="Brotli\enc\metablock.h" />
+    <ClInclude Include="Brotli\enc\metablock_inc.h" />
+    <ClInclude Include="Brotli\enc\params.h" />
+    <ClInclude Include="Brotli\enc\prefix.h" />
+    <ClInclude Include="Brotli\enc\quality.h" />
+    <ClInclude Include="Brotli\enc\ringbuffer.h" />
+    <ClInclude Include="Brotli\enc\state.h" />
+    <ClInclude Include="Brotli\enc\static_dict.h" />
+    <ClInclude Include="Brotli\enc\static_dict_lut.h" />
+    <ClInclude Include="Brotli\enc\utf8_util.h" />
+    <ClInclude Include="Brotli\enc\write_bits.h" />
+    <ClInclude Include="Brotli\include\brotli\decode.h" />
+    <ClInclude Include="Brotli\include\brotli\encode.h" />
+    <ClInclude Include="Brotli\include\brotli\port.h" />
+    <ClInclude Include="Brotli\include\brotli\shared_dictionary.h" />
+    <ClInclude Include="Brotli\include\brotli\types.h" />
+    <ClInclude Include="RHash\aich.h" />
+    <ClInclude Include="RHash\blake2b.h" />
+    <ClInclude Include="RHash\byte_order.h" />
+    <ClInclude Include="RHash\edonr.h" />
+    <ClInclude Include="RHash\gost12.h" />
+    <ClInclude Include="RHash\gost94.h" />
+    <ClInclude Include="RHash\has160.h" />
+    <ClInclude Include="RHash\hex.h" />
+    <ClInclude Include="RHash\ripemd-160.h" />
+    <ClInclude Include="RHash\sha1.h" />
+    <ClInclude Include="RHash\sha256.h" />
+    <ClInclude Include="RHash\sha3.h" />
+    <ClInclude Include="RHash\snefru.h" />
+    <ClInclude Include="RHash\tiger.h" />
+    <ClInclude Include="RHash\torrent.h" />
+    <ClInclude Include="RHash\tth.h" />
+    <ClInclude Include="RHash\ustd.h" />
+    <ClInclude Include="RHash\util.h" />
+    <ClInclude Include="RHash\whirlpool.h" />
+    <ClInclude Include="GmSSL\endian.h" />
+    <ClInclude Include="GmSSL\sm3.h" />
+    <ClInclude Include="BLAKE3\blake3.h" />
+    <ClInclude Include="BLAKE3\blake3_impl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.952</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Json">
+      <Version>1.0.1057</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.212</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
+      <ClCompile Include="BLAKE3\blake3_avx2.c" />
+      <ClCompile Include="BLAKE3\blake3_avx512.c" />
+      <ClCompile Include="BLAKE3\blake3_sse2.c" />
+      <ClCompile Include="BLAKE3\blake3_sse41.c" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
+      <ClCompile Include="BLAKE3\blake3_neon.c" />
+    </ItemGroup>
+  </Target>
+</Project>

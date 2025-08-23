@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Wap.props" />
+  <PropertyGroup>
+    <ProjectGuid>9a119a76-97cb-4490-b8c2-651576cb9302</ProjectGuid>
+    <TargetPlatformVersion>10.0.26100.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <DefaultLanguage>en</DefaultLanguage>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <EntryPointProjectUniqueName>..\NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj</EntryPointProjectUniqueName>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundlePlatforms>x64|arm64</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundleAutoResourcePackageQualifiers>DXFeatureLevel</AppxBundleAutoResourcePackageQualifiers>
+    <AppxDefaultResourceQualifiers>Language=en</AppxDefaultResourceQualifiers>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Image Assets -->
+    <Content Include="..\Assets\PreviewPackageAssets\**\*">
+      <DeploymentContent>true</DeploymentContent>
+      <Link>Assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Content>
+    <Content Include="Mile.Project.Wap.Unstaged.targets" />
+    <!-- Internationalization Support -->
+    <PRIResource Include="Strings\**\*">
+      <Link>Strings\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\K7Pal\K7Pal.vcxproj">
+      <Project>{279F7FA5-7DDC-4635-99B0-3C7F2179DAE0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Modern\NanaZip.Modern.vcxproj">
+      <Project>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj">
+      <Project>{F4511F91-B0EB-41B4-99D6-AEB48169132B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Universal\NanaZip.Universal.Console.vcxproj">
+      <Project>{86E818B3-D657-4E03-9336-48EE242A79D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
+      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Codecs\NanaZip.Codecs.vcxproj">
+      <Project>{89B81A5B-FF0D-4193-9CB1-738692775DD2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
+      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
+      <SetPlatform>Platform=x64</SetPlatform>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj">
+      <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
+      <SetPlatform>Platform=x64</SetPlatform>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.ShellExtension.vcxproj">
+      <Project>{53934E7A-686E-42F1-8A80-4299CDE30564}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Windows.vcxproj">
+      <Project>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Wap.targets" />
+  <Import Project="Mile.Project.Wap.Unstaged.targets" />
+</Project>
