@@ -311,6 +311,7 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
     menu.CheckItemByID(IDM_VIEW_TWO_PANELS, g_App.NumPanels == 2);
     menu.CheckItemByID(IDM_VIEW_FLAT_VIEW, g_App.GetFlatMode());
     menu.CheckItemByID(IDM_VIEW_AUTO_REFRESH, g_App.Get_AutoRefresh_Mode());
+    menu.CheckItemByID(IDM_SHOW_FILESIZE_UNIT, g_App.Get_ShowFilesizeUnit());
     // menu.CheckItemByID(IDM_VIEW_SHOW_STREAMS, g_App.Get_ShowNtfsStrems_Mode());
     // menu.CheckItemByID(IDM_VIEW_SHOW_DELETED, g_App.ShowDeletedFiles);
 
@@ -754,6 +755,7 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     case IDM_VIEW_FLAT_VIEW:      g_App.ChangeFlatMode(); break;
     case IDM_VIEW_REFRESH:        g_App.RefreshView(); break;
     case IDM_VIEW_AUTO_REFRESH:   g_App.Change_AutoRefresh_Mode(); break;
+    case IDM_SHOW_FILESIZE_UNIT: { g_App.Change_ShowFilesizeUnit_Mode(); g_App.RefreshView(); } break;
 
     // case IDM_VIEW_SHOW_STREAMS:     g_App.Change_ShowNtfsStrems_Mode(); break;
     /*
