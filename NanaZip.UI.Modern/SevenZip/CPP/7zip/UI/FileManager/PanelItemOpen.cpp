@@ -423,10 +423,17 @@ struct CTmpProcessInfo: public CTempFileInfo
   UString FullPathFolderPrefix;
   bool UsePassword;
   UString Password;
+  /* 
+  *    isExecutable is added to indicate that the file is executable (for example, .exe or .bat).
+  *    Used when deleting temporary files.
+  */
+    
+
+  bool isExecutable;
 
   bool ReadOnly;
 
-  CTmpProcessInfo(): UsePassword(false), ReadOnly(false) {}
+  CTmpProcessInfo(): UsePassword(false), ReadOnly(false), isExecutable(false){}
 };
 
 
@@ -1418,8 +1425,18 @@ static THREAD_FUNC_DECL MyThreadFunction(void *param)
     {
       DEBUG_PRINT("Delete Temp file");
       tpi->DeleteDirAndFile();
+
+     /**
+      *  If opening a excutable file, we delete all the files in the temp folder after closing it, not just the executable file.
+     */
+      if (tpi->isExecutable) {
+          NWindows::NFile::NDir::RemoveDirWithSubItems(tpi->FolderPath);
+      }
     }
+
+    
   }
+  
 
   return 0;
 }
@@ -1606,11 +1623,14 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
     return;
   }
 
+
+
   bool tryAsArchive = tryInternal && (!tryExternal || !DoItemAlwaysStart(name));
 
   const UString fullVirtPath = _currentFolderPrefix + relPath;
 
   CTempDir tempDirectory;
+
   if (!tempDirectory.Create(kTempDirPrefix))
   {
     MessageBox_LastError();
@@ -1628,6 +1648,14 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
   tempFileInfo.FolderPath = tempDir;
   tempFileInfo.FilePath = tempFilePath;
   tempFileInfo.NeedDelete = true;
+
+  /*
+  
+  *Special handling for exe files: We extract all files to temp dir and run exe from there.
+
+  */
+
+
 
   if (tryAsArchive)
   {
@@ -1664,7 +1692,18 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
 
 
   CRecordVector<UInt32> indices;
-  indices.Add(index);
+  if (FindExt(kExeExtensions, name))
+  {
+      UInt32 numItems = 0;
+      _folder->GetNumberOfItems(&numItems);
+      
+      for (UInt32 i = 0; i < numItems; ++i)
+          {
+              indices.Add((int) i );
+          }
+      
+  }
+  else indices.Add(index);
 
   UStringVector messages;
 
@@ -1860,6 +1899,10 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
   tpi->FullPathFolderPrefix = _currentFolderPrefix;
   tpi->FileIndex = index;
   tpi->RelPath = relPath;
+  if (FindExt(kExeExtensions, name))
+  {
+      tpi->isExecutable =true;
+  }
 
   if ((HANDLE)process != 0)
     tpi->Processes.SetMainProcess(process.Detach());
@@ -1873,6 +1916,7 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
   tempDirectory.DisableDeleting();
   tmpProcessInfoPtr.release();
   tmpProcessInfoRelease._needDelete = false;
+  
 }
 
 
