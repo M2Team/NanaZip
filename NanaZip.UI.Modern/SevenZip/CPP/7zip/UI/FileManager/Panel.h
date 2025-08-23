@@ -480,7 +480,8 @@ public:
   bool _flatMode;
   bool _flatModeForDisk;
   bool _flatModeForArc;
-
+// Added new variable to toggle display filesize in KB,MB,GB,etc.
+  bool _showFilesizeUnit;
   // bool _showNtfsStrems_Mode;
   // bool _showNtfsStrems_ModeForDisk;
   // bool _showNtfsStrems_ModeForArc;
@@ -583,6 +584,7 @@ public:
       _flatMode(false),
       _flatModeForDisk(false),
       _flatModeForArc(false),
+      _showFilesizeUnit(true),
 
       // _showNtfsStrems_Mode(false),
       // _showNtfsStrems_ModeForDisk(false),
@@ -858,6 +860,9 @@ public:
   PROPID GetSortID() const { return _sortID; }
 
   void ChangeFlatMode();
+  void ChangeShowFilesizeUnit();
+
+  bool GetShowFilesizeUnit() const { return _showFilesizeUnit; }
   void Change_ShowNtfsStrems_Mode();
   bool GetFlatMode() const { return _flatMode; }
   // bool Get_ShowNtfsStrems_Mode() const { return _showNtfsStrems_Mode; }
@@ -955,3 +960,4 @@ public:
 extern CExitEventLauncher g_ExitEventLauncher;
 
 #endif
+

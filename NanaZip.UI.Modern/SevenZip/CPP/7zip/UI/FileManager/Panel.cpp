@@ -1042,6 +1042,13 @@ void CPanel::ChangeFlatMode()
   RefreshListCtrl_SaveFocused();
 }
 
+void CPanel::ChangeShowFilesizeUnit()
+{
+    _showFilesizeUnit = !_showFilesizeUnit;
+    
+}
+
+
 /*
 void CPanel::Change_ShowNtfsStrems_Mode()
 {

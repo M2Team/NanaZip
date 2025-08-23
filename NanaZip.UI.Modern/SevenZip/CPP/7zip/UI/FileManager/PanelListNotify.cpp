@@ -92,6 +92,57 @@ UString ConvertSizeToString(UInt64 value)
   return s;
 }
 
+/*
+Display Int filesize in KB,MB,GB, etc.
+*/
+
+static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
+{
+    static const wchar_t* units[] = { L" B", L" KB", L" MB", L" GB", L" TB", L" PB", L" EB" };
+
+    if (val == 0)
+    {
+        swprintf(s, 32, L"0 B");
+        return;
+    }
+
+    int unitIndex = 0;
+    double size = static_cast<double>(val);
+
+    while (size >= 1024.0 && unitIndex < 6)
+    {
+        size /= 1024.0;
+        unitIndex++;
+    }
+
+    if (size < 10.0)
+    {
+        swprintf(s, 32, L"%.1f%s", size, units[unitIndex]);
+    }
+    else if (size < 100.0)
+    {
+        if (size - static_cast<int>(size) > 0.05)
+        {
+            swprintf(s, 32, L"%.1f%s", size, units[unitIndex]);
+        }
+        else
+        {
+            swprintf(s, 32, L"%.0f%s", size, units[unitIndex]);
+        }
+    }
+    else
+    {
+        swprintf(s, 32, L"%.0f%s", size, units[unitIndex]);
+    }
+}
+
+UString ConvertSizeToByteUnitString(UInt64 value)
+{
+    wchar_t s[32];
+    ConvertSizeToByteUnitString(value, s);
+    return s;
+}
+
 static inline unsigned GetHex_Upper(unsigned v)
 {
   return (v < 10) ? ('0' + v) : ('A' + (v - 10));
@@ -513,7 +564,15 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
   {
     UInt64 v = 0;
     ConvertPropVariantToUInt64(prop, v);
-    ConvertSizeToString(v, text);
+    if (_showFilesizeUnit)
+    {
+        ConvertSizeToByteUnitString(v, text);
+    }
+    else
+    {
+        ConvertSizeToString(v, text);
+    }
+    
   }
   else if (prop.vt == VT_BSTR)
   {
@@ -815,7 +874,15 @@ void CPanel::Refresh_StatusBar()
     UInt64 totalSize = 0;
     FOR_VECTOR (i, indices)
       totalSize += GetItemSize(indices[i]);
-    ConvertSizeToString(totalSize, selectSizeString);
+    if (_showFilesizeUnit)
+    {
+        ConvertSizeToByteUnitString(totalSize, selectSizeString);
+    }
+    else
+    {
+    
+        ConvertSizeToString(totalSize, selectSizeString);
+    }
     // }
   }
   // _statusBar.SetText(1, selectSizeString);
@@ -831,7 +898,15 @@ void CPanel::Refresh_StatusBar()
     int realIndex = GetRealItemIndex(focusedItem);
     if (realIndex != kParentIndex)
     {
-      ConvertSizeToString(GetItemSize(realIndex), sizeString);
+        if (_showFilesizeUnit)
+        {
+            ConvertSizeToByteUnitString(GetItemSize(realIndex), sizeString);
+        }
+        else
+
+        {
+            ConvertSizeToString(GetItemSize(realIndex), sizeString);
+        }
       NCOM::CPropVariant prop;
       if (_folder->GetProperty(realIndex, kpidMTime, &prop) == S_OK)
       {
