@@ -584,7 +584,7 @@ public:
       _flatMode(false),
       _flatModeForDisk(false),
       _flatModeForArc(false),
-      _showFilesizeUnit(false),
+      _showFilesizeUnit(true),
 
       // _showNtfsStrems_Mode(false),
       // _showNtfsStrems_ModeForDisk(false),
@@ -960,3 +960,4 @@ public:
 extern CExitEventLauncher g_ExitEventLauncher;
 
 #endif
+
