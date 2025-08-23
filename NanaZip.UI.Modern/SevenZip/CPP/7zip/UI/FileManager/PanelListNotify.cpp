@@ -92,7 +92,9 @@ UString ConvertSizeToString(UInt64 value)
   return s;
 }
 
-
+/*
+Display Int filesize in KB,MB,GB, etc.
+*/
 
 static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
 {
@@ -119,7 +121,6 @@ static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
     }
     else if (size < 100.0)
     {
-        // 检查是否需要显示小数
         if (size - static_cast<int>(size) > 0.05)
         {
             swprintf(s, 32, L"%.1f%s", size, units[unitIndex]);
@@ -902,6 +903,7 @@ void CPanel::Refresh_StatusBar()
             ConvertSizeToByteUnitString(GetItemSize(realIndex), sizeString);
         }
         else
+
         {
             ConvertSizeToString(GetItemSize(realIndex), sizeString);
         }
