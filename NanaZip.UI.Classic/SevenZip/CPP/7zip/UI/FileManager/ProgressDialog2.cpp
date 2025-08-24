@@ -613,15 +613,17 @@ void GetTimeString(UInt64 timeValue, wchar_t *s)
 static void ConvertSizeToString(UInt64 v, wchar_t *s)
 {
   Byte c = 0;
-       if (v >= ((UInt64)100000 << 20)) { v >>= 30; c = 'Gi'; }
-  else if (v >= ((UInt64)100000 << 10)) { v >>= 20; c = 'Mi'; }
-  else if (v >= ((UInt64)100000 <<  0)) { v >>= 10; c = 'Ki'; }
+       if (v >= ((UInt64)100000 << 20)) { v >>= 30; c = 'G'; }
+  else if (v >= ((UInt64)100000 << 10)) { v >>= 20; c = 'M'; }
+  else if (v >= ((UInt64)100000 <<  0)) { v >>= 10; c = 'K'; }
   ConvertUInt64ToString(v, s);
   if (c != 0)
   {
     s += MyStringLen(s);
     *s++ = ' ';
     *s++ = c;
+
+    *s++ = 'i';
     *s++ = 'B';
     *s++ = 0;
   }
