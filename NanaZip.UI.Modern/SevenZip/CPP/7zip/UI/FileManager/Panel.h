@@ -480,7 +480,11 @@ public:
   bool _flatMode;
   bool _flatModeForDisk;
   bool _flatModeForArc;
-
+// **************** NanaZip Modification Start ****************
+// Add  ShowFilesizeUnit variables
+  bool _showFilesizeUnit;
+  // **************** NanaZip Modification End ****************
+ 
   // bool _showNtfsStrems_Mode;
   // bool _showNtfsStrems_ModeForDisk;
   // bool _showNtfsStrems_ModeForArc;
@@ -583,7 +587,11 @@ public:
       _flatMode(false),
       _flatModeForDisk(false),
       _flatModeForArc(false),
-
+// **************** NanaZip Modification Start ****************
+// Add ShowFilesizeUnit variables, default by true(show KB,MB,etc.)
+      _showFilesizeUnit(true),
+// **************** NanaZip Modification End ****************
+ 
       // _showNtfsStrems_Mode(false),
       // _showNtfsStrems_ModeForDisk(false),
       // _showNtfsStrems_ModeForArc(false),
@@ -858,6 +866,12 @@ public:
   PROPID GetSortID() const { return _sortID; }
 
   void ChangeFlatMode();
+// **************** NanaZip Modification Start ****************
+// Add ShowFilesizeUnit variables functions
+  void ChangeShowFilesizeUnit();
+  bool GetShowFilesizeUnit() const { return _showFilesizeUnit; }
+// **************** NanaZip Modification End ****************
+ 
   void Change_ShowNtfsStrems_Mode();
   bool GetFlatMode() const { return _flatMode; }
   // bool Get_ShowNtfsStrems_Mode() const { return _showNtfsStrems_Mode; }
