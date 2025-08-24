@@ -113,7 +113,17 @@ namespace winrt::NanaZip::Modern::implementation
 
         __super::OnApplyTemplate();
     }
-
+// **************** NanaZip Modification Start ****************
+// * Expands environment variables like %appdata%, %temp%, %programfiles% 
+    std::wstring ExpandEnvironmentVariables(const std::wstring& input)
+    {
+        wchar_t buffer[MAX_PATH * 4] = {};
+        DWORD ret = ExpandEnvironmentStringsW(input.c_str(), buffer, ARRAYSIZE(buffer));
+        if (ret == 0 || ret > ARRAYSIZE(buffer))
+            return input; 
+        return buffer;
+    }
+// **************** NanaZip Modification end ****************
     void AddressBar::OnTextBoxPreviewKeyDown(
         winrt::IInspectable const&,
         winrt::KeyRoutedEventArgs const& args)
@@ -135,7 +145,13 @@ namespace winrt::NanaZip::Modern::implementation
             }
             else
             {
-                auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(Text(), nullptr);
+                // **************** NanaZip Modification Start ****************
+                // * Parse  EnvironmentVariables when hitting enter.
+                std::wstring rawPath = Text().c_str();
+                std::wstring expandedPath = ExpandEnvironmentVariables(rawPath);
+                auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(
+                    winrt::hstring(expandedPath), nullptr);
+                // **************** NanaZip Modification End ****************
                 QuerySubmitted(*this, submitArgs);
             }
             args.Handled(true);
