@@ -423,11 +423,15 @@ struct CTmpProcessInfo: public CTempFileInfo
   UString FullPathFolderPrefix;
   bool UsePassword;
   UString Password;
+// **************** NanaZip Modification Start ****************
+// isExecutable is added to indicate that the file is executable
 
+  bool isExecutable;
   bool ReadOnly;
 
-  CTmpProcessInfo(): UsePassword(false), ReadOnly(false) {}
+  CTmpProcessInfo(): UsePassword(false), ReadOnly(false), isExecutable(false){}
 };
+// **************** NanaZip Modification End ****************
 
 
 class CTmpProcessInfoRelease
@@ -1418,8 +1422,19 @@ static THREAD_FUNC_DECL MyThreadFunction(void *param)
     {
       DEBUG_PRINT("Delete Temp file");
       tpi->DeleteDirAndFile();
+// **************** NanaZip Modification Start ****************
+// *  If opening a excutable file, we delete all the files in the temp folder after closing it, not just the executable file.
+
+      if (tpi->isExecutable) {
+          NWindows::NFile::NDir::RemoveDirWithSubItems(tpi->FolderPath);
     }
+// **************** NanaZip Modification End ****************
+  
   }
+
+  
+  }
+  
 
   return 0;
 }
@@ -1664,7 +1679,21 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
 
 
   CRecordVector<UInt32> indices;
-  indices.Add(index);
+// **************** NanaZip Modification Start ****************
+// *Special handling for exe files: We extract all files to temp dir and run exe from there.
+  if (FindExt(kExeExtensions, name))
+  {
+      UInt32 numItems = 0;
+      _folder->GetNumberOfItems(&numItems);
+      
+      for (UInt32 i = 0; i < numItems; ++i)
+          {
+              indices.Add((int) i );
+          }
+      
+  }
+  else indices.Add(index);
+// **************** NanaZip Modification End ****************
 
   UStringVector messages;
 
@@ -1860,6 +1889,13 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
   tpi->FullPathFolderPrefix = _currentFolderPrefix;
   tpi->FileIndex = index;
   tpi->RelPath = relPath;
+// **************** NanaZip Modification Start ****************
+// toggle auto extract on opening exe
+  if (FindExt(kExeExtensions, name))
+  {
+      tpi->isExecutable =true;
+  }
+  // **************** NanaZip Modification End ****************
 
   if ((HANDLE)process != 0)
     tpi->Processes.SetMainProcess(process.Detach());
