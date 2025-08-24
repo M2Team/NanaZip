@@ -92,7 +92,9 @@ UString ConvertSizeToString(UInt64 value)
   return s;
 }
 
-
+    // **************** NanaZip Modification Start ****************
+    // Add Display Filesize Unit
+    // Align Filesize Unit Display Style with Explorer.(49.1 MB, 2 KB,etc.)
 
 static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
 {
@@ -115,23 +117,23 @@ static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
 
     if (size < 10.0)
     {
-        swprintf(s, 32, L"%.1f%s", size, units[unitIndex]);
+        swprintf_s(s, 32, L"%.1f%s", size, units[unitIndex]);
     }
     else if (size < 100.0)
     {
         // 检查是否需要显示小数
         if (size - static_cast<int>(size) > 0.05)
         {
-            swprintf(s, 32, L"%.1f%s", size, units[unitIndex]);
+            swprintf_s(s, 32, L"%.1f%s", size, units[unitIndex]);
         }
         else
         {
-            swprintf(s, 32, L"%.0f%s", size, units[unitIndex]);
+            swprintf_s(s, 32, L"%.0f%s", size, units[unitIndex]);
         }
     }
     else
     {
-        swprintf(s, 32, L"%.0f%s", size, units[unitIndex]);
+        swprintf_s(s, 32, L"%.0f%s", size, units[unitIndex]);
     }
 }
 
@@ -141,7 +143,8 @@ UString ConvertSizeToByteUnitString(UInt64 value)
     ConvertSizeToByteUnitString(value, s);
     return s;
 }
-
+ // **************** NanaZip Modification End ****************
+ 
 static inline unsigned GetHex_Upper(unsigned v)
 {
   return (v < 10) ? ('0' + v) : ('A' + (v - 10));
@@ -903,9 +906,10 @@ void CPanel::Refresh_StatusBar()
   {
     int realIndex = GetRealItemIndex(focusedItem);
     if (realIndex != kParentIndex)
-    // **************** NanaZip Modification Start ****************
-    // execute  ShowFilesizeUnit variables
+
     {
+        // **************** NanaZip Modification Start ****************
+        // execute ShowFilesizeUnit variables
         if (_showFilesizeUnit)
         {
             ConvertSizeToByteUnitString(GetItemSize(realIndex), sizeString);
@@ -914,7 +918,7 @@ void CPanel::Refresh_StatusBar()
         {
             ConvertSizeToString(GetItemSize(realIndex), sizeString);
         }
-    // **************** NanaZip Modification End ****************
+        // **************** NanaZip Modification End ****************
  
       NCOM::CPropVariant prop;
       if (_folder->GetProperty(realIndex, kpidMTime, &prop) == S_OK)
