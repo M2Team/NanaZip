@@ -108,7 +108,8 @@ BEGIN
     MENUITEM "&Refresh\tCtrl+R",            IDM_VIEW_REFRESH
     MENUITEM "Auto Refresh",                IDM_VIEW_AUTO_REFRESH
     // **************** NanaZip Modification Start ****************
-    // Add  ShowFilesizeUnit item
+    // *  New item IDM_SHOW_FILESIZE_UNIT = 471, used to toggle 
+    // *  display filesize unit in IEC unit.
     MENUITEM "Show Filesize Unit", IDM_SHOW_FILESIZE_UNIT
     // **************** NanaZip Modification End ****************
 

@@ -563,7 +563,9 @@ public:
       _flatModeForDisk(false),
       _flatModeForArc(false),
 // **************** NanaZip Modification Start ****************
-// Add ShowFilesizeUnit variables, default by true(show KB,MB,etc.)
+/** _showFilesizeUnit is by default true, so show filesize unit
+ * in IEC unit style, instead of int byte 
+ *  */ 
       _showFilesizeUnit(true),
 // **************** NanaZip Modification End ****************
 

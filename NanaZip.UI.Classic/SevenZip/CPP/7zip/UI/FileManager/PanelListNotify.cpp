@@ -93,16 +93,18 @@ UString ConvertSizeToString(UInt64 value)
 }
 
     // **************** NanaZip Modification Start ****************
-    // Add Display Filesize Unit
-    // Align Filesize Unit Display Style with Explorer.(49.1 MB, 2 KB,etc.)
-
+    /** @brief Replaces original ConvertSizeToString by default.
+     *        Converts a size value in bytes into a formatted string with 
+     *        appropriate binary unit (e.g., KiB, MiB, GiB) in the file manager.
+     *        Differs from ConvertSizeToString() function in ProgressDialog2.cpp
+    **/
 static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
 {
-    static const wchar_t* units[] = { L" B", L" KB", L" MB", L" GB", L" TB", L" PB", L" EB" };
+    static const wchar_t* units[] = { L" Byte", L" KiB", L" MiB", L" GiB", L" TiB", L" PiB", L" EiB" };
 
     if (val == 0)
     {
-        swprintf(s, 32, L"0 B");
+        swprintf(s, 32, L"0 Byte");
         return;
     }
 
@@ -121,7 +123,7 @@ static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
     }
     else if (size < 100.0)
     {
-        // 检查是否需要显示小数
+        
         if (size - static_cast<int>(size) > 0.05)
         {
             swprintf_s(s, 32, L"%.1f%s", size, units[unitIndex]);
@@ -567,7 +569,10 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
     UInt64 v = 0;
     ConvertPropVariantToUInt64(prop, v);
     // **************** NanaZip Modification Start ****************
-    // execute  ShowFilesizeUnit 
+    // **************** NanaZip Modification Start ****************
+    /** Uses _showFilesizeUnit to toggle filesize style between 
+    *   int byte and IEC units.
+     */
     if (_showFilesizeUnit)
     {
         ConvertSizeToByteUnitString(v, text);
@@ -878,8 +883,10 @@ void CPanel::Refresh_StatusBar()
     UInt64 totalSize = 0;
     FOR_VECTOR (i, indices)
       totalSize += GetItemSize(indices[i]);
-// **************** NanaZip Modification Start ****************
-// execute change ShowFilesizeUnit variables
+    // **************** NanaZip Modification Start ****************
+    /** Uses _showFilesizeUnit to toggle filesize style between 
+    *  int byte and IEC units.
+    **/
     if (_showFilesizeUnit)
     {
         ConvertSizeToByteUnitString(totalSize, selectSizeString);
@@ -906,8 +913,11 @@ void CPanel::Refresh_StatusBar()
     if (realIndex != kParentIndex)
 
     {
-    // **************** NanaZip Modification Start ****************
-        // execute ShowFilesizeUnit variables
+        // **************** NanaZip Modification Start ****************
+        // **************** NanaZip Modification Start ****************
+        /** Uses _showFilesizeUnit to toggle filesize style between 
+        *   int byte and IEC units.
+        **/
         if (_showFilesizeUnit)
         {
             ConvertSizeToByteUnitString(GetItemSize(realIndex), sizeString);

@@ -481,9 +481,11 @@ public:
   bool _flatModeForDisk;
   bool _flatModeForArc;
 // **************** NanaZip Modification Start ****************
-// Add  ShowFilesizeUnit variables
+/** _showFilesizeUnit flag is added to toggle display filesize
+ *  style between int byte and IEC units.
+ */
   bool _showFilesizeUnit;
-  // **************** NanaZip Modification End ****************
+// **************** NanaZip Modification End ****************
  
   // bool _showNtfsStrems_Mode;
   // bool _showNtfsStrems_ModeForDisk;
@@ -588,8 +590,10 @@ public:
       _flatModeForDisk(false),
       _flatModeForArc(false),
 // **************** NanaZip Modification Start ****************
-// Add ShowFilesizeUnit variables, default by true(show KB,MB,etc.)
-      _showFilesizeUnit(true),
+/** _showFilesizeUnit is by default true, so show filesize unit
+ * in IEC unit style, instead of int byte 
+ *  */ 
+   _showFilesizeUnit(true),
 // **************** NanaZip Modification End ****************
  
       // _showNtfsStrems_Mode(false),
