@@ -94,22 +94,23 @@ UString ConvertSizeToString(UInt64 value)
 
     // **************** NanaZip Modification Start ****************
     /** @brief Replaces original ConvertSizeToString by default.
-     *        Converts a size value in bytes into a formatted string with 
-     *        appropriate binary unit (e.g., KiB, MiB, GiB) in the file manager.
-     *        Differs from ConvertSizeToString() function in ProgressDialog2.cpp
-    **/
-static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
+     * @param  IntSize Original filesize in int.
+     * @param  StrPtr  Pointer to output String
+    */
+static void ConvertSizeToByteUnitString(
+   UInt64 IntSize,
+   wchar_t* StringPtr) throw()
 {
     static const wchar_t* units[] = { L" Byte", L" KiB", L" MiB", L" GiB", L" TiB", L" PiB", L" EiB" };
 
-    if (val == 0)
+    if (IntSize == 0)
     {
-        swprintf(s, 32, L"0 Byte");
+        swprintf(StringPtr, 32, L"0 Byte");
         return;
     }
 
     int unitIndex = 0;
-    double size = static_cast<double>(val);
+    double size = static_cast<double>(IntSize);
 
     while (size >= 1024.0 && unitIndex < 6)
     {
@@ -119,18 +120,18 @@ static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
 
     if (size < 10.0)
     {
-        swprintf_s(s, 32, L"%.1f%s", size, units[unitIndex]);
+        swprintf_s(StringPtr, 32, L"%.1f%s", size, units[unitIndex]);
     }
     else if (size < 100.0)
     {
         
         if (size - static_cast<int>(size) > 0.05)
         {
-            swprintf_s(s, 32, L"%.1f%s", size, units[unitIndex]);
+            swprintf_s(StringPtr, 32, L"%.1f%s", size, units[unitIndex]);
         }
         else
         {
-            swprintf_s(s, 32, L"%.0f%s", size, units[unitIndex]);
+            swprintf_s(StringPtr, 32, L"%.0f%s", size, units[unitIndex]);
         }
     }
     else
@@ -138,12 +139,16 @@ static void ConvertSizeToByteUnitString(UInt64 val, wchar_t* s) throw()
         swprintf_s(s, 32, L"%.0f%s", size, units[unitIndex]);
     }
 }
-
-UString ConvertSizeToByteUnitString(UInt64 value)
+    /** @brief Wrapper to static void ConvertSizeToByteUnitString.
+     * Incase in need of a String as output.
+     * @param  IntSize Original filesize in int.
+     * @param  StrPtr  Pointer to output String
+    */
+UString ConvertSizeToByteUnitString(UInt64 IntSize)
 {
-    wchar_t s[32];
-    ConvertSizeToByteUnitString(value, s);
-    return s;
+    wchar_t StringOutput[32];
+    ConvertSizeToByteUnitString(IntSize, StringOutput);
+    return StringOutput;
 }
  // **************** NanaZip Modification End ****************
  
@@ -569,10 +574,7 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
     UInt64 v = 0;
     ConvertPropVariantToUInt64(prop, v);
     // **************** NanaZip Modification Start ****************
-    // **************** NanaZip Modification Start ****************
-    /** Uses _showFilesizeUnit to toggle filesize style between 
-    *  int byte and IEC units.
-    */
+    //ConvertSizeToString(v, text);
     if (_showFilesizeUnit)
     {
         ConvertSizeToByteUnitString(v, text);
@@ -885,9 +887,7 @@ void CPanel::Refresh_StatusBar()
     FOR_VECTOR (i, indices)
       totalSize += GetItemSize(indices[i]);
     // **************** NanaZip Modification Start ****************
-    /** Uses _showFilesizeUnit to toggle filesize style between 
-    *   int byte and IEC units.
-    **/
+    //ConvertSizeToString(totalSize, selectSizeString);
     if (_showFilesizeUnit)
     {
         ConvertSizeToByteUnitString(totalSize, selectSizeString);
@@ -916,10 +916,7 @@ void CPanel::Refresh_StatusBar()
 
     {
         // **************** NanaZip Modification Start ****************
-        // **************** NanaZip Modification Start ****************
-        /** Uses _showFilesizeUnit to toggle filesize style between 
-        *   int byte and IEC units.
-        **/
+        // ConvertSizeToString(GetItemSize(realIndex), sizeString);
         if (_showFilesizeUnit)
         {
             ConvertSizeToByteUnitString(GetItemSize(realIndex), sizeString);

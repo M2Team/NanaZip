@@ -892,7 +892,6 @@ void CPanel::ChangeFlatMode()
   RefreshListCtrl_SaveFocused();
 }
 // **************** NanaZip Modification Start ****************
-// Add change ShowFilesizeUnit variables
 void CPanel::ChangeShowFilesizeUnit()
 {
     _showFilesizeUnit = !_showFilesizeUnit;

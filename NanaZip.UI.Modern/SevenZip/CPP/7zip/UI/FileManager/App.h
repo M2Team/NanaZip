@@ -302,9 +302,6 @@ public:
     SetPanels_AutoRefresh_Mode();
   }
 // **************** NanaZip Modification Start ****************
-/** @brief Added change ShowFilesizeUnit functions.
- * Related toflag variable _showFilesizeUnit.
- **/ 
   bool Get_ShowFilesizeUnit()
   {
       return Panels[LastFocusedPanel]._showFilesizeUnit;
