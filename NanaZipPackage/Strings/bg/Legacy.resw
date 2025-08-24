@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:schema id="root">
-    <xs:element name="root" ns1:IsDataSet="true">
-      <xs:complexType>
-        <xs:choice maxOccurs="unbounded">
-          <xs:element name="data">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1"/>
-                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2"/>
-              </xs:sequence>
-              <xs:attribute name="name" type="xsd:string" ns1:Ordinal="1"/>
-              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3"/>
-              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4"/>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="resheader">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1"/>
-              </xs:sequence>
-              <xs:attribute name="name" type="xsd:string" use="required"/>
-            </xs:complexType>
-          </xs:element>
-        </xs:choice>
-      </xs:complexType>
-    </xs:element>
-  </xs:schema>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -221,6 +221,9 @@
   </data>
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Опресняване</value>
+  </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Показване на единици за размер на файл</value>
   </data>
   <data name="Resource750" xml:space="preserve">
     <value>Лента на архива</value>
@@ -1037,8 +1040,5 @@
   </data>
   <data name="Resource7610" xml:space="preserve">
     <value>Успешно преминали:</value>
-  </data>
-  <data name="Resource741" xml:space="preserve">
-    <value>Показване на единици за размер на файл</value>
   </data>
 </root>
