@@ -312,7 +312,6 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
     menu.CheckItemByID(IDM_VIEW_FLAT_VIEW, g_App.GetFlatMode());
     menu.CheckItemByID(IDM_VIEW_AUTO_REFRESH, g_App.Get_AutoRefresh_Mode());
 // **************** NanaZip Modification Start ****************
-// Add change ShowFilesizeUnit variables
     menu.CheckItemByID(IDM_SHOW_FILESIZE_UNIT, g_App.Get_ShowFilesizeUnit());
 // **************** NanaZip Modification End ****************
  
@@ -760,7 +759,6 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     case IDM_VIEW_REFRESH:        g_App.RefreshView(); break;
     case IDM_VIEW_AUTO_REFRESH:   g_App.Change_AutoRefresh_Mode(); break;
 // **************** NanaZip Modification Start ****************
-// Add change ShowFilesizeUnit variables
     case IDM_SHOW_FILESIZE_UNIT: { g_App.Change_ShowFilesizeUnit_Mode(); g_App.RefreshView(); } break;
 // **************** NanaZip Modification End ****************
  

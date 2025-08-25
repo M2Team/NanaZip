@@ -17,6 +17,9 @@
 #include "Panel.h"
 #include "FormatUtils.h"
 
+// **************** NanaZip Modification Start ****************
+#include <../NanaZip.Codecs/Mile.Helpers.CppBase.h>
+// **************** NanaZip Modification End ****************
 using namespace NWindows;
 
 /* Unicode characters for space:
@@ -92,25 +95,24 @@ UString ConvertSizeToString(UInt64 value)
   return s;
 }
 
-    // **************** NanaZip Modification Start ****************
-    /** @brief Replaces original ConvertSizeToString by default.
-     * @param  IntSize Original filesize in int.
-     * @param  StrPtr  Pointer to output String
-    */
-static void ConvertSizeToByteUnitString(
-   UInt64 IntSize,
-   wchar_t* StringPtr) throw()
-{
-    static const wchar_t* units[] = { L" Byte", L" KiB", L" MiB", L" GiB", L" TiB", L" PiB", L" EiB" };
 
-    if (IntSize == 0)
+    // **************** NanaZip Modification Start ****************
+    
+static void ConvertSizeToByteUnitString(
+  UInt64 Size, 
+  wchar_t* String) throw()
+{
+    static const wchar_t* units[] = { L" Bytes", L" KiB  ", L" MiB  ", L" GiB  ", L" TiB  ", L" PiB  ", L" EiB  " };
+
+    if (Size == 0)
     {
-        swprintf(StringPtr, 32, L"0 Byte");
+        std::wstring OutputString = Mile::FormatWideString(L"0 Bytes");
+        ::wcscpy_s(String, 32, OutputString.c_str());
         return;
     }
 
     int unitIndex = 0;
-    double size = static_cast<double>(IntSize);
+    double size = static_cast<double>(Size);
 
     while (size >= 1024.0 && unitIndex < 6)
     {
@@ -118,40 +120,34 @@ static void ConvertSizeToByteUnitString(
         unitIndex++;
     }
 
+    std::wstring OutputString;
     if (size < 10.0)
     {
-        swprintf_s(StringPtr, 32, L"%.1f%s", size, units[unitIndex]);
+        OutputString = Mile::FormatWideString(L"%.1f%s", size, units[unitIndex]);
     }
     else if (size < 100.0)
     {
-        
         if (size - static_cast<int>(size) > 0.05)
         {
-            swprintf_s(StringPtr, 32, L"%.1f%s", size, units[unitIndex]);
+            OutputString = Mile::FormatWideString(L"%.1f%s", size, units[unitIndex]);
         }
         else
         {
-            swprintf_s(StringPtr, 32, L"%.0f%s", size, units[unitIndex]);
+            OutputString = Mile::FormatWideString(L"%.0f%s", size, units[unitIndex]);
         }
     }
     else
     {
-        swprintf_s(s, 32, L"%.0f%s", size, units[unitIndex]);
+        OutputString = Mile::FormatWideString(L"%.0f%s", size, units[unitIndex]);
     }
-}
-    /** @brief Wrapper to static void ConvertSizeToByteUnitString.
-     * Incase in need of a String as output.
-     * @param  IntSize Original filesize in int.
-     * @param  StrPtr  Pointer to output String
-    */
-UString ConvertSizeToByteUnitString(UInt64 IntSize)
-{
-    wchar_t StringOutput[32];
-    ConvertSizeToByteUnitString(IntSize, StringOutput);
-    return StringOutput;
+
+    ::wcscpy_s(String, 32, OutputString.c_str());
 }
  // **************** NanaZip Modification End ****************
  
+
+
+
 static inline unsigned GetHex_Upper(unsigned v)
 {
   return (v < 10) ? ('0' + v) : ('A' + (v - 10));
@@ -571,17 +567,19 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
   }
   else if ((prop.vt == VT_UI8 || prop.vt == VT_UI4 || prop.vt == VT_UI2) && IsSizeProp(propID))
   {
-    UInt64 v = 0;
-    ConvertPropVariantToUInt64(prop, v);
-    // **************** NanaZip Modification Start ****************
-    //ConvertSizeToString(v, text);
-    if (_showFilesizeUnit)
+// **************** NanaZip Modification Start ****************
+ 
+      //UInt64 v=0;
+      //ConvertSizeToString(v, text);
+    UInt64 Size = 0;
+    ConvertPropVariantToUInt64(prop, Size);
+    if (this->_showFilesizeUnit)
     {
-        ConvertSizeToByteUnitString(v, text);
+        ConvertSizeToByteUnitString(Size,text);
     }
     else
     {
-    ConvertSizeToString(v, text);
+        ConvertSizeToString(Size, text);
     }
     // **************** NanaZip Modification End ****************
  
@@ -887,7 +885,8 @@ void CPanel::Refresh_StatusBar()
       totalSize += GetItemSize(indices[i]);
     // **************** NanaZip Modification Start ****************
     //ConvertSizeToString(totalSize, selectSizeString);
-    if (_showFilesizeUnit)
+
+    if (this->_showFilesizeUnit)
     {
         ConvertSizeToByteUnitString(totalSize, selectSizeString);
     }
@@ -897,10 +896,10 @@ void CPanel::Refresh_StatusBar()
     ConvertSizeToString(totalSize, selectSizeString);
     }
     // **************** NanaZip Modification End ****************
- 
-    // }
+    
   }
-  _statusBar.SetText(1, selectSizeString);
+  // _statusBar.SetText(1, selectSizeString);
+  _statusBarControl.Text2(selectSizeString);
 
   int focusedItem = _listView.GetFocusedItem();
   wchar_t sizeString[32];
@@ -911,11 +910,10 @@ void CPanel::Refresh_StatusBar()
   {
     int realIndex = GetRealItemIndex(focusedItem);
     if (realIndex != kParentIndex)
-
     {
         // **************** NanaZip Modification Start ****************
-        // ConvertSizeToString(GetItemSize(realIndex), sizeString);
-        if (_showFilesizeUnit)
+    
+        if (this->_showFilesizeUnit)
         {
             ConvertSizeToByteUnitString(GetItemSize(realIndex), sizeString);
         }
