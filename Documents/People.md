@@ -6,10 +6,25 @@
 
 ## Development Team
 
-- AndromedaMelody, https://github.com/AndromedaMelody
-- dinhngtu, https://github.com/dinhngtu
-- Dongle, https://github.com/dongle-the-gadget
+### Benevolent Dictators For Life
+
+The project is governed by multiple Benevolent Dictators For Life who make final
+decisions by reaching an agreement offline. This structure is chosen to avoid
+the risks of a single point of control while maintaining efficiency over a large
+committee. Here are current active Benevolent Dictators For Life:
+
+- dinhngtu (Tu Dinh), https://github.com/dinhngtu
 - Kenji Mouri, https://github.com/MouriNaruto
+
+### Consultants and Benevolent Dictator For Life Candidates
+
+The following contributors are recognized as candidates for the Benevolent
+Dictator For Life role. In their current capacity, they serve as valued
+consultants to the active Benevolent Dictators For Life due to their significant
+and valuable contributions to the project.
+
+- AndromedaMelody, https://github.com/AndromedaMelody
+- Dongle, https://github.com/dongle-the-gadget
 - Sakura Neko, https://github.com/SakuraNeko
 
 ## Microsoft Store preinstall permission OEM Sponsor
