@@ -299,5 +299,6 @@ the following command in the PowerShell which is run as administrator.
 - [NanaZip Sponsor Edition](Documents/SponsorEdition.md)
 - [NanaZip Release Notes](Documents/ReleaseNotes.md)
 - [NanaZip Preview Release Notes](Documents/ReleaseNotesPreview.md)
+- [Security Policy](Documents/Security.md)
 - [Versioning](Documents/Versioning.md)
 - [My Digital Life Forums](https://forums.mydigitallife.net/threads/84171)
