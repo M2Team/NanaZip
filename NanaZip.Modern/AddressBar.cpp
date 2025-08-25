@@ -113,36 +113,6 @@ namespace winrt::NanaZip::Modern::implementation
 
         __super::OnApplyTemplate();
     }
-// **************** NanaZip Modification Start ****************
-    bool HasDriveLetter(const std::wstring& path)
-    {
-            return path.size() >= 2 &&
-                ((path[0] >= L'A' && path[0] <= L'Z') || (path[0] >= L'a' && path[0] <= L'z')) &&
-                path[1] == L':';
-
-    }
-
-    std::wstring ExpandFirstEnvInPath(const std::wstring& input)
-    {
-        // Expand only the first %xxx%
-        size_t firstPercent = input.find(L'%');
-        if (firstPercent == std::wstring::npos)
-            return input;
-
-        size_t secondPercent = input.find(L'%', firstPercent + 1);
-        if (secondPercent == std::wstring::npos)
-            return input;
-
-
-        std::wstring envName = input.substr(firstPercent, secondPercent - firstPercent + 1);
-        wchar_t buffer[MAX_PATH * 4] = {};
-        DWORD ret = ExpandEnvironmentStringsW(envName.c_str(), buffer, ARRAYSIZE(buffer));
-        std::wstring expanded = (ret == 0 || ret > ARRAYSIZE(buffer)) ? envName : buffer;
-
-
-        return input.substr(0, firstPercent) + expanded + input.substr(secondPercent + 1);
-    }
-// **************** NanaZip Modification Start ****************
 
     void AddressBar::OnTextBoxPreviewKeyDown(
         winrt::IInspectable const&,
@@ -165,24 +135,7 @@ namespace winrt::NanaZip::Modern::implementation
             }
             else
             {
-
-                // **************** NanaZip Modification Start ****************
-                //auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(Text(), nullptr);
-                std::wstring rawPath = Text().c_str();
-                std::wstring finalPath = rawPath;
-                // If the path starts with a drive letter such as "C:","z:", we don't expand it.
-                if (HasDriveLetter(rawPath))
-                {
-                    finalPath = rawPath;
-                }
-                // Expand only the first environment variable to avoid %xxx% filename
-                else {
-                    finalPath = ExpandFirstEnvInPath(rawPath);
-                }
-                auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(
-                    winrt::hstring(finalPath),
-                    nullptr);
-                // **************** NanaZip Modification End ****************
+                auto submitArgs = winrt::make<AddressBarQuerySubmittedEventArgs>(Text(), nullptr);
                 QuerySubmitted(*this, submitArgs);
             }
             args.Handled(true);
