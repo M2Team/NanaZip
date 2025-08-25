@@ -22,6 +22,7 @@
 #include <winrt/Windows.UI.Xaml.Hosting.h>
 #include <Mile.Helpers.CppWinRT.h>
 #include <Mile.Helpers.h>
+#include <Mile.Helpers.CppBase.h>
 
 // TODO: Implement messages (_messageList)
 
@@ -526,7 +527,7 @@ void GetTimeString(UInt64 timeValue, wchar_t *s)
   *s++ = ':'; UINT_TO_STR_2(seconds);
   *s = 0;
 }
-
+/**
 static void ConvertSizeToString(UInt64 v, wchar_t *s)
 {
   Byte c = 0;
@@ -539,12 +540,54 @@ static void ConvertSizeToString(UInt64 v, wchar_t *s)
     s += MyStringLen(s);
     *s++ = ' ';
     *s++ = c;
-    *s++ = 'i';
     *s++ = 'B';
     *s++ = 0;
   }
 }
+*/
+// **************** NanaZip Modification Start **************
+static void ConvertSizeToString(
+    UInt64 Size,
+    wchar_t* String)
+{
+    wchar_t BufString[MAX_PATH * 4] = {};
+    static const wchar_t* unit;
+    std::wstring outputString;
+    if (Size == 0)
+    {
+        outputString = Mile::FormatWideString(L"0 Bytes");
+        ::wcscpy_s(String, ARRAYSIZE(BufString), outputString.c_str());
+        return;
+    }
+    int numOfThousands = 0;
+    static const int maxNumOfThousands = 6;
+    double size = static_cast<double>(Size);
+    while (size >= 1024.0 && numOfThousands < maxNumOfThousands)
+    {
+        size /= 1024.0;
+        numOfThousands++;
+    }
+    switch (numOfThousands)
+    {
+    case 0:                 unit = L" Bytes"; break;
+    case 1:                 unit = L" KiB  "; break;
+    case 2:                 unit = L" MiB  "; break;
+    case 3:                 unit = L" GiB  "; break;
+    case 4:                 unit = L" TiB  "; break;
+    case 5:                 unit = L" PiB  "; break;
+    case maxNumOfThousands: unit = L" EiB  ";
+    }
+    if (size < 10.0)
+        outputString = Mile::FormatWideString(L"%.2f%s", size, unit);
+    else if (size < 100.0)
+        outputString = Mile::FormatWideString(L"%.1f%s", size, unit);
+    else
+        outputString = Mile::FormatWideString(L"%.0f%s", size, unit);
 
+    ::wcscpy_s(String, ARRAYSIZE(BufString) , outputString.c_str());
+    return;
+}
+// **************** NanaZip Modification End ****************
 winrt::hstring CProgressDialog::ShowSize(UInt64 val, UInt64 &prev)
 {
   if (val == prev)
@@ -730,6 +773,9 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
           s[pos++] = ' ';
           if (moveBits != 0)
             s[pos++] = c;
+         // **************** NanaZip Modification Start **************
+          s[pos++] = 'i';  
+         // **************** NanaZip Modification End ****************
           s[pos++] = 'B';
           s[pos++] = '/';
           s[pos++] = 's';

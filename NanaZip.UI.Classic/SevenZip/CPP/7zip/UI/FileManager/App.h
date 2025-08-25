@@ -304,7 +304,7 @@ public:
 // **************** NanaZip Modification Start ****************
   bool Get_ShowFilesizeUnit()
   {
-      return Panels[LastFocusedPanel]._showFilesizeUnit;
+      return Panels[LastFocusedPanel].m_ShowFilesizeUnit;
   }
   void Change_ShowFilesizeUnit_Mode()
   {

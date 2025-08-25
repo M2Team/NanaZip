@@ -18,7 +18,7 @@
 #include "FormatUtils.h"
 
 // **************** NanaZip Modification Start ****************
-#include <../NanaZip.Codecs/Mile.Helpers.CppBase.h>
+#include <Mile.Helpers.CppBase.h>
 // **************** NanaZip Modification End ****************
 using namespace NWindows;
 
@@ -96,56 +96,56 @@ UString ConvertSizeToString(UInt64 value)
 }
 
 
-    // **************** NanaZip Modification Start ****************
-    
+
+// **************** NanaZip Modification Start **************
 static void ConvertSizeToByteUnitString(
   UInt64 Size, 
-  wchar_t* String) throw()
+  wchar_t* String,
+  size_t buflen)
 {
-    static const wchar_t* units[] = { L" Bytes", L" KiB  ", L" MiB  ", L" GiB  ", L" TiB  ", L" PiB  ", L" EiB  " };
-
+    static const wchar_t* unit;
+    std::wstring outputString;
     if (Size == 0)
     {
-        std::wstring OutputString = Mile::FormatWideString(L"0 Bytes");
-        ::wcscpy_s(String, 32, OutputString.c_str());
-        return;
+        outputString = Mile::FormatWideString(L"0 Bytes");
+        ::wcscpy_s(String ,buflen ,outputString.c_str());
+        return ;
     }
-
-    int unitIndex = 0;
+    int numOfThousands = 0;
+    static const int maxNumOfThousands = 6; 
     double size = static_cast<double>(Size);
-
-    while (size >= 1024.0 && unitIndex < 6)
+    while (size >= 1024.0 && numOfThousands < maxNumOfThousands)
     {
         size /= 1024.0;
-        unitIndex++;
+        numOfThousands++;
     }
-
-    std::wstring OutputString;
+    switch(numOfThousands)
+    {
+    case 0:                 unit = L" Bytes"; break;
+    case 1:                 unit = L" KiB  "; break;
+    case 2:                 unit = L" MiB  "; break;
+    case 3:                 unit = L" GiB  "; break;
+    case 4:                 unit = L" TiB  "; break;
+    case 5:                 unit = L" PiB  "; break;
+    case maxNumOfThousands: unit = L" EiB  ";
+    }
     if (size < 10.0)
-    {
-        OutputString = Mile::FormatWideString(L"%.1f%s", size, units[unitIndex]);
-    }
-    else if (size < 100.0)
-    {
-        if (size - static_cast<int>(size) > 0.05)
-        {
-            OutputString = Mile::FormatWideString(L"%.1f%s", size, units[unitIndex]);
-        }
+        outputString = Mile::FormatWideString(L"%.2f%s",size,unit); 
+    else if (size <100.0)
+        outputString = Mile::FormatWideString(L"%.1f%s",size,unit);
         else
-        {
-            OutputString = Mile::FormatWideString(L"%.0f%s", size, units[unitIndex]);
-        }
-    }
-    else
-    {
-        OutputString = Mile::FormatWideString(L"%.0f%s", size, units[unitIndex]);
-    }
-
-    ::wcscpy_s(String, 32, OutputString.c_str());
+        outputString = Mile::FormatWideString(L"%.0f%s",size,unit);
+    ::wcscpy_s(String,buflen,outputString.c_str());
+    return ;
 }
- // **************** NanaZip Modification End ****************
- 
-
+static void ConvertSizeToByteUnitString(UInt64 value, 
+                                        wchar_t* String)
+{
+    wchar_t BufString[MAX_PATH * 4]  = {};
+    ConvertSizeToByteUnitString(value,String,ARRAYSIZE(BufString));
+    return;
+}
+// **************** NanaZip Modification End **************
 
 
 static inline unsigned GetHex_Upper(unsigned v)
@@ -567,22 +567,14 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
   }
   else if ((prop.vt == VT_UI8 || prop.vt == VT_UI4 || prop.vt == VT_UI2) && IsSizeProp(propID))
   {
-// **************** NanaZip Modification Start ****************
- 
-      //UInt64 v=0;
-      //ConvertSizeToString(v, text);
-    UInt64 Size = 0;
-    ConvertPropVariantToUInt64(prop, Size);
-    if (this->_showFilesizeUnit)
-    {
-        ConvertSizeToByteUnitString(Size,text);
-    }
+    UInt64 v = 0;
+    ConvertPropVariantToUInt64(prop, v);
+    // **************** NanaZip Modification Start **************
+    if (this->m_ShowFilesizeUnit)
+        ConvertSizeToByteUnitString(v, text);
     else
-    {
-        ConvertSizeToString(Size, text);
-    }
+        ConvertSizeToString(v, text);
     // **************** NanaZip Modification End ****************
- 
   }
   else if (prop.vt == VT_BSTR)
   {
@@ -883,20 +875,15 @@ void CPanel::Refresh_StatusBar()
     UInt64 totalSize = 0;
     FOR_VECTOR (i, indices)
       totalSize += GetItemSize(indices[i]);
-    // **************** NanaZip Modification Start ****************
-    //ConvertSizeToString(totalSize, selectSizeString);
 
-    if (this->_showFilesizeUnit)
-    {
+    // **************** NanaZip Modification Start **************
+    if (this->m_ShowFilesizeUnit)
         ConvertSizeToByteUnitString(totalSize, selectSizeString);
-    }
     else
     {
     
     ConvertSizeToString(totalSize, selectSizeString);
-    }
     // **************** NanaZip Modification End ****************
-    
   }
   // _statusBar.SetText(1, selectSizeString);
   _statusBarControl.Text2(selectSizeString);
@@ -911,18 +898,16 @@ void CPanel::Refresh_StatusBar()
     int realIndex = GetRealItemIndex(focusedItem);
     if (realIndex != kParentIndex)
     {
-        // **************** NanaZip Modification Start ****************
-    
-        if (this->_showFilesizeUnit)
-        {
-            ConvertSizeToByteUnitString(GetItemSize(realIndex), sizeString);
-        }
+
+        // **************** NanaZip Modification Start **************
+        //ConvertSizeToString(GetItemSize(realIndex), sizeString);
+        if (this->m_ShowFilesizeUnit)
+            ConvertSizeToByteUnitString(GetItemSize(realIndex),
+                                                    sizeString);
         else
-    {
       ConvertSizeToString(GetItemSize(realIndex), sizeString);
-        }
+
     // **************** NanaZip Modification End ****************
- 
       NCOM::CPropVariant prop;
       if (_folder->GetProperty(realIndex, kpidMTime, &prop) == S_OK)
       {

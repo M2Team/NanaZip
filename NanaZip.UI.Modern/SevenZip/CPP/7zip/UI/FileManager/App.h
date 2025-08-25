@@ -301,17 +301,17 @@ public:
     AutoRefresh_Mode = !AutoRefresh_Mode;
     SetPanels_AutoRefresh_Mode();
   }
-// **************** NanaZip Modification Start ****************
+  // **************** NanaZip Modification Start ****************
   bool Get_ShowFilesizeUnit()
   {
-      return Panels[LastFocusedPanel]._showFilesizeUnit;
+      return Panels[LastFocusedPanel].m_ShowFilesizeUnit;
   }
   void Change_ShowFilesizeUnit_Mode()
   {
       Panels[LastFocusedPanel].ChangeShowFilesizeUnit();
   }
-// **************** NanaZip Modification End ****************
- 
+  // **************** NanaZip Modification End ****************
+  // return Panels[LastFocusedPanel].Get_ShowNtfsStrems_Mode();
   void SetPanels_AutoRefresh_Mode()
   {
     for (unsigned i = 0; i < kNumPanelsMax; i++)

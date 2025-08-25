@@ -107,9 +107,8 @@ BEGIN
     MENUITEM "Folders History...\tAlt+F12", IDM_FOLDERS_HISTORY
     MENUITEM "&Refresh\tCtrl+R",            IDM_VIEW_REFRESH
     MENUITEM "Auto Refresh",                IDM_VIEW_AUTO_REFRESH
-    // **************** NanaZip Modification Start ****************
-    MENUITEM "Show Filesize Unit", IDM_SHOW_FILESIZE_UNIT
-    // **************** NanaZip Modification End ****************
+
+    MENUITEM "Show File Size Unit",         IDM_SHOW_FILE_SIZE_UNIT
 
     // MENUITEM "Show NTFS streams",           IDM_VIEW_SHOW_STREAMS
     // MENUITEM "Show deleted files",          IDM_VIEW_SHOW_DELETED
