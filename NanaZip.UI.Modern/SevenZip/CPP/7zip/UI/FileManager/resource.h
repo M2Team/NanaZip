@@ -95,8 +95,9 @@
 #define IDM_VIEW_AUTO_REFRESH    738
 // #define IDM_VIEW_SHOW_DELETED    739
 // #define IDM_VIEW_SHOW_STREAMS    740
+// **************** NanaZip Modification Start **************
 #define IDM_SHOW_FILE_SIZE_UNIT   741
-
+// **************** NanaZip Modification End ****************
 #define IDM_VIEW_TIME            761
 
 #define IDS_BOOKMARK             801

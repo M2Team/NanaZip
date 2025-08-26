@@ -98,7 +98,7 @@ UString ConvertSizeToString(UInt64 value)
 
 
 // **************** NanaZip Modification Start **************
-static std::wstring  ConvertSizeToByteUnitString(
+static std::wstring ConvertSizeToByteUnitString(
     std::uint64_t ByteSize)
 {
     const wchar_t* Units[] =
@@ -141,11 +141,10 @@ static std::wstring  ConvertSizeToByteUnitString(
         Result,
         Units[UnitIndex]));
 }
-static void ConvertSizeToByteUnitString(UInt64 value,
-    wchar_t* String)
+static void ConvertSizeToByteUnitString(UInt64 value,wchar_t* String)
 {
     wchar_t BufString[MAX_PATH * 4] = {};
-    std::wstring output = ConvertSizeToByteUnitString(value);
+    std::wstring output = ::ConvertSizeToByteUnitString(value);
     ::wcscpy_s(String, ARRAYSIZE(BufString), output.c_str());
     return;
 }
@@ -575,9 +574,9 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
     ConvertPropVariantToUInt64(prop, v);
     // **************** NanaZip Modification Start **************
     if (this->m_ShowFilesizeUnit)
-        ConvertSizeToByteUnitString(v, text);
+        ::ConvertSizeToByteUnitString(v, text);
     else
-        ConvertSizeToString(v, text);
+        ::ConvertSizeToString(v, text);
     // **************** NanaZip Modification End ****************
   }
   else if (prop.vt == VT_BSTR)
@@ -883,9 +882,9 @@ void CPanel::Refresh_StatusBar()
 
     // **************** NanaZip Modification Start **************
     if (this->m_ShowFilesizeUnit)
-        ConvertSizeToByteUnitString(totalSize, selectSizeString);
+        ::(totalSize, selectSizeString);
     else
-        ConvertSizeToString(totalSize, selectSizeString);
+        ::ConvertSizeToString(totalSize, selectSizeString);
     // **************** NanaZip Modification End ****************
   }
   // _statusBar.SetText(1, selectSizeString);
@@ -905,10 +904,10 @@ void CPanel::Refresh_StatusBar()
         // **************** NanaZip Modification Start **************
         //ConvertSizeToString(GetItemSize(realIndex), sizeString);
         if (this->m_ShowFilesizeUnit)
-            ConvertSizeToByteUnitString(GetItemSize(realIndex),
+            ::ConvertSizeToByteUnitString(GetItemSize(realIndex),
                                                     sizeString);
         else
-            ConvertSizeToString(GetItemSize(realIndex), sizeString);
+            ::ConvertSizeToString(GetItemSize(realIndex), sizeString);
 
         // **************** NanaZip Modification End ****************
       NCOM::CPropVariant prop;

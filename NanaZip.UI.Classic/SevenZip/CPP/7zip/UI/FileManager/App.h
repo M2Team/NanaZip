@@ -310,8 +310,7 @@ public:
   {
       Panels[LastFocusedPanel].ChangeShowFilesizeUnit();
   }
-// **************** NanaZip Modification End ****************
- 
+  // **************** NanaZip Modification End ******************
   void SetPanels_AutoRefresh_Mode()
   {
     for (unsigned i = 0; i < kNumPanelsMax; i++)

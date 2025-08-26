@@ -19,12 +19,12 @@
 #include "ProgressDialog2.h"
 #include "ProgressDialog2Res.h"
 
-#include <winrt/Windows.UI.Xaml.Hosting.h>
+// **************** NanaZip Modification Start **************
 #include <Mile.Helpers.CppWinRT.h>
 #include <Mile.Helpers.h>
 #include <Mile.Helpers.CppBase.h>
+// **************** NanaZip Modification End **************
 
-// TODO: Implement messages (_messageList)
 
 using namespace NWindows;
 
@@ -527,7 +527,8 @@ void GetTimeString(UInt64 timeValue, wchar_t *s)
   *s++ = ':'; UINT_TO_STR_2(seconds);
   *s = 0;
 }
-/**
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static void ConvertSizeToString(UInt64 v, wchar_t *s)
 {
   Byte c = 0;
@@ -544,8 +545,7 @@ static void ConvertSizeToString(UInt64 v, wchar_t *s)
     *s++ = 0;
   }
 }
-*/
-// **************** NanaZip Modification Start **************
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
 static std::wstring  ConvertSizeToString(
     std::uint64_t ByteSize)
 {
@@ -589,15 +589,14 @@ static std::wstring  ConvertSizeToString(
         Result,
         Units[UnitIndex]));
 }
-static void ConvertSizeToString(UInt64 value,
-    wchar_t* String)
+static void ConvertSizeToString(UInt64 value,wchar_t* String)
 {
     wchar_t BufString[MAX_PATH * 4] = {};
-    std::wstring output = ConvertSizeToString(value);
+    std::wstring output = ::ConvertSizeToString(value);
     ::wcscpy_s(String, ARRAYSIZE(BufString), output.c_str());
     return;
 }
-// **************** NanaZip Modification End ****************
+// **************** 7-Zip ZS Modification End ******************
 winrt::hstring CProgressDialog::ShowSize(UInt64 val, UInt64 &prev)
 {
   if (val == prev)
