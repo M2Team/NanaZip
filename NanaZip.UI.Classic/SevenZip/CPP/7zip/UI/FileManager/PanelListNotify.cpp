@@ -906,10 +906,10 @@ void CPanel::Refresh_StatusBar()
         //ConvertSizeToString(GetItemSize(realIndex), sizeString);
         if (this->m_ShowFilesizeUnit)
             ::ConvertSizeToByteUnitString(
-            ::GetItemSize(realIndex),
+            GetItemSize(realIndex),
             sizeString);
         else
-            ::ConvertSizeToString(::GetItemSize(realIndex), sizeString);
+            ::ConvertSizeToString(GetItemSize(realIndex), sizeString);
 
     // **************** NanaZip Modification End ****************
       NCOM::CPropVariant prop;
