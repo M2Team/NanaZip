@@ -98,51 +98,55 @@ UString ConvertSizeToString(UInt64 value)
 
 
 // **************** NanaZip Modification Start **************
-static void ConvertSizeToByteUnitString(
-  UInt64 Size, 
-  wchar_t* String,
-  size_t buflen)
+static std::wstring  ConvertSizeToByteUnitString(
+    std::uint64_t ByteSize)
 {
-    static const wchar_t* unit;
-    std::wstring outputString;
-    if (Size == 0)
+    const wchar_t* Units[] =
     {
-        outputString = Mile::FormatWideString(L"0 Bytes");
-        ::wcscpy_s(String ,buflen ,outputString.c_str());
-        return ;
-    }
-    int numOfThousands = 0;
-    static const int maxNumOfThousands = 6; 
-    double size = static_cast<double>(Size);
-    while (size >= 1024.0 && numOfThousands < maxNumOfThousands)
+        L"Byte",
+        L"Bytes",
+        L"KiB",
+        L"MiB",
+        L"GiB",
+        L"TiB",
+        L"PiB",
+        L"EiB"
+    };
+    const std::size_t UnitsCount = sizeof(Units) / sizeof(*Units);
+
+    // Output Format:
+    // For ByteSize is 0 or 1: x Byte
+    // For ByteSize is from 2 to 1023: x Bytes
+    // For ByteSize is larger than 1023: x.xx {KiB, MiB, GiB, TiB, PiB, EiB}
+
+    std::size_t UnitIndex = 0;
+    double Result = static_cast<double>(ByteSize);
+
+    if (ByteSize > 1)
     {
-        size /= 1024.0;
-        numOfThousands++;
+        for (UnitIndex = 1; UnitIndex < UnitsCount; ++UnitIndex)
+        {
+            if (1024.0 > Result)
+                break;
+
+            Result /= 1024.0;
+        }
+
+        // Keep two digits after the decimal point.
+        Result = static_cast<std::uint64_t>(Result * 100) / 100.0;
     }
-    switch(numOfThousands)
-    {
-    case 0:                 unit = L" Bytes"; break;
-    case 1:                 unit = L" KiB  "; break;
-    case 2:                 unit = L" MiB  "; break;
-    case 3:                 unit = L" GiB  "; break;
-    case 4:                 unit = L" TiB  "; break;
-    case 5:                 unit = L" PiB  "; break;
-    case maxNumOfThousands: unit = L" EiB  ";
-    }
-    if (size < 10.0)
-        outputString = Mile::FormatWideString(L"%.2f%s",size,unit); 
-    else if (size <100.0)
-        outputString = Mile::FormatWideString(L"%.1f%s",size,unit);
-        else
-        outputString = Mile::FormatWideString(L"%.0f%s",size,unit);
-    ::wcscpy_s(String,buflen,outputString.c_str());
-    return ;
+
+    return std::wstring(Mile::FormatWideString(
+        (UnitIndex > 1) ? L"%.2f %s" : L"%.0f %s",
+        Result,
+        Units[UnitIndex]));
 }
 static void ConvertSizeToByteUnitString(UInt64 value, 
                                         wchar_t* String)
 {
-    wchar_t BufString[MAX_PATH * 4]  = {};
-    ConvertSizeToByteUnitString(value,String,ARRAYSIZE(BufString));
+    wchar_t BufString[MAX_PATH * 4] = {};
+    std::wstring output = ConvertSizeToByteUnitString(value);
+    ::wcscpy_s(String, ARRAYSIZE(BufString), output.c_str());
     return;
 }
 // **************** NanaZip Modification End **************
