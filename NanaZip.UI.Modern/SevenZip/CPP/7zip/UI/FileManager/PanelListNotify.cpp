@@ -141,7 +141,9 @@ static std::wstring ConvertSizeToByteUnitString(
         Result,
         Units[UnitIndex]));
 }
-static void ConvertSizeToByteUnitString(UInt64 value,wchar_t* String)
+static void ConvertSizeToByteUnitString(
+  UInt64 value,
+  wchar_t* String)
 {
     wchar_t BufString[MAX_PATH * 4] = {};
     std::wstring output = ::ConvertSizeToByteUnitString(value);
@@ -904,10 +906,11 @@ void CPanel::Refresh_StatusBar()
         // **************** NanaZip Modification Start **************
         //ConvertSizeToString(GetItemSize(realIndex), sizeString);
         if (this->m_ShowFilesizeUnit)
-            ::ConvertSizeToByteUnitString(GetItemSize(realIndex),
-                                                    sizeString);
+            ::ConvertSizeToByteUnitString(
+            ::GetItemSize(realIndex),
+            sizeString);
         else
-            ::ConvertSizeToString(GetItemSize(realIndex), sizeString);
+            ::ConvertSizeToString(::GetItemSize(realIndex), sizeString);
 
         // **************** NanaZip Modification End ****************
       NCOM::CPropVariant prop;

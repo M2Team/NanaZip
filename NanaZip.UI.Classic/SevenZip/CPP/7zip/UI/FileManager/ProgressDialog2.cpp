@@ -678,7 +678,9 @@ static std::wstring  ConvertSizeToString(
         Result,
         Units[UnitIndex]));
 }
-static void ConvertSizeToString(UInt64 value,wchar_t* String)
+static void ConvertSizeToString(
+      UInt64 value,
+      wchar_t* String)
 {
     wchar_t BufString[MAX_PATH * 4] = {};
     std::wstring output = ::ConvertSizeToString(value);
