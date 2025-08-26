@@ -881,7 +881,7 @@ void CPanel::Refresh_StatusBar()
 
     // **************** NanaZip Modification Start **************
     if (this->m_ShowFilesizeUnit)
-        ::(totalSize, selectSizeString);
+        ::ConvertSizeToByteUnitString(totalSize, selectSizeString);
     else
         ::ConvertSizeToString(totalSize, selectSizeString);
     // **************** NanaZip Modification End ****************
