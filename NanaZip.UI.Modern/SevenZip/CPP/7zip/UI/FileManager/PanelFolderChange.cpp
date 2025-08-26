@@ -80,6 +80,7 @@ static bool DoesNameContainWildcard_SkipRoot(const UString &path)
 {
   return DoesNameContainWildcard(path.Ptr(NName::GetRootPrefixSize(path)));
 }
+// **************** NanaZip Modification Start **************
 bool HasDriveLetter(const UString& path)
 {
     return path.Len() >= 2 &&
@@ -88,7 +89,7 @@ bool HasDriveLetter(const UString& path)
         path[1] == L':';
 }
 
-UString ExpandFirstEnvInPath(const UString &path)
+UString ExpandFirstEnvironmentInPath(const UString &path)
 {
     int firstPercent = path.Find(L'%');
     if (firstPercent == std::wstring::npos)
@@ -100,7 +101,7 @@ UString ExpandFirstEnvInPath(const UString &path)
     for (int i = firstPercent; i <= secondPercent; ++i)
         envName += path[i];
     wchar_t buffer[MAX_PATH * 4] = {};
-    DWORD ret = ExpandEnvironmentStringsW(envName.Ptr(),
+    DWORD ret = ::ExpandEnvironmentStringsW(envName.Ptr(),
      buffer, ARRAYSIZE(buffer));
     UString expanded = (ret == 0 || ret > ARRAYSIZE(buffer))?
                             envName : buffer;
@@ -113,15 +114,18 @@ UString ExpandFirstEnvInPath(const UString &path)
         result += path.Ptr(secondPercent + 1);
     return result;
 }
+// **************** NanaZip Modification End ****************
 
 HRESULT CPanel::BindToPath(const UString &fullPath, 
   const UString &arcFormat, COpenResult &openRes)
 {
+// **************** NanaZip Modification Start **************
   UString path ;
-  if (HasDriveLetter(fullPath))
+  if (::HasDriveLetter(fullPath))
       path = fullPath;
   else
-      path = ExpandFirstEnvInPath(fullPath);
+      path = ::ExpandFirstEnvironmentInPath(fullPath);
+// **************** NanaZip Modification End **************
   #ifdef _WIN32
   path.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif
