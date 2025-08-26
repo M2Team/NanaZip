@@ -18,7 +18,7 @@
 #include "DialogSize.h"
 #include "ProgressDialog2.h"
 #include "ProgressDialog2Res.h"
-
+#include <winrt/Windows.UI.Xaml.Hosting.h>
 // **************** NanaZip Modification Start **************
 #include <Mile.Helpers.CppWinRT.h>
 #include <Mile.Helpers.h>
