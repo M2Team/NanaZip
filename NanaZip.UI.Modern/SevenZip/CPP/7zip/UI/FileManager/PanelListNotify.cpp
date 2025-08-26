@@ -576,10 +576,14 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
     ConvertPropVariantToUInt64(prop, v);
     // **************** NanaZip Modification Start **************
     if (this->m_ShowFilesizeUnit)
+    {
         ::ConvertSizeToByteUnitString(v, text);
+    }    
     else
+    {
         ::ConvertSizeToString(v, text);
-    // **************** NanaZip Modification End ****************
+    }
+        // **************** NanaZip Modification End ****************
   }
   else if (prop.vt == VT_BSTR)
   {
@@ -884,9 +888,13 @@ void CPanel::Refresh_StatusBar()
 
     // **************** NanaZip Modification Start **************
     if (this->m_ShowFilesizeUnit)
+    {
         ::ConvertSizeToByteUnitString(totalSize, selectSizeString);
+    }    
     else
+    {
         ::ConvertSizeToString(totalSize, selectSizeString);
+    }    
     // **************** NanaZip Modification End ****************
   }
   // _statusBar.SetText(1, selectSizeString);
@@ -906,12 +914,15 @@ void CPanel::Refresh_StatusBar()
         // **************** NanaZip Modification Start **************
         //ConvertSizeToString(GetItemSize(realIndex), sizeString);
         if (this->m_ShowFilesizeUnit)
+        {
             ::ConvertSizeToByteUnitString(
-            GetItemSize(realIndex),
-            sizeString);
+                GetItemSize(realIndex),
+                sizeString);
+        }
         else
+        {
             ::ConvertSizeToString(GetItemSize(realIndex), sizeString);
-
+        }
         // **************** NanaZip Modification End ****************
       NCOM::CPropVariant prop;
       if (_folder->GetProperty(realIndex, kpidMTime, &prop) == S_OK)
