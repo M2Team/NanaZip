@@ -81,6 +81,7 @@ static bool DoesNameContainWildcard_SkipRoot(const UString &path)
   return DoesNameContainWildcard(path.Ptr(NName::GetRootPrefixSize(path)));
 }
 
+// **************** NanaZip Modification Start **************
 bool HasDriveLetter(UString const& Path)
 {
     return Path.Len() >= 2 &&
@@ -132,9 +133,11 @@ UString ExpandFirstEnvironmentInPath(UString const& Path)
     }
     return ExpandedPath;
 }
+// **************** NanaZip Modification End ****************
 
 HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes)
 {
+  // **************** NanaZip Modification Start **************
   UString path;
   if (::HasDriveLetter(fullPath))
   {
@@ -144,6 +147,8 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
   {
     path = ::ExpandFirstEnvironmentInPath(fullPath);
   }
+  // **************** NanaZip Modification End ****************
+
   #ifdef _WIN32
   path.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif
