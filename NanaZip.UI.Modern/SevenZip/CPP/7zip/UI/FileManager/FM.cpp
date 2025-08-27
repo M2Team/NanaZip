@@ -477,6 +477,8 @@ static bool CallExtractOnOpen() {
 
   if (!g_IsFileTypeHandler || !ci.ExtractOnOpen || g_MainPath.IsEmpty())
     return false;
+  if (::GetAsyncKeyState(VK_SHIFT) < 0)
+    return false;
   if (!NWindows::NFile::NName::GetFullPath(us2fs(g_MainPath), fullPathF))
     return false;
   if (!NWindows::NFile::NDir::GetOnlyDirPrefix(fullPathF, parentFolder))
