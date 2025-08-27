@@ -80,8 +80,8 @@ static bool DoesNameContainWildcard_SkipRoot(const UString &path)
 {
   return DoesNameContainWildcard(path.Ptr(NName::GetRootPrefixSize(path)));
 }
-// **************** NanaZip Modification Start **************
-bool HasDriveLetter(const UString& path)
+
+bool HasDriveLetter(UString const& path)
 {
     return path.Len() >= 2 &&
         ((path[0] >= L'A' && path[0] <= L'Z') ||
@@ -89,7 +89,7 @@ bool HasDriveLetter(const UString& path)
         path[1] == L':';
 }
 
-UString ExpandFirstEnvironmentInPath(const UString &path)
+UString ExpandFirstEnvironmentInPath(UString const& path)
 {
     int firstPercent = path.Find(L'%');
     if (firstPercent == std::wstring::npos)
@@ -132,21 +132,18 @@ UString ExpandFirstEnvironmentInPath(const UString &path)
     }
     return expandedPath;
 }
-// **************** NanaZip Modification End ****************
+
 HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes)
 {
-// **************** NanaZip Modification Start **************
-//UString path = fullPath;
-    UString path;
-    if (::HasDriveLetter(fullPath))
-    {
-        path = fullPath;
-    }
-    else
-    {
-        path = ::ExpandFirstEnvironmentInPath(fullPath);
-    }
-// **************** NanaZip Modification End ****************
+  UString path;
+  if (::HasDriveLetter(fullPath))
+  {
+    path = fullPath;
+  }
+  else
+  {
+    path = ::ExpandFirstEnvironmentInPath(fullPath);
+  }
   #ifdef _WIN32
   path.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif
