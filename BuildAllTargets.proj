@@ -2,6 +2,7 @@
 <Project 
   DefaultTargets="Restore;Build;Packaging"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="NanaZip.Project\NanaZip.Project.props" />
   <Target Name="Restore">
     <ItemGroup>
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
@@ -44,7 +45,7 @@
     <PropertyGroup>
       <InputBinariesPath>$(MSBuildThisFileDirectory)Output\Binaries\Release\</InputBinariesPath>
       <OutputSymbolsPath>$(MSBuildThisFileDirectory)Output\Binaries\Root\Symbols\</OutputSymbolsPath>
-      <OutputFileNamePrefix>NanaZip_6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</OutputFileNamePrefix>
+      <OutputFileNamePrefix>NanaZip_$(MileProjectVersion)</OutputFileNamePrefix>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputSymbolsPath)arm64" />

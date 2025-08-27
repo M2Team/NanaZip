@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:    NanaZip
+  FILE:       NanaZip.Project.Version.props
+  PURPOSE:    MSBuild Properties for project version configurations for NanaZip
+
+  LICENSE:    The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <NanaZipMajorVersion>6</NanaZipMajorVersion>
+    <NanaZipMinorVersion>0</NanaZipMinorVersion>
+    <!-- <NanaZipBuildNumberDate>2025-08-27</NanaZipBuildNumberDate> -->
+    <NanaZipVersionTag>Preview 1</NanaZipVersionTag>
+  </PropertyGroup>
+</Project>

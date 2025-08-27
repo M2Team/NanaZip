@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:    NanaZip
+  FILE:       NanaZip.Project.props
+  PURPOSE:    MSBuild Properties for NanaZip Common Properties
+
+  LICENSE:    The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)NanaZip.Project.Version.props" />
+  <PropertyGroup>
+    <NanaZipBuildNumberDate Condition="'$(NanaZipBuildNumberDate)' == ''">$([System.DateTime]::Today.ToString('yyyy-MM-dd'))</NanaZipBuildNumberDate>
+    <NanaZipProjectCreationDate>2021-08-31</NanaZipProjectCreationDate>
+    <MileProjectVersion>$(NanaZipMajorVersion).$(NanaZipMinorVersion).$([System.DateTime]::Parse('$(NanaZipBuildNumberDate)').Subtract($([System.DateTime]::Parse('$(NanaZipProjectCreationDate)'))).TotalDays).0</MileProjectVersion>
+    <MileProjectVersionTag>$(NanaZipVersionTag)</MileProjectVersionTag>
+  </PropertyGroup>
+</Project>
