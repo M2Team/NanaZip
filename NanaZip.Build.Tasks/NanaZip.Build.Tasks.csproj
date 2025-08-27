@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>default</LangVersion>
+    <Authors>M2-Team</Authors>
+    <Copyright>© M2-Team and Contributors. All rights reserved.</Copyright>
+    <Version>$(MileProjectVersion)</Version>
+  </PropertyGroup>
+
+  <Target Name="NanaZipBuildTasksAfterBuild" AfterTargets="Build">
+    <Copy OverwriteReadOnlyFiles="true" SourceFiles="$(TargetPath)" DestinationFolder="$(MSBuildThisFileDirectory)..\NanaZip.Project\" />
+  </Target>
+
+</Project>
