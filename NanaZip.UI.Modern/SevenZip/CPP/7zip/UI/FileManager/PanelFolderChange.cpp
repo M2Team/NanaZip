@@ -81,56 +81,56 @@ static bool DoesNameContainWildcard_SkipRoot(const UString &path)
   return DoesNameContainWildcard(path.Ptr(NName::GetRootPrefixSize(path)));
 }
 
-bool HasDriveLetter(UString const& path)
+bool HasDriveLetter(UString const& Path)
 {
-    return path.Len() >= 2 &&
-        ((path[0] >= L'A' && path[0] <= L'Z') ||
-        (path[0] >= L'a' && path[0] <= L'z')) &&
-        path[1] == L':';
+    return Path.Len() >= 2 &&
+        ((Path[0] >= L'A' && Path[0] <= L'Z') ||
+        (Path[0] >= L'a' && Path[0] <= L'z')) &&
+        Path[1] == L':';
 }
 
-UString ExpandFirstEnvironmentInPath(UString const& path)
+UString ExpandFirstEnvironmentInPath(UString const& Path)
 {
-    int firstPercent = path.Find(L'%');
-    if (firstPercent == std::wstring::npos)
+    int FirstPercent = Path.Find(L'%');
+    if (FirstPercent == std::wstring::npos)
     {
-        return path;
+        return Path;
     }
-    int secondPercent = path.Find(L'%', firstPercent + 1);
-    if (secondPercent == std::wstring::npos)
+    int SecondPercent = Path.Find(L'%', FirstPercent + 1);
+    if (SecondPercent == std::wstring::npos)
     {
-        return path;
+        return Path;
     }
-    UString environmentName;
-    for (int i = firstPercent; i <= secondPercent; ++i)
+    UString EnvironmentName;
+    for (int i = FirstPercent; i <= SecondPercent; ++i)
     {    
-        environmentName += path[i];
+        EnvironmentName += Path[i];
     }
-    wchar_t buffer[MAX_PATH * 4] = {};
-    DWORD bufSize = ::ExpandEnvironmentStringsW(
-        environmentName.Ptr(),
-        buffer, 
-        ARRAYSIZE(buffer));
-    UString expandedFirstEvironment;
-    if (bufSize == 0 || bufSize > ARRAYSIZE(buffer))
+    wchar_t Buffer[MAX_PATH * 4] = {};
+    DWORD BufSize = ::ExpandEnvironmentStringsW(
+        EnvironmentName.Ptr(),
+        Buffer, 
+        ARRAYSIZE(Buffer));
+    UString ExpandedFirstEvironment;
+    if (BufSize == 0 || BufSize > ARRAYSIZE(Buffer))
     {
-        expandedFirstEvironment = environmentName;
+        ExpandedFirstEvironment = EnvironmentName;
     }
     else
     {
-        expandedFirstEvironment = buffer;
+        ExpandedFirstEvironment = Buffer;
     }
-    UString expandedPath;
-    if (firstPercent > 0)
+    UString ExpandedPath;
+    if (FirstPercent > 0)
     {
-        expandedPath += path.Left(firstPercent);
+        ExpandedPath += Path.Left(FirstPercent);
     }
-    expandedPath += expandedFirstEvironment;
-    if (secondPercent + 1 <(int) path.Len())
+    ExpandedPath += ExpandedFirstEvironment;
+    if (SecondPercent + 1 < (int)Path.Len())
     {
-        expandedPath += path.Ptr(secondPercent + 1);
+        ExpandedPath += Path.Ptr(SecondPercent + 1);
     }
-    return expandedPath;
+    return ExpandedPath;
 }
 
 HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes)
