@@ -76,8 +76,7 @@ void CPanel::SetToRootFolder()
 }
 
 
-static bool DoesNameContainWildcard_SkipRoot(
-            const UString &path)
+static bool DoesNameContainWildcard_SkipRoot(const UString &path)
 {
   return DoesNameContainWildcard(path.Ptr(NName::GetRootPrefixSize(path)));
 }
@@ -134,20 +133,19 @@ UString ExpandFirstEnvironmentInPath(const UString &path)
     return expandedPath;
 }
 // **************** NanaZip Modification End ****************
-
-HRESULT CPanel::BindToPath(const UString &fullPath, 
-  const UString &arcFormat, COpenResult &openRes)
+HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes)
 {
 // **************** NanaZip Modification Start **************
-  UString path;
-  if (::HasDriveLetter(fullPath))
-  {
-      path = fullPath;
-  }
-  else
-  {
-      path = ::ExpandFirstEnvironmentInPath(fullPath);
-  }
+//UString path = fullPath;
+    UString path;
+    if (::HasDriveLetter(fullPath))
+    {
+        path = fullPath;
+    }
+    else
+    {
+        path = ::ExpandFirstEnvironmentInPath(fullPath);
+    }
 // **************** NanaZip Modification End ****************
   #ifdef _WIN32
   path.Replace(L'/', WCHAR_PATH_SEPARATOR);
