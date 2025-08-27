@@ -25,6 +25,10 @@ trim_trailing_whitespace = true
 vc_generate_documentation_comments = doxygen_slash_star
 
 cpp_new_line_before_open_brace_function = new_line
+cpp_new_line_before_open_brace_block = new_line
+cpp_new_line_before_open_brace_lambda = new_line
+cpp_new_line_before_open_brace_type = new_line
+cpp_new_line_before_open_brace_namespace = new_line
 cpp_new_line_close_brace_same_line_empty_type = false
 cpp_new_line_close_brace_same_line_empty_function = false
 cpp_new_line_before_else = true
