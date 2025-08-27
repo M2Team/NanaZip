@@ -23,6 +23,20 @@ indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 vc_generate_documentation_comments = doxygen_slash_star
+cpp_new_line_before_open_brace_function = new_line
+cpp_new_line_before_open_brace_block = new_line
+cpp_new_line_before_open_brace_lambda = new_line
+cpp_new_line_before_open_brace_type = new_line
+cpp_new_line_before_open_brace_namespace = new_line
+cpp_new_line_close_brace_same_line_empty_type = false
+cpp_new_line_close_brace_same_line_empty_function = false
+cpp_new_line_before_else = true
+cpp_new_line_before_catch = true
+cpp_new_line_before_while_in_do_while = true
+cpp_naming_rule.general_names.symbols = all_symbols
+cpp_naming_rule.general_names.style = mile_project_cpp
+cpp_naming_symbols.all_symbols.applicable_kinds = *
+cpp_naming_style.mile_project_cpp.capitalization = pascal_case
 
 [*.{cs,csx,vb,vbx,asmx}]
 indent_style = space
