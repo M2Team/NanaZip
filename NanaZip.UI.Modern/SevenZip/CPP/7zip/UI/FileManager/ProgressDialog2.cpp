@@ -553,14 +553,14 @@ static std::wstring  ConvertSizeToString(
 {
     const wchar_t* Units[] =
     {
-        L" Byte ",
-        L" Bytes",
-        L" KiB  ",
-        L" MiB  ",
-        L" GiB  ",
-        L" TiB  ",
-        L" PiB  ",
-        L" EiB  "
+        L"Byte",
+        L"Bytes",
+        L"KiB",
+        L"MiB",
+        L"GiB",
+        L"TiB",
+        L"PiB",
+        L"EiB"
     };
     const std::size_t UnitsCount = sizeof(Units) / sizeof(*Units);
 
@@ -596,7 +596,7 @@ static void ConvertSizeToString(
     UInt64 Value,
     wchar_t* String)
 {
-    // Showing max 31 characters, 25 numbers + 6 unit characters.
+    // Showing max 31 characters, 28 numbers + 3 unit characters.
     wchar_t BufString[32] = {};
     std::wstring output = ::ConvertSizeToString(Value);
     ::wcscpy_s(String, ARRAYSIZE(BufString), output.c_str());
