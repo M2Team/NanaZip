@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Aggiornamento automatico</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Mostra unità di dimensione file</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Barra archivio</value>
   </data>
@@ -644,7 +647,6 @@
   </data>
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip è un software libero.
-
 Traduzione italiana a cura di:
 TJL73 &lt;https://tjl73.altervista.org/&gt;</value>
   </data>

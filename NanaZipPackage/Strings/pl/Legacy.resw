@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Automatyczne odświeżanie</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Pokaż jednostki rozmiaru pliku</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Pasek archiwum</value>
   </data>

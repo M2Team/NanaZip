@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Automaattipäivitys</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Näytä tiedostokoon yksiköt</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Pakettipalkki</value>
   </data>

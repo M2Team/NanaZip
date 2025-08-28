@@ -222,6 +222,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;ताजा गर्नुहोस्</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>फाइल आकार एकाइहरू देखाउनुहोस्</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>सङ्ग्रह उपकरणपट्टी</value>
   </data>

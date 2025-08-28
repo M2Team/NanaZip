@@ -225,6 +225,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>Osvežavanje</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Prikaži jedinice veličine datoteke</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Rad sa arhivama</value>
   </data>

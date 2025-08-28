@@ -225,6 +225,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>А&amp;бнавіць</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Паказваць адзінкі памеру файла</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Панэль кнопак архіватара</value>
   </data>

@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Rifreskim automatik</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Shfaq njësitë e madhësisë së skedarit</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Shiriti i veglave i arkivit</value>
   </data>
@@ -1356,5 +1359,4 @@ Je i sigurt që dëshiron të ndash arkivin në vëllime të tilla?</value>
   <data name="Resource12201" xml:space="preserve">
     <value>Hapni aplikacionin Cilësimet e Windows për të lidhur skedarët me NanaZip</value>
   </data>
-
 </root>

@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>تازه کردن خودکار</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>نمایش واحدهای اندازه‌گیری فایل</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>نوارابزار آرشیو</value>
   </data>

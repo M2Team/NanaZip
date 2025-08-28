@@ -222,6 +222,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Împrospătează</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Afișați unitățile de dimensiune a fișierului</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Bara de arhivare</value>
   </data>

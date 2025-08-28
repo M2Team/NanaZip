@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>자동 새로 고침</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>파일 크기 단위 표시</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>압축 도구 모음</value>
   </data>

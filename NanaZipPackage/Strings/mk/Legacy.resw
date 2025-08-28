@@ -216,6 +216,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Обнови</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Прикажи единици за големина на датотека</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Алатница на Архивата</value>
   </data>

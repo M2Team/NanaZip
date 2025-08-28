@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Auto Refresh</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Show file size units</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Archive Toolbar</value>
   </data>
@@ -821,9 +824,6 @@ Do you want to update it in the archive?</value>
   <data name="Resource3433" xml:space="preserve">
     <value>Open folder after extracting</value>
   </data>
-  <data name="Resource3434" xml:space="preserve">
-    <value>Extract on open (hold Shift to skip)</value>
-  </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Propagate Zone.Id stream:</value>
   </data>
@@ -1362,5 +1362,4 @@ Are you sure you want to split archive into such volumes?</value>
   <data name="Resource12201" xml:space="preserve">
     <value>Open Windows Settings app to associate files with NanaZip</value>
   </data>
-
 </root>

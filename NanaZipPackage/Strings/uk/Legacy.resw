@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Автооновлення</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Показати одиниці розміру файлу</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Панель архіву</value>
   </data>

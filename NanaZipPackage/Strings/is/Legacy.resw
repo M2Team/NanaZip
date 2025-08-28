@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Sjálfendurglæðun</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Sýna skráarstærðareiningar</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Safnverkfærastika</value>
   </data>

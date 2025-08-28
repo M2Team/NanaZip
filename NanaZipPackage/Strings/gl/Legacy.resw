@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Recargar auto.</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Mostrar unidades de tamaño de ficheiro</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Barra de ferramentas de arquivos</value>
   </data>

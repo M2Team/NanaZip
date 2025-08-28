@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Automatski osvježi</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Prikaži jedinice veličine datoteke</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Alatna traka arhiva</value>
   </data>

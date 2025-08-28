@@ -216,6 +216,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Verfris</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Wys lêergrootte-eenhede</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Argiveernutsbalk</value>
   </data>

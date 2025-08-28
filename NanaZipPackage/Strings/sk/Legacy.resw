@@ -231,6 +231,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Automatické obnovenie</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Zobraziť jednotky veľkosti súboru</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Archív</value>
   </data>

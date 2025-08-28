@@ -216,6 +216,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Segarkan Semula</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Tunjukkan unit saiz fail</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Toolbar Arkib</value>
   </data>

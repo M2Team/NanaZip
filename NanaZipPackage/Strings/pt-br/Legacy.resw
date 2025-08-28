@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Auto-Atualizar</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Mostrar unidades de tamanho de arquivo</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Barra de Ferramentas do Arquivo Compactado</value>
   </data>
@@ -1356,5 +1359,4 @@ Você tem certeza que você quer dividir o arquivo compactado em tais volumes?</
   <data name="Resource12201" xml:space="preserve">
     <value>Abrir a Configurações do Windows para associar arquivos ao NanaZip</value>
   </data>
-
 </root>

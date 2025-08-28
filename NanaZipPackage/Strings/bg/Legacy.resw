@@ -222,6 +222,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Опресняване</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Показване на единици за размер на файл</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Лента на архива</value>
   </data>

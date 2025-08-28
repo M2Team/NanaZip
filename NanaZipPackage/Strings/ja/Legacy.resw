@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>自動更新</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>ファイルサイズ単位を表示</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>アーカイブ ツールバー</value>
   </data>

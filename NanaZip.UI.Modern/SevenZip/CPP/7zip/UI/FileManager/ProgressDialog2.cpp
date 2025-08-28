@@ -20,10 +20,12 @@
 #include "ProgressDialog2Res.h"
 
 #include <winrt/Windows.UI.Xaml.Hosting.h>
+
+// **************** NanaZip Modification Start **************
 #include <Mile.Helpers.CppWinRT.h>
 #include <Mile.Helpers.h>
-
-// TODO: Implement messages (_messageList)
+#include <Mile.Helpers.CppBase.h>
+// **************** NanaZip Modification End **************
 
 using namespace NWindows;
 
@@ -527,6 +529,8 @@ void GetTimeString(UInt64 timeValue, wchar_t *s)
   *s = 0;
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static void ConvertSizeToString(UInt64 v, wchar_t *s)
 {
   Byte c = 0;
@@ -543,6 +547,62 @@ static void ConvertSizeToString(UInt64 v, wchar_t *s)
     *s++ = 0;
   }
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+static std::wstring ConvertSizeToString(
+    std::uint64_t ByteSize)
+{
+    const wchar_t* Units[] =
+    {
+        L"Byte",
+        L"Bytes",
+        L"KiB",
+        L"MiB",
+        L"GiB",
+        L"TiB",
+        L"PiB",
+        L"EiB"
+    };
+    const std::size_t UnitsCount = sizeof(Units) / sizeof(*Units);
+
+    // Output Format:
+    // For ByteSize is 0 or 1: x Byte
+    // For ByteSize is from 2 to 1023: x Bytes
+    // For ByteSize is larger than 1023: x.xx {KiB, MiB, GiB, TiB, PiB, EiB}
+
+    std::size_t UnitIndex = 0;
+    double Result = static_cast<double>(ByteSize);
+
+    if (ByteSize > 1)
+    {
+        for (UnitIndex = 1; UnitIndex < UnitsCount; ++UnitIndex)
+        {
+            if (1024.0 > Result)
+            {
+                break;
+            }
+            Result /= 1024.0;
+        }
+
+        // Keep two digits after the decimal point.
+        Result = static_cast<std::uint64_t>(Result * 100) / 100.0;
+    }
+
+    return std::wstring(Mile::FormatWideString(
+        (UnitIndex > 1) ? L"%.2f %s" : L"%.0f %s",
+        Result,
+        Units[UnitIndex]));
+}
+static void ConvertSizeToString(
+    UInt64 Value,
+    wchar_t* String)
+{
+    // Showing max 31 characters, 28 numbers + 3 unit characters.
+    wchar_t BufString[32] = {};
+    std::wstring output = ::ConvertSizeToString(Value);
+    ::wcscpy_s(String, ARRAYSIZE(BufString), output.c_str());
+    return;
+}
+// **************** 7-Zip ZS Modification End ******************
 
 winrt::hstring CProgressDialog::ShowSize(UInt64 val, UInt64 &prev)
 {

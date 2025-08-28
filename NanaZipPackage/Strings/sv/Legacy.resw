@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Uppdatera automatiskt</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Visa filstorleksenheter</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Verktygsfältet Arkiv</value>
   </data>

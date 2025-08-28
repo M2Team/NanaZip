@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Automatikus frissítés</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Fájlméret egységek megjelenítése</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Archiválás eszköztár</value>
   </data>

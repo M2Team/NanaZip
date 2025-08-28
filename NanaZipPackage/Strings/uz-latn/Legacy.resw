@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Avtomatik yangilamoq</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Fayl hajmi birliklarini ko'rsatish</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Arxiv jihozini ko‘rsatmoq</value>
   </data>

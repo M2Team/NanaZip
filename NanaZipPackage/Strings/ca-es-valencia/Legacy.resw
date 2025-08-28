@@ -222,6 +222,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>Actualitza&amp;r</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Mostra les unitats de mida del fitxer</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Arxiu</value>
   </data>

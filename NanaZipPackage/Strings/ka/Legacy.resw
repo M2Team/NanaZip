@@ -225,6 +225,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;განახლება</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>ფაილის ზომის ერთეულების ჩვენება</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>დაარქივების ზოლი</value>
   </data>

@@ -216,6 +216,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Сэргээ</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Файлын хэмжээний нэгжийг харуулах</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Aрхив багажны самбар</value>
   </data>

@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Actualitza automàticament</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Mostra les unitats de mida del fitxer</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Barra d'eines afegeix/extreu</value>
   </data>

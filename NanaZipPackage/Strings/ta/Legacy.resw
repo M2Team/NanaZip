@@ -210,6 +210,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>புதுக்கல்</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>கோப்பு அளவு அலகுகளைக் காட்டு</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>காப்பக கருவிப்பட்டை</value>
   </data>
@@ -440,7 +443,6 @@
   </data>
   <data name="Resource2901" xml:space="preserve">
     <value>தமிழாக்கம் (c) 2004 தமிழா! குழு - www.thamizha.com/
-
 7-ஜிப் ஒரு பரிநிரல் ஆகும். ஆனால், நீங்கள் 7-ஜிப்பின் மேம்பாட்டை ஆதரிக்க விரும்பினால், பதிவுபெற்றுங்கள். பதிவுபெற்ற பயனராக, நீங்கள் தொழில்நுட்ப உதவியும் பெறலாம்.</value>
   </data>
   <data name="Resource3001" xml:space="preserve">

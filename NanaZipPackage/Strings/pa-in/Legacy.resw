@@ -222,6 +222,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>ਤਾਜ਼ਾ ਕਰੋ(&amp;R)</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>ਫਾਈਲ ਆਕਾਰ ਯੂਨਿਟਾਂ ਦਿਖਾਓ</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>ਆਕਾਈਵ ਟੂਲਬਾਰ</value>
   </data>
@@ -497,7 +500,6 @@
   </data>
   <data name="Resource2901" xml:space="preserve">
     <value>7-ਜ਼ਿੱਪ ਇੱਕ ਮੁਫ਼ਤ ਸਾਫ਼ਟਵੇਅਰ ਹੈ। ਪਰ ਫੇਰ ਵੀ, ਤੁਸੀਂ ਰਜਿਸਟਰ ਕਰਕੇ 7-ਜ਼ਿੱਪ ਦੇ ਵਿਕਾਸ ਵਿੱਚ ਸਮਰਥਨ ਪਾ ਸੱਕਦੇ ਹੋ।
-
 ਪੰਜਾਬੀ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤਾ (Translation Done By):
 Gurmeet Singh Kochar (ਗੁਰਮੀਤ ਸਿੰਘ ਕੋਚਰ)
 &lt;gomikochar@yahoo.com&gt;</value>

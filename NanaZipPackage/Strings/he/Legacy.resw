@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>רענן אוטומטית</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>הצג יחידות גודל קובץ</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>סרגל כלים של ארכיון</value>
   </data>

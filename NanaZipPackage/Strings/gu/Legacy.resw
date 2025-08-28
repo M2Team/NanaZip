@@ -225,6 +225,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;તાજા કરો</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>ફાઇલનું કદ એકમો બતાવો</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>સંગ્રહ ઔજાર પટ્ટી</value>
   </data>

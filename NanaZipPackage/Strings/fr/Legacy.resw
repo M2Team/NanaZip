@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Actualiser Automatiquement</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Afficher les unités de taille de fichier</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Barre d'Archive</value>
   </data>

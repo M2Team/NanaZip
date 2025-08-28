@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Авто-яңарту</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Файл үлчәме берәмлекләрен күрсәт</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Архиваторның төймәләр панеле</value>
   </data>

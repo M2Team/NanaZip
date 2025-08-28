@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Automatisch verversen</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Bestandsgrootte-eenheden weergeven</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Archiefwerkbalk</value>
   </data>

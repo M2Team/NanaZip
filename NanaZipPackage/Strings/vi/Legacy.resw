@@ -225,6 +225,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>Nạp lại</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Hiển thị đơn vị kích thước tệp</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Thanh công cụ nén</value>
   </data>

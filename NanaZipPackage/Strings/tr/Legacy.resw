@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Görünüm Otomatik Yenilensin</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Dosya boyutu birimlerini göster</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Arşiv Araç Çubuğu</value>
   </data>

@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>自动刷新</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>显示文件大小单位</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>档案工具栏</value>
   </data>

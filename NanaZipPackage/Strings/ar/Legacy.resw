@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>تحديث تلقائي</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>إظهار وحدات حجم الملف</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>شريط أدوات الأرشفة</value>
   </data>

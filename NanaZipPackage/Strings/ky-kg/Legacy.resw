@@ -225,6 +225,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>Ж&amp;аңыртуу</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Файлдын көлөмүнүн бирдиктерин көрсөтүү</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Архиватордун баскычтарынын панели</value>
   </data>

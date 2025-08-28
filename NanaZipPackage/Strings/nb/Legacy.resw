@@ -222,6 +222,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Oppdater</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Vis filstørrelsesenheter</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Arkivverktøylinje</value>
   </data>

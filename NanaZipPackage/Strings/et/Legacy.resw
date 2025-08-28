@@ -225,6 +225,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Värskenda</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Kuva faili suuruse ühikud</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Arhiiviriistariba</value>
   </data>
@@ -548,7 +551,6 @@
   </data>
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip on vaba tarkvara. Kuid kui soovite toetada NanaZipi arendamist, siis saate programmi registreerida.
-
 NanaZipi Eesti koduleht:
 http://www.hot.ee/somberg/7zip.html</value>
   </data>

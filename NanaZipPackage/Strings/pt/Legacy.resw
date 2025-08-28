@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Actualizar automaticamente</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Mostrar unidades de tamanho de arquivo</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Barra de ferramentas do arquivo</value>
   </data>
@@ -644,7 +647,6 @@
   </data>
   <data name="Resource2901" xml:space="preserve">
     <value>O NanaZip é um programa gratuito.
-
 O NanaZip foi traduzido por: Hugo Carvalho
 \thugokarvalho@hotmail.com</value>
   </data>

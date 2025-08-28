@@ -108,6 +108,10 @@ BEGIN
     MENUITEM "&Refresh\tCtrl+R",            IDM_VIEW_REFRESH
     MENUITEM "Auto Refresh",                IDM_VIEW_AUTO_REFRESH
 
+    // **************** NanaZip Modification Start **************
+    MENUITEM "Show File Size Unit",         IDM_SHOW_FILE_SIZE_UNIT
+    // **************** NanaZip Modification End ****************
+
     // MENUITEM "Show NTFS streams",           IDM_VIEW_SHOW_STREAMS
     // MENUITEM "Show deleted files",          IDM_VIEW_SHOW_DELETED
 

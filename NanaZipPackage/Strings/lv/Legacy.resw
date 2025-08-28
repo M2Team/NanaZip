@@ -216,6 +216,9 @@
   <data name="Resource737" xml:space="preserve">
     <value>&amp;Pārlasīt</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Rādīt faila izmēra vienības</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Arhīva rīku josla</value>
   </data>

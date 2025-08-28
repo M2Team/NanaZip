@@ -455,6 +455,11 @@ public:
   bool _flatMode;
   bool _flatModeForDisk;
   bool _flatModeForArc;
+    
+  // **************** NanaZip Modification Start **************
+  // Flag to toggle show file size in bytes integer number or KiB,MiB,etc.
+  bool m_ShowFilesizeUnit;
+  // **************** NanaZip Modification End ****************
 
   // bool _showNtfsStrems_Mode;
   // bool _showNtfsStrems_ModeForDisk;
@@ -833,6 +838,15 @@ public:
   PROPID GetSortID() const { return _sortID; }
 
   void ChangeFlatMode();
+    
+  // **************** NanaZip Modification Start **************
+  void ChangeShowFilesizeUnit();
+  bool const GetShowFilesizeUnit() 
+  {
+      return this->m_ShowFilesizeUnit;
+  }
+  // **************** NanaZip Modification End ****************
+
   void Change_ShowNtfsStrems_Mode();
   bool GetFlatMode() const { return _flatMode; }
   // bool Get_ShowNtfsStrems_Mode() const { return _showNtfsStrems_Mode; }

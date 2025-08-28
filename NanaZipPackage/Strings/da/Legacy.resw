@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Opdater automatisk</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Vis filstørrelsesenheder</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Arkivlinje</value>
   </data>

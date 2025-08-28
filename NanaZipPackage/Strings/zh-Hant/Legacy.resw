@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>自動重新整理</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>顯示文件大小單位</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>壓縮檔工具列</value>
   </data>

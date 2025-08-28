@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Automatiškai atnaujinti</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Rodyti failo dydžio vienetus</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Archyvo mygtukų juosta</value>
   </data>

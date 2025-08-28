@@ -1042,6 +1042,13 @@ void CPanel::ChangeFlatMode()
   RefreshListCtrl_SaveFocused();
 }
 
+// **************** NanaZip Modification Start **************
+void CPanel::ChangeShowFilesizeUnit()
+{
+    this->m_ShowFilesizeUnit = !this->m_ShowFilesizeUnit;
+}
+// **************** NanaZip Modification End ****************
+
 /*
 void CPanel::Change_ShowNtfsStrems_Mode()
 {

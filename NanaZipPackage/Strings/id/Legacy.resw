@@ -234,6 +234,9 @@
   <data name="Resource738" xml:space="preserve">
     <value>Segarkan Otomatis</value>
   </data>
+  <data name="Resource741" xml:space="preserve">
+    <value>Tampilkan satuan ukuran file</value>
+  </data>
   <data name="Resource750" xml:space="preserve">
     <value>Bilah Alat Arsip</value>
   </data>
@@ -638,7 +641,6 @@
   </data>
   <data name="Resource2901" xml:space="preserve">
     <value>NanaZip merupakan perangkat lunak gratis.
-
 Terjemahan oleh Frans Liando.</value>
   </data>
   <data name="Resource3000" xml:space="preserve">
