@@ -20,6 +20,7 @@
 // **************** NanaZip Modification Start ****************
 #include <Mile.Helpers.CppBase.h>
 // **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 
 /* Unicode characters for space:
@@ -101,7 +102,7 @@ UString ConvertSizeToString(UInt64 value)
 static std::wstring ConvertSizeToByteUnitString(
     std::uint64_t ByteSize)
 {
-    const wchar_t* Units[] =
+    wchar_t const* Units[] =
     {
         L"Byte",
         L"Bytes",
@@ -112,7 +113,7 @@ static std::wstring ConvertSizeToByteUnitString(
         L"PiB",
         L"EiB"
     };
-    const std::size_t UnitsCount = sizeof(Units) / sizeof(*Units);
+    std::size_t const UnitsCount = sizeof(Units) / sizeof(*Units);
 
     // Output Format:
     // For ByteSize is 0 or 1: x Byte
@@ -127,8 +128,9 @@ static std::wstring ConvertSizeToByteUnitString(
         for (UnitIndex = 1; UnitIndex < UnitsCount; ++UnitIndex)
         {
             if (1024.0 > Result)
+            {
                 break;
-
+            }
             Result /= 1024.0;
         }
 
@@ -142,12 +144,12 @@ static std::wstring ConvertSizeToByteUnitString(
         Units[UnitIndex]));
 }
 static void ConvertSizeToByteUnitString(
-  UInt64 value,
-  wchar_t* String)
+    UInt64 Value,
+    wchar_t* String)
 {
     wchar_t BufString[MAX_PATH * 4] = {};
-    std::wstring output = ::ConvertSizeToByteUnitString(value);
-    ::wcscpy_s(String, ARRAYSIZE(BufString), output.c_str());
+    std::wstring Output = ::ConvertSizeToByteUnitString(Value);
+    ::wcscpy_s(String, ARRAYSIZE(BufString), Output.c_str());
     return;
 }
 // **************** NanaZip Modification End **************
@@ -574,6 +576,7 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
     {
     UInt64 v = 0;
     ConvertPropVariantToUInt64(prop, v);
+
     // **************** NanaZip Modification Start **************
     if (this->m_ShowFilesizeUnit)
     {
@@ -583,7 +586,8 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
     {
         ::ConvertSizeToString(v, text);
     }
-        // **************** NanaZip Modification End ****************
+    // **************** NanaZip Modification End ****************
+
   }
   else if (prop.vt == VT_BSTR)
   {
@@ -896,6 +900,7 @@ void CPanel::Refresh_StatusBar()
         ::ConvertSizeToString(totalSize, selectSizeString);
     }    
     // **************** NanaZip Modification End ****************
+    
   }
   // _statusBar.SetText(1, selectSizeString);
   _statusBarControl.Text2(selectSizeString);

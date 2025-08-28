@@ -1041,6 +1041,7 @@ void CPanel::ChangeFlatMode()
     _flatModeForDisk = _flatMode;
   RefreshListCtrl_SaveFocused();
 }
+
 // **************** NanaZip Modification Start **************
 void CPanel::ChangeShowFilesizeUnit()
 {

@@ -301,6 +301,7 @@ public:
     AutoRefresh_Mode = !AutoRefresh_Mode;
     SetPanels_AutoRefresh_Mode();
   }
+
   // **************** NanaZip Modification Start ****************
   bool Get_ShowFilesizeUnit()
   {
@@ -311,6 +312,7 @@ public:
       Panels[LastFocusedPanel].ChangeShowFilesizeUnit();
   }
   // **************** NanaZip Modification End ******************
+  
   void SetPanels_AutoRefresh_Mode()
   {
     for (unsigned i = 0; i < kNumPanelsMax; i++)

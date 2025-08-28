@@ -19,6 +19,7 @@
 #include "ProgressDialog2.h"
 #include "ProgressDialog2Res.h"
 #include <winrt/Windows.UI.Xaml.Hosting.h>
+
 // **************** NanaZip Modification Start **************
 #include <Mile.Helpers.CppWinRT.h>
 #include <Mile.Helpers.h>
@@ -527,6 +528,7 @@ void GetTimeString(UInt64 timeValue, wchar_t *s)
   *s++ = ':'; UINT_TO_STR_2(seconds);
   *s = 0;
 }
+
 // **************** 7-Zip ZS Modification Start ****************
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static void ConvertSizeToString(UInt64 v, wchar_t *s)
@@ -591,15 +593,16 @@ static std::wstring  ConvertSizeToString(
         Units[UnitIndex]));
 }
 static void ConvertSizeToString(
-    UInt64 value,
+    UInt64 Value,
     wchar_t* String)
 {
     wchar_t BufString[MAX_PATH * 4] = {};
-    std::wstring output = ::ConvertSizeToString(value);
+    std::wstring output = ::ConvertSizeToString(Value);
     ::wcscpy_s(String, ARRAYSIZE(BufString), output.c_str());
     return;
 }
 // **************** 7-Zip ZS Modification End ******************
+
 winrt::hstring CProgressDialog::ShowSize(UInt64 val, UInt64 &prev)
 {
   if (val == prev)
@@ -785,9 +788,11 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
           s[pos++] = ' ';
           if (moveBits != 0)
             s[pos++] = c;
+
          // **************** NanaZip Modification Start **************
           s[pos++] = 'i';  
          // **************** NanaZip Modification End ****************
+
           s[pos++] = 'B';
           s[pos++] = '/';
           s[pos++] = 's';
