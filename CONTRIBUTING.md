@@ -5,6 +5,27 @@
 - Direct contributions
   - **Create pull requests directly and follow the code style and conventions
     mentioned in this document.**
+  - Only the member of the development team can have the privilege to close the
+    pull requests.
+  - Never be lazy on writing and layouting your source code, your changes should
+    be clarify and professional, like Windows NT kernel mode implementations.
+  - Never have excuses for coding style because it means you have accepted the
+    current coding style after creating your pull requests. If you have any
+    excuses, you should open an issue to make your excuse before you creating
+    your pull requests. In most cases, your excuse issue may be blamed by the
+    development team in most cases and you need to be stouthearted.
+  - It's important to read that coding style carefully word by word. If you 
+    don't follow that, your pull requests will be rejected and closed because
+    all NanaZip Benevolent Dictators For Life are really busy in their reality
+    life, which have no time to act as Dave Culter and Linus Torvalds a.k.a. the
+    angry code reviewers, also it's the important way to keep the mental health
+    of all members in the development team.
+  - You should know that NanaZip have multiple Benevolent Dictators For Life.
+    Read https://github.com/M2Team/NanaZip/blob/main/Documents/People.md for
+    more information.
+  - You are forbidden to modify any content in any files and folders starting
+    with the "Mile." prefix, or your pull requests won't be merged and closed
+    immediately, unless you get the permission from Kenji Mouri.
 - Feedback suggestions and bugs.
   - We use GitHub issues to track bugs and features.
   - For bugs and general issues please 
@@ -36,29 +57,19 @@ more information.
 
 [MD24: The coding style for all my open-source projects]: https://github.com/MouriNaruto/MouriDocs/tree/main/docs/24
 
-**It's important to read that coding style carefully word by word. If you don't
-follow that, your PR will be rejected and closed without any notice because all
-NanaZip Benevolent Dictators For Life don't want to act as Dave Culter and Linus
-Torvalds a.k.a. the angry code reviewers.**
-
-Note: NanaZip have multiple Benevolent Dictators For Life. Read
-https://github.com/M2Team/NanaZip/blob/main/Documents/People.md for more
-information.
-
 For all languages respect the [.editorconfig](https://editorconfig.org/) file 
 specified in the source tree. Many IDEs natively support this or can with a 
 plugin.
 
-#### Notice for "Mile." prefix contents
-
-You are forbidden to modify any content in any files and folders starting 
-with the "Mile." prefix, or your PR won't be merged and closed immediately,
-unless you get the permission from Kenji Mouri.
-
 #### Modifications for inherited 7-Zip mainline source code
 
-**Read https://github.com/M2Team/NanaZip/blob/main/License.md first for knowing
-which files whether belong to inherited 7-Zip mainline source code.**
+> [!NOTE]
+> Read https://github.com/M2Team/NanaZip/blob/main/License.md first for knowing
+> which files whether belong to inherited 7-Zip mainline source code.**
+
+> [!NOTE]
+> For adding something to inherited 7-Zip code, don't add extra empty line if
+> there is no empty line in the existed inherited 7-Zip methods and functions.
 
 For simplifying the synchronization from 7-Zip mainline, the modification mark
 is necessary, which the original 7-Zip mainline code should be commented as
