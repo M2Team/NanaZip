@@ -81,72 +81,26 @@ static bool DoesNameContainWildcard_SkipRoot(const UString &path)
   return DoesNameContainWildcard(path.Ptr(NName::GetRootPrefixSize(path)));
 }
 
-// **************** NanaZip Modification Start **************
-bool HasDriveLetter(UString const& Path)
-{
-    return Path.Len() >= 2 &&
-        ((Path[0] >= L'A' && Path[0] <= L'Z') ||
-        (Path[0] >= L'a' && Path[0] <= L'z')) &&
-        Path[1] == L':';
-}
-
-UString ExpandFirstEnvironmentInPath(UString const& Path)
-{
-    int FirstPercent = Path.Find(L'%');
-    if (FirstPercent == std::wstring::npos)
-    {
-        return Path;
-    }
-    int SecondPercent = Path.Find(L'%', FirstPercent + 1);
-    if (SecondPercent == std::wstring::npos)
-    {
-        return Path;
-    }
-    UString EnvironmentName;
-    for (int i = FirstPercent; i <= SecondPercent; ++i)
-    {    
-        EnvironmentName += Path[i];
-    }
-    wchar_t Buffer[MAX_PATH * 4] = {};
-    DWORD BufSize = ::ExpandEnvironmentStringsW(
-        EnvironmentName.Ptr(),
-        Buffer, 
-        ARRAYSIZE(Buffer));
-    UString ExpandedFirstEvironment;
-    if (BufSize == 0 || BufSize > ARRAYSIZE(Buffer))
-    {
-        ExpandedFirstEvironment = EnvironmentName;
-    }
-    else
-    {
-        ExpandedFirstEvironment = Buffer;
-    }
-    UString ExpandedPath;
-    if (FirstPercent > 0)
-    {
-        ExpandedPath += Path.Left(FirstPercent);
-    }
-    ExpandedPath += ExpandedFirstEvironment;
-    if (SecondPercent + 1 < (int)Path.Len())
-    {
-        ExpandedPath += Path.Ptr(SecondPercent + 1);
-    }
-    return ExpandedPath;
-}
-// **************** NanaZip Modification End ****************
-
 HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes)
 {
+
   // **************** NanaZip Modification Start **************
+  //UString path = fullPath;
+  wchar_t Buffer[MAX_PATH * 4] = {};
+  DWORD BufSize = ::ExpandEnvironmentStringsW(
+      fullPath.Ptr(),
+      Buffer, 
+      ARRAYSIZE(Buffer));
   UString path;
-  if (::HasDriveLetter(fullPath))
+  if (BufSize == 0 || BufSize > ARRAYSIZE(Buffer))
   {
-    path = fullPath;
+      path = fullPath;
   }
   else
   {
-    path = ::ExpandFirstEnvironmentInPath(fullPath);
+      path = Buffer;
   }
+  path = fullPath;
   // **************** NanaZip Modification End ****************
 
   #ifdef _WIN32
