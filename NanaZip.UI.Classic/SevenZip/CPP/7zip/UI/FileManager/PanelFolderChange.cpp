@@ -78,7 +78,8 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
   
   // **************** NanaZip Modification Start **************
   //UString path = fullPath;
-  wchar_t Buffer[MAX_PATH * 4] = {};
+  // 32768 is the maximum path length with the terminating null character.
+  wchar_t Buffer[32768] = {};
   DWORD BufSize = ::ExpandEnvironmentStringsW(
       fullPath.Ptr(),
       Buffer, 
@@ -92,7 +93,6 @@ HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, CO
   {
       path = Buffer;
   }
-  path = fullPath;
   // **************** NanaZip Modification End ****************
 
   #ifdef _WIN32
