@@ -102,18 +102,18 @@ UString ConvertSizeToString(UInt64 value)
 static std::wstring ConvertSizeToByteUnitString(
     std::uint64_t ByteSize)
 {
-    wchar_t const* Units[] =
+    const wchar_t* Units[] =
     {
-        L"Byte",
-        L"Bytes",
-        L"KiB",
-        L"MiB",
-        L"GiB",
-        L"TiB",
-        L"PiB",
-        L"EiB"
+        L" Byte ",
+        L" Bytes",
+        L" KiB  ",
+        L" MiB  ",
+        L" GiB  ",
+        L" TiB  ",
+        L" PiB  ",
+        L" EiB  "
     };
-    std::size_t const UnitsCount = sizeof(Units) / sizeof(*Units);
+    const std::size_t UnitsCount = sizeof(Units) / sizeof(*Units);
 
     // Output Format:
     // For ByteSize is 0 or 1: x Byte
@@ -147,7 +147,8 @@ static void ConvertSizeToByteUnitString(
     UInt64 Value,
     wchar_t* String)
 {
-    wchar_t BufString[MAX_PATH * 4] = {};
+  // Showing max 31 characters, 25 numbers + 6 unit characters.
+    wchar_t BufString[32] = {};
     std::wstring Output = ::ConvertSizeToByteUnitString(Value);
     ::wcscpy_s(String, ARRAYSIZE(BufString), Output.c_str());
     return;

@@ -761,8 +761,12 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     case IDM_VIEW_AUTO_REFRESH:   g_App.Change_AutoRefresh_Mode(); break;
     
     // **************** NanaZip Modification Start **************
-    case IDM_SHOW_FILE_SIZE_UNIT:{g_App.Change_ShowFilesizeUnit_Mode();
-                                  g_App.RefreshView(); } break;
+    case IDM_SHOW_FILE_SIZE_UNIT:
+    {
+      g_App.Change_ShowFilesizeUnit_Mode();
+      g_App.RefreshView(); 
+    } 
+    break;
     // **************** NanaZip Modification End ****************
 
     // case IDM_VIEW_SHOW_STREAMS:     g_App.Change_ShowNtfsStrems_Mode(); break;
