@@ -1,8 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project 
-  DefaultTargets="Restore;Build;Packaging"
+  DefaultTargets="RefreshVersion;Restore;Build;Packaging"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="NanaZip.Project\NanaZip.Project.props" />
+  <UsingTask
+    TaskName="NanaZip.Build.Tasks.RefreshAppxManifestVersion"
+    AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
+  <UsingTask
+    TaskName="NanaZip.Build.Tasks.RefreshProjectBuildNumberDate"
+    AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
+  <Target Name="RefreshVersion">
+    <Exec Command="git show -s --format=%25%25cs" ConsoleToMSBuild="true" IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="GitExitCode" />
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitBuildNumberDate" />
+    </Exec>
+    <PropertyGroup>
+      <NanaZipBuildNumberDate Condition="'$(GitExitCode)' == '0' and '$(GitBuildNumberDate)' != ''">$(GitBuildNumberDate)</NanaZipBuildNumberDate>
+    </PropertyGroup>
+    <RefreshProjectBuildNumberDate
+      FilePath="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Project.Version.props"
+      BuildNumberDate="$(NanaZipBuildNumberDate)" />
+    <PropertyGroup>
+      <MileProjectVersion>$(NanaZipMajorVersion).$(NanaZipMinorVersion).$([System.DateTime]::Parse('$(NanaZipBuildNumberDate)').Subtract($([System.DateTime]::Parse('$(NanaZipProjectCreationDate)'))).TotalDays).0</MileProjectVersion>
+    </PropertyGroup>
+    <RefreshAppxManifestVersion
+      FilePath="$(MSBuildThisFileDirectory)NanaZipPackage\Package.appxmanifest"
+      Version="$(MileProjectVersion)" />
+  </Target>
   <Target Name="Restore">
     <ItemGroup>
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
