@@ -3,29 +3,21 @@
 ## How to become a contributor
 
 - Direct contributions
-  - **Create pull requests directly and follow the code style and conventions
-    mentioned in this document.**
-  - Only the member of the development team can have the privilege to close the
-    pull requests.
-  - Never be lazy on writing and layouting your source code, your changes should
-    be clarify and professional, like Windows NT kernel mode implementations.
-  - Never have excuses for coding style because it means you have accepted the
-    current coding style after creating your pull requests. If you have any
-    excuses, you should open an issue to make your excuse before you creating
-    your pull requests. In most cases, your excuse issue may be blamed by the
-    development team in most cases and you need to be stouthearted.
-  - It's important to read that coding style carefully word by word. If you 
-    don't follow that, your pull requests will be rejected and closed because
-    all NanaZip Benevolent Dictators For Life are really busy in their reality
-    life, which have no time to act as Dave Culter and Linus Torvalds a.k.a. the
-    angry code reviewers, also it's the important way to keep the mental health
-    of all members in the development team.
-  - You should know that NanaZip have multiple Benevolent Dictators For Life.
-    Read https://github.com/M2Team/NanaZip/blob/main/Documents/People.md for
-    more information.
+  - We use a code style similar but not identical to that of Windows NT kernel
+    drivers. You must read the code style guidelines carefully, word by word,
+    before submitting your pull request. To maintain NanaZip's source code
+    quality, and to respect our reviewers' time, we will not accept PRs that
+    don't follow these guidelines.
+  - We expect all contributions to match our existing style WITHOUT EXCEPTION.
+    If you have any questions about our coding standards, please open an issue
+    for discussion before submitting your pull request.
+  - By submitting a pull request, you agree to license your contribution under
+    the MIT license. We reserve the right to reuse and rewrite contributors' PRs
+    as needed.
   - You are forbidden to modify any content in any files and folders starting
-    with the "Mile." prefix, or your pull requests won't be merged and closed
-    immediately, unless you get the permission from Kenji Mouri.
+    with the "Mile." prefix because those implementations are shared across many
+    projects, or your pull requests won't be merged and closed immediately,
+    unless you get the permission from Kenji Mouri.
 - Feedback suggestions and bugs.
   - We use GitHub issues to track bugs and features.
   - For bugs and general issues please 
