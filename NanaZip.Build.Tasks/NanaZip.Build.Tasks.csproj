@@ -4,6 +4,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>default</LangVersion>
+    <Nullable>enable</Nullable>
     <Authors>M2-Team</Authors>
     <Copyright>© M2-Team and Contributors. All rights reserved.</Copyright>
     <Version>$(MileProjectVersion)</Version>
