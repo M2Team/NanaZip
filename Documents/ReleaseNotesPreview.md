@@ -5,6 +5,10 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 **NanaZip 6.0 Preview 1 (6.0.1459.0)**
 
 - Start to transition to community driven development model.
+- Introduce extract-on-open feature. (Contributed by dinhngtu.)
+  - To disable this temporarily, hold Shift while opening the file.
+  - To disable this permanently, go to Settings, Integration tab, and disable
+    "Extract on open" at the bottom.
 - Introduce formal version of contributing guide and security policies.
   (Cooperated with dinhngtu and dongle-the-gadget.)
 - Update system requirement to Windows 10, version 2004 (Build 19041) or later,
@@ -17,8 +21,6 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   dongle-the-gadget.)
 - Introduce the XAML-based progress dialog. (Contributed by dongle-the-gadget.)
 - Improve the Smart Extraction feature. (Contributed by R-YaTian.)
-- Introduce extract-on-open feature. (Contributed by dinhngtu.)
-- Don't extract on open if Shift is held down. (Contributed by dinhngtu.)
 - Introduce extract all automatically policy when opening executable files in
   archives. (Contributed by MajThomas.)
 - Introduce the environment variable parsing support for address bar. (Thanks to
