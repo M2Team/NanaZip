@@ -2,6 +2,111 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 6.0 Preview 1 (6.0.1459.0)**
+
+- Start to transition to community driven development model.
+- Introduce formal version of contributing guide and security policies.
+  (Cooperated with dinhngtu and dongle-the-gadget.)
+- Update system requirement to Windows 10, version 2004 (Build 19041) or later,
+  and remove the x86 (32-bit) for all components.
+- Start to use Zstandard decoder instead of 7-Zip mainline's implementation for
+  better reliability, especially it can reduce more potential vulnerabilities.
+- Introduce the XAML-based address bar. (Contributed by dongle-the-gadget.)
+- Introduce the XAML-based status bar. (Contributed by dongle-the-gadget.)
+- Introduce the XAML-based properties and information dialog. (Contributed by
+  dongle-the-gadget.)
+- Introduce the XAML-based progress dialog. (Contributed by dongle-the-gadget.)
+- Improve the Smart Extraction feature. (Contributed by R-YaTian.)
+- Introduce extract-on-open feature. (Contributed by dinhngtu.)
+- Don't extract on open if Shift is held down. (Contributed by dinhngtu.)
+- Introduce extract all automatically policy when opening executable files in
+  archives. (Contributed by MajThomas.)
+- Introduce the environment variable parsing support for address bar. (Thanks to
+  dongle-the-gadget's huge help.)
+- Improve the NanaZip startup performance by initializing the StoreContext
+  later. (Contributed by dongle-the-gadget.)
+- Add support for CBR/CBZ extensions. (Contributed by dinhngtu.)
+- Display file system version in archive property window for the UFS/UFS2 file
+  system image readonly support.
+- Display bundle version in archive property for the .NET Single File
+  Application bundle readonly support.
+- Display file system version in archive property for the littlefs file system
+  image readonly support.
+- Fix the parsing padding issue for Electron Archive (asar) readonly support.
+  (Contributed by Vlad-Andrei Popescu).
+- Improve the ZealFS file system image readonly support implementation to fix
+  several issues. (Cooperated with Zeal 8-bit.)
+- Try to bring dialog window to the foreground to resolve user experience issues
+  when opened from context menu. (Contributed by dinhngtu.)
+- Move open folder checkbox to extract dialog. (Contributed by dinhngtu.)
+- Introduce registry settings for Mark of the Web (MoTW) enforcement policies.
+  (Contributed by dinhngtu.)
+- Improve the dynamic library block list for resolving compatibility issues.
+  (Contributed by dinhngtu.)
+- Introduce registry settings for disabling security mitigation policies, which
+  should be helpful for debugging and resolving compatibility issues.
+  (Contributed by dinhngtu.)
+- Fix dead loop issue when compressing files with Brotli, Lizard, LZ4 and LZ5
+  mentioned in https://github.com/M2Team/NanaZip/issues/639. (Thanks to
+  gigano01, InfiniteLoopGameDev and iOrange.)
+- Fix the unable to return the processed bytes count issue for
+  NanaZipCodecsReadInputStream.
+- Fix some string resources issues. (Contributed by dinhngtu.)
+- Fix issues in compression levels combobox. (Contributed by dongle-the-gadget.)
+- Update Albanian translation. (Contributed by F1219R.)
+- Update Hungarian translation. (Contributed by John Fowler.)
+- Update Greek translation. (Contributed by Lefteris T.)
+- Update German translation. (Contributed by HackZy01.)
+- Update Bengali translation. (Contributed by Sumon Kayal.)
+- Synchronize 7-Zip mainline implementations to 25.01. (Thanks to Igor Pavlov.
+  Noticed by FadeMind and Pinguin2001.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/2a2dcb293b80180dc305544bf6a9e081750bccfe.
+  (Thanks to Sergey G. Brester and Tino Reichardt.)
+- Update Zstandard to v1.5.7. (Noticed by dcog989.)
+- Update Lizard to v2.1.
+- Synchronize the BLAKE3 implementation to 1.8.2. (Noticed by peashooter2.)
+- Synchronize the RHash implementation to latest master a.k.a.
+  https://github.com/rhash/RHash/commit/cce6c628f93d9ed332921656aa5e1750d12b8d3e
+  which is after v1.4.6.
+- Update Mile.Windows.Helpers to 1.0.952.
+- Update Mile.Windows.Internal to 1.0.3259.
+- Update Mile.Json to 1.0.1057.
+- Add littlefs v2.10.2 to NanaZip.Codecs for future development of work in
+  progress littlefs archive format readonly support.
+- Create NanaZip.Modern project for the modern user experience development.
+- Introduce Mile.Mobility dependence to NanaZip.Codecs project for making better
+  portability between NanaZip and AptxZip (a.k.a. NanaZip for POSIX).
+- Introduce NanaZip.ExtensionPackage project for future development of features
+  which need to be distributed as legacy installer. (Contributed by dinhngtu.)
+- Introduce Mile.Helpers.Portable.Base.Unstaged as the temporary infrastructure
+  to standardize some portable things in NanaZip.Codecs.
+- Introduce NanaZip.Codecs.Specification.Fat for adding definitions of FAT12,
+  FAT16 and FAT32.
+- Introduce NanaZip.Codecs.Specification.Zealfs for adding definitions of
+  ZealFS series file system. (Cooperated with Zeal 8-bit.)
+- Add littlefs v1 on-disk definitions to the littlefs file system image readonly
+  support.
+- Introduce Mile.Project.Wap.Unstaged.targets for solving the issue that
+  unnecessary XAML files contained in the final MSIX package.
+- Add XAML Styler indentation configuration. (Contributed by dongle-the-gadget.)
+- Use x-generate to define language resources in AppX manifest to solve the
+  Windows AppX language fallback issue. (Suggested by dongle-the-gadget.)
+- Update build binary logs when failed to build in GitHub Actions. (Contributed
+  by dongle-the-gadget.)
+- Introduce legacy string migrator. (Contributed by dongle-the-gadget.)
+- Add more targeted editorconfig rules. (Contributed by dongle-the-gadget.)
+- Move NanaZip.Core's NanaZip.Core.Console project to NanaZip.Universal's
+  NanaZip.Universal.Console project.
+- Disable WinRT metadata generation for all WinRT component consumers.
+- Move NanaZip.Modern as the first item to workaround the AppX toolchain
+  manifest generation issues.
+- Improve the GitHub Actions artifacts generation.
+- Update to Windows 11 SDK Build 26100 for NanaZipPackage.
+- Fix the source code file header comment format.
+- Use C++ zero initialization to reduce potential issues.
+- Introduce reproducible build support for the whole project.
+
 **NanaZip 5.1 Preview 0 (5.1.1263.0)**
 
 This release includes all the improvements from NanaZip 5.0 Update 2
