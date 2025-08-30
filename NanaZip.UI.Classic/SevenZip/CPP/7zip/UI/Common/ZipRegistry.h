@@ -196,7 +196,7 @@ struct CContextMenuInfo
   UInt32 WriteZone;
 
   // **************** NanaZip Modification Start ****************
-  UInt32 ExtractOnOpen;
+  CBoolPair ExtractOnOpen;
   // **************** NanaZip Modification End ****************
 
   /*
