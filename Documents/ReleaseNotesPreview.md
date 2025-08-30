@@ -2,7 +2,7 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 6.0 Preview 1 (6.0.1459.0)**
+**NanaZip 6.0 Preview 1 (6.0.1461.0)**
 
 - Start to transition to community driven development model.
 - Introduce extract-on-open feature. (Contributed by dinhngtu.)
@@ -27,7 +27,8 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   dongle-the-gadget's huge help.)
 - Improve the NanaZip startup performance by initializing the StoreContext
   later. (Contributed by dongle-the-gadget.)
-- Add support for CBR/CBZ extensions. (Contributed by dinhngtu.)
+- Add support for CBR and CBZ file associations. (Contributed by dinhngtu.)
+- Add support for ASAR file association. (Contributed by dongle-the-gadget.)
 - Display file system version in archive property window for the UFS/UFS2 file
   system image readonly support.
 - Display bundle version in archive property for the .NET Single File
