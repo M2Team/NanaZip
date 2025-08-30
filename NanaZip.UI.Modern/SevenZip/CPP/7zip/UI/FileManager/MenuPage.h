@@ -14,8 +14,9 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
   bool _elimDup_Changed;
   bool _writeZone_Changed;
   bool _flags_Changed;
+
   // **************** NanaZip Modification Start ****************
-  bool _extractOnOpen_Changed;
+  bool m_ExtractOnOpenChanged;
   // **************** NanaZip Modification End ****************
 
   void Clear_MenuChanged()
@@ -23,8 +24,9 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
     _elimDup_Changed = false;
     _writeZone_Changed = false;
     _flags_Changed = false;
+
     // **************** NanaZip Modification Start ****************
-    _extractOnOpen_Changed = false;
+    m_ExtractOnOpenChanged = false;
     // **************** NanaZip Modification End ****************
   }
 
