@@ -96,6 +96,7 @@
               <uap:FileType>.7z</uap:FileType>
               <uap:FileType>.apfs</uap:FileType>
               <uap:FileType>.arj</uap:FileType>
+              <uap:FileType>.asar</uap:FileType>
               <uap:FileType>.br</uap:FileType>
               <uap:FileType>.bz2</uap:FileType>
               <uap:FileType>.bzip2</uap:FileType>
