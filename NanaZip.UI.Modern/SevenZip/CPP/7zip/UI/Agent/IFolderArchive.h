@@ -125,4 +125,15 @@ FOLDER_ARCHIVE_INTERFACE(IFolderSetZoneIdMode, 0x12)
   INTERFACE_IFolderSetZoneIdMode(PURE)
 };
 
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09, adapted to NanaZip.
+#define INTERFACE_IFolderSetZoneIdFile(x) \
+  STDMETHOD(SetZoneIdFile)(const Byte *data, UInt32 size) x; \
+
+FOLDER_ARCHIVE_INTERFACE(IFolderSetZoneIdFile, 0x13)
+{
+  INTERFACE_IFolderSetZoneIdFile(PURE)
+};
+// **************** NanaZip Modification End ****************
+
 #endif
