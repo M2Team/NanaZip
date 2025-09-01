@@ -2,18 +2,10 @@
 
 Some MSBuild configurations shared by whole NanaZip project.
 
-## Note of precompiled binaries
-
-For out-of-box NanaZip building experience, it's necessary.
-
-Although all precompiled binaries is already open-sourced, but contributors may
-don't know where is the source code. It's necessary to notice that.
-
-Here are the notes:
-
-- Mile.Project.Helpers.dll
-  - https://github.com/ProjectMile/Mile.Project.Helpers
-- NanaZip.Build.Tasks.dll
-  - https://github.com/M2Team/NanaZip/tree/main/NanaZip.Build.Tasks
-  - You can open NanaZip.MaintainerTools.sln at NanaZip source code root folder
-    to build this.
+The precompiled binaries in this folder is necessary for implementing the
+out-of-box NanaZip building experience. Open the `NanaZip.MaintainerTools.sln`
+at the root folder of the NanaZip source code repository, find the
+`NanaZip.Build.Tasks` project, you will see the source for the precompiled
+binaries which contained in this folder. Also, these precompiled binaries will
+be updated automatically via the GitHub Actions workflow if the implementation
+of the `NanaZip.Build.Tasks` project has some changes.
