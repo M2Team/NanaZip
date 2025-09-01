@@ -27,6 +27,9 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
+  <PropertyGroup>
+    <RequiredBundles>Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core</RequiredBundles>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
       <ModuleDefinitionFile>NanaZip.Modern.def</ModuleDefinitionFile>
