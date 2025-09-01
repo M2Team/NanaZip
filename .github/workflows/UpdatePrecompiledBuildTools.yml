@@ -33,4 +33,4 @@ jobs:
         dotnet build --configuration Release NanaZip.Build.Tasks\NanaZip.Build.Tasks.csproj
         git commit -a -m "Update the precompiled build tools."
     - name: Push changes to the repository
-      run: git push
+      run: git push --set-upstream origin unstaged/update-precompiled-build-tools
