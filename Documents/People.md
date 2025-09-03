@@ -2,7 +2,7 @@
 
 ## Notice
 
-- This list sort in alphabetical order.
+- This list sorted in alphabetical order.
 
 ## Development Team
 
