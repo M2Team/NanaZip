@@ -115,5 +115,5 @@ kWzAES = 99    // AE-x encryption marker (see APPENDIX E)
 
 #### Translation contribution notice
 
-All `comment` in `resw` files should be kept English for make it better to 
+All `comment` in `resw` files should be kept English to make it better for 
 maintenance in the future.
