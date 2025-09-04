@@ -72,14 +72,28 @@ HRESULT CPanelCopyThread::ProcessVirt()
 
   HRESULT result2;
 
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09.
+  if (FolderOperations)
   {
-    CMyComPtr<IFolderSetZoneIdMode> setZoneMode;
-    FolderOperations.QueryInterface(IID_IFolderSetZoneIdMode, &setZoneMode);
-    if (setZoneMode)
     {
-      RINOK(setZoneMode->SetZoneIdMode(options->ZoneIdMode));
+      CMyComPtr<IFolderSetZoneIdMode> setZoneMode;
+      FolderOperations.QueryInterface(IID_IFolderSetZoneIdMode, &setZoneMode);
+      if (setZoneMode)
+      {
+        RINOK(setZoneMode->SetZoneIdMode(options->ZoneIdMode))
+      }
+    }
+    {
+      CMyComPtr<IFolderSetZoneIdFile> setZoneFile;
+      FolderOperations.QueryInterface(IID_IFolderSetZoneIdFile, &setZoneFile);
+      if (setZoneFile)
+      {
+        RINOK(setZoneFile->SetZoneIdFile(options->ZoneBuf, (UInt32)options->ZoneBuf.Size()))
+      }
     }
   }
+  // **************** NanaZip Modification End ****************
 
   if (options->testMode)
   {
@@ -133,6 +147,35 @@ static void ThrowException_if_Error(HRESULT res)
 #endif
 */
 
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09.
+void CPanel::Get_ZoneId_Stream_from_ParentFolders(CByteBuffer &buf)
+{
+  // we suppose that ZoneId of top parent has priority over ZoneId from childs.
+  FOR_VECTOR (i, _parentFolders)
+  {
+    // _parentFolders[0] = is top level archive
+    // _parentFolders[1 ... ].isVirtual == true is possible
+    //           if extracted size meets size conditions derived from g_RAM_Size.
+    const CFolderLink &fl = _parentFolders[i];
+    if (fl.IsVirtual)
+    {
+      if (fl.ZoneBuf.Size() != 0)
+      {
+        buf = fl.ZoneBuf;
+        return;
+      }
+    }
+    else if (!fl.FilePath.IsEmpty())
+    {
+      ReadZoneFile_Of_BaseFile(fl.FilePath, buf);
+      if (buf.Size() != 0)
+        return;
+    }
+  }
+}
+// **************** NanaZip Modification End ****************
+
 HRESULT CPanel::CopyTo(CCopyToOptions &options, const CRecordVector<UInt32> &indices,
     UStringVector *messages,
     bool &usePassword, UString &password)
@@ -144,6 +187,13 @@ HRESULT CPanel::CopyTo(CCopyToOptions &options, const CRecordVector<UInt32> &ind
     if (ci.WriteZone != (UInt32)(Int32)-1)
       options.ZoneIdMode = (NExtract::NZoneIdMode::EEnum)(int)(Int32)ci.WriteZone;
   }
+
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09.
+  if (options.ZoneBuf.Size() == 0
+      && options.ZoneIdMode != NExtract::NZoneIdMode::kNone)
+    Get_ZoneId_Stream_from_ParentFolders(options.ZoneBuf);
+  // **************** NanaZip Modification End ****************
 
   if (IsHashFolder())
   {
@@ -190,11 +240,15 @@ HRESULT CPanel::CopyTo(CCopyToOptions &options, const CRecordVector<UInt32> &ind
     extracter.Hash.MainName = extracter.Hash.FirstFileName;
   }
 
-  if (options.VirtFileSystem)
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09.
+  // VirtFileSystem -> VirtFileSystemSpec
+  if (options.VirtFileSystemSpec)
   {
-    extracter.ExtractCallbackSpec->VirtFileSystem = options.VirtFileSystem;
+    extracter.ExtractCallbackSpec->VirtFileSystem = options.VirtFileSystemSpec;
     extracter.ExtractCallbackSpec->VirtFileSystemSpec = options.VirtFileSystemSpec;
   }
+  // **************** NanaZip Modification End ****************
   extracter.ExtractCallbackSpec->ProcessAltStreams = options.includeAltStreams;
 
   if (!options.hashMethods.IsEmpty())

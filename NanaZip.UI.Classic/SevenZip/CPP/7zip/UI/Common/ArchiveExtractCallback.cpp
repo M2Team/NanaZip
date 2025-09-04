@@ -146,6 +146,17 @@ static bool FindExt2(const char *p, const UString &name)
 
 static const FChar * const k_ZoneId_StreamName = FTEXT(":Zone.Identifier");
 
+
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09 with changes.
+// Used k_ZoneId_StreamName instead of upstream
+// k_ZoneId_StreamName_With_Colon_Prefix.
+bool Is_ZoneId_StreamName(const wchar_t *s)
+{
+  return StringsAreEqualNoCase_Ascii(s, k_ZoneId_StreamName + 1);
+}
+// **************** NanaZip Modification End ****************
+
 void ReadZoneFile_Of_BaseFile(CFSTR fileName2, CByteBuffer &buf)
 {
   FString fileName = fileName2;
@@ -174,6 +185,21 @@ static bool WriteZoneFile(CFSTR fileName, const CByteBuffer &buf)
     return false;
   return file.WriteFull(buf, buf.Size());
 }
+
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09 with changes.
+// Used k_ZoneId_StreamName instead of upstream
+// k_ZoneId_StreamName_With_Colon_Prefix.
+bool WriteZoneFile_To_BaseFile(CFSTR fileName, const CByteBuffer &buf)
+{
+  FString path (fileName);
+  path += k_ZoneId_StreamName;
+  NIO::COutFile file;
+  if (!file.Create(path, true))
+    return false;
+  return file.WriteFull(buf, buf.Size());
+}
+// **************** NanaZip Modification End ****************
 
 #endif
 
