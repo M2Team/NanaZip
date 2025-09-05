@@ -18,6 +18,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.306</Version>
+    </PackageReference>
     <ProjectReference Include="$(MSBuildThisFileDirectory)K7Pal.vcxproj">
       <Project>{279F7FA5-7DDC-4635-99B0-3C7F2179DAE0}</Project>
     </ProjectReference>

@@ -23,6 +23,9 @@
     <PackageReference Include="Mile.Windows.Internal">
       <Version>1.0.3259</Version>
     </PackageReference>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.306</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="K7PalStatic.props" />
