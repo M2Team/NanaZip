@@ -61,10 +61,13 @@ must be on its own line.
 Known archive handlers (as of NanaZip 6.0 Preview 1):
 
 ```
-7z APFS APM Ar Arj AVB Base64 brotli bzip2 Cab Chm COFF Compound Cpio CramFS Dmg
-ELF Ext FAT FLV GPT gzip HFS Hxs IHex Iso lizard LP LVM lz4 lz5 Lzh lzip lzma
-lzma86 MachO MBR MsLZ Mub Nsis NTFS PE Ppmd QCOW Rar Rar5 Rpm Sparse Split
-SquashFS SWF SWFc tar TE Udf UEFIc UEFIf VDI VHD VHDX VMDK wim Xar xz Z zip zstd
+.Electron Archive (asar), .NET Single File Application, 7z, APFS, APM, Ar, Arj,
+AVB, Base64, brotli, bzip2, Cab, Chm, COFF, Compound, Cpio, CramFS, Dmg, ELF,
+Ext, FAT, FLV, GPT, gzip, HFS, Hxs, IHex, Iso, littlefs, lizard, LP, LVM, lz4,
+lz5, Lzh, lzip, lzma, lzma86, MachO, MBR, MsLZ, Mub, Nsis, NTFS, PE, Ppmd, QCOW,
+Rar, Rar5, ROMFS, Rpm, Sparse, Split, SquashFS, SWF, SWFc, tar, TE, Udf, UEFIc,
+UEFIf, UFS, VDI, VHD, VHDX, VMDK, WebAssembly (WASM), wim, Xar, xz, Z, ZealFS,
+zip, zstd
 ```
 
 Look for `REGISTER_ARC` in NanaZip.Core for the full list of handlers bundled
@@ -88,9 +91,9 @@ be loaded by NanaZip.
 Known codecs (as of NanaZip 6.0 Preview 1):
 
 ```
-7zAES AES256CBC ARM ARM64 ARMT BCJ BCJ2 BROTLI BZip2 Copy Deflate Deflate64
-Delta FLZMA2 IA64 LIZARD LZ4 LZ5 LZMA LZMA2 PPC PPMD Rar1 Rar2 Rar3 Rar5 RISCV
-SPARC Swap2 Swap4 ZSTD
+7zAES, AES256CBC, ARM, ARM64, ARMT, BCJ, BCJ2, BROTLI, BZip2, Copy, Deflate,
+Deflate64, Delta, FLZMA2, IA64, LIZARD, LZ4, LZ5, LZMA, LZMA2, PPC, PPMD, Rar1,
+Rar2, Rar3, Rar5, RISCV, SPARC, Swap2, Swap4, ZSTD
 ```
 
 Look for `REGISTER_CODEC` in NanaZip.Core for the list of codecs bundled with
