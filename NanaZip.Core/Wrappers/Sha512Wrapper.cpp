@@ -10,6 +10,8 @@
 
 #include "Sha512Wrapper.h"
 
+#include <Windows.h>
+
 #include <cstring>
 
 CSha512& CSha512::operator=(

@@ -22,7 +22,7 @@ namespace
 {
     typedef struct _K7_PAL_HASH_ALGORITHM
     {
-        LPCWSTR Identifier;
+        MO_CONSTANT_WIDE_STRING Identifier;
         BCRYPT_ALG_HANDLE Handle;
         BCRYPT_ALG_HANDLE HmacHandle;
     } K7_PAL_HASH_ALGORITHM, *PK7_PAL_HASH_ALGORITHM;
@@ -43,10 +43,10 @@ namespace
 
     typedef struct _K7_PAL_HASH_CONTEXT
     {
-        UINT32 ContextSize;
-        UINT32 HashSize;
-        UINT32 HashObjectSize;
-        PVOID HashObject;
+        MO_UINT32 ContextSize;
+        MO_UINT32 HashSize;
+        MO_UINT32 HashObjectSize;
+        MO_POINTER HashObject;
         BCRYPT_HASH_HANDLE HashHandle;
     } K7_PAL_HASH_CONTEXT, *PK7_PAL_HASH_CONTEXT;
 
@@ -74,11 +74,11 @@ namespace
     }
 }
 
-EXTERN_C HRESULT WINAPI K7PalHashCreate(
+EXTERN_C MO_RESULT MOAPI K7PalHashCreate(
     _Inout_ PK7_PAL_HASH_HANDLE HashHandle,
-    _In_ LPCWSTR AlgorithmIdentifier,
-    _In_opt_ PVOID SecretBuffer,
-    _In_ UINT32 SecretSize)
+    _In_ MO_CONSTANT_WIDE_STRING AlgorithmIdentifier,
+    _In_opt_ MO_POINTER SecretBuffer,
+    _In_ MO_UINT32 SecretSize)
 {
     PK7_PAL_HASH_ALGORITHM CurrentAlgorithm = nullptr;
     if (AlgorithmIdentifier)
@@ -96,12 +96,12 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
     }
     if (!CurrentAlgorithm)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
 
     if (!HashHandle)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
     *HashHandle = nullptr;
 
@@ -201,17 +201,17 @@ EXTERN_C HRESULT WINAPI K7PalHashCreate(
         *HashHandle = nullptr;
     }
 
-    return Result ? S_OK : E_FAIL;
+    return Result ? MO_RESULT_SUCCESS_OK : MO_RESULT_ERROR_FAIL;
 }
 
-EXTERN_C HRESULT WINAPI K7PalHashDestroy(
+EXTERN_C MO_RESULT MOAPI K7PalHashDestroy(
     _Inout_opt_ K7_PAL_HASH_HANDLE HashHandle)
 {
     PK7_PAL_HASH_CONTEXT Context =
         ::K7PalHashInternalGetContextFromHandle(HashHandle);
     if (!Context)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
 
     Context->ContextSize = 0;
@@ -234,19 +234,19 @@ EXTERN_C HRESULT WINAPI K7PalHashDestroy(
 
     ::MileFreeMemory(Context);
 
-    return S_OK;
+    return MO_RESULT_SUCCESS_OK;
 }
 
-EXTERN_C HRESULT WINAPI K7PalHashUpdate(
+EXTERN_C MO_RESULT MOAPI K7PalHashUpdate(
     _Inout_ K7_PAL_HASH_HANDLE HashHandle,
-    _In_ PVOID InputBuffer,
-    _In_ UINT32 InputSize)
+    _In_ MO_POINTER InputBuffer,
+    _In_ MO_UINT32 InputSize)
 {
     PK7_PAL_HASH_CONTEXT Context =
         ::K7PalHashInternalGetContextFromHandle(HashHandle);
     if (!Context)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
 
     bool Result = BCRYPT_SUCCESS(::BCryptHashData(
@@ -255,19 +255,19 @@ EXTERN_C HRESULT WINAPI K7PalHashUpdate(
         InputSize,
         0));
 
-    return Result ? S_OK : E_FAIL;
+    return Result ? MO_RESULT_SUCCESS_OK : MO_RESULT_ERROR_FAIL;
 }
 
-EXTERN_C HRESULT WINAPI K7PalHashFinal(
+EXTERN_C MO_RESULT MOAPI K7PalHashFinal(
     _Inout_ K7_PAL_HASH_HANDLE HashHandle,
-    _Out_ PVOID OutputBuffer,
-    _In_ ULONG OutputSize)
+    _Out_ MO_POINTER OutputBuffer,
+    _In_ MO_UINT32 OutputSize)
 {
     PK7_PAL_HASH_CONTEXT Context =
         ::K7PalHashInternalGetContextFromHandle(HashHandle);
     if (!Context)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
 
     bool Result = false;
@@ -304,36 +304,36 @@ EXTERN_C HRESULT WINAPI K7PalHashFinal(
         }
     }
 
-    return Result ? S_OK : E_FAIL;
+    return Result ? MO_RESULT_SUCCESS_OK : MO_RESULT_ERROR_FAIL;
 }
 
-EXTERN_C HRESULT WINAPI K7PalHashGetSize(
+EXTERN_C MO_RESULT MOAPI K7PalHashGetSize(
     _In_ K7_PAL_HASH_HANDLE HashHandle,
-    _Out_ PUINT32 HashSize)
+    _Out_ PMO_UINT32 HashSize)
 {
     if (!HashSize)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
 
     PK7_PAL_HASH_CONTEXT Context =
         ::K7PalHashInternalGetContextFromHandle(HashHandle);
     if (!Context)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
 
     *HashSize = Context->HashSize;
-    return S_OK;
+    return MO_RESULT_SUCCESS_OK;
 }
 
-EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
+EXTERN_C MO_RESULT MOAPI K7PalHashDuplicate(
     _In_ K7_PAL_HASH_HANDLE SourceHashHandle,
     _Out_ PK7_PAL_HASH_HANDLE DestinationHashHandle)
 {
     if (!DestinationHashHandle)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
     *DestinationHashHandle = nullptr;
 
@@ -341,7 +341,7 @@ EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
         ::K7PalHashInternalGetContextFromHandle(SourceHashHandle);
     if (!SourceContext)
     {
-        return E_INVALIDARG;
+        return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
 
     bool Result = false;
@@ -382,5 +382,5 @@ EXTERN_C HRESULT WINAPI K7PalHashDuplicate(
         *DestinationHashHandle = nullptr;
     }
 
-    return Result ? S_OK : E_FAIL;
+    return Result ? MO_RESULT_SUCCESS_OK : MO_RESULT_ERROR_FAIL;
 }
