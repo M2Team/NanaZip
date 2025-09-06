@@ -15,105 +15,11 @@ static unsigned g_NumArcs = 0;
 static unsigned g_DefaultArcIndex = 0;
 static const CArcInfo *g_Arcs[kNumArcsMax];
 
-// **************** NanaZip Modification Start ****************
-#ifndef Z7_SFX
-static PCZZSTR GetMultiStringA(PCSTR Name)
-{
-    PZZSTR Result = nullptr;
-    DWORD Length = 0;
-    LSTATUS Status;
-
-    ::RegGetValueA(
-        HKEY_LOCAL_MACHINE,
-        "Software\\NanaZip\\Policies",
-        Name,
-        RRF_RT_REG_MULTI_SZ,
-        nullptr,
-        nullptr,
-        &Length);
-    if (Length == 0)
-    {
-        return nullptr;
-    }
-
-    Result = static_cast<PZZSTR>(std::calloc(Length, sizeof(CHAR)));
-    if (!Result)
-    {
-        return nullptr;
-    }
-
-    Status = ::RegGetValueA(
-        HKEY_LOCAL_MACHINE,
-        "Software\\NanaZip\\Policies",
-        Name,
-        RRF_RT_REG_MULTI_SZ,
-        nullptr,
-        reinterpret_cast<PVOID>(Result),
-        &Length);
-    if (Status != ERROR_SUCCESS)
-    {
-        std::free(Result);
-        return nullptr;
-    }
-
-    return Result;
-}
-
-static bool MultiStringFindStringA(PCZZSTR Haystack, PCSTR Needle)
-{
-    PCSTR Current;
-
-    if (!Haystack || !Needle)
-    {
-        return false;
-    }
-
-    for (Current = Haystack;
-        *Current;
-        Current = Current + std::strlen(Current) + 1)
-    {
-        if (!std::strcmp(Current, Needle))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-static PCZZSTR AllowedHandlers()
-{
-    static PCZZSTR CachedResult = ::GetMultiStringA("AllowedHandlers");
-    return CachedResult;
-}
-
-static PCZZSTR BlockedHandlers()
-{
-    static PCZZSTR CachedResult = ::GetMultiStringA("BlockedHandlers");
-    return CachedResult;
-}
-#endif
-// **************** NanaZip Modification End ****************
-
 void RegisterArc(const CArcInfo *arcInfo) throw()
 {
   if (g_NumArcs < kNumArcsMax)
   {
     const char *p = arcInfo->Name;
-    // **************** NanaZip Modification Start ****************
-#ifndef Z7_SFX
-    if (AllowedHandlers() &&
-        !::MultiStringFindStringA(AllowedHandlers(), p))
-    {
-        return;
-    }
-    if (BlockedHandlers() &&
-        ::MultiStringFindStringA(BlockedHandlers(), p))
-    {
-        return;
-    }
-#endif
-    // **************** NanaZip Modification End ****************
     if (p[0] == '7' && p[1] == 'z' && p[2] == 0)
       g_DefaultArcIndex = g_NumArcs;
     g_Arcs[g_NumArcs++] = arcInfo;
@@ -166,7 +72,7 @@ STDAPI CreateArchiver(const GUID *clsid, const GUID *iid, void **outObject)
     const int formatIndex = FindFormatCalssId(clsid);
     if (formatIndex < 0)
       return CLASS_E_CLASSNOTAVAILABLE;
-
+    
     const CArcInfo &arc = *g_Arcs[formatIndex];
     if (needIn)
     {

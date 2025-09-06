@@ -45,6 +45,10 @@ EXPORT_CODECS
 
 // **************** NanaZip Modification Start ****************
 #include <Mile.Helpers.Base.h>
+
+#ifndef _SFX
+#include "Restrictions.h"
+#endif
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -273,6 +277,28 @@ static HRESULT GetMethodBoolProp(Func_GetMethodProperty getMethodProperty, UInt3
   return S_OK;
 }
 
+// **************** NanaZip Modification Start ****************
+static HRESULT GetMethodStringProp(
+    Func_GetMethodProperty GetMethodProperty,
+    UInt32 Index,
+    PROPID PropertyId,
+    UString &Result)
+{
+  NCOM::CPropVariant Property;
+  Result.Empty();
+  RINOK(GetMethodProperty(Index, PropertyId, &Property))
+  if (Property.vt == VT_BSTR)
+  {
+    Result.SetFromBstr(Property.bstrVal);
+  }
+  else if (Property.vt != VT_EMPTY)
+  {
+    return E_FAIL;
+  }
+  return S_OK;
+}
+// **************** NanaZip Modification End ****************
+
 
 #define MY_GET_FUNC(dest, type, func)  *(void **)(&dest) = (func);
 // #define MY_GET_FUNC(dest, type, func)  dest = (type)(func);
@@ -301,6 +327,22 @@ HRESULT CCodecs::LoadCodecs()
       CDllCodecInfo info;
       info.LibIndex = Libs.Size() - 1;
       info.CodecIndex = i;
+
+      // **************** NanaZip Modification Start ****************
+#ifndef _SFX
+      UString CodecNameWide;
+      AString CodecName;
+      RINOK(GetMethodStringProp(lib.GetMethodProperty, i, NMethodPropID::kName, CodecNameWide))
+
+      CodecName.SetFromWStr_if_Ascii(CodecNameWide);
+
+      if (!::NanaZipIsCodecAllowedA(CodecName))
+      {
+        continue;
+      }
+#endif
+      // **************** NanaZip Modification End ****************
+
       RINOK(GetCoderClass(lib.GetMethodProperty, i, NMethodPropID::kEncoder, info.Encoder, info.EncoderIsAssigned));
       RINOK(GetCoderClass(lib.GetMethodProperty, i, NMethodPropID::kDecoder, info.Decoder, info.DecoderIsAssigned));
       RINOK(GetMethodBoolProp(lib.GetMethodProperty, i, NMethodPropID::kIsFilter, info.IsFilter, info.IsFilter_Assigned));
@@ -445,6 +487,18 @@ HRESULT CCodecs::LoadFormats()
     item.FormatIndex = i;
 
     RINOK(GetProp_String(getProp, getProp2, i, NArchive::NHandlerPropID::kName, item.Name));
+
+    // **************** NanaZip Modification Start ****************
+#ifndef _SFX
+    AString ItemName;
+    ItemName.SetFromWStr_if_Ascii(item.Name);
+
+    if (!::NanaZipIsHandlerAllowedA(ItemName))
+    {
+      continue;
+    }
+#endif
+    // **************** NanaZip Modification End ****************
 
     {
       NCOM::CPropVariant prop;
@@ -760,6 +814,13 @@ HRESULT CCodecs::Load()
     }
 
     #ifndef _SFX
+
+    // **************** NanaZip Modification Start ****************
+    if (!::NanaZipIsHandlerAllowedA(arc.Name))
+    {
+      continue;
+    }
+    // **************** NanaZip Modification End ****************
 
     item.CreateOutArchive = arc.CreateOutArchive;
     item.UpdateEnabled = (arc.CreateOutArchive != NULL);
