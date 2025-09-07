@@ -29,4 +29,8 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     _In_opt_ LPCWSTR Title,
     _In_opt_ LPCWSTR Text);
 
+EXTERN_C INT WINAPI K7ModernShowShareDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_ std::vector<std::wstring> const& SharingFilePaths);
+
 #endif // !NANAZIP_MODERN_EXPERIENCE

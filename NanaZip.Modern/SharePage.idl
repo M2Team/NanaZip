@@ -1,0 +1,7 @@
+﻿namespace NanaZip.Modern
+{
+    [default_interface]
+    runtimeclass SharePage : Windows.UI.Xaml.Controls.Page
+    {
+    }
+}
