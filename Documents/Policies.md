@@ -45,13 +45,61 @@ blocked. BlockedHandlers takes precedence over AllowedHandlers; i.e. handlers
 specified in BlockedHandlers will still be blocked even if they're specified in
 AllowedHandlers.
 
-Look for `REGISTER_ARC` in NanaZip.Core for the list of handlers bundled with
-NanaZip.
+Note that when editing a `REG_MULTI_SZ` value in Registry Editor, each entry
+must be on its own line.
 
 - Name: `AllowedHandlers`
 - Type: `REG_MULTI_SZ`
 - Value: List of allowed archive handlers (case-sensitive).
 
+<!-- -->
+
 - Name: `BlockedHandlers`
 - Type: `REG_MULTI_SZ`
 - Value: List of blocked archive handlers (case-sensitive).
+
+Known archive handlers (as of NanaZip 6.0 Preview 1):
+
+```
+.Electron Archive (asar), .NET Single File Application, 7z, APFS, APM, Ar, Arj,
+AVB, Base64, brotli, bzip2, Cab, Chm, COFF, Compound, Cpio, CramFS, Dmg, ELF,
+Ext, FAT, FLV, GPT, gzip, HFS, Hxs, IHex, Iso, littlefs, lizard, LP, LVM, lz4,
+lz5, Lzh, lzip, lzma, lzma86, MachO, MBR, MsLZ, Mub, Nsis, NTFS, PE, Ppmd, QCOW,
+Rar, Rar5, ROMFS, Rpm, Sparse, Split, SquashFS, SWF, SWFc, tar, TE, Udf, UEFIc,
+UEFIf, UFS, VDI, VHD, VHDX, VMDK, WebAssembly (WASM), wim, Xar, xz, Z, ZealFS,
+zip, zstd
+```
+
+Look for `REGISTER_ARC` in NanaZip.Core for the full list of handlers bundled
+with NanaZip.
+
+### Codec restrictions
+
+Similarly to archive handler restrictions, these values control which codecs can
+be loaded by NanaZip.
+
+**Note:** Some single-codec archive formats (e.g. Brotli) may call their
+associated codecs without respecting codec restrictions. If you want to fully
+block a codec from being used, make sure that its associated formats are also
+blocked.
+
+- Name: `AllowedCodecs`
+- Type: `REG_MULTI_SZ`
+- Value: List of allowed codecs (case-sensitive).
+
+<!-- -->
+
+- Name: `BlockedCodecs`
+- Type: `REG_MULTI_SZ`
+- Value: List of blocked codecs (case-sensitive).
+
+Known codecs (as of NanaZip 6.0 Preview 1):
+
+```
+7zAES, AES256CBC, ARM, ARM64, ARMT, BCJ, BCJ2, BROTLI, BZip2, Copy, Deflate,
+Deflate64, Delta, FLZMA2, IA64, LIZARD, LZ4, LZ5, LZMA, LZMA2, PPC, PPMD, Rar1,
+Rar2, Rar3, Rar5, RISCV, SPARC, Swap2, Swap4, ZSTD
+```
+
+Look for `REGISTER_CODEC` in NanaZip.Core for the list of codecs bundled with
+NanaZip.
