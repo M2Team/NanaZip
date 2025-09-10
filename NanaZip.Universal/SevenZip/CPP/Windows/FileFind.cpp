@@ -731,7 +731,7 @@ bool CFileInfo::Find(CFSTR path, bool followLink)
             bool isOK = false;
             if (finder.FindFirst(s, *this))
             {
-              if (Name == FTEXT("."))
+              if (Name.IsEqualTo("."))
               {
                 Name = path + prefixSize;
                 return true;
@@ -769,6 +769,13 @@ bool CFileInfo::Find(CFSTR path, bool followLink)
 
   // return FollowReparse(path, IsDir());
   return Fill_From_ByHandleFileInfo(path);
+/*
+  // Fill_From_ByHandleFileInfo returns false (with Access Denied error),
+  // if there is reparse link file (not directory reparse item).
+  if (Fill_From_ByHandleFileInfo(path))
+    return true;
+  return HasReparsePoint();
+*/
 }
 
 bool CFileInfoBase::Fill_From_ByHandleFileInfo(CFSTR path)

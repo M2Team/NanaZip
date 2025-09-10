@@ -59,7 +59,9 @@
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
+    <None Include="SevenZip\ASM\x86\Sort.asm" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
+    <None Include="SevenZip\C\Sort.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
@@ -268,7 +270,6 @@
     <ClCompile Include="SevenZip\C\Alloc.c" />
     <ClCompile Include="SevenZip\C\CpuArch.c" />
     <ClCompile Include="SevenZip\C\DllSecur.c" />
-    <ClCompile Include="SevenZip\C\Sort.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
   </ItemGroup>
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
@@ -279,6 +280,18 @@
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\7zCrcOpt.c">
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSortHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
+      <MASM Include="SevenZip\ASM\x86\Sort.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSortHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
+      <ClCompile Include="SevenZip\C\Sort.c">
         <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>

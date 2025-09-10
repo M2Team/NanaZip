@@ -94,6 +94,7 @@ struct CUpdateOptions
 
   bool DeleteAfterCompressing;
   bool SetArcMTime;
+  bool RenameMode;
 
   CBoolPair NtSecurity;
   CBoolPair AltStreams;
@@ -139,6 +140,7 @@ struct CUpdateOptions
     
     DeleteAfterCompressing(false),
     SetArcMTime(false),
+    RenameMode(false),
 
     ArcNameMode(k_ArcNameMode_Smart),
     PathMode(NWildcard::k_RelatPath)
