@@ -84,6 +84,10 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
         if (v < 1) {
           _Level = 1;
         } else if ((Int32)v > ZSTD_maxCLevel()) {
+          if ((Int32)v > Z7_ZSTD_FAST_LEV_INC && _Level != Z7_ZSTD_ULTIMATE_LEV) { // special case (inverter for fast lever)
+            v -= Z7_ZSTD_FAST_LEV_INC;
+            goto fastLevel;
+          }
         #if Z7_ZSTD_ADVMAX_ALLOWED // 64-bit only
           _Max = (_Level == Z7_ZSTD_ULTIMATE_LEV); // special case (level from GUI)
         #endif
@@ -97,6 +101,7 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
         break;
       }
     case NCoderPropID::kFast:
+     fastLevel:
       if (!_Max)
       {
         /* like --fast in zstd cli program */
@@ -110,9 +115,9 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
 
         /**
          * zstd fast levels:
-         * _Fast  => 1..ZSTD_minCLevel()  (_Level => _Fast + 32)
+         * _Fast  => 1..ZSTD_minCLevel()  (_Level => _Fast + Z7_ZSTD_FAST_LEV_INC)
          */
-        _props._level = static_cast < Byte > (_Fast + 32);
+        _props._level = static_cast < Byte > (_Fast + Z7_ZSTD_FAST_LEV_INC);
 
         /* negative levels are the fast ones */
         _Level = _Fast * -1;
