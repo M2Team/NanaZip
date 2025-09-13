@@ -28,7 +28,7 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
   <PropertyGroup>
-    <RequiredBundles>Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core</RequiredBundles>
+    <RequiredBundles>Microsoft.VisualStudio.ComponentGroup.MSIX.Packaging</RequiredBundles>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
