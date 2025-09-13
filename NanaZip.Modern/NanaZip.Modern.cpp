@@ -34,7 +34,7 @@ namespace
     HWND K7ModernCreateXamlDialog(
         _In_opt_ HWND ParentWindowHandle)
     {
-        return ::CreateWindowExW(
+        HWND WindowHandle = ::CreateWindowExW(
             WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
             L"Mile.Xaml.ContentWindow",
             nullptr,
@@ -47,6 +47,49 @@ namespace
             nullptr,
             nullptr,
             nullptr);
+        ::SetWindowSubclass(
+            WindowHandle,
+            [](
+                _In_ HWND hWnd,
+                _In_ UINT uMsg,
+                _In_ WPARAM wParam,
+                _In_ LPARAM lParam,
+                _In_ UINT_PTR uIdSubclass,
+                _In_ DWORD_PTR dwRefData) -> LRESULT
+            {
+                UNREFERENCED_PARAMETER(uIdSubclass);
+                UNREFERENCED_PARAMETER(dwRefData);
+
+                switch (uMsg)
+                {
+                case WM_CLOSE:
+                {
+                    HWND ParentWindow = ::GetWindow(hWnd, GW_OWNER);
+                    if (ParentWindow)
+                    {
+                        ::EnableWindow(ParentWindow, TRUE);
+                    }
+                    break;
+                }
+                case WM_DESTROY:
+                {
+                    winrt::DesktopWindowXamlSource XamlSource = nullptr;
+                    winrt::copy_from_abi(
+                        XamlSource,
+                        ::GetPropW(hWnd, L"XamlWindowSource"));
+                    XamlSource.Close();
+                }
+                }
+
+                return ::DefSubclassProc(
+                    hWnd,
+                    uMsg,
+                    wParam,
+                    lParam);
+            },
+            0,
+            0);
+        return WindowHandle;
     }
 
     int K7ModernShowXamlWindow(
@@ -153,13 +196,6 @@ namespace
             Content,
             ParentWindowHandle);
 
-        if (ParentWindowHandle)
-        {
-            ::EnableWindow(ParentWindowHandle, TRUE);
-            ::SetForegroundWindow(ParentWindowHandle);
-            ::SetActiveWindow(ParentWindowHandle);
-        }
-
         return Result;
     }
 }
@@ -229,40 +265,6 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     {
         return -1;
     }
-
-    ::SetWindowSubclass(
-        WindowHandle,
-        [](
-            _In_ HWND hWnd,
-            _In_ UINT uMsg,
-            _In_ WPARAM wParam,
-            _In_ LPARAM lParam,
-            _In_ UINT_PTR uIdSubclass,
-            _In_ DWORD_PTR dwRefData) -> LRESULT
-    {
-        UNREFERENCED_PARAMETER(uIdSubclass);
-        UNREFERENCED_PARAMETER(dwRefData);
-
-        switch (uMsg)
-        {
-        case WM_DESTROY:
-        {
-            winrt::DesktopWindowXamlSource XamlSource = nullptr;
-            winrt::copy_from_abi(
-                XamlSource,
-                ::GetPropW(hWnd, L"XamlWindowSource"));
-            XamlSource.Close();
-        }
-        }
-
-        return ::DefSubclassProc(
-            hWnd,
-            uMsg,
-            wParam,
-            lParam);
-    },
-        0,
-        0);
 
     using Interface =
         winrt::NanaZip::Modern::InformationPage;
