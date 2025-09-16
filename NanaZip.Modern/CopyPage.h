@@ -27,6 +27,10 @@ namespace winrt::NanaZip::Modern::implementation
             PathText,
             winrt::hstring);
 
+        DEPENDENCY_PROPERTY_HEADER(
+            InfoText,
+            winrt::hstring);
+
         Mile::WinRT::Event<
             winrt::Windows::Foundation::TypedEventHandler<
                 winrt::NanaZip::Modern::CopyPage,
@@ -37,11 +41,20 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::NanaZip::Modern::CopyPage,
             winrt::Windows::Foundation::IInspectable>> CancelButtonClicked;
 
+        Mile::WinRT::Event<
+            winrt::Windows::Foundation::TypedEventHandler<
+            winrt::NanaZip::Modern::CopyPage,
+            winrt::Windows::Foundation::IInspectable>> PickerButtonClicked;
+
         void OkButtonClickedHandler(
             winrt::Windows::Foundation::IInspectable const& sender,
             winrt::Windows::UI::Xaml::RoutedEventArgs const& args);
 
         void CancelButtonClickedHandler(
+            winrt::Windows::Foundation::IInspectable const& sender,
+            winrt::Windows::UI::Xaml::RoutedEventArgs const& args);
+
+        void PickerButtonClickedHandler(
             winrt::Windows::Foundation::IInspectable const& sender,
             winrt::Windows::UI::Xaml::RoutedEventArgs const& args);
     };

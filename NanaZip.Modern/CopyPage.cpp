@@ -28,6 +28,13 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::NanaZip::Modern::CopyPage,
         L"");
 
+    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
+        InfoText,
+        winrt::hstring,
+        winrt::NanaZip::Modern::implementation::CopyPage,
+        winrt::NanaZip::Modern::CopyPage,
+        L"");
+
     void CopyPage::OkButtonClickedHandler(
         winrt::Windows::Foundation::IInspectable const& sender,
         winrt::Windows::UI::Xaml::RoutedEventArgs const& args)
@@ -42,5 +49,13 @@ namespace winrt::NanaZip::Modern::implementation
     {
         UNREFERENCED_PARAMETER(sender);
         this->CancelButtonClicked(*this, args);
+    }
+
+    void CopyPage::PickerButtonClickedHandler(
+        winrt::Windows::Foundation::IInspectable const& sender,
+        winrt::Windows::UI::Xaml::RoutedEventArgs const& args)
+    {
+        UNREFERENCED_PARAMETER(sender);
+        this->PickerButtonClicked(*this, args);
     }
 }

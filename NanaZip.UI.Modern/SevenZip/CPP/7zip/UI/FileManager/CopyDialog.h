@@ -18,7 +18,7 @@ class CCopyDialog /* : public NWindows::NControl::CModalDialog */
   // virtual void OnOK();
   // virtual bool OnInit();
   // virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
-  // void OnButtonSetPath();
+  void OnButtonSetPath();
   // bool OnButtonClicked(int buttonID, HWND buttonHWND);
 
   winrt::NanaZip::Modern::CopyPage m_CopyPage = nullptr;

@@ -58,7 +58,14 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
     winrt::hstring(
       Static.Ptr(),
       Static.Len()));
-  m_CopyPage.PathText(Value.Ptr());
+  m_CopyPage.PathText(
+    winrt::hstring(
+      Value.Ptr(),
+      Value.Len()));
+  m_CopyPage.InfoText(
+    winrt::hstring(
+      Info.Ptr(),
+      Info.Len()));
 
   m_CopyPage.OkButtonClicked(
     [&](auto&& sender, auto&& args)
@@ -66,6 +73,7 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
       UNREFERENCED_PARAMETER(sender);
       UNREFERENCED_PARAMETER(args);
 
+      Value = UString(m_CopyPage.PathText().c_str());
       Result = IDOK;
       ::SendMessageW(this->m_IslandsHwnd, WM_CLOSE, 0, 0);
     });
@@ -80,10 +88,18 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
       ::SendMessageW(this->m_IslandsHwnd, WM_CLOSE, 0, 0);
     });
 
+  m_CopyPage.PickerButtonClicked(
+    [&](auto&& sender, auto&& args)
+    {
+      UNREFERENCED_PARAMETER(sender);
+      UNREFERENCED_PARAMETER(args);
+      this->OnButtonSetPath();
+    });
+
   m_IslandsHwnd = CreateWindowEx(
       WS_EX_NOREDIRECTIONBITMAP,
       L"Mile.Xaml.ContentWindow",
-      nullptr,
+      Title.Ptr(),
       WS_CAPTION | WS_SYSMENU,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,
       parentWindow,
@@ -145,8 +161,6 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
       0,
       0);
 
-  ::EnableWindow(parentWindow, FALSE);
-
   UINT DpiValue = ::GetDpiForWindow(m_IslandsHwnd);
 
   int ScaledWidth = ::MulDiv(500, DpiValue, USER_DEFAULT_SCREEN_DPI);
@@ -188,27 +202,33 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
   ::ShowWindow(m_IslandsHwnd, SW_SHOW);
   ::UpdateWindow(m_IslandsHwnd);
 
+  if (parentWindow)
+  {
+    ::EnableWindow(parentWindow, FALSE);
+  }
   ::MileXamlContentWindowDefaultMessageLoop();
 
   return Result;
 }
 
-/*
-
 void CCopyDialog::OnButtonSetPath()
 {
   UString currentPath;
-  _path.GetText(currentPath);
+  // _path.GetText(currentPath);
+  currentPath = UString(m_CopyPage.PathText().c_str());
 
   const UString title = LangString(IDS_SET_FOLDER);
 
   UString resultPath;
-  if (!MyBrowseForFolder(*this, title, currentPath, resultPath))
+  if (!MyBrowseForFolder(m_IslandsHwnd, title, currentPath, resultPath))
     return;
   NFile::NName::NormalizeDirPathPrefix(resultPath);
-  _path.SetCurSel(-1);
-  _path.SetText(resultPath);
+  // _path.SetCurSel(-1);
+  // _path.SetText(resultPath);
+  m_CopyPage.PathText(resultPath.Ptr());
 }
+
+/*
 
 void CCopyDialog::OnOK()
 {

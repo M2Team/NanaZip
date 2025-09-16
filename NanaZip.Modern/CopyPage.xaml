@@ -20,7 +20,7 @@
       Text="{x:Bind TitleText, Mode=OneWay}" />
     <StackPanel Grid.Row="1" Padding="16,8,16,16">
       <TextBlock Margin="0,0,0,4" Text="{x:Bind PathLabelText, Mode=OneWay}" />
-      <Grid>
+      <Grid Margin="0,0,0,4">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="Auto" />
@@ -36,9 +36,11 @@
         <Button
           Grid.Column="1"
           Padding="8"
+          Click="PickerButtonClickedHandler"
           Content="&#xE712;"
           FontFamily="{ThemeResource SymbolThemeFontFamily}" />
       </Grid>
+      <TextBlock Text="{x:Bind InfoText, Mode=OneWay}" />
     </StackPanel>
     <Grid
       Grid.Row="2"
