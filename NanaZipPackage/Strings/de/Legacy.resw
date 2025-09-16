@@ -1297,6 +1297,6 @@ Sind Sie sicher, dass das Archiv dementsprechend aufgesplittet werden soll?</val
     <value>Integration</value>
   </data>
   <data name="Resource12201" xml:space="preserve">
-    <value>Windowseinstellungen/Standard-Apps öffnen, um Dateien mit NanaZip zu verknüpfen</value>
+    <value>Windows-Einstellungen öffnen, um Dateien mit NanaZip zu verknüpfen</value>
   </data>
 </root>
