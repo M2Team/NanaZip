@@ -208,7 +208,7 @@ void Correct_FsPath(bool absIsAllowed, bool keepAndReplaceEmptyPrefixes, UString
       if (parts.Size() > 1 && parts[1].IsEmpty())
       {
         i = 2;
-        if (parts.Size() > 2 && parts[2] == L"?")
+        if (parts.Size() > 2 && parts[2].IsEqualTo("?"))
         {
           i = 3;
           if (parts.Size() > 3 && NWindows::NFile::NName::IsDrivePath2(parts[3]))

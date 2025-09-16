@@ -569,7 +569,7 @@ void CContextMenuInfo::Save() const
   Key_Set_UInt32(key, kWriteZoneId, WriteZone);
 
   // **************** NanaZip Modification Start ****************
-  Key_Set_UInt32(key, kExtractOnOpen, ExtractOnOpen);
+  Key_Set_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
   // **************** NanaZip Modification End ****************
 
   if (Flags_Def)
@@ -588,6 +588,11 @@ void CContextMenuInfo::Load()
   ElimDup.Def = false;
 
   WriteZone = (UInt32)(Int32)-1;
+
+  // **************** NanaZip Modification Start ****************
+  ExtractOnOpen.Val = false;
+  ExtractOnOpen.Def = false;
+  // **************** NanaZip Modification End ****************
 
   Flags = (UInt32)(Int32)-1;
   Flags_Def = false;
@@ -611,9 +616,11 @@ void CContextMenuInfo::Load()
 
   // **************** NanaZip Modification Start ****************
   if (WriteZone == (UInt32)(Int32)-1)
+  {
     Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+  }
 
-  Key_Get_UInt32(key, kExtractOnOpen, ExtractOnOpen);
+  Key_Get_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
   // **************** NanaZip Modification End ****************
 
   Flags_Def = (key.GetValue_IfOk(kContextMenu, Flags) == ERROR_SUCCESS);

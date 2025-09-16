@@ -136,6 +136,9 @@ namespace NCoderPropID
     kAffinity,          // VT_UI8
     kBranchOffset,      // VT_UI4
     kHashBits,          // VT_UI4
+    kNumThreadGroups,   // VT_UI4
+    kThreadGroup,       // VT_UI4
+    kAffinityInGroup,   // VT_UI8
     /*
     // kHash3Bits,          // VT_UI4
     // kHash2Bits,          // VT_UI4
@@ -185,6 +188,9 @@ namespace NCoderPropID
 }
 
 // **************** 7-Zip ZS Modification Start ****************
+/* level inverter used to wrap to/from fast levels */
+#define Z7_ZSTD_FAST_LEV_INC  32
+
 /* artificial level used to specify max possible level (for ZSTD advanced max compression, equivalent of --max) */
 #define Z7_ZSTD_ULTIMATE_LEV  255
 

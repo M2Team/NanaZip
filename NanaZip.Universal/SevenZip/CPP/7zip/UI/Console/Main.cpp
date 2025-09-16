@@ -901,7 +901,39 @@ int Main2(
     // *g_StdStream << kVersionString;
     *g_StdStream <<
       "NanaZip" PROG_POSTFIX_2 " "
-      MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")";
+      MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")\n\n";
+
+    CCodecs *Codecs = new CCodecs;
+    HRESULT Result = Codecs->Load();
+    if (Result != S_OK)
+    {
+        return 0;
+    }
+
+    CObjectVector<CCodecInfoUser> CodecInfo;
+    Codecs->Get_CodecsInfoUser_Vector(CodecInfo);
+
+    *g_StdStream << "Loaded formats: ";
+    for (unsigned int i = 0; i < Codecs->Formats.Size(); i++)
+    {
+        if (i > 0)
+        {
+            *g_StdStream << ", ";
+        }
+        *g_StdStream << Codecs->Formats[i].Name;
+    }
+    *g_StdStream << "\n";
+
+    *g_StdStream << "Loaded codecs: ";
+    for (unsigned int i = 0; i < CodecInfo.Size(); i++)
+    {
+        if (i > 0)
+        {
+            *g_StdStream << ", ";
+        }
+        *g_StdStream << CodecInfo[i].Name;
+    }
+    *g_StdStream << "\n";
     // **************** NanaZip Modification End ****************
     return 0;
   }
@@ -934,9 +966,12 @@ int Main2(
 
   if (options.EnableHeaders)
   {
-    ShowCopyrightAndHelp(g_StdStream, false);
-    if (!parser.Parse1Log.IsEmpty())
-      *g_StdStream << parser.Parse1Log;
+    if (g_StdStream)
+    {
+      ShowCopyrightAndHelp(g_StdStream, false);
+      if (!parser.Parse1Log.IsEmpty())
+        *g_StdStream << parser.Parse1Log;
+    }
   }
 
   parser.Parse2(options);

@@ -59,6 +59,10 @@ class CAgentFolder:
   public IArchiveFolderInternal,
   public IInArchiveGetStream,
   public IFolderSetZoneIdMode,
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09, adapted to NanaZip.
+  public IFolderSetZoneIdFile,
+  // **************** NanaZip Modification End ****************
 #ifdef NEW_FOLDER_INTERFACE
   public IFolderOperations,
   public IFolderSetFlatMode,
@@ -79,6 +83,10 @@ public:
     MY_QUERYINTERFACE_ENTRY(IArchiveFolderInternal)
     MY_QUERYINTERFACE_ENTRY(IInArchiveGetStream)
     MY_QUERYINTERFACE_ENTRY(IFolderSetZoneIdMode)
+    // **************** NanaZip Modification Start ****************
+    // Backported from 24.09, adapted to NanaZip.
+    MY_QUERYINTERFACE_ENTRY(IFolderSetZoneIdFile)
+    // **************** NanaZip Modification End ****************
   #ifdef NEW_FOLDER_INTERFACE
     MY_QUERYINTERFACE_ENTRY(IFolderOperations)
     MY_QUERYINTERFACE_ENTRY(IFolderSetFlatMode)
@@ -93,6 +101,10 @@ public:
       bool includeAltStreams, bool includeFolderSubItemsInFlatMode, CUIntVector &realIndices) const;
 
   INTERFACE_IFolderSetZoneIdMode(;)
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09, adapted to NanaZip.
+  INTERFACE_IFolderSetZoneIdFile(;)
+  // **************** NanaZip Modification End ****************
 
   INTERFACE_FolderFolder(;)
   INTERFACE_FolderAltStreams(;)
@@ -171,6 +183,10 @@ public:
   bool _loadAltStreams; // in Flat mode
   // Int32 _replaceAltStreamCharsMode;
   NExtract::NZoneIdMode::EEnum _zoneMode;
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09.
+  CByteBuffer _zoneBuf;
+  // **************** NanaZip Modification End ****************
 };
 
 class CAgent:

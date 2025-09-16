@@ -34,6 +34,8 @@
 
 #ifndef _SFX
 
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09.
 class CGrowBuf
 {
   Byte *_items;
@@ -42,12 +44,24 @@ class CGrowBuf
   CLASS_NO_COPY(CGrowBuf);
 
 public:
+  void Free()
+  {
+    MyFree(_items);
+    _items = NULL;
+    _size = 0;
+  }
+
+  // newSize >= keepSize
   bool ReAlloc_KeepData(size_t newSize, size_t keepSize)
   {
-    void *buf = MyAlloc(newSize);
-    if (!buf)
-      return false;
-    if (keepSize != 0)
+    void *buf = NULL;
+    if (newSize)
+    {
+      buf = MyAlloc(newSize);
+      if (!buf)
+        return false;
+    }
+    if (keepSize)
       memcpy(buf, _items, keepSize);
     MyFree(_items);
     _items = (Byte *)buf;
@@ -55,31 +69,37 @@ public:
     return true;
   }
 
-  CGrowBuf(): _items(0), _size(0) {}
+  CGrowBuf(): _items(NULL), _size(0) {}
   ~CGrowBuf() { MyFree(_items); }
 
   operator Byte *() { return _items; }
   operator const Byte *() const { return _items; }
   size_t Size() const { return _size; }
 };
+// **************** NanaZip Modification End ****************
 
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09.
 struct CVirtFile
 {
   CGrowBuf Data;
-  
-  UInt64 Size; // real size
-  UInt64 ExpectedSize; // the size from props request. 0 if unknown
 
-  UString Name;
+  UInt64 ExpectedSize; // size from props request. 0 if unknown
+  size_t WrittenSize;  // size of written data in (Data) buffer
+                       //   use (WrittenSize) only if (CVirtFileSystem::_newVirtFileStream_IsReadyToWrite == false)
+  UString BaseName;    // original name of file inside archive,
+                       // It's not path. So any path separators
+                       // should be treated as part of name (or as incorrect chars)
+  UString AltStreamName;
 
-  bool CTimeDefined;
-  bool ATimeDefined;
-  bool MTimeDefined;
-  bool AttribDefined;
-  
-  bool IsDir;
+  bool CTime_Defined;
+  bool ATime_Defined;
+  bool MTime_Defined;
+  bool Attrib_Defined;
+
+  // bool IsDir;
   bool IsAltStream;
-  
+  bool ColonWasUsed;
   DWORD Attrib;
 
   FILETIME CTime;
@@ -87,85 +107,94 @@ struct CVirtFile
   FILETIME MTime;
 
   CVirtFile():
-    CTimeDefined(false),
-    ATimeDefined(false),
-    MTimeDefined(false),
-    AttribDefined(false),
-    IsDir(false),
-    IsAltStream(false) {}
+    CTime_Defined(false),
+    ATime_Defined(false),
+    MTime_Defined(false),
+    Attrib_Defined(false),
+    // IsDir(false),
+    IsAltStream(false),
+    ColonWasUsed(false)
+    {}
 };
+// **************** NanaZip Modification End ****************
+
+
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09.
+/*
+  We use CVirtFileSystem only for single file extraction:
+  It supports the following cases and names:
+     - "fileName" : single file
+     - "fileName" item (main base file) and additional "fileName:altStream" items
+     - "altStream" : single item without "fileName:" prefix.
+  If file is flushed to disk, it uses Get_Correct_FsFile_Name(name).
+*/
 
 class CVirtFileSystem:
   public ISequentialOutStream,
   public CMyUnknownImp
 {
-  UInt64 _totalAllocSize;
-
-  size_t _pos;
   unsigned _numFlushed;
-  bool _fileIsOpen;
-  bool _fileMode;
-  COutFileStream *_outFileStreamSpec;
-  CMyComPtr<ISequentialOutStream> _outFileStream;
+public:
+  bool IsAltStreamFile; // in:
+      // = true,  if extracting file is alt stream without "fileName:" prefix.
+      // = false, if extracting file is normal file, but additional
+      //          alt streams "fileName:altStream" items are possible.
+private:
+  bool _newVirtFileStream_IsReadyToWrite;    // it can non real file (if can't open alt stream)
+  bool _needWriteToRealFile;  // we need real writing to open file.
+  bool _wasSwitchedToFsMode;
+  bool _altStream_NeedRestore_Attrib_bool;
+  DWORD _altStream_NeedRestore_AttribVal;
+
+  CMyComPtr2<ISequentialOutStream, COutFileStream> _outFileStream;
 public:
   CObjectVector<CVirtFile> Files;
-  UInt64 MaxTotalAllocSize;
-  FString DirPrefix;
- 
-  CVirtFile &AddNewFile()
+  size_t MaxTotalAllocSize; // remain size, including Files.Back()
+  FString DirPrefix; // files will be flushed to this FS directory.
+  UString FileName; // name of file that will be extracted.
+                    // it can be name of alt stream without "fileName:" prefix, if (IsAltStreamFile == trye).
+                    // we use that name to detect altStream part in "FileName:altStream".
+  CByteBuffer ZoneBuf;
+  int Index_of_MainExtractedFile_in_Files; // out: index in Files. == -1, if expected file was not extracted
+  int Index_of_ZoneBuf_AltStream_in_Files; // out: index in Files. == -1, if no zonbuf alt stream
+
+
+  CVirtFileSystem()
   {
-    if (!Files.IsEmpty())
-    {
-      MaxTotalAllocSize -= Files.Back().Data.Size();
-    }
-    return Files.AddNew();
+    _numFlushed = 0;
+    IsAltStreamFile = false;
+    _newVirtFileStream_IsReadyToWrite = false;
+    _needWriteToRealFile = false;
+    _wasSwitchedToFsMode = false;
+    _altStream_NeedRestore_Attrib_bool = false;
+    MaxTotalAllocSize = (size_t)0 - 1;
+    Index_of_MainExtractedFile_in_Files = -1;
+    Index_of_ZoneBuf_AltStream_in_Files = -1;
   }
+
+  bool WasStreamFlushedToFS() const { return _wasSwitchedToFsMode; }
+
   HRESULT CloseMemFile()
   {
-    if (_fileMode)
-    {
-      return FlushToDisk(true);
-    }
+    if (_wasSwitchedToFsMode)
+      return FlushToDisk(true); // closeLast
     CVirtFile &file = Files.Back();
-    if (file.Data.Size() != file.Size)
-    {
-      file.Data.ReAlloc_KeepData((size_t)file.Size, (size_t)file.Size);
-    }
+    if (file.Data.Size() != file.WrittenSize)
+      file.Data.ReAlloc_KeepData(file.WrittenSize, file.WrittenSize);
     return S_OK;
   }
 
-  bool IsStreamInMem() const
-  {
-    if (_fileMode)
-      return false;
-    if (Files.Size() < 1 || /* Files[0].IsAltStream || */ Files[0].IsDir)
-      return false;
-    return true;
-  }
-
-  size_t GetMemStreamWrittenSize() const { return _pos; }
-
-  CVirtFileSystem(): _outFileStreamSpec(NULL), MaxTotalAllocSize((UInt64)0 - 1) {}
-
-  void Init()
-  {
-    _totalAllocSize = 0;
-    _fileMode = false;
-    _pos = 0;
-    _numFlushed = 0;
-    _fileIsOpen = false;
-  }
-
-  HRESULT CloseFile(const FString &path);
   HRESULT FlushToDisk(bool closeLast);
-  size_t GetPos() const { return _pos; }
 
+  // NanaZip: retained definitions.
   MY_UNKNOWN_IMP
   STDMETHOD(Write)(const void *data, UInt32 size, UInt32 *processedSize);
 };
+// **************** NanaZip Modification End ****************
 
 #endif
-  
+
 class CExtractCallbackImp:
   public IExtractCallbackUI, // it includes IFolderArchiveExtractCallback
   public IOpenCallbackUI,
@@ -310,7 +339,7 @@ public:
     _totalBytesDefined(false),
     MultiArcMode(false)
     {}
-   
+
   ~CExtractCallbackImp();
   void Init();
 

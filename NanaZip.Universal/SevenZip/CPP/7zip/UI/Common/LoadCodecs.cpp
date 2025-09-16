@@ -49,6 +49,10 @@ EXPORT_CODECS
 
 // **************** NanaZip Modification Start ****************
 #include <Mile.Helpers.Base.h>
+
+#ifndef Z7_SFX
+#include "Restrictions.h"
+#endif
 // **************** NanaZip Modification End ****************
 
 #ifdef Z7_EXTERNAL_CODECS
@@ -184,7 +188,7 @@ void CArcInfoEx::AddExts(const UString &ext, const UString &addExt)
     if (i < addExts.Size())
     {
       extInfo.AddExt = addExts[i];
-      if (extInfo.AddExt == L"*")
+      if (extInfo.AddExt.IsEqualTo("*"))
         extInfo.AddExt.Empty();
     }
     Exts.Add(extInfo);
@@ -273,6 +277,28 @@ static HRESULT GetMethodBoolProp(Func_GetMethodProperty getMethodProperty, UInt3
   return S_OK;
 }
 
+// **************** NanaZip Modification Start ****************
+static HRESULT GetMethodStringProp(
+    Func_GetMethodProperty GetMethodProperty,
+    UInt32 Index,
+    PROPID PropertyId,
+    UString &Result)
+{
+  NCOM::CPropVariant Property;
+  Result.Empty();
+  RINOK(GetMethodProperty(Index, PropertyId, &Property))
+  if (Property.vt == VT_BSTR)
+  {
+    Result.SetFromBstr(Property.bstrVal);
+  }
+  else if (Property.vt != VT_EMPTY)
+  {
+    return E_FAIL;
+  }
+  return S_OK;
+}
+// **************** NanaZip Modification End ****************
+
 #if defined(__clang__)
 #pragma GCC diagnostic ignored "-Wc++98-compat-pedantic"
 #endif
@@ -309,6 +335,22 @@ HRESULT CCodecs::LoadCodecs()
       CDllCodecInfo info;
       info.LibIndex = Libs.Size() - 1;
       info.CodecIndex = i;
+
+      // **************** NanaZip Modification Start ****************
+#ifndef Z7_SFX
+      UString CodecNameWide;
+      AString CodecName;
+      RINOK(GetMethodStringProp(lib.GetMethodProperty, i, NMethodPropID::kName, CodecNameWide))
+
+      CodecName.SetFromWStr_if_Ascii(CodecNameWide);
+
+      if (!::NanaZipIsCodecAllowedA(CodecName))
+      {
+        continue;
+      }
+#endif
+      // **************** NanaZip Modification End ****************
+
       RINOK(GetCoderClass(lib.GetMethodProperty, i, NMethodPropID::kEncoder, info.Encoder, info.EncoderIsAssigned))
       RINOK(GetCoderClass(lib.GetMethodProperty, i, NMethodPropID::kDecoder, info.Decoder, info.DecoderIsAssigned))
       RINOK(GetMethodBoolProp(lib.GetMethodProperty, i, NMethodPropID::kIsFilter, info.IsFilter, info.IsFilter_Assigned))
@@ -455,6 +497,18 @@ HRESULT CCodecs::LoadFormats()
     item.FormatIndex = i;
 
     RINOK(GetProp_String(getProp, getProp2, i, NArchive::NHandlerPropID::kName, item.Name))
+
+    // **************** NanaZip Modification Start ****************
+#ifndef Z7_SFX
+    AString ItemName;
+    ItemName.SetFromWStr_if_Ascii(item.Name);
+
+    if (!::NanaZipIsHandlerAllowedA(ItemName))
+    {
+      continue;
+    }
+#endif
+    // **************** NanaZip Modification End ****************
 
     {
       NCOM::CPropVariant prop;
@@ -831,6 +885,13 @@ HRESULT CCodecs::Load()
 
     #ifndef Z7_SFX
 
+    // **************** NanaZip Modification Start ****************
+    if (!::NanaZipIsHandlerAllowedA(arc.Name))
+    {
+      continue;
+    }
+    // **************** NanaZip Modification End ****************
+
     item.CreateOutArchive = arc.CreateOutArchive;
     item.UpdateEnabled = (arc.CreateOutArchive != NULL);
     item.SignatureOffset = arc.SignatureOffset;
@@ -962,8 +1023,8 @@ bool CCodecs::FindFormatForArchiveType(const UString &arcType, CIntVector &forma
     const UString name = arcType.Mid(pos, (unsigned)pos2 - pos);
     if (name.IsEmpty())
       return false;
-    int index = FindFormatForArchiveType(name);
-    if (index < 0 && name != L"*")
+    const int index = FindFormatForArchiveType(name);
+    if (index < 0 && !name.IsEqualTo("*"))
     {
       formatIndices.Clear();
       return false;

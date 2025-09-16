@@ -22,6 +22,7 @@
   <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\K7Pal\K7Pal.props" />
   <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.props" />
+  <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;NSIS_SCRIPT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>

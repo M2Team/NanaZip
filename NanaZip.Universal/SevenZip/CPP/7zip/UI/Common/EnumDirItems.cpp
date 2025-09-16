@@ -1213,11 +1213,13 @@ HRESULT CDirItems::FillFixedReparse()
       // continue; // for debug
       if (!item.Has_Attrib_ReparsePoint())
         continue;
-
+      /*
+      We want to get properties of target file instead of properies of symbolic link.
+      Probably this code is unused, because
+      CFileInfo::Find(with followLink = true) called Fill_From_ByHandleFileInfo() already.
+      */
       // if (item.IsDir()) continue;
-
       const FString phyPath = GetPhyPath(i);
-
       NFind::CFileInfo fi;
       if (fi.Fill_From_ByHandleFileInfo(phyPath)) // item.IsDir()
       {
@@ -1228,38 +1230,13 @@ HRESULT CDirItems::FillFixedReparse()
         item.Attrib = fi.Attrib;
         continue;
       }
-
-      /*
-      // we request properties of target file instead of properies of symbolic link
-      // here we also can manually parse unsupported links (like WSL links)
-      NIO::CInFile inFile;
-      if (inFile.Open(phyPath))
-      {
-        BY_HANDLE_FILE_INFORMATION info;
-        if (inFile.GetFileInformation(&info))
-        {
-          // Stat.FilesSize doesn't contain item.Size already
-          // Stat.FilesSize -= item.Size;
-          item.Size = (((UInt64)info.nFileSizeHigh) << 32) + info.nFileSizeLow;
-          Stat.FilesSize += item.Size;
-          item.CTime = info.ftCreationTime;
-          item.ATime = info.ftLastAccessTime;
-          item.MTime = info.ftLastWriteTime;
-          item.Attrib = info.dwFileAttributes;
-          continue;
-        }
-      }
-      */
-
       RINOK(AddError(phyPath))
       continue;
     }
 
-    // (SymLinks == true) here
-
+    // (SymLinks == true)
     if (item.ReparseData.Size() == 0)
       continue;
-
     // if (item.Size == 0)
     {
       // 20.03: we use Reparse Data instead of real data
@@ -1277,7 +1254,7 @@ HRESULT CDirItems::FillFixedReparse()
     /* imagex/WIM reduces absolute paths in links (raparse data),
        if we archive non root folder. We do same thing here */
 
-    bool isWSL = false;
+    // bool isWSL = false;
     if (attr.IsSymLink_WSL())
     {
       // isWSL = true;
@@ -1314,21 +1291,27 @@ HRESULT CDirItems::FillFixedReparse()
       continue;
     if (rootPrefixSize == prefix.Len())
       continue; // simple case: paths are from root
-
     if (link.Len() <= prefix.Len())
       continue;
-
     if (CompareFileNames(link.Left(prefix.Len()), prefix) != 0)
       continue;
 
     UString newLink = prefix.Left(rootPrefixSize);
     newLink += link.Ptr(prefix.Len());
 
-    CByteBuffer data;
-    bool isSymLink = !attr.IsMountPoint();
-    if (!FillLinkData(data, newLink, isSymLink, isWSL))
+    CByteBuffer &data = item.ReparseData2;
+/*
+    if (isWSL)
+    {
+      Convert_WinPath_to_WslLinuxPath(newLink, true); // is absolute : change it
+      FillLinkData_WslLink(data, newLink);
+    }
+    else
+*/
+      FillLinkData_WinLink(data, newLink, !attr.IsMountPoint());
+    if (data.Size() == 0)
       continue;
-    item.ReparseData2 = data;
+    // item.ReparseData2 = data;
   }
   return S_OK;
 }

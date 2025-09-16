@@ -475,18 +475,33 @@ static bool CallExtractOnOpen() {
 
   ci.Load();
 
-  if (!g_IsFileTypeHandler || !ci.ExtractOnOpen || g_MainPath.IsEmpty())
+  if (
+    !g_IsFileTypeHandler ||
+    !ci.ExtractOnOpen.Val ||
+    ::GetAsyncKeyState(VK_SHIFT) < 0)
+  {
     return false;
-  if (::GetAsyncKeyState(VK_SHIFT) < 0)
+  }
+  if (
+    g_MainPath.IsEmpty() ||
+    !NFile::NName::GetFullPath(us2fs(g_MainPath), fullPathF))
+  {
     return false;
-  if (!NWindows::NFile::NName::GetFullPath(us2fs(g_MainPath), fullPathF))
+  }
+  if (!NFile::NDir::GetOnlyDirPrefix(fullPathF, parentFolder))
+  {
     return false;
-  if (!NWindows::NFile::NDir::GetOnlyDirPrefix(fullPathF, parentFolder))
-    return false;
+  }
 
   arcPaths.Add(fs2us(fullPathF));
-  ExtractArchives(arcPaths, fs2us(parentFolder), false, false, ci.WriteZone,
-    true, true);
+  ::ExtractArchives(
+    arcPaths,
+    fs2us(parentFolder),
+    false,
+    false,
+    ci.WriteZone,
+    true,
+    true);
   return true;
 }
 // **************** NanaZip Modification End ****************

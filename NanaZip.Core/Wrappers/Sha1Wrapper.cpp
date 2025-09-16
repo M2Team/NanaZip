@@ -10,6 +10,8 @@
 
 #include "Sha1Wrapper.h"
 
+#include <Windows.h>
+
 #include <cstring>
 
 CSha1& CSha1::operator=(
@@ -133,14 +135,14 @@ void Sha1_GetBlockDigest(
     }
 
     K7_PAL_HASH_HANDLE CurrentHashHandle = nullptr;
-    if (SUCCEEDED(::K7PalHashDuplicate(
+    if (MO_RESULT_SUCCESS_OK == ::K7PalHashDuplicate(
         p->HashHandle,
-        &CurrentHashHandle)))
+        &CurrentHashHandle))
     {
-        if (SUCCEEDED(::K7PalHashUpdate(
+        if (MO_RESULT_SUCCESS_OK == ::K7PalHashUpdate(
             CurrentHashHandle,
             const_cast<LPVOID>(reinterpret_cast<LPCVOID>(data)),
-            SHA1_DIGEST_SIZE)))
+            SHA1_DIGEST_SIZE))
         {
             ::K7PalHashFinal(
                 CurrentHashHandle,

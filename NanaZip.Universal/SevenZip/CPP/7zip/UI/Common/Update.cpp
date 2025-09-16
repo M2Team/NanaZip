@@ -474,7 +474,7 @@ static HRESULT Compress(
 
   CArcToDoStat stat2;
 
-  if (options.RenamePairs.Size() != 0)
+  if (options.RenameMode || options.RenamePairs.Size() != 0)
   {
     FOR_VECTOR (i, arcItems)
     {
@@ -1923,7 +1923,7 @@ Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
       if (NFind::DoesDirExist(phyPath))
       {
         RINOK(callback->DeletingAfterArchiving(phyPath, true))
-        RemoveDir(phyPath);
+        RemoveDirAlways_if_Empty(phyPath);
       }
     }
 

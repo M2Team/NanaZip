@@ -812,7 +812,7 @@ HRESULT CHandler::ObtainBlockMethods(CNum folderIndex, PROPVARIANT *prop, CHandl
           } else {
             *dest++ = 'f';
             *dest++ = 'l';
-            ConvertUInt32ToString(l - 32, dest);
+            ConvertUInt32ToString(l - Z7_ZSTD_FAST_LEV_INC, dest);
           }
           dest += MyStringLen(dest);
         }

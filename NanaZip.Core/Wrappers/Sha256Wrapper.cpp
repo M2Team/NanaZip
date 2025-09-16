@@ -10,6 +10,8 @@
 
 #include "Sha256Wrapper.h"
 
+#include <Windows.h>
+
 #include <cstring>
 
 CSha256& CSha256::operator=(

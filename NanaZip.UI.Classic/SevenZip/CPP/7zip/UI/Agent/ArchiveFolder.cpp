@@ -22,6 +22,15 @@ STDMETHODIMP CAgentFolder::SetZoneIdMode(NExtract::NZoneIdMode::EEnum zoneMode)
   return S_OK;
 }
 
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09, function prototype adapted to NanaZip.
+STDMETHODIMP CAgentFolder::SetZoneIdFile(const Byte *data, UInt32 size)
+{
+  _zoneBuf.CopyFrom(data, size);
+  return S_OK;
+}
+// **************** NanaZip Modification End ****************
+
 STDMETHODIMP CAgentFolder::CopyTo(Int32 moveMode, const UInt32 *indices, UInt32 numItems,
     Int32 includeAltStreams, Int32 replaceAltStreamCharsMode,
     const wchar_t *path, IFolderOperationsExtractCallback *callback)

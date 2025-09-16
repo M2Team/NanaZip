@@ -588,6 +588,11 @@ struct CArchiveExtractCallback_Closer
 
 bool CensorNode_CheckPath(const NWildcard::CCensorNode &node, const CReadArcItem &item);
 
+// **************** NanaZip Modification Start ****************
+// Is_ZoneId_StreamName and WriteZoneFile_To_BaseFile backported from 24.09.
+bool Is_ZoneId_StreamName(const wchar_t *s);
 void ReadZoneFile_Of_BaseFile(CFSTR fileName2, CByteBuffer &buf);
+bool WriteZoneFile_To_BaseFile(CFSTR fileName, const CByteBuffer &buf);
+// **************** NanaZip Modification End ****************
 
 #endif

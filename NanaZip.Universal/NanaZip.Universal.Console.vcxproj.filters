@@ -57,7 +57,13 @@
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm">
       <Filter>SevenZip\ASM\x86</Filter>
     </None>
+    <None Include="SevenZip\ASM\x86\Sort.asm">
+      <Filter>SevenZip\ASM\x86</Filter>
+    </None>
     <None Include="SevenZip\C\7zCrcOpt.c">
+      <Filter>SevenZip\C</Filter>
+    </None>
+    <None Include="SevenZip\C\Sort.c">
       <Filter>SevenZip\C</Filter>
     </None>
   </ItemGroup>
@@ -72,9 +78,6 @@
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\C\DllSecur.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\C\Sort.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\C\Threads.c">
