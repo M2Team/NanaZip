@@ -40,9 +40,7 @@
           Content="&#xE712;"
           FontFamily="{ThemeResource SymbolThemeFontFamily}" />
       </Grid>
-      <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-        <TextBlock Text="{x:Bind InfoText, Mode=OneWay}" TextWrapping="Wrap" />
-      </ScrollViewer>
+      <TextBlock Text="{x:Bind InfoText, Mode=OneWay}" />
     </StackPanel>
     <Grid
       Grid.Row="2"

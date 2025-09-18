@@ -10,7 +10,7 @@
 
 #include <winrt/NanaZip.Modern.h>
 
-const int kCopyDialog_NumInfoLines = 11;
+const int kCopyDialog_NumInfoLines = 10 /* 11 */;
 
 class CCopyDialog /* : public NWindows::NControl::CModalDialog */
 {
