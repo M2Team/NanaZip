@@ -164,7 +164,7 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
   UINT DpiValue = ::GetDpiForWindow(m_IslandsHwnd);
 
   int ScaledWidth = ::MulDiv(500, DpiValue, USER_DEFAULT_SCREEN_DPI);
-  int ScaledHeight = ::MulDiv(300, DpiValue, USER_DEFAULT_SCREEN_DPI);
+  int ScaledHeight = ::MulDiv(400, DpiValue, USER_DEFAULT_SCREEN_DPI);
 
   RECT ParentRect = {};
   if (parentWindow)
