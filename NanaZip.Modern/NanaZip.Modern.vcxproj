@@ -23,10 +23,10 @@
     <MileProjectProductName>NanaZip</MileProjectProductName>
   </PropertyGroup>
   <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1766" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1766" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1766" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1766" Project="Mile.Project.Cpp.props" />
   <PropertyGroup>
     <RequiredBundles>Microsoft.VisualStudio.ComponentGroup.MSIX.Packaging</RequiredBundles>
   </PropertyGroup>
@@ -389,7 +389,7 @@
     <PRIResource Include="Strings\zh-Hant\ProgressPage.resw" />
   </ItemGroup>
   <Import Project="Mile.Xaml.Unstaged.targets" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1766" Project="Mile.Project.Cpp.targets" />
   <!--
   XamlAddCppWinRTMergedWinmd
 
