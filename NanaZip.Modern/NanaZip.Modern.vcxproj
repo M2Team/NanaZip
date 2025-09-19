@@ -52,7 +52,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Mile.Xaml.Unstaged.targets" />
     <None Include="NanaZip.Modern.def" />
     <None Include="NanaZip.Modern.props" />
   </ItemGroup>
@@ -388,7 +387,6 @@
     <PRIResource Include="Strings\zh-Hant\InformationPage.resw" />
     <PRIResource Include="Strings\zh-Hant\ProgressPage.resw" />
   </ItemGroup>
-  <Import Project="Mile.Xaml.Unstaged.targets" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1768" Project="Mile.Project.Cpp.targets" />
   <!--
   XamlAddCppWinRTMergedWinmd

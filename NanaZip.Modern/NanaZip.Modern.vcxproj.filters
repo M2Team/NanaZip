@@ -21,7 +21,6 @@
     <ClInclude Include="ControlMacros.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mile.Xaml.Unstaged.targets" />
     <None Include="NanaZip.Modern.def" />
     <None Include="NanaZip.Modern.props" />
   </ItemGroup>
