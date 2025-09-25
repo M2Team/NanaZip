@@ -1367,6 +1367,7 @@ bool CCompressDialog::OnCommand(int code, int itemID, LPARAM lParam)
         Get_FormatOptions().ResetForLevelChange();
 
         // **************** NanaZip Modification Start ****************
+        // SetMethod();
         SetMethod(GetMethodID());
         // **************** NanaZip Modification End ****************
         MethodChanged();
