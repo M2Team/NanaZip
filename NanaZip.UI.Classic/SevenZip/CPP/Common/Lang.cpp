@@ -34,8 +34,10 @@ bool CLang::Open(CFSTR fileName, const char *id)
 #include <winrt/windows.applicationmodel.resources.core.h>
 #endif
 
+#include <mutex>
 #include <map>
 
+std::mutex g_LanguageLock;
 #ifdef _SFX
 std::map<UInt32, UString> g_LanguageMap;
 #else
@@ -44,44 +46,52 @@ std::map<UInt32, winrt::hstring> g_LanguageMap;
 
 const wchar_t *CLang::Get(UInt32 id) const throw()
 {
-    auto Iterator = g_LanguageMap.find(id);
-    if (Iterator == g_LanguageMap.end())
     {
+        std::lock_guard Lock(g_LanguageLock);
+        auto Iterator = g_LanguageMap.find(id);
+        if (Iterator != g_LanguageMap.end()) {
 #ifdef _SFX
-        UString Content = NWindows::MyLoadString(id);
-        if (Content.IsEmpty())
-        {
-            return nullptr;
-        }
-
-        return g_LanguageMap.emplace(id, Content).first->second;
+            return Iterator->second;
 #else
-        /*using winrt::Windows::ApplicationModel::Resources::Core::ResourceManager;
-        using winrt::Windows::ApplicationModel::Resources::Core::ResourceMap;
-
-        ResourceMap CurrentResourceMap =
-            ResourceManager::Current().MainResourceMap().GetSubtree(L"Legacy");
-
-        winrt::hstring ResourceName = L"Resource" + winrt::to_hstring(id);
-
-        if (CurrentResourceMap.HasKey(ResourceName))
-        {
-            winrt::hstring Content = CurrentResourceMap.Lookup(
-                ResourceName).Candidates().GetAt(0).ValueAsString();
-            g_LanguageMap.emplace(id, Content);
-            return Content.data();
+            return Iterator->second.data();
+#endif
         }
-        else
-        {
-            return nullptr;
-        }*/
-        return nullptr;
-#endif    
     }
 
 #ifdef _SFX
-    return Iterator->second;
+    UString Content = NWindows::MyLoadString(id);
+    if (!Content.IsEmpty())
+    {
+        std::lock_guard Lock(g_LanguageLock);
+        return g_LanguageMap.emplace(id, Content).first->second;
+    }
+    else
+    {
+        return nullptr;
+    }
+
+    return g_LanguageMap.emplace(id, Content).first->second;
 #else
-    return Iterator->second.data();
+    /*using winrt::Windows::ApplicationModel::Resources::Core::ResourceManager;
+    using winrt::Windows::ApplicationModel::Resources::Core::ResourceMap;
+
+    ResourceMap CurrentResourceMap =
+        ResourceManager::Current().MainResourceMap().GetSubtree(L"Legacy");
+
+    winrt::hstring ResourceName = L"Resource" + winrt::to_hstring(id);
+
+    if (CurrentResourceMap.HasKey(ResourceName))
+    {
+        winrt::hstring Content = CurrentResourceMap.Lookup(
+            ResourceName).Candidates().GetAt(0).ValueAsString();
+        std::lock_guard Lock(g_LanguageLock);
+        auto Result = g_LanguageMap.emplace(id, std::move(Content));
+        return Result.first->second.data();
+    }
+    else
+    {
+        return nullptr;
+    }*/
+    return nullptr;
 #endif
 }
