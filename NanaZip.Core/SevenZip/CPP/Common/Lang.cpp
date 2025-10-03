@@ -12,7 +12,9 @@
 #ifdef Z7_SFX
 #include "../Windows/ResourceString.h"
 
+#include <mutex>
 #include <map>
+std::mutex g_LanguageLock;
 std::map<UInt32, UString> g_LanguageMap;
 #endif
 // **************** NanaZip Modification End ****************
@@ -139,7 +141,7 @@ bool CLang::Open(CFSTR fileName, const char *id)
     return false;
   if (length > (1 << 20))
     return false;
-  
+
   AString s;
   const unsigned len = (unsigned)length;
   char *p = s.GetBuf(len);
@@ -161,14 +163,14 @@ bool CLang::Open(CFSTR fileName, const char *id)
   }
   *p2 = 0;
   s.ReleaseBuf_SetLen((unsigned)(p2 - p));
-  
+
   if (OpenFromString(s))
   {
     const wchar_t *name = Get(0);
     if (name && StringsAreEqual_Ascii(name, id))
       return true;
   }
-  
+
   Clear();
   return false;
 }
@@ -177,6 +179,7 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
 {
   // **************** NanaZip Modification Start ****************
 #ifdef Z7_SFX
+  std::lock_guard Lock(g_LanguageLock);
   auto Iterator = g_LanguageMap.find(id);
   if (Iterator == g_LanguageMap.end())
   {
