@@ -118,6 +118,9 @@ void RMF_structuredBuildTable(struct FL2_matchTable_s* const tbl,
 void RMF_recurseListChunk(RMF_builder* const tbl,
     const BYTE* const data_block,
     size_t const block_start,
+    // **************** NanaZip Modification Start ****************
+    size_t const block_end,
+    // **************** NanaZip Modification End ****************
     U32 const depth,
     U32 const max_depth,
     U32 const list_count,
