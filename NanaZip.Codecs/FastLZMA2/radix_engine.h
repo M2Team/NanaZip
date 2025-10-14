@@ -8,7 +8,7 @@
 * You may select, at your option, one of the above-listed licenses.
 */
 
-#include <stdio.h>  
+#include <stdio.h>
 
 #define MAX_READ_BEYOND_DEPTH 2
 
@@ -176,6 +176,9 @@ RMF_structuredInit
 static void RMF_recurseListsBuffered(RMF_builder* const tbl,
     const BYTE* const data_block,
     size_t const block_start,
+    // **************** NanaZip Modification Start ****************
+    size_t const block_end,
+    // **************** NanaZip Modification End ****************
     size_t link,
     U32 depth,
     U32 const max_depth,
@@ -256,7 +259,18 @@ static void RMF_recurseListsBuffered(RMF_builder* const tbl,
             overlap = list_count >> MATCH_BUFFER_OVERLAP;
             overlap += !overlap;
         }
-        RMF_recurseListChunk(tbl, data_block, block_start, depth, max_depth, list_count, stack_base);
+        // **************** NanaZip Modification Start ****************
+        // RMF_recurseListChunk(tbl, data_block, block_start, depth, max_depth, list_count, stack_base);
+        RMF_recurseListChunk(
+            tbl,
+            data_block,
+            block_start,
+            block_end,
+            depth,
+            max_depth,
+            list_count,
+            stack_base);
+        // **************** NanaZip Modification End ****************
         orig_list_count -= (U32)(list_count - start);
         /* Copy everything back, except the last link which never changes, and any extra overlap */
         count -= overlap + (overlap == 0);
@@ -477,12 +491,15 @@ static void RMF_bruteForce(RMF_builder* const tbl,
     } while (i < list_count - 1 && buffer[i] >= block_start);
 }
 
-/* RMF_recurseLists16() : 
+/* RMF_recurseLists16() :
  * Match strings at depth 2 using a 16-bit radix to lengthen to depth 4
  */
 static void RMF_recurseLists16(RMF_builder* const tbl,
     const BYTE* const data_block,
     size_t const block_start,
+    // **************** NanaZip Modification Start ****************
+    size_t const block_end,
+    // **************** NanaZip Modification End ****************
     size_t link,
     U32 count,
     U32 const max_depth)
@@ -589,6 +606,9 @@ static void RMF_recurseLists16(RMF_builder* const tbl,
         RMF_recurseListsBuffered(tbl,
             data_block,
             block_start,
+            // **************** NanaZip Modification Start ****************
+            block_end,
+            // **************** NanaZip Modification End ****************
             link,
             (BYTE)depth,
             (BYTE)max_depth,
@@ -972,10 +992,32 @@ RMF_structuredBuildTable
         if (best && list_head.count > tbl->builders[job]->match_buffer_limit)
         {
             /* Not worth buffering or too long */
-            RMF_recurseLists16(tbl->builders[job], block.data, block.start, list_head.head, list_head.count, max_depth);
+            // **************** NanaZip Modification Start ****************
+            // RMF_recurseLists16(tbl->builders[job], block.data, block.start, list_head.head, list_head.count, max_depth);
+            RMF_recurseLists16(
+                tbl->builders[job],
+                block.data,
+                block.start,
+                block.end,
+                list_head.head,
+                list_head.count,
+                max_depth);
+            // **************** NanaZip Modification End ****************
         }
         else {
-            RMF_recurseListsBuffered(tbl->builders[job], block.data, block.start, list_head.head, 2, (BYTE)max_depth, list_head.count, 0);
+            // **************** NanaZip Modification Start ****************
+            // RMF_recurseListsBuffered(tbl->builders[job], block.data, block.start, list_head.head, 2, (BYTE)max_depth, list_head.count, 0);
+            RMF_recurseListsBuffered(
+                tbl->builders[job],
+                block.data,
+                block.start,
+                block.end,
+                list_head.head,
+                2,
+                (BYTE)max_depth,
+                list_head.count,
+                0);
+            // **************** NanaZip Modification End ****************
         }
     }
 }

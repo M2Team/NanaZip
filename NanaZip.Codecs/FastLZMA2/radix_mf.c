@@ -70,10 +70,10 @@ static void RMF_freeBuilderTable(RMF_builder** const builders, unsigned const si
     free(builders);
 }
 
-/* RMF_createBuilderTable() : 
+/* RMF_createBuilderTable() :
  * Create one match table builder object per thread.
- * max_len : maximum match length supported by the table structure 
- * size : number of threads 
+ * max_len : maximum match length supported by the table structure
+ * size : number of threads
  */
 static RMF_builder** RMF_createBuilderTable(U32* const match_table, size_t const match_buffer_size, unsigned const max_len, unsigned const size)
 {
@@ -181,7 +181,7 @@ static size_t RMF_applyParameters_internal(FL2_matchTable* const tbl, const RMF_
     return 0;
 }
 
-/* RMF_reduceDict() : 
+/* RMF_reduceDict() :
  * Reduce dictionary and match buffer size if the total input size is known and < dictionary_size.
  */
 static void RMF_reduceDict(RMF_parameters* const params, size_t const dict_reduce)
@@ -233,7 +233,7 @@ FL2_matchTable* RMF_createMatchTable(const RMF_parameters* const p, size_t const
     RMF_initListHeads(tbl);
 
     RMF_initProgress(tbl);
-    
+
     return tbl;
 }
 
@@ -288,6 +288,9 @@ void RMF_initTable(FL2_matchTable* const tbl, const void* const data, size_t con
 
 static void RMF_handleRepeat(RMF_buildMatch* const match_buffer,
     const BYTE* const data_block,
+    // **************** NanaZip Modification Start ****************
+    const BYTE* const data_block_end,
+    // **************** NanaZip Modification End ****************
     size_t const next,
     U32 count,
     U32 const rpt_len,
@@ -300,8 +303,12 @@ static void RMF_handleRepeat(RMF_buildMatch* const match_buffer,
     const BYTE* const data = data_block + match_buffer[pos].from;
     const BYTE* const data_2 = data - rpt_len;
 
-    while (data[length] == data_2[length] && length < max_len)
+    // **************** NanaZip Modification Start ****************
+    // while (data[length] == data_2[length] && length < max_len)
+    //     ++length;
+    while (data + length < data_block_end && data[length] == data_2[length] && length < max_len)
         ++length;
+    // **************** NanaZip Modification End ****************
 
     for (; length <= max_len && count; --count) {
         size_t next_i = match_buffer[pos].next & 0xFFFFFF;
@@ -383,13 +390,16 @@ static void RMF_bruteForceBuffered(RMF_builder* const tbl,
     } while (i < list_count - 1 && buffer[i].data_src >= start);
 }
 
-/* Lengthen and divide buffered chains into smaller chains, save them on a stack and process in turn. 
+/* Lengthen and divide buffered chains into smaller chains, save them on a stack and process in turn.
  * The match finder spends most of its time here.
  */
 FORCE_INLINE_TEMPLATE
 void RMF_recurseListChunk_generic(RMF_builder* const tbl,
     const BYTE* const data_block,
     size_t const block_start,
+    // **************** NanaZip Modification Start ****************
+    size_t const block_end,
+    // **************** NanaZip Modification End ****************
     U32 depth,
     U32 const max_depth,
     U32 list_count,
@@ -559,7 +569,18 @@ void RMF_recurseListChunk_generic(RMF_builder* const tbl,
                 size_t const next_link = tbl->match_buffer[next_index].from;
                 if ((link - next_link) > rpt_depth) {
                     if (rpt > 0)
-                        RMF_handleRepeat(tbl->match_buffer, data_block, rpt_head_next, rpt, rpt_dist, rpt_depth, tbl->max_len);
+                        // **************** NanaZip Modification Start ****************
+                        // RMF_handleRepeat(tbl->match_buffer, data_block, rpt_head_next, rpt, rpt_dist, rpt_depth, tbl->max_len);
+                        RMF_handleRepeat(
+                            tbl->match_buffer,
+                            data_block,
+                            data_block + block_end,
+                            rpt_head_next,
+                            rpt,
+                            rpt_dist,
+                            rpt_depth,
+                            tbl->max_len);
+                        // **************** NanaZip Modification End ****************
 
                     rpt = -1;
                     U32 const prev = tbl->tails_8[radix_8].prev_index;
@@ -581,7 +602,18 @@ void RMF_recurseListChunk_generic(RMF_builder* const tbl,
                     U32 const dist = (U32)(link - next_link);
                     if (rpt < 0 || dist != rpt_dist) {
                         if (rpt > 0)
-                            RMF_handleRepeat(tbl->match_buffer, data_block, rpt_head_next, rpt, rpt_dist, rpt_depth, tbl->max_len);
+                            // **************** NanaZip Modification Start ****************
+                            // RMF_handleRepeat(tbl->match_buffer, data_block, rpt_head_next, rpt, rpt_dist, rpt_depth, tbl->max_len);
+                            RMF_handleRepeat(
+                                tbl->match_buffer,
+                                data_block,
+                                data_block + block_end,
+                                rpt_head_next,
+                                rpt,
+                                rpt_dist,
+                                rpt_depth,
+                                tbl->max_len);
+                            // **************** NanaZip Modification End ****************
 
                         rpt = 0;
                         rpt_head_next = next_index;
@@ -608,7 +640,18 @@ void RMF_recurseListChunk_generic(RMF_builder* const tbl,
             } while (--list_count != 0);
 
             if (rpt > 0)
-                RMF_handleRepeat(tbl->match_buffer, data_block, rpt_head_next, rpt, rpt_dist, rpt_depth, tbl->max_len);
+                // **************** NanaZip Modification Start ****************
+                // RMF_handleRepeat(tbl->match_buffer, data_block, rpt_head_next, rpt, rpt_dist, rpt_depth, tbl->max_len);
+                RMF_handleRepeat(
+                    tbl->match_buffer,
+                    data_block,
+                    data_block + block_end,
+                    rpt_head_next,
+                    rpt,
+                    rpt_dist,
+                    rpt_depth,
+                    tbl->max_len);
+                // **************** NanaZip Modification End ****************
 
             size_t const radix_8 = tbl->match_buffer[pos].src.chars[slot];
             U32 const prev = tbl->tails_8[radix_8].prev_index;
@@ -656,6 +699,9 @@ void RMF_recurseListChunk_generic(RMF_builder* const tbl,
 void RMF_recurseListChunk(RMF_builder* const tbl,
     const BYTE* const data_block,
     size_t const block_start,
+    // **************** NanaZip Modification Start ****************
+    size_t const block_end,
+    // **************** NanaZip Modification End ****************
     U32 const depth,
     U32 const max_depth,
     U32 const list_count,
@@ -667,9 +713,31 @@ void RMF_recurseListChunk(RMF_builder* const tbl,
     if (list_count <= MAX_BRUTE_FORCE_LIST_SIZE)
         RMF_bruteForceBuffered(tbl, data_block, block_start, 0, list_count, 0, depth, max_depth);
     else if (max_depth > 6)
-        RMF_recurseListChunk_generic(tbl, data_block, block_start, depth, max_depth, list_count, stack_base);
+        // **************** NanaZip Modification Start ****************
+        // RMF_recurseListChunk_generic(tbl, data_block, block_start, depth, max_depth, list_count, stack_base);
+        RMF_recurseListChunk_generic(
+            tbl,
+            data_block,
+            block_start,
+            block_end,
+            depth,
+            max_depth,
+            list_count,
+            stack_base);
+        // **************** NanaZip Modification End ****************
     else
-        RMF_recurseListChunk_generic(tbl, data_block, block_start, depth, 6, list_count, stack_base);
+        // **************** NanaZip Modification Start ****************
+        // RMF_recurseListChunk_generic(tbl, data_block, block_start, depth, 6, list_count, stack_base);
+        RMF_recurseListChunk_generic(
+            tbl,
+            data_block,
+            block_start,
+            block_end,
+            depth,
+            6,
+            list_count,
+            stack_base);
+        // **************** NanaZip Modification End ****************
 }
 
 /* Iterate the head table concurrently with other threads, and recurse each list until max_depth is reached */
