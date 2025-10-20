@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{86E818B3-D657-4E03-9336-48EE242A79D1}</ProjectGuid>
-    <RootNamespace>NanaZip.Universal.Console</RootNamespace>
-    <MileProjectType>ConsoleApplication</MileProjectType>
+    <ProjectGuid>{8DDAC25D-D16A-4440-9ADE-902255549D1E}</ProjectGuid>
+    <RootNamespace>NanaZip.Universal.Windows</RootNamespace>
+    <MileProjectType>WindowsApplication</MileProjectType>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-    <MileProjectManifestFile>NanaZip.Universal.Console.manifest</MileProjectManifestFile>
+    <MileProjectManifestFile>NanaZip.Universal.Windows.manifest</MileProjectManifestFile>
     <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
-    <MileProjectFileDescription>NanaZip Command Line Interface (Console)</MileProjectFileDescription>
-    <MileProjectInternalName>NanaZip.Universal.Console</MileProjectInternalName>
+    <MileProjectFileDescription>NanaZip Command Line Interface (Windows)</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Universal.Windows</MileProjectInternalName>
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
-    <MileProjectOriginalFilename>NanaZip.Universal.Console.exe</MileProjectOriginalFilename>
+    <MileProjectOriginalFilename>NanaZip.Universal.Windows.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
@@ -26,7 +26,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <PreprocessorDefinitions>Z7_DEVICE_FILE;Z7_EXTERNAL_CODECS;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>Z7_DEVICE_FILE;Z7_EXTERNAL_CODECS;Z7_LANG;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
@@ -294,8 +294,8 @@
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
-      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj">
+      <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
       <SetPlatform>Platform=x64</SetPlatform>
     </ProjectReference>
   </ItemGroup>
