@@ -43,20 +43,6 @@
     <Manifest Include="NanaZip.Universal.Console.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.952</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
-      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
-      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
-      <SetPlatform>Platform=x64</SetPlatform>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     <None Include="SevenZip\ASM\x86\Sort.asm" />
@@ -300,6 +286,18 @@
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.410</Version>
     </PackageReference>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.952</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
+      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
+      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
+      <SetPlatform>Platform=x64</SetPlatform>
+    </ProjectReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1768" Project="Mile.Project.Cpp.targets" />
   <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
