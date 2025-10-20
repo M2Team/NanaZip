@@ -40,7 +40,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Manifest Include="NanaZip.Universal.Console.manifest" />
+    <Manifest Include="NanaZip.Universal.Windows.manifest" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
