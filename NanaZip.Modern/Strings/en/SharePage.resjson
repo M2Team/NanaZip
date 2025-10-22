@@ -1,0 +1,14 @@
+﻿{
+    "TitleTextBlock/Text": "How to send",
+    "ShareButton": {
+        "Content": "Share",
+        "[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip":
+            "Share with other applications by Windows Share"
+    },
+    "EmailButton": {
+        "Content": "Email",
+        "[using:Windows.UI.Xaml.Controls]ToolTipService/ToolTip":
+            "Send an email by Windows Messaging"
+    },
+    "CancelButton/Content": "Cancel"
+}
