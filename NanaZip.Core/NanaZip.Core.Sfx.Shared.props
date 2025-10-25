@@ -12,6 +12,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(OutDir)NanaZip.Core.Sfx.Shared.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions Condition="'$(Configuration)' == 'Release'">%(AdditionalOptions) /DEPENDENTLOADFLAG:0x800</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="NanaZipCoreSfxSharedBuildCSource" BeforeTargets="BeforeClCompile">
