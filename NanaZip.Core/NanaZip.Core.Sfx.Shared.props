@@ -12,6 +12,16 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(OutDir)NanaZip.Core.Sfx.Shared.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <!--
+        Set the dependent load flag to LOAD_LIBRARY_SEARCH_SYSTEM32 to prevent
+        static imports from searching elsewhere:
+        https://docs.microsoft.com/en-us/cpp/build/reference/dependentloadflag
+        Note that any new static imports on the SFX must be audited since this
+        flag may not cover all scenarios; see
+        https://github.com/pbatard/rufus/issues/2701#issuecomment-2874788564
+        for more details.
+      -->
+      <AdditionalOptions Condition="'$(Configuration)' == 'Release'">%(AdditionalOptions) /DEPENDENTLOADFLAG:0x800</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="NanaZipCoreSfxSharedBuildCSource" BeforeTargets="BeforeClCompile">
