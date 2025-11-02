@@ -102,6 +102,7 @@
               <uap:FileType>.bz2</uap:FileType>
               <uap:FileType>.bzip2</uap:FileType>
               <uap:FileType>.cab</uap:FileType>
+              <uap:FileType>.cb7</uap:FileType>
               <uap:FileType>.cbr</uap:FileType>
               <uap:FileType>.cbz</uap:FileType>
               <uap:FileType>.cpio</uap:FileType>
