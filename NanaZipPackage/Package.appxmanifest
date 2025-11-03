@@ -97,10 +97,12 @@
               <uap:FileType>.apfs</uap:FileType>
               <uap:FileType>.arj</uap:FileType>
               <uap:FileType>.asar</uap:FileType>
+              <uap:FileType>.b64</uap:FileType>
               <uap:FileType>.br</uap:FileType>
               <uap:FileType>.bz2</uap:FileType>
               <uap:FileType>.bzip2</uap:FileType>
               <uap:FileType>.cab</uap:FileType>
+              <uap:FileType>.cb7</uap:FileType>
               <uap:FileType>.cbr</uap:FileType>
               <uap:FileType>.cbz</uap:FileType>
               <uap:FileType>.cpio</uap:FileType>
@@ -136,15 +138,19 @@
               <uap:FileType>.tlz5</uap:FileType>
               <uap:FileType>.tpz</uap:FileType>
               <uap:FileType>.txz</uap:FileType>
+              <uap:FileType>.tz</uap:FileType>
               <uap:FileType>.tzst</uap:FileType>
               <uap:FileType>.tzstd</uap:FileType>
+              <uap:FileType>.vdi</uap:FileType>
               <uap:FileType>.vhd</uap:FileType>
               <uap:FileType>.vhdx</uap:FileType>
+              <uap:FileType>.vmdk</uap:FileType>
               <uap:FileType>.wim</uap:FileType>
               <uap:FileType>.xar</uap:FileType>
               <uap:FileType>.xz</uap:FileType>
               <uap:FileType>.z</uap:FileType>
               <uap:FileType>.zip</uap:FileType>
+              <uap:FileType>.zipx</uap:FileType>
               <uap:FileType>.zst</uap:FileType>
               <uap:FileType>.zstd</uap:FileType>
               <uap10:FileType>*</uap10:FileType>
