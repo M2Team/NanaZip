@@ -56,6 +56,10 @@
     <None Include="NanaZip.Codecs.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Brotli\dec\prefix.c" />
+    <ClCompile Include="Brotli\dec\dec_static_init.c" />
+    <ClCompile Include="Brotli\enc\static_dict_lut.c" />
+    <ClCompile Include="Brotli\enc\enc_static_init.c" />
     <ClCompile Include="LittleFS\lfs.c">
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4146;4244;4267;4456;4701;</DisableSpecificWarnings>
@@ -281,6 +285,17 @@
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Brotli\common\dictionary_inc.h" />
+    <ClInclude Include="Brotli\common\static_init.h" />
+    <ClInclude Include="Brotli\dec\prefix_inc.h" />
+    <ClInclude Include="Brotli\dec\static_init.h" />
+    <ClInclude Include="Brotli\enc\dictionary_hash_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_base.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match64_simd_inc.h" />
+    <ClInclude Include="Brotli\enc\hash_longest_match_simd_inc.h" />
+    <ClInclude Include="Brotli\enc\matching_tag_mask.h" />
+    <ClInclude Include="Brotli\enc\static_dict_lut_inc.h" />
+    <ClInclude Include="Brotli\enc\static_init.h" />
     <ClInclude Include="FreeBSD\dinode.h" />
     <ClInclude Include="FreeBSD\dir.h" />
     <ClInclude Include="FreeBSD\fs.h" />
