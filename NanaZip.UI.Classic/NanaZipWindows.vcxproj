@@ -17,7 +17,6 @@
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
     <MileProjectOriginalFilename>NanaZipG.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
-    <NanaZipFrierenEnableModernExperiencesRedirection>true</NanaZipFrierenEnableModernExperiencesRedirection>
   </PropertyGroup>
   <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1768" Project="Mile.Project.Platform.x64.props" />

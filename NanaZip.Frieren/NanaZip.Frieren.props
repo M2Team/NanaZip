@@ -17,7 +17,7 @@
       <AdditionalDependencies>$(OutDir)NanaZip.Frieren.lib;runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <Target Condition="'$(NanaZipFrierenEnableModernExperiencesRedirection)' == 'true'" Name="NanaZipFrierenBuildCSource" BeforeTargets="BeforeClCompile">
+  <Target Name="NanaZipFrierenBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup>
       <ClCompile Include="$(MSBuildThisFileDirectory)NanaZip.Frieren.ModernExperiences.Redirection.cpp" />
     </ItemGroup>
