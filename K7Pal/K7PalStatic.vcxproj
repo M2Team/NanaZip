@@ -24,7 +24,7 @@
       <Version>1.0.3259</Version>
     </PackageReference>
     <PackageReference Include="Mile.Mobility">
-      <Version>1.0.306</Version>
+      <Version>1.0.371</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
