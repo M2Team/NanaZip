@@ -1,3 +1,4 @@
+/*
 #include "CopyDialogRes.h"
 #include "../../GuiCommon.rc"
 
@@ -18,3 +19,4 @@ CAPTION "Copy"
 
 #undef xc
 #undef yc
+*/
