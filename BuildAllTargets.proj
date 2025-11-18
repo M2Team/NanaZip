@@ -29,10 +29,10 @@
   </Target>
   <Target Name="Restore">
     <ItemGroup>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
         <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
       </RestoreProjectReference>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
         <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
       </RestoreProjectReference>
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj">

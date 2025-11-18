@@ -1,0 +1,55 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Core/">
+    <Project Path="NanaZip.Codecs/NanaZip.Codecs.Sfx.Shared.vcxproj" Id="1e894b34-f9d2-4258-9401-6519aae91620">
+      <Platform Project="x64" />
+      <Build Solution="*|ARM64" Project="false" />
+    </Project>
+    <Project Path="NanaZip.Codecs/NanaZip.Codecs.vcxproj" Id="89b81a5b-ff0d-4193-9cb1-738692775dd2" />
+    <Project Path="NanaZip.Core/NanaZip.Core.Sfx.Console.vcxproj" Id="96c0a1a0-d964-4725-afdc-73ebf7fc1416">
+      <Platform Project="x64" />
+      <Build Solution="*|ARM64" Project="false" />
+    </Project>
+    <Project Path="NanaZip.Core/NanaZip.Core.Sfx.Setup.vcxproj" Id="43308629-5328-46bf-8e1c-a258a937b981">
+      <Platform Project="x64" />
+      <Build Solution="*|ARM64" Project="false" />
+    </Project>
+    <Project Path="NanaZip.Core/NanaZip.Core.Sfx.Shared.vcxproj" Id="7262ba1e-732d-4814-972f-698f0b4330a1">
+      <Platform Project="x64" />
+      <Build Solution="*|ARM64" Project="false" />
+    </Project>
+    <Project Path="NanaZip.Core/NanaZip.Core.Sfx.Windows.vcxproj" Id="c11f288b-9e3c-4da9-8206-852bb91c7e4c">
+      <Platform Project="x64" />
+      <Build Solution="*|ARM64" Project="false" />
+    </Project>
+    <Project Path="NanaZip.Core/NanaZip.Core.vcxproj" Id="5220420b-9a5c-44a7-be69-97f25365bb26" />
+    <Project Path="NanaZip.Frieren/NanaZip.Frieren.vcxproj" Id="4e78af72-d7ef-4769-b64b-95e7edf05fa2" />
+  </Folder>
+  <Folder Name="/Core/K7/">
+    <Project Path="K7Pal/K7Pal.vcxproj" Id="279f7fa5-7ddc-4635-99b0-3c7f2179dae0" />
+    <Project Path="K7Pal/K7PalStatic.vcxproj" Id="249b9fce-0114-4ee9-a31e-c8a36eea2279" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="NanaZip.Shared/NanaZip.Shared.Mitigations.vcxproj" Id="3b6ba400-cfe5-44e1-a8e3-2df0ccc5492b" />
+  </Folder>
+  <Folder Name="/UI/">
+    <Project Path="NanaZip.Modern/NanaZip.Modern.vcxproj" Id="1ab11057-1f48-44d2-a913-c945bfc1aa93" />
+    <Project Path="NanaZip.Universal/NanaZip.Universal.Console.vcxproj" Id="86e818b3-d657-4e03-9336-48ee242a79d1" />
+    <Project Path="NanaZip.Universal/NanaZip.Universal.Windows.vcxproj" Id="8ddac25d-d16a-4440-9ade-902255549d1e" />
+  </Folder>
+  <Folder Name="/UI/Classic/">
+    <Project Path="NanaZip.UI.Classic/NanaZip.vcxproj" Id="97894839-6677-49d2-ba7c-39ed0c8d4fdb" />
+    <Project Path="NanaZip.UI.Classic/NanaZipWindows.vcxproj" Id="d33e771e-6b30-4efb-9dec-a9148d50080d" />
+  </Folder>
+  <Folder Name="/UI/Modern/">
+    <Project Path="NanaZip.UI.Modern/NanaZip.Modern.FileManager.vcxproj" Id="f4511f91-b0eb-41b4-99d6-aeb48169132b" />
+    <Project Path="NanaZip.UI.Modern/NanaZip.ShellExtension.vcxproj" Id="53934e7a-686e-42f1-8a80-4299cde30564" />
+    <Project Path="NanaZip.UI.Modern/NanaZip.Windows.vcxproj" Id="3e5b58de-4fdc-4f45-93a4-8aa3d61c614d" />
+  </Folder>
+  <Project Path="NanaZipPackage/NanaZipPackage.wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5">
+    <Deploy />
+  </Project>
+</Solution>
