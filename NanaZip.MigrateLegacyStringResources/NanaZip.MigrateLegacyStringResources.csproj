@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" Version="18.0.2" />
-    <PackageReference Include="Mile.Project.Helpers" Version="1.0.643" />
+    <PackageReference Include="Mile.Project.Helpers" Version="1.0.975" />
     <PackageReference Include="vswhere" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

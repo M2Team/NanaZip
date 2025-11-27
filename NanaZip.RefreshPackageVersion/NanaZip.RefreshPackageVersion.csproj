@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mile.Project.Helpers" Version="1.0.643" />
+    <PackageReference Include="Mile.Project.Helpers" Version="1.0.975" />
   </ItemGroup>
 
 </Project>
