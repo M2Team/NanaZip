@@ -36,14 +36,14 @@ using namespace NName;
     UInt32 Tag;
     UInt16 Size;     // not including starting 8 bytes
     UInt16 Reserved; // = 0
-    
+
     UInt16 SubstituteOffset; // offset in bytes from  start of namesChars
     UInt16 SubstituteLen;    // size in bytes, it doesn't include tailed NUL
     UInt16 PrintOffset;      // offset in bytes from  start of namesChars
     UInt16 PrintLen;         // size in bytes, it doesn't include tailed NUL
-    
+
     [UInt32] Flags;  // for Symbolic Links only.
-    
+
     UInt16 namesChars[]
   }
 
@@ -84,7 +84,11 @@ static const UInt32 kReparseFlags_Microsoft   = ((UInt32)1 << 31);
 #define Get16(p) GetUi16(p)
 #define Get32(p) GetUi32(p)
 
-static const wchar_t * const k_LinkPrefix = L"\\??\\";
+// **************** NanaZip Modification Start ****************
+// Backported from 25.00.
+static const char * const k_LinkPrefix = "\\??\\";
+static const char * const k_LinkPrefix_UNC = "\\??\\UNC\\";
+// **************** NanaZip Modification End ****************
 static const unsigned k_LinkPrefix_Size = 4;
 
 static bool IsLinkPrefix(const wchar_t *s)
@@ -117,71 +121,115 @@ static void WriteString(Byte *dest, const wchar_t *path)
   }
 }
 
-bool FillLinkData(CByteBuffer &dest, const wchar_t *path, bool isSymLink, bool isWSL)
+// **************** NanaZip Modification Start ****************
+// Backported from 25.00, modified for NanaZip.
+#ifdef _WIN32
+void Convert_WinPath_to_WslLinuxPath(FString &s, bool convertDrivePath)
 {
-  bool isAbs = IsAbsolutePath(path);
-  if (!isAbs && !isSymLink)
-    return false;
-
-  if (isWSL)
+  if (convertDrivePath && IsDrivePath(s))
   {
-    // unsupported characters probably use Replacement Character UTF-16 0xFFFD
-    AString utf;
-    ConvertUnicodeToUTF8(path, utf);
-    const size_t size = 4 + utf.Len();
-    if (size != (UInt16)size)
-      return false;
-    dest.Alloc(8 + size);
-    Byte *p = dest;
-    Set32(p, _my_IO_REPARSE_TAG_LX_SYMLINK);
-    Set16(p + 4, (UInt16)(size));
-    Set16(p + 6, 0);
-    Set32(p + 8, _my_LX_SYMLINK_FLAG);
-    memcpy(p + 12, utf.Ptr(), utf.Len());
-    return true;
+    FChar c = s[0];
+    c = MyCharLower_Ascii(c);
+    s.DeleteFrontal(2);
+    s.InsertAtFront(c);
+    s.Insert(0, FTEXT("/mnt/"));
   }
+  s.Replace(FCHAR_PATH_SEPARATOR, FTEXT('/'));
+}
+#endif
 
-  // usual symbolic LINK (NOT WSL)
+
+static const unsigned k_Link_Size_Limit = 1u << 16; // 16-bit field is used for size.
+
+void FillLinkData_WslLink(CByteBuffer &dest, const wchar_t *path)
+{
+  // dest.Free(); // it's empty already
+  // WSL probably uses Replacement Character UTF-16 0xFFFD for unsupported characters?
+  AString utf;
+  ConvertUnicodeToUTF8(path, utf);
+  const unsigned size = 4 + utf.Len();
+  if (size >= k_Link_Size_Limit)
+    return;
+  dest.Alloc(8 + size);
+  Byte *p = dest;
+  Set32(p, _my_IO_REPARSE_TAG_LX_SYMLINK)
+  // Set32(p + 4, (UInt32)size)
+  Set16(p + 4, (UInt16)size)
+  Set16(p + 6, 0)
+  Set32(p + 8, _my_LX_SYMLINK_VERSION_2)
+  memcpy(p + 12, utf.Ptr(), utf.Len());
+}
+
+
+void FillLinkData_WinLink(CByteBuffer &dest, const wchar_t *path, bool isSymLink)
+{
+  // dest.Free(); // it's empty already
+  bool isAbs = false;
+  if (IS_PATH_SEPAR(path[0]))
+  {
+    // root paths "\dir1\path" are marked as relative
+    if (IS_PATH_SEPAR(path[1]))
+      isAbs = true;
+  }
+  else
+    isAbs = IsAbsolutePath(path);
+  if (!isAbs && !isSymLink)
+  {
+    // Win10 allows us to create relative MOUNT_POINT.
+    // But relative MOUNT_POINT will not work when accessing it.
+    // So we prevent useless creation of a relative MOUNT_POINT.
+    return;
+  }
 
   bool needPrintName = true;
-
-  if (IsSuperPath(path))
+  UString subs (path);
+  if (isAbs)
   {
-    path += kSuperPathPrefixSize;
-    if (!IsDrivePath(path))
-      needPrintName = false;
+    const bool isSuperPath = IsSuperPath(path);
+    if (!isSuperPath && NName::IsNetworkPath(us2fs(path)))
+    {
+      subs = k_LinkPrefix_UNC;
+      subs += (path + 2);
+    }
+    else
+    {
+      if (isSuperPath)
+      {
+        // we remove super prefix:
+        path += kSuperPathPrefixSize;
+        // we want to get correct abolute path in PrintName still.
+        if (!IsDrivePath(path))
+          needPrintName = false; // we need "\\server\path" for print name.
+      }
+      subs = k_LinkPrefix;
+      subs += path;
+    }
   }
-
-  const unsigned add_Prefix_Len = isAbs ? k_LinkPrefix_Size : 0;
-    
+  const size_t len1 = subs.Len() * 2;
   size_t len2 = (size_t)MyStringLen(path) * 2;
-  const size_t len1 = len2 + add_Prefix_Len * 2;
   if (!needPrintName)
     len2 = 0;
-
-  size_t totalNamesSize = (len1 + len2);
-
+  size_t totalNamesSize = len1 + len2;
   /* some WIM imagex software uses old scheme for symbolic links.
-     so we can old scheme for byte to byte compatibility */
-
-  bool newOrderScheme = isSymLink;
+     so we can use old scheme for byte to byte compatibility */
+  const bool newOrderScheme = isSymLink;
   // newOrderScheme = false;
-
   if (!newOrderScheme)
-    totalNamesSize += 2 * 2;
+    totalNamesSize += 2 * 2; // we use NULL terminators in old scheme.
 
   const size_t size = 8 + 8 + (isSymLink ? 4 : 0) + totalNamesSize;
-  if (size != (UInt16)size)
-    return false;
+  if (size >= k_Link_Size_Limit)
+    return;
   dest.Alloc(size);
   memset(dest, 0, size);
   const UInt32 tag = isSymLink ?
       _my_IO_REPARSE_TAG_SYMLINK :
       _my_IO_REPARSE_TAG_MOUNT_POINT;
   Byte *p = dest;
-  Set32(p, tag);
-  Set16(p + 4, (UInt16)(size - 8));
-  Set16(p + 6, 0);
+  Set32(p, tag)
+  // Set32(p + 4, (UInt32)(size - 8))
+  Set16(p + 4, (UInt16)(size - 8))
+  Set16(p + 6, 0)
   p += 8;
 
   unsigned subOffs = 0;
@@ -191,26 +239,22 @@ bool FillLinkData(CByteBuffer &dest, const wchar_t *path, bool isSymLink, bool i
   else
     printOffs = (unsigned)len1 + 2;
 
-  Set16(p + 0, (UInt16)subOffs);
-  Set16(p + 2, (UInt16)len1);
-  Set16(p + 4, (UInt16)printOffs);
-  Set16(p + 6, (UInt16)len2);
-
+  Set16(p + 0, (UInt16)subOffs)
+  Set16(p + 2, (UInt16)len1)
+  Set16(p + 4, (UInt16)printOffs)
+  Set16(p + 6, (UInt16)len2)
   p += 8;
   if (isSymLink)
   {
-    UInt32 flags = isAbs ? 0 : _my_SYMLINK_FLAG_RELATIVE;
-    Set32(p, flags);
+    const UInt32 flags = isAbs ? 0 : _my_SYMLINK_FLAG_RELATIVE;
+    Set32(p, flags)
     p += 4;
   }
-
-  if (add_Prefix_Len != 0)
-    WriteString(p + subOffs, k_LinkPrefix);
-  WriteString(p + subOffs + add_Prefix_Len * 2, path);
+  WriteString(p + subOffs, subs);
   if (needPrintName)
     WriteString(p + printOffs, path);
-  return true;
 }
+// **************** NanaZip Modification End ****************
 
 #endif // defined(_WIN32) && !defined(UNDER_CE)
 
@@ -251,7 +295,16 @@ bool CReparseAttr::Parse(const Byte *p, size_t size)
   */
 
   if (Get16(p + 6) != 0) // padding
-    return false;
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.00.
+  //return false;
+  {
+    // DOCs: Reserved : the field SHOULD be set to 0
+    // and MUST be ignored (by parser).
+    // Win10 ignores it.
+    MinorError = true; // optional
+  }
+  // **************** NanaZip Modification End ****************
 
   HeaderError = false;
 
@@ -266,16 +319,18 @@ bool CReparseAttr::Parse(const Byte *p, size_t size)
   }
 
   TagIsUnknown = false;
- 
+
   p += 8;
   size -= 8;
-  
+
   if (Tag == _my_IO_REPARSE_TAG_LX_SYMLINK)
   {
     if (len < 4)
       return false;
-    Flags = Get32(p); // maybe it's not Flags
-    if (Flags != _my_LX_SYMLINK_FLAG)
+    // **************** NanaZip Modification Start ****************
+    // Backported from 25.00.
+    if (Get32(p) != _my_LX_SYMLINK_VERSION_2)
+    // **************** NanaZip Modification End ****************
       return false;
     len -= 4;
     p += 4;
@@ -288,12 +343,16 @@ bool CReparseAttr::Parse(const Byte *p, size_t size)
       if (c == 0)
         break;
     }
-    WslName.ReleaseBuf_SetEnd(i);
+    // **************** NanaZip Modification Start ****************
+    // Backported from 25.00.
+    s[i] = 0;
+    WslName.ReleaseBuf_SetLen(i);
+    // **************** NanaZip Modification End ****************
     MinorError = (i != len);
     ErrorCode = 0;
     return true;
   }
-  
+
   if (len < 8)
     return false;
   unsigned subOffs = Get16(p);
@@ -334,8 +393,13 @@ bool CReparseShortInfo::Parse(const Byte *p, size_t size)
     return false;
   UInt32 Tag = Get32(p);
   UInt32 len = Get16(p + 4);
+  // **************** NanaZip Modification Start ****************
+  // Deleted from 25.00.
+  /*
   if (len + 8 > size)
     return false;
+  */
+  // **************** NanaZip Modification End ****************
   /*
   if ((type & kReparseFlags_Alias) == 0 ||
       (type & kReparseFlags_Microsoft) == 0 ||
@@ -346,15 +410,20 @@ bool CReparseShortInfo::Parse(const Byte *p, size_t size)
     // return true;
     return false;
 
+  // **************** NanaZip Modification Start ****************
+  // Deleted from 25.00.
+  /*
   if (Get16(p + 6) != 0) // padding
     return false;
-  
+  */
+  // **************** NanaZip Modification End ****************
+
   p += 8;
   size -= 8;
-  
+
   if (len != size) // do we need that check?
     return false;
-  
+
   if (len < 8)
     return false;
   unsigned subOffs = Get16(p);
@@ -388,10 +457,17 @@ bool CReparseAttr::IsOkNamePair() const
 {
   if (IsLinkPrefix(SubsName))
   {
+    // **************** NanaZip Modification Start ****************
+    // Backported from 25.00.
+    if (PrintName == GetPath())
+      return true;
+/*
     if (!IsDrivePath(SubsName.Ptr(k_LinkPrefix_Size)))
       return PrintName.IsEmpty();
     if (wcscmp(SubsName.Ptr(k_LinkPrefix_Size), PrintName) == 0)
       return true;
+*/
+    // **************** NanaZip Modification End ****************
   }
   return wcscmp(SubsName, PrintName) == 0;
 }
@@ -405,26 +481,34 @@ bool CReparseAttr::IsVolume() const
 }
 */
 
+// **************** NanaZip Modification Start ****************
+// Backported from 25.00.
 UString CReparseAttr::GetPath() const
 {
+  UString s (SubsName);
   if (IsSymLink_WSL())
   {
-    UString u;
     // if (CheckUTF8(attr.WslName)
-    if (!ConvertUTF8ToUnicode(WslName, u))
-      MultiByteToUnicodeString2(u, WslName);
-    return u;
+    if (!ConvertUTF8ToUnicode(WslName, s))
+      MultiByteToUnicodeString2(s, WslName);
   }
-
-  UString s (SubsName);
-  if (IsLinkPrefix(s))
+  else if (IsLinkPrefix(s))
   {
-    s.ReplaceOneCharAtPos(1, '\\'); // we normalize prefix from "\??\" to "\\?\"
-    if (IsDrivePath(s.Ptr(k_LinkPrefix_Size)))
-      s.DeleteFrontal(k_LinkPrefix_Size);
+    if (IsString1PrefixedByString2_NoCase_Ascii(s.Ptr(), k_LinkPrefix_UNC))
+    {
+      s.DeleteFrontal(6);
+      s.ReplaceOneCharAtPos(0, '\\');
+    }
+    else
+    {
+      s.ReplaceOneCharAtPos(1, '\\'); // we normalize prefix from "\??\" to "\\?\"
+      if (IsDrivePath(s.Ptr(k_LinkPrefix_Size)))
+        s.DeleteFrontal(k_LinkPrefix_Size);
+    }
   }
   return s;
 }
+// **************** NanaZip Modification End ****************
 
 #ifdef SUPPORT_DEVICE_FILE
 
@@ -532,10 +616,14 @@ bool DeleteReparseData(CFSTR path)
     SetLastError(ERROR_INVALID_REPARSE_DATA);
     return false;
   }
-  BYTE buf[my_REPARSE_DATA_BUFFER_HEADER_SIZE];
-  memset(buf, 0, sizeof(buf));
-  memcpy(buf, reparseData, 4); // tag
-  return OutIoReparseData(my_FSCTL_DELETE_REPARSE_POINT, path, buf, sizeof(buf));
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.00.
+  // BYTE buf[my_REPARSE_DATA_BUFFER_HEADER_SIZE];
+  // memset(buf, 0, sizeof(buf));
+  // memcpy(buf, reparseData, 4); // tag
+  memset(reparseData + 4, 0, my_REPARSE_DATA_BUFFER_HEADER_SIZE - 4);
+  return OutIoReparseData(my_FSCTL_DELETE_REPARSE_POINT, path, reparseData, my_REPARSE_DATA_BUFFER_HEADER_SIZE);
+  // **************** NanaZip Modification End ****************
 }
 
 }

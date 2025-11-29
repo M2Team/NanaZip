@@ -42,35 +42,34 @@ static const UInt32 kLangIDs[] =
 #endif
 
 
+// **************** NanaZip Modification Start ****************
+// Backported from 25.00.
 static bool GetSymLink(CFSTR path, CReparseAttr &attr, UString &errorMessage)
 {
   CByteBuffer buf;
   if (!NIO::GetReparseData(path, buf, NULL))
     return false;
-
   if (!attr.Parse(buf, buf.Size()))
   {
     SetLastError(attr.ErrorCode);
     return false;
   }
-
   CByteBuffer data2;
-  if (!FillLinkData(data2, attr.GetPath(),
-      !attr.IsMountPoint(), attr.IsSymLink_WSL()))
+  FillLinkData(data2, attr.GetPath(),
+      !attr.IsMountPoint(), attr.IsSymLink_WSL());
+  if (data2.Size() == 0)
   {
     errorMessage = "Cannot reproduce reparse point";
     return false;
   }
-
-  if (data2.Size() != buf.Size() ||
-      memcmp(data2, buf, buf.Size()) != 0)
+  if (data2 != buf)
   {
     errorMessage = "mismatch for reproduced reparse point";
     return false;
   }
-
   return true;
 }
+// **************** NanaZip Modification End ****************
 
 
 static const int k_LinkType_Buttons[] =
@@ -318,14 +317,17 @@ void CLinkDialog::OnButton_Link()
       return;
     }
 
-    const bool isSymLink = (idb != IDR_LINK_TYPE_JUNCTION);
-
+    // **************** NanaZip Modification Start ****************
+    // Backported from 25.00.
     CByteBuffer data;
-    if (!FillLinkData(data, to, isSymLink, isWSL))
+    const bool isSymLink = (idb != IDR_LINK_TYPE_JUNCTION);
+    FillLinkData(data, to, isSymLink, isWSL);
+    if (data.Size() == 0)
     {
       ShowError(L"Incorrect link");
       return;
     }
+    // **************** NanaZip Modification End ****************
 
     CReparseAttr attr;
     if (!attr.Parse(data, data.Size()))
@@ -385,6 +387,12 @@ void CApp::Link()
         path = destPanel.GetFsPath();
   }
 
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.00.
+  CSelectedState srcSelState;
+  srcPanel.SaveSelectedState(srcSelState);
+  // **************** NanaZip Modification End ****************
+
   CLinkDialog dlg;
   dlg.CurDirPrefix = fsPrefix;
   dlg.FilePath = srcPath + itemName;
@@ -393,7 +401,13 @@ void CApp::Link()
   if (dlg.Create(srcPanel.GetParent()) != IDOK)
     return;
 
-  // fix it: we should refresh panel with changed link
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.00.
+  // we refresh srcPanel to show changes in "Link" (kpidNtReparse) column.
+  // maybe we should refresh another panel also?
+  if (srcPanel._visibleColumns.FindItem_for_PropID(kpidNtReparse) >= 0)
+    srcPanel.RefreshListCtrl(srcSelState);
+  // **************** NanaZip Modification End ****************
 
   RefreshTitleAlways();
 }

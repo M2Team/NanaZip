@@ -195,37 +195,54 @@ struct CDirPathTime: public CFiTimesCAM
 
 #ifdef SUPPORT_LINKS
 
+
+// **************** NanaZip Modification Start ****************
+// Backported from 25.00.
+enum ELinkType
+{
+  k_LinkType_HardLink,
+  k_LinkType_PureSymLink,
+  k_LinkType_Junction,
+  k_LinkType_WSL
+  // , k_LinkType_CopyLink;
+};
+
+
 struct CLinkInfo
 {
-  // bool isCopyLink;
-  bool isHardLink;
-  bool isJunction;
+  ELinkType LinkType;
   bool isRelative;
-  bool isWSL;
-  UString linkPath;
+    //  if (isRelative == false), then (LinkPath) is relative to root folder of archive
+    //  if (isRelative == true ), then (LinkPath) is relative to current item
+  bool isWindowsPath;
+  UString LinkPath;
 
-  bool IsSymLink() const { return !isHardLink; }
+  bool Is_HardLink() const { return LinkType == k_LinkType_HardLink; }
+  bool Is_AnySymLink() const { return LinkType != k_LinkType_HardLink; }
+
+  bool Is_WSL() const { return LinkType == k_LinkType_WSL; }
 
   CLinkInfo():
-    // IsCopyLink(false),
-    isHardLink(false),
-    isJunction(false),
+    LinkType(k_LinkType_PureSymLink),
     isRelative(false),
-    isWSL(false)
+    isWindowsPath(false)
     {}
 
   void Clear()
   {
-    // IsCopyLink = false;
-    isHardLink = false;
-    isJunction = false;
+    LinkType = k_LinkType_PureSymLink;
     isRelative = false;
-    isWSL = false;
-    linkPath.Empty();
+    isWindowsPath = false;
+    LinkPath.Empty();
   }
 
-  bool Parse(const Byte *data, size_t dataSize, bool isLinuxData);
+  bool Parse_from_WindowsReparseData(const Byte *data, size_t dataSize);
+  bool Parse_from_LinuxData(const Byte *data, size_t dataSize);
+  void Normalize_to_RelativeSafe(UStringVector &removePathParts);
+private:
+  void Remove_AbsPathPrefixes();
 };
+// **************** NanaZip Modification End ****************
 
 #endif // SUPPORT_LINKS
 
@@ -500,8 +517,15 @@ private:
 
   // FString _CopyFile_Path;
   // HRESULT MyCopyFile(ISequentialOutStream *outStream);
-  HRESULT Link(const FString &fullProcessedPath);
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.00.
+  // HRESULT Link(const FString &fullProcessedPath);
   HRESULT ReadLink();
+  HRESULT SetLink(
+      const FString &fullProcessedPath_from,
+      const CLinkInfo &linkInfo,
+      bool &linkWasSet);
+  // **************** NanaZip Modification End ****************
 
 public:
   // call PrepareHardLinks() after Init()
@@ -550,15 +574,18 @@ private:
   HRESULT CloseReparseAndFile2();
   HRESULT SetDirsTimes();
 
-  const void *NtReparse_Data;
-  UInt32 NtReparse_Size;
+  // **************** NanaZip Modification Start ****************
+  // Deleted in 25.00.
+  //const void *NtReparse_Data;
+  //UInt32 NtReparse_Size;
 
-  #ifdef SUPPORT_LINKS
-  HRESULT SetFromLinkPath(
-      const FString &fullProcessedPath,
-      const CLinkInfo &linkInfo,
-      bool &linkWasSet);
-  #endif
+  //#ifdef SUPPORT_LINKS
+  //HRESULT SetFromLinkPath(
+  //    const FString &fullProcessedPath,
+  //    const CLinkInfo &linkInfo,
+  //    bool &linkWasSet);
+  //#endif
+  // **************** NanaZip Modification End ****************
 };
 
 
