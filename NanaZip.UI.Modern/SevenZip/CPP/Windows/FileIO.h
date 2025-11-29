@@ -12,7 +12,10 @@
 #define _my_SYMLINK_FLAG_RELATIVE 1
 
 // what the meaning of that FLAG or field (2)?
-#define _my_LX_SYMLINK_FLAG 2
+// **************** NanaZip Modification Start ****************
+// Backported from 25.00, renamed for NanaZip.
+#define _my_LX_SYMLINK_VERSION_2 2
+// **************** NanaZip Modification End ****************
 
 #ifdef _WIN32
 
@@ -44,7 +47,36 @@ namespace NWindows {
 namespace NFile {
 
 #if defined(_WIN32) && !defined(UNDER_CE)
-bool FillLinkData(CByteBuffer &dest, const wchar_t *path, bool isSymLink, bool isWSL);
+// **************** NanaZip Modification Start ****************
+// Backported from 25.00.
+/*
+  in:  (CByteBuffer &dest) is empty
+  in:  (path) uses Windows path separator (\).
+  out: (path) uses   Linux path separator (/).
+       if (isAbsPath == true), then "c:\\" prefix is replaced to "/mnt/c/" prefix
+*/
+void Convert_WinPath_to_WslLinuxPath(FString &path, bool convertDrivePath);
+// (path) must use Linux path separator (/).
+void FillLinkData_WslLink(CByteBuffer &dest, const wchar_t *path);
+
+/*
+  in:  (CByteBuffer &dest) is empty
+  if (isSymLink == false) : MOUNT_POINT : (path) must be absolute.
+  if (isSymLink == true)  : SYMLINK : Windows
+  (path) must use Windows path separator (\).
+  (path) must be without link "\\??\\" prefix.
+  link "\\??\\" prefix will be added inside FillLinkData(), if path is absolute.
+*/
+void FillLinkData_WinLink(CByteBuffer &dest, const wchar_t *path, bool isSymLink);
+// in: (CByteBuffer &dest) is empty
+inline void FillLinkData(CByteBuffer &dest, const wchar_t *path, bool isSymLink, bool isWSL)
+{
+  if (isWSL)
+    FillLinkData_WslLink(dest, path);
+  else
+    FillLinkData_WinLink(dest, path, isSymLink);
+}
+// **************** NanaZip Modification End ****************
 #endif
 
 struct CReparseShortInfo
@@ -84,10 +116,10 @@ struct CReparseAttr
 
   bool IsRelative_WSL() const
   {
-    if (WslName.IsEmpty())
-      return true;
-    char c = WslName[0];
-    return !IS_PATH_SEPAR(c);
+    // **************** NanaZip Modification Start ****************
+    // Backported from 25.00.
+    return WslName[0] != '/'; // WSL uses unix path separator
+    // **************** NanaZip Modification End ****************
   }
 
   // bool IsVolume() const;
