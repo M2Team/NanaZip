@@ -319,6 +319,40 @@ static bool CopyNamesToHGlobal(NMemory::CGlobal &hgDrop, const UStringVector &na
   return true;
 }
 
+// **************** NanaZip Modification Start ****************
+static BOOL FastDragDropAvailable()
+{
+    if (!WantFastDragDrop())
+    {
+        return FALSE;
+    }
+
+    static TOKEN_ELEVATION_TYPE CachedElevation = ([]() -> TOKEN_ELEVATION_TYPE
+    {
+        TOKEN_ELEVATION_TYPE CurrentElevation;
+        DWORD Length = sizeof(CurrentElevation);
+        if (!GetTokenInformation(
+            GetCurrentProcessToken(),
+            TokenElevationType,
+            &CurrentElevation,
+            Length,
+            &Length))
+        {
+            // Fallback to disable
+            return TokenElevationTypeFull;
+        }
+        return CurrentElevation;
+    }());
+
+    if (CachedElevation == TokenElevationTypeFull)
+    {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+// **************** NanaZip Modification End ****************
+
 void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
 {
   if (!DoesItSupportOperations())
@@ -339,7 +373,7 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
   CTempDir tempDirectory;
 
   // **************** NanaZip Modification Start ****************
-  bool FastDragDrop = WantFastDragDrop();
+  bool FastDragDrop = FastDragDropAvailable();
   FString FakeDirPath;
   // **************** NanaZip Modification End ****************
 
