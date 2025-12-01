@@ -17,6 +17,8 @@ namespace NanaZip.ProjectAssetsGenerator
 
                 ConcurrentDictionary<int, MagickImage> StandardSources =
                     new ConcurrentDictionary<int, MagickImage>();
+                ConcurrentDictionary<int, MagickImage> StandardIconSources =
+                    new ConcurrentDictionary<int, MagickImage>();
                 ConcurrentDictionary<int, MagickImage> ContrastBlackSources =
                     new ConcurrentDictionary<int, MagickImage>();
                 ConcurrentDictionary<int, MagickImage> ContrastWhiteSources =
@@ -33,6 +35,11 @@ namespace NanaZip.ProjectAssetsGenerator
                     StandardSources[AssetSize] = new MagickImage(string.Format(
                         @"{0}\{1}\{1}_{2}.png",
                         SourcePath,
+                        "Standard",
+                        AssetSize));
+                    StandardIconSources[AssetSize] = new MagickImage(string.Format(
+                        @"{0}\{1}\{1}_{2}.png",
+                        SourcePath.Replace("OriginalAssets", "OriginalAssetsOptimized"),
                         "Standard",
                         AssetSize));
                     ContrastBlackSources[AssetSize] = new MagickImage(string.Format(
@@ -54,7 +61,7 @@ namespace NanaZip.ProjectAssetsGenerator
 
                     SfxStubSources[AssetSize] = new MagickImage(string.Format(
                         @"{0}\{1}\{1}_{2}.png",
-                        SourcePath,
+                        SourcePath.Replace("OriginalAssets", "OriginalAssetsOptimized"),
                         "SelfExtractingExecutable",
                         AssetSize));
                 }
@@ -71,7 +78,7 @@ namespace NanaZip.ProjectAssetsGenerator
                     @"ArchiveFile");
 
                 ProjectAssetsUtilities.GenerateIconFile(
-                    StandardSources,
+                    StandardIconSources,
                     OutputPath + @"\..\NanaZip.ico");
 
                 ProjectAssetsUtilities.GenerateIconFile(
@@ -89,6 +96,8 @@ namespace NanaZip.ProjectAssetsGenerator
 
                 ConcurrentDictionary<int, MagickImage> StandardSources =
                     new ConcurrentDictionary<int, MagickImage>();
+                ConcurrentDictionary<int, MagickImage> StandardIconSources =
+                    new ConcurrentDictionary<int, MagickImage>();
                 ConcurrentDictionary<int, MagickImage> ContrastBlackSources =
                     new ConcurrentDictionary<int, MagickImage>();
                 ConcurrentDictionary<int, MagickImage> ContrastWhiteSources =
@@ -105,6 +114,11 @@ namespace NanaZip.ProjectAssetsGenerator
                     StandardSources[AssetSize] = new MagickImage(string.Format(
                         @"{0}\{1}\{1}_{2}.png",
                         SourcePath,
+                        "Standard",
+                        AssetSize));
+                    StandardIconSources[AssetSize] = new MagickImage(string.Format(
+                        @"{0}\{1}\{1}_{2}.png",
+                        SourcePath.Replace("OriginalAssets", "OriginalAssetsOptimized"),
                         "Standard",
                         AssetSize));
                     ContrastBlackSources[AssetSize] = new MagickImage(string.Format(
@@ -126,7 +140,7 @@ namespace NanaZip.ProjectAssetsGenerator
 
                     SfxStubSources[AssetSize] = new MagickImage(string.Format(
                         @"{0}\{1}\{1}_{2}.png",
-                        SourcePath,
+                        SourcePath.Replace("OriginalAssets", "OriginalAssetsOptimized"),
                         "SelfExtractingExecutable",
                         AssetSize));
                 }
@@ -143,7 +157,7 @@ namespace NanaZip.ProjectAssetsGenerator
                     @"ArchiveFile");
 
                 ProjectAssetsUtilities.GenerateIconFile(
-                    StandardSources,
+                    StandardIconSources,
                     OutputPath + @"\..\NanaZipPreview.ico");
 
                 ProjectAssetsUtilities.GenerateIconFile(
