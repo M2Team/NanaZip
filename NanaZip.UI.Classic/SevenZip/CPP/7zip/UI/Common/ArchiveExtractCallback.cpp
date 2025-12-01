@@ -1380,8 +1380,8 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
 
   // **************** NanaZip Modification Start ****************
   // Backported from 25.00.
-  //if (_link.linkPath.IsEmpty())
-  if (_link.LinkPath.IsEmpty())
+  //if (!_link.linkPath.IsEmpty())
+  if (!_link.LinkPath.IsEmpty())
   {
     #ifndef UNDER_CE
     {
