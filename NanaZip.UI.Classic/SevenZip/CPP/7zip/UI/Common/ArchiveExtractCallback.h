@@ -365,6 +365,15 @@ class CArchiveExtractCallback:
 
   UInt32 _index;
   UInt64 _curSize;
+
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.05.
+  bool _some_pathParts_wereRemoved;
+public:
+  bool Is_elimPrefix_Mode;
+
+private:
+  // **************** NanaZip Modification End ****************
   bool _curSizeDefined;
   bool _fileLengthWasSet;
   UInt64 _fileLength_that_WasSet;
