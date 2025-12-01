@@ -10,6 +10,8 @@ Following is the list of currently-supported policy options.
 
 ### Propagate Zone.Id stream
 
+*Availability: NanaZip 6.0 Preview 1 (6.0.1461.0) and later.*
+
 This value controls Mark-of-the-Web (MOTW) propagation of archive files.
 
 - Name: `WriteZoneIdExtract`
@@ -21,6 +23,8 @@ This value controls Mark-of-the-Web (MOTW) propagation of archive files.
 
 ### Disable mitigations
 
+*Availability: NanaZip 6.0 Preview 1 (6.0.1461.0) and later.*
+
 This value controls which security mitigations should not be applied by NanaZip.
 
 - Name: `DisableMitigations`
@@ -31,6 +35,8 @@ This value controls which security mitigations should not be applied by NanaZip.
     - Other values are reserved.
 
 ### Archive handler restrictions
+
+*Availability: NanaZip 6.0 Preview 2 and later.*
 
 These values control which archive handlers can be loaded by NanaZip.
 
@@ -58,7 +64,7 @@ must be on its own line.
 - Type: `REG_MULTI_SZ`
 - Value: List of blocked archive handlers (case-sensitive).
 
-Known archive handlers (as of NanaZip 6.0 Preview 1):
+Known archive handlers (as of NanaZip 6.0 Preview 2):
 
 ```
 .Electron Archive (asar), .NET Single File Application, 7z, APFS, APM, Ar, Arj,
@@ -70,10 +76,11 @@ UEFIf, UFS, VDI, VHD, VHDX, VMDK, WebAssembly (WASM), wim, Xar, xz, Z, ZealFS,
 zip, zstd
 ```
 
-Look for `REGISTER_ARC` in NanaZip.Core for the full list of handlers bundled
-with NanaZip.
+Run `NanaZipC --version` to see the full list of currently-enabled handlers.
 
 ### Codec restrictions
+
+*Availability: NanaZip 6.0 Preview 2 and later.*
 
 Similarly to archive handler restrictions, these values control which codecs can
 be loaded by NanaZip.
@@ -93,7 +100,7 @@ blocked.
 - Type: `REG_MULTI_SZ`
 - Value: List of blocked codecs (case-sensitive).
 
-Known codecs (as of NanaZip 6.0 Preview 1):
+Known codecs (as of NanaZip 6.0 Preview 2):
 
 ```
 7zAES, AES256CBC, ARM, ARM64, ARMT, BCJ, BCJ2, BROTLI, BZip2, Copy, Deflate,
@@ -101,5 +108,4 @@ Deflate64, Delta, FLZMA2, IA64, LIZARD, LZ4, LZ5, LZMA, LZMA2, PPC, PPMD, Rar1,
 Rar2, Rar3, Rar5, RISCV, SPARC, Swap2, Swap4, ZSTD
 ```
 
-Look for `REGISTER_CODEC` in NanaZip.Core for the list of codecs bundled with
-NanaZip.
+Run `NanaZipC --version` to see the full list of currently-enabled codecs.

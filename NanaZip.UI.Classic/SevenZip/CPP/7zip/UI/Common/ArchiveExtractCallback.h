@@ -54,7 +54,10 @@ struct CExtractNtOptions
 {
   CBoolPair NtSecurity;
   CBoolPair SymLinks;
-  CBoolPair SymLinks_AllowDangerous;
+  // **************** NanaZip Modification Start ****************
+  // Deleted from 25.01.
+  //CBoolPair SymLinks_AllowDangerous;
+  // **************** NanaZip Modification End ****************
   CBoolPair HardLinks;
   CBoolPair AltStreams;
   bool ReplaceColonForAltStream;
@@ -68,15 +71,27 @@ struct CExtractNtOptions
   bool PreserveATime;
   bool OpenShareForWrite;
 
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  unsigned SymLinks_DangerousLevel;
+  // **************** NanaZip Modification End ****************
+
   CExtractNtOptions():
       ReplaceColonForAltStream(false),
       WriteToAltStreamIfColon(false),
       ExtractOwner(false),
       PreserveATime(false),
-      OpenShareForWrite(false)
+      OpenShareForWrite(false),
+      // **************** NanaZip Modification Start ****************
+      // Backported from 25.01.
+      SymLinks_DangerousLevel(5)
+      // **************** NanaZip Modification End ****************
   {
     SymLinks.Val = true;
-    SymLinks_AllowDangerous.Val = false;
+    // **************** NanaZip Modification Start ****************
+    // Deleted from 25.01.
+    //SymLinks_AllowDangerous.Val = false;
+    // **************** NanaZip Modification End ****************
     HardLinks.Val = true;
     AltStreams.Val = true;
 
@@ -183,13 +198,24 @@ struct CFiTimesCAM
       ATime_Defined |
       MTime_Defined;
   }
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  bool SetDirTime_to_FS(CFSTR path) const;
+#ifdef SUPPORT_LINKS
+  bool SetLinkFileTime_to_FS(CFSTR path) const;
+#endif
+  // **************** NanaZip Modification End ****************
 };
 
 struct CDirPathTime: public CFiTimesCAM
 {
   FString Path;
 
-  bool SetDirTime() const;
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  //bool SetDirTime() const;
+  bool SetDirTime_to_FS_2() const { return SetDirTime_to_FS(Path); }
+  // **************** NanaZip Modification End ****************
 };
 
 
@@ -247,6 +273,16 @@ private:
 #endif // SUPPORT_LINKS
 
 
+// **************** NanaZip Modification Start ****************
+// Backported from 25.01.
+struct CProcessedFileInfo
+{
+  CArcTime CTime;
+  CArcTime ATime;
+  CArcTime MTime;
+  UInt32 Attrib;
+  bool Attrib_Defined;
+
 #ifndef _WIN32
 
 struct COwnerInfo
@@ -263,67 +299,17 @@ struct COwnerInfo
   }
 };
 
+  COwnerInfo Owner;
+  COwnerInfo Group;
 #endif
 
-
-class CArchiveExtractCallback:
-  public IArchiveExtractCallback,
-  public IArchiveExtractCallbackMessage,
-  public ICryptoGetTextPassword,
-  public ICompressProgressInfo,
-  public IArchiveUpdateCallbackFile,
-  public IArchiveGetDiskProperty,
-  public CMyUnknownImp
-{
-  const CArc *_arc;
-  CExtractNtOptions _ntOptions;
-
-  const NWildcard::CCensorNode *_wildcardCensor; // we need wildcard for single pass mode (stdin)
-  CMyComPtr<IFolderArchiveExtractCallback> _extractCallback2;
-  CMyComPtr<ICompressProgressInfo> _compressProgress;
-  CMyComPtr<ICryptoGetTextPassword> _cryptoGetTextPassword;
-  CMyComPtr<IArchiveExtractCallbackMessage> _callbackMessage;
-  CMyComPtr<IFolderArchiveExtractCallback2> _folderArchiveExtractCallback2;
-
-  FString _dirPathPrefix;
-  FString _dirPathPrefix_Full;
-  NExtract::NPathMode::EEnum _pathMode;
-  NExtract::NOverwriteMode::EEnum _overwriteMode;
-  bool _keepAndReplaceEmptyDirPrefixes; // replace them to "_";
-
-  #ifndef _SFX
-
-  CMyComPtr<IFolderExtractToStreamCallback> ExtractToStreamCallback;
-  CGetProp *GetProp_Spec;
-  CMyComPtr<IGetProp> GetProp;
-
-  #endif
-
-  CReadArcItem _item;
-  FString _diskFilePath;
-  UInt64 _position;
-  bool _isSplit;
-
-  bool _extractMode;
-
-  bool Write_CTime;
-  bool Write_ATime;
-  bool Write_MTime;
-
-  bool _encrypted;
-
-  struct CProcessedFileInfo
+  void Clear()
   {
-    CArcTime CTime;
-    CArcTime ATime;
-    CArcTime MTime;
-    UInt32 Attrib;
-    bool Attrib_Defined;
-
-   #ifndef _WIN32
-    COwnerInfo Owner;
-    COwnerInfo Group;
-   #endif
+#ifndef _WIN32
+    Attrib_Defined = false;
+    Owner.Clear();
+#endif
+  }
 
     bool IsReparse() const
     {
@@ -354,7 +340,139 @@ class CArchiveExtractCallback:
       #endif
       Attrib_Defined = true;
     }
-  } _fi;
+};
+
+
+#ifdef SUPPORT_LINKS
+
+struct CPostLink
+{
+  UInt32 Index_in_Arc;
+  bool item_IsDir;                // _item.IsDir
+  UString item_Path;              // _item.Path;
+  UStringVector item_PathParts;   // _item.PathParts;
+  CProcessedFileInfo item_FileInfo; // _fi
+  FString fullProcessedPath_from; // full file path in FS
+  CLinkInfo LinkInfo;
+};
+
+/*
+struct CPostLinks
+{
+  void Clear()
+  {
+    Links.Clear();
+  }
+};
+*/
+
+#endif // SUPPORT_LINKS
+// **************** NanaZip Modification End ****************
+
+
+class CArchiveExtractCallback:
+  public IArchiveExtractCallback,
+  public IArchiveExtractCallbackMessage,
+  public ICryptoGetTextPassword,
+  public ICompressProgressInfo,
+  public IArchiveUpdateCallbackFile,
+  public IArchiveGetDiskProperty,
+  public CMyUnknownImp
+{
+  const CArc *_arc;
+  // **************** NanaZip Modification Start ****************
+  // Made public in 25.01.
+public:
+  CExtractNtOptions _ntOptions;
+private:
+  // **************** NanaZip Modification End ****************
+
+  const NWildcard::CCensorNode *_wildcardCensor; // we need wildcard for single pass mode (stdin)
+  CMyComPtr<IFolderArchiveExtractCallback> _extractCallback2;
+  CMyComPtr<ICompressProgressInfo> _compressProgress;
+  CMyComPtr<ICryptoGetTextPassword> _cryptoGetTextPassword;
+  CMyComPtr<IArchiveExtractCallbackMessage> _callbackMessage;
+  CMyComPtr<IFolderArchiveExtractCallback2> _folderArchiveExtractCallback2;
+
+  FString _dirPathPrefix;
+  // **************** NanaZip Modification Start ****************
+  // Made public in 25.01.
+public:
+  FString _dirPathPrefix_Full;
+private:
+  // **************** NanaZip Modification End ****************
+  NExtract::NPathMode::EEnum _pathMode;
+  NExtract::NOverwriteMode::EEnum _overwriteMode;
+  bool _keepAndReplaceEmptyDirPrefixes; // replace them to "_";
+
+  #ifndef _SFX
+
+  CMyComPtr<IFolderExtractToStreamCallback> ExtractToStreamCallback;
+  CGetProp *GetProp_Spec;
+  CMyComPtr<IGetProp> GetProp;
+
+  #endif
+
+  CReadArcItem _item;
+  FString _diskFilePath;
+  UInt64 _position;
+  bool _isSplit;
+
+  bool _extractMode;
+
+  bool Write_CTime;
+  bool Write_ATime;
+  bool Write_MTime;
+
+  bool _encrypted;
+
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01, see CProcessedFileInfo above.
+  //struct CProcessedFileInfo
+  //{
+  //  CArcTime CTime;
+  //  CArcTime ATime;
+  //  CArcTime MTime;
+  //  UInt32 Attrib;
+  //  bool Attrib_Defined;
+
+  // #ifndef _WIN32
+  //  COwnerInfo Owner;
+  //  COwnerInfo Group;
+  // #endif
+
+  //  bool IsReparse() const
+  //  {
+  //    return (Attrib_Defined && (Attrib & FILE_ATTRIBUTE_REPARSE_POINT) != 0);
+  //  }
+
+  //  bool IsLinuxSymLink() const
+  //  {
+  //    return (Attrib_Defined && MY_LIN_S_ISLNK(Attrib >> 16));
+  //  }
+
+  //  void SetFromPosixAttrib(UInt32 a)
+  //  {
+  //    // here we set only part of combined attribute required by SetFileAttrib() call
+  //    #ifdef _WIN32
+  //    // Windows sets FILE_ATTRIBUTE_NORMAL, if we try to set 0 as attribute.
+  //    Attrib = MY_LIN_S_ISDIR(a) ?
+  //        FILE_ATTRIBUTE_DIRECTORY :
+  //        FILE_ATTRIBUTE_ARCHIVE;
+  //    if ((a & 0222) == 0) // (& S_IWUSR) in p7zip
+  //      Attrib |= FILE_ATTRIBUTE_READONLY;
+  //    // 22.00 : we need type bits for (MY_LIN_S_IFLNK) for IsLinuxSymLink()
+  //    a &= MY_LIN_S_IFMT;
+  //    if (a == MY_LIN_S_IFLNK)
+  //      Attrib |= (a << 16);
+  //    #else
+  //    Attrib = (a << 16) | FILE_ATTRIBUTE_UNIX_EXTENSION;
+  //    #endif
+  //    Attrib_Defined = true;
+  //  }
+  //} _fi;
+  CProcessedFileInfo _fi;
+  // **************** NanaZip Modification End ****************
 
   // bool _is_SymLink_in_Data;
   bool _is_SymLink_in_Data_Linux; // false = WIN32, true = LINUX
@@ -365,6 +483,15 @@ class CArchiveExtractCallback:
 
   UInt32 _index;
   UInt64 _curSize;
+
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.05.
+  bool _some_pathParts_wereRemoved;
+public:
+  bool Is_elimPrefix_Mode;
+
+private:
+  // **************** NanaZip Modification End ****************
   bool _curSizeDefined;
   bool _fileLengthWasSet;
   UInt64 _fileLength_that_WasSet;
@@ -413,7 +540,12 @@ class CArchiveExtractCallback:
   bool _saclEnabled;
   #endif
 
-  void CreateComplexDirectory(const UStringVector &dirPathParts, FString &fullPath);
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  //void CreateComplexDirectory(const UStringVector &dirPathParts, FString &fullPath);
+  void CreateComplexDirectory(
+      const UStringVector &dirPathParts, bool isFinal, FString &fullPath);
+  // **************** NanaZip Modification End ****************
   HRESULT GetTime(UInt32 index, PROPID propID, CArcTime &ft);
   HRESULT GetUnpackSize();
 
@@ -422,9 +554,14 @@ class CArchiveExtractCallback:
   void SetAttrib();
 
 public:
-  HRESULT SendMessageError(const char *message, const FString &path);
-  HRESULT SendMessageError_with_LastError(const char *message, const FString &path);
-  HRESULT SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2);
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  HRESULT SendMessageError(const char *message, const FString &path) const;
+  HRESULT SendMessageError_with_Error(HRESULT errorCode, const char *message, const FString &path) const;
+  HRESULT SendMessageError_with_LastError(const char *message, const FString &path) const;
+  HRESULT SendMessageError2(HRESULT errorCode, const char *message, const FString &path1, const FString &path2) const;
+  HRESULT SendMessageError2_with_LastError(const char *message, const FString &path1, const FString &path2) const;
+  // **************** NanaZip Modification End ****************
 
 public:
   #if defined(_WIN32) && !defined(UNDER_CE)
@@ -513,26 +650,35 @@ public:
 
 private:
   CHardLinks _hardLinks;
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  CObjectVector<CPostLink> _postLinks;
+  // **************** NanaZip Modification End ****************
   CLinkInfo _link;
 
   // FString _CopyFile_Path;
   // HRESULT MyCopyFile(ISequentialOutStream *outStream);
   // **************** NanaZip Modification Start ****************
-  // Backported from 25.00.
+  // Backported from 25.01.
   // HRESULT Link(const FString &fullProcessedPath);
   HRESULT ReadLink();
   HRESULT SetLink(
       const FString &fullProcessedPath_from,
       const CLinkInfo &linkInfo,
       bool &linkWasSet);
+  HRESULT SetPostLinks() const;
   // **************** NanaZip Modification End ****************
 
 public:
-  // call PrepareHardLinks() after Init()
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  HRESULT CreateHardLink2(const FString &newFilePath,
+      const FString &existFilePath, bool &link_was_Created) const;
+  HRESULT DeleteLinkFileAlways_or_RemoveEmptyDir(const FString &path, bool checkThatFileIsEmpty) const;
+  // **************** NanaZip Modification End ****************
   HRESULT PrepareHardLinks(const CRecordVector<UInt32> *realIndices);  // NULL means all items
 
   #endif
-
 
   #ifdef SUPPORT_ALT_STREAMS
   CObjectVector<CIndexToPathPair> _renamedFiles;
@@ -561,7 +707,10 @@ private:
 
   HRESULT Read_fi_Props();
   void CorrectPathParts();
-  void GetFiTimesCAM(CFiTimesCAM &pt);
+  // **************** NanaZip Modification Start ****************
+  // Deleted from 25.01.
+  //void GetFiTimesCAM(CFiTimesCAM &pt);
+  // **************** NanaZip Modification End ****************
   void CreateFolders();
 
   bool _isRenamed;
@@ -571,8 +720,15 @@ private:
 
   HRESULT CloseFile();
   HRESULT CloseReparseAndFile();
-  HRESULT CloseReparseAndFile2();
+  // **************** NanaZip Modification Start ****************
+  // Deleted from 25.01.
+  //HRESULT CloseReparseAndFile2();
+  // **************** NanaZip Modification End ****************
   HRESULT SetDirsTimes();
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  HRESULT SetSecurityInfo(UInt32 indexInArc, const FString &path) const;
+  // **************** NanaZip Modification End ****************
 
   // **************** NanaZip Modification Start ****************
   // Deleted in 25.00.

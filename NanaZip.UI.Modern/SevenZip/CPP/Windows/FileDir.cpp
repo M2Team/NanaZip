@@ -109,7 +109,11 @@ bool GetSystemDir(FString &path)
 #endif // UNDER_CE
 
 
-bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+// **************** NanaZip Modification Start ****************
+// Backported from 25.01.
+//bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+static bool SetFileTime_Base(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime, DWORD dwFlagsAndAttributes)
+// **************** NanaZip Modification End ****************
 {
   #ifndef _UNICODE
   if (!g_IsNT)
@@ -122,14 +126,22 @@ bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CF
   HANDLE hDir = INVALID_HANDLE_VALUE;
   IF_USE_MAIN_PATH
     hDir = ::CreateFileW(fs2us(path), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+        // **************** NanaZip Modification Start ****************
+        // Backported from 25.01.
+        //NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+        NULL, OPEN_EXISTING, dwFlagsAndAttributes, NULL);
+        // **************** NanaZip Modification End ****************
   #ifdef WIN_LONG_PATH
   if (hDir == INVALID_HANDLE_VALUE && USE_SUPER_PATH)
   {
     UString superPath;
     if (GetSuperPath(path, superPath, USE_MAIN_PATH))
       hDir = ::CreateFileW(superPath, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-          NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+        // **************** NanaZip Modification Start ****************
+        // Backported from 25.01.
+        //NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+        NULL, OPEN_EXISTING, dwFlagsAndAttributes, NULL);
+        // **************** NanaZip Modification End ****************
   }
   #endif
 
@@ -141,6 +153,19 @@ bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CF
   }
   return res;
 }
+
+// **************** NanaZip Modification Start ****************
+// Backported from 25.01.
+bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+{
+  return SetFileTime_Base(path, cTime, aTime, mTime, FILE_FLAG_BACKUP_SEMANTICS);
+}
+
+bool SetLinkFileTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)
+{
+  return SetFileTime_Base(path, cTime, aTime, mTime, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT);
+}
+// **************** NanaZip Modification End ****************
 
 
 
@@ -566,6 +591,38 @@ bool RemoveDirWithSubItems(const FString &path)
     return false;
   return RemoveDir(path);
 }
+
+// **************** NanaZip Modification Start ****************
+// Backported from 25.01.
+bool RemoveDirAlways_if_Empty(const FString &path)
+{
+  const DWORD attrib = NFind::GetFileAttrib(path);
+  if (attrib != INVALID_FILE_ATTRIBUTES
+      && (attrib & FILE_ATTRIBUTE_READONLY))
+  {
+    bool need_ClearAttrib = true;
+    if ((attrib & FILE_ATTRIBUTE_REPARSE_POINT) == 0)
+    {
+      FString s (path);
+      s.Add_PathSepar();
+      NFind::CEnumerator enumerator;
+      enumerator.SetDirPrefix(s);
+      NFind::CDirEntry fi;
+      if (enumerator.Next(fi))
+      {
+        // we don't want to change attributes, if there are files
+        // in directory, because RemoveDir(path) will fail.
+        need_ClearAttrib = false;
+        // SetLastError(ERROR_DIR_NOT_EMPTY);
+        // return false;
+      }
+    }
+    if (need_ClearAttrib)
+      SetFileAttrib(path, 0); // we clear read-only attrib to remove read-only dir
+  }
+  return RemoveDir(path);
+}
+// **************** NanaZip Modification End ****************
 
 #endif // _WIN32
 
