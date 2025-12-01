@@ -198,13 +198,16 @@ void ReadZoneFile_Of_BaseFile(CFSTR fileName2, CByteBuffer &buf)
   buf.Free();
 }
 
-static bool WriteZoneFile(CFSTR fileName, const CByteBuffer &buf)
-{
-  NIO::COutFile file;
-  if (!file.Create(fileName, true))
-    return false;
-  return file.WriteFull(buf, buf.Size());
-}
+// **************** NanaZip Modification Start ****************
+// Deleted from 24.05.
+//static bool WriteZoneFile(CFSTR fileName, const CByteBuffer &buf)
+//{
+//  NIO::COutFile file;
+//  if (!file.Create(fileName, true))
+//    return false;
+//  return file.WriteFull(buf, buf.Size());
+//}
+// **************** NanaZip Modification End ****************
 
 // **************** NanaZip Modification Start ****************
 // Backported from 24.09 with changes.
@@ -322,6 +325,10 @@ CArchiveExtractCallback::CArchiveExtractCallback():
     Write_CTime(true),
     Write_ATime(true),
     Write_MTime(true),
+    // **************** NanaZip Modification Start ****************
+    // Backported from 24.05.
+    Is_elimPrefix_Mode(false),
+    // **************** NanaZip Modification End ****************
     _multiArchives(false)
 {
   LocalProgressSpec = new CLocalProgress();
@@ -1121,24 +1128,66 @@ void CArchiveExtractCallback::GetFiTimesCAM(CFiTimesCAM &pt)
 }
 
 
+// **************** NanaZip Modification Start ****************
+// Backported from 24.05.
 void CArchiveExtractCallback::CreateFolders()
 {
   // 21.04 : we don't change original (_item.PathParts) here
   UStringVector pathParts = _item.PathParts;
 
-  if (!_item.IsDir)
+  // bool is_DirOp = false;
+  if (!pathParts.IsEmpty())
   {
-    if (!pathParts.IsEmpty())
+    /* v23: if we extract symlink, and we know that it links to dir:
+        Linux:   we don't create dir item (symlink_from_path) here.
+        Windows: SetReparseData() will create dir item, if it doesn't exist,
+                 but if we create dir item here, it's not problem. */
+    if (!_item.IsDir
+        #ifdef SUPPORT_LINKS
+        #ifndef WIN32
+          || !_link.linkPath.IsEmpty()
+        #endif
+        #endif
+       )
       pathParts.DeleteBack();
+    // else is_DirOp = true;
   }
 
   if (pathParts.IsEmpty())
-    return;
+  {
+    /* if (_some_pathParts_wereRemoved && Is_elimPrefix_Mode),
+       then we can have empty pathParts() here for root folder.
+       v24.00: fixed: we set timestamps for such folder still.
+    */
+    if (!_some_pathParts_wereRemoved ||
+        !Is_elimPrefix_Mode)
+      return;
+    // return; // ignore empty paths case
+  }
+  /*
+  if (is_DirOp)
+  {
+    RINOK(PrepareOperation(NArchive::NExtract::NAskMode::kExtract))
+    _op_WasReported = true;
+  }
+  */
 
   FString fullPathNew;
   CreateComplexDirectory(pathParts, fullPathNew);
 
+  /*
+  if (is_DirOp)
+  {
+    RINOK(SetOperationResult(
+        // _itemFailure ? NArchive::NExtract::NOperationResult::kDataError :
+        NArchive::NExtract::NOperationResult::kOK
+        ))
+  }
+  */
+
   if (!_item.IsDir)
+    return;
+  if (fullPathNew.IsEmpty())
     return;
 
   if (_itemFailure)
@@ -1154,6 +1203,7 @@ void CArchiveExtractCallback::CreateFolders()
     _extractedFolders.Add(pt);
   }
 }
+// **************** NanaZip Modification End ****************
 
 
 
@@ -1609,6 +1659,12 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
   _isSymLinkCreated = false;
   _itemFailure = false;
 
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.05.
+  _some_pathParts_wereRemoved = false;
+  // _op_WasReported = false;
+  // **************** NanaZip Modification End ****************
+
   #ifdef SUPPORT_LINKS
   // _CopyFile_Path.Empty();
   _link.Clear();
@@ -1749,7 +1805,14 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
             return E_FAIL;
         }
         else
+        // **************** NanaZip Modification Start ****************
+        // Backported from 24.05.
+        //numRemovePathParts = _removePathParts.Size();
+        {
           numRemovePathParts = _removePathParts.Size();
+          _some_pathParts_wereRemoved = true;
+        }
+        // **************** NanaZip Modification End ****************
         break;
       }
 
@@ -1935,8 +1998,12 @@ HRESULT CArchiveExtractCallback::CloseFile()
         FindExt2(kOfficeExtensions, _diskFilePath))
     {
       // we must write zone file before setting of timestamps
-      const FString path = _diskFilePath + k_ZoneId_StreamName;
-      if (!WriteZoneFile(path, ZoneBuf))
+      // **************** NanaZip Modification Start ****************
+      // Backported from 24.05.
+      //const FString path = _diskFilePath + k_ZoneId_StreamName;
+      //if (!WriteZoneFile(path, ZoneBuf))
+      if (!WriteZoneFile_To_BaseFile(_diskFilePath, ZoneBuf))
+      // **************** NanaZip Modification End ****************
       {
         // we can't write it in FAT
         // SendMessageError_with_LastError("Can't write Zone.Identifier stream", path);
