@@ -4,15 +4,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>$(MileProjectVersion)</Version>
+    <InstallerInputPath>$(MSBuildThisFileDirectory)..\Output\Binaries\$(Configuration)</InstallerInputPath>
     <InstallerOutputPath>$(MSBuildThisFileDirectory)..\Output</InstallerOutputPath>
   </PropertyGroup>
 
   <!-- NOTE: verify Tools.InnoSetup package binaries with official binaries every upgrade -->
   <ItemGroup>
-    <PackageReference Include="Tools.InnoSetup" Version="6.4.2" />
+    <PackageReference Include="Tools.InnoSetup" Version="6.4.3" />
   </ItemGroup>
 
   <Target Name="BuildInstaller" BeforeTargets="AfterBuild">
-    <Exec Command='"$(InnoSetupCompiler)" "$(MSBuildProjectName).iss" "/DAppVersion=$(Version)" "/O$(InstallerOutputPath)"' />
+    <Exec Command='"$(InnoSetupCompiler)" "$(MSBuildProjectName).iss" "/DAppVersion=$(Version)" "/DInputPath=$(InstallerInputPath)" "/O$(InstallerOutputPath)"' />
   </Target>
 </Project>
