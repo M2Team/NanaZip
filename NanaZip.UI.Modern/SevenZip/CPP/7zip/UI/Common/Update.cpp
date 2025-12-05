@@ -1,4 +1,4 @@
-// Update.cpp
+﻿// Update.cpp
 
 #include "StdAfx.h"
 
@@ -30,6 +30,9 @@
 #include "SetProperties.h"
 #include "TempFiles.h"
 #include "UpdateCallback.h"
+
+#include "../GUI/UpdateCallbackGUI.h"
+#include "NanaZip.Modern.h"
 
 static const char * const kUpdateIsNotSupoorted =
   "update operations are not supported for this archive";
@@ -1185,12 +1188,6 @@ static HRESULT EnumerateInArchiveItems(
   return S_OK;
 }
 
-#if defined(_WIN32) && !defined(UNDER_CE)
-
-#include <MAPI.h>
-
-#endif
-
 HRESULT UpdateArchive(
     CCodecs *codecs,
     const CObjectVector<COpenType> &types,
@@ -1719,90 +1716,22 @@ HRESULT UpdateArchive(
 
   if (options.EMailMode)
   {
-    NDLL::CLibrary mapiLib;
-    if (!mapiLib.Load(FTEXT("Mapi32.dll")))
+    HWND ParentWindowHandle{
+        (HWND)(*(((CUpdateCallbackGUI*)callback)->ProgressDialog)) };
+      
+    std::vector<std::wstring> Paths;
+    for (unsigned i = 0; i < options.Commands.Size(); i++)
     {
-      errorInfo.SetFromLastError("cannot load Mapi32.dll");
-      return errorInfo.Get_HRESULT_Error();
-    }
-
-    /*
-    LPMAPISENDDOCUMENTS fnSend = (LPMAPISENDDOCUMENTS)mapiLib.GetProc("MAPISendDocuments");
-    if (fnSend == 0)
-    {
-      errorInfo.SetFromLastError)("NanaZip cannot find MAPISendDocuments function");
-      return errorInfo.Get_HRESULT_Error();
-    }
-    */
-
-    LPMAPISENDMAIL sendMail = (LPMAPISENDMAIL)(void *)mapiLib.GetProc("MAPISendMail");
-    if (sendMail == 0)
-    {
-      errorInfo.SetFromLastError("NanaZip cannot find MAPISendMail function");
-      return errorInfo.Get_HRESULT_Error();;
-    }
-
-    FStringVector fullPaths;
-    unsigned i;
-
-    for (i = 0; i < options.Commands.Size(); i++)
-    {
-      CArchivePath &ap = options.Commands[i].ArchivePath;
+      CArchivePath& ap = options.Commands[i].ArchivePath;
       FString finalPath = us2fs(ap.GetFinalPath());
       FString arcPath2;
       if (!MyGetFullPathName(finalPath, arcPath2))
-        return errorInfo.SetFromLastError("GetFullPathName error", finalPath);
-      fullPaths.Add(arcPath2);
-    }
-
-    CCurrentDirRestorer curDirRestorer;
-
-    AStringVector paths;
-    AStringVector names;
-
-    for (i = 0; i < fullPaths.Size(); i++)
-    {
-      const UString arcPath2 = fs2us(fullPaths[i]);
-      const UString fileName = ExtractFileNameFromPath(arcPath2);
-      paths.Add(GetAnsiString(arcPath2));
-      names.Add(GetAnsiString(fileName));
-      // const AString path (GetAnsiString(arcPath2));
-      // const AString name (GetAnsiString(fileName));
-      // Warning!!! MAPISendDocuments function changes Current directory
-      // fnSend(0, ";", (LPSTR)(LPCSTR)path, (LPSTR)(LPCSTR)name, 0);
-    }
-
-    CRecordVector<MapiFileDesc> files;
-    files.ClearAndSetSize(paths.Size());
-
-    for (i = 0; i < paths.Size(); i++)
-    {
-      MapiFileDesc &f = files[i];
-      memset(&f, 0, sizeof(f));
-      f.nPosition = 0xFFFFFFFF;
-      f.lpszPathName = paths[i].Ptr_non_const();
-      f.lpszFileName = names[i].Ptr_non_const();
-    }
-
-    {
-      MapiMessage m;
-      memset(&m, 0, sizeof(m));
-      m.nFileCount = files.Size();
-      m.lpFiles = &files.Front();
-
-      const AString addr (GetAnsiString(options.EMailAddress));
-      MapiRecipDesc rec;
-      if (!addr.IsEmpty())
       {
-        memset(&rec, 0, sizeof(rec));
-        rec.ulRecipClass = MAPI_TO;
-        rec.lpszAddress = addr.Ptr_non_const();
-        m.nRecipCount = 1;
-        m.lpRecips = &rec;
+        return errorInfo.SetFromLastError("GetFullPathName error", finalPath);
       }
-
-      sendMail((LHANDLE)0, 0, &m, MAPI_DIALOG, 0);
+      Paths.push_back(std::wstring((const wchar_t*)arcPath2));
     }
+    ::K7ModernShowShareDialog(ParentWindowHandle, Paths);
   }
 
   #endif
