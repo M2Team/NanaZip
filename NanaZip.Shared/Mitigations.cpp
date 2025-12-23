@@ -11,34 +11,11 @@
 
 #include "Mitigations.h"
 
-#include <Mile.Helpers.h>
-
-#include <Detours.h>
-
-EXTERN_C DWORD WINAPI NanaZipGetMitigationDisable()
-{
-    static DWORD CachedResult = ([]() -> DWORD
-    {
-        DWORD Result = 0;
-        DWORD Length = sizeof(DWORD);
-        // Use RRF_ZEROONFAILURE to ensure the result is initialized.
-        ::RegGetValueW(
-            HKEY_LOCAL_MACHINE,
-            L"Software\\NanaZip\\Policies",
-            L"DisableMitigations",
-            RRF_RT_REG_DWORD | RRF_SUBKEY_WOW6464KEY | RRF_ZEROONFAILURE,
-            nullptr,
-            &Result,
-            &Length);
-        return Result;
-    }());
-
-    return CachedResult;
-}
+#include <K7BasePolicies.h>
 
 EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 {
-    if (NanaZipGetMitigationDisable() & 1)
+    if (::K7BaseIsSecurityMitigationPoliciesDisabled())
     {
         return TRUE;
     }
@@ -89,7 +66,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 
 EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 {
-    if (NanaZipGetMitigationDisable() & 1)
+    if (::K7BaseIsSecurityMitigationPoliciesDisabled())
     {
         return TRUE;
     }
@@ -112,7 +89,7 @@ EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(
     _In_ BOOL OptOut)
 {
-    if (NanaZipGetMitigationDisable() & 1)
+    if (::K7BaseIsSecurityMitigationPoliciesDisabled())
     {
         return TRUE;
     }

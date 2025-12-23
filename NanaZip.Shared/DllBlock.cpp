@@ -11,6 +11,8 @@
 
 #include <Mile.Internal.h>
 
+#include <K7BasePolicies.h>
+
 #include <Detours.h>
 
 #include <mutex>
@@ -265,7 +267,7 @@ namespace
 
 EXTERN_C BOOL WINAPI NanaZipBlockDlls()
 {
-    if (NanaZipGetMitigationDisable() & 1) {
+    if (::K7BaseIsSecurityMitigationPoliciesDisabled()) {
         return TRUE;
     }
 

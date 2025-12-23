@@ -14,7 +14,9 @@
 
 #include <Windows.h>
 
-// Affected by NanaZipGetMitigationDisable().
+// All these functions mentioned below are affected by the
+// K7BaseIsSecurityMitigationPoliciesDisabled function in K7Base.
+
 EXTERN_C BOOL WINAPI NanaZipBlockDlls();
 
 #endif // !NANAZIP_SHARED_DLLBLOCK
