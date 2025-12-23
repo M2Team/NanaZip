@@ -37,7 +37,7 @@
       <Version>1.0.3259</Version>
     </PackageReference>
     <PackageReference Include="Mile.Detours">
-      <Version>1.0.1542</Version>
+      <Version>1.0.2180</Version>
     </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
