@@ -11,9 +11,8 @@
 
 #include <Mile.Internal.h>
 
+#include <K7BaseDetours.h>
 #include <K7BasePolicies.h>
-
-#include <Detours.h>
 
 #include <mutex>
 #include <array>
@@ -24,6 +23,203 @@
 #include "Mitigations.h"
 
 #ifdef NDEBUG
+
+namespace
+{
+    namespace FunctionTypes
+    {
+        enum
+        {
+            NtMapViewOfSection,
+            NtQuerySection,
+            NtUnmapViewOfSection,
+            VirtualAlloc,
+            VirtualAllocEx,
+            VirtualProtect,
+            VirtualProtectEx,
+
+            MaximumFunction
+        };
+    }
+
+    struct FunctionItem
+    {
+        PVOID Original;
+        PVOID Detoured;
+    };
+
+    static FunctionItem g_FunctionTable[FunctionTypes::MaximumFunction];
+
+    static HMODULE GetNtDllModuleHandle()
+    {
+        static HMODULE CachedResult = ::GetModuleHandleW(L"ntdll.dll");
+        return CachedResult;
+    }
+
+    static HMODULE GetKernel32ModuleHandle()
+    {
+        static HMODULE CachedResult = ::GetModuleHandleW(L"kernel32.dll");
+        return CachedResult;
+    }
+
+    static NTSTATUS OriginalNtMapViewOfSection(
+        _In_ HANDLE SectionHandle,
+        _In_ HANDLE ProcessHandle,
+        _Inout_ PVOID* BaseAddress,
+        _In_ ULONG_PTR ZeroBits,
+        _In_ SIZE_T CommitSize,
+        _Inout_opt_ PLARGE_INTEGER SectionOffset,
+        _Inout_ PSIZE_T ViewSize,
+        _In_ SECTION_INHERIT InheritDisposition,
+        _In_ ULONG AllocationType,
+        _In_ ULONG PageProtection)
+    {
+        using FunctionType = decltype(NtMapViewOfSection)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::NtMapViewOfSection].Original);
+        if (!FunctionAddress)
+        {
+            return STATUS_NOINTERFACE;
+        }
+        return FunctionAddress(
+            SectionHandle,
+            ProcessHandle,
+            BaseAddress,
+            ZeroBits,
+            CommitSize,
+            SectionOffset,
+            ViewSize,
+            InheritDisposition,
+            AllocationType,
+            PageProtection);
+    }
+
+    static NTSTATUS OriginalNtQuerySection(
+        _In_ HANDLE SectionHandle,
+        _In_ SECTION_INFORMATION_CLASS SectionInformationClass,
+        _Out_ PVOID SectionInformation,
+        _In_ SIZE_T SectionInformationLength,
+        _Out_opt_ PSIZE_T ReturnLength)
+    {
+        using FunctionType = decltype(::NtQuerySection)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::NtQuerySection].Original);
+        if (!FunctionAddress)
+        {
+            return STATUS_NOINTERFACE;
+        }
+        return FunctionAddress(
+            SectionHandle,
+            SectionInformationClass,
+            SectionInformation,
+            SectionInformationLength,
+            ReturnLength);
+    }
+
+    static NTSTATUS OriginalNtUnmapViewOfSection(
+        _In_ HANDLE ProcessHandle,
+        _In_opt_ PVOID BaseAddress)
+    {
+        using FunctionType = decltype(::NtUnmapViewOfSection)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Original);
+        if (!FunctionAddress)
+        {
+            return STATUS_NOINTERFACE;
+        }
+        return FunctionAddress(
+            ProcessHandle,
+            BaseAddress);
+    }
+
+    static LPVOID OriginalVirtualAlloc(
+        _In_opt_ LPVOID lpAddress,
+        _In_ SIZE_T dwSize,
+        _In_ DWORD flAllocationType,
+        _In_ DWORD flProtect)
+    {
+        using FunctionType = decltype(VirtualAlloc)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::VirtualAlloc].Original);
+        if (!FunctionAddress)
+        {
+            ::SetLastError(ERROR_NOINTERFACE);
+            return nullptr;
+        }
+        return FunctionAddress(
+            lpAddress,
+            dwSize,
+            flAllocationType,
+            flProtect);
+    }
+
+    static LPVOID OriginalVirtualAllocEx(
+        _In_ HANDLE hProcess,
+        _In_opt_ LPVOID lpAddress,
+        _In_ SIZE_T dwSize,
+        _In_ DWORD flAllocationType,
+        _In_ DWORD flProtect)
+    {
+        using FunctionType = decltype(VirtualAllocEx)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::VirtualAllocEx].Original);
+        if (!FunctionAddress)
+        {
+            ::SetLastError(ERROR_NOINTERFACE);
+            return nullptr;
+        }
+        return FunctionAddress(
+            hProcess,
+            lpAddress,
+            dwSize,
+            flAllocationType,
+            flProtect);
+    }
+
+    static BOOL OriginalVirtualProtect(
+        _In_ LPVOID lpAddress,
+        _In_ SIZE_T dwSize,
+        _In_ DWORD flNewProtect,
+        _Out_ PDWORD lpflOldProtect)
+    {
+        using FunctionType = decltype(VirtualProtect)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::VirtualProtect].Original);
+        if (!FunctionAddress)
+        {
+            ::SetLastError(ERROR_NOINTERFACE);
+            return FALSE;
+        }
+        return FunctionAddress(
+            lpAddress,
+            dwSize,
+            flNewProtect,
+            lpflOldProtect);
+    }
+
+    static BOOL OriginalVirtualProtectEx(
+        _In_ HANDLE hProcess,
+        _In_ LPVOID lpAddress,
+        _In_ SIZE_T dwSize,
+        _In_ DWORD flNewProtect,
+        _Out_ PDWORD lpflOldProtect)
+    {
+        using FunctionType = decltype(VirtualProtectEx)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::VirtualProtectEx].Original);
+        if (!FunctionAddress)
+        {
+            ::SetLastError(ERROR_NOINTERFACE);
+            return FALSE;
+        }
+        return FunctionAddress(
+            hProcess,
+            lpAddress,
+            dwSize,
+            flNewProtect,
+            lpflOldProtect);
+    }
+}
 
 namespace
 {
@@ -47,14 +243,6 @@ namespace
         std::make_pair("TFMain32.dll", DllNeedsBlocking),
         std::make_pair("TFMain64.dll", DllNeedsBlocking),
     };
-
-    static decltype(NtMapViewOfSection)* RealNtMapViewOfSection = nullptr;
-    static decltype(NtQuerySection)* RealNtQuerySection = nullptr;
-    static decltype(NtUnmapViewOfSection)* RealNtUnmapViewOfSection = nullptr;
-    static decltype(VirtualAlloc)* RealVirtualAlloc = nullptr;
-    static decltype(VirtualAllocEx)* RealVirtualAllocEx = nullptr;
-    static decltype(VirtualProtect)* RealVirtualProtect = nullptr;
-    static decltype(VirtualProtectEx)* RealVirtualProtectEx = nullptr;
 
     static DllFlags FindDll(const char* dllName)
     {
@@ -125,9 +313,7 @@ namespace
         _In_ ULONG Win32Protect)
     {
         NTSTATUS ret, status;
-        if (!RealNtMapViewOfSection)
-            return STATUS_ACCESS_DENIED;
-        ret = RealNtMapViewOfSection(
+        ret = ::OriginalNtMapViewOfSection(
             SectionHandle,
             ProcessHandle,
             BaseAddress,
@@ -142,7 +328,7 @@ namespace
             return ret;
         }
         SECTION_BASIC_INFORMATION sbi = {};
-        status = RealNtQuerySection(SectionHandle, SectionBasicInformation, &sbi, sizeof(sbi), NULL);
+        status = ::OriginalNtQuerySection(SectionHandle, SectionBasicInformation, &sbi, sizeof(sbi), NULL);
         if (status < 0 || !(sbi.AllocationAttributes & SEC_IMAGE)) {
             return ret;
         }
@@ -152,7 +338,7 @@ namespace
         }
         DllFlags dllType = FindDll(dllName);
         if (dllType & DllNeedsBlocking) {
-            RealNtUnmapViewOfSection(ProcessHandle, *BaseAddress);
+            ::OriginalNtUnmapViewOfSection(ProcessHandle, *BaseAddress);
             return STATUS_ACCESS_DENIED;
         }
         else if (dllType & DllNeedsDynamicCodeOptout) {
@@ -166,7 +352,7 @@ namespace
         _In_ HANDLE ProcessHandle,
         _In_opt_ PVOID BaseAddress)
     {
-        NTSTATUS ret = RealNtUnmapViewOfSection(ProcessHandle, BaseAddress);
+        NTSTATUS ret = ::OriginalNtUnmapViewOfSection(ProcessHandle, BaseAddress);
         if (ret < 0 || !HandleIsCurrentProcess(ProcessHandle)) {
             return ret;
         }
@@ -203,11 +389,11 @@ namespace
     {
         if (!ProtectionIsExecute(flProtect) ||
             !CallerUsesDynamicCode(_ReturnAddress())) {
-            return RealVirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
+            return ::OriginalVirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
         }
         // what do we even do if it fails? so, no error checking.
         NanaZipSetThreadDynamicCodeOptout(TRUE);
-        LPVOID ret = RealVirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
+        LPVOID ret = ::OriginalVirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
         NanaZipSetThreadDynamicCodeOptout(FALSE);
         return ret;
     }
@@ -222,10 +408,10 @@ namespace
         if (!HandleIsCurrentProcess(hProcess) ||
             !ProtectionIsExecute(flProtect) ||
             !CallerUsesDynamicCode(_ReturnAddress())) {
-            return RealVirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
+            return ::OriginalVirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
         }
         NanaZipSetThreadDynamicCodeOptout(TRUE);
-        LPVOID ret = RealVirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
+        LPVOID ret = ::OriginalVirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
         NanaZipSetThreadDynamicCodeOptout(FALSE);
         return ret;
     }
@@ -238,10 +424,10 @@ namespace
     {
         if (!ProtectionIsExecute(flNewProtect) ||
             !CallerUsesDynamicCode(_ReturnAddress())) {
-            return RealVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
+            return ::OriginalVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
         }
         NanaZipSetThreadDynamicCodeOptout(TRUE);
-        BOOL ret = RealVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
+        BOOL ret = ::OriginalVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
         NanaZipSetThreadDynamicCodeOptout(FALSE);
         return ret;
     }
@@ -256,10 +442,10 @@ namespace
         if (!HandleIsCurrentProcess(hProcess) ||
             !ProtectionIsExecute(flNewProtect) ||
             !CallerUsesDynamicCode(_ReturnAddress())) {
-            return RealVirtualProtectEx(hProcess, lpAddress, dwSize, flNewProtect, lpflOldProtect);
+            return ::OriginalVirtualProtectEx(hProcess, lpAddress, dwSize, flNewProtect, lpflOldProtect);
         }
         NanaZipSetThreadDynamicCodeOptout(TRUE);
-        BOOL ret = RealVirtualProtectEx(hProcess, lpAddress, dwSize, flNewProtect, lpflOldProtect);
+        BOOL ret = ::OriginalVirtualProtectEx(hProcess, lpAddress, dwSize, flNewProtect, lpflOldProtect);
         NanaZipSetThreadDynamicCodeOptout(FALSE);
         return ret;
     }
@@ -267,33 +453,63 @@ namespace
 
 EXTERN_C BOOL WINAPI NanaZipBlockDlls()
 {
-    if (::K7BaseIsSecurityMitigationPoliciesDisabled()) {
+    if (::K7BaseIsSecurityMitigationPoliciesDisabled())
+    {
         return TRUE;
     }
 
-    DetourTransactionBegin();
-    DetourUpdateThread(GetCurrentThread());
+    g_FunctionTable[FunctionTypes::NtMapViewOfSection].Original =
+        ::GetProcAddress(::GetNtDllModuleHandle(), "NtMapViewOfSection");
+    g_FunctionTable[FunctionTypes::NtMapViewOfSection].Detoured =
+        ::MyNtMapViewOfSection;
 
-    RealNtMapViewOfSection = static_cast<decltype(NtMapViewOfSection)*>(DetourFindFunction("ntdll.dll", "NtMapViewOfSection"));
-    RealNtQuerySection = static_cast<decltype(NtQuerySection)*>(DetourFindFunction("ntdll.dll", "NtQuerySection"));
-    RealNtUnmapViewOfSection = static_cast<decltype(NtUnmapViewOfSection)*>(DetourFindFunction("ntdll.dll", "NtUnmapViewOfSection"));
+    g_FunctionTable[FunctionTypes::NtQuerySection].Original =
+        ::GetProcAddress(::GetNtDllModuleHandle(), "NtQuerySection");
+    g_FunctionTable[FunctionTypes::NtQuerySection].Detoured =
+        nullptr;
 
-    RealVirtualAlloc = static_cast<decltype(VirtualAlloc)*>(DetourFindFunction("kernel32.dll", "VirtualAlloc"));
-    RealVirtualAllocEx = static_cast<decltype(VirtualAllocEx)*>(DetourFindFunction("kernel32.dll", "VirtualAllocEx"));
-    RealVirtualProtect = static_cast<decltype(VirtualProtect)*>(DetourFindFunction("kernel32.dll", "VirtualProtect"));
-    RealVirtualProtectEx = static_cast<decltype(VirtualProtectEx)*>(DetourFindFunction("kernel32.dll", "VirtualProtectEx"));
+    g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Original =
+        ::GetProcAddress(::GetNtDllModuleHandle(), "NtUnmapViewOfSection");
+    g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Detoured =
+        ::MyNtUnmapViewOfSection;
 
-    if (DetourAttach(&RealNtMapViewOfSection, MyNtMapViewOfSection) != NO_ERROR ||
-        DetourAttach(&RealNtUnmapViewOfSection, MyNtUnmapViewOfSection) != NO_ERROR ||
-        DetourAttach(&RealVirtualAlloc, MyVirtualAlloc) != NO_ERROR ||
-        DetourAttach(&RealVirtualAllocEx, MyVirtualAllocEx) != NO_ERROR ||
-        DetourAttach(&RealVirtualProtect, MyVirtualProtect) != NO_ERROR ||
-        DetourAttach(&RealVirtualProtectEx, MyVirtualProtectEx) != NO_ERROR) {
-        DetourTransactionAbort();
-        return FALSE;
+    g_FunctionTable[FunctionTypes::VirtualAlloc].Original =
+        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualAlloc");
+    g_FunctionTable[FunctionTypes::VirtualAlloc].Detoured =
+        ::MyVirtualAlloc;
+
+    g_FunctionTable[FunctionTypes::VirtualAllocEx].Original =
+        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualAllocEx");
+    g_FunctionTable[FunctionTypes::VirtualAllocEx].Detoured =
+        ::MyVirtualAllocEx;
+
+    g_FunctionTable[FunctionTypes::VirtualProtect].Original =
+        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualProtect");
+    g_FunctionTable[FunctionTypes::VirtualProtect].Detoured =
+        ::MyVirtualProtect;
+
+    g_FunctionTable[FunctionTypes::VirtualProtectEx].Original =
+        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualProtectEx");
+    g_FunctionTable[FunctionTypes::VirtualProtectEx].Detoured =
+        ::MyVirtualProtectEx;
+
+    ::K7BaseDetourTransactionBegin();
+    ::K7BaseDetourUpdateThread(::GetCurrentThread());
+    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
+    {
+        if (g_FunctionTable[i].Original &&
+            g_FunctionTable[i].Detoured)
+        {
+            if (NO_ERROR != ::K7BaseDetourAttach(
+                    &g_FunctionTable[i].Original,
+                    g_FunctionTable[i].Detoured))
+            {
+                ::K7BaseDetourTransactionAbort();
+                return FALSE;
+            }
+        }
     }
-
-    DetourTransactionCommit();
+    ::K7BaseDetourTransactionCommit();
     return TRUE;
 }
 
