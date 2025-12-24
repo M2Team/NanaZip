@@ -24,4 +24,56 @@ typedef short SHORT;
 typedef long LONG;
 #endif // VOID
 
+#include <Windows.h>
+
+/**
+ * @brief Begin a new transaction for attaching or detaching detours.
+ * @return Returns NO_ERROR if successful; otherwise, returns an error code.
+ * @remark For more information, see DetourTransactionBegin.
+ */
+EXTERN_C LONG MOAPI K7BaseDetourTransactionBegin();
+
+/**
+ * @brief Commit the current transaction for attaching or detaching detours.
+ * @return Returns NO_ERROR if successful; otherwise, returns an error code.
+ * @remark For more information, see DetourTransactionCommit.
+ */
+EXTERN_C LONG MOAPI K7BaseDetourTransactionCommit();
+
+/**
+ * @brief Enlist a thread for update in the current transaction.
+ * @param ThreadHandle The handle of the thread to be updated with the pending
+ *                     transaction. If hThread is equal to the current threads
+ *                     pseudo handle (as returned by GetCurrentThread()) no
+ *                     action is performed and NO_ERROR is returned.
+ * @return Returns NO_ERROR if successful; otherwise, returns an error code.
+ * @remark For more information, see DetourUpdateThread.
+ */
+EXTERN_C LONG MOAPI K7BaseDetourUpdateThread(
+    _In_ HANDLE ThreadHandle);
+
+/**
+ * @brief Attach a detour to a target function.
+ * @param OriginalFunction Pointer to the target pointer to which the detour
+ *                         will be attached.
+ * @param DetouredFunction Pointer to the detour function.
+ * @return Returns NO_ERROR if successful; otherwise, returns an error code.
+ * @remark For more information, see DetourAttach.
+ */
+EXTERN_C LONG MOAPI K7BaseDetourAttach(
+    _Inout_ PMO_POINTER OriginalFunction,
+    _In_ MO_POINTER DetouredFunction);
+
+/**
+ * @brief Detach a detour from a target function.
+ * @param OriginalFunction Pointer to the target pointer from which the detour
+ *                         will be detached.
+ * @param DetouredFunction Pointer to the detour function.
+ * @return Returns NO_ERROR if successful; otherwise, returns an error code.
+ * @remark For more information, see DetourDetach.
+ */
+EXTERN_C LONG MOAPI K7BaseDetourDetach(
+    _Inout_ PMO_POINTER OriginalFunction,
+    _In_ MO_POINTER DetouredFunction);
+
 #endif // !K7_BASE_DETOURS
