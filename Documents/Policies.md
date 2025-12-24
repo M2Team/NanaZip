@@ -1,4 +1,45 @@
-# NanaZip Policies
+﻿# NanaZip Policies
+
+Starting with NanaZip 6.0, users can configure system‑wide policies under the
+Windows registry key `HKLM\Software\Policies\M2Team\NanaZip`.
+
+These system-wide policies override user settings and are intended for use by
+system administrators to enforce specific configurations across multiple users
+or systems.
+
+Here are the currently provided policies and their descriptions.
+
+## Available policies since NanaZip 6.0
+
+### Allow dynamic code generation for all NanaZip components
+
+NanaZip disables dynamic code generation for its components by default in
+Release builds to reduce the risk of running potentially malicious code at
+runtime. However, some third‑party software that relies on dynamic code
+generation and injects code into NanaZip processes may require this feature
+to be enabled for compatibility.
+
+- Name: `AllowDynamicCodeGeneration`
+- Type: `REG_DWORD`
+- Value:
+  - `0`: Disabled (Default)
+  - `1`: Enabled
+
+### Allow child processes creation for all NanaZip components
+
+NanaZip blocks child process creation by default in its command line components
+and self‑extracting executables to reduce the risk of process abuse by malicious
+archives. However, some third‑party input method editors (IMEs) and assistive
+technologies (ATs) may require child process creation to function correctly. In
+such cases, this policy can be used to allow child process creation.
+
+- Name: `AllowChildProcessCreation`
+- Type: `REG_DWORD`
+- Value:
+  - `0`: Disabled (Default)
+  - `1`: Enabled
+
+# Legacy Policies in NanaZip 6.0 Preview 1
 
 NanaZip supports setting system-wide policies via creating Registry values in
 the key `HKLM\Software\NanaZip\Policies`.
