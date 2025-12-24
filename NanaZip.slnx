@@ -29,6 +29,7 @@
     <Project Path="NanaZip.Frieren/NanaZip.Frieren.vcxproj" Id="4e78af72-d7ef-4769-b64b-95e7edf05fa2" />
   </Folder>
   <Folder Name="/Core/K7/">
+    <Project Path="K7Base/K7Base.vcxproj" Id="5998305e-d017-47c2-8025-a19111f73539" />
     <Project Path="K7Base/K7BaseStatic.vcxproj" Id="38bb5165-3db0-45b7-85ce-0a72def5ccd6" />
     <Project Path="K7Pal/K7Pal.vcxproj" Id="279f7fa5-7ddc-4635-99b0-3c7f2179dae0" />
     <Project Path="K7Pal/K7PalStatic.vcxproj" Id="249b9fce-0114-4ee9-a31e-c8a36eea2279" />

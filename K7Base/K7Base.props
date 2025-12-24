@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:    NanaZip Platform Base Library (K7Base)
+  FILE:       K7Base.props
+  PURPOSE:    MSBuild Properties for referencing the K7Base dynamic library
+
+  LICENSE:    The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>$(OutDir)K7Base.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.372</Version>
+    </PackageReference>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)K7Base.vcxproj">
+      <Project>{5998305E-D017-47C2-8025-A19111F73539}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
