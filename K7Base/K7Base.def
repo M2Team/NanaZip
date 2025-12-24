@@ -3,6 +3,7 @@
 EXPORTS
 
 K7BaseDetourTransactionBegin
+K7BaseDetourTransactionAbort
 K7BaseDetourTransactionCommit
 K7BaseDetourUpdateThread
 K7BaseDetourAttach

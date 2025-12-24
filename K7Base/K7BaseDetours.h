@@ -34,6 +34,14 @@ typedef long LONG;
 EXTERN_C LONG MOAPI K7BaseDetourTransactionBegin();
 
 /**
+ * @brief Abort the current transaction for attaching or detaching detours.
+ * @return Returns NO_ERROR if the pending transaction was completely aborted;
+ *         otherwise, returns an error code.
+ * @remark For more information, see DetourTransactionAbort.
+ */
+EXTERN_C LONG MOAPI K7BaseDetourTransactionAbort();
+
+/**
  * @brief Commit the current transaction for attaching or detaching detours.
  * @return Returns NO_ERROR if successful; otherwise, returns an error code.
  * @remark For more information, see DetourTransactionCommit.

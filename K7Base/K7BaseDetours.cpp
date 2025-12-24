@@ -17,6 +17,11 @@ EXTERN_C LONG MOAPI K7BaseDetourTransactionBegin()
     return ::DetourTransactionBegin();
 }
 
+EXTERN_C LONG MOAPI K7BaseDetourTransactionAbort()
+{
+    return ::DetourTransactionAbort();
+}
+
 EXTERN_C LONG MOAPI K7BaseDetourTransactionCommit()
 {
     return ::DetourTransactionCommit();
