@@ -1290,4 +1290,10 @@ Arşiv dosyasını parçalara bölmek istediğinize emin misiniz?</value>
   <data name="Resource7714" xml:space="preserve">
     <value>Klasör Birleşimi</value>
   </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>İntegrasyon</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Dosyaları NanaZip ile ilişkilendirmek için Windows Ayarlar'ı aç</value>
+  </data>
 </root>
