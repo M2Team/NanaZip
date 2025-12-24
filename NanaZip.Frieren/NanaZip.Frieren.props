@@ -9,6 +9,7 @@
   MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\K7Base\K7BaseStatic.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
   </PropertyGroup>

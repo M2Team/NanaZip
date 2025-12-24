@@ -11,7 +11,7 @@
 #include <Mile.Helpers.h>
 #include <Mile.Helpers.CppBase.h>
 
-#include <Detours.h>
+#include <K7BaseDetours.h>
 
 #include <Uxtheme.h>
 
@@ -1056,18 +1056,19 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
         }
     }
 
-    ::DetourTransactionBegin();
-    ::DetourUpdateThread(::GetCurrentThread());
+    ::K7BaseDetourTransactionBegin();
+    ::K7BaseDetourUpdateThread(::GetCurrentThread());
     for (size_t i = 0; i < FunctionType::MaximumFunction; ++i)
     {
-        if (g_FunctionTable[i].Original)
+        if (g_FunctionTable[i].Original &&
+            g_FunctionTable[i].Detoured)
         {
-            ::DetourAttach(
+            ::K7BaseDetourAttach(
                 &g_FunctionTable[i].Original,
                 g_FunctionTable[i].Detoured);
         }
     }
-    ::DetourTransactionCommit();
+    ::K7BaseDetourTransactionCommit();
 
     ::NanaZipFrierenDarkModeThreadInitialize();
 }
@@ -1076,18 +1077,19 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalUninitialize()
 {
     ::NanaZipFrierenDarkModeThreadUninitialize();
 
-    ::DetourTransactionBegin();
-    ::DetourUpdateThread(::GetCurrentThread());
+    ::K7BaseDetourTransactionBegin();
+    ::K7BaseDetourUpdateThread(::GetCurrentThread());
     for (size_t i = 0; i < FunctionType::MaximumFunction; ++i)
     {
-        if (g_FunctionTable[i].Original)
+        if (g_FunctionTable[i].Original &&
+            g_FunctionTable[i].Detoured)
         {
-            ::DetourDetach(
+            ::K7BaseDetourDetach(
                 &g_FunctionTable[i].Original,
                 g_FunctionTable[i].Detoured);
             g_FunctionTable[i].Original = nullptr;
             g_FunctionTable[i].Detoured = nullptr;
         }
     }
-    ::DetourTransactionCommit();
+    ::K7BaseDetourTransactionCommit();
 }
