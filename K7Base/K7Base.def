@@ -1,3 +1,9 @@
 ﻿LIBRARY
 
 EXPORTS
+
+K7BaseDetourTransactionBegin
+K7BaseDetourTransactionCommit
+K7BaseDetourUpdateThread
+K7BaseDetourAttach
+K7BaseDetourDetach
