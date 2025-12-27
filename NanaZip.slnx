@@ -33,6 +33,7 @@
     <Project Path="K7Base/K7BaseStatic.vcxproj" Id="38bb5165-3db0-45b7-85ce-0a72def5ccd6" />
     <Project Path="K7Pal/K7Pal.vcxproj" Id="279f7fa5-7ddc-4635-99b0-3c7f2179dae0" />
     <Project Path="K7Pal/K7PalStatic.vcxproj" Id="249b9fce-0114-4ee9-a31e-c8a36eea2279" />
+    <Project Path="K7User/K7UserStatic.vcxproj" Id="0b7d00be-6890-453e-86a4-def68b5c22a4" />
   </Folder>
   <Folder Name="/Shared/">
     <Project Path="NanaZip.Shared/NanaZip.Shared.Mitigations.vcxproj" Id="3b6ba400-cfe5-44e1-a8e3-2df0ccc5492b" />
