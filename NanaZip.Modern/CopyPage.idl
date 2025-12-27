@@ -1,0 +1,22 @@
+﻿namespace NanaZip.Modern
+{
+    [default_interface]
+    runtimeclass CopyPage : Windows.UI.Xaml.Controls.Page
+    {
+        CopyPage();
+
+        String TitleText;
+        String PathLabelText;
+        String PathText;
+        String InfoText;
+
+        event Windows.Foundation.TypedEventHandler<CopyPage, Object> OkButtonClicked;
+        event Windows.Foundation.TypedEventHandler<CopyPage, Object> CancelButtonClicked;
+        event Windows.Foundation.TypedEventHandler<CopyPage, Object> PickerButtonClicked;
+
+        static Windows.UI.Xaml.DependencyProperty TitleTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty PathLabelTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty PathTextProperty{ get; };
+        static Windows.UI.Xaml.DependencyProperty InfoTextProperty{ get; };
+    }
+}
