@@ -10,7 +10,9 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
-  <Import Project="..\K7Base\K7BaseStatic.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)..\K7Base\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
@@ -31,11 +33,14 @@
     <ClCompile Include="NanaZip.Frieren.ModernExperiences.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.952</Version>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.372</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Internal">
       <Version>1.0.3259</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.952</Version>
     </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
