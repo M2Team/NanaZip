@@ -36,6 +36,9 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\K7Base\K7Base.vcxproj">
+      <Project>{5998305E-D017-47C2-8025-A19111F73539}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\K7Pal\K7Pal.vcxproj">
       <Project>{279F7FA5-7DDC-4635-99B0-3C7F2179DAE0}</Project>
     </ProjectReference>

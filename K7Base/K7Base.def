@@ -8,3 +8,6 @@ K7BaseDetourTransactionCommit
 K7BaseDetourUpdateThread
 K7BaseDetourAttach
 K7BaseDetourDetach
+
+;Temporary
+K7BaseIsSecurityMitigationPoliciesDisabled
