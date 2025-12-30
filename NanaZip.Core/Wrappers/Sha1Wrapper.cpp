@@ -21,12 +21,12 @@ CSha1& CSha1::operator=(
     {
         if (this->HashHandle)
         {
-            ::K7PalHashDestroy(this->HashHandle);
+            ::K7BaseHashDestroy(this->HashHandle);
             this->HashHandle = nullptr;
         }
         if (Source.HashHandle)
         {
-            ::K7PalHashDuplicate(Source.HashHandle, &this->HashHandle);
+            ::K7BaseHashDuplicate(Source.HashHandle, &this->HashHandle);
         }
     }
     return *this;
@@ -58,11 +58,11 @@ void Sha1_InitState(
 
     if (p->HashHandle)
     {
-        ::K7PalHashDestroy(p->HashHandle);
+        ::K7BaseHashDestroy(p->HashHandle);
         p->HashHandle = nullptr;
     }
 
-    ::K7PalHashCreate(
+    ::K7BaseHashCreate(
         &p->HashHandle,
         BCRYPT_SHA1_ALGORITHM,
         nullptr,
@@ -91,7 +91,7 @@ void Sha1_Update(
         return;
     }
 
-    ::K7PalHashUpdate(
+    ::K7BaseHashUpdate(
         p->HashHandle,
         const_cast<LPVOID>(reinterpret_cast<LPCVOID>(data)),
         static_cast<UINT32>(size));
@@ -106,7 +106,7 @@ void Sha1_Final(
         return;
     }
 
-    ::K7PalHashFinal(
+    ::K7BaseHashFinal(
         p->HashHandle,
         digest,
         SHA1_DIGEST_SIZE);
@@ -134,21 +134,21 @@ void Sha1_GetBlockDigest(
         return;
     }
 
-    K7_PAL_HASH_HANDLE CurrentHashHandle = nullptr;
-    if (MO_RESULT_SUCCESS_OK == ::K7PalHashDuplicate(
+    K7_BASE_HASH_HANDLE CurrentHashHandle = nullptr;
+    if (MO_RESULT_SUCCESS_OK == ::K7BaseHashDuplicate(
         p->HashHandle,
         &CurrentHashHandle))
     {
-        if (MO_RESULT_SUCCESS_OK == ::K7PalHashUpdate(
+        if (MO_RESULT_SUCCESS_OK == ::K7BaseHashUpdate(
             CurrentHashHandle,
             const_cast<LPVOID>(reinterpret_cast<LPCVOID>(data)),
             SHA1_DIGEST_SIZE))
         {
-            ::K7PalHashFinal(
+            ::K7BaseHashFinal(
                 CurrentHashHandle,
                 destDigest,
                 SHA1_DIGEST_SIZE);
         }
-        ::K7PalHashDestroy(CurrentHashHandle);
+        ::K7BaseHashDestroy(CurrentHashHandle);
     }
 }

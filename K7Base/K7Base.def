@@ -10,12 +10,12 @@ K7BaseDetourAttach
 K7BaseDetourDetach
 
 ; Temporary
-K7PalHashCreate
-K7PalHashDestroy
-K7PalHashUpdate
-K7PalHashFinal
-K7PalHashGetSize
-K7PalHashDuplicate
+K7BaseHashCreate
+K7BaseHashDestroy
+K7BaseHashUpdate
+K7BaseHashFinal
+K7BaseHashGetSize
+K7BaseHashDuplicate
 
 ; Temporary Policies Symbols
 ; These symbols won't be exported after the security mitigation implementation

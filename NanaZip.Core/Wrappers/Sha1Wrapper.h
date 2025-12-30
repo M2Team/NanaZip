@@ -13,7 +13,7 @@
 
 #include "../SevenZip/C/7zTypes.h"
 
-#include <K7Pal.h>
+#include <K7BaseHash.h>
 
 EXTERN_C_BEGIN
 
@@ -25,7 +25,7 @@ EXTERN_C_BEGIN
 
 typedef struct CSha1
 {
-    K7_PAL_HASH_HANDLE HashHandle;
+    K7_BASE_HASH_HANDLE HashHandle;
 
 #ifdef __cplusplus
     CSha1& operator=(

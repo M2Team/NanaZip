@@ -10,7 +10,7 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <K7Pal.h>
+#include <K7BaseHash.h>
 
 #include <string>
 
@@ -21,13 +21,13 @@ namespace NanaZip::Codecs::Hash
     private:
 
         std::wstring m_AlgorithmIdentifier;
-        K7_PAL_HASH_HANDLE m_HashHandle = nullptr;
+        K7_BASE_HASH_HANDLE m_HashHandle = nullptr;
 
         void DestroyContext()
         {
             if (this->m_HashHandle)
             {
-                ::K7PalHashDestroy(this->m_HashHandle);
+                ::K7BaseHashDestroy(this->m_HashHandle);
                 this->m_HashHandle = nullptr;
             }
         }
@@ -49,7 +49,7 @@ namespace NanaZip::Codecs::Hash
         void STDMETHODCALLTYPE Init()
         {
             this->DestroyContext();
-            ::K7PalHashCreate(
+            ::K7BaseHashCreate(
                 &this->m_HashHandle,
                 this->m_AlgorithmIdentifier.c_str(),
                 nullptr,
@@ -60,7 +60,7 @@ namespace NanaZip::Codecs::Hash
             _In_ LPCVOID Data,
             _In_ UINT32 Size)
         {
-            ::K7PalHashUpdate(
+            ::K7BaseHashUpdate(
                 this->m_HashHandle,
                 const_cast<LPVOID>(Data),
                 Size);
@@ -69,7 +69,7 @@ namespace NanaZip::Codecs::Hash
         void STDMETHODCALLTYPE Final(
             _Out_ PBYTE Digest)
         {
-            ::K7PalHashFinal(
+            ::K7BaseHashFinal(
                 this->m_HashHandle,
                 Digest,
                 this->GetDigestSize());
@@ -78,7 +78,7 @@ namespace NanaZip::Codecs::Hash
         UINT32 STDMETHODCALLTYPE GetDigestSize()
         {
             UINT32 HashSize = 0;
-            ::K7PalHashGetSize(this->m_HashHandle, &HashSize);
+            ::K7BaseHashGetSize(this->m_HashHandle, &HashSize);
             return HashSize;
         }
     };
@@ -132,7 +132,7 @@ void rhash_sha1_init(
     }
     std::memset(ctx, 0, sizeof(sha1_ctx));
 
-    ::K7PalHashCreate(
+    ::K7BaseHashCreate(
         &ctx->context,
         BCRYPT_SHA1_ALGORITHM,
         nullptr,
@@ -149,7 +149,7 @@ void rhash_sha1_update(
         return;
     }
 
-    ::K7PalHashUpdate(
+    ::K7BaseHashUpdate(
         ctx->context,
         const_cast<LPVOID>(reinterpret_cast<LPCVOID>(msg)),
         static_cast<UINT32>(size));
@@ -165,7 +165,7 @@ void rhash_sha1_final(
         return;
     }
 
-    ::K7PalHashFinal(
+    ::K7BaseHashFinal(
         ctx->context,
         ctx->hash,
         sha1_hash_size);
