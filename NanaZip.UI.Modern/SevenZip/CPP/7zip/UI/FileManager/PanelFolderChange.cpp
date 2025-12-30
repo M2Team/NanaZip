@@ -381,6 +381,9 @@ static int GetRealIconIndex(CFSTR path, DWORD attributes)
 
 static winrt::Windows::Graphics::Imaging::SoftwareBitmap ConvertIconToSoftwareBitmap(HICON hIcon)
 {
+    if (!hIcon)
+        return nullptr;
+
     static winrt::com_ptr<::IWICImagingFactory> wicFactory;
     if (!wicFactory)
     {
