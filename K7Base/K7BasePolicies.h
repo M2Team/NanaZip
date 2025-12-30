@@ -26,6 +26,29 @@ typedef long LONG;
 #endif // VOID
 
 /**
+ * @brief Initializes the NanaZip policy settings.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ * @remarks The function should be called only once during the K7Base library
+ *          initialization phase as early as possible.
+ */
+EXTERN_C MO_RESULT MOAPI K7BasePoliciesInitialize();
+
+/**
+ * @brief Retrieves the policy setting for allowing dynamic code generation.
+ * @return Returns MO_TRUE if dynamic code generation is allowed, or MO_FALSE if
+ *         not.
+ */
+EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowDynamicCodeGeneration();
+
+/**
+ * @brief Retrieves the policy setting for allowing child process creation.
+ * @return Returns MO_TRUE if child process creation is allowed, or MO_FALSE if
+ *         not.
+ */
+EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowChildProcessCreation();
+
+/**
  * @brief Checks the related user settings in the Windows registry to know
  *        whether the security mitigation policies should be disabled or not.
  * @return Returns MO_TRUE if the security mitigations policy should be
