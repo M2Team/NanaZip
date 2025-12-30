@@ -48,12 +48,4 @@ EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowDynamicCodeGeneration();
  */
 EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowChildProcessCreation();
 
-/**
- * @brief Checks the related user settings in the Windows registry to know
- *        whether the security mitigation policies should be disabled or not.
- * @return Returns MO_TRUE if the security mitigations policy should be
- *         disabled, or MO_FALSE if not.
- */
-EXTERN_C MO_BOOL MOAPI K7BaseIsSecurityMitigationPoliciesDisabled();
-
 #endif // !K7_BASE_POLICIES

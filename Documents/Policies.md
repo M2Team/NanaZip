@@ -62,19 +62,6 @@ This value controls Mark-of-the-Web (MOTW) propagation of archive files.
     - `1`: Yes (all files)
     - `2`: Only for unsafe extensions (does not support all nested archives)
 
-### Disable mitigations
-
-*Availability: NanaZip 6.0 Preview 1 (6.0.1461.0) and later.*
-
-This value controls which security mitigations should not be applied by NanaZip.
-
-- Name: `DisableMitigations`
-- Type: `REG_DWORD`
-- Value:
-    - `0`: Don't disable mitigations
-    - `1`: Disable all mitigations
-    - Other values are reserved.
-
 ### Archive handler restrictions
 
 *Availability: NanaZip 6.0 Preview 2 and later.*

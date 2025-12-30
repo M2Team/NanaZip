@@ -15,6 +15,3 @@ K7BaseDetourDetach
 K7BasePoliciesInitialize
 K7BasePoliciesGetAllowDynamicCodeGeneration
 K7BasePoliciesGetAllowChildProcessCreation
-
-;Temporary
-K7BaseIsSecurityMitigationPoliciesDisabled
