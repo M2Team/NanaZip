@@ -36,10 +36,12 @@
   <ItemGroup>
     <ClCompile Include="K7BaseDetours.cpp" />
     <ClCompile Include="K7BasePolicies.cpp" />
+    <ClCompile Include="K7PalHash.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="K7BaseDetours.h" />
     <ClInclude Include="K7BasePolicies.h" />
+    <ClInclude Include="K7Pal.h" />
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
 </Project>

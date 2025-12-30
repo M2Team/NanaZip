@@ -9,6 +9,14 @@ K7BaseDetourUpdateThread
 K7BaseDetourAttach
 K7BaseDetourDetach
 
+; Temporary
+K7PalHashCreate
+K7PalHashDestroy
+K7PalHashUpdate
+K7PalHashFinal
+K7PalHashGetSize
+K7PalHashDuplicate
+
 ; Temporary Policies Symbols
 ; These symbols won't be exported after the security mitigation implementation
 ; is moved to K7Base.

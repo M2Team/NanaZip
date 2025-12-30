@@ -9,7 +9,7 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
   <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
-  <Import Project="..\K7Pal\K7PalStatic.props" />
+  <Import Project="..\K7Base\K7BaseStatic.props" />
   <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.Sfx.Shared.props" />
   <ItemDefinitionGroup>
     <ClCompile>
