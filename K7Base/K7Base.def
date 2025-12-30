@@ -9,7 +9,6 @@ K7BaseDetourUpdateThread
 K7BaseDetourAttach
 K7BaseDetourDetach
 
-; Temporary
 K7BaseHashCreate
 K7BaseHashDestroy
 K7BaseHashUpdate

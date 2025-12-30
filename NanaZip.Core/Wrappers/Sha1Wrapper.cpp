@@ -64,7 +64,7 @@ void Sha1_InitState(
 
     ::K7BaseHashCreate(
         &p->HashHandle,
-        BCRYPT_SHA1_ALGORITHM,
+        K7_BASE_HASH_ALGORITHM_SHA1,
         nullptr,
         0);
 }

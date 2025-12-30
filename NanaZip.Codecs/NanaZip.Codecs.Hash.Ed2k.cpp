@@ -84,12 +84,12 @@ namespace NanaZip::Codecs::Hash
             this->DestroyContext();
             ::K7BaseHashCreate(
                 &this->m_BlockHashHandle,
-                BCRYPT_MD4_ALGORITHM,
+                K7_BASE_HASH_ALGORITHM_MD4,
                 nullptr,
                 0);
             ::K7BaseHashCreate(
                 &this->m_HashesHashHandle,
-                BCRYPT_MD4_ALGORITHM,
+                K7_BASE_HASH_ALGORITHM_MD4,
                 nullptr,
                 0);
             this->m_NotEmule = false;

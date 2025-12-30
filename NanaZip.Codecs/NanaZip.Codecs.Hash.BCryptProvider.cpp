@@ -20,7 +20,7 @@ namespace NanaZip::Codecs::Hash
     {
     private:
 
-        std::wstring m_AlgorithmIdentifier;
+        K7_BASE_HASH_ALGORITHM_TYPE m_Algorithm;
         K7_BASE_HASH_HANDLE m_HashHandle = nullptr;
 
         void DestroyContext()
@@ -35,9 +35,9 @@ namespace NanaZip::Codecs::Hash
     public:
 
         BCryptProvider(
-            _In_ LPCWSTR AlgorithmIdentifier)
+            _In_ K7_BASE_HASH_ALGORITHM_TYPE Algorithm)
         {
-            this->m_AlgorithmIdentifier = std::wstring(AlgorithmIdentifier);
+            this->m_Algorithm = Algorithm;
             this->Init();
         }
 
@@ -51,7 +51,7 @@ namespace NanaZip::Codecs::Hash
             this->DestroyContext();
             ::K7BaseHashCreate(
                 &this->m_HashHandle,
-                this->m_AlgorithmIdentifier.c_str(),
+                this->m_Algorithm,
                 nullptr,
                 0);
         }
@@ -85,37 +85,37 @@ namespace NanaZip::Codecs::Hash
 
     IHasher* CreateMd2()
     {
-        return new BCryptProvider(BCRYPT_MD2_ALGORITHM);
+        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_MD2);
     }
 
     IHasher* CreateMd4()
     {
-        return new BCryptProvider(BCRYPT_MD4_ALGORITHM);
+        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_MD4);
     }
 
     IHasher* CreateMd5()
     {
-        return new BCryptProvider(BCRYPT_MD5_ALGORITHM);
+        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_MD5);
     }
 
     IHasher* CreateSha1()
     {
-        return new BCryptProvider(BCRYPT_SHA1_ALGORITHM);
+        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA1);
     }
 
     IHasher* CreateSha256()
     {
-        return new BCryptProvider(BCRYPT_SHA256_ALGORITHM);
+        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA256);
     }
 
     IHasher* CreateSha384()
     {
-        return new BCryptProvider(BCRYPT_SHA384_ALGORITHM);
+        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA384);
     }
 
     IHasher* CreateSha512()
     {
-        return new BCryptProvider(BCRYPT_SHA512_ALGORITHM);
+        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA512);
     }
 }
 
@@ -134,7 +134,7 @@ void rhash_sha1_init(
 
     ::K7BaseHashCreate(
         &ctx->context,
-        BCRYPT_SHA1_ALGORITHM,
+        K7_BASE_HASH_ALGORITHM_SHA1,
         nullptr,
         0);
 }

@@ -27,7 +27,7 @@ namespace
         BCRYPT_ALG_HANDLE HmacHandle;
     } K7_BASE_HASH_ALGORITHM, *PK7_BASE_HASH_ALGORITHM;
 
-    K7_BASE_HASH_ALGORITHM g_HashAlgorithms[] =
+    K7_BASE_HASH_ALGORITHM g_HashAlgorithms[K7_BASE_HASH_ALGORITHM_MAXIMUM] =
     {
         { BCRYPT_MD2_ALGORITHM, nullptr, nullptr },
         { BCRYPT_MD4_ALGORITHM, nullptr, nullptr },
@@ -37,9 +37,6 @@ namespace
         { BCRYPT_SHA384_ALGORITHM, nullptr, nullptr },
         { BCRYPT_SHA512_ALGORITHM, nullptr, nullptr },
     };
-
-    const std::size_t g_HashAlgorithmsCount =
-        sizeof(g_HashAlgorithms) / sizeof(*g_HashAlgorithms);
 
     typedef struct _K7_BASE_HASH_CONTEXT
     {
@@ -76,25 +73,12 @@ namespace
 
 EXTERN_C MO_RESULT MOAPI K7BaseHashCreate(
     _Inout_ PK7_BASE_HASH_HANDLE HashHandle,
-    _In_ MO_CONSTANT_WIDE_STRING AlgorithmIdentifier,
+    _In_ K7_BASE_HASH_ALGORITHM_TYPE Algorithm,
     _In_opt_ MO_POINTER SecretBuffer,
     _In_ MO_UINT32 SecretSize)
 {
-    PK7_BASE_HASH_ALGORITHM CurrentAlgorithm = nullptr;
-    if (AlgorithmIdentifier)
-    {
-        for (std::size_t i = 0; i < g_HashAlgorithmsCount; ++i)
-        {
-            if (0 == std::wcscmp(
-                AlgorithmIdentifier,
-                g_HashAlgorithms[i].Identifier))
-            {
-                CurrentAlgorithm = &g_HashAlgorithms[i];
-                break;
-            }
-        }
-    }
-    if (!CurrentAlgorithm)
+    if (Algorithm < 0 ||
+        Algorithm >= K7_BASE_HASH_ALGORITHM_MAXIMUM)
     {
         return MO_RESULT_ERROR_INVALID_PARAMETER;
     }
@@ -121,33 +105,33 @@ EXTERN_C MO_RESULT MOAPI K7BaseHashCreate(
         BCRYPT_ALG_HANDLE AlgorithmHandle = nullptr;
         if (SecretBuffer)
         {
-            if (!CurrentAlgorithm->HmacHandle)
+            if (!g_HashAlgorithms[Algorithm].HmacHandle)
             {
                 if (!BCRYPT_SUCCESS(::BCryptOpenAlgorithmProvider(
-                    &CurrentAlgorithm->HmacHandle,
-                    CurrentAlgorithm->Identifier,
+                    &g_HashAlgorithms[Algorithm].HmacHandle,
+                    g_HashAlgorithms[Algorithm].Identifier,
                     nullptr,
                     BCRYPT_ALG_HANDLE_HMAC_FLAG)))
                 {
                     break;
                 }
             }
-            AlgorithmHandle = CurrentAlgorithm->HmacHandle;
+            AlgorithmHandle = g_HashAlgorithms[Algorithm].HmacHandle;
         }
         else
         {
-            if (!CurrentAlgorithm->Handle)
+            if (!g_HashAlgorithms[Algorithm].Handle)
             {
                 if (!BCRYPT_SUCCESS(::BCryptOpenAlgorithmProvider(
-                    &CurrentAlgorithm->Handle,
-                    CurrentAlgorithm->Identifier,
+                    &g_HashAlgorithms[Algorithm].Handle,
+                    g_HashAlgorithms[Algorithm].Identifier,
                     nullptr,
                     0)))
                 {
                     break;
                 }
             }
-            AlgorithmHandle = CurrentAlgorithm->Handle;
+            AlgorithmHandle = g_HashAlgorithms[Algorithm].Handle;
         }
 
         {

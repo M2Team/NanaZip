@@ -67,7 +67,7 @@ void Sha512_InitState(
     {
         ::K7BaseHashCreate(
             &p->HashHandle,
-            BCRYPT_SHA512_ALGORITHM,
+            K7_BASE_HASH_ALGORITHM_SHA512,
             nullptr,
             0);
     }
@@ -75,7 +75,7 @@ void Sha512_InitState(
     {
         ::K7BaseHashCreate(
             &p->HashHandle,
-            BCRYPT_SHA384_ALGORITHM,
+            K7_BASE_HASH_ALGORITHM_SHA384,
             nullptr,
             0);
     }

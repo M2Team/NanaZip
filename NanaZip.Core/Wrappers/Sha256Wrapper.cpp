@@ -64,7 +64,7 @@ void Sha256_InitState(
 
     ::K7BaseHashCreate(
         &p->HashHandle,
-        BCRYPT_SHA256_ALGORITHM,
+        K7_BASE_HASH_ALGORITHM_SHA256,
         nullptr,
         0);
 }
