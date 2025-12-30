@@ -14,9 +14,6 @@
 
 #include <Windows.h>
 
-// All these functions mentioned below are affected by the
-// K7BaseIsSecurityMitigationPoliciesDisabled function in K7Base.
-
 EXTERN_C BOOL WINAPI NanaZipEnableMitigations();
 EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses();
 EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(

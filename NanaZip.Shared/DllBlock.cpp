@@ -453,7 +453,7 @@ namespace
 
 EXTERN_C BOOL WINAPI NanaZipBlockDlls()
 {
-    if (::K7BaseIsSecurityMitigationPoliciesDisabled())
+    if (::K7BasePoliciesGetAllowDynamicCodeGeneration())
     {
         return TRUE;
     }
