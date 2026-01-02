@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -10,13 +10,14 @@
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
+  xmlns:desktop9="http://schemas.microsoft.com/appx/manifest/desktop/windows10/9"
   xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
   xmlns:uap16="http://schemas.microsoft.com/appx/manifest/uap/windows10/16"
   xmlns:uap17="http://schemas.microsoft.com/appx/manifest/uap/windows10/17"
-  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 desktop10 uap8 uap10 virtualization uap16 uap17">
+  IgnorableNamespaces="uap rescap desktop uap2 uap3 com desktop4 desktop5 desktop9 desktop10 uap8 uap10 virtualization uap16 uap17">
 
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
@@ -174,10 +175,19 @@
             </desktop10:ItemType>
           </desktop4:FileExplorerContextMenus>
         </desktop4:Extension>
+        <desktop9:Extension Category="windows.fileExplorerClassicDragDropContextMenuHandler">
+          <desktop9:FileExplorerClassicDragDropContextMenuHandler>
+            <desktop9:ExtensionHandler Type="Directory" Clsid="23170F69-40C1-278A-1000-00FE00020000" />
+            <desktop9:ExtensionHandler Type="Drive" Clsid="23170F69-40C1-278A-1000-00FE00020000" />
+          </desktop9:FileExplorerClassicDragDropContextMenuHandler>
+        </desktop9:Extension>
         <com:Extension Category="windows.comServer">
           <com:ComServer>
             <com:SurrogateServer DisplayName="NanaZip Shell Extension">
               <com:Class Id="469D94E9-6AF4-4395-B396-99B1308F8CE5" Path="NanaZip.ShellExtension.dll" ThreadingModel="STA"/>
+            </com:SurrogateServer>
+            <com:SurrogateServer DisplayName="NanaZip Legacy Shell Extension">
+              <com:Class Id="23170F69-40C1-278A-1000-00FE00020000" Path="NanaZip.LegacyShellExtension.dll" ThreadingModel="STA"/>
             </com:SurrogateServer>
           </com:ComServer>
         </com:Extension>
