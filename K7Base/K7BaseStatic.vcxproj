@@ -35,11 +35,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="K7BaseDetours.cpp" />
+    <ClCompile Include="K7BaseMitigations.cpp" />
     <ClCompile Include="K7BasePolicies.cpp" />
     <ClCompile Include="K7BaseHash.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="K7BaseDetours.h" />
+    <ClInclude Include="K7BaseMitigations.h" />
     <ClInclude Include="K7BasePolicies.h" />
     <ClInclude Include="K7BaseHash.h" />
   </ItemGroup>
