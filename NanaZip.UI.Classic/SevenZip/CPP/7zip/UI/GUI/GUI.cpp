@@ -4,6 +4,7 @@
 
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
+#include <K7BaseMitigations.h>
 #include "Mitigations.h"
 #endif
 
@@ -413,7 +414,7 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   {
     ErrorMessage("Cannot enable security mitigations");
   }
-  if (!::NanaZipDisableChildProcesses())
+  if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
   {
     ErrorMessage("Cannot disable child processes");
   }

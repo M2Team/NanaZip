@@ -19,6 +19,7 @@
 #include "ConsoleClose.h"
 
 // **************** NanaZip Modification Start ****************
+#include <K7BaseMitigations.h>
 #include "Mitigations.h"
 // **************** NanaZip Modification End ****************
 
@@ -134,7 +135,7 @@ int Z7_CDECL main
       << endl;
   }
 
-  if (!::NanaZipDisableChildProcesses())
+  if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
   {
     FlushStreams();
     *g_ErrStream
@@ -146,7 +147,7 @@ int Z7_CDECL main
 
   NConsoleClose::CCtrlHandlerSetter ctrlHandlerSetter;
   int res = 0;
-  
+
   try
   {
     #ifdef _WIN32

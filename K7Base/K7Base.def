@@ -21,5 +21,7 @@ K7BaseHashDuplicate
 ; is moved to K7Base.
 K7BaseInitializePolicies
 K7BaseGetAllowDynamicCodeGenerationPolicy
-K7BaseGetAllowChildProcessCreationPolicy
 K7BaseEnableMandatoryMitigations
+K7BaseDisableDynamicCodeGeneration
+K7BaseDisableChildProcessCreation
+K7BaseSetCurrentThreadDynamicCodePolicyOptOut

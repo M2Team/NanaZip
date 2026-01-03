@@ -32,4 +32,30 @@ typedef long LONG;
  */
 EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations();
 
+/**
+ * @brief Disables dynamic code generation for the current process if the policy
+ *        is set to disallow it.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseDisableDynamicCodeGeneration();
+
+/**
+ * @brief Disables child process creation for the current process if the policy
+ *        is set to disallow it.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseDisableChildProcessCreation();
+
+/**
+ * @brief Sets the dynamic code generation policy for the current thread.
+ * @param AllowDynamicCodeGeneration Indicates whether to allow dynamic code
+ *                                   generation for the current thread.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseSetCurrentThreadDynamicCodePolicyOptOut(
+    _In_ MO_BOOL AllowDynamicCodeGeneration);
+
 #endif // !K7_BASE_MITIGATIONS

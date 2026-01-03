@@ -35,6 +35,7 @@
 #include "../../UI/GUI/ExtractRes.h"
 
 // **************** NanaZip Modification Start ****************
+#include <K7BaseMitigations.h>
 #include <Mile.Helpers.h>
 #include <NanaZip.Frieren.h>
 #include "Mitigations.h"
@@ -261,7 +262,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     ShowErrorMessage(L"Cannot enable security mitigations");
   }
 
-  if (!::NanaZipDisableChildProcesses())
+  if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
   {
     ShowErrorMessage(L"Cannot enable security mitigations");
   }
