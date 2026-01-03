@@ -22,3 +22,4 @@ K7BaseHashDuplicate
 K7BasePoliciesInitialize
 K7BasePoliciesGetAllowDynamicCodeGeneration
 K7BasePoliciesGetAllowChildProcessCreation
+K7BaseEnableMandatoryMitigations

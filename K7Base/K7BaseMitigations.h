@@ -25,4 +25,11 @@ typedef short SHORT;
 typedef long LONG;
 #endif // VOID
 
+/**
+ * @brief Enables the mandatory mitigations for the current process.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations();
+
 #endif // !K7_BASE_MITIGATIONS

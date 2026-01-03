@@ -11,21 +11,14 @@
 
 #include "Mitigations.h"
 
+#include <K7BaseMitigations.h>
 #include <K7BasePolicies.h>
 
 EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 {
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseEnableMandatoryMitigations())
     {
-        PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY Policy = {};
-        Policy.RaiseExceptionOnInvalidHandleReference = 1;
-        Policy.HandleExceptionsPermanentlyEnabled = 1;
-        if (!::SetProcessMitigationPolicy(
-            ProcessStrictHandleCheckPolicy,
-            &Policy,
-            sizeof(PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY)))
-        {
-            return FALSE;
-        }
+        return FALSE;
     }
 
 #ifdef NDEBUG
@@ -43,19 +36,6 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
         }
     }
 #endif // NDEBUG
-
-    {
-        PROCESS_MITIGATION_IMAGE_LOAD_POLICY Policy = {};
-        Policy.NoRemoteImages = 1;
-        Policy.NoLowMandatoryLabelImages = 1;
-        if (!::SetProcessMitigationPolicy(
-            ProcessImageLoadPolicy,
-            &Policy,
-            sizeof(PROCESS_MITIGATION_IMAGE_LOAD_POLICY)))
-        {
-            return FALSE;
-        }
-    }
 
     return TRUE;
 }
