@@ -22,7 +22,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
     }
 
 #ifdef NDEBUG
-    if (!::K7BasePoliciesGetAllowDynamicCodeGeneration())
+    if (!::K7BaseGetAllowDynamicCodeGenerationPolicy())
     {
         PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = {};
         Policy.ProhibitDynamicCode = 1;
@@ -42,7 +42,7 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 
 EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 {
-    if (::K7BasePoliciesGetAllowChildProcessCreation())
+    if (::K7BaseGetAllowChildProcessCreationPolicy())
     {
         return TRUE;
     }
@@ -65,7 +65,7 @@ EXTERN_C BOOL WINAPI NanaZipDisableChildProcesses()
 EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(
     _In_ BOOL OptOut)
 {
-    if (::K7BasePoliciesGetAllowDynamicCodeGeneration())
+    if (::K7BaseGetAllowDynamicCodeGenerationPolicy())
     {
         return TRUE;
     }

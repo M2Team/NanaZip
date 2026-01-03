@@ -43,7 +43,7 @@ namespace
     }
 }
 
-EXTERN_C MO_RESULT MOAPI K7BasePoliciesInitialize()
+EXTERN_C MO_RESULT MOAPI K7BaseInitializePolicies()
 {
     HKEY PoliciesKeyHandle = nullptr;
     if (ERROR_SUCCESS != ::RegOpenKeyExW(
@@ -95,12 +95,12 @@ EXTERN_C MO_RESULT MOAPI K7BasePoliciesInitialize()
     return MO_RESULT_SUCCESS_OK;
 }
 
-EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowDynamicCodeGeneration()
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowDynamicCodeGenerationPolicy()
 {
     return g_AllowDynamicCodeGeneration;
 }
 
-EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowChildProcessCreation()
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowChildProcessCreationPolicy()
 {
     return g_AllowChildProcessCreation;
 }

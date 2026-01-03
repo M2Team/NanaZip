@@ -19,7 +19,7 @@ K7BaseHashDuplicate
 ; Temporary Policies Symbols
 ; These symbols won't be exported after the security mitigation implementation
 ; is moved to K7Base.
-K7BasePoliciesInitialize
-K7BasePoliciesGetAllowDynamicCodeGeneration
-K7BasePoliciesGetAllowChildProcessCreation
+K7BaseInitializePolicies
+K7BaseGetAllowDynamicCodeGenerationPolicy
+K7BaseGetAllowChildProcessCreationPolicy
 K7BaseEnableMandatoryMitigations

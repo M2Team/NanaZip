@@ -32,20 +32,20 @@ typedef long LONG;
  * @remarks The function should be called only once during the K7Base library
  *          initialization phase as early as possible.
  */
-EXTERN_C MO_RESULT MOAPI K7BasePoliciesInitialize();
+EXTERN_C MO_RESULT MOAPI K7BaseInitializePolicies();
 
 /**
  * @brief Retrieves the policy setting for allowing dynamic code generation.
  * @return Returns MO_TRUE if dynamic code generation is allowed, or MO_FALSE if
  *         not.
  */
-EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowDynamicCodeGeneration();
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowDynamicCodeGenerationPolicy();
 
 /**
  * @brief Retrieves the policy setting for allowing child process creation.
  * @return Returns MO_TRUE if child process creation is allowed, or MO_FALSE if
  *         not.
  */
-EXTERN_C MO_BOOL MOAPI K7BasePoliciesGetAllowChildProcessCreation();
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowChildProcessCreationPolicy();
 
 #endif // !K7_BASE_POLICIES
