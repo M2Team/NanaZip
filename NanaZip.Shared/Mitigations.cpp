@@ -28,24 +28,3 @@ EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 
     return TRUE;
 }
-
-#ifdef NDEBUG
-
-EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(
-    _In_ BOOL OptOut)
-{
-    return (MO_RESULT_SUCCESS_OK ==
-        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(
-            OptOut ? MO_TRUE : MO_FALSE));
-}
-
-#else
-
-EXTERN_C BOOL WINAPI NanaZipSetThreadDynamicCodeOptout(
-    _In_ BOOL OptOut)
-{
-    UNREFERENCED_PARAMETER(OptOut);
-    return TRUE;
-}
-
-#endif

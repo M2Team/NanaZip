@@ -13,6 +13,7 @@
 
 #include <K7BaseDetours.h>
 #include <K7BasePolicies.h>
+#include <K7BaseMitigations.h>
 
 #include <mutex>
 #include <array>
@@ -23,6 +24,20 @@
 #include "Mitigations.h"
 
 #ifdef NDEBUG
+
+namespace
+{
+    static bool IsCurrentProcessHandle(
+        _In_ HANDLE ProcessHandle)
+    {
+        if (ProcessHandle == ::GetCurrentProcess() ||
+            ::GetCurrentProcessId() == ::GetProcessId(ProcessHandle))
+        {
+            return true;
+        }
+        return false;
+    }
+}
 
 namespace
 {
@@ -74,7 +89,7 @@ namespace
         _In_ ULONG AllocationType,
         _In_ ULONG PageProtection)
     {
-        using FunctionType = decltype(NtMapViewOfSection)*;
+        using FunctionType = decltype(::NtMapViewOfSection)*;
         FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
             g_FunctionTable[FunctionTypes::NtMapViewOfSection].Original);
         if (!FunctionAddress)
@@ -138,7 +153,7 @@ namespace
         _In_ DWORD flAllocationType,
         _In_ DWORD flProtect)
     {
-        using FunctionType = decltype(VirtualAlloc)*;
+        using FunctionType = decltype(::VirtualAlloc)*;
         FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
             g_FunctionTable[FunctionTypes::VirtualAlloc].Original);
         if (!FunctionAddress)
@@ -160,7 +175,7 @@ namespace
         _In_ DWORD flAllocationType,
         _In_ DWORD flProtect)
     {
-        using FunctionType = decltype(VirtualAllocEx)*;
+        using FunctionType = decltype(::VirtualAllocEx)*;
         FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
             g_FunctionTable[FunctionTypes::VirtualAllocEx].Original);
         if (!FunctionAddress)
@@ -182,7 +197,7 @@ namespace
         _In_ DWORD flNewProtect,
         _Out_ PDWORD lpflOldProtect)
     {
-        using FunctionType = decltype(VirtualProtect)*;
+        using FunctionType = decltype(::VirtualProtect)*;
         FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
             g_FunctionTable[FunctionTypes::VirtualProtect].Original);
         if (!FunctionAddress)
@@ -204,7 +219,7 @@ namespace
         _In_ DWORD flNewProtect,
         _Out_ PDWORD lpflOldProtect)
     {
-        using FunctionType = decltype(VirtualProtectEx)*;
+        using FunctionType = decltype(::VirtualProtectEx)*;
         FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
             g_FunctionTable[FunctionTypes::VirtualProtectEx].Original);
         if (!FunctionAddress)
@@ -223,7 +238,8 @@ namespace
 
 namespace
 {
-    enum DllFlags : unsigned int {
+    enum DllFlags : unsigned int
+    {
         UnknownDll = 0,
         DllNeedsBlocking = 1,
         DllNeedsDynamicCodeOptout = 2,
@@ -234,7 +250,8 @@ namespace
 
     using DllType = std::pair<const char*, DllFlags>;
     // Make sure that this list is sorted for _stricmp.
-    static const std::array<DllType, 7> DllList = {
+    static const std::array<DllType, 7> DllList =
+    {
         std::make_pair("BaseGUI.dll", DllNeedsDynamicCodeOptout),
         std::make_pair("ExplorerPatcher.amd64.dll", DllNeedsBlocking),
         std::make_pair("ExplorerPatcher.IA-32.dll", DllNeedsBlocking),
@@ -246,7 +263,8 @@ namespace
 
     static DllFlags FindDll(const char* dllName)
     {
-        for (auto it = DllList.begin(); it != DllList.end(); it++) {
+        for (auto it = DllList.begin(); it != DllList.end(); it++)
+        {
             if (!_stricmp(it->first, dllName)) {
                 return it->second;
             }
@@ -254,46 +272,50 @@ namespace
         return UnknownDll;
     }
 
-    static inline bool CheckExtents(size_t viewSize, size_t offset, size_t size) {
+    static inline bool CheckExtents(size_t viewSize, size_t offset, size_t size)
+    {
         return offset < viewSize && size <= viewSize && offset + size <= viewSize;
     }
 
     static bool GetDllExportName(char(&dllName)[256], const char* base, size_t viewSize)
     {
-        if (viewSize < sizeof(IMAGE_DOS_HEADER)) {
+        if (viewSize < sizeof(IMAGE_DOS_HEADER))
+        {
             return false;
         }
         const IMAGE_DOS_HEADER* dosHdr = reinterpret_cast<const IMAGE_DOS_HEADER*>(base);
-        if (dosHdr->e_magic != IMAGE_DOS_SIGNATURE) {
+        if (dosHdr->e_magic != IMAGE_DOS_SIGNATURE)
+        {
             return false;
         }
-        if (dosHdr->e_lfanew < 0 || !CheckExtents(viewSize, dosHdr->e_lfanew, sizeof(IMAGE_NT_HEADERS))) {
+        if (dosHdr->e_lfanew < 0 || !CheckExtents(viewSize, dosHdr->e_lfanew, sizeof(IMAGE_NT_HEADERS)))
+        {
             return false;
         }
         const IMAGE_NT_HEADERS* ntHdr = reinterpret_cast<const IMAGE_NT_HEADERS*>(base + dosHdr->e_lfanew);
         if (ntHdr->Signature != IMAGE_NT_SIGNATURE || ntHdr->OptionalHeader.NumberOfRvaAndSizes < IMAGE_DIRECTORY_ENTRY_EXPORT)
             return false;
         const IMAGE_DATA_DIRECTORY* dirExport = &(ntHdr->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT]);
-        if (dirExport->Size < sizeof(IMAGE_EXPORT_DIRECTORY) || !dirExport->VirtualAddress || !CheckExtents(viewSize, dirExport->VirtualAddress, sizeof(IMAGE_EXPORT_DIRECTORY))) {
+        if (dirExport->Size < sizeof(IMAGE_EXPORT_DIRECTORY) || !dirExport->VirtualAddress || !CheckExtents(viewSize, dirExport->VirtualAddress, sizeof(IMAGE_EXPORT_DIRECTORY)))
+        {
             return false;
         }
         const IMAGE_EXPORT_DIRECTORY* exports = reinterpret_cast<const IMAGE_EXPORT_DIRECTORY*>(base + dirExport->VirtualAddress);
         // we don't know the export directory name size so assume that at least 256 bytes after the name are safe
-        if (!exports->Name || !CheckExtents(viewSize, exports->Name, ARRAYSIZE(dllName))) {
+        if (!exports->Name || !CheckExtents(viewSize, exports->Name, ARRAYSIZE(dllName)))
+        {
             return false;
         }
         const char* name = base + exports->Name;
-        if (strncpy_s(dllName, name, _TRUNCATE)) {
+        if (strncpy_s(dllName, name, _TRUNCATE))
+        {
             return false;
         }
         return true;
     }
 
-    static bool HandleIsCurrentProcess(HANDLE ProcessHandle) {
-        return ProcessHandle == GetCurrentProcess() || GetProcessId(ProcessHandle) == GetCurrentProcessId();
-    }
-
-    static bool ProtectionIsExecute(DWORD Protect) {
+    static bool ProtectionIsExecute(DWORD Protect)
+    {
         return Protect == PAGE_EXECUTE ||
             Protect == PAGE_EXECUTE_READ ||
             Protect == PAGE_EXECUTE_READWRITE ||
@@ -324,24 +346,29 @@ namespace
             InheritDisposition,
             AllocationType,
             Win32Protect);
-        if (ret < 0 || !HandleIsCurrentProcess(ProcessHandle) || !ProtectionIsExecute(Win32Protect)) {
+        if (ret < 0 || !::IsCurrentProcessHandle(ProcessHandle) || !ProtectionIsExecute(Win32Protect))
+        {
             return ret;
         }
         SECTION_BASIC_INFORMATION sbi = {};
         status = ::OriginalNtQuerySection(SectionHandle, SectionBasicInformation, &sbi, sizeof(sbi), NULL);
-        if (status < 0 || !(sbi.AllocationAttributes & SEC_IMAGE)) {
+        if (status < 0 || !(sbi.AllocationAttributes & SEC_IMAGE))
+        {
             return ret;
         }
         char dllName[256] = {};
-        if (!GetDllExportName(dllName, reinterpret_cast<const char*>(*BaseAddress), *ViewSize)) {
+        if (!GetDllExportName(dllName, reinterpret_cast<const char*>(*BaseAddress), *ViewSize))
+        {
             return ret;
         }
         DllFlags dllType = FindDll(dllName);
-        if (dllType & DllNeedsBlocking) {
+        if (dllType & DllNeedsBlocking)
+        {
             ::OriginalNtUnmapViewOfSection(ProcessHandle, *BaseAddress);
             return STATUS_ACCESS_DENIED;
         }
-        else if (dllType & DllNeedsDynamicCodeOptout) {
+        else if (dllType & DllNeedsDynamicCodeOptout)
+        {
             std::lock_guard<std::mutex> lock(dynamic_code_range_lock);
             dynamic_code_ranges.push_back(std::make_pair(reinterpret_cast<UINT_PTR>(*BaseAddress), *ViewSize));
         }
@@ -353,14 +380,17 @@ namespace
         _In_opt_ PVOID BaseAddress)
     {
         NTSTATUS ret = ::OriginalNtUnmapViewOfSection(ProcessHandle, BaseAddress);
-        if (ret < 0 || !HandleIsCurrentProcess(ProcessHandle)) {
+        if (ret < 0 || !::IsCurrentProcessHandle(ProcessHandle))
+        {
             return ret;
         }
         UINT_PTR ptr = reinterpret_cast<UINT_PTR>(BaseAddress);
         {
             std::lock_guard<std::mutex> lock(dynamic_code_range_lock);
-            for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++) {
-                if (ptr >= it->first && ptr < it->first + it->second) {
+            for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++)
+            {
+                if (ptr >= it->first && ptr < it->first + it->second)
+                {
                     dynamic_code_ranges.erase(it);
                     break;
                 }
@@ -373,81 +403,125 @@ namespace
     {
         UINT_PTR caller = reinterpret_cast<UINT_PTR>(pCaller);
         std::lock_guard<std::mutex> lock(dynamic_code_range_lock);
-        for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++) {
-            if (caller >= it->first && caller < it->first + it->second) {
+        for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++)
+        {
+            if (caller >= it->first && caller < it->first + it->second)
+            {
                 return true;
             }
         }
         return false;
     }
+}
 
-    static _Ret_maybenull_ _Post_writable_byte_size_(dwSize) LPVOID WINAPI MyVirtualAlloc(
+namespace
+{
+    static LPVOID DetouredVirtualAlloc(
         _In_opt_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flAllocationType,
         _In_ DWORD flProtect)
     {
-        if (!ProtectionIsExecute(flProtect) ||
-            !CallerUsesDynamicCode(_ReturnAddress())) {
-            return ::OriginalVirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
+        if (!::ProtectionIsExecute(flProtect) ||
+            !::CallerUsesDynamicCode(_ReturnAddress()))
+        {
+            return ::OriginalVirtualAlloc(
+                lpAddress,
+                dwSize,
+                flAllocationType,
+                flProtect);
         }
-        // what do we even do if it fails? so, no error checking.
-        NanaZipSetThreadDynamicCodeOptout(TRUE);
-        LPVOID ret = ::OriginalVirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
-        NanaZipSetThreadDynamicCodeOptout(FALSE);
-        return ret;
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_TRUE);
+        LPVOID Result = ::OriginalVirtualAlloc(
+            lpAddress,
+            dwSize,
+            flAllocationType,
+            flProtect);
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        return Result;
     }
 
-    static _Ret_maybenull_ _Post_writable_byte_size_(dwSize) LPVOID WINAPI MyVirtualAllocEx(
+    static LPVOID DetouredVirtualAllocEx(
         _In_ HANDLE hProcess,
         _In_opt_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flAllocationType,
         _In_ DWORD flProtect)
     {
-        if (!HandleIsCurrentProcess(hProcess) ||
-            !ProtectionIsExecute(flProtect) ||
-            !CallerUsesDynamicCode(_ReturnAddress())) {
-            return ::OriginalVirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
+        if (!::IsCurrentProcessHandle(hProcess) ||
+            !::ProtectionIsExecute(flProtect) ||
+            !::CallerUsesDynamicCode(_ReturnAddress()))
+        {
+            return ::OriginalVirtualAllocEx(
+                hProcess,
+                lpAddress,
+                dwSize,
+                flAllocationType,
+                flProtect);
         }
-        NanaZipSetThreadDynamicCodeOptout(TRUE);
-        LPVOID ret = ::OriginalVirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
-        NanaZipSetThreadDynamicCodeOptout(FALSE);
-        return ret;
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_TRUE);
+        LPVOID Result = ::OriginalVirtualAllocEx(
+            hProcess,
+            lpAddress,
+            dwSize,
+            flAllocationType,
+            flProtect);
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        return Result;
     }
 
-    static _Success_(return != FALSE) BOOL WINAPI MyVirtualProtect(
+    static BOOL DetouredVirtualProtect(
         _In_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flNewProtect,
         _Out_ PDWORD lpflOldProtect)
     {
-        if (!ProtectionIsExecute(flNewProtect) ||
-            !CallerUsesDynamicCode(_ReturnAddress())) {
-            return ::OriginalVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
+        if (!::ProtectionIsExecute(flNewProtect) ||
+            !::CallerUsesDynamicCode(_ReturnAddress()))
+        {
+            return ::OriginalVirtualProtect(
+                lpAddress,
+                dwSize,
+                flNewProtect,
+                lpflOldProtect);
         }
-        NanaZipSetThreadDynamicCodeOptout(TRUE);
-        BOOL ret = ::OriginalVirtualProtect(lpAddress, dwSize, flNewProtect, lpflOldProtect);
-        NanaZipSetThreadDynamicCodeOptout(FALSE);
-        return ret;
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_TRUE);
+        BOOL Result = ::OriginalVirtualProtect(
+            lpAddress,
+            dwSize,
+            flNewProtect,
+            lpflOldProtect);
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        return Result;
     }
 
-    static _Success_(return != FALSE) BOOL WINAPI MyVirtualProtectEx(
+    static BOOL DetouredVirtualProtectEx(
         _In_ HANDLE hProcess,
         _In_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flNewProtect,
         _Out_ PDWORD lpflOldProtect)
     {
-        if (!HandleIsCurrentProcess(hProcess) ||
-            !ProtectionIsExecute(flNewProtect) ||
-            !CallerUsesDynamicCode(_ReturnAddress())) {
-            return ::OriginalVirtualProtectEx(hProcess, lpAddress, dwSize, flNewProtect, lpflOldProtect);
+        if (!::IsCurrentProcessHandle(hProcess) ||
+            !::ProtectionIsExecute(flNewProtect) ||
+            !::CallerUsesDynamicCode(_ReturnAddress()))
+        {
+            return ::OriginalVirtualProtectEx(
+                hProcess,
+                lpAddress,
+                dwSize,
+                flNewProtect,
+                lpflOldProtect);
         }
-        NanaZipSetThreadDynamicCodeOptout(TRUE);
-        BOOL ret = ::OriginalVirtualProtectEx(hProcess, lpAddress, dwSize, flNewProtect, lpflOldProtect);
-        NanaZipSetThreadDynamicCodeOptout(FALSE);
-        return ret;
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_TRUE);
+        BOOL Result = ::OriginalVirtualProtectEx(
+            hProcess,
+            lpAddress,
+            dwSize,
+            flNewProtect,
+            lpflOldProtect);
+        ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        return Result;
     }
 }
 
@@ -476,22 +550,22 @@ EXTERN_C BOOL WINAPI NanaZipBlockDlls()
     g_FunctionTable[FunctionTypes::VirtualAlloc].Original =
         ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualAlloc");
     g_FunctionTable[FunctionTypes::VirtualAlloc].Detoured =
-        ::MyVirtualAlloc;
+        ::DetouredVirtualAlloc;
 
     g_FunctionTable[FunctionTypes::VirtualAllocEx].Original =
         ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualAllocEx");
     g_FunctionTable[FunctionTypes::VirtualAllocEx].Detoured =
-        ::MyVirtualAllocEx;
+        ::DetouredVirtualAllocEx;
 
     g_FunctionTable[FunctionTypes::VirtualProtect].Original =
         ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualProtect");
     g_FunctionTable[FunctionTypes::VirtualProtect].Detoured =
-        ::MyVirtualProtect;
+        ::DetouredVirtualProtect;
 
     g_FunctionTable[FunctionTypes::VirtualProtectEx].Original =
         ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualProtectEx");
     g_FunctionTable[FunctionTypes::VirtualProtectEx].Detoured =
-        ::MyVirtualProtectEx;
+        ::DetouredVirtualProtectEx;
 
     ::K7BaseDetourTransactionBegin();
     ::K7BaseDetourUpdateThread(::GetCurrentThread());
