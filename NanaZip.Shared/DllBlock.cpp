@@ -16,7 +16,6 @@
 #include <K7BaseMitigations.h>
 
 #include <mutex>
-#include <array>
 #include <vector>
 #include <intrin.h>
 
@@ -27,6 +26,51 @@
 
 namespace
 {
+    namespace ModuleTypes
+    {
+        enum
+        {
+            Unknown,
+            NeedsBlocking,
+            NeedsDynamicCodeOptout,
+        };
+    }
+
+    struct ModuleItem
+    {
+        MO_UINT8 ModuleType;
+        MO_CONSTANT_STRING ModuleName;
+    };
+
+    /**
+     * @remarks Make sure that this list is sorted for _stricmp.
+     */
+    const ModuleItem g_ModuleRules[] =
+    {
+        { ModuleTypes::NeedsDynamicCodeOptout, "BaseGUI.dll" },
+        { ModuleTypes::NeedsBlocking, "ExplorerPatcher.amd64.dll" },
+        { ModuleTypes::NeedsBlocking, "ExplorerPatcher.IA-32.dll" },
+        { ModuleTypes::NeedsBlocking, "PrxDrvPE.dll" },
+        { ModuleTypes::NeedsBlocking, "PrxDrvPE64.dll" },
+        { ModuleTypes::NeedsBlocking, "TFMain32.dll" },
+        { ModuleTypes::NeedsBlocking, "TFMain64.dll" },
+    };
+
+    static MO_UINT8 QueryModuleType(
+        _In_ MO_CONSTANT_STRING ModuleName)
+    {
+        for (MO_UINT32 i = 0; i < MO_ARRAY_SIZE(g_ModuleRules); ++i)
+        {
+            if (!::_stricmp(ModuleName, g_ModuleRules[i].ModuleName))
+            {
+                return g_ModuleRules[i].ModuleType;
+            }
+        }
+        return ModuleTypes::Unknown;
+    }
+
+    static std::mutex g_DynamicCodeRangeMutex;
+
     static bool IsCurrentProcessHandle(
         _In_ HANDLE ProcessHandle)
     {
@@ -37,10 +81,20 @@ namespace
         }
         return false;
     }
-}
 
-namespace
-{
+    static bool IsPageExecute(
+        _In_ DWORD Protect)
+    {
+        if (PAGE_EXECUTE == Protect ||
+            PAGE_EXECUTE_READ == Protect ||
+            PAGE_EXECUTE_READWRITE == Protect ||
+            PAGE_EXECUTE_WRITECOPY == Protect)
+        {
+            return true;
+        }
+        return false;
+    }
+
     namespace FunctionTypes
     {
         enum
@@ -238,39 +292,7 @@ namespace
 
 namespace
 {
-    enum DllFlags : unsigned int
-    {
-        UnknownDll = 0,
-        DllNeedsBlocking = 1,
-        DllNeedsDynamicCodeOptout = 2,
-    };
-
     static std::vector<std::pair<UINT_PTR, SIZE_T>> dynamic_code_ranges;
-    static std::mutex dynamic_code_range_lock;
-
-    using DllType = std::pair<const char*, DllFlags>;
-    // Make sure that this list is sorted for _stricmp.
-    static const std::array<DllType, 7> DllList =
-    {
-        std::make_pair("BaseGUI.dll", DllNeedsDynamicCodeOptout),
-        std::make_pair("ExplorerPatcher.amd64.dll", DllNeedsBlocking),
-        std::make_pair("ExplorerPatcher.IA-32.dll", DllNeedsBlocking),
-        std::make_pair("PrxDrvPE.dll", DllNeedsBlocking),
-        std::make_pair("PrxDrvPE64.dll", DllNeedsBlocking),
-        std::make_pair("TFMain32.dll", DllNeedsBlocking),
-        std::make_pair("TFMain64.dll", DllNeedsBlocking),
-    };
-
-    static DllFlags FindDll(const char* dllName)
-    {
-        for (auto it = DllList.begin(); it != DllList.end(); it++)
-        {
-            if (!_stricmp(it->first, dllName)) {
-                return it->second;
-            }
-        }
-        return UnknownDll;
-    }
 
     static inline bool CheckExtents(size_t viewSize, size_t offset, size_t size)
     {
@@ -314,14 +336,6 @@ namespace
         return true;
     }
 
-    static bool ProtectionIsExecute(DWORD Protect)
-    {
-        return Protect == PAGE_EXECUTE ||
-            Protect == PAGE_EXECUTE_READ ||
-            Protect == PAGE_EXECUTE_READWRITE ||
-            Protect == PAGE_EXECUTE_WRITECOPY;
-    }
-
     static NTSTATUS NTAPI MyNtMapViewOfSection(
         _In_ HANDLE SectionHandle,
         _In_ HANDLE ProcessHandle,
@@ -346,7 +360,7 @@ namespace
             InheritDisposition,
             AllocationType,
             Win32Protect);
-        if (ret < 0 || !::IsCurrentProcessHandle(ProcessHandle) || !ProtectionIsExecute(Win32Protect))
+        if (ret < 0 || !::IsCurrentProcessHandle(ProcessHandle) || !::IsPageExecute(Win32Protect))
         {
             return ret;
         }
@@ -361,15 +375,15 @@ namespace
         {
             return ret;
         }
-        DllFlags dllType = FindDll(dllName);
-        if (dllType & DllNeedsBlocking)
+        MO_UINT8 ModuleType = ::QueryModuleType(dllName);
+        if (ModuleTypes::NeedsBlocking & ModuleType)
         {
             ::OriginalNtUnmapViewOfSection(ProcessHandle, *BaseAddress);
             return STATUS_ACCESS_DENIED;
         }
-        else if (dllType & DllNeedsDynamicCodeOptout)
+        else if (ModuleTypes::NeedsDynamicCodeOptout & ModuleType)
         {
-            std::lock_guard<std::mutex> lock(dynamic_code_range_lock);
+            std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
             dynamic_code_ranges.push_back(std::make_pair(reinterpret_cast<UINT_PTR>(*BaseAddress), *ViewSize));
         }
         return ret;
@@ -386,7 +400,7 @@ namespace
         }
         UINT_PTR ptr = reinterpret_cast<UINT_PTR>(BaseAddress);
         {
-            std::lock_guard<std::mutex> lock(dynamic_code_range_lock);
+            std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
             for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++)
             {
                 if (ptr >= it->first && ptr < it->first + it->second)
@@ -402,7 +416,7 @@ namespace
     static bool CallerUsesDynamicCode(void* pCaller)
     {
         UINT_PTR caller = reinterpret_cast<UINT_PTR>(pCaller);
-        std::lock_guard<std::mutex> lock(dynamic_code_range_lock);
+        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
         for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++)
         {
             if (caller >= it->first && caller < it->first + it->second)
@@ -422,7 +436,7 @@ namespace
         _In_ DWORD flAllocationType,
         _In_ DWORD flProtect)
     {
-        if (!::ProtectionIsExecute(flProtect) ||
+        if (!::IsPageExecute(flProtect) ||
             !::CallerUsesDynamicCode(_ReturnAddress()))
         {
             return ::OriginalVirtualAlloc(
@@ -449,7 +463,7 @@ namespace
         _In_ DWORD flProtect)
     {
         if (!::IsCurrentProcessHandle(hProcess) ||
-            !::ProtectionIsExecute(flProtect) ||
+            !::IsPageExecute(flProtect) ||
             !::CallerUsesDynamicCode(_ReturnAddress()))
         {
             return ::OriginalVirtualAllocEx(
@@ -476,7 +490,7 @@ namespace
         _In_ DWORD flNewProtect,
         _Out_ PDWORD lpflOldProtect)
     {
-        if (!::ProtectionIsExecute(flNewProtect) ||
+        if (!::IsPageExecute(flNewProtect) ||
             !::CallerUsesDynamicCode(_ReturnAddress()))
         {
             return ::OriginalVirtualProtect(
@@ -503,7 +517,7 @@ namespace
         _Out_ PDWORD lpflOldProtect)
     {
         if (!::IsCurrentProcessHandle(hProcess) ||
-            !::ProtectionIsExecute(flNewProtect) ||
+            !::IsPageExecute(flNewProtect) ||
             !::CallerUsesDynamicCode(_ReturnAddress()))
         {
             return ::OriginalVirtualProtectEx(
