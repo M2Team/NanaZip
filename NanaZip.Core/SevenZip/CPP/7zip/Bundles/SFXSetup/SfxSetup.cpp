@@ -108,7 +108,12 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
     memmove(buffer, buffer + pos, numBytesPrev);
   }
 }
-
+// **************** NanaZip Modification Start ****************
+// Remove the static identifiers to prevent compiler optimizations that break
+// the SfxSetup configuration file parsing. We should initialize the true values
+// at runtime.
+// GitHub Issue reference: https://github.com/M2Team/NanaZip/issues/795
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static char kStartID[] = { ',','!','@','I','n','s','t','a','l','l','@','!','U','T','F','-','8','!', 0 };
 static char kEndID[]   = { ',','!','@','I','n','s','t','a','l','l','E','n','d','@','!', 0 };
 
@@ -120,7 +125,21 @@ static struct CInstallIDInit
     kEndID[0] = ';';
   }
 } g_CInstallIDInit;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+char* StartID()
+{
+    static char CachedResult[] = ",!@Install@!UTF-8!";
+    CachedResult[0] = ';';
+    return CachedResult;
+}
 
+char* EndID()
+{
+    static char CachedResult[] = ",!@InstallEnd@!";
+    CachedResult[0] = ';';
+    return CachedResult;
+}
+// **************** NanaZip Modification End ****************
 
 #if defined(_WIN32) && defined(_UNICODE) && !defined(_WIN64) && !defined(UNDER_CE)
 #define NT_CHECK_FAIL_ACTION ShowErrorMessage(L"Unsupported Windows version"); return 1;
@@ -184,7 +203,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   }
 
   AString config;
-  if (!ReadDataString(fullPath, kStartID, kEndID, config))
+  // **************** NanaZip Modification Start ****************
+  // if (!ReadDataString(fullPath, kStartID, kEndID, config))
+  if (!ReadDataString(fullPath, ::StartID(), ::EndID(), config))
+  // **************** NanaZip Modification End ****************
   {
     if (!assumeYes)
       ShowErrorMessage(L"Can't load config info");
