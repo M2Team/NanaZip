@@ -12,7 +12,7 @@
 
 // **************** NanaZip Modification Start ****************
 #ifndef Z7_SFX
-#include "Restrictions.h"
+#include <K7BasePolicies.h>
 #endif
 
 // static const unsigned kNumCodecsMax = 64;
@@ -39,7 +39,7 @@ extern CExternalCodecs g_ExternalCodecs;
 void RegisterCodec(const CCodecInfo *codecInfo) throw()
 {
 #ifndef Z7_SFX
-  if (!::NanaZipIsCodecAllowedA(codecInfo->Name))
+  if (!::K7BaseGetAllowedCodecPolicy(codecInfo->Name))
   {
     return;
   }

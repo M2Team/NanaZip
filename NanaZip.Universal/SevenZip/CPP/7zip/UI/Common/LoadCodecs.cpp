@@ -51,7 +51,7 @@ EXPORT_CODECS
 #include <Mile.Helpers.Base.h>
 
 #ifndef Z7_SFX
-#include "Restrictions.h"
+#include <K7BasePolicies.h>
 #endif
 // **************** NanaZip Modification End ****************
 
@@ -344,7 +344,7 @@ HRESULT CCodecs::LoadCodecs()
 
       CodecName.SetFromWStr_if_Ascii(CodecNameWide);
 
-      if (!::NanaZipIsCodecAllowedA(CodecName))
+      if (!::K7BaseGetAllowedCodecPolicy(CodecName))
       {
         continue;
       }
@@ -503,7 +503,7 @@ HRESULT CCodecs::LoadFormats()
     AString ItemName;
     ItemName.SetFromWStr_if_Ascii(item.Name);
 
-    if (!::NanaZipIsHandlerAllowedA(ItemName))
+    if (!::K7BaseGetAllowedHandlerPolicy(ItemName))
     {
       continue;
     }
@@ -886,7 +886,7 @@ HRESULT CCodecs::Load()
     #ifndef Z7_SFX
 
     // **************** NanaZip Modification Start ****************
-    if (!::NanaZipIsHandlerAllowedA(arc.Name))
+    if (!::K7BaseGetAllowedHandlerPolicy(arc.Name))
     {
       continue;
     }

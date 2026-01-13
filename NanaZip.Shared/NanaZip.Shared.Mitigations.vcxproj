@@ -24,11 +24,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mitigations.h" />
-    <ClInclude Include="Restrictions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mitigations.cpp" />
-    <ClCompile Include="Restrictions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Mobility">
