@@ -16,6 +16,9 @@ K7BaseHashFinal
 K7BaseHashGetSize
 K7BaseHashDuplicate
 
+K7BaseGetAllowedHandlerPolicy
+K7BaseGetAllowedCodecPolicy
+
 ; Temporary Policies Symbols
 ; These symbols won't be exported after the security mitigation implementation
 ; is moved to K7Base.

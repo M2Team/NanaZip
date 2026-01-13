@@ -48,4 +48,20 @@ EXTERN_C MO_BOOL MOAPI K7BaseGetAllowDynamicCodeGenerationPolicy();
  */
 EXTERN_C MO_BOOL MOAPI K7BaseGetAllowChildProcessCreationPolicy();
 
+/**
+ * @brief Retrieves the policy setting for allowing a specific handler.
+ * @param Name The name of the handler to check.
+ * @return Returns MO_TRUE if the handler is allowed, or MO_FALSE if not.
+ */
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedHandlerPolicy(
+    _In_ MO_CONSTANT_STRING Name);
+
+/**
+ * @brief Retrieves the policy setting for allowing a specific codec.
+ * @param Name The name of the codec to check.
+ * @return Returns MO_TRUE if the codec is allowed, or MO_FALSE if not.
+ */
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedCodecPolicy(
+    _In_ MO_CONSTANT_STRING Name);
+
 #endif // !K7_BASE_POLICIES
