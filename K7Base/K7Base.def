@@ -20,9 +20,7 @@ K7BaseHashDuplicate
 ; These symbols won't be exported after the security mitigation implementation
 ; is moved to K7Base.
 K7BaseInitializePolicies
-K7BaseGetAllowDynamicCodeGenerationPolicy
 K7BaseEnableMandatoryMitigations
 K7BaseDisableDynamicCodeGeneration
 K7BaseDisableChildProcessCreation
-K7BaseSetCurrentThreadDynamicCodePolicyOptOut
 K7BaseInitializeDynamicLinkLibraryBlocker
