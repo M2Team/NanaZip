@@ -23,12 +23,10 @@
     <None Include="NanaZip.Shared.Mitigations.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DllBlock.h" />
     <ClInclude Include="Mitigations.h" />
     <ClInclude Include="Restrictions.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DllBlock.cpp" />
     <ClCompile Include="Mitigations.cpp" />
     <ClCompile Include="Restrictions.cpp" />
   </ItemGroup>

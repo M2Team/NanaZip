@@ -58,4 +58,12 @@ EXTERN_C MO_RESULT MOAPI K7BaseDisableChildProcessCreation();
 EXTERN_C MO_RESULT MOAPI K7BaseSetCurrentThreadDynamicCodePolicyOptOut(
     _In_ MO_BOOL AllowDynamicCodeGeneration);
 
+/**
+ * @brief Initializes the dynamic link library blocker to workaround various
+ *        issues caused by incompatible dynamic link libraries.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker();
+
 #endif // !K7_BASE_MITIGATIONS

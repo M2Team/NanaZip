@@ -9,7 +9,7 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
-#include "DllBlock.h"
+#include <K7BaseMitigations.h>
 #include "Mitigations.h"
 #endif
 
@@ -735,7 +735,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 
   ::NanaZipFrierenGlobalInitialize();
 
-  if (!::NanaZipBlockDlls())
+  if (MO_RESULT_SUCCESS_OK != ::K7BaseInitializeDynamicLinkLibraryBlocker())
   {
     ErrorMessage("Cannot block DLL loading");
   }
