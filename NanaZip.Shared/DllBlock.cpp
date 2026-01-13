@@ -70,6 +70,23 @@ namespace
     }
 
     static std::mutex g_DynamicCodeRangeMutex;
+    static std::vector<std::pair<MO_UINTN, MO_UINTN>> g_DynamicCodeRanges;
+
+    static bool IsDynamicCodeAllowed(
+        _In_ MO_POINTER CallerPointer)
+    {
+        MO_UINTN CallerAddress = reinterpret_cast<MO_UINTN>(CallerPointer);
+        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
+        for (auto const& Range : g_DynamicCodeRanges)
+        {
+            if (CallerAddress >= Range.first &&
+                CallerAddress < Range.first + Range.second)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     static bool IsCurrentProcessHandle(
         _In_ HANDLE ProcessHandle)
@@ -93,6 +110,86 @@ namespace
             return true;
         }
         return false;
+    }
+
+    static inline bool CheckExtents(
+        _In_ MO_UINTN ViewSize,
+        _In_ MO_UINTN Offset,
+        _In_ MO_UINTN Size)
+    {
+        return (
+            Offset < ViewSize &&
+            Size <= ViewSize &&
+            Offset + Size <= ViewSize);
+    }
+
+    static bool GetModuleExportName(
+        _In_ MO_CHAR(&ModuleName)[256],
+        _In_ MO_STRING Base,
+        _In_ MO_UINTN ViewSize)
+    {
+        if (sizeof(IMAGE_DOS_HEADER) > ViewSize)
+        {
+            return false;
+        }
+
+        PIMAGE_DOS_HEADER DosHeader = reinterpret_cast<PIMAGE_DOS_HEADER>(Base);
+        if (IMAGE_DOS_SIGNATURE != DosHeader->e_magic)
+        {
+            return false;
+        }
+        if (0 > DosHeader->e_lfanew ||
+            !::CheckExtents(
+                ViewSize,
+                DosHeader->e_lfanew,
+                sizeof(IMAGE_NT_HEADERS)))
+        {
+            return false;
+        }
+
+        PIMAGE_NT_HEADERS NtHeader = reinterpret_cast<PIMAGE_NT_HEADERS>(
+            Base + DosHeader->e_lfanew);
+        if (IMAGE_NT_SIGNATURE != NtHeader->Signature ||
+            IMAGE_DIRECTORY_ENTRY_EXPORT >
+            NtHeader->OptionalHeader.NumberOfRvaAndSizes)
+        {
+            return false;
+        }
+
+        PIMAGE_DATA_DIRECTORY ExportDirectory =
+            &(NtHeader->OptionalHeader.DataDirectory[
+                IMAGE_DIRECTORY_ENTRY_EXPORT]);
+        if (sizeof(IMAGE_EXPORT_DIRECTORY) > ExportDirectory->Size ||
+            !ExportDirectory->VirtualAddress ||
+            !::CheckExtents(
+                ViewSize,
+                ExportDirectory->VirtualAddress,
+                sizeof(IMAGE_EXPORT_DIRECTORY)))
+        {
+            return false;
+        }
+
+        PIMAGE_EXPORT_DIRECTORY Exports =
+            reinterpret_cast<PIMAGE_EXPORT_DIRECTORY>(
+                Base + ExportDirectory->VirtualAddress);
+        // We don't know the export directory name size so assume that at least
+        // 256 bytes after the name are safe.
+        if (!Exports->Name ||
+            !::CheckExtents(
+                ViewSize,
+                Exports->Name,
+                MO_ARRAY_SIZE(ModuleName)))
+        {
+            return false;
+        }
+
+        const char* Name = Base + Exports->Name;
+        if (::strncpy_s(ModuleName, Name, _TRUNCATE))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     namespace FunctionTypes
@@ -131,7 +228,7 @@ namespace
         return CachedResult;
     }
 
-    static NTSTATUS OriginalNtMapViewOfSection(
+    static NTSTATUS NTAPI OriginalNtMapViewOfSection(
         _In_ HANDLE SectionHandle,
         _In_ HANDLE ProcessHandle,
         _Inout_ PVOID* BaseAddress,
@@ -163,7 +260,7 @@ namespace
             PageProtection);
     }
 
-    static NTSTATUS OriginalNtQuerySection(
+    static NTSTATUS NTAPI OriginalNtQuerySection(
         _In_ HANDLE SectionHandle,
         _In_ SECTION_INFORMATION_CLASS SectionInformationClass,
         _Out_ PVOID SectionInformation,
@@ -185,7 +282,7 @@ namespace
             ReturnLength);
     }
 
-    static NTSTATUS OriginalNtUnmapViewOfSection(
+    static NTSTATUS NTAPI OriginalNtUnmapViewOfSection(
         _In_ HANDLE ProcessHandle,
         _In_opt_ PVOID BaseAddress)
     {
@@ -201,7 +298,7 @@ namespace
             BaseAddress);
     }
 
-    static LPVOID OriginalVirtualAlloc(
+    static LPVOID WINAPI OriginalVirtualAlloc(
         _In_opt_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flAllocationType,
@@ -222,7 +319,7 @@ namespace
             flProtect);
     }
 
-    static LPVOID OriginalVirtualAllocEx(
+    static LPVOID WINAPI OriginalVirtualAllocEx(
         _In_ HANDLE hProcess,
         _In_opt_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
@@ -245,7 +342,7 @@ namespace
             flProtect);
     }
 
-    static BOOL OriginalVirtualProtect(
+    static BOOL WINAPI OriginalVirtualProtect(
         _In_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flNewProtect,
@@ -266,7 +363,7 @@ namespace
             lpflOldProtect);
     }
 
-    static BOOL OriginalVirtualProtectEx(
+    static BOOL WINAPI OriginalVirtualProtectEx(
         _In_ HANDLE hProcess,
         _In_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
@@ -288,68 +385,20 @@ namespace
             flNewProtect,
             lpflOldProtect);
     }
-}
 
-namespace
-{
-    static std::vector<std::pair<UINT_PTR, SIZE_T>> dynamic_code_ranges;
-
-    static inline bool CheckExtents(size_t viewSize, size_t offset, size_t size)
-    {
-        return offset < viewSize && size <= viewSize && offset + size <= viewSize;
-    }
-
-    static bool GetDllExportName(char(&dllName)[256], const char* base, size_t viewSize)
-    {
-        if (viewSize < sizeof(IMAGE_DOS_HEADER))
-        {
-            return false;
-        }
-        const IMAGE_DOS_HEADER* dosHdr = reinterpret_cast<const IMAGE_DOS_HEADER*>(base);
-        if (dosHdr->e_magic != IMAGE_DOS_SIGNATURE)
-        {
-            return false;
-        }
-        if (dosHdr->e_lfanew < 0 || !CheckExtents(viewSize, dosHdr->e_lfanew, sizeof(IMAGE_NT_HEADERS)))
-        {
-            return false;
-        }
-        const IMAGE_NT_HEADERS* ntHdr = reinterpret_cast<const IMAGE_NT_HEADERS*>(base + dosHdr->e_lfanew);
-        if (ntHdr->Signature != IMAGE_NT_SIGNATURE || ntHdr->OptionalHeader.NumberOfRvaAndSizes < IMAGE_DIRECTORY_ENTRY_EXPORT)
-            return false;
-        const IMAGE_DATA_DIRECTORY* dirExport = &(ntHdr->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT]);
-        if (dirExport->Size < sizeof(IMAGE_EXPORT_DIRECTORY) || !dirExport->VirtualAddress || !CheckExtents(viewSize, dirExport->VirtualAddress, sizeof(IMAGE_EXPORT_DIRECTORY)))
-        {
-            return false;
-        }
-        const IMAGE_EXPORT_DIRECTORY* exports = reinterpret_cast<const IMAGE_EXPORT_DIRECTORY*>(base + dirExport->VirtualAddress);
-        // we don't know the export directory name size so assume that at least 256 bytes after the name are safe
-        if (!exports->Name || !CheckExtents(viewSize, exports->Name, ARRAYSIZE(dllName)))
-        {
-            return false;
-        }
-        const char* name = base + exports->Name;
-        if (strncpy_s(dllName, name, _TRUNCATE))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    static NTSTATUS NTAPI MyNtMapViewOfSection(
+    static NTSTATUS NTAPI DetouredNtMapViewOfSection(
         _In_ HANDLE SectionHandle,
         _In_ HANDLE ProcessHandle,
-        _Inout_ _At_(*BaseAddress, _Readable_bytes_(*ViewSize) _Writable_bytes_(*ViewSize) _Post_readable_byte_size_(*ViewSize)) PVOID* BaseAddress,
+        _Inout_ PVOID* BaseAddress,
         _In_ ULONG_PTR ZeroBits,
         _In_ SIZE_T CommitSize,
         _Inout_opt_ PLARGE_INTEGER SectionOffset,
         _Inout_ PSIZE_T ViewSize,
         _In_ SECTION_INHERIT InheritDisposition,
         _In_ ULONG AllocationType,
-        _In_ ULONG Win32Protect)
+        _In_ ULONG PageProtection)
     {
-        NTSTATUS ret, status;
-        ret = ::OriginalNtMapViewOfSection(
+        NTSTATUS Status = ::OriginalNtMapViewOfSection(
             SectionHandle,
             ProcessHandle,
             BaseAddress,
@@ -359,23 +408,35 @@ namespace
             ViewSize,
             InheritDisposition,
             AllocationType,
-            Win32Protect);
-        if (ret < 0 || !::IsCurrentProcessHandle(ProcessHandle) || !::IsPageExecute(Win32Protect))
+            PageProtection);
+        if (!NT_SUCCESS(Status) ||
+            !::IsCurrentProcessHandle(ProcessHandle) ||
+            !::IsPageExecute(PageProtection))
         {
-            return ret;
+            return Status;
         }
-        SECTION_BASIC_INFORMATION sbi = {};
-        status = ::OriginalNtQuerySection(SectionHandle, SectionBasicInformation, &sbi, sizeof(sbi), NULL);
-        if (status < 0 || !(sbi.AllocationAttributes & SEC_IMAGE))
         {
-            return ret;
+            SECTION_BASIC_INFORMATION Information = {};
+            if (!NT_SUCCESS(::OriginalNtQuerySection(
+                SectionHandle,
+                SectionBasicInformation,
+                &Information,
+                sizeof(SECTION_BASIC_INFORMATION),
+                nullptr)) ||
+                !(SEC_IMAGE & Information.AllocationAttributes))
+            {
+                return Status;
+            }
         }
-        char dllName[256] = {};
-        if (!GetDllExportName(dllName, reinterpret_cast<const char*>(*BaseAddress), *ViewSize))
+        MO_CHAR ModuleName[256] = {};
+        if (!::GetModuleExportName(
+            ModuleName,
+            reinterpret_cast<MO_STRING>(*BaseAddress),
+            *ViewSize))
         {
-            return ret;
+            return Status;
         }
-        MO_UINT8 ModuleType = ::QueryModuleType(dllName);
+        MO_UINT8 ModuleType = ::QueryModuleType(ModuleName);
         if (ModuleTypes::NeedsBlocking & ModuleType)
         {
             ::OriginalNtUnmapViewOfSection(ProcessHandle, *BaseAddress);
@@ -384,60 +445,48 @@ namespace
         else if (ModuleTypes::NeedsDynamicCodeOptout & ModuleType)
         {
             std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
-            dynamic_code_ranges.push_back(std::make_pair(reinterpret_cast<UINT_PTR>(*BaseAddress), *ViewSize));
+            g_DynamicCodeRanges.emplace_back(
+                reinterpret_cast<MO_UINTN>(*BaseAddress),
+                *ViewSize);
         }
-        return ret;
+        return Status;
     }
 
-    static NTSTATUS NTAPI MyNtUnmapViewOfSection(
+    static NTSTATUS NTAPI DetouredNtUnmapViewOfSection(
         _In_ HANDLE ProcessHandle,
         _In_opt_ PVOID BaseAddress)
     {
-        NTSTATUS ret = ::OriginalNtUnmapViewOfSection(ProcessHandle, BaseAddress);
-        if (ret < 0 || !::IsCurrentProcessHandle(ProcessHandle))
+        NTSTATUS Status = ::OriginalNtUnmapViewOfSection(
+            ProcessHandle,
+            BaseAddress);
+        if (NT_SUCCESS(Status) &&
+            ::IsCurrentProcessHandle(ProcessHandle))
         {
-            return ret;
-        }
-        UINT_PTR ptr = reinterpret_cast<UINT_PTR>(BaseAddress);
-        {
+            MO_UINTN BaseStart = reinterpret_cast<MO_UINTN>(BaseAddress);
             std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
-            for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++)
+            for (auto Iterator = g_DynamicCodeRanges.begin();
+                Iterator != g_DynamicCodeRanges.end();
+                ++Iterator)
             {
-                if (ptr >= it->first && ptr < it->first + it->second)
+                if (BaseStart >= Iterator->first &&
+                    BaseStart < Iterator->first + Iterator->second)
                 {
-                    dynamic_code_ranges.erase(it);
+                    g_DynamicCodeRanges.erase(Iterator);
                     break;
                 }
             }
         }
-        return ret;
+        return Status;
     }
 
-    static bool CallerUsesDynamicCode(void* pCaller)
-    {
-        UINT_PTR caller = reinterpret_cast<UINT_PTR>(pCaller);
-        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
-        for (auto it = dynamic_code_ranges.begin(); it != dynamic_code_ranges.end(); it++)
-        {
-            if (caller >= it->first && caller < it->first + it->second)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-namespace
-{
-    static LPVOID DetouredVirtualAlloc(
+    static LPVOID WINAPI DetouredVirtualAlloc(
         _In_opt_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flAllocationType,
         _In_ DWORD flProtect)
     {
         if (!::IsPageExecute(flProtect) ||
-            !::CallerUsesDynamicCode(_ReturnAddress()))
+            !::IsDynamicCodeAllowed(::_ReturnAddress()))
         {
             return ::OriginalVirtualAlloc(
                 lpAddress,
@@ -455,7 +504,7 @@ namespace
         return Result;
     }
 
-    static LPVOID DetouredVirtualAllocEx(
+    static LPVOID WINAPI DetouredVirtualAllocEx(
         _In_ HANDLE hProcess,
         _In_opt_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
@@ -464,7 +513,7 @@ namespace
     {
         if (!::IsCurrentProcessHandle(hProcess) ||
             !::IsPageExecute(flProtect) ||
-            !::CallerUsesDynamicCode(_ReturnAddress()))
+            !::IsDynamicCodeAllowed(::_ReturnAddress()))
         {
             return ::OriginalVirtualAllocEx(
                 hProcess,
@@ -484,14 +533,14 @@ namespace
         return Result;
     }
 
-    static BOOL DetouredVirtualProtect(
+    static BOOL WINAPI DetouredVirtualProtect(
         _In_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
         _In_ DWORD flNewProtect,
         _Out_ PDWORD lpflOldProtect)
     {
         if (!::IsPageExecute(flNewProtect) ||
-            !::CallerUsesDynamicCode(_ReturnAddress()))
+            !::IsDynamicCodeAllowed(::_ReturnAddress()))
         {
             return ::OriginalVirtualProtect(
                 lpAddress,
@@ -509,7 +558,7 @@ namespace
         return Result;
     }
 
-    static BOOL DetouredVirtualProtectEx(
+    static BOOL WINAPI DetouredVirtualProtectEx(
         _In_ HANDLE hProcess,
         _In_ LPVOID lpAddress,
         _In_ SIZE_T dwSize,
@@ -518,7 +567,7 @@ namespace
     {
         if (!::IsCurrentProcessHandle(hProcess) ||
             !::IsPageExecute(flNewProtect) ||
-            !::CallerUsesDynamicCode(_ReturnAddress()))
+            !::IsDynamicCodeAllowed(::_ReturnAddress()))
         {
             return ::OriginalVirtualProtectEx(
                 hProcess,
@@ -549,7 +598,7 @@ EXTERN_C BOOL WINAPI NanaZipBlockDlls()
     g_FunctionTable[FunctionTypes::NtMapViewOfSection].Original =
         ::GetProcAddress(::GetNtDllModuleHandle(), "NtMapViewOfSection");
     g_FunctionTable[FunctionTypes::NtMapViewOfSection].Detoured =
-        ::MyNtMapViewOfSection;
+        ::DetouredNtMapViewOfSection;
 
     g_FunctionTable[FunctionTypes::NtQuerySection].Original =
         ::GetProcAddress(::GetNtDllModuleHandle(), "NtQuerySection");
@@ -559,7 +608,7 @@ EXTERN_C BOOL WINAPI NanaZipBlockDlls()
     g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Original =
         ::GetProcAddress(::GetNtDllModuleHandle(), "NtUnmapViewOfSection");
     g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Detoured =
-        ::MyNtUnmapViewOfSection;
+        ::DetouredNtUnmapViewOfSection;
 
     g_FunctionTable[FunctionTypes::VirtualAlloc].Original =
         ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualAlloc");
