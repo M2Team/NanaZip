@@ -27,6 +27,10 @@
   <Target Name="NanaZipCoreSfxSharedBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup>
       <ClCompile Include="$(MSBuildThisFileDirectory)Extensions\ZSCodecs\ZstdRegister.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zHandler.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zIn.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\SplitHandler.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\Bcj2Register.cpp" />
