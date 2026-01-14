@@ -11,8 +11,7 @@
 
 #include "Mitigations.h"
 
-#include <K7BaseMitigations.h>
-#include <K7BasePolicies.h>
+#include <K7Base.h>
 
 EXTERN_C BOOL WINAPI NanaZipEnableMitigations()
 {

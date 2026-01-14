@@ -8,7 +8,7 @@
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#include "K7BaseDetours.h"
+#include "K7BasePrivate.h"
 
 #include <Detours.h>
 

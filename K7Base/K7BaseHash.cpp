@@ -8,7 +8,7 @@
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#include "K7BaseHash.h"
+#include "K7BasePrivate.h"
 
 #include <Mile.Helpers.Base.h>
 

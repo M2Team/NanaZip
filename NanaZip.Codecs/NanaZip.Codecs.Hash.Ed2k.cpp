@@ -10,7 +10,7 @@
 
 #include "NanaZip.Codecs.h"
 
-#include <K7BaseHash.h>
+#include <K7Base.h>
 
 // Comments copy from RHash's ed2k.c
 //

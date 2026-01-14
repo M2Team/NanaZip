@@ -11,7 +11,7 @@
 #include <Mile.Helpers.h>
 #include <Mile.Helpers.CppBase.h>
 
-#include <K7BaseDetours.h>
+#include <K7Base.h>
 
 #include <Uxtheme.h>
 

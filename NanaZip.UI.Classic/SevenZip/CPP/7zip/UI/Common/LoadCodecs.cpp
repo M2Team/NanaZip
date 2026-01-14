@@ -47,7 +47,7 @@ EXPORT_CODECS
 #include <Mile.Helpers.Base.h>
 
 #ifndef _SFX
-#include <K7BasePolicies.h>
+#include <K7Base.h>
 #endif
 // **************** NanaZip Modification End ****************
 

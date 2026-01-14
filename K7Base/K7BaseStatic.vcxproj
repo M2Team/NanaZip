@@ -40,10 +40,8 @@
     <ClCompile Include="K7BaseHash.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="K7BaseDetours.h" />
-    <ClInclude Include="K7BaseMitigations.h" />
-    <ClInclude Include="K7BasePolicies.h" />
-    <ClInclude Include="K7BaseHash.h" />
+    <ClInclude Include="K7Base.h" />
+    <ClInclude Include="K7BasePrivate.h" />
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
 </Project>

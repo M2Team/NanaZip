@@ -35,7 +35,7 @@
 #include "../../UI/GUI/ExtractRes.h"
 
 // **************** NanaZip Modification Start ****************
-#include <K7BaseMitigations.h>
+#include <K7Base.h>
 #include <Mile.Helpers.h>
 #include <NanaZip.Frieren.h>
 #include "Mitigations.h"

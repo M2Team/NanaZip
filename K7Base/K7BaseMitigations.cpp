@@ -11,10 +11,7 @@
 
 #include <Mile.Internal.h>
 
-#include "K7BaseMitigations.h"
-
-#include "K7BaseDetours.h"
-#include "K7BasePolicies.h"
+#include "K7BasePrivate.h"
 
 #include <intrin.h>
 

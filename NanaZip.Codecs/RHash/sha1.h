@@ -2,7 +2,7 @@
 #ifndef SHA1_H
 #define SHA1_H
 #include "ustd.h"
-#include <K7BaseHash.h>
+#include <K7Base.h>
 
 #ifdef __cplusplus
 extern "C" {

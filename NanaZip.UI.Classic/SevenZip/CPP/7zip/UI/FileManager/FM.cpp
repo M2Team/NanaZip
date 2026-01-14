@@ -9,7 +9,7 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
-#include <K7BaseMitigations.h>
+#include <K7Base.h>
 #include "Mitigations.h"
 #endif
 

@@ -12,7 +12,7 @@
 
 // **************** NanaZip Modification Start ****************
 #ifndef Z7_SFX
-#include <K7BasePolicies.h>
+#include <K7Base.h>
 #endif
 
 // static const unsigned kNumCodecsMax = 64;

@@ -13,7 +13,7 @@
 
 #include "../SevenZip/C/7zTypes.h"
 
-#include <K7BaseHash.h>
+#include <K7Base.h>
 
 EXTERN_C_BEGIN
 

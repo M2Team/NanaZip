@@ -9,7 +9,7 @@
  *             MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#include "K7BasePolicies.h"
+#include "K7BasePrivate.h"
 
 #include <Mile.Helpers.CppBase.h>
 

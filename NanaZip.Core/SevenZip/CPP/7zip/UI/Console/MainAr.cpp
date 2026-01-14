@@ -19,7 +19,7 @@
 #include "ConsoleClose.h"
 
 // **************** NanaZip Modification Start ****************
-#include <K7BaseMitigations.h>
+#include <K7Base.h>
 #include "Mitigations.h"
 // **************** NanaZip Modification End ****************
 
