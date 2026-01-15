@@ -9,8 +9,6 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
-#include <K7Base.h>
-#include "Mitigations.h"
 #endif
 
 #include "../../../Common/StringConvert.h"
@@ -721,7 +719,37 @@ static int WINAPI WinMain2(int nCmdShow)
   return (int)msg.wParam;
 }
 
+// **************** NanaZip Modification Start ****************
+#include <K7Base.h>
 #include <NanaZip.Frieren.h>
+
+void NanaZipInitialize()
+{
+    do
+    {
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::ErrorMessage(L"K7BaseInitialize Phase 1 Failed");
+            break;
+        }
+
+        ::NanaZipFrierenGlobalInitialize();
+
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::ErrorMessage(L"K7BaseInitialize Phase 2 Failed");
+            break;
+        }
+    }
+    while (false);
+
+    if (!::K7BaseGetInitialized())
+    {
+        ::ErrorMessage(L"K7BaseInitialize did not complete successfully");
+        ::ExitProcess(1);
+    }
+}
+// **************** NanaZip Modification End ****************
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef UNDER_CE
@@ -733,16 +761,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 {
   g_hInstance = hInstance;
 
-  ::NanaZipFrierenGlobalInitialize();
-
-  if (MO_RESULT_SUCCESS_OK != ::K7BaseInitializeDynamicLinkLibraryBlocker())
-  {
-    ErrorMessage("Cannot block DLL loading");
-  }
-  if (!::NanaZipEnableMitigations())
-  {
-    ErrorMessage("Cannot enable security mitigations");
-  }
+  // **************** NanaZip Modification Start ****************
+  ::NanaZipInitialize();
+  // **************** NanaZip Modification End ****************
 
   try
   {

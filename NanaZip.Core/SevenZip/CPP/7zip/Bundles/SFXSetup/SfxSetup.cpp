@@ -30,7 +30,7 @@
 #include "../../IPassword.h" // Only for passing the compilation.
 #include <Mile.Helpers.h>
 #include <NanaZip.Frieren.h>
-#include "Mitigations.h"
+#include <K7Base.h>
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -157,6 +157,35 @@ static void ShowErrorMessageSpec(const UString &name)
   ShowErrorMessage(NULL, message);
 }
 
+// **************** NanaZip Modification Start ****************
+void NanaZipInitialize()
+{
+    do
+    {
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::ShowErrorMessage(L"K7BaseInitialize Phase 1 Failed");
+            break;
+        }
+
+        ::NanaZipFrierenGlobalInitialize();
+
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::ShowErrorMessage(L"K7BaseInitialize Phase 2 Failed");
+            break;
+        }
+    }
+    while (false);
+
+    if (!::K7BaseGetInitialized())
+    {
+        ::ShowErrorMessage(L"K7BaseInitialize did not complete successfully");
+        ::ExitProcess(1);
+    }
+}
+// **************** NanaZip Modification End ****************
+
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef UNDER_CE
     LPWSTR
@@ -170,12 +199,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   NT_CHECK
 
   // **************** NanaZip Modification Start ****************
-  ::NanaZipFrierenGlobalInitialize();
-
-  if (!::NanaZipEnableMitigations())
-  {
-    ShowErrorMessage(L"Cannot enable security mitigations");
-  }
+  ::NanaZipInitialize();
   // **************** NanaZip Modification End ****************
 
   #ifdef _WIN32

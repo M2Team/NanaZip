@@ -38,7 +38,6 @@
 #include <K7Base.h>
 #include <Mile.Helpers.h>
 #include <NanaZip.Frieren.h>
-#include "Mitigations.h"
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -242,6 +241,41 @@ static int APIENTRY WinMain2()
 #define NT_CHECK_FAIL_ACTION ShowErrorMessage(L"Unsupported Windows version"); return NExitCode::kFatalError;
 #endif
 
+// **************** NanaZip Modification Start ****************
+void NanaZipInitialize()
+{
+    do
+    {
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::ShowErrorMessage(L"K7BaseInitialize Phase 1 Failed");
+            break;
+        }
+
+        ::NanaZipFrierenGlobalInitialize();
+
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::ShowErrorMessage(L"K7BaseInitialize Phase 2 Failed");
+            break;
+        }
+
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::ShowErrorMessage(L"K7BaseInitialize Phase 3 Failed");
+            break;
+        }
+    }
+    while (false);
+
+    if (!::K7BaseGetInitialized())
+    {
+        ::ShowErrorMessage(L"K7BaseInitialize did not complete successfully");
+        ::ExitProcess(1);
+    }
+}
+// **************** NanaZip Modification End ****************
+
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef UNDER_CE
   LPWSTR
@@ -255,17 +289,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   NT_CHECK
 
   // **************** NanaZip Modification Start ****************
-  ::NanaZipFrierenGlobalInitialize();
-
-  if (!::NanaZipEnableMitigations())
-  {
-    ShowErrorMessage(L"Cannot enable security mitigations");
-  }
-
-  if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
-  {
-    ShowErrorMessage(L"Cannot enable security mitigations");
-  }
+  ::NanaZipInitialize();
   // **************** NanaZip Modification End ****************
 
   try

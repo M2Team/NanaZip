@@ -33,9 +33,6 @@
     <Project Path="K7Base/K7BaseStatic.vcxproj" Id="38bb5165-3db0-45b7-85ce-0a72def5ccd6" />
     <Project Path="K7User/K7UserStatic.vcxproj" Id="0b7d00be-6890-453e-86a4-def68b5c22a4" />
   </Folder>
-  <Folder Name="/Shared/">
-    <Project Path="NanaZip.Shared/NanaZip.Shared.Mitigations.vcxproj" Id="3b6ba400-cfe5-44e1-a8e3-2df0ccc5492b" />
-  </Folder>
   <Folder Name="/UI/">
     <Project Path="NanaZip.Modern/NanaZip.Modern.vcxproj" Id="1ab11057-1f48-44d2-a913-c945bfc1aa93" />
     <Project Path="NanaZip.Universal/NanaZip.Universal.Console.vcxproj" Id="86e818b3-d657-4e03-9336-48ee242a79d1" />

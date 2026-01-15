@@ -20,7 +20,6 @@
 
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
-#include "Mitigations.h"
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -105,6 +104,51 @@ static inline bool CheckIsa()
   */
 }
 
+// **************** NanaZip Modification Start ****************
+void NanaZipInitialize()
+{
+    do
+    {
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::FlushStreams();
+            *g_ErrStream
+                << "K7BaseInitialize Phase 1 Failed"
+                << ::endl;
+            break;
+        }
+
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::FlushStreams();
+            *g_ErrStream
+                << "K7BaseInitialize Phase 2 Failed"
+                << ::endl;
+            break;
+        }
+
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        {
+            ::FlushStreams();
+            *g_ErrStream
+                << "K7BaseInitialize Phase 3 Failed"
+                << ::endl;
+            break;
+        }
+    }
+    while (false);
+
+    if (!::K7BaseGetInitialized())
+    {
+        ::FlushStreams();
+        *g_ErrStream
+            << "K7BaseInitialize did not complete successfully"
+            << ::endl;
+        ::ExitProcess(1);
+    }
+}
+// **************** NanaZip Modification End ****************
+
 int Z7_CDECL main
 (
   #ifndef _WIN32
@@ -126,23 +170,7 @@ int Z7_CDECL main
   NT_CHECK
 
   // **************** NanaZip Modification Start ****************
-  if (!::NanaZipEnableMitigations())
-  {
-    FlushStreams();
-    *g_ErrStream
-      << "Cannot enable security mitigations: "
-      << NError::MyFormatMessage(GetLastError())
-      << endl;
-  }
-
-  if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
-  {
-    FlushStreams();
-    *g_ErrStream
-      << "Cannot disable child processes: "
-      << NError::MyFormatMessage(GetLastError())
-      << endl;
-  }
+  ::NanaZipInitialize();
   // **************** NanaZip Modification End ****************
 
   NConsoleClose::CCtrlHandlerSetter ctrlHandlerSetter;

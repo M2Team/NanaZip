@@ -222,15 +222,6 @@ EXTERN_C MO_RESULT MOAPI K7BaseHashDuplicate(
 #define K7_BASE_POLICIES
 
 /**
- * @brief Initializes the NanaZip policy settings.
- * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
- *         it returns an MO_RESULT error code.
- * @remarks The function should be called only once during the K7Base library
- *          initialization phase as early as possible.
- */
-EXTERN_C MO_RESULT MOAPI K7BaseInitializePolicies();
-
-/**
  * @brief Retrieves the policy setting for allowing a specific handler.
  * @param Name The name of the handler to check.
  * @return Returns MO_TRUE if the handler is allowed, or MO_FALSE if not.
@@ -248,41 +239,31 @@ EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedCodecPolicy(
 
 #endif // !K7_BASE_POLICIES
 
-#ifndef K7_BASE_MITIGATIONS
-#define K7_BASE_MITIGATIONS
+#ifndef K7_BASE_INITIALIZE
+#define K7_BASE_INITIALIZE
 
 /**
- * @brief Enables the mandatory mitigations for the current process.
- * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
- *         it returns an MO_RESULT error code.
+ * @brief Checks whether the K7Base library has been initialized.
+ * @return Returns MO_TRUE if the library is initialized, or MO_FALSE if not.
+ * @remarks Only after K7BaseInitialize has been called successfully at least
+ *          twice, this function will return MO_TRUE.
  */
-EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations();
+EXTERN_C MO_BOOL MOAPI K7BaseGetInitialized();
 
 /**
- * @brief Disables dynamic code generation for the current process if the policy
- *        is set to disallow it.
+ * @brief Initializes the K7Base library.
  * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
  *         it returns an MO_RESULT error code.
+ * @remarks The function should be called twice or thrice during the
+ *          initialization phase as early as possible. The first call
+ *          initializes the core components before applying dynamic code
+ *          generation mitigations. The second call initializes the core
+ *          components after applying dynamic code generation mitigations.
+ *          The third call applies the child process creation mitigations,
+ *          which is optional.
  */
-EXTERN_C MO_RESULT MOAPI K7BaseDisableDynamicCodeGeneration();
+EXTERN_C MO_RESULT MOAPI K7BaseInitialize();
 
-/**
- * @brief Disables child process creation for the current process if the policy
- *        is set to disallow it.
- * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
- *         it returns an MO_RESULT error code.
- */
-EXTERN_C MO_RESULT MOAPI K7BaseDisableChildProcessCreation();
-
-/**
- * @brief Initializes the dynamic link library blocker to workaround various
- *        issues caused by incompatible dynamic link libraries.
- * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
- *         it returns an MO_RESULT error code.
- */
-EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker();
-
-#endif // !K7_BASE_MITIGATIONS
-
+#endif // !K7_BASE_INITIALIZE
 
 #endif // !K7_BASE
