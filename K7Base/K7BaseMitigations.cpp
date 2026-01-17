@@ -742,3 +742,43 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker()
 
     return MO_RESULT_SUCCESS_OK;
 }
+
+EXTERN_C MO_RESULT MOAPI K7BaseUninitializeDynamicLinkLibraryBlocker()
+{
+#ifdef NDEBUG
+    if (::K7BaseGetAllowDynamicCodeGenerationPolicy())
+    {
+        return MO_RESULT_SUCCESS_OK;
+    }
+
+    ::K7BaseDetourTransactionBegin();
+    ::K7BaseDetourUpdateThread(::GetCurrentThread());
+    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
+    {
+        if (g_FunctionTable[i].Original &&
+            g_FunctionTable[i].Detoured)
+        {
+            if (NO_ERROR != ::K7BaseDetourDetach(
+                &g_FunctionTable[i].Original,
+                g_FunctionTable[i].Detoured))
+            {
+                ::K7BaseDetourTransactionAbort();
+                return MO_RESULT_ERROR_FAIL;
+            }
+        }
+    }
+    ::K7BaseDetourTransactionCommit();
+
+    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
+    {
+        g_FunctionTable[i].Original = nullptr;
+        g_FunctionTable[i].Detoured = nullptr;
+    }
+
+    {
+        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
+        g_DynamicCodeRanges.clear();
+    }
+#endif // NDEBUG
+    return MO_RESULT_SUCCESS_OK;
+}

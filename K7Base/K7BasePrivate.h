@@ -85,6 +85,13 @@ EXTERN_C MO_RESULT MOAPI K7BaseSetCurrentThreadDynamicCodePolicyOptOut(
  */
 EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker();
 
+/**
+ * @brief Uninitializes the dynamic link library blocker.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseUninitializeDynamicLinkLibraryBlocker();
+
 #endif // !K7_BASE_MITIGATIONS_PRIVATE
 
 #endif // !K7_BASE_PRIVATE
