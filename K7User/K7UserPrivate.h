@@ -1,27 +1,30 @@
 ﻿/*
- * PROJECT:    NanaZip
- * FILE:       NanaZip.Frieren.WinUserPrivate.h
- * PURPOSE:    Definition for Windows undocumented window messages
+ * PROJECT:    NanaZip Platform User Library (K7User)
+ * FILE:       K7UserPrivate.h
+ * PURPOSE:    Definition for NanaZip Platform User Private Interfaces
  *
  * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#ifndef NANAZIP_FRIEREN_WINUSERPRIVATE
-#define NANAZIP_FRIEREN_WINUSERPRIVATE
+#ifndef K7_USER_PRIVATE
+#define K7_USER_PRIVATE
 
 #include <Windows.h>
+
+#ifndef K7_USER_WIN_USER_PRIVATE
+#define K7_USER_WIN_USER_PRIVATE
 
 // Reference: https://github.com/adzm/win32-custom-menubar-aero-theme
 
 // window messages related to menu bar drawing
-#define WM_UAHDESTROYWINDOW    0x0090	// handled by DefWindowProc
-#define WM_UAHDRAWMENU         0x0091	// lParam is UAHMENU
-#define WM_UAHDRAWMENUITEM     0x0092	// lParam is UAHDRAWMENUITEM
-#define WM_UAHINITMENU         0x0093	// handled by DefWindowProc
-#define WM_UAHMEASUREMENUITEM  0x0094	// lParam is UAHMEASUREMENUITEM
-#define WM_UAHNCPAINTMENUPOPUP 0x0095	// handled by DefWindowProc
+#define WM_UAHDESTROYWINDOW 0x0090 // handled by DefWindowProc
+#define WM_UAHDRAWMENU 0x0091 // lParam is UAHMENU
+#define WM_UAHDRAWMENUITEM 0x0092 // lParam is UAHDRAWMENUITEM
+#define WM_UAHINITMENU 0x0093 // handled by DefWindowProc
+#define WM_UAHMEASUREMENUITEM 0x0094 // lParam is UAHMEASUREMENUITEM
+#define WM_UAHNCPAINTMENUPOPUP 0x0095 // handled by DefWindowProc
 
 // describes the sizes of the menu bar or menu item
 typedef union tagUAHMENUITEMMETRICS
@@ -85,4 +88,6 @@ typedef struct tagUAHMEASUREMENUITEM
     UAHMENUITEM umi;
 } UAHMEASUREMENUITEM, *PUAHMEASUREMENUITEM;
 
-#endif // !NANAZIP_FRIEREN_WINUSERPRIVATE
+#endif // !K7_USER_WIN_USER_PRIVATE
+
+#endif // !K7_USER_PRIVATE

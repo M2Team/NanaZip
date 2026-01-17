@@ -12,6 +12,7 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)..\K7Base\;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildThisFileDirectory)..\K7User\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -25,7 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NanaZip.Frieren.h" />
-    <ClInclude Include="NanaZip.Frieren.WinUserPrivate.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NanaZip.Frieren.cpp" />

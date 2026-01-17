@@ -30,5 +30,8 @@
   <ItemGroup>
     <None Include="K7UserStatic.props" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="K7UserPrivate.h" />
+  </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
 </Project>

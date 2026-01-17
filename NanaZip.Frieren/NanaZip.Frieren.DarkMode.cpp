@@ -29,7 +29,7 @@ EXTERN_C HTHEME WINAPI OpenNcThemeData(
 
 #include <unordered_map>
 
-#include "NanaZip.Frieren.WinUserPrivate.h"
+#include "K7UserPrivate.h"
 
 // TODO: Move some workaround for NanaZip.UI.* to this.
 
