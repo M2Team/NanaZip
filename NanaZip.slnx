@@ -31,6 +31,7 @@
   <Folder Name="/Core/K7/">
     <Project Path="K7Base/K7Base.vcxproj" Id="5998305e-d017-47c2-8025-a19111f73539" />
     <Project Path="K7Base/K7BaseStatic.vcxproj" Id="38bb5165-3db0-45b7-85ce-0a72def5ccd6" />
+    <Project Path="K7User/K7User.vcxproj" Id="f9bf062b-998f-45a4-8285-96e4a0d5ec00" />
     <Project Path="K7User/K7UserStatic.vcxproj" Id="0b7d00be-6890-453e-86a4-def68b5c22a4" />
   </Folder>
   <Folder Name="/UI/">
