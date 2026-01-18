@@ -72,5 +72,5 @@ BEGIN
   // **************** NanaZip Modification Start **************** 
   DEFPUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys, WS_GROUP
   PUSHBUTTON     "Cancel", IDCANCEL, bx1, by, bxs, bys
-  // **************** NanaZip Modification Start **************** 
+  // **************** NanaZip Modification End ****************  
 END
