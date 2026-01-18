@@ -226,7 +226,12 @@ LONG CMenuPage::OnApply()
 
     {
       int zoneIndex = (int)_zoneCombo.GetItemData_of_CurSel();
-      if (zoneIndex <= 0)
+      // **************** NanaZip Modification Start ****************
+      // if (zoneIndex <= 0)
+      if (zoneIndex < 0 ||
+          zoneIndex > NExtract::NZoneIdMode::kOffice ||
+          zoneIndex == NExtract::NZoneIdMode::Default)
+      // **************** NanaZip Modification End ****************
         zoneIndex = -1;
       ci.WriteZone = (UInt32)(Int32)zoneIndex;
     }
