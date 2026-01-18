@@ -400,21 +400,21 @@ void NanaZipInitialize()
     {
         if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
         {
-            ::ErrorMessage(L"K7BaseInitialize Phase 1 Failed");
+            ::ErrorMessage(L"K7BaseInitialize Failed");
             break;
         }
 
         ::NanaZipFrierenGlobalInitialize();
 
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
         {
-            ::ErrorMessage(L"K7BaseInitialize Phase 2 Failed");
+            ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
             break;
         }
 
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
         {
-            ::ErrorMessage(L"K7BaseInitialize Phase 3 Failed");
+            ::ErrorMessage(L"K7BaseDisableChildProcessCreation Failed");
             break;
         }
     }

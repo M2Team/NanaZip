@@ -20,5 +20,8 @@ K7BaseGetAllowedHandlerPolicy
 K7BaseGetAllowedCodecPolicy
 K7BaseGetWriteZoneIdExtractPolicy
 
+K7BaseDisableDynamicCodeGeneration
+K7BaseDisableChildProcessCreation
+
 K7BaseGetInitialized
 K7BaseInitialize

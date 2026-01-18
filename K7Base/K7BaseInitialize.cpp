@@ -12,71 +12,42 @@
 
 namespace
 {
-    static MO_UINT8 g_InitializationPhase = 0;
+    static MO_BOOL g_Initialized = MO_FALSE;
 }
 
 EXTERN_C MO_BOOL MOAPI K7BaseGetInitialized()
 {
-    // The K7Base library is considered initialized only after at least the
-    // second initialization phase is completed.
-    return g_InitializationPhase > 1;
+    return g_Initialized;
 }
 
 EXTERN_C MO_RESULT MOAPI K7BaseInitialize()
 {
+    if (g_Initialized)
+    {
+        return MO_RESULT_SUCCESS_OK;
+    }
+
     MO_RESULT Result = MO_RESULT_SUCCESS_OK;
 
-    if (0 == g_InitializationPhase)
+    Result = ::K7BaseInitializePolicies();
+    if (MO_RESULT_SUCCESS_OK != Result)
     {
-        // First initialization phase.
-
-        Result = ::K7BaseInitializePolicies();
-        if (MO_RESULT_SUCCESS_OK != Result)
-        {
-            return Result;
-        }
-
-        Result = ::K7BaseEnableMandatoryMitigations();
-        if (MO_RESULT_SUCCESS_OK != Result)
-        {
-            return Result;
-        }
-
-        Result = ::K7BaseInitializeDynamicLinkLibraryBlocker();
-        if (MO_RESULT_SUCCESS_OK != Result)
-        {
-            return Result;
-        }
-
-        ++g_InitializationPhase;
-        return MO_RESULT_SUCCESS_OK;
+        return Result;
     }
-    else if (1 == g_InitializationPhase)
+
+    Result = ::K7BaseEnableMandatoryMitigations();
+    if (MO_RESULT_SUCCESS_OK != Result)
     {
-        // Second initialization phase.
-
-        Result = ::K7BaseDisableDynamicCodeGeneration();
-        if (MO_RESULT_SUCCESS_OK != Result)
-        {
-            return Result;
-        }
-
-        ++g_InitializationPhase;
-        return MO_RESULT_SUCCESS_OK;
+        return Result;
     }
-    else if (2 == g_InitializationPhase)
+
+    Result = ::K7BaseInitializeDynamicLinkLibraryBlocker();
+    if (MO_RESULT_SUCCESS_OK != Result)
     {
-        // Third initialization phase.
-
-        Result = ::K7BaseDisableChildProcessCreation();
-        if (MO_RESULT_SUCCESS_OK != Result)
-        {
-            return Result;
-        }
-
-        ++g_InitializationPhase;
-        return MO_RESULT_SUCCESS_OK;
+        return Result;
     }
+
+    g_Initialized = MO_TRUE;
 
     // Do nothing if already initialized.
     return MO_RESULT_SUCCESS_OK;

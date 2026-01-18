@@ -113,25 +113,25 @@ void NanaZipInitialize()
         {
             ::FlushStreams();
             *g_ErrStream
-                << "K7BaseInitialize Phase 1 Failed"
+                << "K7BaseInitialize Failed"
                 << ::endl;
             break;
         }
 
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
         {
             ::FlushStreams();
             *g_ErrStream
-                << "K7BaseInitialize Phase 2 Failed"
+                << "K7BaseDisableDynamicCodeGeneration Failed"
                 << ::endl;
             break;
         }
 
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
         {
             ::FlushStreams();
             *g_ErrStream
-                << "K7BaseInitialize Phase 3 Failed"
+                << "K7BaseDisableChildProcessCreation Failed"
                 << ::endl;
             break;
         }

@@ -164,15 +164,15 @@ void NanaZipInitialize()
     {
         if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
         {
-            ::ShowErrorMessage(L"K7BaseInitialize Phase 1 Failed");
+            ::ShowErrorMessage(L"K7BaseInitialize Failed");
             break;
         }
 
         ::NanaZipFrierenGlobalInitialize();
 
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
         {
-            ::ShowErrorMessage(L"K7BaseInitialize Phase 2 Failed");
+            ::ShowErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
             break;
         }
     }

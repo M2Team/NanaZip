@@ -246,6 +246,27 @@ EXTERN_C DWORD MOAPI K7BaseGetWriteZoneIdExtractPolicy();
 
 #endif // !K7_BASE_POLICIES
 
+#ifndef K7_BASE_MITIGATIONS
+#define K7_BASE_MITIGATIONS
+
+/**
+ * @brief Disables dynamic code generation for the current process if the policy
+ *        is set to disallow it.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseDisableDynamicCodeGeneration();
+
+/**
+ * @brief Disables child process creation for the current process if the policy
+ *        is set to disallow it.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7BaseDisableChildProcessCreation();
+
+#endif // !K7_BASE_MITIGATIONS
+
 #ifndef K7_BASE_INITIALIZE
 #define K7_BASE_INITIALIZE
 
