@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>&amp;Scoir</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Oscail istigh *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Oscail istigh #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Roghnaigh &amp;uile</value>
   </data>

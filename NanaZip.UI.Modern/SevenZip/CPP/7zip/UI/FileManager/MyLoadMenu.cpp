@@ -168,6 +168,9 @@ static void MyChangeMenu(HMENU menuLoc, int level, int menuIndex)
 
         UInt32 langID = langPos >= 0 ? kIDLangPairs[langPos].LangID : item.wID;
 
+        // **************** NanaZip Modification Start ****************
+        // */# localization logic removed from NanaZip.
+        #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
         if (langID == IDM_OPEN_INSIDE_ONE || langID == IDM_OPEN_INSIDE_PARSER)
         {
           LangString_OnlyFromLangFile(IDM_OPEN_INSIDE, newString);
@@ -180,6 +183,9 @@ static void MyChangeMenu(HMENU menuLoc, int level, int menuIndex)
           newString += (langID == IDM_OPEN_INSIDE_ONE ? " *" : " #");
         }
         else if (langID == IDM_BENCHMARK2)
+        #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+        if (langID == IDM_BENCHMARK2)
+        // **************** NanaZip Modification End ****************
         {
           LangString_OnlyFromLangFile(IDM_BENCHMARK, newString);
           if (newString.IsEmpty())

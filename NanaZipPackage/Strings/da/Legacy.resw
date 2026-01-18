@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>&amp;Afslut</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Åbn inden i *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Åbn inden i #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Opret/rediger henvisning</value>
   </data>

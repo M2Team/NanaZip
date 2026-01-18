@@ -165,6 +165,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>U&amp;tgong</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Iepenje yn *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Iepenje yn #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>&amp;Alles selektearje</value>
   </data>
