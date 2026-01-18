@@ -259,8 +259,11 @@ HMENU g_MoreMenu = nullptr;
 void MyLoadMenu()
 {
   HMENU Menu = ::LoadMenuW(g_hInstance, MAKEINTRESOURCE(IDM_MENU));
-  if (!g_LangID.IsEmpty())
-    MyChangeMenu(Menu, 0, 0);
+  // **************** NanaZip Modification Start ****************
+  // if (!g_LangID.IsEmpty())
+  //   MyChangeMenu(Menu, 0, 0);
+  MyChangeMenu(Menu, 0, 0);
+  // **************** NanaZip Modification End ****************
 
   g_MoreMenu = ::CreatePopupMenu();
   ::CopyMenu(Menu, g_MoreMenu);
