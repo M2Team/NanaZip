@@ -15,6 +15,10 @@ namespace NControl {
 class CComboBox: public CWindow
 {
 public:
+  // **************** NanaZip Modification Start ****************
+  virtual void Attach(HWND newWindow) override;
+  // **************** NanaZip Modification End ****************
+
   void ResetContent() { SendMsg(CB_RESETCONTENT, 0, 0); }
   LRESULT AddString(LPCTSTR s) { return SendMsg(CB_ADDSTRING, 0, (LPARAM)s); }
   #ifndef _UNICODE
@@ -52,6 +56,10 @@ public:
 class CComboBoxEx: public CComboBox
 {
 public:
+  // **************** NanaZip Modification Start ****************
+  virtual void Attach(HWND newWindow) override;
+  // **************** NanaZip Modification End ****************
+
   bool SetUnicodeFormat(bool fUnicode) { return LRESULTToBool(SendMsg(CBEM_SETUNICODEFORMAT, BOOLToBool(fUnicode), 0)); }
 
   /* Returns:

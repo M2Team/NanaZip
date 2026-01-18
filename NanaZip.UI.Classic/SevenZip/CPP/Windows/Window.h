@@ -64,7 +64,10 @@ public:
     return *this;
   }
   operator HWND() const { return _window; }
-  void Attach(HWND newWindow) { _window = newWindow; }
+  // **************** NanaZip Modification Start ****************
+  // void Attach(HWND newWindow) { _window = newWindow; }
+  virtual void Attach(HWND newWindow) { _window = newWindow; }
+  // **************** NanaZip Modification End ****************
   HWND Detach()
   {
     HWND window = _window;
