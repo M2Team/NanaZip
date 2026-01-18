@@ -1868,50 +1868,21 @@ void CPanel::OpenItemInArchive(int index, bool tryInternal, bool tryExternal, bo
   */
 
 
-  // **************** NanaZip Modification Start ****************
-  // Backported from 24.09.
   if (tryAsArchive)
   {
-    // actually we want to get sum: size of main file plus sizes of altStreams.
-    // but now there is no interface to get altStreams sizes.
-    NCOM::CPropVariant prop;
-    _folder->GetProperty(index, kpidSize, &prop);
-    const size_t fileLimit = g_RAM_Size_Defined ?
-        g_RAM_Size >> MyMax(_parentFolders.Size() + 1, 8u):
-        1u << 22;
-    UInt64 fileSize = 0;
-    if (!ConvertPropVariantToUInt64(prop, fileSize))
-      fileSize = fileLimit;
-#if 0  // 1 : for debug
-    fileLimit = 1;
-#endif
-
-    if (fileSize <= fileLimit)
+    HRESULT res = OpenAsArc_Msg(NULL, tempFileInfo, fullVirtPath, type ? type : L""
+        // , encrypted
+        // , true // showErrorMessage
+        );
+    if (res == S_OK)
     {
-      options.streamMode = true;
-      virtFileSystemSpec = new CVirtFileSystem;
-      virtFileSystem = virtFileSystemSpec;
-      virtFileSystemSpec->FileName = name;
-      virtFileSystemSpec->IsAltStreamFile = isAltStream;
-
-#if defined(_WIN32) && !defined(UNDER_CE)
-#ifndef _UNICODE
-      if (g_IsNT)
-#endif
-      {
-        Get_ZoneId_Stream_from_ParentFolders(virtFileSystemSpec->ZoneBuf);
-        options.ZoneBuf = virtFileSystemSpec->ZoneBuf;
-      }
-#endif
-
-      virtFileSystemSpec->MaxTotalAllocSize = (size_t)fileSize
-            + (1 << 16); // we allow additional total size for small alt streams.
-      virtFileSystemSpec->DirPrefix = tempDirNorm;
-      // options.VirtFileSystem = virtFileSystem;
-      options.VirtFileSystemSpec = virtFileSystemSpec;
+      tempDirectory.DisableDeleting();
+      RefreshListCtrl();
+      return;
     }
+    if (res == E_ABORT || res != S_FALSE)
+      return;
   }
-  // **************** NanaZip Modification End ****************
 
   if (!tryExternal)
     return;
