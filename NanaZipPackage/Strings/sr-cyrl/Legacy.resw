@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>Излаз</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Отвори изнутра *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Отвори изнутра #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Изабери све</value>
   </data>

@@ -162,6 +162,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>Га&amp;рах</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Дотор нээх *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Дотор нээх #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Бүгдийг со&amp;нгох</value>
   </data>

@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>&amp;Keluar</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Buka di Dalam *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Buka di Dalam #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Tautan</value>
   </data>

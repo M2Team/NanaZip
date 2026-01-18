@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>В&amp;ыхад</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Адкрыць усярэдзіне *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Адкрыць усярэдзіне #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Вылучыць у&amp;сё</value>
   </data>

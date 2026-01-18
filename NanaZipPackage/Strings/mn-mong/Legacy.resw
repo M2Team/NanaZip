@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>ᠭᠠᠷᠬᠤ (&amp;X)</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>ᠣᠳᠣᠬᠢ ᠴᠣᠩᠬᠣ  ᠶᠢ ᠨᠡᠭᠡᠭᠡᠬᠦ *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>ᠣᠳᠣᠬᠢ ᠴᠣᠩᠬᠣ  ᠶᠢ ᠨᠡᠭᠡᠭᠡᠬᠦ #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>ᠪᠦᠬᠦᠨ  ᠢ ᠰᠣᠩᠭᠣᠬᠤ (&amp;A)</value>
   </data>

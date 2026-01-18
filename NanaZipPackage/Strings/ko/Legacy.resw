@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>끝내기(&amp;X)</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>내부 열기 *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>내부 열기 #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>연결</value>
   </data>

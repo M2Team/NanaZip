@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>I&amp;rten</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Ireki Barnean *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Ireki Barnean #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Lotura</value>
   </data>

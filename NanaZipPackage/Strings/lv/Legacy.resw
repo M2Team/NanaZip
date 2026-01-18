@@ -162,6 +162,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>&amp;Beigt</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Atvērt iekšpusē *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Atvērt iekšpusē #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Iezīmēt &amp;visu</value>
   </data>

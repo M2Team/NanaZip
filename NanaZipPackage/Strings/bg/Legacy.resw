@@ -165,6 +165,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>Из&amp;ход</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Отваряне в *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Отваряне в #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>&amp;Маркиране на всички</value>
   </data>

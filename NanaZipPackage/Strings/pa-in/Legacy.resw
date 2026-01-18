@@ -165,6 +165,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>ਬਾਹਰ ਨਿਕਲੋ (&amp;x)</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>ਅੰਦਰ ਖੋਲ੍ਹੋ *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>ਅੰਦਰ ਖੋਲ੍ਹੋ #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>ਸਭ ਚੁਣੋ (&amp;A)</value>
   </data>

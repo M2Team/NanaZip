@@ -162,6 +162,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>A&amp;fsluit</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Open Binne *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Open Binne #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Selekteer &amp;alles</value>
   </data>

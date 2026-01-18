@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>閉じる(&amp;X)</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>NanaZip で開く *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>NanaZip で開く #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>リンク</value>
   </data>

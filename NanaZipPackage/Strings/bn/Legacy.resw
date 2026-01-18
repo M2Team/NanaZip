@@ -165,6 +165,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>বাহির</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>NanaZip-এ উন্মুক্ত করা *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>NanaZip-এ উন্মুক্ত করা #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>সব নির্বাচন</value>
   </data>

@@ -165,6 +165,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>E&amp;liru</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Malfermu ene *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Malfermu ene #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>M&amp;arku ĉiun</value>
   </data>

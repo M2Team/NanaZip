@@ -165,6 +165,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>دەر&amp;چوون</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>کردنەوە لەناو خۆدا *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>کردنەوە لەناو خۆدا #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>هەمووی دیاری بکە</value>
   </data>
