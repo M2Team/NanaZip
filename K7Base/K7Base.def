@@ -18,6 +18,7 @@ K7BaseHashDuplicate
 
 K7BaseGetAllowedHandlerPolicy
 K7BaseGetAllowedCodecPolicy
+K7BaseGetWriteZoneIdExtractPolicy
 
 K7BaseGetInitialized
 K7BaseInitialize

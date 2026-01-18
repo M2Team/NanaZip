@@ -113,16 +113,6 @@ Rar2, Rar3, Rar5, RISCV, SPARC, Swap2, Swap4, ZSTD
 
 Run `NanaZipC --version` to see the full list of currently-enabled codecs.
 
-# Legacy Policies in NanaZip 6.0 Preview 1
-
-NanaZip supports setting system-wide policies via creating Registry values in
-the key `HKLM\Software\NanaZip\Policies`.
-These policies override user settings.
-
-Following is the list of currently-supported policy options.
-
-## Supported policy values
-
 ### Propagate Zone.Id stream
 
 *Availability: NanaZip 6.0 Preview 1 (6.0.1461.0) and later.*
@@ -135,3 +125,8 @@ This value controls Mark-of-the-Web (MOTW) propagation of archive files.
     - `0`: No
     - `1`: Yes (all files)
     - `2`: Only for unsafe extensions (does not support all nested archives)
+
+# Legacy Policies in NanaZip 6.0 Preview 1
+
+In NanaZip 6.0 Preview 1, system-wide policies should be set via creating
+Registry values in the key `HKLM\Software\NanaZip\Policies` instead.

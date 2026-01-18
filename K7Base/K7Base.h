@@ -237,6 +237,13 @@ EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedHandlerPolicy(
 EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedCodecPolicy(
     _In_ MO_CONSTANT_STRING Name);
 
+/**
+ * @brief Retrieves the policy setting for Zone.Id stream propagation.
+ * @return Returns a DWORD corresponding to a NZoneIdMode value if the policy is
+ *         defined, or MAXDWORD if not.
+ */
+EXTERN_C DWORD MOAPI K7BaseGetWriteZoneIdExtractPolicy();
+
 #endif // !K7_BASE_POLICIES
 
 #ifndef K7_BASE_INITIALIZE
