@@ -70,6 +70,9 @@ BEGIN
             ntPosX, timePosY + 92, ntSizeX, 16
   
   // **************** NanaZip Modification Start **************** 
+//  DEFPUSHBUTTON  "OK",     IDOK,     bx3, by, bxs, bys, WS_GROUP
+//  PUSHBUTTON     "Cancel", IDCANCEL, bx2, by, bxs, bys
+//  PUSHBUTTON     "Help",   IDHELP,   bx1, by, bxs, bys
   DEFPUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys, WS_GROUP
   PUSHBUTTON     "Cancel", IDCANCEL, bx1, by, bxs, bys
   // **************** NanaZip Modification End **************** 
