@@ -69,7 +69,8 @@ BEGIN
   CONTROL   "Do not change source files last access time", IDX_COMPRESS_PRESERVE_ATIME, MY_CHECKBOX | BS_MULTILINE,
             ntPosX, timePosY + 92, ntSizeX, 16
   
-  
+  // **************** NanaZip Modification Start **************** 
   DEFPUSHBUTTON  "OK",     IDOK,     bx2, by, bxs, bys, WS_GROUP
   PUSHBUTTON     "Cancel", IDCANCEL, bx1, by, bxs, bys
+  // **************** NanaZip Modification End **************** 
 END
