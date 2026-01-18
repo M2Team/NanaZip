@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>Sa&amp;ír</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Abrir dentro *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Abrir dentro #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Ligazón</value>
   </data>

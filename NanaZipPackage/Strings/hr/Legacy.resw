@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>&amp;Izlaz</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Otvori mapu *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Otvori mapu #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Poveznica</value>
   </data>

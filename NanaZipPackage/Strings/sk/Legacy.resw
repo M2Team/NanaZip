@@ -171,6 +171,12 @@
   <data name="Resource558" xml:space="preserve">
     <value>Odkaz...</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Otvoriť vnútri *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Otvoriť vnútri #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Označiť všetko</value>
   </data>

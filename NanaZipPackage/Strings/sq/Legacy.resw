@@ -174,6 +174,12 @@
   <data name="Resource559" xml:space="preserve">
     <value>&amp;Rrjedhat alternative të të dhënave</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Hap brenda *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Hap brenda #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Përzgjidh &amp;të gjithë</value>
   </data>

@@ -174,6 +174,12 @@
   <data name="Resource559" xml:space="preserve">
     <value>&amp;Ҷараёнҳои алтернативӣ</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Кушодан аз дарун *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Кушодан аз дарун #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Ҳамаашро интихоб кардан</value>
   </data>

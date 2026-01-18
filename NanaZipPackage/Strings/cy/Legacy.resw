@@ -165,6 +165,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>Alla&amp;n</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Agor tu Mewn *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Agor tu Mewn #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Dewis y C&amp;yfan</value>
   </data>

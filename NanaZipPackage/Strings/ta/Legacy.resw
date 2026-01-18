@@ -156,6 +156,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>வெளியேறு</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>உள்ளே திற *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>உள்ளே திற #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>அனைத்தும் தேர்ந்தெடு</value>
   </data>
