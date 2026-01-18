@@ -83,8 +83,6 @@ Run `NanaZipC --version` to see the full list of currently-enabled handlers.
 
 ### Codec restrictions
 
-*Availability: NanaZip 6.0 Preview 2 and later.*
-
 Similarly to archive handler restrictions, these values control which codecs can
 be loaded by NanaZip.
 
@@ -115,8 +113,6 @@ Run `NanaZipC --version` to see the full list of currently-enabled codecs.
 
 ### Propagate Zone.Id stream
 
-*Availability: NanaZip 6.0 Preview 1 (6.0.1461.0) and later.*
-
 This value controls Mark-of-the-Web (MOTW) propagation of archive files.
 
 - Name: `WriteZoneIdExtract`
@@ -126,7 +122,28 @@ This value controls Mark-of-the-Web (MOTW) propagation of archive files.
     - `1`: Yes (all files)
     - `2`: Only for unsafe extensions (does not support all nested archives)
 
-# Legacy Policies in NanaZip 6.0 Preview 1
+## Legacy Policies in NanaZip 6.0 Preview 1
 
 In NanaZip 6.0 Preview 1, system-wide policies should be set via creating
 Registry values in the key `HKLM\Software\NanaZip\Policies` instead.
+
+Here are the policies can be applied in NanaZip 6.0 Preview 1.
+
+- AllowedHandlers
+- BlockedHandlers
+- AllowedCodecs
+- BlockedCodecs
+- WriteZoneIdExtract
+
+Here are some policies only available in NanaZip 6.0 Preview 1.
+
+### Disable mitigations
+
+This value controls which security mitigations should not be applied by NanaZip.
+
+- Name: `DisableMitigations`
+- Type: `REG_DWORD`
+- Value:
+    - `0`: Don't disable mitigations
+    - `1`: Disable all mitigations
+    - Other values are reserved.
