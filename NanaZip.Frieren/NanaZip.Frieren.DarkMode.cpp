@@ -35,6 +35,45 @@ EXTERN_C HTHEME WINAPI OpenNcThemeData(
 
 namespace
 {
+    const COLORREF g_LightModeBackgroundColor = RGB(255, 255, 255);
+    const COLORREF g_LightModeForegroundColor = RGB(0, 0, 0);
+
+    const COLORREF g_DarkModeBackgroundColor = RGB(0, 0, 0);
+    const COLORREF g_DarkModeForegroundColor = RGB(255, 255, 255);
+    const COLORREF g_DarkModeBorderColor = RGB(127, 127, 127);
+    const COLORREF g_DarkModeMenuSelectedBackgroundColor = RGB(65, 65, 65);
+
+    static HBRUSH GetDarkModeBackgroundBrush()
+    {
+        static HBRUSH CachedResult =
+            ::CreateSolidBrush(g_DarkModeBackgroundColor);
+        return CachedResult;
+    }
+
+    static HBRUSH GetDarkModeForegroundBrush()
+    {
+        static HBRUSH CachedResult =
+            ::CreateSolidBrush(g_DarkModeForegroundColor);
+        return CachedResult;
+    }
+
+    static HBRUSH GetDarkModeBorderBrush()
+    {
+        static HBRUSH CachedResult =
+            ::CreateSolidBrush(g_DarkModeBorderColor);
+        return CachedResult;
+    }
+
+    static HBRUSH GetDarkModeMenuSelectedBackgroundBrush()
+    {
+        static HBRUSH CachedResult =
+            ::CreateSolidBrush(g_DarkModeMenuSelectedBackgroundColor);
+        return CachedResult;
+    }
+}
+
+namespace
+{
     static bool IsStandardDynamicRangeMode()
     {
         static bool CachedResult = ([]() -> bool
@@ -95,42 +134,6 @@ namespace
         return CachedResult;
     }
 
-    namespace FunctionType
-    {
-        enum
-        {
-            GetSysColor,
-            GetSysColorBrush,
-            DrawThemeText,
-            DrawThemeBackground,
-            OpenNcThemeData,
-
-            MaximumFunction
-        };
-    }
-
-    struct FunctionItem
-    {
-        PVOID Original;
-        PVOID Detoured;
-    };
-
-    FunctionItem g_FunctionTable[FunctionType::MaximumFunction];
-
-    const COLORREF LightModeBackgroundColor = RGB(255, 255, 255);
-    const COLORREF LightModeForegroundColor = RGB(0, 0, 0);
-
-    const COLORREF DarkModeBackgroundColor = RGB(0, 0, 0);
-    const COLORREF DarkModeForegroundColor = RGB(255, 255, 255);
-    const COLORREF DarkModeBorderColor = RGB(127, 127, 127);
-
-    static const HBRUSH DarkModeBackgroundBrush =
-        ::CreateSolidBrush(DarkModeBackgroundColor);
-    static const HBRUSH DarkModeForegroundBrush =
-        ::CreateSolidBrush(DarkModeForegroundColor);
-    static const HBRUSH DarkModeBorderBrush =
-        ::CreateSolidBrush(DarkModeBorderColor);
-
     thread_local bool volatile g_ThreadInitialized = false;
     thread_local bool volatile g_MicaBackdropAvailable = false;
     thread_local HHOOK volatile g_WindowsHookHandle = nullptr;
@@ -170,25 +173,25 @@ namespace
                 {
                     ListView_SetTextBkColor(
                         WindowHandle,
-                        DarkModeBackgroundColor);
+                        g_DarkModeBackgroundColor);
                     ListView_SetBkColor(
                         WindowHandle,
-                        DarkModeBackgroundColor);
+                        g_DarkModeBackgroundColor);
                     ListView_SetTextColor(
                         WindowHandle,
-                        DarkModeForegroundColor);
+                        g_DarkModeForegroundColor);
                 }
                 else
                 {
                     ListView_SetTextBkColor(
                         WindowHandle,
-                        LightModeBackgroundColor);
+                        g_LightModeBackgroundColor);
                     ListView_SetBkColor(
                         WindowHandle,
-                        LightModeBackgroundColor);
+                        g_LightModeBackgroundColor);
                     ListView_SetTextColor(
                         WindowHandle,
-                        LightModeForegroundColor);
+                        g_LightModeForegroundColor);
                 }
             }
             else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
@@ -230,8 +233,8 @@ namespace
                     ColorScheme.clrBtnShadow = CLR_DEFAULT;
                     if (g_ShouldAppsUseDarkMode)
                     {
-                        ColorScheme.clrBtnHighlight = DarkModeBackgroundColor;
-                        ColorScheme.clrBtnShadow = DarkModeBackgroundColor;
+                        ColorScheme.clrBtnHighlight = g_DarkModeBackgroundColor;
+                        ColorScheme.clrBtnShadow = g_DarkModeBackgroundColor;
                     }
                     ::SendMessageW(
                         WindowHandle,
@@ -288,13 +291,14 @@ namespace
                 {
                     ::SetTextColor(
                         DeviceContextHandle,
-                        DarkModeForegroundColor);
+                        g_DarkModeForegroundColor);
                     ::SetBkColor(
                         DeviceContextHandle,
-                        DarkModeBackgroundColor);
+                        g_DarkModeBackgroundColor);
                 }
 
-                return reinterpret_cast<INT_PTR>(DarkModeBackgroundBrush);
+                return reinterpret_cast<INT_PTR>(
+                    ::GetDarkModeBackgroundBrush());
             }
 
             break;
@@ -473,7 +477,7 @@ namespace
                         ::FillRect(
                             UahMenu->hdc,
                             &MenuRect,
-                            DarkModeBackgroundBrush);
+                            ::GetDarkModeBackgroundBrush());
                     }
                 }
 
@@ -501,8 +505,9 @@ namespace
                             &MenuItemInfo))
                         {
                             int StateId = 0;
-                            COLORREF TextColor = DarkModeForegroundColor;
-                            HBRUSH BackgroundBrush = DarkModeBackgroundBrush;
+                            COLORREF TextColor = g_DarkModeForegroundColor;
+                            HBRUSH BackgroundBrush =
+                                ::GetDarkModeBackgroundBrush();
                             if (DrawItemStruct->itemState & ODS_INACTIVE)
                             {
                                 StateId = MBI_DISABLED;
@@ -522,9 +527,8 @@ namespace
                                 & (ODS_HOTLIGHT | ODS_SELECTED))
                             {
                                 StateId = MBI_HOT;
-                                static HBRUSH DarkModeMenuSelectedBackgroundBrush =
-                                    ::CreateSolidBrush(RGB(65, 65, 65));
-                                BackgroundBrush = DarkModeMenuSelectedBackgroundBrush;
+                                BackgroundBrush =
+                                    ::GetDarkModeMenuSelectedBackgroundBrush();
                             }
                             else
                             {
@@ -536,15 +540,17 @@ namespace
                                 &DrawItemStruct->rcItem,
                                 BackgroundBrush);
 
-                            // We have to specify the text colour explicitly as by default
-                            // black would be used, making the menu label unreadable on the
-                            // (almost) black background.
+                            // We have to specify the text colour explicitly as
+                            // by default black would be used, making the menu
+                            // label unreadable on the (almost) black
+                            // background.
                             DTTOPTS TextOptions = {};
                             TextOptions.dwSize = sizeof(DTTOPTS);
                             TextOptions.dwFlags = DTT_TEXTCOLOR;
                             TextOptions.crText = TextColor;
 
-                            DWORD TextFlags = DT_CENTER | DT_VCENTER | DT_SINGLELINE;
+                            DWORD TextFlags =
+                                DT_CENTER | DT_VCENTER | DT_SINGLELINE;
                             if (DrawItemStruct->itemState & ODS_NOACCEL)
                             {
                                 TextFlags |= DT_HIDEPREFIX;
@@ -605,7 +611,7 @@ namespace
                         ::FillRect(
                             DeviceContextHandle,
                             &AnnoyingLineRect,
-                            DarkModeBackgroundBrush);
+                            ::GetDarkModeBackgroundBrush());
 
                         ::ReleaseDC(hWnd, DeviceContextHandle);
                     }
@@ -658,60 +664,42 @@ namespace
             lParam);
     }
 
+    namespace FunctionTypes
+    {
+        enum
+        {
+            GetSysColor,
+            GetSysColorBrush,
+            DrawThemeText,
+            DrawThemeBackground,
+            OpenNcThemeData,
+
+            MaximumFunction
+        };
+    }
+
+    struct FunctionItem
+    {
+        PVOID Original;
+        PVOID Detoured;
+    };
+
+    FunctionItem g_FunctionTable[FunctionTypes::MaximumFunction];
+
     static DWORD WINAPI OriginalGetSysColor(
         _In_ int nIndex)
     {
         return reinterpret_cast<decltype(::GetSysColor)*>(
-            g_FunctionTable[FunctionType::GetSysColor].Original)(
+            g_FunctionTable[FunctionTypes::GetSysColor].Original)(
                 nIndex);
-    }
-
-    static DWORD WINAPI DetouredGetSysColor(
-        _In_ int nIndex)
-    {
-        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
-        {
-            return ::OriginalGetSysColor(nIndex);
-        }
-
-        switch (nIndex)
-        {
-        case COLOR_WINDOW:
-        case COLOR_BTNFACE:
-            return DarkModeBackgroundColor;
-        case COLOR_WINDOWTEXT:
-        case COLOR_BTNTEXT:
-            return DarkModeForegroundColor;
-        default:
-            return ::OriginalGetSysColor(nIndex);
-        }
     }
 
     static HBRUSH WINAPI OriginalGetSysColorBrush(
         _In_ int nIndex)
     {
         return reinterpret_cast<decltype(::GetSysColorBrush)*>(
-            g_FunctionTable[FunctionType::GetSysColorBrush].Original)(
+            g_FunctionTable[FunctionTypes::GetSysColorBrush].Original)(
                 nIndex);
-    }
-
-    static HBRUSH WINAPI DetouredGetSysColorBrush(
-        _In_ int nIndex)
-    {
-        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
-        {
-            return ::OriginalGetSysColorBrush(nIndex);
-        }
-
-        switch (nIndex)
-        {
-        case COLOR_BTNFACE:
-            return DarkModeBackgroundBrush;
-        case COLOR_BTNTEXT:
-            return DarkModeForegroundBrush;
-        default:
-            return ::OriginalGetSysColorBrush(nIndex);
-        }
     }
 
     static HRESULT WINAPI OriginalDrawThemeText(
@@ -726,7 +714,7 @@ namespace
         _In_ LPCRECT pRect)
     {
         return reinterpret_cast<decltype(::DrawThemeText)*>(
-            g_FunctionTable[FunctionType::DrawThemeText].Original)(
+            g_FunctionTable[FunctionTypes::DrawThemeText].Original)(
                 hTheme,
                 hdc,
                 iPartId,
@@ -736,6 +724,74 @@ namespace
                 dwTextFlags,
                 dwTextFlags2,
                 pRect);
+    }
+
+    static HRESULT WINAPI OriginalDrawThemeBackground(
+        _In_ HTHEME hTheme,
+        _In_ HDC hdc,
+        _In_ int iPartId,
+        _In_ int iStateId,
+        _In_ LPCRECT pRect,
+        _In_opt_ LPCRECT pClipRect)
+    {
+        return reinterpret_cast<decltype(::DrawThemeBackground)*>(
+            g_FunctionTable[FunctionTypes::DrawThemeBackground].Original)(
+                hTheme,
+                hdc,
+                iPartId,
+                iStateId,
+                pRect,
+                pClipRect);
+    }
+
+    static HTHEME WINAPI OriginalOpenNcThemeData(
+        _In_opt_ HWND hwnd,
+        _In_ LPCWSTR pszClassList)
+    {
+        return reinterpret_cast<decltype(OpenNcThemeData)*>(
+            g_FunctionTable[FunctionTypes::OpenNcThemeData].Original)(
+                hwnd,
+                pszClassList);
+    }
+
+    static DWORD WINAPI DetouredGetSysColor(
+        _In_ int nIndex)
+    {
+        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
+        {
+            return ::OriginalGetSysColor(nIndex);
+        }
+
+        switch (nIndex)
+        {
+        case COLOR_WINDOW:
+        case COLOR_BTNFACE:
+            return g_DarkModeBackgroundColor;
+        case COLOR_WINDOWTEXT:
+        case COLOR_BTNTEXT:
+            return g_DarkModeForegroundColor;
+        default:
+            return ::OriginalGetSysColor(nIndex);
+        }
+    }
+
+    static HBRUSH WINAPI DetouredGetSysColorBrush(
+        _In_ int nIndex)
+    {
+        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
+        {
+            return ::OriginalGetSysColorBrush(nIndex);
+        }
+
+        switch (nIndex)
+        {
+        case COLOR_BTNFACE:
+            return ::GetDarkModeBackgroundBrush();
+        case COLOR_BTNTEXT:
+            return ::GetDarkModeForegroundBrush();
+        default:
+            return ::OriginalGetSysColorBrush(nIndex);
+        }
     }
 
     static HRESULT WINAPI DetouredDrawThemeText(
@@ -766,7 +822,7 @@ namespace
         DTTOPTS TextOptions = {};
         TextOptions.dwSize = sizeof(DTTOPTS);
         TextOptions.dwFlags = DTT_TEXTCOLOR;
-        TextOptions.crText = DarkModeForegroundColor;
+        TextOptions.crText = g_DarkModeForegroundColor;
 
         return ::DrawThemeTextEx(
             hTheme,
@@ -778,24 +834,6 @@ namespace
             dwTextFlags,
             const_cast<LPRECT>(pRect),
             &TextOptions);
-    }
-
-    static HRESULT WINAPI OriginalDrawThemeBackground(
-        _In_ HTHEME hTheme,
-        _In_ HDC hdc,
-        _In_ int iPartId,
-        _In_ int iStateId,
-        _In_ LPCRECT pRect,
-        _In_opt_ LPCRECT pClipRect)
-    {
-        return reinterpret_cast<decltype(::DrawThemeBackground)*>(
-            g_FunctionTable[FunctionType::DrawThemeBackground].Original)(
-                hTheme,
-                hdc,
-                iPartId,
-                iStateId,
-                pRect,
-                pClipRect);
     }
 
     static HRESULT WINAPI DetouredDrawThemeBackground(
@@ -884,13 +922,13 @@ namespace
                 ::FrameRect(
                     hdc,
                     &paddedRect,
-                    DarkModeBorderBrush);
+                    ::GetDarkModeBorderBrush());
                 ::FillRect(
                     hdc,
                     &insideRect,
                     iStateId == HoveredCheckStateId[iPartId]
-                    ? DarkModeBorderBrush
-                    : DarkModeBackgroundBrush);
+                    ? ::GetDarkModeBorderBrush()
+                    : ::GetDarkModeBackgroundBrush());
 
                 return S_OK;
             }
@@ -907,7 +945,7 @@ namespace
             case 0:
             {
                 // Outside border (top, right)
-                ::FillRect(hdc, pRect, DarkModeBorderBrush);
+                ::FillRect(hdc, pRect, ::GetDarkModeBorderBrush());
                 return S_OK;
             }
             case SP_PANE:
@@ -915,7 +953,7 @@ namespace
             case SP_GRIPPER:
             {
                 // Everything else
-                ::FillRect(hdc, pRect, DarkModeBackgroundBrush);
+                ::FillRect(hdc, pRect, ::GetDarkModeBackgroundBrush());
                 return S_OK;
             }
             default:
@@ -930,16 +968,6 @@ namespace
             iStateId,
             pRect,
             pClipRect);
-    }
-
-    static HTHEME WINAPI OriginalOpenNcThemeData(
-        _In_opt_ HWND hwnd,
-        _In_ LPCWSTR pszClassList)
-    {
-        return reinterpret_cast<decltype(OpenNcThemeData)*>(
-            g_FunctionTable[FunctionType::OpenNcThemeData].Original)(
-                hwnd,
-                pszClassList);
     }
 
     static HTHEME WINAPI DetouredOpenNcThemeData(
@@ -999,24 +1027,24 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
     ::MileAllowDarkModeForApp(true);
     ::MileRefreshImmersiveColorPolicyState();
 
-    g_FunctionTable[FunctionType::GetSysColor].Original =
+    g_FunctionTable[FunctionTypes::GetSysColor].Original =
         ::GetSysColor;
-    g_FunctionTable[FunctionType::GetSysColor].Detoured =
+    g_FunctionTable[FunctionTypes::GetSysColor].Detoured =
         ::DetouredGetSysColor;
 
-    g_FunctionTable[FunctionType::GetSysColorBrush].Original =
+    g_FunctionTable[FunctionTypes::GetSysColorBrush].Original =
         ::GetSysColorBrush;
-    g_FunctionTable[FunctionType::GetSysColorBrush].Detoured =
+    g_FunctionTable[FunctionTypes::GetSysColorBrush].Detoured =
         ::DetouredGetSysColorBrush;
 
-    g_FunctionTable[FunctionType::DrawThemeText].Original =
+    g_FunctionTable[FunctionTypes::DrawThemeText].Original =
         ::DrawThemeText;
-    g_FunctionTable[FunctionType::DrawThemeText].Detoured =
+    g_FunctionTable[FunctionTypes::DrawThemeText].Detoured =
         ::DetouredDrawThemeText;
 
-    g_FunctionTable[FunctionType::DrawThemeBackground].Original =
+    g_FunctionTable[FunctionTypes::DrawThemeBackground].Original =
         ::DrawThemeBackground;
-    g_FunctionTable[FunctionType::DrawThemeBackground].Detoured =
+    g_FunctionTable[FunctionTypes::DrawThemeBackground].Detoured =
         ::DetouredDrawThemeBackground;
 
     {
@@ -1029,9 +1057,9 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
                 MAKEINTRESOURCEA(49));
             if (ProcAddress)
             {
-                g_FunctionTable[FunctionType::OpenNcThemeData].Original =
+                g_FunctionTable[FunctionTypes::OpenNcThemeData].Original =
                     ProcAddress;
-                g_FunctionTable[FunctionType::OpenNcThemeData].Detoured =
+                g_FunctionTable[FunctionTypes::OpenNcThemeData].Detoured =
                     ::DetouredOpenNcThemeData;
             }
         }
@@ -1039,7 +1067,7 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
 
     ::K7BaseDetourTransactionBegin();
     ::K7BaseDetourUpdateThread(::GetCurrentThread());
-    for (size_t i = 0; i < FunctionType::MaximumFunction; ++i)
+    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
     {
         if (g_FunctionTable[i].Original &&
             g_FunctionTable[i].Detoured)
@@ -1060,7 +1088,7 @@ EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalUninitialize()
 
     ::K7BaseDetourTransactionBegin();
     ::K7BaseDetourUpdateThread(::GetCurrentThread());
-    for (size_t i = 0; i < FunctionType::MaximumFunction; ++i)
+    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
     {
         if (g_FunctionTable[i].Original &&
             g_FunctionTable[i].Detoured)
