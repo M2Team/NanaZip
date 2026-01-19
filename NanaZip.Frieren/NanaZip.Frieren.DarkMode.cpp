@@ -121,7 +121,7 @@ namespace
     const COLORREF LightModeForegroundColor = RGB(0, 0, 0);
 
     const COLORREF DarkModeBackgroundColor = RGB(0, 0, 0);
-    const COLORREF DarkModeForegroundColor = RGB(192, 192, 192);
+    const COLORREF DarkModeForegroundColor = RGB(255, 255, 255);
     const COLORREF DarkModeBorderColor = RGB(127, 127, 127);
 
     static const HBRUSH DarkModeBackgroundBrush =
