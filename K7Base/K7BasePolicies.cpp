@@ -30,8 +30,8 @@ namespace
     static std::set<std::string> g_BlockedHandlers;
     static std::set<std::string> g_AllowedCodecs;
     static std::set<std::string> g_BlockedCodecs;
-    // MAXDWORD = undefined
-    static DWORD g_WriteZoneIdExtract = MAXDWORD;
+    // MO_UINT32_MAX is undefined
+    static MO_UINT32 g_WriteZoneIdExtract = MO_UINT32_MAX;
 
     static bool QueryDwordValue(
         _Out_ PDWORD Value,
@@ -183,13 +183,17 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitializePolicies()
         L"BlockedCodecs");
 
     {
-        DWORD Value;
+        DWORD Value = 0;
         if (::QueryDwordValue(
             &Value,
             PoliciesKeyHandle,
             L"WriteZoneIdExtract"))
         {
-            g_WriteZoneIdExtract = Value;
+            // Valid values are 0, 1, and 2.
+            if (Value <= 2)
+            {
+                g_WriteZoneIdExtract = Value;
+            }
         }
     }
 
@@ -238,7 +242,7 @@ EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedCodecPolicy(
     return MO_TRUE;
 }
 
-EXTERN_C DWORD MOAPI K7BaseGetWriteZoneIdExtractPolicy()
+EXTERN_C MO_UINT32 MOAPI K7BaseGetWriteZoneIdExtractPolicy()
 {
     return g_WriteZoneIdExtract;
 }
