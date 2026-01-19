@@ -426,25 +426,6 @@ namespace
 
             break;
         }
-        case WM_ERASEBKGND:
-        {
-            if (g_ShouldAppsUseDarkMode)
-            {
-                RECT ClientArea = {};
-                if (::GetClientRect(hWnd, &ClientArea))
-                {
-                    ::FillRect(
-                        reinterpret_cast<HDC>(wParam),
-                        &ClientArea,
-                        reinterpret_cast<HBRUSH>(
-                            ::GetStockObject(BLACK_BRUSH)));
-                }
-
-                return TRUE;
-            }
-
-            break;
-        }
         case WM_DPICHANGED:
         {
             bool ShouldExtendFrame = (
