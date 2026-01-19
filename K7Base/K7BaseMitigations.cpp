@@ -305,18 +305,6 @@ namespace
 
     static FunctionItem g_FunctionTable[FunctionTypes::MaximumFunction];
 
-    static HMODULE GetNtDllModuleHandle()
-    {
-        static HMODULE CachedResult = ::GetModuleHandleW(L"ntdll.dll");
-        return CachedResult;
-    }
-
-    static HMODULE GetKernel32ModuleHandle()
-    {
-        static HMODULE CachedResult = ::GetModuleHandleW(L"kernel32.dll");
-        return CachedResult;
-    }
-
     static NTSTATUS NTAPI OriginalNtMapViewOfSection(
         _In_ HANDLE SectionHandle,
         _In_ HANDLE ProcessHandle,
@@ -686,38 +674,44 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker()
         return MO_RESULT_SUCCESS_OK;
     }
 
+    HMODULE NtDllModuleHandle = ::GetModuleHandleW(L"ntdll.dll");
+    if (!NtDllModuleHandle)
+    {
+        return MO_RESULT_ERROR_FAIL;
+    }
+
     g_FunctionTable[FunctionTypes::NtMapViewOfSection].Original =
-        ::GetProcAddress(::GetNtDllModuleHandle(), "NtMapViewOfSection");
+        ::GetProcAddress(NtDllModuleHandle, "NtMapViewOfSection");
     g_FunctionTable[FunctionTypes::NtMapViewOfSection].Detoured =
         ::DetouredNtMapViewOfSection;
 
     g_FunctionTable[FunctionTypes::NtQuerySection].Original =
-        ::GetProcAddress(::GetNtDllModuleHandle(), "NtQuerySection");
+        ::GetProcAddress(NtDllModuleHandle, "NtQuerySection");
     g_FunctionTable[FunctionTypes::NtQuerySection].Detoured =
         nullptr;
 
     g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Original =
-        ::GetProcAddress(::GetNtDllModuleHandle(), "NtUnmapViewOfSection");
+        ::GetProcAddress(NtDllModuleHandle, "NtUnmapViewOfSection");
     g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Detoured =
         ::DetouredNtUnmapViewOfSection;
 
     g_FunctionTable[FunctionTypes::VirtualAlloc].Original =
-        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualAlloc");
+        ::VirtualAlloc;
     g_FunctionTable[FunctionTypes::VirtualAlloc].Detoured =
         ::DetouredVirtualAlloc;
 
     g_FunctionTable[FunctionTypes::VirtualAllocEx].Original =
-        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualAllocEx");
+        ::VirtualAllocEx;
     g_FunctionTable[FunctionTypes::VirtualAllocEx].Detoured =
         ::DetouredVirtualAllocEx;
 
     g_FunctionTable[FunctionTypes::VirtualProtect].Original =
-        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualProtect");
+        ::VirtualProtect;
     g_FunctionTable[FunctionTypes::VirtualProtect].Detoured =
         ::DetouredVirtualProtect;
 
     g_FunctionTable[FunctionTypes::VirtualProtectEx].Original =
-        ::GetProcAddress(::GetKernel32ModuleHandle(), "VirtualProtectEx");
+        ::VirtualProtectEx;
     g_FunctionTable[FunctionTypes::VirtualProtectEx].Detoured =
         ::DetouredVirtualProtectEx;
 
