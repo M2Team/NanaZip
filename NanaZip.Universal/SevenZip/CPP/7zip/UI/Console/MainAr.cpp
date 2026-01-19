@@ -107,44 +107,29 @@ static inline bool CheckIsa()
 // **************** NanaZip Modification Start ****************
 void NanaZipInitialize()
 {
-    do
-    {
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
-        {
-            ::FlushStreams();
-            *g_ErrStream
-                << "K7BaseInitialize Failed"
-                << ::endl;
-            break;
-        }
-
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
-        {
-            ::FlushStreams();
-            *g_ErrStream
-                << "K7BaseDisableDynamicCodeGeneration Failed"
-                << ::endl;
-            break;
-        }
-
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
-        {
-            ::FlushStreams();
-            *g_ErrStream
-                << "K7BaseDisableChildProcessCreation Failed"
-                << ::endl;
-            break;
-        }
-    }
-    while (false);
-
-    if (!::K7BaseGetInitialized())
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
     {
         ::FlushStreams();
         *g_ErrStream
-            << "K7BaseInitialize did not complete successfully"
+            << "K7BaseInitialize Failed"
             << ::endl;
         ::ExitProcess(1);
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::FlushStreams();
+        *g_ErrStream
+            << "K7BaseDisableDynamicCodeGeneration Failed"
+            << ::endl;
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
+    {
+        ::FlushStreams();
+        *g_ErrStream
+            << "K7BaseDisableChildProcessCreation Failed"
+            << ::endl;
     }
 }
 // **************** NanaZip Modification End ****************

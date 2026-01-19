@@ -10,18 +10,9 @@
 
 #include "K7BasePrivate.h"
 
-namespace
-{
-    static MO_BOOL g_Initialized = MO_FALSE;
-}
-
-EXTERN_C MO_BOOL MOAPI K7BaseGetInitialized()
-{
-    return g_Initialized;
-}
-
 EXTERN_C MO_RESULT MOAPI K7BaseInitialize()
 {
+    static MO_BOOL g_Initialized = MO_FALSE;
     if (g_Initialized)
     {
         return MO_RESULT_SUCCESS_OK;

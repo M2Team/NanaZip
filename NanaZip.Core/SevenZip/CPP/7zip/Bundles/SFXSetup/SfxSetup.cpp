@@ -160,28 +160,17 @@ static void ShowErrorMessageSpec(const UString &name)
 // **************** NanaZip Modification Start ****************
 void NanaZipInitialize()
 {
-    do
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
     {
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
-        {
-            ::ShowErrorMessage(L"K7BaseInitialize Failed");
-            break;
-        }
-
-        ::NanaZipFrierenGlobalInitialize();
-
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
-        {
-            ::ShowErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
-            break;
-        }
-    }
-    while (false);
-
-    if (!::K7BaseGetInitialized())
-    {
-        ::ShowErrorMessage(L"K7BaseInitialize did not complete successfully");
+        ::ShowErrorMessage(L"K7BaseInitialize Failed");
         ::ExitProcess(1);
+    }
+
+    ::NanaZipFrierenGlobalInitialize();
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ShowErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
     }
 }
 // **************** NanaZip Modification End ****************

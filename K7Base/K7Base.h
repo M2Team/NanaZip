@@ -271,24 +271,11 @@ EXTERN_C MO_RESULT MOAPI K7BaseDisableChildProcessCreation();
 #define K7_BASE_INITIALIZE
 
 /**
- * @brief Checks whether the K7Base library has been initialized.
- * @return Returns MO_TRUE if the library is initialized, or MO_FALSE if not.
- * @remarks Only after K7BaseInitialize has been called successfully at least
- *          twice, this function will return MO_TRUE.
- */
-EXTERN_C MO_BOOL MOAPI K7BaseGetInitialized();
-
-/**
  * @brief Initializes the K7Base library.
  * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
  *         it returns an MO_RESULT error code.
- * @remarks The function should be called twice or thrice during the
- *          initialization phase as early as possible. The first call
- *          initializes the core components before applying dynamic code
- *          generation mitigations. The second call initializes the core
- *          components after applying dynamic code generation mitigations.
- *          The third call applies the child process creation mitigations,
- *          which is optional.
+ * @remarks The function should be called only once during the initialization
+ *          phase as early as possible.
  */
 EXTERN_C MO_RESULT MOAPI K7BaseInitialize();
 

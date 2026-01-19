@@ -23,5 +23,4 @@ K7BaseGetWriteZoneIdExtractPolicy
 K7BaseDisableDynamicCodeGeneration
 K7BaseDisableChildProcessCreation
 
-K7BaseGetInitialized
 K7BaseInitialize

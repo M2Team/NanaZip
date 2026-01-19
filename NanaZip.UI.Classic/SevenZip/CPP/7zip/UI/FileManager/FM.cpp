@@ -725,28 +725,17 @@ static int WINAPI WinMain2(int nCmdShow)
 
 void NanaZipInitialize()
 {
-    do
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
     {
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
-        {
-            ::ErrorMessage(L"K7BaseInitialize Failed");
-            break;
-        }
-
-        ::NanaZipFrierenGlobalInitialize();
-
-        if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
-        {
-            ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
-            break;
-        }
-    }
-    while (false);
-
-    if (!::K7BaseGetInitialized())
-    {
-        ::ErrorMessage(L"K7BaseInitialize did not complete successfully");
+        ::ErrorMessage(L"K7BaseInitialize Failed");
         ::ExitProcess(1);
+    }
+
+    ::NanaZipFrierenGlobalInitialize();
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
     }
 }
 // **************** NanaZip Modification End ****************
