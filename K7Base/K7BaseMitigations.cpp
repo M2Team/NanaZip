@@ -663,6 +663,61 @@ namespace
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
         return Result;
     }
+
+    static bool InitializeFunctionTable()
+    {
+        HMODULE NtDllModuleHandle = ::GetModuleHandleW(L"ntdll.dll");
+        if (!NtDllModuleHandle)
+        {
+            return false;
+        }
+
+        g_FunctionTable[FunctionTypes::NtMapViewOfSection].Original =
+            ::GetProcAddress(NtDllModuleHandle, "NtMapViewOfSection");
+        g_FunctionTable[FunctionTypes::NtMapViewOfSection].Detoured =
+            ::DetouredNtMapViewOfSection;
+
+        g_FunctionTable[FunctionTypes::NtQuerySection].Original =
+            ::GetProcAddress(NtDllModuleHandle, "NtQuerySection");
+        g_FunctionTable[FunctionTypes::NtQuerySection].Detoured =
+            nullptr;
+
+        g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Original =
+            ::GetProcAddress(NtDllModuleHandle, "NtUnmapViewOfSection");
+        g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Detoured =
+            ::DetouredNtUnmapViewOfSection;
+
+        g_FunctionTable[FunctionTypes::VirtualAlloc].Original =
+            ::VirtualAlloc;
+        g_FunctionTable[FunctionTypes::VirtualAlloc].Detoured =
+            ::DetouredVirtualAlloc;
+
+        g_FunctionTable[FunctionTypes::VirtualAllocEx].Original =
+            ::VirtualAllocEx;
+        g_FunctionTable[FunctionTypes::VirtualAllocEx].Detoured =
+            ::DetouredVirtualAllocEx;
+
+        g_FunctionTable[FunctionTypes::VirtualProtect].Original =
+            ::VirtualProtect;
+        g_FunctionTable[FunctionTypes::VirtualProtect].Detoured =
+            ::DetouredVirtualProtect;
+
+        g_FunctionTable[FunctionTypes::VirtualProtectEx].Original =
+            ::VirtualProtectEx;
+        g_FunctionTable[FunctionTypes::VirtualProtectEx].Detoured =
+            ::DetouredVirtualProtectEx;
+
+        return true;
+    }
+
+    static void UninitializeFunctionTable()
+    {
+        for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
+        {
+            g_FunctionTable[i].Original = nullptr;
+            g_FunctionTable[i].Detoured = nullptr;
+        }
+    }
 }
 #endif // NDEBUG
 
@@ -674,46 +729,10 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker()
         return MO_RESULT_SUCCESS_OK;
     }
 
-    HMODULE NtDllModuleHandle = ::GetModuleHandleW(L"ntdll.dll");
-    if (!NtDllModuleHandle)
+    if (!::InitializeFunctionTable())
     {
         return MO_RESULT_ERROR_FAIL;
     }
-
-    g_FunctionTable[FunctionTypes::NtMapViewOfSection].Original =
-        ::GetProcAddress(NtDllModuleHandle, "NtMapViewOfSection");
-    g_FunctionTable[FunctionTypes::NtMapViewOfSection].Detoured =
-        ::DetouredNtMapViewOfSection;
-
-    g_FunctionTable[FunctionTypes::NtQuerySection].Original =
-        ::GetProcAddress(NtDllModuleHandle, "NtQuerySection");
-    g_FunctionTable[FunctionTypes::NtQuerySection].Detoured =
-        nullptr;
-
-    g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Original =
-        ::GetProcAddress(NtDllModuleHandle, "NtUnmapViewOfSection");
-    g_FunctionTable[FunctionTypes::NtUnmapViewOfSection].Detoured =
-        ::DetouredNtUnmapViewOfSection;
-
-    g_FunctionTable[FunctionTypes::VirtualAlloc].Original =
-        ::VirtualAlloc;
-    g_FunctionTable[FunctionTypes::VirtualAlloc].Detoured =
-        ::DetouredVirtualAlloc;
-
-    g_FunctionTable[FunctionTypes::VirtualAllocEx].Original =
-        ::VirtualAllocEx;
-    g_FunctionTable[FunctionTypes::VirtualAllocEx].Detoured =
-        ::DetouredVirtualAllocEx;
-
-    g_FunctionTable[FunctionTypes::VirtualProtect].Original =
-        ::VirtualProtect;
-    g_FunctionTable[FunctionTypes::VirtualProtect].Detoured =
-        ::DetouredVirtualProtect;
-
-    g_FunctionTable[FunctionTypes::VirtualProtectEx].Original =
-        ::VirtualProtectEx;
-    g_FunctionTable[FunctionTypes::VirtualProtectEx].Detoured =
-        ::DetouredVirtualProtectEx;
 
     ::K7BaseDetourTransactionBegin();
     ::K7BaseDetourUpdateThread(::GetCurrentThread());
@@ -727,6 +746,7 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker()
                 g_FunctionTable[i].Detoured))
             {
                 ::K7BaseDetourTransactionAbort();
+                ::UninitializeFunctionTable();
                 return MO_RESULT_ERROR_FAIL;
             }
         }
@@ -763,11 +783,7 @@ EXTERN_C MO_RESULT MOAPI K7BaseUninitializeDynamicLinkLibraryBlocker()
     }
     ::K7BaseDetourTransactionCommit();
 
-    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
-    {
-        g_FunctionTable[i].Original = nullptr;
-        g_FunctionTable[i].Detoured = nullptr;
-    }
+    ::UninitializeFunctionTable();
 
     {
         std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
