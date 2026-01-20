@@ -25,11 +25,6 @@
     <None Include="NanaZip.Frieren.ModernExperiences.Redirection.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NanaZip.Frieren.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="NanaZip.Frieren.cpp" />
-    <ClCompile Include="NanaZip.Frieren.DarkMode.cpp" />
     <ClCompile Include="NanaZip.Frieren.ModernExperiences.cpp" />
   </ItemGroup>
   <ItemGroup>

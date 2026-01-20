@@ -39,6 +39,9 @@
     <ProjectReference Include="..\K7Base\K7Base.vcxproj">
       <Project>{5998305E-D017-47C2-8025-A19111F73539}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\K7User\K7User.vcxproj">
+      <Project>{F9BF062B-998F-45A4-8285-96E4A0D5EC00}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\NanaZip.Modern\NanaZip.Modern.vcxproj">
       <Project>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</Project>
     </ProjectReference>

@@ -28,9 +28,9 @@
 
 // **************** NanaZip Modification Start ****************
 #include "../../IPassword.h" // Only for passing the compilation.
-#include <Mile.Helpers.h>
-#include <NanaZip.Frieren.h>
 #include <K7Base.h>
+#include <K7User.h>
+#include <Mile.Helpers.h>
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -166,7 +166,10 @@ void NanaZipInitialize()
         ::ExitProcess(1);
     }
 
-    ::NanaZipFrierenGlobalInitialize();
+    if (MO_RESULT_SUCCESS_OK != ::K7UserInitializeDarkModeSupport())
+    {
+        ::ShowErrorMessage(L"K7UserInitializeDarkModeSupport Failed");
+    }
 
     if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
     {

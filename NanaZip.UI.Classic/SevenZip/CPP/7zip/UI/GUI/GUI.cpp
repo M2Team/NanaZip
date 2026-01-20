@@ -392,7 +392,7 @@ static int Main2()
 
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
-#include <NanaZip.Frieren.h>
+#include <K7User.h>
 
 void NanaZipInitialize()
 {
@@ -402,7 +402,10 @@ void NanaZipInitialize()
         ::ExitProcess(1);
     }
 
-    ::NanaZipFrierenGlobalInitialize();
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
 
     if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
     {

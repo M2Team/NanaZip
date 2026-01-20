@@ -37,7 +37,7 @@
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
 #include <Mile.Helpers.h>
-#include <NanaZip.Frieren.h>
+#include <K7User.h>
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -250,7 +250,10 @@ void NanaZipInitialize()
         ::ExitProcess(1);
     }
 
-    ::NanaZipFrierenGlobalInitialize();
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ShowErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
 
     if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
     {

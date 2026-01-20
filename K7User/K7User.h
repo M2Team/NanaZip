@@ -1,12 +1,15 @@
 ﻿/*
  * PROJECT:    NanaZip
- * FILE:       NanaZip.Frieren.cpp
- * PURPOSE:    Implementation for NanaZip.Frieren
+ * FILE:       K7User.h
+ * PURPOSE:    Definition for NanaZip Platform User Public Interfaces
  *
  * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
+
+#ifndef K7_USER
+#define K7_USER
 
 #include <Mile.Mobility.Portable.Types.h>
 #ifndef MILE_MOBILITY_ENABLE_MINIMUM_SAL
@@ -21,7 +24,8 @@ typedef short SHORT;
 typedef long LONG;
 #endif // VOID
 
-#include "NanaZip.Frieren.h"
+#ifndef K7_USER_DARK_MODE
+#define K7_USER_DARK_MODE
 
 /**
  * @brief Initializes the dark mode support.
@@ -30,9 +34,6 @@ typedef long LONG;
  */
 EXTERN_C MO_RESULT MOAPI K7UserInitializeDarkModeSupport();
 
-EXTERN_C HRESULT WINAPI NanaZipFrierenGlobalInitialize()
-{
-    return MO_RESULT_SUCCESS_OK == ::K7UserInitializeDarkModeSupport()
-        ? S_OK
-        : E_FAIL;
-}
+#endif // !K7_USER_DARK_MODE
+
+#endif // !K7_USER

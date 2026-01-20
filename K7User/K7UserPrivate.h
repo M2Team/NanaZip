@@ -11,6 +11,8 @@
 #ifndef K7_USER_PRIVATE
 #define K7_USER_PRIVATE
 
+#include "K7User.h"
+
 #include <Windows.h>
 
 #ifndef K7_USER_WIN_USER_PRIVATE
@@ -89,5 +91,18 @@ typedef struct tagUAHMEASUREMENUITEM
 } UAHMEASUREMENUITEM, *PUAHMEASUREMENUITEM;
 
 #endif // !K7_USER_WIN_USER_PRIVATE
+
+#ifndef K7_USER_DARK_MODE_PRIVATE
+#define K7_USER_DARK_MODE_PRIVATE
+
+/**
+ * @brief Uninitializes the dark mode support.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserUninitializeDarkModeSupport();
+
+#endif // !K7_USER_DARK_MODE_PRIVATE
+
 
 #endif // !K7_USER_PRIVATE

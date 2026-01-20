@@ -722,7 +722,7 @@ static int WINAPI WinMain2(int nCmdShow)
 
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
-#include <NanaZip.Frieren.h>
+#include <K7User.h>
 
 void NanaZipInitialize()
 {
@@ -732,7 +732,11 @@ void NanaZipInitialize()
         ::ExitProcess(1);
     }
 
-    ::NanaZipFrierenGlobalInitialize();
+    if (MO_RESULT_SUCCESS_OK != ::K7UserInitializeDarkModeSupport())
+    {
+        ::ErrorMessage(L"K7UserInitializeDarkModeSupport Failed");
+    }
+
 
     if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
     {

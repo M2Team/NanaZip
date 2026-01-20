@@ -10,6 +10,9 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)..\K7Base\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
@@ -31,7 +34,11 @@
     <None Include="K7UserStatic.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="K7User.h" />
     <ClInclude Include="K7UserPrivate.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="K7UserDarkMode.cpp" />
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
 </Project>

@@ -1,12 +1,14 @@
 ﻿/*
  * PROJECT:    NanaZip
- * FILE:       NanaZip.Frieren.DarkMode.cpp
- * PURPOSE:    Implementation for NanaZip dark mode support
+ * FILE:       K7UserDarkMode.cpp
+ * PURPOSE:    Implementation for NanaZip Platform User Dark Mode Interfaces
  *
  * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
+
+#include "K7UserPrivate.h"
 
 #include <Mile.Helpers.h>
 #include <Mile.Helpers.CppBase.h>
@@ -27,9 +29,8 @@ EXTERN_C HTHEME WINAPI OpenNcThemeData(
 
 #include <ShellScalingApi.h>
 
-#include <unordered_map>
-
-#include "K7UserPrivate.h"
+#include <CommCtrl.h>
+#pragma comment(lib,"comctl32.lib")
 
 // TODO: Move some workaround for NanaZip.UI.* to this.
 
@@ -1073,11 +1074,6 @@ namespace
     }
 }
 
-/**
- * @brief Initializes the dark mode support.
- * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
- *         it returns an MO_RESULT error code.
- */
 EXTERN_C MO_RESULT MOAPI K7UserInitializeDarkModeSupport()
 {
     if (g_GlobalInitialized)
@@ -1117,11 +1113,6 @@ EXTERN_C MO_RESULT MOAPI K7UserInitializeDarkModeSupport()
     return MO_RESULT_SUCCESS_OK;
 }
 
-/**
- * @brief Uninitializes the dark mode support.
- * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
- *         it returns an MO_RESULT error code.
- */
 EXTERN_C MO_RESULT MOAPI K7UserUninitializeDarkModeSupport()
 {
     if (!g_GlobalInitialized)
