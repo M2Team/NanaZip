@@ -70,10 +70,7 @@ namespace
             ::CreateSolidBrush(g_DarkModeMenuSelectedBackgroundColor);
         return CachedResult;
     }
-}
 
-namespace
-{
     static bool IsStandardDynamicRangeMode()
     {
         static bool CachedResult = ([]() -> bool
@@ -114,9 +111,8 @@ namespace
                             Path.targetInfo.adapterId;
                         AdvancedColorInfo.header.id =
                             Path.targetInfo.id;
-                        if (ERROR_SUCCESS ==
-                            ::DisplayConfigGetDeviceInfo(
-                                &AdvancedColorInfo.header))
+                        if (ERROR_SUCCESS == ::DisplayConfigGetDeviceInfo(
+                            &AdvancedColorInfo.header))
                         {
                             if (AdvancedColorInfo.advancedColorEnabled)
                             {
@@ -134,12 +130,51 @@ namespace
         return CachedResult;
     }
 
-    thread_local bool volatile g_ThreadInitialized = false;
-    thread_local bool volatile g_MicaBackdropAvailable = false;
-    thread_local HHOOK volatile g_WindowsHookHandle = nullptr;
-    thread_local bool volatile g_ShouldAppsUseDarkMode = false;
-    thread_local HTHEME g_TabControlThemeHandle = nullptr;
-    thread_local HTHEME g_StatusBarThemeHandle = nullptr;
+    static volatile bool g_GlobalInitialized = false;
+
+    static LRESULT CALLBACK CallWndProcCallback(
+        _In_ int nCode,
+        _In_ WPARAM wParam,
+        _In_ LPARAM lParam);
+
+    struct ThreadContext
+    {
+    public:
+
+        bool volatile MicaBackdropAvailable = false;
+        HHOOK volatile WindowsHookHandle = nullptr;
+        bool volatile ShouldAppsUseDarkMode = false;
+        HTHEME TabControlThemeHandle = nullptr;
+        HTHEME StatusBarThemeHandle = nullptr;
+
+    public:
+
+        ThreadContext()
+        {
+            this->WindowsHookHandle = ::SetWindowsHookExW(
+                WH_CALLWNDPROC,
+                ::CallWndProcCallback,
+                nullptr,
+                ::GetCurrentThreadId());
+            if (!this->WindowsHookHandle)
+            {
+                return;
+            }
+
+            this->ShouldAppsUseDarkMode =
+                ::MileShouldAppsUseDarkMode() &&
+                !::MileShouldAppsUseHighContrastMode();
+        }
+
+        ~ThreadContext()
+        {
+            ::UnhookWindowsHookEx(this->WindowsHookHandle);
+            this->WindowsHookHandle = nullptr;
+
+            this->ShouldAppsUseDarkMode = false;
+        }
+    };
+    thread_local ThreadContext g_ThreadContext;
 
     static void RefreshWindowTheme(
         _In_ HWND WindowHandle)
@@ -169,7 +204,7 @@ namespace
             {
                 ::SetWindowTheme(WindowHandle, L"ItemsView", nullptr);
 
-                if (g_ShouldAppsUseDarkMode)
+                if (g_ThreadContext.ShouldAppsUseDarkMode)
                 {
                     ListView_SetTextBkColor(
                         WindowHandle,
@@ -231,7 +266,7 @@ namespace
                     ColorScheme.dwSize = sizeof(COLORSCHEME);
                     ColorScheme.clrBtnHighlight = CLR_DEFAULT;
                     ColorScheme.clrBtnShadow = CLR_DEFAULT;
-                    if (g_ShouldAppsUseDarkMode)
+                    if (g_ThreadContext.ShouldAppsUseDarkMode)
                     {
                         ColorScheme.clrBtnHighlight = g_DarkModeBackgroundColor;
                         ColorScheme.clrBtnShadow = g_DarkModeBackgroundColor;
@@ -284,7 +319,7 @@ namespace
         case WM_CTLCOLORSTATIC:
         case WM_CTLCOLORBTN:
         {
-            if (g_ShouldAppsUseDarkMode)
+            if (g_ThreadContext.ShouldAppsUseDarkMode)
             {
                 HDC DeviceContextHandle = reinterpret_cast<HDC>(wParam);
                 if (DeviceContextHandle)
@@ -323,18 +358,18 @@ namespace
             {
                 ::MileRefreshImmersiveColorPolicyState();
 
-                g_ShouldAppsUseDarkMode =
+                g_ThreadContext.ShouldAppsUseDarkMode =
                     ::MileShouldAppsUseDarkMode() &&
                     !::MileShouldAppsUseHighContrastMode();
 
                 ::MileEnableImmersiveDarkModeForWindow(
                     hWnd,
-                    g_ShouldAppsUseDarkMode);
+                    g_ThreadContext.ShouldAppsUseDarkMode);
 
                 bool ShouldExtendFrame = (
-                    g_ShouldAppsUseDarkMode &&
+                    g_ThreadContext.ShouldAppsUseDarkMode &&
                     ::IsStandardDynamicRangeMode() &&
-                    g_MicaBackdropAvailable);
+                    g_ThreadContext.MicaBackdropAvailable);
                 MARGINS Margins = {};
                 if (ShouldExtendFrame)
                 {
@@ -378,15 +413,15 @@ namespace
                 hWnd,
                 MILE_WINDOW_SYSTEM_BACKDROP_TYPE_MICA);
 
-            g_MicaBackdropAvailable =
+            g_ThreadContext.MicaBackdropAvailable =
                 (S_OK == ::MileEnableImmersiveDarkModeForWindow(
                     hWnd,
-                    g_ShouldAppsUseDarkMode));
+                    g_ThreadContext.ShouldAppsUseDarkMode));
 
             bool ShouldExtendFrame = (
-                g_ShouldAppsUseDarkMode &&
+                g_ThreadContext.ShouldAppsUseDarkMode &&
                 ::IsStandardDynamicRangeMode() &&
-                g_MicaBackdropAvailable);
+                g_ThreadContext.MicaBackdropAvailable);
             if (ShouldExtendFrame)
             {
                 MARGINS Margins = { -1 };
@@ -420,11 +455,13 @@ namespace
                         (::GetWindowLongPtrW(hWnd, GWL_STYLE) & ~TCS_BUTTONS)
                         | TCS_TABS);
                     ::SetWindowTheme(hWnd, nullptr, nullptr);
-                    g_TabControlThemeHandle = ::GetWindowTheme(hWnd);
+                    g_ThreadContext.TabControlThemeHandle =
+                        ::GetWindowTheme(hWnd);
                 }
                 else if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
                 {
-                    g_StatusBarThemeHandle = ::GetWindowTheme(hWnd);
+                    g_ThreadContext.StatusBarThemeHandle =
+                        ::GetWindowTheme(hWnd);
                 }
             }
 
@@ -433,9 +470,9 @@ namespace
         case WM_DPICHANGED:
         {
             bool ShouldExtendFrame = (
-                g_ShouldAppsUseDarkMode &&
+                g_ThreadContext.ShouldAppsUseDarkMode &&
                 ::IsStandardDynamicRangeMode() &&
-                g_MicaBackdropAvailable);
+                g_ThreadContext.MicaBackdropAvailable);
             if (!ShouldExtendFrame && ::IsFileManagerWindow(hWnd))
             {
                 UINT DpiValue = ::GetDpiForWindow(hWnd);
@@ -454,7 +491,7 @@ namespace
             break;
         }
 
-        if (g_ShouldAppsUseDarkMode && ::GetMenu(hWnd))
+        if (g_ThreadContext.ShouldAppsUseDarkMode && ::GetMenu(hWnd))
         {
             if (WM_UAHDRAWMENU == uMsg)
             {
@@ -627,7 +664,7 @@ namespace
         _In_ WPARAM wParam,
         _In_ LPARAM lParam)
     {
-        if (nCode == HC_ACTION)
+        if (g_GlobalInitialized && nCode == HC_ACTION)
         {
             PCWPSTRUCT WndProcStruct =
                 reinterpret_cast<PCWPSTRUCT>(lParam);
@@ -757,7 +794,7 @@ namespace
     static DWORD WINAPI DetouredGetSysColor(
         _In_ int nIndex)
     {
-        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
+        if (!g_GlobalInitialized || !g_ThreadContext.ShouldAppsUseDarkMode)
         {
             return ::OriginalGetSysColor(nIndex);
         }
@@ -778,7 +815,7 @@ namespace
     static HBRUSH WINAPI DetouredGetSysColorBrush(
         _In_ int nIndex)
     {
-        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
+        if (!g_GlobalInitialized || !g_ThreadContext.ShouldAppsUseDarkMode)
         {
             return ::OriginalGetSysColorBrush(nIndex);
         }
@@ -805,7 +842,7 @@ namespace
         _In_ DWORD dwTextFlags2,
         _In_ LPCRECT pRect)
     {
-        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
+        if (!g_GlobalInitialized || !g_ThreadContext.ShouldAppsUseDarkMode)
         {
             return ::OriginalDrawThemeText(
                 hTheme,
@@ -844,7 +881,7 @@ namespace
         _In_ LPCRECT pRect,
         _In_opt_ LPCRECT pClipRect)
     {
-        if (!g_ThreadInitialized || !g_ShouldAppsUseDarkMode)
+        if (!g_GlobalInitialized || !g_ThreadContext.ShouldAppsUseDarkMode)
         {
             return ::OriginalDrawThemeBackground(
                 hTheme,
@@ -855,7 +892,7 @@ namespace
                 pClipRect);
         }
 
-        if (hTheme == g_TabControlThemeHandle)
+        if (hTheme == g_ThreadContext.TabControlThemeHandle)
         {
             const int HoveredCheckStateId[] =
             {
@@ -938,7 +975,7 @@ namespace
                 break;
             }
         }
-        else if (hTheme == g_StatusBarThemeHandle)
+        else if (hTheme == g_ThreadContext.StatusBarThemeHandle)
         {
             switch (iPartId)
             {
@@ -982,123 +1019,139 @@ namespace
 
         return ::OriginalOpenNcThemeData(hwnd, pszClassList);
     }
-}
 
-EXTERN_C VOID WINAPI NanaZipFrierenDarkModeThreadInitialize()
-{
-    if (g_ThreadInitialized)
+    static bool InitializeFunctionTable()
     {
-        return;
-    }
+        g_FunctionTable[FunctionTypes::GetSysColor].Original =
+            ::GetSysColor;
+        g_FunctionTable[FunctionTypes::GetSysColor].Detoured =
+            ::DetouredGetSysColor;
 
-    g_WindowsHookHandle = ::SetWindowsHookExW(
-        WH_CALLWNDPROC,
-        ::CallWndProcCallback,
-        nullptr,
-        ::GetCurrentThreadId());
-    if (!g_WindowsHookHandle)
-    {
-        return;
-    }
+        g_FunctionTable[FunctionTypes::GetSysColorBrush].Original =
+            ::GetSysColorBrush;
+        g_FunctionTable[FunctionTypes::GetSysColorBrush].Detoured =
+            ::DetouredGetSysColorBrush;
 
-    g_ShouldAppsUseDarkMode =
-        ::MileShouldAppsUseDarkMode() &&
-        !::MileShouldAppsUseHighContrastMode();
+        g_FunctionTable[FunctionTypes::DrawThemeText].Original =
+            ::DrawThemeText;
+        g_FunctionTable[FunctionTypes::DrawThemeText].Detoured =
+            ::DetouredDrawThemeText;
 
-    g_ThreadInitialized = true;
-}
+        g_FunctionTable[FunctionTypes::DrawThemeBackground].Original =
+            ::DrawThemeBackground;
+        g_FunctionTable[FunctionTypes::DrawThemeBackground].Detoured =
+            ::DetouredDrawThemeBackground;
 
-EXTERN_C VOID WINAPI NanaZipFrierenDarkModeThreadUninitialize()
-{
-    if (!g_ThreadInitialized)
-    {
-        return;
-    }
-
-    g_ThreadInitialized = false;
-
-    ::UnhookWindowsHookEx(g_WindowsHookHandle);
-    g_WindowsHookHandle = nullptr;
-    g_ShouldAppsUseDarkMode = false;
-}
-
-EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalInitialize()
-{
-    ::MileAllowDarkModeForApp(true);
-    ::MileRefreshImmersiveColorPolicyState();
-
-    g_FunctionTable[FunctionTypes::GetSysColor].Original =
-        ::GetSysColor;
-    g_FunctionTable[FunctionTypes::GetSysColor].Detoured =
-        ::DetouredGetSysColor;
-
-    g_FunctionTable[FunctionTypes::GetSysColorBrush].Original =
-        ::GetSysColorBrush;
-    g_FunctionTable[FunctionTypes::GetSysColorBrush].Detoured =
-        ::DetouredGetSysColorBrush;
-
-    g_FunctionTable[FunctionTypes::DrawThemeText].Original =
-        ::DrawThemeText;
-    g_FunctionTable[FunctionTypes::DrawThemeText].Detoured =
-        ::DetouredDrawThemeText;
-
-    g_FunctionTable[FunctionTypes::DrawThemeBackground].Original =
-        ::DrawThemeBackground;
-    g_FunctionTable[FunctionTypes::DrawThemeBackground].Detoured =
-        ::DetouredDrawThemeBackground;
-
-    {
-        HMODULE ModuleHandle = ::GetModuleHandleW(
-            L"uxtheme.dll");
-        if (ModuleHandle)
         {
-            PVOID ProcAddress = ::GetProcAddress(
-                ModuleHandle,
-                MAKEINTRESOURCEA(49));
-            if (ProcAddress)
+            HMODULE ModuleHandle = ::GetModuleHandleW(
+                L"uxtheme.dll");
+            if (ModuleHandle)
             {
-                g_FunctionTable[FunctionTypes::OpenNcThemeData].Original =
-                    ProcAddress;
-                g_FunctionTable[FunctionTypes::OpenNcThemeData].Detoured =
-                    ::DetouredOpenNcThemeData;
+                PVOID ProcAddress = ::GetProcAddress(
+                    ModuleHandle,
+                    MAKEINTRESOURCEA(49));
+                if (ProcAddress)
+                {
+                    g_FunctionTable[FunctionTypes::OpenNcThemeData].Original =
+                        ProcAddress;
+                    g_FunctionTable[FunctionTypes::OpenNcThemeData].Detoured =
+                        ::DetouredOpenNcThemeData;
+                }
             }
         }
+
+        return true;
     }
 
-    ::K7BaseDetourTransactionBegin();
-    ::K7BaseDetourUpdateThread(::GetCurrentThread());
-    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
+    static void UninitializeFunctionTable()
     {
-        if (g_FunctionTable[i].Original &&
-            g_FunctionTable[i].Detoured)
+        for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
         {
-            ::K7BaseDetourAttach(
-                &g_FunctionTable[i].Original,
-                g_FunctionTable[i].Detoured);
-        }
-    }
-    ::K7BaseDetourTransactionCommit();
-
-    ::NanaZipFrierenDarkModeThreadInitialize();
-}
-
-EXTERN_C VOID WINAPI NanaZipFrierenDarkModeGlobalUninitialize()
-{
-    ::NanaZipFrierenDarkModeThreadUninitialize();
-
-    ::K7BaseDetourTransactionBegin();
-    ::K7BaseDetourUpdateThread(::GetCurrentThread());
-    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
-    {
-        if (g_FunctionTable[i].Original &&
-            g_FunctionTable[i].Detoured)
-        {
-            ::K7BaseDetourDetach(
-                &g_FunctionTable[i].Original,
-                g_FunctionTable[i].Detoured);
             g_FunctionTable[i].Original = nullptr;
             g_FunctionTable[i].Detoured = nullptr;
         }
     }
+}
+
+/**
+ * @brief Initializes the dark mode support.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserInitializeDarkModeSupport()
+{
+    if (g_GlobalInitialized)
+    {
+        return MO_RESULT_SUCCESS_OK;
+    }
+
+    if (!::InitializeFunctionTable())
+    {
+        return MO_RESULT_ERROR_FAIL;
+    }
+
+    ::MileAllowDarkModeForApp(TRUE);
+    ::MileRefreshImmersiveColorPolicyState();
+
+    ::K7BaseDetourTransactionBegin();
+    ::K7BaseDetourUpdateThread(::GetCurrentThread());
+    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
+    {
+        if (g_FunctionTable[i].Original &&
+            g_FunctionTable[i].Detoured)
+        {
+            if (NO_ERROR != ::K7BaseDetourAttach(
+                &g_FunctionTable[i].Original,
+                g_FunctionTable[i].Detoured))
+            {
+                ::K7BaseDetourTransactionAbort();
+                ::UninitializeFunctionTable();
+                return MO_RESULT_ERROR_FAIL;
+            }
+        }
+    }
     ::K7BaseDetourTransactionCommit();
+
+    g_GlobalInitialized = true;
+
+    return MO_RESULT_SUCCESS_OK;
+}
+
+/**
+ * @brief Uninitializes the dark mode support.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserUninitializeDarkModeSupport()
+{
+    if (!g_GlobalInitialized)
+    {
+        return MO_RESULT_SUCCESS_OK;
+    }
+    g_GlobalInitialized = false;
+
+    ::MileAllowDarkModeForApp(FALSE);
+    ::MileRefreshImmersiveColorPolicyState();
+
+    ::K7BaseDetourTransactionBegin();
+    ::K7BaseDetourUpdateThread(::GetCurrentThread());
+    for (size_t i = 0; i < FunctionTypes::MaximumFunction; ++i)
+    {
+        if (g_FunctionTable[i].Original &&
+            g_FunctionTable[i].Detoured)
+        {
+            if (NO_ERROR != ::K7BaseDetourDetach(
+                &g_FunctionTable[i].Original,
+                g_FunctionTable[i].Detoured))
+            {
+                ::K7BaseDetourTransactionAbort();
+                return MO_RESULT_ERROR_FAIL;
+            }
+        }
+    }
+    ::K7BaseDetourTransactionCommit();
+
+    ::UninitializeFunctionTable();
+
+    return MO_RESULT_SUCCESS_OK;
 }
