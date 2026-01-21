@@ -3,3 +3,6 @@
 EXPORTS
 
 K7UserInitializeDarkModeSupport
+
+K7UserModernMessageBoxW
+K7UserModernSHBrowseForFolderW

@@ -17,6 +17,11 @@
       <AdditionalDependencies>$(OutDir)K7User.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <Target Name="K7UserBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup>
+      <ClCompile Include="$(MSBuildThisFileDirectory)K7UserRedirector.cpp" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <PackageReference Include="Mile.Mobility">
       <Version>1.0.372</Version>

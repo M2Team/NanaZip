@@ -13,8 +13,6 @@
 
 #include "K7User.h"
 
-#include <Windows.h>
-
 #ifndef K7_USER_WIN_USER_PRIVATE
 #define K7_USER_WIN_USER_PRIVATE
 

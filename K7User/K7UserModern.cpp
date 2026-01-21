@@ -1,7 +1,7 @@
 ﻿/*
- * PROJECT:    NanaZip
- * FILE:       NanaZip.Frieren.ModernExperiences.cpp
- * PURPOSE:    Implementation for NanaZip Modern Experiences
+ * PROJECT:    NanaZip Platform User Library (K7User)
+ * FILE:       K7UserModern.cpp
+ * PURPOSE:    Implementation for NanaZip Platform User Modern Experiences
  *
  * LICENSE:    The MIT License
  *
@@ -40,7 +40,7 @@ namespace
     }
 }
 
-EXTERN_C int WINAPI NanaZipFrierenModernMessageBoxW(
+EXTERN_C int WINAPI K7UserModernMessageBoxW(
     _In_opt_ HWND hWnd,
     _In_opt_ LPCWSTR lpText,
     _In_opt_ LPCWSTR lpCaption,
@@ -120,7 +120,7 @@ EXTERN_C int WINAPI NanaZipFrierenModernMessageBoxW(
     return ButtonID;
 }
 
-EXTERN_C PIDLIST_ABSOLUTE WINAPI NanaZipFrierenModernSHBrowseForFolderW(
+EXTERN_C PIDLIST_ABSOLUTE WINAPI K7UserModernSHBrowseForFolderW(
     _In_ LPBROWSEINFOW lpbi)
 {
     LPITEMIDLIST IDList = nullptr;

@@ -1,25 +1,14 @@
 ﻿/*
- * PROJECT:    NanaZip
- * FILE:       NanaZip.Frieren.ModernExperiences.Redirection.cpp
- * PURPOSE:    Implementation for NanaZip Modern Experiences Redirection
+ * PROJECT:    NanaZip Platform User Library (K7User)
+ * FILE:       K7UserRedirector.cpp
+ * PURPOSE:    Implementation for NanaZip Platform User API Redirector
  *
  * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
-#include <Windows.h>
-
-#include <ShlObj_core.h>
-
-EXTERN_C int WINAPI NanaZipFrierenModernMessageBoxW(
-    _In_opt_ HWND hWnd,
-    _In_opt_ LPCWSTR lpText,
-    _In_opt_ LPCWSTR lpCaption,
-    _In_ UINT uType);
-
-EXTERN_C PIDLIST_ABSOLUTE WINAPI NanaZipFrierenModernSHBrowseForFolderW(
-    _In_ LPBROWSEINFOW lpbi);
+#include "K7UserPrivate.h"
 
 // Here are the linker-time redirections to replace the original APIs.
 // Implementations only for x64 and ARM64, if you want to learn how to achieve
@@ -27,9 +16,9 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI NanaZipFrierenModernSHBrowseForFolderW(
 // the historical NanaZip versions source code.
 
 extern "C" __declspec(selectany) void const* const __imp_MessageBoxW =
-    reinterpret_cast<void const*>(::NanaZipFrierenModernMessageBoxW);
+    reinterpret_cast<void const*>(::K7UserModernMessageBoxW);
 #pragma comment(linker, "/include:__imp_MessageBoxW")
 
 extern "C" __declspec(selectany) void const* const __imp_SHBrowseForFolderW =
-    reinterpret_cast<void const*>(::NanaZipFrierenModernSHBrowseForFolderW);
+    reinterpret_cast<void const*>(::K7UserModernSHBrowseForFolderW);
 #pragma comment(linker, "/include:__imp_SHBrowseForFolderW")

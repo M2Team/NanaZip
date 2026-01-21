@@ -34,6 +34,7 @@
   <ItemGroup>
     <None Include="K7User.def" />
     <None Include="K7User.props" />
+    <None Include="K7UserRedirector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.UniCrt">
