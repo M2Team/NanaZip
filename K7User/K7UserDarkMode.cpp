@@ -1,7 +1,7 @@
 ﻿/*
- * PROJECT:    NanaZip
+ * PROJECT:    NanaZip Platform User Library (K7User)
  * FILE:       K7UserDarkMode.cpp
- * PURPOSE:    Implementation for NanaZip Platform User Dark Mode Interfaces
+ * PURPOSE:    Implementation for NanaZip Platform User Dark Mode Support
  *
  * LICENSE:    The MIT License
  *

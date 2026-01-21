@@ -1,5 +1,5 @@
 ﻿/*
- * PROJECT:    NanaZip
+ * PROJECT:    NanaZip Platform User Library (K7User)
  * FILE:       K7User.h
  * PURPOSE:    Definition for NanaZip Platform User Public Interfaces
  *
