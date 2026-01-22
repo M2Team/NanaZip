@@ -9,12 +9,10 @@
  *             reflectronic (john-tur@outlook.com)
  */
 
-#include <Windows.h>
+#include "K7UserPrivate.h"
 
 #include <CommCtrl.h>
 #pragma comment(lib,"comctl32.lib")
-
-#include <ShlObj_core.h>
 
 namespace
 {
