@@ -434,9 +434,6 @@
     <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c">
       <Filter>Lizard\entropy</Filter>
     </ClCompile>
-    <ClCompile Include="Lizard\entropy\lizard_hist.c">
-      <Filter>Lizard\entropy</Filter>
-    </ClCompile>
     <ClCompile Include="Lizard\entropy\lizard_entropy_common.c">
       <Filter>Lizard\entropy</Filter>
     </ClCompile>

@@ -70,7 +70,6 @@
     <ClCompile Include="Lizard\entropy\lizard_entropy_common.c" />
     <ClCompile Include="Lizard\entropy\lizard_fse_compress.c" />
     <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c" />
-    <ClCompile Include="Lizard\entropy\lizard_hist.c" />
     <ClCompile Include="Lizard\entropy\lizard_huf_compress.c" />
     <ClCompile Include="Lizard\entropy\lizard_huf_decompress.c" />
     <ClCompile Include="Mile.Helpers.Portable.Base.Unstaged.cpp" />
