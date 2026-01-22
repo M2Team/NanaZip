@@ -37,6 +37,7 @@
     <ClCompile Include="K7BaseDetours.cpp" />
     <ClCompile Include="K7BaseInitialize.cpp" />
     <ClCompile Include="K7BaseMitigations.cpp" />
+    <ClCompile Include="K7BaseModern.cpp" />
     <ClCompile Include="K7BasePolicies.cpp" />
     <ClCompile Include="K7BaseHash.cpp" />
   </ItemGroup>

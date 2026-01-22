@@ -24,3 +24,6 @@ K7BaseDisableDynamicCodeGeneration
 K7BaseDisableChildProcessCreation
 
 K7BaseInitialize
+
+K7BaseModernFileTimeToLocalFileTime
+K7BaseModernLocalFileTimeToFileTime

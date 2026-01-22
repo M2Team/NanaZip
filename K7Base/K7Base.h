@@ -281,4 +281,43 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitialize();
 
 #endif // !K7_BASE_INITIALIZE
 
+#ifndef K7_BASE_MODERN
+#define K7_BASE_MODERN
+
+/**
+ * @brief Converts a file time to a local file time.
+ * @param lpFileTime A pointer to a FILETIME structure containing the UTC-based
+ *                   file time to be converted into a local file time.
+ * @param lpLocalFileTime A pointer to a FILETIME structure to receive the
+ *                        converted local file time. This parameter cannot be
+ *                        the same as the lpFileTime parameter.
+ * @return If the function succeeds, the return value is nonzero. If the
+ *         function fails, the return value is zero. To get extended error
+ *         information, call GetLastError.
+ * @remark For more information, see FileTimeToLocalFileTime.
+ */
+EXTERN_C BOOL WINAPI K7BaseModernFileTimeToLocalFileTime(
+    _In_ CONST FILETIME* lpFileTime,
+    _Out_ LPFILETIME lpLocalFileTime);
+
+/**
+ * @brief Converts a local file time to a file time based on the Coordinated
+ *        Universal Time (UTC).
+ * @param lpLocalFileTime A pointer to a FILETIME structure that specifies the
+ *                        local file time to be converted into a UTC-based file
+ *                        time.
+ * @param lpFileTime A pointer to a FILETIME structure to receive the converted
+ *                   UTC-based file time. This parameter cannot be the same as
+ *                   the lpLocalFileTime parameter.
+ * @return If the function succeeds, the return value is nonzero. If the
+ *         function fails, the return value is zero. To get extended error
+ *         information, use the GetLastError function.
+ * @remark For more information, see LocalFileTimeToFileTime.
+ */
+EXTERN_C BOOL WINAPI K7BaseModernLocalFileTimeToFileTime(
+    _In_ CONST FILETIME* lpLocalFileTime,
+    _Out_ LPFILETIME lpFileTime);
+
+#endif // !K7_BASE_MODERN
+
 #endif // !K7_BASE
