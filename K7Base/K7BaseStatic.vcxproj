@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{38BB5165-3DB0-45B7-85CE-0A72DEF5CCD6}</ProjectGuid>
@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="K7BaseStatic.props" />
+    <None Include="K7BaseRedirector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="K7BaseDetours.cpp" />

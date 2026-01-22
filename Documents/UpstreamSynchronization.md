@@ -15,15 +15,10 @@
 
 ## 7-Zip ZS
 
-- NanaZip.Core: Commit 507d2c5fc8df7d752f5f8162d66f61662432d75a without TZ fix.
+- NanaZip.Core: Commit 507d2c5fc8df7d752f5f8162d66f61662432d75a.
 - NanaZip.UI.Classic: Unknown because it modifies the old codebase a lot.
 - NanaZip.UI.Modern: Unknown because it modifies the old codebase a lot.
-- NanaZip.Universal: Commit 507d2c5fc8df7d752f5f8162d66f61662432d75a without TZ fix.
-
-Note: TZ fix is https://github.com/mcmilk/7-Zip-zstd/issues/432, which basically
-needs to provide a modified version of FileTimeToLocalFileTime and
-LocalFileTimeToFileTime. Kenji Mouri needs some time to consider a better
-workaround solution.
+- NanaZip.Universal: Commit 507d2c5fc8df7d752f5f8162d66f61662432d75a.
 
 ## BLAKE3
 

@@ -17,6 +17,11 @@
       <AdditionalDependencies>$(OutDir)K7BaseStatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <Target Name="K7BaseBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup>
+      <ClCompile Include="$(MSBuildThisFileDirectory)K7BaseRedirector.cpp" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <PackageReference Include="Mile.Mobility">
       <Version>1.0.372</Version>

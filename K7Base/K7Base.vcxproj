@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5998305E-D017-47C2-8025-A19111F73539}</ProjectGuid>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <None Include="K7Base.def" />
     <None Include="K7Base.props" />
+    <None Include="K7BaseRedirector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.UniCrt">
