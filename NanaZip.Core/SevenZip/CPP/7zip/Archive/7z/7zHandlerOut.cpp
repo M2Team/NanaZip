@@ -457,7 +457,11 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
       if (!mInfo.methName.IsEmpty()) {
         COneMethodInfo &m = _methods.AddNew();
         m.MethodName = mInfo.methName;
-        if ((_level == -1) && (mInfo.level != -1)) {
+        // **************** 7-Zip ZS Modification Start ****************
+        //if ((_level == -1) && (mInfo.level != -1)) {
+        if ((_level == (UInt32)-1) && (mInfo.level != -1)) {
+          // XXX - does not work in linux this way
+        // **************** 7-Zip ZS Modification End ****************
           _level = mInfo.level;
         }
       }

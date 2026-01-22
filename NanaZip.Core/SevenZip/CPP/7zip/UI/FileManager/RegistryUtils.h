@@ -52,11 +52,6 @@ bool WantPathHistory();
 bool WantCopyHistory();
 bool WantFolderHistory();
 bool WantLowercaseHashes();
-
-bool WantArcHistory();
-bool WantPathHistory();
-bool WantCopyHistory();
-bool WantFolderHistory();
 // **************** 7-Zip ZS Modification End ****************
 
 void SaveFlatView(UInt32 panelIndex, bool enable);

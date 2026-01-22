@@ -581,7 +581,10 @@ FL2LIB_API size_t FL2LIB_CALL FL2_compressCCtx(FL2_CCtx* cctx,
     if (cctx->params.doXXH && !cctx->params.omitProp) {
         XXH32_canonical_t canonical;
         DEBUGLOG(5, "Writing hash");
-        if(end - dstBuf < XXHASH_SIZEOF)
+        // **************** 7-Zip ZS Modification Start ****************
+        //if(end - dstBuf < XXHASH_SIZEOF)
+        if (end - dstBuf < (long)XXHASH_SIZEOF)
+        // **************** 7-Zip ZS Modification End ****************
             return FL2_ERROR(dstSize_tooSmall);
         XXH32_canonicalFromHash(&canonical, XXH32(src, srcSize, 0));
         memcpy(dstBuf, &canonical, XXHASH_SIZEOF);

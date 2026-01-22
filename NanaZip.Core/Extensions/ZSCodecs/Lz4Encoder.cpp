@@ -12,8 +12,8 @@ CEncoder::CEncoder():
   _processedIn(0),
   _processedOut(0),
   _inputSize(0),
-  _ctx(NULL),
-  _numThreads(1)
+  _numThreads(1),
+  _ctx(NULL)
 {
   _props.clear();
 }

@@ -22,6 +22,10 @@ NanaZipCodecsLizardDecode
 NanaZipCodecsLz4Decode
 NanaZipCodecsLz5Decode
 
+BrotliDecoderDestroyInstance
+BrotliDecoderDecompressStream
+BrotliDecoderCreateInstance
+
 LZ4_decompress_safe
 
 BROTLIMT_compressCCtx

@@ -23,7 +23,7 @@ Z7_COM7F_IMF(CDecoder::SetDecoderProperties2(const Byte * prop, UInt32 size))
 {
   DProps *pProps = (DProps *)prop;
 
-  if (size != sizeof(DProps))
+  if (size > 5)
     return E_NOTIMPL;
 
   memcpy(&_props, pProps, sizeof (DProps));

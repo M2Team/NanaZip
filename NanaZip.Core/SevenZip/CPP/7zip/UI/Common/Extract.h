@@ -86,10 +86,16 @@ struct CDecompressStat
   UInt64 NumFolders;
   UInt64 NumFiles;
   UInt64 NumAltStreams;
+  // **************** 7-Zip ZS Modification Start ****************
+  FString FirstExtractedPath;
+  // **************** 7-Zip ZS Modification End ****************
 
   void Clear()
   {
     NumArchives = UnpackSize = AltStreams_UnpackSize = PackSize = NumFolders = NumFiles = NumAltStreams = 0;
+    // **************** 7-Zip ZS Modification Start ****************
+    FirstExtractedPath.Empty();
+    // **************** 7-Zip ZS Modification End ****************
   }
 };
 

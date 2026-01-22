@@ -36,18 +36,22 @@
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
 #define IDM_XXH32                104
 #define IDM_XXH64                105
-#define IDM_MD2                  106
-#define IDM_MD4                  107
-#define IDM_MD5                  108
-#define IDM_SHA1                 109
-#define IDM_SHA2_256             110
-#define IDM_SHA2_384             111
-#define IDM_SHA2_512             112
-#define IDM_BLAKE2sp             113
-#define IDM_BLAKE3               114
-#define IDM_SHA3_256             115
-#define IDM_SHA3_384             116
-#define IDM_SHA3_512             117
+#define IDM_XXH3_64              106
+#define IDM_XXH3_128             107
+#define IDM_MD2                  108
+#define IDM_MD4                  109
+#define IDM_MD5                  110
+#define IDM_SHA1                 111
+#define IDM_SHA2_224             112
+#define IDM_SHA2_256             113
+#define IDM_SHA2_384             114
+#define IDM_SHA2_512             115
+#define IDM_BLAKE2sp             116
+#define IDM_BLAKE3               117
+#define IDM_SHA3_224             118
+#define IDM_SHA3_256             119
+#define IDM_SHA3_384             120
+#define IDM_SHA3_512             121
 // **************** 7-Zip ZS Modification End ****************
 
 #define IDM_FILE                 500

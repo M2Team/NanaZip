@@ -12,8 +12,8 @@ CEncoder::CEncoder():
   _processedIn(0),
   _processedOut(0),
   _inputSize(0),
-  _ctx(NULL),
-  _numThreads(NWindows::NSystem::GetNumberOfProcessors())
+  _numThreads(NWindows::NSystem::GetNumberOfProcessors()),
+  _ctx(NULL)
 {
   _props.clear();
 }
