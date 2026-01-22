@@ -120,7 +120,10 @@ void RC_reset(RC_encoder* const rc)
 
 #ifdef __64BIT__
 
-void FORCE_NOINLINE RC_shiftLow(RC_encoder* const rc)
+// **************** NanaZip Modification Start ****************
+//void FORCE_NOINLINE RC_shiftLow(RC_encoder* const rc)
+void RC_shiftLow(RC_encoder* const rc)
+// **************** NanaZip Modification End ****************
 {
     U64 low = rc->low;
     rc->low = (U32)(low << 8);
@@ -143,7 +146,10 @@ void FORCE_NOINLINE RC_shiftLow(RC_encoder* const rc)
 
 #else
 
-void FORCE_NOINLINE RC_shiftLow(RC_encoder* const rc)
+// **************** NanaZip Modification Start ****************
+//void FORCE_NOINLINE RC_shiftLow(RC_encoder* const rc)
+void RC_shiftLow(RC_encoder* const rc)
+// **************** NanaZip Modification End ****************
 {
     U32 low = (U32)rc->low;
     unsigned high = (unsigned)(rc->low >> 32);
@@ -194,7 +200,10 @@ void RC_encodeBitTreeReverse(RC_encoder* const rc, LZMA2_prob *const probs, unsi
 	}
 }
 
-void FORCE_NOINLINE RC_encodeDirect(RC_encoder* const rc, unsigned value, unsigned bit_count)
+// **************** NanaZip Modification Start ****************
+//void FORCE_NOINLINE RC_encodeDirect(RC_encoder* const rc, unsigned value, unsigned bit_count)
+void RC_encodeDirect(RC_encoder* const rc, unsigned value, unsigned bit_count)
+// **************** NanaZip Modification End ****************
 {
 	assert(bit_count > 0);
 	do {
