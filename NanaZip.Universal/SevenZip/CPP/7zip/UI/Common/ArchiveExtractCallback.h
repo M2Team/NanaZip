@@ -491,6 +491,10 @@ public:
   UInt64 NumAltStreams;
   UInt64 UnpackSize;
   UInt64 AltStreams_UnpackSize;
+
+  // **************** 7-Zip ZS Modification Start ****************
+  FString FirstExtractedPath;
+  // **************** 7-Zip ZS Modification End ****************
   
   FString DirPathPrefix_for_HashFiles;
 

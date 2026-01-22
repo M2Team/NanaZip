@@ -197,7 +197,7 @@ HRESULT ParseMtProp2(const UString &name, const PROPVARIANT &prop, UInt32 &numTh
 HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 numCPUs, UInt32 &numThreads)
 {
   UString s;
-  numThreads = numCPUs < INT_MAX ? numCPUs : NWindows::NSystem::GetNumberOfProcessors();
+  numThreads = numCPUs ? numCPUs : NWindows::NSystem::GetNumberOfProcessors();
   if (name.IsEmpty())
   {
     if (prop.vt == VT_UI4)
@@ -255,6 +255,7 @@ HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 numCPUs
           return S_OK;
         }
         // otherwise force down
+        // fall through
       case 'd':
         forceUD = -1;  // force down
         start++;
@@ -266,6 +267,7 @@ HRESULT ParseMtProp(const UString &name, const PROPVARIANT &prop, UInt32 numCPUs
           return S_OK;
         }
         // otherwise force up
+        // fall through
       case 'u':
         forceUD = +1;   // force up
         start++;

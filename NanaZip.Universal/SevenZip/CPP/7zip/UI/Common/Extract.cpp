@@ -604,5 +604,8 @@ HRESULT Extract(
   st.AltStreams_UnpackSize = ecs->AltStreams_UnpackSize;
   st.NumArchives = arcPaths.Size();
   st.PackSize = ecs->LocalProgressSpec->InSize;
+  // **************** 7-Zip ZS Modification Start ****************
+  st.FirstExtractedPath = ecs->FirstExtractedPath;
+  // **************** 7-Zip ZS Modification End ****************
   return S_OK;
 }

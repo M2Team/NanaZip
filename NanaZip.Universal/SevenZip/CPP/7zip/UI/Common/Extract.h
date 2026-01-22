@@ -17,9 +17,9 @@
 struct CExtractOptionsBase
 {
   CBoolPair ElimDup;
-// **************** NanaZip Modification Start ****************
+  // **************** NanaZip Modification Start ****************
   CBoolPair SmartExtract;
-// **************** NanaZip Modification End ****************
+  // **************** NanaZip Modification End ****************
 
   bool ExcludeDirItems;
   bool ExcludeFileItems;
@@ -42,7 +42,10 @@ struct CExtractOptionsBase
       OverwriteMode_Force(false),
       PathMode(NExtract::NPathMode::kFullPaths),
       OverwriteMode(NExtract::NOverwriteMode::kAsk),
-      ZoneMode(NExtract::NZoneIdMode::Default)  // NanaZip Modification
+      // **************** NanaZip Modification Start ****************
+      // ZoneMode(NExtract::NZoneIdMode::kNone)
+      ZoneMode(NExtract::NZoneIdMode::Default)
+      // **************** NanaZip Modification End ****************
       {}
 };
 
@@ -83,10 +86,16 @@ struct CDecompressStat
   UInt64 NumFolders;
   UInt64 NumFiles;
   UInt64 NumAltStreams;
+  // **************** 7-Zip ZS Modification Start ****************
+  FString FirstExtractedPath;
+  // **************** 7-Zip ZS Modification End ****************
 
   void Clear()
   {
     NumArchives = UnpackSize = AltStreams_UnpackSize = PackSize = NumFolders = NumFiles = NumAltStreams = 0;
+    // **************** 7-Zip ZS Modification Start ****************
+    FirstExtractedPath.Empty();
+    // **************** 7-Zip ZS Modification End ****************
   }
 };
 

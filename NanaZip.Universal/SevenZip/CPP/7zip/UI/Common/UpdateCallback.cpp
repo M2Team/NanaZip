@@ -79,11 +79,6 @@ CArchiveUpdateCallback::CArchiveUpdateCallback():
     Need_LatestMTime(false),
     LatestMTime_Defined(false),
     
-    // **************** 7-Zip ZS Modification Start ****************
-    VolNumberAfterExt(false),
-    DigitCount(2),
-    // **************** 7-Zip ZS Modification End ****************
-    
     Callback(NULL),
   
     DirItems(NULL),
@@ -92,6 +87,12 @@ CArchiveUpdateCallback::CArchiveUpdateCallback():
     Arc(NULL),
     ArcItems(NULL),
     UpdatePairs(NULL),
+    // **************** 7-Zip ZS Modification Start ****************
+
+    VolNumberAfterExt(false),
+    DigitCount(2),
+
+    // **************** 7-Zip ZS Modification End ****************
     NewNames(NULL),
     Comment(NULL),
     CommentIndex(-1),
