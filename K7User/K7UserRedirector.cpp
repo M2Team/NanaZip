@@ -15,10 +15,12 @@
 // that in x86, please refer to NanaZip.Shared.ModernExperienceShims project in
 // the historical NanaZip versions source code.
 
-extern "C" __declspec(selectany) void const* const __imp_MessageBoxW =
-    reinterpret_cast<void const*>(::K7UserModernMessageBoxW);
-#pragma comment(linker, "/include:__imp_MessageBoxW")
+#ifndef K7_REDIRECT
+#define K7_REDIRECT(Source, Target) \
+    extern "C" __declspec(selectany) void const* const __imp_##Source = \
+        reinterpret_cast<void const*>(::Target); \
+    __pragma(comment(linker, "/include:__imp_" #Source))
+#endif // !K7_REDIRECT
 
-extern "C" __declspec(selectany) void const* const __imp_SHBrowseForFolderW =
-    reinterpret_cast<void const*>(::K7UserModernSHBrowseForFolderW);
-#pragma comment(linker, "/include:__imp_SHBrowseForFolderW")
+K7_REDIRECT(MessageBoxW, K7UserModernMessageBoxW);
+K7_REDIRECT(SHBrowseForFolderW, K7UserModernSHBrowseForFolderW);
