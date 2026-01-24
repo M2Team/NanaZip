@@ -205,7 +205,7 @@
       <Version>2.5.1250</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.952</Version>
+      <Version>1.0.1171</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.410</Version>
