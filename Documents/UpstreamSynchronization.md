@@ -58,7 +58,7 @@
 
 ## RHash
 
-- NanaZip.Codecs: Commit cce6c628f93d9ed332921656aa5e1750d12b8d3e after v1.4.6.
+- NanaZip.Codecs: Commit b76c6a3312422c09817c2cef40442b2f2d9d4689 after v1.4.6.
 
 ## xxHash
 
