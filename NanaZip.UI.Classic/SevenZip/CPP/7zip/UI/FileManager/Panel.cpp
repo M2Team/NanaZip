@@ -30,6 +30,10 @@
 #include "FormatUtils.h"
 #include "Panel.h"
 #include "RootFolder.h"
+// **************** NanaZip Modification Start ****************
+#include <K7Base.h>
+#include <K7User.h>
+// **************** NanaZip Modification End ****************
 
 #include "PropertyNameRes.h"
 
@@ -910,13 +914,109 @@ void CPanel::Post_Refresh_StatusBar()
     PostMsg(kRefresh_StatusBar);
 }
 
+// **************** NanaZip Modification Start ****************
+void CPanel::AddToExistingArchive()
+{
+    if (!DoesItSupportOperations() || _parentFolders.Size() != 1)
+    {
+        MessageBox_Error_UnsupportOperation();
+        return;
+    }
+
+    CFolderLink &Link = _parentFolders.Back();
+    const UString &ArchivePath = Link.VirtualPath;
+
+    // MyBrowseForFile doesn't have multiselect, so use IFileOpenDialog directly
+    CMyComPtr<IFileOpenDialog> FileDialog;
+    if (FAILED(::CoCreateInstance(
+        CLSID_FileOpenDialog,
+        nullptr,
+        CLSCTX_INPROC_SERVER,
+        IID_PPV_ARGS(&FileDialog))))
+    {
+        return;
+    }
+
+    FILEOPENDIALOGOPTIONS DialogOptions;
+    if (FAILED(FileDialog->GetOptions(&DialogOptions)))
+    {
+        return;
+    }
+    DialogOptions |= FOS_ALLOWMULTISELECT | FOS_FORCEFILESYSTEM;
+    if (FAILED(FileDialog->SetOptions(DialogOptions)))
+    {
+        return;
+    }
+    {
+        CMyComPtr<IShellItem> DefaultFolder;
+        if (SUCCEEDED(::SHCreateItemFromParsingName(
+            ArchivePath,
+            nullptr,
+            IID_PPV_ARGS(&DefaultFolder))))
+        {
+            FileDialog->SetDefaultFolder(DefaultFolder);
+        }
+    }
+
+    CMyComPtr<IShellItemArray> Items;
+    if (FAILED(FileDialog->Show(GetParent())) ||
+        FAILED(FileDialog->GetResults(&Items)))
+    {
+        return;
+    }
+
+    UStringVector SelectedPaths;
+    DWORD Count;
+    if (FAILED(Items->GetCount(&Count)))
+    {
+        return;
+    }
+    for (DWORD i = 0; i < Count; ++i)
+    {
+        CMyComPtr<IShellItem> Item;
+        if (SUCCEEDED(Items->GetItemAt(
+            i,
+            &Item)))
+        {
+            LPWSTR DisplayName = nullptr;
+            if (SUCCEEDED(Item->GetDisplayName(
+                SIGDN_FILESYSPATH,
+                &DisplayName)))
+            {
+                SelectedPaths.Add(UString(DisplayName));
+                ::CoTaskMemFree(DisplayName);
+            }
+        }
+    }
+
+    if (SelectedPaths.Size() == 0)
+    {
+        return;
+    }
+    // we can't use CompressFiles here, since that uses NanaZipG which doesn't
+    // support adding files to an archive subdirectory, and there's no way to
+    // just use the dialog from within FM without actually committing files
+    CopyFromAsk(SelectedPaths);
+}
+// **************** NanaZip Modification End ****************
+
 void CPanel::AddToArchive()
 {
   CRecordVector<UInt32> indices;
   GetOperatedItemIndices(indices);
   if (!Is_IO_FS_Folder())
   {
-    MessageBox_Error_UnsupportOperation();
+    // **************** NanaZip Modification Start ****************
+    // MessageBox_Error_UnsupportOperation();
+    if (IsArcFolder())
+    {
+        AddToExistingArchive();
+    }
+    else
+    {
+        MessageBox_Error_UnsupportOperation();
+    }
+    // **************** NanaZip Modification End ****************
     return;
   }
   if (indices.Size() == 0)

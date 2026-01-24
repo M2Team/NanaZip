@@ -887,6 +887,9 @@ public:
   void Refresh_StatusBar();
 
   void AddToArchive();
+  // **************** NanaZip Modification Start ****************
+  void AddToExistingArchive();
+  // **************** NanaZip Modification End ****************
 
   void GetFilePaths(const CRecordVector<UInt32> &indices, UStringVector &paths, bool allowFolders = false);
   void ExtractArchives();
