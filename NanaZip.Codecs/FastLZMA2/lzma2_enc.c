@@ -1,4 +1,4 @@
-﻿/* lzma2_enc.c -- LZMA2 Encoder
+/* lzma2_enc.c -- LZMA2 Encoder
 Based on LzmaEnc.c and Lzma2Enc.c : Igor Pavlov
 Modified for FL2 by Conor McCarthy
 Public domain
@@ -221,12 +221,8 @@ struct LZMA2_ECtx_s
     unsigned dist_slot_prices[kNumLenToPosStates][kDistTableSizeMax];
     unsigned distance_prices[kNumLenToPosStates][kNumFullDistances];
 
-    // **************** NanaZip Modification Start ****************
-    // RMF_match base_match; /* Allows access to matches[-1] in LZMA_optimalParse */
-    // RMF_match matches[kMatchesMax];
-    /* Reserve one for matches[-1] */
-    RMF_match _matches[kMatchesMax + 1];
-    // **************** NanaZip Modification End ****************
+    /* All access must be via MATCH_TBL_INDEX() to allow access to index (-1) in LZMA_optimalParse */
+    RMF_match matches[kMatchesMax + 1];
     size_t match_count;
 
     LZMA2_node opt_buf[kOptimizerBufferSize];
@@ -241,11 +237,6 @@ struct LZMA2_ECtx_s
     /* Temp output buffer before space frees up in the match table */
     BYTE out_buf[kTempBufferSize];
 };
-
-// **************** NanaZip Modification Start ****************
-/* Allows access to matches[-1] in LZMA_optimalParse */
-#define LZMA2_ECtx_match(enc, idx) ((enc)->_matches[(idx) + 1])
-// **************** NanaZip Modification End ****************
 
 LZMA2_ECtx* LZMA2_createECtx(void)
 {
@@ -286,6 +277,8 @@ void LZMA2_freeECtx(LZMA2_ECtx *const enc)
 #define LEN_TO_DIST_STATE(len) (((len) < kNumLenToPosStates + 1) ? (len) - 2 : kNumLenToPosStates - 1)
 
 #define IS_LIT_STATE(state) ((state) < 7)
+
+#define MATCH_TBL_INDEX(index) ((index) + 1)
 
 HINT_INLINE
 unsigned LZMA_getRepLen1Price(LZMA2_ECtx* const enc, size_t const state, size_t const pos_state)
@@ -938,14 +931,8 @@ size_t LZMA_hashGetMatches(LZMA2_ECtx *const enc, FL2_dataBlock const block,
                 const BYTE* data_2 = block.data + match_3;
                 size_t len_test = ZSTD_count(data + 1, data_2 + 1, data + length_limit) + 1;
                 if (len_test > max_len) {
-                    // **************** NanaZip Modification Start ****************
-                    // enc->matches[enc->match_count].length = (U32)len_test;
-                    // enc->matches[enc->match_count].dist = (U32)(pos - match_3 - 1);
-                    LZMA2_ECtx_match(enc, enc->match_count).length =
-                        (U32)len_test;
-                    LZMA2_ECtx_match(enc, enc->match_count).dist =
-                        (U32)(pos - match_3 - 1);
-                    // **************** NanaZip Modification End ****************
+                    enc->matches[MATCH_TBL_INDEX(enc->match_count)].length = (U32)len_test;
+                    enc->matches[MATCH_TBL_INDEX(enc->match_count)].dist = (U32)(pos - match_3 - 1);
                     ++enc->match_count;
                     max_len = len_test;
                     if (len_test >= length_limit)
@@ -960,10 +947,7 @@ size_t LZMA_hashGetMatches(LZMA2_ECtx *const enc, FL2_dataBlock const block,
     tbl->hash_chain_3[pos & chain_mask_3] = (S32)first_3;
     if ((unsigned)max_len < match.length) {
         /* Insert the match from the RMF */
-        // **************** NanaZip Modification Start ****************
-        // enc->matches[enc->match_count] = match;
-        LZMA2_ECtx_match(enc, enc->match_count) = match;
-        // **************** NanaZip Modification End ****************
+        enc->matches[MATCH_TBL_INDEX(enc->match_count)] = match;
         ++enc->match_count;
         return match.length;
     }
@@ -1207,10 +1191,7 @@ size_t LZMA_optimalParse(LZMA2_ECtx* const enc, FL2_dataBlock const block,
             match.length = MIN(match.length, (U32)max_length);
             /* Need to test max_length < 4 because the hash fn reads a U32 */
             if (match.length < 3 || max_length < 4) {
-                // **************** NanaZip Modification Start ****************
-                // enc->matches[0] = match;
-                LZMA2_ECtx_match(enc, 0) = match;
-                // **************** NanaZip Modification End ****************
+                enc->matches[MATCH_TBL_INDEX(0)] = match;
                 enc->match_count = 1;
                 main_len = match.length;
             }
@@ -1222,36 +1203,20 @@ size_t LZMA_optimalParse(LZMA2_ECtx* const enc, FL2_dataBlock const block,
 
             /* Start with a match longer than the best rep if one exists */
             ptrdiff_t start_match = 0;
-            // **************** NanaZip Modification Start ****************
-            // while (start_len > enc->matches[start_match].length)
-            //     ++start_match;
-            while (start_len > LZMA2_ECtx_match(enc, start_match).length)
+            while (start_len > enc->matches[MATCH_TBL_INDEX(start_match)].length)
                 ++start_match;
-            // **************** NanaZip Modification End ****************
 
-            // **************** NanaZip Modification Start ****************
-            // enc->matches[start_match - 1].length = (U32)start_len - 1; /* Avoids an if..else branch in the loop. [-1] is ok */
-            /* Avoids an if..else branch in the loop. [-1] is ok */
-            LZMA2_ECtx_match(enc, start_match - 1).length = (U32)start_len - 1;
-            // **************** NanaZip Modification End ****************
+            enc->matches[MATCH_TBL_INDEX(start_match - 1)].length = (U32)start_len - 1; /* Avoids an if..else branch in the loop. [-1] is ok */
 
             for (; match_index >= start_match; --match_index) {
-                // **************** NanaZip Modification Start ****************
-                // size_t len_test = enc->matches[match_index].length;
-                // size_t const cur_dist = enc->matches[match_index].dist;
-                size_t len_test = LZMA2_ECtx_match(enc, match_index).length;
-                size_t const cur_dist = LZMA2_ECtx_match(enc, match_index).dist;
-                // **************** NanaZip Modification End ****************
+                size_t len_test = enc->matches[MATCH_TBL_INDEX(match_index)].length;
+                size_t const cur_dist = enc->matches[MATCH_TBL_INDEX(match_index)].dist;
                 const BYTE *const data_2 = data - cur_dist - 1;
                 size_t const rep_0_pos = len_test + 1;
                 size_t dist_slot = LZMA_getDistSlot((U32)cur_dist);
                 U32 cur_and_len_price;
                 /* Test from the full length down to 1 more than the next shorter match */
-                // **************** NanaZip Modification Start ****************
-                // size_t base_len = enc->matches[match_index - 1].length + 1;
-                size_t base_len = LZMA2_ECtx_match(enc, match_index - 1).length
-                    + 1;
-                // **************** NanaZip Modification End ****************
+                size_t base_len = enc->matches[MATCH_TBL_INDEX(match_index - 1)].length + 1;
                 for (; len_test >= base_len; --len_test) {
                     cur_and_len_price = normal_match_price + enc->states.len_states.prices[pos_state][len_test - kMatchLenMin];
                     size_t const len_to_dist_state = LEN_TO_DIST_STATE(len_test);
@@ -1260,12 +1225,7 @@ size_t LZMA_optimalParse(LZMA2_ECtx* const enc, FL2_dataBlock const block,
                     else
                         cur_and_len_price += enc->dist_slot_prices[len_to_dist_state][dist_slot] + enc->align_prices[cur_dist & kAlignMask];
 
-                    // **************** NanaZip Modification Start ****************
-                    // BYTE const sub_len = len_test < enc->matches[match_index].length;
-                    BYTE const sub_len = len_test < LZMA2_ECtx_match(
-                        enc,
-                        match_index).length;
-                    // **************** NanaZip Modification End ****************
+                    BYTE const sub_len = len_test < enc->matches[MATCH_TBL_INDEX(match_index)].length;
 
                     LZMA2_node *const opt = &enc->opt_buf[cur + len_test];
                     if (cur_and_len_price < opt->price) {
@@ -1357,10 +1317,7 @@ size_t LZMA_initMatchesPos0Best(LZMA2_ECtx* const enc, FL2_dataBlock const block
     if (start_len <= match.length) {
         size_t main_len;
         if (match.length < 3 || block.end - pos < 4) {
-            // **************** NanaZip Modification Start ****************
-            // enc->matches[0] = match;
-            LZMA2_ECtx_match(enc, 0) = match;
-            // **************** NanaZip Modification End ****************
+            enc->matches[MATCH_TBL_INDEX(0)] = match;
             enc->match_count = 1;
             main_len = match.length;
         }
@@ -1369,30 +1326,18 @@ size_t LZMA_initMatchesPos0Best(LZMA2_ECtx* const enc, FL2_dataBlock const block
         }
 
         ptrdiff_t start_match = 0;
-        // **************** NanaZip Modification Start ****************
-        // while (start_len > enc->matches[start_match].length)
-        //     ++start_match;
-        while (start_len > LZMA2_ECtx_match(enc, start_match).length)
+        while (start_len > enc->matches[MATCH_TBL_INDEX(start_match)].length)
             ++start_match;
-        // **************** NanaZip Modification End ****************
 
-        LZMA2_ECtx_match(enc, start_match - 1).length = (U32)start_len - 1; /* Avoids an if..else branch in the loop. [-1] is ok */
+        enc->matches[MATCH_TBL_INDEX(start_match - 1)].length = (U32)start_len - 1; /* Avoids an if..else branch in the loop. [-1] is ok */
 
         size_t pos_state = pos & enc->pos_mask;
 
         for (ptrdiff_t match_index = enc->match_count - 1; match_index >= start_match; --match_index) {
-            // **************** NanaZip Modification Start ****************
-            // size_t len_test = enc->matches[match_index].length;
-            // size_t const distance = enc->matches[match_index].dist;
-            // size_t const slot = LZMA_getDistSlot((U32)distance);
-            // size_t const base_len = enc->matches[match_index - 1].length + 1;
-            size_t len_test = LZMA2_ECtx_match(enc, match_index).length;
-            size_t const distance = LZMA2_ECtx_match(enc, match_index).dist;
+            size_t len_test = enc->matches[MATCH_TBL_INDEX(match_index)].length;
+            size_t const distance = enc->matches[MATCH_TBL_INDEX(match_index)].dist;
             size_t const slot = LZMA_getDistSlot((U32)distance);
-            size_t const base_len = LZMA2_ECtx_match(
-                enc,
-                match_index - 1).length + 1;
-            // **************** NanaZip Modification End ****************
+            size_t const base_len = enc->matches[MATCH_TBL_INDEX(match_index - 1)].length + 1;
             /* Test every available match length at the shortest distance. The buffer is sorted */
             /* in order of increasing length, and therefore increasing distance too. */
             for (; len_test >= base_len; --len_test) {
