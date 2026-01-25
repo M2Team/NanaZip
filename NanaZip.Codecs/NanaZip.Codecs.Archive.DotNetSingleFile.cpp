@@ -475,7 +475,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (FAILED(hr))
+            if (hr != S_OK)
             {
                 this->Close();
             }
@@ -670,14 +670,15 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            if (!this->m_IsInitialized)
-            {
-                return S_FALSE;
-            }
-
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            if (!this->m_IsInitialized)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
             switch (PropId)
