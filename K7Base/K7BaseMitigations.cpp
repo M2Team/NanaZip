@@ -51,7 +51,7 @@ EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations()
 
 EXTERN_C MO_RESULT MOAPI K7BaseDisableDynamicCodeGeneration()
 {
-#ifdef NDEBUG
+#ifndef _DEBUG
     if (!::K7BaseGetAllowDynamicCodeGenerationPolicy())
     {
         PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = {};
@@ -65,7 +65,7 @@ EXTERN_C MO_RESULT MOAPI K7BaseDisableDynamicCodeGeneration()
             return MO_RESULT_ERROR_FAIL;
         }
     }
-#endif // NDEBUG
+#endif // _DEBUG
 
     return MO_RESULT_SUCCESS_OK;
 }
@@ -90,7 +90,7 @@ EXTERN_C MO_RESULT MOAPI K7BaseDisableChildProcessCreation()
 EXTERN_C MO_RESULT MOAPI K7BaseSetCurrentThreadDynamicCodePolicyOptOut(
     _In_ MO_BOOL AllowDynamicCodeGeneration)
 {
-#ifdef NDEBUG
+#ifndef _DEBUG
     if (::K7BaseGetAllowDynamicCodeGenerationPolicy())
     {
         return TRUE;
@@ -112,7 +112,7 @@ EXTERN_C MO_RESULT MOAPI K7BaseSetCurrentThreadDynamicCodePolicyOptOut(
     return MO_RESULT_SUCCESS_OK;
 }
 
-#ifdef NDEBUG
+#ifndef _DEBUG
 namespace
 {
     namespace ModuleTypes
@@ -719,11 +719,11 @@ namespace
         }
     }
 }
-#endif // NDEBUG
+#endif // _DEBUG
 
 EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker()
 {
-#ifdef NDEBUG
+#ifndef _DEBUG
     if (::K7BaseGetAllowDynamicCodeGenerationPolicy())
     {
         return MO_RESULT_SUCCESS_OK;
@@ -752,14 +752,14 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitializeDynamicLinkLibraryBlocker()
         }
     }
     ::K7BaseDetourTransactionCommit();
-#endif // NDEBUG
+#endif // _DEBUG
 
     return MO_RESULT_SUCCESS_OK;
 }
 
 EXTERN_C MO_RESULT MOAPI K7BaseUninitializeDynamicLinkLibraryBlocker()
 {
-#ifdef NDEBUG
+#ifndef _DEBUG
     if (::K7BaseGetAllowDynamicCodeGenerationPolicy())
     {
         return MO_RESULT_SUCCESS_OK;
@@ -789,6 +789,6 @@ EXTERN_C MO_RESULT MOAPI K7BaseUninitializeDynamicLinkLibraryBlocker()
         std::lock_guard<std::mutex> Lock(g_DynamicCodeRangesMutex);
         g_DynamicCodeRanges.clear();
     }
-#endif // NDEBUG
+#endif // _DEBUG
     return MO_RESULT_SUCCESS_OK;
 }
