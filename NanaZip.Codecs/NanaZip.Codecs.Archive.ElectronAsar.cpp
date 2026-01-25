@@ -259,7 +259,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (hr != S_OK)
+            if (S_OK != hr)
             {
                 this->Close();
             }
