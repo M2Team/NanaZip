@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F5C18E0D-AE2D-494D-9D28-0C435C8ED5C2}</ProjectGuid>
+    <RootNamespace>NanaZip.LegacyShellExtension</RootNamespace>
+    <MileProjectType>DynamicLibrary</MileProjectType>
+    <MileProjectManifestFile>NanaZip.LegacyShellExtension.manifest</MileProjectManifestFile>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
+    <MileProjectEnableCppWinRTSupport>true</MileProjectEnableCppWinRTSupport>
+    <CppWinRTGenerateWindowsMetadata>false</CppWinRTGenerateWindowsMetadata>
+    <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
+    <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
+    <MileProjectFileDescription>NanaZip Legacy Shell Extension</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.LegacyShellExtension</MileProjectInternalName>
+    <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
+    <MileProjectOriginalFilename>NanaZip.LegacyShellExtension.dll</MileProjectOriginalFilename>
+    <MileProjectProductName>NanaZip</MileProjectProductName>
+  </PropertyGroup>
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
+      <PreprocessorDefinitions>LANG;WIN_LONG_PATH;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LargeAddressAware>true</LargeAddressAware>
+      <ModuleDefinitionFile>NanaZip.LegacyShellExtension.def</ModuleDefinitionFile>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+      <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Explorer\DllExportsExplorer.cpp" />
+    <ClCompile Include="SevenZip\C\Alloc.c" />
+    <ClCompile Include="SevenZip\C\CpuArch.c" />
+    <ClCompile Include="SevenZip\C\Threads.c" />
+    <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Lang.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Random.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\DLL.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\ErrorMsg.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileDir.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileFind.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileIO.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\FileName.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\MemoryLock.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Menu.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\ProcessUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Registry.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\ResourceString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Shell.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Window.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ArchiveName.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\CompressCall.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ZipRegistry.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\StringUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SevenZip\C\7zTypes.h" />
+    <ClInclude Include="SevenZip\C\Alloc.h" />
+    <ClInclude Include="SevenZip\C\Compiler.h" />
+    <ClInclude Include="SevenZip\C\CpuArch.h" />
+    <ClInclude Include="SevenZip\C\Precomp.h" />
+    <ClInclude Include="SevenZip\C\Threads.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\MethodProps.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\ICoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IDecl.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IProgress.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IStream.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\PropID.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ArchiveName.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\CompressCall.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ExtractingFilePath.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ExtractMode.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ZipRegistry.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\ContextMenu.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyExplorerCommand.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyMessages.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\resource.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MyCom2.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\StringUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Common.h" />
+    <ClInclude Include="SevenZip\CPP\Common\ComTry.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Common\IntToString.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Lang.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyBuffer.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyCom.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyInitGuid.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyLinux.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyString.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyTypes.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyUnknown.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyVector.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyWindows.h" />
+    <ClInclude Include="SevenZip\CPP\Common\NewHandler.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Random.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StringConvert.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StringToInt.h" />
+    <ClInclude Include="SevenZip\CPP\Common\UTFConvert.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Wildcard.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\COM.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\DLL.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\ErrorMsg.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileDir.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileFind.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileIO.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileMapping.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\FileName.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Handle.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\MemoryGlobal.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\MemoryLock.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Menu.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\NtCheck.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\ProcessUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\PropVariant.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Registry.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\ResourceString.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Shell.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Synchronization.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\TimeUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SevenZip\CPP\7zip\UI\Explorer\resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanaZip.LegacyShellExtension.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
+</Project>
