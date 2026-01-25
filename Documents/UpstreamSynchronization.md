@@ -30,7 +30,7 @@
 
 ## FastLZMA2
 
-- NanaZip.Codecs: 1.0.1 with some fixes by NanaZip team.
+- NanaZip.Codecs: Commit a793db99fade2957d2453035390f97e573acecb2.
 
 ## FreeBSD
 
