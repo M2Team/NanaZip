@@ -18,6 +18,7 @@
 #include "SponsorPage.h"
 #include "AboutPage.h"
 #include "InformationPage.h"
+#include "SharePage.h"
 
 #include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
@@ -280,6 +281,34 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
         WindowHandle,
         560,
         560,
+        winrt::detach_abi(Window),
+        ParentWindowHandle);
+
+    return Result;
+}
+
+EXTERN_C INT WINAPI K7ModernShowShareDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_ std::vector<std::wstring> const& SharingFilePaths)
+{
+    HWND WindowHandle =
+        winrt::check_pointer(::K7ModernCreateXamlDialog(ParentWindowHandle));
+
+    using Interface =
+        winrt::NanaZip::Modern::SharePage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::SharePage;
+
+    Interface Window = winrt::make<Implementation>(
+        WindowHandle,
+        SharingFilePaths);
+
+    winrt::check_hresult(::MileXamlSetTransparentBackgroundAttribute(true));
+
+    int Result = ::K7ModernShowXamlDialog(
+        WindowHandle,
+        500,
+        375,
         winrt::detach_abi(Window),
         ParentWindowHandle);
 
