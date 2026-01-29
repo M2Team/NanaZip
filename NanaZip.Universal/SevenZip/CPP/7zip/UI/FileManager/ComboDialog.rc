@@ -1,0 +1,16 @@
+#include "ComboDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 240
+#define yc 64
+
+IDD_COMBO  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
+CAPTION "Combo"
+{
+  LTEXT      "", IDT_COMBO, m, m, xc, 8
+  COMBOBOX       IDC_COMBO, m, 20, xc, 65, MY_COMBO_WITH_EDIT
+  OK_CANCEL
+}
+
+#undef xc
+#undef yc

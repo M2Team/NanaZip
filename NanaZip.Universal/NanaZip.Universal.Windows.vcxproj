@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8DDAC25D-D16A-4440-9ADE-902255549D1E}</ProjectGuid>
@@ -26,11 +26,12 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <PreprocessorDefinitions>Z7_DEVICE_FILE;Z7_EXTERNAL_CODECS;Z7_LANG;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>Z7_DEVICE_FILE;Z7_EXTERNAL_CODECS;Z7_LANG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
       <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
@@ -48,6 +49,25 @@
     <None Include="SevenZip\ASM\x86\Sort.asm" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\Sort.c" />
+    <None Include="SevenZip\CPP\7zip\GuiCommon.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\EditDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2a.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\FileManager\resourceGui.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\GUI\BenchmarkDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\GUI\CompressDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\GUI\CompressOptionsDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\GUI\Extract.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\GUI\ExtractDialog.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\GUI\resource2.rc" />
+    <None Include="SevenZip\CPP\7zip\UI\GUI\resource3.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
@@ -78,6 +98,7 @@
     <ClInclude Include="SevenZip\CPP\7zip\IStream.h" />
     <ClInclude Include="SevenZip\CPP\7zip\MyVersion.h" />
     <ClInclude Include="SevenZip\CPP\7zip\PropID.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Agent\IFolderArchive.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ArchiveCommandLine.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ArchiveExtractCallback.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ArchiveOpenCallback.h" />
@@ -104,16 +125,58 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\Common\UpdateCallback.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Common\UpdatePair.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Common\UpdateProduce.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\BenchCon.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\ConsoleClose.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\ExtractCallbackConsole.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\HashCon.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\List.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\OpenCallbackConsole.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\PercentPrinter.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\StdAfx.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\UpdateCallbackConsole.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\Console\UserInputUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\WorkDir.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Common\ZipRegistry.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyMessages.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\DialogSize.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\EditDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\EditDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MyWindowsNew.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OpenCallback.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2Res.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PropertyNameRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\resource.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\resourceGui.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\SplitUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\StringUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\BenchmarkDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\BenchmarkDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\CompressDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\CompressDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\ExtractDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\ExtractDialogRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\ExtractGUI.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\ExtractRes.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\HashGUI.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\resource2.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\resource3.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI2.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\GUI\UpdateGUI.h" />
     <ClInclude Include="SevenZip\CPP\Common\CommandLineParser.h" />
     <ClInclude Include="SevenZip\CPP\Common\Common.h" />
     <ClInclude Include="SevenZip\CPP\Common\Common0.h" />
@@ -121,6 +184,7 @@
     <ClInclude Include="SevenZip\CPP\Common\Defs.h" />
     <ClInclude Include="SevenZip\CPP\Common\DynLimBuf.h" />
     <ClInclude Include="SevenZip\CPP\Common\IntToString.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Lang.h" />
     <ClInclude Include="SevenZip\CPP\Common\ListFileUtils.h" />
     <ClInclude Include="SevenZip\CPP\Common\MyBuffer.h" />
     <ClInclude Include="SevenZip\CPP\Common\MyBuffer2.h" />
@@ -135,12 +199,20 @@
     <ClInclude Include="SevenZip\CPP\Common\MyWindows.h" />
     <ClInclude Include="SevenZip\CPP\Common\NewHandler.h" />
     <ClInclude Include="SevenZip\CPP\Common\StdAfx.h" />
-    <ClInclude Include="SevenZip\CPP\Common\StdInStream.h" />
-    <ClInclude Include="SevenZip\CPP\Common\StdOutStream.h" />
     <ClInclude Include="SevenZip\CPP\Common\StringConvert.h" />
     <ClInclude Include="SevenZip\CPP\Common\StringToInt.h" />
     <ClInclude Include="SevenZip\CPP\Common\UTFConvert.h" />
     <ClInclude Include="SevenZip\CPP\Common\Wildcard.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Clipboard.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\COM.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\CommonDialog.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Control\ComboBox.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Control\Dialog.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Control\Edit.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Control\ListView.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Control\ProgressBar.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Control\Static.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Control\StdAfx.h" />
     <ClInclude Include="SevenZip\CPP\Windows\Defs.h" />
     <ClInclude Include="SevenZip\CPP\Windows\DLL.h" />
     <ClInclude Include="SevenZip\CPP\Windows\ErrorMsg.h" />
@@ -151,18 +223,22 @@
     <ClInclude Include="SevenZip\CPP\Windows\FileName.h" />
     <ClInclude Include="SevenZip\CPP\Windows\FileSystem.h" />
     <ClInclude Include="SevenZip\CPP\Windows\Handle.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\MemoryGlobal.h" />
     <ClInclude Include="SevenZip\CPP\Windows\MemoryLock.h" />
     <ClInclude Include="SevenZip\CPP\Windows\NtCheck.h" />
     <ClInclude Include="SevenZip\CPP\Windows\PropVariant.h" />
     <ClInclude Include="SevenZip\CPP\Windows\PropVariantConv.h" />
     <ClInclude Include="SevenZip\CPP\Windows\Registry.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\ResourceString.h" />
     <ClInclude Include="SevenZip\CPP\Windows\SecurityUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Shell.h" />
     <ClInclude Include="SevenZip\CPP\Windows\StdAfx.h" />
     <ClInclude Include="SevenZip\CPP\Windows\Synchronization.h" />
     <ClInclude Include="SevenZip\CPP\Windows\System.h" />
     <ClInclude Include="SevenZip\CPP\Windows\SystemInfo.h" />
     <ClInclude Include="SevenZip\CPP\Windows\Thread.h" />
     <ClInclude Include="SevenZip\CPP\Windows\TimeUtils.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Window.h" />
     <ClInclude Include="SevenZip\C\7zCrc.h" />
     <ClInclude Include="SevenZip\C\7zTypes.h" />
     <ClInclude Include="SevenZip\C\7zVersion.h" />
@@ -212,31 +288,54 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\Common\UpdateCallback.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\Common\UpdatePair.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\Common\UpdateProduce.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\BenchCon.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\ConsoleClose.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\ExtractCallbackConsole.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\HashCon.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\List.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\Main.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\MainAr.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\OpenCallbackConsole.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\PercentPrinter.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\UpdateCallbackConsole.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\Console\UserInputUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\WorkDir.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ZipRegistry.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Explorer\MyMessages.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\EditDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OpenCallback.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\SplitUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\StringUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\SysIconUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\BenchmarkDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\CompressDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\ExtractDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\ExtractGUI.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\GUI.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\HashGUI.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\UpdateCallbackGUI2.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\UpdateGUI.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\CommandLineParser.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\CRC.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\DynLimBuf.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Lang.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\ListFileUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\StdInStream.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\StdOutStream.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Clipboard.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\CommonDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Control\ComboBox.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Control\Dialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Control\ListView.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\DLL.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\ErrorMsg.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\FileDir.cpp" />
@@ -245,18 +344,26 @@
     <ClCompile Include="SevenZip\CPP\Windows\FileLink.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\FileName.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\FileSystem.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\MemoryGlobal.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\MemoryLock.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\PropVariant.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\PropVariantConv.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\Registry.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\ResourceString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Shell.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Synchronization.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\System.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\SystemInfo.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\TimeUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\Window.cpp" />
     <ClCompile Include="SevenZip\C\7zCrc.c" />
     <ClCompile Include="SevenZip\C\Alloc.c" />
     <ClCompile Include="SevenZip\C\CpuArch.c" />
     <ClCompile Include="SevenZip\C\DllSecur.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SevenZip\CPP\7zip\UI\GUI\resource.rc" />
   </ItemGroup>
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
     <ItemGroup Condition="'$(Platform)' == 'x64'">

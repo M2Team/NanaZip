@@ -1,0 +1,30 @@
+#include "resourceGui.h"
+
+STRINGTABLE
+BEGIN
+  IDS_MESSAGE_NO_ERRORS     "There are no errors"
+
+  IDS_PROGRESS_TESTING      "Testing"
+
+  IDS_MOVING    "Moving..."
+
+  IDS_CHECKSUM_CALCULATING    "Checksum calculating..."
+  IDS_CHECKSUM_INFORMATION    "Checksum information"
+  IDS_CHECKSUM_CRC_DATA       "CRC checksum for data:"
+  IDS_CHECKSUM_CRC_DATA_NAMES "CRC checksum for data and names:"
+  IDS_CHECKSUM_CRC_STREAMS_NAMES "CRC checksum for streams and names:"
+
+  IDS_INCORRECT_VOLUME_SIZE "Incorrect volume size"
+
+  IDS_OPENNING  "Opening..."
+  IDS_SCANNING  "Scanning..."
+  IDS_MEM_REQUIRES_BIG_MEM     "The operation requires big amount of memory (RAM)."
+  IDS_MEM_REQUIRED_MEM_SIZE    "required memory usage size"
+  IDS_MEM_CURRENT_MEM_LIMIT    "allowed memory usage limit"
+  IDS_MEM_USAGE_LIMIT_SET_BY_7ZIP "memory usage limit set by 7-Zip"
+  IDS_MEM_RAM_SIZE  "RAM size"
+
+  IDS_MSG_ARC_UNPACKING_WAS_SKIPPED       "Archive extraction was skipped."
+//  IDS_MSG_ARC_FILES_UNPACKING_WAS_SKIPPED "Files extraction was skipped."
+
+END

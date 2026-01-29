@@ -71,6 +71,7 @@ namespace NanaZip.RefreshPackageVersion
             @"{0}\NanaZip.Core\SevenZip\CPP\7zip\Bundles\SFXCon\resource.rc",
             @"{0}\NanaZip.Core\SevenZip\CPP\7zip\Bundles\SFXSetup\resource.rc",
             @"{0}\NanaZip.Core\SevenZip\CPP\7zip\Bundles\SFXWin\resource.rc",
+            @"{0}\NanaZip.Universal\SevenZip\CPP\7zip\UI\GUI\resource.rc",
         };
 
         static void SwitchDevelopmentChannel()

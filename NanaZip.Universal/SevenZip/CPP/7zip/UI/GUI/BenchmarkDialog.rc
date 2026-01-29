@@ -1,0 +1,288 @@
+#include "BenchmarkDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 332
+#define yc 248
+
+#undef g0xs
+#undef g1x
+#undef g1xs
+#undef g2xs
+#undef g3x
+#undef g3xs
+#undef g4x
+
+#define gs 160
+#define gSpace 24
+
+#define g0xs 90
+#define g1xs 48
+#define g1x  (m + g0xs)
+#define gc2x  (g1x + g1xs + m)
+#define gc2xs 80
+
+#define g4x (m + m)
+
+#define sRating 58
+#define sSpeed  60
+#define sUsage  46
+#define sRpu    58
+#define sSize   52
+// #define sFreq 34
+
+#define xRating (xs - m - m - sRating)
+#define xRpu (xRating - sRpu)
+#define xUsage (xRpu - sUsage)
+#define xSpeed (xUsage - sSpeed)
+#define xSize (xSpeed - sSize)
+
+// #define xFreq (xUsage - sFreq)
+
+#define sLabel (xSize - g4x)
+#define sTotalRating (sUsage + sRpu + sRating + m + m)
+#define xTotalRating (xs - m - sTotalRating)
+
+#define sPasses 60
+
+#define g2xs 60
+#define g3xs 64
+#define g3x (m + g2xs)
+
+#undef GROUP_Y_SIZE
+#undef GROUP_Y2_SIZE
+#ifdef UNDER_CE
+#define GROUP_Y_SIZE 8
+#define GROUP_Y2_SIZE 8
+#else
+#define GROUP_Y_SIZE 40
+#define GROUP_Y2_SIZE 32
+#endif
+
+#define g7xs bx1 - m - g0xs - g1xs - m
+
+#define sLog 140 + 0
+
+// MY_MODAL_DIALOG_STYLE
+IDD_BENCH  DIALOG  0, 0, xs + sLog, ys  MY_MODAL_RESIZE_DIALOG_STYLE | WS_MINIMIZEBOX
+CAPTION "Benchmark"
+MY_FONT
+BEGIN
+  PUSHBUTTON  "&Restart", IDB_RESTART, bx1, m, bxs, bys
+  PUSHBUTTON  "&Stop",    IDB_STOP,    bx1, m + bys + 6, bxs, bys
+  
+  PUSHBUTTON  "&Help",  IDHELP,   bx2, by, bxs, bys
+  PUSHBUTTON  "Cancel", IDCANCEL, bx1, by, bxs, bys
+  
+  LTEXT  "&Dictionary size:", IDT_BENCH_DICTIONARY, m, m + 1, g0xs, 8
+  COMBOBOX  IDC_BENCH_DICTIONARY, g1x, m, g1xs, 140, MY_COMBO
+
+  LTEXT  "Memory usage:", IDT_BENCH_MEMORY, gc2x, m - 2, g7xs, 8
+  LTEXT  "", IDT_BENCH_MEMORY_VAL, gc2x, m + 8, g7xs, MY_TEXT_NOPREFIX
+
+  LTEXT  "&Number of CPU threads:", IDT_BENCH_NUM_THREADS, m, 30, g0xs, 8
+  COMBOBOX  IDC_BENCH_NUM_THREADS, g1x, 29, g1xs, 140, MY_COMBO
+  LTEXT  "", IDT_BENCH_HARDWARE_THREADS, gc2x, 30, g7xs, 24, SS_NOPREFIX
+
+  RTEXT  "Size", IDT_BENCH_SIZE,                xSize,   54, sSize,   MY_TEXT_NOPREFIX
+  RTEXT  "CPU Usage", IDT_BENCH_USAGE_LABEL,    xUsage,  54, sUsage,  MY_TEXT_NOPREFIX
+  RTEXT  "Speed", IDT_BENCH_SPEED,              xSpeed,  54, sSpeed,  MY_TEXT_NOPREFIX
+  RTEXT  "Rating / Usage", IDT_BENCH_RPU_LABEL, xRpu,    54, sRpu,    MY_TEXT_NOPREFIX
+  RTEXT  "Rating", IDT_BENCH_RATING_LABEL,      xRating, 54, sRating, MY_TEXT_NOPREFIX
+  
+  GROUPBOX  "Compressing", IDG_BENCH_COMPRESSING, m, 64, xc, GROUP_Y_SIZE
+ 
+  LTEXT  "Current", IDT_BENCH_CURRENT,   g4x,      76, sLabel,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_SIZE1,   xSize,    76, sSize,   MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_USAGE1,  xUsage,   76, sUsage,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_SPEED1,  xSpeed,   76, sSpeed,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_RPU1,    xRpu,     76, sRpu,    MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_RATING1, xRating,  76, sRating, MY_TEXT_NOPREFIX
+  
+  LTEXT  "Resulting", IDT_BENCH_RESULTING, g4x,    89, sLabel,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_SIZE2,   xSize,    89, sSize,   MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_USAGE2,  xUsage,   89, sUsage,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_SPEED2,  xSpeed,   89, sSpeed,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_RPU2,    xRpu,     89, sRpu,    MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_COMPRESS_RATING2, xRating,  89, sRating, MY_TEXT_NOPREFIX
+  
+  GROUPBOX  "Decompressing", IDG_BENCH_DECOMPRESSING, m, 111, xc, GROUP_Y_SIZE
+
+  LTEXT  "Current", IDT_BENCH_CURRENT2,  g4x,     123, sLabel,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_SIZE1,    xSize,   123, sSize,   MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_USAGE1,   xUsage,  123, sUsage,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_SPEED1,   xSpeed,  123, sSpeed,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_RPU1,     xRpu,    123, sRpu,    MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_RATING1,  xRating, 123, sRating, MY_TEXT_NOPREFIX
+  
+  LTEXT  "Resulting", IDT_BENCH_RESULTING2, g4x,  136, sLabel,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_SIZE2,    xSize,   136, sSize,   MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_USAGE2,   xUsage,  136, sUsage,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_SPEED2,   xSpeed,  136, sSpeed,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_RPU2,     xRpu,    136, sRpu,    MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_DECOMPR_RATING2,  xRating, 136, sRating, MY_TEXT_NOPREFIX
+  
+  RTEXT  "", IDT_BENCH_ERROR_MESSAGE, m, 155, xc, MY_TEXT_NOPREFIX
+
+  GROUPBOX  "Total Rating", IDG_BENCH_TOTAL_RATING, xTotalRating, 163, sTotalRating, GROUP_Y2_SIZE
+
+  RTEXT  "", IDT_BENCH_TOTAL_USAGE_VAL,  xUsage,  176, sUsage,  MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_TOTAL_RPU_VAL,    xRpu,    176, sRpu,    MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_TOTAL_RATING_VAL, xRating, 176, sRating, MY_TEXT_NOPREFIX
+
+
+  // RTEXT  "", IDT_BENCH_CPU, m + sPasses, 202, xc - sPasses, 16, SS_NOPREFIX
+  RTEXT  "", IDT_BENCH_CPU, m + 0, 202, xc - 0, 16, SS_NOPREFIX
+  RTEXT  "", IDT_BENCH_VER, m + xc - 100, 222, 100, MY_TEXT_NOPREFIX
+
+  LTEXT  "", IDT_BENCH_CPU_FEATURE, m, 222, xc - 100, 16, SS_NOPREFIX // - 100
+  LTEXT  "", IDT_BENCH_SYS1, m, 238, xc - 140, MY_TEXT_NOPREFIX
+  LTEXT  "", IDT_BENCH_SYS2, m, 248, xc - 140, MY_TEXT_NOPREFIX
+
+  LTEXT  "", IDT_BENCH_LOG, m + xc + m, m, sLog - m, yc, SS_LEFTNOWORDWRAP | SS_NOPREFIX
+
+  
+  LTEXT  "Elapsed time:", IDT_BENCH_ELAPSED, m, 163, g2xs, 8
+//  LTEXT  "Size:", IDT_BENCH_SIZE,            m, 176, g2xs, 8
+  LTEXT  "Passes:", IDT_BENCH_PASSES,        m, 176, g2xs, 8
+  COMBOBOX  IDC_BENCH_NUM_PASSES, 					 m, 187, sPasses, 140, MY_COMBO
+
+  RTEXT  "", IDT_BENCH_ELAPSED_VAL,        g3x, 163, g3xs, MY_TEXT_NOPREFIX
+  // RTEXT  "", IDT_BENCH_SIZE_VAL,           g3x, 176, g3xs, MY_TEXT_NOPREFIX
+  RTEXT  "", IDT_BENCH_PASSES_VAL,         g3x, 176, g3xs, MY_TEXT_NOPREFIX
+
+END
+
+#ifdef UNDER_CE
+
+#undef m
+#define m 4
+
+#undef xc
+#undef yc
+
+#define xc 154
+#define yc 160
+
+#undef g0xs
+#undef g1x
+#undef g1xs
+#undef g2xs
+#undef g3x
+#undef g3xs
+
+#undef bxs
+#undef bys
+
+#define bxs 60
+#define bys 14
+
+#undef gs
+#undef gSpace
+
+#define gs 160
+#define gSpace 24
+
+#define g0xs (xc - bxs)
+#define g1xs 44
+
+#undef g4x
+#define g4x (m)
+
+#undef xRpu
+#undef xUsage
+#undef xRating
+#undef xTotalRating
+
+#undef sRpu
+#undef sRating
+#undef sUsage
+#undef sLabel
+#undef sTotalRating
+
+#define sRating 40
+#define sUsage 24
+#define sRpu 40
+
+#define xRating (xs - m - sRating)
+#define xRpu (xRating - sRpu)
+#define xUsage (xRpu - sUsage)
+
+#define sLabel (xUsage - g4x)
+#define sTotalRating (sRpu + sRating)
+#define xTotalRating (xs - m - sTotalRating)
+
+#define g3xs 32
+#define g3x (xRpu - g3xs)
+#define g2xs (g3x - m)
+
+
+IDD_BENCH_2  DIALOG  0, 0, xs, ys  MY_MODAL_DIALOG_STYLE | WS_MINIMIZEBOX
+CAPTION "Benchmark"
+MY_FONT
+BEGIN
+  PUSHBUTTON  "&Restart", IDB_RESTART, bx1, m, bxs, bys
+  PUSHBUTTON  "&Stop",    IDB_STOP,    bx1, m + bys + m, bxs, bys
+
+  PUSHBUTTON  "Cancel", IDCANCEL, bx1, by, bxs, bys
+  
+  LTEXT  "&Dictionary size:", IDT_BENCH_DICTIONARY, m, m, g0xs, 8
+  COMBOBOX  IDC_BENCH_DICTIONARY, m, m + 11, g1xs, 140, MY_COMBO
+
+  LTEXT  "&Number of CPU threads:", IDT_BENCH_NUM_THREADS, m, 31, g0xs, 8
+  COMBOBOX  IDC_BENCH_NUM_THREADS, m, 42, g1xs, 140, MY_COMBO
+
+  LTEXT  "", IDT_BENCH_MEMORY_VAL,       m + g1xs + 8,  m + 13,  xc - bxs - g1xs - 8,  8
+  LTEXT  "", IDT_BENCH_HARDWARE_THREADS, m + g1xs + 8,  44,      xc - bxs - g1xs - 8,  8
+  
+  LTEXT  "Current", IDT_BENCH_CURRENT,   g4x,      70, sLabel,  8
+  RTEXT  "", IDT_BENCH_COMPRESS_USAGE1,  xUsage,   70, sUsage,  8
+  RTEXT  "", IDT_BENCH_COMPRESS_RPU1,    xRpu,     70, sRpu,    8
+  RTEXT  "", IDT_BENCH_COMPRESS_RATING1, xRating,  70, sRating, 8
+
+  LTEXT  "Resulting", IDT_BENCH_RESULTING, g4x,    80, sLabel,  8
+  RTEXT  "", IDT_BENCH_COMPRESS_USAGE2,  xUsage,   80, sUsage,  8
+  RTEXT  "", IDT_BENCH_COMPRESS_RPU2,    xRpu,     80, sRpu,    8
+  RTEXT  "", IDT_BENCH_COMPRESS_RATING2, xRating,  80, sRating, 8
+
+  LTEXT  "Compressing", IDG_BENCH_COMPRESSING, m, 60, xc - bxs, 8
+  
+  LTEXT  "Current", IDT_BENCH_CURRENT2,  g4x,     104, sLabel,  8
+  RTEXT  "", IDT_BENCH_DECOMPR_USAGE1,   xUsage,  104, sUsage,  8
+  RTEXT  "", IDT_BENCH_DECOMPR_RPU1,     xRpu,    104, sRpu,    8
+  RTEXT  "", IDT_BENCH_DECOMPR_RATING1,  xRating, 104, sRating, 8
+  
+  LTEXT  "Resulting", IDT_BENCH_RESULTING2, g4x,  114, sLabel,  8
+  RTEXT  "", IDT_BENCH_DECOMPR_USAGE2,   xUsage,  114, sUsage,  8
+  RTEXT  "", IDT_BENCH_DECOMPR_RPU2,     xRpu,    114, sRpu,    8
+  RTEXT  "", IDT_BENCH_DECOMPR_RATING2,  xRating, 114, sRating, 8
+  
+  LTEXT  "Decompressing", IDG_BENCH_DECOMPRESSING, m, 94, xc, 8
+
+  RTEXT  "", IDT_BENCH_TOTAL_RPU_VAL,    xRpu,    140, sRpu,    8
+  RTEXT  "", IDT_BENCH_TOTAL_RATING_VAL, xRating, 140, sRating, 8
+  
+  LTEXT  "Elapsed time:", IDT_BENCH_ELAPSED, m, 130, g2xs, 8
+  LTEXT  "Size:", IDT_BENCH_SIZE,            m, 140, g2xs, 8
+  LTEXT  "Passes:", IDT_BENCH_PASSES,        m, 150, g2xs, 8
+
+  RTEXT  "", IDT_BENCH_ELAPSED_VAL,        g3x, 130, g3xs, 8
+  RTEXT  "", IDT_BENCH_SIZE_VAL,           g3x, 140, g3xs, 8
+  RTEXT  "", IDT_BENCH_PASSES_VAL,         g3x, 150, g3xs, 8
+END
+
+#endif
+
+#include "../../GuiCommon.rc"
+
+#define xc 360
+#define yc 260
+
+IDD_BENCH_TOTAL  DIALOG  0, 0, xs, ys  MY_MODAL_RESIZE_DIALOG_STYLE  MY_FONT
+CAPTION "Benchmark"
+{
+  LTEXT  "Elapsed time:", IDT_BENCH_ELAPSED, m, m, 58, 8
+  RTEXT  "", IDT_BENCH_ELAPSED_VAL, m + 58, m, 38, 8
+  EDITTEXT  IDE_BENCH2_EDIT, m, m + 14, xc, yc - bys - m - 14, ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL | WS_VSCROLL | WS_HSCROLL
+  PUSHBUTTON  "&Help",  IDHELP,   bx2, by, bxs, bys
+  PUSHBUTTON  "Cancel", IDCANCEL, bx1, by, bxs, bys
+}
