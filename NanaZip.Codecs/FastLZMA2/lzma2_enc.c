@@ -1,4 +1,4 @@
-/* lzma2_enc.c -- LZMA2 Encoder
+﻿/* lzma2_enc.c -- LZMA2 Encoder
 Based on LzmaEnc.c and Lzma2Enc.c : Igor Pavlov
 Modified for FL2 by Conor McCarthy
 Public domain
