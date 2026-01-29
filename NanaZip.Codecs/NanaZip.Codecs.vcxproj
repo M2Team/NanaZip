@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{89B81A5B-FF0D-4193-9CB1-738692775DD2}</ProjectGuid>
@@ -20,6 +20,7 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\K7Base\K7Base.props" />
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
   <PropertyGroup>
@@ -272,15 +273,15 @@
     <ClCompile Include="BLAKE3\blake3.c">
       <DisableSpecificWarnings>4244;4245;</DisableSpecificWarnings>
     </ClCompile>
-    <None Include="BLAKE3\blake3_avx2.c" />
-    <None Include="BLAKE3\blake3_avx512.c" />
+    <None Include="BLAKE3\blake3_avx2_x86-64_windows_msvc.asm" />
+    <None Include="BLAKE3\blake3_avx512_x86-64_windows_msvc.asm" />
     <ClCompile Include="BLAKE3\blake3_dispatch.c">
       <DisableSpecificWarnings>4189;4702;</DisableSpecificWarnings>
     </ClCompile>
     <None Include="BLAKE3\blake3_neon.c" />
     <ClCompile Include="BLAKE3\blake3_portable.c" />
-    <None Include="BLAKE3\blake3_sse2.c" />
-    <None Include="BLAKE3\blake3_sse41.c" />
+    <None Include="BLAKE3\blake3_sse2_x86-64_windows_msvc.asm" />
+    <None Include="BLAKE3\blake3_sse41_x86-64_windows_msvc.asm" />
     <ClCompile Include="NanaZip.Codecs.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -514,16 +515,19 @@
       <Version>1.0.1057</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
-  <Target Name="NanaZipCodecsBlake3BuildCSource" BeforeTargets="BeforeClCompile">
+  <Target Name="NanaZipCodecsBlake3HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
     <ItemGroup Condition="'$(Platform)' == 'x64'">
-      <ClCompile Include="BLAKE3\blake3_avx2.c" />
-      <ClCompile Include="BLAKE3\blake3_avx512.c" />
-      <ClCompile Include="BLAKE3\blake3_sse2.c" />
-      <ClCompile Include="BLAKE3\blake3_sse41.c" />
+      <MASM Include="BLAKE3\blake3_avx2_x86-64_windows_msvc.asm" />
+      <MASM Include="BLAKE3\blake3_avx512_x86-64_windows_msvc.asm" />
+      <MASM Include="BLAKE3\blake3_sse2_x86-64_windows_msvc.asm" />
+      <MASM Include="BLAKE3\blake3_sse41_x86-64_windows_msvc.asm" />
     </ItemGroup>
-    <ItemGroup Condition="'$(Platform)' != 'x64'">
+  </Target>
+  <Target Name="NanaZipCodecsBlake3HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' == 'ARM64'">
       <ClCompile Include="BLAKE3\blake3_neon.c" />
     </ItemGroup>
   </Target>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>

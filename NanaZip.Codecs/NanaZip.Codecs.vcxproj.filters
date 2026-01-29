@@ -5,10 +5,10 @@
     <ClCompile Include="BLAKE3\blake3.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
-    <None Include="BLAKE3\blake3_avx2.c">
+    <None Include="BLAKE3\blake3_avx2_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
-    <None Include="BLAKE3\blake3_avx512.c">
+    <None Include="BLAKE3\blake3_avx512_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
     <ClCompile Include="BLAKE3\blake3_dispatch.c">
@@ -20,10 +20,10 @@
     <ClCompile Include="BLAKE3\blake3_portable.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
-    <None Include="BLAKE3\blake3_sse2.c">
+    <None Include="BLAKE3\blake3_sse2_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
-    <None Include="BLAKE3\blake3_sse41.c">
+    <None Include="BLAKE3\blake3_sse41_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
     <ClCompile Include="GmSSL\sm3.c">
