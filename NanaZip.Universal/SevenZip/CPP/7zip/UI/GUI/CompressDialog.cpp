@@ -109,17 +109,29 @@ static const UInt32 kZstd_MAX_DictSize_Chain = (UInt32)1 << kMaxDictChain;
 
 static LPCSTR const kExeExt = ".exe";
 
+// **************** 7-Zip ZS Modification Start ****************
+#define k7zFormat "7z"
+// **************** 7-Zip ZS Modification End ****************
+
 static const UInt32 g_Levels[] =
 {
   IDS_METHOD_STORE,
   IDS_METHOD_FASTEST,
-  0,
+  // **************** 7-Zip ZS Modification Start ****************
+  //0,
+  // **************** 7-Zip ZS Modification End ****************
   IDS_METHOD_FAST,
-  0,
+  // **************** 7-Zip ZS Modification Start ****************
+  //0,
+  // **************** 7-Zip ZS Modification End ****************
   IDS_METHOD_NORMAL,
-  0,
+  // **************** 7-Zip ZS Modification Start ****************
+  //0,
+  // **************** 7-Zip ZS Modification End ****************
   IDS_METHOD_MAXIMUM,
-  0,
+  // **************** 7-Zip ZS Modification Start ****************
+  //0,
+  // **************** 7-Zip ZS Modification End ****************
   IDS_METHOD_ULTRA
 };
 
@@ -134,6 +146,17 @@ enum EMethodID
   kDeflate64,
   kPPMdZip,
   // kZSTD,
+  // **************** 7-Zip ZS Modification Start ****************
+  kFLZMA2,
+  kZSTD,
+  kBROTLI,
+  kLZ4,
+  kLZ5,
+  kLIZARD_M1,
+  kLIZARD_M2,
+  kLIZARD_M3,
+  kLIZARD_M4,
+  // **************** 7-Zip ZS Modification End ****************
   kSha256,
   kSha1,
   kCrc32,
@@ -153,6 +176,17 @@ static LPCSTR const kMethodsNames[] =
   , "Deflate64"
   , "PPMd"
   // , "ZSTD"
+  // **************** 7-Zip ZS Modification Start ****************
+  , "FLZMA2"
+  , "zstd"
+  , "Brotli"
+  , "LZ4"
+  , "LZ5"
+  , "Lizard"
+  , "Lizard"
+  , "Lizard"
+  , "Lizard"
+  // **************** 7-Zip ZS Modification End ****************
   , "SHA256"
   , "SHA1"
   , "CRC32"
@@ -160,6 +194,63 @@ static LPCSTR const kMethodsNames[] =
   , "GNU"
   , "POSIX"
 };
+
+// **************** 7-Zip ZS Modification Start ****************
+static LPCSTR const kMethodsNamesLong[] =
+{
+    "Copy [std]"
+  , "LZMA [std]"
+  , "LZMA2 [std]"
+  , "PPMd [std]"
+  , "BZip2 [std]"
+  , "Deflate [std]"
+  , "Deflate64 [std]"
+  , "PPMd [std]"
+  , "LZMA2, Fast [std]"
+  , "Zstandard"
+  , "Brotli"
+  , "LZ4"
+  , "LZ5"
+  , "Lizard, FastLZ4"
+  , "Lizard, LIZv1"
+  , "Lizard, FastLZ4 + Huffman"
+  , "Lizard, LIZv1 + Huffman"
+  , "SHA256"
+  , "SHA1"
+  , "CRC32"
+  , "CRC64"
+  , "GNU"
+  , "POSIX"
+};
+
+static const EMethodID g_ZstdMethods[] =
+{
+  kZSTD
+};
+
+static const EMethodID g_BrotliMethods[] =
+{
+  kBROTLI
+};
+
+static const EMethodID g_LizardMethods[] =
+{
+  kLIZARD_M1,
+  kLIZARD_M2,
+  kLIZARD_M3,
+  kLIZARD_M4
+};
+
+static const EMethodID g_Lz4Methods[] =
+{
+  kLZ4
+};
+
+static const EMethodID g_Lz5Methods[] =
+{
+  kLZ5
+};
+// **************** 7-Zip ZS Modification End ****************
 
 static const EMethodID g_7zMethods[] =
 {
@@ -170,6 +261,17 @@ static const EMethodID g_7zMethods[] =
   , kDeflate
   , kDeflate64
   // , kZSTD
+  // **************** 7-Zip ZS Modification Start ****************
+  , kZSTD
+  , kBROTLI
+  , kLZ4
+  , kLZ5
+  , kLIZARD_M1
+  , kLIZARD_M2
+  , kLIZARD_M3
+  , kLIZARD_M4
+  , kFLZMA2
+  // **************** 7-Zip ZS Modification End ****************
   , kCopy
 };
 
@@ -178,7 +280,12 @@ static const EMethodID g_7zSfxMethods[] =
   kCopy,
   kLZMA,
   kLZMA2,
-  kPPMd
+  // **************** 7-Zip ZS Modification Start ****************
+  //kPPMd
+  kPPMd,
+  kFLZMA2,
+  kZSTD
+  // **************** 7-Zip ZS Modification End ****************
 };
 
 static const EMethodID g_ZipMethods[] =
@@ -187,8 +294,15 @@ static const EMethodID g_ZipMethods[] =
   kDeflate64,
   kBZip2,
   kLZMA,
-  kPPMdZip
+  // **************** 7-Zip ZS Modification Start ****************
+  //kPPMdZip
+  // **************** 7-Zip ZS Modification End ****************
   // , kZSTD
+  // **************** 7-Zip ZS Modification Start ****************
+  kPPMdZip,
+  kZSTD,
+  kCopy
+  // **************** 7-Zip ZS Modification End ****************
 };
 
 static const EMethodID g_GZipMethods[] =
@@ -274,16 +388,22 @@ static const CFormatInfo g_Formats[] =
 {
   {
     "",
-    // (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
-    ((UInt32)1 << 10) - 1,
-    // (UInt32)(Int32)-1,
+    // **************** 7-Zip ZS Modification Start ****************
+    //// (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    //((UInt32)1 << 10) - 1,
+    //// (UInt32)(Int32)-1,
+    (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    // **************** 7-Zip ZS Modification End ****************
     0, NULL,
     kFF_MultiThread | kFF_MemUse
   },
   {
     "7z",
-    // (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
-    (1 << 10) - 1,
+    // **************** 7-Zip ZS Modification Start ****************
+    //// (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    //(1 << 10) - 1,
+    (1 << 0) | (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    // **************** 7-Zip ZS Modification End ****************
     METHODS_PAIR(g_7zMethods),
     kFF_Filter | kFF_Solid | kFF_MultiThread | kFF_Encrypt |
     kFF_EncryptFileNames | kFF_MemUse | kFF_SFX
@@ -311,8 +431,11 @@ static const CFormatInfo g_Formats[] =
   },
   {
     "xz",
-    // (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
-    (1 << 10) - 1 - (1 << 0), // store (1 << 0) is not supported
+    // **************** 7-Zip ZS Modification Start ****************
+    //// (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9),
+    //(1 << 10) - 1 - (1 << 0), // store (1 << 0) is not supported
+    (1 << 1) | (1 << 3) | (1 << 5) | (1 << 7) | (1 << 9), // store (1 << 0) is not supported
+    // **************** 7-Zip ZS Modification End ****************
     METHODS_PAIR(g_XzMethods),
     kFF_Solid | kFF_MultiThread | kFF_MemUse
   },
@@ -335,6 +458,38 @@ static const CFormatInfo g_Formats[] =
     0
   },
 */
+  // **************** 7-Zip ZS Modification Start ****************
+  {
+    "zstd",
+    (1 << 1) | (1 << 3) | (1 << 11) | (1 << 19) | (1 << 20),
+    METHODS_PAIR(g_ZstdMethods),
+    kFF_MultiThread
+  },
+  {
+    "Brotli",
+    (1 << 0) | (1 << 1) | (1 << 3) | (1 << 6) | (1 << 9) | (1 << 11),
+    METHODS_PAIR(g_BrotliMethods),
+    kFF_MultiThread
+  },
+  {
+    "Lizard",
+    (1 << 10) | (1 << 13) | (1 << 15) | (1 << 17) | (1 << 19),
+    METHODS_PAIR(g_LizardMethods),
+    kFF_MultiThread
+  },
+  {
+    "LZ4",
+    (1 << 1) | (1 << 3) | (1 << 6) | (1 << 9) | (1 << 12),
+    METHODS_PAIR(g_Lz4Methods),
+    kFF_MultiThread
+  },
+  {
+    "LZ5",
+    (1 << 1) | (1 << 3) | (1 << 7) | (1 << 11) | (1 << 15),
+    METHODS_PAIR(g_Lz5Methods),
+    kFF_MultiThread
+  },
+  // **************** 7-Zip ZS Modification End ****************
   {
     "Tar",
     (1 << 0),
@@ -356,6 +511,19 @@ static const CFormatInfo g_Formats[] =
     0
   }
 };
+
+// **************** 7-Zip ZS Modification Start ****************
+static const signed char g_LevelRanges[][2] = {
+  { -64, 22 }, // zstd
+  { 0, 11 }, // brotli
+  { 1, 12 }, // lz4
+  { 1, 15 }, // lz5
+  { 10, 19 }, // lizard m1
+  { 20, 29 }, // lizard m2
+  { 30, 39 }, // lizard m3
+  { 40, 49 }, // lizard m4
+};
+// **************** 7-Zip ZS Modification End ****************
 
 static bool IsMethodSupportedBySfx(int methodID)
 {
@@ -693,6 +861,9 @@ static void Set_Final_BoolPairs(
 
 void CCompressDialog::FormatChanged(bool isChanged)
 {
+  // **************** 7-Zip ZS Modification Start ****************
+  SetMethod();
+  // **************** 7-Zip ZS Modification End ****************
   SetLevel();
   SetSolidBlockSize();
   SetParams();
@@ -1247,10 +1418,10 @@ void CCompressDialog::OnOK()
   CModalDialog::OnOK();
 }
 
-#define kHelpTopic         "fm/plugins/7-zip/add.htm"
-#define kHelpTopic_Options "fm/plugins/7-zip/add.htm#options"
-
 // **************** NanaZip Modification Start ****************
+//#define kHelpTopic         "fm/plugins/7-zip/add.htm"
+//#define kHelpTopic_Options "fm/plugins/7-zip/add.htm#options"
+//
 //void CCompressDialog::OnHelp()
 //{
 //  ShowHelpWindow(kHelpTopic);
@@ -1347,7 +1518,9 @@ bool CCompressDialog::OnCommand(unsigned code, unsigned itemID, LPARAM lParam)
       {
         Get_FormatOptions().ResetForLevelChange();
 
-        SetMethod(); // call it if level changes method
+        // **************** 7-Zip ZS Modification Start ****************
+        //SetMethod(); // call it if level changes method
+        // **************** 7-Zip ZS Modification End ****************
 
         // call the following if level change keeps old method
         /*
@@ -1357,6 +1530,9 @@ bool CCompressDialog::OnCommand(unsigned code, unsigned itemID, LPARAM lParam)
           MethodChanged();
         }
         */
+        // **************** 7-Zip ZS Modification Start ****************
+        MethodChanged();
+        // **************** 7-Zip ZS Modification End ****************
 
         SetSolidBlockSize();
         SetNumThreads();
@@ -1367,7 +1543,14 @@ bool CCompressDialog::OnCommand(unsigned code, unsigned itemID, LPARAM lParam)
       
       case IDC_COMPRESS_METHOD:
       {
+        // **************** 7-Zip ZS Modification Start ****************
+        ComprMethodChanged();
+        // **************** 7-Zip ZS Modification End ****************
         MethodChanged();
+        // **************** 7-Zip ZS Modification Start ****************
+        SetLevel2();
+        EnableMultiCombo(IDC_COMPRESS_LEVEL);
+        // **************** 7-Zip ZS Modification End ****************
         SetSolidBlockSize();
         SetNumThreads();
         CheckSFXNameChange();
@@ -1557,16 +1740,31 @@ unsigned CCompressDialog::GetStaticFormatIndex()
 
 void CCompressDialog::SetNearestSelectComboBox(NControl::CComboBox &comboBox, UInt32 value)
 {
+  // **************** 7-Zip ZS Modification Start ****************
+  // exact:
+  for (int i = comboBox.GetCount() - 1; i >= 0; i--)
+    if ((UInt32)comboBox.GetItemData(i) == value)
+    {
+      comboBox.SetCurSel(i);
+      return;
+    }
+  // nearest:
+  // **************** 7-Zip ZS Modification End ****************
   for (int i = comboBox.GetCount() - 1; i >= 0; i--)
     if ((UInt32)comboBox.GetItemData(i) <= value)
     {
       comboBox.SetCurSel(i);
       return;
     }
+  // **************** 7-Zip ZS Modification Start ****************
+  // fallback:
+  // **************** 7-Zip ZS Modification End ****************
   if (comboBox.GetCount() > 0)
     comboBox.SetCurSel(0);
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void CCompressDialog::SetLevel2()
 {
   m_Level.ResetContent();
@@ -1614,6 +1812,121 @@ void CCompressDialog::SetLevel2()
   }
   SetNearestSelectComboBox(m_Level, level);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void CCompressDialog::SetLevel2()
+{
+  const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
+  const CArcInfoEx &ai = Get_ArcInfoEx();
+  UInt32 LevelsMask = fi.LevelsMask;
+  Int32 LevelsStart = (LevelsMask & 1) ? 0 : 1;
+  Int32 LevelsEnd = 9;
+  bool LevelsEndByMask = true;
+  int id = -1;
+  if (ai.LevelsMask != 0xFFFFFFFF)
+    LevelsMask = ai.LevelsMask;
+  else
+  {
+    id = GetMethodID();
+    if (id == kCopy) {
+      LevelsStart = 0;
+      LevelsEnd = 0;
+      LevelsEndByMask = false;
+      LevelsMask = 0;
+    } else if (id >= kZSTD && id <= kLIZARD_M4) {
+      auto& r = g_LevelRanges[id - kZSTD];
+      LevelsStart = r[0];
+      LevelsEnd = r[1];
+      LevelsEndByMask = false;
+      if (id == kZSTD) {
+        LevelsMask = g_Formats[6].LevelsMask;
+      } else if (id == kBROTLI)
+        LevelsMask = g_Formats[7].LevelsMask;
+      else if (id >= kLIZARD_M1 && id <= kLIZARD_M4)
+        LevelsMask = g_Formats[8].LevelsMask;
+      else if (id == kLZ4)
+        LevelsMask = g_Formats[9].LevelsMask;
+      else if (id == kLZ5)
+        LevelsMask = g_Formats[10].LevelsMask;
+    }
+  }
+  UInt32 level = m_Level.GetCount() > 0 ? (UInt32)m_Level.GetItemData_of_CurSel() : (LevelsEnd - LevelsStart + 1) / 2;
+  m_Level.ResetContent();
+  {
+    int index = FindRegistryFormat(ai.Name);
+    if (index >= 0)
+    {
+      const NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[index];
+      if ( (fo.Level <= (UInt32)LevelsEnd) || (id != kCopy && fo.Level == Z7_ZSTD_ULTIMATE_LEV)
+        || (id == kZSTD && fo.Level > Z7_ZSTD_FAST_LEV_INC && fo.Level <= Z7_ZSTD_FAST_LEV_INC + 64)
+      ) {
+        level = (Int32)fo.Level;
+      } else {
+        level = (Int32)(LevelsEnd - (LevelsStart > 0 ? LevelsStart : 0) + 1) / 2;
+      }
+    }
+  }
+
+  const WCHAR t[] = L"Level ";
+  const WCHAR tf[] = L"Fast ";
+  for (Int32 i = LevelsStart, ir, j = 0; i <= LevelsEnd; i++)
+  {
+    if (!i && id == kZSTD) continue;
+
+    // lizard needs extra handling
+    if (GetMethodID() >= kLIZARD_M1 && GetMethodID() <= kLIZARD_M4) {
+      ir = i;
+      if (ir % 10 == 0) j = 0;
+      while (ir > 19) { ir -= 10; }
+    } else {
+      ir = i;
+    }
+
+    // max reached
+    if (LevelsEndByMask && LevelsMask < (UInt32)(1 << ir))
+      break;
+
+    char buf[20+1];
+    UString s = i >= 0 ? t : tf;
+    ConvertInt64ToString(i, buf);
+    s += buf;
+    if (ir < 0 && id == kZSTD) {
+      int lid = 0;
+      switch (-ir) {
+        case 64: lid = IDS_METHOD_ULTIMATEFAST; break;
+        case  7: lid = IDS_METHOD_ULTRAFAST;    break;
+        case  1: lid = IDS_METHOD_SUPERFAST;    break;
+      }
+      if (lid) {
+        s += L" (";
+        s += LangString(lid);
+        s += L")";
+      }
+    }
+    else
+    if (ir >= 0 && (LevelsMask & (1 << ir)) && j < Z7_ARRAY_SIZE(g_Levels))
+    {
+      // skip level 0 (store) if not supported
+      if (j == 0 && ir != 0) j = 1;
+      s += L" (";
+      s += LangString(g_Levels[j++]);
+      s += L")";
+    }
+    int index = (int)m_Level.AddString(s);
+    m_Level.SetItemData(index, i >= 0 ? i : Z7_ZSTD_FAST_LEV_INC - i);
+  }
+  if (m_Level.GetCount() > 1) { // ultimate level (max possible or zstd --max if allowed)
+    UString s;
+    if (id == kZSTD) {
+      s = LangString(IDS_METHOD_ADV_MAX);
+    } else {
+      s = LangString(IDS_METHOD_HIGHEST);
+    }
+    int index = (int)m_Level.AddString(s);
+    m_Level.SetItemData(index, Z7_ZSTD_ULTIMATE_LEV);
+  }
+  SetNearestSelectComboBox(m_Level, level);
+}
+// **************** 7-Zip ZS Modification End ****************
 
 
 static LRESULT ComboBox_AddStringAscii(NControl::CComboBox &cb, const char *s)
@@ -1636,20 +1949,30 @@ void CCompressDialog::SetMethod2(int keepMethodId)
   const CArcInfoEx &ai = Get_ArcInfoEx();
   if (GetLevel() == 0 && !ai.Flags_HashHandler())
   {
-    if (!ai.Is_Tar() &&
+    // **************** 7-Zip ZS Modification Start ****************
+    /*if (!ai.Is_Tar() &&
         !ai.Is_Zstd())
-    {
+    {*/
+    // **************** 7-Zip ZS Modification End ****************
       MethodChanged();
       return;
-    }
+    // **************** 7-Zip ZS Modification Start ****************
+    //}
+    // **************** 7-Zip ZS Modification End ****************
   }
   UString defaultMethod;
+  // **************** 7-Zip ZS Modification Start ****************
+  int defaultLevel = 5;
+  // **************** 7-Zip ZS Modification End ****************
   {
     const int index = FindRegistryFormat(ai.Name);
     if (index >= 0)
     {
       const NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[index];
       defaultMethod = fo.Method;
+      // **************** 7-Zip ZS Modification Start ****************
+      defaultLevel = fo.Level;
+      // **************** 7-Zip ZS Modification End ****************
     }
   }
   const bool isSfx = IsSFX();
@@ -1660,11 +1983,17 @@ void CCompressDialog::SetMethod2(int keepMethodId)
   for (unsigned m = 0;; m++)
   {
     int methodID;
-    const char *method;
+    // **************** 7-Zip ZS Modification Start ****************
+    //const char *method;
+    const char *method, *methodLong;
+    // **************** 7-Zip ZS Modification End ****************
     if (m < fi.NumMethods)
     {
       methodID = fi.MethodIDs[m];
       method = kMethodsNames[methodID];
+      // **************** 7-Zip ZS Modification Start ****************
+      methodLong = kMethodsNamesLong[methodID];
+      // **************** 7-Zip ZS Modification End ****************
       if (is7z)
       if (methodID == kCopy
           || methodID == kDeflate
@@ -1681,12 +2010,18 @@ void CCompressDialog::SetMethod2(int keepMethodId)
         break;
       methodID = (int)(Z7_ARRAY_SIZE(kMethodsNames) + extIndex);
       method = ExternalMethods[extIndex].Ptr();
+      // **************** 7-Zip ZS Modification Start ****************
+      methodLong = method;
+      // **************** 7-Zip ZS Modification End ****************
     }
     if (isSfx)
       if (!IsMethodSupportedBySfx(methodID))
         continue;
 
-    AString s (method);
+    // **************** 7-Zip ZS Modification Start ****************
+    //AString s(method);
+    AString s(methodLong);
+    // **************** 7-Zip ZS Modification End ****************
     int writtenMethodId = methodID;
     if (m == 0)
     {
@@ -1705,10 +2040,44 @@ void CCompressDialog::SetMethod2(int keepMethodId)
     if ((defaultMethod.IsEqualTo_Ascii_NoCase(method) || m == 0) && !weUseSameMethod)
       m_Method.SetCurSel(itemIndex);
   }
-  
-  if (!weUseSameMethod)
+
+  // **************** 7-Zip ZS Modification Start ****************
+  //if (!weUseSameMethod)
+  //  MethodChanged();
+  if (!weUseSameMethod) {
+    // Lizard :/
+    if (defaultMethod.IsEqualTo_Ascii_NoCase("lizard") && keepMethodId == -1) {
+      if (defaultLevel >= 10 && defaultLevel <= 19) SetNearestSelectComboBox(m_Method, kLIZARD_M1);
+      else
+      if (defaultLevel >= 20 && defaultLevel <= 29) SetNearestSelectComboBox(m_Method, kLIZARD_M2);
+      else
+      if (defaultLevel >= 30 && defaultLevel <= 39) SetNearestSelectComboBox(m_Method, kLIZARD_M3);
+      else
+      if (defaultLevel >= 40 && defaultLevel <= 49) SetNearestSelectComboBox(m_Method, kLIZARD_M4);
+    }
+    ComprMethodChanged();
     MethodChanged();
+  }
+  // **************** 7-Zip ZS Modification End ****************
 }
+
+// **************** 7-Zip ZS Modification Start ****************
+void CCompressDialog::ComprMethodChanged()
+{
+  const CArcInfoEx &ai = Get_ArcInfoEx();
+  const int index = FindRegistryFormat(ai.Name);
+  if (index >= 0)
+  {
+    UString compMeth;
+    GetMethodSpec(compMeth);
+    NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[index];
+    if (!compMeth.IsEqualTo_NoCase(fo.Method)) {
+      fo.Method = compMeth;
+      m_RegistryInfo.LoadAndUpdateFormatByMethod(fo);
+    }
+  }
+}
+// **************** 7-Zip ZS Modification End ****************
 
 
 
@@ -1862,6 +2231,39 @@ int CCompressDialog::AddDict_Chain(size_t size)
 }
 */
 
+// **************** 7-Zip ZS Modification Start ****************
+#define FL2_MAX_7Z_CLEVEL 9
+#define MATCH_BUFFER_SHIFT 8
+#define MATCH_BUFFER_ELBOW_BITS 17
+#define MATCH_BUFFER_ELBOW (1UL << MATCH_BUFFER_ELBOW_BITS)
+#define RMF_BUILDER_SIZE (8 * 0x40100U)
+
+#define MB *(1U<<20)
+
+struct FL2_compressionParameters
+{
+  UInt32   dictionarySize;   /* largest match distance : larger == more compression, more memory needed during decompression; > 64Mb == more memory per byte, slower */
+  unsigned chainLog;         /* HC3 sliding window : larger == more compression, slower; hybrid mode only (ultra) */
+  unsigned fastLength;       /* acceptable match size for parser : larger == more compression, slower; fast bytes parameter from 7-Zip */
+  bool isUltra;
+};
+
+static const FL2_compressionParameters FL2_7zCParameters[FL2_MAX_7Z_CLEVEL + 1] = {
+    { 0,       0,   0, false },
+    { 1 MB,    7,  32, false },
+    { 2 MB,    7,  32, false },
+    { 2 MB,    7,  32, false },
+    { 4 MB,    7,  32, false },
+    { 16 MB,   9,  48, true },
+    { 32 MB,  10,  64, true },
+    { 64 MB,  11,  96, true },
+    { 64 MB,  12, 273, true },
+    { 128 MB, 14, 273, true },
+};
+
+#undef MB
+// **************** 7-Zip ZS Modification End ****************
+
 void CCompressDialog::SetDictionary2()
 {
   m_Dictionary.ResetContent();
@@ -1888,7 +2290,10 @@ void CCompressDialog::SetDictionary2()
   }
   
   const int methodID = GetMethodID();
-  const UInt32 level = GetLevel2();
+  // **************** 7-Zip ZS Modification Start ****************
+  //const UInt32 level = GetLevel2();
+  UInt32 level = GetLevel2();
+  // **************** 7-Zip ZS Modification End ****************
 
   {
     RECT r, rLabel;
@@ -2169,6 +2574,39 @@ void CCompressDialog::SetDictionary2()
       m_Dictionary.SetCurSel(0);
       break;
     }
+    // **************** 7-Zip ZS Modification Start ****************
+    case kFLZMA2:
+    {
+      static const UInt32 kMinDicSize = (1 << 20);
+      level += !level;
+      if (level > FL2_MAX_7Z_CLEVEL)
+        level = FL2_MAX_7Z_CLEVEL;
+      if (defaultDict == (UInt32)(Int32)-1)
+        defaultDict = FL2_7zCParameters[level].dictionarySize;
+
+      m_Dictionary.SetCurSel(0);
+
+      for (unsigned i = 20; i <= 31; i++) {
+        UInt32 dict = (UInt32)1 << i;
+
+        if (dict >
+          #ifdef MY_CPU_64BIT
+            (1 << 30)
+          #else
+            (1 << 27)
+          #endif
+          )
+          continue;
+
+        AddDict(dict);
+        //const UInt64 memUsage = GetMemoryUsageComp_Threads_Dict(dict);
+        if (dict <= defaultDict /*&& (!maxRamSize_Defined || memUsage <= maxRamSize)*/)
+          m_Dictionary.SetCurSel(m_Dictionary.GetCount() - 1);
+      }
+
+      break;
+    }
+    // **************** 7-Zip ZS Modification End ****************
   }
 }
 
@@ -2248,8 +2686,17 @@ void CCompressDialog::SetOrder2()
   {
     case kLZMA:
     case kLZMA2:
+    // **************** 7-Zip ZS Modification Start ****************
+    case kFLZMA2:
+    // **************** 7-Zip ZS Modification End ****************
     {
-      _auto_Order = (level < 7 ? 32 : 64);
+      // **************** 7-Zip ZS Modification Start ****************
+      //_auto_Order = (level < 7 ? 32 : 64);
+      if (methodID == kFLZMA2)
+        _auto_Order = FL2_7zCParameters[level].fastLength;
+      else
+        _auto_Order = (level < 7 ? 32 : 64);
+      // **************** 7-Zip ZS Modification End ****************
       int curSel = AddOrder_Auto();
       for (unsigned i = 2 * 2; i < 8 * 2; i++)
       {
@@ -2612,6 +3059,17 @@ void CCompressDialog::SetNumThreads2()
     numAlgoThreadsMax = 256 * 2;
   else switch (methodID)
   {
+    // **************** 7-Zip ZS Modification Start ****************
+    case kZSTD: numAlgoThreadsMax = 128; break;
+    case kBROTLI: numAlgoThreadsMax = 128; break;
+    case kLZ4: numAlgoThreadsMax = 128; break;
+    case kLZ5: numAlgoThreadsMax = 128; break;
+    case kLIZARD_M1: numAlgoThreadsMax = 128; break;
+    case kLIZARD_M2: numAlgoThreadsMax = 128; break;
+    case kLIZARD_M3: numAlgoThreadsMax = 128; break;
+    case kLIZARD_M4: numAlgoThreadsMax = 128; break;
+    case kFLZMA2: numAlgoThreadsMax = 128; break;
+    // **************** 7-Zip ZS Modification End ****************
     case kLZMA: numAlgoThreadsMax = 2; break;
     case kLZMA2: numAlgoThreadsMax = 256; break;
     case kBZip2: numAlgoThreadsMax = 64; break;
@@ -2903,7 +3361,10 @@ UInt64 CCompressDialog::GetMemoryUsage_Threads_Dict_DecompMem(UInt32 numThreads,
 {
   decompressMemory = (UInt64)(Int64)-1;
 
-  const UInt32 level = GetLevel2();
+  // **************** 7-Zip ZS Modification Start ****************
+  //const UInt32 level = GetLevel2();
+  UInt32 level = GetLevel2();
+  // **************** 7-Zip ZS Modification End ****************
   if (level == 0 && !Get_ArcInfoEx().Is_Zstd())
   {
     decompressMemory = (1 << 20);
@@ -3033,6 +3494,33 @@ UInt64 CCompressDialog::GetMemoryUsage_Threads_Dict_DecompMem(UInt32 numThreads,
       return size;
     }
     */
+    // **************** 7-Zip ZS Modification Start ****************
+    case kFLZMA2:
+    {
+      const UInt32 dict = (dict64 >= kLzmaMaxDictSize ? kLzmaMaxDictSize : (UInt32)dict64);
+      if (level > FL2_MAX_7Z_CLEVEL)
+        level = FL2_MAX_7Z_CLEVEL;
+      /* dual buffer is enabled in Lzma2Encoder.cpp so size is dict * 6 */
+      size += dict * 6 + (1UL << 18) * numThreads;
+      UInt32 bufSize = dict >> MATCH_BUFFER_SHIFT;
+      if (bufSize > MATCH_BUFFER_ELBOW) {
+        UInt32 extra = 0;
+        unsigned n = MATCH_BUFFER_ELBOW_BITS - 1;
+        for (; (4UL << n) <= bufSize; ++n)
+          extra += MATCH_BUFFER_ELBOW >> 4;
+        if ((3UL << n) <= bufSize)
+          extra += MATCH_BUFFER_ELBOW >> 5;
+        bufSize = MATCH_BUFFER_ELBOW + extra;
+      }
+      size += (bufSize * 12 + RMF_BUILDER_SIZE) * numThreads;
+      if (dict > (UInt32(1) << 26))
+        size += dict;
+      if (FL2_7zCParameters[level].isUltra)
+        size += (UInt32(4) << 14) + (UInt32(4) << FL2_7zCParameters[level].chainLog);
+      decompressMemory = dict + (2 << 20);
+      return size;
+    }
+    // **************** 7-Zip ZS Modification End ****************
     
     case kPPMd:
     {
@@ -3310,7 +3798,10 @@ void CCompressDialog::SaveOptionsInMem()
   */
 
   fo.Order = GetOrderSpec();
-  fo.Method = GetMethodSpec();
+  // **************** 7-Zip ZS Modification Start ****************
+  // fo.Method = GetMethodSpec();
+  GetMethodSpec(fo.Method);
+  // **************** 7-Zip ZS Modification End ****************
   fo.EncryptionMethod = GetEncryptionMethodSpec();
   fo.NumThreads = GetNumThreadsSpec();
   fo.BlockLogSize = GetBlockSizeSpec();

@@ -16,7 +16,10 @@ extern bool g_DisableUserQuestions;
 void ShowErrorMessage(HWND window, LPCWSTR message)
 {
   if (!g_DisableUserQuestions)
-    ::MessageBoxW(window, message, L"7-Zip", MB_OK | MB_ICONSTOP);
+    // **************** NanaZip Modification Start ****************
+    //::MessageBoxW(window, message, L"7-Zip", MB_OK | MB_ICONSTOP);
+    ::MessageBoxW(window, message, L"NanaZip", MB_OK | MB_ICONSTOP);
+    // **************** NanaZip Modification End ****************
 }
 
 void ShowErrorMessageHwndRes(HWND window, UInt32 resID)

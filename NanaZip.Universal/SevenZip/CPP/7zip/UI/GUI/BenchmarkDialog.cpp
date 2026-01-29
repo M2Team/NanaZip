@@ -27,7 +27,10 @@
 #include "../FileManager/LangUtils.h"
 #include "../FileManager/resourceGui.h"
 
-#include "../../MyVersion.h"
+// **************** NanaZip Modification Start ****************
+//#include "../../MyVersion.h"
+#include <Mile.Project.Version.h>
+// **************** NanaZip Modification End ****************
 
 #include "../Common/Bench.h"
 
@@ -371,7 +374,10 @@ public:
   }
   void MessageBoxError(LPCWSTR message)
   {
-    MessageBoxW(*this, message, L"7-Zip", MB_ICONERROR);
+    // **************** NanaZip Modification Start ****************
+    //MessageBoxW(*this, message, L"7-Zip", MB_ICONERROR);
+    MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
+    // **************** NanaZip Modification End ****************
   }
   void MessageBoxError_Status(LPCWSTR message)
   {
@@ -523,7 +529,10 @@ bool CBenchmarkDialog::OnInit()
       SetItemTextA(IDT_BENCH_CPU_FEATURE, s);
     }
 
-    s = "7-Zip " MY_VERSION_CPU;
+    // **************** NanaZip Modification Start ****************
+    //s = "7-Zip " MY_VERSION_CPU;
+    s = "NanaZip " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")";
+    // **************** NanaZip Modification End ****************
     SetItemTextA(IDT_BENCH_VER, s);
   }
 
@@ -1234,7 +1243,10 @@ bool CBenchmarkDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
           if (res == S_FALSE)
             m = "Decoding error";
           else if (res == CLASS_E_CLASSNOTAVAILABLE)
-            m = "Can't find 7z.dll";
+            // **************** NanaZip Modification Start ****************
+            //m = "Can't find 7z.dll";
+            m = "Can't find NanaZip.Core.dll";
+            // **************** NanaZip Modification End ****************
           else
             m = HResultToMessage(res);
           MessageBoxError_Status(m);
@@ -1896,7 +1908,10 @@ HRESULT Benchmark(
   if (bd.TotalMode)
   {
     // bd.Bench2Text.Empty();
-    bd.Bench2Text = "7-Zip " MY_VERSION_CPU;
+    // **************** NanaZip Modification Start ****************
+    //bd.Bench2Text = "7-Zip " MY_VERSION_CPU;
+    bd.Bench2Text = "NanaZip " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")";
+    // **************** NanaZip Modification End ****************
     // bd.Bench2Text.Add_Char((char)0xD);
     bd.Bench2Text.Add_LF();
   }

@@ -9,9 +9,11 @@
 #include "../../../Windows/FileDir.h"
 #include "../../../Windows/ResourceString.h"
 
-#ifndef Z7_NO_REGISTRY
-#include "../FileManager/HelpUtils.h"
-#endif
+// **************** NanaZip Modification Start ****************
+//#ifndef Z7_NO_REGISTRY
+//#include "../FileManager/HelpUtils.h"
+//#endif
+// **************** NanaZip Modification End ****************
 
 
 #include "../FileManager/BrowseDialog.h"
@@ -200,23 +202,26 @@ bool CExtractDialog::OnInit()
   #ifndef Z7_SFX
 
   // **************** NanaZip Modification Start ****************
+  #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
+  if (_info.SplitDest.Val)
+  {
+    CheckButton(IDX_EXTRACT_NAME_ENABLE, true);
+    UString pathName;
+    SplitPathToParts_Smart(DirPath, pathPrefix, pathName);
+    if (pathPrefix.IsEmpty())
+      pathPrefix = pathName;
+    else
+      _pathName.SetText(pathName);
+  }
+  else
+    ShowItem_Bool(IDE_EXTRACT_NAME, false);
+  #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
   UString pathName;
   SplitPathToParts_Smart(DirPath, pathPrefix, pathName);
   if (pathPrefix.IsEmpty())
     pathPrefix = pathName;
   else
     _pathName.SetText(pathName);
-
-  //if (_info.SplitDest.Val)
-  //{
-  //  CheckButton(IDX_EXTRACT_NAME_ENABLE, true);
-  //  UString pathName;
-  //  SplitPathToParts_Smart(DirPath, pathPrefix, pathName);
-  //  if (pathPrefix.IsEmpty())
-  //    pathPrefix = pathName;
-  //  else
-  //    _pathName.SetText(pathName);
-  //}
 
   if (_info.SplitDest.Val)
     CheckButton(IDX_EXTRACT_NAME_ENABLE, true);
@@ -441,11 +446,13 @@ void CExtractDialog::OnOK()
   CModalDialog::OnOK();
 }
 
-#ifndef Z7_NO_REGISTRY
-#define kHelpTopic "fm/plugins/7-zip/extract.htm"
-void CExtractDialog::OnHelp()
-{
-  ShowHelpWindow(kHelpTopic);
-  CModalDialog::OnHelp();
-}
-#endif
+// **************** NanaZip Modification Start ****************
+//#ifndef Z7_NO_REGISTRY
+//#define kHelpTopic "fm/plugins/7-zip/extract.htm"
+//void CExtractDialog::OnHelp()
+//{
+//  ShowHelpWindow(kHelpTopic);
+//  CModalDialog::OnHelp();
+//}
+//#endif
+// **************** NanaZip Modification End ****************

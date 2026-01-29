@@ -35,6 +35,10 @@ namespace NExtract
     CBoolPair NtSecurity;
     CBoolPair ShowPassword;
 
+    // **************** 7-Zip ZS Modification Start ****************
+    CBoolPair OpnTrgFold;
+    // **************** 7-Zip ZS Modification End ****************
+
     UStringVector Paths;
 
     void Save() const;
@@ -153,6 +157,9 @@ namespace NCompression
 
     void Save() const;
     void Load();
+    // **************** 7-Zip ZS Modification Start ****************
+    void LoadAndUpdateFormatByMethod(CFormatOptions& fo);
+    // **************** 7-Zip ZS Modification End ****************
   };
 }
 

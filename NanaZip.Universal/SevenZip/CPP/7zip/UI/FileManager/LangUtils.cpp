@@ -27,12 +27,22 @@ static NSynchronization::CCriticalSection g_CriticalSection;
 bool LangOpen(CLang &lang, CFSTR fileName);
 bool LangOpen(CLang &lang, CFSTR fileName)
 {
-  return lang.Open(fileName, "7-Zip");
+  // **************** NanaZip Modification Start ****************
+  //return lang.Open(fileName, "7-Zip");
+  return lang.Open(fileName, "NanaZip");
+  // **************** NanaZip Modification End ****************
 }
 
 FString GetLangDirPrefix()
 {
+  // **************** NanaZip Modification Start ****************
+  //return NDLL::GetModuleDirPrefix() + FTEXT("Lang") FSTRING_PATH_SEPARATOR;
+#ifdef Z7_SFX
+  return L"";
+#else
   return NDLL::GetModuleDirPrefix() + FTEXT("Lang") FSTRING_PATH_SEPARATOR;
+#endif
+  // **************** NanaZip Modification End ****************
 }
 
 #ifdef Z7_LANG

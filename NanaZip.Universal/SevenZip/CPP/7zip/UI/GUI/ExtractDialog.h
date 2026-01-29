@@ -50,7 +50,7 @@ class CExtractDialog: public NWindows::NControl::CModalDialog
   // int GetFilesMode() const;
   void UpdatePasswordControl();
   #endif
-  
+
   void OnButtonSetPath();
 
   void CheckButton_TwoBools(UINT id, const CBoolPair &b1, const CBoolPair &b2);
@@ -58,7 +58,7 @@ class CExtractDialog: public NWindows::NControl::CModalDialog
   virtual bool OnInit() Z7_override;
   virtual bool OnButtonClicked(unsigned buttonID, HWND buttonHWND) Z7_override;
   virtual void OnOK() Z7_override;
-  
+
   #ifndef Z7_NO_REGISTRY
 
   // **************** NanaZip Modification Start ****************
@@ -66,9 +66,9 @@ class CExtractDialog: public NWindows::NControl::CModalDialog
   // **************** NanaZip Modification End ****************
 
   NExtract::CInfo _info;
-  
+
   #endif
-  
+
   bool IsShowPasswordChecked() const { return IsButtonCheckedBool(IDX_PASSWORD_SHOW); }
 public:
   // bool _enableSelectedFilesButton;
@@ -89,6 +89,9 @@ public:
   #ifndef Z7_SFX
   // CBoolPair AltStreams;
   CBoolPair NtSecurity;
+  // **************** 7-Zip ZS Modification Start ****************
+  CBoolPair OpnTrgFold;
+  // **************** 7-Zip ZS Modification End ****************
   #endif
 
   CBoolPair ElimDup;

@@ -11,7 +11,10 @@
 using namespace NWindows;
 using namespace NRegistry;
 
-#define REG_PATH_7Z TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("7-Zip")
+// **************** NanaZip Modification Start ****************
+//#define REG_PATH_7Z TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("7-Zip")
+#define REG_PATH_7Z TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("NanaZip")
+// **************** NanaZip Modification End ****************
 
 static LPCTSTR const kCUBasePath = REG_PATH_7Z;
 static LPCTSTR const kCU_FMPath = REG_PATH_7Z TEXT(STRING_PATH_SEPARATOR) TEXT("FM");
@@ -36,6 +39,15 @@ static LPCTSTR const kShowSystemMenu = TEXT("ShowSystemMenu");
 
 // static LPCTSTR const kLockMemoryAdd = TEXT("LockMemoryAdd");
 static LPCTSTR const kLargePages = TEXT("LargePages");
+
+// **************** 7-Zip ZS Modification Start ****************
+// they default to off (0) in 7-Zip ZS /TR
+static LPCTSTR const kArcHistory = TEXT("WantArcHistory");
+static LPCTSTR const kPathHistory = TEXT("WantPathHistory");
+static LPCTSTR const kCopyHistory = TEXT("WantCopyHistory");
+static LPCTSTR const kFolderHistory = TEXT("WantFolderHistory");
+static LPCTSTR const kLowercaseHashes = TEXT("LowercaseHashes");
+// **************** 7-Zip ZS Modification End ****************
 
 static LPCTSTR const kFlatViewName = TEXT("FlatViewArc");
 // static LPCTSTR const kShowDeletedFiles = TEXT("ShowDeleted");
@@ -92,6 +104,19 @@ static bool Read7ZipOption(LPCTSTR value, bool defaultValue)
   return defaultValue;
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+static bool ReadFMOption(LPCTSTR value, bool enabled=false)
+{
+  CKey key;
+  if (key.Open(HKEY_CURRENT_USER, kCU_FMPath, KEY_READ) == ERROR_SUCCESS)
+  {
+    if (key.QueryValue(value, enabled) == ERROR_SUCCESS)
+      return enabled;
+  }
+  return enabled;
+}
+// **************** 7-Zip ZS Modification End ****************
+
 static void ReadOption(CKey &key, LPCTSTR name, bool &dest)
 {
   key.GetValue_bool_IfOk(name, dest);
@@ -126,6 +151,13 @@ void CFmSettings::Save() const
   SaveOption(kShowGrid, ShowGrid);
   SaveOption(kSingleClick, SingleClick);
   SaveOption(kAlternativeSelection, AlternativeSelection);
+  // **************** 7-Zip ZS Modification Start ****************
+  SaveOption(kArcHistory, ArcHistory);
+  SaveOption(kPathHistory, PathHistory);
+  SaveOption(kCopyHistory, CopyHistory);
+  SaveOption(kFolderHistory, FolderHistory);
+  SaveOption(kLowercaseHashes, LowercaseHashes);
+  // **************** 7-Zip ZS Modification End ****************
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
@@ -144,6 +176,13 @@ void CFmSettings::Load()
   ShowGrid = false;
   SingleClick = false;
   AlternativeSelection = false;
+  // **************** 7-Zip ZS Modification Start ****************
+  ArcHistory = true;
+  PathHistory = true;
+  CopyHistory = true;
+  FolderHistory = true;
+  LowercaseHashes = false;
+  // **************** 7-Zip ZS Modification End ****************
   // Underline = false;
 
   ShowSystemMenu = false;
@@ -157,6 +196,13 @@ void CFmSettings::Load()
     ReadOption(key, kShowGrid, ShowGrid);
     ReadOption(key, kSingleClick, SingleClick);
     ReadOption(key, kAlternativeSelection, AlternativeSelection);
+    // **************** 7-Zip ZS Modification Start ****************
+    ReadOption(key, kArcHistory, ArcHistory);
+    ReadOption(key, kPathHistory, PathHistory);
+    ReadOption(key, kCopyHistory, CopyHistory);
+    ReadOption(key, kFolderHistory, FolderHistory);
+    ReadOption(key, kLowercaseHashes, LowercaseHashes);
+    // **************** 7-Zip ZS Modification End ****************
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );
@@ -169,6 +215,14 @@ void CFmSettings::Load()
 
 void SaveLockMemoryEnable(bool enable) { Save7ZipOption(kLargePages, enable); }
 bool ReadLockMemoryEnable() { return Read7ZipOption(kLargePages, false); }
+
+// **************** 7-Zip ZS Modification Start ****************
+bool WantArcHistory() { return ReadFMOption(kArcHistory, true); }
+bool WantPathHistory() { return ReadFMOption(kPathHistory, true); }
+bool WantCopyHistory() { return ReadFMOption(kCopyHistory, true); }
+bool WantFolderHistory() { return ReadFMOption(kFolderHistory, true); }
+bool WantLowercaseHashes() { return ReadFMOption(kLowercaseHashes); }
+// **************** 7-Zip ZS Modification End ****************
 
 static CSysString GetFlatViewName(UInt32 panelIndex)
 {

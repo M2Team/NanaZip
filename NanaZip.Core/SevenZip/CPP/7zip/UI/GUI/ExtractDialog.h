@@ -61,7 +61,9 @@ class CExtractDialog: public NWindows::NControl::CModalDialog
 
   #ifndef Z7_NO_REGISTRY
 
-  virtual void OnHelp() Z7_override;
+  // **************** NanaZip Modification Start ****************
+  //virtual void OnHelp() Z7_override;
+  // **************** NanaZip Modification End ****************
 
   NExtract::CInfo _info;
 

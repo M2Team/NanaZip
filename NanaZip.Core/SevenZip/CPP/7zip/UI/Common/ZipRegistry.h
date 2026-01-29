@@ -157,6 +157,9 @@ namespace NCompression
 
     void Save() const;
     void Load();
+    // **************** 7-Zip ZS Modification Start ****************
+    void LoadAndUpdateFormatByMethod(CFormatOptions& fo);
+    // **************** 7-Zip ZS Modification End ****************
   };
 }
 

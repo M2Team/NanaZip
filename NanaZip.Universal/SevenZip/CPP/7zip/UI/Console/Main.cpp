@@ -223,7 +223,10 @@ static const char * const kHelpString =
 
 static const char * const kEverythingIsOk = "Everything is Ok";
 static const char * const kUserErrorMessage = "Incorrect command line";
-static const char * const kNoFormats = "7-Zip cannot find the code that works with archives.";
+// **************** NanaZip Modification Start ****************
+//static const char* const kNoFormats = "7-Zip cannot find the code that works with archives.";
+static const char* const kNoFormats = "NanaZip cannot find the code that works with archives.";
+// **************** NanaZip Modification End ****************
 static const char * const kUnsupportedArcTypeMessage = "Unsupported archive type";
 // static const char * const kUnsupportedUpdateArcType = "Can't create archive for that type";
 

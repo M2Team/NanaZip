@@ -297,7 +297,10 @@ HRESULT HashCalcGUI(
 
   const UString title = LangString(IDS_CHECKSUM_CALCULATING);
 
-  t.MainTitle = "7-Zip"; // LangString(IDS_APP_TITLE);
+  // **************** NanaZip Modification Start ****************
+  //t.MainTitle = "7-Zip"; // LangString(IDS_APP_TITLE);
+  t.MainTitle = "NanaZip"; // LangString(IDS_APP_TITLE);
+  // **************** NanaZip Modification End ****************
   t.MainAddTitle = title;
   t.MainAddTitle.Add_Space();
 

@@ -57,7 +57,10 @@ using namespace NFind;
 
 static void MessageBox_Error_Global(HWND wnd, const wchar_t *message)
 {
-  ::MessageBoxW(wnd, message, L"7-Zip", MB_ICONERROR);
+  // **************** NanaZip Modification Start ****************
+  //::MessageBoxW(wnd, message, L"7-Zip", MB_ICONERROR);
+  ::MessageBoxW(wnd, message, L"NanaZip", MB_ICONERROR);
+  // **************** NanaZip Modification End ****************
 }
 
 #ifdef USE_MY_BROWSE_DIALOG

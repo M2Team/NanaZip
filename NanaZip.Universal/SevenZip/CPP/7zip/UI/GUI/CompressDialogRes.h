@@ -73,12 +73,21 @@
 #define IDX_COMPRESS_NT_ALT_STREAMS     4042
 #define IDX_COMPRESS_NT_SECUR           4043
 
+// **************** 7-Zip ZS Modification Start ****************
+#define IDS_METHOD_ULTIMATEFAST         4047
+#define IDS_METHOD_ULTRAFAST            4048
+#define IDS_METHOD_SUPERFAST            4049
+// **************** 7-Zip ZS Modification End ****************
 #define IDS_METHOD_STORE                4050
 #define IDS_METHOD_FASTEST              4051
 #define IDS_METHOD_FAST                 4052
 #define IDS_METHOD_NORMAL               4053
 #define IDS_METHOD_MAXIMUM              4054
 #define IDS_METHOD_ULTRA                4055
+// **************** 7-Zip ZS Modification Start ****************
+#define IDS_METHOD_HIGHEST              4058
+#define IDS_METHOD_ADV_MAX              4059
+// **************** 7-Zip ZS Modification End ****************
 
 #define IDS_COMPRESS_UPDATE_MODE_ADD    4060
 #define IDS_COMPRESS_UPDATE_MODE_UPDATE 4061

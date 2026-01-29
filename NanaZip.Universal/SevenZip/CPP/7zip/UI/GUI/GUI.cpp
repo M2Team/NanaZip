@@ -99,7 +99,10 @@ DECLARE_AND_SET_CLIENT_VERSION_VAR
 static void ErrorMessage(LPCWSTR message)
 {
   if (!g_DisableUserQuestions)
-    MessageBoxW(NULL, message, L"7-Zip", MB_ICONERROR | MB_OK);
+    // **************** NanaZip Modification Start ****************
+    //MessageBoxW(NULL, message, L"7-Zip", MB_ICONERROR | MB_OK);
+    MessageBoxW(NULL, message, L"NanaZip", MB_ICONERROR | MB_OK);
+    // **************** NanaZip Modification End ****************
 }
 
 static void ErrorMessage(const char *s)
@@ -112,7 +115,10 @@ static void ErrorLangMessage(UINT resourceID)
   ErrorMessage(LangString(resourceID));
 }
 
-static const char * const kNoFormats = "7-Zip cannot find the code that works with archives.";
+// **************** NanaZip Modification Start ****************
+//static const char* const kNoFormats = "7-Zip cannot find the code that works with archives.";
+static const char* const kNoFormats = "NanaZip cannot find the code that works with archives.";
+// **************** NanaZip Modification End ****************
 
 static int ShowMemErrorMessage()
 {
@@ -145,7 +151,10 @@ static int Main2()
   #endif
   if (commandStrings.Size() == 0)
   {
-    MessageBoxW(NULL, L"Specify command", L"7-Zip", 0);
+    // **************** NanaZip Modification Start ****************
+    //MessageBoxW(NULL, L"Specify command", L"7-Zip", 0);
+    MessageBoxW(NULL, L"Specify command", L"NanaZip", 0);
+    // **************** NanaZip Modification End ****************
     return 0;
   }
 
@@ -171,7 +180,10 @@ static int Main2()
     if (!s.IsEmpty())
     {
       if (!g_DisableUserQuestions)
-        MessageBoxW(NULL, s, L"7-Zip", MB_ICONERROR);
+        // **************** NanaZip Modification Start ****************
+        //MessageBoxW(NULL, s, L"7-Zip", MB_ICONERROR);
+        MessageBoxW(NULL, s, L"NanaZip", MB_ICONERROR);
+        // **************** NanaZip Modification End ****************
     }
   
   }
@@ -187,7 +199,10 @@ static int Main2()
     #ifdef Z7_EXTERNAL_CODECS
     if (!codecs->MainDll_ErrorPath.IsEmpty())
     {
-      UString s ("7-Zip cannot load module: ");
+      // **************** NanaZip Modification Start ****************
+      //UString s ("7-Zip cannot load module: ");
+      UString s("NanaZip cannot load module: ");
+      // **************** NanaZip Modification End ****************
       s += fs2us(codecs->MainDll_ErrorPath);
       throw s;
     }
