@@ -12,6 +12,7 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="AddressBar.cpp" />
     <ClCompile Include="StatusBar.cpp" />
+    <ClCompile Include="ShareExchange.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -19,6 +20,7 @@
     <ClInclude Include="AddressBar.h" />
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="ControlMacros.h" />
+    <ClInclude Include="ShareExchange.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Modern.def" />
@@ -32,6 +34,7 @@
     <Page Include="StatusBarTemplate.xaml" />
     <Page Include="InformationPage.xaml" />
     <Page Include="ProgressPage.xaml" />
+    <Page Include="SharePage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
@@ -797,6 +800,9 @@
     </PRIResource>
     <PRIResource Include="Strings\zh-Hans\ProgressPage.resw">
       <Filter>Strings\zh-Hans</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en\SharePage.resjson">
+      <Filter>Strings\en</Filter>
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
