@@ -18,7 +18,7 @@
     </Link>
   </ItemDefinitionGroup>
   <Target Name="K7BaseBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup>
+    <ItemGroup Condition="'$(K7BaseDisableRedirector)' != 'true'">
       <ClCompile Include="$(MSBuildThisFileDirectory)K7BaseRedirector.cpp" />
     </ItemGroup>
   </Target>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F9BF062B-998F-45A4-8285-96E4A0D5EC00}</ProjectGuid>
@@ -13,6 +13,8 @@
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
     <MileProjectOriginalFilename>K7User.dll</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
+    <K7BaseDisableRedirector>true</K7BaseDisableRedirector>
+    <K7UserDisableRedirector>true</K7UserDisableRedirector>
   </PropertyGroup>
   <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
