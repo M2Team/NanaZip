@@ -20,21 +20,12 @@
 #include "MenuPage.h"
 #include "MenuPageRes.h"
 
-#include <appmodel.h>
-
-#include <winrt/base.h>
-#include <winrt/Windows.Foundation.h>
-#include <winrt/Windows.System.h>
+// **************** NanaZip Modification Start ****************
+#include <K7User.h>
+// **************** NanaZip Modification End ****************
 
 using namespace NWindows;
 using namespace NContextMenuFlags;
-
-namespace winrt
-{
-    using Windows::Foundation::Uri;
-    using Windows::System::Launcher;
-    using Windows::System::LauncherOptions;
-}
 
 static const UInt32 kLangIDs[] =
 {
@@ -275,36 +266,9 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
 
     case IDB_SYSTEM_ASSOCIATE:
     {
-        try
-        {
-            // GetCurrentApplicationUserModelId can't work properly when the
-            // program starts from Visual Studio, because NanaZip will be
-            // allocated a wrong AUMID.
-            UINT32 nLength = 0;
-            ::GetCurrentApplicationUserModelId(
-                &nLength,
-                nullptr);
-            std::wstring AUMID(
-                nLength,
-                '\0');
-            winrt::check_hresult(::GetCurrentApplicationUserModelId(
-                &nLength,
-                AUMID.data()));
-            winrt::Uri NavigateURI(
-                L"ms-settings:defaultapps?registeredAUMID="
-                + AUMID);
-            winrt::LauncherOptions Options;
-            Options.TargetApplicationPackageFamilyName(
-                L"windows.immersivecontrolpanel_cw5n1h2txyewy");
-            winrt::Launcher::LaunchUriAsync(
-                NavigateURI,
-                Options).get();
-            return true;
-        }
-        catch (...)
-        {
-            return false;
-        }
+      // **************** NanaZip Modification Start ****************
+      ::K7UserModernLaunchDefaultAppsSettings();
+      // **************** NanaZip Modification End ****************
     }
 
     default:
