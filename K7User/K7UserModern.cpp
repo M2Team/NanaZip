@@ -11,8 +11,14 @@
 
 #include "K7UserPrivate.h"
 
+#include <Mile.Helpers.CppBase.h>
+
 #include <CommCtrl.h>
 #pragma comment(lib,"comctl32.lib")
+
+#include <appmodel.h>
+
+#include <string>
 
 namespace
 {
@@ -182,4 +188,102 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI K7UserModernSHBrowseForFolderW(
     }
 
     return IDList;
+}
+
+namespace
+{
+    static HMODULE GetKernel32ModuleHandle()
+    {
+        static HMODULE CachedResult = ::GetModuleHandleW(L"kernel32.dll");
+        return CachedResult;
+    }
+
+    static FARPROC GetGetCurrentApplicationUserModelIdProcAddress()
+    {
+        static FARPROC CachedResult = ([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetKernel32ModuleHandle();
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "GetCurrentApplicationUserModelId");
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
+    static LONG GetCurrentApplicationUserModelIdWrapper(
+        _Inout_ PUINT32 applicationUserModelIdLength,
+        _Out_opt_ PWSTR applicationUserModelId)
+    {
+        using ProcType = decltype(::GetCurrentApplicationUserModelId)*;
+
+        ProcType ProcAddress = reinterpret_cast<ProcType>(
+            ::GetGetCurrentApplicationUserModelIdProcAddress());
+
+        if (ProcAddress)
+        {
+            return ProcAddress(
+                applicationUserModelIdLength,
+                applicationUserModelId);
+        }
+
+        return ERROR_NOINTERFACE;
+    }
+
+    static std::wstring GetCurrentApplicationUserModelIdSimple()
+    {
+        static std::wstring CachedResult = ([]() -> std::wstring
+        {
+            std::wstring ApplicationUserModelId;
+            {
+                UINT32 ApplicationUserModelIdLength = 0;
+                LONG Result = ::GetCurrentApplicationUserModelIdWrapper(
+                    &ApplicationUserModelIdLength,
+                    nullptr);
+                if (ERROR_INSUFFICIENT_BUFFER == Result)
+                {
+                    ApplicationUserModelId.resize(ApplicationUserModelIdLength);
+                    Result = ::GetCurrentApplicationUserModelIdWrapper(
+                        &ApplicationUserModelIdLength,
+                        reinterpret_cast<PWSTR>(ApplicationUserModelId.data()));
+                    if (ERROR_SUCCESS == Result)
+                    {
+                        // Remove the trailing null character added by the API.
+                        if (!ApplicationUserModelId.empty() &&
+                            L'\0' == ApplicationUserModelId.back())
+                        {
+                            ApplicationUserModelId.pop_back();
+                        }
+                    }
+                }
+            }
+            return ApplicationUserModelId;
+        }());
+
+        return CachedResult;
+    }
+}
+
+EXTERN_C MO_RESULT WINAPI K7UserModernLaunchDefaultAppsSettings()
+{
+    std::wstring NavigateUri = L"ms-settings:defaultapps";
+    std::wstring CurrentApplicationUserModelId =
+        ::GetCurrentApplicationUserModelIdSimple();
+    if (!CurrentApplicationUserModelId.empty())
+    {
+        NavigateUri.append(L"?registeredAUMID=");
+        NavigateUri.append(CurrentApplicationUserModelId);
+    }
+    SHELLEXECUTEINFOW Information = {};
+    Information.cbSize = sizeof(SHELLEXECUTEINFOW);
+    Information.lpVerb = L"open";
+    Information.lpFile = NavigateUri.c_str();
+    Information.nShow = SW_SHOWNORMAL;
+    return ::ShellExecuteExW(&Information)
+        ? MO_RESULT_SUCCESS_OK
+        : MO_RESULT_ERROR_FAIL;
 }

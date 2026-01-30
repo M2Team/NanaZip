@@ -80,6 +80,14 @@ EXTERN_C int WINAPI K7UserModernMessageBoxW(
 EXTERN_C PIDLIST_ABSOLUTE WINAPI K7UserModernSHBrowseForFolderW(
     _In_ LPBROWSEINFOW lpbi);
 
+/**
+ * @brief Launches the Windows Settings Default Apps settings page for the
+ *        current application.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT WINAPI K7UserModernLaunchDefaultAppsSettings();
+
 #endif // !K7_USER_MODERN
 
 #endif // !K7_USER
