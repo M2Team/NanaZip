@@ -85,6 +85,9 @@ static const UInt32 kLangIDs[] =
   // IDX_EXTRACT_ALT_STREAMS,
   IDX_EXTRACT_NT_SECUR,
   IDX_EXTRACT_ELIM_DUP,
+  // **************** NanaZip Modification Start ****************
+  IDX_EXTRACT_OPEN_FOLDER,
+  // **************** NanaZip Modification End ****************
   IDG_PASSWORD,
   IDX_PASSWORD_SHOW
 };
@@ -189,6 +192,9 @@ bool CExtractDialog::OnInit()
   // **************** 7-Zip ZS Modification End ****************
   CheckButton_TwoBools(IDX_EXTRACT_NT_SECUR,    NtSecurity, _info.NtSecurity);
   CheckButton_TwoBools(IDX_EXTRACT_ELIM_DUP,    ElimDup,    _info.ElimDup);
+  // **************** NanaZip Modification Start ****************
+  CheckButton_TwoBools(IDX_EXTRACT_OPEN_FOLDER, OpenFolder, _info.OpenFolder);
+  // **************** NanaZip Modification End ****************
 
   CheckButton(IDX_PASSWORD_SHOW, _info.ShowPassword.Val);
   UpdatePasswordControl();
@@ -344,6 +350,9 @@ void CExtractDialog::OnOK()
   // **************** 7-Zip ZS Modification End ****************
   GetButton_Bools(IDX_EXTRACT_NT_SECUR,    NtSecurity, _info.NtSecurity);
   GetButton_Bools(IDX_EXTRACT_ELIM_DUP,    ElimDup,    _info.ElimDup);
+  // **************** NanaZip Modification Start ****************
+  GetButton_Bools(IDX_EXTRACT_OPEN_FOLDER, OpenFolder, _info.OpenFolder);
+  // **************** NanaZip Modification End ****************
 
   bool showPassword = IsShowPasswordChecked();
   if (showPassword != _info.ShowPassword.Val)

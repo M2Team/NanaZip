@@ -120,10 +120,12 @@
 // #define IDM_VIEW_SHOW_DELETED    739
 // #define IDM_VIEW_SHOW_STREAMS    740
 
-#define IDM_VIEW_ARCHIVE_TOOLBAR            750
-#define IDM_VIEW_STANDARD_TOOLBAR           751
-#define IDM_VIEW_TOOLBARS_LARGE_BUTTONS     752
-#define IDM_VIEW_TOOLBARS_SHOW_BUTTONS_TEXT 753
+// **************** NanaZip Modification Start ****************
+//#define IDM_VIEW_ARCHIVE_TOOLBAR            750
+//#define IDM_VIEW_STANDARD_TOOLBAR           751
+//#define IDM_VIEW_TOOLBARS_LARGE_BUTTONS     752
+//#define IDM_VIEW_TOOLBARS_SHOW_BUTTONS_TEXT 753
+// **************** NanaZip Modification End ****************
 
 #define IDM_VIEW_TIME_POPUP      760
 #define IDM_VIEW_TIME            761
@@ -137,7 +139,9 @@
 #define IDM_BENCHMARK2           902
 #define IDM_TEMP_DIR             910
 
-#define IDM_HELP_CONTENTS        960
+// **************** NanaZip Modification Start ****************
+//#define IDM_HELP_CONTENTS        960
+// **************** NanaZip Modification End ****************
 #define IDM_ABOUT                961
 
 #define IDS_OPTIONS                     2100

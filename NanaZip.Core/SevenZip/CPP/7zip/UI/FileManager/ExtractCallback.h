@@ -14,6 +14,9 @@
 
 #include "../Common/ArchiveExtractCallback.h"
 #include "../Common/ArchiveOpenCallback.h"
+// **************** NanaZip Modification Start ****************
+#include "../Common/Extract.h"
+// **************** NanaZip Modification End ****************
 
 #ifndef Z7_NO_CRYPTO
 #include "../../IPassword.h"
@@ -285,6 +288,10 @@ public:
   UInt64 NumFolders;
   UInt64 NumFiles;
 #endif
+
+  // **************** NanaZip Modification Start ****************
+  CDecompressStat Stat;
+  // **************** NanaZip Modification End ****************
 
 #ifndef Z7_NO_CRYPTO
   UString Password;

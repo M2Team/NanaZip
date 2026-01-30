@@ -98,7 +98,7 @@ static const wchar_t * _SplitCommandLine(const wchar_t* s, UString &dest)
     switch (c)
     {
       case L'\\':
-        // a backslash - count them up to quote-char or regular char
+        // a backslash - count them up to quote-char or regular char 
         bcount++;
       break;
       case L'"':
@@ -133,7 +133,7 @@ static const wchar_t * _SplitCommandLine(const wchar_t* s, UString &dest)
         f = s;
         if (qcount == 2)
           qcount = 0;
-      break;
+        break;
       case L' ':
         // fall through
       case L'\t':

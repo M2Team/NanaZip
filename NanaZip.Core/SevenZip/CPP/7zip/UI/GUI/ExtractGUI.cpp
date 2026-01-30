@@ -106,7 +106,10 @@ void CThreadExtracting::ProcessWasFinished_GuiVirt()
 
 HRESULT CThreadExtracting::ProcessVirt()
 {
-  CDecompressStat Stat;
+  // **************** NanaZip Modification Start ****************
+  //CDecompressStat Stat;
+  CDecompressStat &Stat = ExtractCallbackSpec->Stat;
+  // **************** NanaZip Modification End ****************
   
   #ifndef Z7_SFX
   /*
@@ -256,6 +259,9 @@ HRESULT ExtractGUI(
       dialog.PathMode = options.PathMode;
       dialog.PathMode_Force = options.PathMode_Force;
       dialog.ElimDup = options.ElimDup;
+      // **************** NanaZip Modification Start ****************
+      dialog.OpenFolder = options.OpenFolder;
+      // **************** NanaZip Modification End ****************
 
       if (archivePathsFull.Size() == 1)
         dialog.ArcPath = archivePathsFull[0];
@@ -275,6 +281,9 @@ HRESULT ExtractGUI(
       options.OverwriteMode = dialog.OverwriteMode;
       options.PathMode = dialog.PathMode;
       options.ElimDup = dialog.ElimDup;
+      // **************** NanaZip Modification Start ****************
+      options.OpenFolder = dialog.OpenFolder;
+      // **************** NanaZip Modification End ****************
       
       #ifndef Z7_SFX
       // **************** 7-Zip ZS Modification Start ****************

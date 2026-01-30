@@ -2,6 +2,10 @@
 
 #include "StdAfx.h"
 
+// **************** NanaZip Modification Start ****************
+#include <Shlwapi.h>
+// **************** NanaZip Modification End ****************
+
 #ifndef _UNICODE
 #include "../../Common/StringConvert.h"
 #endif
@@ -14,6 +18,21 @@ extern bool g_IsNT;
 
 namespace NWindows {
 namespace NControl {
+
+// **************** NanaZip Modification Start ****************
+void CComboBox::Attach(HWND newWindow) {
+    _window = newWindow;
+
+    COMBOBOXINFO ComboBoxInfo = { sizeof(COMBOBOXINFO) };
+    if (GetComboBoxInfo(_window, &ComboBoxInfo) &&
+        ComboBoxInfo.hwndItem != NULL)
+    {
+        ::SHAutoComplete(
+            ComboBoxInfo.hwndItem,
+            SHACF_AUTOAPPEND_FORCE_OFF | SHACF_AUTOSUGGEST_FORCE_OFF);
+    }
+}
+// **************** NanaZip Modification End ****************
 
 LRESULT CComboBox::GetLBText(int index, CSysString &s)
 {
@@ -62,5 +81,19 @@ LRESULT CComboBox::GetLBText(int index, UString &s)
   return (LRESULT)s.Len();
 }
 #endif
+
+// **************** NanaZip Modification Start ****************
+void CComboBoxEx::Attach(HWND newWindow) {
+    _window = newWindow;
+
+    HWND EditControl = this->GetEditControl();
+    if (EditControl != NULL)
+    {
+        ::SHAutoComplete(
+            this->GetEditControl(),
+            SHACF_AUTOAPPEND_FORCE_OFF | SHACF_AUTOSUGGEST_FORCE_OFF);
+    }
+}
+// **************** NanaZip Modification End ****************
 
 }}
