@@ -21,8 +21,6 @@ not in this repository.
 
 ## Features
 
-- Detours Library Wrappers
-- Policies Support
 - Cryptography Support
   - Hash Functions
     - MD2
@@ -32,3 +30,7 @@ not in this repository.
     - SHA-256
     - SHA-384
     - SHA-512
+- Detours Library Wrappers
+- Modern Experiences Support (non-GUI)
+- Policies Support
+- Security Mitigations Support
