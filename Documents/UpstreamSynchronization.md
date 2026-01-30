@@ -15,7 +15,7 @@
 
 ## 7-Zip ZS
 
-- NanaZip.Core: Commit a18a29fa4cd5a71cae81c618923205d0631fb16c.
+- NanaZip.Core: Commit 5766dd7745f6517f7ea42f6de9a190dfd92aa25f.
 - NanaZip.UI.Classic: Unknown because it modifies the old codebase a lot.
 - NanaZip.UI.Modern: Unknown because it modifies the old codebase a lot.
 - NanaZip.Universal: Commit a18a29fa4cd5a71cae81c618923205d0631fb16c.
