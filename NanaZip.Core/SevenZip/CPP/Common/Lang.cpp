@@ -9,15 +9,7 @@
 #include "../Windows/FileIO.h"
 
 // **************** NanaZip Modification Start ****************
-#ifdef Z7_SFX
-#include "../Windows/ResourceString.h"
-
-#include <mutex>
-#include <map>
-std::mutex g_LanguageLock;
-std::map<UInt32, UString> g_LanguageMap;
-#endif
-// **************** NanaZip Modification End ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 
 void CLang::Clear() throw()
 {
@@ -141,7 +133,7 @@ bool CLang::Open(CFSTR fileName, const char *id)
     return false;
   if (length > (1 << 20))
     return false;
-
+  
   AString s;
   const unsigned len = (unsigned)length;
   char *p = s.GetBuf(len);
@@ -163,34 +155,71 @@ bool CLang::Open(CFSTR fileName, const char *id)
   }
   *p2 = 0;
   s.ReleaseBuf_SetLen((unsigned)(p2 - p));
-
+  
   if (OpenFromString(s))
   {
     const wchar_t *name = Get(0);
     if (name && StringsAreEqual_Ascii(name, id))
       return true;
   }
-
+  
   Clear();
   return false;
 }
 
 const wchar_t *CLang::Get(UInt32 id) const throw()
 {
-  // **************** NanaZip Modification Start ****************
-#ifdef Z7_SFX
-  std::lock_guard Lock(g_LanguageLock);
-  auto Iterator = g_LanguageMap.find(id);
-  if (Iterator == g_LanguageMap.end())
-  {
-      return g_LanguageMap.emplace(id, NWindows::MyLoadString(id)).first->second;
-  }
-  return Iterator->second;
-#else
   const int index = _ids.FindInSorted(id);
   if (index < 0)
     return NULL;
   return _text + (size_t)_offsets[(unsigned)index];
-#endif
-  // **************** NanaZip Modification End ****************
 }
+
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+
+#ifdef Z7_SFX
+#include "../Windows/ResourceString.h"
+
+#include <mutex>
+#include <map>
+std::mutex g_LanguageLock;
+std::map<UInt32, UString> g_LanguageMap;
+#endif
+
+void CLang::Clear() throw()
+{
+
+}
+
+bool CLang::OpenFromString(const AString& s2)
+{
+    UNREFERENCED_PARAMETER(s2);
+    return true;
+}
+
+bool CLang::Open(CFSTR fileName, const char* id)
+{
+    UNREFERENCED_PARAMETER(fileName);
+    UNREFERENCED_PARAMETER(id);
+    return true;
+}
+
+const wchar_t *CLang::Get(UInt32 id) const throw()
+{
+#ifdef Z7_SFX
+  std::lock_guard Lock(g_LanguageLock);
+  auto Iterator = g_LanguageMap.find(id);
+  if (g_LanguageMap.end() == Iterator)
+  {
+      return g_LanguageMap.emplace(
+          id,
+          NWindows::MyLoadString(id)).first->second;
+  }
+  return Iterator->second;
+#else
+  UNREFERENCED_PARAMETER(id);
+  return nullptr;
+#endif
+}
+
+// **************** NanaZip Modification End ****************
