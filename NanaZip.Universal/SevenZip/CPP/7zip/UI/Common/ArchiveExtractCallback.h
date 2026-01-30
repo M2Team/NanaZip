@@ -498,6 +498,10 @@ public:
   
   FString DirPathPrefix_for_HashFiles;
 
+  // **************** NanaZip Modification End ****************
+  FString OutDir;
+  // **************** NanaZip Modification End ****************
+
   CArchiveExtractCallback();
 
   void InitForMulti(bool multiArchives,

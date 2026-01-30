@@ -34,6 +34,9 @@ namespace NExtract
     // CBoolPair AltStreams;
     CBoolPair NtSecurity;
     CBoolPair ShowPassword;
+    // **************** NanaZip Modification Start ****************
+    CBoolPair OpenFolder;
+    // **************** NanaZip Modification End ****************
 
     // **************** 7-Zip ZS Modification Start ****************
     CBoolPair OpnTrgFold;
@@ -203,6 +206,10 @@ struct CContextMenuInfo
   bool Flags_Def;
   UInt32 Flags;
   UInt32 WriteZone;
+
+  // **************** NanaZip Modification Start ****************
+  CBoolPair ExtractOnOpen;
+  // **************** NanaZip Modification End ****************
 
   /*
   CContextMenuInfo():

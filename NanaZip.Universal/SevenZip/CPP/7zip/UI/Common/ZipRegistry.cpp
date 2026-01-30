@@ -18,6 +18,12 @@
 // #include "../Explorer/ContextMenuFlags.h"
 #include "ZipRegistry.h"
 
+// **************** NanaZip Modification Start ****************
+#ifndef Z7_SFX
+#include <K7Base.h>
+#endif
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 using namespace NRegistry;
 
@@ -109,6 +115,9 @@ static LPCTSTR const kElimDup = TEXT("ElimDup");
 // static LPCTSTR const kAltStreams = TEXT("AltStreams");
 static LPCTSTR const kNtSecur = TEXT("Security");
 static LPCTSTR const kMemLimit = TEXT("MemLimit");
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const kOpenFolderAfterExtract = TEXT("OpenFolderAfterExtract");
+// **************** NanaZip Modification End ****************
 
 void CInfo::Save() const
 {
@@ -132,6 +141,9 @@ void CInfo::Save() const
   // **************** 7-Zip ZS Modification Start ****************
   Key_Set_BoolPair(key, kOpnTrgFold, OpnTrgFold);
   // **************** 7-Zip ZS Modification End ****************
+  // **************** NanaZip Modification Start ****************
+  Key_Set_BoolPair(key, kOpenFolderAfterExtract, OpenFolder);
+  // **************** NanaZip Modification End ****************
 
   key.RecurseDeleteKey(kPathHistory);
   // **************** 7-Zip ZS Modification Start ****************
@@ -197,6 +209,9 @@ void CInfo::Load()
   // **************** 7-Zip ZS Modification Start ****************
   Key_Get_BoolPair(key, kOpnTrgFold, OpnTrgFold);
   // **************** 7-Zip ZS Modification End ****************
+  // **************** NanaZip Modification Start ****************
+  Key_Get_BoolPair(key, kOpenFolderAfterExtract, OpenFolder);
+  // **************** NanaZip Modification End ****************
 }
 
 bool Read_ShowPassword()
@@ -627,6 +642,9 @@ static LPCTSTR const kContextMenu = TEXT("ContextMenu");
 static LPCTSTR const kMenuIcons = TEXT("MenuIcons");
 static LPCTSTR const kElimDup = TEXT("ElimDupExtract");
 static LPCTSTR const kWriteZoneId = TEXT("WriteZoneIdExtract");
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const kExtractOnOpen = TEXT("ExtractOnOpen");
+// **************** NanaZip Modification End ****************
 
 void CContextMenuInfo::Save() const
 {
@@ -639,6 +657,10 @@ void CContextMenuInfo::Save() const
   Key_Set_BoolPair(key, kElimDup, ElimDup);
 
   Key_Set_UInt32(key, kWriteZoneId, WriteZone);
+
+  // **************** NanaZip Modification Start ****************
+  Key_Set_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
+  // **************** NanaZip Modification End ****************
   
   if (Flags_Def)
     key.SetValue(kContextMenu, Flags);
@@ -654,6 +676,14 @@ void CContextMenuInfo::Load()
 
   ElimDup.Val = true;
   ElimDup.Def = false;
+
+  // **************** NanaZip Modification Start ****************
+  // WriteZone = (UInt32)(Int32)-1;
+  WriteZone = ::K7BaseGetWriteZoneIdExtractPolicy();
+
+  ExtractOnOpen.Val = false;
+  ExtractOnOpen.Def = false;
+  // **************** NanaZip Modification End ****************
 
   WriteZone = (UInt32)(Int32)-1;
 
@@ -678,7 +708,14 @@ void CContextMenuInfo::Load()
   Key_Get_BoolPair_true(key, kElimDup, ElimDup);
   Key_Get_BoolPair(key, kMenuIcons, MenuIcons);
 
-  Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+  // **************** NanaZip Modification Start ****************
+  //Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+  if (static_cast<UInt32>(-1) == WriteZone)
+  {
+    Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+  }
+  Key_Get_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
+  // **************** NanaZip Modification End ****************
 
   Flags_Def = (key.GetValue_UInt32_IfOk(kContextMenu, Flags) == ERROR_SUCCESS);
 }

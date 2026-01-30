@@ -55,6 +55,9 @@ struct CExtractOptions: public CExtractOptionsBase
   bool StdOutMode;
   bool YesToAll;
   bool TestMode;
+  // **************** NanaZip Modification Start ****************
+  CBoolPair OpenFolder;
+  // **************** NanaZip Modification End ****************
 
   // bool ShowDialog;
   // bool PasswordEnabled;
@@ -89,6 +92,9 @@ struct CDecompressStat
   // **************** 7-Zip ZS Modification Start ****************
   FString FirstExtractedPath;
   // **************** 7-Zip ZS Modification End ****************
+  // **************** NanaZip Modification Start ****************
+  FString OutDir;
+  // **************** NanaZip Modification End ****************
 
   void Clear()
   {
@@ -96,6 +102,9 @@ struct CDecompressStat
     // **************** 7-Zip ZS Modification Start ****************
     FirstExtractedPath.Empty();
     // **************** 7-Zip ZS Modification End ****************
+    // **************** NanaZip Modification Start ****************
+    OutDir.Empty();
+    // **************** NanaZip Modification End ****************
   }
 };
 

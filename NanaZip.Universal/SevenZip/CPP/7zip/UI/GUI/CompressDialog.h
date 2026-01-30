@@ -375,7 +375,10 @@ public:
 
   void MessageBoxError(LPCWSTR message)
   {
-    MessageBoxW(*this, message, L"7-Zip", MB_ICONERROR);
+    // **************** NanaZip Modification Start ****************
+    //MessageBoxW(*this, message, L"7-Zip", MB_ICONERROR);
+    MessageBoxW(*this, message, L"NanaZip", MB_ICONERROR);
+    // **************** NanaZip Modification End ****************
   }
 
   void ShowOptionsString();

@@ -231,7 +231,10 @@ static const char * const kUnsupportedArcTypeMessage = "Unsupported archive type
 // static const char * const kUnsupportedUpdateArcType = "Can't create archive for that type";
 
 #ifndef Z7_EXTRACT_ONLY
-#define kDefaultSfxModule "7zCon.sfx"
+// **************** NanaZip Modification Start ****************
+//#define kDefaultSfxModule "7zCon.sfx"
+#define kDefaultSfxModule "NanaZip.Core.Console.sfx"
+// **************** NanaZip Modification End ****************
 #endif
 
 Z7_ATTR_NORETURN

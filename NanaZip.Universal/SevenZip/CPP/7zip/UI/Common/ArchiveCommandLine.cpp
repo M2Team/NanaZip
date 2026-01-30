@@ -187,9 +187,9 @@ enum Enum
   kUseSlashMark,
   kDisableWildcardParsing,
   kElimDup,
-// **************** NanaZip Modification Start ****************
+  // **************** NanaZip Modification Start ****************
   kSmartExtract,
-// **************** NanaZip Modification End ****************
+  // **************** NanaZip Modification End ****************
   kFullPathMode,
   
   kHardLinks,
@@ -206,6 +206,10 @@ enum Enum
   kWriteToAltStreamIfColon,
 
   kNameTrailReplace,
+
+  // **************** NanaZip Modification Start ****************
+  kOpenFolder,
+  // **************** NanaZip Modification End ****************
 
   kDeleteAfterCompressing,
   kSetArcMTime
@@ -341,9 +345,9 @@ static const CSwitchForm kSwitchForms[] =
   { "spm", SWFRM_STRING_SINGL(0) },
   { "spd", SWFRM_SIMPLE },
   { "spe", SWFRM_MINUS },
-// **************** NanaZip Modification Start ****************
+  // **************** NanaZip Modification Start ****************
   { "sps", SWFRM_MINUS },
-// **************** NanaZip Modification End ****************
+  // **************** NanaZip Modification End ****************
   { "spf", SWFRM_STRING_SINGL(0) },
   
   { "snh", SWFRM_MINUS },
@@ -360,6 +364,10 @@ static const CSwitchForm kSwitchForms[] =
   { "snc", SWFRM_SIMPLE },
   
   { "snt", SWFRM_MINUS },
+
+  // **************** NanaZip Modification Start ****************
+  { "sre", SWFRM_MINUS },
+  // **************** NanaZip Modification End ****************
   
   { "sdel", SWFRM_SIMPLE },
   { "stl", SWFRM_SIMPLE }
@@ -1373,6 +1381,11 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   {
     options.ExtractOptions.SmartExtract.Def = true;
     options.ExtractOptions.SmartExtract.Val = !parser[NKey::kSmartExtract].WithMinus;
+  }
+  if (parser[NKey::kOpenFolder].ThereIs)
+  {
+    options.OpenFolder.Def = true;
+    options.OpenFolder.Val = !parser[NKey::kOpenFolder].WithMinus;
   }
   // **************** NanaZip Modification End ****************
   

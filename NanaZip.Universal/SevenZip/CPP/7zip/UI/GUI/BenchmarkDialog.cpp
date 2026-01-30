@@ -39,7 +39,9 @@
 
 using namespace NWindows;
 
-#define kHelpTopic "fm/benchmark.htm"
+// **************** NanaZip Modification Start ****************
+//#define kHelpTopic "fm/benchmark.htm"
+// **************** NanaZip Modification End ****************
 
 static const UINT_PTR kTimerID = 4;
 static const UINT kTimerElapse = 1000; // 1000
@@ -684,10 +686,15 @@ bool CBenchmarkDialog::OnSize(WPARAM /* wParam */, int xSize, int ySize)
     return false;
   }
 
-  int bx1, bx2, by;
+  // **************** NanaZip Modification Start ****************
+  // int bx1, bx2, by;
+  int bx1, by;
+  // **************** NanaZip Modification End ****************
 
   GetItemSizes(IDCANCEL, bx1, by);
-  GetItemSizes(IDHELP, bx2, by);
+  // **************** NanaZip Modification Start ****************
+  //GetItemSizes(IDHELP, bx2, by);
+  // **************** NanaZip Modification End ****************
 
   {
     int y = ySize - my - by;
@@ -696,7 +703,9 @@ bool CBenchmarkDialog::OnSize(WPARAM /* wParam */, int xSize, int ySize)
     InvalidateRect(NULL);
     
     MoveItem(IDCANCEL, x, y, bx1, by);
-    MoveItem(IDHELP, x - mx - bx2, y, bx2, by);
+    // **************** NanaZip Modification Start ****************
+    //MoveItem(IDHELP, x - mx - bx2, y, bx2, by);
+    // **************** NanaZip Modification End ****************
   }
 
   if (_consoleEdit)

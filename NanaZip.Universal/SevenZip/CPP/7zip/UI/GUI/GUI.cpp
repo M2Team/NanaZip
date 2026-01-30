@@ -279,6 +279,9 @@ static int Main2()
     ecs->YesToAll = options.YesToAll;
     eo.TestMode = options.Command.IsTestCommand();
     ecs->TestMode = eo.TestMode;
+    // **************** NanaZip Modification Start ****************
+    eo.OpenFolder = options.OpenFolder;
+    // **************** NanaZip Modification End ****************
 
     #ifndef Z7_SFX
     eo.Properties = options.Properties;
@@ -340,6 +343,11 @@ static int Main2()
     }
     if (!ecs->IsOK())
       return NExitCode::kFatalError;
+    // **************** NanaZip Modification Start ****************
+    else if (eo.OpenFolder.Val) {
+      ShellExecuteW(NULL, NULL, ecs->Stat.OutDir, NULL, NULL, SW_SHOWNORMAL);
+    }
+    // **************** NanaZip Modification End ****************
   }
   else if (options.Command.IsFromUpdateGroup())
   {
@@ -420,6 +428,35 @@ static int Main2()
 #define NT_CHECK_FAIL_ACTION ErrorMessage("Unsupported Windows version"); return NExitCode::kFatalError;
 #endif
 
+// **************** NanaZip Modification Start ****************
+#include <K7Base.h>
+#include <K7User.h>
+
+void NanaZipInitialize()
+{
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+    {
+        ::ErrorMessage(L"K7BaseInitialize Failed");
+        ::ExitProcess(1);
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
+    {
+        ::ErrorMessage(L"K7BaseDisableChildProcessCreation Failed");
+    }
+}
+// **************** NanaZip Modification End ****************
+
 int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef UNDER_CE
   LPWSTR
@@ -428,6 +465,10 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #endif
   /* lpCmdLine */, int /* nCmdShow */)
 {
+  // **************** NanaZip Modification Start ****************
+  ::NanaZipInitialize();
+  // **************** NanaZip Modification End ****************
+
   g_hInstance = hInstance;
   
   #ifdef _WIN32
