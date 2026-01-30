@@ -20,3 +20,6 @@ have the implementations for Linux and FreeBSD, although the implementation may
 not in this repository.
 
 ## Features
+
+- Dark Mode Support
+- Modern Experiences Support (GUI)
