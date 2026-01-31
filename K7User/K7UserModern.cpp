@@ -287,3 +287,61 @@ EXTERN_C MO_RESULT MOAPI K7UserModernLaunchDefaultAppsSettings()
         ? MO_RESULT_SUCCESS_OK
         : MO_RESULT_ERROR_FAIL;
 }
+
+EXTERN_C MO_RESULT MOAPI K7UserModernSetForegroundWindow(
+    _In_ HWND WindowHandle)
+{
+    DWORD ForegroundThreadId = ::GetWindowThreadProcessId(
+        ::GetForegroundWindow(),
+        nullptr);
+    DWORD CurrentThreadId = ::GetCurrentThreadId();
+    ::AttachThreadInput(ForegroundThreadId, CurrentThreadId, TRUE);
+    ::SetWindowPos(
+        WindowHandle,
+        HWND_TOPMOST,
+        0,
+        0,
+        0,
+        0,
+        SWP_NOSIZE | SWP_NOMOVE);
+    ::SetWindowPos(
+        WindowHandle,
+        HWND_NOTOPMOST,
+        0,
+        0,
+        0,
+        0,
+        SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+    ::SetForegroundWindow(WindowHandle);
+    ::SetFocus(WindowHandle);
+    ::SetActiveWindow(WindowHandle);
+    ::AttachThreadInput(ForegroundThreadId, CurrentThreadId, FALSE);
+    return MO_RESULT_SUCCESS_OK;
+}
+
+EXTERN_C MO_RESULT MOAPI K7UserModernSetForegroundProcessMainWindow(
+    _In_ HANDLE ProcessHandle)
+{
+    DWORD ProcessId = ::GetProcessId(ProcessHandle);
+    ::AllowSetForegroundWindow(ProcessId);
+    ::WaitForInputIdle(ProcessHandle, 500);
+    ::EnumWindows(
+        [](
+            _In_ HWND hWnd,
+            _In_ LPARAM lParam) -> BOOL CALLBACK
+    {
+        DWORD ProcessId = 0;
+        ::GetWindowThreadProcessId(hWnd, &ProcessId);
+
+        if (!lParam || ProcessId == (DWORD)lParam)
+        {
+            ::K7UserModernSetForegroundWindow(hWnd);
+            return FALSE;
+        }
+
+        return TRUE;
+    },
+        static_cast<LPARAM>(ProcessId));
+
+    return MO_RESULT_SUCCESS_OK;
+}

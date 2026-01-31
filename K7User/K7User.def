@@ -7,3 +7,5 @@ K7UserInitializeDarkModeSupport
 K7UserModernMessageBoxW
 K7UserModernSHBrowseForFolderW
 K7UserModernLaunchDefaultAppsSettings
+K7UserModernSetForegroundWindow
+K7UserModernSetForegroundProcessMainWindow

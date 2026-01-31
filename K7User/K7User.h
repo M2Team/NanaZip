@@ -88,6 +88,30 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI K7UserModernSHBrowseForFolderW(
  */
 EXTERN_C MO_RESULT MOAPI K7UserModernLaunchDefaultAppsSettings();
 
+/**
+ * @brief Tries to bring the specified window to the foreground and activates
+ *        the window. Keyboard input is directed to the window, and various
+ *        visual cues are changed for the user.
+ * @param WindowHandle A handle to the window that should be activated and
+ *                     brought to the foreground.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserModernSetForegroundWindow(
+    _In_ HWND WindowHandle);
+
+/**
+ * @brief Tries to bring the main window of the specified process to the
+ *        foreground and activates the window. Keyboard input is directed to the
+ *        window, and various visual cues are changed for the user.
+ * @param ProcessHandle A handle to the process whose main window should be
+ *                      activated and brought to the foreground.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserModernSetForegroundProcessMainWindow(
+    _In_ HANDLE ProcessHandle);
+
 #endif // !K7_USER_MODERN
 
 #endif // !K7_USER
