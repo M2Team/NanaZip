@@ -9,7 +9,10 @@
 
 #include "../FileManager/FormatUtils.h"
 #include "../FileManager/LangUtils.h"
-#include "../FileManager/ListViewDialog.h"
+// **************** NanaZip Modification Start ****************
+//#include "../FileManager/ListViewDialog.h"
+#include "../FileManager/EditDialog.h"
+// **************** NanaZip Modification End ****************
 #include "../FileManager/OverwriteDialogRes.h"
 #include "../FileManager/ProgressDialog2.h"
 #include "../FileManager/ProgressDialog2Res.h"
@@ -312,6 +315,8 @@ HRESULT HashCalcGUI(
 
 void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
 {
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   CListViewDialog lv;
   
   FOR_VECTOR (i, propPairs)
@@ -327,6 +332,24 @@ void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
   lv.NumColumns = 2;
   
   lv.Create(hwnd);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  UString Result;
+  FOR_VECTOR(i, propPairs)
+  {
+    if (!Result.IsEmpty())
+    {
+      Result += L"\r\n\r\n";
+    }
+    const CProperty& pair = propPairs[i];
+    Result += pair.Name;
+    Result += L"\r\n    ";
+    Result += pair.Value;
+  }
+  CEditDialog ResultDialog;
+  ResultDialog.Title = LangString(IDS_CHECKSUM_INFORMATION);
+  ResultDialog.Text = Result;
+  ResultDialog.Create(hwnd);
+  // **************** NanaZip Modification End ****************
 }
 
 

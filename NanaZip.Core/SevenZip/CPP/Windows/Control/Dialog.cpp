@@ -10,6 +10,10 @@
 
 #include "Dialog.h"
 
+// **************** NanaZip Modification Start ****************
+#include <K7User.h>
+// **************** NanaZip Modification End ****************
+
 extern HINSTANCE g_hInstance;
 #ifndef _UNICODE
 extern bool g_IsNT;
@@ -34,7 +38,14 @@ DialogProcedure(HWND dialogHWND, UINT message, WPARAM wParam, LPARAM lParam)
   if (dialog == NULL)
     return FALSE;
   if (message == WM_INITDIALOG)
+  // **************** NanaZip Modification Start ****************
+  {
+  // **************** NanaZip Modification End ****************
     dialog->Attach(dialogHWND);
+  // **************** NanaZip Modification Start ****************
+    ::K7UserModernSetForegroundWindow(dialogHWND);
+  }
+  // **************** NanaZip Modification End ****************
 
   /* MSDN: The dialog box procedure should return
        TRUE  - if it processed the message
@@ -57,6 +68,8 @@ bool CDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
     case WM_TIMER: return OnTimer(wParam, lParam);
     case WM_SIZE: return OnSize(wParam, LOWORD(lParam), HIWORD(lParam));
     case WM_DESTROY: return OnDestroy();
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     case WM_HELP: OnHelp(); return true;
     /*
         OnHelp(
@@ -68,6 +81,8 @@ bool CDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
           lParam);
         return true;
     */
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    // **************** NanaZip Modification End ****************
     default: return false;
   }
 }
@@ -94,7 +109,9 @@ bool CDialog::OnButtonClicked(unsigned buttonID, HWND /* buttonHWND */)
     case IDCANCEL: OnCancel(); break;
     case IDCLOSE: OnClose(); break;
     case IDCONTINUE: OnContinue(); break;
-    case IDHELP: OnHelp(); break;
+    // **************** NanaZip Modification Start ****************
+    //case IDHELP: OnHelp(); break;
+    // **************** NanaZip Modification End ****************
     default: return false;
   }
   return true;

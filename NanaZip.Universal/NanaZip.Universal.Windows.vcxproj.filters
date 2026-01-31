@@ -120,9 +120,6 @@
     <None Include="SevenZip\CPP\7zip\UI\FileManager\EditDialog.rc">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </None>
-    <None Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.rc">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </None>
     <None Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.rc">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </None>
@@ -446,13 +443,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\HelpUtils.cpp">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.cpp">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.cpp">
@@ -961,16 +952,7 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\HelpUtils.h">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.h">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.h">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialogRes.h">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.h">

@@ -131,6 +131,8 @@ public:
   virtual bool OnSize(WPARAM /* wParam */, int /* xSize */, int /* ySize */) { return false; }
   virtual bool OnDestroy() { return false; }
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   /*
   #ifdef UNDER_CE
   virtual void OnHelp(void *) { OnHelp(); }
@@ -139,6 +141,8 @@ public:
   #endif
   */
   virtual void OnHelp() {}
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  // **************** NanaZip Modification End ****************
 
   virtual bool OnButtonClicked(unsigned buttonID, HWND buttonHWND);
   virtual void OnOK() {}

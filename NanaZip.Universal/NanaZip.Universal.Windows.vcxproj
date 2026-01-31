@@ -54,7 +54,6 @@
     <None Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\EditDialog.rc" />
-    <None Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.rc" />
@@ -141,8 +140,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialogRes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialogRes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MyWindowsNew.h" />
@@ -298,7 +295,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ExtractCallback.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OpenCallback.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.cpp" />
