@@ -158,14 +158,14 @@ namespace
         return ModuleTypes::Unknown;
     }
 
-    static std::mutex g_DynamicCodeRangeMutex;
+    static std::mutex g_DynamicCodeRangesMutex;
     static std::vector<std::pair<MO_UINTN, MO_UINTN>> g_DynamicCodeRanges;
 
     static bool IsDynamicCodeAllowed(
         _In_ MO_POINTER CallerPointer)
     {
         MO_UINTN CallerAddress = reinterpret_cast<MO_UINTN>(CallerPointer);
-        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
+        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangesMutex);
         for (auto const& Range : g_DynamicCodeRanges)
         {
             if (CallerAddress >= Range.first &&
@@ -521,7 +521,7 @@ namespace
         }
         else if (ModuleTypes::NeedsDynamicCodeOptout & ModuleType)
         {
-            std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
+            std::lock_guard<std::mutex> Lock(g_DynamicCodeRangesMutex);
             g_DynamicCodeRanges.emplace_back(
                 reinterpret_cast<MO_UINTN>(*BaseAddress),
                 *ViewSize);
@@ -540,7 +540,7 @@ namespace
             ::IsCurrentProcessHandle(ProcessHandle))
         {
             MO_UINTN BaseStart = reinterpret_cast<MO_UINTN>(BaseAddress);
-            std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
+            std::lock_guard<std::mutex> Lock(g_DynamicCodeRangesMutex);
             for (auto Iterator = g_DynamicCodeRanges.begin();
                 Iterator != g_DynamicCodeRanges.end();
                 ++Iterator)
@@ -786,7 +786,7 @@ EXTERN_C MO_RESULT MOAPI K7BaseUninitializeDynamicLinkLibraryBlocker()
     ::UninitializeFunctionTable();
 
     {
-        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangeMutex);
+        std::lock_guard<std::mutex> Lock(g_DynamicCodeRangesMutex);
         g_DynamicCodeRanges.clear();
     }
 #endif // NDEBUG
