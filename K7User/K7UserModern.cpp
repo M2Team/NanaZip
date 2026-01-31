@@ -268,7 +268,7 @@ namespace
     }
 }
 
-EXTERN_C MO_RESULT WINAPI K7UserModernLaunchDefaultAppsSettings()
+EXTERN_C MO_RESULT MOAPI K7UserModernLaunchDefaultAppsSettings()
 {
     std::wstring NavigateUri = L"ms-settings:defaultapps";
     std::wstring CurrentApplicationUserModelId =

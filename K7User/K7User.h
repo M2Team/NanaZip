@@ -86,7 +86,7 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI K7UserModernSHBrowseForFolderW(
  * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
  *         it returns an MO_RESULT error code.
  */
-EXTERN_C MO_RESULT WINAPI K7UserModernLaunchDefaultAppsSettings();
+EXTERN_C MO_RESULT MOAPI K7UserModernLaunchDefaultAppsSettings();
 
 #endif // !K7_USER_MODERN
 
