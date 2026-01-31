@@ -37,7 +37,6 @@
 #include "ViewSettings.h"
 
 #include "../../../../../NanaZip.UI.h"
-#include <winrt/NanaZip.Modern.h>
 
 // **************** NanaZip Modification Start ****************
 #include "../Common/ZipRegistry.h"
@@ -562,8 +561,6 @@ static int WINAPI WinMain2(int nCmdShow)
   // Maybe needs CoInitializeEx also ?
   // NCOM::CComInitializer comInitializer;
 
-  winrt::NanaZip::Modern::App App;
-
   NanaZip::UI::SpecialCommandHandler();
 
   UString commandsString;
@@ -723,6 +720,7 @@ static int WINAPI WinMain2(int nCmdShow)
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
 #include <K7User.h>
+#include <NanaZip.Modern.h>
 
 void NanaZipInitialize()
 {
@@ -740,6 +738,12 @@ void NanaZipInitialize()
     if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
     {
         ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
+
+    if (S_OK != ::K7ModernInitialize())
+    {
+        ::ErrorMessage(L"K7ModernInitialize Failed");
+        ::ExitProcess(1);
     }
 }
 // **************** NanaZip Modification End ****************

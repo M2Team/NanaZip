@@ -393,6 +393,7 @@ static int Main2()
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
 #include <K7User.h>
+#include <NanaZip.Modern.h>
 
 void NanaZipInitialize()
 {
@@ -416,9 +417,13 @@ void NanaZipInitialize()
     {
         ::ErrorMessage(L"K7BaseDisableChildProcessCreation Failed");
     }
-}
 
-winrt::NanaZip::Modern::App s_app{ nullptr };
+    if (S_OK != ::K7ModernInitialize())
+    {
+        ::ErrorMessage(L"K7ModernInitialize Failed");
+        ::ExitProcess(1);
+    }
+}
 // **************** NanaZip Modification End ****************
 
 int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
@@ -452,8 +457,6 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #endif
 
   LoadLangOneTime();
-
-  s_app = {};
 
   // setlocale(LC_COLLATE, ".ACP");
   try
