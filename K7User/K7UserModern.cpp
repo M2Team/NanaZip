@@ -328,7 +328,7 @@ EXTERN_C MO_RESULT MOAPI K7UserModernSetForegroundProcessMainWindow(
     ::EnumWindows(
         [](
             _In_ HWND hWnd,
-            _In_ LPARAM lParam) -> BOOL CALLBACK
+            _In_ LPARAM lParam) -> BOOL
     {
         DWORD ProcessId = 0;
         ::GetWindowThreadProcessId(hWnd, &ProcessId);
