@@ -250,9 +250,9 @@ void NanaZipInitialize()
         ::ExitProcess(1);
     }
 
-    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    if (MO_RESULT_SUCCESS_OK != ::K7UserInitializeDarkModeSupport())
     {
-        ::ShowErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+        ::ShowErrorMessage(L"K7UserInitializeDarkModeSupport Failed");
     }
 
     if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())

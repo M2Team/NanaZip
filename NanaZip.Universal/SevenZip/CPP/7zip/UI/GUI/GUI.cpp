@@ -171,7 +171,7 @@ static int Main2()
   codecs->CaseSensitive = options.CaseSensitive;
   ThrowException_if_Error(codecs->Load());
   Codecs_AddHashArcHandler(codecs);
- 
+
   #ifdef Z7_EXTERNAL_CODECS
   {
     g_ExternalCodecs_Ptr = &_externalCodecs;
@@ -185,15 +185,15 @@ static int Main2()
         MessageBoxW(NULL, s, L"NanaZip", MB_ICONERROR);
         // **************** NanaZip Modification End ****************
     }
-  
+
   }
   #endif
 
   const bool isExtractGroupCommand = options.Command.IsFromExtractGroup();
-  
+
   if (codecs->Formats.Size() == 0 &&
         (isExtractGroupCommand
-        
+
         || options.Command.IsFromUpdateGroup()))
   {
     #ifdef Z7_EXTERNAL_CODECS
@@ -209,7 +209,7 @@ static int Main2()
     #endif
     throw kNoFormats;
   }
-  
+
   CObjectVector<COpenType> formatIndices;
   if (!ParseOpenTypes(*codecs, options.ArcType, formatIndices))
   {
@@ -238,7 +238,7 @@ static int Main2()
       || options.Command.CommandType == NCommandType::kBenchmark)
     ThrowException_if_Error(_externalCodecs.Load());
   #endif
-  
+
   if (options.Command.CommandType == NCommandType::kBenchmark)
   {
     HRESULT res = Benchmark(
@@ -292,7 +292,7 @@ static int Main2()
     #ifndef Z7_SFX
     CHashBundle hb;
     CHashBundle *hb_ptr = NULL;
-    
+
     if (!options.HashMethods.IsEmpty())
     {
       hb_ptr = &hb;
@@ -440,9 +440,9 @@ void NanaZipInitialize()
         ::ExitProcess(1);
     }
 
-    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    if (MO_RESULT_SUCCESS_OK != ::K7UserInitializeDarkModeSupport())
     {
-        ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+        ::ErrorMessage(L"K7UserInitializeDarkModeSupport Failed");
     }
 
     if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
@@ -470,7 +470,7 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   // **************** NanaZip Modification End ****************
 
   g_hInstance = hInstance;
-  
+
   #ifdef _WIN32
   NT_CHECK
   #endif
