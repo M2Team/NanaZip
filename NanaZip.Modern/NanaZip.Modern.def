@@ -2,6 +2,9 @@
 
 EXPORTS
 
+K7ModernInitialize
+K7ModernUninitialize
+K7ModernGetLegacyStringResource
 K7ModernShowSponsorDialog
 K7ModernShowAboutDialog
 K7ModernCreateMainWindowToolBarPage

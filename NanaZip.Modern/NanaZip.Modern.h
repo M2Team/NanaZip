@@ -13,6 +13,13 @@
 
 #include <Windows.h>
 
+EXTERN_C HRESULT WINAPI K7ModernInitialize();
+
+EXTERN_C HRESULT WINAPI K7ModernUninitialize();
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
+    _In_ UINT32 ResourceId);
+
 EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
     _In_opt_ HWND ParentWindowHandle);
 

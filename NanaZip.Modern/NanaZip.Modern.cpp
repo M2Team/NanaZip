@@ -15,6 +15,7 @@
 #include <Mile.Helpers.h>
 #include <Mile.Xaml.h>
 
+#include "App.h"
 #include "SponsorPage.h"
 #include "AboutPage.h"
 #include "InformationPage.h"
@@ -22,11 +23,115 @@
 #include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
 
+#include <winrt/Windows.ApplicationModel.Resources.Core.h>
 #include <winrt/Windows.UI.Xaml.Hosting.h>
+
+#include <mutex>
+#include <map>
+
+namespace
+{
+    static winrt::NanaZip::Modern::App g_AppInstance = nullptr;
+}
+
+EXTERN_C HRESULT WINAPI K7ModernInitialize()
+{
+    if (g_AppInstance)
+    {
+        return S_OK;
+    }
+    try
+    {
+        winrt::init_apartment(winrt::apartment_type::single_threaded);
+        using Implementation = winrt::NanaZip::Modern::implementation::App;
+        g_AppInstance = winrt::make<Implementation>();
+    }
+    catch (...)
+    {
+        return winrt::to_hresult();
+    }
+    return S_OK;
+}
+
+EXTERN_C HRESULT WINAPI K7ModernUninitialize()
+{
+    if (!g_AppInstance)
+    {
+        return S_OK;
+    }
+    try
+    {
+        g_AppInstance.Close();
+        g_AppInstance = nullptr;
+        winrt::uninit_apartment();
+    }
+    catch (...)
+    {
+        return winrt::to_hresult();
+    }
+    return S_OK;
+}
 
 namespace winrt
 {
+    using Windows::ApplicationModel::Resources::Core::ResourceManager;
+    using Windows::ApplicationModel::Resources::Core::ResourceMap;
     using Windows::UI::Xaml::Hosting::DesktopWindowXamlSource;
+}
+
+namespace
+{
+    static std::mutex g_CachedLanguageStringResourcesMutex;
+    static std::map<UINT32, winrt::hstring> g_CachedLanguageStringResources;
+
+    static winrt::ResourceMap GetLegacyResourceMap()
+    {
+        winrt::ResourceMap CachedResult = ([]() -> winrt::ResourceMap
+        {
+            winrt::ResourceMap MainResourceMap =
+                winrt::ResourceManager::Current().MainResourceMap();
+            if (!MainResourceMap)
+            {
+                return nullptr;
+            }
+            return MainResourceMap.GetSubtree(L"Legacy");
+        }());
+
+        return CachedResult;
+    }
+}
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
+    _In_ UINT32 ResourceId)
+{
+    {
+        std::lock_guard Lock(g_CachedLanguageStringResourcesMutex);
+        auto Iterator = g_CachedLanguageStringResources.find(ResourceId);
+        if (g_CachedLanguageStringResources.end() != Iterator)
+        {
+            return Iterator->second.c_str();
+        }
+    }
+
+    winrt::ResourceMap LegacyResourceMap = ::GetLegacyResourceMap();
+    if (!LegacyResourceMap)
+    {
+        return nullptr;
+    }
+
+    winrt::hstring ResourceName = L"Resource" + winrt::to_hstring(ResourceId);
+    if (!LegacyResourceMap.HasKey(ResourceName))
+    {
+        return nullptr;
+    }
+
+    winrt::hstring Content = LegacyResourceMap.Lookup(
+        ResourceName).Candidates().GetAt(0).ValueAsString();
+    std::lock_guard Lock(g_CachedLanguageStringResourcesMutex);
+    auto Iterator = g_CachedLanguageStringResources.emplace(
+        ResourceId,
+        std::move(Content));
+    return Iterator.first->second.c_str();
 }
 
 namespace
