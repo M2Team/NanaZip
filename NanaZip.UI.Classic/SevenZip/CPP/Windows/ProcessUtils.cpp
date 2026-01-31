@@ -5,6 +5,11 @@
 #include "../Common/StringConvert.h"
 
 #include "ProcessUtils.h"
+#include "Window.h"
+
+// **************** NanaZip Modification Start ****************
+#include <K7User.h>
+// **************** NanaZip Modification End ****************
 
 #ifndef _UNICODE
 extern bool g_IsNT;
@@ -63,7 +68,7 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
     si.dwFlags = 0;
     si.cbReserved2 = 0;
     si.lpReserved2 = 0;
-    
+
     CSysString curDirA;
     if (curDir != 0)
       curDirA = GetSystemString(curDir);
@@ -82,12 +87,17 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
     si.dwFlags = 0;
     si.cbReserved2 = 0;
     si.lpReserved2 = 0;
-    
+
     result = CreateProcessW(imageName, params2.Ptr_non_const(),
         NULL, NULL, FALSE, 0, NULL, curDir, &si, &pi);
   }
   if (result == 0)
     return ::GetLastError();
+
+  // **************** NanaZip Modification Start ****************
+  ::K7UserModernSetForegroundProcessMainWindow(pi.hProcess);
+  // **************** NanaZip Modification End ****************
+
   ::CloseHandle(pi.hThread);
   _handle = pi.hProcess;
   return 0;

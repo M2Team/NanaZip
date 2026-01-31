@@ -10,6 +10,10 @@
 
 #include "Dialog.h"
 
+// **************** NanaZip Modification Start ****************
+#include <K7User.h>
+// **************** NanaZip Modification End ****************
+
 extern HINSTANCE g_hInstance;
 #ifndef _UNICODE
 extern bool g_IsNT;
@@ -28,7 +32,9 @@ static INT_PTR APIENTRY DialogProcedure(HWND dialogHWND, UINT message, WPARAM wP
     return FALSE;
   if (message == WM_INITDIALOG) {
     dialog->Attach(dialogHWND);
-    BringToForeground(dialogHWND, 0);
+    // **************** NanaZip Modification Start ****************
+    ::K7UserModernSetForegroundWindow(dialogHWND);
+    // **************** NanaZip Modification End ****************
   }
 
   /* MSDN: The dialog box procedure should return

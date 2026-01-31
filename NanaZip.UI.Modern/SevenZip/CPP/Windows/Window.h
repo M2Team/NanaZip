@@ -28,12 +28,6 @@
 
 namespace NWindows {
 
-// **************** NanaZip Modification Start ****************
-BOOL CALLBACK BringToForeground(
-    _In_ HWND hWnd,
-    _In_ LPARAM lParam);
-// **************** NanaZip Modification End ****************
-
 inline ATOM MyRegisterClass(CONST WNDCLASS *wndClass)
   { return ::RegisterClass(wndClass); }
 
