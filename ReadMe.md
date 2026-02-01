@@ -155,12 +155,11 @@ Classic. Here are the differences between them.
 > NanaZip (Modern) can be used as portable version if you extract the files from
 > the MSIX package or copy from the NanaZipPackage project output. It's designed
 > for debugging/testing/development purpose and users who really need portable
-> version. But please note that some features may not work properly due to the
-> limitation of MSIX packaging technology, such as context menu and file
-> associations. This mode is not recommended for users who don't know what they
-> are doing like installing NanaZip (Modern) from third-party maintained Scoop
-> package. Some issues will not be fixed if you are using NanaZip (Modern) in
-> portable mode.
+> version. But please note that some features is not available, such as context
+> menu and file associations. This mode is not recommended for users who don't
+> know what they are doing like installing NanaZip (Modern) from third-party
+> maintained Scoop package. Some issues will not be fixed if you are using
+> NanaZip (Modern) in portable mode.
 
 - NanaZip Classic (**Work In Progress**)
   - Only portable version which is suitable for Server Core, Windows PE, Windows
