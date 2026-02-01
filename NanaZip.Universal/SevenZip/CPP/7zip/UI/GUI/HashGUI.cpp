@@ -21,6 +21,10 @@
 
 #include "HashGUI.h"
 
+// **************** NanaZip Modification Start ****************
+#include <NanaZip.Modern.h>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 
 
@@ -312,11 +316,10 @@ HRESULT HashCalcGUI(
   return S_OK;
 }
 
-
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
 {
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   CListViewDialog lv;
   
   FOR_VECTOR (i, propPairs)
@@ -332,25 +335,39 @@ void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
   lv.NumColumns = 2;
   
   lv.Create(hwnd);
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  UString Result;
-  FOR_VECTOR(i, propPairs)
-  {
-    if (!Result.IsEmpty())
-    {
-      Result += L"\r\n\r\n";
-    }
-    const CProperty& pair = propPairs[i];
-    Result += pair.Name;
-    Result += L"\r\n    ";
-    Result += pair.Value;
-  }
-  CEditDialog ResultDialog;
-  ResultDialog.Title = LangString(IDS_CHECKSUM_INFORMATION);
-  ResultDialog.Text = Result;
-  ResultDialog.Create(hwnd);
-  // **************** NanaZip Modification End ****************
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void ShowHashResults(const CPropNameValPairs& propPairs, HWND hwnd)
+{
+    UString Result;
+    FOR_VECTOR(i, propPairs)
+    {
+        if (!Result.IsEmpty())
+        {
+            Result += L"\r\n\r\n";
+        }
+        const CProperty& pair = propPairs[i];
+        Result += pair.Name;
+        Result += L"\r\n    ";
+        Result += pair.Value;
+    }
+    UString Title = LangString(IDS_CHECKSUM_INFORMATION);
+    if (::K7ModernAvailable())
+    {
+        ::K7ModernShowInformationDialog(
+            hwnd,
+            Title.Ptr(),
+            Result.Ptr());
+    }
+    else
+    {
+        CEditDialog ResultDialog;
+        ResultDialog.Title = Title;
+        ResultDialog.Text = Result;
+        ResultDialog.Create(hwnd);
+    }
+}
+// **************** NanaZip Modification End ****************
 
 
 void ShowHashResults(const CHashBundle &hb, HWND hwnd)

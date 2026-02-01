@@ -431,6 +431,7 @@ static int Main2()
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
 #include <K7User.h>
+#include <NanaZip.Modern.h>
 
 void NanaZipInitialize()
 {
@@ -454,6 +455,8 @@ void NanaZipInitialize()
     {
         ::ErrorMessage(L"K7BaseDisableChildProcessCreation Failed");
     }
+
+    ::K7ModernInitialize();
 }
 // **************** NanaZip Modification End ****************
 

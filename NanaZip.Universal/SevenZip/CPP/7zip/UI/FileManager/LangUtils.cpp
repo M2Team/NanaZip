@@ -77,7 +77,9 @@ static const CIDLangPair kLangPairs[] =
   { IDYES,    406 },
   { IDNO,     407 },
   { IDCLOSE,  408 },
-  { IDHELP,   409 },
+  // **************** NanaZip Modification Start ****************
+  //{ IDHELP,   409 },
+  // **************** NanaZip Modification End ****************
   { IDCONTINUE, 411 }
 };
 
@@ -318,7 +320,13 @@ static void OpenDefaultLang()
 void ReloadLang()
 {
   g_Lang.Clear();
+  // **************** NanaZip Modification Start ****************
+#ifndef Z7_SFX
+  // **************** NanaZip Modification End ****************
   ReadRegLang(g_LangID);
+  // **************** NanaZip Modification Start ****************
+#endif // !Z7_SFX
+  // **************** NanaZip Modification End ****************
   if (g_LangID.IsEmpty())
   {
 #ifndef _UNICODE

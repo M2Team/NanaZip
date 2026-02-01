@@ -184,6 +184,8 @@ const wchar_t *CLang::Get(UInt32 id) const throw()
 #include <map>
 std::mutex g_LanguageLock;
 std::map<UInt32, UString> g_LanguageMap;
+#else
+#include <NanaZip.Modern.h>
 #endif
 
 void CLang::Clear() throw()
@@ -204,21 +206,24 @@ bool CLang::Open(CFSTR fileName, const char* id)
     return true;
 }
 
-const wchar_t *CLang::Get(UInt32 id) const throw()
+const wchar_t* CLang::Get(UInt32 id) const throw()
 {
 #ifdef Z7_SFX
-  std::lock_guard Lock(g_LanguageLock);
-  auto Iterator = g_LanguageMap.find(id);
-  if (g_LanguageMap.end() == Iterator)
-  {
-      return g_LanguageMap.emplace(
-          id,
-          NWindows::MyLoadString(id)).first->second;
-  }
-  return Iterator->second;
+    std::lock_guard Lock(g_LanguageLock);
+    auto Iterator = g_LanguageMap.find(id);
+    if (g_LanguageMap.end() == Iterator)
+    {
+        return g_LanguageMap.emplace(
+            id,
+            NWindows::MyLoadString(id)).first->second;
+    }
+    return Iterator->second;
 #else
-  UNREFERENCED_PARAMETER(id);
-  return nullptr;
+    if (::K7ModernAvailable())
+    {
+        return ::K7ModernGetLegacyStringResource(id);
+    }
+    return nullptr;
 #endif
 }
 
