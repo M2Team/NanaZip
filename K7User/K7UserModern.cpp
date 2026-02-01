@@ -192,17 +192,15 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI K7UserModernSHBrowseForFolderW(
 
 namespace
 {
-    static HMODULE GetKernel32ModuleHandle()
+    static LONG GetCurrentApplicationUserModelIdWrapper(
+        _Inout_ PUINT32 applicationUserModelIdLength,
+        _Out_opt_ PWSTR applicationUserModelId)
     {
-        static HMODULE CachedResult = ::GetModuleHandleW(L"kernel32.dll");
-        return CachedResult;
-    }
+        using ProcType = decltype(::GetCurrentApplicationUserModelId)*;
 
-    static FARPROC GetGetCurrentApplicationUserModelIdProcAddress()
-    {
-        static FARPROC CachedResult = ([]() -> FARPROC
+        static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
         {
-            HMODULE ModuleHandle = ::GetKernel32ModuleHandle();
+            HMODULE ModuleHandle = ::GetModuleHandleW(L"kernel32.dll");
             if (ModuleHandle)
             {
                 return ::GetProcAddress(
@@ -211,18 +209,6 @@ namespace
             }
             return nullptr;
         }());
-
-        return CachedResult;
-    }
-
-    static LONG GetCurrentApplicationUserModelIdWrapper(
-        _Inout_ PUINT32 applicationUserModelIdLength,
-        _Out_opt_ PWSTR applicationUserModelId)
-    {
-        using ProcType = decltype(::GetCurrentApplicationUserModelId)*;
-
-        ProcType ProcAddress = reinterpret_cast<ProcType>(
-            ::GetGetCurrentApplicationUserModelIdProcAddress());
 
         if (ProcAddress)
         {
