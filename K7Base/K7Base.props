@@ -17,7 +17,7 @@
       <AdditionalDependencies>$(OutDir)K7Base.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <Target Name="K7BaseBuildCSource" BeforeTargets="BeforeClCompile">
+  <Target Name="K7BaseBuildSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(K7BaseDisableRedirector)' != 'true'">
       <ClCompile Include="$(MSBuildThisFileDirectory)K7BaseRedirector.cpp" />
     </ItemGroup>

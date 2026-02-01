@@ -24,7 +24,7 @@
       <AdditionalOptions Condition="'$(Configuration)' == 'Release'">%(AdditionalOptions) /DEPENDENTLOADFLAG:0x800</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
-  <Target Name="NanaZipCoreSfxSharedBuildCSource" BeforeTargets="BeforeClCompile">
+  <Target Name="NanaZipCoreSfxSharedBuildSource" BeforeTargets="BeforeClCompile">
     <ItemGroup>
       <ClCompile Include="$(MSBuildThisFileDirectory)Extensions\ZSCodecs\ZstdRegister.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />

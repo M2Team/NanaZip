@@ -17,7 +17,7 @@
       <AdditionalDependencies>$(OutDir)K7UserStatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <Target Name="K7UserBuildCSource" BeforeTargets="BeforeClCompile">
+  <Target Name="K7UserBuildSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(K7UserDisableRedirector)' != 'true'">
       <ClCompile Include="$(MSBuildThisFileDirectory)K7UserRedirector.cpp" />
     </ItemGroup>
