@@ -1,0 +1,10 @@
+name: Feature request
+description: Request a new feature into NanaZip.
+labels: ["enhancements"]
+body:
+  - type: textarea
+    label: Describe the feature
+  - type: checkboxes
+    options:
+      - label: I have confirmed that this feature isn't yet available in the latest Preview
+        required: true
