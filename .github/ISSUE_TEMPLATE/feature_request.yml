@@ -9,6 +9,7 @@ body:
       required: true
   - type: checkboxes
     attributes:
+      label: Prerequisite checks
       options:
         - label: I have confirmed that this feature isn't yet implemented in the latest Preview release.
           required: true
