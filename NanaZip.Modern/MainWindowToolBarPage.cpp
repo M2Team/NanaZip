@@ -60,9 +60,6 @@ namespace winrt
     using Windows::UI::Xaml::Media::GeneralTransform;
 }
 
-using namespace winrt;
-using namespace Windows::UI::Xaml;
-
 namespace
 {
     namespace ToolBarCommandID

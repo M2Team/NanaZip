@@ -28,9 +28,6 @@ namespace winrt
     using Windows::Services::Store::StoreProductQueryResult;
 }
 
-using namespace winrt;
-using namespace Windows::UI::Xaml;
-
 namespace winrt::NanaZip::Modern::implementation
 {
     SponsorPage::SponsorPage(

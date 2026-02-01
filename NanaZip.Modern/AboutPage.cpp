@@ -12,9 +12,6 @@
 
 #include <Mile.Project.Version.h>
 
-using namespace winrt;
-using namespace Windows::UI::Xaml;
-
 namespace winrt::NanaZip::Modern::implementation
 {
     AboutPage::AboutPage(
