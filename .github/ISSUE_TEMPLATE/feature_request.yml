@@ -3,7 +3,10 @@ description: Request a new feature into NanaZip.
 labels: ["enhancements"]
 body:
   - type: textarea
-    label: Describe the feature
+    attribute:
+      label: Describe the feature
+    validations:
+      required: true
   - type: checkboxes
     attributes:
       options:
