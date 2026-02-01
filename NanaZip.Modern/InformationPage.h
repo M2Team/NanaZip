@@ -1,9 +1,8 @@
 ﻿#pragma once
 
 #include "InformationPage.g.h"
-#include "ControlMacros.h"
+
 #include <Windows.h>
-#include <Mile.Helpers.CppWinRT.h>
 
 namespace winrt
 {

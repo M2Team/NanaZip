@@ -5,6 +5,5 @@
         Windows.UI.Xaml.Application,
         Windows.Foundation.IClosable
     {
-        App();
     }
 }
