@@ -27,6 +27,7 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::RoutedEventArgs const& args);
 
     private:
+
         HWND m_WindowHandle = nullptr;
         winrt::hstring m_WindowTitle;
         winrt::hstring m_WindowContent;
