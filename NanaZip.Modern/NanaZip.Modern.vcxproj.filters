@@ -23,6 +23,7 @@
   <ItemGroup>
     <None Include="NanaZip.Modern.def" />
     <None Include="NanaZip.Modern.props" />
+    <None Include="NanaZip.Modern.Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SponsorPage.xaml" />

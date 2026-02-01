@@ -12,11 +12,11 @@
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
   </PropertyGroup>
-  <ItemDefinitionGroup>
-    <Link>
-      <AdditionalDependencies>$(OutDir)NanaZip.Modern.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
+  <Target Name="NanaZipModernBuildSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup>
+      <ClCompile Include="$(MSBuildThisFileDirectory)NanaZip.Modern.Wrapper.cpp" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <ProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.Modern.vcxproj">
       <Project>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</Project>
