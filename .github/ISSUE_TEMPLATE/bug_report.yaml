@@ -14,8 +14,8 @@ body:
   - type: textarea
     attributes:
       label: Describe the issue
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Reproduction steps
@@ -24,14 +24,14 @@ body:
         1.
         2.
         3.
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Expected behavior
       description: What did you expect this feature to do?
-      validations:
-        required: true
+    validations:
+      required: true
   - type: dropdown
     attributes:
       label: NanaZip version
@@ -39,8 +39,8 @@ body:
       options:
         - 6.0 Preview 1
         - 5.0 Update 2
-      validations:
-        required: true
+    validations:
+      required: true
   - type: input
     attributes:
       label: Windows version
