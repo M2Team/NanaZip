@@ -55,6 +55,53 @@ namespace
         return CachedResult;
     }
 
+    static std::mutex g_CachedLanguageStringResourcesMutex;
+    static std::map<UINT32, winrt::hstring> g_CachedLanguageStringResources;
+}
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
+    _In_ UINT32 ResourceId)
+{
+    {
+        std::lock_guard Lock(g_CachedLanguageStringResourcesMutex);
+        auto Iterator = g_CachedLanguageStringResources.find(ResourceId);
+        if (g_CachedLanguageStringResources.end() != Iterator)
+        {
+            return Iterator->second.c_str();
+        }
+    }
+
+    static winrt::ResourceMap LegacyResourceMap = ([]() -> winrt::ResourceMap
+    {
+        winrt::ResourceMap MainResourceMap = ::GetMainResourceMap();
+        if (MainResourceMap)
+        {
+            return MainResourceMap.GetSubtree(L"Legacy");
+        }
+        return nullptr;
+    }());
+    if (!LegacyResourceMap)
+    {
+        return nullptr;
+    }
+
+    winrt::hstring ResourceName = L"Resource" + winrt::to_hstring(ResourceId);
+    if (!LegacyResourceMap.HasKey(ResourceName))
+    {
+        return nullptr;
+    }
+
+    winrt::hstring Content = LegacyResourceMap.Lookup(
+        ResourceName).Candidates().GetAt(0).ValueAsString();
+    std::lock_guard Lock(g_CachedLanguageStringResourcesMutex);
+    auto Iterator = g_CachedLanguageStringResources.emplace(
+        ResourceId,
+        std::move(Content));
+    return Iterator.first->second.c_str();
+}
+
+namespace
+{
     static winrt::NanaZip::Modern::App g_AppInstance = nullptr;
 }
 
@@ -109,53 +156,6 @@ EXTERN_C HRESULT WINAPI K7ModernUninitialize()
 namespace winrt
 {
     using Windows::UI::Xaml::Hosting::DesktopWindowXamlSource;
-}
-
-namespace
-{
-    static std::mutex g_CachedLanguageStringResourcesMutex;
-    static std::map<UINT32, winrt::hstring> g_CachedLanguageStringResources;
-}
-
-EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
-    _In_ UINT32 ResourceId)
-{
-    {
-        std::lock_guard Lock(g_CachedLanguageStringResourcesMutex);
-        auto Iterator = g_CachedLanguageStringResources.find(ResourceId);
-        if (g_CachedLanguageStringResources.end() != Iterator)
-        {
-            return Iterator->second.c_str();
-        }
-    }
-
-    static winrt::ResourceMap LegacyResourceMap = ([]() -> winrt::ResourceMap
-    {
-        winrt::ResourceMap MainResourceMap = ::GetMainResourceMap();
-        if (MainResourceMap)
-        {
-            return MainResourceMap.GetSubtree(L"Legacy");
-        }
-        return nullptr;
-    }());
-    if (!LegacyResourceMap)
-    {
-        return nullptr;
-    }
-
-    winrt::hstring ResourceName = L"Resource" + winrt::to_hstring(ResourceId);
-    if (!LegacyResourceMap.HasKey(ResourceName))
-    {
-        return nullptr;
-    }
-
-    winrt::hstring Content = LegacyResourceMap.Lookup(
-        ResourceName).Candidates().GetAt(0).ValueAsString();
-    std::lock_guard Lock(g_CachedLanguageStringResourcesMutex);
-    auto Iterator = g_CachedLanguageStringResources.emplace(
-        ResourceId,
-        std::move(Content));
-    return Iterator.first->second.c_str();
 }
 
 namespace
@@ -387,7 +387,7 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
 EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     _In_opt_ HWND ParentWindowHandle,
     _In_opt_ LPCWSTR Title,
-    _In_opt_ LPCWSTR Text)
+    _In_opt_ LPCWSTR Content)
 {
     HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
     if (!WindowHandle)
@@ -403,7 +403,7 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     Interface Window = winrt::make<Implementation>(
         WindowHandle,
         Title,
-        Text);
+        Content);
 
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,

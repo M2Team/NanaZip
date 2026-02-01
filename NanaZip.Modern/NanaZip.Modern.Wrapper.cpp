@@ -49,6 +49,31 @@ namespace
     }
 }
 
+EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
+    _In_ UINT32 ResourceId)
+{
+    using ProcType = decltype(::K7ModernGetLegacyStringResource)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernGetLegacyStringResource");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        return ProcAddress(ResourceId);
+    }
+
+    return nullptr;
+}
+
 EXTERN_C BOOL WINAPI K7ModernAvailable()
 {
     using ProcType = decltype(::K7ModernAvailable)*;
@@ -121,31 +146,6 @@ EXTERN_C HRESULT WINAPI K7ModernUninitialize()
     return E_NOINTERFACE;
 }
 
-EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
-    _In_ UINT32 ResourceId)
-{
-    using ProcType = decltype(::K7ModernGetLegacyStringResource)*;
-
-    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
-    {
-        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
-        if (ModuleHandle)
-        {
-            return ::GetProcAddress(
-                ModuleHandle,
-                "K7ModernGetLegacyStringResource");
-        }
-        return nullptr;
-    }());
-
-    if (ProcAddress)
-    {
-        return ProcAddress(ResourceId);
-    }
-
-    return nullptr;
-}
-
 EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
     _In_opt_ HWND ParentWindowHandle)
 {
@@ -197,6 +197,33 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
     return -1;
 }
 
+EXTERN_C INT WINAPI K7ModernShowInformationDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_opt_ LPCWSTR Content)
+{
+    using ProcType = decltype(::K7ModernShowInformationDialog)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernShowInformationDialog");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        return ProcAddress(ParentWindowHandle, Title, Content);
+    }
+
+    return -1;
+}
+
 EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
     _In_ HWND ParentWindowHandle,
     _In_ HMENU MoreMenuHandle)
@@ -221,31 +248,4 @@ EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
     }
 
     return nullptr;
-}
-
-EXTERN_C INT WINAPI K7ModernShowInformationDialog(
-    _In_opt_ HWND ParentWindowHandle,
-    _In_opt_ LPCWSTR Title,
-    _In_opt_ LPCWSTR Text)
-{
-    using ProcType = decltype(::K7ModernShowInformationDialog)*;
-
-    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
-    {
-        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
-        if (ModuleHandle)
-        {
-            return ::GetProcAddress(
-                ModuleHandle,
-                "K7ModernShowInformationDialog");
-        }
-        return nullptr;
-    }());
-
-    if (ProcAddress)
-    {
-        return ProcAddress(ParentWindowHandle, Title, Text);
-    }
-
-    return -1;
 }
