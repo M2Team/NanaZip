@@ -29,8 +29,32 @@
 #include <mutex>
 #include <map>
 
+namespace winrt
+{
+    using Windows::ApplicationModel::Resources::Core::ResourceManager;
+    using Windows::ApplicationModel::Resources::Core::ResourceMap;
+}
+
 namespace
 {
+    static winrt::ResourceMap GetMainResourceMap()
+    {
+        static winrt::ResourceMap CachedResult = ([]() -> winrt::ResourceMap
+        {
+            try
+            {
+                return winrt::ResourceManager::Current().MainResourceMap();
+            }
+            catch (...)
+            {
+                // Do nothing.
+            }
+            return nullptr;
+        }());
+
+        return CachedResult;
+    }
+
     static winrt::NanaZip::Modern::App g_AppInstance = nullptr;
 }
 
@@ -44,6 +68,11 @@ EXTERN_C HRESULT WINAPI K7ModernInitialize()
     if (g_AppInstance)
     {
         return S_OK;
+    }
+    if (!::GetMainResourceMap())
+    {
+        // NanaZip.Modern requires resources.pri to get XAML resources.
+        return E_NOINTERFACE;
     }
     try
     {
@@ -79,8 +108,6 @@ EXTERN_C HRESULT WINAPI K7ModernUninitialize()
 
 namespace winrt
 {
-    using Windows::ApplicationModel::Resources::Core::ResourceManager;
-    using Windows::ApplicationModel::Resources::Core::ResourceMap;
     using Windows::UI::Xaml::Hosting::DesktopWindowXamlSource;
 }
 
@@ -88,22 +115,6 @@ namespace
 {
     static std::mutex g_CachedLanguageStringResourcesMutex;
     static std::map<UINT32, winrt::hstring> g_CachedLanguageStringResources;
-
-    static winrt::ResourceMap GetLegacyResourceMap()
-    {
-        winrt::ResourceMap CachedResult = ([]() -> winrt::ResourceMap
-        {
-            winrt::ResourceMap MainResourceMap =
-                winrt::ResourceManager::Current().MainResourceMap();
-            if (!MainResourceMap)
-            {
-                return nullptr;
-            }
-            return MainResourceMap.GetSubtree(L"Legacy");
-        }());
-
-        return CachedResult;
-    }
 }
 
 EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
@@ -118,7 +129,15 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
         }
     }
 
-    winrt::ResourceMap LegacyResourceMap = ::GetLegacyResourceMap();
+    static winrt::ResourceMap LegacyResourceMap = ([]() -> winrt::ResourceMap
+    {
+        winrt::ResourceMap MainResourceMap = ::GetMainResourceMap();
+        if (MainResourceMap)
+        {
+            return MainResourceMap.GetSubtree(L"Legacy");
+        }
+        return nullptr;
+    }());
     if (!LegacyResourceMap)
     {
         return nullptr;
