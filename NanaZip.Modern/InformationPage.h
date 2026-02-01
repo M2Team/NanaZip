@@ -28,7 +28,7 @@ namespace winrt::NanaZip::Modern::implementation
     private:
 
         HWND m_WindowHandle = nullptr;
-        winrt::hstring m_WindowTitle;
-        winrt::hstring m_WindowContent;
+        winrt::hstring m_Title;
+        winrt::hstring m_Content;
     };
 }
