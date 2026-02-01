@@ -34,6 +34,11 @@ namespace
     static winrt::NanaZip::Modern::App g_AppInstance = nullptr;
 }
 
+EXTERN_C BOOL WINAPI K7ModernAvailable()
+{
+    return nullptr != g_AppInstance;
+}
+
 EXTERN_C HRESULT WINAPI K7ModernInitialize()
 {
     if (g_AppInstance)

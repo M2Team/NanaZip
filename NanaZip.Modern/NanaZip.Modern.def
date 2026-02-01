@@ -2,6 +2,7 @@
 
 EXPORTS
 
+K7ModernAvailable
 K7ModernInitialize
 K7ModernUninitialize
 K7ModernGetLegacyStringResource

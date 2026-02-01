@@ -44,6 +44,30 @@ namespace
     }
 }
 
+EXTERN_C BOOL WINAPI K7ModernAvailable()
+{
+    using ProcType = decltype(::K7ModernAvailable)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernAvailable");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        return ProcAddress();
+    }
+
+    return FALSE;
+}
+
 EXTERN_C HRESULT WINAPI K7ModernInitialize()
 {
     using ProcType = decltype(::K7ModernInitialize)*;

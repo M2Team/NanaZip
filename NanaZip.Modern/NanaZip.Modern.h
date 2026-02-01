@@ -13,6 +13,8 @@
 
 #include <Windows.h>
 
+EXTERN_C BOOL WINAPI K7ModernAvailable();
+
 EXTERN_C HRESULT WINAPI K7ModernInitialize();
 
 EXTERN_C HRESULT WINAPI K7ModernUninitialize();
