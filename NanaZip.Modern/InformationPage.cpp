@@ -8,11 +8,11 @@ namespace winrt::NanaZip::Modern::implementation
 {
     InformationPage::InformationPage(
         _In_opt_ HWND WindowHandle,
-        winrt::hstring const& WindowTitle,
-        winrt::hstring const& WindowContent) :
+        _In_opt_ LPCWSTR Title,
+        _In_opt_ LPCWSTR Content) :
         m_WindowHandle(WindowHandle),
-        m_WindowTitle(WindowTitle),
-        m_WindowContent(WindowContent)
+        m_WindowTitle(Title),
+        m_WindowContent(Content)
     {
     }
 
@@ -20,10 +20,7 @@ namespace winrt::NanaZip::Modern::implementation
     {
         InformationPageT::InitializeComponent();
 
-        ::SetWindowTextW(
-            this->m_WindowHandle,
-            this->m_WindowTitle.c_str()
-        );
+        ::SetWindowTextW(this->m_WindowHandle, this->m_WindowTitle.c_str());
         
         this->TitleTextBlock().Text(this->m_WindowTitle);
         this->InformationTextBox().Text(this->m_WindowContent);

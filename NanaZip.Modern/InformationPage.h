@@ -16,8 +16,8 @@ namespace winrt::NanaZip::Modern::implementation
     {
         InformationPage(
             _In_opt_ HWND WindowHandle,
-            winrt::hstring const& WindowTitle,
-            winrt::hstring const& WindowContent);
+            _In_opt_ LPCWSTR Title,
+            _In_opt_ LPCWSTR Content);
 
         void InitializeComponent();
 
