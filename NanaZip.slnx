@@ -40,7 +40,6 @@
   </Folder>
   <Folder Name="/UI/Classic/">
     <Project Path="NanaZip.UI.Classic/NanaZip.vcxproj" Id="97894839-6677-49d2-ba7c-39ed0c8d4fdb" />
-    <Project Path="NanaZip.UI.Classic/NanaZipWindows.vcxproj" Id="d33e771e-6b30-4efb-9dec-a9148d50080d" />
   </Folder>
   <Folder Name="/UI/Modern/">
     <Project Path="NanaZip.UI.Modern/NanaZip.Modern.FileManager.vcxproj" Id="f4511f91-b0eb-41b4-99d6-aeb48169132b" />

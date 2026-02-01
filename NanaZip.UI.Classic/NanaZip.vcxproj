@@ -434,8 +434,8 @@
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
-    <ProjectReference Include="NanaZipWindows.vcxproj">
-      <Project>{D33E771E-6B30-4EFB-9DEC-A9148D50080D}</Project>
+    <ProjectReference Include="..\NanaZip.Universal\NanaZip.Universal.Windows.vcxproj">
+      <Project>{8DDAC25D-D16A-4440-9ADE-902255549D1E}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
