@@ -6,14 +6,6 @@
 
 #include "NanaZip.Modern.h"
 
-#include <Mile.Helpers.CppBase.h>
-#include <Mile.Helpers.CppWinRT.h>
-
-namespace winrt::Mile
-{
-    using namespace ::Mile;
-}
-
 #include <winrt/Windows.UI.Xaml.Documents.h>
 
 #include <string>
@@ -38,8 +30,8 @@ namespace winrt::NanaZip::Modern::implementation
     {
         AboutPageT::InitializeComponent();
 
-        winrt::hstring WindowTitle = Mile::WinRT::GetLocalizedString(
-            L"Legacy/Resource2900");
+        winrt::hstring WindowTitle = winrt::hstring(
+            ::K7ModernGetLegacyStringResource(2900));
         if (WindowTitle.empty())
         {
             WindowTitle = L"About NanaZip";
@@ -57,7 +49,7 @@ namespace winrt::NanaZip::Modern::implementation
 #endif
 
         std::wstring Content = std::wstring(
-            Mile::WinRT::GetLocalizedString(L"Legacy/Resource2901"));
+            ::K7ModernGetLegacyStringResource(2901));
         if (Content.empty())
         {
             Content = L"NanaZip is free software";
@@ -71,8 +63,8 @@ namespace winrt::NanaZip::Modern::implementation
         this->GridTitleTextBlock().Text(WindowTitle);
         this->Version().Text(Version);
         this->Content().Text(Content);
-        this->CancelButton().Content(winrt::box_value(
-            Mile::WinRT::GetLocalizedString(L"Legacy/Resource402")));
+        this->CancelButton().Content(winrt::box_value(winrt::hstring(
+            ::K7ModernGetLegacyStringResource(402))));
     }
 
     void AboutPage::GitHubButtonClick(

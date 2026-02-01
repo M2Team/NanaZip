@@ -123,18 +123,18 @@ namespace winrt::NanaZip::Modern::implementation
             this->AboutButton()
         };
 
-        const wchar_t* ToolBarResources[10] =
+        const UINT32 ToolBarLegacyStringResources[10] =
         {
-            L"Legacy/Resource7200",
-            L"Legacy/Resource7201",
-            L"Legacy/Resource7202",
-            L"Legacy/Resource7203",
-            L"Legacy/Resource7204",
-            L"Legacy/Resource7205",
-            L"Legacy/Resource7206",
-            L"Legacy/Resource900",
-            L"Legacy/Resource901",
-            L"Legacy/Resource961"
+            7200, // Add
+            7201, // Extract
+            7202, // Test
+            7203, // Copy
+            7204, // Move
+            7205, // Delete
+            7206, // Info
+            900, // Options
+            901, // Benchmark
+            961 // About
         };
 
         const std::size_t ToolBarButtonCount =
@@ -142,8 +142,8 @@ namespace winrt::NanaZip::Modern::implementation
 
         for (size_t i = 0; i < ToolBarButtonCount; ++i)
         {
-            winrt::hstring Resource =
-                Mile::WinRT::GetLocalizedString(ToolBarResources[i]);
+            winrt::hstring Resource = winrt::hstring(::K7ModernGetLegacyStringResource(
+                ToolBarLegacyStringResources[i]));
             winrt::AutomationProperties::SetName(
                 ToolBarButtons[i],
                 Resource);
