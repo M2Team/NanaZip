@@ -32,13 +32,10 @@ body:
       description: What did you expect this feature to do?
     validations:
       required: true
-  - type: dropdown
+  - type: input
     attributes:
-      label: NanaZip version
+      label: NanaZip veresion
       description: What version of NanaZip are you using?
-      options:
-        - 6.0 Preview 1
-        - 5.0 Update 2
     validations:
       required: true
   - type: input
