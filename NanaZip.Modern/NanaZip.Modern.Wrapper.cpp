@@ -12,6 +12,9 @@
 
 #include <string>
 
+// Only used in Shell Extension to check whether NanaZip Modern is loaded.
+EXTERN_C HMODULE K7ModernCurrentModule = nullptr;
+
 namespace
 {
     std::wstring GetCurrentProcessModulePath()
@@ -19,7 +22,9 @@ namespace
         // 32767 is the maximum path length without the terminating null character.
         std::wstring Path(32767, L'\0');
         Path.resize(::GetModuleFileNameW(
-            nullptr, &Path[0], static_cast<DWORD>(Path.size())));
+            ::K7ModernCurrentModule,
+            &Path[0],
+            static_cast<DWORD>(Path.size())));
         return Path;
     }
 

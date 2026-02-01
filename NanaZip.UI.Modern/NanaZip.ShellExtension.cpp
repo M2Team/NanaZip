@@ -1147,6 +1147,9 @@ long g_DllRefCount = 0;
 HWND g_HWND = nullptr;
 HINSTANCE g_hInstance = nullptr;
 
+// Only used in Shell Extension to check whether NanaZip Modern is loaded.
+EXTERN_C HMODULE K7ModernCurrentModule;
+
 BOOL WINAPI DllMain(
     _In_ HINSTANCE hinstDLL,
     _In_ DWORD fdwReason,
@@ -1159,6 +1162,7 @@ BOOL WINAPI DllMain(
     case DLL_PROCESS_ATTACH:
     {
         g_hInstance = hinstDLL;
+        ::K7ModernCurrentModule = hinstDLL;
         break;
     }
     case DLL_THREAD_ATTACH:
