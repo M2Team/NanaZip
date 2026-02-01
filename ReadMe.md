@@ -144,12 +144,23 @@ Kenji Mouri
 NanaZip plans to have two distribution flavors called NanaZip and NanaZip
 Classic. Here are the differences between them.
 
-- NanaZip
+- NanaZip (Modern)
   - Only MSIX packaged version.
   - Support the context menu in Windows 10/11 File Explorer.
   - Support the file associations.
   - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
   - XAML-based GUI.
+
+> [!CAUTION]
+> NanaZip (Modern) can be used as portable version if you extract the files from
+> the MSIX package or copy from the NanaZipPackage project output. It's designed
+> for debugging/testing/development purpose and users who really need portable
+> version. But please note that some features may not work properly due to the
+> limitation of MSIX packaging technology, such as context menu and file
+> associations. This mode is not recommended for users who don't know what they
+> are doing like installing NanaZip (Modern) from third-party maintained Scoop
+> package. Some issues will not be fixed if you are using NanaZip (Modern) in
+> portable mode.
 
 - NanaZip Classic (**Work In Progress**)
   - Only portable version which is suitable for Server Core, Windows PE, Windows
@@ -202,6 +213,11 @@ platform. Here are the policy for non-Windows platform support:
   or later feature level. Currenly tested simply under Wine 9.x.
 - We don't support ReactOS and its derivatives because they are too hard to
   support. But testing under the ReactOS and its derivatives may be interesting.
+
+> [!NOTE]
+> If you have put the ucrtbase.dll with 10.0.19041.0 version or later need
+> to be existed in the binary folder, the theoretically minimum system
+> requirements of NanaZip Classic is Windows 10 (Build 10240) or later.
 
 ## Download and Installation
 
