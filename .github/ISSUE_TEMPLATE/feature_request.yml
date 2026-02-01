@@ -5,6 +5,7 @@ body:
   - type: textarea
     label: Describe the feature
   - type: checkboxes
-    options:
-      - label: I have confirmed that this feature isn't yet available in the latest Preview
-        required: true
+    attributes:
+      options:
+        - label: I have confirmed that this feature isn't yet implemented in the latest Preview release.
+          required: true
