@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Mile.Project.Configurations/1.0.1622" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</ProjectGuid>
     <RootNamespace>NanaZip.Modern</RootNamespace>
@@ -64,6 +64,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="AddressBarTemplate.xaml" />
+    <Page Include="CopyPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="InformationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -90,6 +93,10 @@
     </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="CopyPage.idl">
+      <DependentUpon>CopyPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
     <Midl Include="InformationPage.idl">
       <DependentUpon>InformationPage.xaml</DependentUpon>
@@ -125,6 +132,10 @@
       <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="ControlMacros.h" />
+    <ClInclude Include="CopyPage.h">
+      <DependentUpon>CopyPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="InformationPage.h">
       <DependentUpon>InformationPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -162,6 +173,10 @@
   <ItemGroup>
     <ClCompile Include="AddressBarTemplate.cpp">
       <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="CopyPage.cpp">
+      <DependentUpon>CopyPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="InformationPage.cpp">
       <DependentUpon>InformationPage.xaml</DependentUpon>
@@ -213,178 +228,257 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="Strings\af\CopyPage.resw" />
     <PRIResource Include="Strings\af\InformationPage.resw" />
     <PRIResource Include="Strings\af\ProgressPage.resw" />
+    <PRIResource Include="Strings\ar\CopyPage.resw" />
     <PRIResource Include="Strings\ar\InformationPage.resw" />
     <PRIResource Include="Strings\ar\ProgressPage.resw" />
+    <PRIResource Include="Strings\az-arab\CopyPage.resw" />
     <PRIResource Include="Strings\az-arab\InformationPage.resw" />
     <PRIResource Include="Strings\az-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\be\CopyPage.resw" />
     <PRIResource Include="Strings\be\InformationPage.resw" />
     <PRIResource Include="Strings\be\ProgressPage.resw" />
+    <PRIResource Include="Strings\bg\CopyPage.resw" />
     <PRIResource Include="Strings\bg\InformationPage.resw" />
     <PRIResource Include="Strings\bg\ProgressPage.resw" />
+    <PRIResource Include="Strings\bn\CopyPage.resw" />
     <PRIResource Include="Strings\bn\InformationPage.resw" />
     <PRIResource Include="Strings\bn\ProgressPage.resw" />
+    <PRIResource Include="Strings\ca-es-valencia\CopyPage.resw" />
     <PRIResource Include="Strings\ca-es-valencia\InformationPage.resw" />
     <PRIResource Include="Strings\ca-es-valencia\ProgressPage.resw" />
+    <PRIResource Include="Strings\ca\CopyPage.resw" />
     <PRIResource Include="Strings\ca\InformationPage.resw" />
     <PRIResource Include="Strings\ca\ProgressPage.resw" />
+    <PRIResource Include="Strings\cs\CopyPage.resw" />
     <PRIResource Include="Strings\cs\InformationPage.resw" />
     <PRIResource Include="Strings\cs\ProgressPage.resw" />
+    <PRIResource Include="Strings\cy\CopyPage.resw" />
     <PRIResource Include="Strings\cy\InformationPage.resw" />
     <PRIResource Include="Strings\cy\ProgressPage.resw" />
+    <PRIResource Include="Strings\da\CopyPage.resw" />
     <PRIResource Include="Strings\da\InformationPage.resw" />
     <PRIResource Include="Strings\da\ProgressPage.resw" />
+    <PRIResource Include="Strings\de\CopyPage.resw" />
     <PRIResource Include="Strings\de\InformationPage.resw" />
     <PRIResource Include="Strings\de\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\de\ProgressPage.resw" />
     <PRIResource Include="Strings\de\SponsorPage.resw" />
+    <PRIResource Include="Strings\el\CopyPage.resw" />
     <PRIResource Include="Strings\el\InformationPage.resw" />
     <PRIResource Include="Strings\el\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\el\ProgressPage.resw" />
     <PRIResource Include="Strings\el\SponsorPage.resw" />
+    <PRIResource Include="Strings\en\CopyPage.resw" />
     <PRIResource Include="Strings\en\InformationPage.resw" />
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\en\ProgressPage.resw" />
     <PRIResource Include="Strings\en\SponsorPage.resw" />
+    <PRIResource Include="Strings\eo\CopyPage.resw" />
     <PRIResource Include="Strings\eo\InformationPage.resw" />
     <PRIResource Include="Strings\eo\ProgressPage.resw" />
+    <PRIResource Include="Strings\es\CopyPage.resw" />
     <PRIResource Include="Strings\es\InformationPage.resw" />
     <PRIResource Include="Strings\es\ProgressPage.resw" />
+    <PRIResource Include="Strings\et\CopyPage.resw" />
     <PRIResource Include="Strings\et\InformationPage.resw" />
     <PRIResource Include="Strings\et\ProgressPage.resw" />
+    <PRIResource Include="Strings\eu\CopyPage.resw" />
     <PRIResource Include="Strings\eu\InformationPage.resw" />
     <PRIResource Include="Strings\eu\ProgressPage.resw" />
+    <PRIResource Include="Strings\fa\CopyPage.resw" />
     <PRIResource Include="Strings\fa\InformationPage.resw" />
     <PRIResource Include="Strings\fa\ProgressPage.resw" />
+    <PRIResource Include="Strings\fi\CopyPage.resw" />
     <PRIResource Include="Strings\fi\InformationPage.resw" />
     <PRIResource Include="Strings\fi\ProgressPage.resw" />
+    <PRIResource Include="Strings\fr\CopyPage.resw" />
     <PRIResource Include="Strings\fr\InformationPage.resw" />
     <PRIResource Include="Strings\fr\ProgressPage.resw" />
+    <PRIResource Include="Strings\fy\CopyPage.resw" />
     <PRIResource Include="Strings\fy\InformationPage.resw" />
     <PRIResource Include="Strings\fy\ProgressPage.resw" />
+    <PRIResource Include="Strings\ga\CopyPage.resw" />
     <PRIResource Include="Strings\ga\InformationPage.resw" />
     <PRIResource Include="Strings\ga\ProgressPage.resw" />
+    <PRIResource Include="Strings\gl\CopyPage.resw" />
     <PRIResource Include="Strings\gl\InformationPage.resw" />
     <PRIResource Include="Strings\gl\ProgressPage.resw" />
+    <PRIResource Include="Strings\gu\CopyPage.resw" />
     <PRIResource Include="Strings\gu\InformationPage.resw" />
     <PRIResource Include="Strings\gu\ProgressPage.resw" />
+    <PRIResource Include="Strings\he\CopyPage.resw" />
     <PRIResource Include="Strings\he\InformationPage.resw" />
     <PRIResource Include="Strings\he\ProgressPage.resw" />
+    <PRIResource Include="Strings\hi\CopyPage.resw" />
     <PRIResource Include="Strings\hi\InformationPage.resw" />
     <PRIResource Include="Strings\hi\ProgressPage.resw" />
+    <PRIResource Include="Strings\hr\CopyPage.resw" />
     <PRIResource Include="Strings\hr\InformationPage.resw" />
     <PRIResource Include="Strings\hr\ProgressPage.resw" />
+    <PRIResource Include="Strings\hu\CopyPage.resw" />
     <PRIResource Include="Strings\hu\InformationPage.resw" />
     <PRIResource Include="Strings\hu\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\hu\ProgressPage.resw" />
     <PRIResource Include="Strings\hu\SponsorPage.resw" />
+    <PRIResource Include="Strings\hy\CopyPage.resw" />
     <PRIResource Include="Strings\hy\InformationPage.resw" />
     <PRIResource Include="Strings\hy\ProgressPage.resw" />
+    <PRIResource Include="Strings\id\CopyPage.resw" />
     <PRIResource Include="Strings\id\InformationPage.resw" />
     <PRIResource Include="Strings\id\ProgressPage.resw" />
+    <PRIResource Include="Strings\is\CopyPage.resw" />
     <PRIResource Include="Strings\is\InformationPage.resw" />
     <PRIResource Include="Strings\is\ProgressPage.resw" />
+    <PRIResource Include="Strings\it\CopyPage.resw" />
     <PRIResource Include="Strings\it\InformationPage.resw" />
     <PRIResource Include="Strings\it\ProgressPage.resw" />
+    <PRIResource Include="Strings\ja\CopyPage.resw" />
     <PRIResource Include="Strings\ja\InformationPage.resw" />
     <PRIResource Include="Strings\ja\ProgressPage.resw" />
+    <PRIResource Include="Strings\ka\CopyPage.resw" />
     <PRIResource Include="Strings\ka\InformationPage.resw" />
     <PRIResource Include="Strings\ka\ProgressPage.resw" />
+    <PRIResource Include="Strings\kk\CopyPage.resw" />
     <PRIResource Include="Strings\kk\InformationPage.resw" />
     <PRIResource Include="Strings\kk\ProgressPage.resw" />
+    <PRIResource Include="Strings\ko\CopyPage.resw" />
     <PRIResource Include="Strings\ko\InformationPage.resw" />
     <PRIResource Include="Strings\ko\ProgressPage.resw" />
+    <PRIResource Include="Strings\ku-arab\CopyPage.resw" />
     <PRIResource Include="Strings\ku-arab\InformationPage.resw" />
     <PRIResource Include="Strings\ku-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\ky-kg\CopyPage.resw" />
     <PRIResource Include="Strings\ky-kg\InformationPage.resw" />
     <PRIResource Include="Strings\ky-kg\ProgressPage.resw" />
+    <PRIResource Include="Strings\lt\CopyPage.resw" />
     <PRIResource Include="Strings\lt\InformationPage.resw" />
     <PRIResource Include="Strings\lt\ProgressPage.resw" />
+    <PRIResource Include="Strings\lv\CopyPage.resw" />
     <PRIResource Include="Strings\lv\InformationPage.resw" />
     <PRIResource Include="Strings\lv\ProgressPage.resw" />
+    <PRIResource Include="Strings\mk\CopyPage.resw" />
     <PRIResource Include="Strings\mk\InformationPage.resw" />
     <PRIResource Include="Strings\mk\ProgressPage.resw" />
+    <PRIResource Include="Strings\mn-cyrl\CopyPage.resw" />
     <PRIResource Include="Strings\mn-cyrl\InformationPage.resw" />
     <PRIResource Include="Strings\mn-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\mn-mong\CopyPage.resw" />
     <PRIResource Include="Strings\mn-mong\InformationPage.resw" />
     <PRIResource Include="Strings\mn-mong\ProgressPage.resw" />
+    <PRIResource Include="Strings\mr\CopyPage.resw" />
     <PRIResource Include="Strings\mr\InformationPage.resw" />
     <PRIResource Include="Strings\mr\ProgressPage.resw" />
+    <PRIResource Include="Strings\ms\CopyPage.resw" />
     <PRIResource Include="Strings\ms\InformationPage.resw" />
     <PRIResource Include="Strings\ms\ProgressPage.resw" />
+    <PRIResource Include="Strings\nb\CopyPage.resw" />
     <PRIResource Include="Strings\nb\InformationPage.resw" />
     <PRIResource Include="Strings\nb\ProgressPage.resw" />
+    <PRIResource Include="Strings\ne\CopyPage.resw" />
     <PRIResource Include="Strings\ne\InformationPage.resw" />
     <PRIResource Include="Strings\ne\ProgressPage.resw" />
+    <PRIResource Include="Strings\nl\CopyPage.resw" />
     <PRIResource Include="Strings\nl\InformationPage.resw" />
     <PRIResource Include="Strings\nl\ProgressPage.resw" />
+    <PRIResource Include="Strings\nn\CopyPage.resw" />
     <PRIResource Include="Strings\nn\InformationPage.resw" />
     <PRIResource Include="Strings\nn\ProgressPage.resw" />
+    <PRIResource Include="Strings\pa-in\CopyPage.resw" />
     <PRIResource Include="Strings\pa-in\InformationPage.resw" />
     <PRIResource Include="Strings\pa-in\ProgressPage.resw" />
+    <PRIResource Include="Strings\pl\CopyPage.resw" />
     <PRIResource Include="Strings\pl\InformationPage.resw" />
     <PRIResource Include="Strings\pl\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\pl\ProgressPage.resw" />
     <PRIResource Include="Strings\pl\SponsorPage.resw" />
+    <PRIResource Include="Strings\ps\CopyPage.resw" />
     <PRIResource Include="Strings\ps\InformationPage.resw" />
     <PRIResource Include="Strings\ps\ProgressPage.resw" />
+    <PRIResource Include="Strings\pt-BR\CopyPage.resw" />
     <PRIResource Include="Strings\pt-BR\InformationPage.resw" />
     <PRIResource Include="Strings\pt-BR\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\pt-BR\ProgressPage.resw" />
     <PRIResource Include="Strings\pt-BR\SponsorPage.resw" />
+    <PRIResource Include="Strings\pt\CopyPage.resw" />
     <PRIResource Include="Strings\pt\InformationPage.resw" />
     <PRIResource Include="Strings\pt\ProgressPage.resw" />
+    <PRIResource Include="Strings\ro\CopyPage.resw" />
     <PRIResource Include="Strings\ro\InformationPage.resw" />
     <PRIResource Include="Strings\ro\ProgressPage.resw" />
+    <PRIResource Include="Strings\ru\CopyPage.resw" />
     <PRIResource Include="Strings\ru\InformationPage.resw" />
     <PRIResource Include="Strings\ru\ProgressPage.resw" />
+    <PRIResource Include="Strings\si\CopyPage.resw" />
     <PRIResource Include="Strings\si\InformationPage.resw" />
     <PRIResource Include="Strings\si\ProgressPage.resw" />
+    <PRIResource Include="Strings\sk\CopyPage.resw" />
     <PRIResource Include="Strings\sk\InformationPage.resw" />
     <PRIResource Include="Strings\sk\ProgressPage.resw" />
+    <PRIResource Include="Strings\sl\CopyPage.resw" />
     <PRIResource Include="Strings\sl\InformationPage.resw" />
     <PRIResource Include="Strings\sl\ProgressPage.resw" />
+    <PRIResource Include="Strings\sq\CopyPage.resw" />
     <PRIResource Include="Strings\sq\InformationPage.resw" />
     <PRIResource Include="Strings\sq\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\sq\ProgressPage.resw" />
     <PRIResource Include="Strings\sq\SponsorPage.resw" />
+    <PRIResource Include="Strings\sr-cyrl\CopyPage.resw" />
     <PRIResource Include="Strings\sr-cyrl\InformationPage.resw" />
     <PRIResource Include="Strings\sr-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\sr-Latn\CopyPage.resw" />
     <PRIResource Include="Strings\sr-Latn\InformationPage.resw" />
     <PRIResource Include="Strings\sr-Latn\ProgressPage.resw" />
+    <PRIResource Include="Strings\sv\CopyPage.resw" />
     <PRIResource Include="Strings\sv\InformationPage.resw" />
     <PRIResource Include="Strings\sv\ProgressPage.resw" />
+    <PRIResource Include="Strings\sw\CopyPage.resw" />
     <PRIResource Include="Strings\sw\InformationPage.resw" />
     <PRIResource Include="Strings\sw\ProgressPage.resw" />
+    <PRIResource Include="Strings\ta\CopyPage.resw" />
     <PRIResource Include="Strings\ta\InformationPage.resw" />
     <PRIResource Include="Strings\ta\ProgressPage.resw" />
+    <PRIResource Include="Strings\tg-arab\CopyPage.resw" />
     <PRIResource Include="Strings\tg-arab\InformationPage.resw" />
     <PRIResource Include="Strings\tg-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\th\CopyPage.resw" />
     <PRIResource Include="Strings\th\InformationPage.resw" />
     <PRIResource Include="Strings\th\ProgressPage.resw" />
+    <PRIResource Include="Strings\tk-cyrl\CopyPage.resw" />
     <PRIResource Include="Strings\tk-cyrl\InformationPage.resw" />
     <PRIResource Include="Strings\tk-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\tr\CopyPage.resw" />
     <PRIResource Include="Strings\tr\InformationPage.resw" />
     <PRIResource Include="Strings\tr\ProgressPage.resw" />
+    <PRIResource Include="Strings\tt-arab\CopyPage.resw" />
     <PRIResource Include="Strings\tt-arab\InformationPage.resw" />
     <PRIResource Include="Strings\tt-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\ug-arab\CopyPage.resw" />
     <PRIResource Include="Strings\ug-arab\InformationPage.resw" />
     <PRIResource Include="Strings\ug-arab\ProgressPage.resw" />
+    <PRIResource Include="Strings\uk\CopyPage.resw" />
     <PRIResource Include="Strings\uk\InformationPage.resw" />
     <PRIResource Include="Strings\uk\ProgressPage.resw" />
+    <PRIResource Include="Strings\uz-cyrl\CopyPage.resw" />
     <PRIResource Include="Strings\uz-cyrl\InformationPage.resw" />
     <PRIResource Include="Strings\uz-cyrl\ProgressPage.resw" />
+    <PRIResource Include="Strings\uz-latn\CopyPage.resw" />
     <PRIResource Include="Strings\uz-latn\InformationPage.resw" />
     <PRIResource Include="Strings\uz-latn\ProgressPage.resw" />
+    <PRIResource Include="Strings\vi\CopyPage.resw" />
     <PRIResource Include="Strings\vi\InformationPage.resw" />
     <PRIResource Include="Strings\vi\ProgressPage.resw" />
+    <PRIResource Include="Strings\yo-latn\CopyPage.resw" />
     <PRIResource Include="Strings\yo-latn\InformationPage.resw" />
     <PRIResource Include="Strings\yo-latn\ProgressPage.resw" />
+    <PRIResource Include="Strings\zh-Hans\CopyPage.resw" />
     <PRIResource Include="Strings\zh-Hans\InformationPage.resw" />
     <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\zh-Hans\ProgressPage.resw" />
     <PRIResource Include="Strings\zh-Hans\SponsorPage.resw" />
+    <PRIResource Include="Strings\zh-Hant\CopyPage.resw" />
     <PRIResource Include="Strings\zh-Hant\InformationPage.resw" />
     <PRIResource Include="Strings\zh-Hant\ProgressPage.resw" />
   </ItemGroup>
