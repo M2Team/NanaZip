@@ -7,6 +7,16 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::NanaZip::Modern::implementation
 {
+    ProgressPage::ProgressPage()
+    {
+
+    }
+
+    void ProgressPage::InitializeComponent()
+    {
+        ProgressPageT::InitializeComponent();
+    }
+
     DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
         ActionText,
         winrt::hstring,

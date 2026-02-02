@@ -15,11 +15,9 @@ namespace winrt::NanaZip::Modern::implementation
 {
     struct ProgressPage : ProgressPageT<ProgressPage>
     {
-        ProgressPage() 
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
+        ProgressPage();
+
+        void InitializeComponent();
 
         DEPENDENCY_PROPERTY_HEADER(
             ActionText,

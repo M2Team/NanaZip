@@ -15,6 +15,7 @@
 
 #include "MyWindowsNew.h"
 
+// **************** NanaZip Modification Start ****************
 #pragma push_macro("GetCurrentTime")
 #undef GetCurrentTime
 
@@ -31,6 +32,7 @@ namespace winrt
     using namespace Windows::Foundation;
     using namespace Windows::UI::Xaml;
 }
+// **************** NanaZip Modification End ****************
 
 struct CProgressMessageBoxPair
 {
@@ -132,6 +134,13 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   UString _continue_String;
   UString _paused_String;
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
+  int _buttonSizeX;
+  int _buttonSizeY;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  // **************** NanaZip Modification End ****************
+
   UINT_PTR _timer;
 
   UString _title;
@@ -164,14 +173,16 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
 
   NWindows::NControl::CProgressBar m_ProgressBar;
   NWindows::NControl::CListView _messageList;
+  // **************** NanaZip Modification Start ****************
   winrt::ProgressPage m_progressPage{ nullptr };
   HWND m_islandsHwnd = nullptr;
+  // **************** NanaZip Modification End ****************
   
   int _numMessages;
   UStringVector _messageStrings;
 
   #ifdef __ITaskbarList3_INTERFACE_DEFINED__
-  winrt::com_ptr<ITaskbarList3> _taskbarList;
+  CMyComPtr<ITaskbarList3> _taskbarList;
   #endif
   HWND _hwndForTaskbar;
 
@@ -227,6 +238,14 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void SetProgressPos(UInt64 pos);
   virtual bool OnInit();
   virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
+  virtual void OnCancel();
+  virtual void OnOK();
+  virtual bool OnNotify(UINT /* controlID */, LPNMHDR header);
+  void CopyToClipboard();
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  // **************** NanaZip Modification End ****************
 
   NWindows::NSynchronization::CManualResetEvent _createDialogEvent;
   NWindows::NSynchronization::CManualResetEvent _dialogCreatedEvent;
@@ -243,7 +262,10 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   bool OnCancelClicked();
 
   void SetTitleText();
+  // **************** NanaZip Modification Start ****************
+  //void ShowSize(int id, UInt64 val, UInt64& prev);
   winrt::hstring ShowSize(UInt64 val, UInt64 &prev);
+  // **************** NanaZip Modification End ****************
 
   void UpdateMessagesDialog();
 
@@ -251,11 +273,15 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void AddMessage(LPCWSTR message);
 
   bool OnExternalCloseMessage();
+  // **************** NanaZip Modification Start ****************
+  //void EnableErrorsControls(bool enable);
+  // **************** NanaZip Modification End ****************
 
   void ShowAfterMessages(HWND wndParent);
 
   void CheckNeedClose();
 
+  // **************** NanaZip Modification Start ****************
   void OnCancelButtonClicked(
       winrt::IInspectable const&,
       winrt::RoutedEventArgs const&
@@ -268,6 +294,7 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
       winrt::IInspectable const&,
       winrt::RoutedEventArgs const&
   );
+  // **************** NanaZip Modification End ****************
 public:
   CProgressSync Sync;
   bool CompressingMode;
