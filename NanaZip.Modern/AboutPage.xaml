@@ -43,7 +43,7 @@
         Click="GitHubButtonClick"
         Content="GitHub" />
       <Button
-        x:Name="CancelButton"
+        x:Uid="/NanaZip.Modern/Common/CancelButton"
         Grid.Column="2"
         HorizontalAlignment="Stretch"
         Click="CancelButtonClick"

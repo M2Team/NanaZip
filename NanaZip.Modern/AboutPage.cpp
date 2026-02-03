@@ -8,8 +8,6 @@
 
 #include <winrt/Windows.UI.Xaml.Documents.h>
 
-#include <string>
-
 #include <Mile.Project.Version.h>
 
 namespace winrt::NanaZip::Modern::implementation
@@ -60,8 +58,6 @@ namespace winrt::NanaZip::Modern::implementation
         this->GridTitleTextBlock().Text(WindowTitle);
         this->Version().Text(Version);
         this->Content().Text(Content);
-        this->CancelButton().Content(winrt::box_value(winrt::hstring(
-            ::K7ModernGetLegacyStringResource(402))));
     }
 
     void AboutPage::GitHubButtonClick(
