@@ -280,85 +280,43 @@
     <PRIResource Include="Strings\af\Common.resw">
       <Filter>Strings\af</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\af\InformationPage.resw">
-      <Filter>Strings\af</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ar\Common.resw">
-      <Filter>Strings\ar</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ar\InformationPage.resw">
       <Filter>Strings\ar</Filter>
     </PRIResource>
     <PRIResource Include="Strings\az-arab\Common.resw">
       <Filter>Strings\az-arab</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\az-arab\InformationPage.resw">
-      <Filter>Strings\az-arab</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\be\Common.resw">
-      <Filter>Strings\be</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\be\InformationPage.resw">
       <Filter>Strings\be</Filter>
     </PRIResource>
     <PRIResource Include="Strings\bg\Common.resw">
       <Filter>Strings\bg</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\bg\InformationPage.resw">
-      <Filter>Strings\bg</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\bn\Common.resw">
-      <Filter>Strings\bn</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\bn\InformationPage.resw">
       <Filter>Strings\bn</Filter>
     </PRIResource>
     <PRIResource Include="Strings\ca-es-valencia\Common.resw">
       <Filter>Strings\ca-es-valencia</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\ca-es-valencia\InformationPage.resw">
-      <Filter>Strings\ca-es-valencia</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ca\Common.resw">
-      <Filter>Strings\ca</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ca\InformationPage.resw">
       <Filter>Strings\ca</Filter>
     </PRIResource>
     <PRIResource Include="Strings\cs\Common.resw">
       <Filter>Strings\cs</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\cs\InformationPage.resw">
-      <Filter>Strings\cs</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\cy\Common.resw">
-      <Filter>Strings\cy</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\cy\InformationPage.resw">
       <Filter>Strings\cy</Filter>
     </PRIResource>
     <PRIResource Include="Strings\da\Common.resw">
       <Filter>Strings\da</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\da\InformationPage.resw">
-      <Filter>Strings\da</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\de\Common.resw">
-      <Filter>Strings\de</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\de\InformationPage.resw">
       <Filter>Strings\de</Filter>
     </PRIResource>
     <PRIResource Include="Strings\el\Common.resw">
       <Filter>Strings\el</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\el\InformationPage.resw">
-      <Filter>Strings\el</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\en\Common.resw">
-      <Filter>Strings\en</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\en\InformationPage.resw">
       <Filter>Strings\en</Filter>
     </PRIResource>
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw">
@@ -370,385 +328,193 @@
     <PRIResource Include="Strings\eo\Common.resw">
       <Filter>Strings\eo</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\eo\InformationPage.resw">
-      <Filter>Strings\eo</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\es\Common.resw">
-      <Filter>Strings\es</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\es\InformationPage.resw">
       <Filter>Strings\es</Filter>
     </PRIResource>
     <PRIResource Include="Strings\et\Common.resw">
       <Filter>Strings\et</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\et\InformationPage.resw">
-      <Filter>Strings\et</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\eu\Common.resw">
-      <Filter>Strings\eu</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\eu\InformationPage.resw">
       <Filter>Strings\eu</Filter>
     </PRIResource>
     <PRIResource Include="Strings\fa\Common.resw">
       <Filter>Strings\fa</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\fa\InformationPage.resw">
-      <Filter>Strings\fa</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\fi\Common.resw">
-      <Filter>Strings\fi</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\fi\InformationPage.resw">
       <Filter>Strings\fi</Filter>
     </PRIResource>
     <PRIResource Include="Strings\fr\Common.resw">
       <Filter>Strings\fr</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\fr\InformationPage.resw">
-      <Filter>Strings\fr</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\fy\Common.resw">
-      <Filter>Strings\fy</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\fy\InformationPage.resw">
       <Filter>Strings\fy</Filter>
     </PRIResource>
     <PRIResource Include="Strings\ga\Common.resw">
       <Filter>Strings\ga</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\ga\InformationPage.resw">
-      <Filter>Strings\ga</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\gl\Common.resw">
-      <Filter>Strings\gl</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\gl\InformationPage.resw">
       <Filter>Strings\gl</Filter>
     </PRIResource>
     <PRIResource Include="Strings\gu\Common.resw">
       <Filter>Strings\gu</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\gu\InformationPage.resw">
-      <Filter>Strings\gu</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\he\Common.resw">
-      <Filter>Strings\he</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\he\InformationPage.resw">
       <Filter>Strings\he</Filter>
     </PRIResource>
     <PRIResource Include="Strings\hi\Common.resw">
       <Filter>Strings\hi</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\hi\InformationPage.resw">
-      <Filter>Strings\hi</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\hr\Common.resw">
-      <Filter>Strings\hr</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\hr\InformationPage.resw">
       <Filter>Strings\hr</Filter>
     </PRIResource>
     <PRIResource Include="Strings\hu\Common.resw">
       <Filter>Strings\hu</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\hu\InformationPage.resw">
-      <Filter>Strings\hu</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\hy\Common.resw">
-      <Filter>Strings\hy</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\hy\InformationPage.resw">
       <Filter>Strings\hy</Filter>
     </PRIResource>
     <PRIResource Include="Strings\id\Common.resw">
       <Filter>Strings\id</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\id\InformationPage.resw">
-      <Filter>Strings\id</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\is\Common.resw">
-      <Filter>Strings\is</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\is\InformationPage.resw">
       <Filter>Strings\is</Filter>
     </PRIResource>
     <PRIResource Include="Strings\it\Common.resw">
       <Filter>Strings\it</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\it\InformationPage.resw">
-      <Filter>Strings\it</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ja\Common.resw">
-      <Filter>Strings\ja</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ja\InformationPage.resw">
       <Filter>Strings\ja</Filter>
     </PRIResource>
     <PRIResource Include="Strings\ka\Common.resw">
       <Filter>Strings\ka</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\ka\InformationPage.resw">
-      <Filter>Strings\ka</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\kk\Common.resw">
-      <Filter>Strings\kk</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\kk\InformationPage.resw">
       <Filter>Strings\kk</Filter>
     </PRIResource>
     <PRIResource Include="Strings\ko\Common.resw">
       <Filter>Strings\ko</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\ko\InformationPage.resw">
-      <Filter>Strings\ko</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ku-arab\Common.resw">
-      <Filter>Strings\ku-arab</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ku-arab\InformationPage.resw">
       <Filter>Strings\ku-arab</Filter>
     </PRIResource>
     <PRIResource Include="Strings\ky-kg\Common.resw">
       <Filter>Strings\ky-kg</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\ky-kg\InformationPage.resw">
-      <Filter>Strings\ky-kg</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\lt\Common.resw">
-      <Filter>Strings\lt</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\lt\InformationPage.resw">
       <Filter>Strings\lt</Filter>
     </PRIResource>
     <PRIResource Include="Strings\lv\Common.resw">
       <Filter>Strings\lv</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\lv\InformationPage.resw">
-      <Filter>Strings\lv</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\mk\Common.resw">
-      <Filter>Strings\mk</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\mk\InformationPage.resw">
       <Filter>Strings\mk</Filter>
     </PRIResource>
     <PRIResource Include="Strings\mn-cyrl\Common.resw">
       <Filter>Strings\mn-cyrl</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\mn-cyrl\InformationPage.resw">
-      <Filter>Strings\mn-cyrl</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\mn-mong\Common.resw">
-      <Filter>Strings\mn-mong</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\mn-mong\InformationPage.resw">
       <Filter>Strings\mn-mong</Filter>
     </PRIResource>
     <PRIResource Include="Strings\mr\Common.resw">
       <Filter>Strings\mr</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\mr\InformationPage.resw">
-      <Filter>Strings\mr</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ms\Common.resw">
-      <Filter>Strings\ms</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ms\InformationPage.resw">
       <Filter>Strings\ms</Filter>
     </PRIResource>
     <PRIResource Include="Strings\nb\Common.resw">
       <Filter>Strings\nb</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\nb\InformationPage.resw">
-      <Filter>Strings\nb</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ne\Common.resw">
-      <Filter>Strings\ne</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ne\InformationPage.resw">
       <Filter>Strings\ne</Filter>
     </PRIResource>
     <PRIResource Include="Strings\nl\Common.resw">
       <Filter>Strings\nl</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\nl\InformationPage.resw">
-      <Filter>Strings\nl</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\nn\Common.resw">
-      <Filter>Strings\nn</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\nn\InformationPage.resw">
       <Filter>Strings\nn</Filter>
     </PRIResource>
     <PRIResource Include="Strings\pa-in\Common.resw">
       <Filter>Strings\pa-in</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\pa-in\InformationPage.resw">
-      <Filter>Strings\pa-in</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\pl\Common.resw">
-      <Filter>Strings\pl</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\pl\InformationPage.resw">
       <Filter>Strings\pl</Filter>
     </PRIResource>
     <PRIResource Include="Strings\ps\Common.resw">
       <Filter>Strings\ps</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\ps\InformationPage.resw">
-      <Filter>Strings\ps</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\pt-br\Common.resw">
-      <Filter>Strings\pt-br</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\pt-br\InformationPage.resw">
       <Filter>Strings\pt-br</Filter>
     </PRIResource>
     <PRIResource Include="Strings\pt\Common.resw">
       <Filter>Strings\pt</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\pt\InformationPage.resw">
-      <Filter>Strings\pt</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ro\Common.resw">
-      <Filter>Strings\ro</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ro\InformationPage.resw">
       <Filter>Strings\ro</Filter>
     </PRIResource>
     <PRIResource Include="Strings\ru\Common.resw">
       <Filter>Strings\ru</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\ru\InformationPage.resw">
-      <Filter>Strings\ru</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\si\Common.resw">
-      <Filter>Strings\si</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\si\InformationPage.resw">
       <Filter>Strings\si</Filter>
     </PRIResource>
     <PRIResource Include="Strings\sk\Common.resw">
       <Filter>Strings\sk</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\sk\InformationPage.resw">
-      <Filter>Strings\sk</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\sl\Common.resw">
-      <Filter>Strings\sl</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\sl\InformationPage.resw">
       <Filter>Strings\sl</Filter>
     </PRIResource>
     <PRIResource Include="Strings\sq\Common.resw">
       <Filter>Strings\sq</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\sq\InformationPage.resw">
-      <Filter>Strings\sq</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\sr-cyrl\Common.resw">
-      <Filter>Strings\sr-cyrl</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\sr-cyrl\InformationPage.resw">
       <Filter>Strings\sr-cyrl</Filter>
     </PRIResource>
     <PRIResource Include="Strings\sr-Latn\Common.resw">
       <Filter>Strings\sr-Latn</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\sr-Latn\InformationPage.resw">
-      <Filter>Strings\sr-Latn</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\sv\Common.resw">
-      <Filter>Strings\sv</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\sv\InformationPage.resw">
       <Filter>Strings\sv</Filter>
     </PRIResource>
     <PRIResource Include="Strings\sw\Common.resw">
       <Filter>Strings\sw</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\sw\InformationPage.resw">
-      <Filter>Strings\sw</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ta\Common.resw">
-      <Filter>Strings\ta</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ta\InformationPage.resw">
       <Filter>Strings\ta</Filter>
     </PRIResource>
     <PRIResource Include="Strings\tg-arab\Common.resw">
       <Filter>Strings\tg-arab</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\tg-arab\InformationPage.resw">
-      <Filter>Strings\tg-arab</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\th\Common.resw">
-      <Filter>Strings\th</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\th\InformationPage.resw">
       <Filter>Strings\th</Filter>
     </PRIResource>
     <PRIResource Include="Strings\tk-cyrl\Common.resw">
       <Filter>Strings\tk-cyrl</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\tk-cyrl\InformationPage.resw">
-      <Filter>Strings\tk-cyrl</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\tr\Common.resw">
-      <Filter>Strings\tr</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\tr\InformationPage.resw">
       <Filter>Strings\tr</Filter>
     </PRIResource>
     <PRIResource Include="Strings\tt-arab\Common.resw">
       <Filter>Strings\tt-arab</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\tt-arab\InformationPage.resw">
-      <Filter>Strings\tt-arab</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\ug-arab\Common.resw">
-      <Filter>Strings\ug-arab</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\ug-arab\InformationPage.resw">
       <Filter>Strings\ug-arab</Filter>
     </PRIResource>
     <PRIResource Include="Strings\uk\Common.resw">
       <Filter>Strings\uk</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\uk\InformationPage.resw">
-      <Filter>Strings\uk</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\uz-cyrl\Common.resw">
-      <Filter>Strings\uz-cyrl</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\uz-cyrl\InformationPage.resw">
       <Filter>Strings\uz-cyrl</Filter>
     </PRIResource>
     <PRIResource Include="Strings\uz-latn\Common.resw">
       <Filter>Strings\uz-latn</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\uz-latn\InformationPage.resw">
-      <Filter>Strings\uz-latn</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\vi\Common.resw">
-      <Filter>Strings\vi</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\vi\InformationPage.resw">
       <Filter>Strings\vi</Filter>
     </PRIResource>
     <PRIResource Include="Strings\yo-latn\Common.resw">
       <Filter>Strings\yo-latn</Filter>
     </PRIResource>
-    <PRIResource Include="Strings\yo-latn\InformationPage.resw">
-      <Filter>Strings\yo-latn</Filter>
-    </PRIResource>
     <PRIResource Include="Strings\zh-Hans\Common.resw">
-      <Filter>Strings\zh-Hans</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\zh-Hans\InformationPage.resw">
       <Filter>Strings\zh-Hans</Filter>
     </PRIResource>
     <PRIResource Include="Strings\zh-Hans\MainWindowToolBarPage.resw">
@@ -794,9 +560,6 @@
       <Filter>Strings\de</Filter>
     </PRIResource>
     <PRIResource Include="Strings\zh-Hant\Common.resw">
-      <Filter>Strings\zh-Hant</Filter>
-    </PRIResource>
-    <PRIResource Include="Strings\zh-Hant\InformationPage.resw">
       <Filter>Strings\zh-Hant</Filter>
     </PRIResource>
     <PRIResource Include="Strings\af\ProgressPage.resw">

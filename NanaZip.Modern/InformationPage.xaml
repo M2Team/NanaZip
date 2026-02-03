@@ -43,7 +43,7 @@
         HorizontalAlignment="Right"
         Orientation="Horizontal">
         <Button
-          x:Uid="/NanaZip.Modern/InformationPage/CloseButton"
+          x:Uid="/NanaZip.Modern/Common/CloseButton"
           Width="120"
           Margin="4,16,4,16"
           d:Content="[Close]"
