@@ -3,8 +3,6 @@
     [default_interface]
     runtimeclass ProgressPage : Windows.UI.Xaml.Controls.Page
     {
-        ProgressPage();
-
         String ActionText;
         String FileNameText;
         String ElapsedTimeText;
@@ -67,6 +65,5 @@
 
         event Windows.UI.Xaml.RoutedEventHandler BackgroundButtonClicked;
         event Windows.UI.Xaml.RoutedEventHandler PauseButtonClicked;
-        event Windows.UI.Xaml.RoutedEventHandler CancelButtonClicked;
     }
 }

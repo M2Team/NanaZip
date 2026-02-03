@@ -9,4 +9,5 @@ K7ModernUninitialize
 K7ModernShowSponsorDialog
 K7ModernShowAboutDialog
 K7ModernShowInformationDialog
+K7ModernCreateProgressPage
 K7ModernCreateMainWindowToolBarPage

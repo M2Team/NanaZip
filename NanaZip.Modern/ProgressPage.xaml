@@ -206,7 +206,7 @@
         <Button
           Width="120"
           Margin="4,16,4,16"
-          Click="CancelButtonClickedHandler"
+          Click="CancelButtonClick"
           Content="{x:Bind CancelButtonText, Mode=OneWay}" />
       </StackPanel>
     </Grid>

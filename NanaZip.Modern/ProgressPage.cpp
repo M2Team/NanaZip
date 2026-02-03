@@ -7,7 +7,9 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::NanaZip::Modern::implementation
 {
-    ProgressPage::ProgressPage()
+    ProgressPage::ProgressPage(
+        _In_opt_ HWND WindowHandle) :
+        m_WindowHandle(WindowHandle)
     {
 
     }
@@ -208,11 +210,30 @@ namespace winrt::NanaZip::Modern::implementation
         this->PauseButtonClicked(*this, e);
     }
 
-    void ProgressPage::CancelButtonClickedHandler(
+    void ProgressPage::CancelButtonClick(
         winrt::IInspectable const& sender,
         winrt::RoutedEventArgs const& e)
     {
         UNREFERENCED_PARAMETER(sender);
-        this->CancelButtonClicked(*this, e);
+        UNREFERENCED_PARAMETER(e);
+
+        ::PostMessageW(
+            this->m_WindowHandle,
+            WM_COMMAND,
+            MAKEWPARAM(IDCANCEL, BN_CLICKED),
+            0);
     }
+}
+
+EXTERN_C LPVOID WINAPI K7ModernCreateProgressPage(
+    _In_ HWND ParentWindowHandle)
+{
+    using Interface =
+        winrt::NanaZip::Modern::ProgressPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::ProgressPage;
+
+    Interface Window = winrt::make<Implementation>(
+        ParentWindowHandle);
+    return winrt::detach_abi(Window);
 }

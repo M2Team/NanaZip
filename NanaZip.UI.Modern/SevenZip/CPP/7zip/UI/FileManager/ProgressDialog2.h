@@ -28,9 +28,9 @@
 
 namespace winrt
 {
-    using namespace NanaZip::Modern;
-    using namespace Windows::Foundation;
-    using namespace Windows::UI::Xaml;
+    using NanaZip::Modern::ProgressPage;
+    using Windows::Foundation::IInspectable;
+    using Windows::UI::Xaml::RoutedEventArgs;
 }
 // **************** NanaZip Modification End ****************
 
@@ -174,8 +174,8 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   NWindows::NControl::CProgressBar m_ProgressBar;
   NWindows::NControl::CListView _messageList;
   // **************** NanaZip Modification Start ****************
-  winrt::ProgressPage m_progressPage{ nullptr };
-  HWND m_islandsHwnd = nullptr;
+  winrt::ProgressPage m_ProgressPage{ nullptr };
+  HWND m_ProgressPageWindowHandle = nullptr;
   // **************** NanaZip Modification End ****************
   
   int _numMessages;
@@ -282,10 +282,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void CheckNeedClose();
 
   // **************** NanaZip Modification Start ****************
-  void OnCancelButtonClicked(
-      winrt::IInspectable const&,
-      winrt::RoutedEventArgs const&
-  );
   void OnPauseButtonClicked(
       winrt::IInspectable const&,
       winrt::RoutedEventArgs const&

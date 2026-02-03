@@ -84,6 +84,15 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     _In_opt_ LPCWSTR Content);
 
 /**
+ * @brief Create the progress control for the progress window.
+ * @param ParentWindowHandle A handle to the owner window of the control to be
+ *                           created. This parameter must be valid.
+ * @return The progress control instance pointer.
+ */
+EXTERN_C LPVOID WINAPI K7ModernCreateProgressPage(
+    _In_ HWND ParentWindowHandle);
+
+/**
  * @brief Create the toolbar control for the main window.
  * @param ParentWindowHandle A handle to the owner window of the control to be
  *                           created. This parameter must be valid.

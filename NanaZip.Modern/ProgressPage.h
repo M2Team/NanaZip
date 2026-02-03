@@ -5,6 +5,8 @@
 #include <Mile.Helpers.CppWinRT.h>
 #include "ControlMacros.h"
 
+#include <Windows.h>
+
 namespace winrt
 {
     using namespace Windows::Foundation;
@@ -15,7 +17,10 @@ namespace winrt::NanaZip::Modern::implementation
 {
     struct ProgressPage : ProgressPageT<ProgressPage>
     {
-        ProgressPage();
+    public:
+
+        ProgressPage(
+            _In_opt_ HWND WindowHandle = nullptr);
 
         void InitializeComponent();
 
@@ -127,16 +132,19 @@ namespace winrt::NanaZip::Modern::implementation
         void PauseButtonClickedHandler(
             winrt::IInspectable const& sender,
             winrt::RoutedEventArgs const& e);
-        void CancelButtonClickedHandler(
-            winrt::IInspectable const& sender,
-            winrt::RoutedEventArgs const& e);
 
         Mile::WinRT::Event<winrt::RoutedEventHandler>
             BackgroundButtonClicked;
         Mile::WinRT::Event<winrt::RoutedEventHandler>
             PauseButtonClicked;
-        Mile::WinRT::Event<winrt::RoutedEventHandler>
-            CancelButtonClicked;
+
+        void CancelButtonClick(
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
+
+    private:
+
+        HWND m_WindowHandle;
     };
 }
 
