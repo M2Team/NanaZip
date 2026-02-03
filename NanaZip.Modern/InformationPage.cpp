@@ -33,6 +33,6 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(args);
 
-		::SendMessageW(this->m_WindowHandle, WM_CLOSE, 0, 0);
+		::PostMessageW(this->m_WindowHandle, WM_CLOSE, 0, 0);
     }
 }

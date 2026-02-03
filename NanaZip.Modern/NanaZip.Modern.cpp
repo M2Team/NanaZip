@@ -206,8 +206,21 @@ namespace
                     winrt::copy_from_abi(
                         XamlSource,
                         ::GetPropW(hWnd, L"XamlWindowSource"));
-                    XamlSource.Close();
+                    // Clear the property first to avoid use-after-free issue.
+                    ::RemovePropW(hWnd, L"XamlWindowSource");
+                    if (XamlSource)
+                    {
+                        // Release the reference count from SetPropW.
+                        XamlSource.as<IUnknown>()->Release();
+                        // Close the XAML Island.
+                        XamlSource.Close();
+                        // Destroy the content immediately to avoid unintended access.
+                        XamlSource = nullptr;
+                    }
+                    break;
                 }
+                default:
+                    break;
                 }
 
                 return ::DefSubclassProc(
@@ -349,7 +362,7 @@ EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
         WindowHandle,
         460,
         320,
-        winrt::detach_abi(Window),
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -378,7 +391,7 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
         WindowHandle,
         480,
         320,
-        winrt::detach_abi(Window),
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -409,7 +422,7 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
         WindowHandle,
         560,
         560,
-        winrt::detach_abi(Window),
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
