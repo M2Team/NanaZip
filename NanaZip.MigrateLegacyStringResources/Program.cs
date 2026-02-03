@@ -35,8 +35,6 @@ internal class Program
             new(445, "ProgressPage", "ForegroundButtonText", true),
             new(446, "ProgressPage", "PauseButtonText", true),
             new(411, "ProgressPage", "ContinueButtonText", true),
-            new(402, "ProgressPage", "CancelButtonText", true),
-            new(408, "ProgressPage", "CloseButtonText", true),
             new(447, "ProgressPage", "PausedText")
         ];
 

@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Lanjut</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Batal</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Tutup</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Dijeda</value>
   </data>

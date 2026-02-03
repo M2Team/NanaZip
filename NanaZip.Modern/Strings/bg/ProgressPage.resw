@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Продължаване</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Отказ</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Затваряне</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>В пауза</value>
   </data>

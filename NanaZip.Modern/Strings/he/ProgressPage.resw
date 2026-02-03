@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>המשך</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>בטל</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>סגור</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>מושהה</value>
   </data>

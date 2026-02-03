@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>ਜਾਰੀ ਕਰੋ (C)</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>ਰੱਦ ਕਰੋ</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>ਬੰਦ ਕਰੋ (C)</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>ਪੋਜ਼ ਹੋਇਆ</value>
   </data>

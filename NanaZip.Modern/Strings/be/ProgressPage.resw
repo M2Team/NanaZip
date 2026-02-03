@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Працягнуць</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Адмена</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Зачыніць</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>На паўзе</value>
   </data>

@@ -51,17 +51,8 @@
   <data name="SpeedLabel.Text" xml:space="preserve">
     <value>Spoed:</value>
   </data>
-  <data name="ProcessedLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="CompressionRatioLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="ErrorsLabel.Text" xml:space="preserve">
     <value>Foute:</value>
-  </data>
-  <data name="FilesLabel.Text" xml:space="preserve">
-    <value></value>
   </data>
   <data name="PackedSizeLabel.Text" xml:space="preserve">
     <value>Ingepakte grootte</value>
@@ -77,12 +68,6 @@
   </data>
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Gaan voort</value>
-  </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Kanselleer</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Afsluit</value>
   </data>
   <data name="PausedText" xml:space="preserve">
     <value>Wagtend</value>

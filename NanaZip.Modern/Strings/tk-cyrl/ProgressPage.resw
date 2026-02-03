@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Dowam et</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Goýbolsun et</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Ýap</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Sägindi</value>
   </data>

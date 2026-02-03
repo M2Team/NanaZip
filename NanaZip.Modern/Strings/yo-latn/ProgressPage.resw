@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Tẹ́-síwájú</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Pa re</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Pádé</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Ìdúró</value>
   </data>

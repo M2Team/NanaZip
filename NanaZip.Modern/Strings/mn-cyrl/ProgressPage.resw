@@ -51,17 +51,8 @@
   <data name="SpeedLabel.Text" xml:space="preserve">
     <value>Хурд:</value>
   </data>
-  <data name="ProcessedLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="CompressionRatioLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="ErrorsLabel.Text" xml:space="preserve">
     <value>Алдаанууд:</value>
-  </data>
-  <data name="FilesLabel.Text" xml:space="preserve">
-    <value></value>
   </data>
   <data name="PackedSizeLabel.Text" xml:space="preserve">
     <value>Багцалсан хэмжээ</value>
@@ -77,12 +68,6 @@
   </data>
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Үргэлжлүүл</value>
-  </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Болих</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Хаах</value>
   </data>
   <data name="PausedText" xml:space="preserve">
     <value>Түр зогслоо</value>

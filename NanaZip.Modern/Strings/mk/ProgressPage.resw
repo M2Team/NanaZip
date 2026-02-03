@@ -51,17 +51,8 @@
   <data name="SpeedLabel.Text" xml:space="preserve">
     <value>Брзина:</value>
   </data>
-  <data name="ProcessedLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="CompressionRatioLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="ErrorsLabel.Text" xml:space="preserve">
     <value>Грешки:</value>
-  </data>
-  <data name="FilesLabel.Text" xml:space="preserve">
-    <value></value>
   </data>
   <data name="PackedSizeLabel.Text" xml:space="preserve">
     <value>Пакувана Големина</value>
@@ -77,12 +68,6 @@
   </data>
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Продолжи</value>
-  </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Откажи</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Затвори</value>
   </data>
   <data name="PausedText" xml:space="preserve">
     <value>Паузирано</value>

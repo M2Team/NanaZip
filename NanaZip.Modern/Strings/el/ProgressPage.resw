@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Συνέχεια</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Άκυρο</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Κλείσιμο</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Παύθηκε</value>
   </data>

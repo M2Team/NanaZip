@@ -51,17 +51,8 @@
   <data name="SpeedLabel.Text" xml:space="preserve">
     <value>வேகம்:</value>
   </data>
-  <data name="ProcessedLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="CompressionRatioLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="ErrorsLabel.Text" xml:space="preserve">
     <value>தவறுகள்:</value>
-  </data>
-  <data name="FilesLabel.Text" xml:space="preserve">
-    <value></value>
   </data>
   <data name="PackedSizeLabel.Text" xml:space="preserve">
     <value>கட்டப்பட்ட அளவு</value>
@@ -77,12 +68,6 @@
   </data>
   <data name="ContinueButtonText" xml:space="preserve">
     <value>தொடரவும்</value>
-  </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>இரத்து</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>மூடு</value>
   </data>
   <data name="PausedText" xml:space="preserve">
     <value>தற்காலிக நிறுத்தல்</value>

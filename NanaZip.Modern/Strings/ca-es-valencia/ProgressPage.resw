@@ -51,17 +51,8 @@
   <data name="SpeedLabel.Text" xml:space="preserve">
     <value>Velocitat:</value>
   </data>
-  <data name="ProcessedLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="CompressionRatioLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="ErrorsLabel.Text" xml:space="preserve">
     <value>Errors:</value>
-  </data>
-  <data name="FilesLabel.Text" xml:space="preserve">
-    <value></value>
   </data>
   <data name="PackedSizeLabel.Text" xml:space="preserve">
     <value>Tamany comprimit</value>
@@ -77,12 +68,6 @@
   </data>
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Continuar</value>
-  </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Cancel·lar</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Tancar</value>
   </data>
   <data name="PausedText" xml:space="preserve">
     <value>Parat</value>

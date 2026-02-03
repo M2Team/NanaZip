@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>بەردەوامبوون</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>پاشگەزبوونەوە</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>داخستن</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>ڕاگیردرا</value>
   </data>

@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Jätka</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Loobu</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Sulge</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Pausiks peatatud</value>
   </data>

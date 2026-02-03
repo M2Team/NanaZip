@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>계속(C)</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>취소</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>닫기(C)</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>일시정지 됨</value>
   </data>

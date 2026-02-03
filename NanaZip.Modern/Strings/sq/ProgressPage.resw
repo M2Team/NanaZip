@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Vazhdo</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Anulo</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Mbyll</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Pezulluar</value>
   </data>

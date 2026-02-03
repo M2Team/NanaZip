@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Davom etmoq</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Bekor qilmoq</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Yopmoq</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Pauza qilindi</value>
   </data>

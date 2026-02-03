@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Halda áfram</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Hætta við</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Loka</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Í hléi</value>
   </data>

@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Endelea</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Ghairi</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Funga</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Imetulizwa</value>
   </data>

@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>ดำเนินการต่อ</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>ยกเลิก</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>ออก</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>หยุดชั่วคราว</value>
   </data>

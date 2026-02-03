@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Tiếp tục</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Hủy bỏ</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Đóng</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Đã dừng</value>
   </data>

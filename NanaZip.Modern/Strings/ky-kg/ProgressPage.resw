@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Улантуу</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Айнуу</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Жабуу</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Тыныгууда</value>
   </data>

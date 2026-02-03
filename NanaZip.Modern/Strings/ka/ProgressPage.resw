@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>გაგრძელება</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>გაუქმება</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>დახურვა</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>&amp;შეჩერებული</value>
   </data>

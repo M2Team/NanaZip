@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>داۋاملاشتۇر(C)</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>ۋاز كەچ</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>ياپ(C)</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>ۋاقىتلىق توختىتىلدى</value>
   </data>

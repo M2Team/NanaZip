@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>继续(C)</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>关闭(C)</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>已暂停</value>
   </data>

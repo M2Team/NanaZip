@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Tęsti</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Atšaukti</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Uždaryti</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Laikinai sustabdyta</value>
   </data>

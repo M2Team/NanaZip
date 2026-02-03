@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Շարունակել</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Չեղարկել</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Փակել</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Դադարի մեջ է</value>
   </data>

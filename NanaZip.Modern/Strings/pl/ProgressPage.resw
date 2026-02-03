@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Kontynuuj</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Anuluj</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Zamknij</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Wstrzymano</value>
   </data>

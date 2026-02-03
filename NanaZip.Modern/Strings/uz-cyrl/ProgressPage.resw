@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Давом етмоқ</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Бекор қилмоқ</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Ёпмоқ</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Пауза қилинди</value>
   </data>

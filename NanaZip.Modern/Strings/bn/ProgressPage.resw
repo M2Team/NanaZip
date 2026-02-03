@@ -51,17 +51,8 @@
   <data name="SpeedLabel.Text" xml:space="preserve">
     <value>গতি:</value>
   </data>
-  <data name="ProcessedLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="CompressionRatioLabel.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="ErrorsLabel.Text" xml:space="preserve">
     <value>বিফলতা :</value>
-  </data>
-  <data name="FilesLabel.Text" xml:space="preserve">
-    <value></value>
   </data>
   <data name="PackedSizeLabel.Text" xml:space="preserve">
     <value>সংকুচিত আকার</value>
@@ -77,12 +68,6 @@
   </data>
   <data name="ContinueButtonText" xml:space="preserve">
     <value>চালিয়ে যাওয়া</value>
-  </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>বাতিল</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>বন্ধ করা</value>
   </data>
   <data name="PausedText" xml:space="preserve">
     <value>বিরতিতে অবস্থানরত</value>

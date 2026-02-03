@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Jarraitu</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Ezeztatu</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Itxi</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Pausatuta</value>
   </data>

@@ -472,7 +472,7 @@ bool CProgressDialog::OnInit()
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
   m_progressPage.CancelButtonText(
       ::Mile::WinRT::GetLocalizedString(
-          L"NanaZip.Modern/ProgressPage/CancelButtonText"));
+          L"NanaZip.Modern/Common/CancelButton/Content"));
 
   m_progressPage.CancelButtonClicked({ this, &CProgressDialog::OnCancelButtonClicked });
   m_progressPage.PauseButtonClicked({ this, &CProgressDialog::OnPauseButtonClicked });
@@ -1229,7 +1229,7 @@ bool CProgressDialog::OnExternalCloseMessage()
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
   m_progressPage.CancelButtonText(
       ::Mile::WinRT::GetLocalizedString(
-          L"NanaZip.Modern/ProgressPage/CloseButtonText"));
+          L"NanaZip.Modern/Common/CloseButton/Content"));
   m_progressPage.ShowBackgroundButton(false);
   m_progressPage.ShowPauseButton(false);
   // **************** NanaZip Modification End ****************

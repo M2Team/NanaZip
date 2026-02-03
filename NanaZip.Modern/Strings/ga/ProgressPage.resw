@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>Lean ar aghaidh</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>Cealaigh</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>Dún</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>Ar sos</value>
   </data>

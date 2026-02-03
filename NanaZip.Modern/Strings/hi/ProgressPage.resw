@@ -78,12 +78,6 @@
   <data name="ContinueButtonText" xml:space="preserve">
     <value>जारी रखे</value>
   </data>
-  <data name="CancelButtonText" xml:space="preserve">
-    <value>रद्द</value>
-  </data>
-  <data name="CloseButtonText" xml:space="preserve">
-    <value>बंद करो</value>
-  </data>
   <data name="PausedText" xml:space="preserve">
     <value>विश्रामित</value>
   </data>
