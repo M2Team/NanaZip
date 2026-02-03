@@ -20,6 +20,8 @@ internal class Program
 
     static readonly ImmutableArray<ResourceMapping> map =
         [
+            new(402, "Common", "CancelButton.Content", true),
+            new(408, "Common", "CloseButton.Content", true),
             new(408, "InformationPage", "CloseButton.Content", true),
             new(3900, "ProgressPage", "ElapsedTimeLabel.Text"),
             new(3901, "ProgressPage", "RemainingTimeLabel.Text"),
