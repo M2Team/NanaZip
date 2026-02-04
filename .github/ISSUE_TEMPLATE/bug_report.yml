@@ -1,0 +1,51 @@
+name: Bug report
+description: Something isn't working as expected.
+labels: ["bug"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Prerequisite checks
+      description: These items are required before submitting the bug report.
+      options:
+      - label: My system fulfills [the minimum software requirements](https://github.com/M2Team/NanaZip?tab=readme-ov-file#system-requirements).
+        required: true
+      - label: I have downloaded NanaZip from an official source (GitHub, Microsoft Store, My Digital Life Forums, SourceForge, and Windows App Community)
+        required: true
+  - type: textarea
+    attributes:
+      label: Describe the issue
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction steps
+      description: What steps did you take for this bug to happen?
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: What did you expect this feature to do?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: NanaZip veresion
+      description: What version of NanaZip are you using?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Windows version
+      description: What version of Windows are you using?
+      placeholder: Windows 11, version 25H2; Windows 11 Insider build xxxxx
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Any other information related to this bug that you want to tell us.

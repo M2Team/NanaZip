@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.h
- * PURPOSE:   Definition for NanaZip.Codecs
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.h
+ * PURPOSE:    Definition for NanaZip.Codecs
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

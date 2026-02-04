@@ -435,13 +435,13 @@ bool CInArchive::ReadHeaderReal(const Byte *p, unsigned size, CItem &item)
       size -= sizeof(item.Salt);
       p += sizeof(item.Salt);
     }
-    if (item.Name == "ACL" && size == 0)
+    if (item.Name.IsEqualTo("ACL") && size == 0)
     {
       item.IsAltStream = true;
       item.Name.Empty();
       item.UnicodeName.SetFromAscii(".ACL");
     }
-    else if (item.Name == "STM" && size != 0 && (size & 1) == 0)
+    else if (item.Name.IsEqualTo("STM") && size != 0 && (size & 1) == 0)
     {
       item.IsAltStream = true;
       item.Name.Empty();

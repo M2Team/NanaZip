@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Hash.Sm3.cpp
- * PURPOSE:   Implementation for SM3 hash algorithm
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Hash.Sm3.cpp
+ * PURPOSE:    Implementation for SM3 hash algorithm
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

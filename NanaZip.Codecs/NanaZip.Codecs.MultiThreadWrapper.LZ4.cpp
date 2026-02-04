@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.MultiThreadWrapper.LZ4.cpp
- * PURPOSE:   Implementation for LZ4 Multi Thread Wrapper
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.MultiThreadWrapper.LZ4.cpp
+ * PURPOSE:    Implementation for LZ4 Multi Thread Wrapper
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -47,7 +47,7 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLz4Decode(
     _In_ UINT32 NumberOfThreads,
     _In_ UINT32 InputSize)
 {
-    LZ4MT_RdWr_t ReadWrite = { 0 };
+    LZ4MT_RdWr_t ReadWrite = {};
     ReadWrite.fn_read = ::NanaZipCodecsLz4Read;
     ReadWrite.fn_write = ::NanaZipCodecsLz4Write;
     ReadWrite.arg_read = reinterpret_cast<void*>(StreamContext);

@@ -97,6 +97,16 @@ public:
   
   size_t ReadBytesPart(Byte *buf, size_t size);
   size_t ReadBytes(Byte *buf, size_t size);
+  const Byte *Lookahead(size_t &rem)
+  {
+    rem = (size_t)(_bufLim - _buf);
+    if (!rem)
+    {
+      ReadBlock();
+      rem = (size_t)(_bufLim - _buf);
+    }
+    return _buf;
+  }
   size_t Skip(size_t size);
 };
 

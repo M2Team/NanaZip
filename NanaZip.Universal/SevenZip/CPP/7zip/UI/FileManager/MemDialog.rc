@@ -1,0 +1,49 @@
+#include "MemDialogRes.h"
+#include "../../GuiCommon.rc"
+
+#define xc 320
+#define yc 200
+
+#define spin_x_size 50
+#define info_y_size 72
+#define save_y (m + info_y_size + 4)
+#define spin_y (save_y + 16)
+
+#define xsg (xc - m - m)
+#define xg  (m + m)
+#define yg  (spin_y + 20)
+
+IDD_MEM DIALOG MY_MODAL_DIALOG_POSTFIX
+CAPTION "Memory usage request"
+BEGIN
+  LTEXT   "", IDT_MEM_MESSAGE, m, m, xc, info_y_size, SS_NOPREFIX
+  CONTROL "Change allowed limit for next operations", IDX_MEM_SAVE_LIMIT, MY_CHECKBOX,
+      m, save_y, xc, 10
+
+  MY_CONTROL_EDIT_WITH_SPIN(
+      IDE_MEM_SPIN_EDIT,
+      IDC_MEM_SPIN,
+      "4", m + 10, spin_y, spin_x_size)
+
+  LTEXT     "GB", IDT_MEM_GB,  m + 10 + spin_x_size + 8, spin_y + 2, 160, 10
+
+  GROUPBOX  "Action", IDG_MEM_ACTION, m, yg, xc, 62
+
+  MY_CONTROL_AUTORADIOBUTTON_GROUP (
+            "&Allow archive unpacking", IDR_MEM_ACTION_ALLOW,
+             xg, yg + 14, xsg)
+  MY_CONTROL_AUTORADIOBUTTON (
+            "&Skip archive unpacking",     IDR_MEM_ACTION_SKIP_ARC,
+             xg, yg + 28, xsg)
+//  CONTROL    "&Skip file extracting",       IDR_MEM_SKIP_FILE, MY_AUTORADIOBUTTON,
+//             xg, yg + 42, xsg, 10
+
+  CONTROL "&Repeat selected action for current operation", IDX_MEM_REMEMBER, MY_CHECKBOX,
+  	     xg + 10, yg + 44, xsg - 10, 10
+
+  CONTINUE_CANCEL
+END
+
+#undef save_y
+#undef spin_y
+#undef spin_x_size

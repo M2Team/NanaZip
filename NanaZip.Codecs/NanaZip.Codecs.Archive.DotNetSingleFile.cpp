@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.DotNetSingleFile.cpp
- * PURPOSE:   Implementation for .NET Single File Application readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.DotNetSingleFile.cpp
+ * PURPOSE:    Implementation for .NET Single File Application readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -475,7 +475,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (FAILED(hr))
+            if (S_OK != hr)
             {
                 this->Close();
             }
@@ -670,14 +670,15 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            if (!this->m_IsInitialized)
-            {
-                return S_FALSE;
-            }
-
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            if (!this->m_IsInitialized)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
             switch (PropId)

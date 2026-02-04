@@ -1,19 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project 
-  DefaultTargets="Restore;Build;Packaging"
+  DefaultTargets="RefreshVersion;Restore;Build;Packaging"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="NanaZip.Project\NanaZip.Project.props" />
+  <UsingTask
+    TaskName="NanaZip.Build.Tasks.RefreshAppxManifestVersion"
+    AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
+  <UsingTask
+    TaskName="NanaZip.Build.Tasks.RefreshProjectBuildNumberDate"
+    AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
+  <Target Name="RefreshVersion">
+    <Exec Command="git show -s --format=%25%25cs" ConsoleToMSBuild="true" IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="GitExitCode" />
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitBuildNumberDate" />
+    </Exec>
+    <PropertyGroup>
+      <NanaZipBuildNumberDate Condition="'$(GitExitCode)' == '0' and '$(GitBuildNumberDate)' != ''">$(GitBuildNumberDate)</NanaZipBuildNumberDate>
+    </PropertyGroup>
+    <RefreshProjectBuildNumberDate
+      FilePath="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Project.Version.props"
+      BuildNumberDate="$(NanaZipBuildNumberDate)" />
+    <PropertyGroup>
+      <MileProjectVersion>$(NanaZipMajorVersion).$(NanaZipMinorVersion).$([System.DateTime]::Parse('$(NanaZipBuildNumberDate)').Subtract($([System.DateTime]::Parse('$(NanaZipProjectCreationDate)'))).TotalDays).0</MileProjectVersion>
+    </PropertyGroup>
+    <RefreshAppxManifestVersion
+      FilePath="$(MSBuildThisFileDirectory)NanaZipPackage\Package.appxmanifest"
+      Version="$(MileProjectVersion)" />
+  </Target>
   <Target Name="Restore">
     <ItemGroup>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Debug;Platform=x86</AdditionalProperties>   
-      </RestoreProjectReference>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
-        <AdditionalProperties>Configuration=Release;Platform=x86</AdditionalProperties>   
-      </RestoreProjectReference>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
         <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
       </RestoreProjectReference>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.sln">
+      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
         <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
       </RestoreProjectReference>
       <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj">
@@ -50,12 +69,11 @@
     <PropertyGroup>
       <InputBinariesPath>$(MSBuildThisFileDirectory)Output\Binaries\Release\</InputBinariesPath>
       <OutputSymbolsPath>$(MSBuildThisFileDirectory)Output\Binaries\Root\Symbols\</OutputSymbolsPath>
-      <OutputFileNamePrefix>NanaZip_6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</OutputFileNamePrefix>
+      <OutputFileNamePrefix>NanaZip_$(MileProjectVersion)</OutputFileNamePrefix>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputSymbolsPath)arm64" />
     <MakeDir Directories="$(OutputSymbolsPath)x64" />
-    <MakeDir Directories="$(OutputSymbolsPath)x86" />
 
     <Copy SourceFiles="$(MSBuildThisFileDirectory)License.md" DestinationFiles="$(OutputSymbolsPath)License.txt" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Codecs.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
@@ -74,9 +92,9 @@
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Modern.FileManager.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
-    <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />
-    <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Sfx.Shared.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />
-    <Copy SourceFiles="$(InputBinariesPath)Win32\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x86" />   
+    <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Console.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Sfx.Shared.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />   
 
     <Exec Command="7z a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
   </Target>

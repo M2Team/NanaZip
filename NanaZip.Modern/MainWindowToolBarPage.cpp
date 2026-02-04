@@ -60,9 +60,6 @@ namespace winrt
     using Windows::UI::Xaml::Media::GeneralTransform;
 }
 
-using namespace winrt;
-using namespace Windows::UI::Xaml;
-
 namespace
 {
     namespace ToolBarCommandID
@@ -123,18 +120,18 @@ namespace winrt::NanaZip::Modern::implementation
             this->AboutButton()
         };
 
-        const wchar_t* ToolBarResources[10] =
+        const UINT32 ToolBarLegacyStringResources[10] =
         {
-            L"Legacy/Resource7200",
-            L"Legacy/Resource7201",
-            L"Legacy/Resource7202",
-            L"Legacy/Resource7203",
-            L"Legacy/Resource7204",
-            L"Legacy/Resource7205",
-            L"Legacy/Resource7206",
-            L"Legacy/Resource900",
-            L"Legacy/Resource901",
-            L"Legacy/Resource961"
+            7200, // Add
+            7201, // Extract
+            7202, // Test
+            7203, // Copy
+            7204, // Move
+            7205, // Delete
+            7206, // Info
+            900, // Options
+            901, // Benchmark
+            961 // About
         };
 
         const std::size_t ToolBarButtonCount =
@@ -142,8 +139,8 @@ namespace winrt::NanaZip::Modern::implementation
 
         for (size_t i = 0; i < ToolBarButtonCount; ++i)
         {
-            winrt::hstring Resource =
-                Mile::WinRT::GetLocalizedString(ToolBarResources[i]);
+            winrt::hstring Resource = winrt::hstring(::K7ModernGetLegacyStringResource(
+                ToolBarLegacyStringResources[i]));
             winrt::AutomationProperties::SetName(
                 ToolBarButtons[i],
                 Resource);
@@ -155,13 +152,13 @@ namespace winrt::NanaZip::Modern::implementation
         this->m_DispatcherQueue =
             winrt::DispatcherQueue::GetForCurrentThread();
 
-        this->m_StoreContext = winrt::StoreContext::GetDefault();
-        if (this->m_StoreContext)
-        {
-            winrt::check_hresult(
-                this->m_StoreContext.as<IInitializeWithWindow>()->Initialize(
-                    this->m_WindowHandle));
-        }
+        std::wstring sponsorButtonLabel = L"[";
+        sponsorButtonLabel += Mile::WinRT::GetLocalizedString(
+            L"NanaZip.Modern/MainWindowToolBarPage/SponsorButton/AcquireText",
+            L"Sponsor NanaZip");
+        sponsorButtonLabel += L"]";
+
+        this->SponsorButton().Content(winrt::box_value(sponsorButtonLabel));
     }
 
     void MainWindowToolBarPage::PageLoaded(
@@ -350,7 +347,7 @@ namespace winrt::NanaZip::Modern::implementation
 
         UINT DpiValue = ::GetDpiForWindow(this->m_WindowHandle);
 
-        POINT MenuPosition = { 0 };
+        POINT MenuPosition = {};
         MenuPosition.x = ::MulDiv(
             static_cast<int>(LogicalPoint.X),
             DpiValue,
@@ -476,8 +473,8 @@ namespace winrt::NanaZip::Modern::implementation
                 return;
             }
 
-            STARTUPINFOEXW StartupInfoEx = { 0 };
-            PROCESS_INFORMATION ProcessInformation = { 0 };
+            STARTUPINFOEXW StartupInfoEx = {};
+            PROCESS_INFORMATION ProcessInformation = {};
             StartupInfoEx.StartupInfo.cb = sizeof(STARTUPINFOEXW);
             StartupInfoEx.lpAttributeList = AttributeList;
 
@@ -530,6 +527,11 @@ namespace winrt::NanaZip::Modern::implementation
             {
                 return Data;
             }
+        }
+
+        if (!this->m_StoreContext)
+        {
+            this->m_StoreContext = winrt::StoreContext::GetDefault();
         }
 
         bool Sponsored = false;

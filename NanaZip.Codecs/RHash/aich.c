@@ -72,7 +72,7 @@ void rhash_aich_init(aich_ctx* ctx)
 	memset(ctx, 0, sizeof(aich_ctx));
 
 #if defined(USE_OPENSSL)
-	assert(rhash_info_table[3].info->hash_id == RHASH_SHA1);
+	assert(rhash_info_table[3].info->hash_id == EXTENDED_SHA1);
 	assert(rhash_info_table[3].context_size <= (sizeof(sha1_ctx) + sizeof(unsigned long)));
 	rhash_load_sha1_methods(&ctx->sha1_methods, METHODS_SELECTED);
 #endif

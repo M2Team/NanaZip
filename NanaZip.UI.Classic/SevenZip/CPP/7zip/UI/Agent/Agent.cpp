@@ -1510,6 +1510,11 @@ STDMETHODIMP CAgentFolder::Extract(const UInt32 *indices,
     if (_zoneMode != NExtract::NZoneIdMode::kNone)
     {
       ReadZoneFile_Of_BaseFile(us2fs(_agentSpec->_archiveFilePath), extractCallbackSpec->ZoneBuf);
+      // **************** NanaZip Modification Start ****************
+      // Backported from 24.09.
+      if (_zoneBuf.Size() != 0)
+        extractCallbackSpec->ZoneBuf = _zoneBuf;
+      // **************** NanaZip Modification End ****************
     }
   #endif
 

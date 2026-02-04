@@ -77,7 +77,7 @@ public:
 
 public:
   CDecoder();
-  virtual ~CDecoder();
+  ~CDecoder();
 };
 
 }}

@@ -7,6 +7,10 @@
 #include "ProcessUtils.h"
 #include "Window.h"
 
+// **************** NanaZip Modification Start ****************
+#include <K7User.h>
+// **************** NanaZip Modification End ****************
+
 #ifndef _UNICODE
 extern bool g_IsNT;
 #endif
@@ -91,11 +95,7 @@ WRes CProcess::Create(LPCWSTR imageName, const UString &params, LPCWSTR curDir)
     return ::GetLastError();
 
   // **************** NanaZip Modification Start ****************
-  ::AllowSetForegroundWindow(GetProcessId(pi.hProcess));
-  ::WaitForInputIdle(pi.hProcess, 500);
-  ::EnumWindows(
-      BringToForeground,
-      static_cast<LPARAM>(::GetProcessId(pi.hProcess)));
+  ::K7UserModernSetForegroundProcessMainWindow(pi.hProcess);
   // **************** NanaZip Modification End ****************
 
   ::CloseHandle(pi.hThread);

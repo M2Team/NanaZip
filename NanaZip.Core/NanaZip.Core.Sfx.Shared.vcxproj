@@ -5,11 +5,11 @@
     <RootNamespace>NanaZip.Core.Sfx.Shared</RootNamespace>
     <MileProjectType>StaticLibrary</MileProjectType>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
-  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
-  <Import Project="..\K7Pal\K7PalStatic.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Project="..\K7Base\K7BaseStatic.props" />
   <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.Sfx.Shared.props" />
   <ItemDefinitionGroup>
     <ClCompile>
@@ -19,16 +19,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <PreprocessorDefinitions>Z7_EXTRACT_ONLY;Z7_NO_READ_FROM_CODER;Z7_SFX;Z7_NO_LONG_PATH;Z7_NO_LARGE_PAGES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)' == 'x64'">Z7_LZMA_DEC_OPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4113;</DisableSpecificWarnings>
-      <Optimization Condition="'$(Configuration)' == 'Release'">MinSpace</Optimization>
-      <FavorSizeOrSpeed Condition="'$(Configuration)' == 'Release'">Size</FavorSizeOrSpeed>
     </ClCompile>
-    <MASM>
-      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
-    </MASM>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="NanaZip.Core.Sfx.Shared.props" />
@@ -39,19 +33,29 @@
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\AesOpt.c" />
     <None Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
+    <None Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
+    <None Include="SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp" />
+    <None Include="SevenZip\CPP\7zip\Archive\7z\7zHandler.cpp" />
+    <None Include="SevenZip\CPP\7zip\Archive\7z\7zIn.cpp" />
+    <None Include="SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp" />
+    <None Include="SevenZip\CPP\7zip\Archive\SplitHandler.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\Bcj2Register.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\BcjRegister.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\BranchRegister.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\CopyRegister.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\DeltaFilter.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\Lzma2Register.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\LzmaRegister.cpp" />
+    <None Include="SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
+    <None Include="SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
+    <None Include="SevenZip\CPP\Common\CRC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zHandler.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zIn.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\CoderMixer2.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\MultiStream.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\SplitHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\CreateCoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\CWrappers.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\FilterCoder.cpp" />
@@ -65,24 +69,14 @@
     <ClCompile Include="SevenZip\CPP\7zip\Common\StreamUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\VirtThread.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\Bcj2Coder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\Bcj2Register.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\BcjCoder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\BcjRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\BranchMisc.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\BranchRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\CopyCoder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\CopyRegister.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\DeltaFilter.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\Lzma2Decoder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\Lzma2Register.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\LzmaDecoder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\LzmaRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\PpmdDecoder.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAes.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\MyAes.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\CRC.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
@@ -229,34 +223,34 @@
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
   </ItemGroup>
   <Target Name="NanaZipCoreAesHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\AesOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreAesHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\AesOpt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreLzmaDecHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="'$(Platform)'=='x64'">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\7zCrcOpt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
-  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>

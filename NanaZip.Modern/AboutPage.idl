@@ -3,6 +3,5 @@
     [default_interface]
     runtimeclass AboutPage : Windows.UI.Xaml.Controls.Page
     {
-        AboutPage();
     }
 }

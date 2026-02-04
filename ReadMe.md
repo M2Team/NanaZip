@@ -37,6 +37,9 @@ contributor, because NanaZip is always a community-friendly open-source project.
 If you'd like me to add features or improvements ahead of time, please use
 [paid services](https://github.com/MouriNaruto/MouriNaruto/blob/main/PaidServices.md).
 
+Note: Only GitHub, Microsoft Store, My Digital Life Forums, SourceForge, and
+Windows App Community have hosted NanaZip official project pages.
+
 Kenji Mouri
 
 ## Features
@@ -138,45 +141,64 @@ Kenji Mouri
 
 ## Differences between NanaZip and NanaZip Classic
 
-NanaZip 3.0 and onwards will have two distribution flavors called NanaZip and
-NanaZip Classic. Here are the differences between them.
+NanaZip plans to have two distribution flavors called NanaZip and NanaZip
+Classic. Here are the differences between them.
 
-- NanaZip
-  - Only 64-Bit support.
+- NanaZip (Modern)
   - Only MSIX packaged version.
   - Support the context menu in Windows 10/11 File Explorer.
   - Support the file associations.
   - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
-  - Only support Windows 10 Version 2004 (Build 19041) or later.
   - XAML-based GUI.
 
+> [!CAUTION]
+> NanaZip (Modern) can be used as portable version if you extract the files from
+> the MSIX package or copy from the NanaZipPackage project output. It's designed
+> for debugging/testing/development purpose and users who really need portable
+> version. But please note that some features is not available, such as context
+> menu and file associations. This mode is not recommended for users who don't
+> know what they are doing like installing NanaZip (Modern) from third-party
+> maintained Scoop package. Some issues will not be fixed if you are using
+> NanaZip (Modern) in portable mode.
+
 - NanaZip Classic (**Work In Progress**)
-  - Have 32-Bit support.
-  - Only portable version.
+  - Only portable version which is suitable for Server Core, Windows PE, Windows
+    RE, and Wine.
   - Don't have the context menu support.
   - Don't have the file associations support.
   - Don't have the 7-Zip execution alias support.
-  - Support Windows Vista RTM (Build 6000.16386) or later.
   - Win32 GUI.
 
 ## System Requirements
 
-- NanaZip (XAML-based GUI and MSIX package)
-  - Supported OS: Windows 10 Version 2004 (Build 19041) or later
-  - Supported Platforms: x86 (64-bit) and ARM (64-bit) 
+Here are the system requirements starting with NanaZip 6.0:
 
-- NanaZip Classic (Win32 GUI)
-  - Supported OS: Windows Vista RTM (Build 6000.16386) or later
-  - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
+- Supported Operating Systems:
+  - Windows 10, version 2004 (Build 19041) or later
+  - Windows Server 2022 (Build 20348) or later
+- Supported Platforms:
+  - x86 (64-bit)
+  - ARM (64-bit)
 
-- NanaZip Core (Core, Codecs, CLI and the Self Extracting Executables)
-  - Supported OS: Windows Vista RTM (Build 6000.16386) or later
-  - Supported Platforms: x86 (32-bit and 64-bit) and ARM (64-bit)
+In general, NanaZip follows the 2025 baseline defined by Kenji Mouri's document,
+read [MD23: The baselines of Windows targets for all my open-source projects]
+for more information.
 
-Note: Except the Self Extracting Executables, the ucrtbase.dll with 10.0.19041.0
-version or later need to be existed in the binary folder if you want to use
-NanaZip components on Windows versions earlier than Windows 10 Version 2004
-(Build 19041).
+[MD23: The baselines of Windows targets for all my open-source projects]: https://github.com/MouriNaruto/MouriDocs/tree/main/docs/23
+
+Note: Due to the Self Extracting Executables (SFX) will be migrated to x86
+(64-bit) starting with NanaZip 6.0, it gives users chances to use Self
+Extracting Executables (SFX) archives under 64-bit Microsoft official Windows
+PE and Windows RE instances:
+
+- For ARM (64-bit) Microsoft official Windows PE and Windows RE, you need to
+  make sure you Windows PE and Windows RE images are built with Windows ADK
+  Build 25398 or later and integrated the [x64 emulation optional component].
+- For ARM (64-bit) Windows 10, I suggest you to upgrade to Windows 11 because
+  ARM (64-bit) Windows 11 provides x64 emulation support, and Windows 10 is
+  nearly end of support from Microsoft.
+
+[x64 emulation optional component]: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-add-packages--optional-components-reference?#32
 
 We chose Windows as the major platform for the NanaZip project supported
 because Windows has maintained a good and proven ABI and compatibility, and
@@ -190,6 +212,11 @@ platform. Here are the policy for non-Windows platform support:
   or later feature level. Currenly tested simply under Wine 9.x.
 - We don't support ReactOS and its derivatives because they are too hard to
   support. But testing under the ReactOS and its derivatives may be interesting.
+
+> [!NOTE]
+> If you have put the ucrtbase.dll with 10.0.19041.0 version or later need
+> to be existed in the binary folder, the theoretically minimum system
+> requirements of NanaZip Classic is Windows 10 (Build 10240) or later.
 
 ## Download and Installation
 
@@ -287,5 +314,7 @@ the following command in the PowerShell which is run as administrator.
 - [NanaZip Sponsor Edition](Documents/SponsorEdition.md)
 - [NanaZip Release Notes](Documents/ReleaseNotes.md)
 - [NanaZip Preview Release Notes](Documents/ReleaseNotesPreview.md)
+- [NanaZip Upstream Synchronization Status](Documents/UpstreamSynchronization.md)
+- [Security Policy](Security.md)
 - [Versioning](Documents/Versioning.md)
 - [My Digital Life Forums](https://forums.mydigitallife.net/threads/84171)

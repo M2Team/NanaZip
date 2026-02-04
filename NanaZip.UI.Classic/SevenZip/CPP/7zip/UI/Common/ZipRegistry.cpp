@@ -15,6 +15,12 @@
 
 #include "ZipRegistry.h"
 
+// **************** NanaZip Modification Start ****************
+#ifndef Z7_SFX
+#include <K7Base.h>
+#endif
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 using namespace NRegistry;
 
@@ -24,13 +30,6 @@ static NSynchronization::CCriticalSection g_CS;
 static LPCTSTR const kCuPrefix = TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("NanaZip") TEXT(STRING_PATH_SEPARATOR);
 
 static CSysString GetKeyPath(LPCTSTR path) { return kCuPrefix + (CSysString)path; }
-
-// **************** NanaZip Modification Start ****************
-static LONG OpenMachineKey(CKey &key, LPCTSTR keyName)
-{
-  return key.Open(HKEY_LOCAL_MACHINE, GetKeyPath(keyName), KEY_READ);
-}
-// **************** NanaZip Modification End ****************
 
 static LONG OpenMainKey(CKey &key, LPCTSTR keyName)
 {
@@ -493,9 +492,6 @@ bool MemLimit_Load(NCompression::CMemUse &mu)
 }
 
 static LPCTSTR const kOptionsInfoKeyName = TEXT("Options");
-// **************** NanaZip Modification Start ****************
-static LPCTSTR const kPoliciesInfoKeyName = TEXT("Policies");
-// **************** NanaZip Modification End ****************
 
 namespace NWorkDir
 {
@@ -552,6 +548,9 @@ static LPCTSTR const kContextMenu = TEXT("ContextMenu");
 static LPCTSTR const kMenuIcons = TEXT("MenuIcons");
 static LPCTSTR const kElimDup = TEXT("ElimDupExtract");
 static LPCTSTR const kWriteZoneId = TEXT("WriteZoneIdExtract");
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const kExtractOnOpen = TEXT("ExtractOnOpen");
+// **************** NanaZip Modification End ****************
 
 void CContextMenuInfo::Save() const
 {
@@ -564,6 +563,10 @@ void CContextMenuInfo::Save() const
   Key_Set_BoolPair(key, kElimDup, ElimDup);
 
   Key_Set_UInt32(key, kWriteZoneId, WriteZone);
+
+  // **************** NanaZip Modification Start ****************
+  Key_Set_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
+  // **************** NanaZip Modification End ****************
 
   if (Flags_Def)
     key.SetValue(kContextMenu, Flags);
@@ -580,19 +583,18 @@ void CContextMenuInfo::Load()
   ElimDup.Val = true;
   ElimDup.Def = false;
 
-  WriteZone = (UInt32)(Int32)-1;
+  // **************** NanaZip Modification Start ****************
+  // WriteZone = (UInt32)(Int32)-1;
+  WriteZone = ::K7BaseGetWriteZoneIdExtractPolicy();
+
+  ExtractOnOpen.Val = false;
+  ExtractOnOpen.Def = false;
+  // **************** NanaZip Modification End ****************
 
   Flags = (UInt32)(Int32)-1;
   Flags_Def = false;
 
   CS_LOCK
-
-  // **************** NanaZip Modification Start ****************
-  CKey policiesKey;
-  OpenMachineKey(policiesKey, kPoliciesInfoKeyName);
-
-  Key_Get_UInt32(policiesKey, kWriteZoneId, WriteZone);
-  // **************** NanaZip Modification End ****************
 
   CKey key;
   if (OpenMainKey(key, kOptionsInfoKeyName) != ERROR_SUCCESS)
@@ -604,7 +606,11 @@ void CContextMenuInfo::Load()
 
   // **************** NanaZip Modification Start ****************
   if (WriteZone == (UInt32)(Int32)-1)
+  {
     Key_Get_UInt32(key, kWriteZoneId, WriteZone);
+  }
+
+  Key_Get_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
   // **************** NanaZip Modification End ****************
 
   Flags_Def = (key.GetValue_IfOk(kContextMenu, Flags) == ERROR_SUCCESS);

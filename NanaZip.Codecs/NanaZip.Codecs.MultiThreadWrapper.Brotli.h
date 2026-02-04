@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.MultiThreadWrapper.Brotli.h
- * PURPOSE:   Definition for Brotli Multi Thread Wrapper
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.MultiThreadWrapper.Brotli.h
+ * PURPOSE:    Definition for Brotli Multi Thread Wrapper
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

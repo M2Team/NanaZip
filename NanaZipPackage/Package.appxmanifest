@@ -21,7 +21,7 @@
   <Identity
     Name="40174MouriNaruto.NanaZipPreview"
     Publisher="CN=E310A153-74A9-4D81-800B-857A8D58408A"
-    Version="6.0.1397.0" />
+    Version="6.0.1549.0" />
 
   <Properties>
     <DisplayName>NanaZip Preview</DisplayName>
@@ -55,7 +55,7 @@
   </Resources>
 
   <Applications>
-    <Application 
+    <Application
       Id="NanaZip.Modern"
       Executable="NanaZip.Modern.FileManager.exe"
       EntryPoint="Windows.FullTrustApplication">
@@ -65,10 +65,10 @@
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
-        <uap:DefaultTile 
-          ShortName="NanaZip" 
-          Wide310x150Logo="Assets\Wide310x150Logo.png" 
-          Square310x310Logo="Assets\LargeTile.png" 
+        <uap:DefaultTile
+          ShortName="NanaZip"
+          Wide310x150Logo="Assets\Wide310x150Logo.png"
+          Square310x310Logo="Assets\LargeTile.png"
           Square71x71Logo="Assets\SmallTile.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="wide310x150Logo"/>
@@ -89,17 +89,20 @@
           </uap3:AppExecutionAlias>
         </uap3:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap3:FileTypeAssociation Name="fileassociations" Parameters="&quot;%1&quot;">
+          <uap3:FileTypeAssociation Name="fileassociations" Parameters="&quot;%1&quot; -open">
             <uap:Logo>Assets\ArchiveFile.png</uap:Logo>
             <uap:SupportedFileTypes>
               <uap:FileType>.001</uap:FileType>
               <uap:FileType>.7z</uap:FileType>
               <uap:FileType>.apfs</uap:FileType>
               <uap:FileType>.arj</uap:FileType>
+              <uap:FileType>.asar</uap:FileType>
+              <uap:FileType>.b64</uap:FileType>
               <uap:FileType>.br</uap:FileType>
               <uap:FileType>.bz2</uap:FileType>
               <uap:FileType>.bzip2</uap:FileType>
               <uap:FileType>.cab</uap:FileType>
+              <uap:FileType>.cb7</uap:FileType>
               <uap:FileType>.cbr</uap:FileType>
               <uap:FileType>.cbz</uap:FileType>
               <uap:FileType>.cpio</uap:FileType>
@@ -135,15 +138,19 @@
               <uap:FileType>.tlz5</uap:FileType>
               <uap:FileType>.tpz</uap:FileType>
               <uap:FileType>.txz</uap:FileType>
+              <uap:FileType>.tz</uap:FileType>
               <uap:FileType>.tzst</uap:FileType>
               <uap:FileType>.tzstd</uap:FileType>
+              <uap:FileType>.vdi</uap:FileType>
               <uap:FileType>.vhd</uap:FileType>
               <uap:FileType>.vhdx</uap:FileType>
+              <uap:FileType>.vmdk</uap:FileType>
               <uap:FileType>.wim</uap:FileType>
               <uap:FileType>.xar</uap:FileType>
               <uap:FileType>.xz</uap:FileType>
               <uap:FileType>.z</uap:FileType>
               <uap:FileType>.zip</uap:FileType>
+              <uap:FileType>.zipx</uap:FileType>
               <uap:FileType>.zst</uap:FileType>
               <uap:FileType>.zstd</uap:FileType>
               <uap10:FileType>*</uap10:FileType>
@@ -152,16 +159,18 @@
         </uap:Extension>
         <desktop4:Extension Category="windows.fileExplorerContextMenus">
           <desktop4:FileExplorerContextMenus>
-            <!-- Our verb name starts with "C" to work around a bug preventing our shell menu from appearing in the
-                 classic context menu. -->
+            <!--
+              Use a low name prefix to work around our shell menu not appearing in the classic context menu.
+              (https://github.com/MediaArea/MediaInfo/pull/998)
+            -->
             <desktop4:ItemType Type="*">
-              <desktop4:Verb Id="CNanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
+              <desktop4:Verb Id="0000NanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
             </desktop4:ItemType>
             <desktop5:ItemType Type="Directory">
-              <desktop5:Verb Id="CNanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
+              <desktop5:Verb Id="0000NanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
             </desktop5:ItemType>
             <desktop10:ItemType Type="Drive">
-              <desktop10:Verb Id="CNanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
+              <desktop10:Verb Id="0000NanaZipShellExtension" Clsid="469D94E9-6AF4-4395-B396-99B1308F8CE5" />
             </desktop10:ItemType>
           </desktop4:FileExplorerContextMenus>
         </desktop4:Extension>
@@ -174,11 +183,11 @@
         </com:Extension>
       </Extensions>
     </Application>
-    <Application 
-      Id="NanaZip.Console" 
-      Executable="NanaZip.Universal.Console.exe" 
+    <Application
+      Id="NanaZip.Console"
+      Executable="NanaZip.Universal.Console.exe"
       EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements 
+      <uap:VisualElements
         AppListEntry="none"
         DisplayName="NanaZip Preview"
         Description="NanaZip"
@@ -186,9 +195,9 @@
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png" />
       <Extensions>
-        <uap3:Extension 
-          Category="windows.appExecutionAlias" 
-          Executable="NanaZip.Universal.Console.exe" 
+        <uap3:Extension
+          Category="windows.appExecutionAlias"
+          Executable="NanaZip.Universal.Console.exe"
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipC.exe" />
@@ -198,11 +207,11 @@
         </uap3:Extension>
       </Extensions>
     </Application>
-    <Application 
-      Id="NanaZip.Windows" 
-      Executable="NanaZip.Windows.exe" 
+    <Application
+      Id="NanaZip.Windows"
+      Executable="NanaZip.Windows.exe"
       EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements 
+      <uap:VisualElements
         AppListEntry="none"
         DisplayName="NanaZip Preview"
         Description="NanaZip"
@@ -210,9 +219,9 @@
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png" />
       <Extensions>
-        <uap3:Extension 
-          Category="windows.appExecutionAlias" 
-          Executable="NanaZip.Windows.exe" 
+        <uap3:Extension
+          Category="windows.appExecutionAlias"
+          Executable="NanaZip.Windows.exe"
           EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZipG.exe" />

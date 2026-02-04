@@ -174,6 +174,12 @@
   <data name="Resource559" xml:space="preserve">
     <value>Akış&amp;ları Değiştir</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>NanaZip İçinde Aç *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>NanaZip İçinde Aç #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Tümünü &amp;Seç</value>
   </data>
@@ -1289,5 +1295,11 @@ Arşiv dosyasını parçalara bölmek istediğinize emin misiniz?</value>
   </data>
   <data name="Resource7714" xml:space="preserve">
     <value>Klasör Birleşimi</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>İntegrasyon</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Dosyaları NanaZip ile ilişkilendirmek için Windows Ayarlar'ı aç</value>
   </data>
 </root>

@@ -9,8 +9,6 @@
 #include "../../../../C/Alloc.h"
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
-#include "DllBlock.h"
-#include "Mitigations.h"
 #endif
 
 #include "../../../Common/StringConvert.h"
@@ -39,7 +37,11 @@
 #include "ViewSettings.h"
 
 #include "../../../../../NanaZip.UI.h"
-#include <winrt/NanaZip.Modern.h>
+
+// **************** NanaZip Modification Start ****************
+#include "../Common/ZipRegistry.h"
+#include "../Common/CompressCall.h"
+// **************** NanaZip Modification End ****************
 
 using namespace NWindows;
 using namespace NFile;
@@ -70,6 +72,11 @@ HWND g_HWND;
 
 static UString g_MainPath;
 static UString g_ArcFormat;
+
+// **************** NanaZip Modification Start ****************
+// Specified by the filetype handler for the extract-on-open feature.
+static bool g_IsFileTypeHandler;
+// **************** NanaZip Modification End ****************
 
 // HRESULT LoadGlobalCodecs();
 void FreeGlobalCodecs();
@@ -456,6 +463,46 @@ static void ErrorMessage(const char *s)
 #define NT_CHECK_FAIL_ACTION ErrorMessage("Unsupported Windows version"); return 1;
 #endif
 
+// **************** NanaZip Modification Start ****************
+static bool CallExtractOnOpen() {
+  UStringVector arcPaths;
+  CContextMenuInfo ci;
+  FString fullPathF;
+  FString parentFolder;
+
+  ci.Load();
+
+  if (
+    !g_IsFileTypeHandler ||
+    !ci.ExtractOnOpen.Val ||
+    ::GetAsyncKeyState(VK_SHIFT) < 0)
+  {
+    return false;
+  }
+  if (
+    g_MainPath.IsEmpty() ||
+    !NFile::NName::GetFullPath(us2fs(g_MainPath), fullPathF))
+  {
+    return false;
+  }
+  if (!NFile::NDir::GetOnlyDirPrefix(fullPathF, parentFolder))
+  {
+    return false;
+  }
+
+  arcPaths.Add(fs2us(fullPathF));
+  ::ExtractArchives(
+    arcPaths,
+    fs2us(parentFolder),
+    false,
+    false,
+    ci.WriteZone,
+    true,
+    true);
+  return true;
+}
+// **************** NanaZip Modification End ****************
+
 static int WINAPI WinMain2(int nCmdShow)
 {
   g_RAM_Size_Defined = NSystem::GetRamSize(g_RAM_Size);
@@ -514,8 +561,6 @@ static int WINAPI WinMain2(int nCmdShow)
   // Maybe needs CoInitializeEx also ?
   // NCOM::CComInitializer comInitializer;
 
-  winrt::NanaZip::Modern::App App;
-
   NanaZip::UI::SpecialCommandHandler();
 
   UString commandsString;
@@ -535,6 +580,10 @@ static int WINAPI WinMain2(int nCmdShow)
   tailString.Trim();
   if (tailString.IsPrefixedBy(L"-t"))
     g_ArcFormat = tailString.Ptr(2);
+  // **************** NanaZip Modification Start ****************
+  else if (tailString.IsEqualTo_NoCase(L"-open"))
+    g_IsFileTypeHandler = true;
+  // **************** NanaZip Modification End ****************
 
   /*
   UStringVector switches;
@@ -605,6 +654,10 @@ static int WINAPI WinMain2(int nCmdShow)
   catch(...) { }
   */
 
+  // **************** NanaZip Modification Start ****************
+  if (CallExtractOnOpen())
+    return 0;
+  // **************** NanaZip Modification End ****************
 
   #if defined(_WIN32) && !defined(UNDER_CE)
   SetMemoryLock();
@@ -664,7 +717,36 @@ static int WINAPI WinMain2(int nCmdShow)
   return (int)msg.wParam;
 }
 
-#include <NanaZip.Frieren.h>
+// **************** NanaZip Modification Start ****************
+#include <K7Base.h>
+#include <K7User.h>
+#include <NanaZip.Modern.h>
+
+void NanaZipInitialize()
+{
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+    {
+        ::ErrorMessage(L"K7BaseInitialize Failed");
+        ::ExitProcess(1);
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7UserInitializeDarkModeSupport())
+    {
+        ::ErrorMessage(L"K7UserInitializeDarkModeSupport Failed");
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
+
+    if (S_OK != ::K7ModernInitialize())
+    {
+        ::ErrorMessage(L"K7ModernInitialize Failed");
+        ::ExitProcess(1);
+    }
+}
+// **************** NanaZip Modification End ****************
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef UNDER_CE
@@ -676,16 +758,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 {
   g_hInstance = hInstance;
 
-  ::NanaZipFrierenGlobalInitialize();
-
-  if (!::NanaZipBlockDlls())
-  {
-    ErrorMessage("Cannot block DLL loading");
-  }
-  if (!::NanaZipEnableMitigations())
-  {
-    ErrorMessage("Cannot enable security mitigations");
-  }
+  // **************** NanaZip Modification Start ****************
+  ::NanaZipInitialize();
+  // **************** NanaZip Modification End ****************
 
   try
   {
@@ -1104,7 +1179,7 @@ void CApp::MoveSubWindows()
           DpiValue,
           USER_DEFAULT_SCREEN_DPI);
 
-      RECT ClientRect = { 0 };
+      RECT ClientRect = {};
       ::GetClientRect(hWnd, &ClientRect);
 
       ::SetWindowPos(

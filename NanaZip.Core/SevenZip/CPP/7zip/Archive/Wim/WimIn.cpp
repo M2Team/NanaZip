@@ -1814,7 +1814,7 @@ bool CWimXml::Parse()
 
   if (!Xml.Parse(utf))
     return false;
-  if (Xml.Root.Name != "WIM")
+  if (!Xml.Root.Name.IsEqualTo("WIM"))
     return false;
 
   FOR_VECTOR (i, Xml.Root.SubItems)

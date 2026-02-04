@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{38BB5165-3DB0-45B7-85CE-0A72DEF5CCD6}</ProjectGuid>
+    <RootNamespace>K7Base</RootNamespace>
+    <MileProjectType>StaticLibrary</MileProjectType>
+    <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
+  </PropertyGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.372</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.Internal">
+      <Version>1.0.3259</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Detours">
+      <Version>1.0.2180</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.1171</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="K7BaseStatic.props" />
+    <None Include="K7BaseRedirector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="K7BaseDetours.cpp" />
+    <ClCompile Include="K7BaseInitialize.cpp" />
+    <ClCompile Include="K7BaseMitigations.cpp" />
+    <ClCompile Include="K7BaseModern.cpp" />
+    <ClCompile Include="K7BasePolicies.cpp" />
+    <ClCompile Include="K7BaseHash.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="K7Base.h" />
+    <ClInclude Include="K7BasePrivate.h" />
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
+</Project>

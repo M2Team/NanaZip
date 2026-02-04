@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.Littlefs.cpp
- * PURPOSE:   Implementation for littlefs file system image readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.Littlefs.cpp
+ * PURPOSE:    Implementation for littlefs file system image readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -433,7 +433,7 @@ namespace NanaZip::Codecs::Archive
     private:
 
         IInStream* m_FileStream = nullptr;
-        LfsSuperMetadataHeader m_SuperMetadataHeader = { 0 };
+        LfsSuperMetadataHeader m_SuperMetadataHeader = {};
         std::vector<LittlefsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;
 
@@ -561,7 +561,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                LfsMetadataTag PreviousTag = { 0 };
+                LfsMetadataTag PreviousTag = {};
                 PreviousTag.AsRaw = g_LfsInitialTag;
 
                 if (BundleSize < sizeof(LfsSuperMetadataHeader))
@@ -648,7 +648,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (FAILED(hr))
+            if (S_OK != hr)
             {
                 this->Close();
             }
@@ -664,7 +664,7 @@ namespace NanaZip::Codecs::Archive
         {
             this->m_IsInitialized = false;
             this->m_FilePaths.clear();
-            this->m_SuperMetadataHeader = { 0 };
+            this->m_SuperMetadataHeader = {};
             if (this->m_FileStream)
             {
                 this->m_FileStream->Release();
@@ -855,14 +855,15 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            if (!this->m_IsInitialized)
-            {
-                return S_FALSE;
-            }
-
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            if (!this->m_IsInitialized)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
             switch (PropId)

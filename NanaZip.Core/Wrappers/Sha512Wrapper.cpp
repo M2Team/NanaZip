@@ -1,14 +1,16 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      Sha512Wrapper.cpp
- * PURPOSE:   Implementation for SHA-384/SHA-512 wrapper for 7-Zip
+ * PROJECT:    NanaZip
+ * FILE:       Sha512Wrapper.cpp
+ * PURPOSE:    Implementation for SHA-384/SHA-512 wrapper for 7-Zip
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #include "Sha512Wrapper.h"
+
+#include <Windows.h>
 
 #include <cstring>
 
@@ -19,12 +21,12 @@ CSha512& CSha512::operator=(
     {
         if (this->HashHandle)
         {
-            ::K7PalHashDestroy(this->HashHandle);
+            ::K7BaseHashDestroy(this->HashHandle);
             this->HashHandle = nullptr;
         }
         if (Source.HashHandle)
         {
-            ::K7PalHashDuplicate(Source.HashHandle, &this->HashHandle);
+            ::K7BaseHashDuplicate(Source.HashHandle, &this->HashHandle);
         }
     }
     return *this;
@@ -57,23 +59,23 @@ void Sha512_InitState(
 
     if (p->HashHandle)
     {
-        ::K7PalHashDestroy(p->HashHandle);
+        ::K7BaseHashDestroy(p->HashHandle);
         p->HashHandle = nullptr;
     }
 
     if (SHA512_DIGEST_SIZE == digestSize)
     {
-        ::K7PalHashCreate(
+        ::K7BaseHashCreate(
             &p->HashHandle,
-            BCRYPT_SHA512_ALGORITHM,
+            K7_BASE_HASH_ALGORITHM_SHA512,
             nullptr,
             0);
     }
     else if (SHA512_384_DIGEST_SIZE == digestSize)
     {
-        ::K7PalHashCreate(
+        ::K7BaseHashCreate(
             &p->HashHandle,
-            BCRYPT_SHA384_ALGORITHM,
+            K7_BASE_HASH_ALGORITHM_SHA384,
             nullptr,
             0);
     }
@@ -102,7 +104,7 @@ void Sha512_Update(
         return;
     }
 
-    ::K7PalHashUpdate(
+    ::K7BaseHashUpdate(
         p->HashHandle,
         const_cast<LPVOID>(reinterpret_cast<LPCVOID>(data)),
         static_cast<UINT32>(size));
@@ -118,7 +120,7 @@ void Sha512_Final(
         return;
     }
 
-    ::K7PalHashFinal(
+    ::K7BaseHashFinal(
         p->HashHandle,
         digest,
         digestSize);

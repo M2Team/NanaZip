@@ -15,6 +15,9 @@ namespace winrt::NanaZip::Modern::implementation
 
 namespace winrt::NanaZip::Modern::factory_implementation
 {
-    struct AddressBarTemplate : AddressBarTemplateT<AddressBarTemplate, implementation::AddressBarTemplate>
-    { };
+    struct AddressBarTemplate : AddressBarTemplateT<
+        AddressBarTemplate,
+        implementation::AddressBarTemplate>
+    {
+    };
 }

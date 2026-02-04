@@ -21,6 +21,16 @@ but linux : allows unix time = 0 in filesystem
 
 bool SetDirTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime);
 
+// **************** NanaZip Modification Start ****************
+// Backported from 25.01.
+/*
+SetLinkFileTime() doesn't follow symbolic link,
+and it sets timestamps for symbolic link file itself.
+If (path) is not symbolic link, it still can work (at least in some new OS versions).
+*/
+bool SetLinkFileTime(CFSTR path, const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime);
+// **************** NanaZip Modification End ****************
+
 
 #ifdef _WIN32
 
@@ -59,6 +69,14 @@ bool CreateComplexDir(CFSTR path);
 
 bool DeleteFileAlways(CFSTR name);
 bool RemoveDirWithSubItems(const FString &path);
+// **************** NanaZip Modification Start ****************
+// Backported from 25.01.
+#ifdef _WIN32
+bool RemoveDirAlways_if_Empty(const FString &path);
+#else
+#define RemoveDirAlways_if_Empty RemoveDir
+#endif
+// **************** NanaZip Modification End ****************
 
 bool MyGetFullPathName(CFSTR path, FString &resFullPath);
 bool GetFullPathAndSplit(CFSTR path, FString &resDirPrefix, FString &resFileName);

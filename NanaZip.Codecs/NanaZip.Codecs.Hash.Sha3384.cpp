@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Hash.Sha3384.cpp
- * PURPOSE:   Implementation for SHA3-384 hash algorithm
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Hash.Sha3384.cpp
+ * PURPOSE:    Implementation for SHA3-384 hash algorithm
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

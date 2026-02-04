@@ -17,11 +17,21 @@ protected:
   void InitCommon()
   {
     // _Write_MTime = true;
-    #ifndef Z7_ST
-    _numProcessors = _numThreads = NWindows::NSystem::GetNumberOfProcessors();
-    _numThreads_WasForced = false;
-    #endif
-
+    {
+#ifndef Z7_ST
+      _numThreads_WasForced = false;
+      UInt32 numThreads;
+#ifdef _WIN32
+      NWindows::NSystem::CProcessAffinity aff;
+      numThreads = aff.Load_and_GetNumberOfThreads();
+      _numThreadGroups = aff.IsGroupMode ? aff.Groups.GroupSizes.Size() : 0;
+#else
+      numThreads = NWindows::NSystem::GetNumberOfProcessors();
+#endif // _WIN32
+      _numProcessors = _numThreads = numThreads;
+#endif // Z7_ST
+    }
+    
     size_t memAvail = (size_t)sizeof(size_t) << 28;
     _memAvail = memAvail;
     _memUsage_Compress = memAvail;
@@ -46,11 +56,14 @@ protected:
   }
 
 public:
-  #ifndef Z7_ST
+#ifndef Z7_ST
   UInt32 _numThreads;
   UInt32 _numProcessors;
+#ifdef _WIN32
+  UInt32 _numThreadGroups;
+#endif
   bool _numThreads_WasForced;
-  #endif
+#endif
 
   bool _memUsage_WasSet;
   UInt64 _memUsage_Compress;
@@ -90,10 +103,12 @@ public:
   
   void SetGlobalLevelTo(COneMethodInfo &oneMethodInfo) const;
 
-  #ifndef Z7_ST
+#ifndef Z7_ST
   static void SetMethodThreadsTo_IfNotFinded(CMethodProps &props, UInt32 numThreads);
   static void SetMethodThreadsTo_Replace(CMethodProps &props, UInt32 numThreads);
-  #endif
+  
+  static void Set_Method_NumThreadGroups_IfNotFinded(CMethodProps &props, UInt32 numThreadGroups);
+#endif
 
 
   unsigned GetNumEmptyMethods() const

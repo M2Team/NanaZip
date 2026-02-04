@@ -85,10 +85,16 @@ struct CDecompressStat
   UInt64 NumFolders;
   UInt64 NumFiles;
   UInt64 NumAltStreams;
+  // **************** NanaZip Modification Start ****************
+  FString OutDir;
+  // **************** NanaZip Modification End ****************
 
   void Clear()
   {
     NumArchives = UnpackSize = AltStreams_UnpackSize = PackSize = NumFolders = NumFiles = NumAltStreams = 0;
+    // **************** NanaZip Modification Start ****************
+    OutDir.Empty();
+    // **************** NanaZip Modification End ****************
   }
 };
 

@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.Build.NoTargets/3.7.56" DefaultTargets="Restore;Build">
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</Version>
+    <Version>$(MileProjectVersion)</Version>
     <InstallerOutputPath>$(MSBuildThisFileDirectory)..\Output</InstallerOutputPath>
   </PropertyGroup>
 

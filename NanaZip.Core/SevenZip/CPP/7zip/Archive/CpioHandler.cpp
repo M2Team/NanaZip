@@ -437,7 +437,14 @@ HRESULT CInArchive::GetNextItem()
     return S_OK;
 
   /* v23.02: we have disabled rDevMinor check because real file
-     from Apple contains rDevMinor==255 by some unknown reason */
+     from Apple contains rDevMinor==255 by some unknown reason
+     cpio 2.13 and older versions: it copies stat::st_rdev to archive.
+        and stat::st_rdev can be non-zero for some old linux/filesystems cases for regular files.
+     cpio 2.14 (2023) copies st_rdev to archive only if (S_ISBLK (st->st_mode) || S_ISCHR (st->st_mode))
+     v25.00: we have disabled RDevMajor check here to support some rare case created by cpio 2.13- with old linux.
+     But we still keep full check in IsArc_Cpio() to reduce false cpio detection cases.
+  */
+#if 0 // 0 : to disable check to support some old linux cpio archives.
   if (item.RDevMajor != 0
       // || item.RDevMinor != 0
       )
@@ -446,6 +453,7 @@ HRESULT CInArchive::GetNextItem()
         !MY_LIN_S_ISBLK(item.Mode))
       return S_OK;
   }
+#endif
 
   // Size must be 0 for FIFOs and directories
   if (item.IsDir() || MY_LIN_S_ISFIFO(item.Mode))
@@ -873,17 +881,13 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   {
     case kpidPath:
     {
-      UString res;
-      bool needConvert = true;
-      #ifdef _WIN32
-      // if (
-      ConvertUTF8ToUnicode(item.Name, res);
-      // )
-        needConvert = false;
-      #endif
-      if (needConvert)
-        res = MultiByteToUnicodeString(item.Name, CP_OEMCP);
-      prop = NItemName::GetOsPath(res);
+#ifdef _WIN32
+      UString u;
+      ConvertUTF8ToUnicode(item.Name, u);
+#else
+      const UString u = MultiByteToUnicodeString(item.Name, CP_OEMCP);
+#endif
+      prop = NItemName::GetOsPath(u);
       break;
     }
     case kpidIsDir: prop = item.IsDir(); break;
@@ -921,16 +925,12 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         s.SetFrom_CalcLen((const char *)(const void *)(const Byte *)item.Data, (unsigned)item.Data.Size());
         if (s.Len() == item.Data.Size())
         {
+#ifdef _WIN32
           UString u;
-          bool needConvert = true;
-          #ifdef _WIN32
-            // if (
-            ConvertUTF8ToUnicode(item.Name, u);
-            // )
-            needConvert = false;
-          #endif
-          if (needConvert)
-            u = MultiByteToUnicodeString(s, CP_OEMCP);
+          ConvertUTF8ToUnicode(item.Name, u);
+#else
+          const UString u = MultiByteToUnicodeString(s, CP_OEMCP);
+#endif
           prop = u;
         }
       }

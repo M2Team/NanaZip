@@ -172,6 +172,10 @@ struct CFolderLink: public CTempFileInfo
   bool IsVirtual;
 
   UString VirtualPath; // without tail slash
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09.
+  CByteBuffer ZoneBuf; // ZoneBuf for virtaul stream (IsVirtual)
+  // **************** NanaZip Modification End ****************
   CFolderLink(): UsePassword(false), IsVirtual(false) {}
 
   bool WasChanged(const NWindows::NFile::NFind::CFileInfo &newFileInfo) const
@@ -251,13 +255,19 @@ struct CCopyToOptions
 
   bool NeedRegistryZone;
   NExtract::NZoneIdMode::EEnum ZoneIdMode;
+  // **************** NanaZip Modification Start ****************
+  CByteBuffer ZoneBuf;
+  // **************** NanaZip Modification End ****************
 
   UString folder;
 
   UStringVector hashMethods;
 
   CVirtFileSystem *VirtFileSystemSpec;
-  ISequentialOutStream *VirtFileSystem;
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09.
+  // ISequentialOutStream *VirtFileSystem;
+  // **************** NanaZip Modification End ****************
 
   CCopyToOptions():
       streamMode(false),
@@ -267,9 +277,14 @@ struct CCopyToOptions
       replaceAltStreamChars(false),
       showErrorMessages(false),
       NeedRegistryZone(true),
-      ZoneIdMode(NExtract::NZoneIdMode::Default),  // NanaZip Modification
-      VirtFileSystemSpec(NULL),
-      VirtFileSystem(NULL)
+      // **************** NanaZip Modification Start ****************
+      ZoneIdMode(NExtract::NZoneIdMode::Default),
+      // **************** NanaZip Modification End ****************
+      // **************** NanaZip Modification Start ****************
+      // Backported from 24.09.
+      VirtFileSystemSpec(NULL)
+      // , VirtFileSystem(NULL)
+      // **************** NanaZip Modification End ****************
       {}
 };
 
@@ -872,11 +887,19 @@ public:
   void Refresh_StatusBar();
 
   void AddToArchive();
+  // **************** NanaZip Modification Start ****************
+  void AddToExistingArchive();
+  // **************** NanaZip Modification End ****************
 
   void GetFilePaths(const CRecordVector<UInt32> &indices, UStringVector &paths, bool allowFolders = false);
   void ExtractArchives();
   void ExtractFromArchive();
   void TestArchives();
+
+  // **************** NanaZip Modification Start ****************
+  // Backported from 24.09.
+  void Get_ZoneId_Stream_from_ParentFolders(CByteBuffer &buf);
+  // **************** NanaZip Modification End ****************
 
   HRESULT CopyTo(CCopyToOptions &options,
       const CRecordVector<UInt32> &indices,

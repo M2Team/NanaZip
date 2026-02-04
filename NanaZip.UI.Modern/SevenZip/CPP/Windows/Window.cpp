@@ -13,56 +13,6 @@ extern bool g_IsNT;
 
 namespace NWindows {
 
-// **************** NanaZip Modification Start ****************
-BOOL CALLBACK BringToForeground(
-    _In_ HWND hWnd,
-    _In_ LPARAM lParam)
-{
-    DWORD ProcessId = 0;
-    ::GetWindowThreadProcessId(hWnd, &ProcessId);
-
-    if (!lParam || ProcessId == (DWORD)lParam)
-    {
-        HWND ForegroundWindowHandle = ::GetForegroundWindow();
-        DWORD CurrentThreadId = ::GetCurrentThreadId();
-        DWORD ForegroundThreadId = ::GetWindowThreadProcessId(
-            ForegroundWindowHandle,
-            nullptr);
-        ::AttachThreadInput(
-            ForegroundThreadId,
-            CurrentThreadId,
-            TRUE);
-        ::SetWindowPos(
-            hWnd,
-            HWND_TOPMOST,
-            0,
-            0,
-            0,
-            0,
-            SWP_NOSIZE | SWP_NOMOVE);
-        ::SetWindowPos(
-            hWnd,
-            HWND_NOTOPMOST,
-            0,
-            0,
-            0,
-            0,
-            SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
-        ::SetForegroundWindow(hWnd);
-        ::SetFocus(hWnd);
-        ::SetActiveWindow(hWnd);
-        ::AttachThreadInput(
-            ForegroundThreadId,
-            CurrentThreadId,
-            FALSE);
-
-        return FALSE;
-    }
-
-    return TRUE;
-}
-// **************** NanaZip Modification End ****************
-
 #ifndef _UNICODE
 ATOM MyRegisterClass(CONST WNDCLASSW *wndClass)
 {

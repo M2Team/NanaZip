@@ -19,7 +19,7 @@
 #include "ConsoleClose.h"
 
 // **************** NanaZip Modification Start ****************
-#include "Mitigations.h"
+#include <K7Base.h>
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -104,6 +104,36 @@ static inline bool CheckIsa()
   */
 }
 
+// **************** NanaZip Modification Start ****************
+void NanaZipInitialize()
+{
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+    {
+        ::FlushStreams();
+        *g_ErrStream
+            << "K7BaseInitialize Failed"
+            << ::endl;
+        ::ExitProcess(1);
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::FlushStreams();
+        *g_ErrStream
+            << "K7BaseDisableDynamicCodeGeneration Failed"
+            << ::endl;
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
+    {
+        ::FlushStreams();
+        *g_ErrStream
+            << "K7BaseDisableChildProcessCreation Failed"
+            << ::endl;
+    }
+}
+// **************** NanaZip Modification End ****************
+
 int Z7_CDECL main
 (
   #ifndef _WIN32
@@ -125,28 +155,12 @@ int Z7_CDECL main
   NT_CHECK
 
   // **************** NanaZip Modification Start ****************
-  if (!::NanaZipEnableMitigations())
-  {
-    FlushStreams();
-    *g_ErrStream
-      << "Cannot enable security mitigations: "
-      << NError::MyFormatMessage(GetLastError())
-      << endl;
-  }
-
-  if (!::NanaZipDisableChildProcesses())
-  {
-    FlushStreams();
-    *g_ErrStream
-      << "Cannot disable child processes: "
-      << NError::MyFormatMessage(GetLastError())
-      << endl;
-  }
+  ::NanaZipInitialize();
   // **************** NanaZip Modification End ****************
 
   NConsoleClose::CCtrlHandlerSetter ctrlHandlerSetter;
   int res = 0;
-  
+
   try
   {
     #ifdef _WIN32

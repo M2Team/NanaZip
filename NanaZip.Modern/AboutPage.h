@@ -36,11 +36,3 @@ namespace winrt::NanaZip::Modern::implementation
         std::wstring m_ExtendedMessage;
     };
 }
-
-namespace winrt::NanaZip::Modern::factory_implementation
-{
-    struct AboutPage :
-        AboutPageT<AboutPage, implementation::AboutPage>
-    {
-    };
-}

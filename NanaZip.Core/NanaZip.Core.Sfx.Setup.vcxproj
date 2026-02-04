@@ -5,6 +5,7 @@
     <RootNamespace>NanaZip.Core.Sfx.Setup</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZip.Core.Sfx.Setup.manifest</MileProjectManifestFile>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Self Extracting Executable (Setup)</MileProjectFileDescription>
@@ -12,17 +13,14 @@
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
     <MileProjectOriginalFilename>NanaZip.Core.Setup.sfx</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
-    <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
-    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.props" />
-  <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
+  <Import Project="..\K7User\K7UserStatic.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
@@ -35,16 +33,14 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
       <PreprocessorDefinitions>Z7_NO_REGISTRY;Z7_NO_CRYPTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Optimization Condition="'$(Configuration)' == 'Release'">MinSpace</Optimization>
-      <FavorSizeOrSpeed Condition="'$(Configuration)' == 'Release'">Size</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
-      <RandomizedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">false</RandomizedBaseAddress>
-      <FixedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">true</FixedBaseAddress>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+      <RandomizedBaseAddress Condition="'$(Platform)' != 'ARM64'">false</RandomizedBaseAddress>
+      <FixedBaseAddress Condition="'$(Platform)' != 'ARM64'">true</FixedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -52,7 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.671</Version>
+      <Version>1.0.1171</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -192,5 +191,5 @@
     <ResourceCompile Include="SevenZip\CPP\7zip\Bundles\SFXSetup\resource.rc" />
     <None Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog.rc" />
   </ItemGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
 </Project>

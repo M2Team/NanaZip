@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      Sha512Wrapper.h
- * PURPOSE:   Definition for SHA-384/SHA-512 wrapper for 7-Zip
+ * PROJECT:    NanaZip
+ * FILE:       Sha512Wrapper.h
+ * PURPOSE:    Definition for SHA-384/SHA-512 wrapper for 7-Zip
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -13,7 +13,7 @@
 
 #include "../SevenZip/C/7zTypes.h"
 
-#include <K7Pal.h>
+#include <K7Base.h>
 
 EXTERN_C_BEGIN
 
@@ -24,7 +24,7 @@ EXTERN_C_BEGIN
 
 typedef struct CSha512
 {
-    K7_PAL_HASH_HANDLE HashHandle;
+    K7_BASE_HASH_HANDLE HashHandle;
 
 #ifdef __cplusplus
     CSha512& operator=(

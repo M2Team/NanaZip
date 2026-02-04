@@ -38,11 +38,3 @@ namespace winrt::NanaZip::Modern::implementation
         HWND m_WindowHandle;
     };
 }
-
-namespace winrt::NanaZip::Modern::factory_implementation
-{
-    struct SponsorPage :
-        SponsorPageT<SponsorPage, implementation::SponsorPage>
-    {
-    };
-}

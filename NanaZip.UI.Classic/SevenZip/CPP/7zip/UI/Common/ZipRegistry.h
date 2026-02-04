@@ -195,6 +195,10 @@ struct CContextMenuInfo
   UInt32 Flags;
   UInt32 WriteZone;
 
+  // **************** NanaZip Modification Start ****************
+  CBoolPair ExtractOnOpen;
+  // **************** NanaZip Modification End ****************
+
   /*
   CContextMenuInfo():
       Flags_Def(0),

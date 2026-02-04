@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.Romfs.cpp
- * PURPOSE:   Implementation for ROMFS file system image readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.Romfs.cpp
+ * PURPOSE:    Implementation for ROMFS file system image readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -186,7 +186,7 @@ namespace NanaZip::Codecs::Archive
                 Information.Inode = Offset;
 
                 std::uint8_t FileHeaderBuffer[
-                    offsetof(RomfsFileHeader, FileName)] = { 0 };
+                    offsetof(RomfsFileHeader, FileName)] = {};
                 if (FAILED(this->ReadFileStream(
                     Offset,
                     &FileHeaderBuffer[0],
@@ -295,7 +295,7 @@ namespace NanaZip::Codecs::Archive
                 std::uint32_t Offset = 0;
 
                 std::uint8_t HeaderBuffer[
-                    offsetof(RomfsHeader, VolumeName)] = { 0 };
+                    offsetof(RomfsHeader, VolumeName)] = {};
                 if (FAILED(this->ReadFileStream(
                     0,
                     &HeaderBuffer[0],
@@ -362,7 +362,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (FAILED(hr))
+            if (S_OK != hr)
             {
                 this->Close();
             }
@@ -622,14 +622,15 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            if (!this->m_IsInitialized)
-            {
-                return S_FALSE;
-            }
-
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            if (!this->m_IsInitialized)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
             switch (PropId)

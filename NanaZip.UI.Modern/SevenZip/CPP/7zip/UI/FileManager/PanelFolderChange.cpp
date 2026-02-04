@@ -15,8 +15,9 @@
 #include <winrt/Windows.UI.Xaml.Controls.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Media.Imaging.h>
-#include <winrt/Windows.Storage.Streams.h>
-#include <robuffer.h>
+#include <wincodec.h>
+#include <winrt/Windows.Graphics.Imaging.h>
+#include <windows.graphics.imaging.interop.h>
 
 #ifdef UNDER_CE
 #include "FSFolder.h"
@@ -30,6 +31,10 @@
 #include "ViewSettings.h"
 
 #include "resource.h"
+
+// **************** NanaZip Modification Start ****************
+#include <string>
+// **************** NanaZip Modification End ****************
 
 using namespace NWindows;
 using namespace NFile;
@@ -82,7 +87,28 @@ static bool DoesNameContainWildcard_SkipRoot(const UString &path)
 
 HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes)
 {
-  UString path = fullPath;
+  // **************** NanaZip Modification Start ****************
+  // UString path = fullPath;
+  // 32767 is the maximum path length without the terminating null character.
+  std::wstring ExpandedPath(32767, L'\0');
+  DWORD ExpandedPathLength = ::ExpandEnvironmentStringsW(
+      fullPath.Ptr(),
+      ExpandedPath.data(),
+      static_cast<DWORD>(ExpandedPath.size()));
+  if (ExpandedPathLength)
+  {
+      // If the ExpandEnvironmentStringsW function succeeds, the return value
+      // is the number of wchar_t stored in the destination buffer, including
+      // the terminating null character. So we need to resize the string to
+      // remove the extra null characters at the end.
+      ExpandedPath.resize(ExpandedPathLength - 1);
+  }
+  // According to the UString implementation, converting from std::wstring will
+  // be good for readability, which will be useful for future maintenance.
+  UString path = ExpandedPathLength
+      ? UString(ExpandedPath.c_str())
+      : fullPath;
+  // **************** NanaZip Modification End ****************
   #ifdef _WIN32
   path.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif
@@ -353,88 +379,48 @@ static int GetRealIconIndex(CFSTR path, DWORD attributes)
   return -1;
 }
 
-static winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap ConvertIconToWritableBitmap(HICON hIcon)
+static winrt::Windows::Graphics::Imaging::SoftwareBitmap ConvertIconToSoftwareBitmap(HICON hIcon)
 {
-    ICONINFO iconInfo = { 0 };
-    GetIconInfo(hIcon, &iconInfo);
+    if (!hIcon)
+        return nullptr;
 
-    // Get the screen DC
-    HDC dc = GetDC(NULL);
-
-    // Get icon size info
-    BITMAP bm = { 0 };
-    GetObject(iconInfo.hbmColor, sizeof(BITMAP), &bm);
-
-    // Set up BITMAPINFO
-    BITMAPINFO bmi = { 0 };
-    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-    bmi.bmiHeader.biWidth = bm.bmWidth;
-    bmi.bmiHeader.biHeight = -bm.bmHeight;
-    bmi.bmiHeader.biPlanes = 1;
-    bmi.bmiHeader.biBitCount = 32;
-    bmi.bmiHeader.biCompression = BI_RGB;
-
-    // Extract the color bitmap
-    int nBits = bm.bmWidth * bm.bmHeight;
-    std::unique_ptr<int32_t[]> colorBits(new int32_t[nBits]);
-    GetDIBits(
-        dc,
-        iconInfo.hbmColor,
-        0,
-        bm.bmHeight,
-        colorBits.get(),
-        &bmi,
-        DIB_RGB_COLORS);
-
-    // If no alpha values available, apply the mask bitmap
-    if (!std::any_of(colorBits.get(), colorBits.get() + nBits,
-        [](int32_t c) { return (c & 0xff000000) != 0; }))
+    static winrt::com_ptr<::IWICImagingFactory> wicFactory;
+    if (!wicFactory)
     {
-        // Extract the mask bitmap
-        std::unique_ptr<int32_t[]> maskBits(new int32_t[nBits]);
-        GetDIBits(
-            dc,
-            iconInfo.hbmMask,
-            0,
-            bm.bmHeight,
-            maskBits.get(),
-            &bmi,
-            DIB_RGB_COLORS);
-        // Copy the mask alphas into the color bits
-        for (int i = 0; i < nBits; ++i) {
-            if (maskBits[colorBits[i]] == 0) {
-                colorBits[i] |= 0xff000000;
-            }
-        }
+        wicFactory = winrt::create_instance<::IWICImagingFactory>(
+            CLSID_WICImagingFactory,
+            CLSCTX_INPROC_SERVER,
+            nullptr);
     }
 
-    // Release DC and GDI bitmaps
-    ReleaseDC(NULL, dc);
-    DeleteObject(iconInfo.hbmColor);
-    DeleteObject(iconInfo.hbmMask);
-
-    winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap wb =
-        winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap(
-            bm.bmWidth,
-            bm.bmHeight);
-
-    winrt::com_ptr<::Windows::Storage::Streams::IBufferByteAccess> bufferAccess =
-        wb.PixelBuffer()
-        .as<::Windows::Storage::Streams::IBufferByteAccess>();
-
-    byte* pBuffer;
-    bufferAccess->Buffer(&pBuffer);
-
-    for (int i = 0; i < nBits; ++i)
+    static winrt::com_ptr<::ISoftwareBitmapNativeFactory> factory;
+    if (!factory)
     {
-        int32_t color = colorBits[i];
-        *pBuffer++ = color & 0xff;
-        *pBuffer++ = (color >> 8) & 0xff;
-        *pBuffer++ = (color >> 16) & 0xff;
-        *pBuffer++ = (color >> 24) & 0xff;
+        factory =
+            winrt::get_activation_factory<
+            winrt::Windows::Graphics::Imaging::SoftwareBitmap,
+            ::ISoftwareBitmapNativeFactory>();
     }
 
-    return wb;
+    winrt::com_ptr<::IWICBitmap> bitmap;
+
+    winrt::check_hresult(
+        wicFactory->CreateBitmapFromHICON(hIcon, bitmap.put()));
+
+    winrt::Windows::Graphics::Imaging::SoftwareBitmap winrtBitmap = nullptr;
+
+    winrt::check_hresult(
+        factory->CreateFromWICBitmap(
+            bitmap.get(),
+            TRUE,
+            winrt::guid_of<winrt::Windows::Graphics::Imaging::SoftwareBitmap>(),
+            winrt::put_abi(winrtBitmap)));
+
+    return winrt::Windows::Graphics::Imaging::SoftwareBitmap::Convert(
+        winrtBitmap,
+        winrt::Windows::Graphics::Imaging::BitmapPixelFormat::Bgra8,
+        winrt::Windows::Graphics::Imaging::BitmapAlphaMode::Premultiplied
+    );
 }
 
 void CPanel::LoadFullPathAndShow()
@@ -488,9 +474,13 @@ void CPanel::LoadFullPathAndShow()
 
   int iconIndex = GetRealIconIndex(us2fs(path), attrib);
   HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
-  winrt::Windows::UI::Xaml::Media::Imaging::WriteableBitmap bitmap =
-      ConvertIconToWritableBitmap(icon);
-  _addressBarControl.IconSource(bitmap);
+  winrt::Windows::Graphics::Imaging::SoftwareBitmap bitmap =
+      ConvertIconToSoftwareBitmap(icon);
+  winrt::Windows::UI::Xaml::Media::Imaging::SoftwareBitmapSource source;
+  // Do not put ".get()" here, it hangs the app.
+  // Blocking doesn't matter here anyways since it's instant.
+  source.SetBitmapAsync(bitmap);
+  _addressBarControl.IconSource(source);
   DestroyIcon(icon);
 
   #endif
@@ -623,7 +613,13 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, int indent, boo
   item.Padding({ indent * 16.0, 0, 0, 0 });
 
   HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
-  item.Icon(ConvertIconToWritableBitmap(icon));
+  winrt::Windows::Graphics::Imaging::SoftwareBitmap bitmap =
+      ConvertIconToSoftwareBitmap(icon);
+  winrt::Windows::UI::Xaml::Media::Imaging::SoftwareBitmapSource source;
+  // Do not put ".get()" here, it hangs the app.
+  // Blocking doesn't matter here anyways since it's instant.
+  source.SetBitmapAsync(bitmap);
+  item.Icon(source);
   DestroyIcon(icon);
 
   _items.Append(item);

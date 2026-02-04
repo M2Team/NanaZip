@@ -4,7 +4,6 @@
 
 #ifdef _WIN32
 #include "../../../../C/DllSecur.h"
-#include "Mitigations.h"
 #endif
 
 #include "../../../Common/MyWindows.h"
@@ -242,6 +241,9 @@ static int Main2()
     eo.StdOutMode = options.StdOutMode;
     eo.YesToAll = options.YesToAll;
     eo.TestMode = options.Command.IsTestCommand();
+    // **************** NanaZip Modification Start ****************
+    eo.OpenFolder = options.OpenFolder;
+    // **************** NanaZip Modification End ****************
 
     #ifndef _SFX
     eo.Properties = options.Properties;
@@ -305,7 +307,7 @@ static int Main2()
       return NExitCode::kFatalError;
     // **************** NanaZip Modification Start ****************
     else if (eo.OpenFolder.Val) {
-        ShellExecuteW(NULL, NULL, eo.OutputDir, NULL, NULL, SW_SHOWNORMAL);
+      ShellExecuteW(NULL, NULL, ecs->Stat.OutDir, NULL, NULL, SW_SHOWNORMAL);
     }
     // **************** NanaZip Modification End ****************
   }
@@ -388,7 +390,41 @@ static int Main2()
 #define NT_CHECK_FAIL_ACTION ErrorMessage("Unsupported Windows version"); return NExitCode::kFatalError;
 #endif
 
-#include <NanaZip.Frieren.h>
+// **************** NanaZip Modification Start ****************
+#include <K7Base.h>
+#include <K7User.h>
+#include <NanaZip.Modern.h>
+
+void NanaZipInitialize()
+{
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+    {
+        ::ErrorMessage(L"K7BaseInitialize Failed");
+        ::ExitProcess(1);
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7UserInitializeDarkModeSupport())
+    {
+        ::ErrorMessage(L"K7UserInitializeDarkModeSupport Failed");
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableChildProcessCreation())
+    {
+        ::ErrorMessage(L"K7BaseDisableChildProcessCreation Failed");
+    }
+
+    if (S_OK != ::K7ModernInitialize())
+    {
+        ::ErrorMessage(L"K7ModernInitialize Failed");
+        ::ExitProcess(1);
+    }
+}
+// **************** NanaZip Modification End ****************
 
 int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   #ifdef UNDER_CE
@@ -404,16 +440,9 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE /* hPrevInstance */,
   NT_CHECK
   #endif
 
-  ::NanaZipFrierenGlobalInitialize();
-
-  if (!::NanaZipEnableMitigations())
-  {
-    ErrorMessage("Cannot enable security mitigations");
-  }
-  if (!::NanaZipDisableChildProcesses())
-  {
-    ErrorMessage("Cannot disable child processes");
-  }
+  // **************** NanaZip Modification Start ****************
+  ::NanaZipInitialize();
+  // **************** NanaZip Modification End ****************
 
   InitCommonControls();
 

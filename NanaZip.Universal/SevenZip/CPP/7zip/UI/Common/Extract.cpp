@@ -58,7 +58,10 @@ static HRESULT DecompressArchive(
   
   UStringVector removePathParts;
 
-  FString outDir = options.OutputDir;
+  // **************** NanaZip Modification Start ****************
+  //FString outDir = options.OutputDir;
+  ecs->OutDir = options.OutputDir;
+  // **************** NanaZip Modification End ****************
   UString replaceName = arc.DefaultName;
   
   if (arcLink.Arcs.Size() > 1)
@@ -71,16 +74,25 @@ static HRESULT DecompressArchive(
       replaceName = arc0.DefaultName;
   }
 
-  outDir.Replace(FString("*"), us2fs(Get_Correct_FsFile_Name(replaceName)));
+  // **************** NanaZip Modification Start ****************
+  //outDir.Replace(FString("*"), us2fs(Get_Correct_FsFile_Name(replaceName)));
+  ecs->OutDir.Replace(FString("*"), us2fs(Get_Correct_FsFile_Name(replaceName)));
+  // **************** NanaZip Modification End ****************
 
   bool elimIsPossible = false;
   UString elimPrefix; // only pure name without dir delimiter
-  FString outDirReduced = outDir;
+  // **************** NanaZip Modification Start ****************
+  //FString outDirReduced = outDir;
+  FString outDirReduced = ecs->OutDir;
+  // **************** NanaZip Modification End ****************
   
   if (options.ElimDup.Val && options.PathMode != NExtract::NPathMode::kAbsPaths)
   {
     UString dirPrefix;
-    SplitPathToParts_Smart(fs2us(outDir), dirPrefix, elimPrefix);
+    // **************** NanaZip Modification Start ****************
+    //SplitPathToParts_Smart(fs2us(outDir), dirPrefix, elimPrefix);
+    SplitPathToParts_Smart(fs2us(ecs->OutDir), dirPrefix, elimPrefix);
+    // **************** NanaZip Modification End ****************
     if (!elimPrefix.IsEmpty())
     {
       if (IsPathSepar(elimPrefix.Back()))
@@ -160,7 +172,7 @@ static HRESULT DecompressArchive(
 
       realIndices.Add(i);
     }
-
+    
     // **************** NanaZip Modification Start ****************
     if (options.SmartExtract.Val)
     {
@@ -185,7 +197,7 @@ static HRESULT DecompressArchive(
           break;
       }
       if (firstLevelSet.size() > 1)
-        outDir += replaceName;
+        ecs->OutDir += replaceName;
     }
     // **************** NanaZip Modification End ****************
 
@@ -208,6 +220,8 @@ static HRESULT DecompressArchive(
   // outDir = GetCorrectFullFsPath(outDir);
   #endif
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (outDir.IsEmpty())
     outDir = "." STRING_PATH_SEPARATOR;
   /*
@@ -221,7 +235,7 @@ static HRESULT DecompressArchive(
     SetErrorMessage("Cannot create output directory", outDir, res, errorMessage);
     return res;
   }
-
+  
   ecs->Init(
       options.NtOptions,
       options.StdInMode ? &wildcardCensor : NULL,
@@ -231,6 +245,31 @@ static HRESULT DecompressArchive(
       outDir,
       removePathParts, false,
       packSize);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  if (ecs->OutDir.IsEmpty())
+      ecs->OutDir = "." STRING_PATH_SEPARATOR;
+  /*
+  #ifdef _WIN32
+  else if (NName::IsAltPathPrefix(outDir)) {}
+  #endif
+  */
+  else if (!CreateComplexDir(ecs->OutDir))
+  {
+    const HRESULT res = GetLastError_noZero_HRESULT();
+    SetErrorMessage("Cannot create output directory", ecs->OutDir, res, errorMessage);
+    return res;
+  }
+  
+  ecs->Init(
+      options.NtOptions,
+      options.StdInMode ? &wildcardCensor : NULL,
+      &arc,
+      callbackFAE,
+      options.StdOutMode, options.TestMode,
+      ecs->OutDir,
+      removePathParts, false,
+      packSize);
+  // **************** NanaZip Modification End ****************
 
   ecs->Is_elimPrefix_Mode = elimIsPossible;
 
@@ -422,7 +461,7 @@ HRESULT Extract(
       {
         UString s = arcPath.Ptr(pos + 1);
         int index = codecs->FindFormatForExtension(s);
-        if (index >= 0 && s == L"001")
+        if (index >= 0 && s.IsEqualTo("001"))
         {
           s = arcPath.Left(pos);
           pos = s.ReverseFind(L'.');
@@ -604,5 +643,11 @@ HRESULT Extract(
   st.AltStreams_UnpackSize = ecs->AltStreams_UnpackSize;
   st.NumArchives = arcPaths.Size();
   st.PackSize = ecs->LocalProgressSpec->InSize;
+  // **************** 7-Zip ZS Modification Start ****************
+  st.FirstExtractedPath = ecs->FirstExtractedPath;
+  // **************** 7-Zip ZS Modification End ****************
+  // **************** NanaZip Modification Start ****************
+  st.OutDir = ecs->OutDir;
+  // **************** NanaZip Modification End ****************
   return S_OK;
 }

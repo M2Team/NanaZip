@@ -12,8 +12,8 @@ CEncoder::CEncoder():
   _processedIn(0),
   _processedOut(0),
   _inputSize(0),
-  _ctx(NULL),
-  _numThreads(1)
+  _numThreads(1),
+  _ctx(NULL)
 {
   _props.clear();
 }
@@ -75,7 +75,7 @@ Z7_COM7F_IMF(CEncoder::Code(ISequentialInStream *inStream,
   size_t result;
   HRESULT res = S_OK;
 
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = {};
   Context.InputStream = inStream;
   Context.OutputStream = outStream;
   Context.Progress = progress;

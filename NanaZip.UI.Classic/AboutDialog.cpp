@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      AboutDialog.cpp
- * PURPOSE:   Implementation for About Dialog
+ * PROJECT:    NanaZip
+ * FILE:       AboutDialog.cpp
+ * PURPOSE:    Implementation for About Dialog
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -53,7 +53,7 @@ void NanaZip::FileManager::AboutDialog::Show(
         auto OpenWebSite = [](
             _In_ LPCWSTR Url)
         {
-            SHELLEXECUTEINFOW ExecInfo = { 0 };
+            SHELLEXECUTEINFOW ExecInfo = {};
             ExecInfo.cbSize = sizeof(SHELLEXECUTEINFOW);
             ExecInfo.lpVerb = L"open";
             ExecInfo.lpFile = Url;
@@ -103,7 +103,7 @@ void NanaZip::FileManager::AboutDialog::Show(
     }
 #endif
 
-    TASKDIALOGCONFIG TaskDialogConfig = { 0 };
+    TASKDIALOGCONFIG TaskDialogConfig = {};
     TaskDialogConfig.cbSize = sizeof(TASKDIALOGCONFIG);
     TaskDialogConfig.hwndParent = ParentWindowHandle;
     TaskDialogConfig.hInstance = ::GetModuleHandleW(nullptr);

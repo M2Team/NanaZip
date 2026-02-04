@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</ProjectGuid>
     <RootNamespace>NanaZip.Core.Sfx.Windows</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <MileProjectManifestFile>NanaZip.Core.Sfx.Windows.manifest</MileProjectManifestFile>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Self Extracting Executable (Windows)</MileProjectFileDescription>
@@ -12,17 +13,14 @@
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
     <MileProjectOriginalFilename>NanaZip.Core.Windows.sfx</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
-    <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
-    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Core\NanaZip.Core.Sfx.Shared.props" />
-  <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
+  <Import Project="..\K7User\K7UserStatic.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
@@ -35,18 +33,19 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">NoExtensions</EnableEnhancedInstructionSet>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
       <PreprocessorDefinitions>Z7_NO_REGISTRY;Z7_LANG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Optimization Condition="'$(Configuration)' == 'Release'">MinSpace</Optimization>
-      <FavorSizeOrSpeed Condition="'$(Configuration)' == 'Release'">Size</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
-      <RandomizedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">false</RandomizedBaseAddress>
-      <FixedBaseAddress Condition="('$(Platform)'!='ARM') And ('$(Platform)'!='ARM64')">true</FixedBaseAddress>
-      <AdditionalDependencies>comctl32.lib;comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+      <RandomizedBaseAddress Condition="'$(Platform)' != 'ARM64'">false</RandomizedBaseAddress>
+      <FixedBaseAddress Condition="'$(Platform)' != 'ARM64'">true</FixedBaseAddress>
+      <AdditionalDependencies>Shlwapi.lib;comctl32.lib;comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>Z7_SFX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\IArchive.h" />
@@ -200,7 +199,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.671</Version>
+      <Version>1.0.1171</Version>
+    </PackageReference>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -245,5 +247,5 @@
     <ClCompile Include="SevenZip\CPP\Windows\Window.cpp" />
     <ClCompile Include="SevenZip\C\DllSecur.c" />
   </ItemGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
 </Project>

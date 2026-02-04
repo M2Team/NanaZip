@@ -174,6 +174,12 @@
   <data name="Resource559" xml:space="preserve">
     <value>&amp;Nadomestni tokovi</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Odpri znotraj *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Odpri znotraj #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>Izberi &amp;vse</value>
   </data>

@@ -55,10 +55,3 @@ namespace winrt::NanaZip::Modern::implementation
         void Close();
     };
 }
-
-namespace winrt::NanaZip::Modern::factory_implementation
-{
-    struct App : AppT<App, implementation::App>
-    {
-    };
-}

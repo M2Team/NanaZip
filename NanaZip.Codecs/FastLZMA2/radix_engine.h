@@ -176,6 +176,7 @@ RMF_structuredInit
 static void RMF_recurseListsBuffered(RMF_builder* const tbl,
     const BYTE* const data_block,
     size_t const block_start,
+    size_t const block_end,
     size_t link,
     U32 depth,
     U32 const max_depth,
@@ -256,7 +257,7 @@ static void RMF_recurseListsBuffered(RMF_builder* const tbl,
             overlap = list_count >> MATCH_BUFFER_OVERLAP;
             overlap += !overlap;
         }
-        RMF_recurseListChunk(tbl, data_block, block_start, depth, max_depth, list_count, stack_base);
+        RMF_recurseListChunk(tbl, data_block, block_start, block_end, depth, max_depth, list_count, stack_base);
         orig_list_count -= (U32)(list_count - start);
         /* Copy everything back, except the last link which never changes, and any extra overlap */
         count -= overlap + (overlap == 0);
@@ -483,6 +484,7 @@ static void RMF_bruteForce(RMF_builder* const tbl,
 static void RMF_recurseLists16(RMF_builder* const tbl,
     const BYTE* const data_block,
     size_t const block_start,
+    size_t const block_end,
     size_t link,
     U32 count,
     U32 const max_depth)
@@ -589,6 +591,7 @@ static void RMF_recurseLists16(RMF_builder* const tbl,
         RMF_recurseListsBuffered(tbl,
             data_block,
             block_start,
+            block_end,
             link,
             (BYTE)depth,
             (BYTE)max_depth,
@@ -972,10 +975,10 @@ RMF_structuredBuildTable
         if (best && list_head.count > tbl->builders[job]->match_buffer_limit)
         {
             /* Not worth buffering or too long */
-            RMF_recurseLists16(tbl->builders[job], block.data, block.start, list_head.head, list_head.count, max_depth);
+            RMF_recurseLists16(tbl->builders[job], block.data, block.start, block.end, list_head.head, list_head.count, max_depth);
         }
         else {
-            RMF_recurseListsBuffered(tbl->builders[job], block.data, block.start, list_head.head, 2, (BYTE)max_depth, list_head.count, 0);
+            RMF_recurseListsBuffered(tbl->builders[job], block.data, block.start, block.end, list_head.head, 2, (BYTE)max_depth, list_head.count, 0);
         }
     }
 }

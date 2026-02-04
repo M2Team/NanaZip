@@ -15,11 +15,19 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
   bool _writeZone_Changed;
   bool _flags_Changed;
 
+  // **************** NanaZip Modification Start ****************
+  bool m_ExtractOnOpenChanged;
+  // **************** NanaZip Modification End ****************
+
   void Clear_MenuChanged()
   {
     _elimDup_Changed = false;
     _writeZone_Changed = false;
     _flags_Changed = false;
+
+    // **************** NanaZip Modification Start ****************
+    m_ExtractOnOpenChanged = false;
+    // **************** NanaZip Modification End ****************
   }
 
   NWindows::NControl::CListView _listView;

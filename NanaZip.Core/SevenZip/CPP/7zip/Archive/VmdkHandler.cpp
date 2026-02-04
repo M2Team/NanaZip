@@ -202,9 +202,12 @@ struct CExtentInfo
   // PartitionUUID
   // DeviceIdentifier
 
-  bool IsType_ZERO() const { return Type == "ZERO"; }
-  // bool IsType_FLAT() const { return Type == "FLAT"; }
-  bool IsType_Flat() const { return Type == "FLAT" || Type == "VMFS" || Type == "VMFSRAW"; }
+  bool IsType_ZERO() const { return Type.IsEqualTo("ZERO"); }
+  // bool IsType_FLAT() const { return Type.IsEqualTo("FLAT"); }
+  bool IsType_Flat() const
+    { return Type.IsEqualTo("FLAT")
+          || Type.IsEqualTo("VMFS")
+          || Type.IsEqualTo("VMFSRAW"); }
   
   bool Parse(const char *s);
 };

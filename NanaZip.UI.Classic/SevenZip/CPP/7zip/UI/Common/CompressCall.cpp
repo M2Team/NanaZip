@@ -33,7 +33,7 @@ using namespace NWindows;
 #define MY_TRY_FINISH_VOID } \
   catch(...) { ErrorMessageHRESULT(E_FAIL); }
 
-#define k7zGui  "NanaZipG.exe"
+#define k7zGui  "NanaZip.Universal.Windows.exe"
 
 // 21.07 : we can disable wildcard
 // #define ISWITCH_NO_WILDCARD_POSTFIX "w-"
@@ -50,10 +50,45 @@ using namespace NWindows;
 static NCompression::CInfo m_RegistryInfo;
 extern HWND g_HWND;
 
-UString GetQuotedString(const UString &s)
+// Backport from newer 7-Zip ZS temporarily.
+UString GetQuotedString(const UString &src)
 {
   UString s2 ('\"');
-  s2 += s;
+  unsigned bcount = 0;
+  wchar_t c; const wchar_t *f = src.Ptr(), *s = f, *b = f;
+  // add string considering backslashes before quote (escape them):
+  while (1)
+  {
+    c = *s++;
+    switch (c)
+    {
+      case L'\\':
+        // a backslash - save the position and count them up to quote-char or regular char
+        if (!bcount) b = s-1;
+        bcount++;
+      break;
+      case L'\0':
+        // end of string (it is always quoted, so need to escape backslashes too):
+      case L'"':
+        // add part before backslash (and unescaped backslashes if some are there):
+        s2.AddFrom(f, (unsigned)(s - f - 1));
+        f = s;
+        if (bcount) {
+          // escape backslashes before quote (same count of BS again):
+          s2.AddFrom(b, (unsigned)(s - b - 1));
+        }
+        // done if end of string
+        if (c == L'\0') goto done;
+        // escape this quote char:
+        s2 += L"\\\"";
+      break;
+      default:
+        // a regular character, reset backslash counter
+        bcount = 0;
+    }
+  }
+  s2.AddFrom(f, (unsigned)(s - f - 1));
+done:
   s2 += '\"';
   return s2;
 }
@@ -336,7 +371,7 @@ static void ExtractGroupCommand(const UStringVector &arcPaths, UString &params, 
 
 // **************** NanaZip Modification Start ****************
 // void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone);
-void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone, bool smartExtract)
+void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bool showDialog, bool elimDup, UInt32 writeZone, bool smartExtract, bool openFolder)
 // **************** NanaZip Modification End ****************
 {
   MY_TRY_BEGIN
@@ -351,6 +386,8 @@ void ExtractArchives(const UStringVector &arcPaths, const UString &outFolder, bo
   // **************** NanaZip Modification Start ****************
   if (smartExtract)
     params += " -sps";
+  if (openFolder)
+    params += " -sre";
   // **************** NanaZip Modification End ****************
   if (writeZone != (UInt32)(Int32)-1)
   {

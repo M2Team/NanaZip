@@ -258,8 +258,9 @@ bool GetSecondsSince1601(unsigned year, unsigned month, unsigned day,
       FreeBSD 11.0, NetBSD 7.1, OpenBSD 6.0,
       Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3,
       Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+  Android NDK defines TIME_UTC but doesn't have the timespec_get().
 */
-#if defined(TIME_UTC)
+#if defined(TIME_UTC) && !defined(__ANDROID__)
 #define ZIP7_USE_timespec_get
 // #pragma message("ZIP7_USE_timespec_get")
 #elif defined(CLOCK_REALTIME)

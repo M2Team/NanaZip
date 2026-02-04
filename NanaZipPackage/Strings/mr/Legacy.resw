@@ -162,6 +162,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>गमन</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>अंदर उघडा *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>अंदर उघडा #</value>
+  </data>
   <data name="Resource600" xml:space="preserve">
     <value>सर्व निवडा</value>
   </data>

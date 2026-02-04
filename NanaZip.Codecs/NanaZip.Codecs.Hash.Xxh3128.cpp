@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Hash.Xxh3128.cpp
- * PURPOSE:   Implementation for XXH3_128bits hash algorithm
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Hash.Xxh3128.cpp
+ * PURPOSE:    Implementation for XXH3_128bits hash algorithm
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -55,7 +55,7 @@ namespace NanaZip::Codecs::Hash
         {
             XXH128_hash_t FinalDigest = ::XXH3_128bits_digest(
                 this->Context);
-            XXH128_canonical_t CanonicalDigest = { 0 };
+            XXH128_canonical_t CanonicalDigest = {};
             ::XXH128_canonicalFromHash(&CanonicalDigest, FinalDigest);
             std::memcpy(
                 Digest,

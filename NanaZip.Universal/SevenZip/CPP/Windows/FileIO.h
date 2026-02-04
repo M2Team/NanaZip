@@ -11,8 +11,7 @@
 
 #define Z7_WIN_SYMLINK_FLAG_RELATIVE 1
 
-// what the meaning of that FLAG or field (2)?
-#define Z7_WIN_LX_SYMLINK_FLAG 2
+#define Z7_WIN_LX_SYMLINK_VERSION_2 2
 
 #ifdef _WIN32
 
@@ -44,7 +43,33 @@ namespace NWindows {
 namespace NFile {
 
 #if defined(_WIN32) && !defined(UNDER_CE)
-bool FillLinkData(CByteBuffer &dest, const wchar_t *path, bool isSymLink, bool isWSL);
+/*
+  in:  (CByteBuffer &dest) is empty
+  in:  (path) uses Windows path separator (\).
+  out: (path) uses   Linux path separator (/).
+       if (isAbsPath == true), then "c:\\" prefix is replaced to "/mnt/c/" prefix
+*/
+void Convert_WinPath_to_WslLinuxPath(FString &path, bool convertDrivePath);
+// (path) must use Linux path separator (/).
+void FillLinkData_WslLink(CByteBuffer &dest, const wchar_t *path);
+
+/*
+  in:  (CByteBuffer &dest) is empty
+  if (isSymLink == false) : MOUNT_POINT : (path) must be absolute.
+  if (isSymLink == true)  : SYMLINK : Windows
+  (path) must use Windows path separator (\).
+  (path) must be without link "\\??\\" prefix.
+  link "\\??\\" prefix will be added inside FillLinkData(), if path is absolute.
+*/
+void FillLinkData_WinLink(CByteBuffer &dest, const wchar_t *path, bool isSymLink);
+// in: (CByteBuffer &dest) is empty
+inline void FillLinkData(CByteBuffer &dest, const wchar_t *path, bool isSymLink, bool isWSL)
+{
+  if (isWSL)
+    FillLinkData_WslLink(dest, path);
+  else
+    FillLinkData_WinLink(dest, path, isSymLink);
+}
 #endif
 
 struct CReparseShortInfo
@@ -61,7 +86,6 @@ struct CReparseAttr
   UInt32 Flags;
   UString SubsName;
   UString PrintName;
-
   AString WslName;
 
   bool HeaderError;
@@ -71,8 +95,7 @@ struct CReparseAttr
 
   CReparseAttr(): Tag(0), Flags(0) {}
 
-  // Parse()
-  // returns (true) and (ErrorCode = 0), if (it'a correct known link)
+  // returns (true) and (ErrorCode = 0), if (it's correct known link)
   // returns (false) and (ErrorCode = ERROR_REPARSE_TAG_INVALID), if unknown tag
   bool Parse(const Byte *p, size_t size);
 
@@ -80,17 +103,13 @@ struct CReparseAttr
   bool IsSymLink_Win() const { return Tag == Z7_WIN_IO_REPARSE_TAG_SYMLINK; }
   bool IsSymLink_WSL() const { return Tag == Z7_WIN_IO_REPARSE_TAG_LX_SYMLINK; }
 
+  // note: "/dir1/path" is marked as relative.
   bool IsRelative_Win() const { return Flags == Z7_WIN_SYMLINK_FLAG_RELATIVE; }
 
   bool IsRelative_WSL() const
   {
-    if (WslName.IsEmpty())
-      return true;
-    char c = WslName[0];
-    return !IS_PATH_SEPAR(c);
+    return WslName[0] != '/'; // WSL uses unix path separator
   }
-
-  // bool IsVolume() const;
 
   bool IsOkNamePair() const;
   UString GetPath() const;

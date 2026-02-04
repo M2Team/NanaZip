@@ -5,10 +5,10 @@
     <ClCompile Include="BLAKE3\blake3.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
-    <None Include="BLAKE3\blake3_avx2.c">
+    <None Include="BLAKE3\blake3_avx2_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
-    <None Include="BLAKE3\blake3_avx512.c">
+    <None Include="BLAKE3\blake3_avx512_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
     <ClCompile Include="BLAKE3\blake3_dispatch.c">
@@ -20,10 +20,10 @@
     <ClCompile Include="BLAKE3\blake3_portable.c">
       <Filter>BLAKE3</Filter>
     </ClCompile>
-    <None Include="BLAKE3\blake3_sse2.c">
+    <None Include="BLAKE3\blake3_sse2_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
-    <None Include="BLAKE3\blake3_sse41.c">
+    <None Include="BLAKE3\blake3_sse41_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
     <ClCompile Include="GmSSL\sm3.c">
@@ -434,9 +434,6 @@
     <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c">
       <Filter>Lizard\entropy</Filter>
     </ClCompile>
-    <ClCompile Include="Lizard\entropy\lizard_hist.c">
-      <Filter>Lizard\entropy</Filter>
-    </ClCompile>
     <ClCompile Include="Lizard\entropy\lizard_entropy_common.c">
       <Filter>Lizard\entropy</Filter>
     </ClCompile>
@@ -448,6 +445,18 @@
     </ClCompile>
     <ClCompile Include="LittleFS\lfs_util.c">
       <Filter>LittleFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\prefix.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\dec\dec_static_init.c">
+      <Filter>Brotli\dec</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\static_dict_lut.c">
+      <Filter>Brotli\enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Brotli\enc\enc_static_init.c">
+      <Filter>Brotli\enc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1130,6 +1139,40 @@
     </ClInclude>
     <ClInclude Include="LittleFS\lfs_util.h">
       <Filter>LittleFS</Filter>
+    </ClInclude>
+    <ClInclude Include="NanaZip.Codecs.Specification.Zealfs.h" />
+    <ClInclude Include="Brotli\common\dictionary_inc.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\common\static_init.h">
+      <Filter>Brotli\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\prefix_inc.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\dec\static_init.h">
+      <Filter>Brotli\dec</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\dictionary_hash_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_base.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match_simd_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\hash_longest_match64_simd_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\matching_tag_mask.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\static_dict_lut_inc.h">
+      <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Brotli\enc\static_init.h">
+      <Filter>Brotli\enc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

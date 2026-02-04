@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:    NanaZip Platform Base Library (K7Base)
+  FILE:       K7BaseStatic.props
+  PURPOSE:    MSBuild Properties for referencing the K7Base static library
+
+  LICENSE:    The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>$(OutDir)K7BaseStatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Target Name="K7BaseBuildSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(K7BaseDisableRedirector)' != 'true'">
+      <ClCompile Include="$(MSBuildThisFileDirectory)K7BaseRedirector.cpp" />
+    </ItemGroup>
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.372</Version>
+    </PackageReference>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)K7BaseStatic.vcxproj">
+      <Project>{38BB5165-3DB0-45B7-85CE-0A72DEF5CCD6}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

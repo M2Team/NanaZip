@@ -1,6 +1,10 @@
 ﻿// FastLzma2Encoder.cpp
 
+#define NOMINMAX
+
 #include "../../SevenZip/CPP/7zip/Compress/StdAfx.h"
+
+#include <algorithm>
 
 #include "../../SevenZip/C/Alloc.h"
 #include "../../SevenZip/C/Lzma2Enc.h"
@@ -10,7 +14,6 @@
 #include "../../SevenZip/CPP/7zip/Common/StreamUtils.h"
 
 #include "FastLzma2Encoder.h"
-#pragma warning(disable : 4127)
 
 namespace NCompress {
 
@@ -87,12 +90,12 @@ HRESULT CFastEncoder::FastLzma2::SetCoderProperties(const PROPID *propIDs, const
   }
   size_t dictSize = lzma2Props.lzmaProps.dictSize;
   if (!dictSize) {
-    dictSize = (UInt32)FL2_CCtx_getParameter(fcs, FL2_p_dictionarySize);
+    dictSize = FL2_CCtx_getParameter(fcs, FL2_p_dictionarySize);
   }
-  UInt64 reduceSize = lzma2Props.lzmaProps.reduceSize;
-  reduceSize += (reduceSize < (UInt64)-1); /* prevent extra buffer shift after read */
-  dictSize = (UInt32)min(dictSize, reduceSize);
-  dictSize = max(dictSize, FL2_DICTSIZE_MIN);
+  size_t reduceSize = (size_t)lzma2Props.lzmaProps.reduceSize;
+  reduceSize += (reduceSize < (size_t)-1); /* prevent extra buffer shift after read */
+  dictSize = std::min(dictSize, reduceSize);
+  dictSize = std::max(dictSize, (size_t)FL2_DICTSIZE_MIN);
   CHECK_P(FL2_CCtx_setParameter(fcs, FL2_p_dictionarySize, dictSize));
   if (lzma2Props.lzmaProps.algo >= 0) {
     CHECK_P(FL2_CCtx_setParameter(fcs, FL2_p_strategy, (unsigned)lzma2Props.lzmaProps.algo));
@@ -108,7 +111,7 @@ HRESULT CFastEncoder::FastLzma2::SetCoderProperties(const PROPID *propIDs, const
   if (lzma2Props.lzmaProps.pb >= 0)
     CHECK_P(FL2_CCtx_setParameter(fcs, FL2_p_posBits, lzma2Props.lzmaProps.pb));
   if (lzma2Props.blockSize == 0)
-    lzma2Props.blockSize = min(max(MIN_BLOCK_SIZE, dictSize * 4U), MAX_BLOCK_SIZE);
+    lzma2Props.blockSize = std::min(std::max((size_t)MIN_BLOCK_SIZE, dictSize * 4U), (size_t)MAX_BLOCK_SIZE);
   else if (lzma2Props.blockSize == LZMA2_ENC_PROPS_BLOCK_SIZE_SOLID)
     lzma2Props.blockSize = 0;
   unsigned r = 0;

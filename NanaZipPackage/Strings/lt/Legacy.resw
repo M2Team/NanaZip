@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>Išei&amp;ti</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Atverti viduje *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Atverti viduje #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Nuoroda</value>
   </data>

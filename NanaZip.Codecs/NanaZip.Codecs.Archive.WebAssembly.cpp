@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.WebAssembly.cpp
- * PURPOSE:   Implementation for WebAssembly (WASM) binary file readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.WebAssembly.cpp
+ * PURPOSE:    Implementation for WebAssembly (WASM) binary file readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -247,7 +247,7 @@ namespace NanaZip::Codecs::Archive
                             BundleSize - i < MaximumSize
                             ? BundleSize - i
                             : MaximumSize);
-                        std::uint8_t Buffer[MaximumSize] = { 0 };
+                        std::uint8_t Buffer[MaximumSize] = {};
                         if (FAILED(this->ReadFileStream(
                             i,
                             Buffer,
@@ -279,7 +279,7 @@ namespace NanaZip::Codecs::Archive
                                 BundleSize - i < MaximumSize
                                 ? BundleSize - i
                                 : MaximumSize);
-                            std::uint8_t Buffer[MaximumSize] = { 0 };
+                            std::uint8_t Buffer[MaximumSize] = {};
                             if (FAILED(this->ReadFileStream(
                                 i,
                                 Buffer,
@@ -341,7 +341,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (FAILED(hr))
+            if (S_OK != hr)
             {
                 this->Close();
             }
@@ -537,14 +537,15 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            if (!this->m_IsInitialized)
-            {
-                return S_FALSE;
-            }
-
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            if (!this->m_IsInitialized)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
             switch (PropId)

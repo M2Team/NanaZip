@@ -325,7 +325,7 @@ HRESULT CHandler::ParseLongNames(IInStream *stream)
 {
   unsigned i;
   for (i = 0; i < _items.Size(); i++)
-    if (_items[i].Name == "//")
+    if (_items[i].Name.IsEqualTo("//"))
       break;
   if (i == _items.Size())
     return S_OK;
@@ -378,7 +378,7 @@ void CHandler::ChangeDuplicateNames()
     if (item.Name[0] == '/')
       continue;
     CItem &prev = _items[i - 1];
-    if (item.Name == prev.Name)
+    if (item.Name.IsEqualTo(prev.Name))
     {
       if (prev.SameNameIndex < 0)
         prev.SameNameIndex = 0;
@@ -448,9 +448,9 @@ static UInt32 Get32(const Byte *p, unsigned be) { if (be) return GetBe32(p); ret
 HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
 {
   CItem &item = _items[fileIndex];
-  if (item.Name != "/" &&
-      item.Name != "__.SYMDEF"  &&
-      item.Name != "__.SYMDEF SORTED")
+  if (!item.Name.IsEqualTo("/") &&
+      !item.Name.IsEqualTo("__.SYMDEF")  &&
+      !item.Name.IsEqualTo("__.SYMDEF SORTED"))
     return S_OK;
   if (item.Size > ((UInt32)1 << 30) ||
       item.Size < 4)
@@ -462,7 +462,7 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
  
   size_t pos = 0;
 
-  if (item.Name != "/")
+  if (!item.Name.IsEqualTo("/"))
   {
     // "__.SYMDEF" parsing (BSD)
     unsigned be;
@@ -603,7 +603,7 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream,
     if (_longNames_FileIndex >= 0)
       _items.Delete((unsigned)_longNames_FileIndex);
 
-    if (!_items.IsEmpty() && _items[0].Name == "debian-binary")
+    if (!_items.IsEmpty() && _items[0].Name.IsEqualTo("debian-binary"))
     {
       _type = kType_Deb;
       _items.DeleteFrontal(1);

@@ -1263,7 +1263,10 @@ HRESULT CDirItems::FillFixedReparse()
     /* imagex/WIM reduces absolute paths in links (raparse data),
        if we archive non root folder. We do same thing here */
 
-    bool isWSL = false;
+    // **************** NanaZip Modification Start ****************
+    // Disabled in 25.00.
+    // bool isWSL = false;
+    // **************** NanaZip Modification End ****************
     if (attr.IsSymLink_WSL())
     {
       // isWSL = true;
@@ -1310,11 +1313,22 @@ HRESULT CDirItems::FillFixedReparse()
     UString newLink = prefix.Left(rootPrefixSize);
     newLink += link.Ptr(prefix.Len());
 
-    CByteBuffer data;
-    bool isSymLink = !attr.IsMountPoint();
-    if (!FillLinkData(data, newLink, isSymLink, isWSL))
+    // **************** NanaZip Modification Start ****************
+    // Backported from 25.00.
+    CByteBuffer &data = item.ReparseData2;
+/*
+    if (isWSL)
+    {
+      Convert_WinPath_to_WslLinuxPath(newLink, true); // is absolute : change it
+      FillLinkData_WslLink(data, newLink);
+    }
+    else
+*/
+      FillLinkData_WinLink(data, newLink, !attr.IsMountPoint());
+    if (data.Size() == 0)
       continue;
-    item.ReparseData2 = data;
+    // item.ReparseData2 = data;
+    // **************** NanaZip Modification End ****************
   }
   return S_OK;
 }

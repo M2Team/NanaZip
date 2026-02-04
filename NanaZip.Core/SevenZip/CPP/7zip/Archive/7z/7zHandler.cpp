@@ -812,7 +812,7 @@ HRESULT CHandler::ObtainBlockMethods(CNum folderIndex, PROPVARIANT *prop, CHandl
           } else {
             *dest++ = 'f';
             *dest++ = 'l';
-            ConvertUInt32ToString(l - 32, dest);
+            ConvertUInt32ToString(l - Z7_ZSTD_FAST_LEV_INC, dest);
           }
           dest += MyStringLen(dest);
         }
@@ -827,6 +827,9 @@ HRESULT CHandler::ObtainBlockMethods(CNum folderIndex, PROPVARIANT *prop, CHandl
       case k_ARM64:
         if (info) continue;
         name = "ARM64";
+        // **************** 7-Zip ZS Modification Start ****************
+        break;
+        // **************** 7-Zip ZS Modification End ****************
       case k_RISCV:
         if (info) continue;
         if (id == k_RISCV) name = "RISCV";

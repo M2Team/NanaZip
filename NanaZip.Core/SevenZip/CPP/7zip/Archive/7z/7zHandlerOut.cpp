@@ -111,8 +111,8 @@ HRESULT CHandler::SetMainMethod(CCompressionMethodMode &methodMode)
     }
   }
 
-  const UInt64 kSolidBytes_Min = (1 << 24);
-  const UInt64 kSolidBytes_Max = ((UInt64)1 << 32);
+  const UInt64 kSolidBytes_Min = 1 << 24;
+  const UInt64 kSolidBytes_Max = (UInt64)1 << 32;  // for non-LZMA2 methods
 
   bool needSolid = false;
   
@@ -122,22 +122,24 @@ HRESULT CHandler::SetMainMethod(CCompressionMethodMode &methodMode)
 
     SetGlobalLevelTo(oneMethodInfo);
 
-    #ifndef Z7_ST
+#ifndef Z7_ST
     const bool numThreads_WasSpecifiedInMethod = (oneMethodInfo.Get_NumThreads() >= 0);
     if (!numThreads_WasSpecifiedInMethod)
     {
       // here we set the (NCoderPropID::kNumThreads) property in each method, only if there is no such property already
       CMultiMethodProps::SetMethodThreadsTo_IfNotFinded(oneMethodInfo, methodMode.NumThreads);
     }
-    #endif
+    if (methodMode.NumThreadGroups > 1)
+      CMultiMethodProps::Set_Method_NumThreadGroups_IfNotFinded(oneMethodInfo, methodMode.NumThreadGroups);
+#endif
 
     CMethodFull &methodFull = methodMode.Methods.AddNew();
     RINOK(PropsMethod_To_FullMethod(methodFull, oneMethodInfo))
 
-    #ifndef Z7_ST
+#ifndef Z7_ST
     methodFull.Set_NumThreads = true;
     methodFull.NumThreads = methodMode.NumThreads;
-    #endif
+#endif
 
     if (methodFull.Id != k_Copy)
       needSolid = true;
@@ -220,19 +222,18 @@ HRESULT CHandler::SetMainMethod(CCompressionMethodMode &methodMode)
       // here we get real chunkSize
       cs = oneMethodInfo.Get_Xz_BlockSize();
       if (dicSize > cs)
-        dicSize = cs;
+          dicSize = cs;
 
-      const UInt64 kSolidBytes_Lzma2_Max = ((UInt64)1 << 34);
+      const UInt64 kSolidBytes_Lzma2_Max = (UInt64)1 << 34;
       if (numSolidBytes > kSolidBytes_Lzma2_Max)
-        numSolidBytes = kSolidBytes_Lzma2_Max;
+          numSolidBytes = kSolidBytes_Lzma2_Max;
 
       methodFull.Set_NumThreads = false; // we don't use ICompressSetCoderMt::SetNumberOfThreads() for LZMA2 encoder
 
       #ifndef Z7_ST
       if (!numThreads_WasSpecifiedInMethod
           && !methodMode.NumThreads_WasForced
-          && methodMode.MemoryUsageLimit_WasSet
-          )
+          && methodMode.MemoryUsageLimit_WasSet)
       {
         const UInt32 lzmaThreads = oneMethodInfo.Get_Lzma_NumThreads();
         const UInt32 numBlockThreads_Original = methodMode.NumThreads / lzmaThreads;
@@ -276,14 +277,14 @@ HRESULT CHandler::SetMainMethod(CCompressionMethodMode &methodMode)
     {
       numSolidBytes = (UInt64)dicSize << 7;
       if (numSolidBytes > kSolidBytes_Max)
-        numSolidBytes = kSolidBytes_Max;
+          numSolidBytes = kSolidBytes_Max;
     }
 
     if (_numSolidBytesDefined)
       continue;
 
     if (numSolidBytes < kSolidBytes_Min)
-      numSolidBytes = kSolidBytes_Min;
+        numSolidBytes = kSolidBytes_Min;
     _numSolidBytes = numSolidBytes;
     _numSolidBytesDefined = true;
   }
@@ -456,7 +457,11 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
       if (!mInfo.methName.IsEmpty()) {
         COneMethodInfo &m = _methods.AddNew();
         m.MethodName = mInfo.methName;
-        if ((_level == -1) && (mInfo.level != -1)) {
+        // **************** 7-Zip ZS Modification Start ****************
+        //if ((_level == -1) && (mInfo.level != -1)) {
+        if ((_level == (UInt32)-1) && (mInfo.level != -1)) {
+          // XXX - does not work in linux this way
+        // **************** 7-Zip ZS Modification End ****************
           _level = mInfo.level;
         }
       }
@@ -726,6 +731,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     methodMode.NumThreads = numThreads;
     methodMode.NumThreads_WasForced = _numThreads_WasForced;
     methodMode.MultiThreadMixer = _useMultiThreadMixer;
+#ifdef _WIN32
+    methodMode.NumThreadGroups = _numThreadGroups; // _change it
+#endif
     // headerMethod.NumThreads = 1;
     headerMethod.MultiThreadMixer = _useMultiThreadMixer;
   }

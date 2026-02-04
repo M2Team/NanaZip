@@ -39,8 +39,6 @@ Z7_CLASS_IMP_CHandler_IInArchive_3(
 
   UInt64 _packSize;
   UInt64 _unpackSize;
-  UInt64 _numStreams;
-  UInt64 _numBlocks;
 
   CSingleMethodProps _props;
 };
@@ -235,9 +233,11 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     opRes = NExtract::NOperationResult::kDataAfterEnd;
   else if (result == S_FALSE)
     opRes = NExtract::NOperationResult::kDataError;
-  else if (result == S_OK)
+  else if (result == S_OK) {
+    _unpackSize = outStreamSpec->GetSize();
+    _unpackSize_Defined = true;
     opRes = NExtract::NOperationResult::kOK;
-  else
+  } else
     return result;
 
   }

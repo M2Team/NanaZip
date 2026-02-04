@@ -174,6 +174,10 @@ enum Enum
 
   kNameTrailReplace,
 
+// **************** NanaZip Modification Start ****************
+  kOpenFolder,
+// **************** NanaZip Modification End ****************
+
   kDeleteAfterCompressing,
   kSetArcMTime
 
@@ -311,7 +315,11 @@ static const CSwitchForm kSwitchForms[] =
   { "spf", SWFRM_STRING_SINGL(0) },
 
   { "snh", SWFRM_MINUS },
-  { "snld", SWFRM_MINUS },
+  // **************** NanaZip Modification Start ****************
+  // Backported from 25.01.
+  //{ "snld", SWFRM_MINUS },
+  { "snld", SWFRM_STRING },
+  // **************** NanaZip Modification End ****************
   { "snl", SWFRM_MINUS },
   { "sni", SWFRM_SIMPLE },
 
@@ -324,6 +332,10 @@ static const CSwitchForm kSwitchForms[] =
   { "snc", SWFRM_SIMPLE },
 
   { "snt", SWFRM_MINUS },
+
+// **************** NanaZip Modification Start ****************
+  { "sre", SWFRM_MINUS },
+// **************** NanaZip Modification End ****************
 
   { "sdel", SWFRM_SIMPLE },
   { "stl", SWFRM_SIMPLE }
@@ -1268,6 +1280,11 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
     options.ExtractOptions.SmartExtract.Def = true;
     options.ExtractOptions.SmartExtract.Val = !parser[NKey::kSmartExtract].WithMinus;
   }
+  if (parser[NKey::kOpenFolder].ThereIs)
+  {
+    options.OpenFolder.Def = true;
+    options.OpenFolder.Val = !parser[NKey::kOpenFolder].WithMinus;
+  }
   // **************** NanaZip Modification End ****************
 
   NWildcard::ECensorPathMode censorPathMode = NWildcard::k_RelatPath;
@@ -1393,8 +1410,11 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   SetBoolPair(parser, NKey::kStoreOwnerId, options.StoreOwnerId);
   SetBoolPair(parser, NKey::kStoreOwnerName, options.StoreOwnerName);
 
-  CBoolPair symLinks_AllowDangerous;
-  SetBoolPair(parser, NKey::kSymLinks_AllowDangerous, symLinks_AllowDangerous);
+  // **************** NanaZip Modification Start ****************
+  // Deleted from 25.01.
+  //CBoolPair symLinks_AllowDangerous;
+  //SetBoolPair(parser, NKey::kSymLinks_AllowDangerous, symLinks_AllowDangerous);
+  // **************** NanaZip Modification End ****************
 
 
   /*
@@ -1440,7 +1460,19 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
       if (!options.SymLinks.Def)
         nt.SymLinks.Val = true;
 
-      nt.SymLinks_AllowDangerous = symLinks_AllowDangerous;
+      // **************** NanaZip Modification Start ****************
+      // Backported from 25.01.
+      //nt.SymLinks_AllowDangerous = symLinks_AllowDangerous;
+      if (parser[NKey::kSymLinks_AllowDangerous].ThereIs)
+      {
+        const UString &s = parser[NKey::kSymLinks_AllowDangerous].PostStrings[0];
+        UInt32 v = 9; // default value for "-snld" instead of default = 5 without "-snld".
+        if (!s.IsEmpty())
+          if (!StringToUInt32(s, v))
+            throw CArcCmdLineException("Unsupported switch postfix -snld", s);
+        nt.SymLinks_DangerousLevel = (unsigned)v;
+      }
+      // **************** NanaZip Modification End ****************
 
       nt.ReplaceColonForAltStream = parser[NKey::kReplaceColonForAltStream].ThereIs;
       nt.WriteToAltStreamIfColon = parser[NKey::kWriteToAltStreamIfColon].ThereIs;

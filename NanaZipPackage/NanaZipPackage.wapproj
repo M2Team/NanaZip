@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Wap.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Wap.props" />
   <PropertyGroup>
     <ProjectGuid>9a119a76-97cb-4490-b8c2-651576cb9302</ProjectGuid>
     <TargetPlatformVersion>10.0.26100.0</TargetPlatformVersion>
@@ -30,15 +30,17 @@
       <DeploymentContent>true</DeploymentContent>
       <Link>Assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
-    <Content Include="Mile.Project.Wap.Unstaged.targets" />
     <!-- Internationalization Support -->
     <PRIResource Include="Strings\**\*">
       <Link>Strings\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\K7Pal\K7Pal.vcxproj">
-      <Project>{279F7FA5-7DDC-4635-99B0-3C7F2179DAE0}</Project>
+    <ProjectReference Include="..\K7Base\K7Base.vcxproj">
+      <Project>{5998305E-D017-47C2-8025-A19111F73539}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\K7User\K7User.vcxproj">
+      <Project>{F9BF062B-998F-45A4-8285-96E4A0D5EC00}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Modern\NanaZip.Modern.vcxproj">
       <Project>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</Project>
@@ -57,11 +59,11 @@
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
       <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
-      <SetPlatform>Platform=Win32</SetPlatform>
+      <SetPlatform>Platform=x64</SetPlatform>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj">
       <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
-      <SetPlatform>Platform=Win32</SetPlatform>
+      <SetPlatform>Platform=x64</SetPlatform>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.ShellExtension.vcxproj">
       <Project>{53934E7A-686E-42F1-8A80-4299CDE30564}</Project>
@@ -70,6 +72,5 @@
       <Project>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</Project>
     </ProjectReference>
   </ItemGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Wap.targets" />
-  <Import Project="Mile.Project.Wap.Unstaged.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Wap.targets" />
 </Project>

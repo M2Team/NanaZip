@@ -16,16 +16,14 @@
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
     <MileProjectOriginalFilename>NanaZip.Modern.FileManager.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
-    <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
-    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.ModernExperienceShims.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
-  <Import Project="..\NanaZip.Frieren\NanaZip.Frieren.props" />
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
+  <Import Project="..\K7Base\K7Base.props" />
+  <Import Project="..\K7User\K7User.props" />
   <Import Project="..\NanaZip.Modern\NanaZip.Modern.props" />
   <ItemDefinitionGroup>
     <ClCompile>
@@ -34,7 +32,8 @@
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
-      <AdditionalDependencies>runtimeobject.lib;comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+      <AdditionalDependencies>Shlwapi.lib;runtimeobject.lib;comctl32.lib;htmlhelp.lib;comdlg32.lib;Mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>mpr.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
@@ -386,7 +385,7 @@
       <Version>2.5.1250</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.671</Version>
+      <Version>1.0.1171</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.410</Version>
@@ -403,7 +402,7 @@
       <Project>{3E5B58DE-4FDC-4F45-93A4-8AA3D61C614D}</Project>
     </ProjectReference>
   </ItemGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
 
   <!--
   XamlAddCppWinRTMergedWinmd

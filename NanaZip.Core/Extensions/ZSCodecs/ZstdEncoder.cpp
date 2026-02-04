@@ -78,12 +78,17 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
       _Max = true;
     #endif
       v = Z7_ZSTD_ULTIMATE_LEV;
+      /* fall-through */
     case NCoderPropID::kLevel:
       {
         _Level = !_Max ? v : Z7_ZSTD_ULTIMATE_LEV;
         if (v < 1) {
           _Level = 1;
         } else if ((Int32)v > ZSTD_maxCLevel()) {
+          if ((Int32)v > Z7_ZSTD_FAST_LEV_INC && _Level != Z7_ZSTD_ULTIMATE_LEV) { // special case (inverter for fast lever)
+            v -= Z7_ZSTD_FAST_LEV_INC;
+            goto fastLevel;
+          }
         #if Z7_ZSTD_ADVMAX_ALLOWED // 64-bit only
           _Max = (_Level == Z7_ZSTD_ULTIMATE_LEV); // special case (level from GUI)
         #endif
@@ -97,6 +102,7 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
         break;
       }
     case NCoderPropID::kFast:
+     fastLevel:
       if (!_Max)
       {
         /* like --fast in zstd cli program */
@@ -110,14 +116,15 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
 
         /**
          * zstd fast levels:
-         * _Fast  => 1..ZSTD_minCLevel()  (_Level => _Fast + 32)
+         * _Fast  => 1..ZSTD_minCLevel()  (_Level => _Fast + Z7_ZSTD_FAST_LEV_INC)
          */
-        _props._level = static_cast < Byte > (_Fast + 32);
+        _props._level = static_cast < Byte > (_Fast + Z7_ZSTD_FAST_LEV_INC);
 
         /* negative levels are the fast ones */
         _Level = _Fast * -1;
         break;
       }
+      /* fall-through */
     case NCoderPropID::kLong:
       {
         /* like --long in zstd cli program */
@@ -174,14 +181,12 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
       }
     case NCoderPropID::kTargetLen:
       {
-        if (v < ZSTD_TARGETLENGTH_MIN) v = ZSTD_TARGETLENGTH_MIN;
         if (v > ZSTD_TARGETLENGTH_MAX) v = ZSTD_TARGETLENGTH_MAX;
         _TargetLen = 0;
         break;
       }
     case NCoderPropID::kOverlapLog:
       {
-        if (v < 0) v = 0; /* no overlap */
         if (v > 9) v = 9; /* full size */
         _OverlapLog = v;
         break;
@@ -209,7 +214,6 @@ Z7_COM7F_IMF(CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
       }
     case NCoderPropID::kLdmHashRateLog:
       {
-        if (v < 0) v = 0; /* 0 => automatic mode */
         if (v > (ZSTD_WINDOWLOG_MAX - ZSTD_HASHLOG_MIN)) v = (ZSTD_WINDOWLOG_MAX - ZSTD_HASHLOG_MIN);
         _LdmHashRateLog = v;
         break;

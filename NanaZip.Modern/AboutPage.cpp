@@ -6,22 +6,9 @@
 
 #include "NanaZip.Modern.h"
 
-#include <Mile.Helpers.CppBase.h>
-#include <Mile.Helpers.CppWinRT.h>
-
-namespace winrt::Mile
-{
-    using namespace ::Mile;
-}
-
 #include <winrt/Windows.UI.Xaml.Documents.h>
 
-#include <string>
-
 #include <Mile.Project.Version.h>
-
-using namespace winrt;
-using namespace Windows::UI::Xaml;
 
 namespace winrt::NanaZip::Modern::implementation
 {
@@ -38,8 +25,8 @@ namespace winrt::NanaZip::Modern::implementation
     {
         AboutPageT::InitializeComponent();
 
-        winrt::hstring WindowTitle = Mile::WinRT::GetLocalizedString(
-            L"Legacy/Resource2900");
+        winrt::hstring WindowTitle = winrt::hstring(
+            ::K7ModernGetLegacyStringResource(2900));
         if (WindowTitle.empty())
         {
             WindowTitle = L"About NanaZip";
@@ -57,7 +44,7 @@ namespace winrt::NanaZip::Modern::implementation
 #endif
 
         std::wstring Content = std::wstring(
-            Mile::WinRT::GetLocalizedString(L"Legacy/Resource2901"));
+            ::K7ModernGetLegacyStringResource(2901));
         if (Content.empty())
         {
             Content = L"NanaZip is free software";
@@ -71,8 +58,6 @@ namespace winrt::NanaZip::Modern::implementation
         this->GridTitleTextBlock().Text(WindowTitle);
         this->Version().Text(Version);
         this->Content().Text(Content);
-        this->CancelButton().Content(winrt::box_value(
-            Mile::WinRT::GetLocalizedString(L"Legacy/Resource402")));
     }
 
     void AboutPage::GitHubButtonClick(
@@ -82,7 +67,7 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(e);
 
-        SHELLEXECUTEINFOW ExecInfo = { 0 };
+        SHELLEXECUTEINFOW ExecInfo = {};
         ExecInfo.cbSize = sizeof(SHELLEXECUTEINFOW);
         ExecInfo.lpVerb = L"open";
         ExecInfo.lpFile = L"https://github.com/M2Team/NanaZip";
@@ -97,6 +82,6 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(e);
 
-        ::DestroyWindow(this->m_WindowHandle);
+        ::PostMessageW(this->m_WindowHandle, WM_CLOSE, 0, 0);
     }
 }

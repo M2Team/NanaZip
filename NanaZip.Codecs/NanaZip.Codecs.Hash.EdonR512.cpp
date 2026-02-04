@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Hash.EdonR512.cpp
- * PURPOSE:   Implementation for EDON-R 512 hash algorithm
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Hash.EdonR512.cpp
+ * PURPOSE:    Implementation for EDON-R 512 hash algorithm
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */

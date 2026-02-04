@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.MultiThreadWrapper.Common.cpp
- * PURPOSE:   Implementation for Common Multi Thread Wrapper
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.MultiThreadWrapper.Common.cpp
+ * PURPOSE:    Implementation for Common Multi Thread Wrapper
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -88,7 +88,7 @@ EXTERN_C int NanaZipCodecsCommonWrite(
         {
             return -1;
         }
-            
+
         Todo -= Block;
     }
 

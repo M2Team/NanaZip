@@ -20,27 +20,21 @@
 #include "MenuPage.h"
 #include "MenuPageRes.h"
 
-#include <appmodel.h>
-
-#include <winrt/base.h>
-#include <winrt/Windows.Foundation.h>
-#include <winrt/Windows.System.h>
+// **************** NanaZip Modification Start ****************
+#include <K7User.h>
+// **************** NanaZip Modification End ****************
 
 using namespace NWindows;
 using namespace NContextMenuFlags;
-
-namespace winrt
-{
-    using Windows::Foundation::Uri;
-    using Windows::System::Launcher;
-    using Windows::System::LauncherOptions;
-}
 
 static const UInt32 kLangIDs[] =
 {
   IDB_SYSTEM_ASSOCIATE,
   IDX_EXTRACT_ELIM_DUP,
   IDT_SYSTEM_ZONE,
+  // **************** NanaZip Modification Start ****************
+  IDX_EXTRACT_ON_OPEN,
+// **************** NanaZip Modification End ****************
   IDT_SYSTEM_CONTEXT_MENU_ITEMS
 };
 
@@ -110,6 +104,10 @@ bool CMenuPage::OnInit()
   ci.Load();
 
   CheckButton(IDX_EXTRACT_ELIM_DUP, ci.ElimDup.Val);
+
+  // **************** NanaZip Modification Start ****************
+  CheckButton(IDX_EXTRACT_ON_OPEN, ci.ExtractOnOpen.Val);
+  // **************** NanaZip Modification End ****************
 
   _listView.Attach(GetItem(IDL_SYSTEM_OPTIONS));
   _zoneCombo.Attach(GetItem(IDC_SYSTEM_ZONE));
@@ -203,7 +201,14 @@ bool CMenuPage::OnInit()
 
 LONG CMenuPage::OnApply()
 {
-  if (_elimDup_Changed || _writeZone_Changed || _flags_Changed)
+  // **************** NanaZip Modification Start ****************
+  // if (_elimDup_Changed || _writeZone_Changed || _flags_Changed)
+  if (
+    _elimDup_Changed ||
+    _writeZone_Changed ||
+    _flags_Changed ||
+    m_ExtractOnOpenChanged)
+  // **************** NanaZip Modification End ****************
   {
     CContextMenuInfo ci;
 
@@ -212,7 +217,12 @@ LONG CMenuPage::OnApply()
 
     {
       int zoneIndex = (int)_zoneCombo.GetItemData_of_CurSel();
-      if (zoneIndex <= 0)
+      // **************** NanaZip Modification Start ****************
+      // if (zoneIndex <= 0)
+      if (zoneIndex < 0 ||
+          zoneIndex > NExtract::NZoneIdMode::kOffice ||
+          zoneIndex == NExtract::NZoneIdMode::Default)
+      // **************** NanaZip Modification End ****************
         zoneIndex = -1;
       ci.WriteZone = (UInt32)(Int32)zoneIndex;
     }
@@ -224,6 +234,12 @@ LONG CMenuPage::OnApply()
         ci.Flags |= kMenuItems[i].Flag;
 
     ci.Flags_Def = _flags_Changed;
+
+    // **************** NanaZip Modification Start ****************
+    ci.ExtractOnOpen.Val = IsButtonCheckedBool(IDX_EXTRACT_ON_OPEN);
+    ci.ExtractOnOpen.Def = m_ExtractOnOpenChanged;
+    // **************** NanaZip Modification End ****************
+
     ci.Save();
 
     Clear_MenuChanged();
@@ -239,40 +255,20 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
   switch (buttonID)
   {
     case IDX_EXTRACT_ELIM_DUP: _elimDup_Changed = true; break;
+
+    // **************** NanaZip Modification Start ****************
+    case IDX_EXTRACT_ON_OPEN:
+      m_ExtractOnOpenChanged = true;
+      break;
+    // **************** NanaZip Modification End ****************
+
     // case IDX_EXTRACT_WRITE_ZONE: _writeZone_Changed = true; break;
 
     case IDB_SYSTEM_ASSOCIATE:
     {
-        try
-        {
-            // GetCurrentApplicationUserModelId can't work properly when the
-            // program starts from Visual Studio, because NanaZip will be
-            // allocated a wrong AUMID.
-            UINT32 nLength = 0;
-            ::GetCurrentApplicationUserModelId(
-                &nLength,
-                nullptr);
-            std::wstring AUMID(
-                nLength,
-                '\0');
-            winrt::check_hresult(::GetCurrentApplicationUserModelId(
-                &nLength,
-                AUMID.data()));
-            winrt::Uri NavigateURI(
-                L"ms-settings:defaultapps?registeredAUMID="
-                + AUMID);
-            winrt::LauncherOptions Options;
-            Options.TargetApplicationPackageFamilyName(
-                L"windows.immersivecontrolpanel_cw5n1h2txyewy");
-            winrt::Launcher::LaunchUriAsync(
-                NavigateURI,
-                Options).get();
-            return true;
-        }
-        catch (...)
-        {
-            return false;
-        }
+      // **************** NanaZip Modification Start ****************
+      ::K7UserModernLaunchDefaultAppsSettings();
+      // **************** NanaZip Modification End ****************
     }
 
     default:

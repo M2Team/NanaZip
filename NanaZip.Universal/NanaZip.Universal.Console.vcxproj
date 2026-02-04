@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{86E818B3-D657-4E03-9336-48EE242A79D1}</ProjectGuid>
@@ -14,24 +14,23 @@
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
     <MileProjectOriginalFilename>NanaZip.Universal.Console.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
-    <MileProjectVersion>6.0.$([System.DateTime]::Today.Subtract($([System.DateTime]::Parse('2021-08-31'))).TotalDays).0</MileProjectVersion>
-    <MileProjectVersionTag>Preview 1</MileProjectVersionTag>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x86.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.x64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Platform.ARM64.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.Default.props" />
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.props" />
-  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
-  <Import Project="..\NanaZip.Shared\NanaZip.Shared.Mitigations.props" />
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Project="..\K7Base\K7Base.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>%(AdditionalOptions) /Wv:18</AdditionalOptions>
-      <PreprocessorDefinitions>Z7_DEVICE_FILE;Z7_EXTERNAL_CODECS;WINRT_NO_SOURCE_LOCATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>Z7_DEVICE_FILE;Z7_EXTERNAL_CODECS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <LargeAddressAware>true</LargeAddressAware>
+      <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
@@ -44,23 +43,11 @@
     <Manifest Include="NanaZip.Universal.Console.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.671</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
-      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
-      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
-      <SetPlatform>Platform=Win32</SetPlatform>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="SevenZip\ASM\x86\7zAsm.asm" />
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
+    <None Include="SevenZip\ASM\x86\Sort.asm" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
+    <None Include="SevenZip\C\Sort.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />
@@ -269,18 +256,29 @@
     <ClCompile Include="SevenZip\C\Alloc.c" />
     <ClCompile Include="SevenZip\C\CpuArch.c" />
     <ClCompile Include="SevenZip\C\DllSecur.c" />
-    <ClCompile Include="SevenZip\C\Sort.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
   </ItemGroup>
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
-    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
       <MASM Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
-    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\7zCrcOpt.c">
-        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSortHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
+      <MASM Include="SevenZip\ASM\x86\Sort.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSortHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
+      <ClCompile Include="SevenZip\C\Sort.c">
+        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       </ClCompile>
     </ItemGroup>
   </Target>
@@ -288,7 +286,19 @@
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.410</Version>
     </PackageReference>
+    <PackageReference Include="Mile.Windows.Helpers">
+      <Version>1.0.1171</Version>
+    </PackageReference>
   </ItemGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
-  <Import Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
+      <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Console.vcxproj">
+      <Project>{96C0A1A0-D964-4725-AFDC-73EBF7FC1416}</Project>
+      <SetPlatform>Platform=x64</SetPlatform>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.targets" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>

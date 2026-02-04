@@ -208,35 +208,6 @@ bool StringsAreEqualNoCase(const wchar_t *s1, const wchar_t *s2) throw()
 
 // ---------- ASCII ----------
 
-bool AString::IsPrefixedBy_Ascii_NoCase(const char *s) const throw()
-{
-  const char *s1 = _chars;
-  for (;;)
-  {
-    const char c2 = *s++;
-    if (c2 == 0)
-      return true;
-    const char c1 = *s1++;
-    if (MyCharLower_Ascii(c1) !=
-        MyCharLower_Ascii(c2))
-      return false;
-  }
-}
-
-bool UString::IsPrefixedBy_Ascii_NoCase(const char *s) const throw()
-{
-  const wchar_t *s1 = _chars;
-  for (;;)
-  {
-    const char c2 = *s++;
-    if (c2 == 0)
-      return true;
-    const wchar_t c1 = *s1++;
-    if (MyCharLower_Ascii(c1) != (unsigned char)MyCharLower_Ascii(c2))
-      return false;
-  }
-}
-
 bool StringsAreEqual_Ascii(const char *u, const char *a) throw()
 {
   for (;;)

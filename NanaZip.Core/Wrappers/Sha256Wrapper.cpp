@@ -1,14 +1,16 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      Sha256Wrapper.cpp
- * PURPOSE:   Implementation for SHA-256 wrapper for 7-Zip
+ * PROJECT:    NanaZip
+ * FILE:       Sha256Wrapper.cpp
+ * PURPOSE:    Implementation for SHA-256 wrapper for 7-Zip
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #include "Sha256Wrapper.h"
+
+#include <Windows.h>
 
 #include <cstring>
 
@@ -19,12 +21,12 @@ CSha256& CSha256::operator=(
     {
         if (this->HashHandle)
         {
-            ::K7PalHashDestroy(this->HashHandle);
+            ::K7BaseHashDestroy(this->HashHandle);
             this->HashHandle = nullptr;
         }
         if (Source.HashHandle)
         {
-            ::K7PalHashDuplicate(Source.HashHandle, &this->HashHandle);
+            ::K7BaseHashDuplicate(Source.HashHandle, &this->HashHandle);
         }
     }
     return *this;
@@ -56,13 +58,13 @@ void Sha256_InitState(
 
     if (p->HashHandle)
     {
-        ::K7PalHashDestroy(p->HashHandle);
+        ::K7BaseHashDestroy(p->HashHandle);
         p->HashHandle = nullptr;
     }
 
-    ::K7PalHashCreate(
+    ::K7BaseHashCreate(
         &p->HashHandle,
-        BCRYPT_SHA256_ALGORITHM,
+        K7_BASE_HASH_ALGORITHM_SHA256,
         nullptr,
         0);
 }
@@ -89,7 +91,7 @@ void Sha256_Update(
         return;
     }
 
-    ::K7PalHashUpdate(
+    ::K7BaseHashUpdate(
         p->HashHandle,
         const_cast<LPVOID>(reinterpret_cast<LPCVOID>(data)),
         static_cast<UINT32>(size));
@@ -104,7 +106,7 @@ void Sha256_Final(
         return;
     }
 
-    ::K7PalHashFinal(
+    ::K7BaseHashFinal(
         p->HashHandle,
         digest,
         SHA256_DIGEST_SIZE);

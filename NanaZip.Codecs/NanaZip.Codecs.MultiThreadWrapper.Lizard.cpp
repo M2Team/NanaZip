@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp
- * PURPOSE:   Implementation for Lizard Multi Thread Wrapper
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp
+ * PURPOSE:    Implementation for Lizard Multi Thread Wrapper
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -47,7 +47,7 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLizardDecode(
     _In_ UINT32 NumberOfThreads,
     _In_ UINT32 InputSize)
 {
-    LIZARDMT_RdWr_t ReadWrite = { 0 };
+    LIZARDMT_RdWr_t ReadWrite = {};
     ReadWrite.fn_read = ::NanaZipCodecsLizardRead;
     ReadWrite.fn_write = ::NanaZipCodecsLizardWrite;
     ReadWrite.arg_read = reinterpret_cast<void*>(StreamContext);

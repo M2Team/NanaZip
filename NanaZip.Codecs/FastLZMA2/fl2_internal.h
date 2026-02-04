@@ -55,6 +55,8 @@ extern "C" {
 
 #define FL2_STATIC_ASSERT(c) { enum { FL2_static_assert = 1/(int)(!!(c)) }; }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated FastLZMA2 Mainline Source Code snippet Start ********
 #if defined(FL2_DEBUG) && (FL2_DEBUG>=2)
 #  include <stdio.h>
 extern int g_debuglog_enable;
@@ -79,6 +81,8 @@ extern int g_debuglog_enable;
 #  define RAWLOG(l, ...)      {}    /* disabled */
 #  define DEBUGLOG(l, ...)    {}    /* disabled */
 #endif
+#endif // ******** Annotated FastLZMA2 Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 /*-*************************************

@@ -168,6 +168,12 @@
   <data name="Resource557" xml:space="preserve">
     <value>E&amp;sci</value>
   </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Apri in NanaZip File Manager *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Apri in NanaZip File Manager #</value>
+  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Collegamento</value>
   </data>

@@ -23,6 +23,8 @@
 #include "resource.h"
 #include "PropertyNameRes.h"
 
+#include <NanaZip.Modern.h>
+
 using namespace NWindows;
 
 extern
@@ -53,40 +55,47 @@ void CPanel::InvokeSystemCommand(const char *command)
   contextMenu->InvokeCommand(&ci);
 }
 
-static const char * const kSeparator = "------------------------";
-static const char * const kSeparatorSmall = "----------------";
+static const wchar_t * const kSeparator = L"------------------------";
+static const wchar_t * const kSeparatorSmall = L"----------------";
 
 extern UString ConvertSizeToString(UInt64 value) throw();
 bool IsSizeProp(UINT propID) throw();
 
 UString GetOpenArcErrorMessage(UInt32 errorFlags);
 
-
-static void AddListAscii(CListViewDialog &dialog, const char *s)
+static void AddSeparator(std::wstring& text)
 {
-  dialog.Strings.Add((UString)s);
-  dialog.Values.AddNew();
+  if (text.length() > 0)
+    text += L"\n";
+  text += kSeparator;
+  text += L"\n";
 }
 
-static void AddSeparator(CListViewDialog &dialog)
+static void AddSeparatorSmall(std::wstring& text)
 {
-  AddListAscii(dialog, kSeparator);
+  if (text.length() > 0)
+    text += L"\n";
+  text += kSeparatorSmall;
+  text += L"\n";
 }
 
-static void AddSeparatorSmall(CListViewDialog &dialog)
+static void AddPropertyPair(const UString &name, const UString &val, std::wstring &text)
 {
-  AddListAscii(dialog, kSeparatorSmall);
-}
-
-static void AddPropertyPair(const UString &name, const UString &val, CListViewDialog &dialog)
-{
-  dialog.Strings.Add(name);
-  dialog.Values.Add(val);
+  if (text.length() > 0)
+    text += L"\n";
+  text += name;
+  text += L" =";
+  if (val.Find(L"\n") != -1)
+      text += L"\n";
+  else
+      text += L" ";
+  text += val;
+  text += L"\n";
 }
 
 
 static void AddPropertyString(PROPID propID, const wchar_t *nameBSTR,
-    const NCOM::CPropVariant &prop, CListViewDialog &dialog)
+    const NCOM::CPropVariant &prop, std::wstring& text)
 {
   if (prop.vt != VT_EMPTY)
   {
@@ -118,18 +127,18 @@ static void AddPropertyString(PROPID propID, const wchar_t *nameBSTR,
     {
       if (propID == kpidErrorType)
       {
-        AddPropertyPair(L"Open WARNING:", L"Cannot open the file as expected archive type", dialog);
+        AddPropertyPair(L"Open WARNING:", L"Cannot open the file as expected archive type", text);
       }
-      AddPropertyPair(GetNameOfProperty(propID, nameBSTR), val, dialog);
+      AddPropertyPair(GetNameOfProperty(propID, nameBSTR), val, text);
     }
   }
 }
 
 
-static void AddPropertyString(PROPID propID, UInt64 val, CListViewDialog &dialog)
+static void AddPropertyString(PROPID propID, UInt64 val, std::wstring& text)
 {
   NCOM::CPropVariant prop = val;
-  AddPropertyString(propID, NULL, prop, dialog);
+  AddPropertyString(propID, NULL, prop, text);
 }
 
 
@@ -168,9 +177,11 @@ void CPanel::Properties()
   }
 
   {
-    CListViewDialog message;
+    // CListViewDialog message;
     // message.DeleteIsAllowed = false;
     // message.SelectFirst = false;
+
+    std::wstring message;
 
     CRecordVector<UInt32> operatedIndices;
     GetOperatedItemIndices(operatedIndices);
@@ -414,9 +425,27 @@ void CPanel::Properties()
       }
     }
 
-    message.Title = LangString(IDS_PROPERTIES);
-    message.NumColumns = 2;
-    message.Create(GetParent());
+    const std::wstring charsToTrim = L" \n-";
+
+    // Find the position of the last character that is NOT in our set
+    size_t lastChar = message.find_last_not_of(charsToTrim);
+
+    // If such a character is found, erase everything from the next position onward
+    if (std::string::npos != lastChar) {
+        message.erase(lastChar + 1);
+    }
+    // Otherwise, if the string contains ONLY trim characters, clear the whole string
+    else {
+        message.clear();
+    }
+
+    // message.Title = LangString(IDS_PROPERTIES);
+    // message.NumColumns = 2;
+    // message.Create(GetParent());
+    ::K7ModernShowInformationDialog(
+        this->GetParent(),
+        ::LangString(IDS_PROPERTIES).Ptr(),
+        message.c_str());
   }
 }
 

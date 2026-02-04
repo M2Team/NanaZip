@@ -24,6 +24,10 @@
 
 #include "resource.h"
 
+// **************** NanaZip Modification Start ****************
+#include <string>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 using namespace NFile;
 using namespace NFind;
@@ -75,7 +79,28 @@ static bool DoesNameContainWildcard_SkipRoot(const UString &path)
 
 HRESULT CPanel::BindToPath(const UString &fullPath, const UString &arcFormat, COpenResult &openRes)
 {
-  UString path = fullPath;
+  // **************** NanaZip Modification Start ****************
+  // UString path = fullPath;
+  // 32767 is the maximum path length without the terminating null character.
+  std::wstring ExpandedPath(32767, L'\0');
+  DWORD ExpandedPathLength = ::ExpandEnvironmentStringsW(
+      fullPath.Ptr(),
+      ExpandedPath.data(),
+      static_cast<DWORD>(ExpandedPath.size()));
+  if (ExpandedPathLength)
+  {
+      // If the ExpandEnvironmentStringsW function succeeds, the return value
+      // is the number of wchar_t stored in the destination buffer, including
+      // the terminating null character. So we need to resize the string to
+      // remove the extra null characters at the end.
+      ExpandedPath.resize(ExpandedPathLength - 1);
+  }
+  // According to the UString implementation, converting from std::wstring will
+  // be good for readability, which will be useful for future maintenance.
+  UString path = ExpandedPathLength
+      ? UString(ExpandedPath.c_str())
+      : fullPath;
+  // **************** NanaZip Modification End ****************
   #ifdef _WIN32
   path.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif

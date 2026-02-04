@@ -427,9 +427,11 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     opResult = NExtract::NOperationResult::kDataAfterEnd;
   else if (result == S_FALSE)
     opResult = NExtract::NOperationResult::kDataError;
-  else if (result == S_OK)
+  else if (result == S_OK) {
+    _unpackSize = outStreamSpec->GetSize();
+    _unpackSize_Defined = true;
     opResult = NExtract::NOperationResult::kOK;
-  else
+  } else
     return result;
 
   outStream.Release();

@@ -1,11 +1,11 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      AboutDialog.h
- * PURPOSE:   Definition for About Dialog
+ * PROJECT:    NanaZip
+ * FILE:       AboutDialog.h
+ * PURPOSE:    Definition for About Dialog
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
- * DEVELOPER: MouriNaruto (KurikoMouri@outlook.jp)
+ * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #ifndef NANAZIP_FILEMANAGER_ABOUTDIALOG

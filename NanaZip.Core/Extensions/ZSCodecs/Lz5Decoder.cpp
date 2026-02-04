@@ -23,16 +23,11 @@ Z7_COM7F_IMF(CDecoder::SetDecoderProperties2(const Byte * prop, UInt32 size))
 {
   DProps *pProps = (DProps *)prop;
 
-  switch (size) {
-  case 3:
-    memcpy(&_props, pProps, 3);
-    return S_OK;
-  case 5:
-    memcpy(&_props, pProps, 5);
-    return S_OK;
-  default:
+  if (size > 5)
     return E_NOTIMPL;
-  }
+
+  memcpy(&_props, pProps, sizeof (DProps));
+  return S_OK;
 }
 
 Z7_COM7F_IMF(CDecoder::SetNumberOfThreads(UInt32 numThreads))
@@ -60,7 +55,7 @@ Z7_COM7F_IMF(CDecoder::SetOutStreamSize(const UInt64 * outSize))
 HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
   ISequentialOutStream * outStream, ICompressProgressInfo * progress)
 {
-  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = { 0 };
+  NANAZIP_CODECS_ZSTDMT_STREAM_CONTEXT Context = {};
   Context.InputStream = inStream;
   Context.OutputStream = outStream;
   Context.Progress = progress;

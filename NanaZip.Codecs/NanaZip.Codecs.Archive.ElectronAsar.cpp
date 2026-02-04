@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.ElectronAsar.cpp
- * PURPOSE:   Implementation for Electron Archive (asar) readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.ElectronAsar.cpp
+ * PURPOSE:    Implementation for Electron Archive (asar) readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -207,7 +207,12 @@ namespace NanaZip::Codecs::Archive
                 {
                     break;
                 }
-                this->m_GlobalOffset = BinaryHeaderSize + HeaderStringSize + 1;
+                this->m_GlobalOffset = BinaryHeaderSize + HeaderStringSize;
+
+                if (this->m_GlobalOffset % 4 != 0)
+                {
+                    this->m_GlobalOffset += 4 - this->m_GlobalOffset % 4;
+                }
 
                 std::string HeaderString(HeaderStringSize, '\0');
                 if (FAILED(this->ReadFileStream(
@@ -254,7 +259,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (FAILED(hr))
+            if (S_OK != hr)
             {
                 this->Close();
             }
@@ -446,14 +451,15 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            if (!this->m_IsInitialized)
-            {
-                return S_FALSE;
-            }
-
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            if (!this->m_IsInitialized)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
             switch (PropId)

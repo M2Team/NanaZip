@@ -1206,6 +1206,17 @@ UString &UString::operator=(const UString &s)
   return *this;
 }
 
+// Backport from newer 7-Zip ZS temporarily.
+void UString::AddFrom(const wchar_t *s, unsigned len) // no check
+{
+  if (len) {
+    Grow(len);
+    wmemcpy(_chars + _len, s, len);
+    _len += len;
+    _chars[_len] = 0;
+  }
+}
+
 void UString::SetFrom(const wchar_t *s, unsigned len) // no check
 {
   if (len > _limit)

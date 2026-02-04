@@ -25,12 +25,12 @@ bool IsDrivePath(const wchar_t *s) throw();  // first 3 chars are drive chars li
 
 bool IsAltPathPrefix(CFSTR s) throw(); /* name: */
 
-#if defined(_WIN32) && !defined(UNDER_CE)
-
 extern const char * const kSuperPathPrefix; /* \\?\ */
 const unsigned kDevicePathPrefixSize = 4;
 const unsigned kSuperPathPrefixSize = 4;
 const unsigned kSuperUncPathPrefixSize = kSuperPathPrefixSize + 4;
+
+#if defined(_WIN32) && !defined(UNDER_CE)
 
 bool IsDevicePath(CFSTR s) throw();   /* \\.\ */
 bool IsSuperUncPath(CFSTR s) throw(); /* \\?\UNC\ */
@@ -85,6 +85,15 @@ int FindAltStreamColon(CFSTR path) throw();
 
 bool IsAbsolutePath(const wchar_t *s) throw();
 unsigned GetRootPrefixSize(const wchar_t *s) throw();
+
+#ifndef _WIN32
+/* GetRootPrefixSize_WINDOWS() is called in linux, but it parses path by windows rules.
+   It supports only paths system (linux) slash separators (STRING_PATH_SEPARATOR),
+   It doesn't parses paths with backslash (windows) separators.
+   "c:/dir/file" is supported.
+*/
+unsigned GetRootPrefixSize_WINDOWS(const wchar_t *s) throw();
+#endif
 
 #ifdef Z7_LONG_PATH
 

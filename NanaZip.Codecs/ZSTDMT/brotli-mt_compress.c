@@ -147,7 +147,7 @@ BROTLIMT_CCtx *BROTLIMT_createCCtx(int threads, uint64_t unpackSize, int level, 
 		}
 	} else {
 		ctx->cwork = NULL;
-	}		
+	}
 
 	return ctx;
 
@@ -383,7 +383,7 @@ static size_t st_compress(void *arg)
 	  /* 0, or not specified by user; could be chosen by compressor. */
 	  uint32_t lgwin = 24 /* DEFAULT_LGWIN */;
 	  /* Use file size to limit lgwin. */
-	  if (ctx->unpackSize >= 0 && ctx->unpackSize != (uint64_t)(int64_t)-1) {
+	  if (ctx->unpackSize != (uint64_t)(int64_t)-1) {
 	    lgwin = BROTLI_MIN_WINDOW_BITS;
 	    while (BROTLI_MAX_BACKWARD_LIMIT(lgwin) <
 	           (uint64_t)ctx->unpackSize) {

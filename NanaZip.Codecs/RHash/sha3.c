@@ -334,11 +334,11 @@ void rhash_sha3_final(sha3_ctx* ctx, unsigned char* result)
 
 #ifdef USE_KECCAK
 /**
-* Store calculated hash into the given array.
-*
-* @param ctx the algorithm context containing current hashing state
-* @param result calculated hash in binary form
-*/
+ * Store calculated hash into the given array.
+ *
+ * @param ctx the algorithm context containing current hashing state
+ * @param result calculated hash in binary form
+ */
 void rhash_keccak_final(sha3_ctx* ctx, unsigned char* result)
 {
 	size_t digest_length = 100 - ctx->block_size / 2;

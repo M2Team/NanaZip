@@ -619,7 +619,7 @@ static const uint64_t zero_512[8] = { 0,0,0,0,0,0,0,0 };
  * @param ctx context to initialize
  * @param hash_size the size of the digest in bytes
  */
-static RHASH_INLINE void rhash_gost12_init(gost12_ctx* ctx, size_t hash_size)
+static RHASH_INLINE void rhash_gost12_init(gost12_ctx* ctx, unsigned hash_size)
 {
 	memset(ctx, 0, sizeof(gost12_ctx));
 	if (hash_size != gost12_512_hash_size)
@@ -808,7 +808,7 @@ void rhash_gost12_update(gost12_ctx* ctx, const unsigned char* msg, size_t size)
 		size_t rest = gost12_block_size - ctx->index;
 
 		le64_copy(ctx->message, ctx->index, msg, (size < rest ? size : rest));
-		ctx->index += size;
+		ctx->index += (unsigned)size;
 		if (size < rest)
 			return;
 
@@ -837,7 +837,7 @@ void rhash_gost12_update(gost12_ctx* ctx, const unsigned char* msg, size_t size)
 	}
 	if (size)
 	{
-		ctx->index = size;
+		ctx->index = (unsigned)size;
 		le64_copy(ctx->message, 0, msg, size); /* save leftovers */
 	}
 }

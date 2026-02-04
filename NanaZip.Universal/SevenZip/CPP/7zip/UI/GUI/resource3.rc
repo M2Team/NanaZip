@@ -1,0 +1,15 @@
+#include "resource3.h"
+
+STRINGTABLE
+BEGIN
+  IDS_PROGRESS_REMOVE     "Removing"
+
+  IDS_PROGRESS_ADD        "Adding"
+  IDS_PROGRESS_UPDATE     "Updating"
+  IDS_PROGRESS_ANALYZE    "Analyzing"
+  IDS_PROGRESS_REPLICATE  "Replicating"
+  IDS_PROGRESS_REPACK     "Repacking"
+
+  IDS_PROGRESS_DELETE     "Deleting"
+  IDS_PROGRESS_HEADER     "Header creating"
+END

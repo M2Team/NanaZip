@@ -168,7 +168,7 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
   UINT DpiValue = ::GetDpiForWindow(hwnd);
   int ToolBarControlHeight = ::MulDiv(48, DpiValue, USER_DEFAULT_SCREEN_DPI);
 
-  RECT ClientRect = { 0 };
+  RECT ClientRect = {};
   ::GetClientRect(hwnd, &ClientRect);
 
   this->m_ToolBar = ::CreateWindowExW(

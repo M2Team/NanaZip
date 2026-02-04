@@ -4,6 +4,10 @@
 
 #include "CommandLineParser.h"
 
+// **************** 7-Zip ZS Modification Start ****************
+#include <ctype.h> // isblank()
+// **************** 7-Zip ZS Modification End ****************
+
 namespace NCommandLineParser {
 
 // **************** 7-Zip ZS Modification Start ****************
@@ -129,8 +133,9 @@ static const wchar_t * _SplitCommandLine(const wchar_t* s, UString &dest)
         f = s;
         if (qcount == 2)
           qcount = 0;
-      break;
+        break;
       case L' ':
+        // fall through
       case L'\t':
         // a space (end of arg or regular char):
         if (!qcount)
@@ -142,6 +147,7 @@ static const wchar_t * _SplitCommandLine(const wchar_t* s, UString &dest)
           bcount = 0;
           goto done;
         }
+        // fall through
       // no break - a space as regular char:
       default:
         // a regular character, reset backslash counter
@@ -213,7 +219,7 @@ bool CParser::ParseString(const UString &s, const CSwitchForm *switchForms, unsi
   unsigned pos = 1;
   unsigned switchIndex = 0;
   int maxLen = -1;
-  
+
   for (unsigned i = 0; i < numSwitches; i++)
   {
     const char * const key = switchForms[i].Key;
@@ -234,10 +240,10 @@ bool CParser::ParseString(const UString &s, const CSwitchForm *switchForms, unsi
   }
 
   pos += (unsigned)maxLen;
-  
+
   CSwitchResult &sw = _switches[switchIndex];
   const CSwitchForm &form = switchForms[switchIndex];
-  
+
   if (!form.Multi && sw.ThereIs)
   {
     ErrorMessage = "Multiple instances for switch:";
@@ -252,10 +258,10 @@ bool CParser::ParseString(const UString &s, const CSwitchForm *switchForms, unsi
     ErrorMessage = "Too short switch:";
     return false;
   }
-  
+
   sw.WithMinus = false;
   sw.PostCharIndex = -1;
-  
+
   switch (form.Type)
   {
     case NSwitchType::kMinus:
@@ -268,7 +274,7 @@ bool CParser::ParseString(const UString &s, const CSwitchForm *switchForms, unsi
         return false;
       }
       break;
-      
+
     case NSwitchType::kChar:
       if (rem == 1)
       {
@@ -283,7 +289,7 @@ bool CParser::ParseString(const UString &s, const CSwitchForm *switchForms, unsi
         return false;
       }
       break;
-      
+
     case NSwitchType::kString:
     {
       sw.PostStrings.Add(s.Ptr(pos));
@@ -311,7 +317,7 @@ bool CParser::ParseStrings(const CSwitchForm *switchForms, unsigned numSwitches,
   delete []_switches;
   _switches = NULL;
   _switches = new CSwitchResult[numSwitches];
-  
+
   FOR_VECTOR (i, commandStrings)
   {
     const UString &s = commandStrings[i];

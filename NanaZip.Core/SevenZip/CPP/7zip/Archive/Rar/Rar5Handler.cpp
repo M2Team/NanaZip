@@ -393,6 +393,7 @@ void CItem::Link_to_Prop(unsigned linkType, NWindows::NCOM::CPropVariant &prop) 
   if (!FindExtra_Link(link))
     return;
 
+  bool isWindows = (HostOS == kHost_Windows);
   if (link.Type != linkType)
   {
     if (linkType != NLinkType::kUnixSymLink)
@@ -400,8 +401,11 @@ void CItem::Link_to_Prop(unsigned linkType, NWindows::NCOM::CPropVariant &prop) 
     switch ((unsigned)link.Type)
     {
       case NLinkType::kUnixSymLink:
+        isWindows = false;
+        break;
       case NLinkType::kWinSymLink:
       case NLinkType::kWinJunction:
+        isWindows = true;
         break;
       default: return;
     }
@@ -409,10 +413,15 @@ void CItem::Link_to_Prop(unsigned linkType, NWindows::NCOM::CPropVariant &prop) 
 
   AString s;
   s.SetFrom_CalcLen((const char *)(Extra + link.NameOffset), link.NameLen);
-
   UString unicode;
   ConvertUTF8ToUnicode(s, unicode);
-  prop = NItemName::GetOsPath(unicode);
+  // rar5.0  used '\\' separator for windows symlinks and \??\ prefix for abs paths.
+  // rar5.1+ uses '/'  separator for windows symlinks and /??/ prefix for abs paths.
+  // v25.00: we convert Windows slashes to Linux slashes:
+  if (isWindows)
+    unicode.Replace(L'\\', L'/');
+  prop = unicode;
+  // prop = NItemName::GetOsPath(unicode);
 }
 
 bool CItem::GetAltStreamName(AString &name) const

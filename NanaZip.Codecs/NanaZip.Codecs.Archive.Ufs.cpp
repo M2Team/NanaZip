@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Archive.Ufs.cpp
- * PURPOSE:   Implementation for UFS/UFS2 file system image readonly support
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Archive.Ufs.cpp
+ * PURPOSE:    Implementation for UFS/UFS2 file system image readonly support
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -136,7 +136,7 @@ namespace NanaZip::Codecs::Archive
         IInStream* m_FileStream = nullptr;
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
-        fs m_SuperBlock = { 0 };
+        fs m_SuperBlock = {};
         std::map<std::string, std::uint32_t> m_TemporaryFilePaths;
         std::vector<UfsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;
@@ -773,7 +773,7 @@ namespace NanaZip::Codecs::Archive
 
             } while (false);
 
-            if (FAILED(hr))
+            if (S_OK != hr)
             {
                 this->Close();
             }
@@ -1113,14 +1113,15 @@ namespace NanaZip::Codecs::Archive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value)
         {
-            if (!this->m_IsInitialized)
-            {
-                return S_FALSE;
-            }
-
             if (!Value)
             {
                 return E_INVALIDARG;
+            }
+
+            if (!this->m_IsInitialized)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
             switch (PropId)

@@ -1,5 +1,9 @@
 ﻿// ProgressDialog2.cpp
 
+// **************** NanaZip Modification Start ****************
+#pragma warning(disable: 4505)
+// **************** NanaZip Modification End ****************
+
 #include "StdAfx.h"
 
 #include "../../../Common/IntToString.h"
@@ -16,6 +20,18 @@
 #include "ProgressDialog2.h"
 #include "ProgressDialog2Res.h"
 
+// **************** NanaZip Modification Start ****************
+#include <NanaZip.Modern.h>
+#include <dwmapi.h>
+#include <winrt/Windows.UI.Xaml.Hosting.h>
+#include <Mile.Helpers.CppWinRT.h>
+#include <Mile.Helpers.h>
+namespace winrt
+{
+    using Windows::UI::Xaml::Hosting::DesktopWindowXamlSource;
+}
+// TODO: Implement messages (_messageList)
+// **************** NanaZip Modification End ****************
 using namespace NWindows;
 
 extern HINSTANCE g_hInstance;
@@ -43,6 +59,8 @@ static const UINT kCreateDelay =
 
 static const DWORD kPauseSleepTime = 100;
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 #ifdef LANG
 
 static const UInt32 kLangIDs[] =
@@ -65,6 +83,8 @@ static const UInt32 kLangIDs_Colon[] =
 };
 
 #endif
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 #define UNDEFINED_VAL ((UInt64)(Int64)-1)
@@ -316,12 +336,16 @@ static void ReduceString(UString &s, unsigned size)
   s.Insert(size / 2, L" ... ");
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void CProgressDialog::EnableErrorsControls(bool enable)
 {
   ShowItem_Bool(IDT_PROGRESS_ERRORS, enable);
   ShowItem_Bool(IDT_PROGRESS_ERRORS_VAL, enable);
   ShowItem_Bool(IDL_PROGRESS_MESSAGES, enable);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 bool CProgressDialog::OnInit()
 {
@@ -330,6 +354,12 @@ bool CProgressDialog::OnInit()
     _hwndForTaskbar = GetParent();
   if (!_hwndForTaskbar)
     _hwndForTaskbar = *this;
+
+  // **************** NanaZip Modification Start ****************
+  MileAllowNonClientDefaultDrawingForWindow(*this, FALSE);
+  MARGINS margins = { -1 };
+  DwmExtendFrameIntoClientArea(*this, &margins);
+  // **************** NanaZip Modification End ****************
 
   INIT_AS_UNDEFINED(_progressBar_Range);
   INIT_AS_UNDEFINED(_progressBar_Pos);
@@ -354,14 +384,97 @@ bool CProgressDialog::OnInit()
 
   _foreground = true;
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   m_ProgressBar.Attach(GetItem(IDC_PROGRESS1));
   _messageList.Attach(GetItem(IDL_PROGRESS_MESSAGES));
   _messageList.SetUnicodeFormat();
   _messageList.SetExtendedListViewStyle(LVS_EX_FULLROWSELECT);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  *winrt::put_abi(this->m_ProgressPage) = ::K7ModernCreateProgressPage(*this);
+  this->m_ProgressPageWindowHandle = CreateWindowExW(
+      WS_EX_NOREDIRECTIONBITMAP,
+      L"Mile.Xaml.ContentWindow",
+      nullptr,
+      WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS,
+      0, 0, 0, 0,
+      *this,
+      nullptr,
+      nullptr,
+      winrt::get_abi(this->m_ProgressPage));
+
+  // 376x204
+
+  ::SetWindowSubclass(
+      this->m_ProgressPageWindowHandle,
+      [](
+          _In_ HWND hWnd,
+          _In_ UINT uMsg,
+          _In_ WPARAM wParam,
+          _In_ LPARAM lParam,
+          _In_ UINT_PTR uIdSubclass,
+          _In_ DWORD_PTR dwRefData) -> LRESULT
+      {
+          UNREFERENCED_PARAMETER(uIdSubclass);
+          UNREFERENCED_PARAMETER(dwRefData);
+
+          switch (uMsg)
+          {
+          case WM_DESTROY:
+          {
+              winrt::DesktopWindowXamlSource XamlSource = nullptr;
+              winrt::copy_from_abi(
+                  XamlSource,
+                  ::GetPropW(hWnd, L"XamlWindowSource"));
+              // Clear the property first to avoid use-after-free issue.
+              ::RemovePropW(hWnd, L"XamlWindowSource");
+              if (XamlSource)
+              {
+                  // Release the reference count from SetPropW.
+                  XamlSource.as<IUnknown>()->Release();
+                  // Close the XAML Island.
+                  XamlSource.Close();
+                  // Destroy the content immediately to avoid unintended access.
+                  XamlSource = nullptr;
+              }
+              break;
+          }
+          case WM_ERASEBKGND:
+          {
+              ::RemovePropW(
+                  hWnd,
+                  L"BackgroundFallbackColor");
+              break;
+          }
+          default:
+              break;
+          }
+
+          return ::DefSubclassProc(
+              hWnd,
+              uMsg,
+              wParam,
+              lParam);
+      },
+      0,
+      0);
+
+  RECT rect;
+  GetClientRect(&rect);
+  SetWindowPos(
+      this->m_ProgressPageWindowHandle,
+      nullptr,
+      0, 0,
+      RECT_SIZE_X(rect), RECT_SIZE_Y(rect),
+      SWP_SHOWWINDOW
+  );
+  // **************** NanaZip Modification End ****************
 
   _wasCreated = true;
   _dialogCreatedEvent.Set();
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   #ifdef LANG
   LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
   LangSetDlgItems_Colon(*this, kLangIDs_Colon, ARRAY_SIZE(kLangIDs_Colon));
@@ -378,11 +491,38 @@ bool CProgressDialog::OnInit()
   LangString(IDS_PROGRESS_FOREGROUND, _foreground_String);
   LangString(IDS_CONTINUE, _continue_String);
   LangString(IDS_PROGRESS_PAUSED, _paused_String);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  this->m_ProgressPage.CancelButtonText(
+      ::Mile::WinRT::GetLocalizedString(
+          L"NanaZip.Modern/Common/CancelButton/Content"));
+
+  this->m_ProgressPage.PauseButtonClicked({ this, &CProgressDialog::OnPauseButtonClicked });
+  this->m_ProgressPage.BackgroundButtonClicked({ this, &CProgressDialog::OnBackgroundButtonClicked });
+
+  _background_String = UString(::Mile::WinRT::GetLocalizedString(
+      L"NanaZip.Modern/ProgressPage/BackgroundButtonText"
+  ).c_str());
+  _backgrounded_String = _background_String;
+  _foreground_String = UString(::Mile::WinRT::GetLocalizedString(
+      L"NanaZip.Modern/ProgressPage/ForegroundButtonText"
+  ).c_str());
+  _pause_String = UString(::Mile::WinRT::GetLocalizedString(
+      L"NanaZip.Modern/ProgressPage/PauseButtonText"
+  ).c_str());
+  _continue_String = UString(::Mile::WinRT::GetLocalizedString(
+      L"NanaZip.Modern/ProgressPage/ContinueButtonText"
+  ).c_str());
+  _paused_String = UString(::Mile::WinRT::GetLocalizedString(
+      L"NanaZip.Modern/ProgressPage/PausedText"
+  ).c_str());
+  // **************** NanaZip Modification End ****************
 
   SetText(_title);
   SetPauseText();
   SetPriorityText();
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   _messageList.InsertColumn(0, L"", 30);
   _messageList.InsertColumn(1, L"", 600);
 
@@ -394,13 +534,22 @@ bool CProgressDialog::OnInit()
   GetItemSizes(IDCANCEL, _buttonSizeX, _buttonSizeY);
   _numReduceSymbols = kCurrentFileNameSizeLimit;
   NormalizeSize(true);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  _numReduceSymbols = kCurrentFileNameSizeLimit;
+  // **************** NanaZip Modification End ****************
 
   if (!ShowCompressionInfo)
   {
+      // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     HideItem(IDT_PROGRESS_PACKED);
     HideItem(IDT_PROGRESS_PACKED_VAL);
     HideItem(IDT_PROGRESS_RATIO);
     HideItem(IDT_PROGRESS_RATIO_VAL);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    this->m_ProgressPage.ShowPackedValue(false);
+    this->m_ProgressPage.ShowCompressionRatioValue(false);
+    // **************** NanaZip Modification End ****************
   }
 
   if (IconID >= 0)
@@ -410,9 +559,9 @@ bool CProgressDialog::OnInit()
     SetIcon(ICON_BIG, icon);
   }
   _timer = SetTimer(kTimerID, kTimerElapse);
-  #ifdef UNDER_CE
+#ifdef UNDER_CE
   Foreground();
-  #endif
+#endif
 
   CheckNeedClose();
 
@@ -421,6 +570,8 @@ bool CProgressDialog::OnInit()
   return CModalDialog::OnInit();
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static const UINT kIDs[] =
 {
   IDT_PROGRESS_ELAPSED,   IDT_PROGRESS_ELAPSED_VAL,
@@ -435,9 +586,13 @@ static const UINT kIDs[] =
   IDT_PROGRESS_PACKED,    IDT_PROGRESS_PACKED_VAL,
   IDT_PROGRESS_RATIO,     IDT_PROGRESS_RATIO_VAL
 };
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 bool CProgressDialog::OnSize(WPARAM /* wParam */, int xSize, int ySize)
 {
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   int sY;
   int sStep;
   int mx, my;
@@ -556,10 +711,20 @@ bool CProgressDialog::OnSize(WPARAM /* wParam */, int xSize, int ySize)
     yPos += sStep;
   }
   return false;
+
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    return BOOLToBool(SetWindowPos(
+        this->m_ProgressPageWindowHandle,
+        nullptr,
+        0, 0, xSize, ySize,
+        SWP_SHOWWINDOW));
+// **************** NanaZip Modification End ****************
 }
 
-void CProgressDialog::OnCancel() { Sync.Set_Stopped(true); }
-void CProgressDialog::OnOK() { }
+// **************** NanaZip Modification Start ****************
+//void CProgressDialog::OnCancel() { Sync.Set_Stopped(true); }
+//void CProgressDialog::OnOK() { }
+// **************** NanaZip Modification End ****************
 
 void CProgressDialog::SetProgressRange(UInt64 range)
 {
@@ -568,7 +733,10 @@ void CProgressDialog::SetProgressRange(UInt64 range)
   _progressBar_Range = range;
   INIT_AS_UNDEFINED(_progressBar_Pos);
   _progressConv.Init(range);
-  m_ProgressBar.SetRange32(0, _progressConv.Count(range));
+  // **************** NanaZip Modification Start ****************
+  // m_ProgressBar.SetRange32(0, _progressConv.Count(range));
+  this->m_ProgressPage.ProgressBarMaximum(_progressConv.Count(range));
+  // **************** NanaZip Modification End ****************
 }
 
 void CProgressDialog::SetProgressPos(UInt64 pos)
@@ -577,7 +745,10 @@ void CProgressDialog::SetProgressPos(UInt64 pos)
       pos <= _progressBar_Pos ||
       pos - _progressBar_Pos >= (_progressBar_Range >> 10))
   {
-    m_ProgressBar.SetPos(_progressConv.Count(pos));
+    // **************** NanaZip Modification Start ****************
+    // m_ProgressBar.SetPos(_progressConv.Count(pos));
+      this->m_ProgressPage.ProgressBarValue(_progressConv.Count(pos));
+    // **************** NanaZip Modification End ****************
     #ifdef __ITaskbarList3_INTERFACE_DEFINED__
     if (_taskbarList && _hwndForTaskbar)
       _taskbarList->SetProgressValue(_hwndForTaskbar, pos, _progressBar_Range);
@@ -627,6 +798,8 @@ static void ConvertSizeToString(UInt64 v, wchar_t *s)
   }
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void CProgressDialog::ShowSize(int id, UInt64 val, UInt64 &prev)
 {
   if (val == prev)
@@ -638,6 +811,19 @@ void CProgressDialog::ShowSize(int id, UInt64 val, UInt64 &prev)
     ConvertSizeToString(val, s);
   SetItemText(id, s);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+winrt::hstring CProgressDialog::ShowSize(UInt64 val, UInt64 &prev)
+{
+  if (val == prev)
+    return L"";
+  prev = val;
+  wchar_t s[40];
+  s[0] = 0;
+  if (IS_DEFINED_VAL(val))
+    ConvertSizeToString(val, s);
+  return s;
+}
+// **************** NanaZip Modification End ****************
 
 static void GetChangedString(const UString &newStr, UString &prevStr, bool &hasChanged)
 {
@@ -733,7 +919,12 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     }
   }
 
-  ShowSize(IDT_PROGRESS_TOTAL_VAL, total, _totalBytes_Prev);
+  // **************** NanaZip Modification Start ****************
+  // ShowSize(IDT_PROGRESS_TOTAL_VAL, total, _totalBytes_Prev);
+  winrt::hstring size = ShowSize(total, _totalBytes_Prev);
+  if (size != L"")
+      this->m_ProgressPage.TotalSizeText(size);
+  // **************** NanaZip Modification End ****************
 
   _elapsedTime += (curTime - _prevTime);
   _prevTime = curTime;
@@ -745,7 +936,10 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     elapsedChanged = true;
     wchar_t s[40];
     GetTimeString(elapsedSec, s);
-    SetItemText(IDT_PROGRESS_ELAPSED_VAL, s);
+    // **************** NanaZip Modification Start ****************
+    //SetItemText(IDT_PROGRESS_ELAPSED_VAL, s);
+    this->m_ProgressPage.ElapsedTimeText(s);
+    // **************** NanaZip Modification End ****************
   }
 
   bool needSetTitle = false;
@@ -756,11 +950,15 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
       UpdateMessagesDialog();
       wchar_t s[32];
       ConvertUInt64ToString(numErrors, s);
-      SetItemText(IDT_PROGRESS_ERRORS_VAL, s);
+      // **************** NanaZip Modification Start ****************
+      //SetItemText(IDT_PROGRESS_ERRORS_VAL, s);
+      // **************** NanaZip Modification End ****************
       if (!_errorsWereDisplayed)
       {
         _errorsWereDisplayed = true;
-        EnableErrorsControls(true);
+        // **************** NanaZip Modification Start ****************
+        //EnableErrorsControls(true);
+        // **************** NanaZip Modification End ****************
         SetTaskbarProgressState();
       }
     }
@@ -772,7 +970,10 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
         if (IS_DEFINED_VAL(_prevRemainingSec))
         {
           INIT_AS_UNDEFINED(_prevRemainingSec);
-          SetItemText(IDT_PROGRESS_REMAINING_VAL, L"");
+          // **************** NanaZip Modification Start ****************
+          //SetItemText(IDT_PROGRESS_REMAINING_VAL, L"");
+          this->m_ProgressPage.RemainingTimeText(L"");
+          // **************** NanaZip Modification End ****************
         }
       }
       else
@@ -786,7 +987,10 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
           _prevRemainingSec = remainingSec;
           wchar_t s[40];
           GetTimeString(remainingSec, s);
-          SetItemText(IDT_PROGRESS_REMAINING_VAL, s);
+          // **************** NanaZip Modification Start ****************
+          //SetItemText(IDT_PROGRESS_REMAINING_VAL, s);
+          this->m_ProgressPage.RemainingTimeText(s);
+          // **************** NanaZip Modification End ****************
         }
       }
       {
@@ -811,7 +1015,10 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
           s[pos++] = '/';
           s[pos++] = 's';
           s[pos++] = 0;
-          SetItemText(IDT_PROGRESS_SPEED_VAL, s);
+          // **************** NanaZip Modification Start ****************
+          //SetItemText(IDT_PROGRESS_SPEED_VAL, s);
+          this->m_ProgressPage.SpeedText(s);
+          // **************** NanaZip Modification End ****************
         }
       }
     }
@@ -840,7 +1047,10 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
       if (_filesStr_Prev != s)
       {
         _filesStr_Prev = s;
-        SetItemText(IDT_PROGRESS_FILES_VAL, s);
+        // **************** NanaZip Modification Start ****************
+        //SetItemText(IDT_PROGRESS_FILES_VAL, s);
+        this->m_ProgressPage.FilesText(s);
+        // **************** NanaZip Modification End ****************
       }
 
       s[0] = 0;
@@ -852,7 +1062,10 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
       if (_filesTotStr_Prev != s)
       {
         _filesTotStr_Prev = s;
-        SetItemText(IDT_PROGRESS_FILES_TOTAL, s);
+        // **************** NanaZip Modification Start ****************
+        //SetItemText(IDT_PROGRESS_FILES_TOTAL, s);
+        this->m_ProgressPage.FilesText(s);
+        // **************** NanaZip Modification End ****************
       }
     }
 
@@ -862,13 +1075,35 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     if (IS_UNDEFINED_VAL(unpackSize) &&
         IS_UNDEFINED_VAL(packSize))
     {
+      // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
       ShowSize(IDT_PROGRESS_PROCESSED_VAL, completed, _processed_Prev);
       ShowSize(IDT_PROGRESS_PACKED_VAL, UNDEFINED_VAL, _packed_Prev);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+      winrt::hstring processedSize = ShowSize(completed, _processed_Prev);
+      if (processedSize != L"")
+        this->m_ProgressPage.ProcessedText(processedSize);
+
+      winrt::hstring packedSize = ShowSize(UNDEFINED_VAL, _packed_Prev);
+      if (packedSize != L"")
+        this->m_ProgressPage.PackedSizeText(packedSize);
+      // **************** NanaZip Modification End ****************
     }
     else
     {
+      // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
       ShowSize(IDT_PROGRESS_PROCESSED_VAL, unpackSize, _processed_Prev);
       ShowSize(IDT_PROGRESS_PACKED_VAL, packSize, _packed_Prev);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+      winrt::hstring processedSize = ShowSize(unpackSize, _processed_Prev);
+      if (processedSize != L"")
+        this->m_ProgressPage.ProcessedText(processedSize);
+
+      winrt::hstring packedSize = ShowSize(packSize, _packed_Prev);
+      if (packedSize != L"")
+        this->m_ProgressPage.PackedSizeText(packedSize);
+      // **************** NanaZip Modification End ****************
 
       if (IS_DEFINED_VAL(packSize) &&
           IS_DEFINED_VAL(unpackSize) &&
@@ -881,12 +1116,17 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
           _ratio_Prev = ratio;
           ConvertUInt64ToString(ratio, s);
           MyStringCat(s, L"%");
-          SetItemText(IDT_PROGRESS_RATIO_VAL, s);
+          // **************** NanaZip Modification Start ****************
+          // SetItemText(IDT_PROGRESS_RATIO_VAL, s);
+          this->m_ProgressPage.CompressionRatioText(s);
+          // **************** NanaZip Modification End ****************
         }
       }
     }
   }
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (needSetTitle || titleFileName_Changed)
     SetTitleText();
 
@@ -896,6 +1136,13 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     ReduceString(s, _numReduceSymbols);
     SetItemText(IDT_PROGRESS_STATUS, _status);
   }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  if (needSetTitle || titleFileName_Changed)
+  {
+    this->m_ProgressPage.ActionText(_title.Ptr());
+    SetTitleText();
+  }
+  // **************** NanaZip Modification End ****************
 
   if (curFilePath_Changed)
   {
@@ -917,7 +1164,10 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     ReduceString(s2, _numReduceSymbols);
     s1.Add_LF();
     s1 += s2;
-    SetItemText(IDT_PROGRESS_FILE_NAME, s1);
+    // **************** NanaZip Modification Start ****************
+    // SetItemText(IDT_PROGRESS_FILE_NAME, s1);
+    this->m_ProgressPage.FileNameText(s1.Ptr());
+    // **************** NanaZip Modification End ****************
   }
 }
 
@@ -979,20 +1229,38 @@ INT_PTR CProgressDialog::Create(const UString &title, NWindows::CThread &thread,
 bool CProgressDialog::OnExternalCloseMessage()
 {
   // it doesn't work if there is MessageBox.
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   #ifdef __ITaskbarList3_INTERFACE_DEFINED__
   SetTaskbarProgressState(TBPF_NOPROGRESS);
   #endif
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  // **************** NanaZip Modification End ****************
   // AddToTitle(L"Finished ");
   // SetText(L"Finished2 ");
 
   UpdateStatInfo(true);
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   SetItemText(IDCANCEL, LangString(IDS_CLOSE));
   ::SendMessage(GetItem(IDCANCEL), BM_SETSTYLE, BS_DEFPUSHBUTTON, MAKELPARAM(TRUE, 0));
   HideItem(IDB_PROGRESS_BACKGROUND);
   HideItem(IDB_PAUSE);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  this->m_ProgressPage.CancelButtonText(
+      ::Mile::WinRT::GetLocalizedString(
+          L"NanaZip.Modern/Common/CloseButton/Content"));
+  this->m_ProgressPage.ShowBackgroundButton(false);
+  this->m_ProgressPage.ShowPauseButton(false);
+  // **************** NanaZip Modification End ****************
 
   ProcessWasFinished_GuiVirt();
+
+  // **************** NanaZip Modification Start ****************
+  this->m_ProgressPage.ShowProgress(false);
+  this->m_ProgressPage.ShowResults(true);
+  // **************** NanaZip Modification End ****************
 
   bool thereAreMessages;
   CProgressFinalMessage fm;
@@ -1002,12 +1270,22 @@ bool CProgressDialog::OnExternalCloseMessage()
     fm = Sync.FinalMessage;
   }
 
+  // **************** NanaZip Modification Start ****************
+  bool needToShowMessages = thereAreMessages;
+  // **************** NanaZip Modification End ****************
+
   if (!fm.ErrorMessage.Message.IsEmpty())
   {
     MessagesDisplayed = true;
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     if (fm.ErrorMessage.Title.IsEmpty())
       fm.ErrorMessage.Title = "NanaZip";
     MessageBoxW(*this, fm.ErrorMessage.Message, fm.ErrorMessage.Title, MB_ICONERROR);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    needToShowMessages = true;
+    this->m_ProgressPage.ResultsText(fm.ErrorMessage.Message.Ptr());
+    // **************** NanaZip Modification End ****************
   }
   else if (!thereAreMessages)
   {
@@ -1015,22 +1293,106 @@ bool CProgressDialog::OnExternalCloseMessage()
 
     if (!fm.OkMessage.Message.IsEmpty())
     {
+      // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
       if (fm.OkMessage.Title.IsEmpty())
         fm.OkMessage.Title = "NanaZip";
       MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+      needToShowMessages = true;
+      this->m_ProgressPage.ResultsText(fm.OkMessage.Message.Ptr());
+      // **************** NanaZip Modification End ****************
     }
   }
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (thereAreMessages && !_cancelWasPressed)
   {
     _waitCloseByCancelButton = true;
     UpdateMessagesDialog();
     return true;
   }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  if (needToShowMessages && !_cancelWasPressed)
+  {
+    _waitCloseByCancelButton = true;
+    if (thereAreMessages)
+      UpdateMessagesDialog();
+    return true;
+  }
+  // **************** NanaZip Modification End ****************
 
   End(0);
   return true;
 }
+
+// **************** NanaZip Modification Start ****************
+bool CProgressDialog::OnCancelClicked()
+{
+    if (_waitCloseByCancelButton)
+    {
+        MessagesDisplayed = true;
+        End(IDCLOSE);
+        return false;
+    }
+
+    if (_cancelWasPressed)
+        return true;
+
+    const bool paused = Sync.Get_Paused();
+
+    if (!paused)
+    {
+        OnPauseButton();
+    }
+
+    _inCancelMessageBox = true;
+    const int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
+    _inCancelMessageBox = false;
+    if (res == IDYES)
+        _cancelWasPressed = true;
+
+    if (!paused)
+    {
+        OnPauseButton();
+    }
+
+    if (_externalCloseMessageWasReceived)
+    {
+        /* we have received kCloseMessage while we were in MessageBoxW().
+           so we call OnExternalCloseMessage() here.
+           it can show MessageBox and it can close dialog */
+        OnExternalCloseMessage();
+        return true;
+    }
+
+    if (!_cancelWasPressed)
+        return true;
+
+    MessagesDisplayed = true;
+    // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
+    Sync.Set_Stopped(true);
+
+    return false;
+}
+
+bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
+{
+    switch (buttonID)
+    {
+        // case IDOK: // if IDCANCEL is not DEFPUSHBUTTON
+    case IDCANCEL:
+    {
+        bool click = OnCancelClicked();
+        if (click)
+            return true;
+        break;
+    }
+    }
+    return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
+}
+// **************** NanaZip Modification End ****************
 
 bool CProgressDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -1110,7 +1472,14 @@ void CProgressDialog::SetTitleText()
 
 void CProgressDialog::SetPauseText()
 {
-  SetItemText(IDB_PAUSE, Sync.Get_Paused() ? _continue_String : _pause_String);
+  // **************** NanaZip Modification Start ****************
+  // SetItemText(IDB_PAUSE, Sync.Get_Paused() ? _continue_String : _pause_String);
+  this->m_ProgressPage.PauseButtonText(
+      Sync.Get_Paused() ?
+      _continue_String.Ptr() :
+      _pause_String.Ptr());
+  this->m_ProgressPage.ShowPaused(Sync.Get_Paused());
+  // **************** NanaZip Modification End ****************
   SetTitleText();
 }
 
@@ -1128,9 +1497,17 @@ void CProgressDialog::OnPauseButton()
 
 void CProgressDialog::SetPriorityText()
 {
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   SetItemText(IDB_PROGRESS_BACKGROUND, _foreground ?
       _background_String :
       _foreground_String);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  this->m_ProgressPage.BackgroundButtonText(
+      _foreground ?
+      _background_String.Ptr() :
+      _foreground_String.Ptr());
+  // **************** NanaZip Modification End ****************
   SetTitleText();
 }
 
@@ -1145,6 +1522,8 @@ void CProgressDialog::OnPriorityButton()
 
 void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
 {
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   wchar_t sz[16];
   sz[0] = 0;
   if (needNumber)
@@ -1155,6 +1534,16 @@ void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
     _messageList.SetSubItem((int)itemIndex, 1, message);
     _messageStrings.Add(message);
   }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  UNREFERENCED_PARAMETER(message);
+  UNREFERENCED_PARAMETER(needNumber);
+  std::wstring current = std::wstring((std::wstring_view)this->m_ProgressPage.ResultsText());
+  if (needNumber && current.length() != 0)
+      current += L"------------------------\n";
+  current += message;
+  current += L"\n";
+  this->m_ProgressPage.ResultsText(current);
+  // **************** NanaZip Modification End ****************
 }
 
 void CProgressDialog::AddMessage(LPCWSTR message)
@@ -1210,6 +1599,8 @@ void CProgressDialog::UpdateMessagesDialog()
 }
 
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
 {
   switch (buttonID)
@@ -1271,6 +1662,23 @@ bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
   }
   return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void CProgressDialog::OnPauseButtonClicked(
+    winrt::IInspectable const&,
+    winrt::RoutedEventArgs const&
+)
+{
+    OnPauseButton();
+}
+
+void CProgressDialog::OnBackgroundButtonClicked(
+    winrt::IInspectable const&,
+    winrt::RoutedEventArgs const&
+)
+{
+    OnPriorityButton();
+}
+// **************** NanaZip Modification End ****************
 
 void CProgressDialog::CheckNeedClose()
 {
@@ -1294,6 +1702,8 @@ void CProgressDialog::ProcessWasFinished()
 }
 
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CProgressDialog::OnNotify(UINT /* controlID */, LPNMHDR header)
 {
   if (header->hwndFrom != _messageList)
@@ -1329,6 +1739,8 @@ bool CProgressDialog::OnNotify(UINT /* controlID */, LPNMHDR header)
   }
   return false;
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 static void ListView_GetSelected(NControl::CListView &listView, CUIntVector &vector)
@@ -1345,6 +1757,8 @@ static void ListView_GetSelected(NControl::CListView &listView, CUIntVector &vec
 }
 
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void CProgressDialog::CopyToClipboard()
 {
   CUIntVector indexes;
@@ -1373,6 +1787,8 @@ void CProgressDialog::CopyToClipboard()
 
   ClipboardSetText(*this, s);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 static THREAD_FUNC_DECL MyThreadFunction(void *param)

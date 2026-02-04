@@ -3,6 +3,8 @@
 #include "../../SevenZip/CPP/7zip/Archive/StdAfx.h"
 
 #include "../../SevenZip/C/CpuArch.h"
+#include <brotli/decode.h>
+
 #include "../../SevenZip/CPP/Common/ComTry.h"
 #include "../../SevenZip/CPP/Common/Defs.h"
 
@@ -39,8 +41,6 @@ Z7_CLASS_IMP_CHandler_IInArchive_3(
 
   UInt64 _packSize;
   UInt64 _unpackSize;
-  UInt64 _numStreams;
-  UInt64 _numBlocks;
 
   CSingleMethodProps _props;
 };
@@ -83,15 +83,49 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIAN
   return S_OK;
 }
 
-// brotli format has no signature
-// brotli stream can't be veriefied unless errors by unpack
-#if 0
+// Notes about Brotli .br detection
+// - raw Brotli (RFC 7932) has no signature
+// - framed Brotli (RFC 9841) has sig but isn't well deployed
+// - variant 1: detect brotli by it's (mostly not used) signature
+// - variant 2: try to decompress raw brotli stream
+// - warning: most brotli compressed data is raw format
+// /TR 28.12.2025
 API_FUNC_static_IsArc IsArc_Brotli(const Byte *p, size_t size)
 {
+  if (size < 5)
+    return k_IsArc_Res_NEED_MORE;
+
+  // Brotli - https://github.com/madler/brotli/blob/master/br-format-v3.txt
+  if (p[0] == 0xCE && p[1] == 0xB2 && p[2] == 0xCF && p[3] == 0x81)
+    return k_IsArc_Res_YES;
+
+  // Brotli (RFC 9841)
+  if (p[0] == 0x91 && p[1] == 0x19 && p[2] == 0x62 && p[3] == 0x66)
+    return k_IsArc_Res_YES;
+
+  // try to detect raw brotli stream
+  BrotliDecoderState *st = BrotliDecoderCreateInstance(NULL, NULL, NULL);
+  if (!st)
+    return k_IsArc_Res_NO;
+
+  const uint8_t *next_in = p;
+  size_t avail_in = size;
+  uint8_t out[256];
+  uint8_t *x = out;
+  size_t avail_out = sizeof(out);
+  BrotliDecoderResult r;
+  r = BrotliDecoderDecompressStream(st, &avail_in, &next_in, &avail_out, &x, NULL);
+  BrotliDecoderDestroyInstance(st);
+  if (r == BROTLI_DECODER_RESULT_ERROR)
+    return k_IsArc_Res_NO;
+
+  // when we get here, the begin of some brotli stream was detected:
+  // - BROTLI_DECODER_RESULT_SUCCESS
+  // - BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT
+  // - BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT
   return k_IsArc_Res_YES;
 }
 }
-#endif
 
 Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallback *))
 {
@@ -223,9 +257,11 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     opRes = NExtract::NOperationResult::kDataAfterEnd;
   else if (result == S_FALSE)
     opRes = NExtract::NOperationResult::kDataError;
-  else if (result == S_OK)
+  else if (result == S_OK) {
+    _unpackSize = outStreamSpec->GetSize();
+    _unpackSize_Defined = true;
     opRes = NExtract::NOperationResult::kOK;
-  else
+  } else
     return result;
 
   }
@@ -338,5 +374,5 @@ REGISTER_ARC_R(
   NArcInfoFlags::kKeepName | NArcInfoFlags::kPureStartOpen | NArcInfoFlags::kByExtOnlyOpen,
   0,
   CreateArc, CreateArcOut, 
-  /* IsArc_Brotli */)
+  IsArc_Brotli)
 }}

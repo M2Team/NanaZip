@@ -28,9 +28,9 @@
 
 // **************** NanaZip Modification Start ****************
 #include "../../IPassword.h" // Only for passing the compilation.
+#include <K7Base.h>
+#include <K7User.h>
 #include <Mile.Helpers.h>
-#include <NanaZip.Frieren.h>
-#include "Mitigations.h"
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -60,7 +60,7 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
   Byte buffer[kBufferSize];
   const unsigned signatureStartSize = MyStringLen(startID);
   const unsigned signatureEndSize = MyStringLen(endID);
-  
+
   size_t numBytesPrev = 0;
   bool writeMode = false;
   UInt64 posTotal = 0;
@@ -108,7 +108,12 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
     memmove(buffer, buffer + pos, numBytesPrev);
   }
 }
-
+// **************** NanaZip Modification Start ****************
+// Remove the static identifiers to prevent compiler optimizations that break
+// the SfxSetup configuration file parsing. We should initialize the true values
+// at runtime.
+// GitHub Issue reference: https://github.com/M2Team/NanaZip/issues/795
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static char kStartID[] = { ',','!','@','I','n','s','t','a','l','l','@','!','U','T','F','-','8','!', 0 };
 static char kEndID[]   = { ',','!','@','I','n','s','t','a','l','l','E','n','d','@','!', 0 };
 
@@ -120,7 +125,21 @@ static struct CInstallIDInit
     kEndID[0] = ';';
   }
 } g_CInstallIDInit;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+char* StartID()
+{
+    static char CachedResult[] = ",!@Install@!UTF-8!";
+    CachedResult[0] = ';';
+    return CachedResult;
+}
 
+char* EndID()
+{
+    static char CachedResult[] = ",!@InstallEnd@!";
+    CachedResult[0] = ';';
+    return CachedResult;
+}
+// **************** NanaZip Modification End ****************
 
 #if defined(_WIN32) && defined(_UNICODE) && !defined(_WIN64) && !defined(UNDER_CE)
 #define NT_CHECK_FAIL_ACTION ShowErrorMessage(L"Unsupported Windows version"); return 1;
@@ -138,6 +157,27 @@ static void ShowErrorMessageSpec(const UString &name)
   ShowErrorMessage(NULL, message);
 }
 
+// **************** NanaZip Modification Start ****************
+void NanaZipInitialize()
+{
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseInitialize())
+    {
+        ::ShowErrorMessage(L"K7BaseInitialize Failed");
+        ::ExitProcess(1);
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7UserInitializeDarkModeSupport())
+    {
+        ::ShowErrorMessage(L"K7UserInitializeDarkModeSupport Failed");
+    }
+
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseDisableDynamicCodeGeneration())
+    {
+        ::ShowErrorMessage(L"K7BaseDisableDynamicCodeGeneration Failed");
+    }
+}
+// **************** NanaZip Modification End ****************
+
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     #ifdef UNDER_CE
     LPWSTR
@@ -151,14 +191,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   NT_CHECK
 
   // **************** NanaZip Modification Start ****************
-  ::NanaZipFrierenGlobalInitialize();
-
-  if (!::NanaZipEnableMitigations())
-  {
-    ShowErrorMessage(L"Cannot enable security mitigations");
-  }
-
-  ::MileEnablePerMonitorDialogScaling();
+  ::NanaZipInitialize();
   // **************** NanaZip Modification End ****************
 
   #ifdef _WIN32
@@ -186,7 +219,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   }
 
   AString config;
-  if (!ReadDataString(fullPath, kStartID, kEndID, config))
+  // **************** NanaZip Modification Start ****************
+  // if (!ReadDataString(fullPath, kStartID, kEndID, config))
+  if (!ReadDataString(fullPath, ::StartID(), ::EndID(), config))
+  // **************** NanaZip Modification End ****************
   {
     if (!assumeYes)
       ShowErrorMessage(L"Can't load config info");
@@ -220,7 +256,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
         return 0;
     }
     appLaunched = GetTextConfigValue(pairs, "RunProgram");
-    
+
     #ifdef MY_SHELL_EXECUTE
     executeFile = GetTextConfigValue(pairs, "ExecuteFile");
     executeParameters = GetTextConfigValue(pairs, "ExecuteParameters");
@@ -247,13 +283,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   }
 
   const FString tempDirPath = tempDir.GetPath();
-  // tempDirPath = L"M:\\1\\"; // to test low disk space
+  // tempDirPath = "M:\\1\\"; // to test low disk space
   {
     bool isCorrupt = false;
     UString errorMessage;
     HRESULT result = ExtractArchive(codecs, fullPath, tempDirPath, showProgress,
       isCorrupt, errorMessage);
-    
+
     if (result != S_OK)
     {
       if (!assumeYes)
@@ -279,7 +315,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   if (!SetCurrentDir(tempDirPath))
     return 1;
   #endif
-  
+
   HANDLE hProcess = NULL;
 #ifdef MY_SHELL_EXECUTE
   if (!executeFile.IsEmpty())
@@ -326,7 +362,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   {
     if (appLaunched.IsEmpty())
     {
-      appLaunched = L"setup.exe";
+      appLaunched = "setup.exe";
       if (!NFind::DoesFileExist_FollowLink(us2fs(appLaunched)))
       {
         if (!assumeYes)
@@ -334,13 +370,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
         return 1;
       }
     }
-    
+
     {
       FString s2 = tempDirPath;
       NName::NormalizeDirPathPrefix(s2);
       appLaunched.Replace(L"%%T" WSTRING_PATH_SEPARATOR, fs2us(s2));
     }
-    
+
     const UString appNameForError = appLaunched; // actually we need to rtemove parameters also
 
     appLaunched.Replace(L"%%T", fs2us(tempDirPath));
@@ -358,11 +394,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     startupInfo.dwFlags = 0;
     startupInfo.cbReserved2 = 0;
     startupInfo.lpReserved2 = NULL;
-    
+
     PROCESS_INFORMATION processInformation;
-    
+
     const CSysString appLaunchedSys (GetSystemString(dirPrefix + appLaunched));
-    
+
     const BOOL createResult = CreateProcess(NULL,
         appLaunchedSys.Ptr_non_const(),
         NULL, NULL, FALSE, 0, NULL, NULL /*tempDir.GetPath() */,

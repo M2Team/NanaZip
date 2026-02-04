@@ -72,6 +72,114 @@ public:
   }
 };
 
+
+// **************** NanaZip Modification Start ****************
+// Backported from 24.09.
+template <class iface, class cls>
+class CMyComPtr2
+{
+  cls* _p;
+
+  CMyComPtr2(const CMyComPtr2<iface, cls>& lp);
+  CMyComPtr2(cls* p);
+  CMyComPtr2(iface* p);
+  iface* operator=(const CMyComPtr2<iface, cls>& lp);
+  iface* operator=(cls* p);
+  iface* operator=(iface* p);
+public:
+  CMyComPtr2(): _p(NULL) {}
+  ~CMyComPtr2()
+  {
+    if (_p)
+    {
+      iface *ip = _p;
+      ip->Release();
+    }
+  }
+  // void Release() { if (_p) { (iface *)_p->Release(); _p = NULL; } }
+  cls* operator->() const { return _p; }
+  cls* ClsPtr() const { return _p; }
+  operator iface*() const
+  {
+    iface *ip = _p;
+    return ip;
+  }
+  iface* Interface() const
+  {
+    iface *ip = _p;
+    return ip;
+  }
+  // operator bool() const {  return _p != NULL; }
+  bool IsDefined() const {  return _p != NULL; }
+  void Create_if_Empty()
+  {
+    if (!_p)
+    {
+      _p = new cls;
+      iface *ip = _p;
+      ip->AddRef();
+    }
+  }
+  iface* Detach()
+  {
+    iface *ip = _p;
+    _p = NULL;
+    return ip;
+  }
+  void SetFromCls(cls *src)
+  {
+    if (src)
+    {
+      iface *ip = src;
+      ip->AddRef();
+    }
+    if (_p)
+    {
+      iface *ip = _p;
+      ip->Release();
+    }
+    _p = src;
+  }
+};
+
+
+template <class iface, class cls>
+class CMyComPtr2_Create
+{
+  cls* _p;
+
+  CMyComPtr2_Create(const CMyComPtr2_Create<iface, cls>& lp);
+  CMyComPtr2_Create(cls* p);
+  CMyComPtr2_Create(iface* p);
+  iface* operator=(const CMyComPtr2_Create<iface, cls>& lp);
+  iface* operator=(cls* p);
+  iface* operator=(iface* p);
+public:
+  CMyComPtr2_Create(): _p(new cls)
+  {
+    iface *ip = _p;
+    ip->AddRef();
+  }
+  ~CMyComPtr2_Create()
+  {
+    iface *ip = _p;
+    ip->Release();
+  }
+  cls* operator->() const { return _p; }
+  cls* ClsPtr() const { return _p; }
+  operator iface*() const
+  {
+    iface *ip = _p;
+    return ip;
+  }
+  iface* Interface() const
+  {
+    iface *ip = _p;
+    return ip;
+  }
+};
+// **************** NanaZip Modification End ****************
+
 //////////////////////////////////////////////////////////
 
 inline HRESULT StringToBstr(LPCOLESTR src, BSTR *bstr)

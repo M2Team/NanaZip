@@ -330,11 +330,11 @@ void CHandler::AddSubFileExtension(AString &res) const
   if (!_compressor.IsEmpty())
   {
     s = _compressor;
-    if (_compressor == "bzip2")
+    if (_compressor.IsEqualTo("bzip2"))
       s = "bz2";
-    else if (_compressor == "gzip")
+    else if (_compressor.IsEqualTo("gzip"))
       s = "gz";
-    else if (_compressor == "zstd")
+    else if (_compressor.IsEqualTo("zstd"))
       s = "zst";
   }
   else

@@ -1,9 +1,9 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.MultiThreadWrapper.Brotli.cpp
- * PURPOSE:   Implementation for Brotli Multi Thread Wrapper
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.MultiThreadWrapper.Brotli.cpp
+ * PURPOSE:    Implementation for Brotli Multi Thread Wrapper
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
@@ -47,7 +47,7 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsBrotliDecode(
     _In_ UINT32 NumberOfThreads,
     _In_ UINT32 InputSize)
 {
-    BROTLIMT_RdWr_t ReadWrite = { 0 };
+    BROTLIMT_RdWr_t ReadWrite = {};
     ReadWrite.fn_read = ::NanaZipCodecsBrotliRead;
     ReadWrite.fn_write = ::NanaZipCodecsBrotliWrite;
     ReadWrite.arg_read = reinterpret_cast<void*>(StreamContext);

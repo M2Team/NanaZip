@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\NanaZip.Project\NanaZip.Project.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>default</LangVersion>
+    <Nullable>enable</Nullable>
+    <Authors>M2-Team</Authors>
+    <Copyright>© M2-Team and Contributors. All rights reserved.</Copyright>
+    <Version>$(MileProjectVersion)</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="18.0.2" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.0.2" />
+    <PackageReference Include="Mile.Project.Helpers" Version="1.0.975" />
+  </ItemGroup>
+
+  <Target Name="NanaZipBuildTasksAfterBuild" AfterTargets="Build">
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish" />
+    <Copy OverwriteReadOnlyFiles="true" SourceFiles="$(PublishDir)Mile.Project.Helpers.dll" DestinationFolder="$(MSBuildThisFileDirectory)..\NanaZip.Project\" />
+    <Copy OverwriteReadOnlyFiles="true" SourceFiles="$(PublishDir)NanaZip.Build.Tasks.dll" DestinationFolder="$(MSBuildThisFileDirectory)..\NanaZip.Project\" />
+  </Target>
+
+</Project>

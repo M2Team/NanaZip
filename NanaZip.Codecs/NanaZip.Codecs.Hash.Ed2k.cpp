@@ -1,16 +1,16 @@
 ﻿/*
- * PROJECT:   NanaZip
- * FILE:      NanaZip.Codecs.Hash.Ed2k.cpp
- * PURPOSE:   Implementation for ED2K hash algorithm
+ * PROJECT:    NanaZip
+ * FILE:       NanaZip.Codecs.Hash.Ed2k.cpp
+ * PURPOSE:    Implementation for ED2K hash algorithm
  *
- * LICENSE:   The MIT License
+ * LICENSE:    The MIT License
  *
  * MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
  */
 
 #include "NanaZip.Codecs.h"
 
-#include <K7Pal.h>
+#include <K7Base.h>
 
 // Comments copy from RHash's ed2k.c
 //
@@ -39,10 +39,10 @@ namespace NanaZip::Codecs::Hash
     private:
 
         // MD4 context to hash file blocks.
-        K7_PAL_HASH_HANDLE m_BlockHashHandle = nullptr;
+        K7_BASE_HASH_HANDLE m_BlockHashHandle = nullptr;
 
         // MD4 context to hash block hashes.
-        K7_PAL_HASH_HANDLE m_HashesHashHandle = nullptr;
+        K7_BASE_HASH_HANDLE m_HashesHashHandle = nullptr;
 
         // false for eMule ED2K algorithm.
         bool m_NotEmule = false;
@@ -57,12 +57,12 @@ namespace NanaZip::Codecs::Hash
         {
             if (this->m_BlockHashHandle)
             {
-                ::K7PalHashDestroy(this->m_BlockHashHandle);
+                ::K7BaseHashDestroy(this->m_BlockHashHandle);
                 this->m_BlockHashHandle = nullptr;
             }
             if (this->m_HashesHashHandle)
             {
-                ::K7PalHashDestroy(this->m_HashesHashHandle);
+                ::K7BaseHashDestroy(this->m_HashesHashHandle);
                 this->m_HashesHashHandle = nullptr;
             }
         }
@@ -82,14 +82,14 @@ namespace NanaZip::Codecs::Hash
         void STDMETHODCALLTYPE Init()
         {
             this->DestroyContext();
-            ::K7PalHashCreate(
+            ::K7BaseHashCreate(
                 &this->m_BlockHashHandle,
-                BCRYPT_MD4_ALGORITHM,
+                K7_BASE_HASH_ALGORITHM_MD4,
                 nullptr,
                 0);
-            ::K7PalHashCreate(
+            ::K7BaseHashCreate(
                 &this->m_HashesHashHandle,
-                BCRYPT_MD4_ALGORITHM,
+                K7_BASE_HASH_ALGORITHM_MD4,
                 nullptr,
                 0);
             this->m_NotEmule = false;
@@ -115,7 +115,7 @@ namespace NanaZip::Codecs::Hash
                 }
 
                 // If internal ED2K chunk is full, then finalize it.
-                ::K7PalHashUpdate(
+                ::K7BaseHashUpdate(
                     this->m_BlockHashHandle,
                     const_cast<LPVOID>(Data),
                     BlockLeft);
@@ -126,12 +126,12 @@ namespace NanaZip::Codecs::Hash
                 BlockLeft = ED2K_CHUNK_SIZE;
 
                 // Just finished an ED2K chunk, updating MD4 external context.
-                ::K7PalHashFinal(
+                ::K7BaseHashFinal(
                     this->m_BlockHashHandle,
                     BlockHash,
                     MD4_HASH_SIZE);
                 this->m_BlockProcessedSize = 0;
-                ::K7PalHashUpdate(
+                ::K7BaseHashUpdate(
                     this->m_HashesHashHandle,
                     BlockHash,
                     MD4_HASH_SIZE);
@@ -141,7 +141,7 @@ namespace NanaZip::Codecs::Hash
             if (Size)
             {
                 // Hash leftovers.
-                ::K7PalHashUpdate(
+                ::K7BaseHashUpdate(
                     this->m_BlockHashHandle,
                     const_cast<LPVOID>(Data),
                     Size);
@@ -166,12 +166,12 @@ namespace NanaZip::Codecs::Hash
                     // empty.
 
                     BYTE BlockHash[MD4_HASH_SIZE];
-                    ::K7PalHashFinal(
+                    ::K7BaseHashFinal(
                         this->m_BlockHashHandle,
                         BlockHash,
                         MD4_HASH_SIZE);
                     this->m_BlockProcessedSize = 0;
-                    ::K7PalHashUpdate(
+                    ::K7BaseHashUpdate(
                         this->m_HashesHashHandle,
                         BlockHash,
                         MD4_HASH_SIZE);
@@ -179,7 +179,7 @@ namespace NanaZip::Codecs::Hash
                 }
 
                 // Call final to flush MD4 buffer and finalize the hash value.
-                ::K7PalHashFinal(
+                ::K7BaseHashFinal(
                     this->m_HashesHashHandle,
                     Digest,
                     ED2K_HASH_SIZE);
@@ -188,7 +188,7 @@ namespace NanaZip::Codecs::Hash
             else
             {
                 // Just return the message MD4 hash.
-                ::K7PalHashFinal(
+                ::K7BaseHashFinal(
                     this->m_BlockHashHandle,
                     Digest,
                     MD4_HASH_SIZE);

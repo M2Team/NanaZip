@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:    NanaZip Platform User Library (K7User)
+  FILE:       K7UserStatic.props
+  PURPOSE:    MSBuild Properties for referencing the K7User static library
+
+  LICENSE:    The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>$(OutDir)K7UserStatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Target Name="K7UserBuildSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(K7UserDisableRedirector)' != 'true'">
+      <ClCompile Include="$(MSBuildThisFileDirectory)K7UserRedirector.cpp" />
+    </ItemGroup>
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="Mile.Mobility">
+      <Version>1.0.372</Version>
+    </PackageReference>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)K7UserStatic.vcxproj">
+      <Project>{0B7D00BE-6890-453E-86A4-DEF68B5C22A4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

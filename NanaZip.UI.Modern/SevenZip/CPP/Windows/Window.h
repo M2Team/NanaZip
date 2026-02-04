@@ -28,12 +28,6 @@
 
 namespace NWindows {
 
-// **************** NanaZip Modification Start ****************
-BOOL CALLBACK BringToForeground(
-    _In_ HWND hWnd,
-    _In_ LPARAM lParam);
-// **************** NanaZip Modification End ****************
-
 inline ATOM MyRegisterClass(CONST WNDCLASS *wndClass)
   { return ::RegisterClass(wndClass); }
 
@@ -70,7 +64,10 @@ public:
     return *this;
   }
   operator HWND() const { return _window; }
-  void Attach(HWND newWindow) { _window = newWindow; }
+  // **************** NanaZip Modification Start ****************
+  // void Attach(HWND newWindow) { _window = newWindow; }
+  virtual void Attach(HWND newWindow) { _window = newWindow; }
+  // **************** NanaZip Modification End ****************
   HWND Detach()
   {
     HWND window = _window;

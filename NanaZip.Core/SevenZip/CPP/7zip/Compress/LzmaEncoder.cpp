@@ -104,6 +104,24 @@ HRESULT SetLzmaProp(PROPID propID, const PROPVARIANT &prop, CLzmaEncProps &ep)
     return S_OK;
   }
 
+  if (propID == NCoderPropID::kAffinityInGroup)
+  {
+    if (prop.vt == VT_UI8)
+      ep.affinityInGroup = prop.uhVal.QuadPart;
+    else
+      return E_INVALIDARG;
+    return S_OK;
+  }
+
+  if (propID == NCoderPropID::kThreadGroup)
+  {
+    if (prop.vt == VT_UI4)
+      ep.affinityGroup = (Int32)(UInt32)prop.ulVal;
+    else
+      return E_INVALIDARG;
+    return S_OK;
+  }
+
   if (propID == NCoderPropID::kHashBits)
   {
     if (prop.vt == VT_UI4)
