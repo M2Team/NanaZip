@@ -44,7 +44,7 @@ BoolInt Sha1_SetFunction(
         std::memset(p, 0, sizeof(CSha1));
     }
 
-    // Only return true because it's a wrapper to K7Pal.
+    // Only return true because it's a wrapper to K7Base.
     return True;
 }
 
@@ -121,7 +121,7 @@ void Sha1_PrepareBlock(
     UNREFERENCED_PARAMETER(block);
     UNREFERENCED_PARAMETER(size);
 
-    // Empty implementation because it's a wrapper to K7Pal.
+    // Empty implementation because it's a wrapper to K7Base.
 }
 
 void Sha1_GetBlockDigest(

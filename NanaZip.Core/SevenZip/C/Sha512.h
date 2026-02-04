@@ -1,5 +1,5 @@
 ﻿// **************** NanaZip Modification Start ****************
-// Redirect to K7Pal Wrapper
+// Redirect to K7Base Wrapper
 #include "../../Wrappers/Sha512Wrapper.h"
 // **************** NanaZip Modification End ****************
 /* Sha512.h -- SHA-512 Hash
@@ -50,7 +50,7 @@ typedef struct
     void *_pad_align_ptr[2];
   } v;
   UInt64 state[SHA512_NUM_DIGEST_WORDS];
-  
+
   Byte buffer[SHA512_BLOCK_SIZE];
 } CSha512;
 

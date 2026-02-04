@@ -1,5 +1,5 @@
 ﻿// **************** NanaZip Modification Start ****************
-// Redirect to K7Pal Wrapper
+// Redirect to K7Base Wrapper
 #include "../../Wrappers/Sha256Wrapper.h"
 // **************** NanaZip Modification End ****************
 /* Sha256.h -- SHA-256 Hash

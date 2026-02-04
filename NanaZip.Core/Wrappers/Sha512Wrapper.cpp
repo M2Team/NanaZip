@@ -44,7 +44,7 @@ BoolInt Sha512_SetFunction(
         std::memset(p, 0, sizeof(CSha512));
     }
 
-    // Only return true because it's a wrapper to K7Pal.
+    // Only return true because it's a wrapper to K7Base.
     return True;
 }
 
