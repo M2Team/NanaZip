@@ -1121,11 +1121,11 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     }
   }
 
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (needSetTitle || titleFileName_Changed)
     SetTitleText();
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (status_Changed)
   {
     UString s = _status;
@@ -1133,11 +1133,6 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     SetItemText(IDT_PROGRESS_STATUS, _status);
   }
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  if (needSetTitle || titleFileName_Changed)
-  {
-    this->m_ProgressPage.ActionText(_title.Ptr());
-    SetTitleText();
-  }
   // **************** NanaZip Modification End ****************
 
   if (curFilePath_Changed)
@@ -1399,6 +1394,9 @@ void CProgressDialog::SetTitleText()
     s += fileName;
   }
   SetText(s);
+  // **************** NanaZip Modification Start ****************
+  this->m_ProgressPage.ActionText(s.Ptr());
+  // **************** NanaZip Modification End ****************
 }
 
 void CProgressDialog::SetPauseText()

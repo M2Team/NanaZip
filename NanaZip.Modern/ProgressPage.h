@@ -9,8 +9,9 @@
 
 namespace winrt
 {
-    using namespace Windows::Foundation;
-    using namespace Windows::UI::Xaml;
+    using Windows::Foundation::IInspectable;
+    using Windows::UI::Xaml::RoutedEventArgs;
+    using Windows::UI::Xaml::RoutedEventHandler;
 }
 
 namespace winrt::NanaZip::Modern::implementation
