@@ -23,8 +23,7 @@
       Grid.Row="1"
       Grid.ColumnSpan="2"
       Padding="16,0,16,16"
-      Orientation="Vertical"
-      Visibility="{x:Bind ShowProgress, Mode=OneWay}">
+      Orientation="Vertical">
       <TextBlock
         Margin="0,4,0,0"
         d:Text="debian-12.0.0-amd64-netinst.iso"
@@ -170,17 +169,6 @@
         </Grid>
       </Grid>
     </StackPanel>
-    <TextBox
-      Grid.Row="1"
-      Margin="16,8,16,16"
-      AcceptsReturn="True"
-      IsReadOnly="True"
-      Text="{x:Bind ResultsText, Mode=OneWay}"
-      Visibility="{x:Bind ShowResults, Mode=OneWay}">
-      <TextBox.SelectionFlyout>
-        <TextCommandBarFlyout Placement="BottomEdgeAlignedLeft" />
-      </TextBox.SelectionFlyout>
-    </TextBox>
     <Grid
       Grid.Row="2"
       Background="#37C9C9C9"
@@ -195,19 +183,18 @@
           Width="120"
           Margin="4,16,4,16"
           Click="BackgroundButtonClickedHandler"
-          Content="{x:Bind BackgroundButtonText, Mode=OneWay}"
-          Visibility="{x:Bind ShowBackgroundButton, Mode=OneWay}" />
+          Content="{x:Bind BackgroundButtonText, Mode=OneWay}" />
         <Button
           Width="120"
           Margin="4,16,4,16"
           Click="PauseButtonClickedHandler"
-          Content="{x:Bind PauseButtonText, Mode=OneWay}"
-          Visibility="{x:Bind ShowPauseButton, Mode=OneWay}" />
+          Content="{x:Bind PauseButtonText, Mode=OneWay}" />
         <Button
+          x:Uid="/NanaZip.Modern/Common/CancelButton"
           Width="120"
           Margin="4,16,4,16"
           Click="CancelButtonClick"
-          Content="{x:Bind CancelButtonText, Mode=OneWay}" />
+          Content="[Cancel]" />
       </StackPanel>
     </Grid>
   </Grid>

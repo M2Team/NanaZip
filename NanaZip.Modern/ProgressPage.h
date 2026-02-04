@@ -73,10 +73,6 @@ namespace winrt::NanaZip::Modern::implementation
             PauseButtonText,
             winrt::hstring
         );
-        DEPENDENCY_PROPERTY_HEADER(
-            CancelButtonText,
-            winrt::hstring
-        );
 
         DEPENDENCY_PROPERTY_HEADER(
             ProgressBarMinimum,
@@ -92,14 +88,6 @@ namespace winrt::NanaZip::Modern::implementation
         );
 
         DEPENDENCY_PROPERTY_HEADER(
-            ShowBackgroundButton,
-            bool
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            ShowPauseButton,
-            bool
-        );
-        DEPENDENCY_PROPERTY_HEADER(
             ShowPackedValue,
             bool
         );
@@ -111,19 +99,6 @@ namespace winrt::NanaZip::Modern::implementation
         DEPENDENCY_PROPERTY_HEADER(
             ShowPaused,
             bool
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            ShowResults,
-            bool
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            ShowProgress,
-            bool
-        );
-
-        DEPENDENCY_PROPERTY_HEADER(
-            ResultsText,
-            winrt::hstring
         );
 
         void BackgroundButtonClickedHandler(

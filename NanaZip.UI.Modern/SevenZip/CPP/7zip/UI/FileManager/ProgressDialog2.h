@@ -176,6 +176,7 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   // **************** NanaZip Modification Start ****************
   winrt::ProgressPage m_ProgressPage{ nullptr };
   HWND m_ProgressPageWindowHandle = nullptr;
+  std::wstring m_ResultString;
   // **************** NanaZip Modification End ****************
   
   int _numMessages;

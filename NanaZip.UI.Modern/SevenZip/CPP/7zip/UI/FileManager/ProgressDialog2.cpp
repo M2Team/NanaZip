@@ -492,10 +492,6 @@ bool CProgressDialog::OnInit()
   LangString(IDS_CONTINUE, _continue_String);
   LangString(IDS_PROGRESS_PAUSED, _paused_String);
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  this->m_ProgressPage.CancelButtonText(
-      ::Mile::WinRT::GetLocalizedString(
-          L"NanaZip.Modern/Common/CancelButton/Content"));
-
   this->m_ProgressPage.PauseButtonClicked({ this, &CProgressDialog::OnPauseButtonClicked });
   this->m_ProgressPage.BackgroundButtonClicked({ this, &CProgressDialog::OnBackgroundButtonClicked });
 
@@ -1248,19 +1244,9 @@ bool CProgressDialog::OnExternalCloseMessage()
   HideItem(IDB_PROGRESS_BACKGROUND);
   HideItem(IDB_PAUSE);
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  this->m_ProgressPage.CancelButtonText(
-      ::Mile::WinRT::GetLocalizedString(
-          L"NanaZip.Modern/Common/CloseButton/Content"));
-  this->m_ProgressPage.ShowBackgroundButton(false);
-  this->m_ProgressPage.ShowPauseButton(false);
   // **************** NanaZip Modification End ****************
 
   ProcessWasFinished_GuiVirt();
-
-  // **************** NanaZip Modification Start ****************
-  this->m_ProgressPage.ShowProgress(false);
-  this->m_ProgressPage.ShowResults(true);
-  // **************** NanaZip Modification End ****************
 
   bool thereAreMessages;
   CProgressFinalMessage fm;
@@ -1284,7 +1270,9 @@ bool CProgressDialog::OnExternalCloseMessage()
     MessageBoxW(*this, fm.ErrorMessage.Message, fm.ErrorMessage.Title, MB_ICONERROR);
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
     needToShowMessages = true;
-    this->m_ProgressPage.ResultsText(fm.ErrorMessage.Message.Ptr());
+    this->m_ResultString = std::wstring(
+        fm.ErrorMessage.Message.Ptr(),
+        fm.ErrorMessage.Message.Len());
     // **************** NanaZip Modification End ****************
   }
   else if (!thereAreMessages)
@@ -1300,7 +1288,9 @@ bool CProgressDialog::OnExternalCloseMessage()
       MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK);
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
       needToShowMessages = true;
-      this->m_ProgressPage.ResultsText(fm.OkMessage.Message.Ptr());
+      this->m_ResultString = std::wstring(
+          fm.OkMessage.Message.Ptr(),
+          fm.OkMessage.Message.Len());
       // **************** NanaZip Modification End ****************
     }
   }
@@ -1319,6 +1309,13 @@ bool CProgressDialog::OnExternalCloseMessage()
     _waitCloseByCancelButton = true;
     if (thereAreMessages)
       UpdateMessagesDialog();
+
+    ::K7ModernShowInformationDialog(
+      *this,
+      this->m_ProgressPage.ActionText().c_str(),
+      this->m_ResultString.c_str());
+    MessagesDisplayed = true;
+    this->End(0);
     return true;
   }
   // **************** NanaZip Modification End ****************
@@ -1327,72 +1324,6 @@ bool CProgressDialog::OnExternalCloseMessage()
   return true;
 }
 
-// **************** NanaZip Modification Start ****************
-bool CProgressDialog::OnCancelClicked()
-{
-    if (_waitCloseByCancelButton)
-    {
-        MessagesDisplayed = true;
-        End(IDCLOSE);
-        return false;
-    }
-
-    if (_cancelWasPressed)
-        return true;
-
-    const bool paused = Sync.Get_Paused();
-
-    if (!paused)
-    {
-        OnPauseButton();
-    }
-
-    _inCancelMessageBox = true;
-    const int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
-    _inCancelMessageBox = false;
-    if (res == IDYES)
-        _cancelWasPressed = true;
-
-    if (!paused)
-    {
-        OnPauseButton();
-    }
-
-    if (_externalCloseMessageWasReceived)
-    {
-        /* we have received kCloseMessage while we were in MessageBoxW().
-           so we call OnExternalCloseMessage() here.
-           it can show MessageBox and it can close dialog */
-        OnExternalCloseMessage();
-        return true;
-    }
-
-    if (!_cancelWasPressed)
-        return true;
-
-    MessagesDisplayed = true;
-    // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
-    Sync.Set_Stopped(true);
-
-    return false;
-}
-
-bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
-{
-    switch (buttonID)
-    {
-        // case IDOK: // if IDCANCEL is not DEFPUSHBUTTON
-    case IDCANCEL:
-    {
-        bool click = OnCancelClicked();
-        if (click)
-            return true;
-        break;
-    }
-    }
-    return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
-}
-// **************** NanaZip Modification End ****************
 
 bool CProgressDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -1536,13 +1467,12 @@ void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
   }
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
   UNREFERENCED_PARAMETER(message);
-  UNREFERENCED_PARAMETER(needNumber);
-  std::wstring current = std::wstring((std::wstring_view)this->m_ProgressPage.ResultsText());
-  if (needNumber && current.length() != 0)
-      current += L"------------------------\n";
-  current += message;
-  current += L"\n";
-  this->m_ProgressPage.ResultsText(current);
+  if (needNumber && !this->m_ResultString.empty())
+  {
+      this->m_ResultString.append(L"------------------------\n");
+  }
+  this->m_ResultString.append(message);
+  this->m_ResultString.append(L"\n");
   // **************** NanaZip Modification End ****************
 }
 
@@ -1663,6 +1593,71 @@ bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
   return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
 }
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+bool CProgressDialog::OnCancelClicked()
+{
+    if (_waitCloseByCancelButton)
+    {
+        MessagesDisplayed = true;
+        End(IDCLOSE);
+        return false;
+    }
+
+    if (_cancelWasPressed)
+        return true;
+
+    const bool paused = Sync.Get_Paused();
+
+    if (!paused)
+    {
+        OnPauseButton();
+    }
+
+    _inCancelMessageBox = true;
+    const int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
+    _inCancelMessageBox = false;
+    if (res == IDYES)
+        _cancelWasPressed = true;
+
+    if (!paused)
+    {
+        OnPauseButton();
+    }
+
+    if (_externalCloseMessageWasReceived)
+    {
+        /* we have received kCloseMessage while we were in MessageBoxW().
+           so we call OnExternalCloseMessage() here.
+           it can show MessageBox and it can close dialog */
+        OnExternalCloseMessage();
+        return true;
+    }
+
+    if (!_cancelWasPressed)
+        return true;
+
+    MessagesDisplayed = true;
+    // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
+    Sync.Set_Stopped(true);
+
+    return false;
+}
+
+bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
+{
+    switch (buttonID)
+    {
+        // case IDOK: // if IDCANCEL is not DEFPUSHBUTTON
+    case IDCANCEL:
+    {
+        bool click = OnCancelClicked();
+        if (click)
+            return true;
+        break;
+    }
+    }
+    return CModalDialog::OnButtonClicked(buttonID, buttonHWND);
+}
+
 void CProgressDialog::OnPauseButtonClicked(
     winrt::IInspectable const&,
     winrt::RoutedEventArgs const&

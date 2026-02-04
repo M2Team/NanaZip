@@ -104,13 +104,6 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::NanaZip::Modern::ProgressPage,
         L"[Pause]"
     );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        CancelButtonText,
-        winrt::hstring,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        L"[Cancel]"
-    );
 
     DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
         ProgressBarMinimum,
@@ -135,21 +128,6 @@ namespace winrt::NanaZip::Modern::implementation
     );
 
     DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ShowBackgroundButton,
-        bool,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        true
-    );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ShowPauseButton,
-        bool,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        true
-    );
-
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
         ShowPackedValue,
         bool,
         ProgressPage,
@@ -170,28 +148,6 @@ namespace winrt::NanaZip::Modern::implementation
         ProgressPage,
         winrt::NanaZip::Modern::ProgressPage,
         false
-    );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ShowResults,
-        bool,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        false
-    );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ShowProgress,
-        bool,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        true
-    );
-
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ResultsText,
-        winrt::hstring,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        L""
     );
 
     void ProgressPage::BackgroundButtonClickedHandler(
