@@ -84,6 +84,79 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     _In_opt_ LPCWSTR Content);
 
 /**
+ * @brief The progress dialog status structure.
+ */
+typedef struct _K7_PROGRESS_DIALOG_STATUS
+{
+    /**
+     * @brief If true, the progress is shown in bytes. If false, the progress is
+     *        shown in files.
+     */
+    bool BytesProgressMode;
+
+    /**
+     * @brief If true, the operation is compression. If false, the operation is
+     *        extraction.
+     */
+    bool CompressionMode;
+
+    /**
+     * @brief The title of the progress dialog.
+     */
+    LPCWSTR Title;
+
+    /**
+     * @brief The current file path being processed.
+     */
+    LPCWSTR FilePath;
+
+    /**
+     * @brief The total size of the operation in bytes. If unknown, it is set to
+     *        static_cast<UINT64>(-1).
+     */
+    UINT64 TotalSize;
+
+    /**
+     * @brief The processed size of the operation in bytes. 
+     */
+    UINT64 ProcessedSize;
+
+    /**
+     * @brief The number of total files. If unknown, it is set to
+     *        static_cast<UINT64>(-1).
+     */
+    UINT64 TotalFiles;
+
+    /**
+     * @brief The number of processed files.
+     */
+    UINT64 ProcessedFiles;
+
+    /**
+     * @brief The input size in bytes. For compression, it is the original size.
+     *        For extraction, it is the compressed size. If unknown, it is set
+     *        to static_cast<UINT64>(-1).
+     */
+    UINT64 InputSize;
+
+    /**
+     * @brief The output size in bytes. For compression, it is the compressed
+     *        size. For extraction, it is the original size. If unknown, it is
+     *        set to static_cast<UINT64>(-1).
+     */
+    UINT64 OutputSize;
+
+    /**
+     * @brief The status message.
+     */
+    LPCWSTR Status;
+} K7_PROGRESS_DIALOG_STATUS, *PK7_PROGRESS_DIALOG_STATUS;
+
+EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
+    _In_ LPVOID Instance,
+    _In_ PK7_PROGRESS_DIALOG_STATUS Status);
+
+/**
  * @brief Create the progress control for the progress window.
  * @param ParentWindowHandle A handle to the owner window of the control to be
  *                           created. This parameter must be valid.

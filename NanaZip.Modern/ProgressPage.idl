@@ -9,17 +9,12 @@
         String RemainingTimeText;
         String FilesText;
         String SpeedText;
-        String TotalSizeText;
         String ProcessedText;
         String PackedSizeText;
         String CompressionRatioText;
 
         String BackgroundButtonText;
         String PauseButtonText;
-
-        Double ProgressBarMinimum;
-        Double ProgressBarMaximum;
-        Double ProgressBarValue;
 
         Boolean ShowPackedValue;
         Boolean ShowCompressionRatioValue;
@@ -32,17 +27,12 @@
         static Windows.UI.Xaml.DependencyProperty RemainingTimeTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty FilesTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty SpeedTextProperty{ get; };
-        static Windows.UI.Xaml.DependencyProperty TotalSizeTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty ProcessedTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty PackedSizeTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty CompressionRatioTextProperty{ get; };
 
         static Windows.UI.Xaml.DependencyProperty BackgroundButtonTextProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty PauseButtonTextProperty{ get; };
-
-        static Windows.UI.Xaml.DependencyProperty ProgressBarMinimumProperty{ get; };
-        static Windows.UI.Xaml.DependencyProperty ProgressBarMaximumProperty{ get; };
-        static Windows.UI.Xaml.DependencyProperty ProgressBarValueProperty{ get; };
 
         static Windows.UI.Xaml.DependencyProperty ShowPackedValueProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty ShowCompressionRatioValueProperty{ get; };

@@ -29,14 +29,12 @@
         d:Text="debian-12.0.0-amd64-netinst.iso"
         Text="{x:Bind FileNameText, Mode=OneWay}" />
       <ProgressBar
+        x:Name="ProgressBar"
         Margin="0,4,0,0"
         d:Maximum="100"
         d:Minimum="0"
         d:Value="30"
-        Maximum="{x:Bind ProgressBarMaximum, Mode=OneWay}"
-        Minimum="{x:Bind ProgressBarMinimum, Mode=OneWay}"
-        ShowPaused="{x:Bind ShowPaused, Mode=OneWay}"
-        Value="{x:Bind ProgressBarValue, Mode=OneWay}" />
+        ShowPaused="{x:Bind ShowPaused, Mode=OneWay}" />
 
       <Grid Margin="0,24,0,0" ColumnSpacing="32">
         <Grid.ColumnDefinitions>
@@ -140,10 +138,10 @@
               Text="{x:Bind SpeedText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
+              x:Name="TotalSizeTextBlock"
               Margin="0,4,0,0"
               d:Text="1886 MB"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind TotalSizeText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
               Margin="0,4,0,0"

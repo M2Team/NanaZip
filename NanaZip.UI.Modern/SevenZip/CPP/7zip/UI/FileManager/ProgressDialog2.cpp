@@ -729,10 +729,7 @@ void CProgressDialog::SetProgressRange(UInt64 range)
   _progressBar_Range = range;
   INIT_AS_UNDEFINED(_progressBar_Pos);
   _progressConv.Init(range);
-  // **************** NanaZip Modification Start ****************
-  // m_ProgressBar.SetRange32(0, _progressConv.Count(range));
-  this->m_ProgressPage.ProgressBarMaximum(_progressConv.Count(range));
-  // **************** NanaZip Modification End ****************
+  m_ProgressBar.SetRange32(0, _progressConv.Count(range));
 }
 
 void CProgressDialog::SetProgressPos(UInt64 pos)
@@ -741,10 +738,7 @@ void CProgressDialog::SetProgressPos(UInt64 pos)
       pos <= _progressBar_Pos ||
       pos - _progressBar_Pos >= (_progressBar_Range >> 10))
   {
-    // **************** NanaZip Modification Start ****************
-    // m_ProgressBar.SetPos(_progressConv.Count(pos));
-      this->m_ProgressPage.ProgressBarValue(_progressConv.Count(pos));
-    // **************** NanaZip Modification End ****************
+    m_ProgressBar.SetPos(_progressConv.Count(pos));
     #ifdef __ITaskbarList3_INTERFACE_DEFINED__
     if (_taskbarList && _hwndForTaskbar)
       _taskbarList->SetProgressValue(_hwndForTaskbar, pos, _progressBar_Range);
@@ -864,6 +858,8 @@ static UInt64 MyMultAndDiv(UInt64 mult1, UInt64 mult2, UInt64 divider)
   return res;
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void CProgressDialog::UpdateStatInfo(bool showAll)
 {
   UInt64 total, completed, totalFiles, completedFiles, inSize, outSize;
@@ -915,12 +911,251 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     }
   }
 
-  // **************** NanaZip Modification Start ****************
-  // ShowSize(IDT_PROGRESS_TOTAL_VAL, total, _totalBytes_Prev);
-  winrt::hstring size = ShowSize(total, _totalBytes_Prev);
-  if (size != L"")
-      this->m_ProgressPage.TotalSizeText(size);
-  // **************** NanaZip Modification End ****************
+  ShowSize(IDT_PROGRESS_TOTAL_VAL, total, _totalBytes_Prev);
+
+  _elapsedTime += (curTime - _prevTime);
+  _prevTime = curTime;
+  UInt64 elapsedSec = _elapsedTime / 1000;
+  bool elapsedChanged = false;
+  if (elapsedSec != _prevElapsedSec)
+  {
+    _prevElapsedSec = elapsedSec;
+    elapsedChanged = true;
+    wchar_t s[40];
+    GetTimeString(elapsedSec, s);
+    SetItemText(IDT_PROGRESS_ELAPSED_VAL, s);
+  }
+
+  bool needSetTitle = false;
+  if (elapsedChanged || showAll)
+  {
+    if (numErrors > _numPostedMessages)
+    {
+      UpdateMessagesDialog();
+      wchar_t s[32];
+      ConvertUInt64ToString(numErrors, s);
+      SetItemText(IDT_PROGRESS_ERRORS_VAL, s);
+      if (!_errorsWereDisplayed)
+      {
+        _errorsWereDisplayed = true;
+        EnableErrorsControls(true);
+        SetTaskbarProgressState();
+      }
+    }
+
+    if (progressCompleted != 0)
+    {
+      if (IS_UNDEFINED_VAL(progressTotal))
+      {
+        if (IS_DEFINED_VAL(_prevRemainingSec))
+        {
+          INIT_AS_UNDEFINED(_prevRemainingSec);
+          SetItemText(IDT_PROGRESS_REMAINING_VAL, L"");
+        }
+      }
+      else
+      {
+        UInt64 remainingTime = 0;
+        if (progressCompleted < progressTotal)
+          remainingTime = MyMultAndDiv(_elapsedTime, progressTotal - progressCompleted, progressCompleted);
+        UInt64 remainingSec = remainingTime / 1000;
+        if (remainingSec != _prevRemainingSec)
+        {
+          _prevRemainingSec = remainingSec;
+          wchar_t s[40];
+          GetTimeString(remainingSec, s);
+          SetItemText(IDT_PROGRESS_REMAINING_VAL, s);
+        }
+      }
+      {
+        UInt64 elapsedTime = (_elapsedTime == 0) ? 1 : _elapsedTime;
+        UInt64 v = (progressCompleted * 1000) / elapsedTime;
+        Byte c = 0;
+        unsigned moveBits = 0;
+             if (v >= ((UInt64)10000 << 10)) { moveBits = 20; c = 'M'; }
+        else if (v >= ((UInt64)10000 <<  0)) { moveBits = 10; c = 'K'; }
+        v >>= moveBits;
+        if (moveBits != _prevSpeed_MoveBits || v != _prevSpeed)
+        {
+          _prevSpeed_MoveBits = moveBits;
+          _prevSpeed = v;
+          wchar_t s[40];
+          ConvertUInt64ToString(v, s);
+          unsigned pos = MyStringLen(s);
+          s[pos++] = ' ';
+          if (moveBits != 0)
+            s[pos++] = c;
+          s[pos++] = 'B';
+          s[pos++] = '/';
+          s[pos++] = 's';
+          s[pos++] = 0;
+          SetItemText(IDT_PROGRESS_SPEED_VAL, s);
+        }
+      }
+    }
+
+    {
+      UInt64 percent = 0;
+      {
+        if (IS_DEFINED_VAL(progressTotal))
+        {
+          percent = progressCompleted * 100;
+          if (progressTotal != 0)
+            percent /= progressTotal;
+        }
+      }
+      if (percent != _prevPercentValue)
+      {
+        _prevPercentValue = percent;
+        needSetTitle = true;
+      }
+    }
+
+    {
+      wchar_t s[64];
+
+      ConvertUInt64ToString(completedFiles, s);
+      if (_filesStr_Prev != s)
+      {
+        _filesStr_Prev = s;
+        SetItemText(IDT_PROGRESS_FILES_VAL, s);
+      }
+
+      s[0] = 0;
+      if (IS_DEFINED_VAL(totalFiles))
+      {
+        MyStringCopy(s, L" / ");
+        ConvertUInt64ToString(totalFiles, s + MyStringLen(s));
+      }
+      if (_filesTotStr_Prev != s)
+      {
+        _filesTotStr_Prev = s;
+        SetItemText(IDT_PROGRESS_FILES_TOTAL, s);
+      }
+    }
+
+    const UInt64 packSize   = CompressingMode ? outSize : inSize;
+    const UInt64 unpackSize = CompressingMode ? inSize : outSize;
+
+    if (IS_UNDEFINED_VAL(unpackSize) &&
+        IS_UNDEFINED_VAL(packSize))
+    {
+      ShowSize(IDT_PROGRESS_PROCESSED_VAL, completed, _processed_Prev);
+      ShowSize(IDT_PROGRESS_PACKED_VAL, UNDEFINED_VAL, _packed_Prev);
+    }
+    else
+    {
+      ShowSize(IDT_PROGRESS_PROCESSED_VAL, unpackSize, _processed_Prev);
+      ShowSize(IDT_PROGRESS_PACKED_VAL, packSize, _packed_Prev);
+
+      if (IS_DEFINED_VAL(packSize) &&
+          IS_DEFINED_VAL(unpackSize) &&
+          unpackSize != 0)
+      {
+        wchar_t s[32];
+        UInt64 ratio = packSize * 100 / unpackSize;
+        if (_ratio_Prev != ratio)
+        {
+          _ratio_Prev = ratio;
+          ConvertUInt64ToString(ratio, s);
+          MyStringCat(s, L"%");
+          SetItemText(IDT_PROGRESS_RATIO_VAL, s);
+        }
+      }
+    }
+  }
+
+  if (needSetTitle || titleFileName_Changed)
+    SetTitleText();
+
+  if (status_Changed)
+  {
+    UString s = _status;
+    ReduceString(s, _numReduceSymbols);
+    SetItemText(IDT_PROGRESS_STATUS, _status);
+  }
+
+  if (curFilePath_Changed)
+  {
+    UString s1, s2;
+    if (_isDir)
+      s1 = _filePath;
+    else
+    {
+      int slashPos = _filePath.ReverseFind_PathSepar();
+      if (slashPos >= 0)
+      {
+        s1.SetFrom(_filePath, (unsigned)(slashPos + 1));
+        s2 = _filePath.Ptr((unsigned)(slashPos + 1));
+      }
+      else
+        s2 = _filePath;
+    }
+    ReduceString(s1, _numReduceSymbols);
+    ReduceString(s2, _numReduceSymbols);
+    s1.Add_LF();
+    s1 += s2;
+    SetItemText(IDT_PROGRESS_FILE_NAME, s1);
+  }
+}
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void CProgressDialog::UpdateStatInfo(bool showAll)
+{
+  UInt64 total, completed, totalFiles, completedFiles, inSize, outSize;
+  bool bytesProgressMode;
+
+  bool titleFileName_Changed;
+  bool curFilePath_Changed;
+  bool status_Changed;
+  unsigned numErrors;
+  {
+    NSynchronization::CCriticalSectionLock lock(Sync._cs);
+    total = Sync._totalBytes;
+    completed = Sync._completedBytes;
+    totalFiles = Sync._totalFiles;
+    completedFiles = Sync._curFiles;
+    inSize = Sync._inSize;
+    outSize = Sync._outSize;
+    bytesProgressMode = Sync._bytesProgressMode;
+
+    GetChangedString(Sync._titleFileName, _titleFileName, titleFileName_Changed);
+    GetChangedString(Sync._filePath, _filePath, curFilePath_Changed);
+    GetChangedString(Sync._status, _status, status_Changed);
+    if (_isDir != Sync._isDir)
+    {
+      curFilePath_Changed = true;
+      _isDir = Sync._isDir;
+    }
+    numErrors = Sync.Messages.Size();
+  }
+
+  K7_PROGRESS_DIALOG_STATUS Status;
+  Status.BytesProgressMode = bytesProgressMode;
+  Status.CompressionMode = CompressingMode;
+  Status.Title = _titleFileName.Ptr();
+  Status.FilePath = _filePath.Ptr();
+  Status.TotalSize = total;
+  Status.ProcessedSize = completed;
+  Status.TotalFiles = totalFiles;
+  Status.ProcessedFiles = completedFiles;
+  Status.InputSize = inSize;
+  Status.OutputSize = outSize;
+  Status.Status = _status.Ptr();
+  ::K7ModernUpdateProgressPageStatus(
+      winrt::get_abi(this->m_ProgressPage),
+      &Status);
+
+  UInt32 curTime = ::GetTickCount();
+
+  const UInt64 progressTotal = bytesProgressMode ? total : totalFiles;
+  const UInt64 progressCompleted = bytesProgressMode ? completed : completedFiles;
+  {
+      if (!IS_UNDEFINED_VAL(progressTotal))
+      {
+          if (_taskbarList && _hwndForTaskbar)
+              _taskbarList->SetProgressValue(_hwndForTaskbar, progressCompleted, progressTotal);
+      }
+  }
 
   _elapsedTime += (curTime - _prevTime);
   _prevTime = curTime;
@@ -1161,6 +1396,7 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
     // **************** NanaZip Modification End ****************
   }
 }
+// **************** NanaZip Modification End ****************
 
 bool CProgressDialog::OnTimer(WPARAM /* timerID */, LPARAM /* callback */)
 {

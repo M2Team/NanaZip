@@ -10,7 +10,12 @@ namespace winrt::Mile
     using namespace ::Mile;
 }
 
-namespace winrt::NanaZip::Modern::implementation
+namespace winrt
+{
+    using Windows::System::DispatcherQueuePriority;
+}
+
+namespace
 {
     winrt::hstring ConvertByteSizeToString(
         std::uint64_t ByteSize)
@@ -74,7 +79,10 @@ namespace winrt::NanaZip::Modern::implementation
             Minute,
             Second));
     }
+}
 
+namespace winrt::NanaZip::Modern::implementation
+{
     ProgressPage::ProgressPage(
         _In_opt_ HWND WindowHandle) :
         m_WindowHandle(WindowHandle)
@@ -85,6 +93,8 @@ namespace winrt::NanaZip::Modern::implementation
     void ProgressPage::InitializeComponent()
     {
         ProgressPageT::InitializeComponent();
+
+        this->m_DispatcherQueue = DispatcherQueue::GetForCurrentThread();
     }
 
     DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
@@ -130,13 +140,6 @@ namespace winrt::NanaZip::Modern::implementation
         L""
     );
     DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        TotalSizeText,
-        winrt::hstring,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        L""
-    );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
         ProcessedText,
         winrt::hstring,
         ProgressPage,
@@ -171,28 +174,6 @@ namespace winrt::NanaZip::Modern::implementation
         ProgressPage,
         winrt::NanaZip::Modern::ProgressPage,
         L"[Pause]"
-    );
-
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ProgressBarMinimum,
-        double,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        0
-    );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ProgressBarMaximum,
-        double,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        1
-    );
-    DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
-        ProgressBarValue,
-        double,
-        ProgressPage,
-        winrt::NanaZip::Modern::ProgressPage,
-        0
     );
 
     DEPENDENCY_PROPERTY_SOURCE_BOX_WITHDEFAULT(
@@ -247,6 +228,104 @@ namespace winrt::NanaZip::Modern::implementation
             MAKEWPARAM(IDCANCEL, BN_CLICKED),
             0);
     }
+
+    void ProgressPage::UpdateStatus(
+        _In_ PK7_PROGRESS_DIALOG_STATUS Status)
+    {
+        if (!Status)
+        {
+            return;
+        }
+
+        /*winrt::hstring TitleCandidate = Status->Title
+            ? winrt::hstring(Status->Title)
+            : L"";
+        winrt::hstring FilePathCandidate = Status->FilePath
+            ? winrt::hstring(Status->FilePath)
+            : L"";
+        UINT64 ProcessedSizeCandidate = Status->ProcessedSize;
+        UINT64 TotalFilesCandidate = Status->TotalFiles;
+        UINT64 ProcessedFilesCandidate = Status->ProcessedFiles;
+        UINT64 InputSizeCandidate = Status->InputSize;
+        UINT64 OutputSizeCandidate = Status->OutputSize;
+        winrt::hstring StatusCandidate = Status->Status
+            ? winrt::hstring(Status->Status)
+            : L"";*/
+
+        std::uint64_t TotalSize = Status->TotalSize;
+
+        std::uint64_t TotalProgress = Status->BytesProgressMode
+            ? TotalSize
+            : Status->TotalFiles;
+        std::uint64_t ProcessedProgress = Status->BytesProgressMode
+            ? Status->ProcessedSize
+            : Status->ProcessedFiles;
+
+        if (!this->m_DispatcherQueue)
+        {
+            return;
+        }
+        this->m_DispatcherQueue.TryEnqueue(
+            winrt::DispatcherQueuePriority::Normal,
+            [=]()
+        {
+            if (TotalProgress != this->m_TotalProgress ||
+                ProcessedProgress != this->m_ProcessedProgress)
+            {
+                if (static_cast<std::uint64_t>(-1) != TotalProgress)
+                {
+                    this->ProgressBar().Minimum(0.0);
+                    this->ProgressBar().Maximum(
+                        static_cast<double>(TotalProgress));
+                    this->ProgressBar().Value(
+                        static_cast<double>(ProcessedProgress));
+                }
+                else
+                {
+                    this->ProgressBar().Minimum(0.0);
+                    this->ProgressBar().Maximum(1.0);
+                    this->ProgressBar().Value(0.0);
+                }
+
+                this->m_TotalProgress = TotalProgress;
+                this->m_ProcessedProgress = ProcessedProgress;
+            }
+
+            if (TotalSize != this->m_TotalSize)
+            {
+                winrt::hstring String = L"";
+                if (static_cast<std::uint64_t>(-1) != Status->TotalSize)
+                {
+                    String = ::ConvertByteSizeToString(TotalSize);
+                    this->TotalSizeTextBlock().Text(String);
+                    this->m_TotalSize = TotalSize;
+                }
+            }
+        });
+    }
+}
+
+EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
+    _In_ LPVOID Instance,
+    _In_ PK7_PROGRESS_DIALOG_STATUS Status)
+{
+    if (!Instance || !Status)
+    {
+        return;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::ProgressPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::ProgressPage;
+    Interface InstanceObject = nullptr;
+    winrt::copy_from_abi(InstanceObject, Instance);
+    if (!InstanceObject)
+    {
+        return;
+    }
+    winrt::get_self<Implementation>(InstanceObject)->UpdateStatus(
+        Status);
 }
 
 EXTERN_C LPVOID WINAPI K7ModernCreateProgressPage(
