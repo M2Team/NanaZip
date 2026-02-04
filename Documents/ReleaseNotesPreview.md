@@ -11,7 +11,10 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 - Introduce NanaZip Platform Base Library (K7Base) and NanaZip Platform User
   Library (K7User) to replace NanaZip Platform Abstraction Layer (K7Pal) and
   NanaZip.Frieren for better code sharing and maintainability.
-- Redesign the security mitigation policies settings support. Read
+- Redesign the security mitigation policies settings support (followed some
+  suggestions from dongle-the-gadget), also introduces several new security
+  mitigation policies like the archive handler and codec handler restriction
+  (which is contributed by dinhngtu). Read
   https://github.com/M2Team/NanaZip/blob/main/Documents/Policies.md for more
   information.
 - Backport CVE-2025-0411 and CVE-2025-11001 for NanaZip File Manager which still

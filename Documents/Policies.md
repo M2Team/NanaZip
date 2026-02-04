@@ -129,10 +129,6 @@ Registry values in the key `HKLM\Software\NanaZip\Policies` instead.
 
 Here are the policies can be applied in NanaZip 6.0 Preview 1.
 
-- AllowedHandlers
-- BlockedHandlers
-- AllowedCodecs
-- BlockedCodecs
 - WriteZoneIdExtract
 
 Here are some policies only available in NanaZip 6.0 Preview 1.
