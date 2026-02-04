@@ -219,10 +219,6 @@ const wchar_t* CLang::Get(UInt32 id) const throw()
     }
     return Iterator->second;
 #else
-    if (::K7ModernAvailable())
-    {
-        return ::K7ModernGetLegacyStringResource(id);
-    }
     return nullptr;
 #endif
 }
