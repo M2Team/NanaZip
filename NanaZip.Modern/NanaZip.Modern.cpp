@@ -349,6 +349,16 @@ namespace
 
         return Result;
     }
+
+    winrt::DesktopWindowXamlSource K7ModernGetDesktopWindowXamlSource(
+        _In_ HWND WindowHandle)
+    {
+        winrt::DesktopWindowXamlSource XamlSource = nullptr;
+        winrt::copy_from_abi(
+            XamlSource,
+            ::GetPropW(WindowHandle, L"XamlWindowSource"));
+        return XamlSource;
+    }
 }
 
 EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
@@ -437,11 +447,18 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     return Result;
 }
 
-EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
-    _In_ LPVOID Instance,
+EXTERN_C VOID WINAPI K7ModernUpdateProgressWindowStatus(
+    _In_ HWND WindowHandle,
     _In_ PK7_PROGRESS_WINDOW_STATUS Status)
 {
-    if (!Instance || !Status)
+    if (!WindowHandle || !Status)
+    {
+        return;
+    }
+
+    winrt::DesktopWindowXamlSource XamlSource =
+        ::K7ModernGetDesktopWindowXamlSource(WindowHandle);
+    if (!XamlSource)
     {
         return;
     }
@@ -450,19 +467,46 @@ EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
         winrt::NanaZip::Modern::ProgressPage;
     using Implementation =
         winrt::NanaZip::Modern::implementation::ProgressPage;
-    Interface InstanceObject = nullptr;
-    winrt::copy_from_abi(InstanceObject, Instance);
+    Interface InstanceObject = XamlSource.Content().as<Interface>();
     if (!InstanceObject)
     {
         return;
     }
-    winrt::get_self<Implementation>(InstanceObject)->UpdateStatus(
-        Status);
+    winrt::get_self<Implementation>(InstanceObject)->UpdateStatus(Status);
+}
+
+EXTERN_C VOID WINAPI K7ModernSetProgressWindowPausedMode(
+    _In_ HWND WindowHandle,
+    _In_ BOOL Paused)
+{
+    if (!WindowHandle)
+    {
+        return;
+    }
+
+    winrt::DesktopWindowXamlSource XamlSource =
+        ::K7ModernGetDesktopWindowXamlSource(WindowHandle);
+    if (!XamlSource)
+    {
+        return;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::ProgressPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::ProgressPage;
+    Interface InstanceObject = XamlSource.Content().as<Interface>();
+    if (!InstanceObject)
+    {
+        return;
+    }
+    winrt::get_self<Implementation>(InstanceObject)->SetPausedMode(Paused);
 }
 
 EXTERN_C INT WINAPI K7ModernShowProgressWindow(
     _In_opt_ HWND ParentWindowHandle,
     _In_opt_ LPCWSTR Title,
+    _In_ BOOL ShowCompressionInformation,
     _In_ SUBCLASSPROC WindowSubclassHandler,
     _In_ LPVOID WindowSubclassContext)
 {
@@ -484,7 +528,8 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
 
     Interface Window = winrt::make<Implementation>(
         WindowHandle,
-        Title);
+        Title,
+        ShowCompressionInformation);
 
     if (FAILED(::MileXamlSetXamlContentForContentWindow(
         WindowHandle,

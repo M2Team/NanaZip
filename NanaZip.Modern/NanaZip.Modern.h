@@ -93,16 +93,21 @@ typedef struct _K7_PROGRESS_WINDOW_STATUS
      * @brief If true, the progress is shown in bytes. If false, the progress is
      *        shown in files.
      */
-    bool BytesProgressMode;
+    BOOLEAN BytesProgressMode;
 
     /**
      * @brief If true, the operation is compression. If false, the operation is
      *        extraction.
      */
-    bool CompressionMode;
+    BOOLEAN CompressionMode;
 
     /**
-     * @brief The title of the progress dialog.
+     * @brief If true, there is an error. If false, there is no error.
+     */
+    BOOLEAN HaveError;
+
+    /**
+     * @brief The title of the progress window.
      */
     LPCWSTR Title;
 
@@ -153,8 +158,16 @@ typedef struct _K7_PROGRESS_WINDOW_STATUS
     LPCWSTR Status;
 } K7_PROGRESS_WINDOW_STATUS, *PK7_PROGRESS_WINDOW_STATUS;
 
-EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
-    _In_ LPVOID Instance,
+/**
+ * @brief Update the progress window status.
+ * @param WindowHandle A handle to the progress window which acquired from the
+ *                     window subclass procedure.
+ * @param Status The progress window status to be updated.
+ * @remark You must call this function only in the window subclass procedure of
+ *         the progress window.
+ */
+EXTERN_C VOID WINAPI K7ModernUpdateProgressWindowStatus(
+    _In_ HWND WindowHandle,
     _In_ PK7_PROGRESS_WINDOW_STATUS Status);
 
 /**
@@ -164,12 +177,30 @@ EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
 #define K7_PROGRESS_WINDOW_COMMAND_PAUSE 446
 
 /**
+ * @brief Set the paused mode of the progress window.
+ * @param WindowHandle A handle to the progress window which acquired from the
+ *                     window subclass procedure.
+ * @param Paused If true, the UI of the progress window will be updated to the
+ *               paused mode. If false, the UI of the progress window will be
+ *               updated to the normal mode.
+ * @remark You must call this function only in the window subclass procedure of
+ *         the progress window.
+ */
+EXTERN_C VOID WINAPI K7ModernSetProgressWindowPausedMode(
+    _In_ HWND WindowHandle,
+    _In_ BOOL Paused);
+
+/**
  * @brief Show the progress window.
  * @param ParentWindowHandle A handle to the owner window of the dialog to be
  *                           created. If this parameter is nullptr, the dialog
  *                           has no owner window.
  * @param Title The title of the progress window. If this parameter is
  *              nullptr, the title is empty.
+ * @param ShowCompressionInformation If true, the progress window will show
+ *                                   the packed size and compression ratio.
+ *                                   Otherwise, the packed size and compression
+ *                                   ratio will be hidden.
  * @param WindowSubclassHandler The window subclass procedure for the progress
  *                              window.
  * @param WindowSubclassContext The context pointer for the window subclass
@@ -179,6 +210,7 @@ EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
 EXTERN_C INT WINAPI K7ModernShowProgressWindow(
     _In_opt_ HWND ParentWindowHandle,
     _In_opt_ LPCWSTR Title,
+    _In_ BOOL ShowCompressionInformation,
     _In_ SUBCLASSPROC WindowSubclassHandler,
     _In_ LPVOID WindowSubclassContext);
 

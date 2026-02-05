@@ -16,22 +16,7 @@
 #include "MyWindowsNew.h"
 
 // **************** NanaZip Modification Start ****************
-#pragma push_macro("GetCurrentTime")
-#undef GetCurrentTime
-
-#include <Mile.Xaml.h>
-#include <winrt/Windows.Foundation.h>
-#include <winrt/Windows.UI.Xaml.h>
-#include <winrt/NanaZip.Modern.h>
-
-#pragma pop_macro("GetCurrentTime")
-
-namespace winrt
-{
-    using NanaZip::Modern::ProgressPage;
-    using Windows::Foundation::IInspectable;
-    using Windows::UI::Xaml::RoutedEventArgs;
-}
+#include <string>
 // **************** NanaZip Modification End ****************
 
 struct CProgressMessageBoxPair
@@ -175,7 +160,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   NWindows::NControl::CListView _messageList;
   // **************** NanaZip Modification Start ****************
   bool m_FirstRun = true;
-  winrt::ProgressPage m_ProgressPage{ nullptr };
   std::wstring m_ResultString;
   // **************** NanaZip Modification End ****************
   
@@ -234,12 +218,12 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void SetTaskbarProgressState();
 
   void UpdateStatInfo(bool showAll);
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   bool OnTimer(WPARAM timerID, LPARAM callback);
   void SetProgressRange(UInt64 range);
   void SetProgressPos(UInt64 pos);
   virtual bool OnInit();
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
   virtual void OnCancel();
   virtual void OnOK();
@@ -266,8 +250,7 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   // **************** NanaZip Modification End ****************
 
   void SetTitleText();
-  void ShowSize(int id, UInt64 val, UInt64& prev);
-  winrt::hstring ShowSize(UInt64 val, UInt64 &prev);
+  void ShowSize(int id, UInt64 val, UInt64 &prev);
 
   void UpdateMessagesDialog();
 

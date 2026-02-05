@@ -3,18 +3,5 @@
     [default_interface]
     runtimeclass ProgressPage : Windows.UI.Xaml.Controls.Page
     {
-        String ElapsedTimeText;
-        String RemainingTimeText;
-        String SpeedText;
-
-        Boolean ShowPackedValue;
-        Boolean ShowCompressionRatioValue;
-
-        static Windows.UI.Xaml.DependencyProperty ElapsedTimeTextProperty{ get; };
-        static Windows.UI.Xaml.DependencyProperty RemainingTimeTextProperty{ get; };
-        static Windows.UI.Xaml.DependencyProperty SpeedTextProperty{ get; };
-
-        static Windows.UI.Xaml.DependencyProperty ShowPackedValueProperty{ get; };
-        static Windows.UI.Xaml.DependencyProperty ShowCompressionRatioValueProperty{ get; };
     }
 }

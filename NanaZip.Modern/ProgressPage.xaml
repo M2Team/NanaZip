@@ -79,16 +79,16 @@
 
           <StackPanel Grid.Column="1" HorizontalAlignment="Right">
             <TextBlock
+              x:Name="ElapsedTimeTextBlock"
               Margin="0,4,0,0"
               d:Text="00:00:08"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind ElapsedTimeText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
+              x:Name="RemainingTimeTextBlock"
               Margin="0,4,0,0"
               d:Text="00:01:49"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind RemainingTimeText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
               x:Name="FilesTextBlock"
@@ -124,27 +124,27 @@
               [Processed]
             </TextBlock>
             <TextBlock
+              x:Name="PackedSizeLabel"
               x:Uid="/NanaZip.Modern/ProgressPage/PackedSizeLabel"
               Margin="0,4,0,0"
-              Style="{ThemeResource BaseTextBlockStyle}"
-              Visibility="{x:Bind ShowPackedValue, Mode=OneWay}">
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Packed Size]
             </TextBlock>
             <TextBlock
+              x:Name="CompressionRatioLabel"
               x:Uid="/NanaZip.Modern/ProgressPage/CompressionRatioLabel"
               Margin="0,4,0,0"
-              Style="{ThemeResource BaseTextBlockStyle}"
-              Visibility="{x:Bind ShowCompressionRatioValue, Mode=OneWay}">
+              Style="{ThemeResource BaseTextBlockStyle}">
               [Compression ratio]
             </TextBlock>
           </StackPanel>
 
           <StackPanel Grid.Column="1" HorizontalAlignment="Right">
             <TextBlock
+              x:Name="SpeedTextBlock"
               Margin="0,4,0,0"
               d:Text="30 MB/s"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind SpeedText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
               x:Name="TotalSizeTextBlock"
@@ -163,15 +163,13 @@
               Margin="0,4,0,0"
               d:Text="182 MB"
               HorizontalTextAlignment="Right"
-              Typography.NumeralAlignment="Tabular"
-              Visibility="{x:Bind ShowPackedValue, Mode=OneWay}" />
+              Typography.NumeralAlignment="Tabular" />
             <TextBlock
               x:Name="CompressionRatioTextBlock"
               Margin="0,4,0,0"
               d:Text="89%"
               HorizontalTextAlignment="Right"
-              Typography.NumeralAlignment="Tabular"
-              Visibility="{x:Bind ShowCompressionRatioValue, Mode=OneWay}" />
+              Typography.NumeralAlignment="Tabular" />
           </StackPanel>
         </Grid>
       </Grid>
