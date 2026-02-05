@@ -19,8 +19,8 @@
 #include "SponsorPage.h"
 #include "AboutPage.h"
 #include "InformationPage.h"
+#include "ProgressPage.h"
 
-#include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
 
 #include <winrt/Windows.ApplicationModel.Resources.Core.h>
@@ -160,14 +160,16 @@ namespace winrt
 
 namespace
 {
-    HWND K7ModernCreateXamlDialog(
-        _In_opt_ HWND ParentWindowHandle)
+    HWND K7ModernCreateXamlWindow(
+        _In_opt_ HWND ParentWindowHandle,
+        _In_ DWORD ExtendedWindowStyle,
+        _In_ DWORD WindowStyle)
     {
         HWND WindowHandle = ::CreateWindowExW(
-            WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
+            ExtendedWindowStyle,
             L"Mile.Xaml.ContentWindow",
             nullptr,
-            WS_CAPTION | WS_SYSMENU,
+            WindowStyle,
             CW_USEDEFAULT,
             0,
             CW_USEDEFAULT,
@@ -176,7 +178,7 @@ namespace
             nullptr,
             nullptr,
             nullptr);
-        ::SetWindowSubclass(
+        if (!::SetWindowSubclass(
             WindowHandle,
             [](
                 _In_ HWND hWnd,
@@ -185,70 +187,75 @@ namespace
                 _In_ LPARAM lParam,
                 _In_ UINT_PTR uIdSubclass,
                 _In_ DWORD_PTR dwRefData) -> LRESULT
+        {
+            UNREFERENCED_PARAMETER(uIdSubclass);
+            UNREFERENCED_PARAMETER(dwRefData);
+
+            switch (uMsg)
             {
-                UNREFERENCED_PARAMETER(uIdSubclass);
-                UNREFERENCED_PARAMETER(dwRefData);
+            case WM_CLOSE:
+            {
+                HWND ParentWindow = ::GetWindow(hWnd, GW_OWNER);
+                if (ParentWindow)
+                {
+                    ::EnableWindow(ParentWindow, TRUE);
+                }
+                break;
+            }
+            case WM_DESTROY:
+            {
+                winrt::DesktopWindowXamlSource XamlSource = nullptr;
+                winrt::copy_from_abi(
+                    XamlSource,
+                    ::GetPropW(hWnd, L"XamlWindowSource"));
+                // Clear the property first to avoid use-after-free issue.
+                ::RemovePropW(hWnd, L"XamlWindowSource");
+                if (XamlSource)
+                {
+                    // Release the reference count from SetPropW.
+                    XamlSource.as<IUnknown>()->Release();
+                    // Close the XAML Island.
+                    XamlSource.Close();
+                    // Destroy the content immediately to avoid unintended access.
+                    XamlSource = nullptr;
+                }
+                break;
+            }
+            default:
+                break;
+            }
 
-                switch (uMsg)
-                {
-                case WM_CLOSE:
-                {
-                    HWND ParentWindow = ::GetWindow(hWnd, GW_OWNER);
-                    if (ParentWindow)
-                    {
-                        ::EnableWindow(ParentWindow, TRUE);
-                    }
-                    break;
-                }
-                case WM_DESTROY:
-                {
-                    winrt::DesktopWindowXamlSource XamlSource = nullptr;
-                    winrt::copy_from_abi(
-                        XamlSource,
-                        ::GetPropW(hWnd, L"XamlWindowSource"));
-                    // Clear the property first to avoid use-after-free issue.
-                    ::RemovePropW(hWnd, L"XamlWindowSource");
-                    if (XamlSource)
-                    {
-                        // Release the reference count from SetPropW.
-                        XamlSource.as<IUnknown>()->Release();
-                        // Close the XAML Island.
-                        XamlSource.Close();
-                        // Destroy the content immediately to avoid unintended access.
-                        XamlSource = nullptr;
-                    }
-                    break;
-                }
-                default:
-                    break;
-                }
-
-                return ::DefSubclassProc(
-                    hWnd,
-                    uMsg,
-                    wParam,
-                    lParam);
-            },
+            return ::DefSubclassProc(
+                hWnd,
+                uMsg,
+                wParam,
+                lParam);
+        },
             0,
-            0);
+            0))
+        {
+            ::DestroyWindow(WindowHandle);
+            return nullptr;
+        }
         return WindowHandle;
+    }
+
+    HWND K7ModernCreateXamlDialog(
+        _In_opt_ HWND ParentWindowHandle)
+    {
+        return ::K7ModernCreateXamlWindow(
+            ParentWindowHandle,
+            WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
+            WS_CAPTION | WS_SYSMENU);
     }
 
     int K7ModernShowXamlWindow(
         _In_opt_ HWND WindowHandle,
         _In_ int Width,
         _In_ int Height,
-        _In_ LPVOID Content,
         _In_ HWND ParentWindowHandle)
     {
         if (!WindowHandle)
-        {
-            return -1;
-        }
-
-        if (FAILED(::MileXamlSetXamlContentForContentWindow(
-            WindowHandle,
-            Content)))
         {
             return -1;
         }
@@ -309,12 +316,7 @@ namespace
             return -1;
         }
 
-        if (FAILED(::MileAllowNonClientDefaultDrawingForWindow(
-            WindowHandle,
-            FALSE)))
-        {
-            return -1;
-        }
+        ::MileAllowNonClientDefaultDrawingForWindow(WindowHandle, FALSE);
 
         HMENU MenuHandle = ::GetSystemMenu(WindowHandle, FALSE);
         if (MenuHandle)
@@ -331,11 +333,18 @@ namespace
             ::EnableWindow(ParentWindowHandle, FALSE);
         }
 
+        if (FAILED(::MileXamlSetXamlContentForContentWindow(
+            WindowHandle,
+            Content)))
+        {
+            ::DestroyWindow(WindowHandle);
+            return -1;
+        }
+
         int Result = ::K7ModernShowXamlWindow(
             WindowHandle,
             Width,
             Height,
-            Content,
             ParentWindowHandle);
 
         return Result;
@@ -423,6 +432,85 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
         560,
         560,
         winrt::get_abi(Window),
+        ParentWindowHandle);
+
+    return Result;
+}
+
+EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
+    _In_ LPVOID Instance,
+    _In_ PK7_PROGRESS_WINDOW_STATUS Status)
+{
+    if (!Instance || !Status)
+    {
+        return;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::ProgressPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::ProgressPage;
+    Interface InstanceObject = nullptr;
+    winrt::copy_from_abi(InstanceObject, Instance);
+    if (!InstanceObject)
+    {
+        return;
+    }
+    winrt::get_self<Implementation>(InstanceObject)->UpdateStatus(
+        Status);
+}
+
+EXTERN_C INT WINAPI K7ModernShowProgressWindow(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_ SUBCLASSPROC WindowSubclassHandler,
+    _In_ LPVOID WindowSubclassContext)
+{
+    HWND WindowHandle = ::K7ModernCreateXamlWindow(
+        ParentWindowHandle,
+        WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
+        WS_OVERLAPPEDWINDOW);
+    if (!WindowHandle)
+    {
+        return -1;
+    }
+
+    ::MileAllowNonClientDefaultDrawingForWindow(WindowHandle, FALSE);
+
+    using Interface =
+        winrt::NanaZip::Modern::ProgressPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::ProgressPage;
+
+    Interface Window = winrt::make<Implementation>(
+        WindowHandle,
+        Title);
+
+    if (FAILED(::MileXamlSetXamlContentForContentWindow(
+        WindowHandle,
+        winrt::get_abi(Window))))
+    {
+        ::DestroyWindow(WindowHandle);
+        return -1;
+    }
+
+    if (WindowSubclassHandler)
+    {
+        if (!::SetWindowSubclass(
+            WindowHandle,
+            WindowSubclassHandler,
+            1,
+            reinterpret_cast<DWORD_PTR>(WindowSubclassContext)))
+        {
+            ::DestroyWindow(WindowHandle);
+            return -1;
+        }
+    }
+
+    int Result = ::K7ModernShowXamlWindow(
+        WindowHandle,
+        600,
+        360,
         ParentWindowHandle);
 
     return Result;

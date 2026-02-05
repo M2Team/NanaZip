@@ -12,6 +12,7 @@
 #define NANAZIP_MODERN_EXPERIENCE
 
 #include <Windows.h>
+#include <CommCtrl.h>
 
 /**
  * @brief Get legacy string resource from NanaZip Modern Experience resources.
@@ -84,9 +85,9 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     _In_opt_ LPCWSTR Content);
 
 /**
- * @brief The progress dialog status structure.
+ * @brief The progress window status structure.
  */
-typedef struct _K7_PROGRESS_DIALOG_STATUS
+typedef struct _K7_PROGRESS_WINDOW_STATUS
 {
     /**
      * @brief If true, the progress is shown in bytes. If false, the progress is
@@ -117,7 +118,7 @@ typedef struct _K7_PROGRESS_DIALOG_STATUS
     UINT64 TotalSize;
 
     /**
-     * @brief The processed size of the operation in bytes. 
+     * @brief The processed size of the operation in bytes.
      */
     UINT64 ProcessedSize;
 
@@ -150,21 +151,36 @@ typedef struct _K7_PROGRESS_DIALOG_STATUS
      * @brief The status message.
      */
     LPCWSTR Status;
-} K7_PROGRESS_DIALOG_STATUS, *PK7_PROGRESS_DIALOG_STATUS;
+} K7_PROGRESS_WINDOW_STATUS, *PK7_PROGRESS_WINDOW_STATUS;
 
 EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
     _In_ LPVOID Instance,
-    _In_ PK7_PROGRESS_DIALOG_STATUS Status);
+    _In_ PK7_PROGRESS_WINDOW_STATUS Status);
 
 /**
- * @brief Create the progress control for the progress window.
- * @param ParentWindowHandle A handle to the owner window of the control to be
- *                           created. This parameter must be valid.
- * @return The progress control instance pointer.
+ * @brief The WM_COMMAND BN_CLICKED ID for the "Pause" button will be sent to
+ *        the progress window when the "Pause" button is clicked.
  */
-EXTERN_C LPVOID WINAPI K7ModernCreateProgressPage(
-    _In_ HWND ParentWindowHandle,
-    _In_opt_ LPCWSTR Title);
+#define K7_PROGRESS_WINDOW_COMMAND_PAUSE 446
+
+/**
+ * @brief Show the progress window.
+ * @param ParentWindowHandle A handle to the owner window of the dialog to be
+ *                           created. If this parameter is nullptr, the dialog
+ *                           has no owner window.
+ * @param Title The title of the progress window. If this parameter is
+ *              nullptr, the title is empty.
+ * @param WindowSubclassHandler The window subclass procedure for the progress
+ *                              window.
+ * @param WindowSubclassContext The context pointer for the window subclass
+ *                              procedure.
+ * @return The message loop exit code of the dialog.
+ */
+EXTERN_C INT WINAPI K7ModernShowProgressWindow(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_ SUBCLASSPROC WindowSubclassHandler,
+    _In_ LPVOID WindowSubclassContext);
 
 /**
  * @brief Create the toolbar control for the main window.

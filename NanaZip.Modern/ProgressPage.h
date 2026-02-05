@@ -53,9 +53,6 @@ namespace winrt::NanaZip::Modern::implementation
             bool
         );
 
-        Mile::WinRT::Event<winrt::RoutedEventHandler>
-            PauseButtonClicked;
-
         void BackgroundButtonClick(
             winrt::IInspectable const& sender,
             winrt::RoutedEventArgs const& e);
@@ -69,7 +66,7 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::RoutedEventArgs const& e);
 
         void UpdateStatus(
-            _In_ PK7_PROGRESS_DIALOG_STATUS Status);
+            _In_ PK7_PROGRESS_WINDOW_STATUS Status);
 
     private:
 

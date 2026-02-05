@@ -174,8 +174,8 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   NWindows::NControl::CProgressBar m_ProgressBar;
   NWindows::NControl::CListView _messageList;
   // **************** NanaZip Modification Start ****************
+  bool m_FirstRun = true;
   winrt::ProgressPage m_ProgressPage{ nullptr };
-  HWND m_ProgressPageWindowHandle = nullptr;
   std::wstring m_ResultString;
   // **************** NanaZip Modification End ****************
   
@@ -258,9 +258,12 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void SetPriorityText();
   void OnPauseButton();
   void OnPriorityButton();
-  bool OnButtonClicked(int buttonID, HWND buttonHWND);
-  bool OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
-  bool OnCancelClicked();
+  // **************** NanaZip Modification Start ****************
+  //bool OnButtonClicked(int buttonID, HWND buttonHWND);
+  //bool OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
+  bool OnCancelClickedModern();
+  bool OnMessageModern(UINT message, WPARAM wParam, LPARAM lParam);
+  // **************** NanaZip Modification End ****************
 
   void SetTitleText();
   void ShowSize(int id, UInt64 val, UInt64& prev);
@@ -279,13 +282,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void ShowAfterMessages(HWND wndParent);
 
   void CheckNeedClose();
-
-  // **************** NanaZip Modification Start ****************
-  void OnPauseButtonClicked(
-      winrt::IInspectable const&,
-      winrt::RoutedEventArgs const&
-  );
-  // **************** NanaZip Modification End ****************
 public:
   CProgressSync Sync;
   bool CompressingMode;

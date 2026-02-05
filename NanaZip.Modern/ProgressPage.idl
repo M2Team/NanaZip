@@ -16,7 +16,5 @@
 
         static Windows.UI.Xaml.DependencyProperty ShowPackedValueProperty{ get; };
         static Windows.UI.Xaml.DependencyProperty ShowCompressionRatioValueProperty{ get; };
-
-        event Windows.UI.Xaml.RoutedEventHandler PauseButtonClicked;
     }
 }

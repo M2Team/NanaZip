@@ -234,16 +234,20 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::RoutedEventArgs const& e)
     {
         UNREFERENCED_PARAMETER(sender);
+        UNREFERENCED_PARAMETER(e);
 
         this->m_Paused = !this->m_Paused;
+        ::PostMessageW(
+            this->m_WindowHandle,
+            WM_COMMAND,
+            MAKEWPARAM(K7_PROGRESS_WINDOW_COMMAND_PAUSE, BN_CLICKED),
+            0);
         this->ProgressBar().ShowPaused(this->m_Paused);
         this->PauseButton().Content(winrt::box_value(
             this->m_Paused
             ? this->m_ContinueButtonText
             : this->m_PauseButtonText));
         this->UpdateWindowTitle();
-
-        this->PauseButtonClicked(*this, e);
     }
 
     void ProgressPage::CancelButtonClick(
@@ -261,7 +265,7 @@ namespace winrt::NanaZip::Modern::implementation
     }
 
     void ProgressPage::UpdateStatus(
-        _In_ PK7_PROGRESS_DIALOG_STATUS StatusRequest)
+        _In_ PK7_PROGRESS_WINDOW_STATUS StatusRequest)
     {
         if (!StatusRequest)
         {
@@ -463,42 +467,4 @@ namespace winrt::NanaZip::Modern::implementation
             }
         });
     }
-}
-
-EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
-    _In_ LPVOID Instance,
-    _In_ PK7_PROGRESS_DIALOG_STATUS Status)
-{
-    if (!Instance || !Status)
-    {
-        return;
-    }
-
-    using Interface =
-        winrt::NanaZip::Modern::ProgressPage;
-    using Implementation =
-        winrt::NanaZip::Modern::implementation::ProgressPage;
-    Interface InstanceObject = nullptr;
-    winrt::copy_from_abi(InstanceObject, Instance);
-    if (!InstanceObject)
-    {
-        return;
-    }
-    winrt::get_self<Implementation>(InstanceObject)->UpdateStatus(
-        Status);
-}
-
-EXTERN_C LPVOID WINAPI K7ModernCreateProgressPage(
-    _In_ HWND ParentWindowHandle,
-    _In_opt_ LPCWSTR Title)
-{
-    using Interface =
-        winrt::NanaZip::Modern::ProgressPage;
-    using Implementation =
-        winrt::NanaZip::Modern::implementation::ProgressPage;
-
-    Interface Window = winrt::make<Implementation>(
-        ParentWindowHandle,
-        Title);
-    return winrt::detach_abi(Window);
 }
