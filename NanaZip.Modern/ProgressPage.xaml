@@ -14,27 +14,36 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <TextBlock
+      x:Name="TitleTextBlock"
       Margin="16,0"
       d:Text="[Adding]"
       FontSize="24"
       Style="{ThemeResource BaseTextBlockStyle}"
-      Text="{x:Bind ActionText, Mode=OneWay}" />
+      TextTrimming="CharacterEllipsis"
+      TextWrapping="NoWrap" />
     <StackPanel
       Grid.Row="1"
       Grid.ColumnSpan="2"
       Padding="16,0,16,16"
       Orientation="Vertical">
       <TextBlock
+        x:Name="FilePathTextBlock"
         Margin="0,4,0,0"
         d:Text="debian-12.0.0-amd64-netinst.iso"
-        Text="{x:Bind FileNameText, Mode=OneWay}" />
+        TextTrimming="CharacterEllipsis"
+        TextWrapping="NoWrap" />
+      <TextBlock
+        x:Name="StatusTextBlock"
+        Margin="0,4,0,0"
+        d:Text="Compressing"
+        TextTrimming="CharacterEllipsis"
+        TextWrapping="NoWrap" />
       <ProgressBar
         x:Name="ProgressBar"
         Margin="0,4,0,0"
         d:Maximum="100"
         d:Minimum="0"
-        d:Value="30"
-        ShowPaused="{x:Bind ShowPaused, Mode=OneWay}" />
+        d:Value="30" />
 
       <Grid Margin="0,24,0,0" ColumnSpacing="32">
         <Grid.ColumnDefinitions>
@@ -82,10 +91,10 @@
               Text="{x:Bind RemainingTimeText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
+              x:Name="FilesTextBlock"
               Margin="0,4,0,0"
               d:Text="1/6"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind FilesText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
           </StackPanel>
         </Grid>
@@ -144,23 +153,23 @@
               HorizontalTextAlignment="Right"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
+              x:Name="ProcessedSizeTextBlock"
               Margin="0,4,0,0"
               d:Text="204 MB"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind ProcessedText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular" />
             <TextBlock
+              x:Name="PackedSizeTextBlock"
               Margin="0,4,0,0"
               d:Text="182 MB"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind PackedSizeText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular"
               Visibility="{x:Bind ShowPackedValue, Mode=OneWay}" />
             <TextBlock
+              x:Name="CompressionRatioTextBlock"
               Margin="0,4,0,0"
               d:Text="89%"
               HorizontalTextAlignment="Right"
-              Text="{x:Bind CompressionRatioText, Mode=OneWay}"
               Typography.NumeralAlignment="Tabular"
               Visibility="{x:Bind ShowCompressionRatioValue, Mode=OneWay}" />
           </StackPanel>
@@ -178,15 +187,17 @@
         HorizontalAlignment="Right"
         Orientation="Horizontal">
         <Button
+          x:Name="BackgroundButton"
           Width="120"
           Margin="4,16,4,16"
-          Click="BackgroundButtonClickedHandler"
-          Content="{x:Bind BackgroundButtonText, Mode=OneWay}" />
+          d:Content="[Background]"
+          Click="BackgroundButtonClick" />
         <Button
+          x:Name="PauseButton"
           Width="120"
           Margin="4,16,4,16"
-          Click="PauseButtonClickedHandler"
-          Content="{x:Bind PauseButtonText, Mode=OneWay}" />
+          d:Content="Pause"
+          Click="PauseButtonClick" />
         <Button
           x:Uid="/NanaZip.Modern/Common/CancelButton"
           Width="120"

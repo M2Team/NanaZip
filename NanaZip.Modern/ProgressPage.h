@@ -24,18 +24,13 @@ namespace winrt::NanaZip::Modern::implementation
     public:
 
         ProgressPage(
-            _In_opt_ HWND WindowHandle = nullptr);
+            _In_opt_ HWND WindowHandle = nullptr,
+            _In_opt_ LPCWSTR Title = nullptr);
+
+        void UpdateWindowTitle();
 
         void InitializeComponent();
 
-        DEPENDENCY_PROPERTY_HEADER(
-            ActionText,
-            winrt::hstring
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            FileNameText,
-            winrt::hstring
-        );
         DEPENDENCY_PROPERTY_HEADER(
             ElapsedTimeText,
             winrt::hstring
@@ -45,32 +40,7 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::hstring
         );
         DEPENDENCY_PROPERTY_HEADER(
-            FilesText,
-            winrt::hstring
-        );
-        DEPENDENCY_PROPERTY_HEADER(
             SpeedText,
-            winrt::hstring
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            ProcessedText,
-            winrt::hstring
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            PackedSizeText,
-            winrt::hstring
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            CompressionRatioText,
-            winrt::hstring
-        );
-
-        DEPENDENCY_PROPERTY_HEADER(
-            BackgroundButtonText,
-            winrt::hstring
-        );
-        DEPENDENCY_PROPERTY_HEADER(
-            PauseButtonText,
             winrt::hstring
         );
 
@@ -83,22 +53,16 @@ namespace winrt::NanaZip::Modern::implementation
             bool
         );
 
-        DEPENDENCY_PROPERTY_HEADER(
-            ShowPaused,
-            bool
-        );
-
-        void BackgroundButtonClickedHandler(
-            winrt::IInspectable const& sender,
-            winrt::RoutedEventArgs const& e);
-        void PauseButtonClickedHandler(
-            winrt::IInspectable const& sender,
-            winrt::RoutedEventArgs const& e);
-
-        Mile::WinRT::Event<winrt::RoutedEventHandler>
-            BackgroundButtonClicked;
         Mile::WinRT::Event<winrt::RoutedEventHandler>
             PauseButtonClicked;
+
+        void BackgroundButtonClick(
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
+
+        void PauseButtonClick(
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
 
         void CancelButtonClick(
             winrt::IInspectable const& sender,
@@ -112,17 +76,30 @@ namespace winrt::NanaZip::Modern::implementation
         HWND m_WindowHandle;
         DispatcherQueue m_DispatcherQueue = nullptr;
 
-        // Title
-        // FilePath
+        winrt::hstring m_BackgroundButtonText;
+        winrt::hstring m_ForegroundButtonText;
+        winrt::hstring m_PauseButtonText;
+        winrt::hstring m_ContinueButtonText;
+
+        winrt::hstring m_BackgroundedTitleText;
+        winrt::hstring m_PausedTitleText;
+
+        bool m_BackgroundMode = false;
+        bool m_Paused = false;
+
+        std::wstring m_Title;
+        std::wstring m_FilePath;
         std::uint64_t m_TotalSize = static_cast<std::uint64_t>(-1);
-        //std::uint64_t m_ProcessedSize = static_cast<std::uint64_t>(-1);
-        //std::uint64_t m_TotalFiles = static_cast<std::uint64_t>(-1);
-        //std::uint64_t m_ProcessedFiles = static_cast<std::uint64_t>(-1);
-        //std::uint64_t m_InputSize = static_cast<std::uint64_t>(-1);
-        //std::uint64_t m_OutputSize = static_cast<std::uint64_t>(-1);
+        std::uint64_t m_ProcessedSize = static_cast<std::uint64_t>(-1);
+        std::uint64_t m_TotalFiles = static_cast<std::uint64_t>(-1);
+        std::uint64_t m_ProcessedFiles = static_cast<std::uint64_t>(-1);
+        std::uint64_t m_CompressedSize = static_cast<std::uint64_t>(-1);
+        std::uint64_t m_DecompressedSize = static_cast<std::uint64_t>(-1);
+        std::wstring m_Status;
 
         std::uint64_t m_TotalProgress = static_cast<std::uint64_t>(-1);
         std::uint64_t m_ProcessedProgress = static_cast<std::uint64_t>(-1);
+        std::uint64_t m_PercentageProgress = static_cast<std::uint64_t>(-1);
     };
 }
 

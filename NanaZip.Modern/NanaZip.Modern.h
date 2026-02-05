@@ -163,7 +163,8 @@ EXTERN_C VOID WINAPI K7ModernUpdateProgressPageStatus(
  * @return The progress control instance pointer.
  */
 EXTERN_C LPVOID WINAPI K7ModernCreateProgressPage(
-    _In_ HWND ParentWindowHandle);
+    _In_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title);
 
 /**
  * @brief Create the toolbar control for the main window.

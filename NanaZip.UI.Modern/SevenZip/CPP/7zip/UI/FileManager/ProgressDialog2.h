@@ -238,9 +238,9 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void SetProgressRange(UInt64 range);
   void SetProgressPos(UInt64 pos);
   virtual bool OnInit();
-  virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
   // **************** NanaZip Modification Start ****************
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
+  virtual bool OnSize(WPARAM wParam, int xSize, int ySize);
   virtual void OnCancel();
   virtual void OnOK();
   virtual bool OnNotify(UINT /* controlID */, LPNMHDR header);
@@ -263,10 +263,8 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   bool OnCancelClicked();
 
   void SetTitleText();
-  // **************** NanaZip Modification Start ****************
-  //void ShowSize(int id, UInt64 val, UInt64& prev);
+  void ShowSize(int id, UInt64 val, UInt64& prev);
   winrt::hstring ShowSize(UInt64 val, UInt64 &prev);
-  // **************** NanaZip Modification End ****************
 
   void UpdateMessagesDialog();
 
@@ -284,10 +282,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
 
   // **************** NanaZip Modification Start ****************
   void OnPauseButtonClicked(
-      winrt::IInspectable const&,
-      winrt::RoutedEventArgs const&
-  );
-  void OnBackgroundButtonClicked(
       winrt::IInspectable const&,
       winrt::RoutedEventArgs const&
   );
