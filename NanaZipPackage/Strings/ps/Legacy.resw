@@ -498,6 +498,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>لوی ياد مخونه کارول&amp;</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>د دوتنې اندازه په KB/MB/GB کې وښایئ</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>۷‏-زېپ په اړه</value>
   </data>

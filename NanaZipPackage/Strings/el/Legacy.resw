@@ -663,6 +663,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Χρήση Καταρ/σμου Πεζών Χαρακτήρων</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Εμφάνιση μεγέθους αρχείου σε KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Σχετικά με NanaZip</value>
   </data>

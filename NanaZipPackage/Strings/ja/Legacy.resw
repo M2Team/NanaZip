@@ -645,6 +645,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>大きなメモリ ページを使用(&amp;L)</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ファイル サイズを KB/MB/GB で表示</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip について</value>
   </data>

@@ -522,6 +522,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>چوڭ ئەسلەك بېتى ئىشلەت(&amp;L)</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ھۆججەت چوڭلۇقىنى KB/MB/GB دە كۆرسەت</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>‎NanaZip‏ ھەققىدە</value>
   </data>

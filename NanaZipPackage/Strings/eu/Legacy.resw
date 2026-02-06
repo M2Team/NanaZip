@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Erabili &amp;oroimen handiko orrialdeak</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Erakutsi fitxategiaren tamaina KB/MB/GB-tan</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip buruz</value>
   </data>

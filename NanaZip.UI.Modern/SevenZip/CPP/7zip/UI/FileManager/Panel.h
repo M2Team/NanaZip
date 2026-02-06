@@ -436,6 +436,9 @@ public:
   // CUIntVector _realIndices;
   bool _enableItemChangeNotify;
   bool _mySelectMode;
+  // **************** NanaZip Modification Start ****************
+  bool _showSmartSizes;
+  // **************** NanaZip Modification End ****************
 
   int _timestampLevel;
 
@@ -586,6 +589,9 @@ public:
       // _virtualMode(flase),
       _enableItemChangeNotify(true),
       _mySelectMode(false),
+      // **************** NanaZip Modification Start ****************
+      _showSmartSizes(false),
+      // **************** NanaZip Modification End ****************
       _timestampLevel(kTimestampPrintLevel_MIN),
 
       _thereAreDeletedItems(false),

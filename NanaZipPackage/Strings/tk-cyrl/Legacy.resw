@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Uly hakyda sahypasyny u&amp;lan</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Faýlyň ölçegini KB/MB/GB görnüşinde görkez</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip Hakynda</value>
   </data>

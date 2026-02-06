@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Uporabi &amp;velike pomnilniške strani</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Pokaži velikost datoteke v KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Vizitka</value>
   </data>

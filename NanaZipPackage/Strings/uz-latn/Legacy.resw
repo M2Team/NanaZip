@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;Katta hajmli xotiradan foydalanmoq</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Fayl o'lchamini KB/MB/GB ko'rinishida ko'rsatish</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip dasturi haqida</value>
   </data>

@@ -17,6 +17,8 @@
 #include "Panel.h"
 #include "FormatUtils.h"
 
+#include <Mile.Helpers.CppBase.h>
+
 using namespace NWindows;
 
 /* Unicode characters for space:
@@ -91,6 +93,38 @@ UString ConvertSizeToString(UInt64 value)
   ConvertSizeToString(value, s);
   return s;
 }
+
+// **************** NanaZip Modification Start ****************
+static void ConvertSizeToSmartString(UInt64 val, wchar_t *s, size_t cchTextMax) throw()
+{
+  static const wchar_t *kUnits[] = { L"B", L"KB", L"MB", L"GB", L"TB", L"PB", L"EB" };
+
+  if (cchTextMax == 0)
+    return;
+
+  int unitIndex = 0;
+  double size = (double)val;
+  while (size >= 1024.0 && unitIndex < 6)
+  {
+    size /= 1024.0;
+    unitIndex++;
+  }
+
+  std::wstring text;
+  if (unitIndex == 0)
+    text = Mile::FormatWideString(L"%llu %ls", (unsigned long long)val, kUnits[unitIndex]);
+  else
+    text = Mile::FormatWideString(L"%.2f %ls", size, kUnits[unitIndex]);
+
+  if (text.empty())
+  {
+    ConvertSizeToString(val, s);
+    return;
+  }
+
+  ::wcsncpy_s(s, cchTextMax, text.c_str(), _TRUNCATE);
+}
+// **************** NanaZip Modification End ****************
 
 static inline unsigned GetHex_Upper(unsigned v)
 {
@@ -513,7 +547,13 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
   {
     UInt64 v = 0;
     ConvertPropVariantToUInt64(prop, v);
-    ConvertSizeToString(v, text);
+    // **************** NanaZip Modification Start ****************
+    if (_showSmartSizes)
+      ::ConvertSizeToSmartString(v, text, (size_t)item.cchTextMax);
+    else
+      ::ConvertSizeToString(v, text);
+    //ConvertSizeToString(v, text);
+    // **************** NanaZip Modification End ****************
   }
   else if (prop.vt == VT_BSTR)
   {

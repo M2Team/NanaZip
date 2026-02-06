@@ -642,6 +642,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Käytä &amp;suuria muistisivuja</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Näytä tiedoston koko KB/MB/GB-muodossa</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Tietoja</value>
   </data>

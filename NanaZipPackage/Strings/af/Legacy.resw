@@ -456,6 +456,9 @@
   <data name="Resource2505" xml:space="preserve">
     <value>Wys &amp;roosterlyne</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Wys lêergrootte in KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Aangaande NanaZip</value>
   </data>

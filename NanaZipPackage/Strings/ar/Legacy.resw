@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>استعمال &amp;صفحات ذاكرة كبيرة</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>إظهار حجم الملف بوحدات KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>حول البرنامج</value>
   </data>

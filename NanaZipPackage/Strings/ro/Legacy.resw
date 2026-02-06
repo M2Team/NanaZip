@@ -522,6 +522,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Utilizează pagini &amp;mari de memorie</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Afișează dimensiunea fișierului în KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Despre NanaZip</value>
   </data>

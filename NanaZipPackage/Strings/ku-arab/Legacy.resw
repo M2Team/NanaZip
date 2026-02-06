@@ -522,6 +522,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>پەڕەی بیرگەی &amp;گەورە بەکارببە</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>قەبارەی پەڕگە بە KB/MB/GB پیشان بدە</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip دەربارەی</value>
   </data>

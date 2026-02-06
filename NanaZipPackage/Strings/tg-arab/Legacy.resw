@@ -627,6 +627,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Саҳифаҳои ҳофизаи калонро истифода бурдан</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Андозаи файлро дар KB/MB/GB нишон диҳед</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Дар бораи NanaZip</value>
   </data>

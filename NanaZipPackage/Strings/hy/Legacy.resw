@@ -627,6 +627,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Օգտագործել հիշողության մեծ ծավալներ</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Ցուցադրել ֆայլի չափը KB/MB/GB-ով</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip-ի մասին</value>
   </data>

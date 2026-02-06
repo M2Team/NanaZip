@@ -456,6 +456,9 @@
   <data name="Resource2505" xml:space="preserve">
     <value>Прикажи &amp;мрежа</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Прикажи големина на датотека во KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>За NanaZip</value>
   </data>

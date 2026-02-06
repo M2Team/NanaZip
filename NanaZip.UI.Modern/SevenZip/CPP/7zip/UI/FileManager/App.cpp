@@ -105,6 +105,9 @@ void CApp::SetListSettings()
   {
     CPanel &panel = Panels[i];
     panel._mySelectMode = st.AlternativeSelection;
+    // **************** NanaZip Modification Start ****************
+    panel._showSmartSizes = st.ShowSmartSizes;
+    // **************** NanaZip Modification End ****************
     panel._showDots = st.ShowDots;
     panel._showRealFileIcons = st.ShowRealFileIcons;
     panel._exStyle = extendedStyle;

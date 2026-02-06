@@ -30,6 +30,9 @@ struct CFmSettings
   bool CopyHistory;
   bool FolderHistory;
   bool LowercaseHashes;
+  // **************** NanaZip Modification Start **************** 
+  bool ShowSmartSizes;
+  // **************** NanaZip Modification End ****************
   // bool Underline;
 
   bool ShowSystemMenu;

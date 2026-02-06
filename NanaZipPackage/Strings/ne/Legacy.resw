@@ -471,6 +471,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>ठूलो स्मृति पृष्ठ प्रयोग गर्नुहोस्</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>फाइल आकार KB/MB/GB मा देखाउनुहोस्</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>7-जिपका बारेमा</value>
   </data>

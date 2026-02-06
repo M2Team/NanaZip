@@ -471,6 +471,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>বেশি স্মৃতির ব্যবহার</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ফাইলের আকার KB/MB/GB-এ দেখান</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip সম্পর্কে</value>
   </data>

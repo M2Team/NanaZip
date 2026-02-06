@@ -441,6 +441,9 @@
   <data name="Resource2503" xml:space="preserve">
     <value>மண்டல பட்டியலைக் காட்டு</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>கோப்பு அளவை KB/MB/GB-ல் காட்டு</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>7-ஜிப்பைப் பற்றி</value>
   </data>

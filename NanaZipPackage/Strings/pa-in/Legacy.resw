@@ -498,6 +498,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>ਵੱਡੇ ਮੈਮੋਰੀ ਪੇਜ ਵਰਤੋ (&amp;l)</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ਫਾਇਲ ਆਕਾਰ KB/MB/GB ਵਿੱਚ ਦਿਖਾਓ</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>7-ਜ਼ਿੱਪ ਬਾਰੇ</value>
   </data>

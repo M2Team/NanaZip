@@ -663,6 +663,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Use Hashes Minúsculos</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Mostrar tamanho do arquivo em KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Sobre o NanaZip</value>
   </data>

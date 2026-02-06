@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Naudoti didžiu&amp;lius atmintinės puslapius</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Rodyti failo dydį KB/MB/GB formatu</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Apie NanaZip</value>
   </data>

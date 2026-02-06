@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;დიდი მეხსიერების ბლოკების გამოყენება</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ფაილის ზომის ჩვენება KB/MB/GB-ში</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip-ის შესახებ</value>
   </data>

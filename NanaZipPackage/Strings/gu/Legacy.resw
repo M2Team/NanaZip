@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;મોટા સ્મૃતિ પૃષ્ઠનો પ્રયોગ કરો</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ફાઇલનું કદ KB/MB/GB માં બતાવો</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>7-જિપ ના વિશે</value>
   </data>

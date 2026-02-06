@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Жадтың үлкен беттерін пайдалану</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Файл өлшемін KB/MB/GB түрінде көрсету</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip туралы</value>
   </data>

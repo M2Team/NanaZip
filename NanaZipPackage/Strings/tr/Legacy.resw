@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Büyük Be&amp;llek Sayfaları Kullanılsın</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Dosya boyutunu KB/MB/GB olarak göster</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip Hakkında</value>
   </data>

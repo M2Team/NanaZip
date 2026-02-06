@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Kasuta &amp;suuri mälulehekülgi</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Kuva faili suurus KB/MB/GB kujul</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Teave NanaZipi kohta</value>
   </data>

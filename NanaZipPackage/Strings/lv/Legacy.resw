@@ -456,6 +456,9 @@
   <data name="Resource2505" xml:space="preserve">
     <value>Parādīt at&amp;dalošās līnijas</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Rādīt faila lielumu KB/MB/GB formātā</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Par NanaZip</value>
   </data>

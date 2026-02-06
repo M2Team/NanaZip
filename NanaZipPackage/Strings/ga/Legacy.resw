@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Bain feidhm as leathanaigh chuimhne mhóra</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Taispeáin méid comhaid i KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Maidir le NanaZip</value>
   </data>

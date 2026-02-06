@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Користи велике меморијске блокове</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Прикажи величину датотеке у KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>О програму</value>
   </data>

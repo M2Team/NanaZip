@@ -642,6 +642,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Usar memoria &amp;longa de páxinas</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Mostrar o tamaño do ficheiro en KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Acerca de NanaZip</value>
   </data>

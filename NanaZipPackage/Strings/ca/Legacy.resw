@@ -642,6 +642,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Utilitza pàgines de memòria &amp;grans</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Mostra la mida del fitxer en KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Quant al NanaZip</value>
   </data>

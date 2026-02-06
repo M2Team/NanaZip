@@ -34,6 +34,9 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_WANT_COPY_HISTORY,
   IDX_SETTINGS_WANT_FOLDER_HISTORY,
   IDX_SETTINGS_LOWERCASE_HASHES,
+  // **************** NanaZip Modification Start **************** 
+  IDX_SETTINGS_SHOW_SMART_SIZES,
+  // **************** NanaZip Modification End ****************
   // , IDT_COMPRESS_MEMORY
 };
 
@@ -139,6 +142,9 @@ bool CSettingsPage::OnInit()
   CheckButton(IDX_SETTINGS_WANT_COPY_HISTORY, st.CopyHistory);
   CheckButton(IDX_SETTINGS_WANT_FOLDER_HISTORY, st.FolderHistory);
   CheckButton(IDX_SETTINGS_LOWERCASE_HASHES, st.LowercaseHashes);
+  // **************** NanaZip Modification Start **************** 
+  CheckButton(IDX_SETTINGS_SHOW_SMART_SIZES, st.ShowSmartSizes);
+  // **************** NanaZip Modification End ****************
 
   /*
   NCompression::CMemUse mu;
@@ -224,6 +230,9 @@ LONG CSettingsPage::OnApply()
     st.CopyHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_COPY_HISTORY);
     st.FolderHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_FOLDER_HISTORY);
     st.LowercaseHashes = IsButtonCheckedBool(IDX_SETTINGS_LOWERCASE_HASHES);
+    // **************** NanaZip Modification Start **************** 
+    st.ShowSmartSizes = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SMART_SIZES);
+    // **************** NanaZip Modification End ****************
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
 
     st.ShowSystemMenu = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SYSTEM_MENU);
@@ -346,6 +355,9 @@ bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SETTINGS_WANT_COPY_HISTORY:
     case IDX_SETTINGS_WANT_FOLDER_HISTORY:
     case IDX_SETTINGS_LOWERCASE_HASHES:
+    // **************** NanaZip Modification Start **************** 
+    case IDX_SETTINGS_SHOW_SMART_SIZES:
+    // **************** NanaZip Modification End ****************
       _wasChanged = true;
       break;
 

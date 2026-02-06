@@ -666,6 +666,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Használjon kisbetűs kivonatot</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Fájlméret megjelenítése KB/MB/GB egységben</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>A NanaZip névjegye</value>
   </data>

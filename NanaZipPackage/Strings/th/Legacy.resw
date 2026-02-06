@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>ใช้ &amp;เพจความจำขนาดใหญ่</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>แสดงขนาดไฟล์เป็น KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>เกี่ยวกับ NanaZip</value>
   </data>

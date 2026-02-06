@@ -627,6 +627,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Зур &amp;хәтер битләрен кулланырга</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Файл зурлыгын KB/MB/GB белән күрсәт</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip программасы турында</value>
   </data>

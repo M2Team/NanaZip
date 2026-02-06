@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Sử dụng bộ nhớ lớn</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Hiển thị kích thước tệp theo KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Về NanaZip</value>
   </data>

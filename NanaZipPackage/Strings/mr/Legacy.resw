@@ -468,6 +468,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>मोठे स्मरणशक्ती पृष्ठ वापरा</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>फाइलचा आकार KB/MB/GB मध्ये दाखवा</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip बद्दल माहिती</value>
   </data>

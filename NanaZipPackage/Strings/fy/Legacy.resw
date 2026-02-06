@@ -498,6 +498,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>Brûk &amp;grut ûnthâld siden</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Triemgrutte yn KB/MB/GB sjen litte</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip it hoe en het</value>
   </data>

@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;විශාල මතක පිටු භාවිතා කරන්න</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ගොනු ප්‍රමාණය KB/MB/GB ලෙස පෙන්වන්න</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip පිළිබඳව</value>
   </data>

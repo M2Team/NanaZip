@@ -462,6 +462,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;Том санах ойн хуудас хэрэглэх</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Файлын хэмжээг KB/MB/GB-ээр харуулах</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip-ийн тухай</value>
   </data>

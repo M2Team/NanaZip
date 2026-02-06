@@ -663,6 +663,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Përdor hash-et me shkronja të vogla</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Shfaq madhësinë e skedarit në KB/MB/GB</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Rreth NanaZip</value>
   </data>

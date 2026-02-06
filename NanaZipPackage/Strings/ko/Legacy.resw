@@ -648,6 +648,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>큰 메모리 페이지 사용</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>파일 크기를 KB/MB/GB로 표시</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip 정보</value>
   </data>

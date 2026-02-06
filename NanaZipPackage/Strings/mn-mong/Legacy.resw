@@ -549,6 +549,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>ᠶᠡᠬᠡ ᠷᠠᠮ  ᠤᠨ ᠨᠢᠭᠤᠷ  ᠢ ᠬᠡᠷᠡᠭᠯᠡᠬᠦ (&amp;L)</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ᠹᠠᠶᠢᠯ ᠤᠨ ᠬᠡᠮᠵᠢᠶ᠎ᠡ ᠶᠢ KB/MB/GB-ᠡᠷ ᠬᠠᠷᠠᠭᠤᠯᠠᠬᠤ</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip  ᠶᠢᠨ ᠲᠤᠬᠠᠢ</value>
   </data>

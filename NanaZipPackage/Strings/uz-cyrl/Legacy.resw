@@ -639,6 +639,9 @@
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;Катта ҳажмли хотирадан фойдаланмоқ</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Файл ўлчамини KB/MB/GB кўринишида кўрсатиш</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip дастури ҳақида</value>
   </data>
