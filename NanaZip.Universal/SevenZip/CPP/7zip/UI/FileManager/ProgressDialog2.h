@@ -263,6 +263,22 @@ public:
     _dialogCreatedEvent.Lock();
   }
 
+  // **************** NanaZip Modification Start ****************
+  bool m_FirstRun = true;
+  void ModernPause();
+  void ModernUpdateStatus();
+  bool ModernExternalCloseMessage();
+  bool ModernCancel();
+  bool ModernMessageRouter(UINT message, WPARAM wParam, LPARAM lParam);
+  static LRESULT CALLBACK ModernWindowHandler(
+      _In_ HWND hWnd,
+      _In_ UINT uMsg,
+      _In_ WPARAM wParam,
+      _In_ LPARAM lParam,
+      _In_ UINT_PTR uIdSubclass,
+      _In_ DWORD_PTR dwRefData);
+  // **************** NanaZip Modification End ****************
+
   INT_PTR Create(const UString &title, NWindows::CThread &thread, HWND wndParent = NULL);
 
 

@@ -20,6 +20,11 @@
 #include "ProgressDialog2.h"
 #include "ProgressDialog2Res.h"
 
+// **************** NanaZip Modification Start ****************
+#include <NanaZip.Modern.h>
+#include <string>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 
 extern HINSTANCE g_hInstance;
@@ -958,6 +963,305 @@ struct CWaitCursor
   }
 };
 
+// **************** NanaZip Modification Start ****************
+void CProgressDialog::ModernPause()
+{
+    bool Paused = !this->Sync.Get_Paused();
+    this->Sync.Set_Paused(Paused);
+    ::K7ModernSetProgressWindowPausedMode(this->_window, Paused);
+}
+
+void CProgressDialog::ModernUpdateStatus()
+{
+    K7_PROGRESS_WINDOW_STATUS Status = {};
+    std::wstring Title = std::wstring(
+        this->_title.Ptr(),
+        this->_title.Len());
+    std::wstring FilePath;
+    std::wstring StatusMessage;
+    {
+        NSynchronization::CCriticalSectionLock Lock(this->Sync._cs);
+        Status.BytesProgressMode = !this->Sync._filesProgressMode;
+        Status.CompressionMode = this->CompressingMode;
+        Status.HaveError = !this->Sync.Messages.IsEmpty();
+        {
+            if (!this->Sync._titleFileName.IsEmpty())
+            {
+                Title.push_back(L' ');
+                Title.append(std::wstring(
+                    this->Sync._titleFileName.Ptr(),
+                    this->Sync._titleFileName.Len()));
+            }
+
+            Status.Title = Title.c_str();
+        }
+        {
+            FilePath = std::wstring(
+                this->Sync._filePath.Ptr(),
+                this->Sync._filePath.Len());
+            Status.FilePath = FilePath.c_str();
+        }
+        Status.TotalSize = this->Sync._totalBytes;
+        Status.ProcessedSize = this->Sync._completedBytes;
+        Status.TotalFiles = this->Sync._totalFiles;
+        Status.ProcessedFiles = this->Sync._curFiles;
+        Status.InputSize = this->Sync._inSize;
+        Status.OutputSize = this->Sync._outSize;
+        {
+            StatusMessage = std::wstring(
+                this->Sync._status.Ptr(),
+                this->Sync._status.Len());
+            Status.Status = StatusMessage.c_str();
+        }
+    }
+    ::K7ModernUpdateProgressWindowStatus(this->_window, &Status);
+}
+
+bool CProgressDialog::ModernExternalCloseMessage()
+{
+    this->ModernUpdateStatus();
+
+    this->ProcessWasFinished_GuiVirt();
+
+    bool HaveMessages = false;
+    CProgressFinalMessage FinalMessage = {};
+    {
+        NSynchronization::CCriticalSectionLock Lock(this->Sync._cs);
+        HaveMessages = !Sync.Messages.IsEmpty();
+        FinalMessage = Sync.FinalMessage;
+    }
+
+    bool ShowMessages = HaveMessages;
+
+    std::wstring Title;
+    std::wstring Content;
+
+    if (!FinalMessage.ErrorMessage.Message.IsEmpty())
+    {
+        this->MessagesDisplayed = true;
+
+        ShowMessages = true;
+        Title = std::wstring(
+            FinalMessage.ErrorMessage.Title.Ptr(),
+            FinalMessage.ErrorMessage.Title.Len());
+        Content = std::wstring(
+            FinalMessage.ErrorMessage.Message.Ptr(),
+            FinalMessage.ErrorMessage.Message.Len());
+    }
+    else if (!HaveMessages)
+    {
+        this->MessagesDisplayed = true;
+
+        if (!FinalMessage.OkMessage.Message.IsEmpty())
+        {
+            ShowMessages = true;
+            Title = std::wstring(
+                FinalMessage.OkMessage.Title.Ptr(),
+                FinalMessage.OkMessage.Title.Len());
+            Content = std::wstring(
+                FinalMessage.OkMessage.Message.Ptr(),
+                FinalMessage.OkMessage.Message.Len());
+        }
+    }
+
+    if (ShowMessages && !this->_cancelWasPressed)
+    {
+        this->_waitCloseByCancelButton = true;
+        if (HaveMessages)
+        {
+            NSynchronization::CCriticalSectionLock Lock(this->Sync._cs);
+            for (unsigned i = 0; i < this->Sync.Messages.Size(); ++i)
+            {
+                if (!Content.empty())
+                {
+                    Content.append(L"--------------------------------\r\n");
+                }
+                Content.append(this->Sync.Messages[i]);
+                Content.append(L"\r\n");
+            }
+        }
+
+        if (Title.empty())
+        {
+            Title = std::wstring(this->_title.Ptr(), this->_title.Len());
+            if (Title.empty())
+            {
+                Title = L"NanaZip";
+            }
+        }
+
+        ::K7ModernShowInformationDialog(
+            *this,
+            Title.c_str(),
+            Content.c_str());
+        this->MessagesDisplayed = true;
+        this->Destroy();
+        return true;
+    }
+
+    this->Destroy();
+
+    return true;
+}
+
+bool CProgressDialog::ModernCancel()
+{
+    if (this->_waitCloseByCancelButton)
+    {
+        this->MessagesDisplayed = true;
+        this->Destroy();
+        return false;
+    }
+
+    if (this->_cancelWasPressed)
+        return true;
+
+    bool PreviousPaused = this->Sync.Get_Paused();
+
+    if (!PreviousPaused)
+    {
+        this->ModernPause();
+    }
+
+    this->_inCancelMessageBox = true;
+    const int res = ::MessageBoxW(
+        *this,
+        ::LangString(IDS_PROGRESS_ASK_CANCEL),
+        this->_title,
+        MB_YESNOCANCEL);
+    this->_inCancelMessageBox = false;
+    if (res == IDYES)
+        this->_cancelWasPressed = true;
+
+    if (!PreviousPaused)
+    {
+        this->ModernPause();
+    }
+
+    if (this->_externalCloseMessageWasReceived)
+    {
+        /* we have received kCloseMessage while we were in MessageBoxW().
+           so we call OnExternalCloseMessage() here.
+           it can show MessageBox and it can close dialog */
+        this->ModernExternalCloseMessage();
+        return true;
+    }
+
+    if (!this->_cancelWasPressed)
+        return true;
+
+    this->MessagesDisplayed = true;
+    // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
+    this->Sync.Set_Stopped(true);
+
+    return false;
+}
+
+bool CProgressDialog::ModernMessageRouter(UINT message, WPARAM wParam, LPARAM lParam)
+{
+    UNREFERENCED_PARAMETER(lParam);
+    switch (message)
+    {
+    case WM_COMMAND:
+    {
+        int Code = HIWORD(wParam);
+        int ItemID = LOWORD(wParam);
+        if (BN_CLICKED == Code)
+        {
+            if (IDCANCEL == ItemID)
+            {
+                if (this->ModernCancel())
+                {
+                    return true;
+                }
+            }
+            else if (K7_PROGRESS_WINDOW_COMMAND_PAUSE == ItemID)
+            {
+                this->ModernPause();
+                return true;
+            }
+        }
+        return false;
+    }
+    case WM_TIMER:
+    {
+        if (this->Sync.Get_Paused())
+        {
+            return true;
+        }
+        this->CheckNeedClose();
+        this->ModernUpdateStatus();
+        return true;
+    }
+    case kCloseMessage:
+    {
+        if (this->_timer)
+        {
+            /* 21.03 : KillTimer(kTimerID) instead of KillTimer(_timer).
+               But (_timer == kTimerID) in Win10. So it worked too */
+            this->KillTimer(kTimerID);
+            this->_timer = 0;
+        }
+        if (this->_inCancelMessageBox)
+        {
+            /* if user is in MessageBox(), we will call OnExternalCloseMessage()
+               later, when MessageBox() will be closed */
+            this->_externalCloseMessageWasReceived = true;
+            break;
+        }
+        return this->ModernExternalCloseMessage();
+    }
+    case WM_CLOSE:
+    {
+        if (this->ModernCancel())
+        {
+            return true;
+        }
+        return false;
+    }
+    default:
+        break;
+    }
+    return false;
+}
+
+LRESULT CALLBACK CProgressDialog::ModernWindowHandler(
+    _In_ HWND hWnd,
+    _In_ UINT uMsg,
+    _In_ WPARAM wParam,
+    _In_ LPARAM lParam,
+    _In_ UINT_PTR uIdSubclass,
+    _In_ DWORD_PTR dwRefData)
+{
+    UNREFERENCED_PARAMETER(uIdSubclass);
+
+    CProgressDialog* Instance =
+        reinterpret_cast<CProgressDialog*>(dwRefData);
+    if (Instance)
+    {
+        if (Instance->m_FirstRun)
+        {
+            Instance->m_FirstRun = false;
+            Instance->_window = hWnd;
+            Instance->_wasCreated = true;
+            Instance->_dialogCreatedEvent.Set();
+            Instance->_timer = Instance->SetTimer(kTimerID, kTimerElapse);
+            Instance->CheckNeedClose();
+        }
+        if (Instance->ModernMessageRouter(uMsg, wParam, lParam))
+        {
+            return 0;
+        }
+    }
+
+    return ::DefSubclassProc(
+        hWnd,
+        uMsg,
+        wParam,
+        lParam);
+}
+// **************** NanaZip Modification End ****************
+
 INT_PTR CProgressDialog::Create(const UString &title, NWindows::CThread &thread, HWND wndParent)
 {
   INT_PTR res = 0;
@@ -973,8 +1277,26 @@ INT_PTR CProgressDialog::Create(const UString &title, NWindows::CThread &thread,
         return 0;
     }
     _title = title;
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     BIG_DIALOG_SIZE(360, 192);
     res = CModalDialog::Create(SIZED_DIALOG(IDD_PROGRESS), wndParent);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    if (::K7ModernAvailable())
+    {
+        res = ::K7ModernShowProgressWindow(
+            wndParent,
+            this->_title.Ptr(),
+            this->ShowCompressionInfo,
+            CProgressDialog::ModernWindowHandler,
+            this);
+    }
+    else
+    {
+        BIG_DIALOG_SIZE(360, 192);
+        res = CModalDialog::Create(SIZED_DIALOG(IDD_PROGRESS), wndParent);
+    }
+    // **************** NanaZip Modification End ****************
   }
   catch(...)
   {
