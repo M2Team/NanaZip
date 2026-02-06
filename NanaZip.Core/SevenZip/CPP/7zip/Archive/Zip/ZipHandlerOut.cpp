@@ -16,7 +16,9 @@
 #include "../../Crypto/WzAes.h"
 
 #include "../Common/ItemNameUtils.h"
-#include "../Common/ParseProperties.h"
+// **************** NanaZip Modification Start **************** 
+// #include "../Common/ParseProperties.h"
+// **************** NanaZip Modification End ****************
 
 #include "ZipHandler.h"
 #include "ZipUpdate.h"

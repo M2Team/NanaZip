@@ -12,7 +12,9 @@
 #include "../../Common/StreamObjects.h"
 
 #include "7zEncode.h"
-#include "7zSpecStream.h"
+// **************** NanaZip Modification Start **************** 
+// #include "7zSpecStream.h"
+// **************** NanaZip Modification End ****************
 
 namespace NArchive {
 namespace N7z {

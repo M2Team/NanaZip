@@ -7,7 +7,9 @@
 #include "../../../Common/Wildcard.h"
 
 #include "../Common/ItemNameUtils.h"
-#include "../Common/ParseProperties.h"
+// **************** NanaZip Modification Start **************** 
+// #include "../Common/ParseProperties.h"
+// **************** NanaZip Modification End ****************
 
 #include "7zHandler.h"
 #include "7zOut.h"

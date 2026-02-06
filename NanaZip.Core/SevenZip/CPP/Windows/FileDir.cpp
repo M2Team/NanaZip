@@ -15,7 +15,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "../Common/C_FileIO.h"
+// **************** NanaZip Modification Start **************** 
+// #include "../Common/C_FileIO.h"
+// **************** NanaZip Modification End ****************
 #include "../Common/MyBuffer2.h"
 #include "../Common/StringConvert.h"
 #endif

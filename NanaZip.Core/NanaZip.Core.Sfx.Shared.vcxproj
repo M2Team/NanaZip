@@ -79,7 +79,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\MyAes.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
@@ -100,7 +99,6 @@
     <ClCompile Include="SevenZip\C\Bcj2.c" />
     <ClCompile Include="SevenZip\C\Bra.c" />
     <ClCompile Include="SevenZip\C\Bra86.c" />
-    <ClCompile Include="SevenZip\C\BraIA64.c" />
     <ClCompile Include="SevenZip\C\CpuArch.c" />
     <ClCompile Include="SevenZip\C\Delta.c" />
     <ClCompile Include="SevenZip\C\Lzma2Dec.c" />

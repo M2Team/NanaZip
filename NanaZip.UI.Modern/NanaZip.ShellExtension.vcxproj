@@ -51,7 +51,6 @@
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Lang.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Random.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
@@ -81,7 +80,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\Common\ZipRegistry.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\Explorer\MyMessages.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\Explorer\StdAfx.cpp" />
@@ -130,7 +128,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\FormatUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyMessages.h" />

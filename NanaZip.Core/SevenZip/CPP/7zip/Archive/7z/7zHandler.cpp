@@ -18,7 +18,9 @@
 
 #ifdef Z7_7Z_SET_PROPERTIES
 #ifdef Z7_EXTRACT_ONLY
-#include "../Common/ParseProperties.h"
+// **************** NanaZip Modification Start **************** 
+// #include "../Common/ParseProperties.h"
+// **************** NanaZip Modification End ****************
 #endif
 #endif
 

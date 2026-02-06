@@ -229,7 +229,6 @@
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\ListFileUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StdInStream.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StdOutStream.cpp" />
