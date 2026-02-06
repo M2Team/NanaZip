@@ -18,6 +18,7 @@
 
 // **************** NanaZip Modification Start ****************
 #include <NanaZip.Modern.h>
+#include <string>
 // **************** NanaZip Modification End ****************
 using namespace NWindows;
 
@@ -433,11 +434,7 @@ bool CProgressDialog::OnInit()
 
   return CModalDialog::OnInit();
 }
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-// **************** NanaZip Modification End ****************
 
-// **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static const UINT kIDs[] =
 {
   IDT_PROGRESS_ELAPSED,   IDT_PROGRESS_ELAPSED_VAL,
@@ -983,6 +980,8 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
           this->_titleFileName.Len()));
   }
 
+  showAll;
+
   K7_PROGRESS_WINDOW_STATUS Status;
   Status.BytesProgressMode = bytesProgressMode;
   Status.CompressionMode = CompressingMode;
@@ -1000,30 +999,6 @@ void CProgressDialog::UpdateStatInfo(bool showAll)
       this->_window,
       &Status);
 
-  UInt32 curTime = ::GetTickCount();
-
-  _elapsedTime += (curTime - _prevTime);
-  _prevTime = curTime;
-  UInt64 elapsedSec = _elapsedTime / 1000;
-  bool elapsedChanged = false;
-  if (elapsedSec != _prevElapsedSec)
-  {
-    _prevElapsedSec = elapsedSec;
-    elapsedChanged = true;
-  }
-
-  if (elapsedChanged || showAll)
-  {
-    if (numErrors > _numPostedMessages)
-    {
-      UpdateMessagesDialog();
-      if (!_errorsWereDisplayed)
-      {
-        _errorsWereDisplayed = true;
-      }
-    }
-
-  }
 }
 // **************** NanaZip Modification End ****************
 
@@ -1128,31 +1103,69 @@ INT_PTR CProgressDialog::Create(const UString &title, NWindows::CThread &thread,
   return res;
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CProgressDialog::OnExternalCloseMessage()
 {
   // it doesn't work if there is MessageBox.
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   #ifdef __ITaskbarList3_INTERFACE_DEFINED__
   SetTaskbarProgressState(TBPF_NOPROGRESS);
   #endif
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  // **************** NanaZip Modification End ****************
   // AddToTitle(L"Finished ");
   // SetText(L"Finished2 ");
 
   UpdateStatInfo(true);
 
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   SetItemText(IDCANCEL, LangString(IDS_CLOSE));
   ::SendMessage(GetItem(IDCANCEL), BM_SETSTYLE, BS_DEFPUSHBUTTON, MAKELPARAM(TRUE, 0));
   HideItem(IDB_PROGRESS_BACKGROUND);
   HideItem(IDB_PAUSE);
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  // **************** NanaZip Modification End ****************
 
   ProcessWasFinished_GuiVirt();
+
+  bool thereAreMessages;
+  CProgressFinalMessage fm;
+  {
+    NSynchronization::CCriticalSectionLock lock(Sync._cs);
+    thereAreMessages = !Sync.Messages.IsEmpty();
+    fm = Sync.FinalMessage;
+  }
+
+  if (!fm.ErrorMessage.Message.IsEmpty())
+  {
+    MessagesDisplayed = true;
+    if (fm.ErrorMessage.Title.IsEmpty())
+      fm.ErrorMessage.Title = "NanaZip";
+    MessageBoxW(*this, fm.ErrorMessage.Message, fm.ErrorMessage.Title, MB_ICONERROR);
+  }
+  else if (!thereAreMessages)
+  {
+    MessagesDisplayed = true;
+
+    if (!fm.OkMessage.Message.IsEmpty())
+    {
+      if (fm.OkMessage.Title.IsEmpty())
+        fm.OkMessage.Title = "NanaZip";
+      MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK);
+    }
+  }
+
+  if (thereAreMessages && !_cancelWasPressed)
+  {
+    _waitCloseByCancelButton = true;
+    UpdateMessagesDialog();
+    return true;
+  }
+
+  End(0);
+  return true;
+}
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+bool CProgressDialog::OnExternalCloseMessage()
+{
+  this->UpdateStatInfo(true);
+
+  this->ProcessWasFinished_GuiVirt();
 
   bool thereAreMessages;
   CProgressFinalMessage fm;
@@ -1166,20 +1179,20 @@ bool CProgressDialog::OnExternalCloseMessage()
   bool needToShowMessages = thereAreMessages;
   // **************** NanaZip Modification End ****************
 
+  std::wstring Title;
+  std::wstring Content;
+
   if (!fm.ErrorMessage.Message.IsEmpty())
   {
     MessagesDisplayed = true;
-    // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
-    if (fm.ErrorMessage.Title.IsEmpty())
-      fm.ErrorMessage.Title = "NanaZip";
-    MessageBoxW(*this, fm.ErrorMessage.Message, fm.ErrorMessage.Title, MB_ICONERROR);
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+
     needToShowMessages = true;
-    this->m_ResultString = std::wstring(
+    Title = std::wstring(
+        fm.ErrorMessage.Title.Ptr(),
+        fm.ErrorMessage.Title.Len());
+    Content = std::wstring(
         fm.ErrorMessage.Message.Ptr(),
         fm.ErrorMessage.Message.Len());
-    // **************** NanaZip Modification End ****************
   }
   else if (!thereAreMessages)
   {
@@ -1187,51 +1200,56 @@ bool CProgressDialog::OnExternalCloseMessage()
 
     if (!fm.OkMessage.Message.IsEmpty())
     {
-      // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
-      if (fm.OkMessage.Title.IsEmpty())
-        fm.OkMessage.Title = "NanaZip";
-      MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK);
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
       needToShowMessages = true;
-      this->m_ResultString = std::wstring(
+      Title = std::wstring(
+          fm.OkMessage.Title.Ptr(),
+          fm.OkMessage.Title.Len());
+      Content = std::wstring(
           fm.OkMessage.Message.Ptr(),
           fm.OkMessage.Message.Len());
-      // **************** NanaZip Modification End ****************
     }
   }
 
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
-  if (thereAreMessages && !_cancelWasPressed)
-  {
-    _waitCloseByCancelButton = true;
-    UpdateMessagesDialog();
-    return true;
-  }
-
-  End(0);
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
   if (needToShowMessages && !_cancelWasPressed)
   {
     _waitCloseByCancelButton = true;
     if (thereAreMessages)
-      UpdateMessagesDialog();
+    {
+        NSynchronization::CCriticalSectionLock lock(this->Sync._cs);
+        for (unsigned i = 0; i < this->Sync.Messages.Size(); ++i)
+        {
+            if (!Content.empty())
+            {
+                Content.append(L"--------------------------------\r\n");
+            }
+            Content.append(this->Sync.Messages[i]);
+            Content.append(L"\r\n");
+        }
+    }
+
+    if (Title.empty())
+    {
+        Title = std::wstring(this->_title.Ptr(), this->_title.Len());
+        if (Title.empty())
+        {
+            Title = L"NanaZip";
+        }
+    }
 
     ::K7ModernShowInformationDialog(
-      *this,
-      this->_title.Ptr(),
-      this->m_ResultString.c_str());
+        *this,
+        Title.c_str(),
+        Content.c_str());
     MessagesDisplayed = true;
-    ::PostQuitMessage(0);
+    this->Destroy();
     return true;
   }
 
-  ::PostQuitMessage(0);
-  // **************** NanaZip Modification End ****************
+  this->Destroy();
 
   return true;
 }
+// **************** NanaZip Modification End ****************
 
 // **************** NanaZip Modification Start ****************
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
@@ -1271,49 +1289,53 @@ bool CProgressDialog::OnMessage(UINT message, WPARAM wParam, LPARAM lParam)
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
 bool CProgressDialog::OnCancelClickedModern()
 {
-    if (_waitCloseByCancelButton)
+    if (this->_waitCloseByCancelButton)
     {
-        MessagesDisplayed = true;
-        ::PostQuitMessage(IDCLOSE);
+        this->MessagesDisplayed = true;
+        this->Destroy();
         return false;
     }
 
-    if (_cancelWasPressed)
+    if (this->_cancelWasPressed)
         return true;
 
-    const bool paused = Sync.Get_Paused();
+    bool PreviousPaused = this->Sync.Get_Paused();
 
-    if (!paused)
+    if (!PreviousPaused)
     {
-        OnPauseButton();
+        this->OnPauseButton();
     }
 
-    _inCancelMessageBox = true;
-    const int res = ::MessageBoxW(*this, LangString(IDS_PROGRESS_ASK_CANCEL), _title, MB_YESNOCANCEL);
-    _inCancelMessageBox = false;
+    this->_inCancelMessageBox = true;
+    const int res = ::MessageBoxW(
+        *this,
+        ::K7ModernGetLegacyStringResource(IDS_PROGRESS_ASK_CANCEL),
+        this->_title,
+        MB_YESNOCANCEL);
+    this->_inCancelMessageBox = false;
     if (res == IDYES)
-        _cancelWasPressed = true;
+        this->_cancelWasPressed = true;
 
-    if (!paused)
+    if (!PreviousPaused)
     {
-        OnPauseButton();
+        this->OnPauseButton();
     }
 
-    if (_externalCloseMessageWasReceived)
+    if (this->_externalCloseMessageWasReceived)
     {
         /* we have received kCloseMessage while we were in MessageBoxW().
            so we call OnExternalCloseMessage() here.
            it can show MessageBox and it can close dialog */
-        OnExternalCloseMessage();
+        this->OnExternalCloseMessage();
         return true;
     }
 
-    if (!_cancelWasPressed)
+    if (!this->_cancelWasPressed)
         return true;
 
-    MessagesDisplayed = true;
+    this->MessagesDisplayed = true;
     // we will call Sync.Set_Stopped(true) in OnButtonClicked() : OnCancel()
-    Sync.Set_Stopped(true);
+    this->Sync.Set_Stopped(true);
 
     return false;
 }
@@ -1474,13 +1496,9 @@ void CProgressDialog::OnPriorityButton()
   #endif
   SetPriorityText();
 }
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-// **************** NanaZip Modification End ****************
 
 void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
 {
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   wchar_t sz[16];
   sz[0] = 0;
   if (needNumber)
@@ -1491,15 +1509,6 @@ void CProgressDialog::AddMessageDirect(LPCWSTR message, bool needNumber)
     _messageList.SetSubItem((int)itemIndex, 1, message);
     _messageStrings.Add(message);
   }
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  UNREFERENCED_PARAMETER(message);
-  if (needNumber && !this->m_ResultString.empty())
-  {
-      this->m_ResultString.append(L"------------------------\n");
-  }
-  this->m_ResultString.append(message);
-  this->m_ResultString.append(L"\n");
-  // **************** NanaZip Modification End ****************
 }
 
 void CProgressDialog::AddMessage(LPCWSTR message)
@@ -1555,8 +1564,6 @@ void CProgressDialog::UpdateMessagesDialog()
 }
 
 
-// **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CProgressDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
 {
   switch (buttonID)

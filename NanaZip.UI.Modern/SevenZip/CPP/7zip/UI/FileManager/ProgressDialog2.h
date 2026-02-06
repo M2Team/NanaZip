@@ -15,10 +15,6 @@
 
 #include "MyWindowsNew.h"
 
-// **************** NanaZip Modification Start ****************
-#include <string>
-// **************** NanaZip Modification End ****************
-
 struct CProgressMessageBoxPair
 {
   UString Title;
@@ -160,7 +156,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   NWindows::NControl::CListView _messageList;
   // **************** NanaZip Modification Start ****************
   bool m_FirstRun = true;
-  std::wstring m_ResultString;
   // **************** NanaZip Modification End ****************
   
   int _numMessages;
