@@ -158,9 +158,6 @@
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
@@ -405,9 +402,6 @@
       <Filter>SevenZip\CPP\7zip\UI\GUI</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.cpp">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.cpp">
@@ -896,9 +890,6 @@
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialogRes.h">
-      <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h">
       <Filter>SevenZip\CPP\7zip\UI\FileManager</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.h">

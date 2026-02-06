@@ -137,9 +137,6 @@
     <ClCompile Include="SevenZip\C\Bra86.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\C\BraIA64.c">
-      <Filter>SevenZip\C</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\C\CpuArch.c">
       <Filter>SevenZip\C</Filter>
     </ClCompile>
@@ -198,9 +195,6 @@
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp">
-      <Filter>SevenZip\CPP\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp">
@@ -428,13 +422,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\Common\InOutTempBuffer.cpp">
       <Filter>SevenZip\CPP\7zip\Common</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Common\LockedStream.cpp">
-      <Filter>SevenZip\CPP\7zip\Common</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Common\MemBlocks.cpp">
-      <Filter>SevenZip\CPP\7zip\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Common\MethodId.cpp">
       <Filter>SevenZip\CPP\7zip\Common</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Common\MethodProps.cpp">
@@ -587,9 +575,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\ZipStrong.cpp">
       <Filter>SevenZip\CPP\7zip\Crypto</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.cpp">
-      <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zEncode.cpp">
       <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
     </ClCompile>
@@ -606,9 +591,6 @@
       <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zProperties.cpp">
-      <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zSpecStream.cpp">
       <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zUpdate.cpp">
@@ -648,9 +630,6 @@
       <Filter>SevenZip\CPP\7zip\Archive\Common</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\OutStreamWithSha1.cpp">
-      <Filter>SevenZip\CPP\7zip\Archive\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\ParseProperties.cpp">
       <Filter>SevenZip\CPP\7zip\Archive\Common</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Iso\IsoHandler.cpp">
@@ -771,9 +750,6 @@
       <Filter>SevenZip\CPP\7zip\Archive</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\CramfsHandler.cpp">
-      <Filter>SevenZip\CPP\7zip\Archive</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\DeflateProps.cpp">
       <Filter>SevenZip\CPP\7zip\Archive</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\DmgHandler.cpp">
@@ -1680,9 +1656,6 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Zip\ZipUpdate.h">
       <Filter>SevenZip\CPP\7zip\Archive\Zip</Filter>
-    </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\Archive\DeflateProps.h">
-      <Filter>SevenZip\CPP\7zip\Archive</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\HandlerCont.h">
       <Filter>SevenZip\CPP\7zip\Archive</Filter>

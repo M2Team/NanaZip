@@ -101,7 +101,6 @@
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Lang.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Random.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
@@ -222,7 +221,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PanelSort.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PanelSplitFile.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\RegistryAssociations.cpp" />
@@ -397,7 +395,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PluginInterface.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PluginLoader.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\RegistryAssociations.h" />

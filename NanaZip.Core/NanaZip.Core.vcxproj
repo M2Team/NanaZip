@@ -79,7 +79,6 @@
     <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zEncode.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp" />
@@ -91,7 +90,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zOut.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zProperties.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zRegister.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zSpecStream.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zUpdate.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\ApfsHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\ApmHandler.cpp" />
@@ -118,10 +116,8 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\MultiStream.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\OutStreamWithSha1.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\Common\ParseProperties.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\CpioHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\CramfsHandler.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\DeflateProps.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\DllExports2.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\DmgHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\ElfHandler.cpp" />
@@ -195,9 +191,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\Common\InBuffer.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\InOutTempBuffer.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\LimitedStreams.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Common\LockedStream.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\MemBlocks.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Common\MethodId.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\MethodProps.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\OffsetStream.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\OutBuffer.cpp" />
@@ -281,7 +275,6 @@
     <ClCompile Include="SevenZip\CPP\Common\LzFindPrepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyMap.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyXml.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
@@ -310,7 +303,6 @@
     <ClCompile Include="SevenZip\C\Blake2s.c" />
     <ClCompile Include="SevenZip\C\Bra.c" />
     <ClCompile Include="SevenZip\C\Bra86.c" />
-    <ClCompile Include="SevenZip\C\BraIA64.c" />
     <ClCompile Include="SevenZip\C\BwtSort.c" />
     <ClCompile Include="SevenZip\C\CpuArch.c" />
     <ClCompile Include="SevenZip\C\Delta.c" />
@@ -387,7 +379,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\OutStreamWithSha1.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ParseProperties.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\StdAfx.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\Archive\DeflateProps.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\HandlerCont.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\HfsHandler.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\IArchive.h" />

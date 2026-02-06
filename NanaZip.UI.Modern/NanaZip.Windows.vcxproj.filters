@@ -183,9 +183,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OpenCallback.h">
       <Filter>SevenZip\FM Common</Filter>
     </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h">
-      <Filter>SevenZip\FM Common</Filter>
-    </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.h">
       <Filter>SevenZip\FM Common</Filter>
     </ClInclude>
@@ -528,9 +525,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OpenCallback.cpp">
       <Filter>SevenZip\FM Common</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp">
-      <Filter>SevenZip\FM Common</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp">
       <Filter>SevenZip\FM Common</Filter>
     </ClCompile>
@@ -637,9 +631,6 @@
       <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp">
-      <Filter>SevenZip\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp">
       <Filter>SevenZip\Common</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp">

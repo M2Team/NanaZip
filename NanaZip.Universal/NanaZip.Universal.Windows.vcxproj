@@ -149,7 +149,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialogRes.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialogRes.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2Res.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.h" />
@@ -300,7 +299,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OpenCallback.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PasswordDialog.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgramLocation.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ProgressDialog2.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\PropertyName.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\RegistryUtils.cpp" />
@@ -323,7 +321,6 @@
     <ClCompile Include="SevenZip\CPP\Common\Lang.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\ListFileUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
-    <ClCompile Include="SevenZip\CPP\Common\MyVector.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringToInt.cpp" />
