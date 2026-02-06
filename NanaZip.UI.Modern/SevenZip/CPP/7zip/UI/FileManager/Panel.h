@@ -436,6 +436,9 @@ public:
   // CUIntVector _realIndices;
   bool _enableItemChangeNotify;
   bool _mySelectMode;
+  // **************** NanaZip Modification Start ****************
+  bool _showSmartSizes;
+  // **************** NanaZip Modification End ****************
 
   int _timestampLevel;
 

@@ -666,6 +666,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>使用小写校验值</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>以 KB/MB/GB 显示文件大小</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>关于 NanaZip</value>
   </data>

@@ -44,6 +44,9 @@ static LPCTSTR const kCopyHistory = TEXT("WantCopyHistory");
 static LPCTSTR const kFolderHistory = TEXT("WantFolderHistory");
 static LPCTSTR const kLowercaseHashes = TEXT("LowercaseHashes");
 
+// **************** NanaZip Modification Start **************** 
+static LPCTSTR const kShowSmartSizes = TEXT("ShowSmartSizes");
+// **************** NanaZip Modification End ****************
 static LPCTSTR const kFlatViewName = TEXT("FlatViewArc");
 // static LPCTSTR const kShowDeletedFiles = TEXT("ShowDeleted");
 
@@ -152,6 +155,9 @@ void CFmSettings::Save() const
   SaveOption(kCopyHistory, CopyHistory);
   SaveOption(kFolderHistory, FolderHistory);
   SaveOption(kLowercaseHashes, LowercaseHashes);
+  // **************** NanaZip Modification Start **************** 
+  SaveOption(kShowSmartSizes, ShowSmartSizes);
+  // **************** NanaZip Modification End ****************
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
@@ -188,6 +194,9 @@ void CFmSettings::Load()
     ReadOption(key, kCopyHistory, CopyHistory);
     ReadOption(key, kFolderHistory, FolderHistory);
     ReadOption(key, kLowercaseHashes, LowercaseHashes);
+    // **************** NanaZip Modification Start **************** 
+    ReadOption(key, kShowSmartSizes, ShowSmartSizes);
+    // **************** NanaZip Modification End ****************
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );

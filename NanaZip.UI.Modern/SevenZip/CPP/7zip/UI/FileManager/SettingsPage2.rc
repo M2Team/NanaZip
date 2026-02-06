@@ -18,6 +18,7 @@ BEGIN
   CONTROL  "Want CopyHistory",   IDX_SETTINGS_WANT_COPY_HISTORY,      MY_CHECKBOX, m, 168, xc, 10
   CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 182, xc, 10
   CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 196, xc, 10
+  CONTROL  "Show file size in KB/MB/GB", IDX_SETTINGS_SHOW_SMART_SIZES, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, m, 210, xc, 10
   // **************** NanaZip Modification End ****************
 
   // LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY, m, 140, xc, 8

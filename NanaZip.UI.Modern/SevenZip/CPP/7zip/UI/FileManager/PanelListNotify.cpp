@@ -513,7 +513,13 @@ LRESULT CPanel::SetItemText(LVITEMW &item)
   {
     UInt64 v = 0;
     ConvertPropVariantToUInt64(prop, v);
-    ConvertSizeToString(v, text);
+    // **************** NanaZip Modification Start ****************
+    if (_showSmartSizes)
+      ::ConvertFileSizeToSmartString(v, text);
+    else
+      ::ConvertSizeToString(v, text);
+    //ConvertSizeToString(v, text);
+    // **************** NanaZip Modification End ****************
   }
   else if (prop.vt == VT_BSTR)
   {
