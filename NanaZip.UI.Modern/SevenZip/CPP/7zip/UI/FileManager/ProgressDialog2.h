@@ -154,9 +154,6 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
 
   NWindows::NControl::CProgressBar m_ProgressBar;
   NWindows::NControl::CListView _messageList;
-  // **************** NanaZip Modification Start ****************
-  bool m_FirstRun = true;
-  // **************** NanaZip Modification End ****************
   
   int _numMessages;
   UStringVector _messageStrings;
@@ -212,9 +209,9 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   #endif
   void SetTaskbarProgressState();
 
-  void UpdateStatInfo(bool showAll);
   // **************** NanaZip Modification Start ****************
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
+  void UpdateStatInfo(bool showAll);
   bool OnTimer(WPARAM timerID, LPARAM callback);
   void SetProgressRange(UInt64 range);
   void SetProgressPos(UInt64 pos);
@@ -233,15 +230,15 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void AddToTitle(LPCWSTR string);
   #endif
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   void SetPauseText();
   void SetPriorityText();
   void OnPauseButton();
   void OnPriorityButton();
-  // **************** NanaZip Modification Start ****************
-  //bool OnButtonClicked(int buttonID, HWND buttonHWND);
-  //bool OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
-  bool OnCancelClickedModern();
-  bool OnMessageModern(UINT message, WPARAM wParam, LPARAM lParam);
+  bool OnButtonClicked(int buttonID, HWND buttonHWND);
+  bool OnMessage(UINT message, WPARAM wParam, LPARAM lParam);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
   // **************** NanaZip Modification End ****************
 
   void SetTitleText();
@@ -252,8 +249,8 @@ class CProgressDialog: public NWindows::NControl::CModalDialog
   void AddMessageDirect(LPCWSTR message, bool needNumber);
   void AddMessage(LPCWSTR message);
 
-  bool OnExternalCloseMessage();
   // **************** NanaZip Modification Start ****************
+  //bool OnExternalCloseMessage();
   //void EnableErrorsControls(bool enable);
   // **************** NanaZip Modification End ****************
 
@@ -281,6 +278,22 @@ public:
     _createDialogEvent.Set();
     _dialogCreatedEvent.Lock();
   }
+
+  // **************** NanaZip Modification Start ****************
+  bool m_FirstRun = true;
+  void ModernPause();
+  void ModernUpdateStatus();
+  bool ModernExternalCloseMessage();
+  bool ModernCancel();
+  bool ModernMessageRouter(UINT message, WPARAM wParam, LPARAM lParam);
+  static LRESULT CALLBACK ModernWindowHandler(
+      _In_ HWND hWnd,
+      _In_ UINT uMsg,
+      _In_ WPARAM wParam,
+      _In_ LPARAM lParam,
+      _In_ UINT_PTR uIdSubclass,
+      _In_ DWORD_PTR dwRefData);
+  // **************** NanaZip Modification End ****************
 
   INT_PTR Create(const UString &title, NWindows::CThread &thread, HWND wndParent = 0);
 
