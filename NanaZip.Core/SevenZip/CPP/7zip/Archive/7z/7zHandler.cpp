@@ -16,13 +16,13 @@
 #include "7zHandler.h"
 #include "7zProperties.h"
 
-#ifdef Z7_7Z_SET_PROPERTIES
-#ifdef Z7_EXTRACT_ONLY
 // **************** NanaZip Modification Start **************** 
+// #ifdef Z7_7Z_SET_PROPERTIES
+// #ifdef Z7_EXTRACT_ONLY
 // #include "../Common/ParseProperties.h"
+// #endif
+// #endif
 // **************** NanaZip Modification End ****************
-#endif
-#endif
 
 using namespace NWindows;
 using namespace NCOM;
