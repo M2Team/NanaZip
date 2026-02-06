@@ -16,8 +16,13 @@
     as needed.
   - You are forbidden to modify any content in any files and folders starting
     with the "Mile." prefix because those implementations are shared across many
-    projects, or your pull requests won't be merged and closed immediately,
-    unless you get the permission from Kenji Mouri.
+    projects, or your pull request will not be merged and will be closed
+    immediately, unless you get the permission from Kenji Mouri.
+  - It's OK to use AI/LLM tools to help you write code, but you must ensure that
+    the final commit is written and reviewed by yourself, following our coding
+    style and conventions. If we find that your pull request has no contribution
+    from you, or the contribution is not reviewed by you, your pull request will
+    not be merged and will be closed immediately.
 - Feedback suggestions and bugs.
   - We use GitHub issues to track bugs and features.
   - For bugs and general issues please 
