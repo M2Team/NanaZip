@@ -2,7 +2,7 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 6.0 Preview 2 (6.0.16xx.0)**
+**NanaZip 6.0 Preview 2 (6.0.1621.0)**
 
 - Introduce NanaZip.Universal.Windows project for making NanaZip Command Line
   Interface (Windows) for both NanaZip (Modern) and NanaZip Classic a.k.a.
