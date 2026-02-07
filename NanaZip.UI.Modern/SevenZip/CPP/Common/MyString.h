@@ -628,6 +628,8 @@ public:
   UString &operator=(char c) { return (*this)=((wchar_t)(unsigned char)c); }
   UString &operator=(const wchar_t *s);
   UString &operator=(const UString &s);
+  // Backport from newer 7-Zip ZS temporarily.
+  void AddFrom(const wchar_t* s, unsigned len); // no check
   void SetFrom(const wchar_t *s, unsigned len); // no check
   void SetFromBstr(LPCOLESTR s);
   UString &operator=(const char *s);

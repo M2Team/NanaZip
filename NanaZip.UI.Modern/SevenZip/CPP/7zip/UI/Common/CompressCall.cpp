@@ -50,10 +50,45 @@ using namespace NWindows;
 static NCompression::CInfo m_RegistryInfo;
 extern HWND g_HWND;
 
-UString GetQuotedString(const UString &s)
+// Backport from newer 7-Zip ZS temporarily.
+UString GetQuotedString(const UString &src)
 {
   UString s2 ('\"');
-  s2 += s;
+  unsigned bcount = 0;
+  wchar_t c; const wchar_t *f = src.Ptr(), *s = f, *b = f;
+  // add string considering backslashes before quote (escape them):
+  while (1)
+  {
+    c = *s++;
+    switch (c)
+    {
+      case L'\\':
+        // a backslash - save the position and count them up to quote-char or regular char
+        if (!bcount) b = s-1;
+        bcount++;
+      break;
+      case L'\0':
+        // end of string (it is always quoted, so need to escape backslashes too):
+      case L'"':
+        // add part before backslash (and unescaped backslashes if some are there):
+        s2.AddFrom(f, (unsigned)(s - f - 1));
+        f = s;
+        if (bcount) {
+          // escape backslashes before quote (same count of BS again):
+          s2.AddFrom(b, (unsigned)(s - b - 1));
+        }
+        // done if end of string
+        if (c == L'\0') goto done;
+        // escape this quote char:
+        s2 += L"\\\"";
+      break;
+      default:
+        // a regular character, reset backslash counter
+        bcount = 0;
+    }
+  }
+  s2.AddFrom(f, (unsigned)(s - f - 1));
+done:
   s2 += '\"';
   return s2;
 }
