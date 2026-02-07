@@ -44,7 +44,6 @@
   <Folder Name="/UI/Modern/">
     <Project Path="NanaZip.UI.Modern/NanaZip.Modern.FileManager.vcxproj" Id="f4511f91-b0eb-41b4-99d6-aeb48169132b" />
     <Project Path="NanaZip.UI.Modern/NanaZip.ShellExtension.vcxproj" Id="53934e7a-686e-42f1-8a80-4299cde30564" />
-    <Project Path="NanaZip.UI.Modern/NanaZip.Windows.vcxproj" Id="3e5b58de-4fdc-4f45-93a4-8aa3d61c614d" />
   </Folder>
   <Project Path="NanaZipPackage/NanaZipPackage.wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5">
     <Deploy />
