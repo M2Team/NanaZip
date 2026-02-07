@@ -1,6 +1,5 @@
 ﻿using Mile.Project.Helpers;
 using System.Text;
-using System.Xml;
 
 namespace NanaZip.RefreshPackageVersion
 {
@@ -63,15 +62,14 @@ namespace NanaZip.RefreshPackageVersion
 
         static List<string> FileList = new List<string>
         {
-            @"{0}\NanaZipPackage\Package.appxmanifest",
-            @"{0}\NanaZip.UI.Modern\NanaZip.ShellExtension.cpp",
-            @"{0}\NanaZipPackage\NanaZipPackage.wapproj",
-            @"{0}\NanaZip.UI.Modern\SevenZip\CPP\7zip\UI\FileManager\resource.rc",
-            @"{0}\NanaZip.UI.Modern\SevenZip\CPP\7zip\UI\GUI\resource.rc",
             @"{0}\NanaZip.Core\SevenZip\CPP\7zip\Bundles\SFXCon\resource.rc",
             @"{0}\NanaZip.Core\SevenZip\CPP\7zip\Bundles\SFXSetup\resource.rc",
             @"{0}\NanaZip.Core\SevenZip\CPP\7zip\Bundles\SFXWin\resource.rc",
             @"{0}\NanaZip.Universal\SevenZip\CPP\7zip\UI\GUI\resource.rc",
+            @"{0}\NanaZip.UI.Modern\SevenZip\CPP\7zip\UI\FileManager\resource.rc",
+            @"{0}\NanaZip.UI.Modern\NanaZip.ShellExtension.cpp",
+            @"{0}\NanaZipPackage\Package.appxmanifest",
+            @"{0}\NanaZipPackage\NanaZipPackage.wapproj",
         };
 
         static void SwitchDevelopmentChannel()
