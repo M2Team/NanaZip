@@ -96,6 +96,6 @@
     <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Sfx.Shared.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)x64\NanaZip.Core.Windows.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />   
 
-    <Exec Command="7z a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
+    <Exec Command="&quot;$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Universal.Console.exe&quot; a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
   </Target>
 </Project>
