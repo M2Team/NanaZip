@@ -16,6 +16,7 @@
 #include <K7Base.h>
 
 #include <Uxtheme.h>
+#pragma comment(lib, "Uxtheme.lib")
 
 EXTERN_C HTHEME WINAPI OpenNcThemeData(
     _In_opt_ HWND hwnd,
@@ -200,7 +201,7 @@ namespace
         if (0 != ::GetClassNameW(
             WindowHandle,
             ClassName,
-            256))
+            MO_ARRAY_SIZE(ClassName)))
         {
             if (0 == std::wcscmp(ClassName, WC_BUTTONW))
             {
@@ -307,7 +308,7 @@ namespace
         if (0 != ::GetClassNameW(
             WindowHandle,
             ClassName,
-            256))
+            MO_ARRAY_SIZE(ClassName)))
         {
             return (0 == std::wcscmp(
                 ClassName,
@@ -462,7 +463,7 @@ namespace
             if (0 != ::GetClassNameW(
                 hWnd,
                 ClassName,
-                256))
+                MO_ARRAY_SIZE(ClassName)))
             {
                 if (0 == std::wcscmp(ClassName, WC_TABCONTROLW))
                 {
@@ -551,7 +552,7 @@ namespace
                         MenuItemInfo.cbSize = sizeof(MENUITEMINFOW);
                         MenuItemInfo.fMask = MIIM_STRING;
                         MenuItemInfo.dwTypeData = Buffer;
-                        MenuItemInfo.cch = sizeof(Buffer) - 1;
+                        MenuItemInfo.cch = MO_ARRAY_SIZE(Buffer) - 1;
                         if (::GetMenuItemInfoW(
                             UahDrawMenuItem->um.hmenu,
                             UahDrawMenuItem->umi.iPosition,
@@ -694,7 +695,7 @@ namespace
                 if (0 != ::GetClassNameW(
                     WndProcStruct->hwnd,
                     ClassName,
-                    256))
+                    MO_ARRAY_SIZE(ClassName)))
                 {
                     if (!std::wcsstr(ClassName, L"Windows.UI.") &&
                         !std::wcsstr(ClassName, L"Mile.Xaml.") &&
@@ -743,17 +744,27 @@ namespace
     static DWORD WINAPI OriginalGetSysColor(
         _In_ int nIndex)
     {
-        return reinterpret_cast<decltype(::GetSysColor)*>(
-            g_FunctionTable[FunctionTypes::GetSysColor].Original)(
-                nIndex);
+        using FunctionType = decltype(::GetSysColor)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::GetSysColor].Original);
+        if (!FunctionAddress)
+        {
+            return 0;
+        }
+        return FunctionAddress(nIndex);
     }
 
     static HBRUSH WINAPI OriginalGetSysColorBrush(
         _In_ int nIndex)
     {
-        return reinterpret_cast<decltype(::GetSysColorBrush)*>(
-            g_FunctionTable[FunctionTypes::GetSysColorBrush].Original)(
-                nIndex);
+        using FunctionType = decltype(::GetSysColorBrush)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::GetSysColorBrush].Original);
+        if (!FunctionAddress)
+        {
+            return nullptr;
+        }
+        return FunctionAddress(nIndex);
     }
 
     static HRESULT WINAPI OriginalDrawThemeText(
@@ -767,17 +778,23 @@ namespace
         _In_ DWORD dwTextFlags2,
         _In_ LPCRECT pRect)
     {
-        return reinterpret_cast<decltype(::DrawThemeText)*>(
-            g_FunctionTable[FunctionTypes::DrawThemeText].Original)(
-                hTheme,
-                hdc,
-                iPartId,
-                iStateId,
-                pszText,
-                cchText,
-                dwTextFlags,
-                dwTextFlags2,
-                pRect);
+        using FunctionType = decltype(::DrawThemeText)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::DrawThemeText].Original);
+        if (!FunctionAddress)
+        {
+            return E_NOINTERFACE;
+        }
+        return FunctionAddress(
+            hTheme,
+            hdc,
+            iPartId,
+            iStateId,
+            pszText,
+            cchText,
+            dwTextFlags,
+            dwTextFlags2,
+            pRect);
     }
 
     static HRESULT WINAPI OriginalDrawThemeBackground(
@@ -788,24 +805,34 @@ namespace
         _In_ LPCRECT pRect,
         _In_opt_ LPCRECT pClipRect)
     {
-        return reinterpret_cast<decltype(::DrawThemeBackground)*>(
-            g_FunctionTable[FunctionTypes::DrawThemeBackground].Original)(
-                hTheme,
-                hdc,
-                iPartId,
-                iStateId,
-                pRect,
-                pClipRect);
+        using FunctionType = decltype(::DrawThemeBackground)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::DrawThemeBackground].Original);
+        if (!FunctionAddress)
+        {
+            return E_NOINTERFACE;
+        }
+        return FunctionAddress(
+            hTheme,
+            hdc,
+            iPartId,
+            iStateId,
+            pRect,
+            pClipRect);
     }
 
     static HTHEME WINAPI OriginalOpenNcThemeData(
         _In_opt_ HWND hwnd,
         _In_ LPCWSTR pszClassList)
     {
-        return reinterpret_cast<decltype(OpenNcThemeData)*>(
-            g_FunctionTable[FunctionTypes::OpenNcThemeData].Original)(
-                hwnd,
-                pszClassList);
+        using FunctionType = decltype(::OpenNcThemeData)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::OpenNcThemeData].Original);
+        if (!FunctionAddress)
+        {
+            return nullptr;
+        }
+        return FunctionAddress(hwnd, pszClassList);
     }
 
     static DWORD WINAPI DetouredGetSysColor(
@@ -1094,6 +1121,13 @@ EXTERN_C MO_RESULT MOAPI K7UserInitializeDarkModeSupport()
 {
     if (g_GlobalInitialized)
     {
+        return MO_RESULT_SUCCESS_OK;
+    }
+
+    if (!::MileIsWindowsVersionAtLeast(10, 0, 0))
+    {
+        // Dark mode is only supported on Windows 10 and above, so we can just
+        // return success without doing anything on older versions of Windows.
         return MO_RESULT_SUCCESS_OK;
     }
 
