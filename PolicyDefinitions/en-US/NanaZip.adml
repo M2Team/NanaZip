@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources
+    xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.microsoft.com/GroupPolicy/PolicyDefinitions ../PolicyDefinitionFiles.xsd"
+    revision="1.0"
+    schemaVersion="1.0">
+    <displayName>NanaZip</displayName>
+    <description>NanaZip</description>
+
+    <resources>
+        <stringTable>
+            <!-- Products -->
+            <string id="NanaZip">NanaZip</string>
+            <string id="NanaZip60P1">NanaZip 6.0 Preview 1</string>
+            <string id="NanaZip60P2">NanaZip 6.0 Preview 2</string>
+
+            <!-- Definitions -->
+            <string id="SUPPORTED_NanaZip60P1Only">NanaZip 6.0 Preview 1 only</string>
+            <string id="SUPPORTED_NanaZip60P2">At least NanaZip 6.0 Preview 2</string>
+
+            <!-- Categories -->
+            <string id="NanaZipPolicies">NanaZip</string>
+            <string id="HandlerCodecRestrictions">Handler and Codec Restrictions</string>
+            <string id="NanaZipPoliciesLegacy">Legacy Policies</string>
+
+            <!-- Policies -->
+            <string id="AllowDynamicCodeGeneration">Allow dynamic code generation for all NanaZip components</string>
+            <string id="AllowDynamicCodeGenerationExplain">NanaZip disables dynamic code generation for its components by default in Release builds to reduce the risk of running potentially malicious code at runtime. However, some third-party software that relies on dynamic code generation and injects code into NanaZip processes may require this feature to be enabled for compatibility.
+
+If you enable this policy setting, NanaZip allows third-party components to generate dynamic code at runtime.
+
+If you disable or do not configure this policy setting, NanaZip blocks the ability to create dynamic code in its own processes.</string>
+
+            <string id="AllowChildProcessCreation">Allow child processes creation for all NanaZip components</string>
+            <string id="AllowChildProcessCreationExplain">NanaZip blocks child process creation by default in its command line components and self-extracting executables to reduce the risk of process abuse by malicious archives. However, some third-party input method editors (IMEs) and assistive technologies (ATs) may require child process creation to function correctly. In such cases, this policy can be used to allow child process creation.
+
+If you enable this policy setting, NanaZip processes can create child processes at runtime.
+
+If you disable or do not configure this policy setting, NanaZip blocks the ability to create child processes from many of its own processes.</string>
+
+            <string id="AllowedHandlers">Allowed archive handlers</string>
+            <string id="AllowedHandlersExplain">This policy setting controls which archive handlers can be loaded by NanaZip.
+
+With this policy setting, you can significantly limit the attack surface of NanaZip by blocking the parsing of uncommon archive formats.
+
+If you enable this policy setting, only the handlers specified in this list (one in each line, case sensitive) will be allowed to load.
+
+If you disable or do not configure this policy setting, all otherwise-unspecified archive handlers can load.
+
+Run NanaZipC --version to see the full list of currently-enabled handlers.</string>
+
+            <string id="BlockedHandlers">Blocked archive handlers</string>
+            <string id="BlockedHandlersExplain">This policy setting controls which archive handlers cannot be loaded by NanaZip.
+
+With this policy setting, you can significantly limit the attack surface of NanaZip by blocking the parsing of uncommon archive formats.
+
+If you enable this policy setting, the handlers specified in this list (one in each line, case sensitive) will be blocked from loading.
+
+If you disable or do not configure this policy setting, all otherwise-unspecified archive handlers can load.
+
+Run NanaZipC --version to see the full list of currently-enabled handlers.</string>
+
+            <string id="AllowedCodecs">Allowed compression codecs</string>
+            <string id="AllowedCodecsExplain">This policy setting controls which compression codecs can be loaded by NanaZip.
+
+With this policy setting, you can significantly limit the attack surface of NanaZip by blocking the execution of uncommon compression codecs.
+
+If you enable this policy setting, only the codecs specified in this list (one in each line, case sensitive) will be allowed to load.
+
+If you disable or do not configure this policy setting, all otherwise-unspecified compression codecs can load.
+
+Run NanaZipC --version to see the full list of currently-enabled codecs.</string>
+
+            <string id="BlockedCodecs">Blocked compression codecs</string>
+            <string id="BlockedCodecsExplain">This policy setting controls which compression codecs cannot be loaded by NanaZip.
+
+With this policy setting, you can significantly limit the attack surface of NanaZip by blocking the execution of uncommon compression codecs.
+
+If you enable this policy setting, the codecs specified in this list (one in each line, case sensitive) will be blocked from loading.
+
+If you disable or do not configure this policy setting, all otherwise-unspecified compression codecs can load.
+
+Run NanaZipC --version to see the full list of currently-enabled codecs.</string>
+
+            <!-- Shared between new and legacy policies -->
+            <string id="WriteZoneIdExtract">Propagate Zone.Id stream</string>
+            <string id="WriteZoneIdExtractExplain">This policy setting controls Mark-of-the-Web (MOTW) propagation of archive files.
+
+If you enable this policy setting, NanaZip follows the given MOTW setting when extracting files.
+
+If you disable or do not configure this policy setting, NanaZip follows the user's MOTW propagation setting.</string>
+            <string id="WriteZoneIdExtract0">Don't propagate MOTW</string>
+            <string id="WriteZoneIdExtract1">Propagate MOTW to all files</string>
+            <string id="WriteZoneIdExtract2">Propagate MOTW to unsafe files</string>
+
+            <!-- Legacy policies -->
+            <string id="DisableMitigations">Disable mitigations</string>
+            <string id="DisableMitigationsExplain">This policy setting controls the application of security mitigations on NanaZip processes.
+
+If you enable this policy setting, NanaZip disables all security mitigations in its processes.
+
+If you disable or do not configure this policy setting, NanaZip enables all mitigations by default.</string>
+        </stringTable>
+
+        <presentationTable>
+            <presentation id="AllowedHandlers">
+                <text>List of allowed archive handlers:</text>
+                <multiTextBox refId="AllowedHandlers" />
+            </presentation>
+            <presentation id="BlockedHandlers">
+                <text>List of blocked archive handlers:</text>
+                <multiTextBox refId="BlockedHandlers" />
+            </presentation>
+            <presentation id="AllowedCodecs">
+                <text>List of allowed compression codecs:</text>
+                <multiTextBox refId="AllowedCodecs" />
+            </presentation>
+            <presentation id="BlockedCodecs">
+                <text>List of blocked compression codecs:</text>
+                <multiTextBox refId="BlockedCodecs" />
+            </presentation>
+            <presentation id="WriteZoneIdExtract">
+                <dropdownList refId="WriteZoneIdExtract" defaultItem="1">Propagate Zone.Id stream:</dropdownList>
+            </presentation>
+        </presentationTable>
+    </resources>
+</policyDefinitionResources>
