@@ -490,6 +490,34 @@ namespace
 
             break;
         }
+        case WM_ERASEBKGND:
+        {
+            if (g_ThreadContext.ShouldAppsUseDarkMode)
+            {
+                wchar_t ClassName[256] = {};
+                if (0 != ::GetClassNameW(
+                    hWnd,
+                    ClassName,
+                    MO_ARRAY_SIZE(ClassName)))
+                {
+                    if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
+                    {
+                        RECT ClientArea = {};
+                        if (::GetClientRect(hWnd, &ClientArea))
+                        {
+                            ::FillRect(
+                                reinterpret_cast<HDC>(wParam),
+                                &ClientArea,
+                                reinterpret_cast<HBRUSH>(
+                                    ::GetStockObject(BLACK_BRUSH)));
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+
+            break;
+        }
         case WM_DPICHANGED:
         {
             bool ShouldExtendFrame = (
