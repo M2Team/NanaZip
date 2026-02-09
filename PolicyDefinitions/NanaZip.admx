@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions
+    xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.microsoft.com/GroupPolicy/PolicyDefinitions PolicyDefinitionFiles.xsd"
+    revision="1.0"
+    schemaVersion="1.0">
+    <policyNamespaces>
+        <target prefix="NanaZip" namespace="NanaZip.Policies" />
+    </policyNamespaces>
+    <resources minRequiredRevision="1.0" />
+
+    <supportedOn>
+        <products>
+            <product name="NanaZip" displayName="$(string.NanaZip)">
+                <!-- major (2 digits) + minor (2 digits) + build (5 digits) -->
+                <majorVersion
+                    name="NanaZip60P1"
+                    displayName="$(string.NanaZip60P1)"
+                    versionIndex="60001461" />
+                <majorVersion
+                    name="NanaZip60P2"
+                    displayName="$(string.NanaZip60P2)"
+                    versionIndex="60001621" />
+            </product>
+        </products>
+        <definitions>
+            <definition
+                name="SUPPORTED_NanaZip60P1Only"
+                displayName="$(string.SUPPORTED_NanaZip60P1Only)">
+                <and>
+                    <range ref="NanaZip60P1" />
+                </and>
+            </definition>
+            <definition
+                name="SUPPORTED_NanaZip60P2"
+                displayName="$(string.SUPPORTED_NanaZip60P2)">
+                <and>
+                    <range ref="NanaZip" minVersionIndex="60001621" />
+                </and>
+            </definition>
+        </definitions>
+    </supportedOn>
+
+    <categories>
+        <category name="NanaZipPolicies" displayName="$(string.NanaZipPolicies)" />
+        <category name="HandlerCodecRestrictions" displayName="$(string.HandlerCodecRestrictions)">
+            <parentCategory ref="NanaZipPolicies" />
+        </category>
+        <category name="NanaZipPoliciesLegacy" displayName="$(string.NanaZipPoliciesLegacy)">
+            <parentCategory ref="NanaZipPolicies" />
+        </category>
+    </categories>
+
+    <policies>
+        <policy
+            name="AllowDynamicCodeGeneration"
+            class="Machine"
+            displayName="$(string.AllowDynamicCodeGeneration)"
+            explainText="$(string.AllowDynamicCodeGenerationExplain)"
+            key="SOFTWARE\Policies\M2Team\NanaZip"
+            valueName="AllowDynamicCodeGeneration">
+            <parentCategory ref="NanaZipPolicies" />
+            <supportedOn ref="SUPPORTED_NanaZip60P2" />
+            <enabledValue>
+                <decimal value="1" />
+            </enabledValue>
+            <disabledValue>
+                <decimal value="0" />
+            </disabledValue>
+        </policy>
+        <policy
+            name="AllowChildProcessCreation"
+            class="Machine"
+            displayName="$(string.AllowChildProcessCreation)"
+            explainText="$(string.AllowChildProcessCreationExplain)"
+            key="SOFTWARE\Policies\M2Team\NanaZip"
+            valueName="AllowChildProcessCreation">
+            <parentCategory ref="NanaZipPolicies" />
+            <supportedOn ref="SUPPORTED_NanaZip60P2" />
+            <enabledValue>
+                <decimal value="1" />
+            </enabledValue>
+            <disabledValue>
+                <decimal value="0" />
+            </disabledValue>
+        </policy>
+        <policy
+            name="WriteZoneIdExtract"
+            class="Machine"
+            displayName="$(string.WriteZoneIdExtract)"
+            explainText="$(string.WriteZoneIdExtractExplain)"
+            presentation="$(presentation.WriteZoneIdExtract)"
+            key="SOFTWARE\Policies\M2Team\NanaZip">
+            <parentCategory ref="NanaZipPolicies" />
+            <supportedOn ref="SUPPORTED_NanaZip60P2" />
+            <elements>
+                <enum id="WriteZoneIdExtract" valueName="WriteZoneIdExtract">
+                    <item displayName="$(string.WriteZoneIdExtract0)">
+                        <value>
+                            <decimal value="0" />
+                        </value>
+                    </item>
+                    <item displayName="$(string.WriteZoneIdExtract1)">
+                        <value>
+                            <decimal value="1" />
+                        </value>
+                    </item>
+                    <item displayName="$(string.WriteZoneIdExtract2)">
+                        <value>
+                            <decimal value="2" />
+                        </value>
+                    </item>
+                </enum>
+            </elements>
+        </policy>
+
+        <!-- Handler and codec restrictions -->
+        <policy
+            name="AllowedHandlers"
+            class="Machine"
+            displayName="$(string.AllowedHandlers)"
+            explainText="$(string.AllowedHandlersExplain)"
+            presentation="$(presentation.AllowedHandlers)"
+            key="SOFTWARE\Policies\M2Team\NanaZip">
+            <parentCategory ref="HandlerCodecRestrictions" />
+            <supportedOn ref="SUPPORTED_NanaZip60P2" />
+            <elements>
+                <multiText id="AllowedHandlers" valueName="AllowedHandlers" />
+            </elements>
+        </policy>
+        <policy
+            name="BlockedHandlers"
+            class="Machine"
+            displayName="$(string.BlockedHandlers)"
+            explainText="$(string.BlockedHandlersExplain)"
+            presentation="$(presentation.BlockedHandlers)"
+            key="SOFTWARE\Policies\M2Team\NanaZip">
+            <parentCategory ref="HandlerCodecRestrictions" />
+            <supportedOn ref="SUPPORTED_NanaZip60P2" />
+            <elements>
+                <multiText id="BlockedHandlers" valueName="BlockedHandlers" />
+            </elements>
+        </policy>
+        <policy
+            name="AllowedCodecs"
+            class="Machine"
+            displayName="$(string.AllowedCodecs)"
+            explainText="$(string.AllowedCodecsExplain)"
+            presentation="$(presentation.AllowedCodecs)"
+            key="SOFTWARE\Policies\M2Team\NanaZip">
+            <parentCategory ref="HandlerCodecRestrictions" />
+            <supportedOn ref="SUPPORTED_NanaZip60P2" />
+            <elements>
+                <multiText id="AllowedCodecs" valueName="AllowedCodecs" />
+            </elements>
+        </policy>
+        <policy
+            name="BlockedCodecs"
+            class="Machine"
+            displayName="$(string.BlockedCodecs)"
+            explainText="$(string.BlockedCodecsExplain)"
+            presentation="$(presentation.BlockedCodecs)"
+            key="SOFTWARE\Policies\M2Team\NanaZip">
+            <parentCategory ref="HandlerCodecRestrictions" />
+            <supportedOn ref="SUPPORTED_NanaZip60P2" />
+            <elements>
+                <multiText id="BlockedCodecs" valueName="BlockedCodecs" />
+            </elements>
+        </policy>
+
+        <!-- Legacy policies -->
+        <policy
+            name="WriteZoneIdExtractLegacy"
+            class="Machine"
+            displayName="$(string.WriteZoneIdExtract)"
+            explainText="$(string.WriteZoneIdExtractExplain)"
+            presentation="$(presentation.WriteZoneIdExtract)"
+            key="SOFTWARE\NanaZip\Policies">
+            <parentCategory ref="NanaZipPoliciesLegacy" />
+            <supportedOn ref="SUPPORTED_NanaZip60P1Only" />
+            <elements>
+                <enum id="WriteZoneIdExtract" valueName="WriteZoneIdExtract">
+                    <item displayName="$(string.WriteZoneIdExtract0)">
+                        <value>
+                            <decimal value="0" />
+                        </value>
+                    </item>
+                    <item displayName="$(string.WriteZoneIdExtract1)">
+                        <value>
+                            <decimal value="1" />
+                        </value>
+                    </item>
+                    <item displayName="$(string.WriteZoneIdExtract2)">
+                        <value>
+                            <decimal value="2" />
+                        </value>
+                    </item>
+                </enum>
+            </elements>
+        </policy>
+        <policy
+            name="DisableMitigations"
+            class="Machine"
+            displayName="$(string.DisableMitigations)"
+            explainText="$(string.DisableMitigationsExplain)"
+            key="SOFTWARE\NanaZip\Policies"
+            valueName="DisableMitigations">
+            <parentCategory ref="NanaZipPoliciesLegacy" />
+            <supportedOn ref="SUPPORTED_NanaZip60P1Only" />
+            <enabledValue>
+                <decimal value="1" />
+            </enabledValue>
+            <disabledValue>
+                <decimal value="0" />
+            </disabledValue>
+        </policy>
+    </policies>
+</policyDefinitions>
