@@ -22,6 +22,11 @@ EXTERN_C HTHEME WINAPI OpenNcThemeData(
     _In_opt_ HWND hwnd,
     _In_ LPCWSTR pszClassList);
 
+EXTERN_C HRESULT WINAPI GetThemeClass(
+    _In_ HTHEME hTheme,
+    _Out_ LPWSTR pszClassName,
+    _In_ int cchClassName);
+
 #include <vssym32.h>
 #include <Richedit.h>
 
@@ -725,9 +730,12 @@ namespace
         {
             GetSysColor,
             GetSysColorBrush,
+            GetThemeColor,
             DrawThemeText,
             DrawThemeBackground,
+            DrawThemeBackgroundEx,
             OpenNcThemeData,
+            GetThemeClass,
 
             MaximumFunction
         };
@@ -765,6 +773,28 @@ namespace
             return nullptr;
         }
         return FunctionAddress(nIndex);
+    }
+
+    static HRESULT WINAPI OriginalGetThemeColor(
+        _In_ HTHEME hTheme,
+        _In_ int iPartId,
+        _In_ int iStateId,
+        _In_ int iPropId,
+        _Out_ COLORREF* pColor)
+    {
+        using FunctionType = decltype(::GetThemeColor)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::GetThemeColor].Original);
+        if (!FunctionAddress)
+        {
+            return E_NOINTERFACE;
+        }
+        return FunctionAddress(
+            hTheme,
+            iPartId,
+            iStateId,
+            iPropId,
+            pColor);
     }
 
     static HRESULT WINAPI OriginalDrawThemeText(
@@ -821,6 +851,30 @@ namespace
             pClipRect);
     }
 
+    static HRESULT WINAPI OriginalDrawThemeBackgroundEx(
+        _In_ HTHEME hTheme,
+        _In_ HDC hdc,
+        _In_ int iPartId,
+        _In_ int iStateId,
+        _In_ LPCRECT pRect,
+        _In_opt_ const DTBGOPTS* pOptions)
+    {
+        using FunctionType = decltype(::DrawThemeBackgroundEx)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::DrawThemeBackgroundEx].Original);
+        if (!FunctionAddress)
+        {
+            return E_NOINTERFACE;
+        }
+        return FunctionAddress(
+            hTheme,
+            hdc,
+            iPartId,
+            iStateId,
+            pRect,
+            pOptions);
+    }
+
     static HTHEME WINAPI OriginalOpenNcThemeData(
         _In_opt_ HWND hwnd,
         _In_ LPCWSTR pszClassList)
@@ -833,6 +887,24 @@ namespace
             return nullptr;
         }
         return FunctionAddress(hwnd, pszClassList);
+    }
+
+    static HRESULT WINAPI OriginalGetThemeClass(
+        _In_ HTHEME hTheme,
+        _Out_ LPWSTR pszClassName,
+        _In_ int cchClassName)
+    {
+        using FunctionType = decltype(::GetThemeClass)*;
+        FunctionType FunctionAddress = reinterpret_cast<FunctionType>(
+            g_FunctionTable[FunctionTypes::GetThemeClass].Original);
+        if (!FunctionAddress)
+        {
+            return E_NOINTERFACE;
+        }
+        return FunctionAddress(
+            hTheme,
+            pszClassName,
+            cchClassName);
     }
 
     static DWORD WINAPI DetouredGetSysColor(
@@ -873,6 +945,52 @@ namespace
         default:
             return ::OriginalGetSysColorBrush(nIndex);
         }
+    }
+
+    static HRESULT WINAPI DetouredGetThemeColor(
+        _In_ HTHEME hTheme,
+        _In_ int iPartId,
+        _In_ int iStateId,
+        _In_ int iPropId,
+        _Out_ COLORREF* pColor)
+    {
+        if (!g_GlobalInitialized || !g_ThreadContext.ShouldAppsUseDarkMode)
+        {
+            return ::OriginalGetThemeColor(
+                hTheme,
+                iPartId,
+                iStateId,
+                iPropId,
+                pColor);
+        }
+
+        HRESULT hr = ::OriginalGetThemeColor(
+            hTheme,
+            iPartId,
+            iStateId,
+            iPropId,
+            pColor);
+        if (S_OK != hr)
+        {
+            return hr;
+        }
+
+        wchar_t ClassName[256] = {};
+        if (S_OK == ::OriginalGetThemeClass(
+            hTheme,
+            ClassName,
+            MO_ARRAY_SIZE(ClassName)))
+        {
+            if (0 == ::_wcsicmp(ClassName, VSCLASS_TASKDIALOGSTYLE))
+            {
+                if (TMT_TEXTCOLOR == iPropId)
+                {
+                    *pColor = g_DarkModeForegroundColor;
+                }
+            }
+        }
+
+        return S_OK;
     }
 
     static HRESULT WINAPI DetouredDrawThemeText(
@@ -1051,6 +1169,80 @@ namespace
             pClipRect);
     }
 
+    static HRESULT WINAPI DetouredDrawThemeBackgroundEx(
+        _In_ HTHEME hTheme,
+        _In_ HDC hdc,
+        _In_ int iPartId,
+        _In_ int iStateId,
+        _In_ LPCRECT pRect,
+        _In_opt_ const DTBGOPTS* pOptions)
+    {
+        if (!g_GlobalInitialized || !g_ThreadContext.ShouldAppsUseDarkMode)
+        {
+            return ::OriginalDrawThemeBackgroundEx(
+                hTheme,
+                hdc,
+                iPartId,
+                iStateId,
+                pRect,
+                pOptions);
+        }
+
+        bool NeedTaskDialogWorkaround = (
+            TDLG_PRIMARYPANEL == iPartId ||
+            TDLG_SECONDARYPANEL == iPartId ||
+            TDLG_EXPANDOBUTTON == iPartId ||
+            TDLG_FOOTNOTEPANE == iPartId ||
+            TDLG_FOOTNOTESEPARATOR == iPartId);
+        if (NeedTaskDialogWorkaround)
+        {
+            NeedTaskDialogWorkaround = false;
+            wchar_t ClassName[256] = {};
+            if (S_OK == ::OriginalGetThemeClass(
+                hTheme,
+                ClassName,
+                MO_ARRAY_SIZE(ClassName)))
+            {
+                NeedTaskDialogWorkaround =
+                    (0 == ::_wcsicmp(ClassName, VSCLASS_TASKDIALOG));
+            }
+        }
+
+        if (NeedTaskDialogWorkaround)
+        {
+            if (TDLG_PRIMARYPANEL == iPartId)
+            {
+                ::FillRect(hdc, pRect, ::GetDarkModeBackgroundBrush());
+                return S_OK;
+            }
+            else if (
+                TDLG_SECONDARYPANEL == iPartId ||
+                TDLG_FOOTNOTEPANE == iPartId ||
+                TDLG_FOOTNOTESEPARATOR == iPartId)
+            {
+                ::FillRect(hdc, pRect, ::GetDarkModeBorderBrush());
+                RECT ContentRect = *pRect;
+                ContentRect.top += 1;
+                ::FillRect(hdc, &ContentRect, ::GetDarkModeBackgroundBrush());
+                return S_OK;
+            }
+            else if (iPartId == TDLG_EXPANDOBUTTON)
+            {
+                // It seems our current implementation doesn't have the issue
+                // that the button becomes invisible on dark mode in Windows 11,
+                // so we don't need to do anything here for now.
+            }
+        }
+
+        return ::OriginalDrawThemeBackgroundEx(
+            hTheme,
+            hdc,
+            iPartId,
+            iStateId,
+            pRect,
+            pOptions);
+    }
+
     static HTHEME WINAPI DetouredOpenNcThemeData(
         _In_opt_ HWND hwnd,
         _In_ LPCWSTR pszClassList)
@@ -1076,6 +1268,11 @@ namespace
         g_FunctionTable[FunctionTypes::GetSysColorBrush].Detoured =
             ::DetouredGetSysColorBrush;
 
+        g_FunctionTable[FunctionTypes::GetThemeColor].Original =
+            ::GetThemeColor;
+        g_FunctionTable[FunctionTypes::GetThemeColor].Detoured =
+            ::DetouredGetThemeColor;
+
         g_FunctionTable[FunctionTypes::DrawThemeText].Original =
             ::DrawThemeText;
         g_FunctionTable[FunctionTypes::DrawThemeText].Detoured =
@@ -1085,6 +1282,11 @@ namespace
             ::DrawThemeBackground;
         g_FunctionTable[FunctionTypes::DrawThemeBackground].Detoured =
             ::DetouredDrawThemeBackground;
+
+        g_FunctionTable[FunctionTypes::DrawThemeBackgroundEx].Original =
+            ::DrawThemeBackgroundEx;
+        g_FunctionTable[FunctionTypes::DrawThemeBackgroundEx].Detoured =
+            ::DetouredDrawThemeBackgroundEx;
 
         {
             HMODULE ModuleHandle = ::GetModuleHandleW(
@@ -1100,6 +1302,19 @@ namespace
                         ProcAddress;
                     g_FunctionTable[FunctionTypes::OpenNcThemeData].Detoured =
                         ::DetouredOpenNcThemeData;
+                }
+            }
+            if (ModuleHandle)
+            {
+                PVOID ProcAddress = ::GetProcAddress(
+                    ModuleHandle,
+                    MAKEINTRESOURCEA(74));
+                if (ProcAddress)
+                {
+                    g_FunctionTable[FunctionTypes::GetThemeClass].Original =
+                        ProcAddress;
+                    g_FunctionTable[FunctionTypes::GetThemeClass].Detoured =
+                        nullptr;
                 }
             }
         }
