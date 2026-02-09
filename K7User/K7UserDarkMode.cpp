@@ -142,9 +142,16 @@ namespace
     {
     public:
 
-        bool volatile MicaBackdropAvailable = false;
-        HHOOK volatile WindowsHookHandle = nullptr;
+        // Fields for all scenarios.
+        // Should always be available if ShouldAppsUseDarkMode is true.
+
         bool volatile ShouldAppsUseDarkMode = false;
+        HHOOK volatile WindowsHookHandle = nullptr;
+
+        // Fields for specific scenarios.
+        // May not be available, which need to be checked before use.
+
+        bool volatile MicaBackdropAvailable = false;
         HTHEME TabControlThemeHandle = nullptr;
         HTHEME StatusBarThemeHandle = nullptr;
 
@@ -162,6 +169,9 @@ namespace
                 return;
             }
 
+            // Put this at the end of constructor to ensure that the dark mode
+            // support won't be enabled before the thread context is fully
+            // initialized to reduce the possibility of unintended behaviors.
             this->ShouldAppsUseDarkMode =
                 ::MileShouldAppsUseDarkMode() &&
                 !::MileShouldAppsUseHighContrastMode();
@@ -169,10 +179,16 @@ namespace
 
         ~ThreadContext()
         {
-            ::UnhookWindowsHookEx(this->WindowsHookHandle);
-            this->WindowsHookHandle = nullptr;
-
+            // Put this at the beginning of destructor to ensure that the dark
+            // mode support won't be enabled after the thread context starts to
+            // uninitialize to reduce the possibility of unintended behaviors.
             this->ShouldAppsUseDarkMode = false;
+
+            if (this->WindowsHookHandle)
+            {
+                ::UnhookWindowsHookEx(this->WindowsHookHandle);
+                this->WindowsHookHandle = nullptr;
+            }
         }
     };
     thread_local ThreadContext g_ThreadContext;
