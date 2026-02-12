@@ -753,7 +753,7 @@ Z7_COM7F_IMF(CInFileStream::GetProperty(PROPID propID, PROPVARIANT *value))
       {
         if (StoreOwnerName)
         {
-          const uid_t gid = st.st_gid;
+          const gid_t gid = st.st_gid;
           {
             if (!OwnerGroup.IsEmpty() && _gid == gid)
               prop = OwnerGroup;

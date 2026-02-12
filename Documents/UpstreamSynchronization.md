@@ -11,7 +11,7 @@
     - Fix for CVE-2025-0411 backported from 7-Zip 24.09.
     - Fix for CVE-2025-11001 and CVE-2025-11002 backported from 7-Zip 25.00.
     - Security enhancements for symbolic link handling backported from 7-Zip 25.01.
-- NanaZip.Universal: 25.01
+- NanaZip.Universal: 26.00
 
 ## 7-Zip ZS
 

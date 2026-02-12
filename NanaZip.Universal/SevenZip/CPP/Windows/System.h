@@ -15,6 +15,8 @@
 namespace NWindows {
 namespace NSystem {
 
+UInt32 GetNumberOfProcessors();
+
 #ifdef _WIN32
 
 struct CCpuGroups
@@ -103,6 +105,25 @@ struct CProcessAffinity
     return CountAffinity(systemAffinityMask);
   }
 
+  // it returns normilized number of threads
+  void Get_and_return_NumProcessThreads_and_SysThreads(UInt32 &numProcessThreads, UInt32 &numSysThreads)
+  {
+    UInt32 num1 = 0, num2 = 0;
+    if (Get())
+    {
+      num1 = GetNumProcessThreads();
+      num2 = GetNumSystemThreads();
+    }
+    if (num1 == 0)
+      num1 = NSystem::GetNumberOfProcessors();
+    if (num1 == 0)
+        num1 = 1;
+    if (num2 < num1)
+        num2 = num1;
+    numProcessThreads = num1;
+    numSysThreads = num2;
+  }
+
   BOOL Get();
 
   BOOL SetProcAffinity() const
@@ -176,8 +197,6 @@ struct CProcessAffinity
 
 #endif // _WIN32
 
-
-UInt32 GetNumberOfProcessors();
 
 bool GetRamSize(size_t &size); // returns false, if unknown ram size
 

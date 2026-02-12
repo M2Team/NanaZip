@@ -22,7 +22,7 @@
 
 #if defined(__GLIBC__) && (__GLIBC__ * 100 + __GLIBC_MINOR__ >= 216)
   #define Z7_GETAUXV_AVAILABLE
-#else
+#elif !defined(__QNXNTO__)
 //  #pragma message("=== is not NEW GLIBC === ")
   #if defined __has_include
   #if __has_include (<sys/auxv.h>)
@@ -58,7 +58,7 @@
 
 #ifdef USE_HWCAP
 
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__OpenBSD__)
 
 // #if (__FreeBSD__ >= 13) // (FreeBSD 12.01 is required for elf_aux_info() ???)
 static unsigned long MY_getauxval(int aux)

@@ -440,7 +440,7 @@ static NRecursedType::EEnum GetRecursedTypeFromIndex(int index)
   }
 }
 
-static const char *g_Commands = "audtexlbih";
+static const char * const g_Commands = "audtexlbih";
 
 static bool ParseArchiveCommand(const UString &commandString, CArcCommand &command)
 {

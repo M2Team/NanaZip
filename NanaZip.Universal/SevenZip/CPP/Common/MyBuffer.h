@@ -202,7 +202,53 @@ public:
   }
 };
 
-typedef CObjArray<Byte> CByteArr;
+
+/* CSmallObjArray can be used for Byte arrays
+   or for arrays whose total size in bytes does not exceed size_t ranges.
+   So there is no need to use Z7_ARRAY_NEW macro in CSmallObjArray code. */
+template <class T> class CSmallObjArray
+{
+protected:
+  T *_items;
+private:
+  // we disable copy
+  CSmallObjArray(const CSmallObjArray &buffer);
+  void operator=(const CSmallObjArray &buffer);
+public:
+  void Free()
+  {
+    delete []_items;
+    _items = NULL;
+  }
+  CSmallObjArray(size_t size): _items(NULL)
+  {
+    if (size != 0)
+    {
+      // Z7_ARRAY_NEW(_items, T, size)
+      _items = new T[size];
+    }
+  }
+  CSmallObjArray(): _items(NULL) {}
+  ~CSmallObjArray() { delete []_items; }
+  
+  operator       T *()       { return _items; }
+  operator const T *() const { return _items; }
+  const T* ConstData()    const { return _items; }
+        T* NonConstData() const { return _items; }
+        T* NonConstData()       { return _items; }
+  // const T* Data() const         { return _items; }
+  //       T* Data()               { return _items; }
+  
+  void Alloc(size_t newSize)
+  {
+    delete []_items;
+    _items = NULL;
+    // Z7_ARRAY_NEW(_items, T, newSize)
+    _items = new T[newSize];
+  }
+};
+
+typedef CSmallObjArray<Byte> CByteArr;
 typedef CObjArray<bool> CBoolArr;
 typedef CObjArray<int> CIntArr;
 typedef CObjArray<unsigned> CUIntArr;

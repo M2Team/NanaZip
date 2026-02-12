@@ -452,11 +452,9 @@ static const size_t kMaxDicSize = (size_t)1 << (22 + sizeof(size_t) / 4 * 5);
 
 static int ComboBox_Add_UInt32(NWindows::NControl::CComboBox &cb, UInt32 v)
 {
-  TCHAR s[16];
+  WCHAR s[16];
   ConvertUInt32ToString(v, s);
-  const int index = (int)cb.AddString(s);
-  cb.SetItemData(index, (LPARAM)v);
-  return index;
+  return (int)cb.AddString_SetItemData(s, (LPARAM)v);
 }
 
 
@@ -493,21 +491,17 @@ bool CBenchmarkDialog::OnInit()
       _consoleEdit.SendMsg(WM_SETFONT, (WPARAM)_font._font, TRUE);
   }
 
-  UInt32 numCPUs = 1;
+  UInt32 numCPUs = 1; // process threads
+  UInt32 numCPUs_Sys = 1; // system threads
 
   {
-    AString s ("/ ");
-  
     NSystem::CProcessAffinity threadsInfo;
     threadsInfo.InitST();
+#ifndef Z7_ST
+    threadsInfo.Get_and_return_NumProcessThreads_and_SysThreads(numCPUs, numCPUs_Sys);
+#endif
 
-    #ifndef Z7_ST
-    if (threadsInfo.Get() && threadsInfo.processAffinityMask != 0)
-      numCPUs = threadsInfo.GetNumProcessThreads();
-    else
-      numCPUs = NSystem::GetNumberOfProcessors();
-    #endif
-
+    AString s ("/ ");
     s.Add_UInt32(numCPUs);
     s += GetProcessThreadsInfo(threadsInfo);
     SetItemTextA(IDT_BENCH_HARDWARE_THREADS, s);
@@ -518,10 +512,8 @@ bool CBenchmarkDialog::OnInit()
       SetItemTextA(IDT_BENCH_SYS1, s);
       if (s != s2 && !s2.IsEmpty())
         SetItemTextA(IDT_BENCH_SYS2, s2);
-    }
-    {
-      AString registers;
-      GetCpuName_MultiLine(s, registers);
+
+      GetCpuName_MultiLine(s, s2); // s2==registers
       SetItemTextA(IDT_BENCH_CPU, s);
     }
     {
@@ -541,22 +533,18 @@ bool CBenchmarkDialog::OnInit()
 
   // ----- Num Threads ----------
 
-  if (numCPUs < 1)
-    numCPUs = 1;
-  numCPUs = MyMin(numCPUs, (UInt32)(1 << 6)); // it's WIN32 limit
-
   UInt32 numThreads = Sync.NumThreads;
-
   if (numThreads == (UInt32)(Int32)-1)
     numThreads = numCPUs;
-  if (numThreads > 1)
-    numThreads &= ~(UInt32)1;
-  const UInt32 kNumThreadsMax = (1 << 12);
-  if (numThreads > kNumThreadsMax)
-    numThreads = kNumThreadsMax;
+  numThreads &= ~(UInt32)1;
+  if (numThreads == 0)
+    numThreads = 1;
+  numThreads = MyMin(numThreads, (UInt32)(1u << 14));
 
   m_NumThreads.Attach(GetItem(IDC_BENCH_NUM_THREADS));
-  const UInt32 numTheads_Combo = numCPUs * 2;
+  if (numCPUs_Sys == 0)
+    numCPUs_Sys = 1;
+  const UInt32 numTheads_Combo = numCPUs_Sys * 2;
   UInt32 v = 1;
   int cur = 0;
   for (; v <= numTheads_Combo;)
@@ -1093,16 +1081,17 @@ static void AddUsageString(UString &s, const CTotalBenchRes &info)
     numIter = 1000000;
   UInt64 usage = GetUsagePercents(info.Usage / numIter);
 
-  wchar_t w[64];
-  ConvertUInt64ToString(usage, w);
-  unsigned len = MyStringLen(w);
+  wchar_t w[32];
+  wchar_t *p = ConvertUInt64ToString(usage, w);
+  p[0] = '%';
+  p[1] = 0;
+  unsigned len = (unsigned)(size_t)(p - w);
   while (len < 5)
   {
     s.Add_Space();
     len++;
   }
   s += w;
-  s += "%";
 }
 
 

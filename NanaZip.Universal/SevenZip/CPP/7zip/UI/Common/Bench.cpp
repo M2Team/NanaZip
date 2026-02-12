@@ -3038,7 +3038,7 @@ AString GetProcessThreadsInfo(const NSystem::CProcessAffinity &ti)
     FOR_VECTOR (i, ti.Groups.GroupSizes)
     {
       if (i != 0)
-        s.Add_Char(' ');
+        s.Add_Space();
       s.Add_UInt32(ti.Groups.GroupSizes[i]);
     }
   }
@@ -3773,10 +3773,11 @@ HRESULT Bench(
 
   #ifndef Z7_ST
 
-  if (threadsInfo.Get() && threadsInfo.GetNumProcessThreads() != 0)
-    numCPUs = threadsInfo.GetNumProcessThreads();
-  else
+  if (!threadsInfo.Get()
+      || (numCPUs = threadsInfo.GetNumProcessThreads()) == 0)
     numCPUs = NSystem::GetNumberOfProcessors();
+  // numCPUs : is number of threads assigned to process with affinity,
+  // or it's total number of threads in all groups, if IsGroupMode == true, and there is default affinity.
 
   #endif
 

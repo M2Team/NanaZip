@@ -25,6 +25,8 @@ public:
   LRESULT AddString(LPCWSTR s);
   #endif
 
+  LRESULT AddString_SetItemData(LPCWSTR s, LPARAM lParam);
+
   /* If this parameter is -1, any current selection in the list is removed and the edit control is cleared.*/
   LRESULT SetCurSel(int index) { return SendMsg(CB_SETCURSEL, MY_int_TO_WPARAM(index), 0); }
   LRESULT SetCurSel(unsigned index) { return SendMsg(CB_SETCURSEL, index, 0); }

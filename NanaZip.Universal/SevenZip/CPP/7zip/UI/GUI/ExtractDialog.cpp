@@ -110,8 +110,7 @@ void AddComboItems(NControl::CComboBox &combo, const UInt32 *langIDs, unsigned n
   {
     UString s = LangString(langIDs[i]);
     s.RemoveChar(L'&');
-    const int index = (int)combo.AddString(s);
-    combo.SetItemData(index, (LPARAM)i);
+    combo.AddString_SetItemData(s, (LPARAM)i);
     if (values[i] == curVal)
       curSel = i;
   }
