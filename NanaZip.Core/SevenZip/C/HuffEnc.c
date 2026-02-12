@@ -13,7 +13,7 @@ Igor Pavlov : Public domain */
 #define NUM_BITS      10
 #define MASK          ((1u << NUM_BITS) - 1)
 #define FREQ_MASK     (~(UInt32)MASK)
-#define NUM_COUNTERS  (48 * 2)
+#define NUM_COUNTERS  (104 * 2) // (80 * 2) or (128 * 2) : ((prime_number + 1) * 2) for smaller code.
 
 #if 1 && (defined(MY_CPU_LE) || defined(MY_CPU_BE))
 #if defined(MY_CPU_LE)
@@ -95,9 +95,10 @@ void Huffman_Generate(const UInt32 *freqs, UInt32 *p, Byte *lens, unsigned numSy
     counters[1] = 0;
     for (i = 2; i != NUM_COUNTERS; i += 2)
     {
-      unsigned c;
-      c = (counters    )[i];  (counters    )[i] = num;  num += c;
-      c = (counters + 1)[i];  (counters + 1)[i] = num;  num += c;
+      const unsigned c0 = (counters    )[i];
+      const unsigned c1 = (counters + 1)[i];
+      (counters    )[i] = num;  num += c0;
+      (counters + 1)[i] = num;  num += c1;
     }
     counters[0] = num; // we want to write (freq==0) symbols to the end of (p) array
     {

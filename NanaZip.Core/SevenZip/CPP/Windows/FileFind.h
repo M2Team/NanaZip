@@ -277,13 +277,13 @@ typedef CFileInfo CDirEntry;
 struct CDirEntry
 {
   ino_t iNode;
-#if !defined(_AIX) && !defined(__sun)
+#if !defined(_AIX) && !defined(__sun) && !defined(__QNXNTO__)
   Byte Type;
 #endif
   FString Name;
 
   /*
-#if !defined(_AIX) && !defined(__sun)
+#if !defined(_AIX) && !defined(__sun) && !defined(__QNXNTO__)
   bool IsDir() const
   {
     // (Type == DT_UNKNOWN) on some systems
@@ -310,7 +310,7 @@ public:
   bool Fill_FileInfo(const CDirEntry &de, CFileInfo &fileInfo, bool followLink) const;
   bool DirEntry_IsDir(const CDirEntry &de, bool followLink) const
   {
-#if !defined(_AIX) && !defined(__sun)
+#if !defined(_AIX) && !defined(__sun) && !defined(__QNXNTO__)
     if (de.Type == DT_DIR)
       return true;
     if (de.Type != DT_UNKNOWN)

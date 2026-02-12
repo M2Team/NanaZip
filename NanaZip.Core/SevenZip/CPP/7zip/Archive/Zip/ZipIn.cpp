@@ -1718,61 +1718,49 @@ HRESULT CInArchive::TryEcd64(UInt64 offset, CCdInfo &cdInfo)
 
 HRESULT CInArchive::FindCd(bool checkOffsetMode)
 {
-  CCdInfo &cdInfo = Vols.ecd;
-
-  UInt64 endPos;
-  
   // There are no useful data in cache in most cases here.
-  // So here we don't use cache data from previous operations .
-  
+  // So here we don't use cache data from previous operations.
   InitBuf();
+  UInt64 endPos;
   RINOK(InStream_GetSize_SeekToEnd(Stream, endPos))
   _streamPos = endPos;
-  
-  // const UInt32 kBufSizeMax2 = ((UInt32)1 << 16) + kEcdSize + kEcd64Locator_Size + kEcd64_FullSize;
-  const size_t kBufSizeMax = ((size_t)1 << 17); // must be larger than kBufSizeMax2
-  
+  const size_t kBufSizeMax = (size_t)1 << 17; // must be larger than
+      // (1 << 16) + kEcdSize + kEcd64Locator_Size + kEcd64_FullSize
   const size_t bufSize = (endPos < kBufSizeMax) ? (size_t)endPos : kBufSizeMax;
   if (bufSize < kEcdSize)
     return S_FALSE;
-  // CByteArr byteBuffer(bufSize);
-
   RINOK(AllocateBuffer(kBufSizeMax))
+  {
+    RINOK(Seek_SavePos(endPos - bufSize))
+    size_t processed = bufSize;
+    const HRESULT res = ReadStream(Stream, Buffer, &processed);
+    _streamPos += processed;
+    _bufCached = processed;
+    _bufPos = 0;
+    _cnt += processed;
+    if (res != S_OK)
+      return res;
+    if (processed != bufSize)
+      return S_FALSE;
+  }
 
-  RINOK(Seek_SavePos(endPos - bufSize))
-
-  size_t processed = bufSize;
-  HRESULT res = ReadStream(Stream, Buffer, &processed);
-  _streamPos += processed;
-  _bufCached = processed;
-  _bufPos = 0;
-  _cnt += processed;
-  if (res != S_OK)
-    return res;
-  if (processed != bufSize)
-    return S_FALSE;
-
+  CCdInfo &cdInfo = Vols.ecd;
   
   for (size_t i = bufSize - kEcdSize + 1;;)
   {
-    if (i == 0)
-      return S_FALSE;
-    
     const Byte *buf = Buffer;
-
-    for (;;)
     {
-      i--;
-      if (buf[i] == 0x50)
-        break;
-      if (i == 0)
-        return S_FALSE;
-    }
-    
-    if (Get32(buf + i) != NSignature::kEcd)
-      continue;
+      const Byte *p = buf + i;
+      do
+        if (p == buf)
+          return S_FALSE;
+      while (*(--p) != 0x50);
 
-    cdInfo.ParseEcd32(buf + i);
+      i = (size_t)(p - buf);
+      if (Get32(p) != NSignature::kEcd)
+        continue;
+      cdInfo.ParseEcd32(p);
+    }
     
     if (i >= kEcd64Locator_Size)
     {
@@ -1793,29 +1781,24 @@ HRESULT CInArchive::FindCd(bool checkOffsetMode)
           
           // Most of the zip64 use fixed size Zip64 ECD
           // we try relative backward reading.
-
-          UInt64 absEcd64 = endPos - bufSize + i - (kEcd64Locator_Size + kEcd64_FullSize);
+          const UInt64 absEcd64 = endPos - bufSize + i - (kEcd64Locator_Size + kEcd64_FullSize);
           
           if (locatorIndex >= kEcd64_FullSize)
           if (checkOffsetMode || absEcd64 == locator.Ecd64Offset)
           {
             const Byte *ecd64 = buf + locatorIndex - kEcd64_FullSize;
-            if (Get32(ecd64) == NSignature::kEcd64)
+            if (Get32(ecd64) == NSignature::kEcd64 &&
+                Get64(ecd64 + 4) == kEcd64_MainSize)
             {
-              UInt64 mainEcd64Size = Get64(ecd64 + 4);
-              if (mainEcd64Size == kEcd64_MainSize)
-              {
-                cdInfo.ParseEcd64e(ecd64 + 12);
-                ArcInfo.Base = (Int64)(absEcd64 - locator.Ecd64Offset);
-                // ArcInfo.BaseVolIndex = cdInfo.ThisDisk;
-                return S_OK;
-              }
+              cdInfo.ParseEcd64e(ecd64 + 12);
+              ArcInfo.Base = (Int64)(absEcd64 - locator.Ecd64Offset);
+              // ArcInfo.BaseVolIndex = cdInfo.ThisDisk;
+              return S_OK;
             }
           }
           
           // some zip64 use variable size Zip64 ECD.
           // we try to use absolute offset from locator.
-
           if (absEcd64 != locator.Ecd64Offset)
           {
             if (TryEcd64(locator.Ecd64Offset, cdInfo) == S_OK)
@@ -1881,6 +1864,9 @@ HRESULT CInArchive::TryReadCd(CObjectVector<CItemEx> &items, const CCdInfo &cdIn
   items.Clear();
   IsCdUnsorted = false;
   
+  if ((Int64)cdOffset < 0)
+    return S_FALSE;
+
   // _startLocalFromCd_Disk = (UInt32)(Int32)-1;
   // _startLocalFromCd_Offset = (UInt64)(Int64)-1;
 

@@ -48,7 +48,7 @@ int g_CodePage = -1;
 extern CStdOutStream *g_StdStream;
 
 // **************** NanaZip Modification Start ****************
-//static const char* const kCopyrightString =
+//static const char * const kCopyrightString =
 //"\n7-Zip SFX " MY_VERSION_CPU " : " MY_COPYRIGHT_DATE "\n";
 static const char* const kCopyrightString =
 "\nNanaZip SFX " MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")"
@@ -124,10 +124,10 @@ static const NRecursedType::EEnum kCommandRecursedDefault[kNumCommandForms] =
 static const char * const kUniversalWildcard = "*";
 
 static const char * const kHelpString =
-// **************** NanaZip Modification Start ****************
+    // **************** NanaZip Modification Start ****************
     //"\nUsage: 7zSFX [<command>] [<switches>...] [<file_name>...]\n"
     "\nUsage: NanaZip.Core.Console [<command>] [<switches>...] [<file_name>...]\n"
-// **************** NanaZip Modification End ****************
+    // **************** NanaZip Modification End ****************
     "\n"
     "<Commands>\n"
     // "  l: List contents of archive\n"
@@ -164,7 +164,7 @@ namespace NCommandType
   };
 }
 
-static const char *g_Commands = "txl";
+static const char * const g_Commands = "txl";
 
 struct CArchiveCommand
 {

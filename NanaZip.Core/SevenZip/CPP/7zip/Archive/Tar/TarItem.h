@@ -322,6 +322,7 @@ struct CPaxExtra
 struct CItemEx: public CItem
 {
   bool HeaderError;
+  bool Method_Error;
   
   bool IsSignedChecksum;
   bool Prefix_WasUsed;

@@ -49,42 +49,54 @@ void COutArchive::SeekToCurPos()
 // #define DOES_NEED_ZIP64(v) (v >= 0)
 
 
+Z7_NO_INLINE
 void COutArchive::WriteBytes(const void *data, size_t size)
 {
   m_OutBuffer.WriteBytes(data, size);
   m_CurPos += size;
 }
 
+Z7_NO_INLINE
 void COutArchive::Write8(Byte b)
 {
   m_OutBuffer.WriteByte(b);
   m_CurPos++;
 }
 
+Z7_NO_INLINE
 void COutArchive::Write16(UInt16 val)
 {
   Write8((Byte)val);
   Write8((Byte)(val >> 8));
 }
 
+Z7_NO_INLINE
 void COutArchive::Write32(UInt32 val)
 {
   for (int i = 0; i < 4; i++)
   {
-    Write8((Byte)val);
+    // Write8((Byte)val);
+    m_OutBuffer.WriteByte((Byte)val);
     val >>= 8;
   }
+  m_CurPos += 4;
 }
 
+#define WRITE_CONST_PAIR_16_16(a, b)  { Write32((a) | ((UInt32)(b) << 16)); }
+
+Z7_NO_INLINE
 void COutArchive::Write64(UInt64 val)
 {
   for (int i = 0; i < 8; i++)
   {
-    Write8((Byte)val);
+    // Write8((Byte)val);
+    m_OutBuffer.WriteByte((Byte)val);
     val >>= 8;
   }
+  m_CurPos += 8;
 }
 
+Z7_NO_INLINE
 void COutArchive::WriteExtra(const CExtraBlock &extra)
 {
   FOR_VECTOR (i, extra.SubBlocks)
@@ -134,11 +146,9 @@ void COutArchive::WriteTimeExtra(const CItemOut &item, bool writeNtfs)
   if (writeNtfs)
   {
     // windows explorer ignores that extra
-    Write16(NFileHeader::NExtraID::kNTFS);
-    Write16(k_Ntfs_ExtraSize);
+    WRITE_CONST_PAIR_16_16(NFileHeader::NExtraID::kNTFS, k_Ntfs_ExtraSize)
     Write32(0); // reserved
-    Write16(NFileHeader::NNtfsExtra::kTagTime);
-    Write16(8 * 3);
+    WRITE_CONST_PAIR_16_16(NFileHeader::NNtfsExtra::kTagTime, 8 * 3)
     WriteNtfsTime(item.Ntfs_MTime);
     WriteNtfsTime(item.Ntfs_ATime);
     WriteNtfsTime(item.Ntfs_CTime);
@@ -148,8 +158,7 @@ void COutArchive::WriteTimeExtra(const CItemOut &item, bool writeNtfs)
   {
     // windows explorer ignores that extra
     // by specification : should we write to local header also?
-    Write16(NFileHeader::NExtraID::kUnixTime);
-    Write16(k_UnixTime_ExtraSize);
+    WRITE_CONST_PAIR_16_16(NFileHeader::NExtraID::kUnixTime, k_UnixTime_ExtraSize)
     const Byte flags = (Byte)((unsigned)1 << NFileHeader::NUnixTime::kMTime);
     Write8(flags);
     UInt32 unixTime;
@@ -217,8 +226,7 @@ void COutArchive::WriteLocalHeader(CItemOut &item, bool needCheck)
 
   if (isZip64)
   {
-    Write16(NFileHeader::NExtraID::kZip64);
-    Write16(8 + 8);
+    WRITE_CONST_PAIR_16_16(NFileHeader::NExtraID::kZip64, 8 + 8)
     Write64(size);
     Write64(packSize);
   }
@@ -357,8 +365,9 @@ HRESULT COutArchive::WriteCentralDir(const CObjectVector<CItemOut> &items, const
   const UInt64 cdSize = cd64EndOffset - cdOffset;
   const bool cdOffset64 = DOES_NEED_ZIP64(cdOffset);
   const bool cdSize64 = DOES_NEED_ZIP64(cdSize);
-  const bool items64 = items.Size() >= 0xFFFF;
-  const bool isZip64 = (cdOffset64 || cdSize64 || items64);
+  const bool need_Items_64 = items.Size() >= 0xFFFF;
+  const unsigned items16 = (UInt16)(need_Items_64 ? 0xFFFF: items.Size());
+  const bool isZip64 = (cdOffset64 || cdSize64 || need_Items_64);
   
   // isZip64 = true; // to test Zip64
 
@@ -371,8 +380,8 @@ HRESULT COutArchive::WriteCentralDir(const CObjectVector<CItemOut> &items, const
     // const UInt32 extraSize = 1 << 26;
     // Write64(kEcd64_MainSize + extraSize);
 
-    Write16(45); // made by version
-    Write16(45); // extract version
+    WRITE_CONST_PAIR_16_16(45, // made by version
+        45) // extract version
     Write32(0); // ThisDiskNumber
     Write32(0); // StartCentralDirectoryDiskNumber
     Write64((UInt64)items.Size());
@@ -389,10 +398,9 @@ HRESULT COutArchive::WriteCentralDir(const CObjectVector<CItemOut> &items, const
   }
   
   Write32(NSignature::kEcd);
-  Write16(0); // ThisDiskNumber
-  Write16(0); // StartCentralDirectoryDiskNumber
-  Write16((UInt16)(items64 ? 0xFFFF: items.Size()));
-  Write16((UInt16)(items64 ? 0xFFFF: items.Size()));
+  WRITE_CONST_PAIR_16_16(0, 0)  // ThisDiskNumber, StartCentralDirectoryDiskNumber
+  Write16((UInt16)items16);
+  Write16((UInt16)items16);
   
   WRITE_32_VAL_SPEC(cdSize, cdSize64)
   WRITE_32_VAL_SPEC(cdOffset, cdOffset64)

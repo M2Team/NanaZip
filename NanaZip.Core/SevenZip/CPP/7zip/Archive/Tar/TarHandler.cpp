@@ -65,7 +65,7 @@ static const Byte kArcProps[] =
   kpidComment
 };
 
-static const char *k_Characts_Prefix = "PREFIX";
+static const char * const k_Characts_Prefix = "PREFIX";
 
 IMP_IInArchive_Props
 IMP_IInArchive_ArcProps
@@ -684,10 +684,14 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         s.Add_OptSpaced("SCHILY.fflags=");
         s += item->SCHILY_fflags;
       }
+      if (item->Is_Sparse())
+        s.Add_OptSpaced("SPARSE");
       if (item->IsThereWarning())
         s.Add_OptSpaced("WARNING");
       if (item->HeaderError)
         s.Add_OptSpaced("ERROR");
+      if (item->Method_Error)
+        s.Add_OptSpaced("METHOD_ERROR");
       if (item->Pax_Error)
         s.Add_OptSpaced("PAX_error");
       if (!item->PaxExtra.RawLines.IsEmpty())
@@ -812,11 +816,16 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       inStream2 = inStream;
     else
     {
-      GetStream(index, &inStream2);
-      if (!inStream2)
-        return E_FAIL;
+      const HRESULT hres = GetStream(index, &inStream2);
+      if (hres == E_NOTIMPL)
+        opRes = NExtract::NOperationResult::kHeadersError; // kUnsupportedMethod
+      else if (!inStream2)
+      {
+        opRes = NExtract::NOperationResult::kDataError;
+        // return E_FAIL;
+      }
     }
-
+    if (opRes == NExtract::NOperationResult::kOK)
     {
       if (item->Is_SymLink())
       {
@@ -855,9 +864,9 @@ Z7_CLASS_IMP_IInStream(
   bool _needStartSeek;
 
 public:
+  unsigned ItemIndex;
   CHandler *Handler;
   CMyComPtr<IUnknown> HandlerRef;
-  unsigned ItemIndex;
   CRecordVector<UInt64> PhyOffsets;
 
   void Init()
@@ -879,7 +888,7 @@ Z7_COM7F_IMF(CSparseStream::Read(void *data, UInt32 size, UInt32 *processedSize)
   if (_virtPos >= item.Size)
     return S_OK;
   {
-    UInt64 rem = item.Size - _virtPos;
+    const UInt64 rem = item.Size - _virtPos;
     if (size > rem)
       size = (UInt32)rem;
   }
@@ -903,17 +912,17 @@ Z7_COM7F_IMF(CSparseStream::Read(void *data, UInt32 size, UInt32 *processedSize)
     }
     
     const CSparseBlock &sb = item.SparseBlocks[left];
-    UInt64 relat = _virtPos - sb.Offset;
+    const UInt64 relat = _virtPos - sb.Offset;
     
     if (_virtPos >= sb.Offset && relat < sb.Size)
     {
-      UInt64 rem = sb.Size - relat;
+      const UInt64 rem = sb.Size - relat;
       if (size > rem)
         size = (UInt32)rem;
-      UInt64 phyPos = PhyOffsets[left] + relat;
+      const UInt64 phyPos = PhyOffsets[left] + relat;
       if (_needStartSeek || _phyPos != phyPos)
       {
-        RINOK(InStream_SeekSet(Handler->_stream, (item.Get_DataPos() + phyPos)))
+        RINOK(InStream_SeekSet(Handler->_stream, item.Get_DataPos() + phyPos))
         _needStartSeek = false;
         _phyPos = phyPos;
       }
@@ -927,7 +936,7 @@ Z7_COM7F_IMF(CSparseStream::Read(void *data, UInt32 size, UInt32 *processedSize)
         next = sb.Offset;
       else if (left + 1 < item.SparseBlocks.Size())
         next = item.SparseBlocks[left + 1].Offset;
-      UInt64 rem = next - _virtPos;
+      const UInt64 rem = next - _virtPos;
       if (size > rem)
         size = (UInt32)rem;
       memset(data, 0, size);
@@ -965,6 +974,8 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
 
   if (item.Is_Sparse())
   {
+    if (item.Method_Error)
+      return E_NOTIMPL; // S_FALSE
     CSparseStream *streamSpec = new CSparseStream;
     CMyComPtr<IInStream> streamTemp = streamSpec;
     streamSpec->Init();

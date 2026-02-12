@@ -84,8 +84,8 @@ public:
   BY_HANDLE_FILE_INFORMATION _info;
  #else
   struct stat _info;
-  UInt32 _uid;
-  UInt32 _gid;
+  uid_t _uid; // uid_t can be unsigned or signed int
+  gid_t _gid;
   UString OwnerName;
   UString OwnerGroup;
   bool StoreOwnerId;

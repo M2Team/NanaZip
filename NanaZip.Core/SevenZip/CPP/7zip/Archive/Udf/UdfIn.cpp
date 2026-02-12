@@ -500,10 +500,15 @@ size_t CFileId::Parse(const Byte *p, size_t size)
   processed += impLen;
   Id.Parse(p + processed, idLen);
   processed += idLen;
+  // const size_t processed2 = processed;
   for (;(processed & 3) != 0; processed++)
     if (p[processed] != 0)
       return 0;
-  if ((size_t)tag.CrcLen + 16 != processed) return 0;
+  // some program can create non-standard UDF file where CrcLen doesn't include Padding data
+  if ((size_t)tag.CrcLen + 16 != processed
+      // && (size_t)tag.CrcLen + 16 != processed2 // we can enable this check to support non-standard UDF
+      )
+    return 0;
   return (processed <= size) ? processed : 0;
 }
 
@@ -577,15 +582,20 @@ HRESULT CInArchive::ReadItem(unsigned volIndex, int fsIndex, const CLongAllocDes
 
   item.IcbTag.Parse(p + 16);
 
+  // maybe another FileType values are possible in rare cases.
+  // Shoud we ignore FileType here?
   if (fsIndex < 0)
   {
+    // if (item.IcbTag.FileType == ICB_FILE_TYPE_DIR) return S_FALSE;
     if (item.IcbTag.FileType != ICB_FILE_TYPE_METADATA &&
-        item.IcbTag.FileType != ICB_FILE_TYPE_METADATA_MIRROR)
+        item.IcbTag.FileType != ICB_FILE_TYPE_METADATA_MIRROR &&
+        item.IcbTag.FileType != ICB_FILE_TYPE_METADATA_BITMAP)
       return S_FALSE;
   }
   else if (
       item.IcbTag.FileType != ICB_FILE_TYPE_DIR &&
-      item.IcbTag.FileType != ICB_FILE_TYPE_FILE)
+      item.IcbTag.FileType != ICB_FILE_TYPE_FILE &&
+      item.IcbTag.FileType != ICB_FILE_TYPE_REAL_TIME_FILE) // M2TS files in /BDMV/STREAM/ in Blu-ray movie
     return S_FALSE;
 
   item.Parse(p);
@@ -1210,7 +1220,7 @@ HRESULT CInArchive::Open2()
       if (tag.Id != DESC_TYPE_FileSet)
         return S_FALSE;
       
-      PRF(printf("\n FileSet", volIndex));
+      PRF(printf("\n FileSet"));
       CFileSet fs;
       fs.RecordingTime.Parse(p + 16);
       // fs.InterchangeLevel = Get16(p + 18);

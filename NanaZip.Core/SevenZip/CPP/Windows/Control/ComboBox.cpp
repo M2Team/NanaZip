@@ -82,6 +82,15 @@ LRESULT CComboBox::GetLBText(int index, UString &s)
 }
 #endif
 
+LRESULT CComboBox::AddString_SetItemData(LPCWSTR s, LPARAM lParam)
+{
+  const LRESULT index = AddString(s);
+  // NOTE: SetItemData((int)-1, lParam) works as unexpected.
+  if (index >= 0) // optional check, because (index < 0) is not expected for normal inputs
+    SetItemData((int)index, lParam);
+  return index;
+}
+
 // **************** NanaZip Modification Start ****************
 void CComboBoxEx::Attach(HWND newWindow) {
     _window = newWindow;

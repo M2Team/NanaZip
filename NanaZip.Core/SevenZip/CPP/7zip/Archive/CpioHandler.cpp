@@ -927,7 +927,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         {
 #ifdef _WIN32
           UString u;
-          ConvertUTF8ToUnicode(item.Name, u);
+          ConvertUTF8ToUnicode(s, u);
 #else
           const UString u = MultiByteToUnicodeString(s, CP_OEMCP);
 #endif

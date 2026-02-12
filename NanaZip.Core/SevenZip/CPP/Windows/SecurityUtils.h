@@ -3,7 +3,11 @@
 #ifndef ZIP7_INC_WINDOWS_SECURITY_UTILS_H
 #define ZIP7_INC_WINDOWS_SECURITY_UTILS_H
 
+#if defined(__MINGW32__) || defined(__MINGW64__)
+#include <ntsecapi.h>
+#else
 #include <NTSecAPI.h>
+#endif
 
 #include "Defs.h"
 

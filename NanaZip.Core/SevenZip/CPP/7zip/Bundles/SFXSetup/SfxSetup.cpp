@@ -55,91 +55,60 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
   NIO::CInFile inFile;
   if (!inFile.Open(fileName))
     return false;
-  const size_t kBufferSize = (1 << 12);
+  const size_t kBufferSize = 1 << 12;
 
   Byte buffer[kBufferSize];
-  const unsigned signatureStartSize = MyStringLen(startID);
-  const unsigned signatureEndSize = MyStringLen(endID);
-
+  const size_t signatureStartSize = MyStringLen(startID + 1);
+  const size_t signatureEndSize = MyStringLen(endID + 1);
+  
   size_t numBytesPrev = 0;
   bool writeMode = false;
-  UInt64 posTotal = 0;
+  UInt32 posTotal = 0;
   for (;;)
   {
-    if (posTotal > (1 << 20))
-      return (stringResult.IsEmpty());
     const size_t numReadBytes = kBufferSize - numBytesPrev;
     size_t processedSize;
     if (!inFile.ReadFull(buffer + numBytesPrev, numReadBytes, processedSize))
       return false;
     if (processedSize == 0)
       return true;
-    const size_t numBytesInBuffer = numBytesPrev + processedSize;
-    UInt32 pos = 0;
+    numBytesPrev += processedSize;
+    size_t pos = 0;
     for (;;)
     {
       if (writeMode)
       {
-        if (pos + signatureEndSize > numBytesInBuffer)
+        if (pos + signatureEndSize > numBytesPrev)
           break;
-        if (memcmp(buffer + pos, endID, signatureEndSize) == 0)
-          return true;
-        const Byte b = buffer[pos];
+        const Byte b = buffer[pos++];
         if (b == 0)
           return false;
+        if (b == ';' && memcmp(buffer + pos, endID + 1, signatureEndSize) == 0)
+          return true;
         stringResult += (char)b;
-        pos++;
       }
       else
       {
-        if (pos + signatureStartSize > numBytesInBuffer)
+        if (pos + signatureStartSize > numBytesPrev)
           break;
-        if (memcmp(buffer + pos, startID, signatureStartSize) == 0)
+        const Byte b = buffer[pos++];
+        if (b == ';' && memcmp(buffer + pos, startID + 1, signatureStartSize) == 0)
         {
           writeMode = true;
           pos += signatureStartSize;
         }
-        else
-          pos++;
       }
     }
-    numBytesPrev = numBytesInBuffer - pos;
-    posTotal += pos;
+    posTotal += (UInt32)pos;
+    if (posTotal > (1 << 21))
+      return stringResult.IsEmpty();
+    numBytesPrev -= pos;
     memmove(buffer, buffer + pos, numBytesPrev);
   }
 }
-// **************** NanaZip Modification Start ****************
-// Remove the static identifiers to prevent compiler optimizations that break
-// the SfxSetup configuration file parsing. We should initialize the true values
-// at runtime.
-// GitHub Issue reference: https://github.com/M2Team/NanaZip/issues/795
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
-static char kStartID[] = { ',','!','@','I','n','s','t','a','l','l','@','!','U','T','F','-','8','!', 0 };
-static char kEndID[]   = { ',','!','@','I','n','s','t','a','l','l','E','n','d','@','!', 0 };
 
-static struct CInstallIDInit
-{
-  CInstallIDInit()
-  {
-    kStartID[0] = ';';
-    kEndID[0] = ';';
-  }
-} g_CInstallIDInit;
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-char* StartID()
-{
-    static char CachedResult[] = ",!@Install@!UTF-8!";
-    CachedResult[0] = ';';
-    return CachedResult;
-}
-
-char* EndID()
-{
-    static char CachedResult[] = ",!@InstallEnd@!";
-    CachedResult[0] = ';';
-    return CachedResult;
-}
-// **************** NanaZip Modification End ****************
+static const char * const kStartID = ",!@Install@!UTF-8!";
+static const char * const kEndID   = ",!@InstallEnd@!";
 
 #if defined(_WIN32) && defined(_UNICODE) && !defined(_WIN64) && !defined(UNDER_CE)
 #define NT_CHECK_FAIL_ACTION ShowErrorMessage(L"Unsupported Windows version"); return 1;
@@ -219,10 +188,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   }
 
   AString config;
-  // **************** NanaZip Modification Start ****************
-  // if (!ReadDataString(fullPath, kStartID, kEndID, config))
-  if (!ReadDataString(fullPath, ::StartID(), ::EndID(), config))
-  // **************** NanaZip Modification End ****************
+  if (!ReadDataString(fullPath, kStartID, kEndID, config))
   {
     if (!assumeYes)
       ShowErrorMessage(L"Can't load config info");
@@ -256,7 +222,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
         return 0;
     }
     appLaunched = GetTextConfigValue(pairs, "RunProgram");
-
+    
     #ifdef MY_SHELL_EXECUTE
     executeFile = GetTextConfigValue(pairs, "ExecuteFile");
     executeParameters = GetTextConfigValue(pairs, "ExecuteParameters");
@@ -289,7 +255,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     UString errorMessage;
     HRESULT result = ExtractArchive(codecs, fullPath, tempDirPath, showProgress,
       isCorrupt, errorMessage);
-
+    
     if (result != S_OK)
     {
       if (!assumeYes)
@@ -315,7 +281,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   if (!SetCurrentDir(tempDirPath))
     return 1;
   #endif
-
+  
   HANDLE hProcess = NULL;
 #ifdef MY_SHELL_EXECUTE
   if (!executeFile.IsEmpty())
@@ -370,13 +336,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
         return 1;
       }
     }
-
+    
     {
       FString s2 = tempDirPath;
       NName::NormalizeDirPathPrefix(s2);
       appLaunched.Replace(L"%%T" WSTRING_PATH_SEPARATOR, fs2us(s2));
     }
-
+    
     const UString appNameForError = appLaunched; // actually we need to rtemove parameters also
 
     appLaunched.Replace(L"%%T", fs2us(tempDirPath));
@@ -394,11 +360,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
     startupInfo.dwFlags = 0;
     startupInfo.cbReserved2 = 0;
     startupInfo.lpReserved2 = NULL;
-
+    
     PROCESS_INFORMATION processInformation;
-
+    
     const CSysString appLaunchedSys (GetSystemString(dirPrefix + appLaunched));
-
+    
     const BOOL createResult = CreateProcess(NULL,
         appLaunchedSys.Ptr_non_const(),
         NULL, NULL, FALSE, 0, NULL, NULL /*tempDir.GetPath() */,

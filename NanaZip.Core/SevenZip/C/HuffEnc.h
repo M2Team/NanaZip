@@ -16,7 +16,7 @@ Conditions:
   1 <= maxLen <= 16 = Z7_HUFFMAN_LEN_MAX
   Num_Items(p) >= HUFFMAN_TEMP_SIZE(num)
 */
-void Huffman_Generate(const UInt32 *freqs, UInt32 *p, Byte *lens, UInt32 num, UInt32 maxLen);
+void Huffman_Generate(const UInt32 *freqs, UInt32 *p, Byte *lens, unsigned num, unsigned maxLen);
 
 EXTERN_C_END
 

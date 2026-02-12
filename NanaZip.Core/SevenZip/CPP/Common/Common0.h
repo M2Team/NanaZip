@@ -126,8 +126,9 @@ if compiled with new GCC libstdc++, GCC libstdc++ can use:
 #pragma GCC diagnostic ignored "-Wglobal-constructors"
 #pragma GCC diagnostic ignored "-Wexit-time-destructors"
 
-#if defined(Z7_LLVM_CLANG_VERSION) && __clang_major__ >= 18 // 18.1.0RC
-#pragma GCC diagnostic ignored "-Wswitch-default"
+#if defined(Z7_LLVM_CLANG_VERSION) && __clang_major__ >= 18 /* 18.1.0RC */ \
+  || defined(Z7_APPLE_CLANG_VERSION) && __clang_major__ >= 16 // for APPLE=17 (LLVM=19)
+  #pragma GCC diagnostic ignored "-Wswitch-default"
 #endif
 // #pragma GCC diagnostic ignored "-Wunused-private-field"
 // #pragma GCC diagnostic ignored "-Wnonportable-system-include-path"

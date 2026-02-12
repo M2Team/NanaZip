@@ -8,6 +8,7 @@
 #include "../../../Common/ComTry.h"
 #include "../../../Common/IntToString.h"
 #include "../../../Common/MyBuffer2.h"
+#include "../../../Common/MyLinux.h"
 #include "../../../Common/UTFConvert.h"
 
 #include "../../../Windows/PropVariantUtils.h"
@@ -1184,7 +1185,15 @@ HRESULT CUnpacker::Code(const CItem &item, const CItem &lastItem, UInt64 packSiz
 
   const UInt64 processedSize = outStream->GetPos();
   if (res == S_OK && !lastItem.Is_UnknownSize() && processedSize != lastItem.Size)
-    res = S_FALSE;
+  {
+    // rar_v7.13-: linux archive contains symLink with (packSize == 0 && lastItem.Size != 0)
+    // v25.02: we ignore such record in rar headers:
+    if (packSize != 0
+        || method != 0
+        || lastItem.HostOS != kHost_Unix
+        || !MY_LIN_S_ISLNK(lastItem.Attrib))
+      res = S_FALSE;
+  }
 
   // if (res == S_OK)
   {

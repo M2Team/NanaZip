@@ -7,6 +7,7 @@
 #include "../../../Common/ComTry.h"
 #include "../../../Common/IntToString.h"
 #include "../../../Common/MyBuffer2.h"
+#include "../../../Common/MyLinux.h"
 #include "../../../Common/UTFConvert.h"
 
 #include "../../../Windows/PropVariantUtils.h"
@@ -70,8 +71,14 @@ bool CItem::IsDir() const
     case NHeader::NFile::kHostMSDOS:
     case NHeader::NFile::kHostOS2:
     case NHeader::NFile::kHostWin32:
-      if ((Attrib & FILE_ATTRIBUTE_DIRECTORY) != 0)
+      if (Attrib & FILE_ATTRIBUTE_DIRECTORY)
         return true;
+      break;
+    case NHeader::NFile::kHostUnix:
+    case NHeader::NFile::kHostBeOS:
+      if (MY_LIN_S_ISDIR(Attrib))
+        return true;
+      break;
   }
   return false;
 }
@@ -86,11 +93,20 @@ UInt32 CItem::GetWinAttrib() const
     case NHeader::NFile::kHostWin32:
       a = Attrib;
       break;
+    case NHeader::NFile::kHostUnix:
+    case NHeader::NFile::kHostBeOS:
+      a = Attrib << 16;
+      a |= 0x8000; // add posix mode marker
+      break;
+    // case NHeader::NFile::kHostMacOS:
+    // kHostMacOS was used only by some very old rare case rar.
+    // New rar4-rar7 for macos probably uses kHostUnix.
+    // So we process kHostMacOS without attribute parsing:
     default:
-      a = 0; // must be converted from unix value;
+      a = 0;
   }
   if (IsDir())
-    a |= NHeader::NFile::kWinFileDirectoryAttributeMask;
+    a |= FILE_ATTRIBUTE_DIRECTORY;
   return a;
 }
   

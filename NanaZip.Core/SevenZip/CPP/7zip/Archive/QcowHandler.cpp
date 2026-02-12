@@ -482,6 +482,10 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
   if (_phySize < headerSize)
       _phySize = headerSize;
 
+  // we use 32 MiB limit for L1 size, as QEMU with QCOW_MAX_L1_SIZE limit.
+  if (l1Size > (1u << 22)) // if (l1Size > (1u << (sizeof(size_t) * 8 - 4)))
+    return S_FALSE;
+
   _isArc = true;
   {
     const UInt64 backOffset = Get64((const Byte *)(const void *)buf64 + 8);
@@ -519,7 +523,6 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
   }
   CObjArray<UInt64> table64(l1Size);
   {
-    // if ((t1SizeBytes >> 3) != l1Size) return S_FALSE;
     RINOK(InStream_SeekSet(stream, l1Offset))
     RINOK(ReadStream_FALSE(stream, table64, t1SizeBytes))
   }

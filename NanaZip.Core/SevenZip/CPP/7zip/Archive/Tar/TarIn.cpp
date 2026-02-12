@@ -181,6 +181,7 @@ HRESULT CArchive::GetNextItemReal(CItemEx &item)
 {
   char buf[NFileHeader::kRecordSize];
 
+  item.Method_Error = false;
   error = k_ErrorType_OK;
   filled = false;
 
@@ -218,10 +219,7 @@ HRESULT CArchive::GetNextItemReal(CItemEx &item)
       break;
     item.HeaderSize += NFileHeader::kRecordSize;
     thereAreEmptyRecords = true;
-    if (OpenCallback)
-    {
-      RINOK(Progress(item, 0))
-    }
+    RINOK(Progress(item, 0))
   }
   if (thereAreEmptyRecords)
   {
@@ -335,37 +333,60 @@ HRESULT CArchive::GetNextItemReal(CItemEx &item)
 
   if (item.LinkFlag == NFileHeader::NLinkFlag::kSparse)
   {
-    Byte isExtended = (Byte)buf[482];
-    if (isExtended != 0 && isExtended != 1)
-      return S_OK;
+    // OLD GNU format: parse sparse file information:
+    // PackSize = cumulative size of all non-empty blocks of the file.
+    // We read actual file size from 'realsize' member of oldgnu_header:
     RIF(ParseSize(buf + 483, item.Size, item.Size_IsBin))
-    UInt64 min = 0;
-    for (unsigned i = 0; i < 4; i++)
-    {
-      p = buf + 386 + 24 * i;
-      if (GetBe32(p) == 0)
-      {
-        if (isExtended != 0)
-          return S_OK;
-        break;
-      }
-      CSparseBlock sb;
-      RIF(ParseSize(p, sb.Offset))
-      RIF(ParseSize(p + 12, sb.Size))
-      item.SparseBlocks.Add(sb);
-      if (sb.Offset < min || sb.Offset > item.Size)
-        return S_OK;
-      if ((sb.Offset & 0x1FF) != 0 || (sb.Size & 0x1FF) != 0)
-        return S_OK;
-      min = sb.Offset + sb.Size;
-      if (min < sb.Offset)
-        return S_OK;
-    }
-    if (min > item.Size)
+    if (item.Size < item.PackSize) // additional check
       return S_OK;
 
-    while (isExtended != 0)
+    p = buf + 386;
+    
+    UInt64 end = 0, packSum = 0;
+    unsigned numRecords = 4;
+    unsigned isExtended = (Byte)p[4 * 24]; // (Byte)p[numRecords * 24];
+    // the list of blocks contains non-empty blocks. All another data is empty.
+
+    for (;;)
     {
+      // const unsigned isExtended = (Byte)p[numRecords * 24];
+      if (isExtended > 1)
+        return S_OK;
+      do
+      {
+        if (GetBe32(p) == 0)
+        {
+          if (isExtended)
+            return S_OK;
+          break;
+        }
+        CSparseBlock sb;
+        RIF(ParseSize(p, sb.Offset))
+        RIF(ParseSize(p + 12, sb.Size))
+        p += 24;
+        /* for all non-last blocks we expect :
+             ((sb.Size & 0x1ff) == 0) && ((sb.Offset & 0x1ff) == 0)
+           for last block : (sb.Size == 0) is possible.
+        */
+        if (sb.Offset < end
+            || item.Size < sb.Offset
+            || item.Size - sb.Offset < sb.Size)
+          return S_OK;
+        // optional check:
+        if (sb.Size && ((end & 0x1ff) || (sb.Offset & 0x1ff)))
+        {
+          item.Method_Error = true; // relaxed check
+          // return S_OK;
+        }
+        end = sb.Offset + sb.Size;
+        packSum += sb.Size;
+        item.SparseBlocks.Add(sb);
+      }
+      while (--numRecords);
+
+      if (!isExtended)
+        break;
+
       size_t processedSize = NFileHeader::kRecordSize;
       RINOK(ReadStream(SeqStream, buf, &processedSize))
       if (processedSize != NFileHeader::kRecordSize)
@@ -373,46 +394,22 @@ HRESULT CArchive::GetNextItemReal(CItemEx &item)
         error = k_ErrorType_UnexpectedEnd;
         return S_OK;
       }
-
       item.HeaderSize += NFileHeader::kRecordSize;
-
-      if (OpenCallback)
-      {
-        RINOK(Progress(item, 0))
-      }
-
-      isExtended = (Byte)buf[21 * 24];
-      if (isExtended != 0 && isExtended != 1)
-        return S_OK;
-      for (unsigned i = 0; i < 21; i++)
-      {
-        p = buf + 24 * i;
-        if (GetBe32(p) == 0)
-        {
-          if (isExtended != 0)
-            return S_OK;
-          break;
-        }
-        CSparseBlock sb;
-        RIF(ParseSize(p, sb.Offset))
-        RIF(ParseSize(p + 12, sb.Size))
-        item.SparseBlocks.Add(sb);
-        if (sb.Offset < min || sb.Offset > item.Size)
-          return S_OK;
-        if ((sb.Offset & 0x1FF) != 0 || (sb.Size & 0x1FF) != 0)
-          return S_OK;
-        min = sb.Offset + sb.Size;
-        if (min < sb.Offset)
-          return S_OK;
-      }
+      RINOK(Progress(item, 0))
+      p = buf;
+      numRecords = 21;
+      isExtended = (Byte)p[21 * 24]; // (Byte)p[numRecords * 24];
     }
-    if (min > item.Size)
-      return S_OK;
+    // optional checks for strict size consistency:
+    if (end != item.Size || packSum != item.PackSize)
+    {
+      item.Method_Error = true; // relaxed check
+      // return S_OK;
+    }
   }
  
-  if (item.PackSize >= (UInt64)1 << 63)
+  if (item.PackSize >= (UInt64)1 << 63) // optional check. It was checked in ParseSize() already
     return S_OK;
-
   filled = true;
   error = k_ErrorType_OK;
   return S_OK;
@@ -421,6 +418,8 @@ HRESULT CArchive::GetNextItemReal(CItemEx &item)
 
 HRESULT CArchive::Progress(const CItemEx &item, UInt64 posOffset)
 {
+  if (!OpenCallback)
+    return S_OK;
   const UInt64 pos = item.Get_DataPos() + posOffset;
   if (NumFiles - NumFiles_Prev < (1 << 16)
       // && NumRecords - NumRecords_Prev < (1 << 16)
@@ -500,10 +499,7 @@ HRESULT CArchive::ReadDataToBuffer(const CItemEx &item,
 
   do
   {
-    if (OpenCallback)
-    {
-      RINOK(Progress(item, pos))
-    }
+    RINOK(Progress(item, pos))
 
     unsigned size = kBufSize;
     if (size > packSize)
@@ -813,6 +809,7 @@ HRESULT CArchive::ReadItem2(CItemEx &item)
   item.LongLink_WasUsed_2 = false;
 
   item.HeaderError = false;
+  item.Method_Error = false;
   item.IsSignedChecksum = false;
   item.Prefix_WasUsed = false;
   
@@ -838,13 +835,8 @@ HRESULT CArchive::ReadItem2(CItemEx &item)
 
   for (;;)
   {
-    if (OpenCallback)
-    {
-      RINOK(Progress(item, 0))
-    }
-
+    RINOK(Progress(item, 0))
     RINOK(GetNextItemReal(item))
-
     // NumRecords++;
 
     if (!filled)
@@ -1064,9 +1056,14 @@ HRESULT CArchive::ReadItem2(CItemEx &item)
         // GNU TAR ignores (item.Size) in that case
         if (item.Size != 0 && item.Size != piSize)
           item.Pax_Error = true;
-        item.Size = piSize;
-        item.PackSize = piSize;
-        item.pax_size_WasUsed = true;
+        if (piSize >= ((UInt64)1 << 63))
+          item.Pax_Error = true;
+        else
+        {
+          item.Size = piSize;
+          item.PackSize = piSize;
+          item.pax_size_WasUsed = true;
+        }
       }
       
       item.PaxTimes = paxInfo;
