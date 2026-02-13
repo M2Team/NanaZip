@@ -16,7 +16,11 @@
 #include "App.h"
 #include "FormatUtils.h"
 #include "LangUtils.h"
-#include "ListViewDialog.h"
+// **************** NanaZip Modification Start ****************
+//#include "ListViewDialog.h"
+#include <string>
+#include "../FileManager/EditDialog.h"
+// **************** NanaZip Modification End ****************
 #include "MyLoadMenu.h"
 #include "PropertyName.h"
 
@@ -53,15 +57,22 @@ void CPanel::InvokeSystemCommand(const char *command)
   contextMenu->InvokeCommand(&ci);
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static const char * const kSeparator = "------------------------";
 static const char * const kSeparatorSmall = "----------------";
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+static const wchar_t * const kSeparator = L"------------------------";
+static const wchar_t * const kSeparatorSmall = L"----------------";
+// **************** NanaZip Modification End ****************
 
 extern UString ConvertSizeToString(UInt64 value) throw();
 bool IsSizeProp(UINT propID) throw();
 
 UString GetOpenArcErrorMessage(UInt32 errorFlags);
 
-
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static void AddListAscii(CListViewDialog &dialog, const char *s)
 {
   dialog.Strings.Add((UString)s);
@@ -131,6 +142,85 @@ static void AddPropertyString(PROPID propID, UInt64 val, CListViewDialog &dialog
   NCOM::CPropVariant prop = val;
   AddPropertyString(propID, NULL, prop, dialog);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+static void AddSeparator(std::wstring& text)
+{
+  if (text.length() > 0)
+    text += L"\r\n";
+  text += kSeparator;
+  text += L"\r\n";
+}
+
+static void AddSeparatorSmall(std::wstring& text)
+{
+  if (text.length() > 0)
+    text += L"\r\n";
+  text += kSeparatorSmall;
+  text += L"\r\n";
+}
+
+static void AddPropertyPair(const UString &name, const UString &val, std::wstring &text)
+{
+  if (text.length() > 0)
+    text += L"\r\n";
+  text += name;
+  text += L" =";
+  if (val.Find(L"\r\n") != -1)
+      text += L"\r\n";
+  else
+      text += L" ";
+  text += val;
+  text += L"\r\n";
+}
+
+
+static void AddPropertyString(PROPID propID, const wchar_t *nameBSTR,
+    const NCOM::CPropVariant &prop, std::wstring& text)
+{
+  if (prop.vt != VT_EMPTY)
+  {
+    UString val;
+
+    if (propID == kpidErrorFlags ||
+        propID == kpidWarningFlags)
+    {
+      UInt32 flags = GetOpenArcErrorFlags(prop);
+      if (flags == 0)
+        return;
+      if (flags != 0)
+        val = GetOpenArcErrorMessage(flags);
+    }
+
+    if (val.IsEmpty())
+    {
+      if ((prop.vt == VT_UI8 || prop.vt == VT_UI4 || prop.vt == VT_UI2) && IsSizeProp(propID))
+      {
+        UInt64 v = 0;
+        ConvertPropVariantToUInt64(prop, v);
+        val = ConvertSizeToString(v);
+      }
+      else
+        ConvertPropertyToString2(val, prop, propID, 9); // we send 9 - is ns precision
+    }
+
+    if (!val.IsEmpty())
+    {
+      if (propID == kpidErrorType)
+      {
+        AddPropertyPair(L"Open WARNING:", L"Cannot open the file as expected archive type", text);
+      }
+      AddPropertyPair(GetNameOfProperty(propID, nameBSTR), val, text);
+    }
+  }
+}
+
+
+static void AddPropertyString(PROPID propID, UInt64 val, std::wstring& text)
+{
+  NCOM::CPropVariant prop = val;
+  AddPropertyString(propID, NULL, prop, text);
+}
+// **************** NanaZip Modification End ****************
 
 
 static inline unsigned GetHex_Upper(unsigned v)
@@ -168,7 +258,10 @@ void CPanel::Properties()
   }
 
   {
-    CListViewDialog message;
+    // **************** NanaZip Modification Start ****************
+    //CListViewDialog message;
+    std::wstring message;
+    // **************** NanaZip Modification End ****************
     // message.DeleteIsAllowed = false;
     // message.SelectFirst = false;
 
@@ -414,9 +507,34 @@ void CPanel::Properties()
       }
     }
 
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     message.Title = LangString(IDS_PROPERTIES);
     message.NumColumns = 2;
     message.Create(GetParent());
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    const std::wstring charsToTrim = L" \r\n-";
+
+    // Find the position of the last character that is NOT in our set
+    size_t lastChar = message.find_last_not_of(charsToTrim);
+    if (std::wstring::npos != lastChar)
+    {
+        // If such a character is found, erase everything from the next position
+        // onward.
+        message.erase(lastChar + 1);
+    }
+    else
+    {
+        // Otherwise, if the string contains ONLY trim characters, clear the
+        // whole string.
+        message.clear();
+    }
+
+    CEditDialog ResultDialog;
+    ResultDialog.Title = ::LangString(IDS_PROPERTIES);
+    ResultDialog.Text = message.c_str();
+    ResultDialog.Create(this->GetParent());
+    // **************** NanaZip Modification End ****************
   }
 }
 
