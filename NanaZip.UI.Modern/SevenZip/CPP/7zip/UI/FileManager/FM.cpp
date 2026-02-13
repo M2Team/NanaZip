@@ -235,8 +235,10 @@ static BOOL InitInstance(int nCmdShow)
 
   // wc.hCursor = LoadCursor (NULL, IDC_ARROW);
   wc.hCursor = ::LoadCursor(0, IDC_SIZEWE);
-  // wc.hbrBackground = (HBRUSH) GetStockObject(WHITE_BRUSH);
-  wc.hbrBackground = (HBRUSH) (COLOR_BTNFACE + 1);
+  // This can make the splitter bar fully white to workaround the UI visual
+  // issues in the 2 Panels mode.
+  wc.hbrBackground = (HBRUSH) GetStockObject(WHITE_BRUSH);
+  //wc.hbrBackground = (HBRUSH) (COLOR_BTNFACE + 1);
 
   wc.lpszMenuName = nullptr;
 
