@@ -116,8 +116,12 @@ EXTERN_C int WINAPI K7UserModernMessageBoxW(
         nullptr,
         nullptr);
 
-    if (ButtonID == 0)
+    if (0 == ButtonID)
     {
+        // According to the documentation of TaskDialogIndirect, if the function
+        // fails, the value pointed to by pnButton will be set to zero. To
+        // follow the ABI of MessageBoxW, we will return zero in this case and
+        // set TaskDialogIndirect's HRESULT code to the last error code.
         ::SetLastError(hr);
     }
 
