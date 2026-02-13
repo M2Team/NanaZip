@@ -198,7 +198,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\FSFolderCopy.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LinkDialog.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MenuPage.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MessagesDialog.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MyLoadMenu.cpp" />
@@ -382,7 +381,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\IFolder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LangUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LinkDialog.h" />
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MenuPage.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MessagesDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MyCom2.h" />
