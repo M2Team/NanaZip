@@ -16,7 +16,9 @@
 #include "App.h"
 #include "FormatUtils.h"
 #include "LangUtils.h"
-#include "ListViewDialog.h"
+// **************** NanaZip Modification Start ****************
+//#include "ListViewDialog.h"
+// **************** NanaZip Modification End ****************
 #include "MyLoadMenu.h"
 #include "PropertyName.h"
 

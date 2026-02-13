@@ -194,9 +194,6 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\LinkDialog.cpp">
       <Filter>SevenZip\Dialog</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.cpp">
-      <Filter>SevenZip\Dialog</Filter>
-    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MessagesDialog.cpp">
       <Filter>SevenZip\Dialog</Filter>
     </ClCompile>
@@ -594,9 +591,6 @@
       <Filter>SevenZip\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\LinkDialog.h">
-      <Filter>SevenZip\Dialog</Filter>
-    </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ListViewDialog.h">
       <Filter>SevenZip\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MessagesDialog.h">
