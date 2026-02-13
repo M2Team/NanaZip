@@ -9,7 +9,10 @@
 
 #include "../FileManager/FormatUtils.h"
 #include "../FileManager/LangUtils.h"
-#include "../FileManager/ListViewDialog.h"
+// **************** NanaZip Modification Start ****************
+//#include "../FileManager/ListViewDialog.h"
+#include "../FileManager/EditDialog.h"
+// **************** NanaZip Modification End ****************
 #include "../FileManager/OverwriteDialogRes.h"
 #include "../FileManager/ProgressDialog2.h"
 #include "../FileManager/ProgressDialog2Res.h"
@@ -315,7 +318,10 @@ HRESULT HashCalcGUI(
 
   const UString title = LangString(IDS_CHECKSUM_CALCULATING);
 
+  // **************** NanaZip Modification Start ****************
+  //t.MainTitle = "7-Zip"; // LangString(IDS_APP_TITLE);
   t.MainTitle = "NanaZip"; // LangString(IDS_APP_TITLE);
+  // **************** NanaZip Modification End ****************
   t.MainAddTitle = title;
   t.MainAddTitle.Add_Space();
 
@@ -325,6 +331,8 @@ HRESULT HashCalcGUI(
 }
 
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
 {
   CListViewDialog lv;
@@ -343,6 +351,28 @@ void ShowHashResults(const CPropNameValPairs &propPairs, HWND hwnd)
 
   lv.Create(hwnd);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void ShowHashResults(const CPropNameValPairs& propPairs, HWND hwnd)
+{
+    UString Result;
+    FOR_VECTOR(i, propPairs)
+    {
+        if (!Result.IsEmpty())
+        {
+            Result += L"\r\n\r\n";
+        }
+        const CProperty& pair = propPairs[i];
+        Result += pair.Name;
+        Result += L"\r\n    ";
+        Result += pair.Value;
+    }
+    UString Title = LangString(IDS_CHECKSUM_INFORMATION);
+    CEditDialog ResultDialog;
+    ResultDialog.Title = Title;
+    ResultDialog.Text = Result;
+    ResultDialog.Create(hwnd);
+}
+// **************** NanaZip Modification End ****************
 
 
 void ShowHashResults(const CHashBundle &hb, HWND hwnd)
