@@ -222,7 +222,7 @@ namespace NanaZip::Codecs::Archive
                     static_cast<std::uint32_t>(FileName.size()) + 1,
                     16);
 
-                if (FileName != "." && FileName != "..")
+                if ("." != FileName && ".." != FileName)
                 {
                     Information.Offset = Offset;
                     Information.Path = RootPath + FileName;
