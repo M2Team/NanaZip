@@ -61,7 +61,7 @@ void NanaZip::FileManager::AboutDialog::Show(
             ::ShellExecuteExW(&ExecInfo);
         };
 
-        if (msg == TDN_BUTTON_CLICKED && wParam == IDB_ABOUT_HOMEPAGE)
+        if (TDN_BUTTON_CLICKED == msg && IDB_ABOUT_HOMEPAGE == wParam)
         {
             OpenWebSite(L"https://github.com/M2Team/NanaZip");
             return S_FALSE;
