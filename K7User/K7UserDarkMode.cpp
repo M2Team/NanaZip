@@ -516,6 +516,23 @@ namespace
                 }
             }
 
+            if (::IsFileManagerWindow(hWnd))
+            {
+                RECT ClientArea = {};
+                if (::GetClientRect(hWnd, &ClientArea))
+                {
+                    ::FillRect(
+                        reinterpret_cast<HDC>(wParam),
+                        &ClientArea,
+                        reinterpret_cast<HBRUSH>(
+                            ::GetStockObject(
+                                g_ThreadContext.ShouldAppsUseDarkMode
+                                ? BLACK_BRUSH
+                                : WHITE_BRUSH)));
+                    return TRUE;
+                }
+            }
+
             break;
         }
         case WM_DPICHANGED:
