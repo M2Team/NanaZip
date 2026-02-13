@@ -120,6 +120,10 @@ namespace
          * @brief PDB Files
          */
         Symbols,
+        /**
+         * @brief The counter of file types, must be the last one.
+         */
+        TypeCount,
     };
 
     struct BundleFileEntry
@@ -326,7 +330,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                if (SearchBuffer[0] != 'M' || SearchBuffer[1] != 'Z')
+                if ('M' != SearchBuffer[0] || 'Z' != SearchBuffer[1])
                 {
                     break;
                 }
@@ -385,6 +389,11 @@ namespace NanaZip::Codecs::Archive
                     Current += sizeof(std::uint32_t);
                     Header.NumberOfEmbeddedFiles =
                         this->ReadInt32(&HeaderBuffer[Current]);
+                    if (Header.NumberOfEmbeddedFiles <= 0)
+                    {
+                        // Invalid number of embedded files.
+                        throw std::exception();
+                    }
                     Current += sizeof(std::int32_t);
                     std::uint8_t BundleIdLength =
                         this->ReadUInt8(&HeaderBuffer[Current]);
@@ -419,14 +428,29 @@ namespace NanaZip::Codecs::Archive
                         BundleFileEntry Entry;
                         Entry.Offset =
                             this->ReadInt64(&HeaderBuffer[Current]);
+                        if (Entry.Offset <= 0)
+                        {
+                            // Invalid file offset.
+                            throw std::exception();
+                        }
                         Current += sizeof(std::int64_t);
                         Entry.Size =
                             this->ReadInt64(&HeaderBuffer[Current]);
+                        if (Entry.Size < 0)
+                        {
+                            // Invalid file size.
+                            throw std::exception();
+                        }
                         Current += sizeof(std::int64_t);
                         if (Header.MajorVersion >= 6)
                         {
                             Entry.CompressedSize =
                                 this->ReadInt64(&HeaderBuffer[Current]);
+                            if (Entry.CompressedSize < 0)
+                            {
+                                // Invalid compressed file size.
+                                throw std::exception();
+                            }
                             Current += sizeof(std::int64_t);
                         }
                         else
@@ -439,10 +463,41 @@ namespace NanaZip::Codecs::Archive
                         }
                         Entry.Type = static_cast<BundleFileType>(
                             this->ReadUInt8(&HeaderBuffer[Current]));
+                        if (BundleFileType::TypeCount <= Entry.Type)
+                        {
+                            // Invalid file type.
+                            throw std::exception();
+                        }
                         Current += sizeof(std::uint8_t);
-                        std::uint8_t RelativePathLength =
-                            this->ReadUInt8(&HeaderBuffer[Current]);
-                        Current += sizeof(std::uint8_t);
+                        std::uint16_t RelativePathLength = 0;
+                        {
+                            std::uint8_t FirstByte =
+                                this->ReadUInt8(&HeaderBuffer[Current]);
+                            Current += sizeof(std::uint8_t);
+                            if (0x80 & FirstByte)
+                            {
+                                std::uint8_t SecondByte =
+                                    this->ReadUInt8(&HeaderBuffer[Current]);
+                                Current += sizeof(std::uint8_t);
+                                if (0x80 & SecondByte)
+                                {
+                                    // Invalid relative path length.
+                                    throw std::exception();
+                                }
+                                RelativePathLength = (SecondByte & 0x7F);
+                                RelativePathLength <<= 7;
+                                RelativePathLength |= (FirstByte & 0x7F);
+                            }
+                            else
+                            {
+                                RelativePathLength = (FirstByte & 0x7F);
+                            }
+                            if (0 == RelativePathLength)
+                            {
+                                // Invalid relative path length.
+                                throw std::exception();
+                            }
+                        }
                         Entry.RelativePath = std::string(
                             reinterpret_cast<char*>(&HeaderBuffer[Current]),
                             RelativePathLength);
