@@ -402,7 +402,7 @@ namespace
                 {
                     UINT DpiValue = ::GetDpiForWindow(hWnd);
                     Margins.cyTopHeight =
-                        ::MulDiv(80, DpiValue, USER_DEFAULT_SCREEN_DPI);
+                        ::MulDiv(84, DpiValue, USER_DEFAULT_SCREEN_DPI);
                     Margins.cyBottomHeight =
                         ::MulDiv(32, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 }
@@ -456,7 +456,7 @@ namespace
 
                 MARGINS Margins = {};
                 Margins.cyTopHeight =
-                    ::MulDiv(80, DpiValue, USER_DEFAULT_SCREEN_DPI);
+                    ::MulDiv(84, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 Margins.cyBottomHeight =
                     ::MulDiv(32, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 ::DwmExtendFrameIntoClientArea(hWnd, &Margins);
@@ -530,7 +530,7 @@ namespace
 
                 MARGINS Margins = {};
                 Margins.cyTopHeight =
-                    ::MulDiv(80, DpiValue, USER_DEFAULT_SCREEN_DPI);
+                    ::MulDiv(84, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 Margins.cyBottomHeight =
                     ::MulDiv(32, DpiValue, USER_DEFAULT_SCREEN_DPI);
                 ::DwmExtendFrameIntoClientArea(hWnd, &Margins);

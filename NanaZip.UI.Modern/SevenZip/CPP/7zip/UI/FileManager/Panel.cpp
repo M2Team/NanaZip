@@ -58,7 +58,7 @@ static DWORD kStyles[4] = { LVS_ICON, LVS_SMALLICON, LVS_LIST, LVS_REPORT };
 extern HINSTANCE g_hInstance;
 extern DWORD g_ComCtl32Version;
 
-static const int AddressBarHeight = 32;
+static const int AddressBarHeight = 36;
 static const int StatusBarHeight = 32;
 
 void CPanel::Release()

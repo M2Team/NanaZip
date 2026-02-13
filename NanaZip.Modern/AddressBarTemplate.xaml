@@ -189,7 +189,7 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="local:AddressBar">
-          <Grid>
+          <Grid Margin="4,0">
             <Grid.Resources>
               <Style x:Name="DropDownButtonStyle" TargetType="Button">
                 <Setter Property="Template">
@@ -267,10 +267,11 @@
             </Grid.ColumnDefinitions>
             <Button
               x:Name="UpButton"
-              Width="32"
+              Width="48"
               Height="32"
               Margin="0,0,4,0"
               Padding="0"
+              VerticalAlignment="Top"
               Content="&#xE74A;"
               FontFamily="{StaticResource SymbolThemeFontFamily}"
               FontSize="12"
