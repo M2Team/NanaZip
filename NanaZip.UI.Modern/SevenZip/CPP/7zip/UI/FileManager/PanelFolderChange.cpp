@@ -25,7 +25,9 @@
 #include "FSDrives.h"
 #endif
 #include "LangUtils.h"
-#include "ListViewDialog.h"
+// **************** NanaZip Modification Start ****************
+//#include "ListViewDialog.h"
+// **************** NanaZip Modification End ****************
 #include "Panel.h"
 #include "RootFolder.h"
 #include "ViewSettings.h"
@@ -33,7 +35,10 @@
 #include "resource.h"
 
 // **************** NanaZip Modification Start ****************
+#include <CommCtrl.h>
+#pragma comment(lib,"comctl32.lib")
 #include <string>
+#include <vector>
 // **************** NanaZip Modification End ****************
 
 using namespace NWindows;
@@ -811,6 +816,8 @@ bool CPanel::OnNotifyComboBox(LPNMHDR NON_CE_VAR(header), LRESULT & NON_CE_VAR(r
 
 void CPanel::FoldersHistory()
 {
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   CListViewDialog listViewDialog;
   listViewDialog.DeleteIsAllowed = true;
   listViewDialog.SelectFirst = true;
@@ -834,6 +841,53 @@ void CPanel::FoldersHistory()
   }
   if (listViewDialog.FocusedItemIndex >= 0)
     BindToPathAndRefresh(selectString);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    // Because we want to try our best to keep the ABI of K7Base and K7User,
+    // this part won't be wrapped into a K7User API.
+
+    UString WindowTitle;
+    ::LangString(IDS_FOLDERS_HISTORY, WindowTitle);
+
+    UStringVector FolderHistoryList;
+    _appState->FolderHistory.GetList(FolderHistoryList);
+
+    std::vector<TASKDIALOG_BUTTON> RadioButtons;
+    FOR_VECTOR(i, FolderHistoryList)
+    {
+        TASKDIALOG_BUTTON Current = {};
+        Current.nButtonID = static_cast<int>(i);
+        Current.pszButtonText = FolderHistoryList[i].Ptr();
+        RadioButtons.push_back(Current);
+    }
+    
+    TASKDIALOGCONFIG TaskDialogConfig = {};
+    TaskDialogConfig.cbSize = sizeof(TASKDIALOGCONFIG);
+    TaskDialogConfig.hwndParent = this->GetParent();
+    TaskDialogConfig.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION;
+    TaskDialogConfig.dwCommonButtons = TDCBF_OK_BUTTON | TDCBF_CANCEL_BUTTON;
+    TaskDialogConfig.pszWindowTitle = WindowTitle.Ptr();    
+    if (!FolderHistoryList.IsEmpty())
+    {
+        TaskDialogConfig.cRadioButtons = static_cast<UINT>(RadioButtons.size());
+        TaskDialogConfig.pRadioButtons = RadioButtons.data();
+        // Select first item by default if there is any item in the list.
+        TaskDialogConfig.nDefaultRadioButton = 0;
+    }
+    TaskDialogConfig.cxWidth = 300;
+    int ButtonID = 0;
+    int RadioButtonID = 0;
+    ::TaskDialogIndirect(
+        &TaskDialogConfig,
+        &ButtonID,
+        &RadioButtonID,
+        nullptr);
+    if (IDOK == ButtonID &&
+        0 <= RadioButtonID &&
+        FolderHistoryList.Size() > static_cast<unsigned>(RadioButtonID))
+    {
+        BindToPathAndRefresh(FolderHistoryList[RadioButtonID]);
+    }
+// **************** NanaZip Modification End ****************
 }
 
 
