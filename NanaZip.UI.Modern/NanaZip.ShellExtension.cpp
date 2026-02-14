@@ -141,7 +141,7 @@ namespace
 
     static void ReduceString(UString& s)
     {
-        const unsigned kMaxSize = 64;
+        const unsigned kMaxSize = 60;
         if (s.Len() <= kMaxSize)
             return;
         s.Delete(kMaxSize / 2, s.Len() - kMaxSize);

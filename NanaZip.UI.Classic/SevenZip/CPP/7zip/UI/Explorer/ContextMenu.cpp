@@ -399,7 +399,10 @@ UString GetSubFolderNameForExtract(const UString &arcName)
 
 static void ReduceString(UString &s)
 {
-  const unsigned kMaxSize = 64;
+  // **************** NanaZip Modification Start ****************
+  // const unsigned kMaxSize = 64;
+  const unsigned kMaxSize = 60;
+  // **************** NanaZip Modification End ****************
   if (s.Len() <= kMaxSize)
     return;
   s.Delete(kMaxSize / 2, s.Len() - kMaxSize);
