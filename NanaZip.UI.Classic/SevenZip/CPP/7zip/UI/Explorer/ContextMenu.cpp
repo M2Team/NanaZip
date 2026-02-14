@@ -406,6 +406,8 @@ static void ReduceString(UString &s)
   s.Insert(kMaxSize / 2, L" ... ");
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static UString GetQuotedReducedString(const UString &s)
 {
   UString s2 = s;
@@ -413,6 +415,16 @@ static UString GetQuotedReducedString(const UString &s)
   s2.Replace(L"&", L"&&");
   return GetQuotedString(s2);
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+static UString GetQuotedReducedString(const UString &s)
+{
+  UString s2 = s;
+  ReduceString(s2);
+  s2.Replace(L"&", L"&&");
+  s2.InsertAtFront(L'"'); s2 += L'"'; // quote without GetQuotedString (because it escapes now)
+  return s2;
+}
+// **************** 7-Zip ZS Modification End ****************
 
 static void MyFormatNew_ReducedName(UString &s, const UString &name)
 {
