@@ -141,19 +141,23 @@ namespace
 
     static void ReduceString(UString& s)
     {
-        const unsigned kMaxSize = 64;
+        const unsigned kMaxSize = 60;
         if (s.Len() <= kMaxSize)
             return;
         s.Delete(kMaxSize / 2, s.Len() - kMaxSize);
         s.Insert(kMaxSize / 2, L" ... ");
     }
 
+    // Backport GetQuotedReducedString from 7-Zip ZS since GetQuotedString
+    // now does string escaping as well.
     static UString GetQuotedReducedString(const UString& s)
     {
         UString s2 = s;
         ReduceString(s2);
         s2.Replace(L"&", L"&&");
-        return GetQuotedString(s2);
+        s2.InsertAtFront(L'"');
+        s2 += L'"'; // quote without GetQuotedString (because it escapes now)
+        return s2;
     }
 
     static void MyFormatNew_ReducedName(UString& s, const UString& name)
