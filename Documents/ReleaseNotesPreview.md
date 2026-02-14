@@ -2,6 +2,35 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 6.0 Final (6.0.1628.0)**
+
+- Start to provide the official portable binaries package of NanaZip with both
+  Modern and Classic flavors, except the NanaZip File Manager.
+- Fix several crash issues for the .NET Single File Application bundle readonly
+  support. (Thanks to haaeein.)
+- Synchronize 7-Zip mainline implementations to 26.00. (Except the NanaZip File
+  Manager.) (Thanks to Igor Pavlov. Noticed by FadeMind.)
+- Improve the address bar UI layout. (Suggested by VinaC2.)
+- Make the splitter bar fully white to workaround the light mode UI visual
+  issues in the 2 Panels mode.
+- Fix the splitter bar cannot have Mica in the dark mode.
+- Add the dark mode support for Win32 task dialog.
+- Use Win32 TaskDialog to implement the Folders History dialog to simplify the
+  implementation.
+- Introduce Group Policy Administrative Template (ADMX/ADML) for NanaZip.
+  (Contributed by dinhngtu.)
+- Update Dutch translation. (Contributed by Stephan-P.)
+- Synchronize the NanaZip File Manager implementations between NanaZip (Modern)
+  and NanaZip Classic.
+- Fix some potential issues for the dark mode support.
+- Try to partially improve the NanaZip File Manager main window keyboard
+  navigation experience.
+- Update Mile.Windows.Internal to 1.0.3515.
+- Update Mile.Xaml to 2.5.1616.
+- Add RestoreNuGetPackages.cmd script to workaround some issues for people who
+  want to use Visual Studio to build NanaZip without running BuildAllTargets.bat
+  script.
+ 
 **NanaZip 6.0 Preview 2 (6.0.1621.0)**
 
 - Introduce NanaZip.Universal.Windows project for making NanaZip Command Line
@@ -17,8 +46,8 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   (which is contributed by dinhngtu). Read
   https://github.com/M2Team/NanaZip/blob/main/Documents/Policies.md for more
   information.
-- Backport CVE-2025-0411 and CVE-2025-11001 for NanaZip File Manager which still
-  use the old 7-Zip mainline codebase. (Contributed by dinhngtu.)
+- Backport CVE-2025-0411 and CVE-2025-11001 for the NanaZip File Manager which
+  still use the old 7-Zip mainline codebase. (Contributed by dinhngtu.)
 - Set the LOAD_LIBRARY_SEARCH_SYSTEM32 dependent load flag on Release builds of
   Self Extracting Executables stubs to mitigate static imports level DLL
   planting attack on Windows 10 build 14393 and later. (Contributed by
@@ -50,8 +79,8 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
   which still use the old 7-Zip mainline codebase (command line version).
   (Thanks to Igor Pavlov.)
 - Synchronize the 7-Zip ZS implementations to
-  https://github.com/mcmilk/7-Zip-zstd/tree/5766dd7745f6517f7ea42f6de9a190dfd92aa25f,
-  except NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  https://github.com/mcmilk/7-Zip-zstd/tree/5766dd7745f6517f7ea42f6de9a190dfd92aa25f.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
   Reichardt.)
 - Synchronize Brotli implementations to v1.2.0.
   (https://github.com/google/brotli/releases/tag/v1.2.0)
