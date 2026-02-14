@@ -173,7 +173,8 @@ Classic. Here are the differences between them.
 > from the NanaZipPackage project output. For example, if you are using the
 > files extracted from the MSIX package of NanaZip like Scoop package manager
 > does. We hugely recommend you to use the official release packages of NanaZip.
-> For example, WinGet package manager uses Microsoft Store to install NanaZip.
+> For example, WinGet package manager uses NanaZip official release package to
+> install NanaZip.
 
 ## System Requirements
 
