@@ -13,6 +13,8 @@
 #include "NanaZip.Codecs.SevenZipWrapper.h"
 
 #include <map>
+#include <unordered_set>
+#include <deque>
 
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
@@ -55,6 +57,11 @@ namespace
     // The Windows MAX_PATH as the maximum path length should enough for most
     // ROMFS cases.
     const std::size_t g_RomfsMaximumPathLength = MAX_PATH;
+
+    // Limit resource consumption.
+    const std::size_t g_RomfsMaximumEntries = 10000;
+    // Protect against excessively-deep directory structures.
+    const std::size_t g_RomfsMaximumVisitDepth = 1000;
 
     struct RomfsHeader
     {
@@ -123,6 +130,12 @@ namespace NanaZip::Codecs::Archive
         IInStream* m_FileStream = nullptr;
         std::uint32_t m_FullSize = 0;
         std::string m_VolumeName;
+
+        // For GetAllPaths.
+        std::deque<std::pair<std::uint32_t, std::string>> m_VisitQueue;
+        // Protect against recursive structures.
+        std::unordered_set<std::uint32_t> m_VisitedOffsets;
+
         std::map<std::string, RomfsFilePathInformation> m_TemporaryFilePaths;
         std::vector<RomfsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;
@@ -176,14 +189,27 @@ namespace NanaZip::Codecs::Archive
 
     private:
 
-        void GetAllPaths(
+        HRESULT GetOnePath(
             std::uint32_t Offset,
-            std::string const& RootPath)
+            std::string const& Path)
         {
             while (Offset)
             {
                 RomfsFilePathInformation Information;
                 Information.Inode = Offset;
+
+                if (m_VisitedOffsets.size() >= g_RomfsMaximumEntries)
+                {
+                    // Too many files, softly bail out.
+                    return S_OK;
+                }
+
+                auto [Iterator, Inserted] = m_VisitedOffsets.insert(Offset);
+                if (!Inserted)
+                {
+                    // We have visited recursively. Bail out.
+                    return HRESULT_FROM_WIN32(ERROR_FILE_CORRUPT);
+                }
 
                 std::uint8_t FileHeaderBuffer[
                     offsetof(RomfsFileHeader, FileName)] = {};
@@ -225,11 +251,21 @@ namespace NanaZip::Codecs::Archive
                 if ("." != FileName && ".." != FileName)
                 {
                     Information.Offset = Offset;
-                    Information.Path = RootPath + FileName;
+                    Information.Path = Path + FileName;
 
                     if (RomfsFileType::Directory == Information.Type)
                     {
-                        this->GetAllPaths(Offset, Information.Path + "/");
+                        if (m_VisitQueue.size() < g_RomfsMaximumVisitDepth)
+                        {
+                            m_VisitQueue.emplace_back(
+                                Offset,
+                                Information.Path + "/");
+                        }
+                        else
+                        {
+                            // Exceeded our internal limit, bail out.
+                            return HRESULT_FROM_WIN32(ERROR_FILE_CORRUPT);
+                        }
                     }
                     else if (RomfsFileType::HardLink == Information.Type)
                     {
@@ -244,6 +280,31 @@ namespace NanaZip::Codecs::Archive
 
                 Offset = NextOffset;
             }
+
+            return S_OK;
+        }
+
+        HRESULT GetAllPaths(std::uint32_t RootOffset)
+        {
+            m_VisitQueue.clear();
+            m_VisitedOffsets.clear();
+            m_VisitQueue.emplace_back(RootOffset, "");
+
+            while (!m_VisitQueue.empty())
+            {
+                HRESULT Result;
+
+                // Get the entry out before visiting.
+                auto [Offset, Path] = std::move(m_VisitQueue.front());
+                m_VisitQueue.pop_front();
+                Result = this->GetOnePath(Offset, Path);
+                if (S_OK != Result)
+                {
+                    return Result;
+                }
+            }
+
+            return S_OK;
         }
 
     public:
@@ -342,7 +403,11 @@ namespace NanaZip::Codecs::Archive
                     OpenCallback->SetTotal(&TotalFiles, &TotalBytes);
                 }
 
-                this->GetAllPaths(Offset, "");
+                hr = this->GetAllPaths(Offset);
+                if (FAILED(hr))
+                {
+                    break;
+                }
 
                 TotalFiles = this->m_TemporaryFilePaths.size();
                 if (OpenCallback)
