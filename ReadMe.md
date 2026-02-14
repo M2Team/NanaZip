@@ -151,14 +151,6 @@ Classic. Here are the differences between them.
   - Provide 7-Zip execution alias for helping users to migrate to NanaZip.
   - XAML-based GUI.
 
-> [!CAUTION]
->  extract the files from
-> the MSIX package or copy from the NanaZipPackage project output. It's designed
-> for debugging/testing/development purpose and users who really need portable
-> version. 
-
-  
-
 - NanaZip Classic (**Work In Progress**)
   - Only portable version which is suitable for Server Core, Windows PE, Windows
     RE, and Wine.
