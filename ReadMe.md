@@ -152,14 +152,12 @@ Classic. Here are the differences between them.
   - XAML-based GUI.
 
 > [!CAUTION]
-> NanaZip (Modern) can be used as portable version if you extract the files from
+>  extract the files from
 > the MSIX package or copy from the NanaZipPackage project output. It's designed
 > for debugging/testing/development purpose and users who really need portable
-> version. But please note that some features is not available, such as context
-> menu and file associations. This mode is not recommended for users who don't
-> know what they are doing like installing NanaZip (Modern) from third-party
-> maintained Scoop package. Some issues will not be fixed if you are using
-> NanaZip (Modern) in portable mode.
+> version. 
+
+  
 
 - NanaZip Classic (**Work In Progress**)
   - Only portable version which is suitable for Server Core, Windows PE, Windows
@@ -168,6 +166,22 @@ Classic. Here are the differences between them.
   - Don't have the file associations support.
   - Don't have the 7-Zip execution alias support.
   - Win32 GUI.
+
+> [!CAUTION]
+> NanaZip can be used as portable version if you use the official portable
+> release package. It's designed for debugging/testing/development purpose and
+> scenarios (a.k.a. Server Core, Windows PE, Windows RE, and Wine) really need
+> portable version. But please note that some features is not available, such as
+> context menu and file associations. Some issues will not be fixed if you are
+> using NanaZip in portable mode.
+
+> [!CAUTION]
+> We don't provide any support for users if they are using any non-official
+> release packages, such as extracting the files from the MSIX package or copy
+> from the NanaZipPackage project output. For example, if you are using the
+> files extracted from the MSIX package of NanaZip like Scoop package manager
+> does. We hugely recommend you to use the official release packages of NanaZip.
+> For example, WinGet package manager uses Microsoft Store to install NanaZip.
 
 ## System Requirements
 
