@@ -68,12 +68,42 @@
   <Target Name="Packaging">
     <PropertyGroup>
       <InputBinariesPath>$(MSBuildThisFileDirectory)Output\Binaries\Release\</InputBinariesPath>
+      <OutputBinariesPath>$(MSBuildThisFileDirectory)Output\Binaries\Root\Binaries\</OutputBinariesPath>
       <OutputSymbolsPath>$(MSBuildThisFileDirectory)Output\Binaries\Root\Symbols\</OutputSymbolsPath>
       <OutputFileNamePrefix>NanaZip_$(MileProjectVersion)</OutputFileNamePrefix>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputSymbolsPath)arm64" />
     <MakeDir Directories="$(OutputSymbolsPath)x64" />
+
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)License.md" DestinationFiles="$(OutputBinariesPath)License.txt" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)ReadMe.md" DestinationFiles="$(OutputBinariesPath)ReadMe.txt" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)Documents\People.md" DestinationFiles="$(OutputBinariesPath)People.txt" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)Documents\Policies.md" DestinationFiles="$(OutputBinariesPath)Policies.txt" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)Documents\ReleaseNotes.md" DestinationFiles="$(OutputBinariesPath)ReleaseNotes.txt" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)Documents\ReleaseNotesPreview.md" DestinationFiles="$(OutputBinariesPath)ReleaseNotesPreview.txt" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\K7Base.dll" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\K7User.dll" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Codecs.dll" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.dll" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.Console.sfx" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Core.Windows.sfx" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Modern.dll" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Universal.Console.exe" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\NanaZip.Universal.Windows.exe" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\Mile.Xaml.Styles.SunValley.xbf" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\resources.pri" DestinationFolder="$(OutputBinariesPath)arm64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\K7Base.dll" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\K7User.dll" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Codecs.dll" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.dll" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.Console.sfx" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Core.Windows.sfx" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Modern.dll" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Universal.Console.exe" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Universal.Windows.exe" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\Mile.Xaml.Styles.SunValley.xbf" DestinationFolder="$(OutputBinariesPath)x64" />
+    <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\resources.pri" DestinationFolder="$(OutputBinariesPath)x64" />
 
     <Copy SourceFiles="$(MSBuildThisFileDirectory)License.md" DestinationFiles="$(OutputSymbolsPath)License.txt" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\arm64\K7Base.pdb" DestinationFolder="$(OutputSymbolsPath)arm64" />
@@ -99,6 +129,7 @@
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Modern.FileManager.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZipPackage\x64\NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)x64" />
 
+    <Exec Command="&quot;$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Universal.Console.exe&quot; a -r .\Output\$(OutputFileNamePrefix)_Binaries.zip .\Output\Binaries\Root\Binaries\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
     <Exec Command="&quot;$(InputBinariesPath)NanaZipPackage\x64\NanaZip.Universal.Console.exe&quot; a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
   </Target>
 </Project>

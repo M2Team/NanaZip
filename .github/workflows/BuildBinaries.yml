@@ -40,3 +40,13 @@ jobs:
       with:
         name: NanaZip_Mainline_BuildBinaryLog
         path: Output/BuildAllTargets.binlog
+    - name: Upload Portable Binaries
+      uses: actions/upload-artifact@v4
+      with:
+        name: NanaZip_Mainline_PortableBinaries
+        path: Output/Binaries/Root/Binaries
+    - name: Upload Debug Symbols
+      uses: actions/upload-artifact@v4
+      with:
+        name: NanaZip_Mainline_DebugSymbols
+        path: Output/Binaries/Root/Symbols
