@@ -202,25 +202,6 @@ namespace
                 }
                 break;
             }
-            case WM_DESTROY:
-            {
-                winrt::DesktopWindowXamlSource XamlSource = nullptr;
-                winrt::copy_from_abi(
-                    XamlSource,
-                    ::GetPropW(hWnd, L"XamlWindowSource"));
-                // Clear the property first to avoid use-after-free issue.
-                ::RemovePropW(hWnd, L"XamlWindowSource");
-                if (XamlSource)
-                {
-                    // Release the reference count from SetPropW.
-                    XamlSource.as<IUnknown>()->Release();
-                    // Close the XAML Island.
-                    XamlSource.Close();
-                    // Destroy the content immediately to avoid unintended access.
-                    XamlSource = nullptr;
-                }
-                break;
-            }
             default:
                 break;
             }

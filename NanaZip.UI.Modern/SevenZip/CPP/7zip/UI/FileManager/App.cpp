@@ -185,39 +185,6 @@ HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcForma
       nullptr,
       ::K7ModernCreateMainWindowToolBarPage(hwnd, g_MoreMenu));
 
-  ::SetWindowSubclass(
-      this->m_ToolBar,
-      [](
-          _In_ HWND hWnd,
-          _In_ UINT uMsg,
-          _In_ WPARAM wParam,
-          _In_ LPARAM lParam,
-          _In_ UINT_PTR uIdSubclass,
-          _In_ DWORD_PTR dwRefData) -> LRESULT
-  {
-      UNREFERENCED_PARAMETER(uIdSubclass);
-      UNREFERENCED_PARAMETER(dwRefData);
-
-      switch (uMsg)
-      {
-      case WM_ERASEBKGND:
-      {
-          ::RemovePropW(hWnd, L"BackgroundFallbackColor");
-          break;
-      }
-      default:
-          break;
-      }
-
-      return ::DefSubclassProc(
-          hWnd,
-          uMsg,
-          wParam,
-          lParam);
-  },
-      0,
-      0);
-
   unsigned i;
   for (i = 0; i < kNumPanelsMax; i++)
     Panels[i].PanelCreated = false;

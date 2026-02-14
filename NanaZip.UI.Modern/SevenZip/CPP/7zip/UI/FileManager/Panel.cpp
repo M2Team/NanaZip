@@ -431,39 +431,6 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       winrt::get_abi(_addressBarControl)
   );
 
-  ::SetWindowSubclass(
-      _addressBarWindow,
-      [](
-          _In_ HWND hWnd,
-          _In_ UINT uMsg,
-          _In_ WPARAM wParam,
-          _In_ LPARAM lParam,
-          _In_ UINT_PTR uIdSubclass,
-          _In_ DWORD_PTR dwRefData) -> LRESULT
-      {
-          UNREFERENCED_PARAMETER(uIdSubclass);
-          UNREFERENCED_PARAMETER(dwRefData);
-
-          switch (uMsg)
-          {
-          case WM_ERASEBKGND:
-          {
-              ::RemovePropW(hWnd, L"BackgroundFallbackColor");
-              break;
-          }
-          default:
-              break;
-          }
-
-          return ::DefSubclassProc(
-              hWnd,
-              uMsg,
-              wParam,
-              lParam);
-      },
-      0,
-      0);
-
   _sysImageList = GetSysImageList(true);
 
   _addressBarControl.UpButtonClicked(
@@ -519,39 +486,6 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       nullptr,
       winrt::get_abi(_statusBarControl)
   );
-
-  ::SetWindowSubclass(
-      _statusBarWindow,
-      [](
-          _In_ HWND hWnd,
-          _In_ UINT uMsg,
-          _In_ WPARAM wParam,
-          _In_ LPARAM lParam,
-          _In_ UINT_PTR uIdSubclass,
-          _In_ DWORD_PTR dwRefData) -> LRESULT
-      {
-          UNREFERENCED_PARAMETER(uIdSubclass);
-          UNREFERENCED_PARAMETER(dwRefData);
-
-          switch (uMsg)
-          {
-          case WM_ERASEBKGND:
-          {
-              ::RemovePropW(hWnd, L"BackgroundFallbackColor");
-              break;
-          }
-          default:
-              break;
-          }
-
-          return ::DefSubclassProc(
-              hWnd,
-              uMsg,
-              wParam,
-              lParam);
-      },
-      0,
-      0);
 
   // #ifndef UNDER_CE
   // if (g_ComCtl32Version >= MAKELONG(71, 4))
