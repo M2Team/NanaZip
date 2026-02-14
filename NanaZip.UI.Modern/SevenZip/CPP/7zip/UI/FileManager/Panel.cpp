@@ -38,8 +38,12 @@
 #include "PropertyNameRes.h"
 
 #include <Mile.Xaml.h>
+#include <winrt/Windows.UI.Xaml.Hosting.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <winrt/Windows.UI.Xaml.Input.h>
+#include <vector>
+// Note: All HWND should belong to the same main window thread.
+extern std::vector<HWND> g_K7ControlList;
 
 using namespace NWindows;
 using namespace NControl;
@@ -431,6 +435,56 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       winrt::get_abi(_addressBarControl)
   );
 
+  {
+      using winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource;
+      using winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSourceTakeFocusRequestedEventArgs;
+      using winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationReason;
+      using winrt::Windows::UI::Xaml::Input::KeyboardNavigationMode;
+
+      DesktopWindowXamlSource XamlSource = nullptr;
+      winrt::copy_from_abi(
+          XamlSource,
+          ::GetPropW(_addressBarWindow, L"XamlWindowSource"));
+
+      XamlSource.Content().TabFocusNavigation(KeyboardNavigationMode::Local);
+
+      XamlSource.TakeFocusRequested(
+          [this](
+              DesktopWindowXamlSource const& sender,
+              DesktopWindowXamlSourceTakeFocusRequestedEventArgs const& e)
+      {
+          UNREFERENCED_PARAMETER(sender);
+          XamlSourceFocusNavigationReason Reason = e.Request().Reason();
+          switch (Reason)
+          {
+          case XamlSourceFocusNavigationReason::First:
+          case XamlSourceFocusNavigationReason::Last:
+          {
+              std::size_t Count = g_K7ControlList.size();
+              std::size_t Index = static_cast<std::size_t>(-1);
+              for (size_t i = 0; i < Count; ++i)
+              {
+                  if (this->_addressBarWindow == g_K7ControlList[i])
+                  {
+                      Index = i;
+                      break;
+                  }
+              }
+              if (static_cast<std::size_t>(-1) != Index)
+              {
+                  std::size_t NextIndex = (XamlSourceFocusNavigationReason::Last == Reason)
+                      ? ((Index == 0) ? (Count - 1) : (Index - 1))
+                      : ((Index + 1) % Count);
+                  ::SetFocus(g_K7ControlList[NextIndex]);
+              }
+              break;
+          }
+          default:
+              break;
+          }
+      });
+  }
+
   _sysImageList = GetSysImageList(true);
 
   _addressBarControl.UpButtonClicked(
@@ -486,6 +540,60 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       nullptr,
       winrt::get_abi(_statusBarControl)
   );
+
+  {
+      using winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource;
+      using winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSourceTakeFocusRequestedEventArgs;
+      using winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationReason;
+      using winrt::Windows::UI::Xaml::Input::KeyboardNavigationMode;
+
+      DesktopWindowXamlSource XamlSource = nullptr;
+      winrt::copy_from_abi(
+          XamlSource,
+          ::GetPropW(_statusBarWindow, L"XamlWindowSource"));
+
+      XamlSource.Content().TabFocusNavigation(KeyboardNavigationMode::Local);
+
+      XamlSource.TakeFocusRequested(
+          [this](
+              DesktopWindowXamlSource const& sender,
+              DesktopWindowXamlSourceTakeFocusRequestedEventArgs const& e)
+      {
+          UNREFERENCED_PARAMETER(sender);
+          XamlSourceFocusNavigationReason Reason = e.Request().Reason();
+          switch (Reason)
+          {
+          case XamlSourceFocusNavigationReason::First:
+          case XamlSourceFocusNavigationReason::Last:
+          {
+              std::size_t Count = g_K7ControlList.size();
+              std::size_t Index = static_cast<std::size_t>(-1);
+              for (size_t i = 0; i < Count; ++i)
+              {
+                  if (this->_statusBarWindow == g_K7ControlList[i])
+                  {
+                      Index = i;
+                      break;
+                  }
+              }
+              if (static_cast<std::size_t>(-1) != Index)
+              {
+                  std::size_t NextIndex = (XamlSourceFocusNavigationReason::Last == Reason)
+                      ? ((Index == 0) ? (Count - 1) : (Index - 1))
+                      : ((Index + 1) % Count);
+                  ::SetFocus(g_K7ControlList[NextIndex]);
+              }
+              break;
+          }
+          default:
+              break;
+          }
+      });
+  }
+
+  g_K7ControlList.push_back(_addressBarWindow);
+  g_K7ControlList.push_back(_listView);
+  g_K7ControlList.push_back(_statusBarWindow);
 
   // #ifndef UNDER_CE
   // if (g_ComCtl32Version >= MAKELONG(71, 4))
