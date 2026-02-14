@@ -119,19 +119,19 @@
   </resheader>
   <data name="BuySponsorEditionButton.AutomationProperties.Name" xml:space="preserve">
     <value>Koop NanaZip Sponsoreditie</value>
-    <comment>Koop NanaZip Sponsoreditie</comment>
+    <comment>Buy NanaZip Sponsor Edition</comment>
   </data>
   <data name="BuySponsorEditionButtonTextBlock.Text" xml:space="preserve">
     <value>Koop NanaZip Sponsoreditie</value>
-    <comment>Koop NanaZip Sponsoreditie</comment>
+    <comment>Buy NanaZip Sponsor Edition</comment>
   </data>
   <data name="ContributeButton.AutomationProperties.Name" xml:space="preserve">
     <value>Draag bij aan NanaZip</value>
-    <comment>Draag bij aan NanaZip</comment>
+    <comment>Become a contributor of NanaZip</comment>
   </data>
   <data name="ContributeButtonTextBlock.Text" xml:space="preserve">
     <value>Draag bij aan NanaZip</value>
-    <comment>Draag bij aan NanaZip</comment>
+    <comment>Become a contributor of NanaZip</comment>
   </data>
   <data name="GridTitleTextBlock.Text" xml:space="preserve">
     <value>Sponsor NanaZip</value>
@@ -139,10 +139,10 @@
   </data>
   <data name="SponsorEditionPolicyButton.AutomationProperties.Name" xml:space="preserve">
     <value>Beleid Sponsoreditie</value>
-    <comment>Beleid Sponsoreditie</comment>
+    <comment>Sponsor Edition Policy</comment>
   </data>
   <data name="SponsorEditionPolicyButtonTextBlock.Text" xml:space="preserve">
     <value>Beleid Sponsoreditie</value>
-    <comment>Beleid Sponsoreditiey</comment>
+    <comment>Sponsor Edition Policy</comment>
   </data>
 </root>

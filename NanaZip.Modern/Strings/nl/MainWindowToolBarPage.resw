@@ -119,11 +119,11 @@
   </resheader>
   <data name="MoreButton.AutomationProperties.Name" xml:space="preserve">
     <value>Meer</value>
-    <comment>Meer</comment>
+    <comment>More</comment>
   </data>
   <data name="MoreButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Meer</value>
-    <comment>Meer</comment>
+    <comment>More</comment>
   </data>
   <data name="SponsorButton.AcquireText" xml:space="preserve">
     <value>Sponsor NanaZip</value>
@@ -131,6 +131,6 @@
   </data>
   <data name="SponsorButton.SponsoredText" xml:space="preserve">
     <value>Waardering voor uw sponsoring</value>
-    <comment>Waardering voor uw sponsoring</comment>
+    <comment>Appreciate your sponsorship</comment>
   </data>
 </root>
