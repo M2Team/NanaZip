@@ -318,7 +318,9 @@
     <PRIResource Include="Strings\ne\Common.resw" />
     <PRIResource Include="Strings\ne\ProgressPage.resw" />
     <PRIResource Include="Strings\nl\Common.resw" />
+    <PRIResource Include="Strings\nl\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\nl\ProgressPage.resw" />
+    <PRIResource Include="Strings\nl\SponsorPage.resw" />
     <PRIResource Include="Strings\nn\Common.resw" />
     <PRIResource Include="Strings\nn\ProgressPage.resw" />
     <PRIResource Include="Strings\pa-in\Common.resw" />

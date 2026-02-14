@@ -799,6 +799,12 @@
     <PRIResource Include="Strings\zh-Hans\ProgressPage.resw">
       <Filter>Strings\zh-Hans</Filter>
     </PRIResource>
+    <PRIResource Include="Strings\nl\SponsorPage.resw">
+      <Filter>Strings\nl</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\nl\MainWindowToolBarPage.resw">
+      <Filter>Strings\nl</Filter>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />

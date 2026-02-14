@@ -64,7 +64,7 @@
     <value>A&amp;fsluiten</value>
   </data>
   <data name="Resource409" xml:space="preserve">
-    <value>Help</value>
+    <value>Hulp</value>
   </data>
   <data name="Resource411" xml:space="preserve">
     <value>&amp;Hervatten</value>
@@ -112,16 +112,16 @@
     <value>E&amp;xtra</value>
   </data>
   <data name="Resource505" xml:space="preserve">
-    <value>&amp;Help</value>
+    <value>&amp;Hulp</value>
   </data>
   <data name="Resource540" xml:space="preserve">
     <value>&amp;Openen</value>
   </data>
   <data name="Resource541" xml:space="preserve">
-    <value>Open b&amp;innen</value>
+    <value>Openen b&amp;innen</value>
   </data>
   <data name="Resource542" xml:space="preserve">
-    <value>Open b&amp;uiten</value>
+    <value>Openen b&amp;uiten</value>
   </data>
   <data name="Resource543" xml:space="preserve">
     <value>Be&amp;kijken</value>
@@ -168,17 +168,17 @@
   <data name="Resource557" xml:space="preserve">
     <value>&amp;Sluiten</value>
   </data>
-  <data name="Resource590" xml:space="preserve">
-    <value>Open binnen *</value>
-  </data>
-  <data name="Resource591" xml:space="preserve">
-    <value>Open binnen #</value>
-  </data>
   <data name="Resource558" xml:space="preserve">
     <value>Koppeling</value>
   </data>
   <data name="Resource559" xml:space="preserve">
     <value>&amp;Alternatieve streams</value>
+  </data>
+  <data name="Resource590" xml:space="preserve">
+    <value>Openen binnen *</value>
+  </data>
+  <data name="Resource591" xml:space="preserve">
+    <value>Openen binnen #</value>
   </data>
   <data name="Resource600" xml:space="preserve">
     <value>&amp;Alles selecteren</value>
@@ -318,6 +318,9 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Woordenboek</value>
   </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
   <data name="Resource1020" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -394,7 +397,7 @@
     <value>Kopgrootte</value>
   </data>
   <data name="Resource1046" xml:space="preserve">
-    <value>Checksum</value>
+    <value>Controlesom</value>
   </data>
   <data name="Resource1047" xml:space="preserve">
     <value>Kenmerken</value>
@@ -535,7 +538,7 @@
     <value>Taal:</value>
   </data>
   <data name="Resource2103" xml:space="preserve">
-    <value>Applicaties</value>
+    <value>Bewerken</value>
   </data>
   <data name="Resource2104" xml:space="preserve">
     <value>&amp;Bewerken:</value>
@@ -597,6 +600,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Inpakken naar {0} en e-mailen</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Hier (slim) uitpakken</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Mappen</value>
   </data>
@@ -637,13 +643,28 @@
     <value>Rasterlijnen weer&amp;geven</value>
   </data>
   <data name="Resource2506" xml:space="preserve">
-    <value>Enkele klik om een item te openen</value>
+    <value>Item openen met één klik</value>
   </data>
   <data name="Resource2507" xml:space="preserve">
     <value>&amp;Alternatieve selectiemodus</value>
   </data>
   <data name="Resource2508" xml:space="preserve">
     <value>&amp;Gebruik grote geheugenpagina's</value>
+  </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>ArcHistory opvragen</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>PathHistory opvragen</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>CopyHistory opvragen</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>FolderHistory opvragen</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Hashes in kleine letters</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Over NanaZip</value>
@@ -806,14 +827,17 @@ Wilt u het bijwerken in het archief?</value>
   <data name="Resource3433" xml:space="preserve">
     <value>Map openen na uitpakken</value>
   </data>
+  <data name="Resource3434" xml:space="preserve">
+    <value>Uitpakken bij openen (druk shift om over te slaan)</value>
+  </data>
   <data name="Resource3440" xml:space="preserve">
-    <value>Doorgeven Zone.Id stream:</value>
+    <value>Zone.ID-stream doorgeven:</value>
   </data>
   <data name="Resource3441" xml:space="preserve">
-    <value>Voor Office Bestanden</value>
+    <value>Voor onveilige bestanden</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
-    <value>Bevestigen om een bestand te vervangen</value>
+    <value>Vervanging van bestand bevestigen</value>
   </data>
   <data name="Resource3501" xml:space="preserve">
     <value>De doelmap bevat het verwerkte bestand al.</value>
@@ -1053,13 +1077,13 @@ Wilt u het bijwerken in het archief?</value>
     <value>Tijdstempel precisie:</value>
   </data>
   <data name="Resource4082" xml:space="preserve">
-    <value>Bewaar wijzigingstijd</value>
+    <value>Wijzigingstijd opslaan</value>
   </data>
   <data name="Resource4083" xml:space="preserve">
-    <value>Bewaar aanmaaktjjd</value>
+    <value>Aanmaaktjjd opslaan</value>
   </data>
   <data name="Resource4084" xml:space="preserve">
-    <value>Bewaar laatste toegangstijd</value>
+    <value>Laatste toegangstijd opslaan</value>
   </data>
   <data name="Resource4085" xml:space="preserve">
     <value>Stel archieftijd in op de laatste bestandstijd</value>
@@ -1104,19 +1128,19 @@ Wilt u het bijwerken in het archief?</value>
     <value>Fout bij het hernoemen van bestand of map</value>
   </data>
   <data name="Resource6010" xml:space="preserve">
-    <value>Kopiëren bestand bevestigen</value>
+    <value>Kopiëren van bestand bevestigen</value>
   </data>
   <data name="Resource6011" xml:space="preserve">
     <value>Weet u zeker dat u deze bestanden naar het archief wilt kopiëren</value>
   </data>
   <data name="Resource6100" xml:space="preserve">
-    <value>Verwijderen bestand bevestigen</value>
+    <value>Verwijderen van bestand bevestigen</value>
   </data>
   <data name="Resource6101" xml:space="preserve">
-    <value>Verwijderen map bevestigen</value>
+    <value>Verwijderen van map bevestigen</value>
   </data>
   <data name="Resource6102" xml:space="preserve">
-    <value>Verwijderen meerdere bestanden bevestigen</value>
+    <value>Verwijderen van meerdere bestanden bevestigen</value>
   </data>
   <data name="Resource6103" xml:space="preserve">
     <value>Weet u zeker dat u '{0}' wilt verwijderen?</value>
@@ -1170,7 +1194,7 @@ Wilt u het bijwerken in het archief?</value>
     <value>Selecteren</value>
   </data>
   <data name="Resource6403" xml:space="preserve">
-    <value>Deselecteren</value>
+    <value>Selectie opheffen</value>
   </data>
   <data name="Resource6404" xml:space="preserve">
     <value>Masker:</value>
@@ -1327,7 +1351,7 @@ Weet u zeker dat u het archief zo wilt opsplitsen?</value>
     <value>Koppelingstype</value>
   </data>
   <data name="Resource7711" xml:space="preserve">
-    <value>Vaste  koppeling</value>
+    <value>Vaste koppeling</value>
   </data>
   <data name="Resource7712" xml:space="preserve">
     <value>Symbolische bestandskoppeling</value>
@@ -1338,4 +1362,11 @@ Weet u zeker dat u het archief zo wilt opsplitsen?</value>
   <data name="Resource7714" xml:space="preserve">
     <value>Mapsplitsing</value>
   </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>Integratie</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Open Windows Instellingen om bestanden te associëren met NanaZip</value>
+  </data>
+
 </root>
