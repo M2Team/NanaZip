@@ -7,6 +7,9 @@ These system-wide policies override user settings and are intended for use by
 system administrators to enforce specific configurations across multiple users
 or systems.
 
+You can enforce these policies on an entire domain using our
+[Group Policy Administrative Templates](PolicyDefinitions).
+
 Here are the currently provided policies and their descriptions.
 
 ## Available policies since NanaZip 6.0

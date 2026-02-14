@@ -19,11 +19,11 @@
 ![MainWindowLightMode](Documents/MainWindowLightMode.png)
 ![MainWindowDarkMode](Documents/MainWindowDarkMode.png)
 
-NanaZip is an open source file archiver intended for the modern Windows 
+NanaZip is an open source file archiver intended for the modern Windows
 experience, forked from the source code of well-known open source file archiver
 7-Zip.
 
-**All kinds of contributions will be appreciated. All suggestions, pull 
+**All kinds of contributions will be appreciated. All suggestions, pull
 requests, and issues are welcome.**
 
 If you want to sponsor the development of NanaZip, please read the document of
@@ -243,21 +243,21 @@ Also, you can also click the Microsoft Store link you needed.
 
 ### MSIX Package
 
-You also can download the MSIX Package in 
+You also can download the MSIX Package in
 [GitHub Releases](https://github.com/M2Team/NanaZip/releases).
 
 After you have downloaded the MSIX Package, you can double click to install it,
-or you can execute the following command in the PowerShell which is run as 
+or you can execute the following command in the PowerShell which is run as
 administrator.
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
 
-Note: All needed dependencies are included in the MSIX Package of NanaZip 
-because we known that it's very difficult for users who do not have access to 
-the store to get our dependency packages, and we want to be robust and 
+Note: All needed dependencies are included in the MSIX Package of NanaZip
+because we known that it's very difficult for users who do not have access to
+the store to get our dependency packages, and we want to be robust and
 deployable everywhere.
 
-If you want to install NanaZip for all users, you can execute the following 
+If you want to install NanaZip for all users, you can execute the following
 command in the PowerShell which is run as administrator.
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxProvisionedPackage -Online -PackagePath `The path of the MSIX package` -LicensePath `The path of the XML license file`
@@ -267,7 +267,7 @@ as administrator instead.
 
 > DISM.exe /Online /Add-ProvisionedAppxPackage /PackagePath:`The path of the MSIX package` /LicensePath:`The path of the XML license file`
 
-For more information, please read documents for [PowerShell](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps) and 
+For more information, please read documents for [PowerShell](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps) and
 [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-app-package--appx-or-appxbundle--servicing-command-line-options?view=windows-11)
 
 Note: Due to the policy from Microsoft Store, you need to run NanaZip with the
@@ -282,31 +282,31 @@ the following command in the PowerShell which is run as administrator.
 
 ## Known issues
 
-- If you can't find NanaZip in the context menu, please restart all File 
+- If you can't find NanaZip in the context menu, please restart all File
   Explorer processes via Task Manager.
 - Due to the design of MSIX, drives' context menu in Explorer only show in
   Windows 11(22H2)+.
-- Due to the issues in Desktop Bridge file system virtualization, you are 
+- Due to the issues in Desktop Bridge file system virtualization, you are
   unable to use NanaZip in the Safe Mode of Windows.
-- Due to the policy from Microsoft Store, NanaZip is unable to disable Desktop 
-  Bridge file system virtualization, so the file operations in 
+- Due to the policy from Microsoft Store, NanaZip is unable to disable Desktop
+  Bridge file system virtualization, so the file operations in
   `%UserProfile%/AppData` will be redirected in Windows 10, and file operations
-  in directories other than `Local`, `LocalLow` and `Roaming` in 
+  in directories other than `Local`, `LocalLow` and `Roaming` in
   `%UserProfile%/AppData` will still be redirected in Windows 11.
-- Due to the Microsoft Store limitations, NanaZip 1.2 and later won't support 
-  languages not mentioned in 
+- Due to the Microsoft Store limitations, NanaZip 1.2 and later won't support
+  languages not mentioned in
   https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages.
 - If you turn off the Windows Firewall, NanaZip may fail to install.
   (https://github.com/M2Team/NanaZip/issues/204)
   (https://github.com/microsoft/terminal/issues/12269)
-- Due to the System Settings limitations, starting with Windows 11+ 
-  (Build 22000.1817+ & 22621.1555+), you can launch directly to the Settings 
+- Due to the System Settings limitations, starting with Windows 11+
+  (Build 22000.1817+ & 22621.1555+), you can launch directly to the Settings
   page for file association for NanaZip.
   (https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-default-apps-settings)
 - Due to the Microsoft Store Licensing API implementation, you will find NanaZip
   will try to access the Internet beginning with NanaZip 3.0 because NanaZip
   needs to use that to check the Sponsor Edition addon licensing status.
-- For optimizing the user experience, NanaZip will only check the Sponsor 
+- For optimizing the user experience, NanaZip will only check the Sponsor
   Edition addon licensing status at the first time your launch NanaZip File
   Manager. You can click the sponsor button if you want to refresh the status
   after you have purchased or redeemed the Sponsor Edition addon.
@@ -322,7 +322,7 @@ the following command in the PowerShell which is run as administrator.
 - [NanaZip Release Notes](Documents/ReleaseNotes.md)
 - [NanaZip Preview Release Notes](Documents/ReleaseNotesPreview.md)
 - [NanaZip Upstream Synchronization Status](Documents/UpstreamSynchronization.md)
-- [NanaZip Group Policy Administrative Template (ADMX/ADML)](Documents/PolicyDefinitions)
+- [NanaZip Group Policy Administrative Templates (ADMX/ADML)](Documents/PolicyDefinitions)
 - [Security Policy](Security.md)
 - [Versioning](Documents/Versioning.md)
 - [My Digital Life Forums](https://forums.mydigitallife.net/threads/84171)
