@@ -4,7 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:local="using:NanaZip.Modern">
 
-  <Thickness x:Key="AddressBarImageIconMargin">8,4,0,4</Thickness>
+  <Thickness x:Key="AddressBarImageIconMargin">8,2,0,6</Thickness>
 
   <DataTemplate x:Key="DefaultAddressBarItemTemplate" x:DataType="local:AddressBarItem">
     <StackPanel
@@ -197,7 +197,7 @@
                     <ControlTemplate TargetType="Button">
                       <Grid
                         x:Name="ButtonLayoutGrid"
-                        Margin="{ThemeResource TextBoxInnerButtonMargin}"
+                        Margin="2,4,4,8"
                         Background="{ThemeResource TextControlButtonBackground}"
                         BackgroundSizing="{TemplateBinding BackgroundSizing}"
                         BorderBrush="{ThemeResource TextControlButtonBorderBrush}"
