@@ -2,7 +2,7 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 6.0 Final (6.0.1629.0)**
+**NanaZip 6.0 Final (6.0.1630.0)**
 
 - Start to provide the official portable binaries package of NanaZip with both
   Modern and Classic flavors, except the NanaZip File Manager.
@@ -29,6 +29,9 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 - Fix some potential issues for the dark mode support.
 - Try to partially improve the NanaZip File Manager main window keyboard
   navigation experience.
+- Update Mile.Project.Configurations to 1.0.1917, which solve some issues for
+  using NuGet Package References Support in Visual Studio 2026 version 18.3 or
+  later. (Cooperated by AndromedaMelody.)
 - Update Mile.Windows.Internal to 1.0.3515.
 - Update Mile.Xaml to 2.5.1616.
 - Add RestoreNuGetPackages.cmd script to workaround some issues for people who
