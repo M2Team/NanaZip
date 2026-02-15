@@ -2,15 +2,19 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
-**NanaZip 6.0 Final (6.0.1628.0)**
+**NanaZip 6.0 Final (6.0.1629.0)**
 
 - Start to provide the official portable binaries package of NanaZip with both
   Modern and Classic flavors, except the NanaZip File Manager.
 - Fix several crash issues for the .NET Single File Application bundle readonly
   support. (Thanks to haaeein.)
+- Fix several hang issues for the ROMFS file system image readonly support
+  support. (Contributed by dinhngtu. Thanks to haaeein.)
+- Fix several issues for context menu support. (Contributed by dinhngtu.)
 - Synchronize 7-Zip mainline implementations to 26.00. (Except the NanaZip File
   Manager.) (Thanks to Igor Pavlov. Noticed by FadeMind.)
-- Improve the address bar UI layout. (Suggested by VinaC2.)
+- Improve the address bar UI layout. (Cooperated with dinhngtu. Suggested by
+  VinaC2.)
 - Make the splitter bar fully white to workaround the light mode UI visual
   issues in the 2 Panels mode.
 - Fix the splitter bar cannot have Mica in the dark mode.
