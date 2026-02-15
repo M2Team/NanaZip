@@ -177,6 +177,13 @@ public:
   }
 };
 
+// **************** NanaZip Modification Start ****************
+IInArchive *CreateArcForTar()
+{
+    return new CHandler();
+}
+// **************** NanaZip Modification End ****************
+
 
 CHandler::CHandler():
     _blocks(NULL),
