@@ -702,7 +702,10 @@ BSTR AllocBstrFromAscii(const char *s) throw();
 // #define k_IsArc_Res_YES_LOW_PROB 3
 
 #define API_FUNC_IsArc EXTERN_C UInt32 WINAPI
-#define API_FUNC_static_IsArc extern "C" { static UInt32 WINAPI
+// **************** NanaZip Modification Start ****************
+// #define API_FUNC_static_IsArc extern "C" { static UInt32 WINAPI
+#define API_FUNC_static_IsArc extern "C" { UInt32 WINAPI
+// **************** NanaZip Modification End ****************
 
 extern "C"
 {
