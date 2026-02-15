@@ -3,5 +3,5 @@
   <PropertyGroup>
     <MileProjectOutputPath>$(MSBuildThisFileDirectory)Output\</MileProjectOutputPath>
   </PropertyGroup>
-  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Build.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1917" Project="Mile.Project.Build.props" />
 </Project>
