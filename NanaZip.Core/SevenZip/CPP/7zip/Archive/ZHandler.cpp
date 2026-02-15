@@ -25,6 +25,13 @@ Z7_CLASS_IMP_CHandler_IInArchive_0
   // bool _unpackSize_Defined;
 };
 
+// **************** NanaZip Modification Start ****************
+IInArchive *CreateArcForTar()
+{
+    return new CHandler();
+}
+// **************** NanaZip Modification End ****************
+
 static const Byte kProps[] =
 {
   kpidPackSize

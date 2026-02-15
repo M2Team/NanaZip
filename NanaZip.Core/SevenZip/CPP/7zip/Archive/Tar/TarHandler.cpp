@@ -24,6 +24,13 @@ using namespace NWindows;
 namespace NArchive {
 namespace NTar {
 
+// **************** NanaZip Modification Start ****************
+IInArchive *CreateArcForTar()
+{
+    return new CHandler();
+}
+// **************** NanaZip Modification End ****************
+
 // 21.02: we use UTF8 code page by default, even if some files show error
 // before 21.02 : CP_OEMCP;
 // static const UINT k_DefaultCodePage = CP_UTF8;

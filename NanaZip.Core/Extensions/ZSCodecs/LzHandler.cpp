@@ -153,6 +153,13 @@ Z7_CLASS_IMP_CHandler_IInArchive_1(
   UInt64 _numStreams;
 };
 
+// **************** NanaZip Modification Start ****************
+IInArchive *CreateArcForTar()
+{
+    return new CHandler();
+}
+// **************** NanaZip Modification End ****************
+
 IMP_IInArchive_Props
 IMP_IInArchive_ArcProps
 
