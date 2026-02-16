@@ -23,12 +23,13 @@
 #include <K7Base.h>
 
 #include "../SevenZip/CPP/Common/IntToString.h"
-#include "../SevenZip/CPP/Common/MyBuffer.h"
 #include "../SevenZip/CPP/Common/MyCom.h"
 #include "../SevenZip/CPP/Common/StringConvert.h"
 
 #include "../SevenZip/CPP/Windows/PropVariant.h"
 #include "../SevenZip/CPP/Windows/TimeUtils.h"
+
+#include "../SevenZip/CPP/7zip/PropID.h"
 
 #include "../SevenZip/CPP/7zip/Common/RegisterArc.h"
 #include "../SevenZip/CPP/7zip/Common/StreamBinder.h"
@@ -105,6 +106,10 @@ namespace NArchive
     namespace NTar
     {
         IInArchive* CreateArcForTar();
+        extern const Byte kProps[];
+        extern const UInt32 PropCount;
+        extern const Byte kArcProps[];
+        extern const UInt32 ArcPropCount;
     }
 
     namespace NCompressedTar
@@ -342,7 +347,9 @@ namespace NArchive
                 const size_t BufSize = 1 << 20;
                 Signature.resize(BufSize);
                 SignatureSize = BufSize;
-                hr = ReadStream(m_SourceStream, Signature.data(), &SignatureSize);
+                hr = ReadStream(m_SourceStream,
+                    Signature.data(),
+                    &SignatureSize);
                 if (FAILED(hr))
                 {
                     return hr;
@@ -584,7 +591,9 @@ namespace NArchive
             {
                 String.Add_OptSpaced(Name);
                 if (Bool2)
+                {
                     String.Add_Char('*');
+                }
             }
         }
 
@@ -947,24 +956,106 @@ namespace NArchive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value) noexcept
         {
-            if (m_Compressed)
+            NWindows::NCOM::CPropVariant Prop;
+            HRESULT hr;
+
+            switch (PropId)
             {
+            case kpidPhySize:
+                // This prop has to come from the compression handler, or we'll
+                // get an "unexpected end of archive" error.
+                if (!m_Compressed)
+                {
+                    return S_OK;
+                }
+
                 return m_Compressed->GetArchiveProperty(PropId, Value);
+
+            case kpidErrorFlags:
+            case kpidWarningFlags:
+            {
+                // The error flags and messages need to be combined.
+
+                UInt32 Flags = 0;
+
+                if (!m_Compressed)
+                {
+                    return S_OK;
+                }
+
+                hr = m_Compressed->GetArchiveProperty(PropId, &Prop);
+                if (S_OK != hr)
+                {
+                    return hr;
+                }
+                if (VT_UI4 == Prop.vt)
+                {
+                    Flags = Prop.ulVal;
+                }
+
+                if (m_Tar &&
+                    S_OK == m_Tar->GetArchiveProperty(PropId, &Prop) &&
+                    VT_UI4 == Prop.vt)
+                {
+                    Flags |= Prop.ulVal;
+                }
+
+                Prop = Flags;
+                Prop.Detach(Value);
+                return S_OK;
             }
 
-            return S_OK;
+            case kpidError:
+            case kpidWarning:
+            {
+                UString Message;
+
+                if (!m_Compressed)
+                {
+                    return S_OK;
+                }
+
+                hr = m_Compressed->GetArchiveProperty(PropId, &Prop);
+                if (S_OK != hr)
+                {
+                    return hr;
+                }
+                if (Prop.vt == VT_BSTR)
+                {
+                    Message = Prop.bstrVal;
+                }
+
+                if (m_Tar &&
+                    S_OK == m_Tar->GetArchiveProperty(PropId, &Prop) &&
+                    Prop.vt == VT_BSTR)
+                {
+                    if (!Message.IsEmpty())
+                    {
+                        Message += ". ";
+                    }
+                    Message += Prop.bstrVal;
+                }
+
+                Prop = Message;
+                Prop.Detach(Value);
+                return S_OK;
+            }
+
+            default:
+                if (!m_Tar)
+                {
+                    return S_OK;
+                }
+
+                return m_Tar->GetArchiveProperty(PropId, Value);
+            }
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfProperties(
             _Out_ UInt32* NumProps) noexcept
         {
-            if (!m_Tar)
-            {
-                *NumProps = 0;
-                return S_OK;
-            }
-
-            return m_Tar->GetNumberOfProperties(NumProps);
+            *NumProps = NArchive::NTar::PropCount;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetPropertyInfo(
@@ -973,23 +1064,22 @@ namespace NArchive
             _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType) noexcept
         {
-            if (!m_Tar)
+            if (Index >= NArchive::NTar::PropCount)
             {
-                return E_FAIL;
+                return E_INVALIDARG;
             }
 
-            return m_Tar->GetPropertyInfo(Index, Name, PropId, VarType);
+            *Name = NULL;
+            *PropId = NArchive::NTar::kProps[Index];
+            *VarType = k7z_PROPID_To_VARTYPE[(unsigned)*PropId];
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfArchiveProperties(
             _Out_ UInt32* NumProps) noexcept
         {
-            if (!m_Compressed)
-            {
-                return E_FAIL;
-            }
-
-            return m_Compressed->GetNumberOfArchiveProperties(NumProps);
+            *NumProps = NArchive::NTar::ArcPropCount;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetArchivePropertyInfo(
@@ -998,16 +1088,15 @@ namespace NArchive
             _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType) noexcept
         {
-            if (!m_Compressed)
+            if (Index >= NArchive::NTar::ArcPropCount)
             {
-                return E_FAIL;
+                return E_INVALIDARG;
             }
 
-            return m_Compressed->GetArchivePropertyInfo(
-                Index,
-                Name,
-                PropId,
-                VarType);
+            *Name = NULL;
+            *PropId = NArchive::NTar::kArcProps[Index];
+            *VarType = k7z_PROPID_To_VARTYPE[(unsigned)*PropId];
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Read(
