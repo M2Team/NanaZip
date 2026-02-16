@@ -8,11 +8,11 @@
  * MAINTAINER: Tu Dinh <contact@tudinh.xyz>
  */
 
-/*
- * Note: Only actually-compressed tarballs are supported for now, because
- * a "copy" handler doesn't yet exist, and even if it existed, it wouldn't
- * help us anyway since CompressedTar doesn't implement seeking.
- */
+ /*
+  * Note: Only actually-compressed tarballs are supported for now, because
+  * a "copy" handler doesn't yet exist, and even if it existed, it wouldn't
+  * help us anyway since CompressedTar doesn't implement seeking.
+  */
 
 #include <array>
 #include <vector>
@@ -960,10 +960,10 @@ namespace NArchive
             {
                 // Luckily, NTar::CHandler::_items is public, so we can inject
                 // all of our cached item metadata here.
-                Handler->_items.Clear();
+                Handler->_items.ClearAndReserve(m_Items.size());
                 for (const auto& Item : m_Items)
                 {
-                    Handler->_items.Add(Item);
+                    Handler->_items.AddInReserved(Item);
                 }
                 Handler->_stream = this;
             }
