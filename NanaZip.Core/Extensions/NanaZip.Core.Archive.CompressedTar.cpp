@@ -1,25 +1,43 @@
 ﻿/*
  * PROJECT:    NanaZip
  * FILE:       NanaZip.Core.Archive.CompressedTar.cpp
- * PURPOSE:    Implementation for compressed Tar support
+ * PURPOSE:    Implementation for compressed tarball support
  *
  * LICENSE:    The MIT License
  *
  * MAINTAINER: Tu Dinh <contact@tudinh.xyz>
  */
 
+/*
+ * Note: Only actually-compressed tarballs are supported for now, because
+ * a "copy" handler doesn't yet exist, and even if it existed, it wouldn't
+ * help us anyway since CompressedTar doesn't implement seeking.
+ */
 
 #include <array>
+#include <vector>
+#include <cstring>
 
 #include <Windows.h>
 
+#include "../SevenZip/CPP/Common/IntToString.h"
+#include "../SevenZip/CPP/Common/MyBuffer.h"
 #include "../SevenZip/CPP/Common/MyCom.h"
-#include "../SevenZip/CPP/7zip/Common/RegisterArc.h"
+#include "../SevenZip/CPP/Common/StringConvert.h"
 
+#include "../SevenZip/CPP/Windows/PropVariant.h"
+#include "../SevenZip/CPP/Windows/TimeUtils.h"
+
+#include "../SevenZip/CPP/7zip/Common/RegisterArc.h"
+#include "../SevenZip/CPP/7zip/Common/StreamBinder.h"
+#include "../SevenZip/CPP/7zip/Common/StreamUtils.h"
+#include "../SevenZip/CPP/7zip/Common/VirtThread.h"
+
+#include "../SevenZip/CPP/7zip/Archive/Common/ItemNameUtils.h"
 #include "../SevenZip/CPP/7zip/Archive/IArchive.h"
 
-#include "../SevenZip/CPP/7zip/Common/StreamBinder.h"
-#include "../SevenZip/CPP/7zip/Common/VirtThread.h"
+#include "../SevenZip/CPP/7zip/Archive/Tar/TarIn.h"
+#include "../SevenZip/CPP/7zip/Archive/Tar/TarHandler.h"
 
 namespace NArchive
 {
@@ -91,50 +109,74 @@ namespace NArchive
     {
         struct CodecInfo
         {
-            UInt32(WINAPI* IsArc)(const Byte*, size_t);
             IInArchive* (*CreateArcForTar)();
+            UInt32(WINAPI* IsArc)(const Byte*, size_t);
+            const Byte* Signature;
+            size_t SignatureSize;
         };
+
+        static const Byte XzSignature[] = { 0xFD, '7', 'z', 'X', 'Z', 0x00 };
 
         static const std::array<CodecInfo, 10> CodecInfos = {
             CodecInfo {
+                NArchive::NBROTLI::CreateArcForTar,
                 NArchive::NBROTLI::IsArc_Brotli,
-                NArchive::NBROTLI::CreateArcForTar
-            },
-            CodecInfo {
-                NArchive::NBz2::IsArc_BZip2,
-                NArchive::NBz2::CreateArcForTar
-            },
-            CodecInfo {
-                NArchive::NGz::IsArc_Gz,
-                NArchive::NGz::CreateArcForTar
-            },
-            CodecInfo {
-                NArchive::NLIZARD::IsArc_lizard,
-                NArchive::NLIZARD::CreateArcForTar
-            },
-            CodecInfo {
-                NArchive::NLZ4::IsArc_lz4,
-                NArchive::NLZ4::CreateArcForTar
-            },
-            CodecInfo {
-                NArchive::NLZ5::IsArc_lz5,
-                NArchive::NLZ5::CreateArcForTar
-            },
-            CodecInfo {
-                NArchive::NLz::IsArc_Lz,
-                NArchive::NLz::CreateArcForTar
-            },
-            CodecInfo {
                 nullptr,
-                NArchive::NXz::CreateArcForTar
+                0
             },
             CodecInfo {
+                NArchive::NBz2::CreateArcForTar,
+                NArchive::NBz2::IsArc_BZip2,
+                nullptr,
+                0
+            },
+            CodecInfo {
+                NArchive::NGz::CreateArcForTar,
+                NArchive::NGz::IsArc_Gz,
+                nullptr,
+                0
+            },
+            CodecInfo {
+                NArchive::NLIZARD::CreateArcForTar,
+                NArchive::NLIZARD::IsArc_lizard,
+                nullptr,
+                0
+            },
+            CodecInfo {
+                NArchive::NLZ4::CreateArcForTar,
+                NArchive::NLZ4::IsArc_lz4,
+                nullptr,
+                0
+            },
+            CodecInfo {
+                NArchive::NLZ5::CreateArcForTar,
+                NArchive::NLZ5::IsArc_lz5,
+                nullptr,
+                0
+            },
+            CodecInfo {
+                NArchive::NLz::CreateArcForTar,
+                NArchive::NLz::IsArc_Lz,
+                nullptr,
+                0
+            },
+            CodecInfo {
+                NArchive::NXz::CreateArcForTar,
+                nullptr,
+                XzSignature,
+                sizeof(XzSignature)
+            },
+            CodecInfo {
+                NArchive::NZ::CreateArcForTar,
                 NArchive::NZ::IsArc_Z,
-                NArchive::NZ::CreateArcForTar
+                nullptr,
+                0
             },
             CodecInfo {
+                NArchive::NZSTD::CreateArcForTar,
                 NArchive::NZSTD::IsArc_zstd,
-                NArchive::NZSTD::CreateArcForTar
+                nullptr,
+                0
             },
         };
 
@@ -164,8 +206,9 @@ namespace NArchive
 
                 virtual void Execute() override
                 {
-                    UInt32 indices[] = { 0 };
-                    Compressed->Extract(indices, 1, FALSE, Callback);
+                    UInt32 Indices[] = { 0 };
+
+                    Compressed->Extract(Indices, 1, FALSE, Callback);
                     if (Binder)
                     {
                         Binder->CloseWrite();
@@ -183,6 +226,15 @@ namespace NArchive
             CMyComPtr<ISequentialOutStream> m_PipeOut;
 
             UInt64 m_PipePos = 0;
+            bool m_DecompressedSize_Defined = false;
+            UInt64 m_DecompressedSize = 0;
+
+            std::vector<NArchive::NTar::CItemEx> m_Items;
+            UInt32 m_OpenCodePage = CP_UTF8;
+            NArchive::NTar::CEncodingCharacts m_EncodingCharacts;
+            bool m_MetadataScanned = false;
+
+            HRESULT ScanMetadata() noexcept;
 
             HRESULT StartThread()
             {
@@ -220,7 +272,6 @@ namespace NArchive
                 m_PipeOut.Release();
             }
 
-        public:
             HRESULT STDMETHODCALLTYPE Read(
                 void* Data,
                 UInt32 Size,
@@ -228,6 +279,15 @@ namespace NArchive
             HRESULT STDMETHODCALLTYPE SetTotal(_In_ UInt64 Total) noexcept;
             HRESULT STDMETHODCALLTYPE SetCompleted(
                 _In_ const UInt64* CompleteValue) noexcept;
+
+        private:
+            void TarStringToUnicode(
+                const AString& String,
+                NWindows::NCOM::CPropVariant& Prop,
+                bool ToOS = false) const;
+            static void PaxTimeToProp(
+                const NArchive::NTar::CPaxTime& PaxTime,
+                NWindows::NCOM::CPropVariant& Prop);
         };
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Open(
@@ -248,24 +308,22 @@ namespace NArchive
 
             m_SourceStream = Stream;
 
-            // Max common size for all handlers
-            std::array<Byte, 16> Signature;
-            UInt32 SignatureSize;
+            m_DecompressedSize_Defined = false;
+            m_DecompressedSize = 0;
+
+            std::vector<Byte> Signature;
+            size_t SignatureSize;
             {
-                UInt64 currentPos;
-                hr = m_SourceStream->Seek(0, STREAM_SEEK_CUR, &currentPos);
-                if (S_OK != hr)
+                const size_t BufSize = 1 << 20;
+                Signature.resize(BufSize);
+                SignatureSize = BufSize;
+                hr = ReadStream(m_SourceStream, Signature.data(), &SignatureSize);
+                if (FAILED(hr))
                 {
                     return hr;
                 }
-
-                hr = m_SourceStream->Read(
-                    &Signature[0],
-                    Signature.size(),
-                    &SignatureSize);
-                m_SourceStream->Seek(currentPos, STREAM_SEEK_SET, nullptr);
-
-                if (S_OK != hr || SignatureSize != Signature.size())
+                m_SourceStream->Seek(0, STREAM_SEEK_SET, nullptr);
+                if (0 == SignatureSize)
                 {
                     return S_FALSE;
                 }
@@ -273,43 +331,71 @@ namespace NArchive
 
             for (const auto& CodecInfo : CodecInfos)
             {
-                if (nullptr != CodecInfo.IsArc &&
-                    k_IsArc_Res_YES == CodecInfo.IsArc(
-                        Signature.data(),
-                        Signature.size()))
+                bool IsArc = false;
+                bool HasSignature = false;
+
+                if (!CodecInfo.CreateArcForTar)
+                {
+                    // disabled
+                    continue;
+                }
+
+                // If there's IsArc, then it has to match.
+                if (!CodecInfo.IsArc || k_IsArc_Res_YES == CodecInfo.IsArc(
+                    Signature.data(),
+                    SignatureSize))
+                {
+                    IsArc = true;
+                }
+
+                // If there's Signature, then it has to match.
+                if (!CodecInfo.Signature || (
+                    CodecInfo.SignatureSize <= SignatureSize &&
+                    0 == std::memcmp(Signature.data(),
+                        CodecInfo.Signature,
+                        CodecInfo.SignatureSize)))
+                {
+                    HasSignature = true;
+                }
+
+                if (IsArc && HasSignature)
                 {
                     m_Compressed = CodecInfo.CreateArcForTar();
                     if (!m_Compressed)
                     {
                         return E_OUTOFMEMORY;
                     }
-                    break;
-                }
-            }
 
-            if (m_Compressed)
-            {
-                hr = m_Compressed->Open(
-                    m_SourceStream,
-                    MaxCheckStartPosition,
-                    OpenCallback);
-                if (S_OK != hr)
-                {
+                    hr = m_Compressed->Open(
+                        m_SourceStream,
+                        MaxCheckStartPosition,
+                        OpenCallback);
+
+                    if (S_OK == hr)
+                    {
+                        break;
+                    }
+
                     m_Compressed.Release();
                 }
             }
 
             if (!m_Compressed)
             {
-                // Nothing detected via signature
                 for (const auto& CodecInfo : CodecInfos)
                 {
-                    if (!CodecInfo.IsArc)
+                    if (!CodecInfo.CreateArcForTar)
+                    {
+                        // disabled
+                        continue;
+                    }
+
+                    if (!CodecInfo.IsArc && !CodecInfo.Signature)
                     {
                         m_Compressed = CodecInfo.CreateArcForTar();
                         if (!m_Compressed)
                         {
-                            continue;
+                            return E_OUTOFMEMORY;
                         }
 
                         hr = m_Compressed->Open(
@@ -340,57 +426,96 @@ namespace NArchive
                 return S_FALSE;
             }
 
-            hr = StartThread();
-            if (S_OK != hr)
             {
-                m_Compressed->Close();
-                m_Compressed.Release();
+                NWindows::NCOM::CPropVariant Prop;
+                if (m_Compressed->GetProperty(0, kpidSize, &Prop) == S_OK)
+                {
+                    if (Prop.vt == VT_UI8)
+                    {
+                        m_DecompressedSize = Prop.uhVal.QuadPart;
+                        m_DecompressedSize_Defined = true;
+                    }
+                    else if (Prop.vt == VT_UI4)
+                    {
+                        m_DecompressedSize = Prop.ulVal;
+                        m_DecompressedSize_Defined = true;
+                    }
+                }
+            }
+
+            return ScanMetadata();
+        }
+
+        HRESULT CompressedTar::ScanMetadata() noexcept
+        {
+            if (m_MetadataScanned)
+            {
+                return S_OK;
+            }
+
+            if (!m_Compressed)
+            {
+                return S_FALSE;
+            }
+
+            HRESULT hr = StartThread();
+            if (FAILED(hr))
+            {
                 return hr;
             }
 
-            m_Tar = NArchive::NTar::CreateArcForTar();
-            if (!m_Tar)
+            m_Items.clear();
+            m_EncodingCharacts.Clear();
+
             {
-                StopThread();
-                m_Compressed->Close();
-                m_Compressed.Release();
-                return E_OUTOFMEMORY;
+                NArchive::NTar::CArchive Archive;
+                Archive.Clear();
+                Archive.SeqStream = this;
+
+                for (;;)
+                {
+                    NArchive::NTar::CItemEx Item;
+                    hr = Archive.ReadItem(Item);
+                    if (FAILED(hr))
+                    {
+                        break;
+                    }
+                    if (!Archive.filled)
+                    {
+                        break;
+                    }
+
+                    Item.EncodingCharacts.Check(Item.Name);
+                    m_EncodingCharacts.Update(Item.EncodingCharacts);
+
+                    m_Items.push_back(Item);
+
+                    hr = Seek(
+                        Item.Get_PackSize_Aligned(),
+                        STREAM_SEEK_CUR,
+                        nullptr);
+                    if (FAILED(hr))
+                    {
+                        break;
+                    }
+                }
             }
 
-            // We need to pass ourselves as IInStream to m_Tar, because m_Tar
-            // might call Seek(0) which we need to handle by restarting the
-            // thread.
-            CMyComPtr<IArchiveOpenSeq> TarOpenSeq;
-            if (S_OK == m_Tar->QueryInterface(
-                IID_IArchiveOpenSeq,
-                (void**)&TarOpenSeq) && TarOpenSeq)
+            hr = Seek(0, STREAM_SEEK_SET, nullptr);
+            if (FAILED(hr))
             {
-                hr = TarOpenSeq->OpenSeq(this);
-            }
-            else
-            {
-                hr = m_Tar->Open(this, nullptr, OpenCallback);
-            }
-
-            if (S_OK != hr)
-            {
-                m_Tar.Release();
                 StopThread();
-                m_Compressed->Close();
-                m_Compressed.Release();
                 return hr;
             }
+
+            m_MetadataScanned = true;
 
             return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Close() noexcept
         {
-            if (m_Tar)
-            {
-                m_Tar->Close();
-                m_Tar.Release();
-            }
+            m_Tar.Release();
 
             if (m_Compressed)
             {
@@ -401,18 +526,120 @@ namespace NArchive
             StopThread();
             m_SourceStream.Release();
 
+            m_DecompressedSize_Defined = false;
+            m_DecompressedSize = 0;
+
+            m_Items.clear();
+            m_MetadataScanned = false;
+
             return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfItems(
             _Out_ UInt32* NumItems) noexcept
         {
-            if (!m_Tar)
+            if (!m_MetadataScanned)
             {
-                return S_FALSE;
+                ScanMetadata();
             }
 
-            return m_Tar->GetNumberOfItems(NumItems);
+            *NumItems = (UInt32)m_Items.size();
+            return S_OK;
+        }
+
+        // Copies of TarHandler functions below.
+
+        static void AddSpecCharToString(const char Char, AString& String)
+        {
+            if ((Byte)Char <= 0x20 || (Byte)Char > 127)
+            {
+                String.Add_Char('[');
+                String.Add_Char(GET_HEX_CHAR_LOWER((Byte)Char >> 4));
+                String.Add_Char(GET_HEX_CHAR_LOWER(Char & 15));
+                String.Add_Char(']');
+            }
+            else
+            {
+                String.Add_Char(Char);
+            }
+        }
+
+        static void AddSpecUInt64(
+            AString& String,
+            const char* Name,
+            UInt64 Value)
+        {
+            if (Value != 0)
+            {
+                String.Add_OptSpaced(Name);
+                if (Value > 1)
+                {
+                    String.Add_Colon();
+                    String.Add_UInt64(Value);
+                }
+            }
+        }
+
+        static void AddSpecBools(
+            AString& String,
+            const char* Name,
+            bool Bool1,
+            bool Bool2)
+        {
+            if (Bool1)
+            {
+                String.Add_OptSpaced(Name);
+                if (Bool2)
+                    String.Add_Char('*');
+            }
+        }
+
+        void CompressedTar::TarStringToUnicode(
+            const AString& String,
+            NWindows::NCOM::CPropVariant& Prop,
+            bool ToOS) const
+        {
+            UString Dest;
+            if (m_OpenCodePage == CP_UTF8)
+            {
+                ConvertUTF8ToUnicode(String, Dest);
+            }
+            else
+            {
+                MultiByteToUnicodeString2(Dest, String, m_OpenCodePage);
+            }
+            if (ToOS)
+            {
+                NArchive::NItemName::ReplaceToOsSlashes_Remove_TailSlash(
+                    Dest,
+                    true);
+            }
+            Prop = Dest;
+        }
+
+        void CompressedTar::PaxTimeToProp(
+            const NArchive::NTar::CPaxTime& PaxTime,
+            NWindows::NCOM::CPropVariant& Prop)
+        {
+            UInt64 Value;
+
+            if (!NWindows::NTime::UnixTime64_To_FileTime64(PaxTime.Sec, Value))
+            {
+                return;
+            }
+
+            if (0 != PaxTime.Ns)
+            {
+                Value += PaxTime.Ns / 100;
+            }
+
+            FILETIME FileTime;
+            FileTime.dwLowDateTime = (DWORD)Value;
+            FileTime.dwHighDateTime = (DWORD)(Value >> 32);
+            Prop.SetAsTimeFrom_FT_Prec_Ns100(
+                FileTime,
+                k_PropVar_TimePrec_Base + (unsigned)PaxTime.NumDigits,
+                PaxTime.Ns % 100);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetProperty(
@@ -420,12 +647,270 @@ namespace NArchive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value) noexcept
         {
-            if (!m_Tar)
+            if (Index >= (UInt32)m_Items.size())
             {
-                return S_FALSE;
+                return E_INVALIDARG;
             }
 
-            return m_Tar->GetProperty(Index, PropId, Value);
+            NWindows::NCOM::CPropVariant Prop;
+            const NArchive::NTar::CItemEx& Item = m_Items[Index];
+
+            switch (PropId)
+            {
+            case kpidPath:
+                TarStringToUnicode(Item.Name, Prop, true);
+                break;
+
+            case kpidIsDir:
+                Prop = Item.IsDir();
+                break;
+
+            case kpidSize:
+                Prop = Item.Get_UnpackSize();
+                break;
+
+            case kpidPackSize:
+                Prop = Item.Get_PackSize_Aligned();
+                break;
+
+            case kpidMTime:
+            {
+                if (Item.PaxTimes.MTime.IsDefined())
+                {
+                    PaxTimeToProp(Item.PaxTimes.MTime, Prop);
+                }
+                else
+                {
+                    FILETIME FileTime;
+                    if (NWindows::NTime::UnixTime64_To_FileTime(
+                        Item.MTime,
+                        FileTime))
+                    {
+                        unsigned Precision = k_PropVar_TimePrec_Unix;
+                        if (Item.MTime_IsBin)
+                        {
+                            Precision = k_PropVar_TimePrec_Base;
+                        }
+                        Prop.SetAsTimeFrom_FT_Prec(FileTime, Precision);
+                    }
+                }
+                break;
+            }
+
+            case kpidATime:
+                if (Item.PaxTimes.ATime.IsDefined())
+                {
+                    PaxTimeToProp(Item.PaxTimes.ATime, Prop);
+                }
+                break;
+
+            case kpidCTime:
+                if (Item.PaxTimes.CTime.IsDefined())
+                {
+                    PaxTimeToProp(Item.PaxTimes.CTime, Prop);
+                }
+                break;
+
+            case kpidPosixAttrib:
+                Prop = Item.Get_Combined_Mode();
+                break;
+
+            case kpidUser:
+                if (!Item.User.IsEmpty())
+                {
+                    TarStringToUnicode(Item.User, Prop);
+                }
+                break;
+
+            case kpidGroup:
+                if (!Item.Group.IsEmpty())
+                {
+                    TarStringToUnicode(Item.Group, Prop);
+                }
+                break;
+
+            case kpidUserId:
+                Prop = (UInt32)Item.UID;
+                break;
+
+            case kpidGroupId:
+                Prop = (UInt32)Item.GID;
+                break;
+
+            case kpidDeviceMajor:
+                if (Item.DeviceMajor_Defined)
+                    Prop = (UInt32)Item.DeviceMajor;
+                break;
+
+            case kpidDeviceMinor:
+                if (Item.DeviceMinor_Defined)
+                    Prop = (UInt32)Item.DeviceMinor;
+                break;
+
+            case kpidSymLink:
+                if (Item.Is_SymLink() && !Item.LinkName.IsEmpty())
+                {
+                    TarStringToUnicode(Item.LinkName, Prop);
+                }
+                break;
+
+            case kpidHardLink:
+                if (Item.Is_HardLink() && !Item.LinkName.IsEmpty())
+                {
+                    TarStringToUnicode(Item.LinkName, Prop);
+                }
+                break;
+
+            case kpidCharacts:
+            {
+                AString String;
+
+                {
+                    String.Add_Space_if_NotEmpty();
+                    AddSpecCharToString(Item.LinkFlag, String);
+                }
+                if (Item.IsMagic_GNU())
+                {
+                    String.Add_OptSpaced("GNU");
+                }
+                else if (Item.IsMagic_Posix_ustar_00())
+                {
+                    String.Add_OptSpaced("POSIX");
+                }
+                else
+                {
+                    String.Add_Space_if_NotEmpty();
+                    for (unsigned i = 0; i < sizeof(Item.Magic); i++)
+                    {
+                        AddSpecCharToString(Item.Magic[i], String);
+                    }
+                }
+
+                if (Item.IsSignedChecksum)
+                {
+                    String.Add_OptSpaced("SignedChecksum");
+                }
+
+                if (Item.Prefix_WasUsed)
+                {
+                    String.Add_OptSpaced("PREFIX");
+                }
+
+                String.Add_OptSpaced(Item.EncodingCharacts.GetCharactsString());
+
+                AddSpecBools(
+                    String,
+                    "LongName",
+                    Item.LongName_WasUsed,
+                    Item.LongName_WasUsed_2);
+                AddSpecBools(
+                    String,
+                    "LongLink",
+                    Item.LongLink_WasUsed,
+                    Item.LongLink_WasUsed_2);
+
+                if (Item.MTime_IsBin)
+                {
+                    String.Add_OptSpaced("bin_mtime");
+                }
+                if (Item.PackSize_IsBin)
+                {
+                    String.Add_OptSpaced("bin_psize");
+                }
+                if (Item.PackSize_IsBin)
+                {
+                    // bin_size is same as bin_psize for Tar
+                    String.Add_OptSpaced("bin_size");
+                }
+
+                AddSpecUInt64(String, "PAX", Item.Num_Pax_Records);
+
+                if (Item.PaxTimes.MTime.IsDefined())
+                {
+                    String.Add_OptSpaced("mtime");
+                }
+                if (Item.PaxTimes.ATime.IsDefined())
+                {
+                    String.Add_OptSpaced("atime");
+                }
+                if (Item.PaxTimes.CTime.IsDefined())
+                {
+                    String.Add_OptSpaced("ctime");
+                }
+
+                if (Item.pax_path_WasUsed)
+                {
+                    String.Add_OptSpaced("pax_path");
+                }
+                if (Item.pax_link_WasUsed)
+                {
+                    String.Add_OptSpaced("pax_linkpath");
+                }
+                if (Item.pax_size_WasUsed)
+                {
+                    String.Add_OptSpaced("pax_size");
+                }
+                if (!Item.SCHILY_fflags.IsEmpty())
+                {
+                    String.Add_OptSpaced("SCHILY.fflags=");
+                    String += Item.SCHILY_fflags;
+                }
+                if (Item.Is_Sparse())
+                {
+                    String.Add_OptSpaced("SPARSE");
+                }
+                if (Item.IsThereWarning())
+                {
+                    String.Add_OptSpaced("WARNING");
+                }
+                if (Item.HeaderError)
+                {
+                    String.Add_OptSpaced("ERROR");
+                }
+                if (Item.Method_Error)
+                {
+                    String.Add_OptSpaced("METHOD_ERROR");
+                }
+                if (Item.Pax_Error)
+                {
+                    String.Add_OptSpaced("PAX_error");
+                }
+                if (!Item.PaxExtra.RawLines.IsEmpty())
+                {
+                    String.Add_OptSpaced("PAX_unsupported_line");
+                }
+                if (Item.Pax_Overflow)
+                {
+                    String.Add_OptSpaced("PAX_overflow");
+                }
+                if (!String.IsEmpty())
+                {
+                    Prop = String;
+                }
+                break;
+            }
+
+            case kpidComment:
+            {
+                AString String;
+                Item.PaxExtra.Print_To_String(String);
+                if (!String.IsEmpty())
+                {
+                    Prop = String;
+                }
+                break;
+            }
+
+            default:
+                if (m_Tar)
+                {
+                    return m_Tar->GetProperty(Index, PropId, Value);
+                }
+                break;
+            }
+
+            Prop.Detach(Value);
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Extract(
@@ -436,22 +921,44 @@ namespace NArchive
         {
             if (!m_Tar)
             {
-                return S_FALSE;
+                m_Tar = NArchive::NTar::CreateArcForTar();
+                if (!m_Tar)
+                {
+                    return E_OUTOFMEMORY;
+                }
             }
 
-            return m_Tar->Extract(Indices, NumItems, TestMode, ExtractCallback);
+            auto Handler = reinterpret_cast<NArchive::NTar::CHandler*>(
+                m_Tar.Interface());
+            if (0 == Handler->_items.Size() && !m_Items.empty())
+            {
+                // Luckily, NTar::CHandler::_items is public, so we can inject
+                // all of our cached item metadata here.
+                Handler->_items.Clear();
+                for (const auto& Item : m_Items)
+                {
+                    Handler->_items.Add(Item);
+                }
+                Handler->_stream = this;
+            }
+
+            return m_Tar->Extract(
+                Indices,
+                NumItems,
+                TestMode,
+                ExtractCallback);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetArchiveProperty(
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value) noexcept
         {
-            if (!m_Tar)
+            if (m_Compressed)
             {
-                return S_FALSE;
+                return m_Compressed->GetArchiveProperty(PropId, Value);
             }
 
-            return m_Tar->GetArchiveProperty(PropId, Value);
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfProperties(
@@ -459,7 +966,8 @@ namespace NArchive
         {
             if (!m_Tar)
             {
-                return S_FALSE;
+                *NumProps = 0;
+                return S_OK;
             }
 
             return m_Tar->GetNumberOfProperties(NumProps);
@@ -473,7 +981,7 @@ namespace NArchive
         {
             if (!m_Tar)
             {
-                return S_FALSE;
+                return E_FAIL;
             }
 
             return m_Tar->GetPropertyInfo(Index, Name, PropId, VarType);
@@ -482,12 +990,12 @@ namespace NArchive
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfArchiveProperties(
             _Out_ UInt32* NumProps) noexcept
         {
-            if (!m_Tar)
+            if (!m_Compressed)
             {
-                return S_FALSE;
+                return E_FAIL;
             }
 
-            return m_Tar->GetNumberOfArchiveProperties(NumProps);
+            return m_Compressed->GetNumberOfArchiveProperties(NumProps);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetArchivePropertyInfo(
@@ -496,15 +1004,18 @@ namespace NArchive
             _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType) noexcept
         {
-            if (!m_Tar)
+            if (!m_Compressed)
             {
-                return S_FALSE;
+                return E_FAIL;
             }
 
-            return m_Tar->GetArchivePropertyInfo(Index, Name, PropId, VarType);
+            return m_Compressed->GetArchivePropertyInfo(
+                Index,
+                Name,
+                PropId,
+                VarType);
         }
 
-        // IInStream::Read
         HRESULT STDMETHODCALLTYPE CompressedTar::Read(
             void* Data,
             UInt32 Size,
@@ -524,41 +1035,75 @@ namespace NArchive
             return hr;
         }
 
-        // IInStream::Seek
         HRESULT STDMETHODCALLTYPE CompressedTar::Seek(
             Int64 Offset,
             UInt32 SeekOrigin,
             UInt64* NewPosition) noexcept
         {
-            HRESULT hr;
+            UInt64 TargetPos;
 
-            if (SeekOrigin == STREAM_SEEK_SET && Offset == 0)
+            switch (SeekOrigin)
             {
-                if (m_PipePos != 0)
+            case STREAM_SEEK_SET:
+                TargetPos = Offset;
+                break;
+            case STREAM_SEEK_CUR:
+                TargetPos = m_PipePos + Offset;
+                break;
+            case STREAM_SEEK_END:
+                if (!m_DecompressedSize_Defined)
                 {
-                    StopThread();
-                    m_SourceStream->Seek(0, STREAM_SEEK_SET, nullptr);
-                    hr = StartThread();
-                    if (S_OK != hr)
+                    return E_NOTIMPL;
+                }
+                TargetPos = m_DecompressedSize + Offset;
+                break;
+            default:
+                return STG_E_INVALIDFUNCTION;
+            }
+
+            if (TargetPos < m_PipePos)
+            {
+                // Backward seek: restart
+                StopThread();
+                m_SourceStream->Seek(0, STREAM_SEEK_SET, nullptr);
+                HRESULT hr = StartThread();
+                if (FAILED(hr))
+                {
+                    return hr;
+                }
+                m_PipePos = 0;
+            }
+
+            if (m_PipePos < TargetPos)
+            {
+                const UInt32 BufSize = 65536;
+                std::array<Byte, BufSize> Buffer;
+
+                while (m_PipePos < TargetPos)
+                {
+                    UInt64 SkipSize = TargetPos - m_PipePos;
+                    UInt32 ToRead = (SkipSize > BufSize) ?
+                        BufSize :
+                        (UInt32)SkipSize;
+                    UInt32 Processed;
+
+                    HRESULT hr = Read(Buffer.data(), ToRead, &Processed);
+                    if (FAILED(hr))
                     {
                         return hr;
                     }
+                    if (0 == Processed)
+                    {
+                        break; // EOF
+                    }
                 }
-                if (NewPosition) *NewPosition = 0;
-                return S_OK;
             }
 
-            if (SeekOrigin == STREAM_SEEK_CUR && Offset == 0)
+            if (NewPosition)
             {
-                if (NewPosition)
-                {
-                    *NewPosition = m_PipePos;
-                }
-
-                return S_OK;
+                *NewPosition = m_PipePos;
             }
-
-            return E_NOTIMPL;
+            return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::SetTotal(
@@ -573,7 +1118,6 @@ namespace NArchive
             return S_OK;
         }
 
-        // IArchiveExtractCallback::GetStream
         HRESULT STDMETHODCALLTYPE CompressedTar::GetStream(
             _In_ UInt32 Index,
             _Out_ ISequentialOutStream** Stream,
@@ -602,7 +1146,6 @@ namespace NArchive
             return S_OK;
         }
 
-        // ISequentialOutStream::Write
         HRESULT STDMETHODCALLTYPE CompressedTar::Write(
             const void* Data,
             UInt32 Size,
@@ -616,7 +1159,6 @@ namespace NArchive
             return m_PipeOut->Write(Data, Size, ProcessedSize);
         }
 
-        // IInArchiveGetStream::GetStream
         HRESULT STDMETHODCALLTYPE CompressedTar::GetStream(
             _In_ UInt32 Index,
             _Out_ ISequentialInStream** Stream) noexcept
