@@ -193,6 +193,7 @@ namespace NArchive
                 nullptr,
                 0
             },
+            // Handlers with neither IsArc nor Signature must be at the end.
         };
 
         Z7_class_final(CompressedTar) :
@@ -402,39 +403,6 @@ namespace NArchive
                     }
 
                     m_Compressed.Release();
-                }
-            }
-
-            if (!m_Compressed)
-            {
-                for (const auto& CodecInfo : CodecInfos)
-                {
-                    if (MO_TRUE != K7BaseGetAllowedHandlerPolicy(
-                        CodecInfo.HandlerName))
-                    {
-                        // disabled
-                        continue;
-                    }
-
-                    if (!CodecInfo.IsArc && !CodecInfo.Signature)
-                    {
-                        m_Compressed = CodecInfo.CreateArcForTar();
-                        if (!m_Compressed)
-                        {
-                            return E_OUTOFMEMORY;
-                        }
-
-                        hr = m_Compressed->Open(
-                            m_SourceStream,
-                            MaxCheckStartPosition,
-                            OpenCallback);
-                        if (S_OK == hr)
-                        {
-                            break;
-                        }
-
-                        m_Compressed.Release();
-                    }
                 }
             }
 
