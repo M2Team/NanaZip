@@ -20,6 +20,8 @@
 
 #include <Windows.h>
 
+#include <K7Base.h>
+
 #include "../SevenZip/CPP/Common/IntToString.h"
 #include "../SevenZip/CPP/Common/MyBuffer.h"
 #include "../SevenZip/CPP/Common/MyCom.h"
@@ -109,6 +111,7 @@ namespace NArchive
     {
         struct CodecInfo
         {
+            const char* HandlerName;
             IInArchive* (*CreateArcForTar)();
             UInt32(WINAPI* IsArc)(const Byte*, size_t);
             const Byte* Signature;
@@ -117,62 +120,74 @@ namespace NArchive
 
         static const Byte XzSignature[] = { 0xFD, '7', 'z', 'X', 'Z', 0x00 };
 
+        // All handler names below must be synced with 7-Zip and 7-Zip ZS.
+        static const char* TarHandlerName = "tar";
         static const std::array<CodecInfo, 10> CodecInfos = {
             CodecInfo {
+                "brotli",
                 NArchive::NBROTLI::CreateArcForTar,
                 NArchive::NBROTLI::IsArc_Brotli,
                 nullptr,
                 0
             },
             CodecInfo {
+                "bzip2",
                 NArchive::NBz2::CreateArcForTar,
                 NArchive::NBz2::IsArc_BZip2,
                 nullptr,
                 0
             },
             CodecInfo {
+                "gzip",
                 NArchive::NGz::CreateArcForTar,
                 NArchive::NGz::IsArc_Gz,
                 nullptr,
                 0
             },
             CodecInfo {
+                "lizard",
                 NArchive::NLIZARD::CreateArcForTar,
                 NArchive::NLIZARD::IsArc_lizard,
                 nullptr,
                 0
             },
             CodecInfo {
+                "lz4",
                 NArchive::NLZ4::CreateArcForTar,
                 NArchive::NLZ4::IsArc_lz4,
                 nullptr,
                 0
             },
             CodecInfo {
+                "lz5",
                 NArchive::NLZ5::CreateArcForTar,
                 NArchive::NLZ5::IsArc_lz5,
                 nullptr,
                 0
             },
             CodecInfo {
+                "lzip",
                 NArchive::NLz::CreateArcForTar,
                 NArchive::NLz::IsArc_Lz,
                 nullptr,
                 0
             },
             CodecInfo {
+                "xz",
                 NArchive::NXz::CreateArcForTar,
                 nullptr,
                 XzSignature,
                 sizeof(XzSignature)
             },
             CodecInfo {
+                "Z",
                 NArchive::NZ::CreateArcForTar,
                 NArchive::NZ::IsArc_Z,
                 nullptr,
                 0
             },
             CodecInfo {
+                "zstd",
                 NArchive::NZSTD::CreateArcForTar,
                 NArchive::NZSTD::IsArc_zstd,
                 nullptr,
@@ -302,6 +317,15 @@ namespace NArchive
                 return E_INVALIDARG;
             }
 
+            // Technically we're a separate handler, and is also blockable using
+            // our policy mechanism, but we should also respect restrictions on
+            // the tar handler as well.
+            if (MO_TRUE != K7BaseGetAllowedHandlerPolicy(TarHandlerName))
+            {
+                // disabled
+                return S_FALSE;
+            }
+
             m_Compressed.Release();
             m_Tar.Release();
             m_SourceStream.Release();
@@ -334,7 +358,8 @@ namespace NArchive
                 bool IsArc = false;
                 bool HasSignature = false;
 
-                if (!CodecInfo.CreateArcForTar)
+                if (MO_TRUE != K7BaseGetAllowedHandlerPolicy(
+                    CodecInfo.HandlerName))
                 {
                     // disabled
                     continue;
@@ -384,7 +409,8 @@ namespace NArchive
             {
                 for (const auto& CodecInfo : CodecInfos)
                 {
-                    if (!CodecInfo.CreateArcForTar)
+                    if (MO_TRUE != K7BaseGetAllowedHandlerPolicy(
+                        CodecInfo.HandlerName))
                     {
                         // disabled
                         continue;
