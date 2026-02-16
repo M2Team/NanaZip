@@ -24,19 +24,20 @@ using namespace NWindows;
 namespace NArchive {
 namespace NTar {
 
-// **************** NanaZip Modification Start ****************
-IInArchive *CreateArcForTar()
-{
-    return new CHandler();
-}
-// **************** NanaZip Modification End ****************
-
 // 21.02: we use UTF8 code page by default, even if some files show error
 // before 21.02 : CP_OEMCP;
 // static const UINT k_DefaultCodePage = CP_UTF8;
 
 
-static const Byte kProps[] =
+// **************** NanaZip Modification Start ****************
+IInArchive *CreateArcForTar()
+{
+    return new CHandler();
+}
+
+// static const Byte kProps[] =
+extern const Byte kProps[] =
+// **************** NanaZip Modification End ****************
 {
   kpidPath,
   kpidIsDir,
@@ -64,13 +65,24 @@ static const Byte kProps[] =
   // , kpidOffset // for debug
 };
 
-static const Byte kArcProps[] =
+// **************** NanaZip Modification Start ****************
+extern const UInt32 PropCount = Z7_ARRAY_SIZE(kProps);
+// **************** NanaZip Modification End ****************
+
+// **************** NanaZip Modification Start ****************
+// static const Byte kArcProps[] =
+extern const Byte kArcProps[] =
+// **************** NanaZip Modification End ****************
 {
   kpidHeadersSize,
   kpidCodePage,
   kpidCharacts,
   kpidComment
 };
+
+// **************** NanaZip Modification Start ****************
+extern const UInt32 ArcPropCount = Z7_ARRAY_SIZE(kArcProps);
+// **************** NanaZip Modification End ****************
 
 static const char * const k_Characts_Prefix = "PREFIX";
 
