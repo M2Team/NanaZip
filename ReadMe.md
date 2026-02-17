@@ -57,7 +57,7 @@ Kenji Mouri
 - Modernize message boxes and folder browsers.
 - Provide the Smart Extraction feature.
 - Provide the Open folder after extraction option.
-- Policy mechanism for enforcing settings (see
+- Provide the policy mechanism for enforcing settings (see
   [Policies.md](/Documents/Policies.md) for details)
 - Propagates Mark-of-the-Web to all files by default.
 - Provide additional hash algorithms.
