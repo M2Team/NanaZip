@@ -33,7 +33,8 @@ For preview versions, please read
   - Set the LOAD_LIBRARY_SEARCH_SYSTEM32 dependent load flag on Release builds
     of Self Extracting Executables stubs to mitigate static imports level DLL
     planting attack on Windows 10 build 14393 and later. (Contributed by
-    dinhngtu.)  - Introduce the XAML-based address bar. (Contributed by dongle-the-gadget.)
+    dinhngtu.)
+  - Introduce the XAML-based address bar. (Contributed by dongle-the-gadget.)
   - Introduce the XAML-based status bar. (Contributed by dongle-the-gadget.)
   - Introduce the XAML-based properties and information dialog. (Contributed by
     dongle-the-gadget.)
