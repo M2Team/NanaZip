@@ -227,9 +227,9 @@ namespace NArchive
 
                 virtual void Execute() override
                 {
-                    UInt32 Indices[] = { 0 };
+                    UInt32 Index = 0;
 
-                    Compressed->Extract(Indices, 1, FALSE, Callback);
+                    Compressed->Extract(&Index, 1, FALSE, Callback);
                     if (Binder)
                     {
                         Binder->CloseWrite();
@@ -245,6 +245,8 @@ namespace NArchive
             DecompressionThread m_Thread;
             CMyComPtr<ISequentialInStream> m_PipeIn;
             CMyComPtr<ISequentialOutStream> m_PipeOut;
+
+            CMyComPtr<IArchiveOpenCallback> m_OpenCallback;
 
             UInt64 m_PipePos = 0;
             bool m_DecompressedSize_Defined = false;
@@ -341,6 +343,8 @@ namespace NArchive
             m_DecompressedSize_Defined = false;
             m_DecompressedSize = 0;
 
+            m_OpenCallback = OpenCallback;
+
             std::vector<Byte> Signature;
             size_t SignatureSize;
             {
@@ -402,7 +406,7 @@ namespace NArchive
                     hr = m_Compressed->Open(
                         m_SourceStream,
                         MaxCheckStartPosition,
-                        OpenCallback);
+                        nullptr);
 
                     if (S_OK == hr)
                     {
@@ -441,10 +445,18 @@ namespace NArchive
                         m_DecompressedSize = Prop.ulVal;
                         m_DecompressedSize_Defined = true;
                     }
+
+                    if (m_OpenCallback)
+                    {
+                        UInt64 Files = 0;
+                        m_OpenCallback->SetTotal(&Files, &m_DecompressedSize);
+                    }
                 }
             }
 
-            return ScanMetadata();
+            hr = ScanMetadata();
+            m_OpenCallback.Release();
+            return hr;
         }
 
         HRESULT CompressedTar::ScanMetadata() noexcept
@@ -490,6 +502,11 @@ namespace NArchive
                     m_EncodingCharacts.Update(Item.EncodingCharacts);
 
                     m_Items.push_back(Item);
+                    if (m_OpenCallback)
+                    {
+                        UInt64 Items = static_cast<UInt64>(m_Items.size());
+                        m_OpenCallback->SetCompleted(&Items, &m_PipePos);
+                    }
 
                     hr = Seek(
                         Item.Get_PackSize_Aligned(),
@@ -516,6 +533,8 @@ namespace NArchive
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Close() noexcept
         {
+            m_OpenCallback.Release();
+
             m_Tar.Release();
 
             if (m_Compressed)
