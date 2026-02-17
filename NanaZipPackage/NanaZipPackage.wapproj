@@ -26,7 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Image Assets -->
-    <Content Include="..\Assets\PreviewPackageAssets\**\*">
+    <Content Include="..\Assets\PackageAssets\**\*">
       <DeploymentContent>true</DeploymentContent>
       <Link>Assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>

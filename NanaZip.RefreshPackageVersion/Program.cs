@@ -34,7 +34,7 @@ namespace NanaZip.RefreshPackageVersion
             }
         }
 
-        static bool SwitchToPreview = true;
+        static bool SwitchToPreview = false;
 
         static List<string> ReleaseStringList = new List<string>
         {
