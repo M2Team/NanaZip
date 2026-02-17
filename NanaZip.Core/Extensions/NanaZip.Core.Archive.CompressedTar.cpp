@@ -318,6 +318,7 @@ namespace NArchive
             _In_opt_ const UInt64* MaxCheckStartPosition,
             _In_opt_ IArchiveOpenCallback* OpenCallback) noexcept
         {
+            UInt32 ItemCount = 0;
             HRESULT hr;
 
             if (!Stream)
@@ -356,12 +357,13 @@ namespace NArchive
                     &SignatureSize);
                 if (FAILED(hr))
                 {
-                    return hr;
+                    goto OutClose;
                 }
                 m_SourceStream->Seek(0, STREAM_SEEK_SET, nullptr);
                 if (0 == SignatureSize)
                 {
-                    return S_FALSE;
+                    hr = S_FALSE;
+                    goto OutClose;
                 }
             }
 
@@ -400,7 +402,8 @@ namespace NArchive
                     m_Compressed = CodecInfo.CreateArcForTar();
                     if (!m_Compressed)
                     {
-                        return E_OUTOFMEMORY;
+                        hr = E_OUTOFMEMORY;
+                        goto OutClose;
                     }
 
                     hr = m_Compressed->Open(
@@ -419,16 +422,17 @@ namespace NArchive
 
             if (!m_Compressed)
             {
-                return S_FALSE;
+                hr = S_FALSE;
+                goto OutClose;
             }
 
-            UInt32 ItemCount = 0;
             hr = m_Compressed->GetNumberOfItems(&ItemCount);
             if (S_OK != hr || 1 != ItemCount)
             {
                 m_Compressed->Close();
                 m_Compressed.Release();
-                return S_FALSE;
+                hr = S_FALSE;
+                goto OutClose;
             }
 
             {
@@ -452,7 +456,7 @@ namespace NArchive
                         hr = m_OpenCallback->SetTotal(&Files, &m_DecompressedSize);
                         if (S_OK != hr)
                         {
-                            return hr;
+                            goto OutClose;
                         }
                     }
                 }
@@ -460,6 +464,14 @@ namespace NArchive
 
             hr = ScanMetadata();
             m_OpenCallback.Release();
+            if (S_OK != hr)
+            {
+                goto OutClose;
+            }
+            return hr;
+
+        OutClose:
+            this->Close();
             return hr;
         }
 
@@ -542,8 +554,6 @@ namespace NArchive
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Close() noexcept
         {
-            m_OpenCallback.Release();
-
             m_Tar.Release();
 
             if (m_Compressed)
@@ -554,6 +564,8 @@ namespace NArchive
 
             StopThread();
             m_SourceStream.Release();
+
+            m_OpenCallback.Release();
 
             m_DecompressedSize_Defined = false;
             m_DecompressedSize = 0;
