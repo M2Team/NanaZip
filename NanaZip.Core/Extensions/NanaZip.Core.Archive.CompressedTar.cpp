@@ -449,7 +449,11 @@ namespace NArchive
                     if (m_OpenCallback)
                     {
                         UInt64 Files = 0;
-                        m_OpenCallback->SetTotal(&Files, &m_DecompressedSize);
+                        hr = m_OpenCallback->SetTotal(&Files, &m_DecompressedSize);
+                        if (S_OK != hr)
+                        {
+                            return hr;
+                        }
                     }
                 }
             }
@@ -505,7 +509,12 @@ namespace NArchive
                     if (m_OpenCallback)
                     {
                         UInt64 Items = static_cast<UInt64>(m_Items.size());
-                        m_OpenCallback->SetCompleted(&Items, &m_PipePos);
+                        hr = m_OpenCallback->SetCompleted(&Items, &m_PipePos);
+                        if (S_OK != hr)
+                        {
+                            StopThread();
+                            return hr;
+                        }
                     }
 
                     hr = Seek(
@@ -1123,6 +1132,11 @@ namespace NArchive
             UInt32 Size,
             UInt32* ProcessedSize) noexcept
         {
+            if (m_Thread.Exit)
+            {
+                return E_ABORT;
+            }
+
             if (!m_PipeIn)
             {
                 return E_FAIL;
@@ -1211,12 +1225,22 @@ namespace NArchive
         HRESULT STDMETHODCALLTYPE CompressedTar::SetTotal(
             _In_ UInt64 Total) noexcept
         {
+            if (m_Thread.Exit)
+            {
+                return E_ABORT;
+            }
+
             return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::SetCompleted(
             _In_ const UInt64* CompleteValue) noexcept
         {
+            if (m_Thread.Exit)
+            {
+                return E_ABORT;
+            }
+
             return S_OK;
         }
 
