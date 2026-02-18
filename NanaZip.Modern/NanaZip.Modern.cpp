@@ -20,6 +20,7 @@
 #include "AboutPage.h"
 #include "InformationPage.h"
 #include "ProgressPage.h"
+#include "PasswordPage.h"
 
 #pragma comment(lib, "comctl32.lib")
 
@@ -537,6 +538,39 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
         WindowHandle,
         600,
         360,
+        ParentWindowHandle);
+
+    return Result;
+}
+
+EXTERN_C INT WINAPI K7ModernShowPasswordDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _Out_ LPWSTR* InputPassword)
+{
+    *InputPassword = nullptr;
+
+    ::MileXamlThreadInitialize();
+
+    HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
+    if (!WindowHandle)
+    {
+        return -1;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::PasswordPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::PasswordPage;
+
+    Interface Window = winrt::make<Implementation>(
+        WindowHandle,
+        InputPassword);
+
+    int Result = ::K7ModernShowXamlDialog(
+        WindowHandle,
+        360,
+        130,
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;

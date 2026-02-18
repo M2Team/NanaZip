@@ -33,6 +33,7 @@
     <Page Include="StatusBarTemplate.xaml" />
     <Page Include="InformationPage.xaml" />
     <Page Include="ProgressPage.xaml" />
+    <Page Include="PasswordPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
@@ -323,6 +324,9 @@
       <Filter>Strings\en</Filter>
     </PRIResource>
     <PRIResource Include="Strings\en\SponsorPage.resw">
+      <Filter>Strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en\PasswordPage.resjson">
       <Filter>Strings\en</Filter>
     </PRIResource>
     <PRIResource Include="Strings\eo\Common.resw">
