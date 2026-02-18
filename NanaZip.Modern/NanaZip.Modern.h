@@ -226,4 +226,8 @@ EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
     _In_ HWND ParentWindowHandle,
     _In_ HMENU MoreMenuHandle);
 
+EXTERN_C INT WINAPI K7ModernShowPasswordDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _Out_ LPWSTR* InputPassword);
+
 #endif // !NANAZIP_MODERN_EXPERIENCE

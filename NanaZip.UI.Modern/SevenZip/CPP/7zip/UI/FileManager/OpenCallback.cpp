@@ -13,7 +13,11 @@
 #include "../Common/ZipRegistry.h"
 
 #include "OpenCallback.h"
-#include "PasswordDialog.h"
+
+// **************** NanaZip Modification Start ****************
+#include "NanaZip.Modern.h"
+#include <Mile.Helpers.h>
+// **************** NanaZip Modification End ****************
 
 using namespace NWindows;
 
@@ -111,18 +115,21 @@ STDMETHODIMP COpenArchiveCallback::CryptoGetTextPassword(BSTR *password)
   PasswordWasAsked = true;
   if (!PasswordIsDefined)
   {
-    CPasswordDialog dialog;
-    bool showPassword = NExtract::Read_ShowPassword();
-    dialog.ShowPassword = showPassword;
-   
     ProgressDialog.WaitCreating();
-    if (dialog.Create(ProgressDialog) != IDOK)
-      return E_ABORT;
 
-    Password = dialog.Password;
+    // **************** NanaZip Modification Start ****************
+    LPWSTR PasswordInput{ nullptr };
+    
+    if (::K7ModernShowPasswordDialog(static_cast<HWND>(ProgressDialog), &PasswordInput) != IDOK)
+    {
+      return E_ABORT;
+    }
+
+    Password.SetFrom(PasswordInput, ::lstrlenW(PasswordInput));
+    ::MileFreeMemory(PasswordInput);
+    // **************** NanaZip Modification End ****************
+
     PasswordIsDefined = true;
-    if (dialog.ShowPassword != showPassword)
-      NExtract::Save_ShowPassword(dialog.ShowPassword);
   }
   return StringToBstr(Password, password);
   COM_TRY_END

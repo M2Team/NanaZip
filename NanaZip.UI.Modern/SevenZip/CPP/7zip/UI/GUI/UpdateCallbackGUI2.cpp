@@ -3,7 +3,11 @@
 #include "StdAfx.h"
 
 #include "../FileManager/LangUtils.h"
-#include "../FileManager/PasswordDialog.h"
+
+// **************** NanaZip Modification Start ****************
+#include "NanaZip.Modern.h"
+#include <Mile.Helpers.h>
+// **************** NanaZip Modification End ****************
 
 #include "resource2.h"
 #include "resource3.h"
@@ -49,11 +53,20 @@ HRESULT CUpdateCallbackGUI2::SetOperation_Base(UInt32 notifyOp, const wchar_t *n
 
 HRESULT CUpdateCallbackGUI2::ShowAskPasswordDialog()
 {
-  CPasswordDialog dialog;
+  // **************** NanaZip Modification Start ****************
   ProgressDialog->WaitCreating();
-  if (dialog.Create(*ProgressDialog) != IDOK)
-    return E_ABORT;
-  Password = dialog.Password;
+
+  LPWSTR PasswordInput{ nullptr };
+
+  if (::K7ModernShowPasswordDialog(static_cast<HWND>(*ProgressDialog), &PasswordInput) != IDOK)
+  {
+      return E_ABORT;
+  }
+
+  Password.SetFrom(PasswordInput, ::lstrlenW(PasswordInput));
+  ::MileFreeMemory(PasswordInput);
+  // **************** NanaZip Modification End ****************
+
   PasswordIsDefined = true;
   return S_OK;
 }

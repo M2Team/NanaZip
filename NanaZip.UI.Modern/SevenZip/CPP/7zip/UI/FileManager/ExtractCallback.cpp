@@ -29,7 +29,10 @@
 #include "LangUtils.h"
 #include "OverwriteDialog.h"
 #ifndef _NO_CRYPTO
-#include "PasswordDialog.h"
+// **************** NanaZip Modification Start ****************
+#include "NanaZip.Modern.h"
+#include <Mile.Helpers.h>
+// **************** NanaZip Modification End ****************
 #endif
 #include "PropertyName.h"
 
@@ -663,20 +666,21 @@ STDMETHODIMP CExtractCallbackImp::CryptoGetTextPassword(BSTR *password)
   PasswordWasAsked = true;
   if (!PasswordIsDefined)
   {
-    CPasswordDialog dialog;
-    #ifndef _SFX
-    bool showPassword = NExtract::Read_ShowPassword();
-    dialog.ShowPassword = showPassword;
-    #endif
     ProgressDialog->WaitCreating();
-    if (dialog.Create(*ProgressDialog) != IDOK)
-      return E_ABORT;
-    Password = dialog.Password;
+
+    // **************** NanaZip Modification Start ****************
+    LPWSTR PasswordInput{ nullptr };
+
+    if (::K7ModernShowPasswordDialog(static_cast<HWND>(*ProgressDialog), &PasswordInput) != IDOK)
+    {
+        return E_ABORT;
+    }
+
+    Password.SetFrom(PasswordInput, ::lstrlenW(PasswordInput));
+    ::MileFreeMemory(PasswordInput);
+    // **************** NanaZip Modification End ****************
+
     PasswordIsDefined = true;
-    #ifndef _SFX
-    if (dialog.ShowPassword != showPassword)
-      NExtract::Save_ShowPassword(dialog.ShowPassword);
-    #endif
   }
   return StringToBstr(Password, password);
 }

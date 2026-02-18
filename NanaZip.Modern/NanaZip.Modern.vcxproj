@@ -82,6 +82,9 @@
     <Page Include="StatusBarTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="PasswordPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
@@ -114,6 +117,10 @@
     <Midl Include="StatusBar.idl" />
     <Midl Include="StatusBarTemplate.idl">
       <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="PasswordPage.idl">
+      <DependentUpon>PasswordPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
   </ItemGroup>
@@ -158,6 +165,10 @@
       <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="PasswordPage.h">
+      <DependentUpon>PasswordPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AddressBarTemplate.cpp">
@@ -198,6 +209,10 @@
     </ClCompile>
     <ClCompile Include="StatusBarTemplate.cpp">
       <DependentUpon>StatusBarTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="PasswordPage.cpp">
+      <DependentUpon>PasswordPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
   </ItemGroup>
@@ -247,6 +262,7 @@
     <PRIResource Include="Strings\en\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\en\ProgressPage.resw" />
     <PRIResource Include="Strings\en\SponsorPage.resw" />
+    <PRIResource Include="Strings\en\PasswordPage.resjson" />
     <PRIResource Include="Strings\eo\Common.resw" />
     <PRIResource Include="Strings\eo\ProgressPage.resw" />
     <PRIResource Include="Strings\es\Common.resw" />
