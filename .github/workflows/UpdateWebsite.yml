@@ -7,13 +7,16 @@ on:
     paths:
       - 'Documents/Website/**'
       - '.github/workflows/UpdateWebsite.yml'
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
 jobs:
   deploy:
     environment:
