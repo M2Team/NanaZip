@@ -3,14 +3,12 @@
 on:
   push:
     paths-ignore:
-      - '.github/**'
       - 'Documents/**'
-      - '*.md'
+      - '**/*.md'
   pull_request:
     paths-ignore:
-      - '.github/**'
       - 'Documents/**'
-      - '*.md'
+      - '**/*.md'
 
 jobs:
   build:
