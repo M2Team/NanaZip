@@ -4,10 +4,12 @@ on:
   push:
     paths-ignore:
       - '.github/*'
+      - 'Documents/*'
       - '*.md'
   pull_request:
     paths-ignore:
       - '.github/*'
+      - 'Documents/*'
       - '*.md'
 
 jobs:
