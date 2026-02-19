@@ -127,7 +127,7 @@ namespace NArchive
 
         // All handler names below must be synced with 7-Zip and 7-Zip ZS.
         static const char* TarHandlerName = "tar";
-        static const std::array<CodecInfo, 10> CodecInfos = {
+        static const CodecInfo CodecInfos[] = {
             CodecInfo {
                 "brotli",
                 NArchive::NBROTLI::CreateArcForTar,
@@ -1204,18 +1204,16 @@ namespace NArchive
 
             if (m_PipePos < TargetPos)
             {
-                const UInt32 BufSize = 65536;
-                std::array<Byte, BufSize> Buffer;
+                Byte Buffer[65536];
 
                 while (m_PipePos < TargetPos)
                 {
                     UInt64 SkipSize = TargetPos - m_PipePos;
-                    UInt32 ToRead = (SkipSize > BufSize) ?
-                        BufSize :
-                        (UInt32)SkipSize;
+                    UInt32 ToRead = static_cast<UInt32>(
+                        (std::min)(SkipSize, sizeof(Buffer)));
                     UInt32 Processed;
 
-                    HRESULT hr = Read(Buffer.data(), ToRead, &Processed);
+                    HRESULT hr = Read(&Buffer[0], ToRead, &Processed);
                     if (FAILED(hr))
                     {
                         return hr;
