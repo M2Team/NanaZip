@@ -597,6 +597,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>{0} に圧縮してメール送信</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>ここに展開(スマート)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>フォルダー</value>
   </data>
@@ -644,6 +647,21 @@
   </data>
   <data name="Resource2508" xml:space="preserve">
     <value>大きなメモリ ページを使用(&amp;L)</value>
+  </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>アーカイブの履歴を保存</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>パスの履歴を保存</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>コピーの履歴を保存</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>フォルダーの履歴を保存</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>ハッシュ値を小文字で表示</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip について</value>
@@ -802,6 +820,12 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>ファイルのセキュリティ属性を復元</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>展開後にフォルダーを開く</value>
+  </data>
+  <data name="Resource3434" xml:space="preserve">
+    <value>開くときに展開(Shiftキーでスキップ)</value>
   </data>
   <data name="Resource3440" xml:space="preserve">
     <value>Zone.Id ストリームの伝達:</value>
@@ -1335,4 +1359,11 @@
   <data name="Resource7714" xml:space="preserve">
     <value>ディレクトリのジャンクション</value>
   </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>システム</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Windows 設定アプリを開いて、ファイルを NanaZip に関連付ける</value>
+  </data>
+
 </root>
