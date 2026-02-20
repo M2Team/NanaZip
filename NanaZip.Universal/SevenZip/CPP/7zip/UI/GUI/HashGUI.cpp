@@ -344,11 +344,11 @@ void ShowHashResults(const CPropNameValPairs& propPairs, HWND hwnd)
     {
         if (!Result.IsEmpty())
         {
-            Result += L"\r\n\r\n";
+            Result += L"\r\n";
         }
         const CProperty& pair = propPairs[i];
         Result += pair.Name;
-        Result += L"\r\n    ";
+        Result += L": ";
         Result += pair.Value;
     }
     UString Title = LangString(IDS_CHECKSUM_INFORMATION);
