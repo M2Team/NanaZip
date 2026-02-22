@@ -29,14 +29,13 @@
 
 namespace NanaZip::Core::Archive
 {
-    // SevenZip\CPP\7zip\Archive\ArchiveExports.cpp
-    _Ret_maybenull_ const CArcInfo* LookupArchiveInfo(const GUID* ArchiveClsid);
-
     struct CompressedStreamArchiveInfo
     {
         _Maybenull_ const CArcInfo* InnerArc;
         _Field_size_(ArcInfoCount) const CArcInfo** ArcInfos;
         UInt32 ArcInfoCount;
+        UInt32 ItemCount;
+        UInt32 Index;
     };
 
     Z7_class_final(CompressedStreamArchive) :
@@ -60,10 +59,11 @@ namespace NanaZip::Core::Archive
     private:
         struct DecompressionThread : public CVirtThread
         {
-            IInArchive* Compressed = nullptr;
-            IArchiveExtractCallback* Callback = nullptr;
-            ISequentialOutStream* OutStream = nullptr;
-            CStreamBinder* Binder = nullptr;
+            IInArchive* m_Compressed = nullptr;
+            IArchiveExtractCallback* m_Callback = nullptr;
+            ISequentialOutStream* m_OutStream = nullptr;
+            CStreamBinder* m_Binder = nullptr;
+            UInt32 m_Index = 0;
 
             virtual void Execute() override;
         };

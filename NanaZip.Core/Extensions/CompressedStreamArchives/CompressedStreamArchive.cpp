@@ -38,12 +38,10 @@ namespace NanaZip::Core::Archive
 
     void CompressedStreamArchive::DecompressionThread::Execute()
     {
-        UInt32 Index = 0;
-
-        Compressed->Extract(&Index, 1, FALSE, Callback);
-        if (Binder)
+        m_Compressed->Extract(&m_Index, 1, FALSE, m_Callback);
+        if (m_Binder)
         {
-            Binder->CloseWrite();
+            m_Binder->CloseWrite();
         }
     }
 
@@ -52,10 +50,11 @@ namespace NanaZip::Core::Archive
         m_Binder.Create_ReInit();
         m_Binder.CreateStreams2(m_PipeIn, m_PipeOut);
 
-        m_Thread.Compressed = m_Compressed;
-        m_Thread.Callback = this;
-        m_Thread.OutStream = m_PipeOut;
-        m_Thread.Binder = &m_Binder;
+        m_Thread.m_Compressed = m_Compressed;
+        m_Thread.m_Callback = this;
+        m_Thread.m_OutStream = m_PipeOut;
+        m_Thread.m_Binder = &m_Binder;
+        m_Thread.m_Index = m_Info->Index;
         m_Thread.Exit = false;
 
         WRes Res = m_Thread.Create();
@@ -130,53 +129,57 @@ namespace NanaZip::Core::Archive
         _In_reads_bytes_(SignatureSize) const Byte* Signature,
         _In_ size_t SignatureSize) noexcept
     {
-        bool HasSignature = false;
-        bool IsArc = false;
-
-        // If there's Signature, then it has to match.
-        if (!ArcInfo->Signature)
+        // If there's IsArc, then it has to match.
+        if (ArcInfo->IsArc)
         {
-            HasSignature = true;
+            return k_IsArc_Res_YES == ArcInfo->IsArc(
+                Signature,
+                SignatureSize);
         }
-        else if (!(ArcInfo->Flags & NArcInfoFlags::kMultiSignature) &&
-            ArcInfo->SignatureOffset + ArcInfo->SignatureSize <= SignatureSize &&
-            0 == std::memcmp(Signature + ArcInfo->SignatureOffset,
-                ArcInfo->Signature,
-                ArcInfo->SignatureSize))
-        {
-            HasSignature = true;
-        }
-        else if (ArcInfo->Flags & NArcInfoFlags::kMultiSignature)
-        {
-            Byte SubSignature = 0;
 
-            while (SubSignature < ArcInfo->SignatureSize)
+        if (ArcInfo->Signature)
+        {
+            bool Result = false;
+
+            if (!(ArcInfo->Flags & NArcInfoFlags::kMultiSignature) &&
+                ArcInfo->SignatureOffset + ArcInfo->SignatureSize <= SignatureSize &&
+                0 == std::memcmp(Signature + ArcInfo->SignatureOffset,
+                    ArcInfo->Signature,
+                    ArcInfo->SignatureSize))
             {
-                Byte SubSignatureSize = ArcInfo->Signature[SubSignature];
+                Result = true;
+            }
+            else if (ArcInfo->Flags & NArcInfoFlags::kMultiSignature)
+            {
+                Byte SubSignature = 0;
 
-                if (ArcInfo->SignatureOffset + SubSignatureSize > SignatureSize ||
-                    0 != std::memcmp(Signature + SubSignature + 1 + ArcInfo->SignatureOffset,
-                        ArcInfo->Signature,
-                        SubSignatureSize))
+                while (SubSignature < ArcInfo->SignatureSize)
                 {
-                    HasSignature = false;
-                    break;
+                    Byte SubSignatureSize = ArcInfo->Signature[SubSignature];
+                    if (SubSignature + 1 + SubSignatureSize > ArcInfo->SignatureSize)
+                    {
+                        break;
+                    }
+
+                    if (ArcInfo->SignatureOffset + SubSignatureSize <= SignatureSize &&
+                        0 == std::memcmp(Signature + ArcInfo->SignatureOffset,
+                            ArcInfo->Signature + SubSignature + 1,
+                            SubSignatureSize))
+                    {
+                        Result = true;
+                        break;
+                    }
+                    SubSignature += SubSignatureSize + 1;
                 }
-                SubSignature += SubSignatureSize + 1;
             }
 
-            HasSignature = true;
+            return Result;
         }
-
-        // If there's IsArc, then it has to match.
-        if (!ArcInfo->IsArc || k_IsArc_Res_YES == ArcInfo->IsArc(
-            Signature,
-            SignatureSize))
+        else
         {
-            IsArc = true;
+            // !ArcInfo->Signature && !ArcInfo->IsArc, need to try Open()
+            return true;
         }
-
-        return HasSignature && IsArc;
     }
 
     HRESULT CompressedStreamArchive::ScanMetadata() noexcept
@@ -289,7 +292,7 @@ namespace NanaZip::Core::Archive
         }
 
         hr = m_Compressed->GetNumberOfItems(&ItemCount);
-        if (S_OK != hr || 1 != ItemCount)
+        if (S_OK != hr || m_Info->ItemCount != ItemCount)
         {
             m_Compressed->Close();
             m_Compressed.Release();
@@ -299,7 +302,7 @@ namespace NanaZip::Core::Archive
 
         {
             NWindows::NCOM::CPropVariant Prop;
-            if (m_Compressed->GetProperty(0, kpidSize, &Prop) == S_OK)
+            if (S_OK == m_Compressed->GetProperty(m_Info->Index, kpidSize, &Prop))
             {
                 if (Prop.vt == VT_UI8)
                 {
@@ -507,11 +510,18 @@ namespace NanaZip::Core::Archive
             TargetPos = m_PipePos + Offset;
             break;
         case STREAM_SEEK_END:
-            if (!m_DecompressedSize_Defined)
+            if (m_DecompressedSize_Defined)
+            {
+                TargetPos = m_DecompressedSize + Offset;
+            }
+            else if (Offset == 0)
+            {
+                TargetPos = (UInt64)-1;
+            }
+            else
             {
                 return E_NOTIMPL;
             }
-            TargetPos = m_DecompressedSize + Offset;
             break;
         default:
             return STG_E_INVALIDFUNCTION;
