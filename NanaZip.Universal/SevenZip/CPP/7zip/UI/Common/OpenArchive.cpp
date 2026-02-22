@@ -1770,13 +1770,19 @@ HRESULT CArc::OpenStream2(const COpenOptions &op)
         #endif
 
         // **************** NanaZip Modification Start ****************
-        if (ai.Flags_LongExtension() &&
-            ai.MatchExtension(fileName))
+        if (ai.Flags_LongExtension())
         {
-            orderIndices.Insert(numFinded++, (int)i);
-            isMainFormatArr[i] = true;
+            if (ai.MatchExtension(fileName))
+            {
+                orderIndices.Insert(numFinded++, (int)i);
+                isMainFormatArr[i] = true;
+            }
+            else
+            {
+                orderIndices.Add((int)i);
+            }
+            continue;
         }
-        else
         // **************** NanaZip Modification End ****************
         if (ai.FindExtension(extension) >= 0
             #ifndef Z7_SFX
