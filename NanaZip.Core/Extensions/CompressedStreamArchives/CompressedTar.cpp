@@ -56,22 +56,24 @@ namespace
         NArcInfoFlags::kSymLinks |
         NArcInfoFlags::kHardLinks |
         NArcInfoFlags::kMTime |
-        NArcInfoFlags::kMTime_Default,
+        NArcInfoFlags::kMTime_Default |
+        NArcInfoFlags::kCompositeArc |
+        NArcInfoFlags::kLongExtension,
         0x70,
         0,
         0,
         nullptr,
         "CompressedTar",
-        "br brotli tbr "
-            "bz2 bzip2 tbz2 tbz "
-            "gz gzip tgz tpz apk "
-            "liz tliz "
-            "lz4 tlz4 "
-            "lz5 tlz5 "
-            "lz tlz "
-            "xz txz "
-            "z taz "
-            "zst zstd tzst tzstd",
+        "tar.br tar.brotli tbr "
+            "tar.bz2 tar.bzip2 tbz2 tbz "
+            "tar.gz tar.gzip tgz tpz apk "
+            "tar.liz tliz "
+            "tar.lz4 tlz4 "
+            "tar.lz5 tlz5 "
+            "tar.lz tlz "
+            "tar.xz txz "
+            "tar.z taz "
+            "tar.zst tar.zstd tzst tzstd",
         nullptr,
         ((UInt32)1 << (
             NArcInfoTimeFlags::kTime_Prec_Mask_bit_index +

@@ -1753,6 +1753,16 @@ HRESULT CArc::OpenStream2(const COpenOptions &op)
       {
         const CArcInfoEx &ai = op.codecs->Formats[i];
 
+        // **************** NanaZip Modification Start ****************
+        if (ai.Flags_CompositeArc() &&
+            0 > formatIndex &&
+            !op.openType.CanReturnParser &&
+            !op.openType.Recursive)
+        {
+            continue;
+        }
+        // **************** NanaZip Modification End ****************
+
         if (IgnoreSplit || !op.openType.CanReturnArc)
           if (ai.Is_Split())
             continue;
@@ -1764,6 +1774,15 @@ HRESULT CArc::OpenStream2(const COpenOptions &op)
           isPrearcExt = true;
         #endif
 
+        // **************** NanaZip Modification Start ****************
+        if (ai.Flags_LongExtension() &&
+            ai.MatchExtension(fileName))
+        {
+            orderIndices.Insert(numFinded++, (int)i);
+            isMainFormatArr[i] = true;
+        }
+        else
+        // **************** NanaZip Modification End ****************
         if (ai.FindExtension(extension) >= 0
             #ifndef _SFX
             || (isZip && ai.Is_Zip())
