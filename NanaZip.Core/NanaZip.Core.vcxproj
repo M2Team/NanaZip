@@ -56,7 +56,8 @@
     <None Include="SevenZip\C\Sort.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Extensions\NanaZip.Core.Archive.CompressedTar.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\CompressedStreamArchive.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\CompressedTar.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliDecoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliHandler.cpp" />
