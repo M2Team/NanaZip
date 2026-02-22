@@ -15,6 +15,51 @@ using namespace NanaZip::Core::Archive;
 
 namespace
 {
+    static CompressedStreamArchiveInfo CreateInnerInfo()
+    {
+        static const CArcInfo* CodecInfos[] = {
+            LookupArchiveInfo(&CLSID_Bzip2Handler),
+            LookupArchiveInfo(&CLSID_GzipHandler),
+            LookupArchiveInfo(&CLSID_LzipHandler),
+            LookupArchiveInfo(&CLSID_LzmaHandler),
+            LookupArchiveInfo(&CLSID_XzHandler),
+            LookupArchiveInfo(&CLSID_ZstdHandler),
+        };
+
+        return CompressedStreamArchiveInfo{
+            LookupArchiveInfo(&CLSID_CpioHandler),
+            CodecInfos,
+            ARRAYSIZE(CodecInfos),
+            1,
+            0
+        };
+    }
+
+    static IInArchive* CreateInnerArc()
+    {
+        static CompressedStreamArchiveInfo Info = CreateInnerInfo();
+        if (!Info.InnerArc)
+        {
+            return nullptr;
+        }
+        return new CompressedStreamArchive(&Info);
+    }
+
+    static const CArcInfo InnerArcInfo = {
+        0,
+        0x71,
+        0,
+        0,
+        nullptr,
+        "CompressedCpioRpm",
+        nullptr,
+        nullptr,
+        0,
+        CreateInnerArc,
+        0,
+        nullptr,
+    };
+
     static CompressedStreamArchiveInfo CreateInfo()
     {
         static const CArcInfo* CodecInfos[] = {
@@ -22,9 +67,11 @@ namespace
         };
 
         return CompressedStreamArchiveInfo{
-            LookupArchiveInfo(&CLSID_CpioHandler),
+            &InnerArcInfo,
             CodecInfos,
             ARRAYSIZE(CodecInfos),
+            1,
+            0
         };
     }
 
@@ -40,7 +87,7 @@ namespace
 
     static const CArcInfo ArcInfo = {
         0,
-        0x71,
+        0x72,
         0,
         0,
         nullptr,

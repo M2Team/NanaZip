@@ -15,7 +15,7 @@ using namespace NanaZip::Core::Archive;
 
 namespace
 {
-    static CompressedStreamArchiveInfo CreateInfo()
+    static CompressedStreamArchiveInfo CreateInnerInfo()
     {
         static const CArcInfo* CodecInfos[] = {
             LookupArchiveInfo(&CLSID_BrotliHandler),
@@ -35,13 +35,15 @@ namespace
             LookupArchiveInfo(&CLSID_TarHandler),
             CodecInfos,
             ARRAYSIZE(CodecInfos),
+            1,
+            0
         };
     }
 
     static IInArchive* CreateArc()
     {
         static CompressedStreamArchiveInfo Info =
-            CreateInfo();
+            CreateInnerInfo();
         if (!Info.InnerArc)
         {
             return nullptr;

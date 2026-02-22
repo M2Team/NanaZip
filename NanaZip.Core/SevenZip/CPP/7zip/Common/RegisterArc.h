@@ -28,6 +28,13 @@ struct CArcInfo
 
 void RegisterArc(const CArcInfo *arcInfo) throw();
 
+// **************** NanaZip Modification Start ****************
+namespace NanaZip::Core::Archive
+{
+    // SevenZip\CPP\7zip\Archive\ArchiveExports.cpp
+    _Ret_maybenull_ const CArcInfo* LookupArchiveInfo(const GUID* ArchiveClsid);
+}
+// **************** NanaZip Modification End ****************
 
 #define IMP_CreateArcIn_2(c) \
   static IInArchive *CreateArc() { return new c; }
