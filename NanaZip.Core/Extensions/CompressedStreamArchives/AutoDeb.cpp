@@ -11,7 +11,9 @@
 #include "CompressedStreamArchive.hpp"
 #include "CoreExports.hpp"
 
-namespace NanaZip::Core::Archive
+using namespace NanaZip::Core::Archive;
+
+namespace
 {
     static CompressedStreamArchiveInfo CreateInfo()
     {
