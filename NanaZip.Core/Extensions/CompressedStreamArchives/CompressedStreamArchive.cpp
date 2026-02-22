@@ -9,7 +9,6 @@
  */
 
 #include <array>
-#include <vector>
 #include <cstring>
 
 #include "../../SevenZip/CPP/Common/IntToString.h"
@@ -29,14 +28,11 @@
 namespace NanaZip::Core::Archive
 {
     CompressedStreamArchive::CompressedStreamArchive(
-        const CompressedStreamArchiveInfo* Info) : m_Info(Info)
+        _In_ const CompressedStreamArchiveInfo* Info) : m_Info(Info)
     {
-        // Technically we're a separate handler, and is also blockable
-        // using our policy mechanism, but we should also respect
-        // restrictions on the inner handler as well.
-        if (MO_TRUE == K7BaseGetAllowedHandlerPolicy(m_Info->InnerHandlerName))
+        if (m_Info->InnerArc)
         {
-            m_Inner = m_Info->CreateArcExported();
+            m_Inner = m_Info->InnerArc->CreateInArchive();
         }
     }
 
@@ -87,6 +83,102 @@ namespace NanaZip::Core::Archive
         m_PipeOut.Release();
     }
 
+    HRESULT CompressedStreamArchive::ReadSignature(
+        _In_ IInStream* SourceStream,
+        _Inout_ std::vector<Byte>& Signature) noexcept
+    {
+        const size_t SignatureBufSize = 1 << 20;
+        size_t SignatureSize = SignatureBufSize;
+        HRESULT hr;
+
+        try
+        {
+            Signature.resize(SignatureBufSize);
+
+            hr = ReadStream(SourceStream, Signature.data(), &SignatureSize);
+            if (FAILED(hr))
+            {
+                return hr;
+            }
+
+            hr = SourceStream->Seek(0, STREAM_SEEK_SET, nullptr);
+            if (FAILED(hr))
+            {
+                return hr;
+            }
+
+            if (0 == SignatureSize)
+            {
+                hr = S_FALSE;
+            }
+
+            Signature.resize(SignatureSize);
+            return hr;
+        }
+        catch (const std::bad_alloc&)
+        {
+            return E_OUTOFMEMORY;
+        }
+        catch (...)
+        {
+            return E_FAIL;
+        }
+    }
+
+    bool CompressedStreamArchive::CheckArc(
+        _In_ const CArcInfo* ArcInfo,
+        _In_reads_bytes_(SignatureSize) const Byte* Signature,
+        _In_ size_t SignatureSize) noexcept
+    {
+        bool HasSignature = false;
+        bool IsArc = false;
+
+        // If there's Signature, then it has to match.
+        if (!ArcInfo->Signature)
+        {
+            HasSignature = true;
+        }
+        else if (!(ArcInfo->Flags & NArcInfoFlags::kMultiSignature) &&
+            ArcInfo->SignatureOffset + ArcInfo->SignatureSize <= SignatureSize &&
+            0 == std::memcmp(Signature + ArcInfo->SignatureOffset,
+                ArcInfo->Signature,
+                ArcInfo->SignatureSize))
+        {
+            HasSignature = true;
+        }
+        else if (ArcInfo->Flags & NArcInfoFlags::kMultiSignature)
+        {
+            Byte SubSignature = 0;
+
+            while (SubSignature < ArcInfo->SignatureSize)
+            {
+                Byte SubSignatureSize = ArcInfo->Signature[SubSignature];
+
+                if (ArcInfo->SignatureOffset + SubSignatureSize > SignatureSize ||
+                    0 != std::memcmp(Signature + SubSignature + 1 + ArcInfo->SignatureOffset,
+                        ArcInfo->Signature,
+                        SubSignatureSize))
+                {
+                    HasSignature = false;
+                    break;
+                }
+                SubSignature += SubSignatureSize + 1;
+            }
+
+            HasSignature = true;
+        }
+
+        // If there's IsArc, then it has to match.
+        if (!ArcInfo->IsArc || k_IsArc_Res_YES == ArcInfo->IsArc(
+            Signature,
+            SignatureSize))
+        {
+            IsArc = true;
+        }
+
+        return HasSignature && IsArc;
+    }
+
     HRESULT CompressedStreamArchive::ScanMetadata() noexcept
     {
         HRESULT hr = StartThread();
@@ -95,22 +187,26 @@ namespace NanaZip::Core::Archive
             return hr;
         }
 
+        std::vector<Byte> Signature;
+        hr = ReadSignature(this, Signature);
+        if (S_OK != hr)
+        {
+            goto OutStop;
+        }
+
+        if (!CheckArc(m_Info->InnerArc, Signature.data(), Signature.size()))
+        {
+            hr = S_FALSE;
+            goto OutStop;
+        }
+
         hr = m_Inner->Open(this, 0, m_OpenCallback);
         if (S_OK != hr)
         {
             goto OutStop;
         }
 
-        hr = Seek(0, STREAM_SEEK_SET, nullptr);
-        if (FAILED(hr))
-        {
-            goto OutClose;
-        }
-
         return S_OK;
-
-    OutClose:
-        m_Inner->Close();
 
     OutStop:
         StopThread();
@@ -147,60 +243,26 @@ namespace NanaZip::Core::Archive
         m_OpenCallback = OpenCallback;
 
         std::vector<Byte> Signature;
-        size_t SignatureSize;
+        hr = ReadSignature(m_SourceStream, Signature);
+        if (S_OK != hr)
         {
-            const size_t BufSize = 1 << 20;
-            Signature.resize(BufSize);
-            SignatureSize = BufSize;
-            hr = ReadStream(m_SourceStream,
-                Signature.data(),
-                &SignatureSize);
-            if (FAILED(hr))
-            {
-                goto OutClose;
-            }
-            m_SourceStream->Seek(0, STREAM_SEEK_SET, nullptr);
-            if (0 == SignatureSize)
-            {
-                hr = S_FALSE;
-                goto OutClose;
-            }
+            goto OutClose;
         }
 
-        for (UInt32 i = 0; i < m_Info->CodecInfoCount; i++)
+        for (UInt32 i = 0; i < m_Info->ArcInfoCount; i++)
         {
             bool IsArc = false;
             bool HasSignature = false;
-            const CodecInfo* CodecInfo = &m_Info->CodecInfos[i];
+            const CArcInfo* ArcInfo = m_Info->ArcInfos[i];
 
-            if (MO_TRUE != K7BaseGetAllowedHandlerPolicy(
-                CodecInfo->HandlerName))
+            if (!ArcInfo)
             {
-                // disabled
                 continue;
             }
 
-            // If there's IsArc, then it has to match.
-            if (!CodecInfo->IsArc || k_IsArc_Res_YES == CodecInfo->IsArc(
-                Signature.data(),
-                SignatureSize))
+            if (CheckArc(ArcInfo, Signature.data(), Signature.size()))
             {
-                IsArc = true;
-            }
-
-            // If there's Signature, then it has to match.
-            if (!CodecInfo->Signature || (
-                CodecInfo->SignatureSize <= SignatureSize &&
-                0 == std::memcmp(Signature.data(),
-                    CodecInfo->Signature,
-                    CodecInfo->SignatureSize)))
-            {
-                HasSignature = true;
-            }
-
-            if (IsArc && HasSignature)
-            {
-                m_Compressed = CodecInfo->CreateArcExported();
+                m_Compressed = ArcInfo->CreateInArchive();
                 if (!m_Compressed)
                 {
                     hr = E_OUTOFMEMORY;
@@ -211,7 +273,6 @@ namespace NanaZip::Core::Archive
                     m_SourceStream,
                     MaxCheckStartPosition,
                     nullptr);
-
                 if (S_OK == hr)
                 {
                     break;
@@ -543,7 +604,7 @@ namespace NanaZip::Core::Archive
         return S_OK;
     }
 
-    HRESULT STDMETHODCALLTYPE SetOperationResult(
+    HRESULT STDMETHODCALLTYPE CompressedStreamArchive::SetOperationResult(
         _In_ Int32 OperationResult) noexcept
     {
         return S_OK;

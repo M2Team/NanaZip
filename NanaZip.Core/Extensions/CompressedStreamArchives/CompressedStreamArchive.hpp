@@ -14,11 +14,14 @@
   * help us anyway since CompressedStreamArchive doesn't implement seeking.
   */
 
+#include <vector>
+
 #include <Windows.h>
 #include <K7Base.h>
 
 #include "../../SevenZip/CPP/Common/MyCom.h"
 
+#include "../../SevenZip/CPP/7zip/Common/RegisterArc.h"
 #include "../../SevenZip/CPP/7zip/Common/StreamBinder.h"
 #include "../../SevenZip/CPP/7zip/Common/VirtThread.h"
 
@@ -26,21 +29,14 @@
 
 namespace NanaZip::Core::Archive
 {
-    struct CodecInfo
-    {
-        const char* HandlerName;
-        IInArchive* (*CreateArcExported)();
-        UInt32(WINAPI* IsArc)(const Byte*, size_t);
-        const Byte* Signature;
-        size_t SignatureSize;
-    };
+    // SevenZip\CPP\7zip\Archive\ArchiveExports.cpp
+    _Ret_maybenull_ const CArcInfo* LookupArchiveInfo(const GUID* ArchiveClsid);
 
     struct CompressedStreamArchiveInfo
     {
-        const char* InnerHandlerName;
-        IInArchive* (*CreateArcExported)();
-        const CodecInfo* CodecInfos;
-        UInt32 CodecInfoCount;
+        _Maybenull_ const CArcInfo* InnerArc;
+        _Field_size_(ArcInfoCount) const CArcInfo** ArcInfos;
+        UInt32 ArcInfoCount;
     };
 
     Z7_class_final(CompressedStreamArchive) :
@@ -59,7 +55,7 @@ namespace NanaZip::Core::Archive
             IInArchiveGetStream);
 
     public:
-        CompressedStreamArchive(const CompressedStreamArchiveInfo* Info);
+        CompressedStreamArchive(_In_ const CompressedStreamArchiveInfo* Info);
 
     private:
         struct DecompressionThread : public CVirtThread
@@ -89,6 +85,13 @@ namespace NanaZip::Core::Archive
         bool m_DecompressedSize_Defined = false;
         UInt64 m_DecompressedSize = 0;
 
+        HRESULT ReadSignature(
+            _In_ IInStream* SourceStream,
+            _Inout_ std::vector<Byte>& Signature) noexcept;
+        bool CheckArc(
+            _In_ const CArcInfo* ArcInfo,
+            _In_reads_bytes_(SignatureSize) const Byte* Signature,
+            _In_ size_t SignatureSize) noexcept;
         HRESULT ScanMetadata() noexcept;
 
         HRESULT StartThread();
@@ -99,12 +102,6 @@ namespace NanaZip::Core::Archive
             void* Data,
             UInt32 Size,
             UInt32* ProcessedSize) noexcept;
-
-        // IInStream
-        HRESULT STDMETHODCALLTYPE Seek(
-            Int64 Offset,
-            UInt32 SeekOrigin,
-            UInt64* NewPosition) noexcept;
 
         // IArchiveExtractCallback->IProgress
         HRESULT STDMETHODCALLTYPE SetTotal(
