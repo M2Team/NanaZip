@@ -20,7 +20,6 @@ namespace
         static const CArcInfo* CodecInfos[] = {
             LookupArchiveInfo(&CLSID_Bzip2Handler),
             LookupArchiveInfo(&CLSID_GzipHandler),
-            LookupArchiveInfo(&CLSID_LzipHandler),
             LookupArchiveInfo(&CLSID_LzmaHandler),
             LookupArchiveInfo(&CLSID_XzHandler),
             LookupArchiveInfo(&CLSID_ZstdHandler),
@@ -101,11 +100,53 @@ namespace
         nullptr,
     };
 
+    static CompressedStreamArchiveInfo CreateUncompressedInfo()
+    {
+        static const CArcInfo* CodecInfos[] = {
+            LookupArchiveInfo(&CLSID_RpmHandler),
+        };
+
+        return CompressedStreamArchiveInfo{
+            LookupArchiveInfo(&CLSID_CpioHandler),
+            CodecInfos,
+            ARRAYSIZE(CodecInfos),
+            1,
+            0
+        };
+    }
+
+    static IInArchive* CreateUncompressedArc()
+    {
+        static CompressedStreamArchiveInfo Info = CreateUncompressedInfo();
+        if (!Info.InnerArc)
+        {
+            return nullptr;
+        }
+        return new CompressedStreamArchive(&Info);
+    }
+
+    static const CArcInfo UncompressedArcInfo = {
+        NArcInfoFlags::kPureStartOpen |
+        NArcInfoFlags::kCompositeArc,
+        0x73,
+        0,
+        0,
+        nullptr,
+        "AutoRpmUncompressed",
+        "rpm",
+        nullptr,
+        0,
+        CreateUncompressedArc,
+        0,
+        nullptr,
+    };
+
     struct CRegisterArc
     {
         CRegisterArc()
         {
             RegisterArc(&ArcInfo);
+            RegisterArc(&UncompressedArcInfo);
         }
     };
 
