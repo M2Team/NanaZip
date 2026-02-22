@@ -216,8 +216,19 @@ namespace NArchive
                 ISequentialOutStream,
                 IInArchiveGetStream);
 
-        private:
+        public:
+            CompressedTar()
+            {
+                // Technically we're a separate handler, and is also blockable
+                // using our policy mechanism, but we should also respect
+                // restrictions on the tar handler as well.
+                if (MO_TRUE == K7BaseGetAllowedHandlerPolicy(TarHandlerName))
+                {
+                    m_Tar = NArchive::NTar::CreateArcForTar();
+                }
+            }
 
+        private:
             struct DecompressionThread : public CVirtThread
             {
                 IInArchive* Compressed = nullptr;
@@ -251,11 +262,6 @@ namespace NArchive
             UInt64 m_PipePos = 0;
             bool m_DecompressedSize_Defined = false;
             UInt64 m_DecompressedSize = 0;
-
-            std::vector<NArchive::NTar::CItemEx> m_Items;
-            UInt32 m_OpenCodePage = CP_UTF8;
-            NArchive::NTar::CEncodingCharacts m_EncodingCharacts;
-            bool m_MetadataScanned = false;
 
             HRESULT ScanMetadata() noexcept;
 
@@ -302,15 +308,6 @@ namespace NArchive
             HRESULT STDMETHODCALLTYPE SetTotal(_In_ UInt64 Total) noexcept;
             HRESULT STDMETHODCALLTYPE SetCompleted(
                 _In_ const UInt64* CompleteValue) noexcept;
-
-        private:
-            void TarStringToUnicode(
-                const AString& String,
-                NWindows::NCOM::CPropVariant& Prop,
-                bool ToOS = false) const;
-            static void PaxTimeToProp(
-                const NArchive::NTar::CPaxTime& PaxTime,
-                NWindows::NCOM::CPropVariant& Prop);
         };
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Open(
@@ -326,17 +323,13 @@ namespace NArchive
                 return E_INVALIDARG;
             }
 
-            // Technically we're a separate handler, and is also blockable using
-            // our policy mechanism, but we should also respect restrictions on
-            // the tar handler as well.
-            if (MO_TRUE != K7BaseGetAllowedHandlerPolicy(TarHandlerName))
+            if (!m_Tar)
             {
                 // disabled
                 return S_FALSE;
             }
 
             m_Compressed.Release();
-            m_Tar.Release();
             m_SourceStream.Release();
 
             m_SourceStream = Stream;
@@ -477,84 +470,37 @@ namespace NArchive
 
         HRESULT CompressedTar::ScanMetadata() noexcept
         {
-            if (m_MetadataScanned)
-            {
-                return S_OK;
-            }
-
-            if (!m_Compressed)
-            {
-                return S_FALSE;
-            }
-
             HRESULT hr = StartThread();
             if (FAILED(hr))
             {
                 return hr;
             }
 
-            m_Items.clear();
-            m_EncodingCharacts.Clear();
-
+            hr = m_Tar->Open(this, 0, m_OpenCallback);
+            if (S_OK != hr)
             {
-                NArchive::NTar::CArchive Archive;
-                Archive.Clear();
-                Archive.SeqStream = this;
-
-                for (;;)
-                {
-                    NArchive::NTar::CItemEx Item;
-                    hr = Archive.ReadItem(Item);
-                    if (FAILED(hr))
-                    {
-                        break;
-                    }
-                    if (!Archive.filled)
-                    {
-                        break;
-                    }
-
-                    Item.EncodingCharacts.Check(Item.Name);
-                    m_EncodingCharacts.Update(Item.EncodingCharacts);
-
-                    m_Items.push_back(Item);
-                    if (m_OpenCallback)
-                    {
-                        UInt64 Items = static_cast<UInt64>(m_Items.size());
-                        hr = m_OpenCallback->SetCompleted(&Items, &m_PipePos);
-                        if (S_OK != hr)
-                        {
-                            StopThread();
-                            return hr;
-                        }
-                    }
-
-                    hr = Seek(
-                        Item.Get_PackSize_Aligned(),
-                        STREAM_SEEK_CUR,
-                        nullptr);
-                    if (FAILED(hr))
-                    {
-                        break;
-                    }
-                }
+                goto OutStop;
             }
 
             hr = Seek(0, STREAM_SEEK_SET, nullptr);
             if (FAILED(hr))
             {
-                StopThread();
-                return hr;
+                goto OutClose;
             }
 
-            m_MetadataScanned = true;
-
             return S_OK;
+
+        OutClose:
+            m_Tar->Close();
+
+        OutStop:
+            StopThread();
+            return hr;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Close() noexcept
         {
-            m_Tar.Release();
+            m_Tar->Close();
 
             if (m_Compressed)
             {
@@ -570,119 +516,19 @@ namespace NArchive
             m_DecompressedSize_Defined = false;
             m_DecompressedSize = 0;
 
-            m_Items.clear();
-            m_MetadataScanned = false;
-
             return S_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfItems(
             _Out_ UInt32* NumItems) noexcept
         {
-            if (!m_MetadataScanned)
+            if (!m_Tar)
             {
-                ScanMetadata();
+                *NumItems = 0;
+                return S_OK;
             }
 
-            *NumItems = (UInt32)m_Items.size();
-            return S_OK;
-        }
-
-        // Copies of TarHandler functions below.
-
-        static void AddSpecCharToString(const char Char, AString& String)
-        {
-            if ((Byte)Char <= 0x20 || (Byte)Char > 127)
-            {
-                String.Add_Char('[');
-                String.Add_Char(GET_HEX_CHAR_LOWER((Byte)Char >> 4));
-                String.Add_Char(GET_HEX_CHAR_LOWER(Char & 15));
-                String.Add_Char(']');
-            }
-            else
-            {
-                String.Add_Char(Char);
-            }
-        }
-
-        static void AddSpecUInt64(
-            AString& String,
-            const char* Name,
-            UInt64 Value)
-        {
-            if (Value != 0)
-            {
-                String.Add_OptSpaced(Name);
-                if (Value > 1)
-                {
-                    String.Add_Colon();
-                    String.Add_UInt64(Value);
-                }
-            }
-        }
-
-        static void AddSpecBools(
-            AString& String,
-            const char* Name,
-            bool Bool1,
-            bool Bool2)
-        {
-            if (Bool1)
-            {
-                String.Add_OptSpaced(Name);
-                if (Bool2)
-                {
-                    String.Add_Char('*');
-                }
-            }
-        }
-
-        void CompressedTar::TarStringToUnicode(
-            const AString& String,
-            NWindows::NCOM::CPropVariant& Prop,
-            bool ToOS) const
-        {
-            UString Dest;
-            if (m_OpenCodePage == CP_UTF8)
-            {
-                ConvertUTF8ToUnicode(String, Dest);
-            }
-            else
-            {
-                MultiByteToUnicodeString2(Dest, String, m_OpenCodePage);
-            }
-            if (ToOS)
-            {
-                NArchive::NItemName::ReplaceToOsSlashes_Remove_TailSlash(
-                    Dest,
-                    true);
-            }
-            Prop = Dest;
-        }
-
-        void CompressedTar::PaxTimeToProp(
-            const NArchive::NTar::CPaxTime& PaxTime,
-            NWindows::NCOM::CPropVariant& Prop)
-        {
-            UInt64 Value;
-
-            if (!NWindows::NTime::UnixTime64_To_FileTime64(PaxTime.Sec, Value))
-            {
-                return;
-            }
-
-            if (0 != PaxTime.Ns)
-            {
-                Value += PaxTime.Ns / 100;
-            }
-
-            FILETIME FileTime;
-            FileTime.dwLowDateTime = (DWORD)Value;
-            FileTime.dwHighDateTime = (DWORD)(Value >> 32);
-            Prop.SetAsTimeFrom_FT_Prec_Ns100(
-                FileTime,
-                k_PropVar_TimePrec_Base + (unsigned)PaxTime.NumDigits,
-                PaxTime.Ns % 100);
+            return m_Tar->GetNumberOfItems(NumItems);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetProperty(
@@ -690,270 +536,13 @@ namespace NArchive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value) noexcept
         {
-            if (Index >= (UInt32)m_Items.size())
+            if (!m_Tar)
             {
-                return E_INVALIDARG;
+                Value->vt = VT_EMPTY;
+                return S_OK;
             }
 
-            NWindows::NCOM::CPropVariant Prop;
-            const NArchive::NTar::CItemEx& Item = m_Items[Index];
-
-            switch (PropId)
-            {
-            case kpidPath:
-                TarStringToUnicode(Item.Name, Prop, true);
-                break;
-
-            case kpidIsDir:
-                Prop = Item.IsDir();
-                break;
-
-            case kpidSize:
-                Prop = Item.Get_UnpackSize();
-                break;
-
-            case kpidPackSize:
-                Prop = Item.Get_PackSize_Aligned();
-                break;
-
-            case kpidMTime:
-            {
-                if (Item.PaxTimes.MTime.IsDefined())
-                {
-                    PaxTimeToProp(Item.PaxTimes.MTime, Prop);
-                }
-                else
-                {
-                    FILETIME FileTime;
-                    if (NWindows::NTime::UnixTime64_To_FileTime(
-                        Item.MTime,
-                        FileTime))
-                    {
-                        unsigned Precision = k_PropVar_TimePrec_Unix;
-                        if (Item.MTime_IsBin)
-                        {
-                            Precision = k_PropVar_TimePrec_Base;
-                        }
-                        Prop.SetAsTimeFrom_FT_Prec(FileTime, Precision);
-                    }
-                }
-                break;
-            }
-
-            case kpidATime:
-                if (Item.PaxTimes.ATime.IsDefined())
-                {
-                    PaxTimeToProp(Item.PaxTimes.ATime, Prop);
-                }
-                break;
-
-            case kpidCTime:
-                if (Item.PaxTimes.CTime.IsDefined())
-                {
-                    PaxTimeToProp(Item.PaxTimes.CTime, Prop);
-                }
-                break;
-
-            case kpidPosixAttrib:
-                Prop = Item.Get_Combined_Mode();
-                break;
-
-            case kpidUser:
-                if (!Item.User.IsEmpty())
-                {
-                    TarStringToUnicode(Item.User, Prop);
-                }
-                break;
-
-            case kpidGroup:
-                if (!Item.Group.IsEmpty())
-                {
-                    TarStringToUnicode(Item.Group, Prop);
-                }
-                break;
-
-            case kpidUserId:
-                Prop = (UInt32)Item.UID;
-                break;
-
-            case kpidGroupId:
-                Prop = (UInt32)Item.GID;
-                break;
-
-            case kpidDeviceMajor:
-                if (Item.DeviceMajor_Defined)
-                    Prop = (UInt32)Item.DeviceMajor;
-                break;
-
-            case kpidDeviceMinor:
-                if (Item.DeviceMinor_Defined)
-                    Prop = (UInt32)Item.DeviceMinor;
-                break;
-
-            case kpidSymLink:
-                if (Item.Is_SymLink() && !Item.LinkName.IsEmpty())
-                {
-                    TarStringToUnicode(Item.LinkName, Prop);
-                }
-                break;
-
-            case kpidHardLink:
-                if (Item.Is_HardLink() && !Item.LinkName.IsEmpty())
-                {
-                    TarStringToUnicode(Item.LinkName, Prop);
-                }
-                break;
-
-            case kpidCharacts:
-            {
-                AString String;
-
-                {
-                    String.Add_Space_if_NotEmpty();
-                    AddSpecCharToString(Item.LinkFlag, String);
-                }
-                if (Item.IsMagic_GNU())
-                {
-                    String.Add_OptSpaced("GNU");
-                }
-                else if (Item.IsMagic_Posix_ustar_00())
-                {
-                    String.Add_OptSpaced("POSIX");
-                }
-                else
-                {
-                    String.Add_Space_if_NotEmpty();
-                    for (unsigned i = 0; i < sizeof(Item.Magic); i++)
-                    {
-                        AddSpecCharToString(Item.Magic[i], String);
-                    }
-                }
-
-                if (Item.IsSignedChecksum)
-                {
-                    String.Add_OptSpaced("SignedChecksum");
-                }
-
-                if (Item.Prefix_WasUsed)
-                {
-                    String.Add_OptSpaced("PREFIX");
-                }
-
-                String.Add_OptSpaced(Item.EncodingCharacts.GetCharactsString());
-
-                AddSpecBools(
-                    String,
-                    "LongName",
-                    Item.LongName_WasUsed,
-                    Item.LongName_WasUsed_2);
-                AddSpecBools(
-                    String,
-                    "LongLink",
-                    Item.LongLink_WasUsed,
-                    Item.LongLink_WasUsed_2);
-
-                if (Item.MTime_IsBin)
-                {
-                    String.Add_OptSpaced("bin_mtime");
-                }
-                if (Item.PackSize_IsBin)
-                {
-                    String.Add_OptSpaced("bin_psize");
-                }
-                if (Item.PackSize_IsBin)
-                {
-                    // bin_size is same as bin_psize for Tar
-                    String.Add_OptSpaced("bin_size");
-                }
-
-                AddSpecUInt64(String, "PAX", Item.Num_Pax_Records);
-
-                if (Item.PaxTimes.MTime.IsDefined())
-                {
-                    String.Add_OptSpaced("mtime");
-                }
-                if (Item.PaxTimes.ATime.IsDefined())
-                {
-                    String.Add_OptSpaced("atime");
-                }
-                if (Item.PaxTimes.CTime.IsDefined())
-                {
-                    String.Add_OptSpaced("ctime");
-                }
-
-                if (Item.pax_path_WasUsed)
-                {
-                    String.Add_OptSpaced("pax_path");
-                }
-                if (Item.pax_link_WasUsed)
-                {
-                    String.Add_OptSpaced("pax_linkpath");
-                }
-                if (Item.pax_size_WasUsed)
-                {
-                    String.Add_OptSpaced("pax_size");
-                }
-                if (!Item.SCHILY_fflags.IsEmpty())
-                {
-                    String.Add_OptSpaced("SCHILY.fflags=");
-                    String += Item.SCHILY_fflags;
-                }
-                if (Item.Is_Sparse())
-                {
-                    String.Add_OptSpaced("SPARSE");
-                }
-                if (Item.IsThereWarning())
-                {
-                    String.Add_OptSpaced("WARNING");
-                }
-                if (Item.HeaderError)
-                {
-                    String.Add_OptSpaced("ERROR");
-                }
-                if (Item.Method_Error)
-                {
-                    String.Add_OptSpaced("METHOD_ERROR");
-                }
-                if (Item.Pax_Error)
-                {
-                    String.Add_OptSpaced("PAX_error");
-                }
-                if (!Item.PaxExtra.RawLines.IsEmpty())
-                {
-                    String.Add_OptSpaced("PAX_unsupported_line");
-                }
-                if (Item.Pax_Overflow)
-                {
-                    String.Add_OptSpaced("PAX_overflow");
-                }
-                if (!String.IsEmpty())
-                {
-                    Prop = String;
-                }
-                break;
-            }
-
-            case kpidComment:
-            {
-                AString String;
-                Item.PaxExtra.Print_To_String(String);
-                if (!String.IsEmpty())
-                {
-                    Prop = String;
-                }
-                break;
-            }
-
-            default:
-                if (m_Tar)
-                {
-                    return m_Tar->GetProperty(Index, PropId, Value);
-                }
-                break;
-            }
-
-            Prop.Detach(Value);
-            return S_OK;
+            return m_Tar->GetProperty(Index, PropId, Value);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Extract(
@@ -964,25 +553,7 @@ namespace NArchive
         {
             if (!m_Tar)
             {
-                m_Tar = NArchive::NTar::CreateArcForTar();
-                if (!m_Tar)
-                {
-                    return E_OUTOFMEMORY;
-                }
-            }
-
-            auto Handler = reinterpret_cast<NArchive::NTar::CHandler*>(
-                m_Tar.Interface());
-            if (0 == Handler->_items.Size() && !m_Items.empty())
-            {
-                // Luckily, NTar::CHandler::_items is public, so we can inject
-                // all of our cached item metadata here.
-                Handler->_items.ClearAndReserve(m_Items.size());
-                for (const auto& Item : m_Items)
-                {
-                    Handler->_items.AddInReserved(Item);
-                }
-                Handler->_stream = this;
+                return E_FAIL;
             }
 
             return m_Tar->Extract(
@@ -996,106 +567,25 @@ namespace NArchive
             _In_ PROPID PropId,
             _Inout_ LPPROPVARIANT Value) noexcept
         {
-            NWindows::NCOM::CPropVariant Prop;
-            HRESULT hr;
-
-            switch (PropId)
+            if (!m_Tar)
             {
-            case kpidPhySize:
-                // This prop has to come from the compression handler, or we'll
-                // get an "unexpected end of archive" error.
-                if (!m_Compressed)
-                {
-                    return S_OK;
-                }
-
-                return m_Compressed->GetArchiveProperty(PropId, Value);
-
-            case kpidErrorFlags:
-            case kpidWarningFlags:
-            {
-                // The error flags and messages need to be combined.
-
-                UInt32 Flags = 0;
-
-                if (!m_Compressed)
-                {
-                    return S_OK;
-                }
-
-                hr = m_Compressed->GetArchiveProperty(PropId, &Prop);
-                if (S_OK != hr)
-                {
-                    return hr;
-                }
-                if (VT_UI4 == Prop.vt)
-                {
-                    Flags = Prop.ulVal;
-                }
-
-                if (m_Tar &&
-                    S_OK == m_Tar->GetArchiveProperty(PropId, &Prop) &&
-                    VT_UI4 == Prop.vt)
-                {
-                    Flags |= Prop.ulVal;
-                }
-
-                Prop = Flags;
-                Prop.Detach(Value);
+                Value->vt = VT_EMPTY;
                 return S_OK;
             }
 
-            case kpidError:
-            case kpidWarning:
-            {
-                UString Message;
-
-                if (!m_Compressed)
-                {
-                    return S_OK;
-                }
-
-                hr = m_Compressed->GetArchiveProperty(PropId, &Prop);
-                if (S_OK != hr)
-                {
-                    return hr;
-                }
-                if (Prop.vt == VT_BSTR)
-                {
-                    Message = Prop.bstrVal;
-                }
-
-                if (m_Tar &&
-                    S_OK == m_Tar->GetArchiveProperty(PropId, &Prop) &&
-                    Prop.vt == VT_BSTR)
-                {
-                    if (!Message.IsEmpty())
-                    {
-                        Message += ". ";
-                    }
-                    Message += Prop.bstrVal;
-                }
-
-                Prop = Message;
-                Prop.Detach(Value);
-                return S_OK;
-            }
-
-            default:
-                if (!m_Tar)
-                {
-                    return S_OK;
-                }
-
-                return m_Tar->GetArchiveProperty(PropId, Value);
-            }
+            return m_Tar->GetArchiveProperty(PropId, Value);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfProperties(
             _Out_ UInt32* NumProps) noexcept
         {
-            *NumProps = NArchive::NTar::PropCount;
-            return S_OK;
+            if (!m_Tar)
+            {
+                *NumProps = 0;
+                return S_OK;
+            }
+
+            return m_Tar->GetNumberOfProperties(NumProps);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetPropertyInfo(
@@ -1104,22 +594,24 @@ namespace NArchive
             _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType) noexcept
         {
-            if (Index >= NArchive::NTar::PropCount)
+            if (!m_Tar)
             {
-                return E_INVALIDARG;
+                return E_FAIL;
             }
 
-            *Name = NULL;
-            *PropId = NArchive::NTar::kProps[Index];
-            *VarType = k7z_PROPID_To_VARTYPE[(unsigned)*PropId];
-            return S_OK;
+            return m_Tar->GetPropertyInfo(Index, Name, PropId, VarType);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetNumberOfArchiveProperties(
             _Out_ UInt32* NumProps) noexcept
         {
-            *NumProps = NArchive::NTar::ArcPropCount;
-            return S_OK;
+            if (!m_Tar)
+            {
+                *NumProps = 0;
+                return S_OK;
+            }
+
+            return m_Tar->GetNumberOfArchiveProperties(NumProps);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::GetArchivePropertyInfo(
@@ -1128,15 +620,12 @@ namespace NArchive
             _Out_ PROPID* PropId,
             _Out_ VARTYPE* VarType) noexcept
         {
-            if (Index >= NArchive::NTar::ArcPropCount)
+            if (!m_Tar)
             {
-                return E_INVALIDARG;
+                return E_FAIL;
             }
 
-            *Name = NULL;
-            *PropId = NArchive::NTar::kArcProps[Index];
-            *VarType = k7z_PROPID_To_VARTYPE[(unsigned)*PropId];
-            return S_OK;
+            return m_Tar->GetArchivePropertyInfo(Index, Name, PropId, VarType);
         }
 
         HRESULT STDMETHODCALLTYPE CompressedTar::Read(
