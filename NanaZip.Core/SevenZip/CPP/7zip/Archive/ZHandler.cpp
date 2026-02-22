@@ -26,7 +26,7 @@ Z7_CLASS_IMP_CHandler_IInArchive_0
 };
 
 // **************** NanaZip Modification Start ****************
-IInArchive *CreateArcForTar()
+IInArchive *CreateArcExported()
 {
     return new CHandler();
 }

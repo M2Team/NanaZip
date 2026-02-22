@@ -178,7 +178,7 @@ public:
 };
 
 // **************** NanaZip Modification Start ****************
-IInArchive *CreateArcForTar()
+IInArchive *CreateArcExported()
 {
     return new CHandler();
 }
