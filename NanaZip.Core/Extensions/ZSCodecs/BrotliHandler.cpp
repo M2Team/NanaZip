@@ -45,13 +45,6 @@ Z7_CLASS_IMP_CHandler_IInArchive_3(
   CSingleMethodProps _props;
 };
 
-// **************** NanaZip Modification Start ****************
-IInArchive *CreateArcExported()
-{
-    return new CHandler();
-}
-// **************** NanaZip Modification End ****************
-
 static const Byte kProps[] =
 {
   kpidSize,

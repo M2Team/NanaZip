@@ -29,13 +29,6 @@ namespace NTar {
 // static const UINT k_DefaultCodePage = CP_UTF8;
 
 
-// **************** NanaZip Modification Start ****************
-IInArchive *CreateArcExported()
-{
-    return new CHandler();
-}
-// **************** NanaZip Modification End ****************
-
 static const Byte kProps[] =
 {
   kpidPath,
