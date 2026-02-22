@@ -409,13 +409,100 @@ namespace NanaZip::Core::Archive
         _In_ PROPID PropId,
         _Inout_ LPPROPVARIANT Value) noexcept
     {
-        if (!m_Inner)
+        NWindows::NCOM::CPropVariant Prop;
+        HRESULT hr;
+
+        switch (PropId)
         {
-            Value->vt = VT_EMPTY;
+        case kpidPhySize:
+            // This prop has to come from the compression handler, or we'll
+            // get an "unexpected end of archive" error.
+            if (!m_Compressed)
+            {
+                return S_OK;
+            }
+
+            return m_Compressed->GetArchiveProperty(PropId, Value);
+
+        case kpidErrorFlags:
+        case kpidWarningFlags:
+        {
+            // The error flags and messages need to be combined.
+
+            UInt32 Flags = 0;
+
+            if (!m_Compressed)
+            {
+                return S_OK;
+            }
+
+            hr = m_Compressed->GetArchiveProperty(PropId, &Prop);
+            if (S_OK != hr)
+            {
+                return hr;
+            }
+            if (VT_UI4 == Prop.vt)
+            {
+                Flags = Prop.ulVal;
+            }
+
+            if (m_Inner &&
+                S_OK == m_Inner->GetArchiveProperty(PropId, &Prop) &&
+                VT_UI4 == Prop.vt)
+            {
+                Flags |= Prop.ulVal;
+            }
+
+            Prop = Flags;
+            Prop.Detach(Value);
             return S_OK;
         }
 
-        return m_Inner->GetArchiveProperty(PropId, Value);
+        case kpidError:
+        case kpidWarning:
+        {
+            UString Message;
+
+            if (!m_Compressed)
+            {
+                return S_OK;
+            }
+
+            hr = m_Compressed->GetArchiveProperty(PropId, &Prop);
+            if (S_OK != hr)
+            {
+                return hr;
+            }
+            if (Prop.vt == VT_BSTR)
+            {
+                Message = Prop.bstrVal;
+            }
+
+            if (m_Inner &&
+                S_OK == m_Inner->GetArchiveProperty(PropId, &Prop) &&
+                Prop.vt == VT_BSTR)
+            {
+                if (!Message.IsEmpty())
+                {
+                    Message += ". ";
+                }
+                Message += Prop.bstrVal;
+            }
+
+            Prop = Message;
+            Prop.Detach(Value);
+            return S_OK;
+        }
+
+        default:
+            if (!m_Inner)
+            {
+                Value->vt = VT_EMPTY;
+                return S_OK;
+            }
+
+            return m_Inner->GetArchiveProperty(PropId, Value);
+        }
     }
 
     HRESULT STDMETHODCALLTYPE CompressedStreamArchive::GetNumberOfProperties(
