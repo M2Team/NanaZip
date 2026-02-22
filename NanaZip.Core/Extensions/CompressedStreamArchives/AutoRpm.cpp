@@ -86,7 +86,8 @@ namespace
     }
 
     static const CArcInfo ArcInfo = {
-        NArcInfoFlags::kPureStartOpen,
+        NArcInfoFlags::kPureStartOpen |
+        NArcInfoFlags::kCompositeArc,
         0x72,
         0,
         0,
