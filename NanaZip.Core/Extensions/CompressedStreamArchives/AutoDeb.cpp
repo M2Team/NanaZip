@@ -1,0 +1,63 @@
+﻿/*
+ * PROJECT:    NanaZip
+ * FILE:       AutoDeb.cpp
+ * PURPOSE:    Implementation for DEB unpacking support
+ *
+ * LICENSE:    The MIT License
+ *
+ * MAINTAINER: Tu Dinh <contact@tudinh.xyz>
+ */
+
+#include "CompressedStreamArchive.hpp"
+#include "CoreExports.hpp"
+
+namespace NanaZip::Core::Archive
+{
+    static CompressedStreamArchiveInfo CreateInfo()
+    {
+        static const CArcInfo* CodecInfos[] = {
+            LookupArchiveInfo(&CLSID_ArHandler),
+        };
+
+        return CompressedStreamArchiveInfo{
+            LookupArchiveInfo(&CLSID_TarHandler),
+            CodecInfos,
+            ARRAYSIZE(CodecInfos),
+        };
+    }
+
+    static IInArchive* CreateArc()
+    {
+        static CompressedStreamArchiveInfo Info = CreateInfo();
+        if (!Info.InnerArc)
+        {
+            return nullptr;
+        }
+        return new CompressedStreamArchive(&Info);
+    }
+
+    static const CArcInfo ArcInfo = {
+        0,
+        0x72,
+        0,
+        0,
+        nullptr,
+        "AutoDeb",
+        "deb",
+        nullptr,
+        0,
+        CreateArc,
+        0,
+        nullptr,
+    };
+
+    struct CRegisterArc
+    {
+        CRegisterArc()
+        {
+            RegisterArc(&ArcInfo);
+        }
+    };
+
+    static CRegisterArc g_RegisterArc;
+}

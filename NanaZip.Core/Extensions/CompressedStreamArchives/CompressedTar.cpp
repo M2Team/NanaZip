@@ -8,114 +8,56 @@
  * MAINTAINER: Tu Dinh <contact@tudinh.xyz>
  */
 
-#include "CoreExports.hpp"
 #include "CompressedStreamArchive.hpp"
-
-#include "../../SevenZip/CPP/7zip/Common/RegisterArc.h"
+#include "CoreExports.hpp"
 
 namespace NanaZip::Core::Archive
 {
-    static const Byte XzSignature[] = { 0xFD, '7', 'z', 'X', 'Z', 0x00 };
+    static CompressedStreamArchiveInfo CreateInfo()
+    {
+        static const CArcInfo* CodecInfos[] = {
+            LookupArchiveInfo(&CLSID_BrotliHandler),
+            LookupArchiveInfo(&CLSID_Bzip2Handler),
+            LookupArchiveInfo(&CLSID_GzipHandler),
+            LookupArchiveInfo(&CLSID_LizardHandler),
+            LookupArchiveInfo(&CLSID_Lz4Handler),
+            LookupArchiveInfo(&CLSID_Lz5Handler),
+            LookupArchiveInfo(&CLSID_LzipHandler),
+            LookupArchiveInfo(&CLSID_XzHandler),
+            LookupArchiveInfo(&CLSID_ZHandler),
+            LookupArchiveInfo(&CLSID_ZstdHandler),
+            // Handlers with neither IsArc nor Signature must be at the end.
+        };
 
-    // All handler names below must be synced with 7-Zip and 7-Zip ZS.
-    static const char* InnerHandlerName = "tar";
-    static const CodecInfo CodecInfos[] = {
-        CodecInfo {
-            "brotli",
-            NArchive::NBROTLI::CreateArcExported,
-            NArchive::NBROTLI::IsArc_Brotli,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "bzip2",
-            NArchive::NBz2::CreateArcExported,
-            NArchive::NBz2::IsArc_BZip2,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "gzip",
-            NArchive::NGz::CreateArcExported,
-            NArchive::NGz::IsArc_Gz,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "lizard",
-            NArchive::NLIZARD::CreateArcExported,
-            NArchive::NLIZARD::IsArc_lizard,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "lz4",
-            NArchive::NLZ4::CreateArcExported,
-            NArchive::NLZ4::IsArc_lz4,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "lz5",
-            NArchive::NLZ5::CreateArcExported,
-            NArchive::NLZ5::IsArc_lz5,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "lzip",
-            NArchive::NLz::CreateArcExported,
-            NArchive::NLz::IsArc_Lz,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "xz",
-            NArchive::NXz::CreateArcExported,
-            nullptr,
-            XzSignature,
-            sizeof(XzSignature)
-        },
-        CodecInfo {
-            "Z",
-            NArchive::NZ::CreateArcExported,
-            NArchive::NZ::IsArc_Z,
-            nullptr,
-            0
-        },
-        CodecInfo {
-            "zstd",
-            NArchive::NZSTD::CreateArcExported,
-            NArchive::NZSTD::IsArc_zstd,
-            nullptr,
-            0
-        },
-        // Handlers with neither IsArc nor Signature must be at the end.
-    };
-
-    static const CompressedStreamArchiveInfo CompressedTarInfo = {
-        InnerHandlerName, // InnerHandlerName
-        NArchive::NTar::CreateArcExported, // CreateArcExported
-        CodecInfos, // CodecInfos
-        ARRAYSIZE(CodecInfos), // CodecInfoCount
-    };
+        return CompressedStreamArchiveInfo{
+            LookupArchiveInfo(&CLSID_TarHandler),
+            CodecInfos,
+            ARRAYSIZE(CodecInfos),
+        };
+    }
 
     static IInArchive* CreateArc()
     {
-        return new CompressedStreamArchive(&CompressedTarInfo);
+        static CompressedStreamArchiveInfo Info =
+            CreateInfo();
+        if (!Info.InnerArc)
+        {
+            return nullptr;
+        }
+        return new CompressedStreamArchive(&Info);
     }
 
-    extern const CArcInfo CompressedTarArcInfo = {
+    static const CArcInfo ArcInfo = {
         NArcInfoFlags::kStartOpen |
         NArcInfoFlags::kSymLinks |
         NArcInfoFlags::kHardLinks |
         NArcInfoFlags::kMTime |
         NArcInfoFlags::kMTime_Default,
-        0xA,
+        0x70,
         0,
         0,
         nullptr,
-        "CompressedStreamArchive",
+        "CompressedTar",
         "br brotli tbr "
             "bz2 bzip2 tbz2 tbz "
             "gz gzip tgz tpz apk "
@@ -147,7 +89,7 @@ namespace NanaZip::Core::Archive
     {
         CRegisterArc()
         {
-            RegisterArc(&CompressedTarArcInfo);
+            RegisterArc(&ArcInfo);
         }
     };
 
