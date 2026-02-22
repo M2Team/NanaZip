@@ -56,8 +56,11 @@
     <None Include="SevenZip\C\Sort.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Extensions\CompressedStreamArchives\CoreExports.cpp" />
     <ClCompile Include="Extensions\CompressedStreamArchives\CompressedStreamArchive.cpp" />
     <ClCompile Include="Extensions\CompressedStreamArchives\CompressedTar.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\AutoRpm.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\AutoDeb.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliDecoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliHandler.cpp" />
