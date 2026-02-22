@@ -66,7 +66,7 @@ namespace
         "CompressedTar",
         "tar.br tar.brotli tbr "
             "tar.bz2 tar.bzip2 tbz2 tbz "
-            "tar.gz tar.gzip tgz tpz apk "
+            "tar.gz tar.gzip tgz tpz "
             "tar.liz tliz "
             "tar.lz4 tlz4 "
             "tar.lz5 tlz5 "
