@@ -34,10 +34,9 @@ IInArchive *CreateArcForTar()
 {
     return new CHandler();
 }
-
-// static const Byte kProps[] =
-extern const Byte kProps[] =
 // **************** NanaZip Modification End ****************
+
+static const Byte kProps[] =
 {
   kpidPath,
   kpidIsDir,
@@ -65,24 +64,13 @@ extern const Byte kProps[] =
   // , kpidOffset // for debug
 };
 
-// **************** NanaZip Modification Start ****************
-extern const UInt32 PropCount = Z7_ARRAY_SIZE(kProps);
-// **************** NanaZip Modification End ****************
-
-// **************** NanaZip Modification Start ****************
-// static const Byte kArcProps[] =
-extern const Byte kArcProps[] =
-// **************** NanaZip Modification End ****************
+static const Byte kArcProps[] =
 {
   kpidHeadersSize,
   kpidCodePage,
   kpidCharacts,
   kpidComment
 };
-
-// **************** NanaZip Modification Start ****************
-extern const UInt32 ArcPropCount = Z7_ARRAY_SIZE(kArcProps);
-// **************** NanaZip Modification End ****************
 
 static const char * const k_Characts_Prefix = "PREFIX";
 
