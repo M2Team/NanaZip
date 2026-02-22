@@ -25,6 +25,7 @@ namespace
             LookupArchiveInfo(&CLSID_Lz4Handler),
             LookupArchiveInfo(&CLSID_Lz5Handler),
             LookupArchiveInfo(&CLSID_LzipHandler),
+            LookupArchiveInfo(&CLSID_LzmaHandler),
             LookupArchiveInfo(&CLSID_XzHandler),
             LookupArchiveInfo(&CLSID_ZHandler),
             LookupArchiveInfo(&CLSID_ZstdHandler),
