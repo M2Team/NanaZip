@@ -484,13 +484,6 @@ public:
   }
 };
 
-// **************** NanaZip Modification Start ****************
-IInArchive *CreateArcExported()
-{
-    return new CHandler();
-}
-// **************** NanaZip Modification End ****************
-
 static const Byte kProps[] =
 {
   kpidPath,
