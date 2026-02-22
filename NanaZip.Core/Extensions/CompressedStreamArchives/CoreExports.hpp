@@ -1,4 +1,14 @@
-﻿#pragma once
+﻿/*
+ * PROJECT:    NanaZip
+ * FILE:       CoreExports.cpp
+ * PURPOSE:    Declarations of exported codec CLSIDs
+ *
+ * LICENSE:    The MIT License
+ *
+ * MAINTAINER: Tu Dinh <contact@tudinh.xyz>
+ */
+
+#pragma once
 
 #include "../../SevenZip/CPP/Common/MyWindows.h"
 
