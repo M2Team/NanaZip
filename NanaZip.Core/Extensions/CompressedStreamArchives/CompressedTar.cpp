@@ -52,7 +52,7 @@ namespace
     }
 
     static const CArcInfo ArcInfo = {
-        NArcInfoFlags::kStartOpen |
+        NArcInfoFlags::kPureStartOpen |
         NArcInfoFlags::kSymLinks |
         NArcInfoFlags::kHardLinks |
         NArcInfoFlags::kMTime |
