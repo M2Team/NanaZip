@@ -13,6 +13,7 @@
 #include "NanaZip.Codecs.SevenZipWrapper.h"
 
 #include <map>
+#include <limits>
 
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
@@ -338,7 +339,9 @@ namespace NanaZip::Codecs::Archive
                 std::int64_t BundleHeaderOffset = 0;
 
                 // Initial value is skip 'M', 'Z' and the bundle header offset.
-                for (size_t i = 10; i < SearchBufferSize; ++i)
+                for (size_t i = 10;
+                    (i + sizeof(g_BundleSignature)) <= SearchBufferSize;
+                    ++i)
                 {
                     if (g_BundleSignature[0] != SearchBuffer[i])
                     {
@@ -357,13 +360,22 @@ namespace NanaZip::Codecs::Archive
                         &SearchBuffer[i - sizeof(std::int64_t)]);
                 }
                 SearchBuffer.clear();
-                if (!BundleHeaderOffset)
+                if (BundleHeaderOffset <= 0 ||
+                    static_cast<UINT64>(BundleHeaderOffset) > BundleSize)
                 {
                     break;
                 }
 
+                UINT64 HeaderBufferSizeValue =
+                    BundleSize - static_cast<UINT64>(BundleHeaderOffset);
+                if (0 == HeaderBufferSizeValue ||
+                    HeaderBufferSizeValue >
+                    std::numeric_limits<std::size_t>::max())
+                {
+                    break;
+                }
                 std::size_t HeaderBufferSize = static_cast<std::size_t>(
-                    BundleSize - BundleHeaderOffset);
+                    HeaderBufferSizeValue);
 
                 std::vector<std::uint8_t> HeaderBuffer(HeaderBufferSize);
                 if (FAILED(this->ReadFileStream(
@@ -380,45 +392,89 @@ namespace NanaZip::Codecs::Archive
                 try
                 {
                     std::size_t Current = 0;
-                    Header.MajorVersion =
-                        this->ReadUInt32(&HeaderBuffer[Current]);
+                    auto HasRemainingData = [&Current, &HeaderBufferSize](
+                        std::size_t RequiredSize) -> bool
+                    {
+                        return Current <= HeaderBufferSize &&
+                            RequiredSize <= (HeaderBufferSize - Current);
+                    };
+                    auto ReadUInt8Checked = [&](std::uint8_t* Value)
+                    {
+                        if (!HasRemainingData(sizeof(std::uint8_t)))
+                        {
+                            throw std::exception();
+                        }
+                        *Value = this->ReadUInt8(&HeaderBuffer[Current]);
+                        Current += sizeof(std::uint8_t);
+                    };
+                    auto ReadUInt32Checked = [&](std::uint32_t* Value)
+                    {
+                        if (!HasRemainingData(sizeof(std::uint32_t)))
+                        {
+                            throw std::exception();
+                        }
+                        *Value = this->ReadUInt32(&HeaderBuffer[Current]);
+                        Current += sizeof(std::uint32_t);
+                    };
+                    auto ReadInt32Checked = [&](std::int32_t* Value)
+                    {
+                        if (!HasRemainingData(sizeof(std::int32_t)))
+                        {
+                            throw std::exception();
+                        }
+                        *Value = this->ReadInt32(&HeaderBuffer[Current]);
+                        Current += sizeof(std::int32_t);
+                    };
+                    auto ReadInt64Checked = [&](std::int64_t* Value)
+                    {
+                        if (!HasRemainingData(sizeof(std::int64_t)))
+                        {
+                            throw std::exception();
+                        }
+                        *Value = this->ReadInt64(&HeaderBuffer[Current]);
+                        Current += sizeof(std::int64_t);
+                    };
+                    auto ReadUInt64Checked = [&](std::uint64_t* Value)
+                    {
+                        if (!HasRemainingData(sizeof(std::uint64_t)))
+                        {
+                            throw std::exception();
+                        }
+                        *Value = this->ReadUInt64(&HeaderBuffer[Current]);
+                        Current += sizeof(std::uint64_t);
+                    };
+
+                    ReadUInt32Checked(&Header.MajorVersion);
                     this->m_MajorVersion = Header.MajorVersion;
-                    Current += sizeof(std::uint32_t);
-                    Header.MinorVersion =
-                        this->ReadUInt32(&HeaderBuffer[Current]);
-                    Current += sizeof(std::uint32_t);
-                    Header.NumberOfEmbeddedFiles =
-                        this->ReadInt32(&HeaderBuffer[Current]);
+                    ReadUInt32Checked(&Header.MinorVersion);
+                    ReadInt32Checked(&Header.NumberOfEmbeddedFiles);
                     if (Header.NumberOfEmbeddedFiles <= 0)
                     {
                         // Invalid number of embedded files.
                         throw std::exception();
                     }
-                    Current += sizeof(std::int32_t);
-                    std::uint8_t BundleIdLength =
-                        this->ReadUInt8(&HeaderBuffer[Current]);
-                    Current += sizeof(std::uint8_t);
+                    std::uint8_t BundleIdLength = 0;
+                    ReadUInt8Checked(&BundleIdLength);
+                    if (!HasRemainingData(BundleIdLength))
+                    {
+                        throw std::exception();
+                    }
                     Header.BundleId = std::string(
                         reinterpret_cast<char*>(&HeaderBuffer[Current]),
                         BundleIdLength);
                     Current += BundleIdLength;
                     if (Header.MajorVersion >= 2)
                     {
-                        Header.DepsJsonLocation.Offset =
-                            this->ReadInt64(&HeaderBuffer[Current]);
-                        Current += sizeof(std::int64_t);
-                        Header.DepsJsonLocation.Size =
-                            this->ReadInt64(&HeaderBuffer[Current]);
-                        Current += sizeof(std::int64_t);
-                        Header.RuntimeConfigLocation.Offset =
-                            this->ReadInt64(&HeaderBuffer[Current]);
-                        Current += sizeof(std::int64_t);
-                        Header.RuntimeConfigLocation.Size =
-                            this->ReadInt64(&HeaderBuffer[Current]);
-                        Current += sizeof(std::int64_t);
+                        ReadInt64Checked(&Header.DepsJsonLocation.Offset);
+                        ReadInt64Checked(&Header.DepsJsonLocation.Size);
+                        ReadInt64Checked(
+                            &Header.RuntimeConfigLocation.Offset);
+                        ReadInt64Checked(
+                            &Header.RuntimeConfigLocation.Size);
+                        std::uint64_t FlagsValue = 0;
+                        ReadUInt64Checked(&FlagsValue);
                         Header.Flags = static_cast<BundleFileHeaderFlags>(
-                            this->ReadUInt64(&HeaderBuffer[Current]));
-                        Current += sizeof(std::uint64_t);
+                            FlagsValue);
                     }
 
                     for (std::int32_t i = 0;
@@ -426,32 +482,26 @@ namespace NanaZip::Codecs::Archive
                         ++i)
                     {
                         BundleFileEntry Entry;
-                        Entry.Offset =
-                            this->ReadInt64(&HeaderBuffer[Current]);
+                        ReadInt64Checked(&Entry.Offset);
                         if (Entry.Offset <= 0)
                         {
                             // Invalid file offset.
                             throw std::exception();
                         }
-                        Current += sizeof(std::int64_t);
-                        Entry.Size =
-                            this->ReadInt64(&HeaderBuffer[Current]);
+                        ReadInt64Checked(&Entry.Size);
                         if (Entry.Size < 0)
                         {
                             // Invalid file size.
                             throw std::exception();
                         }
-                        Current += sizeof(std::int64_t);
                         if (Header.MajorVersion >= 6)
                         {
-                            Entry.CompressedSize =
-                                this->ReadInt64(&HeaderBuffer[Current]);
+                            ReadInt64Checked(&Entry.CompressedSize);
                             if (Entry.CompressedSize < 0)
                             {
                                 // Invalid compressed file size.
                                 throw std::exception();
                             }
-                            Current += sizeof(std::int64_t);
                         }
                         else
                         {
@@ -461,24 +511,22 @@ namespace NanaZip::Codecs::Archive
                         {
                             Entry.CompressedSize = Entry.Size;
                         }
-                        Entry.Type = static_cast<BundleFileType>(
-                            this->ReadUInt8(&HeaderBuffer[Current]));
+                        std::uint8_t TypeValue = 0;
+                        ReadUInt8Checked(&TypeValue);
+                        Entry.Type = static_cast<BundleFileType>(TypeValue);
                         if (BundleFileType::TypeCount <= Entry.Type)
                         {
                             // Invalid file type.
                             throw std::exception();
                         }
-                        Current += sizeof(std::uint8_t);
                         std::uint16_t RelativePathLength = 0;
                         {
-                            std::uint8_t FirstByte =
-                                this->ReadUInt8(&HeaderBuffer[Current]);
-                            Current += sizeof(std::uint8_t);
+                            std::uint8_t FirstByte = 0;
+                            ReadUInt8Checked(&FirstByte);
                             if (0x80 & FirstByte)
                             {
-                                std::uint8_t SecondByte =
-                                    this->ReadUInt8(&HeaderBuffer[Current]);
-                                Current += sizeof(std::uint8_t);
+                                std::uint8_t SecondByte = 0;
+                                ReadUInt8Checked(&SecondByte);
                                 if (0x80 & SecondByte)
                                 {
                                     // Invalid relative path length.
@@ -498,13 +546,20 @@ namespace NanaZip::Codecs::Archive
                                 throw std::exception();
                             }
                         }
+                        if (!HasRemainingData(RelativePathLength))
+                        {
+                            // Invalid relative path length.
+                            throw std::exception();
+                        }
                         Entry.RelativePath = std::string(
                             reinterpret_cast<char*>(&HeaderBuffer[Current]),
                             RelativePathLength);
                         Current += RelativePathLength;
                         Files.emplace(Entry.RelativePath, Entry);
                     }
-                    this->m_FullSize = BundleHeaderOffset + Current;
+                    this->m_FullSize =
+                        static_cast<std::uint64_t>(BundleHeaderOffset) +
+                        Current;
                 }
                 catch (...)
                 {

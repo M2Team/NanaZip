@@ -34,6 +34,8 @@
 #endif
 
 #include <map>
+#include <cstddef>
+#include <limits>
 
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
@@ -544,14 +546,14 @@ namespace NanaZip::Codecs::Archive
             return true;
         }
 
-        void GetAllPaths(
+        bool GetAllPaths(
             std::uint32_t const& RootInode,
             std::string const& RootPath)
         {
             UfsInodeInformation Information;
             if (!this->GetInodeInformation(RootInode, Information))
             {
-                return;
+                return false;
             }
 
             if (!RootPath.empty())
@@ -566,51 +568,93 @@ namespace NanaZip::Codecs::Archive
             }
 
             std::int32_t BlockSize = this->GetBlockSize();
+            if (BlockSize <= 0)
+            {
+                return false;
+            }
+            std::size_t BlockSizeValue = static_cast<std::size_t>(BlockSize);
 
             std::size_t BlockOffsetsCount = Information.BlockOffsets.size();
+            if (0 == BlockOffsetsCount)
+            {
+                return true;
+            }
+            if (BlockOffsetsCount >
+                std::numeric_limits<std::size_t>::max() / BlockSizeValue)
+            {
+                return false;
+            }
 
-            std::vector<std::uint8_t> Buffer(BlockOffsetsCount * BlockSize);
-            direct* DirectoryEntries = reinterpret_cast<direct*>(&Buffer[0]);
+            std::vector<std::uint8_t> Buffer(BlockOffsetsCount * BlockSizeValue);
             for (std::size_t i = 0; i < BlockOffsetsCount; ++i)
             {
                 if (FAILED(this->ReadFileStream(
                     Information.BlockOffsets[i],
-                    &Buffer[i * BlockSize],
+                    &Buffer[i * BlockSizeValue],
                     BlockSize)))
                 {
-                    return;
+                    return false;
                 }
             }
 
             // Information.FileSize will be smaller than the actual size a.k.a.
             // BlockOffsetsCount * BlockSize which should be less than
             // MAXDIRSIZE (0x7FFFFFFF).
-            direct* End = reinterpret_cast<direct*>(
-                &Buffer[static_cast<std::size_t>(Information.FileSize)]);
-
-            for (direct* Current = DirectoryEntries; Current < End;)
+            std::size_t DirectorySize = static_cast<std::size_t>(
+                Information.FileSize);
+            if (DirectorySize > Buffer.size())
             {
-                std::uint32_t Inode = this->ReadUInt32(&Current->d_ino);
-                std::uint16_t RecordLength = this->ReadUInt16(&Current->d_reclen);
-                std::uint8_t Type = this->ReadUInt8(&Current->d_type);
-                std::uint8_t NameLength = this->ReadUInt8(&Current->d_namlen);
-                Current->d_name[NameLength] = '\0';
-                std::string Name = std::string(Current->d_name);
+                return false;
+            }
+
+            std::size_t const NameOffset = offsetof(direct, d_name);
+            std::uint8_t* DirectoryEntries = &Buffer[0];
+            std::uint8_t* End = &Buffer[DirectorySize];
+
+            for (std::uint8_t* Current = DirectoryEntries; Current < End;)
+            {
+                if (static_cast<std::size_t>(End - Current) < NameOffset)
+                {
+                    return false;
+                }
+
+                direct* CurrentEntry = reinterpret_cast<direct*>(Current);
+                std::uint32_t Inode = this->ReadUInt32(&CurrentEntry->d_ino);
+                std::uint16_t RecordLength = this->ReadUInt16(
+                    &CurrentEntry->d_reclen);
+                std::uint8_t Type = this->ReadUInt8(&CurrentEntry->d_type);
+                std::uint8_t NameLength = this->ReadUInt8(
+                    &CurrentEntry->d_namlen);
+                if (RecordLength < (NameOffset + 1) ||
+                    static_cast<std::size_t>(RecordLength) >
+                    static_cast<std::size_t>(End - Current) ||
+                    NameLength > UFS_MAXNAMLEN ||
+                    (NameOffset + NameLength) >= RecordLength)
+                {
+                    return false;
+                }
+
+                CurrentEntry->d_name[NameLength] = '\0';
+                std::string Name = std::string(CurrentEntry->d_name);
                 if (Name == "." || Name == "..")
                 {
                     // Just Skip
                 }
                 else if (DT_DIR == Type)
                 {
-                    this->GetAllPaths(Inode, RootPath + Name + "/");
+                    if (!this->GetAllPaths(Inode, RootPath + Name + "/"))
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     this->m_TemporaryFilePaths.emplace(RootPath + Name, Inode);
                 }
-                Current = reinterpret_cast<direct*>(
-                    reinterpret_cast<std::size_t>(Current) + RecordLength);
+                Current += RecordLength;
             }
+
+            return true;
         }
 
     public:
@@ -748,7 +792,10 @@ namespace NanaZip::Codecs::Archive
 
                 this->m_FilePaths.clear();
 
-                this->GetAllPaths(UFS_ROOTINO, "");
+                if (!this->GetAllPaths(UFS_ROOTINO, ""))
+                {
+                    break;
+                }
                 TotalFiles = this->m_FilePaths.size();
 
                 if (OpenCallback)
