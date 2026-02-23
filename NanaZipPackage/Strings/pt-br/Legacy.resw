@@ -827,6 +827,9 @@ Você quer atualizá-lo no arquivo compactado?</value>
   <data name="Resource3440" xml:space="preserve">
     <value>Propagar o fluxo do Zone.Id:</value>
   </data>
+  <data name="Resource3434" xml:space="preserve">
+    <value>Extrair ao abrir (segure Shift para pular)</value>
+  </data>
   <data name="Resource3441" xml:space="preserve">
     <value>Pros arquivos do Office</value>
   </data>
