@@ -31,6 +31,9 @@ scenarios.
   workaround solution than us, but you need to follow the rules, which are
   mentioned in https://github.com/M2Team/NanaZip/blob/main/CONTRIBUTING.md. You
   should read that word by word first.
+  - The PR title and descriptions should not contain the words which make other
+    guys to know it's something about security issues to reduce the risk of
+    before use from malicious guys.
 - If you don't want to make a fix PR directly, you need to provide a Proof of
   Concept (maybe a document, or samples) for that before you using private
   vulnerability reporting feature provided by GitHub, read 
