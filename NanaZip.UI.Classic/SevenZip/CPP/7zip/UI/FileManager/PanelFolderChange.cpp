@@ -692,7 +692,9 @@ void CPanel::FoldersHistory()
     {
         TASKDIALOG_BUTTON Current = {};
         Current.nButtonID = static_cast<int>(i);
-        Current.pszButtonText = FolderHistoryList[i].Ptr();
+        Current.pszButtonText = FolderHistoryList[i].IsEmpty()
+            ? L" "
+            : FolderHistoryList[i].Ptr();
         RadioButtons.push_back(Current);
     }
     
