@@ -318,6 +318,9 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Dicionário</value>
   </data>
+<data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
   <data name="Resource1020" xml:space="preserve">
     <value>Tipo</value>
   </data>
