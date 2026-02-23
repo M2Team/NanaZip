@@ -238,6 +238,17 @@ namespace NanaZip::Codecs::Archive
             return static_cast<std::int64_t>(this->ReadUInt64(BaseAddress));
         }
 
+        void ValidateBound(
+            std::size_t Size,
+            std::size_t Start,
+            std::size_t Length)
+        {
+            if (Size < Start || Size - Start < Length)
+            {
+                throw std::exception();
+            }
+        }
+
         HRESULT ReadFileStream(
             _In_ INT64 Offset,
             _Out_ PVOID Buffer,
@@ -335,10 +346,16 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                std::int64_t BundleHeaderOffset = 0;
+                // According to the .NET Single File Application bundle design,
+                // the signature should be located at the executable stub, which
+                // is beginning of the bundle.
+                std::size_t MaximumSearchOffset =
+                    SearchBufferSize - sizeof(g_BundleSignature);
+
+                std::size_t BundleHeaderOffset = 0;
 
                 // Initial value is skip 'M', 'Z' and the bundle header offset.
-                for (size_t i = 10; i < SearchBufferSize; ++i)
+                for (size_t i = MinimumOffset; i < MaximumSearchOffset; ++i)
                 {
                     if (g_BundleSignature[0] != SearchBuffer[i])
                     {
@@ -353,12 +370,31 @@ namespace NanaZip::Codecs::Archive
                         continue;
                     }
 
-                    BundleHeaderOffset = this->ReadInt64(
+                    std::int64_t RawCandidate = this->ReadInt64(
                         &SearchBuffer[i - sizeof(std::int64_t)]);
+                    if (0 >= RawCandidate)
+                    {
+                        // Must be a positive number according to the .NET
+                        // Single File Application bundle design.
+                        continue;
+                    }
+                    std::size_t Candidate = RawCandidate;
+                    std::size_t SignatureEnd = i + sizeof(g_BundleSignature);
+                    if (Candidate < SignatureEnd || Candidate > BundleSize)
+                    {
+                        // According to the .NET Single File Application bundle
+                        // design, the bundle header should be located (much)
+                        // after the signature and the bundle header offset
+                        // should be within the bundle.
+                        continue;
+                    }
+
+                    BundleHeaderOffset = Candidate;
                 }
                 SearchBuffer.clear();
                 if (!BundleHeaderOffset)
                 {
+                    // Invalid .NET Single File Application bundle.
                     break;
                 }
 
@@ -380,13 +416,25 @@ namespace NanaZip::Codecs::Archive
                 try
                 {
                     std::size_t Current = 0;
+                    this->ValidateBound(
+                        HeaderBufferSize,
+                        Current,
+                        sizeof(std::uint32_t));
                     Header.MajorVersion =
                         this->ReadUInt32(&HeaderBuffer[Current]);
                     this->m_MajorVersion = Header.MajorVersion;
                     Current += sizeof(std::uint32_t);
+                    this->ValidateBound(
+                        HeaderBufferSize,
+                        Current,
+                        sizeof(std::uint32_t));
                     Header.MinorVersion =
                         this->ReadUInt32(&HeaderBuffer[Current]);
                     Current += sizeof(std::uint32_t);
+                    this->ValidateBound(
+                        HeaderBufferSize,
+                        Current,
+                        sizeof(std::int32_t));
                     Header.NumberOfEmbeddedFiles =
                         this->ReadInt32(&HeaderBuffer[Current]);
                     if (Header.NumberOfEmbeddedFiles <= 0)
@@ -395,27 +443,55 @@ namespace NanaZip::Codecs::Archive
                         throw std::exception();
                     }
                     Current += sizeof(std::int32_t);
+                    this->ValidateBound(
+                        HeaderBufferSize,
+                        Current,
+                        sizeof(std::uint8_t));
                     std::uint8_t BundleIdLength =
                         this->ReadUInt8(&HeaderBuffer[Current]);
                     Current += sizeof(std::uint8_t);
+                    this->ValidateBound(
+                        HeaderBufferSize,
+                        Current,
+                        BundleIdLength);
                     Header.BundleId = std::string(
                         reinterpret_cast<char*>(&HeaderBuffer[Current]),
                         BundleIdLength);
                     Current += BundleIdLength;
                     if (Header.MajorVersion >= 2)
                     {
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::int64_t));
                         Header.DepsJsonLocation.Offset =
                             this->ReadInt64(&HeaderBuffer[Current]);
                         Current += sizeof(std::int64_t);
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::int64_t));
                         Header.DepsJsonLocation.Size =
                             this->ReadInt64(&HeaderBuffer[Current]);
                         Current += sizeof(std::int64_t);
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::int64_t));
                         Header.RuntimeConfigLocation.Offset =
                             this->ReadInt64(&HeaderBuffer[Current]);
                         Current += sizeof(std::int64_t);
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::int64_t));
                         Header.RuntimeConfigLocation.Size =
                             this->ReadInt64(&HeaderBuffer[Current]);
                         Current += sizeof(std::int64_t);
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::uint64_t));
                         Header.Flags = static_cast<BundleFileHeaderFlags>(
                             this->ReadUInt64(&HeaderBuffer[Current]));
                         Current += sizeof(std::uint64_t);
@@ -426,6 +502,10 @@ namespace NanaZip::Codecs::Archive
                         ++i)
                     {
                         BundleFileEntry Entry;
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::int64_t));
                         Entry.Offset =
                             this->ReadInt64(&HeaderBuffer[Current]);
                         if (Entry.Offset <= 0)
@@ -434,6 +514,10 @@ namespace NanaZip::Codecs::Archive
                             throw std::exception();
                         }
                         Current += sizeof(std::int64_t);
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::int64_t));
                         Entry.Size =
                             this->ReadInt64(&HeaderBuffer[Current]);
                         if (Entry.Size < 0)
@@ -444,6 +528,10 @@ namespace NanaZip::Codecs::Archive
                         Current += sizeof(std::int64_t);
                         if (Header.MajorVersion >= 6)
                         {
+                            this->ValidateBound(
+                                HeaderBufferSize,
+                                Current,
+                                sizeof(std::int64_t));
                             Entry.CompressedSize =
                                 this->ReadInt64(&HeaderBuffer[Current]);
                             if (Entry.CompressedSize < 0)
@@ -461,6 +549,10 @@ namespace NanaZip::Codecs::Archive
                         {
                             Entry.CompressedSize = Entry.Size;
                         }
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            sizeof(std::uint8_t));
                         Entry.Type = static_cast<BundleFileType>(
                             this->ReadUInt8(&HeaderBuffer[Current]));
                         if (BundleFileType::TypeCount <= Entry.Type)
@@ -471,11 +563,19 @@ namespace NanaZip::Codecs::Archive
                         Current += sizeof(std::uint8_t);
                         std::uint16_t RelativePathLength = 0;
                         {
+                            this->ValidateBound(
+                                HeaderBufferSize,
+                                Current,
+                                sizeof(std::uint8_t));
                             std::uint8_t FirstByte =
                                 this->ReadUInt8(&HeaderBuffer[Current]);
                             Current += sizeof(std::uint8_t);
                             if (0x80 & FirstByte)
                             {
+                                this->ValidateBound(
+                                    HeaderBufferSize,
+                                    Current,
+                                    sizeof(std::uint8_t));
                                 std::uint8_t SecondByte =
                                     this->ReadUInt8(&HeaderBuffer[Current]);
                                 Current += sizeof(std::uint8_t);
@@ -498,6 +598,10 @@ namespace NanaZip::Codecs::Archive
                                 throw std::exception();
                             }
                         }
+                        this->ValidateBound(
+                            HeaderBufferSize,
+                            Current,
+                            RelativePathLength);
                         Entry.RelativePath = std::string(
                             reinterpret_cast<char*>(&HeaderBuffer[Current]),
                             RelativePathLength);
