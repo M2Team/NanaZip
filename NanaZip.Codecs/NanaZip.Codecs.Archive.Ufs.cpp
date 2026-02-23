@@ -317,6 +317,12 @@ namespace NanaZip::Codecs::Archive
                 this->m_IsUfs2
                 ? &Ufs2DirectoryInode->di_nlink
                 : &Ufs1DirectoryInode->di_nlink);
+            if (UFS_LINK_MAX - 1 < Information.NumberOfHardLinks)
+            {
+                // Maximum number of hard links is UFS_LINK_MAX - 1, more than
+                // that are reserved for special values.
+                return false;
+            }
             Information.OwnerUserId = this->ReadUInt32(
                 this->m_IsUfs2
                 ? &Ufs2DirectoryInode->di_uid
@@ -541,17 +547,20 @@ namespace NanaZip::Codecs::Archive
                 }
             }
 
-            return true;
+            // The blocks described by the inode should be enough to cover the
+            // file size, if we reach here, it means the image is corrupted or
+            // something is wrong with the implementation.
+            return false;
         }
 
-        void GetAllPaths(
+        bool GetAllPaths(
             std::uint32_t const& RootInode,
             std::string const& RootPath)
         {
             UfsInodeInformation Information;
             if (!this->GetInodeInformation(RootInode, Information))
             {
-                return;
+                return false;
             }
 
             if (!RootPath.empty())
@@ -569,8 +578,16 @@ namespace NanaZip::Codecs::Archive
 
             std::size_t BlockOffsetsCount = Information.BlockOffsets.size();
 
-            std::vector<std::uint8_t> Buffer(BlockOffsetsCount * BlockSize);
-            direct* DirectoryEntries = reinterpret_cast<direct*>(&Buffer[0]);
+            std::size_t ActualSize = BlockOffsetsCount * BlockSize;
+            if (MAXDIRSIZE < ActualSize)
+            {
+                // The directory entries buffer size is too large.
+                // Information.FileSize is bigger than the actual size of the
+                // directory entries via GetInodeInformation method before.
+                return false;
+            }
+
+            std::vector<std::uint8_t> Buffer(ActualSize);
             for (std::size_t i = 0; i < BlockOffsetsCount; ++i)
             {
                 if (FAILED(this->ReadFileStream(
@@ -578,39 +595,66 @@ namespace NanaZip::Codecs::Archive
                     &Buffer[i * BlockSize],
                     BlockSize)))
                 {
-                    return;
+                    return false;
                 }
             }
 
-            // Information.FileSize will be smaller than the actual size a.k.a.
-            // BlockOffsetsCount * BlockSize which should be less than
-            // MAXDIRSIZE (0x7FFFFFFF).
-            direct* End = reinterpret_cast<direct*>(
-                &Buffer[static_cast<std::size_t>(Information.FileSize)]);
+            // The minimum size of a directory entry can be contained the empty
+            // name string with the null terminator because all names are
+            // guaranteed null terminated.
+            const std::size_t MinimumDirectoryEntrySize =
+                offsetof(direct, d_name) + 1;
 
-            for (direct* Current = DirectoryEntries; Current < End;)
+            std::size_t EndOffset = static_cast<std::size_t>(
+                Information.FileSize);
+            for (size_t CurrentOffset = 0; CurrentOffset < EndOffset;)
             {
+                if (EndOffset < CurrentOffset + MinimumDirectoryEntrySize)
+                {
+                    // The directory entry is too small to be valid.
+                    return false;
+                }
+
+                direct* Current = reinterpret_cast<direct*>(
+                    &Buffer[CurrentOffset]);
+
                 std::uint32_t Inode = this->ReadUInt32(&Current->d_ino);
                 std::uint16_t RecordLength = this->ReadUInt16(&Current->d_reclen);
+                if (MinimumDirectoryEntrySize > RecordLength ||
+                    EndOffset < CurrentOffset + RecordLength)
+                {
+                    // The directory entry record length is invalid.
+                    return false;
+                }
                 std::uint8_t Type = this->ReadUInt8(&Current->d_type);
                 std::uint8_t NameLength = this->ReadUInt8(&Current->d_namlen);
+                if (UFS_MAXNAMLEN < NameLength)
+                {
+                    // The directory entry name length is too large.
+                    return false;
+                }
                 Current->d_name[NameLength] = '\0';
                 std::string Name = std::string(Current->d_name);
-                if (Name == "." || Name == "..")
+                if ("." == Name || ".." == Name)
                 {
                     // Just Skip
                 }
                 else if (DT_DIR == Type)
                 {
-                    this->GetAllPaths(Inode, RootPath + Name + "/");
+                    if (!this->GetAllPaths(Inode, RootPath + Name + "/"))
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     this->m_TemporaryFilePaths.emplace(RootPath + Name, Inode);
                 }
-                Current = reinterpret_cast<direct*>(
-                    reinterpret_cast<std::size_t>(Current) + RecordLength);
+
+                CurrentOffset += RecordLength;
             }
+
+            return true;
         }
 
     public:
@@ -714,8 +758,7 @@ namespace NanaZip::Codecs::Archive
                         continue;
                     }
 
-                    std::int32_t BlockSize = this->ReadInt32(
-                        &this->m_SuperBlock.fs_bsize);
+                    std::int32_t BlockSize = this->GetBlockSize();
                     if (BlockSize < MINBSIZE)
                     {
                         continue;
@@ -748,7 +791,12 @@ namespace NanaZip::Codecs::Archive
 
                 this->m_FilePaths.clear();
 
-                this->GetAllPaths(UFS_ROOTINO, "");
+                if (!this->GetAllPaths(UFS_ROOTINO, ""))
+                {
+                    // The file system image is corrupted or something is wrong
+                    // with the implementation.
+                    return S_FALSE;
+                }
                 TotalFiles = this->m_FilePaths.size();
 
                 if (OpenCallback)
