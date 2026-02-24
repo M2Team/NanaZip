@@ -3,6 +3,21 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.0 Update 1 (6.0.1638.0)**
+
+- Fix several issues for the UFS/UFS2 file system image readonly support.
+  (Cooperated with HO-9.)
+- Fix several issues for the .NET Single File Application bundle readonly
+  support. (Cooperated with HO-9.)
+- Disable text wrapping for textbox control in XAML information dialog to show
+  information better.
+- Make the hash calculation result output text format more compact to improve
+  the copy and paste experience.
+- Fix the Win32 TaskDialog-based Folders History dialog not functioning when
+  users navigate to the desktop virtual folder.
+- Update Japanese translation. (Contributed by noangel.)
+- Update Brazilian Portuguese translation. (Contributed by maisondasilva.)
+
 **NanaZip 6.0 (6.0.1632.0)**
 
 - Notes
@@ -460,7 +475,7 @@ For preview versions, please read
 
 - Notes
   - Update the minimum system requirement to Windows 10 Version 2004 (Build 
-    19041) or later for solving issues in the XAML Islands.
+    1)     or later for solving issues in the XAML Islands.
   - Add instructions for installing NanaZip for all users. (Contributed by
     AndromedaMelody. Suggested by Wolverine1977.)
 - Features
