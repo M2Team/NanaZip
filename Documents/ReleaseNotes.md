@@ -9,6 +9,8 @@ For preview versions, please read
   (Cooperated with HO-9.)
 - Fix several issues for the .NET Single File Application bundle readonly
   support. (Cooperated with HO-9.)
+- Fix the white flashes when initializing the file panels in the NanaZip File 
+  Manager main window. (Thanks to anhelloooo.)
 - Disable text wrapping for textbox control in XAML information dialog to show
   information better.
 - Make the hash calculation result output text format more compact to improve
