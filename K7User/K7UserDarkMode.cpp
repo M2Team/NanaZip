@@ -306,6 +306,18 @@ namespace
         }
     }
 
+    static bool IsFileManagerWindowClassName(
+        _In_ LPCWSTR ClassName)
+    {
+        return (0 == std::wcscmp(ClassName, L"NanaZip.Modern.FileManager"));
+    }
+
+    static bool IsFileManagerPanelWindowClassName(
+        _In_ LPCWSTR ClassName)
+    {
+        return (0 == std::wcscmp(ClassName, L"NanaZip::Panel"));
+    }
+
     static bool IsFileManagerWindow(
         _In_ HWND WindowHandle)
     {
@@ -315,9 +327,7 @@ namespace
             ClassName,
             MO_ARRAY_SIZE(ClassName)))
         {
-            return (0 == std::wcscmp(
-                ClassName,
-                L"NanaZip.Modern.FileManager"));
+            return ::IsFileManagerWindowClassName(ClassName);
         }
 
         return false;
@@ -492,44 +502,43 @@ namespace
         }
         case WM_ERASEBKGND:
         {
-            if (g_ThreadContext.ShouldAppsUseDarkMode)
+            wchar_t ClassName[256] = {};
+            if (0 != ::GetClassNameW(
+                hWnd,
+                ClassName,
+                MO_ARRAY_SIZE(ClassName)))
             {
-                wchar_t ClassName[256] = {};
-                if (0 != ::GetClassNameW(
-                    hWnd,
-                    ClassName,
-                    MO_ARRAY_SIZE(ClassName)))
+                if (g_ThreadContext.ShouldAppsUseDarkMode &&
+                    0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
                 {
-                    if (0 == std::wcscmp(ClassName, STATUSCLASSNAMEW))
+                    RECT ClientArea = {};
+                    if (::GetClientRect(hWnd, &ClientArea))
                     {
-                        RECT ClientArea = {};
-                        if (::GetClientRect(hWnd, &ClientArea))
-                        {
-                            ::FillRect(
-                                reinterpret_cast<HDC>(wParam),
-                                &ClientArea,
-                                reinterpret_cast<HBRUSH>(
-                                    ::GetStockObject(BLACK_BRUSH)));
-                            return TRUE;
-                        }
+                        ::FillRect(
+                            reinterpret_cast<HDC>(wParam),
+                            &ClientArea,
+                            reinterpret_cast<HBRUSH>(
+                                ::GetStockObject(BLACK_BRUSH)));
+                        return TRUE;
                     }
                 }
-            }
 
-            if (::IsFileManagerWindow(hWnd))
-            {
-                RECT ClientArea = {};
-                if (::GetClientRect(hWnd, &ClientArea))
+                if (::IsFileManagerWindowClassName(ClassName) ||
+                    ::IsFileManagerPanelWindowClassName(ClassName))
                 {
-                    ::FillRect(
-                        reinterpret_cast<HDC>(wParam),
-                        &ClientArea,
-                        reinterpret_cast<HBRUSH>(
-                            ::GetStockObject(
-                                g_ThreadContext.ShouldAppsUseDarkMode
-                                ? BLACK_BRUSH
-                                : WHITE_BRUSH)));
-                    return TRUE;
+                    RECT ClientArea = {};
+                    if (::GetClientRect(hWnd, &ClientArea))
+                    {
+                        ::FillRect(
+                            reinterpret_cast<HDC>(wParam),
+                            &ClientArea,
+                            reinterpret_cast<HBRUSH>(
+                                ::GetStockObject(
+                                    g_ThreadContext.ShouldAppsUseDarkMode
+                                    ? BLACK_BRUSH
+                                    : WHITE_BRUSH)));
+                        return TRUE;
+                    }
                 }
             }
 
