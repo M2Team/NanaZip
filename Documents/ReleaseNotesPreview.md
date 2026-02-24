@@ -2,6 +2,11 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 6.5 Preview (6.5.1638.0)**
+
+This release includes all the improvements from NanaZip 6.0 Update 1
+(6.0.1638.0).
+
 **NanaZip 6.0 Final (6.0.1630.0)**
 
 - Start to provide the official portable binaries package of NanaZip with both
