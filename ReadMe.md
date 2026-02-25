@@ -323,6 +323,7 @@ the following command in the PowerShell which is run as administrator.
 - [NanaZip Preview Release Notes](Documents/ReleaseNotesPreview.md)
 - [NanaZip Upstream Synchronization Status](Documents/UpstreamSynchronization.md)
 - [NanaZip Group Policy Administrative Templates (ADMX/ADML)](Documents/PolicyDefinitions)
+- [NanaZip Accessibility Conformance Report for Section 508](Documents/Section508)
 - [Security Policy](Security.md)
 - [Versioning](Documents/Versioning.md)
 - [My Digital Life Forums](https://forums.mydigitallife.net/threads/84171)
