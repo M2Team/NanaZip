@@ -78,7 +78,10 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
     {
       if (writeMode)
       {
+      // **************** NanaZip Modification Start **************** 
+        // if (pos + signatureEndSize > numBytesPrev)
         if (pos + signatureEndSize >= numBytesPrev)
+      // **************** NanaZip Modification End **************** 
           break;
         const Byte b = buffer[pos++];
         if (b == 0)
@@ -89,7 +92,10 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
       }
       else
       {
+      // **************** NanaZip Modification Start **************** 
+        // if (pos + signatureStartSize > numBytesPrev)
         if (pos + signatureStartSize >= numBytesPrev)
+      // **************** NanaZip Modification End **************** 
           break;
         const Byte b = buffer[pos++];
         if (b == ';' && memcmp(buffer + pos, startID + 1, signatureStartSize) == 0)
