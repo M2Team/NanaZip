@@ -423,11 +423,11 @@ namespace
                     [](
                         _In_ HWND hWnd,
                         _In_ LPARAM lParam) -> BOOL
-                    {
-                        UNREFERENCED_PARAMETER(lParam);
-                        ::RefreshWindowTheme(hWnd);
-                        return TRUE;
-                    },
+                {
+                    UNREFERENCED_PARAMETER(lParam);
+                    ::RefreshWindowTheme(hWnd);
+                    return TRUE;
+                },
                     0);
 
                 ::InvalidateRect(hWnd, nullptr, TRUE);
@@ -736,6 +736,49 @@ namespace
         return Result;
     }
 
+    static std::wstring GetAssociatedModuleNameFromWindowHandle(
+        _In_ HWND WindowHandle)
+    {
+        // 32767 is the maximum path length without the terminating null
+        // character.
+        std::wstring Path(32767, L'\0');
+        Path.resize(::GetWindowModuleFileNameW(
+            WindowHandle, &Path[0], static_cast<UINT>(Path.size())));
+        wchar_t* LastBackslash = std::wcsrchr(Path.data(), L'\\');
+        return LastBackslash ? std::wstring(LastBackslash + 1) : Path;
+    }
+
+    static bool IsModernizedWindow(
+        _In_ HWND WindowHandle)
+    {
+        std::wstring ModuleName =
+            ::GetAssociatedModuleNameFromWindowHandle(WindowHandle);
+        if (!::_wcsicmp(ModuleName.c_str(), L"combase.dll") ||
+            !::_wcsicmp(ModuleName.c_str(), L"CoreMessaging.dll") ||
+            !::_wcsicmp(ModuleName.c_str(), L"InputHost.dll") ||
+            !::_wcsicmp(ModuleName.c_str(), L"Windows.UI.dll") ||
+            !::_wcsicmp(ModuleName.c_str(), L"Windows.UI.Xaml.dll"))
+        {
+            return true;
+        }
+
+        wchar_t ClassName[256] = {};
+        if (0 != ::GetClassNameW(
+            WindowHandle,
+            ClassName,
+            MO_ARRAY_SIZE(ClassName)))
+        {
+            if (std::wcsstr(ClassName, L"Windows.UI.") ||
+                std::wcsstr(ClassName, L"Mile.Xaml.") ||
+                std::wcsstr(ClassName, L"Xaml_WindowedPopupClass"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     static LRESULT CALLBACK CallWndProcCallback(
         _In_ int nCode,
         _In_ WPARAM wParam,
@@ -750,23 +793,18 @@ namespace
             {
             case WM_CREATE:
             case WM_INITDIALOG:
-                wchar_t ClassName[256] = {};
-                if (0 != ::GetClassNameW(
-                    WndProcStruct->hwnd,
-                    ClassName,
-                    MO_ARRAY_SIZE(ClassName)))
+            {
+                if (!::IsModernizedWindow(WndProcStruct->hwnd))
                 {
-                    if (!std::wcsstr(ClassName, L"Windows.UI.") &&
-                        !std::wcsstr(ClassName, L"Mile.Xaml.") &&
-                        !std::wcsstr(ClassName, L"Xaml_WindowedPopupClass"))
-                    {
-                        ::SetWindowSubclass(
-                            WndProcStruct->hwnd,
-                            ::WindowSubclassCallback,
-                            0,
-                            0);
-                    }
+                    ::SetWindowSubclass(
+                        WndProcStruct->hwnd,
+                        ::WindowSubclassCallback,
+                        0,
+                        0);
                 }
+                break;
+            }
+            default:
                 break;
             }
         }
