@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5220420B-9A5C-44A7-BE69-97F25365BB26}</ProjectGuid>
@@ -56,6 +56,11 @@
     <None Include="SevenZip\C\Sort.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Extensions\CompressedStreamArchives\CoreExports.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\CompressedStreamArchive.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\CompressedTar.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\AutoRpm.cpp" />
+    <ClCompile Include="Extensions\CompressedStreamArchives\AutoDeb.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliDecoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\BrotliHandler.cpp" />
