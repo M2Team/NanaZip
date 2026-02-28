@@ -25,8 +25,8 @@
       Margin="16,8,16,16"
       AcceptsReturn="True"
       IsReadOnly="True"
-      ScrollViewer.HorizontalScrollBarVisibility="Auto"
-      ScrollViewer.VerticalScrollBarVisibility="Auto">
+      ScrollViewer.HorizontalScrollBarVisibility="Visible"
+      ScrollViewer.VerticalScrollBarVisibility="Visible">
       <TextBox.SelectionFlyout>
         <TextCommandBarFlyout Placement="BottomEdgeAlignedLeft" />
       </TextBox.SelectionFlyout>
