@@ -25,6 +25,8 @@ jobs:
         uses: actions/checkout@v6
       - name: Build and upload website
         uses: withastro/action@v5
+        with:
+          path: ./Documents/Website
   
   deploy:
     needs: build
