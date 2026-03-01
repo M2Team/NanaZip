@@ -14,14 +14,13 @@ import "./StoreBadge.css";
     type="module"
     src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
 
+<script src="./StoreBadge.ts" />
+
 <noscript>
     <a
         class="store-badge-link"
         href={`https://apps.microsoft.com/detail/${productId}?referrer=appbadge&mode=${windowMode}`}
         target="_blank"
-        rel="noopener noreferrer"
-        data-product-id={productId}
-        data-window-mode={windowMode}
     >
         <picture>
             <source
@@ -35,7 +34,7 @@ import "./StoreBadge.css";
             <img
                 src="https://get.microsoft.com/images/en-us%20dark.svg"
                 class={size}
-                alt="Test"
+                alt="Microsoft Store app badge"
             />
         </picture>
     </a>
