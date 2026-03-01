@@ -1,0 +1,57 @@
+button, .btn {
+    border-radius: var(--fds-control-corner-radius);
+    font-size: var(--fds-body-font-size);
+    border: 1px solid var(--fds-control-border-default);
+    background-color: var(--fds-control-fill-default);
+    color: var(--fds-text-primary);
+    font-family: var(--fds-font-family-text);
+    padding: 4px 11px 6px 11px;
+    transition: var(--fds-control-faster-duration) ease background;
+    font-size: var(--fds-body-font-size);
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--fds-control-fill-secondary);
+}
+
+button:active, .btn:active {
+    background-color: var(--fds-control-fill-tertiary);
+    border-color: var(--fds-control-stroke-default);
+    color: var(--fds-text-secondary);
+}
+
+.btn-hyper {
+    background-color: transparent;
+    color: var(--fds-accent-text-primary);
+}
+
+.btn-hyper:hover {
+    background-color: var(--fds-subtle-fill-secondary);
+}
+
+.btn-hyper:active {
+    background-color: var(--fds-subtle-fill-tertiary);
+    color: var(--fds-accent-text-tertiary);
+}
+
+.btn-accent {
+    background-color: var(--fds-accent-default);
+    border: 1px solid var(--fds-control-stroke-on-accent-default);
+    border-bottom-color: var(--fds-control-stroke-on-accent-secondary);
+    color: var(--fds-text-on-accent-primary);
+    transition: var(--fds-control-faster-duration) ease border-color;
+}
+
+.btn-accent:hover {
+    background-color: var(--fds-accent-secondary);
+}
+
+.btn-accent:active {
+    background-color: var(--fds-accent-tertiary);
+    border-color: transparent;
+    color: var(--fds-text-on-accent-secondary);
+}

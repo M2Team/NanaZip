@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "FluentSystemIcons-Regular";
+    src: url("/FluentSystemIcons-Regular.woff2") format("woff2"),
+        url("/FluentSystemIcons-Regular.woff") format("woff"),
+        url("/FluentSystemIcons-Regular.ttf") format("truetype");
+}
+
+.icon:before {
+    font-family: FluentSystemIcons-Regular !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon {
+    line-height: 0;
+}

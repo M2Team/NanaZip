@@ -1,0 +1,44 @@
+.page-section {
+    padding: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 72px;
+
+    p {
+        font-size: var(--fds-subtitle-font-size);
+        line-height: 1.65;
+        margin: 12px 0;
+    }
+
+    &-left {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    &-right {
+        flex: 1 1 0;
+        min-width: 480px;
+    }
+
+    @media screen and (width < 960px) {
+        padding: 36px;
+        gap: 36px;
+        flex-direction: column;
+        align-items: center;
+
+        &-left {
+            align-items: center;
+            text-align: center;
+            flex: auto;
+        }
+
+        &-right {
+            min-width: 0;
+            flex: auto;
+        }
+    }
+}

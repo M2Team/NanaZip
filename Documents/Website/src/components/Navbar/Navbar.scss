@@ -1,0 +1,130 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--fds-layer-background-default);
+    border-bottom: 1px solid var(--fds-surface-stroke-flyout);
+    backdrop-filter: blur(60px);
+    padding: 8px;
+    gap: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+
+    & .btn:not(.skip-to-content), button {
+        padding: 8px;
+        background-color: transparent;
+        align-items: center;
+        gap: 8px;
+
+        & svg {
+            display: block;
+        }
+
+        &:hover {
+            background-color: var(--fds-subtle-fill-secondary);
+        }
+
+        &:active {
+            background-color: var(--fds-subtle-fill-tertiary);
+            color: var(--fds-text-secondary);
+        }
+    }
+
+    & .btn {
+        display: flex;
+    }
+}
+
+nav, .nav-items {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+}
+
+nav {
+    flex: 1;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: var(--fds-text-primary);
+    text-decoration: none;
+    font-size: var(--fds-body-large-font-size);
+    gap: 8px;
+    margin-right: 8px;
+}
+
+.logo:active {
+    color: var(--fds-text-secondary);
+}
+
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    overflow: hidden;
+
+    &:focus {
+        left: 0;
+        z-index: 1001;
+    }
+}
+
+.menu-button {
+    display: none;
+}
+
+.icon-button>span:not(.icon) {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    nav, .nav-items {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    nav {
+        flex-basis: 100%;
+        display: none;
+        justify-content: unset;
+
+        &.active {
+            display: flex;
+        }
+    }
+
+    .menu-button {
+        display: unset;
+    }
+
+    .icon-button > span:not(.icon) {
+        display: unset;
+    }
+}
+
+.icon {
+    font-size: 20px;
+}
+
+.icon-home::before {
+    content: '\F480';
+}
+
+.icon-download::before {
+    content: '\F150';
+}
+
+:global(body.active) {
+    overflow-y: hidden;
+}
