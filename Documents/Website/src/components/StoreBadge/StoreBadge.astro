@@ -1,0 +1,51 @@
+---
+interface Props {
+    productId: string;
+    windowMode?: "direct" | "full";
+    size?: "large" | "small";
+}
+
+const { productId, windowMode = "direct", size = "large" } = Astro.props;
+
+import "./StoreBadge.css";
+---
+
+<script
+    type="module"
+    src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+
+<script src="./StoreBadge.ts" />
+
+<noscript>
+    <a
+        class="store-badge-link"
+        href={`https://apps.microsoft.com/detail/${productId}?referrer=appbadge&mode=${windowMode}`}
+        target="_blank"
+    >
+        <picture>
+            <source
+                srcset="https://get.microsoft.com/images/en-us%20dark.svg"
+                media="(prefers-color-scheme: light)"
+            />
+            <source
+                srcset="https://get.microsoft.com/images/en-us%20light.svg"
+                media="(prefers-color-scheme: dark)"
+            />
+            <img
+                src="https://get.microsoft.com/images/en-us%20dark.svg"
+                class={size}
+                alt="Microsoft Store app badge"
+            />
+        </picture>
+    </a>
+</noscript>
+
+<ms-store-badge
+    productid={productId}
+    window-mode={windowMode}
+    theme="auto"
+    size={size}
+    language="en-us"
+    animation="on"
+>
+</ms-store-badge>
