@@ -1,0 +1,59 @@
+---
+import Layout from "../layouts/Layout.astro";
+import StoreBadge from "../components/StoreBadge/StoreBadge.astro";
+import InfoBar from "../components/InfoBar/InfoBar.astro";
+---
+
+<Layout title="Downloads" description="NanaZip download links">
+    <main id="main">
+        <article>
+            <h1>Downloads</h1>
+
+            <InfoBar title="Warning" severity="caution" wrap={true}>
+                Only GitHub, Microsoft Store, My Digital Life Forums,
+                SourceForge, and Windows App Community hosts official downloads.
+            </InfoBar>
+
+            <!-- Microsoft Store -->
+            <h2>Microsoft Store (recommended)</h2>
+
+            <p><b>NanaZip</b></p>
+            <StoreBadge
+                productId="9n8g7tscl18r"
+                windowMode="full"
+                size="small"
+            />
+            <p><b>NanaZip Preview</b></p>
+            <StoreBadge
+                productId="9NZL0LRP1BNL"
+                windowMode="full"
+                size="small"
+            />
+
+            <!-- SourceForge -->
+            <h2>SourceForge</h2>
+            <a class="btn btn-accent" href="https://sourceforge.net/projects/nanazip/">Go to SourceForge</a>
+
+            <!-- GitHub Releases -->
+            <h2>GitHub Releases</h2>
+            <InfoBar title="Attention" severity="attention" wrap={true}>
+                GitHub Releases include experimental portable versions. These
+                versions are intended for users without access to MSIX (such as
+                Windows PE and Wine).
+                <br />
+                Some features are not available (such as File Manager), and no support
+                is provided for these versions.
+            </InfoBar>
+            <a class="btn btn-accent" href="https://github.com/M2Team/NanaZip/releases/latest" >Latest stable release</a>
+            <br />
+            <a href="https://github.com/M2Team/NanaZip/releases">All releases</a>
+        </article>
+    </main>
+</Layout>
+
+<style>
+    a {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+</style>

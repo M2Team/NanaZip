@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageSection from "../components/PageSection/PageSection.astro";
+import StoreBadge from "../components/StoreBadge/StoreBadge.astro";
+import ThemedLocalPicture from "../components/ThemedLocalPicture/ThemedLocalPicture.astro";
+
+import heroImageDark from "../assets/images/MainWindowDarkMode.png";
+import heroImageLight from "../assets/images/MainWindowLightMode.png";
+---
+
+<Layout description="NanaZip home page">
+	<main id="main">
+		<PageSection header="NanaZip">
+			<Fragment slot="description">
+				<p>The 7-Zip derivative intended for the modern Windows experience</p>
+				<StoreBadge
+					productId="9n8g7tscl18r"
+					windowMode="full"
+					size="small"
+				/>
+				<span>Or check out <a href="/downloads">alternative download options</a></span>
+			</Fragment>
+			<ThemedLocalPicture lightSrc={heroImageLight} darkSrc={heroImageDark} alt="" loading="eager" />
+		</PageSection>
+	</main>
+</Layout>

@@ -1,0 +1,55 @@
+---
+import type { ImageMetadata } from "astro";
+import { getImage } from 'astro:assets';
+
+interface Props {
+    lightSrc: string | ImageMetadata;
+    darkSrc: string | ImageMetadata;
+    alt: string;
+    loading?: "eager" | "lazy";
+}
+
+const { lightSrc, darkSrc, alt, loading = "lazy" } = Astro.props as Props;
+
+const lightImgAvif = await getImage({
+    src: lightSrc,
+    format: 'avif'
+});
+
+const lightImgWebp = await getImage({
+    src: lightSrc,
+    format: 'webp'
+});
+
+const lightImgPng = await getImage({
+    src: lightSrc,
+    format: 'png'
+});
+
+const darkImgAvif = await getImage({
+    src: darkSrc,
+    format: 'avif'
+});
+
+const darkImgWebp = await getImage({
+    src: darkSrc,
+    format: 'webp'
+});
+
+const darkImgPng = await getImage({
+    src: darkSrc,
+    format: 'png'
+});
+---
+
+<picture>
+    <source media="(prefers-color-scheme: light)" srcset={lightImgAvif.src} type="image/avif" />
+    <source media="(prefers-color-scheme: light)" srcset={lightImgWebp.src} type="image/webp" />
+    <source media="(prefers-color-scheme: light)" srcset={lightImgPng.src} type="image/png" />
+
+    <source media="(prefers-color-scheme: dark)" srcset={darkImgAvif.src} type="image/avif" />
+    <source media="(prefers-color-scheme: dark)" srcset={darkImgWebp.src} type="image/webp" />
+    <source media="(prefers-color-scheme: dark)" srcset={darkImgPng.src} type="image/png" />
+
+    <img src={lightImgPng.src} alt={alt} loading={loading} />
+</picture>

@@ -1,0 +1,19 @@
+---
+import './PageSection.scss';
+
+interface Props {
+    header: string;
+}
+
+const { header } = Astro.props;
+---
+
+<div class="page-section">
+    <div class="page-section-left">
+        <h1>{header}</h1>
+        <slot name="description" />
+    </div>
+    <div class="page-section-right">
+        <slot />
+    </div>
+</div>
