@@ -1,0 +1,43 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fds-font-family-display);
+
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: var(--fds-title-large-font-size);
+    font-weight: 600;
+    line-height: 52px;
+}
+
+h2 {
+    font-size: var(--fds-title-font-size);
+    font-weight: 600;
+    line-height: 36px;
+}
+
+h3 {
+    font-size: var(--fds-subtitle-font-size);
+    font-weight: 600;
+    line-height: 28px;
+}
+
+small {
+    font-size: var(--fds-caption-font-size);
+    font-family: var(--fds-font-family-small);
+    line-height: 16px;
+}
+
+article h1, article h2 {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+a {
+    color: var(--fds-accent-text-primary);
+}
+
+a:active {
+    color: var(--fds-accent-text-tertiary);
+}

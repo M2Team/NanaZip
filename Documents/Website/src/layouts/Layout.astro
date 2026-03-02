@@ -1,0 +1,34 @@
+---
+import '../assets/styles/theme.css';
+import '../assets/styles/global.css';
+import '../assets/styles/text.css';
+import '../assets/styles/image.css';
+import '../assets/styles/button.css';
+import '../assets/styles/icons.css'
+import Navbar from '../components/Navbar/Navbar.astro';
+
+interface Props {
+	title?: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="author" content="M2-Team" />
+		<title>{title ? `${title} - NanaZip` : "NanaZip"}</title>
+
+		<link rel="icon" href="/NanaZip.ico" />
+	</head>
+	<body>
+		<Navbar />
+		<slot />
+	</body>
+</html>

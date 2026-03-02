@@ -1,0 +1,129 @@
+.info-badge {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+	user-select: none;
+	min-inline-size: 16px;
+	min-block-size: 16px;
+	border-radius: 16px;
+	padding: 2px 4px;
+	color: var(--fds-text-on-accent-primary);
+	line-height: var(--fds-caption-font-size);
+	font: {
+		family: var(--fds-font-family-small);
+		size: var(--fds-caption-font-size);
+	}
+
+    &.severity- {
+		&attention {
+			background-color: var(--fds-system-attention);
+		}
+		&success {
+			background-color: var(--fds-system-success);
+		}
+		&caution {
+			background-color: var(--fds-system-caution);
+		}
+		&critical {
+			background-color: var(--fds-system-critical);
+		}
+		&information {
+			background-color: var(--fds-system-solid-neutral);
+		}
+	}
+	svg {
+		inline-size: 8px;
+		block-size: 8px;
+		fill: currentColor;
+	}
+}
+
+.info-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+	min-block-size: 48px;
+	padding-inline-start: 15px;
+	box-sizing: border-box;
+	user-select: none;
+	background-clip: padding-box;
+	font-family: var(--fds-font-family-text);
+	border: 1px solid var(--fds-card-stroke-default);
+	border-radius: var(--fds-control-corner-radius);
+    margin-bottom: 16px;
+	&.severity- {
+		&information {
+			background-color: var(--fds-card-background-secondary);
+		}
+		&success {
+			background-color: var(--fds-system-background-success);
+		}
+		&caution {
+			background-color: var(--fds-system-background-caution);
+		}
+		&critical {
+			background-color: var(--fds-system-background-critical);
+		}
+		&attention {
+			background-color: var(--fds-system-background-attention);
+		}
+	}
+	&-icon {
+		align-self: flex-start;
+		display: flex;
+		flex: 0 0 auto;
+		margin: {
+			block-start: 16px;
+		}
+	}
+	&-content {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+		position: relative;
+		box-sizing: border-box;
+		flex: 1 1 auto;
+		margin: {
+			inline-start: 13px;
+			block-start: 7px;
+			block-end: 7px;
+		}
+		&.message-wrapped,
+		&.action-wrapped {
+			margin: {
+				block-start: 13px;
+				block-end: 15px;
+			}
+		}
+		&.message-wrapped {
+			h5,
+			p {
+				align-self: flex-start;
+			}
+			.info-bar-action {
+				margin-inline-end: 50%;
+			}
+		}
+		&.action-wrapped .info-bar-action {
+			padding-block-start: 16px;
+		}
+	}
+	h5,
+	p {
+		color: var(--text-primary);
+		margin: 0;
+		line-height: 20px;
+		font: {
+			size: var(--body-font-size);
+			weight: 400;
+		}
+	}
+	h5 {
+		font-weight: 600;
+		margin-inline-end: 12px;
+	}
+	p {
+		flex: 1 1 auto;
+		margin-inline-end: 15px;
+	}
+}
