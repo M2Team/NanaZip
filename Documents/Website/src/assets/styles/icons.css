@@ -3,6 +3,7 @@
     src: url("/FluentSystemIcons-Regular.woff2") format("woff2"),
         url("/FluentSystemIcons-Regular.woff") format("woff"),
         url("/FluentSystemIcons-Regular.ttf") format("truetype");
+    font-display: swap;
 }
 
 .icon:before {

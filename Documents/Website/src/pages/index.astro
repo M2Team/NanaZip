@@ -3,16 +3,27 @@ import Layout from "../layouts/Layout.astro";
 import PageSection from "../components/PageSection/PageSection.astro";
 import StoreBadge from "../components/StoreBadge/StoreBadge.astro";
 import ThemedLocalPicture from "../components/ThemedLocalPicture/ThemedLocalPicture.astro";
+import Tree from "../components/Tree/Tree.astro";
+
+import '../assets/styles/pages/index.css';
 
 import heroImageDark from "../assets/images/MainWindowDarkMode.png";
 import heroImageLight from "../assets/images/MainWindowLightMode.png";
+
+import contextMenuDark from "../assets/images/ContextMenuDark.png";
+import contextMenuLight from "../assets/images/ContextMenuLight.png";
+
+import ArchiveFile from "../assets/images/ArchiveFile.svg";
 ---
 
 <Layout description="NanaZip home page">
 	<main id="main">
 		<PageSection header="NanaZip">
 			<Fragment slot="description">
-				<p>The 7-Zip derivative intended for the modern Windows experience</p>
+				<p class="subtitle">
+					The 7-Zip derivative intended for the modern Windows
+					experience
+				</p>
 				<StoreBadge
 					productId="9n8g7tscl18r"
 					windowMode="full"
@@ -20,7 +31,135 @@ import heroImageLight from "../assets/images/MainWindowLightMode.png";
 				/>
 				<span>Or check out <a href="/downloads">alternative download options</a></span>
 			</Fragment>
-			<ThemedLocalPicture lightSrc={heroImageLight} darkSrc={heroImageDark} alt="" loading="eager" />
+			<ThemedLocalPicture
+				lightSrc={heroImageLight}
+				darkSrc={heroImageDark}
+				alt=""
+				loading="eager"
+				fetchPriority="high"
+			/>
+		</PageSection>
+
+		<PageSection header="Modern UI">
+			<Fragment slot="description">
+				<p class="subtitle">
+					NanaZip supports the new Windows 11 context menu and adopts the
+					Fluent Design System, using the Mica material and adding dark
+					mode support.
+				</p>
+
+				<p class="subtitle">
+					NanaZip supports Windows accessibility features and
+					meets <a href="/section508">Section 508 compliance standards</a>.
+				</p>
+			</Fragment>
+
+			<ThemedLocalPicture
+				class="image-card"
+				lightSrc={contextMenuLight}
+				darkSrc={contextMenuDark}
+				alt=""
+				loading="lazy"
+			/>
+		</PageSection>
+
+		<PageSection header="Smart Extraction">
+			<Fragment slot="description">
+				<p class="subtitle">
+					Smart Extraction saves you clicks for archives with a single root item,
+					and keeps your files organized for those with multiple root items.
+				</p>
+				<p class="subtitle">
+					In addition, you can configure NanaZip to start Smart Extraction
+					upon opening an archive, instead of opening NanaZip File Manager.
+				</p>
+			</Fragment>
+			
+			<div class="se-demo-scenario" role="img" aria-label="A demonstration of Smart Extraction. Archives with a single file or a single folder in the root will be extracted directly. Archives with multiple root elements will have their contents placed in a newly created folder.">
+				<div class="card" aria-hidden="true">
+					<Tree text="Archive1.zip">
+						<ArchiveFile width="20" height="20" slot="icon" />
+				
+						<Tree text="Music.mp3">
+							<span slot="icon" class="icon icon-file"></span>
+						</Tree>
+					</Tree>
+
+					<Tree text="Archive2.zip">
+						<ArchiveFile width="20" height="20" slot="icon" />
+				
+						<Tree text="Image.jpg">
+							<span slot="icon" class="icon icon-file"></span>
+						</Tree>
+
+						<Tree text="Document.docx">
+							<span slot="icon" class="icon icon-file"></span>
+						</Tree>
+					</Tree>
+				</div>
+
+				<span class="icon icon-arrow" aria-hidden="true"></span>
+
+				<div class="card" aria-hidden="true">
+					<Tree text="Music.mp3">
+						<span slot="icon" class="icon icon-file"></span>
+					</Tree>
+
+					<Tree text="Archive2">
+						<span slot="icon" class="icon icon-folder"></span>
+
+						<Tree text="Image.jpg">
+							<span slot="icon" class="icon icon-file"></span>
+						</Tree>
+
+						<Tree text="Document.docx">
+							<span slot="icon" class="icon icon-file"></span>
+						</Tree>
+					</Tree>
+				</div>
+			</div>
+		</PageSection>
+
+		<PageSection header="File formats">
+			<p slot="description" class="subtitle">
+				NanaZip supports additional file formats on top of 7-zip, such as Zstandard, WASM, Electron ASAR, and .NET Single File Bundle.
+			</p>
+
+			<div class="format-list" role="list" aria-label="List of formats NanaZip supports on top of 7-zip's">
+				<div class="card" role="listitem">Brotli</div>
+				<div class="card" role="listitem">Lizard</div>
+				<div class="card" role="listitem">LZ4</div>
+				<div class="card" role="listitem">LZ5</div>
+				<div class="card" role="listitem">Zstandard</div>
+				<div class="card" role="listitem">Fast-LZMA2</div>
+				<div class="card" role="listitem">NSIS</div>
+				<div class="card" role="listitem">UFS</div>
+				<div class="card" role="listitem">UFS2</div>
+				<div class="card" role="listitem">.NET Single File</div>
+				<div class="card" role="listitem">Electron ASAR</div>
+				<div class="card" role="listitem">ROMFS</div>
+				<div class="card" role="listitem">ZealFS</div>
+				<div class="card" role="listitem">WASM</div>
+				<div class="card" role="listitem">CB7</div>
+				<div class="card" role="listitem">CBZ</div>
+				<div class="card" role="listitem">CBR</div>
+			</div>
+		</PageSection>
+
+		<PageSection header="Security">
+			<Fragment slot="description">
+				<p class="subtitle">NanaZip integrates multiple security mitigations to reduce the impact of vulnerabilities.</p>
+				<p class="subtitle">These mitigations are enabled by default and configurable using <a href="https://github.com/M2Team/NanaZip/blob/main/Documents/Policies.md">Group Policy</a>.</p>
+			</Fragment>
+
+			<div class="format-list" role="list" aria-label="Security mitigations NanaZip includes">
+				<div class="card" role="listitem">Control Flow Guard</div>
+				<div class="card" role="listitem">Shadow Stack</div>
+				<div class="card" role="listitem" style="width: max-content">Dynamic code generation prohibition</div>
+				<div class="card" role="listitem">Package Integrity</div>
+				<div class="card" role="listitem">Mark-Of-The-Web</div>
+				<div class="card" role="listitem" style="width: max-content">Archive format restrictions</div>
+			</div>
 		</PageSection>
 	</main>
 </Layout>

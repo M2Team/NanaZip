@@ -7,49 +7,57 @@ interface Props {
     darkSrc: string | ImageMetadata;
     alt: string;
     loading?: "eager" | "lazy";
+    class?: string;
+    fetchPriority?: "high" | "low" | "auto";
 }
 
-const { lightSrc, darkSrc, alt, loading = "lazy" } = Astro.props as Props;
+const { lightSrc, darkSrc, alt, loading = "lazy", class: className, fetchPriority = "auto" } = Astro.props as Props;
 
 const lightImgAvif = await getImage({
     src: lightSrc,
-    format: 'avif'
+    format: 'avif',
+    layout: 'full-width'
 });
 
 const lightImgWebp = await getImage({
     src: lightSrc,
-    format: 'webp'
+    format: 'webp',
+    layout: 'full-width'
 });
 
 const lightImgPng = await getImage({
     src: lightSrc,
-    format: 'png'
+    format: 'png',
+    layout: 'full-width'
 });
 
 const darkImgAvif = await getImage({
     src: darkSrc,
-    format: 'avif'
+    format: 'avif',
+    layout: 'full-width'
 });
 
 const darkImgWebp = await getImage({
     src: darkSrc,
-    format: 'webp'
+    format: 'webp',
+    layout: 'full-width'
 });
 
 const darkImgPng = await getImage({
     src: darkSrc,
-    format: 'png'
+    format: 'png',
+    layout: 'full-width'
 });
 ---
 
 <picture>
-    <source media="(prefers-color-scheme: light)" srcset={lightImgAvif.src} type="image/avif" />
-    <source media="(prefers-color-scheme: light)" srcset={lightImgWebp.src} type="image/webp" />
-    <source media="(prefers-color-scheme: light)" srcset={lightImgPng.src} type="image/png" />
+    <source media="(prefers-color-scheme: light)" srcset={lightImgAvif.srcSet.attribute} type="image/avif" />
+    <source media="(prefers-color-scheme: light)" srcset={lightImgWebp.srcSet.attribute} type="image/webp" />
+    <source media="(prefers-color-scheme: light)" srcset={lightImgPng.srcSet.attribute} type="image/png" />
 
-    <source media="(prefers-color-scheme: dark)" srcset={darkImgAvif.src} type="image/avif" />
-    <source media="(prefers-color-scheme: dark)" srcset={darkImgWebp.src} type="image/webp" />
-    <source media="(prefers-color-scheme: dark)" srcset={darkImgPng.src} type="image/png" />
+    <source media="(prefers-color-scheme: dark)" srcset={darkImgAvif.srcSet.attribute} type="image/avif" />
+    <source media="(prefers-color-scheme: dark)" srcset={darkImgWebp.srcSet.attribute} type="image/webp" />
+    <source media="(prefers-color-scheme: dark)" srcset={darkImgPng.srcSet.attribute} type="image/png" />
 
-    <img src={lightImgPng.src} alt={alt} loading={loading} />
+    <img class={className} srcset={lightImgPng.srcSet.attribute} alt={alt} loading={loading} fetchpriority={fetchPriority} {...lightImgPng.attributes} />
 </picture>

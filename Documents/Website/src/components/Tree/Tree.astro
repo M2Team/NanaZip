@@ -1,0 +1,18 @@
+---
+interface Props {
+    text: string;
+}
+
+const { text } = Astro.props;
+
+import './Tree.css';
+---
+
+<div class="tree">
+    <p>
+        <slot name="icon" />
+        {text}
+    </p>
+
+    <slot />
+</div>
