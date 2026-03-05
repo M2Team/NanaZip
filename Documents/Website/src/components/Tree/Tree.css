@@ -1,0 +1,12 @@
+.tree > .tree {
+    margin-left: 16px;
+}
+
+.tree p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

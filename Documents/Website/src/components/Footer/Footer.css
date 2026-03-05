@@ -1,0 +1,6 @@
+footer {
+    background-color: var(--fds-card-stroke-default-solid);
+    border-top: 1px solid var(--fds-surface-stroke-flyout);
+    padding: 8px 32px;
+    margin-top: 16px;
+}

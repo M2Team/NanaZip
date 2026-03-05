@@ -6,6 +6,7 @@ import '../assets/styles/image.css';
 import '../assets/styles/button.css';
 import '../assets/styles/icons.css'
 import Navbar from '../components/Navbar/Navbar.astro';
+import Footer from '../components/Footer/Footer.astro';
 
 interface Props {
 	title?: string;
@@ -30,5 +31,6 @@ const { title, description } = Astro.props;
 	<body>
 		<Navbar />
 		<slot />
+		<Footer />
 	</body>
 </html>

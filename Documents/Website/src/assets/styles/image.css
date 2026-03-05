@@ -2,3 +2,8 @@ img {
 	max-width: 100%;
 	height: auto;
 }
+
+.image-card {
+	border: 1px solid var(--fds-surface-stroke-default);
+	border-radius: 8px;
+}
