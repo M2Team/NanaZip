@@ -20,6 +20,7 @@
 #include "AboutPage.h"
 #include "InformationPage.h"
 #include "ProgressPage.h"
+#include "CopyLocationPage.h"
 
 #pragma comment(lib, "comctl32.lib")
 
@@ -289,7 +290,6 @@ namespace
         _In_opt_ HWND WindowHandle,
         _In_ int Width,
         _In_ int Height,
-        _In_ LPVOID Content,
         _In_ HWND ParentWindowHandle)
     {
         if (!WindowHandle)
@@ -312,14 +312,6 @@ namespace
         if (ParentWindowHandle)
         {
             ::EnableWindow(ParentWindowHandle, FALSE);
-        }
-
-        if (FAILED(::MileXamlSetXamlContentForContentWindow(
-            WindowHandle,
-            Content)))
-        {
-            ::DestroyWindow(WindowHandle);
-            return -1;
         }
 
         int Result = ::K7ModernShowXamlWindow(
@@ -358,11 +350,18 @@ EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
 
     Interface Window = winrt::make<Implementation>(WindowHandle);
 
+    if (FAILED(::MileXamlSetXamlContentForContentWindow(
+        WindowHandle,
+        winrt::get_abi(Window))))
+    {
+        ::DestroyWindow(WindowHandle);
+        return -1;
+    }
+
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
         460,
         320,
-        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -387,11 +386,18 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
         WindowHandle,
         ExtendedMessage);
 
+    if (FAILED(::MileXamlSetXamlContentForContentWindow(
+        WindowHandle,
+        winrt::get_abi(Window))))
+    {
+        ::DestroyWindow(WindowHandle);
+        return -1;
+    }
+
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
         480,
         320,
-        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -418,11 +424,18 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
         Title,
         Content);
 
+    if (FAILED(::MileXamlSetXamlContentForContentWindow(
+        WindowHandle,
+        winrt::get_abi(Window))))
+    {
+        ::DestroyWindow(WindowHandle);
+        return -1;
+    }
+
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
         560,
         560,
-        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -540,4 +553,115 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
         ParentWindowHandle);
 
     return Result;
+}
+
+EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_opt_ LPCWSTR Subtitle,
+    _In_opt_ LPCWSTR AdditionalInformation,
+    _In_ SUBCLASSPROC WindowSubclassHandler,
+    _In_ LPVOID WindowSubclassContext)
+{
+    HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
+    if (!WindowHandle)
+    {
+        return -1;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::CopyLocationPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::CopyLocationPage;
+
+    Interface Window = winrt::make<Implementation>(
+        WindowHandle,
+        Title,
+        Subtitle,
+        AdditionalInformation);
+
+    if (FAILED(::MileXamlSetXamlContentForContentWindow(
+        WindowHandle,
+        winrt::get_abi(Window))))
+    {
+        ::DestroyWindow(WindowHandle);
+        return -1;
+    }
+
+    if (WindowSubclassHandler)
+    {
+        if (!::SetWindowSubclass(
+            WindowHandle,
+            WindowSubclassHandler,
+            1,
+            reinterpret_cast<DWORD_PTR>(WindowSubclassContext)))
+        {
+            ::DestroyWindow(WindowHandle);
+            return -1;
+        }
+    }
+
+    int Result = ::K7ModernShowXamlDialog(
+        WindowHandle,
+        560,
+        360,
+        ParentWindowHandle);
+
+    return Result;
+}
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetCopyLocationDialogPath(
+    _In_ HWND WindowHandle)
+{
+    if (!WindowHandle)
+    {
+        return nullptr;
+    }
+
+    winrt::DesktopWindowXamlSource XamlSource =
+        ::K7ModernGetDesktopWindowXamlSource(WindowHandle);
+    if (!XamlSource)
+    {
+        return nullptr;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::CopyLocationPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::CopyLocationPage;
+    Interface InstanceObject = XamlSource.Content().as<Interface>();
+    if (!InstanceObject)
+    {
+        return nullptr;
+    }
+    return winrt::get_self<Implementation>(InstanceObject)->GetPath();
+}
+
+
+EXTERN_C VOID WINAPI K7ModernSetCopyLocationDialogPath(
+    _In_ HWND WindowHandle,
+    _In_ LPCWSTR Path)
+{
+    if (!WindowHandle)
+    {
+        return;
+    }
+
+    winrt::DesktopWindowXamlSource XamlSource =
+        ::K7ModernGetDesktopWindowXamlSource(WindowHandle);
+    if (!XamlSource)
+    {
+        return;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::CopyLocationPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::CopyLocationPage;
+    Interface InstanceObject = XamlSource.Content().as<Interface>();
+    if (!InstanceObject)
+    {
+        return;
+    }
+    winrt::get_self<Implementation>(InstanceObject)->SetPath(Path);
 }

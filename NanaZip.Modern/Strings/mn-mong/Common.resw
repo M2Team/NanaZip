@@ -45,4 +45,7 @@
   <data name="CloseButton.Content" xml:space="preserve">
     <value>ᠬᠠᠭᠠᠬᠤ (C)</value>
   </data>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>ᠲᠡᠭᠡ</value>
+  </data>
 </root>

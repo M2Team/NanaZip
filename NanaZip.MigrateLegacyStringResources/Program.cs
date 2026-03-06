@@ -22,6 +22,7 @@ internal class Program
         [
             new(402, "Common", "CancelButton.Content", true),
             new(408, "Common", "CloseButton.Content", true),
+            new(401, "Common", "OKButton.Content", true),
             new(3900, "ProgressPage", "ElapsedTimeLabel.Text"),
             new(3901, "ProgressPage", "RemainingTimeLabel.Text"),
             new(3902, "ProgressPage", "TotalSizeLabel.Text"),

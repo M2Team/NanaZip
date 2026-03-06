@@ -33,6 +33,7 @@
     <Page Include="StatusBarTemplate.xaml" />
     <Page Include="InformationPage.xaml" />
     <Page Include="ProgressPage.xaml" />
+    <Page Include="CopyLocationPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">

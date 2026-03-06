@@ -13,8 +13,110 @@
 #include "LangUtils.h"
 #endif
 
+// **************** NanaZip Modification Start ****************
+#include <NanaZip.Modern.h>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 
+// **************** NanaZip Modification Start ****************
+INT_PTR CCopyDialog::Create(HWND parentWindow)
+{
+    ::K7ModernShowCopyLocationDialog(
+        parentWindow,
+        this->Title.Ptr(),
+        this->Static.Ptr(),
+        this->Info.Ptr(),
+        &CCopyDialog::ModernWindowHandler,
+        this);
+
+    return this->m_ReturnCode;
+}
+
+bool CCopyDialog::ModernMessageRouter(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    UNREFERENCED_PARAMETER(lParam);
+
+    if (WM_COMMAND == uMsg)
+    {
+        int Code = HIWORD(wParam);
+        int ItemID = LOWORD(wParam);
+        if (BN_CLICKED == Code)
+        {
+            switch (ItemID)
+            {
+            case K7_COPY_LOCATION_DIALOG_RESULT_OK:
+                this->ModernOK();
+                return true;
+            case IDB_COPY_SET_PATH:
+                this->ModernButtonSetPath();
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+void CCopyDialog::ModernOK()
+{
+    m_ReturnCode = IDOK;
+}
+
+void CCopyDialog::ModernButtonSetPath()
+{
+    UString currentPath = ::K7ModernGetCopyLocationDialogPath(
+        this->m_WindowHandle);
+
+    const UString title = LangString(IDS_SET_FOLDER);
+
+    UString resultPath;
+    if (!MyBrowseForFolder(*this, title, currentPath, resultPath))
+        return;
+    NFile::NName::NormalizeDirPathPrefix(resultPath);
+
+    ::K7ModernSetCopyLocationDialogPath(
+        this->m_WindowHandle,
+        resultPath.Ptr());
+}
+
+LRESULT CALLBACK CCopyDialog::ModernWindowHandler(
+    _In_ HWND hWnd,
+    _In_ UINT uMsg,
+    _In_ WPARAM wParam,
+    _In_ LPARAM lParam,
+    _In_ UINT_PTR uIdSubclass,
+    _In_ DWORD_PTR dwRefData)
+{
+    UNREFERENCED_PARAMETER(uIdSubclass);
+
+    CCopyDialog* Instance =
+        reinterpret_cast<CCopyDialog*>(dwRefData);
+
+    if (Instance)
+    {
+        if (!Instance->m_FirstRun)
+        {
+            Instance->m_FirstRun = true;
+            Instance->m_WindowHandle = hWnd;
+            ::K7ModernSetCopyLocationDialogPath(
+                hWnd,
+                Instance->Value.Ptr());
+        }
+        if (Instance->ModernMessageRouter(uMsg, wParam, lParam))
+        {
+            return 0;
+        }
+    }
+
+    return ::DefSubclassProc(
+        hWnd,
+        uMsg,
+        wParam,
+        lParam);
+}
+
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CCopyDialog::OnInit()
 {
   #ifdef LANG
@@ -104,3 +206,5 @@ void CCopyDialog::OnOK()
   _path.GetText(Value);
   CModalDialog::OnOK();
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************

@@ -45,4 +45,7 @@
   <data name="CloseButton.Content" xml:space="preserve">
     <value>બંદ કરો</value>
   </data>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>સારું</value>
+  </data>
 </root>

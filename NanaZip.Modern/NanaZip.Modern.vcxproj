@@ -64,6 +64,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="AddressBarTemplate.xaml" />
+    <Page Include="CopyLocationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="InformationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -90,6 +93,10 @@
     </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="CopyLocationPage.idl">
+      <DependentUpon>CopyLocationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
     <Midl Include="InformationPage.idl">
       <DependentUpon>InformationPage.xaml</DependentUpon>
@@ -125,6 +132,10 @@
       <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="ControlMacros.h" />
+    <ClInclude Include="CopyLocationPage.h">
+      <DependentUpon>CopyLocationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="InformationPage.h">
       <DependentUpon>InformationPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -162,6 +173,10 @@
   <ItemGroup>
     <ClCompile Include="AddressBarTemplate.cpp">
       <DependentUpon>AddressBarTemplate.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="CopyLocationPage.cpp">
+      <DependentUpon>CopyLocationPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="InformationPage.cpp">
       <DependentUpon>InformationPage.xaml</DependentUpon>
