@@ -14,6 +14,10 @@ import contextMenuDark from "../assets/images/ContextMenuDark.png";
 import contextMenuLight from "../assets/images/ContextMenuLight.png";
 
 import ArchiveFile from "../assets/images/ArchiveFile.svg";
+
+import RightArrow from '@fluentui/svg-icons/icons/arrow_right_32_regular.svg';
+import FileIcon from '@fluentui/svg-icons/icons/document_20_regular.svg';
+import FolderIcon from '@fluentui/svg-icons/icons/folder_20_regular.svg';
 ---
 
 <Layout description="NanaZip home page">
@@ -28,6 +32,7 @@ import ArchiveFile from "../assets/images/ArchiveFile.svg";
 					productId="9n8g7tscl18r"
 					windowMode="full"
 					size="small"
+					campaignId="nanaziporg"
 				/>
 				<span>Or check out <a href="/downloads">alternative download options</a></span>
 			</Fragment>
@@ -81,7 +86,7 @@ import ArchiveFile from "../assets/images/ArchiveFile.svg";
 						<ArchiveFile width="20" height="20" slot="icon" />
 				
 						<Tree text="Music.mp3">
-							<span slot="icon" class="icon icon-file"></span>
+							<FileIcon fill="currentColor" slot="icon" />
 						</Tree>
 					</Tree>
 
@@ -89,31 +94,31 @@ import ArchiveFile from "../assets/images/ArchiveFile.svg";
 						<ArchiveFile width="20" height="20" slot="icon" />
 				
 						<Tree text="Image.jpg">
-							<span slot="icon" class="icon icon-file"></span>
+							<FileIcon fill="currentColor" slot="icon" />
 						</Tree>
 
 						<Tree text="Document.docx">
-							<span slot="icon" class="icon icon-file"></span>
+							<FileIcon fill="currentColor" slot="icon" />
 						</Tree>
 					</Tree>
 				</div>
 
-				<span class="icon icon-arrow" aria-hidden="true"></span>
+				<RightArrow fill="currentColor" id="right-arrow" />
 
 				<div class="card" aria-hidden="true">
 					<Tree text="Music.mp3">
-						<span slot="icon" class="icon icon-file"></span>
+						<FileIcon fill="currentColor" slot="icon" />
 					</Tree>
 
 					<Tree text="Archive2">
-						<span slot="icon" class="icon icon-folder"></span>
+						<FolderIcon fill="currentColor" slot="icon" />
 
 						<Tree text="Image.jpg">
-							<span slot="icon" class="icon icon-file"></span>
+							<FileIcon fill="currentColor" slot="icon" />
 						</Tree>
 
 						<Tree text="Document.docx">
-							<span slot="icon" class="icon icon-file"></span>
+							<FileIcon fill="currentColor" slot="icon" />
 						</Tree>
 					</Tree>
 				</div>

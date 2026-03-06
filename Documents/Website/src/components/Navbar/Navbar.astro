@@ -1,28 +1,28 @@
 ---
 import "./Navbar.scss";
-import { Image } from "astro:assets";
 import Logo from "../../assets/images/NanaZip.svg";
+import NavIcon from '@fluentui/svg-icons/icons/navigation_24_regular.svg';
+import HomeIcon from '@fluentui/svg-icons/icons/home_20_regular.svg';
+import DownloadIcon from '@fluentui/svg-icons/icons/arrow_download_20_regular.svg';
 ---
 
 <header class="navbar">
     <a class="btn btn-accent skip-to-content" href="#main">Skip to main content</a>
     <a class="logo" href="/">
-        <Image src={Logo} alt="" height="40" loading="eager" />
+        <Logo height="40" width="40" />
         <span>NanaZip</span>
     </a>
     <button title="Menu" aria-label="Menu" class="menu-button">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20" viewBox="103 297 820 564" width="20" fill="currentColor">
-            <path d="M102.4,321.536C102.4,314.709 104.789,308.907 109.568,304.128C114.347,299.349 120.149,296.96 126.976,296.96L897.024,296.96C903.851,296.96 909.653,299.349 914.432,304.128C919.211,308.907 921.6,315.051 921.6,322.56C921.6,330.069 919.211,336.213 914.432,340.992C909.653,345.771 903.851,348.16 897.024,348.16L129.024,348.16C120.832,348.16 114.347,345.771 109.568,340.992C104.789,336.213 102.4,330.411 102.4,323.584ZM102.4,577.536C102.4,570.709 104.789,564.907 109.568,560.128C114.347,555.349 120.149,552.96 126.976,552.96L897.024,552.96C903.851,552.96 909.653,555.349 914.432,560.128C919.211,564.907 921.6,571.051 921.6,578.56C921.6,586.069 919.211,592.213 914.432,596.992C909.653,601.771 903.851,604.16 897.024,604.16L129.024,604.16C120.832,604.16 114.347,601.771 109.568,596.992C104.789,592.213 102.4,586.411 102.4,579.584ZM129.024,808.96C120.832,808.96 114.347,811.349 109.568,816.128C104.789,820.907 102.4,827.051 102.4,834.56C102.4,842.069 104.789,848.213 109.568,852.992C114.347,857.771 120.832,860.16 129.024,860.16L897.024,860.16C903.851,860.16 909.653,857.771 914.432,852.992C919.211,848.213 921.6,842.069 921.6,834.56C921.6,827.051 919.211,820.907 914.432,816.128C909.653,811.349 903.851,808.96 897.024,808.96Z" />
-        </svg>
+        <NavIcon fill="currentColor" />
     </button>
     <nav>
         <div class="nav-items">
             <a class="btn" href="/">
-                <span aria-hidden="true" class="icon icon-home"></span>
+                <HomeIcon fill="currentColor" />
                 <span>Home</span>
             </a>
             <a class="btn" href="/downloads">
-                <span aria-hidden="true" class="icon icon-download"></span>
+                <DownloadIcon fill="currentColor" />
                 <span>Downloads</span>
             </a>
         </div>
