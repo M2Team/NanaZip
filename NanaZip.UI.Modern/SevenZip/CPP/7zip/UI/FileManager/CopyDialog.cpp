@@ -60,6 +60,8 @@ bool CCopyDialog::ModernMessageRouter(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void CCopyDialog::ModernOK()
 {
+    Value = ::K7ModernGetCopyLocationDialogPath(
+        m_WindowHandle);
     m_ReturnCode = IDOK;
 }
 
