@@ -16,27 +16,13 @@
     flex: 1;
 }
 
-.icon-file::before {
-    content: '\E4D7';
-}
-
-.icon-folder::before {
-    content: '\E643';
-}
-
-.icon-arrow::before {
-    content: '\F1A7';
-    font-size: 48px;
-}
-
 @media (max-width: 768px) {
     .se-demo {
         gap: 32px;
     }
 
-    .icon-arrow::before {
-        font-size: 32px;
-        content: '\F14C';
+    #right-arrow {
+        transform: rotate(90deg);
     }
 
     .se-demo-scenario .card {
