@@ -27,6 +27,7 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
         this->Title.Ptr(),
         this->Static.Ptr(),
         this->Info.Ptr(),
+        this->Value.Ptr(),
         &CCopyDialog::ModernWindowHandler,
         this);
 
@@ -48,9 +49,6 @@ bool CCopyDialog::ModernMessageRouter(UINT uMsg, WPARAM wParam, LPARAM lParam)
             case K7_COPY_LOCATION_DIALOG_RESULT_OK:
                 this->ModernOK();
                 return true;
-            case IDB_COPY_SET_PATH:
-                this->ModernButtonSetPath();
-                return true;
             }
         }
     }
@@ -63,23 +61,6 @@ void CCopyDialog::ModernOK()
     Value = ::K7ModernGetCopyLocationDialogPath(
         m_WindowHandle);
     m_ReturnCode = IDOK;
-}
-
-void CCopyDialog::ModernButtonSetPath()
-{
-    UString currentPath = ::K7ModernGetCopyLocationDialogPath(
-        this->m_WindowHandle);
-
-    const UString title = LangString(IDS_SET_FOLDER);
-
-    UString resultPath;
-    if (!MyBrowseForFolder(*this, title, currentPath, resultPath))
-        return;
-    NFile::NName::NormalizeDirPathPrefix(resultPath);
-
-    ::K7ModernSetCopyLocationDialogPath(
-        this->m_WindowHandle,
-        resultPath.Ptr());
 }
 
 LRESULT CALLBACK CCopyDialog::ModernWindowHandler(
@@ -101,9 +82,6 @@ LRESULT CALLBACK CCopyDialog::ModernWindowHandler(
         {
             Instance->m_FirstRun = true;
             Instance->m_WindowHandle = hWnd;
-            ::K7ModernSetCopyLocationDialogPath(
-                hWnd,
-                Instance->Value.Ptr());
         }
         if (Instance->ModernMessageRouter(uMsg, wParam, lParam))
         {

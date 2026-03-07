@@ -1,6 +1,8 @@
 ﻿#include "pch.h"
 #include "CopyLocationPage.h"
 #include "CopyLocationPage.g.cpp"
+#include <shlobj.h>
+#include <string>
 
 using namespace winrt;
 using namespace Windows::UI::Xaml;
@@ -11,11 +13,13 @@ namespace winrt::NanaZip::Modern::implementation
         _In_opt_ HWND WindowHandle,
         _In_opt_ LPCWSTR Title,
         _In_opt_ LPCWSTR Subtitle,
-        _In_opt_ LPCWSTR AdditionaInformation):
+        _In_opt_ LPCWSTR AdditionaInformation,
+        _In_opt_ LPCWSTR InitialPath):
         m_WindowHandle(WindowHandle),
         m_Title(Title),
         m_Subtitle(Subtitle),
-        m_AdditionalInformation(AdditionaInformation)
+        m_AdditionalInformation(AdditionaInformation),
+        m_InitialPath(InitialPath)
     {
     }
 
@@ -26,6 +30,7 @@ namespace winrt::NanaZip::Modern::implementation
         this->TitleTextBlock().Text(m_Title);
         this->SubtitleTextBlock().Text(m_Subtitle);
         this->AdditionalInformationTextBlock().Text(m_AdditionalInformation);
+        this->PathTextBox().Text(m_InitialPath);
     }
 
     LPCWSTR CopyLocationPage::GetPath()
@@ -78,10 +83,40 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(e);
 
-        ::PostMessageW(
-            this->m_WindowHandle,
-            WM_COMMAND,
-            MAKEWPARAM(K7_COPY_LOCATION_DIALOG_RESULT_BROWSE, BN_CLICKED),
-            0);
+        winrt::com_ptr<::IShellItem> InitialFolder;
+
+        ::SHCreateItemFromParsingName(
+            this->GetPath(),
+            nullptr,
+            IID_IShellItem,
+            InitialFolder.put_void());
+
+        winrt::com_ptr<::IFileDialog> FileDialog =
+            winrt::create_instance<::IFileDialog>(
+                CLSID_FileOpenDialog,
+                CLSCTX_INPROC_SERVER);
+
+        FileDialog->SetOptions(FOS_PICKFOLDERS);
+        FileDialog->SetFolder(InitialFolder.get());
+        FileDialog->SetTitle(::K7ModernGetLegacyStringResource(6007));
+
+        if (FAILED(FileDialog->Show(this->m_WindowHandle)))
+            return;
+
+        winrt::com_ptr<::IShellItem> Result;
+        if (SUCCEEDED(FileDialog->GetResult(Result.put())))
+        {
+            PWSTR Path;
+            if (SUCCEEDED(Result->GetDisplayName(SIGDN_FILESYSPATH, &Path)))
+            {
+                std::wstring PathStr(Path);
+                if (!PathStr.ends_with(L"\\"))
+                {
+                    PathStr += L"\\";
+                }
+                this->PathTextBox().Text(PathStr);
+                ::CoTaskMemFree(Path);
+            }
+        }
     }
 }

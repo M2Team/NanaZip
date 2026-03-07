@@ -18,7 +18,8 @@ namespace winrt::NanaZip::Modern::implementation
             _In_opt_ HWND WindowHandle = nullptr,
             _In_opt_ LPCWSTR Title = nullptr,
             _In_opt_ LPCWSTR Subtitle = nullptr,
-            _In_opt_ LPCWSTR AdditionaInformation = nullptr
+            _In_opt_ LPCWSTR AdditionaInformation = nullptr,
+            _In_opt_ LPCWSTR InitialPath = nullptr
         );
 
         void InitializeComponent();
@@ -44,5 +45,6 @@ namespace winrt::NanaZip::Modern::implementation
         LPCWSTR m_Title = nullptr;
         LPCWSTR m_Subtitle = nullptr;
         LPCWSTR m_AdditionalInformation = nullptr;
+        LPCWSTR m_InitialPath = nullptr;
     };
 }

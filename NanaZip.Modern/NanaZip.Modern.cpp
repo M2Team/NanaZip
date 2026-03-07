@@ -290,6 +290,7 @@ namespace
         _In_opt_ HWND WindowHandle,
         _In_ int Width,
         _In_ int Height,
+        _In_ LPVOID Content,
         _In_ HWND ParentWindowHandle)
     {
         if (!WindowHandle)
@@ -312,6 +313,14 @@ namespace
         if (ParentWindowHandle)
         {
             ::EnableWindow(ParentWindowHandle, FALSE);
+        }
+
+        if (FAILED(::MileXamlSetXamlContentForContentWindow(
+            WindowHandle,
+            Content)))
+        {
+            ::DestroyWindow(WindowHandle);
+            return -1;
         }
 
         int Result = ::K7ModernShowXamlWindow(
@@ -350,18 +359,11 @@ EXTERN_C INT WINAPI K7ModernShowSponsorDialog(
 
     Interface Window = winrt::make<Implementation>(WindowHandle);
 
-    if (FAILED(::MileXamlSetXamlContentForContentWindow(
-        WindowHandle,
-        winrt::get_abi(Window))))
-    {
-        ::DestroyWindow(WindowHandle);
-        return -1;
-    }
-
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
         460,
         320,
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -386,18 +388,11 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
         WindowHandle,
         ExtendedMessage);
 
-    if (FAILED(::MileXamlSetXamlContentForContentWindow(
-        WindowHandle,
-        winrt::get_abi(Window))))
-    {
-        ::DestroyWindow(WindowHandle);
-        return -1;
-    }
-
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
         480,
         320,
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -424,18 +419,11 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
         Title,
         Content);
 
-    if (FAILED(::MileXamlSetXamlContentForContentWindow(
-        WindowHandle,
-        winrt::get_abi(Window))))
-    {
-        ::DestroyWindow(WindowHandle);
-        return -1;
-    }
-
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
         560,
         560,
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;
@@ -560,6 +548,7 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
     _In_opt_ LPCWSTR Title,
     _In_opt_ LPCWSTR Subtitle,
     _In_opt_ LPCWSTR AdditionalInformation,
+    _In_opt_ LPCWSTR InitialPath,
     _In_ SUBCLASSPROC WindowSubclassHandler,
     _In_ LPVOID WindowSubclassContext)
 {
@@ -578,15 +567,8 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
         WindowHandle,
         Title,
         Subtitle,
-        AdditionalInformation);
-
-    if (FAILED(::MileXamlSetXamlContentForContentWindow(
-        WindowHandle,
-        winrt::get_abi(Window))))
-    {
-        ::DestroyWindow(WindowHandle);
-        return -1;
-    }
+        AdditionalInformation,
+        InitialPath);
 
     if (WindowSubclassHandler)
     {
@@ -605,6 +587,7 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
         WindowHandle,
         560,
         360,
+        winrt::get_abi(Window),
         ParentWindowHandle);
 
     return Result;

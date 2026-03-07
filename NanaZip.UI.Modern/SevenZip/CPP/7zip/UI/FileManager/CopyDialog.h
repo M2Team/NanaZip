@@ -23,7 +23,6 @@ class CCopyDialog: public NWindows::NControl::CModalDialog
 
   bool ModernMessageRouter(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-  void ModernButtonSetPath();
   void ModernOK();
 
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********

@@ -220,13 +220,6 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
  */
 #define K7_COPY_LOCATION_DIALOG_RESULT_OK 1
 
-  /**
-   * @brief The WM_COMMAND BN_CLICKED ID for the "Browse" button will be sent
-            to the copy location dialog when the "Browse" button is clicked.
-   */
-#define K7_COPY_LOCATION_DIALOG_RESULT_BROWSE 102
-
-
 /**
  * @brief Show the copy location dialog window.
  * @param ParentWindowHandle A handle to the owner window of the dialog to be
@@ -240,6 +233,7 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
  *                              the copy location dialog window.
  *                              If this parameter is nullptr, the additional
                                 information text is empty.
+ * @param InitialPath The initial path set on the copy location dialog.
  * @param WindowSubclassHandler The window subclass procedure for the progress
  *                              window.
  * @param WindowSubclassContext The context pointer for the window subclass
@@ -251,6 +245,7 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
     _In_opt_ LPCWSTR Title,
     _In_opt_ LPCWSTR Subtitle,
     _In_opt_ LPCWSTR AdditionalInformation,
+    _In_opt_ LPCWSTR InitialPath,
     _In_ SUBCLASSPROC WindowSubclassHandler,
     _In_ LPVOID WindowSubclassContext);
 
