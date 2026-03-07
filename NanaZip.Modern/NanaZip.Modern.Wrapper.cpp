@@ -224,6 +224,87 @@ EXTERN_C INT WINAPI K7ModernShowInformationDialog(
     return -1;
 }
 
+EXTERN_C VOID WINAPI K7ModernUpdateProgressWindowStatus(
+    _In_ HWND WindowHandle,
+    _In_ PK7_PROGRESS_WINDOW_STATUS Status)
+{
+    using ProcType = decltype(::K7ModernUpdateProgressWindowStatus)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernUpdateProgressWindowStatus");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        ProcAddress(WindowHandle, Status);
+    }
+}
+
+EXTERN_C VOID WINAPI K7ModernSetProgressWindowPausedMode(
+    _In_ HWND WindowHandle,
+    _In_ BOOL Paused)
+{
+    using ProcType = decltype(::K7ModernSetProgressWindowPausedMode)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernSetProgressWindowPausedMode");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        ProcAddress(WindowHandle, Paused);
+    }
+}
+
+EXTERN_C INT WINAPI K7ModernShowProgressWindow(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_ BOOL ShowCompressionInformation,
+    _In_ SUBCLASSPROC WindowSubclassHandler,
+    _In_ LPVOID WindowSubclassContext)
+{
+    using ProcType = decltype(::K7ModernShowProgressWindow)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernShowProgressWindow");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        return ProcAddress(
+            ParentWindowHandle,
+            Title,
+            ShowCompressionInformation,
+            WindowSubclassHandler,
+            WindowSubclassContext);
+    }
+    return -1;
+}
+
 EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
     _In_ HWND ParentWindowHandle,
     _In_ HMENU MoreMenuHandle)
