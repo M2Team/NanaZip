@@ -619,32 +619,3 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetCopyLocationDialogPath(
     }
     return winrt::get_self<Implementation>(InstanceObject)->GetPath();
 }
-
-
-EXTERN_C VOID WINAPI K7ModernSetCopyLocationDialogPath(
-    _In_ HWND WindowHandle,
-    _In_ LPCWSTR Path)
-{
-    if (!WindowHandle)
-    {
-        return;
-    }
-
-    winrt::DesktopWindowXamlSource XamlSource =
-        ::K7ModernGetDesktopWindowXamlSource(WindowHandle);
-    if (!XamlSource)
-    {
-        return;
-    }
-
-    using Interface =
-        winrt::NanaZip::Modern::CopyLocationPage;
-    using Implementation =
-        winrt::NanaZip::Modern::implementation::CopyLocationPage;
-    Interface InstanceObject = XamlSource.Content().as<Interface>();
-    if (!InstanceObject)
-    {
-        return;
-    }
-    winrt::get_self<Implementation>(InstanceObject)->SetPath(Path);
-}

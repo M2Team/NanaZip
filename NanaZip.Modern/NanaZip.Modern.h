@@ -258,15 +258,6 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetCopyLocationDialogPath(
     _In_ HWND WindowHandle);
 
 /**
- * @brief Set the path of the copy location dialog.
- * @param WindowHandle A handle to the copy location dialog.
- * @param Path The path to be set.
- */
-EXTERN_C VOID WINAPI K7ModernSetCopyLocationDialogPath(
-    _In_ HWND WindowHandle,
-    _In_ LPCWSTR Path);
-
-/**
  * @brief Create the toolbar control for the main window.
  * @param ParentWindowHandle A handle to the owner window of the control to be
  *                           created. This parameter must be valid.

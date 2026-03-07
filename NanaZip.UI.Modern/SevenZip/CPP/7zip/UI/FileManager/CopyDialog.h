@@ -41,9 +41,9 @@ public:
   UString Info;
   UStringVector Strings;
 // **************** NanaZip Modification Start ****************
-  HWND m_WindowHandle;
-  bool m_FirstRun;
-  int m_ReturnCode;
+  HWND m_WindowHandle = nullptr;
+  bool m_FirstRun = false;
+  int m_ReturnCode = IDCLOSE;
 // **************** NanaZip Modification End ****************
 
 // **************** NanaZip Modification Start ****************

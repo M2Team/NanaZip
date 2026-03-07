@@ -14,5 +14,4 @@ K7ModernSetProgressWindowPausedMode
 K7ModernShowProgressWindow
 K7ModernShowCopyLocationDialog
 K7ModernGetCopyLocationDialogPath
-K7ModernSetCopyLocationDialogPath
 K7ModernCreateMainWindowToolBarPage

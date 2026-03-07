@@ -86,19 +86,29 @@ namespace winrt::NanaZip::Modern::implementation
 
         winrt::com_ptr<::IShellItem> InitialFolder;
 
-        ::SHCreateItemFromParsingName(
+        bool initialSucceeded = false;
+
+        if (SUCCEEDED(::SHCreateItemFromParsingName(
             this->GetPath(),
             nullptr,
             IID_IShellItem,
-            InitialFolder.put_void());
+            InitialFolder.put_void())))
+        {
+            initialSucceeded = true;
+        }
 
         winrt::com_ptr<::IFileDialog> FileDialog =
             winrt::create_instance<::IFileDialog>(
                 CLSID_FileOpenDialog,
                 CLSCTX_INPROC_SERVER);
 
-        FileDialog->SetOptions(FOS_PICKFOLDERS);
-        FileDialog->SetFolder(InitialFolder.get());
+        FILEOPENDIALOGOPTIONS Options;
+        FileDialog->GetOptions(&Options);
+        FileDialog->SetOptions(Options | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM);
+
+        if (initialSucceeded)
+            FileDialog->SetFolder(InitialFolder.get());
+
         FileDialog->SetTitle(::Mile::WinRT::GetLocalizedString(
             L"NanaZip.Modern/CopyLocationPage/SetDestinationText",
             L"Select destination folder.")
