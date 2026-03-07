@@ -85,9 +85,14 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(e);
 
         winrt::com_ptr<IFileDialog> FileDialog =
-            winrt::create_instance<IFileDialog>(
+            winrt::try_create_instance<IFileDialog>(
                 CLSID_FileOpenDialog,
                 CLSCTX_INPROC_SERVER);
+
+        if (!FileDialog)
+        {
+            return;
+        }
 
         FILEOPENDIALOGOPTIONS Options;
         if (FAILED(FileDialog->GetOptions(&Options)))
