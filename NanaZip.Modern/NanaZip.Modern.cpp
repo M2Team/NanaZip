@@ -585,8 +585,8 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
 
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
-        560,
-        360,
+        600,
+        400,
         winrt::get_abi(Window),
         ParentWindowHandle);
 

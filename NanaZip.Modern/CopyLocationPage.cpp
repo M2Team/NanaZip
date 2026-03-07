@@ -1,12 +1,12 @@
 ﻿#include "pch.h"
 #include "CopyLocationPage.h"
 #include "CopyLocationPage.g.cpp"
-#include <Mile.Helpers.CppWinRT.h>
-#include <shlobj.h>
-#include <string>
 
-using namespace winrt;
-using namespace Windows::UI::Xaml;
+#include <Mile.Helpers.CppWinRT.h>
+
+#include <shlobj.h>
+
+#include <string>
 
 namespace winrt::NanaZip::Modern::implementation
 {
@@ -97,20 +97,21 @@ namespace winrt::NanaZip::Modern::implementation
             return;
         }
 
-        winrt::com_ptr<IShellItem> InitialFolder;
-        if (SUCCEEDED(::SHCreateItemFromParsingName(
-            this->GetPath(),
-            nullptr,
-            IID_IShellItem,
-            InitialFolder.put_void())))
-        {
-            FileDialog->SetFolder(InitialFolder.get());
-        }
-
-        FileDialog->SetTitle(::Mile::WinRT::GetLocalizedString(
+        FileDialog->SetTitle(Mile::WinRT::GetLocalizedString(
             L"NanaZip.Modern/CopyLocationPage/SelectDestinationText",
-            L"Select destination folder.")
-            .c_str());
+            L"Select destination folder.").c_str());
+
+        {
+            IShellItem* DefaultFolder = nullptr;
+            if (SUCCEEDED(::SHCreateItemFromParsingName(
+                this->PathTextBox().Text().c_str(),
+                nullptr,
+                IID_PPV_ARGS(&DefaultFolder))))
+            {
+                FileDialog->SetFolder(DefaultFolder);
+                DefaultFolder->Release();
+            }
+        }
 
         if (SUCCEEDED(FileDialog->Show(this->m_WindowHandle)))
         {
