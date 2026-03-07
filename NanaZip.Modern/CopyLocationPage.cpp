@@ -94,7 +94,7 @@ namespace winrt::NanaZip::Modern::implementation
         {
             Options = 0;
         }
-        if (SUCCEEDED(FileDialog->SetOptions(
+        if (FAILED(FileDialog->SetOptions(
                 Options | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM)))
         {
             return;
