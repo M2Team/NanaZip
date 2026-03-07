@@ -60,6 +60,21 @@ namespace winrt::NanaZip::Modern::implementation
         this->Content().Text(Content);
     }
 
+    void AboutPage::NanaZipWebsiteButtonClick(
+        winrt::IInspectable const& sender,
+        winrt::RoutedEventArgs const& e)
+    {
+        UNREFERENCED_PARAMETER(sender);
+        UNREFERENCED_PARAMETER(e);
+
+        SHELLEXECUTEINFOW ExecInfo = {};
+        ExecInfo.cbSize = sizeof(SHELLEXECUTEINFOW);
+        ExecInfo.lpVerb = L"open";
+        ExecInfo.lpFile = L"https://nanazip.org";
+        ExecInfo.nShow = SW_SHOWNORMAL;
+        ::ShellExecuteExW(&ExecInfo);
+    }
+
     void AboutPage::GitHubButtonClick(
         winrt::IInspectable const& sender,
         winrt::RoutedEventArgs const& e)

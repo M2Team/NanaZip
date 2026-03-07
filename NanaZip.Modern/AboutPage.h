@@ -22,6 +22,10 @@ namespace winrt::NanaZip::Modern::implementation
 
         void InitializeComponent();
 
+        void NanaZipWebsiteButtonClick(
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
+
         void GitHubButtonClick(
             winrt::IInspectable const& sender,
             winrt::RoutedEventArgs const& e);

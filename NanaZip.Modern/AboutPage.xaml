@@ -36,15 +36,22 @@
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="8" />
         <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="8" />
+        <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
       <Button
         Grid.Column="0"
+        HorizontalAlignment="Stretch"
+        Click="NanaZipWebsiteButtonClick"
+        Content="NanaZip.org" />
+      <Button
+        Grid.Column="2"
         HorizontalAlignment="Stretch"
         Click="GitHubButtonClick"
         Content="GitHub" />
       <Button
         x:Uid="/NanaZip.Modern/Common/CancelButton"
-        Grid.Column="2"
+        Grid.Column="4"
         HorizontalAlignment="Stretch"
         Click="CancelButtonClick"
         Content="[Cancel]" />
