@@ -84,9 +84,24 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(e);
 
-        winrt::com_ptr<::IShellItem> InitialFolder;
+        winrt::com_ptr<IFileDialog> FileDialog =
+            winrt::create_instance<IFileDialog>(
+                CLSID_FileOpenDialog,
+                CLSCTX_INPROC_SERVER);
 
-        bool initialSucceeded = false;
+        FILEOPENDIALOGOPTIONS Options;
+        if (FAILED(FileDialog->GetOptions(&Options)))
+        {
+            Options = 0;
+        }
+        if (SUCCEEDED(
+            FileDialog->SetOptions(
+                Options | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM)))
+        {
+            return;
+        }
+
+        winrt::com_ptr<::IShellItem> InitialFolder;
 
         if (SUCCEEDED(::SHCreateItemFromParsingName(
             this->GetPath(),
@@ -94,20 +109,8 @@ namespace winrt::NanaZip::Modern::implementation
             IID_IShellItem,
             InitialFolder.put_void())))
         {
-            initialSucceeded = true;
-        }
-
-        winrt::com_ptr<::IFileDialog> FileDialog =
-            winrt::create_instance<::IFileDialog>(
-                CLSID_FileOpenDialog,
-                CLSCTX_INPROC_SERVER);
-
-        FILEOPENDIALOGOPTIONS Options;
-        FileDialog->GetOptions(&Options);
-        FileDialog->SetOptions(Options | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM);
-
-        if (initialSucceeded)
             FileDialog->SetFolder(InitialFolder.get());
+        }
 
         FileDialog->SetTitle(::Mile::WinRT::GetLocalizedString(
             L"NanaZip.Modern/CopyLocationPage/SetDestinationText",
@@ -115,9 +118,11 @@ namespace winrt::NanaZip::Modern::implementation
             .c_str());
 
         if (FAILED(FileDialog->Show(this->m_WindowHandle)))
+        {
             return;
+        }
 
-        winrt::com_ptr<::IShellItem> Result;
+        winrt::com_ptr<IShellItem> Result;
         if (SUCCEEDED(FileDialog->GetResult(Result.put())))
         {
             PWSTR Path;
