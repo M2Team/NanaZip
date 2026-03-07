@@ -94,14 +94,13 @@ namespace winrt::NanaZip::Modern::implementation
         {
             Options = 0;
         }
-        if (SUCCEEDED(
-            FileDialog->SetOptions(
+        if (SUCCEEDED(FileDialog->SetOptions(
                 Options | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM)))
         {
             return;
         }
 
-        winrt::com_ptr<::IShellItem> InitialFolder;
+        winrt::com_ptr<IShellItem> InitialFolder;
 
         if (SUCCEEDED(::SHCreateItemFromParsingName(
             this->GetPath(),
