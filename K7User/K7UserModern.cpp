@@ -167,8 +167,7 @@ EXTERN_C PIDLIST_ABSOLUTE WINAPI K7UserModernSHBrowseForFolderW(
                         nullptr,
                         IID_PPV_ARGS(&DefaultFolder))))
                     {
-                        FileDialog->SetDefaultFolder(DefaultFolder);
-
+                        FileDialog->SetFolder(DefaultFolder);
                         DefaultFolder->Release();
                     }
 
