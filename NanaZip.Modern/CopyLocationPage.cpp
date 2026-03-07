@@ -14,12 +14,12 @@ namespace winrt::NanaZip::Modern::implementation
         _In_opt_ HWND WindowHandle,
         _In_opt_ LPCWSTR Title,
         _In_opt_ LPCWSTR Subtitle,
-        _In_opt_ LPCWSTR AdditionaInformation,
+        _In_opt_ LPCWSTR AdditionalInformation,
         _In_opt_ LPCWSTR InitialPath):
         m_WindowHandle(WindowHandle),
         m_Title(Title),
         m_Subtitle(Subtitle),
-        m_AdditionalInformation(AdditionaInformation),
+        m_AdditionalInformation(AdditionalInformation),
         m_InitialPath(InitialPath)
     {
     }
@@ -28,20 +28,16 @@ namespace winrt::NanaZip::Modern::implementation
     {
         CopyLocationPageT::InitializeComponent();
 
-        this->TitleTextBlock().Text(m_Title);
-        this->SubtitleTextBlock().Text(m_Subtitle);
-        this->AdditionalInformationTextBlock().Text(m_AdditionalInformation);
-        this->PathTextBox().Text(m_InitialPath);
+        this->TitleTextBlock().Text(this->m_Title);
+        this->SubtitleTextBlock().Text(this->m_Subtitle);
+        this->AdditionalInformationTextBlock().Text(
+            this->m_AdditionalInformation);
+        this->PathTextBox().Text(this->m_InitialPath);
     }
 
     LPCWSTR CopyLocationPage::GetPath()
     {
         return this->PathTextBox().Text().c_str();
-    }
-
-    void CopyLocationPage::SetPath(LPCWSTR Path)
-    {
-        this->PathTextBox().Text(Path);
     }
 
     void CopyLocationPage::OkButtonClick(
@@ -70,11 +66,8 @@ namespace winrt::NanaZip::Modern::implementation
     {
         UNREFERENCED_PARAMETER(sender);
         UNREFERENCED_PARAMETER(e);
-        ::SendMessageW(
-            this->m_WindowHandle,
-            WM_CLOSE,
-            0,
-            0);
+
+        ::PostMessageW(this->m_WindowHandle, WM_CLOSE, 0, 0);
     }
 
     void CopyLocationPage::BrowseButtonClick(
@@ -88,7 +81,6 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::try_create_instance<IFileDialog>(
                 CLSID_FileOpenDialog,
                 CLSCTX_INPROC_SERVER);
-
         if (!FileDialog)
         {
             return;
@@ -106,7 +98,6 @@ namespace winrt::NanaZip::Modern::implementation
         }
 
         winrt::com_ptr<IShellItem> InitialFolder;
-
         if (SUCCEEDED(::SHCreateItemFromParsingName(
             this->GetPath(),
             nullptr,
@@ -117,28 +108,36 @@ namespace winrt::NanaZip::Modern::implementation
         }
 
         FileDialog->SetTitle(::Mile::WinRT::GetLocalizedString(
-            L"NanaZip.Modern/CopyLocationPage/SetDestinationText",
+            L"NanaZip.Modern/CopyLocationPage/SelectDestinationText",
             L"Select destination folder.")
             .c_str());
 
-        if (FAILED(FileDialog->Show(this->m_WindowHandle)))
+        if (SUCCEEDED(FileDialog->Show(this->m_WindowHandle)))
         {
-            return;
-        }
-
-        winrt::com_ptr<IShellItem> Result;
-        if (SUCCEEDED(FileDialog->GetResult(Result.put())))
-        {
-            PWSTR Path;
-            if (SUCCEEDED(Result->GetDisplayName(SIGDN_FILESYSPATH, &Path)))
+            IShellItem* Result = nullptr;
+            if (SUCCEEDED(FileDialog->GetResult(&Result)))
             {
-                std::wstring PathStr(Path);
-                if (!PathStr.ends_with(L"\\"))
+                std::wstring Path;
                 {
-                    PathStr += L"\\";
+                    LPWSTR RawPath = nullptr;
+                    if (SUCCEEDED(Result->GetDisplayName(
+                        SIGDN_FILESYSPATH,
+                        &RawPath)))
+                    {
+                        Path = std::wstring(RawPath);
+                        ::CoTaskMemFree(RawPath);
+                    }
                 }
-                this->PathTextBox().Text(PathStr);
-                ::CoTaskMemFree(Path);
+                if (!Path.empty())
+                {
+                    if (!Path.ends_with(L"\\"))
+                    {
+                        Path.append(L"\\");
+                    }
+                    this->PathTextBox().Text(Path);
+                }
+
+                Result->Release();
             }
         }
     }

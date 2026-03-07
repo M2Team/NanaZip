@@ -18,15 +18,13 @@ namespace winrt::NanaZip::Modern::implementation
             _In_opt_ HWND WindowHandle = nullptr,
             _In_opt_ LPCWSTR Title = nullptr,
             _In_opt_ LPCWSTR Subtitle = nullptr,
-            _In_opt_ LPCWSTR AdditionaInformation = nullptr,
+            _In_opt_ LPCWSTR AdditionalInformation = nullptr,
             _In_opt_ LPCWSTR InitialPath = nullptr
         );
 
         void InitializeComponent();
 
         LPCWSTR GetPath();
-
-        void SetPath(LPCWSTR Path);
 
         void OkButtonClick(
             IInspectable const& sender,
@@ -41,10 +39,12 @@ namespace winrt::NanaZip::Modern::implementation
             RoutedEventArgs const& e);
 
     private:
+
         HWND m_WindowHandle = nullptr;
         LPCWSTR m_Title = nullptr;
         LPCWSTR m_Subtitle = nullptr;
         LPCWSTR m_AdditionalInformation = nullptr;
         LPCWSTR m_InitialPath = nullptr;
+        std::wstring m_FinalPath;
     };
 }
