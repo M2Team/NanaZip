@@ -215,6 +215,49 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
     _In_ LPVOID WindowSubclassContext);
 
 /**
+ * @brief The WM_COMMAND BN_CLICKED ID for the "OK" button will be sent to
+ *        the copy location dialog when the "OK" button is clicked.
+ */
+#define K7_COPY_LOCATION_DIALOG_RESULT_OK 1
+
+/**
+ * @brief Show the copy location dialog window.
+ * @param ParentWindowHandle A handle to the owner window of the dialog to be
+ *                           created. If this parameter is nullptr, the dialog
+ *                           has no owner window.
+ * @param Title The title of the copy location dialog window.
+                If this parameter is nullptr, the title is empty.
+ * @param Subtitle The subtitle of the copy location dialog window.
+                   If this parameter is nullptr, the subtitle is empty.
+ * @param AdditionalInformation The additional information text of
+ *                              the copy location dialog window.
+ *                              If this parameter is nullptr, the additional
+                                information text is empty.
+ * @param InitialPath The initial path set on the copy location dialog.
+ * @param WindowSubclassHandler The window subclass procedure for the progress
+ *                              window.
+ * @param WindowSubclassContext The context pointer for the window subclass
+ *                              procedure.
+ * @return The message loop exit code of the dialog.
+ */
+EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_opt_ LPCWSTR Subtitle,
+    _In_opt_ LPCWSTR AdditionalInformation,
+    _In_opt_ LPCWSTR InitialPath,
+    _In_ SUBCLASSPROC WindowSubclassHandler,
+    _In_ LPVOID WindowSubclassContext);
+
+/**
+ * @brief Get the path of the copy location dialog.
+ * @param WindowHandle A handle to the copy location dialog.
+ * @return The path currently set.
+ */
+EXTERN_C LPCWSTR WINAPI K7ModernGetCopyLocationDialogPath(
+    _In_ HWND WindowHandle);
+
+/**
  * @brief Create the toolbar control for the main window.
  * @param ParentWindowHandle A handle to the owner window of the control to be
  *                           created. This parameter must be valid.

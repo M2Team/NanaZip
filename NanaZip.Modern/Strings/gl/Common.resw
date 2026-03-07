@@ -45,4 +45,7 @@
   <data name="CloseButton.Content" xml:space="preserve">
     <value>Pechar</value>
   </data>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>De acordo</value>
+  </data>
 </root>

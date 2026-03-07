@@ -22,6 +22,7 @@ internal class Program
         [
             new(402, "Common", "CancelButton.Content", true),
             new(408, "Common", "CloseButton.Content", true),
+            new(401, "Common", "OKButton.Content", true),
             new(3900, "ProgressPage", "ElapsedTimeLabel.Text"),
             new(3901, "ProgressPage", "RemainingTimeLabel.Text"),
             new(3902, "ProgressPage", "TotalSizeLabel.Text"),
@@ -35,7 +36,8 @@ internal class Program
             new(445, "ProgressPage", "ForegroundButtonText", true),
             new(446, "ProgressPage", "PauseButtonText", true),
             new(411, "ProgressPage", "ContinueButtonText", true),
-            new(447, "ProgressPage", "PausedText")
+            new(447, "ProgressPage", "PausedText"),
+            new(6007, "CopyLocationPage", "SelectDestinationText"),
         ];
 
     static readonly ImmutableArray<IGrouping<string, ResourceMapping>> Mappings

@@ -20,6 +20,7 @@
 #include "AboutPage.h"
 #include "InformationPage.h"
 #include "ProgressPage.h"
+#include "CopyLocationPage.h"
 
 #pragma comment(lib, "comctl32.lib")
 
@@ -540,4 +541,81 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
         ParentWindowHandle);
 
     return Result;
+}
+
+EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
+    _In_opt_ HWND ParentWindowHandle,
+    _In_opt_ LPCWSTR Title,
+    _In_opt_ LPCWSTR Subtitle,
+    _In_opt_ LPCWSTR AdditionalInformation,
+    _In_opt_ LPCWSTR InitialPath,
+    _In_ SUBCLASSPROC WindowSubclassHandler,
+    _In_ LPVOID WindowSubclassContext)
+{
+    HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
+    if (!WindowHandle)
+    {
+        return -1;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::CopyLocationPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::CopyLocationPage;
+
+    Interface Window = winrt::make<Implementation>(
+        WindowHandle,
+        Title,
+        Subtitle,
+        AdditionalInformation,
+        InitialPath);
+
+    if (WindowSubclassHandler)
+    {
+        if (!::SetWindowSubclass(
+            WindowHandle,
+            WindowSubclassHandler,
+            1,
+            reinterpret_cast<DWORD_PTR>(WindowSubclassContext)))
+        {
+            ::DestroyWindow(WindowHandle);
+            return -1;
+        }
+    }
+
+    int Result = ::K7ModernShowXamlDialog(
+        WindowHandle,
+        560,
+        360,
+        winrt::get_abi(Window),
+        ParentWindowHandle);
+
+    return Result;
+}
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetCopyLocationDialogPath(
+    _In_ HWND WindowHandle)
+{
+    if (!WindowHandle)
+    {
+        return nullptr;
+    }
+
+    winrt::DesktopWindowXamlSource XamlSource =
+        ::K7ModernGetDesktopWindowXamlSource(WindowHandle);
+    if (!XamlSource)
+    {
+        return nullptr;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::CopyLocationPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::CopyLocationPage;
+    Interface InstanceObject = XamlSource.Content().as<Interface>();
+    if (!InstanceObject)
+    {
+        return nullptr;
+    }
+    return winrt::get_self<Implementation>(InstanceObject)->GetPath();
 }

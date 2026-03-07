@@ -45,4 +45,7 @@
   <data name="CloseButton.Content" xml:space="preserve">
     <value>Fermu</value>
   </data>
+  <data name="OKButton.Content" xml:space="preserve">
+    <value>Bone</value>
+  </data>
 </root>
