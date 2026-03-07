@@ -3,6 +3,20 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.0 Update 2 (6.0.1650.0)**
+
+- Add NanaZip official website link to the XAML About Dialog.
+- Fix some crash issues caused by dark mode support.
+- Fix some crash issues caused by the XAML information dialog.
+- Fix the issue that we cannot use NanaZip.Universal.Windows.exe without
+  NanaZip.Modern.dll.
+- Fix the issue that we cannot set the initial folder for the copy location
+  dialog browse button.
+- Fix the buffer overflow issue introduced since 7-Zip mainline 26.00 when using
+  NanaZip.Core.Setup.sfx which you need to compiled manually to get. (Backported
+  from https://github.com/M2Team/NanaZip/pull/850 and
+  https://github.com/mcmilk/7-Zip-zstd/pull/468/changes/f4efd0f2d960b18fd51a894d04b5eadebf8c270b.)
+
 **NanaZip 6.0 Update 1 (6.0.1638.0)**
 
 - Fix several issues for the UFS/UFS2 file system image readonly support.
