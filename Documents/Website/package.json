@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fluentui/svg-icons": "^1.1.320",
     "astro": "^5.17.1"
   },
   "devDependencies": {

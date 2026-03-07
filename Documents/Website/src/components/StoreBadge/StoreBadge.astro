@@ -3,9 +3,10 @@ interface Props {
     productId: string;
     windowMode?: "direct" | "full";
     size?: "large" | "small";
+    campaignId?: string;
 }
 
-const { productId, windowMode = "direct", size = "large" } = Astro.props;
+const { productId, windowMode = "direct", size = "large", campaignId } = Astro.props;
 
 import "./StoreBadge.css";
 ---
@@ -17,7 +18,7 @@ import "./StoreBadge.css";
 <noscript>
     <a
         class="store-badge-link"
-        href={`https://apps.microsoft.com/detail/${productId}?referrer=appbadge&mode=${windowMode}`}
+        href={`https://apps.microsoft.com/detail/${productId}?referrer=appbadge&mode=${windowMode}&cid=${campaignId}`}
         target="_blank"
     >
         <picture>
@@ -45,5 +46,6 @@ import "./StoreBadge.css";
     size={size}
     language="en-us"
     animation="on"
+    cid={campaignId}
 >
 </ms-store-badge>
