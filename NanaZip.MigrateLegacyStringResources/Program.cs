@@ -36,7 +36,8 @@ internal class Program
             new(445, "ProgressPage", "ForegroundButtonText", true),
             new(446, "ProgressPage", "PauseButtonText", true),
             new(411, "ProgressPage", "ContinueButtonText", true),
-            new(447, "ProgressPage", "PausedText")
+            new(447, "ProgressPage", "PausedText"),
+            new(6007, "CopyLocationPage", "SelectDestinationText"),
         ];
 
     static readonly ImmutableArray<IGrouping<string, ResourceMapping>> Mappings

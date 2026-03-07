@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "CopyLocationPage.h"
 #include "CopyLocationPage.g.cpp"
+#include <Mile.Helpers.CppWinRT.h>
 #include <shlobj.h>
 #include <string>
 
@@ -98,7 +99,10 @@ namespace winrt::NanaZip::Modern::implementation
 
         FileDialog->SetOptions(FOS_PICKFOLDERS);
         FileDialog->SetFolder(InitialFolder.get());
-        FileDialog->SetTitle(::K7ModernGetLegacyStringResource(6007));
+        FileDialog->SetTitle(::Mile::WinRT::GetLocalizedString(
+            L"NanaZip.Modern/CopyLocationPage/SetDestinationText",
+            L"Select destination folder.")
+            .c_str());
 
         if (FAILED(FileDialog->Show(this->m_WindowHandle)))
             return;
