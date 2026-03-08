@@ -2,6 +2,11 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 6.5 Preview (6.5.16xx.0)**
+
+- Includes all the improvements from NanaZip 6.0 Update 2 (6.0.1650.0).
+- Introduce XAML XAML copy location dialog. (Contributed by dongle-the-gadget.)
+
 **NanaZip 6.5 Preview (6.5.1638.0)**
 
 This release includes all the improvements from NanaZip 6.0 Update 1
