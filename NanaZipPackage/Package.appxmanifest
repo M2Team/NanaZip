@@ -124,6 +124,7 @@
               <uap:FileType>.lzma</uap:FileType>
               <uap:FileType>.lzma2</uap:FileType>
               <uap:FileType>.ntfs</uap:FileType>
+              <uap:FileType>.nupkg</uap:FileType>
               <uap:FileType>.rar</uap:FileType>
               <uap:FileType>.rpm</uap:FileType>
               <uap:FileType>.squashfs</uap:FileType>
