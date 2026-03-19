@@ -18,16 +18,38 @@
 #include <mutex>
 #include <vector>
 
+namespace
+{
+    static BOOL GetCurrentProcessMitigationPolicy(
+        _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
+        _Out_ PVOID lpBuffer,
+        _In_ SIZE_T dwLength)
+    {
+        return ::GetProcessMitigationPolicy(
+            ::GetCurrentProcess(),
+            MitigationPolicy,
+            lpBuffer,
+            dwLength);
+    }
+}
+
 EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations()
 {
     {
         PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY Policy = {};
 
-        ::GetProcessMitigationPolicy(
-            ::GetCurrentProcess(),
+        // Get the current policy state to avoid failing to set the mitigation
+        // policy when the callers already have set the policy to a more strict
+        // state.
+        if (!::GetCurrentProcessMitigationPolicy(
             ProcessStrictHandleCheckPolicy,
             &Policy,
-            sizeof(PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY));
+            sizeof(PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY)))
+        {
+            // We should not trust the policy state if the get call fails, but
+            // we can still try to set the policy.
+            Policy = {};
+        }
 
         Policy.RaiseExceptionOnInvalidHandleReference = 1;
         Policy.HandleExceptionsPermanentlyEnabled = 1;
@@ -44,11 +66,18 @@ EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations()
     {
         PROCESS_MITIGATION_IMAGE_LOAD_POLICY Policy = {};
 
-        ::GetProcessMitigationPolicy(
-            ::GetCurrentProcess(),
+        // Get the current policy state to avoid failing to set the mitigation
+        // policy when the callers already have set the policy to a more strict
+        // state.
+        if (!::GetCurrentProcessMitigationPolicy(
             ProcessImageLoadPolicy,
             &Policy,
-            sizeof(PROCESS_MITIGATION_IMAGE_LOAD_POLICY));
+            sizeof(PROCESS_MITIGATION_IMAGE_LOAD_POLICY)))
+        {
+            // We should not trust the policy state if the get call fails, but
+            // we can still try to set the policy.
+            Policy = {};
+        }
 
         Policy.NoRemoteImages = 1;
         Policy.NoLowMandatoryLabelImages = 1;
@@ -71,8 +100,23 @@ EXTERN_C MO_RESULT MOAPI K7BaseDisableDynamicCodeGeneration()
     if (!::K7BaseGetAllowDynamicCodeGenerationPolicy())
     {
         PROCESS_MITIGATION_DYNAMIC_CODE_POLICY Policy = {};
+
+        // Get the current policy state to avoid failing to set the mitigation
+        // policy when the callers already have set the policy to a more strict
+        // state.
+        if (!::GetCurrentProcessMitigationPolicy(
+            ProcessDynamicCodePolicy,
+            &Policy,
+            sizeof(PROCESS_MITIGATION_DYNAMIC_CODE_POLICY)))
+        {
+            // We should not trust the policy state if the get call fails, but
+            // we can still try to set the policy.
+            Policy = {};
+        }
+
         Policy.ProhibitDynamicCode = 1;
         Policy.AllowThreadOptOut = 1;
+
         if (!::SetProcessMitigationPolicy(
             ProcessDynamicCodePolicy,
             &Policy,
@@ -91,7 +135,22 @@ EXTERN_C MO_RESULT MOAPI K7BaseDisableChildProcessCreation()
     if (!::K7BaseGetAllowChildProcessCreationPolicy())
     {
         PROCESS_MITIGATION_CHILD_PROCESS_POLICY Policy = {};
+
+        // Get the current policy state to avoid failing to set the mitigation
+        // policy when the callers already have set the policy to a more strict
+        // state.
+        if (!::GetCurrentProcessMitigationPolicy(
+            ProcessChildProcessPolicy,
+            &Policy,
+            sizeof(PROCESS_MITIGATION_CHILD_PROCESS_POLICY)))
+        {
+            // We should not trust the policy state if the get call fails, but
+            // we can still try to set the policy.
+            Policy = {};
+        }
+
         Policy.NoChildProcessCreation = 1;
+
         if (!::SetProcessMitigationPolicy(
             ProcessChildProcessPolicy,
             &Policy,
