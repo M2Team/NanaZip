@@ -22,8 +22,16 @@ EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations()
 {
     {
         PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY Policy = {};
+
+        ::GetProcessMitigationPolicy(
+            ::GetCurrentProcess(),
+            ProcessStrictHandleCheckPolicy,
+            &Policy,
+            sizeof(PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY));
+
         Policy.RaiseExceptionOnInvalidHandleReference = 1;
         Policy.HandleExceptionsPermanentlyEnabled = 1;
+
         if (!::SetProcessMitigationPolicy(
             ProcessStrictHandleCheckPolicy,
             &Policy,
@@ -35,8 +43,16 @@ EXTERN_C MO_RESULT MOAPI K7BaseEnableMandatoryMitigations()
 
     {
         PROCESS_MITIGATION_IMAGE_LOAD_POLICY Policy = {};
+
+        ::GetProcessMitigationPolicy(
+            ::GetCurrentProcess(),
+            ProcessImageLoadPolicy,
+            &Policy,
+            sizeof(PROCESS_MITIGATION_IMAGE_LOAD_POLICY));
+
         Policy.NoRemoteImages = 1;
         Policy.NoLowMandatoryLabelImages = 1;
+
         if (!::SetProcessMitigationPolicy(
             ProcessImageLoadPolicy,
             &Policy,
