@@ -1,4 +1,4 @@
-// LoadCodecs.h
+﻿// LoadCodecs.h
 
 #ifndef __LOAD_CODECS_H
 #define __LOAD_CODECS_H
@@ -163,6 +163,11 @@ struct CArcInfoEx
   bool Flags_ATime_Default() const { return (Flags & NArcInfoFlags::kATime_Default) != 0; }
   bool Flags_MTime_Default() const { return (Flags & NArcInfoFlags::kMTime_Default) != 0; }
 
+  // **************** NanaZip Modification Start ****************
+  bool Flags_CompositeArc() const { return (Flags & NArcInfoFlags::kCompositeArc) != 0; }
+  bool Flags_LongExtension() const { return (Flags & NArcInfoFlags::kLongExtension) != 0; }
+  // **************** NanaZip Modification End ****************
+
   UInt32 Get_TimePrecFlags() const
   {
     return (TimeFlags >> NArcInfoTimeFlags::kTime_Prec_Mask_bit_index) &
@@ -183,6 +188,9 @@ struct CArcInfoEx
     return Exts[0].Ext;
   }
   int FindExtension(const UString &ext) const;
+  // **************** NanaZip Modification Start ****************
+  int MatchExtension(const UString &FileName) const;
+  // **************** NanaZip Modification End ****************
 
   bool Is_7z()    const { return Name.IsEqualTo_Ascii_NoCase("7z"); }
   bool Is_Split() const { return Name.IsEqualTo_Ascii_NoCase("Split"); }
