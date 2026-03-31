@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@fluentui/svg-icons": "^1.1.320",
-    "astro": "^5.17.1"
+    "astro": "^6.1.2"
   },
   "devDependencies": {
     "sass-embedded": "^1.97.3"
