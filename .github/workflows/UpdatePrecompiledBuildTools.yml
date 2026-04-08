@@ -14,10 +14,10 @@ jobs:
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: 'recursive'
-    - uses: microsoft/setup-msbuild@v2
+    - uses: microsoft/setup-msbuild@v3
     - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
       run: dotnet nuget locals all --clear
     - name: Configure the git commit information
