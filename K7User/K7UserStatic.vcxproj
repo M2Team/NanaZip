@@ -24,7 +24,7 @@
       <Version>1.0.372</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Internal">
-      <Version>1.0.3550</Version>
+      <Version>1.0.3581</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
       <Version>1.0.1171</Version>
