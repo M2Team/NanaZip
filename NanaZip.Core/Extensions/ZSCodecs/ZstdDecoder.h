@@ -46,6 +46,11 @@ class CDecoder Z7_final:
   public ICompressCoder,
   public ICompressSetDecoderProperties2,
   public ICompressSetCoderMt,
+  public ICompressSetOutStreamSize,
+#ifndef Z7_NO_READ_FROM_CODER
+  public ICompressSetInStream,
+  public ISequentialInStream,
+#endif
   public CMyUnknownImp
 {
   CMyComPtr < ISequentialInStream > _inStream;
@@ -61,6 +66,8 @@ public:
 
   UInt64 _processedIn;
   UInt64 _processedOut;
+  size_t _readSrcPos;  // current read position in _srcBuf (for Read())
+  size_t _readSrcLen;  // valid bytes in _srcBuf (for Read())
 
   HRESULT CodeSpec(ISequentialInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress);
   HRESULT CodeResume(ISequentialOutStream * outStream, const UInt64 * outSize, ICompressProgressInfo * progress);
@@ -69,6 +76,11 @@ public:
   Z7_COM_QI_BEGIN2(ICompressCoder)
   Z7_COM_QI_ENTRY(ICompressSetDecoderProperties2)
   Z7_COM_QI_ENTRY(ICompressSetCoderMt)
+  Z7_COM_QI_ENTRY(ICompressSetOutStreamSize)
+#ifndef Z7_NO_READ_FROM_CODER
+  Z7_COM_QI_ENTRY(ICompressSetInStream)
+  Z7_COM_QI_ENTRY(ISequentialInStream)
+#endif
   Z7_COM_QI_END
   Z7_COM_ADDREF_RELEASE
 
@@ -77,10 +89,10 @@ public:
 public:
   Z7_IFACE_COM7_IMP(ICompressSetCoderMt)
 
-  Z7_COM7F_IMF(SetOutStreamSize(const UInt64 *outSize));
+  Z7_IFACE_COM7_IMP(ICompressSetOutStreamSize)
 #ifndef Z7_NO_READ_FROM_CODER
-  Z7_COM7F_IMF(SetInStream(ISequentialInStream *inStream));
-  Z7_COM7F_IMF(ReleaseInStream());
+  Z7_IFACE_COM7_IMP(ICompressSetInStream)
+  Z7_IFACE_COM7_IMP(ISequentialInStream)
   UInt64 GetInputProcessedSize() const { return _processedIn; }
 #endif
 

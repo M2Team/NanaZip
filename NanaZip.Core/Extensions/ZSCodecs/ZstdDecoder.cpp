@@ -13,7 +13,9 @@ CDecoder::CDecoder():
   _srcBufSize(ZSTD_DStreamInSize()),
   _dstBufSize(ZSTD_DStreamOutSize()),
   _processedIn(0),
-  _processedOut(0)
+  _processedOut(0),
+  _readSrcPos(0),
+  _readSrcLen(0)
 {
   _props.clear();
 }
@@ -55,6 +57,8 @@ HRESULT CDecoder::SetOutStreamSizeResume(const UInt64 * /*outSize*/)
 Z7_COM7F_IMF(CDecoder::SetOutStreamSize(const UInt64 * outSize))
 {
   _processedIn = 0;
+  _readSrcPos = 0;
+  _readSrcLen = 0;
   RINOK(SetOutStreamSizeResume(outSize))
   return S_OK;
 }
@@ -185,6 +189,70 @@ Z7_COM7F_IMF(CDecoder::SetInStream(ISequentialInStream * inStream))
 Z7_COM7F_IMF(CDecoder::ReleaseInStream())
 {
   _inStream.Release();
+  return S_OK;
+}
+
+Z7_COM7F_IMF(CDecoder::Read(void *data, UInt32 size, UInt32 *processedSize))
+{
+  if (processedSize)
+    *processedSize = 0;
+
+  /* 1) create/reset context */
+  if (!_ctx) {
+    _ctx = ZSTD_createDCtx();
+    if (!_ctx)
+      return E_OUTOFMEMORY;
+    _srcBuf = MyAlloc(_srcBufSize);
+    if (!_srcBuf)
+      return E_OUTOFMEMORY;
+    _dstBuf = MyAlloc(_dstBufSize);
+    if (!_dstBuf)
+      return E_OUTOFMEMORY;
+    ZSTD_DCtx_setParameter(_ctx, ZSTD_d_windowLogMax, ZSTD_WINDOWLOG_MAX);
+    _readSrcPos = 0;
+    _readSrcLen = 0;
+  }
+
+  UInt32 totalOut = 0;
+  Byte *outPtr = (Byte *)data;
+
+  while (totalOut < size) {
+    /* refill input buffer if needed */
+    if (_readSrcPos >= _readSrcLen) {
+      _readSrcLen = _srcBufSize;
+      RINOK(ReadStream(_inStream, _srcBuf, &_readSrcLen))
+      _processedIn += _readSrcLen;
+      _readSrcPos = 0;
+      if (_readSrcLen == 0)
+        break; /* EOF */
+    }
+
+    ZSTD_inBuffer zIn;
+    zIn.src = (const Byte *)_srcBuf + _readSrcPos;
+    zIn.size = _readSrcLen - _readSrcPos;
+    zIn.pos = 0;
+
+    ZSTD_outBuffer zOut;
+    zOut.dst = outPtr + totalOut;
+    zOut.size = size - totalOut;
+    zOut.pos = 0;
+
+    size_t result = ZSTD_decompressStream(_ctx, &zOut, &zIn);
+    if (ZSTD_isError(result))
+      return E_FAIL;
+
+    _readSrcPos += zIn.pos;
+    totalOut += (UInt32)zOut.pos;
+    _processedOut += zOut.pos;
+
+    if (result == 0) {
+      /* frame complete */
+      ZSTD_DCtx_reset(_ctx, ZSTD_reset_session_only);
+    }
+  }
+
+  if (processedSize)
+    *processedSize = totalOut;
   return S_OK;
 }
 #endif
