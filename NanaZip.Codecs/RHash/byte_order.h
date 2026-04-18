@@ -214,6 +214,10 @@ static RHASH_INLINE uint64_t bswap_64(uint64_t x)
 #define ROTL64(qword, n) ((qword) << (n) ^ ((qword) >> (64 - (n))))
 #define ROTR64(qword, n) ((qword) >> (n) ^ ((qword) << (64 - (n))))
 
+#define CPU_FEATURE_SSE2 (26)
+#define CPU_FEATURE_SSE3 (32)
+#define CPU_FEATURE_SSSE3 (41)
+#define CPU_FEATURE_SSE4_1 (51)
 #define CPU_FEATURE_SSE4_2 (52)
 #define CPU_FEATURE_SHANI (29)
 

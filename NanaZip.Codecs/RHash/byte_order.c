@@ -255,7 +255,7 @@ void rhash_u32_mem_swap(unsigned* arr, int length)
 
 static uint64_t get_cpuid_features(void)
 {
-	uint32_t cpu_info[4] = {0};
+	uint32_t cpu_info[4] = {0}; /* EAX, EBX, EXC, EDX registers */
 	uint64_t result = 0;
 	/* Request basic CPU functions */
 	RHASH_CPUID(1, cpu_info);
