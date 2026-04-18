@@ -25,6 +25,10 @@ UInt64 CDecoder::GetInputProcessedSize() const
     return _deflateDecoder->GetInputProcessedSize();
   if (_bzDecoder)
     return _bzDecoder->GetInputProcessedSize();
+  // **************** 7-Zip ZS Modification Start ****************
+  if (_zstdDecoder)
+    return _zstdDecoder->GetInputProcessedSize();
+  // **************** 7-Zip ZS Modification End ****************
   return 0;
 }
 
@@ -55,6 +59,12 @@ HRESULT CDecoder::Init(ISequentialInStream *inStream, bool &useFilter)
         _lzmaDecoder = new NCompress::NLzma::CDecoder();
         _codecInStream = _lzmaDecoder;
         break;
+      // **************** 7-Zip ZS Modification Start ****************
+      case NMethodType::kZstd:
+        _zstdDecoder = new NCompress::NZSTD::CDecoder();
+        _codecInStream = _zstdDecoder;
+        break;
+      // **************** 7-Zip ZS Modification End ****************
       default: return E_NOTIMPL;
     }
   }

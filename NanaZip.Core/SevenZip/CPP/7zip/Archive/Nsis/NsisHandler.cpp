@@ -32,6 +32,9 @@ static const char * const kMethods[] =
   , "Deflate"
   , "BZip2"
   , "LZMA"
+  // **************** 7-Zip ZS Modification Start ****************
+  , "Zstd"
+  // **************** 7-Zip ZS Modification End ****************
 };
 
 static const Byte kProps[] =

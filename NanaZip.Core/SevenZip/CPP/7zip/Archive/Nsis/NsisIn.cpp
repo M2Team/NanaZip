@@ -5285,6 +5285,9 @@ HRESULT CInArchive::Parse()
       case NMethodType::kDeflate: m = "zlib"; break;
       case NMethodType::kBZip2: m = "bzip2"; break;
       case NMethodType::kLZMA: m = "lzma"; break;
+      // **************** 7-Zip ZS Modification Start ****************
+      case NMethodType::kZstd: m = "zstd"; break;
+      // **************** 7-Zip ZS Modification End ****************
       default: break;
     }
     Script += "SetCompressor";
@@ -5750,6 +5753,13 @@ static bool IsBZip2(const Byte *p)
   return (p[0] == 0x31 && p[1] < 14);
 }
 
+// **************** 7-Zip ZS Modification Start ****************
+static bool IsZstd(const Byte *p)
+{
+  return (p[0] == 0x28 && p[1] == 0xB5 && p[2] == 0x2F && p[3] == 0xFD);
+}
+// **************** 7-Zip ZS Modification End ****************
+
 HRESULT CInArchive::Open2(const Byte *sig, size_t size)
 {
   const UInt32 kSigSize = 4 + 1 + 5 + 2; // size, flag, 5 - lzma props, 2 - lzma first bytes
@@ -5799,11 +5809,19 @@ HRESULT CInArchive::Open2(const Byte *sig, size_t size)
       Method = NMethodType::kLZMA;
     else if (IsBZip2(sig + 4))
       Method = NMethodType::kBZip2;
+    // **************** 7-Zip ZS Modification Start ****************
+    else if (IsZstd(sig + 4))
+      Method = NMethodType::kZstd;
+    // **************** 7-Zip ZS Modification End ****************
     else
       Method = NMethodType::kDeflate;
   }
   else if (IsBZip2(sig))
     Method = NMethodType::kBZip2;
+  // **************** 7-Zip ZS Modification Start ****************
+  else if (IsZstd(sig))
+    Method = NMethodType::kZstd;
+  // **************** 7-Zip ZS Modification End ****************
   else
     Method = NMethodType::kDeflate;
 

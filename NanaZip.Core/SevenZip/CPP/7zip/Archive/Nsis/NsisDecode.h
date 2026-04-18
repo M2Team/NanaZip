@@ -11,6 +11,9 @@
 #include "../../Compress/BZip2Decoder.h"
 #include "../../Compress/DeflateDecoder.h"
 #include "../../Compress/LzmaDecoder.h"
+// **************** 7-Zip ZS Modification Start ****************
+#include "../../../../../Extensions/ZSCodecs/ZstdDecoder.h"
+// **************** 7-Zip ZS Modification End ****************
 
 namespace NArchive {
 namespace NNsis {
@@ -22,7 +25,11 @@ namespace NMethodType
     kCopy,
     kDeflate,
     kBZip2,
-    kLZMA
+    // **************** 7-Zip ZS Modification Start ****************
+    //kLZMA
+    kLZMA,
+    kZstd
+    // **************** 7-Zip ZS Modification End ****************
   };
 }
 
@@ -42,6 +49,9 @@ class CDecoder
   NCompress::NBZip2::CNsisDecoder *_bzDecoder;
   NCompress::NDeflate::NDecoder::CCOMCoder *_deflateDecoder;
   NCompress::NLzma::CDecoder *_lzmaDecoder;
+  // **************** 7-Zip ZS Modification Start ****************
+  NCompress::NZSTD::CDecoder* _zstdDecoder;
+  // **************** 7-Zip ZS Modification End ****************
 
 public:
   CMyComPtr<IInStream> InputStream; // for non-solid
@@ -62,6 +72,9 @@ public:
     _bzDecoder = NULL;
     _deflateDecoder = NULL;
     _lzmaDecoder = NULL;
+    // **************** 7-Zip ZS Modification Start ****************
+    _zstdDecoder = NULL;
+    // **************** 7-Zip ZS Modification End ****************
   }
 
   void Release()
@@ -74,6 +87,9 @@ public:
     _bzDecoder = NULL;
     _deflateDecoder = NULL;
     _lzmaDecoder = NULL;
+    // **************** 7-Zip ZS Modification Start ****************
+    _zstdDecoder = NULL;
+    // **************** 7-Zip ZS Modification End ****************
   }
 
   UInt64 GetInputProcessedSize() const;
