@@ -11,6 +11,7 @@
 #include <string.h>
 #include "sm3.h"
 #include "endian.h"
+#include <arm_neon.h>
 
 
 #define P0(x) ((x) ^ ROL32((x), 9) ^ ROL32((x),17))
@@ -41,117 +42,60 @@ static uint32_t K[64] = {
 	0xa7a879d8U, 0x4f50f3b1U, 0x9ea1e762U, 0x3d43cec5U,
 };
 
-#if ENABLE_SMALL_FOOTPRINT
-void sm3_compress_blocks(uint32_t digest[8], const uint8_t *data, size_t blocks)
-{
-	uint32_t A;
-	uint32_t B;
-	uint32_t C;
-	uint32_t D;
-	uint32_t E;
-	uint32_t F;
-	uint32_t G;
-	uint32_t H;
-	uint32_t W[68];
-	uint32_t SS1, SS2, TT1, TT2;
-	int j;
-
-	while (blocks--) {
-
-		A = digest[0];
-		B = digest[1];
-		C = digest[2];
-		D = digest[3];
-		E = digest[4];
-		F = digest[5];
-		G = digest[6];
-		H = digest[7];
-
-		for (j = 0; j < 16; j++) {
-			W[j] = GETU32(data + j*4);
-		}
-
-		for (; j < 68; j++) {
-			W[j] = P1(W[j - 16] ^ W[j - 9] ^ ROL32(W[j - 3], 15))
-				^ ROL32(W[j - 13], 7) ^ W[j - 6];
-		}
-
-		for (j = 0; j < 16; j++) {
-			SS1 = ROL32((ROL32(A, 12) + E + K[j]), 7);
-			SS2 = SS1 ^ ROL32(A, 12);
-			TT1 = FF00(A, B, C) + D + SS2 + (W[j] ^ W[j + 4]);
-			TT2 = GG00(E, F, G) + H + SS1 + W[j];
-			D = C;
-			C = ROL32(B, 9);
-			B = A;
-			A = TT1;
-			H = G;
-			G = ROL32(F, 19);
-			F = E;
-			E = P0(TT2);
-		}
-
-		for (; j < 64; j++) {
-			SS1 = ROL32((ROL32(A, 12) + E + K[j]), 7);
-			SS2 = SS1 ^ ROL32(A, 12);
-			TT1 = FF16(A, B, C) + D + SS2 + (W[j] ^ W[j + 4]);
-			TT2 = GG16(E, F, G) + H + SS1 + W[j];
-			D = C;
-			C = ROL32(B, 9);
-			B = A;
-			A = TT1;
-			H = G;
-			G = ROL32(F, 19);
-			F = E;
-			E = P0(TT2);
-		}
-
-		digest[0] ^= A;
-		digest[1] ^= B;
-		digest[2] ^= C;
-		digest[3] ^= D;
-		digest[4] ^= E;
-		digest[5] ^= F;
-		digest[6] ^= G;
-		digest[7] ^= H;
-
-		data += 64;
-	}
-}
-#else
-
 #define SM3_ROUND_0(j,A,B,C,D,E,F,G,H)			\
 	SS0 = ROL32(A, 12);				\
-	SS1 = ROL32(SS0 + E + K[j], 7);			\
+	SS1 = ROL32((SS0 + E + K[j]), 7);		\
 	SS2 = SS1 ^ SS0;				\
-	D += FF00(A, B, C) + SS2 + (W[j] ^ W[j + 4]);	\
-	SS1 += GG00(E, F, G) + H + W[j];		\
+	TT1 = FF00(A,B,C) + D + SS2 + (W[j] ^ W[j+4]);	\
+	TT2 = GG00(E,F,G) + H + SS1 + W[j];		\
+	D = TT1;					\
 	B = ROL32(B, 9);				\
-	H = P0(SS1);					\
-	F = ROL32(F, 19);				\
-	W[j+16] = P1(W[j] ^ W[j+7] ^ ROL32(W[j+13], 15)) ^ ROL32(W[j+3], 7) ^ W[j+10];
+	H = P0(TT2);					\
+	F = ROL32(F, 19);
 
 #define SM3_ROUND_1(j,A,B,C,D,E,F,G,H)			\
 	SS0 = ROL32(A, 12);				\
-	SS1 = ROL32(SS0 + E + K[j], 7);			\
+	SS1 = ROL32((SS0 + E + K[j]), 7);		\
 	SS2 = SS1 ^ SS0;				\
-	D += FF16(A, B, C) + SS2 + (W[j] ^ W[j + 4]);	\
-	SS1 += GG16(E, F, G) + H + W[j];		\
-	B = ROL32(B, 9);					\
-	H = P0(SS1);					\
-	F = ROL32(F, 19);				\
-	W[j+16] = P1(W[j] ^ W[j+7] ^ ROL32(W[j+13], 15)) ^ ROL32(W[j+3], 7) ^ W[j+10];
-
+	TT1 = FF16(A,B,C) + D + SS2 + (W[j] ^ W[j+4]);	\
+	TT2 = GG16(E,F,G) + H + SS1 + W[j];		\
+	D = TT1;					\
+	B = ROL32(B, 9);				\
+	H = P0(TT2);					\
+	F = ROL32(F, 19);
 
 #define SM3_ROUND_2(j,A,B,C,D,E,F,G,H)			\
 	SS0 = ROL32(A, 12);				\
-	SS1 = ROL32(SS0 + E + K[j], 7);			\
+	SS1 = ROL32((SS0 + E + K[j]), 7);		\
 	SS2 = SS1 ^ SS0;				\
-	D += FF16(A, B, C) + SS2 + (W[j] ^ W[j + 4]);	\
-	SS1 += GG16(E, F, G) + H + W[j];		\
+	TT1 = FF16(A,B,C) + D + SS2 + (W[j] ^ W[j+4]);	\
+	TT2 = GG16(E,F,G) + H + SS1 +W[j];		\
+	D = TT1;					\
 	B = ROL32(B, 9);				\
-	H = P0(SS1);					\
+	H = P0(TT2);					\
 	F = ROL32(F, 19);
+
+#define vrolq_n_u32(words, n) \
+	vorrq_u32(vshlq_n_u32((words), (n)), vshrq_n_u32((words), 32 - (n)))
+
+#define EXPAND_WORDS(j)					\
+	words = vld1q_u32(W + j - 3);			\
+	words = vrolq_n_u32(words, 15);			\
+	tempv = vld1q_u32(W + j - 9);			\
+	words = veorq_u32(words, tempv);		\
+	tempv = vld1q_u32(W + j - 16);			\
+	words = veorq_u32(words, tempv);		\
+	tempv = vrolq_n_u32(words, 23-15);		\
+	tempv = veorq_u32(tempv, words);		\
+	tempv = vrolq_n_u32(tempv, 15);			\
+	words = veorq_u32(tempv, words);		\
+	tempv = vld1q_u32(W + j - 13);			\
+	tempv = vrolq_n_u32(tempv, 7);			\
+	words = veorq_u32(words, tempv);		\
+	tempv = vld1q_u32(W + j - 6);			\
+	words = veorq_u32(words, tempv);		\
+	vst1q_u32(W + j, words)
+
 
 void sm3_compress_blocks(uint32_t digest[8], const uint8_t *data, size_t blocks)
 {
@@ -163,8 +107,10 @@ void sm3_compress_blocks(uint32_t digest[8], const uint8_t *data, size_t blocks)
 	uint32_t F;
 	uint32_t G;
 	uint32_t H;
-	uint32_t W[68];
+	uint32_t W[67 + 4];
 	uint32_t SS0, SS1, SS2;
+	uint32_t TT1, TT2;
+	uint32x4_t words, tempv;
 	int j;
 
 	while (blocks--) {
@@ -178,62 +124,65 @@ void sm3_compress_blocks(uint32_t digest[8], const uint8_t *data, size_t blocks)
 		G = digest[6];
 		H = digest[7];
 
-		for (j = 0; j < 16; j++) {
-			W[j] = GETU32(data + j*4);
+
+		for (j = 0; j < 16; j += 4) {
+			words = vld1q_u32((uint32_t *)data + j);
+			words = vrev32q_u8(words);
+			vst1q_u32(W + j, words);
 		}
 
-		SM3_ROUND_0( 0, A,B,C,D, E,F,G,H);
+		SM3_ROUND_0( 0, A,B,C,D, E,F,G,H); EXPAND_WORDS(16);
 		SM3_ROUND_0( 1, D,A,B,C, H,E,F,G);
 		SM3_ROUND_0( 2, C,D,A,B, G,H,E,F);
-		SM3_ROUND_0( 3, B,C,D,A, F,G,H,E);
+		SM3_ROUND_0( 3, B,C,D,A, F,G,H,E); EXPAND_WORDS(19);
 		SM3_ROUND_0( 4, A,B,C,D, E,F,G,H);
 		SM3_ROUND_0( 5, D,A,B,C, H,E,F,G);
-		SM3_ROUND_0( 6, C,D,A,B, G,H,E,F);
+		SM3_ROUND_0( 6, C,D,A,B, G,H,E,F); EXPAND_WORDS(22);
 		SM3_ROUND_0( 7, B,C,D,A, F,G,H,E);
 		SM3_ROUND_0( 8, A,B,C,D, E,F,G,H);
-		SM3_ROUND_0( 9, D,A,B,C, H,E,F,G);
+		SM3_ROUND_0( 9, D,A,B,C, H,E,F,G); EXPAND_WORDS(25);
 		SM3_ROUND_0(10, C,D,A,B, G,H,E,F);
 		SM3_ROUND_0(11, B,C,D,A, F,G,H,E);
-		SM3_ROUND_0(12, A,B,C,D, E,F,G,H);
+		SM3_ROUND_0(12, A,B,C,D, E,F,G,H); EXPAND_WORDS(28);
 		SM3_ROUND_0(13, D,A,B,C, H,E,F,G);
 		SM3_ROUND_0(14, C,D,A,B, G,H,E,F);
-		SM3_ROUND_0(15, B,C,D,A, F,G,H,E);
+		SM3_ROUND_0(15, B,C,D,A, F,G,H,E); EXPAND_WORDS(31);
 		SM3_ROUND_1(16, A,B,C,D, E,F,G,H);
 		SM3_ROUND_1(17, D,A,B,C, H,E,F,G);
-		SM3_ROUND_1(18, C,D,A,B, G,H,E,F);
+		SM3_ROUND_1(18, C,D,A,B, G,H,E,F); EXPAND_WORDS(34);
 		SM3_ROUND_1(19, B,C,D,A, F,G,H,E);
 		SM3_ROUND_1(20, A,B,C,D, E,F,G,H);
-		SM3_ROUND_1(21, D,A,B,C, H,E,F,G);
+		SM3_ROUND_1(21, D,A,B,C, H,E,F,G); EXPAND_WORDS(37);
 		SM3_ROUND_1(22, C,D,A,B, G,H,E,F);
 		SM3_ROUND_1(23, B,C,D,A, F,G,H,E);
-		SM3_ROUND_1(24, A,B,C,D, E,F,G,H);
+		SM3_ROUND_1(24, A,B,C,D, E,F,G,H); EXPAND_WORDS(40);
 		SM3_ROUND_1(25, D,A,B,C, H,E,F,G);
 		SM3_ROUND_1(26, C,D,A,B, G,H,E,F);
-		SM3_ROUND_1(27, B,C,D,A, F,G,H,E);
+		SM3_ROUND_1(27, B,C,D,A, F,G,H,E); EXPAND_WORDS(43);
 		SM3_ROUND_1(28, A,B,C,D, E,F,G,H);
 		SM3_ROUND_1(29, D,A,B,C, H,E,F,G);
-		SM3_ROUND_1(30, C,D,A,B, G,H,E,F);
+		SM3_ROUND_1(30, C,D,A,B, G,H,E,F); EXPAND_WORDS(46);
 		SM3_ROUND_1(31, B,C,D,A, F,G,H,E);
 		SM3_ROUND_1(32, A,B,C,D, E,F,G,H);
-		SM3_ROUND_1(33, D,A,B,C, H,E,F,G);
+		SM3_ROUND_1(33, D,A,B,C, H,E,F,G); EXPAND_WORDS(49);
 		SM3_ROUND_1(34, C,D,A,B, G,H,E,F);
 		SM3_ROUND_1(35, B,C,D,A, F,G,H,E);
-		SM3_ROUND_1(36, A,B,C,D, E,F,G,H);
+		SM3_ROUND_1(36, A,B,C,D, E,F,G,H); EXPAND_WORDS(52);
 		SM3_ROUND_1(37, D,A,B,C, H,E,F,G);
 		SM3_ROUND_1(38, C,D,A,B, G,H,E,F);
-		SM3_ROUND_1(39, B,C,D,A, F,G,H,E);
+		SM3_ROUND_1(39, B,C,D,A, F,G,H,E); EXPAND_WORDS(55);
 		SM3_ROUND_1(40, A,B,C,D, E,F,G,H);
 		SM3_ROUND_1(41, D,A,B,C, H,E,F,G);
-		SM3_ROUND_1(42, C,D,A,B, G,H,E,F);
+		SM3_ROUND_1(42, C,D,A,B, G,H,E,F); EXPAND_WORDS(58);
 		SM3_ROUND_1(43, B,C,D,A, F,G,H,E);
 		SM3_ROUND_1(44, A,B,C,D, E,F,G,H);
-		SM3_ROUND_1(45, D,A,B,C, H,E,F,G);
+		SM3_ROUND_1(45, D,A,B,C, H,E,F,G); EXPAND_WORDS(61);
 		SM3_ROUND_1(46, C,D,A,B, G,H,E,F);
 		SM3_ROUND_1(47, B,C,D,A, F,G,H,E);
-		SM3_ROUND_1(48, A,B,C,D, E,F,G,H);
+		SM3_ROUND_1(48, A,B,C,D, E,F,G,H); EXPAND_WORDS(64);
 		SM3_ROUND_1(49, D,A,B,C, H,E,F,G);
 		SM3_ROUND_1(50, C,D,A,B, G,H,E,F);
-		SM3_ROUND_1(51, B,C,D,A, F,G,H,E);
+		SM3_ROUND_1(51, B,C,D,A, F,G,H,E); EXPAND_WORDS(67);
 		SM3_ROUND_2(52, A,B,C,D, E,F,G,H);
 		SM3_ROUND_2(53, D,A,B,C, H,E,F,G);
 		SM3_ROUND_2(54, C,D,A,B, G,H,E,F);
@@ -259,7 +208,6 @@ void sm3_compress_blocks(uint32_t digest[8], const uint8_t *data, size_t blocks)
 		data += 64;
 	}
 }
-#endif
 
 void sm3_init(SM3_CTX *ctx)
 {
@@ -277,10 +225,6 @@ void sm3_init(SM3_CTX *ctx)
 void sm3_update(SM3_CTX *ctx, const uint8_t *data, size_t data_len)
 {
 	size_t blocks;
-
-	if (!data || !data_len) {
-		return;
-	}
 
 	ctx->num &= 0x3f;
 	if (ctx->num) {
