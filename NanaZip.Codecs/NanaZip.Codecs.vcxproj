@@ -61,6 +61,8 @@
     <ClCompile Include="Brotli\dec\dec_static_init.c" />
     <ClCompile Include="Brotli\enc\static_dict_lut.c" />
     <ClCompile Include="Brotli\enc\enc_static_init.c" />
+    <None Include="GmSSL\sm3_arm64.c" />
+    <None Include="GmSSL\sm3_sse.c" />
     <ClCompile Include="LittleFS\lfs.c">
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4146;4244;4267;4456;4701;</DisableSpecificWarnings>
@@ -269,7 +271,6 @@
     <ClCompile Include="RHash\tth.c" />
     <ClCompile Include="RHash\whirlpool.c" />
     <ClCompile Include="RHash\whirlpool_sbox.c" />
-    <ClCompile Include="GmSSL\sm3.c" />
     <ClCompile Include="BLAKE3\blake3.c">
       <DisableSpecificWarnings>4244;4245;</DisableSpecificWarnings>
     </ClCompile>
@@ -526,6 +527,14 @@
   <Target Name="NanaZipCodecsBlake3HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)' == 'ARM64'">
       <ClCompile Include="BLAKE3\blake3_neon.c" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCodecsGmSSLHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
+      <ClCompile Include="GmSSL\sm3_sse.c" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)' == 'ARM64'">
+      <ClCompile Include="GmSSL\sm3_arm64.c" />
     </ItemGroup>
   </Target>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1917" Project="Mile.Project.Cpp.targets" />

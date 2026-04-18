@@ -26,9 +26,12 @@
     <None Include="BLAKE3\blake3_sse41_x86-64_windows_msvc.asm">
       <Filter>BLAKE3</Filter>
     </None>
-    <ClCompile Include="GmSSL\sm3.c">
+    <None Include="GmSSL\sm3_arm64.c">
       <Filter>GmSSL</Filter>
-    </ClCompile>
+    </None>
+    <None Include="GmSSL\sm3_sse.c">
+      <Filter>GmSSL</Filter>
+    </None>
     <ClCompile Include="RHash\aich.c">
       <Filter>RHash</Filter>
     </ClCompile>
