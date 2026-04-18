@@ -3,6 +3,27 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.0 Update 3 (6.0.1691.0)**
+
+- Fix mitigations failing in some cases (Suggested by ahmed605. Contributed by
+  dongle-the-gadget.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/6146959af008acfb7e92c7d38ef9e43bf9f6afbb.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.)
+- Synchronize the BLAKE3 implementation to 1.8.4.
+  (https://github.com/BLAKE3-team/BLAKE3/releases/tag/1.8.4)
+- Synchronize RHash to the latest master
+  (https://github.com/rhash/RHash/tree/3dbba4baa3cbdc3baf06d3ba086d8094bd98cd88)
+  which is after v1.4.6.
+- Synchronize GmSSL to the latest master
+  (https://github.com/guanzhi/GmSSL/tree/0bcffd37347aa9e1799cf81e6eaeb1e76562dc6c)
+  which is after v3.1.1.
+- Use assembly hardware acceleration for GmSSL implementation.
+- Add support for NuGet package file extension to AppX manifest.
+- Update Mile.Windows.Internal to 1.0.3581 which makes NanaZip can build with
+  Windows SDK for Windows 11 Build 28000.
+
 **NanaZip 6.0 Update 2 (6.0.1650.0)**
 
 - Add NanaZip official website link to the XAML About Dialog.
