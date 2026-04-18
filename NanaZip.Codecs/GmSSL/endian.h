@@ -35,7 +35,7 @@
 	 (uint64_t)(p)[7])
 
 
-// 注意：PUTU32(buf, val++) 会出错！
+// WARNING: must not write PUTU32(buf, val++)
 #define PUTU16(p,V) \
 	((p)[0] = (uint8_t)((V) >> 8), \
 	 (p)[1] = (uint8_t)(V))
