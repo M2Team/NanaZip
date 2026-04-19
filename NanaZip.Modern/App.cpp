@@ -19,7 +19,7 @@ namespace winrt::NanaZip::Modern::implementation
 
     void App::Close()
     {
-        Exit();
+        this->Exit();
         ::MileXamlGlobalUninitialize();
     }
 }
