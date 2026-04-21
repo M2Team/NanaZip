@@ -178,6 +178,10 @@ namespace
             nullptr,
             nullptr,
             nullptr);
+        if (!WindowHandle)
+        {
+            return nullptr;
+        }
         if (!::SetWindowSubclass(
             WindowHandle,
             [](
