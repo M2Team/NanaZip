@@ -12,6 +12,10 @@
 
 #include "NanaZip.Codecs.SevenZipWrapper.h"
 
+#include <map>
+#include <unordered_set>
+#include <deque>
+
 #ifdef _MSC_VER
 #if _MSC_VER > 1000
 #pragma once
@@ -59,6 +63,11 @@ namespace
     }
 
     const std::int32_t g_SuperBlockSearchList[] = SBLOCKSEARCH;
+
+    // Limit resource consumption.
+    const std::size_t g_MaximumEntries = 10000;
+    // Protect against excessively-deep directory structures.
+    const std::size_t g_MaximumVisitDepth = 1000;
 
     struct PropertyItem
     {
@@ -137,6 +146,12 @@ namespace NanaZip::Codecs::Archive
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
         fs m_SuperBlock = {};
+
+        // For GetAllPaths.
+        std::deque<std::pair<std::uint32_t, std::string>> m_VisitQueue;
+        // Protect against recursive structures.
+        std::unordered_set<std::uint32_t> m_VisitedOffsets;
+
         std::map<std::string, std::uint32_t> m_TemporaryFilePaths;
         std::vector<UfsFilePathInformation> m_FilePaths;
         bool m_IsInitialized = false;
@@ -274,11 +289,16 @@ namespace NanaZip::Codecs::Archive
             return this->ReadInt32(&this->m_SuperBlock.fs_maxsymlinklen);
         }
 
+        // Returns UINT64_MAX if invalid.
         std::uint64_t GetInodeOffset(
             std::uint32_t const& Inode)
         {
             std::uint32_t InodePerCylinderGroup = this->ReadUInt32(
                 &this->m_SuperBlock.fs_ipg);
+            if (0 == InodePerCylinderGroup)
+            {
+                return UINT64_MAX;
+            }
             std::uint32_t CylinderGroup = Inode / InodePerCylinderGroup;
             std::uint32_t SubIndex = Inode % InodePerCylinderGroup;
             std::uint64_t Result = this->GetCylinderGroupStart(CylinderGroup);
@@ -301,8 +321,14 @@ namespace NanaZip::Codecs::Archive
             ufs2_dinode* Ufs2DirectoryInode = reinterpret_cast<ufs2_dinode*>(
                 &DirectoryInodeBuffer[0]);
 
+            std::uint64_t InodeOffset = this->GetInodeOffset(Inode);
+            if (UINT64_MAX == InodeOffset)
+            {
+                return false;
+            }
+
             if (FAILED(this->ReadFileStream(
-                this->GetInodeOffset(Inode),
+                InodeOffset,
                 &DirectoryInodeBuffer[0],
                 DirectoryInodeBuffer.size())))
             {
@@ -553,12 +579,33 @@ namespace NanaZip::Codecs::Archive
             return false;
         }
 
-        bool GetAllPaths(
+        bool GetOnePath(
             std::uint32_t const& RootInode,
             std::string const& RootPath)
         {
             UfsInodeInformation Information;
+
+            if (m_VisitedOffsets.size() >= g_MaximumEntries)
+            {
+                // Too many files, softly bail out.
+                return true;
+            }
+
+            auto [Iterator, Inserted] = m_VisitedOffsets.insert(RootInode);
+            if (!Inserted)
+            {
+                // We have visited recursively. Bail out.
+                return false;
+            }
+
             if (!this->GetInodeInformation(RootInode, Information))
+            {
+                return false;
+            }
+
+            // We already checked for the IFDIR type before queuing the inode,
+            // with the important exception of UFS_ROOTINO as queued by Open().
+            if (IFDIR != (Information.Mode & IFMT))
             {
                 return false;
             }
@@ -579,11 +626,12 @@ namespace NanaZip::Codecs::Archive
             std::size_t BlockOffsetsCount = Information.BlockOffsets.size();
 
             std::size_t ActualSize = BlockOffsetsCount * BlockSize;
-            if (MAXDIRSIZE < ActualSize)
+            if (0 == ActualSize || MAXDIRSIZE < ActualSize)
             {
-                // The directory entries buffer size is too large.
-                // Information.FileSize is bigger than the actual size of the
-                // directory entries via GetInodeInformation method before.
+                // The directory entries buffer size is invalid.
+                // If it exceeds MAXDIRSIZE, Information.FileSize is bigger than
+                // the actual size of the directory entries via
+                // GetInodeInformation method before.
                 return false;
             }
 
@@ -633,6 +681,12 @@ namespace NanaZip::Codecs::Archive
                     // The directory entry name length is too large.
                     return false;
                 }
+                uint16_t NameEnd = offsetof(direct, d_name) + NameLength;
+                if (NameEnd >= RecordLength)
+                {
+                    // Name overruns the directory record — corrupted entry.
+                    return false;
+                }
                 Current->d_name[NameLength] = '\0';
                 std::string Name = std::string(Current->d_name);
                 if ("." == Name || ".." == Name)
@@ -641,8 +695,15 @@ namespace NanaZip::Codecs::Archive
                 }
                 else if (DT_DIR == Type)
                 {
-                    if (!this->GetAllPaths(Inode, RootPath + Name + "/"))
+                    if (m_VisitQueue.size() < g_MaximumVisitDepth)
                     {
+                        m_VisitQueue.emplace_back(
+                            RootInode,
+                            RootPath + Name + "/");
+                    }
+                    else
+                    {
+                        // Exceeded our internal limit, bail out.
                         return false;
                     }
                 }
@@ -652,6 +713,28 @@ namespace NanaZip::Codecs::Archive
                 }
 
                 CurrentOffset += RecordLength;
+            }
+
+            return true;
+        }
+
+        bool GetAllPaths(
+            std::uint32_t const& RootInode,
+            std::string const& RootPath)
+        {
+            m_VisitQueue.clear();
+            m_VisitedOffsets.clear();
+            m_VisitQueue.emplace_back(RootInode, RootPath);
+
+            while (!m_VisitQueue.empty())
+            {
+                // Get the entry out before visiting.
+                auto [Offset, Path] = std::move(m_VisitQueue.front());
+                m_VisitQueue.pop_front();
+                if (!this->GetOnePath(Offset, Path))
+                {
+                    return false;
+                }
             }
 
             return true;

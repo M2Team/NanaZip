@@ -618,6 +618,14 @@ namespace NanaZip::Codecs::Archive
                 std::uint32_t BlockCount = this->ReadUInt32(
                     &this->m_SuperMetadataHeader.RawStructure.BlockCount);
 
+                if (0 == BlockSize ||
+                    0 == BlockCount ||
+                    BundleSize < BlockSize ||
+                    BundleSize / BlockSize < BlockCount)
+                {
+                    break;
+                }
+
                 std::uint64_t TotalFiles = 0;
                 std::uint64_t TotalBytes = 0;
 

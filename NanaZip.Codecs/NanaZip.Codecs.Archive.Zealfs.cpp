@@ -277,7 +277,8 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                if (!Header.BitmapSize)
+                if (!Header.BitmapSize ||
+                    ZEALFS_V1_BITMAP_SIZE < Header.BitmapSize)
                 {
                     break;
                 }
