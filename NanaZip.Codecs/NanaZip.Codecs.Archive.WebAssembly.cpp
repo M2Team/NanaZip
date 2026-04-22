@@ -292,6 +292,10 @@ namespace NanaZip::Codecs::Archive
                                 Buffer,
                                 &ProcessedBytes);
                             i += ProcessedBytes;
+                            if (Size < ProcessedBytes)
+                            {
+                                break;
+                            }
                             Size -= ProcessedBytes;
                         }
                         if (NameSize)
@@ -305,6 +309,10 @@ namespace NanaZip::Codecs::Archive
                                 break;
                             }
                             i += sizeof(char) * NameSize;
+                            if (Size < sizeof(char) * NameSize)
+                            {
+                                break;
+                            }
                             Size -= sizeof(char) * NameSize;
                         }
                     }
