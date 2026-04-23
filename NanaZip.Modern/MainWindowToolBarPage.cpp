@@ -45,6 +45,98 @@ namespace
             nullptr, &Path[0], static_cast<DWORD>(Path.size())));
         return Path;
     }
+
+    void UnpackagedLaunchSponsorDialog()
+    {
+        DWORD ShellProcessId = ::GetShellProcessId();
+        if (static_cast<DWORD>(-1) == ShellProcessId)
+        {
+            return;
+        }
+
+        HANDLE ShellProcessHandle = nullptr;
+
+        auto Handler = Mile::ScopeExitTaskHandler([&]()
+        {
+            if (ShellProcessHandle)
+            {
+                ::CloseHandle(ShellProcessHandle);
+            }
+        });
+
+        ShellProcessHandle = ::OpenProcess(
+            PROCESS_CREATE_PROCESS,
+            FALSE,
+            ShellProcessId);
+        if (!ShellProcessHandle)
+        {
+            return;
+        }
+
+        SIZE_T AttributeListSize = 0;
+        ::InitializeProcThreadAttributeList(
+            nullptr,
+            1,
+            0,
+            &AttributeListSize);
+
+        std::vector<std::uint8_t> AttributeListBuffer =
+            std::vector<std::uint8_t>(AttributeListSize);
+
+        PPROC_THREAD_ATTRIBUTE_LIST AttributeList =
+            reinterpret_cast<PPROC_THREAD_ATTRIBUTE_LIST>(
+                &AttributeListBuffer[0]);
+
+        if (!::InitializeProcThreadAttributeList(
+            AttributeList,
+            1,
+            0,
+            &AttributeListSize))
+        {
+            return;
+        }
+
+        if (!::UpdateProcThreadAttribute(
+            AttributeList,
+            0,
+            PROC_THREAD_ATTRIBUTE_PARENT_PROCESS,
+            &ShellProcessHandle,
+            sizeof(ShellProcessHandle),
+            nullptr,
+            nullptr))
+        {
+            return;
+        }
+
+        STARTUPINFOEXW StartupInfoEx = {};
+        PROCESS_INFORMATION ProcessInformation = {};
+        StartupInfoEx.StartupInfo.cb = sizeof(STARTUPINFOEXW);
+        StartupInfoEx.lpAttributeList = AttributeList;
+
+        std::wstring ApplicationName = ::GetCurrentProcessModulePath();
+
+        if (!::CreateProcessW(
+            ApplicationName.c_str(),
+            const_cast<LPWSTR>(L"NanaZip --AcquireSponsorEdition"),
+            nullptr,
+            nullptr,
+            TRUE,
+            CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT,
+            nullptr,
+            nullptr,
+            &StartupInfoEx.StartupInfo,
+            &ProcessInformation))
+        {
+            return;
+        }
+
+        ::AllowSetForegroundWindow(
+            ::GetProcessId(ProcessInformation.hProcess));
+
+        ::CloseHandle(ProcessInformation.hThread);
+        ::WaitForSingleObjectEx(ProcessInformation.hProcess, INFINITE, FALSE);
+        ::CloseHandle(ProcessInformation.hProcess);
+    }
 }
 
 namespace winrt
@@ -413,94 +505,7 @@ namespace winrt::NanaZip::Modern::implementation
 
         winrt::handle(Mile::CreateThread([=]()
         {
-            DWORD ShellProcessId = ::GetShellProcessId();
-            if (static_cast<DWORD>(-1) == ShellProcessId)
-            {
-                return;
-            }
-
-            HANDLE ShellProcessHandle = nullptr;
-
-            auto Handler = Mile::ScopeExitTaskHandler([&]()
-            {
-                if (ShellProcessHandle)
-                {
-                    ::CloseHandle(ShellProcessHandle);
-                }
-            });
-
-            ShellProcessHandle = ::OpenProcess(
-                PROCESS_CREATE_PROCESS,
-                FALSE,
-                ShellProcessId);
-            if (!ShellProcessHandle)
-            {
-                return;
-            }
-
-            SIZE_T AttributeListSize = 0;
-            ::InitializeProcThreadAttributeList(
-                nullptr,
-                1,
-                0,
-                &AttributeListSize);
-
-            std::vector<std::uint8_t> AttributeListBuffer =
-                std::vector<std::uint8_t>(AttributeListSize);
-
-            PPROC_THREAD_ATTRIBUTE_LIST AttributeList =
-                reinterpret_cast<PPROC_THREAD_ATTRIBUTE_LIST>(
-                    &AttributeListBuffer[0]);
-
-            if (!::InitializeProcThreadAttributeList(
-                AttributeList,
-                1,
-                0,
-                &AttributeListSize))
-            {
-                return;
-            }
-
-            if (!::UpdateProcThreadAttribute(
-                AttributeList,
-                0,
-                PROC_THREAD_ATTRIBUTE_PARENT_PROCESS,
-                &ShellProcessHandle,
-                sizeof(ShellProcessHandle),
-                nullptr,
-                nullptr))
-            {
-                return;
-            }
-
-            STARTUPINFOEXW StartupInfoEx = {};
-            PROCESS_INFORMATION ProcessInformation = {};
-            StartupInfoEx.StartupInfo.cb = sizeof(STARTUPINFOEXW);
-            StartupInfoEx.lpAttributeList = AttributeList;
-
-            std::wstring ApplicationName = ::GetCurrentProcessModulePath();
-
-            if (!::CreateProcessW(
-                ApplicationName.c_str(),
-                const_cast<LPWSTR>(L"NanaZip --AcquireSponsorEdition"),
-                nullptr,
-                nullptr,
-                TRUE,
-                CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT,
-                nullptr,
-                nullptr,
-                &StartupInfoEx.StartupInfo,
-                &ProcessInformation))
-            {
-                return;
-            }
-
-            ::AllowSetForegroundWindow(
-                ::GetProcessId(ProcessInformation.hProcess));
-
-            ::CloseHandle(ProcessInformation.hThread);
-            ::WaitForSingleObjectEx(ProcessInformation.hProcess, INFINITE, FALSE);
-            ::CloseHandle(ProcessInformation.hProcess);
+            ::UnpackagedLaunchSponsorDialog();
 
             ::RegDeleteKeyValueW(
                 HKEY_CURRENT_USER,
