@@ -257,8 +257,8 @@ because we known that it's very difficult for users who do not have access to
 the store to get our dependency packages, and we want to be robust and
 deployable everywhere.
 
-If you want to install NanaZip for all users, you can execute the following
-command in the PowerShell which is run as administrator.
+If you want to install NanaZip for all users or without an internet connection,
+run the following command in PowerShell as an administrator.
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxProvisionedPackage -Online -PackagePath `The path of the MSIX package` -LicensePath `The path of the XML license file`
 
@@ -269,11 +269,6 @@ as administrator instead.
 
 For more information, please read documents for [PowerShell](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps) and
 [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-app-package--appx-or-appxbundle--servicing-command-line-options?view=windows-11)
-
-Note: Due to the policy from Microsoft Store, you need to run NanaZip with the
-internet connection at the first time for getting the license if you install
-NanaZip without the internet connection, otherwise Windows won't launch NanaZip
-properly.
 
 If you want to uninstall NanaZip you installed for all users, you can execute
 the following command in the PowerShell which is run as administrator.
