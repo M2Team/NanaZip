@@ -221,9 +221,10 @@ platform. Here are the policy for non-Windows platform support:
   support. But testing under the ReactOS and its derivatives may be interesting.
 
 > [!NOTE]
-> If you have put the ucrtbase.dll with 10.0.19041.0 version or later need
-> to be existed in the binary folder, the theoretically minimum system
-> requirements of NanaZip Classic is Windows 10 (Build 10240) or later.
+> In theory, NanaZip Classic can run on Windows 10 (Build 10240) or later if
+> `ucrtbase.dll` in the `System32` folder has been replaced with version
+> 10.0.19041.0 or later. However, this is a high-risk operation and is not
+> recommended.
 
 ## Download and Installation
 
