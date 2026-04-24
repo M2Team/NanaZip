@@ -243,42 +243,83 @@ Also, you can also click the Microsoft Store link you needed.
 
 ### MSIX Package
 
-You also can download the MSIX Package in
-[GitHub Releases](https://github.com/M2Team/NanaZip/releases).
+You can download the MSIX package and the corresponding XML license file from
+[GitHub Releases](https://github.com/M2Team/NanaZip/releases). After you have
+finished downloading the relevant files, you can use one of the methods
+described below to install NanaZip:
 
-After you have downloaded the MSIX Package, you can double click to install it,
-or you can execute the following command in the PowerShell which is run as
-administrator.
+> [!NOTE]
+> All required dependencies are bundled with NanaZip's MSIX package, as users
+> without access to the Microsoft Store may have difficulty obtaining them
+> separately. This is intended to make NanaZip more robust and easier to deploy
+> in a wide range of environments.
 
-> PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
+#### App Installer
 
-Note: All needed dependencies are included in the MSIX Package of NanaZip
-because we known that it's very difficult for users who do not have access to
-the store to get our dependency packages, and we want to be robust and
-deployable everywhere.
+According to [Install and update the App Installer - MSIX | Microsoft Learn], we
+will know that the App Installer ships as part of Windows SKUs which can access
+to the Microsoft Store, or you can follow the instructions in the document to
+install the App Installer if your Windows SKUs doesn't have access to the
+Microsoft Store.
 
-If you want to install NanaZip for all users, you can execute the following
-command in the PowerShell which is run as administrator.
+If your environment has the App Installer, you can double click the MSIX package
+to install NanaZip.
+
+> [!CAUTION]
+> If NanaZip is installed using this method without an Internet connection, you
+> must connect to the Internet and launch it once so that Windows can acquire
+> the required license. Otherwise, NanaZip may not launch properly.
+
+[Install and update the App Installer - MSIX | Microsoft Learn]: https://learn.microsoft.com/en-us/windows/msix/app-installer/install-update-app-installer
+
+#### Command Line (With license file)
+
+If your downloaded NanaZip release provides the XML license file, you can use
+the following command to install NanaZip for all users.
+
+If you open the PowerShell as Administrator, you can execute:
+
+> Add-AppxProvisionedPackage -Online -PackagePath `The path of the MSIX package` -LicensePath `The path of the XML license file`
+
+If you open the Command Prompt as Administrator, you can execute:
 
 > PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxProvisionedPackage -Online -PackagePath `The path of the MSIX package` -LicensePath `The path of the XML license file`
 
-You also can execute the following command in the Command Prompt which is run
-as administrator instead.
+Or you can execute:
 
 > DISM.exe /Online /Add-ProvisionedAppxPackage /PackagePath:`The path of the MSIX package` /LicensePath:`The path of the XML license file`
 
-For more information, please read documents for [PowerShell](https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage?view=windowsserver2022-ps) and
-[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-app-package--appx-or-appxbundle--servicing-command-line-options?view=windows-11)
+If you want to uninstall NanaZip if you installed it with this method, you can
+use the following command to uninstall NanaZip.
 
-Note: Due to the policy from Microsoft Store, you need to run NanaZip with the
-internet connection at the first time for getting the license if you install
-NanaZip without the internet connection, otherwise Windows won't launch NanaZip
-properly.
-
-If you want to uninstall NanaZip you installed for all users, you can execute
-the following command in the PowerShell which is run as administrator.
+If you open the PowerShell as Administrator, you can execute:
 
 > Get-AppxPackage -Name *40174MouriNaruto.NanaZip* -AllUsers | Remove-AppxPackage -AllUsers -Confirm
+
+#### Command Line (Without license file)
+
+If your downloaded NanaZip release doesn't provide the XML license file, or you
+don't want to install NanaZip for all users, you can use the following command
+to install NanaZip for the current user.
+
+If you open the PowerShell as Administrator, you can execute:
+
+> Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
+
+If you open the Command Prompt as Administrator, you can execute:
+
+> PowerShell -NoLogo -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass Add-AppxPackage -DeferRegistrationWhenPackagesAreInUse -ForceUpdateFromAnyVersion -Path `The path of the MSIX package`
+
+> [!CAUTION]
+> If NanaZip is installed using this method without an Internet connection, you
+> must connect to the Internet and launch it once so that Windows can acquire
+> the required license. Otherwise, NanaZip may not launch properly.
+
+#### Useful Links
+
+- https://learn.microsoft.com/en-us/powershell/module/appx/add-appxpackage
+- https://learn.microsoft.com/en-us/powershell/module/dism/add-appxprovisionedpackage
+- https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-app-package--appx-or-appxbundle--servicing-command-line-options
 
 ## Known issues
 
