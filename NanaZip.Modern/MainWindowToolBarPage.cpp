@@ -17,6 +17,7 @@ namespace winrt::Mile
     using namespace ::Mile;
 }
 
+#include <appmodel.h>
 #include <ShObjIdl_core.h>
 
 namespace
@@ -136,6 +137,114 @@ namespace
         ::CloseHandle(ProcessInformation.hThread);
         ::WaitForSingleObjectEx(ProcessInformation.hProcess, INFINITE, FALSE);
         ::CloseHandle(ProcessInformation.hProcess);
+    }
+
+    // Note: Temporary workaround for not breaking the K7User ABI, this will be
+    // removed in the next release.
+    static LONG GetCurrentApplicationUserModelIdWrapper(
+        _Inout_ PUINT32 applicationUserModelIdLength,
+        _Out_opt_ PWSTR applicationUserModelId)
+    {
+        using ProcType = decltype(::GetCurrentApplicationUserModelId)*;
+
+        static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+        {
+            HMODULE ModuleHandle = ::GetModuleHandleW(L"kernel32.dll");
+            if (ModuleHandle)
+            {
+                return ::GetProcAddress(
+                    ModuleHandle,
+                    "GetCurrentApplicationUserModelId");
+            }
+            return nullptr;
+        }());
+
+        if (ProcAddress)
+        {
+            return ProcAddress(
+                applicationUserModelIdLength,
+                applicationUserModelId);
+        }
+
+        return ERROR_NOINTERFACE;
+    }
+
+    // Note: Temporary workaround for not breaking the K7User ABI, this will be
+    // removed in the next release.
+    static std::wstring GetCurrentApplicationUserModelIdSimple()
+    {
+        static std::wstring CachedResult = ([]() -> std::wstring
+        {
+            std::wstring ApplicationUserModelId;
+            {
+                UINT32 ApplicationUserModelIdLength = 0;
+                LONG Result = ::GetCurrentApplicationUserModelIdWrapper(
+                    &ApplicationUserModelIdLength,
+                    nullptr);
+                if (ERROR_INSUFFICIENT_BUFFER == Result)
+                {
+                    ApplicationUserModelId.resize(ApplicationUserModelIdLength);
+                    Result = ::GetCurrentApplicationUserModelIdWrapper(
+                        &ApplicationUserModelIdLength,
+                        reinterpret_cast<PWSTR>(ApplicationUserModelId.data()));
+                    if (ERROR_SUCCESS == Result)
+                    {
+                        // Remove the trailing null character added by the API.
+                        if (!ApplicationUserModelId.empty() &&
+                            L'\0' == ApplicationUserModelId.back())
+                        {
+                            ApplicationUserModelId.pop_back();
+                        }
+                    }
+                }
+            }
+            return ApplicationUserModelId;
+        }());
+
+        return CachedResult;
+    }
+
+    void PackagedLaunchSponsorDialog()
+    {
+        IApplicationActivationManager* ActivationManager = nullptr;
+        // Use CLSCTX_LOCAL_SERVER for creating non-elevated process.
+        // Use CLSCTX_INPROC_SERVER for creating same-elevation-level process.
+        // Microsoft Store API needs non-elevated process to launch the
+        // in-purchase dialog, so we use CLSCTX_LOCAL_SERVER here.
+        if (SUCCEEDED(::CoCreateInstance(
+            CLSID_ApplicationActivationManager,
+            nullptr,
+            CLSCTX_LOCAL_SERVER,
+            IID_IApplicationActivationManager,
+            reinterpret_cast<LPVOID*>(&ActivationManager))))
+        {
+            std::wstring CurrentApplicationUserModelId =
+                ::GetCurrentApplicationUserModelIdSimple();
+
+            // Try to allow the foreground window to be set to the new process.
+            ::CoAllowSetForegroundWindow(ActivationManager, nullptr);
+
+            DWORD ProcessId = 0;
+            if (SUCCEEDED(ActivationManager->ActivateApplication(
+                CurrentApplicationUserModelId.c_str(),
+                L"--AcquireSponsorEdition",
+                AO_NONE,
+                &ProcessId)))
+            {
+                // Wait for the process to exit.
+                HANDLE ProcessHandle = ::OpenProcess(
+                    SYNCHRONIZE,
+                    FALSE,
+                    ProcessId);
+                if (ProcessHandle)
+                {
+                    ::WaitForSingleObjectEx(ProcessHandle, INFINITE, FALSE);
+                    ::CloseHandle(ProcessHandle);
+                }
+            }
+
+            ActivationManager->Release();
+        }
     }
 }
 
@@ -505,7 +614,14 @@ namespace winrt::NanaZip::Modern::implementation
 
         winrt::handle(Mile::CreateThread([=]()
         {
-            ::UnpackagedLaunchSponsorDialog();
+            if (Mile::WinRT::IsPackagedMode())
+            {
+                ::PackagedLaunchSponsorDialog();
+            }
+            else
+            {
+                ::UnpackagedLaunchSponsorDialog();
+            }
 
             ::RegDeleteKeyValueW(
                 HKEY_CURRENT_USER,
