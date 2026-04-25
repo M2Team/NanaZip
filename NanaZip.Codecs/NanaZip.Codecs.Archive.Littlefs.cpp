@@ -648,7 +648,7 @@ namespace NanaZip::Codecs::Archive
                     Information.Type = LfsTypeRegular;
                     Information.Size = BlockSize;
                     Information.Path = Mile::FormatString("[%d]", i);
-                    Information.Offset = i * BlockSize;
+                    Information.Offset = static_cast<std::uint64_t>(i) * BlockSize;
                     this->m_FilePaths.emplace_back(Information);
                 }
 
