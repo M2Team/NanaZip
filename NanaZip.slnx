@@ -1,5 +1,8 @@
 <Solution>
   <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+    <BuildType Name="ReleaseAsan" />
     <Platform Name="ARM64" />
     <Platform Name="x64" />
   </Configurations>
