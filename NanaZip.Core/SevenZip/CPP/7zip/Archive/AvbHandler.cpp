@@ -408,19 +408,31 @@ HRESULT CHandler::Open2(IInStream *stream)
         ht.Parse(buf + offset);
         unsigned pos = k_Hashtree_Size_Min;
 
-        if (pos + ht.partition_name_len > descSize)
+        // **************** NanaZip Modification Start ****************
+        //if (pos + ht.partition_name_len > descSize)
+        // Avoid overflow.
+        if (ht.partition_name_len > descSize - pos)
+        // **************** NanaZip Modification End ****************
           return S_FALSE;
         Name.Empty(); // UTF-8
         AddNameToString(Name, buf + offset + pos, ht.partition_name_len, false);
         pos += ht.partition_name_len;
-        
-        if (pos + ht.salt_len > descSize)
+
+        // **************** NanaZip Modification Start ****************
+        // if (pos + ht.salt_len > descSize)
+        // Avoid overflow.
+        if (ht.salt_len > descSize - pos)
+        // **************** NanaZip Modification End ****************
           return S_FALSE;
         CByteBuffer salt;
         salt.CopyFrom(buf + offset + pos, ht.salt_len);
         pos += ht.salt_len;
-        
-        if (pos + ht.root_digest_len > descSize)
+
+        // **************** NanaZip Modification Start ****************
+        //if (pos + ht.root_digest_len > descSize)
+        // Avoid overflow.
+        if (ht.root_digest_len > descSize - pos)
+        // **************** NanaZip Modification End ****************
           return S_FALSE;
         CByteBuffer digest;
         digest.CopyFrom(buf + offset + pos, ht.root_digest_len);
@@ -441,10 +453,20 @@ HRESULT CHandler::Open2(IInStream *stream)
         AddNameToString(key, buf + offset + pos, (unsigned)pt.key_num_bytes, false);
         pos += (unsigned)pt.key_num_bytes + 1;
 
+        // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
         if (descSize < pos)
           return S_FALSE;
         if (pt.value_num_bytes > descSize - pos - 1)
           return S_FALSE;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+        // Avoid overflow.
+        if (descSize < pos + 1)
+          return S_FALSE;
+        if (pt.value_num_bytes > static_cast<UInt64>(descSize - pos - 1))
+          return S_FALSE;
+        // **************** NanaZip Modification End ****************
+
         AString value; // UTF-8
         AddNameToString(value, buf + offset + pos, (unsigned)pt.value_num_bytes, false);
         pos += (unsigned)pt.value_num_bytes + 1;
