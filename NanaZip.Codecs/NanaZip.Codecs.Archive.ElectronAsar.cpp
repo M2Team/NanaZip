@@ -35,6 +35,12 @@ namespace
     const std::size_t g_PropertyItemsCount =
         sizeof(g_PropertyItems) / sizeof(*g_PropertyItems);
 
+    // Protect against excessively-deep directory structures.
+    // The max depth is lower than that of other codecs since nlohmann::json's
+    // parse algorithm cannot handle deep recursion.
+    // The resulting effective depth is about 50.
+    const std::size_t g_MaximumVisitDepth = 100;
+
     struct BundleFileEntry
     {
         std::uint64_t Offset = 0;
@@ -96,6 +102,22 @@ namespace NanaZip::Codecs::Archive
             return S_FALSE;
         }
 
+        static bool JsonParserCallback(
+            _In_ int Depth,
+            _In_ nlohmann::json::parse_event_t Event,
+            _Inout_ nlohmann::json& Parsed)
+        {
+            UNREFERENCED_PARAMETER(Event);
+            UNREFERENCED_PARAMETER(Parsed);
+
+            if (Depth > g_MaximumVisitDepth)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     private:
 
         void GetAllPaths(
@@ -123,7 +145,8 @@ namespace NanaZip::Codecs::Archive
                     "-1"));
                 Entry.Size = Mile::Json::ToUInt64(
                     Mile::Json::GetSubKey(RootJson, "size"));
-                if (static_cast<std::uint64_t>(-1) != Entry.Offset)
+                if (static_cast<std::uint64_t>(-1) != Entry.Offset &&
+                    static_cast<std::uint64_t>(-1) != Entry.Size)
                 {
                     this->m_TemporaryFilePaths.emplace(
                         Entry.RelativePath,
@@ -226,7 +249,7 @@ namespace NanaZip::Codecs::Archive
                 try
                 {
                     nlohmann::json HeaderObject =
-                        nlohmann::json::parse(HeaderString);
+                        nlohmann::json::parse(HeaderString, JsonParserCallback);
                     this->GetAllPaths(HeaderObject, "");
                 }
                 catch (...)
