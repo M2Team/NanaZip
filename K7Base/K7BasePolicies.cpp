@@ -216,13 +216,13 @@ EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedHandlerPolicy(
     _In_ MO_CONSTANT_STRING Name)
 {
     std::string HandlerName = std::string(Name);
+    if (!g_BlockedHandlers.empty() && g_BlockedHandlers.contains(HandlerName))
+    {
+        return MO_FALSE;
+    }
     if (!g_AllowedHandlers.empty())
     {
         return g_AllowedHandlers.contains(HandlerName) ? MO_TRUE : MO_FALSE;
-    }
-    if (!g_BlockedHandlers.empty())
-    {
-        return g_BlockedHandlers.contains(HandlerName) ? MO_FALSE : MO_TRUE;
     }
     return MO_TRUE;
 }
@@ -231,13 +231,13 @@ EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedCodecPolicy(
     _In_ MO_CONSTANT_STRING Name)
 {
     std::string CodecName = std::string(Name);
+    if (!g_BlockedCodecs.empty() && g_BlockedCodecs.contains(CodecName))
+    {
+        return MO_FALSE;
+    }
     if (!g_AllowedCodecs.empty())
     {
         return g_AllowedCodecs.contains(CodecName) ? MO_TRUE : MO_FALSE;
-    }
-    if (!g_BlockedCodecs.empty())
-    {
-        return g_BlockedCodecs.contains(CodecName) ? MO_FALSE : MO_TRUE;
     }
     return MO_TRUE;
 }
