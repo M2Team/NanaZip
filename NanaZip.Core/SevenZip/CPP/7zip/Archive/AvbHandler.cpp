@@ -450,7 +450,10 @@ HRESULT CHandler::Open2(IInStream *stream)
         AddNameToString(key, buf + offset + pos, (unsigned)pt.key_num_bytes, false);
         pos += (unsigned)pt.key_num_bytes + 1;
 
-        if (descSize < pos)
+        // **************** NanaZip Modification Start ****************
+        //if (descSize < pos)
+        if (descSize <= pos)
+        // **************** NanaZip Modification End ****************
           return S_FALSE;
         if (pt.value_num_bytes > descSize - pos - 1)
           return S_FALSE;
