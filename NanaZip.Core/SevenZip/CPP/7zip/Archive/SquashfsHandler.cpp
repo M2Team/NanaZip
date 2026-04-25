@@ -1143,10 +1143,18 @@ static HRESULT Lz4Decode(Byte *dest, SizeT *destLen, const Byte *src, SizeT *src
   int dstCapacity = (int)*destLen;
   // int LZ4_decompress_safe (const char* src, char* dst, int compressedSize, int dstCapacity);
   int rv = LZ4_decompress_safe(Src, Dst, compressedSize, dstCapacity);
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (rv == 0)
     return S_FALSE;
 
   *destLen = rv;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  if (rv <= 0)
+      return S_FALSE;
+  *destLen = static_cast<SizeT>(rv);
+  *srcLen = static_cast<SizeT>(compressedSize);
+  // **************** NanaZip Modification End ****************
   return S_OK;
 }
 // **************** 7-Zip ZS Modification End ****************
