@@ -6,6 +6,7 @@
 
 #include "../Common/IntToString.h"
 #include "../Common/StringConvert.h"
+#include "../Common/StringToInt.h"
 
 #ifdef _WIN32
 
@@ -104,6 +105,7 @@ using namespace NWindows;
 
 static bool ReadFile_to_Buffer(CFSTR fileName, CByteBuffer &buf)
 {
+  buf.Free();
   NWindows::NFile::NIO::CInFile file;
   if (!file.Open(fileName))
     return false;
@@ -134,6 +136,15 @@ static bool ReadFile_to_Buffer(CFSTR fileName, CByteBuffer &buf)
     size += processed;
     addSize *= 2;
   }
+}
+
+static bool ReadFile_to_String(CFSTR fileName, AString &s)
+{
+  CByteBuffer buf;
+  if (!ReadFile_to_Buffer(fileName, buf))
+    return false;
+  s.SetFrom_CalcLen((const char *)(const void *)(const Byte *)buf, (unsigned)buf.Size());
+  return true;
 }
 
 #endif
@@ -358,11 +369,8 @@ static const char * const k_PF[] =
 static void PrintPage(AString &s, UInt64 v)
 {
   const char *t = "B";
-  if ((v & 0x3ff) == 0)
-  {
-    v >>= 10;
-    t = "KB";
-  }
+       if ((v & ((1 << 20) - 1)) == 0) { v >>= 20;  t = "MB"; }
+  else if ((v & ((1 << 10) - 1)) == 0) { v >>= 10;  t = "KB"; }
   s.Add_UInt64(v);
   s += t;
 }
@@ -737,6 +745,23 @@ CP 403A: ID_AA64MMFR2_EL1
   #endif
 }
 
+
+#if 0 && defined(Z7_LARGE_PAGES) && defined(__linux__)
+bool Get_HugePageSize(UInt64 &pageSize);
+bool Get_HugePageSize(UInt64 &pageSize)
+{
+  AString s2;
+  if (ReadFile_to_String("/sys/kernel/mm/transparent_hugepage/hpage_pmd_size", s2))
+  {
+    pageSize = ConvertStringToUInt64(s2.Ptr(), NULL);
+    if (pageSize)
+      return true;
+  }
+  return false;
+}
+#endif
+
+
 void AddCpuFeatures(AString &s);
 void AddCpuFeatures(AString &s)
 {
@@ -780,24 +805,56 @@ void AddCpuFeatures(AString &s)
 
   #ifdef __linux__
 
-  CByteBuffer buf;
-  if (ReadFile_to_Buffer("/sys/kernel/mm/transparent_hugepage/enabled", buf))
-  // if (ReadFile_to_Buffer("/proc/cpuinfo", buf))
   {
-    s.Add_OptSpaced("THP:");
     AString s2;
-    s2.SetFrom_CalcLen((const char *)(const void *)(const Byte *)buf, (unsigned)buf.Size());
-    const int pos = s2.Find('[');
-    if (pos >= 0)
+    if (ReadFile_to_String("/proc/meminfo", s2))
     {
-      const int pos2 = s2.Find(']', (unsigned)pos + 1);
-      if (pos2 >= 0)
+      const int pos = s2.Find("Hugepagesize:");
+      if (pos >= 0)
       {
-        s2.DeleteFrom((unsigned)pos2);
-        s2.DeleteFrontal((unsigned)pos + 1);
+        s.Add_OptSpaced("HPS:");
+        s2.DeleteFrontal((unsigned)pos + 13); // 13 == strlen("Hugepagesize:")
+        s2.TrimLeft();
+        // const int pos2 = s2.Find("kB");
+        const UInt64 size = ConvertStringToUInt64(s2.Ptr(), NULL);
+        if (size)
+          PrintPage(s, size << 10);
       }
     }
-    s += s2;
+    
+    if (ReadFile_to_String("/sys/kernel/mm/transparent_hugepage/hpage_pmd_size", s2))
+    {
+      s.Add_OptSpaced("THPS:");
+      const UInt64 size = ConvertStringToUInt64(s2.Ptr(), NULL);
+      if (size)
+        PrintPage(s, size);
+    }
+    /*
+    {
+      UInt64 pagesSize;
+      if (Get_HugePageSize(pagesSize) && pagesSize)
+      {
+        s.Add_OptSpaced("THPS:");
+        PrintPage(s, pagesSize);
+      }
+    }
+    */
+    
+    if (ReadFile_to_String("/sys/kernel/mm/transparent_hugepage/enabled", s2))
+    {
+      s.Add_OptSpaced("THP:");
+      const int pos = s2.Find('[');
+      if (pos >= 0)
+      {
+        const int pos2 = s2.Find(']', (unsigned)pos + 1);
+        if (pos2 >= 0)
+        {
+          s2.DeleteFrom((unsigned)pos2);
+          s2.DeleteFrontal((unsigned)pos + 1);
+        }
+      }
+      s += s2;
+    }
   }
   // else throw CSystemException(MY_SRes_HRESULT_FROM_WRes(errno));
 

@@ -61,23 +61,38 @@ static HRESULT DecompressArchive(
   // **************** NanaZip Modification Start ****************
   //FString outDir = options.OutputDir;
   ecs->OutDir = options.OutputDir;
-  // **************** NanaZip Modification End ****************
   UString replaceName = arc.DefaultName;
-  
-  if (arcLink.Arcs.Size() > 1)
-  {
-    // Most "pe" archives have same name of archive subfile "[0]" or ".rsrc_1".
-    // So it extracts different archives to one folder.
-    // We will use top level archive name
-    const CArc &arc0 = arcLink.Arcs[0];
-    if (arc0.FormatIndex >= 0 && StringsAreEqualNoCase_Ascii(codecs->Formats[(unsigned)arc0.FormatIndex].Name, "pe"))
-      replaceName = arc0.DefaultName;
-  }
-
-  // **************** NanaZip Modification Start ****************
-  //outDir.Replace(FString("*"), us2fs(Get_Correct_FsFile_Name(replaceName)));
-  ecs->OutDir.Replace(FString("*"), us2fs(Get_Correct_FsFile_Name(replaceName)));
   // **************** NanaZip Modification End ****************
+  if (options.OutDirMode != NExtractOutDirMode::k_Direct)
+  {
+    // **************** NanaZip Modification Start ****************
+    //UString replaceName = arc.DefaultName;
+    // **************** NanaZip Modification End ****************
+    if (arcLink.Arcs.Size() > 1)
+    {
+      // Most "pe" archives have same name of archive subfile "[0]" or ".rsrc_1".
+      // So it extracts different archives to one folder.
+      // We will use top level archive name
+      const CArc &arc0 = arcLink.Arcs[0];
+      if (arc0.FormatIndex >= 0 && StringsAreEqualNoCase_Ascii(codecs->Formats[(unsigned)arc0.FormatIndex].Name, "pe"))
+        replaceName = arc0.DefaultName;
+    }
+    const FString correctedName = us2fs(Get_Correct_FsFile_Name(replaceName));
+    if (options.OutDirMode == NExtractOutDirMode::k_AddArcName)
+    {
+      // **************** NanaZip Modification Start ****************
+      //outDir += correctedName;
+      //NFile::NName::NormalizeDirPathPrefix(outDir);
+      ecs->OutDir += correctedName;
+      NFile::NName::NormalizeDirPathPrefix(ecs->OutDir);
+      // **************** NanaZip Modification End ****************
+    }
+    else // eo.OutDirMode == NExtractOutDirMode::k_ReplaceAsterisk;
+      // **************** NanaZip Modification Start ****************
+      //outDir.Replace(FString("*"), correctedName);
+      ecs->OutDir.Replace(FString("*"), correctedName);
+      // **************** NanaZip Modification End ****************
+  }
 
   bool elimIsPossible = false;
   UString elimPrefix; // only pure name without dir delimiter
@@ -235,7 +250,7 @@ static HRESULT DecompressArchive(
     SetErrorMessage("Cannot create output directory", outDir, res, errorMessage);
     return res;
   }
-  
+
   ecs->Init(
       options.NtOptions,
       options.StdInMode ? &wildcardCensor : NULL,

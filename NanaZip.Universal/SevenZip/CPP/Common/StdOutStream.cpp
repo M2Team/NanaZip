@@ -93,6 +93,26 @@ void CStdOutStream::Normalize_UString_LF_Allowed(UString &s)
 }
 */
 
+static inline bool IsDangerousTerminalChar(wchar_t c)
+{
+  // return ((c <= 13 && c >= 7) || c == 0x1b);
+#if 0 && defined(WCHAR_MIN) && WCHAR_MIN < 0
+  // wchar_t is signed type in posix usually.
+  // but negative numbers are not expected in wchar_t strings.
+  // if we want to show negative characters, use the following check:
+  if (c < 0) return false; // it's not expected case
+#endif
+  if (c < 0x20) return true;
+  if (c < 0x7F) return false;
+  if (c < 0x9F + 1) return true;
+  // Unicode Bidirectional (BiDi) control characters:
+  if (c < 0x202A) return false;
+  if (c < 0x202E + 1) return true;
+  if (c < 0x2066) return false;
+  if (c < 0x2069 + 1) return true;
+  return false;
+}
+
 void CStdOutStream::Normalize_UString(UString &s)
 {
   const unsigned len = s.Len();
@@ -101,15 +121,18 @@ void CStdOutStream::Normalize_UString(UString &s)
   if (IsTerminalMode)
     for (unsigned i = 0; i < len; i++)
     {
-      const wchar_t c = d[i];
-      if ((c <= 13 && c >= 7) || c == 0x1b)
+      if (IsDangerousTerminalChar(d[i]))
         d[i] = kReplaceChar;
     }
   else
     for (unsigned i = 0; i < len; i++)
     {
       const wchar_t c = d[i];
-      if (c == '\n')
+      if (c == '\n'
+#ifdef _WIN32
+        || c == '\r'
+#endif
+        )
         d[i] = kReplaceChar;
     }
 }

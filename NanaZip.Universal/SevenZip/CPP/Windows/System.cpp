@@ -413,7 +413,7 @@ unsigned Get_File_OPEN_MAX_Reduced_for_3_tasks()
   else
     numFiles_OPEN_MAX = 1;
   numFiles_OPEN_MAX /= 3; // we suppose that we have up to 3 tasks in total for multiple file processing
-  numFiles_OPEN_MAX = MyMax(numFiles_OPEN_MAX, (unsigned long)3);
+  numFiles_OPEN_MAX = MyMax(numFiles_OPEN_MAX, (unsigned long)1);
   unsigned n = (unsigned)(int)-1;
   if (n > numFiles_OPEN_MAX)
     n = (unsigned)numFiles_OPEN_MAX;

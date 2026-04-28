@@ -819,6 +819,7 @@ static void PrintHexId(CStdOutStream &so, UInt64 id)
 }
 
 #ifndef _WIN32
+#include <sys/resource.h>
 void Set_ModuleDirPrefix_From_ProgArg0(const char *s);
 #endif
 
@@ -840,6 +841,27 @@ int Main2(
   #if defined(_WIN32) && !defined(UNDER_CE)
   SetFileApisToOEM();
   #endif
+
+#if 1 && !defined(_WIN32)
+  {
+    // We increase RLIMIT_NOFILE because a high limit makes it easier for 7-Zip to work with multi-volume archives.
+    struct rlimit a;
+    const int kType = RLIMIT_NOFILE;
+    if (!getrlimit(kType, &a))
+    {
+      // printf("\nrlim_cur=%8lld rlim_max=%8lld \n", (long long)a.rlim_cur, (long long)a.rlim_max);
+      unsigned newVal = 1 << 12; // rlim_t : it's new soft limit
+      if (newVal > a.rlim_cur && a.rlim_cur < a.rlim_max)
+      {
+        if (newVal > a.rlim_max)
+          newVal = (unsigned)a.rlim_max;
+        a.rlim_cur = newVal;
+        setrlimit(kType, &a);
+        // if (!getrlimit(kType, &a)) printf("\nrlim_cur=%8lld rlim_max=%8lld \n", (long long)a.rlim_cur, (long long)a.rlim_max);
+      }
+    }
+  }
+#endif
 
   #ifdef ENV_HAVE_LOCALE
   // printf("\nBefore SetLocale() : %s\n", IsNativeUtf8() ? "NATIVE UTF-8" : "IS NOT NATIVE UTF-8");
@@ -914,7 +936,7 @@ int Main2(
     if (Result != S_OK)
     {
         return 0;
-    }
+  }
 
     CObjectVector<CCodecInfoUser> CodecInfo;
     Codecs->Get_CodecsInfoUser_Vector(CodecInfo);
