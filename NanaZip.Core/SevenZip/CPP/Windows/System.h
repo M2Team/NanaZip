@@ -156,7 +156,8 @@ struct CProcessAffinity
   UInt32 GetNumProcessThreads() const { return (UInt32)CPU_COUNT(&cpu_set); }
   void CpuZero()              { CpuSet_Zero(&cpu_set); }
   void CpuSet(unsigned cpuIndex)   { CpuSet_Set(&cpu_set, cpuIndex); }
-  int IsCpuSet(unsigned cpuIndex) const { return CpuSet_IsSet(&cpu_set, cpuIndex); }
+  // CpuSet_IsSet (CPU_ISSET) can return (unsigned long) in some <sched.h> implementations
+  int IsCpuSet(unsigned cpuIndex) const { return CpuSet_IsSet(&cpu_set, cpuIndex) != 0; }
   // void CpuClr(int cpuIndex) { CPU_CLR(cpuIndex, &cpu_set); }
 
   BOOL SetProcAffinity() const

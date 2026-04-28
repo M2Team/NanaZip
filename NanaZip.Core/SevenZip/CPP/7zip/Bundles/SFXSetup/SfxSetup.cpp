@@ -48,21 +48,23 @@ static CFSTR const kTempDirPrefix = FTEXT("7zS");
 
 #define MY_SHELL_EXECUTE
 
-static bool ReadDataString(CFSTR fileName, LPCSTR startID,
-    LPCSTR endID, AString &stringResult)
+static const char kStartID[] = { ',','!','@','I','n','s','t','a','l','l','@','!','U','T','F','-','8','!' };
+static const char kEndID[]   = { ',','!','@','I','n','s','t','a','l','l','E','n','d','@','!' };
+
+static bool ReadDataString(CFSTR fileName, AString &stringResult)
 {
-  stringResult.Empty();
+  // stringResult.Empty(); // (stringResult) is empty already
   NIO::CInFile inFile;
   if (!inFile.Open(fileName))
     return false;
   const size_t kBufferSize = 1 << 12;
 
   Byte buffer[kBufferSize];
-  const size_t signatureStartSize = MyStringLen(startID + 1);
-  const size_t signatureEndSize = MyStringLen(endID + 1);
+  const size_t startSize1 = sizeof(kStartID) - 1;
+  const size_t endSize1 = sizeof(kEndID) - 1;
   
   size_t numBytesPrev = 0;
-  bool writeMode = false;
+  bool scanMode = true;
   UInt32 posTotal = 0;
   for (;;)
   {
@@ -71,50 +73,42 @@ static bool ReadDataString(CFSTR fileName, LPCSTR startID,
     if (!inFile.ReadFull(buffer + numBytesPrev, numReadBytes, processedSize))
       return false;
     if (processedSize == 0)
-      return true;
+      break;
     numBytesPrev += processedSize;
     size_t pos = 0;
     for (;;)
     {
-      if (writeMode)
+      if (!scanMode)
       {
-        // **************** 7-Zip ZS Modification Start ****************
-        //if (pos + signatureEndSize > numBytesPrev)
-        if (pos + signatureEndSize >= numBytesPrev)
-        // **************** 7-Zip ZS Modification End ****************
+        if (pos + endSize1 >= numBytesPrev)
           break;
         const Byte b = buffer[pos++];
         if (b == 0)
           return false;
-        if (b == ';' && memcmp(buffer + pos, endID + 1, signatureEndSize) == 0)
+        if (b == ';' && memcmp(buffer + pos, kEndID + 1, endSize1) == 0)
           return true;
         stringResult += (char)b;
       }
       else
       {
-        // **************** 7-Zip ZS Modification Start ****************
-        //if (pos + signatureStartSize > numBytesPrev)
-        if (pos + signatureStartSize >= numBytesPrev)
-        // **************** 7-Zip ZS Modification End ****************
+        if (pos + startSize1 >= numBytesPrev)
           break;
         const Byte b = buffer[pos++];
-        if (b == ';' && memcmp(buffer + pos, startID + 1, signatureStartSize) == 0)
+        if (b == ';' && memcmp(buffer + pos, kStartID + 1, startSize1) == 0)
         {
-          writeMode = true;
-          pos += signatureStartSize;
+          scanMode = false;
+          pos += startSize1;
         }
       }
     }
     posTotal += (UInt32)pos;
     if (posTotal > (1 << 21))
-      return stringResult.IsEmpty();
+      break;
     numBytesPrev -= pos;
     memmove(buffer, buffer + pos, numBytesPrev);
   }
+  return scanMode;
 }
-
-static const char * const kStartID = ",!@Install@!UTF-8!";
-static const char * const kEndID   = ",!@InstallEnd@!";
 
 #if defined(_WIN32) && defined(_UNICODE) && !defined(_WIN64) && !defined(UNDER_CE)
 #define NT_CHECK_FAIL_ACTION ShowErrorMessage(L"Unsupported Windows version"); return 1;
@@ -194,7 +188,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
   }
 
   AString config;
-  if (!ReadDataString(fullPath, kStartID, kEndID, config))
+  if (!ReadDataString(fullPath, config))
   {
     if (!assumeYes)
       ShowErrorMessage(L"Can't load config info");

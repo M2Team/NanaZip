@@ -473,9 +473,11 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
       if (size - pos < tableSize || (tableSize & 7) != 0)
         continue;
       size_t namesStart = pos + tableSize;
+      if (size - namesStart < 4)
+        continue;
       const UInt32 namesSize = Get32(p.ConstData() + namesStart, be);
       namesStart += 4;
-      if (namesStart > size || namesStart + namesSize != size)
+      if (namesStart + namesSize != size)
         continue;
       
       const UInt32 numSymbols = tableSize >> 3;
@@ -509,7 +511,7 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
     
     for (UInt32 i = 0; i < numSymbols; i++)
     {
-      const UInt32 offset = GetBe32(p + 4 + i * 4);
+      const UInt32 offset = GetBe32(p + 4 + (size_t)i * 4);
       RINOK(AddFunc(offset, p, size, pos))
     }
     _type = kType_ALib;
@@ -534,11 +536,11 @@ HRESULT CHandler::ParseLibSymbols(IInStream *stream, unsigned fileIndex)
     
     for (UInt32 i = 0; i < numSymbols; i++)
     {
-      // index is 1-based. So 32-bit numSymbols field works as item[0]
-      const UInt32 index = GetUi16(p + indexStart + i * 2);
+      // index is 1-based. So 32-bit numMembers field works as item[0]
+      const UInt32 index = GetUi16(p + indexStart + (size_t)i * 2);
       if (index == 0 || index > numMembers)
         return S_FALSE;
-      const UInt32 offset = GetUi32(p + index * 4);
+      const UInt32 offset = GetUi32(p + (size_t)index * 4);
       RINOK(AddFunc(offset, p, size, pos))
     }
     _type = kType_Lib;

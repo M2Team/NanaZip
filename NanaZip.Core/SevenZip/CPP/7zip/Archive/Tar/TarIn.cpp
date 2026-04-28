@@ -116,9 +116,11 @@ static bool ParseInt64(const char *p, Int64 &val, bool &isBin)
 static bool ParseInt64_MTime(const char *p, Int64 &val, bool &isBin)
 {
   // rare case tar : ZEROs in Docker-Windows TARs
+  // rare case tar : pax record : single ZERO byte followed by junk data
   // rare case tar : spaces
   isBin = false;
-  if (GetUi32(p) != 0)
+  // if (GetUi32(p))
+  if (p[0])
   for (unsigned i = 0; i < 12; i++)
     if (p[i] != ' ')
       return ParseInt64(p, val, isBin);
@@ -1084,6 +1086,8 @@ HRESULT CArchive::ReadItem2(CItemEx &item)
 
 HRESULT CArchive::ReadItem(CItemEx &item)
 {
+  error = k_ErrorType_OK;
+  filled = false;
   item.HeaderPos = _phySize;
   
   const HRESULT res = ReadItem2(item);

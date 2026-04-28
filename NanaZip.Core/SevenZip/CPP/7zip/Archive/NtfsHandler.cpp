@@ -130,7 +130,7 @@ bool CHeader::Parse(const Byte *p)
       else
         sectorsPerClusterLog = 0x100 - v;
       ClusterSizeLog = SectorSizeLog + sectorsPerClusterLog;
-      if (ClusterSizeLog > 30)
+      if (ClusterSizeLog > 21)
         return false;
     }
   }

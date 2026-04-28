@@ -342,6 +342,8 @@ struct CItem
   int ImageIndex; // -1 means that file is unreferenced in Images (deleted item?)
   bool IsDir;
   bool IsAltStream;
+  unsigned DirLevel;
+  size_t SubDirOffset;
 
   bool HasMetadata() const { return ImageIndex >= 0; }
 
@@ -350,7 +352,9 @@ struct CItem
     StreamIndex(-1),
     Parent(-1),
     IsDir(false),
-    IsAltStream(false)
+    IsAltStream(false),
+    DirLevel(0),
+    SubDirOffset(0)
     {}
 };
 
@@ -435,7 +439,7 @@ class CDatabase
   size_t DirStartOffset;
   IArchiveOpenCallback *OpenCallback;
 
-  HRESULT ParseDirItem(size_t pos, int parent);
+  HRESULT ParseDirItem(size_t pos, int parent, unsigned dirLevel);
   HRESULT ParseImageDirs(CByteBuffer &buf, int parent);
 
 public:

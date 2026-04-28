@@ -1,5 +1,5 @@
 ﻿/* Ppmd8.c -- PPMdI codec
-2023-09-07 : Igor Pavlov : Public domain
+: Igor Pavlov : Public domain
 This code is based on PPMd var.I (2002): Dmitry Shkarin : Public domain */
 
 #include "Precomp.h"
@@ -646,7 +646,7 @@ static CPpmd_Void_Ref CutOff(CPpmd8 *p, PPMD8_CTX_PTR ctx, unsigned order)
         Ppmd8_InsertNode(p, stats, indx);
       else
         p->UnitsStart += U2B(I2U(indx));
-      stats = ptr;
+      stats = (CPpmd_State *)ptr;
     }
   }
 
