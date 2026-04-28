@@ -30,17 +30,19 @@ API_FUNC_IsArc IsArc_Ext_PhySize(const Byte *p, size_t size, UInt64 *phySize);
 
 namespace NAvb {
 
-static void AddNameToString(AString &s, const Byte *name, unsigned size, bool strictConvert)
+static bool AddNameToString(AString &s, const Byte *name, unsigned size)
 {
+  bool strictConvert = false;
   for (unsigned i = 0; i < size; i++)
   {
     Byte c = name[i];
     if (c == 0)
-      return;
+      return false;
     if (strictConvert && c < 32)
       c = '_';
     s += (char)c;
   }
+  return true;
 }
 
 /* Maximum size of a vbmeta image - 64 KiB. */
@@ -304,8 +306,6 @@ struct AvbHashtreeDescriptor
   }
 };
 
-static const unsigned k_PropertyDescriptor_Size_Min = 16;
-
 struct AvbPropertyDescriptor
 {
   UInt64 key_num_bytes;
@@ -376,20 +376,28 @@ HRESULT CHandler::Open2(IInStream *stream)
     unsigned offset = (unsigned)AVB_VBMETA_IMAGE_HEADER_SIZE;
     unsigned rem = (unsigned)(Footer.vbmeta_size - offset);
     
-    if (meta.authentication_data_block_size != 0)
+    const unsigned k_BlockAlignMask = 64 - 1;
+
+    if (meta.authentication_data_block_size)
     {
       if (rem < meta.authentication_data_block_size)
         return S_FALSE;
       const unsigned u = (unsigned)meta.authentication_data_block_size;
+      if (u & k_BlockAlignMask)
+        return S_FALSE;
       offset += u;
       rem -= u;
     }
 
-    if (rem < meta.descriptors_offset ||
-        rem - meta.descriptors_offset < meta.descriptors_size)
+    if ((rem & k_BlockAlignMask)
+        || meta.auxiliary_data_block_size < meta.descriptors_size
+        || rem != meta.auxiliary_data_block_size
+        || rem < meta.descriptors_offset
+        || rem - meta.descriptors_offset < meta.descriptors_size)
       return S_FALSE;
     rem = (unsigned)meta.descriptors_size;
-    while (rem != 0)
+    offset += (unsigned)meta.descriptors_offset;
+    while (rem)
     {
       if (rem < k_Descriptor_Size)
         return S_FALSE;
@@ -408,75 +416,65 @@ HRESULT CHandler::Open2(IInStream *stream)
         ht.Parse(buf + offset);
         unsigned pos = k_Hashtree_Size_Min;
 
-        // **************** NanaZip Modification Start ****************
-        //if (pos + ht.partition_name_len > descSize)
-        // Avoid overflow.
         if (ht.partition_name_len > descSize - pos)
-        // **************** NanaZip Modification End ****************
           return S_FALSE;
-        Name.Empty(); // UTF-8
-        AddNameToString(Name, buf + offset + pos, ht.partition_name_len, false);
+        Name.Empty();
+        if (!AddNameToString(Name, buf + offset + pos, ht.partition_name_len))
+          return S_FALSE;
         pos += ht.partition_name_len;
-
-        // **************** NanaZip Modification Start ****************
-        // if (pos + ht.salt_len > descSize)
-        // Avoid overflow.
+        
+        /*
         if (ht.salt_len > descSize - pos)
-        // **************** NanaZip Modification End ****************
           return S_FALSE;
         CByteBuffer salt;
         salt.CopyFrom(buf + offset + pos, ht.salt_len);
         pos += ht.salt_len;
-
-        // **************** NanaZip Modification Start ****************
-        //if (pos + ht.root_digest_len > descSize)
-        // Avoid overflow.
+        
         if (ht.root_digest_len > descSize - pos)
-        // **************** NanaZip Modification End ****************
           return S_FALSE;
         CByteBuffer digest;
         digest.CopyFrom(buf + offset + pos, ht.root_digest_len);
         pos += ht.root_digest_len;
         // what is that digest?
+        */
       }
+      /*
       else if (desc.Tag == AVB_DESCRIPTOR_TAG_PROPERTY)
       {
+        static const unsigned k_PropertyDescriptor_Size_Min = 16;
         if (descSize < k_PropertyDescriptor_Size_Min + 2)
           return S_FALSE;
         AvbPropertyDescriptor pt;
         pt.Parse(buf + offset);
         unsigned pos = k_PropertyDescriptor_Size_Min;
         
-        if (pt.key_num_bytes > descSize - pos - 1)
+        // Two strings contain Null character at the end,
+        // but key_num_bytes and value_num_bytes do not count Null character.
+        // so we use ( >= ) in conditions:
+        if (pt.key_num_bytes >= descSize - pos)
           return S_FALSE;
-        AString key; // UTF-8
-        AddNameToString(key, buf + offset + pos, (unsigned)pt.key_num_bytes, false);
+        AString key;
+        if (!AddNameToString(key, buf + offset + pos, (unsigned)pt.key_num_bytes))
+          return false;
         pos += (unsigned)pt.key_num_bytes + 1;
+        if (buf[offset + pos - 1])
+          return S_FALSE;
 
-        // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
-        if (descSize < pos)
+        if (pt.value_num_bytes >= descSize - pos)
           return S_FALSE;
-        if (pt.value_num_bytes > descSize - pos - 1)
-          return S_FALSE;
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-        // Avoid overflow.
-        if (descSize < pos + 1)
-          return S_FALSE;
-        if (pt.value_num_bytes > static_cast<UInt64>(descSize - pos - 1))
-          return S_FALSE;
-        // **************** NanaZip Modification End ****************
-
-        AString value; // UTF-8
-        AddNameToString(value, buf + offset + pos, (unsigned)pt.value_num_bytes, false);
+        AString value;
+        if (!AddNameToString(value, buf + offset + pos, (unsigned)pt.value_num_bytes))
+          return false;
         pos += (unsigned)pt.value_num_bytes + 1;
+        if (buf[offset + pos - 1])
+          return S_FALSE;
       }
+      */
       offset += descSize;
       rem -= descSize;
     }
 
     _phySize = fileSize;
-
     // _startOffset = 0;
     return S_OK;
   }

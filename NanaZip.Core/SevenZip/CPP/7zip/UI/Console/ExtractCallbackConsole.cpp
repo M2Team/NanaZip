@@ -744,7 +744,7 @@ HRESULT CExtractCallbackConsole::OpenResult(
     const CArc &arc = arcLink.Arcs[level];
     const CArcErrorInfo &er = arc.ErrorInfo;
     
-    UInt32 errorFlags = er.GetErrorFlags();
+    const UInt32 errorFlags = er.GetErrorFlags();
 
     if (errorFlags != 0 || !er.ErrorMessage.IsEmpty())
     {
@@ -769,7 +769,11 @@ HRESULT CExtractCallbackConsole::OpenResult(
       if (!er.ErrorMessage.IsEmpty())
       {
         if (_se)
-          *_se << "ERRORS:" << endl << er.ErrorMessage << endl;
+        {
+          *_se << "ERRORS:" << endl;
+          _se->NormalizePrint_UString(er.ErrorMessage);
+          *_se << endl;
+        }
         NumOpenArcErrors++;
         ThereIsError_in_Current = true;
       }
@@ -806,7 +810,11 @@ HRESULT CExtractCallbackConsole::OpenResult(
       if (!er.WarningMessage.IsEmpty())
       {
         if (_so)
-          *_so << "WARNINGS:" << endl << er.WarningMessage << endl;
+        {
+          *_so << "WARNINGS:" << endl;
+          _so->NormalizePrint_UString(er.WarningMessage);
+          *_so << endl;
+        }
         NumOpenArcWarnings++;
         ThereIsWarning_in_Current = true;
       }

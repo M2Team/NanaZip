@@ -287,7 +287,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     updateItems.Add(ui);
   }
   
-  if (_arc._are_Pax_Items)
+  if (_stream && _arc._are_Pax_Items)
   {
     // we restore original order of files, if there are pax items
     updateItems.Sort(CompareUpdateItems, NULL);

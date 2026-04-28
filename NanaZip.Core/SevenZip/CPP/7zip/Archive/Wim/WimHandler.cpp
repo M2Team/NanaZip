@@ -653,13 +653,13 @@ HRESULT CHandler::GetSecurity(UInt32 realIndex, const void **data, UInt32 *dataS
     return S_OK;
   const CImage &image = _db.Images[item.ImageIndex];
   const Byte *metadata = image.Meta + item.Offset;
-  UInt32 securityId = Get32(metadata + 0xC);
-  if (securityId == (UInt32)(Int32)-1)
+  const UInt32 securId = Get32(metadata + 0xC);
+  if (// securId == (UInt32)(Int32)-1 ||
+         securId     >= image.SecurOffsets.Size()
+      || securId + 1 >= image.SecurOffsets.Size())
     return S_OK;
-  if (securityId >= (UInt32)image.SecurOffsets.Size())
-    return E_FAIL;
-  UInt32 offs = image.SecurOffsets[securityId];
-  UInt32 len = image.SecurOffsets[securityId + 1] - offs;
+  const UInt32 offs = image.SecurOffsets[securId];
+  const UInt32 len = image.SecurOffsets[securId + 1] - offs;
   const CByteBuffer &buf = image.Meta;
   if (offs <= buf.Size() && buf.Size() - offs >= len)
   {
@@ -680,7 +680,7 @@ Z7_COM7F_IMF(CHandler::GetRootRawProp(PROPID propID, const void **data, UInt32 *
     const CImage &image = _db.Images[_db.IndexOfUserImage];
     const CItem &item = _db.Items[image.StartItem];
     if (!item.IsDir || item.ImageIndex != _db.IndexOfUserImage)
-      return E_FAIL;
+      return S_OK; // E_FAIL;
     return GetSecurity(image.StartItem, data, dataSize, propType);
   }
   return S_OK;

@@ -9,12 +9,12 @@ Igor Pavlov : Public domain */
 EXTERN_C_BEGIN
 
 #define Z7_HUFFMAN_LEN_MAX 16
+#define Z7_HUFFMAN_FREQS_SUM_MAX ((1 << 22) - 1)
 /*
 Conditions:
   2 <= num <= 1024 = 2 ^ NUM_BITS
-  Sum(freqs) < 4M = 2 ^ (32 - NUM_BITS)
+  Sum(freqs) <= Z7_HUFFMAN_FREQS_SUM_MAX = 4M - 1 = 2 ^ (32 - NUM_BITS) - 1
   1 <= maxLen <= 16 = Z7_HUFFMAN_LEN_MAX
-  Num_Items(p) >= HUFFMAN_TEMP_SIZE(num)
 */
 void Huffman_Generate(const UInt32 *freqs, UInt32 *p, Byte *lens, unsigned num, unsigned maxLen);
 

@@ -14,6 +14,15 @@
 
 #include "../Common/LoadCodecs.h"
 
+namespace NExtractOutDirMode {
+enum EEnum
+{
+  k_Direct = 0,
+  k_AddArcName,
+  k_ReplaceAsterisk
+};
+}
+
 struct CExtractOptionsBase
 {
   CBoolPair ElimDup;
@@ -29,10 +38,11 @@ struct CExtractOptionsBase
   NExtract::NPathMode::EEnum PathMode;
   NExtract::NOverwriteMode::EEnum OverwriteMode;
   NExtract::NZoneIdMode::EEnum ZoneMode;
+  NExtractOutDirMode::EEnum OutDirMode;
 
   CExtractNtOptions NtOptions;
-
-  FString OutputDir;
+  
+  FString OutputDir; // normalized : with path separator at the end
   UString HashDir;
 
   CExtractOptionsBase():
@@ -43,9 +53,10 @@ struct CExtractOptionsBase
       PathMode(NExtract::NPathMode::kFullPaths),
       OverwriteMode(NExtract::NOverwriteMode::kAsk),
       // **************** NanaZip Modification Start ****************
-      // ZoneMode(NExtract::NZoneIdMode::kNone)
-      ZoneMode(NExtract::NZoneIdMode::Default)
+      // ZoneMode(NExtract::NZoneIdMode::kNone),
+      ZoneMode(NExtract::NZoneIdMode::Default),
       // **************** NanaZip Modification End ****************
+      OutDirMode(NExtractOutDirMode::k_ReplaceAsterisk)
       {}
 };
 
@@ -58,7 +69,7 @@ struct CExtractOptions: public CExtractOptionsBase
   // **************** NanaZip Modification Start ****************
   CBoolPair OpenFolder;
   // **************** NanaZip Modification End ****************
-
+  
   // bool ShowDialog;
   // bool PasswordEnabled;
   // UString Password;

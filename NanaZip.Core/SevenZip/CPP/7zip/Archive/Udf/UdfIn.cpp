@@ -114,7 +114,10 @@ static UString ParseDString(const Byte *data, unsigned size)
       }
     }
     else
-      return UString("[unknown]");
+    {
+      res = "[unknown]";
+      return res;
+    }
     *p = 0;
     res.ReleaseBuf_SetLen((unsigned)(p - (const wchar_t *)res));
   }
@@ -478,8 +481,8 @@ struct CFileId
 
 size_t CFileId::Parse(const Byte *p, size_t size)
 {
-  size_t processed = 0;
-  if (size < 38)
+  const unsigned k_FileId_FixedSize = 38;
+  if (size < k_FileId_FixedSize)
     return 0;
   CTag tag;
   if (tag.Parse(p, size) != S_OK)
@@ -493,23 +496,23 @@ size_t CFileId::Parse(const Byte *p, size_t size)
   const unsigned idLen = p[19];
   Icb.Parse(p + 20);
   const unsigned impLen = Get16(p + 36);
-  if (size < 38 + idLen + impLen)
+  if (size < k_FileId_FixedSize + idLen + impLen)
     return 0;
-  processed = 38;
+  size_t processed = k_FileId_FixedSize;
   // ImplUse.CopyFrom(p + processed, impLen);
   processed += impLen;
   Id.Parse(p + processed, idLen);
   processed += idLen;
   // const size_t processed2 = processed;
-  for (;(processed & 3) != 0; processed++)
-    if (p[processed] != 0)
+  for (; processed & 3; processed++)
+    if (processed >= size || p[processed])
       return 0;
   // some program can create non-standard UDF file where CrcLen doesn't include Padding data
   if ((size_t)tag.CrcLen + 16 != processed
       // && (size_t)tag.CrcLen + 16 != processed2 // we can enable this check to support non-standard UDF
       )
     return 0;
-  return (processed <= size) ? processed : 0;
+  return processed;
 }
 
 

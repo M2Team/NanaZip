@@ -755,10 +755,8 @@ HRESULT CHandler::Open2(IInStream *stream)
     const size_t sizeT = (size_t)size;
     if (sizeT != size)
       return S_FALSE;
-    // **************** NanaZip Modification Start ****************
     if (sizeT < kSectorSize)
       return S_FALSE;
-    // **************** NanaZip Modification End ****************
     meta.Alloc(sizeT);
     RINOK(InStream_SeekSet(stream, offset))
     RINOK(ReadStream_FALSE(stream, meta, sizeT))

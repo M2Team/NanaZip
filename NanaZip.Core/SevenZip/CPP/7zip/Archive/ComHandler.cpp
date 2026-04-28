@@ -189,6 +189,7 @@ public:
 
   bool IsArc;
   bool HeadersError;
+  // bool HeadersWarning;
   // bool IsMsi;
 
   UInt64 PhySize;
@@ -312,6 +313,7 @@ void CDatabase::Clear()
   MainSubfile = -1;
   IsArc = false;
   HeadersError = false;
+  // HeadersWarning = false;
   // IsMsi = false;
   PhySize = 0;
   PhySize_Unaligned = 0;
@@ -663,7 +665,7 @@ HRESULT CDatabase::Open(IInStream *inStream)
   const UInt32 numSectorsForFAT = Get32(p32 + 11); // SAT
 
   // MSDOC: A 512-byte sector compound file MUST be no greater than 2 GB in size for compatibility reasons.
-  // but actual restriction for windows compond creation code can be more strict:
+  // but actual restriction for windows compound creation code can be more strict:
   // (numSectorsForFAT <  (1 << 15)) : actual restriction in win10 for compound creation code
   // (numSectorsForFAT <= (1 << 15)) : relaxed restriction to allow 2 GB files.
   if (sectorSizeBits == 9 &&
@@ -690,6 +692,18 @@ HRESULT CDatabase::Open(IInStream *inStream)
   const Byte k_Used_DIFAT   = 3;
   memset(used, 0, numFatItems);
   UInt32 *fat;
+
+  UInt64 fileSize;
+  RINOK(InStream_GetSize_SeekToEnd(inStream, fileSize))
+#if 0
+  UInt32 numFatItems_Small = numFatItems;
+  {
+    const UInt64 numFatItems_req = ((fileSize + (sectSize - 1)) >> sectorSizeBits) - 1;
+    if (numFatItems_Small > numFatItems_req)
+      numFatItems_Small = (UInt32)numFatItems_req;
+  }
+#endif
+
   {
     // ========== READ FAT ==========
     const UInt32 numSectorsForBat = Get32(p32 + 18); // master sector allocation table
@@ -738,14 +752,36 @@ HRESULT CDatabase::Open(IInStream *inStream)
       used[sectorIndex] = k_Used_FAT;
       UInt32 *fat2 = fat + ((size_t)i << ssb2);
       RINOK(ReadIDs(inStream, sect, sectorIndex, fat2))
-      for (size_t k = 0; k < numSidsInSec; k++)
+    }
+
+#if 0
+    {
+      for (size_t k = numFatItems_Small; k < numFatItems; k++)
       {
-        const UInt32 sid = fat2[k];
+        if (fat[k] != NFatID::kFree)
+        {
+          /* it can mean some cases:
+            - rare case : junk data in FAT after last used item QuickSet (selinc) file
+            - truncated data
+            - data corruption
+          */
+          // if there is junk data in FAT, we restore correct Free items
+          HeadersWarning = true;
+          for (; k < numFatItems; k++)
+            fat[k] = NFatID::kFree;
+          break;
+        }
+      }
+    }
+#endif
+    {
+      for (size_t k = 0; k < numFatItems; k++)
+      {
+        const UInt32 sid = fat[k];
         if (sid > NFatID::kMaxValue)
         {
-          if (sid == NFatID::k_DIF_SECT
-            && used[((size_t)i << ssb2) + k] != k_Used_DIFAT)
-              return S_FALSE;
+          if (sid == NFatID::k_DIF_SECT && used[k] != k_Used_DIFAT)
+            return S_FALSE;
           continue;
         }
         if (sid >= numFatItems || used[sid])
@@ -854,7 +890,8 @@ HRESULT CDatabase::Open(IInStream *inStream)
           if (item.Size != 0) // by specification
             return S_FALSE;
           if (item.Sid != 0   // by specification
-              && item.Sid != NFatID::kFree) // NFatID::kFree is used in some AAF files
+              && item.Sid != NFatID::kFree // NFatID::kFree is used in some AAF files
+              && item.Sid != NFatID::kEndOfChain)   // NFatID::kEndOfChain is used in QuickSet (selinc) file
             return S_FALSE;
         }
         // else if (item.Type == NItemType::kRootStorage) return S_FALSE;
@@ -984,10 +1021,8 @@ HRESULT CDatabase::Open(IInStream *inStream)
 
   {
     // some msi (in rare cases) have unaligned size of archive,
-    // unaligned size of compond files is also possible if we create just one stream
+    // unaligned size of compound files is also possible if we create just one stream
     // where there is no padding data after payload data in last cluster of archive
-    UInt64 fileSize;
-    RINOK(InStream_GetSize_SeekToEnd(inStream, fileSize))
     if (   fileSize < PhySize
         && fileSize > PhySize - sectSize
         && fileSize >= PhySize_Unaligned
@@ -1159,6 +1194,17 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
       prop = v;
       break;
     }
+#if 0
+    case kpidWarningFlags:
+    {
+      UInt32 v = 0;
+      if (_db.HeadersWarning)
+        v |= kpv_ErrorFlags_HeadersError;
+      if (v)
+        prop = v;
+      break;
+    }
+#endif
   }
   prop.Detach(value);
   return S_OK;

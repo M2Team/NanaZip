@@ -16,6 +16,7 @@ EXPORTS
   SetCodecs PRIVATE
 
   SetLargePageMode PRIVATE
+  SetLargePageMode2 PRIVATE
   SetCaseSensitive PRIVATE
 
   GetModuleProp PRIVATE

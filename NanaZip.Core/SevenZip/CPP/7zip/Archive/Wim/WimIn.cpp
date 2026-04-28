@@ -427,7 +427,7 @@ static inline void ParseStream(bool oldVersion, const Byte *p, CStreamInfo &s)
 }
 
 
-#define kLongPath "[LongPath]"
+#define kLongPath "[LONG_PATH]" STRING_PATH_SEPARATOR "[LONG_PATH_ITEM]"
 
 void CDatabase::GetShortName(unsigned index, NWindows::NCOM::CPropVariant &name) const
 {
@@ -487,6 +487,11 @@ void CDatabase::GetItemPath(unsigned index1, bool showImageNumber, NWindows::NCO
   for (;;)
   {
     const CItem &item = Items[index];
+    if (item.DirLevel > (1 << 12))
+    {
+      path = kLongPath;
+      return;
+    }
     index = item.Parent;
     if (index >= 0 || image.NumEmptyRootItems == 0)
     {
@@ -569,53 +574,61 @@ void CDatabase::GetItemPath(unsigned index1, bool showImageNumber, NWindows::NCO
 // if (ver <= 1.10), root folder contains real items.
 // if (ver >= 1.12), root folder contains only one folder with empty name.
 
-HRESULT CDatabase::ParseDirItem(size_t pos, int parent)
+HRESULT CDatabase::ParseDirItem(size_t pos, int parent, unsigned dirLevel)
 {
+  // if (++level > (1 << 10)) return S_FALSE;
+  CImage &image = Images.Back();
   const unsigned align = GetDirAlignMask();
-  if ((pos & align) != 0)
+  if (pos & align)
     return S_FALSE;
 
   for (unsigned numItems = 0;; numItems++)
   {
     if (OpenCallback && (Items.Size() & 0xFFFF) == 0)
     {
-      UInt64 numFiles = Items.Size();
+      const UInt64 numFiles = Items.Size();
       RINOK(OpenCallback->SetCompleted(&numFiles, NULL))
     }
     
     const size_t rem = DirSize - pos;
-    if (pos < DirStartOffset || pos > DirSize || rem < 8)
+    if (pos < DirStartOffset || pos > DirSize || rem < 8 || DirSize - DirProcessed < 8)
       return S_FALSE;
-
     const Byte *p = DirData + pos;
-
-    UInt64 len = Get64(p);
+    const UInt64 len = Get64(p);
     if (len == 0)
     {
       DirProcessed += 8;
       return S_OK;
     }
-    
-    if ((len & align) != 0 || rem < len)
+    if ((len & align) || rem < len || DirSize - DirProcessed < len)
       return S_FALSE;
-    
     DirProcessed += (size_t)len;
-    if (DirProcessed > DirSize)
-      return S_FALSE;
 
     const unsigned dirRecordSize = IsOldVersion ? kDirRecordSizeOld : kDirRecordSize;
     if (len < dirRecordSize)
       return S_FALSE;
 
     CItem item;
-    UInt32 attrib = Get32(p + 8);
+    const UInt32 attrib = Get32(p + 8);
     item.IsDir = ((attrib & 0x10) != 0);
-    UInt64 subdirOffset = Get64(p + 0x10);
-
+    {
+      const UInt32 securId = Get32(p + 0xC);
+      if (securId != (UInt32)(Int32)-1)
+         if (securId     >= image.SecurOffsets.Size() ||
+             securId + 1 >= image.SecurOffsets.Size())
+        HeadersError = true;
+    }
+    size_t subdirOffset;
+    {
+      const UInt64 subdirOffset64 = Get64(p + 0x10);
+      if (subdirOffset64 > DirSize)
+        return S_FALSE;
+      subdirOffset = (size_t)subdirOffset64;
+    }
     const UInt32 numAltStreams = Get16(p + dirRecordSize - 6);
     const UInt32 shortNameLen = Get16(p + dirRecordSize - 4);
     const UInt32 fileNameLen = Get16(p + dirRecordSize - 2);
-    if ((shortNameLen & 1) != 0 || (fileNameLen & 1) != 0)
+    if ((shortNameLen & 1) || (fileNameLen & 1))
       return S_FALSE;
     const UInt32 shortNameLen2 = (shortNameLen == 0 ? shortNameLen : shortNameLen + 2);
     const UInt32 fileNameLen2 = (fileNameLen == 0 ? fileNameLen : fileNameLen + 2);
@@ -623,22 +636,20 @@ HRESULT CDatabase::ParseDirItem(size_t pos, int parent)
       return S_FALSE;
     
     p += dirRecordSize;
-    
     {
-      if (*(const UInt16 *)(const void *)(p + fileNameLen) != 0)
+      if (*(const UInt16 *)(const void *)(p + fileNameLen))
         return S_FALSE;
       for (UInt32 j = 0; j < fileNameLen; j += 2)
         if (*(const UInt16 *)(const void *)(p + j) == 0)
           return S_FALSE;
     }
-
     // PRF(printf("\n%S", p));
 
-    if (shortNameLen != 0)
+    if (shortNameLen)
     {
       // empty shortName has no ZERO at the end ?
       const Byte *p2 = p + fileNameLen2;
-      if (*(const UInt16 *)(const void *)(p2 + shortNameLen) != 0)
+      if (*(const UInt16 *)(const void *)(p2 + shortNameLen))
         return S_FALSE;
       for (UInt32 j = 0; j < shortNameLen; j += 2)
         if (*(const UInt16 *)(const void *)(p2 + j) == 0)
@@ -647,6 +658,7 @@ HRESULT CDatabase::ParseDirItem(size_t pos, int parent)
       
     item.Offset = pos;
     item.Parent = parent;
+    item.DirLevel = dirLevel;
     item.ImageIndex = (int)Images.Size() - 1;
     
     const unsigned prevIndex = Items.Add(item);
@@ -660,47 +672,40 @@ HRESULT CDatabase::ParseDirItem(size_t pos, int parent)
         return S_FALSE;
       const Byte *p2 = DirData + pos;
       const UInt64 len2 = Get64(p2);
-      if ((len2 & align) != 0 || rem2 < len2
+      if ((len2 & align) || rem2 < len2
+          || DirSize - DirProcessed < len2
           || len2 < (unsigned)(IsOldVersion ? 0x18 : 0x28))
         return S_FALSE;
-     
       DirProcessed += (size_t)len2;
-      if (DirProcessed > DirSize)
-        return S_FALSE;
 
       unsigned extraOffset = 0;
-      
       if (IsOldVersion)
         extraOffset = 0x10;
       else
       {
-        if (Get64(p2 + 8) != 0)
+        if (Get64(p2 + 8))
           return S_FALSE;
         extraOffset = 0x24;
       }
       
       const UInt32 fileNameLen111 = Get16(p2 + extraOffset);
-      if ((fileNameLen111 & 1) != 0)
+      if (fileNameLen111 & 1)
         return S_FALSE;
       /* Probably different versions of ImageX can use different number of
          additional ZEROs. So we don't use exact check. */
       const UInt32 fileNameLen222 = (fileNameLen111 == 0 ? fileNameLen111 : fileNameLen111 + 2);
       if (((extraOffset + 2 + fileNameLen222 + align) & ~align) > len2)
         return S_FALSE;
-      
       {
         const Byte *p3 = p2 + extraOffset + 2;
-        if (*(const UInt16 *)(const void *)(p3 + fileNameLen111) != 0)
+        if (*(const UInt16 *)(const void *)(p3 + fileNameLen111))
           return S_FALSE;
         for (UInt32 j = 0; j < fileNameLen111; j += 2)
           if (*(const UInt16 *)(const void *)(p3 + j) == 0)
             return S_FALSE;
-  
         // PRF(printf("\n  %S", p3));
       }
-
-
-      /* wim uses alt sreams list, if there is at least one alt stream.
+      /* wim uses alt streams list, if there is at least one alt stream.
          And alt stream without name is main stream. */
 
       // Why wimlib writes two alt streams for REPARSE_POINT, with empty second alt stream?
@@ -727,6 +732,7 @@ HRESULT CDatabase::ParseDirItem(size_t pos, int parent)
         item2.Offset = pos;
         item2.IsAltStream = true;
         item2.Parent = (int)prevIndex;
+        item2.DirLevel = dirLevel;
         item2.ImageIndex = (int)Images.Size() - 1;
         Items.Add(item2);
       }
@@ -739,28 +745,32 @@ HRESULT CDatabase::ParseDirItem(size_t pos, int parent)
       const Byte *p2 = DirData + pos;
       if (DirSize - pos >= 8 && Get64(p2) == 0)
       {
-        CImage &image = Images.Back();
         image.NumEmptyRootItems = 1;
 
-        if (subdirOffset != 0
+        if (pos + 8 < subdirOffset
             && DirSize - pos >= 16
-            && Get64(p2 + 8) != 0
-            && pos + 8 < subdirOffset)
+            && Get64(p2 + 8))
         {
           // Longhorn.4093 contains hidden files after empty root folder and before items of next folder. Why?
           // That code shows them. If we want to ignore them, we need to update DirProcessed.
-          // DirProcessed += (size_t)(subdirOffset - (pos + 8));
-          // printf("\ndirOffset = %5d hiddenOffset = %5d\n", (int)subdirOffset, (int)pos + 8);
+#if 1 // 0 : for debug : to ignore hidden files
+          // we parse hidden files and then parse main files:
           subdirOffset = pos + 8;
+#else // ignore hidden files
+          DirProcessed += subdirOffset - (pos + 8);
+#endif
+          // printf("\ndirOffset = %5d hiddenOffset = %5d\n", (int)subdirOffset, (int)pos + 8);
           // return S_FALSE;
         }
       }
     }
-
-    if (item.IsDir && subdirOffset != 0)
+    Items[prevIndex].SubDirOffset = subdirOffset;
+    /*
+    if (item.IsDir && subdirOffset)
     {
-      RINOK(ParseDirItem((size_t)subdirOffset, (int)prevIndex))
+      RINOK(ParseDirItem(subdirOffset, (int)prevIndex))
     }
+    */
   }
 }
 
@@ -771,30 +781,26 @@ HRESULT CDatabase::ParseImageDirs(CByteBuffer &buf, int parent)
   DirSize = buf.Size();
   if (DirSize < 8)
     return S_FALSE;
-  const Byte *p = DirData;
   size_t pos = 0;
   CImage &image = Images.Back();
+  const Byte * const p = DirData;
 
   if (IsOldVersion)
   {
-    UInt32 numEntries = Get32(p + 4);
-
-    if (numEntries > (1 << 28) ||
+    const UInt32 numEntries = Get32(p + 4);
+    if (numEntries >= (1 << 28) ||
         numEntries > (DirSize >> 3))
       return S_FALSE;
-
     UInt32 sum = 8;
-    if (numEntries != 0)
+    if (numEntries)
       sum = numEntries * 8;
-
     image.SecurOffsets.ClearAndReserve(numEntries + 1);
     image.SecurOffsets.AddInReserved(sum);
-
     for (UInt32 i = 0; i < numEntries; i++)
     {
       const Byte *pp = p + (size_t)i * 8;
-      UInt32 len = Get32(pp);
-      if (i != 0 && Get32(pp + 4) != 0)
+      const UInt32 len = Get32(pp);
+      if (i && Get32(pp + 4))
         return S_FALSE;
       if (len > DirSize - sum)
         return S_FALSE;
@@ -803,38 +809,35 @@ HRESULT CDatabase::ParseImageDirs(CByteBuffer &buf, int parent)
         return S_FALSE;
       image.SecurOffsets.AddInReserved(sum);
     }
-
     pos = sum;
-
     const size_t align = GetDirAlignMask();
     pos = (pos + align) & ~(size_t)align;
   }
   else
   {
-    UInt32 totalLen = Get32(p);
-    if (totalLen == 0)
-      pos = 8;
-    else
+    const UInt32 totalLen = Get32(p);
+    pos = 8;
+    if (totalLen)
     {
       if (totalLen < 8)
         return S_FALSE;
       UInt32 numEntries = Get32(p + 4);
-      pos = 8;
       if (totalLen > DirSize || numEntries > ((totalLen - 8) >> 3))
         return S_FALSE;
       UInt32 sum = (UInt32)pos + numEntries * 8;
-      image.SecurOffsets.ClearAndReserve(numEntries + 1);
-      image.SecurOffsets.AddInReserved(sum);
-      
-      for (UInt32 i = 0; i < numEntries; i++, pos += 8)
+      numEntries++;
+      image.SecurOffsets.ClearAndReserve(numEntries);
+      for (;;)
       {
-        UInt64 len = Get64(p + pos);
+        image.SecurOffsets.AddInReserved(sum);
+        if (--numEntries == 0)
+          break;
+        const UInt64 len = Get64(p + pos);
+        pos += 8;
         if (len > totalLen - sum)
           return S_FALSE;
         sum += (UInt32)len;
-        image.SecurOffsets.AddInReserved(sum);
       }
-      
       pos = sum;
       pos = (pos + 7) & ~(size_t)7;
       if (pos != (((size_t)totalLen + 7) & ~(size_t)7))
@@ -844,19 +847,26 @@ HRESULT CDatabase::ParseImageDirs(CByteBuffer &buf, int parent)
   
   if (pos > DirSize)
     return S_FALSE;
-  
   DirStartOffset = DirProcessed = pos;
   image.StartItem = Items.Size();
 
-  RINOK(ParseDirItem(pos, parent))
+  RINOK(ParseDirItem(pos, parent, 0)) // dirLevel = 0
+  {
+    for (unsigned i = image.StartItem; i < Items.Size(); i++)
+    {
+      const CItem &item = Items[i];
+      if (item.IsDir && item.SubDirOffset)
+      {
+        RINOK(ParseDirItem(item.SubDirOffset, (int)i, item.DirLevel + 1))
+      }
+    }
+  }
   
   image.NumItems = Items.Size() - image.StartItem;
   if (DirProcessed == DirSize)
     return S_OK;
-
   /* Original program writes additional 8 bytes (END_OF_ROOT_FOLDER),
      but the reference to that folder is empty */
-
   // we can't use DirProcessed - DirStartOffset == 112 check if there is alt stream in root
   if (DirProcessed == DirSize - 8 && Get64(p + DirSize - 8) != 0)
     return S_OK;
