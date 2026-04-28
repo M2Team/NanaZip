@@ -21,6 +21,7 @@
 
 #include "../../../Common/IntToString.h"
 #include "../../../Common/ListFileUtils.h"
+#include "../../../Common/MyException.h"
 #include "../../../Common/StringConvert.h"
 #include "../../../Common/StringToInt.h"
 
@@ -191,6 +192,7 @@ enum Enum
   kSmartExtract,
   // **************** NanaZip Modification End ****************
   kFullPathMode,
+  kOutDirMode,
   
   kHardLinks,
   kSymLinks_AllowDangerous,
@@ -349,7 +351,8 @@ static const CSwitchForm kSwitchForms[] =
   { "sps", SWFRM_MINUS },
   // **************** NanaZip Modification End ****************
   { "spf", SWFRM_STRING_SINGL(0) },
-  
+  { "spo", NSwitchType::kChar, false, 1, "dcr" }, // kOutDirMode
+
   { "snh", SWFRM_MINUS },
   { "snld", SWFRM_STRING },
   { "snl", SWFRM_MINUS },
@@ -364,7 +367,7 @@ static const CSwitchForm kSwitchForms[] =
   { "snc", SWFRM_SIMPLE },
   
   { "snt", SWFRM_MINUS },
-
+  
   // **************** NanaZip Modification Start ****************
   { "sre", SWFRM_MINUS },
   // **************** NanaZip Modification End ****************
@@ -1053,6 +1056,12 @@ static void PrintHex(UString &s, UInt64 v)
 #endif
 
 
+#if 0 && defined(Z7_LARGE_PAGES) && defined(__linux__)
+bool Get_HugePageSize(UInt64 &pageSize);
+extern "C" { extern size_t g_LargePageSize; }
+#endif
+
+
 void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
     CArcCmdLineOptions &options)
 {
@@ -1128,40 +1137,137 @@ void CArcCmdLineParser::Parse1(const UStringVector &commandStrings,
   
   // options.LargePages = false;
 
+#if defined(Z7_LARGE_PAGES)
   if (parser[NKey::kLargePages].ThereIs)
   {
-    UInt32 slp = 0;
     const UString &s = parser[NKey::kLargePages].PostStrings[0];
-    if (s.IsEmpty())
-      slp = 1;
-    else if (!s.IsEqualTo("-"))
-    {
-      if (!StringToUInt32(s, slp))
-        throw CArcCmdLineException("Unsupported switch postfix for -slp", s);
-    }
+    UInt32 slp_Risk = 1;
+    unsigned flags = 0;
+    unsigned cmd = 0;
+    size_t pageSize = 0;
+    size_t threshold = 0;
     
-    #ifdef Z7_LARGE_PAGES
-    if (slp >
+    if (s.IsEqualTo("-"))
+      slp_Risk = 0;
+    else if (!s.IsEmpty())
+    {
+      unsigned index = 0;
+      while (index < s.Len())
+      {
+        const bool isStart = (index == 0);
+        UString s2;
+        {
+          const int pos = s.Find(L':', index);
+          if (pos < 0)
+          {
+            s2 = s.Ptr(index);
+            index = s.Len();
+          }
+          else
+          {
+            s2 = s.Mid(index, (unsigned)pos - index);
+            index = (unsigned)pos + 1;
+          }
+        }
+        if (s2.IsEmpty())
+          continue;
+        
+        if (isStart)
+        {
+          if (StringToUInt32(s2, slp_Risk))
+            continue;
+        }
+        else if (s2.IsPrefixedBy_Ascii_NoCase("ps"))
+        {
+          UInt32 ps = 0;
+          if (StringToUInt32(s2.Ptr(2), ps))
+          {
+            if (ps < sizeof(size_t) * 8)
+            {
+              pageSize = (size_t)1 << ps;
+              flags |= Z7_LARGE_PAGES_FLAG_DIRECT_PAGE_SIZE;
+              continue;
+            }
+          }
+        }
+        else if (s2.IsPrefixedBy_Ascii_NoCase("min"))
+        {
+          UInt32 ps = 0;
+          if (StringToUInt32(s2.Ptr(3), ps))
+          {
+            if (ps < sizeof(size_t) * 8)
+            {
+              threshold = (size_t)1 << ps;
+              flags |= Z7_LARGE_PAGES_FLAG_DIRECT_THRESHOLD;
+              continue;
+            }
+          }
+        }
+        else if (s2.IsEqualTo_Ascii_NoCase("failstop"))
+        {
+          flags |= Z7_LARGE_PAGES_FLAG_FAIL_STOP;
+          continue;
+        }
+        else if (s2.IsEqualTo_Ascii_NoCase("nomadvise"))
+        {
+          cmd = Z7_LARGE_PAGES_FLAG_NO_MADVISE;
+          continue;
+        }
+        else if (s2.IsEqualTo_Ascii_NoCase("nohuge"))
+        {
+          cmd = Z7_LARGE_PAGES_FLAG_NO_HUGEPAGE;
+          continue;
+        }
+        throw CArcCmdLineException("Unsupported switch postfix for -slp", s);
+      }
+    }
+
+    if (slp_Risk <=
           #if defined(_WIN32) && !defined(UNDER_CE)
             (unsigned)NSecurity::Get_LargePages_RiskLevel()
           #else
             0
           #endif
         )
+      cmd = Z7_LARGE_PAGES_FLAG_NO_PAGECODE;
+    if (cmd == 0)
+      cmd = Z7_LARGE_PAGES_FLAG_USE_HUGEPAGE;
+    flags |= cmd;
+
+#if 0 && defined(Z7_LARGE_PAGES) && defined(__linux__)
+    if ((flags & Z7_LARGE_PAGES_FLAG_DIRECT_PAGE_SIZE) == 0)
     {
-      #ifdef _WIN32 // change it !
-      SetLargePageSize();
-      #endif
+      UInt64 pageSize64;
+      if (g_LargePageSize
+          && Get_HugePageSize(pageSize64)
+          && (pageSize64 & (pageSize64 - 1)) == 0
+          && pageSize64 <= (1u << 25))
+      {
+        pageSize = (size_t)pageSize64;
+        flags |= Z7_LARGE_PAGES_FLAG_DIRECT_PAGE_SIZE;
+        printf("\npageSize=0x%x\n", (unsigned)pageSize);
+      }
+    }
+#endif
+    
+#if defined(Z7_LARGE_PAGES)
+    z7_LargePage_Set(flags, pageSize, threshold);
+    if (flags & Z7_LARGE_PAGES_FLAG_USE_HUGEPAGE)
+    {
       // note: this process also can inherit that Privilege from parent process
-      g_LargePagesMode =
+      g_LargePagesMode = true;
       #if defined(_WIN32) && !defined(UNDER_CE)
-        NSecurity::EnablePrivilege_LockMemory();
-      #else
-        true;
+      if (!NSecurity::EnablePrivilege_LockMemory())
+      {
+        g_LargePagesMode = false;
+        if (flags & Z7_LARGE_PAGES_FLAG_FAIL_STOP)
+          throw CSystemException(GetLastError_noZero_HRESULT());
+      }
       #endif
     }
-    #endif
+#endif
   }
+#endif // Z7_LARGE_PAGES
 
 
 #ifndef UNDER_CE
@@ -1656,6 +1762,14 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
           NFile::NName::NormalizeDirSeparators(eo.OutputDir);
         #endif
         NFile::NName::NormalizeDirPathPrefix(eo.OutputDir);
+      }
+      if (parser[NKey::kOutDirMode].ThereIs)
+      {
+        const int index = parser[NKey::kOutDirMode].PostCharIndex;
+        eo.OutDirMode =
+          (index == 0) ? NExtractOutDirMode::k_Direct :
+          (index == 1) ? NExtractOutDirMode::k_AddArcName :
+                         NExtractOutDirMode::k_ReplaceAsterisk;
       }
 
       eo.OverwriteMode = NExtract::NOverwriteMode::kAsk;

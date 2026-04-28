@@ -720,6 +720,7 @@ extern "C"
 
   typedef HRESULT (WINAPI *Func_SetCaseSensitive)(Int32 caseSensitive);
   typedef HRESULT (WINAPI *Func_SetLargePageMode)();
+  typedef HRESULT (WINAPI *Func_SetLargePageMode2)(UInt32 flags, size_t pageSize, size_t threshold);
   // typedef HRESULT (WINAPI *Func_SetClientVersion)(UInt32 version);
 
   typedef IOutArchive * (*Func_CreateOutArchive)();
