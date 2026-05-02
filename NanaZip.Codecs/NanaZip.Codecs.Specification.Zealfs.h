@@ -20,9 +20,6 @@
 #define NANAZIP_CODECS_SPECIFICATION_ZEALFS
 
 #include <Mile.Mobility.Portable.Types.h>
-#ifndef MILE_MOBILITY_ENABLE_MINIMUM_SAL
-#include <sal.h>
-#endif // !MILE_MOBILITY_ENABLE_MINIMUM_SAL
 
 /**
  * @brief Specifies a date and time, using individual members for the month,

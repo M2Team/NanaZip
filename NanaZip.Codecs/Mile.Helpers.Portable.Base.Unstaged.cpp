@@ -10,35 +10,35 @@
 
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
-EXTERN_C MO_UINT8 MileReadUInt8(
-    _In_ MO_CONSTANT_POINTER BaseAddress)
+MO_EXTERN_C MO_UINT8 MileReadUInt8(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
     return Base[0];
 }
 
-EXTERN_C MO_UINT16 MileReadUInt16BigEndian(
-    _In_ MO_CONSTANT_POINTER BaseAddress)
+MO_EXTERN_C MO_UINT16 MileReadUInt16BigEndian(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT16>(Base[0]) << 8) |
         (static_cast<MO_UINT16>(Base[1]));
 }
 
-EXTERN_C MO_UINT16 MileReadUInt16LittleEndian(
-    _In_ MO_CONSTANT_POINTER BaseAddress)
+MO_EXTERN_C MO_UINT16 MileReadUInt16LittleEndian(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT16>(Base[0])) |
         (static_cast<MO_UINT16>(Base[1]) << 8);
 }
 
-EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
-    _In_ MO_CONSTANT_POINTER BaseAddress)
+MO_EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT32>(Base[0]) << 24) |
         (static_cast<MO_UINT32>(Base[1]) << 16) |
@@ -46,10 +46,10 @@ EXTERN_C MO_UINT32 MileReadUInt32BigEndian(
         (static_cast<MO_UINT32>(Base[3]));
 }
 
-EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
-    _In_ MO_CONSTANT_POINTER BaseAddress)
+MO_EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT32>(Base[0])) |
         (static_cast<MO_UINT32>(Base[1]) << 8) |
@@ -58,10 +58,10 @@ EXTERN_C MO_UINT32 MileReadUInt32LittleEndian(
 }
 
 
-EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
-    _In_ MO_CONSTANT_POINTER BaseAddress)
+MO_EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT64>(Base[0]) << 56) |
         (static_cast<MO_UINT64>(Base[1]) << 48) |
@@ -73,10 +73,10 @@ EXTERN_C MO_UINT64 MileReadUInt64BigEndian(
         (static_cast<MO_UINT64>(Base[7]));
 }
 
-EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
-    _In_ MO_CONSTANT_POINTER BaseAddress)
+MO_EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress)
 {
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
     return
         (static_cast<MO_UINT64>(Base[0])) |
         (static_cast<MO_UINT64>(Base[1]) << 8) |
@@ -88,39 +88,39 @@ EXTERN_C MO_UINT64 MileReadUInt64LittleEndian(
         (static_cast<MO_UINT64>(Base[7]) << 56);
 }
 
-EXTERN_C MO_INT8 MileSequenceCompare8(
-    _In_ MO_UINT8 Left,
-    _In_ MO_UINT8 Right)
+MO_EXTERN_C MO_INT8 MileSequenceCompare8(
+    _Mo_In_ MO_UINT8 Left,
+    _Mo_In_ MO_UINT8 Right)
 {
     return static_cast<MO_INT8>(static_cast<MO_UINT8>(Left - Right));
 }
 
-EXTERN_C MO_INT16 MileSequenceCompare16(
-    _In_ MO_UINT16 Left,
-    _In_ MO_UINT16 Right)
+MO_EXTERN_C MO_INT16 MileSequenceCompare16(
+    _Mo_In_ MO_UINT16 Left,
+    _Mo_In_ MO_UINT16 Right)
 {
     return static_cast<MO_INT16>(static_cast<MO_UINT16>(Left - Right));
 }
 
-EXTERN_C MO_INT32 MileSequenceCompare32(
-    _In_ MO_UINT32 Left,
-    _In_ MO_UINT32 Right)
+MO_EXTERN_C MO_INT32 MileSequenceCompare32(
+    _Mo_In_ MO_UINT32 Left,
+    _Mo_In_ MO_UINT32 Right)
 {
     return static_cast<MO_INT32>(static_cast<MO_UINT32>(Left - Right));
 }
 
-EXTERN_C MO_INT64 MileSequenceCompare64(
-    _In_ MO_UINT64 Left,
-    _In_ MO_UINT64 Right)
+MO_EXTERN_C MO_INT64 MileSequenceCompare64(
+    _Mo_In_ MO_UINT64 Left,
+    _Mo_In_ MO_UINT64 Right)
 {
     return static_cast<MO_INT64>(static_cast<MO_UINT64>(Left - Right));
 }
 
-EXTERN_C MO_UINT8 MileDecodeLeb128(
-    _In_ MO_CONSTANT_POINTER BaseAddress,
-    _In_ MO_UINT8 MaximumBits,
-    _In_ MO_BOOL SignedMode,
-    _Out_ PMO_UINT64 OutputValue)
+MO_EXTERN_C MO_UINT8 MileDecodeLeb128(
+    _Mo_In_ MO_CONSTANT_POINTER BaseAddress,
+    _Mo_In_ MO_UINT8 MaximumBits,
+    _Mo_In_ MO_BOOL SignedMode,
+    _Mo_Out_ PMO_UINT64 OutputValue)
 {
     if (!BaseAddress || MaximumBits < 1 || MaximumBits > 64 || !OutputValue)
     {
@@ -147,7 +147,7 @@ EXTERN_C MO_UINT8 MileDecodeLeb128(
 
     MO_UINT8 MaximumByteMask = (1 << MaximumByteValidBits) - 1;
 
-    CONST MO_UINT8* Base = reinterpret_cast<CONST MO_UINT8*>(BaseAddress);
+    MO_CONST MO_UINT8* Base = reinterpret_cast<MO_CONST MO_UINT8*>(BaseAddress);
 
     MO_UINT64 Value = 0;
     MO_UINT8 Index = 0;
