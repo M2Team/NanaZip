@@ -32,7 +32,7 @@ namespace winrt::NanaZip::Modern::implementation
         {
             WindowTitle = L"Enter Password";
         }
-        ::SetWindowTextW(this->m_WindowHandle, WindowTitle.c_str());
+        winrt::check_bool(::SetWindowTextW(this->m_WindowHandle, WindowTitle.c_str()));
     }
 
     void PasswordPage::OKButtonClick(
