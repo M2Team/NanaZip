@@ -21,7 +21,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Mobility">
-      <Version>1.0.372</Version>
+      <Version>1.1.544</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Internal">
       <Version>1.0.3586</Version>
