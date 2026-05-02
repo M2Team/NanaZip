@@ -573,5 +573,7 @@ EXTERN_C INT WINAPI K7ModernShowPasswordDialog(
         winrt::get_abi(Window),
         ParentWindowHandle);
 
+    ::MileXamlThreadUninitialize();
+
     return Result;
 }
