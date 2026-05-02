@@ -24,7 +24,7 @@
   </Target>
   <ItemGroup>
     <PackageReference Include="Mile.Mobility">
-      <Version>1.0.372</Version>
+      <Version>1.1.544</Version>
     </PackageReference>
     <ProjectReference Include="$(MSBuildThisFileDirectory)K7UserStatic.vcxproj">
       <Project>{0B7D00BE-6890-453E-86A4-DEF68B5C22A4}</Project>
