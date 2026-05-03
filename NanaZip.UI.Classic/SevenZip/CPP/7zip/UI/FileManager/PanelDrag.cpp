@@ -18,6 +18,11 @@
 #include "../Common/CompressCall.h"
 #include "../Common/ExtractingFilePath.h"
 
+// **************** NanaZip Modification Start ****************
+#include "../Explorer/CopyHook.h"
+#include "RegistryUtils.h"
+// **************** NanaZip Modification End ****************
+
 #include "MessagesDialog.h"
 
 #include "App.h"
@@ -314,6 +319,40 @@ static bool CopyNamesToHGlobal(NMemory::CGlobal &hgDrop, const UStringVector &na
   return true;
 }
 
+// **************** NanaZip Modification Start ****************
+static BOOL FastDragDropAvailable()
+{
+    if (!WantFastDragDrop())
+    {
+        return FALSE;
+    }
+
+    static TOKEN_ELEVATION_TYPE CachedElevation = ([]() -> TOKEN_ELEVATION_TYPE
+    {
+        TOKEN_ELEVATION_TYPE CurrentElevation;
+        DWORD Length = sizeof(CurrentElevation);
+        if (!GetTokenInformation(
+            GetCurrentProcessToken(),
+            TokenElevationType,
+            &CurrentElevation,
+            Length,
+            &Length))
+        {
+            // Fallback to disable
+            return TokenElevationTypeFull;
+        }
+        return CurrentElevation;
+    }());
+
+    if (CachedElevation == TokenElevationTypeFull)
+    {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+// **************** NanaZip Modification End ****************
+
 void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
 {
   if (!DoesItSupportOperations())
@@ -333,6 +372,11 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
   FString dirPrefix;
   CTempDir tempDirectory;
 
+  // **************** NanaZip Modification Start ****************
+  bool FastDragDrop = FastDragDropAvailable();
+  FString FakeDirPath;
+  // **************** NanaZip Modification End ****************
+
   bool isFSFolder = IsFSFolder();
   if (isFSFolder)
     dirPrefix = us2fs(GetFsPath());
@@ -346,6 +390,20 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
     dirPrefix = tempDirectory.GetPath();
     // dirPrefix2 = dirPrefix;
     NFile::NName::NormalizeDirPathPrefix(dirPrefix);
+    // **************** NanaZip Modification Start ****************
+    if (FastDragDrop) {
+      FakeDirPath = dirPrefix;
+      FakeDirPath += FTEXT(COPY_HOOK_PREFIX) FTEXT(".");
+      FakeDirPath.Add_UInt64(reinterpret_cast<UInt64>(
+        g_App._window.operator HWND()));
+
+      if (!CreateDir(FakeDirPath))
+      {
+          MessageBox_Error(L"Can't create fake folder");
+          return;
+      }
+    }
+    // **************** NanaZip Modification End ****************
   }
 
   CDataObject *dataObjectSpec = new CDataObject;
@@ -357,43 +415,56 @@ void CPanel::OnDrag(LPNMLISTVIEW /* nmListView */)
     // names variable is     USED for drag and drop from NanaZip to Explorer or to NanaZip archive folder.
     // names variable is NOT USED for drag and drop from NanaZip to NanaZip File System folder.
 
-    FOR_VECTOR (i, indices)
+    // **************** NanaZip Modification Start ****************
+    if (!isFSFolder && FastDragDrop)
     {
-      UInt32 index = indices[i];
-      UString s;
-      if (isFSFolder)
-        s = GetItemRelPath(index);
-      else
-      {
-        s = GetItemName(index);
-        /*
-        // We use (keepAndReplaceEmptyPrefixes = true) in CAgentFolder::Extract
-        // So the following code is not required.
-        // Maybe we also can change IFolder interface and send some flag also.
-
-        if (s.IsEmpty())
-        {
-          // Correct_FsFile_Name("") returns "_".
-          // If extracting code removes empty folder prefixes from path (as it was in old version),
-          // Explorer can't find "_" folder in temp folder.
-          // We can ask Explorer to copy parent temp folder "7zE" instead.
-
-          names.Clear();
-          names.Add(dirPrefix2);
-          break;
-        }
-        */
-        s = Get_Correct_FsFile_Name(s);
-      }
-      names.Add(fs2us(dirPrefix) + s);
+      names.Add(fs2us(FakeDirPath));
     }
+    else {
+    // **************** NanaZip Modification End ****************
+      FOR_VECTOR(i, indices)
+      {
+        UInt32 index = indices[i];
+        UString s;
+        if (isFSFolder)
+          s = GetItemRelPath(index);
+        else
+        {
+          s = GetItemName(index);
+          /*
+          // We use (keepAndReplaceEmptyPrefixes = true) in CAgentFolder::Extract
+          // So the following code is not required.
+          // Maybe we also can change IFolder interface and send some flag also.
+
+          if (s.IsEmpty())
+          {
+            // Correct_FsFile_Name("") returns "_".
+            // If extracting code removes empty folder prefixes from path (as it was in old version),
+            // Explorer can't find "_" folder in temp folder.
+            // We can ask Explorer to copy parent temp folder "7zE" instead.
+
+            names.Clear();
+            names.Add(dirPrefix2);
+            break;
+          }
+          */
+          s = Get_Correct_FsFile_Name(s);
+        }
+        names.Add(fs2us(dirPrefix) + s);
+      }
+    // **************** NanaZip Modification Start ****************
+    }
+    // **************** NanaZip Modification End ****************
     if (!CopyNamesToHGlobal(dataObjectSpec->hGlobal, names))
       return;
   }
 
   CDropSource *dropSourceSpec = new CDropSource;
   CMyComPtr<IDropSource> dropSource = dropSourceSpec;
-  dropSourceSpec->NeedExtract = !isFSFolder;
+  // **************** NanaZip Modification Start ****************
+  // dropSourceSpec->NeedExtract = !isFSFolder;
+  dropSourceSpec->NeedExtract = !FastDragDrop && !isFSFolder;
+  // **************** NanaZip Modification End ****************
   dropSourceSpec->Panel = this;
   dropSourceSpec->Indices = indices;
   dropSourceSpec->Folder = fs2us(dirPrefix);
