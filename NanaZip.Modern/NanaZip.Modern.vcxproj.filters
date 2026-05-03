@@ -12,6 +12,7 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="AddressBar.cpp" />
     <ClCompile Include="StatusBar.cpp" />
+    <ClCompile Include="PasswordManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -19,6 +20,7 @@
     <ClInclude Include="AddressBar.h" />
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="ControlMacros.h" />
+    <ClInclude Include="PasswordManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Modern.def" />

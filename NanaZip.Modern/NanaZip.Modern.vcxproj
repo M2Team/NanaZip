@@ -137,6 +137,7 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="NanaZip.Modern.h" />
+    <ClInclude Include="PasswordManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -177,6 +178,9 @@
     <ClCompile Include="InformationPage.cpp">
       <DependentUpon>InformationPage.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="PasswordManager.cpp">
+      <DependentUpon>PasswordManager.h</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />

@@ -21,11 +21,13 @@
 #include "InformationPage.h"
 #include "ProgressPage.h"
 #include "PasswordPage.h"
+#include "PasswordManager.h"
 
 #pragma comment(lib, "comctl32.lib")
 
 #include <winrt/Windows.ApplicationModel.Resources.Core.h>
 #include <winrt/Windows.UI.Xaml.Hosting.h>
+#include <dwmapi.h>
 
 #include <mutex>
 #include <map>
@@ -556,6 +558,32 @@ EXTERN_C INT WINAPI K7ModernShowPasswordDialog(
     {
         return -1;
     }
+
+#pragma region Test Windows Hello
+    BOOL fCloak = true;
+    winrt::check_hresult(::DwmSetWindowAttribute(
+        WindowHandle,
+        DWMWINDOWATTRIBUTE::DWMWA_CLOAK,
+        &fCloak,
+        sizeof(fCloak))); 
+
+    auto VerifierResult = ::NanaZip::Modern::PasswordManager::WindowsHelloVerifier(
+        ParentWindowHandle);
+
+    VerifierResult.Completed(
+        [&](auto const& sender, auto const asyncStatus)
+        {
+            UNREFERENCED_PARAMETER(sender);
+            UNREFERENCED_PARAMETER(asyncStatus);
+            BOOL fCloak = false;
+            winrt::check_hresult(::DwmSetWindowAttribute(
+                WindowHandle,
+                DWMWINDOWATTRIBUTE::DWMWA_CLOAK,
+                &fCloak,
+                sizeof(fCloak)));
+            winrt::check_pointer(::SetFocus(WindowHandle));
+        });
+#pragma endregion
 
     using Interface =
         winrt::NanaZip::Modern::PasswordPage;
