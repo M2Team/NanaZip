@@ -3,6 +3,11 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.0 Update 7 (6.0.1711.0)**
+
+- Fix parsing issues for the UFS/UFS2 file system image readonly support.
+- Update Mile.Mobility to 1.1.544.
+
 **NanaZip 6.0 Update 6 (6.0.1701.0)**
 
 - Synchronize 7-Zip mainline implementations to 26.01. (Except the NanaZip File
