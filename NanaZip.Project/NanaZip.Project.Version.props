@@ -12,7 +12,7 @@
   <PropertyGroup>
     <NanaZipMajorVersion>6</NanaZipMajorVersion>
     <NanaZipMinorVersion>0</NanaZipMinorVersion>
-    <NanaZipBuildNumberDate>2026-04-28</NanaZipBuildNumberDate>
+    <NanaZipBuildNumberDate>2026-05-08</NanaZipBuildNumberDate>
     <NanaZipVersionTag>Update 7</NanaZipVersionTag>
   </PropertyGroup>
 </Project>
