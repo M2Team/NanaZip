@@ -64,11 +64,6 @@ namespace
 
     const std::int32_t g_SuperBlockSearchList[] = SBLOCKSEARCH;
 
-    // Limit resource consumption.
-    const std::size_t g_MaximumEntries = 10000;
-    // Protect against excessively-deep directory structures.
-    const std::size_t g_MaximumVisitDepth = 1000;
-
     struct PropertyItem
     {
         PROPID Property;
@@ -146,6 +141,7 @@ namespace NanaZip::Codecs::Archive
         bool m_IsUfs2 = false;
         bool m_IsBigEndian = false;
         fs m_SuperBlock = {};
+        std::uint64_t m_MaximumInodeCount = 0;
 
         // For GetAllPaths.
         std::deque<std::pair<std::uint32_t, std::string>> m_VisitQueue;
@@ -585,7 +581,7 @@ namespace NanaZip::Codecs::Archive
         {
             UfsInodeInformation Information;
 
-            if (m_VisitedOffsets.size() >= g_MaximumEntries)
+            if (m_VisitedOffsets.size() >= this->m_MaximumInodeCount)
             {
                 // Too many files, softly bail out.
                 return true;
@@ -695,10 +691,10 @@ namespace NanaZip::Codecs::Archive
                 }
                 else if (DT_DIR == Type)
                 {
-                    if (m_VisitQueue.size() < g_MaximumVisitDepth)
+                    if (m_VisitQueue.size() < this->m_MaximumInodeCount)
                     {
                         m_VisitQueue.emplace_back(
-                            RootInode,
+                            Inode,
                             RootPath + Name + "/");
                     }
                     else
@@ -841,6 +837,28 @@ namespace NanaZip::Codecs::Archive
                         continue;
                     }
 
+                    std::uint32_t InodePerCylinderGroup = this->ReadUInt32(
+                        &this->m_SuperBlock.fs_ipg);
+                    if (0 == InodePerCylinderGroup)
+                    {
+                        continue;
+                    }
+
+                    std::uint64_t MaximumInodeCount = CylinderGroupsCount;
+                    MaximumInodeCount *= InodePerCylinderGroup;
+                    if (MaximumInodeCount < UFS_ROOTINO)
+                    {
+                        // At least the root inode should be addressable.
+                        continue;
+                    }
+                    if (MaximumInodeCount > UINT32_MAX)
+                    {
+                        // Directory entry inode is 32 bits, so the maximum
+                        // inode count cannot exceed UINT32_MAX.
+                        continue;
+                    }
+                    this->m_MaximumInodeCount = MaximumInodeCount;
+
                     std::int32_t BlockSize = this->GetBlockSize();
                     if (BlockSize < MINBSIZE)
                     {
@@ -920,6 +938,7 @@ namespace NanaZip::Codecs::Archive
         {
             this->m_IsInitialized = false;
             this->m_FilePaths.clear();
+            this->m_MaximumInodeCount = 0;
             std::memset(&this->m_SuperBlock, 0, sizeof(this->m_SuperBlock));
             this->m_IsBigEndian = false;
             this->m_IsUfs2 = false;
