@@ -15,6 +15,8 @@
 
 [![Download NanaZip from SourceForge mirror](https://img.shields.io/badge/SourceForge-Download-orange)](https://sourceforge.net/projects/nanazip/files/latest/download)
 
+[中文](README_zh-CN.md)
+
 ![ContextMenu](Documents/ContextMenu.png)
 ![MainWindowLightMode](Documents/MainWindowLightMode.png)
 ![MainWindowDarkMode](Documents/MainWindowDarkMode.png)
