@@ -497,7 +497,6 @@ static bool CallExtractOnOpen() {
     false,
     false,
     ci.WriteZone,
-    true,
     true);
   return true;
 }
