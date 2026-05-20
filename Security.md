@@ -27,13 +27,14 @@ scenarios.
 - Ensure the issue can be reproduced by the latest stable and/or preview of
   NanaZip. Because NanaZip introduces several security mitigations, maybe the
   issue you have found will not be reproduced.
-- Perfer making a fix PR directly because we believe you may have a better
+- Prefer making a fix PR directly because we believe you may have a better
   workaround solution than us, but you need to follow the rules, which are
   mentioned in https://github.com/M2Team/NanaZip/blob/main/CONTRIBUTING.md. You
   should read that word by word first.
-  - The PR title and descriptions should not contain the words which make other
-    guys to know it's something about security issues to reduce the risk of
-    before use from malicious guys.
+  - To minimize the vulnerability window, please coordinate with the NanaZip
+    maintainers to publish the fixed source code, fixed release and advisory
+    at the same time. This is especially important for high-severity
+    vulnerabilities (e.g. path traversal or code execution).
 - If you don't want to make a fix PR directly, you need to provide a Proof of
   Concept (maybe a document, or samples) for that before you using private
   vulnerability reporting feature provided by GitHub, read 
@@ -44,6 +45,16 @@ scenarios.
   - We highly suggest you provide the fix logic source code snippets to help us
     to fix issues correctly. Because many related issues are hard for us to
     imagine how to fix them properly. This can make you and us save much time.
+- We will request CVEs for vulnerabilities introduced by our own code as part of
+  our security process. We may also publish fixes, advisories and/or request
+  CVEs for vulnerabilities in upstream code in the following cases:
+  - If the vulnerability is not reachable in upstream (e.g. because of build
+    configuration);
+  - If the issue has been fixed upstream without a security advisory;
+  - If a CVE or fix has not been published upstream 90 days after we've been
+    notified of the vulnerability.
+  - In these cases, we will provide information related to the upstream issue in
+    our advisory.
 
 ## Design Policy
 
