@@ -6,6 +6,8 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
 - Includes all the improvements from NanaZip 6.0 Update 7 (6.0.1711.0).
 - Introduce XAML XAML copy location dialog. (Contributed by dongle-the-gadget.)
+- Don't open Explorer by default during extract-on-open. (Contributed by
+  dinhngtu.)
 
 **NanaZip 6.5 Preview (6.5.1638.0)**
 
