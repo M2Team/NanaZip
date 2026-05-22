@@ -37,7 +37,7 @@
 #endif
 #endif
 
-#include <map>
+#include <Mile.Mobility.Utilities.FixedInteger.h>
 
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
@@ -157,31 +157,31 @@ namespace NanaZip::Codecs::Archive
         std::uint8_t ReadUInt8(
             const void* BaseAddress)
         {
-            return ::MileReadUInt8(BaseAddress);
+            return ::MoMileFixedIntegerRead8(BaseAddress);
         }
 
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
             return this->m_IsBigEndian
-                ? ::MileReadUInt16BigEndian(BaseAddress)
-                : ::MileReadUInt16LittleEndian(BaseAddress);
+                ? ::MoMileFixedIntegerReadBigEndian16(BaseAddress)
+                : ::MoMileFixedIntegerReadLittleEndian16(BaseAddress);
         }
 
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
             return this->m_IsBigEndian
-                ? ::MileReadUInt32BigEndian(BaseAddress)
-                : ::MileReadUInt32LittleEndian(BaseAddress);
+                ? ::MoMileFixedIntegerReadBigEndian32(BaseAddress)
+                : ::MoMileFixedIntegerReadLittleEndian32(BaseAddress);
         }
 
         std::uint64_t ReadUInt64(
             const void* BaseAddress)
         {
             return this->m_IsBigEndian
-                ? ::MileReadUInt64BigEndian(BaseAddress)
-                : ::MileReadUInt64LittleEndian(BaseAddress);
+                ? ::MoMileFixedIntegerReadBigEndian64(BaseAddress)
+                : ::MoMileFixedIntegerReadLittleEndian64(BaseAddress);
         }
 
         std::int8_t ReadInt8(

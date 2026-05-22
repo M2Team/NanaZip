@@ -16,6 +16,8 @@
 #include <unordered_set>
 #include <deque>
 
+#include <Mile.Mobility.Utilities.FixedInteger.h>
+
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
 namespace
@@ -145,7 +147,7 @@ namespace NanaZip::Codecs::Archive
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            return ::MileReadUInt32BigEndian(BaseAddress);
+            return ::MoMileFixedIntegerReadBigEndian32(BaseAddress);
         }
 
         std::uint32_t GetAlignedSize(

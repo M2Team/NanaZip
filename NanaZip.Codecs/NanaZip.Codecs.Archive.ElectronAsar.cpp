@@ -15,6 +15,8 @@
 #include <map>
 #include <Mile.Json.h>
 
+#include <Mile.Mobility.Utilities.FixedInteger.h>
+
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
 namespace
@@ -67,7 +69,7 @@ namespace NanaZip::Codecs::Archive
         std::uint32_t ReadUInt32(
             const void* BaseAddress)
         {
-            return ::MileReadUInt32LittleEndian(BaseAddress);
+            return ::MoMileFixedIntegerReadLittleEndian32(BaseAddress);
         }
 
         HRESULT ReadFileStream(
