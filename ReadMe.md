@@ -44,7 +44,7 @@ Kenji Mouri
 
 ## Features
 
-- Inherit all features from 7-Zip 26.00, [7-Zip ZS] and [7-Zip NSIS].
+- Inherit all features from 7-Zip 26.01, [7-Zip ZS] and [7-Zip NSIS].
 - Support the dark mode for all GUI components.
 - Support the Mica effect on the main window. You will enjoy the full window
   immersive Mica for all GUI components if you are using dark mode with HDR
@@ -91,7 +91,6 @@ Kenji Mouri
   - Snefru-256 (Implemented with RHash)
   - Tiger (Implemented with RHash)
   - Tiger2 (Implemented with RHash)
-  - BTIH (Implemented with RHash)
   - TTH (Implemented with RHash)
   - Whirlpool (Implemented with RHash)
   - XXH32 (Implemented with xxHash)
