@@ -14,6 +14,8 @@
 
 #include <map>
 
+#include <Mile.Mobility.Utilities.FixedInteger.h>
+
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
 namespace
@@ -228,7 +230,7 @@ namespace NanaZip::Codecs::Archive
                     break;
                 }
 
-                std::uint32_t Version = ::MileReadUInt32LittleEndian(
+                std::uint32_t Version = ::MoMileFixedIntegerReadLittleEndian32(
                     &HeaderBuffer[sizeof(std::uint32_t)]);
                 if (1 != Version)
                 {

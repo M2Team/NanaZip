@@ -14,6 +14,8 @@
 
 #include <map>
 
+#include <Mile.Mobility.Utilities.FixedInteger.h>
+
 #include "Mile.Helpers.Portable.Base.Unstaged.h"
 
 #include "NanaZip.Codecs.Specification.Zealfs.h"
@@ -101,7 +103,7 @@ namespace NanaZip::Codecs::Archive
         std::uint16_t ReadUInt16(
             const void* BaseAddress)
         {
-            return ::MileReadUInt16LittleEndian(BaseAddress);
+            return ::MoMileFixedIntegerReadLittleEndian16(BaseAddress);
         }
 
         std::uint32_t GetAlignedSize(
