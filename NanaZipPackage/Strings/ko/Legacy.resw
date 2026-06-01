@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -394,7 +394,7 @@
     <value>물리적 크기</value>
   </data>
   <data name="Resource1045" xml:space="preserve">
-    <value>해더 크기</value>
+    <value>헤더 크기</value>
   </data>
   <data name="Resource1046" xml:space="preserve">
     <value>체크섬</value>
@@ -600,6 +600,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>{0}로 압축해서 이메일 보내기</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>여기에 압축 풀기 (자동)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>폴더</value>
   </data>
@@ -648,6 +651,21 @@
   <data name="Resource2508" xml:space="preserve">
     <value>큰 메모리 페이지 사용</value>
   </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>압축 파일 기록 사용</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>경로 기록 사용</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>복사 기록 사용</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>폴더 기록 사용</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>해시를 소문자로 사용</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip 정보</value>
   </data>
@@ -682,8 +700,7 @@
     <value>{0} 파일은 이미 존재함</value>
   </data>
   <data name="Resource3009" xml:space="preserve">
-    <value>파일 '{0}'이 수정되었습니다.
-압축파일에 업데이트 하시겠습니까?</value>
+    <value>파일 '{0}'이 수정되었습니다. 압축파일에 업데이트 하시겠습니까?</value>
   </data>
   <data name="Resource3010" xml:space="preserve">
     <value>'{0}' 파일을 업데이트 할 수 없습니다.</value>
@@ -805,6 +822,12 @@
   <data name="Resource3431" xml:space="preserve">
     <value>파일 보안 속성을 복원</value>
   </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>압축 해제 후 폴더 열기</value>
+  </data>
+  <data name="Resource3434" xml:space="preserve">
+    <value>열 때 압축 해제 (건너뛰려면 Shift 누르기)</value>
+  </data>
   <data name="Resource3440" xml:space="preserve">
     <value>영역 전파. ID 스트림:</value>
   </data>
@@ -857,7 +880,7 @@
     <value>CRC가 다릅니다</value>
   </data>
   <data name="Resource3724" xml:space="preserve">
-    <value>사용할 수없는 데이터</value>
+    <value>사용할 수 없는 데이터</value>
   </data>
   <data name="Resource3725" xml:space="preserve">
     <value>데이터의 예기치 않은 종료</value>
@@ -875,7 +898,7 @@
     <value>암호가 잘못되었습니다.</value>
   </data>
   <data name="Resource3763" xml:space="preserve">
-    <value>사용할 수 없는 시작의  압축파일</value>
+    <value>사용할 수 없는 시작의 압축파일</value>
   </data>
   <data name="Resource3764" xml:space="preserve">
     <value>확인되지 않는 시작의 압축파일</value>
@@ -1244,8 +1267,7 @@
     <value>볼륨 크기가 부적절합니다.</value>
   </data>
   <data name="Resource7308" xml:space="preserve">
-    <value>지정된 볼륨 크기: {0} 바이트.
-이 볼륨 크기로 분할 하시겠습니까?</value>
+    <value>지정된 볼륨 크기: {0} 바이트. 이 볼륨 크기로 분할 하시겠습니까?</value>
   </data>
   <data name="Resource7400" xml:space="preserve">
     <value>파일 합치기</value>
@@ -1336,5 +1358,11 @@
   </data>
   <data name="Resource7714" xml:space="preserve">
     <value>디렉토리 접합</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>통합</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>파일을 NanaZip과 연결하려면 Windows 설정 앱 열기</value>
   </data>
 </root>
