@@ -18,7 +18,7 @@
 - NanaZip.Core: Commit 4d79dd7b7fbd8ec12fd01881761ea86d97526d53.
 - NanaZip.UI.Classic: Unknown because it modifies the old codebase a lot.
 - NanaZip.UI.Modern: Unknown because it modifies the old codebase a lot.
-- NanaZip.Universal: Commit 38906a9ecae2245a20967701dbc8a9dd83aad93e.
+- NanaZip.Universal: Commit 4d79dd7b7fbd8ec12fd01881761ea86d97526d53.
 
 ## BLAKE3
 
