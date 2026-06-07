@@ -318,7 +318,6 @@ static void *pt_decompress(void *arg)
 		/* zero should not happen here! */
 		result = pt_read(ctx, in, &wl->frame);
 		if (LZ5MT_isError(result)) {
-			list_move(&wl->node, &ctx->writelist_free);
 			goto error_lock;
 		}
 
@@ -329,6 +328,10 @@ static void *pt_decompress(void *arg)
 		if (in->size < 40 && ctx->frames == 1) {
 			out->size = 1024 * 64;
 		} else {
+			if (in->size < 14) {
+				result = ERROR(data_error);
+				goto error_lock;
+			}
 			/* get frame size for output buffer */
 			unsigned char *src = (unsigned char *)in->buf + 6;
 			out->size = (size_t) MEM_readLE64(src);

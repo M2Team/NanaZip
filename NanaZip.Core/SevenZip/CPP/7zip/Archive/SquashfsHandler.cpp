@@ -1140,20 +1140,14 @@ static HRESULT Lz4Decode(Byte *dest, SizeT *destLen, const Byte *src, SizeT *src
   char *Dst = (char *)dest;
   int compressedSize = (int)*srcLen;
   int dstCapacity = (int)*destLen;
+
   // int LZ4_decompress_safe (const char* src, char* dst, int compressedSize, int dstCapacity);
   int rv = LZ4_decompress_safe(Src, Dst, compressedSize, dstCapacity);
-  // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
-  if (rv == 0)
+  if (rv <= 0)
     return S_FALSE;
 
-  *destLen = rv;
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-  if (rv <= 0)
-      return S_FALSE;
-  *destLen = static_cast<SizeT>(rv);
-  *srcLen = static_cast<SizeT>(compressedSize);
-  // **************** NanaZip Modification End ****************
+  *destLen = (SizeT)rv;
+  *srcLen = (SizeT)compressedSize;
   return S_OK;
 }
 // **************** 7-Zip ZS Modification End ****************
@@ -1379,6 +1373,9 @@ HRESULT CHandler::Decompress(ISequentialOutStream *outStream, Byte *outBuf, bool
     if (outBuf)
     {
       *outBufWasWritten = true;
+      // **************** 7-Zip ZS Modification Start ****************
+      // TODO: Decompress should validate destLen <= outSizeMax before storing outBufWasWrittenSize
+      // **************** 7-Zip ZS Modification End ****************
       *outBufWasWrittenSize = (UInt32)destLen;
     }
     else
@@ -2223,6 +2220,13 @@ HRESULT CHandler::ReadBlock(UInt64 blockIndex, Byte *dest, size_t blockSize)
     packBlockSize = GET_COMPRESSED_BLOCK_SIZE(frag.Size);
     compressed = IS_COMPRESSED_BLOCK(frag.Size);
   }
+
+  // **************** 7-Zip ZS Modification Start ****************
+  /* TODO:
+   * ReadBlock should bound offsetInBlock + blockSize against _h.BlockSize
+   * (the actual allocation size), not the decoder-reported _cachedUnpackBlockSize
+   */
+  // **************** 7-Zip ZS Modification End ****************
 
   if (packBlockSize == 0)
   {

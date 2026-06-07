@@ -84,6 +84,55 @@ ERR_STATIC ERR_enum ERR_getErrorCode(size_t code) { if (!ERR_isError(code)) retu
 #define CHECK_V_F(e, f) size_t const e = f; if (ERR_isError(e)) return e
 #define CHECK_F(f)   { CHECK_V_F(_var_err__, f); }
 
+// **************** 7-Zip ZS Modification Start ****************
+/**
+ * Ignore: this is an internal helper.
+ *
+ * This is a helper function to help force C99-correctness during compilation.
+ * Under strict compilation modes, variadic macro arguments can't be empty.
+ * However, variadic function arguments can be. Using a function therefore lets
+ * us statically check that at least one (string) argument was passed,
+ * independent of the compilation flags.
+ */
+static INLINE_KEYWORD UNUSED_ATTR
+void _force_has_format_string(const char *format, ...) {
+  (void)format;
+}
+
+/**
+ * Ignore: this is an internal helper.
+ *
+ * We want to force this function invocation to be syntactically correct, but
+ * we don't want to force runtime evaluation of its arguments.
+ */
+#define _FORCE_HAS_FORMAT_STRING(...)              \
+    do {                                           \
+        if (0) {                                   \
+            _force_has_format_string(__VA_ARGS__); \
+        }                                          \
+    } while (0)
+
+#define ERR_QUOTE(str) #str
+
+/**
+ * Return the specified error if the condition evaluates to true.
+ *
+ * In debug modes, prints additional information.
+ * In order to do that (particularly, printing the conditional that failed),
+ * this can't just wrap RETURN_ERROR().
+ */
+#define RETURN_ERROR_IF(cond, err, ...)                                        \
+    do {                                                                       \
+        if (cond) {                                                            \
+            RAWLOG(3, "%s:%d: ERROR!: check %s failed, returning %s",          \
+                  __FILE__, __LINE__, ERR_QUOTE(cond), ERR_QUOTE(ERROR(err))); \
+            _FORCE_HAS_FORMAT_STRING(__VA_ARGS__);                             \
+            RAWLOG(3, ": " __VA_ARGS__);                                       \
+            RAWLOG(3, "\n");                                                   \
+            return ERROR(err);                                                 \
+        }                                                                      \
+    } while (0)
+// **************** 7-Zip ZS Modification End ****************
 
 /*-****************************************
 *  Error Strings
