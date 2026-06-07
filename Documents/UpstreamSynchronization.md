@@ -15,7 +15,7 @@
 
 ## 7-Zip ZS
 
-- NanaZip.Core: Commit 38906a9ecae2245a20967701dbc8a9dd83aad93e.
+- NanaZip.Core: Commit 4d79dd7b7fbd8ec12fd01881761ea86d97526d53.
 - NanaZip.UI.Classic: Unknown because it modifies the old codebase a lot.
 - NanaZip.UI.Modern: Unknown because it modifies the old codebase a lot.
 - NanaZip.Universal: Commit 38906a9ecae2245a20967701dbc8a9dd83aad93e.
@@ -46,7 +46,7 @@
 
 ## Lizard
 
-- NanaZip.Codecs: 2.1
+- NanaZip.Codecs: 2.1 with current used 7-Zip ZS modifications.
 
 ## LZ4
 
@@ -70,4 +70,4 @@
 
 ## ZSTDMT
 
-- NanaZip.Codecs: Follow 7-Zip ZS's integration.
+- NanaZip.Codecs: Follow current used 7-Zip ZS implementation.

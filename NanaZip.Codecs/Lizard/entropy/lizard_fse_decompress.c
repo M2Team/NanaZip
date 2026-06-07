@@ -194,6 +194,10 @@ FORCE_INLINE_TEMPLATE size_t FSE_decompress_usingDTable_generic(
     FSE_initDState(&state1, &bitD, dt);
     FSE_initDState(&state2, &bitD, dt);
 
+    // **************** 7-Zip ZS Modification Start ****************
+    RETURN_ERROR_IF(BIT_reloadDStream(&bitD) == BIT_DStream_overflow, corruption_detected, "");
+    // **************** 7-Zip ZS Modification End ****************
+
 #define FSE_GETSYMBOL(statePtr) fast ? FSE_decodeSymbolFast(statePtr, &bitD) : FSE_decodeSymbol(statePtr, &bitD)
 
     /* 4 symbols per loop */
@@ -233,7 +237,11 @@ FORCE_INLINE_TEMPLATE size_t FSE_decompress_usingDTable_generic(
             break;
     }   }
 
-    return op-ostart;
+    // **************** 7-Zip ZS Modification Start ****************
+    //return op-ostart;
+    assert(op >= ostart);
+    return (size_t)(op - ostart);
+    // **************** 7-Zip ZS Modification End ****************
 }
 
 
