@@ -3,6 +3,15 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.0 Update 8 (6.0.1742.0)**
+
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/4d79dd7b7fbd8ec12fd01881761ea86d97526d53.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.)
+- Update Korean translation. (Contributed by mcfyynpy68-create.)
+- Update Mile.Mobility to 1.1.564.
+
 **NanaZip 6.0 Update 7 (6.0.1711.0)**
 
 - Fix parsing issues for the UFS/UFS2 file system image readonly support.
