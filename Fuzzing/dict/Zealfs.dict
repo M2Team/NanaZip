@@ -1,0 +1,11 @@
+# libFuzzer dictionary for ZealFS (NanaZip codec).
+# Reference: NanaZip.Codecs.Specification.Zealfs.h
+"Z\x01"
+"\x10"
+"\x20"
+"\x40"
+"\xff"
+flag_d="\x01"
+flag_e="\x80"
+file_t="\x00"
+dir_t="\xf0"

@@ -1,7 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
+	<EnableASAN Condition="'$(Configuration)' == 'ReleaseAsan'">true</EnableASAN>
     <MileProjectOutputPath>$(MSBuildThisFileDirectory)Output\</MileProjectOutputPath>
   </PropertyGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1917" Project="Mile.Project.Build.props" />
+  <!-- Inject ReleaseAsan project configurations for every platform. -->
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="ReleaseAsan|x64">
+      <Configuration>ReleaseAsan</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseAsan|ARM64">
+      <Configuration>ReleaseAsan</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
 </Project>

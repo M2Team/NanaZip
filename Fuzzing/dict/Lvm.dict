@@ -1,0 +1,30 @@
+# libFuzzer dictionary for Linux LVM2 physical-volume metadata (NanaZip codec).
+# Reference: NanaZip.Core/SevenZip/CPP/7zip/Archive/LvmHandler.cpp
+# Two signatures must match in the PV label:
+#   bytes  0..7  : "LABELONE"
+#   bytes 24..31 : "LVM2 001"
+label="LABELONE"
+lvm2_001="LVM2 001"
+# 16-byte magic at start of each on-disk metadata text area.
+fmtt_magic=" LVM2 x[5A%r0N*>"
+# Common ASCII tokens in the metadata text format.
+id="id ="
+seqno="seqno ="
+status="status ="
+contents="contents ="
+version="version ="
+extent_size="extent_size ="
+pv_count="pv_count ="
+physical_volumes="physical_volumes {"
+logical_volumes="logical_volumes {"
+flags="flags ="
+allocation_policy="allocation_policy ="
+striped="\"STRIPED\""
+mirror="\"MIRROR\""
+raid="\"RAID\""
+read_only="\"READ\""
+write_able="\"WRITE\""
+visible="\"VISIBLE\""
+brace_open="{"
+brace_close="}"
+sector="\x00\x02\x00\x00"
