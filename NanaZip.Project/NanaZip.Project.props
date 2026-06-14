@@ -15,5 +15,8 @@
     <NanaZipProjectCreationDate>2021-08-31</NanaZipProjectCreationDate>
     <MileProjectVersion>$(NanaZipMajorVersion).$(NanaZipMinorVersion).$([System.DateTime]::Parse('$(NanaZipBuildNumberDate)').Subtract($([System.DateTime]::Parse('$(NanaZipProjectCreationDate)'))).TotalDays).0</MileProjectVersion>
     <MileProjectVersionTag>$(NanaZipVersionTag)</MileProjectVersionTag>
+    <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == '' And $([System.String]::Copy('$(NanaZipVersionTag)').Contains('Preview'))">true</NanaZipBuildPreviewRelease>
+    <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == '' And $([System.String]::Copy('$(NanaZipVersionTag)').Contains('Final'))">true</NanaZipBuildPreviewRelease>
+    <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == ''">false</NanaZipBuildPreviewRelease>
   </PropertyGroup>
 </Project>
