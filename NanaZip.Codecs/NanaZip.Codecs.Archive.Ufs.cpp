@@ -1195,7 +1195,7 @@ namespace NanaZip::Codecs::Archive
 
                 ISequentialOutStream* OutputStream = nullptr;
                 hr = ExtractCallback->GetStream(
-                    Indices[i],
+                    ActualFileIndex,
                     &OutputStream,
                     AskMode);
                 if (FAILED(hr))
