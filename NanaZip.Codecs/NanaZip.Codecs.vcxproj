@@ -5,7 +5,6 @@
     <RootNamespace>NanaZip.Codecs</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
     <MileProjectFileDescription>NanaZip Codecs</MileProjectFileDescription>
@@ -21,6 +20,7 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1917" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1917" Project="Mile.Project.Cpp.props" />
   <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <Import Project="..\NanaZip.Project\NanaZip.Project.Runtime.props" />
   <Import Project="..\K7Base\K7Base.props" />
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
   <PropertyGroup>
@@ -45,12 +45,6 @@
       <ModuleDefinitionFile>NanaZip.Codecs.def</ModuleDefinitionFile>
       <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
     </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
-    <ClCompile>
-      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
-    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="NanaZip.Codecs.def" />
