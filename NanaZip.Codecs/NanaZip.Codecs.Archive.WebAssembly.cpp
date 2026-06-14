@@ -304,7 +304,14 @@ namespace NanaZip::Codecs::Archive
                         }
                         if (NameSize)
                         {
-                            CustomName = std::string(NameSize, '\0');
+                            try
+                            {
+                                CustomName = std::string(NameSize, '\0');
+                            }
+                            catch (const std::bad_alloc&)
+                            {
+                                break;
+                            }
                             if (FAILED(this->ReadFileStream(
                                 i,
                                 &CustomName[0],
