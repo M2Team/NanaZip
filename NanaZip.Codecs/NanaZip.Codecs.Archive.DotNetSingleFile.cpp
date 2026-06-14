@@ -91,6 +91,8 @@ namespace
     // implementations.
     const std::size_t g_SignatureSearchBufferSize = 20 << 20;
 
+    const std::size_t g_ExtractBufferSize = 1UL << 16;
+
     /**
      * @brief Identifies the type of file embedded into the bundle. The bundler
      *        differentiates a few kinds of files via the manifest, with respect
@@ -740,7 +742,17 @@ namespace NanaZip::Codecs::Archive
                 return S_FALSE;
             }
 
+            std::vector<std::uint8_t> Buffer;
             HRESULT hr = S_OK;
+
+            try
+            {
+                Buffer = std::vector<std::uint8_t>(g_ExtractBufferSize);
+            }
+            catch (const std::bad_alloc&)
+            {
+                return E_OUTOFMEMORY;
+            }
 
             INT32 AskMode = TestMode
                 ? SevenZipExtractAskModeTest
@@ -789,39 +801,86 @@ namespace NanaZip::Codecs::Archive
                     ActualFileIndex,
                     &OutputStream,
                     AskMode);
-                if (FAILED(hr))
+                if (FAILED(hr) || !OutputStream)
                 {
-                    continue;
-                }
-                if (!OutputStream)
-                {
+                    ExtractCallback->SetOperationResult(
+                        SevenZipExtractOperationResultUnsupportedMethod);
                     continue;
                 }
 
-                bool Succeeded = false;
+                SEVENZIP_EXTRACT_OPERATION_RESULT Result =
+                    SevenZipExtractOperationResultUnavailable;
                 if (Information.Size == Information.CompressedSize)
                 {
-                    std::vector<std::uint8_t> Buffer(
-                        static_cast<std::size_t>(Information.Size));
-                    if (SUCCEEDED(this->ReadFileStream(
+                    std::int64_t ProcessedSize = 0;
+                    UINT64 ActualOffset;
+
+                    if (FAILED(this->m_FileStream->Seek(
                         Information.Offset,
-                        &Buffer[0],
-                        static_cast<std::size_t>(Information.Size))))
+                        STREAM_SEEK_SET,
+                        &ActualOffset)))
                     {
-                        UINT32 ProceededSize = 0;
-                        Succeeded = SUCCEEDED(OutputStream->Write(
-                            &Buffer[0],
-                            static_cast<UINT32>(Information.Size),
-                            &ProceededSize));
+                        Result = SevenZipExtractOperationResultUnavailable;
+                        goto done;
                     }
+                    if (ActualOffset != static_cast<UINT64>(Information.Offset))
+                    {
+                        Result = SevenZipExtractOperationResultUnexpectedEnd;
+                        goto done;
+                    }
+
+                    while (ProcessedSize < Information.Size)
+                    {
+                        std::size_t ThisRead;
+
+                        if (FAILED(::NanaZipCodecsReadInputStream(
+                            this->m_FileStream,
+                            &Buffer[0],
+                            (std::min)(
+                                static_cast<std::size_t>(
+                                    Information.Size - ProcessedSize),
+                                Buffer.size()),
+                            &ThisRead)))
+                        {
+                            Result = SevenZipExtractOperationResultUnavailable;
+                            goto done;
+                        }
+                        if (0 == ThisRead)
+                        {
+                            Result = SevenZipExtractOperationResultUnexpectedEnd;
+                            goto done;
+                        }
+
+                        std::size_t ThisWrite = 0;
+                        while (ThisWrite < ThisRead)
+                        {
+                            // ThisRead is bounded by buffer size
+                            UINT32 RemainingToWrite = static_cast<UINT32>(
+                                ThisRead - ThisWrite);
+                            UINT32 SucceededWrite;
+
+                            if (FAILED(OutputStream->Write(
+                                &Buffer[ThisWrite],
+                                RemainingToWrite,
+                                &SucceededWrite)))
+                            {
+                                Result = SevenZipExtractOperationResultUnavailable;
+                                goto done;
+                            }
+
+                            ThisWrite += SucceededWrite;
+                        }
+
+                        ProcessedSize += static_cast<std::int64_t>(ThisRead);
+                    }
+
+                    Result = SevenZipExtractOperationResultSuccess;
                 }
 
+done:
                 OutputStream->Release();
 
-                ExtractCallback->SetOperationResult(
-                    Succeeded
-                    ? SevenZipExtractOperationResultSuccess
-                    : SevenZipExtractOperationResultUnavailable);
+                ExtractCallback->SetOperationResult(Result);
             }
 
             return S_OK;
