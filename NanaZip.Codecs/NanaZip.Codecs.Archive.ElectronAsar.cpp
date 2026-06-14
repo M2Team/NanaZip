@@ -112,7 +112,7 @@ namespace NanaZip::Codecs::Archive
             UNREFERENCED_PARAMETER(Event);
             UNREFERENCED_PARAMETER(Parsed);
 
-            if (Depth > g_MaximumVisitDepth)
+            if (std::cmp_greater(Depth, g_MaximumVisitDepth))
             {
                 return false;
             }
