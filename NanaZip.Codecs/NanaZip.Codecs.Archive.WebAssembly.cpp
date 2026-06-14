@@ -302,6 +302,10 @@ namespace NanaZip::Codecs::Archive
                             }
                             Size -= ProcessedBytes;
                         }
+                        if (NameSize > BundleSize)
+                        {
+                            break;
+                        }
                         if (NameSize)
                         {
                             try
