@@ -70,7 +70,8 @@
       <InputBinariesPath>$(MSBuildThisFileDirectory)Output\Binaries\Release\</InputBinariesPath>
       <OutputBinariesPath>$(MSBuildThisFileDirectory)Output\Binaries\Root\Binaries\</OutputBinariesPath>
       <OutputSymbolsPath>$(MSBuildThisFileDirectory)Output\Binaries\Root\Symbols\</OutputSymbolsPath>
-      <OutputFileNamePrefix>NanaZip_$(MileProjectVersion)</OutputFileNamePrefix>
+      <OutputFileNamePrefix Condition="'$(NanaZipBuildPreviewRelease)' != 'true'">NanaZip_$(MileProjectVersion)</OutputFileNamePrefix>
+      <OutputFileNamePrefix Condition="'$(NanaZipBuildPreviewRelease)' == 'true'">NanaZipPreview_$(MileProjectVersion)</OutputFileNamePrefix>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputSymbolsPath)arm64" />
