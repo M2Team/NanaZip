@@ -129,6 +129,8 @@ namespace
         std::uint32_t Inode = 0;
         UfsInodeInformation Information;
     };
+
+    const std::int32_t g_MaxBlockSize = 65536;
 }
 
 namespace NanaZip::Codecs::Archive
@@ -823,9 +825,37 @@ namespace NanaZip::Codecs::Archive
                         }
                     }
 
+                    std::int32_t BlockSize = this->GetBlockSize();
+                    if (BlockSize < MINBSIZE ||
+                        BlockSize > g_MaxBlockSize ||
+                        (BlockSize & (BlockSize - 1)) != 0)
+                    {
+                        continue;
+                    }
+
                     std::int32_t FragmentsCount = this->ReadInt32(
                         &this->m_SuperBlock.fs_frag);
-                    if (FragmentsCount < 1)
+                    if (FragmentsCount < 1 || FragmentsCount > MAXFRAG)
+                    {
+                        continue;
+                    }
+
+                    std::int32_t FragmentBlockSize =
+                        this->GetFragmentBlockSize();
+                    if ((FragmentBlockSize & (FragmentBlockSize - 1)) != 0)
+                    {
+                        continue;
+                    }
+                    std::int32_t CalculatedBlockSize;
+                    if (MO_FALSE == ::MoMileFixedIntegerCheckedMultiplication32(
+                        reinterpret_cast<PMO_UINT32>(&CalculatedBlockSize),
+                        MO_TRUE,
+                        static_cast<MO_UINT32>(FragmentBlockSize),
+                        static_cast<MO_UINT32>(FragmentsCount)))
+                    {
+                        continue;
+                    }
+                    if (CalculatedBlockSize != BlockSize)
                     {
                         continue;
                     }
@@ -858,12 +888,6 @@ namespace NanaZip::Codecs::Archive
                         continue;
                     }
                     this->m_MaximumInodeCount = MaximumInodeCount;
-
-                    std::int32_t BlockSize = this->GetBlockSize();
-                    if (BlockSize < MINBSIZE)
-                    {
-                        continue;
-                    }
 
                     std::int32_t SuperBlockSize = this->ReadInt32(
                         &this->m_SuperBlock.fs_sbsize);
