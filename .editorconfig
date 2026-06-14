@@ -56,7 +56,7 @@ charset = utf-16le
 [*.inf]
 charset = utf-16le
 
-[*.bat]
+[*.{bat,cmd}]
 charset = utf-8
 insert_final_newline = true
 
