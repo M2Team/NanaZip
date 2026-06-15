@@ -2,6 +2,19 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 6.5 Final (6.5.1749.0)**
+
+- Fix several issues for codecs. (Contributed by dinhngtu. Thanks to
+  Thepigtails.)
+- Introduce optional build with AddressSanitizer (ASAN) support. (Contributed
+  by JarLob.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/d8d651b72a6a85353a23d3f19e0fd2d96c0f36b4.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.) (Note: Actually no useful changes since last synchronization.)
+- Update release tags rules in NanaZip Versioning.
+- Improve the build tools implementations.
+
 **NanaZip 6.5 Preview (6.5.1742.0)**
 
 - Includes all the improvements from NanaZip 6.0 Update 8 (6.0.1742.0).
