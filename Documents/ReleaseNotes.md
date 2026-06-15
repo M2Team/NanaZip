@@ -3,6 +3,21 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.5 (6.5.1750.0)**
+
+- Introduce XAML copy location dialog. (Contributed by dongle-the-gadget.)
+- Don't open Explorer by default during extract-on-open. (Contributed by
+  dinhngtu.)
+- Fix several issues for codecs. (Contributed by dinhngtu. Thanks to Pig-Tail.)
+- Introduce optional build with AddressSanitizer (ASAN) support. (Contributed
+  by JarLob.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/d8d651b72a6a85353a23d3f19e0fd2d96c0f36b4.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.) (Note: Actually no useful changes since last synchronization.)
+- Update release tags rules in NanaZip Versioning.
+- Improve the build tools implementations.
+
 **NanaZip 6.0 Update 8 (6.0.1742.0)**
 
 - Synchronize the 7-Zip ZS implementations to
