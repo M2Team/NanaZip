@@ -9,13 +9,22 @@
   MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(MileProjectType)' != 'StaticLibrary'">
+  <PropertyGroup Condition="'$(NanaZipBuildWithSanitizers)' != 'true' And '$(MileProjectType)' != 'StaticLibrary'">
     <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(NanaZipBuildWithSanitizers)' == 'true'">
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(NanaZipBuildWithSanitizers)' != 'true'">
     <ClCompile>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
+  <ItemGroup Condition="'$(NanaZipBuildWithSanitizers)' == 'true'">
+    <ReferenceCopyLocalPaths Condition="'$(Platform)'=='ARM64'" Include="$(VCToolsInstallDir)bin\HostArm64\arm64\clang_rt.asan_dynamic-aarch64.dll" />
+    <ReferenceCopyLocalPaths Condition="'$(Platform)'=='ARM64'" Include="$(VCToolsInstallDir)bin\HostArm64\arm64\clang_rt.asan_dynamic-aarch64.pdb" />
+    <ReferenceCopyLocalPaths Condition="'$(Platform)'=='x64'" Include="$(VCToolsInstallDir)bin\Hostx64\x64\clang_rt.asan_dynamic-x86_64.dll" />
+    <ReferenceCopyLocalPaths Condition="'$(Platform)'=='x64'" Include="$(VCToolsInstallDir)bin\Hostx64\x64\clang_rt.asan_dynamic-x86_64.pdb" />
+  </ItemGroup>
 </Project>

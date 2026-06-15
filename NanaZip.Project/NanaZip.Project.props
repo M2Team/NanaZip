@@ -18,5 +18,6 @@
     <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == '' And $([System.String]::Copy('$(NanaZipVersionTag)').Contains('Preview'))">true</NanaZipBuildPreviewRelease>
     <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == '' And $([System.String]::Copy('$(NanaZipVersionTag)').Contains('Final'))">true</NanaZipBuildPreviewRelease>
     <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == ''">false</NanaZipBuildPreviewRelease>
+    <NanaZipBuildWithSanitizers Condition="'$(NanaZipBuildWithSanitizers)' == ''">false</NanaZipBuildWithSanitizers>
   </PropertyGroup>
 </Project>
