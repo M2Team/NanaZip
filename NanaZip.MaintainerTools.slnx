@@ -2,5 +2,4 @@
   <Project Path="NanaZip.Build.Tasks/NanaZip.Build.Tasks.csproj" />
   <Project Path="NanaZip.MigrateLegacyStringResources/NanaZip.MigrateLegacyStringResources.csproj" />
   <Project Path="NanaZip.ProjectAssetsGenerator/NanaZip.ProjectAssetsGenerator.csproj" />
-  <Project Path="NanaZip.RefreshPackageVersion/NanaZip.RefreshPackageVersion.csproj" />
 </Solution>
