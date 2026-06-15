@@ -4,8 +4,7 @@ For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
 **NanaZip 6.5 Final (6.5.1749.0)**
 
-- Fix several issues for codecs. (Contributed by dinhngtu. Thanks to
-  Thepigtails.)
+- Fix several issues for codecs. (Contributed by dinhngtu. Thanks to Pig-Tail.)
 - Introduce optional build with AddressSanitizer (ASAN) support. (Contributed
   by JarLob.)
 - Synchronize the 7-Zip ZS implementations to
