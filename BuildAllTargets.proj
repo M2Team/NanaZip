@@ -4,10 +4,16 @@
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="NanaZip.Project\NanaZip.Project.props" />
   <UsingTask
+    TaskName="NanaZip.Build.Tasks.RefreshAppxManifestResourceIdentifies"
+    AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
+  <UsingTask
     TaskName="NanaZip.Build.Tasks.RefreshAppxManifestVersion"
     AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
   <UsingTask
     TaskName="NanaZip.Build.Tasks.RefreshProjectBuildNumberDate"
+    AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
+  <UsingTask
+    TaskName="NanaZip.Build.Tasks.RefreshProjectResources"
     AssemblyFile="$(MSBuildThisFileDirectory)NanaZip.Project\NanaZip.Build.Tasks.dll"/>
   <Target Name="RefreshVersion">
     <Exec Command="git show -s --format=%25%25cs" ConsoleToMSBuild="true" IgnoreExitCode="true">
@@ -26,6 +32,11 @@
     <RefreshAppxManifestVersion
       FilePath="$(MSBuildThisFileDirectory)NanaZipPackage\Package.appxmanifest"
       Version="$(MileProjectVersion)" />
+    <RefreshAppxManifestResourceIdentifies
+      FilePath="$(MSBuildThisFileDirectory)NanaZipPackage\Package.appxmanifest"/>
+    <RefreshProjectResources
+      RootPath="$(MSBuildThisFileDirectory)"
+      BuildPreviewRelease="$(NanaZipBuildPreviewRelease)" />
   </Target>
   <Target Name="Restore">
     <ItemGroup>
