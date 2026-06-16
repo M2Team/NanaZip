@@ -10,9 +10,9 @@
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NanaZipMajorVersion>6</NanaZipMajorVersion>
-    <NanaZipMinorVersion>5</NanaZipMinorVersion>
-    <NanaZipBuildNumberDate>2026-06-16</NanaZipBuildNumberDate>
-    <!-- <NanaZipVersionTag>Final</NanaZipVersionTag> -->
+    <NanaZipMajorVersion>7</NanaZipMajorVersion>
+    <NanaZipMinorVersion>0</NanaZipMinorVersion>
+    <NanaZipBuildNumberDate>2026-06-17</NanaZipBuildNumberDate>
+    <NanaZipVersionTag>Preview</NanaZipVersionTag>
   </PropertyGroup>
 </Project>
