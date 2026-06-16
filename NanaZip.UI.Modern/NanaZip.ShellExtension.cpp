@@ -1006,7 +1006,6 @@ namespace NanaZip::ShellExtension
             else
             {
                 this->m_CurrentSubCommand = this->m_SubCommands.cbegin();
-                this->AddRef();
                 return this->QueryInterface(IID_PPV_ARGS(ppEnum));
             }
         }
