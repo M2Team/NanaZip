@@ -47,6 +47,17 @@
           Click="TestButtonClick"
           Icon="Accept"
           ToolTipService.ToolTip="[Test]" />
+        <AppBarButton
+          x:Uid="/NanaZip.Modern/MainWindowToolBarPage/SmartExtractButton"
+          x:Name="SmartExtractButton"
+          Width="48"
+          AutomationProperties.Name="[Smart Extract and Open]"
+          Click="SmartExtractButtonClick"
+          ToolTipService.ToolTip="[Smart Extract and Open]">
+          <AppBarButton.Content>
+            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8DA;" />
+          </AppBarButton.Content>
+        </AppBarButton>
         <AppBarSeparator />
         <AppBarButton
           x:Name="CopyButton"

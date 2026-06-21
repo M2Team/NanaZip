@@ -1342,6 +1342,55 @@ void CPanel::ExtractFromArchive()
       );
 }
 
+// **************** NanaZip Modification Start ****************
+bool CPanel::SmartExtractArchives()
+{
+  UStringVector paths;
+  UString outFolder;
+
+  if (_parentFolders.Size() > 0)
+  {
+    const CFolderLink &fl = _parentFolders[0];
+    if (fl.IsVirtual || fl.VirtualPath.IsEmpty() || fl.ParentFolderPath.IsEmpty())
+    {
+      MessageBox_Error_UnsupportOperation();
+      return false;
+    }
+    paths.Add(fl.VirtualPath);
+    outFolder = fl.ParentFolderPath;
+  }
+  else
+  {
+    if (!IsFSFolder())
+    {
+      MessageBox_Error_UnsupportOperation();
+      return false;
+    }
+    CRecordVector<UInt32> indices;
+    GetOperatedItemIndices(indices);
+    GetFilePaths(indices, paths);
+    if (paths.IsEmpty())
+      return false;
+    outFolder = GetFsPath();
+  }
+
+  if (outFolder.IsEmpty())
+    return false;
+
+  CContextMenuInfo ci;
+  ci.Load();
+
+  ::ExtractArchives(paths, outFolder
+      , false // showDialog
+      , false // elimDup
+      , ci.WriteZone
+      , true // smartExtract
+      , true // openFolder
+      );
+  return true;
+}
+// **************** NanaZip Modification End ****************
+
 /*
 static void AddValuePair(UINT resourceID, UInt64 value, UString &s)
 {
