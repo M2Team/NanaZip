@@ -125,6 +125,14 @@
     <value>Mais</value>
     <comment>More</comment>
   </data>
+  <data name="SmartExtractButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Smart Extract and Open</value>
+    <comment>Smart Extract and Open</comment>
+  </data>
+  <data name="SmartExtractButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Smart Extract and Open</value>
+    <comment>Smart Extract and Open</comment>
+  </data>
   <data name="SponsorButton.AcquireText" xml:space="preserve">
     <value>Patrocinar NanaZip</value>
     <comment>Sponsor NanaZip</comment>
