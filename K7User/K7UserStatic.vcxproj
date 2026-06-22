@@ -20,7 +20,7 @@
       <Version>1.1.564</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Internal">
-      <Version>1.0.3586</Version>
+      <Version>1.0.3648</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.Helpers">
       <Version>1.0.1171</Version>
