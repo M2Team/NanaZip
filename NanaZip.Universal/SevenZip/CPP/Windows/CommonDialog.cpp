@@ -13,7 +13,7 @@
 #endif
 
 #include "CommonDialog.h"
-#include "Defs.h"
+#include "WinDefs.h"
 // #include "FileDir.h"
 
 #ifndef _UNICODE

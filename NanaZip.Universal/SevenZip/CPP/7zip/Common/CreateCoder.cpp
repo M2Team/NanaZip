@@ -2,7 +2,7 @@
 
 #include "StdAfx.h"
 
-#include "../../Windows/Defs.h"
+#include "../../Windows/WinDefs.h"
 #include "../../Windows/PropVariant.h"
 
 #include "CreateCoder.h"
@@ -38,13 +38,14 @@ extern CExternalCodecs g_ExternalCodecs;
 
 void RegisterCodec(const CCodecInfo *codecInfo) throw()
 {
+  // **************** NanaZip Modification Start ****************
 #ifndef Z7_SFX
   if (!::K7BaseGetAllowedCodecPolicy(codecInfo->Name))
   {
     return;
   }
 #endif
-
+  // **************** NanaZip Modification End ****************
   if (g_NumCodecs < kNumCodecsMax)
     g_Codecs[g_NumCodecs++] = codecInfo;
 }

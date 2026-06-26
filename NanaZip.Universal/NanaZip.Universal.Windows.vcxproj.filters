@@ -574,7 +574,7 @@
     <ClInclude Include="SevenZip\CPP\Windows\ErrorMsg.h">
       <Filter>SevenZip\CPP\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="SevenZip\CPP\Windows\Defs.h">
+    <ClInclude Include="SevenZip\CPP\Windows\WinDefs.h">
       <Filter>SevenZip\CPP\Windows</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\MyLinux.h">

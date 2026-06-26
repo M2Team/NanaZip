@@ -9,7 +9,7 @@
 #endif
 
 #include "FileSystem.h"
-#include "Defs.h"
+#include "WinDefs.h"
 
 #ifndef _UNICODE
 extern bool g_IsNT;

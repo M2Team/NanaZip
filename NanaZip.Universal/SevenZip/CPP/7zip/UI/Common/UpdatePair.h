@@ -15,7 +15,7 @@ struct CUpdatePair
   int DirIndex;
   int HostIndex; // >= 0 for alt streams only, contains index of host pair
 
-  CUpdatePair(): ArcIndex(-1), DirIndex(-1), HostIndex(-1) {}
+  void Construct() { ArcIndex = -1; DirIndex = -1; HostIndex = -1; }
 };
 
 void GetUpdatePairInfoList(
