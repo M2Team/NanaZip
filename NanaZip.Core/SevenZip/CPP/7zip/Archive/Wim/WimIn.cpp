@@ -609,6 +609,7 @@ HRESULT CDatabase::ParseDirItem(size_t pos, int parent, unsigned dirLevel)
       return S_FALSE;
 
     CItem item;
+    item.Construct();
     const UInt32 attrib = Get32(p + 8);
     item.IsDir = ((attrib & 0x10) != 0);
     {
@@ -729,6 +730,7 @@ HRESULT CDatabase::ParseDirItem(size_t pos, int parent, unsigned dirLevel)
       {
         ThereAreAltStreams = true;
         CItem item2;
+        item2.Construct();
         item2.Offset = pos;
         item2.IsAltStream = true;
         item2.Parent = (int)prevIndex;
@@ -1531,6 +1533,7 @@ HRESULT CDatabase::FillAndCheck(const CObjectVector<CVolume> &volumes)
         if (!r.IsSolidBig() || Solids[r.SolidIndex].FirstSmallStream < 0)
         {
           CItem item;
+          item.Construct();
           item.Offset = 0;
           item.StreamIndex = (int)i;
           item.ImageIndex = -1;

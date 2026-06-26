@@ -229,10 +229,11 @@ static FString GetBaseFolderPrefixFromRegistry()
       && !NFind::DoesFileOrDirExist(moduleFolderPrefix + kFormatsFolderName))
   {
     FString path;
-    if (ReadPathFromRegistry(HKEY_CURRENT_USER,  kProgramPath2Value, path)) return path;
-    if (ReadPathFromRegistry(HKEY_LOCAL_MACHINE, kProgramPath2Value, path)) return path;
-    if (ReadPathFromRegistry(HKEY_CURRENT_USER,  kProgramPathValue,  path)) return path;
-    if (ReadPathFromRegistry(HKEY_LOCAL_MACHINE, kProgramPathValue,  path)) return path;
+    if (   ReadPathFromRegistry(HKEY_CURRENT_USER,  kProgramPath2Value, path)
+        || ReadPathFromRegistry(HKEY_LOCAL_MACHINE, kProgramPath2Value, path)
+        || ReadPathFromRegistry(HKEY_CURRENT_USER,  kProgramPathValue,  path)
+        || ReadPathFromRegistry(HKEY_LOCAL_MACHINE, kProgramPathValue,  path))
+      moduleFolderPrefix = path;
   }
   #endif
   

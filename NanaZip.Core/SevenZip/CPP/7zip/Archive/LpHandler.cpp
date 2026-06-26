@@ -223,12 +223,13 @@ struct CPartition
   UInt64 GetSize() const { return NumSectors << kSectorSizeLog; }
   UInt64 GetPackSize() const { return NumSectors_Pack << kSectorSizeLog; }
   
-  CPartition():
-      MethodsMask(0),
-      NumSectors(0),
-      NumSectors_Pack(0),
-      Ext(NULL)
-      {}
+  void Construct()
+  {
+    MethodsMask = 0;
+    NumSectors = 0;
+    NumSectors_Pack = 0;
+    Ext = NULL;
+  }
 };
 
 
@@ -609,6 +610,7 @@ HRESULT CHandler::Open2(IInStream *stream)
     for (UInt32 i = 0; i < d.num_entries; i++)
     {
       CPartition part;
+      part.Construct();
       part.Parse(buffer + d.offset + i * d.entry_size);
       const UInt32 extLimit = part.first_extent_index + part.num_extents;
       if (extLimit < part.first_extent_index ||

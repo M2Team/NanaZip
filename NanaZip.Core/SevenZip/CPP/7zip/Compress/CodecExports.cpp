@@ -8,7 +8,7 @@
 #include "../../Common/ComTry.h"
 #include "../../Common/MyCom.h"
 
-#include "../../Windows/Defs.h"
+#include "../../Windows/WinDefs.h"
 #include "../../Windows/PropVariant.h"
 
 #include "../ICoder.h"

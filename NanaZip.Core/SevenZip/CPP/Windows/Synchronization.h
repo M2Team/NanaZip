@@ -7,7 +7,7 @@
 
 #include "../Common/MyTypes.h"
 
-#include "Defs.h"
+#include "WinDefs.h"
 
 #ifdef _WIN32
 #include "Handle.h"

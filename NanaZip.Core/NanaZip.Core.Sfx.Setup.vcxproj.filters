@@ -212,7 +212,7 @@
     <ClInclude Include="SevenZip\CPP\Windows\COM.h">
       <Filter>SevenZip\CPP\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="SevenZip\CPP\Windows\Defs.h">
+    <ClInclude Include="SevenZip\CPP\Windows\WinDefs.h">
       <Filter>SevenZip\CPP\Windows</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Windows\DLL.h">

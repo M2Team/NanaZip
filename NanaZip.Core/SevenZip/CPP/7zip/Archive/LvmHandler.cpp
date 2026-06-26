@@ -1050,8 +1050,6 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   COM_TRY_BEGIN
   NCOM::CPropVariant prop;
 
-  const CItem &item = _items[index];
-
   // const CLogVol &item = _items[index];
 
   if (index >= _items.Size())
@@ -1070,6 +1068,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
   }
   else
   {
+    const CItem &item = _items[index];
     switch (propID)
     {
     case kpidPath:

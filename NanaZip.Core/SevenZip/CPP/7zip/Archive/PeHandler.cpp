@@ -758,7 +758,13 @@ struct CMixItem
   int StringIndex;
   int VersionIndex;
 
-  CMixItem(): SectionIndex(-1), ResourceIndex(-1), StringIndex(-1), VersionIndex(-1) {}
+  void Construct()
+  {
+    SectionIndex = -1;
+    ResourceIndex = -1;
+    StringIndex = -1;
+    VersionIndex = -1;
+  }
   bool IsSectionItem() const { return ResourceIndex < 0 && StringIndex < 0 && VersionIndex < 0; }
 };
 
@@ -820,19 +826,21 @@ Z7_CLASS_IMP_CHandler_IInArchive_2(
   CObjectVector<CStringKeyValue> _versionKeys;
 
   CByteBuffer _buf;
+  
   bool _oneLang;
-  UString _resourcesPrefix;
-  CUsedBitmap _usedRes;
   // bool _parseResources;
   bool _checksumError;
   bool _sectionsError;
 
+  bool _coffMode;
+  bool _allowTail;
+
+  UString _resourcesPrefix;
+  CUsedBitmap _usedRes;
+
   bool IsOpt() const { return _header.OptHeaderSize != 0; }
 
   COptHeader _optHeader;
-
-  bool _coffMode;
-  bool _allowTail;
 
   HRESULT LoadDebugSections(IInStream *stream, bool &thereIsSection);
   HRESULT Open2(IInStream *stream, IArchiveOpenCallback *callback);
@@ -2269,6 +2277,7 @@ HRESULT CHandler::OpenResources(unsigned sectionIndex, IInStream *stream, IArchi
           if (ParseVersion((const Byte *)_buf + offset, item.Size, f, _versionKeys))
           {
             CMixItem mixItem;
+            mixItem.Construct();
             mixItem.VersionIndex = (int)_versionFiles.Size();
             mixItem.SectionIndex = (int)sectionIndex; // check it !!!!
             CByteBuffer_WithLang &vf = _versionFiles.AddNew();
@@ -2300,6 +2309,7 @@ HRESULT CHandler::OpenResources(unsigned sectionIndex, IInStream *stream, IArchi
       if (_strings[i].FinalSize() == 0)
         continue;
       CMixItem mixItem;
+      mixItem.Construct();
       mixItem.StringIndex = (int)i;
       mixItem.SectionIndex = (int)sectionIndex;
       _mixItems.Add(mixItem);
@@ -2654,6 +2664,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
           if (item.Enabled)
           {
             CMixItem mixItem;
+            mixItem.Construct();
             mixItem.SectionIndex = (int)i;
             mixItem.ResourceIndex = (int)j;
             if (item.IsRcDataOrUnknown())
@@ -2717,6 +2728,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
     }
     
     CMixItem mixItem;
+    mixItem.Construct();
     mixItem.SectionIndex = (int)i;
     _mixItems.Add(mixItem);
   }
