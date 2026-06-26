@@ -19,28 +19,28 @@ struct CUpdatePair2
   bool IsMainRenameItem;
   bool IsSameTime;
 
+  void Construct()
+  {
+    NewData = false;
+    NewProps = false;
+    UseArcProps = false;
+    IsAnti = false;
+    DirIndex = -1;
+    ArcIndex = -1;
+    NewNameIndex = -1;
+    IsMainRenameItem = false;
+    IsSameTime = false;
+  }
+
   void SetAs_NoChangeArcItem(unsigned arcIndex) // int
   {
-    NewData = NewProps = false;
+    Construct();
     UseArcProps = true;
-    IsAnti = false;
     ArcIndex = (int)arcIndex;
   }
 
   bool ExistOnDisk() const { return DirIndex != -1; }
   bool ExistInArchive() const { return ArcIndex != -1; }
-
-  CUpdatePair2():
-      NewData(false),
-      NewProps(false),
-      UseArcProps(false),
-      IsAnti(false),
-      DirIndex(-1),
-      ArcIndex(-1),
-      NewNameIndex(-1),
-      IsMainRenameItem(false),
-      IsSameTime(false)
-      {}
 };
 
 Z7_PURE_INTERFACES_BEGIN

@@ -31,7 +31,7 @@
 
 #include "../Windows/TimeUtils.h"
 
-#include "Defs.h"
+#include "WinDefs.h"
 
 HRESULT GetLastError_noZero_HRESULT();
 

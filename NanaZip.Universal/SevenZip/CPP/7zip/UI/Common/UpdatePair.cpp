@@ -196,6 +196,7 @@ void GetUpdatePairInfoList(
   while (dirIndex < numDirItems || arcIndex < numArcItems)
   {
     CUpdatePair pair;
+    pair.Construct();
     
     int dirIndex2 = -1;
     int arcIndex2 = -1;

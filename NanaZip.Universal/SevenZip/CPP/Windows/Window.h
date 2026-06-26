@@ -6,7 +6,7 @@
 #include "../Common/MyWindows.h"
 #include "../Common/MyString.h"
 
-#include "Defs.h"
+#include "WinDefs.h"
 
 #ifndef UNDER_CE
 #ifdef WM_CHANGEUISTATE

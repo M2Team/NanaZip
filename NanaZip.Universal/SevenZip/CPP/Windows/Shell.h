@@ -12,7 +12,7 @@
 
 #include "../Common/MyString.h"
 
-#include "Defs.h"
+#include "WinDefs.h"
 
 namespace NWindows {
 namespace NShell {
