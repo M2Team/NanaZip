@@ -58,13 +58,45 @@
 
 /* Little Endian R/W */
 
-#define GETU16_LE(p)	(*(const uint16_t *)(p))
-#define GETU32_LE(p)	(*(const uint32_t *)(p))
-#define GETU64_LE(p)	(*(const uint64_t *)(p))
+#define GETU16_LE(p) \
+	((uint16_t)(uint8_t)(p)[0] | \
+	 (uint16_t)(uint8_t)(p)[1] << 8)
 
-#define PUTU16_LE(p,V)	*(uint16_t *)(p) = (V)
-#define PUTU32_LE(p,V)	*(uint32_t *)(p) = (V)
-#define PUTU64_LE(p,V)	*(uint64_t *)(p) = (V)
+#define GETU32_LE(p) \
+	((uint32_t)(uint8_t)(p)[0] | \
+	 (uint32_t)(uint8_t)(p)[1] <<  8 | \
+	 (uint32_t)(uint8_t)(p)[2] << 16 | \
+	 (uint32_t)(uint8_t)(p)[3] << 24)
+
+#define GETU64_LE(p) \
+	((uint64_t)(uint8_t)(p)[0] | \
+	 (uint64_t)(uint8_t)(p)[1] <<  8 | \
+	 (uint64_t)(uint8_t)(p)[2] << 16 | \
+	 (uint64_t)(uint8_t)(p)[3] << 24 | \
+	 (uint64_t)(uint8_t)(p)[4] << 32 | \
+	 (uint64_t)(uint8_t)(p)[5] << 40 | \
+	 (uint64_t)(uint8_t)(p)[6] << 48 | \
+	 (uint64_t)(uint8_t)(p)[7] << 56)
+
+#define PUTU16_LE(p,V) \
+	((p)[0] = (uint8_t)(V), \
+	 (p)[1] = (uint8_t)((V) >> 8))
+
+#define PUTU32_LE(p,V) \
+	((p)[0] = (uint8_t)(V), \
+	 (p)[1] = (uint8_t)((V) >>  8), \
+	 (p)[2] = (uint8_t)((V) >> 16), \
+	 (p)[3] = (uint8_t)((V) >> 24))
+
+#define PUTU64_LE(p,V) \
+	((p)[0] = (uint8_t)(V), \
+	 (p)[1] = (uint8_t)((V) >>  8), \
+	 (p)[2] = (uint8_t)((V) >> 16), \
+	 (p)[3] = (uint8_t)((V) >> 24), \
+	 (p)[4] = (uint8_t)((V) >> 32), \
+	 (p)[5] = (uint8_t)((V) >> 40), \
+	 (p)[6] = (uint8_t)((V) >> 48), \
+	 (p)[7] = (uint8_t)((V) >> 56))
 
 /* Rotate */
 

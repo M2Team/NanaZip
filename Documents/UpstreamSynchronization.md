@@ -40,7 +40,7 @@
 
 ## GmSSL
 
-- NanaZip.Codecs: Commit 0bcffd37347aa9e1799cf81e6eaeb1e76562dc6c after v3.1.1.
+- NanaZip.Codecs: v3.2.0.
 
 ## LittleFS
 
