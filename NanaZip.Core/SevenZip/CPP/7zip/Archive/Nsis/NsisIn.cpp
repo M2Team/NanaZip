@@ -190,7 +190,7 @@ static const CCommandInfo k_Commands[kNumCmds] =
   { 2 }, // "SetFileAttributes" },
   { 3 }, // CreateDirectory, SetOutPath
   { 3 }, // "IfFileExists" },
-  { 3 }, // SetRebootFlag, ...
+  { 4 }, // SetRebootFlag, ...
   { 4 }, // "If" }, // IfAbort, IfSilent, IfErrors, IfRebootFlag
   { 2 }, // "Get" }, // GetInstDirError, GetErrorLevel
   { 4 }, // "Rename" },
@@ -3910,6 +3910,10 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
         if (params[2] != 0)
         {
           s += " lastused";
+          // (params[3] == (UInt32)(Int32)-1) is possible in NSIS 3.10.
+          // SetDetailsPrint lastused (special)
+          if ((Int32)params[3] < 0)
+            s += " ; (special)";
           break;
         }
         UInt32 v;

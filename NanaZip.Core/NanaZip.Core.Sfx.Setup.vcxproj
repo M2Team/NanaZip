@@ -149,7 +149,7 @@
     <ClInclude Include="SevenZip\CPP\Windows\Control\ProgressBar.h" />
     <ClInclude Include="SevenZip\CPP\Windows\Control\Static.h" />
     <ClInclude Include="SevenZip\CPP\Windows\Control\StdAfx.h" />
-    <ClInclude Include="SevenZip\CPP\Windows\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\WinDefs.h" />
     <ClInclude Include="SevenZip\CPP\Windows\DLL.h" />
     <ClInclude Include="SevenZip\CPP\Windows\ErrorMsg.h" />
     <ClInclude Include="SevenZip\CPP\Windows\FileDir.h" />

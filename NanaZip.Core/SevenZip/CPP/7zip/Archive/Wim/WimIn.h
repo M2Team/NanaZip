@@ -347,15 +347,16 @@ struct CItem
 
   bool HasMetadata() const { return ImageIndex >= 0; }
 
-  CItem():
-    IndexInSorted(-1),
-    StreamIndex(-1),
-    Parent(-1),
-    IsDir(false),
-    IsAltStream(false),
-    DirLevel(0),
-    SubDirOffset(0)
-    {}
+  void Construct()
+  {
+    IndexInSorted = -1;
+    StreamIndex = -1;
+    Parent = -1;
+    IsDir = false;
+    IsAltStream = false;
+    DirLevel = 0;
+    SubDirOffset = 0;
+  }
 };
 
 struct CImage

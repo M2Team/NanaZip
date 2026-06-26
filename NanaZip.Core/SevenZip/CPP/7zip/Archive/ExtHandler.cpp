@@ -628,6 +628,8 @@ struct CNode
   UInt32 Gid; // fixed 21.02
   // UInt16 Checksum;
   
+  UInt32 NumLinksCalced;
+
   UInt64 FileSize;
   CExtTime MTime;
   CExtTime ATime;
@@ -639,17 +641,16 @@ struct CNode
   UInt32 NumLinks;
   UInt32 Flags;
 
-  UInt32 NumLinksCalced;
-
   Byte Block[kNodeBlockFieldSize];
   
-  CNode():
-      ParentNode(-1),
-      ItemIndex(-1),
-      SymLinkIndex(-1),
-      DirIndex(-1),
-      NumLinksCalced(0)
-        {}
+  void Construct()
+  {
+    ParentNode = -1;
+    ItemIndex = -1;
+    SymLinkIndex = -1;
+    DirIndex = -1;
+    NumLinksCalced = 0;
+  }
 
   bool IsFlags_HUGE()    const { return (Flags & k_NodeFlags_HUGE) != 0; }
   bool IsFlags_EXTENTS() const { return (Flags & k_NodeFlags_EXTENTS) != 0; }
@@ -1172,21 +1173,19 @@ HRESULT CHandler::Open2(IInStream *inStream)
     {
       // ---------- Read groups ----------
 
-      CByteBuffer gdBuf;
       const size_t gdBufSize = (size_t)numGroups << gdBits;
       if ((gdBufSize >> gdBits) != numGroups)
         return S_FALSE;
+      CByteBuffer gdBuf;
       gdBuf.Alloc(gdBufSize);
       RINOK(SeekAndRead(inStream, (_h.BlockBits <= 10 ? 2 : 1), gdBuf, gdBufSize))
 
-      for (unsigned i = 0; i < numGroups; i++)
+      const unsigned gd_Size = (unsigned)1 << gdBits;
+      const Byte *p = gdBuf;
+      for (unsigned i = 0; i < numGroups; i++, p += gd_Size)
       {
         CGroupDescriptor gd;
-        
-        const Byte *p = gdBuf + ((size_t)i << gdBits);
-        const unsigned gd_Size = (unsigned)1 << gdBits;
         gd.Parse(p, gd_Size);
-        
         if (_h.UseMetadataChecksum())
         {
           // use CRC32c
@@ -1228,7 +1227,10 @@ HRESULT CHandler::Open2(IInStream *inStream)
         if (numNodes > (1 << 24))
           return S_FALSE;
       }
-      
+
+      const size_t blockSize = (size_t)1 << _h.BlockBits;
+      if (numNodes > blockSize * 8)
+        return S_FALSE;
       const UInt32 numReserveInodes = _h.NumInodes - _h.NumFreeInodes + 1;
       // numReserveInodes = _h.NumInodes + 1;
       if (numReserveInodes != 0)
@@ -1241,7 +1243,6 @@ HRESULT CHandler::Open2(IInStream *inStream)
       nodesData.Alloc(nodesDataSize);
       
       CByteBuffer nodesMap;
-      const size_t blockSize = (size_t)1 << _h.BlockBits;
       nodesMap.Alloc(blockSize);
       
       unsigned globalNodeIndex = 0;
@@ -1282,6 +1283,7 @@ HRESULT CHandler::Open2(IInStream *inStream)
           }
 
           CNode node;
+          node.Construct();
               
           PRF(printf("\nnode = %5d ", (unsigned)n));
 

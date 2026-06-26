@@ -1433,7 +1433,12 @@ struct CItem
   int ParentHost;     /* index in Items array, if it's AltStream
                          -1: if it's not AltStream */
   
-  CItem(): DataIndex(k_Item_DataIndex_IsDir), ParentFolder(-1), ParentHost(-1) {}
+  void Construct()
+  {
+    DataIndex = k_Item_DataIndex_IsDir;
+    ParentFolder = -1;
+    ParentHost = -1;
+  }
   
   bool IsAltStream() const { return ParentHost != -1; }
   bool IsDir() const { return DataIndex == k_Item_DataIndex_IsDir; }
@@ -2060,6 +2065,7 @@ HRESULT CDatabase::Open()
       }
       
       CItem item;
+      item.Construct();
       item.NameIndex = t;
       item.RecIndex = i;
       item.DataIndex = rec.IsDir() ?

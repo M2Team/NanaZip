@@ -59,7 +59,7 @@
     <ClInclude Include="SevenZip\CPP\Windows\Control\StdAfx.h">
       <Filter>SevenZip\CPP\Windows\Control</Filter>
     </ClInclude>
-    <ClInclude Include="SevenZip\CPP\Windows\Defs.h">
+    <ClInclude Include="SevenZip\CPP\Windows\WinDefs.h">
       <Filter>SevenZip\CPP\Windows</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Windows\StdAfx.h">

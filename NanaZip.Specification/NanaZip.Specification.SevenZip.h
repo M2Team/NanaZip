@@ -515,7 +515,7 @@ typedef enum _SEVENZIP_ARCHIVE_PROPERTY_TYPE
     SevenZipArchiveWarningFlags, // VT_UI4
     SevenZipArchiveWarning, // VT_BSTR
     SevenZipArchiveNumberOfStreams, // VT_UI8
-    SevenZipArchiveNumberOfAlternateStreams, // VT_UI8
+    SevenZipArchiveNumberOfAlternateStreams, // VT_UI4
     SevenZipArchiveAlternateStreamsSize, // VT_UI8
     SevenZipArchiveVirtualSize, // VT_UI8
     SevenZipArchiveUnpackSize, // VT_UI8

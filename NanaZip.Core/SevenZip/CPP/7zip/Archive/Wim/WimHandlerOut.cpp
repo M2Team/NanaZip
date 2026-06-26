@@ -177,7 +177,12 @@ struct CUpdateItem
   int InArcIndex;         // >= 0, if we use OLD Data
                           //   -1, if we use NEW Data
  
-  CUpdateItem(): MetaIndex(-1), AltStreamIndex(-1), InArcIndex(-1) {}
+  void Construct()
+  {
+    MetaIndex = -1;
+    AltStreamIndex = -1;
+    InArcIndex = -1;
+  }
 };
 
 
@@ -894,6 +899,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   for (i = 0; i < numItems; i++)
   {
     CUpdateItem ui;
+    ui.Construct();
     UInt32 indexInArchive;
     Int32 newData, newProps;
     RINOK(callback->GetUpdateItemInfo(i, &newData, &newProps, &indexInArchive))

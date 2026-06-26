@@ -78,7 +78,7 @@ struct CChunk
   Byte Fill [kFillSize];
   UInt64 PhyOffset;
 
-  CChunk()
+  void Construct()
   {
     Fill[0] =
     Fill[1] =
@@ -293,6 +293,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
     if (size < kChunkHeaderSize)
       return S_FALSE;
     CChunk c;
+    c.Construct();
     c.PhyOffset = offset + kChunkHeaderSize;
     c.VirtBlock = virtBlock;
     offset += size;
@@ -364,6 +365,7 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *openCallback)
 
   {
     CChunk c;
+    c.Construct();
     c.VirtBlock = virtBlock;
     c.PhyOffset = offset;
     Chunks.AddInReserved(c);

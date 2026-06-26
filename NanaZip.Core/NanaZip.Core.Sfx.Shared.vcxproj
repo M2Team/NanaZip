@@ -178,7 +178,7 @@
     <ClInclude Include="SevenZip\CPP\Common\StringConvert.h" />
     <ClInclude Include="SevenZip\CPP\Common\UTFConvert.h" />
     <ClInclude Include="SevenZip\CPP\Common\Wildcard.h" />
-    <ClInclude Include="SevenZip\CPP\Windows\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\WinDefs.h" />
     <ClInclude Include="SevenZip\CPP\Windows\FileDir.h" />
     <ClInclude Include="SevenZip\CPP\Windows\FileFind.h" />
     <ClInclude Include="SevenZip\CPP\Windows\FileIO.h" />

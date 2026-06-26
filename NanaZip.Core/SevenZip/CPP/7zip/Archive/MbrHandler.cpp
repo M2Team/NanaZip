@@ -53,7 +53,12 @@ struct CChs
     SectCyl = p[1];
     Cyl8 = p[2];
   }
-  bool Check() const { return GetSector() > 0; }
+  bool Check() const
+  {
+    if ((Head | SectCyl | Cyl8) == 0)
+      return true;
+    return GetSector() > 0;
+  }
 };
 
 

@@ -437,7 +437,7 @@ struct CRef
   int AttrIndex;
   int Parent;
 
-  CRef(): AttrIndex(kAttrIndex_Item), Parent(-1) {}
+  void Construct() { AttrIndex = kAttrIndex_Item; Parent = -1; }
   bool IsResource() const { return AttrIndex == kAttrIndex_Resource; }
   bool IsAltStream() const { return AttrIndex != kAttrIndex_Item; }
   bool IsItem() const { return AttrIndex == kAttrIndex_Item; }
@@ -1259,6 +1259,7 @@ HRESULT CDatabase::LoadCatalog(const CFork &fork, const CObjectVector<CIdExtents
       IdToIndexMap.Add(pair);
 
       CRef ref;
+      ref.Construct();
       ref.ItemIndex = i;
       Refs.Add(ref);
       
@@ -1317,6 +1318,7 @@ HRESULT CDatabase::LoadCatalog(const CFork &fork, const CObjectVector<CIdExtents
       ThereAreAltStreams = true;
 
       CRef ref;
+      ref.Construct();
       ref.AttrIndex = (int)i;
       ref.Parent = refIndex;
       ref.ItemIndex = Refs[refIndex].ItemIndex;

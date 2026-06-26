@@ -9,7 +9,7 @@
 #include "../Common/StringConvert.h"
 
 #include "Clipboard.h"
-#include "Defs.h"
+#include "WinDefs.h"
 #include "MemoryGlobal.h"
 #include "Shell.h"
 

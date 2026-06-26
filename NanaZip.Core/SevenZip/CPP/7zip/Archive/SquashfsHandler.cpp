@@ -821,7 +821,7 @@ struct CItem
   int Parent;
   UInt32 Ptr;
 
-  CItem(): Node(-1), Parent(-1), Ptr(0) {}
+  void Construct() { Node = -1; Parent = -1; Ptr = 0; }
 };
 
 struct CData
@@ -1562,7 +1562,7 @@ HRESULT CHandler::OpenDir(int parent, UInt32 startBlock, UInt32 offset, unsigned
       if (rem == 0)
         return S_FALSE;
 
-      UInt32 nameOffset = _h.GetFileNameOffset();
+      const UInt32 nameOffset = _h.GetFileNameOffset();
       if (rem < nameOffset)
         return S_FALSE;
 
@@ -1570,7 +1570,7 @@ HRESULT CHandler::OpenDir(int parent, UInt32 startBlock, UInt32 offset, unsigned
         return S_FALSE;
       if (_openCallback)
       {
-        UInt64 numFiles = _items.Size();
+        const UInt64 numFiles = _items.Size();
         if ((numFiles & 0xFFFF) == 0)
         {
           RINOK(_openCallback->SetCompleted(&numFiles, NULL))
@@ -1578,6 +1578,7 @@ HRESULT CHandler::OpenDir(int parent, UInt32 startBlock, UInt32 offset, unsigned
       }
       
       CItem item;
+      item.Construct();
       item.Ptr = (UInt32)(p - (const Byte *)_dirs.Data);
 
       UInt32 size;
