@@ -1971,6 +1971,14 @@ STDMETHODIMP CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
       outStreamLoc = new CStdOutFileStream;
     else
     {
+      // **************** NanaZip Modification Start ****************
+      // Backported from 26.02.
+      if (_isSplit)
+      {
+        RINOK(PrepareOperation(askExtractMode))
+        return SetOperationResult(NArchive::NExtract::NOperationResult::kUnsupportedMethod);
+      }
+      // **************** NanaZip Modification End ****************
       bool needExit = true;
       RINOK(GetExtractStream(outStreamLoc, needExit));
       if (needExit)

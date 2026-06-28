@@ -96,10 +96,17 @@ static void ReplaceIncorrectChars(UString &s)
 void Correct_AltStream_Name(UString &s)
 {
   unsigned len = s.Len();
+  // **************** NanaZip Modification Start ****************
+  // ":$DATA" match suppressed in NanaZip because of security risk.
+  // For example, ":Zone.Identifier:$DATA" can be used to bypass rejection of
+  // Zone.Identifier streams embedded in the archive.
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   const unsigned kPostfixSize = 6;
   if (s.Len() >= kPostfixSize
       && StringsAreEqualNoCase_Ascii(s.RightPtr(kPostfixSize), ":$DATA"))
     len -= kPostfixSize;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  // **************** NanaZip Modification End ****************
   for (unsigned i = 0; i < len; i++)
   {
     wchar_t c = s[i];
