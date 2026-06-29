@@ -1,0 +1,23 @@
+# libFuzzer dictionary for littlefs (NanaZip codec).
+# Reference: NanaZip.Codecs.Archive.Littlefs.cpp
+magic="littlefs"
+# Common metadata-tag types (LfsType*).
+type_create="\x04\x01"
+type_delete="\x04\xff"
+type_super="\x00\xff"
+type_dirstruct="\x02\x00"
+type_ctzstruct="\x02\x02"
+type_inlinestruct="\x02\x01"
+type_softtail="\x06\x00"
+type_hardtail="\x06\x01"
+type_movestate="\x07\xff"
+type_ccrc="\x05\x00"
+type_fcrc="\x05\xff"
+type_userattr="\x03\x00"
+type_name="\x00\x00"
+# Common block sizes (little-endian uint32).
+bs512="\x00\x02\x00\x00"
+bs4096="\x00\x10\x00\x00"
+bs32768="\x00\x80\x00\x00"
+ver_2_0="\x00\x00\x02\x00"
+ver_2_1="\x01\x00\x02\x00"
