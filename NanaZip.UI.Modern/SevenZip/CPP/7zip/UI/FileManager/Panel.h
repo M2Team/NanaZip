@@ -895,6 +895,9 @@ public:
   void ExtractArchives();
   void ExtractFromArchive();
   void TestArchives();
+  // **************** NanaZip Modification Start ****************
+  bool SmartExtractArchives();
+  // **************** NanaZip Modification End ****************
 
   // **************** NanaZip Modification Start ****************
   // Backported from 24.09.

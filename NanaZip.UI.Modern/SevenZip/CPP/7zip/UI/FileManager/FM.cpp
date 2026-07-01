@@ -853,6 +853,12 @@ static void ExecuteCommand(UINT commandID)
     case kMenuCmdID_Toolbar_Add: g_App.AddToArchive(); break;
     case kMenuCmdID_Toolbar_Extract: g_App.ExtractArchives(); break;
     case kMenuCmdID_Toolbar_Test: g_App.TestArchives(); break;
+    // **************** NanaZip Modification Start ****************
+    case kMenuCmdID_Toolbar_SmartExtract:
+      if (g_App.SmartExtractArchives())
+        ::PostMessage(g_HWND, WM_CLOSE, 0, 0);
+      break;
+    // **************** NanaZip Modification End ****************
   }
 }
 

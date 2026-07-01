@@ -27,6 +27,9 @@ enum
   kMenuCmdID_Toolbar_Add = kMenuCmdID_Toolbar_Start,
   kMenuCmdID_Toolbar_Extract,
   kMenuCmdID_Toolbar_Test,
+  // **************** NanaZip Modification Start ****************
+  kMenuCmdID_Toolbar_SmartExtract,
+  // **************** NanaZip Modification End ****************
   kMenuCmdID_Toolbar_End
 };
 
@@ -313,6 +316,9 @@ public:
   void AddToArchive() { GetFocusedPanel().AddToArchive(); }
   void ExtractArchives() { GetFocusedPanel().ExtractArchives(); }
   void TestArchives() { GetFocusedPanel().TestArchives(); }
+  // **************** NanaZip Modification Start ****************
+  bool SmartExtractArchives() { return GetFocusedPanel().SmartExtractArchives(); }
+  // **************** NanaZip Modification End ****************
 
   void OnNotify(int ctrlID, LPNMHDR pnmh);
 
