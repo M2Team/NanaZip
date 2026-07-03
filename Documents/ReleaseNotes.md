@@ -3,6 +3,28 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.5 Update (6.5.1767.0)**
+
+- Synchronize 7-Zip mainline implementations to 26.02. (Except the NanaZip File
+  Manager.) (Thanks to Igor Pavlov. Noticed by FadeMind.)
+- Fix the crash issue when extracting with selected files in Windows 10.
+  (https://github.com/M2Team/NanaZip/issues/930) (Thanks to Mapaler.)
+- Backport fixes for archive extraction callbacks to NanaZip File Manager. 
+  (Contributed by dinhngtu.)
+- Update Polish translation. (Contributed by ChuckMichael.)
+- Try to fix EnumSubCommands refcount leak in NanaZip Shell Extension. 
+  (Contributed by dinhngtu.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/ecaa91dda38d666b1909b42603321fa7d9731776.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.) (Note: Actually no useful changes since last synchronization.)
+- Synchronize the BLAKE3 implementation to 1.8.5.
+  (https://github.com/BLAKE3-team/BLAKE3/releases/tag/1.8.5)
+- Synchronize GmSSL implementation to v3.2.0.
+  (https://github.com/guanzhi/GmSSL/releases/tag/v3.2.0)
+- Update Mile.Mobility to 1.1.602.
+- Update Mile.Windows.Internal to 1.0.3648.
+
 **NanaZip 6.5 (6.5.1750.0)**
 
 - Introduce XAML copy location dialog. (Contributed by dongle-the-gadget.)
