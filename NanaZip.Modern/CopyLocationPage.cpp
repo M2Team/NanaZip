@@ -53,11 +53,7 @@ namespace winrt::NanaZip::Modern::implementation
             MAKEWPARAM(K7_COPY_LOCATION_DIALOG_RESULT_OK, BN_CLICKED),
             0);
 
-        ::SendMessageW(
-            this->m_WindowHandle,
-            WM_CLOSE,
-            0,
-            0);
+        ::PostMessageW(this->m_WindowHandle, WM_CLOSE, 0, 0);
     }
 
     void CopyLocationPage::CancelButtonClick(
