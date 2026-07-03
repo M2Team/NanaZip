@@ -2,6 +2,10 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 7.0 Preview (7.0.1767.0)**
+
+This release includes all the improvements from NanaZip 6.5 Update (6.5.1767.0).
+
 **NanaZip 6.5 Final (6.5.1749.0)**
 
 - Fix several issues for codecs. (Contributed by dinhngtu. Thanks to Pig-Tail.)
