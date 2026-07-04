@@ -64,7 +64,7 @@
     <value>Arquivos</value>
   </data>
   <data name="PackedSizeLabel.Text" xml:space="preserve">
-    <value>Tamanho Compactado</value>
+    <value>Tamanho compactado</value>
   </data>
   <data name="BackgroundButtonText" xml:space="preserve">
     <value>Em 2º plano</value>
