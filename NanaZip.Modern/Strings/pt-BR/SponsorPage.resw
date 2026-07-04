@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BuySponsorEditionButton.AutomationProperties.Name" xml:space="preserve">
-    <value>Comprar a edição patrocinada</value>
+    <value>Comprar edição patrocinada</value>
     <comment>Buy NanaZip Sponsor Edition</comment>
   </data>
   <data name="BuySponsorEditionButtonTextBlock.Text" xml:space="preserve">
-    <value>Comprar a edição patrocinada</value>
+    <value>Comprar edição patrocinada</value>
     <comment>Buy NanaZip Sponsor Edition</comment>
   </data>
   <data name="ContributeButton.AutomationProperties.Name" xml:space="preserve">
-    <value>Torne-se um colaborador</value>
+    <value>Contribua com o NanaZip</value>
     <comment>Become a contributor of NanaZip</comment>
   </data>
   <data name="ContributeButtonTextBlock.Text" xml:space="preserve">
-    <value>Torne-se um colaborador</value>
+    <value>Contribua com o NanaZip</value>
     <comment>Become a contributor of NanaZip</comment>
   </data>
   <data name="GridTitleTextBlock.Text" xml:space="preserve">
