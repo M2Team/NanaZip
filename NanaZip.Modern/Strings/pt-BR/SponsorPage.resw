@@ -126,11 +126,11 @@
     <comment>Buy NanaZip Sponsor Edition</comment>
   </data>
   <data name="ContributeButton.AutomationProperties.Name" xml:space="preserve">
-    <value>Torne-se um colaborador</value>
+    <value>Contribua com o NanaZip</value>
     <comment>Become a contributor of NanaZip</comment>
   </data>
   <data name="ContributeButtonTextBlock.Text" xml:space="preserve">
-    <value>Torne-se um colaborador</value>
+    <value>Contribua com o NanaZip</value>
     <comment>Become a contributor of NanaZip</comment>
   </data>
   <data name="GridTitleTextBlock.Text" xml:space="preserve">
