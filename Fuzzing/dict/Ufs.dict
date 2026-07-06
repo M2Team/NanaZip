@@ -1,0 +1,21 @@
+# libFuzzer dictionary for FreeBSD UFS (NanaZip codec).
+# Reference: NanaZip.Codecs.Archive.Ufs.cpp, sys/ufs/ffs/fs.h
+# Magics little-endian.
+magic_ufs1="\x54\x19\x01\x00"
+magic_ufs2="\x19\x01\x54\x19"
+# Common block sizes (LE uint32).
+bs4096="\x00\x10\x00\x00"
+bs8192="\x00\x20\x00\x00"
+bs16384="\x00\x40\x00\x00"
+bs32768="\x00\x80\x00\x00"
+bs65536="\x00\x00\x01\x00"
+# File modes (octal in LE u16).
+mode_dir="\xed\x41"
+mode_file="\xa4\x81"
+mode_link="\xa4\xa1"
+mode_blk="\xa4\x61"
+mode_chr="\xa4\x21"
+mode_sock="\xa4\xc1"
+mode_fifo="\xa4\x11"
+# UFS2 inode magic for fs_*time / di_extb sentinel checks.
+zero_block="\x00\x00\x00\x00\x00\x00\x00\x00"

@@ -1,0 +1,612 @@
+﻿# Runs fuzzing of NanaZip specific codecs with ASan instrumentation on Windows.
+# Scheduled daily for 2 hours. Can also be triggered manually.
+# Additionally fuzzes PRs that touch relevant files for 10 minutes to catch obvious issues before merge.
+#
+# If secrets.CRASH_KEY is set, crash artifacts are encrypted so only team members with the key access can view them.
+# If the secret is not set crashes are available unencrypted, but it may reveal sensitive information.
+# For PRs, crashes that also reproduce on the base branch are filtered out to avoid noise from pre-existing issues.
+# Crashes found by 10 minutes PR fuzzing are always public.
+#
+# Found files that cause NanaZip ASAN instrumented builds to crash are stored in the crash artifacts.
+# Each crash file is a unique input that causes a crash, and ASan logs with stack traces are included for triaging
+# in a form of crash-894760843895934 (the input reproducer file) and crash-894760843895934.asan.2348 (the ASan log file).
+#
+# Fuzzing improves over time as more unique corpus inputs (test cases) are generated.
+# The corpus is stored as cache. This allows to have a single place with the most up-to-date corpus and
+# also makes it private to the project.
+# However it makes it prone to cache eviction, which would cause fuzzing to start from scratch with an empty corpus if
+# the workflow is not run for longer periods of time.
+# Each scheduled/dispatch run generates a static html coverage report that represents code covered by the current corpus,
+# so it's easy to track coverage improvements over time and spot regressions.
+name: Fuzzing
+
+on:
+  schedule:
+    - cron: '0 14 * * *'   # 14:00 UTC daily
+  workflow_dispatch:
+    inputs:
+      duration_minutes:
+        description: 'Fuzzing duration in minutes'
+        required: false
+        default: '120'
+        type: string
+      formats:
+        description: 'Comma-separated formats to fuzz (blank = all)'
+        required: false
+        default: ''
+        type: string
+  pull_request:
+    paths:
+      - 'NanaZip.Codecs/**'
+      - 'NanaZip.Core/**'
+      - 'Fuzzing/**'
+      - '**/*.vcxproj'
+      - '**/*.props'
+      - '**/*.targets'
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('fuzzing-pr-{0}', github.event.pull_request.number) || 'fuzzing' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read   # checkout repository
+  actions: write   # save build output and corpus caches
+
+env:
+  DEFAULT_DURATION_MINUTES: 120
+  PR_DEFAULT_DURATION_MINUTES: 10
+
+jobs:
+  build:
+    runs-on: windows-latest
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.key }}
+      occ-cache-key: ${{ steps.occ-cache-key.outputs.key }}
+    env:
+      POWERSHELL_TELEMETRY_OPTOUT: 1
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Compute build cache key
+        id: cache-key
+        shell: pwsh
+        run: |
+          echo "key=build-asan-x64-${{ hashFiles('NanaZip.Codecs/**', 'NanaZip.Core/**', 'Fuzzing/**', 'Directory.Build.*', '**/*.vcxproj', '**/*.props', '**/*.targets') }}" >> $env:GITHUB_OUTPUT
+
+      - name: Cache build output
+        id: build-cache
+        uses: actions/cache@v5
+        with:
+          path: Output/Binaries/ReleaseAsan/x64/
+          key: ${{ steps.cache-key.outputs.key }}
+
+      - uses: microsoft/setup-msbuild@v3
+        if: steps.build-cache.outputs.cache-hit != 'true'
+
+      - name: Build ReleaseAsan x64
+        if: steps.build-cache.outputs.cache-hit != 'true'
+        run: |
+          MSBuild -m NanaZip.Codecs\NanaZip.Codecs.vcxproj /p:Configuration=ReleaseAsan /p:Platform=x64 /restore
+          MSBuild -m NanaZip.Core\NanaZip.Core.vcxproj /p:Configuration=ReleaseAsan /p:Platform=x64 /restore
+
+      - name: Compute OpenCppCoverage cache key
+        if: github.event_name != 'pull_request'
+        id: occ-cache-key
+        shell: pwsh
+        run: echo "key=opencppcoverage-0.9.9.0" >> $env:GITHUB_OUTPUT
+
+      - name: Cache OpenCppCoverage
+        if: github.event_name != 'pull_request'
+        id: occ-cache
+        uses: actions/cache@v5
+        with:
+          path: C:\Program Files\OpenCppCoverage
+          key: opencppcoverage-0.9.9.0
+
+      - name: Install OpenCppCoverage
+        if: github.event_name != 'pull_request' && steps.occ-cache.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          $url = 'https://github.com/OpenCppCoverage/OpenCppCoverage/releases/download/release-0.9.9.0/OpenCppCoverageSetup-x64-0.9.9.0.exe'
+          $expectedHash = '2295A733DA39412C61E4F478677519DD0BB1893D88313CE56B468C9E50517888'
+          Invoke-WebRequest -Uri $url -OutFile occ_setup.exe
+          $actualHash = (Get-FileHash occ_setup.exe -Algorithm SHA256).Hash
+          if ($actualHash -ne $expectedHash) {
+            Write-Error "SHA256 mismatch: expected $expectedHash, got $actualHash"
+            exit 1
+          }
+          Start-Process -FilePath .\occ_setup.exe -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -Wait
+          Remove-Item occ_setup.exe
+
+  # Build base-branch binaries in parallel (PR only) so fuzz jobs don't to build multiple times
+  # Each fuzz job needs the base-branch binaries when crashes are found to filter the crashes that are already present in the base branch.
+  build-base:
+    if: github.event_name == 'pull_request'
+    runs-on: windows-latest
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.key }}
+    env:
+      POWERSHELL_TELEMETRY_OPTOUT: 1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - name: Compute build cache key
+        id: cache-key
+        shell: pwsh
+        run: |
+          echo "key=build-asan-x64-${{ hashFiles('NanaZip.Codecs/**', 'NanaZip.Core/**', 'Fuzzing/**', 'Directory.Build.*', '**/*.vcxproj', '**/*.props', '**/*.targets') }}" >> $env:GITHUB_OUTPUT
+
+      - name: Cache build output
+        id: build-cache
+        uses: actions/cache@v5
+        with:
+          path: Output/Binaries/ReleaseAsan/x64/
+          key: ${{ steps.cache-key.outputs.key }}
+
+      - uses: microsoft/setup-msbuild@v3
+        if: steps.build-cache.outputs.cache-hit != 'true'
+
+      - name: Build ReleaseAsan x64
+        if: steps.build-cache.outputs.cache-hit != 'true'
+        run: |
+          MSBuild -m NanaZip.Codecs\NanaZip.Codecs.vcxproj /p:Configuration=ReleaseAsan /p:Platform=x64 /restore
+          MSBuild -m NanaZip.Core\NanaZip.Core.vcxproj /p:Configuration=ReleaseAsan /p:Platform=x64 /restore
+
+  fuzz:
+    needs: [build, build-base]
+    if: "!failure() && !cancelled()"   # run even when build-base is skipped (non-PR)
+    runs-on: windows-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        format:
+          - Ufs
+          - DotNetSingleFile
+          - ElectronAsar
+          - Romfs
+          - Zealfs
+          - WebAssembly
+          - Littlefs
+          - Avb
+          - Lvm
+    env:
+      POWERSHELL_TELEMETRY_OPTOUT: 1
+    steps:
+      - name: Compute parameters
+        id: params
+        shell: pwsh
+        env:
+          INPUT_DURATION: ${{ github.event.inputs.duration_minutes }}
+          INPUT_FORMATS: ${{ github.event.inputs.formats }}
+          EVENT_NAME: ${{ github.event_name }}
+          IS_PR: ${{ github.event_name == 'pull_request' }}
+          MATRIX_FORMAT: ${{ matrix.format }}
+          HAS_CRASH_KEY: ${{ secrets.CRASH_KEY != '' }}
+        run: |
+          if ($env:EVENT_NAME -eq "pull_request") {
+            [int]$minutes = $env:PR_DEFAULT_DURATION_MINUTES
+          } elseif ($env:INPUT_DURATION) {
+            [int]$minutes = $env:INPUT_DURATION
+          } else {
+            [int]$minutes = $env:DEFAULT_DURATION_MINUTES
+          }
+          echo "fuzz_seconds=$($minutes * 60)" >> $env:GITHUB_OUTPUT
+          echo "is_pr=$env:IS_PR" >> $env:GITHUB_OUTPUT
+          $requested = ($env:INPUT_FORMATS ?? '').Trim()
+          if ($requested -and ($requested -split ',' | ForEach-Object { $_.Trim() }) -notcontains $env:MATRIX_FORMAT) {
+            echo "skip=true" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "skip=false" >> $env:GITHUB_OUTPUT
+          }
+          # Print ASan traces in CI only when no encryption key is set (schedule/dispatch).
+          # With CRASH_KEY, traces go into the encrypted artifact instead.
+          # PR fuzzing step always suppresses (reproduce step handles trace printing).
+          $noAsan = if ($env:EVENT_NAME -ne 'pull_request' -and $env:HAS_CRASH_KEY -ne 'true') { 'false' }
+                    else { 'true' }
+          echo "no_print_asan=$noAsan" >> $env:GITHUB_OUTPUT
+
+      - name: Restore build cache
+        if: steps.params.outputs.skip == 'false'
+        uses: actions/cache/restore@v5
+        with:
+          path: Output/Binaries/ReleaseAsan/x64/
+          key: ${{ needs.build.outputs.cache-key }}
+          fail-on-cache-miss: true
+
+      - name: Prepare fuzzers directory
+        if: steps.params.outputs.skip == 'false'
+        shell: pwsh
+        run: Copy-Item -Path Output/Binaries/ReleaseAsan/x64 -Destination fuzzers -Recurse
+
+      - name: Restore corpus cache
+        if: steps.params.outputs.skip == 'false'
+        uses: actions/cache/restore@v5
+        with:
+          path: fuzzers/corpus/${{ matrix.format }}
+          key: fuzz-corpus-${{ matrix.format }}-${{ github.run_id }}
+          restore-keys: |
+            fuzz-corpus-${{ matrix.format }}-
+
+      - name: Run ${{ matrix.format }} fuzzer
+        if: steps.params.outputs.skip == 'false'
+        shell: pwsh
+        working-directory: fuzzers
+        run: ./Fuzz.ps1 -Format ${{ matrix.format }} -TotalSeconds ${{ steps.params.outputs.fuzz_seconds }}${{ steps.params.outputs.no_print_asan == 'true' && ' -NoPrintAsan' || '' }}
+
+      - name: Check for crashes
+        if: always() && steps.params.outputs.skip == 'false'
+        id: check_crashes
+        shell: pwsh
+        run: |
+          $crashDir = "fuzzers\crashes\${{ matrix.format }}"
+          $crashes = @()
+          if (Test-Path $crashDir) {
+            $crashes = Get-ChildItem $crashDir -Filter 'crash-*' -File
+          }
+          if ($crashes.Count -gt 0) {
+            $level = if ("${{ steps.params.outputs.is_pr }}" -eq "true") { "warning" } else { "error" }
+            Write-Host "::${level}::Found $($crashes.Count) crash(es) for ${{ matrix.format }}:"
+            $crashes | ForEach-Object { Write-Host "  $_" }
+            echo "has_crashes=true" >> $env:GITHUB_OUTPUT
+          } else {
+            Write-Host "No crashes found for ${{ matrix.format }}"
+            echo "has_crashes=false" >> $env:GITHUB_OUTPUT
+          }
+
+      # --- PR: verify crashes against base branch so we don't report pre-existing crashes ---
+      # Safe to overwrite Output/ — PR binaries were already copied to fuzzers/.
+      - name: Restore base build cache
+        if: steps.check_crashes.outputs.has_crashes == 'true' && steps.params.outputs.is_pr == 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: Output/Binaries/ReleaseAsan/x64/
+          key: ${{ needs.build-base.outputs.cache-key }}
+          fail-on-cache-miss: true
+
+      - name: Filter out pre-existing crashes
+        if: steps.check_crashes.outputs.has_crashes == 'true' && steps.params.outputs.is_pr == 'true'
+        id: filter_crashes
+        shell: pwsh
+        env:
+          ASAN_OPTIONS: allocator_may_return_null=1:detect_leaks=0:abort_on_error=0:log_path=base_asan_
+        run: |
+          $baseExe = "Output/Binaries/ReleaseAsan/x64/Fuzz.${{ matrix.format }}.exe"
+          $crashDir = "fuzzers/crashes/${{ matrix.format }}"
+          $newDir = "fuzzers/crashes-new/${{ matrix.format }}"
+          New-Item -ItemType Directory -Path $newDir -Force | Out-Null
+          $newCount = 0
+          Get-ChildItem $crashDir -Filter 'crash-*' -File | ForEach-Object {
+            $p = Start-Process -FilePath $baseExe -ArgumentList $_.FullName `
+              -NoNewWindow -PassThru -Wait
+            if ($p.ExitCode -eq 0) {
+              Write-Host "NEW crash (not in base): $($_.Name)"
+              Copy-Item $_.FullName $newDir
+              $newCount++
+            } else {
+              Write-Host "Pre-existing crash (reproduces on base): $($_.Name) - skipping"
+            }
+          }
+          # Also copy ASan logs for new crashes
+          if ($newCount -gt 0) {
+            Get-ChildItem $crashDir -Filter 'asan.*' -File -ErrorAction SilentlyContinue |
+              Copy-Item -Destination $newDir
+          }
+          echo "new_crashes=$newCount" >> $env:GITHUB_OUTPUT
+          echo "has_new_crashes=$($newCount -gt 0 ? 'true' : 'false')" >> $env:GITHUB_OUTPUT
+          Write-Host "New crashes: $newCount"
+          if ($newCount -gt 0) {
+            Write-Host "::error::$newCount new crash(es) introduced by this PR for ${{ matrix.format }}"
+          }
+
+      # Re-run new (PR-introduced) crashes to get clean ASan traces
+      - name: Reproduce new crashes for stack traces
+        if: steps.filter_crashes.outputs.has_new_crashes == 'true'
+        shell: pwsh
+        working-directory: fuzzers
+        run: |
+          $newDir = "crashes-new/${{ matrix.format }}"
+          $reproduced = 0; $failed = 0
+          Get-ChildItem $newDir -Filter 'crash-*' -File | ForEach-Object {
+            Write-Host "`n=== Reproducing $($_.Name) ==="
+            $env:ASAN_OPTIONS = "allocator_may_return_null=1:detect_leaks=0:abort_on_error=0:print_stacktrace=1:log_path=$newDir/$($_.BaseName).asan"
+            $p = Start-Process -FilePath ".\Fuzz.${{ matrix.format }}.exe" `
+              -ArgumentList $_.FullName -NoNewWindow -PassThru -Wait
+            if ($p.ExitCode -ne 0) {
+              $script:reproduced++
+              Get-ChildItem $newDir -Filter "$($_.BaseName).asan.*" -File -ErrorAction SilentlyContinue |
+                ForEach-Object { Get-Content $_.FullName }
+            }
+            else { $script:failed++; Write-Host "WARNING: crash did not reproduce (exit 0)" }
+          }
+          if ($failed -gt 0) {
+            $logs = Get-ChildItem $newDir -Filter 'asan.*' -File -ErrorAction SilentlyContinue
+            if ($logs) {
+              Write-Host "`n=== Fork-mode ASan logs (for non-reproducible crashes) ==="
+              foreach ($log in $logs) {
+                Write-Host "`n--- $($log.Name) ---"
+                Get-Content $log.FullName
+              }
+            }
+          }
+          Write-Host "`nReproduced: $reproduced, Non-reproducible: $failed"
+
+      # --- Non-PR: print full diagnostics ---
+      # Re-run each crash input single-process (no fork mode) to get a clean,
+      # complete ASan trace. Non-reproducible crashes are logged from the
+      # fork-mode ASan log files captured during the original crash.
+      - name: Reproduce crashes for stack traces
+        if: always() && steps.check_crashes.outputs.has_crashes == 'true' && steps.params.outputs.is_pr != 'true'
+        shell: pwsh
+        working-directory: fuzzers
+        run: |
+          $crashDir = "crashes\${{ matrix.format }}"
+          $printAsan = "${{ steps.params.outputs.no_print_asan }}" -ne "true"
+          $reproduced = 0; $failed = 0
+          Get-ChildItem $crashDir -Filter 'crash-*' -File | ForEach-Object {
+            Write-Host "`n=== Reproducing $($_.Name) ==="
+            $env:ASAN_OPTIONS = "allocator_may_return_null=1:detect_leaks=0:abort_on_error=0:print_stacktrace=1:log_path=$crashDir/$($_.BaseName).asan"
+            $p = Start-Process -FilePath ".\Fuzz.${{ matrix.format }}.exe" `
+              -ArgumentList $_.FullName -NoNewWindow -PassThru -Wait
+            if ($p.ExitCode -ne 0) {
+              $script:reproduced++
+              if ($printAsan) {
+                Get-ChildItem $crashDir -Filter "$($_.BaseName).asan.*" -File -ErrorAction SilentlyContinue |
+                  ForEach-Object { Get-Content $_.FullName }
+              }
+            }
+            else { $script:failed++; Write-Host "WARNING: crash did not reproduce (exit 0)" }
+          }
+          # For non-reproducible crashes, fall back to uncorrelated fork-mode ASan logs
+          if ($printAsan -and $failed -gt 0) {
+            $logs = Get-ChildItem $crashDir -Filter 'asan.*' -File -ErrorAction SilentlyContinue
+            if ($logs) {
+              Write-Host "`n=== Fork-mode ASan logs (for non-reproducible crashes) ==="
+              foreach ($log in $logs) {
+                Write-Host "`n--- $($log.Name) ---"
+                Get-Content $log.FullName
+              }
+            }
+          }
+          Write-Host "`nReproduced: $reproduced, Non-reproducible: $failed"
+
+      - name: Package crash artifacts (with optional encryption)
+        if: |
+          always() &&
+          steps.check_crashes.outputs.has_crashes == 'true' &&
+          (steps.params.outputs.is_pr != 'true' || steps.filter_crashes.outputs.has_new_crashes == 'true')
+        id: package_crashes
+        shell: pwsh
+        env:
+          CRASH_KEY: ${{ secrets.CRASH_KEY }}
+        run: |
+          # For PRs, only package new crashes; for non-PR, package all
+          $isPr = "${{ steps.params.outputs.is_pr }}" -eq "true"
+          $crashDir = if ($isPr) { "fuzzers/crashes-new/${{ matrix.format }}" } else { "fuzzers/crashes/${{ matrix.format }}" }
+          # Remove non-crash files: oom/timeout inputs, uncorrelated fork-mode logs, empty repro logs
+          Get-ChildItem $crashDir -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -like 'oom-*' -or $_.Name -like 'timeout-*' -or $_.Name -like 'asan.*' -or ($_.Name -like '*.asan.*' -and $_.Length -eq 0) } |
+            Remove-Item -Force
+          if ($env:CRASH_KEY) {
+            7z a -p"$env:CRASH_KEY" -mhe=on "crashes-${{ matrix.format }}.7z" "$crashDir/crash-*"
+            echo "artifact_path=crashes-${{ matrix.format }}.7z" >> $env:GITHUB_OUTPUT
+            echo "artifact_name=crashes-${{ matrix.format }}-encrypted" >> $env:GITHUB_OUTPUT
+            Write-Host "Crash artifacts encrypted"
+          } else {
+            Write-Host "::warning::CRASH_KEY secret not set, uploading unencrypted"
+            echo "artifact_path=$crashDir" >> $env:GITHUB_OUTPUT
+            echo "artifact_name=crashes-${{ matrix.format }}" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Upload crash artifacts
+        if: |
+          always() &&
+          steps.check_crashes.outputs.has_crashes == 'true' &&
+          (steps.params.outputs.is_pr != 'true' || steps.filter_crashes.outputs.has_new_crashes == 'true')
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.package_crashes.outputs.artifact_name }}
+          path: ${{ steps.package_crashes.outputs.artifact_path }}
+          retention-days: 90
+
+      - name: Minimize corpus
+        if: always() && steps.params.outputs.skip == 'false' && steps.params.outputs.is_pr != 'true'
+        shell: pwsh
+        working-directory: fuzzers
+        env:
+          ASAN_OPTIONS: allocator_may_return_null=1:detect_leaks=0:abort_on_error=0
+        run: |
+          $format = "${{ matrix.format }}"
+          $corpus = "corpus/$format"
+          $min = "corpus/${format}-min"
+          New-Item -ItemType Directory -Path $min -Force | Out-Null
+          & "./Fuzz.$format.exe" -merge=1 $min $corpus
+          Remove-Item -Path $corpus -Recurse -Force
+          Rename-Item -Path $min -NewName $format
+
+      - name: Save corpus cache
+        if: always() && steps.params.outputs.skip == 'false' && steps.params.outputs.is_pr != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: fuzzers/corpus/${{ matrix.format }}
+          key: fuzz-corpus-${{ matrix.format }}-${{ github.run_id }}
+
+      # OpenCppCoverage is self-contained in its install directory. The Inno Setup
+      # installer also registers msdia140.dll (DIA SDK) as a COM component, but GHA
+      # runners already have it registered via Visual Studio, so cache restore works.
+      - name: Restore OpenCppCoverage
+        if: always() && steps.params.outputs.skip == 'false' && steps.params.outputs.is_pr != 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: C:\Program Files\OpenCppCoverage
+          key: ${{ needs.build.outputs.occ-cache-key }}
+          fail-on-cache-miss: true
+        continue-on-error: true
+
+      - name: Generate coverage data
+        if: always() && steps.params.outputs.skip == 'false' && steps.params.outputs.is_pr != 'true'
+        id: coverage
+        shell: pwsh
+        working-directory: fuzzers
+        timeout-minutes: 30
+        continue-on-error: true
+        env:
+          ASAN_OPTIONS: allocator_may_return_null=1:detect_leaks=0:abort_on_error=0
+        run: |
+          $format = "${{ matrix.format }}"
+          $occ = "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe"
+          if (-not (Test-Path $occ)) {
+            Write-Host "::warning::OpenCppCoverage not found, skipping coverage"
+            exit 1
+          }
+          & $occ --sources NanaZip.Codecs --sources NanaZip.Core `
+            --export_type "binary:coverage-${format}.cov" `
+            -- ".\Fuzz.${format}.exe" "corpus\${format}" -runs=0
+
+      - name: Upload coverage data
+        if: always() && steps.coverage.outcome == 'success' && steps.params.outputs.is_pr != 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-${{ matrix.format }}
+          path: fuzzers/coverage-${{ matrix.format }}.cov
+          retention-days: 1
+
+      - name: Fail if crashes found
+        if: |
+          (steps.params.outputs.is_pr != 'true' && steps.check_crashes.outputs.has_crashes == 'true') ||
+          (steps.params.outputs.is_pr == 'true' && steps.filter_crashes.outputs.has_new_crashes == 'true')
+        run: exit 1
+
+  # Merge per-format coverage into a single HTML report.
+  coverage-report:
+    needs: [build, fuzz]
+    if: always() && github.event_name != 'pull_request'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      # OpenCppCoverage is self-contained in its install directory. The Inno Setup
+      # installer also registers msdia140.dll (DIA SDK) as a COM component, but GHA
+      # runners already have it registered via Visual Studio, so cache restore works.
+      - name: Restore OpenCppCoverage
+        uses: actions/cache/restore@v5
+        with:
+          path: C:\Program Files\OpenCppCoverage
+          key: ${{ needs.build.outputs.occ-cache-key }}
+          fail-on-cache-miss: true
+
+      - name: Download coverage data
+        id: download_coverage
+        uses: actions/download-artifact@v8
+        with:
+          pattern: coverage-*
+          path: coverage-data
+          merge-multiple: true
+        continue-on-error: true
+
+      - name: Generate HTML coverage report
+        if: steps.download_coverage.outcome == 'success'
+        id: gen_report
+        shell: pwsh
+        run: |
+          $occ = "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe"
+          $covFiles = Get-ChildItem coverage-data -Filter '*.cov' -File -ErrorAction SilentlyContinue
+          if (-not $covFiles -or $covFiles.Count -eq 0) {
+            Write-Host "::warning::No coverage data found"
+            exit 0
+          }
+          $inputArgs = @()
+          foreach ($f in $covFiles) { $inputArgs += "--input_coverage=$($f.FullName)" }
+          & $occ @inputArgs --export_type "html:coverage-report"
+          echo "has_report=true" >> $env:GITHUB_OUTPUT
+
+      - name: Package coverage report
+        if: steps.gen_report.outputs.has_report == 'true'
+        id: package_coverage
+        shell: pwsh
+        env:
+          CRASH_KEY: ${{ secrets.CRASH_KEY }}
+        run: |
+          if ($env:CRASH_KEY) {
+            7z a -p"$env:CRASH_KEY" -mhe=on coverage-report.7z coverage-report\
+            echo "artifact_path=coverage-report.7z" >> $env:GITHUB_OUTPUT
+            echo "artifact_name=coverage-report-encrypted" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "artifact_path=coverage-report" >> $env:GITHUB_OUTPUT
+            echo "artifact_name=coverage-report" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Upload coverage report
+        if: steps.package_coverage.outputs.artifact_name
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.package_coverage.outputs.artifact_name }}
+          path: ${{ steps.package_coverage.outputs.artifact_path }}
+          retention-days: 90
+
+      - name: Delete per-format coverage artifacts
+        if: steps.download_coverage.outcome == 'success'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const arts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+              per_page: 100,
+            });
+            for (const a of arts.data.artifacts.filter(a => a.name.startsWith('coverage-') && !a.name.startsWith('coverage-report'))) {
+              await github.rest.actions.deleteArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: a.id,
+              });
+              core.info(`Deleted artifact: ${a.name}`);
+            }
+
+  # Upload fuzzer binaries.
+  # Overall it should be reproducible with local ASAN build,
+  # but just in case the crash is triaged much later for verification if something has changed since.
+  # Runs on failure (crash found) or cancellation (user may have cancelled after spotting a crash).
+  # On cancellation we probe for crash artifacts first — if none
+  # were uploaded by any fuzz leg, we skip the binary upload.
+  upload-binaries:
+    needs: [build, fuzz]   # build is needed only for cache-key output reference
+    runs-on: windows-latest
+    if: always() && (needs.fuzz.result == 'failure' || needs.fuzz.result == 'cancelled')
+    steps:
+      - name: Check for crash artifacts
+        if: needs.fuzz.result == 'cancelled'
+        id: probe
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const arts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+              per_page: 100,
+            });
+            const has = arts.data.artifacts.some(a => a.name.startsWith('crashes-'));
+            core.setOutput('has_crashes', has.toString());
+
+      - name: Skip if cancelled without crashes
+        if: needs.fuzz.result == 'cancelled' && steps.probe.outputs.has_crashes != 'true'
+        run: echo "::notice::No crash artifacts found — skipping binary upload"
+
+      - name: Restore build cache
+        if: needs.fuzz.result == 'failure' || steps.probe.outputs.has_crashes == 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: Output/Binaries/ReleaseAsan/x64/
+          key: ${{ needs.build.outputs.cache-key }}
+
+      - name: Upload fuzzer binaries for crash reproduction
+        if: needs.fuzz.result == 'failure' || steps.probe.outputs.has_crashes == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: fuzzer-binaries
+          path: Output/Binaries/ReleaseAsan/x64/
+          retention-days: 90

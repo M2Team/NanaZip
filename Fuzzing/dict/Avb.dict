@@ -1,0 +1,18 @@
+# libFuzzer dictionary for Android Verified Boot vbmeta image (NanaZip codec).
+# Reference: NanaZip.Core/SevenZip/CPP/7zip/Archive/AvbHandler.cpp
+# Footer magic (last 64 bytes of file): 'A','V','B','f',0,0,0,1
+footer_magic="AVBf\x00\x00\x00\x01"
+# Vbmeta block magic at vbmeta_offset: "AVB0" (BE u32 = 0x41564230)
+vbmeta_magic="AVB0"
+# Required version fields (BE u32 = 1).
+ver_major="\x00\x00\x00\x01"
+# Common vbmeta block sizes (BE u64).
+size_64k="\x00\x00\x00\x00\x00\x01\x00\x00"
+size_8k="\x00\x00\x00\x00\x00\x00\x20\x00"
+zero8="\x00\x00\x00\x00\x00\x00\x00\x00"
+# Descriptor tag IDs (BE u64).
+desc_property="\x00\x00\x00\x00\x00\x00\x00\x00"
+desc_hashtree="\x00\x00\x00\x00\x00\x00\x00\x01"
+desc_hash="\x00\x00\x00\x00\x00\x00\x00\x02"
+desc_kernel_cmdline="\x00\x00\x00\x00\x00\x00\x00\x03"
+desc_chain_partition="\x00\x00\x00\x00\x00\x00\x00\x04"

@@ -1,0 +1,22 @@
+# libFuzzer dictionary for Electron Asar (NanaZip codec).
+# Reference: NanaZip.Codecs.Archive.ElectronAsar.cpp
+# Pickle: 4 LE uint32 prefixing a JSON manifest.
+pickle_var="\x04\x00\x00\x00"
+files="\"files\":"
+file="\"file\":"
+size="\"size\":"
+offset="\"offset\":"
+unpacked="\"unpacked\":true"
+executable="\"executable\":true"
+integrity="\"integrity\":"
+algorithm="\"algorithm\":\"SHA256\""
+hash="\"hash\":"
+blocks="\"blocks\":"
+blocksize="\"blockSize\":"
+true_v="true"
+false_v="false"
+brace_open="{"
+brace_close="}"
+bracket_open="["
+bracket_close="]"
+manifest_min="{\"files\":{}}"

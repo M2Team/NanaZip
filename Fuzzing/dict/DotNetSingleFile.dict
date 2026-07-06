@@ -1,0 +1,18 @@
+# libFuzzer dictionary for .NET single-file bundle (NanaZip codec).
+# Reference: NanaZip.Codecs.Archive.DotNetSingleFile.cpp
+# 32-byte SHA-256 of ".net core bundle".
+signature="\x8b\x12\x02\xb9\x6a\x61\x20\x38\x72\x7b\x93\x02\x14\xd7\xa0\x32\x13\xf5\xb9\xe6\xef\xae\x33\x18\xee\x3b\x2d\xce\x24\xb3\x6a\xae"
+# Bundle header versions.
+ver1="\x01\x00\x00\x00\x00\x00\x00\x00"
+ver2="\x02\x00\x00\x00\x00\x00\x00\x00"
+ver6="\x06\x00\x00\x00\x00\x00\x00\x00"
+# File-type enum (uint8).
+ft_unknown="\x00"
+ft_assembly="\x01"
+ft_native="\x02"
+ft_deps_json="\x03"
+ft_runtime_json="\x04"
+ft_symbols="\x05"
+# DOS PE header magic to keep AppHost search loop happy.
+mz="MZ"
+pe="PE\x00\x00"

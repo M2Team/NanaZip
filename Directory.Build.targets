@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <!--
+    When building with AddressSanitizer (EnableASAN=true), the ASan runtime
+    thunk (clang_rt.asan_static_runtime_thunk*.lib) defines the CRT debug-heap
+    symbols (_CrtSetDbgFlag, _CrtCheckMemory, etc.). NanaZip's native vcxproj
+    files set MileUniCrtDisableRuntimeDebuggingFeature=true, which makes
+    Mile.Windows.UniCrt emit its own wrapper object (same symbols) and causes
+    LNK2005 on every linked binary. Flip it off for ASan builds so Mile skips
+    the wrapper; the real debug CRT + ASan thunk supply those symbols.
+
+    This file is auto-imported after every project's own PropertyGroups, so it
+    wins over the per-project setting.
+  -->
+  <PropertyGroup Condition="'$(EnableASAN)' == 'true'">
+    <MileUniCrtDisableRuntimeDebuggingFeature>false</MileUniCrtDisableRuntimeDebuggingFeature>
+  </PropertyGroup>
+  <!--
+    ReleaseAsan maps to project-level Release configuration, so OutDir and
+    IntDir default to ...\Release\$(Platform)\. Redirect them to
+    ...\ReleaseAsan\$(Platform)\ so ASan and non-ASan binaries don't collide.
+  -->
+  <PropertyGroup Condition="'$(EnableASAN)' == 'true' and ('$(MSBuildProjectExtension)' == '.vcxproj' or '$(MSBuildProjectExtension)' == '.nativeproj')">
+    <OutDir>$(MileProjectBinariesPath)ReleaseAsan\$(Platform)\</OutDir>
+    <IntDir>$(MileProjectObjectsPath)ReleaseAsan\$(MSBuildProjectName)\$(Platform)\</IntDir>
+    <GeneratedFilesDir>$(IntDir)Generated Files\</GeneratedFilesDir>
+  </PropertyGroup>
+  <!--
+    ReleaseAsan is a new configuration unknown to Mile.Project.Cpp.props, which
+    only applies Release optimisations when Configuration==Release.  Replicate
+    the Release compiler/linker settings here so ReleaseAsan builds are
+    optimised identically (before ASan overrides RuntimeLibrary below).
+  -->
+  <PropertyGroup Condition="'$(Configuration)' == 'ReleaseAsan'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)' == 'ReleaseAsan'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <!--
+    ASan with static CRT (/MT) uses per-DLL thunks that patch functions at
+    load time.  The longjmp interception fails when NanaZip.Core.dll is loaded
+    via LoadLibrary, aborting the process before any archive code runs.
+    Switch to dynamic CRT (/MD) so all modules share the single ASan runtime
+    DLL (clang_rt.asan_dynamic-x86_64.dll) with no code-patching needed.
+  -->
+  <ItemDefinitionGroup Condition="'$(EnableASAN)' == 'true'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!--
+    Copy the ASan runtime DLL to the output directory so the binaries can
+    find it at launch. The DLL lives next to cl.exe under the active toolset.
+  -->
+  <Target Name="CopyAsanRuntimeDll"
+          AfterTargets="Link"
+          Condition="'$(EnableASAN)' == 'true' and '$(ConfigurationType)' != 'StaticLibrary'">
+    <PropertyGroup>
+      <_AsanDllName Condition="'$(Platform)' == 'x64' or '$(Platform)' == 'X64'">clang_rt.asan_dynamic-x86_64.dll</_AsanDllName>
+      <_AsanDllName Condition="'$(Platform)' == 'ARM64' or '$(Platform)' == 'arm64'">clang_rt.asan_dynamic-aarch64.dll</_AsanDllName>
+      <_AsanDllSource>$(VCToolsInstallDir)bin\Host$(Platform)\$(Platform)\$(_AsanDllName)</_AsanDllSource>
+    </PropertyGroup>
+    <Copy SourceFiles="$(_AsanDllSource)"
+          DestinationFolder="$(OutDir)"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(_AsanDllSource)')" />
+  </Target>
+  <!--
+    Build libFuzzer harnesses and copy runner scripts when the ReleaseAsan
+    solution configuration is active. The target fires after NanaZip.Codecs.dll
+    is linked (the harnesses LoadLibrary it at runtime). Each harness is a
+    standalone cl.exe invocation with /fsanitize=address /fsanitize=fuzzer.
+  -->
+  <Target Name="BuildFuzzHarnesses"
+          AfterTargets="Link"
+          Condition="'$(EnableASAN)' == 'true' and '$(MSBuildProjectName)' == 'NanaZip.Codecs'">
+    <PropertyGroup>
+      <_FuzzDir>$(MSBuildThisFileDirectory)Fuzzing\</_FuzzDir>
+      <_FuzzInc>/I"$(MSBuildThisFileDirectory)NanaZip.Specification"</_FuzzInc>
+      <_FuzzFlags>/nologo /MD /Zi /O1 /EHsc /std:c++17 /fsanitize=address /fsanitize=fuzzer</_FuzzFlags>
+      <_FuzzObj>$(MileProjectObjectsPath)ReleaseAsan\Fuzzing\$(Platform)</_FuzzObj>
+    </PropertyGroup>
+    <MakeDir Directories="$(_FuzzObj)" />
+    <ItemGroup>
+      <FuzzHarness Include="Ufs">            <SeedZip>ufs-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="DotNetSingleFile"><SeedZip>dotnet-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="ElectronAsar">   <SeedZip>asar-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="Romfs">          <SeedZip>romfs-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="Zealfs">         <SeedZip>zealfs-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="WebAssembly">    <SeedZip>wasm-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="Littlefs">       <SeedZip>littlefs-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="Avb">            <SeedZip>avb-seeds.zip</SeedZip></FuzzHarness>
+      <FuzzHarness Include="Lvm">            <SeedZip>lvm-seeds.zip</SeedZip></FuzzHarness>
+    </ItemGroup>
+    <Exec Command="cl $(_FuzzFlags) $(_FuzzInc) &quot;$(_FuzzDir)Fuzz.%(FuzzHarness.Identity).cpp&quot; /Fo$(_FuzzObj)\ /Fe:$(OutDir)Fuzz.%(FuzzHarness.Identity).exe /link /SUBSYSTEM:CONSOLE ole32.lib oleaut32.lib"
+          WorkingDirectory="$(MSBuildThisFileDirectory)" />
+    <!-- Extract seed corpus zips into per-harness corpus directories if they don't already exist. -->
+    <Exec Command="if not exist &quot;$(OutDir)corpus\%(FuzzHarness.Identity)&quot; ( mkdir &quot;$(OutDir)corpus\%(FuzzHarness.Identity)&quot; &amp;&amp; tar -xf &quot;$(_FuzzDir)corpus\%(FuzzHarness.SeedZip)&quot; -C &quot;$(OutDir)corpus\%(FuzzHarness.Identity)&quot; )"
+          Condition="Exists('$(_FuzzDir)corpus\%(FuzzHarness.SeedZip)')" />
+    <!-- Create per-harness crash artifact directories. -->
+    <MakeDir Directories="$(OutDir)crashes\%(FuzzHarness.Identity)" />
+    <!-- Copy fuzzer dictionaries. -->
+    <Copy SourceFiles="$(_FuzzDir)dict\%(FuzzHarness.Identity).dict"
+          DestinationFolder="$(OutDir)dict"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(_FuzzDir)dict\%(FuzzHarness.Identity).dict')" />
+    <Copy SourceFiles="$(_FuzzDir)Fuzz.ps1" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(_FuzzDir)Minimize.cmd" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>
