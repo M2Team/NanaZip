@@ -464,7 +464,7 @@ namespace NanaZip::Codecs::Archive
                 UINT64 ActualOffset;
 
                 if (FAILED(this->m_FileStream->Seek(
-                    Information.Offset,
+                    this->m_GlobalOffset + Information.Offset,
                     STREAM_SEEK_SET,
                     &ActualOffset)))
                 {
