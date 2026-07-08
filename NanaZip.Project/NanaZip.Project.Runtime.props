@@ -17,8 +17,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(NanaZipBuildWithSanitizers)' != 'true'">
     <ClCompile>
-      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)' == 'true'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)' != 'true'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup Condition="'$(NanaZipBuildWithSanitizers)' == 'true'">
