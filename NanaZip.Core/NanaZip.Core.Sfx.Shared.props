@@ -21,7 +21,7 @@
         https://github.com/pbatard/rufus/issues/2701#issuecomment-2874788564
         for more details.
       -->
-      <AdditionalOptions Condition="'$(Configuration)' == 'Release'">%(AdditionalOptions) /DEPENDENTLOADFLAG:0x800</AdditionalOptions>
+      <AdditionalOptions Condition="'$(UseDebugLibraries)' != 'true'">%(AdditionalOptions) /DEPENDENTLOADFLAG:0x800</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="NanaZipCoreSfxSharedBuildSource" BeforeTargets="BeforeClCompile">
