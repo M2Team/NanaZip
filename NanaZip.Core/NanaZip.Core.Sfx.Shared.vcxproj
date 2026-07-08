@@ -223,9 +223,7 @@
   </Target>
   <Target Name="NanaZipCoreAesHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)' != 'x64'">
-      <ClCompile Include="SevenZip\C\AesOpt.c">
-        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
-      </ClCompile>
+      <ClCompile Include="SevenZip\C\AesOpt.c" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreLzmaDecHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
@@ -240,9 +238,7 @@
   </Target>
   <Target Name="NanaZipCoreCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)' != 'x64'">
-      <ClCompile Include="SevenZip\C\7zCrcOpt.c">
-        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
-      </ClCompile>
+      <ClCompile Include="SevenZip\C\7zCrcOpt.c" />
     </ItemGroup>
   </Target>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1917" Project="Mile.Project.Cpp.targets" />
