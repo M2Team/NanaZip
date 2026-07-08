@@ -258,9 +258,7 @@
   </Target>
   <Target Name="NanaZipCoreConsoleCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)' != 'x64'">
-      <ClCompile Include="SevenZip\C\7zCrcOpt.c">
-        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
-      </ClCompile>
+      <ClCompile Include="SevenZip\C\7zCrcOpt.c" />
     </ItemGroup>
   </Target>
   <Target Name="NanaZipCoreSortHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
@@ -270,9 +268,7 @@
   </Target>
   <Target Name="NanaZipCoreSortHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)' != 'x64'">
-      <ClCompile Include="SevenZip\C\Sort.c">
-        <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
-      </ClCompile>
+      <ClCompile Include="SevenZip\C\Sort.c" />
     </ItemGroup>
   </Target>
   <ItemGroup>
