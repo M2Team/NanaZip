@@ -652,7 +652,9 @@ namespace
             dwSize,
             flAllocationType,
             flProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
@@ -681,7 +683,9 @@ namespace
             dwSize,
             flAllocationType,
             flProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
@@ -706,7 +710,9 @@ namespace
             dwSize,
             flNewProtect,
             lpflOldProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
@@ -735,7 +741,9 @@ namespace
             dwSize,
             flNewProtect,
             lpflOldProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
