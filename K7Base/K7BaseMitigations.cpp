@@ -211,11 +211,15 @@ namespace
      */
     const ModuleItem g_ModuleRules[] =
     {
+        // iFlyIME
         { ModuleTypes::NeedsDynamicCodeOptout, "BaseGUI.dll" },
+        // Explorer Patcher
         { ModuleTypes::NeedsBlocking, "ExplorerPatcher.amd64.dll" },
         { ModuleTypes::NeedsBlocking, "ExplorerPatcher.IA-32.dll" },
+        // Proxifier
         { ModuleTypes::NeedsBlocking, "PrxDrvPE.dll" },
         { ModuleTypes::NeedsBlocking, "PrxDrvPE64.dll" },
+        // TranslucentFlyouts
         { ModuleTypes::NeedsBlocking, "TFMain32.dll" },
         { ModuleTypes::NeedsBlocking, "TFMain64.dll" },
     };
