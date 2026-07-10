@@ -26,13 +26,13 @@ EXTERN_C MO_RESULT MOAPI K7BaseInitialize()
         return Result;
     }
 
-    Result = ::K7BaseEnableMandatoryMitigations();
+    Result = ::K7BaseInitializeDynamicLinkLibraryBlocker();
     if (MO_RESULT_SUCCESS_OK != Result)
     {
         return Result;
     }
 
-    Result = ::K7BaseInitializeDynamicLinkLibraryBlocker();
+    Result = ::K7BaseEnableMandatoryMitigations();
     if (MO_RESULT_SUCCESS_OK != Result)
     {
         return Result;
