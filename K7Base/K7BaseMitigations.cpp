@@ -211,11 +211,17 @@ namespace
      */
     const ModuleItem g_ModuleRules[] =
     {
+        // iFlyIME
         { ModuleTypes::NeedsDynamicCodeOptout, "BaseGUI.dll" },
+        // Explorer Patcher
         { ModuleTypes::NeedsBlocking, "ExplorerPatcher.amd64.dll" },
         { ModuleTypes::NeedsBlocking, "ExplorerPatcher.IA-32.dll" },
+        // Proxifier
         { ModuleTypes::NeedsBlocking, "PrxDrvPE.dll" },
         { ModuleTypes::NeedsBlocking, "PrxDrvPE64.dll" },
+        // Sogou Pinyin
+        { ModuleTypes::NeedsDynamicCodeOptout, "SogouPY.ime" },
+        // TranslucentFlyouts
         { ModuleTypes::NeedsBlocking, "TFMain32.dll" },
         { ModuleTypes::NeedsBlocking, "TFMain64.dll" },
     };
@@ -652,7 +658,9 @@ namespace
             dwSize,
             flAllocationType,
             flProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
@@ -681,7 +689,9 @@ namespace
             dwSize,
             flAllocationType,
             flProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
@@ -706,7 +716,9 @@ namespace
             dwSize,
             flNewProtect,
             lpflOldProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
@@ -735,7 +747,9 @@ namespace
             dwSize,
             flNewProtect,
             lpflOldProtect);
+        DWORD Error = ::GetLastError();
         ::K7BaseSetCurrentThreadDynamicCodePolicyOptOut(MO_FALSE);
+        ::SetLastError(Error);
         return Result;
     }
 
