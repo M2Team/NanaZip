@@ -219,6 +219,8 @@ namespace
         // Proxifier
         { ModuleTypes::NeedsBlocking, "PrxDrvPE.dll" },
         { ModuleTypes::NeedsBlocking, "PrxDrvPE64.dll" },
+        // Sogou Pinyin
+        { ModuleTypes::NeedsDynamicCodeOptout, "SogouPY.ime" },
         // TranslucentFlyouts
         { ModuleTypes::NeedsBlocking, "TFMain32.dll" },
         { ModuleTypes::NeedsBlocking, "TFMain64.dll" },
