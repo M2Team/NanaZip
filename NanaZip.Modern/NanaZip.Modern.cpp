@@ -229,10 +229,26 @@ namespace
     HWND K7ModernCreateXamlDialog(
         _In_opt_ HWND ParentWindowHandle)
     {
-        return ::K7ModernCreateXamlWindow(
+        HWND DialogHandle= ::K7ModernCreateXamlWindow(
             ParentWindowHandle,
             WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
             WS_CAPTION | WS_SYSMENU);
+
+        MILE_WINDOW_SYSTEM_BACKDROP_TYPE BackdropType =
+            MILE_WINDOW_SYSTEM_BACKDROP_TYPE_AUTO;
+        if (S_OK == ::MileGetWindowSystemBackdropTypeAttribute(
+                DialogHandle,
+                &BackdropType) &&
+            BackdropType != MILE_WINDOW_SYSTEM_BACKDROP_TYPE_AUTO &&
+            BackdropType != MILE_WINDOW_SYSTEM_BACKDROP_TYPE_NONE)
+        {
+            COLORREF IgnoreAccentColor = static_cast<COLORREF>(-2);
+            ::MileSetWindowCaptionColorAttribute(
+                DialogHandle,
+                IgnoreAccentColor);
+        }
+
+        return DialogHandle;
     }
 
     int K7ModernShowXamlWindow(
