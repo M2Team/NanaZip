@@ -34,6 +34,7 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_WANT_COPY_HISTORY,
   IDX_SETTINGS_WANT_FOLDER_HISTORY,
   IDX_SETTINGS_LOWERCASE_HASHES,
+  IDX_SETTINGS_DELETE_ARCHIVE,
   // , IDT_COMPRESS_MEMORY
 };
 
@@ -139,6 +140,7 @@ bool CSettingsPage::OnInit()
   CheckButton(IDX_SETTINGS_WANT_COPY_HISTORY, st.CopyHistory);
   CheckButton(IDX_SETTINGS_WANT_FOLDER_HISTORY, st.FolderHistory);
   CheckButton(IDX_SETTINGS_LOWERCASE_HASHES, st.LowercaseHashes);
+  CheckButton(IDX_SETTINGS_DELETE_ARCHIVE, st.DeleteArchive);
 
   /*
   NCompression::CMemUse mu;
@@ -224,6 +226,7 @@ LONG CSettingsPage::OnApply()
     st.CopyHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_COPY_HISTORY);
     st.FolderHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_FOLDER_HISTORY);
     st.LowercaseHashes = IsButtonCheckedBool(IDX_SETTINGS_LOWERCASE_HASHES);
+    st.DeleteArchive = IsButtonCheckedBool(IDX_SETTINGS_DELETE_ARCHIVE);
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
 
     st.ShowSystemMenu = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SYSTEM_MENU);
@@ -346,6 +349,7 @@ bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SETTINGS_WANT_COPY_HISTORY:
     case IDX_SETTINGS_WANT_FOLDER_HISTORY:
     case IDX_SETTINGS_LOWERCASE_HASHES:
+    case IDX_SETTINGS_DELETE_ARCHIVE:
       _wasChanged = true;
       break;
 

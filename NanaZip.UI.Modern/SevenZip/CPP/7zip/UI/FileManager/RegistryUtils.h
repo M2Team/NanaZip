@@ -33,6 +33,9 @@ struct CFmSettings
   // bool Underline;
 
   bool ShowSystemMenu;
+  // **************** NanaZip Modification Start ****************
+  bool DeleteArchive;
+  // **************** NanaZip Modification End ****************
 
   void Save() const;
   void Load();

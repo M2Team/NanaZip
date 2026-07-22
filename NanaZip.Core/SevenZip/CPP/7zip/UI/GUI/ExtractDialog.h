@@ -1,4 +1,4 @@
-﻿// ExtractDialog.h
+// ExtractDialog.h
 
 #ifndef ZIP7_INC_EXTRACT_DIALOG_H
 #define ZIP7_INC_EXTRACT_DIALOG_H
