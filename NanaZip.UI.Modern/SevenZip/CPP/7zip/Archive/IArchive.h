@@ -1,4 +1,4 @@
-// IArchive.h
+﻿// IArchive.h
 
 #ifndef __IARCHIVE_H
 #define __IARCHIVE_H
@@ -70,6 +70,10 @@ namespace NArcInfoFlags
   const UInt32 kMTime_Default   = 1 << 19;
   // const UInt32 kTTime_Reserved         = 1 << 20;
   // const UInt32 kTTime_Reserved_Default = 1 << 21;
+  // **************** NanaZip Modification Start ****************
+  const UInt32 kCompositeArc    = 1 << 22; // should be skipped in Open * mode
+  const UInt32 kLongExtension   = 1 << 23; // extension may contain dot
+  // **************** NanaZip Modification End ****************
 }
 
 namespace NArcInfoTimeFlags
