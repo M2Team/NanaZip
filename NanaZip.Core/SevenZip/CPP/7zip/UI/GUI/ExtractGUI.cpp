@@ -29,6 +29,7 @@
 #include "HashGUI.h"
 
 #include "../FileManager/PropertyNameRes.h"
+#include "../FileManager/RegistryUtils.h"
 
 using namespace NWindows;
 using namespace NFile;
@@ -382,5 +383,18 @@ HRESULT ExtractGUI(
   }
 #endif
   // **************** 7-Zip ZS Modification End ****************
+  // **************** NanaZip Modification Start ****************
+  {
+    CFmSettings fmSettings;
+    fmSettings.Load();
+    if (fmSettings.DeleteArchive && extracter.Result == S_OK)
+    {
+      FOR_VECTOR (i, archivePaths)
+      {
+        NDir::DeleteFileAlways(us2fs(archivePaths[i]));
+      }
+    }
+  }
+  // **************** NanaZip Modification End ****************
   return extracter.Result;
 }

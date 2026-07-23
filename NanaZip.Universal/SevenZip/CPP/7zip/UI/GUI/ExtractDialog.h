@@ -1,4 +1,7 @@
-﻿// ExtractDialog.h
+// **************** NanaZip Modification Start ****************
+// (Removed stray BOM character at the start of the original line.)
+// **************** NanaZip Modification End ****************
+// ExtractDialog.h
 
 #ifndef ZIP7_INC_EXTRACT_DIALOG_H
 #define ZIP7_INC_EXTRACT_DIALOG_H
