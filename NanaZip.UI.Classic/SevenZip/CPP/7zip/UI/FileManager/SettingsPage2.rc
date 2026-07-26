@@ -19,7 +19,6 @@ BEGIN
   CONTROL  "Want FolderHistory", IDX_SETTINGS_WANT_FOLDER_HISTORY,    MY_CHECKBOX, m, 182, xc, 10
   CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 196, xc, 10
 
-  CONTROL  "Delete archive after e&xtraction", IDX_SETTINGS_DELETE_ARCHIVE, MY_CHECKBOX, m, 220, xc, 10
   // **************** NanaZip Modification End ****************
 
   // LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY, m, 140, xc, 8

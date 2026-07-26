@@ -100,6 +100,7 @@ public:
   CBoolPair ElimDup;
   // **************** NanaZip Modification Start ****************
   CBoolPair OpenFolder;
+  CBoolPair DeleteArchive;
   // **************** NanaZip Modification End ****************
 
   INT_PTR Create(HWND aWndParent = NULL)
