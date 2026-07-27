@@ -103,7 +103,7 @@
     <value>&amp;Modifica</value>
   </data>
   <data name="Resource502" xml:space="preserve">
-    <value>&amp;Visualizza</value>
+    <value>&amp;Visualizzatore</value>
   </data>
   <data name="Resource503" xml:space="preserve">
     <value>&amp;Preferiti</value>
@@ -118,10 +118,10 @@
     <value>&amp;Apri</value>
   </data>
   <data name="Resource541" xml:space="preserve">
-    <value>Apri in &amp;NanaZip File Manager</value>
+    <value>Apri in &amp;NanaZip</value>
   </data>
   <data name="Resource542" xml:space="preserve">
-    <value>Apri in E&amp;xplorer</value>
+    <value>Apri in E&amp;splora risorse</value>
   </data>
   <data name="Resource543" xml:space="preserve">
     <value>&amp;Visualizza</value>
@@ -175,10 +175,10 @@
     <value>&amp;Alternate Data Streams</value>
   </data>
     <data name="Resource590" xml:space="preserve">
-    <value>Apri in NanaZip File Manager *</value>
+    <value>Apri in NanaZip *</value>
   </data>
   <data name="Resource591" xml:space="preserve">
-    <value>Apri in NanaZip File Manager #</value>
+    <value>Apri in NanaZip #</value>
   </data>
   <data name="Resource600" xml:space="preserve">
     <value>&amp;Seleziona tutto</value>
