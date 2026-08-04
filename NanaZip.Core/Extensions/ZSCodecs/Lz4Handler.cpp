@@ -339,13 +339,16 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
   return _props.SetProperties(names, values, numProps);
 }
 
-static const Byte k_Signature[] = "0x184D2204";
+// lz4 frame magic, and zstdmt skippable-frame magic used for -mmt output
+static const Byte k_Signature[] = {
+    4, 0x04, 0x22, 0x4D, 0x18,
+    4, 0x50, 0x2A, 0x4D, 0x18 };
 
 REGISTER_ARC_IO(
   "lz4", "lz4 tlz4", "* .tar", 0x0f,
   k_Signature,
   0,
-  NArcInfoFlags::kKeepName,
+  NArcInfoFlags::kKeepName | NArcInfoFlags::kMultiSignature,
   0,
   IsArc_lz4)
 

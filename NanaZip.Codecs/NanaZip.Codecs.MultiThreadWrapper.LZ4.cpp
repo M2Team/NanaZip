@@ -60,6 +60,9 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLz4Decode(
     }
 
     std::size_t Result = ::LZ4MT_decompressDCtx(Context, &ReadWrite);
+
+    ::LZ4MT_freeDCtx(Context);
+
     if (::LZ4MT_isError(Result))
     {
         if (ERROR(canceled) == Result)
@@ -69,8 +72,6 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLz4Decode(
 
         return E_FAIL;
     }
-
-    ::LZ4MT_freeDCtx(Context);
 
     return S_OK;
 }

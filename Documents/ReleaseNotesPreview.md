@@ -2,6 +2,10 @@
 
 For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 7.0 Preview (7.0.1800.0)**
+
+This release includes all the improvements from NanaZip 6.5 Update (6.5.1800.0).
+
 **NanaZip 7.0 Preview (7.0.1767.0)**
 
 This release includes all the improvements from NanaZip 6.5 Update (6.5.1767.0).

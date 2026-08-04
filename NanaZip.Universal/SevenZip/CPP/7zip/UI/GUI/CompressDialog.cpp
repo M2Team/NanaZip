@@ -1950,19 +1950,19 @@ void CCompressDialog::SetMethod2(int keepMethodId)
   _auto_MethodId = -1;
   const CFormatInfo &fi = g_Formats[GetStaticFormatIndex()];
   const CArcInfoEx &ai = Get_ArcInfoEx();
+  // **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (GetLevel() == 0 && !ai.Flags_HashHandler())
   {
-    // **************** 7-Zip ZS Modification Start ****************
-    /*if (!ai.Is_Tar() &&
+    if (!ai.Is_Tar() &&
         !ai.Is_Zstd())
-    {*/
-    // **************** 7-Zip ZS Modification End ****************
+    {
       MethodChanged();
       return;
-    // **************** 7-Zip ZS Modification Start ****************
-    //}
-    // **************** 7-Zip ZS Modification End ****************
+    }
   }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  // **************** 7-Zip ZS Modification End ****************
   UString defaultMethod;
   // **************** 7-Zip ZS Modification Start ****************
   int defaultLevel = 5;
