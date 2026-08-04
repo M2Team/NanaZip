@@ -60,6 +60,9 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLz5Decode(
     }
 
     std::size_t Result = ::LZ5MT_decompressDCtx(Context, &ReadWrite);
+
+    ::LZ5MT_freeDCtx(Context);
+
     if (::LZ5MT_isError(Result))
     {
         if (ERROR(canceled) == Result)
@@ -69,8 +72,6 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLz5Decode(
 
         return E_FAIL;
     }
-
-    ::LZ5MT_freeDCtx(Context);
 
     return S_OK;
 }

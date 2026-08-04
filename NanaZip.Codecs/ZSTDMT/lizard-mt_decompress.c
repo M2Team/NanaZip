@@ -480,6 +480,13 @@ static size_t st_decompress(void *arg)
 		}
 	}
 
+	/* input ended, but current frame is not fully decoded yet */
+	if (nextToLoad != 0) {
+		free(out->buf);
+		free(in->buf);
+		return ERROR(frame_decompress);
+	}
+
 	/* no error */
 	free(out->buf);
 	free(in->buf);
@@ -533,7 +540,7 @@ size_t LIZARDMT_decompressDCtx(LIZARDMT_DCtx * ctx, LIZARDMT_RdWr_t * rdwr)
 		/* no pthread_create() needed! */
 		void *p = pt_decompress(w);
 		if (p)
-			return (size_t) p;
+			retval_of_thread = p;
 		goto okay;
 	}
 
@@ -556,6 +563,15 @@ size_t LIZARDMT_decompressDCtx(LIZARDMT_DCtx * ctx, LIZARDMT_RdWr_t * rdwr)
 	}
 
  okay:
+	/* move remaining done/busy entries to free list */
+	while (!list_empty(&ctx->writelist_done)) {
+		struct list_head *entry = list_first(&ctx->writelist_done);
+		list_move(entry, &ctx->writelist_free);
+	}
+	while (!list_empty(&ctx->writelist_busy)) {
+		struct list_head* entry = list_first(&ctx->writelist_busy);
+		list_move(entry, &ctx->writelist_free);
+	}
 	/* clean up the buffers */
 	while (!list_empty(&ctx->writelist_free)) {
 		struct writelist *wl;

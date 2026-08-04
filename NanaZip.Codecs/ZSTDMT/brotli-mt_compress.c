@@ -147,7 +147,7 @@ BROTLIMT_CCtx *BROTLIMT_createCCtx(int threads, uint64_t unpackSize, int level, 
 		}
 	} else {
 		ctx->cwork = NULL;
-	}
+	}		
 
 	return ctx;
 
@@ -239,6 +239,7 @@ static void *pt_compress(void *arg)
 			    malloc(sizeof(struct writelist));
 			if (!wl) {
 				pthread_mutex_unlock(&ctx->write_mutex);
+				free(in.buf);
 				return (void *)MT_ERROR(memory_allocation);
 			}
 			wl->out.size =
@@ -246,6 +247,7 @@ static void *pt_compress(void *arg)
 			wl->out.buf = malloc(wl->out.size);
 			if (!wl->out.buf) {
 				pthread_mutex_unlock(&ctx->write_mutex);
+				free(in.buf);
 				return (void *)MT_ERROR(memory_allocation);
 			}
 			list_add(&wl->node, &ctx->writelist_busy);
@@ -258,6 +260,7 @@ static void *pt_compress(void *arg)
 		rv = ctx->fn_read(ctx->arg_read, &in);
 		if (rv != 0) {
 			pthread_mutex_unlock(&ctx->read_mutex);
+			free(in.buf);
 			return (void *)mt_error(rv);
 		}
 
@@ -292,6 +295,7 @@ static void *pt_compress(void *arg)
 				pthread_mutex_lock(&ctx->write_mutex);
 				list_move(&wl->node, &ctx->writelist_free);
 				pthread_mutex_unlock(&ctx->write_mutex);
+				free(in.buf);
 				return (void *)MT_ERROR(frame_compress);
 			}
 		}
@@ -324,8 +328,10 @@ static void *pt_compress(void *arg)
 		pthread_mutex_lock(&ctx->write_mutex);
 		result = pt_write(ctx, wl);
 		pthread_mutex_unlock(&ctx->write_mutex);
-		if (BROTLIMT_isError(result))
+		if (BROTLIMT_isError(result)) {
+			free(in.buf);
 			return (void *)result;
+		}
 	}
 
  okay:
@@ -480,15 +486,15 @@ size_t BROTLIMT_compressCCtx(BROTLIMT_CCtx * ctx, BROTLIMT_RdWr_t * rdwr)
 			retval_of_thread = p;
 	}
 
-    /* move remaining done/busy entries to free list */
-    while (!list_empty(&ctx->writelist_done)) {
-        struct list_head* entry = list_first(&ctx->writelist_done);
-        list_move(entry, &ctx->writelist_free);
-    }
-    while (!list_empty(&ctx->writelist_busy)) {
-        struct list_head* entry = list_first(&ctx->writelist_busy);
-        list_move(entry, &ctx->writelist_free);
-    }
+	/* move remaining done/busy entries to free list */
+	while (!list_empty(&ctx->writelist_done)) {
+		struct list_head *entry = list_first(&ctx->writelist_done);
+		list_move(entry, &ctx->writelist_free);
+	}
+	while (!list_empty(&ctx->writelist_busy)) {
+		struct list_head* entry = list_first(&ctx->writelist_busy);
+		list_move(entry, &ctx->writelist_free);
+	}
 	/* clean up lists */
 	while (!list_empty(&ctx->writelist_free)) {
 		struct writelist *wl;

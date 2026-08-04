@@ -240,6 +240,7 @@ static void *pt_compress(void *arg)
 			    malloc(sizeof(struct writelist));
 			if (!wl) {
 				pthread_mutex_unlock(&ctx->write_mutex);
+				free(in.buf);
 				return (void *)ERROR(memory_allocation);
 			}
 			wl->out.size =
@@ -248,6 +249,7 @@ static void *pt_compress(void *arg)
 			wl->out.buf = malloc(wl->out.size);
 			if (!wl->out.buf) {
 				pthread_mutex_unlock(&ctx->write_mutex);
+				free(in.buf);
 				return (void *)ERROR(memory_allocation);
 			}
 			list_add(&wl->node, &ctx->writelist_busy);
@@ -260,6 +262,7 @@ static void *pt_compress(void *arg)
 		rv = ctx->fn_read(ctx->arg_read, &in);
 		if (rv != 0) {
 			pthread_mutex_unlock(&ctx->read_mutex);
+			free(in.buf);
 			return (void *)mt_error(rv);
 		}
 
@@ -293,6 +296,7 @@ static void *pt_compress(void *arg)
 
 				/* user can lookup that code */
 				lz4mt_errcode = result;
+				free(in.buf);
 				return (void *)ERROR(compression_library);
 			}
 
@@ -317,6 +321,7 @@ static void *pt_compress(void *arg)
 
 				/* user can lookup that code */
 				lz4mt_errcode = result;
+				free(in.buf);
 				return (void *)ERROR(compression_library);
 			}
 
@@ -327,8 +332,10 @@ static void *pt_compress(void *arg)
 		pthread_mutex_lock(&ctx->write_mutex);
 		result = pt_write(ctx, wl);
 		pthread_mutex_unlock(&ctx->write_mutex);
-		if (LZ4MT_isError(result))
+		if (LZ4MT_isError(result)) {
+			free(in.buf);
 			return (void *)result;
+		}
 	}
 
  okay:
@@ -364,6 +371,15 @@ size_t LZ4MT_compressCCtx(LZ4MT_CCtx * ctx, LZ4MT_RdWr_t * rdwr)
 			retval_of_thread = p;
 	}
 
+	/* move remaining done/busy entries to free list */
+	while (!list_empty(&ctx->writelist_done)) {
+		struct list_head *entry = list_first(&ctx->writelist_done);
+		list_move(entry, &ctx->writelist_free);
+	}
+	while (!list_empty(&ctx->writelist_busy)) {
+		struct list_head* entry = list_first(&ctx->writelist_busy);
+		list_move(entry, &ctx->writelist_free);
+	}
 	/* clean up lists */
 	while (!list_empty(&ctx->writelist_free)) {
 		struct writelist *wl;

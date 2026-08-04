@@ -354,13 +354,26 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
   return _props.SetProperties(names, values, numProps);
 }
 
-static const Byte k_Signature[] = "0xFD2FB522..28";
+// zstd frame magic (1.x), plus legacy zstd frame magics (0.1, 0.2 .. 0.8) when
+// built with ZSTD_LEGACY_SUPPORT, and the zstdmt skippable-frame magic
+static const Byte k_Signature[] = {
+    4, 0x28, 0xB5, 0x2F, 0xFD,
+#ifdef ZSTD_LEGACY_SUPPORT
+    4, 0x1E, 0xB5, 0x2F, 0xFD,
+    4, 0x22, 0xB5, 0x2F, 0xFD,
+    4, 0x23, 0xB5, 0x2F, 0xFD,
+    4, 0x24, 0xB5, 0x2F, 0xFD,
+    4, 0x25, 0xB5, 0x2F, 0xFD,
+    4, 0x26, 0xB5, 0x2F, 0xFD,
+    4, 0x27, 0xB5, 0x2F, 0xFD,
+#endif
+    4, 0x50, 0x2A, 0x4D, 0x18 };
 
 REGISTER_ARC_IO(
   "zstd", "zst zstd tzst tzstd", "* * .tar .tar", 0x0e,
   k_Signature,
   0,
-  NArcInfoFlags::kKeepName,
+  NArcInfoFlags::kKeepName | NArcInfoFlags::kMultiSignature,
   0,
   IsArc_zstd)
 

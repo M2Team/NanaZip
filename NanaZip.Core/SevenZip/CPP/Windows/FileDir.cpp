@@ -1115,6 +1115,8 @@ bool MyMoveFile(CFSTR oldFile, CFSTR newFile)
 }
 
 
+// **************** 7-Zip ZS Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CreateDir(CFSTR path)
 {
   return (mkdir(path, 0777) == 0); // change it
@@ -1124,6 +1126,17 @@ static bool CreateDir2(CFSTR path)
 {
   return (mkdir(path, 0777) == 0); // change it
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+static bool CreateDir2(CFSTR path)
+{
+  return (mkdir(path, ACCESSPERMS) == 0);
+}
+
+bool CreateDir(CFSTR path)
+{
+  return CreateDir2(path);
+}
+// **************** 7-Zip ZS Modification End ****************
 
 
 bool DeleteFileAlways(CFSTR path)
@@ -1248,7 +1261,10 @@ struct C_umask
   {
     /* by security reasons we restrict attributes according
        with process's file mode creation mask (umask) */
-    const mode_t um = umask(0); // octal :0022 is expected
+    // **************** 7-Zip ZS Modification Start ****************
+    //const mode_t um = umask(0); // octal :0022 is expected
+    const mode_t um = umask(0); // octal :0022 is expected // NOSONAR
+    // **************** 7-Zip ZS Modification End ****************
     mask = 0777 & (~um);        // octal: 0755 is expected
     umask(um);  // restore the umask
     // printf("\n umask = 0%03o mask = 0%03o\n", um, mask);

@@ -60,6 +60,9 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsBrotliDecode(
     }
 
     std::size_t Result = ::BROTLIMT_decompressDCtx(Context, &ReadWrite);
+
+    ::BROTLIMT_freeDCtx(Context);
+
     if (::BROTLIMT_isError(Result))
     {
         if (MT_ERROR(canceled) == Result)
@@ -68,9 +71,7 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsBrotliDecode(
         }
 
         return E_FAIL;
-    }
-
-    ::BROTLIMT_freeDCtx(Context);
+    } 
 
     return S_OK;
 }
