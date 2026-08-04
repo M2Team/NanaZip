@@ -112,16 +112,21 @@ BROTLIMT_DCtx *BROTLIMT_createDCtx(int threads, int inputsize)
 	else
 		ctx->inputsize = 1024 * 256; /* 256K buffer */
 
-	if (threads) {
-		pthread_mutex_init(&ctx->read_mutex, NULL);
-		pthread_mutex_init(&ctx->write_mutex, NULL);
+	/* Always initialize the mutexes/lists, even for threads==0: content
+	 * based detection in BROTLIMT_decompressDCtx() may discover a
+	 * brotli-mt container and promote ctx->threads to 1 after this call,
+	 * at which point pt_read()/pt_write() need a valid read_mutex/
+	 * write_mutex. The extra init/destroy cost for genuinely single
+	 * threaded raw streams is negligible. */
+	pthread_mutex_init(&ctx->read_mutex, NULL);
+	pthread_mutex_init(&ctx->write_mutex, NULL);
 
-		INIT_LIST_HEAD(&ctx->writelist_free);
-		INIT_LIST_HEAD(&ctx->writelist_busy);
-		INIT_LIST_HEAD(&ctx->writelist_done);
-	} else {
+	INIT_LIST_HEAD(&ctx->writelist_free);
+	INIT_LIST_HEAD(&ctx->writelist_busy);
+	INIT_LIST_HEAD(&ctx->writelist_done);
+
+	if (!threads)
 		threads = 1;
-	}		
 
 	ctx->cwork = (cwork_t *) malloc(sizeof(cwork_t) * threads);
 	if (!ctx->cwork)
@@ -363,7 +368,7 @@ static void *pt_decompress(void *arg)
 	}
 
 	/* everything is okay */
-    result = 0;
+	result = 0;
 
  error_lock:
 	pthread_mutex_lock(&ctx->write_mutex);
@@ -375,11 +380,74 @@ static void *pt_decompress(void *arg)
 	return (void *)result;
 }
 
-/* single threaded (standard brotli stream, without header/mt-frames) */
-static size_t st_decompress(void *arg)
+/*
+ * st_prime_input - seed @in with the @prefixSize bytes already consumed
+ * from the stream by BROTLIMT_decompressDCtx() while probing for the
+ * brotli-mt container magic, then top up with a fresh read for the rest
+ * of the buffer. Called once, before st_decompress()'s main loop starts,
+ * so this priming logic does not add to that loop's complexity. Mirrors
+ * the "we have read already 4 bytes" prefix handling in LZ4MT
+ * st_decompress() (lz4-mt_decompress.c).
+ *
+ * On return, in->size holds the total number of valid bytes now sitting
+ * in in->buf. Returns 0 on success, or an MT_ERROR() code if the
+ * underlying read fails.
+ */
+static size_t st_prime_input(BROTLIMT_DCtx *ctx, BROTLIMT_Buffer *in, const unsigned char *prefix, size_t prefixSize)
 {
-	BROTLIMT_DCtx *ctx = (BROTLIMT_DCtx *) arg;
-	BrotliDecoderResult bres = BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT;
+	int rv;
+
+	memcpy(in->buf, prefix, prefixSize);
+	in->size = prefixSize;
+
+	if (in->allocated > prefixSize) {
+		BROTLIMT_Buffer tail;
+		tail.buf = (unsigned char *)in->buf + prefixSize;
+		tail.size = in->allocated - prefixSize;
+		tail.allocated = tail.size;
+		rv = ctx->fn_read(ctx->arg_read, &tail);
+		if (rv != 0)
+			return mt_error(rv);
+		in->size += tail.size;
+	}
+
+	return 0;
+}
+
+/*
+ * st_finish_decompress - after st_decompress()'s main loop exits, check
+ * the stream finished cleanly and flush whatever output is still sitting
+ * in the output buffer. Split out (pre-existing logic, not new in this
+ * change) so it doesn't add to the main loop function's complexity either.
+ */
+static size_t st_finish_decompress(BROTLIMT_DCtx *ctx, BROTLIMT_Buffer *out, uint8_t *next_out, BrotliDecoderResult bres)
+{
+	int rv;
+
+	if (bres != BROTLI_DECODER_RESULT_SUCCESS)
+		return MT_ERROR(data_error); // corrupt input
+
+	out->size = next_out - (uint8_t *)out->buf;
+	if (out->size != 0) {
+		rv = ctx->fn_write(ctx->arg_write, out);
+		if (rv != 0)
+			return mt_error(rv);
+	}
+
+	return 0;
+}
+
+/*
+ * single threaded (standard brotli stream, without header/mt-frames)
+ *
+ * @prefix/@prefixSize: bytes already consumed from the stream (by
+ * BROTLIMT_decompressDCtx() while probing for the brotli-mt container
+ * magic) that must be fed back as the beginning of the decoded data;
+ * see st_prime_input() above.
+ */
+static size_t st_decompress(BROTLIMT_DCtx *ctx, const unsigned char *prefix, size_t prefixSize)
+{
+	BrotliDecoderResult bres;
 	cwork_t *w = &ctx->cwork[0];
 	BROTLIMT_Buffer Out;
 	BROTLIMT_Buffer *out = &Out;
@@ -389,13 +457,18 @@ static size_t st_decompress(void *arg)
 	uint8_t* next_out;
 	int rv;
 	size_t retval = 0;
+	size_t allocSize = ctx->inputsize;
 
-	/* allocate space for input buffer */
-	in->allocated = in->size = ctx->inputsize;
+	/* allocate space for input buffer; must be able to hold at least the
+	   already-consumed prefix bytes, in case ctx->inputsize was configured
+	   smaller than prefixSize (prefixSize is at most 4 today) */
+	if (allocSize < prefixSize)
+		allocSize = prefixSize;
+	in->allocated = allocSize;
+	in->size = allocSize;
 	in->buf = malloc(in->size);
 	if (!in->buf)
 		return MT_ERROR(memory_allocation);
-	next_in = in->buf;
 
 	/* allocate space for output buffer */
 	out->allocated = out->size = ctx->inputsize * 4;
@@ -414,7 +487,17 @@ static size_t st_decompress(void *arg)
 	}
 	BrotliDecoderSetParameter(state, BROTLI_DECODER_PARAM_LARGE_WINDOW, 1);
 
+	/* prime the input buffer with whatever was already consumed while
+	   probing for the container magic, then start the loop by feeding
+	   it straight to the decoder (rather than reading again) */
+	retval = st_prime_input(ctx, in, prefix, prefixSize);
+	if (BROTLIMT_isError(retval))
+		goto done;
+	next_in = in->buf;
+
 	while (1) {
+		bres = BrotliDecoderDecompressStream(state, &in->size, &next_in, &out->size, &next_out, 0);
+
 		if (bres == BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT) {
 			in->size = in->allocated;
 			rv = ctx->fn_read(ctx->arg_read, in);
@@ -435,22 +518,9 @@ static size_t st_decompress(void *arg)
 		} else {
 			break;
 		}
-
-		bres = BrotliDecoderDecompressStream(state, &in->size, &next_in, &out->size, &next_out, 0);
 	}
 
-	if (bres != BROTLI_DECODER_RESULT_SUCCESS) {
-		retval = MT_ERROR(data_error); // corrupt input
-		goto done;
-	}
-	out->size = next_out - (uint8_t*)out->buf;
-	if (out->size != 0) {
-		rv = ctx->fn_write(ctx->arg_write, out);
-		if (rv != 0) {
-			retval = mt_error(rv);
-			goto done;
-		}
-	}
+	retval = st_finish_decompress(ctx, out, next_out, bres);
 
  done:
 		free(in->buf);
@@ -476,22 +546,48 @@ size_t BROTLIMT_decompressDCtx(BROTLIMT_DCtx * ctx, BROTLIMT_RdWr_t * rdwr)
 	ctx->arg_read = rdwr->arg_read;
 	ctx->arg_write = rdwr->arg_write;
 
-	/* For single threaded brotli (no header, no mt-frames), don't check for 
-	   BROTLIMT_MAGIC_SKIPPABLE here, because stdandard brotli stream may also
-	   start with it, so will be mistakenly considered as brotli-mt stream. */
-	if (ctx->threads == 0) {
-		/* decompress single threaded */
-		return st_decompress(ctx);
-	}
-
-	/* check for BROTLIMT_MAGIC_SKIPPABLE */
+	/*
+	 * Always peek the first 4 bytes and check for BROTLIMT_MAGIC_SKIPPABLE,
+	 * regardless of the caller-requested thread count (ctx->threads), so
+	 * that raw-vs-mt-container decoding depends on the *file content*
+	 * instead of whether -mmt was passed for *this* invocation. This
+	 * mirrors what e.g. LZ4MT_decompressDCtx() already does for lz4/lz5/
+	 * lizard in this same directory (see lz4-mt_decompress.c): it always
+	 * reads the first 4 bytes and compares against the format's own
+	 * skippable-frame magic before deciding which path to take.
+	 *
+	 * Unlike lz4/lz5/lizard, raw Brotli has no signature of its own, so a
+	 * 4-byte match alone carries a residual false-positive risk (a raw
+	 * stream could coincidentally start with these exact bytes), on the
+	 * order of 2^-32 - the same order of magnitude already accepted here
+	 * for lz4/lz5/lizard's skippable-frame magic check. If frame 0's
+	 * header then fails the additional field checks already done in
+	 * pt_read() (offset +4 == 8, offset +12 == BROTLIMT_MAGICNUMBER),
+	 * decoding fails with a data error instead of silently misinterpreting
+	 * the stream.
+	 */
 	in->buf = buf;
 	in->size = 4;
 	rv = ctx->fn_read(ctx->arg_read, in);
 	if (rv != 0)
 		return mt_error(rv);
-	if (in->size != 4)
-		return MT_ERROR(data_error);
+
+	if (in->size != 4 || MEM_readLE32(buf) != BROTLIMT_MAGIC_SKIPPABLE) {
+		/* raw single threaded brotli stream (no header, no mt-frames):
+		   hand back whatever bytes we already consumed above. */
+		return st_decompress(ctx, buf, in->size);
+	}
+
+	/*
+	 * brotli-mt container detected: make sure we actually use the
+	 * framed/multithreaded decode path, even if the caller asked for
+	 * threads==0 (e.g. testing/extracting without -mmt). read_mutex/
+	 * write_mutex/writelist_* are always initialized in
+	 * BROTLIMT_createDCtx() now, so this promotion is safe even when the
+	 * context was originally created with threads==0.
+	 */
+	if (ctx->threads == 0)
+		ctx->threads = 1;
 
 	/* mark unused */
 	in->buf = 0;
@@ -503,8 +599,8 @@ size_t BROTLIMT_decompressDCtx(BROTLIMT_DCtx * ctx, BROTLIMT_RdWr_t * rdwr)
 		/* no pthread_create() needed! */
 		void *p = pt_decompress(w);
 		if (p)
-            retval_of_thread = p;
-        goto done;
+			retval_of_thread = p;
+		goto done;
 	}
 
 	/* multi threaded */
@@ -525,16 +621,16 @@ size_t BROTLIMT_decompressDCtx(BROTLIMT_DCtx * ctx, BROTLIMT_RdWr_t * rdwr)
 			retval_of_thread = p;
 	}
 
-done:
-    /* move remaining done/busy entries to free list */
-    while (!list_empty(&ctx->writelist_done)) {
-        struct list_head* entry = list_first(&ctx->writelist_done);
-        list_move(entry, &ctx->writelist_free);
-    }
-    while (!list_empty(&ctx->writelist_busy)) {
-        struct list_head* entry = list_first(&ctx->writelist_busy);
-        list_move(entry, &ctx->writelist_free);
-    }
+ done:
+	/* move remaining done/busy entries to free list */
+	while (!list_empty(&ctx->writelist_done)) {
+		struct list_head *entry = list_first(&ctx->writelist_done);
+		list_move(entry, &ctx->writelist_free);
+	}
+	while (!list_empty(&ctx->writelist_busy)) {
+		struct list_head* entry = list_first(&ctx->writelist_busy);
+		list_move(entry, &ctx->writelist_free);
+	}
 	/* clean up the buffers */
 	while (!list_empty(&ctx->writelist_free)) {
 		struct writelist *wl;
@@ -581,10 +677,11 @@ void BROTLIMT_freeDCtx(BROTLIMT_DCtx * ctx)
 	if (!ctx)
 		return;
 
-	if (ctx->threads) {
-		pthread_mutex_destroy(&ctx->read_mutex);
-		pthread_mutex_destroy(&ctx->write_mutex);
-	}
+	/* read_mutex/write_mutex are now always initialized in
+	 * BROTLIMT_createDCtx(), regardless of the initial threads value
+	 * (see comment there), so always destroy them here too. */
+	pthread_mutex_destroy(&ctx->read_mutex);
+	pthread_mutex_destroy(&ctx->write_mutex);
 	free(ctx->cwork);
 	free(ctx);
 	ctx = 0;
