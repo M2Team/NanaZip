@@ -461,17 +461,19 @@ namespace NanaZip::Codecs::Archive
                 SEVENZIP_EXTRACT_OPERATION_RESULT Result =
                     SevenZipExtractOperationResultUnavailable;
                 std::uint64_t ProcessedSize = 0;
-                UINT64 ActualOffset;
+
+                UINT64 ExpectedOffset = this->m_GlobalOffset + Information.Offset;
+                UINT64 ActualOffset = 0;
 
                 if (FAILED(this->m_FileStream->Seek(
-                    this->m_GlobalOffset + Information.Offset,
+                    ExpectedOffset,
                     STREAM_SEEK_SET,
                     &ActualOffset)))
                 {
                     Result = SevenZipExtractOperationResultUnavailable;
                     goto done;
                 }
-                if (ActualOffset != static_cast<UINT64>(Information.Offset))
+                if (ActualOffset != ExpectedOffset)
                 {
                     Result = SevenZipExtractOperationResultUnexpectedEnd;
                     goto done;
