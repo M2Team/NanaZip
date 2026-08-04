@@ -26,8 +26,10 @@
     <IncludePath>$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
-    <Link>
+    <ClCompile>
       <PreprocessorDefinitions>ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
       <AdditionalDependencies>$(OutDir)NanaZip.Codecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
