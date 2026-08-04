@@ -3,6 +3,27 @@
 For preview versions, please read 
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 6.5 Update (6.5.1800.0)**
+
+- Fix the parsing offset issue for Electron Archive (asar) readonly support.
+  (Cooperated with LukeFZ.)
+- Fix some compatibility issues which makes Security mitigation policies
+  conflict with Sogou Pinyin. (Contributed by dinhngtu.)
+- Ignore accent color if creating XAML dialogs with backdrop. (Contributed by
+  AndromedaMelody.)
+- Update Brazilian Portuguese translation. (Contributed by maisondasilva.)
+- Update Italian translation. (Contributed by Hexaae.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/035b23615b81bf6ed4579843bd66b17596ec24cf.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.)
+- Update Mile.Project.Configurations to 1.0.2075.
+- Decouple more project configurations from specific configuration profiles for
+  all projects.
+- Simplify the project optimization configurations.
+- Use global.json to simplify the MSBuild Project SDK version resolving.
+- Fix the project configuration issue for referencing NanaZip.Codecs.
+
 **NanaZip 6.5 Update (6.5.1767.0)**
 
 - Synchronize 7-Zip mainline implementations to 26.02. (Except the NanaZip File
