@@ -17,8 +17,8 @@
 
 ## 7-Zip ZS
 
-- NanaZip.Core: Commit ecaa91dda38d666b1909b42603321fa7d9731776 equals to
-  v26.02-v1.5.7-R1.
+- NanaZip.Core: Commit 2dcb6815c0e6877988171c47e1824b86172ff3b2 equals to
+  v26.02-v1.5.7-R2.
 - NanaZip.UI.Classic: Unknown because it modifies the old codebase a lot.
 - NanaZip.UI.Modern: Unknown because it modifies the old codebase a lot.
 - NanaZip.Universal: Commit ecaa91dda38d666b1909b42603321fa7d9731776 equals to
