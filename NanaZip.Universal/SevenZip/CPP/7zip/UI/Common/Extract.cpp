@@ -17,6 +17,10 @@
 #include "SetProperties.h"
 
 // **************** NanaZip Modification Start ****************
+#include "../../../Common/MyBuffer.h"
+
+#include <shellapi.h>
+
 #include <set>
 #include <string>
 // **************** NanaZip Modification End ****************
@@ -333,6 +337,16 @@ static HRESULT DecompressArchive(
    Sorted list for file paths was sorted with case insensitive compare function.
    But FindInSorted function did binary search via case sensitive compare function */
 
+// **************** NanaZip Modification Start ****************
+static void AddUniqueFilePath(FStringVector &paths, const FString &path)
+{
+  FOR_VECTOR (i, paths)
+    if (path.IsEqualTo_NoCase(paths[i]))
+      return;
+  paths.Add(path);
+}
+// **************** NanaZip Modification End ****************
+
 int Find_FileName_InSortedVector(const UStringVector &fileNames, const UString &name);
 int Find_FileName_InSortedVector(const UStringVector &fileNames, const UString &name)
 {
@@ -636,6 +650,20 @@ HRESULT Extract(
         extractCallback, faeCallback, ecs,
         errorMessage, packProcessed))
 
+    // **************** NanaZip Modification Start ****************
+    /* The archive was opened and decompressed without a fatal error. Per item
+       failures are reported through the callback, so the caller still has to
+       check its own error counters before deleting anything. */
+    if (options.DeleteArchive.Val && !options.TestMode && !options.StdInMode)
+    {
+      FString fullPath;
+      if (MyGetFullPathName(us2fs(arcPath), fullPath))
+        AddUniqueFilePath(st.ExtractedArcPaths, fullPath);
+      FOR_VECTOR (v, arcLink.VolumePaths)
+        AddUniqueFilePath(st.ExtractedArcPaths, us2fs(arcLink.VolumePaths[v]));
+    }
+    // **************** NanaZip Modification End ****************
+
     if (!options.StdInMode)
       packProcessed = fi.Size + arcLink.VolumesSize;
     totalPackProcessed += packProcessed;
@@ -666,3 +694,48 @@ HRESULT Extract(
   // **************** NanaZip Modification End ****************
   return S_OK;
 }
+
+// **************** NanaZip Modification Start ****************
+void DeleteExtractedArchives(const FStringVector &paths)
+{
+  size_t numChars = 1; // the extra null character that ends the whole list
+  FOR_VECTOR (i, paths)
+  {
+    /* SHFileOperationW refuses the whole operation when one path is not shorter
+       than MAX_PATH, so such paths are left to the permanent delete below. */
+    if (paths[i].Len() < MAX_PATH)
+      numChars += paths[i].Len() + 1;
+  }
+
+  if (numChars != 1)
+  {
+    CObjArray<WCHAR> list(numChars);
+    size_t pos = 0;
+    FOR_VECTOR (i, paths)
+    {
+      const FString &path = paths[i];
+      if (path.Len() >= MAX_PATH)
+        continue;
+      const size_t numPathChars = (size_t)path.Len() + 1;
+      memcpy(list + pos, path.Ptr(), numPathChars * sizeof(WCHAR));
+      pos += numPathChars;
+    }
+    list[pos] = 0;
+
+    SHFILEOPSTRUCTW fo;
+    memset(&fo, 0, sizeof(fo));
+    fo.wFunc = FO_DELETE;
+    fo.pFrom = list;
+    /* The extraction already finished, so there is no window left to own a
+       prompt and no useful answer the user could give here. */
+    fo.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_SILENT;
+    ::SHFileOperationW(&fo);
+  }
+
+  /* Whatever the Recycle Bin did not accept, for example a file on a volume
+     that has none, is removed permanently instead of being left behind. */
+  FOR_VECTOR (i, paths)
+    if (NFind::DoesFileExist_Raw(paths[i]))
+      DeleteFileAlways(paths[i]);
+}
+// **************** NanaZip Modification End ****************

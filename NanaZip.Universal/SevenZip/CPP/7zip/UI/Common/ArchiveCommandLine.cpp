@@ -211,6 +211,7 @@ enum Enum
 
   // **************** NanaZip Modification Start ****************
   kOpenFolder,
+  kDeleteArchive,
   // **************** NanaZip Modification End ****************
 
   kDeleteAfterCompressing,
@@ -370,6 +371,7 @@ static const CSwitchForm kSwitchForms[] =
   
   // **************** NanaZip Modification Start ****************
   { "sre", SWFRM_MINUS },
+  { "sda", SWFRM_MINUS },
   // **************** NanaZip Modification End ****************
   
   { "sdel", SWFRM_SIMPLE },
@@ -1492,6 +1494,11 @@ void CArcCmdLineParser::Parse2(CArcCmdLineOptions &options)
   {
     options.OpenFolder.Def = true;
     options.OpenFolder.Val = !parser[NKey::kOpenFolder].WithMinus;
+  }
+  if (parser[NKey::kDeleteArchive].ThereIs)
+  {
+    options.DeleteArchive.Def = true;
+    options.DeleteArchive.Val = !parser[NKey::kDeleteArchive].WithMinus;
   }
   // **************** NanaZip Modification End ****************
   

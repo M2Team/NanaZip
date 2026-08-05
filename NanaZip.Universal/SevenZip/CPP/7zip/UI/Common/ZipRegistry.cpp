@@ -117,6 +117,7 @@ static LPCTSTR const kNtSecur = TEXT("Security");
 static LPCTSTR const kMemLimit = TEXT("MemLimit");
 // **************** NanaZip Modification Start ****************
 static LPCTSTR const kOpenFolderAfterExtract = TEXT("OpenFolderAfterExtract");
+static LPCTSTR const kDeleteArchiveAfterExtract = TEXT("DeleteArchiveAfterExtract");
 // **************** NanaZip Modification End ****************
 
 void CInfo::Save() const
@@ -143,6 +144,7 @@ void CInfo::Save() const
   // **************** 7-Zip ZS Modification End ****************
   // **************** NanaZip Modification Start ****************
   Key_Set_BoolPair(key, kOpenFolderAfterExtract, OpenFolder);
+  Key_Set_BoolPair(key, kDeleteArchiveAfterExtract, DeleteArchive);
   // **************** NanaZip Modification End ****************
 
   key.RecurseDeleteKey(kPathHistory);
@@ -211,6 +213,7 @@ void CInfo::Load()
   // **************** 7-Zip ZS Modification End ****************
   // **************** NanaZip Modification Start ****************
   Key_Get_BoolPair(key, kOpenFolderAfterExtract, OpenFolder);
+  Key_Get_BoolPair(key, kDeleteArchiveAfterExtract, DeleteArchive);
   // **************** NanaZip Modification End ****************
 }
 

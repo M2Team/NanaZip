@@ -281,6 +281,7 @@ static int Main2()
     ecs->TestMode = eo.TestMode;
     // **************** NanaZip Modification Start ****************
     eo.OpenFolder = options.OpenFolder;
+    eo.DeleteArchive = options.DeleteArchive;
     // **************** NanaZip Modification End ****************
 
     #ifndef Z7_SFX
@@ -347,6 +348,11 @@ static int Main2()
     else if (eo.OpenFolder.Val) {
       ShellExecuteW(NULL, NULL, ecs->Stat.OutDir, NULL, NULL, SW_SHOWNORMAL);
     }
+    /* Reaching this point means every archive of the batch was opened and
+       extracted without an error being reported, so the sources the user asked
+       to get rid of can be removed. The list stays empty unless deleting was
+       requested for a real, non-test extraction. */
+    DeleteExtractedArchives(ecs->Stat.ExtractedArcPaths);
     // **************** NanaZip Modification End ****************
   }
   else if (options.Command.IsFromUpdateGroup())

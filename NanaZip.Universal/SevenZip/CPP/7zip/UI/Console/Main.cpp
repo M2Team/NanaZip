@@ -190,6 +190,9 @@ static const char * const kHelpString =
 #endif
 #endif
     "|*] : set hash function for x, e, h commands\n"
+    // **************** NanaZip Modification Start ****************
+    "  -sda[-] : delete archive after successful extraction\n"
+    // **************** NanaZip Modification End ****************
     "  -sdel : delete files after compression\n"
     "  -seml[.] : send archive by email\n"
     "  -sfx[{name}] : Create SFX archive\n"
@@ -1447,6 +1450,9 @@ int Main2(
       eo.StdOutMode = options.StdOutMode;
       eo.YesToAll = options.YesToAll;
       eo.TestMode = options.Command.IsTestCommand();
+      // **************** NanaZip Modification Start ****************
+      eo.DeleteArchive = options.DeleteArchive;
+      // **************** NanaZip Modification End ****************
       
       #ifndef Z7_SFX
       eo.Properties = options.Properties;
@@ -1542,6 +1548,14 @@ int Main2(
       if (isError)
         retCode = NExitCode::kFatalError;
       
+      // **************** NanaZip Modification Start ****************
+      /* The sources the user asked to get rid of are only removed when nothing
+         was reported against any archive of the batch. The list stays empty
+         unless deleting was requested for a real, non-test extraction. */
+      if (hresultMain == S_OK && !isError && ecs->NumFileErrors == 0)
+        DeleteExtractedArchives(stat.ExtractedArcPaths);
+      // **************** NanaZip Modification End ****************
+
       if (so) {
       if (ecs->NumArcsWithError != 0 || ecs->NumFileErrors != 0)
       {

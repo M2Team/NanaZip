@@ -68,6 +68,7 @@ struct CExtractOptions: public CExtractOptionsBase
   bool TestMode;
   // **************** NanaZip Modification Start ****************
   CBoolPair OpenFolder;
+  CBoolPair DeleteArchive;
   // **************** NanaZip Modification End ****************
   
   // bool ShowDialog;
@@ -105,6 +106,11 @@ struct CDecompressStat
   // **************** 7-Zip ZS Modification End ****************
   // **************** NanaZip Modification Start ****************
   FString OutDir;
+  /* Archives that were opened and decompressed without a fatal error, including
+     every volume of a multi-volume archive. It is only filled when the caller
+     asks for the source archives to be deleted, because the caller also needs
+     its own error counters to decide whether deleting them is safe. */
+  FStringVector ExtractedArcPaths;
   // **************** NanaZip Modification End ****************
 
   void Clear()
@@ -115,6 +121,7 @@ struct CDecompressStat
     // **************** 7-Zip ZS Modification End ****************
     // **************** NanaZip Modification Start ****************
     OutDir.Empty();
+    ExtractedArcPaths.Clear();
     // **************** NanaZip Modification End ****************
   }
 };
@@ -135,5 +142,14 @@ HRESULT Extract(
     #endif
     UString &errorMessage,
     CDecompressStat &st);
+
+// **************** NanaZip Modification Start ****************
+/* Removes a source archive after it has been extracted. The Recycle Bin is
+   preferred because the operation is destructive and the user is not asked to
+   confirm it, but the shell refuses paths that are longer than MAX_PATH and
+   volumes such as network shares have no Recycle Bin at all, so a permanent
+   delete is used as the fallback instead of silently keeping the archive. */
+void DeleteExtractedArchives(const FStringVector &paths);
+// **************** NanaZip Modification End ****************
 
 #endif

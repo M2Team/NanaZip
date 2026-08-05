@@ -261,6 +261,7 @@ HRESULT ExtractGUI(
       dialog.ElimDup = options.ElimDup;
       // **************** NanaZip Modification Start ****************
       dialog.OpenFolder = options.OpenFolder;
+      dialog.DeleteArchive = options.DeleteArchive;
       // **************** NanaZip Modification End ****************
 
       if (archivePathsFull.Size() == 1)
@@ -283,6 +284,7 @@ HRESULT ExtractGUI(
       options.ElimDup = dialog.ElimDup;
       // **************** NanaZip Modification Start ****************
       options.OpenFolder = dialog.OpenFolder;
+      options.DeleteArchive = dialog.DeleteArchive;
       // **************** NanaZip Modification End ****************
       
       #ifndef Z7_SFX
@@ -306,6 +308,19 @@ HRESULT ExtractGUI(
     }
     #endif
     // **************** 7-Zip ZS Modification End ****************
+    // **************** NanaZip Modification Start ****************
+    #ifndef Z7_SFX
+    /* The "Extract Here" and "Extract to <folder>" commands never show the
+       dialog, so the choice the user made in it last time decides whether the
+       archives are deleted, unless the command line was explicit about it. */
+    if (!showDialog && !options.DeleteArchive.Def)
+    {
+      NExtract::CInfo extractInfo;
+      extractInfo.Load();
+      options.DeleteArchive = extractInfo.DeleteArchive;
+    }
+    #endif
+    // **************** NanaZip Modification End ****************
     if (!MyGetFullPathName(outputDir, options.OutputDir))
     {
       ShowErrorMessage(kIncorrectOutDir);
