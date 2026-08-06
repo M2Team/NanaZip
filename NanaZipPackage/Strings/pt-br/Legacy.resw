@@ -172,13 +172,13 @@
     <value>Link</value>
   </data>
   <data name="Resource559" xml:space="preserve">
-    <value>&amp;Correntes Alternantes</value>
+    <value>&amp;Fluxos Alternativos</value>
   </data>
   <data name="Resource590" xml:space="preserve">
-    <value>Abrir por dentro *</value>
+    <value>Abrir Conteúdo (Um nível)</value>
   </data>
   <data name="Resource591" xml:space="preserve">
-    <value>Abrir por dentro #</value>
+    <value>Abrir Conteúdo (Analisador)</value>
   </data>
   <data name="Resource600" xml:space="preserve">
     <value>Selecionar &amp;Tudo</value>
