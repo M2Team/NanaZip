@@ -1,7 +1,7 @@
-﻿// **************** NanaZip Modification Start ****************
-// #define IDD_PASSWORD        3800
-// #define IDT_PASSWORD_ENTER  3801
-// #define IDX_PASSWORD_SHOW   3803
+﻿// **************** NanaZip Modification remove ****************
 
-// #define IDE_PASSWORD_PASSWORD  120
-// **************** NanaZip Modification End ****************
+#define IDD_PASSWORD        3800
+#define IDT_PASSWORD_ENTER  3801
+#define IDX_PASSWORD_SHOW   3803
+
+#define IDE_PASSWORD_PASSWORD  120

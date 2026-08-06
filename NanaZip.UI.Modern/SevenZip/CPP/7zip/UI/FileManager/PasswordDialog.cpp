@@ -1,60 +1,60 @@
-﻿// PasswordDialog.cpp
+﻿// **************** NanaZip Modification remove ****************
 
-// **************** NanaZip Modification Start ****************
-// #include "StdAfx.h"
+// PasswordDialog.cpp
 
-// #include "PasswordDialog.h"
+#include "StdAfx.h"
 
-// #ifdef LANG
-// #include "LangUtils.h"
-// #endif
+#include "PasswordDialog.h"
 
-// #ifdef LANG
-// static const UInt32 kLangIDs[] =
-// {
-//   IDT_PASSWORD_ENTER,
-//   IDX_PASSWORD_SHOW
-// };
-// #endif
+#ifdef LANG
+#include "LangUtils.h"
+#endif
 
-// void CPasswordDialog::ReadControls()
-// {
-//   _passwordEdit.GetText(Password);
-//   ShowPassword = IsButtonCheckedBool(IDX_PASSWORD_SHOW);
-// }
+#ifdef LANG
+static const UInt32 kLangIDs[] =
+{
+  IDT_PASSWORD_ENTER,
+  IDX_PASSWORD_SHOW
+};
+#endif
 
-// void CPasswordDialog::SetTextSpec()
-// {
-//   _passwordEdit.SetPasswordChar(ShowPassword ? 0: TEXT('*'));
-//   _passwordEdit.SetText(Password);
-// }
+void CPasswordDialog::ReadControls()
+{
+  _passwordEdit.GetText(Password);
+  ShowPassword = IsButtonCheckedBool(IDX_PASSWORD_SHOW);
+}
 
-// bool CPasswordDialog::OnInit()
-// {
-//   #ifdef LANG
-//   LangSetWindowText(*this, IDD_PASSWORD);
-//   LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
-//   #endif
-//   _passwordEdit.Attach(GetItem(IDE_PASSWORD_PASSWORD));
-//   CheckButton(IDX_PASSWORD_SHOW, ShowPassword);
-//   SetTextSpec();
-//   return CModalDialog::OnInit();
-// }
+void CPasswordDialog::SetTextSpec()
+{
+  _passwordEdit.SetPasswordChar(ShowPassword ? 0: TEXT('*'));
+  _passwordEdit.SetText(Password);
+}
 
-// bool CPasswordDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
-// {
-//   if (buttonID == IDX_PASSWORD_SHOW)
-//   {
-//     ReadControls();
-//     SetTextSpec();
-//     return true;
-//   }
-//   return CDialog::OnButtonClicked(buttonID, buttonHWND);
-// }
+bool CPasswordDialog::OnInit()
+{
+  #ifdef LANG
+  LangSetWindowText(*this, IDD_PASSWORD);
+  LangSetDlgItems(*this, kLangIDs, ARRAY_SIZE(kLangIDs));
+  #endif
+  _passwordEdit.Attach(GetItem(IDE_PASSWORD_PASSWORD));
+  CheckButton(IDX_PASSWORD_SHOW, ShowPassword);
+  SetTextSpec();
+  return CModalDialog::OnInit();
+}
 
-// void CPasswordDialog::OnOK()
-// {
-//   ReadControls();
-//   CModalDialog::OnOK();
-// }
-// **************** NanaZip Modification End ****************
+bool CPasswordDialog::OnButtonClicked(int buttonID, HWND buttonHWND)
+{
+  if (buttonID == IDX_PASSWORD_SHOW)
+  {
+    ReadControls();
+    SetTextSpec();
+    return true;
+  }
+  return CDialog::OnButtonClicked(buttonID, buttonHWND);
+}
+
+void CPasswordDialog::OnOK()
+{
+  ReadControls();
+  CModalDialog::OnOK();
+}
