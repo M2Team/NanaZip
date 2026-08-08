@@ -79,6 +79,7 @@
     <Page Include="StatusBarTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\ButtonCard.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
