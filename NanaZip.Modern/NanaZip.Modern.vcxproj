@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\ButtonCard.xaml" />
+    <Page Include="Styles\SettingsCard.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
