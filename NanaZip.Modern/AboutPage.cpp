@@ -6,6 +6,8 @@
 
 #include "NanaZip.Modern.h"
 
+#include <K7User.h>
+
 #include <winrt/Windows.UI.Xaml.Documents.h>
 
 #include <Mile.Project.Version.h>
@@ -58,6 +60,16 @@ namespace winrt::NanaZip::Modern::implementation
         this->GridTitleTextBlock().Text(WindowTitle);
         this->Version().Text(Version);
         this->Content().Text(Content);
+    }
+
+    void AboutPage::FileAssociationsButtonClick(
+        winrt::IInspectable const& sender,
+        winrt::RoutedEventArgs const& e)
+    {
+        UNREFERENCED_PARAMETER(sender);
+        UNREFERENCED_PARAMETER(e);
+
+        ::K7UserModernLaunchDefaultAppsSettings();
     }
 
     void AboutPage::NanaZipWebsiteButtonClick(

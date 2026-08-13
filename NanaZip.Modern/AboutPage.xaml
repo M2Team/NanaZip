@@ -7,54 +7,109 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   IsTextScaleFactorEnabled="False"
   mc:Ignorable="d">
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <StackPanel Grid.Row="0" Padding="24,0">
-      <TextBlock
-        x:Name="GridTitleTextBlock"
-        Margin="0,0,0,12"
-        FontSize="24"
-        FontWeight="SemiBold"
-        Text="[About NanaZip]" />
-      <TextBlock>
-        <Run x:Name="Version" />
-        <LineBreak />
-        <Run Text="© M2-Team and Contributors. All rights reserved." />
-        <LineBreak />
-        <LineBreak />
-        <Run x:Name="Content" />
-      </TextBlock>
-    </StackPanel>
-    <Grid Grid.Row="1" Padding="24">
-      <Grid.Background>
-        <SolidColorBrush Opacity="0.2" Color="{ThemeResource SystemChromeHighColor}" />
-      </Grid.Background>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="8" />
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="8" />
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-      <Button
-        Grid.Column="0"
-        HorizontalAlignment="Stretch"
-        Click="NanaZipWebsiteButtonClick"
-        Content="NanaZip.org" />
-      <Button
-        Grid.Column="2"
-        HorizontalAlignment="Stretch"
-        Click="GitHubButtonClick"
-        Content="GitHub" />
-      <Button
-        x:Uid="/NanaZip.Modern/Common/CancelButton"
-        Grid.Column="4"
-        HorizontalAlignment="Stretch"
-        Click="CancelButtonClick"
-        Content="[Cancel]" />
-    </Grid>
-  </Grid>
+  <Page.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ButtonCard.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <Style TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,12,0,4" />
+      </Style>
+    </ResourceDictionary>
+  </Page.Resources>
+  <Pivot>
+    <Pivot.Resources>
+      <Thickness x:Key="PivotItemMargin">0</Thickness>
+      <Style TargetType="Button" BasedOn="{StaticResource ButtonCardStyle}" />
+    </Pivot.Resources>
+    <PivotItem Header="[Integration]">
+      <ScrollViewer>
+        <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
+          <TextBlock Text="[File Associations]" />
+          <Button Content="[Open Windows Settings app to associate files with NanaZip]" Click="FileAssociationsButtonClick" />
+          <TextBlock Text="[Context Menu]" />
+          <ToggleSwitch Header="[Eliminate duplication of root folder]" />
+          <ToggleSwitch Header="[Extract on open (hold 'Shift' to skip)]" />
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+    <PivotItem Header="[Folders]" />
+    <PivotItem Header="[Editor]" />
+    <PivotItem Header="[Settings]">
+      <ScrollViewer>
+        <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
+          <TextBlock Text="[File Explorer]" />
+          <ToggleSwitch Header='[Show ".." item]' />
+          <ToggleSwitch Header="[Show real file icons]" AccessKey="I" />
+          <ToggleSwitch Header="[Full row select]" AccessKey="F" />
+          <ToggleSwitch Header="[Show grid lines]" AccessKey="G" />
+          <ToggleSwitch Header="[Single-click to open an item]" AccessKey="S" />
+          <ToggleSwitch Header="[Alternative selection mode]" AccessKey="A" />
+          <ToggleSwitch Header="[Show system menu]" AccessKey="M" />
+          <TextBlock Text="[Compression]" />
+          <ToggleSwitch Header="[Use large memory pages]" AccessKey="L" />
+          <TextBlock Text="[History]" />
+          <ToggleSwitch Header="[Want ArcHistory]" />
+          <ToggleSwitch Header="[Want PathHistory]" />
+          <ToggleSwitch Header="[Want CopyHistory]" />
+          <ToggleSwitch Header="[Want FolderHistory]" />
+          <TextBlock Text="[Checksum]" />
+          <ToggleSwitch Header="[Use Lowercase Hashes]" />
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+    <PivotItem Header="[About]">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Padding="24,0">
+          <TextBlock
+            x:Name="GridTitleTextBlock"
+            Margin="0,0,0,12"
+            FontSize="24"
+            FontWeight="SemiBold"
+            Text="[About NanaZip]" />
+          <TextBlock>
+          <Run x:Name="Version" />
+          <LineBreak />
+          <Run Text="© M2-Team and Contributors. All rights reserved." />
+          <LineBreak />
+          <LineBreak />
+          <Run x:Name="Content" />
+          </TextBlock>
+        </StackPanel>
+        <Grid Grid.Row="1" Padding="24">
+          <Grid.Background>
+            <SolidColorBrush Opacity="0.2" Color="{ThemeResource SystemChromeHighColor}" />
+          </Grid.Background>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="8" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="8" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Button
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            Click="NanaZipWebsiteButtonClick"
+            Content="NanaZip.org" />
+          <Button
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            Click="GitHubButtonClick"
+            Content="GitHub" />
+          <Button
+            x:Uid="/NanaZip.Modern/Common/CancelButton"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            Click="CancelButtonClick"
+            Content="[Cancel]" />
+        </Grid>
+      </Grid>
+    </PivotItem>
+  </Pivot>
 </Page>
