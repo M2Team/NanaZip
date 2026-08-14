@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\ButtonCard.xaml" />
+    <Page Include="Styles\PivotTab.xaml" />
     <Page Include="Styles\SettingsCard.xaml" />
     <Page Include="Styles\ToggleSwitchCard.xaml" />
   </ItemGroup>
