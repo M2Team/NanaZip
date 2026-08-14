@@ -11,6 +11,7 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ButtonCard.xaml" />
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ToggleSwitchCard.xaml" />
       </ResourceDictionary.MergedDictionaries>
       <Style TargetType="TextBlock">
         <Setter Property="FontWeight" Value="SemiBold" />
@@ -22,6 +23,7 @@
     <Pivot.Resources>
       <Thickness x:Key="PivotItemMargin">0</Thickness>
       <Style TargetType="Button" BasedOn="{StaticResource ButtonCardStyle}" />
+      <Style TargetType="ToggleSwitch" BasedOn="{StaticResource ToggleSwitchCardStyle}" />
     </Pivot.Resources>
     <PivotItem Header="[Integration]">
       <ScrollViewer>
