@@ -7,7 +7,9 @@
 namespace winrt
 {
     using Windows::Foundation::IInspectable;
+    using Windows::UI::Xaml::FrameworkElement;
     using Windows::UI::Xaml::RoutedEventArgs;
+    using Windows::UI::Xaml::Controls::ToggleSwitch;
 }
 
 namespace winrt::NanaZip::Modern::implementation
@@ -23,6 +25,14 @@ namespace winrt::NanaZip::Modern::implementation
         void InitializeComponent();
 
         void FileAssociationsButtonClick(
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
+
+        void ToggleSwitchLoading(
+            winrt::FrameworkElement const& sender,
+            winrt::IInspectable const& e);
+
+        void ToggleSwitchToggled(
             winrt::IInspectable const& sender,
             winrt::RoutedEventArgs const& e);
 

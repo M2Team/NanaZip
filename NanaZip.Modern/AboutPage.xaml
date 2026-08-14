@@ -26,39 +26,104 @@
       <Style TargetType="Button" BasedOn="{StaticResource ButtonCardStyle}" />
       <Style TargetType="ToggleSwitch" BasedOn="{StaticResource ToggleSwitchCardStyle}" />
     </Pivot.Resources>
+
+    <!--
+    Guidline:
+      Button:
+        Content -  SettingsCard Header
+      ToggleSwitch:
+        Header - SettingsCard Header
+        Tag - Reg SubKey
+        Name - Reg Value Name
+        IsOn - Default Reg Value Data
+    -->
+    
     <PivotItem Header="[Integration]">
       <ScrollViewer>
         <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
           <TextBlock Text="[File Associations]" />
-          <Button Content="[Open Windows Settings app to associate files with NanaZip]" Click="FileAssociationsButtonClick" />
+          <Button
+            Content="[Open Windows Settings app to associate files with NanaZip]"
+            Click="FileAssociationsButtonClick" />
           <TextBlock Text="[Context Menu]" />
-          <ToggleSwitch Header="[Eliminate duplication of root folder]" />
-          <ToggleSwitch Header="[Extract on open (hold 'Shift' to skip)]" />
+          <ToggleSwitch Name="ElimDupExtract" Tag="Options"
+            Header="[Eliminate duplication of root folder]"
+            IsOn="True"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ExtractOnOpen" Tag="Options"
+            Header="[Extract on open (hold 'Shift' to skip)]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
         </StackPanel>
       </ScrollViewer>
     </PivotItem>
-    <PivotItem Header="[Folders]" />
-    <PivotItem Header="[Editor]" />
     <PivotItem Header="[Settings]">
       <ScrollViewer>
         <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
           <TextBlock Text="[File Explorer]" />
-          <ToggleSwitch Header='[Show ".." item]' />
-          <ToggleSwitch Header="[Show real file icons]" AccessKey="I" />
-          <ToggleSwitch Header="[Full row select]" AccessKey="F" />
-          <ToggleSwitch Header="[Show grid lines]" AccessKey="G" />
-          <ToggleSwitch Header="[Single-click to open an item]" AccessKey="S" />
-          <ToggleSwitch Header="[Alternative selection mode]" AccessKey="A" />
-          <ToggleSwitch Header="[Show system menu]" AccessKey="M" />
-          <TextBlock Text="[Compression]" />
-          <ToggleSwitch Header="[Use large memory pages]" AccessKey="L" />
+          <ToggleSwitch Name="ShowDots" Tag="FM"
+            Header='[Show ".." item]'
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ShowRealFileIcons" Tag="FM"
+            Header="[Show real file icons]"
+            AccessKey="I"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="FullRow" Tag="FM"
+            Header="[Full row select]"
+            AccessKey="F"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ShowGrid" Tag="FM"
+            Header="[Show grid lines]"
+            AccessKey="G"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="SingleClick" Tag="FM"
+            Header="[Single-click to open an item]"
+            AccessKey="S"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="AlternativeSelection" Tag="FM"
+            Header="[Alternative selection mode]"
+            AccessKey="A"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ShowSystemMenu" Tag="FM"
+            Header="[Show system menu]"
+            AccessKey="M"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <TextBlock
+            Text="[Compression]" />
+          <ToggleSwitch Name="LargePages" Tag=""
+            Header="[Use large memory pages]"
+            AccessKey="L"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
           <TextBlock Text="[History]" />
-          <ToggleSwitch Header="[Want ArcHistory]" />
-          <ToggleSwitch Header="[Want PathHistory]" />
-          <ToggleSwitch Header="[Want CopyHistory]" />
-          <ToggleSwitch Header="[Want FolderHistory]" />
+          <ToggleSwitch Name="WantArcHistory" Tag="FM"
+            Header="[Want ArcHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="WantPathHistory" Tag="FM"
+            Header="[Want PathHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="WantCopyHistory" Tag="FM"
+            Header="[Want CopyHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="WantFolderHistory" Tag="FM"
+            Header="[Want FolderHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
           <TextBlock Text="[Checksum]" />
-          <ToggleSwitch Header="[Use Lowercase Hashes]" />
+          <ToggleSwitch Name="LowercaseHashes" Tag="FM"
+            Header="[Use Lowercase Hashes]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
         </StackPanel>
       </ScrollViewer>
     </PivotItem>
