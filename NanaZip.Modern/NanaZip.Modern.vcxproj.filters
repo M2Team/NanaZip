@@ -40,6 +40,9 @@
     <Page Include="Styles\SettingsCard.xaml">
       <Filter>Styles</Filter>
     </Page>
+    <Page Include="Styles\ToggleSwitchCard.xaml">
+      <Filter>Styles</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">

@@ -82,6 +82,7 @@
     </Page>
     <Page Include="Styles\ButtonCard.xaml" />
     <Page Include="Styles\SettingsCard.xaml" />
+    <Page Include="Styles\ToggleSwitchCard.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
