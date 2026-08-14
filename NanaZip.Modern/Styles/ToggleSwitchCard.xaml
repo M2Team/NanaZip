@@ -675,13 +675,6 @@
                 Visibility="Collapsed"
                 AutomationProperties.AccessibilityView="Raw" />
 
-              <Grid x:Name="SwitchAreaGrid"
-                Grid.Column="2"
-                Grid.ColumnSpan="3"
-                Margin="0,5"
-                CornerRadius="{TemplateBinding CornerRadius}"
-                Control.IsTemplateFocusTarget="True"
-                Background="{ThemeResource ToggleSwitchContainerBackground}" />
               <ContentPresenter x:Name="OffContentPresenter"
                 Grid.Column="2"
                 Opacity="0"
@@ -758,16 +751,23 @@
                   <TranslateTransform x:Name="KnobTranslateTransform" />
                 </Grid.RenderTransform>
               </Grid>
-              <Thumb x:Name="SwitchThumb"
-                AutomationProperties.AccessibilityView="Raw"
+              <Grid x:Name="SwitchAreaGrid"
                 Grid.Column="2"
-                Grid.ColumnSpan="3">
-                <Thumb.Template>
-                  <ControlTemplate TargetType="Thumb">
-                    <Rectangle Fill="Transparent" />
-                  </ControlTemplate>
-                </Thumb.Template>
-              </Thumb>
+                Grid.ColumnSpan="3"
+                Margin="-6"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Control.IsTemplateFocusTarget="True">
+                <Thumb x:Name="SwitchThumb"
+                  AutomationProperties.AccessibilityView="Raw"
+                  Grid.Column="2"
+                  Grid.ColumnSpan="3">
+                  <Thumb.Template>
+                    <ControlTemplate TargetType="Thumb">
+                      <Rectangle Fill="Transparent" />
+                    </ControlTemplate>
+                  </Thumb.Template>
+                </Thumb>
+              </Grid>
             </Grid>
           </Grid>
         </ControlTemplate>
