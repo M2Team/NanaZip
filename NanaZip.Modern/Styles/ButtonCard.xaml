@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/SettingsCard.xaml" />
@@ -23,15 +23,15 @@
       <Setter.Value>
         <ControlTemplate TargetType="Button">
           <ContentPresenter
-                        x:Name="ContentPresenter"
-                        Background="{TemplateBinding Background}"
-                        BackgroundSizing="{TemplateBinding BackgroundSizing}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        ContentTransitions="{TemplateBinding ContentTransitions}"
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        Padding="{TemplateBinding Padding}"
-                        AutomationProperties.AccessibilityView="Raw">
+            x:Name="ContentPresenter"
+            Background="{TemplateBinding Background}"
+            BackgroundSizing="{TemplateBinding BackgroundSizing}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            ContentTransitions="{TemplateBinding ContentTransitions}"
+            CornerRadius="{TemplateBinding CornerRadius}"
+            Padding="{TemplateBinding Padding}"
+            AutomationProperties.AccessibilityView="Raw">
 
             <ContentPresenter.Content>
               <Grid HorizontalAlignment="Stretch">
@@ -41,17 +41,17 @@
                   <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter
-                                    Grid.Column="0"
-                                    Content="{TemplateBinding Content}"
-                                    ContentTemplate="{TemplateBinding ContentTemplate}"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    TextWrapping="WrapWholeWords" />
+                  Grid.Column="0"
+                  Content="{TemplateBinding Content}"
+                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                  TextWrapping="WrapWholeWords" />
                 <FontIcon
-                                    Grid.Column="2"
-                                    Glyph="&#xE8A7;"
-                                    FontSize="{StaticResource SettingsCardHeaderFontSize}"
-                                    HorizontalAlignment="Right" />
+                  Grid.Column="2"
+                  Glyph="&#xE8A7;"
+                  FontSize="{StaticResource SettingsCardHeaderFontSize}"
+                  HorizontalAlignment="Right" />
               </Grid>
             </ContentPresenter.Content>
 
@@ -60,79 +60,79 @@
             </ContentPresenter.BackgroundTransition>
             <VisualStateManager.VisualStateGroups>
               <VisualStateGroup x:Name="CommonStates">
-                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Normal" />
                 <VisualState x:Name="PointerOver">
                   <Storyboard>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="Background">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="Background">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardBackgroundPointerOver}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardBackgroundPointerOver}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="BorderBrush">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="BorderBrush">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardBorderBrushPointerOver}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardBorderBrushPointerOver}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="Foreground">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="Foreground">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardForegroundPointerOver}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardForegroundPointerOver}" />
                     </ObjectAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Pressed">
                   <Storyboard>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="Background">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="Background">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardBackgroundPressed}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardBackgroundPressed}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="BorderBrush">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="BorderBrush">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardBorderBrushPressed}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardBorderBrushPressed}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="Foreground">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="Foreground">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardForegroundPressed}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardForegroundPressed}" />
                     </ObjectAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Disabled">
                   <Storyboard>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="Background">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="Background">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardBackgroundDisabled}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardBackgroundDisabled}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="BorderBrush">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="BorderBrush">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardBorderBrushDisabled}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardBorderBrushDisabled}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ContentPresenter"
-                                            Storyboard.TargetProperty="Foreground">
+                      Storyboard.TargetName="ContentPresenter"
+                      Storyboard.TargetProperty="Foreground">
                       <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{ThemeResource SettingsCardForegroundDisabled}" />
+                        KeyTime="0"
+                        Value="{ThemeResource SettingsCardForegroundDisabled}" />
                     </ObjectAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
