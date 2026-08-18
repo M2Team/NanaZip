@@ -127,3 +127,12 @@ kWzAES = 99    // AE-x encryption marker (see APPENDIX E)
 
 All `comment` in `resw` files should be kept English to make it better for 
 maintenance in the future.
+
+#### Synchronization between components
+
+To minimize the work when synchronizing with upstream code, the following should
+be done when proposing changes to NanaZip:
+
+- Synchronize between Core and Universal.
+- Synchronize between UI.Classic and UI.Modern.
+- Do not synchronize between Core/Universal and UI.Classic/UI.Modern.
