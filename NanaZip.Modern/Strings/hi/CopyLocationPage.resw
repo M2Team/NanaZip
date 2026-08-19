@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>गन्तव्य फोल्डर चयनित करें.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>सभी निकालें...</value>
+  </data>
 </root>

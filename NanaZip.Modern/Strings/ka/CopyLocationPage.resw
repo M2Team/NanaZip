@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>აირჩიეთ დანიშნულების საქაღალდე.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>ყველას ამოღება...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

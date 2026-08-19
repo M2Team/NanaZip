@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Ҷузвдонеро муайян кардан.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Ҳамаро баровардан...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

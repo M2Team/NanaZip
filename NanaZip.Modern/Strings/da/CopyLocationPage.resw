@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Vælg destinationsmappen.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Udpak alle...</value>
+  </data>
 </root>

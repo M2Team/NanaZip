@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Баштыкты көрсөтүңүз.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Баарын чыгаруу...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

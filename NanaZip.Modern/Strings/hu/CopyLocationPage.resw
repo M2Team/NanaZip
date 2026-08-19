@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Válassza ki a cél mappát.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Összes kibontása...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

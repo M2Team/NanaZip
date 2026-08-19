@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Odabir odredišne mape.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Izdvoji sve...</value>
+  </data>
 </root>

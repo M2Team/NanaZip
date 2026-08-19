@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Valitse kohdekansio.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Pura kaikki...</value>
+  </data>
 </root>

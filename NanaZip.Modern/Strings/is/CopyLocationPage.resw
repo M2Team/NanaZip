@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Veldu móttökumöppu.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Afþjappa öllu...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

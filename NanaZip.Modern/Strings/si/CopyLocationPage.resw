@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>ගමනාන්ත බහාලුම තෝරන්න.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>සියල්ල උපුටා ගන්න...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>ગન્તવ્ય ફોલ્ડર ચયનિત કરો.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>બધું એક્સટ્રેક્ટ કરો...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

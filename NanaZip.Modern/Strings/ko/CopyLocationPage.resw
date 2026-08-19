@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>대상 폴더를 선택하세요.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>모두 압축 풀기...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Teua folda fikio.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Toa zote...</value>
+  </data>
 </root>

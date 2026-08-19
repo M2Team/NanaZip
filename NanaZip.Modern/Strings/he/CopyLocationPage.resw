@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>.בחר תיקיית יעד</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>חלץ הכל...</value>
+  </data>
 </root>
