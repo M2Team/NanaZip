@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Hedef klasörü seçin.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Tümünü ayıkla...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

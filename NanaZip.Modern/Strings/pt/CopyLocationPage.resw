@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Seleccione a pasta de destino.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Extrair tudo...</value>
+  </data>
 </root>

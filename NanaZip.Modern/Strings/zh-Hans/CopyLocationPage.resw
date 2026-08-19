@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>选择目标文件夹。</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>全部解压缩...</value>
+  </data>
 </root>

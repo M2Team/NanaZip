@@ -19,12 +19,17 @@ namespace winrt::NanaZip::Modern::implementation
             _In_opt_ LPCWSTR Title = nullptr,
             _In_opt_ LPCWSTR Subtitle = nullptr,
             _In_opt_ LPCWSTR AdditionalInformation = nullptr,
-            _In_opt_ LPCWSTR InitialPath = nullptr
+            _In_opt_ LPCWSTR InitialPath = nullptr,
+            _In_ BOOL ShowExtractAll = FALSE
         );
 
         void InitializeComponent();
 
         LPCWSTR GetPath();
+
+        void ExtractAllButtonClick(
+            IInspectable const& sender,
+            RoutedEventArgs const& e);
 
         void OkButtonClick(
             IInspectable const& sender,
@@ -45,6 +50,7 @@ namespace winrt::NanaZip::Modern::implementation
         LPCWSTR m_Subtitle = nullptr;
         LPCWSTR m_AdditionalInformation = nullptr;
         LPCWSTR m_InitialPath = nullptr;
+        BOOL m_ShowExtractAll = FALSE;
         std::wstring m_FinalPath;
     };
 }

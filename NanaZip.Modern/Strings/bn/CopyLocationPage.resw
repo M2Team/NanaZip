@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>গন্তব্য ফোল্ডার নির্বাচন.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>সবকিছু এক্সট্র্যাক্ট করুন...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

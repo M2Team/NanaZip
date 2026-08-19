@@ -571,6 +571,7 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
     _In_opt_ LPCWSTR Subtitle,
     _In_opt_ LPCWSTR AdditionalInformation,
     _In_opt_ LPCWSTR InitialPath,
+    _In_ BOOL ShowExtractAll,
     _In_ SUBCLASSPROC WindowSubclassHandler,
     _In_ LPVOID WindowSubclassContext)
 {
@@ -590,7 +591,8 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
         Title,
         Subtitle,
         AdditionalInformation,
-        InitialPath);
+        InitialPath,
+        ShowExtractAll);
 
     if (WindowSubclassHandler)
     {

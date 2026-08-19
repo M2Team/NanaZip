@@ -42,4 +42,7 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>選擇目標資料夾。</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>全部解壓縮...</value>
+  </data>
 </root>

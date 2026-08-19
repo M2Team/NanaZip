@@ -8,6 +8,11 @@
 
 #include <string>
 
+namespace winrt
+{
+    using Windows::UI::Xaml::Visibility;
+}
+
 namespace winrt::NanaZip::Modern::implementation
 {
     CopyLocationPage::CopyLocationPage(
@@ -15,12 +20,14 @@ namespace winrt::NanaZip::Modern::implementation
         _In_opt_ LPCWSTR Title,
         _In_opt_ LPCWSTR Subtitle,
         _In_opt_ LPCWSTR AdditionalInformation,
-        _In_opt_ LPCWSTR InitialPath):
+        _In_opt_ LPCWSTR InitialPath,
+        _In_ BOOL ShowExtractAll):
         m_WindowHandle(WindowHandle),
         m_Title(Title),
         m_Subtitle(Subtitle),
         m_AdditionalInformation(AdditionalInformation),
-        m_InitialPath(InitialPath)
+        m_InitialPath(InitialPath),
+        m_ShowExtractAll(ShowExtractAll)
     {
     }
 
@@ -33,11 +40,28 @@ namespace winrt::NanaZip::Modern::implementation
         this->AdditionalInformationTextBlock().Text(
             this->m_AdditionalInformation);
         this->PathTextBox().Text(this->m_InitialPath);
+        this->ExtractAllButton().Visibility(winrt::Visibility::Visible);
     }
 
     LPCWSTR CopyLocationPage::GetPath()
     {
         return this->PathTextBox().Text().c_str();
+    }
+
+    void CopyLocationPage::ExtractAllButtonClick(
+        IInspectable const& sender,
+        RoutedEventArgs const& e)
+    {
+        UNREFERENCED_PARAMETER(sender);
+        UNREFERENCED_PARAMETER(e);
+
+        ::SendMessageW(
+            this->m_WindowHandle,
+            WM_COMMAND,
+            MAKEWPARAM(K7_COPY_LOCATION_DIALOG_RESULT_EXTRACT_ALL, BN_CLICKED),
+            0);
+
+        ::PostMessageW(this->m_WindowHandle, WM_CLOSE, 0, 0);
     }
 
     void CopyLocationPage::OkButtonClick(

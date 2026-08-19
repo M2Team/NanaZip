@@ -68,6 +68,13 @@ void CPanelCallbackImp::SetFocusToPath(unsigned index)
 
 
 void CPanelCallbackImp::OnCopy(bool move, bool copyToSame) { _app->OnCopy(move, copyToSame, _index); }
+// **************** NanaZip Modification Start ****************
+bool CPanelCallbackImp::OnCopyOrExtract() {
+    bool wantExtractAll = false;
+    this->_app->OnCopy(false, false, this->_index, true, &wantExtractAll);
+    return !wantExtractAll;
+}
+// **************** NanaZip Modification End ****************
 void CPanelCallbackImp::OnSetSameFolder() { _app->OnSetSameFolder(_index); }
 void CPanelCallbackImp::OnSetSubFolder()  { _app->OnSetSubFolder(_index); }
 void CPanelCallbackImp::PanelWasFocused() { _app->SetFocusedPanel(_index); _app->RefreshTitlePanel(_index); }
@@ -499,7 +506,15 @@ static bool IsFsPath(const FString &path)
 }
 */
 
-void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
+// **************** NanaZip Modification Start ****************
+//void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
+void CApp::OnCopy(
+    bool move,
+    bool copyToSame,
+    int srcPanelIndex,
+    bool showExtractAll,
+    bool *wantExtractAll)
+// **************** NanaZip Modification End ****************
 {
   unsigned destPanelIndex = (NumPanels <= 1) ? srcPanelIndex : (1 - srcPanelIndex);
   CPanel &srcPanel = Panels[srcPanelIndex];
@@ -554,14 +569,31 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
   {
     CCopyDialog copyDialog;
 
+    // **************** NanaZip Modification Start ****************
+    if (showExtractAll)
+    {
+        copyDialog.m_ShowExtractAll = true;
+    }
+    // **************** NanaZip Modification End ****************
     copyDialog.Strings = copyFolders;
     copyDialog.Value = destPath;
     LangString(move ? IDS_MOVE : IDS_COPY, copyDialog.Title);
     LangString(move ? IDS_MOVE_TO : IDS_COPY_TO, copyDialog.Static);
     copyDialog.Info = srcPanel.GetItemsInfoString(indices);
 
-    if (copyDialog.Create(srcPanel.GetParent()) != IDOK)
-      return;
+    // **************** NanaZip Modification Start ****************
+    // if (copyDialog.Create(srcPanel.GetParent()) != IDOK)
+    // return;
+    INT_PTR result = copyDialog.Create(srcPanel.GetParent());
+    if (result != IDOK)
+    {
+        if (wantExtractAll)
+        {
+            *wantExtractAll = result == IDRETRY;
+        }
+        return;
+    }
+    // **************** NanaZip Modification End ****************
 
     destPath = copyDialog.Value;
   }

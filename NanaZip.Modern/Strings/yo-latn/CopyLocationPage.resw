@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Ṣàyàn èbúté àpò faíli.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Yọ gbogbo rẹ̀ jáde...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

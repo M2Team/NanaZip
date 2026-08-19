@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Zielordner auswählen</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Alle extrahieren...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>

@@ -219,6 +219,7 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
  *        the copy location dialog when the "OK" button is clicked.
  */
 #define K7_COPY_LOCATION_DIALOG_RESULT_OK 1
+#define K7_COPY_LOCATION_DIALOG_RESULT_EXTRACT_ALL 2
 
 /**
  * @brief Show the copy location dialog window.
@@ -246,6 +247,7 @@ EXTERN_C INT WINAPI K7ModernShowCopyLocationDialog(
     _In_opt_ LPCWSTR Subtitle,
     _In_opt_ LPCWSTR AdditionalInformation,
     _In_opt_ LPCWSTR InitialPath,
+    _In_ BOOL ShowExtractAll,
     _In_ SUBCLASSPROC WindowSubclassHandler,
     _In_ LPVOID WindowSubclassContext);
 

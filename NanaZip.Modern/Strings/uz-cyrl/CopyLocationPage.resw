@@ -42,4 +42,10 @@
   <data name="SelectDestinationText" xml:space="preserve">
     <value>Белгиланган жилдни танланг.</value>
   </data>
+  <data name="ExtractAllButton.Content" xml:space="preserve">
+    <value>Барчасини чиқариш...</value>
+  </data>
+  <data name="ExtractAllButton.Width" type="System.Double" xml:space="preserve">
+    <value>200</value>
+  </data>
 </root>
