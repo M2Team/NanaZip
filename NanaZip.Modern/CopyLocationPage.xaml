@@ -61,12 +61,26 @@
       Background="#37C9C9C9"
       BorderBrush="{ThemeResource CardStrokeColorDefault}"
       BorderThickness="0,1,0,0">
-      <StackPanel
+      <Grid
         Grid.Column="1"
-        Padding="0,0,12,0"
-        HorizontalAlignment="Right"
-        Orientation="Horizontal">
+        Padding="12,0,12,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
         <Button
+          x:Name="ExtractAllButton"
+          x:Uid="/NanaZip.Modern/CopyLocationPage/ExtractAllButton"
+          Width="120"
+          Margin="4,16,0,16"
+          Click="ExtractAllButtonClick"
+          Content="[Extract all...]" />
+
+        <Button
+          Grid.Column="2"
           x:Name="PauseButton"
           x:Uid="/NanaZip.Modern/Common/OKButton"
           Width="120"
@@ -74,12 +88,13 @@
           Click="OkButtonClick"
           Content="[OK]" />
         <Button
+          Grid.Column="3"
           x:Uid="/NanaZip.Modern/Common/CancelButton"
           Width="120"
           Margin="4,16,4,16"
           Click="CancelButtonClick"
           Content="[Cancel]" />
-      </StackPanel>
+      </Grid>
     </Grid>
   </Grid>
 </Page>

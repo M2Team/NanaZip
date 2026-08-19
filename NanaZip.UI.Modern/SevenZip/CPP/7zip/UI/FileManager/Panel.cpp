@@ -1280,7 +1280,10 @@ void CPanel::ExtractArchives()
 {
   if (_parentFolders.Size() > 0)
   {
-    ExtractFromArchive();
+    // **************** NanaZip Modification Start ****************
+    // _panelCallback->OnCopy(false, false);
+    CopyFromArchive();
+    // **************** NanaZip Modification End ****************
     return;
   }
   CRecordVector<UInt32> indices;
@@ -1307,40 +1310,52 @@ void CPanel::ExtractArchives()
       );
 }
 
-void CPanel::ExtractFromArchive()
+// **************** NanaZip Modification Start ****************
+void CPanel::CopyFromArchive()
 {
-  if (_parentFolders.Size() > 1) {
-    _panelCallback->OnCopy(false, false);
-    return;
-  }
+    UString archivePath = this->_parentFolders[0].VirtualPath;
+    bool wantsExtractAll = true;
 
-  CRecordVector<UInt32> indices;
-  GetOperatedItemIndices(indices);
-  if (indices.Size() > 0) {
-    _panelCallback->OnCopy(false, false);
-    return;
-  }
+    if (this->_parentFolders.Size() > 1)
+    {
+        wantsExtractAll = false;
+    }
 
-  UString path = GetFsPath();
-  if (IsPathSepar(path.Back()))
-      path.DeleteBack();
-  if (path != _parentFolders[0].VirtualPath) {
-    _panelCallback->OnCopy(false, false);
-    return;
-  }
-  UStringVector paths;
-  paths.Add(path);
-  UString outFolder = GetSubFolderNameForExtract2(path);
+    CRecordVector<UInt32> indices;
+    this->GetOperatedItemIndices(indices);
+    if (indices.Size() > 0)
+    {
+        wantsExtractAll = false;
+    }
 
-  CContextMenuInfo ci;
-  ci.Load();
+    UString path = this->GetFsPath();
+    if (::IsPathSepar(path.Back()))
+    {
+        path.DeleteBack();
+    }
+    if (path != archivePath)
+    {
+        wantsExtractAll = false;
+    }
 
-  ::ExtractArchives(paths, outFolder
-      , true // showDialog
-      , false // elimDup
-      , ci.WriteZone
-      );
+    if (wantsExtractAll || !this->_panelCallback->OnCopyOrExtract())
+    {
+        UStringVector paths;
+        paths.Add(archivePath);
+        UString outFolder = ::GetSubFolderNameForExtract2(archivePath);
+
+        CContextMenuInfo ci;
+        ci.Load();
+
+        ::ExtractArchives(
+            paths,
+            outFolder,
+            true, // showDialog
+            false, // elimDup
+            ci.WriteZone);
+    }
 }
+// **************** NanaZip Modification End ****************
 
 /*
 static void AddValuePair(UINT resourceID, UInt64 value, UString &s)

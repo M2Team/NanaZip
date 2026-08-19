@@ -24,6 +24,7 @@ class CCopyDialog: public NWindows::NControl::CModalDialog
   bool ModernMessageRouter(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
   void ModernOK();
+  void ModernExtractAll();
 
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   NWindows::NControl::CComboBox _path;
@@ -44,6 +45,7 @@ public:
   HWND m_WindowHandle = nullptr;
   bool m_FirstRun = false;
   int m_ReturnCode = IDCLOSE;
+  bool m_ShowExtractAll = false;
 // **************** NanaZip Modification End ****************
 
 // **************** NanaZip Modification Start ****************

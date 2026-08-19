@@ -28,6 +28,7 @@ INT_PTR CCopyDialog::Create(HWND parentWindow)
         this->Static.Ptr(),
         this->Info.Ptr(),
         this->Value.Ptr(),
+        this->m_ShowExtractAll ? TRUE : FALSE,
         &CCopyDialog::ModernWindowHandler,
         this);
 
@@ -49,6 +50,9 @@ bool CCopyDialog::ModernMessageRouter(UINT uMsg, WPARAM wParam, LPARAM lParam)
             case K7_COPY_LOCATION_DIALOG_RESULT_OK:
                 this->ModernOK();
                 return true;
+            case K7_COPY_LOCATION_DIALOG_RESULT_EXTRACT_ALL:
+                this->ModernExtractAll();
+                return true;
             }
         }
     }
@@ -61,6 +65,11 @@ void CCopyDialog::ModernOK()
     Value = ::K7ModernGetCopyLocationDialogPath(
         m_WindowHandle);
     m_ReturnCode = IDOK;
+}
+
+void CCopyDialog::ModernExtractAll()
+{
+    m_ReturnCode = IDRETRY;
 }
 
 LRESULT CALLBACK CCopyDialog::ModernWindowHandler(

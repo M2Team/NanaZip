@@ -43,6 +43,9 @@ public:
   virtual void OnTab();
   virtual void SetFocusToPath(unsigned index);
   virtual void OnCopy(bool move, bool copyToSame);
+  // **************** NanaZip Modification Start ****************
+  virtual bool OnCopyOrExtract();
+  // **************** NanaZip Modification End ****************
   virtual void OnSetSameFolder();
   virtual void OnSetSubFolder();
   virtual void PanelWasFocused();
@@ -137,7 +140,7 @@ public:
   CMyComPtr<IDropTarget> _dropTarget;
 
   UString LangString_N_SELECTED_ITEMS;
-  
+
   void ReloadLang();
 
   CApp(): _window(0), NumPanels(2), LastFocusedPanel(0),
@@ -171,8 +174,16 @@ public:
     _dropTargetSpec->SrcPanelIndex = -1;
   }
 
-  
-  void OnCopy(bool move, bool copyToSame, int srcPanelIndex);
+
+  // **************** NanaZip Modification Start ****************
+  //void OnCopy(bool move, bool copyToSame, int srcPanelIndex);
+  void OnCopy(
+    bool move,
+    bool copyToSame,
+    int srcPanelIndex,
+    bool showExtractAll = false,
+    bool *wantExtractAll = nullptr);
+  // **************** NanaZip Modification End ****************
   void OnSetSameFolder(int srcPanelIndex);
   void OnSetSubFolder(int srcPanelIndex);
 
@@ -202,14 +213,14 @@ public:
 
   void DiffFiles(const UString &path1, const UString &path2);
   void DiffFiles();
-  
+
   void VerCtrl(unsigned id);
 
   void Split();
   void Combine();
   void Properties() { GetFocusedPanel().Properties(); }
   void Comment() { GetFocusedPanel().ChangeComment(); }
-  
+
   #ifndef UNDER_CE
   void Link();
   void OpenAltStreams() { GetFocusedPanel().OpenAltStreams(); }
@@ -266,7 +277,7 @@ public:
 
   void SetListSettings();
   HRESULT SwitchOnOffOnePanel();
-  
+
   CIntVector _timestampLevels;
 
   bool GetFlatMode() { return Panels[LastFocusedPanel].GetFlatMode(); }
@@ -285,7 +296,7 @@ public:
   }
 
   // bool Get_ShowNtfsStrems_Mode() { return Panels[LastFocusedPanel].Get_ShowNtfsStrems_Mode(); }
-  
+
   void ChangeFlatMode() { Panels[LastFocusedPanel].ChangeFlatMode(); }
   // void Change_ShowNtfsStrems_Mode() { Panels[LastFocusedPanel].Change_ShowNtfsStrems_Mode(); }
   // void Change_ShowDeleted() { ShowDeletedFiles = !ShowDeletedFiles; }

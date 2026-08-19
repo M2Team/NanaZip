@@ -66,6 +66,10 @@ struct CPanelCallback
   virtual void OnTab() = 0;
   virtual void SetFocusToPath(unsigned index) = 0;
   virtual void OnCopy(bool move, bool copyToSame) = 0;
+  // **************** NanaZip Modification Start ****************
+  // Returns true if copy was selected, or false if Extract All was selected.
+  virtual bool OnCopyOrExtract() = 0;
+  // **************** NanaZip Modification End ****************
   virtual void OnSetSameFolder() = 0;
   virtual void OnSetSubFolder() = 0;
   virtual void PanelWasFocused() = 0;
@@ -893,7 +897,10 @@ public:
 
   void GetFilePaths(const CRecordVector<UInt32> &indices, UStringVector &paths, bool allowFolders = false);
   void ExtractArchives();
-  void ExtractFromArchive();
+  // **************** NanaZip Modification Start ****************
+  void CopyFromArchive();
+  void ExtractFromArchive(const UString &archivePath);
+  // **************** NanaZip Modification End ****************
   void TestArchives();
 
   // **************** NanaZip Modification Start ****************
