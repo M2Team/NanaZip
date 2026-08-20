@@ -1284,10 +1284,10 @@ HRESULT CZipDecoder::Decode(
         result = _wzAesDecoder->ReadHeader(inStream);
         if (result == S_OK)
         {
+          // **************** NanaZip Modification Start ****************
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
           if (!_wzAesDecoder->Init_and_CheckPassword())
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-          // **************** NanaZip Modification Start ****************
           bool passwordIsCorrect =
               _wzAesDecoder->Init_and_CheckPassword();
           if (!passwordIsCorrect && wzAesUtf8PasswordIsDefined)
