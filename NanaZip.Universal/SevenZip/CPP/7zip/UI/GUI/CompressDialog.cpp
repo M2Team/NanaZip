@@ -6,6 +6,9 @@
 
 #include "../../../Common/IntToString.h"
 #include "../../../Common/StringConvert.h"
+// **************** NanaZip Modification Start ****************
+#include "../../../Common/UTFConvert.h"
+// **************** NanaZip Modification End ****************
 
 #include "../../../Windows/FileDir.h"
 #include "../../../Windows/FileName.h"
