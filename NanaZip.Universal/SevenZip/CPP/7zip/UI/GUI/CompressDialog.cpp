@@ -1241,6 +1241,8 @@ void CCompressDialog::OnOK()
   _password1Control.GetText(Info.Password);
   if (IsZipFormat())
   {
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     if (!IsAsciiString(Info.Password))
     {
       ShowErrorMessageHwndRes(*this, IDS_PASSWORD_USE_ASCII);
@@ -1255,6 +1257,31 @@ void CCompressDialog::OnOK()
         return;
       }
     }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    UString method = GetEncryptionMethodSpec();
+    const bool isAesMode = method.IsPrefixedBy_Ascii_NoCase("aes");
+    if (!IsAsciiString(Info.Password))
+    {
+      if (!isAesMode)
+      {
+        ShowErrorMessageHwndRes(*this, IDS_PASSWORD_USE_ASCII);
+        return;
+      }
+      if (::MessageBoxW(*this, LangString(IDS_PASSWORD_USE_ASCII),
+          L"NanaZip", MB_OKCANCEL | MB_ICONWARNING) != IDOK)
+        return;
+    }
+    if (isAesMode)
+    {
+      AString_Wipe utf8Password;
+      ConvertUnicodeToUTF8(Info.Password, utf8Password);
+      if (utf8Password.Len() > 99)
+      {
+        ShowErrorMessageHwndRes(*this, IDS_PASSWORD_TOO_LONG);
+        return;
+      }
+    }
+    // **************** NanaZip Modification End ****************
   }
   if (!IsShowPasswordChecked())
   {

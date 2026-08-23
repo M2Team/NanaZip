@@ -412,6 +412,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
       if (!m_ForceAesMode)
         options.IsAesMode = thereAreAesUpdates;
 
+      // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
       if (!IsSimpleAsciiString(password))
         return E_INVALIDARG;
       if (password)
@@ -421,6 +423,22 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
         if (options.Password.Len() > NCrypto::NWzAes::kPasswordSizeMax)
           return E_INVALIDARG;
       }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+      if (options.IsAesMode)
+      {
+        if (password)
+          ConvertUnicodeToUTF8((LPCOLESTR)password, options.Password);
+        if (options.Password.Len() > NCrypto::NWzAes::kPasswordSizeMax)
+          return E_INVALIDARG;
+      }
+      else
+      {
+        if (!IsSimpleAsciiString(password))
+          return E_INVALIDARG;
+        if (password)
+          UnicodeStringToMultiByte2(options.Password, (LPCOLESTR)password, CP_OEMCP);
+      }
+      // **************** NanaZip Modification End ****************
     }
   }
 
