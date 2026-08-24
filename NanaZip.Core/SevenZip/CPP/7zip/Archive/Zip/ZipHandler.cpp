@@ -1123,8 +1123,6 @@ HRESULT CZipDecoder::Decode(
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
         if (wzAesMode)
         {
-          // WzAES has no password encoding metadata, so use UTF-8 by default
-          // and preserve CP_ACP as a read-only compatibility fallback.
           ConvertUnicodeToUTF8((LPCOLESTR)password, wzAesUtf8Password);
           UnicodeStringToMultiByte2(
               wzAesCodePagePassword, (LPCOLESTR)password, CP_ACP);
