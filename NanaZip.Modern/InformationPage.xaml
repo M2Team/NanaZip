@@ -24,6 +24,7 @@
       Grid.Row="1"
       Margin="16,8,16,16"
       AcceptsReturn="True"
+      CopyingToClipboard="InformationTextBoxCopyingToClipboardHandler"
       IsReadOnly="True"
       ScrollViewer.HorizontalScrollBarVisibility="Visible"
       ScrollViewer.VerticalScrollBarVisibility="Visible">

@@ -4,6 +4,14 @@
 #include "InformationPage.g.cpp"
 #endif
 
+#include <winrt/Windows.ApplicationModel.DataTransfer.h>
+
+namespace winrt
+{
+    using Windows::ApplicationModel::DataTransfer::Clipboard;
+    using Windows::ApplicationModel::DataTransfer::DataPackage;
+}
+
 namespace winrt::NanaZip::Modern::implementation
 {
     InformationPage::InformationPage(
@@ -24,6 +32,21 @@ namespace winrt::NanaZip::Modern::implementation
         
         this->TitleTextBlock().Text(this->m_Title);
         this->InformationTextBox().Text(this->m_Content);
+    }
+
+    void InformationPage::InformationTextBoxCopyingToClipboardHandler(
+        winrt::TextBox const& sender,
+        winrt::TextControlCopyingToClipboardEventArgs const& args)
+    {
+        winrt::hstring SelectedText = sender.SelectedText();
+        if (!SelectedText.empty())
+        {
+            winrt::DataPackage package;
+            package.SetText(SelectedText);
+            winrt::Clipboard::SetContent(package);
+            winrt::Clipboard::Flush();
+            args.Handled(true);
+        }
     }
 
     void InformationPage::CloseButtonClickedHandler(
