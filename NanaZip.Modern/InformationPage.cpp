@@ -41,9 +41,9 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::hstring SelectedText = sender.SelectedText();
         if (!SelectedText.empty())
         {
-            winrt::DataPackage package;
-            package.SetText(SelectedText);
-            winrt::Clipboard::SetContent(package);
+            winrt::DataPackage Package;
+            Package.SetText(SelectedText);
+            winrt::Clipboard::SetContent(Package);
             winrt::Clipboard::Flush();
             args.Handled(true);
         }
