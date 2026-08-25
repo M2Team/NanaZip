@@ -12,6 +12,11 @@ CDecoder::CDecoder():
   _inputSize(0),
   _numThreads(NWindows::NSystem::GetNumberOfProcessors())
 {
+  // GetNumberOfProcessors() is uncapped and sums all processor groups, while
+  // LZ4MT_createDCtx() only accepts up to LZ4MT_THREAD_MAX. Lz4Handler never
+  // calls SetNumberOfThreads(), so clamp here too.
+  if (_numThreads > (UInt32)LZ4MT_THREAD_MAX)
+    _numThreads = (UInt32)LZ4MT_THREAD_MAX;
   _props.clear();
 }
 

@@ -192,17 +192,20 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   NCompress::NBROTLI::CDecoder *decoderSpec = new NCompress::NBROTLI::CDecoder;
   /*
-   * Pass 0 here unless the user explicitly forced a thread count via -mmt.
-   * This is only a lower bound / hint: BROTLIMT_decompressDCtx() (see
+   * Pass threads only if the user explicitly forced a thread count via -mmt.
+   * If it is not specified by user, BROTLIMT_decompressDCtx() (see
    * C/zstdmt/brotli-mt_decompress.c) always peeks the stream's own content
    * for the brotli-mt skippable-frame container magic and decides raw-st
-   * vs. framed-mt decoding from that, promoting threads from 0 to 1 by
-   * itself if the container is present - regardless of what is passed
-   * here. So a file produced with -mmt can still be read correctly even
+   * vs. framed-mt decoding from that, promoting threads to max-processor by
+   * itself if the container is present.
+   * So a file produced with -mmt can still be read correctly even
    * when -mmt is not given on this extract/test invocation. Forcing a
-   * higher count via -mmt is still honored when the container is present.
+   * mode or count via -mmt is still possible and would win over auto detection.
    */
-  decoderSpec->SetNumberOfThreads(!_props._numThreads_WasForced ? 0 : _props._numThreads);
+  decoderSpec->_numThreads_WasForced = _props._numThreads_WasForced ? 1 : 0;
+  if (_props._numThreads_WasForced) {
+    decoderSpec->SetNumberOfThreads(_props._numThreads);
+  }
   CMyComPtr<ICompressCoder> decoder = decoderSpec;
   decoderSpec->SetInStream(_seqStream);
 
@@ -290,6 +293,7 @@ static HRESULT UpdateArchive(
   localProgressSpec->Init(updateCallback, true);
   NCompress::NBROTLI::CEncoder *encoderSpec = new NCompress::NBROTLI::CEncoder;
   encoderSpec->unpackSize = unpackSize;
+  encoderSpec->_numThreads_WasForced = 1;
   encoderSpec->SetNumberOfThreads(0); /* .br - single threaded processing (without header/mt-frames) */
   CMyComPtr<ICompressCoder> encoder = encoderSpec;
   RINOK(props.SetCoderProps(encoderSpec, NULL));

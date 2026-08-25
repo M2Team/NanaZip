@@ -46,6 +46,7 @@ public:
   UInt64 _processedOut;
   UInt32 _inputSize;
   UInt32 _numThreads;
+  int _numThreads_WasForced;
 
   Int32 _Long;
   Int32 _WindowLog;

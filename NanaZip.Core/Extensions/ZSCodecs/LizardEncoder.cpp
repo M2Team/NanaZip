@@ -15,6 +15,11 @@ CEncoder::CEncoder():
   _numThreads(NWindows::NSystem::GetNumberOfProcessors()),
   _ctx(NULL)
 {
+  // GetNumberOfProcessors() is uncapped and sums all processor groups, while
+  // LIZARDMT_createCCtx() only accepts up to LIZARDMT_THREAD_MAX.
+  // LizardHandler never calls SetNumberOfThreads(), so clamp here too.
+  if (_numThreads > (UInt32)LIZARDMT_THREAD_MAX)
+    _numThreads = (UInt32)LIZARDMT_THREAD_MAX;
   _props.clear();
 }
 

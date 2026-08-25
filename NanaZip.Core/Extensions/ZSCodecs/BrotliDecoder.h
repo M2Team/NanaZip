@@ -51,6 +51,7 @@ public:
   UInt64 _processedOut;
   UInt32 _inputSize;
   UInt32 _numThreads;
+  int _numThreads_WasForced; /* -1 - default for brotli in 7z, 0 - not forced in .br, 1 - forced in .br */
 
   HRESULT CodeSpec(ISequentialInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress);
   HRESULT CodeResume(ISequentialOutStream * outStream, const UInt64 * outSize, ICompressProgressInfo * progress);

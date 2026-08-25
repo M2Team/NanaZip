@@ -135,7 +135,7 @@ typedef struct BROTLIMT_DCtx_s BROTLIMT_DCtx;
  * @threads - 1 .. BROTLIMT_THREAD_MAX
  * @ inputsize - used for single threaded standard bro format without skippable frames
  */
-BROTLIMT_DCtx *BROTLIMT_createDCtx(int threads, int inputsize);
+BROTLIMT_DCtx *BROTLIMT_createDCtx(int threads, int threadsset, int inputsize);
 
 /**
  * 2) threaded compression

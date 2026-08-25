@@ -12,6 +12,11 @@ CDecoder::CDecoder():
   _inputSize(0),
   _numThreads(NWindows::NSystem::GetNumberOfProcessors())
 {
+  // GetNumberOfProcessors() is uncapped and sums all processor groups, while
+  // LIZARDMT_createDCtx() only accepts up to LIZARDMT_THREAD_MAX.
+  // LizardHandler never calls SetNumberOfThreads(), so clamp here too.
+  if (_numThreads > (UInt32)LIZARDMT_THREAD_MAX)
+    _numThreads = (UInt32)LIZARDMT_THREAD_MAX;
   _props.clear();
 }
 

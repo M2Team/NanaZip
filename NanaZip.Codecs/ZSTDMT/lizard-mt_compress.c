@@ -94,17 +94,17 @@ LIZARDMT_CCtx *LIZARDMT_createCCtx(int threads, int level, int inputsize)
 	LIZARDMT_CCtx *ctx;
 	int t;
 
-	/* allocate ctx */
-	ctx = (LIZARDMT_CCtx *) malloc(sizeof(LIZARDMT_CCtx));
-	if (!ctx)
-		return 0;
-
 	/* check threads value */
 	if (threads < 1 || threads > LIZARDMT_THREAD_MAX)
 		return 0;
 
 	/* check level */
 	if (level < LIZARDMT_LEVEL_MIN || level > LIZARDMT_LEVEL_MAX)
+		return 0;
+
+	/* allocate ctx */
+	ctx = (LIZARDMT_CCtx *) malloc(sizeof(LIZARDMT_CCtx));
+	if (!ctx)
 		return 0;
 
 	/* calculate chunksize for one thread */

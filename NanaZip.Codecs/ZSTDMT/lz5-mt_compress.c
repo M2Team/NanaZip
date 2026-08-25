@@ -94,17 +94,17 @@ LZ5MT_CCtx *LZ5MT_createCCtx(int threads, int level, int inputsize)
 	LZ5MT_CCtx *ctx;
 	int t;
 
-	/* allocate ctx */
-	ctx = (LZ5MT_CCtx *) malloc(sizeof(LZ5MT_CCtx));
-	if (!ctx)
-		return 0;
-
 	/* check threads value */
 	if (threads < 1 || threads > LZ5MT_THREAD_MAX)
 		return 0;
 
 	/* check level */
 	if (level < LZ5MT_LEVEL_MIN || level > LZ5MT_LEVEL_MAX)
+		return 0;
+
+	/* allocate ctx */
+	ctx = (LZ5MT_CCtx *) malloc(sizeof(LZ5MT_CCtx));
+	if (!ctx)
 		return 0;
 
 	/* calculate chunksize for one thread */

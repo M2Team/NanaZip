@@ -92,13 +92,13 @@ LIZARDMT_DCtx *LIZARDMT_createDCtx(int threads, int inputsize)
 	LIZARDMT_DCtx *ctx;
 	int t;
 
+	/* check threads value */
+	if (threads < 1 || threads > LIZARDMT_THREAD_MAX)
+		return 0;
+
 	/* allocate ctx */
 	ctx = (LIZARDMT_DCtx *) malloc(sizeof(LIZARDMT_DCtx));
 	if (!ctx)
-		return 0;
-
-	/* check threads value */
-	if (threads < 1 || threads > LIZARDMT_THREAD_MAX)
 		return 0;
 
 	/* setup ctx */
@@ -305,7 +305,8 @@ static void *pt_decompress(void *arg)
 			    malloc(sizeof(struct writelist));
 			if (!wl) {
 				result = ERROR(memory_allocation);
-				goto error_unlock;
+				/* @wl was never acquired, nothing to give back */
+				goto error_unlock_nowl;
 			}
 			wl->out.buf = 0;
 			wl->out.size = 0;
@@ -385,6 +386,7 @@ static void *pt_decompress(void *arg)
 	pthread_mutex_lock(&ctx->write_mutex);
  error_unlock:
 	list_move(&wl->node, &ctx->writelist_free);
+ error_unlock_nowl:
 	pthread_mutex_unlock(&ctx->write_mutex);
 	if (in->allocated)
 		free(in->buf);

@@ -12,6 +12,11 @@ CDecoder::CDecoder():
   _inputSize(0),
   _numThreads(NWindows::NSystem::GetNumberOfProcessors())
 {
+  // GetNumberOfProcessors() is uncapped and sums all processor groups, while
+  // LZ5MT_createDCtx() only accepts up to LZ5MT_THREAD_MAX. Lz5Handler never
+  // calls SetNumberOfThreads(), so clamp here too.
+  if (_numThreads > (UInt32)LZ5MT_THREAD_MAX)
+    _numThreads = (UInt32)LZ5MT_THREAD_MAX;
   _props.clear();
 }
 

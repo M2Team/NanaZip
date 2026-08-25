@@ -15,6 +15,11 @@ CEncoder::CEncoder():
   _numThreads(NWindows::NSystem::GetNumberOfProcessors()),
   _ctx(NULL)
 {
+  // GetNumberOfProcessors() is uncapped and sums all processor groups, while
+  // LZ5MT_createCCtx() only accepts up to LZ5MT_THREAD_MAX. Lz5Handler never
+  // calls SetNumberOfThreads(), so clamp here too.
+  if (_numThreads > (UInt32)LZ5MT_THREAD_MAX)
+    _numThreads = (UInt32)LZ5MT_THREAD_MAX;
   _props.clear();
 }
 

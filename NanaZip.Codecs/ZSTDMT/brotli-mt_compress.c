@@ -98,17 +98,17 @@ BROTLIMT_CCtx *BROTLIMT_createCCtx(int threads, uint64_t unpackSize, int level, 
 	BROTLIMT_CCtx *ctx;
 	int t;
 
-	/* allocate ctx */
-	ctx = (BROTLIMT_CCtx *) malloc(sizeof(BROTLIMT_CCtx));
-	if (!ctx)
-		return 0;
-
 	/* check threads value */
 	if (threads < 0 || threads > BROTLIMT_THREAD_MAX)
 		return 0;
 
 	/* check level */
 	if (level < BROTLIMT_LEVEL_MIN || level > BROTLIMT_LEVEL_MAX)
+		return 0;
+
+	/* allocate ctx */
+	ctx = (BROTLIMT_CCtx *) malloc(sizeof(BROTLIMT_CCtx));
+	if (!ctx)
 		return 0;
 
 	/* calculate chunksize for one thread */
