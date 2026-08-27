@@ -433,7 +433,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
       }
       else
       {
-        if (!::IsSimpleAsciiString(password))
+        if (!IsSimpleAsciiString(password))
           return E_INVALIDARG;
         if (password)
           ::UnicodeStringToMultiByte2(
