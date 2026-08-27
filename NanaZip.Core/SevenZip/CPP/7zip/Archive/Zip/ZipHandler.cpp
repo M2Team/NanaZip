@@ -992,8 +992,8 @@ HRESULT CZipDecoder::Decode(
   bool wzAesMode = false;
   bool pkAesMode = false;
   // **************** NanaZip Modification Start ****************
-  AString_Wipe wzAesUtf8Password;
-  AString_Wipe wzAesCodePagePassword;
+  AString_Wipe WzAesUtf8Password;
+  AString_Wipe WzAesCodePagePassword;
   // **************** NanaZip Modification End ****************
 
   bool badDescriptor = item.IsBadDescriptor();
@@ -1123,14 +1123,18 @@ HRESULT CZipDecoder::Decode(
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
         if (wzAesMode)
         {
-          ConvertUnicodeToUTF8((LPCOLESTR)password, wzAesUtf8Password);
-          UnicodeStringToMultiByte2(
-              wzAesCodePagePassword, (LPCOLESTR)password, CP_ACP);
+          ::ConvertUnicodeToUTF8((LPCOLESTR)password, WzAesUtf8Password);
+          ::UnicodeStringToMultiByte2(
+              WzAesCodePagePassword,
+              (LPCOLESTR)password,
+              CP_ACP);
         }
         else
         {
-          UnicodeStringToMultiByte2(
-              charPassword, (LPCOLESTR)password, CP_ACP);
+          ::UnicodeStringToMultiByte2(
+              charPassword,
+              (LPCOLESTR)password,
+              CP_ACP);
         }
         // **************** NanaZip Modification End ****************
         /*
@@ -1160,9 +1164,10 @@ HRESULT CZipDecoder::Decode(
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
       if (!wzAesMode)
       {
-        HRESULT result = cryptoSetPassword->CryptoSetPassword(
-          (const Byte *)(const char *)charPassword, charPassword.Len());
-        if (result != S_OK)
+        HRESULT Result = cryptoSetPassword->CryptoSetPassword(
+            (const Byte *)(const char *)charPassword,
+            charPassword.Len());
+        if (Result != S_OK)
         {
           res = NExtract::NOperationResult::kWrongPassword;
           return S_OK;
@@ -1309,28 +1314,28 @@ HRESULT CZipDecoder::Decode(
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
           if (!_wzAesDecoder->Init_and_CheckPassword())
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-          bool passwordIsCorrect = false;
-          if (_wzAesDecoder->CryptoSetPassword(
-              (const Byte *)(const char *)wzAesUtf8Password,
-              wzAesUtf8Password.Len()) == S_OK)
+          bool IsPasswordCorrect = false;
+          if (this->_wzAesDecoder->CryptoSetPassword(
+              (const Byte *)(const char *)WzAesUtf8Password,
+              WzAesUtf8Password.Len()) == S_OK)
           {
-            passwordIsCorrect =
-                _wzAesDecoder->Init_and_CheckPassword();
+            IsPasswordCorrect =
+                this->_wzAesDecoder->Init_and_CheckPassword();
           }
-          if (!passwordIsCorrect &&
-              wzAesCodePagePassword != wzAesUtf8Password)
+          if (!IsPasswordCorrect &&
+              WzAesCodePagePassword != WzAesUtf8Password)
           {
-            if (_wzAesDecoder->CryptoSetPassword(
-                (const Byte *)(const char *)wzAesCodePagePassword,
-                wzAesCodePagePassword.Len()) == S_OK)
+            if (this->_wzAesDecoder->CryptoSetPassword(
+                (const Byte *)(const char *)WzAesCodePagePassword,
+                WzAesCodePagePassword.Len()) == S_OK)
             {
-              passwordIsCorrect =
-                  _wzAesDecoder->Init_and_CheckPassword();
+              IsPasswordCorrect =
+                  this->_wzAesDecoder->Init_and_CheckPassword();
             }
           }
-          wzAesUtf8Password.Wipe_and_Empty();
-          wzAesCodePagePassword.Wipe_and_Empty();
-          if (!passwordIsCorrect)
+          WzAesUtf8Password.Wipe_and_Empty();
+          WzAesCodePagePassword.Wipe_and_Empty();
+          if (!IsPasswordCorrect)
           // **************** NanaZip Modification End ****************
           {
             res = NExtract::NOperationResult::kWrongPassword;

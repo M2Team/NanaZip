@@ -1261,26 +1261,29 @@ void CCompressDialog::OnOK()
       }
     }
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-    UString method = GetEncryptionMethodSpec();
-    const bool isAesMode = method.IsPrefixedBy_Ascii_NoCase("aes");
-    if (!IsAsciiString(Info.Password))
+    UString Method = this->GetEncryptionMethodSpec();
+    const bool IsAesMode = Method.IsPrefixedBy_Ascii_NoCase("aes");
+    if (!::IsAsciiString(this->Info.Password))
     {
-      if (!isAesMode)
+      if (!IsAesMode)
       {
-        ShowErrorMessageHwndRes(*this, IDS_PASSWORD_USE_ASCII);
+        ::ShowErrorMessageHwndRes(*this, IDS_PASSWORD_USE_ASCII);
         return;
       }
-      if (::MessageBoxW(*this, LangString(IDS_PASSWORD_USE_ASCII),
-          L"NanaZip", MB_OKCANCEL | MB_ICONWARNING) != IDOK)
+      if (::MessageBoxW(
+              *this,
+              ::LangString(IDS_PASSWORD_USE_ASCII),
+              L"NanaZip",
+              MB_OKCANCEL | MB_ICONWARNING) != IDOK)
         return;
     }
-    if (isAesMode)
+    if (IsAesMode)
     {
-      AString_Wipe utf8Password;
-      ConvertUnicodeToUTF8(Info.Password, utf8Password);
-      if (utf8Password.Len() > 99)
+      AString_Wipe Utf8Password;
+      ::ConvertUnicodeToUTF8(this->Info.Password, Utf8Password);
+      if (Utf8Password.Len() > 99)
       {
-        ShowErrorMessageHwndRes(*this, IDS_PASSWORD_TOO_LONG);
+        ::ShowErrorMessageHwndRes(*this, IDS_PASSWORD_TOO_LONG);
         return;
       }
     }
