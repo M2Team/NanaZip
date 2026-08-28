@@ -1281,10 +1281,10 @@ void CCompressDialog::OnOK()
     }
     if (IsAesMode)
     {
-      const UInt32 kWzAesPasswordSizeMax = 99;
+      const UInt32 MaximumPasswordSize = 99;
       AString_Wipe Utf8Password;
       ::ConvertUnicodeToUTF8(this->Info.Password, Utf8Password);
-      if (kWzAesPasswordSizeMax < Utf8Password.Len())
+      if (MaximumPasswordSize < Utf8Password.Len())
       {
         ::ShowErrorMessageHwndRes(*this, IDS_PASSWORD_TOO_LONG);
         return;
