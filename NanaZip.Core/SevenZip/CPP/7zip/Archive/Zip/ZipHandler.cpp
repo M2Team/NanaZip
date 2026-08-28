@@ -1123,17 +1123,19 @@ HRESULT CZipDecoder::Decode(
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
         if (wzAesMode)
         {
-          ::ConvertUnicodeToUTF8((LPCOLESTR)password, WzAesUtf8Password);
+          ::ConvertUnicodeToUTF8(
+              static_cast<LPCOLESTR>(password),
+              WzAesUtf8Password);
           ::UnicodeStringToMultiByte2(
               WzAesCodePagePassword,
-              (LPCOLESTR)password,
+              static_cast<LPCOLESTR>(password),
               CP_ACP);
         }
         else
         {
           ::UnicodeStringToMultiByte2(
               charPassword,
-              (LPCOLESTR)password,
+              static_cast<LPCOLESTR>(password),
               CP_ACP);
         }
         // **************** NanaZip Modification End ****************
@@ -1165,9 +1167,9 @@ HRESULT CZipDecoder::Decode(
       if (!wzAesMode)
       {
         HRESULT Result = cryptoSetPassword->CryptoSetPassword(
-            (const Byte *)(const char *)charPassword,
+            reinterpret_cast<const Byte *>(charPassword.Ptr()),
             charPassword.Len());
-        if (Result != S_OK)
+        if (S_OK != Result)
         {
           res = NExtract::NOperationResult::kWrongPassword;
           return S_OK;
@@ -1315,22 +1317,20 @@ HRESULT CZipDecoder::Decode(
           if (!_wzAesDecoder->Init_and_CheckPassword())
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
           bool IsPasswordCorrect = false;
-          if (this->_wzAesDecoder->CryptoSetPassword(
-              (const Byte *)(const char *)WzAesUtf8Password,
-              WzAesUtf8Password.Len()) == S_OK)
+          if (S_OK == this->_wzAesDecoder->CryptoSetPassword(
+              reinterpret_cast<const Byte *>(WzAesUtf8Password.Ptr()),
+              WzAesUtf8Password.Len()))
           {
-            IsPasswordCorrect =
-                this->_wzAesDecoder->Init_and_CheckPassword();
+            IsPasswordCorrect = this->_wzAesDecoder->Init_and_CheckPassword();
           }
           if (!IsPasswordCorrect &&
               WzAesCodePagePassword != WzAesUtf8Password)
           {
-            if (this->_wzAesDecoder->CryptoSetPassword(
-                (const Byte *)(const char *)WzAesCodePagePassword,
-                WzAesCodePagePassword.Len()) == S_OK)
+            if (S_OK == this->_wzAesDecoder->CryptoSetPassword(
+                reinterpret_cast<const Byte *>(WzAesCodePagePassword.Ptr()),
+                WzAesCodePagePassword.Len()))
             {
-              IsPasswordCorrect =
-                  this->_wzAesDecoder->Init_and_CheckPassword();
+              IsPasswordCorrect = this->_wzAesDecoder->Init_and_CheckPassword();
             }
           }
           WzAesUtf8Password.Wipe_and_Empty();

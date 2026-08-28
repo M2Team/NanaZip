@@ -1270,18 +1270,21 @@ void CCompressDialog::OnOK()
         ::ShowErrorMessageHwndRes(*this, IDS_PASSWORD_USE_ASCII);
         return;
       }
-      if (::MessageBoxW(
-              *this,
-              ::LangString(IDS_PASSWORD_USE_ASCII),
-              L"NanaZip",
-              MB_OKCANCEL | MB_ICONWARNING) != IDOK)
+      if (IDOK != ::MessageBoxW(
+          *this,
+          ::LangString(IDS_PASSWORD_USE_ASCII),
+          L"NanaZip",
+          MB_OKCANCEL | MB_ICONWARNING))
+      {
         return;
+      }
     }
     if (IsAesMode)
     {
+      const UInt32 kWzAesPasswordSizeMax = 99;
       AString_Wipe Utf8Password;
       ::ConvertUnicodeToUTF8(this->Info.Password, Utf8Password);
-      if (Utf8Password.Len() > 99)
+      if (kWzAesPasswordSizeMax < Utf8Password.Len())
       {
         ::ShowErrorMessageHwndRes(*this, IDS_PASSWORD_TOO_LONG);
         return;

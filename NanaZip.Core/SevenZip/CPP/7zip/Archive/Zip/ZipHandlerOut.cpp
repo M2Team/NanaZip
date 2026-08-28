@@ -427,19 +427,29 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
       if (options.IsAesMode)
       {
         if (password)
-          ::ConvertUnicodeToUTF8((LPCOLESTR)password, options.Password);
-        if (options.Password.Len() > NCrypto::NWzAes::kPasswordSizeMax)
+        {
+          ::ConvertUnicodeToUTF8(
+              static_cast<LPCOLESTR>(password),
+              options.Password);
+        }
+        if (NCrypto::NWzAes::kPasswordSizeMax < options.Password.Len())
+        {
           return E_INVALIDARG;
+        }
       }
       else
       {
         if (!IsSimpleAsciiString(password))
+        {
           return E_INVALIDARG;
+        }
         if (password)
+        {
           ::UnicodeStringToMultiByte2(
               options.Password,
-              (LPCOLESTR)password,
+              static_cast<LPCOLESTR>(password),
               CP_OEMCP);
+        }
       }
       // **************** NanaZip Modification End ****************
     }
