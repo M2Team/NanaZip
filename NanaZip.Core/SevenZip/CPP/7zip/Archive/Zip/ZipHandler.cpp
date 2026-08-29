@@ -993,7 +993,7 @@ HRESULT CZipDecoder::Decode(
   bool pkAesMode = false;
   // **************** NanaZip Modification Start ****************
   AString_Wipe WzAesUtf8Password;
-  AString_Wipe WzAesCodePagePassword;
+  AString_Wipe WzAesDefaultEncodingPassword;
   // **************** NanaZip Modification End ****************
 
   bool badDescriptor = item.IsBadDescriptor();
@@ -1127,7 +1127,7 @@ HRESULT CZipDecoder::Decode(
               static_cast<LPCOLESTR>(password),
               WzAesUtf8Password);
           ::UnicodeStringToMultiByte2(
-              WzAesCodePagePassword,
+              WzAesDefaultEncodingPassword,
               static_cast<LPCOLESTR>(password),
               CP_ACP);
         }
@@ -1324,17 +1324,18 @@ HRESULT CZipDecoder::Decode(
             IsPasswordCorrect = this->_wzAesDecoder->Init_and_CheckPassword();
           }
           if (!IsPasswordCorrect &&
-              WzAesCodePagePassword != WzAesUtf8Password)
+              WzAesDefaultEncodingPassword != WzAesUtf8Password)
           {
             if (S_OK == this->_wzAesDecoder->CryptoSetPassword(
-                reinterpret_cast<const Byte *>(WzAesCodePagePassword.Ptr()),
-                WzAesCodePagePassword.Len()))
+                reinterpret_cast<const Byte *>(
+                    WzAesDefaultEncodingPassword.Ptr()),
+                WzAesDefaultEncodingPassword.Len()))
             {
               IsPasswordCorrect = this->_wzAesDecoder->Init_and_CheckPassword();
             }
           }
           WzAesUtf8Password.Wipe_and_Empty();
-          WzAesCodePagePassword.Wipe_and_Empty();
+          WzAesDefaultEncodingPassword.Wipe_and_Empty();
           if (!IsPasswordCorrect)
           // **************** NanaZip Modification End ****************
           {
