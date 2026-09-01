@@ -1315,6 +1315,10 @@ HRESULT CZipDecoder::Decode(
           // **************** NanaZip Modification Start ****************
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
           if (!_wzAesDecoder->Init_and_CheckPassword())
+          {
+            res = NExtract::NOperationResult::kWrongPassword;
+            return S_OK;
+          }
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
           bool IsPasswordCorrect = false;
           if (S_OK == this->_wzAesDecoder->CryptoSetPassword(
@@ -1337,6 +1341,10 @@ HRESULT CZipDecoder::Decode(
           WzAesUtf8Password.Wipe_and_Empty();
           WzAesDefaultEncodingPassword.Wipe_and_Empty();
           if (!IsPasswordCorrect)
+          {
+            res = NExtract::NOperationResult::kWrongPassword;
+            return S_OK;
+          }
           // **************** NanaZip Modification End ****************
           {
             res = NExtract::NOperationResult::kWrongPassword;
