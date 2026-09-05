@@ -26,7 +26,7 @@
 
 ## BLAKE3
 
-- NanaZip.Codecs: 1.8.5
+- NanaZip.Codecs: 1.8.7
 
 ## Brotli
 
