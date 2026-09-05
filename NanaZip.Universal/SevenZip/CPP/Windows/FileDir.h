@@ -46,6 +46,7 @@ bool SetFileAttrib(CFSTR path, DWORD attrib);
 #else
 
 int my_chown(CFSTR path, uid_t owner, gid_t group);
+int my_chown_Link(CFSTR path, uid_t owner, gid_t group);
 
 #endif
 

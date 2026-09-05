@@ -2866,6 +2866,8 @@ static void PrintPercents(IBenchPrintCallback &f, UInt64 val, UInt64 divider, un
 static void PrintChars(IBenchPrintCallback &f, char c, unsigned size)
 {
   char s[256];
+  if (size >= sizeof(s))
+    size = sizeof(s) - 1;
   memset(s, (Byte)c, size);
   s[size] = 0;
   f.Print(s);
@@ -4070,7 +4072,8 @@ HRESULT Bench(
           ));
         if (start >= freq * 16)
         {
-          printCallback->Print(" (Cmplx)");
+          if (printCallback)
+            printCallback->Print(" (Cmplx)");
           if (!freqCallback) // we don't want complexity change for old gui lzma benchmark
           {
             needSetComplexity = true;
@@ -4658,6 +4661,8 @@ HRESULT Bench(
     }
   }
  
+  if (!printCallback)
+    return E_NOTIMPL;
   IBenchPrintCallback &f = *printCallback;
 
   if (threadsPassIndex > 0)

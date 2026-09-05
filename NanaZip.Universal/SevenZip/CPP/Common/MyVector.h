@@ -92,6 +92,21 @@ public:
     _size = newSize;
   }
 
+  void ChangeSize_KeepData_plus_AdditionalReserve(const unsigned newSize)
+  {
+    if (newSize > _capacity)
+    {
+      if (newSize > k_VectorSizeMax)
+        throw 2021;
+      const unsigned rem = k_VectorSizeMax - newSize;
+      unsigned add = newSize >> 2;
+      if (add > rem)
+          add = rem;
+      ReAllocForNewCapacity(newSize + add);
+    }
+    _size = newSize;
+  }
+
   void ClearAndReserve(unsigned newCapacity)
   {
     Clear();

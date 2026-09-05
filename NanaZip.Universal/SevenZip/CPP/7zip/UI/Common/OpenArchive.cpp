@@ -524,32 +524,55 @@ static HRESULT Archive_GetArcProp_Int(IInArchive *arc, PROPID propid, Int64 &res
 
 #ifndef Z7_SFX
 
-HRESULT CArc::GetItem_PathToParent(UInt32 index, UInt32 parent, UStringVector &parts) const
+HRESULT CArc::GetItem_PathToParent(UInt32 index, const UInt32 parent, UStringVector &parts) const
 {
   if (!GetRawProps)
     return E_FAIL;
   if (index == parent)
     return S_OK;
-  UInt32 curIndex = index;
   
+  CRecordVector<UInt32> vec;
   UString s;
-  
-  bool prevWasAltStream = false;
-  
+  bool isAltStream = false;
+
   for (;;)
   {
-    #ifdef MY_CPU_LE
+    vec.Add(index);
+    UInt32 curParent = (UInt32)(Int32)-1;
+    UInt32 parentType = 0;
+    RINOK(GetRawProps->GetParent(index, &curParent, &parentType))
+
+    if (parentType == NParentType::kAltStream)
+    {
+      // that case is not expected because
+      // we don't call GetItem_PathToParent() function for alt stream items
+      if (vec.Size() != 1)
+        return E_FAIL;
+      isAltStream = true;
+    }
+    if (parent == curParent)
+      break;
+    if (curParent == (UInt32)(Int32)-1)
+      return E_FAIL;
+    index = curParent;
+  }
+
+  unsigned k = vec.Size();
+  do
+  {
+    index = vec[--k];
+#ifdef MY_CPU_LE
     const void *p;
     UInt32 size;
     UInt32 propType;
-    RINOK(GetRawProps->GetRawProp(curIndex, kpidName, &p, &size, &propType))
+    RINOK(GetRawProps->GetRawProp(index, kpidName, &p, &size, &propType))
     if (p && propType == PROP_DATA_TYPE_wchar_t_PTR_Z_LE)
       s = (const wchar_t *)p;
     else
-    #endif
+#endif
     {
       NCOM::CPropVariant prop;
-      RINOK(Archive->GetProperty(curIndex, kpidName, &prop))
+      RINOK(Archive->GetProperty(index, kpidName, &prop))
       if (prop.vt == VT_BSTR && prop.bstrVal)
         s.SetFromBstr(prop.bstrVal);
       else if (prop.vt == VT_EMPTY)
@@ -557,51 +580,17 @@ HRESULT CArc::GetItem_PathToParent(UInt32 index, UInt32 parent, UStringVector &p
       else
         return E_FAIL;
     }
-
-    UInt32 curParent = (UInt32)(Int32)-1;
-    UInt32 parentType = 0;
-    RINOK(GetRawProps->GetParent(curIndex, &curParent, &parentType))
-
-    // 18.06: fixed : we don't want to split name to parts
-    /*
-    if (parentType != NParentType::kAltStream)
+    if (isAltStream && k == 0 && !parts.IsEmpty())
     {
-      for (;;)
-      {
-        int pos = s.ReverseFind_PathSepar();
-        if (pos < 0)
-        {
-          break;
-        }
-        parts.Insert(0, s.Ptr(pos + 1));
-        s.DeleteFrom(pos);
-      }
+      UString &s2 = parts.Back();
+      s2.Add_Colon();
+      s2 += s;
     }
-    */
-    
-    parts.Insert(0, s);
-
-    if (prevWasAltStream)
-    {
-      {
-        UString &s2 = parts[parts.Size() - 2];
-        s2.Add_Colon();
-        s2 += parts.Back();
-      }
-      parts.DeleteBack();
-    }
-
-    if (parent == curParent)
-      return S_OK;
-    
-    prevWasAltStream = false;
-    if (parentType == NParentType::kAltStream)
-      prevWasAltStream = true;
-    
-    if (curParent == (UInt32)(Int32)-1)
-      return E_FAIL;
-    curIndex = curParent;
+    else
+      parts.Add(s);
   }
+  while (k);
+  return S_OK;
 }
 
 #endif
@@ -888,7 +877,7 @@ HRESULT CArc::GetItem(UInt32 index, CReadArcItem &item) const
   {
     /* Good handler must support GetRawProps::GetParent for alt streams.
        So the following code currently is not used */
-    int colon = FindAltStreamColon_in_Path(item.Path);
+    const int colon = FindAltStreamColon_in_Path(item.Path);
     if (colon >= 0)
     {
       item.MainPath.DeleteFrom((unsigned)colon);
@@ -3400,8 +3389,7 @@ HRESULT CArchiveLink::Open(COpenOptions &op)
 HRESULT CArchiveLink::Open2(COpenOptions &op, IOpenCallbackUI *callbackUI)
 {
   VolumesSize = 0;
-  COpenCallbackImp *openCallbackSpec = new COpenCallbackImp;
-  CMyComPtr<IArchiveOpenCallback> callback = openCallbackSpec;
+  CMyComPtr2_Create<IArchiveOpenCallback, COpenCallbackImp> openCallbackSpec;
   openCallbackSpec->Callback = callbackUI;
 
   FString prefix, name;
@@ -3416,8 +3404,8 @@ HRESULT CArchiveLink::Open2(COpenOptions &op, IOpenCallbackUI *callbackUI)
     openCallbackSpec->SetSubArchiveName(op.filePath);
   }
 
-  op.callback = callback;
-  op.callbackSpec = openCallbackSpec;
+  op.callback = openCallbackSpec;
+  op.callbackSpec = openCallbackSpec.ClsPtr();
   
   HRESULT res = Open(op);
 

@@ -846,13 +846,18 @@ Z7_COM7F_IMF(CArchiveUpdateCallback::ReportOperation(UInt32 indexType, UInt32 in
   {
     if (index != (UInt32)(Int32)-1)
     {
+      // v26.03: we have no way to convert index_in_server to index_in_ArcItems
+      // so the code was commented:
+      /*
       if (ArcItems)
       {
         const CArcItem &ai = (*ArcItems)[index];
         s = ai.Name;
         isDir = ai.IsDir;
       }
-      else if (Arc)
+      else
+      */
+      if (Arc)
       {
         RINOK(Arc->GetItem_Path(index, s2))
         s = s2;
@@ -905,9 +910,13 @@ Z7_COM7F_IMF(CArchiveUpdateCallback::ReportExtractResult(UInt32 indexType, UInt3
   {
     if (index != (UInt32)(Int32)-1)
     {
+      // v26.03: we have no way to convert index_in_server to index_in_ArcItems
+      /*
       if (ArcItems)
         s = (*ArcItems)[index].Name;
-      else if (Arc)
+      else
+      */
+      if (Arc)
       {
         RINOK(Arc->GetItem_Path(index, s2))
         s = s2;

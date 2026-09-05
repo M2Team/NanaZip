@@ -882,7 +882,7 @@ Z7_COM7F_IMF(CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
 
   UInt32 realProcessedSize;
   BOOL res = TRUE;
-  if (size > 0)
+  if (size)
   {
     // Seems that Windows doesn't like big amounts writing to stdout.
     // So we limit portions by 32KB.
@@ -892,8 +892,8 @@ Z7_COM7F_IMF(CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
     res = ::WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),
         data, sizeTemp, (DWORD *)&realProcessedSize, NULL);
     _size += realProcessedSize;
-    size -= realProcessedSize;
-    data = (const void *)((const Byte *)data + realProcessedSize);
+    // size -= realProcessedSize;
+    // data = (const void *)((const Byte *)data + realProcessedSize);
     if (processedSize)
       *processedSize += realProcessedSize;
   }

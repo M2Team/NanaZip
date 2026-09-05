@@ -394,5 +394,10 @@ Z7_COM7F_IMF(COpenCallbackImp::SetTotal(const UInt64 /* total */))
 
 Z7_COM7F_IMF(COpenCallbackImp::SetCompleted(const UInt64 * /* completed */))
 {
-  return S_OK;
+  // this call can be used for additional structure parsing after archive openning.
+  // so we ignore completed
+  // we just want to process open break
+  if (!Callback)
+    return S_OK;
+  return Callback->Open_CheckBreak();
 }
