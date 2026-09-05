@@ -51,7 +51,7 @@ struct writelist {
 
 struct LZ5MT_CCtx_s {
 
-	/* level: 1..LZ5MT_LEVEL_MAX */
+	/* level: LZ5MT_LEVEL_MIN..LZ5MT_LEVEL_MAX */
 	int level;
 
 	/* threads: 1..LZ5MT_THREAD_MAX */

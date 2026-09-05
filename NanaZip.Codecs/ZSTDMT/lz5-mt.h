@@ -98,7 +98,7 @@ typedef struct LZ5MT_CCtx_s LZ5MT_CCtx;
  * 1) allocate new cctx
  * - return cctx or zero on error
  *
- * @level   - 1 .. 9
+ * @level   - LZ5MT_LEVEL_MIN .. LZ5MT_LEVEL_MAX
  * @threads - 1 .. LZ5MT_THREAD_MAX
  * @inputsize - if zero, becomes some optimal value for the level
  *            - if nonzero, the given value is taken

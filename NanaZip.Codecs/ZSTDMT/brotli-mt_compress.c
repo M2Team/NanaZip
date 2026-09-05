@@ -50,7 +50,7 @@ struct writelist {
 
 struct BROTLIMT_CCtx_s {
 
-	/* levels: 1..BROTLIMT_LEVEL_MAX */
+	/* level: BROTLIMT_LEVEL_MIN..BROTLIMT_LEVEL_MAX */
 	int level;
 
 	/* threads: 0..BROTLIMT_THREAD_MAX */

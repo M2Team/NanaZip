@@ -98,7 +98,7 @@ typedef struct LZ4MT_CCtx_s LZ4MT_CCtx;
  * 1) allocate new cctx
  * - return cctx or zero on error
  *
- * @level   - 1 .. 9
+ * @level   - LZ4MT_LEVEL_MIN .. LZ4MT_LEVEL_MAX
  * @threads - 1 .. LZ4MT_THREAD_MAX
  * @inputsize - if zero, becomes some optimal value for the level
  *            - if nonzero, the given value is taken

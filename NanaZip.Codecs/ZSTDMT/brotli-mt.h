@@ -96,8 +96,9 @@ typedef struct BROTLIMT_CCtx_s BROTLIMT_CCtx;
  * 1) allocate new cctx
  * - return cctx or zero on error
  *
- * @level   - 1 .. 9
- * @threads - 1 .. BROTLIMT_THREAD_MAX
+ * @level   - BROTLIMT_LEVEL_MIN .. BROTLIMT_LEVEL_MAX
+ * @threads - 1 .. BROTLIMT_THREAD_MAX, or 0 to process a raw
+ *            brotli stream single threaded (no mt container)
  * @inputsize - if zero, becomes some optimal value for the level
  *            - if nonzero, the given value is taken
  */
@@ -132,7 +133,8 @@ typedef struct BROTLIMT_DCtx_s BROTLIMT_DCtx;
  * 1) allocate new cctx
  * - return cctx or zero on error
  *
- * @threads - 1 .. BROTLIMT_THREAD_MAX
+ * @threads - 1 .. BROTLIMT_THREAD_MAX, or 0 to process a raw
+ *            brotli stream single threaded (no mt container)
  * @ inputsize - used for single threaded standard bro format without skippable frames
  */
 BROTLIMT_DCtx *BROTLIMT_createDCtx(int threads, int threadsset, int inputsize);

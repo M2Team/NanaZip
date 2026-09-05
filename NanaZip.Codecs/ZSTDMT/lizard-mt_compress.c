@@ -51,7 +51,7 @@ struct writelist {
 
 struct LIZARDMT_CCtx_s {
 
-	/* level: 1..LIZARDMT_LEVEL_MAX */
+	/* level: LIZARDMT_LEVEL_MIN..LIZARDMT_LEVEL_MAX */
 	int level;
 
 	/* threads: 1..LIZARDMT_THREAD_MAX */
