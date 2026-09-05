@@ -579,7 +579,7 @@ HRESULT CDatabase::Check_Item(unsigned index)
         const unsigned subBits = SectorSizeBits - k_MiniSectorSizeBits;
         const UInt32 fid = sid >> subBits;
         if (fid >= NumSectors_in_MiniStream)
-          return false;
+          return S_FALSE;
         sid = Mat[sid];
         if (size <= clusterSize)
           break;
@@ -887,12 +887,16 @@ HRESULT CDatabase::Open(IInStream *inStream)
         }
         else if (item.IsStorage())
         {
-          if (item.Size != 0) // by specification
-            return S_FALSE;
-          if (item.Sid != 0   // by specification
+          /* some old compound archives don't comply specification for (Size) and (Sid) fields for kStorage items.
+             But original Windows code ignores these errors.
+             We also ignore these errors: */
+#if 0
+          if (item.Size != 0  // by specification
+            || ( item.Sid != 0  // by specification
               && item.Sid != NFatID::kFree // NFatID::kFree is used in some AAF files
-              && item.Sid != NFatID::kEndOfChain)   // NFatID::kEndOfChain is used in QuickSet (selinc) file
-            return S_FALSE;
+              && item.Sid != NFatID::kEndOfChain))  // NFatID::kEndOfChain is used in QuickSet (selinc) file
+            HeadersWarning = true;
+#endif
         }
         // else if (item.Type == NItemType::kRootStorage) return S_FALSE;
         else if (item.IsEmptyType())
@@ -1375,9 +1379,10 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
       const unsigned subBits = _db.SectorSizeBits - k_MiniSectorSizeBits;
       const UInt32 fid = sid >> subBits;
       if (fid >= _db.NumSectors_in_MiniStream)
-        return false;
+        return S_FALSE;
+      const UInt32 temp = ((sid & ((1u << subBits) - 1)) << k_MiniSectorSizeBits);
       const UInt64 offset = (((UInt64)_db.MiniSids[fid] + 1) << _db.SectorSizeBits) +
-          ((sid & ((1u << subBits) - 1)) << k_MiniSectorSizeBits);
+          temp;
       if (phyPos != offset)
       {
         RINOK(InStream_SeekSet(_stream, offset))

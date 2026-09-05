@@ -237,14 +237,12 @@ struct CRef
   UInt64 TotalSize;
 };
 
-const UInt32 kBlockSize = 1 << 11;
+const unsigned kBlockSize = 1 << 11;
 
 class CInArchive
 {
-  IInStream *_stream;
   UInt64 _position;
-
-  UInt32 m_BufferPos;
+  unsigned m_BufferPos;
   
   void Skip(size_t size);
   void SkipZeros(size_t size);
@@ -255,23 +253,22 @@ class CInArchive
   UInt32 ReadUInt32Be();
   UInt32 ReadUInt32();
   UInt64 ReadUInt64();
-  UInt32 ReadDigits(int numDigits);
+  unsigned ReadDigits(unsigned numDigits);
   void ReadDateTime(CDateTime &d);
   void ReadRecordingDateTime(CRecordingDateTime &t);
-  void ReadDirRecord2(CDirRecord &r, Byte len);
-  void ReadDirRecord(CDirRecord &r);
+  void ReadDirRecord(CDirRecord &r, unsigned len, bool isJolietDescriptor = false);
 
   void ReadBootRecordDescriptor(CBootRecordDescriptor &d);
   void ReadVolumeDescriptor(CVolumeDescriptor &d);
 
   void SeekToBlock(UInt32 blockIndex);
-  void ReadDir(CDir &d, int level);
+  HRESULT ReadDir(CDir &d, unsigned level);
   void CreateRefs(CDir &d);
 
   void ReadBootInfo();
   HRESULT Open2();
 public:
-  HRESULT Open(IInStream *inStream);
+  HRESULT Open(IInStream *inStream, IArchiveOpenCallback *openCallback);
   void Clear();
 
   UInt64 _fileSize;
@@ -291,10 +288,12 @@ public:
   bool HeadersError;
   bool IncorrectBigEndian;
   bool TooDeepDirs;
+  bool TooBigMetadata;
   bool SelfLinkedDirs;
   bool IsSusp;
   unsigned SuspSkipSize;
 
+private:
   int _expand_BootEntries_index;
 
   CRecordVector<UInt32> UniqStartLocations;
@@ -307,12 +306,19 @@ public:
       PhySize = end;
   }
 
+public:
   bool IsJoliet() const { return VolDescs[MainVolDescIndex].IsJoliet(); }
 
   UInt64 GetBootItemSize(unsigned index) const;
 
 private:
   CDir _rootDir;
+  IInStream *_stream;
+  IArchiveOpenCallback *_openCallback;
+  UInt64 _numFiles;
+  UInt64 _processedBytes;
+  UInt64 _processedBytes_prev;
+
   Byte m_Buffer[kBlockSize];
   CBootRecordDescriptor _bootDesc;
 };

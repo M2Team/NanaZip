@@ -838,8 +838,6 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   // outStream.Release();
 
-  retResult = NExtract::NOperationResult::kDataError;
-
   if (!_isArc)
     retResult = NExtract::NOperationResult::kIsNotArc;
   else if (_needMoreInput)

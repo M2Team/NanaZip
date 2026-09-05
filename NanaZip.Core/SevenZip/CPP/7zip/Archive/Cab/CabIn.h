@@ -97,20 +97,15 @@ struct CDatabase
         return true;
     return false;
   }
-  
-  int GetNumberOfNewFolders() const
-  {
-    int res = (int)Folders.Size();
-    if (IsTherePrevFolder())
-      res--;
-    return res;
-  }
 };
 
 
 struct CDatabaseEx: public CDatabase
 {
   CMyComPtr<IInStream> Stream;
+  int StartGlobalFolderIndex; // == (-1), if there are links to a previous volume that is missing or contains an error
+  
+  CDatabaseEx(): StartGlobalFolderIndex(-1) {}
 };
 
 
@@ -123,31 +118,29 @@ struct CMvItem
 
 class CMvDatabaseEx
 {
-  bool AreItemsEqual(unsigned i1, unsigned i2);
+  bool AreItemsEqual(unsigned i1, unsigned i2) const;
 
 public:
   CObjectVector<CDatabaseEx> Volumes;
   CRecordVector<CMvItem> Items;
-  CRecordVector<int> StartFolderOfVol; // can be negative
-  CRecordVector<unsigned> FolderStartFileIndex;
+  CRecordVector<unsigned> FolderStartFileIndex; // GlobalFolderIndex to Items[] index
 
-  int GetFolderIndex(const CMvItem *mvi) const
+  // out: (returned_value == -1) is possible, if (mvi) refers to a previous volume that is missing or contains an error
+  int GetGlobalFolderIndex(const CMvItem &mvi) const
   {
-    const CDatabaseEx &db = Volumes[mvi->VolumeIndex];
-    return StartFolderOfVol[mvi->VolumeIndex] +
-        db.Items[mvi->ItemIndex].GetFolderIndex(db.Folders.Size());
+    const CDatabaseEx &db = Volumes[mvi.VolumeIndex];
+    return db.StartGlobalFolderIndex +
+        db.Items[mvi.ItemIndex].GetFolderIndex(db.Folders.Size());
   }
 
   void Clear()
   {
     Volumes.Clear();
     Items.Clear();
-    StartFolderOfVol.Clear();
     FolderStartFileIndex.Clear();
   }
   
-  void FillSortAndShrink();
-  bool Check();
+  bool Fill_Sort_Shrink_and_Check();
 };
 
 

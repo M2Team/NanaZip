@@ -1170,6 +1170,7 @@ HRESULT CHandler::Open3()
 
   HeadersSize = (UInt32)1 << 20;
   CHeader headers[2];
+  Z7_memset_0_ARRAY(headers);
   {
     Byte header[kHeader2Size];
     for (unsigned i = 0; i < 2; i++)
@@ -1224,6 +1225,7 @@ HRESULT CHandler::Open3()
     }
   }
   CRegion regions[2];
+  Z7_memset_0_ARRAY(regions);
   int correctRegionIndex = -1;
 
   {

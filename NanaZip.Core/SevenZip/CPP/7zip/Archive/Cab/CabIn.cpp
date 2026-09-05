@@ -31,9 +31,11 @@ void CInArchive::Read(Byte *data, unsigned size)
     throw CUnexpectedEndException();
 }
 
+static const size_t k_Name_Size_Limit = 1 << 13;
+
 void CInArchive::ReadName(AString &s)
 {
-  for (size_t i = 0; i < ((size_t)1 << 13); i++)
+  for (size_t i = 0; i < k_Name_Size_Limit; i++)
   {
     Byte b;
     if (!_inBuffer.ReadByte(b))
@@ -43,8 +45,6 @@ void CInArchive::ReadName(AString &s)
       s.SetFrom((const char *)(const Byte *)_tempBuf, (unsigned)i);
       return;
     }
-    if (_tempBuf.Size() == i)
-      _tempBuf.ChangeSize_KeepData(i * 2, i);
     _tempBuf[i] = b;
   }
   
@@ -58,7 +58,7 @@ void CInArchive::ReadName(AString &s)
   }
   
   ErrorInNames = true;
-  s = "[ERROR-LONG-PATH]";
+  s = "[LONG_PATH_FILE]";
 }
 
 void CInArchive::ReadOtherArc(COtherArc &oa)
@@ -268,14 +268,14 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
   IsArc = true;
 
   _inBuffer.SetStream(limitedStream);
-  if (_tempBuf.Size() == 0)
-    _tempBuf.Alloc(1 << 12);
+  _tempBuf.Alloc(k_Name_Size_Limit);
 
   Byte p[16];
   const unsigned nextSize = 4 + (ai.ReserveBlockPresent() ? 4 : 0);
   Read(p, nextSize);
   ai.SetID = Get16(p);
   ai.CabinetNumber = Get16(p + 2);
+  // printf("CabinetNumber=%5u \n", ai.CabinetNumber);
 
   if (ai.ReserveBlockPresent())
   {
@@ -302,10 +302,9 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     folder.MethodMinor = p[7];
     Skip(ai.PerFolder_AreaSize);
     db.Folders.AddInReserved(folder);
+    // printf("folder=%5u DataStart=%8u numBlocks=%8u\n", i, folder.DataStart, folder.NumDataBlocks);
   }
   
-  // for (int iii = 0; iii < 10000; iii++) {
-
   if (_inBuffer.GetProcessedSize() - startInBuf != ai.FileHeadersOffset)
   {
     // printf("\n!!! Seek Error !!!!\n");
@@ -315,8 +314,14 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     _inBuffer.Init();
   }
 
+/*
+  if (FolderIndex == kContinuedFromPrev || FolderIndex == kContinuedPrevAndNext),
+     then there are no (FolderIndex == 0) items in that cab volume.
+     But (FolderIndex == kContinuedToNext) and (FolderIndex == numFolders - 1) items are possible in same volume.
+  if there are multiple files with (FolderIndex == kContinuedToNext), then they are duplicated
+  in next volume with (FolderIndex == kContinuedFromPrev or kContinuedPrevAndNext).
+*/
   db.Items.ClearAndReserve(ai.NumFiles);
-
   for (i = 0; i < ai.NumFiles; i++)
   {
     Read(p, 16);
@@ -328,18 +333,15 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     const UInt16 pureTime = Get16(p + 12);
     item.Time = (((UInt32)pureDate << 16)) | pureTime;
     item.Attributes = Get16(p + 14);
-
     ReadName(item.Name);
-    
-    if (item.GetFolderIndex(db.Folders.Size()) >= (int)db.Folders.Size())
+    // printf("  -file=%5u Folder=%5x Offset=%10u size=%10u %s\n", i, item.FolderIndex, item.Offset, item.Size, item.Name.Ptr());
+    const unsigned numFolders = db.Folders.Size();
+    if (numFolders == 0 || item.GetFolderIndex(numFolders) >= (int)numFolders)
     {
       HeaderError = true;
       return S_FALSE;
     }
   }
-  
-  // }
-  
   return S_OK;
 }
 
@@ -365,12 +367,8 @@ static int CompareMvItems(const CMvItem *p1, const CMvItem *p2, void *param)
   const CDatabaseEx &db2 = mvDb.Volumes[p2->VolumeIndex];
   const CItem &item1 = db1.Items[p1->ItemIndex];
   const CItem &item2 = db2.Items[p2->ItemIndex];
-  const bool isDir1 = item1.IsDir();
-  const bool isDir2 = item2.IsDir();
-  if (isDir1 && !isDir2) return -1;
-  if (isDir2 && !isDir1) return 1;
-  const int f1 = mvDb.GetFolderIndex(p1);
-  const int f2 = mvDb.GetFolderIndex(p2);
+  const int f1 = mvDb.GetGlobalFolderIndex(*p1);
+  const int f2 = mvDb.GetGlobalFolderIndex(*p2);
   RINOZ(MyCompare(f1, f2))
   RINOZ(MyCompare(item1.Offset, item2.Offset))
   RINOZ(MyCompare(item1.Size, item2.Size))
@@ -379,37 +377,39 @@ static int CompareMvItems(const CMvItem *p1, const CMvItem *p2, void *param)
 }
 
 
-bool CMvDatabaseEx::AreItemsEqual(unsigned i1, unsigned i2)
+bool CMvDatabaseEx::AreItemsEqual(unsigned i1, unsigned i2) const
 {
-  const CMvItem *p1 = &Items[i1];
-  const CMvItem *p2 = &Items[i2];
-  const CDatabaseEx &db1 = Volumes[p1->VolumeIndex];
-  const CDatabaseEx &db2 = Volumes[p2->VolumeIndex];
-  const CItem &item1 = db1.Items[p1->ItemIndex];
-  const CItem &item2 = db2.Items[p2->ItemIndex];
-  return GetFolderIndex(p1) == GetFolderIndex(p2)
+  const CMvItem &p1 = Items[i1];
+  const CMvItem &p2 = Items[i2];
+  const CDatabaseEx &db1 = Volumes[p1.VolumeIndex];
+  const CDatabaseEx &db2 = Volumes[p2.VolumeIndex];
+  const CItem &item1 = db1.Items[p1.ItemIndex];
+  const CItem &item2 = db2.Items[p2.ItemIndex];
+  return GetGlobalFolderIndex(p1) == GetGlobalFolderIndex(p2)
       && item1.Offset == item2.Offset
       && item1.Size == item2.Size
       && item1.Name == item2.Name;
 }
 
 
-void CMvDatabaseEx::FillSortAndShrink()
+bool CMvDatabaseEx::Fill_Sort_Shrink_and_Check()
+{
 {
   Items.Clear();
-  StartFolderOfVol.Clear();
   FolderStartFileIndex.Clear();
   
   int offset = 0;
   
   FOR_VECTOR (v, Volumes)
   {
-    const CDatabaseEx &db = Volumes[v];
-    int curOffset = offset;
+    CDatabaseEx &db = Volumes[v];
     if (db.IsTherePrevFolder())
-      curOffset--;
-    StartFolderOfVol.Add(curOffset);
-    offset += db.GetNumberOfNewFolders();
+      offset--;
+    db.StartGlobalFolderIndex = offset;
+    // printf("vol=%5u StartGlobalFolderIndex=%8d\n", v, offset);
+    offset += (int)db.Folders.Size();
+    if (offset < -1) // overflow
+      return false;
 
     CMvItem mvItem;
     mvItem.VolumeIndex = v;
@@ -433,15 +433,12 @@ void CMvDatabaseEx::FillSortAndShrink()
 
   FOR_VECTOR (i, Items)
   {
-    const int folderIndex = GetFolderIndex(&Items[i]);
+    const int folderIndex = GetGlobalFolderIndex(Items[i]);
     while (folderIndex >= (int)FolderStartFileIndex.Size())
       FolderStartFileIndex.Add(i);
   }
 }
 
-
-bool CMvDatabaseEx::Check()
-{
   for (unsigned v = 1; v < Volumes.Size(); v++)
   {
     const CDatabaseEx &db1 = Volumes[v];
@@ -465,14 +462,12 @@ bool CMvDatabaseEx::Check()
   FOR_VECTOR (i, Items)
   {
     const CMvItem &mvItem = Items[i];
-    const int fIndex = GetFolderIndex(&mvItem);
+    const int fIndex = GetGlobalFolderIndex(mvItem);
     if (fIndex >= (int)FolderStartFileIndex.Size())
       return false;
     const CItem &item = Volumes[mvItem.VolumeIndex].Items[mvItem.ItemIndex];
-    if (item.IsDir())
-      continue;
     
-    const int folderIndex = GetFolderIndex(&mvItem);
+    const int folderIndex = GetGlobalFolderIndex(mvItem);
   
     if (folderIndex != prevFolder)
       prevFolder = folderIndex;

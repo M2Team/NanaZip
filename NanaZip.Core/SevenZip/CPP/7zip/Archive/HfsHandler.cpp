@@ -1429,7 +1429,10 @@ HRESULT CDatabase::Open2(IInStream *inStream, IArchiveOpenCallback *progress)
     const unsigned sector_of_FirstBlock = Get16a(p + 0x1c); // drAlBlSt : first allocation block in volume
     const UInt32 startBlock = Get16a(p + 0x7c + 2);
     const UInt32 blockCount = Get16a(p + 0x7c + 4);
-    SpecOffset = (UInt32)sector_of_FirstBlock << 9; // it's 32-bit here
+    {
+      const UInt32 temp = (UInt32)sector_of_FirstBlock << 9; // it's 32-bit here
+      SpecOffset = temp;
+    }
     PhySize2 = SpecOffset + (UInt64)numBlocks * blockSize;
     SpecOffset += (UInt64)startBlock * blockSize;
     // before v24.09: // SpecOffset = (UInt64)(1 + startBlock) * blockSize;

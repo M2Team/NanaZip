@@ -2393,10 +2393,7 @@ HRESULT CInArchive::ReadVols()
       {
         // get volumes required for cd.
         RINOK(ReadVols2(volCallback, (unsigned)cdDisk, zipDisk, zipDisk, 0, numMissingVols))
-        if (numMissingVols != 0)
-        {
-          // cdOK = false;
-        }
+        // if (numMissingVols) cdOK = false;
       }
     }
     else if (res != S_FALSE)

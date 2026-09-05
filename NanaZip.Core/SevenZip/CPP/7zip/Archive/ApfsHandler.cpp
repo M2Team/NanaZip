@@ -3829,7 +3829,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
      #ifdef APFS_SHOW_ALT_STREAMS
       if (ref.IsAltStream())
       {
-        // if (inode)
+        if (inode)
         {
           const CAttr &attr = inode->Attrs[(unsigned)ref.AttrIndex];
           ConvertUTF8ToUnicode(attr.Name, s);

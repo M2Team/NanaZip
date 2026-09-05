@@ -25,7 +25,7 @@ CExtToIconMap g_Ext_to_Icon_Map;
 int Shell_GetFileInfo_SysIconIndex_for_CSIDL(int csidl)
 {
   LPITEMIDLIST pidl = NULL;
-  SHGetSpecialFolderLocation(NULL, csidl, &pidl);
+  if (SHGetSpecialFolderLocation(NULL, csidl, &pidl) == S_OK)
   if (pidl)
   {
     SHFILEINFO shFileInfo;
@@ -333,6 +333,7 @@ int CExtToIconMap::GetIconIndex(DWORD attrib, const wchar_t *fileName /*, UStrin
 HIMAGELIST Shell_Get_SysImageList_smallIcons(bool smallIcons)
 {
   SHFILEINFO shFileInfo;
+  Z7_memset_0_VAR(shFileInfo); // optional
   // shFileInfo.hIcon = NULL; // optional
   const DWORD_PTR res = SHGetFileInfo(TEXT(""),
       /* FILE_ATTRIBUTE_ARCHIVE | */

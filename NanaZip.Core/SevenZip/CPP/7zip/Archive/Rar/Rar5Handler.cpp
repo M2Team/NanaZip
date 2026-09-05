@@ -1673,7 +1673,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     case kpidExtension:
       if (_arcs.Size() == 1)
       {
-        if (arcInfo->IsVolume())
+        if (arcInfo && arcInfo->IsVolume())
         {
           AString s ("part");
           UInt32 v = (UInt32)arcInfo->GetVolIndex() + 1;
@@ -1809,14 +1809,14 @@ static void TimeRecordToProp(const CItem &item, unsigned stampIndex, NCOM::CProp
     size -= num;
   }
 
-  if ((flags & (NTimeRecord::NFlags::kMTime << stampIndex)) == 0)
+  if (((UInt32)flags & (NTimeRecord::NFlags::kMTime << stampIndex)) == 0)
     return;
   
   unsigned numStamps = 0;
   unsigned curStamp = 0;
 
   for (unsigned i = 0; i < 3; i++)
-    if ((flags & (NTimeRecord::NFlags::kMTime << i)) != 0)
+    if (((UInt32)flags & (NTimeRecord::NFlags::kMTime << i)) != 0)
     {
       if (i == stampIndex)
         curStamp = numStamps;

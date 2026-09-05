@@ -859,8 +859,10 @@ HRESULT CInArchive::Open2()
         }
     }
   }
-  
-  PhySize = (UInt32)(256 + 1) << SecLogSize;
+  {
+    const UInt32 temp = (UInt32)(256 + 1) << SecLogSize;
+    PhySize = temp;
+  }
   IsArc = true;
 
   // UDF 2.2.3  AnchorVolumeDescriptorPointer

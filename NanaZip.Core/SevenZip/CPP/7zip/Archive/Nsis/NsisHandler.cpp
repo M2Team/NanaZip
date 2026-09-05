@@ -151,6 +151,16 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
       prop = v;
       break;
     }
+    case kpidWarningFlags:
+    {
+      UInt32 flags = 0;
+      if (_archive.CREATEDIR_processing_WasStopped
+          || _archive.FILENAME_processing_WasStopped)
+        flags |= kpv_ErrorFlags_HeadersError;
+      if (flags != 0)
+        prop = flags;
+      break;
+    }
     
     case kpidName:
     {

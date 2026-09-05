@@ -253,9 +253,10 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
         numBlocks = finish;
     
     _items.Add(item);
-    if (numPadSectors != 0)
     {
-      RINOK(stream->Seek(numPadSectors << 9, STREAM_SEEK_CUR, NULL))
+      const unsigned offset = numPadSectors << 9;
+      if (offset)
+        RINOK(stream->Seek(offset, STREAM_SEEK_CUR, NULL))
     }
     if (++i == numBlocksInMap)
       break;

@@ -51,12 +51,12 @@ IMP_IInArchive_ArcProps
 
 Z7_COM7F_IMF(CHandler::Open(IInStream *stream,
     const UInt64 * /* maxCheckStartPosition */,
-    IArchiveOpenCallback * /* openArchiveCallback */))
+    IArchiveOpenCallback *openCallback))
 {
   COM_TRY_BEGIN
   Close();
   {
-    RINOK(_archive.Open(stream))
+    RINOK(_archive.Open(stream, openCallback))
     _stream = stream;
   }
   return S_OK;
@@ -165,6 +165,8 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
         AddErrorMessage(s, "Self-linked directory");
       if (_archive.TooDeepDirs)
         AddErrorMessage(s, "Too deep directory levels");
+      if (_archive.TooBigMetadata)
+        AddErrorMessage(s, "Too big headers");
       if (!s.IsEmpty())
         prop = s;
       break;

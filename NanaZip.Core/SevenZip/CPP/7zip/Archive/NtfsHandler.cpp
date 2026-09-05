@@ -813,7 +813,8 @@ Z7_COM7F_IMF(CInStream::Read(void *data, UInt32 size, UInt32 *processedSize))
   {
     memset((Byte *)data, 0, size);
     _virtPos += size;
-    *processedSize = size;
+    if (processedSize)
+      *processedSize = size;
     return S_OK;
   }
 
@@ -836,7 +837,8 @@ Z7_COM7F_IMF(CInStream::Read(void *data, UInt32 size, UInt32 *processedSize))
       if (cur > size)
         cur = size;
       memcpy(data, _outBuf + (cacheIndex << _chunkSizeLog) + offset, cur);
-      *processedSize = (UInt32)cur;
+      if (processedSize)
+        *processedSize = (UInt32)cur;
       _virtPos += cur;
       return S_OK;
     }
@@ -1311,7 +1313,7 @@ bool CMftRec::Parse(Byte *p, unsigned sectorSizeLog, UInt32 numSectors, UInt32 r
     // PRF(printf("\nusn = %d", usn));
     for (UInt32 i = 1; i < numUsaItems; i++)
     {
-      void *pp = p + (i << sectorSizeLog) - 2;
+      void *pp = p + ((size_t)i << sectorSizeLog) - 2;
       if (Get16(pp) != usn)
         return false;
       SetUi16(pp, Get16(p + usaOffset + i * 2))

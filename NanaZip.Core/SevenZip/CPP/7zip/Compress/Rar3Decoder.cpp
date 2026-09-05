@@ -454,7 +454,7 @@ HRESULT CDecoder::DecodePPM(Int32 num, bool &keepDecompressing)
       }
     }
     if (InputEofError_Fast())
-      return false;
+      return S_FALSE;
     const int c = DecodePpmSymbol();
     if (c < 0)
     {

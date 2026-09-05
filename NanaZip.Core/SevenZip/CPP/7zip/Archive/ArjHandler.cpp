@@ -352,7 +352,7 @@ HRESULT CArcHeader::Parse(const Byte *p, unsigned size)
   pos += size1;
   size1 = size - pos;
   RINOK(ReadString(p + pos, size1, Comment))
-  pos += size1;
+  // pos += size1;
   return S_OK;
 }
 
@@ -462,8 +462,7 @@ HRESULT CItem::Parse(const Byte *p, unsigned size)
   pos += size1;
   size1 = size - pos;
   RINOK(ReadString(p + pos, size1, Comment))
-  pos += size1;
-
+  // pos += size1;
   return S_OK;
 }
 

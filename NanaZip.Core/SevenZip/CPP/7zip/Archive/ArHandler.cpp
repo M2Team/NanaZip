@@ -249,7 +249,7 @@ HRESULT CInArchive::GetNextItem(CItem &item, bool &filled)
   RIF(DecimalToNumber32(cur, kUserSize, item.User)) cur += kUserSize;
   RIF(DecimalToNumber32(cur, kUserSize, item.Group)) cur += kUserSize;
   RIF(OctalToNumber32(cur, kModeSize, item.Mode)) cur += kModeSize;
-  RIF(DecimalToNumber(cur, kSizeSize, item.Size)) cur += kSizeSize;
+  RIF(DecimalToNumber(cur, kSizeSize, item.Size)) // cur += kSizeSize;
 
   if (longNameLen != 0 && longNameLen <= item.Size)
   {

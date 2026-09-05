@@ -167,7 +167,9 @@ static const char * const k_ZoneId_StreamName_With_Colon_Prefix = ":Zone.Identif
 
 bool Is_ZoneId_StreamName(const wchar_t *s)
 {
-  return StringsAreEqualNoCase_Ascii(s, k_ZoneId_StreamName_With_Colon_Prefix + 1);
+  UString s2 = s;
+  Correct_AltStream_Name(s2);
+  return StringsAreEqualNoCase_Ascii(s2, k_ZoneId_StreamName_With_Colon_Prefix + 1);
 }
 
 void ReadZoneFile_Of_BaseFile(CFSTR fileName, CByteBuffer &buf)
@@ -364,31 +366,25 @@ void CArchiveExtractCallback::Init(
   _folderArchiveExtractCallback2.Release();
   _extractCallback2.QueryInterface(IID_IFolderArchiveExtractCallback2, &_folderArchiveExtractCallback2);
 
-  #ifndef Z7_SFX
-
+#ifndef Z7_SFX
+  _baseParentFolder = (UInt32)(Int32)-1;
+  _use_baseParentFolder_mode = false;
   ExtractToStreamCallback.Release();
   _extractCallback2.QueryInterface(IID_IFolderExtractToStreamCallback, &ExtractToStreamCallback);
   if (ExtractToStreamCallback)
   {
     Int32 useStreams = 0;
-    if (ExtractToStreamCallback->UseExtractToStream(&useStreams) != S_OK)
-      useStreams = 0;
-    if (useStreams == 0)
+    if (ExtractToStreamCallback->UseExtractToStream(&useStreams) != S_OK
+        || useStreams == 0)
       ExtractToStreamCallback.Release();
   }
-  
-  #endif
+#endif
 
   LocalProgressSpec->Init(extractCallback2, true);
   LocalProgressSpec->SendProgress = false;
  
   _removePathParts = removePathParts;
   _removePartsForAltStreams = removePartsForAltStreams;
-
-  #ifndef Z7_SFX
-  _baseParentFolder = (UInt32)(Int32)-1;
-  _use_baseParentFolder_mode = false;
-  #endif
 
   _arc = arc;
   _dirPathPrefix = directoryPath;
@@ -470,21 +466,16 @@ void CArchiveExtractCallback::CreateComplexDirectory(
     const UStringVector &dirPathParts, bool isFinal, FString &fullPath)
 {
   // we use (_item.IsDir) in this function
-
   bool isAbsPath = false;
-  
   if (!dirPathParts.IsEmpty())
   {
     const UString &s = dirPathParts[0];
     if (s.IsEmpty())
       isAbsPath = true;
-    #if defined(_WIN32) && !defined(UNDER_CE)
-    else
-    {
-      if (NName::IsDrivePath2(s))
-        isAbsPath = true;
-    }
-    #endif
+#if defined(_WIN32) && !defined(UNDER_CE)
+    else if (NName::IsDrivePath2(s))
+      isAbsPath = true;
+#endif
   }
   
   if (_pathMode == NExtract::NPathMode::kAbsPaths && isAbsPath)
@@ -501,37 +492,73 @@ void CArchiveExtractCallback::CreateComplexDirectory(
 
     const bool isFinalDir = (i == dirPathParts.Size() - 1 && isFinal && _item.IsDir);
     
-    if (fullPath.IsEmpty())
+    if (fullPath.IsEmpty()
+#if defined(_WIN32) && !defined(UNDER_CE)
+          || (_pathMode == NExtract::NPathMode::kAbsPaths
+              && i == 0 && s.Len() == 2 && NName::IsDrivePath2(s))
+#endif
+        )
     {
       if (isFinalDir)
-        _itemFailure = true;
+        _itemFailure = true; // we don't want to set attributes for root (or root drive) path
       continue;
     }
 
-    #if defined(_WIN32) && !defined(UNDER_CE)
-    if (_pathMode == NExtract::NPathMode::kAbsPaths)
-      if (i == 0 && s.Len() == 2 && NName::IsDrivePath2(s))
+    // bool need_SetAttrib = isFinalDir;
+    if (!isFinalDir || !NFile::NFind::DoesDirExist(fullPath))
+    {
+      HRESULT hres = S_OK;
+#ifdef _WIN32
+      if (!CreateDir(fullPath))
+        hres = GetLastError_noZero_HRESULT();
+#else
+      mode_t mode = g_umask.mask;
+      if (isFinalDir && _fi.Attrib_Defined)
+      {
+        const UInt32 attrib = _fi.Attrib;
+        if (attrib & FILE_ATTRIBUTE_UNIX_EXTENSION)
+        {
+          mode = attrib >> 16;
+          if (S_ISDIR(mode))
+            mode |= (S_IRUSR | S_IWUSR | S_IXUSR); // user/7z must be able to create files in this directory
+          else
+          {
+            // we do not want to use attributes, if it's not directory type.
+            // SendMessageError("is not directory type in metadata", fullPath);
+            mode = g_umask.mask;
+          }
+          mode &= g_umask.mask;
+        }
+      }
+      // printf("\n mkdir mode = %o\n", (unsigned)mode);
+      if (mkdir(fullPath, mode) == 0)
       {
         if (isFinalDir)
-        {
-          // we don't want to call SetAttrib() for root drive path
-          _itemFailure = true;
-        }
-        continue;
+          _dirAttrib_wasSet = true;
+        // printf("\n mkdir OK\n");
+        // need_SetAttrib = false;
       }
-    #endif
+      else
+        hres = GetLastError_noZero_HRESULT();
+#endif
 
-    HRESULT hres = S_OK;
-    if (!CreateDir(fullPath))
-      hres = GetLastError_noZero_HRESULT();
-    if (isFinalDir)
-    {
-      if (!NFile::NFind::DoesDirExist(fullPath))
+      if (isFinalDir && !NFile::NFind::DoesDirExist(fullPath))
       {
         _itemFailure = true;
         SendMessageError_with_Error(hres, "Cannot create folder", fullPath);
+        // need_SetAttrib = false;
       }
     }
+    /*
+    // this code doesn't process item excluded by "Eliminate duplication of root folder"
+    // so we will set attributes later
+    if (need_SetAttrib)
+    {
+      // printf("\n SetAttrib \n");
+      SetAttrib(fullPath);
+      _dirAttrib_wasSet = true;
+    }
+    */
   }
 }
 
@@ -932,7 +959,38 @@ HRESULT CArchiveExtractCallback::ReadLink()
 #endif // SUPPORT_LINKS
 
 
-#ifndef _WIN32
+#ifdef _WIN32
+
+#define SET_OWNER
+#define SET_NEED_SET_OWNER
+
+#else
+
+#define SET_OWNER  { SetOwner(); }
+#define SET_NEED_SET_OWNER { _needSetOwner = true; }
+
+void CArchiveExtractCallback::SetOwner()
+{
+  if (!_needSetOwner)
+    return;
+  _needSetOwner = false;
+  // we want to call chown() only for file itself.
+  // we don't want to follow link.
+  // if (_isSymLinkCreated) return;
+  const FString &path = _diskFilePath;
+  if (_itemFailure
+      || path.IsEmpty()
+      || _stdOutMode
+      || !_extractMode)
+    return;
+  if (_fi.Owner.Id_Defined &&
+      _fi.Group.Id_Defined)
+  {
+    // printf("\n SetOwner() %s\n", path.Ptr());
+    if (my_chown(path, _fi.Owner.Id, _fi.Group.Id) != 0)
+      SendMessageError_with_LastError("Cannot set owner", path);
+  }
+}
 
 static HRESULT GetOwner(IInArchive *archive,
     UInt32 index, UInt32 pidName, UInt32 pidId, CProcessedFileInfo::COwnerInfo &res)
@@ -1015,7 +1073,7 @@ HRESULT CArchiveExtractCallback::Read_fi_Props()
  #ifndef _WIN32
   if (_ntOptions.ExtractOwner)
   {
-    // SendMessageError_with_LastError("_ntOptions.ExtractOwner", _diskFilePath);
+    // SendMessageError("_ntOptions.ExtractOwner", _diskFilePath);
     GetOwner(archive, index, kpidUser, kpidUserId, _fi.Owner);
     GetOwner(archive, index, kpidGroup, kpidGroupId, _fi.Group);
   }
@@ -1049,7 +1107,11 @@ void CArchiveExtractCallback::CorrectPathParts()
     {
       pathParts.AddNew();
       if (_removePartsForAltStreams || _pathMode == NExtract::NPathMode::kNoPathsAlt)
+      {
+        const UString s2 = Get_Correct_FsFile_Name(s);
+        s = s2;
         needColon = false;
+      }
     }
     #ifdef _WIN32
     else if (_pathMode == NExtract::NPathMode::kAbsPaths &&
@@ -1377,8 +1439,15 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
     if (_link.LinkPath.IsEmpty())
     #endif
     {
+      /* here we can set directory attributes for usual any items and for
+         root directory excluded from processing by "Eliminate duplication of root folder" feature. */
       if (!isAnti)
-        SetAttrib();
+      {
+        if (!_dirAttrib_wasSet)
+          SetAttrib(_diskFilePath);
+        SET_NEED_SET_OWNER
+        SET_OWNER
+      }
       return S_OK;
     }
   }
@@ -1452,7 +1521,9 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
             return S_OK;
           // printf("\nHard linkWasSet Archive_Get_HardLinkNode %s\n", GetAnsiString(_diskFilePath));
           // _needSetAttrib = true; // do we need to set attribute ?
-          SetAttrib();
+          SetAttrib(_diskFilePath);
+          SET_NEED_SET_OWNER
+          SET_OWNER
           /* if we set (needExit = false) here, _hashStreamSpec will be used,
              and hash will be calulated for all hard links files (it's slower).
              But "Test" operation also calculates hashes.
@@ -1471,7 +1542,46 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
 
   _outFileStreamSpec = new COutFileStream;
   CMyComPtr<IOutStream> outFileStream_Loc(_outFileStreamSpec);
+
+  bool needSetAttrib = true;
+#ifndef _WIN32
+  if (_fi.Attrib_Defined)
+  {
+    /*
+      system open() function uses system umask.
+      our (g_umask.mask) is more restricted mask.
+      So we use (mode) parameter in open(,, mode), because our mask for (mode)
+      is more restricted than system umask.
+      If we want to set unrestricted (mode) bits for file, then we must
+      call additional fchmod() function later.
+    */
+    mode_t mode = NWindows::NFile::NIO::k_OutFile_mode_default; // 0666
+    const UInt32 attrib = _fi.Attrib;
+    if (attrib & FILE_ATTRIBUTE_UNIX_EXTENSION)
+    {
+      mode = (attrib >> 16);
+      // mode &= 07777; // for debug
+      if (!S_ISREG(mode))
+      {
+        // printf("\n !S_ISREG(mode) = %o\n", (unsigned)mode);
+        needSetAttrib = false;
+      }
+    }
+    else if (attrib & FILE_ATTRIBUTE_READONLY)
+      mode &= (mode_t)~(mode_t)(S_IWUSR | S_IWGRP | S_IWOTH); // octal: ~0222; // disable write permissions
+    if (needSetAttrib)
+    {
+       // printf("\n File.mode_for_Create = %o\n", (unsigned)mode);
+       mode &= g_umask.mask;
+       // mode = 0777; // for debug
+       // mode |= S_ISUID | S_ISGID | S_ISVTX; // for debug
+      _outFileStreamSpec->File.mode_for_Create = mode;
+    }
+    needSetAttrib = false;
+  }
+#endif
   
+  // printf("\n GetExtractStream Create_ALWAYS_or_Open_ALWAYS : %s\n", fullProcessedPath.Ptr());
   if (!_outFileStreamSpec->Create_ALWAYS_or_Open_ALWAYS(fullProcessedPath, !_isSplit))
   {
     // if (::GetLastError() != ERROR_FILE_EXISTS || !isSplit)
@@ -1481,7 +1591,8 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
     }
   }
   
-  _needSetAttrib = true;
+  SET_NEED_SET_OWNER
+  _needSetAttrib = needSetAttrib;
 
   bool is_SymLink_in_Data = false;
 
@@ -1617,7 +1728,11 @@ Z7_COM7F_IMF(CArchiveExtractCallback::GetStream(UInt32 index, ISequentialOutStre
   _extractMode = false;
   _is_SymLink_in_Data_Linux = false;
   _needSetAttrib = false;
-  _isSymLinkCreated = false;
+  _dirAttrib_wasSet = false;
+#ifndef _WIN32
+  _needSetOwner = false;
+#endif
+  // _isSymLinkCreated = false;
   _itemFailure = false;
   _some_pathParts_wereRemoved = false;
   // _op_WasReported = false;
@@ -1988,13 +2103,48 @@ HRESULT CArchiveExtractCallback::CloseFile()
   CFiTimesCAM t;
   GetFiTimesCAM(_fi, t, *_arc);
 
-  // #ifdef _WIN32
-  if (t.IsSomeTimeDefined())
-    _outFileStreamSpec->SetTime(
+  const bool needSetAttrib = (_needSetAttrib && _fi.Attrib_Defined);
+  if (t.IsSomeTimeDefined() || needSetAttrib)
+  {
+    bool needSetTime = true;
+    if (needSetAttrib)
+    {
+      /*
+      in Linux: { this code branch is not used,
+        because (mode) was set in open() function in COutFile open function.
+        If we call Set_Time_and_WinAttrib(), then later COutFile::Close() will call fchmod().
+        So we need Set_Time_and_WinAttrib() in linux only if we need insecure nonrestricted (mode) bits with fchmod().
+      }
+      
+      win10: if (attrib & FILE_ATTRIBUTE_DIRECTORY)
+      {
+        NtSetInformationFile() returns (STATUS_INVALID_PARAMETER)
+        SetFileAttributes() just ignores FILE_ATTRIBUTE_DIRECTORY()
+      }
+      */
+      // _fi.Attrib |= 0xfffffff; // FOR DEBUG
+      if (_outFileStreamSpec->File.Set_Time_and_WinAttrib(
+          t.CTime_Defined ? &t.CTime : NULL,
+          t.ATime_Defined ? &t.ATime : NULL,
+          t.MTime_Defined ? &t.MTime : NULL,
+          (DWORD)_fi.Attrib & ~(DWORD)FILE_ATTRIBUTE_DIRECTORY))
+      {
+        needSetTime = false;
+        _needSetAttrib = false;
+      }
+      else
+      {
+        // it's unexpected case.
+        // we will set timestamp/attributes with another code later
+        // SendMessageError_with_LastError("Cannot set timestamp and file attribute", _diskFilePath);
+      }
+    }
+    if (needSetTime)
+      _outFileStreamSpec->SetTime(
         t.CTime_Defined ? &t.CTime : NULL,
         t.ATime_Defined ? &t.ATime : NULL,
         t.MTime_Defined ? &t.MTime : NULL);
-  // #endif
+  }
 
   RINOK(_outFileStreamSpec->Close())
   _outFileStream.Release();
@@ -2105,7 +2255,7 @@ HRESULT CArchiveExtractCallback::SetLink(
     return SendMessageError("Cannot create temporary link file", fullProcessedPath_from);
 #if 0 // 1 for debug
   // here we can write link path to temporary link file placeholder,
-  // but empty placeholder is better, because we don't want to get any non-eampty data instead of link file.
+  // but empty placeholder is better, because we don't want to get any non-empty data instead of link file.
   AString s;
   ConvertUnicodeToUTF8(link.LinkPath, s);
   outFile.WriteFull(s, s.Len());
@@ -2552,13 +2702,13 @@ HRESULT CArchiveExtractCallback::CloseReparseAndFile()
           link.Parse_from_LinuxData(_outMemBuf, reparseSize) :
           link.Parse_from_WindowsReparseData(_outMemBuf, reparseSize);
       if (!needSetReparse)
-        res = SendMessageError_with_LastError("Incorrect reparse stream", us2fs(_item.Path));
+        res = SendMessageError("Incorrect reparse stream", us2fs(_item.Path));
       // (link.LinkPath) uses system path separator.
       // windows: (link.LinkPath) doesn't contain linux separator (slash).
     }
     else
     {
-      res = SendMessageError_with_LastError("Unknown reparse stream", us2fs(_item.Path));
+      res = SendMessageError("Unknown reparse stream", us2fs(_item.Path));
     }
     if (!needSetReparse && _outFileStream)
     {
@@ -2596,8 +2746,14 @@ HRESULT CArchiveExtractCallback::CloseReparseAndFile()
         // link.isJunction = true; // for debug
         link.Normalize_to_RelativeSafe(_removePathParts);
         RINOK(SetLink(_diskFilePath, link, linkWasSet))
+/*  DOCs:
+    posix: permissions are ignored for access via link.
+    Linux: the permissions of an ordinary symbolic link are not
+        used in any operations; the permissions are always 0777 (read,
+        write, and execute for all user categories), and can't be changed.
+    So we don't set attributes for placeholder.
+*/
 /*
-        // we don't set attributes for placeholder.
         if (linkWasSet)
           _isSymLinkCreated = true; // link.IsSymLink();
         else
@@ -2614,15 +2770,6 @@ HRESULT CArchiveExtractCallback::CloseReparseAndFile()
 static void SetAttrib_Base(const FString &path, const CProcessedFileInfo &fi,
     const CArchiveExtractCallback &callback)
 {
-#ifndef _WIN32
-  if (fi.Owner.Id_Defined &&
-      fi.Group.Id_Defined)
-  {
-    if (my_chown(path, fi.Owner.Id, fi.Group.Id) != 0)
-      callback.SendMessageError_with_LastError("Cannot set owner", path);
-  }
-#endif
-
   if (fi.Attrib_Defined)
   {
     // const AString s = GetAnsiString(_diskFilePath);
@@ -2635,21 +2782,21 @@ static void SetAttrib_Base(const FString &path, const CProcessedFileInfo &fi,
   }
 }
 
-void CArchiveExtractCallback::SetAttrib() const
+void CArchiveExtractCallback::SetAttrib(const FString &path) const
 {
 #ifndef _WIN32
   // Linux now doesn't support permissions for symlinks
-  if (_isSymLinkCreated)
-    return;
+  // if (_isSymLinkCreated) return;
 #endif
+  // printf("\n SetAttrib %s, \n", path.Ptr());
 
   if (_itemFailure
-      || _diskFilePath.IsEmpty()
+      || path.IsEmpty()
       || _stdOutMode
       || !_extractMode)
     return;
 
-  SetAttrib_Base(_diskFilePath, _fi, *this);
+  SetAttrib_Base(path, _fi, *this);
 }
 
 
@@ -2697,9 +2844,6 @@ Z7_COM7F_IMF(CArchiveExtractCallback::SetOperationResult(Int32 opRes))
     GetUnpackSize();
     return ExtractToStreamCallback->SetOperationResult8(opRes, BoolToInt(_encrypted), _curSize);
   }
-  #endif
-
-  #ifndef Z7_SFX
 
   if (_hashStreamWasUsed)
   {
@@ -2747,11 +2891,11 @@ Z7_COM7F_IMF(CArchiveExtractCallback::SetOperationResult(Int32 opRes))
     NumFiles++;
 
   if (_needSetAttrib)
-    SetAttrib();
-  
-  RINOK(_extractCallback2->SetOperationResult(opRes, BoolToInt(_encrypted)))
-  
-  return S_OK;
+    SetAttrib(_diskFilePath);
+
+  SET_OWNER
+
+  return _extractCallback2->SetOperationResult(opRes, BoolToInt(_encrypted));
   
   COM_TRY_END
 }
@@ -2996,15 +3140,30 @@ HRESULT CArchiveExtractCallback::SetPostLinks() const
     RINOK(SetLink2(*this, link, linkWasSet))
     if (linkWasSet)
     {
-#ifdef _WIN32
-      //  Linux now doesn't support permissions for symlinks
-      SetAttrib_Base(link.fullProcessedPath_from, link.item_FileInfo, *this);
-#endif
-
+      // we set timestamps before SetAttrib(),
+      // because windows doesn't set timestamps, if file has read-only attribute
       CFiTimesCAM pt;
       GetFiTimesCAM(link.item_FileInfo, pt, *_arc);
       if (pt.IsSomeTimeDefined())
-        pt.SetLinkFileTime_to_FS(link.fullProcessedPath_from);
+        if (!pt.SetLinkFileTime_to_FS(link.fullProcessedPath_from))
+        {
+          // SendMessageError_with_LastError("cannot set timestamp", link.fullProcessedPath_from);
+        }
+
+#ifdef _WIN32
+      SetAttrib_Base(link.fullProcessedPath_from, link.item_FileInfo, *this);
+#else
+      // Linux now doesn't support permissions for symlinks.
+      // We set only owner
+      {
+        const CProcessedFileInfo &fi = link.item_FileInfo;
+        if (fi.Owner.Id_Defined && fi.Group.Id_Defined)
+        {
+          if (my_chown_Link(link.fullProcessedPath_from, fi.Owner.Id, fi.Group.Id) != 0)
+            SendMessageError_with_LastError("Cannot set owner", link.fullProcessedPath_from);
+        }
+      }
+#endif
 
 #ifdef Z7_USE_SECURITY_CODE
       // we set security information after timestamps setting

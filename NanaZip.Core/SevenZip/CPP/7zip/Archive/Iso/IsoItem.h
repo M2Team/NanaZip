@@ -81,8 +81,7 @@ struct CDirRecord
   bool AreMultiPartEqualWith(const CDirRecord &a) const
   {
     return FileId == a.FileId
-        && (FileFlags & (~NFileFlags::kNonFinalExtent)) ==
-        (a.FileFlags & (~NFileFlags::kNonFinalExtent));
+        && ((FileFlags ^ a.FileFlags) & ~NFileFlags::kNonFinalExtent) == 0;
   }
 
   bool IsDir() const { return (FileFlags & NFileFlags::kDirectory) != 0; }
@@ -90,10 +89,7 @@ struct CDirRecord
 
   bool IsSystemItem() const
   {
-    if (FileId.Size() != 1)
-      return false;
-    Byte b = *(const Byte *)FileId;
-    return (b == 0 || b == 1);
+    return FileId.Size() == 1 && *(const Byte *)FileId < 2;
   }
 
   

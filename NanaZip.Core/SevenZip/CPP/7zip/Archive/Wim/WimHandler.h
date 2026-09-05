@@ -35,6 +35,8 @@ Z7_CLASS_IMP_CHandler_IInArchive_5(
   bool _isOldVersion;
   bool _xmlInComments;
 
+  bool _error_in_PartNumber;
+  bool _volError;
   bool _xmlError;
   bool _isArc;
   bool _unsupported;
@@ -81,7 +83,18 @@ Z7_CLASS_IMP_CHandler_IInArchive_5(
     return true;
   }
 
-  bool ThereIsError() const { return _xmlError || _db.ThereIsError(); }
+  void ClearErrors()
+  {
+    _error_in_PartNumber = false;
+    _volError = false;
+    _xmlError = false;
+  }
+
+  bool ThereIsError() const
+  {
+    return _error_in_PartNumber || _volError || _xmlError
+      || _db.ThereIsError();
+  }
   HRESULT GetSecurity(UInt32 realIndex, const void **data, UInt32 *dataSize, UInt32 *propType);
 
   HRESULT GetOutProperty(IArchiveUpdateCallback *callback, UInt32 callbackIndex, Int32 arcIndex, PROPID propID, PROPVARIANT *value);

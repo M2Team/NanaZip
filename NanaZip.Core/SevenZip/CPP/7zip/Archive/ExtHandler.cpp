@@ -2167,9 +2167,9 @@ public:
     _curRem = 0;
     _virtPos = 0;
     _physPos = 0;
-    if (Vector.Size() > 0)
+    if (Vector.Size())
     {
-      _physPos = (Vector[0] << BlockBits);
+      _physPos = (UInt64)Vector[0] << BlockBits;
       return SeekToPhys();
     }
     return S_OK;

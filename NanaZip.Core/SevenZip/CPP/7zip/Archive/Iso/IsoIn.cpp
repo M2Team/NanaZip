@@ -94,7 +94,8 @@ Byte CInArchive::ReadByte()
       throw CSystemException(res);
     if (processed != kBlockSize)
       throw CUnexpectedEndException();
-    UInt64 end = _position + processed;
+    _processedBytes += processed;
+    const UInt64 end = _position + processed;
     if (PhySize < end)
       PhySize = end;
   }
@@ -172,22 +173,30 @@ UInt32 CInArchive::ReadUInt32()
   return val;
 }
 
-UInt32 CInArchive::ReadDigits(int numDigits)
+unsigned CInArchive::ReadDigits(unsigned numDigits)
 {
-  UInt32 res = 0;
-  for (int i = 0; i < numDigits; i++)
+  unsigned res = 0;
+  unsigned mode = 0;
+  for (unsigned i = 0; i < numDigits; i++)
   {
-    Byte b = ReadByte();
-    if (b < '0' || b > '9')
+    const Byte b = ReadByte();
+    if (mode == 2)
+      continue;
+    const unsigned d = (unsigned)b - (unsigned)'0';
+    if (d > 9)
     {
-      if (b == 0 || b == ' ') // it's bug in some CD's
-        b = '0';
-      else
+      // what exact cases are possible here?
+      if (b != 0 && b != ' ')
         throw CHeaderErrorException();
+      if (mode == 1)
+        mode = 2;
     }
-    UInt32 d = (UInt32)(b - '0');
-    res *= 10;
-    res += d;
+    else
+    {
+      mode = 1;
+      res *= 10;
+      res += d;
+    }
   }
   return res;
 }
@@ -222,7 +231,7 @@ void CInArchive::ReadRecordingDateTime(CRecordingDateTime &t)
   t.GmtOffset = (signed char)ReadByte();
 }
 
-void CInArchive::ReadDirRecord2(CDirRecord &r, Byte len)
+void CInArchive::ReadDirRecord(CDirRecord &r, unsigned len, bool isJolietDescriptor)
 {
   r.ExtendedAttributeRecordLen = ReadByte();
   if (r.ExtendedAttributeRecordLen != 0)
@@ -234,29 +243,28 @@ void CInArchive::ReadDirRecord2(CDirRecord &r, Byte len)
   r.FileUnitSize = ReadByte();
   r.InterleaveGapSize = ReadByte();
   r.VolSequenceNumber = ReadUInt16();
-  Byte idLen = ReadByte();
+  unsigned idLen = ReadByte();
+  /* for Descriptor Root Directory Record:
+      idLen == 1 : by ISO Specification
+      idLen == 1 : for some Joliet archives
+      idLen == 2 : for some Joliet archives for UCS-2 (UTF-16BE).
+        but (len == 34) is fixed for Descriptor Root Directory Record
+        so we ignore idLen == 2 value in Joliet Descriptor.
+  */
+  if (isJolietDescriptor && idLen == 2) // v26.03 : we support Joliet cases
+    idLen = 0;
   r.FileId.Alloc(idLen);
   ReadBytes((Byte *)r.FileId, idLen);
-  unsigned padSize = 1 - (idLen & 1);
-  
+  idLen += 33;
+  const unsigned padSize = idLen & 1;
   // SkipZeros(padSize);
   Skip(padSize); // it's bug in some cd's. Must be zeros
-
-  unsigned curPos = 33 + idLen + padSize;
-  if (curPos > len)
+  idLen += padSize;
+  if (len < idLen)
     throw CHeaderErrorException();
-  unsigned rem = len - curPos;
-  r.SystemUse.Alloc(rem);
-  ReadBytes((Byte *)r.SystemUse, rem);
-}
-
-void CInArchive::ReadDirRecord(CDirRecord &r)
-{
-  Byte len = ReadByte();
-  // Some CDs can have incorrect value len = 48 ('0') in VolumeDescriptor.
-  // But maybe we must use real "len" for other records.
-  len = 34;
-  ReadDirRecord2(r, len);
+  len -= idLen;
+  r.SystemUse.Alloc(len);
+  ReadBytes((Byte *)r.SystemUse, len);
 }
 
 void CInArchive::ReadVolumeDescriptor(CVolumeDescriptor &d)
@@ -275,7 +283,16 @@ void CInArchive::ReadVolumeDescriptor(CVolumeDescriptor &d)
   d.LOptionalPathTableLocation = ReadUInt32Le();
   d.MPathTableLocation = ReadUInt32Be();
   d.MOptionalPathTableLocation = ReadUInt32Be();
-  ReadDirRecord(d.RootDirRecord);
+  {
+    unsigned len;
+    /* len = */ ReadByte();
+    // len == 34 is expected by ISO specification
+    // len == 36 is possible for some Joliet archives
+    // len == 48 is possible for Rock Ridge?
+    len = 34; // we ignore (len) value from header because
+              // next field (VolumeSetId) always starts after 34 bytes
+    ReadDirRecord(d.RootDirRecord, len, d.IsJoliet());
+  }
   ReadBytes(d.VolumeSetId, sizeof(d.VolumeSetId));
   ReadBytes(d.PublisherId, sizeof(d.PublisherId));
   ReadBytes(d.DataPreparerId, sizeof(d.DataPreparerId));
@@ -330,16 +347,16 @@ void CInArchive::SeekToBlock(UInt32 blockIndex)
   m_BufferPos = 0;
 }
 
-static const int kNumLevelsMax = 256;
+static const unsigned kNumLevelsMax = 256;
 
-void CInArchive::ReadDir(CDir &d, int level)
+HRESULT CInArchive::ReadDir(CDir &d, unsigned level)
 {
   if (!d.IsDir())
-    return;
+    return S_OK;
   if (level > kNumLevelsMax)
   {
     TooDeepDirs = true;
-    return;
+    return S_OK;
   }
 
   {
@@ -347,7 +364,7 @@ void CInArchive::ReadDir(CDir &d, int level)
       if (UniqStartLocations[i] == d.ExtentLocation)
       {
         SelfLinkedDirs = true;
-        return;
+        return S_OK;
       }
     UniqStartLocations.Add(d.ExtentLocation);
   }
@@ -358,26 +375,47 @@ void CInArchive::ReadDir(CDir &d, int level)
   bool firstItem = true;
   for (;;)
   {
-    UInt64 offset = _position - startPos;
+    const UInt64 offset = _position - startPos;
     if (offset >= d.Size)
       break;
-    Byte len = ReadByte();
+    const unsigned len = ReadByte();
     if (len == 0)
       continue;
     CDir subItem;
-    ReadDirRecord2(subItem, len);
+    ReadDirRecord(subItem, len);
     if (firstItem && level == 0)
       IsSusp = subItem.CheckSusp(SuspSkipSize);
       
     if (!subItem.IsSystemItem())
+    {
+      if (_numFiles >= (1u << 30))
+      {
+        TooBigMetadata = true; // Too many files
+        return S_FALSE;
+      }
       d._subItems.Add(subItem);
+      _numFiles++;
+    }
 
+    if (_openCallback && _processedBytes - _processedBytes_prev >= (1 << 24))
+    {
+      _processedBytes_prev = _processedBytes;
+      RINOK(_openCallback->SetTotal(&_numFiles, &_processedBytes))
+    }
+    if (_processedBytes > _fileSize + (1u << 24))
+    {
+      TooBigMetadata = true;
+      return S_FALSE;
+    }
     firstItem = false;
   }
   FOR_VECTOR (i, d._subItems)
-    ReadDir(d._subItems[i], level + 1);
+  {
+    RINOK(ReadDir(d._subItems[i], level + 1))
+  }
 
   UniqStartLocations.DeleteBack();
+  return S_OK;
 }
 
 void CInArchive::CreateRefs(CDir &d)
@@ -614,7 +652,7 @@ HRESULT CInArchive::Open2()
   IsArc = true;
 
   (CDirRecord &)_rootDir = vd.RootDirRecord;
-  ReadDir(_rootDir, 0);
+  RINOK(ReadDir(_rootDir, 0))
   CreateRefs(_rootDir);
   ReadBootInfo();
 
@@ -671,10 +709,12 @@ HRESULT CInArchive::Open2()
   return S_OK;
 }
 
-HRESULT CInArchive::Open(IInStream *inStream)
+HRESULT CInArchive::Open(IInStream *inStream, IArchiveOpenCallback *openCallback)
 {
   Clear();
   _stream = inStream;
+  _openCallback = openCallback;
+  _numFiles = _processedBytes = _processedBytes_prev = 0;
   try { return Open2(); }
   catch(const CSystemException &e) { return e.ErrorCode; }
   catch(CUnexpectedEndException &) { UnexpectedEnd = true; return S_FALSE; }
@@ -689,6 +729,7 @@ void CInArchive::Clear()
   HeadersError = false;
   IncorrectBigEndian = false;
   TooDeepDirs = false;
+  TooBigMetadata = false;
   SelfLinkedDirs = false;
 
   UniqStartLocations.Clear();

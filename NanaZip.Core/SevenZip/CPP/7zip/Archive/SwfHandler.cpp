@@ -412,6 +412,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       if (_item.IsZlib())
       {
         _packSizeDefined = true;
+        if (!_decoderZlibSpec)
+          return E_FAIL;
         _packSize = _decoderZlibSpec->GetInputProcessedSize();
         opRes = NExtract::NOperationResult::kOK;
       }

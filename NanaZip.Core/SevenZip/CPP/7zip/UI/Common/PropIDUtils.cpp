@@ -55,27 +55,28 @@ FILE_ATTRIBUTE_
 
 
 static const char kPosixTypes[16] = { '0', 'p', 'c', '3', 'd', '5', 'b', '7', '-', '9', 'l', 'B', 's', 'D', 'E', 'F' };
-#define MY_ATTR_CHAR(a, n, c) (((a) & (1 << (n))) ? c : '-')
+#define MY_POSIX_MODE_CHAR(a, mask, c) (((a) & (mask)) ? (c) : '-')
 
 static void ConvertPosixAttribToString(char *s, UInt32 a) throw()
 {
-  s[0] = kPosixTypes[(a >> 12) & 0xF];
-  for (int i = 6; i >= 0; i -= 3)
+  *s++ = kPosixTypes[(a >> 12) & 0xF];
+  for (unsigned mask = 1 << 8; mask;)
   {
-    s[7 - i] = MY_ATTR_CHAR(a, i + 2, 'r');
-    s[8 - i] = MY_ATTR_CHAR(a, i + 1, 'w');
-    s[9 - i] = MY_ATTR_CHAR(a, i + 0, 'x');
+    s[0] = MY_POSIX_MODE_CHAR(a, mask, 'r'); mask >>= 1;
+    s[1] = MY_POSIX_MODE_CHAR(a, mask, 'w'); mask >>= 1;
+    s[2] = MY_POSIX_MODE_CHAR(a, mask, 'x'); mask >>= 1;
+    s += 3;
   }
-  if ((a & 0x800) != 0) s[3] = ((a & (1 << 6)) ? 's' : 'S'); // S_ISUID
-  if ((a & 0x400) != 0) s[6] = ((a & (1 << 3)) ? 's' : 'S'); // S_ISGID
-  if ((a & 0x200) != 0) s[9] = ((a & (1 << 0)) ? 't' : 'T'); // S_ISVTX
-  s[10] = 0;
+  if (a & 0x800) s[-7] = ((a & (1 << 6)) ? 's' : 'S'); // S_ISUID
+  if (a & 0x400) s[-4] = ((a & (1 << 3)) ? 's' : 'S'); // S_ISGID
+  if (a & 0x200) s[-1] = ((a & (1 << 0)) ? 't' : 'T'); // S_ISVTX
+  *s = 0;
   
   a &= ~(UInt32)0xFFFF;
-  if (a != 0)
+  if (a)
   {
-    s[10] = ' ';
-    ConvertUInt32ToHex8Digits(a, s + 11);
+    *s++ = ' ';
+    ConvertUInt32ToHex8Digits(a, s);
   }
 }
 

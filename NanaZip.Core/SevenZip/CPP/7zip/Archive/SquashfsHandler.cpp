@@ -1702,11 +1702,13 @@ HRESULT CHandler::Open2(IInStream *inStream)
       RINOK(Seek2(offset))
       RINOK(ReadMetadataBlock2())
       const UInt32 unpackSize = (UInt32)_dynOutStream->GetSize();
-      if (unpackSize != kMetadataBlockSize)
-        if (i != numBlocks - 1 || unpackSize != ((_h.NumFrags << (3 + bigFrag)) & (kMetadataBlockSize - 1)))
+      UInt32 remSize = (_h.NumFrags << (3 + bigFrag)) & (kMetadataBlockSize - 1);
+      if (remSize == 0 || i != numBlocks - 1)
+        remSize = kMetadataBlockSize;
+      if (unpackSize != remSize)
           return S_FALSE;
       const Byte *buf = _dynOutStream->GetBuffer();
-      for (UInt32 j = 0; j < kMetadataBlockSize && j < unpackSize;)
+      for (UInt32 j = 0; j < unpackSize;)
       {
         CFrag frag;
         if (bigFrag)
@@ -1791,8 +1793,9 @@ HRESULT CHandler::Open2(IInStream *inStream)
       // RINOK(ReadMetadataBlock(NULL, _uids + kMetadataBlockSize * i, packSize, unpackSize));
       RINOK(ReadMetadataBlock2())
       const size_t unpackSize = _dynOutStream->GetSize();
-      const UInt32 remSize = (i == numBlocks - 1)  ?
-          (size & (kMetadataBlockSize - 1)) : kMetadataBlockSize;
+      UInt32 remSize = size & (kMetadataBlockSize - 1);
+      if (remSize == 0 || i != numBlocks - 1)
+        remSize = kMetadataBlockSize;
       if (unpackSize != remSize)
         return S_FALSE;
       memcpy(_uids + kMetadataBlockSize * i, _dynOutStream->GetBuffer(), remSize);
@@ -2246,8 +2249,8 @@ HRESULT CHandler::ReadBlock(UInt64 blockIndex, Byte *dest, size_t blockSize)
     if (compressed)
     {
       _outStream->Init((Byte *)_cachedBlock, _h.BlockSize);
-      bool outBufWasWritten;
-      UInt32 outBufWasWrittenSize;
+      bool outBufWasWritten = false;
+      UInt32 outBufWasWrittenSize = 0;
       HRESULT res = Decompress(_outStream, _cachedBlock, &outBufWasWritten, &outBufWasWrittenSize, packBlockSize, _h.BlockSize);
       RINOK(res)
       if (outBufWasWritten)

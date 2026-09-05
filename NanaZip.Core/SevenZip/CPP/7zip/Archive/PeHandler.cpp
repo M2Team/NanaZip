@@ -1562,8 +1562,8 @@ struct CMy_VS_FIXEDFILEINFO
   UInt32 OS;
   UInt32 Type;
   UInt32 Subtype;
-  UInt32 DateMS;
-  UInt32 DateLS;
+  // UInt32 DateMS;
+  // UInt32 DateLS;
 
   bool Parse(const Byte *p);
   void PrintToTextFile(CTextFile &f, CObjectVector<CStringKeyValue> &keys);
@@ -1583,8 +1583,8 @@ bool CMy_VS_FIXEDFILEINFO::Parse(const Byte *p)
   G32(0x20, OS);
   G32(0x24, Type);
   G32(0x28, Subtype);
-  G32(0x2C, DateMS);
-  G32(0x40, DateLS);
+  // G32(0x2C, DateMS);
+  // G32(0x30, DateLS);
   return true;
 }
 

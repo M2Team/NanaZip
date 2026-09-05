@@ -157,10 +157,11 @@ struct CDynHeader
   CParentLocatorEntry ParentLocators[8];
 
   bool Parse(const Byte *p);
-  UInt32 NumBitMapSectors() const
+  UInt32 NumBitMapBytes() const
   {
-    UInt32 numSectorsInBlock = (1 << (BlockSizeLog - kSectorSize_Log));
-    return (numSectorsInBlock + kSectorSize * 8 - 1) / (kSectorSize * 8);
+    const UInt32 numSectorsInBlock = (UInt32)1 << (BlockSizeLog - kSectorSize_Log);
+    const UInt32 NumBitMapSectors = (numSectorsInBlock + kSectorSize * 8 - 1) / (kSectorSize * 8);
+    return NumBitMapSectors << kSectorSize_Log;
   }
   void Clear()
   {
@@ -325,7 +326,7 @@ HRESULT CHandler::InitAndSeek()
   }
   _virtPos = _posInArc = 0;
   BitMapTag = kUnusedBlock;
-  BitMap.Alloc(Dyn.NumBitMapSectors() << kSectorSize_Log);
+  BitMap.Alloc(Dyn.NumBitMapBytes());
   return Seek2(0);
 }
 
@@ -463,7 +464,7 @@ HRESULT CHandler::Open3()
 
   Bat.ClearAndReserve(Dyn.NumBlocks);
 
-  UInt32 bitmapSize = Dyn.NumBitMapSectors() << kSectorSize_Log;
+  const UInt32 bitmapSize = Dyn.NumBitMapBytes();
 
   while ((UInt32)Bat.Size() < Dyn.NumBlocks)
   {

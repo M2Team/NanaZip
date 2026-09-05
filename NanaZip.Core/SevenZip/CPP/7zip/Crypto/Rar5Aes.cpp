@@ -209,6 +209,7 @@ bool CDecoder::CalcKey_and_CheckPassword()
     {
       MY_ALIGN_FOR_SHA256
       UInt32 pswCheck[SHA256_NUM_DIGEST_WORDS];
+      Z7_memset_0_ARRAY(pswCheck);
       {
         // Pbkdf HMAC-SHA-256
         MY_ALIGN_FOR_SHA256

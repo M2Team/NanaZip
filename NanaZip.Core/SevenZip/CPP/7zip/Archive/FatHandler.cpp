@@ -497,7 +497,8 @@ HRESULT CDatabase::OpenProgressFat(bool changeTotal)
     return S_OK;
   if (changeTotal)
   {
-    const UInt64 numTotalBytes = (Header.CalcFatSizeInSectors() << Header.SectorSizeLog) +
+    const UInt32 fatBytes = Header.CalcFatSizeInSectors() << Header.SectorSizeLog;
+    const UInt64 numTotalBytes = fatBytes +
         ((UInt64)(Header.FatSize - NumFreeClusters) << Header.ClusterSizeLog);
     RINOK(OpenCallback->SetTotal(NULL, &numTotalBytes))
   }
@@ -938,7 +939,7 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
   CClusterInStream *streamSpec = new CClusterInStream;
   CMyComPtr<ISequentialInStream> streamTemp = streamSpec;
   streamSpec->Stream = InStream;
-  streamSpec->StartOffset = Header.DataSector << Header.SectorSizeLog;
+  streamSpec->StartOffset = (UInt64)Header.DataSector << Header.SectorSizeLog;
   streamSpec->BlockSizeLog = Header.ClusterSizeLog;
   streamSpec->Size = item.Size;
 

@@ -165,8 +165,11 @@ public:
   #endif
   CByteBuffer _data;
   CObjectVector<CItem> Items;
+  bool IsArc;
   bool IsUnicode;
   bool Is64Bit;
+  bool CREATEDIR_processing_WasStopped;
+  bool FILENAME_processing_WasStopped;
 private:
   UInt32 _stringsPos;     // relative to _data
   UInt32 NumStringChars;
@@ -217,12 +220,13 @@ private:
   #endif
 
 
+  UInt32 _memUsage_Dirs;
+  UInt32 _memUsage_Files;
+
 public:
   CMyComPtr<IInStream> _stream; // it's limited stream that contains only NSIS archive
   UInt64 StartOffset;           // offset in original stream.
   UInt64 DataStreamOffset;      // = sizeof(FirstHeader) = offset of Header in _stream
-
-  bool IsArc;
 
   CDecoder Decoder;
   CByteBuffer ExeStub;
@@ -322,7 +326,7 @@ private:
   void PrintNumComment(const char *name, UInt32 value);
   void Add_QuStr(const AString &s);
   void SpaceQuStr(const AString &s);
-  bool CompareCommands(const Byte *rawCmds, const Byte *sequence, size_t numCommands);
+  bool CompareCommands(const Byte *rawCmds, const Byte *sequence, size_t numCommands) const;
 
   #endif
 
@@ -330,7 +334,7 @@ private:
   unsigned GetNumSupportedCommands() const;
   #endif
 
-  UInt32 GetCmd(UInt32 a);
+  UInt32 GetCmd(UInt32 a) const;
   void FindBadCmd(const CBlockHeader &bh, const Byte *);
   void DetectNsisType(const CBlockHeader &bh, const Byte *);
 

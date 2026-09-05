@@ -17,6 +17,8 @@
 namespace NArchive {
 namespace NNsis {
 
+struct CInArchiveException {};
+
 static const size_t kInputBufSize = 1 << 20;
 
 const Byte kSignature[kSignatureSize] = NSIS_SIGNATURE;
@@ -591,7 +593,7 @@ void CInArchive::GetVar2(AString &res, UInt32 index)
   {
     if (index >= 10)
     {
-      res += 'R';
+      res.Add_Char('R');
       index -= 10;
     }
     UIntToString(res, index);
@@ -607,16 +609,16 @@ void CInArchive::GetVar2(AString &res, UInt32 index)
     }
     else
     {
-      res += '_';
+      res.Add_Char('_');
       UIntToString(res, index - numInternalVars);
-      res += '_';
+      res.Add_Char('_');
     }
   }
 }
 
 void CInArchive::GetVar(AString &res, UInt32 index)
 {
-  res += '$';
+  res.Add_Char('$');
   GetVar2(res, index);
 }
 
@@ -737,7 +739,7 @@ void CInArchive::GetShellString(AString &s, unsigned index1, unsigned index2)
 
     if (id < 0)
     {
-      s += '(';
+      s.Add_Char('(');
       if (IsUnicode)
       {
         for (unsigned i = 0; i < 256; i++)
@@ -751,12 +753,12 @@ void CInArchive::GetShellString(AString &s, unsigned index1, unsigned index2)
       }
       else
         s += (const char *)p;
-      s += ')';
+      s.Add_Char(')');
     }
     return;
   }
 
-  s += '$';
+  s.Add_Char('$');
   if (index1 < Z7_ARRAY_SIZE(kShellStrings))
   {
     const char *sz = kShellStrings[index1];
@@ -776,11 +778,11 @@ void CInArchive::GetShellString(AString &s, unsigned index1, unsigned index2)
     }
   }
   s += "_ERROR_UNSUPPORTED_SHELL_";
-  s += '[';
+  s.Add_Char('[');
   UIntToString(s, index1);
-  s += ',';
+  s.Add_Char(',');
   UIntToString(s, index2);
-  s += ']';
+  s.Add_Char(']');
 }
 
 #ifdef NSIS_SCRIPT
@@ -800,8 +802,15 @@ void CInArchive::Add_LangStr(AString &res, UInt32 id)
   #endif
   res += "$(LSTR_";
   UIntToString(res, id);
-  res += ')';
+  res.Add_Char(')');
 }
+
+static const unsigned k_StringLen_Limit = 1 << 16;
+
+#define CHECK_STRING_LEN(s) \
+  { if (s.Len() >= k_StringLen_Limit) \
+    { /* s = "[LONG_PATH]";  return; */ throw CInArchiveException(); } }
+
 
 void CInArchive::GetNsisString_Raw(const Byte *s)
 {
@@ -811,6 +820,7 @@ void CInArchive::GetNsisString_Raw(const Byte *s)
   {
     for (;;)
     {
+      CHECK_STRING_LEN(Raw_AString)
       Byte c = *s++;
       if (c == 0)
         return;
@@ -846,6 +856,7 @@ void CInArchive::GetNsisString_Raw(const Byte *s)
   // NSIS-3 ANSI
   for (;;)
   {
+    CHECK_STRING_LEN(Raw_AString)
     Byte c = *s++;
     if (c <= NS_3_CODE_SKIP)
     {
@@ -973,6 +984,7 @@ void CInArchive::GetNsisString_Unicode_Raw(const Byte *p)
   {
     for (;;)
     {
+      CHECK_STRING_LEN(Raw_UString)
       unsigned c = Get16(p);
       p += 2;
       if (c == 0)
@@ -1017,6 +1029,7 @@ void CInArchive::GetNsisString_Unicode_Raw(const Byte *p)
   // NSIS-3 Unicode
   for (;;)
   {
+    CHECK_STRING_LEN(Raw_UString)
     unsigned c = Get16(p);
     p += 2;
     if (c > NS_3_CODE_SKIP)
@@ -2124,7 +2137,7 @@ bool CInArchive::PrintSectionBegin(const CSection &sect, unsigned index)
 {
   AString name;
   if (sect.Flags & SF_BOLD)
-    name += '!';
+    name.Add_Char('!');
   AString s2;
   ReadString2(s2, sect.Name);
   if (!IsInstaller)
@@ -2330,9 +2343,9 @@ void CInArchive::MessageBox_MB_Part(UInt32 param)
 static const Byte k_InitPluginDir_Commands[] =
   { 13, 26, 31, 13, 19, 21, 11, 14, 25, 31, 1, 22, 4, 1 };
 
-bool CInArchive::CompareCommands(const Byte *rawCmds, const Byte *sequence, size_t numCommands)
+bool CInArchive::CompareCommands(const Byte *rawCmds, const Byte *sequence, size_t numCommands) const
 {
-  for (UInt32 kkk = 0; kkk < numCommands; kkk++, rawCmds += kCmdSize)
+  for (size_t kkk = 0; kkk < numCommands; kkk++, rawCmds += kCmdSize)
     if (GetCmd(Get32(rawCmds)) != sequence[kkk])
       return false;
   return true;
@@ -2410,7 +2423,7 @@ unsigned CInArchive::GetNumSupportedCommands() const
 
 #endif
 
-UInt32 CInArchive::GetCmd(UInt32 a)
+UInt32 CInArchive::GetCmd(UInt32 a) const
 {
   if (!IsPark())
   {
@@ -2875,21 +2888,58 @@ static bool IsAbsolutePath(const char *s)
   return (s[0] == CHAR_PATH_SEPARATOR && s[1] == CHAR_PATH_SEPARATOR) || IsDrivePath(s);
 }
 
-void CInArchive::SetItemName(CItem &item, UInt32 strPos)
+
+static const unsigned k_PathLen_Small_Limit = 60 + 260 * 4; // we reserve some space for multibyte encoding and for prefix
+static const unsigned k_PathLen_Break_Limit = 1 << 12; // must be >= k_PathLen_Small_Limit
+
+#define k_LONG_PATH_DIR     "[LONG_PATH]"
+#define k_UNKNOWN_PATH_DIR  "[UNKNOWN_PATH]"
+#define k_LONG_PATH_FILE    "[LONG_PATH_FILE]"
+#define k_UNKNOWN_PATH_FILE "[UNKNOWN_PATH_FILE]"
+
+void CInArchive::SetItemName(CItem &item, const UInt32 strPos)
 {
-  ReadString2_Raw(strPos);
-  const bool isAbs = IsAbsolutePathVar(strPos);
-  if (IsUnicode)
+  item.Prefix = -1;
+  if (FILENAME_processing_WasStopped)
   {
-    item.NameU = Raw_UString;
-    if (!isAbs && !IsAbsolutePath(Raw_UString))
-      item.Prefix = (int)UPrefixes.Size() - 1;
+    if (IsUnicode)
+      item.NameU = k_UNKNOWN_PATH_FILE;
+    else
+      item.NameA = k_UNKNOWN_PATH_FILE;
   }
   else
   {
-    item.NameA = Raw_AString;
-    if (!isAbs && !IsAbsolutePath(Raw_AString))
-      item.Prefix = (int)APrefixes.Size() - 1;
+    ReadString2_Raw(strPos);
+    const bool isAbs = IsAbsolutePathVar(strPos);
+    if (IsUnicode)
+    {
+      if (Raw_UString.Len() >= k_PathLen_Small_Limit)
+        item.NameU = k_LONG_PATH_FILE;
+      else
+      {
+        item.NameU = Raw_UString;
+        if (!isAbs && !IsAbsolutePath(Raw_UString))
+          item.Prefix = (int)UPrefixes.Size() - 1;
+      }
+      if (Raw_UString.Len() >= k_PathLen_Break_Limit)
+        FILENAME_processing_WasStopped = true;
+    }
+    else
+    {
+      if (Raw_AString.Len() >= k_PathLen_Small_Limit)
+        item.NameA = k_LONG_PATH_FILE;
+      else
+      {
+        item.NameA = Raw_AString;
+        if (!isAbs && !IsAbsolutePath(Raw_AString))
+          item.Prefix = (int)APrefixes.Size() - 1;
+      }
+      if (Raw_AString.Len() >= k_PathLen_Break_Limit)
+        FILENAME_processing_WasStopped = true;
+    }
+    _memUsage_Files += item.NameA.Len() + item.NameU.Len() * 2 + 128;
+    if (_memUsage_Files >= (1 << 29))
+      FILENAME_processing_WasStopped = true;
   }
 }
 
@@ -3387,14 +3437,14 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
     {
       case EW_CREATEDIR:
       {
-        bool isSetOutPath = (params[1] != 0);
+        const bool isSetOutPath = (params[1] != 0);
 
-        if (isSetOutPath)
+        if (isSetOutPath && !CREATEDIR_processing_WasStopped)
         {
           UInt32 par0 = params[0];
           
           UInt32 resOffset;
-          Int32 idx = GetVarIndex(par0, resOffset);
+          const Int32 idx = GetVarIndex(par0, resOffset);
           if (idx == (Int32)spec_outdir_VarIndex ||
               idx == kVar_OUTDIR)
             par0 += resOffset;
@@ -3407,7 +3457,11 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
               Raw_UString.Insert(0, spec_outdir_U);
             else if (idx == kVar_OUTDIR)
               Raw_UString.Insert(0, UPrefixes.Back());
-            UPrefixes.Add(Raw_UString);
+            if (Raw_UString.Len() >= k_PathLen_Break_Limit)
+              CREATEDIR_processing_WasStopped = true;
+            if (Raw_UString.Len() >= k_PathLen_Small_Limit)
+              Raw_UString = k_LONG_PATH_DIR;
+            _memUsage_Dirs += Raw_UString.Len() * 2;
           }
           else
           {
@@ -3415,17 +3469,37 @@ HRESULT CInArchive::ReadEntries(const CBlockHeader &bh)
               Raw_AString.Insert(0, spec_outdir_A);
             else if (idx == kVar_OUTDIR)
               Raw_AString.Insert(0, APrefixes.Back());
-            APrefixes.Add(Raw_AString);
+            if (Raw_AString.Len() >= k_PathLen_Break_Limit)
+              CREATEDIR_processing_WasStopped = true;
+            if (Raw_AString.Len() >= k_PathLen_Small_Limit)
+              Raw_AString = k_LONG_PATH_DIR;
+            _memUsage_Dirs += Raw_AString.Len();
           }
+          _memUsage_Dirs += 64;
+          if (_memUsage_Dirs >= (1 << 25))
+          {
+            CREATEDIR_processing_WasStopped = true;
+            if (IsUnicode)
+              Raw_UString = k_UNKNOWN_PATH_DIR;
+            else
+              Raw_AString = k_UNKNOWN_PATH_DIR;
+          }
+          if (IsUnicode)
+            UPrefixes.Add(Raw_UString);
+          else
+            APrefixes.Add(Raw_AString);
         }
         
         #ifdef NSIS_SCRIPT
+        if (!s.IsError())
+        {
         s += isSetOutPath ? "SetOutPath" : "CreateDirectory";
         AddParam(params[0]);
         if (params[2] != 0) // 2.51+ & 3.0b3+
         {
           SmallSpaceComment();
           s += "CreateRestrictedDirectory";
+        }
         }
         #endif
         
@@ -5242,7 +5316,7 @@ HRESULT CInArchive::Parse()
     }
   }
 
-  if (bhEntries.Num > (1 << 25))
+  if (bhEntries.Num > (1 << 24))
     return S_FALSE;
   if (bhEntries.Num * kCmdSize > _size - bhEntries.Offset)
     return S_FALSE;
@@ -5498,7 +5572,12 @@ HRESULT CInArchive::Parse()
       return E_NOTIMPL; // maybe it's old NSIS archive()
 
     if (langtable_size < 10)
-      return S_FALSE;
+    {
+      // return S_FALSE;
+    }
+    else
+  {
+
     if (bhLangTables.Num > (_size - bhLangTables.Offset) / langtable_size)
       return S_FALSE;
 
@@ -5613,6 +5692,7 @@ HRESULT CInArchive::Parse()
       AddLF();
     }
     ClearLangComment();
+   }
   }
 
   {
@@ -6095,6 +6175,7 @@ HRESULT CInArchive::Open(IInStream *inStream, const UInt64 *maxCheckStartPositio
     DataStreamOffset -= pos;
     res = Open2(buf + kStartHeaderSize, bufSize - kStartHeaderSize);
   }
+  catch(CInArchiveException &) { res = S_FALSE; }
   catch(...)
   {
     _stream.Release();
@@ -6130,6 +6211,10 @@ void CInArchive::Clear2()
   LogCmdIsEnabled = false;
   BadCmd = -1;
   Is64Bit = false;
+  CREATEDIR_processing_WasStopped = false;
+  FILENAME_processing_WasStopped = false;
+  _memUsage_Dirs = 0;
+  _memUsage_Files = 0;
 
   #ifdef NSIS_SCRIPT
   Name.Empty();
