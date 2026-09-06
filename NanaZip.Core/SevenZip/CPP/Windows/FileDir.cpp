@@ -1276,10 +1276,7 @@ C_umask::C_umask()
     S_ISVTX  01000 sticky bit
   system's open(), mkdir() also can have similar 0777 restiction for some cases.
 */
-    // **************** 7-Zip ZS Modification Start ****************
-    //const mode_t um = umask(0); // um = 0022 (octal) is expected
-    const mode_t um = umask(0); // um = 0022 (octal) is expected // NOSONAR
-    // **************** 7-Zip ZS Modification End ****************
+  const mode_t um = umask(0); // um = 0022 (octal) is expected
   mask = ~um
       & 0777; // 0777 is our additional mode restruction : is secure
       // & 07777; // for debug : 07777 to support all mode bits : is not secure
