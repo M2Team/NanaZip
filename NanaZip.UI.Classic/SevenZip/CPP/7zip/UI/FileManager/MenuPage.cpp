@@ -33,6 +33,7 @@ static const UInt32 kLangIDs[] =
   IDX_EXTRACT_ELIM_DUP,
   IDT_SYSTEM_ZONE,
   // **************** NanaZip Modification Start ****************
+  IDX_EXTRACT_OPEN_FOLDER,
   IDX_EXTRACT_ON_OPEN,
 // **************** NanaZip Modification End ****************
   IDT_SYSTEM_CONTEXT_MENU_ITEMS

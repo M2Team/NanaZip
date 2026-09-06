@@ -19,7 +19,8 @@ BEGIN
            m, m + y, xc, yc - y
 
   // **************** NanaZip Modification Start ****************
-  CONTROL  "Extract on open", IDX_EXTRACT_ON_OPEN, MY_CHECKBOX, m, m + yc + 14, xc, 10
+  CONTROL  "Extract on open", IDX_EXTRACT_ON_OPEN, MY_CHECKBOX, m, m + yc + 6, xc, 10
+  CONTROL  "Open folder after extracting", IDX_EXTRACT_OPEN_FOLDER, MY_CHECKBOX, m, m + yc + 6 + 12, xc, 10
   // **************** NanaZip Modification End ****************
 END
 
