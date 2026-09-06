@@ -27,6 +27,7 @@
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.props" />
   <Import Project="..\NanaZip.Project\NanaZip.Project.Runtime.props" />
+  <Import Project="..\K7User\K7User.props" />
   <PropertyGroup>
     <RequiredBundles>Microsoft.VisualStudio.ComponentGroup.MSIX.Packaging</RequiredBundles>
   </PropertyGroup>
@@ -79,6 +80,10 @@
     <Page Include="StatusBarTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\ButtonCard.xaml" />
+    <Page Include="Styles\PivotTab.xaml" />
+    <Page Include="Styles\SettingsCard.xaml" />
+    <Page Include="Styles\ToggleSwitchCard.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
@@ -477,6 +482,11 @@
     <PRIResource Include="Strings\zh-Hant\Common.resw" />
     <PRIResource Include="Strings\zh-Hant\CopyLocationPage.resw" />
     <PRIResource Include="Strings\zh-Hant\ProgressPage.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\K7User\K7User.vcxproj">
+      <Project>{f9bf062b-998f-45a4-8285-96e4a0d5ec00}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.targets" />
   <!--

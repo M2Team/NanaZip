@@ -34,6 +34,18 @@
     <Page Include="InformationPage.xaml" />
     <Page Include="ProgressPage.xaml" />
     <Page Include="CopyLocationPage.xaml" />
+    <Page Include="Styles\ButtonCard.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="Styles\SettingsCard.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="Styles\ToggleSwitchCard.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="Styles\PivotTab.xaml">
+      <Filter>Styles</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
@@ -275,6 +287,9 @@
     </Filter>
     <Filter Include="Strings\pt-br">
       <UniqueIdentifier>{b7cfbca0-080d-4a0f-9279-460e584c279d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{3be14cb6-2456-4506-8017-b1205aba4370}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
