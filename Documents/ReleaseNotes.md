@@ -3,6 +3,27 @@
 For preview-only releases, please see
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 7.0, version 2609.1 (7.0.1832.0)**
+
+Note: These notes also cover the corresponding preview release.
+
+- Start using a rolling release model.
+- Synchronize 7-Zip mainline implementations to 26.03. (Except the NanaZip File
+  Manager.) (Thanks to Igor Pavlov. Noticed by FadeMind.)
+- Add an Extract all button to the copy dialog. (Contributed by dinhngtu.)
+- Fix UTF-8 passwords for WinZip AES extraction. (Contributed by wyjh233.)
+- Fix the issue that copied text does not remain in the clipboard after closing
+  the XAML information window.
+- Update Brazilian Portuguese translation. (Contributed by maisondasilva.)
+- Update Dutch translation. (Contributed by Stephan-P.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/e234d7f29f95c08cb642bcb9616cdb7d45f9862e.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.)
+- Synchronize the BLAKE3 implementation to 1.8.7.
+  (https://github.com/BLAKE3-team/BLAKE3/releases/tag/1.8.7)
+- Update Mile.Project.Configurations to 1.1.2116.
+
 **NanaZip 6.5 Update (6.5.1800.0)**
 
 - Fix the parsing offset issue for Electron Archive (asar) readonly support.
