@@ -11,13 +11,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildThisFileDirectory)NanaZip.Project.Version.props" />
   <PropertyGroup>
+    <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == ''">true</NanaZipBuildPreviewRelease>
+    <NanaZipBuildWithSanitizers Condition="'$(NanaZipBuildWithSanitizers)' == ''">false</NanaZipBuildWithSanitizers>
+  </PropertyGroup>
+  <PropertyGroup>
     <NanaZipBuildNumberDate Condition="'$(NanaZipBuildNumberDate)' == ''">$([System.DateTime]::Today.ToString('yyyy-MM-dd'))</NanaZipBuildNumberDate>
     <NanaZipProjectCreationDate>2021-08-31</NanaZipProjectCreationDate>
     <MileProjectVersion>$(NanaZipMajorVersion).$(NanaZipMinorVersion).$([System.DateTime]::Parse('$(NanaZipBuildNumberDate)').Subtract($([System.DateTime]::Parse('$(NanaZipProjectCreationDate)'))).TotalDays).0</MileProjectVersion>
-    <MileProjectVersionTag>$(NanaZipVersionTag)</MileProjectVersionTag>
-    <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == '' And $([System.String]::Copy('$(NanaZipVersionTag)').Contains('Preview'))">true</NanaZipBuildPreviewRelease>
-    <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == '' And $([System.String]::Copy('$(NanaZipVersionTag)').Contains('Final'))">true</NanaZipBuildPreviewRelease>
-    <NanaZipBuildPreviewRelease Condition="'$(NanaZipBuildPreviewRelease)' == ''">false</NanaZipBuildPreviewRelease>
-    <NanaZipBuildWithSanitizers Condition="'$(NanaZipBuildWithSanitizers)' == ''">false</NanaZipBuildWithSanitizers>
+    <MileProjectVersionTag Condition="'$(NanaZipBuildPreviewRelease)' == 'false'">, version $(NanaZipDisplayVersion)</MileProjectVersionTag>
+    <MileProjectVersionTag Condition="'$(MileProjectVersionTag)' == ''">Preview, version $(NanaZipDisplayVersion)</MileProjectVersionTag>
   </PropertyGroup>
 </Project>
