@@ -1,6 +1,7 @@
 ﻿# NanaZip Preview Release Notes
 
-For stable versions, please read [NanaZip Release Notes](ReleaseNotes.md).
+For preview releases with matching stable releases, please see
+[NanaZip Release Notes](ReleaseNotes.md).
 
 **NanaZip 7.0 Preview (7.0.1800.0)**
 

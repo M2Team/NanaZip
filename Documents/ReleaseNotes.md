@@ -1,6 +1,6 @@
 ﻿# NanaZip Release Notes
 
-For preview versions, please read 
+For preview-only releases, please see
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
 **NanaZip 6.5 Update (6.5.1800.0)**
