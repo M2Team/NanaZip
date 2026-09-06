@@ -60,6 +60,21 @@ static int FindFormatCalssId(const GUID *clsid)
   return -1;
 }
 
+// **************** NanaZip Modification Start ****************
+namespace NanaZip::Core::Archive
+{
+    _Ret_maybenull_ const CArcInfo* LookupArchiveInfo(const GUID* ArchiveClsid)
+    {
+        int FormatIndex = FindFormatCalssId(ArchiveClsid);
+        if (FormatIndex < 0)
+        {
+            return nullptr;
+        }
+        return g_Arcs[FormatIndex];
+    }
+}
+// **************** NanaZip Modification End ****************
+
 STDAPI CreateArchiver(const GUID *clsid, const GUID *iid, void **outObject);
 STDAPI CreateArchiver(const GUID *clsid, const GUID *iid, void **outObject)
 {

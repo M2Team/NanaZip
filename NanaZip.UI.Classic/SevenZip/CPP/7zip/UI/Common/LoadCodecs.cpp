@@ -176,6 +176,24 @@ int CArcInfoEx::FindExtension(const UString &ext) const
   return -1;
 }
 
+// **************** NanaZip Modification Start ****************
+int CArcInfoEx::MatchExtension(const UString &FileName) const
+{
+    FOR_VECTOR (i, Exts)
+    {
+        const wchar_t* RightExt = FileName.RightPtr(Exts[i].Ext.Len());
+
+        if (FileName.Len() > (Exts[i].Ext.Len() + 1) &&
+            Exts[i].Ext.IsEqualTo_NoCase(RightExt) &&
+            RightExt[-1] == L'.')
+        {
+            return (int)i;
+        }
+    }
+    return -1;
+}
+// **************** NanaZip Modification End ****************
+
 void CArcInfoEx::AddExts(const UString &ext, const UString &addExt)
 {
   UStringVector exts, addExts;
