@@ -48,6 +48,9 @@
   <data name="Resource2" xml:space="preserve">
     <value>Português Brasileiro</value>
   </data>
+  <data name="Resource104" xml:space="preserve">
+    <value>Abrir a pasta de destino</value>
+  </data>
   <data name="Resource401" xml:space="preserve">
     <value>OK</value>
   </data>
