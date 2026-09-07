@@ -1346,10 +1346,6 @@ HRESULT CZipDecoder::Decode(
             return S_OK;
           }
           // **************** NanaZip Modification End ****************
-          {
-            res = NExtract::NOperationResult::kWrongPassword;
-            return S_OK;
-          }
         }
       }
       else if (pkAesMode)
