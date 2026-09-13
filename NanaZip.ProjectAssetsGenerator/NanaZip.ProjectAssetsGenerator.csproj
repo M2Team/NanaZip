@@ -5,10 +5,13 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <MileDotNetHelpersEnableGitHelpers>true</MileDotNetHelpersEnableGitHelpers>
+    <MileDotNetHelpersEnableImageAssetsHelpers>true</MileDotNetHelpersEnableImageAssetsHelpers>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mile.Project.Helpers" Version="1.0.975" />
+    <PackageReference Include="Mile.DotNet.Helpers" Version="1.0.71" />
+    <PackageReference Condition="'$(MileDotNetHelpersEnableImageAssetsHelpers)' == 'true'" Include="Magick.NET-Q8-AnyCPU" Version="*" />
   </ItemGroup>
 
 </Project>

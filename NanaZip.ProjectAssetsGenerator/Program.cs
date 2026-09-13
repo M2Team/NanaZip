@@ -1,12 +1,12 @@
 ﻿using ImageMagick;
-using Mile.Project.Helpers;
+using Mile.DotNet.Helpers;
 using System.Collections.Concurrent;
 
 namespace NanaZip.ProjectAssetsGenerator
 {
     internal class Program
     {
-        static string RepositoryRoot = GitRepository.GetRootPath();
+        static string RepositoryRoot = Git.GetRootPath();
 
         static void Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace NanaZip.ProjectAssetsGenerator
                 ConcurrentDictionary<int, MagickImage> SfxStubSources =
                     new ConcurrentDictionary<int, MagickImage>();
 
-                foreach (var AssetSize in ProjectAssetsUtilities.AssetSizes)
+                foreach (var AssetSize in ImageAssets.AssetSizes)
                 {
                     StandardSources[AssetSize] = new MagickImage(string.Format(
                         @"{0}\{1}\{1}_{2}.png",
@@ -66,22 +66,22 @@ namespace NanaZip.ProjectAssetsGenerator
                         AssetSize));
                 }
 
-                ProjectAssetsUtilities.GeneratePackageApplicationImageAssets(
+                ImageAssets.GeneratePackageApplicationImageAssets(
                     StandardSources,
                     ContrastBlackSources,
                     ContrastWhiteSources,
                     OutputPath);
 
-                ProjectAssetsUtilities.GeneratePackageFileAssociationImageAssets(
+                ImageAssets.GeneratePackageFileAssociationImageAssets(
                     ArchiveFileSources,
                     OutputPath,
                     @"ArchiveFile");
 
-                ProjectAssetsUtilities.GenerateIconFile(
+                ImageAssets.GenerateIconFile(
                     StandardIconSources,
                     OutputPath + @"\..\NanaZip.ico");
 
-                ProjectAssetsUtilities.GenerateIconFile(
+                ImageAssets.GenerateIconFile(
                     SfxStubSources,
                     OutputPath + @"\..\NanaZipSfx.ico");
 
@@ -109,7 +109,7 @@ namespace NanaZip.ProjectAssetsGenerator
                 ConcurrentDictionary<int, MagickImage> SfxStubSources =
                     new ConcurrentDictionary<int, MagickImage>();
 
-                foreach (var AssetSize in ProjectAssetsUtilities.AssetSizes)
+                foreach (var AssetSize in ImageAssets.AssetSizes)
                 {
                     StandardSources[AssetSize] = new MagickImage(string.Format(
                         @"{0}\{1}\{1}_{2}.png",
@@ -145,22 +145,22 @@ namespace NanaZip.ProjectAssetsGenerator
                         AssetSize));
                 }
 
-                ProjectAssetsUtilities.GeneratePackageApplicationImageAssets(
+                ImageAssets.GeneratePackageApplicationImageAssets(
                     StandardSources,
                     ContrastBlackSources,
                     ContrastWhiteSources,
                     OutputPath);
 
-                ProjectAssetsUtilities.GeneratePackageFileAssociationImageAssets(
+                ImageAssets.GeneratePackageFileAssociationImageAssets(
                     ArchiveFileSources,
                     OutputPath,
                     @"ArchiveFile");
 
-                ProjectAssetsUtilities.GenerateIconFile(
+                ImageAssets.GenerateIconFile(
                     StandardIconSources,
                     OutputPath + @"\..\NanaZipPreview.ico");
 
-                ProjectAssetsUtilities.GenerateIconFile(
+                ImageAssets.GenerateIconFile(
                     SfxStubSources,
                     OutputPath + @"\..\NanaZipPreviewSfx.ico");
 

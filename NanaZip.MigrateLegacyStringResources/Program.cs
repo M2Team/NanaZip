@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Construction;
+using Mile.DotNet.Helpers;
 using System.Collections.Immutable;
 using System.Xml;
 
@@ -45,7 +46,7 @@ internal class Program
 
     static int Main(string[] args)
     {
-        string gitRoot = Mile.Project.Helpers.GitRepository.GetRootPath();
+        string gitRoot = Git.GetRootPath();
 
         if (string.IsNullOrEmpty(gitRoot))
         {

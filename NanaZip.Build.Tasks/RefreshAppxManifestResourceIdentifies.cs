@@ -1,6 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Mile.Project.Helpers;
+using Mile.DotNet.Helpers;
 using System.IO;
 
 namespace NanaZip.Build.Tasks
@@ -45,7 +45,7 @@ namespace NanaZip.Build.Tasks
                 }
             }
 
-            FileUtilities.SaveTextToFileAsUtf8Bom(
+            Text.SaveTextToFileAsUtf8WithBom(
                 FilePath,
                 File.ReadAllText(FilePath).Replace(
                     PreviousContent,

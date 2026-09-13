@@ -5,11 +5,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <MileDotNetHelpersEnableGitHelpers>true</MileDotNetHelpersEnableGitHelpers>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" Version="18.0.2" />
-    <PackageReference Include="Mile.Project.Helpers" Version="1.0.975" />
+    <PackageReference Include="Mile.DotNet.Helpers" Version="1.0.71" />
     <PackageReference Include="vswhere" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
