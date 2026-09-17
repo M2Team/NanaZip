@@ -305,6 +305,7 @@
     <ClInclude Include="Lizard\entropy\hist.h" />
     <ClInclude Include="Lizard\entropy\huf.h" />
     <ClInclude Include="Lizard\entropy\mem.h" />
+    <ClInclude Include="LZ5\lz5hc_common.h" />
     <ClInclude Include="Mile.Helpers.Portable.Base.Unstaged.h" />
     <ClInclude Include="NanaZip.Codecs.h" />
     <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
@@ -405,7 +406,7 @@
     <ClInclude Include="Lizard\lizard_parser_optimal.h" />
     <ClInclude Include="Lizard\lizard_parser_pricefast.h" />
     <ClInclude Include="LZ5\lz5.h" />
-    <ClInclude Include="LZ5\lz5common.h" />
+    <ClInclude Include="LZ5\lz5_common.h" />
     <ClInclude Include="LZ5\lz5frame.h" />
     <ClInclude Include="LZ5\lz5frame_static.h" />
     <ClInclude Include="LZ5\lz5hc.h" />

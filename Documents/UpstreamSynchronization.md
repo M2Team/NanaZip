@@ -63,7 +63,7 @@
 
 ## LZ5
 
-- NanaZip.Codecs: 1.5
+- NanaZip.Codecs: Commit 1bc0fef363a44444135badb8e34286d5c56e1d5c after v1.5.
 
 ## RHash
 

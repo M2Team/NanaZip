@@ -30,7 +30,6 @@
 
     You can contact the author at :
        - LZ5 source repository : https://github.com/inikep/lz5
-       - LZ5 public forum : https://groups.google.com/forum/#!forum/lz5c
 */
 
 
@@ -39,17 +38,39 @@
 /* *************************************
 *  Includes
 ***************************************/
-#define LZ5HC_INCLUDES
-#include "lz5common.h"
+#include "lz5_common.h"
 #include "lz5.h"
 #include "lz5hc.h"
+#include "lz5hc_common.h"
 #include <stdio.h>
 #include <stdint.h>
 
 
-/**************************************
-*  HC Compression
-**************************************/
+
+FORCE_INLINE size_t LZ5HC_get_price(size_t litlen, size_t offset, size_t mlen)
+{
+	return LZ5_CODEWORD_COST(litlen, offset, mlen);
+}
+
+
+FORCE_INLINE size_t LZ5HC_better_price(size_t best_off, size_t best_common, size_t off, size_t common, size_t last_off)
+{
+  return LZ5_NORMAL_MATCH_COST(common - MINMATCH, (off == last_off) ? 0 : off) < LZ5_NORMAL_MATCH_COST(best_common - MINMATCH, (best_off == last_off) ? 0 : best_off) + (LZ5_NORMAL_LIT_COST(common - best_common) );
+}
+
+
+FORCE_INLINE size_t LZ5HC_more_profitable(size_t best_off, size_t best_common, size_t off, size_t common, size_t literals, size_t last_off)
+{
+	size_t sum;
+	
+	if (literals > 0)
+		sum = MAX(common + literals, best_common);
+	else
+		sum = MAX(common, best_common - literals);
+	
+//	return LZ5_CODEWORD_COST(sum - common, (off == last_off) ? 0 : (off), common - MINMATCH) <= LZ5_CODEWORD_COST(sum - best_common, (best_off == last_off) ? 0 : (best_off), best_common - MINMATCH);
+	return LZ5_NORMAL_MATCH_COST(common - MINMATCH, (off == last_off) ? 0 : off) + LZ5_NORMAL_LIT_COST(sum - common) <= LZ5_NORMAL_MATCH_COST(best_common - MINMATCH, (best_off == last_off) ? 0 : (best_off)) + LZ5_NORMAL_LIT_COST(sum - best_common);
+}
 
 
 int LZ5_alloc_mem_HC(LZ5HC_Data_Structure* ctx, int compressionLevel)
@@ -127,7 +148,9 @@ FORCE_INLINE void LZ5HC_BinTree_Insert(LZ5HC_Data_Structure* ctx, const BYTE* ip
     }
 
     ctx->nextToUpdate = target;
-#endif 
+#else
+    (void)ctx; (void)ip;
+#endif
 }
 
 
@@ -164,7 +187,7 @@ FORCE_INLINE void LZ5HC_BinTree_InsertFull(LZ5HC_Data_Structure* ctx, const BYTE
         matchIndex = *HashPos;
 #if MINMATCH == 3
         HashTable3[LZ5HC_hash3Ptr(ip, ctx->params.hashLog3)] = idx;
-#endif 
+#endif
 
         // check rest of matches
         ptr0 = &chainTable[(idx*2+1) & contentMask];
@@ -381,6 +404,8 @@ FORCE_INLINE int LZ5HC_FindMatchFast (LZ5HC_Data_Structure* ctx, U32 matchIndex,
 			}
 		}
 	}
+#else
+    (void)matchIndex3;
 #endif
 
     if ((matchIndex < current) && (matchIndex>=lowLimit))
@@ -647,7 +672,6 @@ FORCE_INLINE int LZ5HC_GetAllMatches (
 {
     U32* const chainTable = ctx->chainTable;
     U32* const HashTable = ctx->hashTable;
-    U32* const HashTable3 = ctx->hashTable3;
     const BYTE* const base = ctx->base;
     const U32 dictLimit = ctx->dictLimit;
     const BYTE* const lowPrefixPtr = base + dictLimit;
@@ -661,7 +685,7 @@ FORCE_INLINE int LZ5HC_GetAllMatches (
     int nbAttempts = ctx->params.searchNum;
  //   bool fullSearch = (ctx->params.fullSearch >= 2);
     int mnum = 0;
-    U32* HashPos, *HashPos3;
+    U32* HashPos;
 
     if (ip + MINMATCH > iHighLimit) return 0;
 
@@ -669,7 +693,9 @@ FORCE_INLINE int LZ5HC_GetAllMatches (
     HashPos = &HashTable[LZ5HC_hashPtr(ip, ctx->params.hashLog, ctx->params.searchLength)];
     matchIndex = *HashPos;
 #if MINMATCH == 3
-    HashPos3 = &HashTable3[LZ5HC_hash3Ptr(ip, ctx->params.hashLog3)];
+    {
+    U32* const HashTable3 = ctx->hashTable3;
+    U32* HashPos3 = &HashTable3[LZ5HC_hash3Ptr(ip, ctx->params.hashLog3)];
 
     if ((*HashPos3 < current) && (*HashPos3 >= lowLimit)) 
 	{
@@ -694,6 +720,7 @@ FORCE_INLINE int LZ5HC_GetAllMatches (
 	}
 
     *HashPos3 = current;
+    }
 #endif
 
 
@@ -791,7 +818,7 @@ FORCE_INLINE int LZ5HC_BinTree_GetAllMatches (
     U32 *ptr0, *ptr1;
     U32 matchIndex, delta0, delta1;
     size_t mlt = 0;
-    U32* HashPos, *HashPos3;
+    U32* HashPos;
     
     if (ip + MINMATCH > iHighLimit) return 0;
 
@@ -801,7 +828,8 @@ FORCE_INLINE int LZ5HC_BinTree_GetAllMatches (
 
     
 #if MINMATCH == 3
-    HashPos3 = &ctx->hashTable3[LZ5HC_hash3Ptr(ip, ctx->params.hashLog3)];
+    {
+    U32* HashPos3 = &ctx->hashTable3[LZ5HC_hash3Ptr(ip, ctx->params.hashLog3)];
 
     if ((*HashPos3 < current) && (*HashPos3 >= lowLimit)) 
 	{
@@ -822,6 +850,7 @@ FORCE_INLINE int LZ5HC_BinTree_GetAllMatches (
 
 		*HashPos3 = current;
 	}
+    }
 #endif
     
 
@@ -1071,7 +1100,7 @@ static int LZ5HC_compress_optimal_price (
         }
 
  
-       best_mlen = (last_pos) ? last_pos : MINMATCH;
+       best_mlen = (last_pos) ? last_pos : (MINMATCH-1);
 
        if (faster_get_matches && last_pos)
            match_num = 0;
@@ -1245,7 +1274,7 @@ static int LZ5HC_compress_optimal_price (
             }
 
 
-            best_mlen = (best_mlen > MINMATCH) ? best_mlen : MINMATCH;      
+            best_mlen = (best_mlen > MINMATCH) ? best_mlen : (MINMATCH-1);
 
             if (ctx->params.strategy == LZ5HC_optimal_price)
             {
@@ -1557,7 +1586,7 @@ static int LZ5HC_compress_price_fast (
     U32* HashTable3  = ctx->hashTable3;
 #endif 
     const BYTE* const base = ctx->base;
-    U32* HashPos, *HashPos3;
+    U32* HashPos;
 
     /* init */
 	ctx->inputBuffer = (const BYTE*)source;
@@ -1571,9 +1600,11 @@ static int LZ5HC_compress_price_fast (
     {
         HashPos = &HashTable[LZ5HC_hashPtr(ip, ctx->params.hashLog, ctx->params.searchLength)];
 #if MINMATCH == 3
-        HashPos3 = &HashTable3[LZ5HC_hash3Ptr(ip, ctx->params.hashLog3)];
+        {
+        U32* HashPos3 = &HashTable3[LZ5HC_hash3Ptr(ip, ctx->params.hashLog3)];
         ml = LZ5HC_FindMatchFast (ctx, *HashPos, *HashPos3, ip, matchlimit, (&ref));
         *HashPos3 = (U32)(ip - base);
+        }
 #else
         ml = LZ5HC_FindMatchFast (ctx, *HashPos, 0, ip, matchlimit, (&ref));
 #endif 
@@ -1815,7 +1846,7 @@ int LZ5_freeStreamHC (LZ5_streamHC_t* LZ5_streamHCPtr)
 /* initialization */
 void LZ5_resetStreamHC (LZ5_streamHC_t* LZ5_streamHCPtr)
 {
-    LZ5_STATIC_ASSERT(sizeof(LZ5HC_Data_Structure) <= sizeof(LZ5_streamHC_t));   /* if compilation fails here, LZ5_STREAMHCSIZE must be increased */
+    MEM_STATIC_ASSERT(sizeof(LZ5HC_Data_Structure) <= sizeof(LZ5_streamHC_t));   /* if compilation fails here, LZ5_STREAMHCSIZE must be increased */
     ((LZ5HC_Data_Structure*)LZ5_streamHCPtr)->base = NULL;
 }
 

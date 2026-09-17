@@ -30,7 +30,6 @@
 
    You can contact the author at :
    - LZ5 source repository : https://github.com/inikep/lz5
-   - LZ5 public forum : https://groups.google.com/forum/#!forum/lz5c
 */
 #pragma once
 
@@ -47,12 +46,19 @@ extern "C" {
 /**************************************
 *  Version
 **************************************/
-#define LZ5_VERSION          "v1.5.0"
+#define LZ5_VERSION          "v1.5.1"
 #define LZ5_VERSION_MAJOR    1    /* for breaking interface changes  */
 #define LZ5_VERSION_MINOR    5    /* for new (non-breaking) interface capabilities */
-#define LZ5_VERSION_RELEASE  0    /* for tweaks, bug-fixes, or development */
+#define LZ5_VERSION_RELEASE  1    /* for tweaks, bug-fixes, or development */
 #define LZ5_VERSION_NUMBER (LZ5_VERSION_MAJOR *100*100 + LZ5_VERSION_MINOR *100 + LZ5_VERSION_RELEASE)
+
+#define LZ5_LIB_VERSION LZ5_VERSION_MAJOR.LZ5_VERSION_MINOR.LZ5_VERSION_RELEASE
+#define LZ5_QUOTE(str) #str
+#define LZ5_EXPAND_AND_QUOTE(str) LZ5_QUOTE(str)
+#define LZ5_VERSION_STRING LZ5_EXPAND_AND_QUOTE(LZ5_LIB_VERSION)
+
 int LZ5_versionNumber (void);
+
 
 #define LZ5HC_MAX_CLEVEL     15
 

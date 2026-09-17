@@ -808,7 +808,7 @@
     <ClInclude Include="LZ5\lz5.h">
       <Filter>LZ5</Filter>
     </ClInclude>
-    <ClInclude Include="LZ5\lz5common.h">
+    <ClInclude Include="LZ5\lz5_common.h">
       <Filter>LZ5</Filter>
     </ClInclude>
     <ClInclude Include="LZ5\lz5frame.h">
@@ -1176,6 +1176,9 @@
     </ClInclude>
     <ClInclude Include="Brotli\enc\static_init.h">
       <Filter>Brotli\enc</Filter>
+    </ClInclude>
+    <ClInclude Include="LZ5\lz5hc_common.h">
+      <Filter>LZ5</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

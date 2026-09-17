@@ -30,7 +30,6 @@
 
    You can contact the author at :
    - LZ5 source repository : https://github.com/inikep/lz5
-   - LZ5 public forum : https://groups.google.com/forum/#!forum/lz5c
 */
 
 
@@ -38,7 +37,7 @@
 /**************************************
 *  Includes
 **************************************/
-#include "lz5common.h"
+#include "lz5_common.h"
 #include "lz5.h"
 #include <stdio.h>
 
@@ -110,7 +109,7 @@ static U32 LZ5_hashSequenceT(size_t sequence, tableType_t const tableType)
     return LZ5_hashSequence((U32)sequence, tableType);
 }
 
-static U32 LZ5_hashPosition(const void* p, tableType_t tableType) { return LZ5_hashSequenceT(MEM_read_ARCH(p), tableType); }
+static U32 LZ5_hashPosition(const void* p, tableType_t tableType) { return LZ5_hashSequenceT(MEM_readST(p), tableType); }
 
 static void LZ5_putPositionOnHash(const BYTE* p, U32 h, void* tableBase, tableType_t const tableType, const BYTE* srcBase)
 {
@@ -719,7 +718,7 @@ int LZ5_compress_destSize(const char* src, char* dst, int* srcSizePtr, int targe
 LZ5_stream_t* LZ5_createStream(void)
 {
     LZ5_stream_t* lz5s = (LZ5_stream_t*)ALLOCATOR(8, LZ5_STREAMSIZE_U64);
-    LZ5_STATIC_ASSERT(LZ5_STREAMSIZE >= sizeof(LZ5_stream_t_internal));    /* A compilation error here means LZ5_STREAMSIZE is not large enough */
+    MEM_STATIC_ASSERT(LZ5_STREAMSIZE >= sizeof(LZ5_stream_t_internal));    /* A compilation error here means LZ5_STREAMSIZE is not large enough */
     LZ5_resetStream(lz5s);
     return lz5s;
 }

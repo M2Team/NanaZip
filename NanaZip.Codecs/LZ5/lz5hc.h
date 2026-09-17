@@ -29,7 +29,6 @@
 
    You can contact the author at :
    - LZ5 source repository : https://github.com/inikep/lz5
-   - LZ5 public forum : https://groups.google.com/forum/#!forum/lz5c
 */
 #pragma once
 
