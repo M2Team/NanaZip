@@ -54,7 +54,8 @@
 
 ## Lizard
 
-- NanaZip.Codecs: 2.1 with current used 7-Zip ZS modifications.
+- NanaZip.Codecs: Commit d3becc7e80d3eb01147c2f63bed2e23fac533f19 after v2.1
+  with current used 7-Zip ZS modifications.
 
 ## LZ4
 

@@ -235,7 +235,7 @@ int Lizard_writeBlock(Lizard_stream_t* ctx, const BYTE* ip, uint32_t inputSize, 
 _write_uncompressed:
     LIZARD_LOG_COMPRESS("%d: total=%d block=%d UNCOMPRESSED inputSize=%u outSize=%d\n", (int)(ip - ctx->srcBase),
             (int)(*op - ctx->destBase), (int)(*op-start), inputSize, (int)(oend-start));
-    if ((uint32_t)(oend - start) < inputSize + 4) goto _output_error;
+    if (start > oend || (uint32_t)(oend - start) < inputSize + 4) goto _output_error;
     *start = LIZARD_FLAG_UNCOMPRESSED;
     *op = start + 1;
     MEM_writeLE24(*op, inputSize);
