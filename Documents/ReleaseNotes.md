@@ -3,6 +3,15 @@
 For preview-only releases, please see
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 7.0, version 2609.2 (7.0.1843.0)**
+
+- Add fix for wrong password on all Zip archives. (Contributed by dinhngtu.)
+- Update Brazilian Portuguese translation. (Contributed by maisondasilva.)
+- Use Mile.DotNet.Helpers instead of Mile.Project.Helpers.
+- Update Mile.Mobility to 1.1.678.
+- Update Mile.Windows.Internal to 1.0.3729.
+- Update Mile.Detours to 1.0.2442.
+
 **NanaZip 7.0, version 2609.1 (7.0.1832.0)**
 
 Note: These notes also cover the corresponding preview release.
