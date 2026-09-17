@@ -498,12 +498,12 @@ typedef struct {
 
 typedef enum {
     /* compression parameters */
-    FL2_p_compressionLevel, /* Update all compression parameters according to pre-defined cLevel table
-                             * Default level is FL2_CLEVEL_DEFAULT==6.
-                             * Setting FL2_p_highCompression to 1 switches to an alternate cLevel table. */
-    FL2_p_highCompression,  /* Maximize compression ratio for a given dictionary size.
-                             * Levels 1..10 = dictionaryLog 20..29 (1 Mb..512 Mb).
-                             * Typically provides a poor speed/ratio tradeoff. */
+    FL2_p_compressionLevel, /* Update all compression parameters according to the selected cLevel table.
+                             * Valid levels are 1..10; default is FL2_CLEVEL_DEFAULT==6.
+                             * FL2_p_highCompression selects which cLevel table is used. */
+    FL2_p_highCompression,  /* Select the alternate high-compression cLevel table.
+                             * Set to 0 to disable it or to any non-zero value to enable it.
+                             * Select the actual level separately with FL2_p_compressionLevel. */
     FL2_p_dictionaryLog,    /* Maximum allowed back-reference distance, expressed as power of 2.
                              * Must be clamped between FL2_DICTLOG_MIN and FL2_DICTLOG_MAX.
                              * Default = 24 */
