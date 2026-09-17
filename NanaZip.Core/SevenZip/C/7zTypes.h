@@ -119,6 +119,10 @@ typedef int WRes;
 #define ERROR_PATH_NOT_FOUND        ENOENT
 #define ERROR_FILE_NOT_FOUND        ENOENT
 #define ERROR_DISK_FULL             ENOSPC
+// **************** 7-Zip ZS Modification Start ****************
+#define ERROR_HANDLE_EOF            EILSEQ
+#define ERROR_INVALID_DATA          EBADMSG
+// **************** 7-Zip ZS Modification End ****************
 // #define ERROR_INVALID_HANDLE        EBADF
 
 // we use FACILITY_WIN32 for errors that has no errno equivalent

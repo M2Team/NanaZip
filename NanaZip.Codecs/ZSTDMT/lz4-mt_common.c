@@ -48,6 +48,8 @@ const char *LZ4MT_getErrorString(size_t code)
 		return "Write failure";
 	case PREFIX(data_error):
 		return "Malformed input";
+	case PREFIX(end_of_data):
+		return "Unexpected end of data";
 	case PREFIX(frame_compress):
 		return "Could not compress frame at once";
 	case PREFIX(frame_decompress):

@@ -65,12 +65,18 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsLz4Decode(
 
     if (::LZ4MT_isError(Result))
     {
-        if (ERROR(canceled) == Result)
+        switch (Result)
         {
+        case ERROR(canceled):
             return E_ABORT;
+        case ERROR(end_of_data):
+            return HRESULT_FROM_WIN32(ERROR_HANDLE_EOF);
+        case ERROR(data_error):
+        case ERROR(compression_library):
+            return HRESULT_FROM_WIN32(ERROR_INVALID_DATA);
+        default:
+            return E_FAIL;
         }
-
-        return E_FAIL;
     }
 
     return S_OK;

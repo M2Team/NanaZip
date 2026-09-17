@@ -209,7 +209,7 @@ static size_t pt_write(BROTLIMT_DCtx * ctx, struct writelist *wl)
 static size_t pt_read(BROTLIMT_DCtx * ctx, BROTLIMT_Buffer * in, size_t * frame, size_t * uncompressed)
 {
 	BROTLIMT_Buffer hdr;
-	int rv;
+	size_t result; int rv;
 
 	/* handle skippable frame (16 bytes) */
 	pthread_mutex_lock(&ctx->read_mutex);
@@ -250,16 +250,24 @@ static size_t pt_read(BROTLIMT_DCtx * ctx, BROTLIMT_Buffer * in, size_t * frame,
 		}
 	}
 
-	if (hdr.size < 16)
-		goto error_read;
-	if (MEM_readLE32(hdr.buf) != BROTLIMT_MAGIC_SKIPPABLE)
-		goto error_data;
+	if (hdr.size < 16) {
+		result = MT_ERROR(end_of_data);
+		goto error;
+	}
+	if (MEM_readLE32(hdr.buf) != BROTLIMT_MAGIC_SKIPPABLE) {
+		result = MT_ERROR(data_error);
+		goto error;
+	}
 
 	/* check header data */
-	if (MEM_readLE32((char *)hdr.buf + 4) != 8)
-		goto error_data;
-	if (MEM_readLE16((char *)hdr.buf + 12) != BROTLIMT_MAGICNUMBER)
-		goto error_data;
+	if (MEM_readLE32((char *)hdr.buf + 4) != 8) {
+		result = MT_ERROR(data_error);
+		goto error;
+	}
+	if (MEM_readLE16((char *)hdr.buf + 12) != BROTLIMT_MAGICNUMBER) {
+		result = MT_ERROR(data_error);
+		goto error;
+	}
 
 	/* get uncompressed size for output buffer */
 	{
@@ -277,8 +285,10 @@ static size_t pt_read(BROTLIMT_DCtx * ctx, BROTLIMT_Buffer * in, size_t * frame,
 				in->buf = realloc(in->buf, toRead);
 			else
 				in->buf = malloc(toRead);
-			if (!in->buf)
-				goto error_nomem;
+			if (!in->buf) {
+				result = MT_ERROR(memory_allocation);
+				goto error;
+			}
 			in->allocated = toRead;
 		}
 		in->size = toRead;
@@ -312,8 +322,10 @@ static size_t pt_read(BROTLIMT_DCtx * ctx, BROTLIMT_Buffer * in, size_t * frame,
 			}
 		}
 		/* needed more bytes! */
-		if (in->size != toRead)
-			goto error_data;
+		if (in->size != toRead) {
+			result = in->size < toRead ? MT_ERROR(end_of_data) : MT_ERROR(data_error);
+			goto error;
+		}
 
 		ctx->insize += in->size;
 	}
@@ -323,15 +335,9 @@ static size_t pt_read(BROTLIMT_DCtx * ctx, BROTLIMT_Buffer * in, size_t * frame,
 	/* done, no error */
 	return 0;
 
- error_data:
+ error:
 	pthread_mutex_unlock(&ctx->read_mutex);
-	return MT_ERROR(data_error);
- error_read:
-	pthread_mutex_unlock(&ctx->read_mutex);
-	return MT_ERROR(read_fail);
- error_nomem:
-	pthread_mutex_unlock(&ctx->read_mutex);
-	return MT_ERROR(memory_allocation);
+	return result;
 }
 
 static void *pt_decompress(void *arg)
@@ -433,8 +439,9 @@ static size_t st_finish_decompress(BROTLIMT_DCtx *ctx, BROTLIMT_Buffer *out, uin
 {
 	int rv;
 
-	if (bres != BROTLI_DECODER_RESULT_SUCCESS)
+	if (bres != BROTLI_DECODER_RESULT_SUCCESS) {
 		return MT_ERROR(data_error); // corrupt input
+	}
 
 	out->size = next_out - (uint8_t *)out->buf;
 	if (out->size != 0) {
@@ -510,7 +517,10 @@ static size_t st_decompress(BROTLIMT_DCtx *ctx, const unsigned char *prefix, siz
 			ctx->frames++; // signal for mt-brotli content-based detection, it passed 1st block
 			in->size = in->allocated;
 			rv = ctx->fn_read(ctx->arg_read, in);
-			if (in->size == 0) break;
+			if (in->size == 0) {
+				retval = MT_ERROR(end_of_data); // unexpected end of data
+				goto done;
+			}
 			if (rv != 0) {
 				retval = mt_error(rv);
 				goto done;

@@ -44,6 +44,7 @@ typedef enum {
   LZ4MT_error_read_fail,
   LZ4MT_error_write_fail,
   LZ4MT_error_data_error,
+  LZ4MT_error_end_of_data,
   LZ4MT_error_frame_compress,
   LZ4MT_error_frame_decompress,
   LZ4MT_error_compressionParameter_unsupported,

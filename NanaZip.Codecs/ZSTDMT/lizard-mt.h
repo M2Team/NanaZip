@@ -44,6 +44,7 @@ typedef enum {
   LIZARDMT_error_read_fail,
   LIZARDMT_error_write_fail,
   LIZARDMT_error_data_error,
+  LIZARDMT_error_end_of_data,
   LIZARDMT_error_frame_compress,
   LIZARDMT_error_frame_decompress,
   LIZARDMT_error_compressionParameter_unsupported,

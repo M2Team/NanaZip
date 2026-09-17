@@ -45,6 +45,7 @@ typedef enum {
   BROTLIMT_error_read_fail,
   BROTLIMT_error_write_fail,
   BROTLIMT_error_data_error,
+  BROTLIMT_error_end_of_data,
   BROTLIMT_error_frame_compress,
   BROTLIMT_error_frame_decompress,
   BROTLIMT_error_compressionParameter_unsupported,

@@ -69,12 +69,18 @@ EXTERN_C HRESULT WINAPI NanaZipCodecsBrotliDecode(
 
     if (::BROTLIMT_isError(Result))
     {
-        if (MT_ERROR(canceled) == Result)
+        switch (Result)
         {
+        case MT_ERROR(canceled):
             return E_ABORT;
+        case MT_ERROR(end_of_data):
+            return HRESULT_FROM_WIN32(ERROR_HANDLE_EOF);
+        case MT_ERROR(data_error):
+        case MT_ERROR(compression_library):
+            return HRESULT_FROM_WIN32(ERROR_INVALID_DATA);
+        default:
+            return E_FAIL;
         }
-
-        return E_FAIL;
     } 
 
     return S_OK;
