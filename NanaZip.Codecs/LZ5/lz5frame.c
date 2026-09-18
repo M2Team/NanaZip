@@ -1030,6 +1030,12 @@ static void LZ5F_updateDict(LZ5F_dctx_t* dctxPtr, const BYTE* dstPtr, size_t dst
 
 
 
+// **************** NanaZip Modification Start ****************
+// Disable optimizations for this function to workaround unknown issues which
+// cause decompression to fail. This is a temporary workaround until the root
+// cause can be identified and fixed.
+#pragma optimize("", off)
+// **************** NanaZip Modification End ****************
 /* LZ5F_decompress()
 * Call this function repetitively to regenerate data compressed within srcBuffer.
 * The function will attempt to decode *srcSizePtr from srcBuffer, into dstBuffer of maximum size *dstSizePtr.
@@ -1097,7 +1103,6 @@ size_t LZ5F_decompress(LZ5F_decompressionContext_t decompressionContext,
                 dctxPtr->tmpInTarget = minFHSize;   /* minimum to attempt decode */
                 dctxPtr->dStage = dstage_storeHeader;
             }
-
         case dstage_storeHeader:
             {
                 size_t sizeToCopy = dctxPtr->tmpInTarget - dctxPtr->tmpInSize;
@@ -1483,3 +1488,7 @@ size_t LZ5F_decompress(LZ5F_decompressionContext_t decompressionContext,
     *dstSizePtr = (dstPtr - dstStart);
     return nextSrcSizeHint;
 }
+// **************** NanaZip Modification Start ****************
+// Restore the optimization settings to the previous state.
+#pragma optimize("", on)
+// **************** NanaZip Modification End ****************
