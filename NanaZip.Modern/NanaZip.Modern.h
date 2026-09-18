@@ -271,4 +271,13 @@ EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
     _In_ HWND ParentWindowHandle,
     _In_ HMENU MoreMenuHandle);
 
+/**
+ * @brief Refresh the XAML theme of the modern experience according to the
+ *        current "Invert Theme" option and the system theme.
+ * @remark The "Invert Theme" option is stored as a REG_DWORD under
+ *         HKCU\Software\NanaZip\FM\InvertTheme. This function must be called
+ *         on the thread that initialized the modern experience.
+ */
+EXTERN_C VOID WINAPI K7ModernRefreshTheme();
+
 #endif // !NANAZIP_MODERN_EXPERIENCE

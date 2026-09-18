@@ -1135,6 +1135,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         ::SendMessageW(g_App.m_ToolBar, message, wParam, lParam);
 
+        // **************** NanaZip Modification Start ****************
+        // Refresh the XAML theme when the system light/dark mode changes so
+        // the "Invert Theme" option keeps tracking the system setting.
+        {
+          LPCWSTR Section = reinterpret_cast<LPCWSTR>(lParam);
+          if (Section && 0 == lstrcmpiW(Section, L"ImmersiveColorSet"))
+          {
+            ::K7ModernRefreshTheme();
+          }
+        }
+        // **************** NanaZip Modification End ****************
+
         break;
     }
     default:

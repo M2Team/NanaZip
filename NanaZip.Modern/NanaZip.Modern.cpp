@@ -25,10 +25,17 @@
 #pragma comment(lib, "comctl32.lib")
 
 #include <winrt/Windows.ApplicationModel.Resources.Core.h>
+#include <winrt/Windows.UI.h>
 #include <winrt/Windows.UI.Xaml.Hosting.h>
+#include <winrt/Windows.UI.Xaml.h>
+#include <winrt/Windows.UI.Xaml.Media.h>
 
+#include <cwchar>
+#include <iterator>
 #include <mutex>
 #include <map>
+#include <utility>
+#include <vector>
 
 namespace winrt
 {
@@ -106,6 +113,297 @@ namespace
     static winrt::NanaZip::Modern::App g_AppInstance = nullptr;
 }
 
+namespace
+{
+    static bool K7ModernReadThemeInvert()
+    {
+        // The "Invert Theme" option is exposed by the File Manager settings and
+        // is stored as a REG_DWORD under HKCU\Software\NanaZip\FM\InvertTheme.
+        DWORD Value = 0;
+        DWORD ValueSize = sizeof(Value);
+
+        HKEY KeyHandle = nullptr;
+        if (ERROR_SUCCESS == ::RegOpenKeyExW(
+            HKEY_CURRENT_USER,
+            L"Software\\NanaZip\\FM",
+            0,
+            KEY_READ,
+            &KeyHandle))
+        {
+            if (ERROR_SUCCESS == ::RegQueryValueExW(
+                KeyHandle,
+                L"InvertTheme",
+                nullptr,
+                nullptr,
+                reinterpret_cast<LPBYTE>(&Value),
+                &ValueSize))
+            {
+                // The value exists, use it as is.
+            }
+            else
+            {
+                Value = 0;
+            }
+            ::RegCloseKey(KeyHandle);
+        }
+
+        return (Value != 0);
+    }
+
+    static winrt::Windows::UI::Xaml::ApplicationTheme K7ModernComputeTheme()
+    {
+        const bool BaseShouldUseDarkMode =
+            ::MileShouldAppsUseDarkMode() &&
+            !::MileShouldAppsUseHighContrastMode();
+        const bool InvertTheme = ::K7ModernReadThemeInvert();
+        const bool UseDark = InvertTheme ? !BaseShouldUseDarkMode
+                                         : BaseShouldUseDarkMode;
+        return UseDark ?
+            winrt::Windows::UI::Xaml::ApplicationTheme::Dark :
+            winrt::Windows::UI::Xaml::ApplicationTheme::Light;
+    }
+
+    static void K7ModernApplyXamlWindowTheme(
+        _In_ HWND WindowHandle,
+        _In_ winrt::Windows::UI::Xaml::ApplicationTheme Theme)
+    {
+        winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource XamlSource =
+            nullptr;
+        winrt::copy_from_abi(
+            XamlSource,
+            ::GetPropW(WindowHandle, L"XamlWindowSource"));
+        if (!XamlSource)
+        {
+            return;
+        }
+
+        try
+        {
+            auto Content = XamlSource.Content();
+            if (Content)
+            {
+                winrt::Windows::UI::Xaml::FrameworkElement RootElement =
+                    Content.try_as<
+                        winrt::Windows::UI::Xaml::FrameworkElement>();
+                if (RootElement)
+                {
+                    // FrameworkElement.RequestedTheme takes ElementTheme
+                    // which cannot be implicitly converted from
+                    // ApplicationTheme.
+                    RootElement.RequestedTheme(
+                        (winrt::Windows::UI::Xaml::ApplicationTheme::Dark
+                            == Theme)
+                            ? winrt::Windows::UI::Xaml::ElementTheme::Dark
+                            : winrt::Windows::UI::Xaml::ElementTheme::Light);
+                    // The islands deliberately leave regions of their XAML
+                    // content transparent (e.g. the address bar bottom), so
+                    // the DWM backdrop shows through. The backdrop follows
+                    // the SYSTEM theme and turned those regions into an
+                    // opaque black bar while the inverted theme had the
+                    // application light on a dark-theme system. Give every
+                    // island root an opaque background that follows the
+                    // application theme instead. Only the islands created
+                    // with the Mile.Xaml.ContentWindow class are touched;
+                    // popup sources keep their own self-painted flyout
+                    // presenters.
+                    WCHAR WindowClassName[64] = {};
+                    if (::GetClassNameW(
+                        WindowHandle,
+                        WindowClassName,
+                        (int)(std::size(WindowClassName))) &&
+                        0 == std::wcscmp(
+                            WindowClassName,
+                            L"Mile.Xaml.ContentWindow"))
+                    {
+                        const winrt::Windows::UI::Xaml::Media::SolidColorBrush
+                            IslandBackgroundBrush =
+                                winrt::Windows::UI::Xaml::Media::SolidColorBrush(
+                                    (winrt::Windows::UI::Xaml::ApplicationTheme::Dark == Theme)
+                                        ? winrt::Windows::UI::Color{
+                                              0xFF, 0x20, 0x20, 0x20 }
+                                        : winrt::Windows::UI::Color{
+                                              0xFF, 0xFF, 0xFF, 0xFF });
+                        auto TryPaintBackground = [&](
+                            winrt::Windows::UI::Xaml::FrameworkElement const&
+                                Element) -> bool
+                        {
+                            if (auto PanelRoot = Element.try_as<
+                                winrt::Windows::UI::Xaml::Controls::Panel>())
+                            {
+                                PanelRoot.Background(IslandBackgroundBrush);
+                                return true;
+                            }
+                            if (auto ControlRoot = Element.try_as<
+                                winrt::Windows::UI::Xaml::Controls::Control>())
+                            {
+                                ControlRoot.Background(IslandBackgroundBrush);
+                                return true;
+                            }
+                            if (auto BorderRoot = Element.try_as<
+                                winrt::Windows::UI::Xaml::Controls::Border>())
+                            {
+                                BorderRoot.Background(IslandBackgroundBrush);
+                                return true;
+                            }
+                            if (auto PresenterRoot = Element.try_as<
+                                winrt::Windows::UI::Xaml::Controls::ContentPresenter>())
+                            {
+                                PresenterRoot.Background(IslandBackgroundBrush);
+                                return true;
+                            }
+                            return false;
+                        };
+                        // The content root type varies per island. Try the
+                        // root first and walk the first two layers of the
+                        // visual tree otherwise.
+                        if (!TryPaintBackground(RootElement))
+                        {
+                            bool Painted = false;
+                            try
+                            {
+                                std::vector<
+                                    winrt::Windows::UI::Xaml::DependencyObject>
+                                    NodesToVisit{ RootElement };
+                                for (int Layer = 0;
+                                    Layer < 2 && !Painted && !NodesToVisit.empty();
+                                    ++Layer)
+                                {
+                                    std::vector<
+                                        winrt::Windows::UI::Xaml::DependencyObject>
+                                        NextLayer;
+                                    for (const auto& Node : NodesToVisit)
+                                    {
+                                        const int Count =
+                                            winrt::Windows::UI::Xaml::Media::VisualTreeHelper::GetChildrenCount(
+                                                Node);
+                                        for (int Index = 0;
+                                            Index < Count && !Painted;
+                                            ++Index)
+                                        {
+                                            auto Child =
+                                                winrt::Windows::UI::Xaml::Media::VisualTreeHelper::GetChild(
+                                                    Node,
+                                                    Index);
+                                            if (auto ChildElement = Child.try_as<
+                                                winrt::Windows::UI::Xaml::FrameworkElement>())
+                                            {
+                                                Painted = TryPaintBackground(
+                                                    ChildElement);
+                                            }
+                                            if (!Painted)
+                                            {
+                                                NextLayer.push_back(Child);
+                                            }
+                                        }
+                                    }
+                                    NodesToVisit = std::move(NextLayer);
+                                }
+                            }
+                            catch (...)
+                            {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (...)
+        {
+            // Ignore windows whose XAML content is not ready yet.
+        }
+    }
+
+    static void K7ModernApplyTheme()
+    {
+        if (!g_AppInstance)
+        {
+            return;
+        }
+        const winrt::Windows::UI::Xaml::ApplicationTheme Theme =
+            ::K7ModernComputeTheme();
+        // Application.RequestedTheme throws once XAML content exists (and
+        // before the XAML framework is initialized in this process), which
+        // aborted this whole function and silently skipped the per-island
+        // refresh below. The setter is best-effort only; the per-island
+        // RootElement.RequestedTheme + WM_SETTINGCHANGE path is what
+        // actually switches live XAML Islands.
+        try
+        {
+            winrt::Windows::UI::Xaml::Application::Current().RequestedTheme(
+                Theme);
+        }
+        catch (...)
+        {
+            // RequestedTheme is best-effort; ignore if it is unavailable.
+        }
+
+        // XAML Islands do not refresh already loaded DesktopWindowXamlSource
+        // contents when Application.RequestedTheme changes at runtime, so
+        // the root element theme of every hosted XAML window has to be
+        // updated directly.
+        std::vector<HWND> XamlWindows;
+        ::EnumThreadWindows(
+            ::GetCurrentThreadId(),
+            [](
+                _In_ HWND hWnd,
+                _In_ LPARAM lParam) -> BOOL
+        {
+            auto Windows = reinterpret_cast<std::vector<HWND>*>(lParam);
+
+            Windows->push_back(hWnd);
+
+            ::EnumChildWindows(
+                hWnd,
+                [](
+                    _In_ HWND hWnd,
+                    _In_ LPARAM lParam) -> BOOL
+            {
+                auto Windows = reinterpret_cast<std::vector<HWND>*>(lParam);
+
+                Windows->push_back(hWnd);
+
+                return TRUE;
+            },
+                lParam);
+
+            return TRUE;
+        },
+            reinterpret_cast<LPARAM>(&XamlWindows));
+
+        for (HWND WindowHandle : XamlWindows)
+        {
+            ::K7ModernApplyXamlWindowTheme(WindowHandle, Theme);
+        }
+
+        // XAML Islands re-evaluate their theme resources when they receive
+        // WM_SETTINGCHANGE with the ImmersiveColorSet section, which is also
+        // the message the file manager forwards to its toolbar window when
+        // the system color changes. RequestedTheme changes alone do not
+        // refresh already loaded island contents, leaving the CommandBar
+        // with stale foreground brushes (invisible icons).
+        // Re-entrancy guard: the file manager WM_SETTINGCHANGE handler calls
+        // K7ModernRefreshTheme, so a XAML window forwarding this message
+        // back to its parent must not start an infinite recursion.
+        static bool SendingSettingChange = false;
+        if (!SendingSettingChange)
+        {
+            SendingSettingChange = true;
+            for (HWND WindowHandle : XamlWindows)
+            {
+                if (::GetPropW(WindowHandle, L"XamlWindowSource"))
+                {
+                    ::SendMessageW(
+                        WindowHandle,
+                        WM_SETTINGCHANGE,
+                        0,
+                        reinterpret_cast<LPARAM>(L"ImmersiveColorSet"));
+                }
+            }
+            SendingSettingChange = false;
+        }
+    }
+}
+
 EXTERN_C BOOL WINAPI K7ModernAvailable()
 {
     return nullptr != g_AppInstance;
@@ -132,6 +430,10 @@ EXTERN_C HRESULT WINAPI K7ModernInitialize()
     {
         return winrt::to_hresult();
     }
+    // Refresh the XAML theme with best effort. It must not fail the
+    // initialization because the XAML island may not be ready for
+    // Application::RequestedTheme at this point.
+    ::K7ModernRefreshTheme();
     return S_OK;
 }
 
@@ -152,6 +454,19 @@ EXTERN_C HRESULT WINAPI K7ModernUninitialize()
         return winrt::to_hresult();
     }
     return S_OK;
+}
+
+EXTERN_C VOID WINAPI K7ModernRefreshTheme()
+{
+    // Best effort: the XAML framework or an island may not be ready when
+    // this is called during initialization or teardown.
+    try
+    {
+        ::K7ModernApplyTheme();
+    }
+    catch (...)
+    {
+    }
 }
 
 namespace winrt
