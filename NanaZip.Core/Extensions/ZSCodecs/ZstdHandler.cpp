@@ -233,7 +233,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       break;
   }
 
-    if (!_isArc)
+  if (!_isArc)
     opRes = NExtract::NOperationResult::kIsNotArc;
   // **************** NanaZip Modification Start ****************
   //else if (result == ERROR_HANDLE_EOF)

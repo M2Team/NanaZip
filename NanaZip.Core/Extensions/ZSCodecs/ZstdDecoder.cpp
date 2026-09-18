@@ -148,12 +148,17 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
 
       /* finished with buffer */
       if (zIn.pos == zIn.size) {
+        // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
         if (result != 0) { /* frame not completed - more data expected - error */
           // **************** NanaZip Modification Start ****************
           //return ERROR_HANDLE_EOF;
           return HRESULT_FROM_WIN32(ERROR_HANDLE_EOF);
           // **************** NanaZip Modification End ****************
         }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+        // Disable that to workaround some valid files to fail to decompress.
+        // **************** NanaZip Modification End ****************
         break;
       }
 
