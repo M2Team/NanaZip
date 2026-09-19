@@ -666,6 +666,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>해시를 소문자로 사용</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>다크/라이트 모드 반전</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip 정보</value>
   </data>

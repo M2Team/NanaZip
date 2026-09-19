@@ -30,6 +30,9 @@ struct CFmSettings
   bool CopyHistory;
   bool FolderHistory;
   bool LowercaseHashes;
+  // **************** NanaZip Modification Start ****************
+  bool InvertTheme;
+  // **************** NanaZip Modification End ****************
   // bool Underline;
 
   bool ShowSystemMenu;
@@ -49,6 +52,9 @@ bool WantPathHistory();
 bool WantCopyHistory();
 bool WantFolderHistory();
 bool WantLowercaseHashes();
+// **************** NanaZip Modification Start ****************
+bool WantInvertTheme();
+// **************** NanaZip Modification End ****************
 
 void SaveFlatView(UInt32 panelIndex, bool enable);
 bool ReadFlatView(UInt32 panelIndex);

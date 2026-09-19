@@ -666,6 +666,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Małoliterowe sumy kontrolne</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Odwróć motyw ciemny/jasny</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip - informacje</value>
   </data>
