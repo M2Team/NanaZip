@@ -960,12 +960,6 @@ static void LizardF_updateDict(LizardF_dctx_t* dctxPtr, const BYTE* dstPtr, size
 
 
 
-// **************** NanaZip Modification Start ****************
-// Disable optimizations for this function to workaround unknown issues which
-// cause decompression to fail. This is a temporary workaround until the root
-// cause can be identified and fixed.
-#pragma optimize("", off)
-// **************** NanaZip Modification End ****************
 /*! LizardF_decompress() :
 * Call this function repetitively to regenerate data compressed within srcBuffer.
 * The function will attempt to decode *srcSizePtr from srcBuffer, into dstBuffer of maximum size *dstSizePtr.
@@ -1074,14 +1068,23 @@ size_t LizardF_decompress(LizardF_decompressionContext_t decompressionContext,
             }
 
         /* case dstage_decodeCBlockSize: */   /* no more direct access, to prevent scan-build warning */
-            {   size_t const nextCBlockSize = LizardF_readLE32(selectedIn) & 0x7FFFFFFFU;
+            // **************** NanaZip Modification Start ****************
+            //{   size_t const nextCBlockSize = LizardF_readLE32(selectedIn) & 0x7FFFFFFFU;
+            /* Read the block header once to keep its size and flags derived from the same value.
+             * That also fixes some MSVC optimization issues. */
+            {   U32 const blockHeader = LizardF_readLE32(selectedIn);
+                size_t nextCBlockSize = blockHeader & 0x7FFFFFFFU;
+            // **************** NanaZip Modification End ****************
                 if (nextCBlockSize==0) {  /* frameEnd signal, no more CBlock */
                     dctxPtr->dStage = dstage_getSuffix;
                     break;
                 }
                 if (nextCBlockSize > dctxPtr->maxBlockSize) return (size_t)-LizardF_ERROR_GENERIC;   /* invalid cBlockSize */
                 dctxPtr->tmpInTarget = nextCBlockSize;
-                if (LizardF_readLE32(selectedIn) & LIZARDF_BLOCKUNCOMPRESSED_FLAG) {
+                // **************** NanaZip Modification Start ****************
+                //if (LizardF_readLE32(selectedIn) & LIZARDF_BLOCKUNCOMPRESSED_FLAG) {
+                if (blockHeader & LIZARDF_BLOCKUNCOMPRESSED_FLAG) {
+                // **************** NanaZip Modification End ****************
                     dctxPtr->dStage = dstage_copyDirect;
                     break;
                 }
@@ -1366,7 +1369,3 @@ size_t LizardF_decompress(LizardF_decompressionContext_t decompressionContext,
     *dstSizePtr = (dstPtr - dstStart);
     return nextSrcSizeHint;
 }
-// **************** NanaZip Modification Start ****************
-// Restore the optimization settings to the previous state.
-#pragma optimize("", on)
-// **************** NanaZip Modification End ****************

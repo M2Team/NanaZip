@@ -1030,12 +1030,6 @@ static void LZ5F_updateDict(LZ5F_dctx_t* dctxPtr, const BYTE* dstPtr, size_t dst
 
 
 
-// **************** NanaZip Modification Start ****************
-// Disable optimizations for this function to workaround unknown issues which
-// cause decompression to fail. This is a temporary workaround until the root
-// cause can be identified and fixed.
-#pragma optimize("", off)
-// **************** NanaZip Modification End ****************
 /* LZ5F_decompress()
 * Call this function repetitively to regenerate data compressed within srcBuffer.
 * The function will attempt to decode *srcSizePtr from srcBuffer, into dstBuffer of maximum size *dstSizePtr.
@@ -1157,7 +1151,13 @@ size_t LZ5F_decompress(LZ5F_decompressionContext_t decompressionContext,
 
         /* case dstage_decodeCBlockSize: */   /* no more direct access, to prevent scan-build warning */
             {
-                size_t nextCBlockSize = LZ5F_readLE32(selectedIn) & 0x7FFFFFFFU;
+                // **************** NanaZip Modification Start ****************
+                //size_t nextCBlockSize = LZ5F_readLE32(selectedIn) & 0x7FFFFFFFU;
+                /* Read the block header once to keep its size and flags derived from the same value.
+                 * That also fixes some MSVC optimization issues. */
+                U32 const blockHeader = LZ5F_readLE32(selectedIn);
+                size_t nextCBlockSize = blockHeader & 0x7FFFFFFFU;
+                // **************** NanaZip Modification End ****************
                 if (nextCBlockSize==0)   /* frameEnd signal, no more CBlock */
                 {
                     dctxPtr->dStage = dstage_getSuffix;
@@ -1165,7 +1165,10 @@ size_t LZ5F_decompress(LZ5F_decompressionContext_t decompressionContext,
                 }
                 if (nextCBlockSize > dctxPtr->maxBlockSize) return (size_t)-LZ5F_ERROR_GENERIC; /* invalid cBlockSize */
                 dctxPtr->tmpInTarget = nextCBlockSize;
-                if (LZ5F_readLE32(selectedIn) & LZ5F_BLOCKUNCOMPRESSED_FLAG)
+                // **************** NanaZip Modification Start ****************
+                //if (LZ5F_readLE32(selectedIn) & LZ5F_BLOCKUNCOMPRESSED_FLAG)
+                if (blockHeader & LZ5F_BLOCKUNCOMPRESSED_FLAG)
+                // **************** NanaZip Modification End ****************
                 {
                     dctxPtr->dStage = dstage_copyDirect;
                     break;
@@ -1488,7 +1491,3 @@ size_t LZ5F_decompress(LZ5F_decompressionContext_t decompressionContext,
     *dstSizePtr = (dstPtr - dstStart);
     return nextSrcSizeHint;
 }
-// **************** NanaZip Modification Start ****************
-// Restore the optimization settings to the previous state.
-#pragma optimize("", on)
-// **************** NanaZip Modification End ****************
