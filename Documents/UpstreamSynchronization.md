@@ -25,7 +25,7 @@
   v26.02-v1.5.7-R2.
 - NanaZip.UI.Classic: Unknown because it modifies the old codebase a lot.
 - NanaZip.UI.Modern: Unknown because it modifies the old codebase a lot.
-- NanaZip.Universal: Commit 48a3721a41e2ae227c8e4d7814f60f57a6148147 after
+- NanaZip.Universal: Commit be2bdee6164db8d20a8c262850de864f8bce49e5 after
   v26.02-v1.5.7-R2.
 
 ## BLAKE3
