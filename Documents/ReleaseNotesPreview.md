@@ -3,6 +3,34 @@
 For preview releases with matching stable releases, please see
 [NanaZip Release Notes](ReleaseNotes.md).
 
+**NanaZip 7.0, version 2609.3 (7.0.1845.0)**
+
+Note: This draft release is intended to test changes related to Microsoft Store
+certification and therefore has no corresponding Git tag.
+
+The following changes are staged for this release:
+
+- Disable FileSystemWriteVirtualization again to resolve several known issues.
+  (Encouraged by ahmed605.)
+- Add some workarounds for decompress function from LZ5 and Lizard to solve
+  valid files fail to decompress. (Thanks to dinhngtu.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/be2bdee6164db8d20a8c262850de864f8bce49e5.
+  (Except the NanaZip File Manager.) (Thanks to Sergey G. Brester and Tino
+  Reichardt.)
+- Synchronize the FastLZMA2 implementation to
+  https://github.com/conor42/fast-lzma2/tree/967306d39daacf9a14ad923c86fa7f9c4552b59b.
+- Synchronize the Lizard implementation to
+  https://github.com/inikep/lizard/tree/d3becc7e80d3eb01147c2f63bed2e23fac533f19.
+- Synchronize the LZ5 implementation to
+  https://github.com/inikep/lizard/tree/1bc0fef363a44444135badb8e34286d5c56e1d5c.
+
+---
+
+> **Note:** Starting with NanaZip 7.0, version 2609.1 (7.0.1832.0), NanaZip
+> follows a rolling release model. The release notes above cover releases for
+> which no corresponding stable release is currently available.
+
 **NanaZip 7.0 Preview (7.0.1800.0)**
 
 This release includes all the improvements from NanaZip 6.5 Update (6.5.1800.0).

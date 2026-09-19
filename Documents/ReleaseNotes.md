@@ -5,8 +5,6 @@ For preview-only releases, please see
 
 **NanaZip 7.0, version 2609.2 (7.0.1843.0)**
 
-Note: These notes also cover the corresponding preview release.
-
 - Add fix for wrong password on all Zip archives. (Contributed by dinhngtu.)
 - Update Brazilian Portuguese translation. (Contributed by maisondasilva.)
 - Use Mile.DotNet.Helpers instead of Mile.Project.Helpers.
@@ -15,8 +13,6 @@ Note: These notes also cover the corresponding preview release.
 - Update Mile.Detours to 1.0.2442.
 
 **NanaZip 7.0, version 2609.1 (7.0.1832.0)**
-
-Note: These notes also cover the corresponding preview release.
 
 - Start using a rolling release model.
 - Synchronize 7-Zip mainline implementations to 26.03. (Except the NanaZip File
@@ -34,6 +30,12 @@ Note: These notes also cover the corresponding preview release.
 - Synchronize the BLAKE3 implementation to 1.8.7.
   (https://github.com/BLAKE3-team/BLAKE3/releases/tag/1.8.7)
 - Update Mile.Project.Configurations to 1.1.2116.
+
+---
+
+> **Note:** Starting with NanaZip 7.0, version 2609.1 (7.0.1832.0), NanaZip
+> follows a rolling release model. The release notes above also cover the
+> corresponding preview releases.
 
 **NanaZip 6.5 Update (6.5.1800.0)**
 
