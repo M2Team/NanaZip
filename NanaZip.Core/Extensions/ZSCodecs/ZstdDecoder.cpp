@@ -1,6 +1,6 @@
 ﻿// (C) 2016 - 2020 Tino Reichardt
 
-#include "../../SevenZip/CPP/7zip/Compress/StdAfx.h"
+#include "StdAfx.h"
 #include "ZstdDecoder.h"
 
 namespace NCompress {
@@ -118,10 +118,7 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
           case ZSTD_error_corruption_detected:
           case ZSTD_error_checksum_wrong:
           case ZSTD_error_prefix_unknown:
-            // **************** NanaZip Modification Start ****************
-            //return ERROR_INVALID_DATA;
-            return HRESULT_FROM_WIN32(ERROR_INVALID_DATA);
-            // **************** NanaZip Modification End ****************
+            return ERROR_INVALID_DATA;
           case ZSTD_error_memory_allocation:
             return E_OUTOFMEMORY;
           case ZSTD_error_frameParameter_unsupported:
@@ -148,17 +145,6 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
 
       /* finished with buffer */
       if (zIn.pos == zIn.size) {
-        // **************** NanaZip Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
-        if (result != 0) { /* frame not completed - more data expected - error */
-          // **************** NanaZip Modification Start ****************
-          //return ERROR_HANDLE_EOF;
-          return HRESULT_FROM_WIN32(ERROR_HANDLE_EOF);
-          // **************** NanaZip Modification End ****************
-        }
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-        // Disable that to workaround some valid files to fail to decompress.
-        // **************** NanaZip Modification End ****************
         break;
       }
 
@@ -183,8 +169,12 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
     _processedIn += srcBufLen;
 
     /* finished */
-    if (srcBufLen == 0)
+    if (srcBufLen == 0) {
+      if (result != 0) { /* frame not completed - more data expected - error */
+        return ERROR_HANDLE_EOF;
+      }
       return S_OK;
+    }
 
     zIn.size = srcBufLen;
     zIn.pos = 0;
