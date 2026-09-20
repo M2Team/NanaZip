@@ -14,26 +14,26 @@ jobs:
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
     steps:
-    - uses: actions/checkout@v6
-      with:
-        submodules: 'recursive'
-    - uses: microsoft/setup-msbuild@v3
-    - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
-      run: dotnet nuget locals all --clear
-    - name: Configure the git commit information
-      run: |
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-    - name: Refresh the build number
-      run: |
-        MSBuild -target:RefreshVersion BuildAllTargets.proj
-        git commit -a -m "Refresh the build number for the precompiled build tools."
-    - name: Prepare the compiled build tools binaries
-      run: |
-        dotnet build --configuration Release NanaZip.Build.Tasks\NanaZip.Build.Tasks.csproj
-        git commit -a -m "Update the precompiled build tools."
-    - name: Push changes to the repository
-      run: |
-        git checkout -b unstaged/update-precompiled-build-tools
-        git push origin unstaged/update-precompiled-build-tools --force
+      - uses: actions/checkout@v6
+        with:
+          submodules: 'recursive'
+      - uses: microsoft/setup-msbuild@v3
+      - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
+        run: dotnet nuget locals all --clear
+      - name: Configure the git commit information
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+      - name: Refresh the build number
+        run: |
+          MSBuild -target:RefreshVersion BuildAllTargets.proj
+          git commit -a -m "Refresh the build number for the precompiled build tools."
+      - name: Prepare the compiled build tools binaries
+        run: |
+          dotnet build --configuration Release NanaZip.Build.Tasks\NanaZip.Build.Tasks.csproj
+          git commit -a -m "Update the precompiled build tools."
+      - name: Push changes to the repository
+        run: |
+          git checkout -b unstaged/update-precompiled-build-tools
+          git push origin unstaged/update-precompiled-build-tools --force
         
