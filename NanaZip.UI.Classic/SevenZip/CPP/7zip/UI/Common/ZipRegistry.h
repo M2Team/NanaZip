@@ -36,6 +36,7 @@ namespace NExtract
     CBoolPair ShowPassword;
     // **************** NanaZip Modification Start ****************
     CBoolPair OpenFolder;
+    CBoolPair DeleteArchive;
     // **************** NanaZip Modification End ****************
 
     UStringVector Paths;
