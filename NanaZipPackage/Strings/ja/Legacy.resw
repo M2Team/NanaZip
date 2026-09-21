@@ -663,6 +663,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>ハッシュ値を小文字で表示</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>ダーク/ライトモードを反転</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>NanaZip について</value>
   </data>
