@@ -50,7 +50,7 @@ jobs:
         with:
           name: NanaZip_Mainline_DebugSymbols
           path: Output/Binaries/Root/Symbols
-  test:
+  test-x64:
     runs-on: windows-latest
     needs:
       - build
@@ -64,5 +64,21 @@ jobs:
       - run: |
           .\run.ps1 `
             -Program .\NanaZip_Mainline_PortableBinaries\x64\NanaZip.Universal.Console.exe `
+            -Verbosity Detailed `
+            -Verbose
+  test-arm64:
+    runs-on: windows-11-arm
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          repository: M2Team/K7Tests
+      - uses: actions/download-artifact@v8.0.1
+        name: NanaZip_Mainline_PortableBinaries
+      - run: Install-Module -Name Pester -Scope CurrentUser -MinimumVersion 5.0.0 -Force
+      - run: |
+          .\run.ps1 `
+            -Program .\NanaZip_Mainline_PortableBinaries\arm64\NanaZip.Universal.Console.exe `
             -Verbosity Detailed `
             -Verbose
