@@ -114,7 +114,7 @@
     <Copy SourceFiles="$(InputBinariesPath)NanaZip.Modern.FileManager.pdb" DestinationFolder="$(OutputSymbolsPath)" />
     <Copy SourceFiles="$(InputBinariesPath)NanaZip.ShellExtension.pdb" DestinationFolder="$(OutputSymbolsPath)" />
 
-    <Exec Command="&quot;$(InputBinariesPath)NanaZip.Universal.Console.exe&quot; a -r .\Output\$(OutputFileNamePrefix)_Binaries.zip .\Output\Binaries\Root\Binaries\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
-    <Exec Command="&quot;$(InputBinariesPath)NanaZip.Universal.Console.exe&quot; a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
+    <Exec Command="7z.exe a -r .\Output\$(OutputFileNamePrefix)_Binaries.zip .\Output\Binaries\Root\Binaries\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
+    <Exec Command="7z.exe a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
   </Target>
 </Project>
