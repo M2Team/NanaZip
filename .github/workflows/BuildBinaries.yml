@@ -17,8 +17,13 @@ jobs:
       matrix:
         configuration: [Debug, Release]
         platform: [x64, ARM64]
+        sanitizers: [false, true]
+        exclude:
+          - configuration: Debug
+            sanitizers: true
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
+      ARTIFACT_SUFFIX: ${{ matrix.configuration }}_${{ matrix.platform }}${{ matrix.sanitizers && '_ASAN' || '' }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -27,63 +32,64 @@ jobs:
       - name: Clear local NuGet cache (workaround for failed restores on windows-latest)
         run: dotnet nuget locals all --clear
       - name: Build
-        run: MSBuild -binaryLogger:Output\BuildAllTargets_${{ matrix.configuration }}_${{ matrix.platform }}.binlog -m -p:Configuration=${{ matrix.configuration }} -p:Platform=${{ matrix.platform }} BuildAllTargets.proj
+        run: |
+          MSBuild -binaryLogger:Output\BuildAllTargets_${{ env.ARTIFACT_SUFFIX }}.binlog `
+            -m `
+            -p:Configuration=${{ matrix.configuration }} `
+            -p:Platform=${{ matrix.platform }} `
+            -p:NanaZipBuildWithSanitizers=${{ matrix.sanitizers }} `
+            BuildAllTargets.proj
       - name: Upload MSIX Bundle
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: NanaZip_Mainline_ApplicationPackages_${{ matrix.configuration }}_${{ matrix.platform }}
+          name: NanaZip_Mainline_ApplicationPackages_${{ env.ARTIFACT_SUFFIX }}
           path: Output/Binaries/AppPackages
       - name: Upload Extension Package Installer
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: NanaZip_Mainline_ExtensionPackageInstaller_${{ matrix.configuration }}_${{ matrix.platform }}
+          name: NanaZip_Mainline_ExtensionPackageInstaller_${{ env.ARTIFACT_SUFFIX }}
           path: Output/NanaZip.ExtensionPackage_*.exe
       - name: Upload MSBuild Build Process Binary Log
         uses: actions/upload-artifact@v7.0.1
         if: "!cancelled()"
         with:
-          name: NanaZip_Mainline_BuildBinaryLog_${{ matrix.configuration }}_${{ matrix.platform }}
-          path: Output/BuildAllTargets_${{ matrix.configuration }}_${{ matrix.platform }}.binlog
+          name: NanaZip_Mainline_BuildBinaryLog_${{ env.ARTIFACT_SUFFIX }}
+          path: Output/BuildAllTargets_${{ env.ARTIFACT_SUFFIX }}.binlog
       - name: Upload Portable Binaries
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: NanaZip_Mainline_PortableBinaries_${{ matrix.configuration }}_${{ matrix.platform }}
+          name: NanaZip_Mainline_PortableBinaries_${{ env.ARTIFACT_SUFFIX }}
           path: Output/Binaries/Root/Binaries
       - name: Upload Debug Symbols
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: NanaZip_Mainline_DebugSymbols_${{ matrix.configuration }}_${{ matrix.platform }}
+          name: NanaZip_Mainline_DebugSymbols_${{ env.ARTIFACT_SUFFIX }}
           path: Output/Binaries/Root/Symbols
   test:
-    runs-on: ${{ matrix.runner }}
+    runs-on: ${{ matrix.platform == 'ARM64' && 'windows-11-arm' || 'windows-latest' }}
     needs:
       - build
     strategy:
       matrix:
-        include:
+        configuration: [Debug, Release]
+        platform: [x64, ARM64]
+        sanitizers: [false, true]
+        exclude:
           - configuration: Debug
-            platform: x64
-            runner: windows-latest
-          - configuration: Debug
-            platform: ARM64
-            runner: windows-11-arm
-          - configuration: Release
-            platform: x64
-            runner: windows-latest
-          - configuration: Release
-            platform: ARM64
-            runner: windows-11-arm
+            sanitizers: true
+    env:
+      ARTIFACT_SUFFIX: ${{ matrix.configuration }}_${{ matrix.platform }}${{ matrix.sanitizers && '_ASAN' || '' }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
           repository: M2Team/K7Tests
       - uses: actions/download-artifact@v8.0.1
         with:
-          name: NanaZip_Mainline_PortableBinaries_${{ matrix.configuration }}_${{ matrix.platform }}
-          path: NanaZip_Mainline_PortableBinaries
+          name: NanaZip_Mainline_PortableBinaries_${{ env.ARTIFACT_SUFFIX }}
+          path: NanaZip_Mainline_PortableBinaries_${{ env.ARTIFACT_SUFFIX }}
       - run: Install-Module -Name Pester -Scope CurrentUser -MinimumVersion 5.0.0 -Force
       - run: |
           .\run.ps1 `
-            -Program .\NanaZip_Mainline_PortableBinaries\NanaZip.Universal.Console.exe `
+            -Program .\NanaZip_Mainline_PortableBinaries_${{ env.ARTIFACT_SUFFIX }}\NanaZip.Universal.Console.exe `
             -Verbosity Detailed `
             -Verbose
