@@ -38,6 +38,7 @@ jobs:
             -p:Configuration=${{ matrix.configuration }} `
             -p:Platform=${{ matrix.platform }} `
             -p:NanaZipBuildWithSanitizers=${{ matrix.sanitizers }} `
+            -p:AppxBundlePlatforms=${{ matrix.platform }} `
             BuildAllTargets.proj
       - name: Upload MSIX Bundle
         uses: actions/upload-artifact@v7.0.1
