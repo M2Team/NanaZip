@@ -487,7 +487,10 @@ cleanup:
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Aich : public Mile::ComObject<Aich, IHasher>
+    struct Aich :
+        public Mile::ComObject<Aich, IHasher>,
+        Mile::DisableCopyConstruction,
+        Mile::DisableMoveConstruction
     {
     private:
 

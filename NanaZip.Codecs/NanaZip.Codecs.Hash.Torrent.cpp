@@ -802,7 +802,10 @@ size_t bt_get_text(torrent_ctx* ctx, char** pstr)
 
 namespace NanaZip::Codecs::Hash
 {
-    struct Torrent : public Mile::ComObject<Torrent, IHasher>
+    struct Torrent :
+        public Mile::ComObject<Torrent, IHasher>,
+        Mile::DisableCopyConstruction,
+        Mile::DisableMoveConstruction
     {
     private:
 
