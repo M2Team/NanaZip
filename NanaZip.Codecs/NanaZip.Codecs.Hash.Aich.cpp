@@ -19,6 +19,7 @@ namespace NanaZip::Codecs::Hash
     private:
 
         aich_ctx Context;
+        bool Initialized = false;
 
     public:
 
@@ -27,16 +28,28 @@ namespace NanaZip::Codecs::Hash
             this->Init();
         }
 
+        Aich(const Aich &) = delete;
+        Aich &operator=(const Aich &) = delete;
+        Aich(Aich &&other) = delete;
+        Aich &operator=(Aich &&other) = delete;
+
         ~Aich()
         {
-            ::rhash_aich_cleanup(
-                &this->Context);
+            if (this->Initialized)
+            {
+                ::rhash_aich_cleanup(&this->Context);
+                this->Initialized = false;
+            }
         }
 
         void STDMETHODCALLTYPE Init()
         {
-            ::rhash_aich_init(
-                &this->Context);
+            if (this->Initialized)
+            {
+                ::rhash_aich_cleanup(&this->Context);
+            }
+            ::rhash_aich_init(&this->Context);
+            this->Initialized = true;
         }
 
         void STDMETHODCALLTYPE Update(
@@ -55,6 +68,8 @@ namespace NanaZip::Codecs::Hash
             ::rhash_aich_final(
                 &this->Context,
                 Digest);
+            // rhash_aich_final calls rhash_aich_cleanup
+            this->Initialized = false;
         }
 
         UINT32 STDMETHODCALLTYPE GetDigestSize()
