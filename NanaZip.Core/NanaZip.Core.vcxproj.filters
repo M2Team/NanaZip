@@ -941,14 +941,23 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\LvmHandler.cpp">
       <Filter>SevenZip\CPP\7zip\Archive</Filter>
     </ClCompile>
-    <ClCompile Include="Wrappers\Sha512Wrapper.cpp">
-      <Filter>Wrappers</Filter>
+    <ClCompile Include="SevenZip\C\Sha1.c">
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
-    <ClCompile Include="Wrappers\Sha256Wrapper.cpp">
-      <Filter>Wrappers</Filter>
+    <ClCompile Include="SevenZip\C\Sha1Opt.c">
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
-    <ClCompile Include="Wrappers\Sha1Wrapper.cpp">
-      <Filter>Wrappers</Filter>
+    <ClCompile Include="SevenZip\C\Sha256.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha256Opt.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha512.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha512Opt.c">
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
@@ -1719,15 +1728,6 @@
     </ClInclude>
     <ClInclude Include="SevenZip\C\Sha512.h">
       <Filter>SevenZip\C</Filter>
-    </ClInclude>
-    <ClInclude Include="Wrappers\Sha512Wrapper.h">
-      <Filter>Wrappers</Filter>
-    </ClInclude>
-    <ClInclude Include="Wrappers\Sha256Wrapper.h">
-      <Filter>Wrappers</Filter>
-    </ClInclude>
-    <ClInclude Include="Wrappers\Sha1Wrapper.h">
-      <Filter>Wrappers</Filter>
     </ClInclude>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
       <Filter>Extensions\ZSCodecs</Filter>

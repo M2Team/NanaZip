@@ -1,8 +1,4 @@
-﻿// **************** NanaZip Modification Start ****************
-// Redirect to K7Base Wrapper
-#include "../../Wrappers/Sha1Wrapper.h"
-// **************** NanaZip Modification End ****************
-/* Sha1.h -- SHA-1 Hash
+﻿/* Sha1.h -- SHA-1 Hash
 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SHA1_H
