@@ -412,8 +412,8 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
 
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
-        480,
-        320,
+        500,
+        600,
         winrt::get_abi(Window),
         ParentWindowHandle);
 
