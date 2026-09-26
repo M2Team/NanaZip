@@ -253,6 +253,7 @@
     <ClCompile Include="RHash\rhash_sha256.c" />
     <ClCompile Include="RHash\rhash_util.c" />
     <ClCompile Include="RHash\ripemd-160.c" />
+    <ClCompile Include="RHash\sha1.c" />
     <ClCompile Include="RHash\sha3.c" />
     <ClCompile Include="RHash\snefru.c">
       <DisableSpecificWarnings>4127;</DisableSpecificWarnings>
