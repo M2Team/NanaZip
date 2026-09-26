@@ -1,8 +1,4 @@
-﻿// **************** NanaZip Modification Start ****************
-// Redirect to K7Base Wrapper
-#include "../../Wrappers/Sha512Wrapper.h"
-// **************** NanaZip Modification End ****************
-/* Sha512.h -- SHA-512 Hash
+﻿/* Sha512.h -- SHA-512 Hash
 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SHA512_H
