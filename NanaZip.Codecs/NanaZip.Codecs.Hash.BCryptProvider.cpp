@@ -123,12 +123,20 @@ namespace NanaZip::Codecs::Hash
 
 #include "RHash/sha1.h"
 
+// Notice: In NanaZip, rhash_sha1_init manages OS hash handles and attempts to
+// free any existing hash context. It must be called on zero-initialized memory,
+// on memory previously-initialized by rhash_sha1_init, or on memory cleared by
+// rhash_sha1_final.
 void rhash_sha1_init(
     sha1_ctx* ctx)
 {
     if (!ctx)
     {
         return;
+    }
+    if (ctx->context)
+    {
+        ::K7BaseHashDestroy(ctx->context);
     }
     std::memset(ctx, 0, sizeof(sha1_ctx));
 
@@ -173,6 +181,15 @@ void rhash_sha1_final(
     {
         std::memcpy(result, ctx->hash, sha1_hash_size);
     }
+    ::K7BaseHashDestroy(ctx->context);
+    ctx->context = nullptr; // don't clear the hash value
+}
+
+void rhash_sha1_cleanup(
+    sha1_ctx* ctx)
+{
+    ::K7BaseHashDestroy(ctx->context);
+    ctx->context = nullptr;
 }
 
 #pragma endregion

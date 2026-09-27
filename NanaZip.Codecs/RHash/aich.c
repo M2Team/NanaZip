@@ -160,6 +160,9 @@ void rhash_aich_cleanup(aich_ctx* ctx)
 		ctx->chunk_table = 0;
 	}
 
+	// **************** NanaZip Modification Start ****************
+	rhash_sha1_cleanup(&ctx->sha1_context);
+	// **************** NanaZip Modification End ****************
 	free(ctx->block_hashes);
 	ctx->block_hashes = 0;
 }
