@@ -49,11 +49,14 @@ namespace NanaZip::Codecs::Hash
         void STDMETHODCALLTYPE Init()
         {
             this->DestroyContext();
-            ::K7BaseHashCreate(
+            if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
                 &this->m_HashHandle,
                 this->m_Algorithm,
                 nullptr,
-                0);
+                0))
+            {
+                __fastfail(FAST_FAIL_FATAL_APP_EXIT);
+            }
         }
 
         void STDMETHODCALLTYPE Update(
@@ -140,11 +143,14 @@ void rhash_sha1_init(
     }
     std::memset(ctx, 0, sizeof(sha1_ctx));
 
-    ::K7BaseHashCreate(
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
         &ctx->context,
         K7_BASE_HASH_ALGORITHM_SHA1,
         nullptr,
-        0);
+        0))
+    {
+        __fastfail(FAST_FAIL_FATAL_APP_EXIT);
+    }
 }
 
 void rhash_sha1_update(
