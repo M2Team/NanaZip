@@ -92,11 +92,11 @@ static void SHA1_INIT(torrent_ctx* ctx)
         ctx->sha1_context = nullptr;
     }
 
-    if (::K7BaseHashCreate(
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
         &ctx->sha1_context,
         K7_BASE_HASH_ALGORITHM_SHA1,
         nullptr,
-        0) != MO_RESULT_SUCCESS_OK)
+        0))
     {
         ctx->error = 1;
     }
@@ -115,10 +115,10 @@ static void SHA1_UPDATE(
         const MO_UINT32 input_size = static_cast<MO_UINT32>(
             size > UINT32_MAX ? UINT32_MAX : size);
 
-        if (::K7BaseHashUpdate(
+        if (MO_RESULT_SUCCESS_OK != ::K7BaseHashUpdate(
             ctx->sha1_context,
             const_cast<unsigned char*>(msg),
-            input_size) != MO_RESULT_SUCCESS_OK)
+            input_size))
         {
             ctx->error = 1;
             return;
@@ -131,11 +131,10 @@ static void SHA1_UPDATE(
 
 static void SHA1_FINAL(torrent_ctx* ctx, unsigned char* result)
 {
-    if (ctx->error ||
-        ::K7BaseHashFinal(
-            ctx->sha1_context,
-            result,
-            btih_hash_size) != MO_RESULT_SUCCESS_OK)
+    if (ctx->error || MO_RESULT_SUCCESS_OK != ::K7BaseHashFinal(
+        ctx->sha1_context,
+        result,
+        btih_hash_size))
     {
         ctx->error = 1;
         memset(result, 0, btih_hash_size);
@@ -302,7 +301,9 @@ int bt_add_file(torrent_ctx* ctx, const char* path, uint64_t filesize)
     /* recalculate piece length (but only if hashing not started yet) */
     if (ctx->piece_count == 0 && ctx->index == 0) {
         /* note: in case of batch of files should use a total batch size */
-        ctx->piece_length = bt_default_piece_length(filesize, ctx->options & BT_OPT_TRANSMISSION);
+        ctx->piece_length = bt_default_piece_length(
+            filesize,
+            ctx->options & BT_OPT_TRANSMISSION);
     }
     return 1;
 }
@@ -495,7 +496,9 @@ static void bt_bencode_pieces(torrent_ctx* ctx)
 
     for (bytes_left = pieces_length, i = 0; bytes_left > 0; i++)
     {
-        size_t size = (bytes_left < BT_BLOCK_SIZE_IN_BYTES ? bytes_left : BT_BLOCK_SIZE_IN_BYTES);
+        size_t size = bytes_left < BT_BLOCK_SIZE_IN_BYTES
+            ? bytes_left
+            : BT_BLOCK_SIZE_IN_BYTES;
         memcpy(p, ctx->hash_blocks.array[i], size);
         bytes_left -= size;
         p += size;
@@ -534,7 +537,15 @@ static size_t utorr_piece_length(uint64_t total_size)
  */
 static size_t transmission_piece_length(uint64_t total_size)
 {
-    static const uint64_t sizes[6] = { 50 * MB, 150 * MB, 350 * MB, 512 * MB, 1024 * MB, 2048 * MB };
+    static const uint64_t sizes[6] =
+    {
+        50 * MB,
+        150 * MB,
+        350 * MB,
+        512 * MB,
+        1024 * MB,
+        2048 * MB
+    };
     int i;
     for (i = 0; i < 6 && total_size >= sizes[i]; i++);
     return (32 * 1024) << i;
@@ -542,8 +553,9 @@ static size_t transmission_piece_length(uint64_t total_size)
 
 size_t bt_default_piece_length(uint64_t total_size, int transmission)
 {
-    return (transmission ?
-        transmission_piece_length(total_size) : utorr_piece_length(total_size));
+    return transmission
+        ? transmission_piece_length(total_size)
+        : utorr_piece_length(total_size);
 }
 
 /* get file basename */
@@ -564,8 +576,11 @@ static const char* get_batch_name(char* path)
 }
 
 /* write file size and path */
-static void bt_file_info_append(torrent_ctx* ctx, const char* length_name,
-    const char* path_name, bt_file_info* info)
+static void bt_file_info_append(
+    torrent_ctx* ctx,
+    const char* length_name,
+    const char* path_name,
+    bt_file_info* info)
 {
     bt_bencode_int(ctx, length_name, info->size);
     /* store the file basename */
@@ -746,7 +761,9 @@ void bt_set_piece_length(torrent_ctx* ctx, size_t piece_length)
  */
 void bt_set_total_batch_size(torrent_ctx* ctx, uint64_t total_size)
 {
-    ctx->piece_length = bt_default_piece_length(total_size, ctx->options & BT_OPT_TRANSMISSION);
+    ctx->piece_length = bt_default_piece_length(
+        total_size,
+        ctx->options & BT_OPT_TRANSMISSION);
 }
 
 /**

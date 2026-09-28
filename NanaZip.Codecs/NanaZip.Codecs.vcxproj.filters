@@ -571,9 +571,6 @@
     <ClInclude Include="RHash\ripemd-160.h">
       <Filter>RHash</Filter>
     </ClInclude>
-    <ClInclude Include="RHash\sha1.h">
-      <Filter>RHash</Filter>
-    </ClInclude>
     <ClInclude Include="RHash\sha256.h">
       <Filter>RHash</Filter>
     </ClInclude>

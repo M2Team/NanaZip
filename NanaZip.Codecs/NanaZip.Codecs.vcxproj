@@ -480,7 +480,6 @@
     <ClInclude Include="RHash\has160.h" />
     <ClInclude Include="RHash\hex.h" />
     <ClInclude Include="RHash\ripemd-160.h" />
-    <ClInclude Include="RHash\sha1.h" />
     <ClInclude Include="RHash\sha256.h" />
     <ClInclude Include="RHash\sha3.h" />
     <ClInclude Include="RHash\snefru.h" />

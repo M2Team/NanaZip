@@ -12,8 +12,6 @@
 
 #include <K7Base.h>
 
-#include <string>
-
 namespace NanaZip::Codecs::Hash
 {
     struct BCryptProvider : public Mile::ComObject<BCryptProvider, IHasher>
@@ -118,61 +116,3 @@ namespace NanaZip::Codecs::Hash
         return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA512);
     }
 }
-
-#pragma region RHash Wrappers
-
-#include "RHash/sha1.h"
-
-void rhash_sha1_init(
-    sha1_ctx* ctx)
-{
-    if (!ctx)
-    {
-        return;
-    }
-    std::memset(ctx, 0, sizeof(sha1_ctx));
-
-    ::K7BaseHashCreate(
-        &ctx->context,
-        K7_BASE_HASH_ALGORITHM_SHA1,
-        nullptr,
-        0);
-}
-
-void rhash_sha1_update(
-    sha1_ctx* ctx,
-    const unsigned char* msg,
-    size_t size)
-{
-    if (!ctx)
-    {
-        return;
-    }
-
-    ::K7BaseHashUpdate(
-        ctx->context,
-        const_cast<LPVOID>(reinterpret_cast<LPCVOID>(msg)),
-        static_cast<UINT32>(size));
-    ctx->length += size;
-}
-
-void rhash_sha1_final(
-    sha1_ctx* ctx,
-    unsigned char* result)
-{
-    if (!ctx)
-    {
-        return;
-    }
-
-    ::K7BaseHashFinal(
-        ctx->context,
-        ctx->hash,
-        sha1_hash_size);
-    if (result)
-    {
-        std::memcpy(result, ctx->hash, sha1_hash_size);
-    }
-}
-
-#pragma endregion

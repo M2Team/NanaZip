@@ -73,11 +73,11 @@ static void SHA1_INIT(aich_ctx* ctx)
         ctx->sha1_context = nullptr;
     }
 
-    if (::K7BaseHashCreate(
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
         &ctx->sha1_context,
         K7_BASE_HASH_ALGORITHM_SHA1,
         nullptr,
-        0) != MO_RESULT_SUCCESS_OK)
+        0))
     {
         ctx->error = 1;
     }
@@ -92,11 +92,10 @@ static void SHA1_UPDATE(
         return;
 
     const MO_UINT32 input_size = static_cast<MO_UINT32>(size);
-    if (size != input_size ||
-        ::K7BaseHashUpdate(
-            ctx->sha1_context,
-            const_cast<unsigned char*>(msg),
-            input_size) != MO_RESULT_SUCCESS_OK)
+    if (size != input_size || MO_RESULT_SUCCESS_OK != ::K7BaseHashUpdate(
+        ctx->sha1_context,
+        const_cast<unsigned char*>(msg),
+        input_size))
     {
         ctx->error = 1;
     }
@@ -104,11 +103,10 @@ static void SHA1_UPDATE(
 
 static void SHA1_FINAL(aich_ctx* ctx, unsigned char* result)
 {
-    if (ctx->error ||
-        ::K7BaseHashFinal(
-            ctx->sha1_context,
-            result,
-            static_cast<MO_UINT32>(sha1_hash_size)) != MO_RESULT_SUCCESS_OK)
+    if (ctx->error || MO_RESULT_SUCCESS_OK != ::K7BaseHashFinal(
+        ctx->sha1_context,
+        result,
+        static_cast<MO_UINT32>(sha1_hash_size)))
     {
         ctx->error = 1;
         memset(result, 0, sha1_hash_size);
@@ -265,8 +263,9 @@ static void rhash_aich_hash_tree(aich_ctx* ctx, unsigned char* result, int type)
     assert(type == AICH_HASH_FULL_TREE ? ctx->chunk_table != 0 : ctx->block_hashes != 0);
 
     /* calculate number of leafs in the tree */
-    blocks_stack[0] = blocks = (unsigned)(type == AICH_HASH_FULL_TREE ?
-        ctx->chunks_count : (ctx->index + FULL_BLOCK_SIZE - 1) / FULL_BLOCK_SIZE);
+    blocks_stack[0] = blocks = (unsigned)(type == AICH_HASH_FULL_TREE
+        ? ctx->chunks_count
+        : (ctx->index + FULL_BLOCK_SIZE - 1) / FULL_BLOCK_SIZE);
 
     while (1) {
         unsigned char sha1_message[sha1_hash_size];
@@ -399,8 +398,9 @@ void rhash_aich_update(aich_ctx* ctx, const unsigned char* msg, size_t size)
         return;
     while (size > 0) {
         unsigned left_in_chunk = ED2K_CHUNK_SIZE - ctx->index;
-        unsigned block_left = (left_in_chunk <= LAST_BLOCK_SIZE ? left_in_chunk :
-            FULL_BLOCK_SIZE - ctx->index % FULL_BLOCK_SIZE);
+        unsigned block_left = left_in_chunk <= LAST_BLOCK_SIZE
+            ? left_in_chunk
+            : FULL_BLOCK_SIZE - ctx->index % FULL_BLOCK_SIZE;
         assert(block_left > 0);
 
         if (size >= block_left) {
