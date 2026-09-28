@@ -258,9 +258,6 @@
     </ClCompile>
     <ClCompile Include="RHash\tiger.c" />
     <ClCompile Include="RHash\tiger_sbox.c" />
-    <ClCompile Include="RHash\torrent.c">
-      <DisableSpecificWarnings>4146;4200;</DisableSpecificWarnings>
-    </ClCompile>
     <ClCompile Include="RHash\tth.c" />
     <ClCompile Include="RHash\whirlpool.c" />
     <ClCompile Include="RHash\whirlpool_sbox.c" />
@@ -488,7 +485,6 @@
     <ClInclude Include="RHash\sha3.h" />
     <ClInclude Include="RHash\snefru.h" />
     <ClInclude Include="RHash\tiger.h" />
-    <ClInclude Include="RHash\torrent.h" />
     <ClInclude Include="RHash\tth.h" />
     <ClInclude Include="RHash\ustd.h" />
     <ClInclude Include="RHash\util.h" />

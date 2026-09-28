@@ -71,9 +71,6 @@
     <ClCompile Include="RHash\tiger_sbox.c">
       <Filter>RHash</Filter>
     </ClCompile>
-    <ClCompile Include="RHash\torrent.c">
-      <Filter>RHash</Filter>
-    </ClCompile>
     <ClCompile Include="RHash\tth.c">
       <Filter>RHash</Filter>
     </ClCompile>
@@ -587,9 +584,6 @@
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\tiger.h">
-      <Filter>RHash</Filter>
-    </ClInclude>
-    <ClInclude Include="RHash\torrent.h">
       <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\tth.h">
