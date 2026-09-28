@@ -38,43 +38,60 @@
       RootPath="$(MSBuildThisFileDirectory)"
       BuildPreviewRelease="$(NanaZipBuildPreviewRelease)" />
   </Target>
+  <PropertyGroup>
+    <SolutionPath>$(MSBuildThisFileDirectory)NanaZip.slnx</SolutionPath>
+    <PackageProjectPath>$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj</PackageProjectPath>
+    <ExtensionInstallerProjectPath>$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj</ExtensionInstallerProjectPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <SolutionProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
+    </SolutionProjectReference>
+    <SolutionProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
+    </SolutionProjectReference>
+    <SolutionProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Debug;Platform=ARM64</AdditionalProperties>   
+    </SolutionProjectReference>
+    <SolutionProjectReference Include="$(SolutionPath)">
+      <AdditionalProperties>Configuration=Release;Platform=ARM64</AdditionalProperties>   
+    </SolutionProjectReference>
+    <PackageProjectReference Include="$(PackageProjectPath)">
+      <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>
+    </PackageProjectReference>
+    <PackageProjectReference Include="$(PackageProjectPath)">
+      <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>
+    </PackageProjectReference>
+    <ExtensionInstallerProjectReference Include="$(ExtensionInstallerProjectPath)">
+      <AdditionalProperties>Configuration=Release</AdditionalProperties>
+    </ExtensionInstallerProjectReference>
+  </ItemGroup>
   <Target Name="Restore">
-    <ItemGroup>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
-        <AdditionalProperties>Configuration=Debug;Platform=x64</AdditionalProperties>   
-      </RestoreProjectReference>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.slnx">
-        <AdditionalProperties>Configuration=Release;Platform=x64</AdditionalProperties>   
-      </RestoreProjectReference>
-      <RestoreProjectReference Include="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj">
-        <AdditionalProperties>Configuration=Release</AdditionalProperties>
-      </RestoreProjectReference>
-    </ItemGroup>
     <MSBuild
-      Projects="@(RestoreProjectReference)"
+      Projects="@(SolutionProjectReference);@(PackageProjectReference);@(ExtensionInstallerProjectReference)"
       Targets="Restore"
+      BuildInParallel="True"
       StopOnFirstFailure="True"
       Properties="PreferredToolArchitecture=x64" />
   </Target>
   <Target Name="Build">
     <MSBuild
-      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
+      Projects="@(PackageProjectReference)"
       Targets="Build"
       BuildInParallel="True"
       StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64;Configuration=Debug;Platform=x64" />
+      Properties="PreferredToolArchitecture=x64" />
     <MSBuild
-      Projects="$(MSBuildThisFileDirectory)NanaZipPackage\NanaZipPackage.wapproj"
-      Targets="Build"
+      Projects="@(SolutionProjectReference)"
+      Targets="UI\Classic\NanaZip"
       BuildInParallel="True"
       StopOnFirstFailure="True"
-      Properties="PreferredToolArchitecture=x64;Configuration=Release;Platform=x64" />
+      Properties="PreferredToolArchitecture=x64" />
     <MSBuild
-      Projects="$(MSBuildThisFileDirectory)NanaZip.ExtensionPackage\NanaZip.ExtensionPackage.Installer.proj"
+      Projects="@(ExtensionInstallerProjectReference)"
       Targets="Build"
       BuildInParallel="True"
-      StopOnFirstFailure="True"
-      Properties="Configuration=Release" />
+      StopOnFirstFailure="True" />
   </Target>
   <Target Name="Packaging">
     <PropertyGroup>
