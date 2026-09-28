@@ -49,11 +49,14 @@ namespace NanaZip::Codecs::Hash
         void STDMETHODCALLTYPE Init()
         {
             this->DestroyContext();
-            ::K7BaseHashCreate(
+            if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
                 &this->m_HashHandle,
                 this->m_Algorithm,
                 nullptr,
-                0);
+                0))
+            {
+                __fastfail(FAST_FAIL_FATAL_APP_EXIT);
+            }
         }
 
         void STDMETHODCALLTYPE Update(
@@ -123,6 +126,10 @@ namespace NanaZip::Codecs::Hash
 
 #include "RHash/sha1.h"
 
+// Notice: In NanaZip, rhash_sha1_init manages OS hash handles and attempts to
+// free any existing hash context. It must be called on zero-initialized memory,
+// on memory previously-initialized by rhash_sha1_init, or on memory cleared by
+// rhash_sha1_final.
 void rhash_sha1_init(
     sha1_ctx* ctx)
 {
@@ -130,13 +137,20 @@ void rhash_sha1_init(
     {
         return;
     }
+    if (ctx->context)
+    {
+        ::K7BaseHashDestroy(ctx->context);
+    }
     std::memset(ctx, 0, sizeof(sha1_ctx));
 
-    ::K7BaseHashCreate(
+    if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
         &ctx->context,
         K7_BASE_HASH_ALGORITHM_SHA1,
         nullptr,
-        0);
+        0))
+    {
+        __fastfail(FAST_FAIL_FATAL_APP_EXIT);
+    }
 }
 
 void rhash_sha1_update(
@@ -173,6 +187,15 @@ void rhash_sha1_final(
     {
         std::memcpy(result, ctx->hash, sha1_hash_size);
     }
+    ::K7BaseHashDestroy(ctx->context);
+    ctx->context = nullptr; // don't clear the hash value
+}
+
+void rhash_sha1_cleanup(
+    sha1_ctx* ctx)
+{
+    ::K7BaseHashDestroy(ctx->context);
+    ctx->context = nullptr;
 }
 
 #pragma endregion
