@@ -25,6 +25,10 @@ void rhash_sha1_init(sha1_ctx* ctx);
 void rhash_sha1_update(sha1_ctx* ctx, const unsigned char* msg, size_t size);
 void rhash_sha1_final(sha1_ctx* ctx, unsigned char* result);
 
+// **************** NanaZip Modification Start ****************
+void rhash_sha1_cleanup(sha1_ctx* ctx);
+// **************** NanaZip Modification End ****************
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif /* __cplusplus */

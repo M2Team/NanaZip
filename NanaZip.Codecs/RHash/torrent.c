@@ -91,6 +91,9 @@ void bt_cleanup(torrent_ctx* ctx)
 	bt_vector_clean(&ctx->files);
 	bt_vector_clean(&ctx->announce);
 
+	// **************** NanaZip Modification Start ****************
+	rhash_sha1_cleanup(&ctx->sha1_context);
+	// **************** NanaZip Modification End ****************
 	free(ctx->program_name);
 	free(ctx->content.str);
 	ctx->program_name = 0;

@@ -82,16 +82,22 @@ namespace NanaZip::Codecs::Hash
         void STDMETHODCALLTYPE Init()
         {
             this->DestroyContext();
-            ::K7BaseHashCreate(
+            if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
                 &this->m_BlockHashHandle,
                 K7_BASE_HASH_ALGORITHM_MD4,
                 nullptr,
-                0);
-            ::K7BaseHashCreate(
+                0))
+            {
+                __fastfail(FAST_FAIL_FATAL_APP_EXIT);
+            }
+            if (MO_RESULT_SUCCESS_OK != ::K7BaseHashCreate(
                 &this->m_HashesHashHandle,
                 K7_BASE_HASH_ALGORITHM_MD4,
                 nullptr,
-                0);
+                0))
+            {
+                __fastfail(FAST_FAIL_FATAL_APP_EXIT);
+            }
             this->m_NotEmule = false;
             this->m_BlockProcessedSize = 0;
         }

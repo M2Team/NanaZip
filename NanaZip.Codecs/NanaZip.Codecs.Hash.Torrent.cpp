@@ -19,6 +19,7 @@ namespace NanaZip::Codecs::Hash
     private:
 
         torrent_ctx Context;
+        bool Initialized = false;
 
     public:
 
@@ -27,16 +28,28 @@ namespace NanaZip::Codecs::Hash
             this->Init();
         }
 
+        Torrent(const Torrent &) = delete;
+        Torrent &operator=(const Torrent &) = delete;
+        Torrent(Torrent &&other) = delete;
+        Torrent &operator=(Torrent &&other) = delete;
+
         ~Torrent()
         {
-            ::bt_cleanup(
-                &this->Context);
+            if (this->Initialized)
+            {
+                ::bt_cleanup(&this->Context);
+                this->Initialized = false;
+            }
         }
 
         void STDMETHODCALLTYPE Init()
         {
-            ::bt_init(
-                &this->Context);
+            if (this->Initialized)
+            {
+                ::bt_cleanup(&this->Context);
+            }
+            ::bt_init(&this->Context);
+            this->Initialized = true;
         }
 
         void STDMETHODCALLTYPE Update(

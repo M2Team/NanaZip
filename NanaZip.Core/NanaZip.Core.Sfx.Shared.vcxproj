@@ -103,8 +103,9 @@
     <ClCompile Include="SevenZip\C\MtDec.c" />
     <ClCompile Include="SevenZip\C\Ppmd7.c" />
     <ClCompile Include="SevenZip\C\Ppmd7Dec.c" />
+    <ClCompile Include="SevenZip\C\Sha256.c" />
+    <ClCompile Include="SevenZip\C\Sha256Opt.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
-    <ClCompile Include="Wrappers\Sha256Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
@@ -211,7 +212,6 @@
     <ClInclude Include="SevenZip\C\RotateDefs.h" />
     <ClInclude Include="SevenZip\C\Sha256.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
-    <ClInclude Include="Wrappers\Sha256Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
