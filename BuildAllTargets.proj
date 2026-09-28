@@ -192,4 +192,20 @@
       Command="&quot;$(PackagingToolPath)&quot; a -r .\Output\$(OutputFileNamePrefix)_DebugSymbols.zip .\Output\Binaries\Root\Symbols\*.*"
       WorkingDirectory="$(MSBuildThisFileDirectory)" />
   </Target>
+  <Target Name="BuildTestingBinaries">
+    <!--
+      Use NanaZipPackage instead of UI\NanaZip_Universal_Console if you want to
+      test the GUI version of NanaZip. For UI\NanaZip_Universal_Console, this
+      will only build the console version of NanaZip, which you need to get
+      binaries from something like
+      .\Output\Binaries\Release\x64\NanaZip.Universal.Console.exe instead of
+      .\Output\Binaries\Release\NanaZipPackage\x64\NanaZip.Universal.Console.exe.
+    -->
+    <MSBuild
+      Projects="$(SolutionPath)"
+      Targets="Restore;UI\NanaZip_Universal_Console"
+      BuildInParallel="True"
+      StopOnFirstFailure="True"
+      Properties="PreferredToolArchitecture=x64;GenerateAppxPackageOnBuild=false;Configuration=$(Configuration);Platform=$(Platform)" />
+  </Target>
 </Project>
