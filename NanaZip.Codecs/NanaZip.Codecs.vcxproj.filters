@@ -32,9 +32,6 @@
     <None Include="GmSSL\sm3_sse.c">
       <Filter>GmSSL</Filter>
     </None>
-    <ClCompile Include="RHash\aich.c">
-      <Filter>RHash</Filter>
-    </ClCompile>
     <ClCompile Include="RHash\blake2b.c">
       <Filter>RHash</Filter>
     </ClCompile>
@@ -552,9 +549,6 @@
     </ClInclude>
     <ClInclude Include="GmSSL\sm3.h">
       <Filter>GmSSL</Filter>
-    </ClInclude>
-    <ClInclude Include="RHash\aich.h">
-      <Filter>RHash</Filter>
     </ClInclude>
     <ClInclude Include="RHash\blake2b.h">
       <Filter>RHash</Filter>

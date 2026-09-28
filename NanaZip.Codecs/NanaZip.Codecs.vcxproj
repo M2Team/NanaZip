@@ -238,7 +238,6 @@
     </ClCompile>
     <ClCompile Include="Brotli\enc\static_dict.c" />
     <ClCompile Include="Brotli\enc\utf8_util.c" />
-    <ClCompile Include="RHash\aich.c" />
     <ClCompile Include="RHash\blake2b.c" />
     <ClCompile Include="RHash\byte_order.c">
       <DisableSpecificWarnings>4146;</DisableSpecificWarnings>
@@ -476,7 +475,6 @@
     <ClInclude Include="Brotli\include\brotli\port.h" />
     <ClInclude Include="Brotli\include\brotli\shared_dictionary.h" />
     <ClInclude Include="Brotli\include\brotli\types.h" />
-    <ClInclude Include="RHash\aich.h" />
     <ClInclude Include="RHash\blake2b.h" />
     <ClInclude Include="RHash\byte_order.h" />
     <ClInclude Include="RHash\edonr.h" />
