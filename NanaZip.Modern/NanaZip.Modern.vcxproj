@@ -340,7 +340,9 @@
     <PRIResource Include="Strings\kk\ProgressPage.resw" />
     <PRIResource Include="Strings\ko\Common.resw" />
     <PRIResource Include="Strings\ko\CopyLocationPage.resw" />
+    <PRIResource Include="Strings\ko\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\ko\ProgressPage.resw" />
+    <PRIResource Include="Strings\ko\SponsorPage.resw" />
     <PRIResource Include="Strings\ku-arab\Common.resw" />
     <PRIResource Include="Strings\ku-arab\CopyLocationPage.resw" />
     <PRIResource Include="Strings\ku-arab\ProgressPage.resw" />
