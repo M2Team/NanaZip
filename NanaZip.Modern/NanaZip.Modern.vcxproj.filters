@@ -1046,6 +1046,9 @@
     <PRIResource Include="Strings\it\MainWindowToolBarPage.resw">
       <Filter>Strings\it</Filter>
     </PRIResource>
+    <PRIResource Include="Strings\it\SponsorPage.resw">
+      <Filter>Strings\it</Filter>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
