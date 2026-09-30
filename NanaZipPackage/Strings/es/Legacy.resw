@@ -1077,13 +1077,13 @@
     <value>Precisión de marca de tiempo:</value>
   </data>
   <data name="Resource4082" xml:space="preserve">
-    <value>Almacenar la hora de modificación</value>
+    <value>Almacenar la fecha de modificación</value>
   </data>
   <data name="Resource4083" xml:space="preserve">
-    <value>Almacenar la hora de creación</value>
+    <value>Almacenar la fecha de creación</value>
   </data>
   <data name="Resource4084" xml:space="preserve">
-    <value>Almacenar la hora del último acceso</value>
+    <value>Almacenar la fecha del último acceso</value>
   </data>
   <data name="Resource4085" xml:space="preserve">
     <value>Establecer la hora del archivo comprimido en la del archivo más reciente</value>
