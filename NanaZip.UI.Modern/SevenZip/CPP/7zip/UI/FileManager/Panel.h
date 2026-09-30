@@ -499,6 +499,9 @@ public:
   bool _flatMode;
   bool _flatModeForDisk;
   bool _flatModeForArc;
+  // **************** NanaZip Modification Start ****************
+  bool m_ShowFileSizeUnits;
+  // **************** NanaZip Modification End ****************
 
   // bool _showNtfsStrems_Mode;
   // bool _showNtfsStrems_ModeForDisk;
@@ -602,6 +605,9 @@ public:
       _flatMode(false),
       _flatModeForDisk(false),
       _flatModeForArc(false),
+      // **************** NanaZip Modification Start ****************
+      m_ShowFileSizeUnits(false),
+      // **************** NanaZip Modification End ****************
 
       // _showNtfsStrems_Mode(false),
       // _showNtfsStrems_ModeForDisk(false),

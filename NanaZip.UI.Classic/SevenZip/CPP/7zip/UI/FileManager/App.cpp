@@ -102,6 +102,9 @@ void CApp::SetListSettings()
     panel._mySelectMode = st.AlternativeSelection;
     panel._showDots = st.ShowDots;
     panel._showRealFileIcons = st.ShowRealFileIcons;
+    // **************** NanaZip Modification Start ****************
+    panel.m_ShowFileSizeUnits = st.ShowFileSizeUnits;
+    // **************** NanaZip Modification End ****************
     panel._exStyle = extendedStyle;
 
     DWORD style = (DWORD)panel._listView.GetStyle();

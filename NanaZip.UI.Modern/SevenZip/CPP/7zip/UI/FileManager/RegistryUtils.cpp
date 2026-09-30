@@ -47,6 +47,10 @@ static LPCTSTR const kLowercaseHashes = TEXT("LowercaseHashes");
 static LPCTSTR const kFlatViewName = TEXT("FlatViewArc");
 // static LPCTSTR const kShowDeletedFiles = TEXT("ShowDeleted");
 
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const kShowFileSizeUnits = TEXT("ShowFileSizeUnits");
+// **************** NanaZip Modification End ****************
+
 static void SaveCuString(LPCTSTR keyPath, LPCWSTR valuePath, LPCWSTR value)
 {
   CKey key;
@@ -155,6 +159,9 @@ void CFmSettings::Save() const
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
+  // **************** NanaZip Modification Start ****************
+  SaveOption(kShowFileSizeUnits, ShowFileSizeUnits);
+  // **************** NanaZip Modification End ****************
 }
 
 void CFmSettings::Load()
@@ -173,6 +180,9 @@ void CFmSettings::Load()
   // Underline = false;
 
   ShowSystemMenu = false;
+  // **************** NanaZip Modification Start ****************
+  ShowFileSizeUnits = false;
+  // **************** NanaZip Modification End ****************
 
   CKey key;
   if (key.Open(HKEY_CURRENT_USER, kCU_FMPath, KEY_READ) == ERROR_SUCCESS)
@@ -191,6 +201,10 @@ void CFmSettings::Load()
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );
+
+    // **************** NanaZip Modification Start ****************
+    ReadOption(key, kShowFileSizeUnits, ShowFileSizeUnits);
+    // **************** NanaZip Modification End ****************
   }
 }
 
