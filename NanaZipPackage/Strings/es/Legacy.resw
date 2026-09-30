@@ -318,6 +318,9 @@
   <data name="Resource1018" xml:space="preserve">
     <value>Diccionario</value>
   </data>
+  <data name="Resource1019" xml:space="preserve">
+    <value>CRC</value>
+  </data>
   <data name="Resource1020" xml:space="preserve">
     <value>Tipo</value>
   </data>
@@ -519,6 +522,12 @@
   <data name="Resource1093" xml:space="preserve">
     <value>Solo lectura</value>
   </data>
+  <data name="Resource1095" xml:space="preserve">
+    <value>Copiar enlace</value>
+  </data>
+  <data name="Resource1098" xml:space="preserve">
+    <value>Metadatos modificados</value>
+  </data>
   <data name="Resource2100" xml:space="preserve">
     <value>Opciones</value>
   </data>
@@ -591,6 +600,9 @@
   <data name="Resource2330" xml:space="preserve">
     <value>Comprimir a {0} y enviar por correo</value>
   </data>
+  <data name="Resource2331" xml:space="preserve">
+    <value>Extraer aquí (inteligente)</value>
+  </data>
   <data name="Resource2400" xml:space="preserve">
     <value>Directorios</value>
   </data>
@@ -638,6 +650,21 @@
   </data>
   <data name="Resource2508" xml:space="preserve">
     <value>Usar páginas &amp;grandes de memoria</value>
+  </data>
+  <data name="Resource2509" xml:space="preserve">
+    <value>Mantener historial de archivos</value>
+  </data>
+  <data name="Resource2510" xml:space="preserve">
+    <value>Mantener historial de rutas</value>
+  </data>
+  <data name="Resource2511" xml:space="preserve">
+    <value>Mantener historial de copias</value>
+  </data>
+  <data name="Resource2512" xml:space="preserve">
+    <value>Mantener historial de carpetas</value>
+  </data>
+  <data name="Resource2513" xml:space="preserve">
+    <value>Usar hashes en minúsculas</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Acerca de NanaZip</value>
@@ -796,6 +823,18 @@
   </data>
   <data name="Resource3431" xml:space="preserve">
     <value>Restaurar seguridad del archivo</value>
+  </data>
+  <data name="Resource3433" xml:space="preserve">
+    <value>Abrir la carpeta después de extraer</value>
+  </data>
+  <data name="Resource3434" xml:space="preserve">
+    <value>Extraer al abrir (mantén pulsado Mayús para omitir)</value>
+  </data>
+  <data name="Resource3440" xml:space="preserve">
+    <value>Propagar el flujo de Zone.Id:</value>
+  </data>
+  <data name="Resource3441" xml:space="preserve">
+    <value>Para archivos no seguros</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
     <value>Confirmar sustitución de archivos</value>
@@ -1030,6 +1069,33 @@
   </data>
   <data name="Resource4073" xml:space="preserve">
     <value>Sin límite</value>
+  </data>
+  <data name="Resource4080" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="Resource4081" xml:space="preserve">
+    <value>Precisión de marca de tiempo:</value>
+  </data>
+  <data name="Resource4082" xml:space="preserve">
+    <value>Almacenar la hora de modificación</value>
+  </data>
+  <data name="Resource4083" xml:space="preserve">
+    <value>Almacenar la hora de creación</value>
+  </data>
+  <data name="Resource4084" xml:space="preserve">
+    <value>Almacenar la hora del último acceso</value>
+  </data>
+  <data name="Resource4085" xml:space="preserve">
+    <value>Establecer la hora del archivo comprimido en la del archivo más reciente</value>
+  </data>
+  <data name="Resource4086" xml:space="preserve">
+    <value>No cambiar la hora de último acceso de los archivos de origen</value>
+  </data>
+  <data name="Resource4090" xml:space="preserve">
+    <value>seg</value>
+  </data>
+  <data name="Resource4091" xml:space="preserve">
+    <value>ns</value>
   </data>
   <data name="Resource6000" xml:space="preserve">
     <value>Copiar</value>
@@ -1295,5 +1361,11 @@
   </data>
   <data name="Resource7714" xml:space="preserve">
     <value>Unión de directorio</value>
+  </data>
+  <data name="Resource12200" xml:space="preserve">
+    <value>Integración</value>
+  </data>
+  <data name="Resource12201" xml:space="preserve">
+    <value>Abrir la aplicación Configuración de Windows para asociar archivos con NanaZip</value>
   </data>
 </root>

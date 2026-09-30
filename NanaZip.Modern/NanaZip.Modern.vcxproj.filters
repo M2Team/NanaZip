@@ -1043,6 +1043,12 @@
     <PRIResource Include="Strings\nl\MainWindowToolBarPage.resw">
       <Filter>Strings\nl</Filter>
     </PRIResource>
+    <PRIResource Include="Strings\es\MainWindowToolBarPage.resw">
+      <Filter>Strings\es</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\es\SponsorPage.resw">
+      <Filter>Strings\es</Filter>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />
