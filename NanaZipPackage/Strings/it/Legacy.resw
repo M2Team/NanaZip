@@ -48,6 +48,9 @@
   <data name="Resource2" xml:space="preserve">
     <value>Italiano</value>
   </data>
+  <data name="Resource104" xml:space="preserve">
+    <value>Apri cartella di destinazione</value>
+  </data>
   <data name="Resource401" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -124,7 +127,7 @@
     <value>Apri in E&amp;splora risorse</value>
   </data>
   <data name="Resource543" xml:space="preserve">
-    <value>&amp;Visualizza</value>
+    <value>&amp;Mostra</value>
   </data>
   <data name="Resource544" xml:space="preserve">
     <value>Modifica con l'&amp;editor predefinito</value>
