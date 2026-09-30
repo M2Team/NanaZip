@@ -328,6 +328,7 @@
     <PRIResource Include="Strings\is\ProgressPage.resw" />
     <PRIResource Include="Strings\it\Common.resw" />
     <PRIResource Include="Strings\it\CopyLocationPage.resw" />
+    <PRIResource Include="Strings\it\MainWindowToolBarPage.resw" />
     <PRIResource Include="Strings\it\ProgressPage.resw" />
     <PRIResource Include="Strings\ja\Common.resw" />
     <PRIResource Include="Strings\ja\CopyLocationPage.resw" />
