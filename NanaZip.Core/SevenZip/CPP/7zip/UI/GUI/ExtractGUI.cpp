@@ -177,6 +177,7 @@ HRESULT CThreadExtracting::ProcessVirt()
 // **************** 7-Zip ZS Modification Start ****************
 #ifndef Z7_SFX
 #include <shlobj_core.h>
+#include <shellapi.h>
 static void BrowseToPath(
     bool explore,
     UString &path)
@@ -218,6 +219,8 @@ HRESULT ExtractGUI(
 {
   messageWasDisplayed = false;
 
+  HRESULT result;
+  {
   CThreadExtracting extracter;
   /*
   #ifdef Z7_EXTERNAL_CODECS
@@ -382,5 +385,32 @@ HRESULT ExtractGUI(
   }
 #endif
   // **************** 7-Zip ZS Modification End ****************
-  return extracter.Result;
+  result = extracter.Result;
+  }
+  // **************** NanaZip Modification Start ****************
+#ifndef Z7_NO_REGISTRY
+  {
+    NExtract::CInfo info;
+    info.Load();
+    if (info.DeleteArchive.Val && result == S_OK)
+    {
+      FOR_VECTOR (i, archivePaths)
+      {
+        FString path = us2fs(archivePaths[i]);
+        size_t len = path.Len();
+        wchar_t *buf = new wchar_t[len + 2];
+        wcscpy_s(buf, len + 1, path);
+        buf[len + 1] = L'\0';
+        SHFILEOPSTRUCTW fo = {};
+        fo.wFunc = FO_DELETE;
+        fo.pFrom = buf;
+        fo.fFlags = FOF_ALLOWUNDO;
+        ::SHFileOperationW(&fo);
+        delete[] buf;
+      }
+    }
+  }
+#endif
+  // **************** NanaZip Modification End ****************
+  return result;
 }
