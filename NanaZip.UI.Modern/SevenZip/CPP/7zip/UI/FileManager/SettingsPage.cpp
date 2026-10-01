@@ -17,6 +17,10 @@
 #include "SettingsPage.h"
 #include "SettingsPageRes.h"
 
+// **************** NanaZip Modification Start ****************
+#include <NanaZip.Modern.h>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 
 static const UInt32 kLangIDs[] =
@@ -34,6 +38,9 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_WANT_COPY_HISTORY,
   IDX_SETTINGS_WANT_FOLDER_HISTORY,
   IDX_SETTINGS_LOWERCASE_HASHES,
+  // **************** NanaZip Modification Start ****************
+  IDT_SETTINGS_LANGUAGE,
+  // **************** NanaZip Modification End ****************
   // , IDT_COMPRESS_MEMORY
 };
 
@@ -140,6 +147,26 @@ bool CSettingsPage::OnInit()
   CheckButton(IDX_SETTINGS_WANT_FOLDER_HISTORY, st.FolderHistory);
   CheckButton(IDX_SETTINGS_LOWERCASE_HASHES, st.LowercaseHashes);
 
+  // **************** NanaZip Modification Start ****************
+  NWindows::NControl::CComboBox LanguageComboBox;
+  LanguageComboBox.Attach(GetItem(IDC_SETTINGS_LANGUAGE));
+  UString CurrentLanguageTag;
+  ReadRegLang(CurrentLanguageTag);
+  for (UINT32 Index = 0; ; ++Index)
+  {
+    LPCWSTR LanguageTag = ::K7ModernGetLanguageTag(Index);
+    if (!LanguageTag)
+    {
+      break;
+    }
+    LanguageComboBox.AddString(::K7ModernGetLanguageName(Index));
+    if (CurrentLanguageTag.IsEqualTo_NoCase(LanguageTag))
+    {
+      LanguageComboBox.SetCurSel(static_cast<int>(Index));
+    }
+  }
+  // **************** NanaZip Modification End ****************
+
   /*
   NCompression::CMemUse mu;
   bool needSetCur = NCompression::MemLimit_Load(mu);
@@ -244,6 +271,27 @@ LONG CSettingsPage::OnApply()
     _largePages_wasChanged = false;
   }
   #endif
+
+  // **************** NanaZip Modification Start ****************
+  NWindows::NControl::CComboBox LanguageComboBox;
+  LanguageComboBox.Attach(GetItem(IDC_SETTINGS_LANGUAGE));
+  int const SelectedIndex = LanguageComboBox.GetCurSel();
+  // The combo box is empty when the page is not created or NanaZip Modern
+  // Experience provides no language, and the language setting should be kept
+  // in that case.
+  if (SelectedIndex >= 0 && LanguageComboBox.GetCount() > SelectedIndex)
+  {
+    UString CurrentLanguageTag;
+    ReadRegLang(CurrentLanguageTag);
+    LPCWSTR LanguageTag = ::K7ModernGetLanguageTag(
+      static_cast<UINT32>(SelectedIndex));
+    if (!CurrentLanguageTag.IsEqualTo_NoCase(LanguageTag))
+    {
+      SaveRegLang(UString(LanguageTag));
+      ReloadLang();
+    }
+  }
+  // **************** NanaZip Modification End ****************
 
   /*
   if (_wasChanged_MemLimit)

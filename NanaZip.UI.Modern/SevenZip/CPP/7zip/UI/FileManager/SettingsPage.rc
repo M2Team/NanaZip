@@ -2,7 +2,10 @@
 #include "../../GuiCommon.rc"
 
 #define xc 240
-#define yc 250
+// **************** NanaZip Modification Start ****************
+// #define yc 250
+#define yc 276
+// **************** NanaZip Modification End ****************
 
 IDD_SETTINGS  MY_PAGE
 #include "SettingsPage2.rc"

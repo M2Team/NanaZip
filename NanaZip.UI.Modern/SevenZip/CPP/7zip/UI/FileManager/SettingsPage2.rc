@@ -20,6 +20,11 @@ BEGIN
   CONTROL  "Use Lowercase Hashes", IDX_SETTINGS_LOWERCASE_HASHES,     MY_CHECKBOX, m, 196, xc, 10
   // **************** NanaZip Modification End ****************
 
+  // **************** NanaZip Modification Start ****************
+  LTEXT     "Language:",           IDT_SETTINGS_LANGUAGE,             m, 214, xc, 8
+  COMBOBOX                         IDC_SETTINGS_LANGUAGE,             m, 226, xc, 48, MY_COMBO
+  // **************** NanaZip Modification End ****************
+
   // LTEXT     "Memory usage for Compressing:", IDT_COMPRESS_MEMORY, m, 140, xc, 8
   // COMBOBOX  IDC_SETTINGS_MEM, m , 152, g1xs, yc - 152, MY_COMBO
   // LTEXT     "/ RAM", IDT_SETTINGS_MEM_RAM, m + g1xs + m, 154, xc - g1xs - m, MY_TEXT_NOPREFIX
