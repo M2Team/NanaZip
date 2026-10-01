@@ -27,7 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="SponsorPage.xaml" />
-    <Page Include="AboutPage.xaml" />
+    <Page Include="SettingsPage.xaml" />
     <Page Include="MainWindowToolBarPage.xaml" />
     <Page Include="AddressBarTemplate.xaml" />
     <Page Include="StatusBarTemplate.xaml" />

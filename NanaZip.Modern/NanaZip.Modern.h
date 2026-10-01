@@ -69,6 +69,16 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
     _In_opt_ LPCWSTR ExtendedMessage);
 
 /**
+ * @brief Show the "Settings NanaZip" dialog.
+ * @param ParentWindowHandle A handle to the owner window of the dialog to be
+ *                           created. If this parameter is nullptr, the dialog
+ *                           has no owner window.
+ * @return The message loop exit code of the dialog.
+ */
+EXTERN_C INT WINAPI K7ModernShowSettingsDialog(
+    _In_opt_ HWND ParentWindowHandle);
+
+/**
  * @brief Show an information dialog with the specified title and content.
  * @param ParentWindowHandle A handle to the owner window of the dialog to be
  *                           created. If this parameter is nullptr, the dialog

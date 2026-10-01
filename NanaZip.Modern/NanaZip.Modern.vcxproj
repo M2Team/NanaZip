@@ -74,6 +74,9 @@
     <Page Include="AboutPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindowToolBarPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -111,6 +114,10 @@
     </Midl>
     <Midl Include="AboutPage.idl">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="SettingsPage.idl">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
     <Midl Include="MainWindowToolBarPage.idl">
@@ -156,6 +163,10 @@
       <DependentUpon>AboutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="SettingsPage.h">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="MainWindowToolBarPage.h">
       <DependentUpon>MainWindowToolBarPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -196,6 +207,10 @@
     </ClCompile>
     <ClCompile Include="AboutPage.cpp">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="SettingsPage.cpp">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="MainWindowToolBarPage.cpp">

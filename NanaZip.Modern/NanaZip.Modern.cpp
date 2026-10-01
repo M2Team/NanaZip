@@ -18,6 +18,7 @@
 #include "App.h"
 #include "SponsorPage.h"
 #include "AboutPage.h"
+#include "SettingsPage.h"
 #include "InformationPage.h"
 #include "ProgressPage.h"
 #include "CopyLocationPage.h"
@@ -409,6 +410,33 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
     Interface Window = winrt::make<Implementation>(
         WindowHandle,
         ExtendedMessage);
+
+    int Result = ::K7ModernShowXamlDialog(
+        WindowHandle,
+        482,
+        320,
+        winrt::get_abi(Window),
+        ParentWindowHandle);
+
+    return Result;
+}
+
+EXTERN_C INT WINAPI K7ModernShowSettingsDialog(
+    _In_opt_ HWND ParentWindowHandle)
+{
+    HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
+    if (!WindowHandle)
+    {
+        return -1;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::SettingsPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::SettingsPage;
+
+    Interface Window = winrt::make<Implementation>(
+        WindowHandle);
 
     int Result = ::K7ModernShowXamlDialog(
         WindowHandle,
