@@ -54,6 +54,31 @@
             Header="[Extract on open (hold 'Shift' to skip)]"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
+          <TreeView SelectionMode="Multiple">
+            <TreeView.RootNodes>
+              <TreeViewNode Content="[Context menu items]" IsExpanded="True" >
+                <TreeViewNode.Children>
+                  <TreeViewNode Content="[Open]" />
+                  <TreeViewNode Content="[Test]" />
+                  <TreeViewNode Content="[Extract]"/>
+                  <TreeViewNode Content="[Extract here]" />
+                  <TreeViewNode Content="[Extract here Smart]" />
+                  <TreeViewNode Content="[Extract to]" />
+                  <TreeViewNode Content="[Compress]" />
+                  <TreeViewNode Content="[Compress to 7z]" />
+                  <TreeViewNode Content="[Compress to Zip]" />
+                  <TreeViewNode Content="[Compress Email]" />
+                  <TreeViewNode Content="[Compress to 7z and Email]" />
+                  <TreeViewNode Content="[Compress to Zip and Email]" />
+                  <TreeViewNode Content="[CRC-32]" />
+                  <TreeViewNode Content="[CRC-64]" />
+                  <TreeViewNode Content="[SHA-1]" />
+                  <TreeViewNode Content="[SHA-256]" />
+                  <TreeViewNode Content="[HASH]" />
+                </TreeViewNode.Children>
+              </TreeViewNode>
+            </TreeView.RootNodes>
+          </TreeView>
         </StackPanel>
       </ScrollViewer>
     </PivotItem>
