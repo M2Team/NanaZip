@@ -36,6 +36,15 @@
         Tag - Reg SubKey
         Name - Reg Value Name
         IsOn - Default Reg Value Data
+        Loading - Must ToggleSwitchLoading
+        Toggled - Lambda delegated by ToggleSwitchLoading
+      ComboBox:
+        Header - SettingsCard Header
+        Tag - Reg SubKey
+        Name - Reg Value Name
+        SelectedIndex - Default Reg Value Data
+        Loading - Must ComboBoxLoading
+        SelectionChanged - Lambda delegated by ComboBoxLoading
     -->
     
     <PivotItem Header="[Integration]">
@@ -45,6 +54,15 @@
           <Button
             Content="[Open Windows Settings app to associate files with NanaZip]"
             Click="FileAssociationsButtonClick" />
+          <TextBlock Text="[Security]" />
+          <ComboBox Name="WriteZoneIdExtract" Tag="Options"
+            Header="[Propagate MotW Zone.Id]"
+            SelectedIndex="1"
+            Loading="ComboBoxLoading">
+            <ComboBoxItem Content="[No]" AccessKey="N" />
+            <ComboBoxItem Content="[Yes]" AccessKey="Y" />
+            <ComboBoxItem Content="[For Office files]" />
+          </ComboBox>
           <TextBlock Text="[Context Menu]" />
           <ToggleSwitch Name="ElimDupExtract" Tag="Options"
             Header="[Eliminate duplication of root folder]"

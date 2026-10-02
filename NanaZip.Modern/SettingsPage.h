@@ -10,6 +10,8 @@ namespace winrt
     using Windows::UI::Xaml::FrameworkElement;
     using Windows::UI::Xaml::RoutedEventArgs;
     using Windows::UI::Xaml::Controls::ToggleSwitch;
+    using Windows::UI::Xaml::Controls::ComboBox;
+    using Windows::UI::Xaml::Controls::SelectionChangedEventArgs;
 }
 
 namespace winrt::NanaZip::Modern::implementation
@@ -31,9 +33,9 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::FrameworkElement const& sender,
             winrt::IInspectable const& e);
 
-        void ToggleSwitchToggled(
-            winrt::IInspectable const& sender,
-            winrt::RoutedEventArgs const& e);
+        void ComboBoxLoading(
+            winrt::FrameworkElement const& sender,
+            winrt::IInspectable const& e);
 
     private:
 

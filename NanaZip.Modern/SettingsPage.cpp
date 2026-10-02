@@ -65,30 +65,77 @@ namespace winrt::NanaZip::Modern::implementation
             SwitchElement.IsOn(static_cast<bool>(SwitchValue));
         }
 
-        // Prevent ToggleSwitchToggled when Loading.
-        SwitchElement.Toggled({ this->get_strong(), &SettingsPage::ToggleSwitchToggled});
+        SwitchElement.Toggled(
+            [](winrt::IInspectable const& sender, winrt::RoutedEventArgs const& e)
+            {
+                UNREFERENCED_PARAMETER(e);
+
+                winrt::ToggleSwitch SwitchElement = sender.as<winrt::ToggleSwitch>();
+
+                DWORD SwitchValue = SwitchElement.IsOn();
+                DWORD SwitchValueLength = sizeof(SwitchValue);
+
+                std::wstring SubKey = L"Software\\NanaZip\\";
+                SubKey.append(SwitchElement.Tag().as<winrt::hstring>());
+
+                ::RegSetKeyValueW(
+                    HKEY_CURRENT_USER,
+                    SubKey.c_str(),
+                    SwitchElement.Name().c_str(),
+                    REG_DWORD,
+                    reinterpret_cast<PVOID>(&SwitchValue),
+                    SwitchValueLength);
+            });
     }
 
-    void SettingsPage::ToggleSwitchToggled(
-        winrt::IInspectable const& sender,
-        winrt::RoutedEventArgs const& e)
+    void SettingsPage::ComboBoxLoading(
+        winrt::FrameworkElement const& sender,
+        winrt::IInspectable const& e)
     {
         UNREFERENCED_PARAMETER(e);
 
-        winrt::ToggleSwitch SwitchElement = sender.as<winrt::ToggleSwitch>();
+        winrt::ComboBox ComboElement = sender.as<winrt::ComboBox>();
 
-        DWORD SwitchValue = SwitchElement.IsOn();
-        DWORD SwitchValueLength = sizeof(SwitchValue);
+        DWORD ComboValue = ComboElement.SelectedIndex();
+        DWORD ComboValueLength = sizeof(ComboValue);
 
         std::wstring SubKey = L"Software\\NanaZip\\";
-        SubKey.append(SwitchElement.Tag().as<winrt::hstring>());
+        SubKey.append(ComboElement.Tag().as<winrt::hstring>());
 
-        ::RegSetKeyValueW(
+        LSTATUS Result = ::RegGetValueW(
             HKEY_CURRENT_USER,
             SubKey.c_str(),
-            SwitchElement.Name().c_str(),
-            REG_DWORD,
-            reinterpret_cast<PVOID>(&SwitchValue),
-            SwitchValueLength);
+            ComboElement.Name().c_str(),
+            RRF_RT_REG_DWORD,
+            nullptr,
+            reinterpret_cast<PVOID>(&ComboValue),
+            &ComboValueLength);
+
+        if (ERROR_SUCCESS == Result)
+        {
+            ComboElement.SelectedIndex(static_cast<std::int32_t>(ComboValue));
+        }
+
+        ComboElement.SelectionChanged(
+            [](winrt::IInspectable sender, winrt::SelectionChangedEventArgs e)
+            {
+                UNREFERENCED_PARAMETER(e);
+
+                winrt::ComboBox ComboElement = sender.as<winrt::ComboBox>();
+
+                DWORD ComboValue = ComboElement.SelectedIndex();
+                DWORD ComboValueLength = sizeof(ComboValue);
+
+                std::wstring SubKey = L"Software\\NanaZip\\";
+                SubKey.append(ComboElement.Tag().as<winrt::hstring>());
+
+                ::RegSetKeyValueW(
+                    HKEY_CURRENT_USER,
+                    SubKey.c_str(),
+                    ComboElement.Name().c_str(),
+                    REG_DWORD,
+                    reinterpret_cast<PVOID>(&ComboValue),
+                    ComboValueLength);
+            });
     }
 }
