@@ -139,11 +139,24 @@
             IsOn="False"
             Loading="ToggleSwitchLoading" />
           <TextBlock
-            Text="[Compression]" />
+            Text="[(De)Compression]" />
           <ToggleSwitch Name="LargePages" Tag=""
             Header="[Use large memory pages]"
             AccessKey="L"
             IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ComboBox Name="WorkDirType" Tag="Options"
+            Header="[Working folder]"
+            AccessKey="W"
+            SelectedIndex="0"
+            Loading="ComboBoxLoading">
+            <ComboBoxItem Content="[System temp folder]" AccessKey="S" />
+            <ComboBoxItem Content="[Current]" AccessKey="C" />
+            <ComboBoxItem Content="[Specified]" />
+          </ComboBox>
+          <ToggleSwitch Name="TempRemovableOnly" Tag="Options"
+            Header="[Working folder use for removable drives only]"
+            IsOn="True"
             Loading="ToggleSwitchLoading" />
           <TextBlock Text="[History]" />
           <ToggleSwitch Name="WantArcHistory" Tag="FM"
