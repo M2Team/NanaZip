@@ -66,7 +66,7 @@ namespace winrt::NanaZip::Modern::implementation
         }
 
         SwitchElement.Toggled(
-            [](winrt::IInspectable const& sender, winrt::RoutedEventArgs const& e)
+            [this](winrt::IInspectable const& sender, winrt::RoutedEventArgs const& e)
             {
                 UNREFERENCED_PARAMETER(e);
 
@@ -76,15 +76,29 @@ namespace winrt::NanaZip::Modern::implementation
                 DWORD SwitchValueLength = sizeof(SwitchValue);
 
                 std::wstring SubKey = L"Software\\NanaZip\\";
-                SubKey.append(SwitchElement.Tag().as<winrt::hstring>());
+                std::wstring SwitchTag = SwitchElement.Tag().as<winrt::hstring>().c_str();
+                SubKey.append(SwitchTag);
 
-                ::RegSetKeyValueW(
+                LSTATUS Result = ::RegSetKeyValueW(
                     HKEY_CURRENT_USER,
                     SubKey.c_str(),
                     SwitchElement.Name().c_str(),
                     REG_DWORD,
                     reinterpret_cast<PVOID>(&SwitchValue),
                     SwitchValueLength);
+
+                if (ERROR_SUCCESS == Result
+                    && SwitchTag.compare(L"FM") == 0)
+                {
+                    HWND hWnd = ::GetWindow(this->m_WindowHandle, GW_OWNER);
+                    ::PostMessageW(
+                        hWnd,
+                        WM_COMMAND,
+                        MAKEWPARAM(
+                            0x5678,
+                            0x1234),
+                        0);
+                }
             });
     }
 

@@ -871,6 +871,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         ExecuteCommand(wmId);
         return 0;
       }
+
+      // **************** NanaZip Modification Start ****************
+      if (wmId == 0x5678 && wmEvent == 0x1234)
+      {
+          g_App.SetListSettings();
+          g_App.RefreshAllPanels();
+          return 0;
+      }
+      // **************** NanaZip Modification End ****************
+
       if (OnMenuCommand(hWnd, wmId))
         return 0;
       break;
