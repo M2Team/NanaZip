@@ -43,7 +43,7 @@ namespace winrt::NanaZip::Modern::implementation
     {
         UNREFERENCED_PARAMETER(e);
 
-        winrt::ToggleSwitch SwitchElement = sender.as<winrt::ToggleSwitch>();
+        auto SwitchElement = sender.as<winrt::ToggleSwitch>();
 
         DWORD SwitchValue = SwitchElement.IsOn();
         DWORD SwitchValueLength = sizeof(SwitchValue);
@@ -62,21 +62,23 @@ namespace winrt::NanaZip::Modern::implementation
 
         if (ERROR_SUCCESS == Result)
         {
-            SwitchElement.IsOn(static_cast<bool>(SwitchValue));
+            SwitchElement.IsOn(SwitchValue != false);
         }
 
         SwitchElement.Toggled(
-            [this](winrt::IInspectable const& sender, winrt::RoutedEventArgs const& e)
+            [this](winrt::IInspectable const& sender,
+                   winrt::RoutedEventArgs const& e)
             {
                 UNREFERENCED_PARAMETER(e);
 
-                winrt::ToggleSwitch SwitchElement = sender.as<winrt::ToggleSwitch>();
+                auto SwitchElement = sender.as<winrt::ToggleSwitch>();
 
                 DWORD SwitchValue = SwitchElement.IsOn();
                 DWORD SwitchValueLength = sizeof(SwitchValue);
 
                 std::wstring SubKey = L"Software\\NanaZip\\";
-                std::wstring SwitchTag = SwitchElement.Tag().as<winrt::hstring>().c_str();
+                std::wstring SwitchTag =
+                    SwitchElement.Tag().as<winrt::hstring>().c_str();
                 SubKey.append(SwitchTag);
 
                 LSTATUS Result = ::RegSetKeyValueW(
@@ -90,13 +92,12 @@ namespace winrt::NanaZip::Modern::implementation
                 if (ERROR_SUCCESS == Result
                     && SwitchTag.compare(L"FM") == 0)
                 {
-                    HWND hWnd = ::GetWindow(this->m_WindowHandle, GW_OWNER);
+                    HWND MainWindowHandle =
+                        ::GetWindow(this->m_WindowHandle, GW_OWNER);
                     ::PostMessageW(
-                        hWnd,
+                        MainWindowHandle,
                         WM_COMMAND,
-                        MAKEWPARAM(
-                            0x5678,
-                            0x1234),
+                        K7_MAIN_WINDOW_COMMAND_REFRESH_ALL_PANELS,
                         0);
                 }
             });
@@ -108,7 +109,7 @@ namespace winrt::NanaZip::Modern::implementation
     {
         UNREFERENCED_PARAMETER(e);
 
-        winrt::ComboBox ComboElement = sender.as<winrt::ComboBox>();
+        auto ComboElement = sender.as<winrt::ComboBox>();
 
         DWORD ComboValue = ComboElement.SelectedIndex();
         DWORD ComboValueLength = sizeof(ComboValue);
@@ -125,7 +126,8 @@ namespace winrt::NanaZip::Modern::implementation
             reinterpret_cast<PVOID>(&ComboValue),
             &ComboValueLength);
 
-        if (ERROR_SUCCESS == Result)
+        if (ERROR_SUCCESS == Result
+            && ComboValue < ComboElement.Items().Size())
         {
             ComboElement.SelectedIndex(static_cast<std::int32_t>(ComboValue));
         }
@@ -135,7 +137,7 @@ namespace winrt::NanaZip::Modern::implementation
             {
                 UNREFERENCED_PARAMETER(e);
 
-                winrt::ComboBox ComboElement = sender.as<winrt::ComboBox>();
+                auto ComboElement = sender.as<winrt::ComboBox>();
 
                 DWORD ComboValue = ComboElement.SelectedIndex();
                 DWORD ComboValueLength = sizeof(ComboValue);
@@ -177,15 +179,18 @@ namespace winrt::NanaZip::Modern::implementation
 
         if (ERROR_SUCCESS == Result)
         {
-            ListViewElement.SelectedItems().Clear();
+            auto SelectedListViewItems = ListViewElement.SelectedItems();
+            SelectedListViewItems.Clear();
             for (auto const& it : ListViewElement.Items())
             {
                 auto ListViewItemElement = it.as<winrt::ListViewItem>();
-                auto ListViewItemFlag = ListViewItemElement.Tag().as<std::int32_t>();
-                DWORD IsSelectedValue = ContextMenuValue & (1 << ListViewItemFlag);
+                auto ListViewItemFlag =
+                    ListViewItemElement.Tag().as<std::int32_t>();
+                DWORD IsSelectedValue =
+                    ContextMenuValue & (1 << ListViewItemFlag);
                 if (IsSelectedValue)
                 {
-                    ListViewElement.SelectedItems().Append(ListViewItemElement);
+                    SelectedListViewItems.Append(ListViewItemElement);
                 }
             }
         }
@@ -202,7 +207,8 @@ namespace winrt::NanaZip::Modern::implementation
                 for (auto const& it : ListViewElement.SelectedItems())
                 {
                     auto ListViewItemElement = it.as<winrt::ListViewItem>();
-                    auto ListViewItemFlag = ListViewItemElement.Tag().as<std::int32_t>();
+                    auto ListViewItemFlag =
+                        ListViewItemElement.Tag().as<std::int32_t>();
                     ContextMenuValue |= (1 << ListViewItemFlag);
                 }
 

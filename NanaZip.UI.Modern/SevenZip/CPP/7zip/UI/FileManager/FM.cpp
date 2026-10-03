@@ -873,7 +873,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       }
 
       // **************** NanaZip Modification Start ****************
-      if (wmId == 0x5678 && wmEvent == 0x1234)
+      if (K7_MAIN_WINDOW_COMMAND_REFRESH_ALL_PANELS == wParam)
       {
           g_App.SetListSettings();
           g_App.RefreshAllPanels();

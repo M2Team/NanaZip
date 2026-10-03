@@ -69,6 +69,13 @@ EXTERN_C INT WINAPI K7ModernShowAboutDialog(
     _In_opt_ LPCWSTR ExtendedMessage);
 
 /**
+ * @brief The WM_COMMAND IDM_OPTIONS ID for the message of refreshing all
+ *        panels will be sent to the main window from the settings dialog
+ *        when the user changes the options of file manager.
+ */
+#define K7_MAIN_WINDOW_COMMAND_REFRESH_ALL_PANELS MAKEWPARAM(1000, 900)
+
+/**
  * @brief Show the "Settings NanaZip" dialog.
  * @param ParentWindowHandle A handle to the owner window of the dialog to be
  *                           created. If this parameter is nullptr, the dialog
