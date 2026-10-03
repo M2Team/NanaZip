@@ -1,0 +1,206 @@
+﻿<Page
+  x:Class="NanaZip.Modern.SettingsPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="using:NanaZip.Modern"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  IsTextScaleFactorEnabled="False"
+  mc:Ignorable="d">
+  <Page.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ButtonCard.xaml" />
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ToggleSwitchCard.xaml" />
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/PivotTab.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <Style TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,12,0,4" />
+      </Style>
+    </ResourceDictionary>
+  </Page.Resources>
+  <Pivot Style="{StaticResource PivotTabStyle}">
+    <Pivot.Resources>
+      <Thickness x:Key="PivotItemMargin">0</Thickness>
+      <Style TargetType="Button" BasedOn="{StaticResource ButtonCardStyle}" />
+      <Style TargetType="ToggleSwitch" BasedOn="{StaticResource ToggleSwitchCardStyle}" />
+    </Pivot.Resources>
+
+    <!--
+    Guidline:
+      Button:
+        Content -  SettingsCard Header
+      ToggleSwitch:
+        Header - SettingsCard Header
+        Tag - Reg SubKey
+        Name - Reg Value Name
+        IsOn - Default Reg Value Data
+        Loading - Must ToggleSwitchLoading
+        Toggled - Lambda delegated by ToggleSwitchLoading
+      ComboBox:
+        Header - SettingsCard Header
+        Tag - Reg SubKey
+        Name - Reg Value Name
+        SelectedIndex - Default Reg Value Data
+        Loading - Must ComboBoxLoading
+        SelectionChanged - Lambda delegated by ComboBoxLoading
+    -->
+    
+    <PivotItem Header="[Integration]">
+      <ScrollViewer>
+        <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
+          <TextBlock Text="[File Associations]" />
+          <Button
+            Content="[Open Windows Settings app to associate files with NanaZip]"
+            Click="FileAssociationsButtonClick" />
+          <TextBlock Text="[Security]" />
+          <ComboBox Name="WriteZoneIdExtract" Tag="Options"
+            Header="[Propagate MotW Zone.Id]"
+            SelectedIndex="1"
+            Loading="ComboBoxLoading">
+            <ComboBoxItem Content="[No]" AccessKey="N" />
+            <ComboBoxItem Content="[Yes]" AccessKey="Y" />
+            <ComboBoxItem Content="[For Office files]" />
+          </ComboBox>
+          <TextBlock Text="[Context Menu]" />
+          <ToggleSwitch Name="ElimDupExtract" Tag="Options"
+            Header="[Eliminate duplication of root folder]"
+            IsOn="True"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ExtractOnOpen" Tag="Options"
+            Header="[Extract on open (hold 'Shift' to skip)]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ListView Name="ContextMenu" Tag="Options"
+            Header="[Context menu items]"
+            SelectionMode="Multiple"
+            Loading="ContextMenuListViewLoading">
+            <ListViewItem Content="[Open]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>5</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Test]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>4</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>0</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract here]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>1</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract here Smart]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>3</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract to]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>2</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>8</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to 7z]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>9</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to Zip]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>12</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress Email]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>10</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to 7z and Email]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>11</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to Zip and Email]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>13</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[HASH]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>31</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+          </ListView>
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+    <PivotItem Header="[Settings]">
+      <ScrollViewer>
+        <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
+          <TextBlock Text="[File Explorer]" />
+          <ToggleSwitch Name="ShowDots" Tag="FM"
+            Header='[Show ".." item]'
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ShowRealFileIcons" Tag="FM"
+            Header="[Show real file icons]"
+            AccessKey="I"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="FullRow" Tag="FM"
+            Header="[Full row select]"
+            AccessKey="F"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ShowGrid" Tag="FM"
+            Header="[Show grid lines]"
+            AccessKey="G"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="SingleClick" Tag="FM"
+            Header="[Single-click to open an item]"
+            AccessKey="S"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="AlternativeSelection" Tag="FM"
+            Header="[Alternative selection mode]"
+            AccessKey="A"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="ShowSystemMenu" Tag="FM"
+            Header="[Show system menu]"
+            AccessKey="M"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <TextBlock
+            Text="[(De)Compression]" />
+          <ToggleSwitch Name="LargePages" Tag=""
+            Header="[Use large memory pages]"
+            AccessKey="L"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ComboBox Name="WorkDirType" Tag="Options"
+            Header="[Working folder]"
+            AccessKey="W"
+            SelectedIndex="0"
+            Loading="ComboBoxLoading">
+            <ComboBoxItem Content="[System temp folder]" AccessKey="S" />
+            <ComboBoxItem Content="[Current]" AccessKey="C" />
+            <ComboBoxItem Content="[Specified]" />
+          </ComboBox>
+          <ToggleSwitch Name="TempRemovableOnly" Tag="Options"
+            Header="[Working folder use for removable drives only]"
+            IsOn="True"
+            Loading="ToggleSwitchLoading" />
+          <TextBlock Text="[History]" />
+          <ToggleSwitch Name="WantArcHistory" Tag="FM"
+            Header="[Want ArcHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="WantPathHistory" Tag="FM"
+            Header="[Want PathHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="WantCopyHistory" Tag="FM"
+            Header="[Want CopyHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <ToggleSwitch Name="WantFolderHistory" Tag="FM"
+            Header="[Want FolderHistory]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+          <TextBlock Text="[Checksum]" />
+          <ToggleSwitch Name="LowercaseHashes" Tag="FM"
+            Header="[Use Lowercase Hashes]"
+            IsOn="False"
+            Loading="ToggleSwitchLoading" />
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+  </Pivot>
+</Page>
