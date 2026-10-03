@@ -663,6 +663,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>Përdor hash-et me shkronja të vogla</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>Përmbys modalitetin e errët/të çelët</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>Rreth NanaZip</value>
   </data>

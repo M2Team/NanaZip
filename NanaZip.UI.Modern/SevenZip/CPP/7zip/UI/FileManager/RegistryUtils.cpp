@@ -43,6 +43,9 @@ static LPCTSTR const kPathHistory = TEXT("WantPathHistory");
 static LPCTSTR const kCopyHistory = TEXT("WantCopyHistory");
 static LPCTSTR const kFolderHistory = TEXT("WantFolderHistory");
 static LPCTSTR const kLowercaseHashes = TEXT("LowercaseHashes");
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const kInvertTheme = TEXT("InvertTheme");
+// **************** NanaZip Modification End ****************
 
 static LPCTSTR const kFlatViewName = TEXT("FlatViewArc");
 // static LPCTSTR const kShowDeletedFiles = TEXT("ShowDeleted");
@@ -152,6 +155,9 @@ void CFmSettings::Save() const
   SaveOption(kCopyHistory, CopyHistory);
   SaveOption(kFolderHistory, FolderHistory);
   SaveOption(kLowercaseHashes, LowercaseHashes);
+  // **************** NanaZip Modification Start ****************
+  SaveOption(kInvertTheme, InvertTheme);
+  // **************** NanaZip Modification End ****************
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
@@ -170,6 +176,9 @@ void CFmSettings::Load()
   CopyHistory = false;
   FolderHistory = false;
   LowercaseHashes = false;
+  // **************** NanaZip Modification Start ****************
+  InvertTheme = false;
+  // **************** NanaZip Modification End ****************
   // Underline = false;
 
   ShowSystemMenu = false;
@@ -188,6 +197,9 @@ void CFmSettings::Load()
     ReadOption(key, kCopyHistory, CopyHistory);
     ReadOption(key, kFolderHistory, FolderHistory);
     ReadOption(key, kLowercaseHashes, LowercaseHashes);
+    // **************** NanaZip Modification Start ****************
+    ReadOption(key, kInvertTheme, InvertTheme);
+    // **************** NanaZip Modification End ****************
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );
@@ -206,6 +218,9 @@ bool WantPathHistory() { return ReadFMOption(kPathHistory); }
 bool WantCopyHistory() { return ReadFMOption(kCopyHistory); }
 bool WantFolderHistory() { return ReadFMOption(kFolderHistory); }
 bool WantLowercaseHashes() { return ReadFMOption(kLowercaseHashes); }
+// **************** NanaZip Modification Start ****************
+bool WantInvertTheme() { return ReadFMOption(kInvertTheme); }
+// **************** NanaZip Modification End ****************
 
 static CSysString GetFlatViewName(UInt32 panelIndex)
 {
