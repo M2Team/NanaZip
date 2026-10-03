@@ -72,31 +72,50 @@
             Header="[Extract on open (hold 'Shift' to skip)]"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
-          <TreeView SelectionMode="Multiple" ItemTemplate="{StaticResource TreeViewItemDataTemplate}">
-            <TreeView.RootNodes>
-              <TreeViewNode Content="[Context menu items]" IsExpanded="True" >
-                <TreeViewNode.Children>
-                  <TreeViewNode Content="[Open]" />
-                  <TreeViewNode Content="[Test]" />
-                  <TreeViewNode Content="[Extract]"/>
-                  <TreeViewNode Content="[Extract here]" />
-                  <TreeViewNode Content="[Extract here Smart]" />
-                  <TreeViewNode Content="[Extract to]" />
-                  <TreeViewNode Content="[Compress]" />
-                  <TreeViewNode Content="[Compress to 7z]" />
-                  <TreeViewNode Content="[Compress to Zip]" />
-                  <TreeViewNode Content="[Compress Email]" />
-                  <TreeViewNode Content="[Compress to 7z and Email]" />
-                  <TreeViewNode Content="[Compress to Zip and Email]" />
-                  <TreeViewNode Content="[CRC-32]" />
-                  <TreeViewNode Content="[CRC-64]" />
-                  <TreeViewNode Content="[SHA-1]" />
-                  <TreeViewNode Content="[SHA-256]" />
-                  <TreeViewNode Content="[HASH]" />
-                </TreeViewNode.Children>
-              </TreeViewNode>
-            </TreeView.RootNodes>
-          </TreeView>
+          <ListView Name="ContextMenu" Tag="Options"
+            Header="[Context menu items]"
+            SelectionMode="Multiple"
+            Loading="ContextMenuListViewLoading">
+            <ListViewItem Content="[Open]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>5</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Test]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>4</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>0</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract here]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>1</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract here Smart]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>3</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Extract to]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>2</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>8</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to 7z]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>9</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to Zip]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>12</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress Email]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>10</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to 7z and Email]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>11</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[Compress to Zip and Email]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>13</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+            <ListViewItem Content="[HASH]" IsSelected="True">
+              <ListViewItem.Tag><x:Int32>31</x:Int32></ListViewItem.Tag>
+            </ListViewItem>
+          </ListView>
         </StackPanel>
       </ScrollViewer>
     </PivotItem>

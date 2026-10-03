@@ -12,6 +12,9 @@ namespace winrt
     using Windows::UI::Xaml::Controls::ToggleSwitch;
     using Windows::UI::Xaml::Controls::ComboBox;
     using Windows::UI::Xaml::Controls::SelectionChangedEventArgs;
+    using Windows::UI::Xaml::Controls::ListView;
+    using Windows::UI::Xaml::Controls::ListViewItem;
+    using Windows::UI::Xaml::Controls::SelectionChangedEventArgs;
 }
 
 namespace winrt::NanaZip::Modern::implementation
@@ -34,6 +37,10 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::IInspectable const& e);
 
         void ComboBoxLoading(
+            winrt::FrameworkElement const& sender,
+            winrt::IInspectable const& e);
+
+        void ContextMenuListViewLoading(
             winrt::FrameworkElement const& sender,
             winrt::IInspectable const& e);
 

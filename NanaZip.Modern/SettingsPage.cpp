@@ -152,4 +152,70 @@ namespace winrt::NanaZip::Modern::implementation
                     ComboValueLength);
             });
     }
+
+    void SettingsPage::ContextMenuListViewLoading(
+        winrt::FrameworkElement const& sender,
+        winrt::IInspectable const& e)
+    {
+        UNREFERENCED_PARAMETER(e);
+        winrt::ListView ListViewElement = sender.as<winrt::ListView>();
+
+        DWORD ContextMenuValue = 0x0;
+        DWORD ContextMenuValueLength = sizeof(ContextMenuValue);
+
+        std::wstring SubKey = L"Software\\NanaZip\\";
+        SubKey.append(ListViewElement.Tag().as<winrt::hstring>());
+
+        LSTATUS Result = ::RegGetValueW(
+            HKEY_CURRENT_USER,
+            SubKey.c_str(),
+            ListViewElement.Name().c_str(),
+            RRF_RT_REG_DWORD,
+            nullptr,
+            reinterpret_cast<PVOID>(&ContextMenuValue),
+            &ContextMenuValueLength);
+
+        if (ERROR_SUCCESS == Result)
+        {
+            ListViewElement.SelectedItems().Clear();
+            for (auto const& it : ListViewElement.Items())
+            {
+                auto ListViewItemElement = it.as<winrt::ListViewItem>();
+                auto ListViewItemFlag = ListViewItemElement.Tag().as<std::int32_t>();
+                DWORD IsSelectedValue = ContextMenuValue & (1 << ListViewItemFlag);
+                if (IsSelectedValue)
+                {
+                    ListViewElement.SelectedItems().Append(ListViewItemElement);
+                }
+            }
+        }
+
+        ListViewElement.SelectionChanged(
+            [](winrt::IInspectable sender, winrt::SelectionChangedEventArgs e)
+            {
+                UNREFERENCED_PARAMETER(e);
+                winrt::ListView ListViewElement = sender.as<winrt::ListView>();
+
+                DWORD ContextMenuValue = 0x0;
+                DWORD ContextMenuValueLength = sizeof(ContextMenuValue);
+
+                for (auto const& it : ListViewElement.SelectedItems())
+                {
+                    auto ListViewItemElement = it.as<winrt::ListViewItem>();
+                    auto ListViewItemFlag = ListViewItemElement.Tag().as<std::int32_t>();
+                    ContextMenuValue |= (1 << ListViewItemFlag);
+                }
+
+                std::wstring SubKey = L"Software\\NanaZip\\";
+                SubKey.append(ListViewElement.Tag().as<winrt::hstring>());
+
+                ::RegSetKeyValueW(
+                    HKEY_CURRENT_USER,
+                    SubKey.c_str(),
+                    ListViewElement.Name().c_str(),
+                    REG_DWORD,
+                    reinterpret_cast<PVOID>(&ContextMenuValue),
+                    ContextMenuValueLength);
+            });
+    }
 }
