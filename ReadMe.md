@@ -159,20 +159,22 @@ Classic. Here are the differences between them.
   - Win32 GUI.
 
 > [!CAUTION]
-> NanaZip can be used as portable version if you use the official portable
-> release package. It's designed for debugging/testing/development purpose and
-> scenarios (a.k.a. Server Core, Windows PE, Windows RE, and Wine) really need
-> portable version. But please note that some features is not available, such as
-> context menu and file associations. Some issues will not be fixed if you are
-> using NanaZip in portable mode.
+> NanaZip can be used as a portable application if you use the official portable
+> release package. It is designed for debugging, testing, and development purposes,
+> as well as scenarios that genuinely require a portable version
+> (such as Server Core, Windows PE, Windows RE, and Wine).
+> However, please note that certain features such as context menus and file associations
+> are not available in portable mode. Additionally, some issues specific to
+> running NanaZip in portable mode will not be fixed.
+
 
 > [!CAUTION]
-> We don't provide any support for users if they are using any non-official
-> release packages, such as extracting the files from the MSIX package or copy
+> We do not provide support for users running non-official package installations
+> such as manually extracting files from the MSIX package or copying them directly
 > from the NanaZipPackage project output. For example, if you are using the
 > files extracted from the MSIX package of NanaZip like Scoop package manager
-> does. We hugely recommend you to use the official release packages of NanaZip.
-> For example, WinGet package manager uses NanaZip official release package to
+> does. We strongly recommend using NanaZip’s official release packages instead.
+> For instance, the WinGet package manager utilizes the official release package to
 > install NanaZip.
 
 ## System Requirements
@@ -192,32 +194,21 @@ for more information.
 
 [MD23: The baselines of Windows targets for all my open-source projects]: https://github.com/MouriNaruto/MouriDocs/tree/main/docs/23
 
-Note: Due to the Self Extracting Executables (SFX) will be migrated to x86
-(64-bit) starting with NanaZip 6.0, it gives users chances to use Self
-Extracting Executables (SFX) archives under 64-bit Microsoft official Windows
-PE and Windows RE instances:
+Note: Starting with NanaZip 6.0, Self-Extracting Executables (SFX) will be migrated to x86 (64-bit). 
+This allows users to run SFX archives under 64-bit Microsoft official Windows PE and Windows RE instances, with the following prerequisites:
 
 - For ARM (64-bit) Microsoft official Windows PE and Windows RE, you need to
-  make sure you Windows PE and Windows RE images are built with Windows ADK
-  Build 25398 or later and integrated the [x64 emulation optional component].
-- For ARM (64-bit) Windows 10, I suggest you to upgrade to Windows 11 because
-  ARM (64-bit) Windows 11 provides x64 emulation support, and Windows 10 is
-  nearly end of support from Microsoft.
+  make sure your Windows PE and Windows RE images are built with Windows ADK
+  Build 25398 or later and have the [x64 emulation optional component] integrated.
+- For ARM (64-bit) Windows 10: We recommend upgrading to Windows 11. Windows 11 on ARM provides native x64 emulation support, whereas Windows 10 lacks full x64 emulation and is reaching end of support from Microsoft.
 
 [x64 emulation optional component]: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-add-packages--optional-components-reference?#32
 
-We chose Windows as the major platform for the NanaZip project supported
-because Windows has maintained a good and proven ABI and compatibility, and
-stands out in the history of computing. But we also care about the non-Windows
-platform. Here are the policy for non-Windows platform support:
+We chose Windows as the primary platform for the NanaZip project because Windows has maintained a strong, proven ABI and backward compatibility, standing out in the history of computing. However, we also care about non-Windows platforms. Here is our support policy for non-Windows platforms:
 
-- The modern flavor of NanaZip won't support non-Windows unless someone ported
-  WinRT XAML to POSIX. So, non-Windows support policy is only for NanaZip Core
-  and NanaZip Classic.
-- The developer team will try best to support Wine which has the Windows Vista
-  or later feature level. Currenly tested simply under Wine 9.x.
-- We don't support ReactOS and its derivatives because they are too hard to
-  support. But testing under the ReactOS and its derivatives may be interesting.
+- NanaZip Modern: The modern flavor of NanaZip will not support non-Windows platforms unless someone ports WinRT XAML to POSIX. Therefore, non-Windows support applies exclusively to NanaZip Core and NanaZip Classic.
+- Wine Support: The development team will do its best to support Wine (targeting the Windows Vista or later feature level). Basic testing is currently conducted under Wine 9.x.
+- ReactOS: We do not support ReactOS or its derivatives due to the difficulty of maintenance. However, periodic testing under ReactOS and its derivatives may still be conducted out of interest.
 
 > [!NOTE]
 > In theory, NanaZip Classic can run on Windows 10 (Build 10240) or later if
@@ -256,14 +247,12 @@ described below to install NanaZip:
 
 #### App Installer
 
-According to [Install and update the App Installer - MSIX | Microsoft Learn], we
-will know that the App Installer ships as part of Windows SKUs which can access
-to the Microsoft Store, or you can follow the instructions in the document to
-install the App Installer if your Windows SKUs doesn't have access to the
-Microsoft Store.
+According to [Install and update the App Installer - MSIX | Microsoft Learn], 
+App Installer is included by default in Windows SKUs that have access to the Microsoft Store. 
+If your Windows SKU lacks Microsoft Store access, you can follow the instructions in the article to install App Installer manually.
 
-If your environment has the App Installer, you can double click the MSIX package
-to install NanaZip.
+Once App Installer is available in your environment, 
+you can simply double-click the MSIX package to install NanaZip.
 
 > [!CAUTION]
 > If NanaZip is installed using this method without an Internet connection, you
