@@ -26,6 +26,7 @@
       <Build Solution="*|ARM64" Project="false" />
     </Project>
     <Project Path="NanaZip.Core/NanaZip.Core.vcxproj" Id="5220420b-9a5c-44a7-be69-97f25365bb26" />
+    <Project Path="NanaZip.ZS.Codecs/NanaZip.ZS.Codecs.vcxproj" Id="3ed4769f-3aae-4dcb-a050-3f9c3fe36607" />
   </Folder>
   <Folder Name="/Core/K7/">
     <Project Path="K7Base/K7Base.vcxproj" Id="5998305e-d017-47c2-8025-a19111f73539" />
