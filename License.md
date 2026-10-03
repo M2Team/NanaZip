@@ -8,17 +8,18 @@ The source code of NanaZip (not including the source code from third-party
 libraries, 7-Zip or other 7-Zip derivatives) is distributed under the MIT 
 License.
 
-The application file association icons of NanaZip (these contents are only in 
-the `Assets` folder) are designed by Shomnipotence and authorized to the 
-NanaZip project, and it is distributed under the CC BY-ND 4.0 License.
+The NanaZip project logo and file association icon (located in the `Assets`
+folder) was designed by Shomnipotence and authorized for use by the NanaZip
+project. It is distributed under the CC BY-ND 4.0 License.
 
 The source code from 7-Zip or other 7-Zip derivatives (these contents are only 
 in the `NanaZip.Core\SevenZip`, `NanaZip.Core\Extensions\ZSCodecs`,
-`NanaZip.Universal\SevenZip`, `NanaZip.UI.Classic\SevenZip` and
-`NanaZip.UI.Modern\SevenZip` folders) is distributed under the 7-Zip License.
+`NanaZip.Universal\SevenZip`, `NanaZip.UI.Classic\SevenZip`,
+`NanaZip.ZS.Codecs\SevenZip` and `NanaZip.UI.Modern\SevenZip` folders) is
+distributed under the 7-Zip License.
 
-The source code from the third-party libraries is distributed under the original
-license used in the third-party libraries.
+The source code from third-party libraries is distributed under their respective
+original licenses.
 
 This permission notice shall be included in all copies or substantial portions
 of the Software.
