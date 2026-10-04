@@ -25,7 +25,7 @@
   v26.02-v1.5.7-R2.
 - NanaZip.UI.Classic: Unknown because it modifies the old codebase a lot.
 - NanaZip.UI.Modern: Unknown because it modifies the old codebase a lot.
-- NanaZip.Universal: Commit be2bdee6164db8d20a8c262850de864f8bce49e5 after
+- NanaZip.Universal: Commit b5ac55ff587ec9c9315ffd624c5c93a2899340d2 after
   v26.02-v1.5.7-R2.
 - NanaZip.ZS.Codecs: Commit b5ac55ff587ec9c9315ffd624c5c93a2899340d2 after
   v26.02-v1.5.7-R2.
