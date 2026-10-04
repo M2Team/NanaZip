@@ -115,6 +115,7 @@
       <BinaryFile Include="K7Base.dll" Symbol="true" />
       <BinaryFile Include="K7User.dll" Symbol="true" />
       <BinaryFile Include="NanaZip.Codecs.dll" Symbol="true" />
+      <BinaryFile Include="NanaZip.ZS.Codecs.dll" Symbol="true" />
       <BinaryFile Include="NanaZip.Core.dll" Symbol="true" />
       <BinaryFile Include="NanaZip.Core.Console.sfx" Symbol="NanaZip.Core.Console.pdb" />
       <BinaryFile Include="NanaZip.Core.Windows.sfx" Symbol="NanaZip.Core.Windows.pdb" />

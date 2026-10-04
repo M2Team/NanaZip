@@ -22,6 +22,7 @@
   <Import Project="..\NanaZip.Project\NanaZip.Project.Runtime.props" />
   <Import Project="..\K7Base\K7Base.props" />
   <Import Project="..\NanaZip.Codecs\NanaZip.Codecs.props" />
+  <Import Project="..\NanaZip.ZS.Codecs\NanaZip.ZS.Codecs.props" />
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>Z7_EXTERNAL_CODECS;NSIS_SCRIPT;ZSTD_MULTITHREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>

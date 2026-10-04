@@ -358,5 +358,6 @@
     <None Include="SevenZip\Asm\x86\AesOpt.asm">
       <Filter>SevenZip\Asm\x86</Filter>
     </None>
+    <None Include="NanaZip.ZS.Codecs.props" />
   </ItemGroup>
 </Project>

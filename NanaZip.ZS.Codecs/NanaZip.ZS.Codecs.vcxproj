@@ -137,6 +137,7 @@
     <ClCompile Include="SevenZip\C\Threads.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NanaZip.ZS.Codecs.props" />
     <None Include="SevenZip\.gitignore" />
     <None Include="SevenZip\CPP\7zip\Archive\Archive2.def" />
     <None Include="SevenZip\C\AesOpt.c" />
