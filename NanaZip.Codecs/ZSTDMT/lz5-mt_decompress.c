@@ -401,13 +401,12 @@ static void *pt_decompress(void *arg)
 static size_t st_decompress(void *arg)
 {
 	LZ5MT_DCtx *ctx = (LZ5MT_DCtx *) arg;
-	LZ5F_errorCode_t nextToLoad = 0;
+	LZ5F_errorCode_t result = 0;
 	cwork_t *w = &ctx->cwork[0];
 	LZ5MT_Buffer Out;
 	LZ5MT_Buffer *out = &Out;
 	LZ5MT_Buffer *in = &w->in;
 	void *magic = in->buf;
-	size_t pos = 0;
 	int rv;
 
 	/* allocate space for input buffer */
@@ -428,46 +427,28 @@ static size_t st_decompress(void *arg)
 	in->size = 4;
 	memcpy(in->buf, magic, in->size);
 
-	nextToLoad =
-	    LZ5F_decompress(w->dctx, out->buf, &pos, in->buf, &in->size, 0);
-	if (LZ5F_isError(nextToLoad)) {
-		free(in->buf);
-		free(out->buf);
-		return ERROR(compression_library);
-	}
+	/* stats */
+	ctx->insize = 4;
+	ctx->outsize = 0;
 
-	for (; nextToLoad; pos = 0) {
-		if (nextToLoad > ctx->inputsize)
-			nextToLoad = ctx->inputsize;
-
-		/* read new input */
-		in->size = nextToLoad;
-		rv = ctx->fn_read(ctx->arg_read, in);
-		if (rv != 0) {
-			free(in->buf);
-			free(out->buf);
-			return mt_error(rv);
-		}
-
-		/* done, eof reached */
-		if (in->size == 0)
-			break;
-
-		/* still to read, or still to flush */
-		while ((pos < in->size) || (out->size == ctx->inputsize)) {
-			size_t remaining = in->size - pos;
+	/* decompress loop */
+	for (;;) {
+		size_t srcPos = 0;
+		for (;;) {
+			size_t srcSize = in->size - srcPos;
 			out->size = ctx->inputsize;
 
-			/* decompress */
-			nextToLoad =
-			    LZ5F_decompress(w->dctx, out->buf, &out->size,
-					    (unsigned char *)in->buf + pos,
-					    &remaining, NULL);
-			if (LZ5F_isError(nextToLoad)) {
+			result = LZ5F_decompress(w->dctx, out->buf, &out->size, (unsigned char *)in->buf + srcPos, &srcSize, NULL);
+			if (LZ5F_isError(result)) {
 				free(in->buf);
 				free(out->buf);
 				return ERROR(compression_library);
 			}
+
+			/* update stats */
+			srcPos += srcSize;
+			ctx->insize += srcSize;
+			ctx->outsize += out->size;
 
 			/* have some output */
 			if (out->size) {
@@ -479,15 +460,34 @@ static size_t st_decompress(void *arg)
 				}
 			}
 
-			if (nextToLoad == 0)
+			/* consumed all input */
+			if (srcPos == in->size)
 				break;
-
-			pos += remaining;
 		}
+
+		/* read new input */
+		if (result)
+			in->size = result;
+		else
+			in->size = ctx->inputsize;
+
+		if (in->size > ctx->inputsize)
+			in->size = ctx->inputsize;
+
+		rv = ctx->fn_read(ctx->arg_read, in);
+		ctx->insize += in->size;
+		if (rv != 0) {
+			free(in->buf);
+			free(out->buf);
+			return mt_error(rv);
+		}
+
+		if (in->size == 0)
+			break;
 	}
 
 	/* input ended, but current frame is not fully decoded yet */
-	if (nextToLoad != 0) {
+	if (result != 0) {
 		free(out->buf);
 		free(in->buf);
 		return ERROR(end_of_data);
