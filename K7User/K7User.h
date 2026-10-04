@@ -26,6 +26,34 @@
  */
 EXTERN_C MO_RESULT MOAPI K7UserInitializeDarkModeSupport();
 
+/**
+ * @brief Re-evaluates the dark mode state from the current system color policy
+ *        and the NanaZip "Invert Theme" setting, then re-applies it to the
+ *        windows of the current thread. Used to apply a live theme toggle.
+ * @return If the function succeeds, it returns MO_RESULT_SUCCESS_OK. Otherwise,
+ *         it returns an MO_RESULT error code.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserRefreshTheme();
+
+/**
+ * @brief Suspends the inverted theme so the process follows the system
+ *        appearance. Used to show system common dialogs (e.g.
+ *        IFileOpenDialog) with their native, unmodified look: their
+ *        DirectUI internals cache the process appearance when the dialog
+ *        object is created, so this must be called BEFORE CoCreateInstance
+ *        and kept active until the dialog object is released (an RAII scope
+ *        is recommended), not merely around its Show call.
+ * @remark This function is reference counted and supports nesting. Every
+ *         call must be balanced by a matching K7UserResumeDarkMode call.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserSuspendDarkMode();
+
+/**
+ * @brief Resumes the inverted dark theme after a K7UserSuspendDarkMode call
+ *        and refreshes the windows of the current thread.
+ */
+EXTERN_C MO_RESULT MOAPI K7UserResumeDarkMode();
+
 #endif // !K7_USER_DARK_MODE
 
 #ifndef K7_USER_MODERN

@@ -666,6 +666,9 @@
   <data name="Resource2513" xml:space="preserve">
     <value>使用小寫字母驗證值</value>
   </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>深淺色模式反轉</value>
+  </data>
   <data name="Resource2900" xml:space="preserve">
     <value>關於 NanaZip</value>
   </data>

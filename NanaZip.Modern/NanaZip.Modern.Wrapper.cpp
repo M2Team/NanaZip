@@ -330,3 +330,25 @@ EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(
 
     return nullptr;
 }
+
+EXTERN_C VOID WINAPI K7ModernRefreshTheme()
+{
+    using ProcType = decltype(::K7ModernRefreshTheme)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernRefreshTheme");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        ProcAddress();
+    }
+}

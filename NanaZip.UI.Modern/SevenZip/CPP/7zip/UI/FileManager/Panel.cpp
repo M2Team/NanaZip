@@ -33,6 +33,7 @@
 // **************** NanaZip Modification Start ****************
 #include <K7Base.h>
 #include <K7User.h>
+#include <NanaZip.Modern.h>
 // **************** NanaZip Modification End ****************
 
 #include "PropertyNameRes.h"
@@ -448,6 +449,26 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
 
       XamlSource.Content().TabFocusNavigation(KeyboardNavigationMode::Local);
 
+      // **************** NanaZip Modification Start ****************
+      // Apply the current theme to every island created so far right after
+      // creation (global Application.RequestedTheme cannot be set at runtime).
+      ::K7ModernRefreshTheme();
+      // K7ModernRefreshTheme skips islands whose XAML content has not been
+      // loaded yet ("no content"), so also re-apply when the content
+      // actually finishes loading. Loaded is a FrameworkElement event, so
+      // query the content for FrameworkElement first.
+      if (auto ContentElement = XamlSource.Content().try_as<
+          winrt::Windows::UI::Xaml::FrameworkElement>())
+      {
+          ContentElement.Loaded(
+              [](winrt::Windows::Foundation::IInspectable const&,
+                  winrt::Windows::UI::Xaml::RoutedEventArgs const&)
+          {
+              ::K7ModernRefreshTheme();
+          });
+      }
+      // **************** NanaZip Modification End ****************
+
       XamlSource.TakeFocusRequested(
           [this](
               DesktopWindowXamlSource const& sender,
@@ -553,6 +574,27 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
           ::GetPropW(_statusBarWindow, L"XamlWindowSource"));
 
       XamlSource.Content().TabFocusNavigation(KeyboardNavigationMode::Local);
+
+      // **************** NanaZip Modification Start ****************
+      // Apply the current theme to every island created so far right after
+      // creation (global Application.RequestedTheme cannot be set at runtime).
+      ::K7ModernRefreshTheme();
+      // K7ModernRefreshTheme skips islands whose XAML content has not been
+      // loaded yet ("no content"), so also re-apply when the content
+      // actually finishes loading. This is essential for the status bar,
+      // whose content loads after the panel creation code runs. Loaded is a
+      // FrameworkElement event, so query the content for it first.
+      if (auto ContentElement = XamlSource.Content().try_as<
+          winrt::Windows::UI::Xaml::FrameworkElement>())
+      {
+          ContentElement.Loaded(
+              [](winrt::Windows::Foundation::IInspectable const&,
+                  winrt::Windows::UI::Xaml::RoutedEventArgs const&)
+          {
+              ::K7ModernRefreshTheme();
+          });
+      }
+      // **************** NanaZip Modification End ****************
 
       XamlSource.TakeFocusRequested(
           [this](
@@ -1119,6 +1161,20 @@ void CPanel::AddToExistingArchive()
     const UString &ArchivePath = Link.VirtualPath;
 
     // MyBrowseForFile doesn't have multiselect, so use IFileOpenDialog directly
+    // **************** NanaZip Modification Start ****************
+    // Suspend the inverted theme for the ENTIRE native dialog lifetime,
+    // starting BEFORE the IFileOpenDialog object is created: its DirectUI
+    // internals cache the process appearance during creation, so suspending
+    // only around Show() leaves the dialog half native / half forced. The
+    // RAII guard guarantees the theme is resumed on every exit path below.
+    struct NK7NativeThemeDialogScope
+    {
+        NK7NativeThemeDialogScope() { ::K7UserSuspendDarkMode(); }
+        ~NK7NativeThemeDialogScope() { ::K7UserResumeDarkMode(); }
+    };
+    NK7NativeThemeDialogScope NativeThemeDialogScope;
+    // **************** NanaZip Modification End ****************
+
     CMyComPtr<IFileOpenDialog> FileDialog;
     if (FAILED(::CoCreateInstance(
         CLSID_FileOpenDialog,
@@ -1150,12 +1206,18 @@ void CPanel::AddToExistingArchive()
         }
     }
 
+    // **************** NanaZip Modification Start ****************
+    // The native theme suspend scope (NativeThemeDialogScope) keeps the
+    // whole dialog on the unmodified system appearance for its lifetime.
+    const HRESULT ShowResult = FileDialog->Show(GetParent());
+
     CMyComPtr<IShellItemArray> Items;
-    if (FAILED(FileDialog->Show(GetParent())) ||
+    if (FAILED(ShowResult) ||
         FAILED(FileDialog->GetResults(&Items)))
     {
         return;
     }
+    // **************** NanaZip Modification End ****************
 
     UStringVector SelectedPaths;
     DWORD Count;
