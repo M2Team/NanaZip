@@ -1,4 +1,4 @@
-// Common/Wildcard.h
+﻿// Common/Wildcard.h
 
 #ifndef ZIP7_INC_COMMON_WILDCARD_H
 #define ZIP7_INC_COMMON_WILDCARD_H

@@ -1,4 +1,4 @@
-/* RotateDefs.h -- Rotate functions
+﻿/* RotateDefs.h -- Rotate functions
 2023-06-18 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_ROTATE_DEFS_H

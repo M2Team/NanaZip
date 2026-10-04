@@ -1,4 +1,4 @@
-// Common/MyString.cpp
+﻿// Common/MyString.cpp
 
 #include "StdAfx.h"
 

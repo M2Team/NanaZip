@@ -1,4 +1,4 @@
-/* Sha512Opt.c -- SHA-512 optimized code for SHA-512 hardware instructions
+﻿/* Sha512Opt.c -- SHA-512 optimized code for SHA-512 hardware instructions
 : Igor Pavlov : Public domain */
 
 #include "Precomp.h"

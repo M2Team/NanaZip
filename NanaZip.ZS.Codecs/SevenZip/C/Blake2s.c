@@ -1,4 +1,4 @@
-/* Blake2s.c -- BLAKE2sp Hash
+﻿/* Blake2s.c -- BLAKE2sp Hash
 2024-05-18 : Igor Pavlov : Public domain
 2015-2019 : Samuel Neves : original code : CC0 1.0 Universal (CC0 1.0). */
 

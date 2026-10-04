@@ -1,4 +1,4 @@
-// Windows/NtCheck.h
+﻿// Windows/NtCheck.h
 
 #ifndef ZIP7_INC_WINDOWS_NT_CHECK_H
 #define ZIP7_INC_WINDOWS_NT_CHECK_H

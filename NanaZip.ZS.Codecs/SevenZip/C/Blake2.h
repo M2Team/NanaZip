@@ -1,4 +1,4 @@
-/* Blake2.h -- BLAKE2sp Hash
+﻿/* Blake2.h -- BLAKE2sp Hash
 2024-01-17 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_BLAKE2_H

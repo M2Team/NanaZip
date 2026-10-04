@@ -1,4 +1,4 @@
-/* Sha512.h -- SHA-512 Hash
+﻿/* Sha512.h -- SHA-512 Hash
 : Igor Pavlov : Public domain */
 
 #ifndef ZIP7_INC_SHA512_H

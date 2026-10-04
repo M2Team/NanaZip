@@ -1,4 +1,4 @@
-// RegisterArc.h
+﻿// RegisterArc.h
 
 #ifndef ZIP7_INC_REGISTER_ARC_H
 #define ZIP7_INC_REGISTER_ARC_H

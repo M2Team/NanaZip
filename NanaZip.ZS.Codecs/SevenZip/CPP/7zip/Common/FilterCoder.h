@@ -1,4 +1,4 @@
-// FilterCoder.h
+﻿// FilterCoder.h
 
 #ifndef ZIP7_INC_FILTER_CODER_H
 #define ZIP7_INC_FILTER_CODER_H

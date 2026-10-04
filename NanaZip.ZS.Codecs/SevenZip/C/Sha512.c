@@ -1,4 +1,4 @@
-/* Sha512.c -- SHA-512 Hash
+﻿/* Sha512.c -- SHA-512 Hash
 : Igor Pavlov : Public domain
 This code is based on public domain code from Wei Dai's Crypto++ library. */
 

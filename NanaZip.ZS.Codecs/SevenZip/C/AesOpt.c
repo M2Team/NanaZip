@@ -1,4 +1,4 @@
-/* AesOpt.c -- AES optimized code for x86 AES hardware instructions
+﻿/* AesOpt.c -- AES optimized code for x86 AES hardware instructions
 Igor Pavlov : Public domain */
 
 #include "Precomp.h"
