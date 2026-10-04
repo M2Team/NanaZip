@@ -22,8 +22,20 @@
     <Filter Include="SevenZip\CPP\7zip\Common">
       <UniqueIdentifier>{ee2a9258-1ac8-48dc-bf9c-617818db50aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SevenZip\CPP\7zip\Crypto">
+      <UniqueIdentifier>{e8a79290-7366-492a-b2f1-2d5eb8f79f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\CPP\7zip\Archive">
+      <UniqueIdentifier>{7fb19727-3684-491f-8108-84d54dac7e55}</UniqueIdentifier>
+    </Filter>
     <Filter Include="SevenZip\CPP\7zip\Compress">
-      <UniqueIdentifier>{bf920398-f477-4684-9b8a-a26a00789e5a}</UniqueIdentifier>
+      <UniqueIdentifier>{52362247-3f1e-48b6-8f1b-64ebbfeb7fd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\Asm">
+      <UniqueIdentifier>{a6130780-862a-499d-8280-f97bd17f79f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenZip\Asm\x86">
+      <UniqueIdentifier>{af785e40-6479-4927-af40-05f73477fce5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,11 +51,86 @@
     <ClCompile Include="SevenZip\CPP\7zip\Common\StreamUtils.cpp">
       <Filter>SevenZip\CPP\7zip\Common</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Pbkdf2HmacSha512.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305Register.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Register.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zKeyDerivation.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Aegis256.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Ascon.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Cascade.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\CascadeRegister.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\HkdfBlake2sp.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\HmacSha512.cpp">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha512Opt.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Blake2s.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha256.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha512.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Aes.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\CpuArch.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Common\CreateCoder.cpp">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Common\FilterCoder.cpp">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\ArchiveExports.cpp">
+      <Filter>SevenZip\CPP\7zip\Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\DllExports2.cpp">
+      <Filter>SevenZip\CPP\7zip\Archive</Filter>
+    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Compress\CodecExports.cpp">
       <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClCompile>
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\DllExportsCompress.cpp">
-      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    <ClCompile Include="SevenZip\CPP\Windows\PropVariant.cpp">
+      <Filter>SevenZip\CPP\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\Common\MyString.cpp">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp">
+      <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +200,6 @@
     <ClInclude Include="SevenZip\CPP\7zip\IStream.h">
       <Filter>SevenZip\CPP\7zip</Filter>
     </ClInclude>
-    <ClInclude Include="SevenZip\CPP\7zip\Compress\StdAfx.h">
-      <Filter>SevenZip\CPP\7zip\Compress</Filter>
-    </ClInclude>
     <ClInclude Include="SevenZip\C\CpuArch.h">
       <Filter>SevenZip\C</Filter>
     </ClInclude>
@@ -146,10 +230,133 @@
     <ClInclude Include="SevenZip\CPP\7zip\Common\MethodId.h">
       <Filter>SevenZip\CPP\7zip\Common</Filter>
     </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Pbkdf2HmacSha512.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\StdAfx.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\XChaCha20.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\7zKeyDerivation.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Aegis256.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Aegis256Simd.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Ascon.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\AsconSimd.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Cascade.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\ChaCha20Simd.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\HkdfBlake2sp.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\HmacSha512.h">
+      <Filter>SevenZip\CPP\7zip\Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\IPassword.h">
+      <Filter>SevenZip\CPP\7zip</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Common\MyBuffer.h">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Common\MyBuffer2.h">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Windows\Synchronization.h">
+      <Filter>SevenZip\CPP\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Windows\Handle.h">
+      <Filter>SevenZip\CPP\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\Blake2.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\Sha256.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\Sha512.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\Aes.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\C\RotateDefs.h">
+      <Filter>SevenZip\C</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Common\CreateCoder.h">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Common\FilterCoder.h">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\StdAfx.h">
+      <Filter>SevenZip\CPP\7zip\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Common\RegisterArc.h">
+      <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\IArchive.h">
+      <Filter>SevenZip\CPP\7zip\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\IProgress.h">
+      <Filter>SevenZip\CPP\7zip</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\PropID.h">
+      <Filter>SevenZip\CPP\7zip</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Windows\NtCheck.h">
+      <Filter>SevenZip\CPP\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\StdAfx.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Common\IntToString.h">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Common\StringConvert.h">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\Common\Wildcard.h">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SevenZip\CPP\7zip\Compress\Codec.def">
-      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    <None Include="SevenZip\CPP\7zip\Archive\Archive2.def">
+      <Filter>SevenZip\CPP\7zip\Archive</Filter>
+    </None>
+    <None Include="SevenZip\C\AesOpt.c">
+      <Filter>SevenZip\C</Filter>
+    </None>
+    <None Include="SevenZip\C\Sha256Opt.c">
+      <Filter>SevenZip\C</Filter>
+    </None>
+    <None Include="SevenZip\.gitignore">
+      <Filter>SevenZip</Filter>
+    </None>
+    <None Include="SevenZip\Asm\x86\Sha256Opt.asm">
+      <Filter>SevenZip\Asm\x86</Filter>
+    </None>
+    <None Include="SevenZip\Asm\x86\7zAsm.asm">
+      <Filter>SevenZip\Asm\x86</Filter>
+    </None>
+    <None Include="SevenZip\Asm\x86\AesOpt.asm">
+      <Filter>SevenZip\Asm\x86</Filter>
     </None>
   </ItemGroup>
 </Project>

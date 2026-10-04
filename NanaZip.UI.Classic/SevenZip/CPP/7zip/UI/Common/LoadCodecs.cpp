@@ -852,6 +852,12 @@ HRESULT CCodecs::Load()
       if (!loadedOK)
         MainDll_ErrorPath = L"NanaZip.Codecs.dll";
     }
+    {
+      bool loadedOK;
+      RINOK(LoadDll(baseFolder + L"NanaZip.ZS.Codecs.dll", false, &loadedOK));
+      if (!loadedOK)
+        MainDll_ErrorPath = L"NanaZip.ZS.Codecs.dll";
+    }
     // **************** NanaZip Modification End ****************
     {
       bool loadedOK;

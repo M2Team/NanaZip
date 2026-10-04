@@ -1,7 +1,0 @@
-EXPORTS
-  CreateObject PRIVATE
-  GetNumberOfMethods PRIVATE
-  GetMethodProperty PRIVATE
-  CreateDecoder PRIVATE
-  CreateEncoder PRIVATE
-  GetModuleProp PRIVATE

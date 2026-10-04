@@ -18,10 +18,14 @@
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Platform.ARM64.props" />
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.props" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   <Import Project="..\NanaZip.Project\NanaZip.Project.Runtime.props" />
   <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>Z7_EXTRACT_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <Link>
-      <ModuleDefinitionFile>SevenZip\CPP\7zip\Compress\Codec.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>SevenZip\CPP\7zip\Archive\Archive2.def</ModuleDefinitionFile>
       <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
     </Link>
   </ItemDefinitionGroup>
@@ -31,18 +35,42 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\IArchive.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\CreateCoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\FilterCoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Common\MethodId.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\RegisterArc.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Common\RegisterCodec.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Common\StdAfx.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Common\StreamUtils.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\7zKeyDerivation.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Aegis256.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Aegis256Simd.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Ascon.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\AsconSimd.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Cascade.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\ChaCha20Simd.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\HkdfBlake2sp.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\HmacSha512.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\Pbkdf2HmacSha512.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\XChaCha20.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305.h" />
     <ClInclude Include="SevenZip\CPP\7zip\ICoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\IDecl.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IPassword.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IProgress.h" />
     <ClInclude Include="SevenZip\CPP\7zip\IStream.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\PropID.h" />
     <ClInclude Include="SevenZip\CPP\Common\Common.h" />
     <ClInclude Include="SevenZip\CPP\Common\Common0.h" />
     <ClInclude Include="SevenZip\CPP\Common\ComTry.h" />
     <ClInclude Include="SevenZip\CPP\Common\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Common\IntToString.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyBuffer.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyBuffer2.h" />
     <ClInclude Include="SevenZip\CPP\Common\MyCom.h" />
     <ClInclude Include="SevenZip\CPP\Common\MyInitGuid.h" />
     <ClInclude Include="SevenZip\CPP\Common\MyString.h" />
@@ -52,29 +80,91 @@
     <ClInclude Include="SevenZip\CPP\Common\MyWindows.h" />
     <ClInclude Include="SevenZip\CPP\Common\NewHandler.h" />
     <ClInclude Include="SevenZip\CPP\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StringConvert.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Wildcard.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Handle.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\NtCheck.h" />
     <ClInclude Include="SevenZip\CPP\Windows\PropVariant.h" />
     <ClInclude Include="SevenZip\CPP\Windows\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\Synchronization.h" />
     <ClInclude Include="SevenZip\CPP\Windows\System.h" />
     <ClInclude Include="SevenZip\CPP\Windows\WinDefs.h" />
     <ClInclude Include="SevenZip\C\7zTypes.h" />
     <ClInclude Include="SevenZip\C\7zVersion.h" />
     <ClInclude Include="SevenZip\C\7zWindows.h" />
+    <ClInclude Include="SevenZip\C\Aes.h" />
     <ClInclude Include="SevenZip\C\Alloc.h" />
+    <ClInclude Include="SevenZip\C\Blake2.h" />
     <ClInclude Include="SevenZip\C\Compiler.h" />
     <ClInclude Include="SevenZip\C\CpuArch.h" />
     <ClInclude Include="SevenZip\C\Precomp.h" />
+    <ClInclude Include="SevenZip\C\RotateDefs.h" />
+    <ClInclude Include="SevenZip\C\Sha256.h" />
+    <ClInclude Include="SevenZip\C\Sha512.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\ArchiveExports.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\DllExports2.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\CreateCoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Common\FilterCoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Common\StreamUtils.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\CodecExports.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Compress\DllExportsCompress.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\7zKeyDerivation.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Aegis256.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Ascon.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Cascade.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\CascadeRegister.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\HkdfBlake2sp.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\HmacSha512.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\Pbkdf2HmacSha512.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305Register.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Register.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\PropVariant.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\System.cpp" />
+    <ClCompile Include="SevenZip\C\Aes.c" />
     <ClCompile Include="SevenZip\C\Alloc.c" />
+    <ClCompile Include="SevenZip\C\Blake2s.c" />
+    <ClCompile Include="SevenZip\C\CpuArch.c" />
+    <ClCompile Include="SevenZip\C\Sha256.c" />
+    <ClCompile Include="SevenZip\C\Sha512.c" />
+    <ClCompile Include="SevenZip\C\Sha512Opt.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SevenZip\CPP\7zip\Compress\Codec.def" />
+    <None Include="SevenZip\.gitignore" />
+    <None Include="SevenZip\CPP\7zip\Archive\Archive2.def" />
+    <None Include="SevenZip\C\AesOpt.c" />
+    <None Include="SevenZip\C\Sha256Opt.c" />
+    <None Include="SevenZip\Asm\x86\7zAsm.asm" />
+    <None Include="SevenZip\Asm\x86\AesOpt.asm" />
+    <None Include="SevenZip\Asm\x86\Sha256Opt.asm" />
   </ItemGroup>
+  <Target Name="NanaZipZsCodecsAesHardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
+      <MASM Include="SevenZip\ASM\x86\AesOpt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipZsCodecsAesHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
+      <ClCompile Include="SevenZip\C\AesOpt.c" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipZsCodecsSha256HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="'$(Platform)' == 'x64'">
+      <MASM Include="SevenZip\ASM\x86\Sha256Opt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipZsCodecsSha256HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="'$(Platform)' != 'x64'">
+      <ClCompile Include="SevenZip\C\Sha256Opt.c" />
+    </ItemGroup>
+  </Target>
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.targets" />
+  <Import Condition="'$(Platform)' == 'x64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
 </Project>
