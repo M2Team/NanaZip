@@ -21,16 +21,60 @@
   <Import Project="..\NanaZip.Project\NanaZip.Project.Runtime.props" />
   <ItemDefinitionGroup>
     <Link>
-      <!-- <ModuleDefinitionFile>NanaZip.ZS.Codecs.def</ModuleDefinitionFile> -->
+      <ModuleDefinitionFile>SevenZip\CPP\7zip\Compress\Codec.def</ModuleDefinitionFile>
       <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.410</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SevenZip\CPP\7zip\Common\MethodId.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\RegisterCodec.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Common\StreamUtils.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\ICoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IDecl.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\IStream.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Common.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Common0.h" />
+    <ClInclude Include="SevenZip\CPP\Common\ComTry.h" />
+    <ClInclude Include="SevenZip\CPP\Common\Defs.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyCom.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyInitGuid.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyString.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyTypes.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyUnknown.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyVector.h" />
+    <ClInclude Include="SevenZip\CPP\Common\MyWindows.h" />
+    <ClInclude Include="SevenZip\CPP\Common\NewHandler.h" />
+    <ClInclude Include="SevenZip\CPP\Common\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\PropVariant.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\StdAfx.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\System.h" />
+    <ClInclude Include="SevenZip\CPP\Windows\WinDefs.h" />
+    <ClInclude Include="SevenZip\C\7zTypes.h" />
+    <ClInclude Include="SevenZip\C\7zVersion.h" />
+    <ClInclude Include="SevenZip\C\7zWindows.h" />
+    <ClInclude Include="SevenZip\C\Alloc.h" />
+    <ClInclude Include="SevenZip\C\Compiler.h" />
+    <ClInclude Include="SevenZip\C\CpuArch.h" />
+    <ClInclude Include="SevenZip\C\Precomp.h" />
+    <ClInclude Include="SevenZip\C\Threads.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SevenZip\CPP\7zip\Common\StreamUtils.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\CodecExports.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\DllExportsCompress.cpp" />
+    <ClCompile Include="SevenZip\CPP\Windows\System.cpp" />
+    <ClCompile Include="SevenZip\C\Alloc.c" />
+    <ClCompile Include="SevenZip\C\Threads.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SevenZip\CPP\7zip\Compress\Codec.def" />
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.targets" />
 </Project>
