@@ -50,6 +50,7 @@
     <PivotItem Header="[Integration]">
       <ScrollViewer>
         <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
+          
           <TextBlock Text="[File Associations]" />
           <Button
             Content="[Open Windows Settings app to associate files with NanaZip]"
@@ -63,6 +64,7 @@
             <ComboBoxItem Content="[Yes]" AccessKey="Y" />
             <ComboBoxItem Content="[For Office files]" />
           </ComboBox>
+          
           <TextBlock Text="[Context Menu]" />
           <ToggleSwitch Name="ElimDupExtract" Tag="Options"
             Header="[Eliminate duplication of root folder]"
@@ -116,12 +118,14 @@
               <ListViewItem.Tag><x:Int32>31</x:Int32></ListViewItem.Tag>
             </ListViewItem>
           </ListView>
+          
         </StackPanel>
       </ScrollViewer>
     </PivotItem>
     <PivotItem Header="[Settings]">
       <ScrollViewer>
         <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
+          
           <TextBlock Text="[File Explorer]" />
           <ToggleSwitch Name="ShowDots" Tag="FM"
             Header='[Show ".." item]'
@@ -157,8 +161,26 @@
             AccessKey="M"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
-          <TextBlock
-            Text="[(De)Compression]" />
+          <AutoSuggestBox Name="Viewer" Tag="FM"
+            Header="[View]"
+            AccessKey="V"
+            QueryIcon="More"
+            Loading="AutoSuggestBoxLoading"
+            QuerySubmitted="OpenFileDialogToSelectExecutable" />
+          <AutoSuggestBox Name="Editor" Tag="FM"
+            Header="[Editor]"
+            AccessKey="E"
+            QueryIcon="More"
+            Loading="AutoSuggestBoxLoading"
+            QuerySubmitted="OpenFileDialogToSelectExecutable" />
+          <AutoSuggestBox Name="Diff" Tag="FM"
+            Header="[Diff]"
+            AccessKey="D"
+            QueryIcon="More"
+            Loading="AutoSuggestBoxLoading"
+            QuerySubmitted="OpenFileDialogToSelectExecutable" />
+
+          <TextBlock Text="[(De)Compression]" />
           <ToggleSwitch Name="LargePages" Tag=""
             Header="[Use large memory pages]"
             AccessKey="L"
@@ -173,10 +195,16 @@
             <ComboBoxItem Content="[Current]" AccessKey="C" />
             <ComboBoxItem Content="[Specified]" />
           </ComboBox>
+          <AutoSuggestBox Name="WorkDirPath" Tag="Options"
+            Header="[Working folder path]"
+            QueryIcon="More"
+            Loading="AutoSuggestBoxLoading"
+            QuerySubmitted="OpenFileDialogToSelectPath" />
           <ToggleSwitch Name="TempRemovableOnly" Tag="Options"
             Header="[Working folder use for removable drives only]"
             IsOn="True"
             Loading="ToggleSwitchLoading" />
+          
           <TextBlock Text="[History]" />
           <ToggleSwitch Name="WantArcHistory" Tag="FM"
             Header="[Want ArcHistory]"

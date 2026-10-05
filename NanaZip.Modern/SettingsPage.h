@@ -15,6 +15,10 @@ namespace winrt
     using Windows::UI::Xaml::Controls::ListView;
     using Windows::UI::Xaml::Controls::ListViewItem;
     using Windows::UI::Xaml::Controls::SelectionChangedEventArgs;
+    using Windows::UI::Xaml::Controls::AutoSuggestBox;
+    using Windows::UI::Xaml::Controls::AutoSuggestBoxTextChangedEventArgs;
+    using Windows::UI::Xaml::Controls::AutoSuggestionBoxTextChangeReason;
+    using Windows::UI::Xaml::Controls::AutoSuggestBoxQuerySubmittedEventArgs;
 }
 
 namespace winrt::NanaZip::Modern::implementation
@@ -43,6 +47,18 @@ namespace winrt::NanaZip::Modern::implementation
         void ContextMenuListViewLoading(
             winrt::FrameworkElement const& sender,
             winrt::IInspectable const& e);
+
+        void AutoSuggestBoxLoading(
+            winrt::FrameworkElement const& sender,
+            winrt::IInspectable const& e);
+
+        void OpenFileDialogToSelectPath(
+            winrt::AutoSuggestBox const& sender,
+            winrt::AutoSuggestBoxQuerySubmittedEventArgs const& args);
+
+        void OpenFileDialogToSelectExecutable(
+            winrt::AutoSuggestBox const& sender,
+            winrt::AutoSuggestBoxQuerySubmittedEventArgs const& args);
 
     private:
 

@@ -8,6 +8,8 @@
 
 #include <K7User.h>
 
+#include <ShObjIdl_core.h>
+
 namespace winrt::NanaZip::Modern::implementation
 {
     SettingsPage::SettingsPage(
@@ -133,7 +135,8 @@ namespace winrt::NanaZip::Modern::implementation
         }
 
         ComboElement.SelectionChanged(
-            [](winrt::IInspectable sender, winrt::SelectionChangedEventArgs e)
+            [](winrt::IInspectable const& sender,
+               winrt::SelectionChangedEventArgs const& e)
             {
                 UNREFERENCED_PARAMETER(e);
 
@@ -196,7 +199,8 @@ namespace winrt::NanaZip::Modern::implementation
         }
 
         ListViewElement.SelectionChanged(
-            [](winrt::IInspectable sender, winrt::SelectionChangedEventArgs e)
+            [](winrt::IInspectable const& sender,
+               winrt::SelectionChangedEventArgs const& e)
             {
                 UNREFERENCED_PARAMETER(e);
                 winrt::ListView ListViewElement = sender.as<winrt::ListView>();
@@ -223,5 +227,155 @@ namespace winrt::NanaZip::Modern::implementation
                     reinterpret_cast<PVOID>(&ContextMenuValue),
                     ContextMenuValueLength);
             });
+    }
+
+    void SettingsPage::AutoSuggestBoxLoading(
+        winrt::FrameworkElement const& sender,
+        winrt::IInspectable const& e)
+    {
+        UNREFERENCED_PARAMETER(e);
+        winrt::AutoSuggestBox AutoSuggestBoxElement =
+            sender.as<winrt::AutoSuggestBox>();
+
+        std::wstring SubKey = L"Software\\NanaZip\\";
+        SubKey.append(AutoSuggestBoxElement.Tag().as<winrt::hstring>());
+
+        DWORD AutoSuggestBoxValueLength = 0;
+        LSTATUS Result = ::RegGetValueW(
+            HKEY_CURRENT_USER,
+            SubKey.c_str(),
+            AutoSuggestBoxElement.Name().c_str(),
+            RRF_RT_REG_SZ,
+            nullptr,
+            nullptr,
+            &AutoSuggestBoxValueLength);
+        if (ERROR_SUCCESS == Result)
+        {
+            std::wstring AutoSuggestBoxValue(AutoSuggestBoxValueLength, L'\0');
+            Result = ::RegGetValueW(
+                HKEY_CURRENT_USER,
+                SubKey.c_str(),
+                AutoSuggestBoxElement.Name().c_str(),
+                RRF_RT_REG_SZ,
+                nullptr,
+                reinterpret_cast<PVOID>(AutoSuggestBoxValue.data()),
+                &AutoSuggestBoxValueLength);
+
+            if (ERROR_SUCCESS == Result)
+            {
+                AutoSuggestBoxElement.Text(AutoSuggestBoxValue);
+            }
+        }
+
+        AutoSuggestBoxElement.TextChanged(
+            [](winrt::AutoSuggestBox const& sender,
+               winrt::AutoSuggestBoxTextChangedEventArgs const& args)
+            {
+                if (winrt::AutoSuggestionBoxTextChangeReason::ProgrammaticChange
+                    != args.Reason())
+                {
+                    std::wstring AutoSuggestBoxText = sender.Text().c_str();
+                    DWORD AutoSuggestBoxTextLength =
+                        static_cast<DWORD>((AutoSuggestBoxText.size() + 1)
+                            * sizeof(wchar_t));
+
+                    std::wstring SubKey = L"Software\\NanaZip\\";
+                    SubKey.append(sender.Tag().as<winrt::hstring>());
+
+                    if (args.CheckCurrent())
+                    {
+                        ::RegSetKeyValueW(
+                            HKEY_CURRENT_USER,
+                            SubKey.c_str(),
+                            sender.Name().c_str(),
+                            REG_SZ,
+                            reinterpret_cast<PVOID>(AutoSuggestBoxText.data()),
+                            AutoSuggestBoxTextLength);
+                    }
+                }
+            });
+    }
+
+    void SettingsPage::OpenFileDialogToSelectPath(
+        winrt::AutoSuggestBox const& sender,
+        winrt::AutoSuggestBoxQuerySubmittedEventArgs const& args)
+    {
+        UNREFERENCED_PARAMETER(args);
+
+        auto Dialog = winrt::create_instance<::IFileOpenDialog>(
+            CLSID_FileOpenDialog,
+            CLSCTX_LOCAL_SERVER);
+        Dialog->SetOptions(
+            FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM | FOS_PATHMUSTEXIST);
+        if (ERROR_SUCCESS == Dialog->Show(this->m_WindowHandle))
+        {
+            winrt::com_ptr<IShellItem> Item = nullptr;
+            if (ERROR_SUCCESS == Dialog->GetResult(Item.put()))
+            {
+                LPWSTR Path = nullptr;
+                Item->GetDisplayName(SIGDN_FILESYSPATH, &Path);
+
+                sender.Text(Path);
+
+                std::wstring SubKey = L"Software\\NanaZip\\";
+                SubKey.append(sender.Tag().as<winrt::hstring>());
+
+                ::RegSetKeyValueW(
+                    HKEY_CURRENT_USER,
+                    SubKey.c_str(),
+                    sender.Name().c_str(),
+                    REG_SZ,
+                    reinterpret_cast<PVOID>(Path),
+                    static_cast<DWORD>(
+                        (::wcslen(Path) + 1) * sizeof(wchar_t)));
+
+                ::CoTaskMemFree(Path);
+            }
+        }
+    }
+
+    void SettingsPage::OpenFileDialogToSelectExecutable(
+        winrt::AutoSuggestBox const& sender,
+        winrt::AutoSuggestBoxQuerySubmittedEventArgs const& args)
+    {
+        UNREFERENCED_PARAMETER(args);
+
+        auto Dialog = winrt::create_instance<::IFileOpenDialog>(
+            CLSID_FileOpenDialog,
+            CLSCTX_LOCAL_SERVER);
+
+        COMDLG_FILTERSPEC Types[] =
+        {
+            { L"*.EXE", L"*.EXE"}
+        };
+
+        Dialog->SetFileTypes(static_cast<UINT>(std::size(Types)), Types);
+        Dialog->SetOptions(FOS_FORCEFILESYSTEM | FOS_FILEMUSTEXIST);
+
+        if (ERROR_SUCCESS == Dialog->Show(this->m_WindowHandle))
+        {
+            winrt::com_ptr<IShellItem> Item = nullptr;
+            if (ERROR_SUCCESS == Dialog->GetResult(Item.put()))
+            {
+                LPWSTR Path = nullptr;
+                Item->GetDisplayName(SIGDN_FILESYSPATH, &Path);
+
+                sender.Text(Path);
+
+                std::wstring SubKey = L"Software\\NanaZip\\";
+                SubKey.append(sender.Tag().as<winrt::hstring>());
+
+                ::RegSetKeyValueW(
+                    HKEY_CURRENT_USER,
+                    SubKey.c_str(),
+                    sender.Name().c_str(),
+                    REG_SZ,
+                    reinterpret_cast<PVOID>(Path),
+                    static_cast<DWORD>(
+                        (::wcslen(Path) + 1) * sizeof(wchar_t)));
+
+                ::CoTaskMemFree(Path);
+            }
+        }
     }
 }
