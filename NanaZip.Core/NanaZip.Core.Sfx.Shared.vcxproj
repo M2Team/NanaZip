@@ -76,6 +76,7 @@
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\NewHandler.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\StringConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\UTFConvert.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
@@ -103,8 +104,9 @@
     <ClCompile Include="SevenZip\C\MtDec.c" />
     <ClCompile Include="SevenZip\C\Ppmd7.c" />
     <ClCompile Include="SevenZip\C\Ppmd7Dec.c" />
+    <ClCompile Include="SevenZip\C\Sha256.c" />
+    <ClCompile Include="SevenZip\C\Sha256Opt.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
-    <ClCompile Include="Wrappers\Sha256Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
@@ -211,7 +213,6 @@
     <ClInclude Include="SevenZip\C\RotateDefs.h" />
     <ClInclude Include="SevenZip\C\Sha256.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
-    <ClInclude Include="Wrappers\Sha256Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
