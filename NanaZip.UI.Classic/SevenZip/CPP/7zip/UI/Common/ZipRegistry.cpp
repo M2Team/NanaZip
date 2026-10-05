@@ -107,6 +107,7 @@ static LPCTSTR const kElimDup = TEXT("ElimDup");
 static LPCTSTR const kNtSecur = TEXT("Security");
 // **************** NanaZip Modification Start ****************
 static LPCTSTR const kOpenFolderAfterExtract = TEXT("OpenFolderAfterExtract");
+static LPCTSTR const kDeleteAfterExtract = TEXT("DeleteAfterExtract");
 // **************** NanaZip Modification End ****************
 
 void CInfo::Save() const
@@ -128,6 +129,7 @@ void CInfo::Save() const
   Key_Set_BoolPair(key, kShowPassword, ShowPassword);
   // **************** NanaZip Modification Start ****************
   Key_Set_BoolPair(key, kOpenFolderAfterExtract, OpenFolder);
+  Key_Set_BoolPair(key, kDeleteAfterExtract, DeleteArchive);
   // **************** NanaZip Modification End ****************
 
   key.RecurseDeleteKey(kPathHistory);
@@ -182,6 +184,7 @@ void CInfo::Load()
   Key_Get_BoolPair(key, kShowPassword, ShowPassword);
   // **************** NanaZip Modification Start ****************
   Key_Get_BoolPair(key, kOpenFolderAfterExtract, OpenFolder);
+  Key_Get_BoolPair(key, kDeleteAfterExtract, DeleteArchive);
   // **************** NanaZip Modification End ****************
 }
 
