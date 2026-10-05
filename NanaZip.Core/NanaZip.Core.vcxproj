@@ -270,6 +270,7 @@
     <ClCompile Include="SevenZip\CPP\Common\LzFindPrepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha1Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Sha512Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyMap.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyXml.cpp" />
@@ -324,6 +325,8 @@
     <ClCompile Include="SevenZip\C\Sha1Opt.c" />
     <ClCompile Include="SevenZip\C\Sha256.c" />
     <ClCompile Include="SevenZip\C\Sha256Opt.c" />
+    <ClCompile Include="SevenZip\C\Sha512.c" />
+    <ClCompile Include="SevenZip\C\Sha512Opt.c" />
     <ClCompile Include="SevenZip\C\SwapBytes.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
     <ClCompile Include="SevenZip\C\Xz.c" />
@@ -331,7 +334,6 @@
     <ClCompile Include="SevenZip\C\XzDec.c" />
     <ClCompile Include="SevenZip\C\XzEnc.c" />
     <ClCompile Include="SevenZip\C\XzIn.c" />
-    <ClCompile Include="Wrappers\Sha512Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\BrotliDecoder.h" />
@@ -590,7 +592,6 @@
     <ClInclude Include="SevenZip\C\Xz.h" />
     <ClInclude Include="SevenZip\C\XzCrc64.h" />
     <ClInclude Include="SevenZip\C\XzEnc.h" />
-    <ClInclude Include="Wrappers\Sha512Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
