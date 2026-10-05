@@ -509,7 +509,6 @@ STDMETHODIMP CArchiveExtractCallback::SetRatioInfo(const UInt64 *inSize, const U
 
 // **************** NanaZip Modification Start ****************
 // Backported from 25.01.
-// **************** NanaZip Modification End ****************
 //void CArchiveExtractCallback::CreateComplexDirectory(const UStringVector &dirPathParts, FString &fullPath)
 void CArchiveExtractCallback::CreateComplexDirectory(
     const UStringVector &dirPathParts, bool isFinal, FString &fullPath)

@@ -579,7 +579,7 @@ public:
 
   FString DirPathPrefix_for_HashFiles;
 
-  // **************** NanaZip Modification End ****************
+  // **************** NanaZip Modification Start ****************
   FString OutDir;
   // **************** NanaZip Modification End ****************
 
