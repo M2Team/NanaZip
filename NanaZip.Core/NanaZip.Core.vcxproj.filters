@@ -398,6 +398,9 @@
     <ClCompile Include="SevenZip\CPP\Common\LzFindPrepare.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\Common\Sha1Prepare.cpp">
+      <Filter>SevenZip\CPP\Common</Filter>
+    </ClCompile>
     <ClCompile Include="SevenZip\CPP\Common\MyMap.cpp">
       <Filter>SevenZip\CPP\Common</Filter>
     </ClCompile>
@@ -947,8 +950,11 @@
     <ClCompile Include="Wrappers\Sha256Wrapper.cpp">
       <Filter>Wrappers</Filter>
     </ClCompile>
-    <ClCompile Include="Wrappers\Sha1Wrapper.cpp">
-      <Filter>Wrappers</Filter>
+    <ClCompile Include="SevenZip\C\Sha1.c">
+      <Filter>SevenZip\C</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\C\Sha1Opt.c">
+      <Filter>SevenZip\C</Filter>
     </ClCompile>
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
@@ -1724,9 +1730,6 @@
       <Filter>Wrappers</Filter>
     </ClInclude>
     <ClInclude Include="Wrappers\Sha256Wrapper.h">
-      <Filter>Wrappers</Filter>
-    </ClInclude>
-    <ClInclude Include="Wrappers\Sha1Wrapper.h">
       <Filter>Wrappers</Filter>
     </ClInclude>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
