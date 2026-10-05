@@ -18,6 +18,11 @@
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Margin" Value="0,12,0,4" />
       </Style>
+      <Style TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Spacing" Value="{StaticResource SettingsCardSpacing}" />
+        <Setter Property="Padding" Value="{StaticResource SettingsCardPadding}" />
+      </Style>
     </ResourceDictionary>
   </Page.Resources>
   <Pivot Style="{StaticResource PivotTabStyle}">
@@ -44,27 +49,31 @@
         Name - Reg Value Name
         SelectedIndex - Default Reg Value Data
         Loading - Must ComboBoxLoading
-        SelectionChanged - Lambda delegated by ComboBoxLoading
+        SelectionChanged - Lambda Delegated by ComboBoxLoading
+      ListView：
+        Header - SettingsCard Header
+        Tag - Reg SubKey
+        Name - Reg Value Name
+      ListViewItem:
+        Content - SettingsCard Header
+        IsSelected - Default Reg Value Data
+        Tag - Bitwise AND Operator Data
+      AutoSuggestBox (As Textbox and Button - Filesystem Path Editor and Picker):
+        Header - SettingsCard Header
+        Tag - Reg SubKey
+        Name - Reg Value
+        QuerySubmitted - Open File Dialog
     -->
     
     <PivotItem Header="[Integration]">
       <ScrollViewer>
-        <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
+        <StackPanel>
           
           <TextBlock Text="[File Associations]" />
           <Button
             Content="[Open Windows Settings app to associate files with NanaZip]"
             Click="FileAssociationsButtonClick" />
-          <TextBlock Text="[Security]" />
-          <ComboBox Name="WriteZoneIdExtract" Tag="Options"
-            Header="[Propagate MotW Zone.Id]"
-            SelectedIndex="1"
-            Loading="ComboBoxLoading">
-            <ComboBoxItem Content="[No]" AccessKey="N" />
-            <ComboBoxItem Content="[Yes]" AccessKey="Y" />
-            <ComboBoxItem Content="[For Office files]" />
-          </ComboBox>
-          
+
           <TextBlock Text="[Context Menu]" />
           <ToggleSwitch Name="ElimDupExtract" Tag="Options"
             Header="[Eliminate duplication of root folder]"
@@ -122,11 +131,13 @@
         </StackPanel>
       </ScrollViewer>
     </PivotItem>
-    <PivotItem Header="[Settings]">
+
+
+    <PivotItem Header="[File Explorer]">
       <ScrollViewer>
-        <StackPanel HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}" Padding="{StaticResource SettingsCardPadding}">
-          
-          <TextBlock Text="[File Explorer]" />
+        <StackPanel>
+
+          <TextBlock Text="[Explorer View]" />
           <ToggleSwitch Name="ShowDots" Tag="FM"
             Header='[Show ".." item]'
             IsOn="False"
@@ -161,8 +172,10 @@
             AccessKey="M"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
+
+          <TextBlock Text="[Text Tool]" />
           <AutoSuggestBox Name="Viewer" Tag="FM"
-            Header="[View]"
+            Header="[Viewer]"
             AccessKey="V"
             QueryIcon="More"
             Loading="AutoSuggestBoxLoading"
@@ -174,18 +187,29 @@
             Loading="AutoSuggestBoxLoading"
             QuerySubmitted="OpenFileDialogToSelectExecutable" />
           <AutoSuggestBox Name="Diff" Tag="FM"
-            Header="[Diff]"
+            Header="[Diff Tool]"
             AccessKey="D"
             QueryIcon="More"
             Loading="AutoSuggestBoxLoading"
             QuerySubmitted="OpenFileDialogToSelectExecutable" />
 
-          <TextBlock Text="[(De)Compression]" />
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+
+
+    <PivotItem Header="[(De)Compression]">
+      <ScrollViewer>
+        <StackPanel>
+
+          <TextBlock Text="[Memory]" />
           <ToggleSwitch Name="LargePages" Tag=""
             Header="[Use large memory pages]"
             AccessKey="L"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
+
+          <TextBlock Text="[Temporary Directory]" />
           <ComboBox Name="WorkDirType" Tag="Options"
             Header="[Working folder]"
             AccessKey="W"
@@ -204,31 +228,72 @@
             Header="[Working folder use for removable drives only]"
             IsOn="True"
             Loading="ToggleSwitchLoading" />
-          
-          <TextBlock Text="[History]" />
+
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+
+
+    <PivotItem Header="[History]">
+      <ScrollViewer>
+        <StackPanel>
+
+          <TextBlock Text="[Text Box]" />
           <ToggleSwitch Name="WantArcHistory" Tag="FM"
-            Header="[Want ArcHistory]"
+            Header="[ArcHistory]"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
           <ToggleSwitch Name="WantPathHistory" Tag="FM"
-            Header="[Want PathHistory]"
+            Header="[PathHistory]"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
           <ToggleSwitch Name="WantCopyHistory" Tag="FM"
-            Header="[Want CopyHistory]"
+            Header="[CopyHistory]"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
           <ToggleSwitch Name="WantFolderHistory" Tag="FM"
-            Header="[Want FolderHistory]"
+            Header="[FolderHistory]"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
-          <TextBlock Text="[Checksum]" />
+
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+
+
+    <PivotItem Header="[Checksum]">
+      <ScrollViewer>
+        <StackPanel>
+
+          <TextBlock Text="[Output Text]" />
           <ToggleSwitch Name="LowercaseHashes" Tag="FM"
             Header="[Use Lowercase Hashes]"
             IsOn="False"
             Loading="ToggleSwitchLoading" />
+
         </StackPanel>
       </ScrollViewer>
     </PivotItem>
+
+
+    <PivotItem Header="[Security]">
+      <ScrollViewer>
+        <StackPanel>
+
+          <TextBlock Text="[MotW]" />
+          <ComboBox Name="WriteZoneIdExtract" Tag="Options"
+            Header="[Propagate Zone.Id stream]"
+            SelectedIndex="1"
+            Loading="ComboBoxLoading">
+            <ComboBoxItem Content="[No]" AccessKey="N" />
+            <ComboBoxItem Content="[Yes]" AccessKey="Y" />
+            <ComboBoxItem Content="[For Office files]" />
+          </ComboBox>
+          
+        </StackPanel>
+      </ScrollViewer>
+    </PivotItem>
+
+
   </Pivot>
 </Page>
