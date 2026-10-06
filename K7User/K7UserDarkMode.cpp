@@ -47,6 +47,7 @@ namespace
 
     const COLORREF g_DarkModeBackgroundColor = RGB(0, 0, 0);
     const COLORREF g_DarkModeForegroundColor = RGB(255, 255, 255);
+    const COLORREF g_DarkModeDisabledForegroundColor = RGB(109, 109, 109);
     const COLORREF g_DarkModeBorderColor = RGB(127, 127, 127);
     const COLORREF g_DarkModeMenuSelectedBackgroundColor = RGB(65, 65, 65);
 
@@ -625,7 +626,7 @@ namespace
                             if (DrawItemStruct->itemState & ODS_INACTIVE)
                             {
                                 StateId = MBI_DISABLED;
-                                TextColor = RGB(109, 109, 109);
+                                TextColor = g_DarkModeDisabledForegroundColor;
                             }
                             else if ((DrawItemStruct->itemState & ODS_GRAYED) &&
                                 (DrawItemStruct->itemState & ODS_HOTLIGHT))
@@ -635,7 +636,7 @@ namespace
                             else if (DrawItemStruct->itemState & ODS_GRAYED)
                             {
                                 StateId = MBI_DISABLED;
-                                TextColor = RGB(109, 109, 109);
+                                TextColor = g_DarkModeDisabledForegroundColor;
                             }
                             else if (DrawItemStruct->itemState
                                 & (ODS_HOTLIGHT | ODS_SELECTED))
@@ -1114,6 +1115,42 @@ namespace
         TextOptions.dwSize = sizeof(DTTOPTS);
         TextOptions.dwFlags = DTT_TEXTCOLOR;
         TextOptions.crText = g_DarkModeForegroundColor;
+
+        // Paint the disabled menu items in the dimmed color. Note that
+        // Windows 11 draws them with the focusable popup item part.
+        bool NeedDisabledMenuItemWorkaround = (
+            MENU_POPUPITEM == iPartId ||
+            MENU_POPUPITEMFOCUSABLE == iPartId ||
+            MENU_BARITEM == iPartId);
+        if (NeedDisabledMenuItemWorkaround)
+        {
+            NeedDisabledMenuItemWorkaround = false;
+            wchar_t ClassName[256] = {};
+            if (S_OK == ::OriginalGetThemeClass(
+                hTheme,
+                ClassName,
+                MO_ARRAY_SIZE(ClassName)))
+            {
+                NeedDisabledMenuItemWorkaround =
+                    (0 == ::_wcsicmp(ClassName, VSCLASS_MENU));
+            }
+        }
+        if (NeedDisabledMenuItemWorkaround)
+        {
+            if (MENU_BARITEM == iPartId)
+            {
+                if (MBI_DISABLED == iStateId ||
+                    MBI_DISABLEDHOT == iStateId ||
+                    MBI_DISABLEDPUSHED == iStateId)
+                {
+                    TextOptions.crText = g_DarkModeDisabledForegroundColor;
+                }
+            }
+            else if (MPI_DISABLED == iStateId || MPI_DISABLEDHOT == iStateId)
+            {
+                TextOptions.crText = g_DarkModeDisabledForegroundColor;
+            }
+        }
 
         return ::DrawThemeTextEx(
             hTheme,
