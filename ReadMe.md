@@ -102,12 +102,16 @@ Kenji Mouri
   support, Encoder can be considered as compression support, and Archiver can be
   considered as archive format support)
   - Brotli (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
-  - Fast-LZMA2 (Encoder, inherited from 7-Zip ZS)
   - Lizard (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
+  - LZ (Archiver, inherited from 7-Zip ZS)
   - LZ4 (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
-  - LZ5 (Decoder & Encoder & Archiver, Both inherited from 7-Zip ZS)
-  - Zstandard (Decoder inherited from 7-Zip, Encoder & Archiver inherited from
-    7-Zip ZS)
+  - LZ5 (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
+  - Zstandard (Decoder & Encoder & Archiver, inherited from 7-Zip ZS)
+  - XChaCha20 (Decoder & Encoder, inherited from 7-Zip ZS)
+  - XChaCha20-Poly1305 (Decoder & Encoder, inherited from 7-Zip ZS)
+  - AES+XChaCha20-Poly1305 (Decoder & Encoder, inherited from 7-Zip ZS)
+  - AES+XChaCha20+Ascon (Decoder & Encoder, inherited from 7-Zip ZS)
+  - XChaCha20+AES+AEGIS (Decoder & Encoder, inherited from 7-Zip ZS)
   - NSIS (Decoder's NSIS script decompiling support, inherited from 7-Zip NSIS)
   - UFS/UFS2 file system image (Archiver, read-only, both big and little endian)
   - .NET Single File Application bundle (Archiver, read-only, extracting
