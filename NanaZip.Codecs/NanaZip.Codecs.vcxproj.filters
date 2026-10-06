@@ -83,99 +83,6 @@
     <ClCompile Include="RHash\whirlpool_sbox.c">
       <Filter>RHash</Filter>
     </ClCompile>
-    <ClCompile Include="Brotli\common\constants.c">
-      <Filter>Brotli\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\common\context.c">
-      <Filter>Brotli\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\common\dictionary.c">
-      <Filter>Brotli\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\common\platform.c">
-      <Filter>Brotli\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\common\shared_dictionary.c">
-      <Filter>Brotli\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\common\transform.c">
-      <Filter>Brotli\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\dec\bit_reader.c">
-      <Filter>Brotli\dec</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\dec\decode.c">
-      <Filter>Brotli\dec</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\dec\huffman.c">
-      <Filter>Brotli\dec</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\dec\state.c">
-      <Filter>Brotli\dec</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\backward_references.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\backward_references_hq.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\bit_cost.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\block_splitter.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\brotli_bit_stream.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\cluster.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\command.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\compound_dictionary.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\compress_fragment.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\compress_fragment_two_pass.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\dictionary_hash.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\encode.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\encoder_dict.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\entropy_encode.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\fast_log.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\histogram.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\literal_cost.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\memory.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\metablock.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\static_dict.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\utf8_util.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
     <ClCompile Include="xxHash\xxhash.c">
       <Filter>xxHash</Filter>
     </ClCompile>
@@ -187,63 +94,6 @@
     </ClCompile>
     <ClCompile Include="LZ4\lz4hc.c">
       <Filter>LZ4</Filter>
-    </ClCompile>
-    <ClCompile Include="LZ5\lz5.c">
-      <Filter>LZ5</Filter>
-    </ClCompile>
-    <ClCompile Include="LZ5\lz5frame.c">
-      <Filter>LZ5</Filter>
-    </ClCompile>
-    <ClCompile Include="LZ5\lz5hc.c">
-      <Filter>LZ5</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\lizard_compress.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\lizard_decompress.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\lizard_frame.c">
-      <Filter>Lizard</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\brotli-mt_common.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\brotli-mt_compress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\brotli-mt_decompress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lizard-mt_common.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lizard-mt_compress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lizard-mt_decompress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lz4-mt_common.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lz4-mt_compress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lz4-mt_decompress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lz5-mt_common.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lz5-mt_compress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\lz5-mt_decompress.c">
-      <Filter>ZSTDMT</Filter>
-    </ClCompile>
-    <ClCompile Include="ZSTDMT\zstd-mt_threading.c">
-      <Filter>ZSTDMT</Filter>
     </ClCompile>
     <ClCompile Include="FastLZMA2\dict_buffer.c">
       <Filter>FastLZMA2</Filter>
@@ -369,11 +219,6 @@
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh64.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh364.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.Xxh3128.cpp" />
-    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Common.cpp" />
-    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.cpp" />
-    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.cpp" />
-    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.cpp" />
-    <ClCompile Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.cpp" />
     <ClCompile Include="NanaZip.Codecs.SevenZipWrapper.cpp" />
     <ClCompile Include="NanaZip.Codecs.Hash.BCryptProvider.cpp" />
     <ClCompile Include="NanaZip.Codecs.Archive.Ufs.cpp" />
@@ -419,21 +264,6 @@
     <ClCompile Include="Zstandard\legacy\zstd_v02.c">
       <Filter>Zstandard\legacy</Filter>
     </ClCompile>
-    <ClCompile Include="Lizard\entropy\lizard_huf_compress.c">
-      <Filter>Lizard\entropy</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\entropy\lizard_huf_decompress.c">
-      <Filter>Lizard\entropy</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\entropy\lizard_fse_compress.c">
-      <Filter>Lizard\entropy</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c">
-      <Filter>Lizard\entropy</Filter>
-    </ClCompile>
-    <ClCompile Include="Lizard\entropy\lizard_entropy_common.c">
-      <Filter>Lizard\entropy</Filter>
-    </ClCompile>
     <ClCompile Include="Mile.Helpers.Portable.Base.Unstaged.cpp">
       <Filter>Mile.Portable.Helpers.Unstaged</Filter>
     </ClCompile>
@@ -442,18 +272,6 @@
     </ClCompile>
     <ClCompile Include="LittleFS\lfs_util.c">
       <Filter>LittleFS</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\dec\prefix.c">
-      <Filter>Brotli\dec</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\dec\dec_static_init.c">
-      <Filter>Brotli\dec</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\static_dict_lut.c">
-      <Filter>Brotli\enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Brotli\enc\enc_static_init.c">
-      <Filter>Brotli\enc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -470,38 +288,11 @@
     <Filter Include="RHash">
       <UniqueIdentifier>{c13ab0bc-bcc5-44ec-8b4b-8f3ee60c2ec1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Brotli">
-      <UniqueIdentifier>{733d7abb-fff3-4dfd-a2fa-de0451280840}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Brotli\common">
-      <UniqueIdentifier>{69f0ece3-1d69-4527-ae66-d992b96c6146}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Brotli\dec">
-      <UniqueIdentifier>{82cb3ecc-338a-4805-9568-4b3cd99946c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Brotli\enc">
-      <UniqueIdentifier>{4299b44f-18e5-45ef-b87b-66dc2bd371ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Brotli\include">
-      <UniqueIdentifier>{988d17a2-5e4e-472a-9923-67a046c33253}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Brotli\include\brotli">
-      <UniqueIdentifier>{fbcd39e0-c2a1-4146-92e5-4e217a1f49bd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="xxHash">
       <UniqueIdentifier>{4a2fdc00-56e0-4024-b1e4-65edd9491b7a}</UniqueIdentifier>
     </Filter>
     <Filter Include="LZ4">
       <UniqueIdentifier>{a09b9f72-7fa1-4190-a850-c3ff3c812272}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LZ5">
-      <UniqueIdentifier>{50cd4f8e-720b-44a2-912e-8febdaa5c7c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lizard">
-      <UniqueIdentifier>{3bd67c07-e7a9-462e-bfa1-a18141e2e67c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ZSTDMT">
-      <UniqueIdentifier>{0f78d39c-0bbe-4715-9237-133b2a02b2fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="FastLZMA2">
       <UniqueIdentifier>{fd31c8de-7c34-43cb-abb3-ddc8bad2d7fd}</UniqueIdentifier>
@@ -523,9 +314,6 @@
     </Filter>
     <Filter Include="Zstandard\legacy">
       <UniqueIdentifier>{b18e7303-5e49-475c-aefe-4b289407e2fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lizard\entropy">
-      <UniqueIdentifier>{114a5a2f-28cd-4e17-9570-ecf119db33d9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Mile.Portable.Helpers.Unstaged">
       <UniqueIdentifier>{2ede4493-6888-4402-aa9d-823628b6bd21}</UniqueIdentifier>
@@ -595,186 +383,6 @@
     <ClInclude Include="RHash\whirlpool.h">
       <Filter>RHash</Filter>
     </ClInclude>
-    <ClInclude Include="Brotli\common\constants.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\common\context.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\common\dictionary.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\common\platform.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\common\shared_dictionary_internal.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\common\transform.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\common\version.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\dec\bit_reader.h">
-      <Filter>Brotli\dec</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\dec\huffman.h">
-      <Filter>Brotli\dec</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\dec\prefix.h">
-      <Filter>Brotli\dec</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\dec\state.h">
-      <Filter>Brotli\dec</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\backward_references.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\backward_references_hq.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\backward_references_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\bit_cost.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\bit_cost_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\block_encoder_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\block_splitter.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\block_splitter_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\brotli_bit_stream.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\cluster.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\cluster_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\command.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\compound_dictionary.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\compress_fragment.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\compress_fragment_two_pass.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\dictionary_hash.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\encoder_dict.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\entropy_encode.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\entropy_encode_static.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\fast_log.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\find_match_length.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_composite_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_forgetful_chain_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_longest_match64_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_longest_match_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_longest_match_quickly_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_rolling_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_to_binary_tree_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\histogram.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\histogram_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\literal_cost.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\memory.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\metablock.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\metablock_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\params.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\prefix.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\quality.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\ringbuffer.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\state.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\static_dict.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\static_dict_lut.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\utf8_util.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\write_bits.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\include\brotli\decode.h">
-      <Filter>Brotli\include\brotli</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\include\brotli\encode.h">
-      <Filter>Brotli\include\brotli</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\include\brotli\port.h">
-      <Filter>Brotli\include\brotli</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\include\brotli\shared_dictionary.h">
-      <Filter>Brotli\include\brotli</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\include\brotli\types.h">
-      <Filter>Brotli\include\brotli</Filter>
-    </ClInclude>
     <ClInclude Include="xxHash\xxhash.h">
       <Filter>xxHash</Filter>
     </ClInclude>
@@ -789,96 +397,6 @@
     </ClInclude>
     <ClInclude Include="LZ4\lz4hc.h">
       <Filter>LZ4</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5_common.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5frame.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5frame_static.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5hc.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\mem.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_common.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_compress.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_compress_liz.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_compress_lz4.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_decompress.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_decompress_liz.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_decompress_lz4.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_frame.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_frame_static.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_fast.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_fastbig.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_fastsmall.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_hashchain.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_lowestprice.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_nochain.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_optimal.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\lizard_parser_pricefast.h">
-      <Filter>Lizard</Filter>
-    </ClInclude>
-    <ClInclude Include="ZSTDMT\brotli-mt.h">
-      <Filter>ZSTDMT</Filter>
-    </ClInclude>
-    <ClInclude Include="ZSTDMT\list.h">
-      <Filter>ZSTDMT</Filter>
-    </ClInclude>
-    <ClInclude Include="ZSTDMT\lizard-mt.h">
-      <Filter>ZSTDMT</Filter>
-    </ClInclude>
-    <ClInclude Include="ZSTDMT\lz4-mt.h">
-      <Filter>ZSTDMT</Filter>
-    </ClInclude>
-    <ClInclude Include="ZSTDMT\lz5-mt.h">
-      <Filter>ZSTDMT</Filter>
-    </ClInclude>
-    <ClInclude Include="ZSTDMT\memmt.h">
-      <Filter>ZSTDMT</Filter>
-    </ClInclude>
-    <ClInclude Include="ZSTDMT\threading.h">
-      <Filter>ZSTDMT</Filter>
     </ClInclude>
     <ClInclude Include="FastLZMA2\atomic.h">
       <Filter>FastLZMA2</Filter>
@@ -1040,11 +558,6 @@
       <Filter>Zstandard\compress</Filter>
     </ClInclude>
     <ClInclude Include="NanaZip.Codecs.h" />
-    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Common.h" />
-    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Brotli.h" />
-    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.Lizard.h" />
-    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ4.h" />
-    <ClInclude Include="NanaZip.Codecs.MultiThreadWrapper.LZ5.h" />
     <ClInclude Include="NanaZip.Codecs.SevenZipWrapper.h" />
     <ClInclude Include="FreeBSD\dir.h">
       <Filter>FreeBSD</Filter>
@@ -1091,33 +604,6 @@
     <ClInclude Include="Zstandard\legacy\zstd_v02.h">
       <Filter>Zstandard\legacy</Filter>
     </ClInclude>
-    <ClInclude Include="Lizard\entropy\mem.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\huf.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\error_private.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\fse.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\bitstream.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\compiler.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\debug.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\error_public.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
-    <ClInclude Include="Lizard\entropy\hist.h">
-      <Filter>Lizard\entropy</Filter>
-    </ClInclude>
     <ClInclude Include="Mile.Helpers.Portable.Base.Unstaged.h">
       <Filter>Mile.Portable.Helpers.Unstaged</Filter>
     </ClInclude>
@@ -1129,41 +615,5 @@
       <Filter>LittleFS</Filter>
     </ClInclude>
     <ClInclude Include="NanaZip.Codecs.Specification.Zealfs.h" />
-    <ClInclude Include="Brotli\common\dictionary_inc.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\common\static_init.h">
-      <Filter>Brotli\common</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\dec\prefix_inc.h">
-      <Filter>Brotli\dec</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\dec\static_init.h">
-      <Filter>Brotli\dec</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\dictionary_hash_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_base.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_longest_match_simd_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\hash_longest_match64_simd_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\matching_tag_mask.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\static_dict_lut_inc.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Brotli\enc\static_init.h">
-      <Filter>Brotli\enc</Filter>
-    </ClInclude>
-    <ClInclude Include="LZ5\lz5hc_common.h">
-      <Filter>LZ5</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

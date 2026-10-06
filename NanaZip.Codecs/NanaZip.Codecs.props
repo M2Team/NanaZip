@@ -12,13 +12,9 @@
   <Import Project="..\NanaZip.Specification\NanaZip.Specification.props" />
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)BLAKE3\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)Brotli\include\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)FastLZMA2\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)GmSSL\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)Heimdal\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)Lizard\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)LZ4\;$(IncludePath)</IncludePath>
-    <IncludePath>$(MSBuildThisFileDirectory)LZ5\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)RHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)xxHash\;$(IncludePath)</IncludePath>
     <IncludePath>$(MSBuildThisFileDirectory)Zstandard\;$(IncludePath)</IncludePath>

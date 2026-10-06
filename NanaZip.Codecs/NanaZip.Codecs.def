@@ -8,42 +8,22 @@ CreateObject
 GetNumberOfFormats
 GetHandlerProperty2
 
-NanaZipCodecsBrotliRead
-NanaZipCodecsBrotliWrite
-NanaZipCodecsLizardRead
-NanaZipCodecsLizardWrite
-NanaZipCodecsLz4Read
-NanaZipCodecsLz4Write
-NanaZipCodecsLz5Read
-NanaZipCodecsLz5Write
+HIST_count_wksp
+HIST_count_simple
 
-NanaZipCodecsBrotliDecode
-NanaZipCodecsLizardDecode
-NanaZipCodecsLz4Decode
-NanaZipCodecsLz5Decode
-
-BrotliDecoderDestroyInstance
-BrotliDecoderDecompressStream
-BrotliDecoderCreateInstance
+XXH32_digest
+XXH32
+XXH32_update
+XXH32_reset
 
 LZ4_decompress_safe
-
-BROTLIMT_compressCCtx
-BROTLIMT_createCCtx
-BROTLIMT_freeCCtx
-BROTLIMT_isError
-LIZARDMT_compressCCtx
-LIZARDMT_createCCtx
-LIZARDMT_freeCCtx
-LIZARDMT_isError
-LZ4MT_compressCCtx
-LZ4MT_createCCtx
-LZ4MT_freeCCtx
-LZ4MT_isError
-LZ5MT_compressCCtx
-LZ5MT_createCCtx
-LZ5MT_freeCCtx
-LZ5MT_isError
+LZ4F_getErrorName
+LZ4F_isError
+LZ4F_compressFrame
+LZ4F_compressFrameBound
+LZ4F_createDecompressionContext
+LZ4F_freeDecompressionContext
+LZ4F_decompress
 
 FL2_cancelCStream
 FL2_CCtx_getParameter
