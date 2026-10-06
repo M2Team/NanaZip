@@ -51,8 +51,6 @@
     <None Include="SevenZip\C\Sort.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Extensions\ZSCodecs\FastLzma2Encoder.cpp" />
-    <ClCompile Include="Extensions\ZSCodecs\FastLzma2Register.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\LzHandler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
@@ -314,7 +312,6 @@
     <ClCompile Include="Wrappers\Sha512Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Extensions\ZSCodecs\FastLzma2Encoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
     <ClInclude Include="Extensions\ZSCodecs\ZstdEncoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.h" />

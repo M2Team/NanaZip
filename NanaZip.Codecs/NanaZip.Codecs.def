@@ -25,23 +25,6 @@ LZ4F_createDecompressionContext
 LZ4F_freeDecompressionContext
 LZ4F_decompress
 
-FL2_cancelCStream
-FL2_CCtx_getParameter
-FL2_CCtx_setParameter
-FL2_createCStreamMt
-FL2_endStream
-FL2_freeCCtx
-FL2_getCStreamProgress
-FL2_getDictionaryBuffer
-FL2_getErrorCode
-FL2_getNextCompressedBuffer
-FL2_initCStream
-FL2_isError
-FL2_isTimedOut
-FL2_setCStreamTimeout
-FL2_updateDictionary
-FL2_waitCStream
-
 ZSTD_isError
 ZSTD_maxCLevel
 ZSTD_createCCtx
