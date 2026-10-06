@@ -1486,6 +1486,10 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
     {
       if (!isAnti)
         SetAttrib();
+      // **************** NanaZip Modification Start ****************
+      // Backported from 26.04.
+      needExit = false; // v26.04 : we want (_hashStreamWasUsed = true) for dir items.
+      // **************** NanaZip Modification End ****************
       return S_OK;
     }
   }

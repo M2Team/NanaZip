@@ -858,13 +858,16 @@ STDMETHODIMP CExtractCallbackImp::GetStream7(const wchar_t *name,
   }
 
   // **************** NanaZip Modification Start ****************
-  // Backported from 24.09.
+  // Backported from 26.04.
   GetItemBoolProp(getProp, kpidIsAltStream, _isAltStream);
   if (!ProcessAltStreams && _isAltStream)
     return S_OK;
 
-  if (isDir) // we don't support dir items extraction in this code
-    return S_OK;
+  /* if (isDir), we don't exit from function here because we still need to
+       initialize and use (_hashStream) to calculate Hash of dir name.
+     v.26.04 : we have commented incorrect code below:
+  // if (isDir) return S_OK; // v.24.09-v.26.03 used this incorrect function exit.
+  */
   // **************** NanaZip Modification End ****************
 
   if (askExtractMode != NArchive::NExtract::NAskMode::kExtract &&
@@ -874,7 +877,11 @@ STDMETHODIMP CExtractCallbackImp::GetStream7(const wchar_t *name,
   _needUpdateStat = true;
 
   CMyComPtr<ISequentialOutStream> outStreamLoc;
-
+  // **************** NanaZip Modification Start ****************
+  // Backported from 26.04.
+  // Note the implicit link with the "if (VirtFileSystem...)" block below.
+  if (!_isFolder) // v.26.04 : we don't need dir item in VirtFileSystem
+  // **************** NanaZip Modification End ****************
   // **************** NanaZip Modification Start ****************
   // Backported from 24.09 with changes.
   // size_Defined -> sizeDefined
