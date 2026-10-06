@@ -27,6 +27,36 @@
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
 
+            <!-- AutoSuggestBox hasn't the VisualState of Disable. Must modify TextBoxStyle.
+            <Setter Property="Foreground" Value="{ThemeResource SettingsCardForeground}" />
+            <Setter Property="Background" Value="{ThemeResource SettingsCardBackground}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource SettingsCardBorderBrush}" />
+            <Setter Property="BorderThickness" Value="{StaticResource SettingsCardBorderThickness}" />
+            <Setter Property="FontSize" Value="{ThemeResource SettingsCardHeaderFontSize}" />
+            <Setter Property="MinWidth" Value="{StaticResource SettingsCardMinWidth}" />
+            <Setter Property="MinHeight" Value="{StaticResource SettingsCardMinHeight}" />
+            <Setter Property="MaxWidth" Value="{StaticResource SettingsCardMaxWidth}" />
+            <Setter Property="Padding" Value="{StaticResource SettingsCardPadding}" />
+            ...
+              <Grid x:Name="LayoutRoot">
+                Background="{TemplateBinding Background}"
+                BackgroundSizing="{TemplateBinding BackgroundSizing}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}"
+              ...
+                <ContentPresenter x:Name="HeaderContentPresenter"
+                  Grid.Column="0"
+                  Content="{TemplateBinding Header}"
+                  Foreground="{TemplateBinding Foreground}"
+                  FontSize="{TemplateBinding FontSize}"
+                  FontFamily="{TemplateBinding FontFamily}"
+                  HorizontalContentAlignment="Left"
+                  VerticalContentAlignment="Center"
+                  TextWrapping="WrapWholeWords" />
+            -->
+
             <TextBox x:Name="TextBox"
               Style="{TemplateBinding TextBoxStyle}"
               Header="{TemplateBinding Header}"
