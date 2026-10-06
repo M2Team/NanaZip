@@ -22,7 +22,7 @@
   <Import Project="..\NanaZip.Project\NanaZip.Project.Runtime.props" />
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>Z7_EXTRACT_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>SevenZip\CPP\7zip\Archive\Archive2.def</ModuleDefinitionFile>
@@ -55,6 +55,7 @@
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\HkdfBlake2sp.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\HmacSha512.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\Pbkdf2HmacSha512.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Crypto\RandGen.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\StdAfx.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\XChaCha20.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305.h" />
@@ -118,12 +119,15 @@
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\HkdfBlake2sp.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\HmacSha512.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\Pbkdf2HmacSha512.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Crypto\RandGen.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Poly1305Register.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Crypto\XChaCha20Register.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\IntToString.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\MyString.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
+    <ClCompile Include="SevenZip\CPP\Common\Sha512Prepare.cpp" />
     <ClCompile Include="SevenZip\CPP\Common\Wildcard.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\PropVariant.cpp" />
     <ClCompile Include="SevenZip\CPP\Windows\System.cpp" />
