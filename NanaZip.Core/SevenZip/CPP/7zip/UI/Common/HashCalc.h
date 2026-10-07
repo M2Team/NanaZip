@@ -44,7 +44,7 @@ struct CHasherState
     memset(Digests[groupIndex], 0, sizeof(Digests[groupIndex]));
   }
 
-  const Byte *GetExtraData_for_Group(unsigned groupIndex) const
+  const Byte *GetExtraData_for_Group(unsigned groupIndex) const Z7_lifetimebound
   {
     return Digests[groupIndex] + k_HashCalc_DigestSize_Max;
   }

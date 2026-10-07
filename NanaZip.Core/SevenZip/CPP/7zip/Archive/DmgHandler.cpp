@@ -58,7 +58,7 @@
 #define Get32a(p) GetBe32a(p)
 #define Get64a(p) GetBe64a(p)
 
-Byte *Base64ToBin(Byte *dest, const char *src);
+Byte *Base64ToBin(Byte *dest Z7_lifetimebound, const char *src);
 
 namespace NArchive {
 namespace NDmg {
@@ -1630,7 +1630,7 @@ class CAdcDecoder
     CAdcDecoder *m_Coder;
   public:
     bool NeedFlush;
-    CCoderReleaser(CAdcDecoder *coder): m_Coder(coder), NeedFlush(true) {}
+    CCoderReleaser(CAdcDecoder *coder Z7_lifetimebound): m_Coder(coder), NeedFlush(true) {}
     ~CCoderReleaser()
     {
       if (NeedFlush)

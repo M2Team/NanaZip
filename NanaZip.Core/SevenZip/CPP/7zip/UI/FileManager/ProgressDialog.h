@@ -164,7 +164,7 @@ class CProgressCloser
 {
   CProgressDialog *_p;
 public:
-  CProgressCloser(CProgressDialog &p) : _p(&p) {}
+  CProgressCloser(CProgressDialog &p Z7_lifetimebound) : _p(&p) {}
   ~CProgressCloser() { _p->ProcessWasFinished(); }
 };
 

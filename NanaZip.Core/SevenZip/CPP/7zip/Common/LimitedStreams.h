@@ -53,7 +53,7 @@ public:
     _size = size;
     return SeekToPhys();
   }
-  HRESULT SeekToStart() { return Seek(0, STREAM_SEEK_SET, NULL); }
+  // HRESULT SeekToStart() { _virtPos = 0; }
 };
 
 HRESULT CreateLimitedInStream(IInStream *inStream, UInt64 pos, UInt64 size, ISequentialInStream **resStream);

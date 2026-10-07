@@ -1062,7 +1062,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
       // printf(" -locFolderIndex=%5i\n", locFolderIndex);
       
-      for (UInt32 bl = 0; cabFolderOutStream->NeedMoreWrite();)
+      for (unsigned bl = 0; cabFolderOutStream->NeedMoreWrite();)
       {
         if (volIndex >= m_Database.Volumes.Size())
         {
@@ -1095,6 +1095,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
             but cab extracting library in new Windows ignores this error.
             15.00 : We also try to ignore such error, if archive is not multi-volume.
           */
+          bl = 0u - 1; // max unsigned value for which both important conditions are met:
+          // (bl != 0 && bl >= folder2.NumDataBlocks)
           if (m_Database.Volumes.Size() > 1)
           {
             volIndex++;

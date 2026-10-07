@@ -13,8 +13,8 @@
 
 #include "WimHandler.h"
 
-#define Get16(p) GetUi16(p)
-#define Get32(p) GetUi32(p)
+#define Get16(p) GetUi16a(p)
+#define Get32a(p) GetUi32a(p)
 #define Get64(p) GetUi64(p)
 
 using namespace NWindows;
@@ -42,7 +42,7 @@ static const Byte kProps[] =
   kpidINode,
   kpidLinks,
   kpidIsAltStream,
-  kpidNumAltStreams,
+  kpidNumAltStreams
   
   #ifdef WIM_DETAILS
   , kpidVolume
@@ -69,6 +69,8 @@ static const CStatProp kArcProps[] =
   { NULL, kpidIsVolume, VT_BOOL},
   { NULL, kpidVolume, VT_UI4},
   { NULL, kpidNumVolumes, VT_UI4},
+  // { NULL, kpidName, VT_BSTR},
+  { NULL, kpidExtension, VT_BSTR},
   { "Images", kpidNumImages, VT_UI4},
   { "Boot Image", kpidBootImage, VT_UI4}
 };
@@ -95,7 +97,7 @@ static void AddErrorMessage(AString &s, const char *message)
 }
 
 
-Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
+Z7_COM7F_IMF(CHandler::GetArchiveProperty(const PROPID propID, PROPVARIANT *value))
 {
   COM_TRY_BEGIN
   NCOM::CPropVariant prop;
@@ -222,18 +224,18 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
         {
           char temp[64];
           RawLeGuidToString(h.Guid, temp);
-          temp[8] = 0; // for reduced GUID
-          AString s (temp);
-          const char *ext = ".wim";
+          char *s = temp + 8; // for reduced GUID
+          const char *ext = "wim";
           if (h.NumParts != 1)
           {
-            s += '_';
+            *s++ = '_';
             if (h.PartNumber != 1)
-              s.Add_UInt32(h.PartNumber);
-            ext = ".swm";
+              s = ConvertUInt32ToString(h.PartNumber, s);
+            ext = "swm";
           }
-          s += ext;
-          prop = s;
+          *s++ = '.';
+          MyStringCopy(s, ext);
+          prop = temp;
         }
       }
       break;
@@ -244,14 +246,15 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
         const CHeader &h = _volumes[_firstVolumeIndex].Header;
         if (h.NumParts > 1)
         {
-          AString s;
+          char temp[64];
+          char *s = temp;
           if (h.PartNumber != 1)
           {
-            s.Add_UInt32(h.PartNumber);
-            s.Add_Dot();
+            s = ConvertUInt32ToString(h.PartNumber, s);
+            *s++ = '.';
           }
-          s += "swm";
-          prop = s;
+          MyStringCopy(s, "swm");
+          prop = temp;
         }
       }
       break;
@@ -264,12 +267,11 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
       UInt32 methodUnknown = 0;
       UInt32 methodMask = 0;
       unsigned chunkSizeBits = 0;
-      
       {
         FOR_VECTOR (i, _xmls)
         {
           const CHeader &header = _volumes[_xmls[i].VolIndex].Header;
-          unsigned method = header.GetMethod();
+          const unsigned method = header.Method;
           if (method < Z7_ARRAY_SIZE(k_Methods))
             methodMask |= ((UInt32)1 << method);
           else
@@ -278,9 +280,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
             chunkSizeBits = header.ChunkSizeBits;
         }
       }
-
       AString res;
-
       unsigned numMethods = 0;
 
       for (unsigned i = 0; i < Z7_ARRAY_SIZE(k_Methods); i++)
@@ -299,20 +299,18 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
         res.Add_UInt32(methodUnknown);
         numMethods++;
       }
-
       if (numMethods == 1 && chunkSizeBits != 0)
       {
         res.Add_Colon();
         res.Add_UInt32((UInt32)chunkSizeBits);
       }
-
       prop = res;
       break;
     }
     
     case kpidIsTree: prop = true; break;
     case kpidIsAltStream: prop = _db.ThereAreAltStreams; break;
-    case kpidIsAux: prop = true; break;
+    // case kpidIsAux: prop = (_db.VirtualRoots.Size() + _numIgnoreItems) != 0; break; // v26.04
     // WIM uses special prefix to represent deleted items
     // case kpidIsDeleted: prop = _db.ThereAreDeletedStreams; break;
     case kpidINode: prop = true; break;
@@ -342,9 +340,8 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
 
     case kpidReadOnly:
     {
-      bool readOnly = !IsUpdateSupported();
-      if (readOnly)
-        prop = readOnly;
+      if (!IsUpdateSupported())
+        prop = true;
       break;
     }
   }
@@ -354,11 +351,13 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
   COM_TRY_END
 }
 
+
+// (p) is aligned for 4-bytes
 static void GetFileTime(const Byte *p, NCOM::CPropVariant &prop)
 {
   prop.vt = VT_FILETIME;
-  prop.filetime.dwLowDateTime = Get32(p);
-  prop.filetime.dwHighDateTime = Get32(p + 4);
+  prop.filetime.dwLowDateTime = Get32a(p);
+  prop.filetime.dwHighDateTime = Get32a(p + 4);
   prop.Set_FtPrec(k_PropVar_TimePrec_100ns);
 }
 
@@ -435,11 +434,6 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         {
           char sz[16];
           ConvertUInt32ToString((UInt32)(Int32)item.StreamIndex, sz);
-          /*
-          AString s = sz;
-          while (s.Len() < _nameLenForStreams)
-            s = '0' + s;
-          */
           prop = sz;
         }
         break;
@@ -467,7 +461,6 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         }
         else if (!item.IsDir)
           prop = (UInt64)0;
-
         break;
       }
 
@@ -493,7 +486,6 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         }
         else if (!item.IsDir)
           prop = (UInt64)0;
-
         break;
       }
       
@@ -501,9 +493,9 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       case kpidIsAltStream: prop = item.IsAltStream; break;
       case kpidNumAltStreams:
       {
-        if (!item.IsAltStream && metadata /* mainItem->HasMetadata() */)
+        if (!item.IsAltStream && metadata)
         {
-          UInt32 dirRecordSize = _db.IsOldVersion ? kDirRecordSizeOld : kDirRecordSize;
+          const unsigned dirRecordSize = _db.IsOldVersion ? kDirRecordSizeOld : kDirRecordSize;
           UInt32 numAltStreams = Get16(metadata + dirRecordSize - 6);
           if (numAltStreams != 0)
           {
@@ -516,23 +508,23 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       }
 
       case kpidAttrib:
-        if (!item.IsAltStream && mainItem->ImageIndex >= 0)
+        if (!item.IsAltStream && metadata)
         {
           /*
           if (fileNameLen == 0 && isDir && !item.HasStream())
             item.Attrib = 0x10; // some swm archives have system/hidden attributes for root
           */
-          prop = (UInt32)Get32(metadata + 8);
+          prop = (UInt32)Get32a(metadata + 8);
         }
         break;
-      case kpidCTime: if (metadata /* mainItem->HasMetadata() */ ) GetFileTime(metadata + (_db.IsOldVersion ? 0x18: 0x28), prop); break;
-      case kpidATime: if (metadata /* mainItem->HasMetadata() */ ) GetFileTime(metadata + (_db.IsOldVersion ? 0x20: 0x30), prop); break;
-      case kpidMTime: if (metadata /* mainItem->HasMetadata() */ ) GetFileTime(metadata + (_db.IsOldVersion ? 0x28: 0x38), prop); break;
+      case kpidCTime: if (metadata) GetFileTime(metadata + (_db.IsOldVersion ? 0x18: 0x28), prop); break;
+      case kpidATime: if (metadata) GetFileTime(metadata + (_db.IsOldVersion ? 0x20: 0x30), prop); break;
+      case kpidMTime: if (metadata) GetFileTime(metadata + (_db.IsOldVersion ? 0x28: 0x38), prop); break;
 
       case kpidINode:
-        if (metadata /* mainItem->HasMetadata() */ && !_isOldVersion)
+        if (metadata && !_isOldVersion)
         {
-          UInt32 attrib = (UInt32)Get32(metadata + 8);
+          const UInt32 attrib = (UInt32)Get32a(metadata + 8);
           if ((attrib & FILE_ATTRIBUTE_REPARSE_POINT) == 0)
           {
             // we don't know about that field in OLD WIM format
@@ -568,7 +560,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
               method = 0;
             else if (vol)
             {
-              method = (int)vol->Header.GetMethod();
+              method = (int)vol->Header.Method;
               chunkSizeBits = (int)vol->Header.ChunkSizeBits;
             }
             MethodToProp(method, chunkSizeBits, prop);
@@ -579,7 +571,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       case kpidLinks: if (si) prop = (UInt32)si->RefCount; break;
       #ifdef WIM_DETAILS
       case kpidVolume: if (si) prop = (UInt32)si->PartNumber; break;
-      case kpidOffset: if (si)  prop = (UInt64)si->Resource.Offset; break;
+      case kpidOffset: if (si) prop = (UInt64)si->Resource.Offset; break;
       #endif
     }
   }
@@ -611,7 +603,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
             prop = FILES_DIR_NAME;
           break;
         case kpidIsDir: prop = true; break;
-        case kpidIsAux: prop = true; break;
+        // case kpidIsAux: prop = true; break;
       }
     }
   }
@@ -635,7 +627,7 @@ Z7_COM7F_IMF(CHandler::GetRootProp(PROPID propID, PROPVARIANT *value))
     switch (propID)
     {
       case kpidIsDir: prop = true; break;
-      case kpidAttrib: prop = (UInt32)Get32(metadata + 8); break;
+      case kpidAttrib: prop = (UInt32)Get32a(metadata + 8); break;
       case kpidCTime: GetFileTime(metadata + (_db.IsOldVersion ? 0x18: 0x28), prop); break;
       case kpidATime: GetFileTime(metadata + (_db.IsOldVersion ? 0x20: 0x30), prop); break;
       case kpidMTime: GetFileTime(metadata + (_db.IsOldVersion ? 0x28: 0x38), prop); break;
@@ -653,7 +645,7 @@ HRESULT CHandler::GetSecurity(UInt32 realIndex, const void **data, UInt32 *dataS
     return S_OK;
   const CImage &image = _db.Images[item.ImageIndex];
   const Byte *metadata = image.Meta + item.Offset;
-  const UInt32 securId = Get32(metadata + 0xC);
+  const UInt32 securId = Get32a(metadata + 0xC);
   if (// securId == (UInt32)(Int32)-1 ||
          securId     >= image.SecurOffsets.Size()
       || securId + 1 >= image.SecurOffsets.Size())
@@ -721,7 +713,7 @@ Z7_COM7F_IMF(CHandler::GetParent(UInt32 index, UInt32 *parent, UInt32 *parentTyp
     *parentType = item.IsAltStream ? NParentType::kAltStream : NParentType::kDir;
     if (item.Parent >= 0)
     {
-      if (_db.ExludedItem != item.Parent)
+      if (_db.ExcludedItem != item.Parent)
         *parent = (unsigned)_db.Items[item.Parent].IndexInSorted;
     }
     else
@@ -744,67 +736,71 @@ Z7_COM7F_IMF(CHandler::GetRawProp(UInt32 index, PROPID propID, const void **data
 
   if (propID == kpidName)
   {
+    int imageIndex;
     if (index < _db.SortedItems.Size())
     {
       const CItem &item = _db.Items[_db.SortedItems[index]];
-      if (item.ImageIndex < 0)
+      imageIndex = item.ImageIndex;
+      if (imageIndex < 0)
         return S_OK;
-      const CImage &image = _db.Images[item.ImageIndex];
-      *propType = NPropDataType::kUtf16z;
-      if (image.NumEmptyRootItems != 0 && item.Parent < 0)
+      const CImage &image = _db.Images[imageIndex];
+      if (image.NumEmptyRootItems == 0 || item.Parent >= 0)
       {
-        const CByteBuffer &buf = _db.Images[item.ImageIndex].RootNameBuf;
-        *data = (void *)(const Byte *)buf;
-        *dataSize = (UInt32)buf.Size();
+        const Byte *meta = image.Meta + _db.GetNameOffset(item);
+        const unsigned size = Get16(meta - 2);
+        /* if we used original unmodified Meta data.
+           and if (size == 0), then (shortName) and (fileName) start at same address.
+           But CDatabase::ParseDirItem() resets ShortName to zero-length in Meta data.
+           So we don't check for (size == 0).
+        */
+        // if (size == 0) meta = (const Byte *)(const void *)&_temp_2bytes_NULL;
+        if (*(const UInt16 *)(const void *)(meta + size)) return E_FAIL; // optional
+        *data = (const void *)meta;
+        *dataSize = (UInt32)size + 2;
+        *propType = NPropDataType::kUtf16z;
         return S_OK;
       }
-      const Byte *meta = image.Meta + item.Offset +
-          (item.IsAltStream ?
-          (_isOldVersion ? 0x10 : 0x24) :
-          (_isOldVersion ? kDirRecordSizeOld - 2 : kDirRecordSize - 2));
-      *data = (const void *)(meta + 2);
-      *dataSize = (UInt32)Get16(meta) + 2;
-      return S_OK;
     }
+    else
     {
       index -= _db.SortedItems.Size();
       if (index < _numXmlItems)
         return S_OK;
       index -= _numXmlItems;
-      if (index >= (UInt32)_db.VirtualRoots.Size())
+      if (index >= _db.VirtualRoots.Size())
         return S_OK;
-      const CByteBuffer &buf = _db.Images[_db.VirtualRoots[index]].RootNameBuf;
-      *data = (void *)(const Byte *)buf;
-      *dataSize = (UInt32)buf.Size();
-      *propType = NPropDataType::kUtf16z;
-      return S_OK;
+      imageIndex = (int)_db.VirtualRoots[index];
     }
+    const CByteBuffer &buf = _db.Images[imageIndex].RootNameBuf;
+    *data = buf;
+    *dataSize = (UInt32)buf.Size();
+    *propType = NPropDataType::kUtf16z;
+    return S_OK;
   }
 
   if (index >= _db.SortedItems.Size())
     return S_OK;
-
-  unsigned index2 = _db.SortedItems[index];
+  const unsigned index2 = _db.SortedItems[index];
   
   if (propID == kpidNtSecure)
-  {
     return GetSecurity(index2, data, dataSize, propType);
-  }
   
   const CItem &item = _db.Items[index2];
+
   if (propID == kpidSha1)
   {
+    const UInt32 *sha1;
     if (item.StreamIndex >= 0)
-      *data = _db.DataStreams[item.StreamIndex].Hash;
+      sha1 = _db.DataStreams[item.StreamIndex].Hash;
     else
     {
       if (_isOldVersion)
         return S_OK;
-      const Byte *sha1 = _db.Images[item.ImageIndex].Meta + item.Offset + (item.IsAltStream ? 0x10 : 0x40);
-      if (IsEmptySha(sha1))
+      sha1 = (const UInt32 *)(const void *)(_db.Images[item.ImageIndex].Meta + item.Offset + item.GetHashFieldOffset());
+      if (IsEmptySha1_32(sha1))
         return S_OK;
-      *data = sha1;
     }
+    *data = (const Byte *)(const void *)sha1;
     *dataSize = kHashSize;
     *propType = NPropDataType::kRaw;
     return S_OK;
@@ -813,12 +809,11 @@ Z7_COM7F_IMF(CHandler::GetRawProp(UInt32 index, PROPID propID, const void **data
   if (propID == kpidNtReparse && !_isOldVersion)
   {
     // we don't know about Reparse field in OLD WIM format
-
     if (item.StreamIndex < 0)
       return S_OK;
     if (index2 >= _db.ItemToReparse.Size())
       return S_OK;
-    int reparseIndex = _db.ItemToReparse[index2];
+    const int reparseIndex = _db.ItemToReparse[index2];
     if (reparseIndex < 0)
       return S_OK;
     const CByteBuffer &buf = _db.ReparseItems[reparseIndex];
@@ -832,6 +827,7 @@ Z7_COM7F_IMF(CHandler::GetRawProp(UInt32 index, PROPID propID, const void **data
 
   return S_OK;
 }
+
 
 class CVolumeName
 {
@@ -855,6 +851,7 @@ public:
     return s;
   }
 };
+
 
 Z7_COM7F_IMF(CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCallback *callback))
 {
@@ -912,14 +909,19 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCal
         _bootIndex = header.BootIndex;
         _version = header.Version;
         _isOldVersion = header.IsOldVersion();
+        InitMemUseDefaults();
       }
 
       if (_firstVolumeIndex >= 0)
-        if (!header.AreFromOnArchive(_volumes[_firstVolumeIndex].Header))
+      {
+        if (!header.AreFromSameMvArchive(_volumes[_firstVolumeIndex].Header))
           break;
-
-      if (i != 1 && _isOldVersion != header.IsOldVersion())
-        _volError = true;
+        /*
+        // we have checked already that version is same
+        if (_isOldVersion != header.IsOldVersion())
+          _volError = true;
+        */
+      }
 
       if (_volumes.Size() > header.PartNumber && _volumes[header.PartNumber].Stream)
         break;
@@ -947,16 +949,19 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCal
         res = _db.Open(curStream, header, (unsigned)totalFiles, callback);
         if (i == 1)
           _phySize = _db.PhySize;
+        if (header.PartNumber == 1)
+        {
+          _isOldVersion = _db.IsOldVersion;
+          _startingImageIndex = _db.GetStartImageIndex();
+        }
       }
       
       if (res != S_OK)
       {
-        if (i != 1 && res == S_FALSE)
-        {
-          _volError = true;
-          continue;
-        }
-        return res;
+        if (i == 1 || res != S_FALSE)
+          return res;
+        _volError = true;
+        continue;
       }
       
       while (_volumes.Size() <= header.PartNumber)
@@ -965,7 +970,8 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCal
       volume.Header = header;
       volume.Stream = curStream;
       
-      _firstVolumeIndex = header.PartNumber;
+      if (_firstVolumeIndex < 0)
+        _firstVolumeIndex = header.PartNumber;
       
       if (_xmls.IsEmpty() || xml.Data != _xmls[0].Data)
       {
@@ -992,8 +998,11 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCal
       }
     }
 
+     // we restore _db.IsOldVersion to main value because it's used by FillAndCheck() and ExtractReparseStreams()
+    _db.IsOldVersion = _isOldVersion;
+ 
     RINOK(_db.FillAndCheck(_volumes))
-    int defaultImageIndex = (int)_defaultImageNumber - 1;
+    const int defaultImageIndex = (int)_defaultImageNumber - (int)_startingImageIndex;
     
     bool showImageNumber = (_db.Images.Size() != 1 && defaultImageIndex < 0);
     if (!showImageNumber && _set_use_ShowImageNumber)
@@ -1008,13 +1017,11 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCal
     RINOK(_db.ExtractReparseStreams(_volumes, callback))
     if (!_db.Check_PartNumber_in_Items(_volumes.Size()))
       _error_in_PartNumber = true;
-
     /*
     wchar_t sz[16];
     ConvertUInt32ToString(_db.DataStreams.Size(), sz);
     _nameLenForStreams = MyStringLen(sz);
     */
-
     _xmlInComments = !_showImageNumber;
     _numXmlItems = (_xmlInComments ? 0 : _xmls.Size());
     _numIgnoreItems = _db.ThereAreDeletedStreams ? 1 : 0;
@@ -1026,6 +1033,7 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream, const UInt64 *, IArchiveOpenCal
 
 Z7_COM7F_IMF(CHandler::Close())
 {
+  _startingImageIndex = 1;
   _firstVolumeIndex = -1;
   _phySize = 0;
   _db.Clear();
@@ -1043,7 +1051,7 @@ Z7_COM7F_IMF(CHandler::Close())
 
 
 Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
-    Int32 testMode, IArchiveExtractCallback *extractCallback))
+    const Int32 testMode, IArchiveExtractCallback *extractCallback))
 {
   COM_TRY_BEGIN
   const bool allFilesMode = (numItems == (UInt32)(Int32)-1);
@@ -1061,7 +1069,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     UInt32 index = allFilesMode ? i : indices[i];
     if (index < _db.SortedItems.Size())
     {
-      int streamIndex = _db.Items[_db.SortedItems[index]].StreamIndex;
+      const int streamIndex = _db.Items[_db.SortedItems[index]].StreamIndex;
       if (streamIndex >= 0)
       {
         const CStreamInfo &si = _db.DataStreams[streamIndex];
@@ -1078,18 +1086,17 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   RINOK(extractCallback->SetTotal(totalSize))
 
-  totalSize = 0;
-  UInt64 currentItemUnPacked;
-  
-  int prevSuccessStreamIndex = -1;
-
   CUnpacker unpacker;
+  unpacker.MemUsage_Limit = _db.MemUsage_Limit;
+  unpacker.MemUsage = _db.MemUsage;
 
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
+  totalSize = 0;
+  UInt64 currentItemUnPacked;
+  int prevSuccessStreamIndex = -1;
 
-  for (i = 0;; i++,
-      totalSize += currentItemUnPacked)
+  for (i = 0;; i++, totalSize += currentItemUnPacked)
   {
     currentItemUnPacked = 0;
     lps->InSize = unpacker.TotalPacked;
@@ -1102,80 +1109,75 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
         NExtract::NAskMode::kExtract;
-
-    CMyComPtr<ISequentialOutStream> realOutStream;
-    RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
-
-    if (index >= _db.SortedItems.Size())
+    Int32 opRes = NExtract::NOperationResult::kOK;
     {
-      if (!testMode && !realOutStream)
-        continue;
-      RINOK(extractCallback->PrepareOperation(askMode))
-      index -= _db.SortedItems.Size();
-      if (index < _numXmlItems)
+      CMyComPtr<ISequentialOutStream> realOutStream;
+      RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
+        
+      if (index >= _db.SortedItems.Size())
       {
-        const CByteBuffer &data = _xmls[index].Data;
-        currentItemUnPacked = data.Size();
-        if (realOutStream)
+        index -= _db.SortedItems.Size();
+        if (!testMode && !realOutStream
+            && index < _numXmlItems) // v26.04 fix : we will call PrepareOperation() / SetOperationResult() for AUX items too
+          continue;
+        RINOK(extractCallback->PrepareOperation(askMode))
+        if (index < _numXmlItems)
         {
-          RINOK(WriteStream(realOutStream, (const Byte *)data, data.Size()))
-          realOutStream.Release();
+          const CByteBuffer &data = _xmls[index].Data;
+          currentItemUnPacked = data.Size();
+          if (realOutStream)
+            RINOK(WriteStream(realOutStream, (const Byte *)data, data.Size()))
         }
       }
-      RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
-      continue;
-    }
-
-    const CItem &item = _db.Items[_db.SortedItems[index]];
-    const int streamIndex = item.StreamIndex;
-    if (streamIndex < 0)
-    {
-      if (!item.IsDir)
-        if (!testMode && !realOutStream)
-          continue;
-      RINOK(extractCallback->PrepareOperation(askMode))
-      realOutStream.Release();
-      RINOK(extractCallback->SetOperationResult(!item.IsDir && _db.ItemHasStream(item) ?
-          NExtract::NOperationResult::kDataError :
-          NExtract::NOperationResult::kOK))
-      continue;
-    }
-
-    const CStreamInfo &si = _db.DataStreams[streamIndex];
-    currentItemUnPacked = _db.Get_UnpackSize_of_Resource(si.Resource);
-    // currentItemPacked = _db.Get_PackSize_of_Resource(streamIndex);
-
-    if (!testMode && !realOutStream)
-      continue;
-    RINOK(extractCallback->PrepareOperation(askMode))
-    Int32 opRes = NExtract::NOperationResult::kOK;
-    
-    if (si.PartNumber >= _volumes.Size())
-      opRes = NExtract::NOperationResult::kUnavailable;
-    else if (streamIndex != prevSuccessStreamIndex || realOutStream)
-    {
-      Byte digest[kHashSize];
-      const CVolume &vol = _volumes[si.PartNumber];
-      const bool needDigest = !si.IsEmptyHash() && !_disable_Sha1Check;
-      const HRESULT res = unpacker.Unpack(vol.Stream, si.Resource, vol.Header, &_db,
-          realOutStream, lps, needDigest ? digest : NULL);
-      
-      if (res == S_OK)
-      {
-        if (!needDigest || memcmp(digest, si.Hash, kHashSize) == 0)
-          prevSuccessStreamIndex = streamIndex;
-        else
-          opRes = NExtract::NOperationResult::kCRCError;
-      }
-      else if (res == S_FALSE)
-        opRes = NExtract::NOperationResult::kDataError;
-      else if (res == E_NOTIMPL)
-        opRes = NExtract::NOperationResult::kUnsupportedMethod;
       else
-        return res;
+      {
+        const CItem &item = _db.Items[_db.SortedItems[index]];
+        const int streamIndex = item.StreamIndex;
+        if (streamIndex < 0)
+        {
+          if (!item.IsDir && !testMode && !realOutStream)
+            continue;
+          RINOK(extractCallback->PrepareOperation(askMode))
+          if (!item.IsDir && _db.ItemHasStream(item))
+            opRes = NExtract::NOperationResult::kDataError;
+        }
+        else
+        {
+          const CStreamInfo &si = _db.DataStreams[streamIndex];
+          currentItemUnPacked = _db.Get_UnpackSize_of_Resource(si.Resource);
+          // currentItemPacked = _db.Get_PackSize_of_Resource(streamIndex);
+          
+          if (!testMode && !realOutStream)
+            continue;
+          RINOK(extractCallback->PrepareOperation(askMode))
+            
+          if (si.PartNumber >= _volumes.Size())
+            opRes = NExtract::NOperationResult::kUnavailable;
+          else if (streamIndex != prevSuccessStreamIndex || realOutStream)
+          {
+            UInt32 digest[kHashSize / 4];
+            const CVolume &vol = _volumes[si.PartNumber];
+            const bool needDigest = !si.IsEmptyHash() && !_disable_Sha1Check;
+            const HRESULT res = unpacker.Unpack(vol.Stream, si.Resource, vol.Header, &_db,
+                realOutStream, lps, needDigest ? digest : NULL);
+            
+            if (res == S_OK)
+            {
+              if (!needDigest || memcmp(digest, si.Hash, kHashSize) == 0)
+                prevSuccessStreamIndex = streamIndex;
+              else
+                opRes = NExtract::NOperationResult::kCRCError;
+            }
+            else if (res == S_FALSE)
+              opRes = NExtract::NOperationResult::kDataError;
+            else if (res == E_NOTIMPL)
+              opRes = NExtract::NOperationResult::kUnsupportedMethod;
+            else
+              return res;
+          }
+        }
+      }
     }
-    
-    realOutStream.Release();
     RINOK(extractCallback->SetOperationResult(opRes))
   }
   
@@ -1186,19 +1188,38 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
 Z7_COM7F_IMF(CHandler::GetNumberOfItems(UInt32 *numItems))
 {
-  *numItems = _db.SortedItems.Size() +
-      _numXmlItems +
-      _db.VirtualRoots.Size() +
-      _numIgnoreItems;
+  *numItems = _db.SortedItems.Size() + _numXmlItems +
+      _db.VirtualRoots.Size() + _numIgnoreItems;
   return S_OK;
 }
 
 CHandler::CHandler()
 {
+  _memAvail_wasSet = false;
   _keepMode_ShowImageNumber = false;
   InitDefaults();
   ClearErrors();
+  // _temp_2bytes_NULL = 0;
 }
+
+
+void CHandler::InitMemUseDefaults()
+{
+  if (_memAvail_wasSet)
+    return;
+  _memAvail_wasSet = true;
+  size_t memAvail = (size_t)sizeof(size_t) << 29;
+  _memAvail = memAvail;
+  const bool memUsage_WasSet = NWindows::NSystem::GetRamSize(memAvail);
+  if (memUsage_WasSet)
+  {
+    _memAvail = memAvail;
+    _db.MemUsage_Limit = memAvail / 32 * 31;
+  }
+  else
+    _db.MemUsage_Limit = (UInt64)(Int64)-1;
+}
+
 
 Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps))
 {
@@ -1226,7 +1247,9 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
     }
     else if (name.IsEqualTo("im"))
     {
-      UInt32 image = 9;
+      // wim 1.09- : lowest image number is 0
+      // wim 1.10+ : lowest image number is 1
+      UInt32 image = (UInt32)(Int32)-1;
       RINOK(ParsePropToUInt32(L"", prop, image))
       _defaultImageNumber = (int)image;
     }
@@ -1235,6 +1258,11 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
     }
     else if (name.IsPrefixedBy_Ascii_NoCase("memuse"))
     {
+      InitMemUseDefaults();
+      UInt64 v = 0;
+      if (!ParseSizeString(name.Ptr(6), prop, _memAvail, v))
+        return E_INVALIDARG;
+      _db.MemUsage_Limit = v;
     }
     else if (name.IsPrefixedBy_Ascii_NoCase("crc"))
     {

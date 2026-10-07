@@ -297,7 +297,7 @@ UInt64 CInByte2::ReadUInt64()
     (return_ptr >= limit) : limit was reached or crossed. So no signature found before limit
 */
 Z7_NO_INLINE
-static const Byte *FindSignature_10(const Byte *p, const Byte *limit)
+static const Byte *FindSignature_10(const Byte *p Z7_lifetimebound, const Byte *limit Z7_lifetimebound)
 {
   for (;;)
   {

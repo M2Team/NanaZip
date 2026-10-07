@@ -1829,7 +1829,7 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     */
     
     case kpidIsTree: prop = true; break;
-    case kpidIsAux: prop = true; break;
+    // case kpidIsAux: prop = true; break;
     case kpidINode: prop = true; break;
 
     case kpidClusterSize: prop = (UInt32)1 << _h.BlockBits; break;
@@ -2045,7 +2045,7 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
         break;
       }
       case kpidIsDir: prop = true; break;
-      case kpidIsAux: prop = true; break;
+      // case kpidIsAux: prop = true; break;
     }
   }
   else

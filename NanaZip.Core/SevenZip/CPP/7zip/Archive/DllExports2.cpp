@@ -28,8 +28,7 @@
 #define NT_CHECK_FAIL_ACTION return FALSE;
 #endif
 
-static
-HINSTANCE g_hInstance;
+// static HINSTANCE g_hInstance;
 
 extern "C"
 BOOL WINAPI DllMain(
@@ -47,12 +46,12 @@ BOOL WINAPI DllMain(
   #else
   HINSTANCE
   #endif
-  hInstance, DWORD dwReason, LPVOID /*lpReserved*/)
+  /* hInstance */, DWORD dwReason, LPVOID /*lpReserved*/)
 {
   if (dwReason == DLL_PROCESS_ATTACH)
   {
     // OutputDebugStringA("7z.dll DLL_PROCESS_ATTACH");
-    g_hInstance = (HINSTANCE)hInstance;
+    // g_hInstance = (HINSTANCE)hInstance;
     NT_CHECK
   }
   /*

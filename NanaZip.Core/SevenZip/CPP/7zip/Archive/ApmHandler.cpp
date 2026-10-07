@@ -56,8 +56,8 @@ struct CItem
   UInt32 StartBlock;
   UInt32 NumBlocks;
   UInt32 Flags; // pmPartStatus
-  char Name[k_Str_Size];
-  char Type[k_Str_Size];
+  char Name_Type[k_Str_Size * 2]; // two 32-char arrays concatenated together
+  const char *GetType() const Z7_lifetimebound { return Name_Type + k_Str_Size; }
   /*
   UInt32 DataStartBlock;
   UInt32 NumDataBlocks;
@@ -72,16 +72,15 @@ struct CItem
   bool Is_Valid_and_Allocated() const
     { return (Flags & (DPME_FLAGS_VALID | DPME_FLAGS_ALLOCATED)) != 0; }
 
-  bool Parse(const UInt32 *p32, UInt32 &numBlocksInMap)
+  bool Parse(const UInt32 *p32)
   {
     if (GetUi32a(p32) != 0x4d50) // "PM"
       return false;
-    numBlocksInMap = Get32(p32 + 4 / 4);
     StartBlock = Get32(p32 + 8 / 4);
     NumBlocks = Get32(p32 + 0xc / 4);
     Flags = Get32(p32 + 0x58 / 4);
-    memcpy(Name, p32 + 0x10 / 4, k_Str_Size);
-    memcpy(Type, p32 + 0x30 / 4, k_Str_Size);
+    memcpy(Name_Type, p32 + 0x10 / 4, k_Str_Size * 2);
+    // memcpy(Type, p32 + 0x30 / 4, k_Str_Size);
     /*
     DataStartBlock = Get32(p + 0x50);
     NumDataBlocks = Get32(p + 0x54);
@@ -122,9 +121,9 @@ Z7_class_CHandler_final: public CHandlerCont
   }
 };
 
-static const UInt32 kSectorSize = 512;
+static const unsigned kSectorSize = 512;
 
-// we support only 4 cluster sizes: 512, 1024, 2048, 4096 */
+// we support only 4 cluster sizes: 512, 1024, 2048, 4096
 
 API_FUNC_static_IsArc IsArc_Apm(const Byte *p, size_t size)
 {
@@ -205,7 +204,6 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
 #define Z7_APM_SWITCH_TO_512_BYTES
 
   const UInt32 numBlocks_from_Header = Get32(buf32 + 1);
-  UInt32 numBlocks = 0;
   {
     for (unsigned k = 0; k < numPadSectors; k++)
     {
@@ -228,6 +226,7 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
     }
   }
 
+  UInt32 numBlocks = 0;
   for (unsigned i = 0;;)
   {
 #ifdef Z7_APM_SWITCH_TO_512_BYTES
@@ -238,9 +237,9 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
     }
  
     CItem item;
-    UInt32 numBlocksInMap = 0;
-    if (!item.Parse(buf32, numBlocksInMap))
+    if (!item.Parse(buf32))
       return S_FALSE;
+    const UInt32 numBlocksInMap = Get32(buf32 + 4 / 4);
     // v24.09: we don't check that all entries have same (numBlocksInMap) values,
     // because some APMs have different (numBlocksInMap) values, if (Apple_Void) is used.
     if (numBlocksInMap > (1 << 8) || numBlocksInMap <= i)
@@ -316,14 +315,14 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
   {
     case kpidMainSubfile:
     {
+      AString s;
       int mainIndex = -1;
       FOR_VECTOR (i, _items)
       {
         const CItem &item = _items[i];
         if (!item.Is_Valid_and_Allocated())
           continue;
-        AString s;
-        GetString(s, item.Type);
+        GetString(s, item.GetType());
         if (NDmg::Is_Apple_FS_Or_Unknown(s))
         {
           if (mainIndex != -1)
@@ -341,12 +340,10 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     case kpidClusterSize: prop = (UInt32)1 << _blockSizeLog; break;
     case kpidPhySize: prop = _phySize; break;
     // case kpidNumBlocks: prop = _numBlocks; break;
-
     case kpidErrorFlags:
     {
-      UInt32 v = 0;
-      if (!_isArc) v |= kpv_ErrorFlags_IsNotArc;
-      prop = v;
+      if (!_isArc)
+        prop = (UInt32)kpv_ErrorFlags_IsNotArc;
       break;
     }
   }
@@ -371,11 +368,11 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidPath:
     {
       AString s;
-      GetString(s, item.Name);
+      GetString(s, item.Name_Type);
       if (s.IsEmpty())
         s.Add_UInt32(index);
       AString type;
-      GetString(type, item.Type);
+      GetString(type, item.GetType());
       {
         const char *ext = NDmg::Find_Apple_FS_Ext(type);
         if (ext)

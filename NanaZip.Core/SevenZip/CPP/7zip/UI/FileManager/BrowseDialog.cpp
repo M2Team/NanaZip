@@ -551,8 +551,8 @@ static int CALLBACK CompareItems2(LPARAM lParam1, LPARAM lParam2, LPARAM lpData)
   return ((CBrowseDialog *)lpData)->CompareItems(lParam1, lParam2);
 }
 
-wchar_t *Browse_ConvertSizeToString(UInt64 v, wchar_t *s);
-wchar_t *Browse_ConvertSizeToString(UInt64 v, wchar_t *s)
+wchar_t *Browse_ConvertSizeToString(UInt64 v, wchar_t *s Z7_lifetimebound);
+wchar_t *Browse_ConvertSizeToString(UInt64 v, wchar_t *s Z7_lifetimebound)
 {
   char c = 0;
        if (v >= ((UInt64)10000 << 20)) { v >>= 30; c = 'G'; }

@@ -21,18 +21,17 @@ Z7_CLASS_IMP_CHandler_IInArchive_5(
   , ISetProperties
   , IOutArchive
 )
-  CDatabase _db;
-  UInt32 _version;
-  UInt32 _bootIndex;
+  bool _isOldVersion;
+  bool _showImageNumber;
+  bool _set_use_ShowImageNumber;
+  bool _set_showImageNumber;
 
   CObjectVector<CVolume> _volumes;
+  CDatabase _db;
+
   CObjectVector<CWimXml> _xmls;
   // unsigned _nameLenForStreams;
  
-  unsigned _numXmlItems;
-  unsigned _numIgnoreItems;
-
-  bool _isOldVersion;
   bool _xmlInComments;
 
   bool _error_in_PartNumber;
@@ -41,25 +40,35 @@ Z7_CLASS_IMP_CHandler_IInArchive_5(
   bool _isArc;
   bool _unsupported;
 
-  bool _set_use_ShowImageNumber;
-  bool _set_showImageNumber;
-  int _defaultImageNumber;
-
-  bool _showImageNumber;
   bool _keepMode_ShowImageNumber;
   bool _disable_Sha1Check;
 
-  UInt64 _phySize;
+  bool _memAvail_wasSet;
+  size_t _memAvail;
+
+  unsigned _numXmlItems;
+  unsigned _numIgnoreItems;
+  int _defaultImageNumber;
+
+  UInt32 _version;
+  UInt32 _bootIndex;
   Int32 _firstVolumeIndex;
+  unsigned _startingImageIndex;
 
   CHandlerTimeOptions _timeOptions;
+  // UInt16 _temp_2bytes_NULL; // or UInt32
+  UInt64 _phySize;
+
+  void InitMemUseDefaults();
 
   void InitDefaults()
   {
+    _memAvail_wasSet = false;
     _disable_Sha1Check = false;
     _set_use_ShowImageNumber = false;
     _set_showImageNumber = false;
     _defaultImageNumber = -1;
+    _startingImageIndex = 1;
     _timeOptions.Init();
   }
 

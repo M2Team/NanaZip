@@ -326,7 +326,7 @@ public:
 };
 
 
-static char *CopyAndTrim(char *dest, const char *src,
+static char *CopyAndTrim(char *dest Z7_lifetimebound, const char *src,
     unsigned size, unsigned toLower)
 {
   do

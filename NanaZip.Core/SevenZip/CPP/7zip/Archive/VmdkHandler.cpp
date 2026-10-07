@@ -148,7 +148,7 @@ static inline bool IsSpaceChar(char c)
   return (c == ' ' || c == '\t');
 }
 
-static const char *SkipSpaces(const char *s)
+static const char *SkipSpaces(const char *s Z7_lifetimebound)
 {
   for (;; s++)
   {
@@ -160,7 +160,7 @@ static const char *SkipSpaces(const char *s)
 
 #define SKIP_SPACES(s) s = SkipSpaces(s);
 
-static const char *GetNextWord(const char *s, AString &dest)
+static const char *GetNextWord(const char *s Z7_lifetimebound, AString &dest)
 {
   dest.Empty();
   SKIP_SPACES(s)
@@ -176,7 +176,7 @@ static const char *GetNextWord(const char *s, AString &dest)
   }
 }
 
-static const char *GetNextNumber(const char *s, UInt64 &val)
+static const char *GetNextNumber(const char *s Z7_lifetimebound, UInt64 &val)
 {
   SKIP_SPACES(s)
   if (*s == 0)

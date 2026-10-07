@@ -1413,7 +1413,7 @@ UInt64 CHandler::GetPackSize(unsigned refIndex) const
   }
 }
 
-static char *PrintDictSize(char *s, UInt64 w)
+static char *PrintDictSize(char *s Z7_lifetimebound, UInt64 w)
 {
   char                               c = 'K'; w >>= 10;
   if ((w & ((1 << 10) - 1)) == 0)  { c = 'M'; w >>= 10;

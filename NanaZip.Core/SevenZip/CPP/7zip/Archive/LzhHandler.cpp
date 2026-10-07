@@ -229,13 +229,13 @@ struct CItem
   }
 };
 
-static const Byte *ReadUInt16(const Byte *p, UInt16 &v)
+static const Byte *ReadUInt16(const Byte *p Z7_lifetimebound, UInt16 &v)
 {
   v = Get16(p);
   return p + 2;
 }
 
-static const Byte *ReadString(const Byte *p, size_t size, AString &s)
+static const Byte *ReadString(const Byte *p Z7_lifetimebound, size_t size, AString &s)
 {
   s.Empty();
   for (size_t i = 0; i < size; i++)

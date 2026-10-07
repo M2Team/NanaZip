@@ -86,7 +86,7 @@ Z7_class_CHandler_final:
   CXzStatInfo _stat;    // it's stat from backward parsing
   CXzStatInfo _stat2;   // it's data from forward parsing, if the decoder was called
 
-  const CXzStatInfo *GetStat() const
+  const CXzStatInfo *GetStat() const Z7_lifetimebound
   {
     if (_stat_defined) return &_stat;
     if (_stat2_defined) return &_stat2;

@@ -5115,42 +5115,45 @@ static int CompareItems(void *const *p1, void *const *p2, void *param)
 
 HRESULT CInArchive::SortItems()
 {
+  Items.Sort(CompareItems, (void *)this);
   {
-    Items.Sort(CompareItems, (void *)this);
-    unsigned i;
-
-    for (i = 0; i + 1 < Items.Size(); i++)
+    unsigned prev = 0;
+    for (unsigned i = 1; i < Items.Size(); i++)
     {
-      const CItem &i1 = Items[i];
-      if (i1.IsEmptyFile)
-        continue;
-      const CItem &i2 = Items[i + 1];
-      if (i1.Pos != i2.Pos)
-        continue;
-
-      if (IsUnicode)
       {
-        if (i1.NameU != i2.NameU) continue;
-        if (i1.Prefix != i2.Prefix)
+        const CItem &i1 = Items[prev];
+        if (!i1.IsEmptyFile)
         {
-          if (i1.Prefix < 0 || i2.Prefix < 0) continue;
-          if (UPrefixes[i1.Prefix] != UPrefixes[i2.Prefix]) continue;
+          const CItem &i2 = Items[i];
+          if (i1.Pos == i2.Pos)
+          {
+            if (IsUnicode)
+            {
+              if (i1.NameU == i2.NameU &&
+                  (i1.Prefix == i2.Prefix ||
+                    (i1.Prefix >= 0 && i2.Prefix >= 0
+                      && UPrefixes[i1.Prefix] == UPrefixes[i2.Prefix])))
+                continue;
+            }
+            else
+            {
+              if (i1.NameA == i2.NameA &&
+                  (i1.Prefix == i2.Prefix ||
+                    (i1.Prefix >= 0 && i2.Prefix >= 0
+                      && APrefixes[i1.Prefix] == APrefixes[i2.Prefix])))
+                continue;
+            }
+          }
         }
       }
-      else
-      {
-        if (i1.NameA != i2.NameA) continue;
-        if (i1.Prefix != i2.Prefix)
-        {
-          if (i1.Prefix < 0 || i2.Prefix < 0) continue;
-          if (APrefixes[i1.Prefix] != APrefixes[i2.Prefix]) continue;
-        }
-      }
-      Items.Delete(i + 1);
-      i--;
+      if (++prev != i)
+        Items.MoveOneItem(prev, i); // (Items[i] == NULL) after MoveOneItem() call
     }
-    
-    for (i = 0; i < Items.Size(); i++)
+    if (++prev < Items.Size())
+      Items.DeleteFrom(prev);
+  }
+  {
+    FOR_VECTOR (i, Items)
     {
       CItem &item = Items[i];
       if (item.IsEmptyFile)
@@ -5169,10 +5172,11 @@ HRESULT CInArchive::SortItems()
         }
       }
     }
-    
+  }
+  {
     if (!IsSolid)
     {
-      for (i = 0; i < Items.Size(); i++)
+      FOR_VECTOR (i, Items)
       {
         CItem &item = Items[i];
         if (item.IsEmptyFile)

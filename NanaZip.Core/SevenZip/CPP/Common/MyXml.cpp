@@ -208,7 +208,7 @@ const char * CXmlItem::ParseItem(const char *s, int numAllowedLevels)
   }
 }
 
-static const char * SkipHeader(const char *s, const char *startString, const char *endString)
+static const char * SkipHeader(const char *s Z7_lifetimebound, const char *startString, const char *endString)
 {
   SKIP_SPACES(s)
   if (IsString1PrefixedByString2(s, startString))

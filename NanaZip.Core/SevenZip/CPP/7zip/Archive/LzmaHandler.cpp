@@ -228,7 +228,7 @@ Z7_COM7F_IMF(CHandler::GetNumberOfItems(UInt32 *numItems))
 }
 
 
-static char * DictSizeToString(UInt32 val, char *s)
+static char * DictSizeToString(UInt32 val, char *s Z7_lifetimebound)
 {
   for (unsigned i = 0; i < 32; i++)
     if (((UInt32)1 << i) == val)
@@ -242,7 +242,7 @@ static char * DictSizeToString(UInt32 val, char *s)
   return s;
 }
 
-static char *AddProp32(char *s, const char *name, UInt32 v)
+static char *AddProp32(char *s Z7_lifetimebound, const char *name, UInt32 v)
 {
   *s++ = ':';
   s = MyStpCpy(s, name);

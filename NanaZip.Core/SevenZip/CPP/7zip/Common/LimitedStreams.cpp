@@ -80,7 +80,7 @@ HRESULT CreateLimitedInStream(IInStream *inStream, UInt64 pos, UInt64 size, ISeq
   CMyComPtr<ISequentialInStream> streamTemp = streamSpec;
   streamSpec->SetStream(inStream);
   RINOK(streamSpec->InitAndSeek(pos, size))
-  streamSpec->SeekToStart();
+  // streamSpec->SeekToStart();
   *resStream = streamTemp.Detach();
   return S_OK;
 }

@@ -153,7 +153,7 @@ public:
   HRESULT SetTotal(UInt64 numBytes) Z7_override;
   HRESULT SetCompleted(UInt64 numFiles, UInt64 numBytes) Z7_override;
   HRESULT SetCompleted() Z7_override;
-  CProgressImp(IArchiveOpenCallback *callback): _callback(callback), _numFiles(0), _numBytes(0) {}
+  CProgressImp(IArchiveOpenCallback *callback Z7_lifetimebound): _callback(callback), _numFiles(0), _numBytes(0) {}
 };
 
 HRESULT CProgressImp::SetTotal(UInt64 numBytes)

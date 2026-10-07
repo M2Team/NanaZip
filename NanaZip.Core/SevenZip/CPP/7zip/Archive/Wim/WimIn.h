@@ -27,13 +27,16 @@ hexVer : headerSize : ver
 10900 : 60 : 1.09 : Longhorn.4029-4039 (2003)
 10A00 : 60 : 1.10 : Longhorn.4083 (2004) image starting from 1
 10B00 : ?? : 1.11 : ??
-10C00 : 74 : 1.12 : Longhorn.4093 - VistaBeta1.5112 (2005) - (Multi-Part, SHA1)
+10C00 : 74 : 1.12 : Longhorn.4093 - VistaBeta1.5112 (2005) - (Multi-Part, SHA1), and additional dummy root directory
 10D00 : D0 : 1.13 : VistaBeta2 - Win10, (NumImages, BootIndex, IntegrityResource)
 00E00 : D0 : 0.14 : LZMS, solid, esd, dism
 */
 
 const unsigned kDirRecordSizeOld = 62;
 const unsigned kDirRecordSize = 102;
+
+const unsigned k_DirRecord_FieldOffset_of_Hash = 0x40;
+const unsigned k_AltRecord_FieldOffset_of_Hash = 0x10;
 
 /*
   There is error in WIM specification about dwReparseTag, dwReparseReserved and liHardLink fields.
@@ -127,7 +130,6 @@ const unsigned kDirRecordSize = 102;
 
   If item is file (not Directory) and there are alternative streams,
   there is additional ALT_STREAM item of main "unnamed" stream in Streams array.
-
 */
 
 
@@ -138,9 +140,11 @@ namespace NResourceFlags
   const Byte kCompressed = 1 << 2;
   // const Byte kSpanned = 1 << 3;
   const Byte kSolid = 1 << 4;
+  const Byte kUndefinedFlags = 7 << 5;
 }
 
-const UInt64 k_SolidBig_Resource_Marker = (UInt64)1 << 32;
+const UInt64 k_SolidSmall_ResourceSize_Marker = 0;
+const UInt64 k_SolidBig_ResourceSize_Marker = (UInt64)1 << 32;
 
 struct CResource
 {
@@ -165,7 +169,7 @@ struct CResource
   void Parse(const Byte *p);
   void UpdatePhySize(UInt64 &phySize) const
   {
-    UInt64 v = GetEndLimit();
+    const UInt64 v = GetEndLimit();
     if (phySize < v)
         phySize = v;
   }
@@ -177,11 +181,12 @@ struct CResource
 
   void WriteTo(Byte *p) const;
 
+  bool AreUnknownFlags() const { return (Flags & NResourceFlags::kUndefinedFlags) != 0; }
   bool IsMetadata() const { return (Flags & NResourceFlags::kMetadata) != 0; }
   bool IsCompressed() const { return (Flags & NResourceFlags::kCompressed) != 0; }
   bool IsSolid() const { return (Flags & NResourceFlags::kSolid) != 0; }
-  bool IsSolidBig() const { return IsSolid() && UnpackSize == k_SolidBig_Resource_Marker; }
-  bool IsSolidSmall() const { return IsSolid() && UnpackSize == 0; }
+  bool IsSolidBig() const { return IsSolid() && UnpackSize == k_SolidBig_ResourceSize_Marker; }
+  bool IsSolidSmall() const { return IsSolid() && UnpackSize == k_SolidSmall_ResourceSize_Marker; }
 
   bool IsEmpty() const { return (UnpackSize == 0); }
 };
@@ -191,23 +196,16 @@ struct CSolid
 {
   unsigned StreamIndex;
   // unsigned NumRefs;
-  int FirstSmallStream;
-  
-  UInt64 SolidOffset;
-  
+  int FirstSmallStream; /* index in _db.DataStreams[] of first SolidSmall stream that refers to this solid block.
+                           == -1, if there is no SolidSmall stream that starts in this solid block. */
+  UInt64 SolidOffset;   // sum of Solid[].UnpackSize values inside current solid group (after new solid group restart).
   UInt64 UnpackSize;
   int Method;
   unsigned ChunkSizeBits;
-
-  UInt64 HeadersSize;
-  // size_t NumChunks;
-  CObjArray<UInt64> Chunks; // [NumChunks + 1] (start offset)
-
-  UInt64 GetChunkPackSize(size_t chunkIndex) const { return Chunks[chunkIndex + 1] - Chunks[chunkIndex]; }
+  CObjArray<UInt64> Chunks; // [NumChunks + 1] (start offsets) from Resource start.
 
   CSolid():
       FirstSmallStream(-1),
-      // NumRefs(0),
       Method(-1)
       {}
 };
@@ -234,6 +232,7 @@ namespace NHeaderFlags
 
 namespace NMethod
 {
+  // const UInt32 kUncompressed = 0;
   const UInt32 kXPRESS = 1;
   const UInt32 kLZX    = 2;
   const UInt32 kLZMS   = 3;
@@ -266,6 +265,8 @@ struct CHeader
   bool _isOldVersion; // 1.10-
   bool _isNewVersion; // 1.13+ or 0.14
 
+  unsigned Method;
+
   CResource OffsetResource;
   CResource XmlResource;
   CResource MetadataResource;
@@ -273,53 +274,42 @@ struct CHeader
 
   void SetDefaultFields(bool useLZX);
 
-  void WriteTo(Byte *p) const;
+  HRESULT WriteToStream(IOutStream *stream) const;
   HRESULT Parse(const Byte *p, UInt64 &phySize);
   
   bool IsCompressed() const { return (Flags & NHeaderFlags::kCompression) != 0; }
-  
-  bool IsSupported() const
-  {
-    return (!IsCompressed()
-        || (Flags & NHeaderFlags::kLZX) != 0
-        || (Flags & NHeaderFlags::kXPRESS) != 0
-        || (Flags & NHeaderFlags::kLZMS) != 0
-        || (Flags & NHeaderFlags::kXPRESS2) != 0);
-  }
-  
-  unsigned GetMethod() const
-  {
-    if (!IsCompressed())
-      return 0;
-    UInt32 mask = (Flags & NHeaderFlags::kMethodMask);
-    if (mask == 0) return 0;
-    if (mask == NHeaderFlags::kXPRESS) return NMethod::kXPRESS;
-    if (mask == NHeaderFlags::kLZX) return NMethod::kLZX;
-    if (mask == NHeaderFlags::kLZMS) return NMethod::kLZMS;
-    if (mask == NHeaderFlags::kXPRESS2) return NMethod::kXPRESS;
-    return mask;
-  }
-
   bool IsOldVersion() const { return _isOldVersion; }
   bool IsNewVersion() const { return _isNewVersion; }
   bool IsSolidVersion() const { return (Version == k_Version_Solid); }
 
-  bool AreFromOnArchive(const CHeader &h)
+  bool AreFromSameMvArchive(const CHeader &h) const
   {
-    return (memcmp(Guid, h.Guid, sizeof(Guid)) == 0) && (h.NumParts == NumParts);
+    return h.NumParts == NumParts
+        && h.Version == Version
+        && memcmp(Guid, h.Guid, sizeof(Guid)) == 0;
   }
 };
 
 
 const unsigned kHashSize = 20;
 
-inline bool IsEmptySha(const Byte *data)
+inline bool IsEmptySha1_32(const UInt32 *p)
 {
-  for (unsigned i = 0; i < kHashSize; i++)
-    if (data[i] != 0)
-      return false;
-  return true;
+  return (p[0] | p[1] | p[2] | p[3] | p[4]) == 0;
 }
+
+// We use it to get fast SHA1 HASH comparison for sorting.
+// The results differ from the results of memcmp().
+#define Z7_WIM_SHA1_UI32_COMPARE_LESS_EQUAL_GREATER(h1, h2, less_op, eq_op, greater_op) \
+  const UInt32 *_a = h1, *_b = h2; \
+  if (*_a == *_b          \
+      && *++_a == *++_b   \
+      && *++_a == *++_b   \
+      && *++_a == *++_b   \
+      && *++_a == *++_b) { eq_op } \
+  else if (*_a < *_b) { less_op } else { greater_op }
+// if (*_a < *_b) : for fast and small code
+// if (GetBe32a(_a) < GetBe32a(_b)) : for memcmp() order
 
 const unsigned kStreamInfoSize = 24 + 2 + 4 + kHashSize;
 
@@ -329,27 +319,31 @@ struct CStreamInfo
   UInt16 PartNumber;      // for NEW WIM format, we set it to 1 for OLD WIM format
   UInt32 RefCount;
   UInt32 Id;              // for OLD WIM format
-  Byte Hash[kHashSize];
+  UInt32 Hash[kHashSize / 4];
 
-  bool IsEmptyHash() const { return IsEmptySha(Hash); }
-  
+  bool IsEmptyHash() const { return IsEmptySha1_32(Hash); }
   void WriteTo(Byte *p) const;
 };
 
 
 struct CItem
 {
-  size_t Offset;
+  size_t Offset;  // is aligned for 4 or 8 bytes
   int IndexInSorted;
   int StreamIndex;
   int Parent;
   int ImageIndex; // -1 means that file is unreferenced in Images (deleted item?)
   bool IsDir;
+  bool IsDir_NonReparse; // (attrib & FILE_ATTRIBUTE_DIRECTORY) != 0 && (attrib & FILE_ATTRIBUTE_REPARSE_POINT) == 0)
   bool IsAltStream;
   unsigned DirLevel;
-  size_t SubDirOffset;
 
   bool HasMetadata() const { return ImageIndex >= 0; }
+
+  unsigned GetHashFieldOffset() const
+    { return IsAltStream ?
+        k_AltRecord_FieldOffset_of_Hash :
+        k_DirRecord_FieldOffset_of_Hash; }
 
   void Construct()
   {
@@ -357,22 +351,34 @@ struct CItem
     StreamIndex = -1;
     Parent = -1;
     IsDir = false;
+    IsDir_NonReparse = false;
     IsAltStream = false;
     DirLevel = 0;
-    SubDirOffset = 0;
   }
 };
 
 struct CImage
 {
   CByteBuffer Meta;
-  CRecordVector<UInt32> SecurOffsets;
-  unsigned StartItem;
+  CRecordVector<UInt32> SecurOffsets;  // in Meta
+  unsigned StartItem;  // index in CDatabase::Items[]
   unsigned NumItems;
   unsigned NumEmptyRootItems;
-  int VirtualRootIndex; // index in CDatabase::VirtualRoots[]
+    /* NumEmptyRootItems == 1 : root dir contains single subdir with empty name.
+          We don't include item from root dir to path.
+          for wim 1.12+ usually.
+       NumEmptyRootItems == 0 : in all another cases.
+          We include item from root dir to path, and we show name from meta.
+          for wim 1.10- usually or some unusual items in root dir.
+    */
+  int VirtualRootIndex; /* index in CDatabase::VirtualRoots[]
+       (VirtualRootIndex >= 0) if (NumEmptyRootItems == 0) and
+        (showImageNumber == true was set in GenerateSortedItems()) : 1.10- archives  */
   UString RootName;
   CByteBuffer RootNameBuf;
+
+  bool NeedExcludeItemFromPath_parentIndex(int parentIndex_of_Item) const
+    { return parentIndex_of_Item < 0 && NumEmptyRootItems != 0; }
 
   CImage(): VirtualRootIndex(-1) {}
 };
@@ -433,6 +439,7 @@ struct CWimXml
     return sum;
   }
 
+  // UInt64 GetMemUsage() const { return Data.Size() * 4; }
   void ToUnicode(UString &s);
   bool Parse();
 
@@ -451,12 +458,12 @@ class CDatabase
 {
   Byte *DirData;
   size_t DirSize;
-  size_t DirProcessed;
+  // size_t DirProcessed;
   size_t DirStartOffset;
   IArchiveOpenCallback *OpenCallback;
 
   HRESULT ParseDirItem(size_t pos, int parent, unsigned dirLevel);
-  HRESULT ParseImageDirs(CByteBuffer &buf, int parent);
+  HRESULT ParseImageDirs(CByteBuffer &buf);
 
 public:
   CRecordVector<CStreamInfo> DataStreams;
@@ -468,28 +475,59 @@ public:
   CObjectVector<CByteBuffer> ReparseItems;
   CIntVector ItemToReparse; // from index_in_Items to index_in_ReparseItems
                             // -1 means no reparse;
-  
   CObjectVector<CImage> Images;
   
-  bool IsOldVersion9;
+  unsigned GetStartImageIndex() const { return IsOldVersion9 ? 0 : 1; }
+private:
+  bool IsOldVersion9;  // used only for metadata parsing and for GetStartImageIndex()
+  unsigned GetDirAlignMask() const { return IsOldVersion9 ? 3 : 7; }
+  unsigned GetDirAlign_numShifts() const { return IsOldVersion9 ? 2 : 3; }
+public:
   bool IsOldVersion;
   bool ThereAreDeletedStreams;
   bool ThereAreAltStreams;
   bool RefCountError;
   bool HeadersError;
 
-  unsigned GetStartImageIndex() const { return IsOldVersion9 ? 0 : 1; }
-  unsigned GetDirAlignMask() const { return IsOldVersion9 ? 3 : 7; }
-  
-  // User Items can contain all images or just one image from all.
   CUIntVector SortedItems;
-  int IndexOfUserImage;    // -1 : if more than one images was filled to Sorted Items
-  
+  int IndexOfUserImage;
+    /* IndexOfUserImage == -1 : all images were filled to SortedItems[]
+       IndexOfUserImage >= 0  : only image[IndexOfUserImage] was filled to SortedItems[] */
+ 
   unsigned NumExcludededItems;
-  int ExludedItem;          // -1 : if there are no exclude items
-  CUIntVector VirtualRoots; // we use them for old 1.10 WIM archives
+    /* if (NumExcludededItems != 0), then starting (NumExcludededItems)
+         items of image[IndexOfUserImage] were not included to SortedItems[] */
+  
+  int ExcludedItem;
+    /* ExcludedItem == -1 : there are no exclude items
+       ExcludedItem >= 0  : index in Items[] of first excluded item */
+                
+  CUIntVector VirtualRoots; /* for old wim_ver <= 1.10 archives,
+      because there was no dummy root_dir in these old archives.
+      So we need virtaul root item, if we show image number in path: 1, 2, 3. */
 
   UInt64 PhySize;
+  UInt64 MemUsage;
+  UInt64 MemUsage_Limit;
+
+  CByteBuffer _useMap;
+
+  // return: offset of name (aligned for 2-bytes)
+  size_t GetNameOffset(const CItem &item) const
+  {
+    return item.Offset + (item.IsAltStream ?
+        IsOldVersion ? 0x12 : 0x26:
+        IsOldVersion ? kDirRecordSizeOld : kDirRecordSize);
+  }
+
+  HRESULT UpdateMemUsage(const UInt64 size)
+  {
+    if (MemUsage_Limit - MemUsage < size)
+      return E_OUTOFMEMORY;
+    MemUsage += size;
+    return S_OK;
+  }
+
   bool ThereIsError() const { return RefCountError || HeadersError; }
 
   unsigned GetNumUserItemsInImage(unsigned imageIndex) const
@@ -507,9 +545,10 @@ public:
   {
     if (!r.IsSolid())
       return r.UnpackSize;
-    if (r.IsSolidSmall())
+    if (r.UnpackSize == k_SolidSmall_ResourceSize_Marker) // r.IsSolidSmall()
       return r.PackSize;
-    if (r.IsSolidBig() && r.SolidIndex >= 0)
+    if (r.UnpackSize == k_SolidBig_ResourceSize_Marker // r.IsSolidBig()
+        && r.SolidIndex >= 0)
       return Solids[(unsigned)r.SolidIndex].UnpackSize;
     return 0;
   }
@@ -565,11 +604,14 @@ public:
     ThereAreAltStreams = false;
     RefCountError = false;
     HeadersError = false;
+
+    MemUsage = 0;
   }
 
   CDatabase():
     RefCountError(false),
-    HeadersError(false)
+    HeadersError(false),
+    MemUsage_Limit((UInt64)(Int64)-1)
     {}
 
   void GetShortName(unsigned index, NWindows::NCOM::CPropVariant &res) const;
@@ -630,32 +672,31 @@ class CUnpacker
   CMidBuf packBuf;
   CMidBuf unpackBuf;
 
-  // solid resource
-  int _solidIndex;
+  // solid resource tags:
+  int _solidIndex; // if (_solidIndex >= 0) then unpackBuf contains unpacked data for Chunks[_unpackedChunkIndex] chunk.
   size_t _unpackedChunkIndex;
 
-  HRESULT UnpackChunk(
-      ISequentialInStream *inStream,
-      unsigned method, unsigned chunkSizeBits,
+  HRESULT UnpackChunk(unsigned method, unsigned chunkSizeBits,
       size_t inSize, size_t outSize,
-      ISequentialOutStream *outStream);
+      ISequentialInStream *inStream, ISequentialOutStream *outStream);
 
-  HRESULT Unpack2(
-      IInStream *inStream,
-      const CResource &res,
-      const CHeader &header,
-      const CDatabase *db,
-      ISequentialOutStream *outStream,
-      ICompressProgressInfo *progress);
+  HRESULT Unpack2(const CResource &res,
+      const CHeader &header, const CDatabase *db,
+      IInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress);
 
 public:
   UInt64 TotalPacked;
+
+  UInt64 MemUsage;
+  UInt64 MemUsage_Limit;
 
   CUnpacker():
       lzmsDecoder(NULL),
       _solidIndex(-1),
       _unpackedChunkIndex(0),
-      TotalPacked(0)
+      TotalPacked(0),
+      MemUsage(0),
+      MemUsage_Limit((UInt64)(Int64)-1)
       {}
 
   HRESULT Unpack(
@@ -665,12 +706,12 @@ public:
       const CDatabase *db,
       ISequentialOutStream *outStream,
       ICompressProgressInfo *progress,
-      Byte *digest);
+      UInt32 *digest);
 
   HRESULT UnpackData(IInStream *inStream,
       const CResource &resource, const CHeader &header,
       const CDatabase *db,
-      CByteBuffer &buf, Byte *digest);
+      CByteBuffer &buf, UInt32 *digest);
 };
 
 }}

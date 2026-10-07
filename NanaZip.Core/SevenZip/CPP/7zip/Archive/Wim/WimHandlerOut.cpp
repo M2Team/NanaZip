@@ -29,7 +29,7 @@ using namespace NWindows;
 namespace NArchive {
 namespace NWim {
 
-static const unsigned k_NumSubVectors_Bits = 12; // must be <= 16
+static const unsigned k_NumSubVectors = 1 << 12; // must be power of 2
 
 struct CSortedIndex
 {
@@ -37,41 +37,28 @@ struct CSortedIndex
 
   CSortedIndex()
   {
-    const unsigned k_NumSubVectors = 1 << k_NumSubVectors_Bits;
     Vectors.ClearAndReserve(k_NumSubVectors);
     for (unsigned i = 0; i < k_NumSubVectors; i++)
       Vectors.AddNew();
   }
 };
 
-static int AddUniqHash(const CStreamInfo *streams, CSortedIndex &sorted2, const Byte *h, int streamIndexForInsert)
+static int AddUniqHash(const CStreamInfo *streams, CSortedIndex &sorted2,
+    const UInt32 * const h, const int streamIndexForInsert)
 {
-  const unsigned hash = (((unsigned)h[0] << 8) | (unsigned)h[1]) >> (16 - k_NumSubVectors_Bits);
-  CUIntVector &sorted = sorted2.Vectors[hash];
+  CUIntVector &sorted = sorted2.Vectors[GetUi32a(h) & (k_NumSubVectors - 1)];
   unsigned left = 0, right = sorted.Size();
   while (left != right)
   {
     const unsigned mid = (unsigned)(((size_t)left + (size_t)right) / 2);
     const unsigned index = sorted[mid];
-    const Byte *hash2 = streams[index].Hash;
-    
-    unsigned i;
-    for (i = 0; i < kHashSize; i++)
-      if (h[i] != hash2[i])
-        break;
-    
-    if (i == kHashSize)
-      return (int)index;
-  
-    if (h[i] < hash2[i])
-      right = mid;
-    else
-      left = mid + 1;
+    Z7_WIM_SHA1_UI32_COMPARE_LESS_EQUAL_GREATER(h, streams[index].Hash,
+        right = mid; ,
+        return (int)index; ,
+        left = mid + 1; )
   }
-
   if (streamIndexForInsert != -1)
     sorted.Insert(left, (unsigned)streamIndexForInsert);
- 
   return -1;
 }
 
@@ -310,7 +297,7 @@ static HRESULT GetRootTime(
   return S_OK;
 }
 
-#define Set16(p, d) SetUi16(p, d)
+#define Set16(p, d) SetUi16a(p, d) // all calls are aligned
 #define Set32(p, d) SetUi32(p, d)
 #define Set64(p, d) SetUi64(p, d)
 
@@ -322,9 +309,10 @@ void CResource::WriteTo(Byte *p) const
   Set64(p + 16, UnpackSize)
 }
 
-
-void CHeader::WriteTo(Byte *p) const
+HRESULT CHeader::WriteToStream(IOutStream *stream) const
 {
+  UInt64 buf[(kHeaderSizeMax + 7) / 8];
+  Byte *p = (Byte *)(void *)buf;
   memcpy(p, kSignature, kSignatureSize);
   Set32(p + 8, kHeaderSizeMax)
   Set32(p + 0xC, Version)
@@ -340,9 +328,11 @@ void CHeader::WriteTo(Byte *p) const
   IntegrityResource.WriteTo(p + 0x7C);
   Set32(p + 0x78, BootIndex)
   memset(p + 0x94, 0, 60);
+  return WriteStream(stream, buf, kHeaderSizeMax);
 }
 
 
+// (p) is aligned for 2-bytes
 void CStreamInfo::WriteTo(Byte *p) const
 {
   Resource.WriteTo(p);
@@ -358,23 +348,36 @@ static void SetFileTimeToMem(Byte *p, const FILETIME &ft)
   Set32(p + 4, ft.dwHighDateTime)
 }
 
+#if 0 // 1 to use old_7zip scheme
+// imagex and old 7-zip : write additional 2 bytes of padding
+#define GET_SHORT_NAME_BUF_SIZE(len)  ((len) == 0 ? 2 : (len) + 4)
+#define GET_ALT_NAME_BUF_SIZE(len)    ((len) == 0 ? 0 : (len) + 4)
+#else
+// dism : no additional 2 bytes padding and zero tail
+#define GET_SHORT_NAME_BUF_SIZE(len)  ((len) == 0 ? 0 : (len) + 2)
+#define GET_ALT_NAME_BUF_SIZE(len)    ((len) + 2)
+#endif
+
+#define GET_ALIGNED_SIZE_uint(origSize)     (((origSize) + 7) & ~7u)
+#define GET_ALT_STREAM_RECORD_SIZE(nameLen) GET_ALIGNED_SIZE_uint(0x26 + (nameLen))
+
 static size_t WriteItem_Dummy(const CMetaItem &item)
 {
   if (item.Skip)
     return 0;
-  unsigned fileNameLen = item.Name.Len() * 2;
-  // we write fileNameLen + 2 + 2 to be same as original WIM.
-  unsigned fileNameLen2 = (fileNameLen == 0 ? 0 : fileNameLen + 2);
-
-  const unsigned shortNameLen = item.ShortName.Len() * 2;
-  const unsigned shortNameLen2 = (shortNameLen == 0 ? 2 : shortNameLen + 4);
-
-  size_t totalLen = ((kDirRecordSize + fileNameLen2 + shortNameLen2 + 6) & ~(unsigned)7);
+  size_t totalLen;
+  {
+    const unsigned fileNameLen = item.Name.Len() * 2;
+    const unsigned fileNameLen2 = (fileNameLen == 0 ? 0 : fileNameLen + 2);
+    const unsigned shortNameLen = item.ShortName.Len() * 2;
+    const unsigned shortNameLen2 = GET_SHORT_NAME_BUF_SIZE(shortNameLen);
+    totalLen = GET_ALIGNED_SIZE_uint(fileNameLen2 + shortNameLen2 + kDirRecordSize);
+  }
   if (item.GetNumAltStreams() != 0)
   {
     if (!item.IsDir)
     {
-      const UInt32 curLen = (((0x26 + 0) + 6) & ~(unsigned)7);
+      const unsigned curLen = GET_ALT_STREAM_RECORD_SIZE(0);
       totalLen += curLen;
     }
     FOR_VECTOR (i, item.AltStreams)
@@ -382,29 +385,45 @@ static size_t WriteItem_Dummy(const CMetaItem &item)
       const CAltStream &ss = item.AltStreams[i];
       if (ss.Skip)
         continue;
-      fileNameLen = ss.Name.Len() * 2;
-      fileNameLen2 = (fileNameLen == 0 ? 0 : fileNameLen + 2 + 2);
-      const UInt32 curLen = (((0x26 + fileNameLen2) + 6) & ~(unsigned)7);
+      const unsigned fileNameLen = ss.Name.Len() * 2;
+      const unsigned fileNameLen2 = GET_ALT_NAME_BUF_SIZE(fileNameLen);
+      const unsigned curLen = GET_ALT_STREAM_RECORD_SIZE(fileNameLen2);
       totalLen += curLen;
     }
   }
   return totalLen;
 }
 
-
+// (p) is aligned for 8-bytes
 static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte *p)
 {
   if (item.Skip)
     return 0;
-  unsigned fileNameLen = item.Name.Len() * 2;
-  unsigned fileNameLen2 = (fileNameLen == 0 ? 0 : fileNameLen + 2);
-  unsigned shortNameLen = item.ShortName.Len() * 2;
-  unsigned shortNameLen2 = (shortNameLen == 0 ? 2 : shortNameLen + 4);
-
-  size_t totalLen = ((kDirRecordSize + fileNameLen2 + shortNameLen2 + 6) & ~(unsigned)7);
-  
-  memset(p, 0, totalLen);
-  Set64(p, totalLen)
+  size_t totalLen;
+  {
+    unsigned fileNameLen = item.Name.Len() * 2;
+    unsigned fileNameLen2 = (fileNameLen == 0 ? 0 : fileNameLen + 2);
+    unsigned shortNameLen = item.ShortName.Len() * 2;
+    const unsigned shortNameLen2 = GET_SHORT_NAME_BUF_SIZE(shortNameLen);
+    totalLen = GET_ALIGNED_SIZE_uint(fileNameLen2 + shortNameLen2 + kDirRecordSize);
+   
+    memset(p, 0, totalLen);
+    Set64(p, totalLen)
+    Set16(p + 0x62, (UInt16)shortNameLen)
+    Set16(p + 0x64, (UInt16)fileNameLen)
+    {
+      const Byte *dest = p + kDirRecordSize;
+      unsigned i;
+      const wchar_t *src = item.Name;
+      fileNameLen2 /= 2;
+      for (i = 0; i < fileNameLen2; src++, dest += 2, i++)
+        Set16(dest, (UInt16)*src)
+      src = item.ShortName;
+      shortNameLen /= 2;
+      for (i = 0; i < shortNameLen; src++, dest += 2, i++)
+        Set16(dest, (UInt16)*src)
+    }
+  }
   Set64(p + 8, item.Attrib)
   Set32(p + 0xC, (UInt32)(Int32)item.SecurityId)
   SetFileTimeToMem(p + 0x28, item.CTime);
@@ -427,14 +446,6 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
     Set64(p + 0x58, item.FileID)
   }
   
-  Set16(p + 0x62, (UInt16)shortNameLen)
-  Set16(p + 0x64, (UInt16)fileNameLen)
-  unsigned i;
-  for (i = 0; i * 2 < fileNameLen; i++)
-    Set16(p + kDirRecordSize + i * 2, (UInt16)item.Name[i])
-  for (i = 0; i * 2 < shortNameLen; i++)
-    Set16(p + kDirRecordSize + fileNameLen2 + i * 2, (UInt16)item.ShortName[i])
-  
   if (item.GetNumAltStreams() == 0)
   {
     if (item.HashIndex >= 0)
@@ -447,7 +458,7 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
     
     if (!item.IsDir)
     {
-      const UInt32 curLen = (((0x26 + 0) + 6) & ~(unsigned)7);
+      const unsigned curLen = GET_ALT_STREAM_RECORD_SIZE(0);
       memset(p, 0, curLen);
       Set64(p, curLen)
       if (item.HashIndex >= 0)
@@ -462,17 +473,19 @@ static size_t WriteItem(const CStreamInfo *streams, const CMetaItem &item, Byte 
       if (ss.Skip)
         continue;
       
-      fileNameLen = ss.Name.Len() * 2;
-      fileNameLen2 = (fileNameLen == 0 ? 0 : fileNameLen + 2 + 2);
-      UInt32 curLen = (((0x26 + fileNameLen2) + 6) & ~(unsigned)7);
+      unsigned fileNameLen = ss.Name.Len() * 2;
+      const unsigned fileNameLen2 = GET_ALT_NAME_BUF_SIZE(fileNameLen);
+      const unsigned curLen = GET_ALT_STREAM_RECORD_SIZE(fileNameLen2);
       memset(p, 0, curLen);
-      
       Set64(p, curLen)
       if (ss.HashIndex >= 0)
         memcpy(p + 0x10, streams[ss.HashIndex].Hash, kHashSize);
       Set16(p + 0x24, (UInt16)fileNameLen)
-      for (i = 0; i * 2 < fileNameLen; i++)
-        Set16(p + 0x26 + i * 2, (UInt16)ss.Name[i])
+      const Byte *dest = p + 0x26;
+      const wchar_t *src = ss.Name;
+      fileNameLen /= 2;
+      for (unsigned i = 0; i < fileNameLen; src++, dest += 2, i++)
+        Set16(dest, (UInt16)*src)
       totalLen += curLen;
       p += curLen;
     }
@@ -492,11 +505,22 @@ struct CDb
                                 to disk (the order of tree items). */
 
   size_t WriteTree_Dummy(const CDir &tree) const;
-  void WriteTree(const CDir &tree, Byte *dest, size_t &pos)  const;
+  size_t WriteTree(const CDir &tree, Byte *dest, size_t pos)  const;
   void WriteOrderList(const CDir &tree);
 };
 
-
+/*
+  imagex, dism and 7zip do same actions for any empty directory:
+      if empty directory has no reparse point:
+         it creates new empty list : just 8 zero bytes (list terminator).
+      if empty directory has reparse point, it doesn't create empty list.
+  if there are no user items in image, image still contains 2 directory lists:
+      list_0: root_list with single item: root_item (with empty name)
+      list_1: empty_list_1 (just 8 zero bytes)
+  and there is difference in different programs: for subdirOffset value in root_item in root_list :
+    imagex and dism : root_item.subdirOffset == 0
+               7zip : root_item.subdirOffset == offset_of_empty_list_1
+*/
 size_t CDb::WriteTree_Dummy(const CDir &tree) const
 {
   unsigned i;
@@ -506,14 +530,18 @@ size_t CDb::WriteTree_Dummy(const CDir &tree) const
   for (i = 0; i < tree.Dirs.Size(); i++)
   {
     const CDir &subDir = tree.Dirs[i];
+    const CMetaItem &metaItem = MetaItems[subDir.MetaIndex];
     pos += WriteItem_Dummy(MetaItems[subDir.MetaIndex]);
-    pos += WriteTree_Dummy(subDir);
+    if ((metaItem.Reparse.Size() == 0)
+        || !subDir.Files.IsEmpty()
+        || !subDir.Dirs.IsEmpty())
+      pos += WriteTree_Dummy(subDir);
   }
   return pos + 8;
 }
 
 
-void CDb::WriteTree(const CDir &tree, Byte *dest, size_t &pos) const
+size_t CDb::WriteTree(const CDir &tree, Byte *dest, size_t pos) const
 {
   unsigned i;
   for (i = 0; i < tree.Files.Size(); i++)
@@ -524,24 +552,23 @@ void CDb::WriteTree(const CDir &tree, Byte *dest, size_t &pos) const
     pos += WriteItem_Dummy(MetaItems[tree.Dirs[i].MetaIndex]);
 
   Set64(dest + pos, 0)
-
   pos += 8;
 
   for (i = 0; i < tree.Dirs.Size(); i++)
   {
     const CDir &subDir = tree.Dirs[i];
     const CMetaItem &metaItem = MetaItems[subDir.MetaIndex];
-    bool needCreateTree = (metaItem.Reparse.Size() == 0)
+    const size_t len = WriteItem(Hashes, metaItem, dest + posStart);
+    if ((metaItem.Reparse.Size() == 0)
         || !subDir.Files.IsEmpty()
-        || !subDir.Dirs.IsEmpty();
-    size_t len = WriteItem(Hashes, metaItem, dest + posStart);
-    posStart += len;
-    if (needCreateTree)
+        || !subDir.Dirs.IsEmpty())
     {
-      Set64(dest + posStart - len + 0x10, pos) // subdirOffset
-      WriteTree(subDir, dest, pos);
+      Set64(dest + posStart + 0x10, pos) // subdirOffset
+      pos = WriteTree(subDir, dest, pos);
     }
+    posStart += len;
   }
+  return pos;
 }
 
 
@@ -704,7 +731,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   if (!IsUpdateSupported())
     return E_NOTIMPL;
 
-  bool isUpdate = (_volumes.Size() != 0);
+  const bool isUpdate = (_volumes.Size() != 0);
   int defaultImageIndex = _defaultImageNumber - 1;
   bool showImageNumber;
 
@@ -887,8 +914,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       }
       rootItem.Attrib |= FILE_ATTRIBUTE_DIRECTORY;
     }
-    
-    AddTrees(trees, db.MetaItems, ri, defaultImageIndex);
+    // rootItem.Name = "ROOT_ITEM"; // for debug
+    // rootItem.ShortName = "SHORT_ROOT_ITEM"; // for debug
+    AddTrees(trees, db.MetaItems, ri, defaultImageIndex); // for debug
     db.MetaItems[trees[defaultImageIndex].Dirs[0].MetaIndex] = rootItem;
   }
 
@@ -1001,6 +1029,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         path = propPath.bstrVal;
       else if (propPath.vt != VT_EMPTY)
         return E_INVALIDARG;
+      // path = L""; // for debug only
     
     if (!path)
       return E_INVALIDARG;
@@ -1188,6 +1217,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
           mi.ShortName.SetFromBstr(prop.bstrVal);
         else if (prop.vt != VT_EMPTY)
           return E_INVALIDARG;
+        // mi.ShortName = "SHORT_NAME"; // for debug
       }
 
       while (imageIndex >= (int)secureBlocks.Size())
@@ -1381,11 +1411,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   if (setRestriction)
     RINOK(setRestriction->SetRestriction(0, kHeaderSizeMax))
 
-  {
-    Byte buf[kHeaderSizeMax];
-    header.WriteTo(buf);
-    RINOK(WriteStream(outStream, buf, kHeaderSizeMax))
-  }
+  RINOK(header.WriteToStream(outStream))
 
   UInt64 curPos = kHeaderSizeMax;
 
@@ -1621,8 +1647,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         sha1.Init();
         const size_t packSize = mi.Reparse.Size() - 8;
         sha1.Update((const Byte *)mi.Reparse + 8, packSize);
-        Byte hash[kHashSize];
-        sha1.Final(hash);
+        UInt32 hash[kHashSize / 4];
+        sha1.Final((Byte *)(void *)hash);
         
         int index = AddUniqHash(streams.ConstData(), sortedHashes, hash, (int)streams.Size());
 
@@ -1686,8 +1712,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
             needWritePass = false;
           else
           {
-            Byte hash[kHashSize];
-            inShaStream->Final(hash);
+            UInt32 hash[kHashSize / 4];
+            inShaStream->Final((Byte *)(void *)hash);
 
             index = AddUniqHash(streams.ConstData(), sortedHashes, hash, -1);
             if (index != -1)
@@ -1713,9 +1739,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         {
           if (needWritePass)
           {
-            Byte hash[kHashSize];
+            UInt32 hash[kHashSize / 4];
             const UInt64 packSize = offsetBlockSize + size;
-            inShaStream->Final(hash);
+            inShaStream->Final((Byte *)(void *)hash);
             
             index = AddUniqHash(streams.ConstData(), sortedHashes, hash, (int)streams.Size());
             
@@ -1764,10 +1790,13 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   
   // ---------- Write Images ----------
 
-  for (i = 0; i < numNewImages; i++)
+  for (i = 0;; i++)
   {
     lps->InSize = lps->OutSize = complexity;
     RINOK(lps->SetCur())
+    if (i >= numNewImages)
+      break;
+
     if (i < isChangedImage.Size() && !isChangedImage[i])
     {
       CStreamInfo s = _db.MetaStreams[i];
@@ -1796,24 +1825,26 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     }
 
     const CDir &tree = trees[i];
-    const UInt32 kSecuritySize = 8;
-    
-    size_t pos = kSecuritySize;
-
     const CUniqBlocks &secUniqBlocks = secureBlocks[i];
     const CObjectVector<CByteBuffer> &secBufs = secUniqBlocks.Bufs;
-    pos += (size_t)secUniqBlocks.GetTotalSizeInBytes();
-    pos += secBufs.Size() * 8;
+    
+    const unsigned kSecuritySize = 8;
+    size_t pos = kSecuritySize +
+        (size_t)secUniqBlocks.GetTotalSizeInBytes() +
+        (size_t)secBufs.Size() * 8;
     pos = (pos + 7) & ~(size_t)7;
+    if ((UInt32)pos != pos) // size of security data will be stored as 32-bit to header
+      return E_INVALIDARG;
     
     db.DefaultDirItem = ri;
     pos += db.WriteTree_Dummy(tree);
     
+    const size_t meta_size = pos;
     CByteArr meta(pos);
     
     Set32((Byte *)meta + 4, secBufs.Size()) // num security entries
     pos = kSecuritySize;
-    
+    /*
     if (secBufs.Size() == 0)
     {
       // we can write 0 here only if there is no security data, imageX does it,
@@ -1822,6 +1853,7 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       // Set32((Byte *)meta, 0);
     }
     else
+    */
     {
       unsigned k;
       for (k = 0; k < secBufs.Size(); k++, pos += 8)
@@ -1844,16 +1876,10 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     }
     
     db.Hashes = streams.ConstData();
-    db.WriteTree(tree, (Byte *)meta, pos);
-
+    pos = db.WriteTree(tree, (Byte *)meta, pos);
+    if (pos != meta_size)
+      return E_FAIL;
     {
-      NCrypto::NSha1::CContext sha;
-      sha.Init();
-      sha.Update((const Byte *)meta, pos);
-
-      Byte digest[kHashSize];
-      sha.Final(digest);
-      
       CStreamInfo s;
       s.Resource.PackSize = pos;
       s.Resource.Offset = curPos;
@@ -1861,7 +1887,10 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       s.Resource.Flags = NResourceFlags::kMetadata;
       s.PartNumber = 1;
       s.RefCount = 1;
-      memcpy(s.Hash, digest, kHashSize);
+      NCrypto::NSha1::CContext sha;
+      sha.Init();
+      sha.Update((const Byte *)meta, pos);
+      sha.Final((Byte *)(void *)s.Hash);
       streams.Add(s);
 
       if (_bootIndex != 0 && _bootIndex == (UInt32)i + 1)
@@ -1869,15 +1898,12 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         header.MetadataResource = s.Resource;
         header.BootIndex = _bootIndex;
       }
-
-      RINOK(WriteStream(outStream, (const Byte *)meta, pos))
-      meta.Free();
-      curPos += pos;
     }
+    RINOK(WriteStream(outStream, (const Byte *)meta, pos))
+    curPos += pos;
   }
-
-  lps->InSize = lps->OutSize = complexity;
-  RINOK(lps->SetCur())
+  // lps->InSize = lps->OutSize = complexity;
+  // RINOK(lps->SetCur())
 
   header.OffsetResource.UnpackSize = header.OffsetResource.PackSize = (UInt64)streams.Size() * kStreamInfoSize;
   header.OffsetResource.Offset = curPos;
@@ -1889,8 +1915,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
   for (i = 0; i < streams.Size(); i++)
   {
-    Byte buf[kStreamInfoSize];
-    streams[i].WriteTo(buf);
+    UInt64 buf[(kStreamInfoSize + 7) / 8];
+    streams[i].WriteTo((Byte *)(void *)buf);
     RINOK(WriteStream(outStream, buf, kStreamInfoSize))
     curPos += kStreamInfoSize;
   }
@@ -1942,13 +1968,22 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     UString utf16;
     if (!ConvertUTF8ToUnicode(xml, utf16))
       return S_FALSE;
-    xmlSize = ((size_t)utf16.Len() + 1) * 2;
-
+    size_t numChars = utf16.Len();
+    xmlSize = ((size_t)numChars + 1) * 2;
     CByteArr xmlBuf(xmlSize);
-    Set16((Byte *)xmlBuf, 0xFEFF)
-    for (i = 0; i < (unsigned)utf16.Len(); i++)
+    Byte *dest = xmlBuf;
+    Set16(dest, 0xFEFF)
+    dest += 2;
+    if (numChars)
     {
-      Set16((Byte *)xmlBuf + 2 + (size_t)i * 2, (UInt16)utf16[i])
+      const wchar_t *src = utf16;
+      do
+      {
+        Set16(dest, (UInt16)*src)
+        src++;
+        dest += 2;
+      }
+      while (--numChars);
     }
     RINOK(WriteStream(outStream, (const Byte *)xmlBuf, xmlSize))
   }
@@ -1958,13 +1993,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   header.XmlResource.Offset = curPos;
   header.XmlResource.Flags = NResourceFlags::kMetadata;
 
-  outStream->Seek(0, STREAM_SEEK_SET, NULL);
   header.NumImages = trees.Size();
-  {
-    Byte buf[kHeaderSizeMax];
-    header.WriteTo(buf);
-    RINOK(WriteStream(outStream, buf, kHeaderSizeMax))
-  }
+  RINOK(outStream->Seek(0, STREAM_SEEK_SET, NULL))
+  RINOK(header.WriteToStream(outStream))
 
   if (setRestriction)
     RINOK(setRestriction->SetRestriction(0, 0))

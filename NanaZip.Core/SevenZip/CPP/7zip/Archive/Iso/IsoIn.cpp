@@ -349,7 +349,7 @@ void CInArchive::SeekToBlock(UInt32 blockIndex)
 
 static const unsigned kNumLevelsMax = 256;
 
-HRESULT CInArchive::ReadDir(CDir &d, unsigned level)
+HRESULT CInArchive::ReadDir(CDir &d, const unsigned level)
 {
   if (!d.IsDir())
     return S_OK;
@@ -370,17 +370,53 @@ HRESULT CInArchive::ReadDir(CDir &d, unsigned level)
   }
 
   SeekToBlock(d.ExtentLocation);
-  UInt64 startPos = _position;
-
+  const UInt64 startPos = _position;
   bool firstItem = true;
   for (;;)
   {
-    const UInt64 offset = _position - startPos;
-    if (offset >= d.Size)
+    if (_openCallback && _processedBytes - _processedBytes_prev >= (1 << 24))
+    {
+      _processedBytes_prev = _processedBytes;
+      RINOK(_openCallback->SetCompleted(&_numFiles, &_processedBytes))
+    }
+    if (_processedBytes > _fileSize + (1 << 24))
+    {
+      TooBigMetadata = true;
+      return S_FALSE;
+    }
+
+    const UInt64 recordPos = _position;
+    const UInt64 posInDir = recordPos - startPos;
+    if (d.Size < posInDir)
+      return E_FAIL; // error in code
+    const UInt64 rem = d.Size - posInDir;
+    if (rem == 0)
       break;
+    /* (VolDescs[MainVolDescIndex].LogicalBlockSize == kBlockSize)
+       so we use kBlockSize in code below */
     const unsigned len = ReadByte();
     if (len == 0)
+    {
+      // it must have zero padding to end of block:
+      while ((unsigned)_position & (kBlockSize - 1))
+      {
+        if (_position - startPos >= d.Size)
+          break;
+        if (ReadByte())
+        {
+          HeadersError = true;
+          return S_FALSE;
+        }
+      }
       continue;
+    }
+    // record can't cross block range
+    if (len > rem || (((unsigned)recordPos & (kBlockSize - 1)) + len) > kBlockSize)
+    {
+      HeadersError = true;
+      return S_FALSE;
+    }
+
     CDir subItem;
     ReadDirRecord(subItem, len);
     if (firstItem && level == 0)
@@ -395,17 +431,6 @@ HRESULT CInArchive::ReadDir(CDir &d, unsigned level)
       }
       d._subItems.Add(subItem);
       _numFiles++;
-    }
-
-    if (_openCallback && _processedBytes - _processedBytes_prev >= (1 << 24))
-    {
-      _processedBytes_prev = _processedBytes;
-      RINOK(_openCallback->SetTotal(&_numFiles, &_processedBytes))
-    }
-    if (_processedBytes > _fileSize + (1u << 24))
-    {
-      TooBigMetadata = true;
-      return S_FALSE;
     }
     firstItem = false;
   }

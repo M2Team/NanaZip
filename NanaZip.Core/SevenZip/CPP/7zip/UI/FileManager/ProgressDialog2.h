@@ -284,7 +284,7 @@ class CProgressCloser
 {
   CProgressDialog *_p;
 public:
-  CProgressCloser(CProgressDialog &p) : _p(&p) {}
+  CProgressCloser(CProgressDialog &p Z7_lifetimebound) : _p(&p) {}
   ~CProgressCloser() { _p->ProcessWasFinished(); }
 };
 
@@ -307,7 +307,7 @@ public:
   HRESULT Create(const UString &title, HWND parentWindow = NULL);
   CProgressThreadVirt(): Result(E_FAIL), ThreadFinishedOK(false) {}
 
-  CProgressMessageBoxPair &GetMessagePair(bool isError) { return isError ? FinalMessage.ErrorMessage : FinalMessage.OkMessage; }
+  CProgressMessageBoxPair &GetMessagePair(bool isError) Z7_lifetimebound { return isError ? FinalMessage.ErrorMessage : FinalMessage.OkMessage; }
 };
 
 UString HResultToMessage(HRESULT errorCode);

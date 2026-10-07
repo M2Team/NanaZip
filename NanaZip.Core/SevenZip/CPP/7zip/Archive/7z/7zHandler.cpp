@@ -108,7 +108,7 @@ static void ConvertMethodIdToString(AString &res, UInt64 id)
 }
 
 
-static char *GetStringForSizeValue(char *s, UInt32 val)
+static char *GetStringForSizeValue(char *s Z7_lifetimebound, UInt32 val)
 {
   for (unsigned i = 0; i < 32; i++)
     if (((UInt32)1 << i) == val)
@@ -170,7 +170,7 @@ static inline void AddHexToString(UString &res, Byte value)
 }
 */
 
-static char *AddProp32(char *s, const char *name, UInt32 v)
+static char *AddProp32(char *s Z7_lifetimebound, const char *name, UInt32 v)
 {
   *s++ = ':';
   s = MyStpCpy(s, name);

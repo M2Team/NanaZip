@@ -201,7 +201,7 @@ static EBase64Res Base64ToBin(Byte *p, size_t size, const Byte **srcEnd, Byte **
 }
 
 
-static const Byte *Base64_SkipSpaces(const Byte *p, size_t size)
+static const Byte *Base64_SkipSpaces(const Byte *p Z7_lifetimebound, size_t size)
 {
   for (;;)
   {
@@ -218,8 +218,8 @@ static const Byte *Base64_SkipSpaces(const Byte *p, size_t size)
 
 // the following function is used by DmgHandler.cpp
 
-Byte *Base64ToBin(Byte *dest, const char *src);
-Byte *Base64ToBin(Byte *dest, const char *src)
+Byte *Base64ToBin(Byte *dest Z7_lifetimebound, const char *src);
+Byte *Base64ToBin(Byte *dest Z7_lifetimebound, const char *src)
 {
   UInt32 val = 1;
   

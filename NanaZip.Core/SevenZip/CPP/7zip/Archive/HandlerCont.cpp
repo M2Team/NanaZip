@@ -226,7 +226,7 @@ public:
   CHandlerImg &Handler;
   CMyComPtr<ICompressProgressInfo> _ratioProgress;
 
-  CHandlerImgProgress(CHandlerImg &handler) : Handler(handler) {}
+  CHandlerImgProgress(CHandlerImg &handler Z7_lifetimebound) : Handler(handler) {}
 };
 
 
