@@ -26,8 +26,10 @@
     <None Include="SevenZip\ASM\x86\7zCrcOpt.asm" />
     <None Include="SevenZip\ASM\x86\AesOpt.asm" />
     <None Include="SevenZip\ASM\x86\LzmaDecOpt.asm" />
+    <None Include="SevenZip\ASM\x86\Sha256Opt.asm" />
     <None Include="SevenZip\C\7zCrcOpt.c" />
     <None Include="SevenZip\C\AesOpt.c" />
+    <None Include="SevenZip\C\Sha256Opt.c" />
     <None Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
     <None Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
     <None Include="SevenZip\CPP\7zip\Archive\7z\7zExtract.cpp" />
@@ -45,6 +47,7 @@
     <None Include="SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
     <None Include="SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
     <None Include="SevenZip\CPP\Common\CRC.cpp" />
+    <None Include="SevenZip\CPP\Common\Sha256Prepare.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
@@ -103,8 +106,8 @@
     <ClCompile Include="SevenZip\C\MtDec.c" />
     <ClCompile Include="SevenZip\C\Ppmd7.c" />
     <ClCompile Include="SevenZip\C\Ppmd7Dec.c" />
+    <ClCompile Include="SevenZip\C\Sha256.c" />
     <ClCompile Include="SevenZip\C\Threads.c" />
-    <ClCompile Include="Wrappers\Sha256Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
@@ -211,7 +214,6 @@
     <ClInclude Include="SevenZip\C\RotateDefs.h" />
     <ClInclude Include="SevenZip\C\Sha256.h" />
     <ClInclude Include="SevenZip\C\Threads.h" />
-    <ClInclude Include="Wrappers\Sha256Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SevenZip\CPP\7zip\Guid.txt" />
@@ -239,6 +241,18 @@
   <Target Name="NanaZipCoreCrcHardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
     <ItemGroup Condition="'$(Platform)' != 'x64'">
       <ClCompile Include="SevenZip\C\7zCrcOpt.c" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildAssemblySource" BeforeTargets="_MASM">
+    <ItemGroup Condition="('$(Platform)'=='Win32') Or ('$(Platform)'=='x64')">
+      <MASM Include="SevenZip\ASM\x86\Sha256Opt.asm" />
+    </ItemGroup>
+  </Target>
+  <Target Name="NanaZipCoreSha256HardwareAccelerationBuildCSource" BeforeTargets="BeforeClCompile">
+    <ItemGroup Condition="('$(Platform)'!='Win32') And ('$(Platform)'!='x64')">
+      <ClCompile Include="SevenZip\C\Sha256Opt.c">
+        <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      </ClCompile>
     </ItemGroup>
   </Target>
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.targets" />

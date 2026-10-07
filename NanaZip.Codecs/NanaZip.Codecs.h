@@ -60,10 +60,6 @@ namespace NanaZip::Codecs::Hash
     IHasher* CreateMd2();
     IHasher* CreateMd4();
     IHasher* CreateMd5();
-    IHasher* CreateSha1();
-    IHasher* CreateSha256();
-    IHasher* CreateSha384();
-    IHasher* CreateSha512();
     IHasher* CreateBlake3();
     IHasher* CreateSm3();
     IHasher* CreateAich();
@@ -80,10 +76,6 @@ namespace NanaZip::Codecs::Hash
     IHasher* CreateHas160();
     IHasher* CreateRipemd160();
     IHasher* CreateSha224();
-    IHasher* CreateSha3224();
-    IHasher* CreateSha3256();
-    IHasher* CreateSha3384();
-    IHasher* CreateSha3512();
     IHasher* CreateSnefru128();
     IHasher* CreateSnefru256();
     IHasher* CreateTiger();

@@ -20,52 +20,53 @@ namespace
 {
     struct HashProviderItem
     {
+        std::uint32_t Id;
         const char* Name;
         IHasher* (*Create)();
     };
 
     // Registered Hashers
-    // DO NOT CHANGE THE SEQUENCE FOR COMPATIBILITY
-    HashProviderItem g_Hashers[] =
+    // DO NOT CHANGE EXISTING IDS FOR COMPATIBILITY
+    const HashProviderItem g_Hashers[] =
     {
-        { "MD2", NanaZip::Codecs::Hash::CreateMd2 },
-        { "MD4", NanaZip::Codecs::Hash::CreateMd4 },
-        { "MD5", NanaZip::Codecs::Hash::CreateMd5 },
-        { "SHA1", NanaZip::Codecs::Hash::CreateSha1 },
-        { "SHA256", NanaZip::Codecs::Hash::CreateSha256 },
-        { "SHA384", NanaZip::Codecs::Hash::CreateSha384 },
-        { "SHA512", NanaZip::Codecs::Hash::CreateSha512 },
-        { "SHA3-256", NanaZip::Codecs::Hash::CreateSha3256 },
-        { "SHA3-384", NanaZip::Codecs::Hash::CreateSha3384 },
-        { "SHA3-512", NanaZip::Codecs::Hash::CreateSha3512 },
-        { "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3 },
-        { "SM3", NanaZip::Codecs::Hash::CreateSm3 },
-        { "AICH", NanaZip::Codecs::Hash::CreateAich },
-        { "BLAKE2b", NanaZip::Codecs::Hash::CreateBlake2b },
-        { "ED2K", NanaZip::Codecs::Hash::CreateEd2k },
-        { "EDON-R-224", NanaZip::Codecs::Hash::CreateEdonR224 },
-        { "EDON-R-256", NanaZip::Codecs::Hash::CreateEdonR256 },
-        { "EDON-R-384", NanaZip::Codecs::Hash::CreateEdonR384 },
-        { "EDON-R-512", NanaZip::Codecs::Hash::CreateEdonR512 },
-        { "GOST94", NanaZip::Codecs::Hash::CreateGost94 },
-        { "GOST94CryptoPro", NanaZip::Codecs::Hash::CreateGost94CryptoPro },
-        { "GOST12-256", NanaZip::Codecs::Hash::CreateGost12256 },
-        { "GOST12-512", NanaZip::Codecs::Hash::CreateGost12512 },
-        { "HAS-160", NanaZip::Codecs::Hash::CreateHas160 },
-        { "RIPEMD-160", NanaZip::Codecs::Hash::CreateRipemd160 },
-        { "SHA224", NanaZip::Codecs::Hash::CreateSha224 },
-        { "SHA3-224", NanaZip::Codecs::Hash::CreateSha3224 },
-        { "SNEFRU-128", NanaZip::Codecs::Hash::CreateSnefru128 },
-        { "SNEFRU-256", NanaZip::Codecs::Hash::CreateSnefru256 },
-        { "TIGER", NanaZip::Codecs::Hash::CreateTiger },
-        { "TIGER2", NanaZip::Codecs::Hash::CreateTiger2 },
-        { "BTIH", NanaZip::Codecs::Hash::CreateTorrent },
-        { "TTH", NanaZip::Codecs::Hash::CreateTth },
-        { "WHIRLPOOL", NanaZip::Codecs::Hash::CreateWhirlpool },
-        { "XXH32", NanaZip::Codecs::Hash::CreateXxh32 },
-        { "XXH64", NanaZip::Codecs::Hash::CreateXxh64 },
-        { "XXH3_64bits", NanaZip::Codecs::Hash::CreateXxh364 },
-        { "XXH3_128bits", NanaZip::Codecs::Hash::CreateXxh3128 },
+        { 0, "MD2", NanaZip::Codecs::Hash::CreateMd2 },
+        { 1, "MD4", NanaZip::Codecs::Hash::CreateMd4 },
+        { 2, "MD5", NanaZip::Codecs::Hash::CreateMd5 },
+        // ID 3 (Originally "SHA1") was previously reserved.
+        // ID 4 (Originally "SHA256") was previously reserved.
+        // ID 5 (Originally "SHA384") was previously reserved.
+        // ID 6 (Originally "SHA512") was previously reserved.
+        // ID 7 (Originally "SHA3-256") was previously reserved.
+        // ID 8 (Originally "SHA3-384") was previously reserved.
+        // ID 9 (Originally "SHA3-512") was previously reserved.
+        { 10, "BLAKE3", NanaZip::Codecs::Hash::CreateBlake3 },
+        { 11, "SM3", NanaZip::Codecs::Hash::CreateSm3 },
+        { 12, "AICH", NanaZip::Codecs::Hash::CreateAich },
+        { 13, "BLAKE2b", NanaZip::Codecs::Hash::CreateBlake2b },
+        { 14, "ED2K", NanaZip::Codecs::Hash::CreateEd2k },
+        { 15, "EDON-R-224", NanaZip::Codecs::Hash::CreateEdonR224 },
+        { 16, "EDON-R-256", NanaZip::Codecs::Hash::CreateEdonR256 },
+        { 17, "EDON-R-384", NanaZip::Codecs::Hash::CreateEdonR384 },
+        { 18, "EDON-R-512", NanaZip::Codecs::Hash::CreateEdonR512 },
+        { 19, "GOST94", NanaZip::Codecs::Hash::CreateGost94 },
+        { 20, "GOST94CryptoPro", NanaZip::Codecs::Hash::CreateGost94CryptoPro },
+        { 21, "GOST12-256", NanaZip::Codecs::Hash::CreateGost12256 },
+        { 22, "GOST12-512", NanaZip::Codecs::Hash::CreateGost12512 },
+        { 23, "HAS-160", NanaZip::Codecs::Hash::CreateHas160 },
+        { 24, "RIPEMD-160", NanaZip::Codecs::Hash::CreateRipemd160 },
+        { 25, "SHA224", NanaZip::Codecs::Hash::CreateSha224 },
+        // ID 26 (Originally "SHA3-224") was previously reserved.
+        { 27, "SNEFRU-128", NanaZip::Codecs::Hash::CreateSnefru128 },
+        { 28, "SNEFRU-256", NanaZip::Codecs::Hash::CreateSnefru256 },
+        { 29, "TIGER", NanaZip::Codecs::Hash::CreateTiger },
+        { 30, "TIGER2", NanaZip::Codecs::Hash::CreateTiger2 },
+        { 31, "BTIH", NanaZip::Codecs::Hash::CreateTorrent },
+        { 32, "TTH", NanaZip::Codecs::Hash::CreateTth },
+        { 33, "WHIRLPOOL", NanaZip::Codecs::Hash::CreateWhirlpool },
+        { 34, "XXH32", NanaZip::Codecs::Hash::CreateXxh32 },
+        { 35, "XXH64", NanaZip::Codecs::Hash::CreateXxh64 },
+        { 36, "XXH3_64bits", NanaZip::Codecs::Hash::CreateXxh364 },
+        { 37, "XXH3_128bits", NanaZip::Codecs::Hash::CreateXxh3128 },
     };
 
     const std::size_t g_HashersCount =
@@ -87,7 +88,7 @@ namespace
 
     // Registered Archivers
     // DO NOT CHANGE THE SEQUENCE FOR COMPATIBILITY
-    ArchiverProviderItem g_Archivers[] =
+    const ArchiverProviderItem g_Archivers[] =
     {
         {
             "UFS",
@@ -203,22 +204,23 @@ public:
         {
             return E_INVALIDARG;
         }
-
         ::PropVariantClear(Value);
+
+        HashProviderItem const& CurrentProvider = g_Hashers[Index];
 
         switch (PropId)
         {
         case SevenZipHasherId:
         {
             Value->uhVal.QuadPart =
-                NanaZip::Codecs::HashProviderIdBase | Index;
+                NanaZip::Codecs::HashProviderIdBase | CurrentProvider.Id;
             Value->vt = VT_UI8;
             break;
         }
         case SevenZipHasherName:
         {
             Value->bstrVal = ::SysAllocString(
-                Mile::ToWideString(CP_UTF8, g_Hashers[Index].Name).c_str());
+                Mile::ToWideString(CP_UTF8, CurrentProvider.Name).c_str());
             if (Value->bstrVal)
             {
                 Value->vt = VT_BSTR;
@@ -232,7 +234,7 @@ public:
             EncoderGuid.Data2 = SevenZipGuidData2;
             EncoderGuid.Data3 = SevenZipGuidData3Hasher;
             *reinterpret_cast<PUINT64>(EncoderGuid.Data4) =
-                NanaZip::Codecs::HashProviderIdBase | Index;
+                NanaZip::Codecs::HashProviderIdBase | CurrentProvider.Id;
             Value->bstrVal = ::SysAllocStringByteLen(
                 reinterpret_cast<LPCSTR>(&EncoderGuid),
                 sizeof(EncoderGuid));
@@ -244,9 +246,7 @@ public:
         }
         case SevenZipHasherDigestSize:
         {
-            IHasher* Hasher = g_Hashers[Index].Create
-                ? g_Hashers[Index].Create()
-                : nullptr;
+            IHasher* Hasher = CurrentProvider.Create();
             if (Hasher)
             {
                 Value->ulVal = Hasher->GetDigestSize();
@@ -276,9 +276,7 @@ public:
             return E_INVALIDARG;
         }
 
-        *Hasher = g_Hashers[Index].Create
-            ? g_Hashers[Index].Create()
-            : nullptr;
+        *Hasher = g_Hashers[Index].Create();
         return *Hasher ? S_OK : E_NOINTERFACE;
     }
 };
@@ -315,16 +313,17 @@ EXTERN_C HRESULT WINAPI CreateObject(
             std::uint64_t ProviderId =
                 *reinterpret_cast<const std::uint64_t*>(Clsid.Data4);
             std::uint64_t ProviderIdBase = ProviderId & 0xFFFFFFFF00000000;
-            std::uint32_t ProviderIndex =
+            std::uint32_t ProviderIdValue =
                 static_cast<std::uint32_t>(ProviderId);
             if (NanaZip::Codecs::HashProviderIdBase == ProviderIdBase)
             {
-                if (ProviderIndex < g_HashersCount)
+                for (HashProviderItem const& CurrentProvider : g_Hashers)
                 {
-                    *OutObject = g_Hashers[ProviderIndex].Create
-                        ? g_Hashers[ProviderIndex].Create()
-                        : nullptr;
-                    return *OutObject ? S_OK : E_NOINTERFACE;
+                    if (CurrentProvider.Id == ProviderIdValue)
+                    {
+                        *OutObject = CurrentProvider.Create();
+                        break;
+                    }
                 }
             }
         }
@@ -345,13 +344,12 @@ EXTERN_C HRESULT WINAPI CreateObject(
                 if (ProviderIndex < g_ArchiversCount)
                 {
                     *OutObject = g_Archivers[ProviderIndex].CreateIn();
-                    return S_OK;
                 }
             }
         }
     }
 
-    return E_NOINTERFACE;
+    return *OutObject ? S_OK : E_NOINTERFACE;
 }
 
 EXTERN_C HRESULT WINAPI GetNumberOfFormats(

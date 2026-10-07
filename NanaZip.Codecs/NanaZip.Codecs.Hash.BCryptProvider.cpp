@@ -95,24 +95,4 @@ namespace NanaZip::Codecs::Hash
     {
         return new BCryptProvider(K7_BASE_HASH_ALGORITHM_MD5);
     }
-
-    IHasher* CreateSha1()
-    {
-        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA1);
-    }
-
-    IHasher* CreateSha256()
-    {
-        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA256);
-    }
-
-    IHasher* CreateSha384()
-    {
-        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA384);
-    }
-
-    IHasher* CreateSha512()
-    {
-        return new BCryptProvider(K7_BASE_HASH_ALGORITHM_SHA512);
-    }
 }

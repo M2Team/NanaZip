@@ -43,6 +43,7 @@
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Compress\PpmdRegister.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\7zip\Crypto\7zAesRegister.cpp" />
       <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\Common\CRC.cpp" />
+      <ClCompile Include="$(MSBuildThisFileDirectory)SevenZip\CPP\Common\Sha256Prepare.cpp" />
     </ItemGroup>
   </Target>
   <ItemGroup>
