@@ -881,6 +881,9 @@
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
     </ClCompile>
+    <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp">
+      <Filter>Extensions\ZSCodecs</Filter>
+    </ClCompile>
     <ClCompile Include="Extensions\ZSCodecs\LzHandler.cpp">
       <Filter>Extensions\ZSCodecs</Filter>
     </ClCompile>
@@ -1662,6 +1665,9 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\MyInitGuid.h">
       <Filter>SevenZip\CPP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Extensions\ZSCodecs\ZstdEncoder.hpp">
+      <Filter>Extensions\ZSCodecs</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\Common0.h">
       <Filter>SevenZip\CPP\Common</Filter>

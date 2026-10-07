@@ -7,7 +7,7 @@
 #include "ZstdDecoder.h"
 
 // **************** NanaZip Modification Start ****************
-// Removed from NanaZip.
+// NanaZip uses our own ZS-compatible ZstdEncoder implementation.
 #if 0 // ******** Annotated 7-Zip ZS Source Code snippet Start ********
 #ifndef Z7_EXTRACT_ONLY
 #include "ZstdEncoder.h"
@@ -19,10 +19,13 @@ REGISTER_CODEC_E(
   NCompress::NZSTD::CEncoder(),
   0x4F71101, "ZSTD")
 #endif // ******** Annotated 7-Zip ZS Source Code snippet End ********
-REGISTER_CODEC_CREATE(CreateDec, NCompress::NZSTD::CDecoder())
-REGISTER_CODEC_2(
-  ZSTD,
-  CreateDec,
-  NULL,
-  0x4F71101, "ZSTD")
+#ifndef Z7_EXTRACT_ONLY
+#include "ZstdEncoder.hpp"
+#endif
+
+REGISTER_CODEC_E(
+    ZSTD,
+    NCompress::NZSTD::CDecoder(),
+    NanaZip::Core::Extensions::ZstdEncoder(),
+    0x4F71101, "ZSTD")
 // **************** NanaZip Modification End ****************

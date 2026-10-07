@@ -18,6 +18,9 @@
 #include "../../Compress/LzmaEncoder.h"
 #include "../../Compress/PpmdZip.h"
 #include "../../Compress/XzEncoder.h"
+// **************** NanaZip Modification Start ****************
+#include "../../../../../Extensions/ZSCodecs/ZstdEncoder.hpp"
+// **************** NanaZip Modification End ****************
 
 #include "../Common/InStreamWithCRC.h"
 
@@ -166,6 +169,9 @@ HRESULT CAddCommon::Set_Pre_CompressionResult(bool inSeqMode, bool outSeqMode, U
     case NCompressionMethod::kXz   : ver = NCompressionMethod::kExtractVersion_Xz; break;
     case NCompressionMethod::kPPMd : ver = NCompressionMethod::kExtractVersion_PPMd; break;
     case NCompressionMethod::kBZip2: ver = NCompressionMethod::kExtractVersion_BZip2; break;
+    // **************** NanaZip Modification Start ****************
+    case NCompressionMethod::kZstd: ver = NCompressionMethod::kExtractVersion_Zstd; break;
+    // **************** NanaZip Modification End ****************
     case NCompressionMethod::kLZMA :
     {
       ver = NCompressionMethod::kExtractVersion_LZMA;
@@ -354,6 +360,15 @@ HRESULT CAddCommon::Compress(
             _lzmaEncoder = new CLzmaEncoder();
             _compressEncoder = _lzmaEncoder;
           }
+          // **************** NanaZip Modification Start ****************
+          else if (method == NCompressionMethod::kZstd)
+          {
+            _compressExtractVersion = NCompressionMethod::kExtractVersion_Zstd;
+            NanaZip::Core::Extensions::ZstdEncoder *encoder =
+                new NanaZip::Core::Extensions::ZstdEncoder();
+            _compressEncoder = encoder;
+          }
+          // **************** NanaZip Modification End ****************
           else if (method == NCompressionMethod::kXz)
           {
             _compressExtractVersion = NCompressionMethod::kExtractVersion_Xz;
