@@ -185,6 +185,16 @@ static HRESULT DecompressArchive(
           continue;
       }
 
+#if 1 // 1 : v24.06 : to exclude AUX items from processing
+      if (arc.Ask_Aux)
+      {
+        bool isAux;
+        RINOK(Archive_IsItem_Aux(archive, i, isAux))
+        if (isAux)
+          continue;
+      }
+#endif
+
       realIndices.Add(i);
     }
     

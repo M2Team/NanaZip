@@ -141,7 +141,7 @@ bool CMemDialog::OnInit()
 
   SendItemMessage(IDC_MEM_SPIN, UDM_SETRANGE, 0, MAKELPARAM(valMax, valMin));    // Sets the controls direction
   // UDM_SETPOS doesn't set value larger than max value (valMax) of range:
-  SendItemMessage(IDC_MEM_SPIN, UDM_SETPOS, 0, Required_GB);
+  SendItemMessage(IDC_MEM_SPIN, UDM_SETPOS, 0, (LPARAM)Required_GB);
   {
     UString s;
     s.Add_UInt32(Required_GB);

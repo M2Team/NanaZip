@@ -94,6 +94,17 @@ predefined macros defined in "Common.h".
 #endif
 */
 
+#if defined(__has_cpp_attribute)
+  #if __has_cpp_attribute(msvc::lifetimebound)
+    #define Z7_lifetimebound [[msvc::lifetimebound]]
+  #elif __has_cpp_attribute(clang::lifetimebound)
+    #define Z7_lifetimebound [[clang::lifetimebound]]
+  #else
+    #define Z7_lifetimebound
+  #endif
+#else
+  #define Z7_lifetimebound
+#endif
 
 #if defined(__clang__)
 

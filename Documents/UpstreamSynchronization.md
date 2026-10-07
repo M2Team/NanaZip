@@ -17,7 +17,7 @@
     25.01.
   - Extract callback fix backported from 7-Zip 26.02, including the our simple
     fix for CVE-2026-58052.
-- NanaZip.Universal: 26.03
+- NanaZip.Universal: 26.04
 
 ## 7-Zip ZS
 

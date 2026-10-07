@@ -727,7 +727,7 @@ UInt32 CBenchmarkDialog::GetNumberOfThreads()
   s[2] = (wchar_t)('0' + (val) % 10); \
   s += 3; s[0] = 0; }
 
-static WCHAR *NumberToDot3(UInt64 val, WCHAR *s)
+static WCHAR *NumberToDot3(UInt64 val, WCHAR *s Z7_lifetimebound)
 {
   s = ConvertUInt64ToString(val / 1000, s);
   const UInt32 rem = (UInt32)(val % 1000);

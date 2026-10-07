@@ -488,7 +488,7 @@ public:
     return CModalDialog::Create(SIZED_DIALOG(IDD_COMPRESS_OPTIONS), wndParent);
   }
 
-  COptionsDialog(CCompressDialog *cdLoc):
+  COptionsDialog(CCompressDialog *cdLoc Z7_lifetimebound):
       cd(cdLoc)
       // , TimePrec(0)
       {

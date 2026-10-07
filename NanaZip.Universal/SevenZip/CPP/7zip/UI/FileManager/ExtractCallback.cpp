@@ -841,9 +841,9 @@ static HRESULT GetItemBoolProp(IGetProp *getProp, PROPID propID, bool &result)
 }
 
 
-Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
-    Int32 isDir,
-    ISequentialOutStream **outStream, Int32 askExtractMode,
+Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t * const name,
+    const Int32 isDir,
+    ISequentialOutStream **outStream, const Int32 askExtractMode,
     IGetProp *getProp))
 {
   COM_TRY_BEGIN
@@ -877,8 +877,11 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
   if (!ProcessAltStreams && _isAltStream)
     return S_OK;
 
-  if (isDir) // we don't support dir items extraction in this code
-    return S_OK;
+  /* if (isDir), we don't exit from function here because we still need to
+       initialize and use (_hashStream) to calculate Hash of dir name.
+     v.26.04 : we have commented incorrect code below:
+  // if (isDir) return S_OK; // v.24.09-v.26.03 used this incorrect function exit.
+  */
 
   if (askExtractMode != NArchive::NExtract::NAskMode::kExtract &&
       askExtractMode != NArchive::NExtract::NAskMode::kTest)
@@ -888,6 +891,7 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
   
   CMyComPtr<ISequentialOutStream> outStreamLoc;
   
+  if (!_isFolder) // v.26.04 : we don't need dir item in VirtFileSystem
   if (VirtFileSystem && askExtractMode == NArchive::NExtract::NAskMode::kExtract)
   {
     if (!VirtFileSystemSpec->Files.IsEmpty())
@@ -950,6 +954,14 @@ Z7_COM7F_IMF(CExtractCallbackImp::GetStream7(const wchar_t *name,
     _hashStream_WasUsed = true;
   }
 
+  /* if (_isFolder && _hashStream_WasUsed) the caller must call
+     PrepareOperation7() and SetOperationResult8() because
+     we need dir item processing for hash calculation for dir name.
+     We set hash stream to (*outStream) for dir item. This is an additional
+     marker far caller indicating the need for further processing with
+     PrepareOperation7() and SetOperationResult8().
+  */
+  // if (!_isFolder) // for debug : we can set NULL to *outStream for any dir.
   if (outStreamLoc)
     *outStream = outStreamLoc.Detach();
   return S_OK;

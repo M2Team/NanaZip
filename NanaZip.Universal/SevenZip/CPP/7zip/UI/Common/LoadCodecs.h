@@ -314,7 +314,12 @@ class CCodecs Z7_final:
 
   Z7_CLASS_NO_COPY(CCodecs)
 public:
+  bool CaseSensitive_Change;
+  bool CaseSensitive;
+
   #ifdef Z7_EXTERNAL_CODECS
+
+  bool NeedSetLibCodecs; // = false, if we don't need to set codecs for archive handler via ISetCompressCodecsInfo
   
   CObjectVector<CCodecLib> Libs;
   FString MainDll_ErrorPath;
@@ -330,7 +335,7 @@ public:
     /* CCodecsReleaser object releases CCodecs links.
          1) CCodecs is COM object that is deleted when all links to that object will be released/
          2) CCodecs::Libs[i] can hold (ICompressCodecsInfo *) link to CCodecs object itself.
-       To break that reference loop, we must close all CCodecs::Libs in CCodecsReleaser desttructor. */
+       To break that reference loop, we must close all CCodecs::Libs in CCodecsReleaser destructor. */
 
     CCodecs *_codecs;
       
@@ -339,8 +344,6 @@ public:
     void Set(CCodecs *codecs) { _codecs = codecs; }
     ~CReleaser() { if (_codecs) _codecs->CloseLibs(); }
   };
-
-  bool NeedSetLibCodecs; // = false, if we don't need to set codecs for archive handler via ISetCompressCodecsInfo
 
   HRESULT LoadCodecs();
   HRESULT LoadFormats();
@@ -367,15 +370,12 @@ public:
   CRecordVector<CDllHasherInfo> Hashers;
   #endif
 
-  bool CaseSensitive_Change;
-  bool CaseSensitive;
-
   CCodecs():
-      #ifdef Z7_EXTERNAL_CODECS
-      NeedSetLibCodecs(true),
-      #endif
       CaseSensitive_Change(false),
       CaseSensitive(false)
+      #ifdef Z7_EXTERNAL_CODECS
+      , NeedSetLibCodecs(true)
+      #endif
       {}
 
   ~CCodecs()

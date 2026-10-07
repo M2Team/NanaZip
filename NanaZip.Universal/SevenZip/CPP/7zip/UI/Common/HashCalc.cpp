@@ -798,7 +798,7 @@ bool CHashPair::ParseCksum(const char *s)
 
 
 
-static const char *SkipWhite(const char *s)
+static const char *SkipWhite(const char *s Z7_lifetimebound)
 {
   while (IsWhite(*s))
     s++;

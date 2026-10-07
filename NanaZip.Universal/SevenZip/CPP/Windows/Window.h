@@ -135,7 +135,7 @@ private:
 protected:
   HWND _window;
 public:
-  CWindow(HWND newWindow = NULL): _window(newWindow) {}
+  CWindow(HWND newWindow Z7_lifetimebound = NULL): _window(newWindow) {}
   CWindow& operator=(HWND newWindow)
   {
     _window = newWindow;

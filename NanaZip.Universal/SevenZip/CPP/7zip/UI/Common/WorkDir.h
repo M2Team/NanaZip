@@ -19,8 +19,8 @@ class CWorkDirTempFile  MY_UNCOPYABLE
 public:
   CMyComPtr<IOutStream> OutStream;
 
-  const FString &Get_OriginalFilePath() const { return _originalPath; }
-  const FString &Get_TempFilePath() const { return _tempFile.GetPath(); }
+  const FString &Get_OriginalFilePath() const Z7_lifetimebound { return _originalPath; }
+  const FString &Get_TempFilePath() const Z7_lifetimebound { return _tempFile.GetPath(); }
 
   HRESULT CreateTempFile(const FString &originalPath);
   HRESULT MoveToOriginal(bool deleteOriginal,

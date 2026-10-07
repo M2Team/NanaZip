@@ -486,6 +486,12 @@ static void Add_sysctlbyname_to_String(const char *name, AString &s)
 #endif
 #endif
 
+#ifdef _WIN32
+#ifndef UNDER_CE
+Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
+#endif
+#endif
+
 void GetSysInfo(AString &s1, AString &s2);
 void GetSysInfo(AString &s1, AString &s2)
 {
@@ -912,8 +918,6 @@ void AddCpuFeatures(AString &s)
 
 #ifdef _WIN32
 #ifndef UNDER_CE
-
-Z7_DIAGNOSTIC_IGNORE_CAST_FUNCTION
 
 EXTERN_C_BEGIN
 typedef void (WINAPI * Func_RtlGetVersion) (OSVERSIONINFOEXW *);

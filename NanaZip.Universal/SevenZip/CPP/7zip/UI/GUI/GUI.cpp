@@ -174,7 +174,16 @@ static int Main2()
 
   #ifdef Z7_EXTERNAL_CODECS
   {
+#if defined(__clang__) && __clang_major__ >= 23
+    // stack memory associated with local variable '_externalCodecs' escapes
+    // to the global variable 'g_ExternalCodecs_Ptr' which will dangle
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wlifetime-safety-dangling-global"
+#endif
     g_ExternalCodecs_Ptr = &_externalCodecs;
+#if defined(__clang__) && __clang_major__ >= 23
+#pragma GCC diagnostic pop
+#endif
     UString s;
     codecs->GetCodecsErrorMessage(s);
     if (!s.IsEmpty())
@@ -185,7 +194,6 @@ static int Main2()
         MessageBoxW(NULL, s, L"NanaZip", MB_ICONERROR);
         // **************** NanaZip Modification End ****************
     }
-
   }
   #endif
 
