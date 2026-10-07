@@ -8,15 +8,17 @@
   - Fix for CVE-2025-11001 and CVE-2025-11002 backported from 7-Zip 25.00.
   - Security enhancements for symbolic link handling backported from 7-Zip
     25.01.
-  - Extract callback fix backported from 7-Zip 26.02, including the our simple
-    fix for CVE-2026-58052.
+  - Extract callback fix backported from 7-Zip 26.02.
+  - NanaZip-specific fix for CVE-2026-58052.
+  - Extract callback fixes backported from 7-Zip 26.04.
 - NanaZip.UI.Modern: 22.01
   - Fix for CVE-2025-0411 backported from 7-Zip 24.09.
   - Fix for CVE-2025-11001 and CVE-2025-11002 backported from 7-Zip 25.00.
   - Security enhancements for symbolic link handling backported from 7-Zip
     25.01.
-  - Extract callback fix backported from 7-Zip 26.02, including the our simple
-    fix for CVE-2026-58052.
+  - Extract callback fix backported from 7-Zip 26.02.
+  - NanaZip-specific fix for CVE-2026-58052.
+  - Extract callback fixes backported from 7-Zip 26.04.
 - NanaZip.Universal: 26.03
 
 ## 7-Zip ZS
