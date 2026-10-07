@@ -428,10 +428,12 @@ static const CNameToPropID g_NameToPropID[] =
   { VT_UI8, "memuse" },
   { VT_UI8, "aff" },
   { VT_UI4, "offset" },
-  { VT_UI4, "zhb" },
-  { VT_UI4, "tgn" }, // kNumThreadGroups
-  { VT_UI4, "tgi" }, // kThreadGroup
-  { VT_UI8, "tga" }, // kAffinityInGroup
+  { VT_UI4, "zhb" }
+  /*
+  , { VT_UI4, "tgn" }, // kNumThreadGroups
+  , { VT_UI4, "tgi" }, // kThreadGroup
+  , { VT_UI8, "tga" }, // kAffinityInGroup
+  */
   /*
   ,
   // { VT_UI4, "zhc" },
@@ -510,7 +512,7 @@ static bool ConvertProperty(const PROPVARIANT &srcProp, VARTYPE varType, NCOM::C
   }
   return false;
 }
-
+    
 static void SplitParams(const UString &srcString, UStringVector &subStrings)
 {
   subStrings.Clear();

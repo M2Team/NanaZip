@@ -157,7 +157,7 @@ bool CExtractDialog::OnInit()
     LangSetDlgItems(*this, kLangIDs, Z7_ARRAY_SIZE(kLangIDs));
   }
   #endif
-
+  
   #ifndef Z7_SFX
   _passwordControl.Attach(GetItem(IDE_EXTRACT_PASSWORD));
   _passwordControl.SetText(Password);
@@ -166,12 +166,12 @@ bool CExtractDialog::OnInit()
   #endif
 
   #ifdef Z7_NO_REGISTRY
-
+  
   PathMode = NExtract::NPathMode::kFullPaths;
   OverwriteMode = NExtract::NOverwriteMode::kAsk;
-
+  
   #else
-
+  
   _info.Load();
 
   if (_info.PathMode == NExtract::NPathMode::kCurPaths)
@@ -256,7 +256,7 @@ bool CExtractDialog::OnInit()
 
   HICON icon = LoadIcon(g_hInstance, MAKEINTRESOURCE(IDI_ICON));
   SetIcon(ICON_BIG, icon);
-
+ 
   // CWindow filesWindow = GetItem(IDC_EXTRACT_RADIO_FILES);
   // filesWindow.Enable(_enableFilesButton);
 
@@ -368,17 +368,17 @@ void CExtractDialog::OnOK()
 
 
   #else
-
+  
   ElimDup.Val = IsButtonCheckedBool(IDX_EXTRACT_ELIM_DUP);
 
   #endif
-
+  
   UString s;
-
+  
   #ifdef Z7_NO_REGISTRY
-
+  
   _path.GetText(s);
-
+  
   #else
 
   int currentItem = _path.GetCurSel();
@@ -390,14 +390,14 @@ void CExtractDialog::OnOK()
   }
   else
     _path.GetLBText(currentItem, s);
-
+  
   #endif
 
   s.Trim();
   NName::NormalizeDirPathPrefix(s);
-
+  
   #ifndef Z7_SFX
-
+  
   const bool splitDest = IsButtonCheckedBool(IDX_EXTRACT_NAME_ENABLE);
   if (splitDest)
   {
@@ -415,6 +415,8 @@ void CExtractDialog::OnOK()
 
   #endif
 
+  DirPath = s;
+  
   #ifndef Z7_NO_REGISTRY
   _info.Paths.Clear();
   #ifndef Z7_SFX
@@ -430,7 +432,7 @@ void CExtractDialog::OnOK()
     }
   _info.Save();
   #endif
-
+  
   CModalDialog::OnOK();
 }
 

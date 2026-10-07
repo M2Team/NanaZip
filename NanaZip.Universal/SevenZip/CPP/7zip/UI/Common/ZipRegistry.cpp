@@ -289,6 +289,7 @@ void CInfo::Save() const
   key.SetValue(kShowPassword, ShowPassword);
   key.SetValue(kEncryptHeaders, EncryptHeaders);
   key.RecurseDeleteKey(kArcHistory);
+  key.SetValue_Strings(kArcHistory, ArcPaths);
 
   key.RecurseDeleteKey(kOptionsKeyName);
   {
