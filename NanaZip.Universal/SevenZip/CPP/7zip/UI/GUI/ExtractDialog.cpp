@@ -79,9 +79,6 @@ static const UInt32 kLangIDs[] =
   IDT_EXTRACT_EXTRACT_TO,
   IDT_EXTRACT_PATH_MODE,
   IDT_EXTRACT_OVERWRITE_MODE,
-  // **************** 7-Zip ZS Modification Start ****************
-  IDX_EXTRACT_OPEN_TRG_FLD,
-  // **************** 7-Zip ZS Modification End ****************
   // IDX_EXTRACT_ALT_STREAMS,
   IDX_EXTRACT_NT_SECUR,
   IDX_EXTRACT_ELIM_DUP,
@@ -160,7 +157,7 @@ bool CExtractDialog::OnInit()
     LangSetDlgItems(*this, kLangIDs, Z7_ARRAY_SIZE(kLangIDs));
   }
   #endif
-
+  
   #ifndef Z7_SFX
   _passwordControl.Attach(GetItem(IDE_EXTRACT_PASSWORD));
   _passwordControl.SetText(Password);
@@ -169,12 +166,12 @@ bool CExtractDialog::OnInit()
   #endif
 
   #ifdef Z7_NO_REGISTRY
-
+  
   PathMode = NExtract::NPathMode::kFullPaths;
   OverwriteMode = NExtract::NOverwriteMode::kAsk;
-
+  
   #else
-
+  
   _info.Load();
 
   if (_info.PathMode == NExtract::NPathMode::kCurPaths)
@@ -186,9 +183,6 @@ bool CExtractDialog::OnInit()
     OverwriteMode = _info.OverwriteMode;
 
   // CheckButton_TwoBools(IDX_EXTRACT_ALT_STREAMS, AltStreams, _info.AltStreams);
-  // **************** 7-Zip ZS Modification Start ****************
-  CheckButton_TwoBools(IDX_EXTRACT_OPEN_TRG_FLD, OpnTrgFold, _info.OpnTrgFold);
-  // **************** 7-Zip ZS Modification End ****************
   CheckButton_TwoBools(IDX_EXTRACT_NT_SECUR,    NtSecurity, _info.NtSecurity);
   CheckButton_TwoBools(IDX_EXTRACT_ELIM_DUP,    ElimDup,    _info.ElimDup);
   // **************** NanaZip Modification Start ****************
@@ -262,7 +256,7 @@ bool CExtractDialog::OnInit()
 
   HICON icon = LoadIcon(g_hInstance, MAKEINTRESOURCE(IDI_ICON));
   SetIcon(ICON_BIG, icon);
-
+ 
   // CWindow filesWindow = GetItem(IDC_EXTRACT_RADIO_FILES);
   // filesWindow.Enable(_enableFilesButton);
 
@@ -344,9 +338,6 @@ void CExtractDialog::OnOK()
   #ifndef Z7_NO_REGISTRY
 
   // GetButton_Bools(IDX_EXTRACT_ALT_STREAMS, AltStreams, _info.AltStreams);
-  // **************** 7-Zip ZS Modification Start ****************
-  GetButton_Bools(IDX_EXTRACT_OPEN_TRG_FLD, OpnTrgFold,  _info.OpnTrgFold);
-  // **************** 7-Zip ZS Modification End ****************
   GetButton_Bools(IDX_EXTRACT_NT_SECUR,    NtSecurity, _info.NtSecurity);
   GetButton_Bools(IDX_EXTRACT_ELIM_DUP,    ElimDup,    _info.ElimDup);
   // **************** NanaZip Modification Start ****************
@@ -377,17 +368,17 @@ void CExtractDialog::OnOK()
 
 
   #else
-
+  
   ElimDup.Val = IsButtonCheckedBool(IDX_EXTRACT_ELIM_DUP);
 
   #endif
-
+  
   UString s;
-
+  
   #ifdef Z7_NO_REGISTRY
-
+  
   _path.GetText(s);
-
+  
   #else
 
   int currentItem = _path.GetCurSel();
@@ -399,29 +390,22 @@ void CExtractDialog::OnOK()
   }
   else
     _path.GetLBText(currentItem, s);
-
+  
   #endif
 
   s.Trim();
   NName::NormalizeDirPathPrefix(s);
-
-  // **************** 7-Zip ZS Modification Start ****************
-  DirPath = s; // s remains path without subpath (to store it to history below)
-  // **************** 7-Zip ZS Modification End ****************
+  
   #ifndef Z7_SFX
-
+  
   const bool splitDest = IsButtonCheckedBool(IDX_EXTRACT_NAME_ENABLE);
   if (splitDest)
   {
     UString pathName;
     _pathName.GetText(pathName);
     pathName.Trim();
-    // **************** 7-Zip ZS Modification Start ****************
-    //s += pathName;
-    //NName::NormalizeDirPathPrefix(s);
-    DirPath += pathName;
-    NName::NormalizeDirPathPrefix(DirPath);
-    // **************** 7-Zip ZS Modification End ****************
+    s += pathName;
+    NName::NormalizeDirPathPrefix(s);
   }
   if (splitDest != _info.SplitDest.Val)
   {
@@ -431,10 +415,8 @@ void CExtractDialog::OnOK()
 
   #endif
 
-  // **************** 7-Zip ZS Modification Start ****************
-  // DirPath = s;
-  // **************** 7-Zip ZS Modification End ****************
-
+  DirPath = s;
+  
   #ifndef Z7_NO_REGISTRY
   _info.Paths.Clear();
   #ifndef Z7_SFX
@@ -450,7 +432,7 @@ void CExtractDialog::OnOK()
     }
   _info.Save();
   #endif
-
+  
   CModalDialog::OnOK();
 }
 

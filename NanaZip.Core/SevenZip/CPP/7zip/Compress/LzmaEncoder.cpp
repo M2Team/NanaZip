@@ -6,9 +6,6 @@
 
 #include "../Common/CWrappers.h"
 #include "../Common/StreamUtils.h"
-// **************** 7-Zip ZS Modification Start ****************
-#include "../../Windows/System.h"
-// **************** 7-Zip ZS Modification End ****************
 
 #include "LzmaEncoder.h"
 
@@ -179,11 +176,7 @@ HRESULT SetLzmaProp(PROPID propID, const PROPVARIANT &prop, CLzmaEncProps &ep)
     SET_PROP_32(kPosStateBits, pb)
     SET_PROP_32(kLitPosBits, lp)
     SET_PROP_32(kLitContextBits, lc)
-    // **************** 7-Zip ZS Modification Start ****************
-    // SET_PROP_32(kNumThreads, numThreads)
-    case NCoderPropID::kNumThreads:
-      ep.numThreads = (int)v >= 0 ? (int)(v ? v : 1) : NWindows::NSystem::GetNumberOfProcessors(); break;
-    // **************** 7-Zip ZS Modification End ****************
+    SET_PROP_32(kNumThreads, numThreads)
     default: return E_INVALIDARG;
   }
   return S_OK;

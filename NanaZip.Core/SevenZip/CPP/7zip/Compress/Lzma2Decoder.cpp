@@ -197,10 +197,7 @@ Z7_COM7F_IMF(CDecoder::GetInStreamProcessedSize(UInt64 *value))
 
 Z7_COM7F_IMF(CDecoder::SetNumberOfThreads(UInt32 numThreads))
 {
-  // **************** 7-Zip ZS Modification Start ****************
-  //_numThreads = numThreads;
-  _numThreads = numThreads > 1 ? numThreads : 1;
-  // **************** 7-Zip ZS Modification End ****************
+  _numThreads = numThreads;
   return S_OK;
 }
 

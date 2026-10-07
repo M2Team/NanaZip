@@ -214,10 +214,7 @@ IArchiveExtractCallback::GetStream()
 if (IProgress::SetTotal() was called)
 {
   IProgress::SetCompleted(completeValue) uses
-    // **************** 7-Zip ZS Modification Start ****************
-    // packSize   - for some stream formats (xz, gz, bz2, lzma, z, ppmd).
-    packSize   - for some stream formats (xz, gz, bz2, lz, lzma, z, ppmd).
-    // **************** 7-Zip ZS Modification End ****************
+    packSize   - for some stream formats (xz, gz, bz2, lzma, z, ppmd).
     unpackSize - for another formats.
 }
 else
@@ -710,9 +707,6 @@ extern "C"
 
   typedef UInt32 (WINAPI *Func_IsArc)(const Byte *p, size_t size);
   typedef HRESULT (WINAPI *Func_GetIsArc)(UInt32 formatIndex, Func_IsArc *isArc);
-  // **************** 7-Zip ZS Modification Start ****************
-  typedef HRESULT (WINAPI *Func_GetFormatLevelMask)(UInt32 formatIndex, UInt32 *mask);
-  // **************** 7-Zip ZS Modification End ****************
 
   typedef HRESULT (WINAPI *Func_GetNumberOfFormats)(UInt32 *numFormats);
   typedef HRESULT (WINAPI *Func_GetHandlerProperty)(PROPID propID, PROPVARIANT *value);

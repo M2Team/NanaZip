@@ -57,7 +57,6 @@
   <ItemGroup>
     <ClCompile Include="Extensions\ZSCodecs\LzHandler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp" />
-    <ClCompile Include="Extensions\ZSCodecs\ZstdEncoder.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdHandler.cpp" />
     <ClCompile Include="Extensions\ZSCodecs\ZstdRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp" />
@@ -326,7 +325,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h" />
-    <ClInclude Include="Extensions\ZSCodecs\ZstdEncoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zCompressionMode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\7z\7zEncode.h" />

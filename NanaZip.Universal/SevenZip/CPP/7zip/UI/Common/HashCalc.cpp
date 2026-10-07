@@ -17,12 +17,6 @@
 #include "../../Archive/Common/ItemNameUtils.h"
 #include "../../Archive/IArchive.h"
 
-// **************** 7-Zip ZS Modification Start ****************
-#ifdef WANT_OPTIONAL_LOWERCASE
-#include "../FileManager/RegistryUtils.h"
-#endif
-// **************** 7-Zip ZS Modification End ****************
-
 #include "EnumDirItems.h"
 #include "HashCalc.h"
 
@@ -708,23 +702,8 @@ void HashHexToString(char *dest, const Byte *data, size_t size)
     {
       const size_t b = *data++;
       dest -= 2;
-      // **************** 7-Zip ZS Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
       dest[0] = GET_HEX_CHAR_UPPER(b >> 4);
       dest[1] = GET_HEX_CHAR_UPPER(b & 15);
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-#ifdef WANT_OPTIONAL_LOWERCASE
-      if (!WantLowercaseHashes()) {
-#endif
-        dest[0] = GET_HEX_CHAR_UPPER(b >> 4);
-        dest[1] = GET_HEX_CHAR_UPPER(b & 15);
-#ifdef WANT_OPTIONAL_LOWERCASE
-      } else {
-        dest[0] = GET_HEX_CHAR_LOWER(b >> 4);
-        dest[1] = GET_HEX_CHAR_LOWER(b & 15);
-    }
-#endif
-      // **************** 7-Zip ZS Modification End ****************
     }
     while (dest != dest_start);
   }

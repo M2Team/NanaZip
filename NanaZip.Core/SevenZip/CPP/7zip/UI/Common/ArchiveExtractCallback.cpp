@@ -1461,10 +1461,7 @@ HRESULT CArchiveExtractCallback::GetExtractStream(CMyComPtr<ISequentialOutStream
   }
   
   _diskFilePath = fullProcessedPath;
-  // **************** 7-Zip ZS Modification Start ****************
-  if (FirstExtractedPath.IsEmpty())
-    FirstExtractedPath = fullProcessedPath;
-  // **************** 7-Zip ZS Modification End ****************
+    
 
   if (isAnti)
   {

@@ -49,9 +49,6 @@ namespace NCompressDialog
     bool OrderMode;
     UInt32 Order;
     UString Options;
-    // **************** 7-Zip ZS Modification Start ****************
-    UString SplitVolume;
-    // **************** 7-Zip ZS Modification End ****************
 
     UString EncryptionMethod;
 
@@ -101,9 +98,6 @@ namespace NCompressDialog
       OrderMode = false;
       Method.Empty();
       Options.Empty();
-      // **************** 7-Zip ZS Modification Start ****************
-      SplitVolume.Empty();
-      // **************** 7-Zip ZS Modification End ****************
       EncryptionMethod.Empty();
       TimePrec = (UInt32)(Int32)(-1);
     }
@@ -234,9 +228,6 @@ public:
     EnableMultiCombo(IDC_COMPRESS_METHOD);
   }
 
-  // **************** 7-Zip ZS Modification Start ****************
-  void ComprMethodChanged();
-  // **************** 7-Zip ZS Modification End ****************
   void MethodChanged()
   {
     SetDictionary2();
