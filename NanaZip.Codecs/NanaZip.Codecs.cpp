@@ -244,7 +244,9 @@ public:
         }
         case SevenZipHasherDigestSize:
         {
-            IHasher* Hasher = g_Hashers[Index].Create();
+            IHasher* Hasher = g_Hashers[Index].Create
+                ? g_Hashers[Index].Create()
+                : nullptr;
             if (Hasher)
             {
                 Value->ulVal = Hasher->GetDigestSize();
@@ -274,7 +276,9 @@ public:
             return E_INVALIDARG;
         }
 
-        *Hasher = g_Hashers[Index].Create();
+        *Hasher = g_Hashers[Index].Create
+            ? g_Hashers[Index].Create()
+            : nullptr;
         return *Hasher ? S_OK : E_NOINTERFACE;
     }
 };
@@ -300,6 +304,7 @@ EXTERN_C HRESULT WINAPI CreateObject(
     {
         return E_INVALIDARG;
     }
+    *OutObject = nullptr;
 
     if (Iid == __uuidof(IHasher))
     {
@@ -316,8 +321,10 @@ EXTERN_C HRESULT WINAPI CreateObject(
             {
                 if (ProviderIndex < g_HashersCount)
                 {
-                    *OutObject = g_Hashers[ProviderIndex].Create();
-                    return S_OK;
+                    *OutObject = g_Hashers[ProviderIndex].Create
+                        ? g_Hashers[ProviderIndex].Create()
+                        : nullptr;
+                    return *OutObject ? S_OK : E_NOINTERFACE;
                 }
             }
         }
