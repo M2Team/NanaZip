@@ -1121,8 +1121,6 @@ bool MyMoveFile(CFSTR oldFile, CFSTR newFile)
 }
 
 
-// **************** 7-Zip ZS Modification Start ****************
-#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CreateDir(CFSTR path)
 {
   return (mkdir(path, 0777) == 0); // change it
@@ -1132,17 +1130,6 @@ static bool CreateDir2(CFSTR path)
 {
   return (mkdir(path, 0777) == 0); // change it
 }
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
-static bool CreateDir2(CFSTR path)
-{
-  return (mkdir(path, ACCESSPERMS) == 0);
-}
-
-bool CreateDir(CFSTR path)
-{
-  return CreateDir2(path);
-}
-// **************** 7-Zip ZS Modification End ****************
 
 
 bool DeleteFileAlways(CFSTR path)

@@ -156,9 +156,6 @@ static const char * const kHelpString =
     "  t : Test integrity of archive\n"
     "  u : Update files to archive\n"
     "  x : eXtract files with full paths\n"
-    // **************** 7-Zip ZS Modification Start ****************
-    "  --version : Show version information\n"
-    // **************** 7-Zip ZS Modification End ****************
     "\n"
     "<Switches>\n"
     "  -- : Stop switches and @listfile parsing\n"
@@ -922,50 +919,6 @@ int Main2(
     ShowCopyrightAndHelp(g_StdStream, true);
     return 0;
   }
-
-  // **************** 7-Zip ZS Modification Start ****************
-  if (commandStrings.Size() == 1 && commandStrings[0] == L"--version") {
-    // **************** NanaZip Modification Start ****************
-    // *g_StdStream << kVersionString;
-    *g_StdStream <<
-      "NanaZip" PROG_POSTFIX_2 " "
-      MILE_PROJECT_VERSION_UTF8_STRING " (" MY_CPU_NAME ")\n\n";
-
-    CCodecs *Codecs = new CCodecs;
-    HRESULT Result = Codecs->Load();
-    if (Result != S_OK)
-    {
-        return 0;
-  }
-
-    CObjectVector<CCodecInfoUser> CodecInfo;
-    Codecs->Get_CodecsInfoUser_Vector(CodecInfo);
-
-    *g_StdStream << "Loaded formats: ";
-    for (unsigned int i = 0; i < Codecs->Formats.Size(); i++)
-    {
-        if (i > 0)
-        {
-            *g_StdStream << ", ";
-        }
-        *g_StdStream << Codecs->Formats[i].Name;
-    }
-    *g_StdStream << "\n";
-
-    *g_StdStream << "Loaded codecs: ";
-    for (unsigned int i = 0; i < CodecInfo.Size(); i++)
-    {
-        if (i > 0)
-        {
-            *g_StdStream << ", ";
-        }
-        *g_StdStream << CodecInfo[i].Name;
-    }
-    *g_StdStream << "\n";
-    // **************** NanaZip Modification End ****************
-    return 0;
-  }
-  // **************** 7-Zip ZS Modification End ****************
 
   CArcCmdLineOptions options;
 

@@ -1112,9 +1112,6 @@ static const char * const k_Formats_with_simple_signuature[] =
   , "rar"
   , "bzip2"
   , "gzip"
-  // **************** 7-Zip ZS Modification Start ****************
-  , "lzip"
-  // **************** 7-Zip ZS Modification End ****************
   , "cab"
   , "wim"
   , "rpm"

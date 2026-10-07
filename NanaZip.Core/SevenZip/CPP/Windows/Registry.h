@@ -79,11 +79,6 @@ public:
   //   if (return_result == ERROR_SUCCESS), (value) string was read from registry
   //   if (return_result != ERROR_SUCCESS), (value) string was cleared
   LONG QueryValue(LPCTSTR name, CSysString &value);
-  // **************** 7-Zip ZS Modification Start ****************
-  inline LONG QueryValue(LPCTSTR name, bool &value) {
-    return GetValue_bool_IfOk(name, value);
-  }
-  // **************** 7-Zip ZS Modification End ****************
 #ifndef _UNICODE
   LONG QueryValue(LPCWSTR name, UString &value);
 #endif

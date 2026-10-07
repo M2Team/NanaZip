@@ -89,9 +89,6 @@ public:
   #ifndef Z7_SFX
   // CBoolPair AltStreams;
   CBoolPair NtSecurity;
-  // **************** 7-Zip ZS Modification Start ****************
-  CBoolPair OpnTrgFold;
-  // **************** 7-Zip ZS Modification End ****************
   #endif
 
   CBoolPair ElimDup;

@@ -181,12 +181,6 @@ Handler GUIDs:
   0C xz
   0D ppmd
   0E zstd
-// **************** 7-Zip ZS Modification Start ****************
-  0F lz4
-  10 lz5
-  11 liz
-  12 Lzip
-// **************** 7-Zip ZS Modification End ****************
 
   BF LVM
   C0 AVB

@@ -79,9 +79,6 @@ static const UInt32 kLangIDs[] =
   IDT_EXTRACT_EXTRACT_TO,
   IDT_EXTRACT_PATH_MODE,
   IDT_EXTRACT_OVERWRITE_MODE,
-  // **************** 7-Zip ZS Modification Start ****************
-  IDX_EXTRACT_OPEN_TRG_FLD,
-  // **************** 7-Zip ZS Modification End ****************
   // IDX_EXTRACT_ALT_STREAMS,
   IDX_EXTRACT_NT_SECUR,
   IDX_EXTRACT_ELIM_DUP,
@@ -186,9 +183,6 @@ bool CExtractDialog::OnInit()
     OverwriteMode = _info.OverwriteMode;
 
   // CheckButton_TwoBools(IDX_EXTRACT_ALT_STREAMS, AltStreams, _info.AltStreams);
-  // **************** 7-Zip ZS Modification Start ****************
-  CheckButton_TwoBools(IDX_EXTRACT_OPEN_TRG_FLD, OpnTrgFold, _info.OpnTrgFold);
-  // **************** 7-Zip ZS Modification End ****************
   CheckButton_TwoBools(IDX_EXTRACT_NT_SECUR,    NtSecurity, _info.NtSecurity);
   CheckButton_TwoBools(IDX_EXTRACT_ELIM_DUP,    ElimDup,    _info.ElimDup);
   // **************** NanaZip Modification Start ****************
@@ -344,9 +338,6 @@ void CExtractDialog::OnOK()
   #ifndef Z7_NO_REGISTRY
 
   // GetButton_Bools(IDX_EXTRACT_ALT_STREAMS, AltStreams, _info.AltStreams);
-  // **************** 7-Zip ZS Modification Start ****************
-  GetButton_Bools(IDX_EXTRACT_OPEN_TRG_FLD, OpnTrgFold,  _info.OpnTrgFold);
-  // **************** 7-Zip ZS Modification End ****************
   GetButton_Bools(IDX_EXTRACT_NT_SECUR,    NtSecurity, _info.NtSecurity);
   GetButton_Bools(IDX_EXTRACT_ELIM_DUP,    ElimDup,    _info.ElimDup);
   // **************** NanaZip Modification Start ****************
@@ -405,9 +396,6 @@ void CExtractDialog::OnOK()
   s.Trim();
   NName::NormalizeDirPathPrefix(s);
 
-  // **************** 7-Zip ZS Modification Start ****************
-  DirPath = s; // s remains path without subpath (to store it to history below)
-  // **************** 7-Zip ZS Modification End ****************
   #ifndef Z7_SFX
 
   const bool splitDest = IsButtonCheckedBool(IDX_EXTRACT_NAME_ENABLE);
@@ -416,12 +404,8 @@ void CExtractDialog::OnOK()
     UString pathName;
     _pathName.GetText(pathName);
     pathName.Trim();
-    // **************** 7-Zip ZS Modification Start ****************
-    //s += pathName;
-    //NName::NormalizeDirPathPrefix(s);
-    DirPath += pathName;
-    NName::NormalizeDirPathPrefix(DirPath);
-    // **************** 7-Zip ZS Modification End ****************
+    s += pathName;
+    NName::NormalizeDirPathPrefix(s);
   }
   if (splitDest != _info.SplitDest.Val)
   {
@@ -430,10 +414,6 @@ void CExtractDialog::OnOK()
   }
 
   #endif
-
-  // **************** 7-Zip ZS Modification Start ****************
-  // DirPath = s;
-  // **************** 7-Zip ZS Modification End ****************
 
   #ifndef Z7_NO_REGISTRY
   _info.Paths.Clear();
