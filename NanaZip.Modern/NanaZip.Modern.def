@@ -8,6 +8,7 @@ K7ModernInitialize
 K7ModernUninitialize
 K7ModernShowSponsorDialog
 K7ModernShowAboutDialog
+K7ModernShowSettingsDialog
 K7ModernShowInformationDialog
 K7ModernUpdateProgressWindowStatus
 K7ModernSetProgressWindowPausedMode

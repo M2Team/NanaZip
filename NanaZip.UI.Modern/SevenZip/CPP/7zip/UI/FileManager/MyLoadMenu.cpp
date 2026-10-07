@@ -777,7 +777,12 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
     case IDM_VIEW_TWO_PANELS:       g_App.SwitchOnOffOnePanel(); break;
 
     // Tools
-    case IDM_OPTIONS: OptionsDialog(hWnd, g_hInstance); break;
+    case IDM_OPTIONS:
+      // **************** NanaZip Modification Start ****************
+      //OptionsDialog(hWnd, g_hInstance);
+      ::K7ModernShowSettingsDialog(hWnd);
+      // **************** NanaZip Modification End ****************
+    break;
 
     case IDM_BENCHMARK: MyBenchmark(false); break;
     case IDM_BENCHMARK2: MyBenchmark(true); break;
