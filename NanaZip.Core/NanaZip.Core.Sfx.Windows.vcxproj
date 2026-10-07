@@ -193,7 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Mile.Windows.Helpers">
-      <Version>1.0.1171</Version>
+      <Version>1.0.1427</Version>
     </PackageReference>
     <PackageReference Include="Mile.Windows.UniCrt">
       <Version>1.2.410</Version>
