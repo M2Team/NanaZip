@@ -43,12 +43,6 @@
     <Filter Include="SevenZip\CPP\7zip\Archive\Common">
       <UniqueIdentifier>{90bdad4f-0ef4-4cb5-a451-71a8b415d708}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Extensions">
-      <UniqueIdentifier>{8892af78-26a4-4504-9e3d-d303756f56ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Extensions\ZSCodecs">
-      <UniqueIdentifier>{1f305354-6929-465a-96f8-c10248b20758}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="NanaZip.Core.Sfx.Shared.props" />
@@ -69,9 +63,6 @@
     </None>
     <None Include="SevenZip\C\7zCrcOpt.c">
       <Filter>SevenZip\C</Filter>
-    </None>
-    <None Include="Extensions\ZSCodecs\ZstdRegister.cpp">
-      <Filter>Extensions\ZSCodecs</Filter>
     </None>
     <None Include="SevenZip\CPP\7zip\Archive\7z\7zDecode.cpp">
       <Filter>SevenZip\CPP\7zip\Archive\7z</Filter>
@@ -299,9 +290,6 @@
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\Windows\TimeUtils.cpp">
       <Filter>SevenZip\CPP\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Extensions\ZSCodecs\ZstdDecoder.cpp">
-      <Filter>Extensions\ZSCodecs</Filter>
     </ClCompile>
     <ClCompile Include="SevenZip\C\Sha256.c">
       <Filter>SevenZip\C</Filter>
@@ -616,9 +604,6 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\Common\Common0.h">
       <Filter>SevenZip\CPP\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Extensions\ZSCodecs\ZstdDecoder.h">
-      <Filter>Extensions\ZSCodecs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
