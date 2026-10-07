@@ -31,6 +31,7 @@ ZSTD_createCCtx
 ZSTD_createDCtx
 ZSTD_freeCCtx
 ZSTD_freeDCtx
+ZSTD_CCtx_reset
 ZSTD_CCtx_setParameter
 ZSTD_DCtx_reset
 ZSTD_DCtx_setParameter
@@ -40,4 +41,5 @@ ZSTD_CStreamInSize
 ZSTD_CStreamOutSize
 ZSTD_DStreamInSize
 ZSTD_DStreamOutSize
+ZSTD_cParam_getBounds
 ZSTD_getErrorCode
