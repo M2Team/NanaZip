@@ -11,8 +11,13 @@
 #include "../../SevenZip/CPP/7zip/Common/StreamUtils.h"
 
 #include "ZstdDecoder.h"
+// **************** NanaZip Modification Start ****************
+// Removed from NanaZip.
+#if 0 // ******** Annotated 7-Zip ZS Source Code snippet Start ********
 #include "ZstdEncoder.h"
 #include "../../SevenZip/CPP/7zip/Compress/CopyCoder.h"
+#endif // ******** Annotated 7-Zip ZS Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 #include "../../SevenZip/CPP/7zip/Archive/Common/DummyOutStream.h"
 #include "../../SevenZip/CPP/7zip/Archive/Common/HandlerOut.h"
@@ -22,11 +27,19 @@ using namespace NWindows;
 namespace NArchive {
 namespace NZSTD {
 
+// **************** NanaZip Modification Start ****************
+// Compression support removed from NanaZip.
+#if 0 // ******** Annotated 7-Zip ZS Source Code snippet Start ********
 Z7_CLASS_IMP_CHandler_IInArchive_3(
   IArchiveOpenSeq,
   IOutArchive,
   ISetProperties
 )
+#endif // ******** Annotated 7-Zip ZS Source Code snippet End ********
+Z7_CLASS_IMP_CHandler_IInArchive_1(
+  IArchiveOpenSeq
+)
+// **************** NanaZip Modification End ****************
   CMyComPtr<IInStream> _stream;
   CMyComPtr<ISequentialInStream> _seqStream;
 
@@ -39,7 +52,10 @@ Z7_CLASS_IMP_CHandler_IInArchive_3(
   UInt64 _packSize;
   UInt64 _unpackSize;
 
-  CSingleMethodProps _props;
+  // **************** NanaZip Modification Start ****************
+  // Compression support removed from NanaZip.
+  // CSingleMethodProps _props;
+  // **************** NanaZip Modification End ****************
 };
 
 static const Byte kProps[] =
@@ -264,6 +280,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   COM_TRY_END
 }
 
+// **************** NanaZip Modification Start ****************
+// Removed from NanaZip.
+#if 0 // ******** Annotated 7-Zip ZS Source Code snippet Start ********
 static HRESULT UpdateArchive(
     UInt64 unpackSize,
     ISequentialOutStream *outStream,
@@ -359,6 +378,9 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
 {
   return _props.SetProperties(names, values, numProps);
 }
+#endif
+// ******** Annotated 7-Zip ZS Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 // zstd frame magic (1.x), plus legacy zstd frame magics (0.1, 0.2 .. 0.8) when
 // built with ZSTD_LEGACY_SUPPORT, and the zstdmt skippable-frame magic
@@ -375,6 +397,9 @@ static const Byte k_Signature[] = {
 #endif
     4, 0x50, 0x2A, 0x4D, 0x18 };
 
+// **************** NanaZip Modification Start ****************
+// Compression support removed from NanaZip.
+#if 0 // ******** Annotated 7-Zip ZS Source Code snippet Start ********
 REGISTER_ARC_IO(
   "zstd", "zst zstd tzst tzstd", "* * .tar .tar", 0x0e,
   k_Signature,
@@ -382,5 +407,13 @@ REGISTER_ARC_IO(
   NArcInfoFlags::kKeepName | NArcInfoFlags::kMultiSignature,
   0,
   IsArc_zstd)
+#endif // ******** Annotated 7-Zip ZS Source Code snippet End ********
+REGISTER_ARC_I(
+  "zstd", "zst zstd tzst tzstd", "* * .tar .tar", 0x0e,
+  k_Signature,
+  0,
+  NArcInfoFlags::kKeepName | NArcInfoFlags::kMultiSignature,
+  IsArc_zstd)
+// **************** NanaZip Modification End ****************
 
 }}
