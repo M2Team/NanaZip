@@ -52,10 +52,22 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
     page.Page = pagePointers[i];
   }
 
+  // **************** NanaZip Modification Start ****************
+  UString PreviousLangID = g_LangID;
+  // **************** NanaZip Modification End ****************
+
   INT_PTR res = NControl::MyPropertySheet(pages, hwndOwner, LangString(IDS_OPTIONS));
 
   if (res != -1 && res != 0)
   {
+    // **************** NanaZip Modification Start ****************
+    // The settings page reloads the language when the user changes it, so the
+    // menu needs to be recreated for applying the new language.
+    if (!PreviousLangID.IsEqualTo_NoCase(g_LangID))
+    {
+      MyLoadMenu();
+    }
+    // **************** NanaZip Modification End ****************
     g_App.SetListSettings();
     g_App.RefreshAllPanels();
     // ::PostMessage(hwndOwner, kLangWasChangedMessage, 0 , 0);

@@ -11,6 +11,10 @@
 #include "LangUtils.h"
 #include "RegistryUtils.h"
 
+// **************** NanaZip Modification Start ****************
+#include <NanaZip.Modern.h>
+// **************** NanaZip Modification End ****************
+
 using namespace NWindows;
 
 #ifndef _UNICODE
@@ -274,6 +278,12 @@ void ReloadLang()
   #ifndef _SFX
     ReadRegLang(g_LangID);
   #endif
+  // **************** NanaZip Modification Start ****************
+  // NanaZip Modern Experience resolves all string resources with the Modern
+  // Resource Technology, so the language needs to be overridden there. The
+  // empty language identifier makes it follow the system language settings.
+  ::K7ModernSetLanguageOverride(g_LangID.Ptr());
+  // **************** NanaZip Modification End ****************
   #ifndef _UNICODE
   if (g_IsNT)
   #endif

@@ -74,6 +74,81 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
     return nullptr;
 }
 
+EXTERN_C LPCWSTR WINAPI K7ModernGetLanguageTag(
+    _In_ UINT32 Index)
+{
+    using ProcType = decltype(::K7ModernGetLanguageTag)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernGetLanguageTag");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        return ProcAddress(Index);
+    }
+
+    return nullptr;
+}
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetLanguageName(
+    _In_ UINT32 Index)
+{
+    using ProcType = decltype(::K7ModernGetLanguageName)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernGetLanguageName");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        return ProcAddress(Index);
+    }
+
+    return nullptr;
+}
+
+EXTERN_C HRESULT WINAPI K7ModernSetLanguageOverride(
+    _In_opt_ LPCWSTR LanguageTag)
+{
+    using ProcType = decltype(::K7ModernSetLanguageOverride)*;
+
+    static ProcType ProcAddress = reinterpret_cast<ProcType>([]() -> FARPROC
+    {
+        HMODULE ModuleHandle = ::GetNanaZipModernModuleHandle();
+        if (ModuleHandle)
+        {
+            return ::GetProcAddress(
+                ModuleHandle,
+                "K7ModernSetLanguageOverride");
+        }
+        return nullptr;
+    }());
+
+    if (ProcAddress)
+    {
+        return ProcAddress(LanguageTag);
+    }
+
+    return E_NOINTERFACE;
+}
+
 EXTERN_C BOOL WINAPI K7ModernAvailable()
 {
     using ProcType = decltype(::K7ModernAvailable)*;

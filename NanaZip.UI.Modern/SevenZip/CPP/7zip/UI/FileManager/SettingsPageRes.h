@@ -15,6 +15,12 @@
 #define IDX_SETTINGS_WANT_FOLDER_HISTORY    2512
 #define IDX_SETTINGS_LOWERCASE_HASHES       2513
 
+// **************** NanaZip Modification Start ****************
+// 2102 is the legacy string resource identifier of "Language:", so the label
+// is localized without adding any new string resources.
+#define IDT_SETTINGS_LANGUAGE               2102
+#define IDC_SETTINGS_LANGUAGE               2514
+// **************** NanaZip Modification End ****************
 
 // #define IDT_SETTINGS_MEM     100
 // #define IDC_SETTINGS_MEM     101
