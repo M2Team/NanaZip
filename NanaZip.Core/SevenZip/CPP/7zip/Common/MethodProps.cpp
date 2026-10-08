@@ -463,7 +463,9 @@ static const CNameToPropID g_NameToPropID[] =
   // { VT_UI4, "ztlen" },  // fb ?
 };
 
-/*
+// **************** NanaZip Modification Start ****************
+// Check is enabled in NanaZip.
+///*
 #if defined(static_assert) || (defined(__cplusplus) && __cplusplus >= 200410L) || (defined(_MSC_VER) && _MSC_VER >= 1600)
 
 #if (defined(__cplusplus) && __cplusplus < 201103L) \
@@ -473,7 +475,8 @@ static const CNameToPropID g_NameToPropID[] =
   static_assert(Z7_ARRAY_SIZE(g_NameToPropID) == NCoderPropID::k_NUM_DEFINED,
     "g_NameToPropID doesn't match NCoderPropID enum");
 #endif
-*/
+//*/
+// **************** NanaZip Modification End ****************
 
 static int FindPropIdExact(const UString &name)
 {

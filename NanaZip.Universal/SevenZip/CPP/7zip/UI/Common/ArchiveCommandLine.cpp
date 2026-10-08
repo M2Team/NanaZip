@@ -219,6 +219,10 @@ enum Enum
   #ifndef Z7_NO_CRYPTO
   , kPassword
   #endif
+  // **************** NanaZip Modification Start ****************
+  // For static assertion purposes.
+  , MaxDefined
+  // **************** NanaZip Modification End ****************
 };
 
 }
@@ -379,6 +383,9 @@ static const CSwitchForm kSwitchForms[] =
   , { "p", SWFRM_STRING }
   #endif
 };
+// **************** NanaZip Modification Start ****************
+static_assert(ARRAYSIZE(kSwitchForms) == NKey::Enum::MaxDefined);
+// **************** NanaZip Modification End ****************
 
 static const char * const kUniversalWildcard = "*";
 static const unsigned kMinNonSwitchWords = 1;

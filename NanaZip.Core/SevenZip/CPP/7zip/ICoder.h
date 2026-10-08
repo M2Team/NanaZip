@@ -136,9 +136,14 @@ namespace NCoderPropID
     kAffinity,          // VT_UI8
     kBranchOffset,      // VT_UI4
     kHashBits,          // VT_UI4
+    // **************** NanaZip Modification Start ****************
+    // Upstream has not specified g_NameToPropID for the following props yet.
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     kNumThreadGroups,   // VT_UI4
     kThreadGroup,       // VT_UI4
     kAffinityInGroup,   // VT_UI8
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    // **************** NanaZip Modification End ****************
     /*
     // kHash3Bits,          // VT_UI4
     // kHash2Bits,          // VT_UI4
