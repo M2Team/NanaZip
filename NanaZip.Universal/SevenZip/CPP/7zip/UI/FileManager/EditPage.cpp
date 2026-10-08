@@ -6,7 +6,9 @@
 #include "EditPageRes.h"
 
 #include "BrowseDialog.h"
-#include "HelpUtils.h"
+// **************** NanaZip Modification Start ****************
+// #include "HelpUtils.h"
+// **************** NanaZip Modification End ****************
 #include "LangUtils.h"
 #include "RegistryUtils.h"
 
