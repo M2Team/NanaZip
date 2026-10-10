@@ -285,6 +285,10 @@ static void MyChangeMenu(HMENU menuLoc, unsigned menuID, unsigned level, unsigne
 
 static CMenu g_FileMenu;
 
+// **************** NanaZip Modification Start ****************
+HMENU g_MoreMenu = nullptr;
+// **************** NanaZip Modification End ****************
+
 static struct CFileMenuDestroyer
 {
   ~CFileMenuDestroyer() { if ((HMENU)g_FileMenu) g_FileMenu.Destroy(); }
@@ -335,6 +339,8 @@ static void CopyMenu(HMENU srcMenuSpec, HMENU destMenuSpec)
     false : for call from program window creation code
     true  : for another calls : (from Options language change)
 */
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 void MyLoadMenu(bool needResetMenu)
 {
   #ifdef UNDER_CE
@@ -396,9 +402,32 @@ void MyLoadMenu(bool needResetMenu)
     CopyMenu(::GetSubMenu(baseMenu, k_MenuIndex_File), g_FileMenu);
   }
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void MyLoadMenu(bool /* needResetMenu */)
+{
+  const HMENU menu = ::LoadMenuW(g_hInstance, MAKEINTRESOURCEW(IDM_MENU));
+  #ifdef Z7_LANG
+  MyChangeMenu(menu, 0, 0, 0);
+  #endif
+
+  g_MoreMenu = ::CreatePopupMenu();
+  CopyMenu(menu, g_MoreMenu);
+
+  ::DestroyMenu(menu);
+
+  if ((HMENU)g_FileMenu)
+  {
+    g_FileMenu.Destroy();
+  }
+  g_FileMenu.CreatePopup();
+  CopyMenu(::GetSubMenu(g_MoreMenu, k_MenuIndex_File), g_FileMenu);
+}
+// **************** NanaZip Modification End ****************
 
 void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
 {
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   HMENU mainMenu =
     #ifdef UNDER_CE
     g_App._commandBar.GetMenu(0);
@@ -406,6 +435,9 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
     ::GetMenu(g_HWND)
     #endif
     ;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  HMENU mainMenu = g_MoreMenu;
+  // **************** NanaZip Modification End ****************
 
   if (::GetSubMenu(mainMenu, position) != hMenu)
     return;

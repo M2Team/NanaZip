@@ -200,6 +200,9 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MessagesDialog.cpp">
       <Filter>SevenZip\Dialog</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.cpp">
+      <Filter>SevenZip\Dialog</Filter>
+    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.cpp">
       <Filter>SevenZip\Dialog</Filter>
     </ClCompile>
@@ -470,6 +473,9 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\Explorer\ContextMenu.cpp">
       <Filter>SevenZip\UI\Explorer</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\UI\Explorer\MyMessages.cpp">
+      <Filter>SevenZip\UI\Explorer</Filter>
+    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\GUI\HashGUI.cpp">
       <Filter>SevenZip\UI\GUI</Filter>
     </ClCompile>
@@ -603,6 +609,12 @@
       <Filter>SevenZip\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MessagesDialog.h">
+      <Filter>SevenZip\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialog.h">
+      <Filter>SevenZip\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\MemDialogRes.h">
       <Filter>SevenZip\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\OverwriteDialog.h">
@@ -951,6 +963,9 @@
       <Filter>SevenZip\UI\Agent</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\ContextMenu.h">
+      <Filter>SevenZip\UI\Explorer</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\MyMessages.h">
       <Filter>SevenZip\UI\Explorer</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\Explorer\ContextMenuFlags.h">
