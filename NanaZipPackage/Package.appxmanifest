@@ -50,8 +50,8 @@
 
   <Applications>
     <Application
-      Id="NanaZip.Modern"
-      Executable="NanaZip.Modern.FileManager.exe"
+      Id="NanaZip.FileManager"
+      Executable="NanaZip.Universal.FileManager.exe"
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
         DisplayName="NanaZip Preview"
@@ -74,7 +74,7 @@
       <Extensions>
         <uap3:Extension
             Category="windows.appExecutionAlias"
-            Executable="NanaZip.Modern.FileManager.exe"
+            Executable="NanaZip.Universal.FileManager.exe"
             EntryPoint="Windows.FullTrustApplication">
           <uap3:AppExecutionAlias>
             <desktop:ExecutionAlias Alias="NanaZip.exe" />

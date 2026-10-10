@@ -45,8 +45,8 @@
     <ProjectReference Include="..\NanaZip.Modern\NanaZip.Modern.vcxproj">
       <Project>{1AB11057-1F48-44D2-A913-C945BFC1AA93}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj">
-      <Project>{F4511F91-B0EB-41B4-99D6-AEB48169132B}</Project>
+    <ProjectReference Include="..\NanaZip.Universal\NanaZip.Universal.FileManager.vcxproj">
+      <Project>{F816907D-9457-4EF1-8C86-0888EAB577B6}</Project>
     </ProjectReference>
     <ProjectReference Include="..\NanaZip.Universal\NanaZip.Universal.Console.vcxproj">
       <Project>{86E818B3-D657-4E03-9336-48EE242A79D1}</Project>
