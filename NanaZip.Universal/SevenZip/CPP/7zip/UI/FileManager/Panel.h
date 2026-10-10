@@ -422,8 +422,8 @@ private:
 
   #endif
 
-  bool OnNotifyReBar(LPNMHDR lParam, LRESULT &result);
   // **************** NanaZip Modification Start ****************
+  // bool OnNotifyReBar(LPNMHDR lParam, LRESULT &result);
   // bool OnNotifyComboBox(LPNMHDR lParam, LRESULT &result);
   // **************** NanaZip Modification End ****************
   void OnItemChanged(NMLISTVIEW *item);
@@ -457,19 +457,23 @@ private:
 public:
   HWND _mainWindow;
 
-  NWindows::NControl::CReBar _headerReBar;
-  NWindows::NControl::CToolBar _headerToolBar;
-  NWindows::NControl::
-    #ifdef UNDER_CE
-    CComboBox
-    #else
-    CComboBoxEx
-    #endif
-    _headerComboBox;
+  // **************** NanaZip Modification Start ****************
+  // NWindows::NControl::CReBar _headerReBar;
+  // NWindows::NControl::CToolBar _headerToolBar;
+  // NWindows::NControl::
+  //  #ifdef UNDER_CE
+  //  CComboBox
+  //  #else
+  //  CComboBoxEx
+  //  #endif
+  //  _headerComboBox;
+  // **************** NanaZip Modification End ****************
   UStringVector ComboBoxPaths;
   // CMyComboBox _headerComboBox;
-  CMyComboBoxEdit _comboBoxEdit;
-  NWindows::NControl::CStatusBar _statusBar;
+  // **************** NanaZip Modification Start ****************
+  // CMyComboBoxEdit _comboBoxEdit;
+  // NWindows::NControl::CStatusBar _statusBar;
+  // ***************** NanaZip Modification End ****************
   // NWindows::NControl::CStatusBar _statusBar2;
 
   // **************** NanaZip Modification Start ****************

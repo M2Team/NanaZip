@@ -898,6 +898,8 @@ bool CPanel::OnSize(WPARAM /* wParam */, int xSize, int ySize)
   return true;
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CPanel::OnNotifyReBar(LPNMHDR header, LRESULT & /* result */)
 {
   switch (header->code)
@@ -912,6 +914,8 @@ bool CPanel::OnNotifyReBar(LPNMHDR header, LRESULT & /* result */)
   }
   return false;
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 /*
 UInt32 g_OnNotify = 0;
@@ -959,12 +963,14 @@ bool CPanel::OnNotify(UINT /* controlID */, LPNMHDR header, LRESULT &result)
   if (header->hwndFrom == _headerComboBox)
     return OnNotifyComboBox(header, result);
   else if (header->hwndFrom == _headerReBar)
-#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
   if (header->hwndFrom == _headerReBar)
-  // **************** NanaZip Modification End ****************
     return OnNotifyReBar(header, result);
   else if (header->hwndFrom == _listView)
     return OnNotifyList(header, result);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  if (header->hwndFrom == _listView)
+      return OnNotifyList(header, result);
+  // **************** NanaZip Modification End ****************
   else if (::GetParent(header->hwndFrom) == _listView)
   {
     // NMHDR:code is UINT

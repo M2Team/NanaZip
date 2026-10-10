@@ -520,7 +520,12 @@ HRESULT CPanel::RefreshListCtrl(const CSelectedState &state)
   }
   */
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   _headerToolBar.EnableButton(kParentFolderID, !IsRootFolder());
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  _addressBarControl.IsUpButtonEnabled(!IsRootFolder());
+  // **************** NanaZip Modification End ****************
 
   {
     CMyComPtr<IFolderSetFlatMode> folderSetFlatMode;

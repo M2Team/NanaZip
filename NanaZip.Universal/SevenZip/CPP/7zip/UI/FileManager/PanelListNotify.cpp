@@ -777,7 +777,12 @@ void CPanel::Refresh_StatusBar()
 
     // UString s1 = MyFormatNew(g_App.LangString_N_SELECTED_ITEMS, NumberToString(indices.Size()));
     // UString s1 = MyFormatNew(IDS_N_SELECTED_ITEMS, NumberToString(indices.Size()));
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     _statusBar.SetText(0, MyFormatNew(g_App.LangString_N_SELECTED_ITEMS, s));
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    _statusBarControl.Text1(MyFormatNew(g_App.LangString_N_SELECTED_ITEMS, s).Ptr());
+    // **************** NanaZip Modification End ****************
     // _statusBar.SetText(0, MyFormatNew(IDS_N_SELECTED_ITEMS, NumberToString(indices.Size())));
   }
 
@@ -794,7 +799,12 @@ void CPanel::Refresh_StatusBar()
       ConvertSizeToString(totalSize, selectSizeString);
       // }
     }
+    // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
     _statusBar.SetText(1, selectSizeString);
+#endif
+    _statusBarControl.Text2(selectSizeString);
+    // **************** NanaZip Modification End ****************
   }
 
   const int focusedItem = _listView.GetFocusedItem();
@@ -824,8 +834,14 @@ void CPanel::Refresh_StatusBar()
       }
     }
   }
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   _statusBar.SetText(2, sizeString);
   _statusBar.SetText(3, dateString);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  _statusBarControl.Text3(sizeString);
+  _statusBarControl.Text4(dateString); 
+  // **************** NanaZip Modification End ****************
 
   // _statusBar.SetText(4, nameString);
   // _statusBar2.SetText(1, MyFormatNew(L"{0} bytes", NumberToStringW(totalSize)));
