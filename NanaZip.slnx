@@ -4,10 +4,6 @@
     <Platform Name="x64" />
   </Configurations>
   <Folder Name="/Core/">
-    <Project Path="NanaZip.Codecs/NanaZip.Codecs.Sfx.Shared.vcxproj" Id="1e894b34-f9d2-4258-9401-6519aae91620">
-      <Platform Project="x64" />
-      <Build Solution="*|ARM64" Project="false" />
-    </Project>
     <Project Path="NanaZip.Codecs/NanaZip.Codecs.vcxproj" Id="89b81a5b-ff0d-4193-9cb1-738692775dd2" />
     <Project Path="NanaZip.Core/NanaZip.Core.Sfx.Console.vcxproj" Id="96c0a1a0-d964-4725-afdc-73ebf7fc1416">
       <Platform Project="x64" />
