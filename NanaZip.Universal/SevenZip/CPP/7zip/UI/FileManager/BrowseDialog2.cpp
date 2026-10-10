@@ -244,7 +244,9 @@ class CBrowseDialog2: public NControl::CModalDialog
   void OnItemEnter();
   // void FinishOnOK();
   void OnDelete(/* bool toRecycleBin */);
-  virtual void OnHelp() Z7_override;
+  // **************** NanaZip Modification Start ****************
+  // virtual void OnHelp() Z7_override;
+  // **************** NanaZip Modification End ****************
   bool OnContextMenu(HANDLE windowHandle, int xPos, int yPos);
 
   int GetRealItemIndex(int indexInListView) const
@@ -982,6 +984,9 @@ void CBrowseDialog2::OnDelete(/* bool toRecycleBin */)
 }
 
 
+// **************** NanaZip Modification Start ****************
+// Removed from NanaZip.
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 #ifndef Z7_NO_REGISTRY
 #define kHelpTopic "fm/temp.htm"
 void CBrowseDialog2::OnHelp()
@@ -992,6 +997,8 @@ void CBrowseDialog2::OnHelp()
   CModalDialog::OnHelp();
 }
 #endif
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 HRESULT ShellFolder_ParseDisplayName(IShellFolder *shellFolder,
