@@ -497,7 +497,8 @@ static bool CallExtractOnOpen() {
     false,
     false,
     ci.WriteZone,
-    true);
+    true,
+    ci.OpenFolderAfterExtractOnOpen.Val);
   return true;
 }
 // **************** NanaZip Modification End ****************

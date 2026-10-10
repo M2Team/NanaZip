@@ -550,6 +550,7 @@ static LPCTSTR const kElimDup = TEXT("ElimDupExtract");
 static LPCTSTR const kWriteZoneId = TEXT("WriteZoneIdExtract");
 // **************** NanaZip Modification Start ****************
 static LPCTSTR const kExtractOnOpen = TEXT("ExtractOnOpen");
+static LPCTSTR const kOpenFolderAfterExtractOnOpen = TEXT("OpenFolderAfterExtractOnOpen");
 // **************** NanaZip Modification End ****************
 
 void CContextMenuInfo::Save() const
@@ -566,6 +567,7 @@ void CContextMenuInfo::Save() const
 
   // **************** NanaZip Modification Start ****************
   Key_Set_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
+  Key_Set_BoolPair(key, kOpenFolderAfterExtractOnOpen, OpenFolderAfterExtractOnOpen);
   // **************** NanaZip Modification End ****************
 
   if (Flags_Def)
@@ -589,6 +591,9 @@ void CContextMenuInfo::Load()
 
   ExtractOnOpen.Val = false;
   ExtractOnOpen.Def = false;
+
+  OpenFolderAfterExtractOnOpen.Val = false;
+  OpenFolderAfterExtractOnOpen.Def = false;
   // **************** NanaZip Modification End ****************
 
   Flags = (UInt32)(Int32)-1;
@@ -611,6 +616,7 @@ void CContextMenuInfo::Load()
   }
 
   Key_Get_BoolPair(key, kExtractOnOpen, ExtractOnOpen);
+  Key_Get_BoolPair(key, kOpenFolderAfterExtractOnOpen, OpenFolderAfterExtractOnOpen);
   // **************** NanaZip Modification End ****************
 
   Flags_Def = (key.GetValue_IfOk(kContextMenu, Flags) == ERROR_SUCCESS);

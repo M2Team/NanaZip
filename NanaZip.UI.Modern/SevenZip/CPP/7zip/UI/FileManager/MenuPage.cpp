@@ -107,6 +107,7 @@ bool CMenuPage::OnInit()
 
   // **************** NanaZip Modification Start ****************
   CheckButton(IDX_EXTRACT_ON_OPEN, ci.ExtractOnOpen.Val);
+  CheckButton(IDX_EXTRACT_OPEN_FOLDER, ci.OpenFolderAfterExtractOnOpen.Val);
   // **************** NanaZip Modification End ****************
 
   _listView.Attach(GetItem(IDL_SYSTEM_OPTIONS));
@@ -207,7 +208,8 @@ LONG CMenuPage::OnApply()
     _elimDup_Changed ||
     _writeZone_Changed ||
     _flags_Changed ||
-    m_ExtractOnOpenChanged)
+    m_ExtractOnOpenChanged ||
+    m_OpenFolderAfterExtractOnOpenChanged)
   // **************** NanaZip Modification End ****************
   {
     CContextMenuInfo ci;
@@ -238,6 +240,9 @@ LONG CMenuPage::OnApply()
     // **************** NanaZip Modification Start ****************
     ci.ExtractOnOpen.Val = IsButtonCheckedBool(IDX_EXTRACT_ON_OPEN);
     ci.ExtractOnOpen.Def = m_ExtractOnOpenChanged;
+
+    ci.OpenFolderAfterExtractOnOpen.Val = IsButtonCheckedBool(IDX_EXTRACT_OPEN_FOLDER);
+    ci.OpenFolderAfterExtractOnOpen.Def = m_OpenFolderAfterExtractOnOpenChanged;
     // **************** NanaZip Modification End ****************
 
     ci.Save();
@@ -260,6 +265,9 @@ bool CMenuPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_EXTRACT_ON_OPEN:
       m_ExtractOnOpenChanged = true;
       break;
+    case IDX_EXTRACT_OPEN_FOLDER:
+        m_OpenFolderAfterExtractOnOpenChanged = true;
+        break;
     // **************** NanaZip Modification End ****************
 
     // case IDX_EXTRACT_WRITE_ZONE: _writeZone_Changed = true; break;
