@@ -12,7 +12,7 @@ using namespace NWindows;
 using namespace NRegistry;
 
 // **************** NanaZip Modification Start ****************
-//#define REG_PATH_7Z TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("7-Zip")
+// #define REG_PATH_7Z TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("7-Zip")
 #define REG_PATH_7Z TEXT("Software") TEXT(STRING_PATH_SEPARATOR) TEXT("NanaZip")
 // **************** NanaZip Modification End ****************
 
