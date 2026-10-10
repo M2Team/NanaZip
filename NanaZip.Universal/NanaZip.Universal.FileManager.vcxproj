@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8DDAC25D-D16A-4440-9ADE-902255549D1E}</ProjectGuid>
-    <RootNamespace>NanaZip.Universal.Windows</RootNamespace>
+    <ProjectGuid>{CCF20721-5FBD-4C54-BE02-D223A797A094}</ProjectGuid>
+    <RootNamespace>NanaZip.Universal.FileManager</RootNamespace>
     <MileProjectType>WindowsApplication</MileProjectType>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
     <MileProjectManifestFile>NanaZip.Universal.Windows.manifest</MileProjectManifestFile>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>M2-Team</MileProjectCompanyName>
-    <MileProjectFileDescription>NanaZip Command Line Interface (Windows)</MileProjectFileDescription>
-    <MileProjectInternalName>NanaZip.Universal.Windows</MileProjectInternalName>
+    <MileProjectFileDescription>NanaZip Graphical User Interface (Windows)</MileProjectFileDescription>
+    <MileProjectInternalName>NanaZip.Universal.FileManager</MileProjectInternalName>
     <MileProjectLegalCopyright>© M2-Team and Contributors. All rights reserved.</MileProjectLegalCopyright>
-    <MileProjectOriginalFilename>NanaZip.Universal.Windows.exe</MileProjectOriginalFilename>
+    <MileProjectOriginalFilename>NanaZip.Universal.FileManager.exe</MileProjectOriginalFilename>
     <MileProjectProductName>NanaZip</MileProjectProductName>
     <MileWindowsHelpersNoCppWinRTHelpers>true</MileWindowsHelpersNoCppWinRTHelpers>
   </PropertyGroup>
@@ -386,9 +386,11 @@
     <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.vcxproj">
       <Project>{5220420B-9A5C-44A7-BE69-97F25365BB26}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\NanaZip.Core\NanaZip.Core.Sfx.Windows.vcxproj">
-      <Project>{C11F288B-9E3C-4DA9-8206-852BB91C7E4C}</Project>
-      <SetPlatform>Platform=x64</SetPlatform>
+    <ProjectReference Include="..\NanaZip.UI.Modern\NanaZip.ShellExtension.vcxproj">
+      <Project>{53934E7A-686E-42F1-8A80-4299CDE30564}</Project>
+    </ProjectReference>
+    <ProjectReference Include="NanaZip.Universal.Windows.vcxproj">
+      <Project>{8DDAC25D-D16A-4440-9ADE-902255549D1E}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Project="Mile.Project.Cpp.targets" />
