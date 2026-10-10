@@ -1,0 +1,9 @@
+#define IDD_BROWSE2  93
+
+#define IDL_BROWSE2         100
+#define IDT_BROWSE2_FOLDER  101
+// #define IDE_BROWSE2_PATH    102
+#define IDC_BROWSE2_FILTER  103
+
+#define IDB_BROWSE2_PARENT     110
+// #define IDB_BROWSE2_CREATE_DIR 112

@@ -37,6 +37,7 @@
   <Folder Name="/UI/">
     <Project Path="NanaZip.Modern/NanaZip.Modern.vcxproj" Id="1ab11057-1f48-44d2-a913-c945bfc1aa93" />
     <Project Path="NanaZip.Universal/NanaZip.Universal.Console.vcxproj" Id="86e818b3-d657-4e03-9336-48ee242a79d1" />
+    <Project Path="NanaZip.Universal/NanaZip.Universal.FileManager.vcxproj" Id="f816907d-9457-4ef1-8c86-0888eab577b6" />
     <Project Path="NanaZip.Universal/NanaZip.Universal.Windows.vcxproj" Id="8ddac25d-d16a-4440-9ade-902255549d1e" />
   </Folder>
   <Folder Name="/UI/Classic/">
