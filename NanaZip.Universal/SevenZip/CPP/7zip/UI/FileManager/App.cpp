@@ -164,6 +164,9 @@ HRESULT CApp::CreateOnePanel(unsigned panelIndex, const UString &mainPath, const
 }
 
 
+// **************** NanaZip Modification Start ****************
+// Removed from NanaZip.
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static void CreateToolbar(HWND parent,
     NControl::CImageList &imageList,
     NControl::CToolBar &toolBar,
@@ -302,6 +305,8 @@ void CApp::SaveToolbarChanges()
   ReloadToolbars();
   MoveSubWindows();
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 HRESULT CApp::Create(HWND hwnd, const UString &mainPath, const UString &arcFormat, int xSizes[2], bool needOpenArc, COpenResult &openRes)
