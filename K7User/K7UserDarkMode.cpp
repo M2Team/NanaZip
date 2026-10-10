@@ -310,7 +310,8 @@ namespace
     static bool IsFileManagerWindowClassName(
         _In_ LPCWSTR ClassName)
     {
-        return (0 == std::wcscmp(ClassName, L"NanaZip.Modern.FileManager"));
+        return (0 == std::wcscmp(ClassName, L"NanaZip.Modern.FileManager"))
+            || (0 == std::wcscmp(ClassName, L"NanaZip.Universal.FileManager"));
     }
 
     static bool IsFileManagerPanelWindowClassName(

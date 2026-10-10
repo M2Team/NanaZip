@@ -291,6 +291,8 @@ static BOOL InitInstance(int nCmdShow)
   // wc.hbrBackground = (HBRUSH) GetStockObject(WHITE_BRUSH);
   wc.hbrBackground = (HBRUSH) (COLOR_BTNFACE + 1);
 
+  // ****************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   wc.lpszMenuName =
     #ifdef UNDER_CE
     0
@@ -298,6 +300,9 @@ static BOOL InitInstance(int nCmdShow)
     MAKEINTRESOURCEW(IDM_MENU)
     #endif
     ;
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  wc.lpszMenuName = nullptr;
+  // ****************** NanaZip Modification End ****************
 
   wc.lpszClassName = kWindowClass;
 
