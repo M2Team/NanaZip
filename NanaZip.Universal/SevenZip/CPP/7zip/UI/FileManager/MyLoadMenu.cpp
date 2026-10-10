@@ -11,10 +11,14 @@
 
 #include "../Common/CompressCall.h"
 
-#include "AboutDialog.h"
+// **************** NanaZip Modification Start ****************
+// #include "AboutDialog.h"
+// **************** NanaZip Modification End ****************
 #include "App.h"
 #include "BrowseDialog2.h"
-#include "HelpUtils.h"
+// **************** NanaZip Modification Start ****************
+// #include "HelpUtils.h"
+// **************** NanaZip Modification End ****************
 #include "LangUtils.h"
 #include "MyLoadMenu.h"
 #include "RegistryUtils.h"

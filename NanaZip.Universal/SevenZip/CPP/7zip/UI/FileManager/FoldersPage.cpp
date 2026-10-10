@@ -6,7 +6,9 @@
 #include "FoldersPage.h"
 
 #include "../FileManager/BrowseDialog.h"
-#include "../FileManager/HelpUtils.h"
+// **************** NanaZip Modification Start ****************
+// #include "../FileManager/HelpUtils.h"
+// **************** NanaZip Modification End ****************
 #include "../FileManager/LangUtils.h"
 
 using namespace NWindows;

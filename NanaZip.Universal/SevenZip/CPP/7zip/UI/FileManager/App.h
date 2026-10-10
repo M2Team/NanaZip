@@ -81,7 +81,10 @@ public:
   #ifdef UNDER_CE
   NWindows::NControl::CCommandBar _commandBar;
   #endif
-  NWindows::NControl::CToolBar _toolBar;
+  // **************** NanaZip Modification Start ****************
+  // NWindows::NControl::CToolBar _toolBar;
+  HWND m_ToolBar = nullptr;
+  // **************** NanaZip Modification End ****************
 
   CDropTarget *_dropTargetSpec;
   CMyComPtr<IDropTarget> _dropTarget;
