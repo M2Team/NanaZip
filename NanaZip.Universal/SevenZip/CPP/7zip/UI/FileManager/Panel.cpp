@@ -27,9 +27,7 @@
 #include "ExtractCallback.h"
 #include "FSFolder.h"
 #include "FormatUtils.h"
-// **************** NanaZip Modification Start ****************
-// #include "LangUtils.h"
-// **************** NanaZip Modification End ****************
+#include "LangUtils.h"
 #include "Panel.h"
 #include "RootFolder.h"
 // **************** NanaZip Modification Start ****************
@@ -58,6 +56,11 @@ extern bool g_IsNT;
 
 static const UINT_PTR kTimerID = 1;
 static const UINT kTimerElapse = 1000;
+
+// **************** NanaZip Modification Start ****************
+static const int AddressBarHeight = 36;
+static const int StatusBarHeight = 32;
+// **************** NanaZip Modification End ****************
 
 static DWORD kStyles[4] = { LVS_ICON, LVS_SMALLICON, LVS_LIST, LVS_REPORT };
 
@@ -669,7 +672,7 @@ bool CPanel::OnCreate(CREATESTRUCT * /* createStruct */)
       });
   }
 
-  _sysImageList = GetSysImageList(true);
+  _sysImageList = Shell_Get_SysImageList_smallIcons(true);
 
   _addressBarControl.UpButtonClicked(
       [this](auto&&, auto&&)
@@ -804,6 +807,8 @@ void CPanel::ChangeWindowSize(int xSize, int ySize)
 {
   if (!(HWND)*this)
     return;
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   int kHeaderSize;
   int kStatusBarSize;
   // int kStatusBar2Size;
@@ -817,14 +822,19 @@ void CPanel::ChangeWindowSize(int xSize, int ySize)
 
   _statusBar.GetWindowRect(&rect);
   kStatusBarSize = RECT_SIZE_Y(rect);
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  const UINT dpi = ::GetDpiForWindow(*this);
+  const int kHeaderSize = ::MulDiv(AddressBarHeight, dpi, USER_DEFAULT_SCREEN_DPI);
+  const int kStatusBarSize = ::MulDiv(StatusBarHeight, dpi, USER_DEFAULT_SCREEN_DPI);
+  // **************** NanaZip Modification End ****************
 
   // _statusBar2.GetWindowRect(&rect);
   // kStatusBar2Size = RECT_SIZE_Y(rect);
 
   int yListViewSize = MyMax(ySize - kHeaderSize - kStatusBarSize, 0);
-  const int kStartXPos = 32;
   // **************** NanaZip Modification Start ****************
 #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
+  const int kStartXPos = 32;
   if (_headerReBar)
   {
   }
@@ -839,6 +849,17 @@ void CPanel::ChangeWindowSize(int xSize, int ySize)
   _listView.Move(0, kHeaderSize, xSize, yListViewSize);
   // **************** NanaZip Modification Start ****************
   // _statusBar.Move(0, kHeaderSize + yListViewSize, xSize, kStatusBarSize);
+  if (_statusBarWindow)
+  {
+    ::SetWindowPos(
+        _statusBarWindow,
+        nullptr,
+        0,
+        kHeaderSize + yListViewSize,
+        xSize,
+        kStatusBarSize,
+        SWP_SHOWWINDOW);
+  }
   // **************** NanaZip Modification End ****************
   // _statusBar2.MoveWindow(0, kHeaderSize + yListViewSize + kStatusBarSize, xSize, kStatusBar2Size);
   // _statusBar.MoveWindow(0, 100, xSize, kStatusBarSize);
@@ -929,9 +950,14 @@ bool CPanel::OnNotify(UINT /* controlID */, LPNMHDR header, LRESULT &result)
   if (!_processNotify)
     return false;
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   if (header->hwndFrom == _headerComboBox)
     return OnNotifyComboBox(header, result);
   else if (header->hwndFrom == _headerReBar)
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  if (header->hwndFrom == _headerReBar)
+  // **************** NanaZip Modification End ****************
     return OnNotifyReBar(header, result);
   else if (header->hwndFrom == _listView)
     return OnNotifyList(header, result);
@@ -1391,7 +1417,7 @@ void CPanel::CopyFromArchive()
     }
 
     CRecordVector<UInt32> indices;
-    this->GetOperatedItemIndices(indices);
+    this->Get_ItemIndices_Operated(indices);
     if (indices.Size() > 0)
     {
         wantsExtractAll = false;

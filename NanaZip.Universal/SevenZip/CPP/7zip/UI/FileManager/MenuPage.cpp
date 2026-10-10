@@ -330,6 +330,8 @@ bool CMenuPage::OnInit()
 }
 
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 #ifndef UNDER_CE
 
 static void ShowMenuErrorMessage(const wchar_t *m, HWND hwnd)
@@ -341,6 +343,8 @@ static void ShowMenuErrorMessage(const wchar_t *m, HWND hwnd)
 }
 
 #endif
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 LONG CMenuPage::OnApply()

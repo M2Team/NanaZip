@@ -1061,6 +1061,9 @@ int CApp::GetFocusedPanelIndex() const
 }
 */
 
+// **************** NanaZip Modification Start ****************
+// Removed from NanaZip.
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static UString g_ToolTipBuffer;
 static CSysString g_ToolTipBufferSys;
 
@@ -1090,6 +1093,11 @@ void CApp::OnNotify(int /* ctrlID */, LPNMHDR pnmh)
     #endif
   }
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void CApp::OnNotify(int /* ctrlID */, LPNMHDR /* pnmh */)
+{
+}
+// **************** NanaZip Modification End ****************
 
 void CApp::RefreshTitle(bool always)
 {

@@ -3,7 +3,9 @@
 #include "StdAfx.h"
 
 #include "Panel.h"
-#include "HelpUtils.h"
+// **************** NanaZip Modification Start ****************
+// #include "HelpUtils.h"
+// **************** NanaZip Modification End ****************
 
 #include "../../PropID.h"
 #include "App.h"

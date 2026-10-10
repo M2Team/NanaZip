@@ -134,6 +134,7 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\AltStreamsFolder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\App.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog2.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ClassDefs.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\CopyDialog.cpp" />
@@ -318,6 +319,8 @@
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\App.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\AppState.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog2.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog2Res.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\CopyDialog.h" />
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\DialogSize.h" />

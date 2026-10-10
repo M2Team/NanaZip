@@ -182,6 +182,9 @@
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.cpp">
       <Filter>SevenZip\Dialog</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog2.cpp">
+      <Filter>SevenZip\Dialog</Filter>
+    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.cpp">
       <Filter>SevenZip\Dialog</Filter>
     </ClCompile>
@@ -576,6 +579,12 @@
       <Filter>SevenZip\Dialog\Options</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog.h">
+      <Filter>SevenZip\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog2.h">
+      <Filter>SevenZip\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\BrowseDialog2Res.h">
       <Filter>SevenZip\Dialog</Filter>
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\UI\FileManager\ComboDialog.h">

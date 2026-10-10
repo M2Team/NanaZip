@@ -1589,7 +1589,9 @@ void CPanel::OpenItemInArchive(unsigned index, bool tryInternal, bool tryExterna
   // **************** NanaZip Modification Start ****************
   // Special handling for exe files: We extract all files to temp dir and run exe from there.
   // indices.Add(index);
-  if (FindExt(kExeExtensions, name))
+  CStringFinder exeFinder;
+  const bool isExecutable = FindExt(kExeExtensions, name, exeFinder);
+  if (isExecutable)
   {
       UInt32 numItems = 0;
       _folder->GetNumberOfItems(&numItems);
@@ -1834,9 +1836,9 @@ void CPanel::OpenItemInArchive(unsigned index, bool tryInternal, bool tryExterna
   tpi->RelPath = relPath;
   // **************** NanaZip Modification Start ****************
   // toggle auto extract on opening exe
-  if (FindExt(kExeExtensions, name))
+  if (isExecutable)
   {
-      tpi->isExecutable =true;
+      tpi->isExecutable = true;
   }
   // **************** NanaZip Modification End ****************
 

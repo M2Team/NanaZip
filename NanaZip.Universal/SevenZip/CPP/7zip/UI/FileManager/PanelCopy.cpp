@@ -481,3 +481,18 @@ void CPanel::CopyFromNoAsk(bool moveMode, const UStringVector &filePaths)
   disableNotify.Restore();
   SetFocusToList();
 }
+
+// **************** NanaZip Modification Start ****************
+void CPanel::CopyFromAsk(const UStringVector &filePaths)
+{
+  const UString title = LangString(IDS_CONFIRM_FILE_COPY);
+  UString message = LangString(IDS_WANT_TO_COPY_FILES);
+  message += "\n'";
+  message += _currentFolderPrefix;
+  message += "' ?";
+  if (::MessageBoxW(*this, message, title, MB_YESNOCANCEL | MB_ICONQUESTION) != IDYES)
+    return;
+
+  CopyFromNoAsk(false, filePaths);
+}
+// **************** NanaZip Modification End ****************

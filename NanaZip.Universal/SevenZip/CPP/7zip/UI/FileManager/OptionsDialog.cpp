@@ -60,7 +60,7 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
   const UINT pageIDs[] = {
       // **************** NanaZip Modification Start ****************
       // Removed from NanaZip.
-      SIZED_DIALOG(IDD_SYSTEM),
+      // SIZED_DIALOG(IDD_SYSTEM),
       // **************** NanaZip Modification End ****************
       SIZED_DIALOG(IDD_MENU),
       SIZED_DIALOG(IDD_FOLDERS),
@@ -68,7 +68,8 @@ void OptionsDialog(HWND hwndOwner, HINSTANCE /* hInstance */)
       SIZED_DIALOG(IDD_SETTINGS),
       // **************** NanaZip Modification Start ****************
       // Removed from NanaZip.
-      SIZED_DIALOG(IDD_LANG) };
+      // SIZED_DIALOG(IDD_LANG) };
+      };
       // **************** NanaZip Modification End ****************
 
   // **************** NanaZip Modification Start ****************

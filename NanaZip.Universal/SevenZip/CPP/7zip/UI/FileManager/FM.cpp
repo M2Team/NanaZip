@@ -1307,6 +1307,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 }
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 static int Window_GetRealHeight(NWindows::CWindow &w)
 {
   RECT rect;
@@ -1319,6 +1321,8 @@ static int Window_GetRealHeight(NWindows::CWindow &w)
   #endif
   return res;
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 void CApp::MoveSubWindows()
 {

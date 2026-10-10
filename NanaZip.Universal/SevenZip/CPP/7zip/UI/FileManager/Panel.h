@@ -408,10 +408,17 @@ private:
   #ifndef UNDER_CE
 
   LRESULT OnNotifyComboBoxEnter(const UString &s);
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   bool OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result);
   #ifndef _UNICODE
   bool OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result);
   #endif
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  void OnAddressBarQuerySubmitted(
+      winrt::NanaZip::Modern::AddressBar const&,
+      winrt::NanaZip::Modern::AddressBarQuerySubmittedEventArgs const&);
+  // **************** NanaZip Modification End ****************
 
   #endif
 
@@ -1003,6 +1010,9 @@ public:
       bool showErrorMessages, UStringVector *messages);
 
   void CopyFromNoAsk(bool moveMode, const UStringVector &filePaths);
+  // **************** NanaZip Modification Start ****************
+  void CopyFromAsk(const UStringVector &filePaths);
+  // **************** NanaZip Modification End ****************
 
   void CompressDropFiles(
       const UStringVector &filePaths,

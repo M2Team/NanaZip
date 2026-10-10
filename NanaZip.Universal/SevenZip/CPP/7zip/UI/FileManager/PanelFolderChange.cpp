@@ -603,8 +603,7 @@ void CPanel::LoadFullPathAndShow()
   // See the blocks above.
   // _headerComboBox.SetItem(&item);
 
-  int iconIndex = GetRealIconIndex(us2fs(path), attrib);
-  HICON icon = ImageList_GetIcon(_sysImageList, iconIndex, ILD_IMAGE);
+  HICON icon = ImageList_GetIcon(_sysImageList, item.iImage, ILD_IMAGE);
   winrt::Windows::Graphics::Imaging::SoftwareBitmap bitmap =
       ConvertIconToSoftwareBitmap(icon);
   winrt::Windows::UI::Xaml::Media::Imaging::SoftwareBitmapSource source;
@@ -691,6 +690,8 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDITW info, LRESULT &result)
 // **************** NanaZip Modification End ****************
 #endif
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 #ifndef _UNICODE
 bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result)
 {
@@ -720,6 +721,8 @@ bool CPanel::OnNotifyComboBoxEndEdit(PNMCBEENDEDIT info, LRESULT &result)
   return false;
 }
 #endif
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 void CPanel::AddComboBoxItem(const UString &name, int iconIndex, unsigned indent, bool addToList)
 {
@@ -748,6 +751,8 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, unsigned indent
   item.pszText = name.Ptr_non_const();
   _headerComboBox.InsertItem(&item);
 #endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+  if (iconIndex < 0)
+    iconIndex = g_Ext_to_Icon_Map.GetIconIndex_DIR();
   winrt::NanaZip::Modern::AddressBarItem item;
   item.Text(name.Ptr());
   item.Padding({ indent * 16.0, 0, 0, 0 });
@@ -776,6 +781,8 @@ void CPanel::AddComboBoxItem(const UString &name, int iconIndex, unsigned indent
 }
 
 
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
 {
   result = FALSE;
@@ -987,7 +994,181 @@ bool CPanel::OnComboBoxCommand(UINT code, LPARAM /* param */, LRESULT &result)
   }
   return false;
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+void CPanel::OnDropDownOpened(
+    winrt::NanaZip::Modern::AddressBar const&,
+    winrt::Windows::Foundation::IInspectable const&)
+{
+  ComboBoxPaths.Clear();
+  _items.Clear();
 
+  UString sumPath;
+  UStringVector pathParts;
+  unsigned indent = 0;
+  {
+    UString path = _currentFolderPrefix;
+    // path = "\\\\.\\y:\\"; // for debug
+    UString prefix0;
+    if (path.IsPrefixedBy_Ascii_NoCase("\\\\"))
+    {
+      const int separ = FindCharPosInString(path.Ptr(2), '\\');
+      if (separ > 0
+        && (separ > 1 || path[2] != '.')) // "\\\\.\\" will be processed later
+      {
+        const UString s = path.Left(2 + separ);
+        prefix0 = s;
+        prefix0.Add_PathSepar();
+        AddComboBoxItem(s,
+            GetRealIconIndex_for_DirPath(us2fs(prefix0), FILE_ATTRIBUTE_DIRECTORY),
+            indent++,
+            false); // addToList
+        ComboBoxPaths.Add(prefix0);
+      }
+    }
+
+    unsigned rootPrefixSize = NName::GetRootPrefixSize(path);
+
+    sumPath = path;
+
+    if (rootPrefixSize <= prefix0.Len())
+    {
+      rootPrefixSize = prefix0.Len();
+      sumPath.DeleteFrom(rootPrefixSize);
+    }
+    else
+    {
+      // rootPrefixSize > prefix0.Len()
+      sumPath.DeleteFrom(rootPrefixSize);
+
+      CFileInfo info;
+      DWORD attrib = FILE_ATTRIBUTE_DIRECTORY;
+      if (info.Find(us2fs(sumPath)) && info.IsDir())
+        attrib = info.Attrib;
+      UString s = sumPath.Ptr(prefix0.Len());
+      if (!s.IsEmpty())
+      {
+        const wchar_t c = s.Back();
+        if (IS_PATH_SEPAR(c))
+          s.DeleteBack();
+      }
+      UString path_for_icon = sumPath;
+      NName::If_IsSuperPath_RemoveSuperPrefix(path_for_icon);
+
+      AddComboBoxItem(s,
+          GetRealIconIndex_for_DirPath(us2fs(path_for_icon), attrib),
+          indent++,
+          false); // addToList
+      ComboBoxPaths.Add(sumPath);
+    }
+
+    path.DeleteFrontal(rootPrefixSize);
+    SplitPathToParts(path, pathParts);
+  }
+
+  // it's expected that pathParts.Back() is empty, because _currentFolderPrefix has PathSeparator.
+  unsigned next_Arc_index = 0;
+  int iconIndex_Computer;
+  const UString name_Computer = RootFolder_GetName_Computer(iconIndex_Computer);
+
+  // const bool is_devicePrefix = (sumPath.IsEqualTo("\\\\.\\"));
+
+  if (pathParts.Size() > 1)
+  if (!sumPath.IsEmpty()
+      || pathParts.Size() != 2
+      || pathParts[0] != name_Computer)
+  for (unsigned i = 0; i + 1 < pathParts.Size(); i++)
+  {
+    UString name = pathParts[i];
+    sumPath += name;
+
+    bool isRootDir_inLink = false;
+    if (next_Arc_index < _parentFolders.Size())
+    {
+      const CFolderLink &link = _parentFolders[next_Arc_index];
+      if (link.VirtualPath == sumPath)
+      {
+        isRootDir_inLink = true;
+        next_Arc_index++;
+      }
+    }
+
+    int iconIndex = -1;
+    DWORD attrib = isRootDir_inLink ?
+        FILE_ATTRIBUTE_ARCHIVE:
+        FILE_ATTRIBUTE_DIRECTORY;
+    if (next_Arc_index == 0
+        || (next_Arc_index == 1 && isRootDir_inLink))
+    {
+      if (i == 0 && NName::IsDevicePath(us2fs(sumPath)))
+      {
+        UString path = name;
+        path.Add_PathSepar();
+        attrib = FILE_ATTRIBUTE_ARCHIVE;
+          // FILE_ATTRIBUTE_DIRECTORY;
+      }
+      else
+      {
+        CFileInfo info;
+        if (info.Find(us2fs(sumPath)))
+          attrib = info.Attrib;
+      }
+      iconIndex = Shell_GetFileInfo_SysIconIndex_for_Path(us2fs(sumPath), attrib);
+    }
+
+    if (iconIndex < 0)
+      iconIndex = g_Ext_to_Icon_Map.GetIconIndex(attrib, name);
+    // iconIndex = -1; // for debug
+    if (iconIndex < 0 && isRootDir_inLink)
+      iconIndex = 0; // default file
+
+    sumPath.Add_PathSepar();
+
+    ComboBoxPaths.Add(sumPath);
+    if (name.IsEmpty())
+      name.Add_PathSepar();
+    AddComboBoxItem(name, iconIndex, indent++,
+        false); // addToList
+  }
+
+#ifndef UNDER_CE
+
+  {
+    int iconIndex;
+    const UString name = RootFolder_GetName_Documents(iconIndex);
+    // iconIndex = -1; // for debug
+    AddComboBoxItem(name, iconIndex, 0, true);
+  }
+  AddComboBoxItem(name_Computer, iconIndex_Computer, 0, true);
+  {
+    FStringVector driveStrings;
+    MyGetLogicalDriveStrings(driveStrings);
+    FOR_VECTOR (i, driveStrings)
+    {
+      FString s = driveStrings[i];
+      ComboBoxPaths.Add(fs2us(s));
+      int iconIndex2 = GetRealIconIndex_for_DirPath(s, FILE_ATTRIBUTE_DIRECTORY);
+      if (!s.IsEmpty())
+      {
+        const FChar c = s.Back();
+        if (IS_PATH_SEPAR(c))
+          s.DeleteBack();
+      }
+      // iconIndex2 = -1; // for debug
+      AddComboBoxItem(fs2us(s), iconIndex2, 1, false);
+    }
+  }
+  {
+    int iconIndex;
+    const UString name = RootFolder_GetName_Network(iconIndex);
+    AddComboBoxItem(name, iconIndex, 0, true);
+  }
+
+#endif
+}
+// **************** NanaZip Modification End ****************
+
+// **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
 bool CPanel::OnNotifyComboBox(LPNMHDR NON_CE_VAR(header), LRESULT & NON_CE_VAR(result))
 {
   #ifndef UNDER_CE
@@ -1013,6 +1194,8 @@ bool CPanel::OnNotifyComboBox(LPNMHDR NON_CE_VAR(header), LRESULT & NON_CE_VAR(r
   #endif
   return false;
 }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+// **************** NanaZip Modification End ****************
 
 
 void CPanel::FoldersHistory()
