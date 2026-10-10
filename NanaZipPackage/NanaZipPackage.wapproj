@@ -9,7 +9,7 @@
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <DefaultLanguage>en</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <EntryPointProjectUniqueName>..\NanaZip.UI.Modern\NanaZip.Modern.FileManager.vcxproj</EntryPointProjectUniqueName>
+    <EntryPointProjectUniqueName>..\NanaZip.Universal\NanaZip.Universal.FileManager.vcxproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
