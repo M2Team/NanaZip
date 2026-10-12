@@ -56,7 +56,7 @@ WinXP-64 CreateFile():
   :stream        -  OK
   .:stream       -  ERROR_PATH_NOT_FOUND
   .\:stream      -  OK
-
+  
   folder\:stream -  ERROR_INVALID_NAME
   folder:stream  -  OK
 
@@ -98,7 +98,7 @@ bool CFileBase::Create(CFSTR path, DWORD desiredAccess,
     }
     #endif
   }
-
+  
   /*
   #ifndef UNDER_CE
   #ifndef _SFX
@@ -177,7 +177,7 @@ bool CFileBase::GetLength(UInt64 &length) const throw()
 
 
 /* Specification for SetFilePointer():
-
+   
    If a new file pointer is a negative value,
    {
      the function fails,
@@ -334,9 +334,9 @@ void CInFile::CalcDeviceSize(CFSTR s)
 
   SizeDefined = true;
   Size = 128 << 20;
-
+  
   #else
-
+  
   PARTITION_INFORMATION partInfo;
   bool needCorrectSize = true;
 
@@ -381,7 +381,7 @@ void CInFile::CalcDeviceSize(CFSTR s)
         needCorrectSize = true;
     }
   }
-
+  
   if (!SizeDefined)
   {
     my_DISK_GEOMETRY_EX geomEx;
@@ -398,7 +398,7 @@ void CInFile::CalcDeviceSize(CFSTR s)
         Size = (UInt64)geom.Cylinders.QuadPart * geom.TracksPerCylinder * geom.SectorsPerTrack * geom.BytesPerSector;
     }
   }
-
+  
   if (needCorrectSize && SizeDefined && Size != 0)
   {
     CorrectDeviceSize();
@@ -421,12 +421,12 @@ void CInFile::CalcDeviceSize(CFSTR s)
 bool CInFile::Open(CFSTR fileName, DWORD shareMode, DWORD creationDisposition, DWORD flagsAndAttributes)
 {
   DWORD desiredAccess = GENERIC_READ;
-
+  
   #ifdef _WIN32
   if (PreserveATime)
     desiredAccess |= FILE_WRITE_ATTRIBUTES;
   #endif
-
+  
   bool res = Create(fileName, desiredAccess, shareMode, creationDisposition, flagsAndAttributes);
 
   #ifdef _WIN32

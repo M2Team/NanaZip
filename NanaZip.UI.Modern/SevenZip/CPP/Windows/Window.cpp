@@ -156,7 +156,7 @@ bool CWindow::GetText(UString &s)
 }
 #endif
 
-
+ 
 /*
 bool CWindow::ModifyStyleBase(int styleOffset,
   DWORD remove, DWORD add, UINT flags)

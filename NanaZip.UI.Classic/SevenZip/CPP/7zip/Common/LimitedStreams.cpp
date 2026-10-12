@@ -105,7 +105,7 @@ STDMETHODIMP CClusterInStream::Read(void *data, UInt32 size, UInt32 *processedSi
     const UInt32 virtBlock = (UInt32)(_virtPos >> BlockSizeLog);
     const UInt32 offsetInBlock = (UInt32)_virtPos & (blockSize - 1);
     const UInt32 phyBlock = Vector[virtBlock];
-
+    
     UInt64 newPos = StartOffset + ((UInt64)phyBlock << BlockSizeLog) + offsetInBlock;
     if (newPos != _physPos)
     {
@@ -114,11 +114,11 @@ STDMETHODIMP CClusterInStream::Read(void *data, UInt32 size, UInt32 *processedSi
     }
 
     _curRem = blockSize - offsetInBlock;
-
+    
     for (unsigned i = 1; i < 64 && (virtBlock + i) < (UInt32)Vector.Size() && phyBlock + i == Vector[virtBlock + i]; i++)
       _curRem += (UInt32)1 << BlockSizeLog;
   }
-
+  
   if (size > _curRem)
     size = _curRem;
   HRESULT res = Stream->Read(data, size, &size);
@@ -129,7 +129,7 @@ STDMETHODIMP CClusterInStream::Read(void *data, UInt32 size, UInt32 *processedSi
   _curRem -= size;
   return res;
 }
-
+ 
 STDMETHODIMP CClusterInStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
 {
   switch (seekOrigin)
@@ -159,7 +159,7 @@ STDMETHODIMP CExtentsStream::Read(void *data, UInt32 size, UInt32 *processedSize
     return S_OK;
   if (size == 0)
     return S_OK;
-
+  
   unsigned left = _prevExtentIndex;
   if (virt <  Extents[left].Virt ||
       virt >= Extents[left + 1].Virt)
@@ -178,15 +178,15 @@ STDMETHODIMP CExtentsStream::Read(void *data, UInt32 size, UInt32 *processedSize
     }
     _prevExtentIndex = left;
   }
-
+  
   {
     const UInt64 rem = Extents[left + 1].Virt - virt;
     if (size > rem)
       size = (UInt32)rem;
   }
-
+  
   const CSeekExtent &extent = Extents[left];
-
+  
   if (extent.Is_ZeroFill())
   {
     memset(data, 0, size);
@@ -205,7 +205,7 @@ STDMETHODIMP CExtentsStream::Read(void *data, UInt32 size, UInt32 *processedSize
       _phyPos = phy;
     }
   }
-
+  
   const HRESULT res = Stream->Read(data, size, &size);
   _virtPos += size;
   if (res == S_OK)
@@ -272,7 +272,7 @@ STDMETHODIMP CTailInStream::Read(void *data, UInt32 size, UInt32 *processedSize)
   _virtPos += cur;
   return res;
 }
-
+  
 STDMETHODIMP CTailInStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
 {
   switch (seekOrigin)
@@ -368,7 +368,7 @@ STDMETHODIMP CTailOutStream::Write(const void *data, UInt32 size, UInt32 *proces
     _virtSize = _virtPos;
   return res;
 }
-
+  
 STDMETHODIMP CTailOutStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
 {
   switch (seekOrigin)

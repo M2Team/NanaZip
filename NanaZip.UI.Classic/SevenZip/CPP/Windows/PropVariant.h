@@ -104,7 +104,7 @@ public:
     const unsigned ns100 = wReserved2;
     if (prec == 0
         && prec <= k_PropVar_TimePrec_1ns
-        && ns100 < 100
+        && ns100 < 100 
         && wReserved3 == 0)
       return ns100;
     return 0;
@@ -138,10 +138,10 @@ public:
   CPropVariant& operator=(const char *s);
   CPropVariant& operator=(const AString &s)
     { return (*this)=(const char *)s; }
-
+  
   CPropVariant& operator=(bool bSrc) throw();
   CPropVariant& operator=(Byte value) throw();
-
+  
 private:
   CPropVariant& operator=(Int16 value) throw();
   CPropVariant& operator=(UInt16 value) throw();

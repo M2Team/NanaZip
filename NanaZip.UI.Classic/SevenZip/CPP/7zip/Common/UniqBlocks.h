@@ -10,7 +10,7 @@ struct C_UInt32_UString_Map
 {
   CRecordVector<UInt32> Numbers;
   UStringVector Strings;
-
+  
   void Add_UInt32(const UInt32 n)
   {
     Numbers.AddToUniqueSorted(n);

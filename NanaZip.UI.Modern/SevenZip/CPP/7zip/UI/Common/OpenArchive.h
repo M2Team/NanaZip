@@ -162,7 +162,7 @@ struct CArcErrorInfo
   /* if CArc is Open OK with some format:
         - ErrorFormatIndex shows error format index, if extension is incorrect
         - other variables show message and warnings of archive that is open */
-
+  
   UString ErrorMessage;
   UString WarningMessage;
 
@@ -281,7 +281,7 @@ public:
           // we use InStream in 2 cases (ArcStreamOffset != 0):
           // 1) if we use additional cache stream
           // 2) we reopen sfx archive with CTailInStream
-
+  
   CMyComPtr<IArchiveGetRawProps> GetRawProps;
   CMyComPtr<IArchiveGetRootProps> GetRootProps;
 
@@ -297,7 +297,7 @@ public:
   // CFiTime MTime;
   // bool MTime_Defined;
   CArcTime MTime;
-
+  
   Int64 Offset; // it's offset of start of archive inside stream that is open by Archive Handler
   UInt64 PhySize;
   // UInt64 OkPhySize;
@@ -318,7 +318,7 @@ public:
 
   bool IsTree;
   bool IsReadOnly;
-
+  
   bool Ask_Deleted;
   bool Ask_AltStream;
   bool Ask_Aux;
@@ -351,12 +351,12 @@ public:
 
   HRESULT GetItem_Path(UInt32 index, UString &result) const;
   HRESULT GetItem_DefaultPath(UInt32 index, UString &result) const;
-
+  
   // GetItemPath2 adds [DELETED] dir prefix for deleted items.
   HRESULT GetItem_Path2(UInt32 index, UString &result) const;
 
   HRESULT GetItem(UInt32 index, CReadArcItem &item) const;
-
+  
   HRESULT GetItem_Size(UInt32 index, UInt64 &size, bool &defined) const;
 
   /* if (GetProperty() returns vt==VT_EMPTY), this function sets
@@ -379,7 +379,7 @@ public:
   HRESULT OpenStreamOrFile(COpenOptions &options);
 
   HRESULT ReOpen(const COpenOptions &options, IArchiveOpenCallback *openCallback_Additional);
-
+  
   HRESULT CreateNewTailStream(CMyComPtr<IInStream> &stream);
 
   bool IsHashHandler(const COpenOptions &options) const
@@ -457,7 +457,7 @@ struct CDirPathSortPair
   unsigned Index;
 
   void SetNumSlashes(const FChar *s);
-
+  
   int Compare(const CDirPathSortPair &a) const
   {
     // We need sorting order where parent items will be after child items

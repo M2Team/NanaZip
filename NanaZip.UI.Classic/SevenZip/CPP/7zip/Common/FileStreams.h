@@ -36,7 +36,7 @@ class CInFileStream:
 public:
 
   #ifdef USE_WIN_FILE
-
+  
   #ifdef SUPPORT_DEVICE_FILE
   UInt64 VirtPos;
   UInt64 PhyPos;
@@ -67,7 +67,7 @@ public:
   virtual ~CInFileStream();
 
   CInFileStream();
-
+    
   void Set_PreserveATime(bool v)
   {
     File.PreserveATime = v;
@@ -77,13 +77,13 @@ public:
   {
     return File.GetLength(length);
   }
-
+  
   bool Open(CFSTR fileName)
   {
     _info_WasLoaded = false;
     return File.Open(fileName);
   }
-
+  
   bool OpenShared(CFSTR fileName, bool shareForWrite)
   {
     _info_WasLoaded = false;
@@ -139,7 +139,7 @@ public:
   }
 
   HRESULT Close();
-
+  
   UInt64 ProcessedSize;
 
   bool SetTime(const CFiTime *cTime, const CFiTime *aTime, const CFiTime *mTime)

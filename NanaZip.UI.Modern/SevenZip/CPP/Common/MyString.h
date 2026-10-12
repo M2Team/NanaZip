@@ -18,7 +18,7 @@
 /* if (DEBUG_FSTRING_INHERITS_ASTRING is defined), then
      FString inherits from AString, so we can find bugs related to FString at compile time.
    DON'T define DEBUG_FSTRING_INHERITS_ASTRING in release code */
-
+   
 // #define DEBUG_FSTRING_INHERITS_ASTRING
 
 #ifdef DEBUG_FSTRING_INHERITS_ASTRING
@@ -265,9 +265,9 @@ class AString
   {
     memmove(_chars + dest, _chars + src, (size_t)(_len - src + 1) * sizeof(char));
   }
-
+  
   void InsertSpace(unsigned &index, unsigned size);
-
+  
   void ReAlloc(unsigned newLimit);
   void ReAlloc2(unsigned newLimit);
   void SetStartLen(unsigned len);
@@ -373,7 +373,7 @@ public:
     _len = len;
     return *this;
   }
-
+  
   void Add_Space();
   void Add_Space_if_NotEmpty();
   void Add_OptSpaced(const char *s);
@@ -406,7 +406,7 @@ public:
   // int CompareNoCase(const AString &s) const { return MyStringCompareNoCase(_chars, s._chars); }
   bool IsPrefixedBy(const char *s) const { return IsString1PrefixedByString2(_chars, s); }
   bool IsPrefixedBy_Ascii_NoCase(const char *s) const throw();
-
+ 
   bool IsAscii() const
   {
     unsigned len = Len();
@@ -422,14 +422,14 @@ public:
     int pos = FindCharPosInString(_chars + startIndex, c);
     return pos < 0 ? -1 : (int)startIndex + pos;
   }
-
+  
   int ReverseFind(char c) const throw();
   int ReverseFind_Dot() const throw() { return ReverseFind('.'); }
   int ReverseFind_PathSepar() const throw();
 
   int Find(const char *s) const { return Find(s, 0); }
   int Find(const char *s, unsigned startIndex) const throw();
-
+  
   void TrimLeft() throw();
   void TrimRight() throw();
   void Trim()
@@ -444,7 +444,7 @@ public:
   void Insert(unsigned index, const AString &s);
 
   void RemoveChar(char ch) throw();
-
+  
   void Replace(char oldChar, char newChar) throw();
   void Replace(const AString &oldString, const AString &newString);
 
@@ -460,7 +460,7 @@ public:
       _chars[index] = 0;
     }
   }
-
+  
   void Wipe_and_Empty()
   {
     if (_chars)
@@ -530,9 +530,9 @@ class UString
   {
     memmove(_chars + dest, _chars + src, (size_t)(_len - src + 1) * sizeof(wchar_t));
   }
-
+  
   void InsertSpace(unsigned index, unsigned size);
-
+  
   void ReAlloc(unsigned newLimit);
   void ReAlloc2(unsigned newLimit);
   void SetStartLen(unsigned len);
@@ -552,11 +552,11 @@ class UString
   friend UString operator+(const wchar_t *s1, const UString &s2);
 
   // ---------- forbidden functions ----------
-
+  
   FORBID_STRING_OPS_UString(signed char)
   FORBID_STRING_OPS_UString(unsigned char)
   FORBID_STRING_OPS_UString(short)
-
+  
   #ifdef MY_NATIVE_WCHAR_T_DEFINED
   FORBID_STRING_OPS_UString(unsigned short)
   #endif
@@ -716,7 +716,7 @@ public:
   void Insert(unsigned index, const UString &s);
 
   void RemoveChar(wchar_t ch) throw();
-
+  
   void Replace(wchar_t oldChar, wchar_t newChar) throw();
   void Replace(const UString &oldString, const UString &newString);
 
@@ -732,7 +732,7 @@ public:
       _chars[index] = 0;
     }
   }
-
+  
   void Wipe_and_Empty()
   {
     if (_chars)
@@ -812,7 +812,7 @@ class UString2
   void SetStartLen(unsigned len);
 
   // ---------- forbidden functions ----------
-
+  
   FORBID_STRING_OPS_UString2(char)
   FORBID_STRING_OPS_UString2(signed char)
   FORBID_STRING_OPS_UString2(unsigned char)

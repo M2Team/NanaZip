@@ -84,7 +84,7 @@ CInFileStream::~CInFileStream()
 STDMETHODIMP CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
 {
   #ifdef USE_WIN_FILE
-
+  
   #ifdef SUPPORT_DEVICE_FILE
   if (processedSize)
     *processedSize = 0;
@@ -117,7 +117,7 @@ STDMETHODIMP CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
           *processedSize += rem;
         return S_OK;
       }
-
+      
       bool useBuf = false;
       if ((VirtPos & mask) != 0 || ((ptrdiff_t)data & mask) != 0 )
         useBuf = true;
@@ -189,7 +189,7 @@ STDMETHODIMP CInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
     return S_OK;
 
   #else // USE_WIN_FILE
-
+  
   if (processedSize)
     *processedSize = 0;
   const ssize_t res = File.read_part(data, (size_t)size);
@@ -226,7 +226,7 @@ STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
 STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSize)
 {
   #ifdef _WIN32
-
+  
   DWORD realProcessedSize;
   UInt32 sizeTemp = (1 << 20);
   if (sizeTemp > size)
@@ -237,7 +237,7 @@ STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
   if (res == FALSE && GetLastError() == ERROR_BROKEN_PIPE)
     return S_OK;
   return ConvertBoolToHRESULT(res != FALSE);
-
+  
   #else
 
   if (processedSize)
@@ -253,10 +253,10 @@ STDMETHODIMP CStdInFileStream::Read(void *data, UInt32 size, UInt32 *processedSi
   if (processedSize)
     *processedSize = (UInt32)res;
   return S_OK;
-
+  
   #endif
 }
-
+  
 #endif
 
 STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
@@ -284,7 +284,7 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
     return S_OK;
   }
   #endif
-
+  
   UInt64 realNewPosition = 0;
   const bool result = File.Seek(offset, seekOrigin, realNewPosition);
   const HRESULT hres = ConvertBoolToHRESULT(result);
@@ -292,7 +292,7 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
   /* 21.07: new File.Seek() in 21.07 already returns correct (realNewPosition)
      in case of error. So we don't need additional code below */
   // if (!result) { realNewPosition = 0; File.GetPosition(realNewPosition); }
-
+  
   #ifdef SUPPORT_DEVICE_FILE
   PhyPos = VirtPos = realNewPosition;
   #endif
@@ -301,9 +301,9 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
     *newPosition = realNewPosition;
 
   return hres;
-
+  
   #else
-
+  
   const off_t res = File.seek((off_t)offset, (int)seekOrigin);
   if (res == -1)
   {
@@ -315,7 +315,7 @@ STDMETHODIMP CInFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPos
   if (newPosition)
     *newPosition = (UInt64)res;
   return S_OK;
-
+  
   #endif
 }
 
@@ -471,7 +471,7 @@ STDMETHODIMP CInFileStream::GetProps(UInt64 *size, FILETIME *cTime, FILETIME *aT
   if (File.my_fstat(&st) != 0)
     return GetLastError_HRESULT();
   */
-
+  
   if (size) *size = (UInt64)st.st_size;
   if (cTime) FiTime_To_FILETIME (ST_CTIME(st), *cTime);
   if (aTime) FiTime_To_FILETIME (ST_ATIME(st), *aTime);
@@ -553,7 +553,7 @@ STDMETHODIMP CInFileStream::GetProperty(PROPID propID, PROPVARIANT *value)
         // prop = (UInt32)12345678; // for debug
         break;
       }
-
+        
       case kpidDeviceMinor:
         if (S_ISCHR(st.st_mode) ||
             S_ISBLK(st.st_mode))
@@ -663,9 +663,9 @@ STDMETHODIMP COutFileStream::Write(const void *data, UInt32 size, UInt32 *proces
   if (processedSize)
     *processedSize = realProcessedSize;
   return ConvertBoolToHRESULT(result);
-
+  
   #else
-
+  
   if (processedSize)
     *processedSize = 0;
   size_t realProcessedSize;
@@ -676,15 +676,15 @@ STDMETHODIMP COutFileStream::Write(const void *data, UInt32 size, UInt32 *proces
   if (res == -1)
     return GetLastError_HRESULT();
   return S_OK;
-
+  
   #endif
 }
-
+  
 STDMETHODIMP COutFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
 {
   if (seekOrigin >= 3)
     return STG_E_INVALIDFUNCTION;
-
+  
   #ifdef USE_WIN_FILE
 
   UInt64 realNewPosition = 0;
@@ -692,16 +692,16 @@ STDMETHODIMP COutFileStream::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPo
   if (newPosition)
     *newPosition = realNewPosition;
   return ConvertBoolToHRESULT(result);
-
+  
   #else
-
+  
   const off_t res = File.seek((off_t)offset, (int)seekOrigin);
   if (res == -1)
     return GetLastError_HRESULT();
   if (newPosition)
     *newPosition = (UInt64)res;
   return S_OK;
-
+  
   #endif
 }
 
@@ -754,7 +754,7 @@ STDMETHODIMP CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
   return ConvertBoolToHRESULT(res != FALSE);
 
   #else
-
+  
   ssize_t res;
 
   do
@@ -762,7 +762,7 @@ STDMETHODIMP CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
     res = write(1, data, (size_t)size);
   }
   while (res < 0 && (errno == EINTR));
-
+  
   if (res == -1)
     return GetLastError_HRESULT();
 
@@ -770,7 +770,7 @@ STDMETHODIMP CStdOutFileStream::Write(const void *data, UInt32 size, UInt32 *pro
   if (processedSize)
     *processedSize = (UInt32)res;
   return S_OK;
-
+  
   #endif
 }
 

@@ -25,7 +25,7 @@ public:
     _pos = 0;
     _wasFinished = false;
   }
-
+ 
   MY_UNKNOWN_IMP1(ISequentialInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -55,7 +55,7 @@ public:
     _size = size;
     return SeekToPhys();
   }
-
+ 
   MY_UNKNOWN_IMP2(ISequentialInStream, IInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -178,7 +178,7 @@ public:
   {
     _virtPos = 0;
   }
-
+ 
   MY_UNKNOWN_IMP2(ISequentialInStream, IInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -196,7 +196,7 @@ class CLimitedCachedInStream:
   UInt64 _physPos;
   UInt64 _size;
   UInt64 _startOffset;
-
+  
   const Byte *_cache;
   size_t _cacheSize;
   size_t _cachePhyPos;
@@ -222,7 +222,7 @@ public:
     _size = size;
     return SeekToPhys();
   }
-
+ 
   MY_UNKNOWN_IMP2(ISequentialInStream, IInStream)
 
   STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
@@ -240,7 +240,7 @@ class CTailOutStream:
 public:
   CMyComPtr<IOutStream> Stream;
   UInt64 Offset;
-
+  
   virtual ~CTailOutStream() {}
 
   MY_UNKNOWN_IMP2(ISequentialOutStream, IOutStream)

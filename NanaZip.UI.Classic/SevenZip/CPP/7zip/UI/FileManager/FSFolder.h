@@ -45,10 +45,10 @@ struct CDirItem: public NWindows::NFile::NFind::CFileInfo
   #ifndef UNDER_CE
   CByteBuffer Reparse;
   #endif
-
+  
   UInt64 NumFolders;
   UInt64 NumFiles;
-
+  
   int Parent;
 };
 
@@ -134,7 +134,7 @@ public:
 
 private:
   FString _path;
-
+  
   CObjectVector<CDirItem> Files;
   FStringVector Folders;
   // CObjectVector<CAltStream> Streams;
@@ -159,7 +159,7 @@ private:
   bool LoadComments();
   bool SaveComments();
   HRESULT LoadSubItems(int dirItem, const FString &path);
-
+  
   #ifdef FS_SHOW_LINKS_INFO
   bool ReadFileInfo(CDirItem &di);
   void ReadChangeTime(CDirItem &di);

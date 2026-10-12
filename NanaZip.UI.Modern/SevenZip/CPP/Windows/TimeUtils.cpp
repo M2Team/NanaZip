@@ -255,7 +255,7 @@ void GetCurUtc_FiTime(CFiTime &ft) throw()
   #endif
 
  #else
-
+  
   FiTime_Clear(ft);
   struct timeval now;
   if (gettimeofday(&now, 0 ) == 0)

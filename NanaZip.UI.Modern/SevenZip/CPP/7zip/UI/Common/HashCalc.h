@@ -91,7 +91,7 @@ struct CHashBundle: public IHashCalc
   UString FirstFileName;
 
   HRESULT SetMethods(DECL_EXTERNAL_CODECS_LOC_VARS const UStringVector &methods);
-
+  
   // void Init() {}
   CHashBundle()
   {
@@ -132,7 +132,7 @@ struct CHashOptionsLocal
   CBoolPair HashMode_Tag;
   CBoolPair HashMode_Dirs;
   CBoolPair HashMode_OnlyHash;
-
+  
   void Init_HashOptionsLocal()
   {
     HashMode_Zero.Init();
@@ -146,7 +146,7 @@ struct CHashOptionsLocal
   {
     Init_HashOptionsLocal();
   }
-
+  
   bool ParseFlagCharOption(wchar_t c, bool val)
   {
     c = MyCharLower_Ascii(c);
@@ -226,7 +226,7 @@ struct CHashPair
   bool Size_from_Disk_Defined;
   AString Method;
   AString Name;
-
+  
   AString FullLine;
   AString HashString;
   // unsigned HashLengthInBits;

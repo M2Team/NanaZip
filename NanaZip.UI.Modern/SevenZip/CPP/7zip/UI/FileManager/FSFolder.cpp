@@ -116,7 +116,7 @@ HRESULT CFSFolder::Init(const FString &path /* , IFolderFolder *parentFolder */)
   }
 
   #endif
-
+  
   return S_OK;
 }
 
@@ -197,7 +197,7 @@ HRESULT CFSFolder::LoadSubItems(int dirItem, const FString &relPrefix)
     fi.NumFolders = 0;
     fi.NumFiles = 0;
     fi.Parent = dirItem;
-
+    
     while (enumerator.Next(fi))
     {
       if (fi.IsDir())
@@ -214,12 +214,12 @@ HRESULT CFSFolder::LoadSubItems(int dirItem, const FString &relPrefix)
           fi.PackSize = fi.Size;
         */
       }
-
+      
      #ifndef UNDER_CE
 
       fi.Reparse.Free();
       fi.PackSize_Defined = false;
-
+    
      #ifdef FS_SHOW_LINKS_INFO
       fi.FileInfo_Defined = false;
       fi.FileInfo_WasRequested = false;
@@ -228,9 +228,9 @@ HRESULT CFSFolder::LoadSubItems(int dirItem, const FString &relPrefix)
       fi.ChangeTime_Defined = false;
       fi.ChangeTime_WasRequested = false;
      #endif
-
+      
       fi.PackSize = fi.Size;
-
+     
      #ifdef FS_SHOW_LINKS_INFO
       if (fi.HasReparsePoint())
       {
@@ -568,7 +568,7 @@ STDMETHODIMP CFSFolder::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *va
         prop = fi.NumLinks;
       #endif
       break;
-
+    
     case kpidINode:
       #ifdef UNDER_CE
       // prop = fi.FileIndex;
@@ -586,7 +586,7 @@ STDMETHODIMP CFSFolder::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *va
       if (fi.ChangeTime_Defined)
         prop = fi.ChangeTime;
       break;
-
+      
     #endif
 
     case kpidAttrib: prop = (UInt32)fi.Attrib; break;
@@ -653,7 +653,7 @@ STDMETHODIMP CFSFolder::GetRawProp(UInt32
   *data = NULL;
   *dataSize = 0;
   *propType = 0;
-
+  
   #ifndef UNDER_CE
   if (propID == kpidNtReparse)
   {
@@ -667,7 +667,7 @@ STDMETHODIMP CFSFolder::GetRawProp(UInt32
     return S_OK;
   }
   #endif
-
+  
   return S_OK;
 }
 
@@ -734,7 +734,7 @@ STDMETHODIMP_(Int32) CFSFolder::CompareItems(UInt32 index1, UInt32 index2, PROPI
           /* ss2 ? ss2->PackSize : */ fi2.PackSize);
       #endif
     }
-
+    
     #ifdef FS_SHOW_LINKS_INFO
     case kpidINode:
     {
@@ -777,7 +777,7 @@ STDMETHODIMP_(Int32) CFSFolder::CompareItems(UInt32 index1, UInt32 index2, PROPI
           GetExtensionPtr(fi1.Name),
           GetExtensionPtr(fi2.Name));
   }
-
+  
   return 0;
 }
 
@@ -863,7 +863,7 @@ STDMETHODIMP CFSFolder::BindToParentFolder(IFolderFolder **resultFolder)
   */
   if (_path.IsEmpty())
     return E_INVALIDARG;
-
+  
   #ifndef UNDER_CE
 
   if (IsDriveRootPath_SuperAllowed(_path))
@@ -874,7 +874,7 @@ STDMETHODIMP CFSFolder::BindToParentFolder(IFolderFolder **resultFolder)
     *resultFolder = drivesFolder.Detach();
     return S_OK;
   }
-
+  
   int pos = _path.ReverseFind_PathSepar();
   if (pos < 0 || pos != (int)_path.Len() - 1)
     return E_FAIL;
@@ -892,10 +892,10 @@ STDMETHODIMP CFSFolder::BindToParentFolder(IFolderFolder **resultFolder)
       return S_OK;
     }
   }
-
+  
   /*
   FString parentPathReduced = parentPath.Left(pos);
-
+  
   pos = parentPathReduced.ReverseFind_PathSepar();
   if (pos == 1)
   {
@@ -908,7 +908,7 @@ STDMETHODIMP CFSFolder::BindToParentFolder(IFolderFolder **resultFolder)
     return S_OK;
   }
   */
-
+  
   #endif
 
   return S_OK;
@@ -960,7 +960,7 @@ STDMETHODIMP CFSFolder::WasChanged(Int32 *wasChanged)
   *wasChanged = BoolToInt(wasChangedMain);
   return S_OK;
 }
-
+ 
 STDMETHODIMP CFSFolder::Clone(IFolderFolder **resultFolder)
 {
   CFSFolder *fsFolderSpec = new CFSFolder;

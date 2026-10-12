@@ -32,7 +32,7 @@ bool MyLookupAccountSid(LPCTSTR systemName, PSID sid,
   return result;
 }
 */
-
+  
 static void SetLsaString(LPWSTR src, PLSA_UNICODE_STRING dest)
 {
   size_t len = (size_t)wcslen(src);

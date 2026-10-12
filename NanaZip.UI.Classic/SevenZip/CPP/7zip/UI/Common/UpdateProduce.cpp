@@ -23,7 +23,7 @@ void UpdateProduce(
     up2.ArcIndex = pair.ArcIndex;
     up2.NewData = up2.NewProps = true;
     up2.UseArcProps = false;
-
+    
     switch (actionSet.StateActions[(unsigned)pair.State])
     {
       case NPairAction::kIgnore:
@@ -50,13 +50,13 @@ void UpdateProduce(
         up2.NewData = up2.NewProps = false;
         up2.UseArcProps = true;
         break;
-
+      
       case NPairAction::kCompress:
         if (pair.State == NPairState::kOnlyInArchive ||
             pair.State == NPairState::kNotMasked)
           throw kUpdateActionSetCollision;
         break;
-
+      
       case NPairAction::kCompressAsAnti:
         up2.IsAnti = true;
         up2.UseArcProps = (pair.ArcIndex >= 0);
@@ -67,6 +67,6 @@ void UpdateProduce(
 
     operationChain.Add(up2);
   }
-
+  
   operationChain.ReserveDown();
 }

@@ -101,7 +101,7 @@ public:
   void ClearBase() throw();
 
  #ifdef _WIN32
-
+ 
   bool Fill_From_ByHandleFileInfo(CFSTR path);
   void SetAsDir()  { Attrib = FILE_ATTRIBUTE_DIRECTORY; } // |= (FILE_ATTRIBUTE_UNIX_EXTENSION + (S_IFDIR << 16));
   void SetAsFile() { Attrib = 0; }
@@ -125,9 +125,9 @@ public:
     return NAttributes::Get_PosixMode_From_WinAttrib(Attrib);
   }
   bool Has_Attrib_ReparsePoint() const { return (Attrib & FILE_ATTRIBUTE_REPARSE_POINT) != 0; }
-
+ 
  #else
-
+  
   UInt32 GetPosixAttrib() const { return mode; }
   UInt32 GetWinAttrib() const { return Get_WinAttribPosix_From_PosixMode(mode); }
 
@@ -142,7 +142,7 @@ public:
       return true;
     return false;
   }
-
+ 
   bool IsPosixLink() const { return S_ISLNK(mode); }
 
  #endif

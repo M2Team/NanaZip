@@ -24,9 +24,9 @@ struct CDirItemsStat
   UInt64 NumAltStreams;
   UInt64 FilesSize;
   UInt64 AltStreamsSize;
-
+  
   UInt64 NumErrors;
-
+  
   // UInt64 Get_NumItems() const { return NumDirs + NumFiles + NumAltStreams; }
   UInt64 Get_NumDataItems() const { return NumFiles + NumAltStreams; }
   UInt64 GetTotalBytes() const { return FilesSize + AltStreamsSize; }
@@ -38,7 +38,7 @@ struct CDirItemsStat
         && 0 == FilesSize
         && 0 == AltStreamsSize
         && 0 == NumErrors; }
-
+  
   CDirItemsStat():
       NumDirs(0),
       NumFiles(0),
@@ -55,7 +55,7 @@ struct CDirItemsStat2: public CDirItemsStat
   UInt64 Anti_NumDirs;
   UInt64 Anti_NumFiles;
   UInt64 Anti_NumAltStreams;
-
+  
   // UInt64 Get_NumItems() const { return Anti_NumDirs + Anti_NumFiles + Anti_NumAltStreams + CDirItemsStat::Get_NumItems(); }
   UInt64 Get_NumDataItems2() const { return Anti_NumFiles + Anti_NumAltStreams + CDirItemsStat::Get_NumDataItems(); }
 
@@ -63,7 +63,7 @@ struct CDirItemsStat2: public CDirItemsStat
         && 0 == Anti_NumDirs
         && 0 == Anti_NumFiles
         && 0 == Anti_NumAltStreams; }
-
+  
   CDirItemsStat2():
       Anti_NumDirs(0),
       Anti_NumFiles(0),
@@ -231,7 +231,7 @@ struct CArcTime
 struct CDirItem: public NWindows::NFile::NFind::CFileInfoBase
 {
   UString Name;
-
+  
  #ifndef UNDER_CE
   CByteBuffer ReparseData;
 
@@ -244,7 +244,7 @@ struct CDirItem: public NWindows::NFile::NFind::CFileInfoBase
  #endif // _WIN32
 
  #endif // !UNDER_CE
-
+  
   void Copy_From_FileInfoBase(const NWindows::NFile::NFind::CFileInfoBase &fi)
   {
     (NWindows::NFile::NFind::CFileInfoBase &)*this = fi;
@@ -317,7 +317,7 @@ public:
   {
     return isDir ? !ExcludeDirItems : !ExcludeFileItems;
   }
-
+ 
 
   CDirItemsStat Stat;
 
@@ -332,18 +332,18 @@ public:
   CByteBuffer TempSecureBuf;
   bool _saclEnabled;
   bool ReadSecure;
-
+  
   HRESULT AddSecurityItem(const FString &path, int &secureIndex);
   HRESULT FillFixedReparse();
 
  #endif
 
  #ifndef _WIN32
-
+  
   C_UInt32_UString_Map OwnerNameMap;
   C_UInt32_UString_Map OwnerGroupMap;
   bool StoreOwnerName;
-
+  
   HRESULT FillDeviceSizes();
 
  #endif
@@ -369,7 +369,7 @@ public:
 
   // HRESULT EnumerateOneDir(const FString &phyPrefix, CObjectVector<NWindows::NFile::NFind::CDirEntry> &files);
   HRESULT EnumerateOneDir(const FString &phyPrefix, CObjectVector<NWindows::NFile::NFind::CFileInfo> &files);
-
+  
   HRESULT EnumerateItems2(
     const FString &phyPrefix,
     const UString &logPrefix,
@@ -392,7 +392,7 @@ struct CArcItem
   bool Size_Defined;
   bool Censored;
   UInt32 IndexInServer;
-
+  
   CArcItem():
       IsDir(false),
       IsAltStream(false),
