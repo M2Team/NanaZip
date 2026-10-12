@@ -1,0 +1,110 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style x:Key="PivotTabStyle" TargetType="Pivot" BasedOn="{StaticResource DefaultPivotStyle}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Pivot">
+          <Grid x:Name="RootElement"
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+            Background="{TemplateBinding Background}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="Orientation">
+                <VisualState x:Name="Portrait" />
+                <VisualState x:Name="Landscape" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="NavigationButtonsVisibility">
+                <VisualState x:Name="NavigationButtonsHidden" />
+                <VisualState x:Name="NavigationButtonsVisible" />
+                <VisualState x:Name="PreviousButtonVisible" />
+                <VisualState x:Name="NextButtonVisible" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HeaderStates">
+                <VisualState x:Name="HeaderDynamic" />
+                <VisualState x:Name="HeaderStatic" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ScrollViewer x:Name="ScrollViewer"
+              Grid.Row="1"
+              Margin="{TemplateBinding Padding}"
+              HorizontalSnapPointsType="MandatorySingle"
+              HorizontalSnapPointsAlignment="Center"
+              HorizontalScrollBarVisibility="Hidden"
+              VerticalScrollMode="Disabled"
+              VerticalScrollBarVisibility="Disabled"
+              VerticalSnapPointsType="None"
+              VerticalContentAlignment="Stretch"
+              ZoomMode="Disabled"
+              Template="{StaticResource ScrollViewerScrollBarlessTemplate}"
+              BringIntoViewOnFocusChange="False">
+              <PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
+                <Grid x:Name="PivotLayoutElement">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RenderTransform>
+                    <CompositeTransform x:Name="PivotLayoutElementTranslateTransform" />
+                  </Grid.RenderTransform>
+                  <ContentPresenter x:Name="LeftHeaderPresenter"
+                    Content="{TemplateBinding LeftHeader}"
+                    ContentTemplate="{TemplateBinding LeftHeaderTemplate}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
+                  <ScrollViewer x:Name="HeaderClipper"
+                    Grid.Column="1"
+                    UseSystemFocusVisuals="{StaticResource UseSystemFocusVisuals}"
+                    HorizontalScrollMode="Auto"
+                    VerticalScrollMode="Disabled"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Disabled"
+                    IsTabStop="True"
+                    CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <Grid>
+                      <Grid.RenderTransform>
+                        <CompositeTransform x:Name="HeaderOffsetTranslateTransform" />
+                      </Grid.RenderTransform>
+                      <PivotHeaderPanel x:Name="StaticHeader">
+                        <PivotHeaderPanel.RenderTransform>
+                          <CompositeTransform x:Name="StaticHeaderTranslateTransform" />
+                        </PivotHeaderPanel.RenderTransform>
+                      </PivotHeaderPanel>
+                    </Grid>
+                  </ScrollViewer>
+                  <ContentPresenter x:Name="RightHeaderPresenter"
+                    Grid.Column="2"
+                    Content="{TemplateBinding RightHeader}"
+                    ContentTemplate="{TemplateBinding RightHeaderTemplate}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
+                  <ItemsPresenter x:Name="PivotItemPresenter"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="3">
+                    <ItemsPresenter.RenderTransform>
+                      <TransformGroup>
+                        <TranslateTransform x:Name="ItemsPresenterTranslateTransform" />
+                        <CompositeTransform x:Name="ItemsPresenterCompositeTransform" />
+                      </TransformGroup>
+                    </ItemsPresenter.RenderTransform>
+                  </ItemsPresenter>
+                </Grid>
+              </PivotPanel>
+            </ScrollViewer>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>
