@@ -1,4 +1,4 @@
-# NanaZip Website
+﻿# NanaZip Website
 
 This folder contains the source code of the NanaZip website,
 built using [Astro](https://astro.build).
@@ -54,3 +54,21 @@ import exampleImageDark from '[path to dark version of picture]';
   alt="[alt text]"
   loading="[loading mode]" />
 ```
+
+## Update Packages
+
+Node.js projects often have large transitive dependency trees, so security
+vulnerabilities are discovered frequently. Update dependencies regularly,
+especially when Dependabot reports an issue:
+
+```console
+npx npm-check-updates -u
+npm install
+npm audit fix
+npm audit
+npm run build
+```
+
+Review major-version updates before committing both `package.json` and
+`package-lock.json`. Avoid `npm audit fix --force`, as it may introduce
+breaking changes.

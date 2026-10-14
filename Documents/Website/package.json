@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@fluentui/svg-icons": "^1.1.320",
-    "astro": "^6.1.2"
+    "@fluentui/svg-icons": "^1.1.344",
+    "astro": "^7.3.8"
   },
   "devDependencies": {
-    "sass-embedded": "^1.97.3"
+    "sass-embedded": "^1.105.1"
   }
 }
