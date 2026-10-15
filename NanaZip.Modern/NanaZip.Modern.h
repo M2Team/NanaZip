@@ -25,6 +25,43 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
     _In_ UINT32 ResourceId);
 
 /**
+ * @brief Get the BCP-47 language tag of the specified language which NanaZip
+ *        Modern Experience provides.
+ * @param Index The index of the language. The index 0 means following the
+ *              system language settings.
+ * @return If the language exists, it returns the pointer to the language tag,
+ *         which is empty for the index 0. Otherwise, it returns nullptr.
+ */
+EXTERN_C LPCWSTR WINAPI K7ModernGetLanguageTag(
+    _In_ UINT32 Index);
+
+/**
+ * @brief Get the name of the specified language which NanaZip Modern
+ *        Experience provides, in that language.
+ * @param Index The index of the language. The index 0 means following the
+ *              system language settings.
+ * @return If the language exists, it returns the pointer to the language name.
+ *         Otherwise, it returns nullptr.
+ */
+EXTERN_C LPCWSTR WINAPI K7ModernGetLanguageName(
+    _In_ UINT32 Index);
+
+/**
+ * @brief Override the language for NanaZip Modern Experience resources.
+ * @param LanguageTag The BCP-47 language tag which you want to use. If this
+ *                    parameter is nullptr or an empty string, the system
+ *                    language settings will be used.
+ * @return If the function succeeds, it returns S_OK. Otherwise, it returns an
+ *         HRESULT error code.
+ * @remark This function only affects the resources which are acquired after
+ *         calling it, so you need to recreate the windows and the dialogs
+ *         which are created by NanaZip Modern Experience for applying the new
+ *         language.
+ */
+EXTERN_C HRESULT WINAPI K7ModernSetLanguageOverride(
+    _In_opt_ LPCWSTR LanguageTag);
+
+/**
  * @brief Check whether NanaZip Modern Experience is available.
  * @return If NanaZip Modern Experience is available, it returns TRUE.
  *         Otherwise, it returns FALSE.

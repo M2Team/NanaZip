@@ -25,15 +25,20 @@
 #pragma comment(lib, "comctl32.lib")
 
 #include <winrt/Windows.ApplicationModel.Resources.Core.h>
+#include <winrt/Windows.Globalization.h>
 #include <winrt/Windows.UI.Xaml.Hosting.h>
 
 #include <mutex>
 #include <map>
+#include <vector>
 
 namespace winrt
 {
+    using Windows::ApplicationModel::Resources::Core::ResourceCandidate;
+    using Windows::ApplicationModel::Resources::Core::ResourceContext;
     using Windows::ApplicationModel::Resources::Core::ResourceManager;
     using Windows::ApplicationModel::Resources::Core::ResourceMap;
+    using Windows::Globalization::Language;
 }
 
 namespace
@@ -99,6 +104,150 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetLegacyStringResource(
         ResourceId,
         std::move(Content));
     return Iterator.first->second.c_str();
+}
+
+namespace
+{
+    struct LanguageEntry
+    {
+        winrt::hstring Tag;
+        winrt::hstring Name;
+    };
+
+    static std::vector<LanguageEntry> const& GetLanguageEntries()
+    {
+        static std::vector<LanguageEntry> const CachedResult =
+            ([]() -> std::vector<LanguageEntry>
+            {
+                std::vector<LanguageEntry> Result;
+
+                winrt::ResourceMap MainResourceMap = ::GetMainResourceMap();
+                if (!MainResourceMap)
+                {
+                    return Result;
+                }
+
+                try
+                {
+                    winrt::ResourceMap LegacyResourceMap =
+                        MainResourceMap.GetSubtree(L"Legacy");
+                    if (!LegacyResourceMap)
+                    {
+                        return Result;
+                    }
+
+                    // Resource 2200 is the name of the entry which follows the
+                    // system language settings, so all the provided languages
+                    // have it, and its candidates are the provided languages.
+                    for (winrt::ResourceCandidate const& Candidate
+                        : LegacyResourceMap.Lookup(
+                            L"Resource2200").Candidates())
+                    {
+                        winrt::hstring Tag =
+                            Candidate.GetQualifierValue(L"Language");
+                        if (Tag.empty())
+                        {
+                            continue;
+                        }
+
+                        winrt::hstring Name;
+                        try
+                        {
+                            Name = winrt::Language(Tag).NativeName();
+                        }
+                        catch (...)
+                        {
+                            // Do nothing.
+                        }
+                        if (Name.empty())
+                        {
+                            // Fall back to the language tag when the platform
+                            // does not know the language.
+                            Name = Tag;
+                        }
+
+                        LanguageEntry Entry;
+                        Entry.Tag = Tag;
+                        Entry.Name = Name;
+                        Result.push_back(Entry);
+                    }
+                }
+                catch (...)
+                {
+                    // Do nothing.
+                }
+
+                return Result;
+            }());
+
+        return CachedResult;
+    }
+}
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetLanguageTag(
+    _In_ UINT32 Index)
+{
+    // The index 0 follows the system language settings, so it has no language
+    // tag.
+    if (0 == Index)
+    {
+        return L"";
+    }
+
+    std::vector<LanguageEntry> const& Entries = ::GetLanguageEntries();
+    if (Index > Entries.size())
+    {
+        return nullptr;
+    }
+
+    return Entries[Index - 1].Tag.c_str();
+}
+
+EXTERN_C LPCWSTR WINAPI K7ModernGetLanguageName(
+    _In_ UINT32 Index)
+{
+    // The index 0 follows the system language settings.
+    if (0 == Index)
+    {
+        LPCWSTR SystemName = ::K7ModernGetLegacyStringResource(2200);
+        return SystemName ? SystemName : L"System";
+    }
+
+    std::vector<LanguageEntry> const& Entries = ::GetLanguageEntries();
+    if (Index > Entries.size())
+    {
+        return nullptr;
+    }
+
+    return Entries[Index - 1].Name.c_str();
+}
+
+EXTERN_C HRESULT WINAPI K7ModernSetLanguageOverride(
+    _In_opt_ LPCWSTR LanguageTag)
+{
+    try
+    {
+        if (LanguageTag && *LanguageTag)
+        {
+            winrt::ResourceContext::SetGlobalQualifierValue(
+                L"Language",
+                winrt::hstring(LanguageTag));
+        }
+        else
+        {
+            winrt::ResourceContext::ResetGlobalQualifierValues();
+        }
+    }
+    catch (...)
+    {
+        return winrt::to_hresult();
+    }
+
+    // The cached string resources are resolved with the previous language.
+    std::lock_guard Lock(g_CachedLanguageStringResourcesMutex);
+    g_CachedLanguageStringResources.clear();
+
+    return S_OK;
 }
 
 namespace
