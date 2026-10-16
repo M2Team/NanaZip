@@ -1,4 +1,4 @@
-// IArchive.h
+﻿// IArchive.h
 
 #ifndef __IARCHIVE_H
 #define __IARCHIVE_H
@@ -121,7 +121,7 @@ namespace NArchive
         kReadExternal
       };
     }
-
+  
     namespace NOperationResult
     {
       enum
@@ -151,7 +151,7 @@ namespace NArchive
       // kArcProp
     };
   }
-
+  
   namespace NUpdate
   {
     namespace NOperationResult
@@ -193,7 +193,7 @@ IArchiveExtractCallback::GetStream()
     {
       then the callee doesn't write data to stream: (*outStream == NULL)
     }
-
+  
   Out:
       (*outStream == NULL) - for directories
       (*outStream == NULL) - if link (hard link or symbolic link) was created
@@ -209,7 +209,7 @@ IArchiveExtractCallback::GetStream()
 if (IProgress::SetTotal() was called)
 {
   IProgress::SetCompleted(completeValue) uses
-    packSize   - for some stream formats (xz, gz, bz2, lz, lzma, z, ppmd).
+    packSize   - for some stream formats (xz, gz, bz2, lzma, z, ppmd).
     unpackSize - for another formats.
 }
 else
@@ -381,7 +381,7 @@ ARCHIVE_INTERFACE(IArchiveGetRawProps, 0x70)
 #define INTERFACE_IArchiveGetRootProps(x) \
   STDMETHOD(GetRootProp)(PROPID propID, PROPVARIANT *value) x; \
   STDMETHOD(GetRootRawProp)(PROPID propID, const void **data, UInt32 *dataSize, UInt32 *propType) x; \
-
+ 
 ARCHIVE_INTERFACE(IArchiveGetRootProps, 0x71)
 {
   INTERFACE_IArchiveGetRootProps(PURE)
@@ -398,7 +398,7 @@ ARCHIVE_INTERFACE(IArchiveOpenSeq, 0x61)
     S_FALSE - is not archive
     ? - DATA error
 */
-
+    
 /*
 const UInt32 kOpenFlags_RealPhySize = 1 << 0;
 const UInt32 kOpenFlags_NoSeek = 1 << 1;
@@ -411,7 +411,7 @@ Flags:
      - if phySize is not available, it doesn't try to make full parse to get phySize
    kOpenFlags_NoSeek -  ArcOpen2 function doesn't use IInStream interface, even if it's available
    kOpenFlags_RealPhySize - the handler will try to get PhySize, even if it requires full decompression for file
-
+   
   if handler is not allowed to use IInStream and the flag kOpenFlags_RealPhySize is not specified,
   the handler can return S_OK, but it doesn't check even Signature.
   So next Extract can be called for that sequential stream.
@@ -514,7 +514,7 @@ ARCHIVE_INTERFACE(IArchiveUpdateCallbackFile, 0x83)
 
 #define INTERFACE_IArchiveGetDiskProperty(x) \
   STDMETHOD(GetDiskProperty)(UInt32 index, PROPID propID, PROPVARIANT *value) x; \
-
+  
 ARCHIVE_INTERFACE(IArchiveGetDiskProperty, 0x84)
 {
   INTERFACE_IArchiveGetDiskProperty(PURE);
@@ -526,7 +526,7 @@ ARCHIVE_INTERFACE(IArchiveGetDiskProperty, 0x84)
   STDMETHOD(ReportRawProp)(UInt32 indexType, UInt32 index, PROPID propID, const void *data, UInt32 dataSize, UInt32 propType) x; \
   STDMETHOD(ReportFinished)(UInt32 indexType, UInt32 index, Int32 opRes) x; \
   STDMETHOD(DoNeedArcProp)(PROPID propID, Int32 *answer) x; \
-
+ 
 
 ARCHIVE_INTERFACE(IArchiveUpdateCallbackArcProp, 0x85)
 {
@@ -541,7 +541,7 @@ UpdateItems()
   outStream: output stream. (the handler) MUST support the case when
     Seek position in outStream is not ZERO.
     but the caller calls with empty outStream and seek position is ZERO??
-
+ 
   archives with stub:
 
   If archive is open and the handler and (Offset > 0), then the handler
@@ -565,10 +565,6 @@ ARCHIVE_INTERFACE(IOutArchive, 0xA0)
   INTERFACE_IOutArchive(PURE)
 };
 
-ARCHIVE_INTERFACE(IMultiVolumeOutArchive, 0xFF)
-{
-  STDMETHOD(GetMultiArchiveNameFmt)(PROPVARIANT* nameMod, PROPVARIANT* prefix, PROPVARIANT* postfix, BOOL* numberAfterExt, UInt32* digitCount) PURE;
-};
 
 /*
 ISetProperties::SetProperties()
@@ -675,7 +671,6 @@ extern "C"
 
   typedef UInt32 (WINAPI *Func_IsArc)(const Byte *p, size_t size);
   typedef HRESULT (WINAPI *Func_GetIsArc)(UInt32 formatIndex, Func_IsArc *isArc);
-  typedef HRESULT (WINAPI *Func_GetFormatLevelMask)(UInt32 formatIndex, UInt32 *mask);
 
   typedef HRESULT (WINAPI *Func_GetNumberOfFormats)(UInt32 *numFormats);
   typedef HRESULT (WINAPI *Func_GetHandlerProperty)(PROPID propID, PROPVARIANT *value);

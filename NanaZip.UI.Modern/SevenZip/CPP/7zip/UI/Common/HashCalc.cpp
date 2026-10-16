@@ -17,10 +17,6 @@
 #include "../../Archive/Common/ItemNameUtils.h"
 #include "../../Archive/IArchive.h"
 
-#ifdef WANT_OPTIONAL_LOWERCASE
-#include "../FileManager/RegistryUtils.h"
-#endif
-
 #include "EnumDirItems.h"
 #include "HashCalc.h"
 
@@ -56,7 +52,7 @@ HRESULT CHashBundle::SetMethods(DECL_EXTERNAL_CODECS_LOC_VARS const UStringVecto
 
   CRecordVector<CMethodId> ids;
   CObjectVector<COneMethodInfo> methods;
-
+  
   unsigned i;
   for (i = 0; i < names.Size(); i++)
   {
@@ -65,7 +61,7 @@ HRESULT CHashBundle::SetMethods(DECL_EXTERNAL_CODECS_LOC_VARS const UStringVecto
 
     if (m.MethodName.IsEmpty())
       m.MethodName = k_DefaultHashMethod;
-
+    
     if (m.MethodName == "*")
     {
       CRecordVector<CMethodId> tempMethods;
@@ -169,7 +165,7 @@ static void AddDigests(Byte *dest, const Byte *src, UInt32 size)
       next >>= 8;
     }
   }
-
+  
   // we use little-endian to store extra bytes
   dest += k_HashCalc_DigestSize_Max;
   for (unsigned i = 0; i < k_HashCalc_ExtraSize; i++)
@@ -205,7 +201,7 @@ void CHashBundle::Final(bool isDir, bool isAltStream, const UString &path)
   memset(pre, 0, sizeof(pre));
   if (isDir)
     pre[0] = 1;
-
+  
   FOR_VECTOR (i, Hashers)
   {
     CHasherState &h = Hashers[i];
@@ -219,11 +215,11 @@ void CHashBundle::Final(bool isDir, bool isAltStream, const UString &path)
     h.Hasher->Init();
     h.Hasher->Update(pre, sizeof(pre));
     h.Hasher->Update(h.Digests[0], h.DigestSize);
-
+    
     for (unsigned k = 0; k < path.Len(); k++)
     {
       wchar_t c = path[k];
-
+      
       // 21.04: we want same hash for linux and windows paths
       #if CHAR_PATH_SEPARATOR != '/'
       if (c == CHAR_PATH_SEPARATOR)
@@ -235,7 +231,7 @@ void CHashBundle::Final(bool isDir, bool isAltStream, const UString &path)
       Byte temp[2] = { (Byte)(c & 0xFF), (Byte)((c >> 8) & 0xFF) };
       h.Hasher->Update(temp, 2);
     }
-
+  
     Byte tempDigest[k_HashCalc_DigestSize_Max];
     h.Hasher->Final(tempDigest);
     if (!isAltStream)
@@ -337,7 +333,7 @@ static void AddHashResultLine(
       _s += ' ';
     _s += s;
   }
-
+  
   /*
   if (showSize)
   {
@@ -378,24 +374,24 @@ static void WriteLine(CDynLimBuf &hashFileString,
     Add_LF(hashFileString, options);
     return;
   }
-
+     
   UString path = path2;
-
+      
   bool isBin = false;
   const bool zeroMode = options.HashMode_Zero.Val;
   const bool tagMode = options.HashMode_Tag.Val;
-
+  
 #if CHAR_PATH_SEPARATOR != '/'
   path.Replace(WCHAR_PATH_SEPARATOR, L'/');
   // path.Replace((wchar_t)('\\' + 0xf000), L'\\'); // to debug WSL
 #endif
-
+  
   AString utf8;
   ConvertUnicodeToUTF8(path, utf8);
-
+  
   AString esc;
   CSum_Name_OriginalToEscape(utf8, esc);
-
+  
   if (!zeroMode)
   {
     if (esc != utf8)
@@ -405,10 +401,10 @@ static void WriteLine(CDynLimBuf &hashFileString,
       hashFileString += '\\';
     }
   }
-
+  
   if (isDir && !esc.IsEmpty() && esc.Back() != '/')
     esc += '/';
-
+  
   if (tagMode)
   {
     if (!methodName.IsEmpty())
@@ -421,9 +417,9 @@ static void WriteLine(CDynLimBuf &hashFileString,
     hashFileString += ')';
     hashFileString += " = ";
   }
-
+  
   hashFileString += hashesString;
-
+  
   if (!tagMode)
   {
     hashFileString += ' ';
@@ -445,7 +441,7 @@ static void WriteLine(CDynLimBuf &hashFileString,
   AString methodName;
   if (!hb.Hashers.IsEmpty())
     methodName = hb.Hashers[0].Name;
-
+  
   AString hashesString;
   AddHashResultLine(hashesString, hb.Hashers);
   WriteLine(hashFileString, options, path, isDir, methodName, hashesString);
@@ -484,7 +480,7 @@ HRESULT HashCalc(
         options.PathMode,
         UString(),
         dirItems);
-
+    
     if (res != S_OK)
     {
       if (res != E_ABORT)
@@ -532,7 +528,7 @@ HRESULT HashCalc(
     UString path;
     bool isDir = false;
     bool isAltStream = false;
-
+    
     if (options.StdInMode)
     {
       inStream = new CStdInFileStream;
@@ -588,12 +584,12 @@ HRESULT HashCalc(
         }
       }
     }
-
+    
     RINOK(callback->GetStream(path, isDir));
     UInt64 fileSize = 0;
 
     hb.InitForNewFile();
-
+    
     if (!isDir)
     {
       for (UInt32 step = 0;; step++)
@@ -612,9 +608,9 @@ HRESULT HashCalc(
         completeValue += size;
       }
     }
-
+    
     hb.Final(isDir, isAltStream, path);
-
+    
     /*
     if (needGenerate
         && (options.HashMode_Dirs.Val || !isDir))
@@ -624,7 +620,7 @@ HRESULT HashCalc(
           path, // change it
           isDir,
           hb);
-
+        
       if (hashFileString.IsError())
         return E_OUTOFMEMORY;
     }
@@ -633,7 +629,7 @@ HRESULT HashCalc(
     RINOK(callback->SetOperationResult(fileSize, hb, !isDir));
     RINOK(callback->SetCompleted(&completeValue));
   }
-
+  
   /*
   if (needGenerate)
   {
@@ -651,26 +647,18 @@ HRESULT HashCalc(
 
 static inline char GetHex_Upper(unsigned v)
 {
-#ifdef WANT_OPTIONAL_LOWERCASE
-  if (WantLowercaseHashes())
-    return (char)((v < 10) ? ('0' + v) : ('a' + (v - 10)));
-#endif
   return (char)((v < 10) ? ('0' + v) : ('A' + (v - 10)));
 }
 
 static inline char GetHex_Lower(unsigned v)
 {
-#ifdef WANT_OPTIONAL_LOWERCASE
-  if (!WantLowercaseHashes())
-    return (char)((v < 10) ? ('0' + v) : ('A' + (v - 10)));
-#endif
   return (char)((v < 10) ? ('0' + v) : ('a' + (v - 10)));
 }
 
 void HashHexToString(char *dest, const Byte *data, UInt32 size)
 {
   dest[size * 2] = 0;
-
+  
   if (!data)
   {
     for (UInt32 i = 0; i < size; i++)
@@ -681,7 +669,7 @@ void HashHexToString(char *dest, const Byte *data, UInt32 size)
     }
     return;
   }
-
+  
   if (size <= 8)
   {
     dest += size * 2;
@@ -774,19 +762,19 @@ bool CHashPair::IsDir() const
 bool CHashPair::ParseCksum(const char *s)
 {
   const char *end;
-
+  
   const UInt32 crc = ConvertStringToUInt32(s, &end);
   if (*end != ' ')
     return false;
   end++;
-
+  
   const UInt64 size = ConvertStringToUInt64(end, &end);
   if (*end != ' ')
     return false;
   end++;
-
+  
   Name = end;
-
+  
   Hash.Alloc(4);
   SetBe32(Hash, crc);
 
@@ -866,7 +854,7 @@ bool CHashPair::Parse(const char *s)
     s++;
     escape = true;
   }
-
+  
   // const char *kMethod = GetMethod_from_FileName(s);
   // if (kMethod)
   if (ParseHexString(s, NULL) < 4)
@@ -922,7 +910,7 @@ bool CHashPair::Parse(const char *s)
     HashString.SetFrom(s, (unsigned)numChars);
     s += numChars;
   }
-
+  
   if (IsBSD)
   {
     if (*s != 0)
@@ -1293,7 +1281,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
     AString s;
     bool minusMode = false;
     unsigned numLines = 0;
-
+    
     while (pos < buf.Size())
     {
       if (!GetLine(buf, zeroMode, cr_lf_Mode, pos, s))
@@ -1301,7 +1289,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
       numLines++;
       if (s.IsEmpty())
         continue;
-
+      
       if (s.IsPrefixedBy_Ascii_NoCase("; "))
       {
         if (numLines != 1)
@@ -1309,7 +1297,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
         // comment line of FileVerifier++
         continue;
       }
-
+      
       if (s.IsPrefixedBy_Ascii_NoCase("-----"))
       {
         if (minusMode)
@@ -1329,7 +1317,7 @@ STDMETHODIMP CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
         }
         continue;
       }
-
+      
       CHashPair pair;
       pair.FullLine = s;
       if (cksumMode)
@@ -1457,11 +1445,11 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   #ifdef EXTERNAL_CODECS
   const CExternalCodecs *__externalCodecs = g_ExternalCodecs_Ptr;
   #endif
-
+  
   CHashBundle hb_Glob;
   // UStringVector methods = options.Methods;
   UStringVector methods;
-
+  
   if (methods.IsEmpty() && !_nameExtenstion.IsEmpty())
   {
     AString utf;
@@ -1470,7 +1458,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     if (FindHashMethod(EXTERNAL_CODECS_LOC_VARS utf, id))
       methods.Add(_nameExtenstion);
   }
-
+  
   if (methods.IsEmpty() && !_pgpMethod.IsEmpty())
   {
     CMethodId id;
@@ -1532,7 +1520,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     const UInt32 index = allFilesMode ? i : indices[i];
 
     CHashPair &hp = HashPairs[index];
-
+    
     UString path;
     hp.Get_UString_Path(path);
 
@@ -1560,19 +1548,19 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     askMode = NArchive::NExtract::NAskMode::kReadExternal;
 
     extractCallback->PrepareOperation(askMode);
-
+    
     const bool isAltStream = false;
 
     UInt64 fileSize = 0;
 
     CHashBundle hb_Loc;
-
+    
     CHashBundle *hb_Use = &hb_Glob;
 
     HRESULT res_SetMethods = S_OK;
 
     UStringVector methods_loc;
-
+    
     if (!hp.Method.IsEmpty())
     {
       hb_Use = &hb_Loc;
@@ -1601,7 +1589,7 @@ STDMETHODIMP CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
     const bool isSupportedMode = hp.IsSupportedMode();
     hb_Use->InitForNewFile();
-
+    
     if (inStream)
     {
       for (UInt32 step = 0;; step++)
@@ -1724,10 +1712,10 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     Int32 newData;
     Int32 newProps;
     UInt32 indexInArc;
-
+    
     if (!callback)
       return E_FAIL;
-
+    
     RINOK(callback->GetUpdateItemInfo(i, &newData, &newProps, &indexInArc));
 
     ui.NewProps = IntToBool(newProps);
@@ -1769,7 +1757,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
       else
         return E_INVALIDARG;
     }
-
+    
     updateItems.Add(ui);
   }
 
@@ -1827,7 +1815,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
   CDynLimBuf hashFileString((size_t)1 << 31);
 
   CHashOptionsLocal options = _options;
-
+  
   if (_isArc)
   {
     if (!options.HashMode_Zero.Def && _is_ZeroMode)
@@ -1849,7 +1837,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
     RINOK(lps->SetCur());
 
     const CUpdateItem &ui = updateItems[i];
-
+    
     /*
     CHashPair item;
     if (!ui.NewProps)
@@ -1871,7 +1859,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
         else
         {
           RINOK(res);
-
+          
           if (fileInStream)
           {
             CMyComPtr<IStreamGetSize> streamGetSize;
@@ -1906,7 +1894,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
 
       hb.InitForNewFile();
       const bool isDir = ui.IsDir;
-
+      
       if (needWrite && fileInStream && !isDir)
       {
         for (UInt32 step = 0;; step++)
@@ -1951,7 +1939,7 @@ STDMETHODIMP CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
         PROPVARIANT prop;
         prop.vt = VT_EMPTY;
         prop.wReserved1 = 0;
-
+          
         NCOM::PropVarEm_Set_UInt64(&prop, fileSize);
         RINOK(reportArcProp->ReportProp(NArchive::NEventIndexType::kOutArcIndex, ui.IndexInClient, kpidSize, &prop));
 
@@ -2013,7 +2001,7 @@ HRESULT CHandler::SetProperty(const wchar_t *nameSpec, const PROPVARIANT &value)
   name.MakeLower_Ascii();
   if (name.IsEmpty())
     return E_INVALIDARG;
-
+  
   if (name.IsEqualTo("m")) // "hm" hash method
   {
     // COneMethodInfo omi;
@@ -2047,7 +2035,7 @@ HRESULT CHandler::SetProperty(const wchar_t *nameSpec, const PROPVARIANT &value)
   if (name.IsPrefixedBy_Ascii_NoCase("mt")
       || name.IsPrefixedBy_Ascii_NoCase("memuse"))
     return S_OK;
-
+  
   return E_INVALIDARG;
 }
 
@@ -2083,7 +2071,7 @@ void Codecs_AddHashArcHandler(CCodecs *codecs)
 {
   {
     CArcInfoEx item;
-
+    
     item.Name = "Hash";
     item.CreateInArchive = CreateHashHandler_In;
     item.CreateOutArchive = CreateHashHandler_Out;
@@ -2095,7 +2083,7 @@ void Codecs_AddHashArcHandler(CCodecs *codecs)
       // | NArcInfoFlags::kPureStartOpen
       | NArcInfoFlags::kHashHandler
       ;
-
+  
     // ubuntu uses "SHA256SUMS" file
     item.AddExts(UString (
         "sha256 sha512 sha224 sha384 sha1 sha md5"
@@ -2110,9 +2098,9 @@ void Codecs_AddHashArcHandler(CCodecs *codecs)
     item.SignatureOffset = 0;
     // item.Version = MY_VER_MIX;
     item.NewInterface = true;
-
+    
     item.Signatures.AddNew().CopyFrom(NULL, 0);
-
+    
     codecs->Formats.Add(item);
   }
 }

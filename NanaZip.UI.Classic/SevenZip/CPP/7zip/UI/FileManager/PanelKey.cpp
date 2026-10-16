@@ -90,6 +90,13 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
       _prevFocusedItem = _listView.GetFocusedItem();
       break;
     }
+    /*
+    case VK_F1:
+    {
+      // ShowHelpWindow(NULL, kHelpTopic);
+      break;
+    }
+    */
     case VK_F2:
     {
       if (!alt && !ctrl &&!shift)
@@ -188,7 +195,7 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
     case VK_UP:
     {
       if (alt)
-        OpenParentFolder();
+        _panelCallback->OnSetSameFolder();
       else if (shift)
         OnArrowWithShift();
       return false;
@@ -199,8 +206,6 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
         _panelCallback->OnSetSubFolder();
       else if (shift)
         OnArrowWithShift();
-      else if (ctrl)
-        _panelCallback->OnSetSameFolder();
       return false;
     }
     case VK_LEFT:
@@ -209,8 +214,6 @@ bool CPanel::OnKeyDown(LPNMLVKEYDOWN keyDownInfo, LRESULT &result)
         _panelCallback->OnSetSubFolder();
       else if (shift)
         OnArrowWithShift();
-      else if (ctrl)
-        _panelCallback->OnSetSameFolder();
       return false;
     }
     case VK_NEXT:

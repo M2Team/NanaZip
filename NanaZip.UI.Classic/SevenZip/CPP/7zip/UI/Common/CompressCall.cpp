@@ -17,10 +17,8 @@
 #include "../../../Windows/ProcessUtils.h"
 #include "../../../Windows/Synchronization.h"
 
-#include "../FileManager/StringUtils.h"
 #include "../FileManager/RegistryUtils.h"
 
-#include "ZipRegistry.h"
 #include "CompressCall.h"
 
 using namespace NWindows;
@@ -47,7 +45,6 @@ using namespace NWindows;
 #define kHashIncludeSwitches  kIncludeSwitch
 #define kStopSwitchParsing  " --"
 
-static NCompression::CInfo m_RegistryInfo;
 extern HWND g_HWND;
 
 UString GetQuotedString(const UString &s)
@@ -131,7 +128,7 @@ static HRESULT CreateMap(const UStringVector &names,
       totalSize += (names[i].Len() + 1);
   }
   totalSize *= sizeof(wchar_t);
-
+  
   CRandNameGenerator random;
 
   UString mappingName;
@@ -145,7 +142,7 @@ static HRESULT CreateMap(const UStringVector &names,
       return HRESULT_FROM_WIN32(wres);
     fileMapping.Close();
   }
-
+  
   UString eventName;
   for (;;)
   {
@@ -164,7 +161,7 @@ static HRESULT CreateMap(const UStringVector &names,
   char temp[32];
   ConvertUInt64ToString(totalSize, temp);
   params += temp;
-
+  
   params += ':';
   params += eventName;
 
@@ -186,29 +183,6 @@ static HRESULT CreateMap(const UStringVector &names,
   return S_OK;
 }
 
-int FindRegistryFormat(const UString &name)
-{
-  FOR_VECTOR (i, m_RegistryInfo.Formats)
-  {
-    const NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[i];
-    if (name.IsEqualTo_NoCase(GetUnicodeString(fo.FormatID)))
-      return i;
-  }
-  return -1;
-}
-
-int FindRegistryFormatAlways(const UString &name)
-{
-  int index = FindRegistryFormat(name);
-  if (index < 0)
-  {
-    NCompression::CFormatOptions fo;
-    fo.FormatID = GetSystemString(name);
-    index = m_RegistryInfo.Formats.Add(fo);
-  }
-  return index;
-}
-
 HRESULT CompressFiles(
     const UString &arcPathPrefix,
     const UString &arcName,
@@ -219,72 +193,16 @@ HRESULT CompressFiles(
 {
   MY_TRY_BEGIN
   UString params ('a');
-
+  
   CFileMapping fileMapping;
   NSynchronization::CManualResetEvent event;
   params += kIncludeSwitch;
   RINOK(CreateMap(names, fileMapping, event, params));
 
-  if (!arcType.IsEmpty() && arcType == L"7z")
+  if (!arcType.IsEmpty())
   {
-    int index;
     params += kArchiveTypeSwitch;
     params += arcType;
-    m_RegistryInfo.Load();
-    index = FindRegistryFormatAlways(arcType);
-    if (index >= 0)
-    {
-      char temp[64];
-      const NCompression::CFormatOptions &fo = m_RegistryInfo.Formats[index];
-
-      if (!fo.Method.IsEmpty())
-      {
-        params += " -m0=";
-        params += fo.Method;
-      }
-
-      /* Level = 0 is meaningful */
-      if (fo.Level != static_cast<UInt32>(-1))
-      {
-        params += " -mx=";
-        ConvertUInt32ToString(fo.Level, temp);
-        params += temp;
-      }
-
-      if (fo.Dictionary && fo.Dictionary != static_cast<UInt32>(-1))
-      {
-        params += " -md=";
-        ConvertUInt32ToString(fo.Dictionary, temp);
-        params += temp;
-        params += "b";
-      }
-
-      if (fo.BlockLogSize && fo.BlockLogSize != static_cast<UInt32>(-1))
-      {
-        params += " -ms=";
-        ConvertUInt64ToString(1ULL << fo.BlockLogSize, temp);
-        params += temp;
-        params += "b";
-      }
-
-      if (fo.NumThreads && fo.NumThreads != static_cast<UInt32>(-1))
-      {
-        params += " -mmt=";
-        ConvertUInt32ToString(fo.NumThreads, temp);
-        params += temp;
-      }
-
-      if (!fo.Options.IsEmpty())
-      {
-        UStringVector strings;
-        SplitString(fo.Options, strings);
-        FOR_VECTOR (i, strings)
-        {
-          params += " -m";
-          params += strings[i];
-        }
-      }
-    }
   }
 
   if (email)
@@ -305,7 +223,7 @@ HRESULT CompressFiles(
 
   params += kStopSwitchParsing;
   params.Add_Space();
-
+  
   if (!arcName.IsEmpty())
   {
     params += GetQuotedString(
@@ -314,7 +232,7 @@ HRESULT CompressFiles(
     // #endif
     arcName);
   }
-
+  
   return Call7zGui(params,
       // (arcPathPrefix.IsEmpty()? 0: (LPCWSTR)arcPathPrefix),
       waitFinish, &event);

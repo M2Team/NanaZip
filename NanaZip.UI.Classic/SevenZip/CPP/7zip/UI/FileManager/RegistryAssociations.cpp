@@ -14,7 +14,7 @@ using namespace NWindows;
 using namespace NRegistry;
 
 namespace NRegistryAssoc {
-
+  
 // static NSynchronization::CCriticalSection g_CriticalSection;
 
 static const TCHAR * const kClasses = TEXT("Software\\Classes\\");
@@ -59,7 +59,7 @@ bool CShellExtInfo::ReadFromRegistry(HKEY hkey, const CSysString &ext)
   }
   {
     CKey iconKey;
-
+ 
     if (iconKey.Open(hkey, GetFullKeyPath(hkey, ProgramKey + CSysString(CHAR_PATH_SEPARATOR) + kDefaultIconKeyName), KEY_READ) == ERROR_SUCCESS)
     {
       UString value;
@@ -96,7 +96,7 @@ LONG DeleteShellExtensionInfo(HKEY hkey, const CSysString &ext)
   CKey rootKey;
   rootKey.Attach(hkey);
   LONG res = rootKey.RecurseDeleteKey(GetExtKeyPath(hkey, ext));
-  // then we delete only NanaZip.* key.
+  // then we delete only 7-Zip.* key.
   rootKey.RecurseDeleteKey(GetFullKeyPath(hkey, GetExtProgramKeyName(ext)));
   rootKey.Detach();
   return res;
@@ -157,7 +157,7 @@ LONG AddShellExtensionInfo(HKEY hkey,
   CKey openKey;
   openKey.Create(shellKey, kOpenKeyName);
   openKey.SetValue(NULL, TEXT(""));
-
+  
   CKey commandKey;
   commandKey.Create(openKey, kCommandKeyName);
   commandKey.SetValue(NULL, programOpenCommand);

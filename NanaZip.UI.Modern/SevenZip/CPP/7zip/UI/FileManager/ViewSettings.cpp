@@ -3,14 +3,13 @@
 #include "StdAfx.h"
 
 #include "../../../../C/CpuArch.h"
-
+ 
 #include "../../../Common/IntToString.h"
 #include "../../../Common/StringConvert.h"
 
 #include "../../../Windows/Registry.h"
 #include "../../../Windows/Synchronization.h"
 
-#include "RegistryUtils.h"
 #include "ViewSettings.h"
 
 using namespace NWindows;
@@ -289,15 +288,7 @@ static void ReadStringList(LPCTSTR valueName, UStringVector &folders)
 }
 
 void SaveFolderHistory(const UStringVector &folders)
-{
-  if (WantFolderHistory())
-    SaveStringList(kFolderHistoryValueName, folders);
-  else {
-    UStringVector Empty;
-    SaveStringList(kFolderHistoryValueName, Empty);
-  }
-}
-
+  { SaveStringList(kFolderHistoryValueName, folders); }
 void ReadFolderHistory(UStringVector &folders)
   { ReadStringList(kFolderHistoryValueName, folders); }
 
@@ -307,15 +298,7 @@ void ReadFastFolders(UStringVector &folders)
   { ReadStringList(kFastFoldersValueName, folders); }
 
 void SaveCopyHistory(const UStringVector &folders)
-{
-  if (WantCopyHistory())
-    SaveStringList(kCopyHistoryValueName, folders);
-  else {
-    UStringVector Empty;
-    SaveStringList(kCopyHistoryValueName, Empty);
-  }
-}
-
+  { SaveStringList(kCopyHistoryValueName, folders); }
 void ReadCopyHistory(UStringVector &folders)
   { ReadStringList(kCopyHistoryValueName, folders); }
 

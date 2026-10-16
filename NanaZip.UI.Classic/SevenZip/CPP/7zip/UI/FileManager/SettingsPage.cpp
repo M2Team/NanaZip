@@ -28,12 +28,7 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_SHOW_GRID,
   IDX_SETTINGS_SINGLE_CLICK,
   IDX_SETTINGS_ALTERNATIVE_SELECTION,
-  IDX_SETTINGS_LARGE_PAGES,
-  IDX_SETTINGS_WANT_ARC_HISTORY,
-  IDX_SETTINGS_WANT_PATH_HISTORY,
-  IDX_SETTINGS_WANT_COPY_HISTORY,
-  IDX_SETTINGS_WANT_FOLDER_HISTORY,
-  IDX_SETTINGS_LOWERCASE_HASHES,
+  IDX_SETTINGS_LARGE_PAGES
   // , IDT_COMPRESS_MEMORY
 };
 
@@ -128,17 +123,12 @@ bool CSettingsPage::OnInit()
   // CheckButton(IDX_SETTINGS_UNDERLINE, st.Underline);
 
   CheckButton(IDX_SETTINGS_SHOW_SYSTEM_MENU, st.ShowSystemMenu);
-
+  
   if (IsLargePageSupported())
     CheckButton(IDX_SETTINGS_LARGE_PAGES, ReadLockMemoryEnable());
   else
     EnableItem(IDX_SETTINGS_LARGE_PAGES, false);
 
-  CheckButton(IDX_SETTINGS_WANT_ARC_HISTORY, st.ArcHistory);
-  CheckButton(IDX_SETTINGS_WANT_PATH_HISTORY, st.PathHistory);
-  CheckButton(IDX_SETTINGS_WANT_COPY_HISTORY, st.CopyHistory);
-  CheckButton(IDX_SETTINGS_WANT_FOLDER_HISTORY, st.FolderHistory);
-  CheckButton(IDX_SETTINGS_LOWERCASE_HASHES, st.LowercaseHashes);
 
   /*
   NCompression::CMemUse mu;
@@ -187,7 +177,7 @@ bool CSettingsPage::OnInit()
     }
   }
   */
-
+  
   // EnableSubItems();
 
   return CPropertyPage::OnInit();
@@ -219,13 +209,8 @@ LONG CSettingsPage::OnApply()
     st.ShowGrid = IsButtonCheckedBool(IDX_SETTINGS_SHOW_GRID);
     st.SingleClick = IsButtonCheckedBool(IDX_SETTINGS_SINGLE_CLICK);
     st.AlternativeSelection = IsButtonCheckedBool(IDX_SETTINGS_ALTERNATIVE_SELECTION);
-    st.ArcHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_ARC_HISTORY);
-    st.PathHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_PATH_HISTORY);
-    st.CopyHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_COPY_HISTORY);
-    st.FolderHistory = IsButtonCheckedBool(IDX_SETTINGS_WANT_FOLDER_HISTORY);
-    st.LowercaseHashes = IsButtonCheckedBool(IDX_SETTINGS_LOWERCASE_HASHES);
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
-
+    
     st.ShowSystemMenu = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SYSTEM_MENU);
 
     st.Save();
@@ -252,7 +237,7 @@ LONG CSettingsPage::OnApply()
     const UString str = _memLimitStrings[index];
 
     bool needSave = true;
-
+    
     NCompression::CMemUse mu;
 
     if (_ramSize_Defined)
@@ -266,29 +251,29 @@ LONG CSettingsPage::OnApply()
         if (s2.IsEmpty())
           GetItemText(IDT_COMPRESS_MEMORY, s2);
         UString s;
-
+        
         s += "The selected value is not safe for system performance.";
         s.Add_LF();
         s += "The memory consumption for compression operation will exceed RAM size.";
         s.Add_LF();
         s.Add_LF();
         AddSize_MB(s, usage64);
-
+        
         if (!s2.IsEmpty())
         {
           s += " : ";
           s += s2;
         }
-
+        
         s.Add_LF();
         AddSize_MB(s, _ramSize);
         s += " : RAM";
-
+        
         s.Add_LF();
         s.Add_LF();
         s += "Are you sure you want set that unsafe value for memory usage?";
-
-        int res = MessageBoxW(*this, s, L"NanaZip", MB_YESNOCANCEL | MB_ICONQUESTION);
+        
+        int res = MessageBoxW(*this, s, L"7-Zip", MB_YESNOCANCEL | MB_ICONQUESTION);
         if (res != IDYES)
           needSave = false;
       }
@@ -303,7 +288,7 @@ LONG CSettingsPage::OnApply()
       return PSNRET_INVALID_NOCHANGEPAGE;
   }
   */
-
+    
   return PSNRET_NOERROR;
 }
 
@@ -341,11 +326,6 @@ bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SETTINGS_FULL_ROW:
     case IDX_SETTINGS_SHOW_GRID:
     case IDX_SETTINGS_ALTERNATIVE_SELECTION:
-    case IDX_SETTINGS_WANT_ARC_HISTORY:
-    case IDX_SETTINGS_WANT_PATH_HISTORY:
-    case IDX_SETTINGS_WANT_COPY_HISTORY:
-    case IDX_SETTINGS_WANT_FOLDER_HISTORY:
-    case IDX_SETTINGS_LOWERCASE_HASHES:
       _wasChanged = true;
       break;
 

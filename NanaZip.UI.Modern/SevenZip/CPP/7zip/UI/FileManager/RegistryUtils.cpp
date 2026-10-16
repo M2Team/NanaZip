@@ -37,13 +37,6 @@ static LPCTSTR const kShowSystemMenu = TEXT("ShowSystemMenu");
 // static LPCTSTR const kLockMemoryAdd = TEXT("LockMemoryAdd");
 static LPCTSTR const kLargePages = TEXT("LargePages");
 
-// they default to off (0) in 7-Zip ZS /TR
-static LPCTSTR const kArcHistory = TEXT("WantArcHistory");
-static LPCTSTR const kPathHistory = TEXT("WantPathHistory");
-static LPCTSTR const kCopyHistory = TEXT("WantCopyHistory");
-static LPCTSTR const kFolderHistory = TEXT("WantFolderHistory");
-static LPCTSTR const kLowercaseHashes = TEXT("LowercaseHashes");
-
 static LPCTSTR const kFlatViewName = TEXT("FlatViewArc");
 // static LPCTSTR const kShowDeletedFiles = TEXT("ShowDeleted");
 
@@ -99,18 +92,6 @@ static bool Read7ZipOption(LPCTSTR value, bool defaultValue)
   return defaultValue;
 }
 
-static bool ReadFMOption(LPCTSTR value)
-{
-  CKey key;
-  bool enabled = false;
-  if (key.Open(HKEY_CURRENT_USER, kCU_FMPath, KEY_READ) == ERROR_SUCCESS)
-  {
-    if (key.QueryValue(value, enabled) == ERROR_SUCCESS)
-      return enabled;
-  }
-  return enabled;
-}
-
 static void ReadOption(CKey &key, LPCTSTR value, bool &dest)
 {
   bool enabled = false;
@@ -147,11 +128,6 @@ void CFmSettings::Save() const
   SaveOption(kShowGrid, ShowGrid);
   SaveOption(kSingleClick, SingleClick);
   SaveOption(kAlternativeSelection, AlternativeSelection);
-  SaveOption(kArcHistory, ArcHistory);
-  SaveOption(kPathHistory, PathHistory);
-  SaveOption(kCopyHistory, CopyHistory);
-  SaveOption(kFolderHistory, FolderHistory);
-  SaveOption(kLowercaseHashes, LowercaseHashes);
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
@@ -165,11 +141,6 @@ void CFmSettings::Load()
   ShowGrid = false;
   SingleClick = false;
   AlternativeSelection = false;
-  ArcHistory = false;
-  PathHistory = false;
-  CopyHistory = false;
-  FolderHistory = false;
-  LowercaseHashes = false;
   // Underline = false;
 
   ShowSystemMenu = false;
@@ -183,11 +154,6 @@ void CFmSettings::Load()
     ReadOption(key, kShowGrid, ShowGrid);
     ReadOption(key, kSingleClick, SingleClick);
     ReadOption(key, kAlternativeSelection, AlternativeSelection);
-    ReadOption(key, kArcHistory, ArcHistory);
-    ReadOption(key, kPathHistory, PathHistory);
-    ReadOption(key, kCopyHistory, CopyHistory);
-    ReadOption(key, kFolderHistory, FolderHistory);
-    ReadOption(key, kLowercaseHashes, LowercaseHashes);
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );
@@ -200,12 +166,6 @@ void CFmSettings::Load()
 
 void SaveLockMemoryEnable(bool enable) { Save7ZipOption(kLargePages, enable); }
 bool ReadLockMemoryEnable() { return Read7ZipOption(kLargePages, false); }
-
-bool WantArcHistory() { return ReadFMOption(kArcHistory); }
-bool WantPathHistory() { return ReadFMOption(kPathHistory); }
-bool WantCopyHistory() { return ReadFMOption(kCopyHistory); }
-bool WantFolderHistory() { return ReadFMOption(kFolderHistory); }
-bool WantLowercaseHashes() { return ReadFMOption(kLowercaseHashes); }
 
 static CSysString GetFlatViewName(UInt32 panelIndex)
 {

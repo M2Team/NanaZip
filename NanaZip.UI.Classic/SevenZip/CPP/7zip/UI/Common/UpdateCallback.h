@@ -1,4 +1,4 @@
-// UpdateCallback.h
+﻿// UpdateCallback.h
 
 #ifndef __UPDATE_CALLBACK_H
 #define __UPDATE_CALLBACK_H
@@ -51,7 +51,7 @@ struct CArcToDoStat
   virtual HRESULT ReportRawProp(UInt32 indexType, UInt32 index, PROPID propID, const void *data, UInt32 dataSize, UInt32 propType) x; \
   virtual HRESULT ReportFinished(UInt32 indexType, UInt32 index, Int32 opRes) x; \
   */
-
+ 
   /* virtual HRESULT CloseProgress() { return S_OK; } */
 
 struct IUpdateCallbackUI
@@ -135,16 +135,12 @@ public:
   FString VolName;
   FString VolExt;
   UString ArcFileName; // without path prefix
-  FString VolPrefix;
-  FString VolPostfix;
-  bool VolNumberAfterExt;
-  UInt32 DigitCount;
 
   IUpdateCallbackUI *Callback;
 
   const CDirItems *DirItems;
   const CDirItem *ParentDirItem;
-
+  
   const CArc *Arc;
   CMyComPtr<IInArchive> Archive;
   const CObjectVector<CArcItem> *ArcItems;

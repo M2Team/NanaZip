@@ -122,7 +122,7 @@ static void MyChangeMenu(HMENU menuLoc, int level, int menuIndex)
 {
   CMenu menu;
   menu.Attach(menuLoc);
-
+  
   for (unsigned i = 0;; i++)
   {
     CMenuItem item;
@@ -152,9 +152,9 @@ static void MyChangeMenu(HMENU menuLoc, int level, int menuIndex)
           else
             continue;
         }
-
+        
         LangString_OnlyFromLangFile(langID, newString);
-
+        
         if (newString.IsEmpty())
           continue;
       }
@@ -167,7 +167,7 @@ static void MyChangeMenu(HMENU menuLoc, int level, int menuIndex)
         // we don't need lang change for CRC items!!!
 
         UInt32 langID = langPos >= 0 ? kIDLangPairs[langPos].LangID : item.wID;
-
+        
         // **************** NanaZip Modification Start ****************
         // */# localization logic removed from NanaZip.
         #if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
@@ -285,10 +285,10 @@ void MyLoadMenu()
 void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
 {
   HMENU mainMenu = g_MoreMenu;
-
+  
   if (::GetSubMenu(mainMenu, position) != hMenu)
     return;
-
+  
   if (position == kMenuIndex_File)
   {
     CMenu menu;
@@ -316,7 +316,7 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
 
     menu.CheckRadioItem(IDM_VIEW_ARANGE_BY_NAME, IDM_VIEW_ARANGE_NO_SORT,
         GetSortControlID(g_App.GetSortID()), MF_BYCOMMAND);
-
+    
     menu.CheckItemByID(IDM_VIEW_TWO_PANELS, g_App.NumPanels == 2);
     menu.CheckItemByID(IDM_VIEW_FLAT_VIEW, g_App.GetFlatMode());
     menu.CheckItemByID(IDM_VIEW_AUTO_REFRESH, g_App.Get_AutoRefresh_Mode());
@@ -352,7 +352,7 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
         CMenu subMenu;
         subMenu.Attach(menu.GetSubMenu(i));
         subMenu.RemoveAllItems();
-
+        
         const int k_TimeLevels[] =
         {
           kTimestampPrintLevel_DAY,
@@ -367,7 +367,7 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
         unsigned selectedCommand = 0;
         g_App._timestampLevels.Clear();
         unsigned id = kMenuID_Time;
-
+        
         for (unsigned k = 0; k < ARRAY_SIZE(k_TimeLevels); k++)
         {
           wchar_t s[64];
@@ -399,7 +399,7 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
     subMenu.Attach(menu.GetSubMenu(0));
     subMenu.RemoveAllItems();
     int i;
-
+    
     for (i = 0; i < 10; i++)
     {
       UString s = LangString(IDS_BOOKMARK);
@@ -468,17 +468,17 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
   unsigned numRealItems = startPos;
 
   const bool isBigScreen = NControl::IsDialogSizeOK(40, 200, g_HWND);
-
+  
   for (unsigned i = 0;; i++)
   {
     CMenuItem item;
 
     item.fMask = MIIM_SUBMENU | MIIM_STATE | MIIM_ID | Get_fMask_for_FType_and_String();
     item.fType = MFT_STRING;
-
+    
     if (!g_FileMenu.GetItem(i, true, item))
       break;
-
+    
     {
       if (!programMenu && item.wID == IDCLOSE)
         continue;
@@ -518,7 +518,7 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
             disable = true;
         }
       }
-
+      
       if (isHashFolder)
       {
         switch (item.wID)
@@ -569,7 +569,7 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
   UString vercPath;
   if (!diffPath.IsEmpty() && isFsFolder && allAreFiles && numItems == 1)
     ReadReg_VerCtrlPath(vercPath);
-
+  
   if (!vercPath.IsEmpty())
   {
     NFile::NFind::CFileInfo fi;
@@ -590,7 +590,7 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
           if (id == IDM_VER_EDIT)
             continue;
         }
-
+        
         CMenuItem item;
         UString s (g_Zvc_Strings[k]);
         if (destMenu.AppendItem(MF_STRING, id, s))
@@ -601,7 +601,7 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
       }
     }
   }
-
+  
   destMenu.RemoveAllItemsFrom(numRealItems);
 }
 
@@ -619,7 +619,7 @@ bool ExecuteFileCommand(unsigned id)
   {
     // File
     case IDM_OPEN: g_App.OpenItem(); break;
-
+    
     case IDM_OPEN_INSIDE:        g_App.OpenItemInside(NULL); break;
     case IDM_OPEN_INSIDE_ONE:    g_App.OpenItemInside(L"*"); break;
     case IDM_OPEN_INSIDE_PARSER: g_App.OpenItemInside(L"#"); break;
@@ -631,22 +631,13 @@ bool ExecuteFileCommand(unsigned id)
     case IDM_COPY_TO: g_App.CopyTo(); break;
     case IDM_MOVE_TO: g_App.MoveTo(); break;
     case IDM_DELETE: g_App.Delete(!IsKeyDown(VK_SHIFT)); break;
-
+    
     case IDM_HASH_ALL: g_App.CalculateCrc("*"); break;
     case IDM_CRC32: g_App.CalculateCrc("CRC32"); break;
     case IDM_CRC64: g_App.CalculateCrc("CRC64"); break;
-    case IDM_XXH32: g_App.CalculateCrc("XXH32"); break;
-    case IDM_XXH64: g_App.CalculateCrc("XXH64"); break;
-    case IDM_MD2:   g_App.CalculateCrc("MD2"); break;
-    case IDM_MD4:   g_App.CalculateCrc("MD4"); break;
-    case IDM_MD5:   g_App.CalculateCrc("MD5"); break;
-    case IDM_SHA1:  g_App.CalculateCrc("SHA1"); break;
+    case IDM_SHA1: g_App.CalculateCrc("SHA1"); break;
     case IDM_SHA256: g_App.CalculateCrc("SHA256"); break;
-    case IDM_SHA384: g_App.CalculateCrc("SHA384"); break;
-    case IDM_SHA512: g_App.CalculateCrc("SHA512"); break;
-    case IDM_BLAKE2sp: g_App.CalculateCrc("BLAKE2sp"); break;
-    case IDM_BLAKE3: g_App.CalculateCrc("BLAKE3"); break;
-
+    
     case IDM_DIFF: g_App.DiffFiles(); break;
 
     case IDM_VER_EDIT:
@@ -690,7 +681,7 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
       g_ExitEventLauncher.Exit(false);
       SendMessage(hWnd, WM_CLOSE, 0, 0);
       break;
-
+    
     // Edit
     /*
     case IDM_EDIT_CUT:
@@ -773,12 +764,12 @@ bool OnMenuCommand(HWND hWnd, unsigned id)
       Save_ShowDeleted(isChecked);
     }
     */
-
+    
     case IDM_VIEW_TWO_PANELS:       g_App.SwitchOnOffOnePanel(); break;
 
     // Tools
     case IDM_OPTIONS: OptionsDialog(hWnd, g_hInstance); break;
-
+          
     case IDM_BENCHMARK: MyBenchmark(false); break;
     case IDM_BENCHMARK2: MyBenchmark(true); break;
 
