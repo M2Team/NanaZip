@@ -1,4 +1,4 @@
-﻿{23170F69-40C1-278A-0000-00yy00xx0000}
+{23170F69-40C1-278A-0000-00yy00xx0000}
 
 00 IProgress.h
 
@@ -172,12 +172,7 @@ Handler GUIDs:
   0B lzma86
   0C xz
   0D ppmd
-  0E zstd
-  0F lz4
-  10 lz5
-  11 liz
 
-  BF Lzip
   C0 AVB
   C1 LP
   C2 Sparse

@@ -35,6 +35,8 @@ public:
   virtual void OnDestroy() { PostQuitMessage(0); }
   virtual void OnClose() { Destroy(); }
   /*
+  virtual LRESULT  OnHelp(LPHELPINFO helpInfo) { OnHelp(); }
+  virtual LRESULT  OnHelp() {};
   virtual bool OnButtonClicked(int buttonID, HWND buttonHWND);
   virtual void OnOK() {};
   virtual void OnCancel() {};

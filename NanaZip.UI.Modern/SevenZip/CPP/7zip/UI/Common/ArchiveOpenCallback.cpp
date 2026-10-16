@@ -35,7 +35,7 @@ STDMETHODIMP COpenCallbackImp::SetCompleted(const UInt64 *files, const UInt64 *b
   COM_TRY_END
 }
 
-
+ 
 STDMETHODIMP COpenCallbackImp::GetProperty(PROPID propID, PROPVARIANT *value)
 {
   COM_TRY_BEGIN
@@ -68,7 +68,7 @@ struct CInFileStreamVol: public CInFileStream
   unsigned FileNameIndex;
   COpenCallbackImp *OpenCallbackImp;
   CMyComPtr<IArchiveOpenCallback> OpenCallbackRef;
-
+ 
   ~CInFileStreamVol()
   {
     if (OpenCallbackRef)
@@ -84,7 +84,7 @@ STDMETHODIMP COpenCallbackImp::GetStream(const wchar_t *name, IInStream **inStre
 {
   COM_TRY_BEGIN
   *inStream = NULL;
-
+  
   if (_subArchiveMode)
     return S_FALSE;
   if (Callback)
@@ -94,9 +94,9 @@ STDMETHODIMP COpenCallbackImp::GetStream(const wchar_t *name, IInStream **inStre
 
   UString name2 = name;
 
-
+  
   #ifndef _SFX
-
+  
   #ifdef _WIN32
   name2.Replace(L'/', WCHAR_PATH_SEPARATOR);
   #endif

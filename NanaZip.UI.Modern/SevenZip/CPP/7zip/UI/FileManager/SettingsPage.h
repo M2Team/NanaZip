@@ -1,5 +1,5 @@
 ﻿// SettingsPage.h
-
+ 
 #ifndef __SETTINGS_PAGE_H
 #define __SETTINGS_PAGE_H
 
@@ -17,7 +17,7 @@ class CSettingsPage: public NWindows::NControl::CPropertyPage
   UStringVector _memLimitStrings;
   UInt64 _ramSize;
   UInt64 _ramSize_Defined;
-
+ 
   int AddMemComboItem(UInt64 size, UInt64 percents = 0, bool isDefault = false);
   */
 
