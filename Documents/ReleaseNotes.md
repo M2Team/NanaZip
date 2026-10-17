@@ -3,6 +3,69 @@
 For preview-only releases, please see
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 7.0, version 2610.1 (7.0.1873.0)**
+
+- Disable FileSystemWriteVirtualization again to resolve the following known
+  issues: (Encouraged by ahmed605.)
+  - Due to the issues in Desktop Bridge file system virtualization, you are
+    unable to use NanaZip in the Safe Mode of Windows.
+  - Due to the policy from Microsoft Store, NanaZip is unable to disable Desktop
+    Bridge file system virtualization, so the file operations in
+    `%UserProfile%/AppData` will be redirected in Windows 10, and file
+    operations in directories other than `Local`, `LocalLow` and `Roaming` in
+    `%UserProfile%/AppData` will still be redirected in Windows 11.
+- Refactor the 7-Zip ZS integration. (Cooperated with dinhngtu.)
+  - Rationale
+    - Preserve compatibility with the 7-Zip mainline format specifications and
+      avoid exposing non-standard compression and encryption options.
+    - Remove 7-Zip ZS-specific UI changes because these often lack
+      internationalization support.
+    - Reduce the maintenance burden caused by synchronizing 7-Zip ZS changes.
+    - Isolate additional codecs to improve maintainability and keep the core
+      implementation focused.
+  - Changes
+    - Introduce NanaZip.ZS.Codecs to isolate additional codecs and archive
+      handlers inherited from 7-Zip ZS.
+    - Remove the unmaintained Fast LZMA2 encoder because the upstream 7-Zip
+      LZMA2 encoder now provides sufficient performance.
+    - Align core and user interface behavior unrelated to codec and archive
+      format support closely with the corresponding 7-Zip mainline.
+    - Rewrite the Zstandard encoder for compatibility with upstream 7-Zip
+      interfaces.
+    - Remove Zstandard decoder support from Self Extracting Executable (SFX)
+      stubs to reduce their dependencies and binary size.
+- Refactor the hash algorithm integration to use the SHA-1, SHA-2, and SHA-3
+  implementations from 7-Zip mainline, resolving object lifecycle issues while
+  enabling the SHA512-224, SHA512-256, SHAKE128, SHAKE256, SHAKE128-256 and
+  SHAKE256-512 hash handlers. (Cooperated with dinhngtu.)
+- Add some workarounds for decompress function from LZ5 and Lizard to solve
+  valid files fail to decompress. (Thanks to dinhngtu.)
+- Integrate the RHash AICH and BTIH implementations directly into their
+  respective codecs to resolve SHA-1 integration issues and remove the obsolete
+  custom SHA-1 header and wrapper. (Cooperated with dinhngtu.)
+- Update Italian translations. (Contributed by Hexaae and kaixinol.)
+- Fix the disabled context menu items are indistinguishable in the dark mode.
+  (Contributed by kaixinol.)
+- Introduce NanaZip Test Suite (K7Tests) into GitHub Actions workflow for testing
+  the correctness of NanaZip implementations. (Contributed by dinhngtu.)
+- Synchronize 7-Zip mainline implementations to 26.04. (Except the NanaZip File
+  Manager.) (Thanks to Igor Pavlov.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/964ba6a645545f47edc26452a35a18c726a5f1c4.
+  (Thanks to Sergey G. Brester and Tino Reichardt.)
+- Synchronize the Lizard implementation to
+  https://github.com/inikep/lizard/tree/d3becc7e80d3eb01147c2f63bed2e23fac533f19.
+- Synchronize the LZ5 implementation to
+  https://github.com/inikep/lizard/tree/1bc0fef363a44444135badb8e34286d5c56e1d5c.
+- Synchronize the xxHash implementation to v0.8.4. (Contributed by dinhngtu.)
+  (https://github.com/Cyan4973/xxHash/releases/tag/v0.8.4)
+- Update Mile.Windows.Helpers to 1.0.1427.
+- Simplify and standardize the packaging, restore, and build logic, introducing
+  the NanaZipPackagingArchitectures option and BuildTestingBinaries target while
+  enabling NanaZip Classic binaries for testing.
+- Enforce CRLF line endings for all text files across the project on checkout.
+- Update website dependencies and add package update instructions.
+
 **NanaZip 7.0, version 2609.2 (7.0.1843.0)**
 
 - Add fix for wrong password on all Zip archives. (Contributed by dinhngtu.)
