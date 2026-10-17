@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -124,6 +124,14 @@
   <data name="MoreButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Më shumë</value>
     <comment>More</comment>
+  </data>
+  <data name="SmartExtractButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Smart Extract and Open</value>
+    <comment>Smart Extract and Open</comment>
+  </data>
+  <data name="SmartExtractButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Smart Extract and Open</value>
+    <comment>Smart Extract and Open</comment>
   </data>
   <data name="SponsorButton.AcquireText" xml:space="preserve">
     <value>Mbështet NanaZip</value>
