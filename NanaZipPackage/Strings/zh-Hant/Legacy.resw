@@ -174,6 +174,18 @@
   <data name="Resource559" xml:space="preserve">
     <value>附加資料流(&amp;A)</value>
   </data>
+  <data name="Resource560" xml:space="preserve">
+    <value>檔案名稱編碼</value>
+  </data>
+  <data name="Resource561" xml:space="preserve">
+    <value>自動偵測</value>
+  </data>
+  <data name="Resource562" xml:space="preserve">
+    <value>系統預設 (ANSI)</value>
+  </data>
+  <data name="Resource563" xml:space="preserve">
+    <value>系統預設 (OEM)</value>
+  </data>
   <data name="Resource590" xml:space="preserve">
     <value>在內部開啟 *</value>
   </data>
@@ -665,6 +677,9 @@
   </data>
   <data name="Resource2513" xml:space="preserve">
     <value>使用小寫字母驗證值</value>
+  </data>
+  <data name="Resource2514" xml:space="preserve">
+    <value>預設使用自動編碼偵測(&amp;D)</value>
   </data>
   <data name="Resource2900" xml:space="preserve">
     <value>關於 NanaZip</value>

@@ -332,6 +332,10 @@ struct CItemEx: public CItem
   bool pax_path_WasUsed;
   bool pax_link_WasUsed;
   bool pax_size_WasUsed;
+  // **************** NanaZip Modification Start ****************
+  bool NameIsUtf8;
+  bool LinkIsUtf8;
+  // **************** NanaZip Modification End ****************
 
   bool MTime_IsBin;
   bool PackSize_IsBin;

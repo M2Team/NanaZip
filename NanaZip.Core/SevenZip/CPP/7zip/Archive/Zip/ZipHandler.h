@@ -65,6 +65,16 @@ private:
   bool _force_OpenSeq;
   bool _forceCodePage;
   UInt32 _specifiedCodePage;
+  // **************** NanaZip Modification Start ****************
+    bool m_AutoCodePage;
+    UInt32 m_DetectedCodePage;
+    bool m_CodePageDetected = false;
+    void DetectFileNameCodePage();
+    HRESULT SetFileNameCodePage(PROPVARIANT const& Property);
+    void GetItemName(
+        CItemEx const& Item,
+        UString& Name) const;
+  // **************** NanaZip Modification End ****************
 
   DECL_EXTERNAL_CODECS_VARS
 
@@ -85,6 +95,9 @@ private:
     _force_OpenSeq = false;
     _forceCodePage = false;
     _specifiedCodePage = CP_OEMCP;
+    // **************** NanaZip Modification Start ****************
+    m_AutoCodePage = false;
+    // **************** NanaZip Modification End ****************
   }
 
   // void MarkAltStreams(CObjectVector<CItemEx> &items);

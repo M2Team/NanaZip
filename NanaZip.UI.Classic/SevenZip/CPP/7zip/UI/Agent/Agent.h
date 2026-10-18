@@ -130,15 +130,24 @@ public:
   STDMETHOD(SetFlatMode)(Int32 flatMode);
   #endif
 
+  // **************** NanaZip Modification Start ****************
+  ~CAgentFolder();
+  // **************** NanaZip Modification End ****************
+
   CAgentFolder():
       _proxyDirIndex(0),
       _isAltStreamFolder(false),
+      // **************** NanaZip Modification Start ****************
+      _agentSpec(nullptr),
+      // **************** NanaZip Modification End ****************
       _flatMode(false),
       _loadAltStreams(false) // _loadAltStreams alt streams works in flat mode, but we don't use it now
       , _zoneMode(NExtract::NZoneIdMode::Default)  // NanaZip Modification
       /* , _replaceAltStreamCharsMode(0) */
       {}
 
+  // **************** NanaZip Modification Start ****************
+#if 0 // ******** Annotated 7-Zip Mainline Source Code snippet Start ********
   void Init(const CProxyArc *proxy, const CProxyArc2 *proxy2,
       unsigned proxyDirIndex,
       /* IFolderFolder *parentFolder, */
@@ -154,6 +163,13 @@ public:
     _agent = (IInFolderArchive *)agent;
     _agentSpec = agent;
   }
+#endif // ******** Annotated 7-Zip Mainline Source Code snippet End ********
+    void Init(
+        CProxyArc const* Proxy,
+        CProxyArc2 const* Proxy2,
+        unsigned ProxyDirIndex,
+        CAgent* Agent);
+  // **************** NanaZip Modification End ****************
 
   void GetPathParts(UStringVector &pathParts, bool &isAltStreamFolder);
   HRESULT CommonUpdateOperation(
@@ -241,6 +257,13 @@ public:
   ~CAgent();
 private:
   HRESULT ReadItems();
+  // **************** NanaZip Modification Start ****************
+    HRESULT ApplyFileNameCodePage(UInt32 CodePage);
+    UInt32 m_FileNameCodePage;
+    UInt32 m_AutoFileNameCodePage = static_cast<UInt32>(-1);
+    CRecordVector<CAgentFolder*> m_Folders;
+    void ResetFolders();
+  // **************** NanaZip Modification End ****************
 public:
   CProxyArc *_proxy;
   CProxyArc2 *_proxy2;
@@ -272,6 +295,25 @@ public:
   const CArc &GetArc() const { return _archiveLink.Arcs.Back(); }
   IInArchive *GetArchive() const { if ( _archiveLink.Arcs.IsEmpty()) return 0; return GetArc().Archive; }
   bool CanUpdate() const;
+  // **************** NanaZip Modification Start ****************
+    bool IsFileNameEncodingSupported() const;
+    UInt32 GetFileNameCodePage() const
+    {
+        return this->m_FileNameCodePage;
+    }
+    UInt32 GetAutoFileNameCodePage() const
+    {
+        return this->m_AutoFileNameCodePage;
+    }
+    HRESULT SetFileNameCodePage(
+        UInt32 CodePage,
+        IFolderFolder** RootFolder);
+    void AddFolder(CAgentFolder* Folder)
+    {
+        this->m_Folders.Add(Folder);
+    }
+    void RemoveFolder(CAgentFolder* Folder);
+  // **************** NanaZip Modification End ****************
 
   bool Is_Attrib_ReadOnly() const
   {

@@ -17,6 +17,9 @@
 
 #include "../Common/ItemNameUtils.h"
 #include "../Common/ParseProperties.h"
+// **************** NanaZip Modification Start ****************
+#include "../Common/FileNameEncoding.h"
+// **************** NanaZip Modification End ****************
 
 #include "ZipHandler.h"
 #include "ZipUpdate.h"
@@ -527,8 +530,30 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outStream, UInt32 numIt
 
 
 
+// **************** NanaZip Modification Start ****************
+HRESULT CHandler::SetFileNameCodePage(PROPVARIANT const& Property)
+{
+    UInt32 CodePage;
+    RINOK(ParseFileNameCodePage(Property, CodePage))
+    this->m_AutoCodePage = (CodePage == FileNameCodePageAuto);
+    if (this->m_AutoCodePage)
+    {
+        this->DetectFileNameCodePage();
+        CodePage = this->m_DetectedCodePage;
+    }
+    this->_forceCodePage = (CodePage != FileNameCodePageAuto);
+    this->_specifiedCodePage = this->_forceCodePage ? CodePage : CP_OEMCP;
+    return S_OK;
+}
+// **************** NanaZip Modification End ****************
+
 Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps))
 {
+  // **************** NanaZip Modification Start ****************
+  // An encoding-only change must not reset the compression/update options.
+  if (numProps == 1 && StringsAreEqualNoCase_Ascii(names[0], "cp"))
+    return SetFileNameCodePage(values[0]);
+  // **************** NanaZip Modification End ****************
   InitMethodProps();
   
   for (UInt32 i = 0; i < numProps; i++)
@@ -594,10 +619,13 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
     }
     else if (name.IsEqualTo("cp"))
     {
-      UInt32 cp = CP_OEMCP;
-      RINOK(ParsePropToUInt32(L"", prop, cp))
-      _forceCodePage = true;
-      _specifiedCodePage = cp;
+      // **************** NanaZip Modification Start ****************
+      // UInt32 cp = CP_OEMCP;
+      // RINOK(ParsePropToUInt32(L"", prop, cp))
+      // _forceCodePage = true;
+      // _specifiedCodePage = cp;
+      RINOK(SetFileNameCodePage(prop))
+      // **************** NanaZip Modification End ****************
     }
     else if (name.IsEqualTo("rsfx"))
     {

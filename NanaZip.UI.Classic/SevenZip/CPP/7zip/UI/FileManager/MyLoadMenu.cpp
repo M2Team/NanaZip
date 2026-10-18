@@ -307,6 +307,9 @@ void OnMenuActivating(HWND /* hWnd */, HMENU hMenu, int position)
   {
     CMenu menu;
     menu.Attach(hMenu);
+    // **************** NanaZip Modification Start ****************
+    ::DeleteMenu(hMenu, IDM_FILE_NAME_ENCODING, MF_BYCOMMAND);
+    // **************** NanaZip Modification End ****************
     menu.RemoveAllItems();
     g_App.GetFocusedPanel().CreateFileMenu(hMenu);
   }
@@ -475,6 +478,121 @@ static const char * const g_Zvc_Strings[] =
   , "Ver Diff (&0)"
 };
 
+// **************** NanaZip Modification Start ****************
+static const UINT FileNameEncodingCommand = 910;
+static const UInt32 FileNameCodePages[] =
+{
+    (UInt32)-1, CP_UTF8, 54936, 936, 950, 932, 949,
+    1252, 1250, 1251, 1253, 1254, 1255, 1256, 874, 437, 866,
+    CP_ACP, CP_OEMCP
+};
+
+static UString EncodingMenuText(
+    _In_ UINT Resource,
+    _In_z_ const wchar_t* Fallback)
+{
+    UString Text = ::LangString(Resource);
+    return Text.IsEmpty() ? UString(Fallback) : Text;
+}
+
+static bool GetFileNameEncodingName(
+    _In_ UInt32 CodePage,
+    UString& Text)
+{
+    CPINFOEXW Info = {};
+    if (!::GetCPInfoExW(CodePage, 0, &Info))
+    {
+        return false;
+    }
+    const wchar_t* Name = Info.CodePageName;
+    while (*Name >= L'0' && *Name <= L'9')
+    {
+        ++Name;
+    }
+    while (*Name == L' ')
+    {
+        ++Name;
+    }
+    unsigned Length = (unsigned)::wcslen(Name);
+    if (Length >= 2 && Name[0] == L'(' && Name[Length - 1] == L')')
+    {
+        ++Name;
+        Length -= 2;
+    }
+    Text.SetFrom(Name, Length);
+    return true;
+}
+
+static bool InsertFileNameEncodingMenu(
+    CMenu& Menu,
+    _In_ unsigned Position,
+    _In_ bool Supported,
+    _In_ UInt32 SelectedCodePage,
+    _In_ UInt32 AutoCodePage)
+{
+    CMenu Popup;
+    if (!Popup.CreatePopup())
+    {
+        return false;
+    }
+    CMenuDestroyer Destroyer(Popup);
+    for (unsigned Index = 0; Index < ARRAY_SIZE(FileNameCodePages); ++Index)
+    {
+        const UInt32 CodePage = FileNameCodePages[Index];
+        UString Text;
+        if (CodePage == (UInt32)-1)
+        {
+            Text = ::EncodingMenuText(IDS_ENCODING_AUTO, L"Auto-detect");
+            UString Name;
+            if (Supported && AutoCodePage != (UInt32)-1 &&
+                ::GetFileNameEncodingName(AutoCodePage, Name))
+            {
+                Text += L" (";
+                Text += Name;
+                Text += L")";
+            }
+        }
+        else if (CodePage == CP_ACP)
+        {
+            Text = ::EncodingMenuText(IDS_ENCODING_SYSTEM,
+                                      L"System default (ANSI)");
+        }
+        else if (CodePage == CP_OEMCP)
+        {
+            Text =
+                ::EncodingMenuText(IDS_ENCODING_OEM, L"System default (OEM)");
+        }
+        else if (!::GetFileNameEncodingName(CodePage, Text))
+        {
+            continue;
+        }
+        const UINT Command = FileNameEncodingCommand + Index;
+        if (!Popup.AppendItem(MF_STRING, Command, Text))
+        {
+            return false;
+        }
+        if (CodePage == SelectedCodePage)
+        {
+            Popup.CheckRadioItem(Command, Command, Command, MF_BYCOMMAND);
+        }
+    }
+    CMenuItem Item;
+    Item.fMask = MIIM_SUBMENU | MIIM_ID | MIIM_STATE | MIIM_TYPE;
+    Item.fType = MFT_STRING;
+    Item.fState = Supported ? MFS_ENABLED : MFS_GRAYED;
+    Item.wID = IDM_FILE_NAME_ENCODING;
+    Item.hSubMenu = Popup;
+    Item.StringValue =
+        ::EncodingMenuText(IDM_FILE_NAME_ENCODING, L"File name encoding");
+    if (!Menu.InsertItem(Position, true, Item))
+    {
+        return false;
+    }
+    Destroyer.Disable();
+    return true;
+}
+// **************** NanaZip Modification End ****************
+
 void CFileMenu::Load(HMENU hMenu, unsigned startPos)
 {
   CMenu destMenu;
@@ -577,6 +695,13 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
         if (disable)
           destMenu.EnableItem(startPos, MF_BYPOSITION | MF_GRAYED);
         startPos++;
+        // **************** NanaZip Modification Start ****************
+        if (programMenu && item.hSubMenu &&
+            ::GetMenuItemID(item.hSubMenu, 0) == IDM_CRC32 &&
+            InsertFileNameEncodingMenu(destMenu, startPos,
+                FileNameEncodingSupported, FileNameCodePage, AutoFileNameCodePage))
+            ++startPos;
+        // **************** NanaZip Modification End ****************
       }
 
       if (!item.IsSeparator())
@@ -625,6 +750,15 @@ void CFileMenu::Load(HMENU hMenu, unsigned startPos)
 
 bool ExecuteFileCommand(unsigned id)
 {
+  // **************** NanaZip Modification Start ****************
+  if (id >= FileNameEncodingCommand &&
+      id < FileNameEncodingCommand + ARRAY_SIZE(FileNameCodePages))
+  {
+      g_App.GetFocusedPanel().SetFileNameCodePage(
+          FileNameCodePages[id - FileNameEncodingCommand]);
+      return true;
+  }
+  // **************** NanaZip Modification End ****************
   if (id >= kMenuCmdID_Plugin_Start)
   {
     g_App.GetFocusedPanel().InvokePluginCommand(id);

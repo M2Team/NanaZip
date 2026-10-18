@@ -7,6 +7,9 @@
 #include "../../../../C/Sort.h"
 
 #include "../../../Common/ComTry.h"
+// **************** NanaZip Modification Start ****************
+#include "../../../Common/StringToInt.h"
+// **************** NanaZip Modification End ****************
 
 #include "../../../Windows/FileDir.h"
 #include "../../../Windows/FileName.h"
@@ -98,6 +101,31 @@ HRESULT LoadGlobalCodecs()
 
   return S_OK;
 }
+
+// **************** NanaZip Modification Start ****************
+void CAgentFolder::Init(
+    CProxyArc const* Proxy,
+    CProxyArc2 const* Proxy2,
+    _In_ unsigned ProxyDirIndex,
+    CAgent* Agent)
+{
+    this->_proxy = Proxy;
+    this->_proxy2 = Proxy2;
+    this->_proxyDirIndex = ProxyDirIndex;
+    this->_isAltStreamFolder = Proxy2 && Proxy2->IsAltDir(ProxyDirIndex);
+    this->_agent = (IInFolderArchive*)Agent;
+    this->_agentSpec = Agent;
+    Agent->AddFolder(this);
+}
+
+CAgentFolder::~CAgentFolder()
+{
+    if (this->_agentSpec)
+    {
+        this->_agentSpec->RemoveFolder(this);
+    }
+}
+// **************** NanaZip Modification End ****************
 
 STDMETHODIMP CAgentFolder::GetAgentFolder(CAgentFolder **agentFolder)
 {
@@ -1567,9 +1595,15 @@ STDMETHODIMP CAgentFolder::Extract(const UInt32 *indices,
 // CAgent
 
 CAgent::CAgent():
+    // **************** NanaZip Modification Start ****************
+    m_FileNameCodePage(CP_OEMCP),
+    // **************** NanaZip Modification End ****************
     _proxy(NULL),
     _proxy2(NULL),
     _updatePathPrefix_is_AltFolder(false),
+    // **************** NanaZip Modification Start ****************
+    _agentFolder(nullptr),
+    // **************** NanaZip Modification End ****************
     _isDeviceFile(false),
     _isHashHandler(false)
 {
@@ -1582,6 +1616,165 @@ CAgent::~CAgent()
   if (_proxy2)
     delete _proxy2;
 }
+
+// **************** NanaZip Modification Start ****************
+void CAgent::RemoveFolder(CAgentFolder* Folder)
+{
+    FOR_VECTOR (Index, this->m_Folders)
+    {
+        if (this->m_Folders[Index] == Folder)
+        {
+            this->m_Folders.Delete(Index);
+            break;
+        }
+    }
+    if (this->_agentFolder == Folder)
+    {
+        this->_agentFolder = nullptr;
+    }
+}
+
+void CAgent::ResetFolders()
+{
+    FOR_VECTOR (Index, this->m_Folders)
+    {
+        CAgentFolder& Folder = *this->m_Folders[Index];
+        Folder._items.Clear();
+        Folder._proxy = this->_proxy;
+        Folder._proxy2 = this->_proxy2;
+        Folder._proxyDirIndex = k_Proxy_RootDirIndex;
+        Folder._isAltStreamFolder = false;
+    }
+    this->_updatePathPrefix.Empty();
+    this->_updatePathPrefix_is_AltFolder = false;
+}
+
+bool CAgent::IsFileNameEncodingSupported() const
+{
+    if (!this->_archiveLink.IsOpen || this->_archiveLink.Arcs.IsEmpty())
+    {
+        return false;
+    }
+    const UString Type = this->GetTypeOfArc(this->GetArc());
+    return Type.IsEqualTo_NoCase(L"zip") || Type.IsEqualTo_NoCase(L"tar");
+}
+
+HRESULT CAgent::ApplyFileNameCodePage(UInt32 CodePage)
+{
+    CMyComPtr<ISetProperties> Properties;
+    RINOK(this->GetArchive()->QueryInterface(IID_ISetProperties,
+                                             (void**)&Properties));
+    const wchar_t* Name = L"cp";
+    NCOM::CPropVariant Value;
+    if (CodePage == (UInt32)-1)
+    {
+        Value = L"auto";
+    }
+    else
+    {
+        Value = CodePage;
+    }
+    RINOK(Properties->SetProperties(&Name, &Value, 1));
+    if (CodePage == (UInt32)-1)
+    {
+        this->m_AutoFileNameCodePage = (UInt32)-1;
+        NCOM::CPropVariant Actual;
+        if (this->GetArchive()->GetArchiveProperty(kpidCodePage, &Actual) ==
+            S_OK)
+        {
+            if (Actual.vt == VT_UI4)
+            {
+                this->m_AutoFileNameCodePage = Actual.ulVal;
+            }
+            else if (Actual.vt == VT_BSTR && Actual.bstrVal)
+            {
+                if (::StringsAreEqualNoCase_Ascii(Actual.bstrVal, "UTF-8"))
+                {
+                    this->m_AutoFileNameCodePage = CP_UTF8;
+                }
+                else if (::StringsAreEqualNoCase_Ascii(Actual.bstrVal, "OEM"))
+                {
+                    this->m_AutoFileNameCodePage = CP_OEMCP;
+                }
+                else
+                {
+                    const wchar_t* End;
+                    const UInt32 Detected =
+                        ::ConvertStringToUInt32(Actual.bstrVal, &End);
+                    if (End != Actual.bstrVal && *End == 0)
+                    {
+                        this->m_AutoFileNameCodePage = Detected;
+                    }
+                }
+            }
+        }
+    }
+    return S_OK;
+}
+
+HRESULT CAgent::SetFileNameCodePage(
+    _In_ UInt32 CodePage,
+    IFolderFolder** RootFolder)
+{
+    COM_TRY_BEGIN
+    if (!RootFolder)
+    {
+        return E_POINTER;
+    }
+    *RootFolder = nullptr;
+    if (!this->IsFileNameEncodingSupported())
+    {
+        return E_NOTIMPL;
+    }
+    CMyComPtr<IFolderFolder> Root;
+    RINOK(this->BindToRootFolder(&Root));
+    if (CodePage == this->m_FileNameCodePage)
+    {
+        *RootFolder = Root.Detach();
+        return S_OK;
+    }
+
+    const UInt32 OldCodePage = this->m_FileNameCodePage;
+    HRESULT Result = this->ApplyFileNameCodePage(CodePage);
+    if (Result != S_OK)
+    {
+        this->ApplyFileNameCodePage(OldCodePage);
+        return Result;
+    }
+
+    CProxyArc* OldProxy = this->_proxy;
+    CProxyArc2* OldProxy2 = this->_proxy2;
+    const bool OldThereIsPathProp = this->ThereIsPathProp;
+    this->_proxy = nullptr;
+    this->_proxy2 = nullptr;
+    try
+    {
+        Result = this->ReadItems();
+    }
+    catch (...)
+    {
+        Result = E_OUTOFMEMORY;
+    }
+    if (Result != S_OK)
+    {
+        delete this->_proxy;
+        delete this->_proxy2;
+        this->_proxy = OldProxy;
+        this->_proxy2 = OldProxy2;
+        this->ThereIsPathProp = OldThereIsPathProp;
+        this->ApplyFileNameCodePage(OldCodePage);
+        return Result;
+    }
+
+    this->m_FileNameCodePage = CodePage;
+    this->ResetFolders();
+    delete OldProxy;
+    delete OldProxy2;
+    *RootFolder = Root.Detach();
+    return S_OK;
+    COM_TRY_END
+}
+// **************** NanaZip Modification End ****************
 
 bool CAgent::CanUpdate() const
 {
@@ -1605,6 +1798,17 @@ STDMETHODIMP CAgent::Open(
     IArchiveOpenCallback *openArchiveCallback)
 {
   COM_TRY_BEGIN
+  // **************** NanaZip Modification Start ****************
+  CFmSettings Settings;
+  Settings.Load();
+  m_FileNameCodePage = Settings.AutoDetectFileNameEncoding ? (UInt32)-1 : CP_OEMCP;
+  m_AutoFileNameCodePage = (UInt32)-1;
+  delete _proxy;
+  delete _proxy2;
+  _proxy = NULL;
+  _proxy2 = NULL;
+  ResetFolders();
+  // **************** NanaZip Modification End ****************
   _archiveFilePath = filePath;
   _hashBaseFolderPrefix.Empty();
   _attrib = 0;
@@ -1676,6 +1880,16 @@ STDMETHODIMP CAgent::Open(
     if (arc.IsHashHandler(options))
       _isHashHandler = true;
   }
+  // **************** NanaZip Modification Start ****************
+  if (res == S_OK && IsFileNameEncodingSupported())
+    RINOK(ApplyFileNameCodePage(m_FileNameCodePage));
+  if (res == S_OK && !m_Folders.IsEmpty())
+  {
+    RINOK(ReadItems());
+    ResetFolders();
+  }
+  // **************** NanaZip Modification End ****************
+
 
   return res;
 
@@ -1696,6 +1910,9 @@ STDMETHODIMP CAgent::ReOpen(IArchiveOpenCallback *openArchiveCallback)
     delete _proxy;
     _proxy = NULL;
   }
+  // **************** NanaZip Modification Start ****************
+  ResetFolders();
+  // **************** NanaZip Modification End ****************
 
   CObjectVector<COpenType> incl;
   CIntVector exl;
@@ -1710,7 +1927,15 @@ STDMETHODIMP CAgent::ReOpen(IArchiveOpenCallback *openArchiveCallback)
   options.callback = openArchiveCallback;
 
   RINOK(_archiveLink.ReOpen(options));
-  return ReadItems();
+  // **************** NanaZip Modification Start ****************
+  // return ReadItems();
+  m_AutoFileNameCodePage = (UInt32)-1;
+  if (IsFileNameEncodingSupported())
+    RINOK(ApplyFileNameCodePage(m_FileNameCodePage));
+  const HRESULT Result = ReadItems();
+  ResetFolders();
+  return Result;
+  // **************** NanaZip Modification End ****************
   COM_TRY_END
 }
 

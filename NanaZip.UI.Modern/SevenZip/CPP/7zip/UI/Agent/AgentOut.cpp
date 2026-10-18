@@ -375,6 +375,11 @@ STDMETHODIMP CAgent::DoOperation(
       delete []propValues;
     }
   }
+  // **************** NanaZip Modification Start ****************
+  // The cp-only handler setter preserves compression properties.
+  if (IsFileNameEncodingSupported())
+    RINOK(ApplyFileNameCodePage(GetFileNameCodePage()));
+  // **************** NanaZip Modification End ****************
   m_PropNames.Clear();
   m_PropValues.Clear();
 

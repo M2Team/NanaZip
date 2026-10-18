@@ -6,6 +6,9 @@
 #include "../../../Common/IntToString.h"
 #include "../../../Common/StringConvert.h"
 #include "../../../Common/UTFConvert.h"
+// **************** NanaZip Modification Start ****************
+#include "../Common/FileNameEncoding.h"
+// **************** NanaZip Modification End ****************
 
 #include "../../../Windows/TimeUtils.h"
 
@@ -246,6 +249,10 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
     }
     */
  
+    // **************** NanaZip Modification Start ****************
+    item.NameIsUtf8 = false;
+    item.LinkIsUtf8 = false;
+    // **************** NanaZip Modification End ****************
     item.EncodingCharacts.Check(item.Name);
     _encodingCharacts.Update(item.EncodingCharacts);
 
@@ -287,6 +294,13 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
       _curCodePage = k_DefaultCodePage;
   }
   */
+  // **************** NanaZip Modification Start ****************
+  if (m_AutoCodePage)
+  {
+    DetectFileNameCodePage();
+    _curCodePage = (m_DetectedCodePage == FileNameCodePageAuto ? CP_UTF8 : m_DetectedCodePage);
+  }
+  // **************** NanaZip Modification End ****************
   _openCodePage = _curCodePage;
 
   if (_items.Size() == 0)
@@ -348,6 +362,12 @@ Z7_COM7F_IMF(CHandler::Close())
   _latestIsRead = false;
   _encodingCharacts.Clear();
   _items.Clear();
+  // **************** NanaZip Modification Start ****************
+  m_DetectedCodePage = FileNameCodePageAuto;
+  m_CodePageDetected = false;
+  _curCodePage = _forceCodePage ? _specifiedCodePage : CP_UTF8;
+  _openCodePage = _curCodePage;
+  // **************** NanaZip Modification End ****************
   _seqStream.Release();
   _stream.Release();
   return S_OK;
@@ -364,6 +384,9 @@ CHandler::CHandler()
   // copyCoder = new NCompress::CCopyCoder();
   // copyCoder = copyCoder;
   _openCodePage = CP_UTF8;
+  // **************** NanaZip Modification Start ****************
+  m_DetectedCodePage = FileNameCodePageAuto;
+  // **************** NanaZip Modification End ****************
   Init();
 }
 
@@ -395,15 +418,25 @@ HRESULT CHandler::SkipTo(UInt32 index)
         return E_INVALIDARG;
       }
       _latestIsRead = true;
+      // **************** NanaZip Modification Start ****************
+      _latestItem.NameIsUtf8 = m_AutoCodePage && CheckUTF8_AString(_latestItem.Name);
+      _latestItem.LinkIsUtf8 = m_AutoCodePage && CheckUTF8_AString(_latestItem.LinkName);
+      // **************** NanaZip Modification End ****************
     }
   }
   return S_OK;
 }
 
-void CHandler::TarStringToUnicode(const AString &s, NWindows::NCOM::CPropVariant &prop, bool toOs) const
+// **************** NanaZip Modification Start ****************
+// void CHandler::TarStringToUnicode(const AString &s, NWindows::NCOM::CPropVariant &prop, bool toOs) const
+void CHandler::TarStringToUnicode(const AString &s, NWindows::NCOM::CPropVariant &prop, bool toOs, bool isUtf8) const
+// **************** NanaZip Modification End ****************
 {
   UString dest;
-  if (_curCodePage == CP_UTF8)
+  // **************** NanaZip Modification Start ****************
+  // if (_curCodePage == CP_UTF8)
+  if (isUtf8 || _curCodePage == CP_UTF8)
+  // **************** NanaZip Modification End ****************
     ConvertUTF8ToUnicode(s, dest);
   else
     MultiByteToUnicodeString2(dest, s, _curCodePage);
@@ -513,7 +546,11 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
 
   switch (propID)
   {
-    case kpidPath: TarStringToUnicode(item->Name, prop, true); break;
+    // **************** NanaZip Modification Start ****************
+    // case kpidPath: TarStringToUnicode(item->Name, prop, true); break;
+    case kpidPath: TarStringToUnicode(item->Name, prop, true,
+        item->pax_path_WasUsed || (m_AutoCodePage && item->NameIsUtf8)); break;
+    // **************** NanaZip Modification End ****************
     case kpidIsDir: prop = item->IsDir(); break;
     case kpidSize: prop = item->Get_UnpackSize(); break;
     case kpidPackSize: prop = item->Get_PackSize_Aligned(); break;
@@ -621,12 +658,20 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidSymLink:
       if (item->Is_SymLink())
         if (!item->LinkName.IsEmpty())
-          TarStringToUnicode(item->LinkName, prop);
+          // **************** NanaZip Modification Start ****************
+          // TarStringToUnicode(item->LinkName, prop);
+          TarStringToUnicode(item->LinkName, prop, false,
+              item->pax_link_WasUsed || (m_AutoCodePage && item->LinkIsUtf8));
+          // **************** NanaZip Modification End ****************
       break;
     case kpidHardLink:
       if (item->Is_HardLink())
         if (!item->LinkName.IsEmpty())
-          TarStringToUnicode(item->LinkName, prop);
+          // **************** NanaZip Modification Start ****************
+          // TarStringToUnicode(item->LinkName, prop);
+          TarStringToUnicode(item->LinkName, prop, false,
+              item->pax_link_WasUsed || (m_AutoCodePage && item->LinkIsUtf8));
+          // **************** NanaZip Modification End ****************
       break;
 
     case kpidCharacts:
@@ -1009,6 +1054,9 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
 void CHandler::Init()
 {
   _forceCodePage = false;
+  // **************** NanaZip Modification Start ****************
+  m_AutoCodePage = false;
+  // **************** NanaZip Modification End ****************
   _curCodePage = _specifiedCodePage = CP_UTF8;  // CP_OEMCP;
   _posixMode = false;
   _posixMode_WasForced = false;
@@ -1017,9 +1065,63 @@ void CHandler::Init()
   // _handlerTimeOptions.Write_MTime.Val = true; // it's default already
 }
 
+// **************** NanaZip Modification Start ****************
+void CHandler::DetectFileNameCodePage()
+{
+    if (this->m_CodePageDetected)
+    {
+        return;
+    }
+    CFileNameEncodingSample Sample;
+    FOR_VECTOR (Index, this->_items)
+    {
+        CItemEx& Item = this->_items[Index];
+        Item.NameIsUtf8 = ::CheckUTF8_AString(Item.Name);
+        Item.LinkIsUtf8 = ::CheckUTF8_AString(Item.LinkName);
+        if (Index < 1024)
+        {
+            if (!Item.pax_path_WasUsed)
+            {
+                Sample.Add(Item.Name);
+            }
+            if (!Item.pax_link_WasUsed)
+            {
+                Sample.Add(Item.LinkName);
+            }
+        }
+    }
+    this->m_DetectedCodePage = Sample.Detect();
+    this->m_CodePageDetected = true;
+}
+
+HRESULT CHandler::SetFileNameCodePage(PROPVARIANT const& Property)
+{
+    UInt32 CodePage;
+    RINOK(ParseFileNameCodePage(Property, CodePage))
+    this->_forceCodePage = (CodePage != FileNameCodePageAuto);
+    this->m_AutoCodePage = !this->_forceCodePage;
+    if (this->m_AutoCodePage)
+    {
+        this->DetectFileNameCodePage();
+    }
+    this->_specifiedCodePage = this->_forceCodePage ? CodePage : CP_UTF8;
+    this->_curCodePage = this->_forceCodePage
+                             ? CodePage
+                             : (this->m_DetectedCodePage == FileNameCodePageAuto
+                                    ? CP_UTF8
+                                    : this->m_DetectedCodePage);
+    this->_openCodePage = this->_curCodePage;
+    return S_OK;
+}
+// **************** NanaZip Modification End ****************
 
 Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVARIANT *values, UInt32 numProps))
 {
+  // **************** NanaZip Modification Start ****************
+  // Preserve compression/time options when only the displayed encoding changes.
+  if (numProps == 1 && StringsAreEqualNoCase_Ascii(names[0], "cp"))
+    return SetFileNameCodePage(values[0]);
+  // **************** NanaZip Modification End ****************
   Init();
 
   for (UInt32 i = 0; i < numProps; i++)
@@ -1039,10 +1141,13 @@ Z7_COM7F_IMF(CHandler::SetProperties(const wchar_t * const *names, const PROPVAR
     }
     else if (name.IsEqualTo("cp"))
     {
-      UInt32 cp = CP_OEMCP;
-      RINOK(ParsePropToUInt32(L"", prop, cp))
-      _forceCodePage = true;
-      _curCodePage = _specifiedCodePage = cp;
+      // **************** NanaZip Modification Start ****************
+      // UInt32 cp = CP_OEMCP;
+      // RINOK(ParsePropToUInt32(L"", prop, cp))
+      // _forceCodePage = true;
+      // _curCodePage = _specifiedCodePage = cp;
+      RINOK(SetFileNameCodePage(prop))
+      // **************** NanaZip Modification End ****************
     }
     else if (name.IsPrefixedBy_Ascii_NoCase("mt"))
     {

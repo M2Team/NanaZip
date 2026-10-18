@@ -28,7 +28,11 @@ static const UInt32 kLangIDs[] =
   IDX_SETTINGS_SHOW_GRID,
   IDX_SETTINGS_SINGLE_CLICK,
   IDX_SETTINGS_ALTERNATIVE_SELECTION,
-  IDX_SETTINGS_LARGE_PAGES
+  // **************** NanaZip Modification Start ****************
+  // IDX_SETTINGS_LARGE_PAGES
+  IDX_SETTINGS_LARGE_PAGES,
+  IDX_SETTINGS_AUTO_DETECT_FILE_NAME_ENCODING
+  // **************** NanaZip Modification End ****************
   // , IDT_COMPRESS_MEMORY
 };
 
@@ -123,6 +127,9 @@ bool CSettingsPage::OnInit()
   // CheckButton(IDX_SETTINGS_UNDERLINE, st.Underline);
 
   CheckButton(IDX_SETTINGS_SHOW_SYSTEM_MENU, st.ShowSystemMenu);
+  // **************** NanaZip Modification Start ****************
+  CheckButton(IDX_SETTINGS_AUTO_DETECT_FILE_NAME_ENCODING, st.AutoDetectFileNameEncoding);
+  // **************** NanaZip Modification End ****************
   
   if (IsLargePageSupported())
     CheckButton(IDX_SETTINGS_LARGE_PAGES, ReadLockMemoryEnable());
@@ -212,6 +219,9 @@ LONG CSettingsPage::OnApply()
     // st.Underline = IsButtonCheckedBool(IDX_SETTINGS_UNDERLINE);
     
     st.ShowSystemMenu = IsButtonCheckedBool(IDX_SETTINGS_SHOW_SYSTEM_MENU);
+    // **************** NanaZip Modification Start ****************
+    st.AutoDetectFileNameEncoding = IsButtonCheckedBool(IDX_SETTINGS_AUTO_DETECT_FILE_NAME_ENCODING);
+    // **************** NanaZip Modification End ****************
 
     st.Save();
     _wasChanged = false;
@@ -326,6 +336,9 @@ bool CSettingsPage::OnButtonClicked(int buttonID, HWND buttonHWND)
     case IDX_SETTINGS_FULL_ROW:
     case IDX_SETTINGS_SHOW_GRID:
     case IDX_SETTINGS_ALTERNATIVE_SELECTION:
+    // **************** NanaZip Modification Start ****************
+    case IDX_SETTINGS_AUTO_DETECT_FILE_NAME_ENCODING:
+    // **************** NanaZip Modification End ****************
       _wasChanged = true;
       break;
 

@@ -36,6 +36,9 @@
 #include "../../Crypto/ZipStrong.h"
 
 #include "../Common/ItemNameUtils.h"
+// **************** NanaZip Modification Start ****************
+#include "../Common/FileNameEncoding.h"
+// **************** NanaZip Modification End ****************
 #include "../Common/OutStreamWithCRC.h"
 
 
@@ -198,6 +201,9 @@ static const Byte kArcProps[] =
   kpidEmbeddedStubSize,
   kpidBit64,
   kpidComment,
+  // **************** NanaZip Modification Start ****************
+  kpidCodePage,
+  // **************** NanaZip Modification End ****************
   kpidCharacts,
   kpidTotalPhySize,
   kpidIsVolume,
@@ -208,7 +214,67 @@ static const Byte kArcProps[] =
 CHandler::CHandler()
 {
   InitMethodProps();
+  // **************** NanaZip Modification Start ****************
+  m_DetectedCodePage = FileNameCodePageAuto;
+  // **************** NanaZip Modification End ****************
 }
+
+// **************** NanaZip Modification Start ****************
+void CHandler::DetectFileNameCodePage()
+{
+    if (this->m_CodePageDetected)
+    {
+        return;
+    }
+    CFileNameEncodingSample Sample;
+    bool AllNamesAreUtf8 = true;
+    FOR_VECTOR (Index, this->m_Items)
+    {
+        CItemEx& Item = this->m_Items[Index];
+        Item.NameIsUtf8 = ::CheckUTF8_AString(Item.Name);
+        if (!Item.IsUtf8() && !Item.NameIsUtf8)
+        {
+            bool UnicodeName = false;
+            const CObjectVector<CExtraSubBlock>& Blocks =
+                Item.GetMainExtra().SubBlocks;
+            FOR_VECTOR (BlockIndex, Blocks)
+            {
+                if (Blocks[BlockIndex].ID ==
+                        NFileHeader::NExtraID::kIzUnicodeName &&
+                    Blocks[BlockIndex].CheckIzUnicode(Item.Name))
+                {
+                    UnicodeName = true;
+                    break;
+                }
+            }
+            if (!UnicodeName)
+            {
+                AllNamesAreUtf8 = false;
+                if (Index < 1024)
+                {
+                    Sample.Add(Item.Name);
+                }
+            }
+        }
+    }
+    this->m_DetectedCodePage = AllNamesAreUtf8 ? CP_UTF8 : Sample.Detect();
+    this->m_CodePageDetected = true;
+}
+// **************** NanaZip Modification End ****************
+
+// **************** NanaZip Modification Start ****************
+void CHandler::GetItemName(
+    CItemEx const& Item,
+    UString& Name) const
+{
+    const bool Utf8 = this->m_AutoCodePage && Item.NameIsUtf8;
+    Item.GetUnicodeString(Name,
+                          Item.Name,
+                          false,
+                          this->_forceCodePage || Utf8,
+                          Utf8 ? CP_UTF8 : this->_specifiedCodePage);
+}
+// **************** NanaZip Modification End ****************
 
 static AString BytesToString(const CByteBuffer &data)
 {
@@ -228,6 +294,20 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
   {
     case kpidBit64:  if (m_Archive.IsZip64) prop = m_Archive.IsZip64; break;
     case kpidComment:  if (m_Archive.ArcInfo.Comment.Size() != 0) prop = MultiByteToUnicodeString(BytesToString(m_Archive.ArcInfo.Comment), CP_ACP); break;
+    // **************** NanaZip Modification Start ****************
+    case kpidCodePage:
+    {
+      UInt32 codePage = _forceCodePage ? _specifiedCodePage : CP_OEMCP;
+#ifdef _WIN32
+      if (codePage == CP_ACP)
+        codePage = GetACP();
+      else if (codePage == CP_OEMCP)
+        codePage = GetOEMCP();
+#endif
+      prop = codePage;
+      break;
+    }
+    // **************** NanaZip Modification End ****************
 
     case kpidPhySize:  prop = m_Archive.GetPhySize(); break;
     case kpidOffset:  prop = m_Archive.GetOffset(); break;
@@ -389,7 +469,10 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidPath:
     {
       UString res;
-      item.GetUnicodeString(res, item.Name, false, _forceCodePage, _specifiedCodePage);
+      // **************** NanaZip Modification Start ****************
+      // item.GetUnicodeString(res, item.Name, false, _forceCodePage, _specifiedCodePage);
+      GetItemName(item, res);
+      // **************** NanaZip Modification End ****************
       NItemName::ReplaceToOsSlashes_Remove_TailSlash(res,
           item.Is_MadeBy_Unix() // useBackslashReplacement
           );
@@ -784,6 +867,14 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream,
       m_Items.Clear();
       m_Archive.ClearRefs(); // we don't want to clear error flags
     }
+    // **************** NanaZip Modification Start ****************
+    else if (m_AutoCodePage)
+    {
+      DetectFileNameCodePage();
+      _forceCodePage = (m_DetectedCodePage != FileNameCodePageAuto);
+      _specifiedCodePage = _forceCodePage ? m_DetectedCodePage : CP_OEMCP;
+    }
+    // **************** NanaZip Modification End ****************
     // MarkAltStreams(m_Items);
     return res;
   }
@@ -794,6 +885,10 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream,
 Z7_COM7F_IMF(CHandler::Close())
 {
   m_Items.Clear();
+  // **************** NanaZip Modification Start ****************
+  m_DetectedCodePage = FileNameCodePageAuto;
+  m_CodePageDetected = false;
+  // **************** NanaZip Modification End ****************
   m_Archive.Close();
   return S_OK;
 }

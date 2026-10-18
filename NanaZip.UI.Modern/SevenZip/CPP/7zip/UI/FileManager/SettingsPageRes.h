@@ -9,6 +9,9 @@
 #define IDX_SETTINGS_SINGLE_CLICK           2506
 #define IDX_SETTINGS_ALTERNATIVE_SELECTION  2507
 #define IDX_SETTINGS_LARGE_PAGES            2508
+// **************** NanaZip Modification Start ****************
+#define IDX_SETTINGS_AUTO_DETECT_FILE_NAME_ENCODING 2514
+// **************** NanaZip Modification End ****************
 
 
 // #define IDT_SETTINGS_MEM     100

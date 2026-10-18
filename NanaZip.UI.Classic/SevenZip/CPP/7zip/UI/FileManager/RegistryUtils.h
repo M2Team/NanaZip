@@ -28,6 +28,9 @@ struct CFmSettings
   // bool Underline;
 
   bool ShowSystemMenu;
+  // **************** NanaZip Modification Start ****************
+  bool AutoDetectFileNameEncoding;
+  // **************** NanaZip Modification End ****************
 
   void Save() const;
   void Load();

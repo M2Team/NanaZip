@@ -33,6 +33,7 @@
       <LargeAddressAware>true</LargeAddressAware>
       <ModuleDefinitionFile>SevenZip\CPP\7zip\Archive\Archive2.def</ModuleDefinitionFile>
       <MinimumRequiredVersion>10.0</MinimumRequiredVersion>
+      <AdditionalDependencies>icu.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -137,7 +138,9 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\SplitHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\SquashfsHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\SwfHandler.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\Tar\TarHandler.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\Tar\TarHandler.cpp">
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;NTDDI_VERSION=0x0A000008;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Tar\TarHandlerOut.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Tar\TarHeader.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Tar\TarIn.cpp" />
@@ -159,8 +162,12 @@
     <ClCompile Include="SevenZip\CPP\7zip\Archive\XzHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\ZHandler.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipAddCommon.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipHandler.cpp" />
-    <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipHandlerOut.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipHandler.cpp">
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;NTDDI_VERSION=0x0A000008;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipHandlerOut.cpp">
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;NTDDI_VERSION=0x0A000008;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipIn.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipItem.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Archive\Zip\ZipOut.cpp" />
@@ -352,6 +359,7 @@
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\CoderMixer2.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\DummyOutStream.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\FindSignature.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\FileNameEncoding.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\HandlerOut.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\InStreamWithCRC.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\ItemNameUtils.h" />

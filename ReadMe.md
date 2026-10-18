@@ -57,6 +57,8 @@ Kenji Mouri
 - Modernize message boxes and folder browsers.
 - Provide the Smart Extraction feature.
 - Provide the Open folder after extraction option.
+- Support automatic file name encoding detection and manual code page selection
+  for ZIP and TAR archives from the File menu.
 - Provide the policy mechanism for enforcing settings (see
   [Policies.md](/Documents/Policies.md) for details)
 - Propagates Mark-of-the-Web to all files by default.

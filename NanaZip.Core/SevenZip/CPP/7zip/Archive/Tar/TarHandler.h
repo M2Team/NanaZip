@@ -32,6 +32,13 @@ private:
   UInt32 _specifiedCodePage;
   UInt32 _curCodePage;
   UInt32 _openCodePage;
+  // **************** NanaZip Modification Start ****************
+    UInt32 m_DetectedCodePage;
+    bool m_AutoCodePage;
+    bool m_CodePageDetected = false;
+    void DetectFileNameCodePage();
+    HRESULT SetFileNameCodePage(PROPVARIANT const& Property);
+  // **************** NanaZip Modification End ****************
   // CTimeOptions TimeOptions;
   CHandlerTimeOptions _handlerTimeOptions;
   CEncodingCharacts _encodingCharacts;
@@ -46,7 +53,10 @@ private:
 
   HRESULT Open2(IInStream *stream, IArchiveOpenCallback *callback);
   HRESULT SkipTo(UInt32 index);
-  void TarStringToUnicode(const AString &s, NWindows::NCOM::CPropVariant &prop, bool toOs = false) const;
+  // **************** NanaZip Modification Start ****************
+  // void TarStringToUnicode(const AString &s, NWindows::NCOM::CPropVariant &prop, bool toOs = false) const;
+  void TarStringToUnicode(const AString &s, NWindows::NCOM::CPropVariant &prop, bool toOs = false, bool isUtf8 = false) const;
+  // **************** NanaZip Modification End ****************
 public:
   void Init();
   CHandler();

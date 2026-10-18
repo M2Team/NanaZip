@@ -632,6 +632,9 @@ public:
       CMyComPtr<IContextMenu> &systemContextMenu,
       bool programMenu);
   void CreateFileMenu(HMENU menu);
+  // **************** NanaZip Modification Start ****************
+  void SetFileNameCodePage(UInt32 CodePage);
+  // **************** NanaZip Modification End ****************
   bool InvokePluginCommand(unsigned id);
   bool InvokePluginCommand(unsigned id, IContextMenu *sevenZipContextMenu,
       IContextMenu *systemContextMenu);

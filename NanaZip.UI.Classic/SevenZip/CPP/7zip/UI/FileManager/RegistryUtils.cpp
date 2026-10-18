@@ -33,6 +33,9 @@ static LPCTSTR const kAlternativeSelection = TEXT("AlternativeSelection");
 // static LPCTSTR const kUnderline = TEXT("Underline");
 
 static LPCTSTR const kShowSystemMenu = TEXT("ShowSystemMenu");
+// **************** NanaZip Modification Start ****************
+static LPCTSTR const AutoDetectFileNameEncodingValueName = TEXT("AutoDetectFileNameEncoding");
+// **************** NanaZip Modification End ****************
 
 // static LPCTSTR const kLockMemoryAdd = TEXT("LockMemoryAdd");
 static LPCTSTR const kLargePages = TEXT("LargePages");
@@ -131,6 +134,9 @@ void CFmSettings::Save() const
   // SaveOption(kUnderline, Underline);
 
   SaveOption(kShowSystemMenu, ShowSystemMenu);
+  // **************** NanaZip Modification Start ****************
+  SaveOption(AutoDetectFileNameEncodingValueName, AutoDetectFileNameEncoding);
+  // **************** NanaZip Modification End ****************
 }
 
 void CFmSettings::Load()
@@ -144,6 +150,9 @@ void CFmSettings::Load()
   // Underline = false;
 
   ShowSystemMenu = false;
+  // **************** NanaZip Modification Start ****************
+  AutoDetectFileNameEncoding = false;
+  // **************** NanaZip Modification End ****************
 
   CKey key;
   if (key.Open(HKEY_CURRENT_USER, kCU_FMPath, KEY_READ) == ERROR_SUCCESS)
@@ -157,6 +166,9 @@ void CFmSettings::Load()
     // ReadOption(key, kUnderline, Underline);
 
     ReadOption(key, kShowSystemMenu, ShowSystemMenu );
+    // **************** NanaZip Modification Start ****************
+    ReadOption(key, AutoDetectFileNameEncodingValueName, AutoDetectFileNameEncoding);
+    // **************** NanaZip Modification End ****************
   }
 }
 

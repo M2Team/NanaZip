@@ -46,6 +46,12 @@
 // #define IDM_EXIT                 557
 #define IDM_LINK                 558
 #define IDM_ALT_STREAMS          559
+// **************** NanaZip Modification Start ****************
+#define IDM_FILE_NAME_ENCODING    560
+#define IDS_ENCODING_AUTO         561
+#define IDS_ENCODING_SYSTEM       562
+#define IDS_ENCODING_OEM          563
+// **************** NanaZip Modification End ****************
 
 #define IDM_VER_EDIT             580
 #define IDM_VER_COMMIT           581

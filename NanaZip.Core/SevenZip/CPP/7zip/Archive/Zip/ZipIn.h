@@ -24,10 +24,16 @@ public:
   // int ParentOfAltStream; // -1, if not AltStream
   
   bool DescriptorWasRead;
+  // **************** NanaZip Modification Start ****************
+  bool NameIsUtf8;
+  // **************** NanaZip Modification End ****************
 
   CItemEx():
     // ParentOfAltStream(-1),
-    DescriptorWasRead(false) {}
+    // **************** NanaZip Modification Start ****************
+    // DescriptorWasRead(false) {}
+    DescriptorWasRead(false), NameIsUtf8(false) {}
+    // **************** NanaZip Modification End ****************
 
   UInt64 GetLocalFullSize() const
     { return LocalFullHeaderSize + GetPackSizeWithDescriptor(); }

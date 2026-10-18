@@ -12,6 +12,9 @@
 #include "../../PropID.h"
 #include "../Common/PropIDUtils.h"
 #include "../Explorer/ContextMenu.h"
+// **************** NanaZip Modification Start ****************
+#include "../Agent/Agent.h"
+// **************** NanaZip Modification End ****************
 
 #include "App.h"
 #include "FormatUtils.h"
@@ -1027,6 +1030,38 @@ bool CPanel::CheckBeforeUpdate(UINT resourceID)
   return true;
 }
 
+// **************** NanaZip Modification Start ****************
+void CPanel::SetFileNameCodePage(UInt32 CodePage)
+{
+    CMyComPtr<IArchiveFolderInternal> Internal;
+    if (!this->_folder || this->_folder.QueryInterface(
+                              IID_IArchiveFolderInternal, &Internal) != S_OK)
+    {
+        return;
+    }
+    CAgentFolder* Folder = nullptr;
+    if (Internal->GetAgentFolder(&Folder) != S_OK || !Folder ||
+        !Folder->_agentSpec->IsFileNameEncodingSupported() ||
+        Folder->_agentSpec->GetFileNameCodePage() == CodePage)
+    {
+        return;
+    }
+    CDisableTimerProcessing DisableTimer(*this);
+    CDisableNotify DisableNotify(*this);
+    CMyComPtr<IFolderFolder> Root;
+    const HRESULT Result =
+        Folder->_agentSpec->SetFileNameCodePage(CodePage, &Root);
+    if (Result != S_OK)
+    {
+        this->MessageBox_Error_HRESULT(Result);
+        return;
+    }
+    this->SetNewFolder(Root);
+    this->LoadFullPath();
+    this->RefreshListCtrl();
+}
+// **************** NanaZip Modification End ****************
+
 void CPanel::CreateFileMenu(HMENU menuSpec,
     CMyComPtr<IContextMenu> &sevenZipContextMenu,
     CMyComPtr<IContextMenu> &systemContextMenu,
@@ -1069,6 +1104,20 @@ void CPanel::CreateFileMenu(HMENU menuSpec,
   fm.programMenu = programMenu;
   fm.allAreFiles = allAreFiles;
   fm.numItems = operatedIndices.Size();
+  // **************** NanaZip Modification Start ****************
+  CMyComPtr<IArchiveFolderInternal> Internal;
+  if (_folder && _folder.QueryInterface(
+      IID_IArchiveFolderInternal, &Internal) == S_OK)
+  {
+      CAgentFolder *Folder = nullptr;
+      if (Internal->GetAgentFolder(&Folder) == S_OK && Folder)
+      {
+          fm.FileNameEncodingSupported = Folder->_agentSpec->IsFileNameEncodingSupported();
+          fm.FileNameCodePage = Folder->_agentSpec->GetFileNameCodePage();
+          fm.AutoFileNameCodePage = Folder->_agentSpec->GetAutoFileNameCodePage();
+      }
+  }
+  // **************** NanaZip Modification End ****************
 
   fm.isAltStreamsSupported = false;
 

@@ -18,6 +18,11 @@ struct CFileMenu
   bool isFsFolder;
   bool allAreFiles;
   bool isAltStreamsSupported;
+  // **************** NanaZip Modification Start ****************
+  bool FileNameEncodingSupported = false;
+  UInt32 FileNameCodePage = (UInt32)-1;
+  UInt32 AutoFileNameCodePage = (UInt32)-1;
+  // **************** NanaZip Modification End ****************
   int numItems;
   
   FString FilePath;
