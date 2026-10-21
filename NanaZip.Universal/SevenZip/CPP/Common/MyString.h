@@ -64,7 +64,7 @@ inline unsigned MyStringLen(const char *s)
 
 inline void MyStringCopy(char *dest, const char *src)
 {
-  while ((*dest++ = *src++) != 0);
+  do {} while ((*dest++ = *src++) != 0);
 }
 
 inline char *MyStpCpy(char *dest Z7_lifetimebound, const char *src)
@@ -96,7 +96,7 @@ inline unsigned MyStringLen(const wchar_t *s)
 
 inline void MyStringCopy(wchar_t *dest, const wchar_t *src)
 {
-  while ((*dest++ = *src++) != 0);
+  do {} while ((*dest++ = *src++) != 0);
 }
 
 inline void MyStringCat(wchar_t *dest, const wchar_t *src)
