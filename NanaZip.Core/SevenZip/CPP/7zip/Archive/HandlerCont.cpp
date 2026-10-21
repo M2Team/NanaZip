@@ -33,59 +33,58 @@ Z7_COM7F_IMF(CHandlerCont::Extract(const UInt32 *indices, UInt32 numItems,
   UInt32 i;
   for (i = 0; i < numItems; i++)
   {
-    UInt64 pos, size;
+    UInt64 pos = 0, size = 0;
     GetItem_ExtractInfo(allFilesMode ? i : indices[i], pos, size);
     totalSize += size;
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
-  totalSize = 0;
-  
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
   CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> streamSpec;
   streamSpec->SetStream(_stream);
   CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
+  totalSize = 0;
+
   for (i = 0;; i++)
   {
-    lps->InSize = totalSize;
-    lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
-
-    CMyComPtr<ISequentialOutStream> outStream;
-    const Int32 askMode = testMode ?
-        NExtract::NAskMode::kTest :
-        NExtract::NAskMode::kExtract;
-    const UInt32 index = allFilesMode ? i : indices[i];
-    
-    RINOK(extractCallback->GetStream(index, &outStream, askMode))
-
-    UInt64 pos, size;
-    int opRes = GetItem_ExtractInfo(index, pos, size);
-    totalSize += size;
-    if (!testMode && !outStream)
-      continue;
-    
-    RINOK(extractCallback->PrepareOperation(askMode))
-
-    if (opRes == NExtract::NOperationResult::kOK)
+    int opRes;
     {
-      RINOK(InStream_SeekSet(_stream, pos))
-      streamSpec->Init(size);
-    
-      RINOK(copyCoder.Interface()->Code(streamSpec, outStream, NULL, NULL, lps))
+      CMyComPtr<ISequentialOutStream> outStream;
+      const Int32 askMode = testMode ?
+          NExtract::NAskMode::kTest :
+          NExtract::NAskMode::kExtract;
+      const UInt32 index = allFilesMode ? i : indices[i];
       
-      opRes = NExtract::NOperationResult::kDataError;
-      if (copyCoder->TotalSize == size)
-        opRes = NExtract::NOperationResult::kOK;
-      else if (copyCoder->TotalSize < size)
-        opRes = NExtract::NOperationResult::kUnexpectedEnd;
+      RINOK(extractCallback->GetStream(index, &outStream, askMode))
+        
+      UInt64 pos = 0, size = 0;
+      opRes = GetItem_ExtractInfo(index, pos, size);
+      totalSize += size;
+      if (!testMode && !outStream)
+        continue;
+      
+      RINOK(extractCallback->PrepareOperation(askMode))
+        
+      if (opRes == NExtract::NOperationResult::kOK)
+      {
+        RINOK(InStream_SeekSet(_stream, pos))
+        streamSpec->Init(size);
+          
+        RINOK(copyCoder.Interface()->Code(streamSpec, outStream, NULL, NULL, lps))
+            
+        if (copyCoder->TotalSize != size)
+          opRes = (copyCoder->TotalSize < size) ?
+              NExtract::NOperationResult::kUnexpectedEnd:
+              NExtract::NOperationResult::kDataError;
+      }
     }
-    
-    outStream.Release();
     RINOK(extractCallback->SetOperationResult(opRes))
   }
   

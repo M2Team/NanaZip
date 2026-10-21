@@ -7,7 +7,6 @@
 
 #include "../../Common/ComTry.h"
 #include "../../Common/IntToString.h"
-#include "../../Common/MyString.h"
 
 #include "../../Windows/PropVariant.h"
 
@@ -20,21 +19,10 @@ using namespace NWindows;
 using namespace NCOM;
 
 namespace NArchive {
+namespace NMacho {
+void GetCpuName(AString &s, UInt32 const cpuType, UInt32 const subType);
+}
 namespace NMub {
-
-#define MACH_CPU_ARCH_ABI64 ((UInt32)1 << 24)
-#define MACH_CPU_TYPE_386    7
-#define MACH_CPU_TYPE_ARM   12
-#define MACH_CPU_TYPE_SPARC 14
-#define MACH_CPU_TYPE_PPC   18
-
-#define MACH_CPU_TYPE_PPC64 (MACH_CPU_ARCH_ABI64 | MACH_CPU_TYPE_PPC)
-#define MACH_CPU_TYPE_AMD64 (MACH_CPU_ARCH_ABI64 | MACH_CPU_TYPE_386)
-#define MACH_CPU_TYPE_ARM64 (MACH_CPU_ARCH_ABI64 | MACH_CPU_TYPE_ARM)
-
-#define MACH_CPU_SUBTYPE_LIB64 ((UInt32)1 << 31)
-
-#define MACH_CPU_SUBTYPE_I386_ALL 3
 
 struct CItem
 {
@@ -43,21 +31,25 @@ struct CItem
   UInt32 Offset;
   UInt32 Size;
   UInt32 Align;
+
+  void GetTypeString(AString &s) const
+  {
+    NMacho::GetCpuName(s, Type, SubType);
+    s.Replace('.', '_');
+  }
 };
 
-static const UInt32 kNumFilesMax = 6;
+static const unsigned kNumFilesMax = 8; // we can change it to any value
 
 Z7_class_CHandler_final: public CHandlerCont
 {
   Z7_IFACE_COM7_IMP(IInArchive_Cont)
 
-  // UInt64 _startPos;
   UInt64 _phySize;
   UInt32 _numItems;
   bool _bigEndian;
+  UString _arcName;
   CItem _items[kNumFilesMax];
-
-  HRESULT Open2(IInStream *stream);
 
   virtual int GetItem_ExtractInfo(UInt32 index, UInt64 &pos, UInt64 &size) const Z7_override
   {
@@ -97,45 +89,40 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
 
 Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *value))
 {
+  COM_TRY_BEGIN
   PropVariant_Clear(value);
   const CItem &item = _items[index];
   switch (propID)
   {
+    case kpidPath:
     case kpidExtension:
     {
-      char temp[32];
-      const char *ext = NULL;
-      switch (item.Type)
+      AString s;
+      item.GetTypeString(s);
+      if (propID == kpidExtension)
       {
-        case MACH_CPU_TYPE_386:   ext = "x86";   break;
-        case MACH_CPU_TYPE_ARM:   ext = "arm";   break;
-        case MACH_CPU_TYPE_SPARC: ext = "sparc"; break;
-        case MACH_CPU_TYPE_PPC:   ext = "ppc";   break;
-        case MACH_CPU_TYPE_AMD64: ext = "x64";   break;
-        case MACH_CPU_TYPE_ARM64: ext = "arm64"; break;
-        case MACH_CPU_TYPE_PPC64: ext = "ppc64"; break;
-        default:
-          temp[0] = 'c';
-          temp[1] = 'p';
-          temp[2] = 'u';
-          char *p = ConvertUInt32ToString(item.Type & ~MACH_CPU_ARCH_ABI64, temp + 3);
-          if (item.Type & MACH_CPU_ARCH_ABI64)
-            MyStringCopy(p, "_64");
-          break;
+        if (_arcName.IsEmpty())
+          return PropVarEm_Set_Str(value, s);
       }
-      if (ext)
-        MyStringCopy(temp, ext);
-      if (item.SubType != 0)
-      if ((item.Type != MACH_CPU_TYPE_386 &&
-           item.Type != MACH_CPU_TYPE_AMD64)
-           || (item.SubType & ~(UInt32)MACH_CPU_SUBTYPE_LIB64) != MACH_CPU_SUBTYPE_I386_ALL
-         )
+      else if (!_arcName.IsEmpty())
       {
-        unsigned pos = MyStringLen(temp);
-        temp[pos++] = '-';
-        ConvertUInt32ToString(item.SubType, temp + pos);
+        CPropVariant prop;
+#if 1
+        // use dir extension postfix : "name.x64"
+        UString res (_arcName);
+        res.Add_Dot();
+        res += s;
+#else
+        // use dir prefix : "x64/name"
+        UString res (s);
+        res.Add_PathSepar();
+        res += _arcName;
+#endif
+        prop = res;
+        prop.Detach(value);
+        return S_OK;
       }
-      return PropVarEm_Set_Str(value, temp);
+      break;
     }
     case kpidSize:
     case kpidPackSize:
@@ -149,20 +136,25 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       break;
   }
   return S_OK;
+  COM_TRY_END
 }
 
-HRESULT CHandler::Open2(IInStream *stream)
+Z7_COM7F_IMF(CHandler::Open(IInStream *inStream,
+    const UInt64 * /* maxCheckStartPosition */,
+    IArchiveOpenCallback *openArchiveCallback))
 {
-  // RINOK(InStream_GetPos(stream, _startPos));
+  COM_TRY_BEGIN
+  const unsigned k_NumWords_in_PreHeader = 2;
+  const unsigned k_NumWords_in_Record = 5;
+#define GET_NUM_WORDS_BEFORE_RECORD_INDEX(numRecords) \
+    (k_NumWords_in_PreHeader + (size_t)(numRecords) * k_NumWords_in_Record)
 
-  const UInt32 kHeaderSize = 2;
-  const UInt32 kRecordSize = 5;
-  const UInt32 kBufSize = kHeaderSize + kNumFilesMax * kRecordSize;
-  UInt32 buf[kBufSize];
-  size_t processed = kBufSize * 4;
-  RINOK(ReadStream(stream, buf, &processed))
-  processed >>= 2;
-  if (processed < kHeaderSize)
+  Close();
+  UInt32 buf[GET_NUM_WORDS_BEFORE_RECORD_INDEX(kNumFilesMax)];
+  size_t processed2 = sizeof(buf);
+  RINOK(ReadStream(inStream, buf, &processed2))
+  const size_t processed = processed2 / sizeof(UInt32);
+  if (processed < k_NumWords_in_PreHeader)
     return S_FALSE;
   
   bool be;
@@ -178,17 +170,14 @@ HRESULT CHandler::Open2(IInStream *stream)
         !
       #endif
         be)
-    z7_SwapBytes4(&buf[1], processed - 1);
+    z7_SwapBytes4(buf, processed);
   const UInt32 num = buf[1];
-  if (num > kNumFilesMax || processed < kHeaderSize + num * kRecordSize)
+  if (num == 0 || num > kNumFilesMax || processed < GET_NUM_WORDS_BEFORE_RECORD_INDEX(num))
     return S_FALSE;
-  if (num == 0)
-    return S_FALSE;
-  UInt64 endPosMax = kHeaderSize;
-
-  for (UInt32 i = 0; i < num; i++)
+  UInt64 endPosMax = k_NumWords_in_PreHeader * 4;
+  const UInt32 *p = buf + k_NumWords_in_PreHeader;
+  for (size_t i = 0; i < num; i++, p += k_NumWords_in_Record)
   {
-    const UInt32 *p = buf + kHeaderSize + i * kRecordSize;
     CItem &sb = _items[i];
     sb.Type = p[0];
     sb.SubType = p[1];
@@ -196,36 +185,35 @@ HRESULT CHandler::Open2(IInStream *stream)
     sb.Size = p[3];
     const UInt32 align = p[4];
     sb.Align = align;
-    if (align > 31)
+    if (align >= 32
+        || sb.Offset < GET_NUM_WORDS_BEFORE_RECORD_INDEX(num) * 4
+        || (sb.Type    & ((1 << 24) - (1 << 8)))   // high bits can be used for flags
+        || (sb.SubType & ((1 << 16) - (1 << 10)))) // high bits can be used for flags
       return S_FALSE;
-    if (sb.Offset < kHeaderSize + num * kRecordSize)
-      return S_FALSE;
-    if ((sb.Type & ~MACH_CPU_ARCH_ABI64) >= 0x100 ||
-        (sb.SubType & ~MACH_CPU_SUBTYPE_LIB64) >= 0x100)
-      return S_FALSE;
-
     const UInt64 endPos = (UInt64)sb.Offset + sb.Size;
     if (endPosMax < endPos)
       endPosMax = endPos;
   }
   _numItems = num;
   _phySize = endPosMax;
-  return S_OK;
-}
+  _stream = inStream;
 
-Z7_COM7F_IMF(CHandler::Open(IInStream *inStream,
-    const UInt64 * /* maxCheckStartPosition */,
-    IArchiveOpenCallback * /* openArchiveCallback */))
-{
-  COM_TRY_BEGIN
-  Close();
-  try
+  if (openArchiveCallback)
   {
-    if (Open2(inStream) != S_OK)
-      return S_FALSE;
-    _stream = inStream;
+    CMyComPtr<IArchiveOpenVolumeCallback> openVolumeCallback;
+    openArchiveCallback->QueryInterface(IID_IArchiveOpenVolumeCallback, (void **)&openVolumeCallback);
+    if (openVolumeCallback)
+    {
+      NCOM::CPropVariant prop;
+      RINOK(openVolumeCallback->GetProperty(kpidName, &prop))
+      if (prop.vt == VT_BSTR)
+      {
+        _arcName = prop.bstrVal;
+        if (_arcName.Len() > 4 && StringsAreEqualNoCase_Ascii(_arcName.RightPtr(4), ".mub"))
+          _arcName.DeleteFrom(_arcName.Len() - 4);
+      }
+    }
   }
-  catch(...) { return S_FALSE; }
   return S_OK;
   COM_TRY_END
 }
@@ -233,6 +221,7 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *inStream,
 Z7_COM7F_IMF(CHandler::Close())
 {
   _stream.Release();
+  _arcName.Empty();
   _numItems = 0;
   _phySize = 0;
   return S_OK;
@@ -244,8 +233,6 @@ Z7_COM7F_IMF(CHandler::GetNumberOfItems(UInt32 *numItems))
   return S_OK;
 }
 
-namespace NBe {
-
 static const Byte k_Signature[] = {
     7, 0xCA, 0xFE, 0xBA, 0xBE, 0, 0, 0,
     4, 0xB9, 0xFA, 0xF1, 0x0E };
@@ -254,9 +241,8 @@ REGISTER_ARC_I(
   "Mub", "mub", NULL, 0xE2,
   k_Signature,
   0,
-  NArcInfoFlags::kMultiSignature,
+  NArcInfoFlags::kMultiSignature |
+  NArcInfoFlags::kPreArc,
   NULL)
-
-}
 
 }}

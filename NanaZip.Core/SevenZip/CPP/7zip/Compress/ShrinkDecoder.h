@@ -10,8 +10,9 @@
 namespace NCompress {
 namespace NShrink {
 
-const unsigned kNumMaxBits = 13;
-const unsigned kNumItems = 1 << kNumMaxBits;
+#define Z7_SHRINK_NUM_MAX_BITS  13
+#define Z7_SHRINK_NUM_ITEMS     (1 << Z7_SHRINK_NUM_MAX_BITS)
+const size_t kNumItems = Z7_SHRINK_NUM_ITEMS;
 
 Z7_CLASS_IMP_NOQIB_3(
   CDecoder
@@ -19,7 +20,7 @@ Z7_CLASS_IMP_NOQIB_3(
   , ICompressSetFinishMode
   , ICompressGetInStreamProcessedSize
 )
-  bool _fullStreamMode;
+  UInt32 _fullStreamMode;
   UInt64 _inProcessed;
 
   UInt16 _parents[kNumItems];
@@ -28,6 +29,8 @@ Z7_CLASS_IMP_NOQIB_3(
 
   HRESULT CodeReal(ISequentialInStream *inStream, ISequentialOutStream *outStream,
       const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress);
+public:
+  CDecoder(): _fullStreamMode(0) {}
 };
 
 }}

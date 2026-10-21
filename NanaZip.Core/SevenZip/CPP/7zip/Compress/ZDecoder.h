@@ -3,44 +3,38 @@
 #ifndef ZIP7_INC_COMPRESS_Z_DECODER_H
 #define ZIP7_INC_COMPRESS_Z_DECODER_H
 
-#include "../../Common/MyCom.h"
-
 #include "../ICoder.h"
 
 namespace NCompress {
 namespace NZ {
 
-// Z decoder decodes Z data stream, including 3 bytes of header.
-  
-class CDecoder
-{
-  UInt16 *_parents;
-  Byte *_suffixes;
-  Byte *_stack;
-  unsigned _numMaxBits;
-
-public:
-  CDecoder(): _parents(NULL), _suffixes(NULL), _stack(NULL), /* _prop(0), */ _numMaxBits(0) {}
-  ~CDecoder();
-  void Free();
-  // UInt64 PackSize;
-
-  HRESULT Code(ISequentialInStream *inStream, ISequentialOutStream *outStream,
-    ICompressProgressInfo *progress);
-};
-
 /*
-  There is no end_of_payload_marker in Z stream.
-  Z decoder stops decoding, if it reaches end of input stream.
-   
-  CheckStream function:
-    (size) must be at least 3 bytes (size of Z header).
-    if (size) is larger than size of real Z stream in (data), CheckStream can return false.
+  There is no end_of_payload_marker in Z-stream.
+  The Z-decoder stops decoding upon reaching the end of the input stream
+  or upon encountering an error.
 */
 
-const unsigned kRecommendedCheckSize = 64;
+HRESULT Decode(ISequentialInStream *inStream, ISequentialOutStream *outStream,
+    ICompressProgressInfo *progress) throw();
 
-bool CheckStream(const Byte *data, size_t size);
+/*
+CheckStream() function:
+in:
+  if (size > real_size_of_zstream), CheckStream() may return (false),
+     because there is no end_of_payload_marker in Z-stream.
+     
+return value:
+  false : for any of the following cases:
+    - (size < 3)
+    - there is no correct Z-signature in Z-header (first 3 bytes)
+    - unsupported properties in Z-header
+    - a decoding error was detected in (data)
+  
+  true : size >= 3 and data[0 ... (size-1)] is part of a valid Z-stream,
+         and no errors have been detected.
+*/
+const unsigned kRecommendedCheckSize = 64; // (size >= 64) ensures a low probability of false detection
+bool CheckStream(const Byte *data, size_t size) throw();
 
 }}
 

@@ -1429,7 +1429,7 @@ bool CMftRec::ParseRec(Byte * const p, const unsigned sectorSizeLog,
       case ATTR_TYPE_FILE_NAME:
       {
         CFileNameAttr fna;
-        if (!attr.ParseFileName(fna))
+        if (attr.NonResident != 0 || !attr.ParseFileName(fna))
           return false;
         FileNames.Add(fna);
         PRF(printf(" \n NameType = %1u: ", (unsigned)fna.NameType));
@@ -1437,13 +1437,15 @@ bool CMftRec::ParseRec(Byte * const p, const unsigned sectorSizeLog,
         break;
       }
       case ATTR_TYPE_STANDARD_INFO:
-        if (!attr.ParseSi(SiAttr))
+        if (attr.NonResident != 0 || !attr.ParseSi(SiAttr))
           return false;
         break;
       case ATTR_TYPE_DATA:
         DataAttrs.Add(attr);
         break;
       case ATTR_TYPE_REPARSE_POINT:
+        // if (attr.NonResident != 0) we must read NonResident data from disk
+        if (attr.NonResident == 0)
         if (ReparseDataIndex < 0)
           ReparseDataIndex = (int)reparseDataVector.Add(attr.Data);
         break;
@@ -1454,11 +1456,11 @@ bool CMftRec::ParseRec(Byte * const p, const unsigned sectorSizeLog,
       */
       default:
         // if (attrs) attrs->Add(attr);
-        if (volInfo)
+        if (volInfo && attr.NonResident == 0)
         {
           if (type == ATTR_TYPE_VOLUME_NAME && volInfo->VolName.IsEmpty())
             GetString(attr.Data, (unsigned)attr.Data.Size() / 2, volInfo->VolName);
-          else if (type == ATTR_TYPE_VOLUME_INFO /* && volInfo->FsVerMajor < 0 */)
+          else if (type == ATTR_TYPE_VOLUME_INFO && attr.Data.Size() >= 12 /* && volInfo->FsVerMajor < 0 */)
           {
             volInfo->FsVerMajor = attr.Data[8];
             volInfo->FsVerMinor = attr.Data[9];

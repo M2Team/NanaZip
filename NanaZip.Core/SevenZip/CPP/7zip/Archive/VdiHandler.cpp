@@ -10,7 +10,6 @@
 #include "../../Common/IntToString.h"
 #include "../../Common/MyBuffer.h"
 
-#include "../../Windows/PropVariant.h"
 #include "../../Windows/PropVariantUtils.h"
 
 #include "../Common/RegisterArc.h"
@@ -18,8 +17,8 @@
 
 #include "HandlerCont.h"
 
-#define Get32(p) GetUi32(p)
-#define Get64(p) GetUi64(p)
+#define Get32(p) GetUi32a(p)
+#define Get64(p) GetUi64a(p)
 
 using namespace NWindows;
 
@@ -30,18 +29,13 @@ static const Byte k_Signature[] = { 0x7F, 0x10, 0xDA, 0xBE };
 
 static const unsigned k_ClusterBits = 20;
 static const UInt32 k_ClusterSize = (UInt32)1 << k_ClusterBits;
-
-
 /*
 VDI_IMAGE_BLOCK_FREE = (~0) // returns any random data
 VDI_IMAGE_BLOCK_ZERO = (~1) // returns zeros
 */
-
 // static const UInt32 k_ClusterType_Free  = 0xffffffff;
 static const UInt32 k_ClusterType_Zero  = 0xfffffffe;
-
 #define IS_CLUSTER_ALLOCATED(v) ((UInt32)(v) < k_ClusterType_Zero)
-
 
 // static const UInt32 kDiskType_Dynamic = 1;
 // static const UInt32 kDiskType_Static = 2;
@@ -225,13 +219,13 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
         const Byte *guid = Guids[i];
         if (!IsEmptyGuid(guid))
         {
-          s.Add_LF();
           s += kGuidNames[i];
           s += " : ";
           char temp[64];
           RawLeGuidToString_Braced(guid, temp);
           MyStringLower_Ascii(temp);
           s += temp;
+          s.Add_LF();
         }
       }
       if (!s.IsEmpty())
@@ -245,9 +239,9 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
       if (!IsEmptyGuid(guid))
       {
         char temp[64];
-        RawLeGuidToString_Braced(guid, temp);
+        char * const end = RawLeGuidToString_Braced(guid, temp);
+        MyStringCopy(end, ".vdi");
         MyStringLower_Ascii(temp);
-        MyStringCat(temp, ".vdi");
         prop = temp;
       }
       break;
@@ -281,8 +275,9 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIAN
 HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallback */)
 {
   const unsigned kHeaderSize = 512;
-  Byte buf[kHeaderSize];
-  RINOK(ReadStream_FALSE(stream, buf, kHeaderSize))
+  UInt64 buf64[kHeaderSize / 8];
+  RINOK(ReadStream_FALSE(stream, buf64, kHeaderSize))
+  const Byte * const buf = (const Byte *)(const void *)buf64;
 
   if (memcmp(buf + 0x40, k_Signature, sizeof(k_Signature)) != 0)
     return S_FALSE;
@@ -380,9 +375,9 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback * /* openCallbac
   RINOK(ReadStream_FALSE(stream, _table, numBytes))
     
   const Byte *data = _table;
-  for (UInt32 i = 0; i < totalBlocks; i++)
+  for (size_t i = 0; i < numBytes; i += 4)
   {
-    const UInt32 v = Get32(data + (size_t)i * 4);
+    const UInt32 v = Get32(data + (size_t)i);
     if (!IS_CLUSTER_ALLOCATED(v))
       continue;
     if (v >= numAllocatedBlocks)

@@ -123,7 +123,7 @@ bool CFooter::Parse(const Byte *p)
   // 2040 GB - maximum virtual size of VHD (from some DOCs)
   // 2048 GB - our relaxed limit
   if (CurrentSize > ((UInt64)1 << 41))
-    return S_FALSE; // E_NOTIMPL
+    return false;
   // G32(0x38, DiskGeometry);
   G32(0x3C, Type);
   if (Type < kDiskType_Fixed)
