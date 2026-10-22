@@ -21,7 +21,7 @@
 
 ## 7-Zip ZS
 
-- NanaZip.Core: Commit b5ac55ff587ec9c9315ffd624c5c93a2899340d2 after
+- NanaZip.Core: Commit f7331b3fa14455d78a6e6a91bdd9571c999bb081 after
   v26.02-v1.5.7-R2.
 - NanaZip.ZS.Codecs: Commit f7331b3fa14455d78a6e6a91bdd9571c999bb081 after
   v26.02-v1.5.7-R2.
