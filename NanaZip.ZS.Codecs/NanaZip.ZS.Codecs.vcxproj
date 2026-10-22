@@ -30,6 +30,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>SevenZip\CPP\7zip\Archive\Archive2.def</ModuleDefinitionFile>
@@ -113,6 +114,80 @@
     <ClInclude Include="Brotli\include\brotli\port.h" />
     <ClInclude Include="Brotli\include\brotli\shared_dictionary.h" />
     <ClInclude Include="Brotli\include\brotli\types.h" />
+    <ClInclude Include="Kanzi\BitStreamException.hpp" />
+    <ClInclude Include="Kanzi\bitstream\DebugInputBitStream.hpp" />
+    <ClInclude Include="Kanzi\bitstream\DebugOutputBitStream.hpp" />
+    <ClInclude Include="Kanzi\bitstream\DefaultInputBitStream.hpp" />
+    <ClInclude Include="Kanzi\bitstream\DefaultOutputBitStream.hpp" />
+    <ClInclude Include="Kanzi\concurrent.hpp" />
+    <ClInclude Include="Kanzi\Context.hpp" />
+    <ClInclude Include="Kanzi\EntropyDecoder.hpp" />
+    <ClInclude Include="Kanzi\EntropyEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\AdaptiveProbMap.hpp" />
+    <ClInclude Include="Kanzi\entropy\ANSRangeDecoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\ANSRangeEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\BinaryEntropyDecoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\BinaryEntropyEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\CMPredictor.hpp" />
+    <ClInclude Include="Kanzi\entropy\EntropyDecoderFactory.hpp" />
+    <ClInclude Include="Kanzi\entropy\EntropyEncoderFactory.hpp" />
+    <ClInclude Include="Kanzi\entropy\EntropyUtils.hpp" />
+    <ClInclude Include="Kanzi\entropy\ExpGolombDecoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\ExpGolombEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\FPAQDecoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\FPAQEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\HuffmanCommon.hpp" />
+    <ClInclude Include="Kanzi\entropy\HuffmanDecoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\HuffmanEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\NullEntropyDecoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\NullEntropyEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\RangeDecoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\RangeEncoder.hpp" />
+    <ClInclude Include="Kanzi\entropy\TPAQPredictor.hpp" />
+    <ClInclude Include="Kanzi\Error.hpp" />
+    <ClInclude Include="Kanzi\Event.hpp" />
+    <ClInclude Include="Kanzi\Global.hpp" />
+    <ClInclude Include="Kanzi\InputBitStream.hpp" />
+    <ClInclude Include="Kanzi\InputStream.hpp" />
+    <ClInclude Include="Kanzi\io\CompressedInputStream.hpp" />
+    <ClInclude Include="Kanzi\io\CompressedOutputStream.hpp" />
+    <ClInclude Include="Kanzi\io\IOException.hpp" />
+    <ClInclude Include="Kanzi\io\IOUtil.hpp" />
+    <ClInclude Include="Kanzi\io\NullOutputStream.hpp" />
+    <ClInclude Include="Kanzi\Listener.hpp" />
+    <ClInclude Include="Kanzi\Magic.hpp" />
+    <ClInclude Include="Kanzi\Memory.hpp" />
+    <ClInclude Include="Kanzi\OutputBitStream.hpp" />
+    <ClInclude Include="Kanzi\OutputStream.hpp" />
+    <ClInclude Include="Kanzi\Predictor.hpp" />
+    <ClInclude Include="Kanzi\Seekable.hpp" />
+    <ClInclude Include="Kanzi\SliceArray.hpp" />
+    <ClInclude Include="Kanzi\Transform.hpp" />
+    <ClInclude Include="Kanzi\transform\AliasCodec.hpp" />
+    <ClInclude Include="Kanzi\transform\BWT.hpp" />
+    <ClInclude Include="Kanzi\transform\BWTBlockCodec.hpp" />
+    <ClInclude Include="Kanzi\transform\BWTS.hpp" />
+    <ClInclude Include="Kanzi\transform\DivSufSort.hpp" />
+    <ClInclude Include="Kanzi\transform\EXECodec.hpp" />
+    <ClInclude Include="Kanzi\transform\FSDCodec.hpp" />
+    <ClInclude Include="Kanzi\transform\LZCodec.hpp" />
+    <ClInclude Include="Kanzi\transform\NullTransform.hpp" />
+    <ClInclude Include="Kanzi\transform\RLT.hpp" />
+    <ClInclude Include="Kanzi\transform\ROLZCodec.hpp" />
+    <ClInclude Include="Kanzi\transform\SBRT.hpp" />
+    <ClInclude Include="Kanzi\transform\SRT.hpp" />
+    <ClInclude Include="Kanzi\transform\TextCodec.hpp" />
+    <ClInclude Include="Kanzi\transform\TransformFactory.hpp" />
+    <ClInclude Include="Kanzi\transform\TransformSequence.hpp" />
+    <ClInclude Include="Kanzi\transform\UTFCodec.hpp" />
+    <ClInclude Include="Kanzi\transform\ZRLT.hpp" />
+    <ClInclude Include="Kanzi\types.hpp" />
+    <ClInclude Include="Kanzi\util\Clock.hpp" />
+    <ClInclude Include="Kanzi\util\fixedbuf.hpp" />
+    <ClInclude Include="Kanzi\util\Printer.hpp" />
+    <ClInclude Include="Kanzi\util\strings.hpp" />
+    <ClInclude Include="Kanzi\util\WallTimer.hpp" />
+    <ClInclude Include="Kanzi\util\XXHash.hpp" />
     <ClInclude Include="Lizard\entropy\bitstream.h" />
     <ClInclude Include="Lizard\entropy\compiler.h" />
     <ClInclude Include="Lizard\entropy\debug.h" />
@@ -288,6 +363,62 @@
     <ClCompile Include="Brotli\enc\static_dict.c" />
     <ClCompile Include="Brotli\enc\static_dict_lut.c" />
     <ClCompile Include="Brotli\enc\utf8_util.c" />
+    <ClCompile Include="Kanzi\bitstream\DebugInputBitStream.cpp" />
+    <ClCompile Include="Kanzi\bitstream\DebugOutputBitStream.cpp" />
+    <ClCompile Include="Kanzi\bitstream\DefaultInputBitStream.cpp" />
+    <ClCompile Include="Kanzi\bitstream\DefaultOutputBitStream.cpp" />
+    <ClCompile Include="Kanzi\entropy\ANSRangeDecoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\ANSRangeEncoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\BinaryEntropyDecoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\BinaryEntropyEncoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\CMPredictor.cpp" />
+    <ClCompile Include="Kanzi\entropy\EntropyUtils.cpp" />
+    <ClCompile Include="Kanzi\entropy\ExpGolombDecoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\ExpGolombEncoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\FPAQDecoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\FPAQEncoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\HuffmanCommon.cpp" />
+    <ClCompile Include="Kanzi\entropy\HuffmanDecoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\HuffmanEncoder.cpp">
+      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\RangeDecoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\RangeEncoder.cpp" />
+    <ClCompile Include="Kanzi\entropy\TPAQPredictor.cpp">
+      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\Event.cpp" />
+    <ClCompile Include="Kanzi\Global.cpp">
+      <DisableSpecificWarnings>4566;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\io\CompressedInputStream.cpp">
+      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\io\CompressedOutputStream.cpp">
+      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\AliasCodec.cpp" />
+    <ClCompile Include="Kanzi\transform\BWT.cpp" />
+    <ClCompile Include="Kanzi\transform\BWTBlockCodec.cpp" />
+    <ClCompile Include="Kanzi\transform\BWTS.cpp" />
+    <ClCompile Include="Kanzi\transform\DivSufSort.cpp" />
+    <ClCompile Include="Kanzi\transform\EXECodec.cpp" />
+    <ClCompile Include="Kanzi\transform\FSDCodec.cpp" />
+    <ClCompile Include="Kanzi\transform\LZCodec.cpp">
+      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\RLT.cpp" />
+    <ClCompile Include="Kanzi\transform\ROLZCodec.cpp">
+      <DisableSpecificWarnings>4244;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\SBRT.cpp" />
+    <ClCompile Include="Kanzi\transform\SRT.cpp" />
+    <ClCompile Include="Kanzi\transform\TextCodec.cpp">
+      <DisableSpecificWarnings>4063;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\UTFCodec.cpp" />
+    <ClCompile Include="Kanzi\transform\ZRLT.cpp" />
+    <ClCompile Include="Kanzi\util\WallTimer.cpp" />
     <ClCompile Include="Lizard\entropy\lizard_entropy_common.c" />
     <ClCompile Include="Lizard\entropy\lizard_fse_compress.c" />
     <ClCompile Include="Lizard\entropy\lizard_fse_decompress.c" />

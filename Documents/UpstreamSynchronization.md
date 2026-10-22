@@ -44,7 +44,11 @@
 
 ## GmSSL
 
-- NanaZip.Codecs: v3.2.0.
+- NanaZip.Codecs: v3.2.0
+
+## Kanzi
+
+- NanaZip.ZS.Codecs: 2.6.0
 
 ## LittleFS
 

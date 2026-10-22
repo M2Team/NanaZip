@@ -582,6 +582,7 @@ Creative Commons may be contacted at creativecommons.org.
 - C++/WinRT, https://github.com/microsoft/cppwinrt
 - FreeBSD, https://github.com/freebsd/freebsd-src
 - GmSSL, https://github.com/guanzhi/GmSSL
+- Kanzi, https://github.com/flanglet/kanzi-cpp
 - littlefs, https://github.com/littlefs-project/littlefs
 - Lizard, https://github.com/inikep/lizard
 - LZ4, https://github.com/lz4/lz4

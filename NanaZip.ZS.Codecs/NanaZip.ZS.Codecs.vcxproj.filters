@@ -70,6 +70,24 @@
     <Filter Include="SevenZip\CPP\7zip\Archive\Common">
       <UniqueIdentifier>{683af590-e209-4f0e-b349-3243998ca435}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kanzi">
+      <UniqueIdentifier>{1f8cccd0-d77c-478d-bb58-3990c9ed26e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kanzi\bitstream">
+      <UniqueIdentifier>{6b38c41e-91a3-4da8-ae77-906894c0d2ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kanzi\entropy">
+      <UniqueIdentifier>{7a8287bd-d407-43f5-8f7c-d569434f77bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kanzi\io">
+      <UniqueIdentifier>{df1df4e8-999b-4eb4-b029-7e37f1e87020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kanzi\transform">
+      <UniqueIdentifier>{2573cb1d-552c-4213-8448-5dbbc670363f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kanzi\util">
+      <UniqueIdentifier>{c7031702-fb2f-4fb0-aef9-4c3777dc9cde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SevenZip\C\Alloc.c">
@@ -422,6 +440,126 @@
     </ClCompile>
     <ClCompile Include="SevenZip\CPP\7zip\Common\PropId.cpp">
       <Filter>SevenZip\CPP\7zip\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\bitstream\DefaultInputBitStream.cpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\bitstream\DefaultOutputBitStream.cpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\bitstream\DebugInputBitStream.cpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\bitstream\DebugOutputBitStream.cpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\ANSRangeEncoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\BinaryEntropyDecoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\BinaryEntropyEncoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\CMPredictor.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\EntropyUtils.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\ExpGolombDecoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\ExpGolombEncoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\FPAQDecoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\FPAQEncoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\HuffmanCommon.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\HuffmanDecoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\HuffmanEncoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\RangeDecoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\RangeEncoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\TPAQPredictor.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\entropy\ANSRangeDecoder.cpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\io\CompressedInputStream.cpp">
+      <Filter>Kanzi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\io\CompressedOutputStream.cpp">
+      <Filter>Kanzi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\BWTBlockCodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\BWTS.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\DivSufSort.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\EXECodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\FSDCodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\LZCodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\RLT.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\ROLZCodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\SBRT.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\SRT.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\TextCodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\UTFCodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\ZRLT.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\AliasCodec.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\transform\BWT.cpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\util\WallTimer.cpp">
+      <Filter>Kanzi\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\Event.cpp">
+      <Filter>Kanzi</Filter>
+    </ClCompile>
+    <ClCompile Include="Kanzi\Global.cpp">
+      <Filter>Kanzi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1009,6 +1147,228 @@
     </ClInclude>
     <ClInclude Include="SevenZip\CPP\7zip\Archive\Common\StdAfx.h">
       <Filter>SevenZip\CPP\7zip\Archive\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\bitstream\DefaultInputBitStream.hpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\bitstream\DefaultOutputBitStream.hpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\bitstream\DebugInputBitStream.hpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\bitstream\DebugOutputBitStream.hpp">
+      <Filter>Kanzi\bitstream</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\ANSRangeEncoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\BinaryEntropyDecoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\BinaryEntropyEncoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\CMPredictor.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\EntropyDecoderFactory.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\EntropyEncoderFactory.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\EntropyUtils.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\ExpGolombDecoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\ExpGolombEncoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\FPAQDecoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\FPAQEncoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\HuffmanCommon.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\HuffmanDecoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\HuffmanEncoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\NullEntropyDecoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\NullEntropyEncoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\RangeDecoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\RangeEncoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\TPAQPredictor.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\AdaptiveProbMap.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\entropy\ANSRangeDecoder.hpp">
+      <Filter>Kanzi\entropy</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\io\CompressedOutputStream.hpp">
+      <Filter>Kanzi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\io\IOException.hpp">
+      <Filter>Kanzi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\io\IOUtil.hpp">
+      <Filter>Kanzi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\io\NullOutputStream.hpp">
+      <Filter>Kanzi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\io\CompressedInputStream.hpp">
+      <Filter>Kanzi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\BWTBlockCodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\BWTS.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\DivSufSort.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\EXECodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\FSDCodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\LZCodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\NullTransform.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\RLT.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\ROLZCodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\SBRT.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\SRT.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\TextCodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\TransformFactory.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\TransformSequence.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\UTFCodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\ZRLT.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\AliasCodec.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\transform\BWT.hpp">
+      <Filter>Kanzi\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\util\WallTimer.hpp">
+      <Filter>Kanzi\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\util\XXHash.hpp">
+      <Filter>Kanzi\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\util\Clock.hpp">
+      <Filter>Kanzi\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\util\fixedbuf.hpp">
+      <Filter>Kanzi\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\util\Printer.hpp">
+      <Filter>Kanzi\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\util\strings.hpp">
+      <Filter>Kanzi\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\EntropyEncoder.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Error.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Event.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Global.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\InputBitStream.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\InputStream.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Listener.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Magic.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Memory.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\OutputBitStream.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\OutputStream.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Predictor.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Seekable.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\SliceArray.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Transform.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\types.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\BitStreamException.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\concurrent.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\Context.hpp">
+      <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="Kanzi\EntropyDecoder.hpp">
+      <Filter>Kanzi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
