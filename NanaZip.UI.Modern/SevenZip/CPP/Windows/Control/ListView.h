@@ -34,6 +34,11 @@ public:
   int InsertColumn(int columnIndex, LPCTSTR text, int width);
   bool SetColumnOrderArray(int count, const int *columns)
     { return BOOLToBool(ListView_SetColumnOrderArray(_window, count, (int *)(void *)columns)); }
+  // **************** NanaZip Modification Start ****************
+  void SetSortIndicator(
+      int ColumnIndex,
+      bool Ascending);
+  // **************** NanaZip Modification End ****************
 
   /*
   int GetNumColumns()
