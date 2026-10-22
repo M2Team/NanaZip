@@ -239,6 +239,10 @@
     <ClInclude Include="SevenZip\CPP\7zip\Compress\BrotliDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\BrotliEncoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\CopyCoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziCommon.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziDecoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziEncoder.h" />
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziStreams.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\LizardDecoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\LizardEncoder.h" />
     <ClInclude Include="SevenZip\CPP\7zip\Compress\Lz4Decoder.h" />
@@ -450,6 +454,11 @@
     <ClCompile Include="SevenZip\CPP\7zip\Compress\BrotliRegister.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\CodecExports.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\CopyCoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziCommon.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziDecoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziEncoder.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziRegister.cpp" />
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziStreams.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\LizardDecoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\LizardEncoder.cpp" />
     <ClCompile Include="SevenZip\CPP\7zip\Compress\LizardRegister.cpp" />

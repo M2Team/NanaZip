@@ -561,6 +561,21 @@
     <ClCompile Include="Kanzi\Global.cpp">
       <Filter>Kanzi</Filter>
     </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziEncoder.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziRegister.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziStreams.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziCommon.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenZip\CPP\7zip\Compress\KanziDecoder.cpp">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SevenZip\C\Alloc.h">
@@ -1369,6 +1384,18 @@
     </ClInclude>
     <ClInclude Include="Kanzi\EntropyDecoder.hpp">
       <Filter>Kanzi</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziDecoder.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziEncoder.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziStreams.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenZip\CPP\7zip\Compress\KanziCommon.h">
+      <Filter>SevenZip\CPP\7zip\Compress</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
