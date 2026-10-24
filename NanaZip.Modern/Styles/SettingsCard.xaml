@@ -63,6 +63,7 @@
   <Thickness x:Key="SettingsCardPadding">24</Thickness>
   <x:Double x:Key="SettingsCardMinWidth">148</x:Double>
   <x:Double x:Key="SettingsCardMinHeight">68</x:Double>
+  <x:Double x:Key="SettingsCardTextBoxMinHeight">88</x:Double>
   <x:Double x:Key="SettingsCardHeaderFontSize">14</x:Double>
   <x:Double x:Key="SettingsCardDescriptionFontSize">12</x:Double>
   <x:Double x:Key="SettingsCardContentMinWidth">120</x:Double>

@@ -11,7 +11,7 @@
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="MinWidth" Value="{StaticResource SettingsCardMinWidth}" />
-    <Setter Property="MinHeight" Value="{StaticResource SettingsCardMinHeight}" />
+    <Setter Property="MinHeight" Value="{StaticResource SettingsCardTextBoxMinHeight}" />
     <Setter Property="MaxWidth" Value="{StaticResource SettingsCardMaxWidth}" />
     <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
     <Setter Property="IsTabStop" Value="False" />
@@ -139,6 +139,10 @@
                               FontSize="{ThemeResource AutoSuggestBoxIconFontSize}"
                               Margin="{ThemeResource AutoSuggestBoxInnerButtonMargin}"
                               Padding="{TemplateBinding Padding}"
+                              MinWidth="32"
+                              MaxWidth="32"
+                              MinHeight="28"
+                              MaxHeight="28"
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                               AutomationProperties.AccessibilityView="Raw">
@@ -348,7 +352,6 @@
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
                       </Grid.ColumnDefinitions>
                       <ScrollViewer x:Name="ContentElement"
                         Grid.Column="0"
@@ -390,13 +393,11 @@
                         Content="&#xE894;"
                         FontFamily="{ThemeResource SymbolThemeFontFamily}"
                         FontSize="{TemplateBinding FontSize}"
-                        Width="32"
-                        Height="28"
                         AutomationProperties.AccessibilityView="Raw"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right" />
                       <Button x:Name="QueryButton"
-                        Grid.Column="2"
+                        Grid.Column="1"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Style="{StaticResource SubButtonStyle}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -404,8 +405,6 @@
                         Padding="{ThemeResource HelperButtonThemePadding}"
                         IsTabStop="False"
                         FontSize="{TemplateBinding FontSize}"
-                        Width="32"
-                        Height="28"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                         AutomationProperties.AccessibilityView="Raw" />
