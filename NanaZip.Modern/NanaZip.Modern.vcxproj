@@ -87,6 +87,7 @@
     <Page Include="Styles\PivotTab.xaml" />
     <Page Include="Styles\SettingsCard.xaml" />
     <Page Include="Styles\ToggleSwitchCard.xaml" />
+    <Page Include="Styles\TextCard.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddressBar.idl" />

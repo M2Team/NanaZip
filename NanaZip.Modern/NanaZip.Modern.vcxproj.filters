@@ -46,6 +46,10 @@
     <Page Include="Styles\PivotTab.xaml">
       <Filter>Styles</Filter>
     </Page>
+    <Page Include="AboutPage.xaml" />
+    <Page Include="Styles\TextCard.xaml">
+      <Filter>Styles</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
