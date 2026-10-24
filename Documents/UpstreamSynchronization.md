@@ -32,7 +32,7 @@
 
 ## Brotli
 
-- NanaZip.ZS.Codecs: 1.2.0
+- NanaZip.ZS.Codecs: v1.2.1
 
 ## FastLZMA2
 
