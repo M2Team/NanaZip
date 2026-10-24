@@ -342,7 +342,7 @@ namespace winrt::NanaZip::Modern::implementation
 
         auto Dialog = winrt::create_instance<::IFileOpenDialog>(
             CLSID_FileOpenDialog,
-            CLSCTX_LOCAL_SERVER);
+            CLSCTX::CLSCTX_INPROC_SERVER);
 
         COMDLG_FILTERSPEC Types[] =
         {
