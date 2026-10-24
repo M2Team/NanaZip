@@ -32,7 +32,7 @@
 
 ## Brotli
 
-- NanaZip.Codecs: 1.2.0
+- NanaZip.ZS.Codecs: 1.2.0
 
 ## FastLZMA2
 
@@ -56,7 +56,7 @@
 
 ## Lizard
 
-- NanaZip.Codecs: Commit d3becc7e80d3eb01147c2f63bed2e23fac533f19 after v2.1
+- NanaZip.ZS.Codecs: Commit d3becc7e80d3eb01147c2f63bed2e23fac533f19 after v2.1
   with current used 7-Zip ZS modifications.
 
 ## LZ4
@@ -65,7 +65,7 @@
 
 ## LZ5
 
-- NanaZip.Codecs: Commit 1bc0fef363a44444135badb8e34286d5c56e1d5c after v1.5.
+- NanaZip.ZS.Codecs: Commit 1bc0fef363a44444135badb8e34286d5c56e1d5c after v1.5.
 
 ## RHash
 
