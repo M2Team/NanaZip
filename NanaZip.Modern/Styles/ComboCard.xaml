@@ -6,36 +6,13 @@
     <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/SettingsCard.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
-  <Style x:Key="DefaultComboBoxStyle" TargetType="ComboBox">
-    <Setter Property="Padding" Value="{ThemeResource ComboBoxPadding}" />
-    <Setter Property="MaxDropDownHeight" Value="504" />
-    <Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
-    <Setter Property="Background" Value="{ThemeResource ComboBoxBackground}" />
-    <Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
-    <Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThemeThickness}" />
-    <Setter Property="TabNavigation" Value="Once" />
-    <Setter Property="TextBoxStyle" Value="{StaticResource ComboBoxTextBoxStyle}" />
-    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
-    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
-    <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True" />
-    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
-    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+  <Style x:Key="ComboBoxCardStyle" TargetType="ComboBox" BasedOn="{StaticResource DefaultComboBoxStyle}">
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    <Setter Property="HorizontalAlignment" Value="Left" />
-    <Setter Property="VerticalAlignment" Value="Top" />
-    <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-    <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-    <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
-    <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
-    <Setter Property="ItemsPanel">
-      <Setter.Value>
-        <ItemsPanelTemplate>
-          <CarouselPanel />
-        </ItemsPanelTemplate>
-      </Setter.Value>
-    </Setter>
+    <Setter Property="MinWidth" Value="{StaticResource SettingsCardMinWidth}" />
+    <Setter Property="MinHeight" Value="{StaticResource SettingsCardTextBoxMinHeight}" />
+    <Setter Property="MaxWidth" Value="{StaticResource SettingsCardMaxWidth}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="ComboBox">
@@ -91,6 +68,12 @@
                 </VisualState>
                 <VisualState x:Name="Disabled">
                   <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CardBorder" Storyboard.TargetProperty="Background">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SettingsCardBackgroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CardBorder" Storyboard.TargetProperty="BorderBrush">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SettingsCardBorderBrushDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="Background">
                       <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBackgroundDisabled}" />
                     </ObjectAnimationUsingKeyFrames>
@@ -98,7 +81,10 @@
                       <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
-                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxHeaderForegroundDisabled}" />
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SettingsCardForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DescriptionPresenter" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SettingsCardForegroundDisabled}" />
                     </ObjectAnimationUsingKeyFrames>
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                       <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundDisabled}" />
@@ -168,8 +154,7 @@
                 </VisualState>
                 <VisualState x:Name="Closed">
                   <Storyboard>
-                    <SplitCloseThemeAnimation OpenedTargetName="PopupBorder" ClosedTargetName="ContentPresenter" OffsetFromCenter="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOffset}"
-                      OpenedLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOpenedHeight}" />
+                    <SplitCloseThemeAnimation OpenedTargetName="PopupBorder" ClosedTargetName="ContentPresenter" OffsetFromCenter="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOffset}" OpenedLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownOpenedHeight}" />
                   </Storyboard>
                 </VisualState>
               </VisualStateGroup>
@@ -205,129 +190,141 @@
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
 
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="*" />
-              <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="38" />
-            </Grid.ColumnDefinitions>
-
-            <ContentPresenter x:Name="HeaderContentPresenter"
-              Grid.Row="0"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Content="{TemplateBinding Header}"
-              ContentTemplate="{TemplateBinding HeaderTemplate}"
-              FlowDirection="{TemplateBinding FlowDirection}"
-              Foreground="{ThemeResource ComboBoxHeaderForeground}"
-              FontWeight="{ThemeResource ComboBoxHeaderThemeFontWeight}"
-              LineHeight="20"
-              Margin="{ThemeResource ComboBoxTopHeaderMargin}"
-              TextWrapping="Wrap"
-              VerticalAlignment="Top"
-              Visibility="Collapsed"
-              x:DeferLoadStrategy="Lazy" />
-
-            <Border x:Name="HighlightBackground"
-              Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Margin="-4"
-              Background="{ThemeResource ComboBoxBackgroundFocused}"
-              BorderBrush="{ThemeResource ComboBoxBackgroundBorderBrushFocused}"
-              BorderThickness="{StaticResource ComboBoxBackgroundBorderThicknessFocused}"
-              CornerRadius="{StaticResource ComboBoxHiglightBorderCornerRadius}"
-              Opacity="0" />
-            <Border x:Name="Background"
-              Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Translation="0,0,1"
-              Background="{TemplateBinding Background}"
-              BorderBrush="{TemplateBinding BorderBrush}"
-              BorderThickness="{TemplateBinding BorderThickness}"
+            <Border x:Name="CardBorder"
+              Background="{ThemeResource SettingsCardBackground}"
+              BackgroundSizing="{TemplateBinding BackgroundSizing}"
+              BorderBrush="{ThemeResource SettingsCardBorderBrush}"
+              BorderThickness="{StaticResource SettingsCardBorderThickness}"
               CornerRadius="{TemplateBinding CornerRadius}"
-              Control.IsTemplateFocusTarget="True"
-              MinWidth="{ThemeResource ComboBoxThemeMinWidth}" />
+              IsHitTestVisible="False" />
 
-            <Rectangle x:Name="Pill"
-              Style="{StaticResource ComboBoxItemPill}"
-              Margin="1,0,0,0"
-              Grid.Row="1" Grid.Column="0"
-              Opacity="0">
-              <Rectangle.RenderTransform>
-                <CompositeTransform x:Name="PillTransform" ScaleY="1" />
-              </Rectangle.RenderTransform>
-            </Rectangle>
+            <Grid Padding="{StaticResource SettingsCardPadding}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" MaxWidth="16" />
+                <!-- The width of column where combo located msut be '*', otherwise the offestX of popup is worry. -->
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
 
-            <ContentPresenter x:Name="ContentPresenter"
-              Grid.Row="1"
-              Grid.Column="0"
-              Margin="{TemplateBinding Padding}"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-              <TextBlock x:Name="PlaceholderTextBlock"
-                Text="{TemplateBinding PlaceholderText}"
-                Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForeground}}" />
-            </ContentPresenter>
+              <StackPanel
+                Grid.Column="0"
+                Orientation="Vertical"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                IsHitTestVisible="False">
+                <ContentPresenter x:Name="HeaderContentPresenter"
+                  Content="{TemplateBinding Header}"
+                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                  Foreground="{ThemeResource SettingsCardForeground}"
+                  FontSize="{ThemeResource SettingsCardHeaderFontSize}"
+                  TextWrapping="WrapWholeWords"
+                  Visibility="Collapsed"
+                  x:DeferLoadStrategy="Lazy" />
+                <ContentPresenter x:Name="DescriptionPresenter"
+                  Foreground="{ThemeResource SettingsCardForegroundDescription}"
+                  FontSize="{StaticResource SettingsCardDescriptionFontSize}"
+                  Content="{TemplateBinding Description}"
+                  x:Load="False" />
+              </StackPanel>
 
-            <TextBox x:Name="EditableText"
-              Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Style="{TemplateBinding TextBoxStyle}"
-              Margin="0,0,0,0"
-              Padding="{ThemeResource ComboBoxEditableTextPadding}"
-              BorderBrush="Transparent"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-              PlaceholderText="{TemplateBinding PlaceholderText}"
-              Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForeground}}"
-              Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-              Visibility="Collapsed"
-              Header="{TemplateBinding Header}"
-              AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"
-              x:Load="False"
-              CornerRadius="{TemplateBinding CornerRadius}" />
+              <Grid
+                Grid.Column="2"
+                VerticalAlignment="Center"
+                MinWidth="{StaticResource SettingsCardContentMinWidth}"
+                MaxWidth="{StaticResource SettingsCardContentMaxWidth}">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="38" />
+                </Grid.ColumnDefinitions>
 
-            <Border x:Name="DropDownOverlay"
-              Grid.Row="1"
-              Grid.Column="1"
-              Background="Transparent"
-              Margin="4,4,4,4"
-              Visibility="Collapsed"
-              CornerRadius="{StaticResource ComboBoxDropDownButtonBackgroundCornerRadius}"
-              Width="30"
-              HorizontalAlignment="Right"
-              x:Load="False" />
-            <FontIcon x:Name="DropDownGlyph"
-              MinHeight="{ThemeResource ComboBoxMinHeight}"
-              Grid.Row="1"
-              Grid.Column="1"
-              IsHitTestVisible="False"
-              Margin="0,0,14,0"
-              Foreground="{ThemeResource ComboBoxDropDownGlyphForeground}"
-              FontFamily="{ThemeResource SymbolThemeFontFamily}"
-              FontSize="12"
-              Glyph="&#xE70D;"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Center"
-              AutomationProperties.AccessibilityView="Raw"
-              Width="12"
-              Height="12" />
+                <Border x:Name="HighlightBackground"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Margin="-4"
+                  Background="{ThemeResource ComboBoxBackgroundFocused}"
+                  BorderBrush="{ThemeResource ComboBoxBackgroundBorderBrushFocused}"
+                  BorderThickness="{StaticResource ComboBoxBackgroundBorderThicknessFocused}"
+                  CornerRadius="{StaticResource ComboBoxHiglightBorderCornerRadius}"
+                  Opacity="0" />
 
-            <ContentPresenter x:Name="DescriptionPresenter"
-              Grid.Row="2"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Foreground="{ThemeResource SystemControlDescriptionTextForegroundBrush}"
-              Content="{TemplateBinding Description}"
-              x:Load="False" />
+                <Border x:Name="Background"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Translation="0,0,1"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}"
+                  Control.IsTemplateFocusTarget="True"
+                  MinWidth="{ThemeResource ComboBoxThemeMinWidth}" />
 
-            <Popup x:Name="Popup">
+                <Rectangle x:Name="Pill"
+                  Style="{StaticResource ComboBoxItemPill}"
+                  Margin="1,0,0,0"
+                  Grid.Column="0"
+                  Opacity="0">
+                  <Rectangle.RenderTransform>
+                    <CompositeTransform x:Name="PillTransform" ScaleY="1" />
+                  </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <ContentPresenter x:Name="ContentPresenter"
+                  Grid.Column="0"
+                  Margin="{TemplateBinding Padding}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Center"
+                  ToolTipService.ToolTip="{Binding Content, RelativeSource={RelativeSource Self}}"
+                  ToolTipService.Placement="Bottom">
+                  <TextBlock x:Name="PlaceholderTextBlock"
+                    Text="{TemplateBinding PlaceholderText}"
+                    Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForeground}}" />
+                </ContentPresenter>
+
+                <TextBox x:Name="EditableText"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Style="{TemplateBinding TextBoxStyle}"
+                  Margin="0,0,0,0"
+                  Padding="{ThemeResource ComboBoxEditableTextPadding}"
+                  BorderBrush="Transparent"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Center"
+                  PlaceholderText="{TemplateBinding PlaceholderText}"
+                  Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForeground}}"
+                  Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  Visibility="Collapsed"
+                  Header="{TemplateBinding Header}"
+                  AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"
+                  x:Load="False"
+                  CornerRadius="{TemplateBinding CornerRadius}" />
+                <Border x:Name="DropDownOverlay"
+                  Grid.Column="1"
+                  Background="Transparent"
+                  Margin="4,4,4,4"
+                  Visibility="Collapsed"
+                  CornerRadius="{StaticResource ComboBoxDropDownButtonBackgroundCornerRadius}"
+                  Width="30"
+                  HorizontalAlignment="Right"
+                  x:Load="False" />
+                <FontIcon x:Name="DropDownGlyph"
+                  MinHeight="{ThemeResource ComboBoxMinHeight}"
+                  Grid.Column="1"
+                  IsHitTestVisible="False"
+                  Margin="0,0,14,0"
+                  Foreground="{ThemeResource ComboBoxDropDownGlyphForeground}"
+                  FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                  FontSize="12"
+                  Glyph="&#xE70D;"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  AutomationProperties.AccessibilityView="Raw"
+                  Width="12"
+                  Height="12" />
+              </Grid>
+            </Grid>
+
+            <!-- The coordinate of popup msut be (0, 0), otherwise the offestX of popup is worry. -->
+            <Popup x:Name="Popup" Grid.Column="0" Grid.Row="0">
               <Border x:Name="PopupBorder"
                 Background="{ThemeResource ComboBoxDropDownBackground}"
                 BackgroundSizing="InnerBorderEdge"
@@ -356,9 +353,11 @@
                 </ScrollViewer>
               </Border>
             </Popup>
+
           </Grid>
         </ControlTemplate>
       </Setter.Value>
     </Setter>
   </Style>
+
 </ResourceDictionary>
