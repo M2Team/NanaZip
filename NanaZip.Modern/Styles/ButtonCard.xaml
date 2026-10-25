@@ -13,7 +13,7 @@
     <Setter Property="BorderThickness" Value="{ThemeResource SettingsCardBorderThickness}" />
     <Setter Property="Padding" Value="{StaticResource SettingsCardPadding}" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
-    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Top" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="FontSize" Value="{ThemeResource SettingsCardHeaderFontSize}" />
     <Setter Property="MinWidth" Value="{StaticResource SettingsCardMinWidth}" />

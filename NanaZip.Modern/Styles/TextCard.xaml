@@ -7,7 +7,8 @@
   </ResourceDictionary.MergedDictionaries>
 
   <Style x:Key="AutoSuggestBoxCardStyle" TargetType="AutoSuggestBox" BasedOn="{StaticResource DefaultAutoSuggestBoxStyle}">
-    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="MinWidth" Value="{StaticResource SettingsCardMinWidth}" />

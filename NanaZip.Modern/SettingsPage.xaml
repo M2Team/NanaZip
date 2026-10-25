@@ -14,6 +14,7 @@
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ToggleSwitchCard.xaml" />
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/PivotTab.xaml" />
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/TextCard.xaml" />
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ComboCard.xaml" />
       </ResourceDictionary.MergedDictionaries>
       <Style TargetType="TextBlock">
         <Setter Property="FontWeight" Value="SemiBold" />
@@ -32,6 +33,7 @@
       <Style TargetType="Button" BasedOn="{StaticResource ButtonCardStyle}" />
       <Style TargetType="ToggleSwitch" BasedOn="{StaticResource ToggleSwitchCardStyle}" />
       <Style TargetType="AutoSuggestBox" BasedOn="{StaticResource AutoSuggestBoxCardStyle}" />
+      <Style TargetType="ComboBox" BasedOn="{StaticResource ComboBoxCardStyle}" />
     </Pivot.Resources>
 
     <!--
