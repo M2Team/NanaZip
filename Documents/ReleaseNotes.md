@@ -3,6 +3,19 @@
 For preview-only releases, please see
 [NanaZip Preview Release Notes](ReleaseNotesPreview.md).
 
+**NanaZip 7.0, version 2610.2 (7.0.1882.0)**
+
+- Synchronize 7-Zip mainline implementations to 26.05. (Except the NanaZip File
+  Manager.) (Thanks to Igor Pavlov.)
+- Synchronize the 7-Zip ZS implementations to
+  https://github.com/mcmilk/7-Zip-zstd/tree/f7331b3fa14455d78a6e6a91bdd9571c999bb081.
+  (Thanks to Sergey G. Brester and Tino Reichardt.)
+- Synchronize Brotli implementations to v1.2.1.
+  (https://github.com/google/brotli/releases/tag/v1.2.1)
+- Synchronize RHash to the latest master
+  (https://github.com/rhash/RHash/tree/0517ba2ed33de0afc2d999b3353287dce3b4611c)
+  which is after v1.4.6.
+
 **NanaZip 7.0, version 2610.1 (7.0.1873.0)**
 
 - Disable FileSystemWriteVirtualization again to resolve the following known
