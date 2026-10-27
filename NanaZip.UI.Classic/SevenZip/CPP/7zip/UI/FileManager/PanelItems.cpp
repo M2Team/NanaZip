@@ -784,6 +784,9 @@ HRESULT CPanel::RefreshListCtrl(const CSelectedState &state)
 
   SetSortRawStatus();
   _listView.SortItems(CompareItems, (LPARAM)this);
+  // **************** NanaZip Modification Start ****************
+  UpdateSortIndicator();
+  // **************** NanaZip Modification End ****************
 
   Print_OnNotify("after  Sort");
 
@@ -1280,6 +1283,9 @@ void CPanel::ShowColumnsContextMenu(int x, int y)
         DeleteColumn(visibleIndex);
       }
     }
+    // **************** NanaZip Modification Start ****************
+    UpdateSortIndicator();
+    // **************** NanaZip Modification End ****************
   }
 }
 
