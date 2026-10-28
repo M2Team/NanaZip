@@ -48,9 +48,6 @@
   <data name="Resource2" xml:space="preserve">
     <value>Italiano</value>
   </data>
-  <data name="Resource104" xml:space="preserve">
-    <value>Apri cartella di destinazione</value>
-  </data>
   <data name="Resource401" xml:space="preserve">
     <value>OK</value>
   </data>
