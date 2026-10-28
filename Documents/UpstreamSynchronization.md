@@ -21,9 +21,7 @@
 
 ## 7-Zip ZS
 
-- NanaZip.Core: Commit f7331b3fa14455d78a6e6a91bdd9571c999bb081 after
-  v26.02-v1.5.7-R2.
-- NanaZip.ZS.Codecs: Commit f7331b3fa14455d78a6e6a91bdd9571c999bb081 after
+- NanaZip.ZS.Codecs: Commit 80ba16679ef54f00f6ed8bfd33a4222c9e75bd92 after
   v26.02-v1.5.7-R2.
 
 ## BLAKE3
