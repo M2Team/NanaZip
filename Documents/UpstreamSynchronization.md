@@ -21,6 +21,17 @@
 
 ## 7-Zip ZS
 
+- NanaZip.Core: Commit 80ba16679ef54f00f6ed8bfd33a4222c9e75bd92 after
+  v26.02-v1.5.7-R2. The following files incorporate changes from 7-Zip ZS:
+  - `SevenZip\CPP\7zip\Archive\Nsis\NsisDecode.cpp`
+  - `SevenZip\CPP\7zip\Archive\Nsis\NsisDecode.h`
+  - `SevenZip\CPP\7zip\Archive\Nsis\NsisHandler.cpp`
+  - `SevenZip\CPP\7zip\Archive\Nsis\NsisIn.cpp`
+  - `SevenZip\CPP\7zip\Archive\Zip\ZipHandler.cpp`
+  - `SevenZip\CPP\7zip\Archive\Zip\ZipHandler.h`
+  - `SevenZip\CPP\7zip\Archive\Zip\ZipHeader.h`
+  - `SevenZip\CPP\7zip\Archive\Zip\ZipUpdate.cpp`
+  - `SevenZip\CPP\7zip\Archive\SquashfsHandler.cpp`
 - NanaZip.ZS.Codecs: Commit 80ba16679ef54f00f6ed8bfd33a4222c9e75bd92 after
   v26.02-v1.5.7-R2.
 
