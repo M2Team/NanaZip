@@ -197,6 +197,7 @@ struct CContextMenuInfo
 
   // **************** NanaZip Modification Start ****************
   CBoolPair ExtractOnOpen;
+  CBoolPair OpenFolderAfterExtractOnOpen;
   // **************** NanaZip Modification End ****************
 
   /*
