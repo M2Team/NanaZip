@@ -85,6 +85,7 @@
     </Page>
     <Page Include="Styles\ButtonCard.xaml" />
     <Page Include="Styles\ComboCard.xaml" />
+    <Page Include="Styles\ListViewCard.xaml" />
     <Page Include="Styles\PivotTab.xaml" />
     <Page Include="Styles\SettingsCard.xaml" />
     <Page Include="Styles\ToggleSwitchCard.xaml" />

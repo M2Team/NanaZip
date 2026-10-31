@@ -71,4 +71,8 @@
   <x:Double x:Key="SettingsCardMaxWidth">1000</x:Double>
   <x:Double x:Key="SettingsCardSpacing">4</x:Double>
 
+  <Thickness x:Key="SettingsExpanderItemBorderThickness">0,1,0,0</Thickness>
+  <Thickness x:Key="SettingsExpanderItemPadding">58,8,44,8</Thickness>
+  <x:Double x:Key="SettingsExpanderContentMinHeight">16</x:Double>
+
 </ResourceDictionary>
