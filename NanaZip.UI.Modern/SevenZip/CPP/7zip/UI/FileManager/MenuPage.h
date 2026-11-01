@@ -17,6 +17,7 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
 
   // **************** NanaZip Modification Start ****************
   bool m_ExtractOnOpenChanged;
+  bool m_OpenFolderAfterExtractOnOpenChanged;
   // **************** NanaZip Modification End ****************
 
   void Clear_MenuChanged()
@@ -27,6 +28,7 @@ class CMenuPage: public NWindows::NControl::CPropertyPage
 
     // **************** NanaZip Modification Start ****************
     m_ExtractOnOpenChanged = false;
+    m_OpenFolderAfterExtractOnOpenChanged = false;
     // **************** NanaZip Modification End ****************
   }
 
