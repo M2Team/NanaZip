@@ -44,6 +44,7 @@ extern "C" {
 *  Dependencies
 ******************************************/
 #include <stddef.h>        /* size_t */
+#include "compiler.h"
 #include "error_public.h"  /* enum list */
 
 
@@ -84,7 +85,6 @@ ERR_STATIC ERR_enum ERR_getErrorCode(size_t code) { if (!ERR_isError(code)) retu
 #define CHECK_V_F(e, f) size_t const e = f; if (ERR_isError(e)) return e
 #define CHECK_F(f)   { CHECK_V_F(_var_err__, f); }
 
-// **************** 7-Zip ZS Modification Start ****************
 /**
  * Ignore: this is an internal helper.
  *
@@ -132,7 +132,6 @@ void _force_has_format_string(const char *format, ...) {
             return ERROR(err);                                                 \
         }                                                                      \
     } while (0)
-// **************** 7-Zip ZS Modification End ****************
 
 /*-****************************************
 *  Error Strings

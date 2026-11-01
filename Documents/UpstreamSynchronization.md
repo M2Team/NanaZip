@@ -32,7 +32,7 @@
   - `SevenZip\CPP\7zip\Archive\Zip\ZipHeader.h`
   - `SevenZip\CPP\7zip\Archive\Zip\ZipUpdate.cpp`
   - `SevenZip\CPP\7zip\Archive\SquashfsHandler.cpp`
-- NanaZip.ZS.Codecs: Commit 80ba16679ef54f00f6ed8bfd33a4222c9e75bd92 after
+- NanaZip.ZS.Codecs: Commit 13d2833a4066ddbe95d0fef846d63e89061ac73c after
   v26.02-v1.5.7-R2.
 
 ## BLAKE3
