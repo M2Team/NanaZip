@@ -11,6 +11,7 @@
     <Setter Property="BorderBrush" Value="{ThemeResource SettingsCardBorderBrush}" />
     <Setter Property="BorderThickness" Value="{StaticResource SettingsCardBorderThickness}" />
     <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+    <Setter Property="IsTabStop" Value="False" />
 
     <!-- HeaderTemplate in ItemsPresenter only support pure text.
          If want use control as header's content like Expander, please use ExpanderHeader.
@@ -87,7 +88,8 @@
                 BorderThickness="0"
                 Padding="{StaticResource SettingsExpanderHeaderPadding}"
                 Background="{TemplateBinding Background}"
-                CornerRadius="0">
+                CornerRadius="0"
+                IsTabStop="True">
 
                 <ToggleButton.Resources>
                   <ResourceDictionary>
@@ -259,7 +261,8 @@
               Foreground="{TemplateBinding Foreground}"
               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-              IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+              IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              IsTabStop="False" />
           </Border>
         </ControlTemplate>
       </Setter.Value>
