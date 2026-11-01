@@ -51,7 +51,8 @@
                   Grid.Column="2"
                   Glyph="&#xE8A7;"
                   FontSize="{StaticResource SettingsCardHeaderFontSize}"
-                  HorizontalAlignment="Right" />
+                  HorizontalAlignment="Right"
+                  IsTextScaleFactorEnabled="False" />
               </Grid>
             </ContentPresenter.Content>
 

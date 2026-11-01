@@ -17,20 +17,14 @@
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ComboCard.xaml" />
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ListViewCard.xaml" />
       </ResourceDictionary.MergedDictionaries>
-      <Style TargetType="TextBlock">
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Margin" Value="0,12,0,4" />
-      </Style>
-      <Style TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="Spacing" Value="{StaticResource SettingsCardSpacing}" />
-        <Setter Property="Padding" Value="{StaticResource SettingsCardPadding}" />
-      </Style>
     </ResourceDictionary>
   </Page.Resources>
   <Pivot Style="{StaticResource PivotTabStyle}">
     <Pivot.Resources>
       <Thickness x:Key="PivotItemMargin">0</Thickness>
+      <Style TargetType="PivotHeaderItem" BasedOn="{StaticResource PivotTabHeaderItemStyle}" />
+      <Style TargetType="TextBlock" BasedOn="{StaticResource PivotTabSubTitleStyle}" />
+      <Style TargetType="StackPanel" BasedOn="{StaticResource PivotTabItemPanelStyle}" />
       <Style TargetType="Button" BasedOn="{StaticResource ButtonCardStyle}" />
       <Style TargetType="ToggleSwitch" BasedOn="{StaticResource ToggleSwitchCardStyle}" />
       <Style TargetType="AutoSuggestBox" BasedOn="{StaticResource AutoSuggestBoxCardStyle}" />
