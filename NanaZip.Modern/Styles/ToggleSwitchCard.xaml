@@ -375,6 +375,7 @@
                         KeyTime="0"
                         Value="{ThemeResource ToggleSwitchKnobFillOnDisabled}" />
                     </ObjectAnimationUsingKeyFrames>
+                    <!--
                     <ColorAnimationUsingKeyFrames
                       Storyboard.TargetName="SwitchAreaGrid"
                       Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
@@ -382,6 +383,7 @@
                         KeyTime="{StaticResource ControlFasterAnimationDuration}"
                         Value="{ThemeResource ToggleSwitchContainerBackgroundDisabled}" />
                     </ColorAnimationUsingKeyFrames>
+                    -->
                     <DoubleAnimationUsingKeyFrames
                       Storyboard.TargetName="SwitchKnobOn"
                       Storyboard.TargetProperty="Width"
