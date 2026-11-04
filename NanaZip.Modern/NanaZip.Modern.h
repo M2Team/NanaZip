@@ -260,11 +260,20 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetCopyLocationDialogPath(
     _In_ HWND WindowHandle);
 
 /**
+ * @brief Show the Settings dialog.
+ * @param ParentWindowHandle A handle to the owner window of the dialog to be
+ *                           created. If this parameter is nullptr, the dialog
+ *                           has no owner window.
+ * @return The message loop exit code of the dialog.
+ */
+EXTERN_C INT WINAPI K7ModernShowSettingsDialog(
+    _In_opt_ HWND ParentWindowHandle);
+
+/**
  * @brief Create the toolbar control for the main window.
  * @param ParentWindowHandle A handle to the owner window of the control to be
  *                           created. This parameter must be valid.
- * @param MoreMenuHandle A menu handle for the "More" menu. This parameter must
- *                       be valid.
+ * @param MoreMenuHandle A menu handle for the "More" menu. This parameter mustn *                       be valid.
  * @return The toolbar control instance pointer.
  */
 EXTERN_C LPVOID WINAPI K7ModernCreateMainWindowToolBarPage(

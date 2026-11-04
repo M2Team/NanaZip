@@ -2,11 +2,17 @@
   x:Class="NanaZip.Modern.App"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:local="using:NanaZip.Modern">
+  xmlns:local="using:NanaZip.Modern"
+  RequestedTheme="Dark">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
+        <!-- Base Sun Valley styles -->
         <ResourceDictionary Source="ms-appx:///Mile.Xaml.Styles.SunValley.xbf" />
+        <!-- Base dark theme resources -->
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Themes/ThemeResources.xaml" />
+        <!-- Theme-specific resources (loaded dynamically by ThemeManager) -->
+        <!-- Custom templates -->
         <local:AddressBarTemplate />
         <local:StatusBarTemplate />
       </ResourceDictionary.MergedDictionaries>

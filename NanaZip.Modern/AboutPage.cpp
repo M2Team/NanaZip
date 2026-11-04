@@ -5,6 +5,7 @@
 #endif
 
 #include "NanaZip.Modern.h"
+#include "ThemeManager.h"
 
 #include <winrt/Windows.UI.Xaml.Documents.h>
 
@@ -24,6 +25,9 @@ namespace winrt::NanaZip::Modern::implementation
     void AboutPage::InitializeComponent()
     {
         AboutPageT::InitializeComponent();
+        
+        // Apply theme to this page
+        NanaZip::Modern::ThemeManager::Instance().ApplyThemeToPage(*this);
 
         winrt::hstring WindowTitle = winrt::hstring(
             ::K7ModernGetLegacyStringResource(2900));

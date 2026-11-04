@@ -1,0 +1,88 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NanaZip.Modern">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ThemeResources.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Glassy/Blurry Theme (Mica) - Semi-transparent with blur effect -->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <!-- Window background - Mica-like semi-transparent -->
+            <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#E61F1F1F" />  <!-- 90% opacity -->
+            <SolidColorBrush x:Key="WindowChromeBrush" Color="#CC1F1F1F" />  <!-- 80% opacity -->
+
+            <!-- Page backgrounds -->
+            <SolidColorBrush x:Key="PageBackgroundBrush" Color="#E61F1F1F" />
+            <SolidColorBrush x:Key="ContentBackgroundBrush" Color="#E61F1F1F" />
+
+            <!-- Control backgrounds - subtle glass effect -->
+            <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#CC2D2D2D" />  <!-- 80% -->
+            <SolidColorBrush x:Key="ControlBackgroundHoverBrush" Color="#CC3E3E3E" />
+            <SolidColorBrush x:Key="ControlBackgroundPressedBrush" Color="#CC4A4A4A" />
+
+            <!-- Card backgrounds - glass effect -->
+            <SolidColorBrush x:Key="CardBackgroundBrush" Color="#B32D2D2D" />  <!-- 70% -->
+            <SolidColorBrush x:Key="CardBackgroundHoverBrush" Color="#B33E3E3E" />
+
+            <!-- Dialog backgrounds -->
+            <SolidColorBrush x:Key="DialogBackgroundBrush" Color="#E61F1F1F" />
+            <SolidColorBrush x:Key="DialogChromeBrush" Color="#CC1F1F1F" />
+
+            <!-- ListView/GridView backgrounds -->
+            <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="#E61F1F1F" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundHoverBrush" Color="#80FFFFFF" />  <!-- 50% white -->
+            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedBrush" Color="#990078D4" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedHoverBrush" Color="#B30078D4" />
+
+            <!-- TextBox backgrounds -->
+            <SolidColorBrush x:Key="TextControlBackgroundBrush" Color="#B32D2D2D" />
+            <SolidColorBrush x:Key="TextControlBackgroundFocusedBrush" Color="#CC3E3E3E" />
+            <SolidColorBrush x:Key="TextControlBackgroundDisabledBrush" Color="#801F1F1F" />
+
+            <!-- Button backgrounds -->
+            <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#B32D2D2D" />
+            <SolidColorBrush x:Key="ButtonBackgroundHoverBrush" Color="#CC3E3E3E" />
+            <SolidColorBrush x:Key="ButtonBackgroundPressedBrush" Color="#CC4A4A4A" />
+            <SolidColorBrush x:Key="ButtonBackgroundDisabledBrush" Color="#801F1F1F" />
+
+            <!-- Accent button -->
+            <SolidColorBrush x:Key="AccentButtonBackgroundBrush" Color="#990078D4" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundHoverBrush" Color="#B30078D4" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundPressedBrush" Color="#CC0078D4" />
+
+            <!-- Border brushes - subtle glass borders -->
+            <SolidColorBrush x:Key="ControlBorderBrush" Color="#4DFFFFFF" />  <!-- 30% white -->
+            <SolidColorBrush x:Key="ControlBorderHoverBrush" Color="#66FFFFFF" />
+            <SolidColorBrush x:Key="ControlBorderFocusedBrush" Color="#B30078D4" />
+
+            <!-- ScrollBar -->
+            <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#801F1F1F" />
+            <SolidColorBrush x:Key="ScrollBarForegroundBrush" Color="#80FFFFFF" />
+
+            <!-- Separator -->
+            <SolidColorBrush x:Key="SeparatorBrush" Color="#33FFFFFF" />
+
+            <!-- Tooltip -->
+            <SolidColorBrush x:Key="ToolTipBackgroundBrush" Color="#E61F1F1F" />
+            <SolidColorBrush x:Key="ToolTipBorderBrush" Color="#4DFFFFFF" />
+
+            <!-- Flyout -->
+            <SolidColorBrush x:Key="FlyoutBackgroundBrush" Color="#E61F1F1F" />
+            <SolidColorBrush x:Key="FlyoutBorderBrush" Color="#4DFFFFFF" />
+
+            <!-- Menu -->
+            <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#E61F1F1F" />
+            <SolidColorBrush x:Key="MenuBorderBrush" Color="#4DFFFFFF" />
+            <SolidColorBrush x:Key="MenuItemBackgroundHoverBrush" Color="#4DFFFFFF" />
+            <SolidColorBrush x:Key="MenuItemBackgroundPressedBrush" Color="#66FFFFFF" />
+
+            <!-- Glass/Blur accent brush for special elements -->
+            <SolidColorBrush x:Key="GlassAccentBrush" Color="#4D0078D4" />
+            <SolidColorBrush x:Key="GlassHighlightBrush" Color="#1AFFFFFF" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

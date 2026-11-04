@@ -2,6 +2,9 @@
 #include "CopyLocationPage.h"
 #include "CopyLocationPage.g.cpp"
 
+#include "NanaZip.Modern.h"
+#include "ThemeManager.h"
+
 #include <Mile.Helpers.CppWinRT.h>
 
 #include <shlobj.h>
@@ -34,6 +37,9 @@ namespace winrt::NanaZip::Modern::implementation
     void CopyLocationPage::InitializeComponent()
     {
         CopyLocationPageT::InitializeComponent();
+        
+        // Apply theme to this page
+        NanaZip::Modern::ThemeManager::Instance().ApplyThemeToPage(*this);
 
         this->TitleTextBlock().Text(this->m_Title);
         this->SubtitleTextBlock().Text(this->m_Subtitle);

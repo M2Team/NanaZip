@@ -4,6 +4,9 @@
 #include "InformationPage.g.cpp"
 #endif
 
+#include "NanaZip.Modern.h"
+#include "ThemeManager.h"
+
 #include <winrt/Windows.ApplicationModel.DataTransfer.h>
 
 namespace winrt
@@ -27,6 +30,9 @@ namespace winrt::NanaZip::Modern::implementation
     void InformationPage::InitializeComponent()
     {
         InformationPageT::InitializeComponent();
+        
+        // Apply theme to this page
+        NanaZip::Modern::ThemeManager::Instance().ApplyThemeToPage(*this);
 
         ::SetWindowTextW(this->m_WindowHandle, this->m_Title.c_str());
         

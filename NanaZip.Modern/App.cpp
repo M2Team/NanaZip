@@ -6,6 +6,7 @@
 #endif
 
 #include <Mile.Xaml.h>
+#include "ThemeManager.h"
 
 namespace winrt::NanaZip::Modern::implementation
 {
@@ -15,6 +16,9 @@ namespace winrt::NanaZip::Modern::implementation
         // Fixes: https://github.com/M2Team/NanaZip/issues/400
         this->AddRef();
         winrt::check_hresult(::MileXamlGlobalInitialize());
+        
+        // Initialize theme manager
+        NanaZip::Modern::ThemeManager::Instance().Initialize();
     }
 
     void App::Close()

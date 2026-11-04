@@ -1,0 +1,84 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NanaZip.Modern">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ThemeResources.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Transparent Theme - Fully transparent background -->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <!-- Window background - fully transparent -->
+            <SolidColorBrush x:Key="WindowBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="WindowChromeBrush" Color="Transparent" />
+
+            <!-- Page backgrounds - transparent -->
+            <SolidColorBrush x:Key="PageBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="ContentBackgroundBrush" Color="Transparent" />
+
+            <!-- Control backgrounds - transparent with subtle border -->
+            <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#1AFFFFFF" />  <!-- 10% white -->
+            <SolidColorBrush x:Key="ControlBackgroundHoverBrush" Color="#26FFFFFF" />  <!-- 15% white -->
+            <SolidColorBrush x:Key="ControlBackgroundPressedBrush" Color="#33FFFFFF" />  <!-- 20% white -->
+
+            <!-- Card backgrounds - transparent -->
+            <SolidColorBrush x:Key="CardBackgroundBrush" Color="#1AFFFFFF" />
+            <SolidColorBrush x:Key="CardBackgroundHoverBrush" Color="#26FFFFFF" />
+
+            <!-- Dialog backgrounds - transparent -->
+            <SolidColorBrush x:Key="DialogBackgroundBrush" Color="#1AFFFFFF" />
+            <SolidColorBrush x:Key="DialogChromeBrush" Color="Transparent" />
+
+            <!-- ListView/GridView backgrounds -->
+            <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundHoverBrush" Color="#1AFFFFFF" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedBrush" Color="#330078D4" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedHoverBrush" Color="#4D0078D4" />
+
+            <!-- TextBox backgrounds -->
+            <SolidColorBrush x:Key="TextControlBackgroundBrush" Color="#1AFFFFFF" />
+            <SolidColorBrush x:Key="TextControlBackgroundFocusedBrush" Color="#26FFFFFF" />
+            <SolidColorBrush x:Key="TextControlBackgroundDisabledBrush" Color="#0DFFFFFF" />
+
+            <!-- Button backgrounds -->
+            <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#1AFFFFFF" />
+            <SolidColorBrush x:Key="ButtonBackgroundHoverBrush" Color="#26FFFFFF" />
+            <SolidColorBrush x:Key="ButtonBackgroundPressedBrush" Color="#33FFFFFF" />
+            <SolidColorBrush x:Key="ButtonBackgroundDisabledBrush" Color="#0DFFFFFF" />
+
+            <!-- Accent button -->
+            <SolidColorBrush x:Key="AccentButtonBackgroundBrush" Color="#330078D4" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundHoverBrush" Color="#4D0078D4" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundPressedBrush" Color="#660078D4" />
+
+            <!-- Border brushes -->
+            <SolidColorBrush x:Key="ControlBorderBrush" Color="#33FFFFFF" />
+            <SolidColorBrush x:Key="ControlBorderHoverBrush" Color="#4DFFFFFF" />
+            <SolidColorBrush x:Key="ControlBorderFocusedBrush" Color="#800078D4" />
+
+            <!-- ScrollBar -->
+            <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="ScrollBarForegroundBrush" Color="#4DFFFFFF" />
+
+            <!-- Separator -->
+            <SolidColorBrush x:Key="SeparatorBrush" Color="#1AFFFFFF" />
+
+            <!-- Tooltip -->
+            <SolidColorBrush x:Key="ToolTipBackgroundBrush" Color="#CC1F1F1F" />
+            <SolidColorBrush x:Key="ToolTipBorderBrush" Color="#33FFFFFF" />
+
+            <!-- Flyout -->
+            <SolidColorBrush x:Key="FlyoutBackgroundBrush" Color="#CC1F1F1F" />
+            <SolidColorBrush x:Key="FlyoutBorderBrush" Color="#33FFFFFF" />
+
+            <!-- Menu -->
+            <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#CC1F1F1F" />
+            <SolidColorBrush x:Key="MenuBorderBrush" Color="#33FFFFFF" />
+            <SolidColorBrush x:Key="MenuItemBackgroundHoverBrush" Color="#26FFFFFF" />
+            <SolidColorBrush x:Key="MenuItemBackgroundPressedBrush" Color="#33FFFFFF" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

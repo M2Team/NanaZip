@@ -34,6 +34,7 @@
     <Page Include="InformationPage.xaml" />
     <Page Include="ProgressPage.xaml" />
     <Page Include="CopyLocationPage.xaml" />
+    <Page Include="SettingsPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">
@@ -366,6 +367,9 @@
       <Filter>Strings\en</Filter>
     </PRIResource>
     <PRIResource Include="Strings\en\SponsorPage.resw">
+      <Filter>Strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en\SettingsPage.resw">
       <Filter>Strings\en</Filter>
     </PRIResource>
     <PRIResource Include="Strings\eo\Common.resw">

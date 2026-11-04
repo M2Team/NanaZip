@@ -21,6 +21,7 @@
 #include "InformationPage.h"
 #include "ProgressPage.h"
 #include "CopyLocationPage.h"
+#include "SettingsPage.h"
 
 #pragma comment(lib, "comctl32.lib")
 
@@ -233,6 +234,11 @@ namespace
             ParentWindowHandle,
             WS_EX_STATICEDGE | WS_EX_DLGMODALFRAME,
             WS_CAPTION | WS_SYSMENU);
+
+        // Apply theme backdrop type
+        auto& themeManager = NanaZip::Modern::ThemeManager::Instance();
+        int32_t backdropType = themeManager.GetSystemBackdropType();
+        ::MileSetWindowSystemBackdropTypeAttribute(WindowHandle, static_cast<MILE_WINDOW_SYSTEM_BACKDROP_TYPE>(backdropType));
 
         MILE_WINDOW_SYSTEM_BACKDROP_TYPE SystemBackdropType =
             MILE_WINDOW_SYSTEM_BACKDROP_TYPE_AUTO;
@@ -523,6 +529,11 @@ EXTERN_C INT WINAPI K7ModernShowProgressWindow(
         return -1;
     }
 
+    // Apply theme backdrop type
+    auto& themeManager = NanaZip::Modern::ThemeManager::Instance();
+    int32_t backdropType = themeManager.GetSystemBackdropType();
+    ::MileSetWindowSystemBackdropTypeAttribute(WindowHandle, static_cast<MILE_WINDOW_SYSTEM_BACKDROP_TYPE>(backdropType));
+
     ::MileAllowNonClientDefaultDrawingForWindow(WindowHandle, FALSE);
 
     using Interface =
@@ -642,4 +653,30 @@ EXTERN_C LPCWSTR WINAPI K7ModernGetCopyLocationDialogPath(
         return nullptr;
     }
     return winrt::get_self<Implementation>(InstanceObject)->GetPath();
+}
+
+EXTERN_C INT WINAPI K7ModernShowSettingsDialog(
+    _In_opt_ HWND ParentWindowHandle)
+{
+    HWND WindowHandle = ::K7ModernCreateXamlDialog(ParentWindowHandle);
+    if (!WindowHandle)
+    {
+        return -1;
+    }
+
+    using Interface =
+        winrt::NanaZip::Modern::SettingsPage;
+    using Implementation =
+        winrt::NanaZip::Modern::implementation::SettingsPage;
+
+    Interface Window = winrt::make<Implementation>(WindowHandle);
+
+    int Result = ::K7ModernShowXamlDialog(
+        WindowHandle,
+        460,
+        520,
+        winrt::get_abi(Window),
+        ParentWindowHandle);
+
+    return Result;
 }

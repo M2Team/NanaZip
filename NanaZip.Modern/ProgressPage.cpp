@@ -2,6 +2,9 @@
 #include "ProgressPage.h"
 #include "ProgressPage.g.cpp"
 
+#include "NanaZip.Modern.h"
+#include "ThemeManager.h"
+
 #include <Mile.Helpers.CppBase.h>
 #include <Mile.Helpers.CppWinRT.h>
 
@@ -155,11 +158,12 @@ namespace winrt::NanaZip::Modern::implementation
         this->m_TaskbarList->SetProgressState(
             this->m_WindowHandleForTaskbar,
             ProgressState);
-    }
-
-    void ProgressPage::InitializeComponent()
+    }void ProgressPage::InitializeComponent()
     {
         ProgressPageT::InitializeComponent();
+        
+        // Apply theme to this page
+        NanaZip::Modern::ThemeManager::Instance().ApplyThemeToPage(*this);
 
         HICON ApplicationIconHandle = reinterpret_cast<HICON>(::LoadImageW(
             ::GetModuleHandleW(nullptr),

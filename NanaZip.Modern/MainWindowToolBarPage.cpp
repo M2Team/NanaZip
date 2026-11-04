@@ -9,6 +9,8 @@
 
 #include "NanaZip.Modern.h"
 
+#include "ThemeManager.h"
+
 #include <Mile.Helpers.CppBase.h>
 #include <Mile.Helpers.CppWinRT.h>
 
@@ -306,6 +308,9 @@ namespace winrt::NanaZip::Modern::implementation
     void MainWindowToolBarPage::InitializeComponent()
     {
         MainWindowToolBarPageT::InitializeComponent();
+        
+        // Apply theme to this page
+        NanaZip::Modern::ThemeManager::Instance().ApplyThemeToPage(*this);
 
         winrt::AppBarButton ToolBarButtons[10] =
         {

@@ -5,6 +5,7 @@
 #endif
 
 #include "NanaZip.Modern.h"
+#include "ThemeManager.h"
 
 #include <Mile.Helpers.CppBase.h>
 #include <Mile.Helpers.CppWinRT.h>
@@ -63,6 +64,9 @@ namespace winrt::NanaZip::Modern::implementation
     void SponsorPage::InitializeComponent()
     {
         SponsorPageT::InitializeComponent();
+        
+        // Apply theme to this page
+        NanaZip::Modern::ThemeManager::Instance().ApplyThemeToPage(*this);
     }
 
     void SponsorPage::ContributeButtonClick(
