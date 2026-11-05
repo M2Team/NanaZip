@@ -1,7 +1,7 @@
-﻿/*
+/*
    LZ4 auto-framing library
    Header File for static linking only
-   Copyright (C) 2011-2020, Yann Collet.
+   Copyright (c) Yann Collet. All rights reserved.
 
    BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
 

@@ -70,7 +70,7 @@
 
 ## LZ4
 
-- NanaZip.Codecs: 1.10.0
+- NanaZip.Codecs: v1.11.0
 
 ## LZ5
 
