@@ -20,6 +20,18 @@
     </StackPanel>
   </DataTemplate>
 
+  <!--
+    The default ListViewItem style sets a 40 DIP minimum height, which
+    is twice as tall as the icon and the label combined, and that makes
+    the path tree look sparse.  Let each row wrap its own content.
+  -->
+  <Style
+    x:Key="AddressBarItemContainerStyle"
+    BasedOn="{StaticResource DefaultListViewItemStyle}"
+    TargetType="ListViewItem">
+    <Setter Property="MinHeight" Value="0" />
+  </Style>
+
   <Style x:Key="DefaultAddressBarTextBoxStyle" TargetType="TextBox">
     <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextControlSelectionHighlightColor}" />
     <Setter Property="ContextFlyout" Value="{StaticResource TextControlCommandBarContextFlyout}" />
@@ -294,7 +306,7 @@
 
                 <!--
                   MaxHeight set here to prevent the suggestions
-                  from overflowing the screen. 400 is ~10 elements.
+                  from overflowing the screen. 400 is ~20 elements.
                 -->
                 <ListView
                   x:Name="SuggestionsList"
@@ -304,6 +316,7 @@
                   BorderThickness="{StaticResource FlyoutBorderThemeThickness}"
                   CornerRadius="{StaticResource OverlayCornerRadius}"
                   IsItemClickEnabled="True"
+                  ItemContainerStyle="{StaticResource AddressBarItemContainerStyle}"
                   ItemTemplate="{StaticResource DefaultAddressBarItemTemplate}"
                   ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
                   Translation="0,0,32">
