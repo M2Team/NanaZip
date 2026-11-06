@@ -6,27 +6,44 @@
   - We use a code style similar but not identical to that of Windows NT kernel
     drivers. You must read the code style guidelines carefully, word by word,
     before submitting your pull request. To maintain NanaZip's source code
-    quality, and to respect our reviewers' time, we will not accept PRs that
-    don't follow these guidelines.
+    quality, and to respect our reviewers' time, we will not accept pull
+    requests that don't follow these guidelines.
   - We expect all contributions to match our existing style WITHOUT EXCEPTION.
-    If you have any questions about our coding standards, please open an issue
-    for discussion before submitting your pull request.
+    If you have questions about our coding standards, ask in an issue or in your
+    pull request description.
   - By submitting a pull request, you agree to license your contribution under
-    the MIT license. We reserve the right to reuse and rewrite contributors' PRs
-    as needed.
+    the MIT license. We reserve the right to reuse and rewrite contributors'
+    pull requests as needed.
   - You are forbidden to modify any content in any files and folders starting
     with the "Mile." prefix because those implementations are shared across many
     projects, or your pull request will not be merged and will be closed
     immediately, unless you get the permission from Kenji Mouri.
-  - It's OK to use AI/LLM tools to help you write code, but you must ensure that
-    the final commit is written and reviewed by yourself, following our coding
-    style and conventions. If we find that your pull request has no contribution
-    from you, or the contribution is not reviewed by you, your pull request will
-    not be merged and will be closed immediately.
 - Feedback suggestions and bugs.
   - We use GitHub issues to track bugs and features.
   - For bugs and general issues please 
     [file a new issue](https://github.com/M2Team/NanaZip/issues/new).
+
+## AI/LLM use when contributing
+
+- Before opening a pull request, read the basic guidance yourself, word for 
+  word. AI/LLM assistance, including translation, must not replace your own
+  reading and understanding. Readability-first requires human judgment.
+- Ask about unclear points in an issue or the pull request description. Your
+  questions must show that you have read the guidance; unstated uncertainty does
+  not excuse style violations.
+- Before committing, personally refine the draft so you can explain your
+  reasoning for any added line when asked during review. This includes i18n
+  entries and sources for translations outside your native language.
+- Before pushing, review the changes yourself, then build and test locally.
+- Write commit messages, pull request descriptions, and review comments
+  yourself. Keep them concise, with no emojis or unnecessary tables.
+  AI/LLM-assisted polishing must preserve your own reasoning.
+- Commit messages and pull request descriptions must be in English. Keep commit
+  messages to one sentence, adding lines only for essential context or
+  attribution.
+
+Pull requests will be closed unless you have personally refined and reviewed the
+changes and successfully built and tested them locally.
 
 ## Code contribution guidelines
 
@@ -67,7 +84,7 @@ plugin.
 
 > [!NOTE]
 > Read https://github.com/M2Team/NanaZip/blob/main/License.md first for knowing
-> which files whether belong to inherited 7-Zip mainline source code.**
+> which files whether belong to inherited 7-Zip mainline source code.
 
 > [!NOTE]
 > For adding something to inherited 7-Zip code, don't add extra empty line if
