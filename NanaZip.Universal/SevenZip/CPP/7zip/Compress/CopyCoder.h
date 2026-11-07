@@ -9,6 +9,19 @@
 
 namespace NCompress {
 
+class CCopyCoderBase
+{
+  Byte *_buf;
+public:
+  UInt64 TotalSize;
+  
+  CCopyCoderBase(): _buf(NULL), TotalSize(0) {}
+  ~CCopyCoderBase() throw();
+
+  HRESULT Code(ISequentialInStream *inStream, ISequentialOutStream *outStream,
+      const UInt64 *outSize, ICompressProgressInfo *progress) throw();
+};
+
 Z7_CLASS_IMP_COM_5(
   CCopyCoder
   , ICompressCoder
@@ -17,17 +30,12 @@ Z7_CLASS_IMP_COM_5(
   , ICompressSetFinishMode
   , ICompressGetInStreamProcessedSize
 )
-  Byte *_buf;
+  CCopyCoderBase Coder;
   CMyComPtr<ISequentialInStream> _inStream;
-public:
-  UInt64 TotalSize;
-  
-  CCopyCoder(): _buf(NULL), TotalSize(0) {}
-  ~CCopyCoder();
 };
 
-HRESULT CopyStream(ISequentialInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress);
-HRESULT CopyStream_ExactSize(ISequentialInStream *inStream, ISequentialOutStream *outStream, UInt64 size, ICompressProgressInfo *progress);
+HRESULT CopyStream(ISequentialInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress) throw();
+HRESULT CopyStream_ExactSize(ISequentialInStream *inStream, ISequentialOutStream *outStream, UInt64 size, ICompressProgressInfo *progress) throw();
 
 }
 

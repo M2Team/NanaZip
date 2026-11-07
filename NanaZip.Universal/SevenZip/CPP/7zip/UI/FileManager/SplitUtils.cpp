@@ -1,4 +1,4 @@
-﻿// SplitUtils.cpp
+// SplitUtils.cpp
 
 #include "StdAfx.h"
 
@@ -76,21 +76,4 @@ void AddVolumeItems(NWindows::NControl::CComboBox &combo)
 {
   for (unsigned i = 0; i < Z7_ARRAY_SIZE(k_Sizes); i++)
     combo.AddString(CSysString(k_Sizes[i]));
-}
-
-UInt64 GetNumberOfVolumes(UInt64 size, const CRecordVector<UInt64> &volSizes)
-{
-  if (size == 0 || volSizes.Size() == 0)
-    return 1;
-  FOR_VECTOR (i, volSizes)
-  {
-    UInt64 volSize = volSizes[i];
-    if (volSize >= size)
-      return i + 1;
-    size -= volSize;
-  }
-  UInt64 volSize = volSizes.Back();
-  if (volSize == 0)
-    return (UInt64)(Int64)-1;
-  return volSizes.Size() + (size - 1) / volSize + 1;
 }

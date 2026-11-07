@@ -1,4 +1,4 @@
-﻿// Bench.cpp
+// Bench.cpp
 
 #include "StdAfx.h"
 
@@ -4636,6 +4636,7 @@ HRESULT Bench(
   for (unsigned threadsPassIndex = 0; threadsPassIndex < 3; threadsPassIndex++)
   {
 
+  callback.Init(); // we initialize total statistics
   UInt32 numThreads = numThreadsSpecified;
     
   if (!multiThreadTests)

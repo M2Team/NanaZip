@@ -10,20 +10,14 @@ namespace NCompress {
 
 static const UInt32 kBufSize = 1 << 17;
 
-CCopyCoder::~CCopyCoder()
+CCopyCoderBase::~CCopyCoderBase() throw()
 {
   ::MidFree(_buf);
 }
 
-Z7_COM7F_IMF(CCopyCoder::SetFinishMode(UInt32 /* finishMode */))
-{
-  return S_OK;
-}
-
-Z7_COM7F_IMF(CCopyCoder::Code(ISequentialInStream *inStream,
-    ISequentialOutStream *outStream,
-    const UInt64 * /* inSize */, const UInt64 *outSize,
-    ICompressProgressInfo *progress))
+Z7_NO_INLINE
+HRESULT CCopyCoderBase::Code(ISequentialInStream *inStream, ISequentialOutStream *outStream,
+    const UInt64 *outSize, ICompressProgressInfo *progress) throw()
 {
   if (!_buf)
   {
@@ -107,10 +101,24 @@ Z7_COM7F_IMF(CCopyCoder::Code(ISequentialInStream *inStream,
   }
 }
 
+
+Z7_COM7F_IMF(CCopyCoder::Code(ISequentialInStream *inStream,
+    ISequentialOutStream *outStream,
+    const UInt64 * /* inSize */, const UInt64 *outSize,
+    ICompressProgressInfo *progress))
+{
+  return Coder.Code(inStream, outStream, outSize, progress);
+}
+
+Z7_COM7F_IMF(CCopyCoder::SetFinishMode(UInt32 /* finishMode */))
+{
+  return S_OK;
+}
+
 Z7_COM7F_IMF(CCopyCoder::SetInStream(ISequentialInStream *inStream))
 {
   _inStream = inStream;
-  TotalSize = 0;
+  Coder.TotalSize = 0;
   return S_OK;
 }
 
@@ -124,7 +132,7 @@ Z7_COM7F_IMF(CCopyCoder::Read(void *data, UInt32 size, UInt32 *processedSize))
 {
   UInt32 realProcessedSize = 0;
   HRESULT res = _inStream->Read(data, size, &realProcessedSize);
-  TotalSize += realProcessedSize;
+  Coder.TotalSize += realProcessedSize;
   if (processedSize)
     *processedSize = realProcessedSize;
   return res;
@@ -132,22 +140,22 @@ Z7_COM7F_IMF(CCopyCoder::Read(void *data, UInt32 size, UInt32 *processedSize))
 
 Z7_COM7F_IMF(CCopyCoder::GetInStreamProcessedSize(UInt64 *value))
 {
-  *value = TotalSize;
+  *value = Coder.TotalSize;
   return S_OK;
 }
 
-HRESULT CopyStream(ISequentialInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress)
+
+HRESULT CopyStream(ISequentialInStream *inStream, ISequentialOutStream *outStream, ICompressProgressInfo *progress) throw()
 {
-  CMyComPtr<ICompressCoder> copyCoder = new CCopyCoder;
-  return copyCoder->Code(inStream, outStream, NULL, NULL, progress);
+  CCopyCoderBase copyCoder;
+  return copyCoder.Code(inStream, outStream, NULL, progress);
 }
 
-HRESULT CopyStream_ExactSize(ISequentialInStream *inStream, ISequentialOutStream *outStream, UInt64 size, ICompressProgressInfo *progress)
+HRESULT CopyStream_ExactSize(ISequentialInStream *inStream, ISequentialOutStream *outStream, UInt64 size, ICompressProgressInfo *progress) throw()
 {
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder;
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-  RINOK(copyCoder->Code(inStream, outStream, NULL, &size, progress))
-  return copyCoderSpec->TotalSize == size ? S_OK : E_FAIL;
+  CCopyCoderBase copyCoder;
+  RINOK(copyCoder.Code(inStream, outStream, &size, progress))
+  return copyCoder.TotalSize == size ? S_OK : E_FAIL;
 }
 
 }
