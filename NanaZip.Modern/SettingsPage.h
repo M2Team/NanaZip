@@ -89,5 +89,15 @@ namespace winrt::NanaZip::Modern::implementation
         std::optional<std::wstring> GetWinRegStringValue(
             std::wstring const& SubKey,
             std::wstring const& Value);
+
+        void SetWinRegDWordValue(
+            std::wstring const& SubKey,
+            std::wstring const& Value,
+            std::uint32_t Data);
+
+        void SetWinRegStringValue(
+            std::wstring const& SubKey,
+            std::wstring const& Value,
+            std::wstring const& Data);
     };
 }
