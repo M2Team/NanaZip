@@ -4,6 +4,8 @@
 
 #include <Windows.h>
 
+#include <optional>
+
 namespace winrt
 {
     using Windows::Foundation::IInspectable;
@@ -23,6 +25,20 @@ namespace winrt
 
 namespace winrt::NanaZip::Modern::implementation
 {
+    struct regkey_traits
+    {
+        using type = HKEY;
+        static void close(type value) noexcept
+        {
+            ::RegCloseKey(value);
+        }
+        static constexpr type invalid() noexcept
+        {
+            return nullptr;
+        }
+    };
+    using WinRegKey = handle_type<regkey_traits>;
+
     struct SettingsPage : SettingsPageT<SettingsPage>
     {
     public:
@@ -63,5 +79,15 @@ namespace winrt::NanaZip::Modern::implementation
     private:
 
         HWND m_WindowHandle;
+
+        WinRegKey m_NanaZipRegKey;
+
+        std::optional<std::uint32_t> GetWinRegDWordValue(
+            std::wstring const& SubKey,
+            std::wstring const& Value);
+
+        std::optional<std::wstring> GetWinRegStringValue(
+            std::wstring const& SubKey,
+            std::wstring const& Value);
     };
 }

@@ -12,9 +12,68 @@
 
 namespace winrt::NanaZip::Modern::implementation
 {
+    std::optional<std::uint32_t> SettingsPage::GetWinRegDWordValue(
+        std::wstring const& SubKey,
+        std::wstring const& Value)
+    {
+        DWORD Data = 0;
+        DWORD DataLength = sizeof(Data);
+        LSTATUS Result = ::RegGetValueW(
+            this->m_NanaZipRegKey.get(),
+            SubKey.c_str(),
+            Value.c_str(),
+            RRF_RT_REG_DWORD,
+            nullptr,
+            reinterpret_cast<PVOID>(&Data),
+            &DataLength);
+        if (Result == ERROR_SUCCESS)
+        {
+            return Data;
+        }
+        return std::nullopt;
+    }
+
+    std::optional<std::wstring> SettingsPage::GetWinRegStringValue(
+        std::wstring const& SubKey,
+        std::wstring const& Value)
+    {
+        DWORD DataLength = 0;
+        LSTATUS GetLengthResult = ::RegGetValueW(
+            this->m_NanaZipRegKey.get(),
+            SubKey.c_str(),
+            Value.c_str(),
+            RRF_RT_REG_SZ,
+            nullptr,
+            nullptr,
+            &DataLength);
+        if (GetLengthResult == ERROR_SUCCESS)
+        {
+            std::wstring Data(DataLength / sizeof(wchar_t) - 1, L'\0');
+            LSTATUS GetDataResult = ::RegGetValueW(
+                this->m_NanaZipRegKey.get(),
+                SubKey.c_str(),
+                Value.c_str(),
+                RRF_RT_REG_SZ,
+                nullptr,
+                reinterpret_cast<PVOID>(Data.data()),
+                &DataLength);
+            if (GetDataResult == ERROR_SUCCESS)
+            {
+                return Data;
+            }
+        }
+        return std::nullopt;
+    }
+
     SettingsPage::SettingsPage(
         _In_opt_ HWND WindowHandle) :
-        m_WindowHandle(WindowHandle){ }
+        m_WindowHandle(WindowHandle)
+    {
+        ::RegCreateKeyW(
+            HKEY_CURRENT_USER,
+            L"Software\\NanaZip\\",
+            m_NanaZipRegKey.put());
+    }
 
     void SettingsPage::InitializeComponent()
     {
@@ -46,25 +105,12 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(e);
 
         auto SwitchElement = sender.as<winrt::ToggleSwitch>();
-
-        DWORD SwitchValue = SwitchElement.IsOn();
-        DWORD SwitchValueLength = sizeof(SwitchValue);
-
-        std::wstring SubKey = L"Software\\NanaZip\\";
-        SubKey.append(SwitchElement.Tag().as<winrt::hstring>());
-
-        LSTATUS Result = ::RegGetValueW(
-            HKEY_CURRENT_USER,
-            SubKey.c_str(),
-            SwitchElement.Name().c_str(),
-            RRF_RT_REG_DWORD,
-            nullptr,
-            reinterpret_cast<PVOID>(&SwitchValue),
-            &SwitchValueLength);
-
-        if (ERROR_SUCCESS == Result)
+        auto RegData = this->GetWinRegDWordValue(
+            SwitchElement.Tag().as<winrt::hstring>().c_str(),
+            SwitchElement.Name().c_str());
+        if (RegData.has_value())
         {
-            SwitchElement.IsOn(SwitchValue != false);
+            SwitchElement.IsOn(static_cast<bool>(RegData.value()));
         }
 
         SwitchElement.Toggled(
@@ -112,26 +158,13 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(e);
 
         auto ComboElement = sender.as<winrt::ComboBox>();
-
-        DWORD ComboValue = ComboElement.SelectedIndex();
-        DWORD ComboValueLength = sizeof(ComboValue);
-
-        std::wstring SubKey = L"Software\\NanaZip\\";
-        SubKey.append(ComboElement.Tag().as<winrt::hstring>());
-
-        LSTATUS Result = ::RegGetValueW(
-            HKEY_CURRENT_USER,
-            SubKey.c_str(),
-            ComboElement.Name().c_str(),
-            RRF_RT_REG_DWORD,
-            nullptr,
-            reinterpret_cast<PVOID>(&ComboValue),
-            &ComboValueLength);
-
-        if (ERROR_SUCCESS == Result
-            && ComboValue < ComboElement.Items().Size())
+        auto RegData = this->GetWinRegDWordValue(
+            ComboElement.Tag().as<winrt::hstring>().c_str(),
+            ComboElement.Name().c_str());
+        if (RegData.has_value())
         {
-            ComboElement.SelectedIndex(static_cast<std::int32_t>(ComboValue));
+            ComboElement.SelectedIndex(
+                static_cast<std::int32_t>(RegData.value()));
         }
 
         ComboElement.SelectionChanged(
@@ -163,24 +196,11 @@ namespace winrt::NanaZip::Modern::implementation
         winrt::IInspectable const& e)
     {
         UNREFERENCED_PARAMETER(e);
-        winrt::ListView ListViewElement = sender.as<winrt::ListView>();
-
-        DWORD ContextMenuValue = 0x0;
-        DWORD ContextMenuValueLength = sizeof(ContextMenuValue);
-
-        std::wstring SubKey = L"Software\\NanaZip\\";
-        SubKey.append(ListViewElement.Tag().as<winrt::hstring>());
-
-        LSTATUS Result = ::RegGetValueW(
-            HKEY_CURRENT_USER,
-            SubKey.c_str(),
-            ListViewElement.Name().c_str(),
-            RRF_RT_REG_DWORD,
-            nullptr,
-            reinterpret_cast<PVOID>(&ContextMenuValue),
-            &ContextMenuValueLength);
-
-        if (ERROR_SUCCESS == Result)
+        auto ListViewElement = sender.as<winrt::ListView>();
+        auto RegData = this->GetWinRegDWordValue(
+            ListViewElement.Tag().as<winrt::hstring>().c_str(),
+            ListViewElement.Name().c_str());
+        if (RegData.has_value())
         {
             auto SelectedListViewItems = ListViewElement.SelectedItems();
             SelectedListViewItems.Clear();
@@ -190,7 +210,7 @@ namespace winrt::NanaZip::Modern::implementation
                 auto ListViewItemFlag =
                     ListViewItemElement.Tag().as<std::int32_t>();
                 DWORD IsSelectedValue =
-                    ContextMenuValue & (1 << ListViewItemFlag);
+                    RegData.value() & (1 << ListViewItemFlag);
                 if (IsSelectedValue)
                 {
                     SelectedListViewItems.Append(ListViewItemElement);
@@ -236,37 +256,13 @@ namespace winrt::NanaZip::Modern::implementation
         UNREFERENCED_PARAMETER(e);
         winrt::AutoSuggestBox AutoSuggestBoxElement =
             sender.as<winrt::AutoSuggestBox>();
-
-        std::wstring SubKey = L"Software\\NanaZip\\";
-        SubKey.append(AutoSuggestBoxElement.Tag().as<winrt::hstring>());
-
-        DWORD AutoSuggestBoxValueLength = 0;
-        LSTATUS Result = ::RegGetValueW(
-            HKEY_CURRENT_USER,
-            SubKey.c_str(),
-            AutoSuggestBoxElement.Name().c_str(),
-            RRF_RT_REG_SZ,
-            nullptr,
-            nullptr,
-            &AutoSuggestBoxValueLength);
-        if (ERROR_SUCCESS == Result)
+        auto RegData = this->GetWinRegStringValue(
+            AutoSuggestBoxElement.Tag().as<winrt::hstring>().c_str(),
+            AutoSuggestBoxElement.Name().c_str());
+        if (RegData.has_value())
         {
-            std::wstring AutoSuggestBoxValue(AutoSuggestBoxValueLength, L'\0');
-            Result = ::RegGetValueW(
-                HKEY_CURRENT_USER,
-                SubKey.c_str(),
-                AutoSuggestBoxElement.Name().c_str(),
-                RRF_RT_REG_SZ,
-                nullptr,
-                reinterpret_cast<PVOID>(AutoSuggestBoxValue.data()),
-                &AutoSuggestBoxValueLength);
-
-            if (ERROR_SUCCESS == Result)
-            {
-                AutoSuggestBoxElement.Text(AutoSuggestBoxValue);
-            }
+            AutoSuggestBoxElement.Text(RegData.value());
         }
-
         AutoSuggestBoxElement.TextChanged(
             [](winrt::AutoSuggestBox const& sender,
                winrt::AutoSuggestBoxTextChangedEventArgs const& args)
