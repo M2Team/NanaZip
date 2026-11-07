@@ -3,54 +3,166 @@
 #ifndef ZIP7_INC_MULTI_STREAM_H
 #define ZIP7_INC_MULTI_STREAM_H
 
-#include "../../../Common/MyCom.h"
-#include "../../../Common/MyVector.h"
+#include "../../../Common/MyString.h"
 
-#include "../../IStream.h"
-#include "../../Archive/IArchive.h"
+struct CSplitVolName
+{
+  UString Changed;
+  UString Name; // Name[0 ... (ChangedPos -1)] - is unchanged part
+                // Name[ChangedPos ...]        - is changed part
+  unsigned ChangedPos;
+#ifndef Z7_SFX
+  int SpecPos; //   0 : both cases need to be checked : sequential_mode and skip_mode
+               //  -1 : use sequential_mode only : 7zip style
+               // > 0 : use skip_mode only : linux_split style
+  char PostfixChar; // '0' : 'a' : 'A'
+  bool IsComplicated;
 
-Z7_CLASS_IMP_IInStream(
-  CMultiStream
-)
-
-  unsigned _streamIndex;
-  UInt64 _pos;
-  UInt64 _totalLength;
-
-public:
-
-  struct CSubStreamInfo
+  bool IsLatinPostfix() const { return PostfixChar != '0'; }
+  void AddPostfix_2Chars()
   {
-    CMyComPtr<IInStream> Stream;
-    UInt64 Size;
-    UInt64 GlobalOffset;
-    UInt64 LocalPos;
-    CSubStreamInfo(): Size(0), GlobalOffset(0), LocalPos(0) {}
-  };
+    // for skip_mode: we add 2 additional postfix characters : linux_split style
+    Changed.Add_Char(PostfixChar);
+    Changed.Add_Char(PostfixChar);
+    SpecPos++;
+  }
+#endif
 
-  CMyComPtr<IArchiveUpdateCallbackFile> updateCallbackFile;
-  CObjectVector<CSubStreamInfo> Streams;
- 
-  HRESULT Init()
+  CSplitVolName():
+      ChangedPos(0)
+#ifndef Z7_SFX
+      , SpecPos(0)
+#endif
+    {}
+
+  bool ParseName()
   {
-    UInt64 total = 0;
-    FOR_VECTOR (i, Streams)
+    if (Name.Len() < 2)
+      return false;
+    unsigned pos = Name.Len() - 2;
+#ifndef Z7_SFX
+    if (StringsAreEqualNoCase_Ascii(Name.Ptr(pos), "aa"))
     {
-      CSubStreamInfo &s = Streams[i];
-      s.GlobalOffset = total;
-      total += s.Size;
-      s.LocalPos = 0;
+      PostfixChar = (char)Name.Back();
+      while (pos)
       {
-        // it was already set to start
-        // RINOK(InStream_GetPos(s.Stream, s.LocalPos));
+        if (MyCharLower_Ascii(Name[pos - 1]) != 'a')
+          break;
+        pos--;
       }
     }
-    _totalLength = total;
-    _pos = 0;
-    _streamIndex = 0;
-    return S_OK;
+    else
+#endif
+    {
+#ifndef Z7_SFX
+      PostfixChar = '0';
+#endif
+      pos++;
+      const wchar_t c = Name[pos];
+      if (c != '0' && c != '1')
+        return false;
+      while (pos)
+      {
+        if (Name[pos - 1] != '0')
+          break;
+        pos--;
+      }
+      if (Name.Len() - pos < 2
+          || pos == 0
+          || Name[pos - 1] != '.')
+        return false;
+    }
+    ChangedPos = pos;
+    Changed = Name.Ptr(pos);
+    return true;
+  }
+
+  void Generate_SubName(UString &s) const
+  {
+    unsigned len = ChangedPos;
+    if (len && Name[len - 1] == '.')
+      len--;
+    if (len == 0)
+      s = "file";
+    else
+      s.SetFrom(Name, len);
+  }
+
+  bool GetNextName()
+  {
+#ifndef Z7_SFX
+    IsComplicated = false;
+#endif
+    unsigned i = Changed.Len();
+    for (;;)
+    {
+      wchar_t c = Changed[--i];
+#ifndef Z7_SFX
+      if (IsLatinPostfix())
+      {
+        if ((c | 0x20) != 'z')
+        {
+          c++;
+          Changed.ReplaceOneCharAtPos(i, c);
+          if ((c | 0x20) != 'z')
+            return true;
+          break;
+        }
+        c -= 'z' - 'a';
+        Changed.ReplaceOneCharAtPos(i, c);
+        if (i == 0)
+        {
+#if 0  // 1 : for debug
+          /* (return_code == false) will stop volume processing in caller.
+             But if (return_code) is not checked by caller, we must
+             increase length of (Changed) string to prevent infinite loop. */
+          SpecPos = -1;
+          Changed.InsertAtFront(Changed[0]);
+#endif
+          return false; // stop volume processing
+        }
+      }
+      else
+#endif
+      {
+        if (c != '9')
+        {
+          c++;
+          Changed.ReplaceOneCharAtPos(i, c);
+          if (c != '9')
+            return true;
+          break;
+        }
+        Changed.ReplaceOneCharAtPos(i, L'0');
+        if (i == 0)
+        {
+#ifndef Z7_SFX
+          SpecPos = -1;
+#endif
+          Changed.InsertAtFront(L'1');
+          return true;
+        }
+      }
+    }
+
+#ifndef Z7_SFX
+    if ((int)i != SpecPos)
+      return true;
+    if (i == 0)
+      IsComplicated = true;
+    else
+      AddPostfix_2Chars();
+#endif
+    return true;
+  }
+
+  void GenerateName()
+  {
+    Name.DeleteFrom(ChangedPos);
+    Name += Changed;
   }
 };
+
 
 /*
 Z7_CLASS_IMP_COM_1(

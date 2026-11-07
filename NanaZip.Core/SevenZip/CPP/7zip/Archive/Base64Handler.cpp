@@ -6,15 +6,12 @@
 
 #include "../../Common/ComTry.h"
 #include "../../Common/MyBuffer.h"
-#include "../../Common/IntToString.h"
-#include "../../Common/MyVector.h"
 
 #include "../../Windows/PropVariant.h"
 
 #include "../Common/ProgressUtils.h"
 #include "../Common/RegisterArc.h"
 #include "../Common/StreamUtils.h"
-#include "../Common/InBuffer.h"
 
 /*
 spaces:
@@ -27,7 +24,6 @@ end of stream markers: '=' (0x3d):
   "="  , if numBytes (% 3 == 2)
   "==" , if numBytes (% 3 == 1)
 */
-
 
 static const Byte k_Base64Table[256] =
 {
@@ -62,7 +58,7 @@ API_FUNC_static_IsArc IsArc_Base64(const Byte *p, size_t size)
   {
     if (size == 0)
       return k_IsArc_Res_NEED_MORE;
-    UInt32 c = k_Base64Table[(Byte)(*p++)];
+    const unsigned c = k_Base64Table[(Byte)(*p++)];
     size--;
     if (c < 64)
     {
@@ -98,7 +94,7 @@ API_FUNC_static_IsArc IsArc_Base64(const Byte *p, size_t size)
   {
     if (size == 0)
       return k_IsArc_Res_NEED_MORE;
-    UInt32 c = k_Base64Table[(Byte)(*p++)];
+    const unsigned c = k_Base64Table[(Byte)(*p++)];
     size--;
     if (c != k_Code_Equals)
       return k_IsArc_Res_NO;
@@ -108,7 +104,7 @@ API_FUNC_static_IsArc IsArc_Base64(const Byte *p, size_t size)
   {
     if (size == 0)
       return k_IsArc_Res_YES;
-    UInt32 c = k_Base64Table[(Byte)(*p++)];
+    const unsigned c = k_Base64Table[(Byte)(*p++)];
     size--;
     if (c == k_Code_Space)
       continue;
@@ -126,8 +122,13 @@ enum EBase64Res
   k_Base64_RES_UnexpectedChar
 };
 
+struct CState
+{
+  const Byte *srcEnd;
+  const Byte *destEnd;
+};
 
-static EBase64Res Base64ToBin(Byte *p, size_t size, const Byte **srcEnd, Byte **destEnd)
+static EBase64Res Base64ToBin(Byte *p, size_t size, CState &state)
 {
   Byte *dest = p;
   UInt32 val = 1;
@@ -148,9 +149,9 @@ static EBase64Res Base64ToBin(Byte *p, size_t size, const Byte **srcEnd, Byte **
       val = (val << 6) | c;
       if ((val & ((UInt32)1 << 24)) == 0)
         continue;
-      dest[0] = (Byte)(val >> 16);
-      dest[1] = (Byte)(val >> 8);
       dest[2] = (Byte)(val);
+      dest[1] = (Byte)(val >>= 8);
+      dest[0] = (Byte)(val >> 8);
       dest += 3;
       val = 1;
       continue;
@@ -195,8 +196,8 @@ static EBase64Res Base64ToBin(Byte *p, size_t size, const Byte **srcEnd, Byte **
     *dest++ = (Byte)(val >> 4);
   }
   
-  *srcEnd = p;
-  *destEnd = dest;
+  state.srcEnd = p;
+  state.destEnd = dest;
   return res;
 }
 
@@ -232,9 +233,9 @@ Byte *Base64ToBin(Byte *dest Z7_lifetimebound, const char *src)
       val = (val << 6) | c;
       if ((val & ((UInt32)1 << 24)) == 0)
         continue;
-      dest[0] = (Byte)(val >> 16);
-      dest[1] = (Byte)(val >> 8);
       dest[2] = (Byte)(val);
+      dest[1] = (Byte)(val >>= 8);
+      dest[0] = (Byte)(val >> 8);
       dest += 3;
       val = 1;
       continue;
@@ -291,7 +292,7 @@ Z7_CLASS_IMP_CHandler_IInArchive_0
 static const Byte kProps[] =
 {
   kpidSize,
-  kpidPackSize,
+  kpidPackSize
 };
 
 IMP_IInArchive_Props
@@ -390,17 +391,16 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
       _data.Alloc(curSize);
       RINOK(ReadStream_OpenProgress(stream, _data, curSize, openCallback))
       
-      const Byte *srcEnd;
-      Byte *dest;
-      _sres = Base64ToBin(_data, curSize, &srcEnd, &dest);
-      _size = (size_t)(dest - _data);
-      const size_t mainSize = (size_t)(srcEnd - _data);
+      CState state;
+      _sres = Base64ToBin(_data, curSize, state);
+      _size = (size_t)(state.destEnd - _data);
+      const size_t mainSize = (size_t)(state.srcEnd - _data);
       _phySize = mainSize;
       if (_sres == k_Base64_RES_UnexpectedChar)
         break;
       if (curSize != mainSize)
       {
-        const Byte *end2 = Base64_SkipSpaces(srcEnd, curSize - mainSize);
+        const Byte *end2 = Base64_SkipSpaces(state.srcEnd, curSize - mainSize);
         if ((size_t)(end2 - _data) != curSize)
           break;
         _phySize = curSize;
@@ -425,9 +425,9 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
 
 Z7_COM7F_IMF(CHandler::Close())
 {
+  _isArc = false;
   _phySize = 0;
   _size = 0;
-  _isArc = false;
   _sres = k_Base64_RES_MaybeFinished;
   _data.Free();
   return S_OK;
@@ -471,9 +471,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     }
   }
   RINOK(extractCallback->SetOperationResult(opRes))
-  lps->InSize = _phySize;
-  lps->OutSize = _size;
-  return lps->SetCur();
+  CLocalProgress *lps2 = lps.ClsPtr();
+  lps2->InSize = _phySize;
+  lps2->OutSize = _size;
+  return lps2->SetCur();
   COM_TRY_END
 }
 

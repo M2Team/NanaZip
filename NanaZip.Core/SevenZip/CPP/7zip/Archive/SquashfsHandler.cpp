@@ -1706,7 +1706,7 @@ HRESULT CHandler::Open2(IInStream *inStream)
       if (remSize == 0 || i != numBlocks - 1)
         remSize = kMetadataBlockSize;
       if (unpackSize != remSize)
-          return S_FALSE;
+        return S_FALSE;
       const Byte *buf = _dynOutStream->GetBuffer();
       for (UInt32 j = 0; j < unpackSize;)
       {
@@ -2296,18 +2296,19 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
+  NCompress::CCopyCoderBase copyCoder;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
+  lps->Init(extractCallback, false);
+
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
   
-  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
-  lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
-
   for (i = 0;; i++)
   {
-    lps->InSize = totalPackSize;
-    lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = totalPackSize;
+    lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
 
@@ -2353,10 +2354,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       {
         RINOK(hres)
         {
-          hres = copyCoder.Interface()->Code(inSeqStream, outStream, NULL, NULL, lps);
+          hres = copyCoder.Code(inSeqStream, outStream, NULL, lps);
           if (hres == S_OK)
           {
-            if (copyCoder->TotalSize == unpackSize)
+            if (copyCoder.TotalSize == unpackSize)
               res = NExtract::NOperationResult::kOK;
           }
           else if (hres == E_NOTIMPL)

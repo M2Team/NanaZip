@@ -43,8 +43,6 @@ struct CBuf
   }
 };
 
-static const UInt32 kHeaderSize = 16;
-static const UInt32 kSignature = 0x84ACAF8F;
 static const unsigned kNewHeaderVer = 8;
 
 struct CItem
@@ -68,20 +66,20 @@ struct CItem
 
 HRESULT CItem::ReadHeader(ISequentialInStream *s, UInt32 &headerSize)
 {
-  Byte h[kHeaderSize];
-  RINOK(ReadStream_FALSE(s, h, kHeaderSize))
-  if (GetUi32(h) != kSignature)
+  const unsigned kHeaderSize = 16;
+  UInt32 h32[kHeaderSize / 4];
+  RINOK(ReadStream_FALSE(s, h32, kHeaderSize))
+  if (h32[0] != Z7_CONV_LE_TO_NATIVE_CONST32(0x84acaf8f)) // kSignature
     return S_FALSE;
-  Attrib = GetUi32(h + 4);
-  Time = GetUi32(h + 12);
-  const unsigned info = GetUi16(h + 8);
+  Attrib = GetUi32a(h32 + 1);
+  Time = GetUi32a(h32 + 3);
+  const unsigned info = GetUi16a((const Byte *)(const void *)(h32) + 8);
   Order = (info & 0xF) + 1;
   MemInMB = ((info >> 4) & 0xFF) + 1;
   Ver = info >> 12;
-
-  if (Ver < 6 || Ver > 11) return S_FALSE;
- 
-  UInt32 nameLen = GetUi16(h + 10);
+  if (Ver < 6 || Ver > 11)
+    return S_FALSE;
+  unsigned nameLen = GetUi16a((const Byte *)(const void *)(h32) + 10);
   Restor = nameLen >> 14;
   if (Restor > 2)
     return S_FALSE;
@@ -92,6 +90,7 @@ HRESULT CItem::ReadHeader(ISequentialInStream *s, UInt32 &headerSize)
   char *name = Name.GetBuf(nameLen);
   const HRESULT res = ReadStream_FALSE(s, name, nameLen);
   Name.ReleaseBuf_CalcLen(nameLen);
+  // if (Name.Len() != nameLen) return S_FALSE; // optional strict check
   headerSize = kHeaderSize + nameLen;
   return res;
 }
@@ -194,12 +193,12 @@ Z7_COM7F_IMF(CHandler::OpenSeq(ISequentialInStream *stream))
 {
   COM_TRY_BEGIN
   HRESULT res;
-  try
+  // try
   {
     Close();
     res = _item.ReadHeader(stream, _headerSize);
   }
-  catch(...) { res = S_FALSE; }
+  // catch(...) { res = S_FALSE; }
   if (res == S_OK)
     _stream = stream;
   else
@@ -210,6 +209,7 @@ Z7_COM7F_IMF(CHandler::OpenSeq(ISequentialInStream *stream))
 
 Z7_COM7F_IMF(CHandler::Close())
 {
+  _headerSize = 0;
   _packSize = 0;
   _packSize_Defined = false;
   _stream.Release();
@@ -344,9 +344,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     if (ppmd.InitRc(&inBuf) && !inBuf.Extra && inBuf.Res == S_OK)
     for (;;)
     {
-      lps->InSize = _packSize = inBuf.GetProcessed();
-      lps->OutSize = outSize;
-      RINOK(lps->SetCur())
+      CLocalProgress *lps2 = lps.ClsPtr();
+      lps2->InSize = _packSize = inBuf.GetProcessed();
+      lps2->OutSize = outSize;
+      RINOK(lps2->SetCur())
 
       size_t i;
       int sym = 0;

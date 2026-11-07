@@ -135,6 +135,13 @@ struct CByteIn
 {
   IByteIn IByteIn_obj;
   CBitDecoder BitDecoder;
+  HRESULT hresult;
+
+  void Init()
+  {
+    hresult = S_OK;
+    BitDecoder.Init();
+  }
 };
 
 

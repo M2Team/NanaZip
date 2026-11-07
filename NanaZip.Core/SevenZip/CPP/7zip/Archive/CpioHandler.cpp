@@ -1027,21 +1027,19 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
-  inStream->SetStream(_stream);
   CMyComPtr2_Create<ISequentialOutStream, COutStreamWithSum> outStreamSum;
 
-  UInt64 total_PackSize = 0;
-  UInt64 total_UnpackSize = 0;
+  UInt64 total_PackSize = 0, total_UnpackSize = 0;
 
   for (i = 0;; i++)
   {
-    lps->InSize = total_PackSize;
-    lps->OutSize = total_UnpackSize;
-    RINOK(lps->SetCur())
+    CLocalProgress * const lps2 = lps.ClsPtr();
+    lps2->InSize = total_PackSize;
+    lps2->OutSize = total_UnpackSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
     const Int32 askMode = testMode ?
@@ -1070,11 +1068,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       RINOK(extractCallback->PrepareOperation(askMode))
     }
     RINOK(InStream_SeekSet(_stream, item.GetDataPosition()))
-    inStream->Init(item.Size);
-    RINOK(copyCoder.Interface()->Code(inStream, outStreamSum, NULL, NULL, lps))
+    RINOK(copyCoder.Code(_stream, outStreamSum, &item.Size, lps))
     outStreamSum->ReleaseStream();
     Int32 res = NExtract::NOperationResult::kDataError;
-    if (copyCoder->TotalSize == item.Size)
+    if (copyCoder.TotalSize == item.Size)
     {
       res = NExtract::NOperationResult::kOK;
       if (item.IsCrcFormat() && item.ChkSum != outStreamSum->GetChecksum())

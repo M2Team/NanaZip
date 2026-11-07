@@ -1385,9 +1385,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
   RINOK(callback->SetTotal(complexity))
   UInt64 totalComplexity = complexity;
 
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(callback, true);
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
   complexity = 0;
 
@@ -1450,8 +1450,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         continue;
     }
 
-    lps->InSize = lps->OutSize = complexity;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = complexity;
+    RINOK(lps2->SetCur())
 
     const unsigned streamIndex = streams.Size();
     CStreamInfo s;
@@ -1496,8 +1497,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
     {
       RINOK(InStream_SeekSet(_volumes[siOld.PartNumber].Stream, rs.Offset))
       inStreamLimitedSpec->Init(rs.PackSize);
-      RINOK(copyCoder.Interface()->Code(inStreamLimited, outStream, NULL, NULL, lps))
-      if (copyCoder->TotalSize != rs.PackSize)
+      RINOK(copyCoder.Code(inStreamLimited, outStream, NULL, lps))
+      if (copyCoder.TotalSize != rs.PackSize)
         return E_FAIL;
       s.Resource.Offset = curPos;
       curPos += rs.PackSize;
@@ -1514,8 +1515,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
   for (i = 0; i < db.UpdateIndexes.Size(); i++)
   {
-    lps->InSize = lps->OutSize = complexity;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = complexity;
+    RINOK(lps2->SetCur())
     const CUpdateItem &ui = db.UpdateItems[db.UpdateIndexes[i]];
     CMetaItem &mi = db.MetaItems[ui.MetaIndex];
     UInt64 size = 0;
@@ -1706,8 +1708,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         
         if (inSeekStream /* && !sortedHashes.IsEmpty() */)
         {
-          RINOK(copyCoder.Interface()->Code(inShaStream, NULL, NULL, NULL, lps))
-          size = copyCoder->TotalSize;
+          RINOK(copyCoder.Code(inShaStream, NULL, NULL, lps))
+          size = copyCoder.TotalSize;
           if (size == 0)
             needWritePass = false;
           else
@@ -1731,8 +1733,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
         
         if (needWritePass)
         {
-          RINOK(copyCoder.Interface()->Code(inShaStream, outStream, NULL, NULL, lps))
-          size = copyCoder->TotalSize;
+          RINOK(copyCoder.Code(inShaStream, outStream, NULL, lps))
+          size = copyCoder.TotalSize;
         }
        
         if (size != 0)
@@ -1792,8 +1794,9 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
 
   for (i = 0;; i++)
   {
-    lps->InSize = lps->OutSize = complexity;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = complexity;
+    RINOK(lps2->SetCur())
     if (i >= numNewImages)
       break;
 
@@ -1803,8 +1806,8 @@ Z7_COM7F_IMF(CHandler::UpdateItems(ISequentialOutStream *outSeqStream, UInt32 nu
       
       RINOK(InStream_SeekSet(_volumes[1].Stream, s.Resource.Offset))
       inStreamLimitedSpec->Init(s.Resource.PackSize);
-      RINOK(copyCoder.Interface()->Code(inStreamLimited, outStream, NULL, NULL, lps))
-      if (copyCoder->TotalSize != s.Resource.PackSize)
+      RINOK(copyCoder.Code(inStreamLimited, outStream, NULL, lps))
+      if (copyCoder.TotalSize != s.Resource.PackSize)
         return E_FAIL;
 
       s.Resource.Offset = curPos;

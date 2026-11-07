@@ -42,7 +42,7 @@ private:
 
   CArchive _arc;
 
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
 
   HRESULT Open2(IInStream *stream, IArchiveOpenCallback *callback);
   HRESULT SkipTo(UInt32 index);

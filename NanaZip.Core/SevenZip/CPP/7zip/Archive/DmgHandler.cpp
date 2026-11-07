@@ -1823,7 +1823,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   memset(zeroBuf, 0, kZeroBufSize);
   
   CDecoders decoders;
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
   CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
@@ -1838,11 +1838,14 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         total_PackSize   += cur_PackSize,
         total_UnpackSize += cur_UnpackSize)
   {
-    lps->InSize = total_PackSize;
-    lps->OutSize = total_UnpackSize;
+    {
+      CLocalProgress *lps2 = lps.ClsPtr();
+      lps2->InSize = total_PackSize;
+      lps2->OutSize = total_UnpackSize;
+      RINOK(lps2->SetCur())
+    }
     cur_PackSize = 0;
     cur_UnpackSize = 0;
-    RINOK(lps->SetCur())
     if (i >= numItems)
       return S_OK;
     
@@ -1892,9 +1895,12 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
         FOR_VECTOR (blockIndex, item.Blocks)
         {
-          lps->InSize = total_PackSize + packPos;
-          lps->OutSize = total_UnpackSize + unpPos;
-          RINOK(lps->SetCur())
+          {
+            CLocalProgress *lps2 = lps.ClsPtr();
+            lps2->InSize = total_PackSize + packPos;
+            lps2->OutSize = total_UnpackSize + unpPos;
+            RINOK(lps2->SetCur())
+          }
 
           const CBlock &block = item.Blocks[blockIndex];
           // if (!block.ThereAreDataInBlock()) continue;
@@ -1926,7 +1932,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
             if (unpSize != block.PackSize)
               opRes = NExtract::NOperationResult::kUnsupportedMethod;
             else
-              res = copyCoder.Interface()->Code(inStream, outStream, NULL, NULL, lps);
+              res = copyCoder.Code(inStream, outStream, NULL, lps);
           }
           else
             res = decoders.Code(inStream, outStream, block, &unpSize, lps);
@@ -1962,8 +1968,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
               k++;
               if ((k & 0xfff) == 0)
               {
-                lps->OutSize = total_UnpackSize + unpPos - outStream->GetRem();
-                RINOK(lps->SetCur())
+                CLocalProgress *lps2 = lps.ClsPtr();
+                lps2->OutSize = total_UnpackSize + unpPos - outStream->GetRem();
+                RINOK(lps2->SetCur())
               }
             }
           }

@@ -3,7 +3,6 @@
 #include "StdAfx.h"
 
 #include "../../Common/ComTry.h"
-#include "../../Common/MyString.h"
 
 #include "../../Windows/PropVariant.h"
 
@@ -20,10 +19,34 @@ using namespace NWindows;
 namespace NArchive {
 namespace NSplit {
 
-static const Byte kProps[] =
+Z7_class_CHandler_final:
+  public IInArchive,
+  public IInArchiveGetStream,
+  public IInStream,
+  public CMyUnknownImp
 {
-  kpidPath,
-  kpidSize
+  Z7_IFACES_IMP_UNK_4(
+      IInArchive,
+      IInArchiveGetStream,
+      ISequentialInStream,
+      IInStream)
+
+  unsigned _volIndex; // index of vol in last access for faster processing
+  UInt64 _pos;
+  UInt64 _totalSize;
+
+  struct CVol
+  {
+    CMyComPtr<IInStream> Stream;
+    UInt64 Size;
+    UInt64 GlobalOffset;
+    UInt64 LocalPos;
+  };
+
+  CObjectVector<CVol> Vols;
+  UString _subName;
+
+  HRESULT Open2(IInStream *stream, IArchiveOpenCallback *callback);
 };
 
 static const Byte kArcProps[] =
@@ -32,16 +55,10 @@ static const Byte kArcProps[] =
   kpidTotalPhySize
 };
 
-
-Z7_CLASS_IMP_CHandler_IInArchive_1(
-  IInArchiveGetStream
-)
-  CObjectVector<CMyComPtr<IInStream> > _streams;
-  CRecordVector<UInt64> _sizes;
-  UString _subName;
-  UInt64 _totalSize;
-
-  HRESULT Open2(IInStream *stream, IArchiveOpenCallback *callback);
+static const Byte kProps[] =
+{
+  kpidPath,
+  kpidSize
 };
 
 IMP_IInArchive_Props
@@ -53,70 +70,32 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
   switch (propID)
   {
     case kpidMainSubfile: prop = (UInt32)0; break;
-    case kpidPhySize: if (!_sizes.IsEmpty()) prop = _sizes[0]; break;
+    case kpidPhySize: if (!Vols.IsEmpty()) prop = Vols[0].Size; break;
     case kpidTotalPhySize: prop = _totalSize; break;
-    case kpidNumVolumes: prop = (UInt32)_streams.Size(); break;
+    case kpidNumVolumes: prop = (UInt32)Vols.Size(); break;
     default: break;
   }
   prop.Detach(value);
   return S_OK;
 }
 
-struct CSeqName
+Z7_COM7F_IMF(CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIANT *value))
 {
-  UString _unchangedPart;
-  UString _changedPart;
-  bool _splitStyle;
-  
-  bool GetNextName(UString &s)
+  COM_TRY_BEGIN
+  NCOM::CPropVariant prop;
+  switch (propID)
   {
-    {
-      unsigned i = _changedPart.Len();
-      for (;;)
-      {
-        wchar_t c = _changedPart[--i];
-        
-        if (_splitStyle)
-        {
-          if (c == 'z')
-          {
-            _changedPart.ReplaceOneCharAtPos(i, L'a');
-            if (i == 0)
-              return false;
-            continue;
-          }
-          else if (c == 'Z')
-          {
-            _changedPart.ReplaceOneCharAtPos(i, L'A');
-            if (i == 0)
-              return false;
-            continue;
-          }
-        }
-        else
-        {
-          if (c == '9')
-          {
-            _changedPart.ReplaceOneCharAtPos(i, L'0');
-            if (i == 0)
-            {
-              _changedPart.InsertAtFront(L'1');
-              break;
-            }
-            continue;
-          }
-        }
-
-        c++;
-        _changedPart.ReplaceOneCharAtPos(i, c);
-        break;
-      }
-    }
-    
-    s = _unchangedPart + _changedPart;
-    return true;
+    case kpidPath: prop = _subName; break;
+    case kpidSize:
+    case kpidPackSize:
+      prop = _totalSize;
+      break;
+    default: break;
   }
-};
+  prop.Detach(value);
+  return S_OK;
+  COM_TRY_END
+}
 
 
 HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
@@ -124,120 +103,68 @@ HRESULT CHandler::Open2(IInStream *stream, IArchiveOpenCallback *callback)
   Close();
   if (!callback)
     return S_FALSE;
-
-  Z7_DECL_CMyComPtr_QI_FROM(
-      IArchiveOpenVolumeCallback,
-      volumeCallback, callback)
+  Z7_DECL_CMyComPtr_QI_FROM(IArchiveOpenVolumeCallback, volumeCallback, callback)
   if (!volumeCallback)
     return S_FALSE;
   
-  UString name;
+  CSplitVolName seq;
   {
     NCOM::CPropVariant prop;
     RINOK(volumeCallback->GetProperty(kpidName, &prop))
     if (prop.vt != VT_BSTR)
       return S_FALSE;
-    name = prop.bstrVal;
+    seq.Name = prop.bstrVal;
   }
-  
-  const int dotPos = name.ReverseFind_Dot();
-  const UString prefix = name.Left((unsigned)(dotPos + 1));
-  const UString ext = name.Ptr((unsigned)(dotPos + 1));
-  UString ext2 = ext;
-  ext2.MakeLower_Ascii();
-  
-  CSeqName seqName;
-  
-  unsigned numLetters = 2;
-  bool splitStyle = false;
-  
-  if (ext2.Len() >= 2 && StringsAreEqual_Ascii(ext2.RightPtr(2), "aa"))
-  {
-    splitStyle = true;
-    while (numLetters < ext2.Len())
-    {
-      if (ext2[ext2.Len() - numLetters - 1] != 'a')
-        break;
-      numLetters++;
-    }
-  }
-  else if (ext2.Len() >= 2 && (
-         StringsAreEqual_Ascii(ext2.RightPtr(2), "01")
-      || StringsAreEqual_Ascii(ext2.RightPtr(2), "00")
-      ))
-  {
-    while (numLetters < ext2.Len())
-    {
-      if (ext2[ext2.Len() - numLetters - 1] != '0')
-        break;
-      numLetters++;
-    }
-    if (numLetters != ext2.Len())
-      return S_FALSE;
-  }
-  else
+  if (!seq.ParseName())
     return S_FALSE;
-  
-  seqName._unchangedPart = prefix + ext.Left(ext2.Len() - numLetters);
-  seqName._changedPart = ext.RightPtr(numLetters);
-  seqName._splitStyle = splitStyle;
-  
-  if (prefix.Len() < 1)
-    _subName = "file";
-  else
-    _subName.SetFrom(prefix, prefix.Len() - 1);
-  
-  UInt64 size;
+  seq.Generate_SubName(_subName);
   {
-    /*
-    NCOM::CPropVariant prop;
-    RINOK(volumeCallback->GetProperty(kpidSize, &prop))
-    if (prop.vt != VT_UI8)
-      return E_INVALIDARG;
-    size = prop.uhVal.QuadPart;
-    */
-  }
-  RINOK(InStream_AtBegin_GetSize(stream, size))
-  
-  _totalSize += size;
-  _sizes.Add(size);
-  _streams.Add(stream);
-  
-  {
-    const UInt64 numFiles = _streams.Size();
-    RINOK(callback->SetCompleted(&numFiles, NULL))
-  }
-  
-  for (;;)
-  {
-    UString fullName;
-    if (!seqName.GetNextName(fullName))
-      break;
     CMyComPtr<IInStream> nextStream;
-    const HRESULT result = volumeCallback->GetStream(fullName, &nextStream);
-    if (result == S_FALSE)
-      break;
-    if (result != S_OK)
-      return result;
-    if (!nextStream)
-      break;
-    RINOK(InStream_AtBegin_GetSize(nextStream, size))
-    _totalSize += size;
-    _sizes.Add(size);
-    _streams.Add(nextStream);
+    do
     {
-      const UInt64 numFiles = _streams.Size();
-      RINOK(callback->SetCompleted(&numFiles, NULL))
+      UInt64 size;
+      RINOK(InStream_AtBegin_GetSize(stream, size))
+      CVol &v = Vols.AddNew();
+      v.Stream = stream;
+      v.Size = size;
+      v.GlobalOffset = _totalSize;
+      v.LocalPos = 0;
+      _totalSize += size;
+      if (_totalSize < size)
+        return S_FALSE;
+      stream = NULL; // we don' want (stream) to point to (nextStream) object
+      {
+        const UInt64 numFiles = Vols.Size();
+        RINOK(callback->SetCompleted(&numFiles, NULL))
+      }
+      if (!seq.GetNextName())
+        break;
+      seq.GenerateName();
+      nextStream.Release();
+      HRESULT result = volumeCallback->GetStream(seq.Name, &nextStream);
+#ifndef Z7_SFX
+      if (result == S_FALSE && !nextStream && seq.IsComplicated)
+      {
+        seq.AddPostfix_2Chars();
+        seq.GenerateName();
+        result = volumeCallback->GetStream(seq.Name, &nextStream);
+      }
+#endif
+      if (result != S_OK && result != S_FALSE)
+        return result;
+      stream = nextStream;
     }
+    while (stream);
   }
 
-  if (_streams.Size() == 1)
-  {
-    if (splitStyle)
+#ifndef Z7_SFX
+  if (Vols.Size() == 1) // for single volume case, we allow only 7zip_style files with dot : "*.001"
+    if (seq.ChangedPos == 0 || seq.IsLatinPostfix())
       return S_FALSE;
-  }
+#endif
   return S_OK;
 }
+
 
 Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallback *callback))
 {
@@ -251,32 +178,17 @@ Z7_COM7F_IMF(CHandler::Open(IInStream *stream, const UInt64 *, IArchiveOpenCallb
 
 Z7_COM7F_IMF(CHandler::Close())
 {
+  _volIndex = 0;
+  _pos = 0;
   _totalSize = 0;
   _subName.Empty();
-  _streams.Clear();
-  _sizes.Clear();
+  Vols.Clear();
   return S_OK;
 }
 
 Z7_COM7F_IMF(CHandler::GetNumberOfItems(UInt32 *numItems))
 {
-  *numItems = _streams.IsEmpty() ? 0 : 1;
-  return S_OK;
-}
-
-Z7_COM7F_IMF(CHandler::GetProperty(UInt32 /* index */, PROPID propID, PROPVARIANT *value))
-{
-  NCOM::CPropVariant prop;
-  switch (propID)
-  {
-    case kpidPath: prop = _subName; break;
-    case kpidSize:
-    case kpidPackSize:
-      prop = _totalSize;
-      break;
-    default: break;
-  }
-  prop.Detach(value);
+  *numItems = Vols.IsEmpty() ? 0 : 1;
   return S_OK;
 }
 
@@ -289,38 +201,104 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   if (numItems != (UInt32)(Int32)-1 && (numItems != 1 || indices[0] != 0))
     return E_INVALIDARG;
 
-  UInt64 currentTotalSize = 0;
   RINOK(extractCallback->SetTotal(_totalSize))
-  CMyComPtr<ISequentialOutStream> outStream;
-  const Int32 askMode = testMode ?
-      NExtract::NAskMode::kTest :
-      NExtract::NAskMode::kExtract;
-  RINOK(extractCallback->GetStream(0, &outStream, askMode))
-  if (!testMode && !outStream)
-    return S_OK;
-  RINOK(extractCallback->PrepareOperation(askMode))
-  
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder;
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
-  lps->Init(extractCallback, false);
-
-  for (unsigned i = 0;; i++)
+  int opRes;
   {
-    lps->InSize = lps->OutSize = currentTotalSize;
-    RINOK(lps->SetCur())
-    if (i == _streams.Size())
-      break;
-    IInStream *inStream = _streams[i];
-    RINOK(InStream_SeekToBegin(inStream))
-    RINOK(copyCoder->Code(inStream, outStream, NULL, NULL, progress))
-    currentTotalSize += copyCoderSpec->TotalSize;
+    CMyComPtr<ISequentialOutStream> outStream;
+    const Int32 askMode = testMode ?
+        NExtract::NAskMode::kTest :
+        NExtract::NAskMode::kExtract;
+    RINOK(extractCallback->GetStream(0, &outStream, askMode))
+    if (!testMode && !outStream)
+      return S_OK;
+    RINOK(extractCallback->PrepareOperation(askMode))
+        
+    NCompress::CCopyCoderBase copyCoder;
+    CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
+    lps->Init(extractCallback, false);
+      
+    opRes = NExtract::NOperationResult::kOK;
+    FOR_VECTOR(i, Vols)
+    {
+      CVol &v = Vols[i];
+      v.LocalPos = (UInt64)0-1;
+      IInStream *inStream = v.Stream;
+      RINOK(InStream_SeekToBegin(inStream))
+      RINOK(copyCoder.Code(inStream, outStream, NULL, lps))
+      if (copyCoder.TotalSize != v.Size)
+        opRes = NExtract::NOperationResult::kDataError;
+      CLocalProgress *lps2 = lps.ClsPtr();
+      lps2->InSize += copyCoder.TotalSize;
+      lps2->OutSize = lps2->InSize;
+      RINOK(lps2->SetCur())
+    }
   }
-  outStream.Release();
-  return extractCallback->SetOperationResult(NExtract::NOperationResult::kOK);
+  return extractCallback->SetOperationResult(opRes);
   COM_TRY_END
+}
+
+
+Z7_COM7F_IMF(CHandler::Read(void *data, UInt32 size, UInt32 *processedSize))
+{
+  if (processedSize)
+    *processedSize = 0;
+  if (size == 0)
+    return S_OK;
+  if (_pos >= _totalSize)
+    return S_OK;
+
+  unsigned left = 0, mid = _volIndex, right = Vols.Size();
+  for (;;)
+  {
+    CVol &v = Vols[mid];
+    if (_pos < v.GlobalOffset)
+      right = mid;
+    else
+    {
+      const UInt64 localPos = _pos - v.GlobalOffset;
+      if (localPos < v.Size)
+      {
+        _volIndex = mid;
+        if (localPos != v.LocalPos)
+          RINOK(v.Stream->Seek((Int64)localPos, STREAM_SEEK_SET, &v.LocalPos))
+        {
+          const UInt64 rem = v.Size - localPos;
+          if (size > rem)
+            size = (UInt32)rem;
+        }
+        UInt32 sizeProc = 0;
+        const HRESULT result = v.Stream->Read(data, size, &sizeProc);
+        size = sizeProc;
+        _pos += size;
+        if (result == S_OK)
+          v.LocalPos += size;
+        else
+          v.LocalPos = (UInt64)0-1;
+        if (processedSize)
+          *processedSize = size;
+        return result;
+      }
+      left = mid + 1;
+    }
+    mid = (left + right) / 2;
+  }
+}
+  
+Z7_COM7F_IMF(CHandler::Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition))
+{
+  switch (seekOrigin)
+  {
+    case STREAM_SEEK_SET: break;
+    case STREAM_SEEK_CUR: offset += _pos; break;
+    case STREAM_SEEK_END: offset += _totalSize; break;
+    default: return STG_E_INVALIDFUNCTION;
+  }
+  if (offset < 0)
+    return HRESULT_WIN32_ERROR_NEGATIVE_SEEK;
+  _pos = (UInt64)offset;
+  if (newPosition)
+    *newPosition = (UInt64)offset;
+  return S_OK;
 }
 
 Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
@@ -329,16 +307,17 @@ Z7_COM7F_IMF(CHandler::GetStream(UInt32 index, ISequentialInStream **stream))
   if (index != 0)
     return E_INVALIDARG;
   *stream = NULL;
-  CMultiStream *streamSpec = new CMultiStream;
-  CMyComPtr<ISequentialInStream> streamTemp = streamSpec;
-  FOR_VECTOR (i, _streams)
+  _volIndex = 0;
+  _pos = 0;
+  /*
+  FOR_VECTOR (i, Vols)
   {
-    CMultiStream::CSubStreamInfo subStreamInfo;
-    subStreamInfo.Stream = _streams[i];
-    subStreamInfo.Size = _sizes[i];
-    streamSpec->Streams.Add(subStreamInfo);
+    CVol &v = Vols[i];
+    v.LocalPos = 0;
+    RINOK(InStream_SeekToBegin(v.Stream))
   }
-  streamSpec->Init();
+  */
+  CMyComPtr<ISequentialInStream> streamTemp = this;
   *stream = streamTemp.Detach();
   return S_OK;
   COM_TRY_END

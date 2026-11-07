@@ -1078,26 +1078,24 @@ static int MY_lstat(CFSTR path, struct stat *st, bool followLink)
 }
 
 
-static const char *Get_Name_from_Path(CFSTR path) throw()
+/* if last character is path separator,
+   function returns name before last separator */
+static CFSTR Get_Name_from_Path(CFSTR path Z7_lifetimebound) throw()
 {
-  size_t len = strlen(path);
-  if (len == 0)
-    return path;
-  const char *p = path + len - 1;
-  {
-    if (p == path)
-      return path;
-    p--;
-  }
+  CFSTR name = path;
   for (;;)
   {
-    char c = *p;
+    const FChar c = *path++;
+    if (c == 0)
+      break;
     if (IS_PATH_SEPAR(c))
-      return p + 1;
-    if (p == path)
-      return path;
-    p--;
+    {
+      if (*path == 0)
+        break;
+      name = path;
+    }
   }
+  return name;
 }
 
 

@@ -403,7 +403,7 @@ HRESULT CChmFolderOutStream::FlushCorrupted(UInt64 maxSize)
 
 
 Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
-    Int32 testModeSpec, IArchiveExtractCallback *extractCallback))
+    const Int32 testMode, IArchiveExtractCallback *extractCallback))
 {
   COM_TRY_BEGIN
   const bool allFilesMode = (numItems == (UInt32)(Int32)-1);
@@ -415,17 +415,14 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       m_Database.Indices.Size());
   if (numItems == 0)
     return S_OK;
-  const bool testMode = (testModeSpec != 0);
 
-  UInt64 currentTotalSize = 0;
-
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
   CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
   inStream->SetStream(m_Stream);
 
+  UInt64 currentTotalSize = 0;
   UInt32 i;
 
   if (m_Database.LowLevel)
@@ -444,10 +441,12 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     for (i = 0; i < numItems; i++, currentTotalSize += currentItemSize)
     {
       currentItemSize = 0;
-      lps->InSize = currentTotalSize; // Change it
-      lps->OutSize = currentTotalSize;
-
-      RINOK(lps->SetCur())
+      {
+        CLocalProgress *lps2 = lps.ClsPtr();
+        lps2->InSize = currentTotalSize; // Change it
+        lps2->OutSize = currentTotalSize;
+        RINOK(lps2->SetCur())
+      }
       CMyComPtr<ISequentialOutStream> realOutStream;
       const Int32 askMode= testMode ?
           NExtract::NAskMode::kTest :
@@ -492,9 +491,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       RINOK(InStream_SeekSet(m_Stream, m_Database.ContentOffset + item.Offset))
       inStream->Init(item.Size);
       
-      RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
+      RINOK(copyCoder.Code(inStream, realOutStream, NULL, lps))
       realOutStream.Release();
-      RINOK(extractCallback->SetOperationResult((copyCoder->TotalSize == item.Size) ?
+      RINOK(extractCallback->SetOperationResult((copyCoder.TotalSize == item.Size) ?
           NExtract::NOperationResult::kOK:
           NExtract::NOperationResult::kDataError))
     }
@@ -568,8 +567,11 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       continue;
     }
 
-    lps->InSize = currentTotalSize; // Change it
-    lps->OutSize = currentTotalSize;
+    {
+      CLocalProgress *lps2 = lps.ClsPtr();
+      lps2->InSize = currentTotalSize; // Change it
+      lps2->OutSize = currentTotalSize;
+    }
 
     if (item.Size == 0 || sectionIndex == 0)
     {
@@ -583,8 +585,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       {
         RINOK(InStream_SeekSet(m_Stream, m_Database.ContentOffset + item.Offset))
         inStream->Init(item.Size);
-        RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
-        if (copyCoder->TotalSize != item.Size)
+        RINOK(copyCoder.Code(inStream, realOutStream, NULL, lps))
+        if (copyCoder.TotalSize != item.Size)
           opRes = NExtract::NOperationResult::kDataError;
       }
       realOutStream.Release();
@@ -620,7 +622,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
     const CLzxInfo &lzxInfo = section.Methods[0].LzxInfo;
 
-    chmFolderOutStream->Init(&m_Database, extractCallback, testMode);
+    chmFolderOutStream->Init(&m_Database, extractCallback, testMode != 0);
 
     lzxDecoder.Create_if_Empty();
 

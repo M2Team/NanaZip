@@ -196,9 +196,9 @@ HRESULT UpdateArchive(IInStream *inStream, ISequentialOutStream *outStream,
   if (i == updateItems.Size())
     RINOK(updateCallback->SetTotal(complexity))
 
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(updateCallback, true);
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
   CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStreamLimited;
   inStreamLimited->SetStream(inStream);
 
@@ -208,8 +208,9 @@ HRESULT UpdateArchive(IInStream *inStream, ISequentialOutStream *outStream,
 
   for (i = 0;; i++)
   {
-    lps->InSize = lps->OutSize = complexity;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = complexity;
+    RINOK(lps2->SetCur())
 
     if (i == updateItems.Size())
     {
@@ -439,12 +440,12 @@ HRESULT UpdateArchive(IInStream *inStream, ISequentialOutStream *outStream,
             }
             
             const UInt64 dataPos = outArchive.Pos;
-            RINOK(copyCoder.Interface()->Code(fileInStream, outStream, NULL, NULL, lps))
-            outArchive.Pos += copyCoder->TotalSize;
-            RINOK(outArchive.Write_AfterDataResidual(copyCoder->TotalSize))
+            RINOK(copyCoder.Code(fileInStream, outStream, NULL, lps))
+            outArchive.Pos += copyCoder.TotalSize;
+            RINOK(outArchive.Write_AfterDataResidual(copyCoder.TotalSize))
             // printf("\nTAR after Code old size = %8d copyCoder->TotalSize = %8d \n", (unsigned)item.PackSize, (unsigned)copyCoder->TotalSize);
             // if (numPasses >= 10) // for debug
-            if (copyCoder->TotalSize == item.PackSize)
+            if (copyCoder.TotalSize == item.PackSize)
               break;
             
             if (opCallback)
@@ -459,7 +460,7 @@ HRESULT UpdateArchive(IInStream *inStream, ISequentialOutStream *outStream,
             const UInt64 nextPos = outArchive.Pos;
             RINOK(outSeekStream->Seek(-(Int64)(nextPos - headerPos), STREAM_SEEK_CUR, NULL))
             outArchive.Pos = headerPos;
-            item.PackSize = copyCoder->TotalSize;
+            item.PackSize = copyCoder.TotalSize;
             
             RINOK(outArchive.WriteHeader(item))
             
@@ -549,8 +550,8 @@ HRESULT UpdateArchive(IInStream *inStream, ISequentialOutStream *outStream,
         if (outSeekStream && setRestriction)
           RINOK(setRestriction->SetRestriction(0, 0))
         // 22.00 : we copy Residual data from old archive to new archive instead of zeroing
-        RINOK(copyCoder.Interface()->Code(inStreamLimited, outStream, NULL, NULL, lps))
-        if (copyCoder->TotalSize != size)
+        RINOK(copyCoder.Code(inStreamLimited, outStream, NULL, lps))
+        if (copyCoder.TotalSize != size)
           return E_FAIL;
         outArchive.Pos += size;
         // RINOK(outArchive.Write_AfterDataResidual(existItem.PackSize));

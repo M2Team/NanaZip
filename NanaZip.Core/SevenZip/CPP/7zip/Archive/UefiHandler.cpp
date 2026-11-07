@@ -1774,16 +1774,17 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   for (i = 0; i < numItems; i++)
     totalSize += _items[_items2[allFilesMode ? i : indices[i]].MainIndex].Size;
   RINOK(extractCallback->SetTotal(totalSize))
-  totalSize = 0;
   
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
 
+  totalSize = 0;
   for (i = 0;; i++)
   {
-    lps->InSize = lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
     Int32 opRes;
@@ -1808,8 +1809,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         GetStream(index, &inStream);
         if (inStream)
         {
-          RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
-          if (copyCoder->TotalSize == item.Size)
+          RINOK(copyCoder.Code(inStream, realOutStream, NULL, lps))
+          if (copyCoder.TotalSize == item.Size)
             opRes = NExtract::NOperationResult::kOK;
         }
       }

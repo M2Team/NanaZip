@@ -494,9 +494,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   for (;;)
   {
-    lps->InSize = packSize;
-    lps->OutSize = unpackSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = packSize;
+    lps2->OutSize = unpackSize;
+    RINOK(lps2->SetCur())
 
     const UInt32 kBufSize = 1 + 5 + 8;
     Byte buf[kBufSize];

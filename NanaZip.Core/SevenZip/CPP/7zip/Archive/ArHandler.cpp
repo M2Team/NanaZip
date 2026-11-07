@@ -760,21 +760,18 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       (item.TextFileIndex >= 0) ?
         (UInt64)_libFiles[(unsigned)item.TextFileIndex].Len() : item.Size;
   }
-  extractCallback->SetTotal(totalSize);
+  RINOK(extractCallback->SetTotal(totalSize))
 
-  UInt64 currentTotalSize = 0;
-  
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
 
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
-  inStream->SetStream(_stream);
-
+  UInt64 currentTotalSize = 0;
   for (i = 0;; i++)
   {
-    lps->InSize = lps->OutSize = currentTotalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = currentTotalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
     Int32 opRes;
@@ -807,9 +804,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     else
     {
       RINOK(InStream_SeekSet(_stream, item.GetDataPos()))
-      inStream->Init(item.Size);
-      RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
-      if (copyCoder->TotalSize != item.Size)
+      RINOK(copyCoder.Code(_stream, realOutStream, &item.Size, lps))
+      if (copyCoder.TotalSize != item.Size)
         opRes = NExtract::NOperationResult::kDataError;
     }
    }

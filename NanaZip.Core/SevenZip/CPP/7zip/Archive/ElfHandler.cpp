@@ -10,7 +10,6 @@
 
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../Common/LimitedStreams.h"
 #include "../Common/ProgressUtils.h"
 #include "../Common/RegisterArc.h"
 #include "../Common/StreamUtils.h"
@@ -1216,19 +1215,16 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
-  totalSize = 0;
-  UInt64 currentItemSize;
-  
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
-  inStream->SetStream(_inStream);
-
-  for (i = 0;; i++, totalSize += currentItemSize)
+  UInt64 currentItemSize;
+  
+  for (i = 0;; i++, lps->InSize += currentItemSize)
   {
-    lps->InSize = lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->OutSize = lps2->InSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
     const Int32 askMode = testMode ?
@@ -1255,10 +1251,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         continue;
       RINOK(extractCallback->PrepareOperation(askMode))
       RINOK(InStream_SeekSet(_inStream, offset))
-      inStream->Init(currentItemSize);
-      RINOK(copyCoder.Interface()->Code(inStream, outStream, NULL, NULL, lps))
+      RINOK(copyCoder.Code(_inStream, outStream, &currentItemSize, lps))
     }
-    RINOK(extractCallback->SetOperationResult(copyCoder->TotalSize == currentItemSize ?
+    RINOK(extractCallback->SetOperationResult(copyCoder.TotalSize == currentItemSize ?
         NExtract::NOperationResult::kOK:
         NExtract::NOperationResult::kDataError))
   }

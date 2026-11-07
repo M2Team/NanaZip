@@ -41,13 +41,27 @@ extern "C" {
 static Byte Wrap_ReadByte(IByteInPtr pp) throw()
 {
   CByteIn *p = Z7_CONTAINER_FROM_VTBL_CLS(pp, CByteIn, IByteIn_obj);
-  return p->BitDecoder.Stream.ReadByte();
+  try
+  {
+    return p->BitDecoder.Stream.ReadByte();
+  }
+  catch(const CInBufferException &e) { p->hresult = e.ErrorCode; }
+  catch(...) {}
+  p->BitDecoder.Stream.NumExtraBytes++;
+  return 0xFF;
 }
 
 static Byte Wrap_ReadBits8(IByteInPtr pp) throw()
 {
   CByteIn *p = Z7_CONTAINER_FROM_VTBL_CLS(pp, CByteIn, IByteIn_obj);
-  return (Byte)p->BitDecoder.ReadByteFromAligned();
+  try
+  {
+    return (Byte)p->BitDecoder.ReadByteFromAligned();
+  }
+  catch(const CInBufferException &e) { p->hresult = e.ErrorCode; }
+  catch(...) {}
+  p->BitDecoder.Stream.NumExtraBytes++;
+  return 0xFF;
 }
 
 }
@@ -915,12 +929,15 @@ Z7_COM7F_IMF(CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream 
 
     
     m_InBitStream.BitDecoder.SetStream(inStream);
-    m_InBitStream.BitDecoder.Init();
+    m_InBitStream.Init();
     _outStream = outStream;
    
     // CCoderReleaser coderReleaser(this);
     _unpackSize = outSize ? *outSize : (UInt64)(Int64)-1;
-    return CodeReal(progress);
+    HRESULT res = CodeReal(progress);
+    if (m_InBitStream.hresult != S_OK)
+      res = m_InBitStream.hresult;
+    return res;
   }
   catch(const CInBufferException &e)  { /* _errorMode = true; */ return e.ErrorCode; }
   catch(...) { /* _errorMode = true; */ return S_FALSE; }

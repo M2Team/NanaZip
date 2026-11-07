@@ -1099,9 +1099,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   for (i = 0;; i++, totalSize += currentItemUnPacked)
   {
     currentItemUnPacked = 0;
-    lps->InSize = unpacker.TotalPacked;
-    lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = unpacker.TotalPacked;
+    lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
 

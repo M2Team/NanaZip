@@ -66,7 +66,10 @@ bool CInBufferBase::ReadBlock()
   ErrorCode = result;
   #else
   if (result != S_OK)
+  {
+    _wasFinished = true;
     throw CInBufferException(result);
+  }
   #endif
   _bufLim = _buf + processed;
   _wasFinished = (processed == 0);

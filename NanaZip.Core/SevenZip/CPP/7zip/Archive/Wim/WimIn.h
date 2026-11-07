@@ -663,7 +663,7 @@ struct CMidBuf
 
 class CUnpacker
 {
-  CMyComPtr2<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyUniquePtr<NCompress::NLzx::CDecoder> lzxDecoder;
   CMyUniquePtr<NCompress::NLzms::CDecoder> lzmsDecoder;
 

@@ -456,8 +456,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   for (i = 0;; i++)
   {
-    lps->InSize = lps->OutSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
     const UInt32 index = allFilesMode ? i : indices[i];

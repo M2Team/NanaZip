@@ -75,14 +75,16 @@ private:
   bool _deflateNSIS;
   bool _deflate64Mode;
   bool _keepHistory;
+  bool _outWasInit;
   bool _needFinishInput;
-  
   bool _needInitInStream;
   bool _needReadTable;
+
+  bool _outSizeDefined;
+
   Int32 _remainLen;
   UInt32 _rep0;
 
-  bool _outSizeDefined;
   CMyComPtr<ISequentialInStream> m_InStreamRef;
   UInt64 _outSize;
   UInt64 _outStartPos;

@@ -118,10 +118,9 @@ struct CVersion
 void CVersion::ToProp(NCOM::CPropVariant &prop)
 {
   char sz[32];
-  ConvertUInt32ToString(Major, sz);
-  unsigned len = MyStringLen(sz);
-  sz[len] = '.';
-  ConvertUInt32ToString(Minor, sz + len + 1);
+  char *p = ConvertUInt32ToString(Major, sz);
+  *p = '.';
+  ConvertUInt32ToString(Minor, p + 1);
   prop = sz;
 }
 
@@ -810,9 +809,19 @@ Z7_CLASS_IMP_CHandler_IInArchive_2(
   IInArchiveGetStream,
   IArchiveAllowTail
 )
+  bool _isRepro;
+  bool _oneLang;
+  // bool _parseResources;
+  bool _checksumError;
+  bool _sectionsError;
+
   CMyComPtr<IInStream> _stream;
   CObjectVector<CSection> _sections;
   CHeader _header;
+
+  bool _coffMode;
+  bool _allowTail;
+  
   UInt32 _totalSize;
   Int32 _mainSubfile;
 
@@ -827,14 +836,6 @@ Z7_CLASS_IMP_CHandler_IInArchive_2(
 
   CByteBuffer _buf;
   
-  bool _oneLang;
-  // bool _parseResources;
-  bool _checksumError;
-  bool _sectionsError;
-
-  bool _coffMode;
-  bool _allowTail;
-
   UString _resourcesPrefix;
   CUsedBitmap _usedRes;
 
@@ -885,7 +886,8 @@ enum
   kpidStackReserve,
   kpidStackCommit,
   kpidHeapReserve,
-  kpidHeapCommit
+  kpidHeapCommit,
+  kpidRepro
   // , kpidImageBase
   // , kpidAddressOfEntryPoint
   // , kpidBaseOfCode
@@ -899,6 +901,7 @@ static const CStatProp kArcProps[] =
   { NULL, kpidBit64, VT_BOOL},
   { NULL, kpidCharacts, VT_BSTR},
   { NULL, kpidCTime, VT_FILETIME},
+  { "Repro Hash", kpidRepro, VT_UI4},
   { NULL, kpidHeadersSize, VT_UI4},
   { NULL, kpidChecksum, VT_UI4},
   { NULL, kpidName, VT_BSTR},
@@ -1018,8 +1021,15 @@ Z7_COM7F_IMF(CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value))
     }
 
     case kpidCpu: PAIR_TO_PROP(g_MachinePairs, _header.Machine, prop); break;
+    case kpidRepro:
+      if (_isRepro)
+        prop = _header.Time;
+      break;
     case kpidMTime:
-    case kpidCTime: TimeToProp(_header.Time, prop); break;
+    case kpidCTime:
+      if (!_isRepro)
+        TimeToProp(_header.Time, prop);
+      break;
     case kpidCharacts: FLAGS_TO_PROP(g_HeaderCharacts, _header.Flags, prop); break;
     case kpidMainSubfile: if (_mainSubfile >= 0) prop = (UInt32)_mainSubfile; break;
     
@@ -1230,21 +1240,20 @@ Z7_COM7F_IMF(CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
       case kpidVa: if (item.IsRealSect) prop = item.Va; break;
       case kpidMTime:
       case kpidCTime:
-        TimeToProp(item.IsDebug ? item.Time : _header.Time, prop); break;
+        if (!_isRepro)
+          TimeToProp(item.IsDebug ? item.Time : _header.Time, prop);
+        break;
       case kpidCharacts:
        if (item.IsRealSect)
        {
-         UInt32 flags = item.Flags;
+         const UInt32 flags = item.Flags;
          const UInt32 MY_IMAGE_SCN_ALIGN_MASK = 0x00F00000;
          AString s = FlagsToString(g_SectFlags, Z7_ARRAY_SIZE(g_SectFlags), item.Flags & ~MY_IMAGE_SCN_ALIGN_MASK);
-         const UInt32 align = ((flags >> 20) & 0xF);
-         if (align != 0)
+         const UInt32 align = (flags >> 20) & 0xF;
+         if (align)
          {
-           char sz[32];
-           ConvertUInt32ToString(1 << (align - 1), sz);
-           s.Add_Space();
-           s += "align_";
-           s += sz;
+           s += " align_";
+           s.Add_UInt32(1u << (align - 1));
          }
          prop = s;
        }
@@ -1308,7 +1317,20 @@ HRESULT CHandler::LoadDebugSections(IInStream *stream, bool &thereIsSection)
 
     if (de.Size == 0)
       continue;
-    
+
+    if (de.Type == 0x10) // IMAGE_DEBUG_TYPE_REPRO
+    {
+      _isRepro = true;
+      /*
+      CSection &sect = _sections.AddNew();
+      sect.Name = "REPRO_HASH";
+      sect.IsDebug = true;
+      sect.Time = de.Time;
+      sect.Va = de.Va;
+      sect.Pa = de.Pa;
+      sect.Set_Size_for_all(de.Size);
+      */
+    }
     UInt32 totalSize = de.Pa + de.Size;
     if (totalSize > _totalSize)
     {
@@ -2804,6 +2826,7 @@ void CHandler::CloseResources()
 Z7_COM7F_IMF(CHandler::Close())
 {
   _totalSize = 0;
+  _isRepro = false;
   _checksumError = false;
   _sectionsError = false;
   _mainSubfile = -1;
@@ -2848,32 +2871,32 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
-  inStream->SetStream(_stream);
 
   totalSize = 0;
   UInt64 currentItemSize;
   
   for (i = 0;; i++, totalSize += currentItemSize)
   {
-    lps->InSize = lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
         NExtract::NAskMode::kExtract;
     const UInt32 index = allFilesMode ? i : indices[i];
-
+    bool isOk;
+    {
     CMyComPtr<ISequentialOutStream> outStream;
     RINOK(extractCallback->GetStream(index, &outStream, askMode))
     const CMixItem &mixItem = _mixItems[index];
 
     const CSection &sect = _sections[mixItem.SectionIndex];
-    bool isOk = true;
+    isOk = true;
     if (mixItem.StringIndex >= 0)
     {
       const CStringItem &item = _strings[mixItem.StringIndex];
@@ -2922,12 +2945,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       
       RINOK(extractCallback->PrepareOperation(askMode))
       RINOK(InStream_SeekSet(_stream, sect.Pa))
-      inStream->Init(currentItemSize);
-      RINOK(copyCoder.Interface()->Code(inStream, outStream, NULL, NULL, lps))
-      isOk = (copyCoder->TotalSize == currentItemSize);
+      RINOK(copyCoder.Code(_stream, outStream, &currentItemSize, lps))
+      isOk = (copyCoder.TotalSize == currentItemSize);
     }
-    
-    outStream.Release();
+    }
     RINOK(extractCallback->SetOperationResult(isOk ?
         NExtract::NOperationResult::kOK :
         NExtract::NOperationResult::kDataError))
@@ -3356,41 +3377,38 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     totalSize += _items[allFilesMode ? i : indices[i]].GetSize_Extract();
   RINOK(extractCallback->SetTotal(totalSize))
 
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
-  inStream->SetStream(_stream);
 
   totalSize = 0;
 
   for (i = 0;; i++)
   {
-    lps->InSize = lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
     int opRes;
     {
-    CMyComPtr<ISequentialOutStream> realOutStream;
-    const Int32 askMode = testMode ?
-        NExtract::NAskMode::kTest :
-        NExtract::NAskMode::kExtract;
-    const UInt32 index = allFilesMode ? i : indices[i];
-    const CSection &item = _items[index];
-    RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
-    const UInt32 size = item.GetSize_Extract();
-    totalSize += size;
-    
-    if (!testMode && !realOutStream)
-      continue;
-    RINOK(extractCallback->PrepareOperation(askMode))
-    RINOK(InStream_SeekSet(_stream, item.Pa))
-    inStream->Init(size);
-    RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
-
-      opRes = (copyCoder->TotalSize == size) ?
-          NExtract::NOperationResult::kOK : (copyCoder->TotalSize < size) ?
+      CMyComPtr<ISequentialOutStream> realOutStream;
+      const Int32 askMode = testMode ?
+          NExtract::NAskMode::kTest :
+          NExtract::NAskMode::kExtract;
+      const UInt32 index = allFilesMode ? i : indices[i];
+      const CSection &item = _items[index];
+      RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
+      const UInt32 size = item.GetSize_Extract();
+      totalSize += size;
+      if (!testMode && !realOutStream)
+        continue;
+      RINOK(extractCallback->PrepareOperation(askMode))
+      RINOK(InStream_SeekSet(_stream, item.Pa))
+      const UInt64 size64 = size;
+      RINOK(copyCoder.Code(_stream, realOutStream, &size64, lps))
+      opRes = (copyCoder.TotalSize == size) ?
+          NExtract::NOperationResult::kOK : (copyCoder.TotalSize < size) ?
           NExtract::NOperationResult::kUnexpectedEnd :
           NExtract::NOperationResult::kDataError;
     }

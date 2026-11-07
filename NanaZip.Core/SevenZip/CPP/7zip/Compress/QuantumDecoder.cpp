@@ -2,9 +2,6 @@
 
 #include "StdAfx.h"
 
-// #include <stdio.h>
-
-#include "../../../C/Alloc.h"
 #include "../../../C/CpuArch.h"
 
 #include "../../Common/Defs.h"
@@ -26,9 +23,9 @@ static const unsigned kReorderCount = 50;
 
 class CRangeDecoder
 {
-  UInt32 Low;
-  UInt32 Range;
   UInt32 Code;
+  UInt32 Range;
+  UInt32 Low;
 
   unsigned _bitOffset;
   const Byte *_buf;
@@ -40,11 +37,11 @@ public:
   void Init(const Byte *inData, size_t inSize)
   {
     Code = ((UInt32)*inData << 8) | inData[1];
+    Range = 1 << 16;
+    Low = 0;
+    _bitOffset = 0;
     _buf = inData + 2;
     _bufLim = inData + inSize;
-    _bitOffset = 0;
-    Low = 0;
-    Range = 0x10000;
   }
 
   Z7_FORCE_INLINE
@@ -65,32 +62,39 @@ public:
     return res >> (32 - numBits);
   }
 
-  // ---------- Range Decoder functions ----------
-
   Z7_FORCE_INLINE
-  bool Finish()
+  bool Finish() const
   {
-    const unsigned numBits = 2 + ((16 - 2 - _bitOffset) & 7);
-    if (ReadBits(numBits) != 0)
+    // if ((Low + Code) & 0x3fff) return false; // do we need this additional check?
+    const unsigned bitOffset = _bitOffset;
+    const Byte *buf = _buf;
+    if ((Byte)(buf[0] << bitOffset))
       return false;
-    return _buf == _bufLim;
+    buf++;
+    if (bitOffset > 8 - 2)
+    {
+      if (*buf)
+        return false;
+      buf++;
+    }
+    return buf == _bufLim;
   }
 
   Z7_FORCE_INLINE
   UInt32 GetThreshold(UInt32 total) const
   {
-    return ((Code + 1) * total - 1) / Range; // & 0xFFFF is not required;
+    return ((Code + 1) * total - 1) / Range;
   }
   
   Z7_FORCE_INLINE
   void Decode(UInt32 start, UInt32 end, UInt32 total)
   {
-    // UInt32 hi = ~(Low + end * Range / total - 1);
-    UInt32 hi = 0 - (Low + end * Range / total);
-    const UInt32 offset = start * Range / total;
-    UInt32 lo = Low + offset;
-    Code -= offset;
-    UInt32 numBits = 0;
+    UInt32 hi = Low + end * Range / total;
+    hi = 0 - hi; // hi = ~(hi - 1);
+    UInt32 lo = start * Range / total;
+    Code -= lo;
+    lo += Low;
+    unsigned numBits = 0;
     lo ^= hi;
     while (lo & (1u << 15))
     {
@@ -108,17 +112,16 @@ public:
       numBits++;
     }
     Low = lo;
-    Range = ((~hi - lo) & 0xffff) + 1;
+    Range = 0u - hi - lo; // Range = ~hi - lo + 1;
     if (numBits)
-      Code = (Code << numBits) + ReadBits(numBits);
+      Code = (Code << numBits) + ReadBits(numBits); // numBits <= 16
   }
 };
 
 
 // Z7_FORCE_INLINE
 Z7_NO_INLINE
-unsigned CModelDecoder::Decode(CRangeDecoder *rc)
-// Z7_NO_INLINE void CModelDecoder::Normalize()
+unsigned CModelDecoder::Decode(CRangeDecoder *rc) throw()
 {
   if (Freqs[0] > kFreqSumMax)
   {
@@ -138,10 +141,12 @@ unsigned CModelDecoder::Decode(CRangeDecoder *rc)
         while (--i);
       }
       {
-        for (unsigned i = 0; i < NumItems - 1; i++)
+        const unsigned numItems_minus1 = NumItems - 1;
+        for (unsigned i = 0; i < numItems_minus1; i++)
         {
           UInt16 freq = Freqs[i];
-          for (unsigned k = i + 1; k < NumItems; k++)
+          unsigned k = i + 1;
+          do
             if (freq < Freqs[k])
             {
               const UInt16 freq2 = Freqs[k];
@@ -152,6 +157,7 @@ unsigned CModelDecoder::Decode(CRangeDecoder *rc)
               Vals[i] = Vals[k];
               Vals[k] = val;
             }
+          while (++k <= numItems_minus1);
         }
       }
       unsigned i = NumItems;
@@ -180,27 +186,26 @@ unsigned CModelDecoder::Decode(CRangeDecoder *rc)
       while (--i);
     }
   }
-  unsigned res;
   {
     const unsigned freq0 = Freqs[0];
-    Freqs[0] = (UInt16)(freq0 + kUpdateStep);
     const unsigned threshold = rc->GetThreshold(freq0);
-    UInt16 *freqs = &Freqs[1];
-    unsigned freq = *freqs;
-    while (freq > threshold)
+    UInt16 *freqs = &Freqs[0];
+    unsigned freq = freq0;
+    do
     {
       *freqs++ = (UInt16)(freq + kUpdateStep);
       freq = *freqs;
     }
-    res = Vals[freqs - Freqs - 1];
+    while (freq > threshold);
+    const unsigned res = Vals[freqs - Freqs - 1];
     rc->Decode(freq, freqs[-1] - kUpdateStep, freq0);
+    return res;
   }
-  return res;
 }
 
 
 Z7_NO_INLINE
-void CModelDecoder::Init(unsigned numItems, unsigned startVal)
+void CModelDecoder::Init(unsigned numItems, unsigned startVal) throw()
 {
   NumItems = numItems;
   ReorderCount = kReorderCount_Start;
@@ -217,27 +222,10 @@ void CModelDecoder::Init(unsigned numItems, unsigned startVal)
 }
 
 
-HRESULT CDecoder::Code(const Byte *inData, size_t inSize, UInt32 outSize, bool keepHistory)
+HRESULT CDecoder::CodeChunk_32KB_ExceedRead_Solid(const Byte *inData, size_t inSize, UInt32 outSize) throw()
 {
   if (inSize < 2)
     return S_FALSE;
-  if (!keepHistory)
-  {
-    _winPos = 0;
-    m_Selector.Init(kNumSelectors, 0);
-    unsigned i;
-    for (i = 0; i < kNumLitSelectors; i++)
-      m_Literals[i].Init(kNumLitSymbols, i * kNumLitSymbols);
-    const unsigned numItems = (_numDictBits == 0 ? 1 : (_numDictBits << 1));
-    // const unsigned kNumPosSymbolsMax[kNumMatchSelectors] = { 24, 36, 42 };
-    for (i = 0; i < kNumMatchSelectors; i++)
-    {
-      const unsigned num = 24 + i * 6 + ((i + 1) & 2) * 3;
-      m_PosSlot[i].Init(MyMin(numItems, num), 0);
-    }
-    m_LenSlot.Init(kNumLenSymbols, kMatchMinLen + kNumMatchSelectors - 1);
-  }
-
   CRangeDecoder rc;
   rc.Init(inData, inSize);
   const UInt32 winSize = _winSize;
@@ -264,10 +252,8 @@ HRESULT CDecoder::Code(const Byte *inData, size_t inSize, UInt32 outSize, bool k
     
     if (selector < kNumLitSelectors)
     {
-      const unsigned b = m_Literals[selector].Decode(&rc);
-      *pos++ = (Byte)b;
+      *pos++ = (Byte)m_Literals[selector].Decode(&rc);
       --outSize;
-      // if (--outSize == 0) break;
     }
     else
     {
@@ -289,17 +275,16 @@ HRESULT CDecoder::Code(const Byte *inData, size_t inSize, UInt32 outSize, bool k
       }
       
       UInt32 dist = m_PosSlot[(size_t)selector - kNumLitSelectors].Decode(&rc);
-      
       if (dist >= 4)
       {
-        const unsigned numDirectBits = (unsigned)((dist >> 1) - 1);
+        const unsigned numDirectBits = (unsigned)((dist - 2) >> 1);
         dist = ((2 | (dist & 1)) << numDirectBits) + rc.ReadBits(numDirectBits);
       }
       
       if ((Int32)(outSize -= len) < 0)
         return S_FALSE;
 
-      ptrdiff_t srcPos = (ptrdiff_t)(Int32)((pos - _win) - (ptrdiff_t)dist - 1);
+      ptrdiff_t srcPos = (ptrdiff_t)(pos - _win) - (ptrdiff_t)dist - 1;
       if (srcPos < 0)
       {
         if (!_overWin)
@@ -320,7 +305,6 @@ HRESULT CDecoder::Code(const Byte *inData, size_t inSize, UInt32 outSize, bool k
       do
         *pos++ = *src++;
       while (--len);
-      // if (outSize == 0) break;
     }
   }
 
@@ -329,26 +313,33 @@ HRESULT CDecoder::Code(const Byte *inData, size_t inSize, UInt32 outSize, bool k
 }
 
 
-HRESULT CDecoder::SetParams(unsigned numDictBits)
+HRESULT CDecoder::SetParams_and_Init(const unsigned numDictBits) throw()
 {
-  if (numDictBits > 21)
-    return E_INVALIDARG;
-  _numDictBits = numDictBits;
   _winPos = 0;
   _overWin = false;
-
-  if (numDictBits < 15)
-      numDictBits = 15;
-  _winSize = (UInt32)1 << numDictBits;
+  if (numDictBits < 10 || numDictBits > 21)
+    return E_INVALIDARG;
+  _winSize = (UInt32)1 << MyMax(numDictBits, 15u); // don't change (15), because (1 << 15) is chunk size
   if (!_win || _winSize > _winSize_allocated)
   {
     MidFree(_win);
-    _win = NULL;
     _win = (Byte *)MidAlloc(_winSize);
     if (!_win)
       return E_OUTOFMEMORY;
     _winSize_allocated = _winSize;
   }
+
+  m_Selector.Init(kNumSelectors, 0);
+  unsigned i;
+  for (i = 0; i < kNumLitSelectors; i++)
+    m_Literals[i].Init(kNumLitSymbols, i * kNumLitSymbols);
+  const unsigned numItems = numDictBits << 1;
+  for (i = 0; i < kNumMatchSelectors; i++)
+  {
+    const unsigned num = (Byte)(0x2a2418 >> (i << 3)); // 24, 36, 42
+    m_PosSlot[i].Init(MyMin(num, numItems), 0);
+  }
+  m_LenSlot.Init(kNumLenSymbols, kMatchMinLen + kNumMatchSelectors - 1);
   return S_OK;
 }
 

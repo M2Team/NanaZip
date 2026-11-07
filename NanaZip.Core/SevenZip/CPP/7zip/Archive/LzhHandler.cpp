@@ -602,14 +602,14 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalUnPacked))
 
-  UInt32 cur_Unpacked, cur_Packed;
-
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
   CMyUniquePtr<NCompress::NLzh::NDecoder::CCoder> lzhDecoder;
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
   CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
   inStream->SetStream(_stream);
+
+  UInt32 cur_Unpacked, cur_Packed;
 
   for (i = 0;; i++,
       lps->OutSize += cur_Unpacked,
@@ -661,8 +661,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
       if (item.IsCopyMethod())
       {
-        res = copyCoder.Interface()->Code(inStream, outStream, NULL, NULL, lps);
-        if (res == S_OK && copyCoder->TotalSize != item.PackSize)
+        res = copyCoder.Code(inStream, outStream, NULL, lps);
+        if (res == S_OK && copyCoder.TotalSize != item.PackSize)
           res = S_FALSE;
       }
       else if (item.IsLh4GroupMethod())

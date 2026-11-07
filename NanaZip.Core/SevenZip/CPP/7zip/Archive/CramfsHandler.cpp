@@ -646,23 +646,25 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     if (!IsDir(p, be))
       totalSize += GetSize(p, be);
   }
-  extractCallback->SetTotal(totalSize);
+  RINOK(extractCallback->SetTotal(totalSize))
+
+  NCompress::CCopyCoderBase copyCoder;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
+  lps->Init(extractCallback, false);
 
   UInt64 totalPackSize;
   totalSize = totalPackSize = 0;
   
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
-  lps->Init(extractCallback, false);
-
-  for (i = 0; i < numItems; i++)
+  for (i = 0;; i++)
   {
-    lps->InSize = totalPackSize;
-    lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = totalPackSize;
+    lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
+    if (i >= numItems)
+      break;
+    int res;
+    {
     CMyComPtr<ISequentialOutStream> outStream;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
@@ -692,7 +694,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     if (offset < kHeaderSize)
       curSize = 0;
 
-    int res = NExtract::NOperationResult::kDataError;
+    res = NExtract::NOperationResult::kDataError;
     {
       CMyComPtr<ISequentialInStream> inSeqStream;
       HRESULT hres = GetStream(index, &inSeqStream);
@@ -704,10 +706,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       {
         RINOK(hres)
         {
-          hres = copyCoder->Code(inSeqStream, outStream, NULL, NULL, progress);
+          hres = copyCoder.Code(inSeqStream, outStream, NULL, lps);
           if (hres == S_OK)
           {
-            if (copyCoderSpec->TotalSize == curSize)
+            if (copyCoder.TotalSize == curSize)
               res = NExtract::NOperationResult::kOK;
           }
           else if (hres == E_NOTIMPL)
@@ -716,6 +718,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
             return hres;
         }
       }
+    }
     }
     RINOK(extractCallback->SetOperationResult(res))
   }

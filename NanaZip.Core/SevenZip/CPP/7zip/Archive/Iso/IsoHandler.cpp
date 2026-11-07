@@ -345,19 +345,20 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   }
   RINOK(extractCallback->SetTotal(totalSize))
 
+  NCompress::CCopyCoderBase copyCoder;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
+  lps->Init(extractCallback, false);
+
   UInt64 currentTotalSize = 0;
   UInt64 currentItemSize;
   
-  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
-  lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
-  inStream->SetStream(_stream);
-
   for (i = 0;; i++, currentTotalSize += currentItemSize)
   {
-    lps->InSize = lps->OutSize = currentTotalSize;
-    RINOK(lps->SetCur())
+    {
+      CLocalProgress *lps2 = lps.ClsPtr();
+      lps2->InSize = lps2->OutSize = currentTotalSize;
+      RINOK(lps2->SetCur())
+    }
     if (i >= numItems)
       break;
     currentItemSize = 0;
@@ -393,7 +394,6 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       blockIndex = be.LoadRBA;
     }
    
-
     if (!testMode && !realOutStream)
       continue;
 
@@ -408,11 +408,14 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
         const CDir &item2 = ref.Dir->_subItems[ref.Index + e];
         if (item2.Size == 0)
           continue;
-        lps->InSize = lps->OutSize = currentTotalSize + offset;
+        {
+          CLocalProgress *lps2 = lps.ClsPtr();
+          lps2->InSize = lps2->OutSize = currentTotalSize + offset;
+        }
         RINOK(InStream_SeekSet(_stream, (UInt64)item2.ExtentLocation * kBlockSize))
-        inStream->Init(item2.Size);
-        RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
-        if (copyCoder->TotalSize != item2.Size)
+        const UInt64 size64 = item2.Size;
+        RINOK(copyCoder.Code(_stream, realOutStream, &size64, lps))
+        if (copyCoder.TotalSize != item2.Size)
         {
           opRes = NExtract::NOperationResult::kDataError;
           break;
@@ -423,12 +426,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     else
     {
       RINOK(InStream_SeekSet(_stream, (UInt64)blockIndex * kBlockSize))
-      inStream->Init(currentItemSize);
-      RINOK(copyCoder.Interface()->Code(inStream, realOutStream, NULL, NULL, lps))
-      if (copyCoder->TotalSize != currentItemSize)
+      RINOK(copyCoder.Code(_stream, realOutStream, &currentItemSize, lps))
+      if (copyCoder.TotalSize != currentItemSize)
         opRes = NExtract::NOperationResult::kDataError;
     }
-    // realOutStream.Release();
   }
     RINOK(extractCallback->SetOperationResult(opRes))
   }

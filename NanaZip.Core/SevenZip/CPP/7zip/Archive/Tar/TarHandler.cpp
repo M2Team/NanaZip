@@ -374,9 +374,9 @@ HRESULT CHandler::SkipTo(UInt32 index)
     if (_latestIsRead)
     {
       const UInt64 packSize = _latestItem.Get_PackSize_Aligned();
-      RINOK(copyCoder.Interface()->Code(_seqStream, NULL, &packSize, &packSize, NULL))
-      _arc._phySize += copyCoder->TotalSize;
-      if (copyCoder->TotalSize != packSize)
+      RINOK(copyCoder.Code(_seqStream, NULL, &packSize, NULL))
+      _arc._phySize += copyCoder.TotalSize;
+      if (copyCoder.TotalSize != packSize)
       {
         _arc._error = k_ErrorType_UnexpectedEnd;
         return S_FALSE;
@@ -751,9 +751,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
   for (i = 0; ; i++)
   {
-    lps->InSize = totalPackSize;
-    lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = totalPackSize;
+    lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems && !seqMode)
       break;
     const UInt32 index = allFilesMode ? i : indices[i];
@@ -772,6 +773,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
         NExtract::NAskMode::kExtract;
+    Int32 opRes = NExtract::NOperationResult::kOK;
+    {
     CMyComPtr<ISequentialOutStream> realOutStream;
     RINOK(extractCallback->GetStream(index, &realOutStream, askMode))
     const UInt64 unpackSize = item->Get_UnpackSize();
@@ -780,10 +783,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     if (item->IsDir())
     {
       RINOK(extractCallback->PrepareOperation(askMode))
-      // realOutStream.Release();
-      RINOK(extractCallback->SetOperationResult(NExtract::NOperationResult::kOK))
-      continue;
     }
+    else
+    {
     bool skipMode = false;
     if (!testMode && !realOutStream)
     {
@@ -807,10 +809,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(extractCallback->PrepareOperation(askMode))
 
     outStreamSpec->SetStream(realOutStream);
-    realOutStream.Release();
+    // realOutStream.Release();
     outStreamSpec->Init(skipMode ? 0 : unpackSize, true);
 
-    Int32 opRes = NExtract::NOperationResult::kOK;
     CMyComPtr<ISequentialInStream> inStream2;
     if (!item->Is_Sparse())
       inStream2 = inStream;
@@ -838,7 +839,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
           RINOK(InStream_SeekSet(_stream, item->Get_DataPos()))
         }
         inStream->Init(item->Get_PackSize_Aligned());
-        RINOK(copyCoder.Interface()->Code(inStream2, outStreamSpec, NULL, NULL, lps))
+        RINOK(copyCoder.Code(inStream2, outStreamSpec, NULL, lps))
       }
       if (outStreamSpec->GetRem() != 0)
         opRes = NExtract::NOperationResult::kDataError;
@@ -849,6 +850,8 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       _curIndex++;
     }
     outStreamSpec->ReleaseStream();
+    }
+    }
     RINOK(extractCallback->SetOperationResult(opRes))
   }
   return S_OK;

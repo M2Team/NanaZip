@@ -559,7 +559,9 @@ static void x86_Filter4(Byte *data, size_t size, UInt32 processedSize4, UInt32 t
 
 
 CDecoder::CDecoder() throw():
+    _pos(0),
     _win(NULL),
+    _overDict(false),
     _isUncompressedBlock(false),
     _skipByte(false),
     _keepHistory(false),
@@ -1499,6 +1501,8 @@ HRESULT CDecoder::Set_DictBits_and_Alloc(unsigned numDictBits) throw()
       z7_AlignedFree
         (_win);
       _winSize = 0;
+      _pos = 0;
+      _overDict = false;
       const size_t alloc_size = newWinSize + k_OutBufSize_Add;
       _win = (Byte *)
           // BigAlloc

@@ -4091,24 +4091,21 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     RINOK(extractCallback->SetTotal(totalSize))
   }
 
-  UInt64 currentTotalSize = 0, currentItemSize = 0;
-  
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
-
   // We don't know if zlib without Adler is allowed in APFS.
   // But zlib without Adler is allowed in HFS.
   // So here we allow apfs/zlib without Adler:
   NHfs::CDecoder decoder(true); // IsAdlerOptional
 
+  UInt64 currentTotalSize = 0, currentItemSize = 0;
   for (i = 0;; i++, currentTotalSize += currentItemSize)
   {
-    lps->InSize = currentTotalSize;
-    lps->OutSize = currentTotalSize;
-    RINOK(lps->SetCur())
-
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = currentTotalSize;
+    lps2->OutSize = currentTotalSize;
+    RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
 
@@ -4222,20 +4219,20 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
             }
           }
           
-          RINOK(copyCoder.Interface()->Code(inStream,
+          RINOK(copyCoder.Code(inStream,
               hashStream.IsDefined() ?
                   hashStream.Interface() :
                   realOutStream.Interface(),
-              NULL, NULL, lps))
+              NULL, lps))
           opRes = NExtract::NOperationResult::kDataError;
-          if (copyCoder->TotalSize == currentItemSize)
+          if (copyCoder.TotalSize == currentItemSize)
           {
             opRes = NExtract::NOperationResult::kOK;
             if (hashStream.IsDefined())
               if (!hashStream->FinalCheck())
                 opRes = NExtract::NOperationResult::kCRCError;
           }
-          else if (copyCoder->TotalSize < currentItemSize)
+          else if (copyCoder.TotalSize < currentItemSize)
             opRes = NExtract::NOperationResult::kUnexpectedEnd;
         }
       }

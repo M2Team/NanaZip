@@ -17,7 +17,6 @@
 #include "../../../Common/StringToInt.h"
 #include "../../../Common/UTFConvert.h"
 
-// #include "../../Common/LimitedStreams.h"
 #include "../../Common/StreamObjects.h"
 #include "../../Common/StreamUtils.h"
 
@@ -284,18 +283,10 @@ HRESULT CUnpacker::Unpack2(const CResource &resource,
   {
     if (resource.PackSize != resource.UnpackSize)
       return S_FALSE;
-    copyCoder.Create_if_Empty();
     RINOK(InStream_SeekSet(inStream, resource.Offset))
     TotalPacked += resource.PackSize;
-#if 1
-    HRESULT res = copyCoder.Interface()->Code(inStream, outStream, NULL, &resource.UnpackSize, progress);
-#else
-    CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> limitedStream;
-    limitedStream->SetStream(inStream);
-    limitedStream->Init(resource.PackSize);
-    HRESULT res = copyCoder.Interface()->Code(limitedStream, outStream, NULL, NULL, progress);
-#endif
-    if (res == S_OK && copyCoder->TotalSize != resource.UnpackSize)
+    HRESULT res = copyCoder.Code(inStream, outStream, &resource.UnpackSize, progress);
+    if (res == S_OK && copyCoder.TotalSize != resource.UnpackSize)
       res = S_FALSE;
     return res;
   }

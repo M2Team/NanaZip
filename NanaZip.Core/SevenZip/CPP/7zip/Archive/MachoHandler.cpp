@@ -7,10 +7,10 @@
 
 #include "../../Common/ComTry.h"
 #include "../../Common/IntToString.h"
+#include "../../Common/MyBuffer.h"
 
 #include "../../Windows/PropVariantUtils.h"
 
-#include "../Common/LimitedStreams.h"
 #include "../Common/ProgressUtils.h"
 #include "../Common/RegisterArc.h"
 #include "../Common/StreamUtils.h"
@@ -1013,17 +1013,15 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 * const indices, UInt32 numItems,
     totalSize += _sections[allFilesMode ? i : indices[i]].GetPackSize();
   RINOK(extractCallback->SetTotal(totalSize))
 
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
+  NCompress::CCopyCoderBase copyCoder;
   CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(extractCallback, false);
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> inStream;
-  inStream->SetStream(_inStream);
-  totalSize = 0;
+  UInt64 currentItemSize;
 
-  for (i = 0;; i++)
+  for (i = 0;; i++, lps->InSize += currentItemSize)
   {
     CLocalProgress *lps2 = lps.ClsPtr();
-    lps2->InSize = lps2->OutSize = totalSize;
+    lps2->OutSize = lps2->InSize;
     RINOK(lps2->SetCur())
     if (i >= numItems)
       break;
@@ -1032,8 +1030,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 * const indices, UInt32 numItems,
         NExtract::NAskMode::kExtract;
     const UInt32 index = allFilesMode ? i : indices[i];
     const CSection &item = _sections[index];
-    const UInt64 currentItemSize = item.GetPackSize();
-    totalSize += currentItemSize;
+    currentItemSize = item.GetPackSize();
     {
       CMyComPtr<ISequentialOutStream> outStream;
       RINOK(extractCallback->GetStream(index, &outStream, askMode))
@@ -1041,10 +1038,9 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 * const indices, UInt32 numItems,
         continue;
       RINOK(extractCallback->PrepareOperation(askMode))
       RINOK(InStream_SeekSet(_inStream, item.Pa))
-      inStream->Init(currentItemSize);
-      RINOK(copyCoder.Interface()->Code(inStream, outStream, NULL, NULL, lps))
+      RINOK(copyCoder.Code(_inStream, outStream, &currentItemSize, lps))
     }
-    RINOK(extractCallback->SetOperationResult(copyCoder->TotalSize == currentItemSize ?
+    RINOK(extractCallback->SetOperationResult(copyCoder.TotalSize == currentItemSize ?
         NExtract::NOperationResult::kOK:
         NExtract::NOperationResult::kDataError))
   }

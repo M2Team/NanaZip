@@ -584,12 +584,7 @@ static HRESULT WriteRange(IInStream *inStream, ISequentialOutStream *outStream,
     UInt64 position, UInt64 size, ICompressProgressInfo *progress)
 {
   RINOK(InStream_SeekSet(inStream, position))
-  CMyComPtr2_Create<ISequentialInStream, CLimitedSequentialInStream> streamSpec;
-  streamSpec->SetStream(inStream);
-  streamSpec->Init(size);
-  CMyComPtr2_Create<ICompressCoder, NCompress::CCopyCoder> copyCoder;
-  RINOK(copyCoder.Interface()->Code(streamSpec, outStream, NULL, NULL, progress))
-  return (copyCoder->TotalSize == size ? S_OK : E_FAIL);
+  return NCompress::CopyStream_ExactSize(inStream, outStream, size, progress);
 }
 
 /*

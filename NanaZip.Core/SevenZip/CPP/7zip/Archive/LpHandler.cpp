@@ -1108,22 +1108,23 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
     const UInt32 index = allFilesMode ? i : indices[i];
     totalSize += _items[index].GetSize();
   }
-  extractCallback->SetTotal(totalSize);
+  RINOK(extractCallback->SetTotal(totalSize))
+
+  NCompress::CCopyCoderBase copyCoder;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
+  lps->Init(extractCallback, false);
 
   totalSize = 0;
   
-  NCompress::CCopyCoder *copyCoderSpec = new NCompress::CCopyCoder();
-  CMyComPtr<ICompressCoder> copyCoder = copyCoderSpec;
-
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
-  lps->Init(extractCallback, false);
-
-  for (i = 0; i < numItems; i++)
+  for (i = 0;; i++)
   {
-    lps->InSize = totalSize;
-    lps->OutSize = totalSize;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = lps2->OutSize = totalSize;
+    RINOK(lps2->SetCur())
+    if (i >= numItems)
+      break;
+    int opRes;
+    {
     CMyComPtr<ISequentialOutStream> outStream;
     const Int32 askMode = testMode ?
         NExtract::NAskMode::kTest :
@@ -1141,19 +1142,19 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
 
     CMyComPtr<ISequentialInStream> inStream;
     const HRESULT hres = GetStream(index, &inStream);
-    int opRes = NExtract::NOperationResult::kUnsupportedMethod;
+    opRes = NExtract::NOperationResult::kUnsupportedMethod;
     if (hres != S_FALSE)
     {
       if (hres != S_OK)
         return hres;
-      RINOK(copyCoder->Code(inStream, outStream, NULL, NULL, progress))
+      RINOK(copyCoder.Code(inStream, outStream, NULL, lps))
       opRes = NExtract::NOperationResult::kDataError;
-      if (copyCoderSpec->TotalSize == size)
+      if (copyCoder.TotalSize == size)
         opRes = NExtract::NOperationResult::kOK;
-      else if (copyCoderSpec->TotalSize < size)
+      else if (copyCoder.TotalSize < size)
         opRes = NExtract::NOperationResult::kUnexpectedEnd;
     }
-    outStream.Release();
+    }
     RINOK(extractCallback->SetOperationResult(opRes))
   }
   

@@ -3,6 +3,8 @@
 #ifndef ZIP7_INC_COMPRESS_QUANTUM_DECODER_H
 #define ZIP7_INC_COMPRESS_QUANTUM_DECODER_H
 
+#include "../../../C/Alloc.h"
+
 #include "../../Common/MyTypes.h"
 
 namespace NCompress {
@@ -26,8 +28,8 @@ class CModelDecoder
 public:
   Byte _pad[64 - 10]; // for structure size alignment
 
-  void Init(unsigned numItems, unsigned startVal);
-  unsigned Decode(CRangeDecoder *rc);
+  void Init(unsigned numItems, unsigned startVal) throw();
+  unsigned Decode(CRangeDecoder *rc) throw();
 };
 
 
@@ -38,20 +40,21 @@ class CDecoder
   UInt32 _winSize_allocated;
   bool _overWin;
   Byte *_win;
-  unsigned _numDictBits;
 
   CModelDecoder m_Selector;
   CModelDecoder m_Literals[kNumLitSelectors];
   CModelDecoder m_PosSlot[kNumMatchSelectors];
   CModelDecoder m_LenSlot;
 
-  void Init();
-  HRESULT CodeSpec(const Byte *inData, size_t inSize, UInt32 outSize);
 public:
-  HRESULT Code(const Byte *inData, size_t inSize, UInt32 outSize, bool keepHistory);
-  HRESULT SetParams(unsigned numDictBits);
+  // outSize <= (1 << 15)
+  // if (outSize < (1 << 15)) then it's last chunk of solid sequence.
+  HRESULT CodeChunk_32KB_ExceedRead_Solid(const Byte *inData, size_t inSize, UInt32 outSize) throw();
+  HRESULT SetParams_and_Init(unsigned numDictBits) throw();
 
-  CDecoder(): _win(NULL), _numDictBits(0) {}
+  CDecoder(): _win(NULL) {}
+  ~CDecoder() { MidFree(_win); }
+
   const Byte * GetDataPtr() const { return _win + _winPos; }
 };
 

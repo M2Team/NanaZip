@@ -3056,9 +3056,10 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
       totalUnpacked += curUnpackSize,
       totalPacked += curPackSize)
   {
-    lps->InSize = totalPacked;
-    lps->OutSize = totalUnpacked;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = totalPacked;
+    lps2->OutSize = totalUnpacked;
+    RINOK(lps2->SetCur())
     {
       const unsigned num = _refs.Size();
       if (i >= num)

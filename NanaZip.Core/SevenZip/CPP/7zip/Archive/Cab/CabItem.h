@@ -18,6 +18,12 @@ struct CFolder
   UInt16 NumDataBlocks; // number of CFDATA blocks in this folder
   Byte MethodMajor;
   Byte MethodMinor;
+
+  bool Is_Method_EqualTo(const CFolder &f) const
+  {
+    return MethodMajor == f.MethodMajor
+        && MethodMinor == f.MethodMinor;
+  }
   
   Byte GetMethod() const { return (Byte)(MethodMajor & 0xF); }
 };
@@ -28,8 +34,7 @@ struct CItem
   UInt32 Offset;
   UInt32 Size;
   UInt32 Time;
-  unsigned FolderIndex;
-  UInt16 Flags;
+  UInt16 FolderIndex;
   UInt16 Attributes;
   
   UInt64 GetEndOffset() const { return (UInt64)Offset + Size; }
@@ -48,7 +53,7 @@ struct CItem
   }
   // in:  (numFolders > 0) is expected
   // out: (returned_value >= 0) is expected
-  int GetFolderIndex(unsigned numFolders) const
+  unsigned GetFolderIndex(const unsigned numFolders) const
   {
     const unsigned folderIndex = FolderIndex;
     switch (folderIndex)
@@ -57,9 +62,9 @@ struct CItem
       case NHeader::NFolderIndex::kContinuedPrevAndNext:
         return 0;
       case NHeader::NFolderIndex::kContinuedToNext:
-        return (int)numFolders - 1;
+        return numFolders - 1;
       default:
-        return (int)folderIndex;
+        return folderIndex;
     }
   }
 };

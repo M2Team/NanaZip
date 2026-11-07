@@ -11,8 +11,16 @@
 
 #include "CabIn.h"
 
+#define Get16a(p) GetUi16a(p)
+#define Get32a(p) GetUi32a(p)
+
+#if 1
+#define Get16(p) GetUi16a(p)
+#define Get32(p) GetUi32a(p)
+#else
 #define Get16(p) GetUi16(p)
 #define Get32(p) GetUi32(p)
+#endif
 
 namespace NArchive {
 namespace NCab {
@@ -25,7 +33,7 @@ void CInArchive::Skip(unsigned size)
     throw CUnexpectedEndException();
 }
 
-void CInArchive::Read(Byte *data, unsigned size)
+void CInArchive::Read(Byte *data, const unsigned size)
 {
   if (_inBuffer.ReadBytes(data, size) != size)
     throw CUnexpectedEndException();
@@ -33,9 +41,10 @@ void CInArchive::Read(Byte *data, unsigned size)
 
 static const size_t k_Name_Size_Limit = 1 << 13;
 
-void CInArchive::ReadName(AString &s)
+bool CInArchive::ReadName(AString &s, const UInt32 index)
 {
-  for (size_t i = 0; i < k_Name_Size_Limit; i++)
+  size_t i;
+  for (i = 0; i < k_Name_Size_Limit; i++)
   {
     Byte b;
     if (!_inBuffer.ReadByte(b))
@@ -43,31 +52,40 @@ void CInArchive::ReadName(AString &s)
     if (b == 0)
     {
       s.SetFrom((const char *)(const Byte *)_tempBuf, (unsigned)i);
-      return;
+      return true;
     }
     _tempBuf[i] = b;
   }
   
+  ErrorInNames = true;
+  s = "[LONG_PATH_FILE]";
+  if (index != (UInt32)0-1)
+  {
+    s.Add_Minus();
+    s.Add_UInt32(index);
+  }
   for (;;)
   {
     Byte b;
     if (!_inBuffer.ReadByte(b))
       throw CUnexpectedEndException();
     if (b == 0)
-      break;
+      return true;
+    if (++i >= (1 << 15))
+      return false;
   }
-  
-  ErrorInNames = true;
-  s = "[LONG_PATH_FILE]";
 }
 
-void CInArchive::ReadOtherArc(COtherArc &oa)
+bool CInArchive::ReadOtherArc(COtherArc &oa)
 {
-  ReadName(oa.FileName);
-  ReadName(oa.DiskName);
+  if (!ReadName(oa.FileName))
+    return false;
+  AString DiskName;
+  return ReadName(DiskName);
 }
 
 
+#if 0
 struct CSignatureFinder
 {
   Byte *Buf;
@@ -156,31 +174,31 @@ HRESULT CSignatureFinder::Find()
     End += processedSize;
   }
 }
+#endif
 
 
 bool CInArcInfo::Parse(const Byte *p)
 {
-  if (Get32(p + 0x0C) != 0 ||
-      Get32(p + 0x14) != 0)
+  if (Get32(p + 0x0C) | Get32(p + 0x14))
     return false;
-  Size = Get32(p + 8);
-  if (Size < 36)
+  if (Get16(p + 0x18) != 0x103) // VersionMajor/VersionMinor
     return false;
   Flags = Get16(p + 0x1E);
   if (Flags > 7)
     return false;
-  FileHeadersOffset = Get32(p + 0x10);
-  if (FileHeadersOffset != 0 && FileHeadersOffset > Size)
+  Size = Get32(p + 8);
+  if (Size < 36)
     return false;
-  VersionMinor = p[0x18];
-  VersionMajor = p[0x19];
+  FileHeadersOffset = Get32(p + 0x10);
+  if (FileHeadersOffset > Size)
+    return false;
   NumFolders = Get16(p + 0x1A);
   NumFiles = Get16(p + 0x1C);
   return true;
 }
   
 
-HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
+HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 * /* searchHeaderSizeLimit */)
 {
   IsArc = false;
   ErrorInNames = false;
@@ -188,41 +206,41 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
   HeaderError = false;
 
   db.Clear();
-  RINOK(InStream_GetPos(db.Stream, db.StartPosition))
-  // UInt64 temp = db.StartPosition;
+  db.StartPosition = 0;
+  // RINOK(InStream_GetPos(db.Stream, db.StartPosition))
 
   CByteBuffer buffer;
   CInArcInfo &ai = db.ArcInfo;
-  UInt64 startInBuf = 0;
+  const UInt64 startInBuf = 0;
 
   CLimitedSequentialInStream *limitedStreamSpec = NULL;
   CMyComPtr<ISequentialInStream> limitedStream;
 
-  // for (int iii = 0; iii < 10000; iii++)
   {
-    // db.StartPosition = temp; RINOK(InStream_SeekSet(db.Stream, db.StartPosition))
-    
     const UInt32 kMainHeaderSize = 32;
-    Byte header[kMainHeaderSize];
+    UInt32 header32[kMainHeaderSize / 4];
     const UInt32 kBufSize = 1 << 15;
-    RINOK(ReadStream_FALSE(db.Stream, header, kMainHeaderSize))
-    if (memcmp(header, NHeader::kMarker, NHeader::kMarkerSize) == 0 && ai.Parse(header))
+    RINOK(ReadStream_FALSE(db.Stream, header32, kMainHeaderSize))
+    if (memcmp(header32, NHeader::kMarker, NHeader::kMarkerSize) == 0
+        && ai.Parse((const Byte *)(const void *)header32))
     {
       limitedStreamSpec = new CLimitedSequentialInStream;
       limitedStream = limitedStreamSpec;
       limitedStreamSpec->SetStream(db.Stream);
-      limitedStreamSpec->Init(ai.Size - NHeader::kMarkerSize);
+      limitedStreamSpec->Init(ai.Size - kMainHeaderSize);
       buffer.Alloc(kBufSize);
-      memcpy(buffer, header, kMainHeaderSize);
+      // memcpy(buffer, header32, kMainHeaderSize);
       UInt32 numProcessedBytes;
       RINOK(limitedStream->Read(buffer + kMainHeaderSize, kBufSize - kMainHeaderSize, &numProcessedBytes))
       _inBuffer.SetBuf(buffer, (UInt32)kBufSize, kMainHeaderSize + numProcessedBytes, kMainHeaderSize);
     }
     else
     {
+#if 1
+      return S_FALSE;
+#else
       if (searchHeaderSizeLimit && *searchHeaderSizeLimit == 0)
         return S_FALSE;
-
       CSignatureFinder finder;
 
       finder.Stream = db.Stream;
@@ -236,68 +254,63 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
       memcpy(buffer, header, kMainHeaderSize);
       finder.Processed = db.StartPosition;
       finder.End = kMainHeaderSize;
-      finder.Pos = 1;
+      finder.Pos = 0;
   
       for (;;)
       {
+        finder.Pos++;
         RINOK(finder.Find())
         if (ai.Parse(finder.Buf + finder.Pos))
-        {
-          db.StartPosition = finder.Processed + finder.Pos;
-          limitedStreamSpec = new CLimitedSequentialInStream;
-          limitedStreamSpec->SetStream(db.Stream);
-          limitedStream = limitedStreamSpec;
-          const UInt32 remInFinder = finder.End - finder.Pos;
-          if (ai.Size <= remInFinder)
-          {
-            limitedStreamSpec->Init(0);
-            finder.End = finder.Pos + ai.Size;
-          }
-          else
-            limitedStreamSpec->Init(ai.Size - remInFinder);
-
-          startInBuf = finder.Pos;
-          _inBuffer.SetBuf(buffer, (UInt32)kBufSize, finder.End, finder.Pos + kMainHeaderSize);
           break;
-        }
-        finder.Pos++;
       }
+      db.StartPosition = finder.Processed + finder.Pos;
+      limitedStreamSpec = new CLimitedSequentialInStream;
+      limitedStreamSpec->SetStream(db.Stream);
+      limitedStream = limitedStreamSpec;
+      const UInt32 remInFinder = finder.End - finder.Pos;
+      if (ai.Size <= remInFinder)
+      {
+        finder.End = finder.Pos + ai.Size;
+        limitedStreamSpec->Init(0);
+      }
+      else
+        limitedStreamSpec->Init(ai.Size - remInFinder);
+      
+      startInBuf = finder.Pos;
+      _inBuffer.SetBuf(buffer, (UInt32)kBufSize, finder.End, finder.Pos + kMainHeaderSize);
+#endif
     }
   }
   
   IsArc = true;
-
   _inBuffer.SetStream(limitedStream);
   _tempBuf.Alloc(k_Name_Size_Limit);
 
-  Byte p[16];
+  UInt32 p32[16 / 4];
+  Byte * const p = (Byte *)(void *)p32;
   const unsigned nextSize = 4 + (ai.ReserveBlockPresent() ? 4 : 0);
   Read(p, nextSize);
-  ai.SetID = Get16(p);
-  ai.CabinetNumber = Get16(p + 2);
+  ai.SetID = Get16a(p);
+  ai.CabinetNumber = Get16a(p + 2);
   // printf("CabinetNumber=%5u \n", ai.CabinetNumber);
-
   if (ai.ReserveBlockPresent())
   {
-    ai.PerCabinet_AreaSize = Get16(p + 4);
+    ai.PerCabinet_AreaSize = Get16a(p + 4);
     ai.PerFolder_AreaSize = p[6];
     ai.PerDataBlock_AreaSize = p[7];
     Skip(ai.PerCabinet_AreaSize);
   }
-
-  if (ai.IsTherePrev()) ReadOtherArc(ai.PrevArc);
-  if (ai.IsThereNext()) ReadOtherArc(ai.NextArc);
+  if (ai.IsTherePrev() && !ReadOtherArc(ai.PrevArc)) return false;
+  if (ai.IsThereNext() && !ReadOtherArc(ai.NextArc)) return false;
   
-  UInt32 i;
-  
+  unsigned i;
   db.Folders.ClearAndReserve(ai.NumFolders);
-  
   for (i = 0; i < ai.NumFolders; i++)
   {
     Read(p, 8);
     CFolder folder;
-    folder.DataStart = Get32(p);
-    folder.NumDataBlocks = Get16(p + 4);
+    folder.DataStart = Get32a(p);
+    folder.NumDataBlocks = Get16a(p + 4);
     folder.MethodMajor = p[6];
     folder.MethodMinor = p[7];
     Skip(ai.PerFolder_AreaSize);
@@ -305,13 +318,18 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
     // printf("folder=%5u DataStart=%8u numBlocks=%8u\n", i, folder.DataStart, folder.NumDataBlocks);
   }
   
-  if (_inBuffer.GetProcessedSize() - startInBuf != ai.FileHeadersOffset)
   {
-    // printf("\n!!! Seek Error !!!!\n");
-    // fflush(stdout);
-    RINOK(InStream_SeekSet(db.Stream, db.StartPosition + ai.FileHeadersOffset))
-    limitedStreamSpec->Init(ai.Size - ai.FileHeadersOffset);
-    _inBuffer.Init();
+    const UInt64 procSize = _inBuffer.GetProcessedSize() - startInBuf;
+    if (procSize != ai.FileHeadersOffset)
+    {
+      if (procSize > ai.FileHeadersOffset)
+        return S_FALSE;
+      // printf("\n!!! Seek Error !!!!\n");
+      // fflush(stdout);
+      RINOK(InStream_SeekSet(db.Stream, db.StartPosition + ai.FileHeadersOffset))
+      limitedStreamSpec->Init(ai.Size - ai.FileHeadersOffset);
+      _inBuffer.Init();
+    }
   }
 
 /*
@@ -326,17 +344,18 @@ HRESULT CInArchive::Open2(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
   {
     Read(p, 16);
     CItem &item = db.Items.AddNewInReserved();
-    item.Size = Get32(p);
-    item.Offset = Get32(p + 4);
-    item.FolderIndex = Get16(p + 8);
-    const UInt16 pureDate = Get16(p + 10);
-    const UInt16 pureTime = Get16(p + 12);
+    item.Size = Get32a(p);
+    item.Offset = Get32a(p + 4);
+    item.FolderIndex = Get16a(p + 8);
+    const UInt16 pureDate = Get16a(p + 10);
+    const UInt16 pureTime = Get16a(p + 12);
     item.Time = (((UInt32)pureDate << 16)) | pureTime;
-    item.Attributes = Get16(p + 14);
-    ReadName(item.Name);
+    item.Attributes = Get16a(p + 14);
+    if (!ReadName(item.Name, db.Items.Size() - 1))
+      return S_FALSE;
     // printf("  -file=%5u Folder=%5x Offset=%10u size=%10u %s\n", i, item.FolderIndex, item.Offset, item.Size, item.Name.Ptr());
     const unsigned numFolders = db.Folders.Size();
-    if (numFolders == 0 || item.GetFolderIndex(numFolders) >= (int)numFolders)
+    if (numFolders == 0 || item.GetFolderIndex(numFolders) >= numFolders)
     {
       HeaderError = true;
       return S_FALSE;
@@ -350,6 +369,7 @@ HRESULT CInArchive::Open(CDatabaseEx &db, const UInt64 *searchHeaderSizeLimit)
 {
   try
   {
+    // for (int y = 0; y < 1000; y++) { Open2(db, searchHeaderSizeLimit);  RINOK(InStream_SeekToBegin(db.Stream)) }
     return Open2(db, searchHeaderSizeLimit);
   }
   catch(const CInBufferException &e) { return e.ErrorCode; }
@@ -449,34 +469,30 @@ bool CMvDatabaseEx::Fill_Sort_Shrink_and_Check()
         return false;
       const CFolder &f0 = db0.Folders.Back();
       const CFolder &f1 = db1.Folders.FrontItem();
-      if (f0.MethodMajor != f1.MethodMajor ||
-          f0.MethodMinor != f1.MethodMinor)
+      if (!f0.Is_Method_EqualTo(f1))
         return false;
     }
   }
 
-  UInt32 beginPos = 0;
-  UInt64 endPos = 0;
+  UInt32 prevOffs = 0, prevSize = 0;
   int prevFolder = -2;
   
   FOR_VECTOR (i, Items)
   {
     const CMvItem &mvItem = Items[i];
-    const int fIndex = GetGlobalFolderIndex(mvItem);
-    if (fIndex >= (int)FolderStartFileIndex.Size())
+    const int folderIndex = GetGlobalFolderIndex(mvItem);
+    if (folderIndex >= (int)FolderStartFileIndex.Size())
       return false;
     const CItem &item = Volumes[mvItem.VolumeIndex].Items[mvItem.ItemIndex];
     
-    const int folderIndex = GetGlobalFolderIndex(mvItem);
-  
     if (folderIndex != prevFolder)
       prevFolder = folderIndex;
-    else if (item.Offset < endPos &&
-        (item.Offset != beginPos || item.GetEndOffset() != endPos))
+    else if (item.Offset < (UInt64)prevOffs + prevSize &&
+        (item.Offset != prevOffs || item.Size != prevSize))
       return false;
     
-    beginPos = item.Offset;
-    endPos = item.GetEndOffset();
+    prevOffs = item.Offset;
+    prevSize = item.Size;
   }
   
   return true;

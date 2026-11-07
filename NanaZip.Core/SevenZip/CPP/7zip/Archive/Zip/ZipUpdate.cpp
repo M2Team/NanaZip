@@ -652,8 +652,7 @@ static HRESULT Update2St(
     // , IArchiveUpdateCallbackArcProp *reportArcProp
     )
 {
-  CLocalProgress *lps = new CLocalProgress;
-  CMyComPtr<ICompressProgressInfo> progress = lps;
+  CMyComPtr2_Create<ICompressProgressInfo, CLocalProgress> lps;
   lps->Init(updateCallback, true);
 
   CAddCommon compressor;
@@ -664,9 +663,10 @@ static HRESULT Update2St(
 
   FOR_VECTOR (itemIndex, updateItems)
   {
-    lps->InSize = unpackSizeTotal;
-    lps->OutSize = packSizeTotal;
-    RINOK(lps->SetCur())
+    CLocalProgress *lps2 = lps.ClsPtr();
+    lps2->InSize = unpackSizeTotal;
+    lps2->OutSize = packSizeTotal;
+    RINOK(lps2->SetCur())
     CUpdateItem &ui = updateItems[itemIndex];
     CItemEx itemEx;
     CItemOut item;
@@ -740,7 +740,7 @@ static HRESULT Update2St(
             inSeqMode, outSeqMode,
             ui.Time,
             ui.Size, ui.Size_WasSetFromStream,
-            progress, compressingResult))
+            lps, compressingResult))
         
         if (item.HasDescriptor() != compressingResult.DescriptorMode)
           return E_FAIL;
@@ -760,7 +760,7 @@ static HRESULT Update2St(
       UInt64 complexity = 0;
       lps->SendRatio = false;
 
-      RINOK(UpdateItemOldData(archive, inArchive, itemEx, ui, item, progress, opCallback, complexity))
+      RINOK(UpdateItemOldData(archive, inArchive, itemEx, ui, item, lps, opCallback, complexity))
 
       lps->SendRatio = true;
       lps->ProgressOffset += complexity;
@@ -770,9 +770,10 @@ static HRESULT Update2St(
     lps->ProgressOffset += kLocalHeaderSize;
   }
 
-  lps->InSize = unpackSizeTotal;
-  lps->OutSize = packSizeTotal;
-  RINOK(lps->SetCur())
+  CLocalProgress *lps2 = lps.ClsPtr();
+  lps2->InSize = unpackSizeTotal;
+  lps2->OutSize = packSizeTotal;
+  RINOK(lps2->SetCur())
 
   RINOK(archive.WriteCentralDir(items, comment))
 
@@ -784,8 +785,9 @@ static HRESULT Update2St(
     RINOK(ReportArcProps(reportArcProp, stat))
   */
 
-  lps->ProgressOffset += kCentralHeaderSize * updateItems.Size() + 1;
-  return lps->SetCur();
+  lps2 = lps.ClsPtr();
+  lps2->ProgressOffset += kCentralHeaderSize * updateItems.Size() + 1;
+  return lps2->SetCur();
 }
 
 #ifndef Z7_ST
