@@ -281,30 +281,6 @@ namespace winrt::NanaZip::Modern::implementation
             });
     }
 
-    void SettingsPage::OpenFileDialogToSelectPath(
-        winrt::AutoSuggestBox const& sender,
-        winrt::AutoSuggestBoxQuerySubmittedEventArgs const& args)
-    {
-        UNREFERENCED_PARAMETER(args);
-
-        auto Dialog = winrt::create_instance<::IFileOpenDialog>(
-            CLSID_FileOpenDialog,
-            CLSCTX::CLSCTX_INPROC_SERVER);
-        Dialog->SetOptions(
-            FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM | FOS_PATHMUSTEXIST);
-        if (ERROR_SUCCESS == Dialog->Show(this->m_WindowHandle))
-        {
-            winrt::com_ptr<IShellItem> Item = nullptr;
-            if (ERROR_SUCCESS == Dialog->GetResult(Item.put()))
-            {
-                LPWSTR Path = nullptr;
-                Item->GetDisplayName(SIGDN_FILESYSPATH, &Path);
-                sender.Text(Path);
-                ::CoTaskMemFree(Path);
-            }
-        }
-    }
-
     std::optional<std::wstring> SettingsPage::ShowFileDialog(
         std::wstring const& FileTypes,
         FILEOPENDIALOGOPTIONS Options)
@@ -315,7 +291,7 @@ namespace winrt::NanaZip::Modern::implementation
         };
 
         winrt::guid CLSID_FileOpenDialogBroker(
-            L"7394A3BB-E76A-4244-8534-132593937AD1");
+            L"7394A3BB-E76A-4244-8534-132593937AD1"); // Win11 22621 API
         auto Dialog = winrt::try_create_instance<IFileOpenDialog>(
             CLSID_FileOpenDialogBroker,
             CLSCTX::CLSCTX_LOCAL_SERVER);
@@ -332,7 +308,8 @@ namespace winrt::NanaZip::Modern::implementation
             static_cast<UINT>(std::size(FilterSpecs)),
             FilterSpecs);
         Dialog->SetOptions(
-            Options | FOS_FORCEFILESYSTEM | FOS_FILEMUSTEXIST);
+            Options | FOS_FORCEFILESYSTEM | FOS_FILEMUSTEXIST
+            | FOS_FORCEFILESYSTEM | FOS_PATHMUSTEXIST);
 
         switch (Dialog->Show(this->m_WindowHandle))
         {
@@ -363,6 +340,19 @@ namespace winrt::NanaZip::Modern::implementation
             } // Don't break, InpFileDialog default.
         default:
             return std::nullopt;
+        }
+    }
+
+    void SettingsPage::OpenFileDialogToSelectFolder(
+        winrt::AutoSuggestBox const& sender,
+        winrt::AutoSuggestBoxQuerySubmittedEventArgs const& args)
+    {
+        UNREFERENCED_PARAMETER(args);
+
+        auto Path = this->ShowFileDialog(L"", FOS_PICKFOLDERS);
+        if (Path.has_value())
+        {
+            sender.Text(Path.value());
         }
     }
 

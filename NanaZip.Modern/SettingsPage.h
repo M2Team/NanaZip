@@ -83,7 +83,7 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::FrameworkElement const& sender,
             winrt::IInspectable const& e);
 
-        void OpenFileDialogToSelectPath(
+        void OpenFileDialogToSelectFolder(
             winrt::AutoSuggestBox const& sender,
             winrt::AutoSuggestBoxQuerySubmittedEventArgs const& args);
 

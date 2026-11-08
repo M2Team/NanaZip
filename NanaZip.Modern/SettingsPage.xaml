@@ -228,7 +228,7 @@
             Header="[Working folder path]"
             QueryIcon="More"
             Loading="AutoSuggestBoxLoading"
-            QuerySubmitted="OpenFileDialogToSelectPath" />
+            QuerySubmitted="OpenFileDialogToSelectFolder" />
           <ToggleSwitch Name="TempRemovableOnly" Tag="Options"
             Header="[Working folder use for removable drives only]"
             IsOn="True"
