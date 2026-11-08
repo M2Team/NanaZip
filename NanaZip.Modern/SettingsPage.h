@@ -3,6 +3,7 @@
 #include "SettingsPage.g.h"
 
 #include <Windows.h>
+#include <ShlObj_core.h>
 
 #include <optional>
 
@@ -38,6 +39,20 @@ namespace winrt::NanaZip::Modern::implementation
         }
     };
     using WinRegKey = handle_type<regkey_traits>;
+
+    struct shellstr_traits
+    {
+        using type = LPWSTR;
+        static void close(type value) noexcept
+        {
+            ::CoTaskMemFree(value);
+        }
+        static constexpr type invalid() noexcept
+        {
+            return nullptr;
+        }
+    };
+    using WinShellStr = handle_type<shellstr_traits>;
 
     struct SettingsPage : SettingsPageT<SettingsPage>
     {
@@ -99,5 +114,9 @@ namespace winrt::NanaZip::Modern::implementation
             std::wstring const& SubKey,
             std::wstring const& Value,
             std::wstring const& Data);
+
+        std::optional<std::wstring> ShowFileDialog(
+            std::wstring const& FileTypes,
+            FILEOPENDIALOGOPTIONS Options);
     };
 }
