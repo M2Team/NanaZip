@@ -44,7 +44,7 @@ Kenji Mouri
 
 ## Features
 
-- Inherit features from 7-Zip 26.05, [7-Zip ZS] and [7-Zip NSIS].
+- Inherit features from [7-Zip], [7-Zip ZS] and [7-Zip NSIS].
 - Support the dark mode for all GUI components.
 - Support the Mica effect on the main window. You will enjoy the full window
   immersive Mica for all GUI components if you are using dark mode with HDR
@@ -145,6 +145,7 @@ Kenji Mouri
     compiled binaries is not provided in the NanaZip MSIX package.)
 - Various UI bug fixes and enhancements.
 
+[7-Zip]: https://7-zip.org/
 [7-Zip ZS]: https://github.com/mcmilk/7-Zip-zstd
 [7-Zip NSIS]: https://github.com/myfreeer/7z-build-nsis
 
