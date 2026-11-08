@@ -294,7 +294,34 @@
             <ComboBoxItem Content="[Yes]" AccessKey="Y" />
             <ComboBoxItem Content="[For Office files]" />
           </ComboBox>
-          
+          <!-- Don't use x:Bind, Binding isn't generated code by XamlCompiler. -->
+          <ComboBox Name="GP_WriteZoneIdExtract"
+            Header="[Propagate Zone.Id stream]"
+            ItemsSource="{Binding ElementName=WriteZoneIdExtract, Path=Items, Mode=OneTime}"
+            IsEnabled="False" />
+
+          <TextBlock Text="[Third-party code]" />
+          <ToggleSwitch Name="GP_AllowDynamicCodeGeneration"
+            Header="[Allow dynamic code generation for all NanaZip components]"
+            IsEnabled="False" />
+          <ToggleSwitch Name="GP_AllowChildProcessCreation"
+            Header="[Allow child processes creation for all NanaZip components]"
+            IsEnabled="False" />
+
+          <TextBlock Text="[Third-party Extension]" />
+          <Button Name="GP_AllowedHandlers"
+            Content="[Allowed archive handlers]"
+            IsEnabled="False" />
+          <Button Name="GP_BlockedHandlers"
+            Content="[Blocked archive handlers]"
+            IsEnabled="False" />
+          <Button Name="GP_AllowedCodecs"
+            Content="[Allowed compression codecs]"
+            IsEnabled="False" />
+          <Button Name="GP_BlockedCodecs"
+            Content="[Blocked compression codecs]"
+            IsEnabled="False" />
+
         </StackPanel>
       </ScrollViewer>
     </PivotItem>

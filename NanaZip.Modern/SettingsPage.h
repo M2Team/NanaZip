@@ -22,6 +22,7 @@ namespace winrt
     using Windows::UI::Xaml::Controls::AutoSuggestBoxTextChangedEventArgs;
     using Windows::UI::Xaml::Controls::AutoSuggestionBoxTextChangeReason;
     using Windows::UI::Xaml::Controls::AutoSuggestBoxQuerySubmittedEventArgs;
+    using Windows::UI::Xaml::Visibility;
 }
 
 namespace winrt::NanaZip::Modern::implementation
@@ -118,5 +119,7 @@ namespace winrt::NanaZip::Modern::implementation
         std::optional<std::wstring> ShowFileDialog(
             std::wstring const& FileTypes,
             FILEOPENDIALOGOPTIONS Options);
+
+        void GetGroupPolicyValue();
     };
 }

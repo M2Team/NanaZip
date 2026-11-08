@@ -6,9 +6,8 @@
 
 #include "NanaZip.Modern.h"
 
+#include <K7Base.h>
 #include <K7User.h>
-
-#include <ShObjIdl_core.h>
 
 namespace winrt::NanaZip::Modern::implementation
 {
@@ -96,6 +95,35 @@ namespace winrt::NanaZip::Modern::implementation
             DataLength);
     }
 
+    void SettingsPage::GetGroupPolicyValue()
+    {
+        MO_UINT32 GPData_WriteZoneIdExtract =
+            ::K7BaseGetWriteZoneIdExtractPolicy();
+        if (0 <= GPData_WriteZoneIdExtract && GPData_WriteZoneIdExtract <= 2)
+        {
+            this->GP_WriteZoneIdExtract().SelectedIndex(
+                GPData_WriteZoneIdExtract);
+            this->WriteZoneIdExtract().Visibility(
+                winrt::Visibility::Collapsed);
+        }
+        else
+        {
+            this->GP_WriteZoneIdExtract().Visibility(
+                winrt::Visibility::Collapsed);
+        }
+
+        this->GP_AllowDynamicCodeGeneration().IsOn(static_cast<bool>(
+            ::K7BaseGetAllowDynamicCodeGenerationPolicy()));
+        this->GP_AllowChildProcessCreation().IsOn(static_cast<bool>(
+            ::K7BaseGetAllowChildProcessCreationPolicy()));
+
+        // TBD...
+        // this->GP_AllowedCodecs();
+        // this->GP_BlockedCodecs();
+        // this->GP_AllowedHandlers();
+        // this->GP_BlockedHandlers();
+    }
+
     SettingsPage::SettingsPage(
         _In_opt_ HWND WindowHandle) :
         m_WindowHandle(WindowHandle)
@@ -117,6 +145,8 @@ namespace winrt::NanaZip::Modern::implementation
             WindowTitle = L"About NanaZip";
         }
         ::SetWindowTextW(this->m_WindowHandle, WindowTitle.c_str());
+
+        this->GetGroupPolicyValue();
     }
 
     void SettingsPage::FileAssociationsButtonClick(
