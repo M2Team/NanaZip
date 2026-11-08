@@ -233,6 +233,20 @@ EXTERN_C MO_BOOL MOAPI K7BaseGetAllowedCodecPolicy(
  */
 EXTERN_C MO_UINT32 MOAPI K7BaseGetWriteZoneIdExtractPolicy();
 
+/**
+ * @brief Retrieves the policy setting for allowing dynamic code generation.
+ * @return Returns MO_TRUE if the generation of dynamic code is allowed,
+           or MO_FALSE if not.
+ */
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowDynamicCodeGenerationPolicy();
+
+/**
+ * @brief Retrieves the policy setting for allowing child process creation.
+ * @return Returns MO_TRUE if the creation of child process is allowed,
+           or MO_FALSE if not.
+ */
+EXTERN_C MO_BOOL MOAPI K7BaseGetAllowChildProcessCreationPolicy();
+
 #endif // !K7_BASE_POLICIES
 
 #ifndef K7_BASE_MITIGATIONS
