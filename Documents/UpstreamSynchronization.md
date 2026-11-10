@@ -21,8 +21,15 @@
 
 ## 7-Zip ZS
 
-- NanaZip.Core: Commit bc1fb8a66d4ef549b6ac9bbc1bd660fecd2a572f after
+- NanaZip.Core: Commit 430e33f611df800852e19fb97f5a34dbd8a100c6 after
   v26.02-v1.5.7-R2. The following files incorporate changes from 7-Zip ZS:
+  - `Extensions\ZSCodecs\LzHandler.cpp`
+  - `Extensions\ZSCodecs\ZstdDecoder.cpp`
+  - `Extensions\ZSCodecs\ZstdDecoder.h`
+  - `Extensions\ZSCodecs\ZstdEncoder.cpp`
+  - `Extensions\ZSCodecs\ZstdEncoder.hpp`
+  - `Extensions\ZSCodecs\ZstdHandler.cpp`
+  - `Extensions\ZSCodecs\ZstdRegister.cpp`
   - `SevenZip\CPP\7zip\Archive\Nsis\NsisDecode.cpp`
   - `SevenZip\CPP\7zip\Archive\Nsis\NsisDecode.h`
   - `SevenZip\CPP\7zip\Archive\Nsis\NsisHandler.cpp`

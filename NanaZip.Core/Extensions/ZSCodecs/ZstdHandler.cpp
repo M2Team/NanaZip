@@ -179,7 +179,7 @@ Z7_COM7F_IMF(CHandler::Extract(const UInt32 *indices, UInt32 numItems,
   if (!testMode && !realOutStream)
     return S_OK;
 
-  extractCallback->PrepareOperation(askMode);
+  RINOK(extractCallback->PrepareOperation(askMode));
 
   Int32 opRes;
 
