@@ -56,6 +56,9 @@
     <Page Include="Styles\ListViewCard.xaml">
       <Filter>Styles</Filter>
     </Page>
+    <Page Include="Styles\SimpleInfoBar.xaml">
+      <Filter>Styles</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Strings">

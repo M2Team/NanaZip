@@ -89,6 +89,7 @@
     <Page Include="Styles\ListViewCard.xaml" />
     <Page Include="Styles\PivotTab.xaml" />
     <Page Include="Styles\SettingsCard.xaml" />
+    <Page Include="Styles\SimpleInfoBar.xaml" />
     <Page Include="Styles\ToggleSwitchCard.xaml" />
     <Page Include="Styles\TextCard.xaml" />
   </ItemGroup>
