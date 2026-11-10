@@ -3211,7 +3211,7 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
             DEBUGLOG(6, "dstage_getFrameHeader");
             if ((size_t)(srcEnd-srcPtr) >= maxFHSize) {  /* enough to decode - shortcut */
                 size_t const hSize = LZ4F_decodeHeader(dctx, srcPtr, (size_t)(srcEnd-srcPtr));  /* will update dStage appropriately */
-                FORWARD_IF_ERROR(hSize);
+                if (LZ4F_isError(hSize)) { nextSrcSizeHint = hSize; goto _output; }
                 srcPtr += hSize;
                 break;
             }
@@ -3233,7 +3233,9 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
                 doAnotherStage = 0;   /* not enough src data, ask for some more */
                 break;
             }
-            FORWARD_IF_ERROR( LZ4F_decodeHeader(dctx, dctx->header, dctx->tmpInTarget) ); /* will update dStage appropriately */
+            {   size_t const hSize = LZ4F_decodeHeader(dctx, dctx->header, dctx->tmpInTarget); /* will update dStage appropriately */
+                if (LZ4F_isError(hSize)) { nextSrcSizeHint = hSize; goto _output; }
+            }
             break;
 
         case dstage_init:
@@ -3250,12 +3252,18 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
                     LZ4F_free(dctx->tmpIn, dctx->cmem);
                     dctx->tmpInCapacity = 0;
                     dctx->tmpIn = (BYTE*)LZ4F_malloc(tmpInNeeded, dctx->cmem);
-                    RETURN_ERROR_IF(dctx->tmpIn == NULL, allocation_failed);
+                    if (dctx->tmpIn == NULL) {
+                        nextSrcSizeHint = LZ4F_returnErrorCode(LZ4F_ERROR_allocation_failed);
+                        goto _output;
+                    }
                     dctx->tmpInCapacity = tmpInNeeded;
                     LZ4F_free(dctx->tmpOutBuffer, dctx->cmem);
                     dctx->tmpOutBufferCapacity = 0;
                     dctx->tmpOutBuffer= (BYTE*)LZ4F_malloc(tmpOutNeeded, dctx->cmem);
-                    RETURN_ERROR_IF(dctx->tmpOutBuffer== NULL, allocation_failed);
+                    if (dctx->tmpOutBuffer== NULL) {
+                        nextSrcSizeHint = LZ4F_returnErrorCode(LZ4F_ERROR_allocation_failed);
+                        goto _output;
+                    }
                     dctx->tmpOutBufferCapacity = tmpOutNeeded;
             }   }
             dctx->tmpInSize = 0;
@@ -3285,7 +3293,8 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
                     break;
                 }
                 if (nextCBlockSize > dctx->maxBlockSize) {
-                    RETURN_ERROR(maxBlockSize_invalid);
+                    nextSrcSizeHint = LZ4F_returnErrorCode(LZ4F_ERROR_maxBlockSize_invalid);
+                    goto _output;
                 }
                 if (blockHeader & LZ4F_BLOCKUNCOMPRESSED_FLAG) {
                     /* next block is uncompressed */
@@ -3364,7 +3373,8 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
                 if (readCRC != calcCRC) {
                     DEBUGLOG(4, "incorrect block checksum: %08X != %08X",
                             readCRC, calcCRC);
-                    RETURN_ERROR(blockChecksum_invalid);
+                    nextSrcSizeHint = LZ4F_returnErrorCode(LZ4F_ERROR_blockChecksum_invalid);
+                    goto _output;
                 }
 #else
                 (void)readCRC;
@@ -3394,7 +3404,10 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
                     U32 const readBlockCrc = LZ4F_readLE32(selectedIn + dctx->tmpInTarget);
                     U32 const calcBlockCrc = XXH32(selectedIn, dctx->tmpInTarget, 0);
 #ifndef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
-                    RETURN_ERROR_IF(readBlockCrc != calcBlockCrc, blockChecksum_invalid);
+                    if (readBlockCrc != calcBlockCrc) {
+                        nextSrcSizeHint = LZ4F_returnErrorCode(LZ4F_ERROR_blockChecksum_invalid);
+                        goto _output;
+                    }
 #else
                     (void)readBlockCrc;
                     (void)calcBlockCrc;
@@ -3408,7 +3421,7 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
                   * to benefit from prefix speedup */
               && !(dctx->dict!= NULL && (const BYTE*)dctx->dict + dctx->dictSize == dctx->tmpOut) )
             {   size_t const decodedSize = LZ4F_decodeBlock(dctx, selectedIn, dctx->tmpInTarget, dstPtr);
-                FORWARD_IF_ERROR(decodedSize);
+                if (LZ4F_isError(decodedSize)) { nextSrcSizeHint = decodedSize; goto _output; }
 
                 /* dictionary management, unless the frame ends with this block */
                 if ( (dctx->frameInfo.blockMode==LZ4F_blockLinked)
@@ -3439,7 +3452,7 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
 
             /* Decode block into tmpOut */
             {   size_t const decodedSize = LZ4F_decodeBlock(dctx, selectedIn, dctx->tmpInTarget, dctx->tmpOut);
-                FORWARD_IF_ERROR(decodedSize);
+                if (LZ4F_isError(decodedSize)) { nextSrcSizeHint = decodedSize; goto _output; }
                 dctx->tmpOutSize = decodedSize;
                 dctx->tmpOutStart = 0;
                 dctx->dStage = dstage_flushOut;
@@ -3471,7 +3484,10 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
             break;
 
         case dstage_getSuffix:
-            RETURN_ERROR_IF(dctx->frameRemainingSize, frameSize_wrong);   /* incorrect frame size decoded */
+            if (dctx->frameRemainingSize) {   /* incorrect frame size decoded */
+                nextSrcSizeHint = LZ4F_returnErrorCode(LZ4F_ERROR_frameSize_wrong);
+                goto _output;
+            }
             if (!dctx->frameInfo.contentChecksumFlag) {  /* no checksum, frame is completed */
                 nextSrcSizeHint = 0;
                 LZ4F_resetDecompressionContext(dctx);
@@ -3489,7 +3505,10 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
                 U32 const resultCRC = XXH32_digest(&(dctx->xxh));
                 DEBUGLOG(4, "frame checksum: stored 0x%0X vs 0x%0X processed", readCRC, resultCRC);
 #ifndef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
-                RETURN_ERROR_IF(readCRC != resultCRC, contentChecksum_invalid);
+                if (readCRC != resultCRC) {
+                    nextSrcSizeHint = LZ4F_returnErrorCode(LZ4F_ERROR_contentChecksum_invalid);
+                    goto _output;
+                }
 #else
                 (void)readCRC;
                 (void)resultCRC;
@@ -3550,8 +3569,9 @@ size_t LZ4F_decompress(LZ4F_dctx* dctx,
         }
     }
 
+_output:   /* also on error : report progress, but do not preserve history for reuse */
     *srcSizePtr = (size_t)(srcPtr - srcStart);
-    *dstSizePtr = (size_t)(dstPtr - dstStart);
+    *dstSizePtr = dstStart ? (size_t)(dstPtr - dstStart) : 0;
     return nextSrcSizeHint;
 }
 

@@ -84,10 +84,19 @@ extern "C" {
 #  define LZ4FLIB_API LZ4FLIB_VISIBILITY
 #endif
 
-/* LZ4F_DEPRECATED(message) : precedes the declaration of a deprecated function */
+/* LZ4F_DEPRECATE(x) : deprecated enumerator or type x, replaced by LZ4F_##x
+ * LZ4F_DEPRECATED(message) : precedes the declaration of a deprecated function */
 #ifdef LZ4F_DISABLE_DEPRECATE_WARNINGS
+#  define LZ4F_DEPRECATE(x) x
 #  define LZ4F_DEPRECATED(message)
 #else
+#  if defined(_MSC_VER)
+#    define LZ4F_DEPRECATE(x) x   /* __declspec(deprecated) x - only works with C++ */
+#  elif defined(__clang__) || (defined(__GNUC__) && (__GNUC__ >= 6))
+#    define LZ4F_DEPRECATE(x) x __attribute__((deprecated("use LZ4F_" #x " instead")))
+#  else
+#    define LZ4F_DEPRECATE(x) x   /* no deprecation warning for this compiler */
+#  endif
 #  if defined (__cplusplus) && (__cplusplus >= 201402) /* C++14 or greater */
 #    define LZ4F_DEPRECATED(message) [[deprecated(message)]]
 #  elif defined(_MSC_VER)
@@ -114,6 +123,13 @@ LZ4FLIB_API const char* LZ4F_getErrorName(LZ4F_errorCode_t code);   /**< return 
 /*-************************************
  *  Frame compression types
  ************************************* */
+/* #define LZ4F_ENABLE_OBSOLETE_ENUMS   // uncomment to enable obsolete enums */
+#ifdef LZ4F_ENABLE_OBSOLETE_ENUMS
+#  define LZ4F_OBSOLETE_ENUM(x) , LZ4F_DEPRECATE(x) = LZ4F_##x
+#else
+#  define LZ4F_OBSOLETE_ENUM(x)
+#endif
+
 /* The larger the block size, the (slightly) better the compression ratio,
  * though there are diminishing returns.
  * Larger blocks also increase memory usage on both compression and decompression sides.
@@ -124,6 +140,10 @@ typedef enum {
     LZ4F_max256KB=5,
     LZ4F_max1MB=6,
     LZ4F_max4MB=7
+    LZ4F_OBSOLETE_ENUM(max64KB)
+    LZ4F_OBSOLETE_ENUM(max256KB)
+    LZ4F_OBSOLETE_ENUM(max1MB)
+    LZ4F_OBSOLETE_ENUM(max4MB)
 } LZ4F_blockSizeID_t;
 
 /* Linked blocks sharply reduce inefficiencies when using small blocks,
@@ -132,11 +152,15 @@ typedef enum {
 typedef enum {
     LZ4F_blockLinked=0,
     LZ4F_blockIndependent
+    LZ4F_OBSOLETE_ENUM(blockLinked)
+    LZ4F_OBSOLETE_ENUM(blockIndependent)
 } LZ4F_blockMode_t;
 
 typedef enum {
     LZ4F_noContentChecksum=0,
     LZ4F_contentChecksumEnabled
+    LZ4F_OBSOLETE_ENUM(noContentChecksum)
+    LZ4F_OBSOLETE_ENUM(contentChecksumEnabled)
 } LZ4F_contentChecksum_t;
 
 typedef enum {
@@ -147,7 +171,15 @@ typedef enum {
 typedef enum {
     LZ4F_frame=0,
     LZ4F_skippableFrame
+    LZ4F_OBSOLETE_ENUM(skippableFrame)
 } LZ4F_frameType_t;
+
+#ifdef LZ4F_ENABLE_OBSOLETE_ENUMS
+typedef LZ4F_blockSizeID_t LZ4F_DEPRECATE(blockSizeID_t);
+typedef LZ4F_blockMode_t LZ4F_DEPRECATE(blockMode_t);
+typedef LZ4F_frameType_t LZ4F_DEPRECATE(frameType_t);
+typedef LZ4F_contentChecksum_t LZ4F_DEPRECATE(contentChecksum_t);
+#endif
 
 /*! LZ4F_frameInfo_t :
  *  makes it possible to set or read frame parameters.
@@ -567,12 +599,14 @@ LZ4F_getFrameInfo(LZ4F_dctx* dctx,
  *             (see LZ4F_resumeFrame() in the static section).
  * @retval 0   The current frame is fully decoded. If *srcSizePtr is less than the provided value, 
  *             the unconsumed tail is the start of another frame (if any).
- * @retval error  An error code; test with LZ4F_isError(ret). After an error, dctx is not
- *                resumable: call LZ4F_resetDecompressionContext() before reusing it.
+ * @retval error  An error code; test with LZ4F_isError(ret). The size pointers still report
+ *                the bytes consumed and produced before the error, but produced bytes may be invalid.
+ *                After an error, dctx is not resumable: call LZ4F_resetDecompressionContext() before reusing it.
  *
  * @pre  @p dctx is a valid state created by LZ4F_createDecompressionContext().
  * @post *srcSizePtr and *dstSizePtr are updated with the actual bytes consumed/produced.
- *       @p dstBuffer contents in [0, *dstSizePtr) are valid decompressed data.
+ *       @p dstBuffer contents in [0, *dstSizePtr) are decompressed data.
+ *       The content checksum, if present, is only verified at the end of the frame (return 0).
  *
  * @note  The function may not consume all provided input on each call. Always check *srcSizePtr.
  *        Present any unconsumed source bytes again on the next call.
