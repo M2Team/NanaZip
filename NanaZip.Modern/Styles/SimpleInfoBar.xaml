@@ -78,7 +78,7 @@
   <x:String x:Key="InfoBarWarningIconGlyph">&#xF13C;</x:String>
   <x:String x:Key="InfoBarSuccessIconGlyph">&#xF13E;</x:String>
 
-  <Thickness x:Key="InfoBarContentRootPadding">16,0,0,0</Thickness>
+  <Thickness x:Key="InfoBarContentRootPadding">16,8</Thickness>
 
   <Thickness x:Key="InfoBarIconMargin">0,16,14,16</Thickness>
   <x:Double x:Key="InfoBarIconFontSize">16</x:Double>
@@ -91,18 +91,24 @@
     <Setter Property="AutomationProperties.LandmarkType" Value="Custom" />
     <Setter Property="AutomationProperties.IsDialog" Value="True" />
     <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="MinHeight" Value="{ThemeResource InfoBarMinHeight}" />
+    <Setter Property="Padding" Value="{StaticResource InfoBarContentRootPadding}" />
+    <Setter Property="Foreground" Value="{ThemeResource InfoBarMessageForeground}" />
+    <Setter Property="FontWeight" Value="{StaticResource InfoBarMessageFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource InfoBarMessageFontSize}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="ContentControl">
           <Grid x:Name="ContentRoot"
-            VerticalAlignment="Top"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
-            HorizontalAlignment="Stretch"
-            MinHeight="{ThemeResource InfoBarMinHeight}"
+            MinHeight="{TemplateBinding MinHeight}"
             Background="{TemplateBinding Background}"
             CornerRadius="{TemplateBinding CornerRadius}"
-            Padding="{StaticResource InfoBarContentRootPadding}">
+            Padding="{TemplateBinding Padding}">
 
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto" />
@@ -114,7 +120,7 @@
               VerticalAlignment="Top"
               Margin="{StaticResource InfoBarIconMargin}"
               FontSize="{StaticResource InfoBarIconFontSize}"
-              Glyph="{StaticResource InfoBarIconBackgroundGlyph}"
+              Glyph="{ThemeResource InfoBarIconBackgroundGlyph}"
               Foreground="{ThemeResource InfoBarInformationalSeverityIconBackground}"
               FontFamily="{ThemeResource SymbolThemeFontFamily}"
               AutomationProperties.AccessibilityView="Raw" />
@@ -123,7 +129,7 @@
               VerticalAlignment="Top"
               Margin="{StaticResource InfoBarIconMargin}"
               FontSize="{StaticResource InfoBarIconFontSize}"
-              Glyph="{StaticResource InfoBarInformationalIconGlyph}"
+              Glyph="{ThemeResource InfoBarInformationalIconGlyph}"
               Foreground="{ThemeResource InfoBarInformationalSeverityIconForeground}"
               FontFamily="{ThemeResource SymbolThemeFontFamily}" />
 
@@ -131,11 +137,11 @@
               Grid.Column="1"
               Content="{TemplateBinding Content}"
               ContentTemplate="{TemplateBinding ContentTemplate}"
-              Foreground="{ThemeResource InfoBarMessageForeground}"
+              Foreground="{TemplateBinding Foreground}"
               TextWrapping="WrapWholeWords"
-              FontWeight="{StaticResource InfoBarMessageFontWeight}"
-              FontSize="{StaticResource InfoBarMessageFontSize}"
-              VerticalContentAlignment="Center" />
+              FontWeight="{TemplateBinding FontWeight}"
+              FontSize="{TemplateBinding FontSize}"
+              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
           </Grid>
         </ControlTemplate>
       </Setter.Value>
