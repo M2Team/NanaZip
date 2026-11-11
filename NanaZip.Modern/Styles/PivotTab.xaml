@@ -122,9 +122,11 @@
     <Setter Property="Height" Value="32" />
   </Style>
 
+  <Thickness x:Key="PivotTabSubTitleMargin">0,12,0,4</Thickness>
+
   <Style x:Key="PivotTabSubTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
     <Setter Property="FontWeight" Value="SemiBold" />
-    <Setter Property="Margin" Value="0,12,0,4" />
+    <Setter Property="Margin" Value="{StaticResource PivotTabSubTitleMargin}" />
   </Style>
 
   <Style x:Key="PivotTabItemPanelStyle" TargetType="StackPanel">

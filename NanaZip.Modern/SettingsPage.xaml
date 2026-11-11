@@ -16,6 +16,7 @@
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/TextCard.xaml" />
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ComboCard.xaml" />
         <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/ListViewCard.xaml" />
+        <ResourceDictionary Source="ms-appx:///NanaZip.Modern/Styles/SimpleInfoBar.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Page.Resources>
@@ -284,6 +285,27 @@
     <PivotItem Header="[Security]">
       <ScrollViewer>
         <StackPanel>
+
+          <ContentControl
+            Style="{StaticResource SimpleInfoBarWarningStyle}"
+            Margin="{StaticResource PivotTabSubTitleMargin}">
+            <RichTextBlock>
+              <Paragraph>
+                <Run Text="[Some options are managed by Windows Group Policy. Please" />
+                <Hyperlink NavigateUri="https://github.com/M2Team/NanaZip/tree/main/Documents/PolicyDefinitions">
+                  <Run Text="download administrative templates" />
+                </Hyperlink>
+                <Run Text=", import them and run Group Policy Editor." />
+                <LineBreak />
+                <Run Text="If current account is a member of enterprise domain, you need contact your domain admin.]" />
+              </Paragraph>
+            </RichTextBlock>
+            <ContentControl.Resources>
+              <ResourceDictionary>
+                <x:String x:Key="InfoBarIconBackgroundGlyph">&#xF139;</x:String>
+              </ResourceDictionary>
+            </ContentControl.Resources>
+          </ContentControl>
 
           <TextBlock Text="[MotW]" />
           <ComboBox Name="WriteZoneIdExtract" Tag="Options"
