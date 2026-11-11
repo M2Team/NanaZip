@@ -83,9 +83,9 @@
   <Thickness x:Key="InfoBarIconMargin">0,16,14,16</Thickness>
   <x:Double x:Key="InfoBarIconFontSize">16</x:Double>
 
-  <Style x:Key="SimpleInfoBarInformationalStyle" TargetType="ContentControl">
+  <Style x:Key="SimpleInfoBarWarningStyle" TargetType="ContentControl">
     <Setter Property="IsTabStop" Value="False" />
-    <Setter Property="Background" Value="{ThemeResource InfoBarInformationalSeverityBackgroundBrush}" />
+    <Setter Property="Background" Value="{ThemeResource InfoBarWarningSeverityBackgroundBrush}" />
     <Setter Property="BorderBrush" Value="{ThemeResource InfoBarBorderBrush}" />
     <Setter Property="BorderThickness" Value="{ThemeResource InfoBarBorderThickness}" />
     <Setter Property="AutomationProperties.LandmarkType" Value="Custom" />
@@ -121,7 +121,7 @@
               Margin="{StaticResource InfoBarIconMargin}"
               FontSize="{StaticResource InfoBarIconFontSize}"
               Glyph="{ThemeResource InfoBarIconBackgroundGlyph}"
-              Foreground="{ThemeResource InfoBarInformationalSeverityIconBackground}"
+              Foreground="{ThemeResource InfoBarWarningSeverityIconBackground}"
               FontFamily="{ThemeResource SymbolThemeFontFamily}"
               AutomationProperties.AccessibilityView="Raw" />
             <FontIcon x:Name="StandardIcon"
@@ -129,8 +129,8 @@
               VerticalAlignment="Top"
               Margin="{StaticResource InfoBarIconMargin}"
               FontSize="{StaticResource InfoBarIconFontSize}"
-              Glyph="{ThemeResource InfoBarInformationalIconGlyph}"
-              Foreground="{ThemeResource InfoBarInformationalSeverityIconForeground}"
+              Glyph="{ThemeResource InfoBarWarningIconGlyph}"
+              Foreground="{ThemeResource InfoBarWarningSeverityIconForeground}"
               FontFamily="{ThemeResource SymbolThemeFontFamily}" />
 
             <ContentPresenter
