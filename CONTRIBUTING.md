@@ -25,6 +25,12 @@
 
 ## AI/LLM use when contributing
 
+> [!NOTE]
+> Read [The fabled *Handcrafted Era*: Perhaps we have always lived in the vibe]
+> to understand Kenji Mouri's philosophy on AI/LLM.
+
+[The fabled *Handcrafted Era*: Perhaps we have always lived in the vibe]: https://github.com/MouriNaruto/MouriDocs/blob/main/docs/30/AlwaysVibe.md
+
 - Before opening a pull request, read the basic guidance yourself, word for 
   word. AI/LLM assistance, including translation, must not replace your own
   reading and understanding. Readability-first requires human judgment.
@@ -41,6 +47,15 @@
 - Commit messages and pull request descriptions must be in English. Keep commit
   messages to one sentence, adding lines only for essential context or
   attribution.
+- If you use AI/LLM for the "0 to 1" draft, use at least `gpt-5.6-sol max`
+  (`gpt-6-astra max` is recommended). We will not accept contributions where
+  your "1 to N" human effort cannot be seen, as even `gpt-6-astra max` or
+  `gpt-6.1-sol max` cannot properly follow the MD24 coding style.
+- For AI/LLM-assisted "0 to 1" drafts, append
+  `(Collaborate with [Model Name] [Thinking Level] @ [Agent])` or
+  `(Thanks to [Model Name] [Thinking Level] @ [Agent])` to the commit message.
+  For example:
+  `Just do some YOLO stuff. (Collaborate with gpt-6-astra max @ pi agent.)`
 
 Pull requests will be closed unless you have personally refined and reviewed the
 changes and successfully built and tested them locally.
