@@ -125,6 +125,14 @@
     <value>更多</value>
     <comment>More</comment>
   </data>
+  <data name="SmartExtractButton.AutomationProperties.Name" xml:space="preserve">
+    <value>智能解压并打开</value>
+    <comment>Smart Extract and Open</comment>
+  </data>
+  <data name="SmartExtractButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>智能解压并打开</value>
+    <comment>Smart Extract and Open</comment>
+  </data>
   <data name="SponsorButton.AcquireText" xml:space="preserve">
     <value>赞助 NanaZip</value>
     <comment>Sponsor NanaZip</comment>

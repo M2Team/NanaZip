@@ -270,6 +270,7 @@ namespace
             Add = 1070,
             Extract = 1071,
             Test = 1072,
+            SmartExtract = 1073, // = kMenuCmdID_Toolbar_SmartExtract (App.h)
             Copy = 546,
             Move = 547,
             Delete = 548,
@@ -416,6 +417,22 @@ namespace winrt::NanaZip::Modern::implementation
             WM_COMMAND,
             MAKEWPARAM(
                 ToolBarCommandID::Test,
+                BN_CLICKED),
+            0);
+    }
+
+    void MainWindowToolBarPage::SmartExtractButtonClick(
+        winrt::IInspectable const& sender,
+        winrt::RoutedEventArgs const& e)
+    {
+        UNREFERENCED_PARAMETER(sender);
+        UNREFERENCED_PARAMETER(e);
+
+        ::PostMessageW(
+            this->m_WindowHandle,
+            WM_COMMAND,
+            MAKEWPARAM(
+                ToolBarCommandID::SmartExtract,
                 BN_CLICKED),
             0);
     }
