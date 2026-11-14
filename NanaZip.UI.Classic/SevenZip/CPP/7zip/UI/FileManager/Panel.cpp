@@ -699,6 +699,15 @@ bool CPanel::OnNotify(UINT /* controlID */, LPNMHDR header, LRESULT &result)
   }
   */
 
+  // **************** NanaZip Modification Start ****************
+  // Item text is supplied lazily through LPSTR_TEXTCALLBACKW, so repaints
+  // while notifications are suppressed, e.g. waiting for the archive
+  // password, must still be answered or rows draw images without text.
+  if (_folder && header->hwndFrom == _listView &&
+      header->code == LVN_GETDISPINFOW)
+    return OnNotifyList(header, result);
+  // **************** NanaZip Modification End ****************
+
   if (!_processNotify)
     return false;
 
