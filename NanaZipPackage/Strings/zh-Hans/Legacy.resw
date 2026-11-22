@@ -834,7 +834,7 @@
     <value>传播 Zone.Id 数据流：</value>
   </data>
   <data name="Resource3441" xml:space="preserve">
-    <value>仅限 Office 文件</value>
+    <value>仅限有潜在风险的文件类型</value>
   </data>
   <data name="Resource3500" xml:space="preserve">
     <value>确认文件替换</value>
