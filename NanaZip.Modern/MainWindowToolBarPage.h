@@ -42,6 +42,10 @@ namespace winrt::NanaZip::Modern::implementation
             winrt::IInspectable const& sender,
             winrt::RoutedEventArgs const& e);
 
+        void SmartExtractButtonClick(
+            winrt::IInspectable const& sender,
+            winrt::RoutedEventArgs const& e);
+
         void CopyButtonClick(
             winrt::IInspectable const& sender,
             winrt::RoutedEventArgs const& e);
