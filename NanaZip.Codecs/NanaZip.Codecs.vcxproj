@@ -178,6 +178,7 @@
     <ClInclude Include="Zstandard\common\allocations.h" />
     <ClInclude Include="Zstandard\common\bits.h" />
     <ClInclude Include="Zstandard\common\bitstream.h" />
+    <ClInclude Include="Zstandard\common\bmi2.h" />
     <ClInclude Include="Zstandard\common\compiler.h" />
     <ClInclude Include="Zstandard\common\cpu.h" />
     <ClInclude Include="Zstandard\common\debug.h" />

@@ -500,5 +500,8 @@
       <Filter>LittleFS</Filter>
     </ClInclude>
     <ClInclude Include="NanaZip.Codecs.Specification.Zealfs.h" />
+    <ClInclude Include="Zstandard\common\bmi2.h">
+      <Filter>Zstandard\common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
