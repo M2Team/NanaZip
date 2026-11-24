@@ -31,6 +31,39 @@ bool CListView::GetItemParam(int index, LPARAM &param) const
   return aResult;
 }
 
+// **************** NanaZip Modification Start ****************
+void CListView::SetSortIndicator(
+    int ColumnIndex,
+    bool Ascending)
+{
+    // The HDF_SORTUP and HDF_SORTDOWN flags are shared between the header
+    // item (HDITEM) and the list-view column (LVCOLUMN) format flags, so
+    // we can use the list-view column messages instead of the header ones,
+    // which also avoids the column display order ambiguity.
+    for (int i = 0; ; ++i)
+    {
+        LVCOLUMN ColumnInfo;
+        ColumnInfo.mask = LVCF_FMT;
+        if (!this->GetColumn(i, &ColumnInfo))
+        {
+            break;
+        }
+
+        int Format = ColumnInfo.fmt & ~(HDF_SORTUP | HDF_SORTDOWN);
+        if (i == ColumnIndex)
+        {
+            Format |= Ascending ? HDF_SORTUP : HDF_SORTDOWN;
+        }
+
+        if (Format != ColumnInfo.fmt)
+        {
+            ColumnInfo.fmt = Format;
+            ListView_SetColumn(this->_window, i, &ColumnInfo);
+        }
+    }
+}
+// **************** NanaZip Modification End ****************
+
 int CListView::InsertColumn(int columnIndex, LPCTSTR text, int width)
 {
   LVCOLUMN ci;

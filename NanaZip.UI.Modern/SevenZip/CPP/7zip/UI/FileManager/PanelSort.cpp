@@ -94,6 +94,15 @@ void CPanel::SetSortRawStatus()
   }
 }
 
+// **************** NanaZip Modification Start ****************
+void CPanel::UpdateSortIndicator()
+{
+    this->_listView.SetSortIndicator(
+        this->_visibleColumns.FindItem_for_PropID(this->_sortID),
+        this->_ascending);
+}
+// **************** NanaZip Modification End ****************
+
 
 static int CALLBACK CompareItems2(LPARAM lParam1, LPARAM lParam2, LPARAM lpData)
 {
@@ -256,6 +265,9 @@ void CPanel::SortItemsWithPropID(PROPID propID)
   SetSortRawStatus();
   _listView.SortItems(CompareItems, (LPARAM)this);
   _listView.EnsureVisible(_listView.GetFocusedItem(), false);
+  // **************** NanaZip Modification Start ****************
+  UpdateSortIndicator();
+  // **************** NanaZip Modification End ****************
 }
 
 
