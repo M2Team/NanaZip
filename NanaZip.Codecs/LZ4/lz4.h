@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  LZ4 - Fast LZ compression algorithm
  *  Header File
  *  Copyright (c) Yann Collet. All rights reserved.

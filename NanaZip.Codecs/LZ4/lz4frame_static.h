@@ -1,4 +1,4 @@
-/*
+﻿/*
    LZ4 auto-framing library
    Header File for static linking only
    Copyright (c) Yann Collet. All rights reserved.

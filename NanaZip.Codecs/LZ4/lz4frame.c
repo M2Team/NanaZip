@@ -1,4 +1,4 @@
-/*
+﻿/*
  * LZ4 auto-framing library
  * Copyright (c) Yann Collet. All rights reserved.
  *

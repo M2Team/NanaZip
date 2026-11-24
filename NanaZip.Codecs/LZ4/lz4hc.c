@@ -1,4 +1,4 @@
-/*
+﻿/*
     LZ4 HC - High Compression Mode of LZ4
     Copyright (c) Yann Collet. All rights reserved.
 
